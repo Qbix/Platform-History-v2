@@ -69,11 +69,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             leaveOtherActiveRooms: true,
             onlyOneScreenSharingAllowed: false,
             disconnectBtnInParticipants: false,
+            sounds: {
+                participantDisconnected:Q.url('{{Streams}}/audio/user_disconnected.mp3'),
+                participantConnected:Q.url('{{Streams}}/audio/user_connected.mp3')
+            },
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
                 useRecordRTCLibrary: true,
                 drawBackground: false,
                 timeSlice: 6000,
+                sounds:true,
                 /*chunkSize: 10000*/
             },
             onWebRTCRoomCreated: new Q.Event(),
@@ -883,9 +888,25 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user joined',  participant);
                 if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
-                    notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
+
+                if(WebRTCconference.initNegotiationState == 'ended') {
+                    log('play joined music');
+
+                    if(Q.Audio.collection[_options.sounds.participantConnected]) {
+                        log('play joined music 1', _options.sounds.participantConnected, this);
+                        Q.Audio.collection[_options.sounds.participantConnected].audio.play()
+                    } else {
+                        Q.Audio.load(_options.sounds.participantConnected, function () {
+                            log('play joined music 2', _options.sounds.participantConnected, this);
+
+                            Q.Audio.collection[_options.sounds.participantConnected].audio.play()
+                        });
+                    }
+
+                }
 
                 //screensRendering.updateLayout();
             });
@@ -901,6 +922,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     });
                 }
+
+
+                if(Q.Audio.collection[_options.sounds.participantDisconnected]) {
+                    log('play leave music 1', _options.sounds.participantDisconnected, this);
+                    Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
+                } else {
+                    Q.Audio.load(_options.sounds.participantDisconnected, function () {
+                        log('play leave music 2', _options.sounds.participantDisconnected, this);
+                        Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
+                    });
+                }
+
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
@@ -1555,6 +1588,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     audio: false,
                     startWith: _options.startWith,
                     streams: _options.streams != null ? _options.streams : null,
+                    sounds: _options.sounds != null ? _options.sounds : null,
                     onlyOneScreenSharingAllowed: _options.onlyOneScreenSharingAllowed,
                     liveStreaming: _options.liveStreaming,
                     showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,

@@ -40,6 +40,7 @@ window.WebRTCconferenceLib = function app(options){
         startWith: {},
         showScreenSharingInSeparateScreen: false,
         streams: null,
+        sounds: null,
         twilioAccessToken: null,
         disconnectTime: 3000,
         turnCredentials: null,
@@ -95,6 +96,7 @@ window.WebRTCconferenceLib = function app(options){
     var localParticipant;
     app.localParticipant = function() { return localParticipant; }
     app.state = 'disconnected';
+    app.initNegotiationState = 'disconnected';
 
     //node.js vars
     var socket;
@@ -3073,6 +3075,29 @@ window.WebRTCconferenceLib = function app(options){
                         let source = audio.createMediaStreamSource(e.track.stream);
                         source.connect(_dest);
                     })
+
+                    if(options.liveStreaming.sounds) {
+                        _roomInstance.event.on('participantConnected', function (e) {
+                            if (_canvasMediStream == null || _dest == null) return;
+                            console.log('options.sounds.participantConnected', options.sounds.participantConnected)
+
+                            var connectedAudio = new Audio(options.sounds.participantConnected)
+                            var audioSource = audio.createMediaElementSource(connectedAudio);
+                            audioSource.connect(_dest);
+                            connectedAudio.play();
+                            //audioSource.disconnect(_dest);
+                        })
+
+                        _roomInstance.event.on('participantDisconnected', function (e) {
+                            if (_canvasMediStream == null || _dest == null) return;
+                            console.log('options.sounds.participantDisconnected', options.sounds.participantDisconnected)
+                            var disconnectedAudio = new Audio(options.sounds.participantDisconnected)
+                            var audioSource = audio.createMediaElementSource(disconnectedAudio);
+                            audioSource.connect(_dest);
+                            disconnectedAudio.play();
+                            //audioSource.disconnect(_dest);
+                        })
+                    }
                 }
 
                 function stop() {
@@ -5203,6 +5228,7 @@ window.WebRTCconferenceLib = function app(options){
                 var negotiationEnded = 0;
                 function onNegotiatingEnd() {
                     log('socketEventBinding initNegotiationEnded');
+                    app.initNegotiationState = 'ended';
                     app.event.dispatch('initNegotiationEnded', roomParticipants);
                     app.event.off('signalingStageChange', onSignalingStageChange);
                 }
@@ -5734,7 +5760,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 newPeerConnection.onnegotiationneeded = function (e) {
                     log('socketParticipantConnected: onnegotiationneeded, negotiating = ' + participant.isNegotiating);
-                    log('socketParticipantConnected: onnegotiationneeded, sdp ' + participant.RTCPeerConnection.localDescription.sdp);
+                    log('socketParticipantConnected: onnegotiationneeded, sdp ' + (newPeerConnection.localDescription ? newPeerConnection.localDescription.sdp : 'n/a'));
 
                     negotiate();
                 };
@@ -6120,7 +6146,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 newPeerConnection.onnegotiationneeded = function (e) {
                     log('offerReceived: onnegotiationneeded, isNegotiating = ' + senderParticipant.isNegotiating);
-                    log('offerReceived: onnegotiationneeded, sdp ' + senderParticipant.RTCPeerConnection.localDescription.sdp)
+                    log('offerReceived: onnegotiationneeded, sdp ' + (newPeerConnection.localDescription ? newPeerConnection.localDescription.sdp : 'n/a'))
                     negotiate();
                 };
 
