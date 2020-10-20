@@ -20,7 +20,10 @@
 
 		// stores currently shown contextual id, it's '-1' when no contextual is shown at the moment
 		current: -1,
-	
+
+		// stores current mouse position inside body
+		currentMousePosition: [0, 0],
+
 		// indicates if contextual show() has just been called, need to prevent contextual hiding in 'start' lifecycle handler
 		justShown: false,
 	
@@ -29,7 +32,10 @@
 	
 		// timeout to dismiss contextual when trigger element tap & hold'ed too long
 		dismissTimeout: 1000,
-	
+
+		// timeout before react on mousemove event on desktop
+		mousemoveTimeout: Q.info.isTouchscreen ? 0 : 300,
+
 		// indicates that the contextual is about to be dismissed because timeout passed
 		toDismiss: false,
 	
@@ -333,7 +339,9 @@
 					}
 
 					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
-					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+					//var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+					var px = Q.Contextual.currentMousePosition[0];
+					var py = Q.Contextual.currentMousePosition[1];
 
 					var newMoveTarget = $(Q.Pointer.elementFromPoint(px, py)).closest('.Q_listing li');
 					if (info.moveTarget)
@@ -393,7 +401,17 @@
 						}
 					}
 				};
-				$(document.body).on(Q.Pointer.move, Q.Contextual.moveEventHandler);
+
+				$(document.body).on(Q.Pointer.move, function (e) {
+					var that = this;
+
+					// save current mouse position to use later in other methods
+					Q.Contextual.currentMousePosition = [Q.Pointer.getX(e), Q.Pointer.getY(e)];
+
+					setTimeout(function () {
+						Q.handle(Q.Contextual.moveEventHandler, that, [e]);
+					}, Q.Contextual.mousemoveTimeout);
+				});
 			
 				Q.Contextual.enterEventHandler = function (e) {
 					var c = Q.Contextual.collection[Q.Contextual.current];
@@ -506,7 +524,7 @@
 					// select current element
 					li.addClass('Q_selected');
 
-					var handler = li.attr('data-handler');
+					var handler = li.attr('data-handler') || li.data('handler');
 					handler = handler || contextual.attr('data-handler') || contextual.data('defaultHandler');
 
 					try
@@ -519,7 +537,9 @@
 					}
 					Q.handle(handler, contextual, [li]);
 
-					Q.Contextual.hide();
+					if (li.attr('data-hide') !== "false") {
+						Q.Contextual.hide();
+					}
 				};
 			}
 		},
@@ -618,7 +638,7 @@
 			if (trigger.length !== 0)
 			{
 				var triggerLeft = trigger.offset().left;
-				if (triggerLeft + trigger.outerWidth() < 0|| triggerLeft > $body.width())
+				if (triggerLeft + trigger.outerWidth() < 0 || triggerLeft > $body.width())
 					return;
 			}
 		
@@ -701,14 +721,15 @@
 			contextual.hide();
 			contextual.css({ 'visibility': 'visible' });
 			contextual.css({
-				'top': (y + (info.inBottomHalf ? - (contextual.outerHeight() + 16) : 16)) + 'px',
+				'top': (y + (info.inBottomHalf ? -(contextual.outerHeight() + 16) : 16)) + 'px',
 				'left': x + 'px'
 			});
-			if (Q.Contextual.fadeTime > 0)
+			if (Q.Contextual.fadeTime > 0) {
 				contextual.fadeIn(Q.Contextual.fadeTime);
-			else
+			} else {
 				contextual.show();
-		
+			}
+
 			if (Q.info.isTouchscreen)
 			{
 				var mask = Q.Masks.show('Q.screen.mask', {
@@ -759,12 +780,13 @@
 			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
-			if (Q.Contextual.fadeTime > 0)
+			if (Q.Contextual.fadeTime > 0) {
 				contextual.fadeOut(Q.Contextual.fadeTime);
-			else
+			} else {
 				contextual.hide();
-			if (!leaveMask)
-			{
+			}
+
+			if (!leaveMask) {
 				Q.Masks.hide('Q.screen.mask');
 			}
 

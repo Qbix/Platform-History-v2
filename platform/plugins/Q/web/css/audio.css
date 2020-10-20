@@ -64,6 +64,7 @@
 .Q_audio_tool audio {
 	margin: 10px auto;
 	width: 100%;
+	min-width: 300px;
 }
 
 /**** <Q_audio_custom_player> *****/

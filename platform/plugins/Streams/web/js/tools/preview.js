@@ -370,10 +370,16 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var size = si.saveSizeName[si.showSize];
 			var defaultIcon = (options.defaultIcon) || 'default';
 			var icon = (sfi && sfi !== 'default') ? sfi : defaultIcon;
-			element.src = Q.url(
-				Q.Streams.iconUrl(icon, file), null, 
-				{cacheBust: options.cacheBust && state.cacheBustOnUpdate}
-			);
+
+			// if icon url already valid, set it and src
+			if (icon.match(/\.[a-z]{3,4}$/i)) {
+				element.src = icon;
+			} else {
+				element.src = Q.url(
+					Q.Streams.iconUrl(icon, file), null,
+					{cacheBust: options.cacheBust && state.cacheBustOnUpdate}
+				);
+			}
 			element.setAttribute('data-fullsrc', Q.url(
 				Q.Streams.iconUrl(icon, full), null, 
 				{cacheBust: options.cacheBust && state.cacheBustOnUpdate}

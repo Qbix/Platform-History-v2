@@ -56,6 +56,9 @@
 			var $html = $(fields.html || html);
 
 			$html = tool.parseChatMessage($html, fields.instructions);
+			if (!$html) {
+				return;
+			}
 
 			fields.html = $html[0].outerHTML;
 		}, tool);
@@ -236,6 +239,10 @@
 
 			// parse all links in message
 			var $chatMessageContent = $(".Streams_chat_message_content", element);
+			if (!$chatMessageContent.length) {
+				return;
+			}
+
 			var chatMessageContent = $chatMessageContent.html();
 			Q.each(chatMessageContent.matchTypes('url'), function (i, url) {
 				var href = url;
