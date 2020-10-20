@@ -8,12 +8,6 @@
 const Q = require('Q');
 const fs = require('fs');
 
-const ffmpeg = require('fluent-ffmpeg')
-const { StreamInput } = require('fluent-ffmpeg-multistream')
-
-const { hsv } = require('color-space');
-const { performance } = require('perf_hooks');
-
 var express = require('express');
 var app = express();
 app.set('view engine', 'ejs');
@@ -21,9 +15,6 @@ app.set('view engine', 'ejs');
 
 const Streams_Avatar = Q.require('Streams/Avatar');
 const Users = Q.require('Users');
-
-const VIDEO_OUTPUT_SIZE = '320x240'
-const VIDEO_OUTPUT_FILE = './recording.mp4'
 
 const child_process = require('child_process');
 
@@ -331,8 +322,8 @@ WebRTC.listen = function () {
 
         require('./WebRTC/signaling')(socket, io);
 
-        console.log('rtmpUrl', rtmpUrl)
-        require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
+        //console.log('rtmpUrl', rtmpUrl)
+        //require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
 
         socket.on('Streams/webrtc/log', function (message) {
             if(_debug) console.log('CONSOLE.LOG', message);

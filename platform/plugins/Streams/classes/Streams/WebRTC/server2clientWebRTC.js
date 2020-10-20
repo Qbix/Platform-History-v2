@@ -3,6 +3,8 @@ const child_process = require('child_process');
 const ffmpegPath = '/usr/local/bin/ffmpeg';
 const ffmpeg = require('fluent-ffmpeg');
 ffmpeg.setFfmpegPath(ffmpegPath);
+const { hsv } = require('color-space');
+const { performance } = require('perf_hooks');
 const { StreamInput } = require('fluent-ffmpeg-multistream')
 const { createCanvas, createImageData } = require('canvas');
 const Canvas = require('canvas');
