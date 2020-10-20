@@ -81,6 +81,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 sounds:true,
                 /*chunkSize: 10000*/
             },
+            eyesDetection: true,
             onWebRTCRoomCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event()
@@ -1526,6 +1527,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
                 return null;
             };
+
             if(findScript('{{Streams}}/js/tools/webrtc/app.js')) {
                 initConference();
             } else {
@@ -1534,6 +1536,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 ], function () {
                     initConference();
                 });
+            }
+
+            if(_options.eyesDetection) {
+                if(findScript('{{Q}}/js/webgazer.js')) {
+                    initConference();
+                } else {
+                    Q.addScript([
+                        "{{Q}}/js/webgazer.js"
+                    ], function () {
+                        initConference();
+                    });
+                }
             }
         }
 

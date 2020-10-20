@@ -903,12 +903,18 @@ module.exports = function(socket, io, rtmpUrl) {
             const source = new RTCVideoSource();
             const track = source.createTrack();
             //const transceiver = peerConnection.addTransceiver(track);
-            //const sink = new RTCVideoSink(transceiver.receiver.track);
+            const sink = new RTCVideoSink(track);
 
 
-            //sink.addEventListener('frame', onFrame);
 
-            // TODO(mroberts): Is pixelFormat really necessary?
+            sink.onframe = ({ frame }) => {
+                console.log('GOT FRAAAAME', frame.data.length)
+                // Do something with the received frame.
+                _streamingData.video.push(Buffer.from(frame.data));
+            };
+
+
+
             const canvas = createCanvas(width, height);
             const context = canvas.getContext('2d', { pixelFormat: 'RGBA24' });
             context.fillStyle = 'white';
@@ -933,12 +939,12 @@ module.exports = function(socket, io, rtmpUrl) {
                 //var imageData = createImageData(i420Frame.data, width, height);
                 //var u8Array = new Uint8Array(i420Frame.data, );
                 //var u8Array = new Uint8Array(imageData);
-                //_streamingData.video.push(Buffer.from(i420Frame.data));
+
             });
 
             // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
             // If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.
-            let ffmpeg = child_process.spawn('ffmpeg', [
+            /*let ffmpeg = child_process.spawn('ffmpeg', [
                 // Facebook requires an audio track, so we create a silent one here.
                 // Remove this line, as well as `-shortest`, if you send audio from the browser.
                 '-f', 'lavfi', '-i', 'anullsrc',
@@ -968,19 +974,19 @@ module.exports = function(socket, io, rtmpUrl) {
                 // AAC audio is required for Facebook Live.  No browser currently supports
                 // encoding AAC, so we must transcode the audio to AAC here on the server.
                 //'-acodec', 'aac',
-               /* '-acodec', 'libmp3lame',
+               /!* '-acodec', 'libmp3lame',
                 '-ar', '44100',
                 '-threads', '6',
                 '-qscale', '3',
                 '-b:a', '712000',
-                '-bufsize', '512k',*/
+                '-bufsize', '512k',*!/
 
                 // The output RTMP URL.
                 // For debugging, you could set this to a filename like 'test.flv', and play
                 // the resulting file with VLC.  Please also read the security considerations
                 // later on in this tutorial.
                 '-f', 'mp4',
-               '/home/denis/Videos/1111111.mp4'
+               '/home/denis/Videos/1111112.mp4'
             ]);
 
             // If FFmpeg stops for any reason, close the WebSocket connection.
@@ -1003,27 +1009,28 @@ module.exports = function(socket, io, rtmpUrl) {
                 console.log('FFmpeg STDERR:', data.toString());
             });
 
+            socket.on('disconnect', function() {
+                if(ffmpeg != null) ffmpeg.kill('SIGINT');
+            });
+
             _streamingData.video.on('data', function (chunk) {
                 ffmpeg.stdin.write(chunk);
-            })
-
-/*
-
-
+            })*/
 
             _streamingData.proc = ffmpeg()
                 .addInput((new StreamInput(_streamingData.video)).url)
                 .addInputOptions([
                     '-f', 'rawvideo',
                     '-pix_fmt', 'yuv420p',
-                    '-s', _streamingData.size,
+                    '-s', '640x480',
+                    //'--video_size', '640x480',
                     '-r', '30',
                 ])
                 //.addInput((new StreamInput(_streamingData.audio)).url)
-                .addInputOptions([
+                /*.addInputOptions([
                     '-f lavfi',
                     '-i anullsrc',
-                ])
+                ])*/
                 .on('start', ()=>{
                     //console.log('Start recording >> ', stream.recordPath)
                 })
@@ -1035,7 +1042,7 @@ module.exports = function(socket, io, rtmpUrl) {
                 .output('/home/denis/Videos/555.mp4');
 
             _streamingData.proc.run();
-*/
+
 
         }
 
