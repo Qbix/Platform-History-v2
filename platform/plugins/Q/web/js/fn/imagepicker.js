@@ -299,7 +299,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				if (requiredSize.width > imageSize.width * ms
 				 || requiredSize.height > imageSize.height * ms) {
 					var result = Q.handle(
-						[state.onTooSmall, state.onFinish, instructions], state,
+						[state.onTooSmall, state.onFinish], state,
 						[requiredSize, imageSize]
 					);
 					if (result === false) {
