@@ -24,6 +24,7 @@
 }
 .Users_contacts_dialog .tr.Users_contacts_dialog_letter {
 	font-weight: bold;
+	padding-left: 10px;
 }
 .Users_contacts_dialog:not(.Users_contacts_select) .tr.Users_contacts_dialog_letter {
 	border-bottom: 1px solid #a3a3a3;
@@ -38,6 +39,7 @@
 .Users_contacts_dialog .tr {
     font-size: 20px;
 	white-space: nowrap;
+	overflow: hidden;
 }
 .Users_contacts_dialog .tr[data-rawid] {
 	height: 55px;
@@ -47,7 +49,6 @@
 }
 .Users_contacts_dialog .td {
     padding: 5px 0 5px 5px;
-	display: inline-block;
 }
 .Users_contacts_dialog .td[data-email] {
 	padding-left: 0;
