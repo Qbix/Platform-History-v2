@@ -81,6 +81,8 @@ function Streams_fbLive_startStreaming($params) {
 
 	$title = (isset($params['title']) && !empty($params['title'])) ? $params['title'] : date("D M d, Y G:i");
 	$description = (isset($params['description']) && !empty($params['description'])) ? $params['description'] : '';
+	$link = ($_SERVER['HTTPS'] ? 'https' : 'http') . "://" . $_SERVER['SERVER_NAME'];
+	$description .= "\r\n" . $link;
 	$privacy = (isset($params['privacy']) && !empty($params['privacy'])) ? $params['privacy'] : 'SELF';
 
 	$privacyDesc = ['SELF' => 'Only Me', 'ALL_FRIENDS' => 'Only Friends', 'EVERYONE' => 'Everyone'];
