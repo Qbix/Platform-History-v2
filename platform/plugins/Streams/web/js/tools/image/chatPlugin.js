@@ -16,7 +16,7 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/preview.css');
+		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
