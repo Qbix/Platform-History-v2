@@ -70,18 +70,19 @@ Q.Tool.define('Users/list', function () {
 		var tool = this;
 		var state = tool.state;
 		tool.loading = true;
-		var l = Math.min(this.loaded + state.limit, state.userIds.length);
+		var length = Q.typeOf(state.userIds) === "object" ? Object.keys(state.userIds).length : state.userIds.length;
+		length = Math.min(this.loaded + state.limit, length);
 		var avatars = [], elements = [];
-		for (var i=this.loaded; i<l; ++i) {
-			var element = Q.Tool.setUpElement('div', 'Users/avatar', 
-			Q.extend({}, state.avatar, {
-				userId: state.userIds[i]
-			}), null, tool.prefix);
+		Q.each(state.userIds, function (i, userId) {
+			var element = Q.Tool.setUpElement('div', 'Users/avatar',
+				Q.extend({}, state.avatar, {
+					userId: userId
+				}), null, tool.prefix);
 			tool.element.appendChild(element);
 			elements.push(element);
-		}
-		var count = l - this.loaded;
-		this.loaded = l;
+		});
+		var count = length - this.loaded;
+		this.loaded = length;
 		Q.activate(tool.element.children || tool.element.childNodes, function () {
 			tool.loading = false;
 			if (state.clickable) {
