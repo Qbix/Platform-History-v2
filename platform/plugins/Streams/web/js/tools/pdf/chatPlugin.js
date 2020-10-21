@@ -16,7 +16,7 @@
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
 
-		Q.addStylesheet('{{Streams}}/css/tools/preview.css');
+		Q.addStylesheet('{{Streams}}/css/tools/previews.css');
 
 		// on before message post
 		tool.chatTool.state.beforePost.set(function (fields) {
@@ -35,10 +35,11 @@
 
 		Q.Text.get('Streams/content', function (err, text) {
 			tool.text = text;
+			var title = Q.getObject(["types", "Streams/pdf", "newItem"], text) || "Add PDF";
 
 			// add contect menu item
 			tool.chatTool.addMenuItem({
-				title: tool.text.types["Streams/pdf"].newItem,
+				title: title,
 				icon: "{{Streams}}/img/icons/files/pdf/40.png",
 				handler: function () {
 					$("<div>").tool("Streams/preview", {

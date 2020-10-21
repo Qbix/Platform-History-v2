@@ -24,20 +24,29 @@
 		// set edit action
 		ps.actions.actions = ps.actions.actions || {};
 
-		if (ps.editable && ps.publisherId && ps.streamName) {
-			Q.Streams.get(ps.publisherId, ps.streamName, function () {
-				if (!this.testWriteLevel('edit')) {
+		// only for exist streams set onFieldChanged event - which refresh tool
+		if (ps.streamName) {
+			Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function (err) {
+				if (err) {
 					return;
 				}
-				
-				state.isComposer = false;
-				tool.stream = this;
 
-				ps.actions.actions.edit = function () {
-					tool.composer(function () {
-						Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+				this.onAttribute().set(function (fields, k) {
+					Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
+						tool.refresh(this);
 					});
-				};
+				}, tool);
+
+				if (ps.editable && this.testWriteLevel('edit')) {
+					state.isComposer = false;
+					tool.stream = this;
+
+					ps.actions.actions.edit = function () {
+						tool.composer(function () {
+							Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {messages: true});
+						});
+					};
+				}
 			});
 		}
 
@@ -90,17 +99,6 @@
 			};
 		}
 
-		// only for exist streams set onFieldChanged event - which refresh tool
-		if (ps.streamName) {
-			Q.Streams.retainWith(true).get(ps.publisherId, ps.streamName, function () {
-				this.onAttribute().set(function (fields, k) {
-					Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, function () {
-						tool.refresh(this);
-					});
-				}, tool);
-			});
-		}
-
 		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 			tool.text = params.text[1].video;
 
@@ -136,6 +134,7 @@
 			var $te = $(tool.element);
 			var videoUrl = state.url;
 			var inplace = null;
+			var icon = null;
 
 			if (Q.Streams.isStream(stream)) {
 				videoUrl = stream.fileUrl();
@@ -153,8 +152,10 @@
 					}
 					inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 				}
+				icon = stream.fields.icon;
 			} else {
 				inplace = state.title;
+				icon = state.src;
 			}
 
 			if (!videoUrl) {
@@ -165,7 +166,6 @@
 
 			$te.removeClass('Q_uploading');
 
-			var icon = stream.fields.icon;
 			var iconCustom = true;
 			if (!icon.matchTypes('url').length || !icon.match(/\.[png|jpg|gif]/g)) {
 				icon = stream.iconUrl(40);

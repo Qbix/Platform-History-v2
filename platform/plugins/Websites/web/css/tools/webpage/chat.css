@@ -7,6 +7,7 @@
 	width: 100%;
 }
 .Streams_chat_tool .Websites_webpage_chat_preview {
+	position: relative;
 	background-color: #fff;
 	border: 1px solid #c8c8c8;
 	border-radius: 5px;
@@ -33,9 +34,11 @@
 .Streams_chat_tool .Streams_chat_messages .Websites_webpage_chat_preview .Q_close {
 	display: none;
 }
-.Streams_chat_tool .Websites_webpage_chat_preview .Streams_preview_icon {
+.Streams_chat_tool .Websites_webpage_chat_preview .Streams_preview_icon,
+.Streams_chat_tool .Websites_webpage_chat_preview .Streams_video_preview_icon {
 	width: 40px;
 	height: 40px;
+	vertical-align: top;
 }
 .Streams_chat_tool .Websites_webpage_chat_preview h3.Streams_preview_title {
 	font-size: 14px;

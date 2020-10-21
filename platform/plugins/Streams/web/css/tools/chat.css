@@ -380,6 +380,10 @@
 	display: none;
 }
 
+.Streams_chat_message .Streams_preview_tool .Streams_inplace_tool:not(.Q_inplace_tool) .Q_inplace_tool_static {
+	white-space: normal;
+}
+
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
 	.Streams_chat_date {
