@@ -2179,7 +2179,8 @@ Q.listen = function _Q_listen(options, callback) {
 	};
 	
 	var app = server.attached.express;
-	app.use(express.bodyParser());
+	var bodyParser = require('body-parser');
+	app.use(bodyParser());
 	
 	var use = app.use;
 	app.use = function _app_use() {
