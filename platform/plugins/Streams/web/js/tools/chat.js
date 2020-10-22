@@ -789,7 +789,12 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.renderNotification(Q.first(messages));
 			tool.$('.Streams_chat_noMessages').remove();
 
-			tool.renderRelatedStream(message).appendTo(tool.$('.Streams_chat_messages')).activate();
+			var $preview = tool.renderRelatedStream(message);
+			if (!$preview) {
+				return;
+			}
+
+			$preview.appendTo(tool.$('.Streams_chat_messages')).activate();
 		}, tool);
 
 		// new user left
