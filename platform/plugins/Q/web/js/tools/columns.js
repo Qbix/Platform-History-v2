@@ -123,7 +123,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$toolElement.addClass("Q_columns_animateWidth");
 			}
 		}, 100);
-		Q.onLayout(tool).set(function () {
+		Q.onLayout(tool.element.parentElement).set(function () {
 			tool.refresh();
 		}, tool);
 	}, { slotName: 'Q' });
