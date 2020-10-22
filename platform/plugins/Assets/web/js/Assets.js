@@ -442,7 +442,9 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				Q.Text.get('Assets/content', function (err, text) {
+				var pipe = new Q.Pipe(["text", "scripts"], function (params) {
+					var text = params.text[1];
+
 					options = Q.extend({},
 						text.payments,
 						Assets.Payments.stripe.options,
@@ -479,7 +481,7 @@
 							}
 							Q.handle(callback, null, [err, res]);
 						});
-					} else if (window.PaymentRequest) {
+					} else if (!Q.info.isCordova && window.PaymentRequest) {
 						// check for payment request
 						Assets.Payments.paymentRequestStripe(options, function (err, res) {
 							if (err && (err.code === 9)) {
@@ -495,7 +497,10 @@
 							Assets.Payments.standardStripe(options, callback);
 						}
 					}
-				})
+				});
+
+				Q.Text.get('Assets/content', pipe.fill("text"));
+				Q.addScript(Q.Assets.Payments.stripe.jsLibrary, pipe.fill("scripts"));
 			},
 			/**
 			 * This method use googlePay
@@ -1026,10 +1031,15 @@
 		return err;
 	}
 
-	function _redirectToBrowserTab(paymentOptions) {
+	function _redirectToBrowserTab(options) {
 		var url = new URL(document.location.href);
 		url.searchParams.set('browsertab', 'yes');
-		paymentOptions.userId = Q.Users.loggedInUserId();
+		var paymentOptions = {
+			amount: options.amount,
+			email: options.email,
+			userId: Q.Users.loggedInUserId(),
+			currency: options.currency
+		};
 		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
 		cordova.plugins.browsertab.openUrl(url.toString());
 	}
