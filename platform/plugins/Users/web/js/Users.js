@@ -3141,6 +3141,27 @@
 				var identifierTypes = Q.getObject("identifierTypes", options);
 				var contacts = this;
 
+				// clear contacts from objects in email and phoneNumbers
+				$.each(contacts, function (i, contact) {
+					if (!contact || typeof contact !== "object") {
+						return;
+					}
+
+					$.each(contact, function (j, obj) {
+						if (!obj || typeof obj !== "object" || (j !== "emails" && j !== "phoneNumbers")) {
+							return;
+						}
+
+						var cleared = [];
+						$.each(obj, function (k, element) {
+							if (typeof element === "string") {
+								cleared.push(element);
+							}
+						});
+						contact[j] = cleared;
+					});
+				});
+
 				if (!Q.isEmpty(identifierTypes) && dataType === 'browser') {
 					Q.each(contacts, function (i, contact) {
 						var added = false;
