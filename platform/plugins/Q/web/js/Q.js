@@ -10166,7 +10166,10 @@ Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
-		if (!err) {
+		if (err && !url.endsWith("en.json")) {
+			url = url.replace(/[^\/]{2,5}\.json$/, "en.json");
+			return _Q_Text_getter.force(name, url, callback, options);
+		} else {
 			Q.Text.set(name, content, o.merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
