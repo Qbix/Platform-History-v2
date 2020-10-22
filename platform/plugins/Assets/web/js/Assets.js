@@ -442,7 +442,9 @@
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				Q.Text.get('Assets/content', function (err, text) {
+				var pipe = new Q.Pipe(["text", "scripts"], function (params) {
+					var text = params.text[1];
+
 					options = Q.extend({},
 						text.payments,
 						Assets.Payments.stripe.options,
@@ -495,7 +497,10 @@
 							Assets.Payments.standardStripe(options, callback);
 						}
 					}
-				})
+				});
+
+				Q.Text.get('Assets/content', pipe.fill("text"));
+				Q.addScript(Q.Assets.Payments.stripe.jsLibrary, pipe.fill("scripts"));
 			},
 			/**
 			 * This method use googlePay
