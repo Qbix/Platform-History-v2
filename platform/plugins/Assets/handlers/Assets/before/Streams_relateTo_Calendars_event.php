@@ -8,6 +8,14 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	$fromPublisherId = $stream->publisherId;
 	$fromStreamName = $stream->name;
 
+	// check if related stream type behave to the list of paid stream types
+	$fromStreamType = $stream->type;
+	$paidStreamTypes = Q_Config::get("Assets", "service", "relatedParticipants", null);
+	if (!is_array($paidStreamTypes) || !in_array($fromStreamType, array_keys($paidStreamTypes))) {
+		return true;
+	}
+
+
 	// check if stream payment required
 	$amount = Q::ifset($event->getAttribute("payment"), "amount", null);
 	$currency = Q::ifset($event->getAttribute("payment"), "currency", null);

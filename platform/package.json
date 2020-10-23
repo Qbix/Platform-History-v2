@@ -10,15 +10,15 @@
 	},
 	"dependencies": {
 		"crypto-js": "3.x.x",
-		"express": "3.x.x",
-		"handlebars": "4.5.x",
+		"express": "^4.17.1",
+		"handlebars": "^4.7.6",
 		"html-entities": "^1.2.1",
 		"moment-timezone": "0.5.x",
 		"mysql": "2.14.x",
 		"nodemailer": "^4.4.2",
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
-		"socket.io": "1.x.x",
+		"socket.io": "^2.3.0",
 		"yuidocjs": "^0.10.2"
 	},
 	"repository": {
