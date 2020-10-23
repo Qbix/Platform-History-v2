@@ -71,9 +71,13 @@ Q.Tool.define('Users/list', function () {
 		var state = tool.state;
 		tool.loading = true;
 		var length = Q.typeOf(state.userIds) === "object" ? Object.keys(state.userIds).length : state.userIds.length;
-		length = Math.min(this.loaded + state.limit, length);
+		length = Math.min(tool.loaded + state.limit, length);
 		var avatars = [], elements = [];
 		Q.each(state.userIds, function (i, userId) {
+			if (i < tool.loaded || i >= length) {
+				return;
+			}
+			
 			var element = Q.Tool.setUpElement('div', 'Users/avatar',
 				Q.extend({}, state.avatar, {
 					userId: userId
@@ -81,8 +85,8 @@ Q.Tool.define('Users/list', function () {
 			tool.element.appendChild(element);
 			elements.push(element);
 		});
-		var count = length - this.loaded;
-		this.loaded = length;
+		var count = length - tool.loaded;
+		tool.loaded = length;
 		Q.activate(tool.element.children || tool.element.childNodes, function () {
 			tool.loading = false;
 			if (state.clickable) {
