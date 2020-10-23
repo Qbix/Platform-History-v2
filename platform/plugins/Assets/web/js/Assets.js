@@ -501,8 +501,8 @@
 				}
 			},
 			/**
-			 * Load Stripe js lib and do some needed actions.
-			 * @method loadStripe
+			 * Load js libs and do some needed actions.
+			 * @method load
 			 * @static
 			 *  @param {Function} [callback]
 			 */
@@ -1074,7 +1074,7 @@
 			}
 
 			// need Stripe lib for safari browserTab
-			Q.Assets.Payments.loadStripe();
+			Q.Assets.Payments.load();
 
 			if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
 				var $button = $('#browsertab_pay');
