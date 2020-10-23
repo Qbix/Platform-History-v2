@@ -2126,8 +2126,11 @@
 		 */
 		url: function (authorizeUri, client_id, scope, options) {
 			options = options || {};
-			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
 			var responseType = options.responseType || 'code';
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			if (options.openWindow) {
+				redirectUri = Q.url(redirectUri + '?openWindow=1');
+			}
 			if (!options.state) {
 				options.state = String(Math.random());
 			}
@@ -2174,7 +2177,7 @@
 				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
 			}
 			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
-			var responseType = options.response_typeeType || 'code';
+			var responseType = options.responseType || 'code';
 			if (!options.state) {
 				options.state = String(Math.random());
 			}
