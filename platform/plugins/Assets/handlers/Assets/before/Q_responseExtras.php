@@ -2,7 +2,7 @@
 
 function Assets_before_Q_responseExtras() {
 	Q_Response::addStylesheet('{{Assets}}/css/Assets.css', 'Assets');
-	Q_Response::addScript('{{Assets}}/js/Assets.js', 'Assets');
+	Q_Response::addScript('{{Assets}}/js/Assets.js?'.filemtime(ASSETS_PLUGIN_WEB_DIR.DS.'js/Assets.js'), 'Assets');
 
 	Q_Response::setScriptData('Q.plugins.Assets.Credits.amount', Assets_Credits::amount());
 	Q_Response::setScriptData('Q.plugins.Assets.Credits.exchange', Q_Config::expect('Assets', 'credits', 'exchange'));

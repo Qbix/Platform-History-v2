@@ -500,8 +500,23 @@
 				});
 
 				Q.Text.get('Assets/content', pipe.fill("text"));
-				Q.addScript(Q.Assets.Payments.stripe.jsLibrary, pipe.fill("scripts"));
+				Assets.Payments.loadStripe(pipe.fill("scripts"));
 			},
+			/**
+			 * Load Stripe js lib and do some needed actions.
+			 * @method loadStripe
+			 * @static
+			 *  @param {Function} [callback]
+			 */
+			loadStripe: Q.getter(function (callback) {
+				Q.addScript(Q.Assets.Payments.stripe.jsLibrary, function () {
+					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
+					Stripe.applePay.checkAvailability(function (available) {
+						Assets.Payments.stripe.applePayAvailable = available;
+						Q.handle(callback);
+					});
+				});
+			}),
 			/**
 			 * This method use googlePay
 			 * and then charge that payment profile.
@@ -966,13 +981,6 @@
 			Assets.texts = text;
 		});
 
-		if (Q.info.platform === 'ios' && Q.getObject("Stripe.applePay.checkAvailability")) {
-			Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-			Stripe.applePay.checkAvailability(function (available) {
-				Assets.Payments.stripe.applePayAvailable = available;
-			});
-		}
-
 		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
 		// and listem messages to show Q.Notices
 		var _listenUserStream = function () {
@@ -1053,6 +1061,10 @@
 				console.warn('Undefined payment options');
 				throw(err);
 			}
+
+			// need Stripe lib for safari browserTab
+			Q.Assets.Payments.loadStripe();
+
 			if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
 				var $button = $('#browsertab_pay');
 				var $info = $('#browsertab_pay_info');
@@ -1060,7 +1072,7 @@
 				var $error = $('#browsertab_pay_error');
 				$button.show();
 				$button.on('click', function() {
-					Assets.Payments.stripe(paymentOptions, function(err, res){
+					Assets.Payments.stripe(paymentOptions, function(err, res) {
 						$button.hide();
 						if (err && err.code === 20) {
 							$cancel.show();
@@ -1069,7 +1081,7 @@
 						} else {
 							$info.show();
 						}
-					})
+					});
 				});
 			} else {
 				Assets.Payments.stripe(paymentOptions, function(){
