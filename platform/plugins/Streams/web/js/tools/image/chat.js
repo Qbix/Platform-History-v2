@@ -36,6 +36,11 @@
 		Q.Text.get('Streams/content', function (err, text) {
 			tool.text = text;
 
+			// non logged user can't add any items to chat
+			if (!Q.Users.loggedInUserId()) {
+				return;
+			}
+
 			var $element = $("<li class='Streams_chat_addon Streams_preview_create'></li>");
 			$("<div class='Streams_chat_addon_icon'><img src='" + Q.url("{{Streams}}/img/icons/Streams/image/40.png") + "' /></div>").appendTo($element);
 			$("<span class='Streams_chat_addon_title'>" + tool.text.types["Streams/image"].newItem + "</span>").appendTo($element);

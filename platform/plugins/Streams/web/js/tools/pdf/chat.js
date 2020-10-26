@@ -37,6 +37,11 @@
 			tool.text = text;
 			var title = Q.getObject(["types", "Streams/pdf", "newItem"], text) || "Add PDF";
 
+			// non logged user can't add any items to chat
+			if (!Q.Users.loggedInUserId()) {
+				return;
+			}
+
 			// add contect menu item
 			tool.chatTool.addMenuItem({
 				title: title,
