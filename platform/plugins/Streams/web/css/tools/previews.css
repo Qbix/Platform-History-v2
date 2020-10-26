@@ -227,7 +227,8 @@
 /* <Streams_pdf_preview> */
 /* </Streams_pdf_preview> */
 
-.Streams_chat_tool .Streams_preview_tool .Streams_preview_container {
+.Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
+.Streams_preview_tool .Streams_preview_container.Streams_preview_view {
 	white-space: nowrap;
 	display: block;
 	overflow: hidden;
