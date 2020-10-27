@@ -84,6 +84,8 @@ Q.Tool.define('Users/list', function () {
 				}), null, tool.prefix);
 			tool.element.appendChild(element);
 			elements.push(element);
+		}, {
+			numeric: true
 		});
 		var count = length - tool.loaded;
 		tool.loaded = length;
