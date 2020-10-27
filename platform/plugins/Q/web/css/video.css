@@ -86,3 +86,23 @@
 .Q_dialog_video .Q_video_composer_submit button[name=reset] {
     display: none;
 }
+.Q_video_twitch {
+    overflow: hidden;
+    padding-top: 56.25%;
+    position: relative;
+    min-width: 500px;
+    min-height: 280px;
+}
+.Q_mobile .Q_video_twitch {
+    min-width: 357px;
+    min-height: 201px;
+}
+
+.Q_video_twitch iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}

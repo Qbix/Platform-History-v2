@@ -1005,7 +1005,9 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * @param {object} message
 	 */
 	renderRelatedStream: function (message) {
-		var tool = this;
+		if (Q.getObject("constructor.name", message) !== "Streams_Message") {
+			message = Q.Streams.Message.construct(message);
+		}
 
 		var instructions = message.getAllInstructions();
 		var previewToolName = instructions.fromType + '/preview';
