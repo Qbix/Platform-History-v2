@@ -2424,7 +2424,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Users.cache.where || 'document';
+		var where = Q.getObject("cache.where", Users) || 'document';
 
 		if (Q.Frames) {
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
