@@ -20,7 +20,13 @@
 
 		// stores currently shown contextual id, it's '-1' when no contextual is shown at the moment
 		current: -1,
-	
+
+		// stores current mouse position inside body
+		currentMousePosition: [0, 0],
+
+		// timeout before react on mousemove event on desktop
+		mousemoveTimeout: Q.info.isTouchscreen ? 0 : 300,
+
 		// indicates if contextual show() has just been called, need to prevent contextual hiding in 'start' lifecycle handler
 		justShown: false,
 	
@@ -333,7 +339,8 @@
 					}
 
 					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
-					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
+					var px = Q.Contextual.currentMousePosition[0];
+					var py = Q.Contextual.currentMousePosition[1];
 
 					var newMoveTarget = $(Q.Pointer.elementFromPoint(px, py)).closest('.Q_listing li');
 					if (info.moveTarget)
@@ -393,8 +400,17 @@
 						}
 					}
 				};
-				$(document.body).on(Q.Pointer.move, Q.Contextual.moveEventHandler);
-			
+				$(document.body).on(Q.Pointer.move, function (e) {
+					var that = this;
+
+					// save current mouse position to use later in other methods
+					Q.Contextual.currentMousePosition = [Q.Pointer.getX(e), Q.Pointer.getY(e)];
+
+					setTimeout(function () {
+						Q.handle(Q.Contextual.moveEventHandler, that, [e]);
+					}, Q.Contextual.mousemoveTimeout);
+				});
+
 				Q.Contextual.enterEventHandler = function (e) {
 					var c = Q.Contextual.collection[Q.Contextual.current];
 					if (e.target.tagName.toLowerCase() === 'iframe'
@@ -704,11 +720,12 @@
 				'top': (y + (info.inBottomHalf ? - (contextual.outerHeight() + 16) : 16)) + 'px',
 				'left': x + 'px'
 			});
-			if (Q.Contextual.fadeTime > 0)
+			if (Q.Contextual.fadeTime > 0) {
 				contextual.fadeIn(Q.Contextual.fadeTime);
-			else
+			} else {
 				contextual.show();
-		
+			}
+
 			if (Q.info.isTouchscreen)
 			{
 				var mask = Q.Masks.show('Q.screen.mask', {
@@ -759,10 +776,12 @@
 			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
-			if (Q.Contextual.fadeTime > 0)
+			if (Q.Contextual.fadeTime > 0) {
 				contextual.fadeOut(Q.Contextual.fadeTime);
-			else
+			} else {
 				contextual.hide();
+			}
+
 			if (!leaveMask)
 			{
 				Q.Masks.hide('Q.screen.mask');
