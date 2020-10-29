@@ -173,8 +173,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 				} else {
 					_proceed();
 				}
-				var r = ps.related;
-				Q.Streams.retainWith(tool)
+				Q.Streams.retainWith(tool);
 				function _proceed(overrides, weight) {
 					if (overrides != undefined && !Q.isPlainObject(overrides)) {
 						return;
@@ -210,7 +209,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 							tool.preview.loading();
 						}, 0);
 						ps.streamName = stream.fields.name;
-					}, r, ps.creatable && ps.creatable.options);
+					}, ps.related, ps.creatable && ps.creatable.options);
 				}
 			},
 			onFinish: {'Streams/image/preview': function (data, key, file) {

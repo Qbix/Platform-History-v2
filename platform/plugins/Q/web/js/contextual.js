@@ -506,8 +506,7 @@
 					// select current element
 					li.addClass('Q_selected');
 
-					var handler = li.attr('data-handler') || li.data('handler');
-					handler = handler || contextual.attr('data-handler') || contextual.data('defaultHandler');
+					var handler = li.attr('data-handler') || li.data('handler') || contextual.attr('data-handler') || contextual.data('defaultHandler');
 
 					try
 					{
