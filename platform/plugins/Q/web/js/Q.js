@@ -13471,7 +13471,9 @@ Q.onInit.add(function () {
 			navigator.splashscreen.hide();
 		}
 	}, 'Q.Socket');
-	var info = Q.first(Q.info.languages);
+
+	var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+	var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 	if (info) {
 		Q.Text.setLanguage.apply(Q.Text, info);
 	}

@@ -2711,7 +2711,8 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var info = Q.first(Q.info.languages);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
 		}
