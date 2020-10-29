@@ -13556,6 +13556,7 @@ Q.onJQuery.add(function ($) {
 		"Q/audio": "{{Q}}/js/tools/audio.js",
 		"Q/video": "{{Q}}/js/tools/video.js",
 		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/image": "{{Q}}/js/tools/image.js",
 		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	

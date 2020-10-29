@@ -541,14 +541,14 @@ Q.Tool.define('Streams/chat', function(options) {
 							var element = "div";
 							// if tool is preview, apply Streams/preview tool first, because it may be required
 							if (toolName.endsWith("/preview")) {
-								element = Q.Tool.setUpElement(element, "Streams/preview", fields);
+								element = Q.Tool.setUpElement(element, "Streams/preview", state);
 							}
 
 							var fields = Q.extend({}, stream.getAllAttributes(), {
 								publisherId: stream.fields.publisherId,
 								streamName: stream.fields.name,
 								autoplay: true,
-								url: stream.fileUrl()
+								url: stream.fileUrl() || stream.iconUrl('200')
 							});
 
 							element = Q.Tool.setUpElement(element, toolName, fields);
