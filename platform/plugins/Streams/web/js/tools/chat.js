@@ -404,6 +404,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		this.state.onContextualCreated.add(function (contextual) {
 			$("ul.Q_listing", contextual).append($element);
 		});
+
+		return $element;
 	},
 	renderMessages: function(messages, callback){
 		var tool = this;
