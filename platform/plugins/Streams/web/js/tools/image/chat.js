@@ -11,7 +11,6 @@
 	Q.Tool.define("Streams/image/chat", ["Streams/chat"], function (options) {
 		var tool = this;
 		tool.chatTool = Q.Tool.from(this.element, "Streams/chat");
-		var userId = Q.Users.loggedInUserId();
 
 		// preload throbber
 		$('<img/>')[0].src = Q.info.imgLoading;
@@ -36,59 +35,8 @@
 		Q.Text.get('Streams/content', function (err, text) {
 			tool.text = text;
 
-			// non logged user can't add any items to chat
-			if (!Q.Users.loggedInUserId()) {
-				return;
-			}
-
-			var $element = $("<li class='Streams_chat_addon Streams_preview_create'></li>");
-			$("<div class='Streams_chat_addon_icon'><img src='" + Q.url("{{Streams}}/img/icons/Streams/image/40.png") + "' /></div>").appendTo($element);
-			$("<span class='Streams_chat_addon_title'>" + tool.text.types["Streams/image"].newItem + "</span>").appendTo($element);
-
-			tool.chatTool.state.onContextualCreated.add(function (contextual) {
-				$("ul.Q_listing", contextual).append($element);
-				$element.plugin('Q/imagepicker', {
-					fullSize: "400x",
-					maxStretch: 2,
-					save: "Streams/image",
-					saveSizeName: {
-						"40.png": "40.png",
-						"50": "50",
-						"50.png": "50.png",
-						"80.png": "80.png",
-						"200.png": "200.png",
-						"400.png": "400.png",
-						"400x.png": "400x.png",
-						"x400.png": "x400.png"
-					},
-					showSize: "50"
-				});
-			}, tool);
-
-
-			/*imagePreview.composer(function (params) {
-				var fields = Q.extend({
-					publisherId: userId,
-					type: "Streams/image"
-				}, 10, params);
-
-				var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
-
-				Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
-					$dummy.remove();
-
-					if (err) {
-						return err;
-					}
-
-					console.log(this);
-				}, {
-					publisherId: tool.chatTool.state.publisherId,
-					streamName: tool.chatTool.state.streamName,
-					type: "Streams/image"
-				});
-			});*/
-
+			// add contect menu item
+			tool.refresh();
 		});
 
 	},
@@ -98,7 +46,67 @@
 	},
 
 	{
+		refresh: function () {
+			var tool = this;
+			var userId = Q.Users.loggedInUserId();
 
+			// non logged user can't add any items to chat
+			if (!userId) {
+				return;
+			}
+
+			tool.$previewElement && Q.Tool.remove(tool.$previewElement[0], true, true);
+
+			tool.$previewElement = $("<div>").css("display", "none").appendTo(tool.chatTool.element.parentElement).tool("Streams/preview", {
+				publisherId: userId,
+				related: {
+					publisherId: tool.chatTool.state.publisherId,
+					streamName: tool.chatTool.state.streamName,
+					type: "Streams/image"
+				},
+				onRefresh: function () {
+					tool.refresh();
+				},
+				creatable: {
+					/*preprocess: function (_proceed) {
+						var fields = Q.extend({
+							publisherId: userId,
+							type: "Streams/image"
+						});
+
+						var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
+
+						Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
+							$dummy.remove();
+
+							if (err) {
+								return err;
+							}
+
+							console.log(this);
+						}, {
+							publisherId: tool.chatTool.state.publisherId,
+							streamName: tool.chatTool.state.streamName,
+							type: "Streams/image"
+						});
+					}*/
+				}
+			}).tool("Streams/image/preview").activate(function () {
+				var _handler = function () {
+					$(".Q_imagepicker", tool.$previewElement).plugin('Q/imagepicker', 'click');
+				};
+
+				if (tool.menuItem) {
+					return tool.menuItem.data("handler", _handler);
+				}
+
+				tool.menuItem = tool.chatTool.addMenuItem({
+					title: Q.getObject(["types", "Streams/image", "newItem"], tool.text) || "Add Image",
+					icon: "{{Streams}}/img/icons/Streams/image/40.png",
+					handler: _handler
+				});
+			});
+		}
 	});
 
 })(Q, Q.$, window);
