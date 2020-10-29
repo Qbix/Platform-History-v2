@@ -981,7 +981,7 @@
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js"
 	});
 	
-	Q.onInit.set(function () {
+	Q.onInit.add(function () {
 		// preload this, so it's available on gesture handlers
 		Q.Text.get('Assets/content', function (err, text) {
 			var msg = Q.firstErrorMessage(err);
