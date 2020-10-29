@@ -8,6 +8,7 @@ function Users_before_Q_sessionExtras()
 			$u['sessionCount'] = $user->sessionCount;
 			$u['email'] = $user->emailAddress;
 			$u['mobile'] = $user->mobileNumber;
+			$u['preferredLanguage'] = $user->preferredLanguage;
 			Q_Response::setScriptData("Q.plugins.Users.loggedInUser", $u);
 			Q_Response::addScriptLine("Q.plugins.Users.loggedInUser = new Q.plugins.Users.User(Q.plugins.Users.loggedInUser);");
 			Users::capability()->addPermission('Users/socket');

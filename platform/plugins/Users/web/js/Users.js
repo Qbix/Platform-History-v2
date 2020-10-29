@@ -1517,10 +1517,9 @@
 		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
-			).on(Q.Pointer.touchclick, function (e) {
-				Users.submitClosestForm.apply(this, arguments);
-			}).on(Q.Pointer.click, function (e) {
+			).on(Q.Pointer.fastclick, function (e) {
 				e.preventDefault(); // prevent automatic submit on click
+				submitClosestForm.apply($a, arguments);
 			});
 
 		var directions = Q.plugins.Users.login.serverOptions.noRegister
@@ -2425,7 +2424,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Users.cache.where || 'document';
+		var where = Q.getObject("cache.where", Users) || 'document';
 
 		if (Q.Frames) {
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
@@ -2712,7 +2711,8 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var info = Q.first(Q.info.languages);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
 		}
