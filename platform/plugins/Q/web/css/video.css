@@ -90,8 +90,8 @@
     overflow: hidden;
     padding-top: 56.25%;
     position: relative;
-    min-width: 500px;
-    min-height: 280px;
+    min-width: 480px;
+    min-height: 268px;
 }
 .Q_mobile .Q_video_twitch {
     min-width: 357px;
