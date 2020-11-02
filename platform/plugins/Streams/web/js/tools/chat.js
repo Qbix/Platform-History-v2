@@ -554,7 +554,8 @@ Q.Tool.define('Streams/chat', function(options) {
 							element = Q.Tool.setUpElement(element, toolName, fields);
 							Q.invoke({
 								title: stream.fields.title,
-								content: element
+								content: element,
+								trigger: $toolElement
 							});
 						});
 					});
