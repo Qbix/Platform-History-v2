@@ -9,6 +9,9 @@
 		"node": ">= 0.6.0"
 	},
 	"dependencies": {
+		"@tensorflow-models/face-landmarks-detection": "0.0.2",
+		"@tensorflow/tfjs-backend-webgl": "^2.6.0",
+		"@tensorflow/tfjs-core": "^2.6.0",
 		"crypto-js": "3.x.x",
 		"express": "3.x.x",
 		"handlebars": "4.5.x",

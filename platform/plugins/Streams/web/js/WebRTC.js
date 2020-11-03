@@ -44,7 +44,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 (function (Q, $) {
-
     var Streams = Q.Streams;
     var _debug = null;
     var _debugTimer = {};
@@ -70,8 +69,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             onlyOneScreenSharingAllowed: false,
             disconnectBtnInParticipants: false,
             sounds: {
-                participantDisconnected:Q.url('{{Streams}}/audio/user_disconnected.mp3'),
-                participantConnected:Q.url('{{Streams}}/audio/user_connected.mp3')
+                participantConnected:Q.url('{{Streams}}/audio/user_disconnected.mp3'),
+                participantDisconnected:Q.url('{{Streams}}/audio/user_connected.mp3')
             },
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
@@ -82,6 +81,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 /*chunkSize: 10000*/
             },
             eyesDetection: true,
+            eyes: true,
+            faces: false,
             onWebRTCRoomCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event()
@@ -1538,7 +1539,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
             }
 
-            if(_options.eyesDetection) {
+            /*if(_options.eyesDetection) {
                 if(findScript('{{Q}}/js/webgazer.js')) {
                     initConference();
                 } else {
@@ -1548,7 +1549,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         initConference();
                     });
                 }
-            }
+            }*/
         }
 
         /**
@@ -5020,6 +5021,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {String} [options.mode] Technology that is used to start conference ('twilio' OR 'node')
          */
         function start(options) {
+
             Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
                 createInfoSnippet()
