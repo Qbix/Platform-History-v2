@@ -16,7 +16,14 @@
      * @class Users.webgazerInstance
      * @constructor
      */
-    Users.Eyes.webgazerInstance = null
+    Users.Eyes.webgazerI
+
+    /**
+     * Active MediaStream
+     * @class Users.mediaStream
+     * @constructor
+     */
+    Users.Eyes.mediaStream = null
 
     /**
      * Whether user looking on screen or not
@@ -35,6 +42,7 @@
      * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
      */
     Users.Eyes.start = function (options) {
+        Users.Eyes.stop();
         var webgazerInstance = null;
 
         options = Q.extend({
@@ -56,8 +64,8 @@
                 });
             }
         } else {
-            webgazerInstance.clearData();
             webgazerInstance = Users.Eyes.webgazerInstance
+            webgazerInstance.clearData();
         }
 
         function init() {
@@ -76,6 +84,7 @@
         }
 
         async function startTracking(stream) {
+            Users.Eyes.mediaStream = stream;
             // Kalman Filter defaults to on. Can be toggled by user.
             window.applyKalmanFilter = true;
             // Set to true if you want to save the data even if you reload the page.
@@ -135,7 +144,15 @@
     Users.Eyes.stop = function () {
         if(Users.Eyes.webgazerInstance != null) {
             Users.Eyes.webgazerInstance.end();
+            Users.Eyes.webgazerInstance = null;
         }
+
+        if(Users.Eyes.mediaStream != null) {
+            Users.Eyes.mediaStream.getTracks().map(function (track) {
+                track.stop()
+            })
+        }
+        Users.Faces.state = null;
     }
 
     var findScript = function (src) {
