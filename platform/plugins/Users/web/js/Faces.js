@@ -42,7 +42,6 @@
      * @method Eyes.start
      * @param {Object} options options for the method
      * @param {Function} [options.stream] Video stream which are processed
-     * @param {Function} [options.onChange] Callback called when eyes points are changing
      * @param {Function} [options.onEnter] Callback called when eyes points are within the viewport
      * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
      */
@@ -54,7 +53,6 @@
         options = Q.extend({
             element: null,
             landmarksDetection: false,
-            onChange: new Q.Event(),
             onEnter: new Q.Event(),
             onLeave: new Q.Event()
         }, options);
@@ -87,8 +85,6 @@
         }
 
         function init() {
-            console.log('init')
-
             if(options.element != null) {
                 startTracking(options.element)
             } else {
@@ -96,8 +92,6 @@
                     'audio': false,
                     'video': true
                 }).then(function (stream) {
-                    console.log('init: getUserMedia')
-
                     let videoEl = document.createElement('VIDEO');
                     videoEl.srcObject = stream;
                     startTracking(videoEl);
@@ -118,7 +112,6 @@
                 // Pass in a video stream (or an image, canvas, or 3D tensor) to obtain an
                 // array of detected faces from the MediaPipe graph. If passing in a video
                 // stream, a single prediction per frame will be returned.
-                //console.log('model', model)
                 const predictions = await model.estimateFaces({
                     input: element,
                     returnTensors: false,
@@ -128,12 +121,12 @@
 
                 if (predictions.length > 0) {
                     if(Q.Users.Faces.state === OUTSIDE_CAMERA) {
-                        options.onEnter.handle.call();
+                        Users.Faces.onEnter.handle.call();
                         Q.Users.Faces.state = WITHIN_CAMERA;
                     }
                 } else {
                     if(Q.Users.Faces.state === WITHIN_CAMERA) {
-                        options.onLeave.handle.call();
+                        Users.Faces.onLeave.handle.call();
                         Q.Users.Faces.state = OUTSIDE_CAMERA;
                     }
                 }
@@ -149,22 +142,27 @@
     }
 
     /**
+     * Event is triggered when face is detected
+     * @param {Q.Event} anotherEvent
+     * @return {Q.Event} A new Q.Event object
+     */
+    Users.Faces.onEnter = new Q.Event();
+
+    /**
+     * Event is triggered when face is outside of camera view
+     * @param {Q.Event} anotherEvent
+     * @return {Q.Event} A new Q.Event object
+     */
+    Users.Faces.onLeave = new Q.Event();
+
+    /**
      * Start webcam eye tracking on the browser.
      * @method Eyes.start
      * @param {Object} options options for the method
      * @param {Function} [options.stream] Video stream which are processed
-     * @param {Function} [options.onChange] Callback called when eyes points are changing
-     * @param {Function} [options.onEnter] Callback called when eyes points are within the viewport
-     * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
      */
-    Users.Faces.startFaceDetection = function (options) {
-        Users.Faces.stopFaceDetection();
-        options = Q.extend({
-            element: null,
-            onEnter: new Q.Event(),
-            onLeave: new Q.Event()
-        }, options);
-
+    Users.Faces.start = function (callback) {
+        Users.Faces.stop();
 
         if (!findScript('{{Users}}/js/tfjs.js')) {
             Q.addScript('{{Users}}/js/tfjs.js', function () {
@@ -184,10 +182,8 @@
         }
 
         function init() {
-            console.log('init')
-
-            if (options.element != null) {
-                startTracking(options.element)
+            if (Users.Faces.videoElement != null) {
+                startTracking(Users.Faces.videoElement, callback)
             } else {
                 navigator.mediaDevices.getUserMedia({
                     'audio': false,
@@ -197,7 +193,7 @@
                     videoEl.srcObject = stream;
 
                     videoEl.addEventListener('loadeddata', function(e) {
-                        startTracking(videoEl);
+                        startTracking(videoEl, callback);
                     });
                     videoEl.addEventListener('canplay', (e) => {
                         if(videoEl.paused) videoEl.play()
@@ -210,7 +206,7 @@
         }
 
 
-        async function startTracking(element) {
+        async function startTracking(element, callback) {
             // Load the model.
             const model = await blazeface.load();
 
@@ -227,24 +223,25 @@
 
                 if (predictions.length > 0) {
                     if (Q.Users.Faces.state === OUTSIDE_CAMERA || Q.Users.Faces.state === null) {
-                        options.onEnter.handle.call();
+                        Users.Faces.onEnter.handle.call();
                         Q.Users.Faces.state = WITHIN_CAMERA;
                     }
                 } else {
                     if (Q.Users.Faces.state === WITHIN_CAMERA || Q.Users.Faces.state === null) {
-                        options.onLeave.handle.call();
+                        Users.Faces.onLeave.handle.call();
                         Q.Users.Faces.state = OUTSIDE_CAMERA;
                     }
                 }
             }, 100)
 
+            if(callback != null) callback();
 
         }
 
 
     }
 
-    Users.Faces.stopFaceDetection = Users.Faces.faceDetection.stop = function () {
+    Users.Faces.stop = Users.Faces.faceDetection.stop = function () {
         if (Users.Faces.faceDetection.detectionInterval != null) {
             clearInterval(Users.Faces.faceDetection.detectionInterval);
             Users.Faces.faceDetection.detectionInterval = null;

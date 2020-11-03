@@ -16,7 +16,7 @@
      * @class Users.webgazerInstance
      * @constructor
      */
-    Users.Eyes.webgazerI
+    Users.Eyes.webgazerInstance
 
     /**
      * Active MediaStream
@@ -33,24 +33,35 @@
     Users.Eyes.state = null;
 
     /**
+     * Event is triggered eye moving detected
+     * @param {Q.Event} anotherEvent
+     * @return {Q.Event} A new Q.Event object
+     */
+    Users.Eyes.onMove = new Q.Event();
+
+    /**
+     * Event is triggered when user looked at screen at the first time
+     * @param {Q.Event} anotherEvent
+     * @return {Q.Event} A new Q.Event object
+     */
+    Users.Eyes.onEnter = new Q.Event();
+
+    /**
+     * Event is triggered when user looked outside of the screen
+     * @param {Q.Event} anotherEvent
+     * @return {Q.Event} A new Q.Event object
+     */
+    Users.Eyes.onLeave = new Q.Event();
+
+    /**
      * Start webcam eye tracking on the browser.
      * @method Eyes.start
      * @param {Object} options options for the method
-     * @param {Function} [options.stream] Video stream which are processed
-     * @param {Function} [options.onChange] Callback called when eyes points are changing
-     * @param {Function} [options.onEnter] Callback called when eyes points are within the viewport
-     * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
      */
-    Users.Eyes.start = function (options) {
+    Users.Eyes.start = function (callback) {
         Users.Eyes.stop();
         var webgazerInstance = null;
 
-        options = Q.extend({
-            stream: null,
-            onChange: new Q.Event(),
-            onEnter: new Q.Event(),
-            onLeave: new Q.Event()
-        }, options);
 
         if(Users.Eyes.webgazerInstance == null) {
             if(findScript('{{Users}}/js/webgazer.js')) {
@@ -69,21 +80,21 @@
         }
 
         function init() {
-            if(options.stream != null) {
-                startTracking(options.stream)
+            if(Users.Eyes.mediaStream != null) {
+                startTracking(Users.Eyes.mediaStream, callback)
             } else {
                 navigator.mediaDevices.getUserMedia ({
                     'audio': false,
                     'video': true
                 }).then(function (stream) {
-                    startTracking(stream);
+                    startTracking(stream, callback);
                 }).catch(function(err) {
                     console.error('EYES TRACKING ERROR' + err.name + ": " + err.message);
                 });
             }
         }
 
-        async function startTracking(stream) {
+        async function startTracking(stream, callback) {
             Users.Eyes.mediaStream = stream;
             // Kalman Filter defaults to on. Can be toggled by user.
             window.applyKalmanFilter = true;
@@ -96,17 +107,17 @@
                 .setStaticVideo(stream)
                 .setGazeListener(function(data, clock) {
                     if(data) {
-                        options.onChange.handle.call(data);
+                        Users.Eyes.onMove.handle.call(null, data);
                         if (Math.sign(data.x) === -1 || Math.sign(data.y) === -1) {
 
                             if(Q.Users.Eyes.state === WITHIN_VIEWPORT || Q.Users.Eyes.state === null) {
-                                options.onLeave.handle.call(data);
+                                Users.Eyes.onLeave.handle.call(this, data);
                                 Q.Users.Eyes.state = OUTSIDE_VIEWPORT;
                             }
                         } else if(Math.sign(data.x) === 1 && Math.sign(data.y) === 1) {
 
                             if(Q.Users.Eyes.state === OUTSIDE_VIEWPORT || Q.Users.Eyes.state === null) {
-                                options.onEnter.handle.call(data);
+                                Users.Eyes.onEnter.handle.call(this, data);
                                 Q.Users.Eyes.state = WITHIN_VIEWPORT;
                             }
 
@@ -136,6 +147,8 @@
                 canvas.style.position = 'fixed';
             };
             setup();
+
+            if(callback != null) callback();
 
         }
 
