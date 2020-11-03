@@ -481,11 +481,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var ao = Q.extend({}, state.actions);
 			if (actions) {
 				ao = Q.extend(ao, 10, { actions: actions });
+				$te.tool('Q/actions', ao).activate();
 			}
+			
 			if ($te.state('Q/actions')) {
 				$te.plugin('Q/actions', 'refresh');
-			} else {
-				$te.tool('Q/actions', ao).activate();
 			}
 		});
 		return this;
