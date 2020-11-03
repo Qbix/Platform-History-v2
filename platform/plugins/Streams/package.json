@@ -7,6 +7,8 @@
   "dependencies": {
     "canvas": "^2.6.1",
     "color-space": "^1.16.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-installer": "^1.0.2",
     "fluent-ffmpeg": "^2.1.2",
     "fluent-ffmpeg-multistream": "^1.0.0",
     "requirejs": "^2.3.6",

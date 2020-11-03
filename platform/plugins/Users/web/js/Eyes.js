@@ -2,7 +2,8 @@
 
     var Users = Q.plugins.Users;
     var _debug = null;
-
+    const WITHIN_VIEWPORT = 1;
+    const OUTSIDE_VIEWPORT = 2;
     /**
      * Analyses what user is watching on screen
      * @class Users.Eyes
@@ -16,6 +17,13 @@
      * @constructor
      */
     Users.Eyes.webgazerInstance = null
+
+    /**
+     * Whether user looking on screen or not
+     * @class Users.state
+     * @constructor
+     */
+    Users.Eyes.state = null;
 
     /**
      * Start webcam eye tracking on the browser.
@@ -38,23 +46,21 @@
 
         if(Users.Eyes.webgazerInstance == null) {
             if(findScript('{{Users}}/js/webgazer.js')) {
-                Users.Eyes.webgazerInstance = webgazerInstance = webgazer;
+                webgazerInstance = Users.Eyes.webgazerInstance;
                 init();
 
             } else {
                 Q.addScript('{{Users}}/js/webgazer.js', function () {
-                    webgazerInstance = Users.Eyes.webgazerInstance;
+                    Users.Eyes.webgazerInstance = webgazerInstance = webgazer;
                     init();
                 });
             }
         } else {
+            webgazerInstance.clearData();
             webgazerInstance = Users.Eyes.webgazerInstance
         }
 
         function init() {
-
-
-
             if(options.stream != null) {
                 startTracking(options.stream)
             } else {
@@ -80,9 +86,23 @@
             //.setTracker('clmtrackr')
                 .setStaticVideo(stream)
                 .setGazeListener(function(data, clock) {
-                    options.onChange.handle.call(data);
-                    //console.log(data); /* data is an object containing an x and y key which are the x and y prediction coordinates (no bounds limiting) */
-                    //   console.log(clock); /* elapsed time in milliseconds since webgazer.begin() was called */
+                    if(data) {
+                        options.onChange.handle.call(data);
+                        if (Math.sign(data.x) === -1 || Math.sign(data.y) === -1) {
+
+                            if(Q.Users.Eyes.state === WITHIN_VIEWPORT || Q.Users.Eyes.state === null) {
+                                options.onLeave.handle.call(data);
+                                Q.Users.Eyes.state = OUTSIDE_VIEWPORT;
+                            }
+                        } else if(Math.sign(data.x) === 1 && Math.sign(data.y) === 1) {
+
+                            if(Q.Users.Eyes.state === OUTSIDE_VIEWPORT || Q.Users.Eyes.state === null) {
+                                options.onEnter.handle.call(data);
+                                Q.Users.Eyes.state = WITHIN_VIEWPORT;
+                            }
+
+                        }
+                    }
 
                 }).begin(function(e){
                     console.error(e)
@@ -97,7 +117,7 @@
             webgazerInstance.showVideo(false);
             webgazerInstance.showFaceOverlay(false);
             webgazerInstance.showFaceFeedbackBox(false);
-            webgazerInstance.showPredictionPoints(true); /* shows a square every 100 milliseconds where current prediction is */
+            webgazerInstance.showPredictionPoints(false); /* shows a square every 100 milliseconds where current prediction is */
             //Set up the webgazer video feedback.
             var setup = function() {
                 //Set up the main canvas. The main canvas is used to calibrate the webgazer.
