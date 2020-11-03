@@ -10,20 +10,12 @@
 .Streams_audio_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
 	line-height: normal;
 	display: inline-block;
-	width: calc(100% - 60px);
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
 .Streams_audio_preview_tool iframe {
 	display: none;
-}
-
-.Streams_audio_preview_tool .Streams_preview_container {
-	white-space: nowrap;
-}
-.Streams_audio_preview_tool .Streams_preview_contents {
-	width: 100%;
 }
 
 .Streams_audio_composer,
@@ -215,13 +207,6 @@
 /* ------------------- */
 
 /* <Streams_video_preview> */
-.Streams_video_preview_tool .Streams_preview_container {
-    white-space: nowrap;
-}
-.Streams_video_preview_tool .Streams_preview_container .Streams_preview_title,
-.Streams_video_preview_tool .Streams_preview_container .Streams_preview_contents {
-    width: calc(100% - 40px);
-}
 .Streams_video_composer .Streams_video_composer_preview {
 	margin: 10px 0;
 }
@@ -240,11 +225,12 @@
 /* </Streams_video_preview> */
 
 /* <Streams_pdf_preview> */
-.Streams_pdf_preview_tool .Streams_preview_container {
-    white-space: nowrap;
-}
-.Streams_pdf_preview_tool .Streams_preview_container .Streams_preview_title,
-.Streams_pdf_preview_tool .Streams_preview_container .Streams_preview_contents {
-    width: calc(100% - 40px);
-}
 /* </Streams_pdf_preview> */
+
+.Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
+.Streams_preview_tool .Streams_preview_container.Streams_preview_view {
+	white-space: nowrap;
+	display: block;
+	overflow: hidden;
+	text-align: left;
+}

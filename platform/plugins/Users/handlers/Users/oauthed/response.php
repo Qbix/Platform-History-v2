@@ -47,6 +47,10 @@ function Users_oauthed_response()
 		Q::log($e, 'Users');
 		$result = 'error';
 	}
+	if (empty($_REQUEST['openWindow'])) {
+		Q_Response::redirect($inffo['finalRedirect']);
+		return false;
+	}
 	echo <<<EOT
 <!doctype html><html lang=en>
 <head><meta charset=utf-8><title>oAuth</title></head>

@@ -31,6 +31,8 @@ Q.Tool.define("Assets/payment", function (options) {
 	state.payments = state.payments.charAt(0).toUpperCase() + state.payments.slice(1).toLocaleLowerCase();
 	var currency = state.currency.toLocaleLowerCase();
 
+	Q.Assets.Payments.load();
+
 	Q.addStylesheet('{{Assets}}/css/tools/AssetsPayment.css', { slotName: 'Assets' });
 
 	if (state.payments === 'Authnet' && currency !== 'usd') {

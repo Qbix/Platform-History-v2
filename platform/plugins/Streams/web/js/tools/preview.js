@@ -259,7 +259,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			prefix: tool.prefix
 		}, 10, state.templates.create.fields, 10, f, 10, state.creatable);
 		Q.Template.render(
-			'Streams/preview/create',
+			state.templates.create.name,
 			fields,
 			function (err, html) {
 				if (err) return;
@@ -481,11 +481,11 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var ao = Q.extend({}, state.actions);
 			if (actions) {
 				ao = Q.extend(ao, 10, { actions: actions });
+				$te.tool('Q/actions', ao).activate();
 			}
+			
 			if ($te.state('Q/actions')) {
 				$te.plugin('Q/actions', 'refresh');
-			} else {
-				$te.tool('Q/actions', ao).activate();
 			}
 		});
 		return this;

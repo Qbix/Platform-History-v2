@@ -33,7 +33,7 @@ Q.Tool.define("Q/video", function (options) {
 				}]
 			};
 
-			tool.initPlayer(options);
+			tool.initVideojsPlayer(options);
 		}
 	};
 	tool.adapters.webm = {
@@ -45,7 +45,7 @@ Q.Tool.define("Q/video", function (options) {
 				}]
 			};
 
-			tool.initPlayer(options);
+			tool.initVideojsPlayer(options);
 		}
 	};
 	tool.adapters.ogg = {
@@ -57,7 +57,7 @@ Q.Tool.define("Q/video", function (options) {
 				}]
 			};
 
-			tool.initPlayer(options);
+			tool.initVideojsPlayer(options);
 		}
 	};
 	tool.adapters.youtube = {
@@ -74,7 +74,7 @@ Q.Tool.define("Q/video", function (options) {
 					}
 				};
 
-				tool.initPlayer(options);
+				tool.initVideojsPlayer(options);
 			});
 		}
 	};
@@ -92,7 +92,81 @@ Q.Tool.define("Q/video", function (options) {
 					}
 				};
 
-				tool.initPlayer(options);
+				tool.initVideojsPlayer(options);
+			});
+		}
+	};
+	tool.adapters.twitch = {
+		init: function () {
+			var element = tool.element;
+			var throttle = state.throttle;
+
+			var newA = document.createElement('A');
+			newA.href = state.url;
+			var host = newA.hostname;
+
+			element.classList.add("Q_video_twitch");
+
+			var options = {
+				autoplay: false
+				//channel: "<channel ID>",
+				//video: "782042263",
+				//collection: "<collection ID>"
+			};
+
+			// convert start time to pass as option
+			if (state.clipStart) {
+				options.time = state.clipStart.convertTimeToString(false).replace(/:/, 'h').replace(/:/, 'm') + 's';
+			}
+
+			var videoId = state.url.match(/\/videos\/([0-9]+).*$/);
+			var channel = state.url.match(new RegExp(host + "/(\\w+)"));
+			if (videoId) {
+				options.video = videoId[1];
+			} else if (channel) {
+				options.channel = channel[1];
+			} else {
+				throw new Q.Error("Q/video/twitch: none of videoId or channel filled");
+			}
+
+			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
+				state.player = new Twitch.Player(element, options);
+				state.player.currentTime = function (time) {
+					state.player.seek(time);
+				};
+
+				var _getCurrentPostion = function () {
+					return Math.trunc(state.player.getCurrentTime() * 1000);
+				};
+
+				var onPlay = Q.throttle(function () {
+					state.currentPosition = _getCurrentPostion();
+					console.log("Started at position " + state.currentPosition + " milliseconds");
+					Q.handle(state.onPlay, tool);
+
+					// clear timer if exist
+					tool.clearPlayInterval();
+
+					// start new timer to change needed layout params during play
+					state.playIntervalID = setInterval(function(){
+						state.currentPosition = _getCurrentPostion();
+						Q.handle(state.onPlaying, tool);
+					}, 100);
+				}, throttle);
+				var onPause = Q.throttle(function () {
+					var position = _getCurrentPostion();
+					console.log("Paused at position " + position + " milliseconds");
+					Q.handle(state.onPause, tool);
+				}, throttle);
+				var onEnded = Q.throttle(function () {
+					var position = _getCurrentPostion();
+					console.log("Seeked at position " + position + " milliseconds");
+					Q.handle(state.onEnded, tool);
+				}, throttle);
+
+				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
+				state.player.addEventListener(Twitch.Player.PAUSE, onPause);
+				state.player.addEventListener(Twitch.Player.ENDED, onEnded);
 			});
 		}
 	};
@@ -128,9 +202,14 @@ Q.Tool.define("Q/video", function (options) {
 	onPlaying: new Q.Event(function () {
 		this.checkClip();
 	}),
-	onPause: new Q.Event(),
+	onPause: new Q.Event(function () {
+		this.clearPlayInterval();
+	}),
 	onSeek: new Q.Event(),
-	onEnded: new Q.Event()
+	onEnded: new Q.Event(function () {
+		// stop timer if exist
+		this.clearPlayInterval();
+	})
 },
 
 {
@@ -158,90 +237,87 @@ Q.Tool.define("Q/video", function (options) {
 	 */
 	implement: function () {
 		var tool = this;
+
+		var adapterName = tool.adapterNameFromUrl();
+		tool.adapters[adapterName].init();
+	},
+	/**
+	 *
+	 * @method initVideojsPlayer
+	 */
+	initVideojsPlayer: function (options) {
+		var tool = this;
 		var state = this.state;
+		var throttle = state.throttle;
 
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
 		}, function (err, html) {
 			tool.element.innerHTML = html;
 
-			tool.$video = $("video", tool.element);
+			var _getCurrentPostion = function () {
+				return Math.trunc(state.player.currentTime() * 1000);
+			};
 
-			var adapterName = tool.adapterNameFromUrl();
-			tool.adapters[adapterName].init();
-		});
-	},
-	/**
-	 *
-	 * @method initPlayer
-	 */
-	initPlayer: function (options) {
-		var tool = this;
-		var state = this.state;
-		var throttle = state.throttle;
+			var onPlay = Q.throttle(function () {
+				var position = state.currentPosition || _getCurrentPostion();
+				console.log("Started at position " + position + " milliseconds");
+				Q.handle(state.onPlay, tool, [position]);
+			}, throttle);
+			var onPause = Q.throttle(function () {
+				var position = state.currentPosition || _getCurrentPostion();
+				console.log("Paused at position " + position + " milliseconds");
+				Q.handle(state.onPause, tool, [position]);
+			}, throttle);
+			var onSeek = Q.throttle(function () {
+				var position = state.currentPosition || _getCurrentPostion();
+				console.log("Seeked at position " + position + " milliseconds");
+				Q.handle(state.onSeek, tool, [position]);
+			}, throttle);
+			var onEnded = Q.throttle(function () {
+				var position = state.currentPosition || _getCurrentPostion();
+				console.log("Seeked at position " + position + " milliseconds");
+				Q.handle(state.onEnded, tool, [position]);
+			}, throttle);
 
-		var _getCurrentPostion = function () {
-			return Math.trunc(state.player.currentTime() * 1000);
-		};
+			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
+				videojs.log('Your player is ready!');
 
-		var onPlay = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Started at position " + position + " milliseconds");
-			Q.handle(state.onPlay, tool, [position]);
-		}, throttle);
-		var onPause = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Paused at position " + position + " milliseconds");
-			Q.handle(state.onPause, tool, [position]);
-		}, throttle);
-		var onSeek = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Seeked at position " + position + " milliseconds");
-			Q.handle(state.onSeek, tool, [position]);
-		}, throttle);
-		var onEnded = Q.throttle(function () {
-			var position = state.currentPosition || _getCurrentPostion();
-			console.log("Seeked at position " + position + " milliseconds");
-			Q.handle(state.onEnded, tool, [position]);
-		}, throttle);
+				state.currentPosition = 0;
 
-		state.player = videojs(tool.$video[0], options, function onPlayerReady() {
-			videojs.log('Your player is ready!');
+				this.on('play', function () {
+					onPlay();
+				});
 
-			state.currentPosition = 0;
+				this.on('pause', function () {
+					onPause();
+				});
 
-			this.on('play', function () {
-				onPlay();
-			});
+				this.on('seeking', function() {
+					onPause();
+				});
 
-			this.on('pause', function () {
-				onPause();
-			});
+				this.on('waiting', function() {
+					onPause();
+				});
 
-			this.on('seeking', function() {
-				onPause();
-			});
+				this.on('seeked', function() {
+					onPlay();
+					onSeek();
+				});
 
-			this.on('waiting', function() {
-				onPause();
-			});
+				this.on('ended', function() {
+					onPause();
+					onEnded();
+				});
 
-			this.on('seeked', function() {
-				onPlay();
-				onSeek();
-			});
-
-			this.on('ended', function() {
-				onPause();
-				onEnded();
-			});
-
-			// update currentPosition array on play
-			this.on('timeupdate', function() {
-				setTimeout(function(){
-					state.currentPosition = _getCurrentPostion();
-					Q.handle(state.onPlaying, tool, [state.currentPosition]);
-				}, 500);
+				// update currentPosition array on play
+				this.on('timeupdate', function() {
+					setTimeout(function(){
+						state.currentPosition = _getCurrentPostion();
+						Q.handle(state.onPlaying, tool, [state.currentPosition]);
+					}, 500);
+				});
 			});
 		});
 	},
@@ -279,9 +355,10 @@ Q.Tool.define("Q/video", function (options) {
 
 		if (host.includes("youtube.com") || host.includes("youtu.be")) {
 			return 'youtube';
-		}
-		if (host.includes("vimeo.com")) {
+		} else if (host.includes("vimeo.com")) {
 			return 'vimeo';
+		} else if (host.includes("twitch")) {
+			return 'twitch';
 		}
 
 		var ext = url.split('.').pop();
@@ -291,6 +368,22 @@ Q.Tool.define("Q/video", function (options) {
 			default: return 'mp4';
 		}
 		//throw new Q.Exception(this.id + ': No adapter for this URL');
+	},
+	/**
+	 *
+	 * @method clearPlayInterval
+	 */
+	clearPlayInterval: function () {
+		var playIntervalID = this.state.playIntervalID;
+		if (playIntervalID) {
+			clearInterval(playIntervalID);
+			playIntervalID = false;
+		}
+	},
+	Q: {
+		beforeRemove: function () {
+			this.clearPlayInterval();
+		}
 	}
 });
 

@@ -283,7 +283,7 @@ html.Q_notMobile { height: 100%; }
 .Q_notMobile #dashboard .Q_tabs_tabs { text-align: left; }
 .Q_notMobile #dashboard .Q_tabs_tab { display: block; margin: 0; }
 .Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
-.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; }
+.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; transform: none; }
 .Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
 .Q_notMobile #content_slot { min-height: 100%; padding: 0; }
 .Q_notMobile #content { padding: 20px; }

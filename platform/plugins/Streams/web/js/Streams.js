@@ -569,6 +569,7 @@ Q.Tool.define({
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
 	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
+	"Streams/image/chat": "{{Streams}}/js/tools/image/chat.js",
 	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
 	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
@@ -583,11 +584,11 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
-	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chatPlugin.js",
+	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chat.js",
 	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
-	"Streams/video/chat" : "{{Streams}}/js/tools/video/chatPlugin.js",
+	"Streams/video/chat" : "{{Streams}}/js/tools/video/chat.js",
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
-	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chatPlugin.js",
+	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
@@ -598,6 +599,7 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 	.tool('Streams/audio/chat')
 	.tool('Streams/video/chat')
 	.tool('Streams/pdf/chat')
+	.tool('Streams/image/chat')
 	.activate();
 }, 'Streams');
 

@@ -35,10 +35,16 @@
 
 		Q.Text.get('Streams/content', function (err, text) {
 			tool.text = text;
+			var title = Q.getObject(["types", "Streams/audio", "newItem"], text) || "Add Audio";
+
+			// non logged user can't add any items to chat
+			if (!Q.Users.loggedInUserId()) {
+				return;
+			}
 
 			// add contect menu item
 			tool.chatTool.addMenuItem({
-				title: tool.text.types["Streams/audio"].newItem,
+				title: title,
 				icon: "{{Streams}}/img/icons/Streams/audio/40.png",
 				handler: function () {
 					$("<div>").tool("Streams/preview", {

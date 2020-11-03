@@ -10166,7 +10166,10 @@ Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
-		if (!err) {
+		if (err && !url.endsWith("en.json")) {
+			url = url.replace(/[^\/]{2,5}\.json$/, "en.json");
+			return _Q_Text_getter.force(name, url, callback, options);
+		} else {
 			Q.Text.set(name, content, o.merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
@@ -13468,7 +13471,9 @@ Q.onInit.add(function () {
 			navigator.splashscreen.hide();
 		}
 	}, 'Q.Socket');
-	var info = Q.first(Q.info.languages);
+
+	var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+	var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 	if (info) {
 		Q.Text.setLanguage.apply(Q.Text, info);
 	}
@@ -13553,6 +13558,7 @@ Q.onJQuery.add(function ($) {
 		"Q/audio": "{{Q}}/js/tools/audio.js",
 		"Q/video": "{{Q}}/js/tools/video.js",
 		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/image": "{{Q}}/js/tools/image.js",
 		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	

@@ -1517,10 +1517,9 @@
 		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
-			).on(Q.Pointer.touchclick, function () {
-				submitClosestForm.apply($a, arguments);
-			}).on(Q.Pointer.click, function (e) {
+			).on(Q.Pointer.fastclick, function (e) {
 				e.preventDefault(); // prevent automatic submit on click
+				submitClosestForm.apply($a, arguments);
 			});
 
 		var directions = Q.plugins.Users.login.serverOptions.noRegister
@@ -2126,8 +2125,11 @@
 		 */
 		url: function (authorizeUri, client_id, scope, options) {
 			options = options || {};
-			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
 			var responseType = options.responseType || 'code';
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			if (options.openWindow) {
+				redirectUri = Q.url(redirectUri + '?openWindow=1');
+			}
 			if (!options.state) {
 				options.state = String(Math.random());
 			}
@@ -2174,7 +2176,7 @@
 				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
 			}
 			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
-			var responseType = options.response_typeeType || 'code';
+			var responseType = options.responseType || 'code';
 			if (!options.state) {
 				options.state = String(Math.random());
 			}
@@ -2422,7 +2424,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Users.cache.where || 'document';
+		var where = Q.getObject("cache.where", Users) || 'document';
 
 		if (Q.Frames) {
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
@@ -2709,7 +2711,8 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var info = Q.first(Q.info.languages);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
 		}
@@ -3140,6 +3143,27 @@
 			Users.chooseContacts(function (dataType) {
 				var identifierTypes = Q.getObject("identifierTypes", options);
 				var contacts = this;
+
+				// clear contacts from objects in email and phoneNumbers
+				$.each(contacts, function (i, contact) {
+					if (!contact || typeof contact !== "object") {
+						return;
+					}
+
+					$.each(contact, function (j, obj) {
+						if (!obj || typeof obj !== "object" || (j !== "emails" && j !== "phoneNumbers")) {
+							return;
+						}
+
+						var cleared = [];
+						$.each(obj, function (k, element) {
+							if (typeof element === "string") {
+								cleared.push(element);
+							}
+						});
+						contact[j] = cleared;
+					});
+				});
 
 				if (!Q.isEmpty(identifierTypes) && dataType === 'browser') {
 					Q.each(contacts, function (i, contact) {
