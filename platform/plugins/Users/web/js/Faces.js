@@ -25,7 +25,7 @@
     Users.Faces.faceDetection = {}
     /**
      *
-     * @class Users.faceLandmarksDetection
+     * @class Users.faceDetection
      * @constructor
      */
     Users.Faces.videoElement = null
@@ -158,6 +158,7 @@
      * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
      */
     Users.Faces.startFaceDetection = function (options) {
+        Users.Faces.stopFaceDetection();
         options = Q.extend({
             element: null,
             onEnter: new Q.Event(),
@@ -243,15 +244,18 @@
 
     }
 
-    Users.Faces.faceDetection.stop = function () {
+    Users.Faces.stopFaceDetection = Users.Faces.faceDetection.stop = function () {
         if (Users.Faces.faceDetection.detectionInterval != null) {
             clearInterval(Users.Faces.faceDetection.detectionInterval);
             Users.Faces.faceDetection.detectionInterval = null;
         }
         if(Users.Faces.videoElement != null) {
-            Users.Faces.videoElement.stop();
+            if(Users.Faces.videoElement.srcObject != null) Users.Faces.videoElement.srcObject.getTracks().map(function (track) {
+                track.stop()
+            });
             Users.Faces.videoElement = null;
         }
+        Users.Faces.state = null;
     }
 
     function findScript(src) {
