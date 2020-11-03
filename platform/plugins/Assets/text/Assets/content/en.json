@@ -34,6 +34,7 @@
         "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
         "BoughtCredits": "Bought {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
         "MissingCredits": "Missing Credits",
         "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",

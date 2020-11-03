@@ -1011,6 +1011,16 @@
 				}, 'Assets');
 
 				var _createNotice = function (stream, message) {
+					// check if message already displayed
+					var messageId = message.getInstruction('messageId');
+					if (Q.isEmpty(this.usedIds)) {
+						this.usedIds = [messageId];
+					} else if (this.usedIds.includes(messageId)) {
+						return;
+					} else {
+						this.usedIds.push(messageId);
+					}
+
 					var reason = message.getInstruction('reason');
 					var content = message.content;
 					if (reason) {
@@ -1024,7 +1034,7 @@
 				};
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
-				this.onMessage('Assets/credits/earned').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/granted').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 			});
 		};
