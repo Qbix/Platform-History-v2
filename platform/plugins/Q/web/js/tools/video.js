@@ -293,13 +293,16 @@ Q.Tool.define("Q/video", function (options) {
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
 				videojs.log('Your player is ready!');
 
-				if (state.clipStart || state.start) {
-					var start = (state.clipStart || state.start)/1000;
-					this.currentTime(start);
-					state.currentPosition = start;
-				} else {
-					state.currentPosition = 0;
+				var start = null;
+
+				if (state.clipStart !== null) {
+					start = parseInt(state.clipStart)/1000;
 				}
+				if (state.start !== null) {
+					start = parseInt(state.start)/1000;
+				}
+
+				this.currentTime(start);
 
 				this.on('play', function () {
 					onPlay();
