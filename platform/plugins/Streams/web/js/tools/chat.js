@@ -438,7 +438,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				if (fields.type === "Streams/relatedTo") {
 					var $preview = tool.renderRelatedStream(fields);
 					if (!$preview) {
-						return;
+						return p.fill(ordinal)(null, null);
 					}
 
 					var $html = $(html);
@@ -460,6 +460,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			var items = {};
 			for (var ordinal in params) {
 				var $element = params[ordinal][1];
+
+				if (Q.isEmpty($element)) {
+					continue;
+				}
+
 				if (!($element instanceof jQuery)) {
 					$element = $($element);
 				}
@@ -555,7 +560,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							Q.invoke({
 								title: stream.fields.title,
 								content: element,
-								trigger: $toolElement
+								trigger: $toolElement[0]
 							});
 						});
 					});
