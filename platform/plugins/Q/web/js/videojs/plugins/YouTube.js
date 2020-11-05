@@ -509,6 +509,10 @@ THE SOFTWARE. */
     },
 
     setCurrentTime: function(seconds) {
+      if (!this.ytPlayer) {
+        return;
+      }
+      
       if (this.lastState === YT.PlayerState.PAUSED) {
         this.timeBeforeSeek = this.currentTime();
       }
