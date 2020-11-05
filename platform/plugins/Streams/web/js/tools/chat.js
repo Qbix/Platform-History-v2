@@ -312,7 +312,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			fields,
 			function(error, html){
 				if (error) { return error; }
-				$te.html(html).activate();
+				$te.html(html, true).activate();
 
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
@@ -419,7 +419,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				},
 				function(error, html){
 					if (error) { return error; }
-					tool.$('.Streams_chat_messages').html(html);
+					tool.$('.Streams_chat_messages').html(html, true);
 				},
 				state.templates.Streams_chat_noMessages
 			);
@@ -443,7 +443,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 					var $html = $(html);
 					$html.addClass("Streams_chat_message_skipOverflowed");
-					$(".Streams_chat_message_content", $html).html($preview);
+					$(".Streams_chat_message_content", $html).html($preview, true);
 					Q.handle(state.onMessageRender, tool, [fields, $html]);
 					p.fill(ordinal)(null, $html);
 				} else {
@@ -618,7 +618,7 @@ Q.Tool.define('Streams/chat', function(options) {
     	
 				tool.findMessage('last')
 					.find('.Streams_chat_timestamp')
-					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date))
+					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date), true)
 					.activate();
 			},
 			state.templates.message.error
