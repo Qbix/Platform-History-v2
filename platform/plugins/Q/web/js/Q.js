@@ -10884,7 +10884,7 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 				Q.Tool.clear(this);
 			});
 		}
-		htmlOriginal.apply(this, arguments);
+		return htmlOriginal.apply(this, args);
 	};
 	
 	Q.each({
