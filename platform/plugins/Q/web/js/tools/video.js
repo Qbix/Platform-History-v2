@@ -10,6 +10,7 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.url] URL of video source
+ *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {boolean} [options.autoplay=false] If true - start play on load
@@ -115,6 +116,9 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
+			if (state.start) {
+				options.time = state.start.convertTimeToString(false).replace(/:/, 'h').replace(/:/, 'm') + 's';
+			}
 			if (state.clipStart) {
 				options.time = state.clipStart.convertTimeToString(false).replace(/:/, 'h').replace(/:/, 'm') + 's';
 			}
@@ -167,6 +171,9 @@ Q.Tool.define("Q/video", function (options) {
 				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
 				state.player.addEventListener(Twitch.Player.PAUSE, onPause);
 				state.player.addEventListener(Twitch.Player.ENDED, onEnded);
+				state.player.addEventListener(Twitch.Player.READY, function () {
+					Q.handle(state.onLoad, tool);
+				});
 			});
 		}
 	};
@@ -188,8 +195,12 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	throttle: 10,
 	currentPosition: 0,
+	start: null,
 	clipStart: null,
 	clipEnd: null,
+	videojsOptions: {
+		controls: true
+	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
@@ -250,6 +261,8 @@ Q.Tool.define("Q/video", function (options) {
 		var state = this.state;
 		var throttle = state.throttle;
 
+		options = Q.extend(state.videojsOptions, options);
+
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
 		}, function (err, html) {
@@ -283,7 +296,16 @@ Q.Tool.define("Q/video", function (options) {
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
 				videojs.log('Your player is ready!');
 
-				state.currentPosition = 0;
+				var start = null;
+
+				if (state.clipStart !== null) {
+					start = parseInt(state.clipStart)/1000;
+				}
+				if (state.start !== null) {
+					start = parseInt(state.start)/1000;
+				}
+
+				this.currentTime(start);
 
 				this.on('play', function () {
 					onPlay();
@@ -318,6 +340,8 @@ Q.Tool.define("Q/video", function (options) {
 						Q.handle(state.onPlaying, tool, [state.currentPosition]);
 					}, 500);
 				});
+
+				Q.handle(state.onLoad, tool);
 			});
 		});
 	},
@@ -339,6 +363,12 @@ Q.Tool.define("Q/video", function (options) {
 	 */
 	setCurrentPosition: function (position) {
 		this.state.player && this.state.player.currentTime(position/1000);
+	},
+	/**
+	 * @method getCurrentPosition
+	 */
+	getCurrentPosition: function () {
+		return this.state.currentPosition;
 	},
 	/**
 	 * Detect adapter from url
@@ -383,6 +413,11 @@ Q.Tool.define("Q/video", function (options) {
 	Q: {
 		beforeRemove: function () {
 			this.clearPlayInterval();
+
+			// if videojs, call dispose to kill this player with events, triggers, dom etc
+			if (Q.getObject("player.dispose", this.state)) {
+				this.state.player.dispose();
+			}
 		}
 	}
 });

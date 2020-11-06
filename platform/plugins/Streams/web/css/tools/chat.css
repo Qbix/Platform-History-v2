@@ -235,6 +235,10 @@
 	margin: 10px 10px;
 	position: relative;
 }
+.Streams_chat_item.Streams_chat_message_skipOverflowed .Streams_chat_message_content {
+	display: block;
+	font-size: 0;
+}
 .Streams_chat_noMessages {
 	color: gray;
 	font-size: 12pt;
