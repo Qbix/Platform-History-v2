@@ -577,25 +577,6 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
- * Convert time from milliseconds to hh:mm:ss string
- * @method convertTimeToString
- * @param {boolean} [omitHours=true] If true omit hours if 00
- * @return {string} formatted string
- */
-Sp.convertTimeToString = function (omitHours) {
-	omitHours = Q.typeOf(omitHours) === 'boolean' ? omitHours : true;
-	var time = Math.trunc(parseInt(this) || 0);
-	var timeString = new Date(time).toISOString().substr(11, 8);
-
-	// omit hh if 00
-	if (omitHours) {
-		timeString = timeString.replace(/^00:/, '');
-	}
-
-	return timeString;
-}
-
-/**
  * @class Function
  * @description Q extended methods for Functions
  */
@@ -9426,6 +9407,32 @@ Q.handle.onUrl = new Q.Event(function () {
 	});
 	Q.Pointer.stopHints();
 }, "Q");
+
+/**
+ * Displays a duration
+ * @static
+ * @method displayDuration
+ * @param {Integer} milliseconds The number of milliseconds from start
+ * @param {Object} forceShow=[{hours:false,seconds:true}] Whether to show hours or seconds if they are 00
+ * @return {String} A string of the form "hh:mm:ss" depending on forceShow
+ */
+Q.displayDuration = function(milliseconds, forceShow) {
+	milliseconds = parseInt(milliseconds);
+	if (!forceShow)
+		forceShow = { hours: false, seconds: true };
+	}
+	var seconds = Math.floor(milliseconds / 1000);
+	var minutes = Math.floor(seconds / 60);
+	var hours = Math.floor(minutes / 60);
+	var components = [minutes];
+	if (seconds || forceShow.seconds) {
+		components.push(seconds);
+	}
+	if (hours || forceShow.hours) {
+		components.shift(hours);
+	}
+	return components.join(':');
+};
 
 /**
  * Parses a querystring

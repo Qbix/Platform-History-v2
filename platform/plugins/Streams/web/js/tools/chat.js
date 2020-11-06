@@ -537,15 +537,17 @@ Q.Tool.define('Streams/chat', function(options) {
 
 							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
 							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
-							for (var toolName of possibleToolNames) {
-								if (Q.Tool.defined(toolName)) {
+							var toolName = null;
+							for (var i=0, l=possibleToolNames.length; i<l; ++i) {
+								if (Q.Tool.defined(possibleToolNames[i])) {
+									toolName = possibleToolNames[i];
 									break;
 								}
 							}
 
 							var element = "div";
 							// if tool is preview, apply Streams/preview tool first, because it may be required
-							if (toolName.endsWith("/preview")) {
+							if (toolName && toolName.endsWith("/preview")) {
 								element = Q.Tool.setUpElement(element, "Streams/preview", state);
 							}
 

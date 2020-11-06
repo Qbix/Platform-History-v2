@@ -116,12 +116,8 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
-			if (state.start) {
-				options.time = state.start.convertTimeToString(false).replace(/:/, 'h').replace(/:/, 'm') + 's';
-			}
-			if (state.clipStart) {
-				options.time = state.clipStart.convertTimeToString(false).replace(/:/, 'h').replace(/:/, 'm') + 's';
-			}
+			var start = state.start || state.clipStart;
+			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
 
 			var videoId = state.url.match(/\/videos\/([0-9]+).*$/);
 			var channel = state.url.match(new RegExp(host + "/(\\w+)"));

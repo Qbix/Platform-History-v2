@@ -444,15 +444,15 @@
 
 								$clipElement.tool("Q/clip", {
 									startPosition: clipStart,
-									startPositionDisplay: clipStart ? clipStart.convertTimeToString() : null,
+									startPositionDisplay: clipStart ? Q.displayDuration(clipStart) : null,
 									endPosition: clipEnd,
-									endPositionDisplay: clipEnd ? clipEnd.convertTimeToString() : null,
+									endPositionDisplay: clipEnd ? Q.displayDuration(clipEnd) : null,
 									onStart: function (setNewPosition) {
 										if (setNewPosition) {
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipStart = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "start");
+											this.setPosition(time, Q.displayDuration(time), "start");
 										} else {
 											toolPreview.state.clipStart = null;
 										}
@@ -462,7 +462,7 @@
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipEnd = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "end");
+											this.setPosition(time, Q.displayDuration(time), "end");
 										} else {
 											toolPreview.state.clipEnd = null;
 										}
@@ -596,7 +596,7 @@
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipStart = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "start");
+											this.setPosition(time, Q.displayDuration(time), "start");
 										} else {
 											toolPreview.state.clipStart = null;
 										}
@@ -606,7 +606,7 @@
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipEnd = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "end");
+											this.setPosition(time, Q.displayDuration(time), "end");
 										} else {
 											toolPreview.state.clipEnd = null;
 										}
@@ -641,7 +641,7 @@
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipStart = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "start");
+											this.setPosition(time, Q.displayDuration(time), "start");
 										} else {
 											toolPreview.state.clipStart = null;
 										}
@@ -651,7 +651,7 @@
 											var time = toolPreview.state.currentPosition;
 
 											toolPreview.state.clipEnd = time;
-											this.setPosition(time, time.toString().convertTimeToString(), "end");
+											this.setPosition(time, Q.displayDuration(time), "end");
 										} else {
 											toolPreview.state.clipEnd = null;
 										}
