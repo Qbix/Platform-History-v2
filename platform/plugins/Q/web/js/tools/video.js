@@ -171,6 +171,9 @@ Q.Tool.define("Q/video", function (options) {
 				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
 				state.player.addEventListener(Twitch.Player.PAUSE, onPause);
 				state.player.addEventListener(Twitch.Player.ENDED, onEnded);
+				state.player.addEventListener(Twitch.Player.READY, function () {
+					Q.handle(state.onLoad, tool);
+				});
 			});
 		}
 	};
@@ -337,6 +340,8 @@ Q.Tool.define("Q/video", function (options) {
 						Q.handle(state.onPlaying, tool, [state.currentPosition]);
 					}, 500);
 				});
+
+				Q.handle(state.onLoad, tool);
 			});
 		});
 	},
