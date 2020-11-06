@@ -9424,9 +9424,9 @@ Q.displayDuration = function(milliseconds, forceShow) {
 	var seconds = Math.floor(milliseconds / 1000);
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
-	var components = [minutes];
+	var components = [minutes % 60];
 	if (seconds || forceShow.seconds) {
-		components.push(seconds);
+		components.push(seconds % 60);
 	}
 	if (hours || forceShow.hours) {
 		components.shift(hours);
