@@ -446,6 +446,13 @@ Q.Tool.define("Q/audio", function (options) {
 		this.adapters[adapterName].setCurrentPosition(position);
 	},
 	/**
+	 * Get current play position
+	 * @method getCurrentPosition
+	 */
+	getCurrentPosition: function () {
+		return this.state.currentPosition;
+	},
+	/**
 	 * @method userGesture
 	 * User gesture handler for audio actions if promise != undefined (mobile devices)
 	 * @param {string} action Player action (play, pause, ...)

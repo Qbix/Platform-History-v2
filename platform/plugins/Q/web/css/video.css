@@ -2,7 +2,10 @@
     padding: 10px;
     position: relative;
 }
-
+.vjs-has-started .vjs-control-bar,
+.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+    display: none;
+}
 .Q_video_composer label[for=url] {
     margin-top: 10px;
     display: block;
