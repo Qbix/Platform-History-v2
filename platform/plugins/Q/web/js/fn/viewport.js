@@ -31,7 +31,6 @@ Q.Tool.jQuery('Q/viewport',
 function _Q_viewport(options) {
 	var container, stretcher;
 	var position = this.css('position');
-	var display = this.css('display');
 	var state = this.addClass('Q_viewport').state('Q/viewport');
 	var $this = $(this);
 	state.oldCursor = this.css('cursor');
@@ -58,7 +57,10 @@ function _Q_viewport(options) {
 	        stretcher = this.parent();
 	        container = stretcher.parent();
 	    } else {
-			container = $('<span class="Q_viewport_container" />').css({
+			container = $('<span class="Q_viewport_container" />')
+			.addClass('Q_viewport_container ' + (options.containerClass || ''));
+			var display = this.css('display'); // now that we added the class, get the display style
+			container.css({
 				'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
 				'zoom': 1,
 				'position': position === 'static' ? 'relative' : position,
@@ -77,7 +79,7 @@ function _Q_viewport(options) {
 				'line-height': this.css('line-height'),
 				'vertical-align': this.css('vertical-align'),
 				'text-align': this.css('text-align')
-			}).addClass('Q_viewport_container ' + (options.containerClass || ''))
+			})
 			.insertAfter(this);
 		
 			stretcher = $('<div class="Q_viewport_stretcher" />')
