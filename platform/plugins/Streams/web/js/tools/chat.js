@@ -719,6 +719,25 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		});
 	},
+	/**
+	 * Render single message
+	 * @method renderMessage
+	 * @param message
+	 */
+	renderMessage: function(message) {
+		var tool = this;
+		tool.renderMessages(tool.prepareMessages(message), function (items) {
+			tool.$('.Streams_chat_noMessages').remove();
+			var $scm = tool.$('.Streams_chat_messages');
+			Q.each(items, function (key, $html) {
+				$html.appendTo($scm).activate();
+			}, {ascending: true});
+			tool.processDOM();
+		});
+		// TODO: don't scroll to bottom, show "V 10 new messages" button
+		// on the bottom left of Streams/chat, and then jump to bottom and refresh
+		tool.scrollToBottom();
+	},
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
@@ -762,18 +781,13 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// new message arrived
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/chat/message')
+		.set(function (stream, message) {
+			tool.renderMessage(message);
+		}, tool);
+		// a new stream was related (including a call)
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
 		.set(function(stream, message) {
-			tool.renderMessages(tool.prepareMessages(message), function (items) {
-				tool.$('.Streams_chat_noMessages').remove();
-				var $scm = tool.$('.Streams_chat_messages'); 
-				Q.each(items, function (key, $html) {
-					$html.appendTo($scm).activate();
-				}, {ascending: true});
-				tool.processDOM();
-			});
-			// TODO: don't scroll to bottom, show "V 10 new messages" button
-			// on the bottom left of Streams/chat, and then jump to bottom and refresh
-			tool.scrollToBottom();
+			tool.renderMessage(message);
 		}, tool);
 
 		// new user joined
@@ -788,21 +802,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		.set(function(stream, message) {
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
-		}, tool);
-		
-		// a new stream was related (including a call)
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
-		.set(function(stream, message) {
-			var messages = tool.prepareMessages(message, 'leave');
-			tool.renderNotification(Q.first(messages));
-			tool.$('.Streams_chat_noMessages').remove();
-
-			var $preview = tool.renderRelatedStream(message);
-			if (!$preview) {
-				return;
-			}
-
-			$preview.appendTo(tool.$('.Streams_chat_messages')).activate();
 		}, tool);
 
 		// new user left
@@ -1032,7 +1031,8 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		};
 
-		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
+		return Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields);
+		//return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
 	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {
