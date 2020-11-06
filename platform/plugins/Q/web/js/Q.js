@@ -9417,7 +9417,21 @@ Q.handle.onUrl = new Q.Event(function () {
  * @return {String} A string of the form "hh:mm:ss" depending on forceShow
  */
 Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
-
+	milliseconds = parseInt(milliseconds);
+	if (!forceShow) {
+		forceShow = { hours: false, seconds: true };
+	}
+	var seconds = Math.floor(milliseconds / 1000);
+	var minutes = Math.floor(seconds / 60);
+	var hours = Math.floor(minutes / 60);
+	var components = [minutes % 60];
+	if (seconds || forceShow.seconds) {
+		components.push(seconds % 60);
+	}
+	if (hours || forceShow.hours) {
+		components.shift(hours);
+	}
+	return components.join(':');
 };
 
 /**
