@@ -17,7 +17,7 @@ function Assets_after_Assets_charge($params)
 
 	//TODO: as we come to use credits system, need to change this to send email with amount of credits bought
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
-	$description = Q::interpolate(Q::ifset($text, 'credits', 'BoughtCredits', 'Bought {{amount}} credits'), array('amount' => $credits));
+	$description = Q::interpolate(Q::ifset($text, 'credits', 'forMessages', 'BoughtCredits', Q::ifset($text, 'credits', 'BoughtCredits', 'Bought {{amount}} credits')), array('amount' => $credits));
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
 		$publisherId = $stream->publisherId;
