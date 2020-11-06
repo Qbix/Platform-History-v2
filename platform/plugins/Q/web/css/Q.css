@@ -888,3 +888,7 @@ html.Q_layout_sidebar {
 	display: block;
 }
 /* </Q tabs> */
+
+.Q_dialog_imagepicker .Q_viewport {
+	display: block;
+}
