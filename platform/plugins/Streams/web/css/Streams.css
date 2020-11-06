@@ -408,6 +408,9 @@
 .Streams_preview_contents>.Streams_preview_title {
 	padding: 0; margin: 0;
 }
+.Streams_preview_icon[src=""] {
+	visibility: hidden;
+}
 .Streams_preview_contents .Q_inplace_tool_static,
 .Streams_preview_contents .Q_inplace_tool_static_container {
 	overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap; 
