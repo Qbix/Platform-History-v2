@@ -40,7 +40,6 @@ table { table-layout: fixed; }
 	left: 0px;
 	top: 0px;
 	width: 100%;
-	height: 50px;
 	z-index: 900;
 	text-align: left;
 	cursor: default; 
@@ -54,7 +53,7 @@ table { table-layout: fixed; }
 #dashboard_slot * { color: white; font-size: 24px; font-family: Arial, sans-serif; }
 #dashboard_slot input,
 #dashboard_slot textarea { color: black; }
-#page { position: absolute; width: 100%; top:50px; bottom: 0; left: 50%; transform: translate(-50%, 0); } 
+.Q_layout_widebar #page { position: absolute; width: 100%; top:50px; bottom: 0; left: 50%; transform: translate(-50%, 0); }
 .Q_mobile #page { overflow: auto; -webkit-overflow-scrolling: touch; z-index: 0; }
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_static,
 #dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_blockstatic { 
@@ -79,13 +78,13 @@ table { table-layout: fixed; }
 	background-size: contain;
 }
 .Q_mobile #dashboard_slot .MyApp_dashboard_logo {
-	display: inline-block; width: 40px; height: 40px; float: left; margin: 5px;
+	display: inline-block; width: 40px; height: 40px; float: left;
 	background: url(../img/icon/40.png) no-repeat;
 }
 .Q_mobile #dashboard_slot .MyApp_dashboard_logo h1 {
 	display: none;
 }
-.Q_layout_sidebar #dashboard_slot .Teaching_dashboard_logo {
+.Q_layout_sidebar #dashboard_slot .MyApp_dashboard_logo {
 	width: 100%;
 }
 
@@ -129,7 +128,7 @@ table { table-layout: fixed; }
 #dashboard>h1 { float: left; padding: 5px; width: auto; }
 #dashboard>h2 { float: left; }
 #dashboard_user { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: right; }
-.Q_mobile #dashboard_user { max-width: 40%; padding: 5px; margin: -5px; }
+.Q_mobile #dashboard_user { max-width: 40%; }
 .Q_mobile.Users_loggedIn #dashboard_user { margin: 0; }
 .Q_mobile.Users_loggedOut #dashboard_user { line-height: 40px; }
 #dashboard .Q_contextual * { color: black; }
@@ -167,8 +166,9 @@ table { table-layout: fixed; }
 .Q_notTouchscreen #dashboard .Q_tabs_tab:not(.Q_current):hover { background: rgba(100, 100, 100, 0.5); }
 #dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
 #dashboard .Q_tabs_tab span { display: inline; text-align: left; }
-#dashboard .Q_tabs_tab.Q_current { background-color: #eeeeee; background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
+.Q_notMobile #dashboard .Q_tabs_tab.Q_current { background-color: #eeeeee; background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
+#dashboard .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; width: 28px; height: 28px; }
 .Q_mobile #dashboard .Q_tabs_tool { height: 40px; max-width: 80%; overflow: hidden; }
 .Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tool { height: 40px; }
 .Q_layout_sidebar #dashboard .Q_tabs_tab { padding: 5px; }
@@ -270,23 +270,23 @@ span.c3 { font-weight: bold; }
 .Q_notMobile #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
 .Q_notMobile #dashboard .Q_tabs_tab { margin: 0 10px; }
 
-/* The following lines override default styles for a block-style website */
-/* Try removing them and setting the #dashboard tabs tool vertical => false */
+/* The following lines override default styles for a sidebar-style website */
+/* You can remove them or set the config Q/response/layout/sidebar = true */
 html.Q_notMobile { height: 100%; }
-.Q_notMobile .MyApp_dashboard_logo { float: none; background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center; }
-.Q_notMobile body { height: 100%; }
-.Q_notMobile #dashboard .MyApp_dashboard_logo { background-position: center top; padding-top: 250px; }
-.Q_notMobile #dashboard .MyApp_dashboard_logo h1 { padding: 0; display: none; max-height: none; }
+.Q_layout_sidebar.Q_notMobile .UVSpinner_dashboard_logo { float: none; background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center; }
+.Q_layout_sidebar.Q_notMobile body { height: 100%; }
+.Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo { background-position: center top; padding-top: 250px; }
+.Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo h1 { padding: 0; display: none; max-height: none; }
 .Q_notMobile #dashboard a { display: block; }
 .Q_notMobile #dashboard>h1,
-.Q_notMobile #dashboard>h2 { float: none; }
-.Q_notMobile #dashboard .Q_tabs_tabs { text-align: left; }
-.Q_notMobile #dashboard .Q_tabs_tab { display: block; margin: 0; }
-.Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
-.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; transform: none; }
-.Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
-.Q_notMobile #content_slot { min-height: 100%; padding: 0; }
-.Q_notMobile #content { padding: 20px; }
-.Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }
-.Q_notMobile #dashboard_user { float: none; position: absolute; width: 100%; margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
+.Q_layout_sidebar.Q_notMobile #dashboard>h2 { float: none; }
+.Q_layout_sidebar.Q_notMobile #dashboard .Q_tabs_tabs { text-align: left; }
+.Q_layout_sidebar.Q_notMobile #dashboard .Q_tabs_tab { display: block; margin: 0; }
+.Q_layout_sidebar.Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
+.Q_layout_sidebar.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; transform: none; }
+.Q_layout_sidebar.Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
+.Q_layout_sidebar.Q_notMobile #content_slot { min-height: 100%; padding: 0; }
+.Q_layout_sidebar.Q_notMobile #content { padding: 20px; }
+.Q_layout_sidebar.Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }
+.Q_layout_sidebar.Q_notMobile #dashboard_user { float: none; position: absolute; width: 100%; margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
 .Q_mobile #dashboard_user .Users_avatar_name { display: none; }

@@ -3825,12 +3825,13 @@ Q.Tool = function _Q_Tool(element, options) {
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
 	this.id = this.prefix.substr(0, this.prefix.length-1);
-	
-	if (Q.Tool.byId(this.id, this.name)) {
+
+	var activeTool = null;
+	if (activeTool = Q.Tool.byId(this.id, this.name)) {
 		var toolName = Q.Tool.names[this.name];
 		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
 		//throw new Q.Error(errMsg);
-		console.warn(errMsg);
+		console.warn(errMsg, activeTool);
 	}
 
 	// for later use

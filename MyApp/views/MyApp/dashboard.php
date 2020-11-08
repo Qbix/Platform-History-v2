@@ -8,12 +8,12 @@
 	</div>
 	
 	<?php echo Q::tool('Q/tabs', array(
-		'vertical' => !Q_Request::isMobile(),
+		'vertical' => !$isMobile and Q_Config::get('Q', 'response', 'layout', 'sidebar', false),
 		'overflow' => array(
 			'content' => '{{text}}',
 			'defaultHtml' => $dashboard['Menu']
 		),
-		'compact' => true,
+		'compact' => $isMobile,
 		'tabs' => $tabs,
 		'urls' => $urls
 	))?>
