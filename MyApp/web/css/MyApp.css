@@ -288,5 +288,5 @@ html.Q_notMobile { height: 100%; }
 .Q_layout_sidebar.Q_notMobile #content_slot { min-height: 100%; padding: 0; }
 .Q_layout_sidebar.Q_notMobile #content { padding: 20px; }
 .Q_layout_sidebar.Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }
-.Q_layout_sidebar.Q_notMobile #dashboard_user { float: none; position: absolute; width: 100%; margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
+.Q_layout_sidebar.Q_notMobile #dashboard_user { float: none; position: absolute; width: 90%; left: 50%; transform: translate(-50%, 0); margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
 .Q_mobile #dashboard_user .Users_avatar_name { display: none; }
