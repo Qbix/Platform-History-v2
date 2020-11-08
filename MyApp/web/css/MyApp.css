@@ -132,6 +132,7 @@ table { table-layout: fixed; }
 .Q_mobile.Users_loggedIn #dashboard_user { margin: 0; }
 .Q_mobile.Users_loggedOut #dashboard_user { line-height: 40px; }
 #dashboard .Q_contextual * { color: black; }
+#dashboard_user_contextual { display: none; }
 #dashboard td { vertical-align: middle; }
 #dashboard table { width: 100%; padding: 0; margin: 0; }
 #dashboard .Q_dashboard_logo { padding: 0; }
