@@ -98,5 +98,23 @@
         "inHour": "amin&#39;ny {{h}} ora",
         "inHours": "amin&#39;ny {{h}} ora",
         "inUnderMinute": "ao anatin&#39;ny 1 minitra"
+    },
+    "video": {
+        "clip": "Clip",
+        "errorNoSource": "Tsy misy loharano video"
+    },
+    "pdf": {
+        "clip": "Clip",
+        "errorNoSource": "Tsy misy loharanom-baovao pdf"
+    },
+    "clip": {
+        "SetClipStart": "Mametraha Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Mametraha Clip End",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "Bebe kokoa",
+        "Menu": "sakafo"
     }
 }

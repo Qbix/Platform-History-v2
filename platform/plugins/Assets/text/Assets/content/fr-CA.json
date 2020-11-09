@@ -32,7 +32,12 @@
         "Buy": "Acheter",
         "Credits": "Crédits",
         "ErrorInvalidAmount": "Montant invalide",
-        "ErrorInvalidCurrency": "Malheureusement, nous ne prenons pas encore en charge la devise {{currency}}"
+        "ErrorInvalidCurrency": "Malheureusement, nous ne prenons pas encore en charge la devise {{currency}}",
+        "WatchClip": "Vous avez gagné {{amount}} crédits pour regarder {{fromStreamTitle}}",
+        "PurchaseCredits": "Achat de crédits",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} crédits"
+        }
     },
     "history": {
         "Date": "Rendez-vous amoureux",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Contribution optionnelle",
         "RequiredPayment": "Paiement requis",
         "AreYouSureDelete": "Voulez-vous vraiment supprimer ce service?",
-        "AmountServicesRelated": "Il existe {{amount}} disponibilités liées à ce service. Ils seront également supprimés."
+        "AmountServicesRelated": "Il existe {{amount}} disponibilités liées à ce service. Ils seront également supprimés.",
+        "Free": "Libre"
     }
 }

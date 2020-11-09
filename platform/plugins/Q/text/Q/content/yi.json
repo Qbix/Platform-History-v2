@@ -98,5 +98,23 @@
         "inHour": "אין {{h}} שעה",
         "inHours": "אין {{h}} שעה",
         "inUnderMinute": "אין אונטער 1 מינוט"
+    },
+    "video": {
+        "clip": "קלעמערל",
+        "errorNoSource": "קיין ווידעא מקור"
+    },
+    "pdf": {
+        "clip": "קלעמערל",
+        "errorNoSource": "קיין פּדף מקור"
+    },
+    "clip": {
+        "SetClipStart": "שטעלן קליפּ אָנהייב",
+        "ClipStart": "קלעמערל אָנהייב",
+        "SetClipEnd": "שטעלן קליפּ סוף",
+        "ClipEnd": "קלעמערל סוף"
+    },
+    "tabs": {
+        "more": "מער",
+        "Menu": "מעניו"
     }
 }

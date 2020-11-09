@@ -100,6 +100,21 @@
         "inUnderMinute": "1 મિનિટ હેઠળ"
     },
     "tabs": {
-        "more": "વધુ"
+        "more": "વધુ",
+        "Menu": "મેનુ"
+    },
+    "video": {
+        "clip": "ક્લિપ",
+        "errorNoSource": "કોઈ વિડિઓ સ્રોત નથી"
+    },
+    "pdf": {
+        "clip": "ક્લિપ",
+        "errorNoSource": "કોઈ પીડીએફ સ્રોત નથી"
+    },
+    "clip": {
+        "SetClipStart": "ક્લિપ પ્રારંભ સેટ કરો",
+        "ClipStart": "ક્લિપ પ્રારંભ",
+        "SetClipEnd": "ક્લિપ અંત સેટ કરો",
+        "ClipEnd": "ક્લિપ અંત"
     }
 }

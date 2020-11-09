@@ -98,5 +98,23 @@
         "inHour": "mu {{h}} awa",
         "inHours": "mu {{h}} maawa",
         "inUnderMinute": "mukati me1 miniti"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Hapana vhidhiyo sosi"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Kwete pdf sosi"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Kutanga",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "zvimwe",
+        "Menu": "Menyu"
     }
 }

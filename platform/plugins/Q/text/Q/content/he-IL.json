@@ -100,6 +100,21 @@
         "inUnderMinute": "תוך פחות מדקה"
     },
     "tabs": {
-        "more": "יותר"
+        "more": "יותר",
+        "Menu": "תַפרִיט"
+    },
+    "video": {
+        "clip": "לְקַצֵץ",
+        "errorNoSource": "אין מקור וידאו"
+    },
+    "pdf": {
+        "clip": "לְקַצֵץ",
+        "errorNoSource": "אין מקור pdf"
+    },
+    "clip": {
+        "SetClipStart": "הגדר את התחלת הקליפ",
+        "ClipStart": "התחל קליפ",
+        "SetClipEnd": "הגדר את סוף הקליפ",
+        "ClipEnd": "סוף קליפ"
     }
 }

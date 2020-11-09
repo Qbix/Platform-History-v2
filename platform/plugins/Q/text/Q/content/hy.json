@@ -98,5 +98,23 @@
         "inHour": "999}} ժամում",
         "inHours": "999}} ժամում",
         "inUnderMinute": "1 րոպեի ընթացքում"
+    },
+    "video": {
+        "clip": "հոլովակ",
+        "errorNoSource": "Տեսանյութի աղբյուր չկա"
+    },
+    "pdf": {
+        "clip": "հոլովակ",
+        "errorNoSource": "Ոչ մի pdf աղբյուր"
+    },
+    "clip": {
+        "SetClipStart": "Սահմանեք Clip Start- ը",
+        "ClipStart": "Clip Start- ը",
+        "SetClipEnd": "Սահմանել տեսահոլովակի վերջը",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "ավելին",
+        "Menu": "Ընտրացանկ"
     }
 }

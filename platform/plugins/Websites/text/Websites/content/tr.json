@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Araştır",
             "WriteToStartConversation": "Sohbeti başlatmak için düşüncelerinizi yazın",
             "StartConversation": "Sohbeti Başlat",
-            "GotoConversation": "Konuşmaya Git"
-        }
+            "GotoConversation": "Konuşmaya Git",
+            "reset": "Sıfırla",
+            "edit": "Düzenle",
+            "link": "Bağlantı",
+            "setUrl": "URL ayarla",
+            "save": "Kayıt etmek",
+            "setClip": "Klipsi Kes",
+            "invalidURL": "Geçersiz URL"
+        },
+        "FileTooLarge": "Dosya önbelleğe alınamayacak kadar büyük. Maksimum dosya boyutu {{size}}",
+        "InvalidPDF": "Dosya geçerli bir PDF değil"
     },
     "types": {
         "Websites\/article": {

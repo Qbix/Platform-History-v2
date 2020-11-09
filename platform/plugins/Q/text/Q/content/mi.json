@@ -98,5 +98,23 @@
         "inHour": "i roto i {{h}} haora",
         "inHours": "i roto i {{h}} haora",
         "inUnderMinute": "i raro i te 1 meneti"
+    },
+    "video": {
+        "clip": "topenga",
+        "errorNoSource": "Kaore he punaata ataata"
+    },
+    "pdf": {
+        "clip": "topenga",
+        "errorNoSource": "Kaore he puna PDF"
+    },
+    "clip": {
+        "SetClipStart": "Whakatakotoria te Tiimata Topenga",
+        "ClipStart": "Tīmata Topenga",
+        "SetClipEnd": "Whakatakotoria te Whakamutu Mutu",
+        "ClipEnd": "Topenga topenga"
+    },
+    "tabs": {
+        "more": "atu",
+        "Menu": "Tahua"
     }
 }

@@ -32,7 +32,12 @@
         "Buy": "Pērciet",
         "Credits": "Kredīti",
         "ErrorInvalidAmount": "Summa nav derīga",
-        "ErrorInvalidCurrency": "Diemžēl pagaidām mēs neatbalstām valūtu {{currency}}"
+        "ErrorInvalidCurrency": "Diemžēl pagaidām mēs neatbalstām valūtu {{currency}}",
+        "WatchClip": "Nopelnīti {{amount}} kredīti par skatīšanos {{fromStreamTitle}}",
+        "PurchaseCredits": "Iegādājieties kredītus",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredīti"
+        }
     },
     "history": {
         "Date": "Datums",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Neobligāts ieguldījums",
         "RequiredPayment": "Nepieciešamais maksājums",
         "AreYouSureDelete": "Vai tiešām vēlaties dzēst šo pakalpojumu?",
-        "AmountServicesRelated": "Ar šo pakalpojumu ir {{amount}} iespējas. Viņi arī tiks noņemti."
+        "AmountServicesRelated": "Ar šo pakalpojumu ir {{amount}} iespējas. Viņi arī tiks noņemti.",
+        "Free": "Bezmaksas"
     }
 }

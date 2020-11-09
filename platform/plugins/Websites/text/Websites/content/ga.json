@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Brabhsáil",
             "WriteToStartConversation": "Scríobh do chuid smaointe chun tús a chur leis an gcomhrá",
             "StartConversation": "Comhrá Tosaigh",
-            "GotoConversation": "Téigh go dtí an Comhrá"
-        }
+            "GotoConversation": "Téigh go dtí an Comhrá",
+            "reset": "Athshocraigh",
+            "edit": "Cuir in Eagar",
+            "link": "Nasc",
+            "setUrl": "Socraigh URL",
+            "save": "Sábháil",
+            "setClip": "Gearrthóg Gearr Amach",
+            "invalidURL": "URL neamhbhailí"
+        },
+        "FileTooLarge": "Comhad ró-mhór le haghaidh caching. Uasmhéid comhaid {{size}}",
+        "InvalidPDF": "Ní PDF bailí é an comhad"
     },
     "types": {
         "Websites\/article": {

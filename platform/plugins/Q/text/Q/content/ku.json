@@ -98,5 +98,23 @@
         "inHour": "di demjimêra} 999} de ye",
         "inHours": "di demjimêra 99 999}} de",
         "inUnderMinute": "di nav 1 hûrdeman de"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Çavkaniya vîdyoyê tune"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Çavkaniya pdf tune"
+    },
+    "clip": {
+        "SetClipStart": "Destpêka Klîbê saz bikin",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Dawiya Klîpê saz bikin",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "zêde",
+        "Menu": "Qerta xûrekê"
     }
 }

@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Søk",
             "WriteToStartConversation": "Skriv dine tanker for å starte samtalen",
             "StartConversation": "Start samtale",
-            "GotoConversation": "Gå til samtale"
-        }
+            "GotoConversation": "Gå til samtale",
+            "reset": "Nullstille",
+            "edit": "Redigere",
+            "link": "Link",
+            "setUrl": "Angi URL",
+            "save": "Lagre",
+            "setClip": "Klipp ut klippet",
+            "invalidURL": "ugyldig URL"
+        },
+        "FileTooLarge": "Filen er for stor for caching. Maks filstørrelse {{size}}",
+        "InvalidPDF": "Filen er ikke en gyldig PDF"
     },
     "types": {
         "Websites\/article": {

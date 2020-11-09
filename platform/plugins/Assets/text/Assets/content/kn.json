@@ -32,7 +32,12 @@
         "Buy": "ಖರೀದಿಸಿ",
         "Credits": "ಸಾಲಗಳು",
         "ErrorInvalidAmount": "ಮೊತ್ತ ಅಮಾನ್ಯವಾಗಿದೆ",
-        "ErrorInvalidCurrency": "ದುರದೃಷ್ಟವಶಾತ್ ನಾವು ಇನ್ನೂ ಕರೆನ್ಸಿಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ {99 999}}"
+        "ErrorInvalidCurrency": "ದುರದೃಷ್ಟವಶಾತ್ ನಾವು ಇನ್ನೂ ಕರೆನ್ಸಿಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ {99 999}}",
+        "WatchClip": "ವೀಕ್ಷಣೆಗಾಗಿ {{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ {{fromStreamTitle}}",
+        "PurchaseCredits": "ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಿ",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ಸಾಲಗಳು"
+        }
     },
     "history": {
         "Date": "ದಿನಾಂಕ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "ಐಚ್ al ಿಕ ಕೊಡುಗೆ",
         "RequiredPayment": "ಅಗತ್ಯ ಪಾವತಿ",
         "AreYouSureDelete": "ಈ ಸೇವೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
-        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
+        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.",
+        "Free": "ಉಚಿತ"
     }
 }

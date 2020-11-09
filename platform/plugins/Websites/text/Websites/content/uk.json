@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Огляд",
             "WriteToStartConversation": "Напишіть свої думки, щоб почати розмову",
             "StartConversation": "Почати розмову",
-            "GotoConversation": "Перейдіть до розмови"
-        }
+            "GotoConversation": "Перейдіть до розмови",
+            "reset": "Скинути",
+            "edit": "Редагувати",
+            "link": "Посилання",
+            "setUrl": "Встановити URL-адресу",
+            "save": "Зберегти",
+            "setClip": "Виріжте кліп",
+            "invalidURL": "Недійсна URL-адреса"
+        },
+        "FileTooLarge": "Файл завеликий для кешування. Максимальний розмір файлу {{size}}",
+        "InvalidPDF": "Файл не є дійсним PDF"
     },
     "types": {
         "Websites\/article": {

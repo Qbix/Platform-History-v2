@@ -100,6 +100,21 @@
         "inUnderMinute": "á innan við 1 mínútu"
     },
     "tabs": {
-        "more": "meira"
+        "more": "meira",
+        "Menu": "Matseðill"
+    },
+    "video": {
+        "clip": "bút",
+        "errorNoSource": "Engin myndbandsuppspretta"
+    },
+    "pdf": {
+        "clip": "bút",
+        "errorNoSource": "Engin pdf heimild"
+    },
+    "clip": {
+        "SetClipStart": "Stilltu klemmu byrjun",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Stilltu klemmuenda",
+        "ClipEnd": "Klemmuenda"
     }
 }

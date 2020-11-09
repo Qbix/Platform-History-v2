@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
         "startedConversation": "aloitti keskustelun",
         "RealTimeCall": "Reaaliaikainen puhelu",
-        "SearchByName": "Etsi nimen mukaan"
+        "SearchByName": "Etsi nimen mukaan",
+        "Notifications": {
+            "Visit": "{{displayName}} vierailee chatissa",
+            "Join": "{{displayName}} liittyi chattiin",
+            "Leave": "{{displayName}} lähti keskustelusta",
+            "RelatedTo": "{{displayName}} perusti {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Uusi {{relationDisplayType}} {{toTitle}}",
         "Streams/relatedFrom/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} mainitsi sinut kommentissa",
-        "Streams/call": "{{displayName}} soittaa sinulle"
+        "Streams/call": "{{displayName}} aloitti reaaliaikaisen puhelun"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Haluatko varmasti lopettaa tämän laitteen tilauksen? Se poistaa tämän laitteen ilmoitukset käytöstä.",
         "Identifiers": "tunnisteet",
         "Devices": "Laitteet",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Haluatko varmasti poistaa tämän osallistujan?",
+        "RemoveParticipant": "Poista osallistuja"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Piilota näytön jakaminen",
             "turnOnCamera": "Näytä video",
             "turnOnAudio": "Poista äänen mykistys",
-            "turnOnScreenSharing": "Näytä näytön jakaminen"
+            "turnOnScreenSharing": "Näytä näytön jakaminen",
+            "fullScreen": "Koko näyttö"
         },
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
         "streamTitle": "{{1}} suora puhelu"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Kuva",
-            "description": "visuaalinen kuva"
+            "description": "visuaalinen kuva",
+            "newItem": "Lisää kuva"
         },
         "Streams/images": {
             "displayType": "kuvagalleria",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "tiedosto",
-            "description": "ladattu tiedosto"
+            "description": "ladattu tiedosto",
+            "newItem": "Lisää tiedosto"
         },
         "Streams/audio": {
             "displayType": "Äänileike",
-            "description": "äänileike"
+            "description": "äänileike",
+            "newItem": "Lisää ääni"
         },
         "Streams/video": {
             "displayType": "Videoleike",
-            "description": "videoleike"
+            "description": "videoleike",
+            "newItem": "Lisää video"
         },
         "Streams/live": {
             "displayType": "livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "tervehdys, jonka avulla käyttäjä voi esitellä itsensä",
             "displayType": "Tervehdys"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-tiedosto",
+            "description": "PDF-tiedosto",
+            "newItem": "Lisää PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tämä sisältö on piilotettu teiltä."
+    },
+    "audio": {
+        "record": "Ennätys",
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei äänilähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "video": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei videolähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "pdf": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei pdf-lähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "image": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei kuvalähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
     }
 }

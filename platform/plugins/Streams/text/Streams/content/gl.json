@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Imaxe",
-            "description": "imaxe visual"
+            "description": "imaxe visual",
+            "newItem": "Engadir imaxe"
         },
         "Streams\/images": {
             "displayType": "Galería de imaxes",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Arquivo",
-            "description": "arquivo subido"
+            "description": "arquivo subido",
+            "newItem": "Engadir ficheiro"
         },
         "Streams\/audio": {
             "displayType": "Clip de audio",
-            "description": "clip de audio"
+            "description": "clip de audio",
+            "newItem": "Engadir audio"
         },
         "Streams\/video": {
             "displayType": "Videoclip",
-            "description": "videoclip"
+            "description": "videoclip",
+            "newItem": "Engadir vídeo"
         },
         "Streams\/live": {
             "displayType": "Transmisión en directo",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "saúdo co que un usuario pode presentarse",
             "displayType": "Saúdo"
+        },
+        "Streams\/pdf": {
+            "displayType": "Documento PDF",
+            "description": "Documento PDF",
+            "newItem": "Engadir PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Este contido está escondido de ti."
+    },
+    "audio": {
+        "record": "Rexistro",
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Definir URL",
+        "save": "Gardar",
+        "setClip": "Clip de recorte",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Non hai fonte de audio",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "Sentímolo, pero o ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
+    },
+    "video": {
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Definir URL",
+        "save": "Gardar",
+        "setClip": "Clip de recorte",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Non hai fonte de vídeo",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "Sentímolo, pero o ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
+    },
+    "pdf": {
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Definir URL",
+        "save": "Gardar",
+        "setClip": "Clip de recorte",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Non hai fonte en pdf",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "Sentímolo, pero o ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
+    },
+    "image": {
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Definir URL",
+        "save": "Gardar",
+        "setClip": "Clip de recorte",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Non hai fonte de imaxe",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "Sentímolo, pero o ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
     }
 }

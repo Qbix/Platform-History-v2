@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "image visuelle"
+            "description": "image visuelle",
+            "newItem": "Ajouter une image"
         },
         "Streams\/images": {
             "displayType": "Galerie d&#39;images",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Fichier",
-            "description": "fichier téléchargé"
+            "description": "fichier téléchargé",
+            "newItem": "Ajouter le fichier"
         },
         "Streams\/audio": {
             "displayType": "Clip audio",
-            "description": "clip audio"
+            "description": "clip audio",
+            "newItem": "Ajouter de l&#39;audio"
         },
         "Streams\/video": {
             "displayType": "Clip vidéo",
-            "description": "Clip vidéo"
+            "description": "Clip vidéo",
+            "newItem": "Ajouter une vidéo"
         },
         "Streams\/live": {
             "displayType": "Direct",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "message d&#39;accueil avec lequel un utilisateur peut se présenter",
             "displayType": "Salutation"
+        },
+        "Streams\/pdf": {
+            "displayType": "Document PDF",
+            "description": "Document PDF",
+            "newItem": "Ajouter un PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ce contenu vous est caché."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source audio",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "video": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source vidéo",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "pdf": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Pas de source pdf",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "image": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source d&#39;image",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
     }
 }

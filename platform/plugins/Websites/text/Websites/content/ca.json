@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Navegueu",
             "WriteToStartConversation": "Escriviu els vostres pensaments per començar la conversa",
             "StartConversation": "Inicia la conversa",
-            "GotoConversation": "Vés a Conversa"
-        }
+            "GotoConversation": "Vés a Conversa",
+            "reset": "Restableix",
+            "edit": "Edita",
+            "link": "Enllaç",
+            "setUrl": "Estableix l&#39;URL",
+            "save": "Desa",
+            "setClip": "Clip retallable",
+            "invalidURL": "URL no vàlid"
+        },
+        "FileTooLarge": "El fitxer és massa gran per emmagatzemar-lo a la memòria cau. Mida màxima del fitxer {{size}}",
+        "InvalidPDF": "El fitxer no és un PDF vàlid"
     },
     "types": {
         "Websites\/article": {

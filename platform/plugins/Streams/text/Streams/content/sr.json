@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Слика",
-            "description": "визуелна слика"
+            "description": "визуелна слика",
+            "newItem": "Додај слику"
         },
         "Streams\/images": {
             "displayType": "Галерија слика",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Филе",
-            "description": "отпремљена датотека"
+            "description": "отпремљена датотека",
+            "newItem": "Додај датотеку"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио снимак"
+            "description": "аудио снимак",
+            "newItem": "Додај звук"
         },
         "Streams\/video": {
             "displayType": "Видео клип",
-            "description": "видео клип"
+            "description": "видео клип",
+            "newItem": "Додај видео"
         },
         "Streams\/live": {
             "displayType": "Ливестреам",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "поздрав којим се корисник може представити",
             "displayType": "Поздрав"
+        },
+        "Streams\/pdf": {
+            "displayType": "ПДФ документ",
+            "description": "ПДФ документ",
+            "newItem": "Додајте ПДФ"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Овај садржај је сакривен од вас."
+    },
+    "audio": {
+        "record": "Запис",
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема извора звука",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "video": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема видео извора",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "pdf": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема пдф извора",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "image": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема извора слике",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
     }
 }

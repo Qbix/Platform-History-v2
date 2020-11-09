@@ -24,8 +24,17 @@
             "BrowseTheWeb": "تصفح",
             "WriteToStartConversation": "اكتب أفكارك لبدء المحادثة",
             "StartConversation": "بدء المحادثة",
-            "GotoConversation": "اذهب إلى المحادثة"
-        }
+            "GotoConversation": "اذهب إلى المحادثة",
+            "reset": "إعادة تعيين",
+            "edit": "تعديل",
+            "link": "حلقة الوصل",
+            "setUrl": "تعيين URL",
+            "save": "حفظ",
+            "setClip": "قطع مقطع",
+            "invalidURL": "URL غير صالح"
+        },
+        "FileTooLarge": "الملف كبير جدًا للتخزين المؤقت. أقصى حجم للملف {{size}}",
+        "InvalidPDF": "الملف ليس ملف PDF صالحًا"
     },
     "types": {
         "Websites/article": {

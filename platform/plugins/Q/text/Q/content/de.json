@@ -100,6 +100,21 @@
         "inUnderMinute": "in weniger als 1 Minute"
     },
     "tabs": {
-        "more": "Mehr"
+        "more": "Mehr",
+        "Menu": "Speisekarte"
+    },
+    "video": {
+        "clip": "Clip",
+        "errorNoSource": "Keine Videoquelle"
+    },
+    "pdf": {
+        "clip": "Clip",
+        "errorNoSource": "Keine PDF-Quelle"
+    },
+    "clip": {
+        "SetClipStart": "Stellen Sie den Clip-Start ein",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Clip-Ende einstellen",
+        "ClipEnd": "Clip-Ende"
     }
 }

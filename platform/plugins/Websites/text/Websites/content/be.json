@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Агляд",
             "WriteToStartConversation": "Напішыце свае думкі, каб пачаць размову",
             "StartConversation": "Пачатак размовы",
-            "GotoConversation": "Перайсці да размовы"
-        }
+            "GotoConversation": "Перайсці да размовы",
+            "reset": "Скід",
+            "edit": "Рэдагаваць",
+            "link": "Спасылка",
+            "setUrl": "Устанавіць URL",
+            "save": "Захаваць",
+            "setClip": "Выразаць кліп",
+            "invalidURL": "Няправільны URL"
+        },
+        "FileTooLarge": "Файл занадта вялікі для кэшавання. Максімальны памер файла {{size}}",
+        "InvalidPDF": "Файл не з&#39;яўляецца сапраўдным PDF"
     },
     "types": {
         "Websites\/article": {

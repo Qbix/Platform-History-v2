@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
         "startedConversation": "thosaigh comhrá",
         "RealTimeCall": "Glao Ama Fíor-Ama",
-        "SearchByName": "Cuardaigh de réir ainm"
+        "SearchByName": "Cuardaigh de réir ainm",
+        "Notifications": {
+            "Visit": "Tá {{displayName}} ag tabhairt cuairte ar an gcomhrá",
+            "Join": "Chuaigh {{displayName}} isteach sa chomhrá",
+            "Leave": "D’fhág {{displayName}} an comhrá",
+            "RelatedTo": "Chuir {{displayName}} tús le {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nua {{relationDisplayType}} i {{toTitle}}",
         "Streams/relatedFrom/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
         "Streams/mention": "Luaigh {{&call 'avatar.displayName'}} tú trácht",
-        "Streams/call": "Tá {{displayName}} ag glaoch ort"
+        "Streams/call": "Chuir {{displayName}} tús le glao fíor-ama"
     },
     "invite": {
         "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "An bhfuil tú cinnte díliostáil an fheiste seo? Múchfaidh sé fógraí chuig an bhfeiste seo.",
         "Identifiers": "Aitheantóirí",
         "Devices": "Gléasanna",
-        "Streams": "Sruthanna"
+        "Streams": "Sruthanna",
+        "AreYouSureRemoveParticipant": "An bhfuil tú cinnte gur mhaith leat an rannpháirtí seo a bhaint?",
+        "RemoveParticipant": "Bain an rannpháirtí"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Folaigh comhroinnt scáileáin",
             "turnOnCamera": "Taispeáin físeán",
             "turnOnAudio": "Fuaim unmute",
-            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin"
+            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin",
+            "fullScreen": "Scáileán iomlán"
         },
         "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
         "streamTitle": "{{1}} glao beo"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Íomha",
-            "description": "íomhá amhairc"
+            "description": "íomhá amhairc",
+            "newItem": "Cuir Íomhá leis"
         },
         "Streams/images": {
             "displayType": "Gailearaí Íomhá",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Comhad",
-            "description": "comhad uaslódáilte"
+            "description": "comhad uaslódáilte",
+            "newItem": "Cuir Comhad leis"
         },
         "Streams/audio": {
             "displayType": "Clip Fuaime",
-            "description": "gearrthóg fuaime"
+            "description": "gearrthóg fuaime",
+            "newItem": "Cuir Fuaim leis"
         },
         "Streams/video": {
             "displayType": "Clip Físeáin",
-            "description": "gearrthóg físe"
+            "description": "gearrthóg físe",
+            "newItem": "Cuir Físeán leis"
         },
         "Streams/live": {
             "displayType": "Sruth beo",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "beannú ar féidir le húsáideoir iad féin a thabhairt isteach",
             "displayType": "Beannacht"
+        },
+        "Streams/pdf": {
+            "displayType": "Doiciméad PDF",
+            "description": "Doiciméad PDF",
+            "newItem": "Cuir PDF leis"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tá an t-ábhar seo i bhfolach uait."
+    },
+    "audio": {
+        "record": "Taifead",
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan aon fhoinse fuaime",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "video": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan aon fhoinse físe",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "pdf": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Sin foinse pdf",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "image": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan foinse íomhá",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
     }
 }

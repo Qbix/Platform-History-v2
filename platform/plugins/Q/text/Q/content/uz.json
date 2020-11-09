@@ -98,5 +98,23 @@
         "inHour": "{{h}} soat ichida",
         "inHours": "{{h}} soat ichida",
         "inUnderMinute": "1 minut ichida"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Video manbai yo‘q"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "PDF manbai yo&#39;q"
+    },
+    "clip": {
+        "SetClipStart": "Clip Start-ni o&#39;rnating",
+        "ClipStart": "Klip Boshlash",
+        "SetClipEnd": "Clip End-ni o&#39;rnating",
+        "ClipEnd": "Klipning oxiri"
+    },
+    "tabs": {
+        "more": "Ko&#39;proq",
+        "Menu": "Menyu"
     }
 }

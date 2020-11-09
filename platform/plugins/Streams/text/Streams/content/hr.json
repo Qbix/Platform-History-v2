@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Slika",
-            "description": "vizualna slika"
+            "description": "vizualna slika",
+            "newItem": "Dodaj sliku"
         },
         "Streams\/images": {
             "displayType": "Galerija slika",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Datoteka",
-            "description": "prenesena datoteka"
+            "description": "prenesena datoteka",
+            "newItem": "Dodaj datoteku"
         },
         "Streams\/audio": {
             "displayType": "Audio isječak",
-            "description": "audioisječak"
+            "description": "audioisječak",
+            "newItem": "Dodajte zvuk"
         },
         "Streams\/video": {
             "displayType": "Video isječak",
-            "description": "video isječak"
+            "description": "video isječak",
+            "newItem": "Dodaj videozapis"
         },
         "Streams\/live": {
             "displayType": "Uživo prijenos",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "pozdrav s kojim se korisnik može predstaviti",
             "displayType": "Pozdrav"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokument",
+            "description": "PDF dokument",
+            "newItem": "Dodajte PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ovaj sadržaj je sakriven od vas."
+    },
+    "audio": {
+        "record": "Snimiti",
+        "reset": "Resetirati",
+        "edit": "Uredi",
+        "title": "titula",
+        "description": "opis",
+        "upload": "Učitaj",
+        "link": "Veza",
+        "setUrl": "Postavi URL",
+        "save": "Uštedjeti",
+        "setClip": "Izrežite isječak",
+        "invalidURL": "Neispravan URL",
+        "invalidFile": "Nevažeća datoteka",
+        "errorNoSource": "Nema izvora zvuka",
+        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
+        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+    },
+    "video": {
+        "reset": "Resetirati",
+        "edit": "Uredi",
+        "title": "titula",
+        "description": "opis",
+        "upload": "Učitaj",
+        "link": "Veza",
+        "setUrl": "Postavi URL",
+        "save": "Uštedjeti",
+        "setClip": "Izrežite isječak",
+        "invalidURL": "Neispravan URL",
+        "invalidFile": "Nevažeća datoteka",
+        "errorNoSource": "Nema video izvora",
+        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
+        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetirati",
+        "edit": "Uredi",
+        "title": "titula",
+        "description": "opis",
+        "upload": "Učitaj",
+        "link": "Veza",
+        "setUrl": "Postavi URL",
+        "save": "Uštedjeti",
+        "setClip": "Izrežite isječak",
+        "invalidURL": "Neispravan URL",
+        "invalidFile": "Nevažeća datoteka",
+        "errorNoSource": "Nema pdf izvora",
+        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
+        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+    },
+    "image": {
+        "reset": "Resetirati",
+        "edit": "Uredi",
+        "title": "titula",
+        "description": "opis",
+        "upload": "Učitaj",
+        "link": "Veza",
+        "setUrl": "Postavi URL",
+        "save": "Uštedjeti",
+        "setClip": "Izrežite isječak",
+        "invalidURL": "Neispravan URL",
+        "invalidFile": "Nevažeća datoteka",
+        "errorNoSource": "Nema izvora slike",
+        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
+        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
     }
 }

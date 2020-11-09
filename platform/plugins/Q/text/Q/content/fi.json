@@ -100,6 +100,21 @@
         "inUnderMinute": "alle 1 minuutissa"
     },
     "tabs": {
-        "more": "lisää"
+        "more": "lisää",
+        "Menu": "Valikko"
+    },
+    "video": {
+        "clip": "leike",
+        "errorNoSource": "Ei videolähdettä"
+    },
+    "pdf": {
+        "clip": "leike",
+        "errorNoSource": "Ei pdf-lähdettä"
+    },
+    "clip": {
+        "SetClipStart": "Aseta Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Aseta leikkeen loppu",
+        "ClipEnd": "Leikkeen loppu"
     }
 }

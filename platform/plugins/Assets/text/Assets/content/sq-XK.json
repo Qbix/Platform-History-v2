@@ -32,7 +32,12 @@
         "Buy": "Blej",
         "Credits": "kredite",
         "ErrorInvalidAmount": "Shuma e pavlefshme",
-        "ErrorInvalidCurrency": "Fatkeqësisht ne nuk e mbështesin ende monedhën {999} akoma"
+        "ErrorInvalidCurrency": "Fatkeqësisht ne nuk e mbështesin ende monedhën {999} akoma",
+        "WatchClip": "Fitua {{amount}} kredite për të shikuar {{fromStreamTitle}}",
+        "PurchaseCredits": "Blerjet e kredive",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredite"
+        }
     },
     "history": {
         "Date": "data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Kontributi fakultativ",
         "RequiredPayment": "Pagesa e kërkuar",
         "AreYouSureDelete": "Jeni i sigurt që doni të fshini këtë shërbim?",
-        "AmountServicesRelated": "Ka disponueshmëri prej 999 {{në lidhje me këtë shërbim. Ata gjithashtu do të hiqen."
+        "AmountServicesRelated": "Ka disponueshmëri prej 999 {{në lidhje me këtë shërbim. Ata gjithashtu do të hiqen.",
+        "Free": "Falas"
     }
 }

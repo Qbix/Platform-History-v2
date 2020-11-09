@@ -98,5 +98,23 @@
         "inHour": "ka hora ea {{h}}",
         "inHours": "ka lihora tse {{h}}",
         "inUnderMinute": "ka tlasa motsotso o le mong"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Ha ho mohloli oa video"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Ha ho mohloli oa pdf"
+    },
+    "clip": {
+        "SetClipStart": "Beha Clip Start",
+        "ClipStart": "Qala Clip",
+        "SetClipEnd": "Hlopha Clip End",
+        "ClipEnd": "Qetella"
+    },
+    "tabs": {
+        "more": "Hape",
+        "Menu": "Lenaneo"
     }
 }

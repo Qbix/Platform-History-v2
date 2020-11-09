@@ -24,8 +24,17 @@
             "BrowseTheWeb": "浏览",
             "WriteToStartConversation": "写下你的想法，开始谈话",
             "StartConversation": "开始对话",
-            "GotoConversation": "转到对话"
-        }
+            "GotoConversation": "转到对话",
+            "reset": "重启",
+            "edit": "编辑",
+            "link": "链接",
+            "setUrl": "设定网址",
+            "save": "救",
+            "setClip": "剪出剪辑",
+            "invalidURL": "无效的网址"
+        },
+        "FileTooLarge": "文件太大，无法缓存。最大文件大小{{size}}",
+        "InvalidPDF": "文件不是有效的PDF"
     },
     "types": {
         "Websites/article": {

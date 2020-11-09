@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Зображення",
-            "description": "візуальне зображення"
+            "description": "візуальне зображення",
+            "newItem": "Додати зображення"
         },
         "Streams\/images": {
             "displayType": "Галерея зображень",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "завантажений файл"
+            "description": "завантажений файл",
+            "newItem": "Додати файл"
         },
         "Streams\/audio": {
             "displayType": "Аудіокліп",
-            "description": "аудіокліп"
+            "description": "аудіокліп",
+            "newItem": "Додати аудіо"
         },
         "Streams\/video": {
             "displayType": "Відео кліп",
-            "description": "відео кліп"
+            "description": "відео кліп",
+            "newItem": "Додати відео"
         },
         "Streams\/live": {
             "displayType": "Наживо",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "привітання, з яким користувач може представити себе",
             "displayType": "Привітання"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-документ",
+            "description": "PDF-документ",
+            "newItem": "Додати PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Цей вміст приховано від вас."
+    },
+    "audio": {
+        "record": "Запис",
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Джерело звуку відсутнє",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "video": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела відео",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "pdf": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела PDF",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "image": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела зображення",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
     }
 }

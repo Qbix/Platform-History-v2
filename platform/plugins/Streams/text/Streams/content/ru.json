@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Образ",
-            "description": "визуальный образ"
+            "description": "визуальный образ",
+            "newItem": "Добавить изображение"
         },
         "Streams\/images": {
             "displayType": "Галерея",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "файл",
-            "description": "загруженный файл"
+            "description": "загруженный файл",
+            "newItem": "Добавить файл"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудиоклип"
+            "description": "аудиоклип",
+            "newItem": "Добавить аудио"
         },
         "Streams\/video": {
             "displayType": "Видеоклип",
-            "description": "видеоклип"
+            "description": "видеоклип",
+            "newItem": "Добавить видео"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "приветствие, с которым пользователь может представиться",
             "displayType": "Приветствие"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "Добавить PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Этот контент скрыт от вас."
+    },
+    "audio": {
+        "record": "Запись",
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника звука",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "video": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника видео",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "pdf": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника в формате pdf",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "image": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника изображения",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
     }
 }

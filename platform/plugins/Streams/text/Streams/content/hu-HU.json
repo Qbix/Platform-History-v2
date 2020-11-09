@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nincs engedélye a beszélgetéshez.",
         "startedConversation": "beszélgetést kezdett",
         "RealTimeCall": "Valós idejű hívás",
-        "SearchByName": "Keresés név szerint"
+        "SearchByName": "Keresés név szerint",
+        "Notifications": {
+            "Visit": "{{displayName}} meglátogatja a csevegőt",
+            "Join": "{{displayName}} csatlakozott a csevegéshez",
+            "Leave": "{{displayName}} elhagyta a csevegőt",
+            "RelatedTo": "{{displayName}} indított egy {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Üzenet {{& message.fields.type}} {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Új {{relationDisplayType}} a {{toTitle}} -ben",
         "Streams/relatedFrom/*": "Hozzáadva a következőhöz: {{toTitle}}, mint {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} megemlített egy megjegyzésben",
-        "Streams/call": "{{displayName}} hív téged"
+        "Streams/call": "{{displayName}} valós idejű hívást indított"
     },
     "invite": {
         "messageContent": "{{displayName}} meghívta Önt a {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Biztosan leiratkozott erről az eszközről? Kikapcsolja az eszköz értesítéseit.",
         "Identifiers": "azonosítók",
         "Devices": "eszközök",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Biztos benne, hogy el akarja távolítani ezt a résztvevőt?",
+        "RemoveParticipant": "Távolítsa el a résztvevőt"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "A képernyőmegosztás elrejtése",
             "turnOnCamera": "Videó megjelenítése",
             "turnOnAudio": "A hang némítása",
-            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése"
+            "turnOnScreenSharing": "A képernyőmegosztás megjelenítése",
+            "fullScreen": "Teljes képernyő"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
         "streamTitle": "{{1}} élő hívás"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Kép",
-            "description": "vizuális kép"
+            "description": "vizuális kép",
+            "newItem": "Kép hozzáadása"
         },
         "Streams/images": {
             "displayType": "Képgaléria",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "fájl",
-            "description": "feltöltött fájl"
+            "description": "feltöltött fájl",
+            "newItem": "Fájl hozzáadása"
         },
         "Streams/audio": {
             "displayType": "Audio klip",
-            "description": "audio klip"
+            "description": "audio klip",
+            "newItem": "Hang hozzáadása"
         },
         "Streams/video": {
             "displayType": "Videoklip",
-            "description": "Videoklip"
+            "description": "Videoklip",
+            "newItem": "Videó hozzáadása"
         },
         "Streams/live": {
             "displayType": "Élő adás",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "üdvözlet, amellyel a felhasználó bemutathatja magát",
             "displayType": "Üdvözlet"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF dokumentum",
+            "description": "PDF dokumentum",
+            "newItem": "PDF hozzáadása"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ez a tartalom el van rejtve tőled."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs hangforrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "video": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs video forrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "pdf": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs pdf forrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "image": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs képforrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
     }
 }

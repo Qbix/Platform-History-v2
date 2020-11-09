@@ -24,8 +24,17 @@
             "BrowseTheWeb": "براؤز کریں",
             "WriteToStartConversation": "بات چیت شروع کرنے کے لئے اپنے خیالات لکھیں",
             "StartConversation": "بات چیت شروع کریں",
-            "GotoConversation": "گفتگو پر جائیں۔"
-        }
+            "GotoConversation": "گفتگو پر جائیں۔",
+            "reset": "ری سیٹ کریں",
+            "edit": "ترمیم",
+            "link": "لنک",
+            "setUrl": "یو آر ایل سیٹ کریں",
+            "save": "محفوظ کریں",
+            "setClip": "کٹ آؤٹ کلپ",
+            "invalidURL": "غلط URL"
+        },
+        "FileTooLarge": "کیچنگ کیلئے فائل بہت بڑی ہے۔ فائل کا زیادہ سے زیادہ سائز {{999}",
+        "InvalidPDF": "فائل درست پی ڈی ایف نہیں ہے"
     },
     "types": {
         "Websites\/article": {

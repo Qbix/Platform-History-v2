@@ -24,8 +24,17 @@
             "BrowseTheWeb": "selailla",
             "WriteToStartConversation": "Kirjoita ajatuksesi keskustelun aloittamiseksi",
             "StartConversation": "Aloita keskustelu",
-            "GotoConversation": "Siirry keskusteluun"
-        }
+            "GotoConversation": "Siirry keskusteluun",
+            "reset": "Nollaa",
+            "edit": "Muokata",
+            "link": "Linkki",
+            "setUrl": "Aseta URL-osoite",
+            "save": "Tallentaa",
+            "setClip": "Leikkaa leike",
+            "invalidURL": "Virheellinen URL"
+        },
+        "FileTooLarge": "Tiedosto on liian suuri välimuistiin tallentamista varten. Tiedoston enimmäiskoko {{size}}",
+        "InvalidPDF": "Tiedosto ei ole kelvollinen PDF-tiedosto"
     },
     "types": {
         "Websites/article": {

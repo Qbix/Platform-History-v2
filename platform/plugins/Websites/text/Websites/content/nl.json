@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Blader",
             "WriteToStartConversation": "Schrijf je gedachten om het gesprek te starten",
             "StartConversation": "Begin een gesprek",
-            "GotoConversation": "Ga naar gesprek"
-        }
+            "GotoConversation": "Ga naar gesprek",
+            "reset": "Reset",
+            "edit": "Bewerk",
+            "link": "Koppeling",
+            "setUrl": "URL instellen",
+            "save": "Opslaan",
+            "setClip": "Uitgesneden clip",
+            "invalidURL": "Ongeldige URL"
+        },
+        "FileTooLarge": "Bestand te groot voor caching. Max. Bestandsgrootte {{size}}",
+        "InvalidPDF": "Bestand is geen geldige pdf"
     },
     "types": {
         "Websites\/article": {

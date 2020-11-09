@@ -98,5 +98,23 @@
         "inHour": "a cikin {{h}} awa",
         "inHours": "a cikin {{h}} sa&#39;o&#39;i",
         "inUnderMinute": "a karkashin 1 minti"
+    },
+    "video": {
+        "clip": "shirin bidiyo",
+        "errorNoSource": "Babu tushen bidiyo"
+    },
+    "pdf": {
+        "clip": "shirin bidiyo",
+        "errorNoSource": "Babu tushen pdf"
+    },
+    "clip": {
+        "SetClipStart": "Saita Fara Clip",
+        "ClipStart": "Fara Clip",
+        "SetClipEnd": "Saita liparshen shirin",
+        "ClipEnd": "Endarshen Yankewa"
+    },
+    "tabs": {
+        "more": "Kara",
+        "Menu": "Menu"
     }
 }

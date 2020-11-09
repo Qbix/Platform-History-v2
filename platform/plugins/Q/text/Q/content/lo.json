@@ -98,5 +98,23 @@
         "inHour": "ໃນ {{h}} ຊົ່ວໂມງ",
         "inHours": "ໃນ {{h}} ຊົ່ວໂມງ",
         "inUnderMinute": "ພາຍໃຕ້ 1 ນາທີ"
+    },
+    "video": {
+        "clip": "ຄລິບ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ"
+    },
+    "pdf": {
+        "clip": "ຄລິບ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງ pdf"
+    },
+    "clip": {
+        "SetClipStart": "ຕັ້ງ Clip ເລີ່ມຕົ້ນ",
+        "ClipStart": "ຄລິບເລີ່ມຕົ້ນ",
+        "SetClipEnd": "ຕັ້ງ Clip ຈົບ",
+        "ClipEnd": "Clip ຈົບ"
+    },
+    "tabs": {
+        "more": "ຫຼາຍ",
+        "Menu": "ເມນູ"
     }
 }

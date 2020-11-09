@@ -32,7 +32,12 @@
         "Buy": "Купува",
         "Credits": "Кредити",
         "ErrorInvalidAmount": "Сумата е невалидна",
-        "ErrorInvalidCurrency": "За съжаление все още не поддържаме валута {{currency}}"
+        "ErrorInvalidCurrency": "За съжаление все още не поддържаме валута {{currency}}",
+        "WatchClip": "Спечелени {{amount}} кредита за гледане на {{fromStreamTitle}}",
+        "PurchaseCredits": "Кредити за покупка",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредити"
+        }
     },
     "history": {
         "Date": "Дата",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Незадължителен принос",
         "RequiredPayment": "Задължително плащане",
         "AreYouSureDelete": "Наистина ли искате да изтриете тази услуга?",
-        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също са премахнати."
+        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също са премахнати.",
+        "Free": "Безплатно"
     }
 }

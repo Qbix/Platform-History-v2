@@ -32,7 +32,12 @@
         "Buy": "يشترى",
         "Credits": "ائتمانات",
         "ErrorInvalidAmount": "المبلغ غير صالح",
-        "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} بعد"
+        "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} بعد",
+        "WatchClip": "حصلت على {{amount}} أرصدة مقابل مشاهدة {{fromStreamTitle}}",
+        "PurchaseCredits": "قروض شراء",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ائتمانات"
+        }
     },
     "history": {
         "Date": "تاريخ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "مساهمة اختيارية",
         "RequiredPayment": "الدفع المطلوب",
         "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
-        "AmountServicesRelated": "هناك {{amount}} من الإمكانيات المتاحة لهذه الخدمة. كما سيتم إزالتها."
+        "AmountServicesRelated": "هناك {{amount}} من الإمكانيات المتاحة لهذه الخدمة. كما سيتم إزالتها.",
+        "Free": "مجانا"
     }
 }

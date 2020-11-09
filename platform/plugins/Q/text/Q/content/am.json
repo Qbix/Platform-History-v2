@@ -98,5 +98,23 @@
         "inHour": "በ {{h}} ሰዓት ውስጥ",
         "inHours": "በ {{h}} ሰዓታት ውስጥ",
         "inUnderMinute": "ከ 1 ደቂቃ በታች"
+    },
+    "video": {
+        "clip": "ቅንጥብ",
+        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም"
+    },
+    "pdf": {
+        "clip": "ቅንጥብ",
+        "errorNoSource": "ምንም የፒዲኤፍ ምንጭ የለም"
+    },
+    "clip": {
+        "SetClipStart": "ቅንጥብ ጅምርን ያዘጋጁ",
+        "ClipStart": "ቅንጥብ ጀምር",
+        "SetClipEnd": "ቅንጥብ ማብቂያ ያዘጋጁ",
+        "ClipEnd": "ክሊፕ መጨረሻ"
+    },
+    "tabs": {
+        "more": "ተጨማሪ",
+        "Menu": "ምናሌ"
     }
 }

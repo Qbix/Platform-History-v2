@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Snuffel",
             "WriteToStartConversation": "Skryf jou gedagtes om die gesprek te begin",
             "StartConversation": "Begin gesprek",
-            "GotoConversation": "Gaan na Gesprek"
-        }
+            "GotoConversation": "Gaan na Gesprek",
+            "reset": "Stel terug",
+            "edit": "Wysig",
+            "link": "Skakel",
+            "setUrl": "Stel URL",
+            "save": "Stoor",
+            "setClip": "Knipknip uit",
+            "invalidURL": "Ongeldige URL"
+        },
+        "FileTooLarge": "Lêer is te groot vir die kas. Maksimum lêergrootte {{size}}",
+        "InvalidPDF": "Die lêer is nie &#39;n geldige PDF nie"
     },
     "types": {
         "Websites\/article": {

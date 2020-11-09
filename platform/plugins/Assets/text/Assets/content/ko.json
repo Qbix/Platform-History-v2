@@ -32,7 +32,12 @@
         "Buy": "구입",
         "Credits": "크레딧",
         "ErrorInvalidAmount": "유효하지 않은 금액",
-        "ErrorInvalidCurrency": "불행히도 아직 {{currency}} 통화를 지원하지 않습니다"
+        "ErrorInvalidCurrency": "불행히도 아직 {{currency}} 통화를 지원하지 않습니다",
+        "WatchClip": "{{fromStreamTitle}}을 시청하여 {{amount}} 크레딧을 받았습니다.",
+        "PurchaseCredits": "크레딧 구매",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} 크레딧"
+        }
     },
     "history": {
         "Date": "날짜",
@@ -143,6 +148,7 @@
         "OptionalContribution": "선택적 기여",
         "RequiredPayment": "필요한 지불",
         "AreYouSureDelete": "이 서비스를 삭제 하시겠습니까?",
-        "AmountServicesRelated": "이 서비스와 관련된 {{amount}}의 이용 가능성이 있습니다. 또한 제거됩니다."
+        "AmountServicesRelated": "이 서비스와 관련된 {{amount}}의 이용 가능성이 있습니다. 또한 제거됩니다.",
+        "Free": "비어 있는"
     }
 }

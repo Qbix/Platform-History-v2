@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;din il-konversazzjoni.",
         "startedConversation": "bdiet konverżazzjoni",
         "RealTimeCall": "Sejħa f&#39;ħin Reali",
-        "SearchByName": "Fittex bl-isem"
+        "SearchByName": "Fittex bl-isem",
+        "Notifications": {
+            "Visit": "{{displayName}} qiegħed iżur iċ-chat",
+            "Join": "{{displayName}} ingħaqad maċ-chat",
+            "Leave": "{{displayName}} ħallew iċ-chat",
+            "RelatedTo": "{{displayName}} bdew {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Ġdid {{relationDisplayType}} f &#39;{{toTitle}}",
         "Streams/relatedFrom/*": "Miżjud ma &#39;{{toTitle}} bħala {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} semmejt f&#39;kumment",
-        "Streams/call": "{{displayName}} qed isejjaħlek"
+        "Streams/call": "{{displayName}} bdew sejħa fil-ħin reali"
     },
     "invite": {
         "messageContent": "{{displayName}} stiednek biex {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Int żgur li tħassar dan it-tagħmir? Se itfi n-notifiki ma &#39;dan l-apparat.",
         "Identifiers": "Identifikaturi",
         "Devices": "Apparat",
-        "Streams": "Nixxigħat"
+        "Streams": "Nixxigħat",
+        "AreYouSureRemoveParticipant": "Int żgur li trid tneħħi dan il-parteċipant?",
+        "RemoveParticipant": "Neħħi parteċipant"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Aħbi l-qsim tal-iskrin",
             "turnOnCamera": "Uri vidjow",
             "turnOnAudio": "Akkordja l-awdjo",
-            "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
+            "turnOnScreenSharing": "Uri l-qsim tal-iskrin",
+            "fullScreen": "Skrin sħiħ"
         },
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
         "streamTitle": "{{1}} telefonata diretta"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Immaġni",
-            "description": "immaġni viżwali"
+            "description": "immaġni viżwali",
+            "newItem": "Żid Immaġni"
         },
         "Streams/images": {
             "displayType": "Gallerija tal-Immaġini",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fajl",
-            "description": "fajl imtella &#39;"
+            "description": "fajl imtella &#39;",
+            "newItem": "Żid Fajl"
         },
         "Streams/audio": {
             "displayType": "Kliem tal-awdjo",
-            "description": "klip awdjo"
+            "description": "klip awdjo",
+            "newItem": "Żid Awdjo"
         },
         "Streams/video": {
             "displayType": "Clip tal-Vidjow",
-            "description": "filmat"
+            "description": "filmat",
+            "newItem": "Żid Vidjo"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "tislima li biha utent jista &#39;jintroduċi ruħu",
             "displayType": "Tislijiet"
+        },
+        "Streams/pdf": {
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Żid PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dan il-kontenut huwa moħbi minnek."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titlu",
+        "description": "deskrizzjoni",
+        "upload": "Tella &#39;",
+        "link": "Rabta",
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta &#39;Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors tal-awdjo",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+    },
+    "video": {
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titlu",
+        "description": "deskrizzjoni",
+        "upload": "Tella &#39;",
+        "link": "Rabta",
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta &#39;Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors tal-vidjo",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+    },
+    "pdf": {
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titlu",
+        "description": "deskrizzjoni",
+        "upload": "Tella &#39;",
+        "link": "Rabta",
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta &#39;Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors pdf",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+    },
+    "image": {
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titlu",
+        "description": "deskrizzjoni",
+        "upload": "Tella &#39;",
+        "link": "Rabta",
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta &#39;Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors ta &#39;immaġni",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
     }
 }

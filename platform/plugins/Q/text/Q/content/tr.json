@@ -100,6 +100,21 @@
         "inUnderMinute": "1 dakikadan kısa sürede"
     },
     "tabs": {
-        "more": "Daha"
+        "more": "Daha",
+        "Menu": "Menü"
+    },
+    "video": {
+        "clip": "klips",
+        "errorNoSource": "Video kaynağı yok"
+    },
+    "pdf": {
+        "clip": "klips",
+        "errorNoSource": "PDF kaynağı yok"
+    },
+    "clip": {
+        "SetClipStart": "Klip Başlangıcını Ayarla",
+        "ClipStart": "Klip Başlangıcı",
+        "SetClipEnd": "Klip Sonunu Ayarla",
+        "ClipEnd": "Klip Sonu"
     }
 }

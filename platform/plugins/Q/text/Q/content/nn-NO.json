@@ -100,6 +100,21 @@
         "inUnderMinute": "på under 1 minutt"
     },
     "tabs": {
-        "more": "mer"
+        "more": "mer",
+        "Menu": "Meny"
+    },
+    "video": {
+        "clip": "klipp",
+        "errorNoSource": "Ingen videokilde"
+    },
+    "pdf": {
+        "clip": "klipp",
+        "errorNoSource": "Ingen pdf-kilde"
+    },
+    "clip": {
+        "SetClipStart": "Sett Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Sett Clip End",
+        "ClipEnd": "Clip End"
     }
 }

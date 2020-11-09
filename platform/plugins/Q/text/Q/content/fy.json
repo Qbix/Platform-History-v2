@@ -98,5 +98,23 @@
         "inHour": "yn {{h}} oere",
         "inHours": "yn {{h}} oeren",
         "inUnderMinute": "yn minder dan 1 minút"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Gjin fideoboarne"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Gjin pdf-boarne"
+    },
+    "clip": {
+        "SetClipStart": "Stel Clip Start yn",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Klem ein sette",
+        "ClipEnd": "Clip Ein"
+    },
+    "tabs": {
+        "more": "mear",
+        "Menu": "Menu"
     }
 }

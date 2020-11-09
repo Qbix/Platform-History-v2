@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "ভাবমূর্তি",
-            "description": "দৃষ্টি নির্ভর ছবি"
+            "description": "দৃষ্টি নির্ভর ছবি",
+            "newItem": "ছবি যোগ কর"
         },
         "Streams\/images": {
             "displayType": "ছবির গ্যালারি",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "ফাইল",
-            "description": "আপলোড করা ফাইল"
+            "description": "আপলোড করা ফাইল",
+            "newItem": "ফাইল যুক্ত কর"
         },
         "Streams\/audio": {
             "displayType": "অডিও ক্লিপ",
-            "description": "অডিও ক্লিপ"
+            "description": "অডিও ক্লিপ",
+            "newItem": "অডিও যুক্ত করুন"
         },
         "Streams\/video": {
             "displayType": "ভিডিও ক্লিপ",
-            "description": "ভিডিও ক্লিপ"
+            "description": "ভিডিও ক্লিপ",
+            "newItem": "ভিডিও যোগ করুন"
         },
         "Streams\/live": {
             "displayType": "সরাসরি সম্প্রচার",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "অভিবাদন যা দিয়ে একজন ব্যবহারকারী তাদের পরিচয় দিতে পারে",
             "displayType": "অভিবাদন"
+        },
+        "Streams\/pdf": {
+            "displayType": "পিডিএফ ডকুমেন্ট",
+            "description": "পিডিএফ ডকুমেন্ট",
+            "newItem": "পিডিএফ যুক্ত করুন"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "এই বিষয়বস্তু আপনার কাছ থেকে লুকানো আছে।"
+    },
+    "audio": {
+        "record": "রেকর্ড",
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও অডিও উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "video": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও ভিডিও উত্স নয়",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "pdf": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও পিডিএফ উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "image": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও চিত্রের উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
     }
 }

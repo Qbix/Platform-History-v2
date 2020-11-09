@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Jelajahi",
             "WriteToStartConversation": "Tulis pemikiran Anda untuk memulai percakapan",
             "StartConversation": "Mulai Percakapan",
-            "GotoConversation": "Pergi ke Percakapan"
-        }
+            "GotoConversation": "Pergi ke Percakapan",
+            "reset": "Setel ulang",
+            "edit": "Edit",
+            "link": "Tautan",
+            "setUrl": "Tetapkan URL",
+            "save": "Menyimpan",
+            "setClip": "Potong Klip",
+            "invalidURL": "URL tidak valid"
+        },
+        "FileTooLarge": "File terlalu besar untuk disimpan dalam cache. Ukuran file maks {{size}}",
+        "InvalidPDF": "File bukan PDF yang valid"
     },
     "types": {
         "Websites/article": {

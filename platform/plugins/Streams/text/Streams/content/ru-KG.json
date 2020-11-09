@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому разговору.",
         "startedConversation": "завел разговор",
         "RealTimeCall": "Звонок в реальном времени",
-        "SearchByName": "Поиск по имени"
+        "SearchByName": "Поиск по имени",
+        "Notifications": {
+            "Visit": "{{displayName}} посещает чат",
+            "Join": "{{displayName}} присоединился к чату",
+            "Leave": "{{displayName}} покинул чат",
+            "RelatedTo": "{{displayName}} начал {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Сообщение {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Новый {{relationDisplayType}} в {{toTitle}}",
         "Streams/relatedFrom/*": "Добавлено в {{toTitle}} как {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} упомянул вас в комментарии",
-        "Streams/call": "{{displayName}} звонит тебе"
+        "Streams/call": "{{displayName}} начал разговор в реальном времени"
     },
     "invite": {
         "messageContent": "{{displayName}} пригласил вас на {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Вы уверены, что отписаться от этого устройства? Это отключит уведомления на это устройство.",
         "Identifiers": "Идентификаторы",
         "Devices": "приборы",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Вы уверены, что хотите удалить этого участника?",
+        "RemoveParticipant": "Удалить участника"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Скрыть экран обмена",
             "turnOnCamera": "Показать видео",
             "turnOnAudio": "Включить звук",
-            "turnOnScreenSharing": "Показать общий доступ к экрану"
+            "turnOnScreenSharing": "Показать общий доступ к экрану",
+            "fullScreen": "Полноэкранный"
         },
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
         "streamTitle": "{{1}} живой звонок"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Образ",
-            "description": "визуальный образ"
+            "description": "визуальный образ",
+            "newItem": "Добавить изображение"
         },
         "Streams/images": {
             "displayType": "Галерея",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "файл",
-            "description": "загруженный файл"
+            "description": "загруженный файл",
+            "newItem": "Добавить файл"
         },
         "Streams/audio": {
             "displayType": "Аудио клип",
-            "description": "аудиоклип"
+            "description": "аудиоклип",
+            "newItem": "Добавить аудио"
         },
         "Streams/video": {
             "displayType": "Видеоклип",
-            "description": "видеоклип"
+            "description": "видеоклип",
+            "newItem": "Добавить видео"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "приветствие, с которым пользователь может представиться",
             "displayType": "Приветствие"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "Добавить PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Этот контент скрыт от вас."
+    },
+    "audio": {
+        "record": "Запись",
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника звука",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "video": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника видео",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "pdf": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника в формате pdf",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "image": {
+        "reset": "Сброс настроек",
+        "edit": "редактировать",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Загрузить",
+        "link": "Ссылка на сайт",
+        "setUrl": "Установить URL",
+        "save": "Сохранить",
+        "setClip": "Вырезать клип",
+        "invalidURL": "неправильный адрес",
+        "invalidFile": "Файл поврежден",
+        "errorNoSource": "Нет источника изображения",
+        "uploadLimit": "Максимальный размер файла: {{size}}",
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
     }
 }

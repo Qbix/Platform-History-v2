@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Paść się",
             "WriteToStartConversation": "Napisz swoje myśli, aby rozpocząć rozmowę",
             "StartConversation": "Rozpocznij rozmowę",
-            "GotoConversation": "Idź do rozmowy"
-        }
+            "GotoConversation": "Idź do rozmowy",
+            "reset": "Resetowanie",
+            "edit": "Edytować",
+            "link": "Połączyć",
+            "setUrl": "Ustaw adres URL",
+            "save": "Zapisać",
+            "setClip": "Wytnij klip",
+            "invalidURL": "nieprawidłowy URL"
+        },
+        "FileTooLarge": "Plik jest za duży do buforowania. Maksymalny rozmiar pliku {{size}}",
+        "InvalidPDF": "Plik nie jest prawidłowym plikiem PDF"
     },
     "types": {
         "Websites\/article": {

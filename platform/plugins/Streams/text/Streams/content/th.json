@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "ภาพ",
-            "description": "ภาพภาพ"
+            "description": "ภาพภาพ",
+            "newItem": "ใส่รูปภาพ"
         },
         "Streams\/images": {
             "displayType": "คลังภาพ",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "ไฟล์",
-            "description": "อัพโหลดไฟล์"
+            "description": "อัพโหลดไฟล์",
+            "newItem": "เพิ่มไฟล์"
         },
         "Streams\/audio": {
             "displayType": "คลิปเสียง",
-            "description": "คลิปเสียง"
+            "description": "คลิปเสียง",
+            "newItem": "เพิ่มเสียง"
         },
         "Streams\/video": {
             "displayType": "คลิปวิดีโอ",
-            "description": "คลิปวิดีโอ"
+            "description": "คลิปวิดีโอ",
+            "newItem": "เพิ่มวิดีโอ"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "คำทักทายที่ผู้ใช้สามารถแนะนำตัวเอง",
             "displayType": "คำอวยพร"
+        },
+        "Streams\/pdf": {
+            "displayType": "เอกสาร PDF",
+            "description": "เอกสาร PDF",
+            "newItem": "เพิ่ม PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "เนื้อหานี้ถูกซ่อนจากคุณ"
+    },
+    "audio": {
+        "record": "บันทึก",
+        "reset": "รีเซ็ต",
+        "edit": "แก้ไข",
+        "title": "หัวข้อ",
+        "description": "คำอธิบาย",
+        "upload": "ที่อัพโหลด",
+        "link": "ลิงค์",
+        "setUrl": "ตั้งค่า URL",
+        "save": "บันทึก",
+        "setClip": "ตัดคลิป",
+        "invalidURL": "URL ไม่ถูกต้อง",
+        "invalidFile": "ไฟล์ไม่ถูกต้อง",
+        "errorNoSource": "ไม่มีแหล่งที่มาของเสียง",
+        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
+        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+    },
+    "video": {
+        "reset": "รีเซ็ต",
+        "edit": "แก้ไข",
+        "title": "หัวข้อ",
+        "description": "คำอธิบาย",
+        "upload": "ที่อัพโหลด",
+        "link": "ลิงค์",
+        "setUrl": "ตั้งค่า URL",
+        "save": "บันทึก",
+        "setClip": "ตัดคลิป",
+        "invalidURL": "URL ไม่ถูกต้อง",
+        "invalidFile": "ไฟล์ไม่ถูกต้อง",
+        "errorNoSource": "ไม่มีแหล่งที่มาของวิดีโอ",
+        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
+        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+    },
+    "pdf": {
+        "reset": "รีเซ็ต",
+        "edit": "แก้ไข",
+        "title": "หัวข้อ",
+        "description": "คำอธิบาย",
+        "upload": "ที่อัพโหลด",
+        "link": "ลิงค์",
+        "setUrl": "ตั้งค่า URL",
+        "save": "บันทึก",
+        "setClip": "ตัดคลิป",
+        "invalidURL": "URL ไม่ถูกต้อง",
+        "invalidFile": "ไฟล์ไม่ถูกต้อง",
+        "errorNoSource": "ไม่มีแหล่งที่มาของ pdf",
+        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
+        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+    },
+    "image": {
+        "reset": "รีเซ็ต",
+        "edit": "แก้ไข",
+        "title": "หัวข้อ",
+        "description": "คำอธิบาย",
+        "upload": "ที่อัพโหลด",
+        "link": "ลิงค์",
+        "setUrl": "ตั้งค่า URL",
+        "save": "บันทึก",
+        "setClip": "ตัดคลิป",
+        "invalidURL": "URL ไม่ถูกต้อง",
+        "invalidFile": "ไฟล์ไม่ถูกต้อง",
+        "errorNoSource": "ไม่มีแหล่งที่มาของรูปภาพ",
+        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
+        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
     }
 }

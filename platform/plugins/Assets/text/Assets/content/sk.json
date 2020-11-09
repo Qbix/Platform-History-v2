@@ -32,7 +32,12 @@
         "Buy": "kúpiť",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Suma je neplatná",
-        "ErrorInvalidCurrency": "Bohužiaľ zatiaľ nepodporujeme menu {{currency}}"
+        "ErrorInvalidCurrency": "Bohužiaľ zatiaľ nepodporujeme menu {{currency}}",
+        "WatchClip": "Získali ste {{amount}} kredity za sledovanie {{fromStreamTitle}}",
+        "PurchaseCredits": "Nákup kreditov",
+        "forMessages": {
+            "BoughtCredits": "Kreditov: {{amount}}"
+        }
     },
     "history": {
         "Date": "dátum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Nepovinný príspevok",
         "RequiredPayment": "Požadovaná platba",
         "AreYouSureDelete": "Naozaj chcete odstrániť túto službu?",
-        "AmountServicesRelated": "S touto službou súvisí {{amount}} dostupnosť. Budú tiež odstránené."
+        "AmountServicesRelated": "S touto službou súvisí {{amount}} dostupnosť. Budú tiež odstránené.",
+        "Free": "zadarmo"
     }
 }

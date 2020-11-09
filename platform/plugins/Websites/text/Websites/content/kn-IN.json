@@ -24,8 +24,17 @@
             "BrowseTheWeb": "ಬ್ರೌಸ್",
             "WriteToStartConversation": "ಸಂಭಾಷಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಬರೆಯಿರಿ",
             "StartConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-            "GotoConversation": "ಸಂಭಾಷಣೆಗೆ ಹೋಗಿ"
-        }
+            "GotoConversation": "ಸಂಭಾಷಣೆಗೆ ಹೋಗಿ",
+            "reset": "ಮರುಹೊಂದಿಸಿ",
+            "edit": "ತಿದ್ದು",
+            "link": "ಲಿಂಕ್",
+            "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+            "save": "ಉಳಿಸಿ",
+            "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+            "invalidURL": "ಅಮಾನ್ಯ URL"
+        },
+        "FileTooLarge": "ಹಿಡಿದಿಡಲು ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ. ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{size}}",
+        "InvalidPDF": "ಫೈಲ್ ಮಾನ್ಯ ಪಿಡಿಎಫ್ ಅಲ್ಲ"
     },
     "types": {
         "Websites/article": {

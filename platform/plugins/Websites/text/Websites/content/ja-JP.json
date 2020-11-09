@@ -24,8 +24,17 @@
             "BrowseTheWeb": "ブラウズ",
             "WriteToStartConversation": "会話を始めるためにあなたの考えを書きなさい",
             "StartConversation": "会話を開始",
-            "GotoConversation": "会話へ"
-        }
+            "GotoConversation": "会話へ",
+            "reset": "リセット",
+            "edit": "編集",
+            "link": "リンク",
+            "setUrl": "URLを設定する",
+            "save": "セーブ",
+            "setClip": "クリップを切り取る",
+            "invalidURL": "無効なURL"
+        },
+        "FileTooLarge": "ファイルが大きすぎてキャッシュできません。最大ファイルサイズ{{size}}",
+        "InvalidPDF": "ファイルは有効なPDFではありません"
     },
     "types": {
         "Websites/article": {

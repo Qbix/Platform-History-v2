@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "ಚಿತ್ರ",
-            "description": "ದೃಶ್ಯ ಚಿತ್ರ"
+            "description": "ದೃಶ್ಯ ಚಿತ್ರ",
+            "newItem": "ಚಿತ್ರವನ್ನು ಸೇರಿಸಿ"
         },
         "Streams\/images": {
             "displayType": "ಚಿತ್ರ ಗ್ಯಾಲರಿ",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "ಫೈಲ್",
-            "description": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್"
+            "description": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್",
+            "newItem": "ಕಡತವನ್ನು ಸೇರಿಸು"
         },
         "Streams\/audio": {
             "displayType": "ಆಡಿಯೋ ಕ್ಲಿಪ್",
-            "description": "ಆಡಿಯೋ ಕ್ಲಿಪ್"
+            "description": "ಆಡಿಯೋ ಕ್ಲಿಪ್",
+            "newItem": "ಆಡಿಯೋ ಸೇರಿಸಿ"
         },
         "Streams\/video": {
             "displayType": "ವೀಡಿಯೊ ಕ್ಲಿಪ್",
-            "description": "ವೀಡಿಯೊ ಕ್ಲಿಪ್"
+            "description": "ವೀಡಿಯೊ ಕ್ಲಿಪ್",
+            "newItem": "ವೀಡಿಯೊ ಸೇರಿಸಿ"
         },
         "Streams\/live": {
             "displayType": "ನಿರಂತರ ಪ್ರಸಾರ",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "ಬಳಕೆದಾರರು ತಮ್ಮನ್ನು ಪರಿಚಯಿಸಿಕೊಳ್ಳಬಹುದಾದ ಶುಭಾಶಯ",
             "displayType": "ಶುಭಾಶಯ"
+        },
+        "Streams\/pdf": {
+            "displayType": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
+            "description": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
+            "newItem": "ಪಿಡಿಎಫ್ ಸೇರಿಸಿ"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ಈ ವಿಷಯವನ್ನು ನಿಮ್ಮಿಂದ ಮರೆಮಾಡಲಾಗಿದೆ."
+    },
+    "audio": {
+        "record": "ದಾಖಲೆ",
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಆಡಿಯೊ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "video": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ವೀಡಿಯೊ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "pdf": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಪಿಡಿಎಫ್ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "image": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಚಿತ್ರದ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
     }
 }

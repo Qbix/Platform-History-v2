@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ საუბარში მონაწილეობის უფლება.",
         "startedConversation": "დაიწყო საუბარი",
         "RealTimeCall": "რეალურ დროში ზარი",
-        "SearchByName": "ძებნა სახელით"
+        "SearchByName": "ძებნა სახელით",
+        "Notifications": {
+            "Visit": "999}} სტუმრობს ჩეთს",
+            "Join": "{99 999}} შეუერთდა ჩეთს",
+            "Leave": "99 99 999}} დატოვა ჩატი",
+            "RelatedTo": "99 {999} }– მა დაიწყო {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "შეტყობინება {{& message.fields.type}} {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "ახალი {999}} in {{1000}",
         "Streams/relatedFrom/*": "დაამატა 99 999}} როგორც}} 1000}",
         "Streams/mention": "თქვენ 999}} მოგახსენეთ კომენტარში",
-        "Streams/call": "999 {calling მირეკავს"
+        "Streams/call": "999 }– მა რეალურ დროში დაიწყო ზარი"
     },
     "invite": {
         "messageContent": "{{displayName}} მოიწვია თქვენ {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "დარწმუნებული ხართ, რომ გამოიწერეთ ეს მოწყობილობა? ის გამორთავს შეტყობინებებს ამ მოწყობილობაზე.",
         "Identifiers": "იდენტიფიკატორები",
         "Devices": "მოწყობილობები",
-        "Streams": "ნაკადები"
+        "Streams": "ნაკადები",
+        "AreYouSureRemoveParticipant": "დარწმუნებული ხართ, რომ გსურთ ამ მონაწილის წაშლა?",
+        "RemoveParticipant": "მონაწილეების წაშლა"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "ეკრანის გაზიარება დამალვა",
             "turnOnCamera": "აჩვენეთ ვიდეო",
             "turnOnAudio": "აუდიოს გაუქმება",
-            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება"
+            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება",
+            "fullScreen": "Სრულ ეკრანზე"
         },
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
         "streamTitle": "99 999}} ცოცხალი ზარი"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "გამოსახულება",
-            "description": "ვიზუალური სურათი"
+            "description": "ვიზუალური სურათი",
+            "newItem": "სურათის დამატება"
         },
         "Streams/images": {
             "displayType": "სურათების გალერეა",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ფაილი",
-            "description": "ატვირთული ფაილი"
+            "description": "ატვირთული ფაილი",
+            "newItem": "Ფაილის დამატება"
         },
         "Streams/audio": {
             "displayType": "აუდიო კლიპი",
-            "description": "აუდიო კლიპი"
+            "description": "აუდიო კლიპი",
+            "newItem": "აუდიოს დამატება"
         },
         "Streams/video": {
             "displayType": "ვიდეოკლიპი",
-            "description": "ვიდეოკლიპი"
+            "description": "ვიდეოკლიპი",
+            "newItem": "ვიდეოს დამატება"
         },
         "Streams/live": {
             "displayType": "Პირდაპირი ეთერი",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "მისალოცი, რომელზეც მომხმარებელს შეუძლია გააცნოს საკუთარი თავი",
             "displayType": "მისალმება"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF დოკუმენტი",
+            "description": "PDF დოკუმენტი",
+            "newItem": "PDF- ის დამატება"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ეს შინაარსი შენგან იმალება."
+    },
+    "audio": {
+        "record": "ჩანაწერი",
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "აუდიოს წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "video": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "ვიდეოს წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "pdf": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "არ არის pdf წყარო",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "image": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "სურათის წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     }
 }

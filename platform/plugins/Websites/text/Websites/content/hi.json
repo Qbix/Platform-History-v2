@@ -24,8 +24,17 @@
             "BrowseTheWeb": "ब्राउज",
             "WriteToStartConversation": "बातचीत शुरू करने के लिए अपने विचार लिखें",
             "StartConversation": "बातचीत शुरू करें",
-            "GotoConversation": "बातचीत पर जाएं"
-        }
+            "GotoConversation": "बातचीत पर जाएं",
+            "reset": "रीसेट",
+            "edit": "संपादित करें",
+            "link": "संपर्क",
+            "setUrl": "URL सेट करें",
+            "save": "सहेजें",
+            "setClip": "कट आउट क्लिप",
+            "invalidURL": "अवैध यूआरएल"
+        },
+        "FileTooLarge": "कैशिंग के लिए बहुत बड़ी फ़ाइल। अधिकतम फ़ाइल आकार {{size}}",
+        "InvalidPDF": "फ़ाइल एक वैध पीडीएफ नहीं है"
     },
     "types": {
         "Websites\/article": {

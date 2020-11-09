@@ -98,5 +98,23 @@
         "inHour": "{{CMXCIX in hora}}",
         "inHours": "{{CMXCIX per horas}}",
         "inUnderMinute": "in momento in I"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Nec video fons"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Non fons pdf"
+    },
+    "clip": {
+        "SetClipStart": "Satus set clip",
+        "ClipStart": "Satus clip",
+        "SetClipEnd": "Set finem clip",
+        "ClipEnd": "finis clip"
+    },
+    "tabs": {
+        "more": "magis",
+        "Menu": "Menu"
     }
 }

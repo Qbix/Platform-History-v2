@@ -32,7 +32,12 @@
         "Buy": "ซื้อ",
         "Credits": "เครดิต",
         "ErrorInvalidAmount": "จำนวนเงินไม่ถูกต้อง",
-        "ErrorInvalidCurrency": "น่าเสียดายที่เรายังไม่รองรับสกุลเงิน {{currency}}"
+        "ErrorInvalidCurrency": "น่าเสียดายที่เรายังไม่รองรับสกุลเงิน {{currency}}",
+        "WatchClip": "ได้รับ {{amount}} เครดิตสำหรับการรับชม {{fromStreamTitle}}",
+        "PurchaseCredits": "ซื้อเครดิต",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} เครดิต"
+        }
     },
     "history": {
         "Date": "วันที่",
@@ -143,6 +148,7 @@
         "OptionalContribution": "ผลงานทางเลือก",
         "RequiredPayment": "การชำระเงินที่จำเป็น",
         "AreYouSureDelete": "คุณแน่ใจหรือว่าต้องการลบบริการนี้",
-        "AmountServicesRelated": "มี {{amount}} ความพร้อมให้บริการที่เกี่ยวข้องกับบริการนี้ พวกเขาก็จะถูกลบออก"
+        "AmountServicesRelated": "มี {{amount}} ความพร้อมให้บริการที่เกี่ยวข้องกับบริการนี้ พวกเขาก็จะถูกลบออก",
+        "Free": "ฟรี"
     }
 }

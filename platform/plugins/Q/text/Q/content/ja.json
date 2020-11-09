@@ -100,6 +100,21 @@
         "inUnderMinute": "1分未満"
     },
     "tabs": {
-        "more": "もっと"
+        "more": "もっと",
+        "Menu": "メニュー"
+    },
+    "video": {
+        "clip": "クリップ",
+        "errorNoSource": "ビデオソースなし"
+    },
+    "pdf": {
+        "clip": "クリップ",
+        "errorNoSource": "PDFソースなし"
+    },
+    "clip": {
+        "SetClipStart": "クリップ開始の設定",
+        "ClipStart": "クリップスタート",
+        "SetClipEnd": "クリップエンドを設定",
+        "ClipEnd": "クリップエンド"
     }
 }

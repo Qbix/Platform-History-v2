@@ -32,7 +32,12 @@
         "Buy": "Купуйте",
         "Credits": "Кредити",
         "ErrorInvalidAmount": "Сума недійсна",
-        "ErrorInvalidCurrency": "На жаль, ми ще не підтримуємо валюту {{currency}}"
+        "ErrorInvalidCurrency": "На жаль, ми ще не підтримуємо валюту {{currency}}",
+        "WatchClip": "Зароблені кредити на {{amount}} за перегляд {{fromStreamTitle}}",
+        "PurchaseCredits": "Покупка кредитів",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредитів"
+        }
     },
     "history": {
         "Date": "Дата",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Необов’язковий внесок",
         "RequiredPayment": "Обов’язковий платіж",
         "AreYouSureDelete": "Ви впевнені, що хочете видалити цю послугу?",
-        "AmountServicesRelated": "Є {{amount}} доступність, пов’язана з цією послугою. Вони також будуть вилучені."
+        "AmountServicesRelated": "Є {{amount}} доступність, пов’язана з цією послугою. Вони також будуть вилучені.",
+        "Free": "Безкоштовно"
     }
 }

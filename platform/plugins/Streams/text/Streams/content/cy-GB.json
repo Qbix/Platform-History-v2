@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r sgwrs hon.",
         "startedConversation": "cychwyn sgwrs",
         "RealTimeCall": "Galwad Amser Real",
-        "SearchByName": "Chwilio yn ôl enw"
+        "SearchByName": "Chwilio yn ôl enw",
+        "Notifications": {
+            "Visit": "Mae {{displayName}} yn ymweld â&#39;r sgwrs",
+            "Join": "Ymunodd {{displayName}} â&#39;r sgwrs",
+            "Leave": "Gadawodd {{displayName}} y sgwrs",
+            "RelatedTo": "Dechreuodd {{displayName}} {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Neges {{& message.fields.type}} i {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Newydd {{relationDisplayType}} yn {{toTitle}}",
         "Streams/relatedFrom/*": "Ychwanegwyd at {{toTitle}} fel {{relationDisplayType}}",
         "Streams/mention": "Soniodd {{&call 'avatar.displayName'}} amdanoch mewn sylw",
-        "Streams/call": "Mae {{displayName}} yn eich galw chi"
+        "Streams/call": "Dechreuodd {{displayName}} alwad amser real"
     },
     "invite": {
         "messageContent": "Gwahoddwyd {{displayName}} i {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ydych chi&#39;n sicr yn dad-danysgrifio&#39;r ddyfais hon? Bydd yn diffodd hysbysiadau i&#39;r ddyfais hon.",
         "Identifiers": "Dynodwyr",
         "Devices": "Dyfeisiau",
-        "Streams": "Ffrydiau"
+        "Streams": "Ffrydiau",
+        "AreYouSureRemoveParticipant": "Ydych chi&#39;n siŵr eich bod chi am gael gwared â&#39;r cyfranogwr hwn?",
+        "RemoveParticipant": "Dileu cyfranogwr"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Cuddio rhannu sgrin",
             "turnOnCamera": "Dangos fideo",
             "turnOnAudio": "Sain ddigamsyniol",
-            "turnOnScreenSharing": "Dangos rhannu sgrin"
+            "turnOnScreenSharing": "Dangos rhannu sgrin",
+            "fullScreen": "Sgrin llawn"
         },
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
         "streamTitle": "{{1}} galwad byw"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Delwedd",
-            "description": "delwedd weledol"
+            "description": "delwedd weledol",
+            "newItem": "Ychwanegu Delwedd"
         },
         "Streams/images": {
             "displayType": "Oriel Delweddau",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Ffeil",
-            "description": "ffeil wedi&#39;i llwytho i fyny"
+            "description": "ffeil wedi&#39;i llwytho i fyny",
+            "newItem": "Ychwanegu Ffeil"
         },
         "Streams/audio": {
             "displayType": "Clip Sain",
-            "description": "clip sain"
+            "description": "clip sain",
+            "newItem": "Ychwanegu Sain"
         },
         "Streams/video": {
             "displayType": "Clip Fideo",
-            "description": "clip fideo"
+            "description": "clip fideo",
+            "newItem": "Ychwanegu Fideo"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "cyfarch y gall defnyddiwr gyflwyno ei hun gydag ef",
             "displayType": "Cyfarch"
+        },
+        "Streams/pdf": {
+            "displayType": "Dogfen PDF",
+            "description": "Dogfen PDF",
+            "newItem": "Ychwanegwch PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Mae&#39;r cynnwys hwn wedi&#39;i guddio oddi wrthych chi."
+    },
+    "audio": {
+        "record": "Cofnod",
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell sain",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "video": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell fideo",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "pdf": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell pdf",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "image": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell ddelwedd",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
     }
 }

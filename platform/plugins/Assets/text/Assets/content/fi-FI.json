@@ -32,7 +32,12 @@
         "Buy": "Ostaa",
         "Credits": "Laajuus",
         "ErrorInvalidAmount": "Määrä kelpaa",
-        "ErrorInvalidCurrency": "Valitettavasti emme vielä tue valuuttaa {{currency}}"
+        "ErrorInvalidCurrency": "Valitettavasti emme vielä tue valuuttaa {{currency}}",
+        "WatchClip": "Ansaitsi {{amount}} hyvitystä katsellessasi {{fromStreamTitle}}",
+        "PurchaseCredits": "Osta hyvityksiä",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} hyvitystä"
+        }
     },
     "history": {
         "Date": "Treffi",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valinnainen rahoitusosuus",
         "RequiredPayment": "Vaadittu maksu",
         "AreYouSureDelete": "Haluatko varmasti poistaa tämän palvelun?",
-        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan."
+        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan.",
+        "Free": "Vapaa"
     }
 }

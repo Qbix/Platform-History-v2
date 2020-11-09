@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessu samtali.",
         "startedConversation": "hóf samtal",
         "RealTimeCall": "Rauntíma símtal",
-        "SearchByName": "Leitaðu með nafni"
+        "SearchByName": "Leitaðu með nafni",
+        "Notifications": {
+            "Visit": "{{displayName}} er að heimsækja spjallið",
+            "Join": "{{displayName}} tengdust spjallinu",
+            "Leave": "{{displayName}} yfirgaf spjallið",
+            "RelatedTo": "{{displayName}} byrjaði {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
         "Streams/relatedFrom/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
-        "Streams/call": "{{displayName}} hringir í þig"
+        "Streams/call": "{{displayName}} byrjaði rauntímahringingu"
     },
     "invite": {
         "messageContent": "{{displayName}} bauð þér að {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ertu viss um að segja upp áskrift að þessu tæki? Það mun slökkva á tilkynningum um þetta tæki.",
         "Identifiers": "Auðkenni",
         "Devices": "Tæki",
-        "Streams": "Straumar"
+        "Streams": "Straumar",
+        "AreYouSureRemoveParticipant": "Ertu viss um að þú viljir fjarlægja þennan þátttakanda?",
+        "RemoveParticipant": "Fjarlægðu þátttakanda"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Fela samnýtingu skjáa",
             "turnOnCamera": "Sýna myndband",
             "turnOnAudio": "Slökkva á hljóði",
-            "turnOnScreenSharing": "Sýna samnýtingu skjáa"
+            "turnOnScreenSharing": "Sýna samnýtingu skjáa",
+            "fullScreen": "Fullur skjár"
         },
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
         "streamTitle": "{{1}} símtal í beinni"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Mynd",
-            "description": "sjónræn mynd"
+            "description": "sjónræn mynd",
+            "newItem": "Bæta við mynd"
         },
         "Streams/images": {
             "displayType": "Myndasafn",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Skrá",
-            "description": "hlaðið skrá"
+            "description": "hlaðið skrá",
+            "newItem": "Bæta við skrá"
         },
         "Streams/audio": {
             "displayType": "Hljóðinnskot",
-            "description": "hljóðinnskot"
+            "description": "hljóðinnskot",
+            "newItem": "Bæta við hljóð"
         },
         "Streams/video": {
             "displayType": "Myndskeið",
-            "description": "myndskeið"
+            "description": "myndskeið",
+            "newItem": "Bæta við myndskeiði"
         },
         "Streams/live": {
             "displayType": "Bein útsending",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "kveðju sem notandi getur kynnt sér",
             "displayType": "Kveðjur"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF skjal",
+            "description": "PDF skjal",
+            "newItem": "Bæta við PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Þetta efni er falið fyrir þig."
+    },
+    "audio": {
+        "record": "Met",
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Enginn hljóðgjafi",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "video": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin myndbandsuppspretta",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "pdf": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin pdf heimild",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "image": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin myndheimild",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
     }
 }

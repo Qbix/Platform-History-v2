@@ -32,7 +32,12 @@
         "Buy": "Membeli",
         "Credits": "Kredit",
         "ErrorInvalidAmount": "Jumlah tidak valid",
-        "ErrorInvalidCurrency": "Sayangnya kami belum mendukung mata uang {{currency}}"
+        "ErrorInvalidCurrency": "Sayangnya kami belum mendukung mata uang {{currency}}",
+        "WatchClip": "Memperoleh kredit {{amount}} karena menonton {{fromStreamTitle}}",
+        "PurchaseCredits": "Beli Kredit",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit"
+        }
     },
     "history": {
         "Date": "Tanggal",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Kontribusi opsional",
         "RequiredPayment": "Pembayaran wajib",
         "AreYouSureDelete": "Anda yakin ingin menghapus layanan ini?",
-        "AmountServicesRelated": "Ada {{amount}} ketersediaan yang terkait dengan layanan ini. Mereka juga akan dihapus."
+        "AmountServicesRelated": "Ada {{amount}} ketersediaan yang terkait dengan layanan ini. Mereka juga akan dihapus.",
+        "Free": "Gratis"
     }
 }

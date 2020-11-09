@@ -24,8 +24,17 @@
             "BrowseTheWeb": "shfletoj",
             "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
             "StartConversation": "Filloni bisedën",
-            "GotoConversation": "Shkoni te Biseda"
-        }
+            "GotoConversation": "Shkoni te Biseda",
+            "reset": "Rivendos",
+            "edit": "Redakto",
+            "link": "Lidhje",
+            "setUrl": "Vendos URL",
+            "save": "Ruaj",
+            "setClip": "Klip i prerë",
+            "invalidURL": "URL e pavlefshme"
+        },
+        "FileTooLarge": "Skedari është shumë i madh për caching. Madhësia maksimale e skedarit {{size}}",
+        "InvalidPDF": "Skedari nuk është një PDF i vlefshëm"
     },
     "types": {
         "Websites/article": {

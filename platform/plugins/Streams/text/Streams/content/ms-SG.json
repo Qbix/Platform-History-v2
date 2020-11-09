@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai perbualan ini.",
         "startedConversation": "memulakan perbualan",
         "RealTimeCall": "Panggilan Masa Nyata",
-        "SearchByName": "Cari mengikut nama"
+        "SearchByName": "Cari mengikut nama",
+        "Notifications": {
+            "Visit": "{{displayName}} mengunjungi sembang",
+            "Join": "{{displayName}} menyertai sembang",
+            "Leave": "{{displayName}} keluar dari sembang",
+            "RelatedTo": "{{displayName}} memulakan {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
         "Streams/relatedFrom/*": "Ditambah pada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} menyebut anda dalam ulasan",
-        "Streams/call": "{{displayName}} memanggil anda"
+        "Streams/call": "{{displayName}} memulakan panggilan masa nyata"
     },
     "invite": {
         "messageContent": "{{displayName}} menjemput anda ke {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Adakah anda pasti berhenti melanggan peranti ini? Ia akan mematikan pemberitahuan ke peranti ini.",
         "Identifiers": "Pengenal pasti",
         "Devices": "Peranti",
-        "Streams": "Aliran"
+        "Streams": "Aliran",
+        "AreYouSureRemoveParticipant": "Adakah anda pasti mahu mengalih keluar peserta ini?",
+        "RemoveParticipant": "Alih keluar peserta"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Sembunyikan perkongsian skrin",
             "turnOnCamera": "Tunjukkan video",
             "turnOnAudio": "Redamkan suara",
-            "turnOnScreenSharing": "Tunjukkan perkongsian skrin"
+            "turnOnScreenSharing": "Tunjukkan perkongsian skrin",
+            "fullScreen": "Skrin penuh"
         },
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
         "streamTitle": "{{1}} panggilan langsung"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Gambar",
-            "description": "imej visual"
+            "description": "imej visual",
+            "newItem": "Tambah Imej"
         },
         "Streams/images": {
             "displayType": "Galeri Imej",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fail",
-            "description": "fail yang dimuat naik"
+            "description": "fail yang dimuat naik",
+            "newItem": "Tambah fail"
         },
         "Streams/audio": {
             "displayType": "Klip Audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Tambah Audio"
         },
         "Streams/video": {
             "displayType": "Klip video",
-            "description": "klip video"
+            "description": "klip video",
+            "newItem": "Tambah Video"
         },
         "Streams/live": {
             "displayType": "Siaran langsung",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "salam dengan mana pengguna boleh memperkenalkan diri mereka",
             "displayType": "Salam"
+        },
+        "Streams/pdf": {
+            "displayType": "Dokumen PDF",
+            "description": "Dokumen PDF",
+            "newItem": "Tambah PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Kandungan ini disembunyikan daripada anda."
+    },
+    "audio": {
+        "record": "Rekod",
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber audio",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "video": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber video",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "pdf": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber pdf",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "image": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber gambar",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
     }
 }

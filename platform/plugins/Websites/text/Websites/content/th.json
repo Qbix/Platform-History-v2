@@ -24,8 +24,17 @@
             "BrowseTheWeb": "หมวด",
             "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มการสนทนา",
             "StartConversation": "เริ่มการสนทนา",
-            "GotoConversation": "ไปที่การสนทนา"
-        }
+            "GotoConversation": "ไปที่การสนทนา",
+            "reset": "รีเซ็ต",
+            "edit": "แก้ไข",
+            "link": "ลิงค์",
+            "setUrl": "ตั้งค่า URL",
+            "save": "บันทึก",
+            "setClip": "ตัดคลิป",
+            "invalidURL": "URL ไม่ถูกต้อง"
+        },
+        "FileTooLarge": "ไฟล์ใหญ่เกินไปสำหรับการแคช ขนาดไฟล์สูงสุด {{size}}",
+        "InvalidPDF": "ไฟล์ไม่ใช่ PDF ที่ถูกต้อง"
     },
     "types": {
         "Websites\/article": {

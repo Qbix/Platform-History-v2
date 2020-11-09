@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai sarunai.",
         "startedConversation": "sāka sarunu",
         "RealTimeCall": "Reāllaika zvans",
-        "SearchByName": "Meklēt pēc vārda"
+        "SearchByName": "Meklēt pēc vārda",
+        "Notifications": {
+            "Visit": "{{displayName}} apmeklē tērzēšanu",
+            "Join": "{{displayName}} pievienojās tērzēšanai",
+            "Leave": "{{displayName}} pameta tērzēšanu",
+            "RelatedTo": "{{displayName}} izveidoja {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Jauns {{relationDisplayType}} {{toTitle}}",
         "Streams/relatedFrom/*": "Pievienots mapei {{toTitle}} kā {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} pieminēja jūs komentārā",
-        "Streams/call": "{{displayName}} zvana jums"
+        "Streams/call": "{{displayName}} sāka reāllaika zvanu"
     },
     "invite": {
         "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Vai tiešām atteicāties no šīs ierīces abonēšanas? Tas izslēgs paziņojumus šai ierīcei.",
         "Identifiers": "Identifikatori",
         "Devices": "Ierīces",
-        "Streams": "Straumes"
+        "Streams": "Straumes",
+        "AreYouSureRemoveParticipant": "Vai tiešām vēlaties noņemt šo dalībnieku?",
+        "RemoveParticipant": "Noņemt dalībnieku"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Slēpt ekrāna kopīgošanu",
             "turnOnCamera": "Rādīt video",
             "turnOnAudio": "Ieslēgt skaņu",
-            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu"
+            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
+            "fullScreen": "Pilnekrāna režīmā"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
         "streamTitle": "{{1}} tiešais zvans"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Attēls",
-            "description": "vizuālais tēls"
+            "description": "vizuālais tēls",
+            "newItem": "Pievienot attēlu"
         },
         "Streams/images": {
             "displayType": "Attēlu galerija",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fails",
-            "description": "augšupielādēts fails"
+            "description": "augšupielādēts fails",
+            "newItem": "Pievienot failu"
         },
         "Streams/audio": {
             "displayType": "Audio klips",
-            "description": "audio klips"
+            "description": "audio klips",
+            "newItem": "Pievienot audio"
         },
         "Streams/video": {
             "displayType": "Videoklips",
-            "description": "videoklips"
+            "description": "videoklips",
+            "newItem": "Pievienot videoklipu"
         },
         "Streams/live": {
             "displayType": "Tiešraide",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "sveiciens, ar kuru lietotājs var iepazīstināt sevi",
             "displayType": "Sveiciens"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF dokuments",
+            "description": "PDF dokuments",
+            "newItem": "Pievienot PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Šis saturs ir paslēpts no jums."
+    },
+    "audio": {
+        "record": "Ieraksts",
+        "reset": "Atiestatīt",
+        "edit": "Rediģēt",
+        "title": "nosaukums",
+        "description": "apraksts",
+        "upload": "Augšupielādēt",
+        "link": "Saite",
+        "setUrl": "Iestatīt URL",
+        "save": "Saglabāt",
+        "setClip": "Izgriezt klipu",
+        "invalidURL": "Nederīgs URL",
+        "invalidFile": "Nederīgs fails",
+        "errorNoSource": "Nav audio avota",
+        "uploadLimit": "Maksimālais faila lielums: {{size}}",
+        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+    },
+    "video": {
+        "reset": "Atiestatīt",
+        "edit": "Rediģēt",
+        "title": "nosaukums",
+        "description": "apraksts",
+        "upload": "Augšupielādēt",
+        "link": "Saite",
+        "setUrl": "Iestatīt URL",
+        "save": "Saglabāt",
+        "setClip": "Izgriezt klipu",
+        "invalidURL": "Nederīgs URL",
+        "invalidFile": "Nederīgs fails",
+        "errorNoSource": "Nav video avota",
+        "uploadLimit": "Maksimālais faila lielums: {{size}}",
+        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+    },
+    "pdf": {
+        "reset": "Atiestatīt",
+        "edit": "Rediģēt",
+        "title": "nosaukums",
+        "description": "apraksts",
+        "upload": "Augšupielādēt",
+        "link": "Saite",
+        "setUrl": "Iestatīt URL",
+        "save": "Saglabāt",
+        "setClip": "Izgriezt klipu",
+        "invalidURL": "Nederīgs URL",
+        "invalidFile": "Nederīgs fails",
+        "errorNoSource": "Nav pdf avota",
+        "uploadLimit": "Maksimālais faila lielums: {{size}}",
+        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+    },
+    "image": {
+        "reset": "Atiestatīt",
+        "edit": "Rediģēt",
+        "title": "nosaukums",
+        "description": "apraksts",
+        "upload": "Augšupielādēt",
+        "link": "Saite",
+        "setUrl": "Iestatīt URL",
+        "save": "Saglabāt",
+        "setClip": "Izgriezt klipu",
+        "invalidURL": "Nederīgs URL",
+        "invalidFile": "Nederīgs fails",
+        "errorNoSource": "Nav attēla avota",
+        "uploadLimit": "Maksimālais faila lielums: {{size}}",
+        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
     }
 }

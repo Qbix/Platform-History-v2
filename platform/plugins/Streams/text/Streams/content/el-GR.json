@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Δεν έχετε δικαίωμα να συμμετάσχετε σε αυτήν τη συζήτηση.",
         "startedConversation": "ξεκίνησε μια συνομιλία",
         "RealTimeCall": "Κλήση σε πραγματικό χρόνο",
-        "SearchByName": "Αναζήτηση βάσει ονόματος"
+        "SearchByName": "Αναζήτηση βάσει ονόματος",
+        "Notifications": {
+            "Visit": "Ο χρήστης {{displayName}} επισκέπτεται τη συζήτηση",
+            "Join": "Ο χρήστης {{displayName}} συμμετείχε στη συζήτηση",
+            "Leave": "Ο χρήστης {{displayName}} αποχώρησε από τη συζήτηση",
+            "RelatedTo": "Ο {{displayName}} ξεκίνησε ένα {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Μήνυμα {{& message.fields.type}} έως {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Νέο {{relationDisplayType}} στο {{toTitle}}",
         "Streams/relatedFrom/*": "Προστέθηκε στις {{toTitle}} ως {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} σας ανέφερε σε ένα σχόλιο",
-        "Streams/call": "{{displayName}} σας καλεί"
+        "Streams/call": "Ο χρήστης {{displayName}} ξεκίνησε μια κλήση σε πραγματικό χρόνο"
     },
     "invite": {
         "messageContent": "{{displayName}} σε προσκάλεσε σε {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Είστε βέβαιοι ότι θα καταργήσετε την εγγραφή σας στη συγκεκριμένη συσκευή; Θα απενεργοποιήσει τις ειδοποιήσεις σε αυτήν τη συσκευή.",
         "Identifiers": "Αναγνωριστικά",
         "Devices": "συσκευές",
-        "Streams": "Ροές"
+        "Streams": "Ροές",
+        "AreYouSureRemoveParticipant": "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτόν τον συμμετέχοντα;",
+        "RemoveParticipant": "Κατάργηση συμμετέχοντα"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Απόκρυψη κοινής χρήσης οθόνης",
             "turnOnCamera": "Εμφάνιση βίντεο",
             "turnOnAudio": "Σίγαση ήχου",
-            "turnOnScreenSharing": "Εμφάνιση κοινής χρήσης οθόνης"
+            "turnOnScreenSharing": "Εμφάνιση κοινής χρήσης οθόνης",
+            "fullScreen": "ΠΛΗΡΗΣ ΟΘΟΝΗ"
         },
         "notAllowedToJoinCall": "Δεν έχετε άδεια να συμμετάσχετε σε αυτήν τη ροή.",
         "streamTitle": "{{1}} ζωντανή κλήση"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Εικόνα",
-            "description": "οπτική εικόνα"
+            "description": "οπτική εικόνα",
+            "newItem": "Προσθέστε εικόνα"
         },
         "Streams/images": {
             "displayType": "Συλλογή εικόνων",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Αρχείο",
-            "description": "φορτωμένο αρχείο"
+            "description": "φορτωμένο αρχείο",
+            "newItem": "Προσθήκη αρχείου"
         },
         "Streams/audio": {
             "displayType": "Κλιπ ήχου",
-            "description": "κλιπ ήχου"
+            "description": "κλιπ ήχου",
+            "newItem": "Προσθήκη ήχου"
         },
         "Streams/video": {
             "displayType": "Βίντεο κλιπ",
-            "description": "βίντεο κλιπ"
+            "description": "βίντεο κλιπ",
+            "newItem": "Προσθήκη βίντεο"
         },
         "Streams/live": {
             "displayType": "Ζωντανή μετάδοση",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "χαιρετισμό με τον οποίο ο χρήστης μπορεί να παρουσιαστεί",
             "displayType": "Χαιρετισμός"
+        },
+        "Streams/pdf": {
+            "displayType": "Έγγραφο PDF",
+            "description": "Έγγραφο PDF",
+            "newItem": "Προσθήκη PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Αυτό το περιεχόμενο είναι κρυφό από εσάς."
+    },
+    "audio": {
+        "record": "Ρεκόρ",
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Αποθηκεύσετε",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή ήχου",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+    },
+    "video": {
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Αποθηκεύσετε",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή βίντεο",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+    },
+    "pdf": {
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Αποθηκεύσετε",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Χωρίς πηγή pdf",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+    },
+    "image": {
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Αποθηκεύσετε",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή εικόνας",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
     }
 }

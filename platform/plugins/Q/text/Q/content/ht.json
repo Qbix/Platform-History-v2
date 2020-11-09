@@ -98,5 +98,23 @@
         "inHour": "nan {{h}} èdtan",
         "inHours": "nan {{h}} èdtan",
         "inUnderMinute": "anba 1 minit"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Pa gen sous videyo"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Pa gen sous pdf"
+    },
+    "clip": {
+        "SetClipStart": "Mete Clip Start",
+        "ClipStart": "Clip Kòmanse",
+        "SetClipEnd": "Mete Clip Fen",
+        "ClipEnd": "Clip Fen"
+    },
+    "tabs": {
+        "more": "plis",
+        "Menu": "Meni"
     }
 }

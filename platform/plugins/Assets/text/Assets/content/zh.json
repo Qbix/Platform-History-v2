@@ -32,7 +32,12 @@
         "Buy": "购买",
         "Credits": "学分",
         "ErrorInvalidAmount": "金额无效",
-        "ErrorInvalidCurrency": "不幸的是，我们暂不支持货币{{currency}}"
+        "ErrorInvalidCurrency": "不幸的是，我们暂不支持货币{{currency}}",
+        "WatchClip": "观看{{fromStreamTitle}}可赚取{{amount}}积分",
+        "PurchaseCredits": "购买积分",
+        "forMessages": {
+            "BoughtCredits": "{{amount}}个积分"
+        }
     },
     "history": {
         "Date": "日期",
@@ -143,6 +148,7 @@
         "OptionalContribution": "可选的贡献",
         "RequiredPayment": "所需付款",
         "AreYouSureDelete": "您确定要删除此服务吗？",
-        "AmountServicesRelated": "有{{amount}}个与此服务有关的可用性。它们也将被删除。"
+        "AmountServicesRelated": "有{{amount}}个与此服务有关的可用性。它们也将被删除。",
+        "Free": "自由"
     }
 }

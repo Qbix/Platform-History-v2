@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Повик во реално време",
-        "SearchByName": "Пребарувајте по име"
+        "SearchByName": "Пребарувајте по име",
+        "Notifications": {
+            "Visit": "{999}} го посетува разговорот",
+            "Join": "} 99 999}} се приклучи на разговорот",
+            "Leave": "{99 999}} го напушти разговорот",
+            "RelatedTo": "{{displayName}} започна со {{1000}"
+        }
     },
     "notifications": {
         "*": "Порака {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Нови {{relationDisplayType}} за {{1000}",
         "Streams/relatedFrom/*": "Додадено на 99 999}} како}} 1000}",
         "Streams/mention": "{{&call 'avatar.displayName'}} ве спомнав во коментар",
-        "Streams/call": ". Ви се јавува 999"
+        "Streams/call": "{{999} започнале повик во реално време"
     },
     "invite": {
         "messageContent": "{{displayName}} ве покани да {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Дали сте сигурни дека се откажувате од овој уред? Willе ги исклучи известувањата на овој уред.",
         "Identifiers": "Идентификатори",
         "Devices": "Уреди",
-        "Streams": "Струи"
+        "Streams": "Струи",
+        "AreYouSureRemoveParticipant": "Дали сте сигурни дека сакате да го отстраните овој учесник?",
+        "RemoveParticipant": "Отстранете го учесникот"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Сокриј споделување на екранот",
             "turnOnCamera": "Покажи видео",
             "turnOnAudio": "Исклучете го аудио",
-            "turnOnScreenSharing": "Прикажи споделување на екранот"
+            "turnOnScreenSharing": "Прикажи споделување на екранот",
+            "fullScreen": "Цел екран"
         },
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
         "streamTitle": "99 99 999}} во живо повик"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Слика",
-            "description": "визуелна слика"
+            "description": "визуелна слика",
+            "newItem": "Додадете слика"
         },
         "Streams/images": {
             "displayType": "Галерија со слики",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Датотека",
-            "description": "поставена датотека"
+            "description": "поставена датотека",
+            "newItem": "Додај датотека"
         },
         "Streams/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио клип"
+            "description": "аудио клип",
+            "newItem": "Додајте аудио"
         },
         "Streams/video": {
             "displayType": "Видео клипот",
-            "description": "Видео клипот"
+            "description": "Видео клипот",
+            "newItem": "Додадете видео"
         },
         "Streams/live": {
             "displayType": "Пренос во живо",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "поздрав со кој корисникот може да се претстави",
             "displayType": "Поздрав"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "Додадете PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Оваа содржина е скриена од вас."
+    },
+    "audio": {
+        "record": "Сними",
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на аудио",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "video": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на видео",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "pdf": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на pdf",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "image": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на слика",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
     }
 }

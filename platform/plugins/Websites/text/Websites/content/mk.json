@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Прегледај",
             "WriteToStartConversation": "Напишете ги вашите мисли за да започнете разговор",
             "StartConversation": "Започни разговор",
-            "GotoConversation": "Одете во разговор"
-        }
+            "GotoConversation": "Одете во разговор",
+            "reset": "Ресетирај",
+            "edit": "Уредување",
+            "link": "Врска",
+            "setUrl": "Поставете URL",
+            "save": "Зачувај",
+            "setClip": "Исечете клип",
+            "invalidURL": "Неважечка URL-адреса"
+        },
+        "FileTooLarge": "Датотеката е преголема за кеширање. Максимална големина на датотека {{size}}",
+        "InvalidPDF": "Датотеката не е важечко PDF"
     },
     "types": {
         "Websites\/article": {

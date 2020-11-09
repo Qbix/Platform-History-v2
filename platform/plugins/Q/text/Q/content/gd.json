@@ -98,5 +98,23 @@
         "inHour": "ann an {{h}} uair",
         "inHours": "ann an {{h}} uairean",
         "inUnderMinute": "ann an nas lugha na 1 mhionaid"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Gun stòr bhidio"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Gun stòr pdf"
+    },
+    "clip": {
+        "SetClipStart": "Suidhich Clip Start",
+        "ClipStart": "Clip Tòisich",
+        "SetClipEnd": "Suidhich Clip End",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "tuilleadh",
+        "Menu": "Clàr"
     }
 }

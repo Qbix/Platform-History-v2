@@ -32,7 +32,12 @@
         "Buy": "Ixtri",
         "Credits": "Krediti",
         "ErrorInvalidAmount": "Ammont mhux validu",
-        "ErrorInvalidCurrency": "Sfortunatament għadna ma nappoġġjawx il-munita {{currency}}"
+        "ErrorInvalidCurrency": "Sfortunatament għadna ma nappoġġjawx il-munita {{currency}}",
+        "WatchClip": "Ksibt {{amount}} krediti talli segwi {{fromStreamTitle}}",
+        "PurchaseCredits": "Ixtri Krediti",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} krediti"
+        }
     },
     "history": {
         "Date": "Data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Kontribuzzjoni mhux obbligatorja",
         "RequiredPayment": "Ħlas meħtieġ",
         "AreYouSureDelete": "Int żgur li trid tħassar dan is-servizz?",
-        "AmountServicesRelated": "Hemm {{amount}} disponibbilitajiet relatati ma &#39;dan is-servizz. Huma wkoll se jitneħħew."
+        "AmountServicesRelated": "Hemm {{amount}} disponibbilitajiet relatati ma &#39;dan is-servizz. Huma wkoll se jitneħħew.",
+        "Free": "B&#39;xejn"
     }
 }

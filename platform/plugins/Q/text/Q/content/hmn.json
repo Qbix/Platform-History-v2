@@ -98,5 +98,23 @@
         "inHour": "hauv {{h}} teev",
         "inHours": "hauv {{h}} teev",
         "inUnderMinute": "hauv qab 1 feeb"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Tsis muaj cov zis video"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Tsis muaj pdf los"
+    },
+    "clip": {
+        "SetClipStart": "Teem Clip Pib",
+        "ClipStart": "Clip Pib",
+        "SetClipEnd": "Teev Clip Kawg",
+        "ClipEnd": "Clip Xaus"
+    },
+    "tabs": {
+        "more": "ntxiv",
+        "Menu": "Ntawv qhia zaub mov"
     }
 }

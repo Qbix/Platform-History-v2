@@ -270,7 +270,8 @@
         },
         "Streams/image": {
             "displayType": "תמונה",
-            "description": "תמונה חזותית"
+            "description": "תמונה חזותית",
+            "newItem": "להוסיף תמונה"
         },
         "Streams/images": {
             "displayType": "גלריית תמונות",
@@ -282,15 +283,18 @@
         },
         "Streams/file": {
             "displayType": "קובץ",
-            "description": "הקובץ שהועלה"
+            "description": "הקובץ שהועלה",
+            "newItem": "הוסף קובץ"
         },
         "Streams/audio": {
             "displayType": "קליפ שמע",
-            "description": "קליפ שמע"
+            "description": "קליפ שמע",
+            "newItem": "הוסף אודיו"
         },
         "Streams/video": {
             "displayType": "סרטון וידאו",
-            "description": "סרטון וידאו"
+            "description": "סרטון וידאו",
+            "newItem": "הוסף וידיאו"
         },
         "Streams/live": {
             "displayType": "שידור חי",
@@ -331,6 +335,11 @@
         "Streams/greeting": {
             "description": "ברכה בה המשתמש יכול להציג את עצמו",
             "displayType": "ברכה"
+        },
+        "Streams/pdf": {
+            "displayType": "מסמך PDF",
+            "description": "מסמך PDF",
+            "newItem": "הוסף PDF"
         }
     },
     "messages": {
@@ -361,5 +370,70 @@
     },
     "errors": {
         "HiddenFromYou": "תוכן זה מוסתר מכם."
+    },
+    "audio": {
+        "record": "תקליט",
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת אתר",
+        "save": "להציל",
+        "setClip": "גזור קליפ",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור שמע",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+    },
+    "video": {
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת אתר",
+        "save": "להציל",
+        "setClip": "גזור קליפ",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור וידאו",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+    },
+    "pdf": {
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת אתר",
+        "save": "להציל",
+        "setClip": "גזור קליפ",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור pdf",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+    },
+    "image": {
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת אתר",
+        "save": "להציל",
+        "setClip": "גזור קליפ",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור תמונה",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
     }
 }

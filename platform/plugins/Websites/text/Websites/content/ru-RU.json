@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Просматривать",
             "WriteToStartConversation": "Напишите свои мысли, чтобы начать разговор",
             "StartConversation": "Начать разговор",
-            "GotoConversation": "Перейти к разговору"
-        }
+            "GotoConversation": "Перейти к разговору",
+            "reset": "Сброс настроек",
+            "edit": "редактировать",
+            "link": "Ссылка на сайт",
+            "setUrl": "Установить URL",
+            "save": "Сохранить",
+            "setClip": "Вырезать клип",
+            "invalidURL": "неправильный адрес"
+        },
+        "FileTooLarge": "Файл слишком велик для кеширования. Максимальный размер файла {{size}}",
+        "InvalidPDF": "Файл не является действующим PDF-файлом"
     },
     "types": {
         "Websites/article": {

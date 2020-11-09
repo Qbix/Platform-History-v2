@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Obraz",
-            "description": "obraz wzrokowy"
+            "description": "obraz wzrokowy",
+            "newItem": "Dodaj obraz"
         },
         "Streams\/images": {
             "displayType": "Galeria obrazów",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Plik",
-            "description": "przesłany plik"
+            "description": "przesłany plik",
+            "newItem": "Dodaj plik"
         },
         "Streams\/audio": {
             "displayType": "Klip audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Dodaj dźwięk"
         },
         "Streams\/video": {
             "displayType": "Klip wideo",
-            "description": "klip wideo"
+            "description": "klip wideo",
+            "newItem": "Dodaj wideo"
         },
         "Streams\/live": {
             "displayType": "Transmisja na żywo",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "powitanie, z którym użytkownik może się przedstawić",
             "displayType": "Powitanie"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Dodaj PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ta treść jest przed tobą ukryta."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła dźwięku",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "video": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła wideo",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła PDF",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "image": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła obrazu",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
     }
 }

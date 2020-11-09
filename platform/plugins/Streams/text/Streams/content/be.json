@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Выява",
-            "description": "візуальны вобраз"
+            "description": "візуальны вобраз",
+            "newItem": "Дадаць малюнак"
         },
         "Streams\/images": {
             "displayType": "Галерэя малюнкаў",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "загружаны файл"
+            "description": "загружаны файл",
+            "newItem": "Дадаць файл"
         },
         "Streams\/audio": {
             "displayType": "Аўдыёкліп",
-            "description": "аўдыёкліп"
+            "description": "аўдыёкліп",
+            "newItem": "Дадаць аўдыя"
         },
         "Streams\/video": {
             "displayType": "Відэа кліп",
-            "description": "відэа кліп"
+            "description": "відэа кліп",
+            "newItem": "Дадаць відэа"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "прывітанне, з якім карыстальнік можа прадставіць сябе",
             "displayType": "Прывітанне"
+        },
+        "Streams\/pdf": {
+            "displayType": "Дакумент PDF",
+            "description": "Дакумент PDF",
+            "newItem": "Дадаць PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Гэта ўтрыманне ад вас схавана."
+    },
+    "audio": {
+        "record": "Запіс",
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы гуку",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "video": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы відэа",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "pdf": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы pdf",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "image": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы выявы",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
     }
 }

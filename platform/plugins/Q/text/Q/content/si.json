@@ -98,5 +98,23 @@
         "inHour": "{{h}} පැය තුළ",
         "inHours": "{{h}} පැය වලින්",
         "inUnderMinute": "මිනිත්තු 1 ට අඩු"
+    },
+    "video": {
+        "clip": "ක්ලිප්",
+        "errorNoSource": "වීඩියෝ ප්‍රභවයක් නොමැත"
+    },
+    "pdf": {
+        "clip": "ක්ලිප්",
+        "errorNoSource": "පීඩීඑෆ් ප්‍රභවයක් නොමැත"
+    },
+    "clip": {
+        "SetClipStart": "ක්ලිප් ආරම්භය සකසන්න",
+        "ClipStart": "ක්ලිප් ආරම්භය",
+        "SetClipEnd": "ක්ලිප් අවසානය සකසන්න",
+        "ClipEnd": "ක්ලිප් අවසානය"
+    },
+    "tabs": {
+        "more": "තවත්",
+        "Menu": "මෙනු"
     }
 }

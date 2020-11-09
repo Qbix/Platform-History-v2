@@ -24,8 +24,17 @@
             "BrowseTheWeb": "עיון",
             "WriteToStartConversation": "כתוב את המחשבות שלך כדי להתחיל את השיחה",
             "StartConversation": "התחל שיחה",
-            "GotoConversation": "עבור אל שיחה"
-        }
+            "GotoConversation": "עבור אל שיחה",
+            "reset": "אִתחוּל",
+            "edit": "לַעֲרוֹך",
+            "link": "קישור",
+            "setUrl": "הגדר כתובת אתר",
+            "save": "להציל",
+            "setClip": "גזור קליפ",
+            "invalidURL": "כתובת אתר לא חוקית"
+        },
+        "FileTooLarge": "הקובץ גדול מדי למטמון. גודל קובץ מקסימלי {{size}}",
+        "InvalidPDF": "הקובץ אינו PDF תקף"
     },
     "types": {
         "Websites\/article": {

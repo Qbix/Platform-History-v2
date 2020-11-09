@@ -32,7 +32,12 @@
         "Buy": "Alın",
         "Credits": "Kreditlər",
         "ErrorInvalidAmount": "Məbləğ etibarsızdır",
-        "ErrorInvalidCurrency": "Təəssüf ki, hələ {{currency}} valyuta bilmir"
+        "ErrorInvalidCurrency": "Təəssüf ki, hələ {{currency}} valyuta bilmir",
+        "WatchClip": "{{fromStreamTitle}} filmini izləmək üçün {{amount}} kredit qazandı",
+        "PurchaseCredits": "Satınalma kreditləri",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit"
+        }
     },
     "history": {
         "Date": "Tarix",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Könüllü töhfə",
         "RequiredPayment": "Tələb olunan ödəniş",
         "AreYouSureDelete": "Bu xidməti silmək istədiyinizə əminsiniz?",
-        "AmountServicesRelated": "Bu xidmətlə əlaqəli {{amount}} çatışmazlıqlar var. Bunlar da çıxarılacaq."
+        "AmountServicesRelated": "Bu xidmətlə əlaqəli {{amount}} çatışmazlıqlar var. Bunlar da çıxarılacaq.",
+        "Free": "Pulsuz"
     }
 }

@@ -73,7 +73,8 @@
         "ok": "Go"
     },
     "tabs": {
-        "more": "more"
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
         "errorReadingFile": "Error reading file",

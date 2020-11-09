@@ -98,5 +98,23 @@
         "inHour": "{{h}} ڪلاڪ ۾",
         "inHours": "{{h}} ڪلاڪن ۾",
         "inUnderMinute": "1 منٽ کان گهٽ ۾"
+    },
+    "video": {
+        "clip": "ڪلپ",
+        "errorNoSource": "ويڊيو جو ذريعو ناهي"
+    },
+    "pdf": {
+        "clip": "ڪلپ",
+        "errorNoSource": "پي آر ايف جو ذريعو نه آھي"
+    },
+    "clip": {
+        "SetClipStart": "سيٽ ڪلپ سيٽ ڪريو",
+        "ClipStart": "ڪلپ شروع",
+        "SetClipEnd": "ڪلپ آخر کي سيٽ ڪريو",
+        "ClipEnd": "ڪلپ آخر"
+    },
+    "tabs": {
+        "more": "وڌيڪ",
+        "Menu": "خوراڪ نامو"
     }
 }

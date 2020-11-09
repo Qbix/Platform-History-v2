@@ -32,7 +32,12 @@
         "Buy": "Koop",
         "Credits": "krediete",
         "ErrorInvalidAmount": "Bedrag ongeldig",
-        "ErrorInvalidCurrency": "Ongelukkig ondersteun ons nog nie geldeenheid {{currency}} nie"
+        "ErrorInvalidCurrency": "Ongelukkig ondersteun ons nog nie geldeenheid {{currency}} nie",
+        "WatchClip": "Verdien {{amount}} krediete vir kyk {{fromStreamTitle}}",
+        "PurchaseCredits": "Koop krediete",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} krediete"
+        }
     },
     "history": {
         "Date": "datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Opsionele bydrae",
         "RequiredPayment": "Vereiste betaling",
         "AreYouSureDelete": "Is u seker dat u hierdie diens wil uitvee?",
-        "AmountServicesRelated": "Daar is {{amount}} beskikbaarhede wat met hierdie diens verband hou. Hulle word ook verwyder."
+        "AmountServicesRelated": "Daar is {{amount}} beskikbaarhede wat met hierdie diens verband hou. Hulle word ook verwyder.",
+        "Free": "Vry"
     }
 }

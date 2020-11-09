@@ -101,6 +101,21 @@
         "inUnderMinute": "1 ನಿಮಿಷದಲ್ಲಿ"
     },
     "tabs": {
-        "more": "ಹೆಚ್ಚು"
+        "more": "ಹೆಚ್ಚು",
+        "Menu": "ಮೆನು"
+    },
+    "video": {
+        "clip": "ಕ್ಲಿಪ್",
+        "errorNoSource": "ವೀಡಿಯೊ ಮೂಲವಿಲ್ಲ"
+    },
+    "pdf": {
+        "clip": "ಕ್ಲಿಪ್",
+        "errorNoSource": "ಪಿಡಿಎಫ್ ಮೂಲವಿಲ್ಲ"
+    },
+    "clip": {
+        "SetClipStart": "ಕ್ಲಿಪ್ ಪ್ರಾರಂಭವನ್ನು ಹೊಂದಿಸಿ",
+        "ClipStart": "ಕ್ಲಿಪ್ ಪ್ರಾರಂಭ",
+        "SetClipEnd": "ಕ್ಲಿಪ್ ಎಂಡ್ ಹೊಂದಿಸಿ",
+        "ClipEnd": "ಕ್ಲಿಪ್ ಎಂಡ್"
     }
 }

@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Slika",
-            "description": "vizualna podoba"
+            "description": "vizualna podoba",
+            "newItem": "Dodaj sliko"
         },
         "Streams\/images": {
             "displayType": "Galerija slik",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "mapa",
-            "description": "naložena datoteka"
+            "description": "naložena datoteka",
+            "newItem": "Dodaj datoteko"
         },
         "Streams\/audio": {
             "displayType": "Avdio posnetek",
-            "description": "avdio posnetek"
+            "description": "avdio posnetek",
+            "newItem": "Dodaj zvok"
         },
         "Streams\/video": {
             "displayType": "Video posnetek",
-            "description": "video posnetek"
+            "description": "video posnetek",
+            "newItem": "Dodaj video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "pozdrav, s katerim se lahko uporabnik predstavi",
             "displayType": "Lep pozdrav"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Dodaj PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ta vsebina je skrita pred vami."
+    },
+    "audio": {
+        "record": "Snemaj",
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni zvočnega vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "video": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni video vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "pdf": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni pdf vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "image": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni vira slike",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
     }
 }

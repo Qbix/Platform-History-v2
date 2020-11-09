@@ -270,7 +270,8 @@
         },
         "Streams/image": {
             "displayType": "Bilde",
-            "description": "visuelt bilde"
+            "description": "visuelt bilde",
+            "newItem": "Legg til bilde"
         },
         "Streams/images": {
             "displayType": "bildegalleri",
@@ -282,15 +283,18 @@
         },
         "Streams/file": {
             "displayType": "Fil",
-            "description": "lastet opp fil"
+            "description": "lastet opp fil",
+            "newItem": "Legg til fil"
         },
         "Streams/audio": {
             "displayType": "Lydklipp",
-            "description": "lydklipp"
+            "description": "lydklipp",
+            "newItem": "Legg til lyd"
         },
         "Streams/video": {
             "displayType": "Videoklipp",
-            "description": "videoklipp"
+            "description": "videoklipp",
+            "newItem": "Legg til video"
         },
         "Streams/live": {
             "displayType": "Direktestrømming",
@@ -331,6 +335,11 @@
         "Streams/greeting": {
             "description": "hilsen som en bruker kan presentere seg med",
             "displayType": "Hilsen"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Legg til PDF"
         }
     },
     "messages": {
@@ -361,5 +370,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dette innholdet er skjult for deg."
+    },
+    "audio": {
+        "record": "Ta opp",
+        "reset": "Nullstille",
+        "edit": "Redigere",
+        "title": "tittel",
+        "description": "beskrivelse",
+        "upload": "Laste opp",
+        "link": "Link",
+        "setUrl": "Angi URL",
+        "save": "Lagre",
+        "setClip": "Klipp ut klippet",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen lydkilde",
+        "uploadLimit": "Maks filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
+    },
+    "video": {
+        "reset": "Nullstille",
+        "edit": "Redigere",
+        "title": "tittel",
+        "description": "beskrivelse",
+        "upload": "Laste opp",
+        "link": "Link",
+        "setUrl": "Angi URL",
+        "save": "Lagre",
+        "setClip": "Klipp ut klippet",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen videokilde",
+        "uploadLimit": "Maks filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
+    },
+    "pdf": {
+        "reset": "Nullstille",
+        "edit": "Redigere",
+        "title": "tittel",
+        "description": "beskrivelse",
+        "upload": "Laste opp",
+        "link": "Link",
+        "setUrl": "Angi URL",
+        "save": "Lagre",
+        "setClip": "Klipp ut klippet",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen pdf-kilde",
+        "uploadLimit": "Maks filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
+    },
+    "image": {
+        "reset": "Nullstille",
+        "edit": "Redigere",
+        "title": "tittel",
+        "description": "beskrivelse",
+        "upload": "Laste opp",
+        "link": "Link",
+        "setUrl": "Angi URL",
+        "save": "Lagre",
+        "setClip": "Klipp ut klippet",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen bildekilde",
+        "uploadLimit": "Maks filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
     }
 }

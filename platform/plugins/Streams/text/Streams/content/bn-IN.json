@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "আপনার এই কথোপকথনে যোগদানের অনুমতি নেই।",
         "startedConversation": "একটি কথোপকথন শুরু",
         "RealTimeCall": "রিয়েল টাইম কল",
-        "SearchByName": "নাম দ্বারা অনুসন্ধান"
+        "SearchByName": "নাম দ্বারা অনুসন্ধান",
+        "Notifications": {
+            "Visit": "{{999} chat চ্যাটটি পরিদর্শন করছে",
+            "Join": "{{999} chat চ্যাটে যোগ দিয়েছে",
+            "Leave": "The 9 999} the চ্যাট ছেড়ে গেছে",
+            "RelatedTo": "{{999} a একটি {{stream.displayType}} শুরু করেছে"
+        }
     },
     "notifications": {
         "*": "বার্তা {{& message.fields.type}} থেকে {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} এ নতুন {9 999}",
         "Streams/relatedFrom/*": "{{10009} হিসাবে {{999} to এ যুক্ত হয়েছে",
         "Streams/mention": "{{999} a একটি মন্তব্যে আপনাকে উল্লেখ করেছে",
-        "Streams/call": "{{999} you আপনাকে কল করছে"
+        "Streams/call": "{{999} a একটি রিয়েল-টাইম কল শুরু করেছে"
     },
     "invite": {
         "messageContent": "{{displayName}} আপনাকে {{inviteUrl}} এ আমন্ত্রণ জানিয়েছে",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "আপনি কি নিশ্চিত যে এই ডিভাইসটি সাবস্ক্রাইব করেছেন? এটি এই ডিভাইসে বিজ্ঞপ্তিগুলি বন্ধ করবে।",
         "Identifiers": "শনাক্তকারী",
         "Devices": "ডিভাইস",
-        "Streams": "প্রবাহের"
+        "Streams": "প্রবাহের",
+        "AreYouSureRemoveParticipant": "আপনি কি এই অংশগ্রহণকারীকে সরানোর বিষয়ে নিশ্চিত?",
+        "RemoveParticipant": "অংশগ্রহণকারীকে সরান"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "স্ক্রিন ভাগ করে নেওয়ার বিষয়টি লুকান",
             "turnOnCamera": "ভিডিও দেখান",
             "turnOnAudio": "অডিও নিঃশব্দ করুন",
-            "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান"
+            "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান",
+            "fullScreen": "পূর্ণ পর্দা"
         },
         "notAllowedToJoinCall": "আপনার কাছে এই স্ট্রিমে যোগদানের অনুমতি নেই।",
         "streamTitle": "} 9 999}} লাইভ কল"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "ভাবমূর্তি",
-            "description": "দৃষ্টি নির্ভর ছবি"
+            "description": "দৃষ্টি নির্ভর ছবি",
+            "newItem": "ছবি যোগ কর"
         },
         "Streams/images": {
             "displayType": "ছবির গ্যালারি",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ফাইল",
-            "description": "আপলোড করা ফাইল"
+            "description": "আপলোড করা ফাইল",
+            "newItem": "ফাইল যুক্ত কর"
         },
         "Streams/audio": {
             "displayType": "অডিও ক্লিপ",
-            "description": "অডিও ক্লিপ"
+            "description": "অডিও ক্লিপ",
+            "newItem": "অডিও যুক্ত করুন"
         },
         "Streams/video": {
             "displayType": "ভিডিও ক্লিপ",
-            "description": "ভিডিও ক্লিপ"
+            "description": "ভিডিও ক্লিপ",
+            "newItem": "ভিডিও যোগ করুন"
         },
         "Streams/live": {
             "displayType": "সরাসরি সম্প্রচার",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "অভিবাদন যা দিয়ে একজন ব্যবহারকারী তাদের পরিচয় দিতে পারে",
             "displayType": "অভিবাদন"
+        },
+        "Streams/pdf": {
+            "displayType": "পিডিএফ ডকুমেন্ট",
+            "description": "পিডিএফ ডকুমেন্ট",
+            "newItem": "পিডিএফ যুক্ত করুন"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "এই বিষয়বস্তু আপনার কাছ থেকে লুকানো আছে।"
+    },
+    "audio": {
+        "record": "রেকর্ড",
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও অডিও উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "video": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও ভিডিও উত্স নয়",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "pdf": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও পিডিএফ উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "image": {
+        "reset": "রিসেট",
+        "edit": "সম্পাদনা করুন",
+        "title": "শিরোনাম",
+        "description": "বর্ণনা",
+        "upload": "আপলোড করুন",
+        "link": "লিঙ্ক",
+        "setUrl": "ইউআরএল সেট করুন",
+        "save": "সংরক্ষণ",
+        "setClip": "ক্লিপ কাট",
+        "invalidURL": "অবৈধ ইউআরএল",
+        "invalidFile": "অবৈধ ফাইল",
+        "errorNoSource": "কোনও চিত্রের উত্স নেই",
+        "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
+        "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
     }
 }

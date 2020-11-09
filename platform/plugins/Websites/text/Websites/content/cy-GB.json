@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Pori",
             "WriteToStartConversation": "Ysgrifennwch eich meddyliau i gychwyn y sgwrs",
             "StartConversation": "Sgwrs Dechrau",
-            "GotoConversation": "Ewch i&#39;r Sgwrs"
-        }
+            "GotoConversation": "Ewch i&#39;r Sgwrs",
+            "reset": "Ail gychwyn",
+            "edit": "Golygu",
+            "link": "Dolen",
+            "setUrl": "Gosod URL",
+            "save": "Arbedwch",
+            "setClip": "Clip Torri Allan",
+            "invalidURL": "URL annilys"
+        },
+        "FileTooLarge": "Ffeil yn rhy fawr ar gyfer caching. Maint ffeil mwyaf {{size}}",
+        "InvalidPDF": "Nid yw&#39;r ffeil yn PDF dilys"
     },
     "types": {
         "Websites/article": {

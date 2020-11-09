@@ -32,7 +32,12 @@
         "Buy": "Compre",
         "Credits": "Créditos",
         "ErrorInvalidAmount": "Cantidade non válida",
-        "ErrorInvalidCurrency": "Por desgraza aínda non admitimos a moeda {{currency}}"
+        "ErrorInvalidCurrency": "Por desgraza aínda non admitimos a moeda {{currency}}",
+        "WatchClip": "Obtivo {{amount}} créditos por ver {{fromStreamTitle}}",
+        "PurchaseCredits": "Compra de créditos",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} créditos"
+        }
     },
     "history": {
         "Date": "Data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Contribución facultativa",
         "RequiredPayment": "Pago obrigatorio",
         "AreYouSureDelete": "Está seguro de que quere eliminar este servizo?",
-        "AmountServicesRelated": "Hai {{amount}} dispoñibilidades relacionadas con este servizo. Tamén se eliminarán."
+        "AmountServicesRelated": "Hai {{amount}} dispoñibilidades relacionadas con este servizo. Tamén se eliminarán.",
+        "Free": "De balde"
     }
 }
