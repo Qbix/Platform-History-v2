@@ -180,7 +180,7 @@
 				});
 				chatMessageContent = chatMessageContent.replace(string, avatarTool);
 			});
-			$chatMessageContent.html(chatMessageContent, true);
+			$chatMessageContent.html(chatMessageContent, true).activate();
 
 			// mark element as processed
 			element.attr('data-mentionsProcessed', 1);
