@@ -104,7 +104,8 @@ Q.text = {
 			"ok": "Go"
 		},
 		"tabs": {
-			"more": "more"
+			"more": "more",
+			"Menu": "Menu"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -9612,7 +9613,8 @@ function _activateTools(toolElement, options, shared) {
 			var _constructor = _constructors[toolName];
 			var result = new _constructor(toolElement, options);
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			shared.tools[toolId] = shared.tool = tool;
+			shared.tool = tool;
+			Q.setObject([toolId, toolName], tool, shared);
 			if (uniqueToolId) {
 				if (uniqueToolId === shared.firstToolId) {
 					shared.firstTool = tool;

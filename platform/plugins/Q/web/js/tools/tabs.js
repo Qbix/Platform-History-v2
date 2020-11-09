@@ -526,8 +526,8 @@
 				var $tab = $(state.tab);
 				var values = {
 					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.more,
-					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.more,
+					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
 					more: Q.text.Q.tabs.more,
 					classes: $tab.attr('class')
 				};

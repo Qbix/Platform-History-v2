@@ -227,7 +227,7 @@
 
 				chatMessageContent = chatMessageContent.replace(url, "<a href='" + href + "' target='_blank'>" + url + "</a>");
 			});
-			$chatMessageContent.html(chatMessageContent);
+			$chatMessageContent.html(chatMessageContent, true);
 
 			instructions = Q.getObject('Websites/webpages', JSON.parse(instructions || null));
 			if (instructions) {
