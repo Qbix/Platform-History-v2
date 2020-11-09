@@ -127,35 +127,34 @@
 }
 
 /********** <Composer> *************/
-.Websites_webpage_composer {
+.Websites_dialog_webpage {
+	min-width: 330px;
+}
+.Websites_dialog_webpage .Websites_webpage_composer {
 	padding: 10px;
 	position: relative;
 }
-.Websites_webpage_composer .Q_tabbing_item[data-content=record] {
+.Websites_dialog_webpage .Websites_webpage_composer .Q_tabbing_item[data-content=record] {
 	position: relative;
 }
 
-.Websites_webpage_composer button {
+.Websites_dialog_webpage .Websites_webpage_composer button {
 	display: block;
 	margin: 0 auto;
 	text-align: center;
 }
-.Websites_webpage_composer label[for=url] {
+.Websites_dialog_webpage .Websites_webpage_composer label[for=url] {
 	margin-top: 10px;
 	display: block;
 	white-space: nowrap;
 }
-.Websites_webpage_composer label[for=url] button,
-.Websites_webpage_composer label[for=url] input {
+.Websites_dialog_webpage .Websites_webpage_composer label[for=url] button,
+.Websites_dialog_webpage .Websites_webpage_composer label[for=url] input {
 	display: inline-block;
 }
-.Websites_webpage_composer label[for=url] input {
+.Websites_dialog_webpage .Websites_webpage_composer label[for=url] input {
 	width: 60%;
 	margin-right: 5px;
-}
-
-.Websites_dialog_webpage {
-	min-width: 330px;
 }
 
 .Websites_dialog_webpage .Q_tabbing_container .Q_tabbing_item {
