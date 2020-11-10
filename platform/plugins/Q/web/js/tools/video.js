@@ -13,6 +13,7 @@
  *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
+ *  @param {Integer} [options.positionUpdatePeriod=1000] Time period to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
 Q.Tool.define("Q/video", function (options) {
@@ -119,7 +120,7 @@ Q.Tool.define("Q/video", function (options) {
 			var start = state.start || state.clipStart;
 			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
 
-			var videoId = state.url.match(/\/videos\/([0-9]+).*$/);
+			var videoId = state.url.match(/\/videos?\/([0-9]+).*$/);
 			var channel = state.url.match(new RegExp(host + "/(\\w+)"));
 			if (videoId) {
 				options.video = videoId[1];
@@ -132,34 +133,33 @@ Q.Tool.define("Q/video", function (options) {
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
 				state.player.currentTime = function (time) {
-					state.player.seek(time);
-				};
+					if (!isNaN(time)) {
+						state.player.seek(time);
+						return time;
+					}
 
-				var _getCurrentPostion = function () {
-					return Math.trunc(state.player.getCurrentTime() * 1000);
+					return state.player.getCurrentTime();
+				};
+				state.player.muted = function (value) {
+					if (typeof value === "boolean") {
+						state.player.setMuted(value);
+					} else {
+						return state.player.getMuted();
+					}
 				};
 
 				var onPlay = Q.throttle(function () {
-					state.currentPosition = _getCurrentPostion();
+					state.currentPosition = tool.getCurrentPosition();
 					console.log("Started at position " + state.currentPosition + " milliseconds");
 					Q.handle(state.onPlay, tool);
-
-					// clear timer if exist
-					tool.clearPlayInterval();
-
-					// start new timer to change needed layout params during play
-					state.playIntervalID = setInterval(function(){
-						state.currentPosition = _getCurrentPostion();
-						Q.handle(state.onPlaying, tool);
-					}, 100);
 				}, throttle);
 				var onPause = Q.throttle(function () {
-					var position = _getCurrentPostion();
+					var position = tool.getCurrentPosition();
 					console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
 				}, throttle);
 				var onEnded = Q.throttle(function () {
-					var position = _getCurrentPostion();
+					var position = tool.getCurrentPosition();
 					console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
 				}, throttle);
@@ -191,6 +191,7 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	throttle: 10,
 	currentPosition: 0,
+	positionUpdatePeriod: 1000,
 	start: null,
 	clipStart: null,
 	clipEnd: null,
@@ -202,9 +203,36 @@ Q.Tool.define("Q/video", function (options) {
 		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
-	onLoad: new Q.Event(),
+	onLoad: new Q.Event(function () {
+		var start = 0;
+		var state = this.state;
+
+		if (state.clipStart !== null) {
+			start = parseInt(state.clipStart);
+		}
+		if (state.start !== null) {
+			start = parseInt(state.start);
+		}
+
+		this.setCurrentPosition(start, true);
+	}),
 	onPlay: new Q.Event(function () {
+		var tool = this;
+		var state = this.state;
+
 		this.checkClip();
+
+		tool.clearPlayInterval();
+		state.playIntervalID = setInterval(function() {
+			var currentPosition = tool.getCurrentPosition();
+
+			if (state.currentPosition === currentPosition) {
+				return;
+			}
+
+			state.currentPosition = currentPosition;
+			Q.handle(state.onPlaying, tool, [tool]);
+		}, state.positionUpdatePeriod);
 	}),
 	onPlaying: new Q.Event(function () {
 		this.checkClip();
@@ -227,13 +255,14 @@ Q.Tool.define("Q/video", function (options) {
 	checkClip: function () {
 		var tool = this;
 		var state = this.state;
+		var currentPosition = tool.getCurrentPosition();
 
 		// clipStart handler
-		if (state.clipStart && state.currentPosition < state.clipStart) {
+		if (state.clipStart && currentPosition < state.clipStart) {
 			tool.setCurrentPosition(state.clipStart);
 		}
 		// clipStart handler
-		if (state.clipEnd && state.currentPosition > state.clipEnd) {
+		if (state.clipEnd && currentPosition > state.clipEnd) {
 			tool.pause();
 			tool.setCurrentPosition(state.clipEnd);
 		}
@@ -264,44 +293,30 @@ Q.Tool.define("Q/video", function (options) {
 		}, function (err, html) {
 			tool.element.innerHTML = html;
 
-			var _getCurrentPostion = function () {
-				return Math.trunc(state.player.currentTime() * 1000);
-			};
-
 			var onPlay = Q.throttle(function () {
-				var position = state.currentPosition || _getCurrentPostion();
+				var position = state.currentPosition || tool.getCurrentPosition();
 				console.log("Started at position " + position + " milliseconds");
+
 				Q.handle(state.onPlay, tool, [position]);
 			}, throttle);
 			var onPause = Q.throttle(function () {
-				var position = state.currentPosition || _getCurrentPostion();
+				var position = state.currentPosition || tool.getCurrentPosition();
 				console.log("Paused at position " + position + " milliseconds");
 				Q.handle(state.onPause, tool, [position]);
 			}, throttle);
 			var onSeek = Q.throttle(function () {
-				var position = state.currentPosition || _getCurrentPostion();
+				var position = state.currentPosition || tool.getCurrentPosition();
 				console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onSeek, tool, [position]);
 			}, throttle);
 			var onEnded = Q.throttle(function () {
-				var position = state.currentPosition || _getCurrentPostion();
+				var position = state.currentPosition || tool.getCurrentPosition();
 				console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onEnded, tool, [position]);
 			}, throttle);
 
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
 				videojs.log('Your player is ready!');
-
-				var start = null;
-
-				if (state.clipStart !== null) {
-					start = parseInt(state.clipStart)/1000;
-				}
-				if (state.start !== null) {
-					start = parseInt(state.start)/1000;
-				}
-
-				this.currentTime(start);
 
 				this.on('play', function () {
 					onPlay();
@@ -330,12 +345,7 @@ Q.Tool.define("Q/video", function (options) {
 				});
 
 				// update currentPosition array on play
-				this.on('timeupdate', function() {
-					setTimeout(function(){
-						state.currentPosition = _getCurrentPostion();
-						Q.handle(state.onPlaying, tool, [state.currentPosition]);
-					}, 500);
-				});
+				//this.on('timeupdate', function() {});
 
 				Q.handle(state.onLoad, tool);
 			});
@@ -356,15 +366,48 @@ Q.Tool.define("Q/video", function (options) {
 	/**
 	 * @method setCurrentPosition
 	 * @param {integer} position in milliseonds
+	 * @param {boolean} [silent=false] whether to mute sound while setting position
 	 */
-	setCurrentPosition: function (position) {
-		this.state.player && this.state.player.currentTime(position/1000);
+	setCurrentPosition: function (position, silent) {
+		var tool = this;
+		var state = this.state;
+		var player = state.player;
+		var currentPosition = tool.getCurrentPosition();
+
+		if (position === 0) {
+			position = 1;
+		}
+
+		if (currentPosition === position) {
+			return;
+		}
+
+		if (silent) {
+			player.muted(true);
+		}
+
+		player.currentTime(position/1000);
+
+		if (silent) {
+			// wait for start position
+			var counter = 0;
+			var intervalId = setInterval(function() {
+				var currentPosition = tool.getCurrentPosition();
+
+				if (currentPosition === position || counter > 15) {
+					player.muted(false);
+					clearInterval(intervalId);
+				}
+
+				counter++;
+			}, 200);
+		}
 	},
 	/**
 	 * @method getCurrentPosition
 	 */
 	getCurrentPosition: function () {
-		return this.state.currentPosition;
+		return Math.trunc(this.state.player.currentTime() * 1000);
 	},
 	/**
 	 * Detect adapter from url
@@ -400,10 +443,9 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method clearPlayInterval
 	 */
 	clearPlayInterval: function () {
-		var playIntervalID = this.state.playIntervalID;
-		if (playIntervalID) {
-			clearInterval(playIntervalID);
-			playIntervalID = false;
+		if (this.state.playIntervalID) {
+			clearInterval(this.state.playIntervalID);
+			this.state.playIntervalID = false;
 		}
 	},
 	Q: {
