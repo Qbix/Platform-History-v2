@@ -24,8 +24,17 @@
             "BrowseTheWeb": "паса",
             "WriteToStartConversation": "Напишете мислите си, за да започнете разговора",
             "StartConversation": "Започнете разговор",
-            "GotoConversation": "Отидете в Разговор"
-        }
+            "GotoConversation": "Отидете в Разговор",
+            "reset": "Нулиране",
+            "edit": "редактиране",
+            "link": "Връзка",
+            "setUrl": "Задайте URL",
+            "save": "Запазете",
+            "setClip": "Изрежете клип",
+            "invalidURL": "невалиден адрес"
+        },
+        "FileTooLarge": "Файлът е твърде голям за кеширане. Максимален размер на файла {{size}}",
+        "InvalidPDF": "Файлът не е валиден PDF файл"
     },
     "types": {
         "Websites/article": {

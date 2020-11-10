@@ -32,7 +32,12 @@
         "Buy": "खरीदें",
         "Credits": "क्रेडिट",
         "ErrorInvalidAmount": "राशि अमान्य है",
-        "ErrorInvalidCurrency": "दुर्भाग्य से हम अभी तक मुद्रा {{currency}} का समर्थन नहीं करते हैं"
+        "ErrorInvalidCurrency": "दुर्भाग्य से हम अभी तक मुद्रा {{currency}} का समर्थन नहीं करते हैं",
+        "WatchClip": "{{fromStreamTitle}} अर्जित {{fromStreamTitle}} देखने का श्रेय",
+        "PurchaseCredits": "खरीद क्रेडिट",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} साख"
+        }
     },
     "history": {
         "Date": "दिनांक",
@@ -143,6 +148,7 @@
         "OptionalContribution": "वैकल्पिक योगदान",
         "RequiredPayment": "आवश्यक भुगतान",
         "AreYouSureDelete": "क्या आप वाकई इस सेवा को हटाना चाहते हैं?",
-        "AmountServicesRelated": "इस सेवा से संबंधित {{amount}} उपलब्धियां हैं। उन्हें भी हटा दिया जाएगा।"
+        "AmountServicesRelated": "इस सेवा से संबंधित {{amount}} उपलब्धियां हैं। उन्हें भी हटा दिया जाएगा।",
+        "Free": "नि: शुल्क"
     }
 }

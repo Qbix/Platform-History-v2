@@ -100,6 +100,21 @@
         "inUnderMinute": "chini ya dakika 1"
     },
     "tabs": {
-        "more": "zaidi"
+        "more": "zaidi",
+        "Menu": "Menyu"
+    },
+    "video": {
+        "clip": "kipande cha picha ya video",
+        "errorNoSource": "Hakuna chanzo cha video"
+    },
+    "pdf": {
+        "clip": "kipande cha picha ya video",
+        "errorNoSource": "Hakuna chanzo cha pdf"
+    },
+    "clip": {
+        "SetClipStart": "Weka Kuanza kwa klipu",
+        "ClipStart": "Anza cha picha ya video",
+        "SetClipEnd": "Weka Mwisho wa klipu",
+        "ClipEnd": "Clip Mwisho"
     }
 }

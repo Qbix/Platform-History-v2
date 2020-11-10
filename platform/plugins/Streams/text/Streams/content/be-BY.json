@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтай размовы.",
         "startedConversation": "пачаў размову",
         "RealTimeCall": "Званок у рэжыме рэальнага часу",
-        "SearchByName": "Пошук па імені"
+        "SearchByName": "Пошук па імені",
+        "Notifications": {
+            "Visit": "{{displayName}} наведвае чат",
+            "Join": "{{displayName}} далучыўся да чата",
+            "Leave": "{{displayName}} выйшаў з чата",
+            "RelatedTo": "{{displayName}} запусціў {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Паведамленне {{& message.fields.type}} на {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Новы {{relationDisplayType}} у {{toTitle}}",
         "Streams/relatedFrom/*": "Дададзена ў {{toTitle}} як {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} у каментары згадаў вас",
-        "Streams/call": "{{displayName}} кліча цябе"
+        "Streams/call": "{{displayName}} пачаў званок у рэжыме рэальнага часу"
     },
     "invite": {
         "messageContent": "{{displayName}} запрасіў вас {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Вы ўпэўнены, што адпішыцеся на гэтую прыладу? Ён будзе адключаць апавяшчэнні на гэтай прыладзе.",
         "Identifiers": "Ідэнтыфікатары",
         "Devices": "Прылады",
-        "Streams": "Патокі"
+        "Streams": "Патокі",
+        "AreYouSureRemoveParticipant": "Вы ўпэўнены, што хочаце выдаліць гэтага ўдзельніка?",
+        "RemoveParticipant": "Выдаліць удзельніка"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Схаваць агульны доступ да экрана",
             "turnOnCamera": "Паказаць відэа",
             "turnOnAudio": "Уключыць гук для гуку",
-            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана"
+            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана",
+            "fullScreen": "Поуны экран"
         },
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
         "streamTitle": "{{1}} Жывы званок"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Выява",
-            "description": "візуальны вобраз"
+            "description": "візуальны вобраз",
+            "newItem": "Дадаць малюнак"
         },
         "Streams/images": {
             "displayType": "Галерэя малюнкаў",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Файл",
-            "description": "загружаны файл"
+            "description": "загружаны файл",
+            "newItem": "Дадаць файл"
         },
         "Streams/audio": {
             "displayType": "Аўдыёкліп",
-            "description": "аўдыёкліп"
+            "description": "аўдыёкліп",
+            "newItem": "Дадаць аўдыя"
         },
         "Streams/video": {
             "displayType": "Відэа кліп",
-            "description": "відэа кліп"
+            "description": "відэа кліп",
+            "newItem": "Дадаць відэа"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "прывітанне, з якім карыстальнік можа прадставіць сябе",
             "displayType": "Прывітанне"
+        },
+        "Streams/pdf": {
+            "displayType": "Дакумент PDF",
+            "description": "Дакумент PDF",
+            "newItem": "Дадаць PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Гэта ўтрыманне ад вас схавана."
+    },
+    "audio": {
+        "record": "Запіс",
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы гуку",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "video": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы відэа",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "pdf": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы pdf",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "image": {
+        "reset": "Скід",
+        "edit": "Рэдагаваць",
+        "title": "загаловак",
+        "description": "апісанне",
+        "upload": "Загрузіць",
+        "link": "Спасылка",
+        "setUrl": "Устанавіць URL",
+        "save": "Захаваць",
+        "setClip": "Выразаць кліп",
+        "invalidURL": "Няправільны URL",
+        "invalidFile": "Няправільны файл",
+        "errorNoSource": "Няма крыніцы выявы",
+        "uploadLimit": "Максімальны памер файла: {{size}}",
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
     }
 }

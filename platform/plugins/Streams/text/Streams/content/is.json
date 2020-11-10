@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Mynd",
-            "description": "sjónræn mynd"
+            "description": "sjónræn mynd",
+            "newItem": "Bæta við mynd"
         },
         "Streams\/images": {
             "displayType": "Myndasafn",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Skrá",
-            "description": "hlaðið skrá"
+            "description": "hlaðið skrá",
+            "newItem": "Bæta við skrá"
         },
         "Streams\/audio": {
             "displayType": "Hljóðinnskot",
-            "description": "hljóðinnskot"
+            "description": "hljóðinnskot",
+            "newItem": "Bæta við hljóð"
         },
         "Streams\/video": {
             "displayType": "Myndskeið",
-            "description": "myndskeið"
+            "description": "myndskeið",
+            "newItem": "Bæta við myndskeiði"
         },
         "Streams\/live": {
             "displayType": "Bein útsending",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "kveðju sem notandi getur kynnt sér",
             "displayType": "Kveðjur"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF skjal",
+            "description": "PDF skjal",
+            "newItem": "Bæta við PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Þetta efni er falið fyrir þig."
+    },
+    "audio": {
+        "record": "Met",
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Enginn hljóðgjafi",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "video": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin myndbandsuppspretta",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "pdf": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin pdf heimild",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "image": {
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsing",
+        "upload": "Hlaða inn",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippt út bút",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin myndheimild",
+        "uploadLimit": "Hámarks skráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
     }
 }

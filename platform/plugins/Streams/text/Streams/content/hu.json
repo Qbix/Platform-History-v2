@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Kép",
-            "description": "vizuális kép"
+            "description": "vizuális kép",
+            "newItem": "Kép hozzáadása"
         },
         "Streams\/images": {
             "displayType": "Képgaléria",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "fájl",
-            "description": "feltöltött fájl"
+            "description": "feltöltött fájl",
+            "newItem": "Fájl hozzáadása"
         },
         "Streams\/audio": {
             "displayType": "Audio klip",
-            "description": "audio klip"
+            "description": "audio klip",
+            "newItem": "Hang hozzáadása"
         },
         "Streams\/video": {
             "displayType": "Videoklip",
-            "description": "Videoklip"
+            "description": "Videoklip",
+            "newItem": "Videó hozzáadása"
         },
         "Streams\/live": {
             "displayType": "Élő adás",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "üdvözlet, amellyel a felhasználó bemutathatja magát",
             "displayType": "Üdvözlet"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokumentum",
+            "description": "PDF dokumentum",
+            "newItem": "PDF hozzáadása"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ez a tartalom el van rejtve tőled."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs hangforrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "video": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs video forrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "pdf": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs pdf forrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "image": {
+        "reset": "Visszaállítás",
+        "edit": "Szerkesztés",
+        "title": "cím",
+        "description": "leírás",
+        "upload": "Feltöltés",
+        "link": "Link",
+        "setUrl": "URL beállítása",
+        "save": "Megment",
+        "setClip": "Kivágott klip",
+        "invalidURL": "érvénytelen URL",
+        "invalidFile": "Érvénytelen fájl",
+        "errorNoSource": "Nincs képforrás",
+        "uploadLimit": "Maximális fájlméret: {{size}}",
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
     }
 }

@@ -1818,13 +1818,17 @@ class Streams_Stream extends Base_Streams_Stream
 		$url = (Q_Valid::url($url) or mb_substr($this->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
-		if ($basename) {
+		$baseUrl = Q_Request::baseUrl();
+		$themedUrl = Q_Html::themedUrl($url);
+		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
 			if (strpos($basename, '.') === false) {
 				$basename = "$basename.png";
 			}
 			$url .= "/$basename";
+			return Q_Html::themedUrl($url);
+		} else {
+			return $themedUrl;
 		}
-		return Q_Html::themedUrl($url);
 	}
 	
 	/**

@@ -100,6 +100,21 @@
         "inUnderMinute": "1 분 안에"
     },
     "tabs": {
-        "more": "더"
+        "more": "더",
+        "Menu": "메뉴"
+    },
+    "video": {
+        "clip": "클립",
+        "errorNoSource": "비디오 소스 없음"
+    },
+    "pdf": {
+        "clip": "클립",
+        "errorNoSource": "PDF 소스 없음"
+    },
+    "clip": {
+        "SetClipStart": "클립 시작 설정",
+        "ClipStart": "클립 시작",
+        "SetClipEnd": "클립 끝 설정",
+        "ClipEnd": "클립 끝"
     }
 }

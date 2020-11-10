@@ -101,6 +101,21 @@
         "inUnderMinute": "менш за 1 хвіліну"
     },
     "tabs": {
-        "more": "больш"
+        "more": "больш",
+        "Menu": "Меню"
+    },
+    "video": {
+        "clip": "кліп",
+        "errorNoSource": "Няма крыніцы відэа"
+    },
+    "pdf": {
+        "clip": "кліп",
+        "errorNoSource": "Няма крыніцы pdf"
+    },
+    "clip": {
+        "SetClipStart": "Усталюйце кліп-старт",
+        "ClipStart": "Кліп Пачатак",
+        "SetClipEnd": "Усталяваць канец кліпа",
+        "ClipEnd": "Канец кліпа"
     }
 }

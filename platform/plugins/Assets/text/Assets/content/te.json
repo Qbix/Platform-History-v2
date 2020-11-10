@@ -32,7 +32,12 @@
         "Buy": "కొనుగోలు",
         "Credits": "క్రెడిట్స్",
         "ErrorInvalidAmount": "మొత్తం చెల్లదు",
-        "ErrorInvalidCurrency": "దురదృష్టవశాత్తు మేము ఇంకా {{999} currency కరెన్సీకి మద్దతు ఇవ్వము"
+        "ErrorInvalidCurrency": "దురదృష్టవశాత్తు మేము ఇంకా {{999} currency కరెన్సీకి మద్దతు ఇవ్వము",
+        "WatchClip": "{{1000} watch చూడటానికి {{amount}} క్రెడిట్లను సంపాదించింది",
+        "PurchaseCredits": "క్రెడిట్లను కొనండి",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} క్రెడిట్స్"
+        }
     },
     "history": {
         "Date": "తేదీ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "ఐచ్ఛిక సహకారం",
         "RequiredPayment": "అవసరమైన చెల్లింపు",
         "AreYouSureDelete": "మీరు ఖచ్చితంగా ఈ సేవను తొలగించాలనుకుంటున్నారా?",
-        "AmountServicesRelated": "ఈ సేవకు సంబంధించిన {{amount}} లభ్యత ఉన్నాయి. అవి కూడా తొలగించబడతాయి."
+        "AmountServicesRelated": "ఈ సేవకు సంబంధించిన {{amount}} లభ్యత ఉన్నాయి. అవి కూడా తొలగించబడతాయి.",
+        "Free": "ఉచితం"
     }
 }

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "この会話に参加する権限がありません。",
         "startedConversation": "会話を始めた",
         "RealTimeCall": "リアルタイム通話",
-        "SearchByName": "名前で検索"
+        "SearchByName": "名前で検索",
+        "Notifications": {
+            "Visit": "{{displayName}}がチャットにアクセスしています",
+            "Join": "{{displayName}}がチャットに参加しました",
+            "Leave": "{{displayName}}さんがチャットから退出しました",
+            "RelatedTo": "{{displayName}}が{{stream.displayType}}を開始しました"
+        }
     },
     "notifications": {
         "*": "メッセージ{{& message.fields.type}}から{{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}}の新しい{{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{relationDisplayType}}として{{toTitle}}に追加しました",
         "Streams/mention": "{{&call 'avatar.displayName'}}はコメントであなたに言及しました",
-        "Streams/call": "{{displayName}}からの電話"
+        "Streams/call": "{{displayName}}がリアルタイムの通話を開始しました"
     },
     "invite": {
         "messageContent": "{{displayName}}はあなたを{{inviteUrl}}に招待しました",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "このデバイスのサブスクリプションを解除してもよろしいですか？このデバイスへの通知をオフにします。",
         "Identifiers": "識別子",
         "Devices": "装置",
-        "Streams": "ストリーム"
+        "Streams": "ストリーム",
+        "AreYouSureRemoveParticipant": "この参加者を削除してもよろしいですか？",
+        "RemoveParticipant": "参加者を削除"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "画面共有を非表示",
             "turnOnCamera": "ビデオを表示",
             "turnOnAudio": "音声のミュートを解除",
-            "turnOnScreenSharing": "画面共有を表示"
+            "turnOnScreenSharing": "画面共有を表示",
+            "fullScreen": "全画面表示"
         },
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
         "streamTitle": "{{1}}ライブ通話"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "画像",
-            "description": "視覚的イメージ"
+            "description": "視覚的イメージ",
+            "newItem": "画像を追加"
         },
         "Streams/images": {
             "displayType": "イメージギャラリー",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ファイル",
-            "description": "アップロードされたファイル"
+            "description": "アップロードされたファイル",
+            "newItem": "ファイルの追加"
         },
         "Streams/audio": {
             "displayType": "オーディオクリップ",
-            "description": "オーディオクリップ"
+            "description": "オーディオクリップ",
+            "newItem": "オーディオを追加"
         },
         "Streams/video": {
             "displayType": "ビデオクリップ",
-            "description": "ビデオクリップ"
+            "description": "ビデオクリップ",
+            "newItem": "ビデオを追加"
         },
         "Streams/live": {
             "displayType": "ライブストリーム",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "ユーザーが自己紹介できる挨拶",
             "displayType": "挨拶"
+        },
+        "Streams/pdf": {
+            "displayType": "PDFドキュメント",
+            "description": "PDFドキュメント",
+            "newItem": "PDFを追加"
         }
     },
     "messages": {
@@ -356,5 +374,70 @@
     },
     "errors": {
         "HiddenFromYou": "このコンテンツは非表示です。"
+    },
+    "audio": {
+        "record": "記録",
+        "reset": "リセット",
+        "edit": "編集",
+        "title": "題名",
+        "description": "説明",
+        "upload": "アップロード",
+        "link": "リンク",
+        "setUrl": "URLを設定する",
+        "save": "セーブ",
+        "setClip": "クリップを切り取る",
+        "invalidURL": "無効なURL",
+        "invalidFile": "無効なファイル",
+        "errorNoSource": "オーディオソースなし",
+        "uploadLimit": "最大ファイルサイズ：{{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+    },
+    "video": {
+        "reset": "リセット",
+        "edit": "編集",
+        "title": "題名",
+        "description": "説明",
+        "upload": "アップロード",
+        "link": "リンク",
+        "setUrl": "URLを設定する",
+        "save": "セーブ",
+        "setClip": "クリップを切り取る",
+        "invalidURL": "無効なURL",
+        "invalidFile": "無効なファイル",
+        "errorNoSource": "ビデオソースなし",
+        "uploadLimit": "最大ファイルサイズ：{{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+    },
+    "pdf": {
+        "reset": "リセット",
+        "edit": "編集",
+        "title": "題名",
+        "description": "説明",
+        "upload": "アップロード",
+        "link": "リンク",
+        "setUrl": "URLを設定する",
+        "save": "セーブ",
+        "setClip": "クリップを切り取る",
+        "invalidURL": "無効なURL",
+        "invalidFile": "無効なファイル",
+        "errorNoSource": "PDFソースなし",
+        "uploadLimit": "最大ファイルサイズ：{{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+    },
+    "image": {
+        "reset": "リセット",
+        "edit": "編集",
+        "title": "題名",
+        "description": "説明",
+        "upload": "アップロード",
+        "link": "リンク",
+        "setUrl": "URLを設定する",
+        "save": "セーブ",
+        "setClip": "クリップを切り取る",
+        "invalidURL": "無効なURL",
+        "invalidFile": "無効なファイル",
+        "errorNoSource": "画像ソースなし",
+        "uploadLimit": "最大ファイルサイズ：{{size}}",
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
     }
 }

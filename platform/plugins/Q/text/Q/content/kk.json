@@ -98,5 +98,23 @@
         "inHour": "{{h}} сағатта",
         "inHours": "{{h}} сағат ішінде",
         "inUnderMinute": "1 минут ішінде"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Бейне көзі жоқ"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "Pdf көзі жоқ"
+    },
+    "clip": {
+        "SetClipStart": "Клиптің басталуын орнатыңыз",
+        "ClipStart": "Клип Бастау",
+        "SetClipEnd": "Клиптің соңын орнатыңыз",
+        "ClipEnd": "Клиптің соңы"
+    },
+    "tabs": {
+        "more": "Көбірек",
+        "Menu": "Мәзір"
     }
 }

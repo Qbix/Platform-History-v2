@@ -98,5 +98,23 @@
         "inHour": "saacadda {{h}}",
         "inHours": "saacadaha {{h}}",
         "inUnderMinute": "in ka yar 1 daqiiqo"
+    },
+    "video": {
+        "clip": "goos goos",
+        "errorNoSource": "Ma jiro ilo fiidiyoow"
+    },
+    "pdf": {
+        "clip": "goos goos",
+        "errorNoSource": "Ma jiro ilo pdf"
+    },
+    "clip": {
+        "SetClipStart": "Deji Bilowga Clip",
+        "ClipStart": "Bilow Clip",
+        "SetClipEnd": "Deji Clip End",
+        "ClipEnd": "Dhamaadka Clip"
+    },
+    "tabs": {
+        "more": "dheeraad ah",
+        "Menu": "Liiska"
     }
 }

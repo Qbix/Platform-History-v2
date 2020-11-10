@@ -98,5 +98,23 @@
         "inHour": "په {9 999}} ساعت کې",
         "inHours": "په {9 999}} ساعتونو کې",
         "inUnderMinute": "د 1 دقیقو لاندې"
+    },
+    "video": {
+        "clip": "کليپ",
+        "errorNoSource": "نه د ویډیو سرچینه"
+    },
+    "pdf": {
+        "clip": "کليپ",
+        "errorNoSource": "د پی ډي ایف سرچینه نشته"
+    },
+    "clip": {
+        "SetClipStart": "کليپ پيل وټاکه",
+        "ClipStart": "کليپ پيل",
+        "SetClipEnd": "کليپ پای وټاکه",
+        "ClipEnd": "کليپ پای"
+    },
+    "tabs": {
+        "more": "نور",
+        "Menu": "مینو"
     }
 }

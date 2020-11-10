@@ -24,8 +24,17 @@
             "BrowseTheWeb": "ব্রাউজ করুন",
             "WriteToStartConversation": "কথোপকথন শুরু আপনার চিন্তা লিখুন",
             "StartConversation": "কথোপকথন শুরু করুন",
-            "GotoConversation": "কথোপকথনে যান"
-        }
+            "GotoConversation": "কথোপকথনে যান",
+            "reset": "রিসেট",
+            "edit": "সম্পাদনা করুন",
+            "link": "লিঙ্ক",
+            "setUrl": "ইউআরএল সেট করুন",
+            "save": "সংরক্ষণ",
+            "setClip": "ক্লিপ কাট",
+            "invalidURL": "অবৈধ ইউআরএল"
+        },
+        "FileTooLarge": "ক্যাশিংয়ের জন্য ফাইল খুব বড়। সর্বাধিক ফাইলের আকার {{999}",
+        "InvalidPDF": "ফাইলটি কোনও বৈধ পিডিএফ নয়"
     },
     "types": {
         "Websites/article": {

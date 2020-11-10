@@ -270,7 +270,8 @@
         },
         "Streams/image": {
             "displayType": "Imahe",
-            "description": "biswal na imahe"
+            "description": "biswal na imahe",
+            "newItem": "Magdagdag ng larawan"
         },
         "Streams/images": {
             "displayType": "Gallery ng Larawan",
@@ -282,15 +283,18 @@
         },
         "Streams/file": {
             "displayType": "File",
-            "description": "nai-upload na file"
+            "description": "nai-upload na file",
+            "newItem": "Magdagdag ng File"
         },
         "Streams/audio": {
             "displayType": "Klip ng Audio",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Magdagdag ng Audio"
         },
         "Streams/video": {
             "displayType": "Klip ng Video",
-            "description": "clip ng video"
+            "description": "clip ng video",
+            "newItem": "Magdagdag ng Video"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -331,6 +335,11 @@
         "Streams/greeting": {
             "description": "pagbati kung saan maaaring ipakilala ng isang gumagamit ang kanilang mga sarili",
             "displayType": "Pagbati"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF na dokumento",
+            "description": "PDF na dokumento",
+            "newItem": "Magdagdag ng PDF"
         }
     },
     "messages": {
@@ -361,5 +370,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ang nilalamang ito ay nakatago mula sa iyo."
+    },
+    "audio": {
+        "record": "Itala",
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "I-upload",
+        "link": "Link",
+        "setUrl": "Itakda ang URL",
+        "save": "Magtipid",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang audio source",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+    },
+    "video": {
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "I-upload",
+        "link": "Link",
+        "setUrl": "Itakda ang URL",
+        "save": "Magtipid",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang mapagkukunan ng video",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+    },
+    "pdf": {
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "I-upload",
+        "link": "Link",
+        "setUrl": "Itakda ang URL",
+        "save": "Magtipid",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang mapagkukunan ng pdf",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+    },
+    "image": {
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "I-upload",
+        "link": "Link",
+        "setUrl": "Itakda ang URL",
+        "save": "Magtipid",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang pinagmulan ng imahe",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
     }
 }

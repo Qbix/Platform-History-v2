@@ -312,7 +312,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			fields,
 			function(error, html){
 				if (error) { return error; }
-				$te.html(html).activate();
+				$te.html(html, true).activate();
 
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
@@ -419,7 +419,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				},
 				function(error, html){
 					if (error) { return error; }
-					tool.$('.Streams_chat_messages').html(html);
+					tool.$('.Streams_chat_messages').html(html, true);
 				},
 				state.templates.Streams_chat_noMessages
 			);
@@ -438,12 +438,12 @@ Q.Tool.define('Streams/chat', function(options) {
 				if (fields.type === "Streams/relatedTo") {
 					var $preview = tool.renderRelatedStream(fields);
 					if (!$preview) {
-						return;
+						return p.fill(ordinal)(null, null);
 					}
 
 					var $html = $(html);
 					$html.addClass("Streams_chat_message_skipOverflowed");
-					$(".Streams_chat_message_content", $html).html($preview);
+					$(".Streams_chat_message_content", $html).html($preview, true);
 					Q.handle(state.onMessageRender, tool, [fields, $html]);
 					p.fill(ordinal)(null, $html);
 				} else {
@@ -460,6 +460,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			var items = {};
 			for (var ordinal in params) {
 				var $element = params[ordinal][1];
+
+				if (Q.isEmpty($element)) {
+					continue;
+				}
+
 				if (!($element instanceof jQuery)) {
 					$element = $($element);
 				}
@@ -532,15 +537,17 @@ Q.Tool.define('Streams/chat', function(options) {
 
 							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
 							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
-							for (var toolName of possibleToolNames) {
-								if (Q.Tool.defined(toolName)) {
+							var toolName = null;
+							for (var i=0, l=possibleToolNames.length; i<l; ++i) {
+								if (Q.Tool.defined(possibleToolNames[i])) {
+									toolName = possibleToolNames[i];
 									break;
 								}
 							}
 
 							var element = "div";
 							// if tool is preview, apply Streams/preview tool first, because it may be required
-							if (toolName.endsWith("/preview")) {
+							if (toolName && toolName.endsWith("/preview")) {
 								element = Q.Tool.setUpElement(element, "Streams/preview", state);
 							}
 
@@ -555,7 +562,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							Q.invoke({
 								title: stream.fields.title,
 								content: element,
-								trigger: $toolElement
+								trigger: $toolElement[0]
 							});
 						});
 					});
@@ -618,7 +625,7 @@ Q.Tool.define('Streams/chat', function(options) {
     	
 				tool.findMessage('last')
 					.find('.Streams_chat_timestamp')
-					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date))
+					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date), true)
 					.activate();
 			},
 			state.templates.message.error
@@ -714,6 +721,25 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		});
 	},
+	/**
+	 * Render single message
+	 * @method renderMessage
+	 * @param message
+	 */
+	renderMessage: function(message) {
+		var tool = this;
+		tool.renderMessages(tool.prepareMessages(message), function (items) {
+			tool.$('.Streams_chat_noMessages').remove();
+			var $scm = tool.$('.Streams_chat_messages');
+			Q.each(items, function (key, $html) {
+				$html.appendTo($scm).activate();
+			}, {ascending: true});
+			tool.processDOM();
+		});
+		// TODO: don't scroll to bottom, show "V 10 new messages" button
+		// on the bottom left of Streams/chat, and then jump to bottom and refresh
+		tool.scrollToBottom();
+	},
 	addEvents: function(){
 		var tool    = this,
 			state   = this.state,
@@ -757,18 +783,13 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		// new message arrived
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/chat/message')
+		.set(function (stream, message) {
+			tool.renderMessage(message);
+		}, tool);
+		// a new stream was related (including a call)
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
 		.set(function(stream, message) {
-			tool.renderMessages(tool.prepareMessages(message), function (items) {
-				tool.$('.Streams_chat_noMessages').remove();
-				var $scm = tool.$('.Streams_chat_messages'); 
-				Q.each(items, function (key, $html) {
-					$html.appendTo($scm).activate();
-				}, {ascending: true});
-				tool.processDOM();
-			});
-			// TODO: don't scroll to bottom, show "V 10 new messages" button
-			// on the bottom left of Streams/chat, and then jump to bottom and refresh
-			tool.scrollToBottom();
+			tool.renderMessage(message);
 		}, tool);
 
 		// new user joined
@@ -783,21 +804,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		.set(function(stream, message) {
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
-		}, tool);
-		
-		// a new stream was related (including a call)
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
-		.set(function(stream, message) {
-			var messages = tool.prepareMessages(message, 'leave');
-			tool.renderNotification(Q.first(messages));
-			tool.$('.Streams_chat_noMessages').remove();
-
-			var $preview = tool.renderRelatedStream(message);
-			if (!$preview) {
-				return;
-			}
-
-			$preview.appendTo(tool.$('.Streams_chat_messages')).activate();
 		}, tool);
 
 		// new user left
@@ -1027,7 +1033,8 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		};
 
-		return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
+		return Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields);
+		//return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
 	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {

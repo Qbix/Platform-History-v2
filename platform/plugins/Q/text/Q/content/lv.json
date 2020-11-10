@@ -100,6 +100,21 @@
         "inUnderMinute": "pēc 1 minūtes"
     },
     "tabs": {
-        "more": "vairāk"
+        "more": "vairāk",
+        "Menu": "Izvēlne"
+    },
+    "video": {
+        "clip": "klips",
+        "errorNoSource": "Nav video avota"
+    },
+    "pdf": {
+        "clip": "klips",
+        "errorNoSource": "Nav pdf avota"
+    },
+    "clip": {
+        "SetClipStart": "Iestatiet Clip Start",
+        "ClipStart": "Sākt klipu",
+        "SetClipEnd": "Iestatīt klipa beigas",
+        "ClipEnd": "Klipa beigas"
     }
 }

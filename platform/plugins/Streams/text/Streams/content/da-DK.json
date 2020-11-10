@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne samtale.",
         "startedConversation": "startede en samtale",
         "RealTimeCall": "Realtidsopkald",
-        "SearchByName": "Søg efter navn"
+        "SearchByName": "Søg efter navn",
+        "Notifications": {
+            "Visit": "{{displayName}} besøger chatten",
+            "Join": "{{displayName}} blev medlem af chatten",
+            "Leave": "{{displayName}} forlod chatten",
+            "RelatedTo": "{{displayName}} startede en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Meddelelse {{& message.fields.type}} til {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nyt {{relationDisplayType}} om {{toTitle}}",
         "Streams/relatedFrom/*": "Føjet til {{toTitle}} som {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} nævnte dig i en kommentar",
-        "Streams/call": "{{displayName}} ringer til dig"
+        "Streams/call": "{{displayName}} startede et realtidsopkald"
     },
     "invite": {
         "messageContent": "{{displayName}} inviterede dig til {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Er du sikker på at afmelde denne enhed? Det deaktiverer underretninger til denne enhed.",
         "Identifiers": "identifikatorer",
         "Devices": "Enheder",
-        "Streams": "Vandløb"
+        "Streams": "Vandløb",
+        "AreYouSureRemoveParticipant": "Er du sikker på, at du vil fjerne denne deltager?",
+        "RemoveParticipant": "Fjern deltageren"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Skjul deling af skærmen",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Dæmp lyden",
-            "turnOnScreenSharing": "Vis skærmdeling"
+            "turnOnScreenSharing": "Vis skærmdeling",
+            "fullScreen": "Fuld skærm"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
         "streamTitle": "{{1}} liveopkald"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Billede",
-            "description": "visuelt billede"
+            "description": "visuelt billede",
+            "newItem": "Tilføj billede"
         },
         "Streams/images": {
             "displayType": "Billedgalleri",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fil",
-            "description": "uploadet fil"
+            "description": "uploadet fil",
+            "newItem": "Tilføj fil"
         },
         "Streams/audio": {
             "displayType": "Lydklip",
-            "description": "lydklip"
+            "description": "lydklip",
+            "newItem": "Tilføj lyd"
         },
         "Streams/video": {
             "displayType": "Videoklip",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Tilføj video"
         },
         "Streams/live": {
             "displayType": "Live stream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "hilsen, som en bruger kan introducere sig selv med",
             "displayType": "Hilsen"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Tilføj PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dette indhold er skjult for dig."
+    },
+    "audio": {
+        "record": "Optage",
+        "reset": "Nulstil",
+        "edit": "Redigere",
+        "title": "titel",
+        "description": "beskrivelse",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Indstil URL",
+        "save": "Gemme",
+        "setClip": "Klip klip ud",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen lydkilde",
+        "uploadLimit": "Maks. Filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
+    },
+    "video": {
+        "reset": "Nulstil",
+        "edit": "Redigere",
+        "title": "titel",
+        "description": "beskrivelse",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Indstil URL",
+        "save": "Gemme",
+        "setClip": "Klip klip ud",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen videokilde",
+        "uploadLimit": "Maks. Filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
+    },
+    "pdf": {
+        "reset": "Nulstil",
+        "edit": "Redigere",
+        "title": "titel",
+        "description": "beskrivelse",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Indstil URL",
+        "save": "Gemme",
+        "setClip": "Klip klip ud",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen pdf-kilde",
+        "uploadLimit": "Maks. Filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
+    },
+    "image": {
+        "reset": "Nulstil",
+        "edit": "Redigere",
+        "title": "titel",
+        "description": "beskrivelse",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Indstil URL",
+        "save": "Gemme",
+        "setClip": "Klip klip ud",
+        "invalidURL": "ugyldig URL",
+        "invalidFile": "Ugyldig fil",
+        "errorNoSource": "Ingen billedkilde",
+        "uploadLimit": "Maks. Filstørrelse: {{size}}",
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
     }
 }

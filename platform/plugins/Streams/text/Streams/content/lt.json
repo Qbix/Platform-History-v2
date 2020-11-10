@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Vaizdas",
-            "description": "vaizdinis vaizdas"
+            "description": "vaizdinis vaizdas",
+            "newItem": "Pridėti vaizdą"
         },
         "Streams\/images": {
             "displayType": "Vaizdo galerija",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Byla",
-            "description": "įkeltas failas"
+            "description": "įkeltas failas",
+            "newItem": "Pridėti failą"
         },
         "Streams\/audio": {
             "displayType": "Garso įrašas",
-            "description": "garso klipas"
+            "description": "garso klipas",
+            "newItem": "Pridėti garso įrašą"
         },
         "Streams\/video": {
             "displayType": "Vaizdo įrašas",
-            "description": "vaizdo įrašas"
+            "description": "vaizdo įrašas",
+            "newItem": "Pridėti vaizdo įrašą"
         },
         "Streams\/live": {
             "displayType": "Tiesiogiai",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "sveikinimas, kuriuo vartotojas gali prisistatyti",
             "displayType": "Sveikinimai"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokumentas",
+            "description": "PDF dokumentas",
+            "newItem": "Pridėti PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Šis turinys nuo jūsų paslėptas."
+    },
+    "audio": {
+        "record": "Įrašyti",
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra garso šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "video": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra vaizdo šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "pdf": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra pdf šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "image": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra vaizdo šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
     }
 }

@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Delwedd",
-            "description": "delwedd weledol"
+            "description": "delwedd weledol",
+            "newItem": "Ychwanegu Delwedd"
         },
         "Streams\/images": {
             "displayType": "Oriel Delweddau",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Ffeil",
-            "description": "ffeil wedi&#39;i llwytho i fyny"
+            "description": "ffeil wedi&#39;i llwytho i fyny",
+            "newItem": "Ychwanegu Ffeil"
         },
         "Streams\/audio": {
             "displayType": "Clip Sain",
-            "description": "clip sain"
+            "description": "clip sain",
+            "newItem": "Ychwanegu Sain"
         },
         "Streams\/video": {
             "displayType": "Clip Fideo",
-            "description": "clip fideo"
+            "description": "clip fideo",
+            "newItem": "Ychwanegu Fideo"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "cyfarch y gall defnyddiwr gyflwyno ei hun gydag ef",
             "displayType": "Cyfarch"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dogfen PDF",
+            "description": "Dogfen PDF",
+            "newItem": "Ychwanegwch PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Mae&#39;r cynnwys hwn wedi&#39;i guddio oddi wrthych chi."
+    },
+    "audio": {
+        "record": "Cofnod",
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell sain",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "video": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell fideo",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "pdf": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell pdf",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "image": {
+        "reset": "Ail gychwyn",
+        "edit": "Golygu",
+        "title": "teitl",
+        "description": "disgrifiad",
+        "upload": "Llwythiad i fyny",
+        "link": "Dolen",
+        "setUrl": "Gosod URL",
+        "save": "Arbedwch",
+        "setClip": "Clip Torri Allan",
+        "invalidURL": "URL annilys",
+        "invalidFile": "Ffeil annilys",
+        "errorNoSource": "Dim ffynhonnell ddelwedd",
+        "uploadLimit": "Maint ffeil Max: {{size}}",
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
     }
 }

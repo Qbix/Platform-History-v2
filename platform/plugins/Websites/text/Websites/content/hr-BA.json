@@ -24,8 +24,17 @@
             "BrowseTheWeb": "pretraživati",
             "WriteToStartConversation": "Napišite svoje misli kako biste započeli razgovor",
             "StartConversation": "Pokreni razgovor",
-            "GotoConversation": "Idite na Razgovor"
-        }
+            "GotoConversation": "Idite na Razgovor",
+            "reset": "Resetirati",
+            "edit": "Uredi",
+            "link": "Veza",
+            "setUrl": "Postavi URL",
+            "save": "Uštedjeti",
+            "setClip": "Izrežite isječak",
+            "invalidURL": "Neispravan URL"
+        },
+        "FileTooLarge": "Datoteka je prevelika za predmemoriranje. Maksimalna veličina datoteke {{size}}",
+        "InvalidPDF": "Datoteka nije važeći PDF"
     },
     "types": {
         "Websites/article": {

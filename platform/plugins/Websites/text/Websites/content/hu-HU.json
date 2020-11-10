@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Böngésszen",
             "WriteToStartConversation": "Írja meg gondolatait, hogy elkezdje a beszélgetést",
             "StartConversation": "Indítsa el a beszélgetést",
-            "GotoConversation": "Lépjen a Beszélgetés oldalra"
-        }
+            "GotoConversation": "Lépjen a Beszélgetés oldalra",
+            "reset": "Visszaállítás",
+            "edit": "Szerkesztés",
+            "link": "Link",
+            "setUrl": "URL beállítása",
+            "save": "Megment",
+            "setClip": "Kivágott klip",
+            "invalidURL": "érvénytelen URL"
+        },
+        "FileTooLarge": "A fájl túl nagy a gyorsítótár számára. Maximális fájlméret {{size}}",
+        "InvalidPDF": "A fájl nem érvényes PDF"
     },
     "types": {
         "Websites/article": {

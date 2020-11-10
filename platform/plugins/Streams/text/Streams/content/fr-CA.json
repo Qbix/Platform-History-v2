@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Vous n&#39;avez pas la permission de rejoindre cette conversation.",
         "startedConversation": "a commencé une conversation",
         "RealTimeCall": "Appel en temps réel",
-        "SearchByName": "Rechercher par nom"
+        "SearchByName": "Rechercher par nom",
+        "Notifications": {
+            "Visit": "{{displayName}} visite le chat",
+            "Join": "{{displayName}} a rejoint le chat",
+            "Leave": "{{displayName}} a quitté le chat",
+            "RelatedTo": "{{displayName}} a commencé un {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nouveau {{relationDisplayType}} dans {{toTitle}}",
         "Streams/relatedFrom/*": "Ajouté à {{toTitle}} en tant que {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} vous a mentionné dans un commentaire",
-        "Streams/call": "{{displayName}} vous appelle"
+        "Streams/call": "{{displayName}} a commencé un appel en temps réel"
     },
     "invite": {
         "messageContent": "{{displayName}} vous a invité à {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Êtes-vous sûr de désinscrire cet appareil? Il désactivera les notifications sur cet appareil.",
         "Identifiers": "Identifiants",
         "Devices": "Dispositifs",
-        "Streams": "Ruisseaux"
+        "Streams": "Ruisseaux",
+        "AreYouSureRemoveParticipant": "Voulez-vous vraiment supprimer ce participant?",
+        "RemoveParticipant": "Supprimer un participant"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Masquer le partage d&#39;écran",
             "turnOnCamera": "Afficher la vidéo",
             "turnOnAudio": "Réactiver le son",
-            "turnOnScreenSharing": "Afficher le partage d&#39;écran"
+            "turnOnScreenSharing": "Afficher le partage d&#39;écran",
+            "fullScreen": "Plein écran"
         },
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
         "streamTitle": "{{1}} appel en direct"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Image",
-            "description": "image visuelle"
+            "description": "image visuelle",
+            "newItem": "Ajouter une image"
         },
         "Streams/images": {
             "displayType": "Galerie d&#39;images",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fichier",
-            "description": "fichier téléchargé"
+            "description": "fichier téléchargé",
+            "newItem": "Ajouter le fichier"
         },
         "Streams/audio": {
             "displayType": "Clip audio",
-            "description": "clip audio"
+            "description": "clip audio",
+            "newItem": "Ajouter de l&#39;audio"
         },
         "Streams/video": {
             "displayType": "Clip vidéo",
-            "description": "Clip vidéo"
+            "description": "Clip vidéo",
+            "newItem": "Ajouter une vidéo"
         },
         "Streams/live": {
             "displayType": "Direct",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "message d&#39;accueil avec lequel un utilisateur peut se présenter",
             "displayType": "Salutation"
+        },
+        "Streams/pdf": {
+            "displayType": "Document PDF",
+            "description": "Document PDF",
+            "newItem": "Ajouter un PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ce contenu vous est caché."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source audio",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "video": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source vidéo",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "pdf": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Pas de source pdf",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "image": {
+        "reset": "Réinitialiser",
+        "edit": "Éditer",
+        "title": "Titre",
+        "description": "la description",
+        "upload": "Télécharger",
+        "link": "Lien",
+        "setUrl": "Définir l&#39;URL",
+        "save": "sauvegarder",
+        "setClip": "Clip découpé",
+        "invalidURL": "URL invalide",
+        "invalidFile": "Fichier non valide",
+        "errorNoSource": "Aucune source d&#39;image",
+        "uploadLimit": "Taille maximale du fichier: {{size}}",
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
     }
 }

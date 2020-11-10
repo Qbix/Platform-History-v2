@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Je hebt geen toestemming om aan dit gesprek deel te nemen.",
         "startedConversation": "begon een gesprek",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Zoek op naam"
+        "SearchByName": "Zoek op naam",
+        "Notifications": {
+            "Visit": "{{displayName}} bezoekt de chat",
+            "Join": "{{displayName}} is bij de chat gekomen",
+            "Leave": "{{displayName}} heeft de chat verlaten",
+            "RelatedTo": "{{displayName}} is een {{stream.displayType}} begonnen"
+        }
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} tot {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nieuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams/relatedFrom/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} heeft je in een reactie genoemd",
-        "Streams/call": "{{displayName}} belt u"
+        "Streams/call": "{{displayName}} is een realtime oproep begonnen"
     },
     "invite": {
         "messageContent": "{{displayName}} heeft je uitgenodigd voor {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Weet u zeker dat u dit apparaat wilt afmelden? Het schakelt meldingen naar dit apparaat uit.",
         "Identifiers": "identifiers",
         "Devices": "apparaten",
-        "Streams": "streams"
+        "Streams": "streams",
+        "AreYouSureRemoveParticipant": "Weet je zeker dat je deze deelnemer wilt verwijderen?",
+        "RemoveParticipant": "Deelnemer verwijderen"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Scherm delen verbergen",
             "turnOnCamera": "Video weergeven",
             "turnOnAudio": "Dempen van audio opheffen",
-            "turnOnScreenSharing": "Scherm delen weergeven"
+            "turnOnScreenSharing": "Scherm delen weergeven",
+            "fullScreen": "Volledig scherm"
         },
         "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
         "streamTitle": "{{1}} live-oproep"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Beeld",
-            "description": "visueel beeld"
+            "description": "visueel beeld",
+            "newItem": "Voeg afbeelding toe"
         },
         "Streams/images": {
             "displayType": "Fotogalerij",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "het dossier",
-            "description": "geupload bestand"
+            "description": "geupload bestand",
+            "newItem": "Bestand toevoegen"
         },
         "Streams/audio": {
             "displayType": "Audioclip",
-            "description": "audioclip"
+            "description": "audioclip",
+            "newItem": "Voeg audio toe"
         },
         "Streams/video": {
             "displayType": "Videoclip",
-            "description": "videoclip"
+            "description": "videoclip",
+            "newItem": "Voeg video toe"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "begroeting waarmee een gebruiker zichzelf kan voorstellen",
             "displayType": "Groet"
+        },
+        "Streams/pdf": {
+            "displayType": "Pdf-document",
+            "description": "Pdf-document",
+            "newItem": "Voeg pdf toe"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Deze inhoud is voor u verborgen."
+    },
+    "audio": {
+        "record": "Vermelding",
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen audiobron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen videobron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen pdf-bron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen afbeeldingsbron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
     }
 }

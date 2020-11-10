@@ -18,3 +18,4 @@ function Places_autocomplete_response_results()
 		$r['meters']
 	);
 }
+

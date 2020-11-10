@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "您无权加入此对话。",
         "startedConversation": "开始了对话",
         "RealTimeCall": "实时通话",
-        "SearchByName": "按名称搜寻"
+        "SearchByName": "按名称搜寻",
+        "Notifications": {
+            "Visit": "{{displayName}}正在聊天",
+            "Join": "{{displayName}}加入了聊天",
+            "Leave": "{{displayName}}离开了聊天室",
+            "RelatedTo": "{{displayName}}开始了{{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "消息{{& message.fields.type}}至{{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}}中的新{{relationDisplayType}}",
         "Streams/relatedFrom/*": "添加到{{toTitle}}为{{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}}在评论中提及了您",
-        "Streams/call": "{{displayName}}正在给您打电话"
+        "Streams/call": "{{displayName}}开始了实时通话"
     },
     "invite": {
         "messageContent": "{{displayName}}邀请您{{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "您确定要退订该设备吗？它将关闭此设备的通知。",
         "Identifiers": "身份标识",
         "Devices": "设备",
-        "Streams": "流"
+        "Streams": "流",
+        "AreYouSureRemoveParticipant": "您确定要删除此参与者吗？",
+        "RemoveParticipant": "删除参与者"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "隐藏屏幕共享",
             "turnOnCamera": "显示影片",
             "turnOnAudio": "取消静音",
-            "turnOnScreenSharing": "显示屏幕共享"
+            "turnOnScreenSharing": "显示屏幕共享",
+            "fullScreen": "全屏"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
         "streamTitle": "{{1}}现场通话"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "图片",
-            "description": "视觉形象"
+            "description": "视觉形象",
+            "newItem": "添加图片"
         },
         "Streams/images": {
             "displayType": "图库",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "文件",
-            "description": "上传的文件"
+            "description": "上传的文件",
+            "newItem": "添加文件"
         },
         "Streams/audio": {
             "displayType": "音频剪辑",
-            "description": "音频剪辑"
+            "description": "音频剪辑",
+            "newItem": "添加音频"
         },
         "Streams/video": {
             "displayType": "录像片段",
-            "description": "录像片段"
+            "description": "录像片段",
+            "newItem": "新增影片"
         },
         "Streams/live": {
             "displayType": "现场直播",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "用户可以自我介绍的问候语",
             "displayType": "欢迎"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF文件",
+            "description": "PDF文件",
+            "newItem": "添加PDF"
         }
     },
     "messages": {
@@ -356,5 +374,70 @@
     },
     "errors": {
         "HiddenFromYou": "此内容对您隐藏。"
+    },
+    "audio": {
+        "record": "记录",
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有音频源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "video": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有视频源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "pdf": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有pdf来源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "image": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有图像源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
     }
 }

@@ -270,7 +270,8 @@
         },
         "Streams/image": {
             "displayType": "Image",
-            "description": "visual image"
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams/images": {
             "displayType": "Image Gallery",
@@ -282,15 +283,18 @@
         },
         "Streams/file": {
             "displayType": "File",
-            "description": "uploaded file"
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams/video": {
             "displayType": "Video Clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -331,6 +335,11 @@
         "Streams/greeting": {
             "description": "greeting with which a user can introduce themselves",
             "displayType": "Greeting"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         }
     },
     "messages": {
@@ -361,5 +370,70 @@
     },
     "errors": {
         "HiddenFromYou": "This content is hidden from you."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     }
 }

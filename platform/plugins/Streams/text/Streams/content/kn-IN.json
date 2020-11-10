@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ಈ ಸಂವಾದಕ್ಕೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "startedConversation": "ಸಂವಾದವನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
         "RealTimeCall": "ರಿಯಲ್ ಟೈಮ್ ಕರೆ",
-        "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ"
+        "SearchByName": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ",
+        "Notifications": {
+            "Visit": "{{999} the ಚಾಟ್‌ಗೆ ಭೇಟಿ ನೀಡುತ್ತಿದ್ದಾರೆ",
+            "Join": "{{999} the ಚಾಟ್‌ಗೆ ಸೇರಿದರು",
+            "Leave": "{{999} the ಚಾಟ್‌ನಿಂದ ಹೊರಬಂದರು",
+            "RelatedTo": "{{displayName}} ಪ್ರಾರಂಭವಾಯಿತು {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "{{& stream.fields.title}} ಗೆ {{& message.fields.type}} ಸಂದೇಶ",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} ನಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{999} to ಗೆ {{1000} as ಗೆ ಸೇರಿಸಲಾಗಿದೆ",
         "Streams/mention": "{{999} a ನಿಮ್ಮನ್ನು ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
-        "Streams/call": "{{999} you ನಿಮ್ಮನ್ನು ಕರೆಯುತ್ತಿದೆ"
+        "Streams/call": "{{999} a ನೈಜ ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ"
     },
     "invite": {
         "messageContent": "{{displayName}} ನಿಮ್ಮನ್ನು {{inviteUrl}} ಗೆ ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "ಈ ಸಾಧನವನ್ನು ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡುವುದು ಖಚಿತವೇ? ಇದು ಈ ಸಾಧನಕ್ಕೆ ಅಧಿಸೂಚನೆಗಳನ್ನು ಆಫ್ ಮಾಡುತ್ತದೆ.",
         "Identifiers": "ಗುರುತಿಸುವವರು",
         "Devices": "ಸಾಧನಗಳು",
-        "Streams": "ಸ್ಟ್ರೀಮ್‌ಗಳು"
+        "Streams": "ಸ್ಟ್ರೀಮ್‌ಗಳು",
+        "AreYouSureRemoveParticipant": "ಈ ಭಾಗವಹಿಸುವವರನ್ನು ತೆಗೆದುಹಾಕಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "RemoveParticipant": "ಭಾಗವಹಿಸುವವರನ್ನು ತೆಗೆದುಹಾಕಿ"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ಮರೆಮಾಡಿ",
             "turnOnCamera": "ವೀಡಿಯೊ ತೋರಿಸಿ",
             "turnOnAudio": "ಆಡಿಯೊವನ್ನು ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ",
-            "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ"
+            "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ",
+            "fullScreen": "ಪೂರ್ಣ ಪರದೆ"
         },
         "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "streamTitle": "{{1}} ಲೈವ್ ಕರೆ"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "ಚಿತ್ರ",
-            "description": "ದೃಶ್ಯ ಚಿತ್ರ"
+            "description": "ದೃಶ್ಯ ಚಿತ್ರ",
+            "newItem": "ಚಿತ್ರವನ್ನು ಸೇರಿಸಿ"
         },
         "Streams/images": {
             "displayType": "ಚಿತ್ರ ಗ್ಯಾಲರಿ",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ಫೈಲ್",
-            "description": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್"
+            "description": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಫೈಲ್",
+            "newItem": "ಕಡತವನ್ನು ಸೇರಿಸು"
         },
         "Streams/audio": {
             "displayType": "ಆಡಿಯೋ ಕ್ಲಿಪ್",
-            "description": "ಆಡಿಯೋ ಕ್ಲಿಪ್"
+            "description": "ಆಡಿಯೋ ಕ್ಲಿಪ್",
+            "newItem": "ಆಡಿಯೋ ಸೇರಿಸಿ"
         },
         "Streams/video": {
             "displayType": "ವೀಡಿಯೊ ಕ್ಲಿಪ್",
-            "description": "ವೀಡಿಯೊ ಕ್ಲಿಪ್"
+            "description": "ವೀಡಿಯೊ ಕ್ಲಿಪ್",
+            "newItem": "ವೀಡಿಯೊ ಸೇರಿಸಿ"
         },
         "Streams/live": {
             "displayType": "ನಿರಂತರ ಪ್ರಸಾರ",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "ಬಳಕೆದಾರರು ತಮ್ಮನ್ನು ಪರಿಚಯಿಸಿಕೊಳ್ಳಬಹುದಾದ ಶುಭಾಶಯ",
             "displayType": "ಶುಭಾಶಯ"
+        },
+        "Streams/pdf": {
+            "displayType": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
+            "description": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
+            "newItem": "ಪಿಡಿಎಫ್ ಸೇರಿಸಿ"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ಈ ವಿಷಯವನ್ನು ನಿಮ್ಮಿಂದ ಮರೆಮಾಡಲಾಗಿದೆ."
+    },
+    "audio": {
+        "record": "ದಾಖಲೆ",
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಆಡಿಯೊ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "video": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ವೀಡಿಯೊ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "pdf": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಪಿಡಿಎಫ್ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "image": {
+        "reset": "ಮರುಹೊಂದಿಸಿ",
+        "edit": "ತಿದ್ದು",
+        "title": "ಶೀರ್ಷಿಕೆ",
+        "description": "ವಿವರಣೆ",
+        "upload": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿ",
+        "link": "ಲಿಂಕ್",
+        "setUrl": "URL ಅನ್ನು ಹೊಂದಿಸಿ",
+        "save": "ಉಳಿಸಿ",
+        "setClip": "ಕಟ್ Cl ಟ್ ಕ್ಲಿಪ್",
+        "invalidURL": "ಅಮಾನ್ಯ URL",
+        "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
+        "errorNoSource": "ಚಿತ್ರದ ಮೂಲವಿಲ್ಲ",
+        "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
     }
 }

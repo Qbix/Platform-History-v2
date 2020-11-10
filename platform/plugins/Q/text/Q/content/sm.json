@@ -98,5 +98,23 @@
         "inHour": "ile {{h}} le itula",
         "inHours": "ile {{h}} itula",
         "inUnderMinute": "i lalo ole 1 minute"
+    },
+    "video": {
+        "clip": "kilipa",
+        "errorNoSource": "Leai se ata vitio"
+    },
+    "pdf": {
+        "clip": "kilipa",
+        "errorNoSource": "Leai se punavai pdf"
+    },
+    "clip": {
+        "SetClipStart": "Seti le Amata Vasega",
+        "ClipStart": "Clip Amata",
+        "SetClipEnd": "Seti Faʻaiʻu le kilipa",
+        "ClipEnd": "Faʻaiuga o le kilipa"
+    },
+    "tabs": {
+        "more": "sili atu",
+        "Menu": "Lisi"
     }
 }

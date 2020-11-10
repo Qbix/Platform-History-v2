@@ -32,7 +32,12 @@
         "Buy": "Erosi",
         "Credits": "kredituak",
         "ErrorInvalidAmount": "Zenbatekoa baliogabea",
-        "ErrorInvalidCurrency": "Zoritxarrez ez dugu moneta {{currency}} onartzen oraindik"
+        "ErrorInvalidCurrency": "Zoritxarrez ez dugu moneta {{currency}} onartzen oraindik",
+        "WatchClip": "{{amount}} kreditu irabazi dituzu {{fromStreamTitle}} ikusteagatik",
+        "PurchaseCredits": "Erosi kredituak",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kreditu"
+        }
     },
     "history": {
         "Date": "data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Aukerako ekarpena",
         "RequiredPayment": "Beharrezko ordainketa",
         "AreYouSureDelete": "Ziur zerbitzu hau ezabatu nahi duzula?",
-        "AmountServicesRelated": "Zerbitzu honekin lotutako {{amount}} erabilgarritasun daude. Dira ere kendu egingo dira."
+        "AmountServicesRelated": "Zerbitzu honekin lotutako {{amount}} erabilgarritasun daude. Dira ere kendu egingo dira.",
+        "Free": "Doakoa"
     }
 }

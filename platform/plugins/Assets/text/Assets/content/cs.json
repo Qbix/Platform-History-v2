@@ -32,7 +32,12 @@
         "Buy": "Koupit",
         "Credits": "Úvěry",
         "ErrorInvalidAmount": "Částka je neplatná",
-        "ErrorInvalidCurrency": "Bohužel zatím nepodporujeme měnu {{currency}}"
+        "ErrorInvalidCurrency": "Bohužel zatím nepodporujeme měnu {{currency}}",
+        "WatchClip": "Získali jste kredit {{amount}} za sledování {{fromStreamTitle}}",
+        "PurchaseCredits": "Nákup kreditů",
+        "forMessages": {
+            "BoughtCredits": "Kredity {{amount}}"
+        }
     },
     "history": {
         "Date": "datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Nepovinný příspěvek",
         "RequiredPayment": "Požadovaná platba",
         "AreYouSureDelete": "Opravdu chcete tuto službu smazat?",
-        "AmountServicesRelated": "S touto službou souvisí {{amount}} možnosti. Budou také odstraněny."
+        "AmountServicesRelated": "S touto službou souvisí {{amount}} možnosti. Budou také odstraněny.",
+        "Free": "Volný, uvolnit"
     }
 }

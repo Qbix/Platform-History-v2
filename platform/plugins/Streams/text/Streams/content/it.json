@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Immagine",
-            "description": "immagine visiva"
+            "description": "immagine visiva",
+            "newItem": "Aggiungi immagine"
         },
         "Streams\/images": {
             "displayType": "galleria di immagini",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "file caricato"
+            "description": "file caricato",
+            "newItem": "Aggiungi file"
         },
         "Streams\/audio": {
             "displayType": "Clip audio",
-            "description": "clip audio"
+            "description": "clip audio",
+            "newItem": "Aggiungi audio"
         },
         "Streams\/video": {
             "displayType": "Video clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Aggiungi video"
         },
         "Streams\/live": {
             "displayType": "Trasmissione in diretta",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "saluto con il quale un utente può presentarsi",
             "displayType": "Saluto"
+        },
+        "Streams\/pdf": {
+            "displayType": "Documento PDF",
+            "description": "Documento PDF",
+            "newItem": "Aggiungi PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Questo contenuto ti è nascosto."
+    },
+    "audio": {
+        "record": "Disco",
+        "reset": "Ripristina",
+        "edit": "modificare",
+        "title": "titolo",
+        "description": "descrizione",
+        "upload": "Caricare",
+        "link": "Link",
+        "setUrl": "Imposta URL",
+        "save": "Salva",
+        "setClip": "Clip ritagliata",
+        "invalidURL": "URL non valido",
+        "invalidFile": "File non valido",
+        "errorNoSource": "Nessuna sorgente audio",
+        "uploadLimit": "Dimensione massima del file: {{size}}",
+        "errorFileSize": "Spiacenti, il file è troppo grande.<br> La dimensione massima del file è {{size}}"
+    },
+    "video": {
+        "reset": "Ripristina",
+        "edit": "modificare",
+        "title": "titolo",
+        "description": "descrizione",
+        "upload": "Caricare",
+        "link": "Link",
+        "setUrl": "Imposta URL",
+        "save": "Salva",
+        "setClip": "Clip ritagliata",
+        "invalidURL": "URL non valido",
+        "invalidFile": "File non valido",
+        "errorNoSource": "Nessuna sorgente video",
+        "uploadLimit": "Dimensione massima del file: {{size}}",
+        "errorFileSize": "Spiacenti, il file è troppo grande.<br> La dimensione massima del file è {{size}}"
+    },
+    "pdf": {
+        "reset": "Ripristina",
+        "edit": "modificare",
+        "title": "titolo",
+        "description": "descrizione",
+        "upload": "Caricare",
+        "link": "Link",
+        "setUrl": "Imposta URL",
+        "save": "Salva",
+        "setClip": "Clip ritagliata",
+        "invalidURL": "URL non valido",
+        "invalidFile": "File non valido",
+        "errorNoSource": "Nessuna fonte pdf",
+        "uploadLimit": "Dimensione massima del file: {{size}}",
+        "errorFileSize": "Spiacenti, il file è troppo grande.<br> La dimensione massima del file è {{size}}"
+    },
+    "image": {
+        "reset": "Ripristina",
+        "edit": "modificare",
+        "title": "titolo",
+        "description": "descrizione",
+        "upload": "Caricare",
+        "link": "Link",
+        "setUrl": "Imposta URL",
+        "save": "Salva",
+        "setClip": "Clip ritagliata",
+        "invalidURL": "URL non valido",
+        "invalidFile": "File non valido",
+        "errorNoSource": "Nessuna fonte di immagine",
+        "uploadLimit": "Dimensione massima del file: {{size}}",
+        "errorFileSize": "Spiacenti, il file è troppo grande.<br> La dimensione massima del file è {{size}}"
     }
 }

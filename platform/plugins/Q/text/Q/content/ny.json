@@ -98,5 +98,23 @@
         "inHour": "mu {{h}} ola",
         "inHours": "mu {{h}} maora",
         "inUnderMinute": "osakwana mphindi 1"
+    },
+    "video": {
+        "clip": "kopanira",
+        "errorNoSource": "Palibe kanema"
+    },
+    "pdf": {
+        "clip": "kopanira",
+        "errorNoSource": "Palibe pdf gwero"
+    },
+    "clip": {
+        "SetClipStart": "Khazikitsani Clip Start",
+        "ClipStart": "Yambani Clip",
+        "SetClipEnd": "Khazikitsani Mapeto",
+        "ClipEnd": "Clip End"
+    },
+    "tabs": {
+        "more": "Zambiri",
+        "Menu": "Menyu"
     }
 }

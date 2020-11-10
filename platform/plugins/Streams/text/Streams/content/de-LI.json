@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, an dieser Unterhaltung teilzunehmen.",
         "startedConversation": "hat ein Gespräch begonnen",
         "RealTimeCall": "Echtzeitanruf",
-        "SearchByName": "Suche mit Name"
+        "SearchByName": "Suche mit Name",
+        "Notifications": {
+            "Visit": "{{displayName}} besucht den Chat",
+            "Join": "{{displayName}} ist dem Chat beigetreten",
+            "Leave": "{{displayName}} hat den Chat verlassen",
+            "RelatedTo": "{{displayName}} hat eine {{stream.displayType}} gestartet"
+        }
     },
     "notifications": {
         "*": "Nachricht {{& message.fields.type}} an {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Neu {{relationDisplayType}} in {{toTitle}}",
         "Streams/relatedFrom/*": "Zu {{toTitle}} hinzugefügt als {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} hat Sie in einem Kommentar erwähnt",
-        "Streams/call": "{{displayName}} ruft Sie an"
+        "Streams/call": "{{displayName}} hat einen Echtzeitanruf gestartet"
     },
     "invite": {
         "messageContent": "{{displayName}} hat Sie zu {{inviteUrl}} eingeladen",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Sind Sie sicher, dass Sie dieses Gerät abbestellen? Benachrichtigungen für dieses Gerät werden deaktiviert.",
         "Identifiers": "Bezeichner",
         "Devices": "Geräte",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Möchten Sie diesen Teilnehmer wirklich entfernen?",
+        "RemoveParticipant": "Teilnehmer entfernen"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Bildschirmfreigabe ausblenden",
             "turnOnCamera": "Video anzeigen",
             "turnOnAudio": "Audio stummschalten",
-            "turnOnScreenSharing": "Bildschirmfreigabe anzeigen"
+            "turnOnScreenSharing": "Bildschirmfreigabe anzeigen",
+            "fullScreen": "Vollbildschirm"
         },
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, diesem Stream beizutreten.",
         "streamTitle": "{{1}} Live-Anruf"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Bild",
-            "description": "visuelles Bild"
+            "description": "visuelles Bild",
+            "newItem": "Bild hinzufügen"
         },
         "Streams/images": {
             "displayType": "Bildergalerie",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Datei",
-            "description": "hochgeladene Datei"
+            "description": "hochgeladene Datei",
+            "newItem": "Datei hinzufügen"
         },
         "Streams/audio": {
             "displayType": "Audio clip",
-            "description": "Audio clip"
+            "description": "Audio clip",
+            "newItem": "Audio hinzufügen"
         },
         "Streams/video": {
             "displayType": "Videoclip",
-            "description": "Videoclip"
+            "description": "Videoclip",
+            "newItem": "Video hinzufügen"
         },
         "Streams/live": {
             "displayType": "Liveübertragung",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "Begrüßung, mit der sich ein Benutzer vorstellen kann",
             "displayType": "Gruß"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-Dokument",
+            "description": "PDF-Dokument",
+            "newItem": "PDF hinzufügen"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dieser Inhalt ist Ihnen verborgen."
+    },
+    "audio": {
+        "record": "Aufzeichnung",
+        "reset": "Zurücksetzen",
+        "edit": "Bearbeiten",
+        "title": "Titel",
+        "description": "Beschreibung",
+        "upload": "Hochladen",
+        "link": "Verknüpfung",
+        "setUrl": "URL festlegen",
+        "save": "sparen",
+        "setClip": "Clip ausschneiden",
+        "invalidURL": "ungültige URL",
+        "invalidFile": "Ungültige Datei",
+        "errorNoSource": "Keine Audioquelle",
+        "uploadLimit": "Maximale Dateigröße: {{size}}",
+        "errorFileSize": "Entschuldigung, aber Datei zu groß.<br> Die maximale Dateigröße beträgt {{size}}"
+    },
+    "video": {
+        "reset": "Zurücksetzen",
+        "edit": "Bearbeiten",
+        "title": "Titel",
+        "description": "Beschreibung",
+        "upload": "Hochladen",
+        "link": "Verknüpfung",
+        "setUrl": "URL festlegen",
+        "save": "sparen",
+        "setClip": "Clip ausschneiden",
+        "invalidURL": "ungültige URL",
+        "invalidFile": "Ungültige Datei",
+        "errorNoSource": "Keine Videoquelle",
+        "uploadLimit": "Maximale Dateigröße: {{size}}",
+        "errorFileSize": "Entschuldigung, aber Datei zu groß.<br> Die maximale Dateigröße beträgt {{size}}"
+    },
+    "pdf": {
+        "reset": "Zurücksetzen",
+        "edit": "Bearbeiten",
+        "title": "Titel",
+        "description": "Beschreibung",
+        "upload": "Hochladen",
+        "link": "Verknüpfung",
+        "setUrl": "URL festlegen",
+        "save": "sparen",
+        "setClip": "Clip ausschneiden",
+        "invalidURL": "ungültige URL",
+        "invalidFile": "Ungültige Datei",
+        "errorNoSource": "Keine PDF-Quelle",
+        "uploadLimit": "Maximale Dateigröße: {{size}}",
+        "errorFileSize": "Entschuldigung, aber Datei zu groß.<br> Die maximale Dateigröße beträgt {{size}}"
+    },
+    "image": {
+        "reset": "Zurücksetzen",
+        "edit": "Bearbeiten",
+        "title": "Titel",
+        "description": "Beschreibung",
+        "upload": "Hochladen",
+        "link": "Verknüpfung",
+        "setUrl": "URL festlegen",
+        "save": "sparen",
+        "setClip": "Clip ausschneiden",
+        "invalidURL": "ungültige URL",
+        "invalidFile": "Ungültige Datei",
+        "errorNoSource": "Keine Bildquelle",
+        "uploadLimit": "Maximale Dateigröße: {{size}}",
+        "errorFileSize": "Entschuldigung, aber Datei zu groß.<br> Die maximale Dateigröße beträgt {{size}}"
     }
 }

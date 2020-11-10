@@ -39,10 +39,13 @@
         "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
         "Buy": "Buy",
-		"PurchaseCredits": "Purchase Credits",
+        "PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet"
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} credits"
+        }
     },
     "history": {
         "Date": "Date",

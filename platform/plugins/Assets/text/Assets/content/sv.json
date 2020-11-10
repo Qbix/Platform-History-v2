@@ -32,7 +32,12 @@
         "Buy": "köpa",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Belopp ogiltigt",
-        "ErrorInvalidCurrency": "Tyvärr stöder vi inte valuta {{currency}} än"
+        "ErrorInvalidCurrency": "Tyvärr stöder vi inte valuta {{currency}} än",
+        "WatchClip": "Fick {{amount}} poäng för att titta på {{fromStreamTitle}}",
+        "PurchaseCredits": "Köpkrediter",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} poäng"
+        }
     },
     "history": {
         "Date": "Datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valfritt bidrag",
         "RequiredPayment": "Obligatorisk betalning",
         "AreYouSureDelete": "Är du säker på att du vill ta bort den här tjänsten?",
-        "AmountServicesRelated": "Det finns {{amount}} tillgängligheter relaterade till den här tjänsten. De kommer också att tas bort."
+        "AmountServicesRelated": "Det finns {{amount}} tillgängligheter relaterade till den här tjänsten. De kommer också att tas bort.",
+        "Free": "Fri"
     }
 }

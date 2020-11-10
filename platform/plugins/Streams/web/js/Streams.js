@@ -4760,6 +4760,17 @@ Streams.isStream = function (value) {
 };
 
 /**
+ * Use this to check whether variable is a Q.Streams.Message object
+ * @static
+ * @method isMessage
+ * @param {mixed} value
+ * @return {boolean}
+ */
+Streams.isMessage = function (value) {
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Message';
+};
+
+/**
  * Use this to check whether user subscribed to stream
  * and also whether subscribed to message type (from streams_subscription_rule)
  * @static

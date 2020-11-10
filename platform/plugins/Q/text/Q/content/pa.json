@@ -98,5 +98,23 @@
         "inHour": "{9 999}} ਘੰਟੇ ਵਿੱਚ",
         "inHours": "{9 999}} ਘੰਟਿਆਂ ਵਿੱਚ",
         "inUnderMinute": "1 ਮਿੰਟ ਦੇ ਅੰਦਰ"
+    },
+    "video": {
+        "clip": "ਕਲਿਪ",
+        "errorNoSource": "ਕੋਈ ਵੀਡੀਓ ਸਰੋਤ ਨਹੀਂ"
+    },
+    "pdf": {
+        "clip": "ਕਲਿਪ",
+        "errorNoSource": "ਕੋਈ ਪੀਡੀਐਫ ਸਰੋਤ ਨਹੀਂ"
+    },
+    "clip": {
+        "SetClipStart": "ਕਲਿੱਪ ਸ਼ੁਰੂ ਕਰੋ",
+        "ClipStart": "ਕਲਿੱਪ ਸਟਾਰਟ",
+        "SetClipEnd": "ਕਲਿੱਪ ਅੰਤ ਸੈੱਟ ਕਰੋ",
+        "ClipEnd": "ਕਲਿੱਪ ਅੰਤ"
+    },
+    "tabs": {
+        "more": "ਹੋਰ",
+        "Menu": "ਮੀਨੂ"
     }
 }

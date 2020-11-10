@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "ikusizko irudia"
+            "description": "ikusizko irudia",
+            "newItem": "Gehitu irudia"
         },
         "Streams\/images": {
             "displayType": "Irudi galeria",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "file",
-            "description": "kargatutako fitxategia"
+            "description": "kargatutako fitxategia",
+            "newItem": "Gehitu fitxategia"
         },
         "Streams\/audio": {
             "displayType": "Audio Klip",
-            "description": "audio bideoa"
+            "description": "audio bideoa",
+            "newItem": "Gehitu audioa"
         },
         "Streams\/video": {
             "displayType": "Bideoklipa",
-            "description": "bideoklipa"
+            "description": "bideoklipa",
+            "newItem": "Gehitu bideoa"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "erabiltzaile batek bere burua aurkez dezakezun agurra",
             "displayType": "Agurra"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokumentua",
+            "description": "PDF dokumentua",
+            "newItem": "Gehitu PDFa"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Eduki hau ezkutatuta dago."
+    },
+    "audio": {
+        "record": "Grabatu",
+        "reset": "Berrezarri",
+        "edit": "Editatu",
+        "title": "Izenburua",
+        "description": "deskribapena",
+        "upload": "Kargatu",
+        "link": "Esteka",
+        "setUrl": "Ezarri URLa",
+        "save": "Gorde",
+        "setClip": "Ebaki klipa",
+        "invalidURL": "URL baliogabea",
+        "invalidFile": "Fitxategi baliogabea",
+        "errorNoSource": "Ez dago audio iturririk",
+        "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
+    },
+    "video": {
+        "reset": "Berrezarri",
+        "edit": "Editatu",
+        "title": "Izenburua",
+        "description": "deskribapena",
+        "upload": "Kargatu",
+        "link": "Esteka",
+        "setUrl": "Ezarri URLa",
+        "save": "Gorde",
+        "setClip": "Ebaki klipa",
+        "invalidURL": "URL baliogabea",
+        "invalidFile": "Fitxategi baliogabea",
+        "errorNoSource": "Ez dago bideo iturririk",
+        "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
+    },
+    "pdf": {
+        "reset": "Berrezarri",
+        "edit": "Editatu",
+        "title": "Izenburua",
+        "description": "deskribapena",
+        "upload": "Kargatu",
+        "link": "Esteka",
+        "setUrl": "Ezarri URLa",
+        "save": "Gorde",
+        "setClip": "Ebaki klipa",
+        "invalidURL": "URL baliogabea",
+        "invalidFile": "Fitxategi baliogabea",
+        "errorNoSource": "Ez dago pdf iturririk",
+        "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
+    },
+    "image": {
+        "reset": "Berrezarri",
+        "edit": "Editatu",
+        "title": "Izenburua",
+        "description": "deskribapena",
+        "upload": "Kargatu",
+        "link": "Esteka",
+        "setUrl": "Ezarri URLa",
+        "save": "Gorde",
+        "setClip": "Ebaki klipa",
+        "invalidURL": "URL baliogabea",
+        "invalidFile": "Fitxategi baliogabea",
+        "errorNoSource": "Ez dago irudi iturririk",
+        "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
     }
 }

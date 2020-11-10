@@ -24,8 +24,17 @@
             "BrowseTheWeb": "prezerať",
             "WriteToStartConversation": "Napíšte svoje myšlienky na začatie konverzácie",
             "StartConversation": "Spustite konverzáciu",
-            "GotoConversation": "Prejdite na konverzáciu"
-        }
+            "GotoConversation": "Prejdite na konverzáciu",
+            "reset": "Resetovať",
+            "edit": "Upraviť",
+            "link": "Odkaz",
+            "setUrl": "Nastaviť URL",
+            "save": "Uložiť",
+            "setClip": "Vystrihnúť klip",
+            "invalidURL": "neplatná URL adresa"
+        },
+        "FileTooLarge": "Súbor je príliš veľký na uloženie do pamäte cache. Maximálna veľkosť súboru {{size}}",
+        "InvalidPDF": "Súbor nie je platný súbor PDF"
     },
     "types": {
         "Websites\/article": {

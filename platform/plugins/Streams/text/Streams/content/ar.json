@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "صورة",
-            "description": "الصورة المرئية"
+            "description": "الصورة المرئية",
+            "newItem": "إضافة صورة"
         },
         "Streams\/images": {
             "displayType": "معرض الصور",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "ملف",
-            "description": "ملف تم الرفع"
+            "description": "ملف تم الرفع",
+            "newItem": "اضف ملف"
         },
         "Streams\/audio": {
             "displayType": "مقطع صوتي",
-            "description": "مقطع صوتي"
+            "description": "مقطع صوتي",
+            "newItem": "أضف الصوت"
         },
         "Streams\/video": {
             "displayType": "مقطع فيديو",
-            "description": "مقطع فيديو"
+            "description": "مقطع فيديو",
+            "newItem": "أضف فيديو"
         },
         "Streams\/live": {
             "displayType": "البث المباشر",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "التحية التي يمكن للمستخدم تقديم أنفسهم",
             "displayType": "تحية"
+        },
+        "Streams\/pdf": {
+            "displayType": "وثيقة PDF",
+            "description": "وثيقة PDF",
+            "newItem": "أضف ملف PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "هذا المحتوى مخفي عنك."
+    },
+    "audio": {
+        "record": "سجل",
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر صوتي",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "video": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر فيديو",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "pdf": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر pdf",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "image": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر للصورة",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
     }
 }

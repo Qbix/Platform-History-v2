@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Imagine",
-            "description": "Imagine vizuală"
+            "description": "Imagine vizuală",
+            "newItem": "Adauga imagine"
         },
         "Streams\/images": {
             "displayType": "Galerie de imagini",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Fişier",
-            "description": "fișier încărcat"
+            "description": "fișier încărcat",
+            "newItem": "Adauga fisier"
         },
         "Streams\/audio": {
             "displayType": "Clip audio",
-            "description": "clip audio"
+            "description": "clip audio",
+            "newItem": "Adăugați sunet"
         },
         "Streams\/video": {
             "displayType": "Clip video",
-            "description": "clip video"
+            "description": "clip video",
+            "newItem": "Adăugați videoclip"
         },
         "Streams\/live": {
             "displayType": "Transmitere live",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "salut cu care un utilizator se poate prezenta",
             "displayType": "Salut"
+        },
+        "Streams\/pdf": {
+            "displayType": "Document PDF",
+            "description": "Document PDF",
+            "newItem": "Adăugați PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Acest conținut vă este ascuns."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Resetați",
+        "edit": "Editați | ×",
+        "title": "titlu",
+        "description": "Descriere",
+        "upload": "Încărcare",
+        "link": "Legătură",
+        "setUrl": "Setați adresa URL",
+        "save": "Salvați",
+        "setClip": "Decupați clipul",
+        "invalidURL": "URL invalid",
+        "invalidFile": "Fișier invalid",
+        "errorNoSource": "Fără sursă audio",
+        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+    },
+    "video": {
+        "reset": "Resetați",
+        "edit": "Editați | ×",
+        "title": "titlu",
+        "description": "Descriere",
+        "upload": "Încărcare",
+        "link": "Legătură",
+        "setUrl": "Setați adresa URL",
+        "save": "Salvați",
+        "setClip": "Decupați clipul",
+        "invalidURL": "URL invalid",
+        "invalidFile": "Fișier invalid",
+        "errorNoSource": "Fără sursă video",
+        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetați",
+        "edit": "Editați | ×",
+        "title": "titlu",
+        "description": "Descriere",
+        "upload": "Încărcare",
+        "link": "Legătură",
+        "setUrl": "Setați adresa URL",
+        "save": "Salvați",
+        "setClip": "Decupați clipul",
+        "invalidURL": "URL invalid",
+        "invalidFile": "Fișier invalid",
+        "errorNoSource": "Fără sursă pdf",
+        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+    },
+    "image": {
+        "reset": "Resetați",
+        "edit": "Editați | ×",
+        "title": "titlu",
+        "description": "Descriere",
+        "upload": "Încărcare",
+        "link": "Legătură",
+        "setUrl": "Setați adresa URL",
+        "save": "Salvați",
+        "setClip": "Decupați clipul",
+        "invalidURL": "URL invalid",
+        "invalidFile": "Fișier invalid",
+        "errorNoSource": "Nicio sursă de imagine",
+        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
     }
 }

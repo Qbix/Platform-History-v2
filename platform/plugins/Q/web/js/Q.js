@@ -104,7 +104,8 @@ Q.text = {
 			"ok": "Go"
 		},
 		"tabs": {
-			"more": "more"
+			"more": "more",
+			"Menu": "Menu"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -575,25 +576,6 @@ Sp.deobfuscate = function (key) {
 	}
 	return result;
 };
-
-/**
- * Convert time from milliseconds to hh:mm:ss string
- * @method convertTimeToString
- * @param {boolean} [omitHours=true] If true omit hours if 00
- * @return {string} formatted string
- */
-Sp.convertTimeToString = function (omitHours) {
-	omitHours = Q.typeOf(omitHours) === 'boolean' ? omitHours : true;
-	var time = Math.trunc(parseInt(this) || 0);
-	var timeString = new Date(time).toISOString().substr(11, 8);
-
-	// omit hh if 00
-	if (omitHours) {
-		timeString = timeString.replace(/^00:/, '');
-	}
-
-	return timeString;
-}
 
 /**
  * @class Function
@@ -3844,12 +3826,13 @@ Q.Tool = function _Q_Tool(element, options) {
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
 	this.id = this.prefix.substr(0, this.prefix.length-1);
-	
-	if (Q.Tool.byId(this.id, this.name)) {
+
+	var activeTool = null;
+	if (activeTool = Q.Tool.byId(this.id, this.name)) {
 		var toolName = Q.Tool.names[this.name];
 		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
 		//throw new Q.Error(errMsg);
-		console.warn(errMsg);
+		console.warn(errMsg, activeTool);
 	}
 
 	// for later use
@@ -9428,6 +9411,32 @@ Q.handle.onUrl = new Q.Event(function () {
 }, "Q");
 
 /**
+ * Displays a duration
+ * @static
+ * @method displayDuration
+ * @param {Integer} milliseconds The number of milliseconds from start
+ * @param {Object} forceShow=[{hours:false,seconds:true}] Whether to show hours or seconds if they are 00
+ * @return {String} A string of the form "hh:mm:ss" depending on forceShow
+ */
+Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
+	milliseconds = parseInt(milliseconds);
+	if (!forceShow) {
+		forceShow = { hours: false, seconds: true };
+	}
+	var seconds = Math.floor(milliseconds / 1000);
+	var minutes = Math.floor(seconds / 60);
+	var hours = Math.floor(minutes / 60);
+	var components = [minutes % 60];
+	if (seconds || forceShow.seconds) {
+		components.push(seconds % 60);
+	}
+	if (hours || forceShow.hours) {
+		components.shift(hours);
+	}
+	return components.join(':');
+};
+
+/**
  * Parses a querystring
  * @static
  * @method parseQueryString
@@ -9604,7 +9613,8 @@ function _activateTools(toolElement, options, shared) {
 			var _constructor = _constructors[toolName];
 			var result = new _constructor(toolElement, options);
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			shared.tools[toolId] = shared.tool = tool;
+			shared.tool = tool;
+			Q.setObject([toolId, toolName], tool, shared);
 			if (uniqueToolId) {
 				if (uniqueToolId === shared.firstToolId) {
 					shared.firstTool = tool;
@@ -10875,6 +10885,18 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		});
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
+
+	var htmlOriginal = $.fn.html;
+	$.fn.html = function () {
+		var args = Array.prototype.slice.call(arguments, 0);
+		if (args.pop() === true) {
+			this.each(function () {
+				Q.Tool.clear(this);
+			});
+			return htmlOriginal.apply(this, args);
+		}
+		return htmlOriginal.apply(this, arguments);
+	};
 	
 	Q.each({
 		'on': 'off',

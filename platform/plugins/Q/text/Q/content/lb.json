@@ -98,5 +98,23 @@
         "inHour": "an {{h}} Stonn",
         "inHours": "an {{h}} Stonnen",
         "inUnderMinute": "an ënner 1 Minutt"
+    },
+    "video": {
+        "clip": "Clip",
+        "errorNoSource": "Keng Videoquell"
+    },
+    "pdf": {
+        "clip": "Clip",
+        "errorNoSource": "Keng pdf Quell"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip Enn"
+    },
+    "tabs": {
+        "more": "méi",
+        "Menu": "Menu"
     }
 }

@@ -98,5 +98,23 @@
         "inHour": "ni wakati {{h}}",
         "inHours": "ninu awọn wakati {{h}}",
         "inUnderMinute": "ni labẹ iṣẹju 1"
+    },
+    "video": {
+        "clip": "agekuru",
+        "errorNoSource": "Ko si orisun fidio"
+    },
+    "pdf": {
+        "clip": "agekuru",
+        "errorNoSource": "Ko si orisun pdf"
+    },
+    "clip": {
+        "SetClipStart": "Ṣeto Bẹrẹ Agekuru",
+        "ClipStart": "Bẹrẹ Agekuru",
+        "SetClipEnd": "Ṣeto Agekuru Ipari",
+        "ClipEnd": "Agekuru Ipari"
+    },
+    "tabs": {
+        "more": "siwaju sii",
+        "Menu": "Akojọ aṣyn"
     }
 }

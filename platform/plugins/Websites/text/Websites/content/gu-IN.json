@@ -24,8 +24,17 @@
             "BrowseTheWeb": "બ્રાઉઝ કરો",
             "WriteToStartConversation": "વાતચીત શરૂ કરવા માટે તમારા વિચારો લખો",
             "StartConversation": "વાતચીત શરૂ કરો",
-            "GotoConversation": "વાતચીતમાં જાઓ"
-        }
+            "GotoConversation": "વાતચીતમાં જાઓ",
+            "reset": "ફરીથી સેટ કરો",
+            "edit": "સંપાદિત કરો",
+            "link": "કડી",
+            "setUrl": "URL સેટ કરો",
+            "save": "સાચવો",
+            "setClip": "ક્લિપ આઉટ કરો",
+            "invalidURL": "અમાન્ય URL"
+        },
+        "FileTooLarge": "કેશીંગ માટે ફાઇલ ખૂબ મોટી છે. મહત્તમ ફાઇલ કદ {{999}",
+        "InvalidPDF": "ફાઇલ માન્ય પીડીએફ નથી"
     },
     "types": {
         "Websites/article": {

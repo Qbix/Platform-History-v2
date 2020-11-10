@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Navega",
             "WriteToStartConversation": "Escribe os teus pensamentos para comezar a conversa",
             "StartConversation": "Iniciar conversa",
-            "GotoConversation": "Va a Conversa"
-        }
+            "GotoConversation": "Va a Conversa",
+            "reset": "Restablecer",
+            "edit": "Editar",
+            "link": "Ligazón",
+            "setUrl": "Definir URL",
+            "save": "Gardar",
+            "setClip": "Clip de recorte",
+            "invalidURL": "URL non válido"
+        },
+        "FileTooLarge": "O ficheiro é demasiado grande para almacenar na caché. Tamaño máximo do ficheiro {{size}}",
+        "InvalidPDF": "O ficheiro non é un PDF válido"
     },
     "types": {
         "Websites\/article": {

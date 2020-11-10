@@ -98,5 +98,23 @@
         "inHour": "{{h}} цагт",
         "inHours": "{{h}} цагт",
         "inUnderMinute": "1 минутын дотор"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Видео эх сурвалж байхгүй"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "PDF эх сурвалж байхгүй"
+    },
+    "clip": {
+        "SetClipStart": "Клип Эхлэлийг тохируулна уу",
+        "ClipStart": "Клип Эхлэл",
+        "SetClipEnd": "Клипний төгсгөлийг тохируулна уу",
+        "ClipEnd": "Клип Төгсгөл"
+    },
+    "tabs": {
+        "more": "дэлгэрэнгүй",
+        "Menu": "Цэс"
     }
 }

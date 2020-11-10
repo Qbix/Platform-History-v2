@@ -98,5 +98,23 @@
         "inHour": "kwi {{h}} yure",
         "inHours": "kwi {{h}} iiyure",
         "inUnderMinute": "phantsi komzuzu omnye"
+    },
+    "video": {
+        "clip": "ikliphu",
+        "errorNoSource": "Akukho mthombo wevidiyo"
+    },
+    "pdf": {
+        "clip": "ikliphu",
+        "errorNoSource": "Akukho pdf mthombo"
+    },
+    "clip": {
+        "SetClipStart": "Cwangcisa ukuqala kwesiqwengana",
+        "ClipStart": "Isiqalo sokuqala",
+        "SetClipEnd": "Cwangcisa ukuphela kwesiqwengana",
+        "ClipEnd": "Ukuphela kwesiqwengana"
+    },
+    "tabs": {
+        "more": "Kaninzi",
+        "Menu": "Imenyu"
     }
 }

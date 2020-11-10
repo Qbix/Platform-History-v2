@@ -32,7 +32,12 @@
         "Buy": "Osta",
         "Credits": "Autorid",
         "ErrorInvalidAmount": "Summa on kehtetu",
-        "ErrorInvalidCurrency": "Kahjuks ei toeta me veel valuutat {{currency}}"
+        "ErrorInvalidCurrency": "Kahjuks ei toeta me veel valuutat {{currency}}",
+        "WatchClip": "Teenisite {{fromStreamTitle}} vaatamise eest {{amount}} krediiti",
+        "PurchaseCredits": "Ostu krediiti",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} krediiti"
+        }
     },
     "history": {
         "Date": "Kuupäev",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valikuline panus",
         "RequiredPayment": "Nõutav makse",
         "AreYouSureDelete": "Kas soovite kindlasti selle teenuse kustutada?",
-        "AmountServicesRelated": "Selle teenusega on {{amount}} saadaval. Samuti eemaldatakse need."
+        "AmountServicesRelated": "Selle teenusega on {{amount}} saadaval. Samuti eemaldatakse need.",
+        "Free": "Tasuta"
     }
 }

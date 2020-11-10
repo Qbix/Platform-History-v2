@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "તમને આ વાતચીતમાં જોડાવાની પરવાનગી નથી.",
         "startedConversation": "વાતચીત શરૂ કરી",
         "RealTimeCall": "રીઅલ ટાઇમ ક Callલ",
-        "SearchByName": "નામ દ્વારા શોધો"
+        "SearchByName": "નામ દ્વારા શોધો",
+        "Notifications": {
+            "Visit": "{9 999} the ચેટની મુલાકાત લઈ રહ્યાં છે",
+            "Join": "The 9 999} the ચેટમાં જોડાયા",
+            "Leave": "The 9 999} the એ ચેટ છોડી દીધી",
+            "RelatedTo": "{{999} એ {{stream.displayType}} પ્રારંભ કર્યું"
+        }
     },
     "notifications": {
         "*": "સંદેશ {{& message.fields.type}} થી {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "New {1000}} માં નવું {999}",
         "Streams/relatedFrom/*": "{{relationDisplayType}} તરીકે {9 999} to માં ઉમેર્યું",
         "Streams/mention": "{{999} a એ એક ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો",
-        "Streams/call": "{{999} you તમને ક}લ કરે છે"
+        "Streams/call": "{9 999} a એક રીઅલ-ટાઇમ ક callલ પ્રારંભ કર્યો"
     },
     "invite": {
         "messageContent": "{{displayName}} તમને {{inviteUrl}} માં આમંત્રિત કર્યા છે",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "શું તમે ખરેખર આ ઉપકરણને અનસબ્સ્ક્રાઇબ કરો છો? તે આ ઉપકરણ પર સૂચનાઓ બંધ કરશે.",
         "Identifiers": "ઓળખકર્તાઓ",
         "Devices": "ઉપકરણો",
-        "Streams": "સ્ટ્રીમ્સ"
+        "Streams": "સ્ટ્રીમ્સ",
+        "AreYouSureRemoveParticipant": "શું તમે ખરેખર આ સહભાગીને દૂર કરવા માંગો છો?",
+        "RemoveParticipant": "સહભાગીને દૂર કરો"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "સ્ક્રીન શેરિંગ છુપાવો",
             "turnOnCamera": "વિડિઓ બતાવો",
             "turnOnAudio": "Mડિઓ અવાજ બંધ કરો",
-            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો"
+            "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો",
+            "fullScreen": "સંપૂર્ણ સ્ક્રીન"
         },
         "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
         "streamTitle": "} 9 999}} લાઇવ ક callલ"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "છબી",
-            "description": "દ્રશ્ય છબી"
+            "description": "દ્રશ્ય છબી",
+            "newItem": "છબી ઉમેરો"
         },
         "Streams/images": {
             "displayType": "છબી ગેલેરી",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ફાઇલ",
-            "description": "અપલોડ કરેલી ફાઇલ"
+            "description": "અપલોડ કરેલી ફાઇલ",
+            "newItem": "ફાઇલ ઉમેરો"
         },
         "Streams/audio": {
             "displayType": "Audioડિઓ ક્લિપ",
-            "description": "audioડિઓ ક્લિપ"
+            "description": "audioડિઓ ક્લિપ",
+            "newItem": "Audioડિઓ ઉમેરો"
         },
         "Streams/video": {
             "displayType": "વિડિઓ ક્લિપ",
-            "description": "વિડિઓ ક્લિપ"
+            "description": "વિડિઓ ક્લિપ",
+            "newItem": "વિડિઓ ઉમેરો"
         },
         "Streams/live": {
             "displayType": "જીવંત પ્રવાહ",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "અભિવાદન જેની સાથે વપરાશકર્તા પોતાનો પરિચય આપી શકે",
             "displayType": "અભિવાદન"
+        },
+        "Streams/pdf": {
+            "displayType": "પીડીએફ દસ્તાવેજ",
+            "description": "પીડીએફ દસ્તાવેજ",
+            "newItem": "પીડીએફ ઉમેરો"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "આ સામગ્રી તમારી પાસેથી છુપાયેલ છે."
+    },
+    "audio": {
+        "record": "રેકોર્ડ",
+        "reset": "ફરીથી સેટ કરો",
+        "edit": "સંપાદિત કરો",
+        "title": "શીર્ષક",
+        "description": "વર્ણન",
+        "upload": "અપલોડ કરો",
+        "link": "કડી",
+        "setUrl": "URL સેટ કરો",
+        "save": "સાચવો",
+        "setClip": "ક્લિપ આઉટ કરો",
+        "invalidURL": "અમાન્ય URL",
+        "invalidFile": "અમાન્ય ફાઇલ",
+        "errorNoSource": "કોઈ audioડિઓ સ્રોત નથી",
+        "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
+    },
+    "video": {
+        "reset": "ફરીથી સેટ કરો",
+        "edit": "સંપાદિત કરો",
+        "title": "શીર્ષક",
+        "description": "વર્ણન",
+        "upload": "અપલોડ કરો",
+        "link": "કડી",
+        "setUrl": "URL સેટ કરો",
+        "save": "સાચવો",
+        "setClip": "ક્લિપ આઉટ કરો",
+        "invalidURL": "અમાન્ય URL",
+        "invalidFile": "અમાન્ય ફાઇલ",
+        "errorNoSource": "કોઈ વિડિઓ સ્રોત નથી",
+        "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
+    },
+    "pdf": {
+        "reset": "ફરીથી સેટ કરો",
+        "edit": "સંપાદિત કરો",
+        "title": "શીર્ષક",
+        "description": "વર્ણન",
+        "upload": "અપલોડ કરો",
+        "link": "કડી",
+        "setUrl": "URL સેટ કરો",
+        "save": "સાચવો",
+        "setClip": "ક્લિપ આઉટ કરો",
+        "invalidURL": "અમાન્ય URL",
+        "invalidFile": "અમાન્ય ફાઇલ",
+        "errorNoSource": "કોઈ પીડીએફ સ્રોત નથી",
+        "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
+    },
+    "image": {
+        "reset": "ફરીથી સેટ કરો",
+        "edit": "સંપાદિત કરો",
+        "title": "શીર્ષક",
+        "description": "વર્ણન",
+        "upload": "અપલોડ કરો",
+        "link": "કડી",
+        "setUrl": "URL સેટ કરો",
+        "save": "સાચવો",
+        "setClip": "ક્લિપ આઉટ કરો",
+        "invalidURL": "અમાન્ય URL",
+        "invalidFile": "અમાન્ય ફાઇલ",
+        "errorNoSource": "કોઈ છબી સ્રોત નથી",
+        "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
     }
 }

@@ -32,7 +32,12 @@
         "Buy": "Satın",
         "Credits": "Kredi",
         "ErrorInvalidAmount": "Tutar geçersiz",
-        "ErrorInvalidCurrency": "Maalesef {{currency}} para birimini henüz desteklemiyoruz"
+        "ErrorInvalidCurrency": "Maalesef {{currency}} para birimini henüz desteklemiyoruz",
+        "WatchClip": "{{fromStreamTitle}} izleyerek {{amount}} kredi kazandım",
+        "PurchaseCredits": "satın alma kredisi",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredi"
+        }
     },
     "history": {
         "Date": "tarih",
@@ -143,6 +148,7 @@
         "OptionalContribution": "İsteğe bağlı katkı",
         "RequiredPayment": "Gerekli ödeme",
         "AreYouSureDelete": "Bu hizmeti silmek istediğinizden emin misiniz?",
-        "AmountServicesRelated": "Bu hizmetle ilgili {{amount}} kullanılabilirlik var. Onlar da kaldırılacak."
+        "AmountServicesRelated": "Bu hizmetle ilgili {{amount}} kullanılabilirlik var. Onlar da kaldırılacak.",
+        "Free": "Bedava"
     }
 }

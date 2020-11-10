@@ -100,6 +100,21 @@
         "inUnderMinute": "per mažiau nei 1 minutę"
     },
     "tabs": {
-        "more": "daugiau"
+        "more": "daugiau",
+        "Menu": "Meniu"
+    },
+    "video": {
+        "clip": "klipas",
+        "errorNoSource": "Nėra vaizdo šaltinio"
+    },
+    "pdf": {
+        "clip": "klipas",
+        "errorNoSource": "Nėra pdf šaltinio"
+    },
+    "clip": {
+        "SetClipStart": "Nustatykite „Clip Start“",
+        "ClipStart": "„Clip Start“",
+        "SetClipEnd": "Nustatyti „Clip End“",
+        "ClipEnd": "Klipo pabaiga"
     }
 }

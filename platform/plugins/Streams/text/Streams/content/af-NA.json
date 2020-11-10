@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "U het nie toestemming om aan hierdie gesprek deel te neem nie.",
         "startedConversation": "&#39;n gesprek begin",
         "RealTimeCall": "Intydse oproep",
-        "SearchByName": "Soek op naam"
+        "SearchByName": "Soek op naam",
+        "Notifications": {
+            "Visit": "{{displayName}} besoek die klets",
+            "Join": "{{displayName}} het by die klets aangesluit",
+            "Leave": "{{displayName}} het die klets verlaat",
+            "RelatedTo": "{{displayName}} het &#39;n {{stream.displayType}} begin"
+        }
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} na {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams/relatedFrom/*": "By {{toTitle}} as {{relationDisplayType}} gevoeg",
         "Streams/mention": "{{&call 'avatar.displayName'}} het u in &#39;n opmerking genoem",
-        "Streams/call": "{{displayName}} bel jou"
+        "Streams/call": "{{displayName}} het &#39;n intydse oproep begin"
     },
     "invite": {
         "messageContent": "{{displayName}} het jou genooi na {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Is u seker dat u hierdie toestel inteken? Dit sal kennisgewings op hierdie toestel afskakel.",
         "Identifiers": "identifiseerders",
         "Devices": "toestelle",
-        "Streams": "strome"
+        "Streams": "strome",
+        "AreYouSureRemoveParticipant": "Is u seker dat u hierdie deelnemer wil verwyder?",
+        "RemoveParticipant": "Verwyder die deelnemer"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Versteek skermdeling",
             "turnOnCamera": "Wys video",
             "turnOnAudio": "Demp klank uit",
-            "turnOnScreenSharing": "Wys skermdeling"
+            "turnOnScreenSharing": "Wys skermdeling",
+            "fullScreen": "Volskerm"
         },
         "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
         "streamTitle": "{{1}} regstreekse oproep"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Image",
-            "description": "visuele beeld"
+            "description": "visuele beeld",
+            "newItem": "Voeg prentjie by"
         },
         "Streams/images": {
             "displayType": "Prentgalery",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "lêer",
-            "description": "opgelaaide lêer"
+            "description": "opgelaaide lêer",
+            "newItem": "Voeg lêer by"
         },
         "Streams/audio": {
             "displayType": "Klankgreep",
-            "description": "klankgreep"
+            "description": "klankgreep",
+            "newItem": "Voeg klank by"
         },
         "Streams/video": {
             "displayType": "Videoklip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Voeg video by"
         },
         "Streams/live": {
             "displayType": "Lewendige stroom",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "groet waarmee &#39;n gebruiker hulself kan voorstel",
             "displayType": "groet"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Voeg PDF by"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Hierdie inhoud is vir u weggesteek."
+    },
+    "audio": {
+        "record": "Neem op",
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen klankbron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "video": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen video-bron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "pdf": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen pdf-bron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "image": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen beeldbron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
     }
 }

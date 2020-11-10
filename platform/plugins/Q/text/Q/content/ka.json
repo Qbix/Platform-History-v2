@@ -100,6 +100,21 @@
         "inUnderMinute": "1 წუთში"
     },
     "tabs": {
-        "more": "მეტი"
+        "more": "მეტი",
+        "Menu": "მენიუ"
+    },
+    "video": {
+        "clip": "კლიპი",
+        "errorNoSource": "ვიდეოს წყარო არ არის"
+    },
+    "pdf": {
+        "clip": "კლიპი",
+        "errorNoSource": "არ არის pdf წყარო"
+    },
+    "clip": {
+        "SetClipStart": "დააყენეთ კლიპის დაწყება",
+        "ClipStart": "კლიპის დაწყება",
+        "SetClipEnd": "კლიპის დასასრული",
+        "ClipEnd": "კლიპის დასასრული"
     }
 }

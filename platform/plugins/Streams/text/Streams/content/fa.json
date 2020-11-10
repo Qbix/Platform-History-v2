@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "تصویر",
-            "description": "تصویر بصری"
+            "description": "تصویر بصری",
+            "newItem": "تصویر اضافه کن"
         },
         "Streams\/images": {
             "displayType": "گالری عکس",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "فایل",
-            "description": "پرونده بارگذاری شده"
+            "description": "پرونده بارگذاری شده",
+            "newItem": "افزودن پرونده"
         },
         "Streams\/audio": {
             "displayType": "کلیپ صوتی",
-            "description": "کلیپ صوتی"
+            "description": "کلیپ صوتی",
+            "newItem": "صدا را اضافه کنید"
         },
         "Streams\/video": {
             "displayType": "کلیپ ویدیویی",
-            "description": "کلیپ ویدیویی"
+            "description": "کلیپ ویدیویی",
+            "newItem": "افزودن ویدئو"
         },
         "Streams\/live": {
             "displayType": "پخش زنده",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "با سلام که کاربر می تواند خود را معرفی کند",
             "displayType": "تبریک"
+        },
+        "Streams\/pdf": {
+            "displayType": "سند PDF",
+            "description": "سند PDF",
+            "newItem": "PDF را اضافه کنید"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "این محتوا از شما پنهان است."
+    },
+    "audio": {
+        "record": "رکورد",
+        "reset": "تنظیم مجدد",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "نشانی وب نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع صوتی وجود ندارد",
+        "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
+        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
+    },
+    "video": {
+        "reset": "تنظیم مجدد",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "نشانی وب نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع ویدیویی وجود ندارد",
+        "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
+        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
+    },
+    "pdf": {
+        "reset": "تنظیم مجدد",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "نشانی وب نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع pdf نیست",
+        "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
+        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
+    },
+    "image": {
+        "reset": "تنظیم مجدد",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "نشانی وب نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع تصویری وجود ندارد",
+        "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
+        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
     }
 }

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "이 대화에 참여할 수있는 권한이 없습니다.",
         "startedConversation": "대화를 시작했다.",
         "RealTimeCall": "실시간 통화",
-        "SearchByName": "이름으로 검색"
+        "SearchByName": "이름으로 검색",
+        "Notifications": {
+            "Visit": "{{displayName}} 님이 채팅을 방문 중입니다",
+            "Join": "{{displayName}} 님이 채팅에 참여했습니다",
+            "Leave": "{{displayName}} 님이 채팅에서 나갔습니다",
+            "RelatedTo": "{{displayName}}가 {{stream.displayType}}을 (를) 시작했습니다"
+        }
     },
     "notifications": {
         "*": "메시지 {{& message.fields.type}} ~ {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}}의 새로운 {{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{toTitle}}에 {{relationDisplayType}}으로 추가됨",
         "Streams/mention": "{{&call 'avatar.displayName'}} 님이 댓글에서 나를 멘션했습니다",
-        "Streams/call": "{{displayName}} 님이 전화합니다"
+        "Streams/call": "{{displayName}}가 실시간 통화를 시작했습니다"
     },
     "invite": {
         "messageContent": "{{displayName}} 님이 {{inviteUrl}}에 당신을 초대했습니다.",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "이 기기를 구독 취소 하시겠습니까? 이 장치에 대한 알림이 꺼집니다.",
         "Identifiers": "식별자",
         "Devices": "장치",
-        "Streams": "스트림"
+        "Streams": "스트림",
+        "AreYouSureRemoveParticipant": "이 참가자를 삭제 하시겠습니까?",
+        "RemoveParticipant": "참가자 제거"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "화면 공유 숨기기",
             "turnOnCamera": "비디오 표시",
             "turnOnAudio": "음소거 해제",
-            "turnOnScreenSharing": "화면 공유 표시"
+            "turnOnScreenSharing": "화면 공유 표시",
+            "fullScreen": "전체 화면"
         },
         "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
         "streamTitle": "{{1}} 실시간 통화"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "영상",
-            "description": "시각적 이미지"
+            "description": "시각적 이미지",
+            "newItem": "이미지 추가"
         },
         "Streams/images": {
             "displayType": "이미지 갤러리",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "파일",
-            "description": "업로드 된 파일"
+            "description": "업로드 된 파일",
+            "newItem": "파일 추가"
         },
         "Streams/audio": {
             "displayType": "오디오 클립",
-            "description": "오디오 클립"
+            "description": "오디오 클립",
+            "newItem": "오디오 추가"
         },
         "Streams/video": {
             "displayType": "비디오 클립",
-            "description": "비디오 클립"
+            "description": "비디오 클립",
+            "newItem": "비디오 추가"
         },
         "Streams/live": {
             "displayType": "라이브 스트림",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "사용자가 자신을 소개 할 수있는 인사말",
             "displayType": "인사"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF 문서",
+            "description": "PDF 문서",
+            "newItem": "PDF 추가"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "이 콘텐츠는 귀하에게서 숨겨져 있습니다."
+    },
+    "audio": {
+        "record": "기록",
+        "reset": "초기화",
+        "edit": "편집하다",
+        "title": "표제",
+        "description": "기술",
+        "upload": "업로드",
+        "link": "링크",
+        "setUrl": "URL 설정",
+        "save": "저장",
+        "setClip": "잘라낸 클립",
+        "invalidURL": "잘못된 URL",
+        "invalidFile": "유효하지 않은 파일",
+        "errorNoSource": "오디오 소스 없음",
+        "uploadLimit": "최대 파일 크기 : {{size}}",
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+    },
+    "video": {
+        "reset": "초기화",
+        "edit": "편집하다",
+        "title": "표제",
+        "description": "기술",
+        "upload": "업로드",
+        "link": "링크",
+        "setUrl": "URL 설정",
+        "save": "저장",
+        "setClip": "잘라낸 클립",
+        "invalidURL": "잘못된 URL",
+        "invalidFile": "유효하지 않은 파일",
+        "errorNoSource": "비디오 소스 없음",
+        "uploadLimit": "최대 파일 크기 : {{size}}",
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+    },
+    "pdf": {
+        "reset": "초기화",
+        "edit": "편집하다",
+        "title": "표제",
+        "description": "기술",
+        "upload": "업로드",
+        "link": "링크",
+        "setUrl": "URL 설정",
+        "save": "저장",
+        "setClip": "잘라낸 클립",
+        "invalidURL": "잘못된 URL",
+        "invalidFile": "유효하지 않은 파일",
+        "errorNoSource": "PDF 소스 없음",
+        "uploadLimit": "최대 파일 크기 : {{size}}",
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+    },
+    "image": {
+        "reset": "초기화",
+        "edit": "편집하다",
+        "title": "표제",
+        "description": "기술",
+        "upload": "업로드",
+        "link": "링크",
+        "setUrl": "URL 설정",
+        "save": "저장",
+        "setClip": "잘라낸 클립",
+        "invalidURL": "잘못된 URL",
+        "invalidFile": "유효하지 않은 파일",
+        "errorNoSource": "이미지 소스 없음",
+        "uploadLimit": "최대 파일 크기 : {{size}}",
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
     }
 }

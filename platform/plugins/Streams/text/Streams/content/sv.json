@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Bild",
-            "description": "visuell bild"
+            "description": "visuell bild",
+            "newItem": "Lägg till bild"
         },
         "Streams\/images": {
             "displayType": "Bildgalleri",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Fil",
-            "description": "uppladdad fil"
+            "description": "uppladdad fil",
+            "newItem": "Lägg till fil"
         },
         "Streams\/audio": {
             "displayType": "Ljudklipp",
-            "description": "ljudklipp"
+            "description": "ljudklipp",
+            "newItem": "Lägg till ljud"
         },
         "Streams\/video": {
             "displayType": "Videoklipp",
-            "description": "videoklipp"
+            "description": "videoklipp",
+            "newItem": "Lägg till video"
         },
         "Streams\/live": {
             "displayType": "Direktsändning",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "hälsning som en användare kan presentera sig med",
             "displayType": "Hälsning"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Lägg till PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Detta innehåll är gömt för dig."
+    },
+    "audio": {
+        "record": "Spela in",
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen ljudkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "video": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen videokälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "pdf": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen pdf-källa",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "image": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen bildkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
     }
 }

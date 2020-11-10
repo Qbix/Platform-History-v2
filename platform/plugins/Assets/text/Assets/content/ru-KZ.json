@@ -32,7 +32,12 @@
         "Buy": "купить",
         "Credits": "кредиты",
         "ErrorInvalidAmount": "Неверная сумма",
-        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}}"
+        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}}",
+        "WatchClip": "Заработано {{amount}} кредитов за просмотр {{fromStreamTitle}}",
+        "PurchaseCredits": "Покупка кредитов",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредиты"
+        }
     },
     "history": {
         "Date": "Дата",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Дополнительный вклад",
         "RequiredPayment": "Требуется оплата",
         "AreYouSureDelete": "Вы уверены, что хотите удалить эту услугу?",
-        "AmountServicesRelated": "{{amount}} существует доступность, связанная с этой услугой. Они также будут удалены."
+        "AmountServicesRelated": "{{amount}} существует доступность, связанная с этой услугой. Они также будут удалены.",
+        "Free": "Свободно"
     }
 }

@@ -880,6 +880,10 @@ html.Q_layout_sidebar {
 	border: 1px solid #777;
 	background: white;
 }
+Q_tabbing_container .Q_tabbing_item.Q_tabs_switchingTo,
+Q_tabbing_container .Q_tabbing_item.Q_current:not(.Q_tabs_switchingFrom) {
+	background-color: white;
+}
 .Q_tabbing_container .Q_tabbing_item {
 	display: none;
 	padding: 10px 5px 5px 5px;
@@ -888,3 +892,7 @@ html.Q_layout_sidebar {
 	display: block;
 }
 /* </Q tabs> */
+
+.Q_dialog_imagepicker .Q_viewport {
+	display: block;
+}

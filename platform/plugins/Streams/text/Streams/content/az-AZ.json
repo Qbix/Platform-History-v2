@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Bu söhbətə qoşulmaq üçün icazəniz yoxdur.",
         "startedConversation": "söhbətə başladı",
         "RealTimeCall": "Real vaxt zəng",
-        "SearchByName": "Adı ilə axtarın"
+        "SearchByName": "Adı ilə axtarın",
+        "Notifications": {
+            "Visit": "{{displayName}} sohbeti ziyarət edir",
+            "Join": "{{displayName}} söhbətə qoşuldu",
+            "Leave": "{{displayName}} söhbətdən çıxdı",
+            "RelatedTo": "{{displayName}} bir {{stream.displayType}} başladı"
+        }
     },
     "notifications": {
         "*": "{{& message.fields.type}} - {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} yeni {{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{toTitle}} -a {{relationDisplayType}} olaraq əlavə edildi",
         "Streams/mention": "{{&call 'avatar.displayName'}} sizi şərhdə qeyd etdi",
-        "Streams/call": "{{displayName}} sizi axtarır"
+        "Streams/call": "{{displayName}} real vaxt zəng etməyə başladı"
     },
     "invite": {
         "messageContent": "{{displayName}} sizi {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Bu cihazdan imtina etdiyinizə əminsiniz? Bu cihazdakı bildirişləri söndürəcəkdir.",
         "Identifiers": "Müəyyənləşdiricilər",
         "Devices": "Cihazlar",
-        "Streams": "Axınlar"
+        "Streams": "Axınlar",
+        "AreYouSureRemoveParticipant": "Bu iştirakçını çıxarmaq istədiyinizə əminsiniz?",
+        "RemoveParticipant": "İştirakçını çıxarın"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Ekran paylaşımlarını gizlət",
             "turnOnCamera": "Videonu göstərin",
             "turnOnAudio": "Səsin səsini açın",
-            "turnOnScreenSharing": "Ekran paylaşımını göstərin"
+            "turnOnScreenSharing": "Ekran paylaşımını göstərin",
+            "fullScreen": "Tam ekran"
         },
         "notAllowedToJoinCall": "Bu axına qoşulmaq icazəniz yoxdur.",
         "streamTitle": "{{1}} canlı zəng"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Şəkil",
-            "description": "vizual görüntü"
+            "description": "vizual görüntü",
+            "newItem": "Şəkil əlavə edin"
         },
         "Streams/images": {
             "displayType": "Şəkil Qalereyası",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fayl",
-            "description": "yüklənmiş faylı"
+            "description": "yüklənmiş faylı",
+            "newItem": "Fayl əlavə edin"
         },
         "Streams/audio": {
             "displayType": "Audio klip",
-            "description": "audio klip"
+            "description": "audio klip",
+            "newItem": "Səs əlavə edin"
         },
         "Streams/video": {
             "displayType": "Video Klip",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Video əlavə edin"
         },
         "Streams/live": {
             "displayType": "Canlı yayım",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "bir istifadəçinin özlərini tanıda biləcəyi təbrik",
             "displayType": "Salamlayiram"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF sənədi",
+            "description": "PDF sənədi",
+            "newItem": "PDF əlavə edin"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Bu məzmun sizdən gizlidir."
+    },
+    "audio": {
+        "record": "Qeyd edin",
+        "reset": "Sıfırla",
+        "edit": "Redaktə edin",
+        "title": "başlıq",
+        "description": "təsviri",
+        "upload": "Yükləmək",
+        "link": "Bağlantı",
+        "setUrl": "URL qurun",
+        "save": "Yadda saxla",
+        "setClip": "Klipsi kəsin",
+        "invalidURL": "Yanlış URL",
+        "invalidFile": "Yanlış Fayl",
+        "errorNoSource": "Səs mənbəyi yoxdur",
+        "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
+        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
+    },
+    "video": {
+        "reset": "Sıfırla",
+        "edit": "Redaktə edin",
+        "title": "başlıq",
+        "description": "təsviri",
+        "upload": "Yükləmək",
+        "link": "Bağlantı",
+        "setUrl": "URL qurun",
+        "save": "Yadda saxla",
+        "setClip": "Klipsi kəsin",
+        "invalidURL": "Yanlış URL",
+        "invalidFile": "Yanlış Fayl",
+        "errorNoSource": "Video mənbəyi yoxdur",
+        "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
+        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
+    },
+    "pdf": {
+        "reset": "Sıfırla",
+        "edit": "Redaktə edin",
+        "title": "başlıq",
+        "description": "təsviri",
+        "upload": "Yükləmək",
+        "link": "Bağlantı",
+        "setUrl": "URL qurun",
+        "save": "Yadda saxla",
+        "setClip": "Klipsi kəsin",
+        "invalidURL": "Yanlış URL",
+        "invalidFile": "Yanlış Fayl",
+        "errorNoSource": "Pdf mənbəyi yoxdur",
+        "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
+        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
+    },
+    "image": {
+        "reset": "Sıfırla",
+        "edit": "Redaktə edin",
+        "title": "başlıq",
+        "description": "təsviri",
+        "upload": "Yükləmək",
+        "link": "Bağlantı",
+        "setUrl": "URL qurun",
+        "save": "Yadda saxla",
+        "setClip": "Klipsi kəsin",
+        "invalidURL": "Yanlış URL",
+        "invalidFile": "Yanlış Fayl",
+        "errorNoSource": "Şəkil mənbəyi yoxdur",
+        "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
+        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
     }
 }

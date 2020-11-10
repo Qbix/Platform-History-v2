@@ -32,7 +32,12 @@
         "Buy": "Kopen",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Ongeldig bedrag",
-        "ErrorInvalidCurrency": "Helaas ondersteunen we valuta {{currency}} nog niet"
+        "ErrorInvalidCurrency": "Helaas ondersteunen we valuta {{currency}} nog niet",
+        "WatchClip": "{{amount}} credits verdiend voor het kijken naar {{fromStreamTitle}}",
+        "PurchaseCredits": "Koop tegoeden",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} tegoeden"
+        }
     },
     "history": {
         "Date": "Datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Optionele bijdrage",
         "RequiredPayment": "Vereiste betaling",
         "AreYouSureDelete": "Weet u zeker dat u deze service wilt verwijderen?",
-        "AmountServicesRelated": "Er zijn {{amount}} beschikbaarheden met betrekking tot deze service. Ze worden ook verwijderd."
+        "AmountServicesRelated": "Er zijn {{amount}} beschikbaarheden met betrekking tot deze service. Ze worden ook verwijderd.",
+        "Free": "Vrij"
     }
 }

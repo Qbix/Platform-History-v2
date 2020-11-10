@@ -270,7 +270,8 @@
         },
         "Streams\/image": {
             "displayType": "Gambar",
-            "description": "gambar visual"
+            "description": "gambar visual",
+            "newItem": "Menambahkan gambar"
         },
         "Streams\/images": {
             "displayType": "Galeri Gambar",
@@ -282,15 +283,18 @@
         },
         "Streams\/file": {
             "displayType": "Mengajukan",
-            "description": "file yang diunggah"
+            "description": "file yang diunggah",
+            "newItem": "Tambah berkas"
         },
         "Streams\/audio": {
             "displayType": "Klip Audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Tambahkan Audio"
         },
         "Streams\/video": {
             "displayType": "Klip video",
-            "description": "klip video"
+            "description": "klip video",
+            "newItem": "Tambahkan Video"
         },
         "Streams\/live": {
             "displayType": "Siaran langsung",
@@ -331,6 +335,11 @@
         "Streams\/greeting": {
             "description": "salam yang dengannya pengguna dapat memperkenalkan diri",
             "displayType": "Salam"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokumen PDF",
+            "description": "Dokumen PDF",
+            "newItem": "Tambahkan PDF"
         }
     },
     "messages": {
@@ -361,5 +370,70 @@
     },
     "errors": {
         "HiddenFromYou": "Konten ini disembunyikan dari Anda."
+    },
+    "audio": {
+        "record": "Merekam",
+        "reset": "Setel ulang",
+        "edit": "Edit",
+        "title": "judul",
+        "description": "deskripsi",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Menyimpan",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak valid",
+        "invalidFile": "File yang tidak valid",
+        "errorNoSource": "Tidak ada sumber audio",
+        "uploadLimit": "Ukuran file maks: {{size}}",
+        "errorFileSize": "Maaf, tapi file terlalu besar.<br> Ukuran file maks adalah {{size}}"
+    },
+    "video": {
+        "reset": "Setel ulang",
+        "edit": "Edit",
+        "title": "judul",
+        "description": "deskripsi",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Menyimpan",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak valid",
+        "invalidFile": "File yang tidak valid",
+        "errorNoSource": "Tidak ada sumber video",
+        "uploadLimit": "Ukuran file maks: {{size}}",
+        "errorFileSize": "Maaf, tapi file terlalu besar.<br> Ukuran file maks adalah {{size}}"
+    },
+    "pdf": {
+        "reset": "Setel ulang",
+        "edit": "Edit",
+        "title": "judul",
+        "description": "deskripsi",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Menyimpan",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak valid",
+        "invalidFile": "File yang tidak valid",
+        "errorNoSource": "Tidak ada sumber pdf",
+        "uploadLimit": "Ukuran file maks: {{size}}",
+        "errorFileSize": "Maaf, tapi file terlalu besar.<br> Ukuran file maks adalah {{size}}"
+    },
+    "image": {
+        "reset": "Setel ulang",
+        "edit": "Edit",
+        "title": "judul",
+        "description": "deskripsi",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Menyimpan",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak valid",
+        "invalidFile": "File yang tidak valid",
+        "errorNoSource": "Tidak ada sumber gambar",
+        "uploadLimit": "Ukuran file maks: {{size}}",
+        "errorFileSize": "Maaf, tapi file terlalu besar.<br> Ukuran file maks adalah {{size}}"
     }
 }

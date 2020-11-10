@@ -100,6 +100,21 @@
         "inUnderMinute": "1 perc alatt"
     },
     "tabs": {
-        "more": "több"
+        "more": "több",
+        "Menu": "Menü"
+    },
+    "video": {
+        "clip": "csipesz",
+        "errorNoSource": "Nincs video forrás"
+    },
+    "pdf": {
+        "clip": "csipesz",
+        "errorNoSource": "Nincs pdf forrás"
+    },
+    "clip": {
+        "SetClipStart": "A Clip Start beállítása",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Állítsa be a klip végét",
+        "ClipEnd": "Clip End"
     }
 }

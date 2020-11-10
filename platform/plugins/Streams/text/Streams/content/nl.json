@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Beeld",
-            "description": "visueel beeld"
+            "description": "visueel beeld",
+            "newItem": "Voeg afbeelding toe"
         },
         "Streams\/images": {
             "displayType": "Fotogalerij",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "het dossier",
-            "description": "geupload bestand"
+            "description": "geupload bestand",
+            "newItem": "Bestand toevoegen"
         },
         "Streams\/audio": {
             "displayType": "Audioclip",
-            "description": "audioclip"
+            "description": "audioclip",
+            "newItem": "Voeg audio toe"
         },
         "Streams\/video": {
             "displayType": "Videoclip",
-            "description": "videoclip"
+            "description": "videoclip",
+            "newItem": "Voeg video toe"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "begroeting waarmee een gebruiker zichzelf kan voorstellen",
             "displayType": "Groet"
+        },
+        "Streams\/pdf": {
+            "displayType": "Pdf-document",
+            "description": "Pdf-document",
+            "newItem": "Voeg pdf toe"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Deze inhoud is voor u verborgen."
+    },
+    "audio": {
+        "record": "Vermelding",
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen audiobron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen videobron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen pdf-bron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Bewerk",
+        "title": "titel",
+        "description": "Omschrijving",
+        "upload": "Uploaden",
+        "link": "Koppeling",
+        "setUrl": "URL instellen",
+        "save": "Opslaan",
+        "setClip": "Uitgesneden clip",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldig bestand",
+        "errorNoSource": "Geen afbeeldingsbron",
+        "uploadLimit": "Max. Bestandsgrootte: {{size}}",
+        "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
     }
 }

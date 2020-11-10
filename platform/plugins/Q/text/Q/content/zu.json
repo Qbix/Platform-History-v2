@@ -98,5 +98,23 @@
         "inHour": "e - {{h}} ihora",
         "inHours": "emahoreni angu - {{h}}",
         "inUnderMinute": "ngaphansi kweminithi elingu-1"
+    },
+    "video": {
+        "clip": "isiqeshana",
+        "errorNoSource": "Awukho umthombo wevidiyo"
+    },
+    "pdf": {
+        "clip": "isiqeshana",
+        "errorNoSource": "Awukho umthombo we-pdf"
+    },
+    "clip": {
+        "SetClipStart": "Setha isiqeshana sesiqeshana",
+        "ClipStart": "Isiqeshana Qala",
+        "SetClipEnd": "Setha ukuphela kwesiqeshana",
+        "ClipEnd": "Isiqeshana Siphelile"
+    },
+    "tabs": {
+        "more": "Okuningi",
+        "Menu": "Imenyu"
     }
 }

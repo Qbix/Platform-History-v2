@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nie masz uprawnień do dołączenia do tej rozmowy.",
         "startedConversation": "rozpoczął rozmowę",
         "RealTimeCall": "Połączenie w czasie rzeczywistym",
-        "SearchByName": "Szukaj według nazwy"
+        "SearchByName": "Szukaj według nazwy",
+        "Notifications": {
+            "Visit": "{{displayName}} odwiedza czat",
+            "Join": "{{displayName}} dołączył do czatu",
+            "Leave": "{{displayName}} opuścił czat",
+            "RelatedTo": "{{displayName}} rozpoczął {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Wiadomość {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nowy {{relationDisplayType}} w {{toTitle}}",
         "Streams/relatedFrom/*": "Dodano do {{toTitle}} jako {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} wspomniał o Tobie w komentarzu",
-        "Streams/call": "{{displayName}} dzwoni do ciebie"
+        "Streams/call": "{{displayName}} rozpoczął rozmowę w czasie rzeczywistym"
     },
     "invite": {
         "messageContent": "{{displayName}} zaprosił Cię na {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Czy na pewno anulujesz subskrypcję tego urządzenia? Wyłączy powiadomienia na tym urządzeniu.",
         "Identifiers": "Identyfikatory",
         "Devices": "Urządzenia",
-        "Streams": "Strumienie"
+        "Streams": "Strumienie",
+        "AreYouSureRemoveParticipant": "Czy na pewno chcesz usunąć tego uczestnika?",
+        "RemoveParticipant": "Usuń uczestnika"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Ukryj udostępnianie ekranu",
             "turnOnCamera": "Pokaż wideo",
             "turnOnAudio": "Wyłącz wyciszenie dźwięku",
-            "turnOnScreenSharing": "Pokaż udostępnianie ekranu"
+            "turnOnScreenSharing": "Pokaż udostępnianie ekranu",
+            "fullScreen": "Pełny ekran"
         },
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
         "streamTitle": "{{1}} połączenie na żywo"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Obraz",
-            "description": "obraz wzrokowy"
+            "description": "obraz wzrokowy",
+            "newItem": "Dodaj obraz"
         },
         "Streams/images": {
             "displayType": "Galeria obrazów",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Plik",
-            "description": "przesłany plik"
+            "description": "przesłany plik",
+            "newItem": "Dodaj plik"
         },
         "Streams/audio": {
             "displayType": "Klip audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Dodaj dźwięk"
         },
         "Streams/video": {
             "displayType": "Klip wideo",
-            "description": "klip wideo"
+            "description": "klip wideo",
+            "newItem": "Dodaj wideo"
         },
         "Streams/live": {
             "displayType": "Transmisja na żywo",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "powitanie, z którym użytkownik może się przedstawić",
             "displayType": "Powitanie"
+        },
+        "Streams/pdf": {
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Dodaj PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ta treść jest przed tobą ukryta."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła dźwięku",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "video": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła wideo",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła PDF",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "image": {
+        "reset": "Resetowanie",
+        "edit": "Edytować",
+        "title": "tytuł",
+        "description": "opis",
+        "upload": "Przekazać plik",
+        "link": "Połączyć",
+        "setUrl": "Ustaw adres URL",
+        "save": "Zapisać",
+        "setClip": "Wytnij klip",
+        "invalidURL": "nieprawidłowy URL",
+        "invalidFile": "Niepoprawny plik",
+        "errorNoSource": "Brak źródła obrazu",
+        "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
     }
 }

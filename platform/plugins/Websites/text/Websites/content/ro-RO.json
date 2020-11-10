@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Naviga",
             "WriteToStartConversation": "Scrieți gândurile pentru a începe conversația",
             "StartConversation": "Porniți conversația",
-            "GotoConversation": "Accesați conversația"
-        }
+            "GotoConversation": "Accesați conversația",
+            "reset": "Resetați",
+            "edit": "Editați | ×",
+            "link": "Legătură",
+            "setUrl": "Setați adresa URL",
+            "save": "Salvați",
+            "setClip": "Decupați clipul",
+            "invalidURL": "URL invalid"
+        },
+        "FileTooLarge": "Fișierul este prea mare pentru stocarea în cache. Dimensiunea maximă a fișierului {{size}}",
+        "InvalidPDF": "Fișierul nu este un PDF valid"
     },
     "types": {
         "Websites/article": {

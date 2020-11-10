@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här konversationen.",
         "startedConversation": "inledde en konversation",
         "RealTimeCall": "Realtidssamtal",
-        "SearchByName": "Sök efter namn"
+        "SearchByName": "Sök efter namn",
+        "Notifications": {
+            "Visit": "{{displayName}} besöker chatten",
+            "Join": "{{displayName}} gick med i chatten",
+            "Leave": "{{displayName}} lämnade chatten",
+            "RelatedTo": "{{displayName}} startade en {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
         "Streams/relatedFrom/*": "Tillagd till {{toTitle}} som {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
-        "Streams/call": "{{displayName}} ringer dig"
+        "Streams/call": "{{displayName}} startade ett realtidssamtal"
     },
     "invite": {
         "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Är du säker på att du kan avsluta prenumerationen på den här enheten? Det stänger av aviseringar till den här enheten.",
         "Identifiers": "identifierare",
         "Devices": "enheter",
-        "Streams": "Strömmar"
+        "Streams": "Strömmar",
+        "AreYouSureRemoveParticipant": "Är du säker på att du vill ta bort den här deltagaren?",
+        "RemoveParticipant": "Ta bort deltagaren"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Dölj skärmdelning",
             "turnOnCamera": "Visa video",
             "turnOnAudio": "Stäng av ljudet",
-            "turnOnScreenSharing": "Visa skärmdelning"
+            "turnOnScreenSharing": "Visa skärmdelning",
+            "fullScreen": "Fullskärm"
         },
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
         "streamTitle": "{{1}} direktuppringning"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Bild",
-            "description": "visuell bild"
+            "description": "visuell bild",
+            "newItem": "Lägg till bild"
         },
         "Streams/images": {
             "displayType": "Bildgalleri",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Fil",
-            "description": "uppladdad fil"
+            "description": "uppladdad fil",
+            "newItem": "Lägg till fil"
         },
         "Streams/audio": {
             "displayType": "Ljudklipp",
-            "description": "ljudklipp"
+            "description": "ljudklipp",
+            "newItem": "Lägg till ljud"
         },
         "Streams/video": {
             "displayType": "Videoklipp",
-            "description": "videoklipp"
+            "description": "videoklipp",
+            "newItem": "Lägg till video"
         },
         "Streams/live": {
             "displayType": "Direktsändning",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "hälsning som en användare kan presentera sig med",
             "displayType": "Hälsning"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Lägg till PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Detta innehåll är gömt för dig."
+    },
+    "audio": {
+        "record": "Spela in",
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen ljudkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "video": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen videokälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "pdf": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen pdf-källa",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "image": {
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen bildkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
     }
 }

@@ -98,5 +98,23 @@
         "inHour": "ing {{h}} jam",
         "inHours": "ing {{h}} jam",
         "inUnderMinute": "ing 1 menit"
+    },
+    "video": {
+        "clip": "kliping",
+        "errorNoSource": "Ora ana sumber video"
+    },
+    "pdf": {
+        "clip": "kliping",
+        "errorNoSource": "Ora ana sumber pdf"
+    },
+    "clip": {
+        "SetClipStart": "Setel Clip Start",
+        "ClipStart": "Miwiti Klip",
+        "SetClipEnd": "Setel Klip Pungkasan",
+        "ClipEnd": "Klip Pungkasan"
+    },
+    "tabs": {
+        "more": "liyane",
+        "Menu": "Menu"
     }
 }

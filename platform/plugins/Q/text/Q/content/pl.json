@@ -100,6 +100,21 @@
         "inUnderMinute": "w mniej niż 1 minutę"
     },
     "tabs": {
-        "more": "więcej"
+        "more": "więcej",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "spinacz",
+        "errorNoSource": "Brak źródła wideo"
+    },
+    "pdf": {
+        "clip": "spinacz",
+        "errorNoSource": "Brak źródła PDF"
+    },
+    "clip": {
+        "SetClipStart": "Ustaw początek klipu",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Ustaw koniec obcinania",
+        "ClipEnd": "Clip End"
     }
 }

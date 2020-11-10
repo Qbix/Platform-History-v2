@@ -32,7 +32,12 @@
         "Buy": "வாங்க",
         "Credits": "வரவு",
         "ErrorInvalidAmount": "தொகை தவறானது",
-        "ErrorInvalidCurrency": "துரதிர்ஷ்டவசமாக நாணயத்தை நாங்கள் இன்னும் ஆதரிக்கவில்லை {99 999}}"
+        "ErrorInvalidCurrency": "துரதிர்ஷ்டவசமாக நாணயத்தை நாங்கள் இன்னும் ஆதரிக்கவில்லை {99 999}}",
+        "WatchClip": "{{1000} watch பார்ப்பதற்கான {{amount}} வரவுகளை சம்பாதித்தார்",
+        "PurchaseCredits": "வரவுகளை வாங்கவும்",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} வரவு"
+        }
     },
     "history": {
         "Date": "தேதி",
@@ -143,6 +148,7 @@
         "OptionalContribution": "விருப்ப பங்களிப்பு",
         "RequiredPayment": "தேவையான கட்டணம்",
         "AreYouSureDelete": "இந்த சேவையை நீக்க விரும்புகிறீர்களா?",
-        "AmountServicesRelated": "இந்த சேவை தொடர்பான {99 999}} கிடைக்கும் தன்மைகள் உள்ளன. அவை அகற்றப்படும்."
+        "AmountServicesRelated": "இந்த சேவை தொடர்பான {99 999}} கிடைக்கும் தன்மைகள் உள்ளன. அவை அகற்றப்படும்.",
+        "Free": "இலவசம்"
     }
 }

@@ -337,7 +337,7 @@ class Q_Session
 			} else {
 				Q_Cache::clear(true);
 				Q::log($e);
-				throw new Q_Exception("Please run {{prefix}}scripts/Q/install.php --all");
+				throw new Q_Exception("Please run $prefix"."scripts/Q/install.php --all");
 			}
 		}
 		// merge in all the stuff that was added to $_SESSION

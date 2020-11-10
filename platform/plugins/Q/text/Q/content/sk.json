@@ -100,6 +100,21 @@
         "inUnderMinute": "za menej ako 1 minútu"
     },
     "tabs": {
-        "more": "viac"
+        "more": "viac",
+        "Menu": "Ponuka"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Žiadny zdroj videa"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Žiadny zdroj vo formáte PDF"
+    },
+    "clip": {
+        "SetClipStart": "Nastavte Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Nastaviť koniec svorky",
+        "ClipEnd": "Koniec klipu"
     }
 }

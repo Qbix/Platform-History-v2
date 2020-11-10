@@ -32,7 +32,12 @@
         "Buy": "خرید",
         "Credits": "وام",
         "ErrorInvalidAmount": "مقدار نامعتبر است",
-        "ErrorInvalidCurrency": "متأسفانه ما هنوز از {999 پوند ارز پشتیبانی نمی کنیم"
+        "ErrorInvalidCurrency": "متأسفانه ما هنوز از {999 پوند ارز پشتیبانی نمی کنیم",
+        "WatchClip": "برای تماشای {{fromStreamTitle}} اعتبار {{amount}} کسب کرده اید",
+        "PurchaseCredits": "اعتبارات خرید",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} اعتبار"
+        }
     },
     "history": {
         "Date": "تاریخ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "سهم اختیاری",
         "RequiredPayment": "پرداخت مورد نیاز",
         "AreYouSureDelete": "آیا مطمئن هستید که می خواهید این سرویس را حذف کنید؟",
-        "AmountServicesRelated": "در دسترس بودن مربوط به این سرویس 999 {است. آنها همچنین حذف خواهند شد."
+        "AmountServicesRelated": "در دسترس بودن مربوط به این سرویس 999 {است. آنها همچنین حذف خواهند شد.",
+        "Free": "رایگان"
     }
 }

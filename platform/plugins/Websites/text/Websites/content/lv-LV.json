@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Pārlūkot",
             "WriteToStartConversation": "Uzrakstiet savas domas, lai sāktu sarunu",
             "StartConversation": "Sāciet sarunu",
-            "GotoConversation": "Dodieties uz Sarunu"
-        }
+            "GotoConversation": "Dodieties uz Sarunu",
+            "reset": "Atiestatīt",
+            "edit": "Rediģēt",
+            "link": "Saite",
+            "setUrl": "Iestatīt URL",
+            "save": "Saglabāt",
+            "setClip": "Izgriezt klipu",
+            "invalidURL": "Nederīgs URL"
+        },
+        "FileTooLarge": "Fails ir par lielu kešatmiņai. Maksimālais faila lielums {{size}}",
+        "InvalidPDF": "Fails nav derīgs PDF fails"
     },
     "types": {
         "Websites/article": {

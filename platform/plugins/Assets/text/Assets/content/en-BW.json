@@ -24,18 +24,23 @@
         "PaymentFor": "Payment for \"{{1}}\"",
         "PaymentTo": "Payment to {{1}}",
         "PaymentToUser": "Payment to {{userName}}",
-        "JoinedPaidStream": "for joining \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a>\"",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a>\"",
         "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "for leaving \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a>\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}</a>\"",
         "BoughtCredits": "Bought {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
         "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You missing {{amount}} credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
         "Buy": "Buy",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet"
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "PurchaseCredits": "Purchase Credits",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} credits"
+        }
     },
     "history": {
         "Date": "Date",
@@ -146,6 +151,7 @@
         "OptionalContribution": "Optional contribution",
         "RequiredPayment": "Required payment",
         "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed.",
+        "Free": "Free"
     }
 }

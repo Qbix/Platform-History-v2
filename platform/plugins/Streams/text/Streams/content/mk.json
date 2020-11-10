@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Слика",
-            "description": "визуелна слика"
+            "description": "визуелна слика",
+            "newItem": "Додадете слика"
         },
         "Streams\/images": {
             "displayType": "Галерија со слики",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Датотека",
-            "description": "поставена датотека"
+            "description": "поставена датотека",
+            "newItem": "Додај датотека"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио клип"
+            "description": "аудио клип",
+            "newItem": "Додајте аудио"
         },
         "Streams\/video": {
             "displayType": "Видео клипот",
-            "description": "Видео клипот"
+            "description": "Видео клипот",
+            "newItem": "Додадете видео"
         },
         "Streams\/live": {
             "displayType": "Пренос во живо",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "поздрав со кој корисникот може да се претстави",
             "displayType": "Поздрав"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "Додадете PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Оваа содржина е скриена од вас."
+    },
+    "audio": {
+        "record": "Сними",
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на аудио",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "video": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на видео",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "pdf": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на pdf",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "image": {
+        "reset": "Ресетирај",
+        "edit": "Уредување",
+        "title": "Наслов",
+        "description": "опис",
+        "upload": "Поставете",
+        "link": "Врска",
+        "setUrl": "Поставете URL",
+        "save": "Зачувај",
+        "setClip": "Исечете клип",
+        "invalidURL": "Неважечка URL-адреса",
+        "invalidFile": "Неважечка датотека",
+        "errorNoSource": "Нема извор на слика",
+        "uploadLimit": "Максимална големина на датотека: {{size}}",
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
     }
 }

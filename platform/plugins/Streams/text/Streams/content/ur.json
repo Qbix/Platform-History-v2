@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "تصویر",
-            "description": "بصری تصویر"
+            "description": "بصری تصویر",
+            "newItem": "تصویر شامل کریں"
         },
         "Streams\/images": {
             "displayType": "تصویری گیلری۔",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "فائل۔",
-            "description": "اپ لوڈ فائل"
+            "description": "اپ لوڈ فائل",
+            "newItem": "فائل شامل کریں"
         },
         "Streams\/audio": {
             "displayType": "آڈیو کلپ",
-            "description": "آڈیو کلپ"
+            "description": "آڈیو کلپ",
+            "newItem": "آڈیو شامل کریں"
         },
         "Streams\/video": {
             "displayType": "ویڈیو کلپ",
-            "description": "ویڈیو کلپ"
+            "description": "ویڈیو کلپ",
+            "newItem": "ویڈیو شامل کریں"
         },
         "Streams\/live": {
             "displayType": "لائیو سٹریم",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "سلام ہے جس کے ساتھ کوئی صارف اپنا تعارف کروا سکتا ہے۔",
             "displayType": "سلام۔"
+        },
+        "Streams\/pdf": {
+            "displayType": "پی ڈی ایف دستاویز",
+            "description": "پی ڈی ایف دستاویز",
+            "newItem": "پی ڈی ایف شامل کریں"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔"
+    },
+    "audio": {
+        "record": "ریکارڈ",
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی آڈیو ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "video": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "pdf": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی پی ڈی ایف ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "image": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "تصویری ذریعہ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
     }
 }

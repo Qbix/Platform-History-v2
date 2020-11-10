@@ -526,16 +526,17 @@
 				var $tab = $(state.tab);
 				var values = {
 					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.more,
-					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.more,
-					more: Q.text.Q.tabs.more
+					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
+					more: Q.text.Q.tabs.more,
+					classes: $tab.attr('class')
 				};
 				var html = this.state.overflow.content.interpolate(values);
 				if (index >= 0 && state.overflow) {
 					tabAlreadyVisible = ($tab.data('index') < index);
 					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
-						.empty().append($copied);
+						.empty().append($copied).addClass(values.classes);
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
 						.html(state.overflow.glyph.interpolate(values))
@@ -559,7 +560,7 @@
 							var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
 								.html(state.overflow.glyph.interpolate(values))
 								.appendTo($overflow);
-							if ($overflow.outerWidth(true) > w - w4 - 1) {
+							if (!state.compact && $overflow.outerWidth(true) > w - w4 - 1) {
 								$glyph.remove(); // better to at least fit on the line
 							}
 						}

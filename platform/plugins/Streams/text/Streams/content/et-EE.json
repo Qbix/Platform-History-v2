@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Teil pole sellel vestlusel luba.",
         "startedConversation": "alustas vestlust",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Otsige nime järgi"
+        "SearchByName": "Otsige nime järgi",
+        "Notifications": {
+            "Visit": "{{displayName}} külastab vestlust",
+            "Join": "{{displayName}} liitus vestlusega",
+            "Leave": "{{displayName}} lahkus vestlusest",
+            "RelatedTo": "{{displayName}} alustas {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Sõnum {{& message.fields.type}} {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Uus {{relationDisplayType}} asukohas {{toTitle}}",
         "Streams/relatedFrom/*": "Lisatud saidile {{toTitle}} kui {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} mainis teid oma kommentaaris",
-        "Streams/call": "{{displayName}} helistab teile"
+        "Streams/call": "{{displayName}} alustas reaalajas kõnet"
     },
     "invite": {
         "messageContent": "{{displayName}} kutsus teid {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Kas olete kindlasti selle seadme tellimuse tühistanud? See lülitab selle seadme märguanded välja.",
         "Identifiers": "Identifitseerijad",
         "Devices": "Seadmed",
-        "Streams": "Vood"
+        "Streams": "Vood",
+        "AreYouSureRemoveParticipant": "Kas soovite kindlasti selle osaleja eemaldada?",
+        "RemoveParticipant": "Eemalda osaleja"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Peida ekraani jagamine",
             "turnOnCamera": "Kuva video",
             "turnOnAudio": "Vaigista heli sisse",
-            "turnOnScreenSharing": "Kuva ekraani jagamine"
+            "turnOnScreenSharing": "Kuva ekraani jagamine",
+            "fullScreen": "Täisekraan"
         },
         "notAllowedToJoinCall": "Teil pole luba selle vooga liituda.",
         "streamTitle": "{{1}} otsekõne"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Pilt",
-            "description": "visuaalne pilt"
+            "description": "visuaalne pilt",
+            "newItem": "Lisa pilt"
         },
         "Streams/images": {
             "displayType": "Pildigalerii",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Toimik",
-            "description": "üles laaditud fail"
+            "description": "üles laaditud fail",
+            "newItem": "Lisa fail"
         },
         "Streams/audio": {
             "displayType": "Heliklipp",
-            "description": "heliklipp"
+            "description": "heliklipp",
+            "newItem": "Lisa heli"
         },
         "Streams/video": {
             "displayType": "Videoklipp",
-            "description": "videoklipp"
+            "description": "videoklipp",
+            "newItem": "Lisa video"
         },
         "Streams/live": {
             "displayType": "Otseülekanne",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "tervitus, millega kasutaja saab ennast tutvustada",
             "displayType": "Tervitus"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Lisage PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "See sisu on teie eest peidetud."
+    },
+    "audio": {
+        "record": "Salvesta",
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Heliallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "video": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Videoallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "pdf": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Puudub pdf-allikas",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "image": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Pildiallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
     }
 }

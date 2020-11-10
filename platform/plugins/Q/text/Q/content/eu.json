@@ -100,6 +100,21 @@
         "inUnderMinute": "1 minutu baino gutxiagoan"
     },
     "tabs": {
-        "more": "gehiago"
+        "more": "gehiago",
+        "Menu": "Menua"
+    },
+    "video": {
+        "clip": "klipa",
+        "errorNoSource": "Ez dago bideo iturririk"
+    },
+    "pdf": {
+        "clip": "klipa",
+        "errorNoSource": "Ez dago pdf iturririk"
+    },
+    "clip": {
+        "SetClipStart": "Ezarri Clip Start",
+        "ClipStart": "Clip Hasi",
+        "SetClipEnd": "Ezarri kliparen amaiera",
+        "ClipEnd": "Kliparen amaiera"
     }
 }

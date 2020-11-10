@@ -32,7 +32,12 @@
         "Buy": "Ceannaigh",
         "Credits": "Creidmheasanna",
         "ErrorInvalidAmount": "Méid neamhbhailí",
-        "ErrorInvalidCurrency": "Ar an drochuair ní thacaímid le hairgeadra {{currency}} fós"
+        "ErrorInvalidCurrency": "Ar an drochuair ní thacaímid le hairgeadra {{currency}} fós",
+        "WatchClip": "Creidmheasanna {{amount}} tuillte as féachaint ar {{fromStreamTitle}}",
+        "PurchaseCredits": "Creidmheasanna Ceannaigh",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} creidmheasanna"
+        }
     },
     "history": {
         "Date": "Dáta",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Ranníocaíocht roghnach",
         "RequiredPayment": "Íocaíocht riachtanach",
         "AreYouSureDelete": "An bhfuil tú cinnte gur mhaith leat an tseirbhís seo a scriosadh?",
-        "AmountServicesRelated": "Tá {{amount}} infhaighteacht ar fáil a bhaineann leis an tseirbhís seo. Bainfear iad freisin."
+        "AmountServicesRelated": "Tá {{amount}} infhaighteacht ar fáil a bhaineann leis an tseirbhís seo. Bainfear iad freisin.",
+        "Free": "Saor"
     }
 }

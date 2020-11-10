@@ -98,5 +98,23 @@
         "inHour": "ក្នុង {{h}} ម៉ោង",
         "inHours": "ក្នុង {{h}} ម៉ោង",
         "inUnderMinute": "នៅក្រោម 1 នាទី"
+    },
+    "video": {
+        "clip": "ឈុត",
+        "errorNoSource": "គ្មានប្រភពវីដេអូទេ"
+    },
+    "pdf": {
+        "clip": "ឈុត",
+        "errorNoSource": "គ្មានប្រភព pdf ទេ"
+    },
+    "clip": {
+        "SetClipStart": "កំណត់ឈុតចាប់ផ្តើម",
+        "ClipStart": "ឈុតចាប់ផ្តើម",
+        "SetClipEnd": "កំណត់ឈុតបញ្ចប់",
+        "ClipEnd": "ឈុតបញ្ចប់"
+    },
+    "tabs": {
+        "more": "ច្រើនទៀត",
+        "Menu": "មឺនុយ"
     }
 }

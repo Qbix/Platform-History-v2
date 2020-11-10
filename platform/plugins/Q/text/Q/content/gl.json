@@ -100,6 +100,21 @@
         "inUnderMinute": "en menos dun minuto"
     },
     "tabs": {
-        "more": "máis"
+        "more": "máis",
+        "Menu": "Menú"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Non hai fonte de vídeo"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Non hai fonte en pdf"
+    },
+    "clip": {
+        "SetClipStart": "Establecer Clip Start",
+        "ClipStart": "Clip Iniciar",
+        "SetClipEnd": "Establecer fin de clip",
+        "ClipEnd": "Final do clip"
     }
 }

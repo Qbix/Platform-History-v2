@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Gennemse",
             "WriteToStartConversation": "Skriv dine tanker for at starte samtalen",
             "StartConversation": "Start samtale",
-            "GotoConversation": "Gå til samtale"
-        }
+            "GotoConversation": "Gå til samtale",
+            "reset": "Nulstil",
+            "edit": "Redigere",
+            "link": "Link",
+            "setUrl": "Indstil URL",
+            "save": "Gemme",
+            "setClip": "Klip klip ud",
+            "invalidURL": "ugyldig URL"
+        },
+        "FileTooLarge": "Filen er for stor til cache. Maksimal filstørrelse {{size}}",
+        "InvalidPDF": "Filen er ikke en gyldig PDF"
     },
     "types": {
         "Websites\/article": {

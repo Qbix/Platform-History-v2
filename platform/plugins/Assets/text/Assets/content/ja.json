@@ -32,7 +32,12 @@
         "Buy": "購入",
         "Credits": "クレジット",
         "ErrorInvalidAmount": "金額が無効です",
-        "ErrorInvalidCurrency": "残念ながら、通貨{{currency}}はまだサポートされていません"
+        "ErrorInvalidCurrency": "残念ながら、通貨{{currency}}はまだサポートされていません",
+        "WatchClip": "{{fromStreamTitle}}を視聴したことで{{amount}}クレジットを獲得",
+        "PurchaseCredits": "購入クレジット",
+        "forMessages": {
+            "BoughtCredits": "{{amount}}クレジット"
+        }
     },
     "history": {
         "Date": "日付",
@@ -143,6 +148,7 @@
         "OptionalContribution": "オプションの寄付",
         "RequiredPayment": "必要な支払い",
         "AreYouSureDelete": "このサービスを削除してもよろしいですか？",
-        "AmountServicesRelated": "このサービスに関連する{{amount}}の可用性があります。それらも削除されます。"
+        "AmountServicesRelated": "このサービスに関連する{{amount}}の可用性があります。それらも削除されます。",
+        "Free": "自由"
     }
 }
