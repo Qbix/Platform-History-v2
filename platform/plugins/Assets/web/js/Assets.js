@@ -1026,7 +1026,8 @@
 
 					Q.Notices.add({
 						content: reason || content,
-						timeout: 5
+						timeout: 5,
+						group: reason || null
 					});
 				};
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
