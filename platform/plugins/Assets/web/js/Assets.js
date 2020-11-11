@@ -201,6 +201,7 @@
 		onSuccessPayment: new Q.Event(),
 
 		onBeforeNotice: new Q.Event(),
+		onCreditsChanged: new Q.Event(),
 
 		/**
 		 * Operates with subscriptions.
@@ -1009,6 +1010,7 @@
 
 					try {
 						Assets.Credits.amount = JSON.parse(fields[k]).amount;
+						Q.handle(Assets.onCreditsChanged, null, [Assets.Credits.amount]);
 					} catch (e) {}
 				}, 'Assets');
 
