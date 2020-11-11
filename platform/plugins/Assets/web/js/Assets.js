@@ -200,6 +200,8 @@
 
 		onSuccessPayment: new Q.Event(),
 
+		onBeforeNotice: new Q.Event(),
+
 		/**
 		 * Operates with subscriptions.
 		 * @class Assets.Subscriptions
@@ -1024,11 +1026,20 @@
 					var reason = message.getInstruction('reason');
 					var content = message.content;
 
-					Q.Notices.add({
+					var options = {
 						content: reason || content,
 						timeout: 5,
-						group: reason || null
-					});
+						group: reason || null,
+						handler: function () {
+							if (content.includes("credit") || reason.includes("credit")) {
+								Q.handle(Q.url("me/credits"));
+							}
+						}
+					};
+
+					Q.handle(Assets.onBeforeNotice, message, [options]);
+
+					Q.Notices.add(options);
 				};
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
