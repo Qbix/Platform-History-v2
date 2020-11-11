@@ -1023,12 +1023,9 @@
 
 					var reason = message.getInstruction('reason');
 					var content = message.content;
-					if (reason) {
-						content += '<br>' + reason;
-					}
 
 					Q.Notices.add({
-						content: content,
+						content: reason || content,
 						timeout: 5
 					});
 				};
