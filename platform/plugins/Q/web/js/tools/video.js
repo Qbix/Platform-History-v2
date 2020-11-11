@@ -132,6 +132,12 @@ Q.Tool.define("Q/video", function (options) {
 
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
+
+				/**
+				 * Implemented global function "currentTime" to set/get position
+				 * @method currentTime
+				 * @param {integer} [time] If defined, set play position. If not, return current pos.
+				 */
 				state.player.currentTime = function (time) {
 					if (!isNaN(time)) {
 						state.player.seek(time);
@@ -140,11 +146,30 @@ Q.Tool.define("Q/video", function (options) {
 
 					return state.player.getCurrentTime();
 				};
+
+				/**
+				 * Implemented global function "muted" to on/off sound
+				 * @method muted
+				 * @param {boolean} [value=true] If true/false, turn off/on sound.
+				 */
 				state.player.muted = function (value) {
 					if (typeof value === "boolean") {
 						state.player.setMuted(value);
 					} else {
 						return state.player.getMuted();
+					}
+				};
+
+				/**
+				 * Trigger to show/hide loading spinner above player
+				 * @method waiting
+				 * @param {boolean} [status=true] If true/false - show/hide spinner.
+				 */
+				state.player.waiting = function (status) {
+					if (status || typeof status === "undefined") {
+						$('<div class="Q_video_spinner">').appendTo(state.player._target);
+					} else {
+						$(".Q_video_spinner", state.player._target).remove();
 					}
 				};
 
@@ -316,6 +341,8 @@ Q.Tool.define("Q/video", function (options) {
 			}, throttle);
 
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
+				var player = this;
+
 				videojs.log('Your player is ready!');
 
 				this.on('play', function () {
@@ -343,6 +370,21 @@ Q.Tool.define("Q/video", function (options) {
 					onPause();
 					onEnded();
 				});
+
+				/**
+				 * Trigger to show/hide loading spinner above player
+				 * @method waiting
+				 * @param {boolean} [state=true] If true - show spinner, false - hide.
+				 */
+				this.waiting = function (state) {
+					if (state || typeof state === "undefined") {
+						player.addClass("vjs-waiting");
+						player.trigger("waiting")
+					} else {
+						player.removeClass("vjs-waiting");
+						player.trigger("canplay")
+					}
+				};
 
 				// update currentPosition array on play
 				//this.on('timeupdate', function() {});
@@ -384,6 +426,7 @@ Q.Tool.define("Q/video", function (options) {
 
 		if (silent) {
 			player.muted(true);
+			player.waiting(true);
 		}
 
 		player.currentTime(position/1000);
@@ -396,6 +439,7 @@ Q.Tool.define("Q/video", function (options) {
 
 				if (currentPosition === position || counter > 15) {
 					player.muted(false);
+					player.waiting(false);
 					clearInterval(intervalId);
 				}
 
