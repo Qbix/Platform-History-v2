@@ -92,7 +92,6 @@ Q.Tool.define("Q/audio", function (options) {
 						state.audio.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
 							state.audio.getPosition(function (position) {
 								state.currentPosition = Math.trunc(position);
-								Q.handle(state.onPlaying, tool, [position]);
 							});
 						});
 						state.audio.getDuration(function(duration) {
@@ -118,6 +117,9 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			setCurrentPosition: function (position) {
 				state.audio.seekTo(Math.trunc(position));
+			},
+			getCurrentPosition: function () {
+				return state.currentPosition;
 			},
 			getDuration: function () {
 				return tool.audio.getDuration();
@@ -167,6 +169,9 @@ Q.Tool.define("Q/audio", function (options) {
 			setCurrentPosition: function (position) {
 				tool.audioElement.currentTime = position/1000;
 			},
+			getCurrentPosition: function () {
+				return Math.trunc(tool.audioElement.currentTime * 1000);
+			},
 			getDuration: function () {
 				return tool.audioElement.duration * 1000;
 			}
@@ -208,11 +213,25 @@ Q.Tool.define("Q/audio", function (options) {
 	onLoad: new Q.Event(),
 	onPlay: new Q.Event(function () {
 		var tool = this;
+		var state = this.state;
 
 		// set box attribute to apply valid styles
 		this.$pieBox && this.$pieBox.attr("data-state", "pause");
 
 		tool.checkClip();
+
+		tool.clearPlayInterval();
+		state.playIntervalID = setInterval(function() {
+			state.currentPosition = tool.getCurrentPosition();
+
+			if (state.currentPosition === this.currentPosition) {
+				return;
+			}
+
+			this.currentPosition = state.currentPosition;
+
+			Q.handle(state.onPlaying, tool, [tool]);
+		}, state.positionUpdatePeriod);
 	}),
 	onPlaying: new Q.Event(function () {
 		var tool = this;
@@ -227,10 +246,7 @@ Q.Tool.define("Q/audio", function (options) {
 	}),
 	onPause: new Q.Event(function () {
 		// stop timer if exist
-		if (this.state.playIntervalID) {
-			clearInterval(this.state.playIntervalID);
-			this.state.playIntervalID = false;
-		}
+		this.clearPlayInterval();
 
 		// set box attribute to apply valid styles
 		this.$pieBox && this.$pieBox.attr("data-state", "play");
@@ -368,10 +384,8 @@ Q.Tool.define("Q/audio", function (options) {
 			if(state.recorder){ state.recorder.stop(); }
 
 			// stop recorder timer if exist
-			if(state.recordIntervalID){
-				clearInterval(state.recordIntervalID);
-				state.recordIntervalID = false;
-			}
+			tool.clearPlayInterval();
+
 			return;
 		}
 
@@ -450,7 +464,8 @@ Q.Tool.define("Q/audio", function (options) {
 	 * @method getCurrentPosition
 	 */
 	getCurrentPosition: function () {
-		return this.state.currentPosition;
+		var adapterName = this.adapterNameFromUrl();
+		this.adapters[adapterName].getCurrentPosition();
 	},
 	/**
 	 * @method userGesture
@@ -630,18 +645,6 @@ Q.Tool.define("Q/audio", function (options) {
 			state.currentPosition = Math.trunc(this.currentTime * 1000);
 			console.log("Started at position " + state.currentPosition + " milliseconds");
 			Q.handle(state.onPlay, tool, [state.currentPosition]);
-
-			// clear timer if exist
-			if(state.playIntervalID) {
-				clearInterval(state.playIntervalID);
-			}
-
-			// start new timer to change needed layout params during play
-			state.playIntervalID = setInterval(function(){
-				state.currentPosition = Math.trunc(tool.audioElement.currentTime * 1000);
-
-				Q.handle(state.onPlaying, tool, [state.currentPosition]);
-			}, 100);
 		});
 
 		tool.audioElement.addEventListener("canplay", function(){
@@ -657,7 +660,7 @@ Q.Tool.define("Q/audio", function (options) {
 			var duration = this.duration;
 
 			// stop timer if exist
-			if(state.playIntervalID) { clearInterval(state.playIntervalID); state.playIntervalID = false; }
+			tool.clearPlayInterval();
 
 			// Q/pie tool reset position
 			tool.pieTool && tool.pieTool.initPos();
@@ -794,6 +797,22 @@ Q.Tool.define("Q/audio", function (options) {
 		}
 
 		return res;
+	},
+	clearPlayInterval: function () {
+		if (this.state.playIntervalID) {
+			clearInterval(this.state.playIntervalID);
+			this.state.playIntervalID = false;
+		}
+
+		if(this.state.recordIntervalID) {
+			clearInterval(this.state.recordIntervalID);
+			this.state.recordIntervalID = false;
+		}
+	},
+	Q: {
+		beforeRemove: function () {
+			this.clearPlayInterval();
+		}
 	}
 });
 
