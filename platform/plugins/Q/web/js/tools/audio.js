@@ -15,6 +15,7 @@
  *	@param {Integer} [options.maxRecordTime=60] max record time for recorder in seconds
  *	@param {Integer} [options.clipStart] if clip defined, start time in milliseconds
  *	@param {Integer} [options.clipEnd] if clip defined, end time in milliseconds
+ *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
  *  @param {String} [options.url] URL of audio source
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
@@ -28,6 +29,10 @@ Q.Tool.define("Q/audio", function (options) {
 
 	if (state.action === "implement" && Q.isEmpty(state.url)) {
 		throw new Q.Error("URL required");
+	}
+
+	if (!Q.isEmpty(state.metrics)) {
+		tool.metrics = new Q.Streams.Metrics(state.metrics);
 	}
 
 	// convert to milliseconds, as we use milliseconds everywhere for calculations
@@ -204,6 +209,7 @@ Q.Tool.define("Q/audio", function (options) {
 	currentPosition: 0,
 	clipStart: null,
 	clipEnd: null,
+	metrics: null,
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
@@ -236,6 +242,10 @@ Q.Tool.define("Q/audio", function (options) {
 	onPlaying: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
+
+		if (tool.metrics) {
+			tool.metrics.add(state.currentPosition/1000);
+		}
 
 		if (tool.pieTool) {
 			tool.pieTool.state.fraction = 100 * state.currentPosition / state.duration;
@@ -812,6 +822,9 @@ Q.Tool.define("Q/audio", function (options) {
 	Q: {
 		beforeRemove: function () {
 			this.clearPlayInterval();
+			if (this.metrics) {
+				this.metrics.stop();
+			}
 		}
 	}
 });
