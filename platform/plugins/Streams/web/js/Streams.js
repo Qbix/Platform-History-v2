@@ -4720,6 +4720,113 @@ var Interests = Streams.Interests = {
 	my: null
 };
 
+/**
+ * Operates with metrics.
+ * @class Streams.Metrics
+ * @param {Object} params JSON object with necessary params
+ * @param {Number} params.period Seconds period to send data to server
+ * @param {Number} params.predefined Seconds period to send data to server
+ */
+Streams.Metrics = function (params) {
+	var that = this;
+
+	this.publisherId = Q.getObject("publisherId", params) || null;
+	this.streamName = Q.getObject("streamName", params) || null;
+
+	if (!this.publisherId) {
+		throw new Q.Error("Streams.Metrics: publisherId undefined");
+	}
+
+	if (!this.streamName) {
+		throw new Q.Error("Streams.Metrics: streamName undefined");
+	}
+
+	/**
+	 * Seconds period to send data to server
+	 */
+	this.period = (Q.getObject("period", params) || 60) * 1000;
+
+	// min period to compare with prev value to decide if this continue of watching or seeked to new position
+	this.minPeriod = Q.getObject("minPeriod", params) || 2;
+
+	/**
+	 * Data saved before send to server
+	 */
+	this.predefined = Q.getObject("predefined", params) || [];
+
+	/**
+	 * Save time as metrics localy before save
+	 * @method add
+	 * @param {number} value
+	 */
+	this.add = function (value) {
+		// iterate all periods and try to fing the period which continue value is
+		var sorted = false;
+		Q.each(that.predefined, function (i, period) {
+			if (sorted) {
+				return;
+			}
+
+			var start = period[0];
+			var end = period[1] || start;
+
+			if (value >= start && value <= end) {
+				sorted = true;
+				return;
+			}
+			else if (value > end && value < end + that.minPeriod) {
+				period[1] = value;
+				sorted = true;
+			}
+			else if (value < start && value > start - that.minPeriod) {
+				period[0] = value;
+				sorted = true;
+			}
+		});
+
+		// if suitable period not found, create new priod
+		if (!sorted) {
+			that.predefined.push([value]);
+		}
+	};
+
+
+	/**
+	 * Stop timer interval
+	 * @method stop
+	 */
+	this.stop = function () {
+		that.timerId && clearInterval(that.timerId);
+	};
+
+	/**
+	 * Start timer interval
+	 */
+	this.timerId = setInterval(function () {
+		if (Q.isEmpty(that.predefined)) {
+			return;
+		}
+
+		Q.req("Streams/metrics", [], function (err, response) {
+			var msg = Q.firstErrorMessage(err, response && response.errors);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.handle(params.callback);
+		}, {
+			method: "post",
+			fields: {
+				publisherId: that.publisherId,
+				streamName: that.streamName,
+				metrics: that.predefined,
+				minPeriod: that.minPeriod
+			}
+		});
+
+		that.predefined = [];
+	}, this.period);
+};
 
 /**
  * @class Streams
