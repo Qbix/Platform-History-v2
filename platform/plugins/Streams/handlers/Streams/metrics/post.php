@@ -63,12 +63,12 @@ function Streams_metrics_post() {
 					$used = true;
 				}
 				// this period overlaps stored period before start, so change start of period
-				elseif ($reqStart < $rowStart - $minPeriod && $rowStart < $reqEnd && $reqEnd <= $rowEnd + $minPeriod) {
+				elseif ($reqStart < $rowStart - $minPeriod && $rowStart - $minPeriod < $reqEnd && $reqEnd <= $rowEnd + $minPeriod) {
 					$metrics[$i][0] = $reqStart;
 					$used = true;
 				}
 				// this period overlaps stored period from end, so change end of period
-				elseif ($reqStart >= $rowStart - $minPeriod && $reqStart < $rowEnd && $reqEnd > $rowEnd + $minPeriod) {
+				elseif ($reqStart >= $rowStart - $minPeriod && $reqStart < $rowEnd + $minPeriod && $reqEnd > $rowEnd + $minPeriod) {
 					$metrics[$i][1] = $reqEnd;
 					$used = true;
 				}
