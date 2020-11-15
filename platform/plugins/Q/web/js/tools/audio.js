@@ -204,12 +204,15 @@ Q.Tool.define("Q/audio", function (options) {
 		borderSize: 5,
 		size: null
 	},
+	positionUpdatePeriod: 1, // seconds
 	maxRecordTime: 60, // seconds
 	duration: 0,
 	currentPosition: 0,
 	clipStart: null,
 	clipEnd: null,
-	metrics: null,
+	metrics: {
+		useFaces: false
+	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
@@ -237,7 +240,7 @@ Q.Tool.define("Q/audio", function (options) {
 			this.currentPosition = state.currentPosition;
 
 			Q.handle(state.onPlaying, tool, [tool]);
-		}, state.positionUpdatePeriod);
+		}, state.positionUpdatePeriod * 1000);
 	}),
 	onPlaying: new Q.Event(function () {
 		var tool = this;

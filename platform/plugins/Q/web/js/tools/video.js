@@ -221,11 +221,13 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	throttle: 10,
 	currentPosition: 0,
-	positionUpdatePeriod: 1000,
+	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
 	clipEnd: null,
-	metrics: null,
+	metrics: {
+		useFaces: true
+	},
 	videojsOptions: {
 		controls: true
 	},
@@ -263,7 +265,7 @@ Q.Tool.define("Q/video", function (options) {
 
 			state.currentPosition = currentPosition;
 			Q.handle(state.onPlaying, tool, [tool]);
-		}, state.positionUpdatePeriod);
+		}, state.positionUpdatePeriod * 1000);
 	}),
 	onPlaying: new Q.Event(function () {
 		if (this.metrics) {
