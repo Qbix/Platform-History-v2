@@ -4741,6 +4741,9 @@ Streams.Metrics = function (params) {
 		throw new Q.Error("Streams.Metrics: streamName undefined");
 	}
 
+	this.useFaces = Q.getObject("useFaces", params);
+	this.useFaces = typeof this.useFaces === "boolean" ? this.useFaces : true;
+
 	/**
 	 * Seconds period to send data to server
 	 */
@@ -4760,6 +4763,11 @@ Streams.Metrics = function (params) {
 	 * @param {number} value
 	 */
 	this.add = function (value) {
+		// check faces
+		if (that.useFaces && !that.face) {
+			return;
+		}
+
 		// iterate all periods and try to fing the period which continue value is
 		var sorted = false;
 		Q.each(that.predefined, function (i, period) {
@@ -4772,7 +4780,6 @@ Streams.Metrics = function (params) {
 
 			if (value >= start && value <= end) {
 				sorted = true;
-				return;
 			}
 			else if (value > end && value < end + that.minPeriod) {
 				period[1] = value;
@@ -4797,7 +4804,23 @@ Streams.Metrics = function (params) {
 	 */
 	this.stop = function () {
 		that.timerId && clearInterval(that.timerId);
+		that.faces && that.faces.stop();
 	};
+
+	if (this.useFaces) {
+		this.faces = new Q.Users.Faces();
+
+		this.faces.start(function () {
+			that.faces.onEnter.add(function () {
+				that.face = true;
+				console.log("Streams.Metrics: face on");
+			});
+			that.faces.onLeave.add(function () {
+				that.face = false;
+				console.log("Streams.Metrics: face off");
+			});
+		});
+	}
 
 	/**
 	 * Start timer interval
