@@ -1,44 +1,36 @@
 (function (Q, $) {
 
     var Users = Q.plugins.Users;
-    var _debug = null;
     const WITHIN_CAMERA = 1;
     const OUTSIDE_CAMERA = 2;
+
     /**
      * Analyses whether user seen on camera
      * @class Users.Faces
+     * @param {object} params JSON object with necessary params
+     * @param {integer} params.debounce Seconds to debounce setting face off. If face off and during this time no face, than call onLeave event.
+     * But when face on, call onEnter immediately.
      * @constructor
      */
-    Users.Faces =  function Users_Faces() {
+    Users.Faces =  function Users_Faces (params) {
         var that = this;
 
         this.faceDetection = {}
 
         this.videoElement = null
 
+        this.debounce = (Q.getObject("debounce", params) || 0) * 1000;
+
         /**
-         * Whether user looking on screen or not
-         * @class Users.state
-         * @constructor
+         * Current state of users face (WITHIN_CAMERA or OUTSIDE_CAMERA)
          */
         this.state = null;
 
         /**
-         * Start webcam eye tracking on the browser.
-         * @method Eyes.start
-         * @param {Object} options options for the method
-         * @param {Function} [options.stream] Video stream which are processed
-         * @param {Function} [options.onEnter] Callback called when eyes points are within the viewport
-         * @param {Function} [options.onLeave] Callback called when eyes points leaves viewport
+         *
+         * @method Faces.landmarksDetection
          */
-        this.landmarksDetection = function (options) {
-            options = Q.extend({
-                element: null,
-                landmarksDetection: false,
-                onEnter: new Q.Event(),
-                onLeave: new Q.Event()
-            }, options);
-
+        this.landmarksDetection = function () {
             var landmarksDetection = this;
 
             /**
@@ -58,8 +50,8 @@
                 landmarksDetection.faceLandmarksDetection = window.faceLandmarksDetection;
 
                 // init face-landmarks-detection
-                if(options.element != null) {
-                    landmarksDetection.startTracking(options.element)
+                if(landmarksDetection.element != null) {
+                    landmarksDetection.startTracking(landmarksDetection.element)
                 } else {
                     navigator.mediaDevices.getUserMedia ({
                         'audio': false,
@@ -92,15 +84,9 @@
                     });
 
                     if (predictions.length > 0) {
-                        if(that.state === OUTSIDE_CAMERA) {
-                            Q.handle(that.onEnter);
-                            that.state = WITHIN_CAMERA;
-                        }
+                        that.faceOn();
                     } else {
-                        if(that.state === WITHIN_CAMERA) {
-                            Q.handle(that.onLeave);
-                            that.state = OUTSIDE_CAMERA;
-                        }
+                        that.faceOff();
                     }
                 }, 100)
             }
@@ -128,10 +114,8 @@
         that.onLeave = new Q.Event();
 
         /**
-         * Start webcam eye tracking on the browser.
-         * @method Eyes.start
-         * @param {Object} options options for the method
-         * @param {Function} [options.stream] Video stream which are processed
+         * Start webcam face tracking on the browser.
+         * @method Faces.start
          */
         this.start = function (callback) {
             that.stop();
@@ -177,25 +161,64 @@
                     // stream, a single prediction per frame will be returned.
 
                     if (predictions.length > 0) {
-                        if (that.state === OUTSIDE_CAMERA || that.state === null) {
-                            Q.handle(that.onEnter);
-                            that.state = WITHIN_CAMERA;
-                        }
+                        that.faceOn();
                     } else {
-                        if (that.state === WITHIN_CAMERA || that.state === null) {
-                            Q.handle(that.onLeave);
-                            that.state = OUTSIDE_CAMERA;
-                        }
+                        that.faceOff();
                     }
                 }, 100)
 
                 Q.handle(callback);
 
             }
+        };
 
+        /**
+         * Make needed actions when face appear with camera
+         * @method faceOn
+         */
+        this.faceOn = function () {
+            // if debounce time id defined, clear to avoid call onLeave
+            that.clearDebounceTimer();
 
-        }
+            if (that.state === OUTSIDE_CAMERA || that.state === null) {
+                Q.handle(that.onEnter);
+                that.state = WITHIN_CAMERA;
+            }
+        };
 
+        /**
+         * Make needed actions when face hide with camera
+         * @method faceOff
+         */
+        this.faceOff = function () {
+            if (that.state === null) {
+                Q.handle(that.onLeave);
+                that.state = OUTSIDE_CAMERA;
+            } else if (that.state === WITHIN_CAMERA && !that.debounceTimerId) {
+                that.debounceTimerId = setTimeout(function () {
+                    Q.handle(that.onLeave);
+                    that.state = OUTSIDE_CAMERA;
+                }, that.debounce);
+            }
+        };
+
+        /**
+         * Clear debounce timeOut timer id
+         * @method clearDebounceTimer
+         */
+        this.clearDebounceTimer = function () {
+            if (!that.debounceTimerId) {
+                return;
+            }
+
+            clearTimeout(that.debounceTimerId);
+            that.debounceTimerId = null;
+        };
+
+        /**
+         * Stop watching for face
+         * @method stop
+         */
         this.stop = this.faceDetection.stop = function () {
             if (that.faceDetection.detectionInterval != null) {
                 clearInterval(that.faceDetection.detectionInterval);
