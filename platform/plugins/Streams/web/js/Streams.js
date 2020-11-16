@@ -4726,6 +4726,8 @@ var Interests = Streams.Interests = {
  * @param {Object} params JSON object with necessary params
  * @param {Number} params.period Seconds period to send data to server
  * @param {Number} params.predefined Seconds period to send data to server
+ * @param {boolean|object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
+ * If object - use this object as params for Users.Faces.
  */
 Streams.Metrics = function (params) {
 	var that = this;
@@ -4741,8 +4743,13 @@ Streams.Metrics = function (params) {
 		throw new Q.Error("Streams.Metrics: streamName undefined");
 	}
 
+	// set useFaces option
 	this.useFaces = Q.getObject("useFaces", params);
-	this.useFaces = typeof this.useFaces === "boolean" ? this.useFaces : true;
+	if (this.useFaces === true) {
+		this.useFaces = {
+			debounce: 30
+		};
+	}
 
 	/**
 	 * Seconds period to send data to server
@@ -4808,7 +4815,7 @@ Streams.Metrics = function (params) {
 	};
 
 	if (this.useFaces) {
-		this.faces = new Q.Users.Faces();
+		this.faces = new Q.Users.Faces(that.useFaces);
 
 		this.faces.start(function () {
 			that.faces.onEnter.add(function () {
