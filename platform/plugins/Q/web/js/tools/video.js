@@ -233,7 +233,7 @@ Q.Tool.define("Q/video", function (options) {
 	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
-		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {

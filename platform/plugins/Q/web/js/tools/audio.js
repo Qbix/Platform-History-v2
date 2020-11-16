@@ -215,7 +215,7 @@ Q.Tool.define("Q/audio", function (options) {
 	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
-		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
