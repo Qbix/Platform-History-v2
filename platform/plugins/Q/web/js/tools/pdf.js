@@ -56,7 +56,7 @@ Q.Tool.define("Q/pdf", function (options) {
 	pdfInfo: {},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
-		Q.alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	/* </Q/audio jquery plugin states> */

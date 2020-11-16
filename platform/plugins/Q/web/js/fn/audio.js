@@ -385,7 +385,7 @@
 			preprocess: null,
 			onSuccess: new Q.Event(function () {}, 'Q/audio'),
 			onError: new Q.Event(function (message) {
-				alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+				alert('File upload error' + (message ? ': ' + message : '') + '.');
 			}, 'Q/audio'),
 			onFinish: new Q.Event(),
 			templates: {

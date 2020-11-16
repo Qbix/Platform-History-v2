@@ -13,7 +13,8 @@
  *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
- *  @param {Integer} [options.positionUpdatePeriod=1000] Time period to check new play position.
+ *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
+ *  @param {Integer} [options.positionUpdatePeriod=1000] Time period (milliseconds) to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
 Q.Tool.define("Q/video", function (options) {
@@ -25,6 +26,10 @@ Q.Tool.define("Q/video", function (options) {
 	}
 
 	tool.adapters = {};
+
+	if (!Q.isEmpty(state.metrics)) {
+		tool.metrics = new Q.Streams.Metrics(state.metrics);
+	}
 
 	tool.adapters.mp4 = {
 		init: function () {
@@ -216,16 +221,19 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	throttle: 10,
 	currentPosition: 0,
-	positionUpdatePeriod: 1000,
+	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
 	clipEnd: null,
+	metrics: {
+		useFaces: true
+	},
 	videojsOptions: {
 		controls: true
 	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
-		alert('Flie upload error' + (message ? ': ' + message : '') + '.');
+		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
@@ -257,9 +265,13 @@ Q.Tool.define("Q/video", function (options) {
 
 			state.currentPosition = currentPosition;
 			Q.handle(state.onPlaying, tool, [tool]);
-		}, state.positionUpdatePeriod);
+		}, state.positionUpdatePeriod * 1000);
 	}),
 	onPlaying: new Q.Event(function () {
+		if (this.metrics) {
+			this.metrics.add(this.state.currentPosition/1000);
+		}
+
 		this.checkClip();
 	}),
 	onPause: new Q.Event(function () {
@@ -499,6 +511,10 @@ Q.Tool.define("Q/video", function (options) {
 			// if videojs, call dispose to kill this player with events, triggers, dom etc
 			if (Q.getObject("player.dispose", this.state)) {
 				this.state.player.dispose();
+			}
+
+			if (this.metrics) {
+				this.metrics.stop();
 			}
 		}
 	}
