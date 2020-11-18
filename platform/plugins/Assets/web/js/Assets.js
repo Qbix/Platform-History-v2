@@ -1104,31 +1104,31 @@
 			}
 
 			// need Stripe lib for safari browserTab
-			Q.Assets.Payments.load();
-
-			if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
-				var $button = $('#browsertab_pay');
-				var $info = $('#browsertab_pay_info');
-				var $cancel = $('#browsertab_pay_cancel');
-				var $error = $('#browsertab_pay_error');
-				$button.show();
-				$button.on('click', function() {
-					Assets.Payments.stripe(paymentOptions, function(err, res) {
-						$button.hide();
-						if (err && err.code === 20) {
-							$cancel.show();
-						} else if (err) {
-							$error.show();
-						} else {
-							$info.show();
-						}
+			Q.Assets.Payments.load(function () {
+				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+					var $button = $('#browsertab_pay');
+					var $info = $('#browsertab_pay_info');
+					var $cancel = $('#browsertab_pay_cancel');
+					var $error = $('#browsertab_pay_error');
+					$button.show();
+					$button.on('click', function() {
+						Q.Assets.Payments.stripe(paymentOptions, function(err, res) {
+							$button.hide();
+							if (err && err.code === 20) {
+								$cancel.show();
+							} else if (err) {
+								$error.show();
+							} else {
+								$info.show();
+							}
+						});
 					});
-				});
-			} else {
-				Assets.Payments.stripe(paymentOptions, function(){
-					window.close();
-				})
-			}
+				} else {
+					Q.Assets.Payments.stripe(paymentOptions, function(){
+						window.close();
+					})
+				}
+			});
 		};
 	}
 
