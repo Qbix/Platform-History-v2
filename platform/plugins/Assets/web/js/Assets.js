@@ -97,7 +97,9 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
+								onSuccess: options.onSuccess,
+								onFailure: options.onFailure
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
@@ -1081,7 +1083,11 @@
 			currency: options.currency
 		};
 		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
-		cordova.plugins.browsertab.openUrl(url.toString());
+		cordova.plugins.browsertab.openUrl(url.toString(), {scheme: Q.info.scheme}, function(successResp) {
+			Q.handle(options.onSuccess, null, [successResp]);
+		}, function(err) {
+			Q.handle(options.onSuccess, null, [err]);
+		});
 	}
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
