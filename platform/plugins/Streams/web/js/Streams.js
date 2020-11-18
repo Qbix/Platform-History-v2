@@ -6185,7 +6185,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 				Q.Template.render('Streams/chat/webrtc/available', {
 					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
 						userId: publisherId,
-						icon: true,
+						icon: false,
 						short: true
 					}),
 					text: text.chat.startedConversation
