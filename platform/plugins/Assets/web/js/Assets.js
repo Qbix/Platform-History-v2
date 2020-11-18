@@ -1029,9 +1029,12 @@
 
 					var reason = message.getInstruction('reason');
 					var content = message.content;
+					if (reason) {
+						content += '<br>' + reason;
+					}
 
 					var options = {
-						content: reason || content,
+						content: content,
 						timeout: 5,
 						group: reason || null,
 						handler: function () {
