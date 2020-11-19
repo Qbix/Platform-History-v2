@@ -2590,15 +2590,6 @@
 		if (!querystring) {
 			return;
 		}
-		if (querystring.includes('Q.Users.newSessionId')) { // handoff action
-			var fields = _getParams(url.split('#')[1]);
-			if (fields['Q.Users.newSessionId']) {
-				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-				location.reload();
-			}
-		} else if (querystring.includes('facebookLogin=1')) {
-			Users.login({using: 'facebook'});
-		}
 		if (querystring.queryField('Q.Users.newSessionId')) {
 			var fieldNames = [
 				'Q.Users.appId', 'Q.Users.newSessionId',
