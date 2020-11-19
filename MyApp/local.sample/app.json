@@ -31,7 +31,7 @@
 			} */
 		},
 		"environment": "",
-		/* "scriptFiles": ["config/Q/urls.php"], */
+		/* "scriptFiles": ["config/Q/urls.php", "config/Q/preload.php"], */
 		"javascript": {
 			"prettyPrintData": true
 		}
