@@ -14128,6 +14128,7 @@ Q.Notices = {
 	 * @default 500
 	 */
 	popUpTime: 500,
+
 	/**
 	 * Container for notices
 	 * @property container
@@ -14136,10 +14137,18 @@ Q.Notices = {
 	container: document.getElementById("notices_slot"),
 
 	/**
+	 * Here store groips of notices closed manually by user. These groups will not appear during current session.
+	 * @property closedGroups
+	 * @type {array}
+	 */
+	closedGroups: [],
+
+	/**
 	 * Adds a notice.
 	 * @method add
 	 * @param {Object} options Object of options
 	 * @param {String} [options.key] Unique key for this notice. Need if you want to modify/remove notice by key.
+	 * @param {String} [options.group] key to group notices. If user close notice manually, this group of notices will not appear during session.
 	 * @param {String} options.content HTML contents of this notice.
 	 * @param {Boolean} [options.closeable=true] Whether notice can be closed with red x icon.
 	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle() on click notice
@@ -14157,11 +14166,16 @@ Q.Notices = {
 		// default options
 		var o = Q.extend({
 			key: null,
+			group: null,
 			closeable: true,
 			type: 'common',
 			timeout: false,
 			persistent: false
 		}, options);
+
+		if (o.group && Q.Notices.closedGroups.includes(o.group)) {
+			return;
+		}
 
 		if (o.persistent && !o.key) {
 			o.key = Date.now().toString();
@@ -14202,6 +14216,7 @@ Q.Notices = {
 			closeIcon.onclick = function (event) {
 				event.stopPropagation();
 				Q.Notices.remove(li);
+				o.group && Q.Notices.closedGroups.push(o.group);
 			}
 		}
 		if (typeof o.timeout === 'number' && o.timeout > 0) {
@@ -14276,7 +14291,7 @@ Q.Notices = {
 			var o = JSON.parse(json) || {};
 			// if notice persistent - send request to remove from session
 			if (typeof key === 'string' && o.persistent) {
-				Q.req('Q/notice', 'data', null, {
+				Q.req('Q/notice', [], null, {
 					method: 'delete',
 					fields: {key: key}
 				});

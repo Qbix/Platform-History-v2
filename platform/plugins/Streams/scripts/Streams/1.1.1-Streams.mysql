@@ -1,0 +1,15 @@
+# Dump of table {{prefix}}metrics
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `{{prefix}}metrics`;
+CREATE TABLE `{{prefix}}metrics` (
+  `userId`   varbinary(31) NOT NULL COMMENT 'id of user owner statistics',
+  `publisherId` varbinary(31) NOT NULL COMMENT 'id of user who publishes the stream',
+  `streamName` varbinary(255) NOT NULL COMMENT 'the name of the stream',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL,
+  `metrics` TEXT COMMENT 'json encoded statistics',
+  PRIMARY KEY (`publisherId`,`streamName`,`userId`),
+  KEY `userId` (`userId`),
+  KEY `stream` (`publisherId`, `streamName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

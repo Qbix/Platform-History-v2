@@ -564,8 +564,12 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 #notices_slot ul li .Q_tool.Users_avatar_tool {
-	width: 40px;
+	height: 40px;
 	line-height: normal;
+	overflow: unset;
+}
+#notices_slot ul li .Q_tool.Users_avatar_tool[data-users-avatar*='"icon":false'] {
+	height: unset;
 }
 
 #notices_slot ul li {

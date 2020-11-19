@@ -771,6 +771,9 @@ html.Q_scanning body > .Q_scanning_code {
 	overflow: visible !important;
 	z-index: 100 !important;
 }
+#content.Q_columns_containsExpanded {
+	padding: 0;
+}
 .Q_columns_siblingContainsExpanded {
 	z-index: 0 !important;
 }

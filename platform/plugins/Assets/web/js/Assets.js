@@ -97,7 +97,9 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
+								onSuccess: options.onSuccess,
+								onFailure: options.onFailure
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
@@ -199,6 +201,9 @@
 		},
 
 		onSuccessPayment: new Q.Event(),
+
+		onBeforeNotice: new Q.Event(),
+		onCreditsChanged: new Q.Event(),
 
 		/**
 		 * Operates with subscriptions.
@@ -1007,6 +1012,7 @@
 
 					try {
 						Assets.Credits.amount = JSON.parse(fields[k]).amount;
+						Q.handle(Assets.onCreditsChanged, null, [Assets.Credits.amount]);
 					} catch (e) {}
 				}, 'Assets');
 
@@ -1027,10 +1033,20 @@
 						content += '<br>' + reason;
 					}
 
-					Q.Notices.add({
+					var options = {
 						content: content,
-						timeout: 5
-					});
+						timeout: 5,
+						group: reason || null,
+						handler: function () {
+							if (content.includes("credit") || reason.includes("credit")) {
+								Q.handle(Q.url("me/credits"));
+							}
+						}
+					};
+
+					Q.handle(Assets.onBeforeNotice, message, [options]);
+
+					Q.Notices.add(options);
 				};
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
@@ -1070,7 +1086,13 @@
 			currency: options.currency
 		};
 		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
-		cordova.plugins.browsertabs.openUrl(url.toString());
+		cordova.plugins.browsertab.openUrl(url.toString(), {
+			scheme: Q.info.scheme
+		}, function(successResp) {
+			Q.handle(options.onSuccess, null, [successResp]);
+		}, function(err) {
+			Q.handle(options.onFailure, null, [err]);
+		});
 	}
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
@@ -1084,31 +1106,31 @@
 			}
 
 			// need Stripe lib for safari browserTab
-			Q.Assets.Payments.load();
-
-			if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
-				var $button = $('#browsertab_pay');
-				var $info = $('#browsertab_pay_info');
-				var $cancel = $('#browsertab_pay_cancel');
-				var $error = $('#browsertab_pay_error');
-				$button.show();
-				$button.on('click', function() {
-					Assets.Payments.stripe(paymentOptions, function(err, res) {
-						$button.hide();
-						if (err && err.code === 20) {
-							$cancel.show();
-						} else if (err) {
-							$error.show();
-						} else {
-							$info.show();
-						}
+			Q.Assets.Payments.load(function () {
+				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
+					var $button = $('#browsertab_pay');
+					var $info = $('#browsertab_pay_info');
+					var $cancel = $('#browsertab_pay_cancel');
+					var $error = $('#browsertab_pay_error');
+					$button.show();
+					$button.on('click', function() {
+						Q.Assets.Payments.stripe(paymentOptions, function(err, res) {
+							$button.hide();
+							if (err && err.code === 20) {
+								$cancel.show();
+							} else if (err) {
+								$error.show();
+							} else {
+								$info.show();
+							}
+						});
 					});
-				});
-			} else {
-				Assets.Payments.stripe(paymentOptions, function(){
-					window.close();
-				})
-			}
+				} else {
+					Q.Assets.Payments.stripe(paymentOptions, function(){
+						window.close();
+					})
+				}
+			});
 		};
 	}
 
