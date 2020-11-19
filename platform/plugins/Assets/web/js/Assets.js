@@ -1079,13 +1079,13 @@
 	function _redirectToBrowserTab(options) {
 		var url = new URL(document.location.href);
 		url.searchParams.set('browsertab', 'yes');
-		var paymentOptions = {
+		url.searchParams.set('scheme', Q.info.scheme);
+		url.searchParams.set('paymentOptions', JSON.stringify({
 			amount: options.amount,
 			email: options.email,
 			userId: Q.Users.loggedInUserId(),
 			currency: options.currency
-		};
-		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
+		}));
 		cordova.plugins.browsertab.openUrl(url.toString(), {scheme: Q.info.scheme}, function(successResp) {
 			Q.handle(options.onSuccess, null, [successResp]);
 		}, function(err) {
@@ -1107,6 +1107,8 @@
 				return console.warn("Undefined payment options");
 			}
 
+			var scheme = params.get('scheme');
+
 			// need Stripe lib for safari browserTab
 			Q.Assets.Payments.load(function () {
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
@@ -1123,14 +1125,20 @@
 							} else if (err) {
 								$error.show();
 							} else {
+								// if scheme defined, redirect to scheme to close browsertab
+								scheme && (location.href = scheme);
 								$info.show();
 							}
 						});
 					});
 				} else {
-					Q.Assets.Payments.stripe(paymentOptions, function(){
-						window.close();
-					})
+					Q.Assets.Payments.stripe(paymentOptions, function () {
+						if (scheme) {
+							location.href = scheme
+						} else {
+							window.close();
+						}
+					});
 				}
 			});
 		};
