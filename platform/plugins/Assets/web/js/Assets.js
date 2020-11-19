@@ -1070,7 +1070,7 @@
 			currency: options.currency
 		};
 		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
-		cordova.plugins.browsertab.openUrl(url.toString());
+		cordova.plugins.browsertabs.openUrl(url.toString());
 	}
 
 	if (window.location.href.indexOf('browsertab=yes') !== -1) {
@@ -1141,7 +1141,7 @@
 				}
 
 				// open browsertab for cordova
-				var browsertab = Q.getObject("cordova.plugins.browsertab");
+				var browsertab = Q.getObject("cordova.plugins.browsertabs");
 				if (browsertab) {
 					return browsertab.openUrl(redirectUrl);
 				}
