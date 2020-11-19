@@ -1099,8 +1099,12 @@
 			try {
 				var paymentOptions = JSON.parse(params.get('paymentOptions'));
 			} catch(err) {
-				console.warn('Undefined payment options');
+				console.warn("Undefined payment options");
 				throw(err);
+			}
+
+			if (Q.isEmpty(paymentOptions)) {
+				return console.warn("Undefined payment options");
 			}
 
 			// need Stripe lib for safari browserTab
