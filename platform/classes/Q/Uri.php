@@ -1171,11 +1171,19 @@ class Q_Uri
 	 */
 	protected static $cacheBaseUrl = null;
 	/**
+	 * Information on modification times and hashes of web resources
 	 * @property $urls
 	 * @public
 	 * @type string
 	 */
 	static $urls = array();
+	/**
+	 * Information on what resources to tell the client to preload
+	 * @property $preload
+	 * @public
+	 * @type string
+	 */
+	static $preload = array();
 	/**
 	 * @property $url
 	 * @public

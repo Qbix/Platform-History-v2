@@ -2151,7 +2151,8 @@
 		 * @param {Function} [callback] This function is called after the oAuth flow ends,
 		 *    unless options.openWindow === false, because then the redirect would happen.
 		 * @param {Object} [options={}]
-		 * @param {Object|String} [openWindow={}] Set to false to start the oAuth flow in the
+		 * @param {Object|String} [openWindow={closeUrlRegExp:Q.url("Users/oauthed")+".*"}] 
+		 *    Set to false to start the oAuth flow in the
 		 *    current window. Otherwise, this object can be used to set window features
 		 *    passed to window.open() as a string.
 		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
@@ -2197,9 +2198,14 @@
 			} else {
 				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
 				var ival = setInterval(function () {
-					if (w.name === 'Q_Users_oAuth_success') {
+					var regexp = new RegExp(
+						options.openWindow.closeUrlRegExp
+						|| Q.url("Users/close") + ".*"
+					);
+					if (w.name === 'Q_Users_oAuth_success'
+					|| w.location.href.match(regexp)) {
 						w.close();
-						callback(true);
+						callback(w.url);
 						clearInterval(ival);
 					}
 					if (w.name === 'Q_Users_oAuth_error') {
@@ -2584,15 +2590,6 @@
 		if (!querystring) {
 			return;
 		}
-		if (querystring.includes('Q.Users.newSessionId')) { // handoff action
-			var fields = _getParams(url.split('#')[1]);
-			if (fields['Q.Users.newSessionId']) {
-				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-				location.reload();
-			}
-		} else if (querystring.includes('facebookLogin=1')) {
-			Users.login({using: 'facebook'});
-		}
 		if (querystring.queryField('Q.Users.newSessionId')) {
 			var fieldNames = [
 				'Q.Users.appId', 'Q.Users.newSessionId',
@@ -2643,7 +2640,7 @@
 
 	// handoff action
 	Q.onHandleOpenUrl.set(function (url) {
-		window.cordova.plugins.browsertab.close();
+		window.cordova.plugins.browsertabs.close();
 		_setSessionFromQueryString(url.split('#')[1]);
 	}, 'Users.handoff');
 
@@ -3373,7 +3370,7 @@
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=' + Users.Facebook.scope.join(",");
-				cordova.plugins.browsertab.openUrl(url,
+				cordova.plugins.browsertabs.openUrl(url,
 					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
 					function(err) { console.log(err); }

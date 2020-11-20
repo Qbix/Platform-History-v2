@@ -1085,8 +1085,11 @@
 			email: options.email,
 			userId: Q.Users.loggedInUserId(),
 			currency: options.currency
-		}));
-		cordova.plugins.browsertab.openUrl(url.toString(), {scheme: Q.info.scheme}, function(successResp) {
+		};
+		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
+		cordova.plugins.browsertab.openUrl(url.toString(), {
+			scheme: Q.info.scheme
+		}, function(successResp) {
 			Q.handle(options.onSuccess, null, [successResp]);
 		}, function(err) {
 			Q.handle(options.onFailure, null, [err]);
@@ -1173,7 +1176,7 @@
 				}
 
 				// open browsertab for cordova
-				var browsertab = Q.getObject("cordova.plugins.browsertab");
+				var browsertab = Q.getObject("cordova.plugins.browsertabs");
 				if (browsertab) {
 					return browsertab.openUrl(redirectUrl);
 				}
