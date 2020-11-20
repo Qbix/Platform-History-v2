@@ -1134,13 +1134,13 @@
 						});
 					});
 				} else {
-					Q.Assets.Payments.stripe(paymentOptions, function(){
+					Q.Assets.Payments.stripe(paymentOptions, function () {
 						if (scheme) {
-							location.href = scheme
+							location.href = scheme;
 						} else {
 							window.close();
 						}
-					})
+					});
 				}
 			});
 		};
