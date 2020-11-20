@@ -1498,7 +1498,7 @@ class Q_Response
 	 */
 	static function links($slotName = null, $between = "\n")
 	{
-		$links = self::linkArray($slotName);
+		$links = self::linksArray($slotName);
 		if (!is_array($links)) {
 			return '';
 		}
