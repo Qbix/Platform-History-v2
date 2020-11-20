@@ -1085,8 +1085,7 @@
 			email: options.email,
 			userId: Q.Users.loggedInUserId(),
 			currency: options.currency
-		};
-		url.searchParams.set('paymentOptions', JSON.stringify(paymentOptions));
+		}));
 		cordova.plugins.browsertab.openUrl(url.toString(), {
 			scheme: Q.info.scheme
 		}, function(successResp) {
@@ -1137,7 +1136,7 @@
 				} else {
 					Q.Assets.Payments.stripe(paymentOptions, function () {
 						if (scheme) {
-							location.href = scheme
+							location.href = scheme;
 						} else {
 							window.close();
 						}

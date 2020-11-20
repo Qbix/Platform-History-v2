@@ -128,7 +128,9 @@
 	animation: pulsate 2s infinite;
 }
 
+.Streams_invite_QR_content canvas,
 .Streams_invite_QR_content img {
+	display: block;
 	padding: 20px;
 	margin: 0 auto;
 }
