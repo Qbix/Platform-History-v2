@@ -1,6 +1,6 @@
 (function ($, window, undefined) {
 
-    var ua=navigator.userAgent;
+    var ua = navigator.userAgent;
     var _isiOS = false;
     var _isAndroid = false;
     var _isiOSCordova = false;
@@ -10,28 +10,22 @@
     if(typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
     if(typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
-
-    Q.addStylesheet('{{Q}}/css/3dcarousel.css');
-
-    //Q.addScript("{{Q}}/js/3dcarousel.js");
-
-
     /**
-     * Streams/webrtc/control tool.
-     * Users can chat with each other via WebRTC using Twilio or raw streams
-     * @module Streams
-     * @class Streams webrtc
+     * Q/carousel tool
+     * Displays an interactive carousel of images with titles
+     * @module Q
+     * @class Q carousel
      * @constructor
      * @param {Object} [options]
-     *  @param {String} [options.element] Container with images/videos
-     *  @param {String} [options.radius] URL of video source
-     *  @param {string} [options.imgWidth] Clip start position in milliseconds
-     *  @param {string} [options.imgHeight] Clip start position in milliseconds
-     *  @param {string} [options.autoRotate] Clip start position in milliseconds
-     *  @param {string} [options.rotateSpeed] Clip start position in milliseconds
+     *  @param {Element} [options.element] Container with images/videos
+     *  @param {float} [options.radius]
+     *  @param {integer} [options.imgWidth] 
+     *  @param {integer} [options.imgHeight] 
+     *  @param {boolean} [options.autoRotate] 
+     *  @param {integer} [options.rotateSpeed]
      *  Hash of possible options
      */
-    Q.Tool.define("Streams/webrtc/controls", function(options) {
+    Q.Tool.define("Q/carousel", function(options) {
             var tool = this;
             tool.state = Q.extend({}, tool.state, options);
 
@@ -55,6 +49,8 @@
                 var rotateSpeed = tool.state.rotateSpeed;
                 var imgWidth = tool.state.imgWidth;
                 var imgHeight = tool.state.imgHeight;
+
+                Q.addStylesheet('{{Q}}/css/3dcarousel.css');
 
                 setTimeout(init, 100);
 
