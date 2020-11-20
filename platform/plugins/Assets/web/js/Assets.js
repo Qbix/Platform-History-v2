@@ -1089,7 +1089,7 @@
 		cordova.plugins.browsertab.openUrl(url.toString(), {scheme: Q.info.scheme}, function(successResp) {
 			Q.handle(options.onSuccess, null, [successResp]);
 		}, function(err) {
-			Q.handle(options.onSuccess, null, [err]);
+			Q.handle(options.onFailure, null, [err]);
 		});
 	}
 
