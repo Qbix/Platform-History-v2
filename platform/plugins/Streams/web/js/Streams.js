@@ -1517,7 +1517,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 Streams.invite.options = {
 	followup: "future",
 	identifierTypes: ["email", "mobile"],
-	youCanNowPasteDuration: 1000
+	youCanNowPasteDuration: 10000
 };
 
 /**
