@@ -4736,11 +4736,11 @@ Streams.Metrics = function (params) {
 	this.streamName = Q.getObject("streamName", params) || null;
 
 	if (!this.publisherId) {
-		throw new Q.Error("Streams.Metrics: publisherId undefined");
+		return console.warn("Streams.Metrics: publisherId undefined");
 	}
 
 	if (!this.streamName) {
-		throw new Q.Error("Streams.Metrics: streamName undefined");
+		return console.warn("Streams.Metrics: streamName undefined");
 	}
 
 	// set useFaces option
