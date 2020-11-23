@@ -71,10 +71,8 @@ function _Q_viewport(options) {
 				'border': '0px solid transparent',
 				'float': this.css('float'),
 				'z-index': this.css('z-index'),
-				'overflow': 'hidden',
 				'width': state.width + 'px',
 				'height': state.height + 'px',
-				'text-align': 'left',
 				'overflow': 'hidden',
 				'line-height': this.css('line-height'),
 				'vertical-align': this.css('vertical-align'),
@@ -225,7 +223,14 @@ function _Q_viewport(options) {
 			var _ec = Q.addEventListener(window, Q.Pointer.cancel, _endHandler, {passive: false});
 			// Q.addEventListener(window, Q.Pointer.touchclick, _clickHandler, {passive: false});
 		});
-	
+
+		// this is for ios devices only
+		// for some reason photo from camera displayed with bottom gap. Need to process touchstart handler to normalize.
+		if (Q.info.isTouchscreen) {
+			container.trigger("touchstart");
+			setTimeout(function () { container.trigger("touchend") }, 200);
+		}
+
 		container.on(Q.Pointer.wheel, function (e) {
 			if (Q.Pointer.started) {
 				return;
