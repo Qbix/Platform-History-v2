@@ -895,6 +895,4 @@ Q_tabbing_container .Q_tabbing_item.Q_current:not(.Q_tabs_switchingFrom) {
 
 .Q_dialog_imagepicker .Q_viewport {
 	display: block;
-	width: 100%;
-	height: auto;
 }
