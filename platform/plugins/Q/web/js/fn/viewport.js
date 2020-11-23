@@ -227,8 +227,8 @@ function _Q_viewport(options) {
 		// this is for ios devices only
 		// for some reason photo from camera displayed with bottom gap. Need to process touchstart handler to normalize.
 		if (Q.info.isTouchscreen) {
-			container.trigger("touchstart");
-			setTimeout(function () { container.trigger("touchend") }, 200);
+			var $img = this;
+			setTimeout(function () { $img.width("100%") }, 200);
 		}
 
 		container.on(Q.Pointer.wheel, function (e) {
