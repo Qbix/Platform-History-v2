@@ -3,7 +3,7 @@
 .carousel-wrap {
     flex: 0 1 50%;
     /* for touch screen laptop */
-    touch-action: none;
+    touch-action: pan-y;
 }
 
 .carousel-wrap {
