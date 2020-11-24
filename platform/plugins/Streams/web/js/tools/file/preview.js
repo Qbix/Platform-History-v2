@@ -62,9 +62,6 @@ function _Streams_file_preview(options, preview) {
 	if (ps.editable) {
 		Q.setObject(["actions", "actions", "edit"], true, ps);
 	}
-	if (Q.getObject(["actions", "actions", "edit"], ps)) {
-		ps.actions.actions.edit = tool.selectAndUploadFile.bind(this);
-	}
 },
 
 {
@@ -165,15 +162,31 @@ function _Streams_file_preview(options, preview) {
 						window.location = url;
 					}
 				});
+
+				// apply edit action
+				if (Q.getObject(["actions", "actions", "edit"], ps)) {
+					ps.actions.actions.edit = tool.selectAndUploadFile.bind(tool);
+					tool.preview.actions();
+				}
 			},
 			state.templates[tpl]
 		);
 	},
 	composer: function () {
 		var tool = this;
-		var state = tool.state;
-		tool.$('.Streams_file_input')
-		.on(Q.Pointer.fastclick, function (event) {
+		var $file = tool.$('.Streams_file_input');
+
+		var $container = this.$('.Streams_preview_container');
+
+		// remove default click handler
+		$container.off([Q.Pointer.fastclick, ".Streams_preview"]);
+
+		// attach custom handler
+		$container.on([Q.Pointer.fastclick, ".Streams_file_preview"], function () {
+			$file.trigger("click");
+		});
+
+		$file.on("click", function (event) {
 			event.stopPropagation();
 		}).change(function (event) {
 			if (!this.value) {
@@ -188,6 +201,9 @@ function _Streams_file_preview(options, preview) {
 				if (fem) {
 					Q.alert(fem);
 				}
+
+				// after file uploaded, Q/actions plugin must do this
+				$container.off([Q.Pointer.fastclick, ".Streams_file_preview"]);
 			});
 			form.reset();
 		});
