@@ -1189,6 +1189,23 @@ class Users_User extends Base_Users_User
 	}
 
 	/**
+	 * Get client IP address
+	 * @method getIP
+	 * @static
+	 */
+	static function getIP () {
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+
+		return $ip;
+	}
+
+	/**
 	 * Remove users from system
 	 * @method removeUser
 	 * @static
