@@ -151,7 +151,7 @@ function _Streams_file_preview(options, preview) {
 						p.fill('inplace').apply(this, arguments);
 					});
 				});
-				$(tool.element).on(Q.Pointer.click, function () {
+				$(tool.element).on(Q.Pointer.fastclick, function () {
 					var url = stream.fileUrl();
 					if (!url) {
 						return tool.selectAndUploadFile();
