@@ -82,12 +82,12 @@
 }
 .Websites_webpage_preview_tool .Streams_aspect_description {
 	font-size: 12px;
-	color: #000;
+	color: var(--html-color);
 	line-height: normal;
 }
 .Websites_webpage_preview_tool .Streams_aspect_interests a:link,
 .Websites_webpage_preview_tool .Streams_aspect_interests a:visited {
-	color: blue;
+	color: var(--html-link-color);
 }
 .Websites_webpage_preview_tool .Streams_aspect_interests {
 	font-size: 12px;

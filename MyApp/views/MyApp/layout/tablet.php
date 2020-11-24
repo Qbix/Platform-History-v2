@@ -33,6 +33,7 @@
 	</script>
 	
 	<!-- scripts have been moved to the bottom of the body -->
+	<?php echo Q_Response::links(true, "\n\t") ?> 
 	<?php echo Q_Response::stylesheets(true, "\n\t") ?> 
 	<?php echo Q_Response::styles(true, "\n\t") ?> 
 </head>

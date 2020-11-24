@@ -48,7 +48,7 @@ function Users_oauthed_response()
 		$result = 'error';
 	}
 	if (empty($_REQUEST['openWindow'])) {
-		Q_Response::redirect($inffo['finalRedirect']);
+		Q_Response::redirect($info['finalRedirect']);
 		return false;
 	}
 	echo <<<EOT

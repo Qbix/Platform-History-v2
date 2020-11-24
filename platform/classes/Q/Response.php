@@ -475,17 +475,16 @@ class Q_Response
 	 * @param {string} [$params.attrName=name] Attribute name of the meta tag
 	 * @param {string} $params.attrValue Attribute value of the meta tag
 	 * @param {mixed} [$params.content=null] The content of the meta tag
-	 * @param {mixed} [$params.slotName=null]
+	 * @param {string} [$slotName=null]
 	 */
-	static function setMeta($params)
+	static function setMeta($params, $slotName = null)
 	{
 		$argList = func_get_args();
 		if (count($argList) > 1) { // backward compatibility
 			$params = array(
 				'attrName' => 'name',
 				'attrValue' => Q::ifset($argList, 0, ''),
-				'content' => Q::ifset($argList, 1, ''),
-				'slotName' => Q::ifset($argList, 2, null)
+				'content' => Q::ifset($argList, 1, '')
 			);
 		} elseif (isset($params[0]) and is_array($params[0])) {
 			foreach ($params as $v) {
@@ -498,8 +497,7 @@ class Q_Response
 
 		$params = array_merge(array(
 			'attrName' => 'name',
-			'content' => '',
-			'slotName' => null
+			'content' => ''
 		), $params);
 
 		// remove from content new lines and html tags
@@ -522,7 +520,9 @@ class Q_Response
 		self::$metas[$key] = $params;
 
 		// Now, for the slot
-		$slotName = Q::ifset($params, 'slotName', isset(self::$slotName) ? self::$slotName : '');
+		if (!isset($slotName)) {
+			$slotName = isset(self::$slotName) ? self::$slotName : '';
+		}
 		self::$metasForSlot[$slotName][$key] = $params;
 	}
 
@@ -584,20 +584,6 @@ class Q_Response
 			}
 		}
 		return implode($between, $tags);
-	}
-
-	/**
-	 * Returns text describing all the metas inline which have been added with setMeta(),
-	 * to be included between &lt;meta&gt;&lt;/meta&gt; tags.
-	 * @method metasInline
-	 * @static
-	 * @param {string} [$slotName=null] If provided, returns only the metas set while filling this slot.
-	* @param {string} [$between=''] Optional text to insert between the blocks of meta text
-	 * @return {string}
-	 */
-	static function metasInline($slotName = null, $between = "\n")
-	{
-		return self::metas($slotName, $between, false);
 	}
 
 	/**
@@ -1405,17 +1391,40 @@ class Q_Response
 	 * Returns the HTML markup for referencing all the stylesheets added so far
 	 * @method stylesheets
 	 * @static.
-	 * @param {string} [$slotName=null] If provided, returns only the stylesheets added while filling this slot.
+	 * @param {string} [$slotName=null] If provided, returns only the stylesheets
+	 *   added while filling this slot.
 	 * @param {string} [$between=''] Optional text to insert between the &lt;link&gt; tags
+	 * @param {boolean} [$skipPreloads=false] Whether to skip automatically also adding
+	 *   <link> tags informing the client on what to preload.
 	 * @return {string} the HTML markup for referencing all the stylesheets added so far
 	 */
-	static function stylesheets ($slotName = null, $between = "\n")
+	static function stylesheets ($slotName = null, $between = "\n", $skipPreloads = false)
 	{
 		$stylesheets = self::stylesheetsArray($slotName);
 		if (empty($stylesheets))
 			return '';
+		$baseUrl = Q_Request::baseUrl();
 		$tags = array();
 		foreach ($stylesheets as $stylesheet) {
+			if (Q::startsWith($href, $baseUrl)) {
+				$tail = substr($href, strlen($baseUrl)+1);
+				if (!$skipPreloads) {
+					if (!empty(Q_Uri::$preload[$tail])) {
+						foreach (Q_Uri::$preload[$tail] as $preload) {
+							$parts = explode('.', $preload);
+							$ext = array_pop($parts);
+							if (empty(Q_Html::$preloadAs[$ext])) {
+								continue;
+							}
+							$tags[] = Q_Html::tag('link', array(
+								'rel' => 'preload',
+								'href' => $preload,
+								'as' => Q_Html::$preloadAs[$ext]
+							));
+						}
+					}
+				}
+			}
 			$rel = 'stylesheet';
 			$href = '';
 			$media = 'screen,print';
@@ -1425,6 +1434,80 @@ class Q_Response
 			$attributes = compact('rel', 'type', 'href', 'media');
 			$attributes['data-slot'] = $stylesheet['slot'];
 			$tags[] = Q_Html::tag('link', $attributes, null, compact('hash'));
+		}
+		return implode($between, $tags);
+	}
+	
+	/**
+	 * Add <link> tag with some attributes
+	 * @method addLink
+	 * @static
+	 * @param {string} $rel the rel attribute
+	 * @param {sting} $href the href attributes
+	 * @param {array} [$attributes=array()] any other attributes
+	 * @param {string} [$slotName=null]
+	 */
+	static function addLink($rel, $href, array $attributes = array(), $slotName = null)
+	{
+		$attributes = array_merge(compact('rel', 'href'), $attributes);
+		if (!isset($slotName)) {
+			$slotName = isset(self::$slotName) ? self::$slotName : '';
+		}
+		self::$links[$slotName][] = $attributes;
+	}
+	
+	/**
+	 * Return the array of links added so far
+	 * @method linksArray
+	 * @static
+	 * @param {string} [$slotName=null] If provided, returns only the links set while filling this slot.
+	 *  If you leave this empty, you get links information for the "right" slots.
+	 *  If you pass false here, you will just get the entire $links array without any processing.
+	 * @param {string} [$urls=true] If true, transforms all the 'src' values into URLs before returning.
+	 * @return {array} if $slotName is an array or true, returns array of $slotName => $links, otherwise returns $links
+	 */
+	static function linksArray ($slotName = null, $urls = true)
+	{
+		if ($slotName === false) {
+			return is_array(self::$links) ? self::$links : array();
+		}
+		if (!isset($slotName) or $slotName === true) {
+			$slotName = self::allSlotNames();
+		}
+		if (is_array($slotName)) {
+			$links = array();
+			foreach ($slotName as $sn) {
+				$links[$sn] = self::linksArray($sn, $urls);
+			}
+			return $links;
+		}
+		if (!isset(self::$linksForSlot[$slotName])) {
+			return array();
+		}
+		$links = self::$linksForSlot[$slotName];
+		return is_array($links) ? $links : array();
+	}
+	
+	/**
+	 * Returns text describing all the links inline which have been added with setLink()
+	 * @method links
+	 * @static
+	 * @param {string} [$slotName=null] If provided, returns only the links set while filling this slot.
+	 * @param {string} [$between=''] Optional text to insert between the <link> tags or blocks of text.
+	 * @return {string}
+	 */
+	static function links($slotName = null, $between = "\n")
+	{
+		$links = self::linksArray($slotName);
+		if (!is_array($links)) {
+			return '';
+		}
+
+		$tags = array();
+		foreach ($links as $sn => $l) {
+			foreach ($l as $link) {
+				$tags[] = Q_Html::tag('link', $link);
+			}
 		}
 		return implode($between, $tags);
 	}
@@ -1899,6 +1982,12 @@ class Q_Response
 	 */
 	protected static $metas = array();
 	/**
+	 * @property $links
+	 * @static
+	 * @type array
+	 */
+	protected static $links = array();
+	/**
 	 * @property $templates
 	 * @static
 	 * @type array
@@ -1971,6 +2060,12 @@ class Q_Response
 	 * @type array
 	 */
 	protected static $metasForSlot = array();
+	/**
+	 * @property $linksForSlot
+	 * @static
+	 * @type array
+	 */
+	protected static $linksForSlot = array();
 	/**
 	 * @property $toolOptions
 	 * @static

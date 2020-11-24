@@ -34,6 +34,7 @@ Base.tableClasses = [
 	"Streams_Invited",
 	"Streams_Message",
 	"Streams_MessageTotal",
+	"Streams_Metrics",
 	"Streams_Notification",
 	"Streams_Participant",
 	"Streams_RelatedFrom",
@@ -114,6 +115,13 @@ Base.Message = Q.require('Streams/Message');
  * @type Streams.MessageTotal
  */
 Base.MessageTotal = Q.require('Streams/MessageTotal');
+
+/**
+ * Link to Streams.Metrics model
+ * @property Metrics
+ * @type Streams.Metrics
+ */
+Base.Metrics = Q.require('Streams/Metrics');
 
 /**
  * Link to Streams.Notification model
