@@ -882,11 +882,11 @@ abstract class Users extends Base_Users
 	 */
 	static function setLoggedInUser($user = null, $options = array())
 	{
-		if ($user and is_string($user)) {
+		if ($user && is_string($user)) {
 			$user = Users_User::fetch($user, true);
 		}
 		$loggedInUserId = Q::ifset($_SESSION, 'Users', 'loggedInUser', 'id', null);
-		if (!$user and $user->id === $loggedInUserId) {
+		if (Q::ifset($user, "id", null) === $loggedInUserId) {
 			// This user is already the logged-in user. Do nothing.
 			return false;
 		}
