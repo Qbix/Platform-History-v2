@@ -6845,7 +6845,7 @@ Q.layout = function _Q_layout(element, force) {
  * @param {Boolean} [options.unlessOffscreenHorizontally]
  * @return {Boollean} Whether the native scrollIntoView(options) was called on the element.
  */
-Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
+Q.scrollIntoView = function _Q_scrollIntoView(element, options) {
 	if (!element || typeof element.scrollIntoView !== 'function') {
 		return false;
 	}
@@ -12082,8 +12082,8 @@ Q.Pointer = {
 	 * @param {Element} [element] If you skip this, all scrolling cancels clicks
 	 */
 	startCancelingClicksOnScroll: function (element) {
-		if (element) {
-			var sp = element.scrollingParent(true);
+		var sp;
+		if (element && (sp = element.scrollingParent(true))) {
 			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
 		} else {
 			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
