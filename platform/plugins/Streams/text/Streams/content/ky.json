@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "көрүү сүрөтү"
+            "description": "көрүү сүрөтү",
+            "newItem": "Сүрөт кошуу"
         },
         "Streams\/images": {
             "displayType": "Сүрөт галлереясы",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "жүктөлгөн билэ"
+            "description": "жүктөлгөн билэ",
+            "newItem": "Файл кошуу"
         },
         "Streams\/audio": {
             "displayType": "аудио-клип",
-            "description": "аудио-клип"
+            "description": "аудио-клип",
+            "newItem": "Аудио кошуу"
         },
         "Streams\/video": {
             "displayType": "Видео клип",
-            "description": "Видео клип"
+            "description": "Видео клип",
+            "newItem": "Видео кошуу"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
             "description": "реалдуу убакыт Video \/ аудио чалуу"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "PDF кошуу"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Бул мазмун сизден жашырылган."
+    },
+    "audio": {
+        "record": "Жазуу",
+        "reset": "Баштапкы абалга келтирүү",
+        "edit": "Түзөтүү",
+        "title": "аталышы",
+        "description": "сүрөттөө",
+        "upload": "Жүктөө",
+        "link": "Шилтеме",
+        "setUrl": "URL коюңуз",
+        "save": "Сактоо",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "URL жараксыз",
+        "invalidFile": "Жараксыз файл",
+        "errorNoSource": "Аудио булагы жок",
+        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
+        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+    },
+    "video": {
+        "reset": "Баштапкы абалга келтирүү",
+        "edit": "Түзөтүү",
+        "title": "аталышы",
+        "description": "сүрөттөө",
+        "upload": "Жүктөө",
+        "link": "Шилтеме",
+        "setUrl": "URL коюңуз",
+        "save": "Сактоо",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "URL жараксыз",
+        "invalidFile": "Жараксыз файл",
+        "errorNoSource": "Видеонун булагы жок",
+        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
+        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+    },
+    "pdf": {
+        "reset": "Баштапкы абалга келтирүү",
+        "edit": "Түзөтүү",
+        "title": "аталышы",
+        "description": "сүрөттөө",
+        "upload": "Жүктөө",
+        "link": "Шилтеме",
+        "setUrl": "URL коюңуз",
+        "save": "Сактоо",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "URL жараксыз",
+        "invalidFile": "Жараксыз файл",
+        "errorNoSource": "PDF булагы жок",
+        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
+        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+    },
+    "image": {
+        "reset": "Баштапкы абалга келтирүү",
+        "edit": "Түзөтүү",
+        "title": "аталышы",
+        "description": "сүрөттөө",
+        "upload": "Жүктөө",
+        "link": "Шилтеме",
+        "setUrl": "URL коюңуз",
+        "save": "Сактоо",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "URL жараксыз",
+        "invalidFile": "Жараксыз файл",
+        "errorNoSource": "Сүрөт булагы жок",
+        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
+        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
     }
 }

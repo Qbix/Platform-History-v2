@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Պատկեր",
-            "description": "տեսողական պատկեր"
+            "description": "տեսողական պատկեր",
+            "newItem": "Ավելացնել պատկեր"
         },
         "Streams\/images": {
             "displayType": "Պատկերասրահ",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Ֆայլ",
-            "description": "վերբեռնված ֆայլ"
+            "description": "վերբեռնված ֆայլ",
+            "newItem": "Ավելացնել ֆայլ"
         },
         "Streams\/audio": {
             "displayType": "Ձայնային տեսահոլովակ",
-            "description": "աուդիո հոլովակ"
+            "description": "աուդիո հոլովակ",
+            "newItem": "Ավելացնել աուդիո"
         },
         "Streams\/video": {
             "displayType": "Տեսահոլովակը",
-            "description": "տեսահոլովակը"
+            "description": "տեսահոլովակը",
+            "newItem": "Ավելացնել տեսանյութ"
         },
         "Streams\/live": {
             "displayType": "Ուղիղ եթեր",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Իրական ժամանակի զանգ",
             "description": "իրական ժամանակի վիդեո \/ աուդիո զանգ"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF փաստաթուղթ",
+            "description": "PDF փաստաթուղթ",
+            "newItem": "Ավելացնել PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Այս բովանդակությունը թաքնված է ձեզանից:"
+    },
+    "audio": {
+        "record": "Գրառում",
+        "reset": "Վերականգնել",
+        "edit": "Խմբագրել",
+        "title": "կոչում",
+        "description": "նկարագրություն",
+        "upload": "Վերբեռնել",
+        "link": "Հղում",
+        "setUrl": "Սահմանեք URL",
+        "save": "Խնայել",
+        "setClip": "Կտրել տեսահոլովակը",
+        "invalidURL": "Անվավեր URL",
+        "invalidFile": "Անվավեր ֆայլ",
+        "errorNoSource": "Աուդիո աղբյուր չկա",
+        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
+        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+    },
+    "video": {
+        "reset": "Վերականգնել",
+        "edit": "Խմբագրել",
+        "title": "կոչում",
+        "description": "նկարագրություն",
+        "upload": "Վերբեռնել",
+        "link": "Հղում",
+        "setUrl": "Սահմանեք URL",
+        "save": "Խնայել",
+        "setClip": "Կտրել տեսահոլովակը",
+        "invalidURL": "Անվավեր URL",
+        "invalidFile": "Անվավեր ֆայլ",
+        "errorNoSource": "Տեսանյութի աղբյուր չկա",
+        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
+        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+    },
+    "pdf": {
+        "reset": "Վերականգնել",
+        "edit": "Խմբագրել",
+        "title": "կոչում",
+        "description": "նկարագրություն",
+        "upload": "Վերբեռնել",
+        "link": "Հղում",
+        "setUrl": "Սահմանեք URL",
+        "save": "Խնայել",
+        "setClip": "Կտրել տեսահոլովակը",
+        "invalidURL": "Անվավեր URL",
+        "invalidFile": "Անվավեր ֆայլ",
+        "errorNoSource": "Ոչ մի pdf աղբյուր",
+        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
+        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+    },
+    "image": {
+        "reset": "Վերականգնել",
+        "edit": "Խմբագրել",
+        "title": "կոչում",
+        "description": "նկարագրություն",
+        "upload": "Վերբեռնել",
+        "link": "Հղում",
+        "setUrl": "Սահմանեք URL",
+        "save": "Խնայել",
+        "setClip": "Կտրել տեսահոլովակը",
+        "invalidURL": "Անվավեր URL",
+        "invalidFile": "Անվավեր ֆայլ",
+        "errorNoSource": "Պատկերի աղբյուր չկա",
+        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
+        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
     }
 }

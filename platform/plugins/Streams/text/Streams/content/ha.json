@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Hoto",
-            "description": "hoto na gani"
+            "description": "hoto na gani",
+            "newItem": "Imageara hoto"
         },
         "Streams\/images": {
             "displayType": "Hoton Hoto",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Fayiloli",
-            "description": "fayil da aka ɗora"
+            "description": "fayil da aka ɗora",
+            "newItem": "Fileara Fayil"
         },
         "Streams\/audio": {
             "displayType": "Clip Audio",
-            "description": "shirin bidiyo"
+            "description": "shirin bidiyo",
+            "newItem": "Audioara Audio"
         },
         "Streams\/video": {
             "displayType": "Filin Bidiyo",
-            "description": "shirin bidiyo"
+            "description": "shirin bidiyo",
+            "newItem": "Videoara Bidiyo"
         },
         "Streams\/live": {
             "displayType": "Hanyar rayuwa",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Kira na Gaskiya",
             "description": "lokaci na ainihi bidiyo \/ kira"
+        },
+        "Streams\/pdf": {
+            "displayType": "Takaddun PDF",
+            "description": "Takaddun PDF",
+            "newItem": "PDFara PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Wannan abu yana ɓoye muku."
+    },
+    "audio": {
+        "record": "Rikodi",
+        "reset": "Sake saita",
+        "edit": "Shirya",
+        "title": "take",
+        "description": "bayanin",
+        "upload": "Loda",
+        "link": "Haɗi",
+        "setUrl": "Saita URL",
+        "save": "Ajiye",
+        "setClip": "Yanke Clip",
+        "invalidURL": "URL mara aiki",
+        "invalidFile": "Fayil mara aiki",
+        "errorNoSource": "Babu tushen tushe na sauti",
+        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
+        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+    },
+    "video": {
+        "reset": "Sake saita",
+        "edit": "Shirya",
+        "title": "take",
+        "description": "bayanin",
+        "upload": "Loda",
+        "link": "Haɗi",
+        "setUrl": "Saita URL",
+        "save": "Ajiye",
+        "setClip": "Yanke Clip",
+        "invalidURL": "URL mara aiki",
+        "invalidFile": "Fayil mara aiki",
+        "errorNoSource": "Babu tushen bidiyo",
+        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
+        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+    },
+    "pdf": {
+        "reset": "Sake saita",
+        "edit": "Shirya",
+        "title": "take",
+        "description": "bayanin",
+        "upload": "Loda",
+        "link": "Haɗi",
+        "setUrl": "Saita URL",
+        "save": "Ajiye",
+        "setClip": "Yanke Clip",
+        "invalidURL": "URL mara aiki",
+        "invalidFile": "Fayil mara aiki",
+        "errorNoSource": "Babu tushen pdf",
+        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
+        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+    },
+    "image": {
+        "reset": "Sake saita",
+        "edit": "Shirya",
+        "title": "take",
+        "description": "bayanin",
+        "upload": "Loda",
+        "link": "Haɗi",
+        "setUrl": "Saita URL",
+        "save": "Ajiye",
+        "setClip": "Yanke Clip",
+        "invalidURL": "URL mara aiki",
+        "invalidFile": "Fayil mara aiki",
+        "errorNoSource": "Babu tushen hoto",
+        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
+        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
     }
 }

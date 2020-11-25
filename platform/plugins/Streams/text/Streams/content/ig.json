@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Onyonyo",
-            "description": "ihe nlere anya"
+            "description": "ihe nlere anya",
+            "newItem": "Tinye Foto"
         },
         "Streams\/images": {
             "displayType": "Osisi onyonyo",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faịlụ",
-            "description": "ebugote faịlụ"
+            "description": "ebugote faịlụ",
+            "newItem": "Tinye Faịlụ"
         },
         "Streams\/audio": {
             "displayType": "Clip Audio",
-            "description": "ọdịyo"
+            "description": "ọdịyo",
+            "newItem": "Tinye Audio"
         },
         "Streams\/video": {
             "displayType": "Obere vidiyo",
-            "description": "obere vidiyo"
+            "description": "obere vidiyo",
+            "newItem": "Tinye vidiyo"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Oku n’ezie",
             "description": "ezigbo oge vidiyo \/ oku ọdịyo"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF akwụkwọ",
+            "description": "PDF akwụkwọ",
+            "newItem": "Tinye PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "E zonarịrị ọdịnaya gị ihe ndị a."
+    },
+    "audio": {
+        "record": "Dekọọ",
+        "reset": "Tọgharia",
+        "edit": "Dezie",
+        "title": "aha",
+        "description": "nkọwa",
+        "upload": "Bugote",
+        "link": "Njikọ",
+        "setUrl": "Tọọ URL",
+        "save": "Chekwa",
+        "setClip": "Bee Clip",
+        "invalidURL": "URL na ezighi ezi",
+        "invalidFile": "Faịlụ na ezighi ezi",
+        "errorNoSource": "Enweghị isi iyi",
+        "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
+        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
+    },
+    "video": {
+        "reset": "Tọgharia",
+        "edit": "Dezie",
+        "title": "aha",
+        "description": "nkọwa",
+        "upload": "Bugote",
+        "link": "Njikọ",
+        "setUrl": "Tọọ URL",
+        "save": "Chekwa",
+        "setClip": "Bee Clip",
+        "invalidURL": "URL na ezighi ezi",
+        "invalidFile": "Faịlụ na ezighi ezi",
+        "errorNoSource": "Enweghị isi iyi vidiyo",
+        "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
+        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
+    },
+    "pdf": {
+        "reset": "Tọgharia",
+        "edit": "Dezie",
+        "title": "aha",
+        "description": "nkọwa",
+        "upload": "Bugote",
+        "link": "Njikọ",
+        "setUrl": "Tọọ URL",
+        "save": "Chekwa",
+        "setClip": "Bee Clip",
+        "invalidURL": "URL na ezighi ezi",
+        "invalidFile": "Faịlụ na ezighi ezi",
+        "errorNoSource": "Enweghị isi pdf",
+        "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
+        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
+    },
+    "image": {
+        "reset": "Tọgharia",
+        "edit": "Dezie",
+        "title": "aha",
+        "description": "nkọwa",
+        "upload": "Bugote",
+        "link": "Njikọ",
+        "setUrl": "Tọọ URL",
+        "save": "Chekwa",
+        "setClip": "Bee Clip",
+        "invalidURL": "URL na ezighi ezi",
+        "invalidFile": "Faịlụ na ezighi ezi",
+        "errorNoSource": "Enweghị isi iyi onyonyo",
+        "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
+        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
     }
 }

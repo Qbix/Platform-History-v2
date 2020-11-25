@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Gambar",
-            "description": "gambar visual"
+            "description": "gambar visual",
+            "newItem": "Tambihkeun Gambar"
         },
         "Streams\/images": {
             "displayType": "Galeri Gambar",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "file diunggah"
+            "description": "file diunggah",
+            "newItem": "Tambihkeun File"
         },
         "Streams\/audio": {
             "displayType": "Klip Audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Tambihkeun Audio"
         },
         "Streams\/video": {
             "displayType": "Klip Video",
-            "description": "klip video"
+            "description": "klip video",
+            "newItem": "Tambihkeun Pidéo"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Panggeroan Real-Time",
             "description": "nyata waktos video \/ telepon audio"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokumén PDF",
+            "description": "Dokumén PDF",
+            "newItem": "Tambihkeun PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Eusi ieu disumputkeun ti anjeun."
+    },
+    "audio": {
+        "record": "Catetan",
+        "reset": "Reset",
+        "edit": "Édit",
+        "title": "gelar",
+        "description": "katerangan",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Nyetél URL",
+        "save": "Ngahémat",
+        "setClip": "Motong Klip",
+        "invalidURL": "URL henteu valid",
+        "invalidFile": "File henteu leres",
+        "errorNoSource": "Teu aya sumber audio",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Édit",
+        "title": "gelar",
+        "description": "katerangan",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Nyetél URL",
+        "save": "Ngahémat",
+        "setClip": "Motong Klip",
+        "invalidURL": "URL henteu valid",
+        "invalidFile": "File henteu leres",
+        "errorNoSource": "Teu aya sumber pidéo",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Édit",
+        "title": "gelar",
+        "description": "katerangan",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Nyetél URL",
+        "save": "Ngahémat",
+        "setClip": "Motong Klip",
+        "invalidURL": "URL henteu valid",
+        "invalidFile": "File henteu leres",
+        "errorNoSource": "Teu aya sumber pdf",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Édit",
+        "title": "gelar",
+        "description": "katerangan",
+        "upload": "Unggah",
+        "link": "Tautan",
+        "setUrl": "Nyetél URL",
+        "save": "Ngahémat",
+        "setClip": "Motong Klip",
+        "invalidURL": "URL henteu valid",
+        "invalidFile": "File henteu leres",
+        "errorNoSource": "Teu aya sumber gambar",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
     }
 }

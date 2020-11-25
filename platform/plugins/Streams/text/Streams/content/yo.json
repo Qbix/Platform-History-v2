@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Aworan",
-            "description": "aworan wiwo"
+            "description": "aworan wiwo",
+            "newItem": "Ṣafikun Aworan"
         },
         "Streams\/images": {
             "displayType": "Aworan Aworan",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faili",
-            "description": "faili po si"
+            "description": "faili po si",
+            "newItem": "Ṣafikun Faili"
         },
         "Streams\/audio": {
             "displayType": "Agekuru Audio",
-            "description": "agekuru ohun"
+            "description": "agekuru ohun",
+            "newItem": "Fi Audio si"
         },
         "Streams\/video": {
             "displayType": "Agekuru fidio",
-            "description": "agekuru fidio"
+            "description": "agekuru fidio",
+            "newItem": "Ṣafikun Fidio"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Ipe ti Gidi",
             "description": "akoko gidi fidio \/ ohun ipe"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF iwe aṣẹ",
+            "description": "PDF iwe aṣẹ",
+            "newItem": "Ṣafikun PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Akoonu yii wa ni pamọ fun yin."
+    },
+    "audio": {
+        "record": "Igbasilẹ",
+        "reset": "Tunto",
+        "edit": "Ṣatunkọ",
+        "title": "akọle",
+        "description": "apejuwe",
+        "upload": "Po si",
+        "link": "Ọna asopọ",
+        "setUrl": "Ṣeto URL",
+        "save": "Fipamọ",
+        "setClip": "Ge Agekuru",
+        "invalidURL": "URL ti ko fẹsẹmulẹ",
+        "invalidFile": "Faili ti ko fẹ",
+        "errorNoSource": "Ko si orisun ohun",
+        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
+        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+    },
+    "video": {
+        "reset": "Tunto",
+        "edit": "Ṣatunkọ",
+        "title": "akọle",
+        "description": "apejuwe",
+        "upload": "Po si",
+        "link": "Ọna asopọ",
+        "setUrl": "Ṣeto URL",
+        "save": "Fipamọ",
+        "setClip": "Ge Agekuru",
+        "invalidURL": "URL ti ko fẹsẹmulẹ",
+        "invalidFile": "Faili ti ko fẹ",
+        "errorNoSource": "Ko si orisun fidio",
+        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
+        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+    },
+    "pdf": {
+        "reset": "Tunto",
+        "edit": "Ṣatunkọ",
+        "title": "akọle",
+        "description": "apejuwe",
+        "upload": "Po si",
+        "link": "Ọna asopọ",
+        "setUrl": "Ṣeto URL",
+        "save": "Fipamọ",
+        "setClip": "Ge Agekuru",
+        "invalidURL": "URL ti ko fẹsẹmulẹ",
+        "invalidFile": "Faili ti ko fẹ",
+        "errorNoSource": "Ko si orisun pdf",
+        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
+        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+    },
+    "image": {
+        "reset": "Tunto",
+        "edit": "Ṣatunkọ",
+        "title": "akọle",
+        "description": "apejuwe",
+        "upload": "Po si",
+        "link": "Ọna asopọ",
+        "setUrl": "Ṣeto URL",
+        "save": "Fipamọ",
+        "setClip": "Ge Agekuru",
+        "invalidURL": "URL ti ko fẹsẹmulẹ",
+        "invalidFile": "Faili ti ko fẹ",
+        "errorNoSource": "Ko si orisun aworan",
+        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
+        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
     }
 }

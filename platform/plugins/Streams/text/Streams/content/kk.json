@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Сурет",
-            "description": "көрнекі сурет"
+            "description": "көрнекі сурет",
+            "newItem": "Кескін қосу"
         },
         "Streams\/images": {
             "displayType": "Суреттер галереясы",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "жүктелген файл"
+            "description": "жүктелген файл",
+            "newItem": "Файл қосу"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио клип"
+            "description": "аудио клип",
+            "newItem": "Дыбысты қосу"
         },
         "Streams\/video": {
             "displayType": "Видеоролик",
-            "description": "бейнеролик"
+            "description": "бейнеролик",
+            "newItem": "Бейне қосу"
         },
         "Streams\/live": {
             "displayType": "Тікелей эфир",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Нақты уақыттағы қоңырау",
             "description": "нақты уақыттағы бейне \/ аудио қоңырау"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF құжаты",
+            "description": "PDF құжаты",
+            "newItem": "PDF қосыңыз"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Бұл мазмұн сізден жасырылған."
+    },
+    "audio": {
+        "record": "Жазба",
+        "reset": "Қалпына келтіру",
+        "edit": "Өңдеу",
+        "title": "тақырып",
+        "description": "сипаттама",
+        "upload": "Жүктеу",
+        "link": "Сілтеме",
+        "setUrl": "URL мекенжайын орнатыңыз",
+        "save": "Сақтау",
+        "setClip": "Клипті кесіп тастаңыз",
+        "invalidURL": "URL дұрыс емес",
+        "invalidFile": "Жарамсыз файл",
+        "errorNoSource": "Аудио көзі жоқ",
+        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
+        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+    },
+    "video": {
+        "reset": "Қалпына келтіру",
+        "edit": "Өңдеу",
+        "title": "тақырып",
+        "description": "сипаттама",
+        "upload": "Жүктеу",
+        "link": "Сілтеме",
+        "setUrl": "URL мекенжайын орнатыңыз",
+        "save": "Сақтау",
+        "setClip": "Клипті кесіп тастаңыз",
+        "invalidURL": "URL дұрыс емес",
+        "invalidFile": "Жарамсыз файл",
+        "errorNoSource": "Бейне көзі жоқ",
+        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
+        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+    },
+    "pdf": {
+        "reset": "Қалпына келтіру",
+        "edit": "Өңдеу",
+        "title": "тақырып",
+        "description": "сипаттама",
+        "upload": "Жүктеу",
+        "link": "Сілтеме",
+        "setUrl": "URL мекенжайын орнатыңыз",
+        "save": "Сақтау",
+        "setClip": "Клипті кесіп тастаңыз",
+        "invalidURL": "URL дұрыс емес",
+        "invalidFile": "Жарамсыз файл",
+        "errorNoSource": "Pdf көзі жоқ",
+        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
+        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+    },
+    "image": {
+        "reset": "Қалпына келтіру",
+        "edit": "Өңдеу",
+        "title": "тақырып",
+        "description": "сипаттама",
+        "upload": "Жүктеу",
+        "link": "Сілтеме",
+        "setUrl": "URL мекенжайын орнатыңыз",
+        "save": "Сақтау",
+        "setClip": "Клипті кесіп тастаңыз",
+        "invalidURL": "URL дұрыс емес",
+        "invalidFile": "Жарамсыз файл",
+        "errorNoSource": "Кескін көзі жоқ",
+        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
+        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
     }
 }

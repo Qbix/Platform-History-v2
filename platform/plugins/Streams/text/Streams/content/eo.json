@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Bildo",
-            "description": "vida bildo"
+            "description": "vida bildo",
+            "newItem": "Aldoni Bildon"
         },
         "Streams\/images": {
             "displayType": "Bildgalerio",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Dosiero",
-            "description": "alŝutita dosiero"
+            "description": "alŝutita dosiero",
+            "newItem": "Aldoni dosieron"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "sondosiero"
+            "description": "sondosiero",
+            "newItem": "Aldoni Aŭdion"
         },
         "Streams\/video": {
             "displayType": "Vidbendo",
-            "description": "filmeto"
+            "description": "filmeto",
+            "newItem": "Aldonu filmeton"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Realtempa Voko",
             "description": "realtempa filmeto \/ audiovoko"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-dokumento",
+            "description": "PDF-dokumento",
+            "newItem": "Aldonu PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ĉi tiu enhavo estas kaŝita de vi."
+    },
+    "audio": {
+        "record": "Rekordo",
+        "reset": "Restarigi",
+        "edit": "Redaktu",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝuti",
+        "link": "Ligilo",
+        "setUrl": "Agordi URL",
+        "save": "Savi",
+        "setClip": "Eltranĉita Klipo",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu sonfonto",
+        "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
+    },
+    "video": {
+        "reset": "Restarigi",
+        "edit": "Redaktu",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝuti",
+        "link": "Ligilo",
+        "setUrl": "Agordi URL",
+        "save": "Savi",
+        "setClip": "Eltranĉita Klipo",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu videofonto",
+        "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
+    },
+    "pdf": {
+        "reset": "Restarigi",
+        "edit": "Redaktu",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝuti",
+        "link": "Ligilo",
+        "setUrl": "Agordi URL",
+        "save": "Savi",
+        "setClip": "Eltranĉita Klipo",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu pdf-fonto",
+        "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
+    },
+    "image": {
+        "reset": "Restarigi",
+        "edit": "Redaktu",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝuti",
+        "link": "Ligilo",
+        "setUrl": "Agordi URL",
+        "save": "Savi",
+        "setClip": "Eltranĉita Klipo",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu bildfonto",
+        "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
     }
 }

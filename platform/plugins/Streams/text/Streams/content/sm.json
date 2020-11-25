@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Ata",
-            "description": "ata vaaia"
+            "description": "ata vaaia",
+            "newItem": "Faʻaopopo le Ata"
         },
         "Streams\/images": {
             "displayType": "Faʻafanua Ata",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "lokaina faila"
+            "description": "lokaina faila",
+            "newItem": "Faʻaopopo Faila"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "lipine leo"
+            "description": "lipine leo",
+            "newItem": "Faʻaopopo Leo"
         },
         "Streams\/video": {
             "displayType": "Ata Vitio",
-            "description": "vitio vitio"
+            "description": "vitio vitio",
+            "newItem": "Faʻaopopo le Vitio"
         },
         "Streams\/live": {
             "displayType": "Faʻaola",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Taimi Moni Taimi",
             "description": "se taimi moni video \/ leo telefoni"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF pepa",
+            "description": "PDF pepa",
+            "newItem": "Faʻaopopo PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "O lenei mea e lilo mai ia te oe."
+    },
+    "audio": {
+        "record": "Faamaumauga",
+        "reset": "Toe setiina",
+        "edit": "Faʻatonutonu",
+        "title": "ulutala",
+        "description": "faʻamatalaga",
+        "upload": "Tuʻu i luga",
+        "link": "Sootaga",
+        "setUrl": "Seti URL",
+        "save": "Sefe",
+        "setClip": "Oti ese le kilipa",
+        "invalidURL": "Le saʻo URL",
+        "invalidFile": "Faila le saʻo",
+        "errorNoSource": "Leai se mea puʻega",
+        "uploadLimit": "Max faila tele: {{size}}",
+        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+    },
+    "video": {
+        "reset": "Toe setiina",
+        "edit": "Faʻatonutonu",
+        "title": "ulutala",
+        "description": "faʻamatalaga",
+        "upload": "Tuʻu i luga",
+        "link": "Sootaga",
+        "setUrl": "Seti URL",
+        "save": "Sefe",
+        "setClip": "Oti ese le kilipa",
+        "invalidURL": "Le saʻo URL",
+        "invalidFile": "Faila le saʻo",
+        "errorNoSource": "Leai se ata vitio",
+        "uploadLimit": "Max faila tele: {{size}}",
+        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+    },
+    "pdf": {
+        "reset": "Toe setiina",
+        "edit": "Faʻatonutonu",
+        "title": "ulutala",
+        "description": "faʻamatalaga",
+        "upload": "Tuʻu i luga",
+        "link": "Sootaga",
+        "setUrl": "Seti URL",
+        "save": "Sefe",
+        "setClip": "Oti ese le kilipa",
+        "invalidURL": "Le saʻo URL",
+        "invalidFile": "Faila le saʻo",
+        "errorNoSource": "Leai se punavai pdf",
+        "uploadLimit": "Max faila tele: {{size}}",
+        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+    },
+    "image": {
+        "reset": "Toe setiina",
+        "edit": "Faʻatonutonu",
+        "title": "ulutala",
+        "description": "faʻamatalaga",
+        "upload": "Tuʻu i luga",
+        "link": "Sootaga",
+        "setUrl": "Seti URL",
+        "save": "Sefe",
+        "setClip": "Oti ese le kilipa",
+        "invalidURL": "Le saʻo URL",
+        "invalidFile": "Faila le saʻo",
+        "errorNoSource": "Leai se ata e maua",
+        "uploadLimit": "Max faila tele: {{size}}",
+        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
     }
 }

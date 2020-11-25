@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Ìomhaigh",
-            "description": "ìomhaigh lèirsinneach"
+            "description": "ìomhaigh lèirsinneach",
+            "newItem": "Cuir Ìomhaigh ris"
         },
         "Streams\/images": {
             "displayType": "Gailearaidh ìomhaighean",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faidhle",
-            "description": "faidhle air a luchdachadh suas"
+            "description": "faidhle air a luchdachadh suas",
+            "newItem": "Cuir faidhle ris"
         },
         "Streams\/audio": {
             "displayType": "Earrann claisneachd",
-            "description": "criomag claisneachd"
+            "description": "criomag claisneachd",
+            "newItem": "Cuir ris claisneachd"
         },
         "Streams\/video": {
             "displayType": "Earrann bhidio",
-            "description": "criomag bhidio"
+            "description": "criomag bhidio",
+            "newItem": "Cuir Bhidio ris"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Call fìor-ùine",
             "description": "gairm bhidio \/ claisneachd fìor-ùine"
+        },
+        "Streams\/pdf": {
+            "displayType": "Sgrìobhainn PDF",
+            "description": "Sgrìobhainn PDF",
+            "newItem": "Cuir PDF ris"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tha an susbaint seo falaichte bhuat."
+    },
+    "audio": {
+        "record": "Clàr",
+        "reset": "Ath-shuidhich",
+        "edit": "Deasaich",
+        "title": "tiotal",
+        "description": "tuairisgeul",
+        "upload": "Luchdaich suas",
+        "link": "Ceangal",
+        "setUrl": "Suidhich URL",
+        "save": "Sàbhail",
+        "setClip": "Gearradh a-mach clip",
+        "invalidURL": "URL mì-dhligheach",
+        "invalidFile": "Faidhle mì-dhligheach",
+        "errorNoSource": "Gun stòr claisneachd",
+        "uploadLimit": "Meud faidhle Max: {{size}}",
+        "errorFileSize": "Duilich, ach faidhle ro mhòr.<br> Is e meud faidhle Max {{size}}"
+    },
+    "video": {
+        "reset": "Ath-shuidhich",
+        "edit": "Deasaich",
+        "title": "tiotal",
+        "description": "tuairisgeul",
+        "upload": "Luchdaich suas",
+        "link": "Ceangal",
+        "setUrl": "Suidhich URL",
+        "save": "Sàbhail",
+        "setClip": "Gearradh a-mach clip",
+        "invalidURL": "URL mì-dhligheach",
+        "invalidFile": "Faidhle mì-dhligheach",
+        "errorNoSource": "Gun stòr bhidio",
+        "uploadLimit": "Meud faidhle Max: {{size}}",
+        "errorFileSize": "Duilich, ach faidhle ro mhòr.<br> Is e meud faidhle Max {{size}}"
+    },
+    "pdf": {
+        "reset": "Ath-shuidhich",
+        "edit": "Deasaich",
+        "title": "tiotal",
+        "description": "tuairisgeul",
+        "upload": "Luchdaich suas",
+        "link": "Ceangal",
+        "setUrl": "Suidhich URL",
+        "save": "Sàbhail",
+        "setClip": "Gearradh a-mach clip",
+        "invalidURL": "URL mì-dhligheach",
+        "invalidFile": "Faidhle mì-dhligheach",
+        "errorNoSource": "Gun stòr pdf",
+        "uploadLimit": "Meud faidhle Max: {{size}}",
+        "errorFileSize": "Duilich, ach faidhle ro mhòr.<br> Is e meud faidhle Max {{size}}"
+    },
+    "image": {
+        "reset": "Ath-shuidhich",
+        "edit": "Deasaich",
+        "title": "tiotal",
+        "description": "tuairisgeul",
+        "upload": "Luchdaich suas",
+        "link": "Ceangal",
+        "setUrl": "Suidhich URL",
+        "save": "Sàbhail",
+        "setClip": "Gearradh a-mach clip",
+        "invalidURL": "URL mì-dhligheach",
+        "invalidFile": "Faidhle mì-dhligheach",
+        "errorNoSource": "Gun stòr ìomhaigh",
+        "uploadLimit": "Meud faidhle Max: {{size}}",
+        "errorFileSize": "Duilich, ach faidhle ro mhòr.<br> Is e meud faidhle Max {{size}}"
     }
 }

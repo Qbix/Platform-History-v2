@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "imago visual"
+            "description": "imago visual",
+            "newItem": "addendi Image"
         },
         "Streams\/images": {
             "displayType": "Image",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "file",
-            "description": "file uploaded"
+            "description": "file uploaded",
+            "newItem": "File addendi"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
             "displayType": "Video clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "addere Video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Verus-Tempus Voca",
             "description": "verum nunc video \/ vocationem audio"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "PDF addendi"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Hoc contentus non est absconditum a te."
+    },
+    "audio": {
+        "record": "record",
+        "reset": "Reddere praeferentias",
+        "edit": "recensere",
+        "title": "title",
+        "description": "descriptio",
+        "upload": "Index",
+        "link": "Link",
+        "setUrl": "set URL",
+        "save": "salvare",
+        "setClip": "Cut de clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Non audio fons",
+        "uploadLimit": "Max file size: {{CMXCIX}}",
+        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
+    },
+    "video": {
+        "reset": "Reddere praeferentias",
+        "edit": "recensere",
+        "title": "title",
+        "description": "descriptio",
+        "upload": "Index",
+        "link": "Link",
+        "setUrl": "set URL",
+        "save": "salvare",
+        "setClip": "Cut de clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Nec video fons",
+        "uploadLimit": "Max file size: {{CMXCIX}}",
+        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
+    },
+    "pdf": {
+        "reset": "Reddere praeferentias",
+        "edit": "recensere",
+        "title": "title",
+        "description": "descriptio",
+        "upload": "Index",
+        "link": "Link",
+        "setUrl": "set URL",
+        "save": "salvare",
+        "setClip": "Cut de clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Non fons pdf",
+        "uploadLimit": "Max file size: {{CMXCIX}}",
+        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
+    },
+    "image": {
+        "reset": "Reddere praeferentias",
+        "edit": "recensere",
+        "title": "title",
+        "description": "descriptio",
+        "upload": "Index",
+        "link": "Link",
+        "setUrl": "set URL",
+        "save": "salvare",
+        "setClip": "Cut de clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Nulla imago fons",
+        "uploadLimit": "Max file size: {{CMXCIX}}",
+        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
     }
 }

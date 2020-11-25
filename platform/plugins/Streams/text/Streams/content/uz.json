@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Rasm",
-            "description": "vizual tasvir"
+            "description": "vizual tasvir",
+            "newItem": "Rasm qo&#39;shish"
         },
         "Streams\/images": {
             "displayType": "Rasmlar galereyasi",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Fayl",
-            "description": "yuklangan fayl"
+            "description": "yuklangan fayl",
+            "newItem": "Fayl qo&#39;shish"
         },
         "Streams\/audio": {
             "displayType": "Audio klip",
-            "description": "audio klip"
+            "description": "audio klip",
+            "newItem": "Ovoz qo&#39;shish"
         },
         "Streams\/video": {
             "displayType": "Videoklip",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Video qo&#39;shish"
         },
         "Streams\/live": {
             "displayType": "Jonli oqim",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Haqiqiy vaqtda qo&#39;ng&#39;iroq",
             "description": "real vaqtda video \/ audio qo&#39;ng&#39;iroq"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF hujjati",
+            "description": "PDF hujjati",
+            "newItem": "PDF qo&#39;shish"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ushbu tarkib sizdan yashirilgan."
+    },
+    "audio": {
+        "record": "Yozib olish",
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsif",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini o&#39;rnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL manzili yaroqsiz",
+        "invalidFile": "Fayl yaroqsiz",
+        "errorNoSource": "Ovoz manbai yo&#39;q",
+        "uploadLimit": "Faylning maksimal hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
+    },
+    "video": {
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsif",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini o&#39;rnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL manzili yaroqsiz",
+        "invalidFile": "Fayl yaroqsiz",
+        "errorNoSource": "Video manbai yo‘q",
+        "uploadLimit": "Faylning maksimal hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
+    },
+    "pdf": {
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsif",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini o&#39;rnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL manzili yaroqsiz",
+        "invalidFile": "Fayl yaroqsiz",
+        "errorNoSource": "PDF manbai yo&#39;q",
+        "uploadLimit": "Faylning maksimal hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
+    },
+    "image": {
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsif",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini o&#39;rnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL manzili yaroqsiz",
+        "invalidFile": "Fayl yaroqsiz",
+        "errorNoSource": "Rasm manbai yo‘q",
+        "uploadLimit": "Faylning maksimal hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
     }
 }

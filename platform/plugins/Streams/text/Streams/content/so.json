@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Sawirka",
-            "description": "muuqaal muuqaal ah"
+            "description": "muuqaal muuqaal ah",
+            "newItem": "Kudar Sawir"
         },
         "Streams\/images": {
             "displayType": "Sawirka Sawirka",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Fayl",
-            "description": "faylka la galiyay"
+            "description": "faylka la galiyay",
+            "newItem": "Kudar Fayl"
         },
         "Streams\/audio": {
             "displayType": "Clip Audio",
-            "description": "maqal maqal ah"
+            "description": "maqal maqal ah",
+            "newItem": "Kudar Codka"
         },
         "Streams\/video": {
             "displayType": "Clip Video",
-            "description": "Muuqaal video ah"
+            "description": "Muuqaal video ah",
+            "newItem": "Ku dar Video"
         },
         "Streams\/live": {
             "displayType": "Tooska",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Wicitaan waqti-dhab ah",
             "description": "waqti fiidiyow ah \/ maqal maqal ah"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dukumiintiga PDF",
+            "description": "Dukumiintiga PDF",
+            "newItem": "Kudar PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Nuxurka ayaa kaa qarsoon."
+    },
+    "audio": {
+        "record": "Diiwaan",
+        "reset": "Dib u celi",
+        "edit": "Tafatir",
+        "title": "cinwaan",
+        "description": "sharaxaad",
+        "upload": "Geli",
+        "link": "Xiriir",
+        "setUrl": "Deji URL",
+        "save": "Keydso",
+        "setClip": "Iska yaree Clip",
+        "invalidURL": "URL aan ansax ahayn",
+        "invalidFile": "Fayl aan ansax ahayn",
+        "errorNoSource": "Ma jiro ilo maqal ah",
+        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
+        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+    },
+    "video": {
+        "reset": "Dib u celi",
+        "edit": "Tafatir",
+        "title": "cinwaan",
+        "description": "sharaxaad",
+        "upload": "Geli",
+        "link": "Xiriir",
+        "setUrl": "Deji URL",
+        "save": "Keydso",
+        "setClip": "Iska yaree Clip",
+        "invalidURL": "URL aan ansax ahayn",
+        "invalidFile": "Fayl aan ansax ahayn",
+        "errorNoSource": "Ma jiro ilo fiidiyoow",
+        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
+        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+    },
+    "pdf": {
+        "reset": "Dib u celi",
+        "edit": "Tafatir",
+        "title": "cinwaan",
+        "description": "sharaxaad",
+        "upload": "Geli",
+        "link": "Xiriir",
+        "setUrl": "Deji URL",
+        "save": "Keydso",
+        "setClip": "Iska yaree Clip",
+        "invalidURL": "URL aan ansax ahayn",
+        "invalidFile": "Fayl aan ansax ahayn",
+        "errorNoSource": "Ma jiro ilo pdf",
+        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
+        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+    },
+    "image": {
+        "reset": "Dib u celi",
+        "edit": "Tafatir",
+        "title": "cinwaan",
+        "description": "sharaxaad",
+        "upload": "Geli",
+        "link": "Xiriir",
+        "setUrl": "Deji URL",
+        "save": "Keydso",
+        "setClip": "Iska yaree Clip",
+        "invalidURL": "URL aan ansax ahayn",
+        "invalidFile": "Fayl aan ansax ahayn",
+        "errorNoSource": "Ma jiro ilo sawir",
+        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
+        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
     }
 }
