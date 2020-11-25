@@ -4770,6 +4770,12 @@ Streams.Metrics = function (params) {
 	 * @param {number} value
 	 */
 	this.add = function (value) {
+
+		// check active
+		if (Q.isDocumentHidden()) {
+			return;
+		}
+
 		// check faces
 		if (that.useFaces && !that.face) {
 			return;
@@ -4820,11 +4826,9 @@ Streams.Metrics = function (params) {
 		this.faces.start(function () {
 			that.faces.onEnter.add(function () {
 				that.face = true;
-				console.log("Streams.Metrics: face on");
 			});
 			that.faces.onLeave.add(function () {
 				that.face = false;
-				console.log("Streams.Metrics: face off");
 			});
 		});
 	}
