@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Umfanekiso",
-            "description": "umfanekiso obonakalayo"
+            "description": "umfanekiso obonakalayo",
+            "newItem": "Yongeza umfanekiso"
         },
         "Streams\/images": {
             "displayType": "Igalari yemifanekiso",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Ifayile",
-            "description": "ifayile egciniweyo"
+            "description": "ifayile egciniweyo",
+            "newItem": "Yongeza Ifayile"
         },
         "Streams\/audio": {
             "displayType": "Isiqeshana somsindo",
-            "description": "iklip yevidiyo"
+            "description": "iklip yevidiyo",
+            "newItem": "Yongeza iAudio"
         },
         "Streams\/video": {
             "displayType": "Umboniso weVidiyo",
-            "description": "iklip yevidiyo"
+            "description": "iklip yevidiyo",
+            "newItem": "Yongeza iVidiyo"
         },
         "Streams\/live": {
             "displayType": "Umthombo philayo",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Umnxeba wexesha lokwenyani",
             "description": "ividiyo yexesha \/ ividiyo yomsindo"
+        },
+        "Streams\/pdf": {
+            "displayType": "Uxwebhu lwePDF",
+            "description": "Uxwebhu lwePDF",
+            "newItem": "Yongeza iPDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Lo mxholo ufihliwe kuwe."
+    },
+    "audio": {
+        "record": "Rekhoda",
+        "reset": "Hlela kwakhona",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "inkcazo",
+        "upload": "Layisha",
+        "link": "Qhagamshela",
+        "setUrl": "Cwangcisa i-URL",
+        "save": "Gcina",
+        "setClip": "Sika iklip",
+        "invalidURL": "I-URL engekhoyo",
+        "invalidFile": "NONE",
+        "errorNoSource": "Akukho mthombo wesandi",
+        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+    },
+    "video": {
+        "reset": "Hlela kwakhona",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "inkcazo",
+        "upload": "Layisha",
+        "link": "Qhagamshela",
+        "setUrl": "Cwangcisa i-URL",
+        "save": "Gcina",
+        "setClip": "Sika iklip",
+        "invalidURL": "I-URL engekhoyo",
+        "invalidFile": "NONE",
+        "errorNoSource": "Akukho mthombo wevidiyo",
+        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+    },
+    "pdf": {
+        "reset": "Hlela kwakhona",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "inkcazo",
+        "upload": "Layisha",
+        "link": "Qhagamshela",
+        "setUrl": "Cwangcisa i-URL",
+        "save": "Gcina",
+        "setClip": "Sika iklip",
+        "invalidURL": "I-URL engekhoyo",
+        "invalidFile": "NONE",
+        "errorNoSource": "Akukho pdf mthombo",
+        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+    },
+    "image": {
+        "reset": "Hlela kwakhona",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "inkcazo",
+        "upload": "Layisha",
+        "link": "Qhagamshela",
+        "setUrl": "Cwangcisa i-URL",
+        "save": "Gcina",
+        "setClip": "Sika iklip",
+        "invalidURL": "I-URL engekhoyo",
+        "invalidFile": "NONE",
+        "errorNoSource": "Akukho mthombo womfanekiso",
+        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
     }
 }

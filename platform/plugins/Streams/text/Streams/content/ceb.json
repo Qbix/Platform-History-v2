@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Imahen",
-            "description": "biswal nga imahe"
+            "description": "biswal nga imahe",
+            "newItem": "Pagdugang Larawan"
         },
         "Streams\/images": {
             "displayType": "Gallery sa Imahen",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Pag-file",
-            "description": "gi-upload nga file"
+            "description": "gi-upload nga file",
+            "newItem": "Idugang ang File"
         },
         "Streams\/audio": {
             "displayType": "Klip sa Audio",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Pagdugang Audio"
         },
         "Streams\/video": {
             "displayType": "Klip sa Video",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Pagdugang Video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Tinuod nga Panahon sa Pagtawag",
             "description": "usa ka tinuud nga tawag sa tawag \/ audio"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF nga dokumento",
+            "description": "PDF nga dokumento",
+            "newItem": "Pagdugang PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ang sulud kini gitago gikan kanimo."
+    },
+    "audio": {
+        "record": "Pagrekord",
+        "reset": "Pag-usab",
+        "edit": "Pag-edit",
+        "title": "titulo",
+        "description": "paghulagway",
+        "upload": "Pag-upload",
+        "link": "Pag-link",
+        "setUrl": "Ibutang ang URL",
+        "save": "Pagtipig",
+        "setClip": "Guntinga ang Clip",
+        "invalidURL": "Dili balido nga URL",
+        "invalidFile": "Dili balido nga File",
+        "errorNoSource": "Wala’y gigikanan sa audio",
+        "uploadLimit": "Max nga kadako sa file: {{size}}",
+        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
+    },
+    "video": {
+        "reset": "Pag-usab",
+        "edit": "Pag-edit",
+        "title": "titulo",
+        "description": "paghulagway",
+        "upload": "Pag-upload",
+        "link": "Pag-link",
+        "setUrl": "Ibutang ang URL",
+        "save": "Pagtipig",
+        "setClip": "Guntinga ang Clip",
+        "invalidURL": "Dili balido nga URL",
+        "invalidFile": "Dili balido nga File",
+        "errorNoSource": "Wala’y gigikanan sa video",
+        "uploadLimit": "Max nga kadako sa file: {{size}}",
+        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
+    },
+    "pdf": {
+        "reset": "Pag-usab",
+        "edit": "Pag-edit",
+        "title": "titulo",
+        "description": "paghulagway",
+        "upload": "Pag-upload",
+        "link": "Pag-link",
+        "setUrl": "Ibutang ang URL",
+        "save": "Pagtipig",
+        "setClip": "Guntinga ang Clip",
+        "invalidURL": "Dili balido nga URL",
+        "invalidFile": "Dili balido nga File",
+        "errorNoSource": "Wala’y gigikanan sa pdf",
+        "uploadLimit": "Max nga kadako sa file: {{size}}",
+        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
+    },
+    "image": {
+        "reset": "Pag-usab",
+        "edit": "Pag-edit",
+        "title": "titulo",
+        "description": "paghulagway",
+        "upload": "Pag-upload",
+        "link": "Pag-link",
+        "setUrl": "Ibutang ang URL",
+        "save": "Pagtipig",
+        "setClip": "Guntinga ang Clip",
+        "invalidURL": "Dili balido nga URL",
+        "invalidFile": "Dili balido nga File",
+        "errorNoSource": "Wala’y gigikanan sa imahe",
+        "uploadLimit": "Max nga kadako sa file: {{size}}",
+        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
     }
 }

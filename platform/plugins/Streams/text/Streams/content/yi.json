@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "בילד",
-            "description": "וויסואַל בילד"
+            "description": "וויסואַל בילד",
+            "newItem": "לייג בילד"
         },
         "Streams\/images": {
             "displayType": "בילד גאַלערי",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "טעקע",
-            "description": "ופּלאָאַדעד טעקע"
+            "description": "ופּלאָאַדעד טעקע",
+            "newItem": "לייג טעקע"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "לייג אַודיאָ"
         },
         "Streams\/video": {
             "displayType": "ווידעא קליפּ",
-            "description": "ווידעא קלעמערל"
+            "description": "ווידעא קלעמערל",
+            "newItem": "לייג ווידעא"
         },
         "Streams\/live": {
             "displayType": "ליוועסטרעאַם",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "פאַקטיש-צייט רופן",
             "description": "אַ פאַקטיש-צייט ווידעא \/ אַודיאָ רופן"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF דאָקומענט",
+            "description": "PDF דאָקומענט",
+            "newItem": "לייג PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "דער אינהאַלט איז פאַרבאָרגן פון איר."
+    },
+    "audio": {
+        "record": "רעקאָרד",
+        "reset": "באַשטעטיק",
+        "edit": "רעדאַגירן",
+        "title": "טיטל",
+        "description": "באַשרייַבונג",
+        "upload": "צופֿעליקער",
+        "link": "לינק",
+        "setUrl": "שטעלן URL",
+        "save": "היט",
+        "setClip": "שנייַדן אָוט קלעמערל",
+        "invalidURL": "אונגילטיג URL",
+        "invalidFile": "אונגילטיג טעקע",
+        "errorNoSource": "קיין אַודיאָ מקור",
+        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
+        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+    },
+    "video": {
+        "reset": "באַשטעטיק",
+        "edit": "רעדאַגירן",
+        "title": "טיטל",
+        "description": "באַשרייַבונג",
+        "upload": "צופֿעליקער",
+        "link": "לינק",
+        "setUrl": "שטעלן URL",
+        "save": "היט",
+        "setClip": "שנייַדן אָוט קלעמערל",
+        "invalidURL": "אונגילטיג URL",
+        "invalidFile": "אונגילטיג טעקע",
+        "errorNoSource": "קיין ווידעא מקור",
+        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
+        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+    },
+    "pdf": {
+        "reset": "באַשטעטיק",
+        "edit": "רעדאַגירן",
+        "title": "טיטל",
+        "description": "באַשרייַבונג",
+        "upload": "צופֿעליקער",
+        "link": "לינק",
+        "setUrl": "שטעלן URL",
+        "save": "היט",
+        "setClip": "שנייַדן אָוט קלעמערל",
+        "invalidURL": "אונגילטיג URL",
+        "invalidFile": "אונגילטיג טעקע",
+        "errorNoSource": "קיין פּדף מקור",
+        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
+        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+    },
+    "image": {
+        "reset": "באַשטעטיק",
+        "edit": "רעדאַגירן",
+        "title": "טיטל",
+        "description": "באַשרייַבונג",
+        "upload": "צופֿעליקער",
+        "link": "לינק",
+        "setUrl": "שטעלן URL",
+        "save": "היט",
+        "setClip": "שנייַדן אָוט קלעמערל",
+        "invalidURL": "אונגילטיג URL",
+        "invalidFile": "אונגילטיג טעקע",
+        "errorNoSource": "קיין בילד מקור",
+        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
+        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
     }
 }

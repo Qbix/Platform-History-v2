@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Kiʻi",
-            "description": "kiʻi kiʻi"
+            "description": "kiʻi kiʻi",
+            "newItem": "Pākuʻi Kiʻi"
         },
         "Streams\/images": {
             "displayType": "Kiʻi Kiʻi",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faila",
-            "description": "hoʻouna ʻia"
+            "description": "hoʻouna ʻia",
+            "newItem": "Hoʻohui Kōnae"
         },
         "Streams\/audio": {
             "displayType": "Kōkua Audio",
-            "description": "pakipili leo"
+            "description": "pakipili leo",
+            "newItem": "Pākuʻi Leo"
         },
         "Streams\/video": {
             "displayType": "Kōkua wikiō",
-            "description": "kiʻi wikiō"
+            "description": "kiʻi wikiō",
+            "newItem": "Pākuʻi wikiō"
         },
         "Streams\/live": {
             "displayType": "Kawai Kawai",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Kāhea-Ka-Pono",
             "description": "i ke kelepona mau \/ kelepona maoli"
+        },
+        "Streams\/pdf": {
+            "displayType": "Palapala PDF",
+            "description": "Palapala PDF",
+            "newItem": "Hoʻohui PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Huna ʻia kēia ʻike iā ʻoe."
+    },
+    "audio": {
+        "record": "Hoʻopaʻa",
+        "reset": "Hoʻihoʻi hou",
+        "edit": "Hoʻoponopono",
+        "title": "poʻo inoa",
+        "description": "ho&#39;ākāka",
+        "upload": "Hoʻouka",
+        "link": "Loulou",
+        "setUrl": "Hoʻonohonoho URL",
+        "save": "Mālama",
+        "setClip": "ʻOki ʻoki",
+        "invalidURL": "Hewa URL",
+        "invalidFile": "Waihona kūpono ʻole",
+        "errorNoSource": "ʻAʻohe kumu leo",
+        "uploadLimit": "Ka nui o ka faile: {{size}}",
+        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
+    },
+    "video": {
+        "reset": "Hoʻihoʻi hou",
+        "edit": "Hoʻoponopono",
+        "title": "poʻo inoa",
+        "description": "ho&#39;ākāka",
+        "upload": "Hoʻouka",
+        "link": "Loulou",
+        "setUrl": "Hoʻonohonoho URL",
+        "save": "Mālama",
+        "setClip": "ʻOki ʻoki",
+        "invalidURL": "Hewa URL",
+        "invalidFile": "Waihona kūpono ʻole",
+        "errorNoSource": "ʻAʻohe kumu wikiō",
+        "uploadLimit": "Ka nui o ka faile: {{size}}",
+        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
+    },
+    "pdf": {
+        "reset": "Hoʻihoʻi hou",
+        "edit": "Hoʻoponopono",
+        "title": "poʻo inoa",
+        "description": "ho&#39;ākāka",
+        "upload": "Hoʻouka",
+        "link": "Loulou",
+        "setUrl": "Hoʻonohonoho URL",
+        "save": "Mālama",
+        "setClip": "ʻOki ʻoki",
+        "invalidURL": "Hewa URL",
+        "invalidFile": "Waihona kūpono ʻole",
+        "errorNoSource": "ʻAʻohe kumu Puna",
+        "uploadLimit": "Ka nui o ka faile: {{size}}",
+        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
+    },
+    "image": {
+        "reset": "Hoʻihoʻi hou",
+        "edit": "Hoʻoponopono",
+        "title": "poʻo inoa",
+        "description": "ho&#39;ākāka",
+        "upload": "Hoʻouka",
+        "link": "Loulou",
+        "setUrl": "Hoʻonohonoho URL",
+        "save": "Mālama",
+        "setClip": "ʻOki ʻoki",
+        "invalidURL": "Hewa URL",
+        "invalidFile": "Waihona kūpono ʻole",
+        "errorNoSource": "ʻAʻohe kumu kiʻi",
+        "uploadLimit": "Ka nui o ka faile: {{size}}",
+        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
     }
 }

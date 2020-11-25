@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "انځور",
-            "description": "لید انځور"
+            "description": "لید انځور",
+            "newItem": "انځور اضافه کړئ"
         },
         "Streams\/images": {
             "displayType": "د انځور ګالري",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "دوتنه",
-            "description": "پورته شوې دوتنه"
+            "description": "پورته شوې دوتنه",
+            "newItem": "دوتنه اضافه کول"
         },
         "Streams\/audio": {
             "displayType": "آډیو کلیپ",
-            "description": "آډیو کلپ"
+            "description": "آډیو کلپ",
+            "newItem": "آډیو اضافه کړئ"
         },
         "Streams\/video": {
             "displayType": "ویډیو کلیپ",
-            "description": "ویډیو کلپ"
+            "description": "ویډیو کلپ",
+            "newItem": "ویډیو اضافه کړئ"
         },
         "Streams\/live": {
             "displayType": "ژوندۍ ب .ه",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "ریښتیني وخت زنګ",
             "description": "یو ریښتنی وخت ویډیو \/ آډیو زنګ"
+        },
+        "Streams\/pdf": {
+            "displayType": "د PDF سند",
+            "description": "د PDF سند",
+            "newItem": "PDF اضافه کړئ"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "دا مینځپانګه ستاسو څخه پټ ده."
+    },
+    "audio": {
+        "record": "ثبت",
+        "reset": "بیا تنظیمول",
+        "edit": "سمول",
+        "title": "سرلیک",
+        "description": "سپړنه",
+        "upload": "اپلوډ",
+        "link": "لینک",
+        "setUrl": "یو ار ایل تنظیم کړئ",
+        "save": "خوندي کړئ",
+        "setClip": "کلیپ",
+        "invalidURL": "ناباوره یو ار ایل",
+        "invalidFile": "ناباوره دوتنه",
+        "errorNoSource": "هیڅ آډیو سرچینه نشته",
+        "uploadLimit": "د فایل اندازه اندازه: {{999}",
+        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
+    },
+    "video": {
+        "reset": "بیا تنظیمول",
+        "edit": "سمول",
+        "title": "سرلیک",
+        "description": "سپړنه",
+        "upload": "اپلوډ",
+        "link": "لینک",
+        "setUrl": "یو ار ایل تنظیم کړئ",
+        "save": "خوندي کړئ",
+        "setClip": "کلیپ",
+        "invalidURL": "ناباوره یو ار ایل",
+        "invalidFile": "ناباوره دوتنه",
+        "errorNoSource": "نه د ویډیو سرچینه",
+        "uploadLimit": "د فایل اندازه اندازه: {{999}",
+        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
+    },
+    "pdf": {
+        "reset": "بیا تنظیمول",
+        "edit": "سمول",
+        "title": "سرلیک",
+        "description": "سپړنه",
+        "upload": "اپلوډ",
+        "link": "لینک",
+        "setUrl": "یو ار ایل تنظیم کړئ",
+        "save": "خوندي کړئ",
+        "setClip": "کلیپ",
+        "invalidURL": "ناباوره یو ار ایل",
+        "invalidFile": "ناباوره دوتنه",
+        "errorNoSource": "د پی ډي ایف سرچینه نشته",
+        "uploadLimit": "د فایل اندازه اندازه: {{999}",
+        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
+    },
+    "image": {
+        "reset": "بیا تنظیمول",
+        "edit": "سمول",
+        "title": "سرلیک",
+        "description": "سپړنه",
+        "upload": "اپلوډ",
+        "link": "لینک",
+        "setUrl": "یو ار ایل تنظیم کړئ",
+        "save": "خوندي کړئ",
+        "setClip": "کلیپ",
+        "invalidURL": "ناباوره یو ار ایل",
+        "invalidFile": "ناباوره دوتنه",
+        "errorNoSource": "د عکس سرچینه نشته",
+        "uploadLimit": "د فایل اندازه اندازه: {{999}",
+        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
     }
 }

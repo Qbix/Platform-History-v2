@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Mufananidzo",
-            "description": "mufananidzo unoona"
+            "description": "mufananidzo unoona",
+            "newItem": "Wedzera Mufananidzo"
         },
         "Streams\/images": {
             "displayType": "Image Garari",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faira",
-            "description": "uploaded faira"
+            "description": "uploaded faira",
+            "newItem": "Wedzera Faira"
         },
         "Streams\/audio": {
             "displayType": "Vadivelu Comedy Audio Clip",
-            "description": "clip yekuteerera"
+            "description": "clip yekuteerera",
+            "newItem": "Wedzera Audio"
         },
         "Streams\/video": {
             "displayType": "Vhidhiyo Dura",
-            "description": "clip yevhidhiyo"
+            "description": "clip yevhidhiyo",
+            "newItem": "Wedzera Vhidhiyo"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Real-Nguva Yekufona",
             "description": "vhiki chaiyo vhidhiyo \/ kudhindwa kudana"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF gwaro",
+            "description": "PDF gwaro",
+            "newItem": "Wedzera PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Izvi zvirimo zvakavanzika kubva kwauri."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Dzorera zvakare",
+        "edit": "Hora",
+        "title": "zita",
+        "description": "tsananguro",
+        "upload": "Isa",
+        "link": "Batanidza",
+        "setUrl": "Gadza URL",
+        "save": "Sevha",
+        "setClip": "Cheka Kunze Clip",
+        "invalidURL": "URL isiriyo",
+        "invalidFile": "Faira Haisiriyo",
+        "errorNoSource": "Hapana odhiyo sosi",
+        "uploadLimit": "Saizi yakakura saizi: {{size}}",
+        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+    },
+    "video": {
+        "reset": "Dzorera zvakare",
+        "edit": "Hora",
+        "title": "zita",
+        "description": "tsananguro",
+        "upload": "Isa",
+        "link": "Batanidza",
+        "setUrl": "Gadza URL",
+        "save": "Sevha",
+        "setClip": "Cheka Kunze Clip",
+        "invalidURL": "URL isiriyo",
+        "invalidFile": "Faira Haisiriyo",
+        "errorNoSource": "Hapana vhidhiyo sosi",
+        "uploadLimit": "Saizi yefaira",
+        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+    },
+    "pdf": {
+        "reset": "Dzorera zvakare",
+        "edit": "Hora",
+        "title": "zita",
+        "description": "tsananguro",
+        "upload": "Isa",
+        "link": "Batanidza",
+        "setUrl": "Gadza URL",
+        "save": "Sevha",
+        "setClip": "Cheka Kunze Clip",
+        "invalidURL": "URL isiriyo",
+        "invalidFile": "Faira Haisiriyo",
+        "errorNoSource": "Kwete pdf sosi",
+        "uploadLimit": "Saizi yakakura saizi: {{size}}",
+        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+    },
+    "image": {
+        "reset": "Dzorera zvakare",
+        "edit": "Hora",
+        "title": "zita",
+        "description": "tsananguro",
+        "upload": "Isa",
+        "link": "Batanidza",
+        "setUrl": "Gadza URL",
+        "save": "Sevha",
+        "setClip": "Cheka Kunze Clip",
+        "invalidURL": "URL isiriyo",
+        "invalidFile": "Faira Haisiriyo",
+        "errorNoSource": "Hapana chinyorwa chinyorwa",
+        "uploadLimit": "Saizi yakakura saizi: {{size}}",
+        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura iri {{size}}"
     }
 }

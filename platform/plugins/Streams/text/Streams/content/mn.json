@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Зураг",
-            "description": "харааны дүрс"
+            "description": "харааны дүрс",
+            "newItem": "Зураг нэмэх"
         },
         "Streams\/images": {
             "displayType": "Зургийн цомог",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "байршуулсан файл"
+            "description": "байршуулсан файл",
+            "newItem": "Файл нэмэх"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио клип"
+            "description": "аудио клип",
+            "newItem": "Аудио нэмэх"
         },
         "Streams\/video": {
             "displayType": "Видео клип",
-            "description": "видео клип"
+            "description": "видео клип",
+            "newItem": "Видео нэмэх"
         },
         "Streams\/live": {
             "displayType": "Шууд дамжуулалт",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Бодит цагийн дуудлага",
             "description": "бодит цаг хугацааны видео \/ аудио дуудлага"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF баримт бичиг",
+            "description": "PDF баримт бичиг",
+            "newItem": "PDF нэмэх"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Энэ агуулга нь танаас нуугдсан байна."
+    },
+    "audio": {
+        "record": "Бичлэг",
+        "reset": "Дахин тохируулах",
+        "edit": "Засах",
+        "title": "гарчиг",
+        "description": "тодорхойлолт",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Хавчаарыг хайчилж ав",
+        "invalidURL": "URL буруу байна",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Аудио эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
+    },
+    "video": {
+        "reset": "Дахин тохируулах",
+        "edit": "Засах",
+        "title": "гарчиг",
+        "description": "тодорхойлолт",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Хавчаарыг хайчилж ав",
+        "invalidURL": "URL буруу байна",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Видео эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
+    },
+    "pdf": {
+        "reset": "Дахин тохируулах",
+        "edit": "Засах",
+        "title": "гарчиг",
+        "description": "тодорхойлолт",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Хавчаарыг хайчилж ав",
+        "invalidURL": "URL буруу байна",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "PDF эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
+    },
+    "image": {
+        "reset": "Дахин тохируулах",
+        "edit": "Засах",
+        "title": "гарчиг",
+        "description": "тодорхойлолт",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Хавчаарыг хайчилж ав",
+        "invalidURL": "URL буруу байна",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Зургийн эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
     }
 }

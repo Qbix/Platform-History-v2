@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "sary fahitana"
+            "description": "sary fahitana",
+            "newItem": "Manampia sary"
         },
         "Streams\/images": {
             "displayType": "Gallery Gallery",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "nampidirina"
+            "description": "nampidirina",
+            "newItem": "Manampia rakitra"
         },
         "Streams\/audio": {
             "displayType": "Clip Audio",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Manampia Audio"
         },
         "Streams\/video": {
             "displayType": "Horonan-tsarimihetsika",
-            "description": "sary mihetsika"
+            "description": "sary mihetsika",
+            "newItem": "Ampio horonan-tsary"
         },
         "Streams\/live": {
             "displayType": "LiveStream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Antso tena-fotoana",
             "description": "antso an-tsary \/ audio tena ora"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF rakitra",
+            "description": "PDF rakitra",
+            "newItem": "Manampia PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ny atiny dia afenina anao."
+    },
+    "audio": {
+        "record": "Record",
+        "reset": "Mamerina",
+        "edit": "Edit",
+        "title": "lohateny",
+        "description": "famaritana",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Mametraha URL",
+        "save": "Save",
+        "setClip": "Hetezo ny clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharanom-peo",
+        "uploadLimit": "Haben&#39;ny Max: {{size}}",
+        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
+    },
+    "video": {
+        "reset": "Mamerina",
+        "edit": "Edit",
+        "title": "lohateny",
+        "description": "famaritana",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Mametraha URL",
+        "save": "Save",
+        "setClip": "Hetezo ny clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharano video",
+        "uploadLimit": "Haben&#39;ny Max: {{size}}",
+        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
+    },
+    "pdf": {
+        "reset": "Mamerina",
+        "edit": "Edit",
+        "title": "lohateny",
+        "description": "famaritana",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Mametraha URL",
+        "save": "Save",
+        "setClip": "Hetezo ny clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharanom-baovao pdf",
+        "uploadLimit": "Haben&#39;ny Max: {{size}}",
+        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
+    },
+    "image": {
+        "reset": "Mamerina",
+        "edit": "Edit",
+        "title": "lohateny",
+        "description": "famaritana",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Mametraha URL",
+        "save": "Save",
+        "setClip": "Hetezo ny clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharano",
+        "uploadLimit": "Haben&#39;ny Max: {{size}}",
+        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
     }
 }

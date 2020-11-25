@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "प्रतिमा",
-            "description": "व्हिज्युअल प्रतिमा"
+            "description": "व्हिज्युअल प्रतिमा",
+            "newItem": "प्रतिमा जोडा"
         },
         "Streams\/images": {
             "displayType": "प्रतिमा गॅलरी",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "फाईल",
-            "description": "अपलोड केलेली फाईल"
+            "description": "अपलोड केलेली फाईल",
+            "newItem": "फाईल जोडा"
         },
         "Streams\/audio": {
             "displayType": "ऑडिओ क्लिप",
-            "description": "ऑडिओ क्लिप"
+            "description": "ऑडिओ क्लिप",
+            "newItem": "ऑडिओ जोडा"
         },
         "Streams\/video": {
             "displayType": "चित्र फीत",
-            "description": "चित्र फीत"
+            "description": "चित्र फीत",
+            "newItem": "व्हिडिओ जोडा"
         },
         "Streams\/live": {
             "displayType": "थेट प्रसारण",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "रीअल-टाइम कॉल",
             "description": "वास्तविक वेळ व्हिडिओ \/ ऑडिओ कॉल"
+        },
+        "Streams\/pdf": {
+            "displayType": "पीडीएफ दस्तऐवज",
+            "description": "पीडीएफ दस्तऐवज",
+            "newItem": "पीडीएफ जोडा"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ही सामग्री आपल्यापासून लपलेली आहे."
+    },
+    "audio": {
+        "record": "विक्रम",
+        "reset": "रीसेट करा",
+        "edit": "सुधारणे",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड करा",
+        "link": "दुवा",
+        "setUrl": "URL सेट करा",
+        "save": "जतन करा",
+        "setClip": "क्लिप कट",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अवैध फाईल",
+        "errorNoSource": "कोणताही ऑडिओ स्त्रोत नाही",
+        "uploadLimit": "कमाल फाइल आकार: {{999}",
+        "errorFileSize": "क्षमस्व, परंतु फाईल खूप मोठी आहे.<br> कमाल फाइल आकार {{999} is आहे"
+    },
+    "video": {
+        "reset": "रीसेट करा",
+        "edit": "सुधारणे",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड करा",
+        "link": "दुवा",
+        "setUrl": "URL सेट करा",
+        "save": "जतन करा",
+        "setClip": "क्लिप कट",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अवैध फाईल",
+        "errorNoSource": "व्हिडिओ स्रोत नाही",
+        "uploadLimit": "कमाल फाइल आकार: {{999}",
+        "errorFileSize": "क्षमस्व, परंतु फाईल खूप मोठी आहे.<br> कमाल फाइल आकार {{999} is आहे"
+    },
+    "pdf": {
+        "reset": "रीसेट करा",
+        "edit": "सुधारणे",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड करा",
+        "link": "दुवा",
+        "setUrl": "URL सेट करा",
+        "save": "जतन करा",
+        "setClip": "क्लिप कट",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अवैध फाईल",
+        "errorNoSource": "पीडीएफ स्त्रोत नाही",
+        "uploadLimit": "कमाल फाइल आकार: {{999}",
+        "errorFileSize": "क्षमस्व, परंतु फाईल खूप मोठी आहे.<br> कमाल फाइल आकार {{999} is आहे"
+    },
+    "image": {
+        "reset": "रीसेट करा",
+        "edit": "सुधारणे",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड करा",
+        "link": "दुवा",
+        "setUrl": "URL सेट करा",
+        "save": "जतन करा",
+        "setClip": "क्लिप कट",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अवैध फाईल",
+        "errorNoSource": "प्रतिमा स्त्रोत नाही",
+        "uploadLimit": "कमाल फाइल आकार: {{999}",
+        "errorFileSize": "क्षमस्व, परंतु फाईल खूप मोठी आहे.<br> कमाल फाइल आकार {{999} is आहे"
     }
 }

@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "تصوير",
-            "description": "تصويري تصوير"
+            "description": "تصويري تصوير",
+            "newItem": "تصوير شامل ڪريو"
         },
         "Streams\/images": {
             "displayType": "تصويري گريٽري",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "فائل",
-            "description": "اپ لوڊ ٿيل فائل"
+            "description": "اپ لوڊ ٿيل فائل",
+            "newItem": "فائل شامل ڪريو"
         },
         "Streams\/audio": {
             "displayType": "آڊيو ڪلپ",
-            "description": "آڊيو ڪلپ"
+            "description": "آڊيو ڪلپ",
+            "newItem": "آڊيو شامل ڪريو"
         },
         "Streams\/video": {
             "displayType": "وڊيو ڪلپيو",
-            "description": "وڊيو ڪلپ"
+            "description": "وڊيو ڪلپ",
+            "newItem": "وڊيو شامل ڪريو"
         },
         "Streams\/live": {
             "displayType": "زندھ پائڻ وارو",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "ريئل ٽائم ڪال",
             "description": "هڪ حقيقي وقت وڊيو \/ آڊيو ڪال"
+        },
+        "Streams\/pdf": {
+            "displayType": "پي ڊي ايف دستاويز",
+            "description": "پي ڊي ايف دستاويز",
+            "newItem": "پي ڊي ايف جوڙيو"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "هي مواد توهان کان لڪيل آهي."
+    },
+    "audio": {
+        "record": "رڪارڊ",
+        "reset": "ٻيھر سيٽ ڪريو",
+        "edit": "تبديلي آڻيو",
+        "title": "عنوان",
+        "description": "تفصيل",
+        "upload": "اپ لوڊ ڪريو",
+        "link": "لنڪ",
+        "setUrl": "URL قائم ڪريو",
+        "save": "محفوظ ڪريو",
+        "setClip": "ڪلپ ڪٽيو",
+        "invalidURL": "چڪ واري يو آر ايل",
+        "invalidFile": "غلط فائيل",
+        "errorNoSource": "ڪوبه آڊيو ذريعو نه",
+        "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
+        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
+    },
+    "video": {
+        "reset": "ٻيھر سيٽ ڪريو",
+        "edit": "تبديلي آڻيو",
+        "title": "عنوان",
+        "description": "تفصيل",
+        "upload": "اپ لوڊ ڪريو",
+        "link": "لنڪ",
+        "setUrl": "URL قائم ڪريو",
+        "save": "محفوظ ڪريو",
+        "setClip": "ڪلپ ڪٽيو",
+        "invalidURL": "چڪ واري يو آر ايل",
+        "invalidFile": "غلط فائيل",
+        "errorNoSource": "ويڊيو جو ذريعو ناهي",
+        "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
+        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
+    },
+    "pdf": {
+        "reset": "ٻيھر سيٽ ڪريو",
+        "edit": "تبديلي آڻيو",
+        "title": "عنوان",
+        "description": "تفصيل",
+        "upload": "اپ لوڊ ڪريو",
+        "link": "لنڪ",
+        "setUrl": "URL قائم ڪريو",
+        "save": "محفوظ ڪريو",
+        "setClip": "ڪلپ ڪٽيو",
+        "invalidURL": "چڪ واري يو آر ايل",
+        "invalidFile": "غلط فائيل",
+        "errorNoSource": "پي آر ايف جو ذريعو نه آھي",
+        "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
+        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
+    },
+    "image": {
+        "reset": "ٻيھر سيٽ ڪريو",
+        "edit": "تبديلي آڻيو",
+        "title": "عنوان",
+        "description": "تفصيل",
+        "upload": "اپ لوڊ ڪريو",
+        "link": "لنڪ",
+        "setUrl": "URL قائم ڪريو",
+        "save": "محفوظ ڪريو",
+        "setClip": "ڪلپ ڪٽيو",
+        "invalidURL": "چڪ واري يو آر ايل",
+        "invalidFile": "غلط فائيل",
+        "errorNoSource": "تصويري جو ماخذ ڪونهي",
+        "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
+        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
     }
 }

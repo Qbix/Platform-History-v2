@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Chithunzi",
-            "description": "chithunzi chowoneka"
+            "description": "chithunzi chowoneka",
+            "newItem": "Onjezani Chithunzi"
         },
         "Streams\/images": {
             "displayType": "Zithunzi Zithunzi",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Fayilo",
-            "description": "fayilo yokwezedwa"
+            "description": "fayilo yokwezedwa",
+            "newItem": "Onjezani Fayilo"
         },
         "Streams\/audio": {
             "displayType": "Pofikira Audio",
-            "description": "clip clip"
+            "description": "clip clip",
+            "newItem": "Onjezani Audio"
         },
         "Streams\/video": {
             "displayType": "Vidiyo Yakanema",
-            "description": "kapepala kanema"
+            "description": "kapepala kanema",
+            "newItem": "Onjezani Kanema"
         },
         "Streams\/live": {
             "displayType": "Kutali",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Kuyimbira Kwambiri",
             "description": "kanema weniweni \/ kuyimba"
+        },
+        "Streams\/pdf": {
+            "displayType": "Zolemba za PDF",
+            "description": "Zolemba za PDF",
+            "newItem": "Onjezani PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Izi ndizobisika kwa inu."
+    },
+    "audio": {
+        "record": "Lembani",
+        "reset": "Bwezeretsani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Chidutswa",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo Yolakwika",
+        "errorNoSource": "Palibe mawu omvera",
+        "uploadLimit": "Kukula kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwamafayilo ndi {{size}}"
+    },
+    "video": {
+        "reset": "Bwezeretsani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Chidutswa",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo Yolakwika",
+        "errorNoSource": "Palibe kanema",
+        "uploadLimit": "Kukula kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwa mafayilo ndi {{size}}"
+    },
+    "pdf": {
+        "reset": "Bwezeretsani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Chidutswa",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo Yolakwika",
+        "errorNoSource": "Palibe pdf gwero",
+        "uploadLimit": "Kukula kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwa mafayilo ndi {{size}}"
+    },
+    "image": {
+        "reset": "Bwezeretsani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Chidutswa",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo Yolakwika",
+        "errorNoSource": "Palibe chithunzi",
+        "uploadLimit": "Kukula kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwamafayilo ndi {{size}}"
     }
 }
