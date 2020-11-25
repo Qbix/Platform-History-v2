@@ -4361,6 +4361,21 @@ Tp.stateChanged = function Q_Tool_prototype_stateChanged(names) {
 };
 
 /**
+ * You can call this to update the state of the tool, and let
+ * all the hooks happen as a result. An alternative to this is
+ * changing the state manually and then calling stateChanged(),
+ * but this method was introduced to be more familiar to users of React.
+ * It only does a *shallow* update, meaning it completely replaces
+ * whatever was there previously.
+ * @method setState
+ * @param {Object} updates An object of state property names and new values
+ */
+Tp.setState = function Q_Tool_prototype_setState(updates) {
+	Q.extend(this.state, updates);
+	this.stateChanged(Object.keys(updates));
+};
+
+/**
  * When implementing tools, use this to implement rendering markup that can vary
  * as a function of the tool's state (with no additional side effects).
  * @method rendering
