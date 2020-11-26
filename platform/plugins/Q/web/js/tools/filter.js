@@ -238,7 +238,7 @@ Q.Tool.define('Q/filter', function (options) {
 			topH += parseInt(tool.$input.css('margin-top')) ;
 		}
 		tool.$results.insertAfter($container).css({
-			left: 0,
+			left: parseInt($container.css('marginLeft'), 10) || 0,
 			width: $container.outerWidth(),
 			"box-sizing": 'border-box',
 			top: state.fullscreen 
