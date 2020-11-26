@@ -207,8 +207,8 @@
 	float: none;
 }
 .Streams_chat_tool .Streams_chat_bubble .Users_avatar_name {
-	margin-right: 5px;
 	display: block;
+	font-weight: bold;
 	color: #222;
 }
 .Streams_chat_message,
