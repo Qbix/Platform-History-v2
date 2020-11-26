@@ -16,6 +16,7 @@
  *	@param {Integer} [options.clipStart] if clip defined, start time in milliseconds
  *	@param {Integer} [options.clipEnd] if clip defined, end time in milliseconds
  *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
+ *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {String} [options.url] URL of audio source
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */

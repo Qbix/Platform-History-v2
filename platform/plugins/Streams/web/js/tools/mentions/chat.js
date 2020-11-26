@@ -23,7 +23,7 @@
 				return;
 			}
 
-			if (this.value.slice(-1) === '@') {
+			if (this.value === '@' || this.value.match(/\s+(\!|\#|\^|\=|\-|\$|\%|\&|\*|\(|\)|\+)?\@$/)) { //this.value === '@' || this.value.endsWith(' @')
 				tool.process(this);
 			}
 		});

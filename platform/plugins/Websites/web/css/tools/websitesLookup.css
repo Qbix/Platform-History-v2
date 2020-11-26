@@ -1,0 +1,16 @@
+.Websites_lookup_tool {
+    width: 100%;
+}
+.Websites_lookup_tool .Q_filter_results .Websites_lookup_result .Websites_lookup_result_icon img {
+    height: 40px;
+    width: auto;
+}
+.Websites_lookup_tool .Q_filter_results .Websites_lookup_result .Websites_lookup_result_title {
+    font-size: 12px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}

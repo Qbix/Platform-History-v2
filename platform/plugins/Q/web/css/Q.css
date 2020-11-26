@@ -774,11 +774,8 @@ html.Q_scanning body > .Q_scanning_code {
 #content.Q_columns_containsExpanded {
 	padding: 0;
 }
-.Q_columns_siblingContainsExpanded {
+.Q_columns_siblingContainsExpanded:not(#notices_slot):not(.Q_contextual) {
 	z-index: 0 !important;
-}
-#notices_slot.Q_columns_siblingContainsExpanded {
-	z-index: 5000 !important;
 }
 #status_background {
 	width: 100%;
