@@ -4736,11 +4736,11 @@ Streams.Metrics = function (params) {
 	this.streamName = Q.getObject("streamName", params) || null;
 
 	if (!this.publisherId) {
-		return console.warn("Streams.Metrics: publisherId undefined");
+		console.warn("Streams.Metrics: publisherId undefined");
 	}
 
 	if (!this.streamName) {
-		return console.warn("Streams.Metrics: streamName undefined");
+		console.warn("Streams.Metrics: streamName undefined");
 	}
 
 	// set useFaces option
@@ -4837,6 +4837,10 @@ Streams.Metrics = function (params) {
 	 * Start timer interval
 	 */
 	this.timerId = setInterval(function () {
+		if (!this.publisherId || !this.streamName) {
+			return;
+		}
+
 		if (Q.isEmpty(that.predefined)) {
 			return;
 		}
