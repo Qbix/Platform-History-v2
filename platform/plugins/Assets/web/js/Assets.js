@@ -1086,7 +1086,7 @@
 			userId: Q.Users.loggedInUserId(),
 			currency: options.currency
 		}));
-		cordova.plugins.browsertab.openUrl(url.toString(), {
+		cordova.plugins.browsertabs.openUrl(url.toString(), {
 			scheme: Q.info.scheme
 		}, function(successResp) {
 			Q.handle(options.onSuccess, null, [successResp]);
