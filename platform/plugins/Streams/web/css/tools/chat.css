@@ -220,6 +220,9 @@
 	text-overflow: ellipsis;
 	cursor: default;
 }
+.Streams_chat_item.Streams_chat_message_skipOverflowed .Streams_chat_message {
+	max-height: unset;
+}
 .Streams_chat_message a, .Streams_chat_message a:visited {
 	font-weight: bold;
 }
