@@ -16,14 +16,25 @@
  * @param {Object} [options.filter] any options for the Q/filter tool
  */
 Q.Tool.define("Websites/lookup", function _Websites_lookup_tool (options) {
+	var tool = this;
 	var state = this.state;
+
 	if (Q.isEmpty(state.platforms)) {
 		throw new Q.Error("Websites/lookup tool: missing platforms");
 	}
 
-	Q.addStylesheet('{{Websites}}/css/tools/websitesLookup.css', { slotName: 'Websites' });
+	var pipe = new Q.pipe(["styles", "texts"], function () {
+		tool.refresh();
+	});
 
-	this.refresh();
+	Q.addStylesheet('{{Websites}}/css/tools/websitesLookup.css', { slotName: 'Websites' }, pipe.fill("styles"));
+	Q.Text.get('Websites/content', function (err, text) {
+		tool.text = text;
+
+		state.filter.placeholder = text.webpage.StartTypingTitleOrKeywords;
+		pipe.fill("texts")();
+	});
+
 }, {
 	platforms: null,
 	debounce: 300,
