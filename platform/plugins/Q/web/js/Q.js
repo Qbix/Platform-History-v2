@@ -11033,7 +11033,7 @@ Q.info = {
 	        var calculatedPadding = parseInt(div.computedStyle('padding-top'))
 				+ parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
-	        if (calculatedPadding > 0) {
+	        if (calculatedPadding > 40) {
 	            return true;
 	        }
 	    }
