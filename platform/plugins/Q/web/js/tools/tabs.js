@@ -536,7 +536,10 @@
 					tabAlreadyVisible = ($tab.data('index') < index);
 					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
-						.empty().append($copied).addClass(values.classes);
+						.empty().append($copied);
+					if (!tabAlreadyVisible) {
+						$overflow.addClass(values.classes); // copy its style
+					}
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
 						.html(state.overflow.glyph.interpolate(values))
