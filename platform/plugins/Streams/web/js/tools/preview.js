@@ -452,12 +452,13 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var $te = $(tool.element);
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			var stream = this;
+			var actions = {};
+
 			// check if we should add this behavior
 			if (state.actions
 			&& state.closeable !== false
 			&& this.testWriteLevel('close')) {
 				// add some actions
-				var actions = {};
 				var action = this.isRequired
 					? (this.fields.closedTime ? 'open' : 'close')
 					: 'remove';
@@ -479,11 +480,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				}
 			}
 			var ao = Q.extend({}, state.actions);
-			if (actions) {
-				ao = Q.extend(ao, 10, { actions: actions });
-				$te.tool('Q/actions', ao).activate();
-			}
-			
+			ao = Q.extend(ao, 10, { actions: actions });
+			$te.tool('Q/actions', ao).activate();
+
 			if ($te.state('Q/actions')) {
 				$te.plugin('Q/actions', 'refresh');
 			}

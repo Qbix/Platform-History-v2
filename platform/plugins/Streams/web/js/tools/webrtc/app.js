@@ -756,7 +756,7 @@ window.WebRTCconferenceLib = function app(options){
                         break;
                     }
                 }
-                if(!appendedToNextScreen) {
+                if(!appendedToNextScreen && screen.participant.soundMeter.visualizations['participantScreen'] != null) {
                     screen.participant.soundMeter.visualizations['participantScreen'].remove();
                 }
             };

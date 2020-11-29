@@ -141,6 +141,20 @@ class Users_User extends Base_Users_User
 	}
 
 	/**
+	 * Checks whether user belong to developers group
+	 */
+	function isDeveloper () {
+		$user = $this;
+		$developers = Q_Config::get("Users", "developers", array());
+
+		if (in_array($user->emailAddress, $developers) || in_array($user->mobileNumber, $developers)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Call this to prepare the passphrase before passing it to
 	 * Users::hashPassphrase() and Users::verifyPassphrase()
 	 * @param {array} $passphrase The value to be checked depends on value of isHashed.
@@ -1186,6 +1200,23 @@ class Users_User extends Base_Users_User
 			}
 		}
 		return $users;
+	}
+
+	/**
+	 * Get client IP address
+	 * @method getIP
+	 * @static
+	 */
+	static function getIP () {
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+
+		return $ip;
 	}
 
 	/**

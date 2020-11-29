@@ -14,7 +14,7 @@
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
- *  @param {Integer} [options.positionUpdatePeriod=1000] Time period (milliseconds) to check new play position.
+ *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  */
 Q.Tool.define("Q/video", function (options) {

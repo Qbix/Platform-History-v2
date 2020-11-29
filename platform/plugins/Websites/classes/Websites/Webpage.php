@@ -29,19 +29,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		if (!function_exists('_return')) {
-			function _return ($url, $result, $webpageCahe) {
-				if ($webpageCahe) {
-					$webpageCahe->url = $url;
-
-					// dummy interest block for cache
-					$result['interest'] = array(
-						'title' => $url,
-						'icon' => $result['iconSmall']
-					);
-					$webpageCahe->results = json_encode($result);
-					$webpageCahe->save();
-				}
-
+			function _return ($url, $result) {
+				Websites_Webpage::cacheSet($url, $result);
 				return $result;
 			}
 		}
@@ -58,29 +47,9 @@ class Websites_Webpage extends Base_Websites_Webpage
 		//$document = file_get_contents($url);
 
         // try to get cache
-		$webpageCahe = null;
-		if (Q_Config::get('Websites', 'cache', 'webpage', true)) {
-			$webpageCahe = new Websites_Webpage();
-			$webpageCahe->url = $url;
-			if (!$webpageCahe->retrieve()) {
-				// if not retrieved try to find url ended with slash (to avoid duplicates of save source)
-				$webpageCahe->url = $url.'/';
-				$webpageCahe->retrieve();
-			}
-
-			if ($webpageCahe->retrieved) {
-				$updatedTime = $webpageCahe->updatedTime;
-				if (isset($updatedTime)) {
-					$db = $webpageCahe->db();
-					$updatedTime = $db->fromDateTime($updatedTime);
-					$currentTime = $db->getCurrentTimestamp();
-					$cacheDuration = Q_Config::get('Websites', 'cache', 'duration', 60*60*24*30); // default 1 month
-					if ($currentTime - $updatedTime < $cacheDuration) {
-						// there are cached webpage results that are still viable
-						return json_decode($webpageCahe->results, true);
-					}
-				}
-			}
+		$cached = self::cacheGet($url);
+		if ($cached) {
+			return $cached;
 		}
 
 		$headers = get_headers($url, 1);
@@ -114,7 +83,7 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'type' => $extension
             ));
 
-            return _return($url, $result, $webpageCahe);
+            return _return($url, $result);
         }
 
 		$document = self::readURL($url);
@@ -293,7 +262,63 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$result['iconBig'] = Q::ifset($result, 'iconBig', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
 		$result['iconSmall'] = Q::ifset($result, 'iconSmall', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
 
-		return _return($url, $result, $webpageCahe);
+		return _return($url, $result);
+	}
+
+	/**
+	 * Get cached url response
+	 * @method cacheGet
+	 * @static
+	 * @param string $url
+	 * @return array|boolean decoded json if found or false
+	 */
+	static function cacheGet ($url) {
+		if (!Q_Config::get('Websites', 'cache', 'webpage', true)) {
+			return false;
+		}
+
+		$webpageCahe = new Websites_Webpage();
+		$webpageCahe->url = $url;
+		if (!$webpageCahe->retrieve()) {
+			// if not retrieved try to find url ended with slash (to avoid duplicates of save source)
+			$webpageCahe->url = $url.'/';
+			$webpageCahe->retrieve();
+		}
+
+		if ($webpageCahe->retrieved) {
+			$updatedTime = $webpageCahe->updatedTime;
+			if (isset($updatedTime)) {
+				$db = $webpageCahe->db();
+				$updatedTime = $db->fromDateTime($updatedTime);
+				$currentTime = $db->getCurrentTimestamp();
+				$cacheDuration = Q_Config::get('Websites', 'cache', 'duration', 60*60*24*30); // default 1 month
+				if ($currentTime - $updatedTime < $cacheDuration) {
+					// there are cached webpage results that are still viable
+					return json_decode($webpageCahe->results, true);
+				}
+			}
+		}
+
+		return false;
+	}
+	/**
+	 * Save url response to cache
+	 * @method cacheSet
+	 * @static
+	 * @param string $url
+	 * @param array $result
+	 */
+	static function cacheSet ($url, $result) {
+		$webpageCahe = new Websites_Webpage();
+		$webpageCahe->url = $url;
+
+		// dummy interest block for cache
+		$result['interest'] = array(
+			'title' => $url,
+			'icon' => $result['iconSmall']
+		);
+		$webpageCahe->results = json_encode($result);
+		$webpageCahe->save();
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL

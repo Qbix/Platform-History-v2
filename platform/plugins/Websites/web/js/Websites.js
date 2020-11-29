@@ -146,6 +146,7 @@ Q.Tool.define({
 	"Websites/seo": "{{Websites}}/js/tools/seo.js",
 	"Websites/presentation": "{{Websites}}/js/tools/presentation.js",
 	"Websites/slide": "{{Websites}}/js/tools/slide.js",
+	"Websites/lookup": "{{Websites}}/js/tools/lookup.js",
 	"Websites/webpage/composer": "{{Websites}}/js/tools/webpage/composer.js",
 	"Websites/webpage/preview": "{{Websites}}/js/tools/webpage/preview.js",
 	"Websites/webpage/chat": "{{Websites}}/js/tools/webpage/chat.js",

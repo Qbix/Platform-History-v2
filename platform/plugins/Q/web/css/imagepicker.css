@@ -1,6 +1,6 @@
 .Q_imagepicker { cursor: pointer !important; }
-.Q_imagepicker_cropping_title { font-size: 20px; }
-.Q_imagepicker_cropping_explanation { font-size: 14px; }
+.Q_imagepicker_cropping_title { font-size: 20px; line-height: 20px; }
+.Q_imagepicker_cropping_explanation { font-size: 14px; line-height: 20px; }
 .Q_imagepicker_label { display: none; }
 .Q_dialog_cameraCommands .Q_buttons > button:first-child {
 	margin-bottom: 10px;
