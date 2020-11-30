@@ -6,6 +6,7 @@
 		}
 	],
 	"require": {
-		"lordelph/icofileloader": "1.*"
+		"lordelph/icofileloader": "1.*",
+		"google/apiclient": "^2.0"
 	}
 }

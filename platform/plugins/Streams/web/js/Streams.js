@@ -4736,11 +4736,11 @@ Streams.Metrics = function (params) {
 	this.streamName = Q.getObject("streamName", params) || null;
 
 	if (!this.publisherId) {
-		throw new Q.Error("Streams.Metrics: publisherId undefined");
+		return console.warn("Streams.Metrics: publisherId undefined");
 	}
 
 	if (!this.streamName) {
-		throw new Q.Error("Streams.Metrics: streamName undefined");
+		return console.warn("Streams.Metrics: streamName undefined");
 	}
 
 	// set useFaces option
@@ -4770,6 +4770,12 @@ Streams.Metrics = function (params) {
 	 * @param {number} value
 	 */
 	this.add = function (value) {
+
+		// check active
+		if (Q.isDocumentHidden()) {
+			return;
+		}
+
 		// check faces
 		if (that.useFaces && !that.face) {
 			return;
@@ -4820,11 +4826,9 @@ Streams.Metrics = function (params) {
 		this.faces.start(function () {
 			that.faces.onEnter.add(function () {
 				that.face = true;
-				console.log("Streams.Metrics: face on");
 			});
 			that.faces.onLeave.add(function () {
 				that.face = false;
-				console.log("Streams.Metrics: face off");
 			});
 		});
 	}
