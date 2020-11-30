@@ -483,6 +483,10 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
+		$form = Q_Request::special('formFactor');
+		if (isset($form)) {
+			return ($form === 'tablet');
+		}
 		return (Q_Request::isTouchscreen() and !Q_Request::isTablet());
 	}
 	
@@ -506,6 +510,10 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
+		$form = Q_Request::special('formFactor');
+		if (isset($form)) {
+			return ($form === 'tablet');
+		}
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 			return null;
 		}
@@ -527,6 +535,10 @@ class Q_Request
 	 */
 	static function isTouchscreen()
 	{
+		$touchscreen = Q_Request::special('touchscreen');
+		if (isset($touchscreen)) {
+			return !!$touchscreen;
+		}
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 			return null;
 		}
@@ -610,6 +622,10 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
+		$webview = Q_Request::special('webview');
+		if (isset($webview)) {
+			return !!$webview;
+		}
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 			return null;
 		}
@@ -653,6 +669,10 @@ class Q_Request
 	 */
 	static function formFactor()
 	{
+		$form = Q_Request::special('formFactor');
+		if (isset($form)) {
+			return $form;
+		}
 		return self::isMobile() ? 'mobile' : (self::isTablet() ? 'tablet' : 'desktop');
 	}
 	
@@ -685,7 +705,7 @@ class Q_Request
 	 * @method special
 	 * @param {string} $fieldname the name of the field, which can be namespaced as "Module.fieldname"
 	 * @param {mixed} $default optionally what to return if field is missing
-	 * @param {string} [$source=null] optionally provide an array to use instead of $_REQUEST
+	 * @param {array} [$source=null] optionally provide an array to use instead of $_REQUEST
 	 * @static
 	 * @return {mixed|null}
 	 */
