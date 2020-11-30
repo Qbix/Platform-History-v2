@@ -1646,9 +1646,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             screensRendering.updateLayout();
 
 
-                            var btnsToIgnore = Array.prototype.slice.call(_controls.querySelectorAll('.Streams_webrtc_conference-control-inner > div'));
                             var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
-                            elementsToIgnore = elementsToIgnore.concat(btnsToIgnore);
                             Q.activate(
                                 Q.Tool.setUpElement(
                                     _controls.firstChild, // or pass an existing element

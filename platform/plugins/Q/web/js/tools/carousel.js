@@ -19,9 +19,9 @@
      * @param {Object} [options]
      *  @param {Element} [options.element] Container with images/videos
      *  @param {float} [options.radius]
-     *  @param {integer} [options.imgWidth] 
-     *  @param {integer} [options.imgHeight] 
-     *  @param {boolean} [options.autoRotate] 
+     *  @param {integer} [options.imgWidth]
+     *  @param {integer} [options.imgHeight]
+     *  @param {boolean} [options.autoRotate]
      *  @param {integer} [options.rotateSpeed]
      *  Hash of possible options
      */
@@ -48,6 +48,8 @@
 
                 var pointerIsDragging = false;
                 var rotatingIsPasused = null;
+                var imgWidth = tool.state.imgWidth;
+                var imgHeight = tool.state.imgHeight;
                 var radius = tool.state.radius;
                 var autoRotate = tool.state.autoRotate;
                 var direction = tool.state.direction;
@@ -64,6 +66,8 @@
                 var rotateRoundTimer = null;
                 var restartRotateRoundTimer = null;
                 var isRotating = false;
+
+                var autorotateStartsNum = 0;
 
                 var sX, sY, nX, nY, desX = 0,
                     desY = 0,
@@ -100,13 +104,13 @@
                 }
                 obox.appendChild(ospin);
                 mediaContainer.appendChild(obox);
-                
+
                 ospin.style.width = imgWidth + "px";
                 ospin.style.height = imgHeight + "px";
 
-               /* var ground = document.getElementById('ground');
-                ground.style.width = radius * 3 + "px";
-                ground.style.height = radius * 3 + "px";*/
+                /* var ground = document.getElementById('ground');
+                 ground.style.width = radius * 3 + "px";
+                 ground.style.height = radius * 3 + "px";*/
 
                 function init(delayTime, callback) {
                     if(tool.state.debug) console.log('init : radius', radius);
@@ -143,6 +147,8 @@
 
                 function toggleActive(selectedIndex) {
                     if(aEle[selectedIndex] == null) return;
+                    if(tool.state.debug) console.log('toggleActive')
+
 
                     for (let i = 0; i < aEle.length; i++) {
                         if(i === selectedIndex) continue;
@@ -153,7 +159,7 @@
                 }
 
                 function togglePreActive(selectedIndex) {
-
+                    if(tool.state.debug) console.log('togglePreActive')
                     var toogleClass = function (prevIndex, nextIndex) {
                         for (let i = 0; i < aEle.length; i++) {
 
@@ -193,17 +199,15 @@
                 }
 
                 function draggingIsActive(yes) {
+                    if(tool.state.debug) console.log('draggingIsActive START', yes, rotatingIsPasused);
                     if(yes) {
-                        if(rotatingIsPasused === true) return;
-                        rotatingIsPasused = true;
-
                         if(rotateRoundTimer != null) {
                             clearTimeout(rotateRoundTimer);
                             rotateRoundTimer = null;
                         }
 
-                        if(roundTimer.start != null) {
-                            if(tool.state.debug) console.log('draggingIsActive START');
+                        if(roundTimer.start != null && !rotatingIsPasused) {
+                            if(tool.state.debug) console.log('draggingIsActive YES');
 
                             roundTimer.pause = performance.now()
                             var timePassed = roundTimer.pause - roundTimer.start;
@@ -211,13 +215,16 @@
                             var thetaDegPassed = theta / 100 * percentTimePassed;
                             var degPassed = tX + (theta - thetaDegPassed);
 
+                            if(tool.state.debug) console.log('draggingIsActive : degPassed', degPassed);
+
                             tX = degPassed;
                             obox.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (degPassed) + "deg)";
 
                         }
+                        rotatingIsPasused = true;
                         if(!obox.classList.contains('draggingActive')) obox.classList.add('draggingActive');
                     } else {
-                        if(tool.state.debug) console.log('draggingIsActive : stop');
+                        if(tool.state.debug) console.log('draggingIsActive : NO');
 
                         if(autoRotate) {
                             if(tool.state.debug) console.log('draggingIsActive : stop : restart autorotate');
@@ -254,10 +261,9 @@
                             obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
 
                             if(tool.state.debug) console.log('draggingIsActive : closestIndex, currentOrderIndex', closestDegIndex);
-
+                            rotatingIsPasused = false;
                             restartRotateRoundTimer = setTimeout(function () {
-
-                                rotatingIsPasused = false;
+                                if(rotatingIsPasused == true) return;
                                 obox.classList.remove('draggingActive');
                                 startAutoRotate(tX);
                             }, 500)
@@ -274,7 +280,7 @@
                 }
 
                 function applyTranform(obj) {
-                    if(tY > 7) tY = 7;
+                    //if(tY > 7) tY = 7;
                     if(tY < 0) tY = 0;
 
                     var circlesNum = Math.floor(Math.abs(tX)/360);
@@ -282,8 +288,10 @@
 
                     let closestDegIndex;
                     if(Math.sign(tX) === -1 || Math.sign(tX) === 0) {
+                        if(tool.state.debug) console.log('applyTranform : negative tX')
                         closestDegIndex = closest(negativeDeg, -degreeBelow360)
                     } else {
+                        if(tool.state.debug) console.log('applyTranform : positive tX')
                         closestDegIndex = closest(positiveDeg, degreeBelow360)
                     }
 
@@ -295,11 +303,13 @@
                     obj.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (tX) + "deg)";
                 }
 
-                function rotateCarousel(transitionTime, endCallback, manualTx, toZeroFix) {
+                function rotateCarousel(transitionTime, endCallback, manualTx, toZeroFix, startNum) {
                     if(tool.state.debug) {
+                        console.log('rotateCarousel START: starts num', startNum)
                         console.log('rotateCarousel START: tX', manualTx, tX)
                         console.log('rotateCarousel : index : next, current', selectedIndex, currentOrderIndex)
                         console.log('rotateCarousel : theta, transitionTime', theta, transitionTime)
+                        console.log('rotateCarousel : rotatingIsPasused', rotatingIsPasused)
                     }
                     if(rotatingIsPasused === true) return;
                     if(manualTx != null) tX = manualTx;
@@ -341,7 +351,13 @@
                     obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
 
                     if(endCallback != null) {
+                        if(tool.state.debug) console.log('rotateCarousel : rotateRoundTimer : endCallback well run in', transitionTime);
+                        if(rotateRoundTimer != null) {
+                            clearTimeout(rotateRoundTimer);
+                            rotateRoundTimer = null;
+                        }
                         rotateRoundTimer = setTimeout(function () {
+                            if(tool.state.debug) console.log('rotateCarousel : rotateRoundTimer : run endCallback');
                             endCallback()
                         }, transitionTime);
                     }
@@ -393,21 +409,21 @@
 
                 //var autorotateNum = 0;
                 function startAutoRotate(manualTx) {
-                    if(tool.state.debug) console.log('startAutoRotate');
+                    if(tool.state.debug) console.log('startAutoRotate', manualTx);
                     var circleTime = rotateSpeed/aEle.length;
                     obox.classList.remove('rotatingPaused');
                     rotatingIsPasused = false;
 
                     function startNormally() {
                         if(tool.state.debug) console.log('startAutoRotate : startNormally')
-
+                        autorotateStartsNum++
                         selectedIndex++;
                         function rotateLoop() {
                             selectedIndex++;
-                            rotateCarousel(circleTime, rotateLoop)
+                            rotateCarousel(circleTime, rotateLoop, null, null, autorotateStartsNum)
                         }
 
-                        rotateCarousel(circleTime, rotateLoop, manualTx)
+                        rotateCarousel(circleTime, rotateLoop, manualTx, null, autorotateStartsNum)
                     }
 
                     let belowZero = (Math.sign(manualTx) === -1 || Math.sign(manualTx) === 0);
@@ -538,12 +554,7 @@
                 }
 
                 function onTabSwitch() {
-                    if (document.visibilityState != 'visible') {
-                        stopRotating();
-                    } else {
-                        startAutoRotate();
-
-                    }
+                    if(tool.state.debug) console.log('visibilitychange', tX, obox.style.transform)
                 }
 
                 document.addEventListener("visibilitychange", onTabSwitch);
