@@ -4,8 +4,6 @@ function Users_before_Q_responseExtras()
 {
 	Q_Response::addScript('{{Users}}/js/Users.js', 'Users');
 	Q_Response::addScript('{{Users}}/js/UsersDevice.js', 'Users');
-	Q_Response::addScript('{{Users}}/js/Eyes.js', 'Users');
-	Q_Response::addScript('{{Users}}/js/Faces.js', 'Users');
 	$app = Q::app();
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();

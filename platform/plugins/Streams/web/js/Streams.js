@@ -4721,12 +4721,13 @@ var Interests = Streams.Interests = {
 };
 
 /**
- * Operates with metrics.
+ * Class with functionality to operate with Metrics
  * @class Streams.Metrics
+ * @constructor
  * @param {Object} params JSON object with necessary params
- * @param {Number} params.period Seconds period to send data to server
- * @param {Number} params.predefined Seconds period to send data to server
- * @param {boolean|object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
+ * @param {number} params.period Seconds period to send data to server
+ * @param {number} params.predefined Seconds period to send data to server
+ * @param {boolean|Object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
  * If object - use this object as params for Users.Faces.
  */
 Streams.Metrics = function (params) {
@@ -4765,7 +4766,7 @@ Streams.Metrics = function (params) {
 	this.predefined = Q.getObject("predefined", params) || [];
 
 	/**
-	 * Save time as metrics localy before save
+	 * Save time as metrics locally before save
 	 * @method add
 	 * @param {number} value
 	 */
@@ -4821,14 +4822,15 @@ Streams.Metrics = function (params) {
 	};
 
 	if (this.useFaces) {
-		this.faces = new Q.Users.Faces(that.useFaces);
-
-		this.faces.start(function () {
-			that.faces.onEnter.add(function () {
-				that.face = true;
-			});
-			that.faces.onLeave.add(function () {
-				that.face = false;
+		Q.ensure(Q.Users.Faces, '{{Users}}/js/Faces.js', function () {
+			this.faces = new Q.Users.Faces(that.useFaces);
+			this.faces.start(function () {
+				that.faces.onEnter.add(function () {
+					that.face = true;
+				});
+				that.faces.onLeave.add(function () {
+					that.face = false;
+				});
 			});
 		});
 	}
