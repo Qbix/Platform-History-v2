@@ -86,6 +86,13 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	}
 	var $te = $(tool.element);
 	$te.addClass('Streams_preview');
+
+	// if user not logged in, editable and closeable options have no sense
+	if (!Q.Users.loggedInUserId()) {
+		state.closeable = false;
+		state.editable = false;
+	}
+
 	// let the extending tool's constructor run,
 	// it may change this tool's state or methods
 	setTimeout(function () {
