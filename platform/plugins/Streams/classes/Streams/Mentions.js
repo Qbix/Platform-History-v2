@@ -26,7 +26,7 @@ Q.on('init', function () {
 		});
 
 		Q.each(matches, function (i, string) {
-			var userId = string.replace('@', '');
+			var userId = string.replace(/@/g, '');
 
 			if (instructions.indexOf(userId) === -1) {
 				return pipe.fill(string)();
