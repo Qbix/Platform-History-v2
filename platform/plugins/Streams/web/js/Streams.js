@@ -4778,7 +4778,7 @@ Streams.Metrics = function (params) {
 		}
 
 		// check faces
-		if (that.useFaces && !that.face) {
+		if (!that.face) {
 			return;
 		}
 
@@ -4823,8 +4823,8 @@ Streams.Metrics = function (params) {
 
 	if (this.useFaces) {
 		Q.ensure(Q.Users.Faces, '{{Users}}/js/Faces.js', function () {
-			this.faces = new Q.Users.Faces(that.useFaces);
-			this.faces.start(function () {
+			that.faces = new Q.Users.Faces(that.useFaces);
+			that.faces.start(function () {
 				that.faces.onEnter.add(function () {
 					that.face = true;
 				});
@@ -4839,7 +4839,7 @@ Streams.Metrics = function (params) {
 	 * Start timer interval
 	 */
 	this.timerId = setInterval(function () {
-		if (!this.publisherId || !this.streamName) {
+		if (!that.publisherId || !that.streamName) {
 			return;
 		}
 
