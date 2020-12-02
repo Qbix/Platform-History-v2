@@ -78,6 +78,10 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             throw new Q_Exception_RequiredField(array('field' => $field));
         }
 
+        if(strpos($roomId, 'Streams/webrtc/') !== false) {
+            $roomId = explode('/', $roomId)[2];
+        }
+
         $streamName = "Streams/webrtc/$roomId";
         $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
         //$stream->setAttribute('endTime', time());

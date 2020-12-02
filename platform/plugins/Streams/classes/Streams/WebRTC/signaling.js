@@ -87,8 +87,11 @@ module.exports = function(socket,io) {
             if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
             if(clients.length === 0) {
                 Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, 'Streams/webrtc/' + roomId, function (error, stream) {
-                        stream.setAttribute('endTime', +Date.now());
-                        stream.save();
+                    if(!stream) {
+                        return;
+                    }
+                    stream.setAttribute('endTime', +Date.now());
+                    stream.save();
                     }
                 )
             }
