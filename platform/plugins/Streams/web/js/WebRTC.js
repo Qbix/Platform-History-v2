@@ -5308,7 +5308,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
 
-                        WebRTCconference.switchRoom('Yang', 'meeting5', function (newInstance) {
+                        WebRTCconference.switchRoom(Q.Users.communityName, 'meeting5', function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
 
@@ -5495,7 +5495,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         var userId = Q.Users.loggedInUserId();
 
-        Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true}, function (err) {
+        Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true} , function (err) {
             if (err) {
                 return;
             }
