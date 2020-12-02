@@ -5503,10 +5503,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             // get first property from relatedStreams (actually it should be only one)
             var stream = Q.first(this.relatedStreams);
 
-            console.log('Streams.WebRTC.start stream', stream);
-
             function _createRoom(publisherId, streamName) {
-                console.log('_createRoom',  streamName, Q.normalize(streamName))
                 // connect to this particular conversation
                 Q.Streams.WebRTC().start({
                     element: options.element,
@@ -5542,8 +5539,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             };
 
             if (stream && !stream.getAttribute('endTime')) {
-                console.log('Streams.WebRTC.start if1');
-
                 if (!stream.testWriteLevel('join')) {
                     return Q.Text.get("Streams/content", function (err, text) {
                         var msg = Q.firstErrorMessage(err);
@@ -5557,15 +5552,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 _createRoom(stream.fields.publisherId, stream.fields.name);
             } else {
-                console.log('Streams.WebRTC.start else');
-
                 Q.req("Streams/webrtc", ["room"], function (err, response) {
                     var msg = Q.firstErrorMessage(err, response && response.errors);
                     if (msg) {
                         return Q.alert(msg);
                     }
 
-                    console.log('response.slots.room.roomId', response.slots.room.roomId)
                     Q.Streams.get(userId, response.slots.room.roomId, function (err) {
                         var fem = Q.firstErrorMessage(err);
                         if (fem) {
