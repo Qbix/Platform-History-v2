@@ -71,8 +71,10 @@ function Streams_webrtc_put($params = array()) {
             }
         }
 
-        $toSave = filesize($path.DS.$filename) ? ',' . PHP_EOL . trim($toSave,"[]") : trim($toSave,"[]");
-        $reslt = file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
+        $toSave = file_exists($path.DS.$filename) && filesize($path.DS.$filename)
+			? ',' . PHP_EOL . trim($toSave,"[]")
+			: trim($toSave,"[]");
+        $result = file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
 
 
         //removeOldLogs($logsPath);

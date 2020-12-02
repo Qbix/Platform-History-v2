@@ -230,10 +230,16 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 .Q_mobile .Q_overlay { width: 90%; }
 
 /* The following lines are for cordova on iOS */
-.Q_notCordova #status_background { display: none; }
-.Q_cordova.Q_notch #status_background {
+.Q_notCordova .Q_top_background,
+.Q_notCordova .Q_bottom_background { display: none; }
+.Q_cordova .Q_top_background {
 	background: #f2f2f2;
-	height: 20px;
+}
+.Q_cordova .Q_bottom_background {
+	background: #f2f2f2;
+}
+.Q_cordova.Q_notch .Q_top_background {
+	background: black;
 }
 .Q_cordova.Q_ios.Q_mobile #dashboard_slot { height: 50px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 50px; }
@@ -245,7 +251,7 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 	top: calc(env(safe-area-inset-top) + 50px);
 	height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 50px);
 }
-.Q_cordova.Q_ios.Q_mobile.Q_notch #status_background {
+.Q_cordova.Q_ios.Q_mobile.Q_notch .Q_top_background {
 	background: black;
     height: constant(safe-area-inset-top);
     height: env(safe-area-inset-top);

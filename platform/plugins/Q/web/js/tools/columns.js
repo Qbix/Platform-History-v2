@@ -581,7 +581,7 @@ Q.Tool.define("Q/columns", function(options) {
 			var $sc = $(state.container);
 			var containerRect = $sc[0].getBoundingClientRect();
 			var statusBackground = document.getElementById('status_background')
-				|| document.getElementsByClassName('Q_status_background')[0];
+				|| document.getElementsByClassName('Q_top_background')[0];
 			var margin = (statusBackground && statusBackground.getBoundingClientRect().height) || 0;
 			var top = expandTop
 				? -containerRect.top + margin

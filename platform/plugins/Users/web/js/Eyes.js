@@ -2,8 +2,9 @@
 
     var Users = Q.plugins.Users;
     var _debug = null;
-    const WITHIN_VIEWPORT = 1;
-    const OUTSIDE_VIEWPORT = 2;
+    var WITHIN_VIEWPORT = 1;
+    var OUTSIDE_VIEWPORT = 2;
+	
     /**
      * Analyses what user is watching on screen
      * @class Users.Eyes
