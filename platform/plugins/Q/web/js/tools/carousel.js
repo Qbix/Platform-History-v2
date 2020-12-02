@@ -24,11 +24,13 @@
      *  @param {boolean} [options.autoRotate]
      *  @param {integer} [options.rotateSpeed]
      *  Hash of possible options
+     *  Hash of possible options
      */
     Q.Tool.define("Q/carousel", function(options) {
             var tool = this;
             tool.state = Q.extend({}, tool.state, options);
 
+            Q.addStylesheet('{{Q}}/css/3dcarousel.css');
             tool.create();
         },
 
