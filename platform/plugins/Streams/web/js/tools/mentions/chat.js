@@ -109,7 +109,7 @@
 				.tool("Streams/userChooser", {
 					position: 'top',
 					onChoose: function (userId, avatar) {
-						$input.val($input.val() + userId);
+						$input.val($input.val() + userId + '@');
 						state.selectedIds.push(userId);
 						tool.close();
 					}
@@ -167,7 +167,7 @@
 			var $chatMessageContent = $(".Streams_chat_message_content", element);
 			var chatMessageContent = $chatMessageContent.html();
 			Q.each(chatMessageContent.matchTypes('qbixUserId'), function (i, string) {
-				var userId = string.replace('@', '');
+				var userId = string.replace(/@/g, '');
 
 				if (instructions.indexOf(userId) === -1) {
 					return;

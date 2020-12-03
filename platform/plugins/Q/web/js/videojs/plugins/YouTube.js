@@ -122,7 +122,9 @@ THE SOFTWARE. */
         modestbranding: 1,
         rel: 0,
         showinfo: 0,
-        loop: this.options_.loop ? 1 : 0
+        loop: this.options_.loop ? 1 : 0,
+        origin: location.protocol+'//'+location.hostname,
+        enablejsapi: 1
       };
 
       // Let the user set any YouTube parameter
@@ -246,6 +248,8 @@ THE SOFTWARE. */
 
       if (typeof this.options_.enablePrivacyEnhancedMode !== 'undefined' && this.options_.enablePrivacyEnhancedMode) {
         playerConfig.host = 'https://www.youtube-nocookie.com';
+      } else {
+        playerConfig.host = 'https://www.youtube.com';
       }
 
       this.ytPlayer = new YT.Player(this.options_.techId, playerConfig);

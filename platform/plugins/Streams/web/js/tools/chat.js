@@ -1033,6 +1033,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		};
 
+		if (previewToolName === "Streams/image/preview") {
+			fields.showTitle = false;
+			fields.imagepicker = {showSize: "200"};
+		}
+
 		return Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields);
 		//return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
 	},
