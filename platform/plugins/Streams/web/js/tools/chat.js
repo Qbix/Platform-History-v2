@@ -35,6 +35,7 @@
  *   @param {Object} [options.startWebRTC=false] If true, start webrtc once tool activated. Also if startWebRTC exist somewhere in GET params.
  *   @param {Object} [options.preprocess=[]] Array of functions which call one by one before message post.
  *   Each function will get callback as argument. Need to call this callback when ready to go further.
+ *   @param {Array} [option.excludedRelatedStreams] Array with types of related streams excluded from display as chat message.
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
@@ -144,6 +145,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png'
 		}
 	},
+	excludedRelatedStreams: ["Streams/question"],
 	seen: true,
 	scrollToBottom: true,
 	overflowed: {
@@ -1014,11 +1016,18 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * @param {object} message
 	 */
 	renderRelatedStream: function (message) {
+		var state = this.state;
+
 		if (Q.getObject("constructor.name", message) !== "Streams_Message") {
 			message = Q.Streams.Message.construct(message);
 		}
 
 		var instructions = message.getAllInstructions();
+
+		if (state.excludedRelatedStreams.includes(instructions.fromType)) {
+			return;
+		}
+
 		var previewToolName = instructions.fromType + '/preview';
 		if (!Q.Tool.defined(previewToolName)) {
 			return console.warn("tool " + previewToolName + " not found");
