@@ -803,6 +803,10 @@
    */
 
   function removeClass(element, classToRemove) {
+      if (!(element instanceof HTMLElement)) {
+          return;
+      }
+      
     if (element.classList) {
       element.classList.remove(classToRemove);
     } else {
