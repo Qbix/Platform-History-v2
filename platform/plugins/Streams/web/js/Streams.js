@@ -580,6 +580,9 @@ Q.Tool.define({
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
+	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
+	"Streams/answer/preview": "{{Streams}}/js/tools/answer/preview.js",
+	"Streams/question": "{{Streams}}/js/tools/question.js",
 	"Streams/player": function () {
 		// does nothing
 	},

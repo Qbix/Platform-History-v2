@@ -361,6 +361,14 @@
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
             "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
         }
     },
     "menu": {
@@ -434,5 +442,26 @@
         "errorNoSource": "No image source",
         "uploadLimit": "Max file size: {{size}}",
         "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "questions": {
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "free answer...",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required"
     }
 }
