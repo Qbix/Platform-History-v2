@@ -333,6 +333,14 @@
 					"icon": "Streams/answer"
 				}
 			},
+			"Streams/topic": {
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"title": "Untitled experience",
+					"icon": "Streams/category"
+				}
+			},
 			"Streams/text": {
 				"create": true, 
 				"edit": true
@@ -619,7 +627,8 @@
 		"canManage": ["Users/owners", "Users/admins"],
 		"possibleUserStreams": {
 			"Streams/questions": true,
-			"Streams/answer": true
+			"Streams/answer": true,
+			"Streams/topic": true
 		}
 	}
 }

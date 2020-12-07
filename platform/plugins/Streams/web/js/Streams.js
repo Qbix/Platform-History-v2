@@ -583,6 +583,7 @@ Q.Tool.define({
 	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
 	"Streams/answer/preview": "{{Streams}}/js/tools/answer/preview.js",
 	"Streams/question": "{{Streams}}/js/tools/question.js",
+	"Streams/experience": "{{Streams}}/js/tools/experience.js",
 	"Streams/player": function () {
 		// does nothing
 	},

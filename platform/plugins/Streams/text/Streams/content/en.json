@@ -463,5 +463,8 @@
         "TitlePlaceholder": "Type your question",
         "ContentPlaceholder": "Put any additional information here to help people answer",
         "ErrorTitle": "Question required"
+    },
+    "experience": {
+        "NewExperience": "New Experience"
     }
 }
