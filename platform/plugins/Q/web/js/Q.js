@@ -12795,10 +12795,9 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Object} [options.template] can be used instead of content option.
  * @param {String} [options.template.name] names a template to render into the initial dialog content.
  * @param {String} [options.template.fields] fields to pass to the template, if any
- * @param {Function} [options.callback]
- *   Optional callback to call once the title and content has been shown and activated.
- *   Should be passed the container element by the handler.
- * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
+ * @param {Q.Event} [options.onActivate] Q.Event or function which is called when invoked container is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
+ * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when invoked container closing was initiated and it's still visible. Can return false to cancel closing.
+ * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
 	var o = options;
