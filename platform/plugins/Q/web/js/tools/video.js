@@ -226,7 +226,7 @@ Q.Tool.define("Q/video", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	metrics: {
-		useFaces: true
+		useFaces: false
 	},
 	videojsOptions: {
 		controls: true

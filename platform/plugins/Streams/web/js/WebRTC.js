@@ -1646,9 +1646,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             screensRendering.updateLayout();
 
 
-                            var btnsToIgnore = Array.prototype.slice.call(_controls.querySelectorAll('.Streams_webrtc_conference-control-inner > div'));
                             var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
-                            elementsToIgnore = elementsToIgnore.concat(btnsToIgnore);
                             Q.activate(
                                 Q.Tool.setUpElement(
                                     _controls.firstChild, // or pass an existing element
@@ -5310,7 +5308,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
 
-                        WebRTCconference.switchRoom('Yang', 'meeting5', function (newInstance) {
+                        WebRTCconference.switchRoom(Q.Users.communityName, 'meeting5', function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
 
@@ -5497,18 +5495,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         var userId = Q.Users.loggedInUserId();
 
-        Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true}, function (err) {
+        Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true} , function (err) {
             if (err) {
                 return;
             }
 
             // get first property from relatedStreams (actually it should be only one)
             var stream = Q.first(this.relatedStreams);
+
             function _createRoom(publisherId, streamName) {
                 // connect to this particular conversation
                 Q.Streams.WebRTC().start({
                     element: options.element,
-                    roomId: Q.normalize(streamName),
+                    roomId: streamName,
                     roomPublisherId: publisherId,
                     mode: options.mode,
                     onWebrtcControlsCreated: function () {
