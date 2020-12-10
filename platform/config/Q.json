@@ -33,7 +33,8 @@
 		},
 		"log": {
 			"pattern": "{{key}}-{{day}}.log",
-			"removeAfterDays": 10
+			"removeAfterDays": 10,
+			"maxFileSize": 100000000
 		},
 		"web": {
 			"ignoreUserAbort": true,
