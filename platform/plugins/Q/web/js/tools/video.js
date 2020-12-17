@@ -391,10 +391,18 @@ Q.Tool.define("Q/video", function (options) {
 				this.waiting = function (state) {
 					if (state || typeof state === "undefined") {
 						player.addClass("vjs-waiting");
-						player.trigger("waiting")
+
+						// need to check eventBusEl_ to avoid error from videojs lib
+						if (player.eventBusEl_) {
+							player.trigger("waiting");
+						}
 					} else {
 						player.removeClass("vjs-waiting");
-						player.trigger("canplay")
+
+						// need to check eventBusEl_ to avoid error from videojs lib
+						if (player.eventBusEl_) {
+							player.trigger("canplay");
+						}
 					}
 				};
 
