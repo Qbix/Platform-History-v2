@@ -2,9 +2,22 @@
     padding: 10px;
     position: relative;
 }
-.vjs-has-started .vjs-control-bar,
-.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+.video-js .vjs-time-control {
+    display: block;
+}
+.video-js .vjs-remaining-time {
     display: none;
+}
+.video-js .vjs-time-control {
+    padding-right: 0;
+    padding-left: 0;
+}
+.video-js .vjs-time-divider {
+    text-align: center;
+}
+.video-js .vjs-marker {
+    height: 50%;
+    bottom: 24%;
 }
 .Q_video_composer label[for=url] {
     margin-top: 10px;
