@@ -182,9 +182,9 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
-		$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+		$div.attr('data-width-range', Math.round($div.width()/300) || 1);
 		Q.onLayout(div).add(function () {
-			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+			$div.attr('data-width-range', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
 	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
@@ -563,6 +563,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.removeClass('Q_columns_loading');
 				}
 				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
+				Q.layout(tool.element);
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {

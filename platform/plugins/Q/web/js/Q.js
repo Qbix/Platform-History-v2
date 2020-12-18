@@ -2811,7 +2811,7 @@ Q.onLayout = function (element) {
 		observer.observe(element);
 	}
 	_layoutObservers[l-1] = observer;
-	event.onEmpty().set(function () {
+	event.onEmpty().set(Q.debounce(function () {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
@@ -2823,9 +2823,10 @@ Q.onLayout = function (element) {
 				break;
 			}
 		}
-	}, 'Q');
+	}, Q.onLayout.debounce || 0), 'Q');
 	return event;
 }
+Q.onLayout.debounce = 100;
 Q.onLayout().set(function () {
 	_detectOrientation.apply(this, arguments);
 	Q.Masks.update();
