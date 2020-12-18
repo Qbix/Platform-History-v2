@@ -838,7 +838,7 @@ Q.Tool.define("Q/columns", function(options) {
 		return true;
 		
 		function _close() {
-			Q.removeElement(div, true); // remove it correctly
+			Q.removeElement(div, true); // remove it correctly)
 
 			var data = tool.data(index);
 			presentColumn(tool);
@@ -850,6 +850,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
+			Q.layout(tool.element);
 			Q.Masks.hide('Q.click.mask');
 		}
 	},
