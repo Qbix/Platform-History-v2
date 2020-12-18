@@ -22,7 +22,8 @@
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
 		"socket.io": "^2.3.0",
-		"yuidocjs": "^0.10.2"
+		"yuidocjs": "^0.10.2",
+		"google-closure-compiler": "20201207.0.0"
 	},
 	"repository": {
 		"type": "git",

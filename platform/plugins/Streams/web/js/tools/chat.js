@@ -1205,7 +1205,7 @@ Q.Template.set('Streams/chat/message/bubble',
 			'<div class="Streams_chat_tick"></div>'+
 			'<div class="Streams_chat_message">'+
 				'<div class="Streams_chat_avatar_name" data-byUserId="{{byUserId}}"></div>'+
-				'<span class="Streams_chat_message_content">{{content}}</span>'+
+				'&nbsp;<span class="Streams_chat_message_content">{{content}}</span>'+
 			'</div>'+
 			'<div class="Q_clear"></div>'+
 		'</div>'+
