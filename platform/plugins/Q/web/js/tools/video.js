@@ -16,6 +16,7 @@
  *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
  *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
+ *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
  */
 Q.Tool.define("Q/video", function (options) {
 	var tool = this;
@@ -77,7 +78,7 @@ Q.Tool.define("Q/video", function (options) {
 						type: 'video/youtube'
 					}],
 					youtube: {
-						ytControls: 2
+						ytControls: 0
 					}
 				};
 
@@ -225,11 +226,13 @@ Q.Tool.define("Q/video", function (options) {
 	start: null,
 	clipStart: null,
 	clipEnd: null,
+	ads: [],
 	metrics: {
 		useFaces: false
 	},
 	videojsOptions: {
-		controls: true
+		controls: true,
+		inactivityTimeout: 0
 	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
@@ -237,17 +240,8 @@ Q.Tool.define("Q/video", function (options) {
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
-		var start = 0;
-		var state = this.state;
-
-		if (state.clipStart !== null) {
-			start = parseInt(state.clipStart);
-		}
-		if (state.start !== null) {
-			start = parseInt(state.start);
-		}
-
-		this.setCurrentPosition(start, true);
+		this.setCurrentPosition(this.calculateStartPosition(), true);
+		this.addAdvertising();
 	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
@@ -426,6 +420,51 @@ Q.Tool.define("Q/video", function (options) {
 		this.state.player && this.state.player.pause();
 	},
 	/**
+	 * @method addAdvertising
+	 */
+	addAdvertising: function () {
+		var state = this.state;
+		var player = state.player;
+		var ads = state.ads;
+
+		if (Q.isEmpty(ads)) {
+			return;
+		}
+
+		Q.addStylesheet("{{Q}}/css/videojs.markers.min.css");
+		Q.addScript("{{Q}}/js/videojs/plugins/videojs-markers.js", function () {
+			var markers = [];
+
+			Q.each(ads, function (i) {
+				markers.push({
+					time: this.position,
+					//text: "Advert " + (i+1),
+					url: this.url
+				});
+			});
+
+			// wait till duration
+			var durationTimeId = setInterval(function () {
+				if (!player.duration()) {
+					return;
+				}
+
+				player.markers({
+					breakOverlay:{
+						display: false
+					},
+					onMarkerReached: function(marker){
+						console.log(marker);
+					},
+					markers: markers
+				});
+				player.trigger("loadedmetadata");
+
+				clearInterval(durationTimeId);
+			}, 1000);
+		});
+	},
+	/**
 	 * @method setCurrentPosition
 	 * @param {integer} position in milliseonds
 	 * @param {boolean} [silent=false] whether to mute sound while setting position
@@ -501,6 +540,23 @@ Q.Tool.define("Q/video", function (options) {
 			default: return 'mp4';
 		}
 		//throw new Q.Exception(this.id + ': No adapter for this URL');
+	},
+	/**
+	 *
+	 * @method calculateStartPosition
+	 */
+	calculateStartPosition: function () {
+		var state = this.state;
+		var start = 0;
+
+		if (state.clipStart) {
+			start = parseInt(state.clipStart) || 0;
+		}
+		if (state.start) {
+			start = parseInt(state.start) || 0;
+		}
+
+		return start;
 	},
 	/**
 	 *
