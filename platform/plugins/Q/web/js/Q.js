@@ -2153,241 +2153,6 @@ Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
 Q.calculateKey.keys = [];
 
 /**
- * Chains an array of callbacks together into a function that can be called with arguments
- * 
- * @static
- * @method chain
- * @param {Array} callbacks An array of callbacks, each taking another callback at the end
- * @return {Function} The wrapper function
- */
-Q.chain = function (callbacks) {
-	var result = null;
-	Q.each(callbacks, function (i, callback) {
-		if (Q.typeOf(callback) !== 'function') {
-			return;
-		}
-
-		var prevResult = result;
-		result = function () {
-			var args = Array.prototype.slice.call(arguments, 0);
-			args.push(prevResult);
-			return callback.apply(this, args);
-		};
-	}, {ascending: false, numeric: true});
-	return result;
-};
-
-/**
- * Takes a function and returns a version that returns a promise
- * @method promisify
- * @static
- * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
- * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
- * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
- */
-Q.promisify = function (getter, useSecondArgument) {
-	function _promisifier() {
-		if (!Q.Promise) {
-			return getter.apply(this, args);
-		}
-		var args = [], resolve, reject, found = false;
-		for (var i=0, l=arguments.length; i<l; ++i) {
-			var ai = arguments[i];
-			if (typeof ai === 'function') {
-				found = true;
-				ai = function _promisified(err, second) {
-					if (err) {
-						return reject(err);
-					}
-					try {
-						ai.apply(this, arguments);
-					} catch (e) {
-						err = e;
-					}
-					if (err) {
-						return reject(err);
-					}
-					resolve(useSecondArgument ? second : this);
-				}
-			}
-			args.push(ai);
-			break; // only one callback, expect err as first argument
-		}
-		if (!found) {
-			args.push(function _defaultCallback(err, second) {
-				if (err) {
-					return reject(err);
-				}
-				resolve(useSecondArgument ? second : this);
-			});
-		}
-		var promise = new Q.Promise(function (r1, r2) {
-			resolve = r1;
-			reject = r2;
-		});
-		return Q.extend(promise, getter.apply(this, args));
-	}
-	return Q.extend(_promisifier, getter);
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function at most once.
- * @static
- * @method once
- * @param {Function} original The function to wrap
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.once = function (original, defaultValue) {
-	var _called = false;
-	return function _Q_once_wrapper() {
-		if (_called) return defaultValue;
-		_called = true;
-		return original.apply(this, arguments);
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function
- * at most once every given milliseconds.
- * @static
- * @method throttle
- * @param {Function} original The function to wrap
- * @param {Number} milliseconds The number of milliseconds
- * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
- *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
-	var _lastCalled;
-	var _timeout = null;
-	return function _Q_throttle_wrapper(e) {
-		var t = this, a = arguments;
-		var ms = Date.now() - _lastCalled;
-		if (ms < milliseconds) {
-			if (delayedFinal) {
-				if (_timeout) {
-					clearTimeout(_timeout);
-				}
-				_timeout = setTimeout(function () {
-					_lastCalled = Date.now();
-					original.apply(t, a);
-				}, milliseconds - ms);
-			}
-			return defaultValue;
-		}
-		_lastCalled = Date.now();
-		return original.apply(this, arguments);
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that adds the function to a queue
- * of functions to be called one by one at most once every given milliseconds.
- * @static
- * @method queue
- * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds, defaults to 0
- * @return {Function} The wrapper function
- */
-Q.queue = function (original, milliseconds) {
-	var _queue = [];
-	var _timeout = null;
-	milliseconds = milliseconds || 0;
-	function _Q_queue_next() {
-		if (!_queue.length) {
-			_timeout = null;
-			return 0;
-		}
-		var p = _queue.shift();
-		var ret = original.apply(p[0], p[1]);
-		if (ret === false) {
-			_timeout = null;
-			_queue = [];
-		} else {
-			_timeout = setTimeout(_Q_queue_next, milliseconds);
-		}
-	};
-	return function _Q_queue_wrapper() {
-		var args = Array.prototype.slice.call(arguments, 0);
-		var len = _queue.push([this, args]);
-		if (!_timeout) {
-			_timeout = setTimeout(_Q_queue_next, 0);
-		}
-		return len;
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function
- * after calls stopped coming in for a given number of milliseconds.
- * If the immediate param is true, the wrapper lets the function be called
- * without waiting if it hasn't been called for the given number of milliseconds.
- * @static
- * @method debounce
- * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds
- * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
- *   without waiting if it hasn't been called for the given number of milliseconds.
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.debounce = function (original, milliseconds, immediate, defaultValue) {
-	var _timeout = null;
-	return function _Q_debounce_wrapper() {
-		var t = this, a = arguments;
-		if (_timeout) {
-			clearTimeout(_timeout);
-		} else if (immediate) {
-			original.apply(t, a);
-		}
-		_timeout = setTimeout(function _Q_debounce_handler() {
-			if (!immediate) {
-				original.apply(t, a);
-			}
-			_timeout = null;
-		}, milliseconds);
-		return defaultValue;
-	};
-};
-
-/**
- * Wraps a function and causes it to return early if called recursively.
- * Use sparingly, since most functions should make guarantees about postconditions.
- * @static
- * @method preventRecursion
- * @param {String} name The name of the function, passed explicitly
- * @param {Function} original The function or method to wrap
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.preventRecursion = function (name, original, defaultValue) {
-	return function () {
-		var n = '__preventRecursion_'+name;
-		if (this[n]) return defaultValue;
-		this[n] = true;
-		var ret = original.apply(this, arguments);
-		delete this[n];
-		return ret;
-	};
-};
-
-/**
- * Custom exception constructor
- * @class Q.Exception
- * @constructor
- * @param [message=""] {string} The error message
- * @param {object} fields={}
- */
-Q.Exception = function (message, fields) {
-	this.fields = fields || {};
-	this.message = message || "";
-};
-
-Q.Exception.prototype = Error;
-
-/**
  * Wraps a callable in a Q.Event object
  * @class Q.Event
  * @namespace Q
@@ -3046,7 +2811,7 @@ Q.onLayout = function (element) {
 		observer.observe(element);
 	}
 	_layoutObservers[l-1] = observer;
-	event.onEmpty().set(Q.debounce(function () {
+	event.onEmpty().set(function () {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
@@ -3058,7 +2823,7 @@ Q.onLayout = function (element) {
 				break;
 			}
 		}
-	}, Q.onLayout.debounce || 0), 'Q');
+	}, 'Q');
 	return event;
 }
 Q.onLayout.debounce = 100;
@@ -3739,6 +3504,241 @@ Q.getter.CACHED = 0;
 Q.getter.REQUESTING = 1;
 Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
+
+/**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	Q.each(callbacks, function (i, callback) {
+		if (Q.typeOf(callback) !== 'function') {
+			return;
+		}
+
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
+
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
+	function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject, found = false;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
+				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
+				if (err) {
+					return reject(err);
+				}
+				resolve(useSecondArgument ? second : this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+	return Q.extend(_promisifier, getter);
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function at most once.
+ * @static
+ * @method once
+ * @param {Function} original The function to wrap
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.once = function (original, defaultValue) {
+	var _called = false;
+	return function _Q_once_wrapper() {
+		if (_called) return defaultValue;
+		_called = true;
+		return original.apply(this, arguments);
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function
+ * at most once every given milliseconds.
+ * @static
+ * @method throttle
+ * @param {Function} original The function to wrap
+ * @param {Number} milliseconds The number of milliseconds
+ * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
+ *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
+	var _lastCalled;
+	var _timeout = null;
+	return function _Q_throttle_wrapper(e) {
+		var t = this, a = arguments;
+		var ms = Date.now() - _lastCalled;
+		if (ms < milliseconds) {
+			if (delayedFinal) {
+				if (_timeout) {
+					clearTimeout(_timeout);
+				}
+				_timeout = setTimeout(function () {
+					_lastCalled = Date.now();
+					original.apply(t, a);
+				}, milliseconds - ms);
+			}
+			return defaultValue;
+		}
+		_lastCalled = Date.now();
+		return original.apply(this, arguments);
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that adds the function to a queue
+ * of functions to be called one by one at most once every given milliseconds.
+ * @static
+ * @method queue
+ * @param {Function} original The function to wrap
+ * @param {number} milliseconds The number of milliseconds, defaults to 0
+ * @return {Function} The wrapper function
+ */
+Q.queue = function (original, milliseconds) {
+	var _queue = [];
+	var _timeout = null;
+	milliseconds = milliseconds || 0;
+	function _Q_queue_next() {
+		if (!_queue.length) {
+			_timeout = null;
+			return 0;
+		}
+		var p = _queue.shift();
+		var ret = original.apply(p[0], p[1]);
+		if (ret === false) {
+			_timeout = null;
+			_queue = [];
+		} else {
+			_timeout = setTimeout(_Q_queue_next, milliseconds);
+		}
+	};
+	return function _Q_queue_wrapper() {
+		var args = Array.prototype.slice.call(arguments, 0);
+		var len = _queue.push([this, args]);
+		if (!_timeout) {
+			_timeout = setTimeout(_Q_queue_next, 0);
+		}
+		return len;
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function
+ * after calls stopped coming in for a given number of milliseconds.
+ * If the immediate param is true, the wrapper lets the function be called
+ * without waiting if it hasn't been called for the given number of milliseconds.
+ * @static
+ * @method debounce
+ * @param {Function} original The function to wrap
+ * @param {number} milliseconds The number of milliseconds
+ * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
+ *   without waiting if it hasn't been called for the given number of milliseconds.
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.debounce = function (original, milliseconds, immediate, defaultValue) {
+	var _timeout = null;
+	return function _Q_debounce_wrapper() {
+		var t = this, a = arguments;
+		if (_timeout) {
+			clearTimeout(_timeout);
+		} else if (immediate) {
+			original.apply(t, a);
+		}
+		_timeout = setTimeout(function _Q_debounce_handler() {
+			if (!immediate) {
+				original.apply(t, a);
+			}
+			_timeout = null;
+		}, milliseconds);
+		return defaultValue;
+	};
+};
+
+/**
+ * Wraps a function and causes it to return early if called recursively.
+ * Use sparingly, since most functions should make guarantees about postconditions.
+ * @static
+ * @method preventRecursion
+ * @param {String} name The name of the function, passed explicitly
+ * @param {Function} original The function or method to wrap
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.preventRecursion = function (name, original, defaultValue) {
+	return function () {
+		var n = '__preventRecursion_'+name;
+		if (this[n]) return defaultValue;
+		this[n] = true;
+		var ret = original.apply(this, arguments);
+		delete this[n];
+		return ret;
+	};
+};
+
+/**
+ * Custom exception constructor
+ * @class Q.Exception
+ * @constructor
+ * @param [message=""] {string} The error message
+ * @param {object} fields={}
+ */
+Q.Exception = function (message, fields) {
+	this.fields = fields || {};
+	this.message = message || "";
+};
+
+Q.Exception.prototype = Error;
 
 /**
  * The root mixin added to all tools.
