@@ -13,6 +13,7 @@
  *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
+ *  @param {string} [options.className] Additional class name to add to tool element
  *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
  *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
@@ -24,6 +25,10 @@ Q.Tool.define("Q/video", function (options) {
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
+	}
+
+	if (state.className) {
+		$(tool.element).addClass(state.className);
 	}
 
 	tool.adapters = {};
@@ -222,11 +227,13 @@ Q.Tool.define("Q/video", function (options) {
 	autoplay: false,
 	throttle: 10,
 	currentPosition: 0,
+	className: null,
 	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
 	clipEnd: null,
 	ads: [],
+	adsTimeOut: 10,
 	metrics: {
 		useFaces: false
 	},
@@ -321,6 +328,7 @@ Q.Tool.define("Q/video", function (options) {
 
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
+			timeOut: state.adsTimeOut
 		}, function (err, html) {
 			tool.element.innerHTML = html;
 
@@ -423,9 +431,11 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method addAdvertising
 	 */
 	addAdvertising: function () {
+		var tool = this;
 		var state = this.state;
 		var player = state.player;
 		var ads = state.ads;
+		var timeOut = state.adsTimeOut;
 
 		if (Q.isEmpty(ads)) {
 			return;
@@ -435,26 +445,78 @@ Q.Tool.define("Q/video", function (options) {
 		Q.addScript("{{Q}}/js/videojs/plugins/videojs-markers.js", function () {
 			var markers = [];
 
-			Q.each(ads, function (i) {
-				markers.push({
-					time: this.position,
-					//text: "Advert " + (i+1),
-					url: this.url
-				});
-			});
-
 			// wait till duration
 			var durationTimeId = setInterval(function () {
-				if (!player.duration()) {
+				var duration = player.duration();
+				if (!duration) {
 					return;
 				}
+
+				Q.each(ads, function (i) {
+					if (typeof this.position === "string" && this.position.includes("%")) {
+						this.position = duration / 100 * parseInt(this.position);
+					}
+
+					markers.push({
+						time: this.position,
+						text: "Advertising " + (i+1),
+						url: this.url
+					});
+				});
 
 				player.markers({
 					breakOverlay:{
 						display: false
 					},
 					onMarkerReached: function(marker){
-						console.log(marker);
+						player.pause();
+						player.hide();
+
+						$("<div>").appendTo(tool.element).tool("Q/video", {
+							url: marker.url,
+							autoplay: true,
+							metrics: null,
+							className: "Q_video_advertising Q_current",
+							positionUpdatePeriod: 1,
+							onLoad: function () {
+								var advTool = this;
+								advTool.play();
+
+								Q.Template.render('Q/video/skip', {
+									text: tool.text,
+									timeOut: state.adsTimeOut
+								}, function (err, html) {
+									$(html).appendTo(advTool.element);
+								});
+								player.pause();
+							},
+							onPlaying: function () {
+								var advTool = this;
+								var $skipElement = $(".Q_video_skip", this.element);
+								if (!$skipElement.length) {
+									return;
+								}
+
+								var $timeToSkip = $(".Q_video_skip_time", $skipElement);
+								var timeToSkip = parseInt($timeToSkip.text());
+								if (!timeToSkip || timeToSkip <= 0) {
+									$(".Q_video_skip_after", $skipElement).html(tool.text.Skip);
+									$(".Q_video_skip_time", $skipElement).html(">>");
+									$skipElement.on(Q.Pointer.fastclick, function () {
+										Q.handle(advTool.state.onEnded, advTool);
+									});
+								} else {
+									$timeToSkip.html(timeToSkip-1);
+								}
+
+								player.pause();
+							},
+							onEnded: function () {
+								Q.Tool.remove(this.element, true, true);
+								player.show();
+								player.play();
+							}
+						}).activate();
 					},
 					markers: markers
 				});
@@ -515,9 +577,10 @@ Q.Tool.define("Q/video", function (options) {
 	/**
 	 * Detect adapter from url
 	 * @method adapterNameFromUrl
+	 * @param {string} url
 	 */
-	adapterNameFromUrl: function () {
-		var url = this.state.url;
+	adapterNameFromUrl: function (url) {
+		url = url || this.state.url;
 		if (!url) {
 			throw new Q.Exception(this.id + ": url is required");
 		}
@@ -587,5 +650,12 @@ Q.Tool.define("Q/video", function (options) {
 Q.Template.set('Q/video/videojs',
 	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}}/>'
 );
+
+Q.Template.set('Q/video/skip',
+	'<span class="Q_video_skip">' +
+	'	<span class="Q_video_skip_after">{{text.SkipAfter}}</span> <span class="Q_video_skip_time">{{timeOut}}</span>' +
+	'</div>'
+);
+
 
 })(window, Q, jQuery);
