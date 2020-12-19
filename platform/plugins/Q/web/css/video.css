@@ -154,3 +154,11 @@
     color: #fff;
     cursor: pointer;
 }
+.Q_video_tool.Q_video_advertising .vjs-control,
+.Q_video_tool.Q_video_advertising .vjs-control * {
+    pointer-events: none;
+}
+.Q_video_hidden {
+    position: absolute;
+    top: -1000px;
+}

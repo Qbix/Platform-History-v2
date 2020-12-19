@@ -460,6 +460,7 @@ Q.Tool.define("Q/video", function (options) {
 					markers.push({
 						time: this.position,
 						text: "Advertising " + (i+1),
+						index: i,
 						url: this.url
 					});
 				});
@@ -468,9 +469,13 @@ Q.Tool.define("Q/video", function (options) {
 					breakOverlay:{
 						display: false
 					},
-					onMarkerReached: function(marker){
+					onMarkerReached: function(marker) {
+						if (Q.isEmpty(marker)) {
+							return;
+						}
+
 						player.pause();
-						player.hide();
+						player.addClass("Q_video_hidden");
 
 						$("<div>").appendTo(tool.element).tool("Q/video", {
 							url: marker.url,
@@ -488,6 +493,7 @@ Q.Tool.define("Q/video", function (options) {
 								}, function (err, html) {
 									$(html).appendTo(advTool.element);
 								});
+
 								player.pause();
 							},
 							onPlaying: function () {
@@ -513,7 +519,8 @@ Q.Tool.define("Q/video", function (options) {
 							},
 							onEnded: function () {
 								Q.Tool.remove(this.element, true, true);
-								player.show();
+								player.markers.remove([0]);
+								player.removeClass("Q_video_hidden");
 								player.play();
 							}
 						}).activate();

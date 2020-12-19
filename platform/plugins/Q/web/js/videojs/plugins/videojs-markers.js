@@ -14,10 +14,10 @@
         markerTip: {
             display: true,
             text: function(marker) {
-                return "Break: "+ marker.text;
+                return marker ? "Break: "+ marker.text : null;
             },
             time: function(marker) {
-                return marker.time;
+                return marker ? marker.time : null;
             }
         },
         breakOverlay:{
