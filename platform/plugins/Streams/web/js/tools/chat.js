@@ -531,12 +531,13 @@ Q.Tool.define('Streams/chat', function(options) {
 						var stream = this;
 
 						var streamType = stream.fields.type;
-						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-							if (streamType === 'Streams/webrtc') {
-								tool.startWebRTC();
-								return;
-							}
 
+						if (streamType === 'Streams/webrtc') {
+							// Streams/webrtc/preview tool handle click event itself
+							return;
+						}
+
+						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
 							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
 							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
 							var toolName = null;
