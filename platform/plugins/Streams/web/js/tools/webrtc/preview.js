@@ -60,7 +60,7 @@
                     roomId: stream.fields.name.split('/').pop(),
                     roomPublisherId: stream.fields.publisherId,
                     mode: 'node',
-                    startWith: {video: true, audio: true},
+                    startWith: {video: false, audio: true},
                     onWebRTCRoomCreated: function() {
                         console.log('onWebRTCRoomCreated', this);
                     },
