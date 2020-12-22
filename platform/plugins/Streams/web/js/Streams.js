@@ -577,9 +577,14 @@ Q.Tool.define({
 	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
 	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
+	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
+	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
+	"Streams/answer/preview": "{{Streams}}/js/tools/answer/preview.js",
+	"Streams/question": "{{Streams}}/js/tools/question.js",
+	"Streams/experience": "{{Streams}}/js/tools/experience.js",
 	"Streams/player": function () {
 		// does nothing
 	},

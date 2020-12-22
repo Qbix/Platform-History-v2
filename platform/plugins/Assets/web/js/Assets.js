@@ -566,8 +566,8 @@
 			applePayCordova: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
-				var applePayConfig = Q.getObject("Q.Assets.Payments.applePay");
-				if (!applePayConfig) {
+				var merchantIdentifier = Q.getObject("Assets.Payments.applePay.merchantIdentifier", Q);
+				if (!merchantIdentifier) {
 					return _redirectToBrowserTab(options);
 				}
 
@@ -589,7 +589,7 @@
 						}],
 						supportedNetworks: supportedNetworks,
 						merchantCapabilities: merchantCapabilities,
-						merchantIdentifier: applePayConfig.merchantIdentifier,
+						merchantIdentifier: merchantIdentifier,
 						currencyCode: options.currency,
 						countryCode: 'US',
 						billingAddressRequirement: options.shippingAddress ? 'all' : 'none',

@@ -12,7 +12,12 @@ function Assets_before_Q_responseExtras() {
 			Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.jsLibrary', $jsLibrary);
 		}
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.publishableKey', $publishableKey);
-		Q_Response::setScriptData('Q.plugins.Assets.Payments.applePay.merchantIdentifier', Q_Config::get('Assets', 'payments', 'applePay', 'merchantIdentifier', null));
+
+		$applPayMerchantId = Q_Config::get('Assets', 'payments', 'applePay', 'merchantIdentifier', null);
+		if ($applPayMerchantId) {
+			Q_Response::setScriptData('Q.plugins.Assets.Payments.applePay.merchantIdentifier', $applPayMerchantId);
+		}
+
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.googlePay', Q_Config::get('Assets', 'payments', 'googlePay', null));
 		Q_Response::setScriptData('Q.plugins.Assets.Payments.stripe.version', Q_Config::get('Assets', 'payments', 'stripe', 'version', null));
 	}

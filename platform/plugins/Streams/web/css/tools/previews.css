@@ -227,6 +227,36 @@
 /* <Streams_pdf_preview> */
 /* </Streams_pdf_preview> */
 
+/* <Streams_question_preview> */
+.Streams_dialog_newQuestion .Q_dialog_content,
+.Streams_dialog_answer .Q_dialog_content {
+	padding: 10px;
+	min-width: 300px;
+}
+.Streams_question_preview_tool + .Streams_related_tool {
+	margin-left: 40px;
+}
+.Streams_question_preview_tool + .Streams_related_tool:not(:last-of-type) {
+	margin-bottom: 5px;
+}
+.Streams_question_preview_tool + .Streams_related_tool .Streams_related_composer {
+	display: none;
+}
+.Streams_question_preview_tool:not(:last-of-type),
+.Streams_answer_preview_tool:not(:last-of-type) {
+	margin-bottom: 5px;
+}
+.Streams_answer_preview_tool .Streams_preview_icon {
+	visibility: hidden;
+}
+.Streams_answer_preview_tool .Users_avatar_tool {
+	margin-right: 5px;
+}
+.Streams_answer_preview_tool .Users_avatar_name {
+	display: none;
+}
+/* </Streams_question_preview> */
+
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
 .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
 	white-space: nowrap;
