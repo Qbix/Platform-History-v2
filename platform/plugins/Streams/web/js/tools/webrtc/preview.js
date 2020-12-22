@@ -82,7 +82,7 @@
 						Q.handle(state.onRender, tool);
 					});
 				},
-				state.templates[tpl]
+				state.templates.view
 			);
 
             setTimeout(function () {
