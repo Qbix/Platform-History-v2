@@ -53,7 +53,7 @@
             // retain with stream
             Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
 
-			var fields = Q.extend({}, state.templates[view].fields, f, {
+			var fields = Q.extend({}, state.templates.view.fields, {
 				alt: 'icon',
 				title: stream.fields.title,
 				inplace: inplace,
