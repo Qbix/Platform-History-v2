@@ -639,7 +639,7 @@ Q.Tool.define("Q/columns", function(options) {
 				var $ct = $('.Q_columns_title', $div);
 				
 				var $prev = $div.prev();
-				$div.css('z-index', $prev.css('z-index')+1 || 1);
+				$div.css('z-index', parseInt($prev.css('z-index'))+1 || 1);
 				
 				if (Q.info.isMobile) {
 					$div.add($ct).css('width', '100%');

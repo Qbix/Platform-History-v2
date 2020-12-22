@@ -83,7 +83,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		});
 		Q.Streams.refresh.beforeRequest.add(function () {
-			if (state.stream) {
+			if (state.stream && state.stream.refrresh) {
 				state.stream.refresh(null, {messages: true});
 			}
 		}, tool);

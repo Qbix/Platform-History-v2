@@ -103,6 +103,8 @@
             this.participantListEl = null;
             this.participantsList = [];
             this.chatBox = this.chatDialogue = null;
+			
+			$(this.element).addClass('Q_floatAboveDocument');
 
 			if (!options.webRTClibraryInstance || !options.webrtcClass) {
 				throw "Video room should be created";

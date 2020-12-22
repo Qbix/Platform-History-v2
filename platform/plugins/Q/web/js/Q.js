@@ -7370,7 +7370,8 @@ Q.request = function (url, slotNames, callback, options) {
 					if (xmlhttp.status == 200) {
 						onSuccess.call(xmlhttp, xmlhttp.responseText);
 					} else {
-						console.log("Q.request xhr: " + xmlhttp.status + ' ' + xmlhttp.responseText.substr(1000));
+						console.log("Q.request xhr: " + xmlhttp.status + ' ' 
+							+ xmlhttp.responseText.substr(xmlhttp.responseText.indexOf('<body')));
 						onCancel.call(xmlhttp, xmlhttp.status);
 					}
 				}
