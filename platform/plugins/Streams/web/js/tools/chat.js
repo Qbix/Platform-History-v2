@@ -1187,8 +1187,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		
 		}
-		
-		Q.Streams.retainWith(this).get(state.publisherId, state.streamName, function () {
+
+		// for some reason stream get from cache with wrong messageCount field
+		Q.Streams.retainWith(this).get.force(state.publisherId, state.streamName, function () {
 			state.stream = this;
 			tool.more(function () {
 				_render.apply(this, arguments);
