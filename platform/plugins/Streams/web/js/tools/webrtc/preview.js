@@ -85,13 +85,6 @@
 				state.templates.view
 			);
 
-            setTimeout(function () {
-                $toolElement.tool("Streams/preview", {
-                    publisherId: state.publisherId,
-                    streamName: state.streamName
-                }).tool("Streams/default/preview").activate();
-            }, 0);
-
             $toolElement.on(Q.Pointer.fastclick, function () {
                 var WebConference = Q.Streams.WebRTC();
                 WebConference.start({
