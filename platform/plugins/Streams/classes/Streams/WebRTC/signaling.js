@@ -80,6 +80,16 @@ module.exports = function(socket,io) {
         socket.to(nspName + '#' + message.targetSid).emit('Streams/webrtc/signalling', message);
     });
 
+    const getMethods = (obj) => {
+        let properties = new Set()
+        let currentObj = obj
+        do {
+            Object.getOwnPropertyNames(currentObj).map(item => properties.add(item))
+        } while ((currentObj = Object.getPrototypeOf(currentObj)))
+        return [...properties.keys()].filter(item => typeof obj[item] === 'function')
+    }
+
+    //console.log('Q.plugins.Streams', getMethods(Q.plugins.Streams));
     socket.on('disconnect', function() {
         if(!roomId) return;
         if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Streams/webrtc/' + roomId);
@@ -91,6 +101,7 @@ module.exports = function(socket,io) {
                         return;
                     }
                     stream.setAttribute('endTime', +Date.now());
+                    stream.fields.closedTime = +Date.now();
                     stream.save();
                     }
                 )

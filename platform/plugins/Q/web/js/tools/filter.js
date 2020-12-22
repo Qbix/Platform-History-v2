@@ -70,22 +70,7 @@ Q.Tool.define('Q/filter', function (options) {
 		setTimeout(function () {
 			tool.cancelBegin = false;
 		}, 500);
-	}).on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed)
-	.on(Q.Pointer.fastclick, function (evt) {
-		var $this = $(this);
-		var xMax = $this.offset().left + $this.outerWidth(true) -
-			parseInt($this.css('margin-right'));
-		var xMin = xMax - parseInt($this.css('padding-right'));
-		var x = Q.Pointer.getX(evt);
-		if (xMin < x && x < xMax) {
-			$this.val('').trigger('Q_refresh');
-			setTimeout(function () {
-				state.onClear.handle.call(tool);
-				tool.end();	
-			}, 0);
-			return false;
-		}
-	});
+	}).on('keydown keyup change input focus paste blur Q_refresh Q_refresh_filter', _changed);
 	$te.addClass(state.fullscreen ? 'Q_filter_fullscreen' : 'Q_filter_notFullscreen');
 	
 	tool.$results.on(Q.Pointer.start.eventName + ' ' + Q.Pointer.end.eventName, function () {
@@ -98,6 +83,19 @@ Q.Tool.define('Q/filter', function (options) {
 		if (event.keyCode === 27) {
 			$this.val('');
 			tool.end();
+		}
+
+		// check if clicked clear icon
+		if (event.type === Q.Pointer.start.eventName) {
+			var xMax = $this.offset().left + $this.outerWidth(true) -
+				parseInt($this.css('margin-right'));
+			var xMin = xMax - parseInt($this.css('padding-right'));
+			var x = Q.Pointer.getX(event);
+			if (xMin < x && x < xMax) {
+				$this.val('').trigger('Q_refresh');
+				state.onClear.handle.call(tool);
+				tool.end();
+			}
 		}
 		if (!tool.cancelRemoveClass) {
 			tool.$input.removeClass('Q_filter_chose');
