@@ -11,6 +11,8 @@
             var tool = this;
             var state = this.state;
             tool.preview = preview;
+			
+			preview.state.editable = false;
 
             //preview.state.creatable.preprocess = tool.composer.bind(this);
 
