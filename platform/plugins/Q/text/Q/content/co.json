@@ -98,5 +98,23 @@
         "inHour": "in {{h}} ora",
         "inHours": "in {{h}} ore",
         "inUnderMinute": "in menu di 1 minutu"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Nisuna surghjente video"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Nisuna surghjente pdf"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip Fine"
+    },
+    "tabs": {
+        "more": "più",
+        "Menu": "Menu"
     }
 }

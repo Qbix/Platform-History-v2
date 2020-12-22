@@ -4,7 +4,7 @@
 	 * @class Websites/webpage/composer
 	 * @constructor
 	 * @param {Object} [options] this is an object that contains parameters for this function
-	 * @param {Object} [options.categoryStream] Object with publisherId and streamName of stream where to need to
+	 * @param {Object} [options.categoryStream] Object with publisherId, streamName, relationType of stream where to need to
 	 * relate new Websites/webpage stream.
 	 * @param {Object} [options.relationType] Type of relation to category stream.
 	 * @param {Q.Event} [options.onScrape] fires when the tool successfully scrapes a webpage
@@ -40,9 +40,9 @@
 	{
 		categoryStream: {
 			publisherId: Q.Users.communityId,
-			streamName: 'Streams/chats/main'
+			streamName: 'Streams/chats/main',
+			relationType: 'Websites/webpage'
 		},
-		relationType: 'Websites/webpage',
 		onScrape: new Q.Event(),
 		onCreate: new Q.Event()
 	},
@@ -120,29 +120,32 @@
 							return Q.alert(msg);
 						}
 
-						state.siteData = response.slots.result;
+						var siteData = response.slots.result;
 
 						$te.removeClass('Websites_webpage_loading');
 
-						if (state.siteData.alreadyExist) {
+						if (siteData.alreadyExist) {
 							$message.hide();
 							$message.closest(".Q_autogrow_container").hide();
 							$startButton.html(tool.text.webpage.composer.GotoConversation);
 						}
 
 						tool.$(".Websites_webpage_composer").tool("Websites/webpage/preview", {
-							title: state.siteData.title,
-							description: state.siteData.description,
-							keywords: state.siteData.keywords || '',
+							title: siteData.title,
+							description: siteData.description,
+							keywords: siteData.keywords || '',
 							interest: {
-								title: ' ' + state.siteData.host,
-								icon: state.siteData.smallIcon,
+								title: ' ' + siteData.host,
+								icon: siteData.iconSmall,
 							},
-							src: state.siteData.bigIcon,
-							url: state.siteData.url
-						}, Date.now()).activate();
+							src: siteData.iconBig,
+							url: url
+						}, Date.now()).activate(function () {
+							$startButton.removeClass('Q_disabled');
 
-						$startButton.removeClass('Q_disabled');
+							// save url in state to use later
+							state.url = url;
+						});
 
 						Q.handle(state.onScrape, tool);
 					}, {
@@ -164,15 +167,14 @@
 			var state = this.state;
 			var $message = tool.$('textarea[name=message]');
 
-			Q.req("Websites/webpage", ["data"], function (err, response) {
+			Q.req("Websites/webpage", ["publisherId", "streamName"], function (err, response) {
 				var msg = Q.firstErrorMessage(err, response && response.errors);
 				if (msg) {
 					return Q.alert(msg);
 				}
 
-				var slot = response.slots.data;
-				state.publisherId = slot.publisherId;
-				state.streamName = slot.streamName;
+				state.publisherId = response.slots.publisherId;
+				state.streamName = response.slots.streamName;
 
 				Q.handle(state.onCreate, tool);
 				Q.handle(callback);
@@ -180,9 +182,8 @@
 				method: 'post',
 				fields: {
 					action: 'start',
-					data: state.siteData,
+					url: state.url,
 					categoryStream: state.categoryStream,
-					relationType: state.relationType,
 					message: $message.val()
 				}
 			});

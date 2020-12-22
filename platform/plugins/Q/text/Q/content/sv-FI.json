@@ -98,5 +98,8 @@
         "inHour": "om {{h}} timme",
         "inHours": "om {{h}} timmar",
         "inUnderMinute": "på under 1 minut"
+    },
+    "tabs": {
+        "more": "Mer"
     }
 }

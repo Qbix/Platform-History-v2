@@ -98,5 +98,23 @@
         "inHour": "în {{h}} oră",
         "inHours": "în {{h}} ore",
         "inUnderMinute": "în sub 1 minut"
+    },
+    "tabs": {
+        "more": "Mai Mult",
+        "Menu": "Meniul"
+    },
+    "video": {
+        "clip": "clamă",
+        "errorNoSource": "Fără sursă video"
+    },
+    "pdf": {
+        "clip": "clamă",
+        "errorNoSource": "Fără sursă pdf"
+    },
+    "clip": {
+        "SetClipStart": "Setați Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Setați Clip End",
+        "ClipEnd": "Clip End"
     }
 }

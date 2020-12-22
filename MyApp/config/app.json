@@ -25,7 +25,7 @@
 		},
 		"routes": {
 			"facebook/:action": {"module": "MyApp", "facebook": 1},
-			":action": {"module": "MyApp"},
+			":action": {"module": "MyApp", "": "MyApp/moduleCanHandle"},
 			"": {"module": "MyApp", "action": "welcome"}
 		},
 		"response": {
@@ -34,7 +34,8 @@
 			"layout": {
 				"desktop": "MyApp/layout/desktop.php",
 				"tablet": "MyApp/layout/tablet.php",
-				"mobile": "MyApp/layout/mobile.php"
+				"mobile": "MyApp/layout/mobile.php",
+				"sidebar": false
 			},
 			"cacheBaseUrl": "https://myapp.intercept"
 		},

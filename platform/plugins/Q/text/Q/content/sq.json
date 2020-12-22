@@ -98,5 +98,23 @@
         "inHour": "në {999}} orë",
         "inHours": "në {999}} orë",
         "inUnderMinute": "në nën 1 minutë"
+    },
+    "tabs": {
+        "more": "më shumë",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Asnjë burim video"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Asnjë burim pdf"
+    },
+    "clip": {
+        "SetClipStart": "Vendos Clip Start",
+        "ClipStart": "Fillo klipin",
+        "SetClipEnd": "Cakto fundin e klipit",
+        "ClipEnd": "Fundi i Klipit"
     }
 }

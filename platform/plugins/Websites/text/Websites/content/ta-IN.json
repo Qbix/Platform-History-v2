@@ -24,8 +24,17 @@
             "BrowseTheWeb": "உலாவ",
             "WriteToStartConversation": "உரையாடலைத் தொடங்க உங்கள் எண்ணங்களை எழுதுங்கள்",
             "StartConversation": "உரையாடலைத் தொடங்குங்கள்",
-            "GotoConversation": "உரையாடலுக்குச் செல்லவும்"
-        }
+            "GotoConversation": "உரையாடலுக்குச் செல்லவும்",
+            "reset": "மீட்டமை",
+            "edit": "தொகு",
+            "link": "இணைப்பு",
+            "setUrl": "URL ஐ அமைக்கவும்",
+            "save": "சேமி",
+            "setClip": "கட் அவுட் கிளிப்",
+            "invalidURL": "தவறான வலைதள முகவரி"
+        },
+        "FileTooLarge": "தேக்ககத்திற்கு கோப்பு மிகப் பெரியது. அதிகபட்ச கோப்பு அளவு {{size}}",
+        "InvalidPDF": "கோப்பு சரியான PDF அல்ல"
     },
     "types": {
         "Websites/article": {

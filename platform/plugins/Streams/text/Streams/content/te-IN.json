@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ఈ సంభాషణలో చేరడానికి మీకు అనుమతి లేదు.",
         "startedConversation": "సంభాషణను ప్రారంభించారు",
         "RealTimeCall": "రియల్ టైమ్ కాల్",
-        "SearchByName": "పేరు ద్వారా శోధించండి"
+        "SearchByName": "పేరు ద్వారా శోధించండి",
+        "Notifications": {
+            "Visit": "{{999} the చాట్‌ను సందర్శిస్తున్నారు",
+            "Join": "{{999} the చాట్‌లో చేరారు",
+            "Leave": "{{999} the చాట్ నుండి నిష్క్రమించారు",
+            "RelatedTo": "{{999} a ప్రారంభమైంది {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "{{& stream.fields.title}} కి సందేశం {{& message.fields.type}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} లో క్రొత్త {{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{999} to కు {{1000} as గా జోడించబడింది",
         "Streams/mention": "{{999} you మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
-        "Streams/call": "{{999} you మిమ్మల్ని పిలుస్తోంది"
+        "Streams/call": "{99 999} a నిజ-సమయ కాల్‌ను ప్రారంభించింది"
     },
     "invite": {
         "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}} కి ఆహ్వానించారు",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "మీరు ఖచ్చితంగా ఈ పరికరాన్ని చందాను తొలగించారా? ఇది ఈ పరికరానికి నోటిఫికేషన్‌లను ఆపివేస్తుంది.",
         "Identifiers": "ఐడెంటిఫైఎర్స్",
         "Devices": "పరికరాల",
-        "Streams": "Streams"
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "మీరు ఖచ్చితంగా ఈ పాల్గొనేవారిని తొలగించాలనుకుంటున్నారా?",
+        "RemoveParticipant": "పాల్గొనేవారిని తొలగించండి"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని దాచండి",
             "turnOnCamera": "వీడియో చూపించు",
             "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
-            "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు"
+            "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు",
+            "fullScreen": "పూర్తి స్క్రీన్"
         },
         "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
         "streamTitle": "{{1}} ప్రత్యక్ష కాల్"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "చిత్రం",
-            "description": "దృశ్య చిత్రం"
+            "description": "దృశ్య చిత్రం",
+            "newItem": "చిత్రాన్ని జోడించండి"
         },
         "Streams/images": {
             "displayType": "చిత్ర గ్యాలరీ",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ఫైలు",
-            "description": "అప్‌లోడ్ చేసిన ఫైల్"
+            "description": "అప్‌లోడ్ చేసిన ఫైల్",
+            "newItem": "ఫైల్‌ను జోడించండి"
         },
         "Streams/audio": {
             "displayType": "ఆడియో క్లిప్",
-            "description": "ఆడియో క్లిప్"
+            "description": "ఆడియో క్లిప్",
+            "newItem": "ఆడియోని జోడించండి"
         },
         "Streams/video": {
             "displayType": "వీడియో క్లిప్",
-            "description": "వీడియో క్లిప్"
+            "description": "వీడియో క్లిప్",
+            "newItem": "వీడియోను జోడించండి"
         },
         "Streams/live": {
             "displayType": "అంతర్జాలం ద్వారా ప్రత్యక్ష ప్రసారం",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "ఒక వినియోగదారు తమను తాము పరిచయం చేసుకోగలిగే గ్రీటింగ్",
             "displayType": "గ్రీటింగ్"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF పత్రం",
+            "description": "PDF పత్రం",
+            "newItem": "PDF ని జోడించండి"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ఈ కంటెంట్ మీ నుండి దాచబడింది."
+    },
+    "audio": {
+        "record": "రికార్డ్",
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించండి",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URL ను సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "ఆడియో మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
+    },
+    "video": {
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించండి",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URL ను సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "వీడియో మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
+    },
+    "pdf": {
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించండి",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URL ను సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "పిడిఎఫ్ మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
+    },
+    "image": {
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించండి",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URL ను సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "చిత్ర మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
     }
 }

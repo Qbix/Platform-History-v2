@@ -98,5 +98,23 @@
         "inHour": "за {{h}} час",
         "inHours": "за {{h}} часа",
         "inUnderMinute": "за по-малко от 1 минута"
+    },
+    "tabs": {
+        "more": "Повече ▼",
+        "Menu": "Меню"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Няма видео източник"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "Няма PDF източник"
+    },
+    "clip": {
+        "SetClipStart": "Задайте Clip Start",
+        "ClipStart": "Клип Старт",
+        "SetClipEnd": "Задайте края на клипа",
+        "ClipEnd": "Край на клипа"
     }
 }

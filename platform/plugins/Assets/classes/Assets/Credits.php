@@ -66,9 +66,11 @@ class Assets_Credits extends Base_Assets_Credits
 			));
 
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
-			self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
-				'communityId' => Users::communityId()
-			));
+			if ($amount > 0) {
+				self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
+					'communityId' => Users::communityId()
+				));
+			}
 		}
 		return $stream;
 	}
@@ -211,7 +213,7 @@ class Assets_Credits extends Base_Assets_Credits
 	}
 	/**
 	 * Grant credits to a user
-	 * @method earn
+	 * @method grant
 	 * @static
 	 * @param {integer} $amount The amount of credits to grant.
 	 * @param {string} $reason Identifies the reason for granting the credits. Can't be null.
@@ -245,7 +247,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
 		$stream->changed();
 
-		self::createRow($amount, $reason, $userId, null, $more);
+		$assets_credits = self::createRow($amount, $reason, $userId, null, $more);
+		$more = self::fillInstructions($assets_credits, $more);
 
 		// Post that this user granted $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
@@ -328,17 +331,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream->setAttribute('amount', $existing_amount - $amount);
 		$from_stream->changed();
 
-		$more['amount'] = $amount;
-		$more['toUserName'] = $assets_credits->getAttribute("toUserName");
-		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
-		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
-		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
-		$more['toUserId'] = $assets_credits->toUserId;
-		$more['fromUserId'] = $assets_credits->fromUserId;
-		$more['fromPublisherId'] = $assets_credits->fromPublisherId;
-		$more['fromStreamName'] = $assets_credits->fromStreamName;
-		$more['toPublisherId'] = $assets_credits->toPublisherId;
-		$more['toStreamName'] = $assets_credits->toStreamName;
+		$more = self::fillInstructions($assets_credits, $more);
 
 		$instructions = array_merge(
 			array(
@@ -376,6 +369,30 @@ class Assets_Credits extends Base_Assets_Credits
 			'content' => Q::interpolate($content, $more),
 			'instructions' => Q::json_encode($instructions)
 		));
+	}
+	/**
+	 * Fill message instructions with needed info
+	 * @method fillInstructions
+	 * @static
+	 * @param {Assets_Credits} $assetsCredits Assets credits row.
+	 * @param {array} [$more=array()] Predefined instructions array.
+	 * @return {Array}
+	 */
+	private static function fillInstructions ($assetsCredits, $more = array()) {
+		$more['messageId'] = $assetsCredits->id;
+		$more['amount'] = $assetsCredits->credits;
+		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
+		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
+		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
+		$more['fromStreamTitle'] = $assetsCredits->getAttribute("fromStreamTitle");
+		$more['toUserId'] = $assetsCredits->toUserId;
+		$more['fromUserId'] = $assetsCredits->fromUserId;
+		$more['fromPublisherId'] = $assetsCredits->fromPublisherId;
+		$more['fromStreamName'] = $assetsCredits->fromStreamName;
+		$more['toPublisherId'] = $assetsCredits->toPublisherId;
+		$more['toStreamName'] = $assetsCredits->toStreamName;
+
+		return $more;
 	}
 	/**
 	 * Create row in Assets_Credits table
@@ -466,8 +483,8 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	static function reasonToText($key, $more = array())
 	{
-		$tests = Q_Text::get('Assets/content');
-		$text = Q::ifset($tests, 'credits', $key, null);
+		$texts = Q_Text::get('Assets/content');
+		$text = Q::ifset($texts, 'credits', $key, null);
 
 		if ($text && $more) {
 			$text = Q::interpolate($text, $more);

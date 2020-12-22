@@ -32,7 +32,12 @@
         "Buy": "Bumili",
         "Credits": "Mga Kredito",
         "ErrorInvalidAmount": "Hindi wasto ang halaga",
-        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang pera {{currency}}"
+        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang pera {{currency}}",
+        "WatchClip": "Kumita ng mga kredito sa {{amount}} para sa panonood ng {{fromStreamTitle}}",
+        "PurchaseCredits": "Bumili ng Mga Kredito",
+        "forMessages": {
+            "BoughtCredits": "Mga kredito ng {{amount}}"
+        }
     },
     "history": {
         "Date": "Petsa",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Opsyonal na kontribusyon",
         "RequiredPayment": "Kinakailangan na pagbabayad",
         "AreYouSureDelete": "Sigurado ka bang gusto mong tanggalin ang serbisyong ito?",
-        "AmountServicesRelated": "Mayroong mga {{amount}} availability na may kaugnayan sa serbisyong ito. Aalisin din sila."
+        "AmountServicesRelated": "Mayroong mga {{amount}} availability na may kaugnayan sa serbisyong ito. Aalisin din sila.",
+        "Free": "Libre"
     }
 }

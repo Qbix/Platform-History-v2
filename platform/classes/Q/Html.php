@@ -1236,7 +1236,9 @@ class Q_Html
 			++ $i;
 		}
 		if (!empty($hash) and ($ltag === 'link' or $ltag === 'script')) {
-			$result .= ' integrity="sha256-' . $hash . '"';
+			if (empty($attributes['rel']) or $attributes['rel'] !== 'preload') {
+				$result .= ' integrity="sha256-' . $hash . '"';
+			}
 		}
 		return $result;
 	}
@@ -1582,5 +1584,26 @@ class Q_Html
 	 * @protected
 	 */
 	protected static $tool_ids = array(null);
+	
+	static $preloadAs = array(
+		'ttf' => 'font',
+		'ottf' => 'font',
+		'woff' => 'font',
+		'woff2' => 'font',
+		'eot' => 'font',
+		'mp3' => 'audio',
+		'ogg' => 'audio',
+		'png' => 'image',
+		'gif' => 'image',
+		'jpg' => 'image',
+		'jpeg' => 'image',
+		'tiff' => 'image',
+		'webm' => 'image',
+		'mp4' => 'video',
+		'wmv' => 'video',
+		'mov' => 'video',
+		'avi' => 'video',
+		'flv' => 'video'
+	);
 
 }

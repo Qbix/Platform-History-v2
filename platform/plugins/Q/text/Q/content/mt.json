@@ -98,5 +98,23 @@
         "inHour": "f &#39;{{h}} siegħa",
         "inHours": "f &#39;{{h}} sigħat",
         "inUnderMinute": "fl-inqas 1 minuta"
+    },
+    "tabs": {
+        "more": "aktar",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "klipp",
+        "errorNoSource": "L-ebda sors tal-vidjo"
+    },
+    "pdf": {
+        "clip": "klipp",
+        "errorNoSource": "L-ebda sors pdf"
+    },
+    "clip": {
+        "SetClipStart": "Issettja Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Issettja t-Tmiem tal-Klipp",
+        "ClipEnd": "Clip End"
     }
 }

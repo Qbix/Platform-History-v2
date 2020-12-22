@@ -98,5 +98,23 @@
         "inHour": "дар {{h}} соат",
         "inHours": "дар {{h}} соат",
         "inUnderMinute": "дар зери 1 дақиқа"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Манбаи видеоӣ нест"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "Манбаи PDF нест"
+    },
+    "clip": {
+        "SetClipStart": "Клипи Оғозро таъин кунед",
+        "ClipStart": "Клип Оғоз",
+        "SetClipEnd": "Анҷоми клипро таъин кунед",
+        "ClipEnd": "Клипи хотима"
+    },
+    "tabs": {
+        "more": "Бештар",
+        "Menu": "Меню"
     }
 }

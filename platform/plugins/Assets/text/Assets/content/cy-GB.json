@@ -32,7 +32,12 @@
         "Buy": "Prynu",
         "Credits": "Credydau",
         "ErrorInvalidAmount": "Swm yn annilys",
-        "ErrorInvalidCurrency": "Yn anffodus nid ydym yn cefnogi arian cyfred {{currency}} eto"
+        "ErrorInvalidCurrency": "Yn anffodus nid ydym yn cefnogi arian cyfred {{currency}} eto",
+        "WatchClip": "Credydau {{amount}} a enillwyd am wylio {{fromStreamTitle}}",
+        "PurchaseCredits": "Credydau Prynu",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} credyd"
+        }
     },
     "history": {
         "Date": "Dyddiad",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Cyfraniad dewisol",
         "RequiredPayment": "Taliad gofynnol",
         "AreYouSureDelete": "Ydych chi&#39;n siŵr eich bod chi am ddileu&#39;r gwasanaeth hwn?",
-        "AmountServicesRelated": "Mae {{amount}} argaeledd yn gysylltiedig â&#39;r gwasanaeth hwn. Maent hefyd yn cael eu tynnu."
+        "AmountServicesRelated": "Mae {{amount}} argaeledd yn gysylltiedig â&#39;r gwasanaeth hwn. Maent hefyd yn cael eu tynnu.",
+        "Free": "Am ddim"
     }
 }

@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "visuele beeld"
+            "description": "visuele beeld",
+            "newItem": "Voeg prentjie by"
         },
         "Streams\/images": {
             "displayType": "Prentgalery",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "lêer",
-            "description": "opgelaaide lêer"
+            "description": "opgelaaide lêer",
+            "newItem": "Voeg lêer by"
         },
         "Streams\/audio": {
             "displayType": "Klankgreep",
-            "description": "klankgreep"
+            "description": "klankgreep",
+            "newItem": "Voeg klank by"
         },
         "Streams\/video": {
             "displayType": "Videoklip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Voeg video by"
         },
         "Streams\/live": {
             "displayType": "Lewendige stroom",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "groet waarmee &#39;n gebruiker hulself kan voorstel",
             "displayType": "groet"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Voeg PDF by"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Hierdie inhoud is vir u weggesteek."
+    },
+    "audio": {
+        "record": "Neem op",
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen klankbron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "video": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen video-bron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "pdf": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen pdf-bron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "image": {
+        "reset": "Stel terug",
+        "edit": "Wysig",
+        "title": "titel",
+        "description": "beskrywing",
+        "upload": "Laai op",
+        "link": "Skakel",
+        "setUrl": "Stel URL",
+        "save": "Stoor",
+        "setClip": "Knipknip uit",
+        "invalidURL": "Ongeldige URL",
+        "invalidFile": "Ongeldige lêer",
+        "errorNoSource": "Geen beeldbron nie",
+        "uploadLimit": "Maksimum lêergrootte: {{size}}",
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
     }
 }

@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "រូបភាព",
-            "description": "រូបភាពមើលឃើញ"
+            "description": "រូបភាពមើលឃើញ",
+            "newItem": "បន្ថែមរូបភាព"
         },
         "Streams\/images": {
             "displayType": "វិចិត្រសាលរូបភាព",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ឯកសារ",
-            "description": "ឯកសារដែលបានផ្ទុកឡើង"
+            "description": "ឯកសារដែលបានផ្ទុកឡើង",
+            "newItem": "បន្ថែមឯកសារ"
         },
         "Streams\/audio": {
             "displayType": "ឈុតសំលេង",
-            "description": "ឈុតសំលេង"
+            "description": "ឈុតសំលេង",
+            "newItem": "បន្ថែមអូឌីយ៉ូ"
         },
         "Streams\/video": {
             "displayType": "ឈុតវីដេអូ",
-            "description": "ឈុតវីដេអូ"
+            "description": "ឈុតវីដេអូ",
+            "newItem": "បន្ថែមវីដេអូ"
         },
         "Streams\/live": {
             "displayType": "ផ្សាយ​ផ្ទាល់",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "ការហៅពេលវេលាពិតប្រាកដ",
             "description": "ការហៅជាវីដេអូ \/ អូឌីយ៉ូពេលវេលាពិត"
+        },
+        "Streams\/pdf": {
+            "displayType": "ឯកសារ PDF",
+            "description": "ឯកសារ PDF",
+            "newItem": "បន្ថែម PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "មាតិកានេះត្រូវបានលាក់ពីអ្នក។"
+    },
+    "audio": {
+        "record": "កំណត់ត្រា",
+        "reset": "កំណត់ឡើងវិញ",
+        "edit": "កែសម្រួល",
+        "title": "ចំណងជើង",
+        "description": "ការពិពណ៌នា",
+        "upload": "ផ្ទុកឡើង",
+        "link": "តំណ",
+        "setUrl": "កំណត់ URL",
+        "save": "រក្សាទុក",
+        "setClip": "កាត់ឈុតចេញ",
+        "invalidURL": "URL មិនត្រឹមត្រូវ",
+        "invalidFile": "ឯកសារមិនត្រឹមត្រូវ",
+        "errorNoSource": "គ្មានប្រភពសំឡេងទេ",
+        "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
+        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
+    },
+    "video": {
+        "reset": "កំណត់ឡើងវិញ",
+        "edit": "កែសម្រួល",
+        "title": "ចំណងជើង",
+        "description": "ការពិពណ៌នា",
+        "upload": "ផ្ទុកឡើង",
+        "link": "តំណ",
+        "setUrl": "កំណត់ URL",
+        "save": "រក្សាទុក",
+        "setClip": "កាត់ឈុតចេញ",
+        "invalidURL": "URL មិនត្រឹមត្រូវ",
+        "invalidFile": "ឯកសារមិនត្រឹមត្រូវ",
+        "errorNoSource": "គ្មានប្រភពវីដេអូទេ",
+        "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
+        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
+    },
+    "pdf": {
+        "reset": "កំណត់ឡើងវិញ",
+        "edit": "កែសម្រួល",
+        "title": "ចំណងជើង",
+        "description": "ការពិពណ៌នា",
+        "upload": "ផ្ទុកឡើង",
+        "link": "តំណ",
+        "setUrl": "កំណត់ URL",
+        "save": "រក្សាទុក",
+        "setClip": "កាត់ឈុតចេញ",
+        "invalidURL": "URL មិនត្រឹមត្រូវ",
+        "invalidFile": "ឯកសារមិនត្រឹមត្រូវ",
+        "errorNoSource": "គ្មានប្រភព pdf ទេ",
+        "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
+        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
+    },
+    "image": {
+        "reset": "កំណត់ឡើងវិញ",
+        "edit": "កែសម្រួល",
+        "title": "ចំណងជើង",
+        "description": "ការពិពណ៌នា",
+        "upload": "ផ្ទុកឡើង",
+        "link": "តំណ",
+        "setUrl": "កំណត់ URL",
+        "save": "រក្សាទុក",
+        "setClip": "កាត់ឈុតចេញ",
+        "invalidURL": "URL មិនត្រឹមត្រូវ",
+        "invalidFile": "ឯកសារមិនត្រឹមត្រូវ",
+        "errorNoSource": "គ្មានប្រភពរូបភាពទេ",
+        "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
+        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
     }
 }

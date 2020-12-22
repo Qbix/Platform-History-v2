@@ -98,5 +98,23 @@
         "inHour": "n’ime awa {{h}}",
         "inHours": "n’ime awa {{h}}",
         "inUnderMinute": "n&#39;okpuru 1 nkeji"
+    },
+    "video": {
+        "clip": "obere vidiyo",
+        "errorNoSource": "Enweghị isi iyi vidiyo"
+    },
+    "pdf": {
+        "clip": "obere vidiyo",
+        "errorNoSource": "Enweghị isi pdf"
+    },
+    "clip": {
+        "SetClipStart": "Tọọ mkpido mmalite",
+        "ClipStart": "Mbido clip",
+        "SetClipEnd": "Nịm Clip End",
+        "ClipEnd": "Clip Ọgwụgwụ"
+    },
+    "tabs": {
+        "more": "Ọzọ",
+        "Menu": "NchNhr"
     }
 }

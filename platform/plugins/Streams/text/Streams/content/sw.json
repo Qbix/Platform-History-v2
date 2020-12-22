@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Picha",
-            "description": "picha ya kuona"
+            "description": "picha ya kuona",
+            "newItem": "Ongeza Picha"
         },
         "Streams\/images": {
             "displayType": "Picha ya sanaa",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Faili",
-            "description": "faili iliyopakiwa"
+            "description": "faili iliyopakiwa",
+            "newItem": "Ongeza faili"
         },
         "Streams\/audio": {
             "displayType": "Kipande cha Sauti",
-            "description": "kipande cha sauti"
+            "description": "kipande cha sauti",
+            "newItem": "Ongeza Sauti"
         },
         "Streams\/video": {
             "displayType": "Kipande cha picha ya video",
-            "description": "kipande cha picha ya video"
+            "description": "kipande cha picha ya video",
+            "newItem": "Ongeza Video"
         },
         "Streams\/live": {
             "displayType": "Maisha ya moja kwa moja",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "salamu ambayo mtumiaji anaweza kujitambulisha",
             "displayType": "Salamu"
+        },
+        "Streams\/pdf": {
+            "displayType": "Hati ya PDF",
+            "description": "Hati ya PDF",
+            "newItem": "Ongeza PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Yaliyomo hapa siri."
+    },
+    "audio": {
+        "record": "Rekodi",
+        "reset": "Weka upya",
+        "edit": "Hariri",
+        "title": "kichwa",
+        "description": "maelezo",
+        "upload": "Pakia",
+        "link": "Kiungo",
+        "setUrl": "Weka URL",
+        "save": "Okoa",
+        "setClip": "Kata cha picha ya video",
+        "invalidURL": "URL batili",
+        "invalidFile": "Faili batili",
+        "errorNoSource": "Hakuna chanzo cha sauti",
+        "uploadLimit": "Ukubwa wa faili: {{size}}",
+        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
+    },
+    "video": {
+        "reset": "Weka upya",
+        "edit": "Hariri",
+        "title": "kichwa",
+        "description": "maelezo",
+        "upload": "Pakia",
+        "link": "Kiungo",
+        "setUrl": "Weka URL",
+        "save": "Okoa",
+        "setClip": "Kata cha picha ya video",
+        "invalidURL": "URL batili",
+        "invalidFile": "Faili batili",
+        "errorNoSource": "Hakuna chanzo cha video",
+        "uploadLimit": "Ukubwa wa faili: {{size}}",
+        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
+    },
+    "pdf": {
+        "reset": "Weka upya",
+        "edit": "Hariri",
+        "title": "kichwa",
+        "description": "maelezo",
+        "upload": "Pakia",
+        "link": "Kiungo",
+        "setUrl": "Weka URL",
+        "save": "Okoa",
+        "setClip": "Kata cha picha ya video",
+        "invalidURL": "URL batili",
+        "invalidFile": "Faili batili",
+        "errorNoSource": "Hakuna chanzo cha pdf",
+        "uploadLimit": "Ukubwa wa faili: {{size}}",
+        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
+    },
+    "image": {
+        "reset": "Weka upya",
+        "edit": "Hariri",
+        "title": "kichwa",
+        "description": "maelezo",
+        "upload": "Pakia",
+        "link": "Kiungo",
+        "setUrl": "Weka URL",
+        "save": "Okoa",
+        "setClip": "Kata cha picha ya video",
+        "invalidURL": "URL batili",
+        "invalidFile": "Faili batili",
+        "errorNoSource": "Hakuna chanzo cha picha",
+        "uploadLimit": "Ukubwa wa faili: {{size}}",
+        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
     }
 }

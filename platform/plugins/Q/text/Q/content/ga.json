@@ -98,5 +98,23 @@
         "inHour": "in {{h}} uair an chloig",
         "inHours": "in {{h}} uair an chloig",
         "inUnderMinute": "faoi bhun 1 nóiméad"
+    },
+    "tabs": {
+        "more": "níos mó",
+        "Menu": "Roghchlár"
+    },
+    "video": {
+        "clip": "gearrthóg",
+        "errorNoSource": "Gan aon fhoinse físe"
+    },
+    "pdf": {
+        "clip": "gearrthóg",
+        "errorNoSource": "Sin foinse pdf"
+    },
+    "clip": {
+        "SetClipStart": "Socraigh Tosaigh Gearrthóg",
+        "ClipStart": "Gearrthóg Tosaigh",
+        "SetClipEnd": "Socraigh Deireadh Gearrthóg",
+        "ClipEnd": "Gearrthóg"
     }
 }

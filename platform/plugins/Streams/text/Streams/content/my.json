@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "ပုံ",
-            "description": "အမြင်အာရုံပုံရိပ်"
+            "description": "အမြင်အာရုံပုံရိပ်",
+            "newItem": "ပုံထည့်ပါ"
         },
         "Streams\/images": {
             "displayType": "ပုံပြခန်း",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ဖိုင်",
-            "description": "တင်ထားသောဖိုင်"
+            "description": "တင်ထားသောဖိုင်",
+            "newItem": "ဖိုင်ထည့်ပါ"
         },
         "Streams\/audio": {
             "displayType": "အသံကလစ်",
-            "description": "အသံကလစ်"
+            "description": "အသံကလစ်",
+            "newItem": "အသံထည့်ပါ"
         },
         "Streams\/video": {
             "displayType": "ဗီဒီယိုကလစ်",
-            "description": "ဗီဒီယိုကလစ်"
+            "description": "ဗီဒီယိုကလစ်",
+            "newItem": "ဗွီဒီယိုထည့်ပါ"
         },
         "Streams\/live": {
             "displayType": "တိုက်ရိုက်ထုတ်လွှင့်ခြင်း",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Real-Time ခေါ်ဆိုမှု",
             "description": "အမှန်တကယ်အချိန်ဗီဒီယို \/ အသံခေါ်ဆိုမှု"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF စာရွက်စာတမ်း",
+            "description": "PDF စာရွက်စာတမ်း",
+            "newItem": "PDF ထည့်ပါ"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ဤအကြောင်းအရာသည်သင့်ထံမှလျှို့ဝှက်ထားသည်"
+    },
+    "audio": {
+        "record": "စံချိန်တင်",
+        "reset": "ပြန်လည်စတင်",
+        "edit": "တည်းဖြတ်ပါ",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်ပါ",
+        "link": "Link",
+        "setUrl": "URL ထည့်ပါ",
+        "save": "သိမ်းဆည်းပါ",
+        "setClip": "ကလစ်များကိုဖြတ်ယူပါ",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သောဖိုင်",
+        "errorNoSource": "အသံအရင်းအမြစ်မရှိပါ",
+        "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
+        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
+    },
+    "video": {
+        "reset": "ပြန်လည်စတင်",
+        "edit": "တည်းဖြတ်ပါ",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်ပါ",
+        "link": "Link",
+        "setUrl": "URL ထည့်ပါ",
+        "save": "သိမ်းဆည်းပါ",
+        "setClip": "ကလစ်များကိုဖြတ်ယူပါ",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သောဖိုင်",
+        "errorNoSource": "ဗီဒီယိုရင်းမြစ်မရှိပါ",
+        "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
+        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
+    },
+    "pdf": {
+        "reset": "ပြန်လည်စတင်",
+        "edit": "တည်းဖြတ်ပါ",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်ပါ",
+        "link": "Link",
+        "setUrl": "URL ထည့်ပါ",
+        "save": "သိမ်းဆည်းပါ",
+        "setClip": "ကလစ်များကိုဖြတ်ယူပါ",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သောဖိုင်",
+        "errorNoSource": "pdf အရင်းအမြစ်မရှိပါ",
+        "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
+        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
+    },
+    "image": {
+        "reset": "ပြန်လည်စတင်",
+        "edit": "တည်းဖြတ်ပါ",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်ပါ",
+        "link": "Link",
+        "setUrl": "URL ထည့်ပါ",
+        "save": "သိမ်းဆည်းပါ",
+        "setClip": "ကလစ်များကိုဖြတ်ယူပါ",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သောဖိုင်",
+        "errorNoSource": "ပုံအရင်းအမြစ်မရှိပါ",
+        "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
+        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
     }
 }

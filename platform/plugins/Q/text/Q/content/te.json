@@ -98,5 +98,23 @@
         "inHour": "{{h}} గంటలో",
         "inHours": "{{h}} గంటల్లో",
         "inUnderMinute": "1 నిమిషం లోపు"
+    },
+    "tabs": {
+        "more": "మరింత",
+        "Menu": "మెను"
+    },
+    "video": {
+        "clip": "క్లిప్",
+        "errorNoSource": "వీడియో మూలం లేదు"
+    },
+    "pdf": {
+        "clip": "క్లిప్",
+        "errorNoSource": "పిడిఎఫ్ మూలం లేదు"
+    },
+    "clip": {
+        "SetClipStart": "క్లిప్ ప్రారంభాన్ని సెట్ చేయండి",
+        "ClipStart": "క్లిప్ ప్రారంభం",
+        "SetClipEnd": "క్లిప్ ఎండ్ సెట్ చేయండి",
+        "ClipEnd": "క్లిప్ ఎండ్"
     }
 }

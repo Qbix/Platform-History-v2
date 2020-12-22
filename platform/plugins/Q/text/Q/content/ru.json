@@ -98,5 +98,23 @@
         "inHour": "через {{h}} час",
         "inHours": "в {{h}} часах",
         "inUnderMinute": "менее чем за 1 минуту"
+    },
+    "tabs": {
+        "more": "Больше",
+        "Menu": "Меню"
+    },
+    "video": {
+        "clip": "зажим",
+        "errorNoSource": "Нет источника видео"
+    },
+    "pdf": {
+        "clip": "зажим",
+        "errorNoSource": "Нет источника в формате pdf"
+    },
+    "clip": {
+        "SetClipStart": "Установить начало клипа",
+        "ClipStart": "Начало клипа",
+        "SetClipEnd": "Установить конец клипа",
+        "ClipEnd": "Конец клипа"
     }
 }

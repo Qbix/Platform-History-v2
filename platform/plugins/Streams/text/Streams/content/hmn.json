@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Duab",
-            "description": "pom duab"
+            "description": "pom duab",
+            "newItem": "Ntxiv Duab"
         },
         "Streams\/images": {
             "displayType": "Duab Saib",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Cov ntaub ntawv",
-            "description": "ua ntaub ntawv upload"
+            "description": "ua ntaub ntawv upload",
+            "newItem": "Ntxiv Ntaub Ntawv"
         },
         "Streams\/audio": {
             "displayType": "Tsom Xyooj Clip",
-            "description": "suab nkauj"
+            "description": "suab nkauj",
+            "newItem": "Ntxiv Suab"
         },
         "Streams\/video": {
             "displayType": "Daim Video Kab Zuag",
-            "description": "kwv txhiaj clip"
+            "description": "kwv txhiaj clip",
+            "newItem": "Ntxiv Video"
         },
         "Streams\/live": {
             "displayType": "Ciaj sia",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Tiag-Lub sijhawm Hu",
             "description": "lub sijhawm tiag tiag video \/ audio hu"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF ntawv",
+            "description": "PDF ntawv",
+            "newItem": "Ntxiv PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Cov ntsiab lus no tau muab zais los ntawm koj."
+    },
+    "audio": {
+        "record": "Ntaub Ntawv",
+        "reset": "Rov qab pib dua",
+        "edit": "Kho kom raug",
+        "title": "qha",
+        "description": "piav qhia",
+        "upload": "Upload",
+        "link": "Txuas",
+        "setUrl": "Teev URL",
+        "save": "Txuag",
+        "setClip": "Txiav Tawm Clip",
+        "invalidURL": "URL tsis raug",
+        "invalidFile": "Ntaub Ntawv Tsis Txaus",
+        "errorNoSource": "Tsis muaj cov ntaub ntawv tawm suab",
+        "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
+        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
+    },
+    "video": {
+        "reset": "Rov qab pib dua",
+        "edit": "Kho kom raug",
+        "title": "qha",
+        "description": "piav qhia",
+        "upload": "Upload",
+        "link": "Txuas",
+        "setUrl": "Teev URL",
+        "save": "Txuag",
+        "setClip": "Txiav Tawm Clip",
+        "invalidURL": "URL tsis raug",
+        "invalidFile": "Ntaub Ntawv Tsis Txaus",
+        "errorNoSource": "Tsis muaj cov zis video",
+        "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
+        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
+    },
+    "pdf": {
+        "reset": "Rov qab pib dua",
+        "edit": "Kho kom raug",
+        "title": "qha",
+        "description": "piav qhia",
+        "upload": "Upload",
+        "link": "Txuas",
+        "setUrl": "Teev URL",
+        "save": "Txuag",
+        "setClip": "Txiav Tawm Clip",
+        "invalidURL": "URL tsis raug",
+        "invalidFile": "Ntaub Ntawv Tsis Txaus",
+        "errorNoSource": "Tsis muaj pdf los",
+        "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
+        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
+    },
+    "image": {
+        "reset": "Rov qab pib dua",
+        "edit": "Kho kom raug",
+        "title": "qha",
+        "description": "piav qhia",
+        "upload": "Upload",
+        "link": "Txuas",
+        "setUrl": "Teev URL",
+        "save": "Txuag",
+        "setClip": "Txiav Tawm Clip",
+        "invalidURL": "URL tsis raug",
+        "invalidFile": "Ntaub Ntawv Tsis Txaus",
+        "errorNoSource": "Tsis muaj cov duab chaw",
+        "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
+        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
     }
 }

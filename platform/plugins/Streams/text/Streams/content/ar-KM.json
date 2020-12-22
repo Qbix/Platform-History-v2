@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
         "startedConversation": "بدأت محادثة",
         "RealTimeCall": "نداء الوقت الحقيقي",
-        "SearchByName": "البحث عن طريق الإسم"
+        "SearchByName": "البحث عن طريق الإسم",
+        "Notifications": {
+            "Visit": "{{displayName}} يزور الدردشة",
+            "Join": "انضم {{displayName}} إلى الدردشة",
+            "Leave": "{{displayName}} غادر الدردشة",
+            "RelatedTo": "{{displayName}} بدأ {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "رسالة {{& message.fields.type}} إلى {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "الجديد {{relationDisplayType}} في {{toTitle}}",
         "Streams/relatedFrom/*": "تمت الإضافة إلى {{toTitle}} كـ {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} ذكرك في تعليق",
-        "Streams/call": "{{displayName}} يتصل بك"
+        "Streams/call": "بدأ {{displayName}} مكالمة في الوقت الفعلي"
     },
     "invite": {
         "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "هل أنت متأكد من إلغاء اشتراك هذا الجهاز؟ سيؤدي إلى إيقاف تشغيل الإشعارات لهذا الجهاز.",
         "Identifiers": "معرفات",
         "Devices": "الأجهزة",
-        "Streams": "تيارات"
+        "Streams": "تيارات",
+        "AreYouSureRemoveParticipant": "هل أنت متأكد أنك تريد إزالة هذا المشارك؟",
+        "RemoveParticipant": "إزالة المشارك"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
             "turnOnCamera": "عرض الفيديو",
             "turnOnAudio": "إلغاء كتم الصوت",
-            "turnOnScreenSharing": "إظهار مشاركة الشاشة"
+            "turnOnScreenSharing": "إظهار مشاركة الشاشة",
+            "fullScreen": "شاشة كاملة"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
         "streamTitle": "{{1}} مكالمة مباشرة"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "صورة",
-            "description": "الصورة المرئية"
+            "description": "الصورة المرئية",
+            "newItem": "إضافة صورة"
         },
         "Streams/images": {
             "displayType": "معرض الصور",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "ملف",
-            "description": "ملف تم الرفع"
+            "description": "ملف تم الرفع",
+            "newItem": "اضف ملف"
         },
         "Streams/audio": {
             "displayType": "مقطع صوتي",
-            "description": "مقطع صوتي"
+            "description": "مقطع صوتي",
+            "newItem": "أضف الصوت"
         },
         "Streams/video": {
             "displayType": "مقطع فيديو",
-            "description": "مقطع فيديو"
+            "description": "مقطع فيديو",
+            "newItem": "أضف فيديو"
         },
         "Streams/live": {
             "displayType": "البث المباشر",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "التحية التي يمكن للمستخدم تقديم أنفسهم",
             "displayType": "تحية"
+        },
+        "Streams/pdf": {
+            "displayType": "وثيقة PDF",
+            "description": "وثيقة PDF",
+            "newItem": "أضف ملف PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "هذا المحتوى مخفي عنك."
+    },
+    "audio": {
+        "record": "سجل",
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر صوتي",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "video": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر فيديو",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "pdf": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر pdf",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "image": {
+        "reset": "إعادة تعيين",
+        "edit": "تعديل",
+        "title": "عنوان",
+        "description": "وصف",
+        "upload": "رفع",
+        "link": "حلقة الوصل",
+        "setUrl": "تعيين URL",
+        "save": "حفظ",
+        "setClip": "قطع مقطع",
+        "invalidURL": "URL غير صالح",
+        "invalidFile": "ملف غير صالح",
+        "errorNoSource": "لا يوجد مصدر للصورة",
+        "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
     }
 }

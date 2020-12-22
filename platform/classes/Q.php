@@ -314,7 +314,30 @@ class Q
 		}
 		return $expression;
 	}
-	
+    /**
+     * Modification of stripos function but with array as $needle (case-insensitive)
+     * @method striposa
+     * @static
+     * @param {string} $haystack The string to search in.
+     * @param {array} [$needles=array()] Array of string need to find.
+     * @param {integer} [$offset=0] If specified, search will start this number of characters counted from the beginning of
+     * the string. If the offset is negative, the search will start this number of characters counted from the end of the string.
+     * @return {boolean|intefer} Postion of needle or false if not found.
+     */
+    static function striposa($haystack, $needles=array(), $offset=0) {
+        $chr = array();
+        foreach($needles as $needle) {
+            $res = stripos($haystack, $needle, $offset);
+            if ($res !== false) {
+                $chr[$needle] = $res;
+            }
+        }
+        if(empty($chr)) {
+            return false;
+        }
+
+        return min($chr);
+    }
 	/**
 	 * A convenience method to use in your PHP templates.
 	 * It is short for Q_Html::text(Q::interpolate($expression, ...)).
@@ -1304,11 +1327,22 @@ class Q
 		$filename = Q_Config::get('Q', 'log', 'pattern', '{{key}}-{{day}}.log');
 		$filename = Q::interpolate($filename, compact('key', 'day'));
 		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
+		$tooLargeString = "\n\nLog file has grown too large.\n\nPlease delete it and fix the issue before continuing.\n";
+		$maxFileSize = Q_Config::get('Q', 'log', 'maxFileSize', 100000000);
 		if (!file_exists($realPath.DS.$filename)) {
 			// about to create a new file, remove any old logs
 			self::removeOldLogs();
+		} else if (filesize($realPath.DS.$filename) >= $maxFileSize) {
+			$handle = fopen($realPath.DS.$filename, 'r');
+			$len = strlen($tooLargeString) * 2;
+			fseek($handle, -$len, SEEK_END);
+			$ending = fread($handle, $len);
+			if (strpos($ending, $tooLargeString) === false) {
+				file_put_contents($realPath.DS.$filename, $tooLargeString, FILE_APPEND);
+			}
+		} else {
+			file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
 		}
-		file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
 		umask($mask);
 	}
 	
@@ -1703,7 +1737,7 @@ class Q
 	 * @param {string} $pattern='$class::$function&#32;(from&#32;line&#32;$line)'
 	 * @param {integer} $skip=2
 	 */
-	static function backtrace($pattern = '{{class}}::{{function}} (from line {{line}})', $skip = 2)
+	static function backtrace($pattern = '{{class}}::{{function}} (from line {{line}} in {{file}})', $skip = 2)
 	{
 		$result = array();
 		$i = 0;
@@ -1731,7 +1765,7 @@ class Q
 	 */
 	static function b($separator = ", <br>\n")
 	{
-		return implode($separator, Q::backtrace('{{i}}) {{class}}::{{function}} (from line {{line}})', 3));
+		return implode($separator, Q::backtrace('{{i}}) {{class}}::{{function}} (from line {{line}} in {{file}})', 3));
 	}
 
 	/**

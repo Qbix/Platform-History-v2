@@ -28,13 +28,16 @@ var MyApp = (function (Q, $) {
 			Q.Users.login();
 			return false;
 		});
-		
-		Q.addScript("{{Q}}/js/QTools.js", function () {
-			$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
-				elements: $('#dashboard_user_contextual .Q_listing').clone().children(),
-				defaultHandler: MyApp.userContextual
+
+		var $userCommands = $('#dashboard_user_contextual .Q_listing').children();
+		if ($userCommands.length) {
+			Q.addScript("{{Q}}/js/contextual.js", function () {
+				$('#dashboard .Users_avatar_tool').plugin('Q/contextual', {
+					elements: $userCommands.clone(),
+					defaultHandler: MyApp.userContextual
+				});
 			});
-		});
+		}
 		
 		// For example, we can hide notices when the user clicks/taps on them
 		$('#notices li').on(Q.Pointer.fastclick, true, function () {

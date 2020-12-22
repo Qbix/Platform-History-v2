@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Skoða",
             "WriteToStartConversation": "Skrifaðu hugsanir þínar til að hefja samtalið",
             "StartConversation": "Byrjaðu samtal",
-            "GotoConversation": "Farðu í Samtöl"
-        }
+            "GotoConversation": "Farðu í Samtöl",
+            "reset": "Endurstilla",
+            "edit": "Breyta",
+            "link": "Tengill",
+            "setUrl": "Stilltu vefslóð",
+            "save": "Vista",
+            "setClip": "Klippt út bút",
+            "invalidURL": "Ógild vefslóð"
+        },
+        "FileTooLarge": "Skráin er of stór fyrir skyndiminni. Hámarks skráarstærð {{size}}",
+        "InvalidPDF": "Skráin er ekki gild PDF"
     },
     "types": {
         "Websites\/article": {

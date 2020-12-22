@@ -98,5 +98,23 @@
         "inHour": "{{h}} saatda",
         "inHours": "{{h}} saatda",
         "inUnderMinute": "1 dəqiqə ərzində"
+    },
+    "tabs": {
+        "more": "daha çox",
+        "Menu": "Menyu"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Video mənbəyi yoxdur"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Pdf mənbəyi yoxdur"
+    },
+    "clip": {
+        "SetClipStart": "Klip Başlanğıcını təyin edin",
+        "ClipStart": "Klip Başlayın",
+        "SetClipEnd": "Klip Sonunu təyin edin",
+        "ClipEnd": "Klip sonu"
     }
 }

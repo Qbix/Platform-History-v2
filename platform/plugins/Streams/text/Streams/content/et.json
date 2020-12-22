@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Pilt",
-            "description": "visuaalne pilt"
+            "description": "visuaalne pilt",
+            "newItem": "Lisa pilt"
         },
         "Streams\/images": {
             "displayType": "Pildigalerii",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Toimik",
-            "description": "üles laaditud fail"
+            "description": "üles laaditud fail",
+            "newItem": "Lisa fail"
         },
         "Streams\/audio": {
             "displayType": "Heliklipp",
-            "description": "heliklipp"
+            "description": "heliklipp",
+            "newItem": "Lisa heli"
         },
         "Streams\/video": {
             "displayType": "Videoklipp",
-            "description": "videoklipp"
+            "description": "videoklipp",
+            "newItem": "Lisa video"
         },
         "Streams\/live": {
             "displayType": "Otseülekanne",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "tervitus, millega kasutaja saab ennast tutvustada",
             "displayType": "Tervitus"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Lisage PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "See sisu on teie eest peidetud."
+    },
+    "audio": {
+        "record": "Salvesta",
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Heliallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "video": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Videoallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "pdf": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Puudub pdf-allikas",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "image": {
+        "reset": "Lähtesta",
+        "edit": "Muuda",
+        "title": "pealkiri",
+        "description": "kirjeldus",
+        "upload": "Laadi üles",
+        "link": "Link",
+        "setUrl": "Määra URL",
+        "save": "Salvesta",
+        "setClip": "Lõigatud klamber",
+        "invalidURL": "vigane URL",
+        "invalidFile": "Vigane fail",
+        "errorNoSource": "Pildiallikat pole",
+        "uploadLimit": "Maksimaalne failisuurus: {{size}}",
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
     }
 }

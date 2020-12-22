@@ -24,8 +24,17 @@
             "BrowseTheWeb": "იხილე",
             "WriteToStartConversation": "ჩაწერეთ თქვენი აზრები, რომ დაიწყოთ საუბარი",
             "StartConversation": "დაიწყეთ საუბარი",
-            "GotoConversation": "გადადით საუბარში"
-        }
+            "GotoConversation": "გადადით საუბარში",
+            "reset": "გადატვირთვის",
+            "edit": "რედაქტირება",
+            "link": "Ბმული",
+            "setUrl": "მითითებული URL",
+            "save": "Გადარჩენა",
+            "setClip": "ამოჭრა კლიპი",
+            "invalidURL": "არასწორი ლინკი"
+        },
+        "FileTooLarge": "ფაილი ძალიან დიდია ქეშირებისთვის. ფაილის მაქსიმალური ზომა: {{size}}",
+        "InvalidPDF": "ფაილი არ არის სწორი PDF"
     },
     "types": {
         "Websites\/article": {

@@ -1078,9 +1078,11 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
+
+		if (!empty($this->closedTime) && !$this->testWriteLevel('close')) {
 			return false;
 		}
+
 		$numeric = Streams_Stream::numericReadLevel($level);
 		$readLevel = $this->get('readLevel', 0);
 		if ($readLevel >= 0 and $readLevel >= $numeric) {
@@ -1115,9 +1117,11 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		if (!empty($this->closedTime) and $level !== 'close' and !$this->testWriteLevel('close')) {
+
+		if (!empty($this->closedTime) && $level !== 'close') {
 			return false;
 		}
+
 		$numeric = Streams_Stream::numericWriteLevel($level);
 		$writeLevel = $this->get('writeLevel', 0);
 		if ($writeLevel >= 0 and $writeLevel >= $numeric) {
@@ -1128,13 +1132,10 @@ class Streams_Stream extends Base_Streams_Stream
 		or $writeLevel_source === Streams::$ACCESS_SOURCES['inherited_direct']) {
 			return false;
 		}
-		if (!$this->inheritAccess()) {
-			return false;
-		}
-		$writeLevel = $this->get('writeLevel', 0);
-		if ($writeLevel >= 0 and $writeLevel >= $numeric) {
+		if ($this->inheritAccess()) {
 			return true;
 		}
+
 		return false;
 	}
 	
@@ -1152,9 +1153,11 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->publishedByFetcher) {
 			return true;
 		}
-		if (!empty($this->closedTime) and !$this->testWriteLevel('close')) {
+
+		if (!empty($this->closedTime) && !$this->testWriteLevel('close')) {
 			return false;
 		}
+
 		$numeric = Streams_Stream::numericAdminLevel($level);
 		$adminLevel = $this->get('adminLevel', 0);
 		if ($adminLevel >= 0 and $adminLevel >= $numeric) {
@@ -1244,7 +1247,6 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 		}
 	}
-	
 	/**
 	 * Inherits access from any streams specified in the inheritAccess field.
 	 * @method inheritAccess
@@ -1278,7 +1280,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$readLevel_source = $this->get('readLevel_source', $public_source);
 		$writeLevel_source = $this->get('writeLevel_source', $public_source);
 		$adminLevel_source = $this->get('adminLevel_source', $public_source);
-		
+
 		// Inheritance only goes one "generation" here.
 		// To implement several "generations" of inheritance, you can do things like:
 		// 'inheritAccess' => [["publisherId","grandparentStreamName"], ["publisherId","parentStreamName"]]
@@ -1816,13 +1818,17 @@ class Streams_Stream extends Base_Streams_Stream
 		$url = (Q_Valid::url($url) or mb_substr($this->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
-		if ($basename) {
+		$baseUrl = Q_Request::baseUrl();
+		$themedUrl = Q_Html::themedUrl($url);
+		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
 			if (strpos($basename, '.') === false) {
 				$basename = "$basename.png";
 			}
 			$url .= "/$basename";
+			return Q_Html::themedUrl($url);
+		} else {
+			return $themedUrl;
 		}
-		return Q_Html::themedUrl($url);
 	}
 	
 	/**

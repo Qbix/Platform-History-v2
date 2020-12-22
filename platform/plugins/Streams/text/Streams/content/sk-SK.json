@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nemáte povolenie na pripojenie sa k tejto konverzácii.",
         "startedConversation": "začal konverzáciu",
         "RealTimeCall": "Hovor v reálnom čase",
-        "SearchByName": "Vyhľadávanie podľa mena"
+        "SearchByName": "Vyhľadávanie podľa mena",
+        "Notifications": {
+            "Visit": "{{displayName}} navštevuje rozhovor",
+            "Join": "{{displayName}} sa pripojil k rozhovoru",
+            "Leave": "{{displayName}} opustil chat",
+            "RelatedTo": "{{displayName}} začal {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Správa {{& message.fields.type}} až {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Nové {{relationDisplayType}} o {{toTitle}}",
         "Streams/relatedFrom/*": "Pridané do {{toTitle}} ako {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} sa o vás zmienil v komentári",
-        "Streams/call": "{{displayName}} vás volá"
+        "Streams/call": "{{displayName}} začal hovor v reálnom čase"
     },
     "invite": {
         "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Naozaj chcete zrušiť odber tohto zariadenia? Vypne upozornenia pre toto zariadenie.",
         "Identifiers": "identifikátory",
         "Devices": "prístroje",
-        "Streams": "prúdy"
+        "Streams": "prúdy",
+        "AreYouSureRemoveParticipant": "Naozaj chcete tohto účastníka odstrániť?",
+        "RemoveParticipant": "Odstráňte účastníka"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Skryť zdieľanie obrazovky",
             "turnOnCamera": "Zobraziť video",
             "turnOnAudio": "Obnoviť zvuk",
-            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky"
+            "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky",
+            "fullScreen": "Celá obrazovka"
         },
         "notAllowedToJoinCall": "Na pripojenie k tomuto toku nemáte povolenie.",
         "streamTitle": "{{1}} živý hovor"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "obraz",
-            "description": "vizuálny obrázok"
+            "description": "vizuálny obrázok",
+            "newItem": "Pridať obrázok"
         },
         "Streams/images": {
             "displayType": "Galéria obrázkov",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "súbor",
-            "description": "nahraný súbor"
+            "description": "nahraný súbor",
+            "newItem": "Pridať súbor"
         },
         "Streams/audio": {
             "displayType": "Zvukový klip",
-            "description": "zvukový klip"
+            "description": "zvukový klip",
+            "newItem": "Pridať zvuk"
         },
         "Streams/video": {
             "displayType": "Videoklip",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Pridať video"
         },
         "Streams/live": {
             "displayType": "Živý prenos",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "pozdrav, s ktorým sa užívateľ môže predstaviť",
             "displayType": "pozdrav"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF dokument",
+            "description": "PDF dokument",
+            "newItem": "Pridať PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tento obsah je pred vami skrytý."
+    },
+    "audio": {
+        "record": "Záznam",
+        "reset": "Resetovať",
+        "edit": "Upraviť",
+        "title": "titul",
+        "description": "popis",
+        "upload": "Nahrať",
+        "link": "Odkaz",
+        "setUrl": "Nastaviť URL",
+        "save": "Uložiť",
+        "setClip": "Vystrihnúť klip",
+        "invalidURL": "neplatná URL adresa",
+        "invalidFile": "Neplatný súbor",
+        "errorNoSource": "Žiadny zdroj zvuku",
+        "uploadLimit": "Maximálna veľkosť súboru: {{size}}",
+        "errorFileSize": "Ľutujeme, ale súbor je príliš veľký.<br> Maximálna veľkosť súboru je {{size}}"
+    },
+    "video": {
+        "reset": "Resetovať",
+        "edit": "Upraviť",
+        "title": "titul",
+        "description": "popis",
+        "upload": "Nahrať",
+        "link": "Odkaz",
+        "setUrl": "Nastaviť URL",
+        "save": "Uložiť",
+        "setClip": "Vystrihnúť klip",
+        "invalidURL": "neplatná URL adresa",
+        "invalidFile": "Neplatný súbor",
+        "errorNoSource": "Žiadny zdroj videa",
+        "uploadLimit": "Maximálna veľkosť súboru: {{size}}",
+        "errorFileSize": "Ľutujeme, ale súbor je príliš veľký.<br> Maximálna veľkosť súboru je {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetovať",
+        "edit": "Upraviť",
+        "title": "titul",
+        "description": "popis",
+        "upload": "Nahrať",
+        "link": "Odkaz",
+        "setUrl": "Nastaviť URL",
+        "save": "Uložiť",
+        "setClip": "Vystrihnúť klip",
+        "invalidURL": "neplatná URL adresa",
+        "invalidFile": "Neplatný súbor",
+        "errorNoSource": "Žiadny zdroj vo formáte PDF",
+        "uploadLimit": "Maximálna veľkosť súboru: {{size}}",
+        "errorFileSize": "Ľutujeme, ale súbor je príliš veľký.<br> Maximálna veľkosť súboru je {{size}}"
+    },
+    "image": {
+        "reset": "Resetovať",
+        "edit": "Upraviť",
+        "title": "titul",
+        "description": "popis",
+        "upload": "Nahrať",
+        "link": "Odkaz",
+        "setUrl": "Nastaviť URL",
+        "save": "Uložiť",
+        "setClip": "Vystrihnúť klip",
+        "invalidURL": "neplatná URL adresa",
+        "invalidFile": "Neplatný súbor",
+        "errorNoSource": "Žiadny zdroj obrázkov",
+        "uploadLimit": "Maximálna veľkosť súboru: {{size}}",
+        "errorFileSize": "Ľutujeme, ale súbor je príliš veľký.<br> Maximálna veľkosť súboru je {{size}}"
     }
 }

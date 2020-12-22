@@ -99,5 +99,23 @@
         "inHour": "in {{h}} hour",
         "inHours": "in {{h}} hours",
         "inUnderMinute": "in under 1 minute"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End"
     }
 }

@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Kuva",
-            "description": "visuaalinen kuva"
+            "description": "visuaalinen kuva",
+            "newItem": "Lisää kuva"
         },
         "Streams\/images": {
             "displayType": "kuvagalleria",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "tiedosto",
-            "description": "ladattu tiedosto"
+            "description": "ladattu tiedosto",
+            "newItem": "Lisää tiedosto"
         },
         "Streams\/audio": {
             "displayType": "Äänileike",
-            "description": "äänileike"
+            "description": "äänileike",
+            "newItem": "Lisää ääni"
         },
         "Streams\/video": {
             "displayType": "Videoleike",
-            "description": "videoleike"
+            "description": "videoleike",
+            "newItem": "Lisää video"
         },
         "Streams\/live": {
             "displayType": "livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "tervehdys, jonka avulla käyttäjä voi esitellä itsensä",
             "displayType": "Tervehdys"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF-tiedosto",
+            "description": "PDF-tiedosto",
+            "newItem": "Lisää PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tämä sisältö on piilotettu teiltä."
+    },
+    "audio": {
+        "record": "Ennätys",
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei äänilähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "video": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei videolähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "pdf": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei pdf-lähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "image": {
+        "reset": "Nollaa",
+        "edit": "Muokata",
+        "title": "otsikko",
+        "description": "kuvaus",
+        "upload": "Lähetä",
+        "link": "Linkki",
+        "setUrl": "Aseta URL-osoite",
+        "save": "Tallentaa",
+        "setClip": "Leikkaa leike",
+        "invalidURL": "Virheellinen URL",
+        "invalidFile": "Virheellinen tiedosto",
+        "errorNoSource": "Ei kuvalähdettä",
+        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
     }
 }

@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "आपको इस वार्तालाप में शामिल होने की अनुमति नहीं है।",
         "startedConversation": "बातचीत शुरू की",
         "RealTimeCall": "रियल टाइम कॉल",
-        "SearchByName": "नाम से खोजें"
+        "SearchByName": "नाम से खोजें",
+        "Notifications": {
+            "Visit": "{{displayName}} चैट पर जा रहा है",
+            "Join": "{{displayName}} चैट में शामिल हो गया",
+            "Leave": "{{displayName}} ने चैट छोड़ दी",
+            "RelatedTo": "{{displayName}} ने {{stream.displayType}} शुरू किया"
+        }
     },
     "notifications": {
         "*": "संदेश {{& message.fields.type}} से {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} में नया {{relationDisplayType}}",
         "Streams/relatedFrom/*": "{{toTitle}} को {{relationDisplayType}} के रूप में जोड़ा गया",
         "Streams/mention": "{{&call 'avatar.displayName'}} ने एक टिप्पणी में आपका उल्लेख किया",
-        "Streams/call": "{{displayName}} आपको कॉल कर रहा है"
+        "Streams/call": "{{displayName}} ने वास्तविक समय पर कॉल शुरू किया"
     },
     "invite": {
         "messageContent": "{{displayName}} ने आपको {{inviteUrl}} आमंत्रित किया",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "क्या आप वाकई इस डिवाइस को अनसब्सक्राइब कर रहे हैं? यह इस उपकरण के लिए सूचनाओं को बंद कर देगा।",
         "Identifiers": "पहचानकर्ता",
         "Devices": "उपकरण",
-        "Streams": "स्ट्रीम"
+        "Streams": "स्ट्रीम",
+        "AreYouSureRemoveParticipant": "क्या आप वाकई इस प्रतिभागी को हटाना चाहते हैं?",
+        "RemoveParticipant": "प्रतिभागी को हटा दें"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "स्क्रीन साझाकरण छिपाएँ",
             "turnOnCamera": "वीडियो दिखाएं",
             "turnOnAudio": "ऑडियो को अनम्यूट करें",
-            "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ"
+            "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ",
+            "fullScreen": "पूर्ण स्क्रीन"
         },
         "notAllowedToJoinCall": "आपको इस स्ट्रीम में शामिल होने की अनुमति नहीं है।",
         "streamTitle": "{{1}} लाइव कॉल"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "छवि",
-            "description": "दृश्य छवि"
+            "description": "दृश्य छवि",
+            "newItem": "छवि जोड़ें"
         },
         "Streams/images": {
             "displayType": "छवि गैलरी",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "फ़ाइल",
-            "description": "अपलोड की गई फ़ाइल"
+            "description": "अपलोड की गई फ़ाइल",
+            "newItem": "फाइल जोडें"
         },
         "Streams/audio": {
             "displayType": "ऑडियो क्लिप",
-            "description": "ऑडियो क्लिप"
+            "description": "ऑडियो क्लिप",
+            "newItem": "ऑडियो जोड़ें"
         },
         "Streams/video": {
             "displayType": "वीडियो क्लिप",
-            "description": "वीडियो क्लिप"
+            "description": "वीडियो क्लिप",
+            "newItem": "वीडियो जोड़ें"
         },
         "Streams/live": {
             "displayType": "लाइव स्ट्रीम",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "अभिवादन जिसके साथ कोई उपयोगकर्ता अपना परिचय दे सकता है",
             "displayType": "शुभकामना"
+        },
+        "Streams/pdf": {
+            "displayType": "पीडीएफ दस्तावेज़",
+            "description": "पीडीएफ दस्तावेज़",
+            "newItem": "पीडीएफ जोड़ें"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "यह सामग्री आपसे छिपी हुई है।"
+    },
+    "audio": {
+        "record": "अभिलेख",
+        "reset": "रीसेट",
+        "edit": "संपादित करें",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "डालना",
+        "link": "संपर्क",
+        "setUrl": "URL सेट करें",
+        "save": "सहेजें",
+        "setClip": "कट आउट क्लिप",
+        "invalidURL": "अवैध यूआरएल",
+        "invalidFile": "अवैध फाइल",
+        "errorNoSource": "कोई ऑडियो स्रोत नहीं",
+        "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
+        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
+    },
+    "video": {
+        "reset": "रीसेट",
+        "edit": "संपादित करें",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "डालना",
+        "link": "संपर्क",
+        "setUrl": "URL सेट करें",
+        "save": "सहेजें",
+        "setClip": "कट आउट क्लिप",
+        "invalidURL": "अवैध यूआरएल",
+        "invalidFile": "अवैध फाइल",
+        "errorNoSource": "कोई वीडियो स्रोत नहीं",
+        "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
+        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
+    },
+    "pdf": {
+        "reset": "रीसेट",
+        "edit": "संपादित करें",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "डालना",
+        "link": "संपर्क",
+        "setUrl": "URL सेट करें",
+        "save": "सहेजें",
+        "setClip": "कट आउट क्लिप",
+        "invalidURL": "अवैध यूआरएल",
+        "invalidFile": "अवैध फाइल",
+        "errorNoSource": "कोई पीडीएफ स्रोत नहीं",
+        "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
+        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
+    },
+    "image": {
+        "reset": "रीसेट",
+        "edit": "संपादित करें",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "डालना",
+        "link": "संपर्क",
+        "setUrl": "URL सेट करें",
+        "save": "सहेजें",
+        "setClip": "कट आउट क्लिप",
+        "invalidURL": "अवैध यूआरएल",
+        "invalidFile": "अवैध फाइल",
+        "errorNoSource": "कोई छवि स्रोत नहीं",
+        "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
+        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
     }
 }

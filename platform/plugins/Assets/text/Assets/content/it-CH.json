@@ -32,7 +32,12 @@
         "Buy": "Acquistare",
         "Credits": "Crediti",
         "ErrorInvalidAmount": "Importo non valido",
-        "ErrorInvalidCurrency": "Purtroppo non supportiamo ancora la valuta {{currency}}"
+        "ErrorInvalidCurrency": "Purtroppo non supportiamo ancora la valuta {{currency}}",
+        "WatchClip": "Hai ottenuto {{amount}} crediti per la visione di {{fromStreamTitle}}",
+        "PurchaseCredits": "Acquista crediti",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} crediti"
+        }
     },
     "history": {
         "Date": "Data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Contributo opzionale",
         "RequiredPayment": "Pagamento richiesto",
         "AreYouSureDelete": "Sei sicuro di voler eliminare questo servizio?",
-        "AmountServicesRelated": "Ci sono {{amount}} disponibilità relative a questo servizio. Inoltre saranno rimossi."
+        "AmountServicesRelated": "Ci sono {{amount}} disponibilità relative a questo servizio. Inoltre saranno rimossi.",
+        "Free": "Gratuito"
     }
 }

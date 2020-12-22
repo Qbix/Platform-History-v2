@@ -32,7 +32,12 @@
         "Buy": "Pirkite",
         "Credits": "Kreditai",
         "ErrorInvalidAmount": "Suma netinkama",
-        "ErrorInvalidCurrency": "Deja, dar nepalaikome valiutos {{currency}}"
+        "ErrorInvalidCurrency": "Deja, dar nepalaikome valiutos {{currency}}",
+        "WatchClip": "Uždirbote {{amount}} kreditą už žiūrėjimą {{fromStreamTitle}}",
+        "PurchaseCredits": "Pirkite kreditus",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kreditų"
+        }
     },
     "history": {
         "Date": "Data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Neprivalomas įnašas",
         "RequiredPayment": "Reikalingas mokėjimas",
         "AreYouSureDelete": "Ar tikrai norite ištrinti šią paslaugą?",
-        "AmountServicesRelated": "Yra {{amount}} galimybių, susijusių su šia paslauga. Jie taip pat bus pašalinti."
+        "AmountServicesRelated": "Yra {{amount}} galimybių, susijusių su šia paslauga. Jie taip pat bus pašalinti.",
+        "Free": "Laisvas"
     }
 }

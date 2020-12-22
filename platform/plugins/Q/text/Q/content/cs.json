@@ -98,5 +98,23 @@
         "inHour": "za {{h}} hodinu",
         "inHours": "za {{h}} hodin",
         "inUnderMinute": "za méně než 1 minutu"
+    },
+    "tabs": {
+        "more": "více",
+        "Menu": "Jídelní lístek"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Žádný zdroj videa"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Žádný zdroj ve formátu PDF"
+    },
+    "clip": {
+        "SetClipStart": "Nastavte začátek klipu",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Nastavte konec klipu",
+        "ClipEnd": "Konec klipu"
     }
 }

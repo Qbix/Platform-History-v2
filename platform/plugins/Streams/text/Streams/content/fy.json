@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Byld",
-            "description": "fisuele ôfbylding"
+            "description": "fisuele ôfbylding",
+            "newItem": "Ofbylding tafoegje"
         },
         "Streams\/images": {
             "displayType": "Ofbylding gallery",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Map",
-            "description": "opladen bestân"
+            "description": "opladen bestân",
+            "newItem": "Bestân taheakje"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio klip"
+            "description": "audio klip",
+            "newItem": "Audio tafoegje"
         },
         "Streams\/video": {
             "displayType": "Fideoklip",
-            "description": "fideoklip"
+            "description": "fideoklip",
+            "newItem": "Fideo tafoegje"
         },
         "Streams\/live": {
             "displayType": "Streekrjochte útstjoering",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Echte-tiidoprop",
             "description": "in realtime fideo \/ audio-oprop"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokumint",
+            "description": "PDF dokumint",
+            "newItem": "PDF tafoegje"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dizze ynhâld is foar jo ferburgen."
+    },
+    "audio": {
+        "record": "Opnimme",
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
+        "upload": "Upload",
+        "link": "Keppeling",
+        "setUrl": "URL ynstelle",
+        "save": "Rêde",
+        "setClip": "Knip útknippe",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildich bestân",
+        "errorNoSource": "Gjin audioboarne",
+        "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
+    },
+    "video": {
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
+        "upload": "Upload",
+        "link": "Keppeling",
+        "setUrl": "URL ynstelle",
+        "save": "Rêde",
+        "setClip": "Knip útknippe",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildich bestân",
+        "errorNoSource": "Gjin fideoboarne",
+        "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
+    },
+    "pdf": {
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
+        "upload": "Upload",
+        "link": "Keppeling",
+        "setUrl": "URL ynstelle",
+        "save": "Rêde",
+        "setClip": "Knip útknippe",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildich bestân",
+        "errorNoSource": "Gjin pdf-boarne",
+        "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
+    },
+    "image": {
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
+        "upload": "Upload",
+        "link": "Keppeling",
+        "setUrl": "URL ynstelle",
+        "save": "Rêde",
+        "setClip": "Knip útknippe",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildich bestân",
+        "errorNoSource": "Gjin ôfbyldingsboarne",
+        "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
     }
 }

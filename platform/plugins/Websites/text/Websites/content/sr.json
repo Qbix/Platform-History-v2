@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Бровсе",
             "WriteToStartConversation": "Напишите своје мисли да бисте започели разговор",
             "StartConversation": "Старт Цонверсатион",
-            "GotoConversation": "Идите на Разговор"
-        }
+            "GotoConversation": "Идите на Разговор",
+            "reset": "Ресетовање",
+            "edit": "Уредити",
+            "link": "Линк",
+            "setUrl": "Постави УРЛ",
+            "save": "сачувати",
+            "setClip": "Исеците клип",
+            "invalidURL": "Неважећи УРЛ"
+        },
+        "FileTooLarge": "Датотека је превелика за кеширање. Максимална величина датотеке {{size}}",
+        "InvalidPDF": "Датотека није важећи ПДФ"
     },
     "types": {
         "Websites\/article": {

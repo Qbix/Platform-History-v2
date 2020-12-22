@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "imazh",
-            "description": "imazh vizual"
+            "description": "imazh vizual",
+            "newItem": "Shto imazhin"
         },
         "Streams\/images": {
             "displayType": "Galeria e Imazheve",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "skedar",
-            "description": "skedar i ngarkuar"
+            "description": "skedar i ngarkuar",
+            "newItem": "Shto skedarin"
         },
         "Streams\/audio": {
             "displayType": "Klip audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Shto Audio"
         },
         "Streams\/video": {
             "displayType": "Klip video",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Shto video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "përshëndetje me të cilën një përdorues mund të prezantojë veten e tyre",
             "displayType": "përshëndetje"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokumenti PDF",
+            "description": "Dokumenti PDF",
+            "newItem": "Shto PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Kjo përmbajtje është e fshehur nga ju."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Rivendos",
+        "edit": "Redakto",
+        "title": "titulli",
+        "description": "përshkrim",
+        "upload": "Ngarkoni",
+        "link": "Lidhje",
+        "setUrl": "Vendos URL",
+        "save": "Ruaj",
+        "setClip": "Klip i prerë",
+        "invalidURL": "URL e pavlefshme",
+        "invalidFile": "Skedar i pavlefshëm",
+        "errorNoSource": "Asnjë burim audio",
+        "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+    },
+    "video": {
+        "reset": "Rivendos",
+        "edit": "Redakto",
+        "title": "titulli",
+        "description": "përshkrim",
+        "upload": "Ngarkoni",
+        "link": "Lidhje",
+        "setUrl": "Vendos URL",
+        "save": "Ruaj",
+        "setClip": "Klip i prerë",
+        "invalidURL": "URL e pavlefshme",
+        "invalidFile": "Skedar i pavlefshëm",
+        "errorNoSource": "Asnjë burim video",
+        "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+    },
+    "pdf": {
+        "reset": "Rivendos",
+        "edit": "Redakto",
+        "title": "titulli",
+        "description": "përshkrim",
+        "upload": "Ngarkoni",
+        "link": "Lidhje",
+        "setUrl": "Vendos URL",
+        "save": "Ruaj",
+        "setClip": "Klip i prerë",
+        "invalidURL": "URL e pavlefshme",
+        "invalidFile": "Skedar i pavlefshëm",
+        "errorNoSource": "Asnjë burim pdf",
+        "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+    },
+    "image": {
+        "reset": "Rivendos",
+        "edit": "Redakto",
+        "title": "titulli",
+        "description": "përshkrim",
+        "upload": "Ngarkoni",
+        "link": "Lidhje",
+        "setUrl": "Vendos URL",
+        "save": "Ruaj",
+        "setClip": "Klip i prerë",
+        "invalidURL": "URL e pavlefshme",
+        "invalidFile": "Skedar i pavlefshëm",
+        "errorNoSource": "Asnjë burim imazhi",
+        "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
     }
 }

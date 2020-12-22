@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "பட",
-            "description": "காட்சி படம்"
+            "description": "காட்சி படம்",
+            "newItem": "படத்தைச் சேர்க்கவும்"
         },
         "Streams\/images": {
             "displayType": "பட தொகுப்பு",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "கோப்பு",
-            "description": "பதிவேற்றிய கோப்பு"
+            "description": "பதிவேற்றிய கோப்பு",
+            "newItem": "கோப்பைச் சேர்க்கவும்"
         },
         "Streams\/audio": {
             "displayType": "ஆடியோ கிளிப்",
-            "description": "ஆடியோ கிளிப்"
+            "description": "ஆடியோ கிளிப்",
+            "newItem": "ஆடியோவைச் சேர்க்கவும்"
         },
         "Streams\/video": {
             "displayType": "வீடியோ கிளிப்",
-            "description": "வீடியோ கிளிப்"
+            "description": "வீடியோ கிளிப்",
+            "newItem": "வீடியோவைச் சேர்க்கவும்"
         },
         "Streams\/live": {
             "displayType": "லைவ்ஸ்டிரீமில்",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "ஒரு பயனர் தங்களை அறிமுகப்படுத்தக்கூடிய வாழ்த்து",
             "displayType": "வாழ்த்து"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF ஆவணம்",
+            "description": "PDF ஆவணம்",
+            "newItem": "PDF ஐச் சேர்க்கவும்"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "இந்த உள்ளடக்கம் உங்களிடமிருந்து மறைக்கப்பட்டுள்ளது."
+    },
+    "audio": {
+        "record": "பதிவு",
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமி",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "ஆடியோ மூலமில்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
+    },
+    "video": {
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமி",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "வீடியோ ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
+    },
+    "pdf": {
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமி",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "பி.டி.எஃப் மூலமில்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
+    },
+    "image": {
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமி",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "பட ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
     }
 }

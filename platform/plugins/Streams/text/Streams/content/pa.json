@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "ਚਿੱਤਰ",
-            "description": "ਦਿੱਖ ਚਿੱਤਰ"
+            "description": "ਦਿੱਖ ਚਿੱਤਰ",
+            "newItem": "ਚਿੱਤਰ ਸ਼ਾਮਲ ਕਰੋ"
         },
         "Streams\/images": {
             "displayType": "ਚਿੱਤਰ ਗੈਲਰੀ",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ਫਾਈਲ",
-            "description": "ਅਪਲੋਡ ਕੀਤੀ ਫਾਈਲ"
+            "description": "ਅਪਲੋਡ ਕੀਤੀ ਫਾਈਲ",
+            "newItem": "ਫਾਈਲ ਸ਼ਾਮਲ ਕਰੋ"
         },
         "Streams\/audio": {
             "displayType": "ਆਡੀਓ ਕਲਿੱਪ",
-            "description": "ਆਡੀਓ ਕਲਿੱਪ"
+            "description": "ਆਡੀਓ ਕਲਿੱਪ",
+            "newItem": "ਆਡੀਓ ਸ਼ਾਮਲ ਕਰੋ"
         },
         "Streams\/video": {
             "displayType": "ਵੀਡੀਓ ਕਲਿੱਪ",
-            "description": "ਵੀਡੀਓ ਕਲਿੱਪ"
+            "description": "ਵੀਡੀਓ ਕਲਿੱਪ",
+            "newItem": "ਵੀਡੀਓ ਸ਼ਾਮਲ ਕਰੋ"
         },
         "Streams\/live": {
             "displayType": "ਸਿੱਧਾ ਪ੍ਰਸਾਰਣ",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "ਰੀਅਲ-ਟਾਈਮ ਕਾਲ",
             "description": "ਇੱਕ ਰੀਅਲ ਟਾਈਮ ਵੀਡੀਓ \/ ਆਡੀਓ ਕਾਲ"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF ਦਸਤਾਵੇਜ਼",
+            "description": "PDF ਦਸਤਾਵੇਜ਼",
+            "newItem": "ਪੀਡੀਐਫ ਸ਼ਾਮਲ ਕਰੋ"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ਇਹ ਸਮਗਰੀ ਤੁਹਾਡੇ ਤੋਂ ਲੁਕੀ ਹੋਈ ਹੈ."
+    },
+    "audio": {
+        "record": "ਰਿਕਾਰਡ",
+        "reset": "ਰੀਸੈੱਟ",
+        "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+        "title": "ਸਿਰਲੇਖ",
+        "description": "ਵੇਰਵਾ",
+        "upload": "ਅਪਲੋਡ ਕਰੋ",
+        "link": "ਲਿੰਕ",
+        "setUrl": "URL ਸੈੱਟ ਕਰੋ",
+        "save": "ਸੇਵ",
+        "setClip": "ਕਲਿੱਪ ਕੱਟੋ",
+        "invalidURL": "ਅਵੈਧ URL",
+        "invalidFile": "ਗਲਤ ਫਾਈਲ",
+        "errorNoSource": "ਕੋਈ ਆਡੀਓ ਸਰੋਤ ਨਹੀਂ",
+        "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
+        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
+    },
+    "video": {
+        "reset": "ਰੀਸੈੱਟ",
+        "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+        "title": "ਸਿਰਲੇਖ",
+        "description": "ਵੇਰਵਾ",
+        "upload": "ਅਪਲੋਡ ਕਰੋ",
+        "link": "ਲਿੰਕ",
+        "setUrl": "URL ਸੈੱਟ ਕਰੋ",
+        "save": "ਸੇਵ",
+        "setClip": "ਕਲਿੱਪ ਕੱਟੋ",
+        "invalidURL": "ਅਵੈਧ URL",
+        "invalidFile": "ਗਲਤ ਫਾਈਲ",
+        "errorNoSource": "ਕੋਈ ਵੀਡੀਓ ਸਰੋਤ ਨਹੀਂ",
+        "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
+        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
+    },
+    "pdf": {
+        "reset": "ਰੀਸੈੱਟ",
+        "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+        "title": "ਸਿਰਲੇਖ",
+        "description": "ਵੇਰਵਾ",
+        "upload": "ਅਪਲੋਡ ਕਰੋ",
+        "link": "ਲਿੰਕ",
+        "setUrl": "URL ਸੈੱਟ ਕਰੋ",
+        "save": "ਸੇਵ",
+        "setClip": "ਕਲਿੱਪ ਕੱਟੋ",
+        "invalidURL": "ਅਵੈਧ URL",
+        "invalidFile": "ਗਲਤ ਫਾਈਲ",
+        "errorNoSource": "ਕੋਈ ਪੀਡੀਐਫ ਸਰੋਤ ਨਹੀਂ",
+        "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
+        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
+    },
+    "image": {
+        "reset": "ਰੀਸੈੱਟ",
+        "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+        "title": "ਸਿਰਲੇਖ",
+        "description": "ਵੇਰਵਾ",
+        "upload": "ਅਪਲੋਡ ਕਰੋ",
+        "link": "ਲਿੰਕ",
+        "setUrl": "URL ਸੈੱਟ ਕਰੋ",
+        "save": "ਸੇਵ",
+        "setClip": "ਕਲਿੱਪ ਕੱਟੋ",
+        "invalidURL": "ਅਵੈਧ URL",
+        "invalidFile": "ਗਲਤ ਫਾਈਲ",
+        "errorNoSource": "ਕੋਈ ਚਿੱਤਰ ਸਰੋਤ ਨਹੀਂ",
+        "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
+        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
     }
 }

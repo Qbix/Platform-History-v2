@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Squeaky toy",
             "WriteToStartConversation": "Escreva seus pensamentos para começar a conversa",
             "StartConversation": "Iniciar conversa",
-            "GotoConversation": "Ir para conversação"
-        }
+            "GotoConversation": "Ir para conversação",
+            "reset": "Redefinir",
+            "edit": "Editar",
+            "link": "Ligação",
+            "setUrl": "Definir URL",
+            "save": "Salve ",
+            "setClip": "Cortar o clipe",
+            "invalidURL": "URL inválida"
+        },
+        "FileTooLarge": "Arquivo muito grande para armazenamento em cache. Tamanho máximo do arquivo {{size}}",
+        "InvalidPDF": "O arquivo não é um PDF válido"
     },
     "types": {
         "Websites\/article": {

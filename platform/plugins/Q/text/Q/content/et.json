@@ -98,5 +98,23 @@
         "inHour": "tunni pärast {{h}}",
         "inHours": "{{h}} tunni pärast",
         "inUnderMinute": "vähem kui 1 minut"
+    },
+    "tabs": {
+        "more": "rohkem",
+        "Menu": "Menüü"
+    },
+    "video": {
+        "clip": "klipp",
+        "errorNoSource": "Videoallikat pole"
+    },
+    "pdf": {
+        "clip": "klipp",
+        "errorNoSource": "Puudub pdf-allikas"
+    },
+    "clip": {
+        "SetClipStart": "Määra Clip Start",
+        "ClipStart": "Klipi algus",
+        "SetClipEnd": "Määra klipi lõpp",
+        "ClipEnd": "Klipi lõpp"
     }
 }

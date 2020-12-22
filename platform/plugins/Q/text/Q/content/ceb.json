@@ -98,5 +98,23 @@
         "inHour": "sa {{h}} nga oras",
         "inHours": "sa {{h}} nga mga oras",
         "inUnderMinute": "sa ilalum sa 1 minuto"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Wala’y gigikanan sa video"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Wala’y gigikanan sa pdf"
+    },
+    "clip": {
+        "SetClipStart": "Ibutang ang Pagsugod sa Clip",
+        "ClipStart": "Pagsugod sa Clip",
+        "SetClipEnd": "Itakda ang Kataposan sa Clip",
+        "ClipEnd": "Pagtapos sa Clip"
+    },
+    "tabs": {
+        "more": "labi pa",
+        "Menu": "Menu"
     }
 }

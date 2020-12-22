@@ -79,10 +79,19 @@ if (empty($process	)) {
 	}
 }
 
-echo Q_scripts_combine($process) . PHP_EOL;
+$src = $dest = null;
+$combined = array();
+$preload = array();
+$dir_to_save = APP_CONFIG_DIR.DS.'Q';
+if (!file_exists($dir_to_save)) {
+	mkdir($dir_to_save);
+}
+$baseUrl = Q_Request::baseUrl();
+echo Q_combine($process) . PHP_EOL;
 
-function Q_scripts_combine($process)
+function Q_combine($process)
 {
+	global $combined, $src, $dest, $baseUrl; // used inside called function
 	$environment = Q_Config::get('Q', 'environment', false);
 	if (!$environment) {
 		return "Config field 'Q'/'environment' is empty";
@@ -99,19 +108,28 @@ function Q_scripts_combine($process)
 	if (empty($filters)) {
 		return "Config field 'Q'/'environments'/'$environment'/filters is empty";
 	}
-	$combined = array();
 	foreach ($files as $src => $dest) {
-		$ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
-		if (!isset($process[$ext]) and !isset($process['all'])) {
-			continue;
+		$df = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest));
+		if (!Q_Valid::url($src) or Q::startsWith($src, $baseUrl)) {
+			$ext = strtolower(pathinfo($src, PATHINFO_EXTENSION));
+			if (!isset($process[$ext]) and !isset($process['all'])) {
+				continue;
+			}
+			$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, array(
+				'ignoreEnvironment' => true
+			)));
+			if ($f === $df) {
+				echo "Recursion encountered:\n$src => $dest" . PHP_EOL;
+				exit;
+			}
+			if (!file_exists($f)) {
+				return "Aborting: File $f corresponding to $src doesn't exist";
+			}
+			$content = file_get_contents($f);
+		} else {
+			echo "Downloading: $src" . PHP_EOL;
+			$content = file_get_contents($src);
 		}
-		$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($src, array(
-			'ignoreEnvironment' => true
-		)));
-		if (!file_exists($f)) {
-			return "Aborting: File $f corresponding to $src doesn't exist";
-		}
-		$content = file_get_contents($f);
 		$combined[$dest][$src] = $content;
 	}
 	foreach ($combined as $dest => $parts) {
@@ -136,7 +154,7 @@ function Q_scripts_combine($process)
 					$params = array_merge($params, $filter['params']);
 				}
 				if ($ext === 'css') {
-					Q_scripts_preprocessCss($params);
+					Q_combine_preprocessCss($params);
 				}
 				$content = Q::event($filter['handler'], $params);
 			}
@@ -147,14 +165,24 @@ function Q_scripts_combine($process)
 	echo "Success.";
 }
 
-function Q_scripts_preprocessCss(&$params)
+function Q_combine_preprocessCss(&$params)
 {
+	global $preload, $dir_to_save;
 	$dest = $params['dest'];
 	$parts = $params['parts'];
 	$processed = array();
 	foreach ($parts as $src => $content) {
 		if (strpos($src, '{{') === 0) {
 			$src = Q_Request::tail(Q_Uri::interpolateUrl($src), true);
+		}
+		$content = preg_replace_callback(
+			"/url\(\'{0,1}(.*)\'{0,1}\)/",
+			'Q_combine_preload',
+			$content
+		);
+		$processed[$src] = $content;
+		if (Q_Valid::url($src) and !Q::startsWith($src, $baseUrl)) {
+			continue;
 		}
 		$dest_parts = explode('/', $dest);
 		$src_parts = explode('/', $src);
@@ -172,11 +200,50 @@ function Q_scripts_preprocessCss(&$params)
 		if ($relative) {
 			$relative .= '/';
 		}
-		$processed[$src] = preg_replace(
-			"/url\((\'){0,1}/",
+		$content = preg_replace(
+			"/url\((\'){0,1}(?!http\:\/\/|https\:\/\/)/",
 			'url($1'.$relative,
 			$content
 		);
+		$processed[$src] = $content;
 	}
 	$params['processed'] = $processed;
+	
+	$preload_export = Q::var_export($preload, true);
+	file_put_contents(
+		$dir_to_save.DS.'preload.php',
+		"<?php\nQ_Uri::\$preload = $preload_export;"
+	);
+}
+
+function Q_combine_preload($matches)
+{
+	global $combined, $src, $dest, $preload, $baseUrl;
+	$url = $matches[1];
+	if (strpos($url, '{{') === 0) {
+		$url = Q_Request::tail(Q_Uri::interpolateUrl($url), true);
+	}
+	if (!Q_Valid::url($url) or Q::startsWith($url, $baseUrl)) {
+		return $matches[0];
+	}
+	$f = Q_Uri::filenameFromUrl(Q_Html::themedUrl($dest, array(
+		'ignoreEnvironment' => true
+	)));
+	$info = pathinfo($f);
+	$dirname = $info['dirname'] . DS . $info['filename'];
+	@mkdir($dirname);
+	$info = parse_url($url);
+	$path = $info['path'];
+	$parts = explode('.', $path);
+	$ext = array_pop($parts);
+	$path2 = implode('.', $parts);
+	$basename = Q_Utils::normalize($path2) . ".$ext";
+	$contents = $combined[$dest][$src];
+	$filename = $dirname . DS . $basename;
+	file_put_contents($filename, $contents);
+	echo "\t Saving $basename\n";
+	$preloadUrl = substr($dirname, strlen(APP_WEB_DIR)+1) . '/'
+		. str_replace(DS, '/', $filename);
+	$preload[$dest][] = $preloadUrl;
+	return $filename;
 }

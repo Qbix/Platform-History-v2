@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Naršyti",
             "WriteToStartConversation": "Parašykite savo mintis, kad pradėtumėte pokalbį",
             "StartConversation": "Pradėkite pokalbį",
-            "GotoConversation": "Eikite į pokalbį"
-        }
+            "GotoConversation": "Eikite į pokalbį",
+            "reset": "Atstatyti",
+            "edit": "Redaguoti",
+            "link": "Nuoroda",
+            "setUrl": "Nustatykite URL",
+            "save": "Sutaupyti",
+            "setClip": "Iškirpti spaustuką",
+            "invalidURL": "neteisingas URL"
+        },
+        "FileTooLarge": "Failas per didelis, kad būtų galima išsaugoti talpyklą. Maksimalus failo dydis {{size}}",
+        "InvalidPDF": "Failas nėra galiojantis PDF failas"
     },
     "types": {
         "Websites/article": {

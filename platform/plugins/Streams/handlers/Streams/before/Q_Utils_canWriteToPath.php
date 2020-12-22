@@ -22,27 +22,16 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 		}
 		$prefix = "files/$app/uploads/Streams/";
 		$len = strlen($prefix);
+
 		if (substr($sp, 0, $len) === $prefix) {
 			$splitId = Q_Utils::splitId($userId, 3, '/');
-			$prefix2 = "files/$app/uploads/Streams/invitations/$splitId/";
+			$prefix2 = $prefix."invitations/$splitId";
 			if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
 				$result = true; // user can write any invitations here
 				return;
 			}
 
-			// check if user can manage streams published by publisherId
-			if ($canManageLabels = Q_Config::get('Streams', 'canManage', null)) {
-				foreach(Users::byRoles($canManageLabels) as $usersContact) {
-					$splitId = Q_Utils::splitId($usersContact->userId, 3, '/');
-					$prefix2 = "files/$app/uploads/Streams/invitations/$splitId/";
-					if (substr($sp, 0, strlen($prefix2)) === $prefix2) {
-						$result = true; // user can write any invitations here
-						return;
-					}
-				}
-			}
-
-			$parts = explode('/', substr($sp, $len));
+			$parts = explode('/', substr($sp, $len));	
 			$c = count($parts);
 			if ($c >= 3) {
 				$result = false;
@@ -55,8 +44,8 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 							break;
 						}
 					}
-					$name = implode('/', array_slice($parts, $j+1, $l-$j-1));
-					if ($name and $stream = Streams::fetchOne($userId, $publisherId, $name)) {
+                    $streamName = implode('/', array_slice($parts, $j+1, $l-$j-1));
+					if ($streamName && $stream = Streams::fetchOne($userId, $publisherId, $streamName)) {
 						$result = $stream->testWriteLevel('edit');
 						Streams::$cache['canWriteToStream'] = $stream;
 						break;

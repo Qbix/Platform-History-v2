@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "آپ کو اس گفتگو میں شامل ہونے کی اجازت نہیں ہے۔",
         "startedConversation": "گفتگو شروع کی۔",
         "RealTimeCall": "ریئل ٹائم کال",
-        "SearchByName": "نام سے تلاش کریں"
+        "SearchByName": "نام سے تلاش کریں",
+        "Notifications": {
+            "Visit": "{9 999} the چیٹ کو دیکھ رہے ہیں",
+            "Join": "chat 9 999} chat چیٹ میں شامل ہوئے",
+            "Leave": "chat 9 999} the نے چیٹ چھوڑی",
+            "RelatedTo": "{{999} نے ایک {{stream.displayType}} شروع کیا"
+        }
     },
     "notifications": {
         "*": "پیغام {{& message.fields.type}} {{& stream.fields.title}} تک",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "{{toTitle}} میں نیا {9 999}",
         "Streams/relatedFrom/*": "بطور {{10009} {{999} to میں شامل",
         "Streams/mention": "{9 999} a نے ایک تبصرے میں آپ کا تذکرہ کیا",
-        "Streams/call": "{9 999} you آپ کو کال کر رہا ہے"
+        "Streams/call": "{9 999} نے ریئل ٹائم کال شروع کی"
     },
     "invite": {
         "messageContent": "{{displayName}} آپ کو {{inviteUrl}} میں مدعو کیا",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "کیا آپ واقعی اس آلہ کی رکنیت ختم کریں گے؟ یہ اس آلہ پر اطلاعات کو بند کردے گا۔",
         "Identifiers": "شناخت کرنے والے",
         "Devices": "ڈیوائسز",
-        "Streams": "سلسلہ"
+        "Streams": "سلسلہ",
+        "AreYouSureRemoveParticipant": "کیا آپ واقعی اس شریک کو ہٹانا چاہتے ہیں؟",
+        "RemoveParticipant": "شریک کو ہٹا دیں"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "اسکرین شیئرنگ چھپائیں",
             "turnOnCamera": "ویڈیو دکھائیں",
             "turnOnAudio": "آڈیو خاموش کریں",
-            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں"
+            "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں",
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
         "streamTitle": "} 9 999}} براہ راست کال"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "تصویر",
-            "description": "بصری تصویر"
+            "description": "بصری تصویر",
+            "newItem": "تصویر شامل کریں"
         },
         "Streams/images": {
             "displayType": "تصویری گیلری۔",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "فائل۔",
-            "description": "اپ لوڈ فائل"
+            "description": "اپ لوڈ فائل",
+            "newItem": "فائل شامل کریں"
         },
         "Streams/audio": {
             "displayType": "آڈیو کلپ",
-            "description": "آڈیو کلپ"
+            "description": "آڈیو کلپ",
+            "newItem": "آڈیو شامل کریں"
         },
         "Streams/video": {
             "displayType": "ویڈیو کلپ",
-            "description": "ویڈیو کلپ"
+            "description": "ویڈیو کلپ",
+            "newItem": "ویڈیو شامل کریں"
         },
         "Streams/live": {
             "displayType": "لائیو سٹریم",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "سلام ہے جس کے ساتھ کوئی صارف اپنا تعارف کروا سکتا ہے۔",
             "displayType": "سلام۔"
+        },
+        "Streams/pdf": {
+            "displayType": "پی ڈی ایف دستاویز",
+            "description": "پی ڈی ایف دستاویز",
+            "newItem": "پی ڈی ایف شامل کریں"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔"
+    },
+    "audio": {
+        "record": "ریکارڈ",
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی آڈیو ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "video": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "pdf": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی پی ڈی ایف ماخذ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "image": {
+        "reset": "ری سیٹ کریں",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں",
+        "link": "لنک",
+        "setUrl": "یو آر ایل سیٹ کریں",
+        "save": "محفوظ کریں",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "تصویری ذریعہ نہیں ہے",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
     }
 }

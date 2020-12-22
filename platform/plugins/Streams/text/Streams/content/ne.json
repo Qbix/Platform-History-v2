@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "छवि",
-            "description": "दृश्य छवि"
+            "description": "दृश्य छवि",
+            "newItem": "छवि थप्नुहोस्"
         },
         "Streams\/images": {
             "displayType": "छवि ग्यालरी",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "फाईल",
-            "description": "अपलोड गरिएको फाईल"
+            "description": "अपलोड गरिएको फाईल",
+            "newItem": "फाइल थप्नुहोस्"
         },
         "Streams\/audio": {
             "displayType": "अडियो क्लिप",
-            "description": "अडियो क्लिप"
+            "description": "अडियो क्लिप",
+            "newItem": "अडियो थप्नुहोस्"
         },
         "Streams\/video": {
             "displayType": "भिडियो क्लिप",
-            "description": "भिडियो क्लिप"
+            "description": "भिडियो क्लिप",
+            "newItem": "भिडियो थप्नुहोस्"
         },
         "Streams\/live": {
             "displayType": "प्रत्यक्ष प्रसारण",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "वास्तविक-समय कल",
             "description": "एक वास्तविक समय भिडियो \/ अडियो कल"
+        },
+        "Streams\/pdf": {
+            "displayType": "पीडीएफ कागजात",
+            "description": "पीडीएफ कागजात",
+            "newItem": "पीडीएफ थप्नुहोस्"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "यो सामग्री तपाईंबाट लुकेको छ।"
+    },
+    "audio": {
+        "record": "रेकर्ड",
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिंक",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै अडियो स्रोत छैन",
+        "uploadLimit": "अधिकतम फाईल आकार: {{9{}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाईल आकार {{9{} is is हो"
+    },
+    "video": {
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिंक",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै भिडियो स्रोत छैन",
+        "uploadLimit": "अधिकतम फाईल आकार: {{9{}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाईल आकार {{9{} is is हो"
+    },
+    "pdf": {
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिंक",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "Pdf स्रोत छैन",
+        "uploadLimit": "अधिकतम फाइल आकार: {{9{}}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाईल आकार {{9{} is is हो"
+    },
+    "image": {
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "वर्णन",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिंक",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अवैध URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै छवि स्रोत छैन",
+        "uploadLimit": "अधिकतम फाईल आकार: {{9{}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाइल आकार {{9{} is is हो"
     }
 }

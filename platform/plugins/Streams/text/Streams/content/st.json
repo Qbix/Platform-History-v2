@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Setšoantšo",
-            "description": "setšoantšo se bonoang"
+            "description": "setšoantšo se bonoang",
+            "newItem": "Eketsa Setšoantšo"
         },
         "Streams\/images": {
             "displayType": "Setšoantšo sa litšoantšo",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Faele",
-            "description": "faele e kentsoeng"
+            "description": "faele e kentsoeng",
+            "newItem": "Kenya File"
         },
         "Streams\/audio": {
             "displayType": "Molumo oa Audio",
-            "description": "sekotlo sa molumo"
+            "description": "sekotlo sa molumo",
+            "newItem": "Kenya Audio"
         },
         "Streams\/video": {
             "displayType": "Papali ea Video",
-            "description": "sekotwana sa video"
+            "description": "sekotwana sa video",
+            "newItem": "Kenya Video"
         },
         "Streams\/live": {
             "displayType": "Ho pharalla",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Mohala oa Nako ea &#39;nete",
             "description": "video ea nako ea &#39;nete \/ mohala oa molumo"
+        },
+        "Streams\/pdf": {
+            "displayType": "Tokomane ea PDF",
+            "description": "Tokomane ea PDF",
+            "newItem": "Kenya PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Litaba tsena li patetsoe uena."
+    },
+    "audio": {
+        "record": "Rekoto",
+        "reset": "Seta bocha",
+        "edit": "Edita",
+        "title": "sehlooho",
+        "description": "tlhaloso",
+        "upload": "Kenya",
+        "link": "Khokahano",
+        "setUrl": "Seta URL",
+        "save": "Boloka",
+        "setClip": "Khaola Sekoto",
+        "invalidURL": "URL e fosahetseng",
+        "invalidFile": "Faele e fosahetseng",
+        "errorNoSource": "Ha ho mohloli oa molumo",
+        "uploadLimit": "Boholo ba faele: {{size}}",
+        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+    },
+    "video": {
+        "reset": "Seta bocha",
+        "edit": "Edita",
+        "title": "sehlooho",
+        "description": "tlhaloso",
+        "upload": "Kenya",
+        "link": "Khokahano",
+        "setUrl": "Seta URL",
+        "save": "Boloka",
+        "setClip": "Khaola Sekoto",
+        "invalidURL": "URL e fosahetseng",
+        "invalidFile": "Faele e fosahetseng",
+        "errorNoSource": "Ha ho mohloli oa video",
+        "uploadLimit": "Boholo ba faele: {{size}}",
+        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+    },
+    "pdf": {
+        "reset": "Seta bocha",
+        "edit": "Edita",
+        "title": "sehlooho",
+        "description": "tlhaloso",
+        "upload": "Kenya",
+        "link": "Khokahano",
+        "setUrl": "Seta URL",
+        "save": "Boloka",
+        "setClip": "Khaola Sekoto",
+        "invalidURL": "URL e fosahetseng",
+        "invalidFile": "Faele e fosahetseng",
+        "errorNoSource": "Ha ho mohloli oa pdf",
+        "uploadLimit": "Boholo ba faele: {{size}}",
+        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+    },
+    "image": {
+        "reset": "Seta bocha",
+        "edit": "Edita",
+        "title": "sehlooho",
+        "description": "tlhaloso",
+        "upload": "Kenya",
+        "link": "Khokahano",
+        "setUrl": "Seta URL",
+        "save": "Boloka",
+        "setClip": "Khaola Sekoto",
+        "invalidURL": "URL e fosahetseng",
+        "invalidFile": "Faele e fosahetseng",
+        "errorNoSource": "Ha ho mohloli oa setšoantšo",
+        "uploadLimit": "Boholo ba faele: {{size}}",
+        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
     }
 }

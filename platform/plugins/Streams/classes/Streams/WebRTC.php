@@ -62,6 +62,10 @@ abstract class Streams_WebRTC
     static function getOrCreateStream($publisherId, $roomId) {
         $streamName = null;
 
+        if(strpos($roomId, 'Streams/webrtc/') !== false) {
+            $roomId = explode('/', $roomId)[2];
+        }
+
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
             $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);

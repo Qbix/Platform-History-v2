@@ -98,5 +98,23 @@
         "inHour": "binne {{h}} uur",
         "inHours": "binne {{h}} uur",
         "inUnderMinute": "binne minder as 1 minuut"
+    },
+    "tabs": {
+        "more": "meer",
+        "Menu": "Spyskaart"
+    },
+    "video": {
+        "clip": "knip",
+        "errorNoSource": "Geen video-bron nie"
+    },
+    "pdf": {
+        "clip": "knip",
+        "errorNoSource": "Geen pdf-bron nie"
+    },
+    "clip": {
+        "SetClipStart": "Stel Clip Start",
+        "ClipStart": "Knip begin",
+        "SetClipEnd": "Stel die einde van die knip",
+        "ClipEnd": "Knip einde"
     }
 }

@@ -32,14 +32,18 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	var element = $(this.element);
 	this.$input = $('input', element);
+	var offset = this.$input && this.$input.offset();
+	if (!offset) {
+		return; // some error
+	}
 	var cached = {};
 	var focusedResults = false;
 	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
 		.css({
 			display: 'none',
 			position: 'absolute',
-			left: tool.$input.offset().left + 'px',
-			top: tool.$input.offset().top + tool.$input.outerHeight() + 'px',
+			left: offset.left + 'px',
+			top: offset.top + tool.$input.outerHeight() + 'px',
 			width: tool.$input.outerWidth(),
 			'z-index': 80000,
 			background: 'white',
@@ -65,8 +69,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 			}
 			focusedResults = false;
 		}, 10);
-	}).on('focus change', doQuery);
-	element.on('keyup keydown', doQuery);
+	}).on('focus change keyup keydown', doQuery)
 	
 	var lastQuery = null;
 
@@ -214,8 +217,12 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	end: function () {
-		this.$input.blur().trigger('Q_refresh');
-		this.$results.remove();
+		if (this.$input) {
+			this.$input.blur().trigger('Q_refresh');	
+		}
+		if (this.$results) {
+			this.$results.remove();	
+		}
 	},
 	Q: {
 		beforeRemove: function () {

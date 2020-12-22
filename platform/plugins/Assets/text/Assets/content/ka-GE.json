@@ -32,7 +32,12 @@
         "Buy": "იყიდეთ",
         "Credits": "კრედიტები",
         "ErrorInvalidAmount": "თანხა არასწორია",
-        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ ვუჭერთ მხარს 999 {currency ვალუტას"
+        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ ვუჭერთ მხარს 999 {currency ვალუტას",
+        "WatchClip": "მოიპოვა {{amount}} კრედიტი {{fromStreamTitle}} - ის ყურებისას",
+        "PurchaseCredits": "კრედიტების შეძენა",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} კრედიტი"
+        }
     },
     "history": {
         "Date": "თარიღი",
@@ -143,6 +148,7 @@
         "OptionalContribution": "არჩევითი წვლილი",
         "RequiredPayment": "საჭირო გადახდა",
         "AreYouSureDelete": "დარწმუნებული ხართ, რომ გსურთ ამ სერვისის წაშლა?",
-        "AmountServicesRelated": "ამ მომსახურებასთან დაკავშირებული 999 {}} შესაძლებლობები არსებობს. ისინი ასევე მოიხსნება."
+        "AmountServicesRelated": "ამ მომსახურებასთან დაკავშირებული 999 {}} შესაძლებლობები არსებობს. ისინი ასევე მოიხსნება.",
+        "Free": "უფასო"
     }
 }

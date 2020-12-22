@@ -129,6 +129,8 @@ for ($i = ($FROM_APP ? 1 : 2); $i < $count; ++$i) {
 			$options['dirmode'] = 0775;
 			$mode = '';
 			break;
+		case 'plugin':
+			$plugins[] = $argv[$i];
 		case '':
 			switch ($argv[$i]) {
 				case '-s':

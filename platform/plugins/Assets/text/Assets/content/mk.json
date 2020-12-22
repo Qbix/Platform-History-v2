@@ -32,7 +32,12 @@
         "Buy": "Купи",
         "Credits": "Кредити",
         "ErrorInvalidAmount": "Износот е невалиден",
-        "ErrorInvalidCurrency": "За жал, сè уште не поддржуваме валута {999"
+        "ErrorInvalidCurrency": "За жал, сè уште не поддржуваме валута {999",
+        "WatchClip": "Заработени {{amount}} кредити за гледање {{fromStreamTitle}}",
+        "PurchaseCredits": "Кредити за набавка",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредити"
+        }
     },
     "history": {
         "Date": "Датум",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Факултативен придонес",
         "RequiredPayment": "Задолжително плаќање",
         "AreYouSureDelete": "Дали сте сигурни дека сакате да ја избришете оваа услуга?",
-        "AmountServicesRelated": "Постојат достапности на оваа услуга од 999 фунти. Тие исто така ќе бидат отстранети."
+        "AmountServicesRelated": "Постојат достапности на оваа услуга од 999 фунти. Тие исто така ќе бидат отстранети.",
+        "Free": "Бесплатно"
     }
 }

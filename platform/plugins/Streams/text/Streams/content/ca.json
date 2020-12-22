@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Imatge",
-            "description": "imatge visual"
+            "description": "imatge visual",
+            "newItem": "Afegeix una imatge"
         },
         "Streams\/images": {
             "displayType": "Galeria d’Imatges",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Dossier",
-            "description": "fitxer penjat"
+            "description": "fitxer penjat",
+            "newItem": "Afegeix un fitxer"
         },
         "Streams\/audio": {
             "displayType": "Clip d&#39;àudio",
-            "description": "clip d’àudio"
+            "description": "clip d’àudio",
+            "newItem": "Afegeix àudio"
         },
         "Streams\/video": {
             "displayType": "Clip de vídeo",
-            "description": "Clip de vídeo"
+            "description": "Clip de vídeo",
+            "newItem": "Afegeix un vídeo"
         },
         "Streams\/live": {
             "displayType": "Corrent en directe",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "salutació amb la qual un usuari es pot presentar",
             "displayType": "Salutació"
+        },
+        "Streams\/pdf": {
+            "displayType": "Document PDF",
+            "description": "Document PDF",
+            "newItem": "Afegeix PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Aquest contingut està ocult."
+    },
+    "audio": {
+        "record": "Registre",
+        "reset": "Restableix",
+        "edit": "Edita",
+        "title": "títol",
+        "description": "descripció",
+        "upload": "Pujar",
+        "link": "Enllaç",
+        "setUrl": "Estableix l&#39;URL",
+        "save": "Desa",
+        "setClip": "Clip retallable",
+        "invalidURL": "URL no vàlid",
+        "invalidFile": "Fitxer no vàlid",
+        "errorNoSource": "No hi ha cap font d&#39;àudio",
+        "uploadLimit": "Mida màxima del fitxer: {{size}}",
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+    },
+    "video": {
+        "reset": "Restableix",
+        "edit": "Edita",
+        "title": "títol",
+        "description": "descripció",
+        "upload": "Pujar",
+        "link": "Enllaç",
+        "setUrl": "Estableix l&#39;URL",
+        "save": "Desa",
+        "setClip": "Clip retallable",
+        "invalidURL": "URL no vàlid",
+        "invalidFile": "Fitxer no vàlid",
+        "errorNoSource": "No hi ha cap font de vídeo",
+        "uploadLimit": "Mida màxima del fitxer: {{size}}",
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+    },
+    "pdf": {
+        "reset": "Restableix",
+        "edit": "Edita",
+        "title": "títol",
+        "description": "descripció",
+        "upload": "Pujar",
+        "link": "Enllaç",
+        "setUrl": "Estableix l&#39;URL",
+        "save": "Desa",
+        "setClip": "Clip retallable",
+        "invalidURL": "URL no vàlid",
+        "invalidFile": "Fitxer no vàlid",
+        "errorNoSource": "No hi ha cap font en pdf",
+        "uploadLimit": "Mida màxima del fitxer: {{size}}",
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+    },
+    "image": {
+        "reset": "Restableix",
+        "edit": "Edita",
+        "title": "títol",
+        "description": "descripció",
+        "upload": "Pujar",
+        "link": "Enllaç",
+        "setUrl": "Estableix l&#39;URL",
+        "save": "Desa",
+        "setClip": "Clip retallable",
+        "invalidURL": "URL no vàlid",
+        "invalidFile": "Fitxer no vàlid",
+        "errorNoSource": "No hi ha cap font d’imatge",
+        "uploadLimit": "Mida màxima del fitxer: {{size}}",
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
     }
 }

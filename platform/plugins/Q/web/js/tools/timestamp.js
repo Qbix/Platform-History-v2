@@ -127,7 +127,7 @@ Q.Tool.define('Q/timestamp', function () {
 				result = strftime(format, time);
 			}
 		} else if (diff < -3600) {
-			result = '1 hour ago';
+			result = t.hourAgo.interpolate({h: 1});
 		} else if (diff < -60 * 2) {
 			result = t.minutesAgo.interpolate({
 				m: Math.floor(-diff / 60)

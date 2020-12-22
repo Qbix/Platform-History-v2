@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Duyệt",
             "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
             "StartConversation": "Bắt đầu hội thoại",
-            "GotoConversation": "Đi tới hội thoại"
-        }
+            "GotoConversation": "Đi tới hội thoại",
+            "reset": "Cài lại",
+            "edit": "Biên tập",
+            "link": "Liên kết",
+            "setUrl": "Đặt URL",
+            "save": "Tiết kiệm",
+            "setClip": "Cắt ra Clip",
+            "invalidURL": "URL không hợp lệ"
+        },
+        "FileTooLarge": "Tệp quá lớn để lưu vào bộ nhớ đệm. Kích thước tệp tối đa {{size}}",
+        "InvalidPDF": "Tệp không phải là PDF hợp lệ"
     },
     "types": {
         "Websites\/article": {

@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Íomha",
-            "description": "íomhá amhairc"
+            "description": "íomhá amhairc",
+            "newItem": "Cuir Íomhá leis"
         },
         "Streams\/images": {
             "displayType": "Gailearaí Íomhá",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Comhad",
-            "description": "comhad uaslódáilte"
+            "description": "comhad uaslódáilte",
+            "newItem": "Cuir Comhad leis"
         },
         "Streams\/audio": {
             "displayType": "Clip Fuaime",
-            "description": "gearrthóg fuaime"
+            "description": "gearrthóg fuaime",
+            "newItem": "Cuir Fuaim leis"
         },
         "Streams\/video": {
             "displayType": "Clip Físeáin",
-            "description": "gearrthóg físe"
+            "description": "gearrthóg físe",
+            "newItem": "Cuir Físeán leis"
         },
         "Streams\/live": {
             "displayType": "Sruth beo",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "beannú ar féidir le húsáideoir iad féin a thabhairt isteach",
             "displayType": "Beannacht"
+        },
+        "Streams\/pdf": {
+            "displayType": "Doiciméad PDF",
+            "description": "Doiciméad PDF",
+            "newItem": "Cuir PDF leis"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tá an t-ábhar seo i bhfolach uait."
+    },
+    "audio": {
+        "record": "Taifead",
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan aon fhoinse fuaime",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "video": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan aon fhoinse físe",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "pdf": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Sin foinse pdf",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "image": {
+        "reset": "Athshocraigh",
+        "edit": "Cuir in Eagar",
+        "title": "teideal",
+        "description": "tuairisc",
+        "upload": "Uaslódáil",
+        "link": "Nasc",
+        "setUrl": "Socraigh URL",
+        "save": "Sábháil",
+        "setClip": "Gearrthóg Gearr Amach",
+        "invalidURL": "URL neamhbhailí",
+        "invalidFile": "Comhad Neamhbhailí",
+        "errorNoSource": "Gan foinse íomhá",
+        "uploadLimit": "Uasmhéid comhaid: {{size}}",
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
     }
 }

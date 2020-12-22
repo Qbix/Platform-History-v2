@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "obraz",
-            "description": "vizuální obrázek"
+            "description": "vizuální obrázek",
+            "newItem": "Přidat obrázek"
         },
         "Streams\/images": {
             "displayType": "Galerie Obrázků",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Soubor",
-            "description": "nahraný soubor"
+            "description": "nahraný soubor",
+            "newItem": "Přidat soubor"
         },
         "Streams\/audio": {
             "displayType": "Zvukový klip",
-            "description": "zvukový klip"
+            "description": "zvukový klip",
+            "newItem": "Přidat zvuk"
         },
         "Streams\/video": {
             "displayType": "Videoklip",
-            "description": "videoklip"
+            "description": "videoklip",
+            "newItem": "Přidat video"
         },
         "Streams\/live": {
             "displayType": "Živý přenos",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "pozdrav, kterým se uživatel může představit",
             "displayType": "Pozdrav"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF dokument",
+            "description": "PDF dokument",
+            "newItem": "Přidat PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Tento obsah je před vámi skrytý."
+    },
+    "audio": {
+        "record": "Záznam",
+        "reset": "Resetovat",
+        "edit": "Upravit",
+        "title": "titul",
+        "description": "popis",
+        "upload": "nahrát",
+        "link": "Odkaz",
+        "setUrl": "Nastavit URL",
+        "save": "Uložit",
+        "setClip": "Vystřihnout klip",
+        "invalidURL": "neplatná URL",
+        "invalidFile": "Neplatný soubor",
+        "errorNoSource": "Žádný zdroj zvuku",
+        "uploadLimit": "Maximální velikost souboru: {{size}}",
+        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+    },
+    "video": {
+        "reset": "Resetovat",
+        "edit": "Upravit",
+        "title": "titul",
+        "description": "popis",
+        "upload": "nahrát",
+        "link": "Odkaz",
+        "setUrl": "Nastavit URL",
+        "save": "Uložit",
+        "setClip": "Vystřihnout klip",
+        "invalidURL": "neplatná URL",
+        "invalidFile": "Neplatný soubor",
+        "errorNoSource": "Žádný zdroj videa",
+        "uploadLimit": "Maximální velikost souboru: {{size}}",
+        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+    },
+    "pdf": {
+        "reset": "Resetovat",
+        "edit": "Upravit",
+        "title": "titul",
+        "description": "popis",
+        "upload": "nahrát",
+        "link": "Odkaz",
+        "setUrl": "Nastavit URL",
+        "save": "Uložit",
+        "setClip": "Vystřihnout klip",
+        "invalidURL": "neplatná URL",
+        "invalidFile": "Neplatný soubor",
+        "errorNoSource": "Žádný zdroj ve formátu PDF",
+        "uploadLimit": "Maximální velikost souboru: {{size}}",
+        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+    },
+    "image": {
+        "reset": "Resetovat",
+        "edit": "Upravit",
+        "title": "titul",
+        "description": "popis",
+        "upload": "nahrát",
+        "link": "Odkaz",
+        "setUrl": "Nastavit URL",
+        "save": "Uložit",
+        "setClip": "Vystřihnout klip",
+        "invalidURL": "neplatná URL",
+        "invalidFile": "Neplatný soubor",
+        "errorNoSource": "Žádný zdroj obrázku",
+        "uploadLimit": "Maximální velikost souboru: {{size}}",
+        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
     }
 }

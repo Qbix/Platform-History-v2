@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Gambar",
-            "description": "imej visual"
+            "description": "imej visual",
+            "newItem": "Tambah Imej"
         },
         "Streams\/images": {
             "displayType": "Galeri Imej",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Fail",
-            "description": "fail yang dimuat naik"
+            "description": "fail yang dimuat naik",
+            "newItem": "Tambah fail"
         },
         "Streams\/audio": {
             "displayType": "Klip Audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Tambah Audio"
         },
         "Streams\/video": {
             "displayType": "Klip video",
-            "description": "klip video"
+            "description": "klip video",
+            "newItem": "Tambah Video"
         },
         "Streams\/live": {
             "displayType": "Siaran langsung",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "salam dengan mana pengguna boleh memperkenalkan diri mereka",
             "displayType": "Salam"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokumen PDF",
+            "description": "Dokumen PDF",
+            "newItem": "Tambah PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Kandungan ini disembunyikan daripada anda."
+    },
+    "audio": {
+        "record": "Rekod",
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber audio",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "video": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber video",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "pdf": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber pdf",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "image": {
+        "reset": "Tetapkan semula",
+        "edit": "Edit",
+        "title": "tajuk",
+        "description": "penerangan",
+        "upload": "Muat naik",
+        "link": "Pautan",
+        "setUrl": "Tetapkan URL",
+        "save": "Jimat",
+        "setClip": "Potong Klip",
+        "invalidURL": "URL tidak sah",
+        "invalidFile": "Fail Tidak Sah",
+        "errorNoSource": "Tiada sumber gambar",
+        "uploadLimit": "Saiz fail maksimum: {{size}}",
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
     }
 }

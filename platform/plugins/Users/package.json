@@ -9,16 +9,16 @@
 		"node": ">= 0.6.0"
 	},
 	"dependencies": {
-		"nodemailer": "6.3.x",
-		"nodemailer-smtp-transport": "2.7.x",
-		"nodemailer-sendmail-transport": "1.x",
+		"apn": "^2.2.0",
 		"fcm-node": "^1.5.1",
-		"web-push": "^3.2.2",
-		"twilio": "0.4.x",
-		"yuidocjs": "0.3.x",
-		"apn": "^2.1.1",
 		"node-adm": "^0.9.1",
-		"wns": "^0.5.3"
+		"nodemailer": "6.3.x",
+		"nodemailer-sendmail-transport": "1.x",
+		"nodemailer-smtp-transport": "2.7.x",
+		"twilio": "0.4.x",
+		"web-push": "^3.2.2",
+		"wns": "^0.5.3",
+		"yuidocjs": "^0.10.2"
 	},
 	"repository": {
 		"type": "git",

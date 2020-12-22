@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Gambar",
-            "description": "gambar visual"
+            "description": "gambar visual",
+            "newItem": "Tambah Gambar"
         },
         "Streams\/images": {
             "displayType": "Galeri Gambar",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "file sing diunggah"
+            "description": "file sing diunggah",
+            "newItem": "Tambah File"
         },
         "Streams\/audio": {
             "displayType": "Klip Audio",
-            "description": "klip audio"
+            "description": "klip audio",
+            "newItem": "Tambah Audio"
         },
         "Streams\/video": {
             "displayType": "Klip Video",
-            "description": "klip video"
+            "description": "klip video",
+            "newItem": "Tambah Video"
         },
         "Streams\/live": {
             "displayType": "Urip",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Telpon Real-Time",
             "description": "telpon video \/ audio nyata"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokumen PDF",
+            "description": "Dokumen PDF",
+            "newItem": "Tambah PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Konten iki didhelikake saka sampeyan."
+    },
+    "audio": {
+        "record": "Cathetan",
+        "reset": "Reset",
+        "edit": "Sunting",
+        "title": "judhul",
+        "description": "katrangan",
+        "upload": "Unggah",
+        "link": "Link",
+        "setUrl": "Setel URL",
+        "save": "Ngirit",
+        "setClip": "Klip Potong",
+        "invalidURL": "URL ora valid",
+        "invalidFile": "File ora valid",
+        "errorNoSource": "Ora ono sumber audio",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Sunting",
+        "title": "judhul",
+        "description": "katrangan",
+        "upload": "Unggah",
+        "link": "Link",
+        "setUrl": "Setel URL",
+        "save": "Ngirit",
+        "setClip": "Klip Potong",
+        "invalidURL": "URL ora valid",
+        "invalidFile": "File ora valid",
+        "errorNoSource": "Ora ana sumber video",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Sunting",
+        "title": "judhul",
+        "description": "katrangan",
+        "upload": "Unggah",
+        "link": "Link",
+        "setUrl": "Setel URL",
+        "save": "Ngirit",
+        "setClip": "Klip Potong",
+        "invalidURL": "URL ora valid",
+        "invalidFile": "File ora valid",
+        "errorNoSource": "Ora ana sumber pdf",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Sunting",
+        "title": "judhul",
+        "description": "katrangan",
+        "upload": "Unggah",
+        "link": "Link",
+        "setUrl": "Setel URL",
+        "save": "Ngirit",
+        "setClip": "Klip Potong",
+        "invalidURL": "URL ora valid",
+        "invalidFile": "File ora valid",
+        "errorNoSource": "Ora ana sumber gambar",
+        "uploadLimit": "Ukuran file maksimal: {{size}}",
+        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
     }
 }

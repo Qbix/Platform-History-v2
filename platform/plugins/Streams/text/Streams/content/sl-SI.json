@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu pogovoru.",
         "startedConversation": "začel pogovor",
         "RealTimeCall": "Klic v realnem času",
-        "SearchByName": "Iščite po imenu"
+        "SearchByName": "Iščite po imenu",
+        "Notifications": {
+            "Visit": "{{displayName}} obišče klepet",
+            "Join": "{{displayName}} se je pridružil klepetu",
+            "Leave": "{{displayName}} je zapustil klepet",
+            "RelatedTo": "{{displayName}} je začel {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Sporočilo {{& message.fields.type}} do {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Novo {{relationDisplayType}} v {{toTitle}}",
         "Streams/relatedFrom/*": "Dodano {{toTitle}} kot {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} vas je omenil v komentarju",
-        "Streams/call": "{{displayName}} vas kliče"
+        "Streams/call": "{{displayName}} je sprožil klic v realnem času"
     },
     "invite": {
         "messageContent": "{{displayName}} vas je povabil na {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ali ste prepričani, da odjavite to napravo? Ta naprava bo izklopila obvestila.",
         "Identifiers": "Identifikatorji",
         "Devices": "Naprave",
-        "Streams": "Potoki"
+        "Streams": "Potoki",
+        "AreYouSureRemoveParticipant": "Ali ste prepričani, da želite odstraniti tega udeleženca?",
+        "RemoveParticipant": "Odstrani udeleženca"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Skrivanje skupne rabe zaslona",
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Vklopite zvok zvoka",
-            "turnOnScreenSharing": "Pokažite skupno rabo zaslona"
+            "turnOnScreenSharing": "Pokažite skupno rabo zaslona",
+            "fullScreen": "Celozaslonski način"
         },
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
         "streamTitle": "{{1}} klic v živo"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Slika",
-            "description": "vizualna podoba"
+            "description": "vizualna podoba",
+            "newItem": "Dodaj sliko"
         },
         "Streams/images": {
             "displayType": "Galerija slik",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "mapa",
-            "description": "naložena datoteka"
+            "description": "naložena datoteka",
+            "newItem": "Dodaj datoteko"
         },
         "Streams/audio": {
             "displayType": "Avdio posnetek",
-            "description": "avdio posnetek"
+            "description": "avdio posnetek",
+            "newItem": "Dodaj zvok"
         },
         "Streams/video": {
             "displayType": "Video posnetek",
-            "description": "video posnetek"
+            "description": "video posnetek",
+            "newItem": "Dodaj video"
         },
         "Streams/live": {
             "displayType": "Livestream",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "pozdrav, s katerim se lahko uporabnik predstavi",
             "displayType": "Lep pozdrav"
+        },
+        "Streams/pdf": {
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Dodaj PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ta vsebina je skrita pred vami."
+    },
+    "audio": {
+        "record": "Snemaj",
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni zvočnega vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "video": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni video vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "pdf": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni pdf vira",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "image": {
+        "reset": "Ponastaviti",
+        "edit": "Uredi",
+        "title": "naslov",
+        "description": "opis",
+        "upload": "Naloži",
+        "link": "Povezava",
+        "setUrl": "Nastavi URL",
+        "save": "Shrani",
+        "setClip": "Izreži sponko",
+        "invalidURL": "Neveljaven URL",
+        "invalidFile": "Neveljavna datoteka",
+        "errorNoSource": "Ni vira slike",
+        "uploadLimit": "Največja velikost datoteke: {{size}}",
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
     }
 }

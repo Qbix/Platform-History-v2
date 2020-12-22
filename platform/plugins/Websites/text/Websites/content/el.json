@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Ξεφυλλίζω",
             "WriteToStartConversation": "Γράψτε τις σκέψεις σας για να ξεκινήσετε τη συζήτηση",
             "StartConversation": "Ξεκινήστε τη συνομιλία",
-            "GotoConversation": "Μεταβείτε στην &quot;Συνομιλία&quot;"
-        }
+            "GotoConversation": "Μεταβείτε στην &quot;Συνομιλία&quot;",
+            "reset": "Επαναφορά",
+            "edit": "Επεξεργασία",
+            "link": "Σύνδεσμος",
+            "setUrl": "Ορισμός διεύθυνσης URL",
+            "save": "Αποθηκεύσετε",
+            "setClip": "Αποκοπή κλιπ",
+            "invalidURL": "Μη έγκυρη διεύθυνση URL"
+        },
+        "FileTooLarge": "Το αρχείο είναι πολύ μεγάλο για προσωρινή αποθήκευση. Μέγιστο μέγεθος αρχείου {{size}}",
+        "InvalidPDF": "Το αρχείο δεν είναι έγκυρο PDF"
     },
     "types": {
         "Websites\/article": {

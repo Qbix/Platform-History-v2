@@ -32,7 +32,12 @@
         "Buy": "Kjøpe",
         "Credits": "studiepoeng",
         "ErrorInvalidAmount": "Beløp ugyldig",
-        "ErrorInvalidCurrency": "Dessverre støtter vi ikke valuta {{currency}} ennå"
+        "ErrorInvalidCurrency": "Dessverre støtter vi ikke valuta {{currency}} ennå",
+        "WatchClip": "Fikk {{amount}} studiepoeng for å se på {{fromStreamTitle}}",
+        "PurchaseCredits": "Kjøp studiepoeng",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} studiepoeng"
+        }
     },
     "history": {
         "Date": "Dato",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valgfritt bidrag",
         "RequiredPayment": "Påkrevd betaling",
         "AreYouSureDelete": "Er du sikker på at du vil slette denne tjenesten?",
-        "AmountServicesRelated": "Det er {{amount}} tilgjengeligheter relatert til denne tjenesten. De er også vil bli fjernet."
+        "AmountServicesRelated": "Det er {{amount}} tilgjengeligheter relatert til denne tjenesten. De er også vil bli fjernet.",
+        "Free": "Gratis"
     }
 }

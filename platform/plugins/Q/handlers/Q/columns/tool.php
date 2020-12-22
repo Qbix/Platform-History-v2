@@ -28,7 +28,7 @@
  *  @param {boolean} [$options.closeFromTitleClick] Whether the whole title would be a trigger for the back button. Defaults to true.
  *  @param {array}  [$options.scrollbarsAutoHide] If not null, enables Q/scrollbarsAutoHide functionality with options from here. Enabled by default.
  *  @param {boolean} [$options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android, false everywhere else.
- *  @param {array}   [$options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'content' => $html, 'close' => true, 'controls' => $html, 'url' => $url), 'columnClass' => string, with "controls", "close", "columnClass" and "url" being optional
+ *  @param {array}   [$options.columns] In PHP only, an array of $name => $column pairs, where $column is in the form array('title' => $html, 'column' => $html, 'close' => true, 'controls' => $html, 'url' => $url), 'columnClass' => string, with "controls", "close", "columnClass" and "url" being optional
  * @param {array} [$options.classes=Q_Config.get('Q','columns','classes')]
  *  An array of "columnName" => "css classes here"
  * @return {string}

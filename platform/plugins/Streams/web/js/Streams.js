@@ -569,6 +569,7 @@ Q.Tool.define({
 	"Streams/html"		 : "{{Streams}}/js/tools/html.js",
 	"Streams/preview"  	   : "{{Streams}}/js/tools/preview.js",
 	"Streams/image/preview": "{{Streams}}/js/tools/image/preview.js",
+	"Streams/image/chat": "{{Streams}}/js/tools/image/chat.js",
 	"Streams/file/preview" : "{{Streams}}/js/tools/file/preview.js",
 	"Streams/category/preview" : "{{Streams}}/js/tools/category/preview.js",
 	"Streams/category"	 : "{{Streams}}/js/tools/category.js",
@@ -583,12 +584,23 @@ Q.Tool.define({
 		// does nothing
 	},
 	"Streams/audio/preview" : "{{Streams}}/js/tools/audio/preview.js",
+	"Streams/audio/chat" : "{{Streams}}/js/tools/audio/chat.js",
+	"Streams/video/preview" : "{{Streams}}/js/tools/video/preview.js",
+	"Streams/video/chat" : "{{Streams}}/js/tools/video/chat.js",
+	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
+	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element).tool('Streams/mentions/chat').activate();
+	$(this.element)
+	.tool('Streams/mentions/chat')
+	.tool('Streams/audio/chat')
+	.tool('Streams/video/chat')
+	.tool('Streams/pdf/chat')
+	.tool('Streams/image/chat')
+	.activate();
 }, 'Streams');
 
 /**
@@ -771,6 +783,7 @@ var _Streams_batchFunction_options = {
  *   @param {String} [related.publisherId] the id of whoever is publishing the related stream
  *   @param {String} [related.streamName] the name of the related stream
  *   @param {Mixed} [related.type] the type of the relation
+ *   @param {Mixed} [related.weight] the type of the relation
  * @param {Object} [options] Any extra options involved in creating the stream
  *   @param {Object} [options.fields] Used to override any other fields passed in the request
  *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config
@@ -1504,7 +1517,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 Streams.invite.options = {
 	followup: "future",
 	identifierTypes: ["email", "mobile"],
-	youCanNowPasteDuration: 1000
+	youCanNowPasteDuration: 10000
 };
 
 /**
@@ -2196,7 +2209,8 @@ Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
  * @return {String|null} the url, or null if no url
  */
 Sp.fileUrl = function() {
-	var url = this.getAttribute('Q.file.url') || this.getAttribute('file.url');
+	var url = this.getAttribute("Q.file.url") || this.getAttribute("file.url") || this.getAttribute("url");
+
 	if (!url) {
 		return null;
 	}
@@ -4233,7 +4247,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 1000);
+MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -4706,6 +4720,153 @@ var Interests = Streams.Interests = {
 	my: null
 };
 
+/**
+ * Class with functionality to operate with Metrics
+ * @class Streams.Metrics
+ * @constructor
+ * @param {Object} params JSON object with necessary params
+ * @param {number} params.period Seconds period to send data to server
+ * @param {number} params.predefined Seconds period to send data to server
+ * @param {boolean|Object} params.useFaces If true, used Users.Faces with debounce=30. If false - don't use Users.Faces.
+ * If object - use this object as params for Users.Faces.
+ */
+Streams.Metrics = function (params) {
+	var that = this;
+
+	this.publisherId = Q.getObject("publisherId", params) || null;
+	this.streamName = Q.getObject("streamName", params) || null;
+
+	if (!this.publisherId) {
+		console.warn("Streams.Metrics: publisherId undefined");
+	}
+
+	if (!this.streamName) {
+		console.warn("Streams.Metrics: streamName undefined");
+	}
+
+	// set useFaces option
+	this.useFaces = Q.getObject("useFaces", params);
+	if (this.useFaces === true) {
+		this.useFaces = {
+			debounce: 30
+		};
+	}
+
+	/**
+	 * Seconds period to send data to server
+	 */
+	this.period = (Q.getObject("period", params) || 60) * 1000;
+
+	// min period to compare with prev value to decide if this continue of watching or seeked to new position
+	this.minPeriod = Q.getObject("minPeriod", params) || 2;
+
+	/**
+	 * Data saved before send to server
+	 */
+	this.predefined = Q.getObject("predefined", params) || [];
+
+	/**
+	 * Save time as metrics locally before save
+	 * @method add
+	 * @param {number} value
+	 */
+	this.add = function (value) {
+
+		// check active
+		if (Q.isDocumentHidden()) {
+			return;
+		}
+
+		// check faces
+		if (!that.face) {
+			return;
+		}
+
+		// iterate all periods and try to fing the period which continue value is
+		var sorted = false;
+		Q.each(that.predefined, function (i, period) {
+			if (sorted) {
+				return;
+			}
+
+			var start = period[0];
+			var end = period[1] || start;
+
+			if (value >= start && value <= end) {
+				sorted = true;
+			}
+			else if (value > end && value < end + that.minPeriod) {
+				period[1] = value;
+				sorted = true;
+			}
+			else if (value < start && value > start - that.minPeriod) {
+				period[0] = value;
+				sorted = true;
+			}
+		});
+
+		// if suitable period not found, create new priod
+		if (!sorted) {
+			that.predefined.push([value]);
+		}
+	};
+
+
+	/**
+	 * Stop timer interval
+	 * @method stop
+	 */
+	this.stop = function () {
+		that.timerId && clearInterval(that.timerId);
+		that.faces && that.faces.stop();
+	};
+
+	if (this.useFaces) {
+		Q.ensure(Q.Users.Faces, '{{Users}}/js/Faces.js', function () {
+			that.faces = new Q.Users.Faces(that.useFaces);
+			that.faces.start(function () {
+				that.faces.onEnter.add(function () {
+					that.face = true;
+				});
+				that.faces.onLeave.add(function () {
+					that.face = false;
+				});
+			});
+		});
+	}
+
+	/**
+	 * Start timer interval
+	 */
+	this.timerId = setInterval(function () {
+		if (!that.publisherId || !that.streamName) {
+			return;
+		}
+
+		if (Q.isEmpty(that.predefined)) {
+			return;
+		}
+
+		Q.req("Streams/metrics", [], function (err, response) {
+			var msg = Q.firstErrorMessage(err, response && response.errors);
+			if (msg) {
+				return console.warn(msg);
+			}
+
+			Q.handle(params.callback);
+		}, {
+			method: "post",
+			fields: {
+				publisherId: that.publisherId,
+				streamName: that.streamName,
+				metrics: that.predefined,
+				minPeriod: that.minPeriod
+			}
+		});
+
+		that.predefined = [];
+	}, this.period);
+};
 
 /**
  * @class Streams
@@ -4743,6 +4904,17 @@ Streams.displayType = function _Streams_displayType(type, callback, options) {
  */
 Streams.isStream = function (value) {
 	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Stream';
+};
+
+/**
+ * Use this to check whether variable is a Q.Streams.Message object
+ * @static
+ * @method isMessage
+ * @param {mixed} value
+ * @return {boolean}
+ */
+Streams.isMessage = function (value) {
+	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Message';
 };
 
 /**
@@ -5165,7 +5337,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 1000),
+		cache: Q.Cache[where]("Streams.get", 100),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {
@@ -5182,7 +5354,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Streams.related = Q.getter(Streams.related, {
-		cache: Q.Cache[where]("Streams.related", 1000),
+		cache: Q.Cache[where]("Streams.related", 100),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
 			if (params[0]) { // some error
@@ -5206,7 +5378,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Message.get = Q.getter(Message.get, {
-		cache: Q.Cache[where]("Streams.Message.get", 10000),
+		cache: Q.Cache[where]("Streams.Message.get", 100),
 		throttle: 'Streams.Message.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -5226,12 +5398,12 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	MTotal.get = Q.getter(MTotal.get, {
-		cache: Q.Cache[where]("Streams.Message.Total.get", 10000),
+		cache: Q.Cache[where]("Streams.Message.Total.get", 100),
 		throttle: 'Streams.Message.Total.get'
 	});
 
 	Participant.get = Q.getter(Participant.get, {
-		cache: Q.Cache[where]("Streams.Participant.get", 10000),
+		cache: Q.Cache[where]("Streams.Participant.get", 100),
 		throttle: 'Streams.Participant.get',
 		prepare: function (subject, params, callback, args) {
 			if (params[0]) {
@@ -5251,7 +5423,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.get = Q.getter(Avatar.get, {
-		cache: Q.Cache[where]("Streams.Avatar.get", 10000),
+		cache: Q.Cache[where]("Streams.Avatar.get", 1000),
 		throttle: 'Streams.Avatar.get',
 		prepare: function (subject, params, callback) {
 			if (params[0]) {
@@ -5263,7 +5435,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 	Avatar.byPrefix = Q.getter(Avatar.byPrefix, {
-		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 10000),
+		cache: Q.Cache[where]("Streams.Avatar.byPrefix", 100),
 		throttle: 'Streams.Avatar.byPrefix'
 	});
 
@@ -6023,7 +6195,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 				Q.Template.render('Streams/chat/webrtc/available', {
 					avatar: Q.Tool.setUpElementHTML('div', 'Users/avatar', {
 						userId: publisherId,
-						icon: true,
+						icon: false,
 						short: true
 					}),
 					text: text.chat.startedConversation

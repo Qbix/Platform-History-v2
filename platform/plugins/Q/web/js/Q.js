@@ -102,6 +102,10 @@ Q.text = {
 		"prompt": {
 			"title": "Prompt",
 			"ok": "Go"
+		},
+		"tabs": {
+			"more": "more",
+			"Menu": "Menu"
 		}
 	}
 }; // put all your text strings here e.g. Q.text.Users.foo
@@ -151,48 +155,6 @@ Object.getPrototypeOf = function (obj) {
 	}
 	return undefined;
 };
-
-if (!Object.keys)
-/**
-* Returns an array containing the object's keys, in a cross-browser way
-* @method keys
-* @return {Array}
-*/
-Object.keys = (function () {
-	var hasOwnProperty = Object.prototype.hasOwnProperty,
-		hasDontEnumBug = !{toString:null}.propertyIsEnumerable("toString"),
-		DontEnums = [
-			'toString',
-			'toLocaleString',
-			'valueOf',
-			'hasOwnProperty',
-			'isPrototypeOf',
-			'propertyIsEnumerable',
-			'constructor'
-		],
-		DontEnumsLength = DontEnums.length;
-  
-	return function (o) {
-		if (typeof o != "object" && typeof o != "function" || o === null)
-			throw new TypeError("Object.keys called on a non-object");
-	 
-		var result = [];
-		for (var name in o) {
-			if (hasOwnProperty.call(o, name)) {
-				result.push(name);
-			}
-		}
-	 
-		if (hasDontEnumBug) {
-			for (var i = 0; i < DontEnumsLength; i++) {
-				if (hasOwnProperty.call(o, DontEnums[i]))
-					result.push(DontEnums[i]);
-			}   
-		}
-	 
-		return result;
-	};
-})();
 
 /**
  * @class String
@@ -546,7 +508,7 @@ Sp.matchTypes.adapters = {
 		return this.match(/\+[0-9]{1,2}?(-|\s|\.)?[0-9]{3,5}(-|\s|\.)?([0-9]{3,5}(-|\s|\.)?)?([0-9]{4,5})/gi) || [];
 	},
 	qbixUserId: function () {
-		return this.match(/(@[a-z]{8})/gi) || [];
+		return this.match(/(@[a-z]{8}@)/gi) || [];
 	}
 };
 
@@ -805,6 +767,9 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
 	while (includeSelf ? 1 : (p = p.parentNode)) {
 		includeSelf = false;
+		if (p === document.documentElement) {
+			break;
+		}
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
@@ -825,7 +790,7 @@ Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 			}
 		}
 	}
-	return document.documentElement;
+	return p || null;
 };
 
 /**
@@ -2131,6 +2096,30 @@ Q.latest.seen = {};
 Q.latest.max = 10000;
 
 /**
+ * Convert string or number to human readable string
+ * @static
+ * @method humanReadable
+ * @param {String|Integer} value
+ * @param {object} params
+ * @param {string} [params.bytes] If true, convert from bytes to human readable string like "12 KB", "1.5 MB" etc
+ * @return {String} Human readable string
+ */
+Q.humanReadable = function (value, params) {
+	if (Q.getObject("bytes", params)) {
+		value = parseInt(value);
+
+		if (value >= Math.pow(2, 30)) {
+			return Math.ceil(value / Math.pow(2, 30)) + ' GB';
+		} else if (value >= Math.pow(2, 20)) {
+			return Math.ceil(value / Math.pow(2, 20)) + ' MB';
+		} else if (value >= Math.pow(2, 10)) {
+			return Math.ceil(value / Math.pow(2, 10)) + ' KB';
+		} else {
+			return value + ' bytes';
+		}
+	}
+}
+/**
  * Calculates a string key by considering the parameter that was passed,
  * the tool being activated, and the page being activated.
  * These keys can be used in methods of Q.Event, Q.Masks etc.
@@ -2162,6 +2151,227 @@ Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
 	return key;
 };
 Q.calculateKey.keys = [];
+
+/**
+ * Chains an array of callbacks together into a function that can be called with arguments
+ * 
+ * @static
+ * @method chain
+ * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @return {Function} The wrapper function
+ */
+Q.chain = function (callbacks) {
+	var result = null;
+	Q.each(callbacks, function (i, callback) {
+		if (Q.typeOf(callback) !== 'function') {
+			return;
+		}
+
+		var prevResult = result;
+		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
+			args.push(prevResult);
+			return callback.apply(this, args);
+		};
+	}, {ascending: false, numeric: true});
+	return result;
+};
+
+/**
+ * Takes a function and returns a version that returns a promise
+ * @method promisify
+ * @static
+ * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
+ * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
+ */
+Q.promisify = function (getter, useSecondArgument) {
+	function _promisifier() {
+		if (!Q.Promise) {
+			return getter.apply(this, args);
+		}
+		var args = [], resolve, reject, found = false;
+		for (var i=0, l=arguments.length; i<l; ++i) {
+			var ai = arguments[i];
+			if (typeof ai === 'function') {
+				found = true;
+				ai = function _promisified(err, second) {
+					if (err) {
+						return reject(err);
+					}
+					try {
+						ai.apply(this, arguments);
+					} catch (e) {
+						err = e;
+					}
+					if (err) {
+						return reject(err);
+					}
+					resolve(useSecondArgument ? second : this);
+				}
+			}
+			args.push(ai);
+			break; // only one callback, expect err as first argument
+		}
+		if (!found) {
+			args.push(function _defaultCallback(err, second) {
+				if (err) {
+					return reject(err);
+				}
+				resolve(useSecondArgument ? second : this);
+			});
+		}
+		var promise = new Q.Promise(function (r1, r2) {
+			resolve = r1;
+			reject = r2;
+		});
+		return Q.extend(promise, getter.apply(this, args));
+	}
+	return Q.extend(_promisifier, getter);
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function at most once.
+ * @static
+ * @method once
+ * @param {Function} original The function to wrap
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.once = function (original, defaultValue) {
+	var _called = false;
+	return function _Q_once_wrapper() {
+		if (_called) return defaultValue;
+		_called = true;
+		return original.apply(this, arguments);
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function
+ * at most once every given milliseconds.
+ * @static
+ * @method throttle
+ * @param {Function} original The function to wrap
+ * @param {Number} milliseconds The number of milliseconds
+ * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
+ *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
+	var _lastCalled;
+	var _timeout = null;
+	return function _Q_throttle_wrapper(e) {
+		var t = this, a = arguments;
+		var ms = Date.now() - _lastCalled;
+		if (ms < milliseconds) {
+			if (delayedFinal) {
+				if (_timeout) {
+					clearTimeout(_timeout);
+				}
+				_timeout = setTimeout(function () {
+					_lastCalled = Date.now();
+					original.apply(t, a);
+				}, milliseconds - ms);
+			}
+			return defaultValue;
+		}
+		_lastCalled = Date.now();
+		return original.apply(this, arguments);
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that adds the function to a queue
+ * of functions to be called one by one at most once every given milliseconds.
+ * @static
+ * @method queue
+ * @param {Function} original The function to wrap
+ * @param {number} milliseconds The number of milliseconds, defaults to 0
+ * @return {Function} The wrapper function
+ */
+Q.queue = function (original, milliseconds) {
+	var _queue = [];
+	var _timeout = null;
+	milliseconds = milliseconds || 0;
+	function _Q_queue_next() {
+		if (!_queue.length) {
+			_timeout = null;
+			return 0;
+		}
+		var p = _queue.shift();
+		var ret = original.apply(p[0], p[1]);
+		if (ret === false) {
+			_timeout = null;
+			_queue = [];
+		} else {
+			_timeout = setTimeout(_Q_queue_next, milliseconds);
+		}
+	};
+	return function _Q_queue_wrapper() {
+		var args = Array.prototype.slice.call(arguments, 0);
+		var len = _queue.push([this, args]);
+		if (!_timeout) {
+			_timeout = setTimeout(_Q_queue_next, 0);
+		}
+		return len;
+	};
+};
+
+/**
+ * Wraps a function and returns a wrapper that will call the function
+ * after calls stopped coming in for a given number of milliseconds.
+ * If the immediate param is true, the wrapper lets the function be called
+ * without waiting if it hasn't been called for the given number of milliseconds.
+ * @static
+ * @method debounce
+ * @param {Function} original The function to wrap
+ * @param {number} milliseconds The number of milliseconds
+ * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
+ *   without waiting if it hasn't been called for the given number of milliseconds.
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.debounce = function (original, milliseconds, immediate, defaultValue) {
+	var _timeout = null;
+	return function _Q_debounce_wrapper() {
+		var t = this, a = arguments;
+		if (_timeout) {
+			clearTimeout(_timeout);
+		} else if (immediate) {
+			original.apply(t, a);
+		}
+		_timeout = setTimeout(function _Q_debounce_handler() {
+			if (!immediate) {
+				original.apply(t, a);
+			}
+			_timeout = null;
+		}, milliseconds);
+		return defaultValue;
+	};
+};
+
+/**
+ * Wraps a function and causes it to return early if called recursively.
+ * Use sparingly, since most functions should make guarantees about postconditions.
+ * @static
+ * @method preventRecursion
+ * @param {String} name The name of the function, passed explicitly
+ * @param {Function} original The function or method to wrap
+ * @param {Mixed} defaultValue Value to return whenever original function isn't called
+ * @return {Function} The wrapper function
+ */
+Q.preventRecursion = function (name, original, defaultValue) {
+	return function () {
+		var n = '__preventRecursion_'+name;
+		if (this[n]) return defaultValue;
+		this[n] = true;
+		var ret = original.apply(this, arguments);
+		delete this[n];
+		return ret;
+	};
+};
 
 /**
  * Wraps a callable in a Q.Event object
@@ -2822,7 +3032,7 @@ Q.onLayout = function (element) {
 		observer.observe(element);
 	}
 	_layoutObservers[l-1] = observer;
-	event.onEmpty().set(function () {
+	event.onEmpty().set(Q.debounce(function () {
 		for (var i=0, l=_layoutElements.length; i<l; ++i) {
 			if (_layoutElements[i] === element) {
 				_layoutElements.splice(i, 1);
@@ -2834,9 +3044,10 @@ Q.onLayout = function (element) {
 				break;
 			}
 		}
-	}, 'Q');
+	}, Q.onLayout.debounce || 0), 'Q');
 	return event;
 }
+Q.onLayout.debounce = 100;
 Q.onLayout().set(function () {
 	_detectOrientation.apply(this, arguments);
 	Q.Masks.update();
@@ -3516,227 +3727,6 @@ Q.getter.WAITING = 2;
 Q.getter.THROTTLING = 3;
 
 /**
- * Chains an array of callbacks together into a function that can be called with arguments
- * 
- * @static
- * @method chain
- * @param {Array} callbacks An array of callbacks, each taking another callback at the end
- * @return {Function} The wrapper function
- */
-Q.chain = function (callbacks) {
-	var result = null;
-	Q.each(callbacks, function (i, callback) {
-		if (Q.typeOf(callback) !== 'function') {
-			return;
-		}
-
-		var prevResult = result;
-		result = function () {
-			var args = Array.prototype.slice.call(arguments, 0);
-			args.push(prevResult);
-			return callback.apply(this, args);
-		};
-	}, {ascending: false, numeric: true});
-	return result;
-};
-
-/**
- * Takes a function and returns a version that returns a promise
- * @method promisify
- * @static
- * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
- * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
- * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
- */
-Q.promisify = function (getter, useSecondArgument) {
-	function _promisifier() {
-		if (!Q.Promise) {
-			return getter.apply(this, args);
-		}
-		var args = [], resolve, reject, found = false;
-		for (var i=0, l=arguments.length; i<l; ++i) {
-			var ai = arguments[i];
-			if (typeof ai === 'function') {
-				found = true;
-				ai = function _promisified(err, second) {
-					if (err) {
-						return reject(err);
-					}
-					try {
-						ai.apply(this, arguments);
-					} catch (e) {
-						err = e;
-					}
-					if (err) {
-						return reject(err);
-					}
-					resolve(useSecondArgument ? second : this);
-				}
-			}
-			args.push(ai);
-			break; // only one callback, expect err as first argument
-		}
-		if (!found) {
-			args.push(function _defaultCallback(err, second) {
-				if (err) {
-					return reject(err);
-				}
-				resolve(useSecondArgument ? second : this);
-			});
-		}
-		var promise = new Q.Promise(function (r1, r2) {
-			resolve = r1;
-			reject = r2;
-		});
-		return Q.extend(promise, getter.apply(this, args));
-	}
-	return Q.extend(_promisifier, getter);
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function at most once.
- * @static
- * @method once
- * @param {Function} original The function to wrap
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.once = function (original, defaultValue) {
-	var _called = false;
-	return function _Q_once_wrapper() {
-		if (_called) return defaultValue;
-		_called = true;
-		return original.apply(this, arguments);
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function
- * at most once every given milliseconds.
- * @static
- * @method throttle
- * @param {Function} original The function to wrap
- * @param {Number} milliseconds The number of milliseconds
- * @param {Boolean} delayedFinal Whether the wrapper should execute the latest function call
- *  after throttle opens again, useful for e.g. following a mouse pointer that stopped.
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.throttle = function (original, milliseconds, delayedFinal, defaultValue) {
-	var _lastCalled;
-	var _timeout = null;
-	return function _Q_throttle_wrapper(e) {
-		var t = this, a = arguments;
-		var ms = Date.now() - _lastCalled;
-		if (ms < milliseconds) {
-			if (delayedFinal) {
-				if (_timeout) {
-					clearTimeout(_timeout);
-				}
-				_timeout = setTimeout(function () {
-					_lastCalled = Date.now();
-					original.apply(t, a);
-				}, milliseconds - ms);
-			}
-			return defaultValue;
-		}
-		_lastCalled = Date.now();
-		return original.apply(this, arguments);
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that adds the function to a queue
- * of functions to be called one by one at most once every given milliseconds.
- * @static
- * @method queue
- * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds, defaults to 0
- * @return {Function} The wrapper function
- */
-Q.queue = function (original, milliseconds) {
-	var _queue = [];
-	var _timeout = null;
-	milliseconds = milliseconds || 0;
-	function _Q_queue_next() {
-		if (!_queue.length) {
-			_timeout = null;
-			return 0;
-		}
-		var p = _queue.shift();
-		var ret = original.apply(p[0], p[1]);
-		if (ret === false) {
-			_timeout = null;
-			_queue = [];
-		} else {
-			_timeout = setTimeout(_Q_queue_next, milliseconds);
-		}
-	};
-	return function _Q_queue_wrapper() {
-		var args = Array.prototype.slice.call(arguments, 0);
-		var len = _queue.push([this, args]);
-		if (!_timeout) {
-			_timeout = setTimeout(_Q_queue_next, 0);
-		}
-		return len;
-	};
-};
-
-/**
- * Wraps a function and returns a wrapper that will call the function
- * after calls stopped coming in for a given number of milliseconds.
- * If the immediate param is true, the wrapper lets the function be called
- * without waiting if it hasn't been called for the given number of milliseconds.
- * @static
- * @method debounce
- * @param {Function} original The function to wrap
- * @param {number} milliseconds The number of milliseconds
- * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
- *   without waiting if it hasn't been called for the given number of milliseconds.
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.debounce = function (original, milliseconds, immediate, defaultValue) {
-	var _timeout = null;
-	return function _Q_debounce_wrapper() {
-		var t = this, a = arguments;
-		if (_timeout) {
-			clearTimeout(_timeout);
-		} else if (immediate) {
-			original.apply(t, a);
-		}
-		_timeout = setTimeout(function _Q_debounce_handler() {
-			if (!immediate) {
-				original.apply(t, a);
-			}
-			_timeout = null;
-		}, milliseconds);
-		return defaultValue;
-	};
-};
-
-/**
- * Wraps a function and causes it to return early if called recursively.
- * Use sparingly, since most functions should make guarantees about postconditions.
- * @static
- * @method preventRecursion
- * @param {String} name The name of the function, passed explicitly
- * @param {Function} original The function or method to wrap
- * @param {Mixed} defaultValue Value to return whenever original function isn't called
- * @return {Function} The wrapper function
- */
-Q.preventRecursion = function (name, original, defaultValue) {
-	return function () {
-		var n = '__preventRecursion_'+name;
-		if (this[n]) return defaultValue;
-		this[n] = true;
-		var ret = original.apply(this, arguments);
-		delete this[n];
-		return ret;
-	};
-};
-
-/**
  * Custom exception constructor
  * @class Q.Exception
  * @constructor
@@ -3795,12 +3785,13 @@ Q.Tool = function _Q_Tool(element, options) {
 	}
 	this.prefix = Q.Tool.calculatePrefix(this.element.id);
 	this.id = this.prefix.substr(0, this.prefix.length-1);
-	
-	if (Q.Tool.byId(this.id, this.name)) {
+
+	var activeTool = null;
+	if (activeTool = Q.Tool.byId(this.id, this.name)) {
 		var toolName = Q.Tool.names[this.name];
 		var errMsg = "A " + toolName + " tool with id " + this.id + " is already active";
 		//throw new Q.Error(errMsg);
-		console.warn(errMsg);
+		console.warn(errMsg, activeTool);
 	}
 
 	// for later use
@@ -4065,7 +4056,13 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @method define
  * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object containing {name: filename} pairs instead.
  * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
- * @param {Function} ctor Your tool's constructor. You can also pass a filename here, in which case the other parameters are ignored.
+ * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
+ *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
+ * @param {string} [ctor.js] filenames containing Javascript to load for the tool
+ * @param {string} [ctor.css] filenames containing CSS to load for the tool
+ * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
+ * @param {String} [ctor.placeholder.html] literal HTML to insert
+ * @param {String} [ctor.placeholder.template] the name of a template to insert
  * @param {Object} [defaultOptions] An optional hash of default options for the tool
  * @param {Array} [stateKeys] An optional array of key names to copy from options to state
  * @param{Object} [methods] An optional hash of method functions to assign to the prototype
@@ -4320,6 +4317,21 @@ Tp.stateChanged = function Q_Tool_prototype_stateChanged(names) {
 		this.Q.onStateChanged(name).handle.call(this, name, this.state[name]);
 	}
 	this.Q.onStateChanged('').handle.call(this, names);
+};
+
+/**
+ * You can call this to update the state of the tool, and let
+ * all the hooks happen as a result. An alternative to this is
+ * changing the state manually and then calling stateChanged(),
+ * but this method was introduced to be more familiar to users of React.
+ * It only does a *shallow* update, meaning it completely replaces
+ * whatever was there previously.
+ * @method setState
+ * @param {Object} updates An object of state property names and new values
+ */
+Tp.setState = function Q_Tool_prototype_setState(updates) {
+	Q.extend(this.state, updates);
+	this.stateChanged(Object.keys(updates));
 };
 
 /**
@@ -4837,7 +4849,7 @@ Tp.setUpElement = function (element, toolName, toolOptions, id) {
 /**
  * Returns HTML for an element that it can be used to activate a tool.
  * The prefix and id of the element are derived from the tool on which this method is called.
- * For example: $('container').append(Q.Tool.make('Streams/chat')).activate(options);
+ * For example: $('container').append(Q.Tool.setUpElementHTML('Streams/chat')).activate(options);
  * @method setUpElementHTML
  * @param {String|Element} element
  *  The tag of the element, such as "div", or a reference to an existing Element
@@ -5399,9 +5411,27 @@ function Q_Cache_set(cache, key, obj, special) {
 		if (cache.localStorage && Q.Frames && !Q.Frames.isMain()) {
 			return false; // do nothing, this isn't the main frame
 		}
-		var serialized = JSON.stringify(obj);
 		var storage = cache.localStorage ? localStorage : (cache.sessionStorage ? sessionStorage : null);
-		storage.setItem(cache.name + (special===true ? "\t" : "\t\t") + key, serialized);
+		var id = cache.name + (special===true ? "\t" : "\t\t") + key;
+		try {
+			var serialized = JSON.stringify(obj);
+			storage.setItem(id, serialized);
+		} catch (e) {
+			if (!special) {
+				for (var i=0; i<10; ++i) {
+					try {
+						// try to remove up to 10 items it may be a problem with space
+						if (cache.remove(cache.earliest())) {
+							storage.setItem(id, serialized);
+						}
+						break;
+					} catch (e) {
+		
+					}
+				}
+			}
+		}
+		
 	}
 }
 function Q_Cache_remove(cache, key, special) {
@@ -5558,7 +5588,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	if (typeof key !== 'string') {
 		key = Q.Cache.key(key);
 	}
-	existing = this.get(key, true);
+	existing = this.get(key, {dontTouch: true});
 	if (!existing) {
 		return false;
 	}
@@ -5725,7 +5755,11 @@ Q.Page.push = function (url, title) {
 	var parts = url.split('#');
 	var path = (url.substr(Q.baseUrl().length+1) || '');
 	if (history.pushState) {
-		history.pushState({}, null, url);
+		if (typeof title === 'string') {
+			history.pushState({}, title, url);	
+		} else {
+			history.pushState({}, null, url);
+		}
 	} else {
 		var hash = '#!url=' + encodeURIComponent(path) +
 			location.hash.replace(/#!url=[^&]*/, '')
@@ -6643,6 +6677,10 @@ Event.prototype.stopPropagation = _Q_Event_stopPropagation;
  * return {boolean} Should normally return true, unless listener could not be found or removed
  */
 Q.removeEventListener = function _Q_removeEventListener(element, eventName, eventHandler, useCapture) {
+	if (Q.isEmpty(element)) {
+		return false;
+	}
+
 	useCapture = useCapture || false;
 	var handler = (eventHandler.typename === "Q.Event"
 		? eventHandler.eventListener
@@ -6748,8 +6786,10 @@ Q.trigger = function _Q_trigger(eventName, element, args) {
  *  on container elements.
  *  If a non-element is passed here (such as null, or a DOMEvent)
  *  then this defaults to the document element.
+ * @param {Boolean} [force] Pass true here to handle Q.onLayout events
+ *   even if ResizeObserver was added
  */
-Q.layout = function _Q_layout(element) {
+Q.layout = function _Q_layout(element, force) {
 	if (!(element instanceof Element)) {
 		element = null;
 	}
@@ -6758,7 +6798,7 @@ Q.layout = function _Q_layout(element) {
 			var event = _layoutEvents[i];
 
 			// return if ResizeObserver defined on this element
-			if (_layoutObservers[i]) {
+			if (!force && _layoutObservers[i]) {
 				return;
 			}
 
@@ -6779,7 +6819,7 @@ Q.layout = function _Q_layout(element) {
  * @param {Boolean} [options.unlessOffscreenHorizontally]
  * @return {Boollean} Whether the native scrollIntoView(options) was called on the element.
  */
-Q.scrollIntoView = function _Q_fixScrollingParent(element, options) {
+Q.scrollIntoView = function _Q_scrollIntoView(element, options) {
 	if (!element || typeof element.scrollIntoView !== 'function') {
 		return false;
 	}
@@ -6885,7 +6925,7 @@ Q.load = function _Q_load(plugins, callback, options) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
@@ -8306,8 +8346,10 @@ Q.cookie = function _Q_cookie(name, value, options) {
 		parts = Q.baseUrl().split('://');
 		if ('path' in options) {
 			path = ';path='+options.path;
-		} else {
+		} else if (parts[1]) {
 			path = ';path=/' + parts[1].split('/').slice(1).join('/');
+		} else {
+			return null;
 		}
 		if ('domain' in options) {
 			domain = ';domain='+options.domain;
@@ -8881,7 +8923,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				}
 
 				if (!o.ignoreHistory) {
-					Q.Page.push(url);
+					Q.Page.push(url, Q.getObject('slots.title', response));
 				}
 			
 				if (!o.ignorePage) {
@@ -9349,6 +9391,32 @@ Q.handle.onUrl = new Q.Event(function () {
 }, "Q");
 
 /**
+ * Displays a duration
+ * @static
+ * @method displayDuration
+ * @param {Integer} milliseconds The number of milliseconds from start
+ * @param {Object} forceShow=[{hours:false,seconds:true}] Whether to show hours or seconds if they are 00
+ * @return {String} A string of the form "hh:mm:ss" depending on forceShow
+ */
+Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
+	milliseconds = parseInt(milliseconds);
+	if (!forceShow) {
+		forceShow = { hours: false, seconds: true };
+	}
+	var seconds = Math.floor(milliseconds / 1000);
+	var minutes = Math.floor(seconds / 60);
+	var hours = Math.floor(minutes / 60);
+	var components = [minutes % 60];
+	if (seconds || forceShow.seconds) {
+		components.push(seconds % 60);
+	}
+	if (hours || forceShow.hours) {
+		components.shift(hours);
+	}
+	return components.join(':');
+};
+
+/**
  * Parses a querystring
  * @static
  * @method parseQueryString
@@ -9525,7 +9593,8 @@ function _activateTools(toolElement, options, shared) {
 			var _constructor = _constructors[toolName];
 			var result = new _constructor(toolElement, options);
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
-			shared.tools[toolId] = shared.tool = tool;
+			shared.tool = tool;
+			Q.setObject([toolId, toolName], tool, shared);
 			if (uniqueToolId) {
 				if (uniqueToolId === shared.firstToolId) {
 					shared.firstTool = tool;
@@ -10087,7 +10156,10 @@ Q.Text.setLanguage.apply(Q.Text, navigator.language.split('-'));
 var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 	var o = Q.extend({extend: false}, options);
 	return Q.request(url, function (err, content) {
-		if (!err) {
+		if (err && !url.endsWith("en.json")) {
+			url = url.replace(/[^\/]{2,5}\.json$/, "en.json");
+			return _Q_Text_getter.force(name, url, callback, options);
+		} else {
 			Q.Text.set(name, content, o.merge);
 		}
 		Q.handle(callback, Q.Text, [err, content]);
@@ -10793,6 +10865,18 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 		});
 	};
 	$.fn.andSelf = $.fn.addBack || $.fn.andSelf;
+
+	var htmlOriginal = $.fn.html;
+	$.fn.html = function () {
+		var args = Array.prototype.slice.call(arguments, 0);
+		if (args.pop() === true) {
+			this.each(function () {
+				Q.Tool.clear(this);
+			});
+			return htmlOriginal.apply(this, args);
+		}
+		return htmlOriginal.apply(this, arguments);
+	};
 	
 	Q.each({
 		'on': 'off',
@@ -10950,7 +11034,7 @@ Q.info = {
 	        var calculatedPadding = parseInt(div.computedStyle('padding-top'))
 				+ parseInt(div.computedStyle('padding-bottom'));
 	        document.body.removeChild(div);
-	        if (calculatedPadding > 0) {
+	        if (calculatedPadding > 40) {
 	            return true;
 	        }
 	    }
@@ -11801,6 +11885,9 @@ Q.Pointer = {
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
 		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
+			if (!Q.Pointer.isPressed(e)) {
+				return;
+			}
 			var x = Q.Pointer.getX(e);
 			var y = Q.Pointer.getY(e);
 			var t = document.elementFromPoint(x, y);
@@ -11969,8 +12056,8 @@ Q.Pointer = {
 	 * @param {Element} [element] If you skip this, all scrolling cancels clicks
 	 */
 	startCancelingClicksOnScroll: function (element) {
-		if (element) {
-			var sp = element.scrollingParent(true);
+		var sp;
+		if (element && (sp = element.scrollingParent(true))) {
 			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
 		} else {
 			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
@@ -12396,9 +12483,6 @@ Q.Dialogs = {
 				$title = $('<div class="Q_title_slot" />').append($h2);
 				$content = $('<div class="Q_dialog_slot Q_dialog_content Q_overflow" />');
 				$dialog = $('<div />').append($title).append($content);
-				if (o.className) {
-					$dialog.addClass(o.className);
-				}
 				if (o.apply) {
 					$dialog.addClass('Q_overlay_apply');
 				}
@@ -12712,10 +12796,9 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Object} [options.template] can be used instead of content option.
  * @param {String} [options.template.name] names a template to render into the initial dialog content.
  * @param {String} [options.template.fields] fields to pass to the template, if any
- * @param {Function} [options.callback]
- *   Optional callback to call once the title and content has been shown and activated.
- *   Should be passed the container element by the handler.
- * @return {Integer} Returns the index of the handler that executed in Q.invoke.handlers
+ * @param {Q.Event} [options.onActivate] Q.Event or function which is called when invoked container is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
+ * @param {Q.Event} [options.beforeClose] beforeClose Q.Event or function which is called when invoked container closing was initiated and it's still visible. Can return false to cancel closing.
+ * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
 	var o = options;
@@ -12729,7 +12812,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, o);
+			var ret = Q.handle(handler, Q, [o]);
 			if (ret === false) {
 				return false
 			}
@@ -12739,8 +12822,6 @@ Q.invoke = function (options) {
 Q.invoke.handlers = [
 	function (options) {
 		Q.Dialogs.push(Q.extend({}, options, {
-			title: title,
-			content: content,
 			onActivate: options.callback || function () { }
 		}));
 	}
@@ -12775,14 +12856,16 @@ Q.Intl = {
  * @class Q.Audio
  * @constructor
  * @param {String} url the url of the audio to load
+ * @param {HTMLElement} container html element to insert audio to
+ * @param {object} attributes json object with attributes to apply to audio element
  */
-Q.Audio = function (url) {
+Q.Audio = function (url, container, attributes) {
 	if (this === root) {
-		throw new Q.Error("Please call Q.Audio with the keyword new");
+		throw new Q.Error("Q.Audio: Please call Q.Audio with the keyword new");
 	}
 	var t = this;
 	this.src = url = Q.url(url);
-	var container = document.getElementById('Q-audio-container');
+	container = container || document.getElementById('Q-audio-container');
 	if (!container) {
 		container = document.createElement('div');
 		container.setAttribute('id', 'Q-audio-container');
@@ -12793,6 +12876,11 @@ Q.Audio = function (url) {
 	var audio = this.audio = document.createElement('audio');
 	audio.setAttribute('src', url);
 	audio.setAttribute('preload', 'auto');
+	attributes = attributes || {};
+	for (var property in attributes) {
+		audio.setAttribute(property, attributes[property]);
+	}
+
 	function _handler(e) {
 		Q.handle(e.type === 'canplay' ? Aup.onCanPlay : (
 			(e.type === 'canplaythrough' ? Aup.onCanPlayThrough : Aup.onEnded)
@@ -12933,11 +13021,12 @@ Aup.pause = function () {
 
 /**
  * @method pause
- * Pauses the audio if it is playing
+ * Pauses all the audio that is playing
  */
 Q.Audio.pauseAll = function () {
 	for (var url in Q.Audio.collection) {
-		Q.Audio.collection[url].pause();
+		var audio = Q.Audio.collection[url];
+		audio.pause && audio.pause();
 	}
 };
 
@@ -13383,7 +13472,9 @@ Q.onInit.add(function () {
 			navigator.splashscreen.hide();
 		}
 	}, 'Q.Socket');
-	var info = Q.first(Q.info.languages);
+
+	var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+	var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 	if (info) {
 		Q.Text.setLanguage.apply(Q.Text, info);
 	}
@@ -13395,18 +13486,21 @@ Q.onInit.add(function () {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
 	}
 
-	Q.Text.get('Q/content', function (err, text) {
-		if (!text) {
-			return;
-		}
-		Q.extend(Q.text.Q, 10, text);
-		Q.extend(Q.confirm.options, 10, Q.text.confirm);
-		Q.extend(Q.prompt.options, 10, Q.text.prompt);
-		Q.extend(Q.alert.options, 10, Q.text.alert);
-		var QtQw = Q.text.Q.words;
-		QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-		QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
-	});
+	if (['en', 'en-US'].indexOf(Q.Text.languageLocale) < 0) {
+		Q.Text.get('Q/content', function (err, text) {
+			if (!text) {
+				return;
+			}
+			Q.extend(Q.text.Q, 10, text);
+			Q.extend(Q.confirm.options, 10, Q.text.confirm);
+			Q.extend(Q.prompt.options, 10, Q.text.prompt);
+			Q.extend(Q.alert.options, 10, Q.text.alert);
+			var QtQw = Q.text.Q.words;
+			QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+			QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+			Q.layout(null, true);
+		});
+	}
 	
 	// load this ASAP so dialogs can load synchronously (for keyboard focus, etc.)
 	Q.addScript("{{Q}}/js/fn/dialog.js");
@@ -13459,9 +13553,15 @@ Q.onJQuery.add(function ($) {
 		"Q/badge": "{{Q}}/js/tools/badge.js",
 		"Q/resize": "{{Q}}/js/tools/resize.js",
 		"Q/layouts": "{{Q}}/js/tools/layouts.js",
+		"Q/carousel": "{{Q}}/js/tools/carousel.js",
 		"Q/infinitescroll": "{{Q}}/js/tools/infinitescroll.js",
 		"Q/parallax": "{{Q}}/js/tools/parallax.js",
-		"Q/lazyload": "{{Q}}/js/tools/lazyload.js"
+		"Q/lazyload": "{{Q}}/js/tools/lazyload.js",
+		"Q/audio": "{{Q}}/js/tools/audio.js",
+		"Q/video": "{{Q}}/js/tools/video.js",
+		"Q/pdf": "{{Q}}/js/tools/pdf.js",
+		"Q/image": "{{Q}}/js/tools/image.js",
+		"Q/clip": "{{Q}}/js/tools/clip.js"
 	});
 	
 	Q.Tool.jQuery({
@@ -13487,8 +13587,8 @@ Q.onJQuery.add(function ($) {
 		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js",
-		"Q/audio": "{{Q}}/js/fn/audio.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js"
+		//"Q/audio": "{{Q}}/js/fn/audio.js"
 	});
 	
 	Q.onLoad.add(function () {
@@ -13776,10 +13876,10 @@ if (_isCordova) {
 	}, 'Q.handleOpenUrl');
 
 	Q.onReady.set(function _Q_browsertab() {
-		if (!(cordova.plugins && cordova.plugins.browsertab)) {
+		if (!(cordova.plugins && cordova.plugins.browsertabs)) {
 			return;
 		}
-		cordova.plugins.browsertab.isAvailable(function(result) {
+		cordova.plugins.browsertabs.isAvailable(function(result) {
 			var a = root.open;
 			delete root.open;
 			root.open = function (url, target, options) {
@@ -13790,20 +13890,20 @@ if (_isCordova) {
 					return root;
 				}
 				if (result) {
-					cordova.plugins.browsertab.openUrl(url, function() {}, function() {});
+					cordova.plugins.browsertabs.openUrl(url, options, function() {}, function() {});
 				} else if (cordova.InAppBrowser) {
 					cordova.InAppBrowser.open(url, '_system', options);
 				}
 			};
 			root.close = function (url, target, options) {
 				if (result) {
-					cordova.plugins.browsertab.close();
+					cordova.plugins.browsertabs.close(options);
 				} else if (cordova.InAppBrowser) {
 					cordova.InAppBrowser.close();
 				}
 			};
 		}, function () {});
-	}, 'Q.browsertab');
+	}, 'Q.browsertabs');
 }
 
 /**
@@ -14002,6 +14102,7 @@ Q.Notices = {
 	 * @default 500
 	 */
 	popUpTime: 500,
+
 	/**
 	 * Container for notices
 	 * @property container
@@ -14010,10 +14111,18 @@ Q.Notices = {
 	container: document.getElementById("notices_slot"),
 
 	/**
+	 * Here store groips of notices closed manually by user. These groups will not appear during current session.
+	 * @property closedGroups
+	 * @type {array}
+	 */
+	closedGroups: [],
+
+	/**
 	 * Adds a notice.
 	 * @method add
 	 * @param {Object} options Object of options
 	 * @param {String} [options.key] Unique key for this notice. Need if you want to modify/remove notice by key.
+	 * @param {String} [options.group] key to group notices. If user close notice manually, this group of notices will not appear during session.
 	 * @param {String} options.content HTML contents of this notice.
 	 * @param {Boolean} [options.closeable=true] Whether notice can be closed with red x icon.
 	 * @param {Function|String} [options.handler] Something (callback or URL) to handle with Q.handle() on click notice
@@ -14031,11 +14140,16 @@ Q.Notices = {
 		// default options
 		var o = Q.extend({
 			key: null,
+			group: null,
 			closeable: true,
 			type: 'common',
 			timeout: false,
 			persistent: false
 		}, options);
+
+		if (o.group && Q.Notices.closedGroups.includes(o.group)) {
+			return;
+		}
 
 		if (o.persistent && !o.key) {
 			o.key = Date.now().toString();
@@ -14076,6 +14190,7 @@ Q.Notices = {
 			closeIcon.onclick = function (event) {
 				event.stopPropagation();
 				Q.Notices.remove(li);
+				o.group && Q.Notices.closedGroups.push(o.group);
 			}
 		}
 		if (typeof o.timeout === 'number' && o.timeout > 0) {
@@ -14150,7 +14265,7 @@ Q.Notices = {
 			var o = JSON.parse(json) || {};
 			// if notice persistent - send request to remove from session
 			if (typeof key === 'string' && o.persistent) {
-				Q.req('Q/notice', 'data', null, {
+				Q.req('Q/notice', [], null, {
 					method: 'delete',
 					fields: {key: key}
 				});

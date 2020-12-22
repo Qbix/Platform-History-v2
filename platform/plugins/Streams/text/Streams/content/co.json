@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Maghjina",
-            "description": "maghjina visuale"
+            "description": "maghjina visuale",
+            "newItem": "Aghjunghje Immagine"
         },
         "Streams\/images": {
             "displayType": "Galleria di Image",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "u schedariu carricatu"
+            "description": "u schedariu carricatu",
+            "newItem": "Aghjunghje File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip"
+            "description": "audio clip",
+            "newItem": "Aghjunghje Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video"
+            "description": "video",
+            "newItem": "Aghjunghje Video"
         },
         "Streams\/live": {
             "displayType": "In diretta",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Chjamate in tempu reale",
             "description": "una chjama video \/ audio in tempu reale"
+        },
+        "Streams\/pdf": {
+            "displayType": "Documentu PDF",
+            "description": "Documentu PDF",
+            "newItem": "Aghjunghje PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Stu cuntenutu hè oculatu da voi."
+    },
+    "audio": {
+        "record": "Récord",
+        "reset": "Resettate",
+        "edit": "Mudificà",
+        "title": "titulu",
+        "description": "descrizzione",
+        "upload": "Caricà",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Salvà",
+        "setClip": "Tagliate Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fichju invalidu",
+        "errorNoSource": "Nisuna surghjente audio",
+        "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
+        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+    },
+    "video": {
+        "reset": "Resettate",
+        "edit": "Mudificà",
+        "title": "titulu",
+        "description": "descrizzione",
+        "upload": "Caricà",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Salvà",
+        "setClip": "Tagliate Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fichju invalidu",
+        "errorNoSource": "Nisuna surghjente video",
+        "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
+        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+    },
+    "pdf": {
+        "reset": "Resettate",
+        "edit": "Mudificà",
+        "title": "titulu",
+        "description": "descrizzione",
+        "upload": "Caricà",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Salvà",
+        "setClip": "Tagliate Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fichju invalidu",
+        "errorNoSource": "Nisuna surghjente pdf",
+        "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
+        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+    },
+    "image": {
+        "reset": "Resettate",
+        "edit": "Mudificà",
+        "title": "titulu",
+        "description": "descrizzione",
+        "upload": "Caricà",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Salvà",
+        "setClip": "Tagliate Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fichju invalidu",
+        "errorNoSource": "Nisuna surghjente di maghjina",
+        "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
+        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
     }
 }

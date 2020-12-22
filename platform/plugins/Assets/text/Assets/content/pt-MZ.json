@@ -32,7 +32,12 @@
         "Buy": "Comprar",
         "Credits": "Créditos",
         "ErrorInvalidAmount": "Valor inválido",
-        "ErrorInvalidCurrency": "Infelizmente ainda não suportamos a moeda {{currency}}"
+        "ErrorInvalidCurrency": "Infelizmente ainda não suportamos a moeda {{currency}}",
+        "WatchClip": "Ganhou {{amount}} créditos por assistir {{fromStreamTitle}}",
+        "PurchaseCredits": "Comprar Créditos",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} créditos"
+        }
     },
     "history": {
         "Date": "Encontro",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Contribuição opcional",
         "RequiredPayment": "Pagamento obrigatório",
         "AreYouSureDelete": "Tem certeza de que deseja excluir este serviço?",
-        "AmountServicesRelated": "Existem {{amount}} disponibilidades relacionadas a este serviço. Eles também serão removidos."
+        "AmountServicesRelated": "Existem {{amount}} disponibilidades relacionadas a este serviço. Eles também serão removidos.",
+        "Free": "Livre"
     }
 }

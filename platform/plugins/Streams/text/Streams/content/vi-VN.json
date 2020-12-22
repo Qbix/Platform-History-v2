@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Bạn không được phép tham gia cuộc trò chuyện này.",
         "startedConversation": "bắt đầu một cuộc trò chuyện",
         "RealTimeCall": "Cuộc gọi thời gian thực",
-        "SearchByName": "Tìm kiếm theo tên"
+        "SearchByName": "Tìm kiếm theo tên",
+        "Notifications": {
+            "Visit": "{{displayName}} đang truy cập trò chuyện",
+            "Join": "{{displayName}} đã tham gia trò chuyện",
+            "Leave": "{{displayName}} rời khỏi trò chuyện",
+            "RelatedTo": "{{displayName}} đã bắt đầu {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
         "Streams/relatedFrom/*": "Đã thêm vào {{toTitle}} dưới dạng {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} đã đề cập đến bạn trong một nhận xét",
-        "Streams/call": "{{displayName}} đang gọi cho bạn"
+        "Streams/call": "{{displayName}} đã bắt đầu cuộc gọi trong thời gian thực"
     },
     "invite": {
         "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Bạn có chắc chắn hủy đăng ký thiết bị này? Nó sẽ tắt thông báo cho thiết bị này.",
         "Identifiers": "Định danh",
         "Devices": "Thiết bị",
-        "Streams": "Dòng suối"
+        "Streams": "Dòng suối",
+        "AreYouSureRemoveParticipant": "Bạn có chắc chắn muốn loại bỏ người tham gia này?",
+        "RemoveParticipant": "Xóa người tham gia"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Ẩn chia sẻ màn hình",
             "turnOnCamera": "Hiển thị video",
             "turnOnAudio": "Tắt âm thanh",
-            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình"
+            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình",
+            "fullScreen": "Toàn màn hình"
         },
         "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
         "streamTitle": "{{1}} cuộc gọi trực tiếp"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Hình ảnh",
-            "description": "hình ảnh trực quan"
+            "description": "hình ảnh trực quan",
+            "newItem": "Thêm hình ảnh"
         },
         "Streams/images": {
             "displayType": "thư viện hình ảnh",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Tập tin",
-            "description": "tập tin tải lên"
+            "description": "tập tin tải lên",
+            "newItem": "Thêm tập tin"
         },
         "Streams/audio": {
             "displayType": "Clip âm thanh",
-            "description": "clip âm thanh"
+            "description": "clip âm thanh",
+            "newItem": "Thêm âm thanh"
         },
         "Streams/video": {
             "displayType": "Video Clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Thêm video"
         },
         "Streams/live": {
             "displayType": "Phát trực tiếp",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "chào người dùng có thể tự giới thiệu",
             "displayType": "Lời chào"
+        },
+        "Streams/pdf": {
+            "displayType": "Tài liệu PDF",
+            "description": "Tài liệu PDF",
+            "newItem": "Thêm PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Nội dung này được ẩn từ bạn."
+    },
+    "audio": {
+        "record": "Ghi lại",
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn âm thanh",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "video": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn video",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "pdf": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn pdf",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "image": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn hình ảnh",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
     }
 }

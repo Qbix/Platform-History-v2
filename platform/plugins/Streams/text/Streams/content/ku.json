@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Wêne",
-            "description": "wêneya dîtbar"
+            "description": "wêneya dîtbar",
+            "newItem": "Wêne zêde bikin"
         },
         "Streams\/images": {
             "displayType": "Galeriya Wêne",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Dosî",
-            "description": "pelê hilandin"
+            "description": "pelê hilandin",
+            "newItem": "Pelê zêde bikin"
         },
         "Streams\/audio": {
             "displayType": "Clip Audio",
-            "description": "klîp audio"
+            "description": "klîp audio",
+            "newItem": "Audio lê zêde bike"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "klîpa vîdyoyê"
+            "description": "klîpa vîdyoyê",
+            "newItem": "Vîdyo zêde bike"
         },
         "Streams\/live": {
             "displayType": "Zindî",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Banga rast-time",
             "description": "telefonek \/ vîdyoyek rastîn a rastîn"
+        },
+        "Streams\/pdf": {
+            "displayType": "Belgeya PDF",
+            "description": "Belgeya PDF",
+            "newItem": "PDF-ê lê zêde bike"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ev naverok ji we veşartî ye."
+    },
+    "audio": {
+        "record": "Rekor",
+        "reset": "Reset bikin",
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Upload",
+        "link": "Pêvek",
+        "setUrl": "URL-yê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Klîb Qut Bikin",
+        "invalidURL": "URL-ya nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniyek bihîstbar tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
+    },
+    "video": {
+        "reset": "Reset bikin",
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Upload",
+        "link": "Pêvek",
+        "setUrl": "URL-yê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Klîb Qut Bikin",
+        "invalidURL": "URL-ya nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniya vîdyoyê tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
+    },
+    "pdf": {
+        "reset": "Reset bikin",
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Upload",
+        "link": "Pêvek",
+        "setUrl": "URL-yê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Klîb Qut Bikin",
+        "invalidURL": "URL-ya nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniya pdf tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
+    },
+    "image": {
+        "reset": "Reset bikin",
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Upload",
+        "link": "Pêvek",
+        "setUrl": "URL-yê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Klîb Qut Bikin",
+        "invalidURL": "URL-ya nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniya wêneyê tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
     }
 }

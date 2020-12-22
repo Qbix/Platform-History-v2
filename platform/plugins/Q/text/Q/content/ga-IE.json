@@ -98,5 +98,8 @@
         "inHour": "in {{h}} uair an chloig",
         "inHours": "in {{h}} uair an chloig",
         "inUnderMinute": "faoi bhun 1 nóiméad"
+    },
+    "tabs": {
+        "more": "níos mó"
     }
 }

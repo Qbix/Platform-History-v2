@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Bläddra",
             "WriteToStartConversation": "Skriv dina tankar för att starta samtalet",
             "StartConversation": "Starta konversationen",
-            "GotoConversation": "Gå till konversation"
-        }
+            "GotoConversation": "Gå till konversation",
+            "reset": "Återställa",
+            "edit": "Redigera",
+            "link": "Länk",
+            "setUrl": "Ange URL",
+            "save": "Spara",
+            "setClip": "Klipp ut klipp",
+            "invalidURL": "Ogiltig URL"
+        },
+        "FileTooLarge": "Filen är för stor för cachning. Max filstorlek {{size}}",
+        "InvalidPDF": "Filen är inte en giltig PDF"
     },
     "types": {
         "Websites\/article": {

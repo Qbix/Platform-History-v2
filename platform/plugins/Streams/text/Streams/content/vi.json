@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Hình ảnh",
-            "description": "hình ảnh trực quan"
+            "description": "hình ảnh trực quan",
+            "newItem": "Thêm hình ảnh"
         },
         "Streams\/images": {
             "displayType": "thư viện hình ảnh",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "Tập tin",
-            "description": "tập tin tải lên"
+            "description": "tập tin tải lên",
+            "newItem": "Thêm tập tin"
         },
         "Streams\/audio": {
             "displayType": "Clip âm thanh",
-            "description": "clip âm thanh"
+            "description": "clip âm thanh",
+            "newItem": "Thêm âm thanh"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video clip"
+            "description": "video clip",
+            "newItem": "Thêm video"
         },
         "Streams\/live": {
             "displayType": "Phát trực tiếp",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "chào người dùng có thể tự giới thiệu",
             "displayType": "Lời chào"
+        },
+        "Streams\/pdf": {
+            "displayType": "Tài liệu PDF",
+            "description": "Tài liệu PDF",
+            "newItem": "Thêm PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Nội dung này được ẩn từ bạn."
+    },
+    "audio": {
+        "record": "Ghi lại",
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn âm thanh",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "video": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn video",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "pdf": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn pdf",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "image": {
+        "reset": "Cài lại",
+        "edit": "Biên tập",
+        "title": "tiêu đề",
+        "description": "sự miêu tả",
+        "upload": "Tải lên",
+        "link": "Liên kết",
+        "setUrl": "Đặt URL",
+        "save": "Tiết kiệm",
+        "setClip": "Cắt ra Clip",
+        "invalidURL": "URL không hợp lệ",
+        "invalidFile": "Tập tin không hợp lệ",
+        "errorNoSource": "Không có nguồn hình ảnh",
+        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
+        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
     }
 }

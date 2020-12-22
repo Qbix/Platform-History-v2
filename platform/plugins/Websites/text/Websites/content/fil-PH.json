@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Mag-browse",
             "WriteToStartConversation": "Isulat ang iyong mga saloobin upang simulan ang pag-uusap",
             "StartConversation": "Simulan ang Pag-uusap",
-            "GotoConversation": "Pumunta sa Pag-uusap"
-        }
+            "GotoConversation": "Pumunta sa Pag-uusap",
+            "reset": "I-reset",
+            "edit": "I-edit",
+            "link": "Link",
+            "setUrl": "Itakda ang URL",
+            "save": "Magtipid",
+            "setClip": "Gupitin ang Clip",
+            "invalidURL": "Di-wastong URL"
+        },
+        "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file na {{size}}",
+        "InvalidPDF": "Ang file ay hindi wastong PDF"
     },
     "types": {
         "Websites/article": {

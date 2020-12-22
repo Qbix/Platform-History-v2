@@ -32,7 +32,12 @@
         "Buy": "Nunua",
         "Credits": "Mikopo",
         "ErrorInvalidAmount": "Kiasi sio sawa",
-        "ErrorInvalidCurrency": "Kwa bahati mbaya hatuungi mkono sarafu {{currency}} bado"
+        "ErrorInvalidCurrency": "Kwa bahati mbaya hatuungi mkono sarafu {{currency}} bado",
+        "WatchClip": "Alipewa sifa za {{amount}} za kutazama {{fromStreamTitle}}",
+        "PurchaseCredits": "Salio la Ununuzi",
+        "forMessages": {
+            "BoughtCredits": "Salio za {{amount}}"
+        }
     },
     "history": {
         "Date": "Tarehe",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Mchango wa hiari",
         "RequiredPayment": "Malipo inahitajika",
         "AreYouSureDelete": "Je! Una uhakika unataka kufuta huduma hii?",
-        "AmountServicesRelated": "Kuna upatikanaji wa {{amount}} unaohusiana na huduma hii. Pia zitaondolewa."
+        "AmountServicesRelated": "Kuna upatikanaji wa {{amount}} unaohusiana na huduma hii. Pia zitaondolewa.",
+        "Free": "Bure"
     }
 }

@@ -175,9 +175,6 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_chrome_surface { background: gray; }
 .Q_tabbed { border: 1px solid #aaa; border-top: 1px solid #eee; background: white; }
 
-/* dialogs */
-#dialog { width: 500px; }
-
 /* the overlayed element */
 .Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;
  opacity: 1; border-radius: 7px; border-radius: 7px; box-shadow: 0 0 20px #333; }
@@ -663,6 +660,9 @@ html.Q_scanning body > .Q_scanning_code {
 	animation: Q_newsflash 2s ease-in-out;
 }
 
+#notices_slot {
+	width: 100%;
+}
 #notices_slot ul:empty {
 	display: none;
 }
@@ -771,11 +771,11 @@ html.Q_scanning body > .Q_scanning_code {
 	overflow: visible !important;
 	z-index: 100 !important;
 }
-.Q_columns_siblingContainsExpanded {
-	z-index: 0 !important;
+#content.Q_columns_containsExpanded {
+	padding: 0;
 }
-#notices_slot.Q_columns_siblingContainsExpanded {
-	z-index: 5000 !important;
+.Q_columns_siblingContainsExpanded:not(#notices_slot):not(.Q_contextual) {
+	z-index: 0 !important;
 }
 #status_background {
 	width: 100%;
@@ -843,4 +843,56 @@ img[data-lazyload-src] {
     width:80%;
     height:50%;
     border-radius:100%;
+}
+
+html.Q_layout_widebar {
+
+}
+
+html.Q_layout_sidebar {
+	height: 100%;
+}
+/* <Q tabs> */
+.Q_tabbing_tabs {
+	white-space: nowrap;
+	text-align: center;
+}
+.Q_tabbing_tabs .Q_tabbing_tab {
+	display: inline-block;
+	white-space: nowrap;
+	padding: 3px;
+	font-size: 14px;
+	cursor: pointer;
+	margin: 0 5px 0 0;
+}
+.Q_tabbing_tabs .Q_tabbing_tab:last-of-type {
+	margin-right: 0;
+}
+.Q_tabbing_tabs .Q_tabbing_tab.Q_current {
+	border: 1px solid #777;
+	border-bottom: solid 1px transparent;
+	background-color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.Q_tabbing_container {
+	margin-top: -1px;
+	border: 1px solid #777;
+	background: white;
+}
+Q_tabbing_container .Q_tabbing_item.Q_tabs_switchingTo,
+Q_tabbing_container .Q_tabbing_item.Q_current:not(.Q_tabs_switchingFrom) {
+	background-color: white;
+}
+.Q_tabbing_container .Q_tabbing_item {
+	display: none;
+	padding: 10px 5px 5px 5px;
+}
+.Q_tabbing_container > .Q_tabbing_item.Q_current {
+	display: block;
+}
+/* </Q tabs> */
+
+.Q_dialog_imagepicker .Q_viewport {
+	display: block;
 }

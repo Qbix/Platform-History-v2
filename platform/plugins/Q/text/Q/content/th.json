@@ -98,5 +98,23 @@
         "inHour": "ใน {{h}} ชั่วโมง",
         "inHours": "ใน {{h}} ชั่วโมง",
         "inUnderMinute": "ในไม่เกิน 1 นาที"
+    },
+    "tabs": {
+        "more": "มากกว่า",
+        "Menu": "เมนู"
+    },
+    "video": {
+        "clip": "คลิป",
+        "errorNoSource": "ไม่มีแหล่งที่มาของวิดีโอ"
+    },
+    "pdf": {
+        "clip": "คลิป",
+        "errorNoSource": "ไม่มีแหล่งที่มาของ pdf"
+    },
+    "clip": {
+        "SetClipStart": "ตั้งค่าเริ่มต้นคลิป",
+        "ClipStart": "คลิปเริ่มต้น",
+        "SetClipEnd": "ตั้งค่าคลิปสิ้นสุด",
+        "ClipEnd": "คลิปจบ"
     }
 }

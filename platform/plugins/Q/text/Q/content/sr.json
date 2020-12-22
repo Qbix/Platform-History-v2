@@ -98,5 +98,23 @@
         "inHour": "за {{h}} сат",
         "inHours": "за {{h}} сати",
         "inUnderMinute": "за мање од 1 минуте"
+    },
+    "tabs": {
+        "more": "више",
+        "Menu": "Мени"
+    },
+    "video": {
+        "clip": "цлип",
+        "errorNoSource": "Нема видео извора"
+    },
+    "pdf": {
+        "clip": "цлип",
+        "errorNoSource": "Нема пдф извора"
+    },
+    "clip": {
+        "SetClipStart": "Поставите Цлип Старт",
+        "ClipStart": "Цлип Старт",
+        "SetClipEnd": "Постави крај исечка",
+        "ClipEnd": "Цлип Енд"
     }
 }

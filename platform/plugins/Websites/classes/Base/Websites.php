@@ -22,6 +22,7 @@ abstract class Base_Websites
 	static $table_classnames = array (
   0 => 'Websites_Article',
   1 => 'Websites_Permalink',
+  2 => 'Websites_Webpage',
 );
 
 	/**

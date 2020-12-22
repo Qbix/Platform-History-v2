@@ -98,5 +98,23 @@
         "inHour": "{9 999}} گھنٹے میں",
         "inHours": "{9 999}} گھنٹوں میں",
         "inUnderMinute": "1 منٹ سے کم میں"
+    },
+    "tabs": {
+        "more": "مزید",
+        "Menu": "مینو"
+    },
+    "video": {
+        "clip": "کلپ",
+        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے"
+    },
+    "pdf": {
+        "clip": "کلپ",
+        "errorNoSource": "کوئی پی ڈی ایف ماخذ نہیں ہے"
+    },
+    "clip": {
+        "SetClipStart": "کلپ اسٹارٹ سیٹ کریں",
+        "ClipStart": "کلپ اسٹارٹ",
+        "SetClipEnd": "کلپ اینڈ سیٹ کریں",
+        "ClipEnd": "ویڈیوکلپ اختتام"
     }
 }

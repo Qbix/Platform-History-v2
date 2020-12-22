@@ -32,7 +32,12 @@
         "Buy": "Købe",
         "Credits": "credits",
         "ErrorInvalidAmount": "Beløb ugyldigt",
-        "ErrorInvalidCurrency": "Desværre understøtter vi ikke valuta {{currency}} endnu"
+        "ErrorInvalidCurrency": "Desværre understøtter vi ikke valuta {{currency}} endnu",
+        "WatchClip": "Optjent {{amount}} kredit for at se {{fromStreamTitle}}",
+        "PurchaseCredits": "Købskreditter",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kreditter"
+        }
     },
     "history": {
         "Date": "Dato",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valgfrit bidrag",
         "RequiredPayment": "Krævet betaling",
         "AreYouSureDelete": "Er du sikker på, at du vil slette denne service?",
-        "AmountServicesRelated": "Der er {{amount}} tilgængeligheder relateret til denne service. De fjernes også."
+        "AmountServicesRelated": "Der er {{amount}} tilgængeligheder relateret til denne service. De fjernes også.",
+        "Free": "Gratis"
     }
 }

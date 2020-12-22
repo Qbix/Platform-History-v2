@@ -120,7 +120,7 @@ Q.Tool.define('Q/filter', function (options) {
 	this.Q.onStateChanged('results').set(function () {
 		this.$results.empty().append(state.results);
 	});
-	this.$results.on(Q.Pointer.fastclick, function (event) {
+	this.$results.on(Q.Pointer.fastclick, ".Q_filter_result", function (event) {
 		var $cur = $(event.target);
 		$cur = $cur.is('.Q_filter_result') ? $cur : $cur.closest('.Q_filter_result');
 		tool.choose($cur[0]);
@@ -238,7 +238,7 @@ Q.Tool.define('Q/filter', function (options) {
 			topH += parseInt(tool.$input.css('margin-top')) ;
 		}
 		tool.$results.insertAfter($container).css({
-			left: 0,
+			left: parseInt($container.css('marginLeft'), 10) || 0,
 			width: $container.outerWidth(),
 			"box-sizing": 'border-box',
 			top: state.fullscreen 

@@ -98,5 +98,23 @@
         "inHour": "{{9{}} घण्टामा",
         "inHours": "{{9{}} घण्टामा",
         "inUnderMinute": "१ मिनेट मुनि"
+    },
+    "video": {
+        "clip": "क्लिप",
+        "errorNoSource": "कुनै भिडियो स्रोत छैन"
+    },
+    "pdf": {
+        "clip": "क्लिप",
+        "errorNoSource": "Pdf स्रोत छैन"
+    },
+    "clip": {
+        "SetClipStart": "क्लिप सुरु सेट गर्नुहोस्",
+        "ClipStart": "क्लिप सुरु",
+        "SetClipEnd": "क्लिप अन्त्य सेट गर्नुहोस्",
+        "ClipEnd": "क्लिप अन्त्य"
+    },
+    "tabs": {
+        "more": "अधिक",
+        "Menu": "मेनू"
     }
 }

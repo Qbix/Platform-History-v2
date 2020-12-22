@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Procházet",
             "WriteToStartConversation": "Napište své myšlenky a začněte konverzaci",
             "StartConversation": "Spusťte konverzaci",
-            "GotoConversation": "Přejít na konverzaci"
-        }
+            "GotoConversation": "Přejít na konverzaci",
+            "reset": "Resetovat",
+            "edit": "Upravit",
+            "link": "Odkaz",
+            "setUrl": "Nastavit URL",
+            "save": "Uložit",
+            "setClip": "Vystřihnout klip",
+            "invalidURL": "neplatná URL"
+        },
+        "FileTooLarge": "Soubor je příliš velký pro ukládání do mezipaměti. Maximální velikost souboru {{size}}",
+        "InvalidPDF": "Soubor není platný PDF"
     },
     "types": {
         "Websites/article": {

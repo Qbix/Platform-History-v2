@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.0.9",
+				"version": "1.1.1",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -383,6 +383,15 @@
 				"defaults": {
 					"icon": "Streams/video",
 					"title": "Untitled Video Clip"
+				},
+				"updateTitle": true
+			},
+			"Streams/pdf": {
+				"create": true,
+				"edit": true,
+				"defaults": {
+					"icon": "files/pdf",
+					"title": "Untitled PDF doc"
 				},
 				"updateTitle": true
 			},

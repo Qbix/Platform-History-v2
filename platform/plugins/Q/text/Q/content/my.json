@@ -98,5 +98,23 @@
         "inHour": "{{h}} နာရီ၌",
         "inHours": "{{h}} နာရီအတွင်း",
         "inUnderMinute": "1 မိနစ်အောက်မှာ"
+    },
+    "video": {
+        "clip": "ကလစ်",
+        "errorNoSource": "ဗီဒီယိုရင်းမြစ်မရှိပါ"
+    },
+    "pdf": {
+        "clip": "ကလစ်",
+        "errorNoSource": "pdf အရင်းအမြစ်မရှိပါ"
+    },
+    "clip": {
+        "SetClipStart": "Clip Start ကိုသတ်မှတ်ပါ",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Clip အဆုံးကိုသတ်မှတ်ပါ",
+        "ClipEnd": "Clip အဆုံး"
+    },
+    "tabs": {
+        "more": "နောက်ထပ်",
+        "Menu": "မီနူး"
     }
 }

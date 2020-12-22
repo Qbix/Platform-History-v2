@@ -98,5 +98,23 @@
         "inHour": "i {{h}} hora",
         "inHours": "i {{h}} mau hola",
         "inUnderMinute": "i lalo o 1 mau minuke"
+    },
+    "video": {
+        "clip": "paopao",
+        "errorNoSource": "ʻAʻohe kumu wikiō"
+    },
+    "pdf": {
+        "clip": "paopao",
+        "errorNoSource": "ʻAʻohe kumu Puna"
+    },
+    "clip": {
+        "SetClipStart": "Hoʻonohonoho Clip hoʻomaka",
+        "ClipStart": "Hoʻomaka Clip",
+        "SetClipEnd": "E hoʻopaʻa iā Clip End",
+        "ClipEnd": "Ka Hopena Clip"
+    },
+    "tabs": {
+        "more": "hou aku",
+        "Menu": "Papa Kuhikuhi"
     }
 }

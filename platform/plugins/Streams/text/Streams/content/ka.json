@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "გამოსახულება",
-            "description": "ვიზუალური სურათი"
+            "description": "ვიზუალური სურათი",
+            "newItem": "სურათის დამატება"
         },
         "Streams\/images": {
             "displayType": "სურათების გალერეა",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "ფაილი",
-            "description": "ატვირთული ფაილი"
+            "description": "ატვირთული ფაილი",
+            "newItem": "Ფაილის დამატება"
         },
         "Streams\/audio": {
             "displayType": "აუდიო კლიპი",
-            "description": "აუდიო კლიპი"
+            "description": "აუდიო კლიპი",
+            "newItem": "აუდიოს დამატება"
         },
         "Streams\/video": {
             "displayType": "ვიდეოკლიპი",
-            "description": "ვიდეოკლიპი"
+            "description": "ვიდეოკლიპი",
+            "newItem": "ვიდეოს დამატება"
         },
         "Streams\/live": {
             "displayType": "Პირდაპირი ეთერი",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "მისალოცი, რომელზეც მომხმარებელს შეუძლია გააცნოს საკუთარი თავი",
             "displayType": "მისალმება"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF დოკუმენტი",
+            "description": "PDF დოკუმენტი",
+            "newItem": "PDF- ის დამატება"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ეს შინაარსი შენგან იმალება."
+    },
+    "audio": {
+        "record": "ჩანაწერი",
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "აუდიოს წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "video": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "ვიდეოს წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "pdf": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "არ არის pdf წყარო",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "image": {
+        "reset": "გადატვირთვის",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "მითითებული URL",
+        "save": "Გადარჩენა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "სურათის წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     }
 }

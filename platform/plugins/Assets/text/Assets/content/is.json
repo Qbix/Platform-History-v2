@@ -32,7 +32,12 @@
         "Buy": "Kauptu",
         "Credits": "Einingar",
         "ErrorInvalidAmount": "Fjárhæð ógild",
-        "ErrorInvalidCurrency": "Því miður styðjum við ekki gjaldmiðil {{currency}} enn"
+        "ErrorInvalidCurrency": "Því miður styðjum við ekki gjaldmiðil {{currency}} enn",
+        "WatchClip": "Fékk {{amount}} einingar fyrir að horfa á {{fromStreamTitle}}",
+        "PurchaseCredits": "Kaup inneign",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ein"
+        }
     },
     "history": {
         "Date": "Dagsetning",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Valfrjálst framlag",
         "RequiredPayment": "Nauðsynleg greiðsla",
         "AreYouSureDelete": "Ertu viss um að þú viljir eyða þessari þjónustu?",
-        "AmountServicesRelated": "Það eru {{amount}} tiltæk atriði tengd þessari þjónustu. Þeir eru einnig verður fjarlægður."
+        "AmountServicesRelated": "Það eru {{amount}} tiltæk atriði tengd þessari þjónustu. Þeir eru einnig verður fjarlægður.",
+        "Free": "Ókeypis"
     }
 }

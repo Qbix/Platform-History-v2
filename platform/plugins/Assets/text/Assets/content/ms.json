@@ -32,7 +32,12 @@
         "Buy": "Beli",
         "Credits": "Kredit",
         "ErrorInvalidAmount": "Amaun tidak sah",
-        "ErrorInvalidCurrency": "Sayangnya kami belum menyokong mata wang {{currency}}"
+        "ErrorInvalidCurrency": "Sayangnya kami belum menyokong mata wang {{currency}}",
+        "WatchClip": "Memperoleh {{amount}} kredit untuk menonton {{fromStreamTitle}}",
+        "PurchaseCredits": "Beli Kredit",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit"
+        }
     },
     "history": {
         "Date": "Tarikh",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Sumbangan pilihan",
         "RequiredPayment": "Pembayaran yang diperlukan",
         "AreYouSureDelete": "Adakah anda pasti mahu memadamkan perkhidmatan ini?",
-        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan."
+        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan.",
+        "Free": "Percuma"
     }
 }

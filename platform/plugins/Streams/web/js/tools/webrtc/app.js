@@ -40,11 +40,13 @@ window.WebRTCconferenceLib = function app(options){
         startWith: {},
         showScreenSharingInSeparateScreen: false,
         streams: null,
+        sounds: null,
         twilioAccessToken: null,
         disconnectTime: 3000,
         turnCredentials: null,
         username: null,
         debug: null,
+        onlyOneScreenSharingAllowed: null,
         liveStreaming: {},
         TwilioInstance: null
     };
@@ -88,12 +90,18 @@ window.WebRTCconferenceLib = function app(options){
         }
     }
 
+
+    app.addParticipant = function(participant) {roomParticipants.unshift(participant);}
+
     var localParticipant;
     app.localParticipant = function() { return localParticipant; }
     app.state = 'disconnected';
+    app.initNegotiationState = 'disconnected';
 
     //node.js vars
     var socket;
+    app.socketConnection = function() { return localParticipant; }
+
 
     var _isMobile;
     var _isiOS;
@@ -246,11 +254,16 @@ window.WebRTCconferenceLib = function app(options){
             return false;
         }
 
+        var destroy = function () {
+            events = {};
+        }
+
         return {
             dispatch:dispatch,
             on:on,
             off:off,
-            doesHandlerExist:doesHandlerExist
+            doesHandlerExist:doesHandlerExist,
+            destroy:destroy
         }
     }())
 
@@ -336,7 +349,7 @@ window.WebRTCconferenceLib = function app(options){
             for(var i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
-                    track.trackEl.muted = false;
+                track.trackEl.muted = false;
             }
             this.audioIsMuted = false;
             app.event.dispatch('audioUnmuted', this);
@@ -352,6 +365,7 @@ window.WebRTCconferenceLib = function app(options){
                 var currentScreen = this;
                 var screen = roomScreens[i];
                 if(currentScreen != screen.participant) continue;
+                screen.isActive = false;
                 if(screen.screenEl && screen.screenEl.parentNode != null) screen.screenEl.parentNode.removeChild(screen.screenEl);
                 roomScreens.splice(i, 1);
             }
@@ -477,7 +491,19 @@ window.WebRTCconferenceLib = function app(options){
          * @property signallingState
          * @type {Object}
          */
-        this.signalingState = {state:null, stage:null};
+        this.signalingState = (function(participant){
+            let signalingState = {};
+            signalingState.state = null;
+            signalingState.stage = null;
+            signalingState.setStage = function (stage) {
+                signalingState.stage = stage;
+                app.event.dispatch('signalingStageChange', {participant:participant, signalingState: signalingState});
+                console.log('setStage', signalingState)
+
+            }
+
+            return signalingState;
+        }(this));
         //this.audioStream = null;
         //this.videoStream = null;
         /**
@@ -699,6 +725,7 @@ window.WebRTCconferenceLib = function app(options){
 
             };
             this.hide = function() {
+                log('screen.hide');
                 let screen = this;
                 if(screen.screenEl != null && screen.screenEl.parentElement != null) screen.screenEl.parentElement.removeChild(screen.screenEl);
 
@@ -706,25 +733,61 @@ window.WebRTCconferenceLib = function app(options){
 
                     if(screen == roomScreens[m]){
                         screen.isActive = false;
-                        roomScreens.splice(m, 1);
+                        //roomScreens.splice(m, 1);
                         break;
                     }
                 }
+
                 app.event.dispatch('screenHidden', screen);
 
+                let appendedToNextScreen = false;
+                if(screen.soundEl != null && screen.participant.soundMeter.visualizations['participantScreen'] != null
+                    && screen.participant.soundMeter.visualizations['participantScreen'].element == screen.soundEl) {
+                    log('screen.hide move sound', screen.participant.screens.length);
+
+                    for(let s in screen.participant.screens) {
+                        let scr = screen.participant.screens[s];
+                        log('screen.hide move sound change');
+                        if(scr == screen || !scr.isActive) continue;
+                        log('screen.hide move sound change 2');
+                        screen.participant.soundMeter.visualizations['participantScreen'].element = scr.soundEl
+                        scr.soundEl.appendChild(screen.participant.soundMeter.visualizations['participantScreen'].svg);
+                        appendedToNextScreen = true;
+                        break;
+                    }
+                }
+                if(!appendedToNextScreen && screen.participant.soundMeter.visualizations['participantScreen'] != null) {
+                    screen.participant.soundMeter.visualizations['participantScreen'].remove();
+                }
             };
             this.show = function() {
+                log('screen.show');
                 let screen = this;
+                var presentInScreensList = false;
                 for(let m in roomScreens) {
                     if(screen == roomScreens[m]){
-                        return false;
+                        log('screen.show: screen exists in roomScreens');
+
+                        presentInScreensList = true;
+                        break;
                     }
                 }
                 screen.isActive = true;
-                roomScreens.push(screen);
+
+                if(!presentInScreensList) roomScreens.push(screen);
                 app.event.dispatch('screenShown', screen);
 
+                if(screen.participant.soundMeter.visualizations['participantScreen'] == null) {
+                    app.screensInterface.audioVisualization().build({
+                        name: 'participantScreen',
+                        participant: screen.participant,
+                        element: screen.soundEl,
+                        stopOnMute: true
+                    });
+                }
+
             };
+
         };
 
         /**
@@ -854,10 +917,10 @@ window.WebRTCconferenceLib = function app(options){
         function createAudioAnalyser(track, participant) {
             if(typeof cordova != 'undefined' && _isiOS) return;
 
-            log('createAudioAnalyser', track)
+            log('audiovis: createAudioAnalyser', track)
 
             if(participant.soundMeter.source != null) {
-                log('createAudioAnalyser: source exists')
+                log('audiovis: createAudioAnalyser: source exists')
 
                 /*participant.soundMeter.script.disconnect();
 				participant.soundMeter.source.disconnect();*/
@@ -925,6 +988,7 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function buildVisualization(participant) {
+                log('audiovis: createAudioAnalyser: buildVisualization');
                 participant.soundMeter.latestUpdate = performance.now();
 
                 participant.soundMeter.script.onaudioprocess = function(e) {
@@ -1067,9 +1131,16 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         function audioVisualization() {
+            log('audiovis: audioVisualization');
 
             function updatVisualizationWidth(participant, visualization) {
+                log('audiovis: audioVisualization: updatVisualizationWidth');
+                try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
 
+                }
                 if((visualization == null || visualization.svg == null) || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
 
                 var element = visualization.element;
@@ -1157,6 +1228,8 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function buildVisualization(options) {
+                log('audiovis: audioVisualization: buildVisualization');
+
                 var name = options.name;
                 var element = options.element;
                 var participant = options.participant;
@@ -1230,6 +1303,10 @@ window.WebRTCconferenceLib = function app(options){
                     setTimeout(function () {
                         updatVisualizationWidth(participant, visualisation)
                     }, 300);
+                };
+                visualisation.remove = function () {
+                    delete options.participant.soundMeter.visualizations[name];
+                    if(visualisation.svg.parentNode != null) visualisation.svg.parentNode.removeChild(visualisation.svg);
                 };
             }
 
@@ -1395,7 +1472,7 @@ window.WebRTCconferenceLib = function app(options){
                 log('createTrackElement: onload', remoteStreamEl)
             }
             remoteStreamEl.oncanplay = function (e) {
-                log('createTrackElement: oncanplay', remoteStreamEl);
+                log('createTrackElement: oncanplay ' + track.kind, remoteStreamEl);
 
                 if(!participant.isLocal) remoteStreamEl.play();
 
@@ -1414,7 +1491,8 @@ window.WebRTCconferenceLib = function app(options){
                 log('createTrackElement: onloadedmetadata', remoteStreamEl)
             }
             if(track.kind == 'video') {
-                log('createTrackElement: video size', remoteStreamEl.videoWidth, remoteStreamEl.videoHeight)
+                log('createTrackElement: add video track events');
+                log('createTrackElement: video size', remoteStreamEl.videoWidth, remoteStreamEl.videoHeight);
 
                 remoteStreamEl.addEventListener('loadedmetadata', function (e) {
                     var videoConWidth = (track.parentScreen.videoCon.style.width).replace('px', '');
@@ -1422,7 +1500,16 @@ window.WebRTCconferenceLib = function app(options){
                     var currentRation = videoConWidth / videoConHeight;
                     var videoRatio = e.target.videoWidth / e.target.videoHeight;
 
-                    log('createTrackElement: loadedmetadata: ' + videoConWidth + 'x' + videoConHeight)
+                    //if(e.target.videoWidth)
+                    log('createTrackElement: loadedmetadata: video ' + e.target.videoWidth + 'x' + e.target.videoHeight)
+                    log('createTrackElement: loadedmetadata: con ' + videoConWidth + 'x' + videoConHeight)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.readyState ' + track.mediaStreamTrack.readyState)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.enabled ' + track.mediaStreamTrack.enabled)
+                    log('createTrackElement: loadedmetadata: mediaStreamTrack.muted ' + track.mediaStreamTrack.muted)
+
+                    if(track.mediaStreamTrack.readyState == 'ended' || (e.target.videoWidth == 0 && e.target.videoHeight == 0)) return;
+                    log('createTrackElement: loadedmetadata: return check');
+
                     var shouldReset = (track.parentScreen != null && currentRation.toFixed(1) != videoRatio.toFixed(1)) || track.screensharing == true;
 
                     track.metadata = {width:e.target.videoWidth, height:e.target.videoHeight};
@@ -1435,7 +1522,7 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('mute', function(){
-                    log('mediaStreamTrack mute');
+                    log('mediaStreamTrack mute', track);
 
                     //if(track.participant.videoTracks(true).length != 0) return;
 
@@ -1449,7 +1536,7 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('unmute', function(e){
-                    log('mediaStreamTrack unmute');
+                    log('mediaStreamTrack unmuted 1', track);
                     if(track.parentScreen.removeTimer != null) {
                         clearTimeout(track.parentScreen.removeTimer);
                         track.parentScreen.removeTimer = null;
@@ -1459,14 +1546,14 @@ window.WebRTCconferenceLib = function app(options){
                 });
 
                 track.mediaStreamTrack.addEventListener('ended', function(e){
-                    log('mediaStreamTrack ended');
+                    log('mediaStreamTrack ended', track);
                     //if(track.participant.videoTracks(true).length == 0)
                     removeScreenFromCommonList(track.parentScreen);
                 });
             }
 
             track.mediaStreamTrack.addEventListener('mute', function(e){
-                log('mediaStreamTrack muted');
+                log('mediaStreamTrack muted', track);
                 app.event.dispatch('trackMuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -1475,7 +1562,7 @@ window.WebRTCconferenceLib = function app(options){
             });
 
             track.mediaStreamTrack.addEventListener('unmute', function(e){
-                log('mediaStreamTrack unmuted');
+                log('mediaStreamTrack unmuted 0', track);
                 app.event.dispatch('trackUnmuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -1484,7 +1571,7 @@ window.WebRTCconferenceLib = function app(options){
             });
 
             track.mediaStreamTrack.addEventListener('ended', function(e){
-                log('mediaStreamTrack ended');
+                log('mediaStreamTrack ended', track);
                 app.event.dispatch('trackMuted', {
                     screen: track.parentScreen,
                     trackEl: e.target,
@@ -1673,8 +1760,10 @@ window.WebRTCconferenceLib = function app(options){
 
         }
 
-        var canvasComposer = (function () {
+        var canvasComposer = (function (roomInstance) {
 
+            var _roomInstance = roomInstance;
+            var _isChangingRoom = false;
             var _canvas = null;
             var _canvasMediStream = null;
             var _mediaRecorder = null;
@@ -1701,7 +1790,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
                     videoCanvas.style.position = 'absolute';
                     videoCanvas.style.top = '-999999999px';
-                    videoCanvas.style.top = '0';
+                    //videoCanvas.style.top = '0';
                     videoCanvas.style.left = '0';
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
@@ -1742,7 +1831,9 @@ window.WebRTCconferenceLib = function app(options){
                     var tracksToRemove = [];
 
 
-                    var participants = app.roomParticipants(true);
+                    var participants = _roomInstance.roomParticipants(true);
+                    log('updateCanvasLayout participants',  participants)
+
                     var renderScreenSharingLayout = false;
                     for(var v in participants) {
                         log('updateCanvasLayout participant', participants[v].online, participants[v])
@@ -1930,17 +2021,80 @@ window.WebRTCconferenceLib = function app(options){
 
                     }
                     log('updateCanvasLayout result', tracksToAdd, tracksToRemove)
+                    log('updateCanvasLayout room name', options.roomName)
 
+                    for(let r = _streams.length - 1; r >= 0 ; r--){
+                        let onlineInCurrentRoom = false;
+                        for(let p in participants) {
+                            if(_streams[r].participant == participants[p]) {
+                                onlineInCurrentRoom = true;
+                            }
+                        }
+                        if(_streams[r].participant.isLocal && !onlineInCurrentRoom) {
+                            log('updateCanvasLayout prevRoom: loc prev room stream', _streams[r])
 
-                    var r;
-                    for(r = _streams.length - 1; r >= 0 ; r--){
-                        for(let n in tracksToRemove) {
-                            if(_streams[r] == tracksToRemove[n]) {
-                                _inputCtx.clearRect(_streams[r].rect.x, _streams[r].rect.y, _streams[r].rect.width, _streams[r].rect.height);
-                                _streams[r] = null;
-                                _streams.splice(r, 1);
+                            for(let m = _streams.length - 1; m >= 0 ; m--){
+                                if(!_streams[m].participant.isLocal || _streams[m] == _streams[r]) continue;
+                                log('updateCanvasLayout prevRoom: loc live stream', _streams[m])
+
+                                if(_streams[m].kind == 'audio') {
+                                    _streams[r].participant = _streams[m].participant;
+                                    _streams[r].kind = 'audio';
+                                    _streams[r].track = null;
+                                    _streams[r].mediaStream = null;
+                                    _streams[r].htmlVideoEl = null;
+                                    _streams[r].screenSharing = false;
+                                } else {
+                                    _streams[r].participant = _streams[m].participant;
+                                    _streams[r].kind = 'video';
+                                    _streams[r].track = _streams[m].track;
+                                    _streams[r].mediaStream = _streams[m].track.stream;
+                                    _streams[r].htmlVideoEl = _streams[m].track.trackEl;
+                                    if (_streams[r].track.screensharing == true) _streams[m].screenSharing = true;
+
+                                }
+                                tracksToRemove.push(_streams[m]);
+                                break;
                             }
                             break;
+                        } else if(_streams[r].participant.isLocal && onlineInCurrentRoom) {
+                            log('updateCanvasLayout prevRoom: loc current room', _streams[r])
+
+                            continue;
+                        } else if(!_streams[r].participant.isLocal && !onlineInCurrentRoom) {
+                            log('updateCanvasLayout prevRoom: remote prev room', _streams[r])
+
+                            tracksToRemove.push(_streams[r])
+                        } else {
+                            log('updateCanvasLayout prevRoom: else', _streams[r])
+
+                        }
+                    }
+
+                    log('updateCanvasLayout remove from prev room', tracksToRemove)
+                    for(let n in tracksToRemove) {
+                        log('updateCanvasLayout tracksToRemove', tracksToRemove[n].participant.isLocal)
+
+                    }
+
+                    for(let d = _streams.length - 1; d >= 0 ; d--){
+                        log('updateCanvasLayout remove')
+
+                        function remove() {
+                            _inputCtx.clearRect(_streams[d].rect.x, _streams[d].rect.y, _streams[d].rect.width, _streams[d].rect.height);
+                            _streams[d] = null;
+                            _streams.splice(d, 1);
+                        }
+
+                        for(let n in tracksToRemove) {
+                            log('updateCanvasLayout remove tracksToRemove', _streams[d], tracksToRemove[n])
+
+                            if(_streams[d] == tracksToRemove[n]) {
+                                log('updateCanvasLayout remove stream', _streams[d])
+
+                                remove();
+                                break;
+                            }
                         }
                     }
 
@@ -2172,6 +2326,10 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     }
 
+                    /*if(_isChangingRoom !== false) {
+                        circleLoader.draw();
+                    }*/
+
                     requestAnimationFrame(function(){
                         drawVideosOnCanvas();
                     })
@@ -2277,7 +2435,7 @@ window.WebRTCconferenceLib = function app(options){
 
                         _inputCtx.font = "16px Arial";
                         _inputCtx.fillStyle = "white";
-                        _inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+                        _inputCtx.fillText(data.participant.username, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
                     }
                     _inputCtx.strokeStyle = "black";
                     _inputCtx.beginPath();
@@ -2299,9 +2457,9 @@ window.WebRTCconferenceLib = function app(options){
                     //drawAudioVisualization(data);
 
                     var width, height;
-                    if(data.avatar != null) {
+                    if(data.participant.avatar != null) {
 
-                        var avatar = data.avatar;
+                        var avatar = data.participant.avatar.image;
                         width = avatar.width;
                         height = avatar.height;
 
@@ -2349,7 +2507,7 @@ window.WebRTCconferenceLib = function app(options){
 
                         _inputCtx.font = "16px Arial";
                         _inputCtx.fillStyle = "white";
-                        _inputCtx.fillText(data.name, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
+                        _inputCtx.fillText(data.participant.username, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
                     }
 
                 }
@@ -2509,29 +2667,116 @@ window.WebRTCconferenceLib = function app(options){
                     }
                 }
 
+                var circleLoader = (function drawChangingRoomLoader() {
+
+                    var _circle = null;
+                    const pi = Math.PI,
+                        pi2 = pi*2,
+                        opts = {
+                            bgc: "rgba(255, 255, 255, 0.5)",
+                            radius: 25,
+                            thickness: 5
+                        };
+
+                    let w = _size.width,
+                        h = _size.height;
+                    class Circle {
+                        constructor(){
+                            this.reverse = false;
+                            this.theta = 0;
+                        }
+                        update(){
+                            this.theta+=.2;
+
+                            if(this.theta > pi2){
+                                this.theta = 0;
+                                this.reverse ? this.reverse = false : this.reverse = true;
+                            }
+                        };
+
+                        draw(){
+                            this.update();
+
+                            _inputCtx.beginPath();
+
+                            this.reverse ?
+                                _inputCtx.arc((w/2) - (opts.radius + 15), h/2 - 8, opts.radius, this.theta, pi2)
+                                : _inputCtx.arc((w/2) - (opts.radius + 15), h/2 - 8, opts.radius, 0, this.theta);
+
+                            _inputCtx.strokeStyle = "#1d1e22";
+                            _inputCtx.lineWidth = opts.thickness;
+                            _inputCtx.lineCap = "round";
+                            _inputCtx.stroke();
+                        };
+                    }
+
+                    _circle = new Circle();
+
+                    function draw() {
+                        _inputCtx.fillStyle = opts.bgc;
+                        _inputCtx.fillRect(0,0,w,h);
+
+                        _circle.draw();
+
+                        _inputCtx.font = "26px Arial";
+                        _inputCtx.fillStyle = "black";
+                        _inputCtx.fillText('Switching room...', _size.width / 2, _size.height / 2);
+                    }
+
+
+                    return {
+                        draw:draw
+                    }
+                }())
+
                 function compositeVideosAndDraw() {
-                    if(_isActive) return;
-                    if(!document.body.contains(_canvas)) document.body.appendChild(_canvas);
+                    log('compositeVideosAndDraw 0');
+
+                    if (_isActive) return;
+                    log('compositeVideosAndDraw');
+                    if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 
                     updateCanvasLayout();
                     drawVideosOnCanvas();
                     _isActive = true;
+                    refreshEventListeners(_roomInstance);
+                }
 
+                function refreshEventListeners(roomInstance) {
+                    _roomInstance = roomInstance;
                     var updateCanvas = function() {
                         if(_isActive == true) {
                             updateCanvasLayout();
                         }
                     }
-                    app.event.on('videoTrackLoaded', updateCanvas);
-                    app.event.on('audioTrackLoaded', updateCanvas);
-                    app.event.on('participantDisconnected', updateCanvas);
-                    app.event.on('trackMuted', updateCanvas);
-                    app.event.on('trackUnmuted', updateCanvas);
-                    app.event.on('screenHidden', updateCanvas);
-                    app.event.on('screenShown', updateCanvas);
-                    app.event.on('audioMuted', updateCanvas);
-                    app.event.on('audioUnmuted', updateCanvas);
+                    roomInstance.event.on('videoTrackLoaded', updateCanvas);
+                    roomInstance.event.on('audioTrackLoaded', updateCanvas);
+                    roomInstance.event.on('participantDisconnected', updateCanvas);
+                    roomInstance.event.on('trackMuted', updateCanvas);
+                    roomInstance.event.on('trackUnmuted', updateCanvas);
+                    roomInstance.event.on('screenHidden', updateCanvas);
+                    roomInstance.event.on('screenShown', updateCanvas);
+                    roomInstance.event.on('audioMuted', updateCanvas);
+                    roomInstance.event.on('audioUnmuted', updateCanvas);
+                }
 
+                function switchingRoom(value) {
+                    log('switchingRoom', value);
+                    if(value == false && Date.now() - _isChangingRoom < 3000) {
+                        log('switchingRoom setTimeout');
+
+                        setTimeout(function () {
+                            log('switchingRoom setTimeout end');
+                            _isChangingRoom = false;
+                        }, 3000 - (Date.now() - _isChangingRoom))
+                        return;
+                    } else if(value == false) {
+                        log('switchingRoom', value);
+                        _isChangingRoom = false;
+                        return;
+                    }
+                    log('switchingRoom', value);
+                    _isChangingRoom = Date.now();
                 }
 
                 function layoutGenerator(layoutName, numberOfRects) {
@@ -2754,6 +2999,8 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function stopAndRemove() {
+                    log('videoComposer: stopAndRemove')
+
                     if(_canvas != null) {
                         if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
                     }
@@ -2776,6 +3023,8 @@ window.WebRTCconferenceLib = function app(options){
                 return {
                     updateCanvasLayout: updateCanvasLayout,
                     compositeVideosAndDraw: compositeVideosAndDraw,
+                    refreshEventListeners: refreshEventListeners,
+                    switchingRoom: switchingRoom,
                     stop: stopAndRemove,
                     isActive: isActive
                 }
@@ -2786,8 +3035,9 @@ window.WebRTCconferenceLib = function app(options){
                 var _dest;
 
                 function mix() {
-                    _dest = audio.createMediaStreamDestination();
-                    let participants = app.roomParticipants();
+                    if(_dest == null) _dest = audio.createMediaStreamDestination();
+
+                    let participants = _roomInstance.roomParticipants();
                     let tracksNum = 0;
                     participants.forEach(function(participant) {
                         let audiotracks = participant.audioTracks();
@@ -2820,11 +3070,34 @@ window.WebRTCconferenceLib = function app(options){
 
                     }
 
-                    app.event.on('audioTrackLoaded', function(e) {
+                    _roomInstance.event.on('audioTrackLoaded', function(e) {
                         if(_canvasMediStream == null || _dest == null) return;
                         let source = audio.createMediaStreamSource(e.track.stream);
                         source.connect(_dest);
                     })
+
+                    if(options.liveStreaming.sounds) {
+                        _roomInstance.event.on('participantConnected', function (e) {
+                            if (_canvasMediStream == null || _dest == null) return;
+                            console.log('options.sounds.participantConnected', options.sounds.participantConnected)
+
+                            var connectedAudio = new Audio(options.sounds.participantConnected)
+                            var audioSource = audio.createMediaElementSource(connectedAudio);
+                            audioSource.connect(_dest);
+                            connectedAudio.play();
+                            //audioSource.disconnect(_dest);
+                        })
+
+                        _roomInstance.event.on('participantDisconnected', function (e) {
+                            if (_canvasMediStream == null || _dest == null) return;
+                            console.log('options.sounds.participantDisconnected', options.sounds.participantDisconnected)
+                            var disconnectedAudio = new Audio(options.sounds.participantDisconnected)
+                            var audioSource = audio.createMediaElementSource(disconnectedAudio);
+                            audioSource.connect(_dest);
+                            disconnectedAudio.play();
+                            //audioSource.disconnect(_dest);
+                        })
+                    }
                 }
 
                 function stop() {
@@ -2857,6 +3130,7 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function captureStream(ondataavailable) {
+                log('captureStream');
                 if(ondataavailable != null){
                     addDataListener(ondataavailable);
                 }
@@ -2871,6 +3145,8 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 if(options.liveStreaming.useRecordRTCLibrary) {
+                    log('captureStream if1');
+
                     videoComposer.compositeVideosAndDraw();
 
                     _canvasMediStream = canvasComposer.canvas().captureStream(25);
@@ -2884,6 +3160,7 @@ window.WebRTCconferenceLib = function app(options){
                     });
                     _mediaRecorder.startRecording();
                 } else {
+                    log('captureStream if1 else');
 
                     if(_mediaRecorder != null){
                         return;
@@ -2953,6 +3230,7 @@ window.WebRTCconferenceLib = function app(options){
                 }
                 videoComposer.stop();
                 audioComposer.stop();
+                _mediaRecorder = null;
             }
 
             function saveToFile(file, fileName) {
@@ -3033,23 +3311,22 @@ window.WebRTCconferenceLib = function app(options){
                     return false;
                 }
             }
-        }())
+        }(app))
 
-
-        var fbLive = (function () {
+        var fbLive = (function (roomInstance) {
+            var _roomInstance = roomInstance;
+            var _streamUsingWebRTC = false;
             var _streamingSocket;
-            var _fbUserId = null;
-
-            var _fbApiInited;
-            var _fbStreamUrl;
+            var _streamingParticipant;
 
             var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
             function connect(streamUrl, callback) {
                 if(typeof io == 'undefined') return;
+                log('startStreaming connect');
 
                 var secure = options.nodeServer.indexOf('https://') == 0;
-                _streamingSocket = io.connect(options.nodeServer, {
+                _streamingSocket = io.connect(options.nodeServer + '/webrtc', {
                     query: {
                         rtmp: streamUrl,
                         localInfo: JSON.stringify(_localInfo)
@@ -3109,6 +3386,64 @@ window.WebRTCconferenceLib = function app(options){
 
             }
 
+            function startStreaming(fbStreamUrl) {
+                log('startStreaming', fbStreamUrl);
+
+                connect(fbStreamUrl, function () {
+                    log('startStreaming connected');
+                    if(!_streamUsingWebRTC) {
+                        canvasComposer.captureStream(function (blob) {
+                            onDataAvailablehandler(blob);
+                        });
+
+                        var timer = function() {
+                            if(_videoStream.blobs.length != 0) {
+                                let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+                                var mergedBlob = new Blob(blobsToSend);
+                                _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+                            }
+                            _videoStream.timer = setTimeout(timer, 6000);
+                        }
+
+                        _videoStream.timer = setTimeout(timer, 6000);
+
+                        _roomInstance.event.dispatch('facebookLiveStreamingStarted', localParticipant);
+                        _roomInstance.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+                    } else {
+                        socket.emit('Streams/webrtc/recording', {url:fbStreamUrl});
+                        var getStreamingParticipant = function (streamingParticipant) {
+                            log('startLivestreaming getStreamingParticipant', streamingParticipant)
+                            log('startLivestreaming getStreamingParticipant', streamingParticipant.connection ? streamingParticipant.connection.initiatorId : null, localParticipant.sid)
+                            if(streamingParticipant.sid == 'recording' && streamingParticipant.connection && streamingParticipant.connection.initiatorId == localParticipant.sid) {
+                                log('startLivestreaming getStreamingParticipant streamingParticipant')
+
+                                _streamingParticipant = streamingParticipant;
+                                _roomInstance.event.off('participantConnected', getStreamingParticipant);
+                            }
+                        }
+                        _roomInstance.event.on('participantConnected', getStreamingParticipant);
+                    }
+                });
+            }
+
+            function switchRoom(roomInstance, roomParticipants) {
+                log('fbLive switchRoom', roomInstance);
+                if(_streamingParticipant == null) return;
+                _roomInstance = roomInstance;
+                //_streamingParticipant.connection.initiatorId = _roomInstance.localParticipant().sid;
+
+                _roomInstance.addParticipant(_streamingParticipant);
+                for(let s in _streamingParticipant.screens) {
+                    _roomInstance.screensInterface.addScreenToCommonList(_streamingParticipant.screens[s]);
+                }
+                log('fbLive switchRoom roomParticipants', roomParticipants.length);
+                log('fbLive switchRoom roomParticipants2', app.roomParticipants(true).length);
+                log('fbLive switchRoom _streamingParticipant', _streamingParticipant);
+
+
+                _roomInstance.event.dispatch('participantConnected', _streamingParticipant);
+            }
+
             return {
                 goLive: function () {
                     log('goLiveDialog goLive');
@@ -3125,42 +3460,23 @@ window.WebRTCconferenceLib = function app(options){
 
                     if(_streamingSocket != null) _streamingSocket.disconnect();
                     _streamingSocket = null;
-
-                    app.event.dispatch('facebookLiveStreamingEnded', localParticipant);
-                    app.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
+                    _roomInstance.event.dispatch('facebookLiveStreamingEnded', localParticipant);
+                    _roomInstance.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
                 },
                 isStreaming: function () {
                     if(_streamingSocket != null && _streamingSocket.connected) return true;
                     return false;
                 },
-                startStreaming: function(fbStreamUrl) {
-                    log('startStreaming', fbStreamUrl);
-
-                    connect(fbStreamUrl, function () {
-                        canvasComposer.captureStream(function (blob) {
-                            onDataAvailablehandler(blob);
-                        });
-
-                        var timer = function() {
-                            if(_videoStream.blobs.length != 0) {
-                                let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
-                                var mergedBlob = new Blob(blobsToSend);
-                                _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
-                            }
-                            _videoStream.timer = setTimeout(timer, 6000);
-                        }
-
-                        _videoStream.timer = setTimeout(timer, 6000);
-
-                        app.event.dispatch('facebookLiveStreamingStarted', localParticipant);
-                        app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
-                    });
-                },
+                startStreaming: startStreaming,
+                switchRoom: switchRoom,
                 videoStream:function () {
                     return _videoStream;
+                },
+                streamingParticipant:function () {
+                    return _streamingParticipant;
                 }
             }
-        }())
+        }(app))
 
         var videoRecorder = (function () {
             var _videoStream = {blobs: [], allBlobs: [], size: 0}
@@ -3269,7 +3585,7 @@ window.WebRTCconferenceLib = function app(options){
                     if(typeof io == 'undefined') return;
 
                     var secure = options.nodeServer.indexOf('https://') == 0;
-                    _streamingSocket = io.connect(options.nodeServer, {
+                    _streamingSocket = io.connect(options.nodeServer + '/webrtc', {
                         query: {
                             rtmp: streamUrl,
                             localInfo: JSON.stringify(_localInfo)
@@ -4150,6 +4466,8 @@ window.WebRTCconferenceLib = function app(options){
         }())
 
         function addScreenToCommonList(screen) {
+            log('addScreenToCommonList');
+
             screen.show();
             app.event.dispatch('screenAdded', {
                 screen: screen,
@@ -4208,7 +4526,9 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         function startShareScreen(successCallback, failureCallback) {
-            log('startShareScreen');
+            log('startShareScreen', options.onlyOneScreenSharingAllowed);
+
+
             app.eventBinding.sendDataTrackMessage("screensharingStarting");
 
             var screenForScreensharing = app.screensInterface.createParticipantScreen(localParticipant);
@@ -4513,10 +4833,11 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         function checkOnlineStatus() {
+            //return;
             app.checkOnlineStatusInterval = setInterval(function () {
                 var i, participant;
                 for (i = 0; participant = roomParticipants[i]; i++){
-                    if(participant.isLocal) continue;
+                    if(participant.isLocal || participant.sid == 'recording') continue;
 
                     var audioTracks = participant.tracks.filter(function (t) {
                         if(participant.online == false) return;
@@ -4772,7 +5093,8 @@ window.WebRTCconferenceLib = function app(options){
                     sdpMid: event.candidate.sdpMid,
                     candidate: event.candidate.candidate,
                     id: event.candidate.sdpMid,
-                    targetSid: existingParticipant.sid
+                    targetSid: existingParticipant.sid,
+                    connection: existingParticipant.connection
                 });
             }
 
@@ -4899,13 +5221,39 @@ window.WebRTCconferenceLib = function app(options){
                 socketParticipantConnected().initPeerConnection(participant);
             });
 
-            socket.on('Streams/webrtc/participantConnected', function (participant){
-                log('socket: participantConnected', participant);
-                socketParticipantConnected().initPeerConnection(participant);
-            });
+            socket.on('Streams/webrtc/roomParticipants', function (socketParticipants) {
+                log('roomParticipants', socketParticipants);
 
-            socket.on('Streams/webrtc/roomParticipants', function (participantsList){
-                log('roomParticipants', participantsList);
+                app.event.dispatch('roomParticipants', socketParticipants);
+                var negotiationEnded = 0;
+                function onNegotiatingEnd() {
+                    log('socketEventBinding initNegotiationEnded');
+                    app.initNegotiationState = 'ended';
+                    app.event.dispatch('initNegotiationEnded', roomParticipants);
+                    app.event.off('signalingStageChange', onSignalingStageChange);
+                }
+
+                function onSignalingStageChange(e) {
+                    log('signalingStageChange', e);
+                    var existingParticipant = roomParticipants.filter(function (roomParticipant) {
+                        return roomParticipant.sid == e.participant.sid;
+                    })[0];
+
+                    if(existingParticipant != null && existingParticipant.signalingState.stage == 'answerSent') {
+                        negotiationEnded++;
+                    }
+
+                    if(negotiationEnded == socketParticipants.length) {
+                        onNegotiatingEnd();
+                    }
+
+                }
+
+                if(socketParticipants.length != 0) {
+                    app.event.on('signalingStageChange', onSignalingStageChange);
+                } else {
+                    onNegotiatingEnd();
+                }
             });
 
             socket.on('Streams/webrtc/participantDisconnected', function (sid){
@@ -5002,6 +5350,92 @@ window.WebRTCconferenceLib = function app(options){
                     app.event.dispatch('canISendOffer', message);
                 }
             });
+            socket.on('Streams/webrtc/recording', function (message){
+                console.log('Streams/webrtc/recording', message);
+                var offer = {
+                    type:'offer',
+                    sdp: message.connection.localDescription.sdp,
+                    info: {usesUnifiedPlan: true},
+                    name: 'recording',
+                    fromSid: 'recording',
+                    connection: {initiatorId: message.initiatorId, connectionId: message.connection.id},
+                }
+                offerReceived().processOffer(offer);
+            });
+            var _img;
+            var _canvas;
+            var _outputCtx;
+            socket.on('Streams/webrtc/serverVideo', function (message){
+                return;
+                console.log('Streams/webrtc/recording', message);
+
+                function createCanvas() {
+                    var videoCanvas = document.createElement("CANVAS");
+                    videoCanvas.className = "Streams_webrtc_video-stream-canvas";
+                    videoCanvas.style.position = 'absolute';
+                    videoCanvas.style.top = '-999999999px';
+                    videoCanvas.style.top = '0';
+                    videoCanvas.style.left = '0';
+                    videoCanvas.style.zIndex = '9999999999999999999';
+                    videoCanvas.style.backgroundColor = 'transparent';
+                    videoCanvas.width = 2000;
+                    videoCanvas.height = 600;
+
+                    _outputCtx = videoCanvas.getContext('2d');
+
+                    _canvas = videoCanvas;
+                    document.body.appendChild(_canvas);
+
+                }
+                function createFrameCanvas(data, width, height) {
+                    var frameCanvas = document.createElement("CANVAS");
+                    frameCanvas.className = "Streams_webrtc_video-stream-canvas";
+                    frameCanvas.style.position = 'absolute';
+                    frameCanvas.style.top = '-999999999px';
+                    frameCanvas.style.top = '0';
+                    frameCanvas.style.left = '0';
+                    frameCanvas.style.zIndex = '9999999999999999999';
+                    frameCanvas.width = width;
+                    frameCanvas.height = height;
+                    var offCtx = frameCanvas.getContext('2d');
+                    var frameImageData = new ImageData(new Uint8ClampedArray(data), width, height);
+                    offCtx.putImageData(frameImageData, 0, 0);
+                    return frameCanvas;
+                }
+
+                function createImg() {
+                    _img = document.createElement("IMG");
+                    document.body.appendChild(_img);
+                }
+
+                if(_canvas == null) createCanvas();
+                //_canvas.width = message.size.width;
+                //_canvas.height = message.size.height;
+
+                let frameCanvas = createFrameCanvas(message.data, message.size.width, message.size.height);
+                _outputCtx.drawImage(frameCanvas, 0, 0);
+                //var iData = new ImageData(new Uint8ClampedArray(message.data), message.size.width, message.size.height);
+                //_outputCtx.putImageData(iData, 0, 0);
+                /*if(_img == null) {
+                    createImg();
+
+                    var arrayBuffer = message.data;
+                    var bytes = new Uint8Array(arrayBuffer);
+                    var blob = new Blob([bytes.buffer]);
+
+                    var image = _img;
+
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        image.src = e.target.result;
+                    };
+                    reader.readAsDataURL(blob);
+                }*/
+                //var imageUrl = urlCreator.createObjectURL( blob );
+
+                //_img.src = imageUrl;
+            });
+            window.WebRTCSocket = socket;
         }
 
         function setH264AsPreffered(description) {
@@ -5088,9 +5522,9 @@ window.WebRTCconferenceLib = function app(options){
                     participant.currentOfferId = hasPriority;
 
                     if(!resetConnection) {
-                        participant.signalingState.stage = 'offerCreating';
+                        participant.signalingState.setStage('offerCreating');
                     } else {
-                        participant.signalingState.stage = 'initialOfferCreating';
+                        participant.signalingState.setStage('initialOfferCreating');
                         publishMedia();
                     }
 
@@ -5098,7 +5532,7 @@ window.WebRTCconferenceLib = function app(options){
                     newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
                         .then(function(offer) {
                             log('createOffer: offer created', hasPriority, participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState, offer)
-                            participant.signalingState.stage = 'offerCreated';
+                            participant.signalingState.setStage('offerCreated');
 
                             //In the case when renegotiationneeded was triggered right after initial offer was created
                             //this cancels initial offer before signalingState will be changed to have-local-offer
@@ -5130,13 +5564,14 @@ window.WebRTCconferenceLib = function app(options){
 
                             return newPeerConnection.setLocalDescription(localDescription).then(function () {
                                 log('createOffer: offer created: sending', participant.hasNewOffersInQueue, participant.currentOfferId, participant.RTCPeerConnection.signalingState);
-                                participant.signalingState.stage = 'offerSent';
+                                participant.signalingState.setStage('offerSent');
                                 sendMessage({
                                     name: localParticipant.identity,
                                     targetSid: participant.sid,
                                     type: "offer",
                                     resetConnection: resetConnection == true ? true : false,
-                                    sdp: newPeerConnection.localDescription.sdp
+                                    sdp: newPeerConnection.localDescription.sdp,
+                                    connection: participant.connection != null ? participant.connection : null
                                 });
                             });
                         })
@@ -5184,9 +5619,9 @@ window.WebRTCconferenceLib = function app(options){
 
                     //startNegotiating();
 
-                    if(participant.signalingRole == 'impolite' && !participant.isNegotiating) {
+                    if(participant.signalingRole == 'impolite' && !participant.isNegotiating && participant.sid != 'recording') {
 
-                        if((_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox') {
+                        if((_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox' || participant.sid == 'recording') {
                             log('negotiate: browser supports rollback');
                             startNegotiating();
                         } else {
@@ -5210,22 +5645,25 @@ window.WebRTCconferenceLib = function app(options){
                 participant.negotiate = negotiate;
 
                 function publishMedia() {
+                    log('createPeerConnection: publishMedia')
+
                     var localTracks = localParticipant.tracks;
 
-                    if(app.conferenceControl.cameraIsEnabled()){
-                        if('ontrack' in newPeerConnection){
-                            for (var t in localTracks) {
-                                log('createPeerConnection: add track ' + localTracks[t].kind)
+                    //we can eliminate checking whether .cameraIsEnabled() as all video tracks are stopped when user switches camera or screensharing off.
+                    if('ontrack' in newPeerConnection){
+                        for (var t in localTracks) {
+                            log('createPeerConnection: add track ' + localTracks[t].kind)
 
-                                if (localTracks[t].kind == 'video') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
-                            }
-
-                        } else {
-                            log('createPeerConnection: add videoStream - ' + (localParticipant.videoStream != null))
-                            if(localParticipant.videoStream != null) newPeerConnection.addStream(localParticipant.videoStream);
+                            if (localTracks[t].kind == 'video') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
                         }
+
+                    } else {
+                        log('createPeerConnection: add videoStream - ' + (localParticipant.videoStream != null))
+                        if(localParticipant.videoStream != null) newPeerConnection.addStream(localParticipant.videoStream);
                     }
 
+                    //we must check whether .micIsEnabled() we don't .do mediaStreamTrack.stop() for iOS as stop() cancels access to mic, and both stop() and enabled = false affect audio visualization.
+                    //So we need to check if micIsEnabled() to avoid cases when we add audio tracks while user's mic is turned off.
                     if(app.conferenceControl.micIsEnabled()){
 
                         if('ontrack' in newPeerConnection){
@@ -5263,14 +5701,14 @@ window.WebRTCconferenceLib = function app(options){
 
                                 participant.isNegotiating = false;
                                 participant.currentOfferId = false;
-                                participant.signalingState.stage = null;
+                                participant.signalingState.setStage(null);
 
                                 participant.negotiate();
                             } else {
                                 participant.hasNewOffersInQueue = false;
                                 participant.isNegotiating = false;
                                 participant.currentOfferId = false;
-                                participant.signalingState.stage = null;
+                                participant.signalingState.setStage(null);
                             }
                         }
 
@@ -5322,6 +5760,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 newPeerConnection.onnegotiationneeded = function (e) {
                     log('socketParticipantConnected: onnegotiationneeded, negotiating = ' + participant.isNegotiating);
+                    log('socketParticipantConnected: onnegotiationneeded, sdp ' + (newPeerConnection.localDescription ? newPeerConnection.localDescription.sdp : 'n/a'));
 
                     negotiate();
                 };
@@ -5383,10 +5822,12 @@ window.WebRTCconferenceLib = function app(options){
 
                     if((localRollbackSupport && remoteRollbackSupport) || (!localRollbackSupport && remoteRollbackSupport) || (!localRollbackSupport && !remoteRollbackSupport)) {
                         newParticipant.signalingRole = 'polite';
+                        //newParticipant.signalingRole = 'impolite';
                         log('socketParticipantConnected: signalingRole: polite');
 
                     } else {
                         newParticipant.signalingRole = 'impolite';
+                        //newParticipant.signalingRole = 'polite';
                         log('socketParticipantConnected: signalingRole: impolite');
 
                     }
@@ -5520,6 +5961,8 @@ window.WebRTCconferenceLib = function app(options){
             function createPeerConnection(senderParticipant) {
                 var config = pc_config;
                 if(!senderParticipant.localInfo.usesUnifiedPlan) config.sdpSemantics = "plan-b";
+                log('config.sdpSemantics', config.sdpSemantics)
+
                 var newPeerConnection = new RTCPeerConnection(config);
 
                 function createOffer(hasPriority){
@@ -5527,12 +5970,12 @@ window.WebRTCconferenceLib = function app(options){
                     log('createOffer', senderParticipant.username, senderParticipant.identity, senderParticipant.sid)
                     senderParticipant.isNegotiating = true;
                     senderParticipant.currentOfferId = hasPriority;
-                    senderParticipant.signalingState.stage = 'offerCreating';
+                    senderParticipant.signalingState.setStage('offerCreating');
 
                     newPeerConnection.createOffer({ 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true })
                         .then(function(offer) {
                             log('createOffer: offer created', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState, offer)
-                            senderParticipant.signalingState.stage = 'offerCreated';
+                            senderParticipant.signalingState.setStage('offerCreated');
 
                             //In case, when multiple renegotiationneeded events was triggered one after another,
                             //this will cancel all offers but last. It's highly unlikely that this scenario will ever happen.
@@ -5557,13 +6000,14 @@ window.WebRTCconferenceLib = function app(options){
 
                             return newPeerConnection.setLocalDescription(localDescription).then(function () {
                                 log('createOffer: offer created: sending', senderParticipant.hasNewOffersInQueue, senderParticipant.currentOfferId, senderParticipant.RTCPeerConnection.signalingState);
-                                senderParticipant.signalingState.stage = 'offerSent';
+                                senderParticipant.signalingState.setStage('offerSent');
 
                                 sendMessage({
                                     name: localParticipant.identity,
                                     targetSid: senderParticipant.sid,
                                     type: "offer",
-                                    sdp: senderParticipant.RTCPeerConnection.localDescription.sdp
+                                    sdp: senderParticipant.RTCPeerConnection.localDescription.sdp,
+                                    connection: senderParticipant.connection != null ? senderParticipant.connection : null
                                 });
                             });
                         })
@@ -5609,7 +6053,7 @@ window.WebRTCconferenceLib = function app(options){
 
                     //startNegotiating();
 
-                    if(senderParticipant.signalingRole == 'impolite' && !senderParticipant.isNegotiating) {
+                    if(senderParticipant.signalingRole == 'impolite' && !senderParticipant.isNegotiating && senderParticipant.sid != 'recording') {
 
                         if((_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox') {
                             log('negotiate: browser supports rollback');
@@ -5660,13 +6104,13 @@ window.WebRTCconferenceLib = function app(options){
 
                                 senderParticipant.isNegotiating = false;
                                 senderParticipant.currentOfferId = false;
-                                senderParticipant.signalingState.stage = null;
+                                senderParticipant.signalingState.setStage(null);
                                 senderParticipant.negotiate();
                             } else {
                                 senderParticipant.hasNewOffersInQueue = false;
                                 senderParticipant.isNegotiating = false;
                                 senderParticipant.currentOfferId = false;
-                                senderParticipant.signalingState.stage = null;
+                                senderParticipant.signalingState.setStage(null);
                             }
                         }
 
@@ -5702,7 +6146,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 newPeerConnection.onnegotiationneeded = function (e) {
                     log('offerReceived: onnegotiationneeded, isNegotiating = ' + senderParticipant.isNegotiating);
-
+                    log('offerReceived: onnegotiationneeded, sdp ' + (newPeerConnection.localDescription ? newPeerConnection.localDescription.sdp : 'n/a'))
                     negotiate();
                 };
 
@@ -5749,7 +6193,7 @@ window.WebRTCconferenceLib = function app(options){
                 var localTracks = localParticipant.tracks;
                 log('offerReceived: publishLocalVideo: cameraIsEnabled = ' + (app.conferenceControl.cameraIsEnabled()));
 
-                if(app.conferenceControl.cameraIsEnabled()){
+                //if(app.conferenceControl.cameraIsEnabled()){
                     if ('ontrack' in RTCPeerConnection) {
                         for (let t in localTracks) {
                             log('offerReceived: publishLocalAudio: add videoTrack');
@@ -5762,7 +6206,7 @@ window.WebRTCconferenceLib = function app(options){
                             RTCPeerConnection.addStream(localParticipant.videoStream);
                         }
                     }
-                }
+                //}
             }
 
             function creteEmptyVideoTrack(width, height) {
@@ -5795,7 +6239,8 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             function process(message) {
-                log('offerReceived ', message.resetConnection);
+                log('offerReceived fromSid', message.fromSid);
+                log('offerReceived resetConnection', message.resetConnection);
                 log('offerReceived ' + message.sdp);
 
                 var senderParticipant = roomParticipants.filter(function (existingParticipant) {
@@ -5831,6 +6276,7 @@ window.WebRTCconferenceLib = function app(options){
                     senderParticipant.sid = message.fromSid;
                     senderParticipant.identity = message.name;
                     senderParticipant.localInfo = message.info;
+                    senderParticipant.connection = message.connection != null ? message.connection : null;
                     participantConnected(senderParticipant);
                 } else if(senderParticipant != null && senderParticipant.online == false && message.resetConnection == true) {
                     log('offerReceived participantConnected: reset connection', senderParticipant);
@@ -5840,13 +6286,14 @@ window.WebRTCconferenceLib = function app(options){
                     senderParticipant.sid = message.fromSid;
                     senderParticipant.identity = message.name;
                     senderParticipant.localInfo = message.info;
+                    senderParticipant.connection = message.connection != null ? message.connection : null;
                     participantConnected(senderParticipant);
                 }
 
                 senderParticipant.isNegotiating = true;
                 senderParticipant.waitingForReverseOffer = false;
                 senderParticipant.waitingForOffer = false;
-                senderParticipant.signalingState.stage = 'offerReceived';
+                senderParticipant.signalingState.setStage('offerReceived');
                 //senderParticipant.currentOfferId = senderParticipant.hasNewOffersInQueue !== false ? senderParticipant.hasNewOffersInQueue + 1 : 0;
 
                 var description;
@@ -5863,19 +6310,22 @@ window.WebRTCconferenceLib = function app(options){
                     var localRollbackSupport = (_localInfo.browserName == 'Chrome' && _localInfo.browserVersion >= 80) || _localInfo.browserName == 'Firefox';
                     var remoteRollbackSupport = (message.info.browserName == 'Chrome' && message.info.browserVersion >= 80) || message.info.browserName == 'Firefox';
 
-                    if((localRollbackSupport                                                                                                                                                                               && remoteRollbackSupport) || (localRollbackSupport && !remoteRollbackSupport) || (!localRollbackSupport && !remoteRollbackSupport)) {
+                    if((localRollbackSupport && remoteRollbackSupport) || (localRollbackSupport && !remoteRollbackSupport) || (!localRollbackSupport && !remoteRollbackSupport)) {
 
                         senderParticipant.signalingRole = 'impolite';
+                        //senderParticipant.signalingRole = 'polite';
+
                     } else {
                         senderParticipant.signalingRole = 'polite';
+                        //senderParticipant.signalingRole = 'impolite';
                     }
 
-
+                    senderParticipant.connection = message.connection != null ? message.connection : null;
                     senderParticipant.RTCPeerConnection = createPeerConnection(senderParticipant);
                 }
 
                 senderParticipant.RTCPeerConnection.setRemoteDescription(description).then(function () {
-                    senderParticipant.signalingState.stage = 'offerApplied';
+                    senderParticipant.signalingState.setStage('offerApplied');
                     if(pcNotEstablished || senderParticipant.RTCPeerConnection.connectionState =='closed' ||  message.resetConnection == true) {
                         publishLocalVideo(senderParticipant.RTCPeerConnection);
                         publishLocalAudio(senderParticipant.RTCPeerConnection);
@@ -5883,7 +6333,7 @@ window.WebRTCconferenceLib = function app(options){
                     senderParticipant.RTCPeerConnection.createAnswer()
                         .then(function(answer) {
                             log('offerReceived: answer created ' + answer.sdp);
-                            senderParticipant.signalingState.stage = 'answerCreated';
+                            senderParticipant.signalingState.setStage('answerCreated');
 
                             if(_isiOS){
                                 //answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
@@ -5891,13 +6341,14 @@ window.WebRTCconferenceLib = function app(options){
 
                             return senderParticipant.RTCPeerConnection.setLocalDescription(answer).then(function () {
                                 log('offerReceived: answer created: sending', answer);
-                                senderParticipant.signalingState.stage = 'answerSent';
+                                senderParticipant.signalingState.setStage('answerSent');
 
                                 sendMessage({
                                     name: localParticipant.identity,
                                     targetSid: message.fromSid,
                                     type: "answer",
-                                    sdp: senderParticipant.RTCPeerConnection.localDescription
+                                    sdp: senderParticipant.RTCPeerConnection.localDescription,
+                                    connection: message.connection != null ? message.connection : null
                                 });
                             });
                         })
@@ -5941,13 +6392,13 @@ window.WebRTCconferenceLib = function app(options){
 
                     senderParticipant.isNegotiating = false;
                     senderParticipant.currentOfferId = false;
-                    senderParticipant.signalingState.stage = null;
+                    senderParticipant.signalingState.setStage(null);
                     senderParticipant.negotiate();
                 } else {
                     senderParticipant.hasNewOffersInQueue = false;
                     senderParticipant.isNegotiating = false;
                     senderParticipant.currentOfferId = false;
-                    senderParticipant.signalingState.stage = null;
+                    senderParticipant.signalingState.setStage(null);
                 }*/
             });
         }
@@ -6094,6 +6545,9 @@ window.WebRTCconferenceLib = function app(options){
     app.conferenceControl = (function () {
         var cameraIsDisabled = options.startWith.video === true ? false : true;
         var micIsDisabled = options.startWith.audio === true ? false : true;
+        log('micIsDisabled', micIsDisabled, options.startWith.audio);
+
+        var screensharingIsDisabled = true;
         var speakerIsDisabled = false;
         var currentAudioOutputMode = 'speaker';
 
@@ -6667,6 +7121,10 @@ window.WebRTCconferenceLib = function app(options){
             return cameraIsDisabled ? false : true;
         }
 
+        function screensharingIsEnabled() {
+            return screensharingIsDisabled ? false : true;
+        }
+
         function audioOutputMode() {
             function getCurrentMode() {
                 return currentAudioOutputMode;
@@ -6742,6 +7200,7 @@ window.WebRTCconferenceLib = function app(options){
         function enableVideoTracks() {
             log('enableVideoTracks');
 
+            var screensharingTracksOnly = false;
             //TODO: make camera request if no video
             if(options.mode == 'twilio') {
                 var twilioTracks = [];
@@ -6802,19 +7261,39 @@ window.WebRTCconferenceLib = function app(options){
                             }
 
                         } else {
+                            //localParticipant.videoStream are assigned in createTrackElement function
                             roomParticipants[p].RTCPeerConnection.addStream(localParticipant.videoStream);
                         }
                     }
                 }
             }
-            cameraIsDisabled = false;
+            cameraIsDisabled = localParticipant.tracks.filter(function (track) {
+                return track.kind == 'video' && !track.screensharing
+            }).length == 0;
+            screensharingIsDisabled = localParticipant.tracks.filter(function (track) {
+                return track.screensharing === true;
+            }).length == 0;
+
             app.event.dispatch('cameraEnabled');
             app.eventBinding.sendDataTrackMessage('online', {cameraIsEnabled: true});
 
         }
 
+        /**
+         * Stops streaming video tracks/streams.
+         *
+         * @method tracksToDisable
+         * @uses Track
+         * @return {Array}
+         */
         function disableVideoTracks(tracksToDisable) {
             log('disableVideoTracks', tracksToDisable);
+
+            var screensharingTracksOnly = tracksToDisable && tracksToDisable.filter(function (track) {
+                return track.screensharing === true;
+            }).length == tracksToDisable.length;
+
+            log('disableVideoTracks screensharingTracksOnly=' + screensharingTracksOnly);
 
             if(options.mode == 'twilio') {
                 var twilioTracks = []
@@ -6849,8 +7328,28 @@ window.WebRTCconferenceLib = function app(options){
                     }
                 }
 
+                //Report 11.07.19
                 if(_isiOS) {
-                    cameraIsDisabled = true;
+                    if(screensharingTracksOnly) {
+                        screensharingIsDisabled = true;
+                    } else {
+                        cameraIsDisabled = true;
+                    }
+
+                    if(tracksToDisable == null) {
+                        for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
+                            if(localParticipant.tracks[i].kind != 'video' || (options.showScreenSharingInSeparateScreen && localParticipant.tracks[i].screensharing == true)) continue;
+                            localParticipant.tracks.splice(i, 1);
+                        }
+                    } else  {
+                        for (let i = 0; i < tracksToDisable.length; i++) {
+                            for (let i = localParticipant.tracks.length - 1; i >= 0; i--) {
+                                if(tracksToDisable[i] != localParticipant.tracks[i]) continue;
+                                localParticipant.tracks.splice(i, 1);
+                                break;
+                            }
+                        }
+                    }
                     app.eventBinding.sendDataTrackMessage('online', {cameraIsEnabled: false});
                     return;
                 }
@@ -6870,6 +7369,7 @@ window.WebRTCconferenceLib = function app(options){
                                     return sender.track != null && sender.track.kind == 'video' && tracksToDisable.map(function(e) { return e.mediaStreamTrack; }).indexOf(sender.track) != -1;
                                 });
                             }
+                            log('disableVideoTracks: videoSenders', videoSenders);
 
                             for(var s = videoSenders.length - 1; s >= 0 ; s--){
 
@@ -6884,7 +7384,7 @@ window.WebRTCconferenceLib = function app(options){
                                         break;
                                     }
                                 }
-                                log('disableVideoTracks: remove track from PC ');
+                                log('disableVideoTracks: remove track from PC, skip', skip);
                                 if(!skip) roomParticipants[p].RTCPeerConnection.removeTrack(videoSenders[s]);
 
                             }
@@ -6932,7 +7432,12 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
             }
-            cameraIsDisabled = true;
+
+            if(screensharingTracksOnly) {
+                screensharingIsDisabled = true;
+            } else {
+                cameraIsDisabled = true;
+            }
             app.eventBinding.sendDataTrackMessage('online', {cameraIsEnabled: false});
         }
 
@@ -7194,6 +7699,7 @@ window.WebRTCconferenceLib = function app(options){
             addTrack: addTrack,
             micIsEnabled: micIsEnabled,
             cameraIsEnabled: cameraIsEnabled,
+            screensharingIsEnabled: screensharingIsEnabled,
             speakerIsEnabled: speakerIsEnabled,
             loadDevicesList: loadDevicesList,
             videoInputDevices: getVideoDevices,
@@ -7657,6 +8163,7 @@ window.WebRTCconferenceLib = function app(options){
 
                             return localParticipant.RTCPeerConnection.setLocalDescription(localDescription).then(function () {
 
+                                
                                 var message = {
                                     type: "answer",
                                     sdp: localDescription
@@ -8119,54 +8626,60 @@ window.WebRTCconferenceLib = function app(options){
             app.views.updateOrientation();
         } else app.views.isMobile(false);
 
-        var connect = function () {
-            log('initWithNodeJs: connect');
+        var onConnect = function () {
+            log('initWithNodeJs: connected', socket);
 
+            app.event.dispatch('connected');
+
+            if(app.state == 'reconnecting') {
+                app.state = 'connected';
+                log('initWithNodeJs: socket: RECONNECTED')
+                socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
+                localParticipant.sid = socket.id;
+                return;
+            }
+
+            //enableiOSDebug();
+            log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
+            if(localParticipant == null) {
+                localParticipant = new Participant();
+                localParticipant.sid = socket.id;
+                localParticipant.identity = options.username;
+                localParticipant.isLocal = true;
+                localParticipant.online = true;
+                roomParticipants.push(localParticipant);
+            }
+
+            if(typeof cordova != 'undefined' && _isiOS) {
+                iosrtcLocalPeerConnection.create(function () {
+                    nativeLocalWebRTCPeerConnection.create(function () {
+                        iosrtcLocalPeerConnection.createOffer();
+                    })
+                });
+            }
+
+            if(socket.connected && app.state == 'connecting') initOrConnectWithNodeJs(callback);
+        }
+
+        var connect = function () {
+            log('initWithNodeJs: connect', window.WebRTCSocket != null ? false : true);
+
+            //let io = io('/webrtc');
             var secure = options.nodeServer.indexOf('https://') == 0;
-            socket = io.connect(options.nodeServer, {
+            socket = io.connect(options.nodeServer + '/webrtc', {
                 transports: ['websocket'],
-                'force new connection': true,
+               // path: options.roomName,
+               'force new connection': window.WebRTCSocket != null ? false : true,
+               /* channel:'webrtc',
+                publish_key:'webrtc_test',
+                subscribe:'webrtc_test',*/
                 secure:secure,
                 reconnection: true,
                 reconnectionDelay: 1000,
                 reconnectionDelayMax: 5000,
                 reconnectionAttempts: 5
             });
-            socket.on('connect', function () {
-                log('initWithNodeJs: connected');
-
-                app.event.dispatch('connected');
-
-                if(app.state == 'reconnecting') {
-                    app.state = 'connected';
-                    log('initWithNodeJs: socket: RECONNECTED')
-                    socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
-                    localParticipant.sid = socket.id;
-                    return;
-                }
-
-                //enableiOSDebug();
-                log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
-                if(localParticipant == null) {
-                    localParticipant = new Participant();
-                    localParticipant.sid = socket.id;
-                    localParticipant.identity = options.username;
-                    localParticipant.isLocal = true;
-                    localParticipant.online = true;
-                    roomParticipants.push(localParticipant);
-                }
-
-                if(typeof cordova != 'undefined' && _isiOS) {
-                    iosrtcLocalPeerConnection.create(function () {
-                        nativeLocalWebRTCPeerConnection.create(function () {
-                            iosrtcLocalPeerConnection.createOffer();
-                        })
-                    });
-                }
-
-                if(socket.connected && app.state == 'connecting') initOrConnectWithNodeJs(callback);
-
-            });
+            socket.on('connect', onConnect);
             socket.on('connect_error', function(e) {
                 log('initWithNodeJs: connect_error');
                 app.event.dispatch('connectError');
@@ -8188,6 +8701,12 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         log('initWithNodeJs: find socket.io');
+
+        if(typeof options.nodeServer == 'object') {
+            socket = options.nodeServer;
+            onConnect();
+            return;
+        }
 
         if(findScript('socket.io.js') && typeof io != 'undefined') {
             connect();
@@ -8251,7 +8770,58 @@ window.WebRTCconferenceLib = function app(options){
             initWithNodeJs(callback);
         }
     }
-    app.disconnect = function () {
+
+    app.switchRoom = function(publisherId, streamName, callback){
+        console.log('app.switchRoom')
+        app.screensInterface.canvasComposer.videoComposer.switchingRoom(true);
+        var currentStreams = localParticipant.tracks.map(function (track) {
+            return track.stream.clone();
+        })
+        console.log('app.switchRoom: currentStreams', options.roomName, localParticipant.sid)
+        var prevLocalParticipant = localParticipant.sid;
+        var prevRoomId = options.roomName;
+
+        var initOptions = options;
+        initOptions.roomName = streamName;
+        initOptions.roomPublisher = publisherId;
+        initOptions.streams = currentStreams;
+        let streamingParticipant = app.screensInterface.fbLive.streamingParticipant();
+        initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.screensInterface.fbLive.streamingParticipant().connection};
+        initOptions.startWith = {
+            audio:app.conferenceControl.micIsEnabled() ? true : false,
+            video:app.conferenceControl.cameraIsEnabled() || app.conferenceControl.screensharingIsEnabled() ? true : false
+        };
+
+        var newConferenceInstance = window.WebRTCconferenceLib(initOptions);
+        newConferenceInstance.screensInterface.canvasComposer = app.screensInterface.canvasComposer;
+        newConferenceInstance.screensInterface.canvasComposer.videoComposer.refreshEventListeners(newConferenceInstance);
+        //newConferenceInstance.screensInterface.canvasComposer.audioComposer.mix();
+        newConferenceInstance.screensInterface.fbLive = app.screensInterface.fbLive;
+
+        newConferenceInstance.init();
+
+        newConferenceInstance.event.on('initNegotiationEnded', function (roomParticipants) {
+            console.log('initNegotiationEnded switch', newConferenceInstance)
+            let newParticipantSid = newConferenceInstance.localParticipant().sid;
+            newConferenceInstance.screensInterface.canvasComposer.videoComposer.switchingRoom(false);
+            newConferenceInstance.screensInterface.fbLive.switchRoom(newConferenceInstance, roomParticipants);
+            //switchRoomForFbLive(newConferenceInstance);
+            newConferenceInstance.roomSwitched({prevParticipantId:prevLocalParticipant, prevRoom:prevRoomId});
+            app.disconnect(true);
+        });
+
+        if(callback != null) callback(newConferenceInstance);
+        console.log('newConferenceInstance', newConferenceInstance)
+      //  app = null;
+    }
+
+    app.roomSwitched = function(info) {
+        console.log('roomSwitched', info)
+
+        socket.emit('Streams/webrtc/roomSwitched', info);
+    }
+
+    app.disconnect = function (switchRoom) {
 
         if(app.checkOnlineStatusInterval != null) {
             clearInterval(app.checkOnlineStatusInterval);
@@ -8262,21 +8832,26 @@ window.WebRTCconferenceLib = function app(options){
             app.sendOnlineStatusInterval = null;
         }
 
-        if(app.screensInterface.fbLive.isStreaming()) {
+        if(!switchRoom && app.screensInterface.fbLive.isStreaming()) {
             app.screensInterface.fbLive.endStreaming();
         }
 
         for(var p = roomParticipants.length - 1; p >= 0; p--){
+            
+            if(roomParticipants[p] == app.screensInterface.fbLive.streamingParticipant()) continue;
             if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
             if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
             if(options.mode == 'node' && !roomParticipants[p].isLocal) {
+                console.log('disconnect: close pc', roomParticipants[p].sid);
                 if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();
                 if (roomParticipants[p].iosrtcRTCPeerConnection != null) roomParticipants[p].iosrtcRTCPeerConnection.close();
             }
 
             roomParticipants[p].remove();
         }
+
+        app.event.destroy();
 
         if(socket != null) socket.disconnect();
 
@@ -8323,4 +8898,3 @@ window.WebRTCconferenceLib = function app(options){
 
     return app;
 }
-

@@ -98,5 +98,23 @@
         "inHour": "en {{h}} horo",
         "inHours": "en {{h}} horoj",
         "inUnderMinute": "en malpli ol 1 minuto"
+    },
+    "video": {
+        "clip": "klipo",
+        "errorNoSource": "Neniu videofonto"
+    },
+    "pdf": {
+        "clip": "klipo",
+        "errorNoSource": "Neniu pdf-fonto"
+    },
+    "clip": {
+        "SetClipStart": "Agordi Klipan Komencon",
+        "ClipStart": "Klipa Komenco",
+        "SetClipEnd": "Agordi Klipfinon",
+        "ClipEnd": "Klipa Fino"
+    },
+    "tabs": {
+        "more": "pli",
+        "Menu": "Menuo"
     }
 }

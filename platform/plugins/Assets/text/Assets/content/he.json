@@ -32,7 +32,12 @@
         "Buy": "לִקְנוֹת",
         "Credits": "נקודות זכות",
         "ErrorInvalidAmount": "הסכום אינו חוקי",
-        "ErrorInvalidCurrency": "לצערנו אנו עדיין לא תומכים במטבע {{currency}}"
+        "ErrorInvalidCurrency": "לצערנו אנו עדיין לא תומכים במטבע {{currency}}",
+        "WatchClip": "הרוויחו נקודות זכות של {{amount}} לצפייה {{fromStreamTitle}}",
+        "PurchaseCredits": "זיכויים לרכישה",
+        "forMessages": {
+            "BoughtCredits": "זיכויים {{amount}}"
+        }
     },
     "history": {
         "Date": "תאריך",
@@ -143,6 +148,7 @@
         "OptionalContribution": "תרומה אופציונלית",
         "RequiredPayment": "תשלום נדרש",
         "AreYouSureDelete": "האם אתה בטוח שברצונך למחוק שירות זה?",
-        "AmountServicesRelated": "יש {{amount}} זמינות הקשורות לשירות זה. הם גם יוסרו."
+        "AmountServicesRelated": "יש {{amount}} זמינות הקשורות לשירות זה. הם גם יוסרו.",
+        "Free": "חינם"
     }
 }

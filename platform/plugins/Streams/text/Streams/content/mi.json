@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Whakaahua",
-            "description": "atahanga ahua"
+            "description": "atahanga ahua",
+            "newItem": "Taapirihia te Atahanga"
         },
         "Streams\/images": {
             "displayType": "Taiwhanga Whakaahua",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Kōnae",
-            "description": "tukuake"
+            "description": "tukuake",
+            "newItem": "Taapirihia te Kōnae"
         },
         "Streams\/audio": {
             "displayType": "Ataata Ororongo",
-            "description": "topenga oro"
+            "description": "topenga oro",
+            "newItem": "Taapirihia he Ororongo"
         },
         "Streams\/video": {
             "displayType": "Ataata Ataata",
-            "description": "topenga ataata"
+            "description": "topenga ataata",
+            "newItem": "Taapirihia te Ataata"
         },
         "Streams\/live": {
             "displayType": "Whanui",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Karangatia-Katoa Waea",
             "description": "he waea ataata \/ oro korero tūturu"
+        },
+        "Streams\/pdf": {
+            "displayType": "Tuhinga PDF",
+            "description": "Tuhinga PDF",
+            "newItem": "Taapirihia te PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "He mea huna tenei korero kei a koe."
+    },
+    "audio": {
+        "record": "Tuhia",
+        "reset": "Tautuhi Anō",
+        "edit": "Whakatika",
+        "title": "taitara",
+        "description": "whakaahuatanga",
+        "upload": "Tukuatu",
+        "link": "Hono",
+        "setUrl": "Tautuhia te URL",
+        "save": "Penapena",
+        "setClip": "Tapahia te Topenga",
+        "invalidURL": "URL muhu",
+        "invalidFile": "Kōnae Muhu",
+        "errorNoSource": "Kaore he puna oro",
+        "uploadLimit": "Te rahi o te konae: {{size}}",
+        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+    },
+    "video": {
+        "reset": "Tautuhi Anō",
+        "edit": "Whakatika",
+        "title": "taitara",
+        "description": "whakaahuatanga",
+        "upload": "Tukuatu",
+        "link": "Hono",
+        "setUrl": "Tautuhia te URL",
+        "save": "Penapena",
+        "setClip": "Tapahia te Topenga",
+        "invalidURL": "URL muhu",
+        "invalidFile": "Kōnae Muhu",
+        "errorNoSource": "Kaore he punaata ataata",
+        "uploadLimit": "Te rahi o te konae: {{size}}",
+        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+    },
+    "pdf": {
+        "reset": "Tautuhi Anō",
+        "edit": "Whakatika",
+        "title": "taitara",
+        "description": "whakaahuatanga",
+        "upload": "Tukuatu",
+        "link": "Hono",
+        "setUrl": "Tautuhia te URL",
+        "save": "Penapena",
+        "setClip": "Tapahia te Topenga",
+        "invalidURL": "URL muhu",
+        "invalidFile": "Kōnae Muhu",
+        "errorNoSource": "Kaore he puna PDF",
+        "uploadLimit": "Te rahi o te konae: {{size}}",
+        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+    },
+    "image": {
+        "reset": "Tautuhi Anō",
+        "edit": "Whakatika",
+        "title": "taitara",
+        "description": "whakaahuatanga",
+        "upload": "Tukuatu",
+        "link": "Hono",
+        "setUrl": "Tautuhia te URL",
+        "save": "Penapena",
+        "setClip": "Tapahia te Topenga",
+        "invalidURL": "URL muhu",
+        "invalidFile": "Kōnae Muhu",
+        "errorNoSource": "Kaore he puna ahua",
+        "uploadLimit": "Te rahi o te konae: {{size}}",
+        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
     }
 }

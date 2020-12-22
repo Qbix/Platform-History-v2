@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "Изображение",
-            "description": "визуално изображение"
+            "description": "визуално изображение",
+            "newItem": "Добавяне на изображение"
         },
         "Streams\/images": {
             "displayType": "Галерия с изображения",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "досие",
-            "description": "качен файл"
+            "description": "качен файл",
+            "newItem": "Добави файл"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио клип"
+            "description": "аудио клип",
+            "newItem": "Добавете аудио"
         },
         "Streams\/video": {
             "displayType": "Видеоклип",
-            "description": "видеоклип"
+            "description": "видеоклип",
+            "newItem": "Добавяне на видео"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "поздрав, с който потребителят може да се представи",
             "displayType": "Поздрав"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF документ",
+            "description": "PDF документ",
+            "newItem": "Добавете PDF"
         }
     },
     "messages": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Това съдържание е скрито от вас."
+    },
+    "audio": {
+        "record": "Запис",
+        "reset": "Нулиране",
+        "edit": "редактиране",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Качване",
+        "link": "Връзка",
+        "setUrl": "Задайте URL",
+        "save": "Запазете",
+        "setClip": "Изрежете клип",
+        "invalidURL": "невалиден адрес",
+        "invalidFile": "Невалиден файл",
+        "errorNoSource": "Няма аудио източник",
+        "uploadLimit": "Максимален размер на файла: {{size}}",
+        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+    },
+    "video": {
+        "reset": "Нулиране",
+        "edit": "редактиране",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Качване",
+        "link": "Връзка",
+        "setUrl": "Задайте URL",
+        "save": "Запазете",
+        "setClip": "Изрежете клип",
+        "invalidURL": "невалиден адрес",
+        "invalidFile": "Невалиден файл",
+        "errorNoSource": "Няма видео източник",
+        "uploadLimit": "Максимален размер на файла: {{size}}",
+        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+    },
+    "pdf": {
+        "reset": "Нулиране",
+        "edit": "редактиране",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Качване",
+        "link": "Връзка",
+        "setUrl": "Задайте URL",
+        "save": "Запазете",
+        "setClip": "Изрежете клип",
+        "invalidURL": "невалиден адрес",
+        "invalidFile": "Невалиден файл",
+        "errorNoSource": "Няма PDF източник",
+        "uploadLimit": "Максимален размер на файла: {{size}}",
+        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+    },
+    "image": {
+        "reset": "Нулиране",
+        "edit": "редактиране",
+        "title": "заглавие",
+        "description": "описание",
+        "upload": "Качване",
+        "link": "Връзка",
+        "setUrl": "Задайте URL",
+        "save": "Запазете",
+        "setClip": "Изрежете клип",
+        "invalidURL": "невалиден адрес",
+        "invalidFile": "Невалиден файл",
+        "errorNoSource": "Няма източник на изображение",
+        "uploadLimit": "Максимален размер на файла: {{size}}",
+        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
     }
 }

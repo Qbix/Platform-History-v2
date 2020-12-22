@@ -273,7 +273,8 @@
         },
         "Streams\/image": {
             "displayType": "图片",
-            "description": "视觉形象"
+            "description": "视觉形象",
+            "newItem": "添加图片"
         },
         "Streams\/images": {
             "displayType": "图库",
@@ -285,15 +286,18 @@
         },
         "Streams\/file": {
             "displayType": "文件",
-            "description": "上传的文件"
+            "description": "上传的文件",
+            "newItem": "添加文件"
         },
         "Streams\/audio": {
             "displayType": "音频剪辑",
-            "description": "音频剪辑"
+            "description": "音频剪辑",
+            "newItem": "添加音频"
         },
         "Streams\/video": {
             "displayType": "录像片段",
-            "description": "录像片段"
+            "description": "录像片段",
+            "newItem": "新增影片"
         },
         "Streams\/live": {
             "displayType": "现场直播",
@@ -334,6 +338,11 @@
         "Streams\/greeting": {
             "description": "用户可以自我介绍的问候语",
             "displayType": "欢迎"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF文件",
+            "description": "PDF文件",
+            "newItem": "添加PDF"
         }
     },
     "messages": {
@@ -365,5 +374,70 @@
     },
     "errors": {
         "HiddenFromYou": "此内容对您隐藏。"
+    },
+    "audio": {
+        "record": "记录",
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有音频源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "video": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有视频源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "pdf": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有pdf来源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "image": {
+        "reset": "重启",
+        "edit": "编辑",
+        "title": "标题",
+        "description": "描述",
+        "upload": "上载",
+        "link": "链接",
+        "setUrl": "设定网址",
+        "save": "救",
+        "setClip": "剪出剪辑",
+        "invalidURL": "无效的网址",
+        "invalidFile": "无效的文件",
+        "errorNoSource": "没有图像源",
+        "uploadLimit": "档案大小上限：{{size}}",
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
     }
 }

@@ -32,7 +32,12 @@
         "Buy": "megvesz",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Az összeg érvénytelen",
-        "ErrorInvalidCurrency": "Sajnos még nem támogatjuk a (z) {{currency}} valutát"
+        "ErrorInvalidCurrency": "Sajnos még nem támogatjuk a (z) {{currency}} valutát",
+        "WatchClip": "Kért {{amount}} kreditet a (z) {{fromStreamTitle}} megtekintéséért",
+        "PurchaseCredits": "Vásároljon krediteket",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit"
+        }
     },
     "history": {
         "Date": "Dátum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Opcionális hozzájárulás",
         "RequiredPayment": "Szükséges fizetés",
         "AreYouSureDelete": "Biztosan törli ezt a szolgáltatást?",
-        "AmountServicesRelated": "Ehhez a szolgáltatáshoz {{amount}} hozzáférhetőség van. Őket is eltávolítják."
+        "AmountServicesRelated": "Ehhez a szolgáltatáshoz {{amount}} hozzáférhetőség van. Őket is eltávolítják.",
+        "Free": "Ingyenes"
     }
 }

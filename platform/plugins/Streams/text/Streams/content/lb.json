@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Bild",
-            "description": "visuellt Bild"
+            "description": "visuellt Bild",
+            "newItem": "Foto derbäi"
         },
         "Streams\/images": {
             "displayType": "Bild Galerie",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Datei",
-            "description": "eropgelueden Datei"
+            "description": "eropgelueden Datei",
+            "newItem": "Datei derbäisetzen"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio Clip"
+            "description": "audio Clip",
+            "newItem": "Füügt Audio bäi"
         },
         "Streams\/video": {
             "displayType": "Videoclip",
-            "description": "Video Clip"
+            "description": "Video Clip",
+            "newItem": "Dobäizemaachen Video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
             "description": "en Echtzäit Video \/ Audio Uruff"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF Dokument",
+            "description": "PDF Dokument",
+            "newItem": "PDF derbäisetzen"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Dësen Inhalt ass vun Iech verstoppt."
+    },
+    "audio": {
+        "record": "Rekord",
+        "reset": "Zrécksetzen",
+        "edit": "Änneren",
+        "title": "Titel",
+        "description": "Beschreiwung",
+        "upload": "Eroplueden",
+        "link": "Link",
+        "setUrl": "Setzt URL",
+        "save": "Späicheren",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Ongülteg URL",
+        "invalidFile": "Ongülteg Datei",
+        "errorNoSource": "Keng Audioquell",
+        "uploadLimit": "Max Dateigréisst: {{size}}",
+        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
+    },
+    "video": {
+        "reset": "Zrécksetzen",
+        "edit": "Änneren",
+        "title": "Titel",
+        "description": "Beschreiwung",
+        "upload": "Eroplueden",
+        "link": "Link",
+        "setUrl": "Setzt URL",
+        "save": "Späicheren",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Ongülteg URL",
+        "invalidFile": "Ongülteg Datei",
+        "errorNoSource": "Keng Videoquell",
+        "uploadLimit": "Max Dateigréisst: {{size}}",
+        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
+    },
+    "pdf": {
+        "reset": "Zrécksetzen",
+        "edit": "Änneren",
+        "title": "Titel",
+        "description": "Beschreiwung",
+        "upload": "Eroplueden",
+        "link": "Link",
+        "setUrl": "Setzt URL",
+        "save": "Späicheren",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Ongülteg URL",
+        "invalidFile": "Ongülteg Datei",
+        "errorNoSource": "Keng pdf Quell",
+        "uploadLimit": "Max Dateigréisst: {{size}}",
+        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
+    },
+    "image": {
+        "reset": "Zrécksetzen",
+        "edit": "Änneren",
+        "title": "Titel",
+        "description": "Beschreiwung",
+        "upload": "Eroplueden",
+        "link": "Link",
+        "setUrl": "Setzt URL",
+        "save": "Späicheren",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Ongülteg URL",
+        "invalidFile": "Ongülteg Datei",
+        "errorNoSource": "Keng Bildquell",
+        "uploadLimit": "Max Dateigréisst: {{size}}",
+        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
     }
 }

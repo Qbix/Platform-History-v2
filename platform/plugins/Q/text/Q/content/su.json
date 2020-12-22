@@ -98,5 +98,23 @@
         "inHour": "dina {{h}} jam",
         "inHours": "dina {{h}} jam",
         "inUnderMinute": "di handapeun 1 menit"
+    },
+    "video": {
+        "clip": "jepitan",
+        "errorNoSource": "Teu aya sumber pidéo"
+    },
+    "pdf": {
+        "clip": "jepitan",
+        "errorNoSource": "Teu aya sumber pdf"
+    },
+    "clip": {
+        "SetClipStart": "Atur Klip Mimitian",
+        "ClipStart": "Klip Mimitian",
+        "SetClipEnd": "Atur Klip Tungtung",
+        "ClipEnd": "Klip Tungtung"
+    },
+    "tabs": {
+        "more": "Tambih deui",
+        "Menu": "Ménu"
     }
 }

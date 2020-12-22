@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "ചിത്രം",
-            "description": "വിഷ്വൽ ഇമേജ്"
+            "description": "വിഷ്വൽ ഇമേജ്",
+            "newItem": "ചിത്രം ചേർക്കുക"
         },
         "Streams\/images": {
             "displayType": "ഇമേജ് ഗാലറി",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ഫയൽ",
-            "description": "അപ്‌ലോഡ് ചെയ്ത ഫയൽ"
+            "description": "അപ്‌ലോഡ് ചെയ്ത ഫയൽ",
+            "newItem": "ഫയല് ചേര്ക്കുക"
         },
         "Streams\/audio": {
             "displayType": "ഓഡിയോ ക്ലിപ്പ്",
-            "description": "ഓഡിയോ ക്ലിപ്പ്"
+            "description": "ഓഡിയോ ക്ലിപ്പ്",
+            "newItem": "ഓഡിയോ ചേർക്കുക"
         },
         "Streams\/video": {
             "displayType": "വീഡിയോ ക്ലിപ്പ്",
-            "description": "വീഡിയോ ക്ലിപ്പ്"
+            "description": "വീഡിയോ ക്ലിപ്പ്",
+            "newItem": "വീഡിയോ ചേർക്കുക"
         },
         "Streams\/live": {
             "displayType": "ലൈവ്സ്ട്രീം",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "തത്സമയ കോൾ",
             "description": "ഒരു തത്സമയ വീഡിയോ \/ ഓഡിയോ കോൾ"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF പ്രമാണം",
+            "description": "PDF പ്രമാണം",
+            "newItem": "PDF ചേർക്കുക"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ഈ ഉള്ളടക്കം നിങ്ങളിൽ നിന്ന് മറച്ചിരിക്കുന്നു."
+    },
+    "audio": {
+        "record": "റെക്കോർഡ്",
+        "reset": "പുന et സജ്ജമാക്കുക",
+        "edit": "എഡിറ്റുചെയ്യുക",
+        "title": "ശീർഷകം",
+        "description": "വിവരണം",
+        "upload": "അപ്‌ലോഡുചെയ്യുക",
+        "link": "ലിങ്ക്",
+        "setUrl": "URL സജ്ജമാക്കുക",
+        "save": "രക്ഷിക്കും",
+        "setClip": "കട്ട് Cl ട്ട് ക്ലിപ്പ്",
+        "invalidURL": "അസാധുവായ URL",
+        "invalidFile": "അസാധുവായ ഫയൽ",
+        "errorNoSource": "ഓഡിയോ ഉറവിടമൊന്നുമില്ല",
+        "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
+        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
+    },
+    "video": {
+        "reset": "പുന et സജ്ജമാക്കുക",
+        "edit": "എഡിറ്റുചെയ്യുക",
+        "title": "ശീർഷകം",
+        "description": "വിവരണം",
+        "upload": "അപ്‌ലോഡുചെയ്യുക",
+        "link": "ലിങ്ക്",
+        "setUrl": "URL സജ്ജമാക്കുക",
+        "save": "രക്ഷിക്കും",
+        "setClip": "കട്ട് Cl ട്ട് ക്ലിപ്പ്",
+        "invalidURL": "അസാധുവായ URL",
+        "invalidFile": "അസാധുവായ ഫയൽ",
+        "errorNoSource": "വീഡിയോ ഉറവിടങ്ങളൊന്നുമില്ല",
+        "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
+        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
+    },
+    "pdf": {
+        "reset": "പുന et സജ്ജമാക്കുക",
+        "edit": "എഡിറ്റുചെയ്യുക",
+        "title": "ശീർഷകം",
+        "description": "വിവരണം",
+        "upload": "അപ്‌ലോഡുചെയ്യുക",
+        "link": "ലിങ്ക്",
+        "setUrl": "URL സജ്ജമാക്കുക",
+        "save": "രക്ഷിക്കും",
+        "setClip": "കട്ട് Cl ട്ട് ക്ലിപ്പ്",
+        "invalidURL": "അസാധുവായ URL",
+        "invalidFile": "അസാധുവായ ഫയൽ",
+        "errorNoSource": "പി‌ഡി‌എഫ് ഉറവിടമില്ല",
+        "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
+        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
+    },
+    "image": {
+        "reset": "പുന et സജ്ജമാക്കുക",
+        "edit": "എഡിറ്റുചെയ്യുക",
+        "title": "ശീർഷകം",
+        "description": "വിവരണം",
+        "upload": "അപ്‌ലോഡുചെയ്യുക",
+        "link": "ലിങ്ക്",
+        "setUrl": "URL സജ്ജമാക്കുക",
+        "save": "രക്ഷിക്കും",
+        "setClip": "കട്ട് Cl ട്ട് ക്ലിപ്പ്",
+        "invalidURL": "അസാധുവായ URL",
+        "invalidFile": "അസാധുവായ ഫയൽ",
+        "errorNoSource": "ഇമേജ് ഉറവിടമൊന്നുമില്ല",
+        "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
+        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
     }
 }

@@ -43,10 +43,22 @@
         "playing": "Playing",
         "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Or Upload",
-        "usethis": "Use This",
         "discard": "Discard",
         "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End"
     },
     "alert": {
         "title": "Alert"
@@ -59,6 +71,10 @@
     "prompt": {
         "title": "Prompt",
         "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
         "errorReadingFile": "Error reading file",

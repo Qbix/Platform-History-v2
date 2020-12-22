@@ -32,7 +32,12 @@
         "Buy": "Mua",
         "Credits": "Tín dụng",
         "ErrorInvalidAmount": "Số tiền không hợp lệ",
-        "ErrorInvalidCurrency": "Thật không may, chúng tôi chưa hỗ trợ tiền tệ {{currency}}"
+        "ErrorInvalidCurrency": "Thật không may, chúng tôi chưa hỗ trợ tiền tệ {{currency}}",
+        "WatchClip": "Đã kiếm được {{amount}} tín dụng khi xem {{fromStreamTitle}}",
+        "PurchaseCredits": "Mua tín dụng",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} tín dụng"
+        }
     },
     "history": {
         "Date": "Ngày",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Đóng góp tùy chọn",
         "RequiredPayment": "Yêu cầu thanh toán",
         "AreYouSureDelete": "Bạn có chắc chắn muốn xóa dịch vụ này?",
-        "AmountServicesRelated": "Có {{amount}} khả dụng liên quan đến dịch vụ này. Họ cũng sẽ được gỡ bỏ."
+        "AmountServicesRelated": "Có {{amount}} khả dụng liên quan đến dịch vụ này. Họ cũng sẽ được gỡ bỏ.",
+        "Free": "Miễn phí"
     }
 }

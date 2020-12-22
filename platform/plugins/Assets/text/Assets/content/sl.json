@@ -32,7 +32,12 @@
         "Buy": "Nakup",
         "Credits": "Krediti",
         "ErrorInvalidAmount": "Znesek je neveljaven",
-        "ErrorInvalidCurrency": "Na žalost še ne podpiramo valute {{currency}}"
+        "ErrorInvalidCurrency": "Na žalost še ne podpiramo valute {{currency}}",
+        "WatchClip": "Prislužili ste si {{amount}} dobroimetja za ogled {{fromStreamTitle}}",
+        "PurchaseCredits": "Nakup kreditov",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kreditov"
+        }
     },
     "history": {
         "Date": "Datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Izbirni prispevek",
         "RequiredPayment": "Obvezno plačilo",
         "AreYouSureDelete": "Ali ste prepričani, da želite izbrisati to storitev?",
-        "AmountServicesRelated": "Obstajajo {{amount}} razpoložljivosti povezane s to storitvijo. Prav tako so odstranjeni."
+        "AmountServicesRelated": "Obstajajo {{amount}} razpoložljivosti povezane s to storitvijo. Prav tako so odstranjeni.",
+        "Free": "prost"
     }
 }

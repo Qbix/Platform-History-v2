@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio pokalbio.",
         "startedConversation": "pradėjo pokalbį",
         "RealTimeCall": "Skambinimas realiuoju laiku",
-        "SearchByName": "Paieška pagal pavadinimą"
+        "SearchByName": "Paieška pagal pavadinimą",
+        "Notifications": {
+            "Visit": "{{displayName}} lankosi pokalbyje",
+            "Join": "{{displayName}} prisijungė prie pokalbio",
+            "Leave": "{{displayName}} paliko pokalbį",
+            "RelatedTo": "{{displayName}} pradėjo {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Pranešimas {{& message.fields.type}} į {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Naujas {{relationDisplayType}} {{toTitle}}",
         "Streams/relatedFrom/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} paminėjo jus komentare",
-        "Streams/call": "{{displayName}} skambina jums"
+        "Streams/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
     },
     "invite": {
         "messageContent": "{{displayName}} pakvietė jus į {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Ar tikrai atšaukėte šio įrenginio prenumeratą? Tai išjungs šio įrenginio pranešimus.",
         "Identifiers": "Identifikatoriai",
         "Devices": "Įrenginiai",
-        "Streams": "Srautai"
+        "Streams": "Srautai",
+        "AreYouSureRemoveParticipant": "Ar tikrai norite pašalinti šį dalyvį?",
+        "RemoveParticipant": "Pašalinti dalyvį"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Slėpti ekrano bendrinimą",
             "turnOnCamera": "Rodyti vaizdo įrašą",
             "turnOnAudio": "Įjungti garso garsą",
-            "turnOnScreenSharing": "Rodyti ekrano bendrinimą"
+            "turnOnScreenSharing": "Rodyti ekrano bendrinimą",
+            "fullScreen": "Per visą ekraną"
         },
         "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
         "streamTitle": "{{1}} tiesioginis skambutis"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Vaizdas",
-            "description": "vaizdinis vaizdas"
+            "description": "vaizdinis vaizdas",
+            "newItem": "Pridėti vaizdą"
         },
         "Streams/images": {
             "displayType": "Vaizdo galerija",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Byla",
-            "description": "įkeltas failas"
+            "description": "įkeltas failas",
+            "newItem": "Pridėti failą"
         },
         "Streams/audio": {
             "displayType": "Garso įrašas",
-            "description": "garso klipas"
+            "description": "garso klipas",
+            "newItem": "Pridėti garso įrašą"
         },
         "Streams/video": {
             "displayType": "Vaizdo įrašas",
-            "description": "vaizdo įrašas"
+            "description": "vaizdo įrašas",
+            "newItem": "Pridėti vaizdo įrašą"
         },
         "Streams/live": {
             "displayType": "Tiesiogiai",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "sveikinimas, kuriuo vartotojas gali prisistatyti",
             "displayType": "Sveikinimai"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF dokumentas",
+            "description": "PDF dokumentas",
+            "newItem": "Pridėti PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Šis turinys nuo jūsų paslėptas."
+    },
+    "audio": {
+        "record": "Įrašyti",
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra garso šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "video": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra vaizdo šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "pdf": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra pdf šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "image": {
+        "reset": "Atstatyti",
+        "edit": "Redaguoti",
+        "title": "pavadinimas",
+        "description": "apibūdinimas",
+        "upload": "Įkelti",
+        "link": "Nuoroda",
+        "setUrl": "Nustatykite URL",
+        "save": "Sutaupyti",
+        "setClip": "Iškirpti spaustuką",
+        "invalidURL": "neteisingas URL",
+        "invalidFile": "Neteisingas failas",
+        "errorNoSource": "Nėra vaizdo šaltinio",
+        "uploadLimit": "Maksimalus failo dydis: {{size}}",
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
     }
 }

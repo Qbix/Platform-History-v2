@@ -32,7 +32,12 @@
         "Buy": "خریدنے",
         "Credits": "کریڈٹ",
         "ErrorInvalidAmount": "رقم غلط ہے",
-        "ErrorInvalidCurrency": "بدقسمتی سے ہم ابھی تک کرنسی {{999} support کی حمایت نہیں کرتے ہیں"
+        "ErrorInvalidCurrency": "بدقسمتی سے ہم ابھی تک کرنسی {{999} support کی حمایت نہیں کرتے ہیں",
+        "WatchClip": "watching {1000} watching دیکھنے کے لئے {{amount}} کریڈٹ حاصل ہوا",
+        "PurchaseCredits": "خریداری کریڈٹ",
+        "forMessages": {
+            "BoughtCredits": "its 9 999} its کریڈٹ"
+        }
     },
     "history": {
         "Date": "تاریخ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "اختیاری شراکت",
         "RequiredPayment": "مطلوبہ ادائیگی",
         "AreYouSureDelete": "کیا آپ واقعی اس سروس کو حذف کرنا چاہتے ہیں؟",
-        "AmountServicesRelated": "اس سروس سے متعلق {{999} aila دستیاب قابلیتیں ہیں۔ وہ بھی ہٹائے جائیں گے۔"
+        "AmountServicesRelated": "اس سروس سے متعلق {{999} aila دستیاب قابلیتیں ہیں۔ وہ بھی ہٹائے جائیں گے۔",
+        "Free": "مفت"
     }
 }

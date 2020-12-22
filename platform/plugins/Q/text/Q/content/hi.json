@@ -98,5 +98,23 @@
         "inHour": "{{h}} घंटे में",
         "inHours": "{{h}} घंटे में",
         "inUnderMinute": "1 मिनट से कम"
+    },
+    "tabs": {
+        "more": "अधिक",
+        "Menu": "मेन्यू"
+    },
+    "video": {
+        "clip": "क्लिप",
+        "errorNoSource": "कोई वीडियो स्रोत नहीं"
+    },
+    "pdf": {
+        "clip": "क्लिप",
+        "errorNoSource": "कोई पीडीएफ स्रोत नहीं"
+    },
+    "clip": {
+        "SetClipStart": "क्लिप प्रारंभ सेट करें",
+        "ClipStart": "प्रारंभ प्रारंभ करें",
+        "SetClipEnd": "क्लिप एंड सेट करें",
+        "ClipEnd": "क्लिप एंड"
     }
 }

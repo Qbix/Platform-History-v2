@@ -24,8 +24,17 @@
             "BrowseTheWeb": "검색",
             "WriteToStartConversation": "대화를 시작할 생각을 남기세요.",
             "StartConversation": "대화 시작",
-            "GotoConversation": "대화로 이동"
-        }
+            "GotoConversation": "대화로 이동",
+            "reset": "초기화",
+            "edit": "편집하다",
+            "link": "링크",
+            "setUrl": "URL 설정",
+            "save": "저장",
+            "setClip": "잘라낸 클립",
+            "invalidURL": "잘못된 URL"
+        },
+        "FileTooLarge": "캐싱하기에 파일이 너무 큽니다. 최대 파일 크기 {{size}}",
+        "InvalidPDF": "파일이 유효한 PDF가 아닙니다."
     },
     "types": {
         "Websites/article": {

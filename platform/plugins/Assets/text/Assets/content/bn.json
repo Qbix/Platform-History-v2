@@ -32,7 +32,12 @@
         "Buy": "কেনা",
         "Credits": "ক্রেডিট",
         "ErrorInvalidAmount": "অবৈধ পরিমাণ",
-        "ErrorInvalidCurrency": "দুর্ভাগ্যক্রমে আমরা এখনও মুদ্রা {{999} don&#39;t সমর্থন করি না"
+        "ErrorInvalidCurrency": "দুর্ভাগ্যক্রমে আমরা এখনও মুদ্রা {{999} don&#39;t সমর্থন করি না",
+        "WatchClip": "{{1000} watching দেখার জন্য {Ear 999}} ক্রেডিট অর্জন করেছেন",
+        "PurchaseCredits": "ক্রয় ক্রেডিট",
+        "forMessages": {
+            "BoughtCredits": "{9 999}} ক্রেডিট"
+        }
     },
     "history": {
         "Date": "তারিখ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Ptionচ্ছিক অবদান",
         "RequiredPayment": "প্রয়োজনীয় অর্থ প্রদান",
         "AreYouSureDelete": "আপনি কি নিশ্চিত যে আপনি এই পরিষেবাটি মুছতে চান?",
-        "AmountServicesRelated": "এই পরিষেবাটি সম্পর্কিত There {999}} উপলভ্যতা রয়েছে। সেগুলিও সরানো হবে।"
+        "AmountServicesRelated": "এই পরিষেবাটি সম্পর্কিত There {999}} উপলভ্যতা রয়েছে। সেগুলিও সরানো হবে।",
+        "Free": "ফ্রি"
     }
 }

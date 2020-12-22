@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Gözdən keçirin",
             "WriteToStartConversation": "Söhbətdən başlamaq üçün fikirlərinizi yazın",
             "StartConversation": "Söhbətə başlayın",
-            "GotoConversation": "Söhbətə gedin"
-        }
+            "GotoConversation": "Söhbətə gedin",
+            "reset": "Sıfırla",
+            "edit": "Redaktə edin",
+            "link": "Bağlantı",
+            "setUrl": "URL qurun",
+            "save": "Yadda saxla",
+            "setClip": "Klipsi kəsin",
+            "invalidURL": "Yanlış URL"
+        },
+        "FileTooLarge": "Önbellek üçün çox böyük fayl. Maksimum fayl ölçüsü {{size}}",
+        "InvalidPDF": "Fayl düzgün PDF deyil"
     },
     "types": {
         "Websites/article": {

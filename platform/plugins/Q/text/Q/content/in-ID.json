@@ -98,5 +98,23 @@
         "inHour": "dalam {{h}} jam",
         "inHours": "dalam {{h}} jam",
         "inUnderMinute": "kurang dari 1 menit"
+    },
+    "tabs": {
+        "more": "lebih",
+        "Menu": "Tidak bisa"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Tidak ada sumber video"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Tidak ada sumber pdf"
+    },
+    "clip": {
+        "SetClipStart": "Setel Mulai Klip",
+        "ClipStart": "Klip Mulai",
+        "SetClipEnd": "Setel Akhir Klip",
+        "ClipEnd": "Klip Akhir"
     }
 }

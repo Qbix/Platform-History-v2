@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Sirvi",
             "WriteToStartConversation": "Kirjutage oma mõtted vestluse alustamiseks",
             "StartConversation": "Alustage vestlust",
-            "GotoConversation": "Avage vestlus"
-        }
+            "GotoConversation": "Avage vestlus",
+            "reset": "Lähtesta",
+            "edit": "Muuda",
+            "link": "Link",
+            "setUrl": "Määra URL",
+            "save": "Salvesta",
+            "setClip": "Lõigatud klamber",
+            "invalidURL": "vigane URL"
+        },
+        "FileTooLarge": "Fail on vahemällu salvestamiseks liiga suur. Maksimaalne failisuurus {{size}}",
+        "InvalidPDF": "Fail ei ole kehtiv PDF"
     },
     "types": {
         "Websites\/article": {

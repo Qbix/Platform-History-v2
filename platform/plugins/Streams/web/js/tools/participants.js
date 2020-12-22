@@ -231,6 +231,9 @@ function _Streams_participants(options) {
 					Q.handle(callback, tool, []);
 					return Q.handle(state.onRefresh, tool, []);
 				}
+				if (tool.$('.Streams_inviteTrigger').length) {
+					return; // the invite button already rendered
+				}
 				Q.Text.get("Streams/content", function (err, result) {
 					var text = result && result.invite;
 					if (text) {

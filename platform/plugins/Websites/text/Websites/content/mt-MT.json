@@ -24,8 +24,17 @@
             "BrowseTheWeb": "Fittex",
             "WriteToStartConversation": "Ikteb il-ħsibijiet tiegħek biex tibda l-konversazzjoni",
             "StartConversation": "Ibda l-Konversazzjoni",
-            "GotoConversation": "Mur fil-Konversazzjoni"
-        }
+            "GotoConversation": "Mur fil-Konversazzjoni",
+            "reset": "Irrisettja",
+            "edit": "Editja",
+            "link": "Rabta",
+            "setUrl": "Issettja l-URL",
+            "save": "Ħlief",
+            "setClip": "Aqta &#39;Clip",
+            "invalidURL": "URL invalidu"
+        },
+        "FileTooLarge": "Fajl kbir wisq għall-cache. Daqs massimu tal-fajl {{size}}",
+        "InvalidPDF": "Il-fajl mhux PDF validu"
     },
     "types": {
         "Websites/article": {

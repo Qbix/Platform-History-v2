@@ -98,5 +98,8 @@
         "inHour": "f &#39;{{h}} siegħa",
         "inHours": "f &#39;{{h}} sigħat",
         "inUnderMinute": "fl-inqas 1 minuta"
+    },
+    "tabs": {
+        "more": "aktar"
     }
 }

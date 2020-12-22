@@ -40,6 +40,7 @@ function Q_before_Q_responseExtras()
 				'sessionName' => Q_Session::name(),
 				'nodeUrl' => Q_Utils::nodeUrl(),
 				'socketPath' => Q_Utils::socketPath(),
+				'maxUploadSize' => Q_Utils::maxUploadSize(),
 				'slotNames' => Q_Config::get("Q", "response", "slotNames", array(
 					'content', 'dashboard', 'title', 'notices'
 				)),
@@ -91,6 +92,12 @@ function Q_before_Q_responseExtras()
 		or Q_Request::isCordova()
 	)) {
 		Q_Response::addHtmlCssClass('Q_statusBarOverlapped');
+	}
+	if (!Q_Request::isMobile()
+	and Q_Config::get('Q', 'response', 'layout', 'sidebar', false)) {
+		Q_Response::addHtmlCssClass('Q_layout_sidebar');
+	} else {
+		Q_Response::addHtmlCssClass('Q_layout_widebar');
 	}
 	
 	$textLoadBeforeInit = Q_Config::get('Q', 'text', 'loadBeforeInit', array());

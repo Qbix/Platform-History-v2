@@ -98,5 +98,23 @@
         "inHour": "v {{h}} uri",
         "inHours": "v {{h}} urah",
         "inUnderMinute": "v manj kot 1 minuti"
+    },
+    "tabs": {
+        "more": "več",
+        "Menu": "Meni"
+    },
+    "video": {
+        "clip": "posnetek",
+        "errorNoSource": "Ni video vira"
+    },
+    "pdf": {
+        "clip": "posnetek",
+        "errorNoSource": "Ni pdf vira"
+    },
+    "clip": {
+        "SetClipStart": "Nastavite Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Nastavite konec posnetka",
+        "ClipEnd": "Konec posnetka"
     }
 }

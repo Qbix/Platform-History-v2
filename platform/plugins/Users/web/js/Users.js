@@ -1125,7 +1125,7 @@
 				}
 			}, {"prompt": false});
 		} else if (!json.exists) {
-			// no username available. This user has no password set yet and will activate later
+			// this identifier is available. This user has no password set yet and will activate later
 			step2_form = setupRegisterForm(identifier_input.val(), json, priv, login_setupDialog.dialog.data('Q/dialog'));
 		} else if (json.passphrase_set) {
 			// check password
@@ -1523,10 +1523,9 @@
 		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
-			).on(Q.Pointer.touchclick, function () {
-				submitClosestForm.apply($a, arguments);
-			}).on(Q.Pointer.click, function (e) {
+			).on(Q.Pointer.fastclick, function (e) {
 				e.preventDefault(); // prevent automatic submit on click
+				submitClosestForm.apply($a, arguments);
 			});
 
 		var directions = Q.plugins.Users.login.serverOptions.noRegister
@@ -2150,8 +2149,15 @@
 		 */
 		url: function (authorizeUri, client_id, scope, options) {
 			options = options || {};
-			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
 			var responseType = options.responseType || 'code';
+			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
+			if (options.openWindow) {
+				redirectUri = Q.url(redirectUri + '?openWindow=1');
+			}
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
+			Q.cookie('Users_latest_oAuth_state', options.state);
 			Q.url(authorizeUri, {
 				client_id: client_id,
 				redirect_uri: redirectUri,
@@ -2169,7 +2175,8 @@
 		 * @param {Function} [callback] This function is called after the oAuth flow ends,
 		 *    unless options.openWindow === false, because then the redirect would happen.
 		 * @param {Object} [options={}]
-		 * @param {Object|String} [openWindow={}] Set to false to start the oAuth flow in the
+		 * @param {Object|String} [openWindow={closeUrlRegExp:Q.url("Users/oauthed")+".*"}] 
+		 *    Set to false to start the oAuth flow in the
 		 *    current window. Otherwise, this object can be used to set window features
 		 *    passed to window.open() as a string.
 		 * @param {Object|String} [finalRedirect=location.href] If openWindow === false,
@@ -2192,7 +2199,10 @@
 				throw new Q.Exception("Users.OAuth.start: authorizeUri is empty");
 			}
 			var redirectUri = options.redirectUri || Users.OAuth.redirectUri;
-			var responseType = options.response_typeeType || 'code';
+			var responseType = options.responseType || 'code';
+			if (!options.state) {
+				options.state = String(Math.random());
+			}
 			if (!('openWindow' in options)) {
 				options.openWindow = {};
 			}
@@ -2209,9 +2219,14 @@
 			} else {
 				var w = window.open(url, 'Q_Users_oAuth', options.openWindow);
 				var ival = setInterval(function () {
-					if (w.name === 'Q_Users_oAuth_success') {
+					var regexp = new RegExp(
+						options.openWindow.closeUrlRegExp
+						|| Q.url("Users/close") + ".*"
+					);
+					if (w.name === 'Q_Users_oAuth_success'
+					|| w.location.href.match(regexp)) {
 						w.close();
-						callback(true);
+						callback(w.url);
 						clearInterval(ival);
 					}
 					if (w.name === 'Q_Users_oAuth_error') {
@@ -2424,7 +2439,7 @@
 
 	Q.beforeInit.add(function _Users_beforeInit() {
 
-		var where = Users.cache.where || 'document';
+		var where = Q.getObject("cache.where", Users) || 'document';
 
 		if (Q.Frames) {
 			Users.get = Q.Frames.useMainFrame(Users.get, 'Q.Users.get');
@@ -2584,15 +2599,6 @@
 		if (!querystring) {
 			return;
 		}
-		if (querystring.includes('Q.Users.newSessionId')) { // handoff action
-			var fields = _getParams(url.split('#')[1]);
-			if (fields['Q.Users.newSessionId']) {
-				Q.cookie('Q_sessionId', fields['Q.Users.newSessionId']);
-				location.reload();
-			}
-		} else if (querystring.includes('facebookLogin=1')) {
-			Users.login({using: 'facebook'});
-		}
 		if (querystring.queryField('Q.Users.newSessionId')) {
 			var fieldNames = [
 				'Q.Users.appId', 'Q.Users.newSessionId',
@@ -2643,7 +2649,7 @@
 
 	// handoff action
 	Q.onHandleOpenUrl.set(function (url) {
-		window.cordova.plugins.browsertab.close();
+		window.cordova.plugins.browsertabs.close();
 		_setSessionFromQueryString(url.split('#')[1]);
 	}, 'Users.handoff');
 
@@ -2711,7 +2717,8 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var info = Q.first(Q.info.languages);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
 		}
@@ -3143,6 +3150,27 @@
 				var identifierTypes = Q.getObject("identifierTypes", options);
 				var contacts = this;
 
+				// clear contacts from objects in email and phoneNumbers
+				$.each(contacts, function (i, contact) {
+					if (!contact || typeof contact !== "object") {
+						return;
+					}
+
+					$.each(contact, function (j, obj) {
+						if (!obj || typeof obj !== "object" || (j !== "emails" && j !== "phoneNumbers")) {
+							return;
+						}
+
+						var cleared = [];
+						$.each(obj, function (k, element) {
+							if (typeof element === "string") {
+								cleared.push(element);
+							}
+						});
+						contact[j] = cleared;
+					});
+				});
+
 				if (!Q.isEmpty(identifierTypes) && dataType === 'browser') {
 					Q.each(contacts, function (i, contact) {
 						var added = false;
@@ -3351,7 +3379,7 @@
 					'&redirect_uri=' + Q.baseUrl() + '/login/facebook%3Fscheme%3D' + Users.Facebook.scheme +
 					'&state=' + _stringGen(10) +
 					'&response_type=token&scope=' + Users.Facebook.scope.join(",");
-				cordova.plugins.browsertab.openUrl(url,
+				cordova.plugins.browsertabs.openUrl(url,
 					{scheme: Users.Facebook.scheme + '://'},
 					function(success) { console.log(success); },
 					function(err) { console.log(err); }

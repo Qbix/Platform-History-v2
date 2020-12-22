@@ -24,8 +24,17 @@
             "BrowseTheWeb": "arakatu",
             "WriteToStartConversation": "Idatzi zure pentsamenduak elkarrizketa hasteko",
             "StartConversation": "Hasi elkarrizketa",
-            "GotoConversation": "Joan hizketaldia"
-        }
+            "GotoConversation": "Joan hizketaldia",
+            "reset": "Berrezarri",
+            "edit": "Editatu",
+            "link": "Esteka",
+            "setUrl": "Ezarri URLa",
+            "save": "Gorde",
+            "setClip": "Ebaki klipa",
+            "invalidURL": "URL baliogabea"
+        },
+        "FileTooLarge": "Fitxategia handiegia da cachean gordetzeko. Gehienezko fitxategiaren tamaina {{size}}",
+        "InvalidPDF": "Fitxategiak ez du baliozko PDFa"
     },
     "types": {
         "Websites\/article": {

@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "ຮູບພາບ",
-            "description": "ຮູບພາບສາຍຕາ"
+            "description": "ຮູບພາບສາຍຕາ",
+            "newItem": "ເພີ່ມຮູບພາບ"
         },
         "Streams\/images": {
             "displayType": "ຫ້ອງສະແດງຮູບພາບ",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ແຟ້ມ",
-            "description": "ໄຟລ໌ທີ່ອັບໂຫລດແລ້ວ"
+            "description": "ໄຟລ໌ທີ່ອັບໂຫລດແລ້ວ",
+            "newItem": "ເພີ່ມ File"
         },
         "Streams\/audio": {
             "displayType": "ຄລິບສຽງ",
-            "description": "ຄລິບສຽງ"
+            "description": "ຄລິບສຽງ",
+            "newItem": "ເພີ່ມສຽງ"
         },
         "Streams\/video": {
             "displayType": "ຄລິບວີດີໂອ",
-            "description": "ຄລິບວິດີໂອ"
+            "description": "ຄລິບວິດີໂອ",
+            "newItem": "ເພີ່ມວິດີໂອ"
         },
         "Streams\/live": {
             "displayType": "ກະແສນໍ້າ",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "ການໂທດ້ວຍເວລາຈິງ",
             "description": "ການໂທດ້ວຍວິດີໂອ \/ ສຽງທີ່ໃຊ້ເວລາຈິງ"
+        },
+        "Streams\/pdf": {
+            "displayType": "ເອກະສານ PDF",
+            "description": "ເອກະສານ PDF",
+            "newItem": "ເພີ່ມ PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ເນື້ອຫານີ້ຖືກປິດບັງຈາກທ່ານ."
+    },
+    "audio": {
+        "record": "ບັນທຶກ",
+        "reset": "ປັບ ໃໝ່",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ຄຳ ອະທິບາຍ",
+        "upload": "ອັບໂຫລດ",
+        "link": "ການເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດຄລິບ",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ເອກະສານບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງສຽງ",
+        "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
+    },
+    "video": {
+        "reset": "ປັບ ໃໝ່",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ຄຳ ອະທິບາຍ",
+        "upload": "ອັບໂຫລດ",
+        "link": "ການເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດຄລິບ",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ເອກະສານບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ",
+        "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
+    },
+    "pdf": {
+        "reset": "ປັບ ໃໝ່",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ຄຳ ອະທິບາຍ",
+        "upload": "ອັບໂຫລດ",
+        "link": "ການເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດຄລິບ",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ເອກະສານບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງ pdf",
+        "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
+    },
+    "image": {
+        "reset": "ປັບ ໃໝ່",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ຄຳ ອະທິບາຍ",
+        "upload": "ອັບໂຫລດ",
+        "link": "ການເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດຄລິບ",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ເອກະສານບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງຮູບພາບ",
+        "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
     }
 }

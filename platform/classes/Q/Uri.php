@@ -452,11 +452,13 @@ class Q_Uri
 					// If this route has a special condition, test it
 					if (!empty($fields[''])) {
 						$params = array(
-							'fields' => $uri_fields, 
+							'uriFields' => $uri_fields,
+							'routeFields' => $fields,
+							'fields' => array_merge($fields, $uri_fields),
 							'pattern' => $pattern,
 							'fromUrl' => $url
 						);
-						if (false === Q::event($fields[''], $params)) {
+						if (false === Q::event($fields[''], $params, false, false, $params)) {
 							$matched = false;
 						}
 					}
@@ -1169,11 +1171,19 @@ class Q_Uri
 	 */
 	protected static $cacheBaseUrl = null;
 	/**
+	 * Information on modification times and hashes of web resources
 	 * @property $urls
 	 * @public
 	 * @type string
 	 */
 	static $urls = array();
+	/**
+	 * Information on what resources to tell the client to preload
+	 * @property $preload
+	 * @public
+	 * @type string
+	 */
+	static $preload = array();
 	/**
 	 * @property $url
 	 * @public

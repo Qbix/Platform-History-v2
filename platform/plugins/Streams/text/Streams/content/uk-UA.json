@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цієї розмови.",
         "startedConversation": "почав розмову",
         "RealTimeCall": "Дзвінок у режимі реального часу",
-        "SearchByName": "Пошук по імені"
+        "SearchByName": "Пошук по імені",
+        "Notifications": {
+            "Visit": "{{displayName}} відвідує чат",
+            "Join": "{{displayName}} приєднався до чату",
+            "Leave": "{{displayName}} вийшов із чату",
+            "RelatedTo": "{{displayName}} розпочав роботу {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Повідомлення {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Новий {{relationDisplayType}} в {{toTitle}}",
         "Streams/relatedFrom/*": "Додано до {{toTitle}} як {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} згадав вас у коментарі",
-        "Streams/call": "{{displayName}} телефонує вам"
+        "Streams/call": "{{displayName}} почав дзвінок у режимі реального часу"
     },
     "invite": {
         "messageContent": "{{displayName}} запросив вас до {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Справді скасувати підписку на цей пристрій? Він вимкне сповіщення на цьому пристрої.",
         "Identifiers": "Ідентифікатори",
         "Devices": "Прилади",
-        "Streams": "Потоки"
+        "Streams": "Потоки",
+        "AreYouSureRemoveParticipant": "Ви впевнені, що хочете видалити цього учасника?",
+        "RemoveParticipant": "Видалити учасника"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Сховати спільний доступ до екрана",
             "turnOnCamera": "Показати відео",
             "turnOnAudio": "Увімкнути звук",
-            "turnOnScreenSharing": "Показати спільний доступ до екрана"
+            "turnOnScreenSharing": "Показати спільний доступ до екрана",
+            "fullScreen": "Повноекранний"
         },
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
         "streamTitle": "{{1}} прямий дзвінок"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Зображення",
-            "description": "візуальне зображення"
+            "description": "візуальне зображення",
+            "newItem": "Додати зображення"
         },
         "Streams/images": {
             "displayType": "Галерея зображень",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Файл",
-            "description": "завантажений файл"
+            "description": "завантажений файл",
+            "newItem": "Додати файл"
         },
         "Streams/audio": {
             "displayType": "Аудіокліп",
-            "description": "аудіокліп"
+            "description": "аудіокліп",
+            "newItem": "Додати аудіо"
         },
         "Streams/video": {
             "displayType": "Відео кліп",
-            "description": "відео кліп"
+            "description": "відео кліп",
+            "newItem": "Додати відео"
         },
         "Streams/live": {
             "displayType": "Наживо",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "привітання, з яким користувач може представити себе",
             "displayType": "Привітання"
+        },
+        "Streams/pdf": {
+            "displayType": "PDF-документ",
+            "description": "PDF-документ",
+            "newItem": "Додати PDF"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Цей вміст приховано від вас."
+    },
+    "audio": {
+        "record": "Запис",
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Джерело звуку відсутнє",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "video": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела відео",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "pdf": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела PDF",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "image": {
+        "reset": "Скинути",
+        "edit": "Редагувати",
+        "title": "заголовок",
+        "description": "опис",
+        "upload": "Завантажити",
+        "link": "Посилання",
+        "setUrl": "Встановити URL-адресу",
+        "save": "Зберегти",
+        "setClip": "Виріжте кліп",
+        "invalidURL": "Недійсна URL-адреса",
+        "invalidFile": "Недійсний файл",
+        "errorNoSource": "Немає джерела зображення",
+        "uploadLimit": "Максимальний розмір файлу: {{size}}",
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
     }
 }

@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Isithombe",
-            "description": "isithombe esibonakalayo"
+            "description": "isithombe esibonakalayo",
+            "newItem": "Faka isithombe"
         },
         "Streams\/images": {
             "displayType": "Igalari Yezithombe",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Ifayela",
-            "description": "ifayela elilayishiwe"
+            "description": "ifayela elilayishiwe",
+            "newItem": "Faka Ifayela"
         },
         "Streams\/audio": {
             "displayType": "Isiqeshana Somsindo",
-            "description": "isiqeshana somsindo"
+            "description": "isiqeshana somsindo",
+            "newItem": "Faka Umsindo"
         },
         "Streams\/video": {
             "displayType": "Isiqeshana Sevidiyo",
-            "description": "isiqeshana sevidiyo"
+            "description": "isiqeshana sevidiyo",
+            "newItem": "Faka ividiyo"
         },
         "Streams\/live": {
             "displayType": "Ukusakaza bukhoma",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Ucingo lwesikhathi sangempela",
             "description": "ividiyo yangempela \/ ikholi yomsindo"
+        },
+        "Streams\/pdf": {
+            "displayType": "Idokhumenti ye-PDF",
+            "description": "Idokhumenti ye-PDF",
+            "newItem": "Faka i-PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Lokhu okuqukethwe kufihlwe kuwe."
+    },
+    "audio": {
+        "record": "Qopha",
+        "reset": "Setha kabusha",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "incazelo",
+        "upload": "Layisha",
+        "link": "Xhumanisa",
+        "setUrl": "Setha i-URL",
+        "save": "Gcina",
+        "setClip": "Sika isiqeshana",
+        "invalidURL": "I-URL engavumelekile",
+        "invalidFile": "Ifayela elingavumelekile",
+        "errorNoSource": "Awukho umthombo womsindo",
+        "uploadLimit": "Usayizi wefayela omkhulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayela likhulu kakhulu.<br> Usayizi wefayela omkhulu ngu- {{size}}"
+    },
+    "video": {
+        "reset": "Setha kabusha",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "incazelo",
+        "upload": "Layisha",
+        "link": "Xhumanisa",
+        "setUrl": "Setha i-URL",
+        "save": "Gcina",
+        "setClip": "Sika isiqeshana",
+        "invalidURL": "I-URL engavumelekile",
+        "invalidFile": "Ifayela elingavumelekile",
+        "errorNoSource": "Awukho umthombo wevidiyo",
+        "uploadLimit": "Usayizi wefayela omkhulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayela likhulu kakhulu.<br> Usayizi wefayela omkhulu ngu- {{size}}"
+    },
+    "pdf": {
+        "reset": "Setha kabusha",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "incazelo",
+        "upload": "Layisha",
+        "link": "Xhumanisa",
+        "setUrl": "Setha i-URL",
+        "save": "Gcina",
+        "setClip": "Sika isiqeshana",
+        "invalidURL": "I-URL engavumelekile",
+        "invalidFile": "Ifayela elingavumelekile",
+        "errorNoSource": "Awukho umthombo we-pdf",
+        "uploadLimit": "Usayizi wefayela omkhulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayela likhulu kakhulu.<br> Usayizi wefayela omkhulu ngu- {{size}}"
+    },
+    "image": {
+        "reset": "Setha kabusha",
+        "edit": "Hlela",
+        "title": "isihloko",
+        "description": "incazelo",
+        "upload": "Layisha",
+        "link": "Xhumanisa",
+        "setUrl": "Setha i-URL",
+        "save": "Gcina",
+        "setClip": "Sika isiqeshana",
+        "invalidURL": "I-URL engavumelekile",
+        "invalidFile": "Ifayela elingavumelekile",
+        "errorNoSource": "Awukho umthombo wesithombe",
+        "uploadLimit": "Usayizi wefayela omkhulu: {{size}}",
+        "errorFileSize": "Uxolo, kodwa ifayela likhulu kakhulu.<br> Usayizi wefayela omkhulu ngu- {{size}}"
     }
 }

@@ -98,5 +98,23 @@
         "inHour": "sa {{h}} oras",
         "inHours": "sa {{h}} na oras",
         "inUnderMinute": "sa ilalim ng 1 minuto"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Walang mapagkukunan ng video"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Walang mapagkukunan ng pdf"
+    },
+    "clip": {
+        "SetClipStart": "Itakda ang Start ng Clip",
+        "ClipStart": "Magsimula sa Clip",
+        "SetClipEnd": "Itakda ang Clip End",
+        "ClipEnd": "Pagtatapos ng Clip"
+    },
+    "tabs": {
+        "more": "higit pa",
+        "Menu": "Menu"
     }
 }

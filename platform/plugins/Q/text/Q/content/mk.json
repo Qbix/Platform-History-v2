@@ -98,5 +98,23 @@
         "inHour": "за 99 999}} час",
         "inHours": "за {999}} часа",
         "inUnderMinute": "за помалку од 1 минута"
+    },
+    "tabs": {
+        "more": "повеќе",
+        "Menu": "Мени"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Нема извор на видео"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "Нема извор на pdf"
+    },
+    "clip": {
+        "SetClipStart": "Поставете почеток на клипот",
+        "ClipStart": "Клип Почеток",
+        "SetClipEnd": "Поставете крај на клипот",
+        "ClipEnd": "Клип Крај"
     }
 }

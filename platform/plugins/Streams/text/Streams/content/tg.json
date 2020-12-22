@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Тасвир",
-            "description": "тасвири визуалӣ"
+            "description": "тасвири визуалӣ",
+            "newItem": "Иловаи тасвир"
         },
         "Streams\/images": {
             "displayType": "Галереяи тасвирҳо",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "файли боршуда"
+            "description": "файли боршуда",
+            "newItem": "Илова кардани файл"
         },
         "Streams\/audio": {
             "displayType": "Клипи аудиоӣ",
-            "description": "клипи аудио"
+            "description": "клипи аудио",
+            "newItem": "Иловаи аудио"
         },
         "Streams\/video": {
             "displayType": "Клипи видеоӣ",
-            "description": "клипи видеоӣ"
+            "description": "клипи видеоӣ",
+            "newItem": "Видео илова кунед"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Занги воқеӣ",
             "description": "вақти воқеӣ видео \/ занги аудио"
+        },
+        "Streams\/pdf": {
+            "displayType": "Ҳуҷҷати PDF",
+            "description": "Ҳуҷҷати PDF",
+            "newItem": "PDF илова кунед"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Ин мундариҷа аз шумо пинҳон аст."
+    },
+    "audio": {
+        "record": "Сабт",
+        "reset": "Reset",
+        "edit": "Таҳрир",
+        "title": "унвон",
+        "description": "тавсиф",
+        "upload": "Боргузорӣ",
+        "link": "Истинод",
+        "setUrl": "URL таъин кунед",
+        "save": "Захира кунед",
+        "setClip": "Клипро буред",
+        "invalidURL": "URL-и нодуруст",
+        "invalidFile": "Файл нодуруст аст",
+        "errorNoSource": "Манбаи аудиоӣ нест",
+        "uploadLimit": "Андозаи максималии файл: {{size}}",
+        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+    },
+    "video": {
+        "reset": "Reset",
+        "edit": "Таҳрир",
+        "title": "унвон",
+        "description": "тавсиф",
+        "upload": "Боргузорӣ",
+        "link": "Истинод",
+        "setUrl": "URL таъин кунед",
+        "save": "Захира кунед",
+        "setClip": "Клипро буред",
+        "invalidURL": "URL-и нодуруст",
+        "invalidFile": "Файл нодуруст аст",
+        "errorNoSource": "Манбаи видеоӣ нест",
+        "uploadLimit": "Андозаи максималии файл: {{size}}",
+        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+    },
+    "pdf": {
+        "reset": "Reset",
+        "edit": "Таҳрир",
+        "title": "унвон",
+        "description": "тавсиф",
+        "upload": "Боргузорӣ",
+        "link": "Истинод",
+        "setUrl": "URL таъин кунед",
+        "save": "Захира кунед",
+        "setClip": "Клипро буред",
+        "invalidURL": "URL-и нодуруст",
+        "invalidFile": "Файл нодуруст аст",
+        "errorNoSource": "Манбаи PDF нест",
+        "uploadLimit": "Андозаи максималии файл: {{size}}",
+        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+    },
+    "image": {
+        "reset": "Reset",
+        "edit": "Таҳрир",
+        "title": "унвон",
+        "description": "тавсиф",
+        "upload": "Боргузорӣ",
+        "link": "Истинод",
+        "setUrl": "URL таъин кунед",
+        "save": "Захира кунед",
+        "setClip": "Клипро буред",
+        "invalidURL": "URL-и нодуруст",
+        "invalidFile": "Файл нодуруст аст",
+        "errorNoSource": "Манбаи тасвир нест",
+        "uploadLimit": "Андозаи максималии файл: {{size}}",
+        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
     }
 }

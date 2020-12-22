@@ -28,7 +28,13 @@
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом разговору.",
         "startedConversation": "је започео разговор",
         "RealTimeCall": "Позив у реалном времену",
-        "SearchByName": "Тражи по имену"
+        "SearchByName": "Тражи по имену",
+        "Notifications": {
+            "Visit": "{{displayName}} посећује ћаскање",
+            "Join": "{{displayName}} придружио се ћаскању",
+            "Leave": "{{displayName}} напустио ћаскање",
+            "RelatedTo": "{{displayName}} покренуо је {{stream.displayType}}"
+        }
     },
     "notifications": {
         "*": "Порука {{& message.fields.type}} до {{& stream.fields.title}}",
@@ -50,7 +56,7 @@
         "Streams/relatedTo/*": "Ново {{relationDisplayType}} у {{toTitle}}",
         "Streams/relatedFrom/*": "Додато у {{toTitle}} као {{relationDisplayType}}",
         "Streams/mention": "{{&call 'avatar.displayName'}} споменуо вас је у коментару",
-        "Streams/call": "{{displayName}} зове те"
+        "Streams/call": "{{displayName}} започео је позив у стварном времену"
     },
     "invite": {
         "messageContent": "{{displayName}} вас је позвао на {{inviteUrl}}",
@@ -118,7 +124,9 @@
         "AreYouSureUnsubscribeDevice": "Јесте ли сигурни да ћете одјавити овај уређај? Искључиће обавештења на овом уређају.",
         "Identifiers": "Идентификатори",
         "Devices": "Уређаји",
-        "Streams": "Струје"
+        "Streams": "Струје",
+        "AreYouSureRemoveParticipant": "Јесте ли сигурни да желите да уклоните овог учесника?",
+        "RemoveParticipant": "Уклони учесника"
     },
     "webrtc": {
         "allow": {
@@ -212,7 +220,8 @@
             "turnOffScreenSharing": "Сакриј дељење екрана",
             "turnOnCamera": "Прикажи видео",
             "turnOnAudio": "Занемаривање звука",
-            "turnOnScreenSharing": "Прикажи дељење екрана"
+            "turnOnScreenSharing": "Прикажи дељење екрана",
+            "fullScreen": "Цео екран"
         },
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
         "streamTitle": "{999}} позив уживо"
@@ -264,7 +273,8 @@
         },
         "Streams/image": {
             "displayType": "Слика",
-            "description": "визуелна слика"
+            "description": "визуелна слика",
+            "newItem": "Додај слику"
         },
         "Streams/images": {
             "displayType": "Галерија слика",
@@ -276,15 +286,18 @@
         },
         "Streams/file": {
             "displayType": "Филе",
-            "description": "отпремљена датотека"
+            "description": "отпремљена датотека",
+            "newItem": "Додај датотеку"
         },
         "Streams/audio": {
             "displayType": "Аудио клип",
-            "description": "аудио снимак"
+            "description": "аудио снимак",
+            "newItem": "Додај звук"
         },
         "Streams/video": {
             "displayType": "Видео клип",
-            "description": "видео клип"
+            "description": "видео клип",
+            "newItem": "Додај видео"
         },
         "Streams/live": {
             "displayType": "Ливестреам",
@@ -325,6 +338,11 @@
         "Streams/greeting": {
             "description": "поздрав којим се корисник може представити",
             "displayType": "Поздрав"
+        },
+        "Streams/pdf": {
+            "displayType": "ПДФ документ",
+            "description": "ПДФ документ",
+            "newItem": "Додајте ПДФ"
         }
     },
     "messages": {
@@ -355,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Овај садржај је сакривен од вас."
+    },
+    "audio": {
+        "record": "Запис",
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема извора звука",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "video": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема видео извора",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "pdf": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема пдф извора",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "image": {
+        "reset": "Ресетовање",
+        "edit": "Уредити",
+        "title": "наслов",
+        "description": "Опис",
+        "upload": "Отпремити",
+        "link": "Линк",
+        "setUrl": "Постави УРЛ",
+        "save": "сачувати",
+        "setClip": "Исеците клип",
+        "invalidURL": "Неважећи УРЛ",
+        "invalidFile": "Неисправан фајл",
+        "errorNoSource": "Нема извора слике",
+        "uploadLimit": "Максимална величина датотеке: {{size}}",
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
     }
 }

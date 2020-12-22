@@ -32,7 +32,12 @@
         "Buy": "Cumpără",
         "Credits": "credite",
         "ErrorInvalidAmount": "Suma nevalidă",
-        "ErrorInvalidCurrency": "Din păcate, nu acceptăm încă moneda {{currency}}"
+        "ErrorInvalidCurrency": "Din păcate, nu acceptăm încă moneda {{currency}}",
+        "WatchClip": "Ați câștigat {{amount}} credite pentru vizionarea {{fromStreamTitle}}",
+        "PurchaseCredits": "Achiziționați credite",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} credite"
+        }
     },
     "history": {
         "Date": "Data",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Contribuție opțională",
         "RequiredPayment": "Plata obligatorie",
         "AreYouSureDelete": "Sigur doriți să ștergeți acest serviciu?",
-        "AmountServicesRelated": "Există {{amount}} disponibilități legate de acest serviciu. Acestea sunt, de asemenea, vor fi eliminate."
+        "AmountServicesRelated": "Există {{amount}} disponibilități legate de acest serviciu. Acestea sunt, de asemenea, vor fi eliminate.",
+        "Free": "Gratuit"
     }
 }

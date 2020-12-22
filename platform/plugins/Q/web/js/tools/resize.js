@@ -1,5 +1,4 @@
 (function ($, window, undefined) {
-	Streams = Q.Streams;
 	/**
 	 * Q/resize tool.
 	 * Tool makes possible to resize any element on the page
@@ -200,7 +199,7 @@
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
-								if (((evt.type != "mousemove" && evt.type != "touchmove") && (evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)))
+                                if ((/*(evt.type != "mousemove" && evt.type != "touchmove") && */(evt.target == ignoreEls[e] || ignoreEls[e].contains(evt.target)))
 									|| (evt.target.nodeName == 'INPUT' && evt.target.type == 'text')) {
 									return;
 								}
@@ -623,7 +622,6 @@
                             elementHeight = _latestHeightValue - (distance1 + distance2);
 							elementWidth = _latestWidthValue - (distance1 + distance2);
 						}
-						//console.log('resize elementWidth', Math.abs(touch1.clientX - prevPosOfTouch1.x) + Math.abs(touch2.clientX - prevPosOfTouch2.x))
 
 						if(ratio < 1) {
 							elementWidth = parseInt(elementHeight * ratio);

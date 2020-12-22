@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "Imaj",
-            "description": "imaj vizyèl"
+            "description": "imaj vizyèl",
+            "newItem": "Ajoute Imaj"
         },
         "Streams\/images": {
             "displayType": "Galeri Imaj",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "Uploaded file"
+            "description": "Uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "odyo clip"
+            "description": "odyo clip",
+            "newItem": "Ajoute odyo"
         },
         "Streams\/video": {
             "displayType": "Videyo Clip",
-            "description": "videyo"
+            "description": "videyo",
+            "newItem": "Ajoute Videyo"
         },
         "Streams\/live": {
             "displayType": "Livestream",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "Rele an tan reyèl",
             "description": "yon tan reyèl videyo \/ odyo apèl"
+        },
+        "Streams\/pdf": {
+            "displayType": "Dokiman PDF",
+            "description": "Dokiman PDF",
+            "newItem": "Ajoute PDF"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "Kontni sa a kache pou ou."
+    },
+    "audio": {
+        "record": "Dosye",
+        "reset": "Reyajiste",
+        "edit": "Edite",
+        "title": "tit",
+        "description": "deskripsyon",
+        "upload": "Voye",
+        "link": "Lyen",
+        "setUrl": "Mete URL",
+        "save": "Sove",
+        "setClip": "Koupe Clip",
+        "invalidURL": "URL ki pa valab",
+        "invalidFile": "Dosye ki pa valab",
+        "errorNoSource": "Pa gen sous odyo",
+        "uploadLimit": "Gwosè dosye max: {{size}}",
+        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+    },
+    "video": {
+        "reset": "Reyajiste",
+        "edit": "Edite",
+        "title": "tit",
+        "description": "deskripsyon",
+        "upload": "Voye",
+        "link": "Lyen",
+        "setUrl": "Mete URL",
+        "save": "Sove",
+        "setClip": "Koupe Clip",
+        "invalidURL": "URL ki pa valab",
+        "invalidFile": "Dosye ki pa valab",
+        "errorNoSource": "Pa gen sous videyo",
+        "uploadLimit": "Gwosè dosye max: {{size}}",
+        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye max se {{size}}"
+    },
+    "pdf": {
+        "reset": "Reyajiste",
+        "edit": "Edite",
+        "title": "tit",
+        "description": "deskripsyon",
+        "upload": "Voye",
+        "link": "Lyen",
+        "setUrl": "Mete URL",
+        "save": "Sove",
+        "setClip": "Koupe Clip",
+        "invalidURL": "URL ki pa valab",
+        "invalidFile": "Dosye ki pa valab",
+        "errorNoSource": "Pa gen sous pdf",
+        "uploadLimit": "Gwosè dosye max: {{size}}",
+        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+    },
+    "image": {
+        "reset": "Reyajiste",
+        "edit": "Edite",
+        "title": "tit",
+        "description": "deskripsyon",
+        "upload": "Voye",
+        "link": "Lyen",
+        "setUrl": "Mete URL",
+        "save": "Sove",
+        "setClip": "Koupe Clip",
+        "invalidURL": "URL ki pa valab",
+        "invalidFile": "Dosye ki pa valab",
+        "errorNoSource": "Pa gen sous imaj",
+        "uploadLimit": "Gwosè dosye max: {{size}}",
+        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
     }
 }

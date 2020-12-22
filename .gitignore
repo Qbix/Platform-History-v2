@@ -30,6 +30,7 @@ platform/plugins/Awards/classes/Composer/vendor
 platform/plugins/Communities/
 platform/plugins/Cards/
 platform/plugins/Calendars/
+platform/plugins/Media/
 platform/node_modules
 platform/vendor
 MyApp/local/*
@@ -58,3 +59,4 @@ composer.lock
 platform/plugins/Streams/files/Streams/icons.tar.gz
 
 platform/plugins/Streams/web/css/selection.json
+platform/files/Q/logs/

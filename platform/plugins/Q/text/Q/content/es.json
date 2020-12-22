@@ -98,5 +98,23 @@
         "inHour": "en {{h}} hora",
         "inHours": "en {{h}} horas",
         "inUnderMinute": "en menos de 1 minuto"
+    },
+    "tabs": {
+        "more": "más",
+        "Menu": "Menú"
+    },
+    "video": {
+        "clip": "acortar",
+        "errorNoSource": "Sin fuente de video"
+    },
+    "pdf": {
+        "clip": "acortar",
+        "errorNoSource": "Sin fuente pdf"
+    },
+    "clip": {
+        "SetClipStart": "Establecer inicio de clip",
+        "ClipStart": "Inicio del clip",
+        "SetClipEnd": "Establecer final de clip",
+        "ClipEnd": "Final del clip"
     }
 }

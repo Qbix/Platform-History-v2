@@ -30,7 +30,7 @@
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},
-			"session": {"module": "Users", "action": "session"},
+			"Users/session": {"module": "Users", "action": "session"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
 			"appleLogin": {"module": "Users", "action": "appleLogin"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
@@ -149,7 +149,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url", "xids"
+			"id", "username", "signedUpWith", "icon", "url", "xids", "preferredLanguage"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"

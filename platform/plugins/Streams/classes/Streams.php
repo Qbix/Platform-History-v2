@@ -4711,7 +4711,6 @@ abstract class Streams extends Base_Streams
 		}
 		return $realpath . DS . $subpath;
 	}
-
 	/**
 	 * Remove streams from the system, including all related rows.
 	 * @method remove

@@ -32,7 +32,12 @@
         "Buy": "ખરીદો",
         "Credits": "ક્રેડિટ્સ",
         "ErrorInvalidAmount": "રકમ અમાન્ય છે",
-        "ErrorInvalidCurrency": "દુર્ભાગ્યે અમે હજી સુધી ચલણ support {999} support ને સમર્થન આપતા નથી"
+        "ErrorInvalidCurrency": "દુર્ભાગ્યે અમે હજી સુધી ચલણ support {999} support ને સમર્થન આપતા નથી",
+        "WatchClip": "Watching {1000} watching જોવા માટે {{amount}} કમાણી",
+        "PurchaseCredits": "ખરીદી ક્રેડિટ્સ",
+        "forMessages": {
+            "BoughtCredits": "Its 9 999}} ક્રેડિટ્સ"
+        }
     },
     "history": {
         "Date": "તારીખ",
@@ -143,6 +148,7 @@
         "OptionalContribution": "વૈકલ્પિક ફાળો",
         "RequiredPayment": "જરૂરી ચુકવણી",
         "AreYouSureDelete": "શું તમે ખરેખર આ સેવા કા deleteી નાખવા માંગો છો?",
-        "AmountServicesRelated": "આ સેવાથી સંબંધિત {{amount}} ઉપલબ્ધતાઓ છે. તેઓ પણ દૂર કરવામાં આવશે."
+        "AmountServicesRelated": "આ સેવાથી સંબંધિત {{amount}} ઉપલબ્ધતાઓ છે. તેઓ પણ દૂર કરવામાં આવશે.",
+        "Free": "મફત"
     }
 }

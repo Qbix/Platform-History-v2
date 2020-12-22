@@ -537,7 +537,7 @@ button.Users_getintouch_call {
 
 html.Users_loggedOut .Users_whenLoggedIn,
 html.Users_loggedIn .Users_whenLoggedOut {
-	display: none;
+	display: none !important;
 }
 
 .Users_status_tool .Users_avatar_tool img.Users_avatar_icon {
@@ -546,7 +546,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 .Q_mobile .Users_status_tool .Users_avatar_tool img {
-	display: block;
+	display: inline-block;
 }
 
 #Users_login_step1,
@@ -564,8 +564,12 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 #notices_slot ul li .Q_tool.Users_avatar_tool {
-	width: 40px;
+	height: 40px;
 	line-height: normal;
+	overflow: unset;
+}
+#notices_slot ul li .Q_tool.Users_avatar_tool[data-users-avatar*='"icon":false'] {
+	height: unset;
 }
 
 #notices_slot ul li {

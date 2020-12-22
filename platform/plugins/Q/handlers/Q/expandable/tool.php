@@ -12,10 +12,11 @@
  * @param {array} $options Options for the tool
  * @param {string} $options.title Required. The title for the expandable.
  * @param {string} $options.content The content. Required unless you pass "items" instead.
- * @param {array} [$options.items] An array of strings to wrap in <span> elements and render in the content
+ * @param {array} [$options.items] Instead of the content, you can pass an array of strings to wrap in <span> elements and render in the content
  * @param {string} [$options.class] If you use "items", optionally specify the class of the container elements for each item
  * @param {integer} [$options.title] A number, if any, to display when collapsed
- * @param {boolean} [$options.autoCollapseSiblings]  Whether, when expanding an expandable, its siblings should be automatically collapsed.
+ * @param {Boolean} [options.expanded] Whether it should start out expanded
+ * @param {boolean} [$options.autoCollapseSiblings=true]  Whether, when expanding an expandable, its siblings should be automatically collapsed.
  */
 function Q_expandable_tool($options)
 {
@@ -25,7 +26,8 @@ function Q_expandable_tool($options)
 			: '';
 		$lines = array();
 		foreach ($options['items'] as $key => $value) {
-			$lines[] = "<span $classString>$key</span>";
+			$key = Q_Html::text($key);
+			$lines[] = "<span data-value='$key' $classString>$value</span>";
 		}
 		$between = Q::ifset($options, 'between', '');
 		$options['content'] = implode($between, $lines);

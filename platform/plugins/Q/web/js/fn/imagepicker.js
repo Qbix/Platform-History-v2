@@ -132,68 +132,40 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		state.input.unwrap();
 	}
 
-	if (navigator.camera) {
-		// "file" input type is not supported
-		$this.on([Q.Pointer.click, '.Q_imagepicker'], function(e) {
-			var state = $this.state('Q/imagepicker');
-			if (false === Q.handle(state.onClick, $this, [])) {
-				return false;
-			}
-			Q.confirm(state.cameraCommands.prompt, function(result) {
-				if (result === null) return;
-				var source = Camera.PictureSourceType[result ? "CAMERA" : "PHOTOLIBRARY"];
-				navigator.camera.getPicture(function(data){
-					$this.plugin('Q/imagepicker', 'pick', "data:image/jpeg;base64," + data);
-				}, function(msg){
-					alert(msg);
-				}, { quality: 50,
-					sourceType: source,
-					destinationType: Camera.DestinationType.DATA_URL
-				});
-			}, {
-				ok: state.cameraCommands.photo,
-				cancel: state.cameraCommands.library,
-				className: 'Q_confirm Q_dialog_cameraCommands',
-				noClose: false
-			});
-			e.preventDefault();
-			e.stopPropagation();
-			Q.Pointer.ended();
-		});
-	} else {
-		// natively support "file" input
-		$this.on([Q.Pointer.click, '.Q_imagepicker'], function(e) {
-			state.input.click();
-			e.preventDefault();
-			e.stopPropagation();
-		});
-		state.input.click(function (e) {
-			var state = $this.state('Q/imagepicker');
-			if (false === Q.handle(state.onClick, $this, [])) {
-				return false;
-			}
-			Q.Pointer.stopHints();
-			e.stopPropagation();
-		});
-		state.input.change(function () {
-			if (!this.value) {
-				return; // it was canceled
-			}
-			Q.Pointer.stopHints();
-			_process.call(this);
-		});
-		function _cancel(e) {
-			e.preventDefault();
+	// "file" input type is not supported
+	$this.on([Q.Pointer.click, '.Q_imagepicker'], function(e) {
+		$this.plugin('Q/imagepicker', 'click');
+		e.preventDefault();
+		e.stopPropagation();
+		Q.Pointer.ended();
+	});
+
+	state.input.click(function (e) {
+		var state = $this.state('Q/imagepicker');
+		if (false === Q.handle(state.onClick, $this, [])) {
+			return false;
 		}
-		$this.on({
-			 "dragover.Q_imagepicker": _cancel,
-			 "dragenter.Q_imagepicker": _cancel,
-			 "drop.Q_imagepicker": function _Q_imagepicker_drop(e) {
-				 _process.call(e.originalEvent.dataTransfer);
-				 e.preventDefault();
-			 }
-		});
+		Q.Pointer.stopHints();
+		e.stopPropagation();
+	});
+	state.input.change(function () {
+		if (!this.value) {
+			return; // it was canceled
+		}
+		Q.Pointer.stopHints();
+		_process.call(this);
+	});
+	function _cancel(e) {
+		e.preventDefault();
 	}
+	$this.on({
+		 "dragover.Q_imagepicker": _cancel,
+		 "dragenter.Q_imagepicker": _cancel,
+		 "drop.Q_imagepicker": function _Q_imagepicker_drop(e) {
+			 _process.call(e.originalEvent.dataTransfer);
+			 e.preventDefault();
+		 }
+	});
 	$this.on([Q.Pointer.fastclick, '.Q_imagepicker'], function (e) {
 		e.stopPropagation();
 	});
@@ -237,9 +209,33 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	click: function () {
 		var $this = this;
 		var state = $this.state('Q/imagepicker');
-		if (state.label && state.label.click) {
-			state.label.click();
+
+		// "file" input type is not supported
+		if (false === Q.handle(state.onClick, $this, [])) {
+			return false;
 		}
+
+		if (!navigator.camera) {
+			return state.input.click();
+		}
+
+		Q.confirm(state.cameraCommands.prompt, function(result) {
+			if (result === null) return;
+			var source = Camera.PictureSourceType[result ? "CAMERA" : "PHOTOLIBRARY"];
+			navigator.camera.getPicture(function(data){
+				$this.plugin('Q/imagepicker', 'pick', "data:image/jpeg;base64," + data);
+			}, function(msg){
+				alert(msg);
+			}, { quality: 50,
+				sourceType: source,
+				destinationType: Camera.DestinationType.DATA_URL
+			});
+		}, {
+			ok: state.cameraCommands.photo,
+			cancel: state.cameraCommands.library,
+			className: 'Q_confirm Q_dialog_cameraCommands',
+			noClose: false
+		});
 	},
 	/**
 	 * Set the image in the imagepicker
@@ -299,7 +295,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				if (requiredSize.width > imageSize.width * ms
 				 || requiredSize.height > imageSize.height * ms) {
 					var result = Q.handle(
-						[state.onTooSmall, state.onFinish, instructions], state,
+						[state.onTooSmall, state.onFinish], state,
 						[requiredSize, imageSize]
 					);
 					if (result === false) {

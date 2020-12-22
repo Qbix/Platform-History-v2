@@ -16,11 +16,12 @@
 	 *  @param {String} [options.field='tab'] Uses this field when urls doesn't contain the tab name.
 	 *  @param {Boolean|Object} [options.retain] Pass true to retain slots from all tabs, or object of {name: Boolean} for individual tabs. Makes switchTo avoid reloading tab url by default, instead it restores last-seen slot contents, url and title.
 	 *  @param {Boolean} [options.checkQueryString=false] Whether the default getCurrentTab should check the querystring when determining the current tab
-	 *  @param {boolean} [options.touchlabels=Q.info.isMobile] Whether to show touchlabels on the tabs
+	 *  @param {boolean} [options.touchlabels=false] Whether to show touchlabels on the tabs
 	 *  @param {Boolean} [options.vertical=false] Stack the tabs vertically instead of horizontally
 	 *  @param {Boolean} [options.compact=false] Display the tabs interface in a compact space with a contextual menu
 	 *  @param {Object} [options.overflow] Object defined element with overflowed menu items. If false, don't crop overflowed menu elements.
 	 *  @param {String} [options.overflow.content] The html that is displayed when the tabs overflow. You can interpolate {{count}}, {{text}} or {{html}} in the string.
+	 *  @param {String} [options.overflow.alreadyVisible] The html that is displayed when the tabs overflow but current tab is already visible. You can interpolate {{count}}, {{text}} or {{html}} in the string.
 	 *  @param {String} [options.overflow.glyph] Override the glyph that appears next to the overflow text. You can interpolate {{count}} here
 	 *  @param {String} [options.overflow.defaultText] The text to interpolate {{text}} in the content when no tab is selected
 	 *  @param {String} [options.overflow.defaultHtml] The html to interpolate {{html}} in the content when no tab is selected
@@ -49,7 +50,7 @@
 			tool.retained = {};
 			
 			if (state.touchlabels === undefined) {
-				state.touchlabels = Q.info.isMobile;
+				state.touchlabels = false;
 			}
 			
 			if (state.contextualHandler == null) {
@@ -59,9 +60,9 @@
 				}
 			}
 
-			var refresh = function () {
+			var refresh = Q.debounce(function () {
 				tool.refresh();
-			};
+			});
 			Q.onPopState.set(refresh, tool);
 			Q.Page.onPush.set(refresh, tool);
 
@@ -71,10 +72,12 @@
 			_addListeners(tool, $te);
 
 			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
-			Q.onLayout(tool).set(function () {
+			setTimeout(function () {
+				Q.onLayout(tool).add(Q.throttle(function () {
+					tool.refresh();
+				}, 100, true), tool);
 				tool.refresh();
-			}, tool);
-			tool.refresh();
+			}, 100);
 			Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 		},
 
@@ -86,13 +89,20 @@
 			touchlabels: undefined,
 			contextualHandler: null,
 			overflow: {
-				content: '<span><span>{{count}} more</span></span>',
-				glyph: '&#9776;',
-				defaultText: '...',
-				defaultHtml: '...'
+				content: '<span><span>{{count}} {{more}}</span></span>',
+				alreadyVisible: '<span><span>{{count}} {{more}}</span></span>',
+				glyph: '<svg class="Q_overflow_glyph_svg" viewBox="0 0 100 80" width="40" height="40">'
+				    + '<rect y="10" width="100" height="10" rx="8"></rect>'
+				    + '<rect y="40" width="100" height="10" rx="8"></rect>'
+				    + '<rect y="70" width="100" height="10" rx="8"></rect>'
+					+'</svg>',
+				defaultText: null,
+				defaultHtml: null
 			},
 			retain: {},
-			loaderOptions: {},
+			loaderOptions: {
+				retainPropertiesOf: '.Q_overflow,.Q_column_slot'
+			},
 			loader: Q.req,
 			onClick: new Q.Event(),
 			beforeSwitch: new Q.Event(),
@@ -218,11 +228,29 @@
 							Q.extend(retained, {
 								url: fromUrl,
 								title: document.title,
-								stored: {}
+								stored: {},
+								elementsWithProperties: {}
 							});
 							Q.each(slots, function (i, slotName) {
+								if (slotName === 'title') {
+									return;
+								}
 								var s = retained.stored[slotName] = document.createElement('div');
 								var c = slotContainer(slotName);
+								var r = retained.elementsWithProperties[slotName];
+								if (!r) {
+									r = [s];
+								}
+								r = r.concat(Array.prototype.slice.call(
+									c.querySelectorAll(o.retainPropertiesOf)
+								));
+								retained.elementsWithProperties[slotName] = r;
+								Q.each(r, function (i) {
+									this.Q_retained_properties = {
+										scrollTop: this.scrollTop,
+										scrollLeft: this.scrollLeft
+									};
+								});
 								Q.Tool.remove(c);
 								Q.each(c && c.childNodes, function () {
 									s.appendChild(this);
@@ -267,7 +295,15 @@
 							var elements = [];
 							Q.each(retained.stored, function (slotName) {
 								var element = slotContainer(slotName);
+								var ep = retained.elementsWithProperties
+									&& retained.elementsWithProperties[slotName];
 								Q.replace(element, this);
+								Q.each (ep, function () {
+									for (var k in this.Q_retained_properties) {
+										this[k] = this.Q_retained_properties[k];
+									}
+									delete this.Q_retained_properties;
+								});
 								Q.activate(element);
 								elements.push(element);
 							});
@@ -421,11 +457,12 @@
 				var tool = this;
 				var state = tool.state;
 				var $te = $(tool.element);
+				var html, $copied;
 				var w = Math.min(
 					$te[0].getBoundingClientRect().width,
 					$te[0].remainingWidth(true)
 				);
-				var w2 = 0, w3 = 0, index = -10;
+				var w2 = 0, w3 = 0, w4 = 0, index = -10;
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
 				Q.handle(state.beforeRefresh, tool, [function (tabName) {
@@ -453,7 +490,7 @@
 					$o.remove();
 				}
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
-				var $overflow, $lastVisibleTab;
+				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
 					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
@@ -465,6 +502,7 @@
 					$tabs.each(function (i) {
 						var cs = this.computedStyle();
 						var $t = $(this);
+						$t.data('index', i);
 						w3 = w2;
 						w2 += this.getBoundingClientRect().width
 							+ parseFloat(cs.marginLeft)
@@ -473,6 +511,7 @@
 							index = i-1;
 							return false;
 						}
+						w4 = w3;
 					});
 				}
 				if (state.touchlabels) {
@@ -481,39 +520,52 @@
 							this.setAttribute('data-touchlabel', $(this).text());
 						}
 					});
+				} else {
+					$tabs.removeAttr('data-touchlabel');
 				}
+				var $tab = $(state.tab);
+				var values = {
+					count: $tabs.length - index - 1,
+					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
+					more: Q.text.Q.tabs.more,
+					classes: $tab.attr('class')
+				};
+				var html = this.state.overflow.content.interpolate(values);
 				if (index >= 0 && state.overflow) {
-					var values = {
-						count: $tabs.length - index - 1,
-						text: $(state.tab).text() || state.overflow.defaultText,
-						html: $(state.tab).html() || state.overflow.defaultHtml
-					};
-					$lastVisibleTab = $tabs.eq(index);
+					tabAlreadyVisible = ($tab.data('index') < index);
+					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
-						.css('visibility', 'visible')
-						.html(state.overflow.content.interpolate(values));
+						.empty().append($copied);
+					if (!tabAlreadyVisible) {
+						$overflow.addClass(values.classes); // copy its style
+					}
 					if (state.overflow.glyph) {
 						$('<span class="Q_tabs_overflowGlyph" />')
-							.html(state.overflow.glyph.interpolate(values))
-							.prependTo($overflow);
+						.html(state.overflow.glyph.interpolate(values))
+						.appendTo($overflow);
 					}
+					$lastVisibleTab = $tabs.eq(index);
 					var oneLess = !!state.compact;
 					if (!oneLess) {
 						$overflow.insertAfter($lastVisibleTab);
 						// REFLOW happens here
-						if ($overflow.outerWidth(true) > w - w3 - 1) {
+						if ($overflow.outerWidth(true) >  w - w3 - 1) {
 							oneLess = true;
 						}
 					}
 					if (oneLess) {
 						--index;
 						values.count = $tabs.length - index - 1;
-						$overflow.insertBefore($lastVisibleTab)
-							.html(this.state.overflow.content.interpolate(values));
+						$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
+						$overflow.insertBefore($lastVisibleTab).empty().append($copied);
 						if (state.overflow.glyph) {
-							$('<span class="Q_tabs_overflowGlyph" />')
+							var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
 								.html(state.overflow.glyph.interpolate(values))
-								.prependTo($overflow);
+								.appendTo($overflow);
+							if (!state.compact && $overflow.outerWidth(true) > w - w4 - 1) {
+								$glyph.remove(); // better to at least fit on the line
+							}
 						}
 					}
 				}
@@ -523,15 +575,37 @@
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}
+				if (tabAlreadyVisible) {
+					$overflow.addClass('Q_tabs_alreadyVisible')
+					.find('.Q_tabs_copiedTitle').html(
+						this.state.overflow.alreadyVisible.interpolate(values)
+					);
+				} else {
+					_copyClassToOverflow(tool);
+					$overflow.addClass('Q_current');
+				}
 				tool.overflowIndex = index;
+				// if (tool.$overflow
+				// && (
+				// 	!tool.$overflow.data('contextual')
+				// 	|| tool.$overflow.closest('html').length)
+				// ) {
+				// 	// it's already set up and wasn't removed
+				// 	tool.$tabs.css('visibility', 'visible');
+				// 	Q.handle(state.onRefresh, this);
+				// 	Q.handle(callback, tool);
+				// 	$overflow.css('visibility', 'visible');
+				// 	return;
+				// }
 				tool.$overflow = $overflow;
-				_copyClassToOverflow(tool);
-				Q.addScript("{{Q}}/js/QTools.js", function () {
+				Q.addScript("{{Q}}/js/contextual.js", function () {
 					var elements = [];
 					for (var i=index+1; i<$tabs.length; ++i) {
 						elements.push($tabs[i]);
 					}
-					$overflow.plugin("Q/contextual", {
+					$(elements).removeAttr('data-touchlabel');
+					$overflow.plugin("Q/contextual", "remove")
+					.plugin("Q/contextual", {
 						elements: elements,
 						className: "Q_tabs_contextual",
 						defaultHandler: state.contextualHandler,
@@ -540,11 +614,12 @@
 							tool.$tabs.css('visibility', 'visible');
 							Q.handle(state.onRefresh, this);
 							Q.handle(callback, tool);
+							$overflow.css('visibility', 'visible');
 						},
 						onShow: function (cs) {
 							Q.handle(state.onContextual, this, arguments);
 						}
-					});
+					}).data('contextual', true);
 					tool.$overflowed = $(elements);
 					if (Q.Contextual.current != -1) {
 						// it was open, show it again

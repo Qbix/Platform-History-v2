@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "ምስል",
-            "description": "ምስላዊ ምስል"
+            "description": "ምስላዊ ምስል",
+            "newItem": "ምስል አክል"
         },
         "Streams\/images": {
             "displayType": "የምስል ማእከል",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ፋይል",
-            "description": "የተሰቀለ ፋይል"
+            "description": "የተሰቀለ ፋይል",
+            "newItem": "ፋይል አክል"
         },
         "Streams\/audio": {
             "displayType": "ኦዲዮ ክሊፕ",
-            "description": "የድምፅ ቅንጥብ"
+            "description": "የድምፅ ቅንጥብ",
+            "newItem": "ኦዲዮን አክል"
         },
         "Streams\/video": {
             "displayType": "ቪዲዮ ክሊፕ",
-            "description": "ቪዲዮ ክሊፕ"
+            "description": "ቪዲዮ ክሊፕ",
+            "newItem": "ቪዲዮ አክል"
         },
         "Streams\/live": {
             "displayType": "ቀጥታ ስርጭት",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "የእውነተኛ-ጊዜ ጥሪ",
             "description": "የእውነተኛ ጊዜ ቪዲዮ \/ ድምጽ ጥሪ"
+        },
+        "Streams\/pdf": {
+            "displayType": "የፒዲኤፍ ሰነድ",
+            "description": "የፒዲኤፍ ሰነድ",
+            "newItem": "ፒዲኤፍ አክል"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "ይህ ይዘት ከእርስዎ ተደብቋል።"
+    },
+    "audio": {
+        "record": "መዝገብ",
+        "reset": "ዳግም አስጀምር",
+        "edit": "አርትዕ",
+        "title": "ርዕስ",
+        "description": "መግለጫ",
+        "upload": "ስቀል",
+        "link": "አገናኝ",
+        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "save": "አስቀምጥ",
+        "setClip": "ክሊፕን ይቁረጡ",
+        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "invalidFile": "ልክ ያልሆነ ፋይል",
+        "errorNoSource": "ምንም የድምፅ ምንጭ የለም",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
+        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+    },
+    "video": {
+        "reset": "ዳግም አስጀምር",
+        "edit": "አርትዕ",
+        "title": "ርዕስ",
+        "description": "መግለጫ",
+        "upload": "ስቀል",
+        "link": "አገናኝ",
+        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "save": "አስቀምጥ",
+        "setClip": "ክሊፕን ይቁረጡ",
+        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "invalidFile": "ልክ ያልሆነ ፋይል",
+        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
+        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+    },
+    "pdf": {
+        "reset": "ዳግም አስጀምር",
+        "edit": "አርትዕ",
+        "title": "ርዕስ",
+        "description": "መግለጫ",
+        "upload": "ስቀል",
+        "link": "አገናኝ",
+        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "save": "አስቀምጥ",
+        "setClip": "ክሊፕን ይቁረጡ",
+        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "invalidFile": "ልክ ያልሆነ ፋይል",
+        "errorNoSource": "ምንም የፒዲኤፍ ምንጭ የለም",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
+        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+    },
+    "image": {
+        "reset": "ዳግም አስጀምር",
+        "edit": "አርትዕ",
+        "title": "ርዕስ",
+        "description": "መግለጫ",
+        "upload": "ስቀል",
+        "link": "አገናኝ",
+        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "save": "አስቀምጥ",
+        "setClip": "ክሊፕን ይቁረጡ",
+        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "invalidFile": "ልክ ያልሆነ ፋይል",
+        "errorNoSource": "የምስል ምንጭ የለም",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
+        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
     }
 }

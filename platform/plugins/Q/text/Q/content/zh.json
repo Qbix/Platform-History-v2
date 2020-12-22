@@ -98,5 +98,23 @@
         "inHour": "在{{h}}小时内",
         "inHours": "在{{h}}小时内",
         "inUnderMinute": "不到1分钟"
+    },
+    "tabs": {
+        "more": "更多",
+        "Menu": "菜单"
+    },
+    "video": {
+        "clip": "夹",
+        "errorNoSource": "没有视频源"
+    },
+    "pdf": {
+        "clip": "夹",
+        "errorNoSource": "没有pdf来源"
+    },
+    "clip": {
+        "SetClipStart": "设置剪辑开始",
+        "ClipStart": "剪辑开始",
+        "SetClipEnd": "设置剪辑结束",
+        "ClipEnd": "夹端"
     }
 }

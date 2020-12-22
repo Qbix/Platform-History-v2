@@ -291,7 +291,8 @@
         },
         "Streams\/image": {
             "displayType": "රූප",
-            "description": "දෘශ්‍ය රූපය"
+            "description": "දෘශ්‍ය රූපය",
+            "newItem": "රූපය එක් කරන්න"
         },
         "Streams\/images": {
             "displayType": "රූප ගැලරිය",
@@ -303,15 +304,18 @@
         },
         "Streams\/file": {
             "displayType": "ගොනුව",
-            "description": "උඩුගත කරන ලද ගොනුව"
+            "description": "උඩුගත කරන ලද ගොනුව",
+            "newItem": "ගොනුව එක් කරන්න"
         },
         "Streams\/audio": {
             "displayType": "ශ්‍රව්‍ය පටය",
-            "description": "ශ්‍රව්‍ය පටය"
+            "description": "ශ්‍රව්‍ය පටය",
+            "newItem": "ශ්රව්ය උපකරණ එකතු කරන්න"
         },
         "Streams\/video": {
             "displayType": "වීඩියෝ පටය",
-            "description": "වීඩියෝ පටය"
+            "description": "වීඩියෝ පටය",
+            "newItem": "වීඩියෝ එකතු කරන්න"
         },
         "Streams\/live": {
             "displayType": "සජීවී විකාශය",
@@ -340,6 +344,11 @@
         "Streams\/webrtc": {
             "displayType": "තථ්‍ය කාලීන ඇමතුම",
             "description": "තථ්‍ය කාලීන වීඩියෝ \/ ශ්‍රව්‍ය ඇමතුමක්"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF ලේඛනය",
+            "description": "PDF ලේඛනය",
+            "newItem": "PDF එකතු කරන්න"
         }
     },
     "participating": {
@@ -364,5 +373,70 @@
     },
     "errors": {
         "HiddenFromYou": "මෙම අන්තර්ගතය ඔබෙන් සැඟවී ඇත."
+    },
+    "audio": {
+        "record": "වාර්තාව",
+        "reset": "නැවත සකසන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
+        "setClip": "කටවුට් ක්ලිප්",
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "ශ්‍රව්‍ය ප්‍රභවයක් නොමැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
+    },
+    "video": {
+        "reset": "නැවත සකසන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
+        "setClip": "කටවුට් ක්ලිප්",
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "වීඩියෝ ප්‍රභවයක් නොමැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
+    },
+    "pdf": {
+        "reset": "නැවත සකසන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
+        "setClip": "කටවුට් ක්ලිප්",
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "පීඩීඑෆ් ප්‍රභවයක් නොමැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
+    },
+    "image": {
+        "reset": "නැවත සකසන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
+        "setClip": "කටවුට් ක්ලිප්",
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "රූප ප්‍රභවයක් නොමැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
     }
 }

@@ -32,7 +32,12 @@
         "Buy": "Kupiti",
         "Credits": "krediti",
         "ErrorInvalidAmount": "Iznos je nevažeći",
-        "ErrorInvalidCurrency": "Nažalost, još uvijek ne podržavamo valutu {{currency}}"
+        "ErrorInvalidCurrency": "Nažalost, još uvijek ne podržavamo valutu {{currency}}",
+        "WatchClip": "Zaradio ste {{amount}} kredita za gledanje filma {{fromStreamTitle}}",
+        "PurchaseCredits": "Kupnja kredita",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredita"
+        }
     },
     "history": {
         "Date": "Datum",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Neobvezni doprinos",
         "RequiredPayment": "Obavezno plaćanje",
         "AreYouSureDelete": "Jeste li sigurni da želite izbrisati ovu uslugu?",
-        "AmountServicesRelated": "Postoje {{amount}} dostupnosti povezane s ovom uslugom. Oni su također biti uklonjeni."
+        "AmountServicesRelated": "Postoje {{amount}} dostupnosti povezane s ovom uslugom. Oni su također biti uklonjeni.",
+        "Free": "Besplatno"
     }
 }

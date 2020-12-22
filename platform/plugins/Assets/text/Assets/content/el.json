@@ -32,7 +32,12 @@
         "Buy": "Αγορά",
         "Credits": "Πιστώσεις",
         "ErrorInvalidAmount": "Το ποσό δεν είναι έγκυρο",
-        "ErrorInvalidCurrency": "Δυστυχώς, δεν υποστηρίζουμε ακόμη το νόμισμα {{currency}}"
+        "ErrorInvalidCurrency": "Δυστυχώς, δεν υποστηρίζουμε ακόμη το νόμισμα {{currency}}",
+        "WatchClip": "Κερδίσατε {{amount}} πιστώσεις για παρακολούθηση {{fromStreamTitle}}",
+        "PurchaseCredits": "Αγορά πιστώσεων",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} πιστώσεις"
+        }
     },
     "history": {
         "Date": "Ημερομηνία",
@@ -143,6 +148,7 @@
         "OptionalContribution": "Προαιρετική συνεισφορά",
         "RequiredPayment": "Απαιτούμενη πληρωμή",
         "AreYouSureDelete": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την υπηρεσία;",
-        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητα που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης."
+        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητα που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης.",
+        "Free": "Ελεύθερος"
     }
 }

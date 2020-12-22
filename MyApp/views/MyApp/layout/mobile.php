@@ -38,11 +38,12 @@
 	</script>
 
 	<!-- scripts have been moved to the bottom of the body -->
+	<?php echo Q_Response::links(true, "\n\t") ?> 
 	<?php echo Q_Response::stylesheets(true, "\n\t") ?> 
 	<?php echo Q_Response::styles(true, "\n\t") ?> 
 </head>
 <body>
-	<div id="status_background" class="Q_dont_hide Q_fixed_top Q_status_background"></div>
+	<div class="Q_dont_hide Q_fixed_top Q_top_background"></div>
 	<div id="dashboard_slot" class="Q_fixed_top">
 <!-- - - - - - - - - - - - - begin dashboard slot- - - - - - - - - - - - - - - - -->
 <?php echo $dashboard ?> 
@@ -65,6 +66,7 @@
 <!-- - - - - - - - - - - - - - - end dialogs slot- - - - - - - - - - - - - - - - -->
 		</div>
 	</div>
+	<div class="Q_dont_hide Q_fixed_bottom Q_bottom_background"></div>
 	<?php echo Q_Response::scripts(true, "\n\t") ?> 
 	<?php echo Q_Response::templates(true, "\n\t") ?> 
 	<?php echo Q_Response::scriptLines(true) ?> 
