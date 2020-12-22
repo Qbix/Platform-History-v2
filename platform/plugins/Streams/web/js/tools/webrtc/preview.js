@@ -68,7 +68,7 @@
 						// load the icon
 						// TODO: make this use flexbox instead
 						var jq = tool.$('img.Streams_preview_icon');
-						tool.preview.icon(jq[0], p.fill('icon'));
+						tool.preview.icon(jq[0], null);
 						var $pc = tool.$('.Streams_preview_contents');
 						if ($pc.parent().is(":visible")) {
 							$pc.width(0).width($pc[0].remainingWidth());
