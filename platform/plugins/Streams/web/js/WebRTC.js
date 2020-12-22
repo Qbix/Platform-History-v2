@@ -5565,42 +5565,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         var stream = this;
-                        var pipe = new Q.pipe(['relate', 'parentStream', 'text'], function (params) {
-                            var parentStream = params.parentStream[0];
-                            var text = params.text[0];
-
-                            stream.pendingFields.title = stream.fields.title = text.webrtc.streamTitle.interpolate([parentStream.fields.title]);
-                            stream.save();
-
-                            _createRoom(stream.fields.publisherId, stream.fields.name);
-                        });
-
                         stream.relateTo('Streams/webrtc', options.publisherId, options.streamName, function (err) {
                             var fem = Q.firstErrorMessage(err);
                             if (fem) {
                                 return console.warn("Streams.webrtc.start.relate: " + fem);
                             }
 
-                            pipe.fill('relate')();
-                        });
-
-                        // set webrtc stream title same as parent title
-                        Streams.get(options.publisherId, options.streamName, function (err) {
-                            var fem = Q.firstErrorMessage(err);
-                            if (fem) {
-                                return console.warn("Streams.webrtc.start.title: " + fem);
-                            }
-
-                            pipe.fill('parentStream')(this);
-                        });
-
-                        Q.Text.get("Streams/content", function (err, text) {
-                            var msg = Q.firstErrorMessage(err);
-                            if (msg) {
-                                return console.warn(msg);
-                            }
-
-                            pipe.fill('text')(text);
+                            _createRoom(stream.fields.publisherId, stream.fields.name);
                         });
                     });
                 }, {
