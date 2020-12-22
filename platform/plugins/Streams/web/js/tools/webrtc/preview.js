@@ -30,7 +30,12 @@
         },
 
         {
-
+			templates: {
+				view: {
+					name: 'Streams/webrtc/preview/view',
+					fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
+				}
+			}
         },
 
 {
@@ -47,6 +52,39 @@
 
             // retain with stream
             Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
+
+			var fields = Q.extend({}, state.templates[view].fields, f, {
+				alt: 'icon',
+				title: stream.fields.title,
+				inplace: inplace,
+				preamble: Q.getObject('webtc.preview.preamble', text) || 'Meeting'
+			});
+			Q.Template.render(
+				'Streams/webrtc/preview/view',
+				fields,
+				function (err, html) {
+					if (err) return;
+					tool.element.innerHTML = html;
+					Q.activate(tool, function () {
+						// load the icon
+						// TODO: make this use flexbox instead
+						var jq = tool.$('img.Streams_preview_icon');
+						tool.preview.icon(jq[0], p.fill('icon'));
+						var $pc = tool.$('.Streams_preview_contents');
+						if ($pc.parent().is(":visible")) {
+							$pc.width(0).width($pc[0].remainingWidth());
+						}
+						Q.onLayout(tool.element).set(function () {
+							var $pc = tool.$('.Streams_preview_contents');
+							if ($pc.parent().is(':visible')) {
+								$pc.width(0).width($pc[0].remainingWidth());	
+							}
+						}, tool);
+						Q.handle(state.onRender, tool);
+					});
+				},
+				state.templates[tpl]
+			);
 
             setTimeout(function () {
                 $toolElement.tool("Streams/preview", {
@@ -73,5 +111,15 @@
             });
         }
     });
+	
+Q.Template.set('Streams/webrtc/preview/view',
+	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
+	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
+	+ '<div class="Streams_preview_contents {{titleClass}}">'
+	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}}</{{titleTag}}'
+	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+	+ '<div class="Streams_preview_file_size">{{size}}</div>'
+	+ '</div></div>'
+);
 
 })(Q, Q.$, window);

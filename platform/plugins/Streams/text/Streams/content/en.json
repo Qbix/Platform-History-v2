@@ -242,7 +242,10 @@
             "turnOnCamera": "Show video",
             "turnOnAudio": "Unmute audio",
             "turnOnScreenSharing": "Show screen sharing"
-        }
+        },
+		"preview": {
+			"preamble": "Meeting:"
+		}
     },
     "types": {
         "Streams\/invited": {

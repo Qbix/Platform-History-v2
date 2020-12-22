@@ -415,7 +415,9 @@
 .Streams_preview_contents .Q_inplace_tool_static_container {
 	overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap; 
 }
-.Streams_preview .Streams_preview_title { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
+.Streams_preview .Streams_preview_title,
+.Streams_preview .Streams_preview_preamble { margin: 0; padding: 0px; line-height: 24px; font-size: 16px; font-weight: normal; }
+.Streams_preview .Streams_preview_preamble { font-weight: bold; }
 .Streams_preview_tool, .Q_listing .Streams_preview_tool { overflow: visible; }
 .Streams_image_preview_tool,.Streams_album_preview_tool { text-align: center; display: inline-block; }
 .Streams_preview_tool .Streams_preview_icon,
