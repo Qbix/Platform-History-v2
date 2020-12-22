@@ -56,7 +56,6 @@
 			var fields = Q.extend({}, state.templates.view.fields, {
 				alt: 'icon',
 				title: stream.fields.title,
-				inplace: inplace,
 				preamble: Q.getObject('webtc.preview.preamble', text) || 'Meeting'
 			});
 			Q.Template.render(
