@@ -108,7 +108,7 @@ Q.Template.set('Streams/webrtc/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}}</{{titleTag}}'
+	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}}</{{titleTag}}>'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
 	+ '<div class="Streams_preview_file_size">{{size}}</div>'
 	+ '</div></div>'
