@@ -411,7 +411,16 @@ Q.Tool.define("Q/video", function (options) {
 				// update currentPosition array on play
 				//this.on('timeupdate', function() {});
 
-				Q.handle(state.onLoad, tool);
+				// call onLoad when loadedmetadata event occured
+				this.on("loadedmetadata", function() {
+					if (this.loadedmetadata) {
+						return;
+					}
+
+					this.loadedmetadata = true;
+					
+					Q.handle(state.onLoad, tool);
+				});
 			});
 		});
 	},
@@ -452,6 +461,8 @@ Q.Tool.define("Q/video", function (options) {
 					return;
 				}
 
+				clearInterval(durationTimeId);
+
 				Q.each(ads, function (i) {
 					if (typeof this.position === "string" && this.position.includes("%")) {
 						this.position = duration / 100 * parseInt(this.position);
@@ -465,8 +476,12 @@ Q.Tool.define("Q/video", function (options) {
 					});
 				});
 
+				if (typeof player.markers !== "function") {
+					return;
+				}
+
 				player.markers({
-					breakOverlay:{
+					breakOverlay: {
 						display: false
 					},
 					onMarkerReached: function(marker) {
@@ -528,8 +543,6 @@ Q.Tool.define("Q/video", function (options) {
 					markers: markers
 				});
 				player.trigger("loadedmetadata");
-
-				clearInterval(durationTimeId);
 			}, 1000);
 		});
 	},
