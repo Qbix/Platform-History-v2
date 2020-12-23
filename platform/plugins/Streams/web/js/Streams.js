@@ -5276,27 +5276,27 @@ function prepareStream(stream) {
 	if (stream.fields.messageCount) {
 		stream.fields.messageCount = parseInt(stream.fields.messageCount);
 	}
-	if (stream.fields.access) {
+	if ('access' in stream.fields) {
 		stream.access = Q.copy(stream.fields.access);
 		delete stream.fields.access;
 	}
-	if (stream.fields.participant) {
+	if ('participant' in stream.fields) {
 		stream.participant = new Streams.Participant(stream.fields.participant);
 		delete stream.fields.participant;
 	}
-	if (stream.fields.messageTotals) {
+	if ('messageTotals' in stream.fields) {
 		stream.messageTotals = stream.fields.messageTotals;
 		delete stream.fields.messageTotals;
 	}
-	if (stream.fields.relatedToTotals) {
+	if ('relatedToTotals' in stream.fields) {
 		stream.relatedToTotals = stream.fields.relatedToTotals;
 		delete stream.fields.relatedToTotals;
 	}
-	if (stream.fields.relatedFromTotals) {
-		stream.relatedFromTotals = stream.fields.relatedFromTotals;
+	if ('relatedFromTotals' in stream.fields) {
+		stream.relatedFromTotals = stream.fields;
 		delete stream.fields.relatedFromTotals;
 	}
-	if (stream.fields.isRequired) {
+	if ('isRequired' in stream.fields) {
 		stream.isRequired = stream.fields.isRequired;
 		delete stream.fields.isRequired;
 	}
