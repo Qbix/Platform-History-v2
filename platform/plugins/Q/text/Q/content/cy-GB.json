@@ -100,6 +100,23 @@
         "inUnderMinute": "mewn llai na 1 munud"
     },
     "tabs": {
-        "more": "mwy"
+        "more": "mwy",
+        "Menu": "Dewislen"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "Dim ffynhonnell fideo",
+        "SkipAfter": "Neidio ar ôl",
+        "Skip": "Neidio"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "Dim ffynhonnell pdf"
+    },
+    "clip": {
+        "SetClipStart": "Gosod Clip Start",
+        "ClipStart": "Cychwyn Clip",
+        "SetClipEnd": "Gosod Diwedd Clip",
+        "ClipEnd": "Diwedd Clip"
     }
 }

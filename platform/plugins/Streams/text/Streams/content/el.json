@@ -224,7 +224,10 @@
             "fullScreen": "ΠΛΗΡΗΣ ΟΘΟΝΗ"
         },
         "notAllowedToJoinCall": "Δεν έχετε άδεια να συμμετάσχετε σε αυτήν τη ροή.",
-        "streamTitle": "{{1}} ζωντανή κλήση"
+        "streamTitle": "{{1}} ζωντανή κλήση",
+        "preview": {
+            "preamble": "Συνάντηση:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Έγγραφο PDF",
             "description": "Έγγραφο PDF",
             "newItem": "Προσθήκη PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Ερώτηση",
+            "description": "ροή ερωτήσεων"
+        },
+        "Streams\/answer": {
+            "displayType": "Απάντηση",
+            "description": "ροή απαντήσεων"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Δεν υπάρχει πηγή εικόνας",
         "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
         "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+    },
+    "questions": {
+        "Questions": "Ερωτήσεις",
+        "Answers": "Απαντήσεις",
+        "AnswerQuestion": "Απάντησε στην ερώτηση",
+        "SetYourAnswer": "Απαντήστε στην ερώτηση",
+        "NewQuestion": "Νέα ερώτηση",
+        "NewAnswer": "Νέα απάντηση",
+        "AnswerDetails": "Λεπτομέρειες απάντησης",
+        "answerOption": "Επιλογή",
+        "answerOptionExclusive": "Αποκλειστικός",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "δωρεάν απάντηση ...",
+        "SaveQuestion": "Αποθήκευση ερώτησης",
+        "SaveAnswer": "Αποθήκευση απάντησης",
+        "AddAnotherAnswer": "Προσθέστε μια άλλη απάντηση",
+        "ErrorAnswers": "Προσθέστε ακόμη και μία απάντηση",
+        "AlreadyAnswered": "Έχει ήδη απαντηθεί",
+        "TitlePlaceholder": "Πληκτρολογήστε την ερώτησή σας",
+        "ContentPlaceholder": "Βάλτε τυχόν επιπλέον πληροφορίες εδώ για να βοηθήσετε τους χρήστες να απαντήσουν",
+        "ErrorTitle": "Απαιτείται ερώτηση"
+    },
+    "experience": {
+        "NewExperience": "Νέα εμπειρία"
     }
 }

@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "spinacz",
-        "errorNoSource": "Brak źródła wideo"
+        "errorNoSource": "Brak źródła wideo",
+        "SkipAfter": "Przejdź po",
+        "Skip": "Pominąć"
     },
     "pdf": {
         "clip": "spinacz",

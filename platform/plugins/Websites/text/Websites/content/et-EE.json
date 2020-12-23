@@ -34,7 +34,8 @@
             "invalidURL": "vigane URL"
         },
         "FileTooLarge": "Fail on vahemällu salvestamiseks liiga suur. Maksimaalne failisuurus {{size}}",
-        "InvalidPDF": "Fail ei ole kehtiv PDF"
+        "InvalidPDF": "Fail ei ole kehtiv PDF",
+        "StartTypingTitleOrKeywords": "Alustage pealkirja või märksõnade tippimist ..."
     },
     "types": {
         "Websites/article": {

@@ -224,7 +224,10 @@
             "fullScreen": "A schermo intero"
         },
         "notAllowedToJoinCall": "Non sei autorizzato a partecipare a questo stream.",
-        "streamTitle": "{{1}} chiamata in diretta"
+        "streamTitle": "{{1}} chiamata in diretta",
+        "preview": {
+            "preamble": "Incontro:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Documento PDF",
             "description": "Documento PDF",
             "newItem": "Aggiungi PDF"
+        },
+        "Streams/question": {
+            "displayType": "Domanda",
+            "description": "flusso di domande"
+        },
+        "Streams/answer": {
+            "displayType": "Risposta",
+            "description": "rispondi al flusso"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nessuna fonte di immagine",
         "uploadLimit": "Dimensione massima del file: {{size}}",
         "errorFileSize": "Spiacenti, il file è troppo grande.<br> La dimensione massima del file è {{size}}"
+    },
+    "questions": {
+        "Questions": "Domande",
+        "Answers": "Risposte",
+        "AnswerQuestion": "Rispondi alla domanda",
+        "SetYourAnswer": "Per favore rispondi alla domanda",
+        "NewQuestion": "Nuova domanda",
+        "NewAnswer": "Nuova risposta",
+        "AnswerDetails": "Dettagli risposta",
+        "answerOption": "Opzione",
+        "answerOptionExclusive": "Esclusivo",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "risposta libera ...",
+        "SaveQuestion": "Salva domanda",
+        "SaveAnswer": "Salva risposta",
+        "AddAnotherAnswer": "Aggiungi un&#39;altra risposta",
+        "ErrorAnswers": "Per favore aggiungi anche una risposta",
+        "AlreadyAnswered": "Già risposto",
+        "TitlePlaceholder": "Scrivi la tua domanda",
+        "ContentPlaceholder": "Inserisci qui eventuali informazioni aggiuntive per aiutare le persone a rispondere",
+        "ErrorTitle": "Domanda richiesta"
+    },
+    "experience": {
+        "NewExperience": "Nuova esperienza"
     }
 }

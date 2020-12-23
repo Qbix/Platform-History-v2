@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "கிளிப்",
-        "errorNoSource": "வீடியோ ஆதாரம் இல்லை"
+        "errorNoSource": "வீடியோ ஆதாரம் இல்லை",
+        "SkipAfter": "பிறகு தவிர்",
+        "Skip": "தவிர்"
     },
     "pdf": {
         "clip": "கிளிப்",

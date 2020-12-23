@@ -221,7 +221,10 @@
             "fullScreen": "Layar penuh"
         },
         "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan aliran ini.",
-        "streamTitle": "{{1}} panggilan langsung"
+        "streamTitle": "{{1}} panggilan langsung",
+        "preview": {
+            "preamble": "Pertemuan:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -340,6 +343,14 @@
             "displayType": "Dokumen PDF",
             "description": "Dokumen PDF",
             "newItem": "Tambahkan PDF"
+        },
+        "Streams/question": {
+            "displayType": "Pertanyaan",
+            "description": "aliran pertanyaan"
+        },
+        "Streams/answer": {
+            "displayType": "Menjawab",
+            "description": "aliran jawaban"
         }
     },
     "messages": {
@@ -435,5 +446,29 @@
         "errorNoSource": "Tidak ada sumber gambar",
         "uploadLimit": "Ukuran file maks: {{size}}",
         "errorFileSize": "Maaf, tapi file terlalu besar.<br> Ukuran file maks adalah {{size}}"
+    },
+    "questions": {
+        "Questions": "Pertanyaan",
+        "Answers": "Jawaban",
+        "AnswerQuestion": "Jawab pertanyaan",
+        "SetYourAnswer": "Tolong jawab pertanyaannya",
+        "NewQuestion": "Pertanyaan Baru",
+        "NewAnswer": "Jawaban Baru",
+        "AnswerDetails": "Rincian Jawaban",
+        "answerOption": "Pilihan",
+        "answerOptionExclusive": "Eksklusif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "jawaban gratis ...",
+        "SaveQuestion": "Simpan Pertanyaan",
+        "SaveAnswer": "Simpan Jawaban",
+        "AddAnotherAnswer": "Tambahkan jawaban lain",
+        "ErrorAnswers": "Harap tambahkan bahkan satu jawaban",
+        "AlreadyAnswered": "Sudah dijawab",
+        "TitlePlaceholder": "Ketikkan pertanyaan Anda",
+        "ContentPlaceholder": "Letakkan informasi tambahan di sini untuk membantu orang menjawab",
+        "ErrorTitle": "Pertanyaan diperlukan"
+    },
+    "experience": {
+        "NewExperience": "Pengalaman baru"
     }
 }

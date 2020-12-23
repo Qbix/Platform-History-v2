@@ -34,7 +34,8 @@
             "invalidURL": "URL annilys"
         },
         "FileTooLarge": "Ffeil yn rhy fawr ar gyfer caching. Maint ffeil mwyaf {{size}}",
-        "InvalidPDF": "Nid yw&#39;r ffeil yn PDF dilys"
+        "InvalidPDF": "Nid yw&#39;r ffeil yn PDF dilys",
+        "StartTypingTitleOrKeywords": "Dechreuwch deipio teitl neu eiriau allweddol ..."
     },
     "types": {
         "Websites/article": {

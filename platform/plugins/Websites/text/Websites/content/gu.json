@@ -34,7 +34,8 @@
             "invalidURL": "અમાન્ય URL"
         },
         "FileTooLarge": "કેશીંગ માટે ફાઇલ ખૂબ મોટી છે. મહત્તમ ફાઇલ કદ {{999}",
-        "InvalidPDF": "ફાઇલ માન્ય પીડીએફ નથી"
+        "InvalidPDF": "ફાઇલ માન્ય પીડીએફ નથી",
+        "StartTypingTitleOrKeywords": "શીર્ષક અથવા કીવર્ડ્સ લખવાનું પ્રારંભ કરો ..."
     },
     "types": {
         "Websites\/article": {

@@ -224,7 +224,10 @@
             "fullScreen": "Fuld skærm"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
-        "streamTitle": "{{1}} liveopkald"
+        "streamTitle": "{{1}} liveopkald",
+        "preview": {
+            "preamble": "Møde:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-dokument",
             "description": "PDF-dokument",
             "newItem": "Tilføj PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Spørgsmål",
+            "description": "spørgsmål stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Svar",
+            "description": "svar stream"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ingen billedkilde",
         "uploadLimit": "Maks. Filstørrelse: {{size}}",
         "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
+    },
+    "questions": {
+        "Questions": "Spørgsmål",
+        "Answers": "Svar",
+        "AnswerQuestion": "Besvar spørgsmål",
+        "SetYourAnswer": "Besvar spørgsmålet",
+        "NewQuestion": "Nyt spørgsmål",
+        "NewAnswer": "Nyt svar",
+        "AnswerDetails": "Svardetaljer",
+        "answerOption": "Mulighed",
+        "answerOptionExclusive": "Eksklusiv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "gratis svar ...",
+        "SaveQuestion": "Gem spørgsmål",
+        "SaveAnswer": "Gem svar",
+        "AddAnotherAnswer": "Tilføj et andet svar",
+        "ErrorAnswers": "Tilføj venligst et svar",
+        "AlreadyAnswered": "Allerede besvaret",
+        "TitlePlaceholder": "Skriv dit spørgsmål",
+        "ContentPlaceholder": "Anbring yderligere oplysninger her for at hjælpe folk med at svare",
+        "ErrorTitle": "Spørgsmål krævet"
+    },
+    "experience": {
+        "NewExperience": "Ny oplevelse"
     }
 }

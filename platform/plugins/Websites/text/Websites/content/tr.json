@@ -34,7 +34,8 @@
             "invalidURL": "Geçersiz URL"
         },
         "FileTooLarge": "Dosya önbelleğe alınamayacak kadar büyük. Maksimum dosya boyutu {{size}}",
-        "InvalidPDF": "Dosya geçerli bir PDF değil"
+        "InvalidPDF": "Dosya geçerli bir PDF değil",
+        "StartTypingTitleOrKeywords": "Başlığı veya anahtar kelimeleri yazmaya başlayın ..."
     },
     "types": {
         "Websites\/article": {

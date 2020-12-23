@@ -34,7 +34,8 @@
             "invalidURL": "URL baliogabea"
         },
         "FileTooLarge": "Fitxategia handiegia da cachean gordetzeko. Gehienezko fitxategiaren tamaina {{size}}",
-        "InvalidPDF": "Fitxategiak ez du baliozko PDFa"
+        "InvalidPDF": "Fitxategiak ez du baliozko PDFa",
+        "StartTypingTitleOrKeywords": "Hasi izenburua edo hitz gakoak idazten ..."
     },
     "types": {
         "Websites/article": {

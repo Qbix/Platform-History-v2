@@ -34,7 +34,8 @@
             "invalidURL": "无效的网址"
         },
         "FileTooLarge": "文件太大，无法缓存。最大文件大小{{size}}",
-        "InvalidPDF": "文件不是有效的PDF"
+        "InvalidPDF": "文件不是有效的PDF",
+        "StartTypingTitleOrKeywords": "开始输入标题或关键字..."
     },
     "types": {
         "Websites\/article": {

@@ -221,7 +221,10 @@
             "fullScreen": "Buong Screen"
         },
         "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa stream na ito.",
-        "streamTitle": "Live na tawag ng {{1}}"
+        "streamTitle": "Live na tawag ng {{1}}",
+        "preview": {
+            "preamble": "Pagpupulong:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -340,6 +343,14 @@
             "displayType": "PDF na dokumento",
             "description": "PDF na dokumento",
             "newItem": "Magdagdag ng PDF"
+        },
+        "Streams/question": {
+            "displayType": "Tanong",
+            "description": "tanong na stream"
+        },
+        "Streams/answer": {
+            "displayType": "Sagot",
+            "description": "sagot stream"
         }
     },
     "messages": {
@@ -435,5 +446,29 @@
         "errorNoSource": "Walang pinagmulan ng imahe",
         "uploadLimit": "Max na laki ng file: {{size}}",
         "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+    },
+    "questions": {
+        "Questions": "Mga Katanungan",
+        "Answers": "Mga sagot",
+        "AnswerQuestion": "Sagot tanong",
+        "SetYourAnswer": "Mangyaring sagutin ang tanong",
+        "NewQuestion": "Bagong Tanong",
+        "NewAnswer": "Bagong Sagot",
+        "AnswerDetails": "Mga Detalye ng Sagot",
+        "answerOption": "Pagpipilian",
+        "answerOptionExclusive": "Eksklusibo",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "libreng sagot ...",
+        "SaveQuestion": "I-save ang Tanong",
+        "SaveAnswer": "I-save ang Sagot",
+        "AddAnotherAnswer": "Magdagdag ng isa pang sagot",
+        "ErrorAnswers": "Mangyaring magdagdag ng kahit isang sagot",
+        "AlreadyAnswered": "Sumagot na",
+        "TitlePlaceholder": "I-type ang iyong katanungan",
+        "ContentPlaceholder": "Maglagay ng anumang karagdagang impormasyon dito upang matulungan ang mga tao na sagutin",
+        "ErrorTitle": "Kailangan ng tanong"
+    },
+    "experience": {
+        "NewExperience": "Bagong karanasan"
     }
 }

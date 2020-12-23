@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Tidak ada sumber video"
+        "errorNoSource": "Tidak ada sumber video",
+        "SkipAfter": "Lewati setelah",
+        "Skip": "Melewatkan"
     },
     "pdf": {
         "clip": "klip",

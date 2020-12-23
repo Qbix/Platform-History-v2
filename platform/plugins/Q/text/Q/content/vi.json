@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "kẹp",
-        "errorNoSource": "Không có nguồn video"
+        "errorNoSource": "Không có nguồn video",
+        "SkipAfter": "Bỏ qua sau",
+        "Skip": "Nhảy"
     },
     "pdf": {
         "clip": "kẹp",

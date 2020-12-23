@@ -224,7 +224,10 @@
             "fullScreen": "Skrin penuh"
         },
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
-        "streamTitle": "{{1}} panggilan langsung"
+        "streamTitle": "{{1}} panggilan langsung",
+        "preview": {
+            "preamble": "Mesyuarat:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dokumen PDF",
             "description": "Dokumen PDF",
             "newItem": "Tambah PDF"
+        },
+        "Streams/question": {
+            "displayType": "Soalan",
+            "description": "aliran soalan"
+        },
+        "Streams/answer": {
+            "displayType": "Jawapan",
+            "description": "aliran jawapan"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Tiada sumber gambar",
         "uploadLimit": "Saiz fail maksimum: {{size}}",
         "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+    },
+    "questions": {
+        "Questions": "Soalan",
+        "Answers": "Jawapan",
+        "AnswerQuestion": "Jawab soalan",
+        "SetYourAnswer": "Sila jawab soalannya",
+        "NewQuestion": "Soalan Baru",
+        "NewAnswer": "Jawapan Baru",
+        "AnswerDetails": "Perincian Jawapan",
+        "answerOption": "Pilihan",
+        "answerOptionExclusive": "Eksklusif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "jawapan percuma ...",
+        "SaveQuestion": "Simpan Soalan",
+        "SaveAnswer": "Simpan Jawapan",
+        "AddAnotherAnswer": "Tambahkan jawapan lain",
+        "ErrorAnswers": "Sila tambah satu jawapan",
+        "AlreadyAnswered": "Sudah dijawab",
+        "TitlePlaceholder": "Taipkan soalan anda",
+        "ContentPlaceholder": "Masukkan maklumat tambahan di sini untuk membantu orang menjawab",
+        "ErrorTitle": "Soalan diperlukan"
+    },
+    "experience": {
+        "NewExperience": "Pengalaman baru"
     }
 }

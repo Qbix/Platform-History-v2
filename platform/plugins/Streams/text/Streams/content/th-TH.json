@@ -224,7 +224,10 @@
             "fullScreen": "เต็มจอ"
         },
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
-        "streamTitle": "{{1}} การโทรสด"
+        "streamTitle": "{{1}} การโทรสด",
+        "preview": {
+            "preamble": "การประชุม:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "เอกสาร PDF",
             "description": "เอกสาร PDF",
             "newItem": "เพิ่ม PDF"
+        },
+        "Streams/question": {
+            "displayType": "คำถาม",
+            "description": "กระแสคำถาม"
+        },
+        "Streams/answer": {
+            "displayType": "ตอบ",
+            "description": "ตอบสตรีม"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ไม่มีแหล่งที่มาของรูปภาพ",
         "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
         "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+    },
+    "questions": {
+        "Questions": "คำถาม",
+        "Answers": "คำตอบ",
+        "AnswerQuestion": "ตอบคำถาม",
+        "SetYourAnswer": "กรุณาตอบคำถาม",
+        "NewQuestion": "คำถามใหม่",
+        "NewAnswer": "คำตอบใหม่",
+        "AnswerDetails": "รายละเอียดคำตอบ",
+        "answerOption": "ตัวเลือก",
+        "answerOptionExclusive": "พิเศษ",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ตอบฟรี ...",
+        "SaveQuestion": "บันทึกคำถาม",
+        "SaveAnswer": "บันทึกคำตอบ",
+        "AddAnotherAnswer": "เพิ่มคำตอบอื่น",
+        "ErrorAnswers": "โปรดเพิ่มแม้แต่คำตอบเดียว",
+        "AlreadyAnswered": "ตอบไปแล้ว",
+        "TitlePlaceholder": "พิมพ์คำถามของคุณ",
+        "ContentPlaceholder": "ใส่ข้อมูลเพิ่มเติมที่นี่เพื่อช่วยคนตอบ",
+        "ErrorTitle": "ต้องมีคำถาม"
+    },
+    "experience": {
+        "NewExperience": "ประสบการณ์ใหม่"
     }
 }

@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klipp",
-        "errorNoSource": "L-ebda sors tal-vidjo"
+        "errorNoSource": "L-ebda sors tal-vidjo",
+        "SkipAfter": "Aqbeż wara",
+        "Skip": "Aqbeż"
     },
     "pdf": {
         "clip": "klipp",

@@ -100,6 +100,23 @@
         "inUnderMinute": "in minder dan 1 minuut"
     },
     "tabs": {
-        "more": "meer"
+        "more": "meer",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "klem",
+        "errorNoSource": "Geen videobron",
+        "SkipAfter": "Overslaan na",
+        "Skip": "Overspringen"
+    },
+    "pdf": {
+        "clip": "klem",
+        "errorNoSource": "Geen pdf-bron"
+    },
+    "clip": {
+        "SetClipStart": "Stel Clip Start in",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Clip-einde instellen",
+        "ClipEnd": "Clip einde"
     }
 }

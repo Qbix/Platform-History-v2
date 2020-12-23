@@ -224,7 +224,10 @@
             "fullScreen": "Plein écran"
         },
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
-        "streamTitle": "{{1}} appel en direct"
+        "streamTitle": "{{1}} appel en direct",
+        "preview": {
+            "preamble": "Réunion:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Document PDF",
             "description": "Document PDF",
             "newItem": "Ajouter un PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "flux de questions"
+        },
+        "Streams\/answer": {
+            "displayType": "Répondre",
+            "description": "flux de réponse"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Aucune source d&#39;image",
         "uploadLimit": "Taille maximale du fichier: {{size}}",
         "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+    },
+    "questions": {
+        "Questions": "Des questions",
+        "Answers": "Réponses",
+        "AnswerQuestion": "Répondez à la question",
+        "SetYourAnswer": "Veuillez répondre à la question",
+        "NewQuestion": "Nouvelle question",
+        "NewAnswer": "Nouvelle réponse",
+        "AnswerDetails": "Détails de la réponse",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "réponse gratuite ...",
+        "SaveQuestion": "Enregistrer la question",
+        "SaveAnswer": "Enregistrer la réponse",
+        "AddAnotherAnswer": "Ajouter une autre réponse",
+        "ErrorAnswers": "Veuillez ajouter ne serait-ce qu&#39;une seule réponse",
+        "AlreadyAnswered": "Déjà répondu",
+        "TitlePlaceholder": "Tapez votre question",
+        "ContentPlaceholder": "Mettez ici toute information supplémentaire pour aider les gens à répondre",
+        "ErrorTitle": "Question requise"
+    },
+    "experience": {
+        "NewExperience": "Nouvelle expérience"
     }
 }

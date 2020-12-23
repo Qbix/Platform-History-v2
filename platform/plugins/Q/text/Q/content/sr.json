@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "цлип",
-        "errorNoSource": "Нема видео извора"
+        "errorNoSource": "Нема видео извора",
+        "SkipAfter": "Прескочи после",
+        "Skip": "Прескочи"
     },
     "pdf": {
         "clip": "цлип",

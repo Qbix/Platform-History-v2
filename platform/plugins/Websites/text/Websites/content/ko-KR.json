@@ -34,7 +34,8 @@
             "invalidURL": "잘못된 URL"
         },
         "FileTooLarge": "캐싱하기에 파일이 너무 큽니다. 최대 파일 크기 {{size}}",
-        "InvalidPDF": "파일이 유효한 PDF가 아닙니다."
+        "InvalidPDF": "파일이 유효한 PDF가 아닙니다.",
+        "StartTypingTitleOrKeywords": "제목 또는 키워드 입력 시작 ..."
     },
     "types": {
         "Websites/article": {

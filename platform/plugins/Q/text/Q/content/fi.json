@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "leike",
-        "errorNoSource": "Ei videolähdettä"
+        "errorNoSource": "Ei videolähdettä",
+        "SkipAfter": "Ohita jälkeen",
+        "Skip": "Ohita"
     },
     "pdf": {
         "clip": "leike",

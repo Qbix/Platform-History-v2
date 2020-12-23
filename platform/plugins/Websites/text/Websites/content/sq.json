@@ -34,7 +34,8 @@
             "invalidURL": "URL e pavlefshme"
         },
         "FileTooLarge": "Skedari është shumë i madh për caching. Madhësia maksimale e skedarit {{size}}",
-        "InvalidPDF": "Skedari nuk është një PDF i vlefshëm"
+        "InvalidPDF": "Skedari nuk është një PDF i vlefshëm",
+        "StartTypingTitleOrKeywords": "Filloni të shtypni titull ose fjalë kyçe ..."
     },
     "types": {
         "Websites\/article": {

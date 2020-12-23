@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "acortar",
-        "errorNoSource": "Sin fuente de video"
+        "errorNoSource": "Sin fuente de video",
+        "SkipAfter": "Saltar después",
+        "Skip": "Omitir"
     },
     "pdf": {
         "clip": "acortar",

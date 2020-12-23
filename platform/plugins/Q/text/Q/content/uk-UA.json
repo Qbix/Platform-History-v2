@@ -100,6 +100,23 @@
         "inUnderMinute": "менше 1 хвилини"
     },
     "tabs": {
-        "more": "більше"
+        "more": "більше",
+        "Menu": "Меню"
+    },
+    "video": {
+        "clip": "кліп",
+        "errorNoSource": "Немає джерела відео",
+        "SkipAfter": "Пропустити після",
+        "Skip": "Пропустити"
+    },
+    "pdf": {
+        "clip": "кліп",
+        "errorNoSource": "Немає джерела PDF"
+    },
+    "clip": {
+        "SetClipStart": "Встановити запуск кліпу",
+        "ClipStart": "Початок кліпу",
+        "SetClipEnd": "Встановити кінець кліпу",
+        "ClipEnd": "Кінець кліпу"
     }
 }

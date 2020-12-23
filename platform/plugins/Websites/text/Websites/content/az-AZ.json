@@ -34,7 +34,8 @@
             "invalidURL": "Yanlış URL"
         },
         "FileTooLarge": "Önbellek üçün çox böyük fayl. Maksimum fayl ölçüsü {{size}}",
-        "InvalidPDF": "Fayl düzgün PDF deyil"
+        "InvalidPDF": "Fayl düzgün PDF deyil",
+        "StartTypingTitleOrKeywords": "Başlıq və ya açar sözlər yazmağa başlayın ..."
     },
     "types": {
         "Websites/article": {

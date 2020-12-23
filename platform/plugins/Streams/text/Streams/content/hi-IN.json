@@ -224,7 +224,10 @@
             "fullScreen": "पूर्ण स्क्रीन"
         },
         "notAllowedToJoinCall": "आपको इस स्ट्रीम में शामिल होने की अनुमति नहीं है।",
-        "streamTitle": "{{1}} लाइव कॉल"
+        "streamTitle": "{{1}} लाइव कॉल",
+        "preview": {
+            "preamble": "मुलाकात:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "पीडीएफ दस्तावेज़",
             "description": "पीडीएफ दस्तावेज़",
             "newItem": "पीडीएफ जोड़ें"
+        },
+        "Streams/question": {
+            "displayType": "सवाल",
+            "description": "प्रश्न धारा"
+        },
+        "Streams/answer": {
+            "displayType": "उत्तर",
+            "description": "उत्तर धारा"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "कोई छवि स्रोत नहीं",
         "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
         "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
+    },
+    "questions": {
+        "Questions": "प्रशन",
+        "Answers": "जवाब",
+        "AnswerQuestion": "जवाब सवाल",
+        "SetYourAnswer": "कृपया इस सवाल का जवाब दें",
+        "NewQuestion": "नया प्रश्न",
+        "NewAnswer": "नया उत्तर",
+        "AnswerDetails": "उत्तर विवरण",
+        "answerOption": "विकल्प",
+        "answerOptionExclusive": "EXCLUSIVE",
+        "answerTextarea": "पाठ क्षेत्र",
+        "FreeAnswer": "मुफ्त उत्तर ...",
+        "SaveQuestion": "प्रश्न सहेजें",
+        "SaveAnswer": "उत्तर सहेजें",
+        "AddAnotherAnswer": "एक और उत्तर जोड़ें",
+        "ErrorAnswers": "कृपया एक उत्तर भी जोड़ें",
+        "AlreadyAnswered": "पहले से उत्तर दिया हुआ",
+        "TitlePlaceholder": "अपना प्रश्न लिखें",
+        "ContentPlaceholder": "लोगों को जवाब देने में मदद के लिए यहां कोई अतिरिक्त जानकारी रखें",
+        "ErrorTitle": "प्रश्न आवश्यक है"
+    },
+    "experience": {
+        "NewExperience": "नया अनुभव"
     }
 }

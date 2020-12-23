@@ -224,7 +224,10 @@
             "fullScreen": "Vollbildschirm"
         },
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, diesem Stream beizutreten.",
-        "streamTitle": "{{1}} Live-Anruf"
+        "streamTitle": "{{1}} Live-Anruf",
+        "preview": {
+            "preamble": "Treffen:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-Dokument",
             "description": "PDF-Dokument",
             "newItem": "PDF hinzufügen"
+        },
+        "Streams\/question": {
+            "displayType": "Frage",
+            "description": "Fragenstrom"
+        },
+        "Streams\/answer": {
+            "displayType": "Antworten",
+            "description": "Antwortstrom"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Keine Bildquelle",
         "uploadLimit": "Maximale Dateigröße: {{size}}",
         "errorFileSize": "Entschuldigung, aber Datei zu groß.<br> Die maximale Dateigröße beträgt {{size}}"
+    },
+    "questions": {
+        "Questions": "Fragen",
+        "Answers": "Antworten",
+        "AnswerQuestion": "Frage beantworten",
+        "SetYourAnswer": "Bitte beantworten Sie die Frage",
+        "NewQuestion": "Neue Frage",
+        "NewAnswer": "Neue Antwort",
+        "AnswerDetails": "Antwortdetails",
+        "answerOption": "Möglichkeit",
+        "answerOptionExclusive": "Exklusiv",
+        "answerTextarea": "Textbereich",
+        "FreeAnswer": "kostenlose Antwort ...",
+        "SaveQuestion": "Frage speichern",
+        "SaveAnswer": "Antwort speichern",
+        "AddAnotherAnswer": "Fügen Sie eine weitere Antwort hinzu",
+        "ErrorAnswers": "Bitte fügen Sie noch eine Antwort hinzu",
+        "AlreadyAnswered": "Schon beantwortet",
+        "TitlePlaceholder": "Geben Sie Ihre Frage ein",
+        "ContentPlaceholder": "Geben Sie hier zusätzliche Informationen ein, um die Beantwortung zu erleichtern",
+        "ErrorTitle": "Frage erforderlich"
+    },
+    "experience": {
+        "NewExperience": "Neue Erfahrung"
     }
 }

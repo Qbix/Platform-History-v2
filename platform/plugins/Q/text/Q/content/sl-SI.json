@@ -100,6 +100,23 @@
         "inUnderMinute": "v manj kot 1 minuti"
     },
     "tabs": {
-        "more": "več"
+        "more": "več",
+        "Menu": "Meni"
+    },
+    "video": {
+        "clip": "posnetek",
+        "errorNoSource": "Ni video vira",
+        "SkipAfter": "Preskoči po",
+        "Skip": "Preskoči"
+    },
+    "pdf": {
+        "clip": "posnetek",
+        "errorNoSource": "Ni pdf vira"
+    },
+    "clip": {
+        "SetClipStart": "Nastavite Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Nastavite konec posnetka",
+        "ClipEnd": "Konec posnetka"
     }
 }

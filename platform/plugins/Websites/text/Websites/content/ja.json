@@ -34,7 +34,8 @@
             "invalidURL": "無効なURL"
         },
         "FileTooLarge": "ファイルが大きすぎてキャッシュできません。最大ファイルサイズ{{size}}",
-        "InvalidPDF": "ファイルは有効なPDFではありません"
+        "InvalidPDF": "ファイルは有効なPDFではありません",
+        "StartTypingTitleOrKeywords": "タイトルまたはキーワードの入力を開始します..."
     },
     "types": {
         "Websites\/article": {

@@ -34,7 +34,8 @@
             "invalidURL": "невалиден адрес"
         },
         "FileTooLarge": "Файлът е твърде голям за кеширане. Максимален размер на файла {{size}}",
-        "InvalidPDF": "Файлът не е валиден PDF файл"
+        "InvalidPDF": "Файлът не е валиден PDF файл",
+        "StartTypingTitleOrKeywords": "Започнете да пишете заглавие или ключови думи ..."
     },
     "types": {
         "Websites\/article": {

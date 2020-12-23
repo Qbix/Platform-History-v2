@@ -224,7 +224,10 @@
             "fullScreen": "全屏"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
-        "streamTitle": "{{1}}现场通话"
+        "streamTitle": "{{1}}现场通话",
+        "preview": {
+            "preamble": "会议："
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF文件",
             "description": "PDF文件",
             "newItem": "添加PDF"
+        },
+        "Streams/question": {
+            "displayType": "题",
+            "description": "问题流"
+        },
+        "Streams/answer": {
+            "displayType": "回答",
+            "description": "答案流"
         }
     },
     "messages": {
@@ -439,5 +450,29 @@
         "errorNoSource": "没有图像源",
         "uploadLimit": "档案大小上限：{{size}}",
         "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+    },
+    "questions": {
+        "Questions": "问题",
+        "Answers": "答案",
+        "AnswerQuestion": "回答问题",
+        "SetYourAnswer": "请回答问题",
+        "NewQuestion": "新问题",
+        "NewAnswer": "新答案",
+        "AnswerDetails": "回答细节",
+        "answerOption": "选项",
+        "answerOptionExclusive": "独家",
+        "answerTextarea": "文字区",
+        "FreeAnswer": "免费答案...",
+        "SaveQuestion": "保存问题",
+        "SaveAnswer": "保存答案",
+        "AddAnotherAnswer": "添加其他答案",
+        "ErrorAnswers": "请添加一个答案",
+        "AlreadyAnswered": "已经回答",
+        "TitlePlaceholder": "输入您的问题",
+        "ContentPlaceholder": "在此处放置任何其他信息以帮助人们回答",
+        "ErrorTitle": "需要提问"
+    },
+    "experience": {
+        "NewExperience": "新体验"
     }
 }

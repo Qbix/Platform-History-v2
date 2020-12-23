@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klipa",
-        "errorNoSource": "Ez dago bideo iturririk"
+        "errorNoSource": "Ez dago bideo iturririk",
+        "SkipAfter": "Saltatu ondoren",
+        "Skip": "Saltatu"
     },
     "pdf": {
         "clip": "klipa",

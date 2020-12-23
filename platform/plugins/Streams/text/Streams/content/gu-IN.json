@@ -224,7 +224,10 @@
             "fullScreen": "સંપૂર્ણ સ્ક્રીન"
         },
         "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
-        "streamTitle": "} 9 999}} લાઇવ ક callલ"
+        "streamTitle": "} 9 999}} લાઇવ ક callલ",
+        "preview": {
+            "preamble": "સભા:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "પીડીએફ દસ્તાવેજ",
             "description": "પીડીએફ દસ્તાવેજ",
             "newItem": "પીડીએફ ઉમેરો"
+        },
+        "Streams/question": {
+            "displayType": "પ્રશ્ન",
+            "description": "પ્રશ્ન પ્રવાહ"
+        },
+        "Streams/answer": {
+            "displayType": "જવાબ",
+            "description": "જવાબ પ્રવાહ"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "કોઈ છબી સ્રોત નથી",
         "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
         "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
+    },
+    "questions": {
+        "Questions": "પ્રશ્નો",
+        "Answers": "જવાબો",
+        "AnswerQuestion": "જવાબ પ્રશ્ન",
+        "SetYourAnswer": "કૃપા કરીને સવાલનો જવાબ આપો",
+        "NewQuestion": "નવો પ્રશ્ન",
+        "NewAnswer": "નવો જવાબ",
+        "AnswerDetails": "જવાબ વિગતો",
+        "answerOption": "વિકલ્પ",
+        "answerOptionExclusive": "વિશિષ્ટ",
+        "answerTextarea": "ટેક્ટેરિયા",
+        "FreeAnswer": "મફત જવાબ ...",
+        "SaveQuestion": "પ્રશ્ન સાચવો",
+        "SaveAnswer": "જવાબ સાચવો",
+        "AddAnotherAnswer": "બીજો જવાબ ઉમેરો",
+        "ErrorAnswers": "કૃપા કરી એક જવાબ પણ ઉમેરો",
+        "AlreadyAnswered": "પહેલેથી જ જવાબ આપ્યો છે",
+        "TitlePlaceholder": "તમારો પ્રશ્ન લખો",
+        "ContentPlaceholder": "લોકોને જવાબ આપવા માટે સહાય માટે અહીં કોઈ વધારાની માહિતી મૂકો",
+        "ErrorTitle": "પ્રશ્ન જરૂરી છે"
+    },
+    "experience": {
+        "NewExperience": "નવો અનુભવ"
     }
 }

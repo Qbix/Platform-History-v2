@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "مقطع",
-        "errorNoSource": "لا يوجد مصدر فيديو"
+        "errorNoSource": "لا يوجد مصدر فيديو",
+        "SkipAfter": "تخطي بعد",
+        "Skip": "تخطى"
     },
     "pdf": {
         "clip": "مقطع",

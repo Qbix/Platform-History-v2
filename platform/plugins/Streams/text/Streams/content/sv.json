@@ -224,7 +224,10 @@
             "fullScreen": "Fullskärm"
         },
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
-        "streamTitle": "{{1}} direktuppringning"
+        "streamTitle": "{{1}} direktuppringning",
+        "preview": {
+            "preamble": "Möte:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-dokument",
             "description": "PDF-dokument",
             "newItem": "Lägg till PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Fråga",
+            "description": "frågeström"
+        },
+        "Streams\/answer": {
+            "displayType": "Svar",
+            "description": "svarström"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ingen bildkälla",
         "uploadLimit": "Max filstorlek: {{size}}",
         "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+    },
+    "questions": {
+        "Questions": "Frågor",
+        "Answers": "Svar",
+        "AnswerQuestion": "Svar fråga",
+        "SetYourAnswer": "Vänligen svara på frågan",
+        "NewQuestion": "Ny fråga",
+        "NewAnswer": "Nytt svar",
+        "AnswerDetails": "Svarsdetaljer",
+        "answerOption": "Alternativ",
+        "answerOptionExclusive": "Exklusiv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "gratis svar ...",
+        "SaveQuestion": "Spara fråga",
+        "SaveAnswer": "Spara svar",
+        "AddAnotherAnswer": "Lägg till ett annat svar",
+        "ErrorAnswers": "Lägg till till och med ett svar",
+        "AlreadyAnswered": "Har redan svarat",
+        "TitlePlaceholder": "Skriv din fråga",
+        "ContentPlaceholder": "Lägg ytterligare information här för att hjälpa människor att svara",
+        "ErrorTitle": "Fråga krävs"
+    },
+    "experience": {
+        "NewExperience": "Ny upplevelse"
     }
 }

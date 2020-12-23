@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klipas",
-        "errorNoSource": "Nėra vaizdo šaltinio"
+        "errorNoSource": "Nėra vaizdo šaltinio",
+        "SkipAfter": "Praleisti po",
+        "Skip": "Praleisti"
     },
     "pdf": {
         "clip": "klipas",

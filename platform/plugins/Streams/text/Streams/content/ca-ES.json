@@ -224,7 +224,10 @@
             "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
-        "streamTitle": "{{1}} trucada en directe"
+        "streamTitle": "{{1}} trucada en directe",
+        "preview": {
+            "preamble": "Reunió:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Document PDF",
             "description": "Document PDF",
             "newItem": "Afegeix PDF"
+        },
+        "Streams/question": {
+            "displayType": "Pregunta",
+            "description": "flux de preguntes"
+        },
+        "Streams/answer": {
+            "displayType": "Resposta",
+            "description": "corrent de respostes"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "No hi ha cap font d’imatge",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
         "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+    },
+    "questions": {
+        "Questions": "Preguntes",
+        "Answers": "Respostes",
+        "AnswerQuestion": "Respondre pregunta",
+        "SetYourAnswer": "Responeu la pregunta",
+        "NewQuestion": "Nova pregunta",
+        "NewAnswer": "Nova resposta",
+        "AnswerDetails": "Detalls de la resposta",
+        "answerOption": "Opció",
+        "answerOptionExclusive": "Exclusiu",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "resposta gratuïta ...",
+        "SaveQuestion": "Desa la pregunta",
+        "SaveAnswer": "Desa la resposta",
+        "AddAnotherAnswer": "Afegiu una altra resposta",
+        "ErrorAnswers": "Afegiu fins i tot una resposta",
+        "AlreadyAnswered": "Ja contestat",
+        "TitlePlaceholder": "Escriviu la vostra pregunta",
+        "ContentPlaceholder": "Poseu informació addicional aquí per ajudar la gent a respondre",
+        "ErrorTitle": "Pregunta obligatòria"
+    },
+    "experience": {
+        "NewExperience": "Nova experiència"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Scáileán iomlán"
         },
         "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
-        "streamTitle": "{{1}} glao beo"
+        "streamTitle": "{{1}} glao beo",
+        "preview": {
+            "preamble": "Cruinniú:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Doiciméad PDF",
             "description": "Doiciméad PDF",
             "newItem": "Cuir PDF leis"
+        },
+        "Streams\/question": {
+            "displayType": "Ceist",
+            "description": "sruth ceisteanna"
+        },
+        "Streams\/answer": {
+            "displayType": "Freagra",
+            "description": "sruth freagraí"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Gan foinse íomhá",
         "uploadLimit": "Uasmhéid comhaid: {{size}}",
         "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+    },
+    "questions": {
+        "Questions": "Ceisteanna",
+        "Answers": "Freagraí",
+        "AnswerQuestion": "Freagair Ceist",
+        "SetYourAnswer": "Freagair an cheist le do thoil",
+        "NewQuestion": "Ceist Nua",
+        "NewAnswer": "Freagra Nua",
+        "AnswerDetails": "Sonraí Freagra",
+        "answerOption": "Rogha",
+        "answerOptionExclusive": "Eisiach",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "freagra saor in aisce ...",
+        "SaveQuestion": "Sábháil Ceist",
+        "SaveAnswer": "Sábháil Freagra",
+        "AddAnotherAnswer": "Cuir freagra eile leis",
+        "ErrorAnswers": "Cuir fiú freagra amháin le do thoil",
+        "AlreadyAnswered": "Freagraíodh cheana",
+        "TitlePlaceholder": "Clóscríobh do cheist",
+        "ContentPlaceholder": "Cuir aon fhaisnéis bhreise anseo chun cabhrú le daoine freagra a thabhairt",
+        "ErrorTitle": "Ceist ag teastáil"
+    },
+    "experience": {
+        "NewExperience": "Taithí Nua"
     }
 }

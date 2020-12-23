@@ -34,7 +34,8 @@
             "invalidURL": "URL no vàlid"
         },
         "FileTooLarge": "El fitxer és massa gran per emmagatzemar-lo a la memòria cau. Mida màxima del fitxer {{size}}",
-        "InvalidPDF": "El fitxer no és un PDF vàlid"
+        "InvalidPDF": "El fitxer no és un PDF vàlid",
+        "StartTypingTitleOrKeywords": "Comenceu a escriure el títol o les paraules clau ..."
     },
     "types": {
         "Websites/article": {

@@ -34,7 +34,8 @@
             "invalidURL": "ಅಮಾನ್ಯ URL"
         },
         "FileTooLarge": "ಹಿಡಿದಿಡಲು ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ. ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{size}}",
-        "InvalidPDF": "ಫೈಲ್ ಮಾನ್ಯ ಪಿಡಿಎಫ್ ಅಲ್ಲ"
+        "InvalidPDF": "ಫೈಲ್ ಮಾನ್ಯ ಪಿಡಿಎಫ್ ಅಲ್ಲ",
+        "StartTypingTitleOrKeywords": "ಶೀರ್ಷಿಕೆ ಅಥವಾ ಕೀವರ್ಡ್ಗಳನ್ನು ಟೈಪ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ ..."
     },
     "types": {
         "Websites/article": {

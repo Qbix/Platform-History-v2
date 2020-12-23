@@ -224,7 +224,10 @@
             "fullScreen": "Toàn màn hình"
         },
         "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
-        "streamTitle": "{{1}} cuộc gọi trực tiếp"
+        "streamTitle": "{{1}} cuộc gọi trực tiếp",
+        "preview": {
+            "preamble": "Gặp gỡ:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Tài liệu PDF",
             "description": "Tài liệu PDF",
             "newItem": "Thêm PDF"
+        },
+        "Streams/question": {
+            "displayType": "Câu hỏi",
+            "description": "dòng câu hỏi"
+        },
+        "Streams/answer": {
+            "displayType": "Câu trả lời",
+            "description": "luồng trả lời"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Không có nguồn hình ảnh",
         "uploadLimit": "Kích thước tệp tối đa: {{size}}",
         "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+    },
+    "questions": {
+        "Questions": "Câu hỏi",
+        "Answers": "Câu trả lời",
+        "AnswerQuestion": "Trả lời câu hỏi",
+        "SetYourAnswer": "Làm ơn trả lời câu hỏi này",
+        "NewQuestion": "Câu hỏi mới",
+        "NewAnswer": "Câu trả lời mới",
+        "AnswerDetails": "Chi tiết câu trả lời",
+        "answerOption": "Lựa chọn",
+        "answerOptionExclusive": "Độc quyền",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "câu trả lời miễn phí ...",
+        "SaveQuestion": "Lưu câu hỏi",
+        "SaveAnswer": "Lưu câu trả lời",
+        "AddAnotherAnswer": "Thêm câu trả lời khác",
+        "ErrorAnswers": "Vui lòng thêm ngay cả một câu trả lời",
+        "AlreadyAnswered": "Sẵn sàng trả lời",
+        "TitlePlaceholder": "Nhập câu hỏi của bạn",
+        "ContentPlaceholder": "Đặt bất kỳ thông tin bổ sung nào ở đây để giúp mọi người trả lời",
+        "ErrorTitle": "Câu hỏi bắt buộc"
+    },
+    "experience": {
+        "NewExperience": "Kinh nghiệm mới"
     }
 }

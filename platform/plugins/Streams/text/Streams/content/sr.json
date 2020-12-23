@@ -224,7 +224,10 @@
             "fullScreen": "Цео екран"
         },
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
-        "streamTitle": "{999}} позив уживо"
+        "streamTitle": "{999}} позив уживо",
+        "preview": {
+            "preamble": "Састанак:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "ПДФ документ",
             "description": "ПДФ документ",
             "newItem": "Додајте ПДФ"
+        },
+        "Streams\/question": {
+            "displayType": "Питање",
+            "description": "ток питања"
+        },
+        "Streams\/answer": {
+            "displayType": "Одговор",
+            "description": "ток одговора"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Нема извора слике",
         "uploadLimit": "Максимална величина датотеке: {{size}}",
         "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+    },
+    "questions": {
+        "Questions": "Питања",
+        "Answers": "Одговори",
+        "AnswerQuestion": "Одговори на питање",
+        "SetYourAnswer": "Одговорите на питање",
+        "NewQuestion": "Ново питање",
+        "NewAnswer": "Нови одговор",
+        "AnswerDetails": "Детаљи одговора",
+        "answerOption": "Опција",
+        "answerOptionExclusive": "Ексклузивно",
+        "answerTextarea": "Тектареа",
+        "FreeAnswer": "бесплатан одговор ...",
+        "SaveQuestion": "Сачувај питање",
+        "SaveAnswer": "Сачувај одговор",
+        "AddAnotherAnswer": "Додајте још један одговор",
+        "ErrorAnswers": "Молимо додајте чак и један одговор",
+        "AlreadyAnswered": "Већ одговорио",
+        "TitlePlaceholder": "Укуцајте своје питање",
+        "ContentPlaceholder": "Овде додајте све додатне информације како бисте помогли људима да одговоре",
+        "ErrorTitle": "Питање потребно"
+    },
+    "experience": {
+        "NewExperience": "Ново искуство"
     }
 }

@@ -34,7 +34,8 @@
             "invalidURL": "Nederīgs URL"
         },
         "FileTooLarge": "Fails ir par lielu kešatmiņai. Maksimālais faila lielums {{size}}",
-        "InvalidPDF": "Fails nav derīgs PDF fails"
+        "InvalidPDF": "Fails nav derīgs PDF fails",
+        "StartTypingTitleOrKeywords": "Sāciet rakstīt virsrakstu vai atslēgvārdus ..."
     },
     "types": {
         "Websites\/article": {

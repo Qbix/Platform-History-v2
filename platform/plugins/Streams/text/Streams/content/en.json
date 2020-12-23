@@ -243,9 +243,9 @@
             "turnOnAudio": "Unmute audio",
             "turnOnScreenSharing": "Show screen sharing"
         },
-		"preview": {
-			"preamble": "Meeting:"
-		}
+        "preview": {
+            "preamble": "Meeting:"
+        }
     },
     "types": {
         "Streams\/invited": {

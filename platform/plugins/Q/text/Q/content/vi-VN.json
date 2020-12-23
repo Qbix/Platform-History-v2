@@ -100,6 +100,23 @@
         "inUnderMinute": "dưới 1 phút"
     },
     "tabs": {
-        "more": "hơn"
+        "more": "hơn",
+        "Menu": "Thực đơn"
+    },
+    "video": {
+        "clip": "kẹp",
+        "errorNoSource": "Không có nguồn video",
+        "SkipAfter": "Bỏ qua sau",
+        "Skip": "Nhảy"
+    },
+    "pdf": {
+        "clip": "kẹp",
+        "errorNoSource": "Không có nguồn pdf"
+    },
+    "clip": {
+        "SetClipStart": "Đặt bắt đầu clip",
+        "ClipStart": "Bắt đầu clip",
+        "SetClipEnd": "Đặt kết thúc clip",
+        "ClipEnd": "Clip kết thúc"
     }
 }

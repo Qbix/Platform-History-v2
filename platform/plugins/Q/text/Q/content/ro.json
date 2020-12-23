@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "clamă",
-        "errorNoSource": "Fără sursă video"
+        "errorNoSource": "Fără sursă video",
+        "SkipAfter": "Treci după",
+        "Skip": "Ocolire"
     },
     "pdf": {
         "clip": "clamă",

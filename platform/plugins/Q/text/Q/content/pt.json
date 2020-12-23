@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "grampo",
-        "errorNoSource": "Sem fonte de vídeo"
+        "errorNoSource": "Sem fonte de vídeo",
+        "SkipAfter": "Pular depois",
+        "Skip": "Pular"
     },
     "pdf": {
         "clip": "grampo",
