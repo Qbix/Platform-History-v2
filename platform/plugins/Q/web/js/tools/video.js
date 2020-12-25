@@ -669,7 +669,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set('Q/video/videojs',
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}}/>'
+	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} playsinline webkit-playsinline />'
 );
 
 Q.Template.set('Q/video/skip',
