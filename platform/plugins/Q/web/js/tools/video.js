@@ -83,7 +83,8 @@ Q.Tool.define("Q/video", function (options) {
 						type: 'video/youtube'
 					}],
 					youtube: {
-						ytControls: 0
+						ytControls: 0,
+						playsinline: 1
 					}
 				};
 
