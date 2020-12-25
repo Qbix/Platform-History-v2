@@ -295,6 +295,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 				if ($currentTime - $updatedTime < $cacheDuration) {
 					// there are cached webpage results that are still viable
 					return json_decode($webpageCahe->results, true);
+				} else {
+					$webpageCahe->remove();
 				}
 			}
 		}
