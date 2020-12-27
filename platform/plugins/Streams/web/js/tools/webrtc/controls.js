@@ -702,7 +702,7 @@
 									"Streams/chat",
 									{
 										publisherId:tool.WebRTCClass.options().roomPublisherId,
-										streamName:'Streams/webrtc/' + tool.WebRTCClass.options().roomId
+										streamName:'Streams/webrtc/' + tool.WebRTCClass.options().roomId.replace('Streams/webrtc/', '')
 									}
 								)
 							),
