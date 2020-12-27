@@ -256,7 +256,7 @@ Sp.interpolate = function _String_prototype_interpolate(fields) {
 		return result;
 	}
 	return this.replace(/\{\{([^{}]*)\}\}/g, function (a, b) {
-		var r = fields[b];
+		var r = Q.getObject(b, fields);
 
 		if (Q.typeOf(r) === 'function') {
 			var context = Q.getObject(b.split('.').slice(0, -1), fields);
@@ -13151,6 +13151,7 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
+		Q.text.interpolate(Q.text.Q.words);
 		if (root.TTS) {
 			TTS.speak({
 				text: text,
