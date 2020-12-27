@@ -13151,7 +13151,7 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		Q.text.interpolate(Q.text.Q.words);
+		Q.text.interpolate(Q.text);
 		if (root.TTS) {
 			TTS.speak({
 				text: text,
