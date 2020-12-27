@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "csipesz",
-        "errorNoSource": "Nincs video forrás"
+        "errorNoSource": "Nincs video forrás",
+        "SkipAfter": "Ugrás után",
+        "Skip": "Ugrás"
     },
     "pdf": {
         "clip": "csipesz",

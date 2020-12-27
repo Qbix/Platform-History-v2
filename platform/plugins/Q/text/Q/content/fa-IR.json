@@ -100,6 +100,23 @@
         "inUnderMinute": "در کمتر از 1 دقیقه"
     },
     "tabs": {
-        "more": "بیشتر"
+        "more": "بیشتر",
+        "Menu": "منو"
+    },
+    "video": {
+        "clip": "کلیپ",
+        "errorNoSource": "منبع ویدیویی وجود ندارد",
+        "SkipAfter": "پس از آن رد شوید",
+        "Skip": "پرش"
+    },
+    "pdf": {
+        "clip": "کلیپ",
+        "errorNoSource": "منبع pdf نیست"
+    },
+    "clip": {
+        "SetClipStart": "شروع کلیپ را تنظیم کنید",
+        "ClipStart": "شروع کلیپ",
+        "SetClipEnd": "Clip End را تنظیم کنید",
+        "ClipEnd": "پایان کلیپ"
     }
 }

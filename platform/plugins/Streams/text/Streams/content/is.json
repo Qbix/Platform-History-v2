@@ -224,7 +224,10 @@
             "fullScreen": "Fullur skjár"
         },
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
-        "streamTitle": "{{1}} símtal í beinni"
+        "streamTitle": "{{1}} símtal í beinni",
+        "preview": {
+            "preamble": "Fundur:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF skjal",
             "description": "PDF skjal",
             "newItem": "Bæta við PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Spurning",
+            "description": "spurningarstraumur"
+        },
+        "Streams\/answer": {
+            "displayType": "Svaraðu",
+            "description": "svara straumi"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Engin myndheimild",
         "uploadLimit": "Hámarks skráarstærð: {{size}}",
         "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+    },
+    "questions": {
+        "Questions": "Spurningar",
+        "Answers": "Svör",
+        "AnswerQuestion": "Svaraðu spurningu",
+        "SetYourAnswer": "Vinsamlegast svaraðu spurningunni",
+        "NewQuestion": "Ný spurning",
+        "NewAnswer": "Nýtt svar",
+        "AnswerDetails": "Upplýsingar um svar",
+        "answerOption": "Valkostur",
+        "answerOptionExclusive": "Sérstaklega",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ókeypis svar ...",
+        "SaveQuestion": "Vista spurningu",
+        "SaveAnswer": "Vista svar",
+        "AddAnotherAnswer": "Bættu við öðru svari",
+        "ErrorAnswers": "Vinsamlegast bættu við einu svari",
+        "AlreadyAnswered": "Nú þegar svarað",
+        "TitlePlaceholder": "Sláðu inn spurningu þína",
+        "ContentPlaceholder": "Settu allar viðbótarupplýsingar hér til að hjálpa fólki að svara",
+        "ErrorTitle": "Spurning krafist"
+    },
+    "experience": {
+        "NewExperience": "Ný reynsla"
     }
 }

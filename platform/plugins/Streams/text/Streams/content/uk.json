@@ -224,7 +224,10 @@
             "fullScreen": "Повноекранний"
         },
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
-        "streamTitle": "{{1}} прямий дзвінок"
+        "streamTitle": "{{1}} прямий дзвінок",
+        "preview": {
+            "preamble": "Зустріч:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-документ",
             "description": "PDF-документ",
             "newItem": "Додати PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Питання",
+            "description": "питання потоку"
+        },
+        "Streams\/answer": {
+            "displayType": "Відповідь",
+            "description": "відповідь потік"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Немає джерела зображення",
         "uploadLimit": "Максимальний розмір файлу: {{size}}",
         "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+    },
+    "questions": {
+        "Questions": "Питання",
+        "Answers": "Відповіді",
+        "AnswerQuestion": "Відповісти на питання",
+        "SetYourAnswer": "Будь ласка, дайте відповідь на запитання",
+        "NewQuestion": "Нове запитання",
+        "NewAnswer": "Нова відповідь",
+        "AnswerDetails": "Деталі відповіді",
+        "answerOption": "Варіант",
+        "answerOptionExclusive": "Ексклюзивно",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "безкоштовна відповідь ...",
+        "SaveQuestion": "Зберегти питання",
+        "SaveAnswer": "Зберегти відповідь",
+        "AddAnotherAnswer": "Додайте ще одну відповідь",
+        "ErrorAnswers": "Будь ласка, додайте навіть одну відповідь",
+        "AlreadyAnswered": "Вже відповів",
+        "TitlePlaceholder": "Введіть своє запитання",
+        "ContentPlaceholder": "Додайте сюди будь-яку додаткову інформацію, щоб допомогти людям відповісти",
+        "ErrorTitle": "Потрібне запитання"
+    },
+    "experience": {
+        "NewExperience": "Новий досвід"
     }
 }

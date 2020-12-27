@@ -224,7 +224,10 @@
             "fullScreen": "পূর্ণ পর্দা"
         },
         "notAllowedToJoinCall": "আপনার কাছে এই স্ট্রিমে যোগদানের অনুমতি নেই।",
-        "streamTitle": "} 9 999}} লাইভ কল"
+        "streamTitle": "} 9 999}} লাইভ কল",
+        "preview": {
+            "preamble": "সভা:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "পিডিএফ ডকুমেন্ট",
             "description": "পিডিএফ ডকুমেন্ট",
             "newItem": "পিডিএফ যুক্ত করুন"
+        },
+        "Streams\/question": {
+            "displayType": "প্রশ্ন",
+            "description": "প্রশ্ন প্রবাহ"
+        },
+        "Streams\/answer": {
+            "displayType": "উত্তর",
+            "description": "উত্তরের প্রবাহ"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "কোনও চিত্রের উত্স নেই",
         "uploadLimit": "সর্বাধিক ফাইলের আকার: {{999}",
         "errorFileSize": "দুঃখিত, তবে ফাইলটি খুব বড়।<br> সর্বাধিক ফাইলের আকার {{999} is"
+    },
+    "questions": {
+        "Questions": "প্রশ্ন",
+        "Answers": "উত্তর",
+        "AnswerQuestion": "প্রশ্ন উত্তর",
+        "SetYourAnswer": "প্রশ্নের উত্তর দিন",
+        "NewQuestion": "নতুন প্রশ্ন",
+        "NewAnswer": "নতুন উত্তর",
+        "AnswerDetails": "উত্তর বিশদ",
+        "answerOption": "বিকল্প",
+        "answerOptionExclusive": "এক্সক্লুসিভ",
+        "answerTextarea": "টেক্সারিয়া",
+        "FreeAnswer": "বিনামূল্যে উত্তর ...",
+        "SaveQuestion": "প্রশ্ন সংরক্ষণ করুন",
+        "SaveAnswer": "উত্তর সংরক্ষণ করুন",
+        "AddAnotherAnswer": "অন্য উত্তর যুক্ত করুন",
+        "ErrorAnswers": "দয়া করে একটি উত্তর যুক্ত করুন",
+        "AlreadyAnswered": "ইতিমধ্যে উত্তর",
+        "TitlePlaceholder": "আপনার প্রশ্ন টাইপ করুন",
+        "ContentPlaceholder": "লোকদের উত্তর দিতে সহায়তা করতে এখানে কোনও অতিরিক্ত তথ্য রাখুন",
+        "ErrorTitle": "প্রশ্ন প্রয়োজন"
+    },
+    "experience": {
+        "NewExperience": "নতুন অভিজ্ঞতা"
     }
 }

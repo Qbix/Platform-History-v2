@@ -34,7 +34,8 @@
             "invalidURL": "غلط URL"
         },
         "FileTooLarge": "کیچنگ کیلئے فائل بہت بڑی ہے۔ فائل کا زیادہ سے زیادہ سائز {{999}",
-        "InvalidPDF": "فائل درست پی ڈی ایف نہیں ہے"
+        "InvalidPDF": "فائل درست پی ڈی ایف نہیں ہے",
+        "StartTypingTitleOrKeywords": "عنوان یا مطلوبہ الفاظ کو ٹائپ کرنا شروع کریں ..."
     },
     "types": {
         "Websites/article": {

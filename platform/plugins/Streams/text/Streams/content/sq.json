@@ -224,7 +224,10 @@
             "fullScreen": "Ekran i plotë"
         },
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
-        "streamTitle": "999 thirrje live"
+        "streamTitle": "999 thirrje live",
+        "preview": {
+            "preamble": "Takimi:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dokumenti PDF",
             "description": "Dokumenti PDF",
             "newItem": "Shto PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pyetje",
+            "description": "rryma e pyetjeve"
+        },
+        "Streams\/answer": {
+            "displayType": "Përgjigje",
+            "description": "lumë përgjigjesh"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Asnjë burim imazhi",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
         "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+    },
+    "questions": {
+        "Questions": "Pyetjet",
+        "Answers": "Përgjigjet",
+        "AnswerQuestion": "Pergjigju pyetjes",
+        "SetYourAnswer": "Ju lutemi përgjigjuni pyetjes",
+        "NewQuestion": "Pyetje e re",
+        "NewAnswer": "Përgjigje e re",
+        "AnswerDetails": "Detajet e përgjigjes",
+        "answerOption": "Opsioni",
+        "answerOptionExclusive": "Ekskluzive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "përgjigje falas ...",
+        "SaveQuestion": "Ruaje pyetjen",
+        "SaveAnswer": "Ruaj përgjigjen",
+        "AddAnotherAnswer": "Shtoni një përgjigje tjetër",
+        "ErrorAnswers": "Ju lutemi shtoni edhe një përgjigje",
+        "AlreadyAnswered": "Tashmë përgjigjur",
+        "TitlePlaceholder": "Shtyp pyetjen tënde",
+        "ContentPlaceholder": "Vendosni ndonjë informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
+        "ErrorTitle": "Kërkohet pyetje"
+    },
+    "experience": {
+        "NewExperience": "Përvoja e re"
     }
 }

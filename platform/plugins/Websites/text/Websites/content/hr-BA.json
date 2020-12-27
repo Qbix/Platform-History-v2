@@ -34,7 +34,8 @@
             "invalidURL": "Neispravan URL"
         },
         "FileTooLarge": "Datoteka je prevelika za predmemoriranje. Maksimalna veličina datoteke {{size}}",
-        "InvalidPDF": "Datoteka nije važeći PDF"
+        "InvalidPDF": "Datoteka nije važeći PDF",
+        "StartTypingTitleOrKeywords": "Počnite tipkati naslov ili ključne riječi ..."
     },
     "types": {
         "Websites/article": {

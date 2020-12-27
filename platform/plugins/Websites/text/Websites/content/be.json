@@ -34,7 +34,8 @@
             "invalidURL": "Няправільны URL"
         },
         "FileTooLarge": "Файл занадта вялікі для кэшавання. Максімальны памер файла {{size}}",
-        "InvalidPDF": "Файл не з&#39;яўляецца сапраўдным PDF"
+        "InvalidPDF": "Файл не з&#39;яўляецца сапраўдным PDF",
+        "StartTypingTitleOrKeywords": "Пачніце ўводзіць загаловак ці ключавыя словы ..."
     },
     "types": {
         "Websites\/article": {

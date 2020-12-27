@@ -34,7 +34,8 @@
             "invalidURL": "URL neamhbhailí"
         },
         "FileTooLarge": "Comhad ró-mhór le haghaidh caching. Uasmhéid comhaid {{size}}",
-        "InvalidPDF": "Ní PDF bailí é an comhad"
+        "InvalidPDF": "Ní PDF bailí é an comhad",
+        "StartTypingTitleOrKeywords": "Tosaigh teideal nó eochairfhocail a chlóscríobh ..."
     },
     "types": {
         "Websites/article": {

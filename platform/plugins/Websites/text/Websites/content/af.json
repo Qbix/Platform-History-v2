@@ -34,7 +34,8 @@
             "invalidURL": "Ongeldige URL"
         },
         "FileTooLarge": "Lêer is te groot vir die kas. Maksimum lêergrootte {{size}}",
-        "InvalidPDF": "Die lêer is nie &#39;n geldige PDF nie"
+        "InvalidPDF": "Die lêer is nie &#39;n geldige PDF nie",
+        "StartTypingTitleOrKeywords": "Begin tik titel of sleutelwoorde ..."
     },
     "types": {
         "Websites\/article": {

@@ -34,7 +34,8 @@
             "invalidURL": "Неважечка URL-адреса"
         },
         "FileTooLarge": "Датотеката е преголема за кеширање. Максимална големина на датотека {{size}}",
-        "InvalidPDF": "Датотеката не е важечко PDF"
+        "InvalidPDF": "Датотеката не е важечко PDF",
+        "StartTypingTitleOrKeywords": "Започнете да пишувате наслов или клучни зборови ..."
     },
     "types": {
         "Websites\/article": {

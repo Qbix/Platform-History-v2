@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Walang mapagkukunan ng video"
+        "errorNoSource": "Walang mapagkukunan ng video",
+        "SkipAfter": "Laktawan pagkatapos",
+        "Skip": "Laktawan"
     },
     "pdf": {
         "clip": "clip",

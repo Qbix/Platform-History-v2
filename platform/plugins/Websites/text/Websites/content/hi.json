@@ -34,7 +34,8 @@
             "invalidURL": "अवैध यूआरएल"
         },
         "FileTooLarge": "कैशिंग के लिए बहुत बड़ी फ़ाइल। अधिकतम फ़ाइल आकार {{size}}",
-        "InvalidPDF": "फ़ाइल एक वैध पीडीएफ नहीं है"
+        "InvalidPDF": "फ़ाइल एक वैध पीडीएफ नहीं है",
+        "StartTypingTitleOrKeywords": "शीर्षक या कीवर्ड लिखना शुरू करें ..."
     },
     "types": {
         "Websites\/article": {

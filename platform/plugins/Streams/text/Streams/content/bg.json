@@ -224,7 +224,10 @@
             "fullScreen": "Цял екран"
         },
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
-        "streamTitle": "{{1}} обаждане на живо"
+        "streamTitle": "{{1}} обаждане на живо",
+        "preview": {
+            "preamble": "Среща:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF документ",
             "description": "PDF документ",
             "newItem": "Добавете PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Въпрос",
+            "description": "поток от въпроси"
+        },
+        "Streams\/answer": {
+            "displayType": "Отговор",
+            "description": "отговор поток"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Няма източник на изображение",
         "uploadLimit": "Максимален размер на файла: {{size}}",
         "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+    },
+    "questions": {
+        "Questions": "Въпроси",
+        "Answers": "Отговори",
+        "AnswerQuestion": "Отговорете на въпрос",
+        "SetYourAnswer": "Моля, отговорете на въпроса",
+        "NewQuestion": "Нов въпрос",
+        "NewAnswer": "Нов отговор",
+        "AnswerDetails": "Подробности за отговора",
+        "answerOption": "Вариант",
+        "answerOptionExclusive": "Изключителен",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "безплатен отговор ...",
+        "SaveQuestion": "Запазете въпроса",
+        "SaveAnswer": "Запазване на отговор",
+        "AddAnotherAnswer": "Добавете още един отговор",
+        "ErrorAnswers": "Моля, добавете дори един отговор",
+        "AlreadyAnswered": "Вече отговорих",
+        "TitlePlaceholder": "Въведете въпроса си",
+        "ContentPlaceholder": "Поставете допълнителна информация тук, за да помогнете на хората да отговорят",
+        "ErrorTitle": "Изисква се въпрос"
+    },
+    "experience": {
+        "NewExperience": "Ново преживяване"
     }
 }

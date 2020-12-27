@@ -34,7 +34,8 @@
             "invalidURL": "URL invalidu"
         },
         "FileTooLarge": "Fajl kbir wisq għall-cache. Daqs massimu tal-fajl {{size}}",
-        "InvalidPDF": "Il-fajl mhux PDF validu"
+        "InvalidPDF": "Il-fajl mhux PDF validu",
+        "StartTypingTitleOrKeywords": "Ibda ttajpja titlu jew kliem ewlieni ..."
     },
     "types": {
         "Websites/article": {

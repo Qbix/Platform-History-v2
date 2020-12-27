@@ -34,7 +34,8 @@
             "invalidURL": "URL không hợp lệ"
         },
         "FileTooLarge": "Tệp quá lớn để lưu vào bộ nhớ đệm. Kích thước tệp tối đa {{size}}",
-        "InvalidPDF": "Tệp không phải là PDF hợp lệ"
+        "InvalidPDF": "Tệp không phải là PDF hợp lệ",
+        "StartTypingTitleOrKeywords": "Bắt đầu nhập tiêu đề hoặc từ khóa ..."
     },
     "types": {
         "Websites/article": {

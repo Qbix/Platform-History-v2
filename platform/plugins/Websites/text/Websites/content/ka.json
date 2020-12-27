@@ -34,7 +34,8 @@
             "invalidURL": "არასწორი ლინკი"
         },
         "FileTooLarge": "ფაილი ძალიან დიდია ქეშირებისთვის. ფაილის მაქსიმალური ზომა: {{size}}",
-        "InvalidPDF": "ფაილი არ არის სწორი PDF"
+        "InvalidPDF": "ფაილი არ არის სწორი PDF",
+        "StartTypingTitleOrKeywords": "დაიწყეთ სათაურის ან საკვანძო სიტყვების აკრეფა ..."
     },
     "types": {
         "Websites\/article": {

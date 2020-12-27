@@ -224,7 +224,10 @@
             "fullScreen": "전체 화면"
         },
         "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
-        "streamTitle": "{{1}} 실시간 통화"
+        "streamTitle": "{{1}} 실시간 통화",
+        "preview": {
+            "preamble": "모임:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF 문서",
             "description": "PDF 문서",
             "newItem": "PDF 추가"
+        },
+        "Streams\/question": {
+            "displayType": "질문",
+            "description": "질문 스트림"
+        },
+        "Streams\/answer": {
+            "displayType": "대답",
+            "description": "응답 스트림"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "이미지 소스 없음",
         "uploadLimit": "최대 파일 크기 : {{size}}",
         "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+    },
+    "questions": {
+        "Questions": "질문",
+        "Answers": "답변",
+        "AnswerQuestion": "질문에 답변",
+        "SetYourAnswer": "질문에 답 해주세요",
+        "NewQuestion": "새로운 질문",
+        "NewAnswer": "새로운 답변",
+        "AnswerDetails": "답변 내용",
+        "answerOption": "선택권",
+        "answerOptionExclusive": "독특한",
+        "answerTextarea": "텍스트 영역",
+        "FreeAnswer": "무료 답변 ...",
+        "SaveQuestion": "질문 저장",
+        "SaveAnswer": "답변 저장",
+        "AddAnotherAnswer": "다른 답변 추가",
+        "ErrorAnswers": "답을 하나만 추가 해주세요",
+        "AlreadyAnswered": "이미 답변 함",
+        "TitlePlaceholder": "질문 입력",
+        "ContentPlaceholder": "사람들이 답변 할 수 있도록 여기에 추가 정보를 입력하세요.",
+        "ErrorTitle": "질문 필요"
+    },
+    "experience": {
+        "NewExperience": "새로운 경험"
     }
 }

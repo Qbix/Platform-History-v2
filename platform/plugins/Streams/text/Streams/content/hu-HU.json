@@ -224,7 +224,10 @@
             "fullScreen": "Teljes képernyő"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
-        "streamTitle": "{{1}} élő hívás"
+        "streamTitle": "{{1}} élő hívás",
+        "preview": {
+            "preamble": "Találkozó:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokumentum",
             "description": "PDF dokumentum",
             "newItem": "PDF hozzáadása"
+        },
+        "Streams/question": {
+            "displayType": "Kérdés",
+            "description": "kérdésfolyam"
+        },
+        "Streams/answer": {
+            "displayType": "Válasz",
+            "description": "válaszfolyam"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nincs képforrás",
         "uploadLimit": "Maximális fájlméret: {{size}}",
         "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+    },
+    "questions": {
+        "Questions": "Kérdések",
+        "Answers": "Válaszok",
+        "AnswerQuestion": "Válaszolj a kérdésre",
+        "SetYourAnswer": "Kérem, válaszoljon a kérdésre",
+        "NewQuestion": "Új kérdés",
+        "NewAnswer": "Új válasz",
+        "AnswerDetails": "Válasz részletei",
+        "answerOption": "választási lehetőség",
+        "answerOptionExclusive": "Kizárólagos",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "szabad válasz ...",
+        "SaveQuestion": "Kérdés mentése",
+        "SaveAnswer": "Válasz mentése",
+        "AddAnotherAnswer": "Adjon hozzá egy másik választ",
+        "ErrorAnswers": "Kérjük, adjon meg akár egyetlen választ is",
+        "AlreadyAnswered": "Már válaszolt",
+        "TitlePlaceholder": "Írja be kérdését",
+        "ContentPlaceholder": "Tegyen ide további információkat, hogy segítsen az embereknek válaszolni",
+        "ErrorTitle": "Kérdés szükséges"
+    },
+    "experience": {
+        "NewExperience": "Új tapasztalat"
     }
 }

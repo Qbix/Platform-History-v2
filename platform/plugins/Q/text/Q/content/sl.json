@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "posnetek",
-        "errorNoSource": "Ni video vira"
+        "errorNoSource": "Ni video vira",
+        "SkipAfter": "Preskoči po",
+        "Skip": "Preskoči"
     },
     "pdf": {
         "clip": "posnetek",

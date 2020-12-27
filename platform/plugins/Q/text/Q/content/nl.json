@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klem",
-        "errorNoSource": "Geen videobron"
+        "errorNoSource": "Geen videobron",
+        "SkipAfter": "Overslaan na",
+        "Skip": "Overspringen"
     },
     "pdf": {
         "clip": "klem",

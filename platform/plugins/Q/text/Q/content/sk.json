@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Žiadny zdroj videa"
+        "errorNoSource": "Žiadny zdroj videa",
+        "SkipAfter": "Preskočiť po",
+        "Skip": "Preskočiť"
     },
     "pdf": {
         "clip": "klip",

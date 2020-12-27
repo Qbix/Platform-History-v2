@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Non hai fonte de vídeo"
+        "errorNoSource": "Non hai fonte de vídeo",
+        "SkipAfter": "Saltar despois",
+        "Skip": "Saltar"
     },
     "pdf": {
         "clip": "clip",

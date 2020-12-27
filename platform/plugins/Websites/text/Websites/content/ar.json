@@ -34,7 +34,8 @@
             "invalidURL": "URL غير صالح"
         },
         "FileTooLarge": "الملف كبير جدًا للتخزين المؤقت. أقصى حجم للملف {{size}}",
-        "InvalidPDF": "الملف ليس ملف PDF صالحًا"
+        "InvalidPDF": "الملف ليس ملف PDF صالحًا",
+        "StartTypingTitleOrKeywords": "ابدأ في كتابة العنوان أو الكلمات الأساسية ..."
     },
     "types": {
         "Websites\/article": {

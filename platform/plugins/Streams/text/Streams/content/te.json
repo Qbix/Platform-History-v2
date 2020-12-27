@@ -224,7 +224,10 @@
             "fullScreen": "పూర్తి స్క్రీన్"
         },
         "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
-        "streamTitle": "{{1}} ప్రత్యక్ష కాల్"
+        "streamTitle": "{{1}} ప్రత్యక్ష కాల్",
+        "preview": {
+            "preamble": "సమావేశం:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF పత్రం",
             "description": "PDF పత్రం",
             "newItem": "PDF ని జోడించండి"
+        },
+        "Streams\/question": {
+            "displayType": "ప్రశ్న",
+            "description": "ప్రశ్న ప్రసారం"
+        },
+        "Streams\/answer": {
+            "displayType": "సమాధానం",
+            "description": "జవాబు ప్రసారం"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "చిత్ర మూలం లేదు",
         "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
         "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
+    },
+    "questions": {
+        "Questions": "ప్రశ్నలు",
+        "Answers": "సమాధానాలు",
+        "AnswerQuestion": "ప్రశ్నకు సమాధానం ఇవ్వండి",
+        "SetYourAnswer": "దయచేసి ప్రశ్నకు సమాధానం ఇవ్వండి",
+        "NewQuestion": "క్రొత్త ప్రశ్న",
+        "NewAnswer": "క్రొత్త సమాధానం",
+        "AnswerDetails": "వివరాలకు సమాధానం ఇవ్వండి",
+        "answerOption": "ఎంపిక",
+        "answerOptionExclusive": "ప్రత్యేకమైనది",
+        "answerTextarea": "టెక్స్ట్రియా",
+        "FreeAnswer": "ఉచిత సమాధానం ...",
+        "SaveQuestion": "ప్రశ్నను సేవ్ చేయండి",
+        "SaveAnswer": "సమాధానం సేవ్ చేయండి",
+        "AddAnotherAnswer": "మరొక సమాధానం జోడించండి",
+        "ErrorAnswers": "దయచేసి ఒక సమాధానం కూడా జోడించండి",
+        "AlreadyAnswered": "ఇప్పటికే సమాధానం ఇచ్చారు",
+        "TitlePlaceholder": "మీ ప్రశ్నను టైప్ చేయండి",
+        "ContentPlaceholder": "ప్రజలకు సమాధానం ఇవ్వడానికి ఏదైనా అదనపు సమాచారం ఇక్కడ ఉంచండి",
+        "ErrorTitle": "ప్రశ్న అవసరం"
+    },
+    "experience": {
+        "NewExperience": "కొత్త అనుభవం"
     }
 }

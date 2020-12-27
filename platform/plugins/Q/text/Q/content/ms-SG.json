@@ -100,6 +100,23 @@
         "inUnderMinute": "dalam masa kurang dari 1 minit"
     },
     "tabs": {
-        "more": "lebih banyak lagi"
+        "more": "lebih banyak lagi",
+        "Menu": "Menu"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Tiada sumber video",
+        "SkipAfter": "Langkau selepas",
+        "Skip": "Langkau"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Tiada sumber pdf"
+    },
+    "clip": {
+        "SetClipStart": "Tetapkan Mula Klip",
+        "ClipStart": "Mula Klip",
+        "SetClipEnd": "Tetapkan Klip Akhir",
+        "ClipEnd": "Akhir Klip"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Tam ekran"
         },
         "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
-        "streamTitle": "{{1}} canlı çağrı"
+        "streamTitle": "{{1}} canlı çağrı",
+        "preview": {
+            "preamble": "Toplantı:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF belgesi",
             "description": "PDF belgesi",
             "newItem": "PDF ekle"
+        },
+        "Streams\/question": {
+            "displayType": "Soru",
+            "description": "soru akışı"
+        },
+        "Streams\/answer": {
+            "displayType": "Cevap",
+            "description": "yanıt akışı"
         }
     },
     "messages": {
@@ -439,5 +450,29 @@
         "errorNoSource": "Görüntü kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
         "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
+    },
+    "questions": {
+        "Questions": "Sorular",
+        "Answers": "Yanıtlar",
+        "AnswerQuestion": "Soruyu cevapla",
+        "SetYourAnswer": "Lütfen soruya cevap ver",
+        "NewQuestion": "Yeni Soru",
+        "NewAnswer": "Yeni Cevap",
+        "AnswerDetails": "Cevap Ayrıntıları",
+        "answerOption": "Seçenek",
+        "answerOptionExclusive": "Ayrıcalıklı",
+        "answerTextarea": "Metin alanı",
+        "FreeAnswer": "ücretsiz cevap ...",
+        "SaveQuestion": "Soruyu Kaydet",
+        "SaveAnswer": "Yanıtı Kaydet",
+        "AddAnotherAnswer": "Başka bir cevap ekleyin",
+        "ErrorAnswers": "Lütfen bir cevap bile ekleyin",
+        "AlreadyAnswered": "Zaten cevaplandı",
+        "TitlePlaceholder": "Sorunuzu yazın",
+        "ContentPlaceholder": "İnsanların yanıt vermesine yardımcı olmak için ek bilgileri buraya koyun",
+        "ErrorTitle": "Soru gerekli"
+    },
+    "experience": {
+        "NewExperience": "Yeni deneyim"
     }
 }

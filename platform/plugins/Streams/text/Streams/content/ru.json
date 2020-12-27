@@ -224,7 +224,10 @@
             "fullScreen": "Полноэкранный"
         },
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
-        "streamTitle": "{{1}} живой звонок"
+        "streamTitle": "{{1}} живой звонок",
+        "preview": {
+            "preamble": "Встреча:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF документ",
             "description": "PDF документ",
             "newItem": "Добавить PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Вопрос",
+            "description": "поток вопросов"
+        },
+        "Streams\/answer": {
+            "displayType": "Ответ",
+            "description": "поток ответов"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Нет источника изображения",
         "uploadLimit": "Максимальный размер файла: {{size}}",
         "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+    },
+    "questions": {
+        "Questions": "Вопросов",
+        "Answers": "Ответы",
+        "AnswerQuestion": "Отвечать на вопрос",
+        "SetYourAnswer": "Пожалуйста ответьте на вопрос",
+        "NewQuestion": "Новый вопрос",
+        "NewAnswer": "Новый ответ",
+        "AnswerDetails": "Подробности ответа",
+        "answerOption": "Вариант",
+        "answerOptionExclusive": "Эксклюзивный",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "свободный ответ ...",
+        "SaveQuestion": "Сохранить вопрос",
+        "SaveAnswer": "Сохранить ответ",
+        "AddAnotherAnswer": "Добавить еще один ответ",
+        "ErrorAnswers": "Добавьте хотя бы один ответ",
+        "AlreadyAnswered": "Уже ответил",
+        "TitlePlaceholder": "Введите свой вопрос",
+        "ContentPlaceholder": "Разместите здесь любую дополнительную информацию, чтобы помочь людям ответить",
+        "ErrorTitle": "Требуется вопрос"
+    },
+    "experience": {
+        "NewExperience": "Новый опыт"
     }
 }

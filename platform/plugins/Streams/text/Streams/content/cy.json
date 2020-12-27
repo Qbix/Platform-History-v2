@@ -224,7 +224,10 @@
             "fullScreen": "Sgrin llawn"
         },
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
-        "streamTitle": "{{1}} galwad byw"
+        "streamTitle": "{{1}} galwad byw",
+        "preview": {
+            "preamble": "Cyfarfod:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dogfen PDF",
             "description": "Dogfen PDF",
             "newItem": "Ychwanegwch PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Cwestiwn",
+            "description": "ffrwd cwestiynau"
+        },
+        "Streams\/answer": {
+            "displayType": "Ateb",
+            "description": "ffrwd ateb"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Dim ffynhonnell ddelwedd",
         "uploadLimit": "Maint ffeil Max: {{size}}",
         "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+    },
+    "questions": {
+        "Questions": "Cwestiynau",
+        "Answers": "Atebion",
+        "AnswerQuestion": "Ateb cwestiwn",
+        "SetYourAnswer": "Atebwch y cwestiwn",
+        "NewQuestion": "Cwestiwn Newydd",
+        "NewAnswer": "Ateb Newydd",
+        "AnswerDetails": "Manylion Ateb",
+        "answerOption": "Opsiwn",
+        "answerOptionExclusive": "Unigryw",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ateb am ddim ...",
+        "SaveQuestion": "Cadw Cwestiwn",
+        "SaveAnswer": "Cadw Ateb",
+        "AddAnotherAnswer": "Ychwanegwch ateb arall",
+        "ErrorAnswers": "Ychwanegwch hyd yn oed un ateb",
+        "AlreadyAnswered": "Atebwyd eisoes",
+        "TitlePlaceholder": "Teipiwch eich cwestiwn",
+        "ContentPlaceholder": "Rhowch unrhyw wybodaeth ychwanegol yma i helpu pobl i ateb",
+        "ErrorTitle": "Angen cwestiwn"
+    },
+    "experience": {
+        "NewExperience": "Profiad Newydd"
     }
 }

@@ -34,7 +34,8 @@
             "invalidURL": "Virheellinen URL"
         },
         "FileTooLarge": "Tiedosto on liian suuri välimuistiin tallentamista varten. Tiedoston enimmäiskoko {{size}}",
-        "InvalidPDF": "Tiedosto ei ole kelvollinen PDF-tiedosto"
+        "InvalidPDF": "Tiedosto ei ole kelvollinen PDF-tiedosto",
+        "StartTypingTitleOrKeywords": "Aloita otsikon tai avainsanojen kirjoittaminen ..."
     },
     "types": {
         "Websites/article": {

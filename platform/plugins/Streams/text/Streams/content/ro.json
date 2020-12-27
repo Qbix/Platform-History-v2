@@ -224,7 +224,10 @@
             "fullScreen": "Ecran complet"
         },
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
-        "streamTitle": "{{1}} apel live"
+        "streamTitle": "{{1}} apel live",
+        "preview": {
+            "preamble": "Întâlnire:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Document PDF",
             "description": "Document PDF",
             "newItem": "Adăugați PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Întrebare",
+            "description": "flux de întrebări"
+        },
+        "Streams\/answer": {
+            "displayType": "Răspuns",
+            "description": "flux de răspuns"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nicio sursă de imagine",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
         "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+    },
+    "questions": {
+        "Questions": "Întrebări",
+        "Answers": "Răspunsuri",
+        "AnswerQuestion": "Răspuns întrebare",
+        "SetYourAnswer": "Vă rugăm să răspundeți la întrebare",
+        "NewQuestion": "Întrebare nouă",
+        "NewAnswer": "Răspuns nou",
+        "AnswerDetails": "Detalii de răspuns",
+        "answerOption": "Opțiune",
+        "answerOptionExclusive": "Exclusiv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "raspuns gratuit ...",
+        "SaveQuestion": "Salvați întrebarea",
+        "SaveAnswer": "Salvați răspunsul",
+        "AddAnotherAnswer": "Adăugați un alt răspuns",
+        "ErrorAnswers": "Vă rugăm să adăugați chiar și un singur răspuns",
+        "AlreadyAnswered": "Am răspuns deja",
+        "TitlePlaceholder": "Tastați-vă întrebarea",
+        "ContentPlaceholder": "Puneți orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
+        "ErrorTitle": "Întrebare necesară"
+    },
+    "experience": {
+        "NewExperience": "Experienta noua"
     }
 }

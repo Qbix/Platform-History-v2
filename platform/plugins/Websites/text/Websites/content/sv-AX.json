@@ -34,7 +34,8 @@
             "invalidURL": "Ogiltig URL"
         },
         "FileTooLarge": "Filen är för stor för cachning. Max filstorlek {{size}}",
-        "InvalidPDF": "Filen är inte en giltig PDF"
+        "InvalidPDF": "Filen är inte en giltig PDF",
+        "StartTypingTitleOrKeywords": "Börja skriva titel eller nyckelord ..."
     },
     "types": {
         "Websites/article": {

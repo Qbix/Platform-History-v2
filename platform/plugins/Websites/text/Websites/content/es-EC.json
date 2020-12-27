@@ -34,7 +34,8 @@
             "invalidURL": "URL invalida"
         },
         "FileTooLarge": "Archivo demasiado grande para almacenar en caché. Tamaño máximo de archivo {{size}}",
-        "InvalidPDF": "El archivo no es un PDF válido"
+        "InvalidPDF": "El archivo no es un PDF válido",
+        "StartTypingTitleOrKeywords": "Empiece a escribir el título o las palabras clave ..."
     },
     "types": {
         "Websites/article": {

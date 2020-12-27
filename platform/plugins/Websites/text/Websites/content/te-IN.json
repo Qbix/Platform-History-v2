@@ -34,7 +34,8 @@
             "invalidURL": "చెల్లని URL"
         },
         "FileTooLarge": "కాషింగ్ కోసం ఫైల్ చాలా పెద్దది. గరిష్ట ఫైల్ పరిమాణం {{size}}",
-        "InvalidPDF": "ఫైల్ చెల్లుబాటు అయ్యే PDF కాదు"
+        "InvalidPDF": "ఫైల్ చెల్లుబాటు అయ్యే PDF కాదు",
+        "StartTypingTitleOrKeywords": "శీర్షిక లేదా కీలకపదాలను టైప్ చేయడం ప్రారంభించండి ..."
     },
     "types": {
         "Websites/article": {

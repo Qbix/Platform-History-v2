@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No hi ha cap font de vídeo"
+        "errorNoSource": "No hi ha cap font de vídeo",
+        "SkipAfter": "Saltar després",
+        "Skip": "Ometre"
     },
     "pdf": {
         "clip": "clip",

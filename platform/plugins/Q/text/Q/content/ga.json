@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "gearrthóg",
-        "errorNoSource": "Gan aon fhoinse físe"
+        "errorNoSource": "Gan aon fhoinse físe",
+        "SkipAfter": "Scipeáil tar éis",
+        "Skip": "Scipeáil"
     },
     "pdf": {
         "clip": "gearrthóg",

@@ -224,7 +224,10 @@
             "fullScreen": "Celá obrazovka"
         },
         "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto proudu.",
-        "streamTitle": "{{1}} živý hovor"
+        "streamTitle": "{{1}} živý hovor",
+        "preview": {
+            "preamble": "Setkání:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokument",
             "description": "PDF dokument",
             "newItem": "Přidat PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Otázka",
+            "description": "stream otázek"
+        },
+        "Streams\/answer": {
+            "displayType": "Odpovědět",
+            "description": "stream odpovědí"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Žádný zdroj obrázku",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
         "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+    },
+    "questions": {
+        "Questions": "Dotazy",
+        "Answers": "Odpovědi",
+        "AnswerQuestion": "Odpověď na otázku",
+        "SetYourAnswer": "Odpovězte prosím na otázku",
+        "NewQuestion": "Nová otázka",
+        "NewAnswer": "Nová odpověď",
+        "AnswerDetails": "Odpovědět Podrobnosti",
+        "answerOption": "Volba",
+        "answerOptionExclusive": "Výhradní",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "bezplatná odpověď ...",
+        "SaveQuestion": "Uložit otázku",
+        "SaveAnswer": "Uložit odpověď",
+        "AddAnotherAnswer": "Přidejte další odpověď",
+        "ErrorAnswers": "Přidejte prosím jen jednu odpověď",
+        "AlreadyAnswered": "Již odpověděl",
+        "TitlePlaceholder": "Napište svůj dotaz",
+        "ContentPlaceholder": "Sem vložte další informace, které lidem pomohou odpovědět",
+        "ErrorTitle": "Vyžaduje se otázka"
+    },
+    "experience": {
+        "NewExperience": "Nový zážitek"
     }
 }

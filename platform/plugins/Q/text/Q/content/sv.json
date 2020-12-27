@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klämma",
-        "errorNoSource": "Ingen videokälla"
+        "errorNoSource": "Ingen videokälla",
+        "SkipAfter": "Hoppa efter",
+        "Skip": "Hoppa"
     },
     "pdf": {
         "clip": "klämma",

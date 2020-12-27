@@ -224,7 +224,10 @@
             "fullScreen": "Volskerm"
         },
         "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
-        "streamTitle": "{{1}} regstreekse oproep"
+        "streamTitle": "{{1}} regstreekse oproep",
+        "preview": {
+            "preamble": "Vergadering:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-dokument",
             "description": "PDF-dokument",
             "newItem": "Voeg PDF by"
+        },
+        "Streams\/question": {
+            "displayType": "Vraag",
+            "description": "vraagstroom"
+        },
+        "Streams\/answer": {
+            "displayType": "Antwoord",
+            "description": "antwoordstroom"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Geen beeldbron nie",
         "uploadLimit": "Maksimum lêergrootte: {{size}}",
         "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+    },
+    "questions": {
+        "Questions": "Vrae",
+        "Answers": "Antwoorde",
+        "AnswerQuestion": "Beantwoord die vraag",
+        "SetYourAnswer": "Beantwoord die vraag",
+        "NewQuestion": "Nuwe vraag",
+        "NewAnswer": "Nuwe antwoord",
+        "AnswerDetails": "Antwoordbesonderhede",
+        "answerOption": "Opsie",
+        "answerOptionExclusive": "Eksklusief",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "gratis antwoord ...",
+        "SaveQuestion": "Stoor vraag",
+        "SaveAnswer": "Stoor antwoord",
+        "AddAnotherAnswer": "Voeg nog &#39;n antwoord by",
+        "ErrorAnswers": "Voeg asseblief net een antwoord by",
+        "AlreadyAnswered": "Al beantwoord",
+        "TitlePlaceholder": "Tik u vraag in",
+        "ContentPlaceholder": "Plaas addisionele inligting hier om mense te help beantwoord",
+        "ErrorTitle": "Vraag vereis"
+    },
+    "experience": {
+        "NewExperience": "Nuwe ervaring"
     }
 }

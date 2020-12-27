@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klipp",
-        "errorNoSource": "Videoallikat pole"
+        "errorNoSource": "Videoallikat pole",
+        "SkipAfter": "Jäta pärast",
+        "Skip": "Vahele jätma"
     },
     "pdf": {
         "clip": "klipp",

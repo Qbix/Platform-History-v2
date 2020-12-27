@@ -224,7 +224,10 @@
             "fullScreen": "Pilnekrāna režīmā"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
-        "streamTitle": "{{1}} tiešais zvans"
+        "streamTitle": "{{1}} tiešais zvans",
+        "preview": {
+            "preamble": "Tikšanās:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokuments",
             "description": "PDF dokuments",
             "newItem": "Pievienot PDF"
+        },
+        "Streams/question": {
+            "displayType": "Jautājums",
+            "description": "jautājumu straume"
+        },
+        "Streams/answer": {
+            "displayType": "Atbilde",
+            "description": "atbilžu straume"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nav attēla avota",
         "uploadLimit": "Maksimālais faila lielums: {{size}}",
         "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+    },
+    "questions": {
+        "Questions": "Jautājumi",
+        "Answers": "Atbildes",
+        "AnswerQuestion": "Atbildiet uz jautājumu",
+        "SetYourAnswer": "Lūdzu, atbildiet uz jautājumu",
+        "NewQuestion": "Jauns jautājums",
+        "NewAnswer": "Jauna atbilde",
+        "AnswerDetails": "Atbildes informācija",
+        "answerOption": "Opcija",
+        "answerOptionExclusive": "Ekskluzīvs",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "brīva atbilde ...",
+        "SaveQuestion": "Saglabāt jautājumu",
+        "SaveAnswer": "Saglabāt atbildi",
+        "AddAnotherAnswer": "Pievienojiet citu atbildi",
+        "ErrorAnswers": "Lūdzu, pievienojiet pat vienu atbildi",
+        "AlreadyAnswered": "Jau atbildēju",
+        "TitlePlaceholder": "Ierakstiet savu jautājumu",
+        "ContentPlaceholder": "Ievietojiet šeit papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
+        "ErrorTitle": "Nepieciešams jautājums"
+    },
+    "experience": {
+        "NewExperience": "Jauna pieredze"
     }
 }

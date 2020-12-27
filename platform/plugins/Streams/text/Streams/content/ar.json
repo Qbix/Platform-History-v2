@@ -224,7 +224,10 @@
             "fullScreen": "شاشة كاملة"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
-        "streamTitle": "{{1}} مكالمة مباشرة"
+        "streamTitle": "{{1}} مكالمة مباشرة",
+        "preview": {
+            "preamble": "لقاء:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "وثيقة PDF",
             "description": "وثيقة PDF",
             "newItem": "أضف ملف PDF"
+        },
+        "Streams\/question": {
+            "displayType": "سؤال",
+            "description": "تيار السؤال"
+        },
+        "Streams\/answer": {
+            "displayType": "إجابة",
+            "description": "الجواب تيار"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "لا يوجد مصدر للصورة",
         "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
         "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+    },
+    "questions": {
+        "Questions": "أسئلة",
+        "Answers": "الإجابات",
+        "AnswerQuestion": "اجب عن السؤال",
+        "SetYourAnswer": "الرجاء الإجابة على السؤال",
+        "NewQuestion": "سؤال جديد",
+        "NewAnswer": "إجابة جديدة",
+        "AnswerDetails": "تفاصيل الإجابة",
+        "answerOption": "اختيار",
+        "answerOptionExclusive": "حصرية",
+        "answerTextarea": "تيكستاريا",
+        "FreeAnswer": "إجابة مجانية ...",
+        "SaveQuestion": "حفظ السؤال",
+        "SaveAnswer": "حفظ الجواب",
+        "AddAnotherAnswer": "أضف إجابة أخرى",
+        "ErrorAnswers": "الرجاء إضافة إجابة واحدة",
+        "AlreadyAnswered": "تمت الاجابة مسبقا",
+        "TitlePlaceholder": "اكتب سؤالك",
+        "ContentPlaceholder": "ضع أي معلومات إضافية هنا لمساعدة الناس على الإجابة",
+        "ErrorTitle": "السؤال مطلوب"
+    },
+    "experience": {
+        "NewExperience": "تجربة جديدة"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Поуны экран"
         },
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
-        "streamTitle": "{{1}} Жывы званок"
+        "streamTitle": "{{1}} Жывы званок",
+        "preview": {
+            "preamble": "Сустрэча:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Дакумент PDF",
             "description": "Дакумент PDF",
             "newItem": "Дадаць PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Пытанне",
+            "description": "паток пытанняў"
+        },
+        "Streams\/answer": {
+            "displayType": "Адкажыце",
+            "description": "паток адказаў"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Няма крыніцы выявы",
         "uploadLimit": "Максімальны памер файла: {{size}}",
         "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+    },
+    "questions": {
+        "Questions": "Пытанні",
+        "Answers": "Адказы",
+        "AnswerQuestion": "Адкажыце на пытанне",
+        "SetYourAnswer": "Калі ласка, адкажыце на пытанне",
+        "NewQuestion": "Новае пытанне",
+        "NewAnswer": "Новы адказ",
+        "AnswerDetails": "Адказы на падрабязнасці",
+        "answerOption": "Варыянт",
+        "answerOptionExclusive": "Эксклюзіў",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "бясплатны адказ ...",
+        "SaveQuestion": "Захаваць пытанне",
+        "SaveAnswer": "Захаваць адказ",
+        "AddAnotherAnswer": "Дадайце яшчэ адзін адказ",
+        "ErrorAnswers": "Калі ласка, дадайце нават адзін адказ",
+        "AlreadyAnswered": "Ужо адказаў",
+        "TitlePlaceholder": "Набярыце пытанне",
+        "ContentPlaceholder": "Дадайце сюды дадатковую інфармацыю, каб дапамагчы людзям адказаць",
+        "ErrorTitle": "Пытанне патрабуецца"
+    },
+    "experience": {
+        "NewExperience": "Новы досвед"
     }
 }

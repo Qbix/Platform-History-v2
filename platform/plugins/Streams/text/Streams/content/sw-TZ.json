@@ -224,7 +224,10 @@
             "fullScreen": "Screen kamili"
         },
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
-        "streamTitle": "{{1}} simu ya moja kwa moja"
+        "streamTitle": "{{1}} simu ya moja kwa moja",
+        "preview": {
+            "preamble": "Mkutano:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Hati ya PDF",
             "description": "Hati ya PDF",
             "newItem": "Ongeza PDF"
+        },
+        "Streams/question": {
+            "displayType": "Swali",
+            "description": "mkondo wa maswali"
+        },
+        "Streams/answer": {
+            "displayType": "Jibu",
+            "description": "mkondo wa jibu"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Hakuna chanzo cha picha",
         "uploadLimit": "Ukubwa wa faili: {{size}}",
         "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
+    },
+    "questions": {
+        "Questions": "Maswali",
+        "Answers": "Majibu",
+        "AnswerQuestion": "Jibu swali",
+        "SetYourAnswer": "Tafadhali jibu swali",
+        "NewQuestion": "Swali Jipya",
+        "NewAnswer": "Jibu Jipya",
+        "AnswerDetails": "Jibu Maelezo",
+        "answerOption": "Chaguo",
+        "answerOptionExclusive": "Kipekee",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "jibu la bure ...",
+        "SaveQuestion": "Hifadhi Swali",
+        "SaveAnswer": "Hifadhi Jibu",
+        "AddAnotherAnswer": "Ongeza jibu lingine",
+        "ErrorAnswers": "Tafadhali ongeza hata jibu moja",
+        "AlreadyAnswered": "Tayari imejibiwa",
+        "TitlePlaceholder": "Andika swali lako",
+        "ContentPlaceholder": "Weka habari yoyote ya ziada hapa kusaidia watu kujibu",
+        "ErrorTitle": "Swali linahitajika"
+    },
+    "experience": {
+        "NewExperience": "Uzoefu mpya"
     }
 }

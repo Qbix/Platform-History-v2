@@ -100,6 +100,23 @@
         "inUnderMinute": "za manje od 1 minute"
     },
     "tabs": {
-        "more": "više"
+        "more": "više",
+        "Menu": "izbornik"
+    },
+    "video": {
+        "clip": "isječak",
+        "errorNoSource": "Nema video izvora",
+        "SkipAfter": "Preskoči nakon",
+        "Skip": "Preskočiti"
+    },
+    "pdf": {
+        "clip": "isječak",
+        "errorNoSource": "Nema pdf izvora"
+    },
+    "clip": {
+        "SetClipStart": "Postavite Clip Start",
+        "ClipStart": "Isječak Start",
+        "SetClipEnd": "Postavi kraj isječka",
+        "ClipEnd": "Kraj isječka"
     }
 }

@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "לְקַצֵץ",
-        "errorNoSource": "אין מקור וידאו"
+        "errorNoSource": "אין מקור וידאו",
+        "SkipAfter": "דלג אחרי",
+        "Skip": "לדלג"
     },
     "pdf": {
         "clip": "לְקַצֵץ",

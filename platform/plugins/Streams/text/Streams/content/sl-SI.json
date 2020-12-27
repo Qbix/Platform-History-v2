@@ -224,7 +224,10 @@
             "fullScreen": "Celozaslonski način"
         },
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
-        "streamTitle": "{{1}} klic v živo"
+        "streamTitle": "{{1}} klic v živo",
+        "preview": {
+            "preamble": "Sestanek:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dokument PDF",
             "description": "Dokument PDF",
             "newItem": "Dodaj PDF"
+        },
+        "Streams/question": {
+            "displayType": "Vprašanje",
+            "description": "tok vprašanj"
+        },
+        "Streams/answer": {
+            "displayType": "Odgovor",
+            "description": "tok odgovorov"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ni vira slike",
         "uploadLimit": "Največja velikost datoteke: {{size}}",
         "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+    },
+    "questions": {
+        "Questions": "Vprašanja",
+        "Answers": "Odgovori",
+        "AnswerQuestion": "Odgovori na vprašanje",
+        "SetYourAnswer": "Prosim odgovorite na vprašanje",
+        "NewQuestion": "Novo vprašanje",
+        "NewAnswer": "Nov odgovor",
+        "AnswerDetails": "Podrobnosti odgovora",
+        "answerOption": "Možnost",
+        "answerOptionExclusive": "Ekskluzivno",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "brezplačen odgovor ...",
+        "SaveQuestion": "Shrani vprašanje",
+        "SaveAnswer": "Shrani odgovor",
+        "AddAnotherAnswer": "Dodajte še en odgovor",
+        "ErrorAnswers": "Dodajte še en odgovor",
+        "AlreadyAnswered": "Že odgovoril",
+        "TitlePlaceholder": "Vnesite svoje vprašanje",
+        "ContentPlaceholder": "Tu vnesite dodatne informacije, da boste lažje odgovorili",
+        "ErrorTitle": "Zahtevano vprašanje"
+    },
+    "experience": {
+        "NewExperience": "Nova izkušnja"
     }
 }

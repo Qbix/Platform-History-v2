@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "agrafe",
-        "errorNoSource": "Aucune source vidéo"
+        "errorNoSource": "Aucune source vidéo",
+        "SkipAfter": "Passer après",
+        "Skip": "Sauter"
     },
     "pdf": {
         "clip": "agrafe",

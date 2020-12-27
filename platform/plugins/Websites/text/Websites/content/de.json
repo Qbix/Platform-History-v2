@@ -34,7 +34,8 @@
             "invalidURL": "ungültige URL"
         },
         "FileTooLarge": "Datei zu groß zum Zwischenspeichern. Maximale Dateigröße {{size}}",
-        "InvalidPDF": "Die Datei ist kein gültiges PDF"
+        "InvalidPDF": "Die Datei ist kein gültiges PDF",
+        "StartTypingTitleOrKeywords": "Beginnen Sie mit der Eingabe von Titeln oder Schlüsselwörtern ..."
     },
     "types": {
         "Websites\/article": {

@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "isječak",
-        "errorNoSource": "Nema video izvora"
+        "errorNoSource": "Nema video izvora",
+        "SkipAfter": "Preskoči nakon",
+        "Skip": "Preskočiti"
     },
     "pdf": {
         "clip": "isječak",
