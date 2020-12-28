@@ -22834,6 +22834,10 @@
          */
         'playsinline'].forEach(function (prop) {
         Html5.prototype['set' + toTitleCase(prop)] = function (v) {
+            if (!this.el_) {
+                return;
+            }
+
             this.el_[prop] = v;
 
             if (v) {
@@ -23103,11 +23107,7 @@
          */
         'crossOrigin'].forEach(function (prop) {
             Html5.prototype[prop] = function () {
-                if (typeof this.el_ !== "object") {
-                    return;
-                }
-
-                return this.el_[prop];
+                return Q.getObject(["el_", prop], this);
             };
         }); // Wrap native properties with a setter in this format:
     // set + toTitleCase(name)
