@@ -23102,10 +23102,14 @@
          * @see [Spec]{@link https://html.spec.whatwg.org/#attr-media-crossorigin}
          */
         'crossOrigin'].forEach(function (prop) {
-        Html5.prototype[prop] = function () {
-            return this.el_[prop];
-        };
-    }); // Wrap native properties with a setter in this format:
+            Html5.prototype[prop] = function () {
+                if (typeof this.el_ !== "object") {
+                    return;
+                }
+
+                return this.el_[prop];
+            };
+        }); // Wrap native properties with a setter in this format:
     // set + toTitleCase(name)
     // The list is as follows:
     // setVolume, setSrc, setPoster, setPreload, setPlaybackRate, setDefaultPlaybackRate,
