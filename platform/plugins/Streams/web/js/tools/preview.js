@@ -488,9 +488,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			}
 			var ao = Q.extend({}, state.actions);
 			ao = Q.extend(ao, 10, { actions: actions });
-			$te.tool('Q/actions', ao);
 			if (Q.getObject('Q.tools.streams_preview', $te[0])) {
-				$te.activate();
+				$te.tool('Q/actions', ao).activate();
 			}
 
 			if ($te.state('Q/actions')) {
