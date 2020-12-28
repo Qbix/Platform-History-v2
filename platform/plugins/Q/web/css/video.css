@@ -162,3 +162,26 @@
     position: absolute;
     top: -1000px;
 }
+
+.Q_video_tool .video-js .vjs-big-play-button {
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+    background-color: unset;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+}
+.Q_video_tool .video-js .vjs-big-play-button .vjs-icon-placeholder,
+.Q_video_tool .video-js .vjs-big-play-button .vjs-control-text {
+    display: none;
+}
+.Q_video_tool .vjs-has-started .vjs-big-play-button {
+    display: block;
+}
+.Q_video_tool .vjs-playing .vjs-big-play-button {
+    display: none;
+}
