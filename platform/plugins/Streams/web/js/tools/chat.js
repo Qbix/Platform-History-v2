@@ -639,7 +639,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = tool.state;
 		var params = {
-			max  : state.earliest ? state.earliest - 1 : state.stream.fields.messageCount,
+			max  : state.earliest ? state.earliest - 1 : -1,
 			limit: state.messagesToLoad,
 			type: ["Streams/chat/message", "Streams/relatedTo"],
 			withMessageTotals: ["Streams/chat/message", "Streams/relatedTo"]
@@ -1189,7 +1189,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 
 		// for some reason stream get from cache with wrong messageCount field
-		Q.Streams.retainWith(this).get.force(state.publisherId, state.streamName, function () {
+		Q.Streams.retainWith(this).get(state.publisherId, state.streamName, function () {
 			state.stream = this;
 			tool.more(function () {
 				_render.apply(this, arguments);
