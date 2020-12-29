@@ -253,8 +253,11 @@ Q.Tool.define("Q/video", function (options) {
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), true);
+		this.setCurrentPosition(this.calculateStartPosition(), true, true);
 		this.addAdvertising();
+	}),
+	onCanPlay: new Q.Event(function () {
+		this.setCurrentPosition(this.calculateStartPosition(), true, true);
 	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
@@ -382,7 +385,6 @@ Q.Tool.define("Q/video", function (options) {
 				});
 
 				this.on('seeked', function() {
-					onPlay();
 					onSeek();
 				});
 
@@ -417,9 +419,6 @@ Q.Tool.define("Q/video", function (options) {
 					}
 				};
 
-				// update currentPosition array on play
-				//this.on('timeupdate', function() {});
-
 				// call onLoad when loadedmetadata event occured
 				this.on("loadedmetadata", function() {
 					if (this.loadedmetadata) {
@@ -429,6 +428,16 @@ Q.Tool.define("Q/video", function (options) {
 					this.loadedmetadata = true;
 					
 					Q.handle(state.onLoad, tool);
+				});
+
+				this.on("canplay", function() {
+					if (this.canplay) {
+						return;
+					}
+
+					this.canplay = true;
+
+					Q.handle(state.onCanPlay, tool);
 				});
 			});
 		});
@@ -559,8 +568,9 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method setCurrentPosition
 	 * @param {integer} position in milliseonds
 	 * @param {boolean} [silent=false] whether to mute sound while setting position
+	 * @param {boolean} [pause=false] whether to pause video after position changed
 	 */
-	setCurrentPosition: function (position, silent) {
+	setCurrentPosition: function (position, silent, pause) {
 		var tool = this;
 		var state = this.state;
 		var player = state.player;
@@ -581,15 +591,23 @@ Q.Tool.define("Q/video", function (options) {
 
 		player.currentTime(position/1000);
 
-		if (silent) {
+		if (silent || pause) {
 			// wait for start position
 			var counter = 0;
 			var intervalId = setInterval(function() {
 				var currentPosition = tool.getCurrentPosition();
 
-				if (currentPosition === position || counter > 15) {
-					player.muted(false);
-					player.waiting(false);
+				if (currentPosition === position || counter > 10) {
+					if (silent) {
+						player.muted(false);
+						player.waiting(false);
+					}
+
+					if (pause) {
+						player.pause();
+						player.trigger('pause');
+					}
+
 					clearInterval(intervalId);
 				}
 
