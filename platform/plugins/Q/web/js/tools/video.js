@@ -605,7 +605,7 @@ Q.Tool.define("Q/video", function (options) {
 
 					if (pause) {
 						player.pause();
-						player.trigger('pause');
+						player.trigger && player.trigger('pause');
 					}
 
 					clearInterval(intervalId);
