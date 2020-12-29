@@ -1770,7 +1770,11 @@ window.WebRTCconferenceLib = function app(options){
             var _dataListeners = [];
 
             var videoComposer = (function () {
-                var _streams = [];
+                var _scenes = [];
+                var _activeScene = null;
+                var _defaultScene = null;
+                var _webrtcGroup = null;
+                var _availableWebRTCSources = [];
                 var _size = {width:1280, height: 720};
                 var _inputCtx = null;
                 var _outputCtx = null;
@@ -1790,7 +1794,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
                     videoCanvas.style.position = 'absolute';
                     videoCanvas.style.top = '-999999999px';
-                    //videoCanvas.style.top = '0';
+                    videoCanvas.style.top = '0';
                     videoCanvas.style.left = '0';
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
@@ -1812,7 +1816,24 @@ window.WebRTCconferenceLib = function app(options){
                     _canvas.height = _size.height;
                 }
 
-                var CanvasStream = function (participant) {
+                var Scene = function () {
+                    this.title = null;
+                    this.sources = [];
+                }
+
+                var defaultScene = new Scene();
+                defaultScene.title = 'default';
+                _defaultScene = _activeScene = defaultScene;
+                _scenes.push(defaultScene);
+
+                var Source = function () {
+                    this.active = null;
+                    this.title = null;
+                    this.rect = null;
+                    this.parentGroup = null;
+                }
+
+                var WebRTCStreamSource = function (participant) {
                     this.kind = null;
                     this.participant = participant;
                     this.name = participant.username;
@@ -1821,37 +1842,202 @@ window.WebRTCconferenceLib = function app(options){
                     this.mediaStream = null;
                     this.htmlVideoEl = null;
                     this.screenSharing = false;
-                    this.volumeHistory = [];
-                    this.rect = null;
+                    this.sourceType = 'webrtc';
                 }
-                function updateCanvasLayout() {
-                    log('updateCanvasLayout start')
+                WebRTCStreamSource.prototype = new Source();
+
+                var ImageSource = function () {
+                     this.imageInstance = null;
+                     this.link = null;
+                     this.sourceType = 'image';
+                }
+                ImageSource.prototype = new Source();
+
+                var VideoSource = function () {
+                     this.videoInstance = null;
+                     this.link = null;
+                     this.sourceType = 'video';
+                }
+                VideoSource.prototype = new Source();
+
+                var GroupSource = function () {
+                     this.groupType = null;
+                     this.sourceType = 'group';
+                }
+                GroupSource.prototype = new Source();
+                var webrtcGroup = new GroupSource()
+                webrtcGroup.title = 'Video Chat';
+                webrtcGroup.groupType = 'webrtc';
+                defaultScene.sources.push(webrtcGroup);
+                _webrtcGroup = webrtcGroup;
+
+                function createScene(name) {
+                    var newScene = new Scene();
+                    newScene.title = name;
+                }
+
+                function addSource(newSource) {
+                    console.log('addSource', newSource)
+                    if(newSource.sourceType == 'webrtc') {
+                        let startIndex = null;
+                        console.log('addSource webrtc')
+
+                        for (let j in _activeScene.sources) {
+                            if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
+                                log('updateWebRTCCanvasLayout rendered for', _activeScene.sources[j])
+
+                                _activeScene.sources.splice(j + 1, 0, newSource)
+                                log('updateWebRTCCanvasLayout rendered for', _activeScene.sources)
+
+                                break;
+                            }
+                        }
+                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
+
+                    } else if(newSource.sourceType == 'image') {
+                        var imageSource = new ImageSource();
+                        imageSource.imageInstance = newSource.imageInstance;
+                        _activeScene.sources.push(imageSource);
+                        return imageSource;
+                    } else if(newSource.sourceType == 'video') {
+                        var videoSource = new VideoSource();
+                        videoSource.videoInstance = newSource.videoInstance;
+                        _activeScene.sources.push(videoSource);
+                        return videoSource;
+                    }
+                }
+
+                function getScenes() {
+                    return _scenes;
+                }
+
+                function getActiveScene() {
+                    return _activeScene;
+                }
+
+                function getSources(type) {
+                    if(type == null) return _activeScene.sources;
+                    console.log('getSources')
+                    console.log('getSources _activeScene', _activeScene)
+                    console.log('getSources _activeScene.sources', _activeScene.sources)
+                    return _activeScene.sources.filter(function (source) {
+                        return source.sourceType == type && source.parentGroup != null && source.parentGroup.groupType == 'webrtc';
+                    });
+                }
+
+                function moveSource(old_index, new_index) {
+                    console.log('moveItem', old_index, new_index);
+                    if (new_index < 0) {
+                        new_index = 0;
+                    }
+                    if (new_index >= _activeScene.sources.length) {
+                        new_index = _activeScene.sources.length - 1;
+                    }
+                    _activeScene.sources.splice(new_index, 0, _activeScene.sources.splice(old_index, 1)[0]);
+                    return _activeScene.sources;
+                }
+
+                function moveSourceForward(source) {
+                    console.log('moveSourceForward');
+                    if(source.sourceType == 'group') {
+                        var childItems = 0;
+                        for(var i in _activeScene.sources) {
+                            if(_activeScene.sources[i].parentGroup == source) {
+                                childItems++;
+                            }
+                        }
+                        console.log('moveSourceBackward childItems', childItems);
+
+                        for(var i in _activeScene.sources) {
+                            if(_activeScene.sources[i] == source) {
+                                console.log('moveForward ==', i);
+
+                                _activeScene.sources.splice(i + childItems + 1, 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
+                                break;
+                            }
+                        }
+                        console.log('moveSourceBackward  _activeScene.sources',  _activeScene.sources);
+
+                        return;
+                    }
+                    for(var i in _activeScene.sources) {
+                        if(_activeScene.sources[i] == source) {
+                            console.log('moveForward ==', i);
+                            console.log('moveSourceBackward for', _activeScene.sources[i], source);
+
+                            moveSource(i, parseInt(i) + 1);
+                            break;
+                        }
+                    }
+                }
+
+                function moveSourceBackward(source) {
+                    console.log('moveSourceBackward', source);
+                    if(source.sourceType == 'group') {
+                        var childItems = 0;
+                        for(var i in _activeScene.sources) {
+                            if(_activeScene.sources[i].parentGroup == source) {
+                                childItems++;
+                            }
+                        }
+                        console.log('moveSourceBackward childItems', childItems);
+
+                        for(var i in _activeScene.sources) {
+                            if(_activeScene.sources[i] == source) {
+                                console.log('moveForward ==', i);
+
+                                _activeScene.sources.splice(i - (childItems + 1), 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
+                                break;
+                            }
+                        }
+                        console.log('moveSourceBackward  _activeScene.sources',  _activeScene.sources);
+
+                        return;
+                    }
+
+                    for(var i in _activeScene.sources) {
+                        console.log('moveSourceBackward i', i);
+                        console.log('moveSourceBackward for', _activeScene.sources[i], source);
+
+                        if(_activeScene.sources[i] == source) {
+                            moveSource(i, parseInt(i) - 1);
+                        }
+                    }
+                }
+
+                function updateWebRTCCanvasLayout() {
+                    log('updateWebRTCCanvasLayout start')
 
                     var tracksToAdd = [];
                     var tracksToRemove = [];
 
-
+                    var currentWebRTCSources = getSources('webrtc');
                     var participants = _roomInstance.roomParticipants(true);
-                    log('updateCanvasLayout participants',  participants)
+                    log('updateWebRTCCanvasLayout participants',  participants)
+                    log('updateWebRTCCanvasLayout currentWebRTCSources',  currentWebRTCSources)
 
                     var renderScreenSharingLayout = false;
                     for(var v in participants) {
-                        log('updateCanvasLayout participant', participants[v].online, participants[v])
+                        log('updateWebRTCCanvasLayout participant', participants[v].online, participants[v])
 
                         let renderedTracks = [];
-                        for (let j in _streams) {
+                        for (let j in currentWebRTCSources) {
+                            log('updateWebRTCCanvasLayout rendered for', currentWebRTCSources[j], currentWebRTCSources[j].participant == participants[v])
+                            log('updateWebRTCCanvasLayout rendered for2', currentWebRTCSources[j].participant.sid, participants[v].sid)
 
-                            if(_streams[j].participant == participants[v]) {
-                                log('updateCanvasLayout rendered for', _streams[j])
+                            if(currentWebRTCSources[j].participant == participants[v]) {
+                                log('updateWebRTCCanvasLayout rendered for', currentWebRTCSources[j])
 
-                                renderedTracks.push(_streams[j])
+                                renderedTracks.push(currentWebRTCSources[j])
                             }
                         }
 
-                        log('updateCanvasLayout renderedTracks', renderedTracks)
+                        log('updateWebRTCCanvasLayout renderedTracks', renderedTracks)
 
 
                         if(participants[v].online == false) {
+                            log('updateWebRTCCanvasLayout participants[v].online == false: REMOVE TRACK')
+
                             tracksToRemove = tracksToRemove.concat(renderedTracks);
                             continue;
                         }
@@ -1859,29 +2045,29 @@ window.WebRTCconferenceLib = function app(options){
 
                         let vTracks = participants[v].videoTracks(true);
                         let aTracks = participants[v].audioTracks();
-                        log('updateCanvasLayout p tracks', vTracks, aTracks)
+                        log('updateWebRTCCanvasLayout p tracks', vTracks, aTracks)
 
-                        log('updateCanvasLayout rendered _streams', _streams)
+                        log('updateWebRTCCanvasLayout rendered currentWebRTCSources', currentWebRTCSources)
 
                         vTracks = vTracks.filter(function (o) {
                             return o.parentScreen.isActive;
                         });
-                        log('updateCanvasLayout vTracks', vTracks)
+                        log('updateWebRTCCanvasLayout vTracks', vTracks)
 
                         let audioIsEnabled = participants[v].isLocal ? app.conferenceControl.micIsEnabled() : participants[v].audioIsMuted != true;
 
-                        log('updateCanvasLayout audioIsEnabled', audioIsEnabled)
+                        log('updateWebRTCCanvasLayout audioIsEnabled', audioIsEnabled)
 
 
                         if(vTracks.length != 0) {
-                            log('updateCanvasLayout vTracks != 0')
+                            log('updateWebRTCCanvasLayout vTracks != 0')
 
                             for (let s in vTracks) {
-                                log('updateCanvasLayout track', vTracks[s])
+                                log('updateWebRTCCanvasLayout track', vTracks[s])
 
                                 let trackCurrentlyRendered = false;
                                 for (let c in renderedTracks) {
-                                    log('updateCanvasLayout trackCurrentlyRendered', vTracks[s], renderedTracks[c].track)
+                                    log('updateWebRTCCanvasLayout trackCurrentlyRendered', vTracks[s], renderedTracks[c].track)
 
                                     if(vTracks[s] == renderedTracks[c].track)  {
                                         trackCurrentlyRendered = true;
@@ -1900,13 +2086,13 @@ window.WebRTCconferenceLib = function app(options){
                                         });
                                     }
                                 }
-                                log('updateCanvasLayout trackCurrentlyRendered', trackCurrentlyRendered)
+                                log('updateWebRTCCanvasLayout trackCurrentlyRendered', trackCurrentlyRendered)
 
                                 if(!trackCurrentlyRendered) {
-                                    log('updateCanvasLayout !trackCurrentlyRendered')
+                                    log('updateWebRTCCanvasLayout !trackCurrentlyRendered')
 
                                     if(vTracks.length > 1) {
-                                        log('updateCanvasLayout !trackCurrentlyRendered if1')
+                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered if1 ADD VIDEO RECT')
 
                                         /*let z;
                                         for(z = renderedTracks.length - 1; z >= 0 ; z--){
@@ -1917,22 +2103,25 @@ window.WebRTCconferenceLib = function app(options){
                                             }
                                         }*/
 
-                                        let canvasStream = new CanvasStream(participants[v]);
+                                        let canvasStream = new WebRTCStreamSource(participants[v]);
                                         canvasStream.kind = 'video';
                                         canvasStream.track = vTracks[s];
                                         canvasStream.mediaStream = vTracks[s].stream;
                                         canvasStream.htmlVideoEl = vTracks[s].trackEl;
+                                        canvasStream.parentGroup = _webrtcGroup;
                                         if (vTracks[s].screensharing == true) canvasStream.screenSharing = true;
                                         tracksToAdd.push(canvasStream)
 
                                     } else {
-                                        log('updateCanvasLayout !trackCurrentlyRendered else')
+                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered else')
 
                                         let z, replacedAudioTrack = false;
                                         for(z = renderedTracks.length - 1; z >= 0 ; z--){
-                                            log('updateCanvasLayout !trackCurrentlyRendered renderedTracks[z]', renderedTracks[z])
+                                            log('updateWebRTCCanvasLayout !trackCurrentlyRendered renderedTracks[z]', renderedTracks[z])
 
                                             if(renderedTracks[z].kind == 'audio') {
+                                                log('updateWebRTCCanvasLayout else REPLACE VIDEO TRACK')
+
                                                 renderedTracks[z].kind = 'video';
                                                 renderedTracks[z].track = vTracks[s];
                                                 renderedTracks[z].mediaStream = vTracks[s].stream;
@@ -1943,14 +2132,17 @@ window.WebRTCconferenceLib = function app(options){
                                             }
                                         }
 
-                                        log('updateCanvasLayout replacedAudioTrack', replacedAudioTrack)
+                                        log('updateWebRTCCanvasLayout replacedAudioTrack', replacedAudioTrack)
 
                                         if(!replacedAudioTrack) {
-                                            let canvasStream = new CanvasStream(participants[v]);
+                                            log('updateWebRTCCanvasLayout else ADD VIDEO TRACK')
+
+                                            let canvasStream = new WebRTCStreamSource(participants[v]);
                                             canvasStream.kind = 'video';
                                             canvasStream.track = vTracks[s];
                                             canvasStream.mediaStream = vTracks[s].stream;
                                             canvasStream.htmlVideoEl = vTracks[s].trackEl;
+                                            canvasStream.parentGroup = _webrtcGroup;
                                             if (vTracks[s].screensharing == true) canvasStream.screenSharing = true;
                                             tracksToAdd.push(canvasStream)
                                         }
@@ -1962,7 +2154,7 @@ window.WebRTCconferenceLib = function app(options){
                             }
 
                         } else if (aTracks.length != 0 && audioIsEnabled) {
-                            log('updateCanvasLayout aTracks != 0')
+                            log('updateWebRTCCanvasLayout aTracks != 0')
 
                             let audioCurrentlyRendered = false;
                             for (let c in renderedTracks) {
@@ -1978,10 +2170,11 @@ window.WebRTCconferenceLib = function app(options){
                             })
 
                             if(renderedVideoTracks.length != 0) {
-                                log('updateCanvasLayout aTracks: if1', renderedVideoTracks.length)
+                                log('updateWebRTCCanvasLayout aTracks: if1', renderedVideoTracks.length)
 
                                 var newAudioTrack = renderedVideoTracks.splice(0, 1)[0];
-                                log('updateCanvasLayout aTracks: if1 splice', renderedVideoTracks.length, tracksToRemove.length)
+                                log('updateWebRTCCanvasLayout aTracks: if1 splice', renderedVideoTracks.length, tracksToRemove.length)
+                                log('updateWebRTCCanvasLayout aTracks: REMOVE TRACK')
 
                                 newAudioTrack.kind = 'audio';
                                 newAudioTrack.track = null;
@@ -1991,10 +2184,12 @@ window.WebRTCconferenceLib = function app(options){
 
                                 tracksToRemove = tracksToRemove.concat(renderedVideoTracks);
                             } else {
-                                log('updateCanvasLayout aTracks: if2')
+                                log('updateWebRTCCanvasLayout aTracks: if2')
+                                log('updateWebRTCCanvasLayout aTracks: ADD AUDIO TRACK')
 
-                                let canvasStream = new CanvasStream(participants[v]);
+                                let canvasStream = new WebRTCStreamSource(participants[v]);
                                 canvasStream.kind = 'audio';
+                                canvasStream.parentGroup = _webrtcGroup;
                                 tracksToAdd.push(canvasStream);
                             }
                         }
@@ -2006,7 +2201,7 @@ window.WebRTCconferenceLib = function app(options){
                             if(renderedTracks[x].kind == 'video') {
                                 for (let m in vTracks) {
                                     if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) {
-                                        log('updateCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
+                                        log('updateWebRTCCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
 
                                         trackIsLive = true;
                                     }
@@ -2016,81 +2211,87 @@ window.WebRTCconferenceLib = function app(options){
                             }
 
 
-                            if(!trackIsLive) tracksToRemove.push(renderedTracks[x]);
+                            if(!trackIsLive) {
+                                log('updateWebRTCCanvasLayout aTracks: REMOVE AUDIO TRACK')
+
+                                tracksToRemove.push(renderedTracks[x]);
+                            }
                         }
 
                     }
-                    log('updateCanvasLayout result', tracksToAdd, tracksToRemove)
-                    log('updateCanvasLayout room name', options.roomName)
+                    log('updateWebRTCCanvasLayout result', tracksToAdd, tracksToRemove)
+                    log('updateWebRTCCanvasLayout room name', options.roomName)
 
-                    for(let r = _streams.length - 1; r >= 0 ; r--){
+                    for(let r = currentWebRTCSources.length - 1; r >= 0 ; r--){
                         let onlineInCurrentRoom = false;
                         for(let p in participants) {
-                            if(_streams[r].participant == participants[p]) {
+                            if(currentWebRTCSources[r].participant == participants[p]) {
                                 onlineInCurrentRoom = true;
                             }
                         }
-                        if(_streams[r].participant.isLocal && !onlineInCurrentRoom) {
-                            log('updateCanvasLayout prevRoom: loc prev room stream', _streams[r])
+                        if(currentWebRTCSources[r].participant.isLocal && !onlineInCurrentRoom) {
+                            log('updateWebRTCCanvasLayout prevRoom: loc prev room stream', currentWebRTCSources[r])
 
-                            for(let m = _streams.length - 1; m >= 0 ; m--){
-                                if(!_streams[m].participant.isLocal || _streams[m] == _streams[r]) continue;
-                                log('updateCanvasLayout prevRoom: loc live stream', _streams[m])
+                            for(let m = currentWebRTCSources.length - 1; m >= 0 ; m--){
+                                if(!currentWebRTCSources[m].participant.isLocal || currentWebRTCSources[m] == currentWebRTCSources[r]) continue;
+                                log('updateWebRTCCanvasLayout prevRoom: loc live stream', currentWebRTCSources[m])
 
-                                if(_streams[m].kind == 'audio') {
-                                    _streams[r].participant = _streams[m].participant;
-                                    _streams[r].kind = 'audio';
-                                    _streams[r].track = null;
-                                    _streams[r].mediaStream = null;
-                                    _streams[r].htmlVideoEl = null;
-                                    _streams[r].screenSharing = false;
+                                if(currentWebRTCSources[m].kind == 'audio') {
+                                    currentWebRTCSources[r].participant = currentWebRTCSources[m].participant;
+                                    currentWebRTCSources[r].kind = 'audio';
+                                    currentWebRTCSources[r].track = null;
+                                    currentWebRTCSources[r].mediaStream = null;
+                                    currentWebRTCSources[r].htmlVideoEl = null;
+                                    currentWebRTCSources[r].screenSharing = false;
                                 } else {
-                                    _streams[r].participant = _streams[m].participant;
-                                    _streams[r].kind = 'video';
-                                    _streams[r].track = _streams[m].track;
-                                    _streams[r].mediaStream = _streams[m].track.stream;
-                                    _streams[r].htmlVideoEl = _streams[m].track.trackEl;
-                                    if (_streams[r].track.screensharing == true) _streams[m].screenSharing = true;
+                                    currentWebRTCSources[r].participant = currentWebRTCSources[m].participant;
+                                    currentWebRTCSources[r].kind = 'video';
+                                    currentWebRTCSources[r].track = currentWebRTCSources[m].track;
+                                    currentWebRTCSources[r].mediaStream = currentWebRTCSources[m].track.stream;
+                                    currentWebRTCSources[r].htmlVideoEl = currentWebRTCSources[m].track.trackEl;
+                                    if (currentWebRTCSources[r].track.screensharing == true) currentWebRTCSources[m].screenSharing = true;
 
                                 }
-                                tracksToRemove.push(_streams[m]);
+                                log('updateWebRTCCanvasLayout prevRoom: REMOVE TRACK')
+
+                                tracksToRemove.push(currentWebRTCSources[m]);
                                 break;
                             }
                             break;
-                        } else if(_streams[r].participant.isLocal && onlineInCurrentRoom) {
-                            log('updateCanvasLayout prevRoom: loc current room', _streams[r])
+                        } else if(currentWebRTCSources[r].participant.isLocal && onlineInCurrentRoom) {
+                            log('updateWebRTCCanvasLayout prevRoom: loc current room', currentWebRTCSources[r])
 
                             continue;
-                        } else if(!_streams[r].participant.isLocal && !onlineInCurrentRoom) {
-                            log('updateCanvasLayout prevRoom: remote prev room', _streams[r])
+                        } else if(!currentWebRTCSources[r].participant.isLocal && !onlineInCurrentRoom) {
+                            log('updateWebRTCCanvasLayout prevRoom: REMOVE TRACK', currentWebRTCSources[r])
 
-                            tracksToRemove.push(_streams[r])
+                            tracksToRemove.push(currentWebRTCSources[r])
                         } else {
-                            log('updateCanvasLayout prevRoom: else', _streams[r])
+                            log('updateWebRTCCanvasLayout prevRoom: else', currentWebRTCSources[r])
 
                         }
                     }
 
-                    log('updateCanvasLayout remove from prev room', tracksToRemove)
+                    log('updateWebRTCCanvasLayout remove from prev room', tracksToRemove)
                     for(let n in tracksToRemove) {
-                        log('updateCanvasLayout tracksToRemove', tracksToRemove[n].participant.isLocal)
+                        log('updateWebRTCCanvasLayout tracksToRemove', tracksToRemove[n].participant.isLocal)
 
                     }
 
-                    for(let d = _streams.length - 1; d >= 0 ; d--){
-                        log('updateCanvasLayout remove')
+                    for(let d = _activeScene.sources.length - 1; d >= 0 ; d--){
+                        log('updateWebRTCCanvasLayout remove')
 
                         function remove() {
-                            _inputCtx.clearRect(_streams[d].rect.x, _streams[d].rect.y, _streams[d].rect.width, _streams[d].rect.height);
-                            _streams[d] = null;
-                            _streams.splice(d, 1);
+                            _inputCtx.clearRect(_activeScene.sources[d].rect.x, _activeScene.sources[d].rect.y, _activeScene.sources[d].rect.width, _activeScene.sources[d].rect.height);
+                            _activeScene.sources[d] = null;
+                            _activeScene.sources.splice(d, 1);
                         }
 
                         for(let n in tracksToRemove) {
-                            log('updateCanvasLayout remove tracksToRemove', _streams[d], tracksToRemove[n])
+                            log('updateWebRTCCanvasLayout remove tracksToRemove', _activeScene.sources[d], tracksToRemove[n])
 
-                            if(_streams[d] == tracksToRemove[n]) {
-                                log('updateCanvasLayout remove stream', _streams[d])
+                            if(_activeScene.sources[d] == tracksToRemove[n]) {
+                                log('updateWebRTCCanvasLayout remove stream', _activeScene.sources[d])
 
                                 remove();
                                 break;
@@ -2099,7 +2300,7 @@ window.WebRTCconferenceLib = function app(options){
                     }
 
 
-                    var layoutRects, streamsNum = _streams.concat(tracksToAdd).length;
+                    var layoutRects, streamsNum = currentWebRTCSources.concat(tracksToAdd).length;
                     if(renderScreenSharingLayout) {
                         layoutRects = layoutGenerator('screenSharing', streamsNum);
                     } else {
@@ -2107,16 +2308,16 @@ window.WebRTCconferenceLib = function app(options){
 
                     }
 
-                    log('updateCanvasLayout streamsNum', streamsNum)
+                    log('updateWebRTCCanvasLayout streamsNum', streamsNum)
 
-                    var streamsToUpdate = _streams.slice();
+                    var streamsToUpdate = currentWebRTCSources.slice();
                     var c = 0;
 
                     var videoTracksOfUserWhoShares = [];
                     var screenSharingIsNew = false;
 
                     if(renderScreenSharingLayout) {
-                        log('updateCanvasLayout: renderScreenSharingLayout: sort streams')
+                        log('updateWebRTCCanvasLayout: renderScreenSharingLayout: sdaraort streams')
 
                         var getUsersTracks = function(participant, screenSharingStream) {
 
@@ -2160,7 +2361,7 @@ window.WebRTCconferenceLib = function app(options){
 
                         }
 
-                        for(r = 0; r < tracksToAdd.length; r++){
+                        for(let r = 0; r < tracksToAdd.length; r++){
                             if(!tracksToAdd[r].screenSharing) continue;
 
                             let screenSharingStream = tracksToAdd[r];
@@ -2191,17 +2392,17 @@ window.WebRTCconferenceLib = function app(options){
                     }
 
 
-                    log('updateCanvasLayout layoutRects', layoutRects)
+                    log('updateWebRTCCanvasLayout layoutRects', layoutRects)
 
-                    log('updateCanvasLayout tracksToAdd', tracksToAdd)
+                    log('updateWebRTCCanvasLayout tracksToAdd', tracksToAdd)
 
-                    log('updateCanvasLayout streamsToUpdate', streamsToUpdate.length)
+                    log('updateWebRTCCanvasLayout streamsToUpdate', streamsToUpdate.length)
 
                     for(let a = 0; a < tracksToAdd.length; a++){
                         let rect = layoutRects[c];
 
-                        log('updateCanvasLayout add new tracks', rect)
-                        log('updateCanvasLayout add new tracks c', c)
+                        log('updateWebRTCCanvasLayout add new tracks', rect)
+                        log('updateWebRTCCanvasLayout add new tracks c', c)
 
                         var startRect = new DOMRect(0, 0, 0, 0);
                         tracksToAdd[a].rect = startRect;
@@ -2211,15 +2412,15 @@ window.WebRTCconferenceLib = function app(options){
                             moveit(timestamp, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add');
                         })
 
-                        _streams.unshift(tracksToAdd[a]);
+                        addSource(tracksToAdd[a]);
 
                         c++
                     }
 
                     for(let r = 0; r < streamsToUpdate.length; r++){
                         let rect = layoutRects[c];
-                        log('updateCanvasLayout streamsToUpdate loop', streamsToUpdate[r].screenSharing, rect)
-                        log('updateCanvasLayout streamsToUpdate c',c)
+                        log('updateWebRTCCanvasLayout streamsToUpdate loop', streamsToUpdate[r].screenSharing, rect)
+                        log('updateWebRTCCanvasLayout streamsToUpdate c',c)
 
                         let rectToUpdate = new DOMRect(streamsToUpdate[r].rect.x, streamsToUpdate[r].rect.y, streamsToUpdate[r].rect.width, streamsToUpdate[r].rect.height);
                         streamsToUpdate[r].rect = rectToUpdate;
@@ -2236,9 +2437,9 @@ window.WebRTCconferenceLib = function app(options){
                         for (let a = videoTracksOfUserWhoShares.length - 1; a >= 0; a--) {
                             let rect = layoutRects[a];
 
-                            log('updateCanvasLayout screensharing tracks', rect)
+                            log('updateWebRTCCanvasLayout screensharing tracks', rect)
 
-                            let index = _streams.indexOf(videoTracksOfUserWhoShares[a]);
+                            let index = _activeScene.sources.indexOf(videoTracksOfUserWhoShares[a]);
 
 
                             if(index == -1) {
@@ -2254,9 +2455,9 @@ window.WebRTCconferenceLib = function app(options){
                                     }, 300, starttime, 'add');
                                 })
 
-                                log('updateCanvasLayout videoTracksOfUserWhoShares for screenSharingIsNew', videoTracksOfUserWhoShares[a])
+                                log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for screenSharingIsNew', videoTracksOfUserWhoShares[a])
 
-                                _streams.unshift(videoTracksOfUserWhoShares[a]);
+                                addSource(videoTracksOfUserWhoShares[a]);
                             } else {
                                 videoTracksOfUserWhoShares[a].rect = rect;
                                 let rectToUpdate = new DOMRect(videoTracksOfUserWhoShares[a].rect.x, videoTracksOfUserWhoShares[a].rect.y, videoTracksOfUserWhoShares[a].rect.width, videoTracksOfUserWhoShares[a].rect.height);
@@ -2267,10 +2468,10 @@ window.WebRTCconferenceLib = function app(options){
                                     moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up');
                                 })
 
-                                log('updateCanvasLayout videoTracksOfUserWhoShares for !screenSharingIsNew index', index)
+                                log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for !screenSharingIsNew index', index)
 
                                 if(a === 0) {
-                                    _streams.splice(0, 0, _streams.splice(index, 1)[0])
+                                    _activeScene.sources.splice(0, 0, _activeScene.sources.splice(index, 1)[0])
                                 }
 
 
@@ -2280,7 +2481,7 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     }
 
-                    log('updateCanvasLayout result streams', _streams)
+                    log('updateWebRTCCanvasLayout result streams', _activeScene.sources)
 
 
 
@@ -2310,19 +2511,34 @@ window.WebRTCconferenceLib = function app(options){
 
                 function drawVideosOnCanvas() {
                     _inputCtx.clearRect(0, 0, _size.width, _size.height);
-                    if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
+                    //if(options.liveStreaming.drawBackground && _background != null) drawBackground(_background);
 
-                    for(let i = 0; i < _streams.length; i++) {
-                        let streamData = _streams[i];
+                    for(let i = 0; i < _activeScene.sources.length; i++) {
+                        if(_activeScene.sources[i].active == false ||_activeScene.sources[i].sourceType == 'group') continue;
+                         if(window.debugg == true) console.log('_activeScene.sources', _activeScene.sources.length)
 
-                        if(streamData.kind == 'video') {
+                        let streamData = _activeScene.sources[i];
+
+                        if(streamData.sourceType == 'webrtc' && streamData.kind == 'video') {
+                            if(window.debugg == true) console.log('_activeScene.sources if1')
                             //log('drawVideosOnCanvas 1')
 
                             drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
-                        } else {
+                        } else if(streamData.sourceType == 'webrtc' && streamData.kind == 'audio') {
                             //log('drawVideosOnCanvas 1')
+                            if(window.debugg == true) console.log('_activeScene.sources if2')
 
                             drawSingleAudioOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height);
+                        } else if(streamData.sourceType == 'image') {
+                            //log('drawVideosOnCanvas 1')
+                            if(window.debugg == true) console.log('_activeScene.sources if3')
+
+                            drawBackground(streamData.imageInstance);
+                        } else if(streamData.sourceType == 'video') {
+                            //log('drawVideosOnCanvas 1')
+                            if(window.debugg == true) console.log('_activeScene.sources if3')
+
+                            drawBackground(streamData.videoInstance);
                         }
                     }
 
@@ -2736,7 +2952,7 @@ window.WebRTCconferenceLib = function app(options){
                     log('compositeVideosAndDraw');
                     if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 
-                    updateCanvasLayout();
+                    updateWebRTCCanvasLayout();
                     drawVideosOnCanvas();
                     _isActive = true;
                     refreshEventListeners(_roomInstance);
@@ -2746,7 +2962,7 @@ window.WebRTCconferenceLib = function app(options){
                     _roomInstance = roomInstance;
                     var updateCanvas = function() {
                         if(_isActive == true) {
-                            updateCanvasLayout();
+                            updateWebRTCCanvasLayout();
                         }
                     }
                     roomInstance.event.on('videoTrackLoaded', updateCanvas);
@@ -3013,7 +3229,7 @@ window.WebRTCconferenceLib = function app(options){
                     }
 
                     _isActive = false;
-                    _streams = [];
+                    if(_activeScene != null) _activeScene.sources = [];
                 }
 
                 function isActive() {
@@ -3021,12 +3237,18 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 return {
-                    updateCanvasLayout: updateCanvasLayout,
+                    updateWebRTCCanvasLayout: updateWebRTCCanvasLayout,
                     compositeVideosAndDraw: compositeVideosAndDraw,
                     refreshEventListeners: refreshEventListeners,
                     switchingRoom: switchingRoom,
                     stop: stopAndRemove,
-                    isActive: isActive
+                    isActive: isActive,
+                    createScene: createScene,
+                    addSource: addSource,
+                    moveSourceForward: moveSourceForward,
+                    moveSourceBackward: moveSourceBackward,
+                    getScenes: getScenes,
+                    getActiveScene: getActiveScene
                 }
             }());
 
@@ -6194,18 +6416,18 @@ window.WebRTCconferenceLib = function app(options){
                 log('offerReceived: publishLocalVideo: cameraIsEnabled = ' + (app.conferenceControl.cameraIsEnabled()));
 
                 //if(app.conferenceControl.cameraIsEnabled()){
-                    if ('ontrack' in RTCPeerConnection) {
-                        for (let t in localTracks) {
-                            log('offerReceived: publishLocalAudio: add videoTrack');
-                            if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
-                        }
-
-                    } else {
-                        if (localParticipant.videoStream != null) {
-                            log('offerReceived: publishLocalAudio: add videoStream');
-                            RTCPeerConnection.addStream(localParticipant.videoStream);
-                        }
+                if ('ontrack' in RTCPeerConnection) {
+                    for (let t in localTracks) {
+                        log('offerReceived: publishLocalAudio: add videoTrack');
+                        if (localTracks[t].kind == 'video') RTCPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
                     }
+
+                } else {
+                    if (localParticipant.videoStream != null) {
+                        log('offerReceived: publishLocalAudio: add videoStream');
+                        RTCPeerConnection.addStream(localParticipant.videoStream);
+                    }
+                }
                 //}
             }
 
@@ -6721,11 +6943,11 @@ window.WebRTCconferenceLib = function app(options){
                     cordova.plugins.iosrtc.getUserMedia({
                         'audio': false,
                         'video': constrains
-                    }, function (videoStream) {
+                    }).then(function (videoStream) {
                         log('toggleCameras: iosrtc: got stream')
 
                         toggleCamera(videoStream);
-                    }, function (error) {
+                    }).catch(function (error) {
                         console.error(error.name + ': ' + error.message);
                         if(failureCallback != null) failureCallback(error);
                     });
@@ -6861,9 +7083,9 @@ window.WebRTCconferenceLib = function app(options){
                         width: { min: 320, max: 1280 },
                         height: { min: 240, max: 720 }
                     }
-                }, function (videoStream) {
+                }).then(function (videoStream) {
                     gotCameraStream(videoStream);
-                }, function (e) {
+                }).catch(function (e) {
                     if (failureCallback != null) failureCallback(e);
                     console.error(e.name + ": " + e.message);
                 });
@@ -6934,9 +7156,9 @@ window.WebRTCconferenceLib = function app(options){
 
                 cordova.plugins.iosrtc.getUserMedia({
                     'audio': true
-                }, function (audioStream) {
+                }).then(function (audioStream) {
                     successCallback(audioStream);
-                }, function (err) {
+                }).catch(function (err) {
                     error(err);
                 });
             } else {
@@ -8022,7 +8244,7 @@ window.WebRTCconferenceLib = function app(options){
             if(callback != null) callback(app);
         }
 
-        cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList){
+        cordova.plugins.iosrtc.enumerateDevices().then(function(mediaDevicesList){
             var mediaDevices = mediaDevicesList;
 
             var videoDevices = 0;
@@ -8046,73 +8268,62 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             if(audioDevices != 0 && options.audio) {
-                cordova.plugins.iosrtc.getUserMedia(
-                    {
+                cordova.plugins.iosrtc.getUserMedia({
                         audio: true,
                         video: false
-                    },
-                    function (audioStream) {
+                    }).then(function (audioStream) {
                         if(videoConstrains !== false) {
-                            cordova.plugins.iosrtc.getUserMedia(
-                                {
+                            cordova.plugins.iosrtc.getUserMedia({
                                     audio: false,
                                     video: true
-                                },
-                                function (videoStream) {
-                                    cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
+                                }).then(function (videoStream) {
+                                    cordova.plugins.iosrtc.enumerateDevices().then(function (mediaDevicesList) {
                                         joinRoom([audioStream, videoStream], mediaDevicesList);
-                                    }, function (error) {
+                                    }).catch(function (error) {
                                         console.error(`Unable to connect to Room: ${error.message}`);
                                     });
-                                },
-                                function (error) {
+                                }).catch(function (error) {
                                     console.error('getUserMedia failed: ', error);
-                                }
-                            );
+                                });
                         } else {
                             joinRoom([audioStream], mediaDevicesList);
                         }
-                    },
-                    function (error) {
+                    }).catch(function (error) {
                         console.error('getUserMedia failed: ', error);
                     }
                 );
             } else if (videoConstrains !== false) {
-                cordova.plugins.iosrtc.getUserMedia(
-                    {
+                cordova.plugins.iosrtc.getUserMedia({
                         audio: false,
                         video: true
-                    },
-                    function (videoStream) {
-                        cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
+                    }).then(function (videoStream) {
+                        cordova.plugins.iosrtc.enumerateDevices().then(function (mediaDevicesList) {
                             try {
                                 joinRoom([videoStream], mediaDevicesList);
                             } catch (e) {
                                 console.error(e.name + ': ' + e.message);
                             }
-                        }, function (error) {
+                        }).catch(function (error) {
                             console.error(`Unable to connect to Room: ${error.message}`);
                         });
-                    },
+                    }).catch(
                     function (error) {
                         console.error('getUserMedia failed: ', error);
-                    }
-                );
+                    });
             } else {
-                cordova.plugins.iosrtc.enumerateDevices(function (mediaDevicesList) {
+                cordova.plugins.iosrtc.enumerateDevices().then(function (mediaDevicesList) {
                     //try {
                     joinRoom((options.streams != null ? options.streams : []), mediaDevicesList);
                     //} catch (e) {
                     ////	console.error('error', e.message);
                     //}
-                }, function (error) {
+                }).catch(function (error) {
                     console.error(`Unable to connect to Room: ${error.message}`);
                 });
             }
 
-        }, function (e) {
-            console.error(e.name + ': ' + e.message)
-
+        }).catch(function(err) {
+            console.error(err.name + ": " + err.message);
         });
     }
 
@@ -8163,7 +8374,7 @@ window.WebRTCconferenceLib = function app(options){
 
                             return localParticipant.RTCPeerConnection.setLocalDescription(localDescription).then(function () {
 
-                                
+
                                 var message = {
                                     type: "answer",
                                     sdp: localDescription
@@ -8668,11 +8879,11 @@ window.WebRTCconferenceLib = function app(options){
             var secure = options.nodeServer.indexOf('https://') == 0;
             socket = io.connect(options.nodeServer + '/webrtc', {
                 transports: ['websocket'],
-               // path: options.roomName,
-               'force new connection': window.WebRTCSocket != null ? false : true,
-               /* channel:'webrtc',
-                publish_key:'webrtc_test',
-                subscribe:'webrtc_test',*/
+                // path: options.roomName,
+                'force new connection': window.WebRTCSocket != null ? false : true,
+                /* channel:'webrtc',
+                 publish_key:'webrtc_test',
+                 subscribe:'webrtc_test',*/
                 secure:secure,
                 reconnection: true,
                 reconnectionDelay: 1000,
@@ -8812,7 +9023,7 @@ window.WebRTCconferenceLib = function app(options){
 
         if(callback != null) callback(newConferenceInstance);
         console.log('newConferenceInstance', newConferenceInstance)
-      //  app = null;
+        //  app = null;
     }
 
     app.roomSwitched = function(info) {
@@ -8837,7 +9048,7 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         for(var p = roomParticipants.length - 1; p >= 0; p--){
-            
+
             if(roomParticipants[p] == app.screensInterface.fbLive.streamingParticipant()) continue;
             if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
             if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();

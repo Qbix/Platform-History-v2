@@ -119,7 +119,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             if( _isiOS ) {
                 if ( isSafari ) {
                     //browser
-                } else if ( !isSafari ) {
+                } else if ( !isSafari && !Q.info.isCordova ) {
                     _isiOSWebView = true;
                 };
             } else {
@@ -580,7 +580,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             function sendReportToServer() {
-                if(_infoLog.length == 0 || _options.roomId == null || _options.roomPublisherId == null) return;
+                if(_infoLog.length == 0 || _options.roomId == null || _options.roomPublisherId == null || !Q.Users.loggedInUser) return;
                 Q.req("Streams/webrtc", ["updateLog"], function (err, response) {
                     var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -2075,7 +2075,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 {
                                     movable: true,
                                     active: true,
-                                    moveWithinArea: 'window',
+                                    //moveWithinArea: 'window',
                                     keepRatioBasedOnElement: participantScreen.videoTrack,
                                     onMoved: function () {
                                         if(!Q.info.isMobile) screensRendering.renderManualScreensGrid();
@@ -5271,7 +5271,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         }
 
-        function switchRoom(publisherId, streamName, callback, options) {
+        function switchTo(publisherId, streamName, callback, options) {
             //showPageLoader();
             log('switch WebRTC conference room');
             
@@ -5308,7 +5308,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
 
-                        WebRTCconference.switchRoom(Q.Users.communityName, 'meeting5', function (newInstance) {
+                        WebRTCconference.switchTo(Q.Users.communityName, 'meeting5', function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
 
@@ -5448,7 +5448,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var webRTCInstance = {
             start: start,
             stop: stop,
-            switchRoom: switchRoom,
+            switchTo: switchTo,
             screenRendering: screensRendering,
             currentConferenceLibInstance: currentConferenceLibInstance,
             controls: function () {
