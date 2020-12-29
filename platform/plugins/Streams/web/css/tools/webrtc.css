@@ -1626,6 +1626,36 @@ and (max-device-width : 320px) {
     padding: 0;
     width:400px;
 }
+.dialog-box.advanced-streaming {
+    padding: 0;
+    margin: 0;
+    width:700px;
+    left: 0;
+}
+.Streams_webrtc_popup-add-image, .Streams_webrtc_popup-add-video {
+    padding: 0;
+    margin: 0;
+    padding-bottom:10px;
+    position: absolute;
+    background: #424242;
+}
+.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box, .Streams_webrtc_popup-add-video .Streams_webrtc_popup-box{
+    padding:10px;
+}
+.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box input[type=file],
+.Streams_webrtc_popup-add-video .Streams_webrtc_popup-box input[type=file]{
+    margin-top:15px;
+    margin-bottom:15px;
+}
+.Streams_webrtc_popup-add-video .Streams_webrtc_popup-box input[type=text],
+.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box input[type=text]{
+    margin-top:15px;
+    padding: 10px 5px;
+}
+.Streams_webrtc_popup-add-image .close-dialog-sign,
+.Streams_webrtc_popup-add-video .close-dialog-sign {
+    animation: none !important;
+}
 
 .dialog-box.Streams_webrtc_live-preview .Streams_webrtc-dialog-preview {
     background: #fff;
@@ -1659,6 +1689,158 @@ and (max-device-width : 320px) {
     float: right;
     margin: 15px;
 }
+
+/*Advanced live streaming popup*/
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box {
+    display: flex;
+    flex-direction: column;
+    background: #424242;
+    color:white;
+}
+.Streams_webrtc_popup-streaming-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px;
+    background: #424242;
+    margin: 1px;
+    border: 1px solid #373737;
+}
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-scenes,
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-sources {
+    flex-basis: 30%;
+    border: 1px solid #383838;
+    background: #525252;
+}
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-audio {
+    flex-basis: 20%;
+    border: 1px solid #383838;
+}
+.Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-scenes-title-inner,
+.Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-sources-title-inner {
+    position: relative;
+    border-bottom: 1px solid #383838;
+    height: 40px;
+    background: #424242;
+}
+.Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-scenes-title-tab,
+.Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-sources-title-tab {
+    position: absolute;
+    padding: 10px 15px 11px 15px;
+    background: #525252;
+}
+
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-preview {
+    background: #282828;
+}
+.Streams_webrtc_popup-scenes-body, .Streams_webrtc_popup-sources-body{
+    max-height:250px;
+}
+.Streams_webrtc_popup-scenes-body-inner, .Streams_webrtc_popup-sources-body-inner {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-preview-body-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 300px;
+}
+.Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-preview-body-inner canvas{
+    position: static;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.Streams_webrtc_popup-scenes-item, .Streams_webrtc_popup-sources-item {
+    display: block;
+    padding: 5px 10px;
+    border-top: 1px solid #454545;
+}
+
+.Streams_webrtc_popup-sources-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.Streams_webrtc_popup-sources-item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Streams_webrtc_popup-sources-item-control {
+    display: flex;
+    flex-direction: row;
+}
+.Streams_webrtc_popup-sources-item-control svg path{
+    fill: white;
+}
+
+.Streams_webrtc_popup-scenes-item-active, .Streams_webrtc_popup-sources-item-active{
+    background: #696969;
+    color: white;
+}
+
+.Streams_webrtc_popup-sources-control {
+    display: flex;
+    flex-direction: revert;
+    padding: 5px 10px;
+    border-top: 1px solid #424242;
+}
+
+.Streams_webrtc_popup-sources-control .Streams_webrtc_popup-sources-control-btn {
+    margin-right: 10px;
+    cursor: pointer;
+}
+.Streams_webrtc_popup-sources-control .Streams_webrtc_popup-sources-control-btn svg path{
+    fill:white;
+}
+
+._webrtc_popup-sources-control-btn-add:hover, ._webrtc_popup-sources-control-btn-add:focus {
+    background-color: #2980B9;
+}
+
+.Streams_webrtc_popup-sources-add-menu {
+    display: none;
+    position: absolute;
+    background-color:#282828;
+    min-width: 160px;
+    bottom: 50px;
+    z-index: 9999999999999999;
+}
+
+.Streams_webrtc_popup-sources-add-menu .Streams_webrtc_popup-sources-add-menu-item {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    position: relative;
+    cursor: pointer;
+}
+
+.Streams_webrtc_popup-sources-add-menu .Streams_webrtc_popup-sources-add-image div{
+   pointer-events: none;
+}
+
+
+.Streams_webrtc_popup-sources-add-menu-file {
+    /*position: absolute;*/
+    width:100%;
+    height: 100%;
+    /*opacity: 0;*/
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.Streams_webrtc_popup-sources-control-btn-add {
+    z-index: 9999999999999999;
+}
+
+.Streams_webrtc_popup-sources-add-menu a:hover {background-color: #ddd;}
+
+.Streams_webrtc_popup-sources-add-menu-show {display: block;}
 
 @media (min-width: 576px) {
 
