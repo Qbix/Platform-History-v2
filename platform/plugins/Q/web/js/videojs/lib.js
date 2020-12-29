@@ -807,6 +807,10 @@
      */
 
     function removeClass(element, classToRemove) {
+        if (!element) {
+            return ;
+        }
+
         if (element.classList) {
             element.classList.remove(classToRemove);
         } else {
@@ -22830,6 +22834,10 @@
          */
         'playsinline'].forEach(function (prop) {
         Html5.prototype['set' + toTitleCase(prop)] = function (v) {
+            if (!this.el_) {
+                return;
+            }
+
             this.el_[prop] = v;
 
             if (v) {
@@ -23098,10 +23106,10 @@
          * @see [Spec]{@link https://html.spec.whatwg.org/#attr-media-crossorigin}
          */
         'crossOrigin'].forEach(function (prop) {
-        Html5.prototype[prop] = function () {
-            return this.el_[prop];
-        };
-    }); // Wrap native properties with a setter in this format:
+            Html5.prototype[prop] = function () {
+                return Q.getObject(["el_", prop], this);
+            };
+        }); // Wrap native properties with a setter in this format:
     // set + toTitleCase(name)
     // The list is as follows:
     // setVolume, setSrc, setPoster, setPreload, setPlaybackRate, setDefaultPlaybackRate,
