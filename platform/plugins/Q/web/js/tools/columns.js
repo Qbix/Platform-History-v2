@@ -46,7 +46,7 @@ var dataKey_opening = 'opening';
  *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
- *  @param {Q.Event} [options.onOpen] Event that happens after a column is opened. Receives (options, index, columnElement).
+ *  @param {Q.Event} [options.onActivate] Event that happens after a column is opened and activated. Receives (options, index, columnElement).
  *  @param {Q.Event} [options.onTransitionEnd] Event that happens after a css transition compete. Have tool as context and index, div as arguments.
  *  @param {Q.Event} [options.afterDelay] Event that happens after a column is opened, after a delay intended to wait out various animations. Receives (options, index, columnElement).
  *  @param {Q.Event} [options.onClose] Event that happens after a column is closed.
@@ -174,7 +174,7 @@ Q.Tool.define("Q/columns", function(options) {
 		setTimeout(_updateAttributes.bind(this), 0);
 	}, 'Q/columns'),
 	beforeClose: new Q.Event(),
-	onOpen: new Q.Event(function (options, index, div) {
+	onActivate: new Q.Event(function (options, index, div) {
 		var tool = this;
 		Q.Pointer.stopHints();
 		div.addEventListener('transitionend', function () {
@@ -182,9 +182,9 @@ Q.Tool.define("Q/columns", function(options) {
 		});
 
 		var $div = $(div);
-		$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+		$div.attr('data-width-range', Math.round($div.width()/300) || 1);
 		Q.onLayout(div).add(function () {
-			$div.attr('data-width-index', Math.round($div.width()/300) || 1);
+			$div.attr('data-width-range', Math.round($div.width()/300) || 1);
 		}, this);
 	}, 'Q/columns'),
 	onClose: new Q.Event(function (index, div, data, skipUpdateAttributes) {
@@ -227,7 +227,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * Opens a column
 	 * @method open
 	 * @param {Object} options Can be used to override various tool options,
-	 *  including events such as "onOpen" and "onClose". Additional options include:
+	 *  including events such as "onActivate" and "onClose". Additional options include:
 	 *  @param {String} [options.name] any name to assign to the column
 	 *  @param {String} [options.columnClass] to add a class to the column
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
@@ -550,8 +550,8 @@ Q.Tool.define("Q/columns", function(options) {
 					// call the callback before the events,
 					// so something custom can be done first
 					Q.handle(callback, tool, [options, index, div, data]);
-					Q.handle(options.onOpen, tool, [options, index, div, data]);
-					state.onOpen.handle.call(tool, options, index, div, data);
+					Q.handle(options.onActivate, tool, [options, index, div, data]);
+					state.onActivate.handle.call(tool, options, index, div, data);
 					setTimeout(function () {
 						$mask.remove();
 						$div.removeClass('Q_columns_loading');
@@ -563,6 +563,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.removeClass('Q_columns_loading');
 				}
 				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
+				Q.layout(tool.element);
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {
@@ -638,7 +639,7 @@ Q.Tool.define("Q/columns", function(options) {
 				var $ct = $('.Q_columns_title', $div);
 				
 				var $prev = $div.prev();
-				$div.css('z-index', $prev.css('z-index')+1 || 1);
+				$div.css('z-index', parseInt($prev.css('z-index'))+1 || 1);
 				
 				if (Q.info.isMobile) {
 					$div.add($ct).css('width', '100%');
@@ -837,7 +838,7 @@ Q.Tool.define("Q/columns", function(options) {
 		return true;
 		
 		function _close() {
-			Q.removeElement(div, true); // remove it correctly
+			Q.removeElement(div, true); // remove it correctly)
 
 			var data = tool.data(index);
 			presentColumn(tool);
@@ -849,6 +850,7 @@ Q.Tool.define("Q/columns", function(options) {
 			if (o.pagePushUrl && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
+			Q.layout(tool.element);
 			Q.Masks.hide('Q.click.mask');
 		}
 	},
@@ -1161,7 +1163,7 @@ Q.invoke.handlers.unshift(function (options, callback) {
 		columns.close({min: index+1}, null, {animation: {duration: 0}});
 		columns.open(Q.extend({}, options, {
 			column: options.content,
-			onOpen: options.callback
+			onActivate: options.callback
 		}));
 		return false;
 	}

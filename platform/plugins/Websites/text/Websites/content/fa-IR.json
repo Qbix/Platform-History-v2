@@ -34,7 +34,8 @@
             "invalidURL": "نشانی وب نامعتبر است"
         },
         "FileTooLarge": "پرونده برای ذخیره سازی خیلی بزرگ است. حداکثر اندازه پرونده {{size}}",
-        "InvalidPDF": "پرونده PDF معتبری نیست"
+        "InvalidPDF": "پرونده PDF معتبری نیست",
+        "StartTypingTitleOrKeywords": "شروع به تایپ عنوان یا کلمات کلیدی کنید ..."
     },
     "types": {
         "Websites/article": {

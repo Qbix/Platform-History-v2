@@ -1780,7 +1780,8 @@ abstract class Streams extends Base_Streams
 					'asUserId' => $asUserId,
 					'category' => $category,
 					'stream' => $stream,
-					'extra' => &$extra
+					'extra' => &$extra,
+					'type' => $type
 				),
 				'before'
 			)) {
@@ -1797,7 +1798,7 @@ abstract class Streams extends Base_Streams
 			 */
 			if (false === Q::event(
 				"Streams/relateFrom/{$stream->type}",
-				compact('asUserId', 'category', 'stream'),
+				compact('asUserId', 'category', 'stream', 'type'),
 				'before'
 			)) {
 				continue;
@@ -1890,7 +1891,7 @@ abstract class Streams extends Base_Streams
 			$streamName = explode('/', $stream->name);
 
 			$params = compact(
-				'relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream',
+				'relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream',
 				'fromUri', 'fromUrl',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
 				'toUri', 'toUrl',
@@ -1974,8 +1975,8 @@ abstract class Streams extends Base_Streams
 
 			/**
 			 * @event Streams/relateFrom/$streamType {after}
-			 * @param {string} relatedTo
-			 * @param {string} relatedFrom
+			 * @param {string} relatedToArray
+			 * @param {string} relatedFromArray
 			 * @param {string} asUserId
 			 * @param {array} extra
 			 * @param {Streams_Stream} category
@@ -1983,20 +1984,20 @@ abstract class Streams extends Base_Streams
 			 */
 			Q::event(
 				"Streams/relateFrom/{$stream->type}",
-				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream', 'extra'),
+				compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'extra', 'type'),
 				'after'
 			);
 			/**
 			 * @event Streams/relateTo/$categoryType {after}
-			 * @param {string} relatedTo
-			 * @param {string} relatedFrom
+			 * @param {string} relatedToArray
+			 * @param {string} relatedFromArray
 			 * @param {string} asUserId
 			 * @param {Streams_Stream} category
 			 * @param {Streams_Stream} stream
 			 */
 			Q::event(
 				"Streams/relateTo/{$category->type}",
-				compact('relatedTo', 'relatedFrom', 'asUserId', 'category', 'stream'),
+				compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'type'),
 				'after'
 			);
 

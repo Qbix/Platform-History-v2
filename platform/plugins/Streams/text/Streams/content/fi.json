@@ -224,7 +224,10 @@
             "fullScreen": "Koko näyttö"
         },
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
-        "streamTitle": "{{1}} suora puhelu"
+        "streamTitle": "{{1}} suora puhelu",
+        "preview": {
+            "preamble": "Tapaaminen:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-tiedosto",
             "description": "PDF-tiedosto",
             "newItem": "Lisää PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Kysymys",
+            "description": "kysymysvirta"
+        },
+        "Streams\/answer": {
+            "displayType": "Vastaus",
+            "description": "vastausvirta"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ei kuvalähdettä",
         "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
         "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+    },
+    "questions": {
+        "Questions": "Kysymyksiä",
+        "Answers": "Vastaukset",
+        "AnswerQuestion": "Vastata kysymykseen",
+        "SetYourAnswer": "Ole hyvä ja vastaa kysymykseen",
+        "NewQuestion": "Uusi kysymys",
+        "NewAnswer": "Uusi vastaus",
+        "AnswerDetails": "Vastauksen tiedot",
+        "answerOption": "Vaihtoehto",
+        "answerOptionExclusive": "Yksinomainen",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ilmainen vastaus ...",
+        "SaveQuestion": "Tallenna kysymys",
+        "SaveAnswer": "Tallenna vastaus",
+        "AddAnotherAnswer": "Lisää toinen vastaus",
+        "ErrorAnswers": "Lisää edes yksi vastaus",
+        "AlreadyAnswered": "Vastasin jo",
+        "TitlePlaceholder": "Kirjoita kysymyksesi",
+        "ContentPlaceholder": "Lisää tähän lisätietoja auttaaksesi ihmisiä vastaamaan",
+        "ErrorTitle": "Kysymys vaaditaan"
+    },
+    "experience": {
+        "NewExperience": "Uusi kokemus"
     }
 }

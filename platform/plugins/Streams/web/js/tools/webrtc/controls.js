@@ -104,6 +104,7 @@
             this.participantsList = [];
             this.chatBox = this.chatDialogue = null;
             this.advancedStreamingDialogue = null;
+
             $(this.element).addClass('Q_floatAboveDocument');
 
 			if (!options.webRTClibraryInstance || !options.webrtcClass) {

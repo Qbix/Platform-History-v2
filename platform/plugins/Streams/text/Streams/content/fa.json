@@ -224,7 +224,10 @@
             "fullScreen": "تمام صفحه"
         },
         "notAllowedToJoinCall": "شما اجازه پیوستن به این جریان را ندارید.",
-        "streamTitle": "99 999}} تماس زنده"
+        "streamTitle": "99 999}} تماس زنده",
+        "preview": {
+            "preamble": "ملاقات:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "سند PDF",
             "description": "سند PDF",
             "newItem": "PDF را اضافه کنید"
+        },
+        "Streams\/question": {
+            "displayType": "سوال",
+            "description": "جریان سوال"
+        },
+        "Streams\/answer": {
+            "displayType": "پاسخ",
+            "description": "جریان پاسخ"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "منبع تصویری وجود ندارد",
         "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
         "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
+    },
+    "questions": {
+        "Questions": "سوالات",
+        "Answers": "پاسخ ها",
+        "AnswerQuestion": "پاسخ به سوال",
+        "SetYourAnswer": "لطفا به سوال پاسخ دهید",
+        "NewQuestion": "سوال جدید",
+        "NewAnswer": "پاسخ جدید",
+        "AnswerDetails": "جزئیات پاسخ",
+        "answerOption": "گزینه",
+        "answerOptionExclusive": "انحصاری",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "پاسخ رایگان ...",
+        "SaveQuestion": "سوال را ذخیره کنید",
+        "SaveAnswer": "ذخیره پاسخ",
+        "AddAnotherAnswer": "پاسخ دیگری اضافه کنید",
+        "ErrorAnswers": "لطفا حتی یک جواب اضافه کنید",
+        "AlreadyAnswered": "قبلا جواب داده",
+        "TitlePlaceholder": "س yourال خود را تایپ کنید",
+        "ContentPlaceholder": "هرگونه اطلاعات اضافی را در اینجا قرار دهید تا به افراد کمک کند تا پاسخ دهند",
+        "ErrorTitle": "سوال لازم است"
+    },
+    "experience": {
+        "NewExperience": "تجربه جدید"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Pantaila osoa"
         },
         "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
-        "streamTitle": "{{1}} zuzeneko deia"
+        "streamTitle": "{{1}} zuzeneko deia",
+        "preview": {
+            "preamble": "Bilera:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokumentua",
             "description": "PDF dokumentua",
             "newItem": "Gehitu PDFa"
+        },
+        "Streams/question": {
+            "displayType": "Galdera",
+            "description": "galdera korrontea"
+        },
+        "Streams/answer": {
+            "displayType": "Erantzun",
+            "description": "erantzun korrontea"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ez dago irudi iturririk",
         "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
         "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
+    },
+    "questions": {
+        "Questions": "Galderak",
+        "Answers": "Erantzunak",
+        "AnswerQuestion": "Erantzun galderari",
+        "SetYourAnswer": "Mesedez, erantzun galderari",
+        "NewQuestion": "Galdera berria",
+        "NewAnswer": "Erantzun berria",
+        "AnswerDetails": "Erantzun xehetasunak",
+        "answerOption": "Aukera",
+        "answerOptionExclusive": "Esklusiboa",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "erantzun librea ...",
+        "SaveQuestion": "Gorde galdera",
+        "SaveAnswer": "Gorde erantzuna",
+        "AddAnotherAnswer": "Gehitu beste erantzun bat",
+        "ErrorAnswers": "Mesedez, gehitu erantzun bakarra",
+        "AlreadyAnswered": "Dagoeneko erantzuna",
+        "TitlePlaceholder": "Idatzi zure galdera",
+        "ContentPlaceholder": "Jarri informazio gehigarria hemen jendeari erantzuten laguntzeko",
+        "ErrorTitle": "Galdera beharrezkoa da"
+    },
+    "experience": {
+        "NewExperience": "Esperientzia berria"
     }
 }

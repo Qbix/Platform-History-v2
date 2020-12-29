@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "knip",
-        "errorNoSource": "Geen video-bron nie"
+        "errorNoSource": "Geen video-bron nie",
+        "SkipAfter": "Slaan oor na",
+        "Skip": "Huppel"
     },
     "pdf": {
         "clip": "knip",

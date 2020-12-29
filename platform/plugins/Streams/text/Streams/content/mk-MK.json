@@ -224,7 +224,10 @@
             "fullScreen": "Цел екран"
         },
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
-        "streamTitle": "99 99 999}} во живо повик"
+        "streamTitle": "99 99 999}} во живо повик",
+        "preview": {
+            "preamble": "Средба:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF документ",
             "description": "PDF документ",
             "newItem": "Додадете PDF"
+        },
+        "Streams/question": {
+            "displayType": "Прашање",
+            "description": "поток на прашања"
+        },
+        "Streams/answer": {
+            "displayType": "Одговор",
+            "description": "поток на одговори"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Нема извор на слика",
         "uploadLimit": "Максимална големина на датотека: {{size}}",
         "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+    },
+    "questions": {
+        "Questions": "Прашања",
+        "Answers": "Одговори",
+        "AnswerQuestion": "Одговор Прашање",
+        "SetYourAnswer": "Ве молам, одговорете на прашањето",
+        "NewQuestion": "Ново прашање",
+        "NewAnswer": "Нов одговор",
+        "AnswerDetails": "Детали за одговор",
+        "answerOption": "Опција",
+        "answerOptionExclusive": "Ексклузивно",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "бесплатен одговор ...",
+        "SaveQuestion": "Зачувај прашање",
+        "SaveAnswer": "Зачувај одговор",
+        "AddAnotherAnswer": "Додадете друг одговор",
+        "ErrorAnswers": "Ве молиме, додадете дури и еден одговор",
+        "AlreadyAnswered": "Веќе одговори",
+        "TitlePlaceholder": "Внесете го вашето прашање",
+        "ContentPlaceholder": "Ставете какви било дополнителни информации тука за да им помогнете на луѓето да одговорат",
+        "ErrorTitle": "Потребно е прашање"
+    },
+    "experience": {
+        "NewExperience": "Ново искуство"
     }
 }

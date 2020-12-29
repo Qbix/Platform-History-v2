@@ -23,8 +23,8 @@
         "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
         "earlierComments": "earlier comments",
-        "Subscribed": "Mute Notifications",
-        "Unsubscribed": "Get Notifications",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
         "notAllowedToJoinCall": "You don't have permission to join this conversation.",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
@@ -221,7 +221,10 @@
             "fullScreen": "Full Screen"
         },
         "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} live call"
+        "streamTitle": "{{1}} live call",
+        "preview": {
+            "preamble": "Meeting:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -340,6 +343,14 @@
             "displayType": "PDF document",
             "description": "PDF document",
             "newItem": "Add PDF"
+        },
+        "Streams/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
         }
     },
     "messages": {
@@ -435,5 +446,29 @@
         "errorNoSource": "No image source",
         "uploadLimit": "Max file size: {{size}}",
         "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+    },
+    "questions": {
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "free answer...",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required"
+    },
+    "experience": {
+        "NewExperience": "New Experience"
     }
 }

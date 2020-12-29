@@ -221,7 +221,10 @@
             "fullScreen": "מסך מלא"
         },
         "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם זה.",
-        "streamTitle": "{{1}} שיחה חיה"
+        "streamTitle": "{{1}} שיחה חיה",
+        "preview": {
+            "preamble": "פְּגִישָׁה:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -340,6 +343,14 @@
             "displayType": "מסמך PDF",
             "description": "מסמך PDF",
             "newItem": "הוסף PDF"
+        },
+        "Streams/question": {
+            "displayType": "שְׁאֵלָה",
+            "description": "זרם השאלה"
+        },
+        "Streams/answer": {
+            "displayType": "תשובה",
+            "description": "תשובת זרם"
         }
     },
     "messages": {
@@ -435,5 +446,29 @@
         "errorNoSource": "אין מקור תמונה",
         "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
         "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+    },
+    "questions": {
+        "Questions": "שאלות",
+        "Answers": "תשובות",
+        "AnswerQuestion": "ענה לשאלה",
+        "SetYourAnswer": "בבקשה ענה על השאלה",
+        "NewQuestion": "שאלה חדשה",
+        "NewAnswer": "תשובה חדשה",
+        "AnswerDetails": "פרטי תשובה",
+        "answerOption": "אוֹפְּצִיָה",
+        "answerOptionExclusive": "בִּלעָדִי",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "תשובה בחינם ...",
+        "SaveQuestion": "שמור שאלה",
+        "SaveAnswer": "שמור תשובה",
+        "AddAnotherAnswer": "הוסף תשובה נוספת",
+        "ErrorAnswers": "אנא הוסף אפילו תשובה אחת",
+        "AlreadyAnswered": "כבר נענה",
+        "TitlePlaceholder": "הקלד את השאלה שלך",
+        "ContentPlaceholder": "הכנס כאן מידע נוסף כדי לעזור לאנשים לענות",
+        "ErrorTitle": "שאלה נדרשת"
+    },
+    "experience": {
+        "NewExperience": "חוויה חדשה"
     }
 }

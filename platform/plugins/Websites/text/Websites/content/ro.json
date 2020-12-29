@@ -34,7 +34,8 @@
             "invalidURL": "URL invalid"
         },
         "FileTooLarge": "Fișierul este prea mare pentru stocarea în cache. Dimensiunea maximă a fișierului {{size}}",
-        "InvalidPDF": "Fișierul nu este un PDF valid"
+        "InvalidPDF": "Fișierul nu este un PDF valid",
+        "StartTypingTitleOrKeywords": "Începeți să tastați titlul sau cuvintele cheie ..."
     },
     "types": {
         "Websites\/article": {

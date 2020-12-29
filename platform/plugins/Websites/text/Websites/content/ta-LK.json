@@ -34,7 +34,8 @@
             "invalidURL": "தவறான வலைதள முகவரி"
         },
         "FileTooLarge": "தேக்ககத்திற்கு கோப்பு மிகப் பெரியது. அதிகபட்ச கோப்பு அளவு {{size}}",
-        "InvalidPDF": "கோப்பு சரியான PDF அல்ல"
+        "InvalidPDF": "கோப்பு சரியான PDF அல்ல",
+        "StartTypingTitleOrKeywords": "தலைப்பு அல்லது முக்கிய வார்த்தைகளைத் தட்டச்சு செய்யத் தொடங்குங்கள் ..."
     },
     "types": {
         "Websites/article": {

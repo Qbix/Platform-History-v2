@@ -34,7 +34,8 @@
             "invalidURL": "Ógild vefslóð"
         },
         "FileTooLarge": "Skráin er of stór fyrir skyndiminni. Hámarks skráarstærð {{size}}",
-        "InvalidPDF": "Skráin er ekki gild PDF"
+        "InvalidPDF": "Skráin er ekki gild PDF",
+        "StartTypingTitleOrKeywords": "Byrjaðu að slá inn titil eða lykilorð ..."
     },
     "types": {
         "Websites/article": {

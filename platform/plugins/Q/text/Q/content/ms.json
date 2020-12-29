@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Tiada sumber video"
+        "errorNoSource": "Tiada sumber video",
+        "SkipAfter": "Langkau selepas",
+        "Skip": "Langkau"
     },
     "pdf": {
         "clip": "klip",

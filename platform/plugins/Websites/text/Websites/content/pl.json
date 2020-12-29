@@ -34,7 +34,8 @@
             "invalidURL": "nieprawidłowy URL"
         },
         "FileTooLarge": "Plik jest za duży do buforowania. Maksymalny rozmiar pliku {{size}}",
-        "InvalidPDF": "Plik nie jest prawidłowym plikiem PDF"
+        "InvalidPDF": "Plik nie jest prawidłowym plikiem PDF",
+        "StartTypingTitleOrKeywords": "Zacznij wpisywać tytuł lub słowa kluczowe ..."
     },
     "types": {
         "Websites\/article": {

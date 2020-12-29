@@ -34,7 +34,8 @@
             "invalidURL": "Неважећи УРЛ"
         },
         "FileTooLarge": "Датотека је превелика за кеширање. Максимална величина датотеке {{size}}",
-        "InvalidPDF": "Датотека није важећи ПДФ"
+        "InvalidPDF": "Датотека није важећи ПДФ",
+        "StartTypingTitleOrKeywords": "Почните да куцате наслов или кључне речи ..."
     },
     "types": {
         "Websites/article": {

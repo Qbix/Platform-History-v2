@@ -34,7 +34,8 @@
             "invalidURL": "Di-wastong URL"
         },
         "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file na {{size}}",
-        "InvalidPDF": "Ang file ay hindi wastong PDF"
+        "InvalidPDF": "Ang file ay hindi wastong PDF",
+        "StartTypingTitleOrKeywords": "Simulang mag-type ng pamagat o mga keyword ..."
     },
     "types": {
         "Websites\/article": {

@@ -87,9 +87,9 @@ if (!file_exists($dir_to_save)) {
 	mkdir($dir_to_save);
 }
 $baseUrl = Q_Request::baseUrl();
-echo Q_scripts_combine($process) . PHP_EOL;
+echo Q_combine($process) . PHP_EOL;
 
-function Q_scripts_combine($process)
+function Q_combine($process)
 {
 	global $combined, $src, $dest, $baseUrl; // used inside called function
 	$environment = Q_Config::get('Q', 'environment', false);
@@ -154,7 +154,7 @@ function Q_scripts_combine($process)
 					$params = array_merge($params, $filter['params']);
 				}
 				if ($ext === 'css') {
-					Q_scripts_preprocessCss($params);
+					Q_combine_preprocessCss($params);
 				}
 				$content = Q::event($filter['handler'], $params);
 			}
@@ -165,7 +165,7 @@ function Q_scripts_combine($process)
 	echo "Success.";
 }
 
-function Q_scripts_preprocessCss(&$params)
+function Q_combine_preprocessCss(&$params)
 {
 	global $preload, $dir_to_save;
 	$dest = $params['dest'];
@@ -177,7 +177,7 @@ function Q_scripts_preprocessCss(&$params)
 		}
 		$content = preg_replace_callback(
 			"/url\(\'{0,1}(.*)\'{0,1}\)/",
-			'Q_scripts_preload',
+			'Q_combine_preload',
 			$content
 		);
 		$processed[$src] = $content;
@@ -216,7 +216,7 @@ function Q_scripts_preprocessCss(&$params)
 	);
 }
 
-function Q_scripts_preload($matches)
+function Q_combine_preload($matches)
 {
 	global $combined, $src, $dest, $preload, $baseUrl;
 	$url = $matches[1];

@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "کلپ",
-        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے"
+        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے",
+        "SkipAfter": "بعد چھوڑیں",
+        "Skip": "چھوڑ دو"
     },
     "pdf": {
         "clip": "کلپ",

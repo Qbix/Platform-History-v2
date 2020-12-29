@@ -72,13 +72,13 @@ Q.Tool.define("Q/drawers", function _Q_drawers(options) {
 			return;
 		}
 		var columns = $column.closest('.Q_tool')[0].Q("Q/columns");
-		var key = columns.state.onOpen.set(function () {
+		var key = columns.state.onActivate.set(function () {
 			if (state.fullscreen) {
 				_initialize();
 			} else {
 				_layout();
 			}
-			columns.state.onOpen.remove(key);
+			columns.state.onActivate.remove(key);
 		}, tool);
 	}, state.initial.delay || 0);
 	

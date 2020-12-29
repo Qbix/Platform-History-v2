@@ -224,7 +224,10 @@
             "fullScreen": "Puni zaslon"
         },
         "notAllowedToJoinCall": "Nemate dozvolu pridružiti se tom toku.",
-        "streamTitle": "{{1}} poziv uživo"
+        "streamTitle": "{{1}} poziv uživo",
+        "preview": {
+            "preamble": "Sastanak:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokument",
             "description": "PDF dokument",
             "newItem": "Dodajte PDF"
+        },
+        "Streams/question": {
+            "displayType": "Pitanje",
+            "description": "tok pitanja"
+        },
+        "Streams/answer": {
+            "displayType": "Odgovor",
+            "description": "tok odgovora"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nema izvora slike",
         "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
         "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+    },
+    "questions": {
+        "Questions": "Pitanja",
+        "Answers": "Odgovori",
+        "AnswerQuestion": "Odgovori na pitanje",
+        "SetYourAnswer": "Molimo odgovorite na pitanje",
+        "NewQuestion": "Novo pitanje",
+        "NewAnswer": "Novi odgovor",
+        "AnswerDetails": "Pojedinosti o odgovoru",
+        "answerOption": "Opcija",
+        "answerOptionExclusive": "Ekskluzivan",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "besplatan odgovor ...",
+        "SaveQuestion": "Spremi pitanje",
+        "SaveAnswer": "Spremi odgovor",
+        "AddAnotherAnswer": "Dodajte još jedan odgovor",
+        "ErrorAnswers": "Molimo dodajte čak jedan odgovor",
+        "AlreadyAnswered": "Već odgovorio",
+        "TitlePlaceholder": "Upišite svoje pitanje",
+        "ContentPlaceholder": "Ovdje dodajte sve dodatne informacije kako biste pomogli ljudima da odgovore",
+        "ErrorTitle": "Potrebno pitanje"
+    },
+    "experience": {
+        "NewExperience": "Novo iskustvo"
     }
 }

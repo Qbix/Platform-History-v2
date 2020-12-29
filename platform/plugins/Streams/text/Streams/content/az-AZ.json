@@ -224,7 +224,10 @@
             "fullScreen": "Tam ekran"
         },
         "notAllowedToJoinCall": "Bu axına qoşulmaq icazəniz yoxdur.",
-        "streamTitle": "{{1}} canlı zəng"
+        "streamTitle": "{{1}} canlı zəng",
+        "preview": {
+            "preamble": "İclas:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF sənədi",
             "description": "PDF sənədi",
             "newItem": "PDF əlavə edin"
+        },
+        "Streams/question": {
+            "displayType": "Sual",
+            "description": "sual axını"
+        },
+        "Streams/answer": {
+            "displayType": "Cavab verin",
+            "description": "cavab axını"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Şəkil mənbəyi yoxdur",
         "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
         "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
+    },
+    "questions": {
+        "Questions": "Suallar",
+        "Answers": "Cavablar",
+        "AnswerQuestion": "Suala cavab ver",
+        "SetYourAnswer": "Zəhmət olmasa suala cavab verin",
+        "NewQuestion": "Yeni sual",
+        "NewAnswer": "Yeni cavab",
+        "AnswerDetails": "Cavab detalları",
+        "answerOption": "Seçim",
+        "answerOptionExclusive": "Eksklüziv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "pulsuz cavab ...",
+        "SaveQuestion": "Sual saxla",
+        "SaveAnswer": "Cavab saxla",
+        "AddAnotherAnswer": "Başqa bir cavab əlavə edin",
+        "ErrorAnswers": "Xahiş edirəm bir cavab da əlavə edin",
+        "AlreadyAnswered": "Artıq cavab verdi",
+        "TitlePlaceholder": "Sualınızı yazın",
+        "ContentPlaceholder": "İnsanları cavablandırmaq üçün əlavə məlumatları buraya qoyun",
+        "ErrorTitle": "Sual tələb olunur"
+    },
+    "experience": {
+        "NewExperience": "Yeni təcrübə"
     }
 }

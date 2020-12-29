@@ -1,0 +1,28 @@
+.Streams_experience_tool .Streams_experience_composer,
+.Streams_experience_invoke .Streams_experience_composer {
+    overflow: hidden;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    font-family: Arial;
+    width: 40px;
+    height: 40px;
+    color: green;
+    background-color: #fff;
+    font-size: 45px;
+    line-height: 40px;
+    text-align: center;
+    margin: 0 auto;
+}
+.Streams_experience_addons .Streams_experience_addon .Streams_experience_addon_icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.Streams_experience_addons .Streams_experience_addon .Streams_experience_addon_title {
+    color: #fff;
+}
+.Streams_experience_invoke {
+    min-width: 300px;
+    min-height: 200px;
+}

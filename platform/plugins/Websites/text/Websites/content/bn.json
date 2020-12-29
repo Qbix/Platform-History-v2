@@ -34,7 +34,8 @@
             "invalidURL": "অবৈধ ইউআরএল"
         },
         "FileTooLarge": "ক্যাশিংয়ের জন্য ফাইল খুব বড়। সর্বাধিক ফাইলের আকার {{999}",
-        "InvalidPDF": "ফাইলটি কোনও বৈধ পিডিএফ নয়"
+        "InvalidPDF": "ফাইলটি কোনও বৈধ পিডিএফ নয়",
+        "StartTypingTitleOrKeywords": "শিরোনাম বা কীওয়ার্ড লিখতে শুরু করুন ..."
     },
     "types": {
         "Websites\/article": {

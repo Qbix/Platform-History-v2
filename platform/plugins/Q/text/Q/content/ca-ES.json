@@ -100,6 +100,23 @@
         "inUnderMinute": "en menys d’un minut"
     },
     "tabs": {
-        "more": "més"
+        "more": "més",
+        "Menu": "Menú"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No hi ha cap font de vídeo",
+        "SkipAfter": "Saltar després",
+        "Skip": "Ometre"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No hi ha cap font en pdf"
+    },
+    "clip": {
+        "SetClipStart": "Estableix Inici de clip",
+        "ClipStart": "Inici de clip",
+        "SetClipEnd": "Estableix el final del clip",
+        "ClipEnd": "Final del clip"
     }
 }

@@ -100,6 +100,23 @@
         "inUnderMinute": "1 মিনিটের মধ্যে"
     },
     "tabs": {
-        "more": "আরও"
+        "more": "আরও",
+        "Menu": "তালিকা"
+    },
+    "video": {
+        "clip": "ক্লিপ",
+        "errorNoSource": "কোনও ভিডিও উত্স নয়",
+        "SkipAfter": "পরে এড়িয়ে যান",
+        "Skip": "এড়িয়ে যান"
+    },
+    "pdf": {
+        "clip": "ক্লিপ",
+        "errorNoSource": "কোনও পিডিএফ উত্স নেই"
+    },
+    "clip": {
+        "SetClipStart": "ক্লিপ শুরু সেট করুন",
+        "ClipStart": "ক্লিপ শুরু",
+        "SetClipEnd": "ক্লিপ শেষ সেট করুন",
+        "ClipEnd": "ক্লিপ শেষ"
     }
 }

@@ -34,7 +34,8 @@
             "invalidURL": "ugyldig URL"
         },
         "FileTooLarge": "Filen er for stor til cache. Maksimal filstørrelse {{size}}",
-        "InvalidPDF": "Filen er ikke en gyldig PDF"
+        "InvalidPDF": "Filen er ikke en gyldig PDF",
+        "StartTypingTitleOrKeywords": "Begynd at skrive titel eller nøgleord ..."
     },
     "types": {
         "Websites\/article": {

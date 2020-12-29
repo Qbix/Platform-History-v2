@@ -224,7 +224,10 @@
             "fullScreen": "முழு திரை"
         },
         "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
-        "streamTitle": "{{1}} நேரடி அழைப்பு"
+        "streamTitle": "{{1}} நேரடி அழைப்பு",
+        "preview": {
+            "preamble": "சந்தித்தல்:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF ஆவணம்",
             "description": "PDF ஆவணம்",
             "newItem": "PDF ஐச் சேர்க்கவும்"
+        },
+        "Streams/question": {
+            "displayType": "கேள்வி",
+            "description": "கேள்வி ஸ்ட்ரீம்"
+        },
+        "Streams/answer": {
+            "displayType": "பதில்",
+            "description": "பதில் ஸ்ட்ரீம்"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "பட ஆதாரம் இல்லை",
         "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
         "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
+    },
+    "questions": {
+        "Questions": "கேள்விகள்",
+        "Answers": "பதில்கள்",
+        "AnswerQuestion": "பதிலளி",
+        "SetYourAnswer": "என்ற கேள்விக்கு பதிலளிக்கவும்",
+        "NewQuestion": "புதிய கேள்வி",
+        "NewAnswer": "புதிய பதில்",
+        "AnswerDetails": "பதில் விவரங்கள்",
+        "answerOption": "விருப்பம்",
+        "answerOptionExclusive": "பிரத்தியேக",
+        "answerTextarea": "டெக்ஸ்டேரியா",
+        "FreeAnswer": "இலவச பதில் ...",
+        "SaveQuestion": "கேள்வியைச் சேமிக்கவும்",
+        "SaveAnswer": "பதிலைச் சேமி",
+        "AddAnotherAnswer": "மற்றொரு பதிலைச் சேர்க்கவும்",
+        "ErrorAnswers": "ஒரு பதிலைக் கூட சேர்க்கவும்",
+        "AlreadyAnswered": "ஏற்கனவே பதில் அளித்துள்ளார்",
+        "TitlePlaceholder": "உங்கள் கேள்வியைத் தட்டச்சு செய்க",
+        "ContentPlaceholder": "மக்களுக்கு பதிலளிக்க உதவும் கூடுதல் தகவல்களை இங்கே வைக்கவும்",
+        "ErrorTitle": "கேள்வி தேவை"
+    },
+    "experience": {
+        "NewExperience": "புதிய அனுபவம்"
     }
 }

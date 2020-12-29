@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Dim ffynhonnell fideo"
+        "errorNoSource": "Dim ffynhonnell fideo",
+        "SkipAfter": "Neidio ar ôl",
+        "Skip": "Neidio"
     },
     "pdf": {
         "clip": "clip",

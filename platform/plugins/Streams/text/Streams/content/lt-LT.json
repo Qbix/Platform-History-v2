@@ -224,7 +224,10 @@
             "fullScreen": "Per visą ekraną"
         },
         "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
-        "streamTitle": "{{1}} tiesioginis skambutis"
+        "streamTitle": "{{1}} tiesioginis skambutis",
+        "preview": {
+            "preamble": "Susitikimas:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF dokumentas",
             "description": "PDF dokumentas",
             "newItem": "Pridėti PDF"
+        },
+        "Streams/question": {
+            "displayType": "Klausimas",
+            "description": "klausimų srautas"
+        },
+        "Streams/answer": {
+            "displayType": "Atsakymas",
+            "description": "atsakymų srautas"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nėra vaizdo šaltinio",
         "uploadLimit": "Maksimalus failo dydis: {{size}}",
         "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+    },
+    "questions": {
+        "Questions": "Klausimai",
+        "Answers": "Atsakymai",
+        "AnswerQuestion": "Atsakykite į klausimą",
+        "SetYourAnswer": "Prašau atsakyti į klausimą",
+        "NewQuestion": "Naujas klausimas",
+        "NewAnswer": "Naujas atsakymas",
+        "AnswerDetails": "Išsami atsakymo informacija",
+        "answerOption": "Variantas",
+        "answerOptionExclusive": "Išskirtinis",
+        "answerTextarea": "„Textarea“",
+        "FreeAnswer": "nemokamas atsakymas ...",
+        "SaveQuestion": "Išsaugoti klausimą",
+        "SaveAnswer": "Išsaugoti atsakymą",
+        "AddAnotherAnswer": "Pridėti dar vieną atsakymą",
+        "ErrorAnswers": "Pridėkite nors vieną atsakymą",
+        "AlreadyAnswered": "Jau atsakiau",
+        "TitlePlaceholder": "Įveskite savo klausimą",
+        "ContentPlaceholder": "Čia padėkite bet kokią papildomą informaciją, kad žmonės galėtų atsakyti",
+        "ErrorTitle": "Būtinas klausimas"
+    },
+    "experience": {
+        "NewExperience": "Nauja patirtis"
     }
 }

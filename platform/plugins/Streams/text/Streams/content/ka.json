@@ -224,7 +224,10 @@
             "fullScreen": "Სრულ ეკრანზე"
         },
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
-        "streamTitle": "99 999}} ცოცხალი ზარი"
+        "streamTitle": "99 999}} ცოცხალი ზარი",
+        "preview": {
+            "preamble": "Შეხვედრა:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF დოკუმენტი",
             "description": "PDF დოკუმენტი",
             "newItem": "PDF- ის დამატება"
+        },
+        "Streams\/question": {
+            "displayType": "Კითხვა",
+            "description": "კითხვის ნაკადი"
+        },
+        "Streams\/answer": {
+            "displayType": "პასუხი",
+            "description": "პასუხის ნაკადი"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "სურათის წყარო არ არის",
         "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
         "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+    },
+    "questions": {
+        "Questions": "კითხვები",
+        "Answers": "პასუხები",
+        "AnswerQuestion": "პასუხი კითხვაზე",
+        "SetYourAnswer": "გთხოვთ, უპასუხეთ კითხვას",
+        "NewQuestion": "ახალი კითხვა",
+        "NewAnswer": "ახალი პასუხი",
+        "AnswerDetails": "პასუხის დეტალები",
+        "answerOption": "ვარიანტი",
+        "answerOptionExclusive": "ექსკლუზიური",
+        "answerTextarea": "ტექსტარეა",
+        "FreeAnswer": "უფასო პასუხი ...",
+        "SaveQuestion": "შენახვა კითხვა",
+        "SaveAnswer": "პასუხის შენახვა",
+        "AddAnotherAnswer": "დაამატე კიდევ ერთი პასუხი",
+        "ErrorAnswers": "გთხოვთ დაამატოთ თუნდაც ერთი პასუხი",
+        "AlreadyAnswered": "უკვე უპასუხა",
+        "TitlePlaceholder": "აკრიფეთ თქვენი კითხვა",
+        "ContentPlaceholder": "განათავსეთ აქ ნებისმიერი დამატებითი ინფორმაცია, რომ დაეხმაროთ ხალხს პასუხის გაცემაში",
+        "ErrorTitle": "საჭიროა კითხვა"
+    },
+    "experience": {
+        "NewExperience": "Ახალი გამოცდილება"
     }
 }

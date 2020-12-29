@@ -224,7 +224,10 @@
             "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
-        "streamTitle": "} 9 999}} براہ راست کال"
+        "streamTitle": "} 9 999}} براہ راست کال",
+        "preview": {
+            "preamble": "میٹنگ:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "پی ڈی ایف دستاویز",
             "description": "پی ڈی ایف دستاویز",
             "newItem": "پی ڈی ایف شامل کریں"
+        },
+        "Streams\/question": {
+            "displayType": "سوال",
+            "description": "سوال کا سلسلہ"
+        },
+        "Streams\/answer": {
+            "displayType": "جواب",
+            "description": "جواب کا سلسلہ"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "تصویری ذریعہ نہیں ہے",
         "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
         "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+    },
+    "questions": {
+        "Questions": "سوالات",
+        "Answers": "جوابات",
+        "AnswerQuestion": "جواب سوال",
+        "SetYourAnswer": "براہ کرم سوال کا جواب دیں",
+        "NewQuestion": "نیا سوال",
+        "NewAnswer": "نیا جواب",
+        "AnswerDetails": "جواب کی تفصیلات",
+        "answerOption": "آپشن",
+        "answerOptionExclusive": "خصوصی",
+        "answerTextarea": "ٹیکسٹیریا",
+        "FreeAnswer": "مفت جواب ...",
+        "SaveQuestion": "سوال کو محفوظ کریں",
+        "SaveAnswer": "جواب محفوظ کریں",
+        "AddAnotherAnswer": "دوسرا جواب شامل کریں",
+        "ErrorAnswers": "براہ کرم ایک جواب بھی شامل کریں",
+        "AlreadyAnswered": "پہلے ہی جواب دیا گیا ہے",
+        "TitlePlaceholder": "اپنا سوال ٹائپ کریں",
+        "ContentPlaceholder": "لوگوں کو جواب دینے میں مدد کے لئے کوئی اضافی معلومات یہاں رکھیں",
+        "ErrorTitle": "سوال درکار ہے"
+    },
+    "experience": {
+        "NewExperience": "نیا تجربہ"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "ಪೂರ್ಣ ಪರದೆ"
         },
         "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
-        "streamTitle": "{{1}} ಲೈವ್ ಕರೆ"
+        "streamTitle": "{{1}} ಲೈವ್ ಕರೆ",
+        "preview": {
+            "preamble": "ಸಭೆಯಲ್ಲಿ:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
             "description": "ಪಿಡಿಎಫ್ ಡಾಕ್ಯುಮೆಂಟ್",
             "newItem": "ಪಿಡಿಎಫ್ ಸೇರಿಸಿ"
+        },
+        "Streams\/question": {
+            "displayType": "ಪ್ರಶ್ನೆ",
+            "description": "ಪ್ರಶ್ನೆ ಸ್ಟ್ರೀಮ್"
+        },
+        "Streams\/answer": {
+            "displayType": "ಉತ್ತರ",
+            "description": "ಉತ್ತರ ಸ್ಟ್ರೀಮ್"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ಚಿತ್ರದ ಮೂಲವಿಲ್ಲ",
         "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
         "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+    },
+    "questions": {
+        "Questions": "ಪ್ರಶ್ನೆಗಳು",
+        "Answers": "ಉತ್ತರಗಳು",
+        "AnswerQuestion": "ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಿ",
+        "SetYourAnswer": "ದಯವಿಟ್ಟು ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಿ",
+        "NewQuestion": "ಹೊಸ ಪ್ರಶ್ನೆ",
+        "NewAnswer": "ಹೊಸ ಉತ್ತರ",
+        "AnswerDetails": "ಉತ್ತರ ವಿವರಗಳು",
+        "answerOption": "ಆಯ್ಕೆ",
+        "answerOptionExclusive": "ವಿಶೇಷ",
+        "answerTextarea": "ಟೆಕ್ಸ್ಟೇರಿಯಾ",
+        "FreeAnswer": "ಉಚಿತ ಉತ್ತರ ...",
+        "SaveQuestion": "ಪ್ರಶ್ನೆಯನ್ನು ಉಳಿಸಿ",
+        "SaveAnswer": "ಉತ್ತರವನ್ನು ಉಳಿಸಿ",
+        "AddAnotherAnswer": "ಇನ್ನೊಂದು ಉತ್ತರವನ್ನು ಸೇರಿಸಿ",
+        "ErrorAnswers": "ದಯವಿಟ್ಟು ಒಂದು ಉತ್ತರವನ್ನು ಕೂಡ ಸೇರಿಸಿ",
+        "AlreadyAnswered": "ಈಗಾಗಲೇ ಉತ್ತರಿಸಲಾಗಿದೆ",
+        "TitlePlaceholder": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ",
+        "ContentPlaceholder": "ಜನರಿಗೆ ಉತ್ತರಿಸಲು ಸಹಾಯ ಮಾಡಲು ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಇರಿಸಿ",
+        "ErrorTitle": "ಪ್ರಶ್ನೆ ಅಗತ್ಯವಿದೆ"
+    },
+    "experience": {
+        "NewExperience": "ಹೊಸ ಅನುಭವ"
     }
 }

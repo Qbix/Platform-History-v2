@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "夹",
-        "errorNoSource": "没有视频源"
+        "errorNoSource": "没有视频源",
+        "SkipAfter": "跳过后",
+        "Skip": "跳跃"
     },
     "pdf": {
         "clip": "夹",

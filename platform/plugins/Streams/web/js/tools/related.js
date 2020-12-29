@@ -116,7 +116,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 			params.streamType = streamType;
 			var element = tool.elementForStream(
-				tool.state.publisherId, "", streamType, null, 
+				params.publisherId || tool.state.publisherId, "", streamType, null,
 				Q.extend(state.previewOptions, { creatable: params }),
 				state.specificOptions
 			).addClass('Streams_related_composer Q_contextual_inactive');
@@ -125,7 +125,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 			if (oldElement) {
 				$(oldElement).before(element);
-				var $last = tool.$('.Streams_related_composer:last');
+				var $last = tool.$('>.Streams_related_composer:last');
 				if ($last.length) {
 					$(oldElement).insertAfter($last);
 				}

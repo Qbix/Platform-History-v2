@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "kipande cha picha ya video",
-        "errorNoSource": "Hakuna chanzo cha video"
+        "errorNoSource": "Hakuna chanzo cha video",
+        "SkipAfter": "Ruka baada",
+        "Skip": "Ruka"
     },
     "pdf": {
         "clip": "kipande cha picha ya video",

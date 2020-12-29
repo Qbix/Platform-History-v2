@@ -224,7 +224,10 @@
             "fullScreen": "全画面表示"
         },
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
-        "streamTitle": "{{1}}ライブ通話"
+        "streamTitle": "{{1}}ライブ通話",
+        "preview": {
+            "preamble": "会議："
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDFドキュメント",
             "description": "PDFドキュメント",
             "newItem": "PDFを追加"
+        },
+        "Streams/question": {
+            "displayType": "質問",
+            "description": "質問ストリーム"
+        },
+        "Streams/answer": {
+            "displayType": "回答",
+            "description": "回答ストリーム"
         }
     },
     "messages": {
@@ -439,5 +450,29 @@
         "errorNoSource": "画像ソースなし",
         "uploadLimit": "最大ファイルサイズ：{{size}}",
         "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+    },
+    "questions": {
+        "Questions": "質問",
+        "Answers": "回答",
+        "AnswerQuestion": "質問に答える",
+        "SetYourAnswer": "質問に答えてください",
+        "NewQuestion": "新しい質問",
+        "NewAnswer": "新しい答え",
+        "AnswerDetails": "回答の詳細",
+        "answerOption": "オプション",
+        "answerOptionExclusive": "独占",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "自由回答...",
+        "SaveQuestion": "質問を保存",
+        "SaveAnswer": "回答を保存",
+        "AddAnotherAnswer": "別の答えを追加する",
+        "ErrorAnswers": "答えを1つでも追加してください",
+        "AlreadyAnswered": "すでに回答済み",
+        "TitlePlaceholder": "質問を入力してください",
+        "ContentPlaceholder": "人々が答えるのを助けるためにここに追加情報を入れてください",
+        "ErrorTitle": "質問が必要です"
+    },
+    "experience": {
+        "NewExperience": "新しい経験"
     }
 }

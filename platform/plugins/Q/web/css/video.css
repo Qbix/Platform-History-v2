@@ -1,10 +1,29 @@
+.Q_video_tool {
+    position: relative;
+}
 .Q_video_composer {
     padding: 10px;
     position: relative;
 }
-.vjs-has-started .vjs-control-bar,
-.vjs-has-started.vjs-user-inactive.vjs-playing .vjs-control-bar {
+.video-js .vjs-time-control {
+    display: block;
+}
+.video-js .vjs-remaining-time {
     display: none;
+}
+.video-js .vjs-time-control {
+    padding-right: 0;
+    padding-left: 0;
+}
+.video-js .vjs-time-divider {
+    text-align: center;
+}
+.video-js .vjs-marker {
+    height: 50%;
+    bottom: 24%;
+}
+.Q_video_advertising .video-js .vjs-play-progress {
+    background-color: yellow;
 }
 .Q_video_composer label[for=url] {
     margin-top: 10px;
@@ -118,4 +137,28 @@
     background-image: url(../img/throbbers/coolspinner_dark.gif);
     background-repeat: no-repeat;
     background-position: center center;
+}
+.Q_video_tool .Q_video_skip {
+    display: none;
+}
+.Q_video_tool.Q_video_advertising .Q_video_skip {
+    position: absolute;
+    right: 10px;
+    bottom: 50px;
+    display: block;
+    white-space: nowrap;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: grey;
+    color: #fff;
+    cursor: pointer;
+}
+.Q_video_tool.Q_video_advertising .vjs-progress-control,
+.Q_video_tool.Q_video_advertising .vjs-progress-control * {
+    pointer-events: none;
+}
+.Q_video_hidden {
+    position: absolute;
+    top: -1000px;
 }

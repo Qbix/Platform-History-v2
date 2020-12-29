@@ -224,7 +224,10 @@
             "fullScreen": "Volledig scherm"
         },
         "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
-        "streamTitle": "{{1}} live-oproep"
+        "streamTitle": "{{1}} live-oproep",
+        "preview": {
+            "preamble": "Vergadering:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Pdf-document",
             "description": "Pdf-document",
             "newItem": "Voeg pdf toe"
+        },
+        "Streams\/question": {
+            "displayType": "Vraag",
+            "description": "vragenstroom"
+        },
+        "Streams\/answer": {
+            "displayType": "Antwoord",
+            "description": "antwoord stream"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Geen afbeeldingsbron",
         "uploadLimit": "Max. Bestandsgrootte: {{size}}",
         "errorFileSize": "Sorry, maar het bestand is te groot.<br> Maximale bestandsgrootte is {{size}}"
+    },
+    "questions": {
+        "Questions": "Vragen",
+        "Answers": "Antwoorden",
+        "AnswerQuestion": "Antwoord vraag",
+        "SetYourAnswer": "Beantwoord alstublieft de vraag",
+        "NewQuestion": "Nieuwe vraag",
+        "NewAnswer": "Nieuw antwoord",
+        "AnswerDetails": "Beantwoord Details",
+        "answerOption": "Optie",
+        "answerOptionExclusive": "Exclusief",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "gratis antwoord ...",
+        "SaveQuestion": "Vraag opslaan",
+        "SaveAnswer": "Antwoord opslaan",
+        "AddAnotherAnswer": "Voeg nog een antwoord toe",
+        "ErrorAnswers": "Voeg alstublieft één antwoord toe",
+        "AlreadyAnswered": "Al beantwoord",
+        "TitlePlaceholder": "Typ uw vraag",
+        "ContentPlaceholder": "Zet hier eventuele aanvullende informatie om mensen te helpen antwoorden",
+        "ErrorTitle": "Vraag vereist"
+    },
+    "experience": {
+        "NewExperience": "Nieuwe ervaring"
     }
 }

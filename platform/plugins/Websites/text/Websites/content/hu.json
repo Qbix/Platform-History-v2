@@ -34,7 +34,8 @@
             "invalidURL": "érvénytelen URL"
         },
         "FileTooLarge": "A fájl túl nagy a gyorsítótár számára. Maximális fájlméret {{size}}",
-        "InvalidPDF": "A fájl nem érvényes PDF"
+        "InvalidPDF": "A fájl nem érvényes PDF",
+        "StartTypingTitleOrKeywords": "Kezdje el beírni a címet vagy a kulcsszavakat ..."
     },
     "types": {
         "Websites\/article": {

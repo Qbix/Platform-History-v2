@@ -100,6 +100,23 @@
         "inUnderMinute": "za méně než 1 minutu"
     },
     "tabs": {
-        "more": "více"
+        "more": "více",
+        "Menu": "Jídelní lístek"
+    },
+    "video": {
+        "clip": "klip",
+        "errorNoSource": "Žádný zdroj videa",
+        "SkipAfter": "Přeskočit po",
+        "Skip": "Přeskočit"
+    },
+    "pdf": {
+        "clip": "klip",
+        "errorNoSource": "Žádný zdroj ve formátu PDF"
+    },
+    "clip": {
+        "SetClipStart": "Nastavte začátek klipu",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Nastavte konec klipu",
+        "ClipEnd": "Konec klipu"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Skrin sħiħ"
         },
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
-        "streamTitle": "{{1}} telefonata diretta"
+        "streamTitle": "{{1}} telefonata diretta",
+        "preview": {
+            "preamble": "Laqgħa:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dokument PDF",
             "description": "Dokument PDF",
             "newItem": "Żid PDF"
+        },
+        "Streams/question": {
+            "displayType": "Mistoqsija",
+            "description": "fluss tal-mistoqsijiet"
+        },
+        "Streams/answer": {
+            "displayType": "Tweġiba",
+            "description": "risposta fluss"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "L-ebda sors ta &#39;immaġni",
         "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
         "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+    },
+    "questions": {
+        "Questions": "Mistoqsijiet",
+        "Answers": "Tweġibiet",
+        "AnswerQuestion": "Wieġeb Mistoqsija",
+        "SetYourAnswer": "Jekk jogħġbok wieġeb il-mistoqsija",
+        "NewQuestion": "Mistoqsija Ġdida",
+        "NewAnswer": "Tweġiba Ġdida",
+        "AnswerDetails": "Tweġiba Dettalji",
+        "answerOption": "Għażla",
+        "answerOptionExclusive": "Esklussiva",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "tweġiba b&#39;xejn ...",
+        "SaveQuestion": "Ħlief Mistoqsija",
+        "SaveAnswer": "Ħlief Tweġiba",
+        "AddAnotherAnswer": "Żid tweġiba oħra",
+        "ErrorAnswers": "Jekk jogħġbok żid anki tweġiba waħda",
+        "AlreadyAnswered": "Diġà wieġeb",
+        "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
+        "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
+        "ErrorTitle": "Mistoqsija meħtieġa"
+    },
+    "experience": {
+        "NewExperience": "Esperjenza Ġdida"
     }
 }

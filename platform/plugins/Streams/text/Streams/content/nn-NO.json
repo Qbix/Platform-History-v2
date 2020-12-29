@@ -221,7 +221,10 @@
             "fullScreen": "Full skjerm"
         },
         "notAllowedToJoinCall": "Du har ikke tillatelse til å bli med i denne strømmen.",
-        "streamTitle": "{{1}} direktesendt samtale"
+        "streamTitle": "{{1}} direktesendt samtale",
+        "preview": {
+            "preamble": "Møte:"
+        }
     },
     "types": {
         "Streams/invited": {
@@ -340,6 +343,14 @@
             "displayType": "PDF-dokument",
             "description": "PDF-dokument",
             "newItem": "Legg til PDF"
+        },
+        "Streams/question": {
+            "displayType": "Spørsmål",
+            "description": "spørsmålsstrøm"
+        },
+        "Streams/answer": {
+            "displayType": "Svar",
+            "description": "svarstrøm"
         }
     },
     "messages": {
@@ -435,5 +446,29 @@
         "errorNoSource": "Ingen bildekilde",
         "uploadLimit": "Maks filstørrelse: {{size}}",
         "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
+    },
+    "questions": {
+        "Questions": "Spørsmål",
+        "Answers": "Svar",
+        "AnswerQuestion": "Svar på spørsmål",
+        "SetYourAnswer": "Vennligst svar på spørsmålet",
+        "NewQuestion": "Nytt spørsmål",
+        "NewAnswer": "Nytt svar",
+        "AnswerDetails": "Svardetaljer",
+        "answerOption": "Alternativ",
+        "answerOptionExclusive": "Eksklusiv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "gratis svar ...",
+        "SaveQuestion": "Lagre spørsmål",
+        "SaveAnswer": "Lagre svar",
+        "AddAnotherAnswer": "Legg til et annet svar",
+        "ErrorAnswers": "Legg til enda ett svar",
+        "AlreadyAnswered": "Svarte allerede",
+        "TitlePlaceholder": "Skriv inn spørsmålet ditt",
+        "ContentPlaceholder": "Legg ytterligere informasjon her for å hjelpe folk med å svare",
+        "ErrorTitle": "Spørsmål kreves"
+    },
+    "experience": {
+        "NewExperience": "Ny erfaring"
     }
 }

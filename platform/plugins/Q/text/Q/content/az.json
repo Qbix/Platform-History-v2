@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Video mənbəyi yoxdur"
+        "errorNoSource": "Video mənbəyi yoxdur",
+        "SkipAfter": "Sonra keçin",
+        "Skip": "Keç"
     },
     "pdf": {
         "clip": "klip",

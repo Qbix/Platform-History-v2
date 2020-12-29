@@ -105,7 +105,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Asnjë burim video"
+        "errorNoSource": "Asnjë burim video",
+        "SkipAfter": "Kapërce pas",
+        "Skip": "Kapërce"
     },
     "pdf": {
         "clip": "klip",

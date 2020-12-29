@@ -34,7 +34,8 @@
             "invalidURL": "neplatná URL"
         },
         "FileTooLarge": "Soubor je příliš velký pro ukládání do mezipaměti. Maximální velikost souboru {{size}}",
-        "InvalidPDF": "Soubor není platný PDF"
+        "InvalidPDF": "Soubor není platný PDF",
+        "StartTypingTitleOrKeywords": "Začněte psát název nebo klíčová slova ..."
     },
     "types": {
         "Websites\/article": {

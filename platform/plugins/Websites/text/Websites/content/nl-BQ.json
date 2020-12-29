@@ -34,7 +34,8 @@
             "invalidURL": "Ongeldige URL"
         },
         "FileTooLarge": "Bestand te groot voor caching. Max. Bestandsgrootte {{size}}",
-        "InvalidPDF": "Bestand is geen geldige pdf"
+        "InvalidPDF": "Bestand is geen geldige pdf",
+        "StartTypingTitleOrKeywords": "Begin met het typen van titel of trefwoorden ..."
     },
     "types": {
         "Websites/article": {

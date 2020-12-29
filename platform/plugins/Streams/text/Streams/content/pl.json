@@ -224,7 +224,10 @@
             "fullScreen": "Pełny ekran"
         },
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
-        "streamTitle": "{{1}} połączenie na żywo"
+        "streamTitle": "{{1}} połączenie na żywo",
+        "preview": {
+            "preamble": "Spotkanie:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Dokument PDF",
             "description": "Dokument PDF",
             "newItem": "Dodaj PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pytanie",
+            "description": "strumień pytań"
+        },
+        "Streams\/answer": {
+            "displayType": "Odpowiedź",
+            "description": "strumień odpowiedzi"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Brak źródła obrazu",
         "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
         "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+    },
+    "questions": {
+        "Questions": "pytania",
+        "Answers": "Odpowiedzi",
+        "AnswerQuestion": "Odpowiedz na pytanie",
+        "SetYourAnswer": "Proszę odpowiedz na pytanie",
+        "NewQuestion": "Nowe pytanie",
+        "NewAnswer": "Nowa odpowiedź",
+        "AnswerDetails": "Szczegóły odpowiedzi",
+        "answerOption": "Opcja",
+        "answerOptionExclusive": "Ekskluzywny",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "bezpłatna odpowiedź ...",
+        "SaveQuestion": "Zapisz pytanie",
+        "SaveAnswer": "Zapisz odpowiedź",
+        "AddAnotherAnswer": "Dodaj kolejną odpowiedź",
+        "ErrorAnswers": "Dodaj jeszcze jedną odpowiedź",
+        "AlreadyAnswered": "Już odpowiedziałem",
+        "TitlePlaceholder": "Wpisz swoje pytanie",
+        "ContentPlaceholder": "Umieść tutaj dodatkowe informacje, aby pomóc innym odpowiedzieć",
+        "ErrorTitle": "Wymagane pytanie"
+    },
+    "experience": {
+        "NewExperience": "Nowe doświadczenie"
     }
 }

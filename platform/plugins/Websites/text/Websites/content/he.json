@@ -34,7 +34,8 @@
             "invalidURL": "כתובת אתר לא חוקית"
         },
         "FileTooLarge": "הקובץ גדול מדי למטמון. גודל קובץ מקסימלי {{size}}",
-        "InvalidPDF": "הקובץ אינו PDF תקף"
+        "InvalidPDF": "הקובץ אינו PDF תקף",
+        "StartTypingTitleOrKeywords": "התחל להקליד כותרת או מילות מפתח ..."
     },
     "types": {
         "Websites\/article": {

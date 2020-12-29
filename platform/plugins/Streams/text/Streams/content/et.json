@@ -224,7 +224,10 @@
             "fullScreen": "Täisekraan"
         },
         "notAllowedToJoinCall": "Teil pole luba selle vooga liituda.",
-        "streamTitle": "{{1}} otsekõne"
+        "streamTitle": "{{1}} otsekõne",
+        "preview": {
+            "preamble": "Kohtumine:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "PDF-dokument",
             "description": "PDF-dokument",
             "newItem": "Lisage PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Küsimus",
+            "description": "küsimuste voog"
+        },
+        "Streams\/answer": {
+            "displayType": "Vastus",
+            "description": "vastuste voog"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Pildiallikat pole",
         "uploadLimit": "Maksimaalne failisuurus: {{size}}",
         "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+    },
+    "questions": {
+        "Questions": "Küsimused",
+        "Answers": "Vastused",
+        "AnswerQuestion": "Vasta küsimusele",
+        "SetYourAnswer": "Palun vastake küsimusele",
+        "NewQuestion": "Uus küsimus",
+        "NewAnswer": "Uus vastus",
+        "AnswerDetails": "Vastuse üksikasjad",
+        "answerOption": "Variant",
+        "answerOptionExclusive": "Eksklusiivne",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "tasuta vastus ...",
+        "SaveQuestion": "Salvesta küsimus",
+        "SaveAnswer": "Salvesta vastus",
+        "AddAnotherAnswer": "Lisage veel üks vastus",
+        "ErrorAnswers": "Palun lisage kasvõi üks vastus",
+        "AlreadyAnswered": "Vastanud juba",
+        "TitlePlaceholder": "Sisestage oma küsimus",
+        "ContentPlaceholder": "Siit saate lisateavet, et aidata inimestel vastata",
+        "ErrorTitle": "Küsimus on vajalik"
+    },
+    "experience": {
+        "NewExperience": "Uus kogemus"
     }
 }

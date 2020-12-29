@@ -100,6 +100,23 @@
         "inUnderMinute": "за помалку од 1 минута"
     },
     "tabs": {
-        "more": "повеќе"
+        "more": "повеќе",
+        "Menu": "Мени"
+    },
+    "video": {
+        "clip": "клип",
+        "errorNoSource": "Нема извор на видео",
+        "SkipAfter": "Прескокни после",
+        "Skip": "Прескокни"
+    },
+    "pdf": {
+        "clip": "клип",
+        "errorNoSource": "Нема извор на pdf"
+    },
+    "clip": {
+        "SetClipStart": "Поставете почеток на клипот",
+        "ClipStart": "Клип Почеток",
+        "SetClipEnd": "Поставете крај на клипот",
+        "ClipEnd": "Клип Крај"
     }
 }

@@ -224,7 +224,10 @@
             "fullScreen": "Pantalla completa"
         },
         "notAllowedToJoinCall": "No tienes permiso para unirte a esta transmisión.",
-        "streamTitle": "{{1}} llamada en vivo"
+        "streamTitle": "{{1}} llamada en vivo",
+        "preview": {
+            "preamble": "Reunión:"
+        }
     },
     "types": {
         "Streams\/invited": {
@@ -343,6 +346,14 @@
             "displayType": "Documento PDF",
             "description": "Documento PDF",
             "newItem": "Agregar PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pregunta",
+            "description": "flujo de preguntas"
+        },
+        "Streams\/answer": {
+            "displayType": "Responder",
+            "description": "flujo de respuesta"
         }
     },
     "messages": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Sin fuente de imagen",
         "uploadLimit": "Tamaño máximo de archivo: {{size}}",
         "errorFileSize": "Lo siento, pero el archivo es demasiado grande.<br> El tamaño máximo de archivo es {{size}}"
+    },
+    "questions": {
+        "Questions": "Preguntas",
+        "Answers": "Respuestas",
+        "AnswerQuestion": "Responder pregunta",
+        "SetYourAnswer": "Por favor conteste la pregunta",
+        "NewQuestion": "Nueva pregunta",
+        "NewAnswer": "Nueva respuesta",
+        "AnswerDetails": "Detalles de la respuesta",
+        "answerOption": "Opción",
+        "answerOptionExclusive": "Exclusivo",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "respuesta libre ...",
+        "SaveQuestion": "Guardar pregunta",
+        "SaveAnswer": "Guardar respuesta",
+        "AddAnotherAnswer": "Agrega otra respuesta",
+        "ErrorAnswers": "Por favor agregue incluso una respuesta",
+        "AlreadyAnswered": "Ya respondido",
+        "TitlePlaceholder": "Escriba su pregunta",
+        "ContentPlaceholder": "Coloque aquí cualquier información adicional para ayudar a las personas a responder",
+        "ErrorTitle": "Pregunta requerida"
+    },
+    "experience": {
+        "NewExperience": "Nueva experiencia"
     }
 }

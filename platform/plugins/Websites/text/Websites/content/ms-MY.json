@@ -34,7 +34,8 @@
             "invalidURL": "URL tidak sah"
         },
         "FileTooLarge": "Fail terlalu besar untuk cache. Saiz fail maksimum {{size}}",
-        "InvalidPDF": "Fail bukan PDF yang sah"
+        "InvalidPDF": "Fail bukan PDF yang sah",
+        "StartTypingTitleOrKeywords": "Mula menaip tajuk atau kata kunci ..."
     },
     "types": {
         "Websites/article": {

@@ -34,7 +34,8 @@
             "invalidURL": "Недійсна URL-адреса"
         },
         "FileTooLarge": "Файл завеликий для кешування. Максимальний розмір файлу {{size}}",
-        "InvalidPDF": "Файл не є дійсним PDF"
+        "InvalidPDF": "Файл не є дійсним PDF",
+        "StartTypingTitleOrKeywords": "Почніть вводити заголовок або ключові слова ..."
     },
     "types": {
         "Websites/article": {

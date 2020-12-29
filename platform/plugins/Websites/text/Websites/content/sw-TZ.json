@@ -34,7 +34,8 @@
             "invalidURL": "URL batili"
         },
         "FileTooLarge": "Faili ni kubwa mno kwa akiba ya akiba. Ukubwa wa juu wa faili {{size}}",
-        "InvalidPDF": "Faili sio PDF halali"
+        "InvalidPDF": "Faili sio PDF halali",
+        "StartTypingTitleOrKeywords": "Anza kuandika kichwa au maneno ..."
     },
     "types": {
         "Websites/article": {

@@ -34,7 +34,8 @@
             "invalidURL": "URL ไม่ถูกต้อง"
         },
         "FileTooLarge": "ไฟล์ใหญ่เกินไปสำหรับการแคช ขนาดไฟล์สูงสุด {{size}}",
-        "InvalidPDF": "ไฟล์ไม่ใช่ PDF ที่ถูกต้อง"
+        "InvalidPDF": "ไฟล์ไม่ใช่ PDF ที่ถูกต้อง",
+        "StartTypingTitleOrKeywords": "เริ่มพิมพ์ชื่อเรื่องหรือคำสำคัญ ..."
     },
     "types": {
         "Websites\/article": {
