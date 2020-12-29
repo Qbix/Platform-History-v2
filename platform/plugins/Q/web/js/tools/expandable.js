@@ -14,6 +14,7 @@
  *  @param {Number} [options.count] A number, if any, to display when collapsed.
  *  @param {Number} [options.spaceAbove] How many pixels of space to leave above at the end of the scrolling animation
  *  @param {Boolean} [options.expanded] Whether it should start out expanded
+ *  @param {Boolean} [options.evenIfFilled=false] If true, fill tool.element with content event if tool.element have children
  *  @param {Boolean} [options.autoCollapseSiblings=true] Whether, when expanding an expandable, its siblings should be automatically collapsed.
  *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container when necessary
  * @return {Q.Tool}
@@ -24,8 +25,8 @@ Q.Tool.define('Q/expandable', function (options) {
 	var $te = $(tool.element);
 	
 	Q.addStylesheet('{{Q}}/css/expandable.css');
-	
-	if (!$te.children().length) {
+
+	if (state.evenIfFilled || !$te.children().length) {
 		// set it up with javascript
 		var count = options.count || '';
 		var h2 = "<h2 class='Q_clearfix'>"
@@ -79,6 +80,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	autoCollapseSiblings: true,
 	scrollContainer: true,
 	duration: 300,
+	evenIfFilled: false,
 	beforeExpand: new Q.Event(),
 	onExpand: new Q.Event(),
 	beforeCollapse: new Q.Event()
