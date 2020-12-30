@@ -68,7 +68,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	var tool = this;
 	var state = tool.state;
 	if (!state.publisherId) {
-		throw new Q.Error("Streams/preview tool: missing options.publisherId");
+		return console.warn("Streams/preview tool: missing options.publisherId");
 	}
 	var si = state.imagepicker;
 	if (!si || !si.showSize) {
