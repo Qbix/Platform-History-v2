@@ -54,6 +54,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		throw new Q.Error("Streams/related tool: sortable must be an object or false");
 	}
 
+	tool.previewElements = {};
+
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
 	state.streamName = state.streamName || state.stream.fields.name;
 	
@@ -115,6 +117,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				params = {};
 			}
 			params.streamType = streamType;
+
 			var element = tool.elementForStream(
 				params.publisherId || tool.state.publisherId, "", streamType, null,
 				Q.extend(state.previewOptions, { creatable: params }),
@@ -172,9 +175,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (isTabs) {
 			$container = $te.find('.Q_tabs_tabs');
 		}
-		Q.removeElement($container.find('.Streams_preview_tool'), true);
 		++state.refreshCount;
-		
+
+		var ascending = Q.getObject("ascending", state.relatedOptions) || false;
+
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
@@ -216,12 +220,37 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				});
 			}
 		}
-		
-		tool.previewElements = {};
+
+		// remove exiting previews
+		Q.each(exiting, function (i) {
+			var publisherId = this.fields.publisherId;
+			var streamName = this.fields.name;
+			var element = Q.getObject([publisherId, streamName], tool.previewElements);
+
+			if (!element) {
+				return;
+			}
+
+			Q.removeElement(element, true);
+			delete tool.previewElements[publisherId][streamName];
+			if (Q.isEmpty(tool.previewElements[publisherId])) {
+				delete tool.previewElements[publisherId];
+			}
+		});
+
 		var elements = [];
 		Q.each(result.relations, function (i) {
-			if (!this.from) return;
+			if (!this.from) {
+				return;
+			}
+
 			var tff = this.from.fields;
+
+			// if element exists - do nothing
+			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
+				return;
+			}
+
 			var element = tool.elementForStream(
 				tff.publisherId, 
 				tff.name, 
@@ -237,6 +266,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			elements.push(element);
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
+
 			$container.append(element);
 		});
 
@@ -303,6 +333,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
+
 		Streams.retainWith(tool).related(
 			publisherId, 
 			streamName, 
