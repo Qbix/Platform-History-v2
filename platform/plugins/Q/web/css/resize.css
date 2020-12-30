@@ -1,3 +1,6 @@
+.Q_resize_tool {
+    pointer-events: all;
+}
 .Q_resize_resize-handler {
     position: absolute;
     bottom: 0;

@@ -156,6 +156,7 @@ Q.Tool.define('Q/layouts', function (options) {
 				if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';
                 if((rect2.height != 0 && currentHeight != rect2.height) && currentHeight !== rect2.height) ts.height = rect1.height + (rect2.height - rect1.height) * y + 'px';
 			});
+
 		}, duration, ease);
 		tool.state.currentGenerator = generator;
 	}

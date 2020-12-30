@@ -196,6 +196,7 @@
 					}
 
 					var initMoving = function(evt){
+						console.log('initMoving');
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
@@ -217,7 +218,7 @@
 							elementToMove.style.width = elRect.width + 'px';
 							elementToMove.style.height = elRect.height + 'px';
 						}
-						var elementPosition = elementToMove.style.position;
+						var elementPosition = tool.state.elementPosition ? tool.state.elementPosition : 'absolute';
 
 						elementPosition = elementPosition != '' && elementPosition != null ? elementPosition : elementComputedStyle.position;
 						if(elementPosition == 'fixed'){
@@ -809,11 +810,13 @@
 						if(tool.state.move) {
 
 							Q.addEventListener(activateOnElement, Q.Pointer.move, function (e) {
+								console.log('event: MOVE');
 								if(!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10){
-									_dragElement.initMoving(e);
+                                    console.log('event: MOVE: before initMoving');
+
+                                    _dragElement.initMoving(e);
 								}
 							});
-							Q.addEventListener(activateOnElement, Q.Pointer.start, _dragElement.initMoving, true, true);
 							Q.addEventListener(window, Q.Pointer.end, _dragElement.stopMoving, true, true);
 						}
 

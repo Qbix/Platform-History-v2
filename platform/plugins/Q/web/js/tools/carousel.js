@@ -282,7 +282,7 @@
                 }
 
                 function applyTranform(obj) {
-                    //if(tY > 7) tY = 7;
+                    if(tY > 10) tY = 10;
                     if(tY < 0) tY = 0;
 
                     var circlesNum = Math.floor(Math.abs(tX)/360);

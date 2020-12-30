@@ -235,6 +235,11 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	ads: [],
 	adsTimeOut: 10,
+	overlay: {
+		play: {
+			src: '{{Q}}/img/play.png'
+		}
+	},
 	metrics: {
 		useFaces: false
 	},
@@ -385,6 +390,9 @@ Q.Tool.define("Q/video", function (options) {
 					onPause();
 					onEnded();
 				});
+
+				// apply play button image
+				$(".vjs-big-play-button", this.el_).css("background-image", "url(" +Q.url(state.overlay.play.src) + ")");
 
 				/**
 				 * Trigger to show/hide loading spinner above player
