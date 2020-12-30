@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "د پردې شریکول وښایاست"
         },
         "notAllowedToJoinCall": "تاسو په دې جریان کې د شاملیدو اجازه نلرئ.",
-        "streamTitle": "} {999}} ژوندی زنګ"
+        "streamTitle": "} {999}} ژوندی زنګ",
+        "preview": {
+            "preamble": "ناسته:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "د PDF سند",
             "description": "د PDF سند",
             "newItem": "PDF اضافه کړئ"
+        },
+        "Streams\/question": {
+            "displayType": "پوښتنه",
+            "description": "د پوښتنې جریان"
+        },
+        "Streams\/answer": {
+            "displayType": "ځواب",
+            "description": "د ځواب جریان"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "د عکس سرچینه نشته",
         "uploadLimit": "د فایل اندازه اندازه: {{999}",
         "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
+    },
+    "questions": {
+        "Questions": "پوښتنې",
+        "Answers": "ځوابونه",
+        "AnswerQuestion": "د پوښتنې ځواب",
+        "SetYourAnswer": "مهرباني وکړئ پوښتنې ته ځواب ووایاست",
+        "NewQuestion": "نوې پوښتنه",
+        "NewAnswer": "نوی ځواب",
+        "AnswerDetails": "د ځواب جزئیات",
+        "answerOption": "غوراوي",
+        "answerOptionExclusive": "ځانګړې",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "وړیا ځواب ...",
+        "SaveQuestion": "پوښتنه خوندي کړئ",
+        "SaveAnswer": "ځواب خوندي کړئ",
+        "AddAnotherAnswer": "یو بل ځواب اضافه کړئ",
+        "ErrorAnswers": "مهرباني وکړئ حتی یو ځواب اضافه کړئ",
+        "AlreadyAnswered": "دمخه ځواب شوی",
+        "TitlePlaceholder": "خپله پوښتنه ولیکئ",
+        "ContentPlaceholder": "کوم اضافي معلومات دلته ولیکئ ترڅو خلکو ته ځواب ویلو کې مرسته وکړي",
+        "ErrorTitle": "پوښتنه ضروري ده"
+    },
+    "experience": {
+        "NewExperience": "نوې تجربه"
     }
 }

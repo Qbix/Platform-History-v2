@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Gosi nkekọrịta onyonyo"
         },
         "notAllowedToJoinCall": "I nweghi ikike isonye na mmiri iyi a.",
-        "streamTitle": "{{1}} oku di ndu"
+        "streamTitle": "{{1}} oku di ndu",
+        "preview": {
+            "preamble": "Nzukọ:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF akwụkwọ",
             "description": "PDF akwụkwọ",
             "newItem": "Tinye PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Ajụjụ",
+            "description": "Ajuju ajuju"
+        },
+        "Streams\/answer": {
+            "displayType": "Azịza",
+            "description": "azịza iyi"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Enweghị isi iyi onyonyo",
         "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
         "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
+    },
+    "questions": {
+        "Questions": "Mme mbụme",
+        "Answers": "Azịza",
+        "AnswerQuestion": "Azịza Ajụjụ",
+        "SetYourAnswer": "Biko zaa ajụjụ a",
+        "NewQuestion": "New Ajụjụ",
+        "NewAnswer": "New Azịza",
+        "AnswerDetails": "Azịza nkọwa",
+        "answerOption": "Nhọrọ",
+        "answerOptionExclusive": "Naanị",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "azịza efu ...",
+        "SaveQuestion": "Zọpụta Ajụjụ",
+        "SaveAnswer": "Zọpụta Azịza",
+        "AddAnotherAnswer": "Tinye azịza ọzọ",
+        "ErrorAnswers": "Biko tinye ọbụna otu azịza",
+        "AlreadyAnswered": "Azala ya",
+        "TitlePlaceholder": "Pịnye ajụjụ gị",
+        "ContentPlaceholder": "Tinye ozi ndị ọzọ ebe a iji nyere ndị mmadụ aka ịza",
+        "ErrorTitle": "Achọrọ ajụjụ"
+    },
+    "experience": {
+        "NewExperience": "New Ahụmahụ"
     }
 }

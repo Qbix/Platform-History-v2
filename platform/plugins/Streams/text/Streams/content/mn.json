@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Дэлгэц хуваалцахыг харуул"
         },
         "notAllowedToJoinCall": "Танд энэ цацалтад нэгдэх зөвшөөрөл байхгүй байна.",
-        "streamTitle": "{{1}} шууд дуудлага"
+        "streamTitle": "{{1}} шууд дуудлага",
+        "preview": {
+            "preamble": "Уулзалт:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF баримт бичиг",
             "description": "PDF баримт бичиг",
             "newItem": "PDF нэмэх"
+        },
+        "Streams\/question": {
+            "displayType": "Асуулт",
+            "description": "асуултын урсгал"
+        },
+        "Streams\/answer": {
+            "displayType": "Хариулт",
+            "description": "хариултын урсгал"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Зургийн эх сурвалж байхгүй",
         "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
         "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
+    },
+    "questions": {
+        "Questions": "Асуултууд",
+        "Answers": "Хариултууд",
+        "AnswerQuestion": "Хариулт асуулт",
+        "SetYourAnswer": "Асуултанд хариулна уу",
+        "NewQuestion": "Шинэ асуулт",
+        "NewAnswer": "Шинэ хариулт",
+        "AnswerDetails": "Хариултын дэлгэрэнгүй",
+        "answerOption": "Сонголт",
+        "answerOptionExclusive": "Онцгой",
+        "answerTextarea": "Тектерея",
+        "FreeAnswer": "үнэгүй хариулт ...",
+        "SaveQuestion": "Асуултаа хадгалах",
+        "SaveAnswer": "Хариултаа хадгалах",
+        "AddAnotherAnswer": "Өөр хариулт нэмнэ үү",
+        "ErrorAnswers": "Нэг хариултыг ч нэмнэ үү",
+        "AlreadyAnswered": "Аль хэдийн хариулсан",
+        "TitlePlaceholder": "Асуултаа бичнэ үү",
+        "ContentPlaceholder": "Хүмүүс хариулахад нь туслах нэмэлт мэдээллийг энд байрлуул",
+        "ErrorTitle": "Асуулт шаардлагатай"
+    },
+    "experience": {
+        "NewExperience": "Шинэ туршлага"
     }
 }

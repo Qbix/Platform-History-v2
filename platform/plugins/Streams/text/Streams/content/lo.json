@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "ສະແດງການແບ່ງປັນ ໜ້າ ຈໍ"
         },
         "notAllowedToJoinCall": "ທ່ານບໍ່ມີສິດເຂົ້າຮ່ວມກະແສນີ້.",
-        "streamTitle": "{{1}} ການໂທໂດຍກົງ"
+        "streamTitle": "{{1}} ການໂທໂດຍກົງ",
+        "preview": {
+            "preamble": "ກອງປະຊຸມ:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "ເອກະສານ PDF",
             "description": "ເອກະສານ PDF",
             "newItem": "ເພີ່ມ PDF"
+        },
+        "Streams\/question": {
+            "displayType": "ຄຳ ຖາມ",
+            "description": "ກະແສຖາມ ຄຳ ຖາມ"
+        },
+        "Streams\/answer": {
+            "displayType": "ຕອບ",
+            "description": "ກະແສຕອບ"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ບໍ່ມີແຫຼ່ງຮູບພາບ",
         "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
         "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
+    },
+    "questions": {
+        "Questions": "ຄຳ ຖາມ",
+        "Answers": "ຄຳ ຕອບ",
+        "AnswerQuestion": "ຕອບ​ຄໍາ​ຖາມ",
+        "SetYourAnswer": "ກະລຸນາຕອບ ຄຳ ຖາມ",
+        "NewQuestion": "ຄຳ ຖາມ ໃໝ່",
+        "NewAnswer": "ຄຳ ຕອບ ໃໝ່",
+        "AnswerDetails": "ຕອບລາຍລະອຽດ",
+        "answerOption": "ທາງເລືອກ",
+        "answerOptionExclusive": "ພິເສດ",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ຄໍາຕອບຟຣີ ...",
+        "SaveQuestion": "ບັນທຶກ ຄຳ ຖາມ",
+        "SaveAnswer": "ບັນທຶກ ຄຳ ຕອບ",
+        "AddAnotherAnswer": "ຕື່ມ ຄຳ ຕອບອື່ນ",
+        "ErrorAnswers": "ກະລຸນາຕື່ມໃສ່ ຄຳ ຕອບດຽວ",
+        "AlreadyAnswered": "ຕອບແລ້ວ",
+        "TitlePlaceholder": "ພິມ ຄຳ ຖາມຂອງທ່ານ",
+        "ContentPlaceholder": "ໃສ່ຂໍ້ມູນເພີ່ມເຕີມໃສ່ບ່ອນນີ້ເພື່ອຊ່ວຍຄົນຕອບ",
+        "ErrorTitle": "ຕ້ອງມີ ຄຳ ຖາມ"
+    },
+    "experience": {
+        "NewExperience": "ປະສົບການ ໃໝ່"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Bonisa ukwabelana ngesikrini"
         },
         "notAllowedToJoinCall": "Awunayo imvume yokujoyina lo msele.",
-        "streamTitle": "{{1}} umnxeba ophilayo"
+        "streamTitle": "{{1}} umnxeba ophilayo",
+        "preview": {
+            "preamble": "Intlanganiso:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Uxwebhu lwePDF",
             "description": "Uxwebhu lwePDF",
             "newItem": "Yongeza iPDF"
+        },
+        "Streams\/question": {
+            "displayType": "Umbuzo",
+            "description": "umsinga wombuzo"
+        },
+        "Streams\/answer": {
+            "displayType": "Phendula",
+            "description": "umjelo wempendulo"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Akukho mthombo womfanekiso",
         "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
         "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+    },
+    "questions": {
+        "Questions": "Imibuzo",
+        "Answers": "Iimpendulo",
+        "AnswerQuestion": "Phendula umbuzo",
+        "SetYourAnswer": "Nceda uphendule umbuzo",
+        "NewQuestion": "Umbuzo omtsha",
+        "NewAnswer": "Impendulo eNtsha",
+        "AnswerDetails": "Iinkcukacha zeempendulo",
+        "answerOption": "Ukhetho",
+        "answerOptionExclusive": "Ikhethekileyo",
+        "answerTextarea": "Umbhalo",
+        "FreeAnswer": "impendulo yasimahla ...",
+        "SaveQuestion": "Gcina umbuzo",
+        "SaveAnswer": "Gcina Impendulo",
+        "AddAnotherAnswer": "Yongeza enye impendulo",
+        "ErrorAnswers": "Nceda wongeze impendulo ibenye",
+        "AlreadyAnswered": "Sele iphendulwe",
+        "TitlePlaceholder": "Chwetheza umbuzo wakho",
+        "ContentPlaceholder": "Beka naluphi na ulwazi olongezelelweyo apha ukunceda abantu baphendule",
+        "ErrorTitle": "Kufuneka umbuzo"
+    },
+    "experience": {
+        "NewExperience": "Amava amatsha"
     }
 }

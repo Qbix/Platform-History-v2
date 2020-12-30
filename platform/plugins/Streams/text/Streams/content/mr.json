@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "स्क्रीन सामायिकरण दर्शवा"
         },
         "notAllowedToJoinCall": "आपणास या प्रवाहामध्ये सामील होण्याची परवानगी नाही.",
-        "streamTitle": "} {999}} थेट कॉल"
+        "streamTitle": "} {999}} थेट कॉल",
+        "preview": {
+            "preamble": "बैठक:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "पीडीएफ दस्तऐवज",
             "description": "पीडीएफ दस्तऐवज",
             "newItem": "पीडीएफ जोडा"
+        },
+        "Streams\/question": {
+            "displayType": "प्रश्न",
+            "description": "प्रश्न प्रवाह"
+        },
+        "Streams\/answer": {
+            "displayType": "उत्तर",
+            "description": "उत्तर प्रवाह"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "प्रतिमा स्त्रोत नाही",
         "uploadLimit": "कमाल फाइल आकार: {{999}",
         "errorFileSize": "क्षमस्व, परंतु फाईल खूप मोठी आहे.<br> कमाल फाइल आकार {{999} is आहे"
+    },
+    "questions": {
+        "Questions": "प्रश्न",
+        "Answers": "उत्तरे",
+        "AnswerQuestion": "उत्तर प्रश्न",
+        "SetYourAnswer": "कृपया प्रश्नाचे उत्तर द्या",
+        "NewQuestion": "नवीन प्रश्न",
+        "NewAnswer": "नवीन उत्तर",
+        "AnswerDetails": "उत्तर तपशील",
+        "answerOption": "पर्याय",
+        "answerOptionExclusive": "अनन्य",
+        "answerTextarea": "टेक्स्टेरिया",
+        "FreeAnswer": "विनामूल्य उत्तर ...",
+        "SaveQuestion": "प्रश्न जतन करा",
+        "SaveAnswer": "उत्तर जतन करा",
+        "AddAnotherAnswer": "दुसरे उत्तर जोडा",
+        "ErrorAnswers": "कृपया आणखी एक उत्तर जोडा",
+        "AlreadyAnswered": "आधीच उत्तर दिले आहे",
+        "TitlePlaceholder": "आपला प्रश्न टाइप करा",
+        "ContentPlaceholder": "लोकांना उत्तर देण्यासाठी मदत करण्यासाठी येथे कोणतीही अतिरिक्त माहिती ठेवा",
+        "ErrorTitle": "प्रश्न आवश्यक"
+    },
+    "experience": {
+        "NewExperience": "नवीन अनुभव"
     }
 }

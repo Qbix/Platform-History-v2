@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Экранмен бөлісуді көрсету"
         },
         "notAllowedToJoinCall": "Бұл ағынға қосылуға рұқсатыңыз жоқ.",
-        "streamTitle": "{{1}} тікелей қоңырау"
+        "streamTitle": "{{1}} тікелей қоңырау",
+        "preview": {
+            "preamble": "Кездесу:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF құжаты",
             "description": "PDF құжаты",
             "newItem": "PDF қосыңыз"
+        },
+        "Streams\/question": {
+            "displayType": "Сұрақ",
+            "description": "сұрақтар ағыны"
+        },
+        "Streams\/answer": {
+            "displayType": "Жауап",
+            "description": "жауаптар ағыны"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Кескін көзі жоқ",
         "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
         "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+    },
+    "questions": {
+        "Questions": "Сұрақтар",
+        "Answers": "Жауаптар",
+        "AnswerQuestion": "Сұраққа жауап беріңіз",
+        "SetYourAnswer": "Сұраққа жауап беріңізші",
+        "NewQuestion": "Жаңа сұрақ",
+        "NewAnswer": "Жаңа жауап",
+        "AnswerDetails": "Толығырақ жауап беріңіз",
+        "answerOption": "Опция",
+        "answerOptionExclusive": "Эксклюзивті",
+        "answerTextarea": "Тектерея",
+        "FreeAnswer": "тегін жауап ...",
+        "SaveQuestion": "Сұрақты сақтау",
+        "SaveAnswer": "Жауапты сақтау",
+        "AddAnotherAnswer": "Тағы бір жауап қосыңыз",
+        "ErrorAnswers": "Бір жауабын да қосыңыз",
+        "AlreadyAnswered": "Қазірдің өзінде жауап берді",
+        "TitlePlaceholder": "Сұрағыңызды теріңіз",
+        "ContentPlaceholder": "Адамдарға жауап беру үшін кез-келген қосымша ақпаратты осы жерге салыңыз",
+        "ErrorTitle": "Сұрақ қажет"
+    },
+    "experience": {
+        "NewExperience": "Жаңа тәжірибе"
     }
 }

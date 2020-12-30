@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Montri ekranan interŝanĝon"
         },
         "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu rivereto.",
-        "streamTitle": "{{1}} viva alvoko"
+        "streamTitle": "{{1}} viva alvoko",
+        "preview": {
+            "preamble": "Kunveno:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF-dokumento",
             "description": "PDF-dokumento",
             "newItem": "Aldonu PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Demando",
+            "description": "demandofluo"
+        },
+        "Streams\/answer": {
+            "displayType": "Respondo",
+            "description": "responda rivereto"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Neniu bildfonto",
         "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
         "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
+    },
+    "questions": {
+        "Questions": "Demandoj",
+        "Answers": "Respondoj",
+        "AnswerQuestion": "Respondu Demandon",
+        "SetYourAnswer": "Bonvolu respondi la demandon",
+        "NewQuestion": "Nova Demando",
+        "NewAnswer": "Nova Respondo",
+        "AnswerDetails": "Respondaj Detaloj",
+        "answerOption": "Opcio",
+        "answerOptionExclusive": "Ekskluziva",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "senpaga respondo ...",
+        "SaveQuestion": "Konservu Demandon",
+        "SaveAnswer": "Konservu Respondon",
+        "AddAnotherAnswer": "Aldonu alian respondon",
+        "ErrorAnswers": "Bonvolu aldoni eĉ unu respondon",
+        "AlreadyAnswered": "Jam respondis",
+        "TitlePlaceholder": "Tajpu vian demandon",
+        "ContentPlaceholder": "Metu ĉi tien pliajn informojn por helpi homojn respondi",
+        "ErrorTitle": "Demando necesas"
+    },
+    "experience": {
+        "NewExperience": "Nova Sperto"
     }
 }

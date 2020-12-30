@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Muuji wadaagida shaashadda"
         },
         "notAllowedToJoinCall": "Uma lihin ogolaansho inaad ku biirto qulqulkaan.",
-        "streamTitle": "{{1}} wicitaan toos ah"
+        "streamTitle": "{{1}} wicitaan toos ah",
+        "preview": {
+            "preamble": "Kulan:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Dukumiintiga PDF",
             "description": "Dukumiintiga PDF",
             "newItem": "Kudar PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Su’aal",
+            "description": "durdur su&#39;aal"
+        },
+        "Streams\/answer": {
+            "displayType": "Jawaab",
+            "description": "jawaabta qulqulka"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ma jiro ilo sawir",
         "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
         "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+    },
+    "questions": {
+        "Questions": "Su&#39;aalaha",
+        "Answers": "Jawaabaha",
+        "AnswerQuestion": "Jawaab Su&#39;aal",
+        "SetYourAnswer": "Fadlan ka jawaab su&#39;aasha",
+        "NewQuestion": "Su’aal Cusub",
+        "NewAnswer": "Jawaab Cusub",
+        "AnswerDetails": "Faahfaahinta Jawaab",
+        "answerOption": "Xulasho",
+        "answerOptionExclusive": "Gaar ah",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "jawaab bilaash ah ...",
+        "SaveQuestion": "Keydso Su&#39;aal",
+        "SaveAnswer": "Jawaab kaydi",
+        "AddAnotherAnswer": "Ku dar jawaab kale",
+        "ErrorAnswers": "Fadlan ku dar xitaa hal jawaab",
+        "AlreadyAnswered": "Horaa looga jawaabay",
+        "TitlePlaceholder": "Qor su&#39;aashaada",
+        "ContentPlaceholder": "Macluumaad kasta oo dheeri ah halkaan dhig si aad uga caawiso dadka inay ka jawaabaan",
+        "ErrorTitle": "Su&#39;aal ayaa loo baahan yahay"
+    },
+    "experience": {
+        "NewExperience": "Khibrad Cusub"
     }
 }

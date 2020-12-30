@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "ማሳያ ማጋራትን አሳይ"
         },
         "notAllowedToJoinCall": "ይህንን ጅረት ለመቀላቀል ፈቃድ የልዎትም።",
-        "streamTitle": "{{1}} የቀጥታ ጥሪ"
+        "streamTitle": "{{1}} የቀጥታ ጥሪ",
+        "preview": {
+            "preamble": "ስብሰባ"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "የፒዲኤፍ ሰነድ",
             "description": "የፒዲኤፍ ሰነድ",
             "newItem": "ፒዲኤፍ አክል"
+        },
+        "Streams\/question": {
+            "displayType": "ጥያቄ",
+            "description": "የጥያቄ ጅረት"
+        },
+        "Streams\/answer": {
+            "displayType": "መልስ",
+            "description": "መልስ ዥረት"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "የምስል ምንጭ የለም",
         "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
         "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+    },
+    "questions": {
+        "Questions": "ጥያቄዎች",
+        "Answers": "መልሶች",
+        "AnswerQuestion": "የመልስ ጥያቄ",
+        "SetYourAnswer": "እባክዎን ለጥያቄው መልስ ይስጡ",
+        "NewQuestion": "አዲስ ጥያቄ",
+        "NewAnswer": "አዲስ መልስ",
+        "AnswerDetails": "የመልስ ዝርዝሮች",
+        "answerOption": "አማራጭ",
+        "answerOptionExclusive": "ብቸኛ",
+        "answerTextarea": "ቴክስታሪያ",
+        "FreeAnswer": "ነፃ መልስ ...",
+        "SaveQuestion": "ጥያቄን አስቀምጥ",
+        "SaveAnswer": "መልስ አስቀምጥ",
+        "AddAnotherAnswer": "ሌላ መልስ ያክሉ",
+        "ErrorAnswers": "እባክዎን አንድ መልስ እንኳን ያክሉ",
+        "AlreadyAnswered": "ቀድሞውኑ መልስ ተሰጥቷል",
+        "TitlePlaceholder": "ጥያቄዎን ይተይቡ",
+        "ContentPlaceholder": "ሰዎች መልስ እንዲሰጡ ለማገዝ ማንኛውንም ተጨማሪ መረጃ እዚህ ያኑሩ",
+        "ErrorTitle": "ጥያቄ ያስፈልጋል"
+    },
+    "experience": {
+        "NewExperience": "አዲስ ተሞክሮ"
     }
 }
