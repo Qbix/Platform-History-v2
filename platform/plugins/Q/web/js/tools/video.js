@@ -407,6 +407,7 @@ Q.Tool.define("Q/video", function (options) {
 
 						// need to check eventBusEl_ to avoid error from videojs lib
 						if (player.eventBusEl_) {
+							// this event show preloader spinner
 							player.trigger("waiting");
 						}
 					} else {
@@ -591,6 +592,9 @@ Q.Tool.define("Q/video", function (options) {
 
 		player.currentTime(position/1000);
 
+		// this event need to show videojs control bar
+		player.hasStarted && player.hasStarted(true);
+
 		if (silent || pause) {
 			// wait for start position
 			var counter = 0;
@@ -605,6 +609,8 @@ Q.Tool.define("Q/video", function (options) {
 
 					if (pause) {
 						player.pause();
+
+						// this event need to set status paused, because for some reason it stay in status vjs-playing
 						player.trigger && player.trigger('pause');
 					}
 
