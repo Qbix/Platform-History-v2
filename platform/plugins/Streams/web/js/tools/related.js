@@ -251,11 +251,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				return;
 			}
 
+			var thisWeight = this.weight;
 			var element = tool.elementForStream(
 				tff.publisherId, 
 				tff.name, 
-				tff.type, 
-				this.weight,
+				tff.type,
+				thisWeight,
 				state.previewOptions
 			);
 
@@ -267,7 +268,41 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 
-			$container.append(element);
+			// place new element in right place
+			var comparedWeight = null;
+			Q.each(tool.previewElements, function () {
+				Q.each(this, function () {
+					var previewTool = Q.Tool.from(this, "Streams/preview");
+					var weight = Q.getObject("state.related.weight", previewTool);
+
+					if (!previewTool || !weight) {
+						return;
+					}
+
+
+					if (weight > comparedWeight) {
+						comparedWeight = weight;
+					}
+				});
+			});
+
+			if (!comparedWeight) {
+				return $container.append(element);
+			}
+
+			if (thisWeight > comparedWeight) {
+				if (ascending) {
+					$container.append(element);
+				} else {
+					$container.prepend(element);
+				}
+			} else {
+				if (ascending) {
+					$container.prepend(element);
+				} else {
+					$container.append(element);
+				}
+			}
 		});
 
 		// activate the elements one by one, asynchronously
