@@ -32,6 +32,7 @@ var Streams = Q.Streams;
  *   @param {Object} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
+ *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
  *   If executing result of this handler===false, skip adding this preview tool to the related list.
@@ -87,6 +88,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	isCategory: true,
 	relationType: null,
 	realtime: false,
+	infinitescroll: false,
 	activate: {
 		batchSize: {
 			start: 20,
@@ -279,7 +281,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 						return;
 					}
 
-
 					if (weight > comparedWeight) {
 						comparedWeight = weight;
 					}
@@ -304,6 +305,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				}
 			}
 		});
+
+
 
 		// activate the elements one by one, asynchronously
 		var previews = [];
@@ -350,7 +353,34 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		// The elements should animate to their respective positions, like in D3.
 
 	}, "Streams/related"),
-	onRefresh: new Q.Event()
+	onRefresh: new Q.Event(function () {
+		var tool = this;
+		var state = this.state;
+
+		if (state.infinitescroll) {
+			var scrollableElement = this.element.scrollingParent(true, "vertical", true);
+			if (!scrollableElement) {
+				return;
+			}
+
+			$(scrollableElement).tool('Q/infinitescroll', {
+				onInvoke: function () {
+					var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+
+					// skip duplicated (same offsets) requests
+					if (this.state.offset && this.state.offset >= offset) {
+						return;
+					}
+
+					this.state.offset = offset;
+					tool.loadMore(offset);
+				}
+			}).activate();
+		}
+	}, "Streams/related"),
+	onActivated: new Q.Event(function () {
+
+	})
 },
 
 {
