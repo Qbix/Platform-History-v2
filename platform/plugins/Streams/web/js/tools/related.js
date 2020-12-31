@@ -375,65 +375,119 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			state.relationType, 
 			state.isCategory, 
 			state.relatedOptions,
-			relatedResult
+			function (errorMessage) {
+				if (errorMessage) {
+					return console.warn("Streams/related refresh: " + errorMessage);
+				}
+
+				tool.relatedResult(this, onUpdate);
+			}
 		);
-		
-		function relatedResult(errorMessage) {
-			if (errorMessage) {
-				console.warn("Streams/related refresh: " + errorMessage);
-				return;
-			}
-			var result = this;
-			var entering, exiting, updating;
-			entering = exiting = updating = null;
-			function comparator(s1, s2, i, j) {
-				return s1 && s2 && s1.fields && s2.fields
-					&& s1.fields.publisherId === s2.fields.publisherId
-					&& s1.fields.name === s2.fields.name;
-			}
-			var tsr = tool.state.result;
-			if (tsr) {
+	},
+	/**
+	 * Process related results
+	 * @method relatedResult
+	 * @param {Object} result related result
+	 * @param {function} onUpdate callback executed when updated
+	 * @param {boolean} partial Flag indicated that loaded partial data. This case no need to compare streams for exiting.
+	 */
+	relatedResult: function (result, partial, onUpdate) {
+		var tool = this;
+
+		if (typeof arguments[1] === "function") {
+			onUpdate = arguments[1];
+			partial = false;
+		}
+
+		var entering, exiting, updating;
+		entering = exiting = updating = null;
+		function comparator(s1, s2, i, j) {
+			return s1 && s2 && s1.fields && s2.fields
+				&& s1.fields.publisherId === s2.fields.publisherId
+				&& s1.fields.name === s2.fields.name;
+		}
+		var tsr = tool.state.result;
+		if (tsr) {
+			if (!partial) {
 				exiting = Q.diff(tsr.relatedStreams, result.relatedStreams, comparator);
-				entering = Q.diff(result.relatedStreams, tsr.relatedStreams, comparator);
-				updating = Q.diff(result.relatedStreams, entering, exiting, comparator);
-			} else {
-				exiting = updating = [];
-				entering = result.relatedStreams;
 			}
-			tool.state.onUpdate.handle.apply(tool, [result, entering, exiting, updating]);
-			Q.handle(onUpdate, tool, [result, entering, exiting, updating]);
-			
-			// Now that we have the stream, we can update the event listeners again
-			var dir = tool.state.isCategory ? 'To' : 'From';
-			var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
-			if (tool.state.realtime) {
-				Q.each(eventNames, function (i, eventName) {
-					result.stream[eventName]().set(onChangedRelations, tool);
-				});
-			} else {
-				Q.each(eventNames, function (i, eventName) {
-					result.stream[eventName]().remove(tool);
-				});
-			}
-			tool.state.result = result;
-			tool.state.lastMessageOrdinal = result.stream.fields.messageCount;
+			entering = Q.diff(result.relatedStreams, tsr.relatedStreams, comparator);
+			updating = Q.diff(result.relatedStreams, entering, exiting, comparator);
+		} else {
+			exiting = updating = [];
+			entering = result.relatedStreams;
 		}
-		function onChangedRelations(msg, fields) {
-			// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
-			var isCategory = tool.state.isCategory;
-			if (fields.type !== tool.state.relationType) {
-				return;
-			}
-			if (!Users.loggedInUser
-			|| msg.byUserId != Users.loggedInUser.id
-			|| msg.byClientId != Q.clientId()
-			|| msg.ordinal !== tool.state.lastMessageOrdinal + 1) {
-				tool.refresh();
-			} else {
-				tool.refresh(); // TODO: make the weights of the items in between update in the client
-			}
-			tool.state.lastMessageOrdinal = msg.ordinal;
+		tool.state.onUpdate.handle.apply(tool, [result, entering, exiting, updating]);
+		Q.handle(onUpdate, tool, [result, entering, exiting, updating]);
+
+		// Now that we have the stream, we can update the event listeners again
+		var dir = tool.state.isCategory ? 'To' : 'From';
+		var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
+		if (tool.state.realtime) {
+			Q.each(eventNames, function (i, eventName) {
+				result.stream[eventName]().set(function (msg, fields) {
+					// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
+					var isCategory = tool.state.isCategory;
+					if (fields.type !== tool.state.relationType) {
+						return;
+					}
+					if (!Users.loggedInUser
+						|| msg.byUserId != Users.loggedInUser.id
+						|| msg.byClientId != Q.clientId()
+						|| msg.ordinal !== tool.state.lastMessageOrdinal + 1) {
+						tool.refresh();
+					} else {
+						tool.refresh(); // TODO: make the weights of the items in between update in the client
+					}
+					tool.state.lastMessageOrdinal = msg.ordinal;
+				}, tool);
+			});
+		} else {
+			Q.each(eventNames, function (i, eventName) {
+				result.stream[eventName]().remove(tool);
+			});
 		}
+		tool.state.result = Q.extend(tool.state.result, 2, result, 2);
+		tool.state.lastMessageOrdinal = result.stream.fields.messageCount;
+	},
+	/**
+	 * Request part of related data and add previews
+	 * @method loadMore
+	 * @param {Integer} amount How much elements to load
+	 * @param {function} onUpdate callback executed when updated
+	 */
+	loadMore: function (amount, onUpdate) {
+		var tool = this;
+		var state = tool.state;
+		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
+		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
+
+		var limit = Q.getObject("relatedOptions.limit", state);
+		if (!limit) {
+			throw new Q.Error("Streams/related/loadMore: limit undefined, no sense to use loadMore, because all items loaded");
+		}
+
+		var options = Q.extend({}, state.relatedOptions, {
+			offset: limit,
+			limit: amount
+		});
+
+		Streams.retainWith(tool).related(
+			publisherId,
+			streamName,
+			state.relationType,
+			state.isCategory,
+			options,
+			function (errorMessage) {
+				if (errorMessage) {
+					return console.warn("Streams/related refresh: " + errorMessage);
+				}
+
+				tool.relatedResult(this, true, onUpdate);
+
+				state.relatedOptions.limit += amount;
+			}
+		);
 	},
 	/**
 	 * Some time need to remove relation when user doesn't participated to stream (hence doesn't get unrelatedTo message).
@@ -441,7 +495,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 * @param {String } publisherId
 	 * @param {String} streamName
 	 */
-	removeRelation(publisherId, streamName) {
+	removeRelation: function (publisherId, streamName) {
 		var result = this.state.result;
 
 		var previewTools = this.children("Streams/preview");
