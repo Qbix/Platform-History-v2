@@ -2031,6 +2031,10 @@
      */
 
     function trigger(elem, event, hash) {
+        if (!elem) {
+            return;
+        }
+
         // Fetches element data and a reference to the parent (for bubbling).
         // Don't want to add a data object to cache for every parent,
         // so checking hasElData first.
