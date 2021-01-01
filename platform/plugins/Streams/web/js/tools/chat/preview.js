@@ -10,6 +10,7 @@
 	 * @param {Object} [options] options to pass besides the ones to Streams/preview tool
 	 *   @param {string} [options.mode=document] This option regulates tool layout. Can be 'title' and 'document'.
 	 *   @param {Boolean} [options.hideIfNoParticipants] If there are no participants in the chat, hide this preview.
+	 *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
 	 */
 	Q.Tool.define("Streams/chat/preview", "Streams/preview", function _Streams_chat_preview(options, preview) {
 		var tool = this;
@@ -25,7 +26,8 @@
 	{
 		mode: 'document',
 		hideIfNoParticipants: false,
-		onInvoke: new Q.Event()
+		onInvoke: new Q.Event(),
+		onRender: new Q.Event()
 	},
 
 	{
@@ -55,6 +57,10 @@
 				if (err) return;
 
 				tool.element.innerHTML = html;
+
+				setTimeout(function () {
+					Q.handle(state.onRender, tool);
+				}, 0);
 
 				if (state.mode === 'title') {
 					return;

@@ -12,6 +12,7 @@
 	 *   @param {boolean} [options.showDomainOnly=false] If true show domain:port if port != 80, else show full url
 	 *   @param {boolean} [options.showDescription=false] If true show site description below title instead url
 	 *   @param {object} [options.siteData] Site data
+	 *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
 	 *   @param {string} [options.url] url for preview
 	 */
 	Q.Tool.define("Websites/webpage/preview", function (options) {
@@ -319,7 +320,7 @@
 				$(tool.element).html(html);
 
 				Q.activate(tool.element, function () {
-					Q.handle(tool.state.onRender, tool);
+					Q.handle(state.onRender, tool);
 				});
 			});
 		},
