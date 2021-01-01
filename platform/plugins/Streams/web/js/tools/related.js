@@ -358,9 +358,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var state = this.state;
 
 		if (state.infinitescroll) {
+			var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
 			var scrollableElement = this.element.scrollingParent(true, "vertical", true);
-			if (!scrollableElement) {
-				return;
+			$dummyElement.remove();
+			if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
+				return console.warn("Streams/related: scrolligParent for infinitescroll not found");
 			}
 
 			$(scrollableElement).tool('Q/infinitescroll', {
