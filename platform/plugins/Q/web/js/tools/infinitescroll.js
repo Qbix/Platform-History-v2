@@ -52,6 +52,36 @@
 
 			state.lastScrollHeight = $te[0].scrollHeight;
 		}, 100);
+
+		// listen for included tools rendered
+		var includedTools = [];
+		var pipeTimer = null;
+		tool.element.forEachTool(function () {
+			if (pipeTimer === true) {
+				return;
+			}
+
+			if (this.state.onRender) {
+				includedTools.push(this);
+				clearTimeout(pipeTimer);
+				pipeTimer = setTimeout(function () {
+					pipeTimer = true; // mark that pipe called
+					var pipeArray = includedTools.map(function (currTool) {
+						return currTool.id;
+					});
+					var pipe = new Q.Pipe(pipeArray, function () {
+						// check if tool element scrollable
+						if (tool.element.clientHeight >= tool.element.scrollHeight) {
+							Q.handle(tool.state.onInvoke, tool, [0]);
+							pipeTimer = null;
+						}
+					});
+					Q.each(includedTools, function () {
+						this.state.onRender.add(pipe.fill(this.id), tool);
+					});
+				}, 1000);
+			}
+		}, tool);
 	}, {
 		future: {
 			threshold: 0.8
