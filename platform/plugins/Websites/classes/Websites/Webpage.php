@@ -236,7 +236,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
 			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
-			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&fields=items(snippet(title,description,tags,thumbnails))&part=snippet', reset($googleapisMatches), $googleapisKey);
+			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=snippet', reset($googleapisMatches), $googleapisKey);
 			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
 			$error = Q::ifset($googleapisRes, 'error', null);
 			// if json is valid
@@ -245,6 +245,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
 					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
 					$result['iconBig'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'iconBig', null))));
+					$result['publishTime'] = strtotime(Q::ifset($googleapisSnippet, "publishTime", Q::ifset($googleapisSnippet, "publishedAt", "now")));
 					$result['iconSmall'] = "{{Websites}}/img/icons/Websites/youtube/32.png";
 
 					$googleapisTags = Q::ifset($googleapisSnippet, 'tags', null);
@@ -317,7 +318,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		// dummy interest block for cache
 		$result['interest'] = array(
 			'title' => $url,
-			'icon' => $result['iconSmall']
+			'icon' => Q::ifset($result, "iconSmall", Q::ifset($result, "icon", Q::ifset($result, "iconBig", null)))
 		);
 		$webpageCahe->results = json_encode($result);
 		$webpageCahe->save();

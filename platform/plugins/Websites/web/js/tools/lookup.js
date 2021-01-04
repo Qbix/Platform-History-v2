@@ -89,7 +89,10 @@ Q.Tool.define("Websites/lookup", function _Websites_lookup_tool (options) {
 			var $table = $('<table />');
 			Q.each(data.slots.results, function (i, result) {
 				var $tr = $('<tr class="Q_filter_result Websites_lookup_result" />').appendTo($table);
-				$tr.attr("data-url", result.url);
+				$tr.attr({
+					"data-url": result.url,
+					"data-time": result.insertedTime
+				});
 				$('<td class="Websites_lookup_result_icon" />')
 					.append($('<img />', {'src': result.icon}))
 					.appendTo($tr);

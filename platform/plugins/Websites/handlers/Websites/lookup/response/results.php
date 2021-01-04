@@ -39,7 +39,10 @@ function Websites_lookup_response_results ($params) {
 					$result[] = array(
 						"title" => $snippet["title"],
 						"icon" => Q::ifset($snippet, "thumbnails", "default", "url", null),
+						"iconBig" => Q::ifset($snippet, "thumbnails", "high", "url", null),
+						"iconSmall" => "{{Websites}}/img/icons/Websites/youtube/32.png",
 						"description" => $snippet["description"],
+						"publishTime" => strtotime(Q::ifset($snippet, "publishTime", Q::ifset($snippet, "publishedAt", "now"))),
 						"url" => "https://www.youtube.com/watch?v=".Q::ifset($item, "id", "videoId", null)
 					);
 				}
