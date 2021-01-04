@@ -244,7 +244,7 @@ html .Q_inplace_tool_fieldinput { padding: 0px; }
 .Q_cordova.Q_ios.Q_mobile #dashboard_slot { height: 50px; }
 .Q_cordova.Q_ios.Q_mobile #page { top: 50px; }
 .Q_cordova.Q_ios.Q_mobile.Q_notch #dashboard_slot {
-	top: calc(env(safe-area-inset-top));
+	top: env(safe-area-inset-top);
 	height: 50px;
 }
 .Q_cordova.Q_ios.Q_mobile.Q_notch #page { 
