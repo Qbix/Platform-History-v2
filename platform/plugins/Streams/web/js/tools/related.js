@@ -270,37 +270,33 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 
-			// place new element in right place
-			var comparedWeight = null;
+			// select closest larger weight
+			var closestLargerWeight = null;
+			var closestLargerElement = null;
 			Q.each(tool.previewElements, function () {
 				Q.each(this, function () {
 					var weight = Q.getObject("options.streams_preview.related.weight", this);
-					if (weight > comparedWeight) {
-						comparedWeight = weight;
+					if (weight > thisWeight && (!closestLargerWeight || weight < closestLargerWeight)) {
+						closestLargerWeight = weight;
+						closestLargerElement = this;
 					}
 				});
 			});
 
-			if (!comparedWeight) {
-				return $container.append(element);
-			}
-
-			if (thisWeight > comparedWeight) {
+			if (closestLargerElement) {
 				if (ascending) {
-					$container.append(element);
+					$(closestLargerElement).before(element);
 				} else {
-					$container.prepend(element);
+					$(closestLargerElement).after(element);
 				}
 			} else {
 				if (ascending) {
-					$container.prepend(element);
-				} else {
 					$container.append(element);
+				} else {
+					$container.prepend(element);
 				}
 			}
 		});
-
-
 
 		// activate the elements one by one, asynchronously
 		var previews = [];
