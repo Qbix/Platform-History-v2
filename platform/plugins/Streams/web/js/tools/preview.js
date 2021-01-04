@@ -215,6 +215,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
 			var r = state.related;
+			if (weight) {
+				state.related.weight = weight;
+			}
 			Q.Streams.retainWith(tool)
 			.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
 				if (err) {
