@@ -274,13 +274,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			var comparedWeight = null;
 			Q.each(tool.previewElements, function () {
 				Q.each(this, function () {
-					var previewTool = Q.Tool.from(this, "Streams/preview");
-					var weight = Q.getObject("state.related.weight", previewTool);
-
-					if (!previewTool || !weight) {
-						return;
-					}
-
+					var weight = Q.getObject("options.streams_preview.related.weight", this);
 					if (weight > comparedWeight) {
 						comparedWeight = weight;
 					}
