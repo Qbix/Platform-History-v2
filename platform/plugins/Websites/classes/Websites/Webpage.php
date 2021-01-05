@@ -289,7 +289,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		if (!function_exists('_returnYoutube')) {
 			function returnYoutube ($data) {
-				$result = array();
+				$results = array();
 
 				foreach ($data["items"] as $item) {
 					$snippet = $item["snippet"];
@@ -300,7 +300,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 						$keywords = implode(',', $tags);
 					}
 
-					$result[] = array(
+					$result = array(
 						"title" => $snippet["title"],
 						"icon" => Q::ifset($snippet, "thumbnails", "default", "url", null),
 						"iconBig" => Q::ifset($snippet, "thumbnails", "high", "url", null),
@@ -311,9 +311,13 @@ class Websites_Webpage extends Base_Websites_Webpage
 						"url" => "https://www.youtube.com/watch?v=".Q::ifset($item, "id", "videoId", Q::ifset($item, "id", null))
 					);
 
+					// cache data for video
+					Websites_Webpage::cacheSet($result["url"], $result);
+
+					$results[] = $result;
 				}
 
-				return $result;
+				return $results;
 			}
 		}
 
@@ -382,6 +386,11 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 * @param integer [$duration=null] cache life time in seconds
 	 */
 	static function cacheSet ($url, $result, $duration = null) {
+		// check if already exists
+		if (self::cacheGet($url)) {
+			return;
+		}
+
 		$webpageCahe = new Websites_Webpage();
 		$webpageCahe->url = $url;
 
