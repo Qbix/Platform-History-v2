@@ -329,8 +329,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		// docs: https://developers.google.com/youtube/v3/docs/search/list
 		$youtubeApiUrl = $endPoint.'?'.http_build_query($query);
 		$result = Q::json_decode(Q_Utils::get($youtubeApiUrl), true);
-
-		Websites_Webpage::cacheSet($cacheUrl, $result);
+		$duration = $type == "search" ? Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200) : null; // for youtube search results cache duration 12 hours
+		Websites_Webpage::cacheSet($cacheUrl, $result, $duration);
 
 		return returnYoutube($result);
 	}
@@ -360,7 +360,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 				$db = $webpageCahe->db();
 				$updatedTime = $db->fromDateTime($updatedTime);
 				$currentTime = $db->getCurrentTimestamp();
-				$cacheDuration = Q_Config::get('Websites', 'cache', 'duration', 60*60*24*30); // default 1 month
+				$cacheDuration = $webpageCahe->duration; // default 1 month
 				if ($currentTime - $updatedTime < $cacheDuration) {
 					// there are cached webpage results that are still viable
 					return json_decode($webpageCahe->results, true);
@@ -378,10 +378,15 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 * @static
 	 * @param string $url
 	 * @param array $result
+	 * @param integer [$duration=null] cache life time in seconds
 	 */
-	static function cacheSet ($url, $result) {
+	static function cacheSet ($url, $result, $duration = null) {
 		$webpageCahe = new Websites_Webpage();
 		$webpageCahe->url = $url;
+
+		if ($duration) {
+			$webpageCahe->duration = $duration;
+		}
 
 		// dummy interest block for cache
 		$result['interest'] = array(
