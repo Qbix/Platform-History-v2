@@ -28,8 +28,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 			throw new Exception("Invalid URL");
 		}
 
-		if (!function_exists('_return')) {
-			function _return ($url, $result) {
+		if (!function_exists('_returnScrape')) {
+			function _returnScrape ($url, $result) {
 				Websites_Webpage::cacheSet($url, $result);
 				return $result;
 			}
@@ -83,7 +83,7 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'type' => $extension
             ));
 
-            return _return($url, $result);
+            return _returnScrape($url, $result);
         }
 
 		$document = self::readURL($url);
@@ -234,38 +234,106 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		// additional handler for youtube.com
 		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
-			$googleapisKey = Q_Config::expect('Websites', 'youtube', 'keys', 'server');
-			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $googleapisMatches);
-			$googleapisUrl = sprintf('https://www.googleapis.com/youtube/v3/videos?id=%s&key=%s&part=snippet', reset($googleapisMatches), $googleapisKey);
-			$googleapisRes = json_decode(Q_Utils::get($googleapisUrl));
-			$error = Q::ifset($googleapisRes, 'error', null);
-			// if json is valid
-			if (json_last_error() == JSON_ERROR_NONE && empty($error)) {
-				if ($googleapisSnippet = Q::ifset($googleapisRes, 'items', 0, 'snippet', null)) {
-					$result['title'] = Q::ifset($googleapisSnippet, 'title', Q::ifset($result, 'title', null));
-					$result['description'] = Q::ifset($googleapisSnippet, 'description', Q::ifset($result, 'description', null));
-					$result['iconBig'] = Q::ifset($googleapisSnippet, 'thumbnails', 'high', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'medium', 'url', Q::ifset($googleapisSnippet, 'thumbnails', 'default', 'url', Q::ifset($result, 'iconBig', null))));
-					$result['publishTime'] = strtotime(Q::ifset($googleapisSnippet, "publishTime", Q::ifset($googleapisSnippet, "publishedAt", "now")));
-					$result['iconSmall'] = "{{Websites}}/img/icons/Websites/youtube/32.png";
-
-					$googleapisTags = Q::ifset($googleapisSnippet, 'tags', null);
-					if (is_array($googleapisTags) && count($googleapisTags)) {
-						$result['keywords'] = implode(',', $googleapisTags);
-					}
-				}
-			} else {
-				if ($error) {
-					throw new Exception($error->message);
-				}
-			}
+			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $videoId);
+			$videoId = reset($videoId);
+			$youtubeData = self::youtube(compact("videoId"));
+			$youtubeData  = reset($youtubeData);
+			$result = array_merge($result, $youtubeData);
 		}
 
 		$result['iconBig'] = Q::ifset($result, 'iconBig', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
 		$result['iconSmall'] = Q::ifset($result, 'iconSmall', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
 
-		return _return($url, $result);
+		return _returnScrape($url, $result);
 	}
+	/**
+	 * Get search youtube videos or get info about video.
+	 * @method youtube
+	 * @static
+	 * @param {array} $options
+	 * @param {string} [$options.videoId] id of youtube video to get info about single video
+	 * @param {string} [$options.query] query string to search videos
+	 * @param {string} [$options.channel] youtube channel id
+	 * @param {integer} [$options.maxResults=10] limit search results
+	 * @return {array|boolean} decoded json if found or false
+	 */
+	static function youtube ($options) {
+		$apiKey = Q_Config::expect("Websites", "youtube", "keys", "server");
+		$videoId = Q::ifset($options, "videoId", null);
+		$query = Q::ifset($options, "query", null);
 
+		if ($videoId === null && $query === null) {
+			throw new Exception('Websites_Webpage::youtube: videoId or query should defined');
+		}
+
+		$type = $videoId ? "videos" : "search";
+		$endPoint = "https://youtube.googleapis.com/youtube/v3/".$type;
+
+		$query = array(
+			"part" => "snippet"
+		);
+
+		if ($type == "search") {
+			$query["maxResults"] = Q::ifset($options, "maxResults", 10);
+			$query["order"] = "date";
+			$query["q"] = $query;
+
+			$channelId = Q::ifset($options, "channel", null);
+			if ($channelId) {
+				$query["channelId"] = $channelId;
+			}
+		} elseif ($type == "videos") {
+			$query["id"] = $videoId;
+		}
+
+		if (!function_exists('_returnYoutube')) {
+			function returnYoutube ($data) {
+				$result = array();
+
+				foreach ($data["items"] as $item) {
+					$snippet = $item["snippet"];
+
+					$tags = Q::ifset($snippet, 'tags', null);
+					$keywords = "";
+					if (is_array($tags) && count($tags)) {
+						$keywords = implode(',', $tags);
+					}
+
+					$result[] = array(
+						"title" => $snippet["title"],
+						"icon" => Q::ifset($snippet, "thumbnails", "default", "url", null),
+						"iconBig" => Q::ifset($snippet, "thumbnails", "high", "url", null),
+						"iconSmall" => "{{Websites}}/img/icons/Websites/youtube/32.png",
+						"description" => $snippet["description"],
+						"keywords" => $keywords,
+						"publishTime" => strtotime(Q::ifset($snippet, "publishTime", Q::ifset($snippet, "publishedAt", "now"))),
+						"url" => "https://www.youtube.com/watch?v=".Q::ifset($item, "id", "videoId", Q::ifset($item, "id", null))
+					);
+
+				}
+
+				return $result;
+			}
+		}
+
+		$cacheUrl = $endPoint.'?'.http_build_query($query);
+
+		// check for cache
+		$cached = Websites_Webpage::cacheGet($cacheUrl);
+		if ($cached) {
+			return returnYoutube($cached);
+		}
+
+		$query["key"] = $apiKey;
+
+		// docs: https://developers.google.com/youtube/v3/docs/search/list
+		$youtubeApiUrl = $endPoint.'?'.http_build_query($query);
+		$result = Q::json_decode(Q_Utils::get($youtubeApiUrl), true);
+
+		Websites_Webpage::cacheSet($cacheUrl, $result);
+
+		return returnYoutube($result);
+	}
 	/**
 	 * Get cached url response
 	 * @method cacheGet
