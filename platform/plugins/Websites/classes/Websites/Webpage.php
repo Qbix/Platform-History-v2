@@ -255,6 +255,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 * @param {string} [$options.query] query string to search videos
 	 * @param {string} [$options.channel] youtube channel id
 	 * @param {integer} [$options.maxResults=10] limit search results
+	 * @param {integer} [$options.cacheDuration] response cache life time in seconds
 	 * @return {array|boolean} decoded json if found or false
 	 */
 	static function youtube ($options) {
@@ -329,7 +330,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		// docs: https://developers.google.com/youtube/v3/docs/search/list
 		$youtubeApiUrl = $endPoint.'?'.http_build_query($query);
 		$result = Q::json_decode(Q_Utils::get($youtubeApiUrl), true);
-		$duration = $type == "search" ? Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200) : null; // for youtube search results cache duration 12 hours
+		$duration = $type == "search" ? Q::ifset($options, "cacheDuration", Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200)) : null; // for youtube search results cache duration 12 hours
 		Websites_Webpage::cacheSet($cacheUrl, $result, $duration);
 
 		return returnYoutube($result);
