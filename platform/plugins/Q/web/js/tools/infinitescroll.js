@@ -46,10 +46,6 @@
 				state.waiting = false;
 			}
 			
-			if (!$te.is(":visible")) {
-				clearInterval(tool.watchingScrollHeight);
-			}
-
 			state.lastScrollHeight = $te[0].scrollHeight;
 		}, 100);
 
@@ -70,11 +66,20 @@
 						return currTool.id;
 					});
 					var pipe = new Q.Pipe(pipeArray, function () {
-						// check if tool element scrollable
-						if (tool.element.clientHeight >= tool.element.scrollHeight) {
-							Q.handle(tool.state.onInvoke, tool, [0]);
-							pipeTimer = null;
-						}
+						var waitToolVisible = setInterval(function () {
+							// it means that tool element invisible
+							if (tool.element.clientHeight === 0) {
+								return;
+							}
+
+							// check if tool element scrollable
+							if (tool.element.clientHeight >= tool.element.scrollHeight) {
+								Q.handle(tool.state.onInvoke, tool, [0]);
+								pipeTimer = null;
+							}
+
+							clearInterval(waitToolVisible);
+						}, 1000);
 					});
 					Q.each(includedTools, function () {
 						this.state.onRender.add(pipe.fill(this.id), tool);
