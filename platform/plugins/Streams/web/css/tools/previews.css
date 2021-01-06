@@ -257,6 +257,14 @@
 }
 /* </Streams_question_preview> */
 
+/* <Streams_webrtc_preview> */
+.Streams_webrtc_preview_tool .Streams_webrtc_duration {
+	float: right;
+	font-weight: normal;
+	font-size: .8em;
+}
+/* </Streams_webrtc_preview> */
+
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
 .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
 	white-space: nowrap;

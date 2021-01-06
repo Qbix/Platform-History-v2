@@ -182,6 +182,9 @@
 	cursor: none;
 	pointer-events: none;
 }
+.Streams_chat_tool .Streams_webrtc_preview_tool .Streams_preview_icon {
+	display: none;
+}
 
 .Streams_chat_tool h1 {
 	text-align: center;
