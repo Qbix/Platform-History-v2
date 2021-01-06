@@ -62,6 +62,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	
 	state.refreshCount = 0;
 
+	// save first value of relatedOptions.limit to use it to load more streams
+	state.loadMore = Q.getObject("relatedOptions.limit", state);
+
 	if (this.element.classList.contains("Streams_related_participant")) {
 		state.mode = "participant";
 	} else if (state.mode === "participant" && !this.element.classList.contains("Streams_related_participant")) {
@@ -81,6 +84,29 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		tool.text = text;
 		pipe.fill('texts')();
 	});
+
+	if (state.infinitescroll) {
+		var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
+		var scrollableElement = this.element.scrollingParent(true, "vertical", true);
+		$dummyElement.remove();
+		if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
+			return console.warn("Streams/related: scrolligParent for infinitescroll not found");
+		}
+
+		$(scrollableElement).tool('Q/infinitescroll', {
+			onInvoke: function () {
+				var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+
+				// skip duplicated (same offsets) requests
+				if (this.state.offset && this.state.offset >= offset) {
+					return;
+				}
+
+				this.state.offset = offset;
+				tool.loadMore(state.loadMore);
+			}
+		}).activate();
+	}
 },
 
 {
@@ -343,36 +369,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		// The elements should animate to their respective positions, like in D3.
 
 	}, "Streams/related"),
-	onRefresh: new Q.Event(function () {
-		var tool = this;
-		var state = this.state;
-
-		if (state.infinitescroll) {
-			var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
-			var scrollableElement = this.element.scrollingParent(true, "vertical", true);
-			$dummyElement.remove();
-			if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
-				return console.warn("Streams/related: scrolligParent for infinitescroll not found");
-			}
-
-			$(scrollableElement).tool('Q/infinitescroll', {
-				onInvoke: function () {
-					var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
-
-					// skip duplicated (same offsets) requests
-					if (this.state.offset && this.state.offset >= offset) {
-						return;
-					}
-
-					this.state.offset = offset;
-					tool.loadMore(offset);
-				}
-			}).activate();
-		}
-	}, "Streams/related"),
-	onActivated: new Q.Event(function () {
-
-	})
+	onRefresh: new Q.Event()
 },
 
 {
