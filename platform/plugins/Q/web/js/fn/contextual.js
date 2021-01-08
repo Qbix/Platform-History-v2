@@ -44,7 +44,9 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 	}
 
 	var contextual = $('<div class="Q_contextual" />');
-	if (state.className) contextual.addClass(state.className);
+	if (state.className) {
+		contextual.addClass(state.className);
+	}
 	var listingWrapper = $('<div class="Q_listing_wrapper" />');
 	if (state.defaultHandler) {
 		if (typeof(state.defaultHandler) == 'string') {
@@ -60,6 +62,17 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 		}
 	}
 	contextual.append(listingWrapper.append(listing));
+
+	// set contextual max z-index
+	var highestZ = 0;
+	Q.each($('div'), function () {
+		var z = parseInt($(this).css("z-index"), 10);
+		if(z > highestZ) {
+			highestZ = z;
+		}
+	});
+	contextual.css("z-index", highestZ);
+
 	$(document.body).append(contextual);
 
 	var cid = Q.Contextual.add($this, contextual, null, state.size);
