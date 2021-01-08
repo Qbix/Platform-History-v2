@@ -16,8 +16,10 @@ var Streams = Q.Streams;
  * @param {String} [options.category.relationType="Streams/topic"]
  * @param {String} [options.publisherId] User id on whose behalf related streams will be created. Logged in user by default.
  * @param {String} [options.streamName] Name of category to relate streams to.
- * @param {Boolean} [options.oneByOne=true] means people have to finish previous ones before going to the next one.
- * @param {Boolean} [options.automatic=true] means people have to finish previous ones before going to the next one.
+ * @param {Boolean} [options.moveNext=true] define how people move to next step:
+ * 		If true - need to finish current before going next,
+ * 		if numeric - force to go next after this number seconds.
+ * @param {Boolean} [options.automatic=true] means people advance to the next one at a given time
  */
 Q.Tool.define("Streams/experience", function(options) {
 	var tool = this;
@@ -101,8 +103,7 @@ Q.Tool.define("Streams/experience", function(options) {
 		streamName: "Streams/experience/main",
 		relationType: "Streams/topic"
 	},
-	oneByOne: true,
-	automatic: true,
+	moveNext: true,
 	streamTypes: {
 		"Streams/video": {
 			icon: "{{Streams}}/img/icons/Streams/video/40.png"
@@ -124,9 +125,6 @@ Q.Tool.define("Streams/experience", function(options) {
 		},
 		"Websites/webpage": {
 			icon: "{{Websites}}/img/icons/Websites/webpage/40.png"
-		},
-		"Websites/article": {
-			icon: "{{Websites}}/img/icons/Websites/article/40.png"
 		}
 	}
 },
@@ -136,6 +134,7 @@ Q.Tool.define("Streams/experience", function(options) {
 		var tool = this;
 		var state = this.state;
 		var $toolElement = $(this.element);
+		var relationType = state.category.relationType;
 
 		Q.invoke({
 			title: tool.text.NewExperience,
@@ -143,8 +142,11 @@ Q.Tool.define("Streams/experience", function(options) {
 			content: Q.Tool.setUpElement('div', 'Streams/related', {
 				publisherId: tool.stream.fields.publisherId,
 				streamName: tool.stream.fields.name,
-				relationType: "Streams/topic",
-				editable: false
+				relationType: relationType,
+				editable: false,
+				closeable: true,
+				realtime: true,
+				sortable: false
 			}),
 			trigger: tool.element,
 			callback: function (content) {
@@ -161,7 +163,25 @@ Q.Tool.define("Streams/experience", function(options) {
 								icon: info.icon,
 								className: "Streams_experience_contextual",
 								handler: function () {
-
+									$("<div>").hide().appendTo(content).tool("Streams/preview", {
+										publisherId: state.publisherId,
+										closeable: false,
+										editable: false,
+										related: {
+											publisherId: relatedTool.state.publisherId,
+											streamName: relatedTool.state.streamName,
+											type: relationType
+										},
+										creatable: {
+											//title: title,
+											clickable: false,
+											addIconSize: 0,
+											streamType: type,
+											options: {
+												skipComposer: true
+											}
+										}
+									}).tool(type + "/preview").activate();
 								}
 							});
 						});
@@ -184,7 +204,7 @@ Q.Tool.define("Streams/experience", function(options) {
 	addContextual: function (params) {
 		var tool = this;
 
-		var $element = $("<div class='Streams_experience_addon'></div>");
+		var $element = $("<li class='Streams_experience_addon'></li>");
 
 		$("<div class='Streams_experience_addon_icon'><img src='" + Q.url(params.icon) + "' /></div>").appendTo($element);
 
