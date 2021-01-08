@@ -14,6 +14,7 @@
 	 *   @param {object} [options.siteData] Site data
 	 *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
 	 *   @param {string} [options.url] url for preview
+	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
 	 */
 	Q.Tool.define("Websites/webpage/preview", function (options) {
 		var tool = this;
@@ -53,18 +54,24 @@
 					return ;
 				}
 
-				tool.composer(_proceed);
+				// when all components loaded, call composer
+				state.onLoad.add(function () {
+					tool.composer(_proceed);
+				}, tool);
+
 				return false;
 			};
 		}
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
-				if (previewState) {
-					previewState.onRefresh.add(tool.refresh.bind(tool));
-				} else {
-					tool.refresh();
-				}
+			Q.handle(state.onLoad, tool);
+
+			if (previewState) {
+				previewState.onRefresh.add(tool.refresh.bind(tool));
+			} else {
+				tool.refresh();
+			}
 		});
 
 		// loading styles
@@ -97,16 +104,17 @@
 		isComposer: true,
 		editable: ['title'],
 		mode: 'document',
-		onInvoke: new Q.Event(),
-		onRender: new Q.Event(),
-		onError: new Q.Event(),
 		showDomainOnly: false,
 		showDescription: false,
 		hideIfNoParticipants: false,
 		category: null,
 		// light mode params
 		siteData: {},
-		url: null
+		url: null,
+		onInvoke: new Q.Event(),
+		onRender: new Q.Event(),
+		onError: new Q.Event(),
+		onLoad: new Q.Event()
 	},
 
 	{
