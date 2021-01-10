@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ឈុត",
-        "errorNoSource": "គ្មានប្រភពវីដេអូទេ"
+        "errorNoSource": "គ្មានប្រភពវីដេអូទេ",
+        "SkipAfter": "រំលងបន្ទាប់",
+        "Skip": "រំលង"
     },
     "pdf": {
         "clip": "ឈុត",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "ច្រើនទៀត",
         "Menu": "មឺនុយ"
+    },
+    "durations": {
+        "second": "ទីពីរ",
+        "seconds": "វិនាទី",
+        "minute": "នាទី",
+        "minutes": "នាទី",
+        "hour": "ម៉ោង",
+        "day": "ថ្ងៃ",
+        "days": "ថ្ងៃ",
+        "week": "សប្តាហ៍",
+        "weeks": "សប្តាហ៍",
+        "month": "ខែ",
+        "months": "ខែ",
+        "year": "ឆ្នាំ",
+        "years": "ឆ្នាំ",
+        "decade": "មួយទសវត្សរ៍",
+        "decades": "ជាច្រើនទសវត្ស",
+        "century": "សតវត្សទី",
+        "centuries": "សតវត្ស"
     }
 }

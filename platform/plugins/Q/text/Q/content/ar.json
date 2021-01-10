@@ -118,5 +118,24 @@
         "ClipStart": "بدء المقطع",
         "SetClipEnd": "تعيين نهاية المقطع",
         "ClipEnd": "نهاية المقطع"
+    },
+    "durations": {
+        "second": "ثانيا",
+        "seconds": "ثواني",
+        "minute": "دقيقة",
+        "minutes": "الدقائق",
+        "hour": "ساعات",
+        "day": "يوم",
+        "days": "أيام",
+        "week": "أسبوع",
+        "weeks": "أسابيع",
+        "month": "شهر",
+        "months": "الشهور",
+        "year": "عام",
+        "years": "سنوات",
+        "decade": "عقد",
+        "decades": "عقود",
+        "century": "مئة عام",
+        "centuries": "قرون"
     }
 }

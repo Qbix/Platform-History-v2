@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "jepitan",
-        "errorNoSource": "Teu aya sumber pidéo"
+        "errorNoSource": "Teu aya sumber pidéo",
+        "SkipAfter": "Skip saatos",
+        "Skip": "Ngalangkungan"
     },
     "pdf": {
         "clip": "jepitan",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Tambih deui",
         "Menu": "Ménu"
+    },
+    "durations": {
+        "second": "kadua",
+        "seconds": "detik",
+        "minute": "menit",
+        "minutes": "menit",
+        "hour": "jam",
+        "day": "dinten",
+        "days": "poé",
+        "week": "saminggu",
+        "weeks": "minggu",
+        "month": "sasih",
+        "months": "bulan",
+        "year": "taun",
+        "years": "taun",
+        "decade": "dékade",
+        "decades": "puluhan taun",
+        "century": "abad",
+        "centuries": "mangabad-abad"
     }
 }

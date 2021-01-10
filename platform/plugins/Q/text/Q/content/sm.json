@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "kilipa",
-        "errorNoSource": "Leai se ata vitio"
+        "errorNoSource": "Leai se ata vitio",
+        "SkipAfter": "Skip pe a uma",
+        "Skip": "Faapasi"
     },
     "pdf": {
         "clip": "kilipa",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "sili atu",
         "Menu": "Lisi"
+    },
+    "durations": {
+        "second": "tulaga lua",
+        "seconds": "sekone",
+        "minute": "minute",
+        "minutes": "minute",
+        "hour": "itula",
+        "day": "aso",
+        "days": "aso",
+        "week": "vaiaso",
+        "weeks": "vaiaso",
+        "month": "masina",
+        "months": "masina",
+        "year": "tausaga",
+        "years": "tausaga",
+        "decade": "sefulu tausaga",
+        "decades": "sefulu tausaga",
+        "century": "seneturi",
+        "centuries": "seneturi"
     }
 }

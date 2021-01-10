@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ක්ලිප්",
-        "errorNoSource": "වීඩියෝ ප්‍රභවයක් නොමැත"
+        "errorNoSource": "වීඩියෝ ප්‍රභවයක් නොමැත",
+        "SkipAfter": "පසුව මඟ හරින්න",
+        "Skip": "මඟ හරින්න"
     },
     "pdf": {
         "clip": "ක්ලිප්",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "තවත්",
         "Menu": "මෙනු"
+    },
+    "durations": {
+        "second": "දෙවැනි",
+        "seconds": "තත්පර",
+        "minute": "විනාඩිය",
+        "minutes": "මිනිත්තු",
+        "hour": "පැය",
+        "day": "දින",
+        "days": "දින",
+        "week": "සතිය",
+        "weeks": "සති",
+        "month": "මස",
+        "months": "මාස",
+        "year": "වර්ෂය",
+        "years": "වසර",
+        "decade": "දශකය",
+        "decades": "දශක",
+        "century": "සියවස",
+        "centuries": "සියවස්"
     }
 }

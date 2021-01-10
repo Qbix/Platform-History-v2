@@ -118,5 +118,24 @@
         "ClipStart": "剪辑开始",
         "SetClipEnd": "设置剪辑结束",
         "ClipEnd": "夹端"
+    },
+    "durations": {
+        "second": "第二",
+        "seconds": "秒",
+        "minute": "分钟",
+        "minutes": "分钟",
+        "hour": "小时",
+        "day": "天",
+        "days": "天",
+        "week": "周",
+        "weeks": "周",
+        "month": "月",
+        "months": "月",
+        "year": "年",
+        "years": "年份",
+        "decade": "十年",
+        "decades": "几十年",
+        "century": "世纪",
+        "centuries": "几个世纪"
     }
 }

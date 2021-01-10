@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Hapana vhidhiyo sosi"
+        "errorNoSource": "Hapana vhidhiyo sosi",
+        "SkipAfter": "Enda shure",
+        "Skip": "Darika"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "zvimwe",
         "Menu": "Menyu"
+    },
+    "durations": {
+        "second": "Chepiri",
+        "seconds": "masekondi",
+        "minute": "Mineti",
+        "minutes": "maminetsi",
+        "hour": "maawa",
+        "day": "zuva",
+        "days": "mazuva",
+        "week": "vhiki",
+        "weeks": "mavhiki",
+        "month": "mwedzi",
+        "months": "mwedzi",
+        "year": "gore",
+        "years": "makore",
+        "decade": "gumi",
+        "decades": "makumi emakore",
+        "century": "zana remakore",
+        "centuries": "mazana emakore"
     }
 }

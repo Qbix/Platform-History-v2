@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "obere vidiyo",
-        "errorNoSource": "Enweghị isi iyi vidiyo"
+        "errorNoSource": "Enweghị isi iyi vidiyo",
+        "SkipAfter": "Mafere mgbe",
+        "Skip": "Mafere"
     },
     "pdf": {
         "clip": "obere vidiyo",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Ọzọ",
         "Menu": "NchNhr"
+    },
+    "durations": {
+        "second": "nke abụọ",
+        "seconds": "sekọnd",
+        "minute": "Nkeji",
+        "minutes": "Nkeji",
+        "hour": "awa",
+        "day": "ụbọchị",
+        "days": "ụbọchị",
+        "week": "izu",
+        "weeks": "izu",
+        "month": "ọnwa",
+        "months": "Ọnwa",
+        "year": "afọ",
+        "years": "afọ",
+        "decade": "afọ iri",
+        "decades": "ọtụtụ iri afọ",
+        "century": "narị afọ",
+        "centuries": "ọtụtụ narị afọ"
     }
 }

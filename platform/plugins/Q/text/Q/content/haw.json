@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "paopao",
-        "errorNoSource": "ʻAʻohe kumu wikiō"
+        "errorNoSource": "ʻAʻohe kumu wikiō",
+        "SkipAfter": "E lele ma hope",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "paopao",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "hou aku",
         "Menu": "Papa Kuhikuhi"
+    },
+    "durations": {
+        "second": "ka lua",
+        "seconds": "kekona",
+        "minute": "minuke",
+        "minutes": "minuke",
+        "hour": "mau hola",
+        "day": "lā",
+        "days": "nā lā",
+        "week": "pule",
+        "weeks": "pule",
+        "month": "mahina",
+        "months": "mahina",
+        "year": "makahiki",
+        "years": "makahiki",
+        "decade": "ʻumi makahiki",
+        "decades": "mau makahiki",
+        "century": "kenekulia",
+        "centuries": "kenekulia"
     }
 }

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ຄລິບ",
-        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ"
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ",
+        "SkipAfter": "ຂ້າມຫຼັງຈາກ",
+        "Skip": "ຂ້າມ"
     },
     "pdf": {
         "clip": "ຄລິບ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "ຫຼາຍ",
         "Menu": "ເມນູ"
+    },
+    "durations": {
+        "second": "ຄັ້ງທີສອງ",
+        "seconds": "ວິນາທີ",
+        "minute": "ນາທີ",
+        "minutes": "ນາທີ",
+        "hour": "ຊົ່ວໂມງ",
+        "day": "ມື້",
+        "days": "ມື້",
+        "week": "ອາທິດ",
+        "weeks": "ອາທິດ",
+        "month": "ເດືອນ",
+        "months": "ເດືອນ",
+        "year": "ປີ",
+        "years": "ປີ",
+        "decade": "ທົດສະວັດ",
+        "decades": "ທົດສະວັດ",
+        "century": "ສະຕະວັດ",
+        "centuries": "ສັດຕະວັດແລ້ວ"
     }
 }

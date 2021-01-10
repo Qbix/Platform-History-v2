@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ਕਲਿਪ",
-        "errorNoSource": "ਕੋਈ ਵੀਡੀਓ ਸਰੋਤ ਨਹੀਂ"
+        "errorNoSource": "ਕੋਈ ਵੀਡੀਓ ਸਰੋਤ ਨਹੀਂ",
+        "SkipAfter": "ਦੇ ਬਾਅਦ ਛੱਡੋ",
+        "Skip": "ਛੱਡੋ"
     },
     "pdf": {
         "clip": "ਕਲਿਪ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "ਹੋਰ",
         "Menu": "ਮੀਨੂ"
+    },
+    "durations": {
+        "second": "ਦੂਜਾ",
+        "seconds": "ਸਕਿੰਟ",
+        "minute": "ਮਿੰਟ",
+        "minutes": "ਮਿੰਟ",
+        "hour": "ਘੰਟੇ",
+        "day": "ਦਿਨ",
+        "days": "ਦਿਨ",
+        "week": "ਹਫ਼ਤਾ",
+        "weeks": "ਹਫ਼ਤੇ",
+        "month": "ਮਹੀਨਾ",
+        "months": "ਮਹੀਨੇ",
+        "year": "ਸਾਲ",
+        "years": "ਸਾਲ",
+        "decade": "ਦਹਾਕਾ",
+        "decades": "ਦਹਾਕੇ",
+        "century": "ਸਦੀ",
+        "centuries": "ਸਦੀਆਂ"
     }
 }

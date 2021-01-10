@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "клип",
-        "errorNoSource": "Бейне көзі жоқ"
+        "errorNoSource": "Бейне көзі жоқ",
+        "SkipAfter": "Кейін өткізіп жіберу",
+        "Skip": "Өткізіп жіберу"
     },
     "pdf": {
         "clip": "клип",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Көбірек",
         "Menu": "Мәзір"
+    },
+    "durations": {
+        "second": "екінші",
+        "seconds": "секунд",
+        "minute": "минут",
+        "minutes": "минут",
+        "hour": "сағат",
+        "day": "күн",
+        "days": "күндер",
+        "week": "апта",
+        "weeks": "апта",
+        "month": "ай",
+        "months": "ай",
+        "year": "жыл",
+        "years": "жылдар",
+        "decade": "он жылдық",
+        "decades": "онжылдықтар",
+        "century": "ғасыр",
+        "centuries": "ғасырлар"
     }
 }

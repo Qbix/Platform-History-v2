@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Çavkaniya vîdyoyê tune"
+        "errorNoSource": "Çavkaniya vîdyoyê tune",
+        "SkipAfter": "Li dû xwe bavêjin",
+        "Skip": "Hilperkîn"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "zêde",
         "Menu": "Qerta xûrekê"
+    },
+    "durations": {
+        "second": "duyem",
+        "seconds": "çirke",
+        "minute": "deqqe",
+        "minutes": "deqîqe",
+        "hour": "saetan",
+        "day": "roj",
+        "days": "rojan",
+        "week": "hefte",
+        "weeks": "hefte",
+        "month": "meh",
+        "months": "meh",
+        "year": "sal",
+        "years": "salan",
+        "decade": "dehsal",
+        "decades": "dehsalan",
+        "century": "sedsal",
+        "centuries": "sedsalan"
     }
 }

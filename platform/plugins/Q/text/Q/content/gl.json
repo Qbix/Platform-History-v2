@@ -118,5 +118,24 @@
         "ClipStart": "Clip Iniciar",
         "SetClipEnd": "Establecer fin de clip",
         "ClipEnd": "Final do clip"
+    },
+    "durations": {
+        "second": "segundo",
+        "seconds": "segundos",
+        "minute": "minuto",
+        "minutes": "minutos",
+        "hour": "horas",
+        "day": "día",
+        "days": "días",
+        "week": "semana",
+        "weeks": "semanas",
+        "month": "mes",
+        "months": "meses",
+        "year": "ano",
+        "years": "anos",
+        "decade": "década",
+        "decades": "décadas",
+        "century": "século",
+        "centuries": "séculos"
     }
 }

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "isiqeshana",
-        "errorNoSource": "Awukho umthombo wevidiyo"
+        "errorNoSource": "Awukho umthombo wevidiyo",
+        "SkipAfter": "Yeqa ngemuva",
+        "Skip": "Yeqa"
     },
     "pdf": {
         "clip": "isiqeshana",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Okuningi",
         "Menu": "Imenyu"
+    },
+    "durations": {
+        "second": "okwesibili",
+        "seconds": "imizuzwana",
+        "minute": "umzuzu",
+        "minutes": "imizuzu",
+        "hour": "amahora",
+        "day": "usuku",
+        "days": "izinsuku",
+        "week": "isonto",
+        "weeks": "amasonto",
+        "month": "inyanga",
+        "months": "izinyanga",
+        "year": "unyaka",
+        "years": "iminyaka",
+        "decade": "iminyaka eyishumi",
+        "decades": "amashumi eminyaka",
+        "century": "ikhulu leminyaka",
+        "centuries": "amakhulu eminyaka"
     }
 }

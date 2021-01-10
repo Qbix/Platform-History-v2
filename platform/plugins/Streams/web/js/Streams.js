@@ -4252,7 +4252,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
+MTotal.seen.cache = Q.Cache['document']("Streams.Message.Total.seen", 100);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.

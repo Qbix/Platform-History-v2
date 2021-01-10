@@ -118,5 +118,24 @@
         "ClipStart": "ক্লিপ শুরু",
         "SetClipEnd": "ক্লিপ শেষ সেট করুন",
         "ClipEnd": "ক্লিপ শেষ"
+    },
+    "durations": {
+        "second": "দ্বিতীয়",
+        "seconds": "সেকেন্ড",
+        "minute": "মিনিট",
+        "minutes": "মিনিট",
+        "hour": "ঘন্টার",
+        "day": "দিন",
+        "days": "দিন",
+        "week": "সপ্তাহ",
+        "weeks": "সপ্তাহ",
+        "month": "মাস",
+        "months": "মাস",
+        "year": "বছর",
+        "years": "বছর",
+        "decade": "দশক",
+        "decades": "দশক",
+        "century": "শতাব্দী",
+        "centuries": "শতাব্দী"
     }
 }

@@ -118,5 +118,24 @@
         "ClipStart": "Цлип Старт",
         "SetClipEnd": "Постави крај исечка",
         "ClipEnd": "Цлип Енд"
+    },
+    "durations": {
+        "second": "друго",
+        "seconds": "секунде",
+        "minute": "минуту",
+        "minutes": "минута",
+        "hour": "сати",
+        "day": "дан",
+        "days": "дана",
+        "week": "Недеља",
+        "weeks": "недеље",
+        "month": "месец дана",
+        "months": "месеци",
+        "year": "године",
+        "years": "године",
+        "decade": "декада",
+        "decades": "деценија",
+        "century": "века",
+        "centuries": "векова"
     }
 }

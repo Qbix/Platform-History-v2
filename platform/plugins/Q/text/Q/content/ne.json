@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "क्लिप",
-        "errorNoSource": "कुनै भिडियो स्रोत छैन"
+        "errorNoSource": "कुनै भिडियो स्रोत छैन",
+        "SkipAfter": "पछि छोड्नुहोस्",
+        "Skip": "छोड्नुहोस्"
     },
     "pdf": {
         "clip": "क्लिप",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "अधिक",
         "Menu": "मेनू"
+    },
+    "durations": {
+        "second": "दोस्रो",
+        "seconds": "सेकेन्ड",
+        "minute": "मिनेट",
+        "minutes": "मिनेट",
+        "hour": "घण्टा",
+        "day": "दिन",
+        "days": "दिनहरु",
+        "week": "हप्ता",
+        "weeks": "हप्ता",
+        "month": "महिना",
+        "months": "महिना",
+        "year": "बर्ष",
+        "years": "बर्ष",
+        "decade": "दशक",
+        "decades": "दशकहरु",
+        "century": "शताब्दी",
+        "centuries": "शताब्दी"
     }
 }

@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Issettja t-Tmiem tal-Klipp",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "it-tieni",
+        "seconds": "sekondi",
+        "minute": "minuta",
+        "minutes": "minuti",
+        "hour": "sigħat",
+        "day": "jum",
+        "days": "jiem",
+        "week": "ġimgħa",
+        "weeks": "ġimgħat",
+        "month": "xahar",
+        "months": "xhur",
+        "year": "sena",
+        "years": "snin",
+        "decade": "għaxar snin",
+        "decades": "għexieren ta ’snin",
+        "century": "seklu",
+        "centuries": "sekli"
     }
 }

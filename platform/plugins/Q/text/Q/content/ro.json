@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Setați Clip End",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "al doilea",
+        "seconds": "secunde",
+        "minute": "minut",
+        "minutes": "minute",
+        "hour": "ore",
+        "day": "zi",
+        "days": "zile",
+        "week": "săptămână",
+        "weeks": "săptămâni",
+        "month": "lună",
+        "months": "luni",
+        "year": "an",
+        "years": "ani",
+        "decade": "deceniu",
+        "decades": "decenii",
+        "century": "secol",
+        "centuries": "secole"
     }
 }

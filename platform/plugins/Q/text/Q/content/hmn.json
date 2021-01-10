@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Tsis muaj cov zis video"
+        "errorNoSource": "Tsis muaj cov zis video",
+        "SkipAfter": "Hla tom qab",
+        "Skip": "Hla"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "ntxiv",
         "Menu": "Ntawv qhia zaub mov"
+    },
+    "durations": {
+        "second": "ob",
+        "seconds": "vib nas this",
+        "minute": "feeb",
+        "minutes": "feeb",
+        "hour": "cov sij hawm",
+        "day": "hnub",
+        "days": "hnub",
+        "week": "lub lim tiam",
+        "weeks": "lub lis piam",
+        "month": "lub hli",
+        "months": "lub hlis",
+        "year": "xyoo",
+        "years": "xyoo",
+        "decade": "xyoo caum",
+        "decades": "kaum tawm xyoo",
+        "century": "caug xyoo",
+        "centuries": "ib-paus xyoo"
     }
 }

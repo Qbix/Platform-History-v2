@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Tidak ada sumber video"
+        "errorNoSource": "Tidak ada sumber video",
+        "SkipAfter": "Lewati setelah",
+        "Skip": "Melewatkan"
     },
     "pdf": {
         "clip": "klip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "lebih",
         "Menu": "Tidak bisa"
+    },
+    "durations": {
+        "second": "kedua",
+        "seconds": "detik",
+        "minute": "menit",
+        "minutes": "menit",
+        "hour": "jam",
+        "day": "hari",
+        "days": "hari",
+        "week": "minggu",
+        "weeks": "minggu",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tahun",
+        "years": "tahun",
+        "decade": "dasawarsa",
+        "decades": "dekade",
+        "century": "abad",
+        "centuries": "abad"
     }
 }

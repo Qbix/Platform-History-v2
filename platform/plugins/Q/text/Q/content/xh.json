@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ikliphu",
-        "errorNoSource": "Akukho mthombo wevidiyo"
+        "errorNoSource": "Akukho mthombo wevidiyo",
+        "SkipAfter": "Tsiba emva",
+        "Skip": "Tsiba"
     },
     "pdf": {
         "clip": "ikliphu",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Kaninzi",
         "Menu": "Imenyu"
+    },
+    "durations": {
+        "second": "Isibini",
+        "seconds": "imizuzwana",
+        "minute": "mzuzu",
+        "minutes": "imizuzu",
+        "hour": "iiyure",
+        "day": "usuku",
+        "days": "iintsuku",
+        "week": "iveki",
+        "weeks": "iiveki",
+        "month": "inyanga",
+        "months": "iinyanga",
+        "year": "unyaka",
+        "years": "iminyaka",
+        "decade": "Ishumi leminyaka",
+        "decades": "amashumi eminyaka",
+        "century": "kwinkulungwane",
+        "centuries": "kwiinkulungwane"
     }
 }

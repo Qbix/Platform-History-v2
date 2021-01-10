@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Ustaw koniec obcinania",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "druga",
+        "seconds": "sekundy",
+        "minute": "minuta",
+        "minutes": "minuty",
+        "hour": "godziny",
+        "day": "dzień",
+        "days": "dni",
+        "week": "tydzień",
+        "weeks": "tygodni",
+        "month": "miesiąc",
+        "months": "miesięcy",
+        "year": "rok",
+        "years": "lat",
+        "decade": "dekada",
+        "decades": "dekady",
+        "century": "stulecie",
+        "centuries": "wieki"
     }
 }

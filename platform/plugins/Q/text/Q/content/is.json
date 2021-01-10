@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Stilltu klemmuenda",
         "ClipEnd": "Klemmuenda"
+    },
+    "durations": {
+        "second": "annað",
+        "seconds": "sekúndur",
+        "minute": "mínútu",
+        "minutes": "mínútur",
+        "hour": "klukkustundir",
+        "day": "dagur",
+        "days": "daga",
+        "week": "vika",
+        "weeks": "vikur",
+        "month": "mánuði",
+        "months": "mánuðum",
+        "year": "ári",
+        "years": "ár",
+        "decade": "Áratugur",
+        "decades": "áratugir",
+        "century": "öld",
+        "centuries": "öldum"
     }
 }

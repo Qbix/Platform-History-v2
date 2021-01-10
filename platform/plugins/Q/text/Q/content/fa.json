@@ -118,5 +118,24 @@
         "ClipStart": "شروع کلیپ",
         "SetClipEnd": "Clip End را تنظیم کنید",
         "ClipEnd": "پایان کلیپ"
+    },
+    "durations": {
+        "second": "دومین",
+        "seconds": "ثانیه",
+        "minute": "دقیقه",
+        "minutes": "دقایق",
+        "hour": "ساعت ها",
+        "day": "روز",
+        "days": "روزها",
+        "week": "هفته",
+        "weeks": "هفته ها",
+        "month": "ماه",
+        "months": "ماه ها",
+        "year": "سال",
+        "years": "سال ها",
+        "decade": "دهه",
+        "decades": "دهه ها",
+        "century": "قرن",
+        "centuries": "قرنها"
     }
 }

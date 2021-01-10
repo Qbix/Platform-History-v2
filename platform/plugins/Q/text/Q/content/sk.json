@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Nastaviť koniec svorky",
         "ClipEnd": "Koniec klipu"
+    },
+    "durations": {
+        "second": "druhý",
+        "seconds": "sekúnd",
+        "minute": "minútu",
+        "minutes": "minút",
+        "hour": "hodín",
+        "day": "deň",
+        "days": "dni",
+        "week": "týždeň",
+        "weeks": "týždňov",
+        "month": "mesiac",
+        "months": "mesiacov",
+        "year": "rok",
+        "years": "rokov",
+        "decade": "desaťročie",
+        "decades": "desaťročia",
+        "century": "storočia",
+        "centuries": "storočia"
     }
 }

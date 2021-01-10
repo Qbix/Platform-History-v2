@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Ha ho mohloli oa video"
+        "errorNoSource": "Ha ho mohloli oa video",
+        "SkipAfter": "Tlola ka mora",
+        "Skip": "Tlola"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Hape",
         "Menu": "Lenaneo"
+    },
+    "durations": {
+        "second": "ea bobeli",
+        "seconds": "metsotswana",
+        "minute": "motsotso",
+        "minutes": "metsotso",
+        "hour": "lihora",
+        "day": "letsatsi",
+        "days": "matsatsi",
+        "week": "beke",
+        "weeks": "libeke",
+        "month": "khoeli",
+        "months": "likhoeli",
+        "year": "selemo",
+        "years": "lilemo",
+        "decade": "lilemo tse leshome",
+        "decades": "mashome a lilemo",
+        "century": "lekholo la lilemo",
+        "centuries": "makholo a lilemo"
     }
 }

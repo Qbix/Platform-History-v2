@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Nastavite konec posnetka",
         "ClipEnd": "Konec posnetka"
+    },
+    "durations": {
+        "second": "drugič",
+        "seconds": "sekund",
+        "minute": "minuta",
+        "minutes": "minut",
+        "hour": "ure",
+        "day": "dan",
+        "days": "dnevi",
+        "week": "teden",
+        "weeks": "tednov",
+        "month": "mesec",
+        "months": "mesecev",
+        "year": "leto",
+        "years": "letih",
+        "decade": "desetletje",
+        "decades": "desetletja",
+        "century": "stoletja",
+        "centuries": "stoletja"
     }
 }
