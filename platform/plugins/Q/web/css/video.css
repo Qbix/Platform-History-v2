@@ -158,6 +158,9 @@
 .Q_video_tool.Q_video_advertising .vjs-progress-control * {
     pointer-events: none;
 }
+.Q_video_tool .vjs-progress-control.Q_video_clips_control {
+    overflow: hidden;
+}
 .Q_video_hidden {
     position: absolute;
     top: -1000px;
@@ -184,4 +187,15 @@
 }
 .Q_video_tool .vjs-playing .vjs-big-play-button {
     display: none;
+}
+.Q_video_tool .Q_video_clips_pointer {
+    position: absolute;
+    width: 2px;
+    height: 50%;
+    background-color: red;
+    -webkit-transition: all 1s linear;
+    -moz-transition: all 1s linear;
+    -o-transition: all 1s linear;
+    -ms-transition: all 1s linear;
+    transition: all 1s linear;
 }
