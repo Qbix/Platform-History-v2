@@ -191,17 +191,17 @@ Q.Tool.define("Q/video", function (options) {
 
 				var onPlay = Q.throttle(function () {
 					state.currentPosition = tool.getCurrentPosition();
-					console.log("Started at position " + state.currentPosition + " milliseconds");
+					//console.log("Started at position " + state.currentPosition + " milliseconds");
 					Q.handle(state.onPlay, tool);
 				}, throttle);
 				var onPause = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
-					console.log("Paused at position " + position + " milliseconds");
+					//console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
 				}, throttle);
 				var onEnded = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
-					console.log("Seeked at position " + position + " milliseconds");
+					//console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
 				}, throttle);
 
@@ -282,13 +282,15 @@ Q.Tool.define("Q/video", function (options) {
 				return;
 			}
 
-			state.currentPosition = currentPosition;
+			state.currentPosition = (currentPosition || state.clips.start || 0);
 			Q.handle(state.onPlaying, tool, [tool]);
 		}, state.positionUpdatePeriod * 1000);
 	}),
 	onPlaying: new Q.Event(function () {
+		var state = this.state;
+
 		if (this.metrics) {
-			this.metrics.add(this.state.currentPosition/1000);
+			this.metrics.add(state.currentPosition/1000);
 		}
 
 		// check clip borders if clip defined
@@ -297,10 +299,12 @@ Q.Tool.define("Q/video", function (options) {
 		// update pointers position on timeline for "clips" mode
 		this.movePointers();
 
-		// check clips duration limit
-		var clipsDuration = Q.getObject("state.clips.duration", this);
-		if (clipsDuration && this.state.currentPosition/1000 >= clipsDuration) {
-			Q.handle(this.state.onEnded, this);
+		if (!state.clips.useNativeDuration) {
+			// check clips duration limit
+			var clipsDuration = Q.getObject("clips.duration", state);
+			if (clipsDuration && state.currentPosition/1000 >= clipsDuration) {
+				Q.handle(state.onEnded, this);
+			}
 		}
 	}),
 	onPause: new Q.Event(function () {
@@ -409,23 +413,23 @@ Q.Tool.define("Q/video", function (options) {
 
 			var onPlay = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Started at position " + position + " milliseconds");
+				//console.log("Started at position " + position + " milliseconds");
 
 				Q.handle(state.onPlay, tool, [position]);
 			}, throttle);
 			var onPause = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Paused at position " + position + " milliseconds");
+				//console.log("Paused at position " + position + " milliseconds");
 				Q.handle(state.onPause, tool, [position]);
 			}, throttle);
 			var onSeek = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Seeked at position " + position + " milliseconds");
+				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onSeek, tool, [position]);
 			}, throttle);
 			var onEnded = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Seeked at position " + position + " milliseconds");
+				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onEnded, tool, [position]);
 			}, throttle);
 
@@ -576,7 +580,7 @@ Q.Tool.define("Q/video", function (options) {
 
 								var offset = state.clips.offset + tool.getCurrentPosition()/1000 + ((x / rect.width * 100) - 50)/state.clips.oneSecondPercent ;
 
-								// search pointer
+								// search pointer to move to
 								Q.each(state.clips.pointers, function () {
 									if (this.start > offset || this.end < offset) {
 										return;
