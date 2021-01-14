@@ -2031,6 +2031,10 @@
      */
 
     function trigger(elem, event, hash) {
+        if (!elem) {
+            return;
+        }
+
         // Fetches element data and a reference to the parent (for bubbling).
         // Don't want to add a data object to cache for every parent,
         // so checking hasElData first.
@@ -13858,8 +13862,8 @@
         ;
 
         _proto.handlePause = function handlePause(event) {
-            this.removeClass('vjs-playing');
-            this.addClass('vjs-paused'); // change the button text to "Play"
+            this.player_.removeClass('vjs-playing');
+            this.player_.addClass('vjs-paused'); // change the button text to "Play"
 
             this.controlText('Play');
         }
@@ -23257,7 +23261,7 @@
          */
         'play'].forEach(function (prop) {
         Html5.prototype[prop] = function () {
-            return this.el_[prop]();
+            return this.el_ && this.el_[prop]();
         };
     });
     Tech.withSourceHandlers(Html5);
