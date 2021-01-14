@@ -182,6 +182,9 @@
 	cursor: none;
 	pointer-events: none;
 }
+.Streams_chat_tool .Streams_webrtc_preview_tool .Streams_preview_icon {
+	display: none;
+}
 
 .Streams_chat_tool h1 {
 	text-align: center;
@@ -393,7 +396,9 @@
 .Streams_chat_message .Streams_preview_tool .Streams_inplace_tool:not(.Q_inplace_tool) .Q_inplace_tool_static {
 	white-space: normal;
 }
-
+.Streams_chat_message .Streams_chat_avatar_name {
+	margin-right: .4em;
+}
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
 	.Streams_chat_date {

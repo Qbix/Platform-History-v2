@@ -77,6 +77,26 @@ Q.text = {
 			"11": "November",
 			"12": "December"
 		},
+		"durations": {
+			"second": "second",
+			"seconds": "seconds",
+			"minute": "minute",
+			"minutes": "minutes",
+			"hour": "hour",
+			"hour": "hours",
+			"day": "day",
+			"days": "days",
+			"week": "week",
+			"weeks": "weeks",
+			"month": "month",
+			"months": "months",
+			"year": "year",
+			"years": "years",
+			"decade": "decade",
+			"decades": "decades",
+			"century": "century",
+			"centuries": "centuries"
+		},
 		"audio": {
 			"allowMicrophoneAccess": "Please allow access to your microphone",
 			"record": "Record",
@@ -761,7 +781,7 @@ Elp.cssDimensions = function () {
  * @method scrollingParent
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
- * @param {Boolean} [includSelf=false] Whether the element itself can be returned if it matches
+ * @param {Boolean} [includeSelf=false] Whether the element itself can be returned if it matches
  */
 Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
@@ -9713,7 +9733,9 @@ Q.baseUrl = function _Q_host(where) {
 Q.baseUrl.routers = []; // functions returning a custom url
 
 /**
- * Given an index and field values, returns the hostname and port for connecting to a Node.js server running Q
+ * Given some optional input identifying objects in the system,
+ * returns the hostname and port for connecting to a Qbix Node.js server
+ * set up for working with those objects.
  * @static
  * @method nodeUrl
  * @param {Object} where
@@ -13037,7 +13059,7 @@ Q.Audio.speak = function (text, options) {
 		Q.Text.get(source, function (err, content) {
 			var text = Q.getObject(pathArray, content);
 			if (text) {
-				_proceed(text)
+				_proceed(text);
 			}
 		});
 	} else {
@@ -13097,7 +13119,8 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		Q.text.interpolate(Q.text);
+		text = text.interpolate(Q.text);
+
 		if (root.TTS) {
 			TTS.speak({
 				text: text,

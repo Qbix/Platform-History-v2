@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "තිර බෙදාගැනීම පෙන්වන්න"
         },
         "notAllowedToJoinCall": "මෙම ප්‍රවාහයට සම්බන්ධ වීමට ඔබට අවසර නැත.",
-        "streamTitle": "{{1}} සජීවී ඇමතුම"
+        "streamTitle": "{{1}} සජීවී ඇමතුම",
+        "preview": {
+            "preamble": "රැස්වීම:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF ලේඛනය",
             "description": "PDF ලේඛනය",
             "newItem": "PDF එකතු කරන්න"
+        },
+        "Streams\/question": {
+            "displayType": "ප්‍රශ්නය",
+            "description": "ප්‍රශ්න ප්‍රවාහය"
+        },
+        "Streams\/answer": {
+            "displayType": "පිළිතුර",
+            "description": "පිළිතුරු ප්‍රවාහය"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "රූප ප්‍රභවයක් නොමැත",
         "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
         "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
+    },
+    "questions": {
+        "Questions": "ප්රශ්නය",
+        "Answers": "පිළිතුරු",
+        "AnswerQuestion": "ප්රශ්නයට පිළිතුරු සපයන්න",
+        "SetYourAnswer": "කරුණාකර ප්‍රශ්නයට පිළිතුරු සපයන්න",
+        "NewQuestion": "නව ප්‍රශ්නය",
+        "NewAnswer": "නව පිළිතුර",
+        "AnswerDetails": "පිළිතුරු විස්තර",
+        "answerOption": "විකල්පය",
+        "answerOptionExclusive": "බැහැරව",
+        "answerTextarea": "ටෙක්ස්ටාරියා",
+        "FreeAnswer": "නිදහස් පිළිතුර ...",
+        "SaveQuestion": "ප්‍රශ්නය සුරකින්න",
+        "SaveAnswer": "පිළිතුර සුරකින්න",
+        "AddAnotherAnswer": "තවත් පිළිතුරක් එක් කරන්න",
+        "ErrorAnswers": "කරුණාකර එක් පිළිතුරක් පවා එක් කරන්න",
+        "AlreadyAnswered": "දැනටමත් පිළිතුරු දී ඇත",
+        "TitlePlaceholder": "ඔබේ ප්‍රශ්නය ටයිප් කරන්න",
+        "ContentPlaceholder": "මිනිසුන්ට පිළිතුරු දීමට අමතර තොරතුරු මෙහි තබන්න",
+        "ErrorTitle": "ප්‍රශ්නය අවශ්‍යයි"
+    },
+    "experience": {
+        "NewExperience": "නව අත්දැකීම්"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "បង្ហាញការចែករំលែកអេក្រង់"
         },
         "notAllowedToJoinCall": "អ្នកមិនមានសិទ្ធិចូលរួមក្នុងស្ទ្រីមនេះទេ។",
-        "streamTitle": "ការហៅបន្តផ្ទាល់ {{៩៩៩}}"
+        "streamTitle": "ការហៅបន្តផ្ទាល់ {{៩៩៩}}",
+        "preview": {
+            "preamble": "ការប្រជុំ៖"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "ឯកសារ PDF",
             "description": "ឯកសារ PDF",
             "newItem": "បន្ថែម PDF"
+        },
+        "Streams\/question": {
+            "displayType": "សំណួរ",
+            "description": "ស្ទ្រីមសំណួរ"
+        },
+        "Streams\/answer": {
+            "displayType": "ចម្លើយ",
+            "description": "ស្ទ្រីមចម្លើយ"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "គ្មានប្រភពរូបភាពទេ",
         "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
         "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
+    },
+    "questions": {
+        "Questions": "សំណួរ",
+        "Answers": "ចម្លើយ",
+        "AnswerQuestion": "ឆ្លើយសំណួរ",
+        "SetYourAnswer": "សូមឆ្លើយសំណួរ",
+        "NewQuestion": "សំណួរថ្មី",
+        "NewAnswer": "ចម្លើយថ្មី",
+        "AnswerDetails": "ចម្លើយលម្អិត",
+        "answerOption": "ជម្រើស",
+        "answerOptionExclusive": "ផ្តាច់មុខ",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "ចម្លើយដោយឥតគិតថ្លៃ ...",
+        "SaveQuestion": "រក្សាទុកសំណួរ",
+        "SaveAnswer": "រក្សាទុកចម្លើយ",
+        "AddAnotherAnswer": "បន្ថែមចម្លើយផ្សេងទៀត",
+        "ErrorAnswers": "សូមបន្ថែមសូម្បីតែចម្លើយមួយ",
+        "AlreadyAnswered": "បានឆ្លើយរួចហើយ",
+        "TitlePlaceholder": "វាយបញ្ចូលសំណួររបស់អ្នក",
+        "ContentPlaceholder": "ដាក់ព័ត៌មានបន្ថែមនៅទីនេះដើម្បីជួយមនុស្សឆ្លើយ",
+        "ErrorTitle": "ត្រូវការសំណួរ"
+    },
+    "experience": {
+        "NewExperience": "បទពិសោធន៍ថ្មី"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Whakaatuhia te tohatoha mata"
         },
         "notAllowedToJoinCall": "Kaore koe e whakaae kia uru atu ki tenei awa.",
-        "streamTitle": "{{1}} karanga ora"
+        "streamTitle": "{{1}} karanga ora",
+        "preview": {
+            "preamble": "Hui:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Tuhinga PDF",
             "description": "Tuhinga PDF",
             "newItem": "Taapirihia te PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Patai",
+            "description": "awa pātai"
+        },
+        "Streams\/answer": {
+            "displayType": "Whakautu",
+            "description": "rerenga whakautu"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Kaore he puna ahua",
         "uploadLimit": "Te rahi o te konae: {{size}}",
         "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+    },
+    "questions": {
+        "Questions": "Nga Patai",
+        "Answers": "Nga Whakautu",
+        "AnswerQuestion": "Whakautu Pātai",
+        "SetYourAnswer": "Tena koa whakautua te patai",
+        "NewQuestion": "Patai Hou",
+        "NewAnswer": "Whakautu Hou",
+        "AnswerDetails": "Whakaaturanga Taipitopito",
+        "answerOption": "Kōwhiringa",
+        "answerOptionExclusive": "Motuhake",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "whakautu koreutu ...",
+        "SaveQuestion": "Penapena Patai",
+        "SaveAnswer": "Whakautu Whakautu",
+        "AddAnotherAnswer": "Taapirihia tetahi atu whakautu",
+        "ErrorAnswers": "Tena koa taapiri kia kotahi te whakautu",
+        "AlreadyAnswered": "Kua whakautu kē",
+        "TitlePlaceholder": "Patohia to patai",
+        "ContentPlaceholder": "Tuhia etahi atu korero ki konei hei awhina i nga tangata ki te whakautu",
+        "ErrorTitle": "He patai e hiahiatia ana"
+    },
+    "experience": {
+        "NewExperience": "Wheako Hou"
     }
 }

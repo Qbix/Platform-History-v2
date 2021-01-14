@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Seall roinneadh sgrion"
         },
         "notAllowedToJoinCall": "Chan eil cead agad a dhol a-steach don t-sruth seo.",
-        "streamTitle": "{{1}} gairm beò"
+        "streamTitle": "{{1}} gairm beò",
+        "preview": {
+            "preamble": "Coinneamh:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Sgrìobhainn PDF",
             "description": "Sgrìobhainn PDF",
             "newItem": "Cuir PDF ris"
+        },
+        "Streams\/question": {
+            "displayType": "Ceist",
+            "description": "sruth cheistean"
+        },
+        "Streams\/answer": {
+            "displayType": "Freagair",
+            "description": "sruth freagairt"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Gun stòr ìomhaigh",
         "uploadLimit": "Meud faidhle Max: {{size}}",
         "errorFileSize": "Duilich, ach faidhle ro mhòr.<br> Is e meud faidhle Max {{size}}"
+    },
+    "questions": {
+        "Questions": "Ceistean",
+        "Answers": "Freagairtean",
+        "AnswerQuestion": "Freagair Ceist",
+        "SetYourAnswer": "Feuch an freagair thu a ’cheist",
+        "NewQuestion": "Ceist Ùr",
+        "NewAnswer": "Freagairt Ùr",
+        "AnswerDetails": "Freagairt mion-fhiosrachadh",
+        "answerOption": "Roghainn",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "freagairt an-asgaidh ...",
+        "SaveQuestion": "Sàbhail Ceist",
+        "SaveAnswer": "Sàbhail Freagairt",
+        "AddAnotherAnswer": "Cuir freagairt eile ris",
+        "ErrorAnswers": "Feuch an cuir thu eadhon aon fhreagairt",
+        "AlreadyAnswered": "Fhreagair mu thràth",
+        "TitlePlaceholder": "Taidhp do cheist",
+        "ContentPlaceholder": "Cuir fiosrachadh a bharrachd an seo gus daoine a chuideachadh a ’freagairt",
+        "ErrorTitle": "Ceist a dhìth"
+    },
+    "experience": {
+        "NewExperience": "Eòlas ùr"
     }
 }

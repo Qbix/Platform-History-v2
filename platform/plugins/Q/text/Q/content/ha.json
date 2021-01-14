@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "shirin bidiyo",
-        "errorNoSource": "Babu tushen bidiyo"
+        "errorNoSource": "Babu tushen bidiyo",
+        "SkipAfter": "Tsallake bayan",
+        "Skip": "Tsallake"
     },
     "pdf": {
         "clip": "shirin bidiyo",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Kara",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "na biyu",
+        "seconds": "dakika",
+        "minute": "minti",
+        "minutes": "mintuna",
+        "hour": "awowi",
+        "day": "rana",
+        "days": "kwanaki",
+        "week": "mako",
+        "weeks": "makonni",
+        "month": "wata",
+        "months": "watanni",
+        "year": "shekara",
+        "years": "shekaru",
+        "decade": "shekaru goma",
+        "decades": "shekarun da suka gabata",
+        "century": "karni",
+        "centuries": "ƙarni"
     }
 }

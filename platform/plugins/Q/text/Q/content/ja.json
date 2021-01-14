@@ -118,5 +118,24 @@
         "ClipStart": "クリップスタート",
         "SetClipEnd": "クリップエンドを設定",
         "ClipEnd": "クリップエンド"
+    },
+    "durations": {
+        "second": "2番目",
+        "seconds": "秒",
+        "minute": "分",
+        "minutes": "分",
+        "hour": "時間",
+        "day": "日",
+        "days": "日々",
+        "week": "週間",
+        "weeks": "週",
+        "month": "月",
+        "months": "月",
+        "year": "年",
+        "years": "年",
+        "decade": "十年",
+        "decades": "数十年",
+        "century": "世紀",
+        "centuries": "何世紀も"
     }
 }

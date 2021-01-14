@@ -118,5 +118,24 @@
         "ClipStart": "Klip Başlayın",
         "SetClipEnd": "Klip Sonunu təyin edin",
         "ClipEnd": "Klip sonu"
+    },
+    "durations": {
+        "second": "ikinci",
+        "seconds": "saniyə",
+        "minute": "dəqiqə",
+        "minutes": "dəqiqə",
+        "hour": "saat",
+        "day": "gün",
+        "days": "günlər",
+        "week": "həftə",
+        "weeks": "həftələr",
+        "month": "ay",
+        "months": "ay",
+        "year": "il",
+        "years": "il",
+        "decade": "onillik",
+        "decades": "onilliklər",
+        "century": "əsr",
+        "centuries": "əsrlər"
     }
 }

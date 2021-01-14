@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "topenga",
-        "errorNoSource": "Kaore he punaata ataata"
+        "errorNoSource": "Kaore he punaata ataata",
+        "SkipAfter": "Peke i muri",
+        "Skip": "Hūpeke"
     },
     "pdf": {
         "clip": "topenga",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "atu",
         "Menu": "Tahua"
+    },
+    "durations": {
+        "second": "tuarua",
+        "seconds": "hēkona",
+        "minute": "meneti",
+        "minutes": "meneti",
+        "hour": "haora",
+        "day": "rā",
+        "days": "ra",
+        "week": "wiki",
+        "weeks": "wiki",
+        "month": "marama",
+        "months": "marama",
+        "year": "tau",
+        "years": "tau",
+        "decade": "tekau tau",
+        "decades": "tekau tau",
+        "century": "rautau",
+        "centuries": "rautau"
     }
 }

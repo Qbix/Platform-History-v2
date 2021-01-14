@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Tampilake nuduhake layar"
         },
         "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo gabung stream iki.",
-        "streamTitle": "{{1}} telpon langsung"
+        "streamTitle": "{{1}} telpon langsung",
+        "preview": {
+            "preamble": "Rapat:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Dokumen PDF",
             "description": "Dokumen PDF",
             "newItem": "Tambah PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pitakon",
+            "description": "stream pitakonan"
+        },
+        "Streams\/answer": {
+            "displayType": "Wangsulan",
+            "description": "stream wangsulan"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ora ana sumber gambar",
         "uploadLimit": "Ukuran file maksimal: {{size}}",
         "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+    },
+    "questions": {
+        "Questions": "Pitakon",
+        "Answers": "Wangsulan",
+        "AnswerQuestion": "Wangsulan Pitakon",
+        "SetYourAnswer": "Tulung jawaben pitakonane",
+        "NewQuestion": "Pitakon Anyar",
+        "NewAnswer": "Wangsulan Anyar",
+        "AnswerDetails": "Rincian Wangsulan",
+        "answerOption": "Pilihan",
+        "answerOptionExclusive": "Eksklusif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "wangsulan gratis ...",
+        "SaveQuestion": "Simpen Pitakon",
+        "SaveAnswer": "Simpen Wangsulan",
+        "AddAnotherAnswer": "Tambah wangsulan liyane",
+        "ErrorAnswers": "Tulung tambahake malah siji wangsulan",
+        "AlreadyAnswered": "Wis mangsuli",
+        "TitlePlaceholder": "Ketik pitakonan sampeyan",
+        "ContentPlaceholder": "Sijine informasi tambahan ing kene kanggo mbantu wong mangsuli",
+        "ErrorTitle": "Pitakon dibutuhake"
+    },
+    "experience": {
+        "NewExperience": "Pengalaman Anyar"
     }
 }

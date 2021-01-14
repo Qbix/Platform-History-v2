@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Ratidza kugovana skrini"
         },
         "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha rwizi urwu.",
-        "streamTitle": "{{1}} chaiyo yekufona"
+        "streamTitle": "{{1}} chaiyo yekufona",
+        "preview": {
+            "preamble": "Musangano:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF gwaro",
             "description": "PDF gwaro",
             "newItem": "Wedzera PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Mubvunzo",
+            "description": "rwizi rwemibvunzo"
+        },
+        "Streams\/answer": {
+            "displayType": "Pindura",
+            "description": "mhinduro rukova"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Hapana chinyorwa chinyorwa",
         "uploadLimit": "Saizi yakakura saizi: {{size}}",
         "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura iri {{size}}"
+    },
+    "questions": {
+        "Questions": "Mibvunzo",
+        "Answers": "Mhinduro",
+        "AnswerQuestion": "Pindura Mubvunzo",
+        "SetYourAnswer": "Ndapota pindura mubvunzo",
+        "NewQuestion": "Mubvunzo Mutsva",
+        "NewAnswer": "Mhinduro Nyowani",
+        "AnswerDetails": "Pindura Zvidimbu",
+        "answerOption": "Sarudzo",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "mhinduro yemahara ...",
+        "SaveQuestion": "Sevha Mubvunzo",
+        "SaveAnswer": "Sevha Mhinduro",
+        "AddAnotherAnswer": "Wedzera imwe mhinduro",
+        "ErrorAnswers": "Ndokumbirawo uwedzere kunyange imwe mhinduro",
+        "AlreadyAnswered": "Yatopindurwa",
+        "TitlePlaceholder": "Nyora mubvunzo wako",
+        "ContentPlaceholder": "Isa chero ruzivo rwekuwedzera pano kubatsira vanhu kupindura",
+        "ErrorTitle": "Mubvunzo unodiwa"
+    },
+    "experience": {
+        "NewExperience": "New Zvakaitika"
     }
 }

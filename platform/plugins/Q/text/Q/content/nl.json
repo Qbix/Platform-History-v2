@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Clip-einde instellen",
         "ClipEnd": "Clip einde"
+    },
+    "durations": {
+        "second": "tweede",
+        "seconds": "seconden",
+        "minute": "minuut",
+        "minutes": "minuten",
+        "hour": "uren",
+        "day": "dag",
+        "days": "dagen",
+        "week": "week",
+        "weeks": "weken",
+        "month": "maand",
+        "months": "maanden",
+        "year": "jaar",
+        "years": "jaren",
+        "decade": "decennium",
+        "decades": "tientallen jaren",
+        "century": "eeuw",
+        "centuries": "eeuwen"
     }
 }

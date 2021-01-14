@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Fihan pinpin iboju"
         },
         "notAllowedToJoinCall": "Iwọ ko ni aṣẹ lati darapọ mọ ṣiṣan yii.",
-        "streamTitle": "{{1}} ipe laaye"
+        "streamTitle": "{{1}} ipe laaye",
+        "preview": {
+            "preamble": "Ipade:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF iwe aṣẹ",
             "description": "PDF iwe aṣẹ",
             "newItem": "Ṣafikun PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Ibeere",
+            "description": "ṣiṣan ibeere"
+        },
+        "Streams\/answer": {
+            "displayType": "Idahun",
+            "description": "san san"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ko si orisun aworan",
         "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
         "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+    },
+    "questions": {
+        "Questions": "Awọn ibeere",
+        "Answers": "Awọn idahun",
+        "AnswerQuestion": "Idahun Ibeere",
+        "SetYourAnswer": "Jọwọ dahun ibeere naa",
+        "NewQuestion": "Ibeere tuntun",
+        "NewAnswer": "Idahun Tuntun",
+        "AnswerDetails": "Awọn alaye Idahun",
+        "answerOption": "Aṣayan",
+        "answerOptionExclusive": "Iyasoto",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "idahun ọfẹ ...",
+        "SaveQuestion": "Fipamọ Ibeere",
+        "SaveAnswer": "Fipamọ Idahun",
+        "AddAnotherAnswer": "Ṣafikun idahun miiran",
+        "ErrorAnswers": "Jọwọ ṣafikun ani idahun kan",
+        "AlreadyAnswered": "Ti dahun tẹlẹ",
+        "TitlePlaceholder": "Tẹ ibeere rẹ",
+        "ContentPlaceholder": "Fi eyikeyi alaye diẹ sii nibi lati ṣe iranlọwọ fun eniyan lati dahun",
+        "ErrorTitle": "Ibeere nilo"
+    },
+    "experience": {
+        "NewExperience": "Iriri Tuntun"
     }
 }

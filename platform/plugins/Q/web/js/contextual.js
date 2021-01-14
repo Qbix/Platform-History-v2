@@ -447,7 +447,7 @@
 					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
 					var target = (info.curScroll === 'iScroll' || info.curScroll === 'touchscroll'
 							? event.target
-							: (info.moveTarget ? info.moveTarget[0] : event.target));
+							: Q.getObject("moveTarget.0", info) || event.target);
 					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
 
 					var element = target;

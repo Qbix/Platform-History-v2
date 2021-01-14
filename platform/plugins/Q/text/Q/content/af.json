@@ -118,5 +118,24 @@
         "ClipStart": "Knip begin",
         "SetClipEnd": "Stel die einde van die knip",
         "ClipEnd": "Knip einde"
+    },
+    "durations": {
+        "second": "tweede",
+        "seconds": "sekondes",
+        "minute": "minuut",
+        "minutes": "minute",
+        "hour": "ure",
+        "day": "dag",
+        "days": "dae",
+        "week": "week",
+        "weeks": "weke",
+        "month": "maand",
+        "months": "maande",
+        "year": "jaar",
+        "years": "jare",
+        "decade": "dekade",
+        "decades": "dekades",
+        "century": "eeu",
+        "centuries": "eeue"
     }
 }

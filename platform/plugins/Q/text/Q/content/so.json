@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "goos goos",
-        "errorNoSource": "Ma jiro ilo fiidiyoow"
+        "errorNoSource": "Ma jiro ilo fiidiyoow",
+        "SkipAfter": "Ka bood kadib",
+        "Skip": "Ka bood"
     },
     "pdf": {
         "clip": "goos goos",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "dheeraad ah",
         "Menu": "Liiska"
+    },
+    "durations": {
+        "second": "labaad",
+        "seconds": "ilbiriqsiyo",
+        "minute": "daqiiqad",
+        "minutes": "daqiiqado",
+        "hour": "saacadood",
+        "day": "maalin",
+        "days": "maalmood",
+        "week": "usbuuc",
+        "weeks": "toddobaadyo",
+        "month": "bil",
+        "months": "bilood",
+        "year": "sanadka",
+        "years": "sano",
+        "decade": "toban sano",
+        "decades": "tobanaan sano",
+        "century": "qarnigii",
+        "centuries": "qarniyo"
     }
 }

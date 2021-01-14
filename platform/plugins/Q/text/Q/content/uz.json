@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Video manbai yo‘q"
+        "errorNoSource": "Video manbai yo‘q",
+        "SkipAfter": "O&#39;tkazib yuborish",
+        "Skip": "O&#39;tkazib yuborish"
     },
     "pdf": {
         "clip": "klip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Ko&#39;proq",
         "Menu": "Menyu"
+    },
+    "durations": {
+        "second": "ikkinchi",
+        "seconds": "soniya",
+        "minute": "daqiqa",
+        "minutes": "daqiqa",
+        "hour": "soat",
+        "day": "kun",
+        "days": "kunlar",
+        "week": "hafta",
+        "weeks": "hafta",
+        "month": "oy",
+        "months": "oylar",
+        "year": "yil",
+        "years": "yil",
+        "decade": "o&#39;n yil",
+        "decades": "o&#39;nlab yillar",
+        "century": "asr",
+        "centuries": "asrlar"
     }
 }

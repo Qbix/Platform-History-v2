@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "Clip",
-        "errorNoSource": "Tsy misy loharano video"
+        "errorNoSource": "Tsy misy loharano video",
+        "SkipAfter": "Skip rehefa afaka",
+        "Skip": "Mifohaza"
     },
     "pdf": {
         "clip": "Clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Bebe kokoa",
         "Menu": "sakafo"
+    },
+    "durations": {
+        "second": "FAHAROA",
+        "seconds": "segondra",
+        "minute": "minitra",
+        "minutes": "minitra",
+        "hour": "ORA",
+        "day": "andro",
+        "days": "andro",
+        "week": "herinandro",
+        "weeks": "HERINANDRON&#39;NY",
+        "month": "VOLANA",
+        "months": "VOLANA",
+        "year": "TAOM-",
+        "years": "taona",
+        "decade": "folo taona",
+        "decades": "am-polo taona",
+        "century": "taonjato",
+        "centuries": "taonjato maro"
     }
 }

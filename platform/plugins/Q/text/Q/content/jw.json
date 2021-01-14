@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "kliping",
-        "errorNoSource": "Ora ana sumber video"
+        "errorNoSource": "Ora ana sumber video",
+        "SkipAfter": "Skip sawise",
+        "Skip": "Liwati"
     },
     "pdf": {
         "clip": "kliping",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "liyane",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "kapindho",
+        "seconds": "detik",
+        "minute": "menit",
+        "minutes": "menit",
+        "hour": "jam",
+        "day": "dina iki",
+        "days": "dina",
+        "week": "minggu",
+        "weeks": "minggu",
+        "month": "wulan",
+        "months": "wulan",
+        "year": "taun",
+        "years": "taun",
+        "decade": "dasawarsa",
+        "decades": "puluhan taun",
+        "century": "abad",
+        "centuries": "abad"
     }
 }

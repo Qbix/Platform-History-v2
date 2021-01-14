@@ -118,5 +118,24 @@
         "ClipStart": "Isječak Start",
         "SetClipEnd": "Postavi kraj isječka",
         "ClipEnd": "Kraj isječka"
+    },
+    "durations": {
+        "second": "drugi",
+        "seconds": "sekunde",
+        "minute": "minuta",
+        "minutes": "minuta",
+        "hour": "sati",
+        "day": "dan",
+        "days": "dana",
+        "week": "tjedan",
+        "weeks": "tjedni",
+        "month": "mjesec",
+        "months": "mjeseci",
+        "year": "godina",
+        "years": "godine",
+        "decade": "desetljeće",
+        "decades": "desetljeća",
+        "century": "stoljeću",
+        "centuries": "stoljeća"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "स्क्रीन साझेदारी देखाउनुहोस्"
         },
         "notAllowedToJoinCall": "तपाईंसँग यस स्ट्रिममा सहभागी हुन अनुमति छैन।",
-        "streamTitle": "Call {9{}} call प्रत्यक्ष कल"
+        "streamTitle": "Call {9{}} call प्रत्यक्ष कल",
+        "preview": {
+            "preamble": "बैठक:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "पीडीएफ कागजात",
             "description": "पीडीएफ कागजात",
             "newItem": "पीडीएफ थप्नुहोस्"
+        },
+        "Streams\/question": {
+            "displayType": "प्रश्न",
+            "description": "प्रश्न प्रवाह"
+        },
+        "Streams\/answer": {
+            "displayType": "उत्तर",
+            "description": "उत्तर प्रवाह"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "कुनै छवि स्रोत छैन",
         "uploadLimit": "अधिकतम फाईल आकार: {{9{}}",
         "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाइल आकार {{9{} is is हो"
+    },
+    "questions": {
+        "Questions": "प्रश्नहरू",
+        "Answers": "उत्तरहरू",
+        "AnswerQuestion": "प्रश्नको उत्तर दिनुहोस्",
+        "SetYourAnswer": "कृपया प्रश्नको उत्तर दिनुहोस्",
+        "NewQuestion": "नयाँ प्रश्न",
+        "NewAnswer": "नयाँ उत्तर",
+        "AnswerDetails": "उत्तर विवरण",
+        "answerOption": "विकल्प",
+        "answerOptionExclusive": "विशेष",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "नि: शुल्क उत्तर ...",
+        "SaveQuestion": "प्रश्न बचत गर्नुहोस्",
+        "SaveAnswer": "उत्तर बचत गर्नुहोस्",
+        "AddAnotherAnswer": "अर्को उत्तर थप्नुहोस्",
+        "ErrorAnswers": "कृपया एउटा उत्तर पनि थप्नुहोस्",
+        "AlreadyAnswered": "पहिले नै उत्तर दिइयो",
+        "TitlePlaceholder": "तपाईंको प्रश्न टाइप गर्नुहोस्",
+        "ContentPlaceholder": "व्यक्तिलाई जवाफ दिन सहयोग गर्न यहाँ कुनै थप जानकारी राख्नुहोस्",
+        "ErrorTitle": "प्रश्न आवाश्यक छ"
+    },
+    "experience": {
+        "NewExperience": "नयाँ अनुभव"
     }
 }

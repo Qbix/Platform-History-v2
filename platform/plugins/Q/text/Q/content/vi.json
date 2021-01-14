@@ -118,5 +118,24 @@
         "ClipStart": "Bắt đầu clip",
         "SetClipEnd": "Đặt kết thúc clip",
         "ClipEnd": "Clip kết thúc"
+    },
+    "durations": {
+        "second": "thứ hai",
+        "seconds": "giây",
+        "minute": "phút",
+        "minutes": "phút",
+        "hour": "giờ",
+        "day": "ngày",
+        "days": "ngày",
+        "week": "tuần",
+        "weeks": "tuần",
+        "month": "tháng",
+        "months": "tháng",
+        "year": "năm",
+        "years": "năm",
+        "decade": "thập kỷ",
+        "decades": "thập kỷ",
+        "century": "kỷ",
+        "centuries": "thế kỉ"
     }
 }

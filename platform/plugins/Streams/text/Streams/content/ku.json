@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Parvekirina serşokê nîşan bide"
         },
         "notAllowedToJoinCall": "Tu destûr naye ku hûn beşdarî vê streamê bibin.",
-        "streamTitle": "99 999} call banga zindî"
+        "streamTitle": "99 999} call banga zindî",
+        "preview": {
+            "preamble": "Hevdîtinî:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Belgeya PDF",
             "description": "Belgeya PDF",
             "newItem": "PDF-ê lê zêde bike"
+        },
+        "Streams\/question": {
+            "displayType": "Pirs",
+            "description": "herika pirsê"
+        },
+        "Streams\/answer": {
+            "displayType": "Bersiv",
+            "description": "bersiva çemê"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Çavkaniya wêneyê tune",
         "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
         "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
+    },
+    "questions": {
+        "Questions": "Pirs",
+        "Answers": "Bersiv",
+        "AnswerQuestion": "Pirs Bersiv",
+        "SetYourAnswer": "Ji kerema xwe pirsê bibersivînin",
+        "NewQuestion": "Pirsa Nû",
+        "NewAnswer": "Bersiva Nû",
+        "AnswerDetails": "Agahdariyên Bersivê",
+        "answerOption": "Dibe",
+        "answerOptionExclusive": "Hew",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "bersiva belaş ...",
+        "SaveQuestion": "Pirsê hilînin",
+        "SaveAnswer": "Bersiv Biparêzin",
+        "AddAnotherAnswer": "Bersivek din zêde bikin",
+        "ErrorAnswers": "Ji kerema xwe yek bersivê jî zêde bikin",
+        "AlreadyAnswered": "Jixwe bersiv da",
+        "TitlePlaceholder": "Pirsa xwe binivîse",
+        "ContentPlaceholder": "Ji bo ku mirov bersîvê bide her agahdariyek din li vir bixe",
+        "ErrorTitle": "Pirs pêwîst e"
+    },
+    "experience": {
+        "NewExperience": "Tecrubeya Nû"
     }
 }

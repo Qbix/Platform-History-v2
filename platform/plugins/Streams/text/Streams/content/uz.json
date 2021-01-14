@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Ekrandagi almashishni ko&#39;rsatish"
         },
         "notAllowedToJoinCall": "Ushbu translatsiyaga qo&#39;shilish uchun sizda ruxsat yo&#39;q.",
-        "streamTitle": "{{1}} jonli qo&#39;ng&#39;iroq"
+        "streamTitle": "{{1}} jonli qo&#39;ng&#39;iroq",
+        "preview": {
+            "preamble": "Uchrashuv:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF hujjati",
             "description": "PDF hujjati",
             "newItem": "PDF qo&#39;shish"
+        },
+        "Streams\/question": {
+            "displayType": "Savol",
+            "description": "savollar oqimi"
+        },
+        "Streams\/answer": {
+            "displayType": "Javob",
+            "description": "javoblar oqimi"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Rasm manbai yo‘q",
         "uploadLimit": "Faylning maksimal hajmi: {{size}}",
         "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
+    },
+    "questions": {
+        "Questions": "Savollar",
+        "Answers": "Javoblar",
+        "AnswerQuestion": "Savolga javob bering",
+        "SetYourAnswer": "Iltimos, savolga javob bering",
+        "NewQuestion": "Yangi savol",
+        "NewAnswer": "Yangi javob",
+        "AnswerDetails": "Javob tafsilotlari",
+        "answerOption": "Variant",
+        "answerOptionExclusive": "Eksklyuziv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "bepul javob ...",
+        "SaveQuestion": "Savolni saqlash",
+        "SaveAnswer": "Javobni saqlash",
+        "AddAnotherAnswer": "Boshqa javobni qo&#39;shing",
+        "ErrorAnswers": "Iltimos, bitta javobni ham qo&#39;shib qo&#39;ying",
+        "AlreadyAnswered": "Javob berdim",
+        "TitlePlaceholder": "Savolingizni kiriting",
+        "ContentPlaceholder": "Odamlarga javob berishga yordam berish uchun qo&#39;shimcha ma&#39;lumotlarni bu erga joylashtiring",
+        "ErrorTitle": "Savol talab qilinadi"
+    },
+    "experience": {
+        "NewExperience": "Yangi tajriba"
     }
 }

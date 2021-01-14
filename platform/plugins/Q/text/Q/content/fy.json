@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Gjin fideoboarne"
+        "errorNoSource": "Gjin fideoboarne",
+        "SkipAfter": "Oerslaan nei",
+        "Skip": "Oerslaan"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "mear",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "twadde",
+        "seconds": "sekonden",
+        "minute": "minút",
+        "minutes": "minuten",
+        "hour": "oeren",
+        "day": "dei",
+        "days": "dagen",
+        "week": "wike",
+        "weeks": "wiken",
+        "month": "moanne",
+        "months": "moannen",
+        "year": "jier",
+        "years": "jierren",
+        "decade": "dekade",
+        "decades": "desennia",
+        "century": "ieu",
+        "centuries": "ieuwen"
     }
 }

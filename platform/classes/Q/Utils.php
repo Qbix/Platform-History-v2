@@ -1220,14 +1220,29 @@ class Q_Utils
 	}
 
 	/**
-	 * Returns base url for node.js requests
+	 * Given some optional input identifying objects in the system,
+	 * returns the hostname and port for connecting to a Qbix Node.js server
+	 * set up for working with those objects.
 	 * @method nodeUrl
 	 * @static
+	 * @param {array} [$where=array()] An array of key => value pairs
 	 * @throws {Q_Exception_MissingConfig} If node host or port are not defined
 	 */
-	static function nodeUrl ()
+	static function nodeUrl ($where = array())
 	{
-		$url = Q_Config::get('Q', 'node', 'url', null);
+		$url = null;
+		if (!empty(self::$nodeUrlRouters)) {
+			foreach (self::$nodeUrlRouters as $router) {
+				if (false === Q::event(
+					$router, compact('where'), false, false, $url
+				)) {
+					break;
+				}
+			}
+		}
+		if (!isset($url)) {
+			$url = Q_Config::get('Q', 'node', 'url', null);
+		}
 		if (isset($url)) {
 			return Q_Uri::interpolateUrl($url);
 		}
@@ -1606,4 +1621,6 @@ class Q_Utils
 
 	protected static $urand;
 	protected static $sockets = array();
+	
+	public $nodeUrlRouters = array();
 }

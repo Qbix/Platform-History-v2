@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ቅንጥብ",
-        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም"
+        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም",
+        "SkipAfter": "በኋላ ዝለል",
+        "Skip": "ዝለል"
     },
     "pdf": {
         "clip": "ቅንጥብ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "ተጨማሪ",
         "Menu": "ምናሌ"
+    },
+    "durations": {
+        "second": "ሁለተኛ",
+        "seconds": "ሰከንዶች",
+        "minute": "ደቂቃ",
+        "minutes": "ደቂቃዎች",
+        "hour": "ሰዓታት",
+        "day": "ቀን",
+        "days": "ቀናት",
+        "week": "ሳምንት",
+        "weeks": "ሳምንታት",
+        "month": "ወር",
+        "months": "ወሮች",
+        "year": "አመት",
+        "years": "ዓመታት",
+        "decade": "አስር አመት",
+        "decades": "አስርት ዓመታት",
+        "century": "ክፍለ ዘመን",
+        "centuries": "ክፍለ ዘመናት"
     }
 }

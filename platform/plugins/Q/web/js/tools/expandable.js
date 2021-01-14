@@ -17,6 +17,7 @@
  *  @param {Boolean} [options.evenIfFilled=false] If true, fill tool.element with content event if tool.element have children
  *  @param {Boolean} [options.autoCollapseSiblings=true] Whether, when expanding an expandable, its siblings should be automatically collapsed.
  *  @param {Boolean} [options.scrollContainer] Whether to scroll a parent container when necessary
+ *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
  * @return {Q.Tool}
  */
 Q.Tool.define('Q/expandable', function (options) {
@@ -36,6 +37,9 @@ Q.Tool.define('Q/expandable', function (options) {
 		var div = "<div class='Q_expandable_container'><div class='Q_expandable_content'>"
 			+options.content+"</div></div>";
 		this.element.innerHTML = h2 + div;
+		setTimeout(function () {
+			Q.handle(state.onRender, tool);
+		}, 0);
 	}
 	
 	var $h2 = $('>h2', $te);
@@ -81,6 +85,7 @@ Q.Tool.define('Q/expandable', function (options) {
 	scrollContainer: true,
 	duration: 300,
 	evenIfFilled: false,
+	onRender: new Q.Event(),
 	beforeExpand: new Q.Event(),
 	onExpand: new Q.Event(),
 	beforeCollapse: new Q.Event()

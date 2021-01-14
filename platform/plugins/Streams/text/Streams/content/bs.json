@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Prikaži dijeljenje ekrana"
         },
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom toku.",
-        "streamTitle": "{999}} poziv uživo"
+        "streamTitle": "{999}} poziv uživo",
+        "preview": {
+            "preamble": "Sastanak:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF dokument",
             "description": "PDF dokument",
             "newItem": "Dodajte PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pitanje",
+            "description": "tok pitanja"
+        },
+        "Streams\/answer": {
+            "displayType": "Odgovorite",
+            "description": "tok odgovora"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nema izvora slike",
         "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
         "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+    },
+    "questions": {
+        "Questions": "Pitanja",
+        "Answers": "Odgovori",
+        "AnswerQuestion": "Odgovori na pitanje",
+        "SetYourAnswer": "Odgovorite na pitanje",
+        "NewQuestion": "Novo pitanje",
+        "NewAnswer": "Novi odgovor",
+        "AnswerDetails": "Pojedinosti o odgovoru",
+        "answerOption": "Opcija",
+        "answerOptionExclusive": "Ekskluzivno",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "besplatan odgovor ...",
+        "SaveQuestion": "Spremi pitanje",
+        "SaveAnswer": "Sačuvaj odgovor",
+        "AddAnotherAnswer": "Dodajte još jedan odgovor",
+        "ErrorAnswers": "Molimo dodajte jedan odgovor",
+        "AlreadyAnswered": "Već sam odgovorio",
+        "TitlePlaceholder": "Upišite svoje pitanje",
+        "ContentPlaceholder": "Ovdje dodajte sve dodatne informacije kako biste pomogli ljudima da odgovore",
+        "ErrorTitle": "Pitanje potrebno"
+    },
+    "experience": {
+        "NewExperience": "Novo iskustvo"
     }
 }

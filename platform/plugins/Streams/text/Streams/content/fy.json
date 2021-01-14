@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Skerm dielen sjen litte"
         },
         "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dizze stream.",
-        "streamTitle": "{{1}} live oprop"
+        "streamTitle": "{{1}} live oprop",
+        "preview": {
+            "preamble": "Moeting:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF dokumint",
             "description": "PDF dokumint",
             "newItem": "PDF tafoegje"
+        },
+        "Streams\/question": {
+            "displayType": "Fraach",
+            "description": "fraachstream"
+        },
+        "Streams\/answer": {
+            "displayType": "Antwurd",
+            "description": "antwurdstream"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Gjin ôfbyldingsboarne",
         "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
         "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
+    },
+    "questions": {
+        "Questions": "Fragen",
+        "Answers": "Antwurden",
+        "AnswerQuestion": "Antwurdzje op fraach",
+        "SetYourAnswer": "Beantwurdzje asjebleaft de fraach",
+        "NewQuestion": "Nije fraach",
+        "NewAnswer": "Nij antwurd",
+        "AnswerDetails": "Antwurddetails",
+        "answerOption": "Opsje",
+        "answerOptionExclusive": "Eksklusyf",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "fergees antwurd ...",
+        "SaveQuestion": "Fraach bewarje",
+        "SaveAnswer": "Antwurd bewarje",
+        "AddAnotherAnswer": "Foegje noch in antwurd ta",
+        "ErrorAnswers": "Foegje asjebleaft sels ien antwurd ta",
+        "AlreadyAnswered": "Al beäntwurde",
+        "TitlePlaceholder": "Typ jo fraach",
+        "ContentPlaceholder": "Set hjir ekstra ynformaasje om minsken te beantwurdzjen",
+        "ErrorTitle": "Fraach ferplicht"
+    },
+    "experience": {
+        "NewExperience": "Nije Underfining"
     }
 }

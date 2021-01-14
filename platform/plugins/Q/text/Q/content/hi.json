@@ -118,5 +118,24 @@
         "ClipStart": "प्रारंभ प्रारंभ करें",
         "SetClipEnd": "क्लिप एंड सेट करें",
         "ClipEnd": "क्लिप एंड"
+    },
+    "durations": {
+        "second": "दूसरा",
+        "seconds": "सेकंड",
+        "minute": "मिनट",
+        "minutes": "मिनट",
+        "hour": "घंटे",
+        "day": "दिन",
+        "days": "दिन",
+        "week": "सप्ताह",
+        "weeks": "हफ्तों",
+        "month": "महीना",
+        "months": "महीने",
+        "year": "साल",
+        "years": "वर्षों",
+        "decade": "दशक",
+        "decades": "दशकों",
+        "century": "सदी",
+        "centuries": "सदियों"
     }
 }

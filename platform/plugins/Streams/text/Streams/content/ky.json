@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Экранда бөлүшүүнү көрсөтүү"
         },
         "notAllowedToJoinCall": "Бул агымга кошулууга уруксатыңыз жок.",
-        "streamTitle": "{{1}} жандуу чалуу"
+        "streamTitle": "{{1}} жандуу чалуу",
+        "preview": {
+            "preamble": "Жолугушуу:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF документ",
             "description": "PDF документ",
             "newItem": "PDF кошуу"
+        },
+        "Streams\/question": {
+            "displayType": "Суроо",
+            "description": "суроо агымы"
+        },
+        "Streams\/answer": {
+            "displayType": "Жооп",
+            "description": "жооп агымы"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Сүрөт булагы жок",
         "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
         "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+    },
+    "questions": {
+        "Questions": "Суроолор",
+        "Answers": "Жооптор",
+        "AnswerQuestion": "Суроого жооп бериңиз",
+        "SetYourAnswer": "Сурооңузга жооп бериңиз",
+        "NewQuestion": "Жаңы суроо",
+        "NewAnswer": "Жаңы жооп",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Вариант",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "акысыз жооп ...",
+        "SaveQuestion": "Суроону сактоо",
+        "SaveAnswer": "Жоопту сактоо",
+        "AddAnotherAnswer": "Дагы бир жооп кошуңуз",
+        "ErrorAnswers": "Сураныч, бир гана жооп кошуңуз",
+        "AlreadyAnswered": "Буга чейин жооп берген",
+        "TitlePlaceholder": "Сурооңузду териңиз",
+        "ContentPlaceholder": "Адамдар жооп бергенге жардам берүү үчүн кошумча маалыматты ушул жерге коюңуз",
+        "ErrorTitle": "Суроо талап кылынат"
+    },
+    "experience": {
+        "NewExperience": "Жаңы тажрыйба"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Montre pataje ekran"
         },
         "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan kouran sa a.",
-        "streamTitle": "{{1}} apèl viv"
+        "streamTitle": "{{1}} apèl viv",
+        "preview": {
+            "preamble": "Reyinyon:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Dokiman PDF",
             "description": "Dokiman PDF",
             "newItem": "Ajoute PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Kesyon",
+            "description": "kesyon kouran"
+        },
+        "Streams\/answer": {
+            "displayType": "Reponn",
+            "description": "kouran repons"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Pa gen sous imaj",
         "uploadLimit": "Gwosè dosye max: {{size}}",
         "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+    },
+    "questions": {
+        "Questions": "Kesyon",
+        "Answers": "Repons",
+        "AnswerQuestion": "Reponn kesyon",
+        "SetYourAnswer": "Tanpri reponn kesyon an",
+        "NewQuestion": "Nouvo Kesyon",
+        "NewAnswer": "Nouvo Repons",
+        "AnswerDetails": "Reponn Detay",
+        "answerOption": "Opsyon",
+        "answerOptionExclusive": "Eksklizif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "repons gratis ...",
+        "SaveQuestion": "Sove kesyon an",
+        "SaveAnswer": "Sove Repons",
+        "AddAnotherAnswer": "Ajoute yon lòt repons",
+        "ErrorAnswers": "Tanpri ajoute menm yon repons",
+        "AlreadyAnswered": "Deja reponn",
+        "TitlePlaceholder": "Tape kesyon ou an",
+        "ContentPlaceholder": "Mete nenpòt lòt enfòmasyon isit la pou ede moun yo reponn",
+        "ErrorTitle": "Kesyon obligatwa"
+    },
+    "experience": {
+        "NewExperience": "Nouvo Eksperyans"
     }
 }

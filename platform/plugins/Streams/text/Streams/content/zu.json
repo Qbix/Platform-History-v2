@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Khombisa ukwabelana ngesikrini"
         },
         "notAllowedToJoinCall": "Awunayo imvume yokujoyina lokhu kusakaza.",
-        "streamTitle": "{{1}} ikholi ebukhoma"
+        "streamTitle": "{{1}} ikholi ebukhoma",
+        "preview": {
+            "preamble": "Umhlangano:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Idokhumenti ye-PDF",
             "description": "Idokhumenti ye-PDF",
             "newItem": "Faka i-PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Umbuzo",
+            "description": "ukusakazwa kombuzo"
+        },
+        "Streams\/answer": {
+            "displayType": "Phendula",
+            "description": "Ukusakaza impendulo"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Awukho umthombo wesithombe",
         "uploadLimit": "Usayizi wefayela omkhulu: {{size}}",
         "errorFileSize": "Uxolo, kodwa ifayela likhulu kakhulu.<br> Usayizi wefayela omkhulu ngu- {{size}}"
+    },
+    "questions": {
+        "Questions": "Imibuzo",
+        "Answers": "Izimpendulo",
+        "AnswerQuestion": "Phendula umbuzo",
+        "SetYourAnswer": "Sicela uphendule umbuzo",
+        "NewQuestion": "Umbuzo Omusha",
+        "NewAnswer": "Impendulo Entsha",
+        "AnswerDetails": "Imininingwane Yempendulo",
+        "answerOption": "Inketho",
+        "answerOptionExclusive": "Okukhethekile",
+        "answerTextarea": "I-Textarea",
+        "FreeAnswer": "impendulo yamahhala ...",
+        "SaveQuestion": "Gcina Umbuzo",
+        "SaveAnswer": "Gcina Impendulo",
+        "AddAnotherAnswer": "Faka enye impendulo",
+        "ErrorAnswers": "Sicela ungeze impendulo eyodwa",
+        "AlreadyAnswered": "Isivele iphenduliwe",
+        "TitlePlaceholder": "Thayipha umbuzo wakho",
+        "ContentPlaceholder": "Faka noma imiphi imininingwane eyengeziwe lapha ukusiza abantu baphendule",
+        "ErrorTitle": "Kudingeka umbuzo"
+    },
+    "experience": {
+        "NewExperience": "Okuhlangenwe nakho okusha"
     }
 }

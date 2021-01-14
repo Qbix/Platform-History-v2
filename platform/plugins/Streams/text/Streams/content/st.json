@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Bontša ho arolelana skrineng"
         },
         "notAllowedToJoinCall": "Ha u na tumello ea ho kenella molatsoaneng ona.",
-        "streamTitle": "{{1}} mohala o tsitsitseng"
+        "streamTitle": "{{1}} mohala o tsitsitseng",
+        "preview": {
+            "preamble": "Seboka:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Tokomane ea PDF",
             "description": "Tokomane ea PDF",
             "newItem": "Kenya PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Potso",
+            "description": "molapo oa lipotso"
+        },
+        "Streams\/answer": {
+            "displayType": "Karabo",
+            "description": "karabo ea karabo"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Ha ho mohloli oa setšoantšo",
         "uploadLimit": "Boholo ba faele: {{size}}",
         "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+    },
+    "questions": {
+        "Questions": "Lipotso",
+        "Answers": "Likarabo",
+        "AnswerQuestion": "Araba Potso",
+        "SetYourAnswer": "Ka kopo araba potso",
+        "NewQuestion": "Potso e Ncha",
+        "NewAnswer": "Karabo e Ncha",
+        "AnswerDetails": "Lintlha tsa Karabo",
+        "answerOption": "Khetho",
+        "answerOptionExclusive": "E khethehileng",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "karabo ea mahala ...",
+        "SaveQuestion": "Boloka Potso",
+        "SaveAnswer": "Boloka Karabo",
+        "AddAnotherAnswer": "Kenya karabo e &#39;ngoe",
+        "ErrorAnswers": "Ka kopo eketsa karabo e le &#39;ngoe",
+        "AlreadyAnswered": "E se e arabiloe",
+        "TitlePlaceholder": "Ngola potso ea hau",
+        "ContentPlaceholder": "Beha lintlha tse ling tse tlatsetso mona ho thusa batho ho araba",
+        "ErrorTitle": "Potso ea hlokahala"
+    },
+    "experience": {
+        "NewExperience": "Phihlelo e Ncha"
     }
 }

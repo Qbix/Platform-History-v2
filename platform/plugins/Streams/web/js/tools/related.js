@@ -32,6 +32,7 @@ var Streams = Q.Streams;
  *   @param {Object} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
+ *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
  *   If executing result of this handler===false, skip adding this preview tool to the related list.
@@ -54,10 +55,15 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		throw new Q.Error("Streams/related tool: sortable must be an object or false");
 	}
 
+	tool.previewElements = {};
+
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
 	state.streamName = state.streamName || state.stream.fields.name;
 	
 	state.refreshCount = 0;
+
+	// save first value of relatedOptions.limit to use it to load more streams
+	state.loadMore = Q.getObject("relatedOptions.limit", state);
 
 	if (this.element.classList.contains("Streams_related_participant")) {
 		state.mode = "participant";
@@ -78,6 +84,29 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		tool.text = text;
 		pipe.fill('texts')();
 	});
+
+	if (state.infinitescroll) {
+		var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
+		var scrollableElement = this.element.scrollingParent(true, "vertical", true);
+		$dummyElement.remove();
+		if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
+			return console.warn("Streams/related: scrolligParent for infinitescroll not found");
+		}
+
+		$(scrollableElement).tool('Q/infinitescroll', {
+			onInvoke: function () {
+				var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+
+				// skip duplicated (same offsets) requests
+				if (this.state.offset && this.state.offset >= offset) {
+					return;
+				}
+
+				this.state.offset = offset;
+				tool.loadMore(state.loadMore);
+			}
+		}).activate();
+	}
 },
 
 {
@@ -85,6 +114,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	isCategory: true,
 	relationType: null,
 	realtime: false,
+	infinitescroll: false,
 	activate: {
 		batchSize: {
 			start: 20,
@@ -115,6 +145,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				params = {};
 			}
 			params.streamType = streamType;
+
 			var element = tool.elementForStream(
 				params.publisherId || tool.state.publisherId, "", streamType, null,
 				Q.extend(state.previewOptions, { creatable: params }),
@@ -172,9 +203,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (isTabs) {
 			$container = $te.find('.Q_tabs_tabs');
 		}
-		Q.removeElement($container.find('.Streams_preview_tool'), true);
 		++state.refreshCount;
-		
+
+		var ascending = Q.getObject("ascending", state.relatedOptions) || false;
+
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
@@ -216,17 +248,43 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				});
 			}
 		}
-		
-		tool.previewElements = {};
+
+		// remove exiting previews
+		Q.each(exiting, function (i) {
+			var publisherId = this.fields.publisherId;
+			var streamName = this.fields.name;
+			var element = Q.getObject([publisherId, streamName], tool.previewElements);
+
+			if (!element) {
+				return;
+			}
+
+			Q.removeElement(element, true);
+			delete tool.previewElements[publisherId][streamName];
+			if (Q.isEmpty(tool.previewElements[publisherId])) {
+				delete tool.previewElements[publisherId];
+			}
+		});
+
 		var elements = [];
 		Q.each(result.relations, function (i) {
-			if (!this.from) return;
+			if (!this.from) {
+				return;
+			}
+
 			var tff = this.from.fields;
+
+			// if element exists - do nothing
+			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
+				return;
+			}
+
+			var thisWeight = this.weight;
 			var element = tool.elementForStream(
 				tff.publisherId, 
 				tff.name, 
-				tff.type, 
-				this.weight,
+				tff.type,
+				thisWeight,
 				state.previewOptions
 			);
 
@@ -237,7 +295,33 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			elements.push(element);
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
-			$container.append(element);
+
+			// select closest larger weight
+			var closestLargerWeight = null;
+			var closestLargerElement = null;
+			Q.each(tool.previewElements, function () {
+				Q.each(this, function () {
+					var weight = Q.getObject("options.streams_preview.related.weight", this);
+					if (weight > thisWeight && (!closestLargerWeight || weight < closestLargerWeight)) {
+						closestLargerWeight = weight;
+						closestLargerElement = this;
+					}
+				});
+			});
+
+			if (closestLargerElement) {
+				if (ascending) {
+					$(closestLargerElement).before(element);
+				} else {
+					$(closestLargerElement).after(element);
+				}
+			} else {
+				if (ascending) {
+					$container.append(element);
+				} else {
+					$container.prepend(element);
+				}
+			}
 		});
 
 		// activate the elements one by one, asynchronously
@@ -303,71 +387,126 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
+
 		Streams.retainWith(tool).related(
 			publisherId, 
 			streamName, 
 			state.relationType, 
 			state.isCategory, 
 			state.relatedOptions,
-			relatedResult
+			function (errorMessage) {
+				if (errorMessage) {
+					return console.warn("Streams/related refresh: " + errorMessage);
+				}
+
+				tool.relatedResult(this, onUpdate);
+			}
 		);
-		
-		function relatedResult(errorMessage) {
-			if (errorMessage) {
-				console.warn("Streams/related refresh: " + errorMessage);
-				return;
-			}
-			var result = this;
-			var entering, exiting, updating;
-			entering = exiting = updating = null;
-			function comparator(s1, s2, i, j) {
-				return s1 && s2 && s1.fields && s2.fields
-					&& s1.fields.publisherId === s2.fields.publisherId
-					&& s1.fields.name === s2.fields.name;
-			}
-			var tsr = tool.state.result;
-			if (tsr) {
+	},
+	/**
+	 * Process related results
+	 * @method relatedResult
+	 * @param {Object} result related result
+	 * @param {function} onUpdate callback executed when updated
+	 * @param {boolean} partial Flag indicated that loaded partial data. This case no need to compare streams for exiting.
+	 */
+	relatedResult: function (result, partial, onUpdate) {
+		var tool = this;
+
+		if (typeof arguments[1] === "function") {
+			onUpdate = arguments[1];
+			partial = false;
+		}
+
+		var entering, exiting, updating;
+		entering = exiting = updating = null;
+		function comparator(s1, s2, i, j) {
+			return s1 && s2 && s1.fields && s2.fields
+				&& s1.fields.publisherId === s2.fields.publisherId
+				&& s1.fields.name === s2.fields.name;
+		}
+		var tsr = tool.state.result;
+		if (tsr) {
+			if (!partial) {
 				exiting = Q.diff(tsr.relatedStreams, result.relatedStreams, comparator);
-				entering = Q.diff(result.relatedStreams, tsr.relatedStreams, comparator);
-				updating = Q.diff(result.relatedStreams, entering, exiting, comparator);
-			} else {
-				exiting = updating = [];
-				entering = result.relatedStreams;
 			}
-			tool.state.onUpdate.handle.apply(tool, [result, entering, exiting, updating]);
-			Q.handle(onUpdate, tool, [result, entering, exiting, updating]);
-			
-			// Now that we have the stream, we can update the event listeners again
-			var dir = tool.state.isCategory ? 'To' : 'From';
-			var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
-			if (tool.state.realtime) {
-				Q.each(eventNames, function (i, eventName) {
-					result.stream[eventName]().set(onChangedRelations, tool);
-				});
-			} else {
-				Q.each(eventNames, function (i, eventName) {
-					result.stream[eventName]().remove(tool);
-				});
-			}
-			tool.state.result = result;
-			tool.state.lastMessageOrdinal = result.stream.fields.messageCount;
+			entering = Q.diff(result.relatedStreams, tsr.relatedStreams, comparator);
+			updating = Q.diff(result.relatedStreams, entering, exiting, comparator);
+		} else {
+			exiting = updating = [];
+			entering = result.relatedStreams;
 		}
-		function onChangedRelations(msg, fields) {
-			// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
-			var isCategory = tool.state.isCategory;
-			if (fields.type !== tool.state.relationType) {
-				return;
-			}
-			if (!Users.loggedInUser
-			|| msg.byUserId != Users.loggedInUser.id
-			|| msg.byClientId != Q.clientId()
-			|| msg.ordinal !== tool.state.lastMessageOrdinal + 1) {
-				tool.refresh();
-			} else {
-				tool.refresh(); // TODO: make the weights of the items in between update in the client
-			}
-			tool.state.lastMessageOrdinal = msg.ordinal;
+		tool.state.onUpdate.handle.apply(tool, [result, entering, exiting, updating]);
+		Q.handle(onUpdate, tool, [result, entering, exiting, updating]);
+
+		// Now that we have the stream, we can update the event listeners again
+		var dir = tool.state.isCategory ? 'To' : 'From';
+		var eventNames = ['onRelated'+dir, 'onUnrelated'+dir, 'onUpdatedRelate'+dir];
+		if (tool.state.realtime) {
+			Q.each(eventNames, function (i, eventName) {
+				result.stream[eventName]().set(function (msg, fields) {
+					// TODO: REPLACE THIS WITH AN ANIMATED UPDATE BY LOOKING AT THE ARRAYS entering, exiting, updating
+					var isCategory = tool.state.isCategory;
+					if (fields.type !== tool.state.relationType) {
+						return;
+					}
+					if (!Users.loggedInUser
+						|| msg.byUserId != Users.loggedInUser.id
+						|| msg.byClientId != Q.clientId()
+						|| msg.ordinal !== tool.state.lastMessageOrdinal + 1) {
+						tool.refresh();
+					} else {
+						tool.refresh(); // TODO: make the weights of the items in between update in the client
+					}
+					tool.state.lastMessageOrdinal = msg.ordinal;
+				}, tool);
+			});
+		} else {
+			Q.each(eventNames, function (i, eventName) {
+				result.stream[eventName]().remove(tool);
+			});
 		}
+		tool.state.result = Q.extend(tool.state.result, 2, result, 2);
+		tool.state.lastMessageOrdinal = result.stream.fields.messageCount;
+	},
+	/**
+	 * Request part of related data and add previews
+	 * @method loadMore
+	 * @param {Integer} amount How much elements to load
+	 * @param {function} onUpdate callback executed when updated
+	 */
+	loadMore: function (amount, onUpdate) {
+		var tool = this;
+		var state = tool.state;
+		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
+		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
+
+		var limit = Q.getObject("relatedOptions.limit", state);
+		if (!limit) {
+			throw new Q.Error("Streams/related/loadMore: limit undefined, no sense to use loadMore, because all items loaded");
+		}
+
+		var options = Q.extend({}, state.relatedOptions, {
+			offset: limit,
+			limit: amount
+		});
+
+		Streams.retainWith(tool).related(
+			publisherId,
+			streamName,
+			state.relationType,
+			state.isCategory,
+			options,
+			function (errorMessage) {
+				if (errorMessage) {
+					return console.warn("Streams/related refresh: " + errorMessage);
+				}
+
+				tool.relatedResult(this, true, onUpdate);
+
+				state.relatedOptions.limit += amount;
+			}
+		);
 	},
 	/**
 	 * Some time need to remove relation when user doesn't participated to stream (hence doesn't get unrelatedTo message).
@@ -375,7 +514,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	 * @param {String } publisherId
 	 * @param {String} streamName
 	 */
-	removeRelation(publisherId, streamName) {
+	removeRelation: function (publisherId, streamName) {
 		var result = this.state.result;
 
 		var previewTools = this.children("Streams/preview");

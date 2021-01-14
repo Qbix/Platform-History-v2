@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Pa gen sous videyo"
+        "errorNoSource": "Pa gen sous videyo",
+        "SkipAfter": "Sote apre",
+        "Skip": "Sote"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "plis",
         "Menu": "Meni"
+    },
+    "durations": {
+        "second": "dezyèm",
+        "seconds": "segonn",
+        "minute": "minit",
+        "minutes": "minit",
+        "hour": "èdtan",
+        "day": "jou",
+        "days": "jou",
+        "week": "semèn",
+        "weeks": "semèn",
+        "month": "mwa",
+        "months": "mwa",
+        "year": "ane",
+        "years": "ane",
+        "decade": "deseni",
+        "decades": "dè dekad",
+        "century": "syèk la",
+        "centuries": "syèk"
     }
 }

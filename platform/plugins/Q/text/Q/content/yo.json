@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "agekuru",
-        "errorNoSource": "Ko si orisun fidio"
+        "errorNoSource": "Ko si orisun fidio",
+        "SkipAfter": "Rekọja lẹhin",
+        "Skip": "Foo"
     },
     "pdf": {
         "clip": "agekuru",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "siwaju sii",
         "Menu": "Akojọ aṣyn"
+    },
+    "durations": {
+        "second": "keji",
+        "seconds": "aaya",
+        "minute": "iseju",
+        "minutes": "iṣẹju",
+        "hour": "wakati",
+        "day": "ọjọ",
+        "days": "ọjọ",
+        "week": "ọsẹ",
+        "weeks": "ọsẹ",
+        "month": "osù",
+        "months": "osu",
+        "year": "odun",
+        "years": "ọdun",
+        "decade": "ọdun mẹwa",
+        "decades": "ewadun",
+        "century": "orundun",
+        "centuries": "sehin"
     }
 }

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "Clip",
-        "errorNoSource": "Keng Videoquell"
+        "errorNoSource": "Keng Videoquell",
+        "SkipAfter": "Skip no",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "Clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "méi",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "zweeten",
+        "seconds": "Sekonnen",
+        "minute": "Minutt",
+        "minutes": "Minutten",
+        "hour": "Stonnen",
+        "day": "Dag",
+        "days": "Deeg",
+        "week": "Woch",
+        "weeks": "Wochen",
+        "month": "Mount",
+        "months": "Méint",
+        "year": "Joer",
+        "years": "Joer",
+        "decade": "Jorzéngt",
+        "decades": "Joerzéngten",
+        "century": "Joerhonnert",
+        "centuries": "Joerhonnerte"
     }
 }

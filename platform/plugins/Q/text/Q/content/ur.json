@@ -118,5 +118,24 @@
         "ClipStart": "کلپ اسٹارٹ",
         "SetClipEnd": "کلپ اینڈ سیٹ کریں",
         "ClipEnd": "ویڈیوکلپ اختتام"
+    },
+    "durations": {
+        "second": "دوسرا",
+        "seconds": "سیکنڈ",
+        "minute": "منٹ",
+        "minutes": "منٹ",
+        "hour": "گھنٹے",
+        "day": "دن",
+        "days": "دن",
+        "week": "ہفتہ",
+        "weeks": "ہفتوں",
+        "month": "مہینہ",
+        "months": "مہینے",
+        "year": "سال",
+        "years": "سال",
+        "decade": "دہائی",
+        "decades": "دہائیاں",
+        "century": "صدی",
+        "centuries": "صدیوں"
     }
 }

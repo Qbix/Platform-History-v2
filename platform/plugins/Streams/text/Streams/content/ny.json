@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Onetsani kugawana pazenera"
         },
         "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo mtsinje uwu.",
-        "streamTitle": "{{1}} mayankho amoyo"
+        "streamTitle": "{{1}} mayankho amoyo",
+        "preview": {
+            "preamble": "Msonkhano:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Zolemba za PDF",
             "description": "Zolemba za PDF",
             "newItem": "Onjezani PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Funso",
+            "description": "mtsinje wamafunso"
+        },
+        "Streams\/answer": {
+            "displayType": "Yankho",
+            "description": "yankho mtsinje"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Palibe chithunzi",
         "uploadLimit": "Kukula kwa fayilo: {{size}}",
         "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwamafayilo ndi {{size}}"
+    },
+    "questions": {
+        "Questions": "Mafunso",
+        "Answers": "Mayankho",
+        "AnswerQuestion": "Yankhani Funso",
+        "SetYourAnswer": "Chonde yankhani funsoli",
+        "NewQuestion": "Funso Latsopano",
+        "NewAnswer": "Yankho Latsopano",
+        "AnswerDetails": "Yankhani Zambiri",
+        "answerOption": "Yankho",
+        "answerOptionExclusive": "Mwakathithi",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "yankho laulere ...",
+        "SaveQuestion": "Sungani Funso",
+        "SaveAnswer": "Sungani Yankho",
+        "AddAnotherAnswer": "Onjezani yankho lina",
+        "ErrorAnswers": "Chonde onjezani yankho limodzi",
+        "AlreadyAnswered": "Yankhani kale",
+        "TitlePlaceholder": "Lembani funso lanu",
+        "ContentPlaceholder": "Ikani zambiri zowonjezera apa kuti muthandize anthu kuyankha",
+        "ErrorTitle": "Funso likufunika"
+    },
+    "experience": {
+        "NewExperience": "Zochitika Zatsopano"
     }
 }

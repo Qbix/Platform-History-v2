@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "မျက်နှာပြင်မျှဝေပါ"
         },
         "notAllowedToJoinCall": "သင်ဤစီးဝင်ရန်ခွင့်ပြုချက်မရှိပါ",
-        "streamTitle": "{{1}} တိုက်ရိုက်ခေါ်ဆိုမှု"
+        "streamTitle": "{{1}} တိုက်ရိုက်ခေါ်ဆိုမှု",
+        "preview": {
+            "preamble": "အစည်းအဝေး:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF စာရွက်စာတမ်း",
             "description": "PDF စာရွက်စာတမ်း",
             "newItem": "PDF ထည့်ပါ"
+        },
+        "Streams\/question": {
+            "displayType": "မေးခွန်း",
+            "description": "မေးခွန်းပုံစံ"
+        },
+        "Streams\/answer": {
+            "displayType": "အဖြေ",
+            "description": "အဖြေစီးပါ"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ပုံအရင်းအမြစ်မရှိပါ",
         "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
         "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
+    },
+    "questions": {
+        "Questions": "မေးခွန်းများ",
+        "Answers": "အဖြေများ",
+        "AnswerQuestion": "မေးခွန်းကိုဖြေပါ",
+        "SetYourAnswer": "ကျေးဇူးပြု၍ မေးခွန်းကိုဖြေပါ",
+        "NewQuestion": "မေးခွန်းအသစ်",
+        "NewAnswer": "အဖြေအသစ်",
+        "AnswerDetails": "အသေးစိတ်ကိုဖြေပါ",
+        "answerOption": "ရွေးချယ်စရာ",
+        "answerOptionExclusive": "သီးသန့်",
+        "answerTextarea": "မြဝတီ",
+        "FreeAnswer": "အခမဲ့အဖြေ ...",
+        "SaveQuestion": "မေးခွန်း Save",
+        "SaveAnswer": "အဖြေကိုသိမ်းဆည်းပါ",
+        "AddAnotherAnswer": "နောက်ထပ်အဖြေတစ်ခုထည့်ပါ",
+        "ErrorAnswers": "ကျေးဇူးပြုပြီးအဖြေတစ်ခုတောင်ထည့်ပါ",
+        "AlreadyAnswered": "ဖြေပြီးသား",
+        "TitlePlaceholder": "သင်၏မေးခွန်းရိုက်ပါ",
+        "ContentPlaceholder": "လူများဖြေဆိုရန်ကူညီရန်နောက်ထပ်သတင်းအချက်အလက်များကိုဤနေရာတွင်ထားပါ",
+        "ErrorTitle": "မေးခွန်းလိုအပ်သည်"
+    },
+    "experience": {
+        "NewExperience": "အတွေ့အကြုံအသစ်"
     }
 }

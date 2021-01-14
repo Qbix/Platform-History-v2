@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Nuna raba allo"
         },
         "notAllowedToJoinCall": "Baka da izinin shiga wannan rafin.",
-        "streamTitle": "{{1}} kiran bidiyo"
+        "streamTitle": "{{1}} kiran bidiyo",
+        "preview": {
+            "preamble": "Gamuwa:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Takaddun PDF",
             "description": "Takaddun PDF",
             "newItem": "PDFara PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Tambaya",
+            "description": "Tambayar tambaya"
+        },
+        "Streams\/answer": {
+            "displayType": "Amsa",
+            "description": "amsar rafi"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Babu tushen hoto",
         "uploadLimit": "Matsakaicin girman fayil: {{size}}",
         "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+    },
+    "questions": {
+        "Questions": "Tambayoyi",
+        "Answers": "Amsoshi",
+        "AnswerQuestion": "Amsa Tambaya",
+        "SetYourAnswer": "Da fatan za a amsa tambayar",
+        "NewQuestion": "Sabuwar Tambaya",
+        "NewAnswer": "Sabon Amsa",
+        "AnswerDetails": "Bayanin Amsa",
+        "answerOption": "Zaɓi",
+        "answerOptionExclusive": "Keɓancewa",
+        "answerTextarea": "Rubutun",
+        "FreeAnswer": "Amsa kyauta ...",
+        "SaveQuestion": "Ajiye Tambaya",
+        "SaveAnswer": "Ajiye Amsa",
+        "AddAnotherAnswer": "Anotherara wata amsa",
+        "ErrorAnswers": "Da fatan za a kara koda guda daya",
+        "AlreadyAnswered": "An riga an amsa",
+        "TitlePlaceholder": "Buga tambayarka",
+        "ContentPlaceholder": "Sanya kowane ƙarin bayani anan don taimakawa mutane amsa",
+        "ErrorTitle": "Tambaya ake bukata"
+    },
+    "experience": {
+        "NewExperience": "Sabuwar Kwarewa"
     }
 }

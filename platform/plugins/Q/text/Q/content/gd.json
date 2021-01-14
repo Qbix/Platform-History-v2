@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Gun stòr bhidio"
+        "errorNoSource": "Gun stòr bhidio",
+        "SkipAfter": "Thoir leum às deidh",
+        "Skip": "Thoir leum"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "tuilleadh",
         "Menu": "Clàr"
+    },
+    "durations": {
+        "second": "an dàrna",
+        "seconds": "diogan",
+        "minute": "mionaid",
+        "minutes": "mionaidean",
+        "hour": "uairean",
+        "day": "latha",
+        "days": "làithean",
+        "week": "seachdain",
+        "weeks": "seachdainean",
+        "month": "mìos",
+        "months": "mìosan",
+        "year": "bliadhna",
+        "years": "bliadhna",
+        "decade": "deichead",
+        "decades": "deicheadan",
+        "century": "linn",
+        "centuries": "linntean"
     }
 }

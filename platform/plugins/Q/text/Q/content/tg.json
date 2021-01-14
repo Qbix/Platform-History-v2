@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "клип",
-        "errorNoSource": "Манбаи видеоӣ нест"
+        "errorNoSource": "Манбаи видеоӣ нест",
+        "SkipAfter": "Партофтан баъд",
+        "Skip": "Гузаштан"
     },
     "pdf": {
         "clip": "клип",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Бештар",
         "Menu": "Меню"
+    },
+    "durations": {
+        "second": "дуюм",
+        "seconds": "сония",
+        "minute": "дақиқа",
+        "minutes": "дақиқа",
+        "hour": "соат",
+        "day": "рӯз",
+        "days": "рӯзҳо",
+        "week": "ҳафта",
+        "weeks": "ҳафтаҳо",
+        "month": "моҳ",
+        "months": "моҳҳо",
+        "year": "сол",
+        "years": "сол",
+        "decade": "даҳсола",
+        "decades": "даҳсолаҳо",
+        "century": "аср",
+        "centuries": "асрҳо"
     }
 }
