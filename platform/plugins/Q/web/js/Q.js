@@ -11518,6 +11518,60 @@ Q.Pointer = {
 		return root.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 	},
 	/**
+	 * Get the rectangle enclosing all the children of the container element
+	 * and – for their children with overflow: visible – their overflowed contents.
+	 * @static
+	 * @method boundingRect
+	 * @param {HTMLElement} [container=document.body] The container element
+	 * @param {Array} [omitClasses] Put CSS classes of any elements to omit from calculations
+	 * @param {boolean} [omitOverflow=false] If true, doesn't use overflowed content in calculations
+	 * @return {Object} with properties left, right, top, bottom, width, height
+	 */
+	boundingRect: function (container, omitClasses, omitOverflow) {
+		var rect = {left: 0, top: 0};
+		rect.right = Q.Pointer.windowWidth();
+		rect.bottom = Q.Pointer.windowHeight();
+		container = container || document.body;
+		var sl = Q.Pointer.scrollLeft();
+		var st = Q.Pointer.scrollTop();
+		Q.each(container.children || container.childNodes, function () {
+			if (this.hasClass && omitClasses) {
+				for (var i=0, l=omitClasses.length; i<l; ++i) {
+					if (this.hasClass(omitClasses[i])) return;
+				}
+			}
+			var bcr = this.getBoundingClientRect();
+			var r = {
+				left: bcr.left,
+				top: bcr.top,
+				right: bcr.right,
+				bottom: bcr.bottom
+			};
+			if (!r) return;
+			r.left += sl; r.right += sl;
+			r.top += st; r.bottom += st;
+			var cs = this.computedStyle();
+			if (!omitOverflow && cs.overflow === 'visible') {
+				if (this.scrollWidth > r.right - r.left) {
+					r.right += this.scrollWidth - (r.right - r.left);
+					r.left -= this.scrollLeft;
+				}
+				if (this.scrollHeight > r.bottom - r.top) {
+					r.bottom += this.scrollHeight - (r.bottom - r.top);
+					r.top -= this.scrollTop;
+				}
+			}
+			if (r.right - r.left == 0 || r.bottom - r.top == 0) return;
+			rect.left = Math.min(rect.left, r.left);
+			rect.top = Math.min(rect.top, r.top);
+			rect.right = Math.max(rect.right, r.right);
+			rect.bottom = Math.max(rect.bottom, r.bottom);
+		});
+		rect.width = rect.right - rect.left;
+		rect.height = rect.bottom - rect.top;
+		return rect;
+	},
+	/**
 	 * Returns the x coordinate of an event relative to the document
 	 * @static
 	 * @method getX
@@ -13338,6 +13392,9 @@ Q.Masks = {
 				'top': rect.top,
 				'bottom': rect.bottom
 			};
+			if (!mask.shouldCover) {
+				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;
 			}
