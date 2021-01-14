@@ -9733,7 +9733,9 @@ Q.baseUrl = function _Q_host(where) {
 Q.baseUrl.routers = []; // functions returning a custom url
 
 /**
- * Given an index and field values, returns the hostname and port for connecting to a Node.js server running Q
+ * Given some optional input identifying objects in the system,
+ * returns the hostname and port for connecting to a Qbix Node.js server
+ * set up for working with those objects.
  * @static
  * @method nodeUrl
  * @param {Object} where
