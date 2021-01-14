@@ -262,8 +262,13 @@ Q.Tool.define("Q/video", function (options) {
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
+		var state = this.state;
+
+		this.setCurrentPosition(this.calculateStartPosition(), !state.skipPauseOnload, !state.skipPauseOnload);
 		this.addAdvertising();
+
+		// preload next clip
+		this.preloadNextClip();
 	}),
 	onCanPlay: new Q.Event(function () {
 		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
@@ -297,7 +302,7 @@ Q.Tool.define("Q/video", function (options) {
 		this.checkClip();
 
 		// update pointers position on timeline for "clips" mode
-		this.movePointers();
+		this.moveClipsPointers();
 
 		if (!state.clips.useNativeDuration) {
 			// check clips duration limit
@@ -507,6 +512,9 @@ Q.Tool.define("Q/video", function (options) {
 					// set autoplay to autostart next clip
 					state.player.autoplay(true);
 
+					// set initial clips.offset when first clip loaded
+					state.clips.offset = 0;
+
 					// render custom player controls
 					Q.Template.render("Q/video/clips/control", {}, function (err, html) {
 						var $newControls = $(html);
@@ -564,8 +572,10 @@ Q.Tool.define("Q/video", function (options) {
 								}
 
 								clipsUsed.push(nextClip.url);
-								tool.addPointer(nextClip);
+								tool.addClipsPointer(nextClip);
 							}
+
+							tool.preloadNextClip();
 
 							// progress bar seek handler
 							$(".vjs-progress-control", $newControls).on("click", function (e) {
@@ -581,30 +591,25 @@ Q.Tool.define("Q/video", function (options) {
 								var offset = state.clips.offset + tool.getCurrentPosition()/1000 + ((x / rect.width * 100) - 50)/state.clips.oneSecondPercent ;
 
 								// search pointer to move to
-								Q.each(state.clips.pointers, function () {
-									if (this.start > offset || this.end < offset) {
-										return;
-									}
+								var pointer = Q.getObject("pointer", tool.getClipsPointer(offset));
+								// change offset to move timeline
+								state.clips.offset = pointer.offset;
 
-									// change offset to move timeline
-									state.clips.offset = this.offset;
+								var seekedPosition = (offset - pointer.start) * 1000; // in milliseconds
 
-									var seekedPosition = (offset - this.start) * 1000; // in milliseconds
+								// move timeline
+								tool.moveClipsPointers(null, seekedPosition);
 
-									// move timeline
-									tool.movePointers(null, seekedPosition);
+								//return;
+								if (state.url === pointer.url) {
+									tool.setCurrentPosition(seekedPosition);
+								} else {
+									// set next clip start position
+									state.clips.start = seekedPosition;
 
-									//return;
-									if (state.url === this.url) {
-										tool.setCurrentPosition(seekedPosition);
-									} else {
-										// set next clip start position
-										state.clips.start = seekedPosition;
-
-										// change source
-										tool.changeSource(this);
-									}
-								});
+									// change source
+									tool.changeSource(pointer);
+								}
 
 							});
 						}, 500);
@@ -627,10 +632,10 @@ Q.Tool.define("Q/video", function (options) {
 	},
 	/**
 	 * Add clip pointer to timeline
-	 * @method addPointer
+	 * @method addClipsPointer
 	 * @param {object} clip
 	 */
-	addPointer: function (clip) {
+	addClipsPointer: function (clip) {
 		var tool = this;
 		var state = this.state;
 
@@ -645,15 +650,15 @@ Q.Tool.define("Q/video", function (options) {
 		state.clips.pointers.push(clip);
 
 		// place on timeline
-		tool.movePointers(clip);
+		tool.moveClipsPointers(clip);
 	},
 	/**
 	 * Change clips pointers position on timeline.
-	 * @method movePointers
+	 * @method moveClipsPointers
 	 * @param {object} [pointer] Pointer to move. If empty move all pointers.
 	 * @param {number} [offset] Offset in milliseconds to move pointer inside clip
 	 */
-	movePointers: function (pointer, offset) {
+	moveClipsPointers: function (pointer, offset) {
 		var state = this.state;
 		var pointers = state.clips.pointers;
 
@@ -682,6 +687,49 @@ Q.Tool.define("Q/video", function (options) {
 
 		// move all pointers
 		Q.each(pointers, _handler);
+	},
+	/**
+	 * Get clips pointer by offset. Or current pointer if offset null.
+	 * @method getClipsPointer
+	 * @param {number} [offset] Offset in milliseconds. If undefined, current pointer will return;
+	 * @return {object} pointer founded or null
+	 */
+	getClipsPointer: function (offset) {
+		var state = this.state;
+
+		// if offset not defined, use current offset
+		offset = offset === undefined ? state.clips.offset : offset;
+
+		var pointer = null;
+		var index = null;
+		Q.each(state.clips.pointers, function (i) {
+			if (this.start > offset || this.end < offset) {
+				return;
+			}
+
+			pointer = this;
+			index = i;
+		});
+
+		return {
+			index: index,
+			pointer: pointer
+		};
+	},
+	/**
+	 *
+	 * @method preloadNextCLip
+	 */
+	preloadNextClip: function () {
+		var index = Q.getObject("index", this.getClipsPointer());
+		if (!index) {
+			return;
+		}
+
+		var nextClip = this.state.clips.pointers[index + 1];
+		if (nextClip) {
+			this.preloadClip(nextClip.url);
+		}
 	},
 	/**
 	 * @method addAdvertising
@@ -884,6 +932,23 @@ Q.Tool.define("Q/video", function (options) {
 			default: return 'mp4';
 		}
 		//throw new Q.Exception(this.id + ': No adapter for this URL');
+	},
+	/**
+	 * Preload movie and create URL object with source.
+	 * @method preloadClip
+	 */
+	preloadClip: function (url) {
+		var req = new XMLHttpRequest();
+		req.open('GET', url, true);
+		req.responseType = 'blob';
+		req.onload = function() {
+			// Onload is triggered even on 404
+			// so we need to check the status code
+			if (this.status === 200) {
+				URL.createObjectURL(this.response);
+			}
+		}
+		req.send();
 	},
 	/**
 	 *
