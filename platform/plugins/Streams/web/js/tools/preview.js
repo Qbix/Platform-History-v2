@@ -68,7 +68,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	var tool = this;
 	var state = tool.state;
 	if (!state.publisherId) {
-		throw new Q.Error("Streams/preview tool: missing options.publisherId");
+		return console.warn("Streams/preview tool: missing options.publisherId");
 	}
 	var si = state.imagepicker;
 	if (!si || !si.showSize) {
@@ -215,6 +215,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			state.beforeCreate.handle.call(tool);
 			tool.loading();
 			var r = state.related;
+			if (weight) {
+				state.related.weight = weight;
+			}
 			Q.Streams.retainWith(tool)
 			.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
 				if (err) {

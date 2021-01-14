@@ -781,7 +781,7 @@ Elp.cssDimensions = function () {
  * @method scrollingParent
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
- * @param {Boolean} [includSelf=false] Whether the element itself can be returned if it matches
+ * @param {Boolean} [includeSelf=false] Whether the element itself can be returned if it matches
  */
 Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
@@ -13173,7 +13173,7 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		Q.text.interpolate(Q.text);
+
 		if (root.TTS) {
 			TTS.speak({
 				text: text,

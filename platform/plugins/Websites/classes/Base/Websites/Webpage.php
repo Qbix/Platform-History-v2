@@ -21,6 +21,7 @@
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.results] defaults to null
+ * @param {integer} [$fields.duration] defaults to 2592000
  */
 abstract class Base_Websites_Webpage extends Db_Row
 {
@@ -53,6 +54,12 @@ abstract class Base_Websites_Webpage extends Db_Row
 	 * @type string
 	 * @default null
 	 * 
+	 */
+	/**
+	 * @property $duration
+	 * @type integer
+	 * @default 2592000
+	 * cache life time in seconds (default 1 month)
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -526,6 +533,60 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_duration
+	 * @param {integer} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 */
+	function beforeSet_duration($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('duration', $value);
+		}
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".duration");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".duration");
+		}
+		return array('duration', $value);			
+	}
+
+	/**
+	 * @method maxSize_duration
+	 * Returns the maximum integer that can be assigned to the duration field
+	 * @return {integer}
+	 */
+	function maxSize_duration()
+	{
+
+		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for duration column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_duration()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => '11',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => '2592000',
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -557,7 +618,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('url', 'cache', 'insertedTime', 'updatedTime', 'results');
+		$field_names = array('url', 'cache', 'insertedTime', 'updatedTime', 'results', 'duration');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

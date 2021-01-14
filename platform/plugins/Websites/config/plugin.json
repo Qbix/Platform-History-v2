@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "1.0.2",
+				"version": "1.0.3",
 				"compatible": "0.8",
 				"requires": {"Streams": "1.0"},
 				"connections": ["Users", "Streams", "Websites"]

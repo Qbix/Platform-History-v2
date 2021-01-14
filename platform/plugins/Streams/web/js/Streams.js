@@ -826,6 +826,7 @@ Streams.create = function (fields, callback, related, options) {
 		fields['Q.Streams.related.publisherId'] = related.publisherId || related.publisherId;
 		fields['Q.Streams.related.streamName'] = related.streamName || related.streamName || related.name;
 		fields['Q.Streams.related.type'] = related.type;
+		fields['Q.Streams.related.weight'] = related.weight;
 		slotNames.push('messageTo');
 	}
 	var baseUrl = Q.baseUrl({

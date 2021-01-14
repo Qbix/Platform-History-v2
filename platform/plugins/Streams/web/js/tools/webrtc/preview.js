@@ -16,7 +16,7 @@
 
             //preview.state.creatable.preprocess = tool.composer.bind(this);
 
-            //Q.addStylesheet('{{Streams}}/css/tools/webrtcPreview.css', { slotName: 'Streams' });
+            Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
             Q.Text.get('Streams/content', function (err, text) {
                 var msg = Q.firstErrorMessage(err);
@@ -53,10 +53,21 @@
             // retain with stream
             Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
 
+            var preamble = Q.getObject('webtc.preview.Meeting', tool.text) || 'Meeting';
+            var duration = "";
+            if (stream.getAttribute("endTime")) {
+            	var durationArr = Q.displayDuration(parseInt(stream.getAttribute("endTime")) - parseInt(stream.getAttribute("startTime"))).split(":");
+				for (var i=durationArr.length-1; i>=0; i--) {
+					duration = durationArr[i] + " " + (["sec", "min", "h"][durationArr.length - (i + 1)]) + " " + duration;
+				}
+				preamble = Q.getObject('webtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
+			}
+
 			var fields = Q.extend({}, state.templates.view.fields, {
 				alt: 'icon',
 				title: stream.fields.title,
-				preamble: Q.getObject('webtc.preview.preamble', tool.text) || 'Meeting'
+				duration: duration,
+				preamble: preamble
 			});
 			Q.Template.render(
 				'Streams/webrtc/preview/view',
@@ -108,9 +119,8 @@ Q.Template.set('Streams/webrtc/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}}</{{titleTag}}>'
+	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
-	+ '<div class="Streams_preview_file_size">{{size}}</div>'
 	+ '</div></div>'
 );
 

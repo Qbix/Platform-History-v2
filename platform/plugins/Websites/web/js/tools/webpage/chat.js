@@ -159,7 +159,7 @@
 						var streamType = type ? Q.Websites.getStreamType(type) : Q.Websites.getStreamType(url);
 
 						$(".Websites_webpage_chat_preview", websitesPreview[url]).tool("Streams/preview", {
-							publisherId: result.publisherId || Q.Users.loggedInUserId(),
+							publisherId: result.publisherId || Q.Users.loggedInUserId() || Q.Users.communityId,
 							streamName: result.streamName,
 							closeable: false,
 							editable: false
@@ -227,7 +227,7 @@
 
 				chatMessageContent = chatMessageContent.replace(url, "<a href='" + href + "' target='_blank'>" + url + "</a>");
 			});
-			$chatMessageContent.html(chatMessageContent, true).activate();
+			$chatMessageContent.html(chatMessageContent, true);
 
 			instructions = Q.getObject('Websites/webpages', JSON.parse(instructions || null));
 			if (instructions) {
