@@ -12735,6 +12735,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
+ * @param {String} [options.className] additional class name added to dialog element
  * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
@@ -12756,6 +12757,8 @@ Q.prompt = function(message, callback, options) {
 	if (o.initialText) {
 		attr.value = o.initialText;
 	}
+
+	options.className = 'Q_prompt ' + (options.className || '');
 	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
@@ -12765,7 +12768,6 @@ Q.prompt = function(message, callback, options) {
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
-		'className': 'Q_prompt',
 		'onActivate': function(dialog) {
 			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
