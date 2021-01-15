@@ -660,6 +660,19 @@ html.Q_scanning body > .Q_scanning_code {
 	animation: Q_newsflash 2s ease-in-out;
 }
 
+@-webkit-keyframes Q_errorFlash {
+	0%   { background-color: red; }
+	100% { background-color: transparent; }
+}
+@keyframes Q_errorFlash {
+	0%   { background-color: red; }
+	100% { background-color: transparent; }
+}
+.Q_errorFlash {
+	background-image: none !important;
+	animation: Q_errorFlash 2s ease-in-out;
+}
+
 #notices_slot {
 	width: 100%;
 }
