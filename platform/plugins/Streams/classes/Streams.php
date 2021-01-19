@@ -2311,11 +2311,8 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		if ($isCategory) {
-			if (empty($options['orderBy'])) {
-				$query = $query->orderBy('weight', false);
-			} else if ($options['orderBy'] === true) {
-				$query = $query->orderBy('weight', true);
-			}
+			$query = $query->orderBy('weight', Q::ifset($options, "orderBy", false));
+
 			if (!empty($options['weight'])) {
 				$query = $query->andWhere(array('weight' => $options['weight']));
 			}
