@@ -254,7 +254,9 @@ Q.Tool.define("Q/video", function (options) {
 	clips: {
 		handler: null,
 		duration: null,
-		oneSecondPercent: 1/6
+		oneSecondPercent: 1/6,
+		offset: 0,
+		pointers: []
 	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
@@ -555,10 +557,6 @@ Q.Tool.define("Q/video", function (options) {
 							$(".vjs-volume-panel", $newControls).replaceWith(nativeControl.$volumeControl);
 							$(".vjs-fullscreen-control", $newControls).replaceWith(nativeControl.$fullScreen);
 							$(".vjs-current-time", $newControls).replaceWith(nativeControl.$currentTime);
-
-							// set clips start position
-							state.clips.offset = 0;
-							state.clips.pointers = [];
 
 							// fill timeline with clips pointers
 							var clipsUsed = [];
