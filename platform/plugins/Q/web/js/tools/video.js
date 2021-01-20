@@ -272,9 +272,6 @@ Q.Tool.define("Q/video", function (options) {
 	onCanPlay: new Q.Event(function () {
 		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
 	}),
-	onCanPlay: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), true, true);
-	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
