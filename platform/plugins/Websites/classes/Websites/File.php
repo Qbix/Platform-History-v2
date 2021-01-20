@@ -453,7 +453,7 @@ class Websites_File extends Base_Websites_Webpage
 	 * @param {string} $path Path to file need to copy from
 	 * @return {string} $newFileDest New file path
 	 */
-	static function saveStreamFile ($stream, $path) {
+	static function saveStreamFile ($stream, $path, $type = "file") {
 		if (!is_file($path)) {
 			throw new Exception("Source file not found");
 		}
@@ -461,7 +461,17 @@ class Websites_File extends Base_Websites_Webpage
 		$publisherId = Q::ifset($stream, 'publisherId', null);
 		$streamName = Q::ifset($stream, 'name', Q::ifset($stream, 'streamName', null));
 
-		$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'file', time());
+		if ($type == "file") {
+			$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'file', time());
+		} elseif($type == "icon") {
+			$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'icon');
+		} else {
+			throw new Q_Exception_BadValue(array(
+				'internal' => 'file',
+				'problem' => 'can be "file" or "icon"'
+			));
+		}
+
 		$fileName = basename($path);
 
 		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
