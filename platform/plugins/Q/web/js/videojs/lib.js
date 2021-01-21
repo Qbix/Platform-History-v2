@@ -13862,8 +13862,8 @@
         ;
 
         _proto.handlePause = function handlePause(event) {
-            this.player_.removeClass('vjs-playing');
-            this.player_.addClass('vjs-paused'); // change the button text to "Play"
+            this.removeClass('vjs-playing');
+            this.addClass('vjs-paused'); // change the button text to "Pause"
 
             this.controlText('Play');
         }

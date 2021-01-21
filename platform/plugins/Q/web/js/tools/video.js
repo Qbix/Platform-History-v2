@@ -360,6 +360,9 @@ Q.Tool.define("Q/video", function (options) {
 		var state = this.state;
 		var player = state.player;
 
+		// set autoplay to autostart next clip
+		state.player.autoplay(true);
+
 		state.url = source.url;
 		player.src(source.url);
 
@@ -510,9 +513,6 @@ Q.Tool.define("Q/video", function (options) {
 
 				// apply clips mode if clips.handler defined
 				if (Q.getObject("clips.handler", state)) {
-					// set autoplay to autostart next clip
-					state.player.autoplay(true);
-
 					// set initial clips.offset when first clip loaded
 					state.clips.offset = 0;
 
@@ -559,16 +559,14 @@ Q.Tool.define("Q/video", function (options) {
 							$(".vjs-current-time", $newControls).replaceWith(nativeControl.$currentTime);
 
 							// fill timeline with clips pointers
-							var clipsUsed = [];
 							var nextClip;
 							var fullTimelineSeconds = 100/state.clips.oneSecondPercent;
 							for (var nextClipIndex = -10000; nextClipIndex <= 10000; nextClipIndex++) {
 								nextClip = state.clips.handler(-fullTimelineSeconds/2 + nextClipIndex);
-								if (!nextClip || clipsUsed.includes(nextClip.url)) {
+								if (!nextClip) {
 									continue;
 								}
 
-								clipsUsed.push(nextClip.url);
 								tool.addClipsPointer(nextClip);
 							}
 
@@ -589,6 +587,10 @@ Q.Tool.define("Q/video", function (options) {
 
 								// search pointer to move to
 								var pointer = Q.getObject("pointer", tool.getClipsPointer(offset));
+								if (!pointer) {
+									return;
+								}
+
 								// change offset to move timeline
 								state.clips.offset = pointer.offset;
 
@@ -636,7 +638,20 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 		var state = this.state;
 
-		var start = state.clips.offset + clip.offset;
+		// check if already exists
+		var exists = false;
+		Q.each(state.clips.pointers, function () {
+			if (this.url === clip.url) {
+				exists = true;
+			}
+		});
+		if (exists) {
+			return;
+		}
+
+		console.log(clip.url);
+
+		var start = clip.offset;
 		var end = start + clip.duration;
 
 		clip.$start = $("<div class='Q_video_clips_pointer' data-time='" + start + "'>").appendTo($(".Q_video_clips_control .vjs-progress-control", tool.element));
