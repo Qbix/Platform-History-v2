@@ -451,9 +451,11 @@ class Websites_File extends Base_Websites_Webpage
 	 * @static
 	 * @param {Streams_Stream} $stream
 	 * @param {string} $path Path to file need to copy from
+	 * @param {string} [$type="file"] Can be "file" and "icon".
+	 *@param {boolean} [$move=false] If false - copy file. If true - move file.
 	 * @return {string} $newFileDest New file path
 	 */
-	static function saveStreamFile ($stream, $path, $type = "file") {
+	static function saveStreamFile ($stream, $path, $type="file", $move=false) {
 		if (!is_file($path)) {
 			throw new Exception("Source file not found");
 		}
@@ -477,7 +479,12 @@ class Websites_File extends Base_Websites_Webpage
 		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
 		mkdir($streamDir,0775,true);
 		$newFileDest = $streamDir.DS.$fileName;
-		copy($path, $newFileDest);
+
+		if ($move) {
+			rename($path, $newFileDest);
+		} else {
+			copy($path, $newFileDest);
+		}
 
 		return array(
 			"path" => $newFileDest,
