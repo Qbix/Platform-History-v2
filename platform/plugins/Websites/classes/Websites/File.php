@@ -452,10 +452,11 @@ class Websites_File extends Base_Websites_Webpage
 	 * @param {Streams_Stream} $stream
 	 * @param {string} $path Path to file need to copy from
 	 * @param {string} [$type="file"] Can be "file" and "icon".
-	 *@param {boolean} [$move=false] If false - copy file. If true - move file.
+	 * @param {boolean} [$move=false] If false - copy file. If true - move file.
+	 * @param {boolean} [$mode=0777] Directories and file mode.
 	 * @return {string} $newFileDest New file path
 	 */
-	static function saveStreamFile ($stream, $path, $type="file", $move=false) {
+	static function saveStreamFile ($stream, $path, $type="file", $move=false, $mode=0777) {
 		if (!is_file($path)) {
 			throw new Exception("Source file not found");
 		}
@@ -477,7 +478,9 @@ class Websites_File extends Base_Websites_Webpage
 		$fileName = basename($path);
 
 		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
-		mkdir($streamDir,0775,true);
+		$oldumask = umask(0);
+		mkdir($streamDir, $mode,true);
+		umask($oldumask);
 		$newFileDest = $streamDir.DS.$fileName;
 
 		if ($move) {
@@ -485,6 +488,8 @@ class Websites_File extends Base_Websites_Webpage
 		} else {
 			copy($path, $newFileDest);
 		}
+
+		chmod($newFileDest, $mode);
 
 		return array(
 			"path" => $newFileDest,
