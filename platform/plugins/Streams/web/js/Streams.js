@@ -1634,6 +1634,7 @@ Streams.followup.options = {
  *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
  *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
  *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
+ *   @param {Boolean} [options.relationsOnly=false] Return only the relations, not the streams
  *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
  *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
@@ -1666,8 +1667,11 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
 		farStreamName = far+'StreamName',
-		slotNames = ['relations', 'relatedStreams'],
+		slotNames = ['relations'],
 		fields = {"publisherId": publisherId, "streamName": streamName};
+	if (!options.relationsOnly) {
+		slotNames.push('relatedStreams');
+	}
 	if (options.messages) {
 		slotNames.push('messages');
 	}
