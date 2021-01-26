@@ -13265,11 +13265,8 @@ Q.Masks = {
 		key = Q.calculateKey(key);
 		var mask;
 		if (key in Q.Masks.collection) {
-			mask = Q.Masks.collection[key];
-			if (options && options.zIndex) {
-				mask.element.style.zIndex = options.zIndex;
-			}
-			return mask;
+			Q.Masks.collection[key].element.remove();
+			delete Q.Masks.collection[key];
 		}
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
