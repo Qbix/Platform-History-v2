@@ -8854,15 +8854,15 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			_reject && _reject()
 			return; // a newer request was sent
 		}
-		if (err) {
+		if (!Q.isEmpty(err)) {
 			_reject && _reject()
 			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
 		}
-		if (!response) {
+		if (Q.isEmpty(response)) {
 			_reject && _reject()
 			return Q.handle(onError, this, ["Response is empty", response]);
 		}
-		if (response.errors) {
+		if (!Q.isEmpty(response.errors)) {
 			_reject && _reject()
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
