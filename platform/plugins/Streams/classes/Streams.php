@@ -2349,8 +2349,15 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
 		}
 
-		$min = isset($options['min']) ? $options['min'] : null;
-		$max = isset($options['max']) ? $options['max'] : null;
+		$min = null;
+		if (isset($options['min'])) {
+			$min = is_numeric($options['min']) ?: strtotime($options['min']);
+		}
+
+		$max = null;
+		if (isset($options['max'])) {
+			$max = is_numeric($options['max']) ?: strtotime($options['max']);
+		}
 		if (isset($min) or isset($max)) {
 			$range = new Db_Range($min, true, true, $max);
 			$query = $query->where(array('weight' => $range));
