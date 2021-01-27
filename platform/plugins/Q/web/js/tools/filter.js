@@ -52,11 +52,18 @@ Q.Tool.define('Q/filter', function (options) {
 	var events = 'focus ' + Q.Pointer.start.eventName;
 	var wasAlreadyFocused = false;
 	tool.$input.on(events, function (event) {
-		if (wasAlreadyFocused) return;
-		var that = this;
+		// check if clicked clear icon
+		if (event.type === Q.Pointer.start.eventName && tool.checkIfClose(event)) {
+			return;
+		}
+
+		if (wasAlreadyFocused) {
+			return;
+		}
+
 		wasAlreadyFocused = true;
 		Q.handle(state.onFocus, tool);
-		_changed.call(that, event);
+		_changed.call(this, event);
 	}).on('blur', function () {
 		wasAlreadyFocused = false;
 		setTimeout(function () {
@@ -85,18 +92,6 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.end();
 		}
 
-		// check if clicked clear icon
-		if (event.type === Q.Pointer.start.eventName) {
-			var xMax = $this.offset().left + $this.outerWidth(true) -
-				parseInt($this.css('margin-right'));
-			var xMin = xMax - parseInt($this.css('padding-right'));
-			var x = Q.Pointer.getX(event);
-			if (xMin < x && x < xMax) {
-				$this.val('').trigger('Q_refresh');
-				state.onClear.handle.call(tool);
-				tool.end();
-			}
-		}
 		if (!tool.cancelRemoveClass) {
 			tool.$input.removeClass('Q_filter_chose');
 		}
@@ -113,7 +108,7 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.$input.removeClass('Q_nonempty');
 		}
 		lastVal = val;
-	};
+	}
 	
 	this.Q.onStateChanged('results').set(function () {
 		this.$results.empty().append(state.results);
@@ -189,8 +184,8 @@ Q.Tool.define('Q/filter', function (options) {
 		state.begun = true;
 		
 		tool.canceledBlur = true;
-		setTimeout(function () {		
-			tool.canceledBlur = false;		
+		setTimeout(function () {
+			tool.canceledBlur = false;
 		}, 500);
 
 		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
@@ -314,6 +309,28 @@ Q.Tool.define('Q/filter', function (options) {
 		setTimeout(function () {
 			tool.cancelRemoveClass = false;
 		}, 300);
+	},
+	/**
+	 * Close results and clear input
+	 * @method checkIfClose
+	 */
+	checkIfClose: function (event) {
+		var tool = this;
+		var state = this.state;
+		var $input = tool.$input;
+
+		var xMax = $input.offset().left + $input.outerWidth(true) -
+			parseInt($input.css('margin-right'));
+		var xMin = xMax - parseInt($input.css('padding-right'));
+		var x = Q.Pointer.getX(event);
+		if (xMin < x && x < xMax) {
+			$input.val('');
+			state.onClear.handle.call(tool);
+
+			$input.trigger("blur");
+		}
+
+		return false;
 	}
 });
 

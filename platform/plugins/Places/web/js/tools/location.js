@@ -405,7 +405,6 @@ Q.Tool.define("Places/location", function (options) {
 		if ($olt.length) {
 			$olt.plugin('Q/placeholders', function () {
 				tool.addressTool.filter.setText('');
-				tool.addressTool.filter.$input.plugin('Q/clickfocus');
 			});
 		}
 
