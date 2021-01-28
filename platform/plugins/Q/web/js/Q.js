@@ -8842,7 +8842,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		_reject && _reject();
+		Q.handle(_reject);
 	};
 	return promise;
 
@@ -8851,25 +8851,25 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return; // this loadUrl call was canceled
 		}
 		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
 		}
 		if (Q.isEmpty(response)) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return Q.handle(onError, this, ["Response is empty", response]);
 		}
 		if (!Q.isEmpty(response.errors)) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		
 		if (redirected) {
-			_reject && _reject();
+			Q.handle(_reject);
 			return;
 		}
 		
