@@ -31,6 +31,7 @@
 		goFoolscreen: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="49px" height="49px" viewBox="-0.07 -0.107 49 49" enable-background="new -0.07 -0.107 49 49"    xml:space="preserve">  <defs>  </defs>  <path fill="#8C8C8C" stroke="#8C8C8C" stroke-width="2" stroke-miterlimit="10" d="M46.668,47.786H25.148   c-0.663,0-1.2-0.537-1.2-1.201c0-0.662,0.537-1.199,1.2-1.199h20.319V3.4H3.4v20.111c0,0.663-0.538,1.2-1.2,1.2S1,24.174,1,23.511   V2.2C1,1.537,1.538,1,2.2,1h44.468c0.662,0,1.199,0.538,1.199,1.2v44.384C47.868,47.247,47.331,47.786,46.668,47.786z"/>  <path fill="#8C8C8C" stroke="#8C8C8C" stroke-width="2" stroke-miterlimit="10" d="M23.188,26.773c-0.307,0-0.614-0.116-0.849-0.353   c-0.469-0.469-0.468-1.229,0-1.696L37.124,9.948c0.471-0.469,1.229-0.468,1.697,0c0.469,0.469,0.469,1.229,0,1.697L24.036,26.42   C23.802,26.657,23.495,26.773,23.188,26.773z"/>  <path fill="#8C8C8C" stroke="#8C8C8C" stroke-width="2" stroke-miterlimit="10" d="M38.476,22.055c-0.663,0-1.2-0.538-1.2-1.2   v-9.359h-9.359c-0.662,0-1.199-0.538-1.199-1.2c0-0.662,0.537-1.2,1.199-1.2h10.561c0.663,0,1.2,0.538,1.2,1.2v10.56   C39.676,21.517,39.139,22.055,38.476,22.055z"/>  <path fill="#8C8C8C" stroke="#8C8C8C" stroke-width="2" stroke-miterlimit="10" d="M18.419,47.786H2.2c-0.663,0-1.2-0.537-1.2-1.201   V30.375c0-0.664,0.538-1.2,1.2-1.2h16.219c0.663,0,1.2,0.536,1.2,1.2v16.209C19.619,47.247,19.081,47.786,18.419,47.786z    M3.4,45.384h13.818V31.577H3.4V45.384z"/>  </svg>',
 		facebooklogo: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#1877F2" d="M50,0C22.3857422,0,0,22.3857422,0,50c0,25.6513672,19.3173828,46.7910156,44.1982422,49.6660156   c0-11.5039063,0-23.0068359,0-34.5107422c-4.2099609-0.03125-8.5439453,0.0625-12.6748047-0.046875   c0.03125-4.7861328-0.0625-9.6972656,0.0458984-14.4052734c4.2099609,0,8.4189453,0,12.6289063,0   c0.1933594-5.2246094-0.3769531-10.6503906,0.2802734-15.0605469c1.2792969-8.5859375,6.7324219-14.1972656,15.5751953-15.1542969   c4.7587891-0.5146484,9.7216797,0.1660156,14.171875,0.8427734c-0.03125,4.0683594,0.0615234,8.2626953-0.046875,12.2539063   c-2.7724609,0.0996094-5.40625-0.1748047-7.7646484,0.09375c-2.2597656,0.2558594-3.9492188,1.1113281-5.1445313,2.7119141   c-1.2519531,1.6767578-1.4501953,3.5166016-1.4501953,6.4082031c0,2.5195313,0,5.3271484,0,7.9042969   c4.5839844,0.03125,9.2919922-0.0625,13.7978516,0.046875c-0.734375,4.8164063-1.4101563,9.6894531-2.2451172,14.4052734   c-3.8505859,0-7.7011719,0-11.5527344,0c0,11.2939453,0,22.5869141,0,33.8808594C82.7314453,94.4726563,100,74.2529297,100,50   C100,22.3857422,77.6142578,0,50,0z"/>  <path fill="#FFFFFF" d="M71.3720703,65.1552734c0.8349609-4.7158203,1.5107422-9.5888672,2.2451172-14.4052734   c-4.5058594-0.109375-9.2138672-0.015625-13.7978516-0.046875c0-2.5771484,0-5.3847656,0-7.9042969   c0-2.8916016,0.1982422-4.7314453,1.4501953-6.4082031c1.1953125-1.6005859,2.8847656-2.4560547,5.1445313-2.7119141   c2.3583984-0.2685547,4.9921875,0.0058594,7.7646484-0.09375c0.1083984-3.9912109,0.015625-8.1855469,0.046875-12.2539063   c-4.4501953-0.6767578-9.4130859-1.3574219-14.171875-0.8427734c-8.8427734,0.9570313-14.2958984,6.5683594-15.5751953,15.1542969   c-0.6572266,4.4101563-0.0869141,9.8359375-0.2802734,15.0605469c-4.2099609,0-8.4189453,0-12.6289063,0   c-0.1083984,4.7080078-0.0146484,9.6191406-0.0458984,14.4052734c4.1308594,0.109375,8.4648438,0.015625,12.6748047,0.046875   c0,11.5039063,0,23.0068359,0,34.5107422C46.1015625,99.8867188,48.0371094,100,50,100   c3.3613281,0,6.6445313-0.3320313,9.8193359-0.9638672c0-11.2939453,0-22.5869141,0-33.8808594   C63.6708984,65.1552734,67.5214844,65.1552734,71.3720703,65.1552734z"/>  </svg> ',
 		facebookLive: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.622 -0.182 162 63" enable-background="new -0.622 -0.182 162 63"    xml:space="preserve">  <defs>  </defs>  <path fill="#C12337" d="M148.646,61.641l7.711,0.001c2.387,0,4.322-1.279,4.324-2.857l0.004-55.919c0-1.578-1.936-2.857-4.322-2.858   h-7.711L77.966,0.001L70.253,0c-2.381,0-4.311,1.271-4.32,2.843L65.929,53.68l-0.004,5.102c0.006,1.574,1.938,2.853,4.322,2.853"/>  <path fill="#FFFFFF" d="M84.446,19.024h3.082v21.038h10.08v2.555H84.446V19.024z"/>  <path fill="#FFFFFF" d="M104.048,19.024v23.593h-3.082V19.024H104.048z"/>  <path fill="#FFFFFF" d="M114.548,42.617l-7.736-23.593h3.326l3.674,11.621c0.98,3.186,1.855,6.056,2.521,8.821h0.07   c0.664-2.73,1.609-5.705,2.695-8.786l3.99-11.656h3.254l-8.436,23.593H114.548z"/>  <path fill="#FFFFFF" d="M141.077,31.556h-9.135v8.507h10.221v2.555H128.86V19.024h12.777v2.556h-9.695v7.455h9.135V31.556z"/>  <path fill="#4272B9" d="M30.891,0.085C13.83,0.085,0,13.916,0,30.976c0,15.849,11.935,28.908,27.306,30.683   c0-7.105,0-14.213,0-21.321c-2.601-0.019-5.279,0.04-7.831-0.027c0.02-2.956-0.039-5.991,0.028-8.9c2.601,0,5.201,0,7.802,0   c0.12-3.228-0.233-6.58,0.173-9.305c0.79-5.305,4.159-8.771,9.622-9.363c2.94-0.318,6.007,0.103,8.756,0.521   c-0.019,2.514,0.038,5.105-0.029,7.571c-1.713,0.061-3.34-0.108-4.796,0.058c-1.396,0.158-2.441,0.687-3.18,1.676   c-0.772,1.036-0.896,2.172-0.896,3.959c0,1.557,0,3.291,0,4.883c2.833,0.019,5.742-0.039,8.525,0.029   c-0.454,2.976-0.87,5.986-1.387,8.898c-2.379,0-4.759,0-7.139,0c0,6.978,0,13.956,0,20.934   c14.156-2.818,24.825-15.312,24.825-30.295C61.781,13.916,47.951,0.085,30.891,0.085z"/>  <path fill="#FFFFFF" d="M44.095,40.338c0.517-2.912,0.933-5.923,1.387-8.898c-2.783-0.068-5.692-0.01-8.525-0.029   c0-1.592,0-3.327,0-4.883c0-1.787,0.124-2.923,0.896-3.959c0.738-0.989,1.783-1.518,3.18-1.676c1.456-0.166,3.083,0.003,4.796-0.058   c0.067-2.466,0.011-5.058,0.029-7.571c-2.749-0.417-5.815-0.838-8.756-0.521c-5.463,0.591-8.832,4.058-9.622,9.363   c-0.406,2.725-0.054,6.077-0.173,9.305c-2.601,0-5.201,0-7.802,0c-0.067,2.909-0.009,5.944-0.028,8.9   c2.552,0.067,5.229,0.009,7.831,0.027c0,7.108,0,14.216,0,21.321c1.176,0.137,2.372,0.208,3.584,0.208   c2.076,0,4.105-0.206,6.065-0.596c0-6.978,0-13.956,0-20.934C39.336,40.338,41.716,40.338,44.095,40.338z"/>  </svg>',
+		rtmpLive: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="105px" height="105px" viewBox="-0.429 -0.991 105 105" enable-background="new -0.429 -0.991 105 105" xml:space="preserve"> <defs> </defs> <circle fill="none" stroke="#050505" stroke-width="4" stroke-miterlimit="10" cx="52" cy="52" r="50"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M16.775,65.664V39.441h8.844c1.777,0,3.129,0.236,4.054,0.706 c0.925,0.472,1.665,1.304,2.217,2.496c0.553,1.192,0.831,2.511,0.831,3.954c0,1.858-0.459,3.428-1.375,4.703 c-0.917,1.275-2.332,2.088-4.245,2.434c0.697,0.441,1.229,0.877,1.591,1.304c0.772,0.933,1.502,2.094,2.191,3.487l3.47,7.139h-3.32 l-2.64-5.456c-0.77-1.573-1.406-2.778-1.904-3.612c-0.5-0.835-0.946-1.418-1.342-1.753c-0.394-0.334-0.795-0.568-1.204-0.697 c-0.299-0.085-0.789-0.125-1.47-0.125h-3.061v11.644H16.775z M19.415,51.014h5.673c1.207,0,2.15-0.164,2.831-0.492 c0.68-0.327,1.197-0.852,1.551-1.574c0.354-0.72,0.53-1.505,0.53-2.351c0-1.241-0.342-2.261-1.027-3.06 c-0.686-0.798-1.768-1.198-3.245-1.198h-6.313V51.014z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M41.428,65.664V42.536h-6.572v-3.095h15.81v3.095h-6.599 v23.127H41.428z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M53.294,65.664V39.441h3.972l4.722,18.566 c0.436,1.73,0.753,3.023,0.953,3.883c0.226-0.953,0.58-2.355,1.062-4.204l4.775-18.245h3.551v26.222h-2.543V43.716l-5.798,21.948 h-2.38l-5.769-22.323v22.323H53.294z"/> <path stroke="#000000" stroke-width="0.5" stroke-miterlimit="10" d="M76.587,65.664V39.441h7.524c1.323,0,2.336,0.084,3.034,0.25 c0.98,0.215,1.8,0.625,2.462,1.226s1.195,1.446,1.599,2.531c0.403,1.085,0.606,2.278,0.606,3.578c0,2.229-0.539,4.117-1.619,5.662 s-3.03,2.316-5.851,2.316h-5.117v10.66H76.587z M79.226,51.908h5.157c1.706,0,2.916-0.417,3.632-1.252 c0.717-0.834,1.074-2.009,1.074-3.523c0-1.097-0.209-2.036-0.632-2.817c-0.421-0.781-0.977-1.298-1.665-1.548 c-0.444-0.154-1.267-0.232-2.464-0.232h-5.103V51.908z"/></svg>',
 		dragIconOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#8C8C8C" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
 		dragIconOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path fill="#4AAA4E" d="M50,0C22.431,0,0,22.431,0,50c0,27.57,22.429,50,50,50c27.57,0,50-22.43,50-50C100,22.432,77.568,0,50,0z"/>  <path fill="#FFFFFF" d="M66.508,39.37c-1.358,0-2.59,0.571-3.465,1.486l0.012-1.438c0.02-2.646-2.116-4.814-4.798-4.834   c-1.359,0-2.592,0.573-3.467,1.49l0.002-0.192c0.019-2.644-2.118-4.811-4.799-4.832c-1.359,0-2.59,0.572-3.466,1.487l0.089-11.674   c0.011-1.284-0.481-2.494-1.383-3.407c-0.899-0.911-2.099-1.418-3.417-1.428c-2.623,0-4.774,2.135-4.794,4.76l-0.261,34.258   l-4.639-2.011c-1.242-0.547-3.103-1.274-4.923-1.274c-1.11,0-2.106,0.265-2.972,0.793c-1.196,0.742-2.032,1.924-2.356,3.327   c-0.346,1.502-0.057,3.137,0.793,4.487l0.202,0.32l0.319,0.202c2.809,1.794,10.573,7.182,12.745,10.537   c3.75,5.805,9.523,8.656,17.651,8.718l0.227,0.001c0.001,0,0.002,0,0.003,0c16.4,0,17.334-13.387,17.354-16.07l0.151-19.873   C71.337,41.559,69.196,39.391,66.508,39.37z M38.697,58.021c0.136-0.089,0.219-0.239,0.22-0.402l0.281-36.814   c0.011-1.434,1.186-2.601,2.64-2.601c0.699,0.005,1.355,0.283,1.847,0.781c0.492,0.499,0.761,1.16,0.755,1.861l-0.201,26.45   c-0.005,0.835,0.671,1.52,1.518,1.525c0.836,0,1.521-0.674,1.528-1.503l0.086-11.492c0.011-1.434,1.188-2.6,2.641-2.6   c1.446,0.011,2.614,1.195,2.604,2.639l-0.087,11.491c-0.004,0.403,0.151,0.784,0.436,1.072c0.287,0.292,0.672,0.453,1.095,0.455   c0.833,0,1.514-0.675,1.518-1.503l0.063-8.017c0.01-1.436,1.185-2.603,2.638-2.603c0.702,0.005,1.359,0.282,1.85,0.78   c0.49,0.499,0.758,1.16,0.752,1.861l-0.077,10.096c-0.004,0.836,0.678,1.521,1.528,1.526c0.831,0,1.511-0.675,1.516-1.503   l0.042-5.372c0.011-1.435,1.186-2.602,2.642-2.602c1.451,0.012,2.624,1.197,2.613,2.642L68.99,64.059   c-0.018,2.323-0.833,13.913-15.182,13.912L53.6,77.97c-7.44-0.057-12.474-2.511-15.841-7.723   c-2.763-4.268-12.189-10.409-13.308-11.13c-0.501-0.844-0.668-1.84-0.459-2.748c0.192-0.834,0.683-1.532,1.38-1.965   c0.515-0.314,1.113-0.468,1.827-0.468c1.41,0,2.984,0.622,4.048,1.091l6.991,3.032C38.388,58.123,38.56,58.11,38.697,58.021z"/>  </svg> ',
 		recordingIcon: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.5 -0.501 101 101" enable-background="new -0.5 -0.501 101 101"    xml:space="preserve">  <defs>  </defs>  <g>   <path fill="#8C8C8C" d="M50,4c25.365,0,46,20.636,46,46c0,25.363-20.636,45.998-46,45.998C24.635,95.998,4,75.363,4,50    C4,24.636,24.635,4,50,4 M50,0C22.431,0,0,22.43,0,50s22.429,49.998,50,49.998c27.57,0,50-22.428,50-49.998    C100,22.431,77.569,0,50,0L50,0z"/>  </g>  <circle fill="#8C8C8C" cx="50" cy="50" r="25.833"/>  </svg>'
@@ -264,33 +265,62 @@
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
 
-				tool.WebRTCLib.event.on('facebookLiveStreamingStarted', function (participant) {
-					if(participant.isLocal) {
-						if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
-						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youBeganFbLive", tool.textes));
+				tool.WebRTCLib.event.on('liveStreamingStarted', function (e) {
+					if(e.platform == 'facebook') {
+                        if (e.participant.isLocal) {
+                            if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
+                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youBeganFbLive", tool.textes));
 
-					} else {
-						if (!tool.usersBtn.classList.contains('isRecording')) tool.usersBtn.classList.add('isRecording');
-						tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbBeganFbLive.interpolate({userName: participant.username}));
+                        } else {
+                            if (!tool.usersBtn.classList.contains('isRecording')) tool.usersBtn.classList.add('isRecording');
+                            tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbBeganFbLive.interpolate({userName: e.participant.username}));
+                        }
+                    } else {
+                        if (e.participant.isLocal) {
+                            if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
+                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStartedLive", tool.textes));
+
+                        } else {
+                            if (!tool.usersBtn.classList.contains('isRecording')) tool.usersBtn.classList.add('isRecording');
+                            tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbStartedLiveStreaming.interpolate({userName: e.participant.username}));
+                        }
 					}
 
-					tool.participantsPopup().showFbLiveIndicator(participant);
+					tool.participantsPopup().showFbLiveIndicator(e.participant);
 				});
-				tool.WebRTCLib.event.on('facebookLiveStreamingEnded', function (participant) {
-					if(document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
-						Q.Dialogs.pop();
-					}
-					if(participant.isLocal) {
-						tool.cameraBtn.classList.remove('isRecording');
-						tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedFbLive", tool.textes));
-					} else {
-						tool.usersBtn.classList.remove('isRecording');
-						tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbStoppedFbLive.interpolate({userName: participant.username}));
+				tool.WebRTCLib.event.on('liveStreamingEnded', function (e) {
 
+                    if (document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
+                        Q.Dialogs.pop();
+                    }
+
+					if(e.platform == 'facebook') {
+                        if (e.participant.isLocal) {
+                            tool.cameraBtn.classList.remove('isRecording');
+                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedFbLive", tool.textes));
+                        } else {
+                            tool.usersBtn.classList.remove('isRecording');
+                            tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbStoppedFbLive.interpolate({userName: e.participant.username}));
+
+                        }
+                    } else {
+                        if (e.participant.isLocal) {
+                            tool.cameraBtn.classList.remove('isRecording');
+                            tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedLive", tool.textes));
+                        } else {
+                            tool.usersBtn.classList.remove('isRecording');
+                            tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.sbStoppedLiveStreaming.interpolate({userName: e.participant.username}));
+
+                        }
 					}
 
-					tool.participantsPopup().hideFbLiveIndicator(participant);
+					tool.participantsPopup().hideFbLiveIndicator(e.participant);
 				});
+
+				tool.WebRTCLib.event.on('liveStreamingStopped', function () {
+                    tool.cameraBtn.classList.remove('isRecording');
+                    tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.liveStopped);
+                });
 
 				tool.WebRTCLib.event.on('videoRecordingStarted', function (participant) {
 					if(participant.isLocal) {
@@ -1675,7 +1705,7 @@
                                 data.title = facebookLiveTtleInput.value;
                                 data.description = facebookLiveDescInput.value;
                                 data.privacy = privacySelect.value;
-                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {5
+                                tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
                                     facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
 
                                     fbStreamingStartSettings.style.display = 'none';
@@ -1734,6 +1764,127 @@
 
                             return streamingAndUploading;
                         }
+
+                        function createCustomRTMPlink() {
+                            var rtmpStreaming = document.createElement('DIV');
+                            rtmpStreaming.className = 'Streams_webrtc_streaming Streams_webrtc_streaming_recording_item'
+
+                            var rtmpStreamingItem = document.createElement('DIV');
+                            rtmpStreamingItem.className = 'Streams_webrtc_streaming_item';
+                            var rtmpStreamingTextLabel = document.createElement('SPAN');
+                            rtmpStreamingTextLabel.innerHTML = 'Streaming to custom RTMP';
+                            var rtmpStreamingIcon = document.createElement('SPAN');
+                            rtmpStreamingIcon.className = 'Streams_webrtc_streaming_recording_icon';
+                            rtmpStreamingIcon.innerHTML = icons.rtmpLive;
+                            rtmpStreamingItem.appendChild(rtmpStreamingTextLabel);
+                            rtmpStreamingItem.appendChild(rtmpStreamingIcon);
+
+                            var rtmpStreamingSettings = document.createElement('DIV');
+                            rtmpStreamingSettings.className = 'Streams_webrtc_streaming_start_settings';
+
+                            var rtmpLiveURL = document.createElement('LABEL');
+                            rtmpLiveURL.className = 'Streams_webrtc_streaming_title';
+
+                            var rtmpLiveURLInput = document.createElement('INPUT');
+                            rtmpLiveURLInput.type = 'text';
+                            rtmpLiveURLInput.placeholder ='RTMP URL';
+
+                            var rtmpLiveStreamKey = document.createElement('LABEL');
+                            rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_desc';
+
+                            var rtmpLiveStreamKeyInput = document.createElement('INPUT');
+                            rtmpLiveStreamKeyInput.type = 'password';
+                            rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+
+                            var startStreamingBtnCon = document.createElement('DIV');
+                            startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+                            var startStreamingBtn = document.createElement('BUTTON');
+                            startStreamingBtn.type = 'button';
+                            startStreamingBtn.className = 'Q_button';
+                            startStreamingBtn.innerHTML = 'Go Live';
+
+                            var stopStreamingBtnCon = document.createElement('DIV');
+                            stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
+
+                            var stopStreamingBtn = document.createElement('BUTTON');
+                            stopStreamingBtn.type = 'button';
+                            stopStreamingBtn.className = 'Q_button';
+                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
+
+                            rtmpStreaming.appendChild(rtmpStreamingItem);
+
+                            rtmpLiveURL.appendChild(rtmpLiveURLInput);
+                            rtmpStreamingSettings.appendChild(rtmpLiveURL);
+                            rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
+                            rtmpStreamingSettings.appendChild(rtmpLiveStreamKey);
+
+
+                            startStreamingBtnCon.appendChild(startStreamingBtn);
+                            rtmpStreamingSettings.appendChild(startStreamingBtnCon);
+
+
+                            var rtmpLiveSection = document.createElement('DIV');
+                            rtmpLiveSection.style.display = 'none';
+                            rtmpLiveSection.className = 'Streams_webrtc_streaming_live';
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'Streams_webrtc_streaming_buttons';
+
+                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
+                            buttonsCon.appendChild(stopStreamingBtnCon);
+                            rtmpLiveSection.appendChild(buttonsCon);
+
+                            rtmpStreaming.appendChild(rtmpStreamingSettings);
+                            rtmpStreaming.appendChild(rtmpLiveSection);
+
+                            rtmpStreamingItem.addEventListener('click', function (e) {
+                                if(rtmpStreamingSettings.classList.contains('shown')) {
+                                    rtmpStreamingSettings.classList.remove('shown');
+                                } else {
+                                    rtmpStreamingSettings.classList.add('shown');
+                                    rtmpLiveURL.focus();
+                                }
+                            })
+
+                            startStreamingBtn.addEventListener('click', function (e) {
+                                var rtmpURL = rtmpLiveURLInput.value.trim();
+                                var streamKey = rtmpLiveStreamKeyInput.value.trim();
+                                var fullRtmpURL = rtmpURL;
+                                if(streamKey != null && streamKey != '') {
+                                    fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
+                                }
+
+                                tool.WebRTCLib.screensInterface.fbLive.startStreaming(fullRtmpURL, 'custom');
+
+                                rtmpStreamingSettings.style.display = 'none';
+                                rtmpLiveSection.style.display = 'block';
+                                //if(rtmpStreamingSettings.classList.contains('Q_working')) rtmpStreamingSettings.classList.remove('Q_working');
+                                rtmpStreamingTextLabel.innerHTML = 'Streaming to custom RTMP (active)';
+
+                            })
+
+                            function onStop(e) {
+                                rtmpStreamingSettings.style.display = 'block';
+                                rtmpLiveSection.style.display = 'none';
+                                //if(rtmpStreamingSettings.classList.contains('Q_working')) rtmpStreamingSettings.classList.remove('Q_working');
+                                rtmpStreamingTextLabel.innerHTML = 'Streaming to custom RTMP';
+                            }
+
+                            stopStreamingBtn.addEventListener('click', function () {
+                                tool.WebRTCLib.screensInterface.fbLive.endStreaming('custom');
+                            })
+
+                            tool.WebRTCLib.event.on('liveStreamingEnded', function () {
+                                onStop();
+                            });
+                            tool.WebRTCLib.event.on('liveStreamingStopped', function () {
+                                onStop();
+                            });
+
+                            return rtmpStreaming;
+                        }
+
+
 
                         function createRecordingLink() {
                             var recordingLinkCon = document.createElement('DIV');
@@ -1892,6 +2043,7 @@
                             _streamingAndRecordingEl = document.createElement('DIV');
                             _streamingAndRecordingEl.className = 'Streams_webrtc_streaming_recording'
                             _streamingAndRecordingEl.appendChild(createStreamingLink());
+                            _streamingAndRecordingEl.appendChild(createCustomRTMPlink());
                             //_streamingAndRecordingEl.appendChild(createRecordingLink());
 
 							return _streamingAndRecordingEl;
@@ -2900,7 +3052,7 @@
 									broadcast_data: createRes
 								}, (publishRes) => {
 									if(publishRes == null || typeof publishRes == 'undefined') {
-										tool.WebRTCLib.screensInterface.fbLive.endStreaming();
+										tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
 									}
 
 									_liveId = publishRes.id
@@ -2908,7 +3060,7 @@
 									if(callback != null) callback(linkToStream);
 								});
 
-								tool.WebRTCLib.screensInterface.fbLive.startStreaming(createRes.secure_stream_url);
+								tool.WebRTCLib.screensInterface.fbLive.startStreaming(createRes.secure_stream_url, 'facebook');
 							});
 						}
 
@@ -2962,7 +3114,7 @@
 								return Q.alert(msg);
 							}
 
-							tool.WebRTCLib.screensInterface.fbLive.endStreaming();
+							tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
 							if(callback != null) callback(_liveInfo);
 						}, {
 							method: 'post',
@@ -3017,7 +3169,7 @@
 									tool.fbLiveInterface.createLive(data, function (response) {
 
 										console.log('response.secure_stream_url', response.secure_stream_url)
-										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url);
+										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url, 'facebook');
 										_liveInfo = response;
 										if (callback != null) callback(response);
 									});
@@ -4344,7 +4496,7 @@
 				endStreamingBtn.className = 'Q_button';
 				endStreamingBtn.innerHTML = "Stop streaming";
 				endStreamingBtn.addEventListener('click', function () {
-					tool.WebRTCLib.screensInterface.fbLive.endStreaming();
+					tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
 				})
 				fbLiveDialog.appendChild(endStreamingBtn);
 				Q.Dialogs.push({

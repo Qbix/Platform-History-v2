@@ -2054,6 +2054,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .Streams_webrtc_streaming label {
     padding-left:0;
 }
+.Streams_webrtc_streaming label input[type="password"],
 .Streams_webrtc_streaming label input[type="text"] {
     padding:10px;
     font-size:14px;
