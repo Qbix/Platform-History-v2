@@ -2856,7 +2856,10 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
-			$updateFields = compact('state');
+			$updateFields = array(
+				"state" => $state,
+				"subscribed" => "no"
+			);
 			if (isset($extra)) {
 				$updateFields['extra'] = $extra;
 			}
@@ -3619,10 +3622,6 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
-			if ($label) {
-				$label2 = Q::isAssociative($label) ? array_keys($label) : $label;
-				Users_Contact::addContact($publisherId, $label2, $userId, null, $asUserId2, true);
-			}
 			if ($myLabel) {
 				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
