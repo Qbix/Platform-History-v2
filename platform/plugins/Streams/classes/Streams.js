@@ -677,6 +677,7 @@ function Streams_request_handler (req, res, next) {
 				adminLevel = parsed.adminLevel || null;
 				permissions = parsed.permissions || null;
 				displayName = parsed.displayName || '';
+				label = parsed.label || '';
 				expireTime = parsed.expireTime ? new Date(parsed.expireTime*1000) : null;
 			} catch (e) {
 				return res.send({data: false});
@@ -864,6 +865,7 @@ function Streams_request_handler (req, res, next) {
 					instructions: JSON.stringify({
 						token: token,
 						displayName: displayName,
+						label: label,
 						appUrl: appUrl,
 						userId: userId,
 						inviteUrl: inviteUrl,

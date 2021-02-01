@@ -238,6 +238,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$participant->publisherId = $stream->publisherId;
 			$participant->streamName = $stream->name;
 			$participant->userId = $userId;
+			$participant->state = "participating";
 			$participant->subscribed = "yes";
 			if (!$participant->retrieve()) {
 				try {
@@ -258,6 +259,18 @@ class Streams_Invite extends Base_Streams_Invite
 				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
 				'noVisit' => true
 			));
+		}
+
+		// get labels and set
+		// TODO: save labels in table streams_invite
+		$sql = 'SELECT * FROM streams_message where publisherId="'.$userId.'" and streamName="Streams/invited" and byUserId="'.$this->invitingUserId.'" and type="Streams/invite" and instructions like "%'.$this->token.'%"';
+		$db = Db::connect('Streams');
+		$message = $db->rawQuery($sql)->execute()->fetchDbRow();
+		if ($message) {
+			$instructions = json_decode($message->instructions, true);
+			if ($instructions["label"]) {
+				Users_Contact::addContact($stream->publisherId, $instructions["label"], $userId, null, $message->byUserId, true);
+			}
 		}
 
 		return true;

@@ -606,11 +606,7 @@
 				"Streams/chat/message": {
 					"timeout": 10
 				},
-				"Streams/invite": {
-					"persistent": true,
-					"closeable": false,
-					"evenIfNotSubscribed": true
-				}
+				"Streams/invite": true
 			}
 		},
 		"import": {

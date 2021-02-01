@@ -7,7 +7,10 @@
     },
     "labels": {
         "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me"
+        "Streams\/invitedMe": "Who invited me",
+        "AreYouAgree": "Are you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
         "Filter": "What do you enjoy?",

@@ -5528,8 +5528,8 @@ Q.onInit.add(function _Streams_onInit() {
 				return;
 			}
 
-			Q.Text.get(pluginName + '/content', function (err, text) {
-				text = Q.getObject(["notifications", messageType], text);
+			Q.Text.get(pluginName + '/content', function (err, content) {
+				var text = Q.getObject(["notifications", messageType], content);
 				if (!text || typeof text !== 'string') {
 					return console.warn('Streams.notifications.notices: no text for ' + messageType);
 				}
@@ -5544,6 +5544,40 @@ Q.onInit.add(function _Streams_onInit() {
 
 						if (stream.fields.name === 'Streams/invited') {
 							stream.fields.title = message.getInstruction('title');
+						}
+
+						// special behavior for Streams/invite
+						if (messageType === "Streams/invite") {
+							var label = message.getInstruction('label');
+							var inviteUrl = message.getInstruction('inviteUrl');
+							var template = Q.Template.compile(text, 'handlebars');
+							var html = template({
+								app: Q.info.app,
+								info: Q.info,
+								stream: stream,
+								message: message
+							});
+
+							if (label) {
+								if (typeof label === "string") {
+									label = [label];
+								}
+
+								html += " as " + label.join(', ');
+							}
+
+							html += "<br>" + content.labels.AreYouAgree;
+							Q.confirm(html, function (res) {
+								if (!res) {
+									return;
+								}
+
+								Q.handle(inviteUrl);
+							}, {
+								ok: content.labels.Yes,
+								cancel: content.labels.No
+							});
+							return;
 						}
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
