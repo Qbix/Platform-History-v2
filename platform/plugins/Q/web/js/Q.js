@@ -14347,9 +14347,16 @@ Q.Notices = {
 			options.type = 'common';
 			var json = this.getAttribute('data-notice');
 			var o = JSON.parse(json) || {};
+			// turn to boolean
+			Q.each(o, function (i) {
+				if (this === "true") {
+					o[i] = true;
+				} else if (this === "false") {
+					o[i] = false;
+				}
+			});
 			Q.extend(options, o);
 			this.remove(); // need to remove before adding because can be keys conflict
-			delete options.persistent; // this was already set on the server
 			Q.Notices.add(options);
 		});
 	}
