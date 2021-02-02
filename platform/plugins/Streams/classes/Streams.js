@@ -558,14 +558,13 @@ function Streams_request_handler (req, res, next) {
 	if (!parsed || !parsed['Q/method']) {
 		return next();
 	}
-	var participant, stream, msg, posted, streams, deviceId, title, k;
-	var userIds, invitingUserId, username, appUrl, parts, rest, label, myLabel;
+	var participant, msg, posted, streams, k;
+	var userIds, invitingUserId, username, appUrl, label;
 	var readLevel, writeLevel, adminLevel, permissions, displayName, expireTime, logKey;
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
 		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
 	var userId = parsed.userId;
-	var sessionId = parsed.sessionId;
 	switch (parsed['Q/method']) {
 		case 'Streams/Stream/join':
 			participant = new Streams.Participant(JSON.parse(parsed.participant));
@@ -743,6 +742,10 @@ function Streams_request_handler (req, res, next) {
 					// User is already a participant in the stream.
 					return;
 				}
+				var extra = {};
+				if (label) {
+					extra.label = label;
+				}
 				(new Streams.Invite({
 					"userId": userId,
 					"state": "pending",
@@ -755,7 +758,8 @@ function Streams_request_handler (req, res, next) {
 					"writeLevel": writeLevel,
 					"adminLevel": adminLevel,
 					"permissions": permissions,
-					"expireTime": expireTime
+					"expireTime": expireTime,
+					"extra": JSON.stringify(extra)
 				})).save(_inviteSaved);
 			}
 			

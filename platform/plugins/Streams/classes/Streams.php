@@ -3603,7 +3603,7 @@ abstract class Streams extends Base_Streams
 		$expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
-		
+
 		if ($label = Q::ifset($options, 'addLabel', null)) {
 			if (is_string($label)) {
 				$label = explode("\t", $label);
@@ -3694,6 +3694,9 @@ abstract class Streams extends Base_Streams
 			$invite->writeLevel = $writeLevel;
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
+			if ($label) {
+				$invite->extra = compact($label);
+			}
 			$invite->save();
 			$return['invite'] = $invite->exportArray();
 			$return['url'] = $invite->url();

@@ -261,27 +261,14 @@ class Streams_Invite extends Base_Streams_Invite
 			));
 		}
 
-		// get labels and set
-		// TODO: save labels in table streams_invite
-		$sql = 'SELECT * FROM streams_message where publisherId="'.$userId.'" and streamName="Streams/invited" and byUserId="'.$this->invitingUserId.'" and type="Streams/invite" and instructions like "%'.$this->token.'%"';
-		$db = Db::connect('Streams');
-		$message = $db->rawQuery($sql)->execute()->fetchDbRow();
-		if ($message) {
-			$instructions = json_decode($message->instructions, true);
-			if ($instructions["label"]) {
-				Users_Contact::addContact($stream->publisherId, $instructions["label"], $userId, null, $message->byUserId, true);
-			}
+		// if labels exist add contact
+		$extra = Q::json_decode($this->extra ?: '{}', true);
+		if ($label = Q::ifset($extra, "label", null)) {
+			Users_Contact::addContact($stream->publisherId, $label, $userId, null, $this->invitingUserId, true);
 		}
-
 		return true;
 	}
 	
-	function decline()
-	{
-		$this->state = 'declined';
-		$this->save();
-	}
-
 	/**
 	 * Retrieves invite
 	 * @method getInvite
@@ -290,7 +277,6 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @param {boolean} $throwIfMissing
 	 * @return {Streams_Invite|null}
 	 */
-
 	static function fromToken ($token, $throwIfMissing = false) {
 		if (empty($token)) {
 			return null;
