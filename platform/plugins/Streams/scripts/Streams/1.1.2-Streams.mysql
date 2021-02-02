@@ -1,0 +1,1 @@
+ALTER TABLE {{prefix}}invite ADD COLUMN extra varchar(1023) DEFAULT NULL;
