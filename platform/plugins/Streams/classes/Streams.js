@@ -559,12 +559,13 @@ function Streams_request_handler (req, res, next) {
 		return next();
 	}
 	var participant, msg, posted, streams, k;
-	var userIds, invitingUserId, username, appUrl, label;
+	var userIds, invitingUserId, username, appUrl, label, alwaysSend;
 	var readLevel, writeLevel, adminLevel, permissions, displayName, expireTime, logKey;
 	var clientId = parsed["Q.clientId"];
 	var stream = parsed.stream
 		&& Streams.Stream.construct(JSON.parse(parsed.stream), true);
 	var userId = parsed.userId;
+	var participated = false;
 	switch (parsed['Q/method']) {
 		case 'Streams/Stream/join':
 			participant = new Streams.Participant(JSON.parse(parsed.participant));
@@ -677,6 +678,7 @@ function Streams_request_handler (req, res, next) {
 				permissions = parsed.permissions || null;
 				displayName = parsed.displayName || '';
 				label = parsed.label || '';
+				alwaysSend = parsed.alwaysSend || false;
 				expireTime = parsed.expireTime ? new Date(parsed.expireTime*1000) : null;
 			} catch (e) {
 				return res.send({data: false});
@@ -723,12 +725,13 @@ function Streams_request_handler (req, res, next) {
 				"userId": userId
 			})).retrieve(_user);
 			
-			function _user(err, rows) {	
+			function _user(err, rows) {
 				if (!rows || !rows.length) {
 					// User wan't found in the dtabase
 					return;
 				}
 				user = rows[0];
+
 				(new Streams.Participant({
 					"publisherId": stream.fields.publisherId,
 					"streamName": stream.fields.name,
@@ -739,8 +742,13 @@ function Streams_request_handler (req, res, next) {
 			
 			function _participant(err, rows) {
 				if (rows && rows.length) {
-					// User is already a participant in the stream.
-					return;
+					participated = true;
+
+					// if alwaysSend do further
+					if (!alwaysSend) {
+						// User is already a participant in the stream.
+						return;
+					}
 				}
 				var extra = {};
 				if (label) {
@@ -788,15 +796,19 @@ function Streams_request_handler (req, res, next) {
 					Q.log(err);
 					return;
 				}
-				(new Streams.Participant({
-					"publisherId": stream.fields.publisherId,
-					"streamName": stream.fields.name,
-					"streamType": stream.fields.type,
-					"userId": userId,
-					"state": "invited",
-					"reason": ""
-				})).save(true, _participantSaved);
-				
+				if (participated) {
+					_participantSaved();
+				} else {
+					(new Streams.Participant({
+						"publisherId": stream.fields.publisherId,
+						"streamName": stream.fields.name,
+						"streamType": stream.fields.type,
+						"userId": userId,
+						"state": "invited",
+						"reason": ""
+					})).save(true, _participantSaved);
+				}
+
 				// Write some files, if requested
 				// SECURITY: Here we trust the input, which should only be sent internally
 				if (parsed.template) {

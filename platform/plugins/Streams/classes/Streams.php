@@ -3546,8 +3546,10 @@ abstract class Streams extends Base_Streams
 			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 
+		$alwaysSend = Q::ifset($options, 'alwaysSend', false);
+
 		// remove already participating users if alwaysSend=false
-		if (!Q::ifset($options, 'alwaysSend', false)) {
+		if (!$alwaysSend) {
 			$userIds = array_diff($raw_userIds, $alreadyParticipating);
 		}
 
@@ -3640,7 +3642,8 @@ abstract class Streams extends Base_Streams
 			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
-			"label" => $label, 
+			"label" => $label,
+			"alwaysSend" => $alwaysSend,
 			"myLabel" => $myLabel, 
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
