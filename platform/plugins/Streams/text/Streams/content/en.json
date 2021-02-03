@@ -472,6 +472,8 @@
         "ErrorTitle": "Question required"
     },
     "experience": {
-        "NewExperience": "New Experience"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     }
 }

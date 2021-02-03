@@ -337,7 +337,7 @@
 				"create": true,
 				"edit": true,
 				"defaults": {
-					"title": "Untitled experience",
+					"title": "Untitled topic",
 					"icon": "Streams/category"
 				}
 			},

@@ -30,7 +30,7 @@ function Streams_player_tool($options)
 				}
 				return null;
 			}
-			return $strem->content;
+			return $stream->content;
 		case 'Streams/category': // TODO: implement
 		case 'Streams/chat': // TODO: implement
 		case 'Streams/experience': // TODO: implement

@@ -584,7 +584,6 @@ Q.Tool.define({
 	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
 	"Streams/answer/preview": "{{Streams}}/js/tools/answer/preview.js",
 	"Streams/question": "{{Streams}}/js/tools/question.js",
-	"Streams/experience": "{{Streams}}/js/tools/experience.js",
 	"Streams/player": function () {
 		// does nothing
 	},
@@ -595,7 +594,9 @@ Q.Tool.define({
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
 	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
-	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
+	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
+	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
+	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
