@@ -254,17 +254,26 @@ class Streams_Invite extends Base_Streams_Invite
 					// this exception, they could have written this code block themselves.
 				}
 			}
-		} else {
-			$stream->join($userId, $this->publisherId, $this->streamName, array(
-				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
-				'noVisit' => true
-			));
 		}
+
+		$stream->join($userId, $this->publisherId, $this->streamName, array(
+			'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
+			'noVisit' => true
+		));
 
 		// if labels exist add contact
 		$extra = Q::json_decode($this->extra ?: '{}', true);
-		if ($label = Q::ifset($extra, "label", null)) {
-			Users_Contact::addContact($stream->publisherId, $label, $userId, null, $this->invitingUserId, true);
+		$labels = Q::ifset($extra, "label", null);
+		if ($labels) {
+			if (!is_array($labels)) {
+				$labels = array($labels);
+			}
+			$permissions = Users_Label::getPermissions($stream->publisherId, $this->invitingUserId);
+			foreach ($labels as $label) {
+				if (in_array($label, $permissions["canAddRoles"])) {
+					Users_Contact::addContact($stream->publisherId, $label, $userId, null, $this->invitingUserId, true);
+				}
+			}
 		}
 		return true;
 	}
