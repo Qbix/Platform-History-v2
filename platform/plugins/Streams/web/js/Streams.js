@@ -5515,7 +5515,6 @@ Q.onInit.add(function _Streams_onInit() {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
-			var content = message.getInstruction('content');
 			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
@@ -5526,6 +5525,12 @@ Q.onInit.add(function _Streams_onInit() {
 
 			// skip myself messages
 			if (message.byUserId === userId) {
+				return;
+			}
+
+			// skip messages older than 24 hours
+			var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
+			if (timeDiff >= 60*60*24) {
 				return;
 			}
 
@@ -6226,6 +6231,12 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 
 	// only relation type Streams/webrtc and not for myself
 	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
+		return;
+	}
+
+	// skip messages older than 24 hours
+	var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
+	if (timeDiff >= 60*60*24) {
 		return;
 	}
 
