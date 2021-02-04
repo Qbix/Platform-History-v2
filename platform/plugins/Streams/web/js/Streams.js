@@ -5568,6 +5568,15 @@ Q.onInit.add(function _Streams_onInit() {
 								if (typeof label === "string") {
 									label = [label];
 								}
+								// convert labels to readable
+								Q.each(Q.getObject("labels", Users), function (labelKey) {
+									var index = label.indexOf(labelKey);
+									if (index < 0 || !this.title) {
+										return;
+									}
+
+									label[index] = this.title;
+								});
 
 								html += " as " + label.join(', ');
 							}
