@@ -233,7 +233,7 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 		}
 		
-		if (!empty($options['subscribe'])) {
+		if (Q::ifset($options, "subscribe", false)) {
 			$participant = new Streams_Participant();
 			$participant->publisherId = $stream->publisherId;
 			$participant->streamName = $stream->name;
@@ -254,12 +254,12 @@ class Streams_Invite extends Base_Streams_Invite
 					// this exception, they could have written this code block themselves.
 				}
 			}
+		} else {
+			$stream->join($userId, $this->publisherId, $this->streamName, array(
+				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
+				'noVisit' => true
+			));
 		}
-
-		$stream->join($userId, $this->publisherId, $this->streamName, array(
-			'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
-			'noVisit' => true
-		));
 
 		// if labels exist add contact
 		$extra = Q::json_decode($this->extra ?: '{}', true);
