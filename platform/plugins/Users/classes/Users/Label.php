@@ -220,11 +220,13 @@ class Users_Label extends Base_Users_Label
 			'canRemoveRoles' => array(),
 			'canSeeRoles' => array(),
 			'canManageIcon' => false,
-			'canManageEvents' => false
+			'canManageEvents' => false,
+			'canManageMedia' => false
 		);
 		$allLabels = self::ofCommunities();
 		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
 		$labelsCanManageEvents = Q_Config::get("Calendars", "events", "admins", array());
+		$labelsCanManageMedia = Q_Config::get("Media", "access", "feeds", "admins", array());
 		$contacts = Users_Contact::select()->where(array(
 			'userId' => $communityId,
 			'contactUserId' => $userId
@@ -250,6 +252,9 @@ class Users_Label extends Base_Users_Label
 			}
 			if (in_array($c->label, $labelsCanManageEvents)) {
 				$result['canManageEvents'] = true;
+			}
+			if (in_array($c->label, $labelsCanManageMedia)) {
+				$result['canManageMedia'] = true;
 			}
 		}
 
