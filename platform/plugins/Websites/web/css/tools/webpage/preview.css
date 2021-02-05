@@ -62,7 +62,7 @@
 	text-decoration: underline;
 	font-size: 14px;
 }
-.Websites_webpage_preview_tool .Streams_preview_contents {
+.Websites_webpage_preview_tool:not(.Streams_preview_composer) .Streams_preview_contents {
 	width: calc(100% - 60px);
 }
 .Websites_webpage_preview_tool[data-participants] .Streams_preview_contents {
