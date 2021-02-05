@@ -5307,8 +5307,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
-
-                        WebRTCconference.switchTo(Q.Users.communityName, 'meeting5', function (newInstance) {
+                        console.log('WebRTCconference', WebRTCconference)
+                        WebRTCconference.switchTo(Q.Users.communityName, streamName, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
 

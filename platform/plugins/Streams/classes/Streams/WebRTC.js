@@ -233,6 +233,7 @@ WebRTC.listen = function () {
         if ( rtmpUrl != null ) {
             if(_debug) console.log('made sockets connection (LIVE STREAMING)', socket.id);
             var usersInfo = JSON.parse(socket.handshake.query.localInfo);
+            var platform = socket.handshake.query.platform;
             var isAndroid = usersInfo.platform == 'android' ? true : false
 
             var ffmpeg;
@@ -282,8 +283,10 @@ WebRTC.listen = function () {
                 // If FFmpeg stops for any reason, close the WebSocket connection.
                 ffmpeg.on('close', (code, signal) => {
                     console.log('FFmpeg child process closed, code ' + code + ', signal ' + signal);
+                    if (code !== 0) {
+                        socket.emit('Streams/webrtc/liveStreamingStopped', {platform: platform, rtmpUrl: rtmpUrl});
+                    }
                     ffmpeg = null;
-                    //socket.disconnect();
                 });
 
                 // Handle STDIN pipe errors by logging to the console.

@@ -1794,7 +1794,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
                     videoCanvas.style.position = 'absolute';
                     videoCanvas.style.top = '-999999999px';
-                    videoCanvas.style.top = '0';
+                    //videoCanvas.style.top = '0';
                     videoCanvas.style.left = '0';
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
@@ -3543,7 +3543,7 @@ window.WebRTCconferenceLib = function app(options){
 
             var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
-            function connect(streamUrl, callback) {
+            function connect(streamUrl, platform, callback) {
                 if(typeof io == 'undefined') return;
                 log('startStreaming connect');
 
@@ -3551,7 +3551,8 @@ window.WebRTCconferenceLib = function app(options){
                 _streamingSocket = io.connect(options.nodeServer + '/webrtc', {
                     query: {
                         rtmp: streamUrl,
-                        localInfo: JSON.stringify(_localInfo)
+                        localInfo: JSON.stringify(_localInfo),
+                        platform: platform
                     },
                     transports: ['websocket'],
                     'force new connection': true,
@@ -3563,6 +3564,11 @@ window.WebRTCconferenceLib = function app(options){
                 });
                 _streamingSocket.on('connect', function () {
                     if(callback != null) callback();
+                });
+                _streamingSocket.on('Streams/webrtc/liveStreamingStopped', function (e) {
+                    _streamingSocket.disconnect();
+                    _roomInstance.event.dispatch('liveStreamingStopped', e);
+                    _roomInstance.eventBinding.sendDataTrackMessage("liveStreamingEnded", e.platform);
                 });
             }
 
@@ -3608,10 +3614,10 @@ window.WebRTCconferenceLib = function app(options){
 
             }
 
-            function startStreaming(fbStreamUrl) {
+            function startStreaming(fbStreamUrl, service) {
                 log('startStreaming', fbStreamUrl);
 
-                connect(fbStreamUrl, function () {
+                connect(fbStreamUrl, service, function () {
                     log('startStreaming connected');
                     if(!_streamUsingWebRTC) {
                         canvasComposer.captureStream(function (blob) {
@@ -3629,8 +3635,9 @@ window.WebRTCconferenceLib = function app(options){
 
                         _videoStream.timer = setTimeout(timer, 6000);
 
-                        _roomInstance.event.dispatch('facebookLiveStreamingStarted', localParticipant);
-                        _roomInstance.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+                        _roomInstance.event.dispatch('liveStreamingStarted', {participant:localParticipant, platform:service});
+                        _roomInstance.eventBinding.sendDataTrackMessage("liveStreamingStarted", service);
+
                     } else {
                         socket.emit('Streams/webrtc/recording', {url:fbStreamUrl});
                         var getStreamingParticipant = function (streamingParticipant) {
@@ -3670,7 +3677,7 @@ window.WebRTCconferenceLib = function app(options){
                 goLive: function () {
                     log('goLiveDialog goLive');
                 },
-                endStreaming: function () {
+                endStreaming: function (service) {
                     log('endStreaming');
 
                     clearTimeout(_videoStream.timer);
@@ -3682,8 +3689,11 @@ window.WebRTCconferenceLib = function app(options){
 
                     if(_streamingSocket != null) _streamingSocket.disconnect();
                     _streamingSocket = null;
-                    _roomInstance.event.dispatch('facebookLiveStreamingEnded', localParticipant);
-                    _roomInstance.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
+
+
+                    _roomInstance.event.dispatch('liveStreamingEnded', {participant:localParticipant, platform:service});
+                    _roomInstance.eventBinding.sendDataTrackMessage("liveStreamingEnded", service);
+
                 },
                 isStreaming: function () {
                     if(_streamingSocket != null && _streamingSocket.connected) return true;
@@ -3769,7 +3779,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 if(callback != null) callback();
                 app.event.dispatch('videoRecordingStarted', localParticipant);
-                //app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
+                //app.eventBinding.sendDataTrackMessage("liveStreamingStarted");
             }
 
             function stopRecording(callback) {
@@ -3778,7 +3788,7 @@ window.WebRTCconferenceLib = function app(options){
                 canvasComposer.stopRecorder();
                 if(callback != null) callback();
                 app.event.dispatch('videoRecordingStopped', localParticipant);
-                //app.eventBinding.sendDataTrackMessage("facebookLiveStreamingEnded");
+                //app.eventBinding.sendDataTrackMessage("liveStreamingEnded");
             }
 
             return {
@@ -3883,7 +3893,7 @@ window.WebRTCconferenceLib = function app(options){
                         if(_streamingSocket != null) _streamingSocket.disconnect();
                         _streamingSocket = null;
 
-                        //app.event.dispatch('facebookLiveStreamingEnded');
+                        //app.event.dispatch('liveStreamingEnded');
                     },
                     isStreaming: function () {
                         if(_streamingSocket != null && _streamingSocket.connected) return true;
@@ -3909,7 +3919,7 @@ window.WebRTCconferenceLib = function app(options){
 
                             _videoStream.timer = setTimeout(timer, 6000);
 
-                            //app.event.dispatch('facebookLiveStreamingStarted');
+                            //app.event.dispatch('liveStreamingStarted');
                         });
                     }
                 }
@@ -5020,12 +5030,12 @@ window.WebRTCconferenceLib = function app(options){
                     app.event.on('screensharingFailed', screenSharingFailingHandler);
                 }
 
-            } else if(data.type == 'facebookLiveStreamingStarted') {
+            } else if(data.type == 'liveStreamingStarted') {
                 participant.fbLiveStreamingActive = true;
-                app.event.dispatch('facebookLiveStreamingStarted', participant);
-            } else if(data.type == 'facebookLiveStreamingEnded') {
+                app.event.dispatch('liveStreamingStarted', {participant:participant, platform:data});
+            } else if(data.type == 'liveStreamingEnded') {
                 participant.fbLiveStreamingActive = false;
-                app.event.dispatch('facebookLiveStreamingEnded', participant);
+                app.event.dispatch('liveStreamingEnded', {participant:participant, platform:data});
             } else if(data.type == 'online') {
 
                 if(data.content.micIsEnabled != null) participant.remoteMicIsEnabled = data.content.micIsEnabled;
@@ -5171,7 +5181,7 @@ window.WebRTCconferenceLib = function app(options){
             //participant.remove();
             participant.online = false;
             if(participant.fbLiveStreamingActive) {
-                app.event.dispatch('facebookLiveStreamingEnded', participant);
+                app.event.dispatch('liveStreamingEnded', participant);
             }
 
             app.event.dispatch('participantDisconnected', participant);
@@ -5596,7 +5606,7 @@ window.WebRTCconferenceLib = function app(options){
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
                     videoCanvas.style.position = 'absolute';
                     videoCanvas.style.top = '-999999999px';
-                    videoCanvas.style.top = '0';
+                    //videoCanvas.style.top = '0';
                     videoCanvas.style.left = '0';
                     videoCanvas.style.zIndex = '9999999999999999999';
                     videoCanvas.style.backgroundColor = 'transparent';
@@ -5614,7 +5624,7 @@ window.WebRTCconferenceLib = function app(options){
                     frameCanvas.className = "Streams_webrtc_video-stream-canvas";
                     frameCanvas.style.position = 'absolute';
                     frameCanvas.style.top = '-999999999px';
-                    frameCanvas.style.top = '0';
+                    //frameCanvas.style.top = '0';
                     frameCanvas.style.left = '0';
                     frameCanvas.style.zIndex = '9999999999999999999';
                     frameCanvas.width = width;
@@ -5994,8 +6004,8 @@ window.WebRTCconferenceLib = function app(options){
                     participant.dataTrack = dataChannel;
                     var sendInitialData = function(){
                         if(app.screensInterface.fbLive.isStreaming()) {
-                            //app.eventBinding.sendDataTrackMessage("facebookLiveStreamingStarted");
-                            dataChannel.send(JSON.stringify({type:"facebookLiveStreamingStarted"}));
+                            //app.eventBinding.sendDataTrackMessage("liveStreamingStarted");
+                            dataChannel.send(JSON.stringify({type:"liveStreamingStarted"}));
                         }
 
                         var screensharingTracks = localParticipant.tracks.filter(function(t){
@@ -8141,7 +8151,7 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         function joinRoom(streams, mediaDevicesList) {
-            log('initOrConnectWithNodeJs: joinRoom');
+            log('app.screensInterface.fbLive.streamingParticipant().connection: joinRoom');
             app.eventBinding.socketRoomJoined((streams != null ? streams : []));
             if(mediaDevicesList != null) app.conferenceControl.loadDevicesList(mediaDevicesList);
             app.event.dispatch('joined', localParticipant);
@@ -8982,13 +8992,13 @@ window.WebRTCconferenceLib = function app(options){
         }
     }
 
-    app.switchRoom = function(publisherId, streamName, callback){
-        console.log('app.switchRoom')
+    app.switchTo = function(publisherId, streamName, callback){
+        console.log('app.switchTo')
         app.screensInterface.canvasComposer.videoComposer.switchingRoom(true);
         var currentStreams = localParticipant.tracks.map(function (track) {
             return track.stream.clone();
         })
-        console.log('app.switchRoom: currentStreams', options.roomName, localParticipant.sid)
+        console.log('app.switchTo: currentStreams', options.roomName, localParticipant.sid)
         var prevLocalParticipant = localParticipant.sid;
         var prevRoomId = options.roomName;
 
@@ -8997,7 +9007,7 @@ window.WebRTCconferenceLib = function app(options){
         initOptions.roomPublisher = publisherId;
         initOptions.streams = currentStreams;
         let streamingParticipant = app.screensInterface.fbLive.streamingParticipant();
-        initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.screensInterface.fbLive.streamingParticipant().connection};
+        initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.screensInterface.fbLive.streamingParticipant() != null ? app.screensInterface.fbLive.streamingParticipant().connection : null};
         initOptions.startWith = {
             audio:app.conferenceControl.micIsEnabled() ? true : false,
             video:app.conferenceControl.cameraIsEnabled() || app.conferenceControl.screensharingIsEnabled() ? true : false
