@@ -268,10 +268,13 @@ class Streams_Invite extends Base_Streams_Invite
 			if (!is_array($labels)) {
 				$labels = array($labels);
 			}
-			$permissions = Users_Label::getPermissions($stream->publisherId, $this->invitingUserId);
+			$can = Users_Label::can($stream->publisherId, $this->invitingUserId);
 			foreach ($labels as $label) {
-				if (in_array($label, $permissions["canAddRoles"])) {
-					Users_Contact::addContact($stream->publisherId, $label, $userId, null, $this->invitingUserId, true);
+				if (in_array($label, $can["add"])) {
+					Users_Contact::addContact(
+						$stream->publisherId, $label, $userId, 
+						null, $this->invitingUserId, true
+					);
 				}
 			}
 		}

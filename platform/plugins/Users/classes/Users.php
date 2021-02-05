@@ -132,7 +132,6 @@ abstract class Users extends Base_Users
 	 * @param {array} [$options=array()] Any additional options to pass to the query, such as "ignoreCache"
 	 * @param {string} [$userId=null] If not passed, the logged in user is used, if any
 	 * @return {array} An associative array of $roleName => $contactRow pairs
-	 * @throws {Users_Exception_NotLoggedIn}
 	 */
 	static function roles(
 		$publisherId = null,
