@@ -161,7 +161,10 @@
 	"Streams/labels": {
 		"type": "Streams/resource",
 		"title": "Labels",
-		"icon": ""
+		"icon": "",
+		"attributes": {
+			"prefixes": ["Users/", "Streams/"]
+		}
 	},
 	"Streams/user/interests": {
 		"type": "Streams/category",
