@@ -603,6 +603,7 @@
 			"onlyIfAllClientsOffline": true,
 			"debug": true,
 			"notices": {
+				"expired": 86400, /* skip messages posted more than seconds ago */
 				"Streams/chat/message": {
 					"timeout": 10
 				},

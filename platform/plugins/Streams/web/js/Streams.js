@@ -5530,7 +5530,7 @@ Q.onInit.add(function _Streams_onInit() {
 
 			// skip messages older than 24 hours
 			var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
-			if (timeDiff >= 60*60*24) {
+			if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
 				return;
 			}
 
@@ -6245,7 +6245,7 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 
 	// skip messages older than 24 hours
 	var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
-	if (timeDiff >= 60*60*24) {
+	if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
 		return;
 	}
 
