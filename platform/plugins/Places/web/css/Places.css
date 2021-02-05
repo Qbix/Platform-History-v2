@@ -179,14 +179,13 @@
 	display: none;
 	font-size: 12px;
     text-indent: 2px;
-    overflow: auto;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
 .Places_address_tool input {
     font-size: 16px;
-    max-width: 200px;
     overflow: hidden;
     background: white;
     padding: 8px;

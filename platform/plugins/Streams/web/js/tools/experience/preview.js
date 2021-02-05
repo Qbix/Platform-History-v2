@@ -1,109 +1,97 @@
 (function (Q, $, window, undefined) {
 
 var Streams = Q.Streams;
+
 /**
  * @module Streams-tools
  */
 
 /**
- * Compose or play Streams/experience related stream.
- * @class Streams experience
+ * Compose or play Streams/topic stream.
+ * @class Streams topic
  * @constructor
  * @param {Object} [options] any options for the tool
- * @param {Object} [options.category] The main category where to experience categories related
- * @param {String} [options.category.publisherId=Q.Users.communityId]
- * @param {String} [options.category.streamName="Streams/experience/main"]
- * @param {String} [options.category.relationType="Streams/topic"]
  * @param {String} [options.publisherId] User id on whose behalf related streams will be created. Logged in user by default.
- * @param {String} [options.streamName] Name of category to relate streams to.
- * @param {Boolean} [options.moveNext=true] define how people move to next step:
- * 		If true - need to finish current before going next,
- * 		if numeric - force to go next after this number seconds.
- * @param {Boolean} [options.automatic=true] means people advance to the next one at a given time
+ * @param {object} [options.streamTypes]
  */
-Q.Tool.define("Streams/experience", function(options) {
+Q.Tool.define("Streams/topic/preview", "Streams/preview", function (options, preview) {
 	var tool = this;
+	tool.preview = preview;
+	var previewState = preview.state;
 	var state = tool.state;
-	var category = state.category;
-	var composerRelationType = category.relationType + "/composer";
 
-	if (!state.publisherId) {
-		throw new Q.Error("Streams/experience: publisherId required");
+	if (previewState.related) {
+		state.category = previewState.related;
+	}
+	state.category.composerRelationType = state.category.type + "/composer";
+
+	if (previewState.creatable) {
+		// rewrite Streams/preview composer
+		previewState.creatable.preprocess = function (_proceed) {
+			tool.composer(_proceed);
+			return false;
+		};
 	}
 
-	var pipe = new Q.pipe(["style", "text", "stream"], function () {
-		if (state.streamName) {
-			tool.play();
-		} else {
-			tool.composer();
-		}
+	preview.state.onRefresh.add(this.refresh.bind(this));
+
+	var pipe = new Q.pipe(["style", "text"], function () {
+
 	});
 
-	if (state.streamName) {
-		Streams.get(state.publisherId, state.streamName, function (err) {
-			if (err) {
-				return;
-			}
+	var textsToLoad = [];
+	Q.each(state.streamTypes, function (type) {
+		var textPath = type.split('/')[0] + "/content";
+		if (textsToLoad.indexOf(textPath) >= 0) {
+			return;
+		}
 
-			tool.stream = this;
-			pipe.fill("stream")();
-		});
-	} else {
-		// get current category
-		Streams.related(category.publisherId, category.streamName, composerRelationType, true, function (err) {
-			if (err) {
-				return;
-			}
-
-			var relatedStreams = this.relatedStreams;
-
-			// if no composer stream, create one
-			if (Q.isEmpty(relatedStreams)) {
-				Streams.create({
-					publisherId: state.publisherId,
-					type: 'Streams/topic',
-					title: 'Untitled experience'
-				}, function (err) {
-					if (err) {
-						return;
-					}
-
-					tool.stream = this;
-					pipe.fill("stream")();
-				}, {
-					publisherId: category.publisherId,
-					streamName: category.streamName,
-					type: composerRelationType,
-					weight: Math.round(Date.now() / 1000)
-				});
-			} else {
-				tool.stream = relatedStreams[Object.keys(relatedStreams)[0]];
-				pipe.fill("stream")();
-			}
-		});
-	}
-
-	Q.Text.get("Streams/content", function (err, content) {
+		textsToLoad.push(textPath);
+	});
+	Q.Text.get(textsToLoad, function (err, content) {
 		if (err) {
 			return;
 		}
+
+		// update streamTypes with titles
+		Q.each(content.types, function (type) {
+			if (!state.streamTypes[type]) {
+				return;
+			}
+
+			state.streamTypes[type]["title"] = this.displayType;
+		})
 
 		tool.text = content;
 		pipe.fill("text")();
 	});
 	Q.addStylesheet('{{Streams}}/css/tools/experience.css', { slotName: 'Streams' }, pipe.fill("style"));
 
+	// only for exist streams set onFieldChanged event - which refresh tool
+	if (previewState.streamName) {
+		// set edit action
+		previewState.actions.actions = previewState.actions.actions || {};
+
+		Streams.retainWith(true).get(previewState.publisherId, previewState.streamName, function (err) {
+			if (err) {
+				return;
+			}
+
+			if (previewState.editable && this.testWriteLevel('edit')) {
+				tool.stream = this;
+				previewState.actions.actions.edit = tool.editor.bind(tool);
+				//preview.actions();
+			}
+		});
+	}
 },
 
 {
-	publisherId: Q.Users.loggedInUserId(),
-	streamName: null,
 	category: {
-		publisherId: Q.Users.communityId,
+		publisherId: Q.Users.currentCommunityId,
 		streamName: "Streams/experience/main",
-		relationType: "Streams/topic"
+		type: "Streams/topic"
 	},
-	moveNext: true,
 	streamTypes: {
 		"Streams/video": {
 			icon: "{{Streams}}/img/icons/Streams/video/40.png"
@@ -130,14 +118,65 @@ Q.Tool.define("Streams/experience", function(options) {
 },
 
 {
+	refresh: function () {
+		$(this.element).tool("Streams/default/preview").activate();
+	},
 	composer: function () {
 		var tool = this;
 		var state = this.state;
-		var $toolElement = $(this.element);
-		var relationType = state.category.relationType;
+		var category = state.category;
+		var publisherId = Q.Users.loggedInUserId();
+
+		if (!publisherId) {
+			return Q.Users.login();
+		}
+
+		Q.prompt(null, function (title) {
+			if (!title) {
+				return;
+			}
+
+			Streams.create({
+				publisherId: publisherId,
+				type: "Streams/topic",
+				title: title
+			}, function (err) {
+				if (err) {
+					return;
+				}
+
+				tool.stream = this;
+				tool.editor();
+			}, {
+				publisherId: category.publisherId,
+				streamName: category.streamName,
+				type: category.type,
+				weight: Math.round(Date.now() / 1000)
+			});
+		}, {
+			title: tool.text.experience.NewExperience,
+			placeholder: tool.text.experience.DefineTitlem,
+			maxlength: 255,
+			className: "Streams_experience_title"
+		});
+	},
+	editor: function () {
+		var tool = this;
+		var state = this.state;
+		var category = state.category;
+		var stream = this.stream;
+
+		// get topics category first
+		if (!tool.stream) {
+			return tool.getComposerStream(function () {
+				tool.composer(_proceed);
+			});
+		}
+
+		var relationType = category.type;
 
 		Q.invoke({
-			title: tool.text.NewExperience,
+			title: stream.fields.title,
 			className: "Streams_experience_invoke",
 			content: Q.Tool.setUpElement('div', 'Streams/related', {
 				publisherId: tool.stream.fields.publisherId,
@@ -146,25 +185,26 @@ Q.Tool.define("Streams/experience", function(options) {
 				editable: false,
 				closeable: true,
 				realtime: true,
-				sortable: false
+				sortable: false,
+				creatable: state.streamTypes
 			}),
 			trigger: tool.element,
 			callback: function (content) {
 				var relatedTool = Q.Tool.from($(".Streams_related_tool", content), "Streams/related");
 
-				$("<div class='Streams_experience_composer'>+</div>").appendTo(relatedTool.element).plugin('Q/contextual', {
+				/*$("<div class='Streams_experience_composer'>+</div>").appendTo(relatedTool.element).plugin('Q/contextual', {
 					className: "Streams_experience_addons",
 					onConstruct: function (contextual) {
 						tool.contextual = contextual;
 
 						Q.each(state.streamTypes, function (type, info) {
 							tool.addContextual({
-								title: type,
+								title: Q.getObject(["types", type, "displayType"], tool.text) || type,
 								icon: info.icon,
 								className: "Streams_experience_contextual",
 								handler: function () {
 									$("<div>").hide().appendTo(content).tool("Streams/preview", {
-										publisherId: state.publisherId,
+										publisherId: publisherId,
 										closeable: false,
 										editable: false,
 										related: {
@@ -186,7 +226,7 @@ Q.Tool.define("Streams/experience", function(options) {
 							});
 						});
 					}
-				});
+				});*/
 			}
 		});
 	},

@@ -115,6 +115,10 @@ function _Streams_default_preview(options, preview) {
 					Q.handle(state.onRender, tool);
 					var inplace = tool.child('Streams_inplace');
 					if (!inplace) {
+						stream.onFieldChanged("title").set(function (modFields, field) {
+							tool.$(".Streams_preview_title").html(modFields[field]);
+						}, tool);
+
 						return p.fill('inplace').apply(this, arguments);
 					}
 					inplace.state.onLoad.add(function () {

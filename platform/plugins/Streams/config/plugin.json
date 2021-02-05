@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Streams": {
-				"version": "1.1.1",
+				"version": "1.1.2",
 				"compatible": "0.9",
 				"requires": {"Users": "1.0.4"},
 				"permissions": ["Streams/icons"],
@@ -337,7 +337,7 @@
 				"create": true,
 				"edit": true,
 				"defaults": {
-					"title": "Untitled experience",
+					"title": "Untitled topic",
 					"icon": "Streams/category"
 				}
 			},
@@ -603,14 +603,11 @@
 			"onlyIfAllClientsOffline": true,
 			"debug": true,
 			"notices": {
+				"expired": 86400, /* skip messages posted more than seconds ago */
 				"Streams/chat/message": {
 					"timeout": 10
 				},
-				"Streams/invite": {
-					"persistent": true,
-					"closeable": false,
-					"evenIfNotSubscribed": true
-				}
+				"Streams/invite": true
 			}
 		},
 		"import": {

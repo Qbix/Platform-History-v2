@@ -64,6 +64,9 @@
 				// indicator of payment process started
 				var paymentStarted = false;
 
+				// load payment lib and set required params
+				Assets.Payments.load();
+
 				Q.Dialogs.push({
 					title: title,
 					className: "Assets_credits_buy",
@@ -512,11 +515,11 @@
 			 *  @param {Function} [callback]
 			 */
 			load: Q.getter(function (callback) {
-				Q.addScript(Q.Assets.Payments.stripe.jsLibrary, function () {
-					Stripe.setPublishableKey(Q.Assets.Payments.stripe.publishableKey);
+				Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
+					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
 					Stripe.applePay.checkAvailability(function (available) {
-						Q.Assets.Payments.stripe.applePayAvailable = available;
-						Q.Assets.Payments.loaded = true;
+						Assets.Payments.stripe.applePayAvailable = available;
+						Assets.Payments.loaded = true;
 						Q.handle(callback);
 					});
 				});
@@ -1112,7 +1115,7 @@
 			var scheme = params.get('scheme');
 
 			// need Stripe lib for safari browserTab
-			Q.Assets.Payments.load(function () {
+			Assets.Payments.load(function () {
 				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
 					var $button = $('#browsertab_pay');
 					var $info = $('#browsertab_pay_info');
@@ -1120,7 +1123,7 @@
 					var $error = $('#browsertab_pay_error');
 					$button.show();
 					$button.on('click', function() {
-						Q.Assets.Payments.stripe(paymentOptions, function(err, res) {
+						Assets.Payments.stripe(paymentOptions, function(err, res) {
 							$button.hide();
 							if (err && err.code === 20) {
 								$cancel.show();
@@ -1134,7 +1137,7 @@
 						});
 					});
 				} else {
-					Q.Assets.Payments.stripe(paymentOptions, function () {
+					Assets.Payments.stripe(paymentOptions, function () {
 						if (scheme) {
 							location.href = scheme;
 						} else {

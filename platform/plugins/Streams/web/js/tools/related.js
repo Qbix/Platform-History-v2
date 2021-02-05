@@ -60,8 +60,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
 	state.streamName = state.streamName || state.stream.fields.name;
 	
-	state.refreshCount = 0;
-
 	// save first value of relatedOptions.limit to use it to load more streams
 	state.loadMore = Q.getObject("relatedOptions.limit", state);
 
@@ -169,27 +167,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				}
 			}
 			Q.activate(element, function () {
-				var rc = tool.state.refreshCount;
 				var preview = Q.Tool.from(element, 'Streams/preview');
-				var ps = preview.state;
+				var previewState = preview.state;
 				tool.integrateWithTabs([element], true);
-				preview.state.beforeCreate.set(function () {
-					// workaround for now
-					if (tool.state.refreshCount > rc) {
-						return;
-					}
-					$(this.element)
-						.addClass('Streams_related_loading')
-						.removeClass('Streams_related_composer');
-					addComposer(streamType, params, null, element);
-					ps.beforeCreate.remove(tool);
+				previewState.beforeCreate.set(function () {
+					$(this.element).addClass('Streams_related_loading').removeClass('Streams_related_composer');
+					previewState.beforeCreate.remove(tool);
 				}, tool);
-				preview.state.onCreate.set(function () {
-					$(this.element)
-						.removeClass('Streams_related_loading')
-						.removeClass('Streams_related_composer')
-						.addClass('Streams_related_stream');
-					ps.onCreate.remove(tool);
+				previewState.onCreate.set(function () {
+					addComposer(streamType, params, null, element);
+					Q.Tool.remove(this.element, true, true);
 				}, tool);
 				Q.handle(state.onComposer, tool, [preview]);
 			});
@@ -203,12 +190,14 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (isTabs) {
 			$container = $te.find('.Q_tabs_tabs');
 		}
-		++state.refreshCount;
 
 		var ascending = Q.getObject("ascending", state.relatedOptions) || false;
 
 		if (result.stream.testWriteLevel('relate')) {
-			Q.each(state.creatable, addComposer);
+			if (!state.composersCreated) {
+				Q.each(state.creatable, addComposer);
+				state.composersCreated = true;
+			}
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
 				if (state.realtime) {
 					alert("Streams/related: can't mix realtime and sortable options yet");

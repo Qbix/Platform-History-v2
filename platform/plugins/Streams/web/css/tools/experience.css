@@ -1,4 +1,4 @@
-.Streams_experience_tool .Streams_experience_composer,
+.Streams_topic_preview_tool .Streams_experience_composer,
 .Streams_experience_invoke .Streams_experience_composer {
     overflow: hidden;
     border-radius: 5px;
@@ -33,9 +33,17 @@
     min-width: 300px;
     min-height: 200px;
 }
+.Streams_experience_invoke .Q_dialog_content {
+    overflow-x: hidden;
+    padding: 5px 5px 10px 5px;
+}
 .Streams_experience_invoke .Streams_related_tool .Streams_preview_tool {
     width: 100%;
     text-align: left;
+}
+.Streams_experience_invoke .Streams_related_tool .Streams_video_preview_tool.Streams_preview_composer {
+    border-top: 1px solid black;
+    margin-top: 20px;
 }
 .Streams_experience_invoke .Streams_related_tool .Streams_preview_tool .Streams_image_preview_title {
     display: inline-block;

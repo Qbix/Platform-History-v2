@@ -32,6 +32,30 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 			Q.handle(state.onInvoke, tool);
 		});
 	}
+
+	if (tool.element.parentNode) {
+		// observe dom elements for mutation
+		tool.domObserver = new MutationObserver(function (mutations) {
+			mutations.forEach(function(mutation) {
+				if (mutation.type !== 'childList' || Q.isEmpty(mutation.removedNodes)) {
+					return;
+				}
+
+				mutation.removedNodes.forEach(function(removedElement) {
+					if (removedElement.id === tool.element.id) {
+						if (tool.$answersRelated && tool.$answersRelated.length) {
+							// remove answers related tool
+							Q.Tool.remove(tool.$answersRelated[0], true, true);
+						}
+
+						tool.domObserver.disconnect();
+					}
+				});
+			});
+		});
+		tool.domObserver.observe(tool.element.parentNode, {childList: true});
+	}
+
 },
 
 {
@@ -59,8 +83,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				return console.warn("Streams/question/preview: previewContainer not found");
 			}
 
-			var $answersRelated = $("<div>").insertAfter($toolElement);
-			$answersRelated.tool("Streams/related", {
+			tool.$answersRelated = $("<div>").insertAfter($toolElement);
+			tool.$answersRelated.tool("Streams/related", {
 				publisherId: publisherId,
 				streamName: streamName,
 				relationType: "Streams/answer",
@@ -98,7 +122,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 						}
 					}
 
-					var composerTool = Q.Tool.from($(".Streams_preview_composer", $answersRelated), "Streams/preview");
+					var composerTool = Q.Tool.from($(".Streams_preview_composer", tool.$answersRelated), "Streams/preview");
 					composerTool.create(event);
 				});
 			});

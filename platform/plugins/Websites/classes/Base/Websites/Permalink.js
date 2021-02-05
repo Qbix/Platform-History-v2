@@ -396,7 +396,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["datetime","255","",false],true,"",null];
+return [["timestamp","255","",false],true,"",null];
 };
 
 Base.prototype.beforeSave = function (value) {

@@ -2311,11 +2311,8 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		if ($isCategory) {
-			if (empty($options['orderBy'])) {
-				$query = $query->orderBy('weight', false);
-			} else if ($options['orderBy'] === true) {
-				$query = $query->orderBy('weight', true);
-			}
+			$query = $query->orderBy('weight', Q::ifset($options, "orderBy", false));
+
 			if (!empty($options['weight'])) {
 				$query = $query->andWhere(array('weight' => $options['weight']));
 			}
@@ -2352,8 +2349,15 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
 		}
 
-		$min = isset($options['min']) ? $options['min'] : null;
-		$max = isset($options['max']) ? $options['max'] : null;
+		$min = null;
+		if (isset($options['min'])) {
+			$min = is_numeric($options['min']) ?: strtotime($options['min']);
+		}
+
+		$max = null;
+		if (isset($options['max'])) {
+			$max = is_numeric($options['max']) ?: strtotime($options['max']);
+		}
 		if (isset($min) or isset($max)) {
 			$range = new Db_Range($min, true, true, $max);
 			$query = $query->where(array('weight' => $range));
@@ -2852,7 +2856,10 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
-			$updateFields = compact('state');
+			$updateFields = array(
+				"state" => $state,
+				"subscribed" => "no"
+			);
 			if (isset($extra)) {
 				$updateFields['extra'] = $extra;
 			}
@@ -3539,8 +3546,10 @@ abstract class Streams extends Base_Streams
 			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 
+		$alwaysSend = Q::ifset($options, 'alwaysSend', false);
+
 		// remove already participating users if alwaysSend=false
-		if (!Q::ifset($options, 'alwaysSend', false)) {
+		if (!$alwaysSend) {
 			$userIds = array_diff($raw_userIds, $alreadyParticipating);
 		}
 
@@ -3596,7 +3605,7 @@ abstract class Streams extends Base_Streams
 		$expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
-		
+
 		if ($label = Q::ifset($options, 'addLabel', null)) {
 			if (is_string($label)) {
 				$label = explode("\t", $label);
@@ -3615,10 +3624,6 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
-			if ($label) {
-				$label2 = Q::isAssociative($label) ? array_keys($label) : $label;
-				Users_Contact::addContact($publisherId, $label2, $userId, null, $asUserId2, true);
-			}
 			if ($myLabel) {
 				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
@@ -3637,7 +3642,8 @@ abstract class Streams extends Base_Streams
 			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
-			"label" => $label, 
+			"label" => $label,
+			"alwaysSend" => $alwaysSend,
 			"myLabel" => $myLabel, 
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
@@ -3691,6 +3697,9 @@ abstract class Streams extends Base_Streams
 			$invite->writeLevel = $writeLevel;
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
+			if ($label) {
+				$invite->extra = compact($label);
+			}
 			$invite->save();
 			$return['invite'] = $invite->exportArray();
 			$return['url'] = $invite->url();

@@ -17,3 +17,11 @@
 	height: 54px;
 	line-height: 54px;
 }
+.Places_areas_tool .Q_filter_notFullscreen .Q_filter_results {
+	overflow: hidden;
+}
+.Q_prompt.Places_area_title .Q_buttons button.Q_button,
+.Q_prompt.Places_area_title .Q_buttons input {
+	min-height: 40px;
+	box-sizing: border-box;
+}

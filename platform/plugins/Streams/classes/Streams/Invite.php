@@ -233,8 +233,14 @@ class Streams_Invite extends Base_Streams_Invite
 			}
 		}
 		
-		if (!empty($options['subscribe'])) {
-			if (!$stream->subscription($userId)) {
+		if (Q::ifset($options, "subscribe", false)) {
+			$participant = new Streams_Participant();
+			$participant->publisherId = $stream->publisherId;
+			$participant->streamName = $stream->name;
+			$participant->userId = $userId;
+			$participant->state = "participating";
+			$participant->subscribed = "yes";
+			if (!$participant->retrieve()) {
 				try {
 					$extra = Q::ifset($options, 'extra', array());
 					$configExtra = Streams_Stream::getConfigField($stream->type, array(
@@ -255,15 +261,23 @@ class Streams_Invite extends Base_Streams_Invite
 			));
 		}
 
+		// if labels exist add contact
+		$extra = Q::json_decode($this->extra ?: '{}', true);
+		$labels = Q::ifset($extra, "label", null);
+		if ($labels) {
+			if (!is_array($labels)) {
+				$labels = array($labels);
+			}
+			$permissions = Users_Label::getPermissions($stream->publisherId, $this->invitingUserId);
+			foreach ($labels as $label) {
+				if (in_array($label, $permissions["canAddRoles"])) {
+					Users_Contact::addContact($stream->publisherId, $label, $userId, null, $this->invitingUserId, true);
+				}
+			}
+		}
 		return true;
 	}
 	
-	function decline()
-	{
-		$this->state = 'declined';
-		$this->save();
-	}
-
 	/**
 	 * Retrieves invite
 	 * @method getInvite
@@ -272,7 +286,6 @@ class Streams_Invite extends Base_Streams_Invite
 	 * @param {boolean} $throwIfMissing
 	 * @return {Streams_Invite|null}
 	 */
-
 	static function fromToken ($token, $throwIfMissing = false) {
 		if (empty($token)) {
 			return null;

@@ -8842,7 +8842,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		_reject && _reject();
+		Q.handle(_reject);
 	};
 	return promise;
 
@@ -8851,25 +8851,25 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return; // this loadUrl call was canceled
 		}
 		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return; // a newer request was sent
 		}
-		if (err) {
-			_reject && _reject()
+		if (!Q.isEmpty(err)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
 		}
-		if (!response) {
-			_reject && _reject()
+		if (Q.isEmpty(response)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, ["Response is empty", response]);
 		}
-		if (response.errors) {
-			_reject && _reject()
+		if (!Q.isEmpty(response.errors)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		
 		if (redirected) {
-			_reject && _reject();
+			Q.handle(_reject);
 			return;
 		}
 		
@@ -12735,6 +12735,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
+ * @param {String} [options.className] additional class name added to dialog element
  * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
@@ -12756,6 +12757,8 @@ Q.prompt = function(message, callback, options) {
 	if (o.initialText) {
 		attr.value = o.initialText;
 	}
+
+	options.className = 'Q_prompt ' + (options.className || '');
 	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
@@ -12765,7 +12768,6 @@ Q.prompt = function(message, callback, options) {
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
-		'className': 'Q_prompt',
 		'onActivate': function(dialog) {
 			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
@@ -13263,11 +13265,8 @@ Q.Masks = {
 		key = Q.calculateKey(key);
 		var mask;
 		if (key in Q.Masks.collection) {
-			mask = Q.Masks.collection[key];
-			if (options && options.zIndex) {
-				mask.element.style.zIndex = options.zIndex;
-			}
-			return mask;
+			Q.Masks.collection[key].element.remove();
+			delete Q.Masks.collection[key];
 		}
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
@@ -14348,9 +14347,16 @@ Q.Notices = {
 			options.type = 'common';
 			var json = this.getAttribute('data-notice');
 			var o = JSON.parse(json) || {};
+			// turn to boolean
+			Q.each(o, function (i) {
+				if (this === "true") {
+					o[i] = true;
+				} else if (this === "false") {
+					o[i] = false;
+				}
+			});
 			Q.extend(options, o);
 			this.remove(); // need to remove before adding because can be keys conflict
-			delete options.persistent; // this was already set on the server
 			Q.Notices.add(options);
 		});
 	}

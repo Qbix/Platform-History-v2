@@ -479,7 +479,7 @@ Q.Tool.define("Q/audio", function (options) {
 	 */
 	getCurrentPosition: function () {
 		var adapterName = this.adapterNameFromUrl();
-		this.adapters[adapterName].getCurrentPosition();
+		return this.adapters[adapterName].getCurrentPosition();
 	},
 	/**
 	 * @method userGesture

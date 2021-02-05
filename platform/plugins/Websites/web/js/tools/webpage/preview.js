@@ -151,14 +151,21 @@
 					$te.removeClass('Streams_chat_preview_noParticipants');
 				}
 
-				var icon = webpageStream.getAttribute("iconBig");
-				if (!icon) {
-					icon = webpageStream.fields.icon;
-					if (!icon.match(/\.[a-z]{3,4}$/i)) {
-						icon = webpageStream.iconUrl('80');
+				var iconBig = webpageStream.getAttribute("iconBig");
+				if (!iconBig) {
+					iconBig = webpageStream.fields.icon;
+					if (!iconBig.match(/\.[a-z]{3,4}$/i)) {
+						iconBig = webpageStream.iconUrl('80');
 					}
 				}
 
+				var iconSmall = null;
+				if (Q.Streams.isStream(interestStream)) {
+					iconSmall = interestStream.fields.icon;
+					if (!iconSmall.match(/\.[a-z]{3,4}$/i)) {
+						iconSmall = interestStream.iconUrl(interestStream.getAttribute('iconSize') || 40);
+					}
+				}
 
 				Q.Template.render('Websites/webpage/preview', {
 					title: state.editable && state.editable.indexOf('title') >= 0
@@ -176,9 +183,9 @@
 					}) : webpageStream.fields.content,
 					interest: {
 						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
-						icon: Q.Streams.isStream(interestStream) ? interestStream.iconUrl(interestStream.getAttribute('iconSize')) : null,
+						icon: iconSmall,
 					},
-					src: icon,
+					src: iconBig,
 					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {
