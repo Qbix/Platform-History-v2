@@ -96,7 +96,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
 
 				// skip duplicated (same offsets) requests
-				if (this.state.offset && this.state.offset >= offset) {
+				if (!isNaN(this.state.offset) && this.state.offset >= offset) {
 					return;
 				}
 
