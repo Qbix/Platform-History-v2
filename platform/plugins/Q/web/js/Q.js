@@ -2394,6 +2394,22 @@ Q.preventRecursion = function (name, original, defaultValue) {
 };
 
 /**
+ * Open url in new tab if cordova browsertabs plugin exist or new window otherwise.
+ * @static
+ * @method openUrl
+ * @param {String} url
+ * @param {String} [name=_blank] new window name
+ */
+Q.openUrl = function (url, name = "_blank") {
+	var browsertab = Q.getObject("cordova.plugins.browsertabs");
+	if (browsertab) {
+		browsertab.openUrl(url);
+	} else {
+		window.open(url, name).focus();
+	}
+};
+
+/**
  * Wraps a callable in a Q.Event object
  * @class Q.Event
  * @namespace Q

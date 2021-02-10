@@ -224,6 +224,9 @@ body.Q_preventScroll {
 .Q_prompt .Q_dialog_content {
 	text-align: center;
 }
+.Q_confirm .Q_dialog_content p:empty {
+	display: none;
+}
 .Q_prompt .Q_big_prompt p:empty {
 	display: none;
 }
