@@ -212,7 +212,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		},
 		beforeRemove: function () {
-
+			if (this.addonsContextual) {
+				this.addonsContextual.plugin("Q/contextual").remove();
+			}
 		}
 	},
 	/**
@@ -227,7 +229,8 @@ Q.Tool.define('Streams/chat', function(options) {
 	 */
 	seen: function (value) {
 		var state = this.state;
-		if (state.seen = value) {
+		state.seen = value;
+		if (value) {
 			Q.Streams.Message.Total.seen(
 				state.publisherId, 
 				state.streamName, 
@@ -319,8 +322,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
 						className: "Streams_chat_addons",
-						onConstruct: function (contextual) {
-							tool.addonsContextual = contextual;
+						onConstruct: function (contextual, cid) {
+							tool.addonsContextual = this;
 							Q.handle(state.onContextualCreated, tool, [contextual]);
 						}
 					});
