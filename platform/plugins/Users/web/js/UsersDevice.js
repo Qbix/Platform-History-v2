@@ -65,7 +65,7 @@
 						// but the device not subscribed, then just subscribe device without any confirmation dialog
 						if (granted === true || requested === true) {
 							return adapter.subscribe(function (err, subscribed) {
-								console.log('Users.Device: User is subscribed.');
+								console.log('Users.Device: Device is subscribed.');
 								Q.handle(Users.Device.onSubscribe, Users.Device, [options, granted, subscribed]);
 								Q.handle(callback, null, [err, subscribed]);
 							}, options);
