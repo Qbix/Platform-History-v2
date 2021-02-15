@@ -367,6 +367,9 @@ abstract class Streams extends Base_Streams
 			$options = $fields;
 			$fields = '*';
 		}
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
 		$allCached = array();
 		if (empty($options['refetch']) and (is_array($name) or is_string($name))) {
 			$arr = is_array($name) ? $name : array($name);
@@ -380,9 +383,6 @@ abstract class Streams extends Base_Streams
 			}
 		} else {
 			$namesToFetch = $name;
-		}
-		if ($fields === '*') {
-			$fields = join(',', Streams_Stream::fieldNames());
 		}
 		$criteria = array(
 			'publisherId' => $publisherId,
