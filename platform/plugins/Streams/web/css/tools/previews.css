@@ -263,6 +263,10 @@
 	font-weight: normal;
 	font-size: .8em;
 }
+.Streams_webrtc_preview_tool .Streams_participants_tool .Users_avatar_icon {
+	position: unset;
+	margin: 0;
+}
 /* </Streams_webrtc_preview> */
 
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,

@@ -202,7 +202,7 @@ class Users_Label extends Base_Users_Label
 	 * @method can
 	 * @param {string} $communityId The community for which we are checking labels
 	 * @param {string} [$userId=null] The user whose access we are checking. Defaults to logged-in user.
-	 * @return array Contains "canAdd", "canRemove", "canSee" arrays of labels
+	 * @return array Contains "add", "remove", "see", "roles", "manageIcon" arrays of labels
 	 */
 	static function can($communityId, $userId = null)
 	{
@@ -213,24 +213,36 @@ class Users_Label extends Base_Users_Label
 			}
 			$userId = $user->id;
 		}
-		$roles = Users::roles($communityId, null, array(), $userId);		
-		$add = array();
-		$remove = array();
-		$see = array();
-		foreach ($roles as $role) {
-			foreach ($allRoles as $label) {
+		$userCommunityRoles = Users::roles($communityId, null, array(), $userId);
+		$communityRoles = self::ofCommunities();
+		$labelsCanManageIcon = Q_Config::get("Users", "icon", "canManage", array());
+		$result = array(
+			"manageIcon" => false,
+			"manageContacts" => Users::canManageContacts($userId, $communityId, Q::app()."/")
+		);
+		foreach ($userCommunityRoles as $role => $row) {
+			$result["roles"][] = $role;
+			foreach ($communityRoles as $label) {
 				if (Users_Label::canAddLabel($role, $label)) {
-					$add[] = $label;
+					$result["add"][] = $label;
 				}
 				if (Users_Label::canRemoveLabel($role, $label)) {
-					$remove[] = $label;
+					$result["remove"][] = $label;
 				}
 				if (Users_Label::canSeeLabel($role, $label)) {
-					$see[] = $label;
+					$result["see"][] = $label;
 				}
 			}
+
+			if (in_array($role, $labelsCanManageIcon)) {
+				$result["manageIcon"] = true;
+			}
 		}
-		return compact('add', 'remove', 'see');
+
+		// collect from other sources
+		Q::event("Users/Label/can", compact('userId', 'communityId', 'userCommunityRoles', 'communityRoles'), 'after', false, $result);
+
+		return $result;
 	}
 	/**
 	 * Whether $label_1 can remove $label_2
@@ -382,7 +394,25 @@ class Users_Label extends Base_Users_Label
 		}
 		return $labels;
 	}
-	
+
+	/**
+	 * Fetch an array of labels
+	 * @method getLabels
+	 * @return {array} An array of array(label => array(title=> ..., icon => ...)) pairs
+	 */
+	static function getLabels () {
+		$labelsMysql = self::db()->rawQuery('select distinct label, title, icon from users_label')->fetchDbRows();
+		$labels = array();
+		foreach ($labelsMysql as $row) {
+			$labels[$row->label] = array(
+				"title" => $row->title,
+				"icon" => Users::iconUrl($row->icon, "40.png")
+			);
+		}
+
+		return $labels;
+	}
+
 	static function _icon($l, $icon, $userId)
 	{
 		if (!is_array($icon)) {
