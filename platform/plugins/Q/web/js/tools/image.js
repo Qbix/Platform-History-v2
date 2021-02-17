@@ -9,7 +9,8 @@
  * @class Q image
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {string} [options.url] Source to get image from. Can be remote url or "blob:" for local files
+ *  @param {string} options.url Source to get image from. Can be remote url or "blob:" for local files
+ *  @param {boolean} [options.useViewport=true] If true apply Q/viewport on image
  *
  */
 Q.Tool.define("Q/image", function (options) {
@@ -25,7 +26,8 @@ Q.Tool.define("Q/image", function (options) {
 },
 
 {
-	url: null
+	url: null,
+	useViewport: true
 },
 
 {
@@ -36,8 +38,14 @@ Q.Tool.define("Q/image", function (options) {
 	refresh: function () {
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(this.element);
 
-		$("<img>").prop("src", state.url).appendTo(tool.element);
+		var $img = $("<img>").prop("src", state.url).appendTo(tool.element);
+		if (state.useViewport) {
+			$img.plugin('Q/viewport', {
+				width: $toolElement.width(),
+			});
+		}
 	}
 });
 
