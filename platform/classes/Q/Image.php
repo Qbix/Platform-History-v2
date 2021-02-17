@@ -458,7 +458,7 @@ class Q_Image
 			}
 			switch ($ext) {
 				case 'jpeg':
-				case 'jpeg':
+				case 'jpg':
 					$func = 'imagejpeg';
 					break;
 				case 'gif':
@@ -485,7 +485,7 @@ class Q_Image
 		 */
 		Q::event(
 			'Q/image/save', 
-			compact('path', 'subpath', 'writePath', 'data', 'save', 'crop'), 
+			compact('path', 'subpath', 'writePath', 'data', 'save', 'crop', 'ext'),
 			'after'
 		);
 		return $data;
