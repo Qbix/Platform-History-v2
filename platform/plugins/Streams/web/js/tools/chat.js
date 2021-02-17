@@ -525,18 +525,32 @@ Q.Tool.define('Streams/chat', function(options) {
 				$element[0].forEachTool(function () {
 					var state = this.state;
 					var $toolElement = $(this.element);
+					var $chatItem = $toolElement.closest(".Streams_chat_item");
 
 					if (!(state.publisherId && state.streamName)) {
 						return;
 					}
 
-					Q.Streams.get(state.publisherId, state.streamName, function (err) {
+					this.state.onError && this.state.onError.set(function () {
+						$chatItem.remove();
+					}, tool);
+					this.state.onAfterClose && this.state.onAfterClose.set(function () {
+						$chatItem.remove();
+					}, tool);
+
+					Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function (err) {
 						if (err) {
 							return console.warn(err);
 						}
 
-						var stream = this;
+						// if stream closed, remove tool and chat item
+						if (this.fields.closedTime) {
+							Q.Tool.remove($toolElement[0], true, true);
+							$chatItem.remove();
+							return ;
+						}
 
+						var stream = this;
 						var streamType = stream.fields.type;
 
 						if (streamType === 'Streams/webrtc') {
@@ -1043,15 +1057,11 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var fields = {
 			publisherId: instructions.fromPublisherId,
-			streamName: instructions.fromStreamName,
-			closeable: false,
-			onError: function () {
-				$(this.element).closest(".Streams_chat_item").remove();
-			}
+			streamName: instructions.fromStreamName
 		};
 
 		if (previewToolName === "Streams/image/preview") {
-			fields.showTitle = false;
+			//fields.showTitle = false;
 			fields.imagepicker = {showSize: "200"};
 		}
 
