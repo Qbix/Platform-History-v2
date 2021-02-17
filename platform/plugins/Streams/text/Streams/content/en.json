@@ -448,6 +448,8 @@
         "link": "Link",
         "setUrl": "Set URL",
         "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
         "setClip": "Cut Out Clip",
         "invalidURL": "Invalid URL",
         "invalidFile": "Invalid File",
