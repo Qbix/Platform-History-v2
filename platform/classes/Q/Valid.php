@@ -222,10 +222,10 @@ class Q_Valid
 	 */
 	static function phone ($number, &$number_normalized = null)
 	{
+		$number_normalized = null;
 		if (empty($number)) {
 			return false;
 		}
-		$number_normalized = null;
 		
 		// Strip all non numeric, non plus characters from the phone number
 		$num = "$number";
