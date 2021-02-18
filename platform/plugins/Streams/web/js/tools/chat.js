@@ -538,7 +538,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						$chatItem.remove();
 					}, tool);
 
-					Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function (err) {
+					Q.Streams.get(state.publisherId, state.streamName, function (err) {
 						if (err) {
 							return console.warn(err);
 						}
@@ -559,34 +559,37 @@ Q.Tool.define('Streams/chat', function(options) {
 						}
 
 						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
-							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
-							var toolName = null;
-							for (var i=0, l=possibleToolNames.length; i<l; ++i) {
-								if (Q.Tool.defined(possibleToolNames[i])) {
-									toolName = possibleToolNames[i];
-									break;
+							Q.Streams.get(state.publisherId, state.streamName, function (err) {
+								var stream = this;
+								// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
+								var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
+								var toolName = null;
+								for (var i=0, l=possibleToolNames.length; i<l; ++i) {
+									if (Q.Tool.defined(possibleToolNames[i])) {
+										toolName = possibleToolNames[i];
+										break;
+									}
 								}
-							}
 
-							var element = "div";
-							// if tool is preview, apply Streams/preview tool first, because it may be required
-							if (toolName && toolName.endsWith("/preview")) {
-								element = Q.Tool.setUpElement(element, "Streams/preview", state);
-							}
+								var element = "div";
+								// if tool is preview, apply Streams/preview tool first, because it may be required
+								if (toolName && toolName.endsWith("/preview")) {
+									element = Q.Tool.setUpElement(element, "Streams/preview", state);
+								}
 
-							var fields = Q.extend({}, stream.getAllAttributes(), {
-								publisherId: stream.fields.publisherId,
-								streamName: stream.fields.name,
-								autoplay: true,
-								url: stream.fileUrl() || stream.iconUrl('200')
-							});
+								var fields = Q.extend({}, stream.getAllAttributes(), {
+									publisherId: stream.fields.publisherId,
+									streamName: stream.fields.name,
+									autoplay: true,
+									url: stream.fileUrl() || stream.iconUrl('200')
+								});
 
-							element = Q.Tool.setUpElement(element, toolName, fields);
-							Q.invoke({
-								title: stream.fields.title,
-								content: element,
-								trigger: $toolElement[0]
+								element = Q.Tool.setUpElement(element, toolName, fields);
+								Q.invoke({
+									title: stream.fields.title,
+									content: element,
+									trigger: $toolElement[0]
+								});
 							});
 						});
 					});
