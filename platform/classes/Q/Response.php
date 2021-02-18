@@ -621,7 +621,7 @@ class Q_Response
 	/**
 	 * Sets some data for the script
 	 * @method setScriptData
-	 * @param {string} $path The path to the variable where the data will be saved, such as "Q.info" or "MyApp.foo.bar".
+	 * @param {string|array} $path The path to the variable where the data will be saved, such as "Q.info" or "MyApp.foo.bar".
 	 * @param {array} $data The data to set. It will be JSON-encoded and stored in the specified variable.
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
 	 *  have the script lines be returned first by Q_Response::scriptLines.
