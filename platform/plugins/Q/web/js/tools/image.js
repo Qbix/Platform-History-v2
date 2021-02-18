@@ -42,8 +42,16 @@ Q.Tool.define("Q/image", function (options) {
 
 		var $img = $("<img>").prop("src", state.url).appendTo(tool.element);
 		if (state.useViewport) {
-			$img.plugin('Q/viewport', {
-				width: $toolElement.width(),
+			$img.on("load", function () {
+				// to avoid lazyload transparent image loaded
+				if ($img.prop("src") !== state.url) {
+					return;
+				}
+
+				// apply Q/viewport once image loaded
+				$img.plugin('Q/viewport', {
+					width: $toolElement.width(),
+				});
 			});
 		}
 	}
