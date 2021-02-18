@@ -1177,13 +1177,7 @@
 					Q.alert("Assets/connected: invalid url");
 				}
 
-				// open browsertab for cordova
-				var browsertab = Q.getObject("cordova.plugins.browsertabs");
-				if (browsertab) {
-					return browsertab.openUrl(redirectUrl);
-				}
-
-				window.open(redirectUrl, '_blank').focus();
+				Q.openUrl(redirectUrl);
 			});
 
 			return false;

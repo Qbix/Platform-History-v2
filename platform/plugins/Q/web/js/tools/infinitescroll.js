@@ -18,6 +18,8 @@
 		var state = tool.state;
 		var $te = $(tool.element);
 
+		Q.addStylesheet('{{Q}}/css/infinitescroll.css', { slotName: 'Q' });
+
 		state.lastScrollHeight = $te[0].scrollHeight;
 
 		$te.on('scroll', tool, function () {
@@ -97,6 +99,18 @@
 		flipped: false,
 		onInvoke: new Q.Event()
 	}, {
+		/**
+		 * Show or hide preloader indicated that new results loading
+		 * @method setLoading
+		 * @param {boolean} state If true - show preloader, false - hide.
+		 */
+		setLoading: function (state) {
+			if (state) {
+				this.preloader = $("<div class='Q_infinitescroll_preloader'>").appendTo(this.element);
+			} else {
+				this.preloader && this.preloader.remove();
+			}
+		},
 		Q: {
 			beforeRemove: function () {
 				if (this.watchingScrollHeight) {

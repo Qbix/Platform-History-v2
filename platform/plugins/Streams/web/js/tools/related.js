@@ -94,14 +94,18 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		$(scrollableElement).tool('Q/infinitescroll', {
 			onInvoke: function () {
 				var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+				var infiniteTool = this;
 
 				// skip duplicated (same offsets) requests
-				if (this.state.offset && this.state.offset >= offset) {
+				if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
 					return;
 				}
 
-				this.state.offset = offset;
-				tool.loadMore(state.loadMore);
+				infiniteTool.setLoading(true);
+				infiniteTool.state.offset = offset;
+				tool.loadMore(state.loadMore, function () {
+					infiniteTool.setLoading(false);
+				});
 			}
 		}).activate();
 	}

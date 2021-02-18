@@ -71,13 +71,5 @@ function Users_before_Q_responseExtras()
 	}
 
 	// fetch labels info
-	$labelsMysql = Users_Label::db()->rawQuery('select distinct label, title, icon from users_label')->fetchDbRows();
-	$labels = array();
-	foreach ($labelsMysql as $row) {
-		$labels[$row->label] = array(
-			"title" => $row->title,
-			"icon" => $row->icon
-		);
-	}
-	Q_Response::setScriptData("Q.plugins.Users.labels", $labels);
+	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
 }

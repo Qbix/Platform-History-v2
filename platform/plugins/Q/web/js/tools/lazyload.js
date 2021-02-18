@@ -281,7 +281,11 @@ function _polyfill(callback) {
 	  }
 	  return Q.handle(callback);
 	}
-	Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', callback);
+
+	Q.onReady.add(function () {
+		Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', callback);
+	}, 'Q/lazyload');
+
 }
 
 _polyfill();

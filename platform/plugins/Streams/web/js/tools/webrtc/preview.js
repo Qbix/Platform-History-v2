@@ -64,6 +64,8 @@
 			}
 
 			var fields = Q.extend({}, state.templates.view.fields, {
+				publisherId: stream.fields.publisherId,
+				streamName: stream.fields.name,
 				alt: 'icon',
 				title: stream.fields.title,
 				duration: duration,
@@ -121,6 +123,7 @@ Q.Template.set('Streams/webrtc/preview/view',
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+	+ '{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true}}'
 	+ '</div></div>'
 );
 
