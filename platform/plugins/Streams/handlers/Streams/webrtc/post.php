@@ -24,6 +24,7 @@ function Streams_webrtc_post($params = array())
 	$publisherId = Q::ifset($params, 'publisherId', Users::loggedInUser(true)->id);
 	$roomId = Q::ifset($params, 'roomId', null);
 	$adapter = Q::ifset($params, 'adapter', 'node');
+	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 
 	if (!in_array($adapter, array('node', 'twilio'))) {
 		throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
@@ -33,6 +34,9 @@ function Streams_webrtc_post($params = array())
 
 	$webrtc = new $className();
 	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
+	if ($resumeClosed !== null) {
+		$result['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+	}
 	$result['stream']->join();
 
 	Q_Response::setSlot("room", $result);

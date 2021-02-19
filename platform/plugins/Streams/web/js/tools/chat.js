@@ -735,6 +735,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		Q.Streams.WebRTC.start({
 			publisherId: state.publisherId,
 			streamName: state.streamName,
+			resumeClosed: false,
+			useExisting: false,
 			tool: tool,
 			onWebrtcControlsCreated: function () {
 				$toolElement.attr('data-webrtc', true);
@@ -1064,7 +1066,6 @@ Q.Tool.define('Streams/chat', function(options) {
 		};
 
 		if (previewToolName === "Streams/image/preview") {
-			//fields.showTitle = false;
 			fields.imagepicker = {showSize: "200"};
 		}
 

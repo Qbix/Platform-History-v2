@@ -95,17 +95,21 @@ module.exports = function(socket,io) {
         if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Streams/webrtc/' + roomId);
         io.of('/webrtc').in(roomId).clients(function (error, clients) {
             if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
-            if(clients.length === 0) {
-                Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, 'Streams/webrtc/' + roomId, function (error, stream) {
-                    if(!stream) {
-                        return;
-                    }
-                    stream.setAttribute('endTime', +Date.now());
-                    stream.fields.closedTime = +Date.now();
-                    stream.save();
-                    }
-                )
+            if(clients.length > 0) {
+                return;
             }
+
+            var streamName = 'Streams/webrtc/' + roomId;
+            Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
+                if(err || !stream) {
+                    return;
+                }
+                stream.setAttribute('endTime', +Date.now());
+                stream.save();
+                if ([false, "false"].includes(stream.getAttribute('resumeClosed'))) {
+                    Q.plugins.Streams.close(socket.userPlatformId, roomPublisherId, streamName);
+                }
+            });
         });
 
         socket.broadcast.to(roomId).emit('Streams/webrtc/participantDisconnected', socket.client.id);
