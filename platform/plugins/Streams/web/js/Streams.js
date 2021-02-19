@@ -2317,6 +2317,7 @@ Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePen
  * @method setAttribute
  * @param {String} attributeName
  * @param {Mixed} value
+ * @return Streams_Stream
  */
 Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
 	var t = this.fields.type;
@@ -2341,6 +2342,8 @@ Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value)
 		}
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
+
+	return this;
 };
 
 /**
