@@ -1096,7 +1096,16 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
  */
 Streams.close = function (asUserId, publisherId, streamName, callback) {
 	var phpScriptPath = path.dirname(__dirname) + '/scripts/api.php';
-	var argsString = '--appRoot=' + Q.app.DIR + ' --action=close --asUserId=' + asUserId + ' --publisherId=' + publisherId + ' --streamName=' + streamName;
+	var args = {
+		"appRoot": Q.app.DIR,
+		"action": "close",
+		"asUserId": asUserId,
+		"publisherId": publisherId,
+		"streamName": streamName
+	};
+	args.signature = Q.Utils.signature(args);
+	var argsString = '';
+	Object.entries(args).forEach(([key, value]) => { argsString += '--' + key + '=' + value + ' '; });
 	child_process.exec("php " + phpScriptPath + " " + argsString, function(err, response, stderr) {
 		if(err){
 			console.log(err);
@@ -1104,7 +1113,6 @@ Streams.close = function (asUserId, publisherId, streamName, callback) {
 
 		Q.handle(callback, null, [publisherId, streamName]);
 	});
-
 };
 
 /**

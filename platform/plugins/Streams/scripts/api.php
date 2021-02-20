@@ -25,15 +25,6 @@ the user on whose behalf the action executed
 [streamName]
 EOT;
 
-// get all CLI options
-$params = array(
-	'h::' => 'help::',
-	'app::' => 'appRoot::',
-	'a::' => 'action::',
-	'as::' => 'asUserId::',
-	'pId::' => 'publisherId::',
-	'sn::' => 'streamName::'
-);
 $help = <<<EOT
 Script to execute php methods from nodejs
 
@@ -48,11 +39,29 @@ Options include:
 --publisherId
 
 --streamName
+
+--signature
 EOT;
 
+// get all CLI options
+$params = array(
+	'h::' => 'help::',
+	'app::' => 'appRoot::',
+	'a::' => 'action::',
+	'as::' => 'asUserId::',
+	'pId::' => 'publisherId::',
+	'sn::' => 'streamName::',
+	'sig::' => 'signature::'
+);
 $options = getopt(implode('', array_keys($params)), $params);
-if (empty($options['action']) || empty($options['appRoot'])) {
-	die($help);
+if (empty($options['action'])) {
+	throw new Q_Exception_RequiredField(array("field" => "action"));
+}
+if (empty($options['appRoot'])) {
+	throw new Q_Exception_RequiredField(array("field" => "appRoot"));
+}
+if (empty($options['signature'])) {
+	throw new Q_Exception_RequiredField(array("field" => "signature"));
 }
 
 #Is it a call for help?
@@ -62,20 +71,27 @@ if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h
 
 $qPath = $options['appRoot']."/scripts/Q.inc.php";
 if (!is_file($qPath)) {
-    die("Q.inc.php not found: ".$qPath);
+	throw new Exception("Q.inc.php not found: ".$qPath);
 }
 
 include $qPath;
 
+// check signature
+$signature = Q::ifset($options, "signature", null);
+unset($options["signature"]);
+if (Q_Utils::signature($options) !== $signature) {
+	throw new Q_Exception_FailedValidation($options);
+}
+
 if ($options['action'] == "close") {
 	if (empty($options['asUserId'])) {
-		die("asUserId required for close");
+		throw new Q_Exception_RequiredField(array("field" => "asUserId"));
 	}
 	if (empty($options['publisherId'])) {
-		die("publisherId required for close");
+		throw new Q_Exception_RequiredField(array("field" => "publisherId"));
 	}
 	if (empty($options['streamName'])) {
-		die("streamName required for close");
+		throw new Q_Exception_RequiredField(array("field" => "streamName"));
 	}
 
 	Q::event('Streams/Stream/delete', Q::take($options, array(
