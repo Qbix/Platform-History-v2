@@ -12871,10 +12871,10 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
-	var o = options;
 	if (options.template) {
 		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
-			o = Q.extend({ content: html }, options);
+			options.content = html;
+			delete options.template;
 			_continue();
 		});
 	} else {
@@ -12882,7 +12882,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, [o]);
+			var ret = Q.handle(handler, Q, [options]);
 			if (ret === false) {
 				return false
 			}
