@@ -25,7 +25,7 @@ var Utils = {};
  * @return {string}
  * @throws {Q.Exception} if secret is not defined
  */
-Utils.signature = function (data, secret=null) {
+Utils.signature = function (data, secret) {
 	secret = secret || Q.Config.get(['Q', 'internal', 'secret'], null);
 	if (!secret) {
 		throw new Q.Exception('Q.Utils.signature is expecting a secret');
