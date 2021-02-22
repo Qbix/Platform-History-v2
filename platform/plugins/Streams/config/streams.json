@@ -284,5 +284,13 @@
 		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
+	},
+	"Streams/calls/main": {
+		"type": "Streams/calls",
+		"title": "Calls",
+		"icon": "Streams/category",
+		"readLevel": 0,
+		"writeLevel": 23,
+		"adminLevel": 0
 	}
 }
