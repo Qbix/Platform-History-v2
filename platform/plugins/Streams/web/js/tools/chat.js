@@ -820,6 +820,25 @@ Q.Tool.define('Streams/chat', function(options) {
 		.set(function(stream, message) {
 			tool.renderMessage(message);
 		}, tool);
+		// a new stream was related (including a call)
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/unrelatedTo')
+		.set(function(stream, message) {
+			var instructions = JSON.parse(message.instructions);
+			var fromPublisherId = Q.getObject("fromPublisherId", instructions);
+			var fromStreamName = Q.getObject("fromStreamName", instructions);
+
+			if (!fromStreamName || !fromPublisherId) {
+				return;
+			}
+
+			// search preview for this stream and remove
+			$(".Streams_preview_tool", $te).each(function () {
+				var previewTool = Q.Tool.from(this, "Streams/preview");
+				if (previewTool && previewTool.state.publisherId === fromPublisherId && previewTool.state.streamName === fromStreamName) {
+					Q.handle(previewTool.state.onAfterClose, previewTool);
+				}
+			});
+		}, tool);
 
 		// new user joined
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/join')
