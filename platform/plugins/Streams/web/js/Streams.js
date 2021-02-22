@@ -597,6 +597,7 @@ Q.Tool.define({
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
+	"Streams/calls": "{{Streams}}/js/tools/calls.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {

@@ -482,5 +482,11 @@
         "NewExperience": "New Experience",
         "DefineTitle": "Please define a title",
         "Create": "Create"
+    },
+    "calls": {
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet"
     }
 }

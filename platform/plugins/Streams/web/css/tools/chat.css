@@ -281,7 +281,8 @@
 	padding-right: 30px;
 }
 .Streams_chat_composer .Streams_chat_submit,
-.Streams_chat_composer .Streams_chat_call {
+.Streams_chat_composer .Streams_chat_call,
+.Streams_chat_composer .Streams_calls_tool {
 	cursor: pointer;
 	position: absolute;
 	right: 1px;
