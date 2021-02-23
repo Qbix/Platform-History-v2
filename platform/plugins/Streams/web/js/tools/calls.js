@@ -28,7 +28,7 @@ Q.Tool.define("Streams/calls", function(options) {
 		}
 	});
 
-	Streams.get(state.publisherId, state.streamName, function (err) {
+	Streams.get.force(state.publisherId, state.streamName, function (err) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
 			return Q.alert(msg);
@@ -39,6 +39,8 @@ Q.Tool.define("Streams/calls", function(options) {
 
 		tool.stream = this;
 		pipe.fill("stream")();
+	}, {
+		withRelatedToTotals: [state.relationType]
 	});
 
 	Q.Text.get("Streams/content", function (err, content) {
@@ -55,7 +57,8 @@ Q.Tool.define("Streams/calls", function(options) {
 {
 	maxCalls: 0,
 	publisherId: Users.currentCommunityId,
-	streamName: "Streams/calls/main"
+	streamName: "Streams/calls/main",
+	relationType: "Streams/call"
 },
 
 {
@@ -78,24 +81,38 @@ Q.Tool.define("Streams/calls", function(options) {
 			Q.invoke({
 				title: tool.text.calls.SettingsTitle,
 				columnClass: "Streams_calls_settings",
+				className: "Streams_calls_settings",
 				template: {
 					name: "Streams/calls/settings",
 					fields: {
 						text: tool.text.calls,
-						maxCalls: state.maxCalls
+						maxCalls: tool.stream.getAttribute("maxRelations")
 					}
 				},
 				trigger: $toolElement[0],
-				callback: function (options, index, columnElement, data) {
-					$(".Streams_calls_related", columnElement).tool("Streams/related", {
+				callback: function () {
+					// if opened in columns - third argument is a column element,
+					// if opened dialog - first argument is dialog element
+					var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
+					$(".Streams_calls_related", parentElement).tool("Streams/related", {
 						publisherId: state.publisherId,
 						streamName: state.streamName,
-						relationType: "Streams/call",
+						relationType: state.relationType,
 						editable: false,
 						closeable: true,
 						sortable: false,
 						realtime: true
 					}).activate();
+
+					$("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
+						var maxCalls = parseInt($("input[name=maxCalls]", parentElement).val());
+						var oldMaxCalls = parseInt(tool.stream.getAttribute("maxRelations"));
+
+						if (maxCalls !== oldMaxCalls) {
+							tool.stream.setAttribute("maxRelations", maxCalls).save();
+						}
+
+					});
 				}
 			});
 		});
@@ -113,6 +130,7 @@ Q.Tool.define("Streams/calls", function(options) {
 			Streams.WebRTC.start({
 				publisherId: state.publisherId,
 				streamName: state.streamName,
+				relationType: state.relationType,
 				resumeClosed: false,
 				useExisting: false,
 				tool: tool
@@ -123,8 +141,8 @@ Q.Tool.define("Streams/calls", function(options) {
 
 Q.Template.set("Streams/calls/settings",
 	'<div class="Streams_calls_related"></div>' +
-	'<label>{{text.MaxCalls}}</label><input name="maxCalls" value="{{maxCalls}}">' +
-	'<button class="Q_button">{{text.Update}}</button>'
+	'<label>{{text.MaxCalls}}</label><input name="maxCalls" type="number" value="{{maxCalls}}">' +
+	'<button class="Q_button" name="update">{{text.Update}}</button>'
 );
 
 })(Q, Q.$, window);
