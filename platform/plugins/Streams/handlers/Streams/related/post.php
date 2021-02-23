@@ -21,25 +21,46 @@ function Streams_related_post($params) {
 	// TODO: When we start supporting multiple hosts, this will have to be rewritten
 	// to make servers communicate with one another when establishing relations between streams
 	
-	if (!($stream = Streams::fetch($asUserId, $toPublisherId, $toStreamName))) {
+	if (!($categories = Streams::fetch($asUserId, $toPublisherId, $toStreamName))) {
 		throw new Q_Exception_MissingRow(
 			array('table' => 'stream', 'criteria' => 'with those fields'), 
 			array('publisherId', 'name')
 		);
 	}
+
 	if (!($stream = Streams::fetch($asUserId, $fromPublisherId, $fromStreamName))) {
 		throw new Q_Exception_MissingRow(
 			array('table' => 'stream', 'criteria' => 'with those fields'),
 			array('fromPublisherId', 'from_name')
 		);
 	}
-	
-	$weight = "+1";
-	if (isset($_REQUEST['weight'])) {
-		if (!$stream->testWriteLevel('relations')) {
-			throw new Users_Exception_NotAuthorized();
+
+	$weight = time();
+	foreach ($categories as $category) {
+		// check maxRelations attribute
+		$maxRelations = $category->getAttribute("maxRelations");
+		if (is_numeric($maxRelations)) {
+			if (!Streams::checkAvailableRelations(null, $toPublisherId, $toStreamName, $type, false)) {
+				if ($_REQUEST["exception"] === false || $_REQUEST["exception"] === "false") {
+					return;
+				} else {
+					$texts = Q_Text::get("Streams/content");
+					$exceededText = Q::ifset($texts, "types", $stream->type, "MaxRelationsExceeded", "Max relations exceeded");
+					throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+				}
+			}
 		}
-		$weight = $_REQUEST['weight'];
+
+		if (isset($_REQUEST['weight'])) {
+			if (!$category->testWriteLevel('relations')) {
+				if ($_REQUEST["exception"] === false || $_REQUEST["exception"] === "false") {
+					return;
+				} else {
+					throw new Users_Exception_NotAuthorized();
+				}
+			}
+			$weight = $_REQUEST['weight'];
+		}
 	}
 
 	$result = Streams::relate(
