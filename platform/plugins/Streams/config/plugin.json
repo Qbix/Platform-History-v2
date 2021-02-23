@@ -250,7 +250,7 @@
 			},
 			"Streams/calls": {
 				"create": false,
-				"edit": false
+				"edit": ["attributes"]
 			},
 			"Streams/invited": {
 				"create": false,

@@ -289,8 +289,8 @@
 		"type": "Streams/calls",
 		"title": "Calls",
 		"icon": "Streams/category",
-		"readLevel": 0,
+		"readLevel": 40,
 		"writeLevel": 23,
-		"adminLevel": 0
+		"adminLevel": 20
 	}
 }
