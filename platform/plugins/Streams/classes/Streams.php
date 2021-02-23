@@ -123,14 +123,14 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages relating other streams to this one
-	 * @property WRITE_LEVEL['relate']
+	 * @property $WRITE_LEVEL['relate']
 	 * @type integer
 	 * @default 23
 	 * @final
 	 */
 	/**
 	 * Can update properties of relations directly
-	 * @property WRITE_LEVEL['relations']
+	 * @property $WRITE_LEVEL['relations']
 	 * @type integer
 	 * @default 25
 	 * @final
@@ -1699,7 +1699,7 @@ abstract class Streams extends Base_Streams
 		$fromPublisherId,
 		$fromStreamName,
 		$options = array())
-	{		
+	{
 		self::getRelations(
 			$asUserId,
 			$toPublisherId,
@@ -2445,9 +2445,53 @@ abstract class Streams extends Base_Streams
 			$returnMultiple ? $streams : $stream
 		);
 	}
-	
+
+	/**
+	 * Check if category allow new relations
+	 * @method checkAvailableRelations
+	 * @param {string} $asUserId The id of the user on whose behalf the stream requested
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamName The name of the stream
+	 * @param {string} $relationType The type of the relation
+	 * @param {boolean} $postMessage Whether to post messages Streams/relation/available, Streams/relation/unavailable
+	 * @return {boolean} if available or not
+	 */
+	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $postMessage=true) {
+		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$maxRelations = $stream->getAttribute("maxRelations");
+		if (!is_numeric($maxRelations)) {
+			return true;
+		}
+
+		$currentRelations = (int)Streams_RelatedToTotal::select("relationCount")->where(array(
+			"toPublisherId" => $publisherId,
+			"toStreamName" => $streamName,
+			"relationType" => $relationType
+		))->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+
+		$available = $maxRelations - $currentRelations;
+		if ($available > 0) {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/available',
+					'instructions' => array("available" => $available)
+				));
+			}
+
+			return true;
+		} else {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/unavailable'
+				));
+			}
+
+			return false;
+		}
+	}
 	/**
 	 * Updates the weight on a relation
+	 * @method updateRelation
 	 * @param {string} $asUserId
 	 *  The id of the user on whose behalf the app will be updating the relation
 	 * @param {string} $toPublisherId
