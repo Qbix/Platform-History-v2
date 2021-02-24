@@ -782,6 +782,14 @@ html.Q_scanning body > .Q_scanning_code {
 	filter: blur(1px);
 	transition: all 300ms linear;
 }
+.Q_disabled_2 {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	filter: grayscale(100%);
+	pointer-events: none;
+	transition: all 300ms linear;
+}
 
 .Q_columns_containsExpanded {
 	overflow: visible !important;
