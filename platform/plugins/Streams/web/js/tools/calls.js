@@ -38,6 +38,18 @@ Q.Tool.define("Streams/calls", function(options) {
 		this.join();
 
 		tool.stream = this;
+
+		// check availability and also listen messages Streams/relation/[available, unavailable]
+		var calls = Q.getObject(["relatedToTotals", state.relationType, "Streams/webrtc"], this) || 0;
+		var maxCalls = tool.getMaxCalls();
+		tool.available(calls < maxCalls);
+		this.onMessage("Streams/relation/available").set(function (stream, message) {
+			tool.available(true);
+		}, tool);
+		this.onMessage("Streams/relation/unavailable").set(function (stream, message) {
+			tool.available(false);
+		}, tool);
+
 		pipe.fill("stream")();
 	}, {
 		withRelatedToTotals: [state.relationType]
@@ -58,15 +70,38 @@ Q.Tool.define("Streams/calls", function(options) {
 	maxCalls: 0,
 	publisherId: Users.currentCommunityId,
 	streamName: "Streams/calls/main",
-	relationType: "Streams/call"
+	relationType: "Streams/calls"
 },
 
 {
 	/**
-	 * @method refresh
+	 * Set tool status to available/unavailable
+	 * @method available
+	 * @params {boolean} state
 	 */
-	refresh: function () {
+	available: function (state) {
+		var $toolElement = $(this.element);
 
+		// available/unavailable only for regular users
+		if (this.stream.testWriteLevel("edit")) {
+			return;
+		}
+
+		if (state) {
+			$toolElement.removeClass("Q_disabled_2");
+			$toolElement.addClass("Q_pulsate");
+		} else {
+			$toolElement.addClass("Q_disabled_2");
+			$toolElement.removeClass("Q_pulsate");
+		}
+	},
+	/**
+	 * Get current max calls from stream attributes
+	 * @method getMaxCalls
+	 * @params {boolean} state
+	 */
+	getMaxCalls: function () {
+		return Q.getObject(this.state.relationType, this.stream.getAttribute("maxRelations")) || 0;
 	},
 	/**
 	 * Implement settings UI for admins
@@ -86,7 +121,7 @@ Q.Tool.define("Streams/calls", function(options) {
 					name: "Streams/calls/settings",
 					fields: {
 						text: tool.text.calls,
-						maxCalls: tool.stream.getAttribute("maxRelations")
+						maxCalls: tool.getMaxCalls()
 					}
 				},
 				trigger: $toolElement[0],
@@ -106,10 +141,12 @@ Q.Tool.define("Streams/calls", function(options) {
 
 					$("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
 						var maxCalls = parseInt($("input[name=maxCalls]", parentElement).val());
-						var oldMaxCalls = parseInt(tool.stream.getAttribute("maxRelations"));
+						var maxRelations = tool.stream.getAttribute("maxRelations") || {};
+						var oldMaxCalls = parseInt(Q.getObject(state.relationType, maxRelations));
 
 						if (maxCalls !== oldMaxCalls) {
-							tool.stream.setAttribute("maxRelations", maxCalls).save();
+							maxRelations[state.relationType] = maxCalls;
+							tool.stream.setAttribute("maxRelations", maxRelations).save();
 						}
 
 					});
