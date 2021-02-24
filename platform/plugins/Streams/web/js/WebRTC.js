@@ -5506,22 +5506,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return console.warn("Streams.webrtc.start.create: " + fem);
                     }
 
-                    var stream = this;
-                    stream.relateTo(options.relationType, options.publisherId, options.streamName, function (err) {
-                        var fem = Q.firstErrorMessage(err);
-                        if (fem) {
-                            return console.warn("Streams.webrtc.start.relate: " + fem);
-                        }
-
-                        _createRoom(stream);
-                    });
+                    _createRoom(this);
                 });
             }, {
                 method: 'post',
                 fields: {
                     publisherId: userId,
                     resumeClosed: options.resumeClosed,
-                    adapter: options.mode
+                    adapter: options.mode,
+                    relate: {
+                        publisherId: options.publisherId,
+                        streamName: options.streamName,
+                        relationType: options.relationType
+                    }
                 }
             });
         }
