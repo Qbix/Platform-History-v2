@@ -7,7 +7,7 @@ function Streams_after_Streams_message_Streams_unrelatedTo($params)
 	$stream = $params['stream'];
 
 	// check if new relations available and send appropriate messages
-	Streams::checkAvailableRelations(null, $stream->publisherId, $stream->name, $type, true);
+	Streams::checkAvailableRelations(null, $stream->publisherId, $stream->name, $type);
 
 	if (!Q_Config::get('Streams', 'categorize', $stream->type, $type, false)) {
 		return;

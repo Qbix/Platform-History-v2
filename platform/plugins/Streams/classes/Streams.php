@@ -2453,21 +2453,30 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId The publisher of the stream
 	 * @param {string} $streamName The name of the stream
 	 * @param {string} $relationType The type of the relation
-	 * @param {boolean} $postMessage Whether to post messages Streams/relation/available, Streams/relation/unavailable
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.postMessage=true] Whether to post messages Streams/relation/available, Streams/relation/unavailable
+	 * @param {boolean} [$options.throw=false] If true and relation unavailbale, throws exception
+	 * @param {boolean} [$options.singleRelation=false] If true, check that user already related stream to category. If yes throws exception.
 	 * @return {boolean} if available or not
 	 */
-	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $postMessage=true) {
+	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
 		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
-		$maxRelations = $stream->getAttribute("maxRelations");
+		$maxRelations = Q::ifset($stream->getAttribute("maxRelations"), $relationType, null);
 		if (!is_numeric($maxRelations)) {
 			return true;
 		}
 
-		$currentRelations = (int)Streams_RelatedToTotal::select("relationCount")->where(array(
+		$postMessage = Q::ifset($options, "postMessage", true);
+		$throw = Q::ifset($options, "throw", false);
+		$singleRelation = Q::ifset($options, "singleRelation", false);
+		$texts = Q_Text::get("Streams/content");
+		$exceededText = Q::ifset($texts, "types", $relationType, "MaxRelationsExceeded", "Max relations exceeded");
+
+		$currentRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
 			"toPublisherId" => $publisherId,
 			"toStreamName" => $streamName,
-			"relationType" => $relationType
-		))->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+			"type" => $relationType
+		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
 
 		$available = $maxRelations - $currentRelations;
 		if ($available > 0) {
@@ -2478,12 +2487,32 @@ abstract class Streams extends Base_Streams
 				));
 			}
 
+			if ($singleRelation) {
+				$selfRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+					"toPublisherId" => $publisherId,
+					"toStreamName" => $streamName,
+					"type" => $relationType,
+					"fromPublisherId" => $asUserId
+				))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+				if ($selfRelations) {
+					if ($throw) {
+						throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+					} else {
+						return false;
+					}
+				}
+			}
+
 			return true;
 		} else {
 			if ($postMessage) {
 				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
 					'type' => 'Streams/relation/unavailable'
 				));
+			}
+
+			if ($throw) {
+				throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
 			}
 
 			return false;
