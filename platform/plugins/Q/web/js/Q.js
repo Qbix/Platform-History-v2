@@ -2044,55 +2044,30 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  * @method ensure
  * @param {Mixed} property
  *  The property to test for being undefined.
- * @param {String|Function|Q.Event|Object} loader
+ * @param {String|Function|Q.Event} loader
  *  Something to execute if the property was undefined.
  *  If a string, this is interpreted as the URL of a javascript to load.
  *  If a function, this is called with the callback as the first argument.
  *  If an event, the callback is added to it.
  *  The loader must call the callback and pass the property as the first parameter.
- *  If object, should contain valid "action" property and options for that action:
- *  	waiting: wait while property function return true. Options: period in milliseconds (default 500), timeOut in milliseconds (default 5000)
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
  *  The first parameter should be the property (object, string, etc.) that's now defined.
  *  This is where you would put the code that relies on the property being defined.
  */
 Q.ensure = function _Q_ensure(property, loader, callback) {
-	if (typeof loader === "object" && Q.handle(property)) {
-		return Q.handle(callback);
-	} else if (property !== undefined) {
-		return Q.handle(callback, null, [property]);
+	if (property !== undefined) {
+		Q.handle(callback, null, [property]);
+		return;
 	}
-
 	Q.onInit.addOnce(function () {
 		if (typeof loader === 'string') {
 			Q.require(loader, callback);
+			return;
 		} else if (typeof loader === 'function') {
 			loader(callback);
 		} else if (loader instanceof Q.Event) {
 			loader.add(callback);
-		} else if (typeof loader === "object") {
-			switch (loader.action) {
-				case 'waiting':
-					var period = loader.period || 500;
-					var timeOut = loader.timeOut || 5000;
-					var timeOutCounter = 0;
-					var timerId = setInterval(function () {
-						if (Q.handle(property)) {
-							Q.handle(callback);
-							clearInterval(timerId);
-							return;
-						}
-
-						timeOutCounter += period;
-						if (timeOutCounter >= timeOut) {
-							console.warn("Q.ensure: could not wait after " + timeOut + " milliseconds");
-							clearInterval(timerId);
-						}
-					}, period);
-					break;
-				default: throw new Q.Error("Q/ensure: invalid action");
-			}
 		}
 	});
 };
@@ -9794,6 +9769,35 @@ Q.nodeUrl = function _Q_node(where) {
 };
 Q.nodeUrl.routers = []; // functions returning a custom url
 
+/**
+ * Wait while condition return true
+ * @static
+ * @method waiting
+ * @param {function} condition Function which called each time to check result
+ * @param {Function} callback called when property defined
+ * @param {Number} [period=500] waiting period in milliseconds
+ * @param {Number} [timeOut=5000] time out in milliseconds
+ */
+Q.waiting = function _Q_waiting(condition, callback, period=500, timeOut=5000) {
+	if (Q.handle(condition)) {
+		return Q.handle(callback);
+	}
+
+	var timeOutCounter = 0;
+	var timerId = setInterval(function () {
+		if (Q.handle(condition)) {
+			Q.handle(callback);
+			clearInterval(timerId);
+			return;
+		}
+
+		timeOutCounter += period;
+		if (timeOutCounter >= timeOut) {
+			console.warn("Q.waiting: could not wait after " + timeOut + " milliseconds");
+			clearInterval(timerId);
+		}
+	}, period);
+};
 /**
  * Module for templates functionality
  * @class Q.Template
