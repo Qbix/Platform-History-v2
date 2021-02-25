@@ -238,10 +238,18 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 							tool.preview.loading();
 						}, 0);
 						ps.streamName = stream.fields.name;
-					}, ps.related, ps.creatable && ps.creatable.options);
+					}, null, ps.creatable && ps.creatable.options);
 				}
 			},
 			onFinish: {'Streams/image/preview': function (data, key, file) {
+				Q.Streams.relate(
+					ps.related.publisherId,
+					ps.related.streamName,
+					ps.related.type,
+					ps.publisherId,
+					ps.streamName
+				);
+
 				Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {
 					messages: true,
 					changed: {icon: true},
