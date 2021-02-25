@@ -9770,35 +9770,6 @@ Q.nodeUrl = function _Q_node(where) {
 Q.nodeUrl.routers = []; // functions returning a custom url
 
 /**
- * Wait while condition return true
- * @static
- * @method waiting
- * @param {function} condition Function which called each time to check result
- * @param {Function} callback called when property defined
- * @param {Number} [period=500] waiting period in milliseconds
- * @param {Number} [timeOut=5000] time out in milliseconds
- */
-Q.waiting = function _Q_waiting(condition, callback, period=500, timeOut=5000) {
-	if (Q.handle(condition)) {
-		return Q.handle(callback);
-	}
-
-	var timeOutCounter = 0;
-	var timerId = setInterval(function () {
-		if (Q.handle(condition)) {
-			Q.handle(callback);
-			clearInterval(timerId);
-			return;
-		}
-
-		timeOutCounter += period;
-		if (timeOutCounter >= timeOut) {
-			console.warn("Q.waiting: could not wait after " + timeOut + " milliseconds");
-			clearInterval(timerId);
-		}
-	}, period);
-};
-/**
  * Module for templates functionality
  * @class Q.Template
  * @constructor
