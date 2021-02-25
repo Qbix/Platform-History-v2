@@ -12452,8 +12452,8 @@ function _onPointerBlurHandler() {
 Q.Dialogs = {
 
 	options: {
-		topMargin: '10%', // in percentage	
-		bottomMargin: '10%' // or in absolute pixel values
+		topMargin: '5%', // in percentage
+		bottomMargin: '5%' // or in absolute pixel values
 	},
 	
 	dialogs: [], // stack of dialogs that is currently being shown
