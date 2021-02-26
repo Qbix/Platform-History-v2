@@ -166,6 +166,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
 	preprocess: [],
+	openInSameColumn: [],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -525,11 +526,11 @@ Q.Tool.define('Streams/chat', function(options) {
 
 				// set handler for each tool activated in chat message
 				$element[0].forEachTool(function () {
-					var state = this.state;
+					var previewState = this.state;
 					var $toolElement = $(this.element);
 					var $chatItem = $toolElement.closest(".Streams_chat_item");
 
-					if (!(state.publisherId && state.streamName)) {
+					if (!(previewState.publisherId && previewState.streamName)) {
 						return;
 					}
 
@@ -540,7 +541,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						$chatItem.remove();
 					}, tool);
 
-					Q.Streams.get(state.publisherId, state.streamName, function (err) {
+					Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
 						if (err) {
 							return console.warn(err);
 						}
@@ -555,7 +556,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
 							// need to request stream again, because stream may be modified since it requested when message created
-							Q.Streams.get(state.publisherId, state.streamName, function (err) {
+							Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
 								var stream = this;
 								// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
 								var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
@@ -570,7 +571,7 @@ Q.Tool.define('Streams/chat', function(options) {
 								var element = "div";
 								// if tool is preview, apply Streams/preview tool first, because it may be required
 								if (toolName && toolName.endsWith("/preview")) {
-									element = Q.Tool.setUpElement(element, "Streams/preview", state);
+									element = Q.Tool.setUpElement(element, "Streams/preview", previewState);
 								}
 
 								var fields = Q.extend({}, stream.getAllAttributes(), {
@@ -584,7 +585,8 @@ Q.Tool.define('Streams/chat', function(options) {
 								Q.invoke({
 									title: stream.fields.title,
 									content: element,
-									trigger: $toolElement[0]
+									trigger: $toolElement[0],
+									columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
 								});
 							});
 						});
@@ -690,7 +692,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var $more = tool.$('.Streams_chat_more');
 		if (Q.isEmpty(results)) {
 			return $more.hide();
-		};
+		}
 		var $scm = tool.$('.Streams_chat_messages');
 		tool.renderMessages(results, function (items) {
 			tool.$('.Streams_chat_noMessages').remove();
@@ -1059,6 +1061,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * @param {function} callback
 	 */
 	renderRelatedStream: function (message, callback) {
+		var tool = this;
 		var state = this.state;
 
 		if (Q.getObject("constructor.name", message) !== "Streams_Message") {
@@ -1092,6 +1095,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.handle(callback, message, [Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields)]);
+			tool.scrollToBottom();
 		});
 	},
 	getOrdinal: function(action, ordinal){
