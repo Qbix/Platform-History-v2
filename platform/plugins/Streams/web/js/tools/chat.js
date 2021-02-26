@@ -443,18 +443,20 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.Template.render('Streams/chat/message/bubble', fields, function (err, html) {
+				var $html = $(html);
+				$html.addClass("Streams_chat_message_skipOverflowed");
+
 				// generate special message for related streams
 				if (fields.type === "Streams/relatedTo") {
-					var $preview = tool.renderRelatedStream(fields);
-					if (!$preview) {
-						return p.fill(ordinal)(null, null);
-					}
+					tool.renderRelatedStream(fields, function (preview) {
+						if (!preview) {
+							return p.fill(ordinal)(null, null);
+						}
 
-					var $html = $(html);
-					$html.addClass("Streams_chat_message_skipOverflowed");
-					$(".Streams_chat_message_content", $html).html($preview, true);
-					Q.handle(state.onMessageRender, tool, [fields, $html]);
-					p.fill(ordinal)(null, $html);
+						$(".Streams_chat_message_content", $html).html(preview, true);
+						Q.handle(state.onMessageRender, tool, [fields, $html]);
+						p.fill(ordinal)(null, $html);
+					});
 				} else {
 					Q.handle(state.onMessageRender, tool, [fields, html]);
 					p.fill(ordinal)(err, fields.html || html);
@@ -543,13 +545,6 @@ Q.Tool.define('Streams/chat', function(options) {
 							return console.warn(err);
 						}
 
-						// if stream closed, remove tool and chat item
-						if (this.fields.closedTime) {
-							Q.Tool.remove($toolElement[0], true, true);
-							$chatItem.remove();
-							return ;
-						}
-
 						var stream = this;
 						var streamType = stream.fields.type;
 
@@ -559,6 +554,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						}
 
 						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+							// need to request stream again, because stream may be modified since it requested when message created
 							Q.Streams.get(state.publisherId, state.streamName, function (err) {
 								var stream = this;
 								// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
@@ -1060,8 +1056,9 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * Render related stream as chat message
 	 * @method renderRelatedStream
 	 * @param {object} message
+	 * @param {function} callback
 	 */
-	renderRelatedStream: function (message) {
+	renderRelatedStream: function (message, callback) {
 		var state = this.state;
 
 		if (Q.getObject("constructor.name", message) !== "Streams_Message") {
@@ -1071,11 +1068,12 @@ Q.Tool.define('Streams/chat', function(options) {
 		var instructions = message.getAllInstructions();
 
 		if (state.excludedRelatedStreams.includes(instructions.fromType)) {
-			return;
+			return Q.handle(callback, message, [null]);
 		}
 
 		var previewToolName = instructions.fromType + '/preview';
 		if (!Q.Tool.defined(previewToolName)) {
+			Q.handle(callback, message, [null]);
 			return console.warn("tool " + previewToolName + " not found");
 		}
 
@@ -1088,8 +1086,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			fields.imagepicker = {showSize: "200"};
 		}
 
-		return Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields);
-		//return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
+		Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
+			if (err || this.fields.closedTime) {
+				return Q.handle(callback, message, [null]);
+			}
+
+			Q.handle(callback, message, [Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields)]);
+		});
 	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {
