@@ -83,7 +83,7 @@ Q.text = {
 			"minute": "minute",
 			"minutes": "minutes",
 			"hour": "hour",
-			"hour": "hours",
+			"hours": "hours",
 			"day": "day",
 			"days": "days",
 			"week": "week",
@@ -9443,12 +9443,21 @@ Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
 	var seconds = Math.floor(milliseconds / 1000);
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
-	var components = [minutes % 60];
+
+	minutes = (minutes % 60).toString();
+	if (minutes.length === 1) {
+		minutes = '0' + minutes;
+	}
+	var components = [minutes];
 	if (seconds || forceShow.seconds) {
-		components.push(seconds % 60);
+		seconds = (seconds % 60).toString();
+		if (seconds.length === 1) {
+			seconds = '0' + seconds;
+		}
+		components.push(seconds);
 	}
 	if (hours || forceShow.hours) {
-		components.shift(hours);
+		components.unshift(hours);
 	}
 	return components.join(':');
 };
