@@ -164,13 +164,23 @@ Q.Tool.define("Streams/calls", function(options) {
 		var $toolElement = $(tool.element);
 
 		$toolElement.addClass("Streams_calls_call").on(Q.Pointer.fastclick, function () {
-			Streams.WebRTC.start({
-				publisherId: state.publisherId,
-				streamName: state.streamName,
-				relationType: state.relationType,
-				resumeClosed: false,
-				useExisting: false,
-				tool: tool
+			Q.prompt(null, function (content) {
+				if (!content) {
+					return;
+				}
+
+				Streams.WebRTC.start({
+					publisherId: state.publisherId,
+					streamName: state.streamName,
+					relationType: state.relationType,
+					content: content,
+					resumeClosed: false,
+					useExisting: false,
+					tool: tool
+				});
+			}, {
+				title: tool.text.calls.CallReasonTitle,
+				noClose: false
 			});
 		});
 	}

@@ -492,6 +492,8 @@
         "SettingsTitle": "Calls",
         "MaxCalls": "Max calls",
         "Update": "Update",
-        "NoCallsYet": "No calls yet"
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?"
+
     }
 }

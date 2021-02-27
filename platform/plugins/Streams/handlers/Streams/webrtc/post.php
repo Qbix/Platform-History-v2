@@ -21,11 +21,13 @@ function Streams_webrtc_post($params = array())
 {
 	$params = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-	$publisherId = Q::ifset($params, 'publisherId', Users::loggedInUser(true)->id);
+	$loggedInUserId = Users::loggedInUser(true)->id;
+	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
 	$adapter = Q::ifset($params, 'adapter', 'node');
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
+	$content = Q::ifset($params, 'content', null);
 
 	// check maxCalls
 	if (!empty($relate)) {
@@ -45,6 +47,13 @@ function Streams_webrtc_post($params = array())
 
 	$webrtc = new $className();
 	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
+
+	if ($publisherId == $loggedInUserId) {
+		if ($content) {
+			$result['stream']->content = $content;
+			$result['stream']->changed();
+		}
+	}
 
 	if (!empty($relate)) {
 		$result['stream']->relateTo((object)array(

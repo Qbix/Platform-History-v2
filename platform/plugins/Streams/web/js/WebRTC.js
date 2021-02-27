@@ -5513,6 +5513,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 fields: {
                     publisherId: userId,
                     resumeClosed: options.resumeClosed,
+                    content: options.content || null,
                     adapter: options.mode,
                     relate: {
                         publisherId: options.publisherId,
