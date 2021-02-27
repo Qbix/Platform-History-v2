@@ -304,13 +304,15 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var $te = $(tool.element);
 		var state = tool.state;
-		var isPublisher = Q.Users.loggedInUserId() === Q.getObject("stream.fields.publisherId", state);
+		var loggedInUserId = Q.Users.loggedInUserId();
+		var isPublisher = loggedInUserId === Q.getObject("stream.fields.publisherId", state);
 
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
 		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
+		fields.loggedIn = loggedInUserId;
 		fields.text = tool.text;
 		fields.closeable = state.closeable && isPublisher;
 		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
@@ -1316,7 +1318,9 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
+		'{{#if loggedIn}}' +
 		'<div class="Streams_chat_addons">+</div>' +
+		'{{/if}}' +
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +
