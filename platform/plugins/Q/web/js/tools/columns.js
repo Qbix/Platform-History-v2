@@ -1150,7 +1150,12 @@ Q.invoke.handlers.unshift(function (options, callback) {
 	while (node) {
 		if (node.hasClass) {
 			if (node.hasClass('Q_columns_column')) {
-				index = parseInt(node.getAttribute('data-index'));
+				index = typeof options.columnIndex === "number" ? options.columnIndex : parseInt(node.getAttribute('data-index'));
+
+				// if columnIndex==="current" open stuff in same column
+				if (options.columnIndex === "current" && index > 0) {
+					index -= 1;
+				}
 			}
 			if (node.hasClass('Q_columns_tool')) {
 				columns = node.Q.tools['q_columns'];

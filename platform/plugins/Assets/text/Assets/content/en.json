@@ -28,7 +28,7 @@
         "YouHaveCreditsToStart": "You have {{amount}} credits to start",
         "PaymentFor": "Payment for \"{{1}}\"",
         "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{userName}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
         "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
         "CreatedCommunity": "for creating community \"{{communityId}}\"",
         "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",

@@ -47,6 +47,7 @@ Q.onInit.add(function () {
  * @param {String|Function} [options.subpath=""] A subpath which may be created on the server if it doesn't already exist. If this is a function, it is executed right before the request is sent.
  * @param {String} [options.showSize=null] showSize is a key in saveSizeName to show on success.
  * @param {String} [options.useAnySize=false] whether to tell the server to accept any size without complaining.
+ * @param {String} [options.sendOriginal=false] If true pass to server also original image source as "original" field.
  * @param {Object} [options.crop] crop If provided, the image will be cropped according to the given parameters before it is saved on the server in the saveSizeName formats. If the browser supports it, the cropping will occur in the browser.
  *   @param {Number} [options.crop.x] left for cropping
  *   @param {Number} [options.crop.y] top for cropping
@@ -179,6 +180,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	showSize: null,
 	useAnySize: false,
 	crop: null,
+	sendOriginal: false,
 	cropping: true,
 	croppingTitle: qtqi.cropping.title,
 	croppingTouchscreen: qtqi.cropping.touchscreen,
@@ -242,11 +244,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	 * @method pick
 	 */
 	pick: function (src, callback) {
-		
 		var $this = this;
 		var state = $this.state('Q/imagepicker');
-		_upload.call(this, src);
-		
+
 		function _callback (err, res) {
 			var msg = Q.firstErrorMessage(err, res);
 			if (msg) {
@@ -269,276 +269,272 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			$this.removeClass('Q_uploading');
 		}
 	
-		function _upload(data) {
-			
-			function _calculateRequiredSize (saveSizeName, imageSize, rotated) {
-		        var widths = [], heights = [];
-		        Q.each(saveSizeName, function(key, size) {
-		            var parts = key.split('x');
-					var w = parseInt(parts[0] || 0);
-					var h = (parts.length === 2) ? parseInt(parts[1] || 0) : w;
-					var r = imageSize.width / imageSize.height;
-					widths.push(w || h * r || imageSize.width);
-					heights.push(h || w / r || imageSize.height);
-		        });
-				var width = Math.max.apply( Math, widths );
-				var height = Math.max.apply( Math, heights );
+		function _calculateRequiredSize (saveSizeName, imageSize, rotated) {
+			var widths = [], heights = [];
+			Q.each(saveSizeName, function(key, size) {
+				var parts = key.split('x');
+				var w = parseInt(parts[0] || 0);
+				var h = (parts.length === 2) ? parseInt(parts[1] || 0) : w;
+				var r = imageSize.width / imageSize.height;
+				widths.push(w || h * r || imageSize.width);
+				heights.push(h || w / r || imageSize.height);
+			});
+			var width = Math.max.apply( Math, widths );
+			var height = Math.max.apply( Math, heights );
 
-		        return { width: width, height: height };
-		    };
+			return { width: width, height: height };
+		};
 
-			function _checkRequiredSize(requiredSize, imageSize) {
-				if (state.useAnySize) {
-					return true;
-				}
-				var ms = state.maxStretch || 1;
-				if (requiredSize.width > imageSize.width * ms
-				 || requiredSize.height > imageSize.height * ms) {
-					var result = Q.handle(
-						[state.onTooSmall, state.onFinish], state,
-						[requiredSize, imageSize]
-					);
-					if (result === false) {
-						return false;
-					}
-				}
+		function _checkRequiredSize(requiredSize, imageSize) {
+			if (state.useAnySize) {
 				return true;
-		    }
-		
-	        function _selectionInfo(requiredSize, imageSize) {
-	            if (!_checkRequiredSize(requiredSize, imageSize)) {
-	            	return _revert();
-	            }
-	            var result = {};
-	            if ( requiredSize.width && requiredSize.height ) {
-					// if specified both dimensions - we should remove
-					// smaller size to avoid double reductions
-		            requiredSize = Q.copy(requiredSize);
-	                if ( requiredSize.width > requiredSize.height ) {
-	                    requiredSize.height = null;
-	                } else {
-	                    requiredSize.width = null;
-	                }
-
-	            }
-				var rqw = requiredSize.width;
-				var rqh = requiredSize.height;
-				var iw = imageSize.width;
-				var ih = imageSize.height;
-	            if (rqw) {
-	                result.width = rqw;
-	                result.height = Math.ceil(imageSize.height * rqw/imageSize.width);
-	            }
-	            if (rqh) {
-	                result.height = rqh;
-	                result.width = Math.ceil(imageSize.width * rqh/imageSize.height);
-	            }
-				result.left = (iw-result.width)/2;
-				result.top = (ih-result.height)/2;
-	            return result;
-	        };
-		
-            function _doCanvasCrop (src, bounds, orientation, callback) {
-				// nothing to crop
-				if ( ! src || ! bounds ) {
-				    throw new Q.Exception('Q/imagepicker: src and bounds are required!');
-				}
-			
-				var canvas = $('<canvas style="display:none"></canvas>').appendTo('body')[0];
-			
-				if (!( canvas && canvas.getContext('2d') )) {
-					return callback.call(this, src, params.crop);
-				}
-			
-				canvas.width = bounds.requiredSize.width;
-				canvas.height = bounds.requiredSize.height;
-	
-				var $img = $('<img />').on('load', function() {
-				    // draw cropped image
-				    var sourceLeft = bounds.left;
-				    var sourceTop = bounds.top;
-				    var sourceWidth = bounds.width;
-				    var sourceHeight = bounds.height;
-				    var destLeft = 0;
-				    var destTop = 0;
-				    var destWidth = bounds.requiredSize.width;
-				    var destHeight = bounds.requiredSize.height;
-					var context = canvas.getContext('2d');
-					switch (orientation) {
-					case 8:
-						context.translate(-canvas.width, 0); 
-						context.rotate(-90*Math.PI/180);
-						break;
-					case 3:
-						context.translate(canvas.width, canvas.height); 
-						context.rotate(180*Math.PI/180);
-						break;
-					case 6:
-						context.translate(canvas.width, 0); 
-						context.rotate(90*Math.PI/180);
-						break;
-				    }
-					var rotated = (orientation === 8 || orientation === 6);
-					var dw = rotated ? destHeight : destWidth;
-					var dh = rotated ? destWidth : destHeight;
-				    drawImageIOSFix(
-						context, $img[0],
-						sourceLeft, sourceTop, sourceWidth, sourceHeight,
-						destLeft, destTop, dw, dh
-					);
-				    var imageData = canvas.toDataURL();
-				    $(canvas).remove();
-					$img.remove();
-				    callback.call(this, imageData, null);
-				}).attr('src', src)
-				.css('display', 'none')
-				.appendTo('body');
-			};
-		
-			function _onImgLoad() {
-
-				Q.addScript(EXIFjslib, function () {
-					EXIF.getData(img, function () {
-						var orientation = this.exifdata.Orientation;
-						document.body.appendChild(img);
-						if (img.computedStyle().imageOrientation === 'from-image') {
-							orientation = 1; // browser already did the work for us
-						}
-						document.body.removeChild(img);
-						var rotated = (orientation === 8 || orientation === 6);
-						var isw = img.width;
-						var ish = img.height;
-						var temp = null;
-						if (rotated) {
-							temp = isw;
-							isw = ish;
-							ish = temp;
-						}
-						imageSize = {
-							width: isw,
-							height: ish
-						};
-						var requiredSize  = _calculateRequiredSize(
-							state.saveSizeName, {width: isw, height: ish}, rotated
-						);
-						if (!_checkRequiredSize(requiredSize, imageSize)) {
-							return _revert();
-						}
-					
-						if (state.cropping && !state.saveSizeName.x) {
-		                    var $croppingElement = $('<img />').attr({ src: img.src })
-								.css({'visibility': 'hidden'});
-							var $title = $('<div />')
-								.addClass('Q_imagepicker_cropping_title')
-								.html(state.croppingTitle);
-							var $explanation = $('<div />')
-								.addClass('Q_imagepicker_cropping_explanation')
-								.html(Q.info.isTouchscreen
-									? state.croppingTouchscreen
-									: state.croppingNotTouchscreen
-								);
-							var $croppingTitle = $('<div />').append(
-								$title, $explanation
-							);
-		                    Q.Dialogs.push({
-		                        className: 'Q_dialog_imagepicker',
-		                        title: $croppingTitle,
-		                        content: $croppingElement,
-		                        destroyOnClose: true,
-								apply: true,
-		                        onActivate : {
-		                            "Q/imagepicker": function ($dialog) {
-										var w = requiredSize.width / isw;
-										var h = requiredSize.height / ish;
-										var rsw1 = rsw2 = Math.min(requiredSize.width, isw);
-										var rsh1 = rsh2 = Math.min(requiredSize.height, ish);
-										var dw = this.width();
-										var dh = this.height();
-										if (rsw2 != dw) {
-											rsh2 *= dw / rsw1;
-											rsw2 = dw;
-										}
-										// if (rsh2 > dh) {
-										// 	rsw2 *= dh / rsh2;
-										// 	rsh2 = dh;
-										// }
-										var maxScale = Math.min(rsw2 / rsw1, rsh2 / rsh1);
-			                            $croppingElement.plugin('Q/viewport', {
-		                                    initial: {
-												x: 0.5, 
-												y: 0.5, 
-												scale: Math.max(rsw2 / isw, rsh2 / ish)
-											},
-											width: rsw2,
-											height: rsh2,
-											maxScale: maxScale
-		                                }, function () {
-		                                	$croppingElement.css({'visibility': 'visible'});
-											Q.handle(state.onCropping, $this, [
-												$dialog,
-												$croppingTitle,
-												$croppingElement
-											]);
-		                                });
-		                            }
-		                        },
-		                        beforeClose: function(dialog) {
-									var state = $('.Q_viewport', dialog).state('Q/viewport');
-				                    var result = state.selection;
-				                    var bounds = {
-				                        requiredSize: requiredSize,
-				                        left: result.left * isw,
-				                        top: result.top * ish,
-				                        width: result.width * isw,
-				                        height: result.height * ish
-				                    };
-				                    if (!_checkRequiredSize(requiredSize, bounds)) {
-				                    	return _revert();
-				                    }
-									_handleOrientation(bounds);
-				                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
-		                        }
-		                    });
-						} else {
-							var bounds = _selectionInfo(requiredSize, imageSize);
-							bounds.requiredSize = requiredSize;
-							_handleOrientation(bounds);
-		                    _doCanvasCrop(img.src, bounds, orientation, _doUpload);
-						}
-
-						function _handleOrientation(bounds) {
-							var temp;
-							if (orientation === 6) {
-								temp = bounds.width;
-								bounds.width = bounds.height;
-								bounds.height = temp;
-								temp = bounds.left;
-								bounds.left = bounds.top;
-								bounds.top = isw - temp - bounds.height;
-							} else if (orientation === 8) {
-								temp = bounds.height;
-								bounds.height = bounds.width;
-								bounds.width = temp;
-								temp = bounds.top;
-								bounds.top = bounds.left;
-								bounds.left = ish - temp - bounds.width;
-							} else if (orientation === 3) {
-								bounds.top = ish - bounds.top - bounds.height;
-								bounds.left = isw - bounds.left - bounds.width;
-							}
-						}
-					});
-				});
 			}
-		
-			var EXIFjslib = '{{Q}}/js/exif.js';
-			Q.addScript(EXIFjslib); // start loading it
-		
-			var img = new Image;
-			img.onload = _onImgLoad;
-			img.src = data;
+			var ms = state.maxStretch || 1;
+			if (requiredSize.width > imageSize.width * ms
+			 || requiredSize.height > imageSize.height * ms) {
+				var result = Q.handle(
+					[state.onTooSmall, state.onFinish], state,
+					[requiredSize, imageSize]
+				);
+				if (result === false) {
+					return false;
+				}
+			}
+			return true;
 		}
-		
+
+		function _selectionInfo(requiredSize, imageSize) {
+			if (!_checkRequiredSize(requiredSize, imageSize)) {
+				return _revert();
+			}
+			var result = {};
+			if ( requiredSize.width && requiredSize.height ) {
+				// if specified both dimensions - we should remove
+				// smaller size to avoid double reductions
+				requiredSize = Q.copy(requiredSize);
+				if ( requiredSize.width > requiredSize.height ) {
+					requiredSize.height = null;
+				} else {
+					requiredSize.width = null;
+				}
+
+			}
+			var rqw = requiredSize.width;
+			var rqh = requiredSize.height;
+			var iw = imageSize.width;
+			var ih = imageSize.height;
+			if (rqw) {
+				result.width = rqw;
+				result.height = Math.ceil(imageSize.height * rqw/imageSize.width);
+			}
+			if (rqh) {
+				result.height = rqh;
+				result.width = Math.ceil(imageSize.width * rqh/imageSize.height);
+			}
+			result.left = (iw-result.width)/2;
+			result.top = (ih-result.height)/2;
+			return result;
+		};
+
+		function _doCanvasCrop (src, bounds, orientation, callback) {
+			// nothing to crop
+			if ( ! src || ! bounds ) {
+				throw new Q.Exception('Q/imagepicker: src and bounds are required!');
+			}
+
+			var canvas = $('<canvas style="display:none"></canvas>').appendTo('body')[0];
+
+			if (!( canvas && canvas.getContext('2d') )) {
+				return callback.call(this, src, params.crop);
+			}
+
+			canvas.width = bounds.requiredSize.width;
+			canvas.height = bounds.requiredSize.height;
+
+			var $img = $('<img />').on('load', function() {
+				// draw cropped image
+				var sourceLeft = bounds.left;
+				var sourceTop = bounds.top;
+				var sourceWidth = bounds.width;
+				var sourceHeight = bounds.height;
+				var destLeft = 0;
+				var destTop = 0;
+				var destWidth = bounds.requiredSize.width;
+				var destHeight = bounds.requiredSize.height;
+				var context = canvas.getContext('2d');
+				switch (orientation) {
+				case 8:
+					context.translate(-canvas.width, 0);
+					context.rotate(-90*Math.PI/180);
+					break;
+				case 3:
+					context.translate(canvas.width, canvas.height);
+					context.rotate(180*Math.PI/180);
+					break;
+				case 6:
+					context.translate(canvas.width, 0);
+					context.rotate(90*Math.PI/180);
+					break;
+				}
+				var rotated = (orientation === 8 || orientation === 6);
+				var dw = rotated ? destHeight : destWidth;
+				var dh = rotated ? destWidth : destHeight;
+				drawImageIOSFix(
+					context, $img[0],
+					sourceLeft, sourceTop, sourceWidth, sourceHeight,
+					destLeft, destTop, dw, dh
+				);
+				var imageData = canvas.toDataURL();
+				$(canvas).remove();
+				$img.remove();
+				callback.call(this, imageData, null);
+			}).attr('src', src)
+			.css('display', 'none')
+			.appendTo('body');
+		};
+
+		function _onImgLoad() {
+			Q.addScript(EXIFjslib, function () {
+				EXIF.getData(img, function () {
+					var orientation = this.exifdata.Orientation;
+					document.body.appendChild(img);
+					if (img.computedStyle().imageOrientation === 'from-image') {
+						orientation = 1; // browser already did the work for us
+					}
+					document.body.removeChild(img);
+					var rotated = (orientation === 8 || orientation === 6);
+					var isw = img.width;
+					var ish = img.height;
+					var temp = null;
+					if (rotated) {
+						temp = isw;
+						isw = ish;
+						ish = temp;
+					}
+					var imageSize = {
+						width: isw,
+						height: ish
+					};
+					var requiredSize  = _calculateRequiredSize(
+						state.saveSizeName, {width: isw, height: ish}, rotated
+					);
+					if (!_checkRequiredSize(requiredSize, imageSize)) {
+						return _revert();
+					}
+
+					if (state.cropping && !state.saveSizeName.x) {
+						var $croppingElement = $('<img />').attr({ src: img.src })
+							.css({'visibility': 'hidden'});
+						var $title = $('<div />')
+							.addClass('Q_imagepicker_cropping_title')
+							.html(state.croppingTitle);
+						var $explanation = $('<div />')
+							.addClass('Q_imagepicker_cropping_explanation')
+							.html(Q.info.isTouchscreen
+								? state.croppingTouchscreen
+								: state.croppingNotTouchscreen
+							);
+						var $croppingTitle = $('<div />').append(
+							$title, $explanation
+						);
+						Q.Dialogs.push({
+							className: 'Q_dialog_imagepicker',
+							title: $croppingTitle,
+							content: $croppingElement,
+							destroyOnClose: true,
+							apply: true,
+							onActivate : {
+								"Q/imagepicker": function ($dialog) {
+									var w = requiredSize.width / isw;
+									var h = requiredSize.height / ish;
+									var rsw1 = rsw2 = Math.min(requiredSize.width, isw);
+									var rsh1 = rsh2 = Math.min(requiredSize.height, ish);
+									var dw = this.width();
+									var dh = this.height();
+									if (rsw2 != dw) {
+										rsh2 *= dw / rsw1;
+										rsw2 = dw;
+									}
+									// if (rsh2 > dh) {
+									// 	rsw2 *= dh / rsh2;
+									// 	rsh2 = dh;
+									// }
+									var maxScale = Math.min(rsw2 / rsw1, rsh2 / rsh1);
+									$croppingElement.plugin('Q/viewport', {
+										initial: {
+											x: 0.5,
+											y: 0.5,
+											scale: Math.max(rsw2 / isw, rsh2 / ish)
+										},
+										width: rsw2,
+										height: rsh2,
+										maxScale: maxScale
+									}, function () {
+										$croppingElement.css({'visibility': 'visible'});
+										Q.handle(state.onCropping, $this, [
+											$dialog,
+											$croppingTitle,
+											$croppingElement
+										]);
+									});
+								}
+							},
+							beforeClose: function(dialog) {
+								var state = $('.Q_viewport', dialog).state('Q/viewport');
+								var result = state.selection;
+								var bounds = {
+									requiredSize: requiredSize,
+									left: result.left * isw,
+									top: result.top * ish,
+									width: result.width * isw,
+									height: result.height * ish
+								};
+								if (!_checkRequiredSize(requiredSize, bounds)) {
+									return _revert();
+								}
+								_handleOrientation(bounds);
+								_doCanvasCrop(img.src, bounds, orientation, _doUpload);
+							}
+						});
+					} else {
+						var bounds = _selectionInfo(requiredSize, imageSize);
+						bounds.requiredSize = requiredSize;
+						_handleOrientation(bounds);
+						_doCanvasCrop(img.src, bounds, orientation, _doUpload);
+					}
+
+					function _handleOrientation(bounds) {
+						var temp;
+						if (orientation === 6) {
+							temp = bounds.width;
+							bounds.width = bounds.height;
+							bounds.height = temp;
+							temp = bounds.left;
+							bounds.left = bounds.top;
+							bounds.top = isw - temp - bounds.height;
+						} else if (orientation === 8) {
+							temp = bounds.height;
+							bounds.height = bounds.width;
+							bounds.width = temp;
+							temp = bounds.top;
+							bounds.top = bounds.left;
+							bounds.left = ish - temp - bounds.width;
+						} else if (orientation === 3) {
+							bounds.top = ish - bounds.top - bounds.height;
+							bounds.left = isw - bounds.left - bounds.width;
+						}
+					}
+				});
+			});
+		}
+
+		var EXIFjslib = '{{Q}}/js/exif.js';
+		Q.addScript(EXIFjslib); // start loading it
+
+		var img = new Image;
+		img.onload = _onImgLoad;
+		img.src = src;
+
 		function _doUpload(data, crop) {
 			if (state.preprocess) {
 				state.preprocess.call($this, _continue);
@@ -561,6 +557,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 					'loader': state.loader,
 					'crop': crop
 				};
+				if (state.sendOriginal) {
+					params.original = src;
+				}
 				if (state.save) {
 					params.save = state.save;
 				}

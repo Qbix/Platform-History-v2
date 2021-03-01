@@ -16,11 +16,11 @@
 function Streams_file_post($params = array())
 {
 	$user = Users::loggedInUser(true);
+	$req = array_merge($_REQUEST, $params);
 	$publisherId = Streams::requestedPublisherId();
 	if (empty($publisherId)) {
-		$publisherId = $_REQUEST['publisherId'] = $user->id;
+		$publisherId = $req['publisherId'] = $user->id;
 	}
-	$req = array_merge($_REQUEST, $params);
 	$type = Streams::requestedType(true);
 	$streamName = Streams::requestedName(true);
     $types = Q_Config::expect('Streams', 'types');

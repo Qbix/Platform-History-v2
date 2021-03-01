@@ -29,7 +29,6 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
             $stream->setAttribute('startTime', round(microtime(true) * 1000));
             $stream->clearAttribute('endTime');
-            $stream->closedTime = null;
             $stream->save();
         }
 

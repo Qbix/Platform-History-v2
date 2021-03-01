@@ -316,7 +316,9 @@ Q.Tool.define("Q/video", function (options) {
 	onPause: new Q.Event(function () {
 		this.clearPlayInterval();
 	}),
-	onSeek: new Q.Event(),
+	onSeek: new Q.Event(function (position) {
+		this.state.currentPosition = position;
+	}),
 	onEnded: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
@@ -432,7 +434,7 @@ Q.Tool.define("Q/video", function (options) {
 				Q.handle(state.onPause, tool, [position]);
 			}, throttle);
 			var onSeek = Q.throttle(function () {
-				var position = state.currentPosition || tool.getCurrentPosition();
+				var position = tool.getCurrentPosition();
 				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onSeek, tool, [position]);
 			}, throttle);

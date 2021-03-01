@@ -68,6 +68,7 @@
 				streamName: stream.fields.name,
 				alt: 'icon',
 				title: stream.fields.title,
+				content: stream.fields.content,
 				duration: duration,
 				preamble: preamble
 			});
@@ -123,6 +124,7 @@ Q.Template.set('Streams/webrtc/preview/view',
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+	+ '<div class="Streams_preview_content">{{content}}</div>'
 	+ '{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true}}'
 	+ '</div></div>'
 );
