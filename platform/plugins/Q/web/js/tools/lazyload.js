@@ -35,7 +35,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 
 	var Elp = Element.prototype;
 	
-	Q.ensure(window.IntersectionObserver, _polyfill, function () {
+	Q.ensure('IntersectionObsever', _polyfill, function () {
 		// Observe whatever is on the page already
 		var p = tool.element.scrollingParent(true);
 		if (p === document.body) {

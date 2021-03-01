@@ -4833,7 +4833,7 @@ Streams.Metrics = function (params) {
 	};
 
 	if (this.useFaces) {
-		Q.ensure(Q.Users.Faces, '{{Users}}/js/Faces.js', function () {
+		Q.ensure('Q.Users.Faces', function () {
 			that.faces = new Q.Users.Faces(that.useFaces);
 			that.faces.start(function () {
 				that.faces.onEnter.add(function () {

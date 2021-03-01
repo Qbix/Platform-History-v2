@@ -3539,5 +3539,7 @@
 	}, 'Users.dialogCloseHint');
 	
 	Q.Users.cache = Q.Users.cache || {};
+	
+	Q.ensure.loaders['Q.Users.Faces'] = '{{Users}}/js/Faces.js';
 
 })(Q, jQuery);

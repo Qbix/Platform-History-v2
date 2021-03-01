@@ -25,14 +25,6 @@ function Q () {
 	// explore the docs at http://qbix.com/platform/client
 }
 
-// external libraries, which you can override
-Q.libraries = {
-	json: "{{Q}}/js/json3-3.2.4.min.js",
-	handlebars: '{{Q}}/js/handlebars-v4.0.10.min.js',
-	jQuery: '{{Q}}/js/jquery-3.2.1.min.js',
-	bluebird: '{{Q}}/js/bluebird.min.js'
-};
-
 /**
  * @module Q
  */
@@ -2042,34 +2034,84 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  * like Q.url() and Q.addScript can be expected to work properly.
  * @static
  * @method ensure
- * @param {Mixed} property
- *  The property to test for being undefined.
- * @param {String|Function|Q.Event} loader
- *  Something to execute if the property was undefined.
- *  If a string, this is interpreted as the URL of a javascript to load.
- *  If a function, this is called with the callback as the first argument.
- *  If an event, the callback is added to it.
- *  The loader must call the callback and pass the property as the first parameter.
+ * @param {String} property
+ *  Path to the property to test whether Q.getObject() will return undefined.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
  *  The first parameter should be the property (object, string, etc.) that's now defined.
  *  This is where you would put the code that relies on the property being defined.
  */
-Q.ensure = function _Q_ensure(property, loader, callback) {
-	if (property !== undefined) {
+Q.ensure = function _Q_ensure(property, callback) {
+	if (Q.getObject(property, root) !== undefined) {
 		Q.handle(callback, null, [property]);
 		return;
+	}
+	var loader = Q.ensure.loaders[property];
+	if (!loader) {
+		throw new Q.Error("Q.ensure: missing loader for " + property);
 	}
 	Q.onInit.addOnce(function () {
 		if (typeof loader === 'string') {
 			Q.require(loader, callback);
-			return;
 		} else if (typeof loader === 'function') {
-			loader(callback);
+			loader(property, callback);
 		} else if (loader instanceof Q.Event) {
-			loader.add(callback);
+			loader.add(property, function _loaded() {
+				callback(property);
+			});
 		}
 	});
+};
+
+/**
+ * Whether a page is currently being loaded
+ * @property {Object} ensure.loaders
+ *  Something to execute if the property was undefined and needs to be loaded.
+ *  The key is the property. The value can be one of several things.
+ *  If a string, this is interpreted as the URL of a javascript to load.
+ *  If a function, this is called with the property and callback as arguments.
+ *  If an event, the callback is added to it.
+ *  The loader must call the callback and pass the property as the first parameter.
+ */
+Q.ensure.loaders = {
+	'JSON': "{{Q}}/js/json3-3.2.4.min.js",
+	'Handlebars': '{{Q}}/js/handlebars-v4.0.10.min.js',
+	'jQuery': '{{Q}}/js/jquery-3.2.1.min.js',
+	'Q.PHPJS': "{{Q}}/js/phpjs.js",
+	'Promise': function (property, callback) {
+		// This loads a Promise library for browsers which do not
+		// support Promise natively. For example: IE, Opera Mini.
+		// WARN: Could have race conditions:
+		if (Q.Promise || typeof Promise !== "undefined"
+		&& Promise.toString().indexOf("[native code]") !== -1) {
+			return callback && callback(property); // already loaded some other library
+		}
+		Q.addScript('{{Q}}/js/bluebird.min.js', function() {
+			Q.Promise = Promise;
+			callback && callback(property);
+		});
+	},
+	'IntersectionObserver': function (property, callback) {
+		if ('IntersectionObserver' in window
+		&& 'IntersectionObserverEntry' in window
+		&& 'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+			// Minimal polyfill for Edge 15's lack of `isIntersecting`
+			// See: https://github.com/w3c/IntersectionObserver/issues/211
+			if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+   				  Object.defineProperty(window.IntersectionObserverEntry.prototype,
+   					  'isIntersecting', {
+   						  get: function () {
+   							  return this.intersectionRatio > 0;
+   						  }
+   					  }
+   				  );
+			}
+			return callback && callback(property);
+	 	}
+		Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', function () {
+			callback && callback(property);
+		});
+	}
 };
 
 /**
@@ -5961,7 +6003,7 @@ Q.init = function _Q_init(options) {
 		}
 
 		function _getJSON() {
-			Q.ensure(root.JSON, Q.libraries.json, _ready);
+			Q.ensure('JSON', _ready);
 		}
 
 		var baseUrl = Q.baseUrl();
@@ -6204,7 +6246,7 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  */
 Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 	Q.onInit.addOnce(function () {
-		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
+		Q.ensure('Handlebars', function () {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
@@ -14410,15 +14452,7 @@ Q.beforeInit.addOnce(function () {
 		}
 	}
 
-	// This loads bluebird library to enable Promise for browsers which do not
-	// support Promise natively. For example: IE, Opera Mini.
-	// WARN: Could have race conditions:
-	if (!(typeof Promise !== "undefined"
-	&& Promise.toString().indexOf("[native code]") !== -1)) {
-		Q.addScript(Q.url(Q.libraries.bluebird), function() {
-			Q.Promise = Promise;
-		});
-	}
+	Q.ensure('Promise');
 }, 'Q');
 
 /**
