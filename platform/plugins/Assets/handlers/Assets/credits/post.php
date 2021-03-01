@@ -7,7 +7,7 @@ function Assets_credits_post($params = array())
 	$loggedUserId = Users::loggedInUser(true)->id;
 	$amount = (float)$req['amount'];
 	$credits = (int)Assets_Credits::amount();
-	$needCredits = Assets_Credits::convertToCredits($amount, $req['currency']);
+	$needCredits = $req['currency'] == "credits" ? $amount : Assets_Credits::convertToCredits($amount, $req['currency']);
 
 	if ($credits < $needCredits) {
 		$needCredits = $needCredits - $credits;
