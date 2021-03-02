@@ -78,7 +78,7 @@
 .Streams_dialog_pdf .Q_tabbing_container .Q_tabbing_item[data-content=upload] input.Streams_pdf_file,
 .Streams_dialog_pdf .Q_tabbing_container .Q_tabbing_item[data-content=link] label {
 	display: block;
-	margin: 30px auto 0;
+	margin: 0 auto;
 	width: 90%;
 	white-space: nowrap;
 }
@@ -177,7 +177,7 @@
 .Streams_dialog_audio input,
 .Streams_dialog_video input,
 .Streams_dialog_pdf input{
-	height: 40px;
+	height: 30px;
 	width: 60%;
 }
 .Streams_dialog_audio .Streams_audio_composer_submit button[name=reset],
@@ -271,7 +271,6 @@
 
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
 .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
-	white-space: nowrap;
 	display: block;
 	overflow: hidden;
 	text-align: left;

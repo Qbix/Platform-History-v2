@@ -166,6 +166,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
 	preprocess: [],
+	openInSameColumn: [],
 	templates: {
 		main: {
 			dir: '{{Streams}}/views',
@@ -303,13 +304,15 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var $te = $(tool.element);
 		var state = tool.state;
-		var isPublisher = Q.Users.loggedInUserId() === Q.getObject("stream.fields.publisherId", state);
+		var loggedInUserId = Q.Users.loggedInUserId();
+		var isPublisher = loggedInUserId === Q.getObject("stream.fields.publisherId", state);
 
 		var subscribed = ('yes' === Q.getObject('stream.participant.subscribed', state));
 		var what = subscribed ? 'on' : 'off';
 		var touchlabel = subscribed ? tool.text.Subscribed : tool.text.Unsubscribed;
 		var fields = Q.extend({}, state.more, state.templates.main.fields);
 		fields.textarea = (state.inputType === 'textarea');
+		fields.loggedIn = loggedInUserId;
 		fields.text = tool.text;
 		fields.closeable = state.closeable && isPublisher;
 		fields.earlierSrc = Q.url('{{Streams}}/img/chat/earlier.png');
@@ -443,18 +446,20 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.Template.render('Streams/chat/message/bubble', fields, function (err, html) {
+				var $html = $(html);
+				$html.addClass("Streams_chat_message_skipOverflowed");
+
 				// generate special message for related streams
 				if (fields.type === "Streams/relatedTo") {
-					var $preview = tool.renderRelatedStream(fields);
-					if (!$preview) {
-						return p.fill(ordinal)(null, null);
-					}
+					tool.renderRelatedStream(fields, function (preview) {
+						if (!preview) {
+							return p.fill(ordinal)(null, null);
+						}
 
-					var $html = $(html);
-					$html.addClass("Streams_chat_message_skipOverflowed");
-					$(".Streams_chat_message_content", $html).html($preview, true);
-					Q.handle(state.onMessageRender, tool, [fields, $html]);
-					p.fill(ordinal)(null, $html);
+						$(".Streams_chat_message_content", $html).html(preview, true);
+						Q.handle(state.onMessageRender, tool, [fields, $html]);
+						p.fill(ordinal)(null, $html);
+					});
 				} else {
 					Q.handle(state.onMessageRender, tool, [fields, html]);
 					p.fill(ordinal)(err, fields.html || html);
@@ -523,20 +528,27 @@ Q.Tool.define('Streams/chat', function(options) {
 
 				// set handler for each tool activated in chat message
 				$element[0].forEachTool(function () {
-					var state = this.state;
+					var previewState = this.state;
 					var $toolElement = $(this.element);
+					var $chatItem = $toolElement.closest(".Streams_chat_item");
 
-					if (!(state.publisherId && state.streamName)) {
+					if (!(previewState.publisherId && previewState.streamName)) {
 						return;
 					}
 
-					Q.Streams.get(state.publisherId, state.streamName, function (err) {
+					this.state.onError && this.state.onError.set(function () {
+						$chatItem.remove();
+					}, tool);
+					this.state.onAfterClose && this.state.onAfterClose.set(function () {
+						$chatItem.remove();
+					}, tool);
+
+					Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
 						if (err) {
 							return console.warn(err);
 						}
 
 						var stream = this;
-
 						var streamType = stream.fields.type;
 
 						if (streamType === 'Streams/webrtc') {
@@ -545,34 +557,39 @@ Q.Tool.define('Streams/chat', function(options) {
 						}
 
 						$toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
-							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
-							var toolName = null;
-							for (var i=0, l=possibleToolNames.length; i<l; ++i) {
-								if (Q.Tool.defined(possibleToolNames[i])) {
-									toolName = possibleToolNames[i];
-									break;
+							// need to request stream again, because stream may be modified since it requested when message created
+							Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
+								var stream = this;
+								// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
+								var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
+								var toolName = null;
+								for (var i=0, l=possibleToolNames.length; i<l; ++i) {
+									if (Q.Tool.defined(possibleToolNames[i])) {
+										toolName = possibleToolNames[i];
+										break;
+									}
 								}
-							}
 
-							var element = "div";
-							// if tool is preview, apply Streams/preview tool first, because it may be required
-							if (toolName && toolName.endsWith("/preview")) {
-								element = Q.Tool.setUpElement(element, "Streams/preview", state);
-							}
+								var element = "div";
+								// if tool is preview, apply Streams/preview tool first, because it may be required
+								if (toolName && toolName.endsWith("/preview")) {
+									element = Q.Tool.setUpElement(element, "Streams/preview", previewState);
+								}
 
-							var fields = Q.extend({}, stream.getAllAttributes(), {
-								publisherId: stream.fields.publisherId,
-								streamName: stream.fields.name,
-								autoplay: true,
-								url: stream.fileUrl() || stream.iconUrl('200')
-							});
+								var fields = Q.extend({}, stream.getAllAttributes(), {
+									publisherId: stream.fields.publisherId,
+									streamName: stream.fields.name,
+									autoplay: true,
+									url: stream.fileUrl() || stream.iconUrl('200')
+								});
 
-							element = Q.Tool.setUpElement(element, toolName, fields);
-							Q.invoke({
-								title: stream.fields.title,
-								content: element,
-								trigger: $toolElement[0]
+								element = Q.Tool.setUpElement(element, toolName, fields);
+								Q.invoke({
+									title: stream.fields.title,
+									content: element,
+									trigger: $toolElement[0],
+									columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
+								});
 							});
 						});
 					});
@@ -677,7 +694,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var $more = tool.$('.Streams_chat_more');
 		if (Q.isEmpty(results)) {
 			return $more.hide();
-		};
+		}
 		var $scm = tool.$('.Streams_chat_messages');
 		tool.renderMessages(results, function (items) {
 			tool.$('.Streams_chat_noMessages').remove();
@@ -800,6 +817,25 @@ Q.Tool.define('Streams/chat', function(options) {
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
 		.set(function(stream, message) {
 			tool.renderMessage(message);
+		}, tool);
+		// a new stream was related (including a call)
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/unrelatedTo')
+		.set(function(stream, message) {
+			var instructions = JSON.parse(message.instructions);
+			var fromPublisherId = Q.getObject("fromPublisherId", instructions);
+			var fromStreamName = Q.getObject("fromStreamName", instructions);
+
+			if (!fromStreamName || !fromPublisherId) {
+				return;
+			}
+
+			// search preview for this stream and remove
+			$(".Streams_preview_tool", $te).each(function () {
+				var previewTool = Q.Tool.from(this, "Streams/preview");
+				if (previewTool && previewTool.state.publisherId === fromPublisherId && previewTool.state.streamName === fromStreamName) {
+					Q.handle(previewTool.state.onAfterClose, previewTool);
+				}
+			});
 		}, tool);
 
 		// new user joined
@@ -1022,8 +1058,10 @@ Q.Tool.define('Streams/chat', function(options) {
 	 * Render related stream as chat message
 	 * @method renderRelatedStream
 	 * @param {object} message
+	 * @param {function} callback
 	 */
-	renderRelatedStream: function (message) {
+	renderRelatedStream: function (message, callback) {
+		var tool = this;
 		var state = this.state;
 
 		if (Q.getObject("constructor.name", message) !== "Streams_Message") {
@@ -1033,30 +1071,32 @@ Q.Tool.define('Streams/chat', function(options) {
 		var instructions = message.getAllInstructions();
 
 		if (state.excludedRelatedStreams.includes(instructions.fromType)) {
-			return;
+			return Q.handle(callback, message, [null]);
 		}
 
 		var previewToolName = instructions.fromType + '/preview';
 		if (!Q.Tool.defined(previewToolName)) {
+			Q.handle(callback, message, [null]);
 			return console.warn("tool " + previewToolName + " not found");
 		}
 
 		var fields = {
 			publisherId: instructions.fromPublisherId,
-			streamName: instructions.fromStreamName,
-			closeable: false,
-			onError: function () {
-				$(this.element).closest(".Streams_chat_item").remove();
-			}
+			streamName: instructions.fromStreamName
 		};
 
 		if (previewToolName === "Streams/image/preview") {
-			fields.showTitle = false;
 			fields.imagepicker = {showSize: "200"};
 		}
 
-		return Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields);
-		//return $('<div />').tool("Streams/preview", fields).tool(previewToolName, fields);
+		Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
+			if (err || this.fields.closedTime) {
+				return Q.handle(callback, message, [null]);
+			}
+
+			Q.handle(callback, message, [Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields)]);
+			tool.scrollToBottom();
+		});
 	},
 	getOrdinal: function(action, ordinal){
 		if (ordinal) {
@@ -1276,7 +1316,9 @@ Q.Template.set('Streams/chat/main',
 		'<!-- messages -->'+
 	'</div>'+
 	'<form class="Streams_chat_composer" action="" method="post">'+
+		'{{#if loggedIn}}' +
 		'<div class="Streams_chat_addons">+</div>' +
+		'{{/if}}' +
 		'{{#if textarea}}' +
 			'<textarea placeholder="{{placeholder}}"></textarea>'+
 		'{{else}}' +

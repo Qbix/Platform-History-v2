@@ -75,7 +75,7 @@ Q.text = {
 			"minute": "minute",
 			"minutes": "minutes",
 			"hour": "hour",
-			"hour": "hours",
+			"hours": "hours",
 			"day": "day",
 			"days": "days",
 			"week": "week",
@@ -9485,12 +9485,21 @@ Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
 	var seconds = Math.floor(milliseconds / 1000);
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
-	var components = [minutes % 60];
+
+	minutes = (minutes % 60).toString();
+	if (minutes.length === 1) {
+		minutes = '0' + minutes;
+	}
+	var components = [minutes];
 	if (seconds || forceShow.seconds) {
-		components.push(seconds % 60);
+		seconds = (seconds % 60).toString();
+		if (seconds.length === 1) {
+			seconds = '0' + seconds;
+		}
+		components.push(seconds);
 	}
 	if (hours || forceShow.hours) {
-		components.shift(hours);
+		components.unshift(hours);
 	}
 	return components.join(':');
 };
@@ -12465,8 +12474,8 @@ function _onPointerBlurHandler() {
 Q.Dialogs = {
 
 	options: {
-		topMargin: '10%', // in percentage	
-		bottomMargin: '10%' // or in absolute pixel values
+		topMargin: '5%', // in percentage
+		bottomMargin: '5%' // or in absolute pixel values
 	},
 	
 	dialogs: [], // stack of dialogs that is currently being shown
@@ -12884,10 +12893,10 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
-	var o = options;
 	if (options.template) {
 		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
-			o = Q.extend({ content: html }, options);
+			options.content = html;
+			delete options.template;
 			_continue();
 		});
 	} else {
@@ -12895,7 +12904,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, [o]);
+			var ret = Q.handle(handler, Q, [options]);
 			if (ret === false) {
 				return false
 			}

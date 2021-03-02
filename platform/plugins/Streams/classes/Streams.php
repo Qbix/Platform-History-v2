@@ -123,14 +123,14 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages relating other streams to this one
-	 * @property WRITE_LEVEL['relate']
+	 * @property $WRITE_LEVEL['relate']
 	 * @type integer
 	 * @default 23
 	 * @final
 	 */
 	/**
 	 * Can update properties of relations directly
-	 * @property WRITE_LEVEL['relations']
+	 * @property $WRITE_LEVEL['relations']
 	 * @type integer
 	 * @default 25
 	 * @final
@@ -1699,7 +1699,7 @@ abstract class Streams extends Base_Streams
 		$fromPublisherId,
 		$fromStreamName,
 		$options = array())
-	{		
+	{
 		self::getRelations(
 			$asUserId,
 			$toPublisherId,
@@ -2445,9 +2445,82 @@ abstract class Streams extends Base_Streams
 			$returnMultiple ? $streams : $stream
 		);
 	}
-	
+
+	/**
+	 * Check if category allow new relations
+	 * @method checkAvailableRelations
+	 * @param {string} $asUserId The id of the user on whose behalf the stream requested
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamName The name of the stream
+	 * @param {string} $relationType The type of the relation
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.postMessage=true] Whether to post messages Streams/relation/available, Streams/relation/unavailable
+	 * @param {boolean} [$options.throw=false] If true and relation unavailbale, throws exception
+	 * @param {boolean} [$options.singleRelation=false] If true, check that user already related stream to category. If yes throws exception.
+	 * @return {boolean} if available or not
+	 */
+	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
+		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$maxRelations = Q::ifset($stream->getAttribute("maxRelations"), $relationType, null);
+		if (!is_numeric($maxRelations)) {
+			return true;
+		}
+
+		$postMessage = Q::ifset($options, "postMessage", true);
+		$throw = Q::ifset($options, "throw", false);
+		$singleRelation = Q::ifset($options, "singleRelation", false);
+		$texts = Q_Text::get("Streams/content");
+		$exceededText = Q::ifset($texts, "types", $relationType, "MaxRelationsExceeded", "Max relations exceeded");
+
+		$currentRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+			"toPublisherId" => $publisherId,
+			"toStreamName" => $streamName,
+			"type" => $relationType
+		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+
+		$available = $maxRelations - $currentRelations;
+		if ($available > 0) {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/available',
+					'instructions' => array("available" => $available)
+				));
+			}
+
+			if ($singleRelation) {
+				$selfRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+					"toPublisherId" => $publisherId,
+					"toStreamName" => $streamName,
+					"type" => $relationType,
+					"fromPublisherId" => $asUserId
+				))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+				if ($selfRelations) {
+					if ($throw) {
+						throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+					} else {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		} else {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/unavailable'
+				));
+			}
+
+			if ($throw) {
+				throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+			}
+
+			return false;
+		}
+	}
 	/**
 	 * Updates the weight on a relation
+	 * @method updateRelation
 	 * @param {string} $asUserId
 	 *  The id of the user on whose behalf the app will be updating the relation
 	 * @param {string} $toPublisherId

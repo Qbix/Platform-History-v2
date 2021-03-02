@@ -2228,19 +2228,6 @@
 		Q.extend(this, fields);
 		this.typename = 'Q.Users.Contact';
 	};
-	var Cp = Contact.prototype;
-
-	/**
-	 * Constructs a contact from fields, which are typically returned from the server.
-	 * @class Users.Contact
-	 * @constructor
-	 * @param {Object} fields
-	 */
-	var Contact = Users.Contact = function Users_Contact(fields) {
-		Q.extend(this, fields);
-		this.typename = 'Q.Users.Contact';
-	};
-	var Cp = Contact.prototype;
 
 	/**
 	 * Contacts batch getter.

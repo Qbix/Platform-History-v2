@@ -4,6 +4,9 @@
     height: 250px;
     overflow: auto;
 }
+.Q_column_slot .Q_pdf_tool:only-child {
+    height: 100%;
+}
 .Q_pdf_composer {
     padding: 10px;
     position: relative;

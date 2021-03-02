@@ -12,8 +12,10 @@
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
  *   @uses Q inplace
  *   @param {Boolean} [options.showTitle=true] Whether to display the title of the image stream
+ *   @param {Boolean} [options.defineTitle=false] If true allow to set stream title
  *   @param {Boolean} [options.updateTitle=false] Whether to update the title to reflect the file name
  *   of an image
+ *   @param {Boolean} [options.sendOriginal=false] If true send to server original image source tool.
  *   @param {Boolean} [options.dontSetSize=false] If true, shows the image in its natural size instead of using preview.state.imagepicker.showSize
  *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
  *     @param {Object} [options.templates.view]
@@ -43,23 +45,31 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 	var state = tool.state;
 	var ps = preview.state;
 	tool.preview = preview;
-	if (ps.actions) {
-		ps.actions.position = 'tr';
-	}
 	ps.templates.create.name = 'Streams/image/preview/create';
 	ps.templates.create.showTitle = (state.showTitle !== false);
 	if (ps.creatable) {
 		ps.creatable.streamType = ps.creatable.streamType || 'Streams/image';
 		ps.creatable.title = ps.creatable.title || 'New Image';
 	}
-	ps.onRefresh.add(tool.refresh.bind(tool), tool);
-	ps.onComposer.add(tool.composer.bind(tool), tool);
+
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			console.warn(msg);
+		}
+
+		tool.text = text.image;
+		ps.onRefresh.add(tool.refresh.bind(tool), tool);
+		ps.onComposer.add(tool.composer.bind(tool), tool);
+	});
 },
 
 {
 	inplace: {},
 	dontSetSize: false,
 	showTitle: true,
+	sendOriginal: false,
+	defineTitle: false,
 	updateTitle: false,
 	templates: {
 		view: {
@@ -161,19 +171,38 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 	},
 	composer: function () {
 		var tool = this;
+		var state = this.state;
 		var ps = tool.preview.state;
 		var src = Q.url('{{Q}}/img/actions/add.png');
 		this.$('img.Streams_preview_add').attr('src', src);
 
 		// add imagepicker
-		var ipo = Q.extend({}, ps.imagepicker, 10, {
+		var ipo = Q.extend({sendOriginal: state.sendOriginal}, ps.imagepicker, 10, {
 			preprocess: function (callback) {
 				if (ps.creatable && ps.creatable.preprocess) {
-					Q.handle(ps.creatable.preprocess, this, [_proceed, tool, event]);
+					Q.handle(ps.creatable.preprocess, this, [_proceed, tool]);
+				} else if (state.defineTitle) {
+					Q.Dialogs.push({
+						className: 'Q_dialog_stream_title',
+						title: tool.text.imageTitle,
+						content: "<input name='title' value='" + tool.text.uploadedImage + "'>",
+						destroyOnClose: true,
+						apply: true,
+						onActivate : {
+
+						},
+						beforeClose: function(dialog) {
+							_proceed({
+								title: $("input[name=title]", dialog).val()
+							});
+						}
+					});
 				} else {
 					_proceed();
 				}
+
 				Q.Streams.retainWith(tool);
+
 				function _proceed(overrides, weight) {
 					if (overrides != undefined && !Q.isPlainObject(overrides)) {
 						return;
@@ -209,10 +238,18 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 							tool.preview.loading();
 						}, 0);
 						ps.streamName = stream.fields.name;
-					}, ps.related, ps.creatable && ps.creatable.options);
+					}, null, ps.creatable && ps.creatable.options);
 				}
 			},
 			onFinish: {'Streams/image/preview': function (data, key, file) {
+				Q.Streams.relate(
+					ps.related.publisherId,
+					ps.related.streamName,
+					ps.related.type,
+					ps.publisherId,
+					ps.streamName
+				);
+
 				Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {
 					messages: true,
 					changed: {icon: true},

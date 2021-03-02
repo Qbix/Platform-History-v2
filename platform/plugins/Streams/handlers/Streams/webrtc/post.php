@@ -21,9 +21,23 @@ function Streams_webrtc_post($params = array())
 {
 	$params = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-	$publisherId = Q::ifset($params, 'publisherId', Users::loggedInUser(true)->id);
+	$loggedInUserId = Users::loggedInUser(true)->id;
+	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
 	$adapter = Q::ifset($params, 'adapter', 'node');
+	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
+	$relate = Q::ifset($params, 'relate', null);
+	$content = Q::ifset($params, 'content', null);
+
+	// check maxCalls
+	if (!empty($relate)) {
+		// if calls unavailable, throws exception
+		Streams::checkAvailableRelations($publisherId, $relate["publisherId"], $relate["streamName"], $relate["relationType"], array(
+			"postMessage" => false,
+			"throw" => true,
+			"singleRelation" => true
+		));
+	}
 
 	if (!in_array($adapter, array('node', 'twilio'))) {
 		throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
@@ -33,6 +47,27 @@ function Streams_webrtc_post($params = array())
 
 	$webrtc = new $className();
 	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
+
+	if ($publisherId == $loggedInUserId) {
+		if ($content) {
+			$result['stream']->content = $content;
+			$result['stream']->changed();
+		}
+	}
+
+	if (!empty($relate)) {
+		$result['stream']->relateTo((object)array(
+			"publisherId" => $relate["publisherId"],
+			"name" => $relate["streamName"]
+		), $relate["relationType"], $result['stream']->publisherId, array(
+			"inheritAccess" => true,
+			"weight" => time()
+		));
+	}
+
+	if ($resumeClosed !== null) {
+		$result['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+	}
 	$result['stream']->join();
 
 	Q_Response::setSlot("room", $result);

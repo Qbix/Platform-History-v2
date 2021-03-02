@@ -7,6 +7,8 @@
  */
 var Q = require('Q');
 var fs = require('fs');
+var path = require('path');
+var child_process = require('child_process');
 
 /**
  * Static methods for the Streams model
@@ -1080,6 +1082,36 @@ Streams.fetchOne = function (asUserId, publisherId, streamName, callback, fields
 		res[0].calculateAccess(asUserId, function () {
 		    callback.call(res[0], null, res[0]);
 		});
+	});
+};
+
+/**
+ * Closes a stream in the database, and marks it for removal unless it is required.
+ * @method close
+ * @static
+ * @param {String} asUserId	The user id to calculate access rights
+ * @param {String} publisherId The publisher Id
+ * @param {String} streamName The name of the stream
+ * @param {Function} [callback=null] Callback receives the (err, stream) as parameters
+ */
+Streams.close = function (asUserId, publisherId, streamName, callback) {
+	var phpScriptPath = path.dirname(__dirname) + '/scripts/api.php';
+	var args = {
+		"appRoot": Q.app.DIR,
+		"action": "close",
+		"asUserId": asUserId,
+		"publisherId": publisherId,
+		"streamName": streamName
+	};
+	args.signature = Q.Utils.signature(args);
+	var argsString = '';
+	Object.entries(args).forEach(([key, value]) => { argsString += '--' + key + '=' + value + ' '; });
+	child_process.exec("php " + phpScriptPath + " " + argsString, function(err, response, stderr) {
+		if(err){
+			console.log(err);
+		}
+
+		Q.handle(callback, null, [publisherId, streamName]);
 	});
 };
 
