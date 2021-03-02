@@ -126,6 +126,7 @@
 			 *  @param {number} options.amount
 			 *  @param {string} options.currency Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {Streams_Stream} [options.userId] The id of user who would receive credits
+			 *  @param {Stream} [options.reason] payment reason
 			 *  @param {Streams_Stream} [options.toStream] Valuable stream object for which the payment is being made.
 			 *    It also can be object with keys "publisherId" and "streamName"
 			 *  @param {Array} [options.items] an array of objects, each with "publisherId", "streamName" and "amount"
@@ -181,6 +182,7 @@
 						currency: options.currency,
 						userId: options.userId,
 						toStream: options.toStream,
+						reason: options.reason,
 						items: options.items
 					}
 				});
