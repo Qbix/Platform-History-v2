@@ -210,6 +210,7 @@ abstract class Places extends Base_Places
 		case 'mi':
 		case 'miles':
 			$mi = intval(round($meters/1609.34*10)/10);
+			$mi = $mi==0 ? 1 : $mi;
 			if ($mi == 1 and $displayUnits === 'miles') {
 				$displayUnits = 'mile';
 			}
