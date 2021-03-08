@@ -67,7 +67,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function userStream($userId = null, $asUserId = null, $throwIfNotLoggedIn = false)
 	{
 		if (!isset($userId)) {
-			$user = Users::loggedInUser($throwIfNotLoggedIn);
+			$user = Users::loggedInUser($throwIfNotLoggedIn, false);
 			if (!$user) {
 				return null;
 			}
