@@ -182,9 +182,11 @@ function _Streams_file_preview(options, preview) {
 		$container.off([Q.Pointer.fastclick, ".Streams_preview"]);
 
 		// attach custom handler
-		$container.on([Q.Pointer.fastclick, ".Streams_file_preview"], function () {
+		// As we styled file input to fill whole tool element no need to trigger click, because click happens naturally
+		// on file element and hence on desktop and android click happens twice, but on ios it happens once.
+		/*$container.on([Q.Pointer.fastclick, ".Streams_file_preview"], function () {
 			$file.trigger("click");
-		});
+		});*/
 
 		$file.on("click", function (event) {
 			event.stopPropagation();
@@ -284,7 +286,7 @@ Q.Template.set('Streams/file/preview/edit',
 	+ '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
 	+ '<div class="Streams_preview_file_size">{{size}}</div>'
 	+ '<form enctype="multipart/form-data" class="Streams_file_form">'
-	+ '	<input name="file" type="file" id="{{prefix}}file" class="Streams_file_input">'
+	+ '	<input name="file" type="file" class="Streams_file_input">'
 	+ ' <input name="streamName" type="hidden" value="{{streamName}}">'
 	+ ' <input name="streamType" type="hidden" value="{{streamType}}">'
 	+ '</form>'
@@ -297,7 +299,7 @@ Q.Template.set('Streams/file/preview/create',
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
 	+ '</div>'
-	+ '<form enctype="multipart/form-data" class="Streams_file_form"><input name="file" type="file" id="{{prefix}}file" class="Streams_file_input"></form>'
+	+ '<form enctype="multipart/form-data" class="Streams_file_form"><input name="file" type="file" class="Streams_file_input"></form>'
 	+ '</div>'
 );
 
