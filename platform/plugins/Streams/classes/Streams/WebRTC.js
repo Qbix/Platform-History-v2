@@ -7,6 +7,7 @@
  */
 const Q = require('Q');
 const fs = require('fs');
+const { PassThrough } = require('stream');
 
 var express = require('express');
 var app = express();
@@ -226,6 +227,8 @@ WebRTC.listen = function () {
     var io = socket.io;
     var webrtcNamespace = io.of('/webrtc');
 
+    var _streamingData = new PassThrough();
+
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
 
@@ -247,9 +250,14 @@ WebRTC.listen = function () {
                     //'-f', 'lavfi', '-i', 'anullsrc',
 
                     //set input framerate to 24 fps
-                    //'-r', '24',
+                    //'-r', '30',
+                    //'-f', 'rawvideo',
+                    //'-s', '1280x768',
                     '-re',
                     // FFmpeg will read input video from STDIN
+                    //'-f', 's16be',
+                    //'-ar', '48k',
+                    //'-ac', '1',
                     '-i', '-',
 
                     // Because we're using a generated audio source which never ends,
@@ -267,11 +275,13 @@ WebRTC.listen = function () {
                     // encoding AAC, so we must transcode the audio to AAC here on the server.
                     '-acodec', 'aac',
 
+                    //'-map', '0:0',
+                    //'-map', '0:1',
                     // FLV is the container format used in conjunction with RTMP
                     '-f', 'flv',
-
                     //set output framerate to 24 fps
                     //'-r', '24',
+                    //'-s', '1280x768',
 
                     // The output RTMP URL.
                     // For debugging, you could set this to a filename like 'test.flv', and play
@@ -279,6 +289,13 @@ WebRTC.listen = function () {
                     // later on in this tutorial.
                     rtmpUrl
                 ]);
+
+                /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
+  -pix_fmt yuv420p -profile:v baseline -s 426x240 -bufsize 6000k \
+  -vb 400k -maxrate 1500k -deinterlace -vcodec libx264           \
+  -preset veryfast -g 30 -r 30 -f flv                            \
+  -flvflags no_duration_filesize                                 \
+  "rtmp://live-api.facebook.com:80/rtmp/my_key"*/
 
                 // If FFmpeg stops for any reason, close the WebSocket connection.
                 ffmpeg.on('close', (code, signal) => {
@@ -303,15 +320,18 @@ WebRTC.listen = function () {
             }
             createFfmpegProcess();
 
-            // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
-            socket.on('Streams/webrtc/videoData', function(data) {
-                console.log('VIDEODATA');
-                //socket.broadcast.emit('video', data);
+            _streamingData.on('data', function (data) {
                 if(ffmpeg != null) {
                     ffmpeg.stdin.write(data);
                 } else {
                     createFfmpegProcess();
                 }
+            })
+            // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
+            socket.on('Streams/webrtc/videoData', function(data) {
+                console.log('VIDEODATA', data);
+                _streamingData.push(data);
+                //socket.broadcast.emit('video', data);
             });
 
             // If the client disconnects, stop FFmpeg.

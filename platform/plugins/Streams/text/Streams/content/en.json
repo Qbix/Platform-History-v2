@@ -158,6 +158,15 @@
             "cameraBtn": "Enable Camera",
             "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
         },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
         "webInstructionsDialog": {
             "dialogTitle": "Instructions",
             "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
