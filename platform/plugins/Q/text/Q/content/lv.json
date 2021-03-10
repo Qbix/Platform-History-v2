@@ -118,5 +118,24 @@
         "ClipStart": "Sākt klipu",
         "SetClipEnd": "Iestatīt klipa beigas",
         "ClipEnd": "Klipa beigas"
+    },
+    "durations": {
+        "second": "otrais",
+        "seconds": "sekundes",
+        "minute": "minūti",
+        "minutes": "minūtes",
+        "hour": "stundas",
+        "day": "diena",
+        "days": "dienas",
+        "week": "nedēļā",
+        "weeks": "nedēļas",
+        "month": "mēnesī",
+        "months": "mēnešus",
+        "year": "gadā",
+        "years": "gadiem",
+        "decade": "desmitgade",
+        "decades": "gadu desmitiem",
+        "century": "gadsimtā",
+        "centuries": "gadsimtiem"
     }
 }

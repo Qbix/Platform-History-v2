@@ -23,6 +23,7 @@
  *   @param {Function} [options.filter]
  *    Takes (userId, element) and can modify them.
  *    If this function returns false, the element is not appended.
+ *   @param {Function} [options.hideIfNoParticipants=false] If true hide tool element when no participants and show when somebody join
  *   @param {Q.Event} [options.onRefresh] An event that occurs when the tool is refreshed
  */
 Q.Tool.define("Streams/participants",
@@ -31,6 +32,7 @@ function _Streams_participants(options) {
 	
 	var tool = this;
 	var state = tool.state;
+	var $toolElement = $(tool.element);
 	
 	if (!state.publisherId) {
 		throw new Q.Error("Streams/chat: missing publisherId option");
@@ -47,6 +49,15 @@ function _Streams_participants(options) {
 		} else {
 			tool.$summary.hide();
 		}
+
+		if (state.hideIfNoParticipants) {
+			if (c <= 0) {
+				tool.cssDisplay = $toolElement.css("display");
+				$toolElement.css("display", "none");
+			} else {
+				$toolElement.css("display", tool.cssDisplay);
+			}
+		}
 	}, tool);
 	
 	tool.refresh(function () {
@@ -62,6 +73,7 @@ function _Streams_participants(options) {
 			return location.href;
 		}
 	},
+	hideIfNoParticipants: false,
 	maxShow: 10,
 	maxLoad: 100,
 	max: null,

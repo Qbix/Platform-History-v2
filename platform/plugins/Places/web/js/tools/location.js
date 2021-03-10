@@ -312,12 +312,15 @@ Q.Tool.define("Places/location", function (options) {
 											return;
 										}
 
-										tool.relatedTool.state.onRefresh.setOnce(function (previews, map, entering, exiting, updating) {
-											var key = Q.firstKey(entering);
-											var index = map[key];
-											var preview = previews[index];
+										var stream = this;
+
+										tool.relatedTool.element.forEachTool("Streams/preview", function () {
+											if (Q.getObject("fields.publisherId", stream) !== this.state.publisherId || Q.getObject("fields.name", stream) !== this.state.streamName) {
+												return;
+											}
+
 											Q.Pointer.canceledClick = false;
-											tool.toggle(preview.element);
+											tool.toggle(this.element);
 										});
 									}, {
 										publisherId: userId,
@@ -405,7 +408,6 @@ Q.Tool.define("Places/location", function (options) {
 		if ($olt.length) {
 			$olt.plugin('Q/placeholders', function () {
 				tool.addressTool.filter.setText('');
-				tool.addressTool.filter.$input.plugin('Q/clickfocus');
 			});
 		}
 

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "לְקַצֵץ",
-        "errorNoSource": "אין מקור וידאו"
+        "errorNoSource": "אין מקור וידאו",
+        "SkipAfter": "דלג אחרי",
+        "Skip": "לדלג"
     },
     "pdf": {
         "clip": "לְקַצֵץ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "יותר",
         "Menu": "תַפרִיט"
+    },
+    "durations": {
+        "second": "שְׁנִיָה",
+        "seconds": "שניות",
+        "minute": "דַקָה",
+        "minutes": "דקות",
+        "hour": "שעה (ות",
+        "day": "יְוֹם",
+        "days": "ימים",
+        "week": "שָׁבוּעַ",
+        "weeks": "שבועות",
+        "month": "חוֹדֶשׁ",
+        "months": "חודשים",
+        "year": "שָׁנָה",
+        "years": "שנים",
+        "decade": "עָשׂוֹר",
+        "decades": "עשרות שנים",
+        "century": "מֵאָה",
+        "centuries": "מאות שנים"
     }
 }

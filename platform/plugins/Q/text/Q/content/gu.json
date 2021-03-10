@@ -118,5 +118,24 @@
         "ClipStart": "ક્લિપ પ્રારંભ",
         "SetClipEnd": "ક્લિપ અંત સેટ કરો",
         "ClipEnd": "ક્લિપ અંત"
+    },
+    "durations": {
+        "second": "બીજું",
+        "seconds": "સેકન્ડ",
+        "minute": "મિનિટ",
+        "minutes": "મિનિટ",
+        "hour": "કલાક",
+        "day": "દિવસ",
+        "days": "દિવસ",
+        "week": "અઠવાડિયું",
+        "weeks": "અઠવાડિયા",
+        "month": "માસ",
+        "months": "મહિના",
+        "year": "વર્ષ",
+        "years": "વર્ષો",
+        "decade": "દાયકા",
+        "decades": "દાયકાઓ",
+        "century": "સદી",
+        "centuries": "સદીઓ"
     }
 }

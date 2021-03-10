@@ -1,0 +1,1 @@
+ALTER TABLE `{{prefix}}webpage` ADD  `duration` INT NOT NULL DEFAULT 2592000 COMMENT  'cache life time in seconds (default 1 month)';

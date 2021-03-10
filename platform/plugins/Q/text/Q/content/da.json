@@ -118,5 +118,24 @@
         "ClipStart": "Klip Start",
         "SetClipEnd": "Indstil klipende",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "anden",
+        "seconds": "sekunder",
+        "minute": "minut",
+        "minutes": "minutter",
+        "hour": "timer",
+        "day": "dag",
+        "days": "dage",
+        "week": "uge",
+        "weeks": "uger",
+        "month": "måned",
+        "months": "måneder",
+        "year": "år",
+        "years": "flere år",
+        "decade": "årti",
+        "decades": "årtier",
+        "century": "århundrede",
+        "centuries": "århundreder"
     }
 }

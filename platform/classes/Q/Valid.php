@@ -167,6 +167,7 @@ class Q_Valid
 	 */
 	static function email ($address, &$normalized_address = null, $options = array())
 	{
+		$normalized_address = null;
 		// First, we check that there's one @ symbol, and that the lengths are right
 		if (! preg_match("/^[^@]{1,64}@[^@]{1,255}$/", $address)) {
 			// Email invalid because wrong number of characters in one section, or wrong number of @ symbols.
@@ -221,6 +222,7 @@ class Q_Valid
 	 */
 	static function phone ($number, &$number_normalized = null)
 	{
+		$number_normalized = null;
 		if (empty($number)) {
 			return false;
 		}

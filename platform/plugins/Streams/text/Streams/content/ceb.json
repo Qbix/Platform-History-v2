@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Ipakita ang pagpaambit sa screen"
         },
         "notAllowedToJoinCall": "Wala kay pagtugot nga moapil sa kini nga sapa.",
-        "streamTitle": "{{1}} live nga tawag"
+        "streamTitle": "{{1}} live nga tawag",
+        "preview": {
+            "preamble": "Tigum:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF nga dokumento",
             "description": "PDF nga dokumento",
             "newItem": "Pagdugang PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Pangutana",
+            "description": "pangutana nga sapa"
+        },
+        "Streams\/answer": {
+            "displayType": "Tubag",
+            "description": "tubag sapa"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Wala’y gigikanan sa imahe",
         "uploadLimit": "Max nga kadako sa file: {{size}}",
         "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
+    },
+    "questions": {
+        "Questions": "Mga pangutana",
+        "Answers": "Mga Tubag",
+        "AnswerQuestion": "Tubag nga Pangutana",
+        "SetYourAnswer": "Palihug tubaga ang pangutana",
+        "NewQuestion": "Bag-ong Pangutana",
+        "NewAnswer": "Bag-ong Tubag",
+        "AnswerDetails": "Mga Detalye sa Tubag",
+        "answerOption": "Kapilian",
+        "answerOptionExclusive": "Eksklusibo",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "libre nga tubag ...",
+        "SaveQuestion": "Tipigi ang Pangutana",
+        "SaveAnswer": "Makatipig Tubag",
+        "AddAnotherAnswer": "Pagdugang usa pa nga tubag",
+        "ErrorAnswers": "Palihug pagdugang bisan usa ka tubag",
+        "AlreadyAnswered": "Gitubag na",
+        "TitlePlaceholder": "Type ang imong pangutana",
+        "ContentPlaceholder": "Ibutang dinhi ang bisan unsang dugang nga kasayuran aron matabangan ang mga tawo nga makatubag",
+        "ErrorTitle": "Kinahanglan nga pangutana"
+    },
+    "experience": {
+        "NewExperience": "Bag-ong Kasinatian"
     }
 }

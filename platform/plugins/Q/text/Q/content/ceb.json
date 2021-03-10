@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Wala’y gigikanan sa video"
+        "errorNoSource": "Wala’y gigikanan sa video",
+        "SkipAfter": "Laktaw pagkahuman",
+        "Skip": "Laktaw"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "labi pa",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "ikaduha",
+        "seconds": "segundo",
+        "minute": "minuto",
+        "minutes": "minuto",
+        "hour": "mga oras",
+        "day": "adlaw",
+        "days": "adlaw",
+        "week": "semana",
+        "weeks": "mga semana",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tuig",
+        "years": "tuig",
+        "decade": "dekada",
+        "decades": "mga dekada",
+        "century": "siglo",
+        "centuries": "kasiglohan"
     }
 }

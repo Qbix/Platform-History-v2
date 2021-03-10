@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Faʻaali le faʻasoa"
         },
         "notAllowedToJoinCall": "E leai sau faʻatagaina e te auai i lenei vaitafe.",
-        "streamTitle": "{{1}} ola valaʻau"
+        "streamTitle": "{{1}} ola valaʻau",
+        "preview": {
+            "preamble": "Fonotaga:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF pepa",
             "description": "PDF pepa",
             "newItem": "Faʻaopopo PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Fesili",
+            "description": "vaitafe fesili"
+        },
+        "Streams\/answer": {
+            "displayType": "Tali",
+            "description": "tali vaitafe"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Leai se ata e maua",
         "uploadLimit": "Max faila tele: {{size}}",
         "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+    },
+    "questions": {
+        "Questions": "Fesili",
+        "Answers": "Tali",
+        "AnswerQuestion": "Tali Fesili",
+        "SetYourAnswer": "Faʻamolemole tali le fesili",
+        "NewQuestion": "Fesili Fou",
+        "NewAnswer": "Tali Fou",
+        "AnswerDetails": "Tali Faamatalaga",
+        "answerOption": "Filifiliga",
+        "answerOptionExclusive": "Faʻapitoa",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "tali fua ...",
+        "SaveQuestion": "Sefe le Fesili",
+        "SaveAnswer": "Sefe Tali",
+        "AddAnotherAnswer": "Faʻaopopo se isi tali",
+        "ErrorAnswers": "Faʻamolemole faʻaopopo se tali se tasi",
+        "AlreadyAnswered": "Ua uma ona tali",
+        "TitlePlaceholder": "Ituaiga lau fesili",
+        "ContentPlaceholder": "Tuʻu nisi faʻamatalaga faʻaopopo e fesoasoani i tagata e tali",
+        "ErrorTitle": "Fesili e manaʻomia"
+    },
+    "experience": {
+        "NewExperience": "Aafiaga Fou"
     }
 }

@@ -14,6 +14,8 @@
 	 *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
 	 *   @param {Object} [options.pie] Any options to pass to the Q/pie tool -- see its options.
 	 *   @param {String} [options.url] If defined, Websites/scrape will requested and created preview tool with response data
+	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
+	 *   @param {Q.Event} [onRender] called when tool rendered
 	 */
 	Q.Tool.define("Streams/audio/preview", "Streams/preview", function _Streams_audio_preview(options, preview) {
 			var tool = this;
@@ -96,8 +98,10 @@
 						return ;
 					}
 
-					// activate new Q/audio tool and save to state
-					tool.composer(_proceed);
+					// when all components loaded, call composer
+					state.onLoad.add(function () {
+						tool.composer(_proceed);
+					}, tool);
 
 					return false;
 				};
@@ -106,8 +110,7 @@
 			var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 				tool.text = params.text[1].audio;
 
-				ps.onRefresh.add(tool.refresh.bind(tool), tool);
-				//ps.onComposer.add(tool.composer.bind(tool), tool);
+				Q.handle(state.onLoad, tool);
 			});
 
 			Q.Text.get('Streams/content', p.fill('text'));
@@ -126,7 +129,11 @@
 			pie: {
 				borderSize: 5,
 				color: "red"
-			}
+			},
+			onLoad: new Q.Event(function () {
+				this.preview.state.onRefresh.add(this.refresh.bind(this), this);
+			}, "Streams/audio"),
+			onRender: new Q.Event()
 		},
 
 		{
@@ -201,7 +208,9 @@
 							onEnded: function () { // when audio ended (ended event) - show again duration
 								$durationBox.html(this.formatRecordTime(this.state.duration));
 							}
-						}).activate();
+						}).activate(function () {
+							Q.handle(state.onRender, tool);
+						});
 					});
 				});
 			},

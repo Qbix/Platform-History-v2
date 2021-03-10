@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "klipp",
-        "errorNoSource": "Ingen videokilde"
+        "errorNoSource": "Ingen videokilde",
+        "SkipAfter": "Hopp etter",
+        "Skip": "Hopp over"
     },
     "pdf": {
         "clip": "klipp",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "mer",
         "Menu": "Meny"
+    },
+    "durations": {
+        "second": "sekund",
+        "seconds": "sekunder",
+        "minute": "minutt",
+        "minutes": "minutter",
+        "hour": "timer",
+        "day": "dag",
+        "days": "dager",
+        "week": "uke",
+        "weeks": "uker",
+        "month": "måned",
+        "months": "måneder",
+        "year": "år",
+        "years": "år",
+        "decade": "tiår",
+        "decades": "tiår",
+        "century": "århundre",
+        "centuries": "århundrer"
     }
 }

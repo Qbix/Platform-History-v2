@@ -118,5 +118,24 @@
         "ClipStart": "Anza cha picha ya video",
         "SetClipEnd": "Weka Mwisho wa klipu",
         "ClipEnd": "Clip Mwisho"
+    },
+    "durations": {
+        "second": "pili",
+        "seconds": "sekunde",
+        "minute": "dakika",
+        "minutes": "dakika",
+        "hour": "masaa",
+        "day": "siku",
+        "days": "siku",
+        "week": "wiki",
+        "weeks": "wiki",
+        "month": "mwezi",
+        "months": "miezi",
+        "year": "mwaka",
+        "years": "miaka",
+        "decade": "miaka kumi",
+        "decades": "miongo",
+        "century": "karne",
+        "centuries": "karne nyingi"
     }
 }

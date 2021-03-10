@@ -96,9 +96,7 @@ function Streams_after_Users_User_saveExecute($params)
 	$toInsert = array();
 	if ($params['inserted'] && !$user->get('skipInsertingStreams', false)) {
 		$onInsert = Q_Config::get('Streams', 'onInsert', array());
-		$personOrCommunity = ($user->id === ucfirst($user->id))
-			? 'community'
-			: 'person';
+		$personOrCommunity = Users::isCommunityId($user->id) ? 'community' : 'person';
 		$toInsert = array_merge(
 			Q::ifset($onInsert, 'user', array()),
 			Q::ifset($onInsert, $personOrCommunity, array())	

@@ -138,7 +138,11 @@
 	overflow: hidden;
 	cursor: pointer;
 	background-color: #fff;
-	padding: 0;
+	padding: 5px 5px 0 5px;
+}
+.Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon:last-child,
+.Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon.Q_selected:last-child {
+	padding-bottom: 5px;
 }
 .Streams_chat_addons .Streams_chat_addon_icon,
 .Streams_chat_addons .Streams_chat_addon_icon img,
@@ -182,6 +186,9 @@
 	cursor: none;
 	pointer-events: none;
 }
+.Streams_chat_tool .Streams_webrtc_preview_tool .Streams_preview_icon {
+	display: none;
+}
 
 .Streams_chat_tool h1 {
 	text-align: center;
@@ -194,7 +201,6 @@
 	float: left;
 }
 .Streams_chat_to_me .Streams_chat_bubble .Users_avatar_tool {
-	float: left;
 	font-weight: bold;
 }
 .Streams_chat_from_me .Users_avatar_tool {
@@ -274,7 +280,8 @@
 	padding-right: 30px;
 }
 .Streams_chat_composer .Streams_chat_submit,
-.Streams_chat_composer .Streams_chat_call {
+.Streams_chat_composer .Streams_chat_call,
+.Streams_chat_composer .Streams_calls_tool {
 	cursor: pointer;
 	position: absolute;
 	right: 1px;
@@ -393,7 +400,9 @@
 .Streams_chat_message .Streams_preview_tool .Streams_inplace_tool:not(.Q_inplace_tool) .Q_inplace_tool_static {
 	white-space: normal;
 }
-
+.Streams_chat_message .Streams_chat_avatar_name {
+	margin-right: .4em;
+}
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
 	.Streams_chat_date {

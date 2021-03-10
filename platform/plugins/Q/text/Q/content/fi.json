@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Aseta leikkeen loppu",
         "ClipEnd": "Leikkeen loppu"
+    },
+    "durations": {
+        "second": "toinen",
+        "seconds": "sekuntia",
+        "minute": "minuutti",
+        "minutes": "pöytäkirja",
+        "hour": "tuntia",
+        "day": "päivä",
+        "days": "päivää",
+        "week": "viikko",
+        "weeks": "viikkoa",
+        "month": "kuukausi",
+        "months": "kuukaudet",
+        "year": "vuosi",
+        "years": "vuotta",
+        "decade": "vuosikymmenen ajan",
+        "decades": "vuosikymmenien ajan",
+        "century": "vuosisadalla",
+        "centuries": "vuosisadat"
     }
 }

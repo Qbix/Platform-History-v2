@@ -39,7 +39,7 @@ function Streams_related_response()
 		'limit', 'offset', 'min', 'max', 'type', 'prefix', 'filter'
 	));
 	$options['relationsOnly'] = !$streams_requested;
-	$options['orderBy'] = !empty($_REQUEST['ascending']);
+	$options['orderBy'] = filter_var($_REQUEST['ascending'], FILTER_VALIDATE_BOOLEAN);
 	$options['fetchOptions'] = compact('withParticipant');
 	$result = Streams::related(
 		$asUserId,
@@ -76,25 +76,23 @@ function Streams_related_response()
 			}
 		}
 	}
-
 	Q_Response::setSlot('relations', $rel);
-	if (!$streams_requested) {
-		return;
+
+	if ($streams_requested) {
+		$streams = $result[1];
+		$arr = Db::exportArray($streams, array('numeric' => true));
+		foreach ($arr as $k => $stream) {
+			if (!$stream) continue;
+			$s = $streams[$stream['name']];
+			$arr[$k]['access'] = array(
+				'readLevel' => $s->get('readLevel', $s->readLevel),
+				'writeLevel' => $s->get('writeLevel', $s->writeLevel),
+				'adminLevel' => $s->get('adminLevel', $s->adminLevel)
+			);
+		}
+		Q_Response::setSlot('relatedStreams', $arr);
 	}
 
-	$streams = $result[1];
-	$arr = Db::exportArray($streams, array('numeric' => true));
-	foreach ($arr as $k => $stream) {
-		if (!$stream) continue;
-		$s = $streams[$stream['name']];
-		$arr[$k]['access'] = array(
-			'readLevel' => $s->get('readLevel', $s->readLevel),
-			'writeLevel' => $s->get('writeLevel', $s->writeLevel),
-			'adminLevel' => $s->get('adminLevel', $s->adminLevel)
-		);
-	}
-	Q_Response::setSlot('relatedStreams', $arr);
-	
 	$stream = $result[2];
 	if (is_array($stream)) {
 		Q_Response::setSlot('streams', Db::exportArray($stream));

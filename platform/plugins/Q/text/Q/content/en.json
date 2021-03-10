@@ -34,6 +34,25 @@
         "11": "November",
         "12": "December"
     },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
+    },
     "audio": {
         "allowMicrophoneAccess": "Please allow access to your microphone",
         "record": "Record",

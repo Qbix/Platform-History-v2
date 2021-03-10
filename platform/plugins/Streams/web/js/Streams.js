@@ -584,7 +584,6 @@ Q.Tool.define({
 	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
 	"Streams/answer/preview": "{{Streams}}/js/tools/answer/preview.js",
 	"Streams/question": "{{Streams}}/js/tools/question.js",
-	"Streams/experience": "{{Streams}}/js/tools/experience.js",
 	"Streams/player": function () {
 		// does nothing
 	},
@@ -595,7 +594,10 @@ Q.Tool.define({
 	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
 	"Streams/pdf/chat" : "{{Streams}}/js/tools/pdf/chat.js",
 	"Streams/album/preview": "{{Streams}}/js/tools/album/preview.js",
-	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js"
+	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
+	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
+	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
+	"Streams/calls": "{{Streams}}/js/tools/calls.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
@@ -826,6 +828,7 @@ Streams.create = function (fields, callback, related, options) {
 		fields['Q.Streams.related.publisherId'] = related.publisherId || related.publisherId;
 		fields['Q.Streams.related.streamName'] = related.streamName || related.streamName || related.name;
 		fields['Q.Streams.related.type'] = related.type;
+		fields['Q.Streams.related.weight'] = related.weight;
 		slotNames.push('messageTo');
 	}
 	var baseUrl = Q.baseUrl({
@@ -1633,6 +1636,7 @@ Streams.followup.options = {
  *   @param {Array} [options.fields] if set, limits the "extended" fields exported to only these
  *   @param {Boolean} [options.stream] pass true here to fetch the latest version of the stream and ignore the cache.
  *   @param {Mixed} [options.participants]  Pass a limit here to fetch that many participants and ignore cache.
+ *   @param {Boolean} [options.relationsOnly=false] Return only the relations, not the streams
  *   @param {Boolean} [options.messages] Pass a limit here to fetch that many recent messages and ignore cache.
  *   @param {Boolean} [options.withParticipant=true] Pass false here to return related streams without extra info about whether the logged-in user (if any) is a participant.
  *   @param {String} [options.messageType] optional String specifying the type of messages to fetch. Only honored if streamName is a string.
@@ -1665,8 +1669,11 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 		far = isCategory ? 'from' : 'to',
 		farPublisherId = far+'PublisherId',
 		farStreamName = far+'StreamName',
-		slotNames = ['relations', 'relatedStreams'],
+		slotNames = ['relations'],
 		fields = {"publisherId": publisherId, "streamName": streamName};
+	if (!options.relationsOnly) {
+		slotNames.push('relatedStreams');
+	}
 	if (options.messages) {
 		slotNames.push('messages');
 	}
@@ -2311,6 +2318,7 @@ Sp.getAttribute = function _Stream_prototype_getAttribute (attributeName, usePen
  * @method setAttribute
  * @param {String} attributeName
  * @param {Mixed} value
+ * @return Streams_Stream
  */
 Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value) {
 	var t = this.fields.type;
@@ -2335,6 +2343,8 @@ Sp.setAttribute = function _Stream_prototype_setAttribute (attributeName, value)
 		}
 	}
 	this.pendingFields.attributes = JSON.stringify(this.pendingAttributes);
+
+	return this;
 };
 
 /**
@@ -4252,7 +4262,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
+MTotal.seen.cache = Q.Cache['document']("Streams.Message.Total.seen", 100);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -4827,7 +4837,7 @@ Streams.Metrics = function (params) {
 	};
 
 	if (this.useFaces) {
-		Q.ensure(Q.Users.Faces, '{{Users}}/js/Faces.js', function () {
+		Q.ensure('Q.Users.Faces', function () {
 			that.faces = new Q.Users.Faces(that.useFaces);
 			that.faces.start(function () {
 				that.faces.onEnter.add(function () {
@@ -5509,7 +5519,6 @@ Q.onInit.add(function _Streams_onInit() {
 			message = Streams.Message.construct(message);
 			var messageType = message.type;
 			var messageUrl = message.getInstruction('inviteUrl') || message.getInstruction('url');
-			var content = message.getInstruction('content');
 			var noticeOptions = notificationsAsNotice[messageType];
 			var pluginName = messageType.split('/')[0];
 
@@ -5523,8 +5532,14 @@ Q.onInit.add(function _Streams_onInit() {
 				return;
 			}
 
-			Q.Text.get(pluginName + '/content', function (err, text) {
-				text = Q.getObject(["notifications", messageType], text);
+			// skip messages older than 24 hours
+			var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
+			if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
+				return;
+			}
+
+			Q.Text.get(pluginName + '/content', function (err, content) {
+				var text = Q.getObject(["notifications", messageType], content);
 				if (!text || typeof text !== 'string') {
 					return console.warn('Streams.notifications.notices: no text for ' + messageType);
 				}
@@ -5539,6 +5554,49 @@ Q.onInit.add(function _Streams_onInit() {
 
 						if (stream.fields.name === 'Streams/invited') {
 							stream.fields.title = message.getInstruction('title');
+						}
+
+						// special behavior for Streams/invite
+						if (messageType === "Streams/invite") {
+							var label = message.getInstruction('label');
+							var inviteUrl = message.getInstruction('inviteUrl');
+							var template = Q.Template.compile(text, 'handlebars');
+							var html = template({
+								app: Q.info.app,
+								info: Q.info,
+								stream: stream,
+								message: message
+							});
+
+							if (label) {
+								if (typeof label === "string") {
+									label = [label];
+								}
+								// convert labels to readable
+								Q.each(Q.getObject("labels", Users), function (labelKey) {
+									var index = label.indexOf(labelKey);
+									if (index < 0 || !this.title) {
+										return;
+									}
+
+									label[index] = this.title;
+								});
+
+								html += " as " + label.join(', ');
+							}
+
+							html += "<br>" + content.labels.AreYouAgree;
+							Q.confirm(html, function (res) {
+								if (!res) {
+									return;
+								}
+
+								Q.handle(inviteUrl);
+							}, {
+								ok: content.labels.Yes,
+								cancel: content.labels.No
+							});
+							return;
 						}
 
 						Streams.Avatar.get(message.byUserId, function (err, avatar) {
@@ -6186,6 +6244,12 @@ Users.Socket.onEvent('Streams/post').set(function (message) {
 
 	// only relation type Streams/webrtc and not for myself
 	if (relationType !== 'Streams/webrtc' || publisherId === Q.Users.loggedInUserId() || !toUrl) {
+		return;
+	}
+
+	// skip messages older than 24 hours
+	var timeDiff = Math.abs((new Date(message.sentTime).getTime() - new Date().getTime()))/1000;
+	if (timeDiff >= parseInt(Q.Streams.notifications.notices.expired)) {
 		return;
 	}
 

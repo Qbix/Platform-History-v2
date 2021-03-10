@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "ווייַזן פאַרשטעלן ייַנטיילונג"
         },
         "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם טייַך.",
-        "streamTitle": "{{1}} לעבן רופן"
+        "streamTitle": "{{1}} לעבן רופן",
+        "preview": {
+            "preamble": "פאַרזאַמלונג:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF דאָקומענט",
             "description": "PDF דאָקומענט",
             "newItem": "לייג PDF"
+        },
+        "Streams\/question": {
+            "displayType": "פראגע",
+            "description": "קשיא טייַך"
+        },
+        "Streams\/answer": {
+            "displayType": "ענטפער",
+            "description": "ענטפֿערן טייַך"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "קיין בילד מקור",
         "uploadLimit": "מאקס טעקע גרייס: {{size}}",
         "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+    },
+    "questions": {
+        "Questions": "פֿראגן",
+        "Answers": "ענטפֿערס",
+        "AnswerQuestion": "ענטפער פראגע",
+        "SetYourAnswer": "ביטע ענטפֿערן די קשיא",
+        "NewQuestion": "ניו קשיא",
+        "NewAnswer": "ניו ענטפער",
+        "AnswerDetails": "ענטפער דעטאַילס",
+        "answerOption": "אָפּציע",
+        "answerOptionExclusive": "ויסשליסיק",
+        "answerTextarea": "טעקסטאַרעאַ",
+        "FreeAnswer": "פריי ענטפער ...",
+        "SaveQuestion": "היט פֿראַגע",
+        "SaveAnswer": "היט ענטפער",
+        "AddAnotherAnswer": "לייג אן אנדער ענטפער",
+        "ErrorAnswers": "ביטע לייגן אפילו איין ענטפער",
+        "AlreadyAnswered": "שוין געענטפערט",
+        "TitlePlaceholder": "טיפּ דיין קשיא",
+        "ContentPlaceholder": "שטעלן דאָ נאָך אינפֿאָרמאַציע צו העלפֿן מענטשן ענטפֿערן",
+        "ErrorTitle": "קשיא פארלאנגט"
+    },
+    "experience": {
+        "NewExperience": "ניו עקספּעריענסע"
     }
 }

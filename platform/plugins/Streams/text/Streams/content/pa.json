@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "ਸਕ੍ਰੀਨ ਸ਼ੇਅਰਿੰਗ ਦਿਖਾਓ"
         },
         "notAllowedToJoinCall": "ਤੁਹਾਨੂੰ ਇਸ ਸਟ੍ਰੀਮ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ.",
-        "streamTitle": "Call {999}} ਲਾਈਵ ਕਾਲ"
+        "streamTitle": "Call {999}} ਲਾਈਵ ਕਾਲ",
+        "preview": {
+            "preamble": "ਮੁਲਾਕਾਤ:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF ਦਸਤਾਵੇਜ਼",
             "description": "PDF ਦਸਤਾਵੇਜ਼",
             "newItem": "ਪੀਡੀਐਫ ਸ਼ਾਮਲ ਕਰੋ"
+        },
+        "Streams\/question": {
+            "displayType": "ਪ੍ਰਸ਼ਨ",
+            "description": "ਪ੍ਰਸ਼ਨ ਧਾਰਾ"
+        },
+        "Streams\/answer": {
+            "displayType": "ਜਵਾਬ",
+            "description": "ਜਵਾਬ ਦੀ ਧਾਰਾ"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ਕੋਈ ਚਿੱਤਰ ਸਰੋਤ ਨਹੀਂ",
         "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
         "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
+    },
+    "questions": {
+        "Questions": "ਪ੍ਰਸ਼ਨ",
+        "Answers": "ਜਵਾਬ",
+        "AnswerQuestion": "ਉੱਤਰ ਪ੍ਰਸ਼ਨ",
+        "SetYourAnswer": "ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਸ਼ਨ ਦਾ ਉੱਤਰ ਦਿਓ",
+        "NewQuestion": "ਨਵਾਂ ਪ੍ਰਸ਼ਨ",
+        "NewAnswer": "ਨਵਾਂ ਉੱਤਰ",
+        "AnswerDetails": "ਉੱਤਰ ਵੇਰਵੇ",
+        "answerOption": "ਵਿਕਲਪ",
+        "answerOptionExclusive": "ਨਿਵੇਕਲਾ",
+        "answerTextarea": "ਟੈਕਸਟਰੇਆ",
+        "FreeAnswer": "ਮੁਫਤ ਜਵਾਬ ...",
+        "SaveQuestion": "ਪ੍ਰਸ਼ਨ ਸੇਵ ਕਰੋ",
+        "SaveAnswer": "ਜਵਾਬ ਸੇਵ ਕਰੋ",
+        "AddAnotherAnswer": "ਹੋਰ ਜਵਾਬ ਸ਼ਾਮਲ ਕਰੋ",
+        "ErrorAnswers": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੀ ਜਵਾਬ ਸ਼ਾਮਲ ਕਰੋ",
+        "AlreadyAnswered": "ਪਹਿਲਾਂ ਹੀ ਜਵਾਬ ਦਿੱਤਾ ਗਿਆ ਹੈ",
+        "TitlePlaceholder": "ਆਪਣਾ ਪ੍ਰਸ਼ਨ ਟਾਈਪ ਕਰੋ",
+        "ContentPlaceholder": "ਲੋਕਾਂ ਦੇ ਜਵਾਬ ਦੇਣ ਵਿੱਚ ਸਹਾਇਤਾ ਲਈ ਇੱਥੇ ਕੋਈ ਵਾਧੂ ਜਾਣਕਾਰੀ ਪਾਓ",
+        "ErrorTitle": "ਪ੍ਰਸ਼ਨ ਲੋੜੀਂਦੇ ਹਨ"
+    },
+    "experience": {
+        "NewExperience": "ਨਵਾਂ ਤਜਰਬਾ"
     }
 }

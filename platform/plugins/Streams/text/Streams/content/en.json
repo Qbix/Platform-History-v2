@@ -7,7 +7,10 @@
     },
     "labels": {
         "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me"
+        "Streams\/invitedMe": "Who invited me",
+        "AreYouAgree": "Are you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
         "Filter": "What do you enjoy?",
@@ -258,7 +261,8 @@
             "turnOnScreenSharing": "Show screen sharing"
         },
         "preview": {
-            "preamble": "Meeting:"
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
@@ -386,6 +390,11 @@
         "Streams\/answer": {
             "displayType": "Answer",
             "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
@@ -453,6 +462,8 @@
         "link": "Link",
         "setUrl": "Set URL",
         "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
         "setClip": "Cut Out Clip",
         "invalidURL": "Invalid URL",
         "invalidFile": "Invalid File",
@@ -482,6 +493,16 @@
         "ErrorTitle": "Question required"
     },
     "experience": {
-        "NewExperience": "New Experience"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
+    },
+    "calls": {
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?"
+
     }
 }

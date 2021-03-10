@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "اسڪرين شيئرنگ ڏيکاريو"
         },
         "notAllowedToJoinCall": "توهان کي هن وهڪري ۾ شامل ٿيڻ جي اجازت ناهي.",
-        "streamTitle": "{{1}} لائيو ڪال"
+        "streamTitle": "{{1}} لائيو ڪال",
+        "preview": {
+            "preamble": "گڏجاڻي:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "پي ڊي ايف دستاويز",
             "description": "پي ڊي ايف دستاويز",
             "newItem": "پي ڊي ايف جوڙيو"
+        },
+        "Streams\/question": {
+            "displayType": "سوال",
+            "description": "سوال وارو وهڪرو"
+        },
+        "Streams\/answer": {
+            "displayType": "جواب",
+            "description": "جواب جو وهڪرو"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "تصويري جو ماخذ ڪونهي",
         "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
         "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
+    },
+    "questions": {
+        "Questions": "سوالَ",
+        "Answers": "جوابَ",
+        "AnswerQuestion": "سوال جواب",
+        "SetYourAnswer": "مهرباني ڪري سوال جو جواب ڏيو",
+        "NewQuestion": "نئون سوال",
+        "NewAnswer": "نئون جواب",
+        "AnswerDetails": "جواب جا تفصيل",
+        "answerOption": "اختيار",
+        "answerOptionExclusive": "خاص",
+        "answerTextarea": "ٽيڪاريريا",
+        "FreeAnswer": "مفت جواب ...",
+        "SaveQuestion": "سوال بچايو",
+        "SaveAnswer": "جواب بچايو",
+        "AddAnotherAnswer": "ٻيو جواب شامل ڪيو",
+        "ErrorAnswers": "مهرباني ڪري هڪڙو جواب به شامل ڪريو",
+        "AlreadyAnswered": "اڳ ۾ ئي جواب ڏنل آهي",
+        "TitlePlaceholder": "پنهنجي سوال کي ٽائپ ڪيو",
+        "ContentPlaceholder": "ماڻهن کي جواب ڏيڻ ۾ مدد لاءِ هتي اضافي معلومات وجهي ڇڏيو",
+        "ErrorTitle": "گهربل سوال"
+    },
+    "experience": {
+        "NewExperience": "نئون تجربو"
     }
 }

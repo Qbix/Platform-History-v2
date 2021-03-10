@@ -161,7 +161,10 @@
 	"Streams/labels": {
 		"type": "Streams/resource",
 		"title": "Labels",
-		"icon": ""
+		"icon": "",
+		"attributes": {
+			"prefixes": ["Users/", "Streams/"]
+		}
 	},
 	"Streams/user/interests": {
 		"type": "Streams/category",
@@ -281,5 +284,13 @@
 		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
+	},
+	"Streams/calls/main": {
+		"type": "Streams/calls",
+		"title": "Calls",
+		"icon": "Streams/category",
+		"readLevel": 40,
+		"writeLevel": 23,
+		"adminLevel": 20
 	}
 }

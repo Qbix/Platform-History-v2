@@ -1,4 +1,4 @@
-.Streams_experience_tool .Streams_experience_composer,
+.Streams_topic_preview_tool .Streams_experience_composer,
 .Streams_experience_invoke .Streams_experience_composer {
     overflow: hidden;
     border-radius: 5px;
@@ -14,6 +14,13 @@
     text-align: center;
     margin: 0 auto;
 }
+.Streams_experience_addons .Streams_experience_addon {
+    cursor: pointer;
+    list-style-type: none;
+}
+.Streams_experience_addons .Streams_experience_addon:hover {
+    background-color: rgba(255, 255, 255, .2);
+}
 .Streams_experience_addons .Streams_experience_addon .Streams_experience_addon_icon {
     display: inline-block;
     vertical-align: middle;
@@ -25,4 +32,24 @@
 .Streams_experience_invoke {
     min-width: 300px;
     min-height: 200px;
+}
+.Streams_experience_invoke .Q_dialog_content {
+    overflow-x: hidden;
+    padding: 5px 5px 10px 5px;
+}
+.Streams_experience_invoke .Streams_related_tool .Streams_preview_tool {
+    width: 100%;
+    text-align: left;
+}
+.Streams_experience_invoke .Streams_related_tool .Streams_video_preview_tool.Streams_preview_composer {
+    border-top: 1px solid black;
+    margin-top: 20px;
+}
+.Streams_experience_invoke .Streams_related_tool .Streams_preview_tool .Streams_image_preview_title {
+    display: inline-block;
+    white-space: nowrap;
+}
+.Streams_experience_invoke .Streams_related_tool .Streams_preview_tool .Streams_image_preview_icon {
+    vertical-align: middle;
+    margin-right: 10px;
 }

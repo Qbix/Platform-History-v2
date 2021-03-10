@@ -118,5 +118,24 @@
         "ClipStart": "Начало клипа",
         "SetClipEnd": "Установить конец клипа",
         "ClipEnd": "Конец клипа"
+    },
+    "durations": {
+        "second": "второй",
+        "seconds": "секунды",
+        "minute": "минута",
+        "minutes": "минут",
+        "hour": "часы",
+        "day": "день",
+        "days": "дней",
+        "week": "неделю",
+        "weeks": "недели",
+        "month": "месяц",
+        "months": "месяцы",
+        "year": "год",
+        "years": "лет",
+        "decade": "десятилетие",
+        "decades": "десятилетия",
+        "century": "век",
+        "centuries": "века"
     }
 }

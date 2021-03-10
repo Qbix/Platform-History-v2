@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Állítsa be a klip végét",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "második",
+        "seconds": "másodpercig",
+        "minute": "perc",
+        "minutes": "percek",
+        "hour": "órák",
+        "day": "nap",
+        "days": "napok",
+        "week": "hét",
+        "weeks": "hétig",
+        "month": "hónap",
+        "months": "hónapok",
+        "year": "év",
+        "years": "évek",
+        "decade": "évtized",
+        "decades": "évtizedekig",
+        "century": "század",
+        "centuries": "századokban"
     }
 }

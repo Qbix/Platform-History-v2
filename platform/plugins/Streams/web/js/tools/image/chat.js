@@ -91,7 +91,10 @@
 						});
 					}*/
 				}
-			}).tool("Streams/image/preview").activate(function () {
+			}).tool("Streams/image/preview", {
+				defineTitle: true,
+				sendOriginal: true
+			}).activate(function () {
 				var _handler = function () {
 					$(".Q_imagepicker", tool.$previewElement).plugin('Q/imagepicker', 'click');
 				};

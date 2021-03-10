@@ -15,6 +15,10 @@
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {string} [options.className] Additional class name to add to tool element
  *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
+ *  @param {object} [options.clips] Contains options for "clips" mode.
+ *  @param {function} [options.clips.handler] The main option which return clip url for some timestamp. If it null - means mode is not "clips"
+ *  @param {integer} [options.clips.duration] Clips duration in seconds. If defined the clips will play this fixed duration. If null clips will play till the end.
+ *  @param {integer} [options.clips.oneSecondPercent=1/6] How much percents one second used on timeline. By default 1/6 - which means 60 seconds will use 10% of timeline.
  *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
@@ -187,17 +191,17 @@ Q.Tool.define("Q/video", function (options) {
 
 				var onPlay = Q.throttle(function () {
 					state.currentPosition = tool.getCurrentPosition();
-					console.log("Started at position " + state.currentPosition + " milliseconds");
+					//console.log("Started at position " + state.currentPosition + " milliseconds");
 					Q.handle(state.onPlay, tool);
 				}, throttle);
 				var onPause = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
-					console.log("Paused at position " + position + " milliseconds");
+					//console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
 				}, throttle);
 				var onEnded = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
-					console.log("Seeked at position " + position + " milliseconds");
+					//console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
 				}, throttle);
 
@@ -235,6 +239,11 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	ads: [],
 	adsTimeOut: 10,
+	overlay: {
+		play: {
+			src: '{{Q}}/img/play.png'
+		}
+	},
 	metrics: {
 		useFaces: false
 	},
@@ -242,14 +251,28 @@ Q.Tool.define("Q/video", function (options) {
 		controls: true,
 		inactivityTimeout: 0
 	},
+	clips: {
+		handler: null,
+		duration: null,
+		oneSecondPercent: 1/6,
+		offset: 0,
+		pointers: []
+	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), true);
+		var state = this.state;
+		this.setCurrentPosition(this.calculateStartPosition(), !state.skipPauseOnload, !state.skipPauseOnload);
 		this.addAdvertising();
+
+		// preload next clip
+		this.preloadNextClip();
+	}),
+	onCanPlay: new Q.Event(function () {
+		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
 	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
@@ -265,28 +288,94 @@ Q.Tool.define("Q/video", function (options) {
 				return;
 			}
 
-			state.currentPosition = currentPosition;
+			state.currentPosition = (currentPosition || state.clips.start || 0);
 			Q.handle(state.onPlaying, tool, [tool]);
 		}, state.positionUpdatePeriod * 1000);
 	}),
 	onPlaying: new Q.Event(function () {
+		var state = this.state;
+
 		if (this.metrics) {
-			this.metrics.add(this.state.currentPosition/1000);
+			this.metrics.add(state.currentPosition/1000);
 		}
 
+		// check clip borders if clip defined
 		this.checkClip();
+
+		// update pointers position on timeline for "clips" mode
+		this.moveClipsPointers();
+
+		if (!state.clips.useNativeDuration) {
+			// check clips duration limit
+			var clipsDuration = Q.getObject("clips.duration", state);
+			if (clipsDuration && state.currentPosition/1000 >= clipsDuration) {
+				Q.handle(state.onEnded, this);
+			}
+		}
 	}),
 	onPause: new Q.Event(function () {
 		this.clearPlayInterval();
 	}),
-	onSeek: new Q.Event(),
+	onSeek: new Q.Event(function (position) {
+		this.state.currentPosition = position;
+	}),
 	onEnded: new Q.Event(function () {
+		var tool = this;
+		var state = this.state;
+
 		// stop timer if exist
 		this.clearPlayInterval();
+
+		// check clips to play next
+		var pointers = Q.getObject("clips.pointers", state);
+		if (!Q.isEmpty(pointers)) {
+			var nextPointer = null;
+			var i = 1000;
+			Q.each(pointers, function () {
+				var start = parseFloat(this.$start.attr("data-time"));
+
+				// only next points
+				if (start < 0 || state.url === this.url) {
+					return;
+				}
+
+				var offsetDeviation = this.offset - state.clips.offset;
+				if (offsetDeviation > 0 && offsetDeviation < i) {
+					i = offsetDeviation;
+					nextPointer = this;
+				}
+			});
+			if (nextPointer) {
+				tool.changeSource(nextPointer);
+			}
+		}
 	})
 },
 
 {
+	/**
+	 * Change current player source.
+	 * @method changeSource
+	 * @param {object} source Object with properties: url, duration, offset, ...
+	 */
+	changeSource: function (source) {
+		var state = this.state;
+		var player = state.player;
+
+		// set autoplay to autostart next clip
+		state.player.autoplay(true);
+
+		state.url = source.url;
+		player.src(source.url);
+
+		state.clips.duration = source.duration;
+
+		// don't pause when new clip loaded
+		state.skipPauseOnload = true;
+
+		// set offset to duration of prev clip
+		state.clips.offset = source.offset;
+	},
 	/**
 	 * Check clip borders and pause if outside
 	 * @method checkClip
@@ -335,23 +424,23 @@ Q.Tool.define("Q/video", function (options) {
 
 			var onPlay = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Started at position " + position + " milliseconds");
+				//console.log("Started at position " + position + " milliseconds");
 
 				Q.handle(state.onPlay, tool, [position]);
 			}, throttle);
 			var onPause = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Paused at position " + position + " milliseconds");
+				//console.log("Paused at position " + position + " milliseconds");
 				Q.handle(state.onPause, tool, [position]);
 			}, throttle);
 			var onSeek = Q.throttle(function () {
-				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Seeked at position " + position + " milliseconds");
+				var position = tool.getCurrentPosition();
+				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onSeek, tool, [position]);
 			}, throttle);
 			var onEnded = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();
-				console.log("Seeked at position " + position + " milliseconds");
+				//console.log("Seeked at position " + position + " milliseconds");
 				Q.handle(state.onEnded, tool, [position]);
 			}, throttle);
 
@@ -368,23 +457,22 @@ Q.Tool.define("Q/video", function (options) {
 					onPause();
 				});
 
-				this.on('seeking', function() {
-					onPause();
-				});
-
-				this.on('waiting', function() {
-					onPause();
-				});
+				//this.on('waiting', function() {
+				//	onPause();
+				//});
 
 				this.on('seeked', function() {
-					onPlay();
 					onSeek();
 				});
 
 				this.on('ended', function() {
-					onPause();
 					onEnded();
 				});
+
+				// apply play button image
+				$(".vjs-big-play-button", this.el_).css("background-image", "url(" +Q.url(state.overlay.play.src) + ")");
+
+				var playerElement = player.el_;
 
 				/**
 				 * Trigger to show/hide loading spinner above player
@@ -396,32 +484,138 @@ Q.Tool.define("Q/video", function (options) {
 						player.addClass("vjs-waiting");
 
 						// need to check eventBusEl_ to avoid error from videojs lib
-						if (player.eventBusEl_) {
+						if (playerElement) {
+							// this event show preloader spinner
 							player.trigger("waiting");
 						}
 					} else {
 						player.removeClass("vjs-waiting");
 
 						// need to check eventBusEl_ to avoid error from videojs lib
-						if (player.eventBusEl_) {
+						if (playerElement) {
 							player.trigger("canplay");
 						}
 					}
 				};
 
-				// update currentPosition array on play
-				//this.on('timeupdate', function() {});
-
 				// call onLoad when loadedmetadata event occured
 				this.on("loadedmetadata", function() {
-					if (this.loadedmetadata) {
+					Q.handle(state.onLoad, tool);
+				});
+
+				this.on("canplay", function() {
+					if (this.canplay) {
 						return;
 					}
 
-					this.loadedmetadata = true;
-					
-					Q.handle(state.onLoad, tool);
+					this.canplay = true;
+
+					Q.handle(state.onCanPlay, tool);
 				});
+
+				// apply clips mode if clips.handler defined
+				if (Q.getObject("clips.handler", state)) {
+					// set initial clips.offset when first clip loaded
+					state.clips.offset = 0;
+
+					// render custom player controls
+					Q.Template.render("Q/video/clips/control", {}, function (err, html) {
+						var $newControls = $(html);
+
+						// wait till all control elements rendered
+						var waitControls = setInterval(function () {
+							var nativeControl = {
+								$controls: $(".vjs-control-bar", playerElement),
+								$playButton: $(".vjs-control-bar .vjs-play-control", playerElement),
+								$volumeControl: $(".vjs-control-bar .vjs-volume-panel", playerElement),
+								$fullScreen: $(".vjs-control-bar .vjs-fullscreen-control", playerElement),
+								$currentTime: $(".vjs-control-bar .vjs-current-time", playerElement)
+							};
+
+							var passed = true;
+
+							if (!player.duration()) {
+								passed = false;
+							}
+
+							Q.each(nativeControl, function () {
+								if (!this.length) {
+									passed = false;
+								}
+							});
+
+							if (!passed) {
+								return;
+							}
+
+							clearInterval(waitControls);
+
+							videojs.log('duration: ' + player.duration());
+							state.clips.duration = Q.getObject("clips.duration", state) || Q.getObject("duration", state.clips.handler(0));
+							state.duration = state.clips.duration || player.duration();
+
+							nativeControl.$controls.after($newControls).hide();
+							$(".vjs-play-control", $newControls).replaceWith(nativeControl.$playButton);
+							$(".vjs-volume-panel", $newControls).replaceWith(nativeControl.$volumeControl);
+							$(".vjs-fullscreen-control", $newControls).replaceWith(nativeControl.$fullScreen);
+							$(".vjs-current-time", $newControls).replaceWith(nativeControl.$currentTime);
+
+							// fill timeline with clips pointers
+							var nextClip;
+							var fullTimelineSeconds = 100/state.clips.oneSecondPercent;
+							for (var nextClipIndex = -10000; nextClipIndex <= 10000; nextClipIndex++) {
+								nextClip = state.clips.handler(-fullTimelineSeconds/2 + nextClipIndex);
+								if (!nextClip) {
+									continue;
+								}
+
+								tool.addClipsPointer(nextClip);
+							}
+
+							tool.preloadNextClip();
+
+							// progress bar seek handler
+							$(".vjs-progress-control", $newControls).on("click", function (e) {
+								var $holder = $(".vjs-progress-holder", $newControls);
+								var rect = $holder[0].getBoundingClientRect();
+								var x = e.clientX - rect.left; //x position within the element.
+
+								// click outside holder
+								if (x < 0 || rect.width < x) {
+									return;
+								}
+
+								var offset = state.clips.offset + tool.getCurrentPosition()/1000 + ((x / rect.width * 100) - 50)/state.clips.oneSecondPercent ;
+
+								// search pointer to move to
+								var pointer = Q.getObject("pointer", tool.getClipsPointer(offset));
+								if (!pointer) {
+									return;
+								}
+
+								// change offset to move timeline
+								state.clips.offset = pointer.offset;
+
+								var seekedPosition = (offset - pointer.start) * 1000; // in milliseconds
+
+								// move timeline
+								tool.moveClipsPointers(null, seekedPosition);
+
+								//return;
+								if (state.url === pointer.url) {
+									tool.setCurrentPosition(seekedPosition);
+								} else {
+									// set next clip start position
+									state.clips.start = seekedPosition;
+
+									// change source
+									tool.changeSource(pointer);
+								}
+
+							});
+						}, 500);
+					});
+				}
 			});
 		});
 	},
@@ -436,6 +630,120 @@ Q.Tool.define("Q/video", function (options) {
 	 */
 	pause: function () {
 		this.state.player && this.state.player.pause();
+	},
+	/**
+	 * Add clip pointer to timeline
+	 * @method addClipsPointer
+	 * @param {object} clip
+	 */
+	addClipsPointer: function (clip) {
+		var tool = this;
+		var state = this.state;
+
+		// check if already exists
+		var exists = false;
+		Q.each(state.clips.pointers, function () {
+			if (this.url === clip.url) {
+				exists = true;
+			}
+		});
+		if (exists) {
+			return;
+		}
+
+		console.log(clip.url);
+
+		var start = clip.offset;
+		var end = start + clip.duration;
+
+		clip.$start = $("<div class='Q_video_clips_pointer' data-time='" + start + "'>").appendTo($(".Q_video_clips_control .vjs-progress-control", tool.element));
+		clip.$end = $("<div class='Q_video_clips_pointer' data-time='" + end + "'>").appendTo($(".Q_video_clips_control .vjs-progress-control", tool.element));
+		clip.start = start;
+		clip.end = end;
+
+		state.clips.pointers.push(clip);
+
+		// place on timeline
+		tool.moveClipsPointers(clip);
+	},
+	/**
+	 * Change clips pointers position on timeline.
+	 * @method moveClipsPointers
+	 * @param {object} [pointer] Pointer to move. If empty move all pointers.
+	 * @param {number} [offset] Offset in milliseconds to move pointer inside clip
+	 */
+	moveClipsPointers: function (pointer, offset) {
+		var state = this.state;
+		var pointers = state.clips.pointers;
+
+		if (Q.isEmpty(pointer) && Q.isEmpty(pointers)) {
+			return;
+		}
+
+		var oneSecondPercent = state.clips.oneSecondPercent;
+		var _handler = function () {
+			var $start = this.$start;
+			var $end = this.$end;
+
+			var startLeft = 50 + this.start * oneSecondPercent - (offset || state.currentPosition)/1000*oneSecondPercent - state.clips.offset*oneSecondPercent;
+			var endLeft = startLeft + this.duration * oneSecondPercent;
+
+			$start[0].style.left = startLeft + '%';
+			startLeft > 98 || startLeft < 2 ? $start.hide() : $start.show();
+
+			$end[0].style.left = endLeft + '%';
+			endLeft > 98 || endLeft < 2 ? $end.hide() : $end.show();
+		};
+
+		if (pointer) {
+			return Q.handle(_handler, pointer);
+		}
+
+		// move all pointers
+		Q.each(pointers, _handler);
+	},
+	/**
+	 * Get clips pointer by offset. Or current pointer if offset null.
+	 * @method getClipsPointer
+	 * @param {number} [offset] Offset in milliseconds. If undefined, current pointer will return;
+	 * @return {object} pointer founded or null
+	 */
+	getClipsPointer: function (offset) {
+		var state = this.state;
+
+		// if offset not defined, use current offset
+		offset = offset === undefined ? state.clips.offset : offset;
+
+		var pointer = null;
+		var index = null;
+		Q.each(state.clips.pointers, function (i) {
+			if (this.start > offset || this.end < offset) {
+				return;
+			}
+
+			pointer = this;
+			index = i;
+		});
+
+		return {
+			index: index,
+			pointer: pointer
+		};
+	},
+	/**
+	 *
+	 * @method preloadNextCLip
+	 */
+	preloadNextClip: function () {
+		var index = Q.getObject("index", this.getClipsPointer());
+		if (!index) {
+			return;
+		}
+
+		var nextClip = this.state.clips.pointers[index + 1];
+		if (nextClip) {
+			this.preloadClip(nextClip.url);
+		}
 	},
 	/**
 	 * @method addAdvertising
@@ -551,8 +859,9 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method setCurrentPosition
 	 * @param {integer} position in milliseonds
 	 * @param {boolean} [silent=false] whether to mute sound while setting position
+	 * @param {boolean} [pause=false] whether to pause video after position changed
 	 */
-	setCurrentPosition: function (position, silent) {
+	setCurrentPosition: function (position, silent, pause) {
 		var tool = this;
 		var state = this.state;
 		var player = state.player;
@@ -573,15 +882,28 @@ Q.Tool.define("Q/video", function (options) {
 
 		player.currentTime(position/1000);
 
-		if (silent) {
+		// this event need to show videojs control bar
+		player.hasStarted && player.hasStarted(true);
+
+		if (silent || pause) {
 			// wait for start position
 			var counter = 0;
 			var intervalId = setInterval(function() {
 				var currentPosition = tool.getCurrentPosition();
 
-				if (currentPosition === position || counter > 15) {
-					player.muted(false);
-					player.waiting(false);
+				if (currentPosition === position || counter > 10) {
+					if (silent) {
+						player.muted(state.videojsOptions.muted || false);
+						player.waiting(false);
+					}
+
+					if (pause) {
+						player.pause();
+
+						// this event need to set status paused, because for some reason it stay in status vjs-playing
+						player.trigger && player.trigger('pause');
+					}
+
 					clearInterval(intervalId);
 				}
 
@@ -626,6 +948,23 @@ Q.Tool.define("Q/video", function (options) {
 		//throw new Q.Exception(this.id + ': No adapter for this URL');
 	},
 	/**
+	 * Preload movie and create URL object with source.
+	 * @method preloadClip
+	 */
+	preloadClip: function (url) {
+		var req = new XMLHttpRequest();
+		req.open('GET', url, true);
+		req.responseType = 'blob';
+		req.onload = function() {
+			// Onload is triggered even on 404
+			// so we need to check the status code
+			if (this.status === 200) {
+				URL.createObjectURL(this.response);
+			}
+		}
+		req.send();
+	},
+	/**
 	 *
 	 * @method calculateStartPosition
 	 */
@@ -638,6 +977,12 @@ Q.Tool.define("Q/video", function (options) {
 		}
 		if (state.start) {
 			start = parseInt(state.start) || 0;
+		}
+		if (state.clips.start) {
+			start = parseInt(state.clips.start) || 0;
+
+			// avoid from seeking next clip
+			state.clips.start = null;
 		}
 
 		return start;
@@ -668,15 +1013,28 @@ Q.Tool.define("Q/video", function (options) {
 	}
 });
 
-Q.Template.set('Q/video/videojs',
+Q.Template.set("Q/video/videojs",
 	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} playsinline webkit-playsinline />'
 );
 
-Q.Template.set('Q/video/skip',
+Q.Template.set("Q/video/skip",
 	'<span class="Q_video_skip">' +
 	'	<span class="Q_video_skip_after">{{text.SkipAfter}}</span> <span class="Q_video_skip_time">{{timeOut}}</span>' +
 	'</div>'
 );
 
+Q.Template.set("Q/video/clips/control",
+	'<div class="vjs-control-bar Q_video_clips_control" dir="ltr">' +
+	'	<div class="vjs-play-control"></div>' +
+	'	<div class="vjs-volume-panel"></div>' +
+	'	<div class="vjs-current-time"></div>' +
+	'	<div class="vjs-progress-control vjs-control">' +
+	'		<div class="vjs-progress-holder vjs-slider vjs-slider-horizontal" role="slider" aria-label="Progress Bar">' +
+	'			<div class="vjs-play-progress vjs-slider-bar" aria-hidden="true" style="width: 50%;"></div>' +
+	'		</div>' +
+	'	</div>' +
+	'	<div class="vjs-fullscreen-control"></div>' +
+	'</div>'
+);
 
 })(window, Q, jQuery);

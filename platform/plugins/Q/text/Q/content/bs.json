@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "isječak",
-        "errorNoSource": "Nema video izvora"
+        "errorNoSource": "Nema video izvora",
+        "SkipAfter": "Preskoči nakon",
+        "Skip": "Preskoči"
     },
     "pdf": {
         "clip": "isječak",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "više",
         "Menu": "Meni"
+    },
+    "durations": {
+        "second": "sekunda",
+        "seconds": "sekunde",
+        "minute": "minutu",
+        "minutes": "minuta",
+        "hour": "sati",
+        "day": "dan",
+        "days": "dana",
+        "week": "sedmica",
+        "weeks": "sedmice",
+        "month": "mjesec",
+        "months": "mjeseci",
+        "year": "godine",
+        "years": "godine",
+        "decade": "decenija",
+        "decades": "decenijama",
+        "century": "vijeka",
+        "centuries": "vijeka"
     }
 }

@@ -807,6 +807,10 @@
      */
 
     function removeClass(element, classToRemove) {
+        if (!element) {
+            return ;
+        }
+
         if (element.classList) {
             element.classList.remove(classToRemove);
         } else {
@@ -2027,6 +2031,10 @@
      */
 
     function trigger(elem, event, hash) {
+        if (!elem) {
+            return;
+        }
+
         // Fetches element data and a reference to the parent (for bubbling).
         // Don't want to add a data object to cache for every parent,
         // so checking hasElData first.
@@ -13855,7 +13863,7 @@
 
         _proto.handlePause = function handlePause(event) {
             this.removeClass('vjs-playing');
-            this.addClass('vjs-paused'); // change the button text to "Play"
+            this.addClass('vjs-paused'); // change the button text to "Pause"
 
             this.controlText('Play');
         }
@@ -22830,6 +22838,10 @@
          */
         'playsinline'].forEach(function (prop) {
         Html5.prototype['set' + toTitleCase(prop)] = function (v) {
+            if (!this.el_) {
+                return;
+            }
+
             this.el_[prop] = v;
 
             if (v) {
@@ -23098,10 +23110,10 @@
          * @see [Spec]{@link https://html.spec.whatwg.org/#attr-media-crossorigin}
          */
         'crossOrigin'].forEach(function (prop) {
-        Html5.prototype[prop] = function () {
-            return this.el_[prop];
-        };
-    }); // Wrap native properties with a setter in this format:
+            Html5.prototype[prop] = function () {
+                return Q.getObject(["el_", prop], this);
+            };
+        }); // Wrap native properties with a setter in this format:
     // set + toTitleCase(name)
     // The list is as follows:
     // setVolume, setSrc, setPoster, setPreload, setPlaybackRate, setDefaultPlaybackRate,
@@ -23249,7 +23261,7 @@
          */
         'play'].forEach(function (prop) {
         Html5.prototype[prop] = function () {
-            return this.el_[prop]();
+            return this.el_ && this.el_[prop]();
         };
     });
     Tech.withSourceHandlers(Html5);

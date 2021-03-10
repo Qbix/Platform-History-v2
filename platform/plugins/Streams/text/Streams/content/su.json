@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Tampilkeun perkongsian layar"
         },
         "notAllowedToJoinCall": "Anjeun teu gaduh idin pikeun ngiringan aliran ieu.",
-        "streamTitle": "Panggero {{1}} langsung"
+        "streamTitle": "Panggero {{1}} langsung",
+        "preview": {
+            "preamble": "Rapat:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Dokumén PDF",
             "description": "Dokumén PDF",
             "newItem": "Tambihkeun PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Patarosan",
+            "description": "aliran patarosan"
+        },
+        "Streams\/answer": {
+            "displayType": "Waleranana",
+            "description": "waleran stream"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Teu aya sumber gambar",
         "uploadLimit": "Ukuran file maksimal: {{size}}",
         "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
+    },
+    "questions": {
+        "Questions": "Patarosan",
+        "Answers": "Jawaban",
+        "AnswerQuestion": "Jawaban Patarosan",
+        "SetYourAnswer": "Punten jawab patarosan",
+        "NewQuestion": "Patarosan Anyar",
+        "NewAnswer": "Jawaban Anyar",
+        "AnswerDetails": "Rincian Jawaban",
+        "answerOption": "Pilihan",
+        "answerOptionExclusive": "Eksklusif",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "waleran gratis ...",
+        "SaveQuestion": "Simpen Patarosan",
+        "SaveAnswer": "Simpen Jawaban",
+        "AddAnotherAnswer": "Tambihkeun waleran anu sanés",
+        "ErrorAnswers": "Punten tambihan hiji waleran",
+        "AlreadyAnswered": "Parantos ngajawab",
+        "TitlePlaceholder": "Ketik patarosan anjeun",
+        "ContentPlaceholder": "Pasang inpormasi tambihan didieu kanggo ngabantosan jalma-jalma ngajawab",
+        "ErrorTitle": "Patarosan diperyogikeun"
+    },
+    "experience": {
+        "NewExperience": "Pangalaman Anyar"
     }
 }

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Nisuna surghjente video"
+        "errorNoSource": "Nisuna surghjente video",
+        "SkipAfter": "Saltate dopu",
+        "Skip": "Saltà"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "più",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "sicondu",
+        "seconds": "sicondi",
+        "minute": "minutu",
+        "minutes": "minuti",
+        "hour": "ore",
+        "day": "ghjornu",
+        "days": "ghjorni",
+        "week": "settimana",
+        "weeks": "settimane",
+        "month": "mese",
+        "months": "mesi",
+        "year": "annu",
+        "years": "anni",
+        "decade": "decenniu",
+        "decades": "decennii",
+        "century": "seculu",
+        "centuries": "seculi"
     }
 }

@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "kopanira",
-        "errorNoSource": "Palibe kanema"
+        "errorNoSource": "Palibe kanema",
+        "SkipAfter": "Pitani pambuyo",
+        "Skip": "Pitani"
     },
     "pdf": {
         "clip": "kopanira",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "Zambiri",
         "Menu": "Menyu"
+    },
+    "durations": {
+        "second": "chachiwiri",
+        "seconds": "masekondi",
+        "minute": "miniti",
+        "minutes": "mphindi",
+        "hour": "maola",
+        "day": "tsiku",
+        "days": "masiku",
+        "week": "sabata",
+        "weeks": "masabata",
+        "month": "mwezi",
+        "months": "miyezi",
+        "year": "chaka",
+        "years": "zaka",
+        "decade": "zaka khumi",
+        "decades": "zaka makumi",
+        "century": "zaka zana limodzi",
+        "centuries": "zaka mazana ambiri"
     }
 }

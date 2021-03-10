@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Hōʻike i ke kaʻana like screen"
         },
         "notAllowedToJoinCall": "ʻAʻole ʻae ʻia ʻoe e komo i kēia kahawai.",
-        "streamTitle": "{{1}} kāhea ola"
+        "streamTitle": "{{1}} kāhea ola",
+        "preview": {
+            "preamble": "Halawai:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Palapala PDF",
             "description": "Palapala PDF",
             "newItem": "Hoʻohui PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Ninau",
+            "description": "kahawai nīnau"
+        },
+        "Streams\/answer": {
+            "displayType": "Pane",
+            "description": "kahawai pane"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ʻAʻohe kumu kiʻi",
         "uploadLimit": "Ka nui o ka faile: {{size}}",
         "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
+    },
+    "questions": {
+        "Questions": "Nā Nīnau",
+        "Answers": "Nā Pane",
+        "AnswerQuestion": "Pane Haina",
+        "SetYourAnswer": "E ʻoluʻolu e pane i ka nīnau",
+        "NewQuestion": "Nīnau Hou",
+        "NewAnswer": "Pane Hou",
+        "AnswerDetails": "Nā pane kikoʻī",
+        "answerOption": "Koho",
+        "answerOptionExclusive": "Kūpono",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "pane manuahi ...",
+        "SaveQuestion": "Mālama i ka Nīnau",
+        "SaveAnswer": "Mālama i ka pane",
+        "AddAnotherAnswer": "Pākuʻi i kahi pane hou aʻe",
+        "ErrorAnswers": "E ʻoluʻolu e hoʻohui i hoʻokahi pane",
+        "AlreadyAnswered": "Ua pane ʻia",
+        "TitlePlaceholder": "E kikokiko i kāu nīnau",
+        "ContentPlaceholder": "E hoʻokau i kahi ʻike hou ma aneʻi e kōkua i ka poʻe e pane",
+        "ErrorTitle": "Nīnau koi ʻia"
+    },
+    "experience": {
+        "NewExperience": "ʻIke Hou"
     }
 }

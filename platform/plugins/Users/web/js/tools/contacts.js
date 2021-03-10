@@ -65,7 +65,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 		var selectedLabel = null;
 
 		Q.Users.getLabels(state.communityId, state.prefix, function (err, labels) {
-			Q.Template.render("Users/labels", {
+			Q.Template.render("Users/contacts", {
 				labels: labels,
 				all: all,
 				canAdd: state.canAdd,
@@ -119,7 +119,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 );
 
-Q.Template.set('Users/labels', ''
+Q.Template.set('Users/contacts', ''
 + '<ul>'
 + '{{#if all}}'
 + '<li class="Users_labels_label" data-label="*">'

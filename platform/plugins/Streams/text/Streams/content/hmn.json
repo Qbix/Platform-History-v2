@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Qhia pom kev sib koom ntawm kev tshuaj ntsuam"
         },
         "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog cov kwj deg no.",
-        "streamTitle": "{{1}} nyob ntawm kev hu xov tooj"
+        "streamTitle": "{{1}} nyob ntawm kev hu xov tooj",
+        "preview": {
+            "preamble": "Lub rooj sib tham:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF ntawv",
             "description": "PDF ntawv",
             "newItem": "Ntxiv PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Lo lus nug",
+            "description": "nqe lus nug kwj"
+        },
+        "Streams\/answer": {
+            "displayType": "Teb",
+            "description": "teb kwj"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Tsis muaj cov duab chaw",
         "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
         "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
+    },
+    "questions": {
+        "Questions": "Cov lus nug",
+        "Answers": "Cov lus teb",
+        "AnswerQuestion": "Teb Lus Nug",
+        "SetYourAnswer": "Thov teb cov lus nug",
+        "NewQuestion": "Cov Lus Nug Tshiab",
+        "NewAnswer": "Teb Tshiab",
+        "AnswerDetails": "Teb Cov Lus Qhia",
+        "answerOption": "Xaiv",
+        "answerOptionExclusive": "Tshwj Xeeb",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "teb pub dawb ...",
+        "SaveQuestion": "Khaws Lus Nug",
+        "SaveAnswer": "Txuag Teb",
+        "AddAnotherAnswer": "Ntxiv lwm lo lus teb",
+        "ErrorAnswers": "Thov teb ib qho lus ntxiv",
+        "AlreadyAnswered": "Twb teb tau",
+        "TitlePlaceholder": "Ntaus koj lo lus nug",
+        "ContentPlaceholder": "Tso cov ntaub ntawv ntxiv ntawm no los pab tib neeg teb",
+        "ErrorTitle": "Yuav tsum muaj lus nug"
+    },
+    "experience": {
+        "NewExperience": "Kev Paub Tshiab"
     }
 }

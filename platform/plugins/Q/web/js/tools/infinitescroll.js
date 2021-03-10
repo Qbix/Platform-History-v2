@@ -18,6 +18,8 @@
 		var state = tool.state;
 		var $te = $(tool.element);
 
+		Q.addStylesheet('{{Q}}/css/infinitescroll.css', { slotName: 'Q' });
+
 		state.lastScrollHeight = $te[0].scrollHeight;
 
 		$te.on('scroll', tool, function () {
@@ -46,12 +48,47 @@
 				state.waiting = false;
 			}
 			
-			if (!$te.is(":visible")) {
-				clearInterval(tool.watchingScrollHeight);
-			}
-
 			state.lastScrollHeight = $te[0].scrollHeight;
 		}, 100);
+
+		// listen for included tools rendered
+		var includedTools = [];
+		var pipeTimer = null;
+		tool.element.forEachTool(function () {
+			if (pipeTimer === true) {
+				return;
+			}
+
+			if (this.state.onRender) {
+				includedTools.push(this);
+				clearTimeout(pipeTimer);
+				pipeTimer = setTimeout(function () {
+					pipeTimer = true; // mark that pipe called
+					var pipeArray = includedTools.map(function (currTool) {
+						return currTool.id;
+					});
+					var pipe = new Q.Pipe(pipeArray, function () {
+						var waitToolVisible = setInterval(function () {
+							// it means that tool element invisible
+							if (tool.element.clientHeight === 0) {
+								return;
+							}
+
+							// check if tool element scrollable
+							if (tool.element.clientHeight >= tool.element.scrollHeight) {
+								Q.handle(tool.state.onInvoke, tool, [0]);
+								pipeTimer = null;
+							}
+
+							clearInterval(waitToolVisible);
+						}, 1000);
+					});
+					Q.each(includedTools, function () {
+						this.state.onRender.add(pipe.fill(this.id), tool);
+					});
+				}, 1000);
+			}
+		}, tool);
 	}, {
 		future: {
 			threshold: 0.8
@@ -62,6 +99,18 @@
 		flipped: false,
 		onInvoke: new Q.Event()
 	}, {
+		/**
+		 * Show or hide preloader indicated that new results loading
+		 * @method setLoading
+		 * @param {boolean} state If true - show preloader, false - hide.
+		 */
+		setLoading: function (state) {
+			if (state) {
+				this.preloader = $("<div class='Q_infinitescroll_preloader'>").appendTo(this.element);
+			} else {
+				this.preloader && this.preloader.remove();
+			}
+		},
 		Q: {
 			beforeRemove: function () {
 				if (this.watchingScrollHeight) {

@@ -21,11 +21,12 @@ var Utils = {};
  * Generate signature for an object
  * @method signature
  * @param {Object|String} data The data to sign
- * @param {String} secret A secret to use for signature
+ * @param {String} [secret] A secret to use for signature. If null Q/internal/secret used
  * @return {string}
  * @throws {Q.Exception} if secret is not defined
  */
 Utils.signature = function (data, secret) {
+	secret = secret || Q.Config.get(['Q', 'internal', 'secret'], null);
 	if (!secret) {
 		throw new Q.Exception('Q.Utils.signature is expecting a secret');
 	}

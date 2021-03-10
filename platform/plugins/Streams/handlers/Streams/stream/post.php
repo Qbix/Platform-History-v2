@@ -53,7 +53,7 @@ function Streams_stream_post($params = array())
 	if (isset($relate['streamName'])) {
 		$relate['publisherId'] = Q_Request::special("Streams.related.publisherId", $publisherId, $req);
 		$relate['type'] = Q_Request::special("Streams.related.type", "", $req);
-		$relate['weight'] = "+1"; // TODO: introduce ways to have "1" and "+1" for some admins etc.
+		$relate['weight'] = Q_Request::special("Streams.related.weight", "+1", $req); // TODO: introduce ways to have "1" and "+1" for some admins etc.
 	}
 	
 	// Split the id for saving files in the filesystem

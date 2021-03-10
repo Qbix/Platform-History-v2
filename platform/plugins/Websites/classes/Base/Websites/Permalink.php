@@ -456,7 +456,7 @@ return array (
 return array (
   0 => 
   array (
-    0 => 'datetime',
+    0 => 'timestamp',
     1 => '255',
     2 => '',
     3 => false,

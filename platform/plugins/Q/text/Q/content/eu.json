@@ -118,5 +118,24 @@
         "ClipStart": "Clip Hasi",
         "SetClipEnd": "Ezarri kliparen amaiera",
         "ClipEnd": "Kliparen amaiera"
+    },
+    "durations": {
+        "second": "bigarrena",
+        "seconds": "segundo",
+        "minute": "minutua",
+        "minutes": "minutu",
+        "hour": "ordu",
+        "day": "eguna",
+        "days": "egunak",
+        "week": "astea",
+        "weeks": "asteak",
+        "month": "hilabetea",
+        "months": "hilabeteak",
+        "year": "urtea",
+        "years": "urteak",
+        "decade": "hamarkada",
+        "decades": "hamarkadetan",
+        "century": "mendean",
+        "centuries": "mendeetan"
     }
 }

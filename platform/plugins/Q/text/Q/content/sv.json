@@ -118,5 +118,24 @@
         "ClipStart": "Clip Start",
         "SetClipEnd": "Ställ in klippänden",
         "ClipEnd": "Clip End"
+    },
+    "durations": {
+        "second": "andra",
+        "seconds": "sekunder",
+        "minute": "minut",
+        "minutes": "minuter",
+        "hour": "timmar",
+        "day": "dag",
+        "days": "dagar",
+        "week": "vecka",
+        "weeks": "Veckor",
+        "month": "månad",
+        "months": "månader",
+        "year": "år",
+        "years": "år",
+        "decade": "årtionde",
+        "decades": "årtionden",
+        "century": "århundrade",
+        "centuries": "århundraden"
     }
 }

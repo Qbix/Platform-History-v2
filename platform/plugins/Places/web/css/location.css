@@ -1,7 +1,7 @@
 .Places_location_tool.Q_selected,
 .Places_location_tool .Q_selected {
 	border-radius: 5px;
-	padding: 5px 10px;
+	padding: 5px;
 }
 .Places_location_tool div[data-location] label {
 	cursor: pointer;
@@ -50,6 +50,9 @@
 }
 .Places_location_tool .Places_location_related {
 	margin-bottom: 5px;
+}
+.Places_location_tool .Places_location_related:empty {
+	display: none;
 }
 .Places_location_tool .Places_location_related[data-loading=true] {
 	margin: 10px 0;

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Showուցադրել էկրանի համօգտագործումը"
         },
         "notAllowedToJoinCall": "Դուք այս հոսքին միանալու թույլտվություն չունեք:",
-        "streamTitle": "99 99 999}} կենդանի զանգ"
+        "streamTitle": "99 99 999}} կենդանի զանգ",
+        "preview": {
+            "preamble": "Հանդիպում"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF փաստաթուղթ",
             "description": "PDF փաստաթուղթ",
             "newItem": "Ավելացնել PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Հարց",
+            "description": "հարցի հոսք"
+        },
+        "Streams\/answer": {
+            "displayType": "Պատասխանել",
+            "description": "պատասխան հոսք"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Պատկերի աղբյուր չկա",
         "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
         "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+    },
+    "questions": {
+        "Questions": "Հարցեր",
+        "Answers": "Պատասխանները",
+        "AnswerQuestion": "Պատասխանել հարցին",
+        "SetYourAnswer": "Խնդրում եմ պատասխանել հարցին",
+        "NewQuestion": "Նոր հարց",
+        "NewAnswer": "Նոր պատասխան",
+        "AnswerDetails": "Պատասխանի մանրամասները",
+        "answerOption": "Տարբերակ",
+        "answerOptionExclusive": "Բացառիկ",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "անվճար պատասխան ...",
+        "SaveQuestion": "Հարցը պահպանել",
+        "SaveAnswer": "Պահպանեք պատասխանը",
+        "AddAnotherAnswer": "Ավելացրեք մեկ այլ պատասխան",
+        "ErrorAnswers": "Խնդրում եմ ավելացնել նույնիսկ մեկ պատասխան",
+        "AlreadyAnswered": "Արդեն պատասխանեց",
+        "TitlePlaceholder": "Մուտքագրեք ձեր հարցը",
+        "ContentPlaceholder": "Տեղադրեք այստեղ ցանկացած լրացուցիչ տեղեկություն ՝ մարդկանց օգնելու համար",
+        "ErrorTitle": "Հարց է պահանջվում"
+    },
+    "experience": {
+        "NewExperience": "Նոր փորձ"
     }
 }

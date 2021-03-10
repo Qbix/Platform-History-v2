@@ -118,5 +118,24 @@
         "ClipStart": "Klipi algus",
         "SetClipEnd": "Määra klipi lõpp",
         "ClipEnd": "Klipi lõpp"
+    },
+    "durations": {
+        "second": "teine",
+        "seconds": "sekundit",
+        "minute": "minut",
+        "minutes": "minutit",
+        "hour": "tundi",
+        "day": "päeval",
+        "days": "päeva",
+        "week": "nädal",
+        "weeks": "nädalat",
+        "month": "kuu",
+        "months": "kuud",
+        "year": "aasta",
+        "years": "aastat",
+        "decade": "kümnendil",
+        "decades": "aastakümneid",
+        "century": "sajandil",
+        "centuries": "sajandeid"
     }
 }

@@ -118,5 +118,24 @@
         "ClipStart": "Gearrthóg Tosaigh",
         "SetClipEnd": "Socraigh Deireadh Gearrthóg",
         "ClipEnd": "Gearrthóg"
+    },
+    "durations": {
+        "second": "dara",
+        "seconds": "soicind",
+        "minute": "nóiméad",
+        "minutes": "nóiméad",
+        "hour": "uair an chloig",
+        "day": "lá",
+        "days": "laethanta",
+        "week": "seachtain",
+        "weeks": "seachtaine",
+        "month": "mhí",
+        "months": "míonna",
+        "year": "bhliain",
+        "years": "bliana",
+        "decade": "deich mbliana",
+        "decades": "scór bliain",
+        "century": "haois",
+        "centuries": "céadta bliain"
     }
 }

@@ -12,7 +12,9 @@
 	 *   @param {boolean} [options.showDomainOnly=false] If true show domain:port if port != 80, else show full url
 	 *   @param {boolean} [options.showDescription=false] If true show site description below title instead url
 	 *   @param {object} [options.siteData] Site data
+	 *   @param {Q.Event} [options.onRender] Event occurs when tool element has rendered with content
 	 *   @param {string} [options.url] url for preview
+	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
 	 */
 	Q.Tool.define("Websites/webpage/preview", function (options) {
 		var tool = this;
@@ -52,18 +54,24 @@
 					return ;
 				}
 
-				tool.composer(_proceed);
+				// when all components loaded, call composer
+				state.onLoad.add(function () {
+					tool.composer(_proceed);
+				}, tool);
+
 				return false;
 			};
 		}
 
 		// wait when styles and texts loaded and then run refresh
 		var pipe = Q.pipe(['styles', 'text'], function () {
-				if (previewState) {
-					previewState.onRefresh.add(tool.refresh.bind(tool));
-				} else {
-					tool.refresh();
-				}
+			Q.handle(state.onLoad, tool);
+
+			if (previewState) {
+				previewState.onRefresh.add(tool.refresh.bind(tool));
+			} else {
+				tool.refresh();
+			}
 		});
 
 		// loading styles
@@ -96,16 +104,17 @@
 		isComposer: true,
 		editable: ['title'],
 		mode: 'document',
-		onInvoke: new Q.Event(),
-		onRender: new Q.Event(),
-		onError: new Q.Event(),
 		showDomainOnly: false,
 		showDescription: false,
 		hideIfNoParticipants: false,
 		category: null,
 		// light mode params
 		siteData: {},
-		url: null
+		url: null,
+		onInvoke: new Q.Event(),
+		onRender: new Q.Event(),
+		onError: new Q.Event(),
+		onLoad: new Q.Event()
 	},
 
 	{
@@ -142,14 +151,21 @@
 					$te.removeClass('Streams_chat_preview_noParticipants');
 				}
 
-				var icon = webpageStream.getAttribute("iconBig");
-				if (!icon) {
-					icon = webpageStream.fields.icon;
-					if (!icon.match(/\.[a-z]{3,4}$/i)) {
-						icon = webpageStream.iconUrl('80');
+				var iconBig = webpageStream.getAttribute("iconBig");
+				if (!iconBig) {
+					iconBig = webpageStream.fields.icon;
+					if (!iconBig.match(/\.[a-z]{3,4}$/i)) {
+						iconBig = webpageStream.iconUrl('80');
 					}
 				}
 
+				var iconSmall = null;
+				if (Q.Streams.isStream(interestStream)) {
+					iconSmall = interestStream.fields.icon;
+					if (!iconSmall.match(/\.[a-z]{3,4}$/i)) {
+						iconSmall = interestStream.iconUrl(interestStream.getAttribute('iconSize') || 40);
+					}
+				}
 
 				Q.Template.render('Websites/webpage/preview', {
 					title: state.editable && state.editable.indexOf('title') >= 0
@@ -167,9 +183,9 @@
 					}) : webpageStream.fields.content,
 					interest: {
 						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
-						icon: Q.Streams.isStream(interestStream) ? interestStream.iconUrl(interestStream.getAttribute('iconSize')) : null,
+						icon: iconSmall,
 					},
-					src: icon,
+					src: iconBig,
 					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {
@@ -319,7 +335,7 @@
 				$(tool.element).html(html);
 
 				Q.activate(tool.element, function () {
-					Q.handle(tool.state.onRender, tool);
+					Q.handle(state.onRender, tool);
 				});
 			});
 		},

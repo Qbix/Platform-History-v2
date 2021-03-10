@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "کليپ",
-        "errorNoSource": "نه د ویډیو سرچینه"
+        "errorNoSource": "نه د ویډیو سرچینه",
+        "SkipAfter": "وروسته پرېښودل",
+        "Skip": "پرېښودل"
     },
     "pdf": {
         "clip": "کليپ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "نور",
         "Menu": "مینو"
+    },
+    "durations": {
+        "second": "دوهم",
+        "seconds": "ثانیې",
+        "minute": "دقیقه",
+        "minutes": "دقیقې",
+        "hour": "ساعتونه",
+        "day": "ورځ",
+        "days": "ورځې",
+        "week": "اونۍ",
+        "weeks": "اونۍ",
+        "month": "میاشت",
+        "months": "میاشتې",
+        "year": "کال",
+        "years": "کلونه",
+        "decade": "لسيزه",
+        "decades": "لسیزې",
+        "century": "پیړۍ",
+        "centuries": "پېړۍ"
     }
 }

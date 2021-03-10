@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Nec video fons"
+        "errorNoSource": "Nec video fons",
+        "SkipAfter": "post Skip",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "magis",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "secundus",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "horis",
+        "day": "dies",
+        "days": "diebus",
+        "week": "septem",
+        "weeks": "hebdomades",
+        "month": "mensis",
+        "months": "menses",
+        "year": "annos singulos",
+        "years": "annorum",
+        "decade": "decennium",
+        "decades": "decennium",
+        "century": "saeculum",
+        "centuries": "saecula"
     }
 }

@@ -118,5 +118,24 @@
         "ClipStart": "Cychwyn Clip",
         "SetClipEnd": "Gosod Diwedd Clip",
         "ClipEnd": "Diwedd Clip"
+    },
+    "durations": {
+        "second": "yn ail",
+        "seconds": "eiliadau",
+        "minute": "munud",
+        "minutes": "munudau",
+        "hour": "oriau",
+        "day": "Dydd",
+        "days": "dyddiau",
+        "week": "wythnos",
+        "weeks": "wythnosau",
+        "month": "mis",
+        "months": "misoedd",
+        "year": "flwyddyn",
+        "years": "mlynedd",
+        "decade": "degawd",
+        "decades": "degawdau",
+        "century": "ganrif",
+        "centuries": "canrifoedd"
     }
 }

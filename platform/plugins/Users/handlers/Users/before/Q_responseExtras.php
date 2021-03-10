@@ -64,4 +64,12 @@ function Users_before_Q_responseExtras()
 		}
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
+
+	// add apple signIn js lib
+	if (Q_Request::platform() === 'ios') {
+		Q_Response::addScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', 'Users');
+	}
+
+	// fetch labels info
+	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
 }

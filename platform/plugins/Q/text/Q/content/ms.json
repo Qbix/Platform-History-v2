@@ -118,5 +118,24 @@
         "ClipStart": "Mula Klip",
         "SetClipEnd": "Tetapkan Klip Akhir",
         "ClipEnd": "Akhir Klip"
+    },
+    "durations": {
+        "second": "kedua",
+        "seconds": "saat",
+        "minute": "minit",
+        "minutes": "minit",
+        "hour": "Jam",
+        "day": "hari",
+        "days": "hari-hari",
+        "week": "minggu",
+        "weeks": "minggu",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tahun",
+        "years": "tahun",
+        "decade": "dekad",
+        "decades": "dekad",
+        "century": "abad",
+        "centuries": "abad"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Asehoy ny fizarana efijery"
         },
         "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity stream ity ianao.",
-        "streamTitle": "Antso {{1}} mivantana"
+        "streamTitle": "Antso {{1}} mivantana",
+        "preview": {
+            "preamble": "fivoriana:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF rakitra",
             "description": "PDF rakitra",
             "newItem": "Manampia PDF"
+        },
+        "Streams\/question": {
+            "displayType": "fanontaniana",
+            "description": "renirano fanontaniana"
+        },
+        "Streams\/answer": {
+            "displayType": "valiny",
+            "description": "valiny"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Tsy misy loharano",
         "uploadLimit": "Haben&#39;ny Max: {{size}}",
         "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
+    },
+    "questions": {
+        "Questions": "fanontaniana",
+        "Answers": "VALIN&#39;NY",
+        "AnswerQuestion": "Valiny Fanontaniana",
+        "SetYourAnswer": "Valio azafady ny fanontaniana",
+        "NewQuestion": "Fanontaniana vaovao",
+        "NewAnswer": "Valiny vaovao",
+        "AnswerDetails": "Valiny amin&#39;ny antsipiriany",
+        "answerOption": "SAFIDY",
+        "answerOptionExclusive": "manokana",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "valiny maimaim-poana ...",
+        "SaveQuestion": "Tehirizo ny fanontaniana",
+        "SaveAnswer": "Vonjeo ny valiny",
+        "AddAnotherAnswer": "Manampy valiny hafa",
+        "ErrorAnswers": "Azafady mba ampio valiny iray aza",
+        "AlreadyAnswered": "Efa namaly",
+        "TitlePlaceholder": "Soraty ny fanontanianao",
+        "ContentPlaceholder": "Apetraho eto ny fampahalalana fanampiny hanampiana ny olona hamaly",
+        "ErrorTitle": "Fanontaniana ilaina"
+    },
+    "experience": {
+        "NewExperience": "Fanandramana vaovao"
     }
 }

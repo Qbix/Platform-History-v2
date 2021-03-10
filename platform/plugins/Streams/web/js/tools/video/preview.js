@@ -14,6 +14,8 @@
 	 *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
 	 *   @param {Object} [options.pie] Any options to pass to the Q/pie tool -- see its options.
 	 *   @param {String} [options.url] If defined, Websites/scrape will requested and created preview tool with response data
+	 *   @param {Q.Event} [onLoad] called when styles and texts loaded
+	 *   @param {Q.Event} [onRender] called when tool rendered
 	 */
 	Q.Tool.define("Streams/video/preview", "Streams/preview", function (options, preview) {
 		var tool = this;
@@ -93,7 +95,10 @@
 					return ;
 				}
 
-				tool.composer(_proceed);
+				// when all components loaded, call composer
+				state.onLoad.add(function () {
+					tool.composer(_proceed);
+				}, tool);
 
 				return false;
 			};
@@ -102,7 +107,7 @@
 		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 			tool.text = params.text[1].video;
 
-			ps.onRefresh.add(tool.refresh.bind(tool), tool);
+			Q.handle(state.onLoad, tool);
 		});
 
 		Q.Text.get('Streams/content', p.fill('text'));
@@ -118,7 +123,11 @@
 		inplace: {
 			field: 'title',
 			inplaceType: 'text'
-		}
+		},
+		onLoad: new Q.Event(function () {
+			this.preview.state.onRefresh.add(this.refresh.bind(this), this);
+		}, "Streams/video"),
+		onRender: new Q.Event()
 	},
 
 	{
@@ -181,6 +190,8 @@
 				if (err) return;
 
 				$te.html(html);
+
+				Q.handle(state.onRender, tool);
 
 				Q.activate($te);
 			});

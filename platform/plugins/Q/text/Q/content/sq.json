@@ -118,5 +118,24 @@
         "ClipStart": "Fillo klipin",
         "SetClipEnd": "Cakto fundin e klipit",
         "ClipEnd": "Fundi i Klipit"
+    },
+    "durations": {
+        "second": "e dyta",
+        "seconds": "sekonda",
+        "minute": "minutë",
+        "minutes": "minuta",
+        "hour": "orë",
+        "day": "ditë",
+        "days": "ditë",
+        "week": "javë",
+        "weeks": "javë",
+        "month": "muaj",
+        "months": "muaj",
+        "year": "viti",
+        "years": "vjet",
+        "decade": "dekadë",
+        "decades": "dekada",
+        "century": "shekulli",
+        "centuries": "shekuj"
     }
 }

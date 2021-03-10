@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Show screen sharing"
         },
         "notAllowedToJoinCall": "Haec tibi non liceat iungere amnis.",
-        "streamTitle": "{{CMXCIX vivere vocationem}}"
+        "streamTitle": "{{CMXCIX vivere vocationem}}",
+        "preview": {
+            "preamble": "testimonii:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF document",
             "description": "PDF document",
             "newItem": "PDF addendi"
+        },
+        "Streams\/question": {
+            "displayType": "Quaeritur",
+            "description": "quaestio amnis"
+        },
+        "Streams\/answer": {
+            "displayType": "Et respondendum est,",
+            "description": "responsum amnis"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nulla imago fons",
         "uploadLimit": "Max file size: {{CMXCIX}}",
         "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
+    },
+    "questions": {
+        "Questions": "quaestiones",
+        "Answers": "Answers",
+        "AnswerQuestion": "Et respondendum est Quaeritur",
+        "SetYourAnswer": "Quaeso responde quaestio",
+        "NewQuestion": "novum Quaeritur",
+        "NewAnswer": "Nova Et respondendum est,",
+        "AnswerDetails": "Et respondendum est, Details",
+        "answerOption": "optionem",
+        "answerOptionExclusive": "exclusive",
+        "answerTextarea": "textarea",
+        "FreeAnswer": "liberum responsum ...",
+        "SaveQuestion": "nisi Quaeritur",
+        "SaveAnswer": "Et respondendum est, nisi",
+        "AddAnotherAnswer": "Addere aliud respondere",
+        "ErrorAnswers": "Placere respondere unum et adde",
+        "AlreadyAnswered": "iam respondit",
+        "TitlePlaceholder": "Typus quaeris,",
+        "ContentPlaceholder": "Ad auxilium populus quaelibet informationis hic respondere",
+        "ErrorTitle": "quaestio requiratur"
+    },
+    "experience": {
+        "NewExperience": "Usus novum"
     }
 }

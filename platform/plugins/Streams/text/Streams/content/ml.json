@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "സ്‌ക്രീൻ പങ്കിടൽ കാണിക്കുക"
         },
         "notAllowedToJoinCall": "ഈ സ്ട്രീമിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
-        "streamTitle": "{{1}} തത്സമയ കോൾ"
+        "streamTitle": "{{1}} തത്സമയ കോൾ",
+        "preview": {
+            "preamble": "യോഗം:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF പ്രമാണം",
             "description": "PDF പ്രമാണം",
             "newItem": "PDF ചേർക്കുക"
+        },
+        "Streams\/question": {
+            "displayType": "ചോദ്യം",
+            "description": "ചോദ്യ സ്ട്രീം"
+        },
+        "Streams\/answer": {
+            "displayType": "ഉത്തരം",
+            "description": "ഉത്തര സ്ട്രീം"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "ഇമേജ് ഉറവിടമൊന്നുമില്ല",
         "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
         "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
+    },
+    "questions": {
+        "Questions": "ചോദ്യങ്ങൾ",
+        "Answers": "ഉത്തരങ്ങൾ",
+        "AnswerQuestion": "ഉത്തരം പറയൂ",
+        "SetYourAnswer": "ചോദ്യത്തിന് ഉത്തരം നൽ‌കുക",
+        "NewQuestion": "പുതിയ ചോദ്യം",
+        "NewAnswer": "പുതിയ ഉത്തരം",
+        "AnswerDetails": "ഉത്തരം വിശദാംശങ്ങൾ",
+        "answerOption": "ഓപ്ഷൻ",
+        "answerOptionExclusive": "എക്സ്ക്ലൂസീവ്",
+        "answerTextarea": "ടെക്സ്റ്റേറിയ",
+        "FreeAnswer": "സ answer ജന്യ ഉത്തരം ...",
+        "SaveQuestion": "ചോദ്യം സംരക്ഷിക്കുക",
+        "SaveAnswer": "ഉത്തരം സംരക്ഷിക്കുക",
+        "AddAnotherAnswer": "മറ്റൊരു ഉത്തരം ചേർക്കുക",
+        "ErrorAnswers": "ഒരു ഉത്തരം പോലും ചേർക്കുക",
+        "AlreadyAnswered": "ഇതിനകം ഉത്തരം നൽകി",
+        "TitlePlaceholder": "നിങ്ങളുടെ ചോദ്യം ടൈപ്പുചെയ്യുക",
+        "ContentPlaceholder": "ഉത്തരം നൽകാൻ ആളുകളെ സഹായിക്കുന്നതിന് ഏതെങ്കിലും അധിക വിവരങ്ങൾ ഇവിടെ ഇടുക",
+        "ErrorTitle": "ചോദ്യം ആവശ്യമാണ്"
+    },
+    "experience": {
+        "NewExperience": "പുതിയ അനുഭവം"
     }
 }

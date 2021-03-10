@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "klipo",
-        "errorNoSource": "Neniu videofonto"
+        "errorNoSource": "Neniu videofonto",
+        "SkipAfter": "Preterpasu",
+        "Skip": "Saltu"
     },
     "pdf": {
         "clip": "klipo",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "pli",
         "Menu": "Menuo"
+    },
+    "durations": {
+        "second": "dua",
+        "seconds": "sekundoj",
+        "minute": "minuto",
+        "minutes": "minutoj",
+        "hour": "horoj",
+        "day": "tago",
+        "days": "tagojn",
+        "week": "semajno",
+        "weeks": "semajnoj",
+        "month": "monato",
+        "months": "monatoj",
+        "year": "jaro",
+        "years": "jaroj",
+        "decade": "jardeko",
+        "decades": "jardekojn",
+        "century": "jarcento",
+        "centuries": "jarcentoj"
     }
 }

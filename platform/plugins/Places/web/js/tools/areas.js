@@ -230,7 +230,8 @@
 				},
 				{
 					title: state.text.areas.addNewArea,
-					ok: state.text.areas.add
+					ok: state.text.areas.add,
+					className: "Places_area_title"
 				});
 
 				// set default value

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Нишон додани мубодилаи экран"
         },
         "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин ҷараёнро надоред.",
-        "streamTitle": "{{1}} занги мустақим"
+        "streamTitle": "{{1}} занги мустақим",
+        "preview": {
+            "preamble": "Маҷлис:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Ҳуҷҷати PDF",
             "description": "Ҳуҷҷати PDF",
             "newItem": "PDF илова кунед"
+        },
+        "Streams\/question": {
+            "displayType": "Савол",
+            "description": "ҷараёни саволҳо"
+        },
+        "Streams\/answer": {
+            "displayType": "Ҷавоб",
+            "description": "ҷараёни посух"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Манбаи тасвир нест",
         "uploadLimit": "Андозаи максималии файл: {{size}}",
         "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+    },
+    "questions": {
+        "Questions": "Саволҳо",
+        "Answers": "Ҷавобҳо",
+        "AnswerQuestion": "Саволро ҷавоб диҳед",
+        "SetYourAnswer": "Лутфан ба савол ҷавоб диҳед",
+        "NewQuestion": "Саволи нав",
+        "NewAnswer": "Ҷавоби нав",
+        "AnswerDetails": "Тафсилоти ҷавоб",
+        "answerOption": "Интихоб",
+        "answerOptionExclusive": "Истисноӣ",
+        "answerTextarea": "Тектерея",
+        "FreeAnswer": "ҷавоби озод ...",
+        "SaveQuestion": "Саволро захира кунед",
+        "SaveAnswer": "Ҷавобро захира кунед",
+        "AddAnotherAnswer": "Ҷавоби дигарро илова кунед",
+        "ErrorAnswers": "Лутфан ҳатто як ҷавоб илова кунед",
+        "AlreadyAnswered": "Аллакай ҷавоб дод",
+        "TitlePlaceholder": "Саволи худро нависед",
+        "ContentPlaceholder": "Дар ин ҷо ягон маълумоти иловагӣ гузоред, то ба одамон ҷавоб диҳанд",
+        "ErrorTitle": "Савол талаб карда мешавад"
+    },
+    "experience": {
+        "NewExperience": "Таҷрибаи нав"
     }
 }

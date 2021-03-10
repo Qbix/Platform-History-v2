@@ -118,5 +118,24 @@
         "ClipStart": "คลิปเริ่มต้น",
         "SetClipEnd": "ตั้งค่าคลิปสิ้นสุด",
         "ClipEnd": "คลิปจบ"
+    },
+    "durations": {
+        "second": "วินาที",
+        "seconds": "วินาที",
+        "minute": "นาที",
+        "minutes": "นาที",
+        "hour": "ชั่วโมง",
+        "day": "วัน",
+        "days": "วัน",
+        "week": "สัปดาห์",
+        "weeks": "สัปดาห์",
+        "month": "เดือน",
+        "months": "เดือน",
+        "year": "ปี",
+        "years": "ปี",
+        "decade": "ทศวรรษ",
+        "decades": "ทศวรรษ",
+        "century": "ศตวรรษ",
+        "centuries": "หลายศตวรรษ"
     }
 }

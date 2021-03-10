@@ -118,5 +118,24 @@
         "ClipStart": "„Clip Start“",
         "SetClipEnd": "Nustatyti „Clip End“",
         "ClipEnd": "Klipo pabaiga"
+    },
+    "durations": {
+        "second": "antra",
+        "seconds": "sekundžių",
+        "minute": "minutė",
+        "minutes": "minučių",
+        "hour": "valandos",
+        "day": "dieną",
+        "days": "dienų",
+        "week": "savaitę",
+        "weeks": "savaičių",
+        "month": "mėnesį",
+        "months": "mėnesių",
+        "year": "metus",
+        "years": "metų",
+        "decade": "dešimtmetis",
+        "decades": "dešimtmečiais",
+        "century": "amžiaus",
+        "centuries": "amžius"
     }
 }

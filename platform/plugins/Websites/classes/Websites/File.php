@@ -451,9 +451,12 @@ class Websites_File extends Base_Websites_Webpage
 	 * @static
 	 * @param {Streams_Stream} $stream
 	 * @param {string} $path Path to file need to copy from
+	 * @param {string} [$type="file"] Can be "file" and "icon".
+	 * @param {boolean} [$move=false] If false - copy file. If true - move file.
+	 * @param {boolean} [$mode=0777] Directories and file mode.
 	 * @return {string} $newFileDest New file path
 	 */
-	static function saveStreamFile ($stream, $path) {
+	static function saveStreamFile ($stream, $path, $type="file", $move=false, $mode=0777) {
 		if (!is_file($path)) {
 			throw new Exception("Source file not found");
 		}
@@ -461,13 +464,32 @@ class Websites_File extends Base_Websites_Webpage
 		$publisherId = Q::ifset($stream, 'publisherId', null);
 		$streamName = Q::ifset($stream, 'name', Q::ifset($stream, 'streamName', null));
 
-		$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'file', time());
+		if ($type == "file") {
+			$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'file', time());
+		} elseif($type == "icon") {
+			$parts = array('uploads', 'Streams', Q_Utils::splitId($publisherId, 3, '/'), $streamName, 'icon');
+		} else {
+			throw new Q_Exception_BadValue(array(
+				'internal' => 'file',
+				'problem' => 'can be "file" or "icon"'
+			));
+		}
+
 		$fileName = basename($path);
 
 		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
-		mkdir($streamDir,0775,true);
+		$oldumask = umask(0);
+		mkdir($streamDir, $mode,true);
+		umask($oldumask);
 		$newFileDest = $streamDir.DS.$fileName;
-		copy($path, $newFileDest);
+
+		if ($move) {
+			rename($path, $newFileDest);
+		} else {
+			copy($path, $newFileDest);
+		}
+
+		chmod($newFileDest, $mode);
 
 		return array(
 			"path" => $newFileDest,

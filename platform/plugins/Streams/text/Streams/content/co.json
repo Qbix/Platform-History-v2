@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Mostra u sparte di u screnu"
         },
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à questu flussu.",
-        "streamTitle": "{{1}} chiamata in diretta"
+        "streamTitle": "{{1}} chiamata in diretta",
+        "preview": {
+            "preamble": "Riunione:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "Documentu PDF",
             "description": "Documentu PDF",
             "newItem": "Aghjunghje PDF"
+        },
+        "Streams\/question": {
+            "displayType": "Dumanda",
+            "description": "flussu di quistione"
+        },
+        "Streams\/answer": {
+            "displayType": "Rispondi",
+            "description": "flussu di risposta"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Nisuna surghjente di maghjina",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
         "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+    },
+    "questions": {
+        "Questions": "Dumande",
+        "Answers": "Risposte",
+        "AnswerQuestion": "Risponde à a dumanda",
+        "SetYourAnswer": "Per piacè risponde à a dumanda",
+        "NewQuestion": "Nova dumanda",
+        "NewAnswer": "Risposta nova",
+        "AnswerDetails": "Rispondi à i Dettagli",
+        "answerOption": "Opzione",
+        "answerOptionExclusive": "Esclusivu",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "risposta libera ...",
+        "SaveQuestion": "Salva Quistione",
+        "SaveAnswer": "Salvà a Risposta",
+        "AddAnotherAnswer": "Aghjustate una altra risposta",
+        "ErrorAnswers": "Per piacè aghjunghje ancu una risposta",
+        "AlreadyAnswered": "Digià rispostu",
+        "TitlePlaceholder": "Scrivite a vostra dumanda",
+        "ContentPlaceholder": "Mettite ogni infurmazione addiziunale quì per aiutà a ghjente à risponde",
+        "ErrorTitle": "Dumanda necessaria"
+    },
+    "experience": {
+        "NewExperience": "Nova Esperienza"
     }
 }

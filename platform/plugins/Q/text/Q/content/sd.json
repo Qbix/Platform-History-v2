@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "ڪلپ",
-        "errorNoSource": "ويڊيو جو ذريعو ناهي"
+        "errorNoSource": "ويڊيو جو ذريعو ناهي",
+        "SkipAfter": "بعد ڇڏيو",
+        "Skip": "ڇڏي ڏيو"
     },
     "pdf": {
         "clip": "ڪلپ",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "وڌيڪ",
         "Menu": "خوراڪ نامو"
+    },
+    "durations": {
+        "second": "ٻيون",
+        "seconds": "سيڪنڊ",
+        "minute": "منٽ",
+        "minutes": "منٽ",
+        "hour": "ڪلاڪ",
+        "day": "ڏينهن",
+        "days": "ڏينهن",
+        "week": "هفتو",
+        "weeks": "هفتا",
+        "month": "مهينو",
+        "months": "مهينا",
+        "year": "سال",
+        "years": "سال",
+        "decade": "ڏهاڪي",
+        "decades": "ڏهاڙا",
+        "century": "صدي",
+        "centuries": "صديون"
     }
 }

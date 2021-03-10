@@ -447,7 +447,7 @@
 					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
 					var target = (info.curScroll === 'iScroll' || info.curScroll === 'touchscroll'
 							? event.target
-							: (info.moveTarget ? info.moveTarget[0] : event.target));
+							: Q.getObject("moveTarget.0", info) || event.target);
 					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
 
 					var element = target;
@@ -675,7 +675,9 @@
 				'eventDelegate': Q.info.isTouchscreen ? document.body : null
 			});
 			info.curScroll = 'scroller';
-		
+
+			Q.Contextual.calcRelativeCoords(trigger, contextual, info);
+
 			if (info.inBottomHalf) {
 				contextual.append('<div class="Q_contextual_bottom_arrow" />');
 			} else {
@@ -685,9 +687,6 @@
 			var arrow = contextual.find('.Q_contextual_bottom_arrow, .Q_contextual_top_arrow');
 			info.arrowHeight = arrow.outerHeight(true);
 	
-		
-			Q.Contextual.calcRelativeCoords(trigger, contextual, info);
-		
 			var x = info.coords.x, y = info.coords.y;
 			var w = (info.size && info.size.width) || contextual.outerWidth();
 			var arrowLeft = 0;

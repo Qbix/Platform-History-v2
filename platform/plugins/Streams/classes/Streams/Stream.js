@@ -103,6 +103,7 @@ Sp.getAttribute = function(attributeName, def) {
  * @param {string} attributeName The name of the attribute to set,
  *  or an array of {attributeName: attributeValue} pairs
  * @param {mixed} value The value to set the attribute to
+ * @return Streams_Stream
  */
 Sp.setAttribute = function(attributeName, value) {
 	var attr = this.getAllAttributes();
@@ -112,6 +113,8 @@ Sp.setAttribute = function(attributeName, value) {
 		attr[attributeName] = value;
 	}
 	this.fields.attributes = JSON.stringify(attr);
+
+	return this;
 };
 
 /**

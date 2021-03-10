@@ -101,7 +101,9 @@
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Walang mapagkukunan ng video"
+        "errorNoSource": "Walang mapagkukunan ng video",
+        "SkipAfter": "Laktawan pagkatapos",
+        "Skip": "Laktawan"
     },
     "pdf": {
         "clip": "clip",
@@ -116,5 +118,24 @@
     "tabs": {
         "more": "higit pa",
         "Menu": "Menu"
+    },
+    "durations": {
+        "second": "pangalawa",
+        "seconds": "segundo",
+        "minute": "minuto",
+        "minutes": "minuto",
+        "hour": "oras",
+        "day": "araw",
+        "days": "araw",
+        "week": "linggo",
+        "weeks": "linggo",
+        "month": "buwan",
+        "months": "buwan",
+        "year": "taon",
+        "years": "taon",
+        "decade": "dekada",
+        "decades": "dekada",
+        "century": "siglo",
+        "centuries": "daang siglo"
     }
 }

@@ -211,7 +211,10 @@
             "turnOnScreenSharing": "Show Écran Deele"
         },
         "notAllowedToJoinCall": "Dir hutt net déi néideg Rechter fir matzemaachen.",
-        "streamTitle": "{{1}} Live Uruff"
+        "streamTitle": "{{1}} Live Uruff",
+        "preview": {
+            "preamble": "Versammlung:"
+        }
     },
     "messages": {
         "html": {
@@ -349,6 +352,14 @@
             "displayType": "PDF Dokument",
             "description": "PDF Dokument",
             "newItem": "PDF derbäisetzen"
+        },
+        "Streams\/question": {
+            "displayType": "Fro",
+            "description": "Fro Baach"
+        },
+        "Streams\/answer": {
+            "displayType": "Äntwert",
+            "description": "Äntwert Stroum"
         }
     },
     "participating": {
@@ -438,5 +449,29 @@
         "errorNoSource": "Keng Bildquell",
         "uploadLimit": "Max Dateigréisst: {{size}}",
         "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
+    },
+    "questions": {
+        "Questions": "Froen",
+        "Answers": "Äntwerten",
+        "AnswerQuestion": "Äntwert Fro",
+        "SetYourAnswer": "Äntwert w.e.g. op d&#39;Fro",
+        "NewQuestion": "Nei Fro",
+        "NewAnswer": "Nei Äntwert",
+        "AnswerDetails": "Äntwert Detailer",
+        "answerOption": "Optioun",
+        "answerOptionExclusive": "Exklusiv",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "fräi Äntwert ...",
+        "SaveQuestion": "Späichert Fro",
+        "SaveAnswer": "Späichert Äntwert",
+        "AddAnotherAnswer": "Füügt eng aner Äntwert bäi",
+        "ErrorAnswers": "Füügt w.e.g. souguer eng Äntwert derbäi",
+        "AlreadyAnswered": "Scho geäntwert",
+        "TitlePlaceholder": "Typ Är Fro",
+        "ContentPlaceholder": "Setzt all zousätzlech Informatioun hei fir de Leit z&#39;äntweren",
+        "ErrorTitle": "Fro gefrot"
+    },
+    "experience": {
+        "NewExperience": "Nei Erfahrung"
     }
 }

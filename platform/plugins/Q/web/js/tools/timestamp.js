@@ -49,7 +49,7 @@ Q.Tool.define('Q/timestamp', function () {
 		pipe.fill('text')();
 	});
 
-	Q.ensure(Q.PHPJS, "{{Q}}/js/phpjs.js", pipe.fill('phpjs'));
+	Q.ensure('Q.PHPJS', pipe.fill('phpjs'));
 
 	tool.Q.onStateChanged('time')
 	.or(tool.Q.onStateChanged('format'))

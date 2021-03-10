@@ -1,0 +1,69 @@
+.Streams_calls_tool.Streams_calls_settings,
+.Streams_calls_tool.Streams_calls_call {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    cursor: pointer;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+}
+.Streams_calls_tool.Streams_calls_settings:before,
+.Streams_calls_tool.Streams_calls_call:before {
+    display: block;
+    position: absolute;
+    font-size: 35px;
+    font-family: streams-icons;
+    text-align: center;
+}
+.Streams_calls_tool.Streams_calls_settings:before {
+    content: "\e994"; color: red;
+}
+.Streams_calls_tool.Streams_calls_call:before {
+    content: "\e942"; color: blue;
+}
+.Streams_calls_settings input[name=maxCalls] {
+    margin-left: 10px;
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 5px;
+}
+.Streams_calls_settings .Q_column_slot,
+.Streams_calls_settings .Q_dialog_slot {
+    padding: 10px;
+}
+.Streams_calls_settings .Streams_calls_related {
+    padding: 5px;
+    background-color: rgba(255, 255, 255, .1);
+    margin-bottom: 10px;
+}
+.Streams_calls_settings .Streams_calls_related:empty {
+    height: 100px;
+}
+.Streams_calls_settings .Streams_calls_related:empty:after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    opacity: .3;
+    font-style: italic;
+    text-align: center;
+    line-height: 100px;
+    content: "No calls yet"
+}
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool {
+    cursor: pointer;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, .2);
+    margin-top: 10px;
+}
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_icon,
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_preamble {
+    display: none;
+}

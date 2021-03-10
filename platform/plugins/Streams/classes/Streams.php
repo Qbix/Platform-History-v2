@@ -123,14 +123,14 @@ abstract class Streams extends Base_Streams
 	 */
 	/**
 	 * Can post messages relating other streams to this one
-	 * @property WRITE_LEVEL['relate']
+	 * @property $WRITE_LEVEL['relate']
 	 * @type integer
 	 * @default 23
 	 * @final
 	 */
 	/**
 	 * Can update properties of relations directly
-	 * @property WRITE_LEVEL['relations']
+	 * @property $WRITE_LEVEL['relations']
 	 * @type integer
 	 * @default 25
 	 * @final
@@ -367,6 +367,9 @@ abstract class Streams extends Base_Streams
 			$options = $fields;
 			$fields = '*';
 		}
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
 		$allCached = array();
 		if (empty($options['refetch']) and (is_array($name) or is_string($name))) {
 			$arr = is_array($name) ? $name : array($name);
@@ -380,9 +383,6 @@ abstract class Streams extends Base_Streams
 			}
 		} else {
 			$namesToFetch = $name;
-		}
-		if ($fields === '*') {
-			$fields = join(',', Streams_Stream::fieldNames());
 		}
 		$criteria = array(
 			'publisherId' => $publisherId,
@@ -1699,7 +1699,7 @@ abstract class Streams extends Base_Streams
 		$fromPublisherId,
 		$fromStreamName,
 		$options = array())
-	{		
+	{
 		self::getRelations(
 			$asUserId,
 			$toPublisherId,
@@ -2311,11 +2311,8 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		if ($isCategory) {
-			if (empty($options['orderBy'])) {
-				$query = $query->orderBy('weight', false);
-			} else if ($options['orderBy'] === true) {
-				$query = $query->orderBy('weight', true);
-			}
+			$query = $query->orderBy('weight', Q::ifset($options, "orderBy", false));
+
 			if (!empty($options['weight'])) {
 				$query = $query->andWhere(array('weight' => $options['weight']));
 			}
@@ -2352,8 +2349,15 @@ abstract class Streams extends Base_Streams
 			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
 		}
 
-		$min = isset($options['min']) ? $options['min'] : null;
-		$max = isset($options['max']) ? $options['max'] : null;
+		$min = null;
+		if (isset($options['min'])) {
+			$min = is_numeric($options['min']) ?: strtotime($options['min']);
+		}
+
+		$max = null;
+		if (isset($options['max'])) {
+			$max = is_numeric($options['max']) ?: strtotime($options['max']);
+		}
 		if (isset($min) or isset($max)) {
 			$range = new Db_Range($min, true, true, $max);
 			$query = $query->where(array('weight' => $range));
@@ -2441,9 +2445,82 @@ abstract class Streams extends Base_Streams
 			$returnMultiple ? $streams : $stream
 		);
 	}
-	
+
+	/**
+	 * Check if category allow new relations
+	 * @method checkAvailableRelations
+	 * @param {string} $asUserId The id of the user on whose behalf the stream requested
+	 * @param {string} $publisherId The publisher of the stream
+	 * @param {string} $streamName The name of the stream
+	 * @param {string} $relationType The type of the relation
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.postMessage=true] Whether to post messages Streams/relation/available, Streams/relation/unavailable
+	 * @param {boolean} [$options.throw=false] If true and relation unavailbale, throws exception
+	 * @param {boolean} [$options.singleRelation=false] If true, check that user already related stream to category. If yes throws exception.
+	 * @return {boolean} if available or not
+	 */
+	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
+		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$maxRelations = Q::ifset($stream->getAttribute("maxRelations"), $relationType, null);
+		if (!is_numeric($maxRelations)) {
+			return true;
+		}
+
+		$postMessage = Q::ifset($options, "postMessage", true);
+		$throw = Q::ifset($options, "throw", false);
+		$singleRelation = Q::ifset($options, "singleRelation", false);
+		$texts = Q_Text::get("Streams/content");
+		$exceededText = Q::ifset($texts, "types", $relationType, "MaxRelationsExceeded", "Max relations exceeded");
+
+		$currentRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+			"toPublisherId" => $publisherId,
+			"toStreamName" => $streamName,
+			"type" => $relationType
+		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+
+		$available = $maxRelations - $currentRelations;
+		if ($available > 0) {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/available',
+					'instructions' => array("available" => $available)
+				));
+			}
+
+			if ($singleRelation) {
+				$selfRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+					"toPublisherId" => $publisherId,
+					"toStreamName" => $streamName,
+					"type" => $relationType,
+					"fromPublisherId" => $asUserId
+				))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+				if ($selfRelations) {
+					if ($throw) {
+						throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+					} else {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		} else {
+			if ($postMessage) {
+				Streams_Message::post($stream->publisherId, $stream->publisherId, $stream->name, array(
+					'type' => 'Streams/relation/unavailable'
+				));
+			}
+
+			if ($throw) {
+				throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+			}
+
+			return false;
+		}
+	}
 	/**
 	 * Updates the weight on a relation
+	 * @method updateRelation
 	 * @param {string} $asUserId
 	 *  The id of the user on whose behalf the app will be updating the relation
 	 * @param {string} $toPublisherId
@@ -2852,7 +2929,10 @@ abstract class Streams extends Base_Streams
 			$p->state = $state;
 		}
 		if ($streamNamesUpdate) {
-			$updateFields = compact('state');
+			$updateFields = array(
+				"state" => $state,
+				"subscribed" => "no"
+			);
 			if (isset($extra)) {
 				$updateFields['extra'] = $extra;
 			}
@@ -3539,8 +3619,10 @@ abstract class Streams extends Base_Streams
 			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
 
+		$alwaysSend = Q::ifset($options, 'alwaysSend', false);
+
 		// remove already participating users if alwaysSend=false
-		if (!Q::ifset($options, 'alwaysSend', false)) {
+		if (!$alwaysSend) {
 			$userIds = array_diff($raw_userIds, $alreadyParticipating);
 		}
 
@@ -3596,7 +3678,7 @@ abstract class Streams extends Base_Streams
 		$expireTime = $duration ? strtotime("+$duration seconds") : null;
 		
 		$asUserId2 = empty($options['skipAccess']) ? $asUserId : false;
-		
+
 		if ($label = Q::ifset($options, 'addLabel', null)) {
 			if (is_string($label)) {
 				$label = explode("\t", $label);
@@ -3615,10 +3697,6 @@ abstract class Streams extends Base_Streams
 			Users_Contact::addContact($asUserId, "Streams/invited/{$stream->type}", $userId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe", $asUserId, null, false, true);
 			Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $asUserId, null, false, true);
-			if ($label) {
-				$label2 = Q::isAssociative($label) ? array_keys($label) : $label;
-				Users_Contact::addContact($publisherId, $label2, $userId, null, $asUserId2, true);
-			}
 			if ($myLabel) {
 				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
@@ -3637,7 +3715,8 @@ abstract class Streams extends Base_Streams
 			"userIds" => Q::json_encode($userIds),
 			"stream" => Q::json_encode($stream->toArray()),
 			"appUrl" => $appUrl,
-			"label" => $label, 
+			"label" => $label,
+			"alwaysSend" => $alwaysSend,
 			"myLabel" => $myLabel, 
 			"readLevel" => $readLevel,
 			"writeLevel" => $writeLevel,
@@ -3691,6 +3770,9 @@ abstract class Streams extends Base_Streams
 			$invite->writeLevel = $writeLevel;
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
+			if ($label) {
+				$invite->extra = compact($label);
+			}
 			$invite->save();
 			$return['invite'] = $invite->exportArray();
 			$return['url'] = $invite->url();

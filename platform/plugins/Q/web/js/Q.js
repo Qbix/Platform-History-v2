@@ -25,14 +25,6 @@ function Q () {
 	// explore the docs at http://qbix.com/platform/client
 }
 
-// external libraries, which you can override
-Q.libraries = {
-	json: "{{Q}}/js/json3-3.2.4.min.js",
-	handlebars: '{{Q}}/js/handlebars-v4.0.10.min.js',
-	jQuery: '{{Q}}/js/jquery-3.2.1.min.js',
-	bluebird: '{{Q}}/js/bluebird.min.js'
-};
-
 /**
  * @module Q
  */
@@ -76,6 +68,26 @@ Q.text = {
 			"10": "October",
 			"11": "November",
 			"12": "December"
+		},
+		"durations": {
+			"second": "second",
+			"seconds": "seconds",
+			"minute": "minute",
+			"minutes": "minutes",
+			"hour": "hour",
+			"hours": "hours",
+			"day": "day",
+			"days": "days",
+			"week": "week",
+			"weeks": "weeks",
+			"month": "month",
+			"months": "months",
+			"year": "year",
+			"years": "years",
+			"decade": "decade",
+			"decades": "decades",
+			"century": "century",
+			"centuries": "centuries"
 		},
 		"audio": {
 			"allowMicrophoneAccess": "Please allow access to your microphone",
@@ -761,7 +773,7 @@ Elp.cssDimensions = function () {
  * @method scrollingParent
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
- * @param {Boolean} [includSelf=false] Whether the element itself can be returned if it matches
+ * @param {Boolean} [includeSelf=false] Whether the element itself can be returned if it matches
  */
 Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
@@ -2022,34 +2034,84 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
  * like Q.url() and Q.addScript can be expected to work properly.
  * @static
  * @method ensure
- * @param {Mixed} property
- *  The property to test for being undefined.
- * @param {String|Function|Q.Event} loader
- *  Something to execute if the property was undefined.
- *  If a string, this is interpreted as the URL of a javascript to load.
- *  If a function, this is called with the callback as the first argument.
- *  If an event, the callback is added to it.
- *  The loader must call the callback and pass the property as the first parameter.
+ * @param {String} property
+ *  Path to the property to test whether Q.getObject() will return undefined.
  * @param {Function} callback
  *  The callback to call when the loader has been executed.
  *  The first parameter should be the property (object, string, etc.) that's now defined.
  *  This is where you would put the code that relies on the property being defined.
  */
-Q.ensure = function _Q_ensure(property, loader, callback) {
-	if (property !== undefined) {
+Q.ensure = function _Q_ensure(property, callback) {
+	if (Q.getObject(property, root) !== undefined) {
 		Q.handle(callback, null, [property]);
 		return;
+	}
+	var loader = Q.ensure.loaders[property];
+	if (!loader) {
+		throw new Q.Error("Q.ensure: missing loader for " + property);
 	}
 	Q.onInit.addOnce(function () {
 		if (typeof loader === 'string') {
 			Q.require(loader, callback);
-			return;
 		} else if (typeof loader === 'function') {
-			loader(callback);
+			loader(property, callback);
 		} else if (loader instanceof Q.Event) {
-			loader.add(callback);
+			loader.add(property, function _loaded() {
+				callback(property);
+			});
 		}
 	});
+};
+
+/**
+ * Whether a page is currently being loaded
+ * @property {Object} ensure.loaders
+ *  Something to execute if the property was undefined and needs to be loaded.
+ *  The key is the property. The value can be one of several things.
+ *  If a string, this is interpreted as the URL of a javascript to load.
+ *  If a function, this is called with the property and callback as arguments.
+ *  If an event, the callback is added to it.
+ *  The loader must call the callback and pass the property as the first parameter.
+ */
+Q.ensure.loaders = {
+	'JSON': "{{Q}}/js/json3-3.2.4.min.js",
+	'Handlebars': '{{Q}}/js/handlebars-v4.0.10.min.js',
+	'jQuery': '{{Q}}/js/jquery-3.2.1.min.js',
+	'Q.PHPJS': "{{Q}}/js/phpjs.js",
+	'Promise': function (property, callback) {
+		// This loads a Promise library for browsers which do not
+		// support Promise natively. For example: IE, Opera Mini.
+		// WARN: Could have race conditions:
+		if (Q.Promise || typeof Promise !== "undefined"
+		&& Promise.toString().indexOf("[native code]") !== -1) {
+			return callback && callback(property); // already loaded some other library
+		}
+		Q.addScript('{{Q}}/js/bluebird.min.js', function() {
+			Q.Promise = Promise;
+			callback && callback(property);
+		});
+	},
+	'IntersectionObserver': function (property, callback) {
+		if ('IntersectionObserver' in window
+		&& 'IntersectionObserverEntry' in window
+		&& 'intersectionRatio' in window.IntersectionObserverEntry.prototype) {
+			// Minimal polyfill for Edge 15's lack of `isIntersecting`
+			// See: https://github.com/w3c/IntersectionObserver/issues/211
+			if (!('isIntersecting' in window.IntersectionObserverEntry.prototype)) {
+   				  Object.defineProperty(window.IntersectionObserverEntry.prototype,
+   					  'isIntersecting', {
+   						  get: function () {
+   							  return this.intersectionRatio > 0;
+   						  }
+   					  }
+   				  );
+			}
+			return callback && callback(property);
+	 	}
+		Q.addScript('{{Q}}/js/polyfills/IntersectionObserver.js', function () {
+			callback && callback(property);
+		});
+	}
 };
 
 /**
@@ -2371,6 +2433,22 @@ Q.preventRecursion = function (name, original, defaultValue) {
 		delete this[n];
 		return ret;
 	};
+};
+
+/**
+ * Open url in new tab if cordova browsertabs plugin exist or new window otherwise.
+ * @static
+ * @method openUrl
+ * @param {String} url
+ * @param {String} [name=_blank] new window name
+ */
+Q.openUrl = function (url, name = "_blank") {
+	var browsertab = Q.getObject("cordova.plugins.browsertabs");
+	if (browsertab) {
+		browsertab.openUrl(url);
+	} else {
+		window.open(url, name).focus();
+	}
 };
 
 /**
@@ -5925,7 +6003,7 @@ Q.init = function _Q_init(options) {
 		}
 
 		function _getJSON() {
-			Q.ensure(root.JSON, Q.libraries.json, _ready);
+			Q.ensure('JSON', _ready);
 		}
 
 		var baseUrl = Q.baseUrl();
@@ -6168,7 +6246,7 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
  */
 Q.loadHandlebars = Q.getter(function _Q_loadHandlebars(callback) {
 	Q.onInit.addOnce(function () {
-		Q.ensure(root.Handlebars, Q.url(Q.libraries.handlebars), function () {
+		Q.ensure('Handlebars', function () {
 			_addHandlebarsHelpers();
 			Q.handle(callback);
 		});
@@ -8822,7 +8900,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		_reject && _reject();
+		Q.handle(_reject);
 	};
 	return promise;
 
@@ -8831,25 +8909,25 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return; // this loadUrl call was canceled
 		}
 		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			_reject && _reject()
+			Q.handle(_reject);
 			return; // a newer request was sent
 		}
-		if (err) {
-			_reject && _reject()
+		if (!Q.isEmpty(err)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
 		}
-		if (!response) {
-			_reject && _reject()
+		if (Q.isEmpty(response)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, ["Response is empty", response]);
 		}
-		if (response.errors) {
-			_reject && _reject()
+		if (!Q.isEmpty(response.errors)) {
+			Q.handle(_reject);
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		
 		if (redirected) {
-			_reject && _reject();
+			Q.handle(_reject);
 			return;
 		}
 		
@@ -9407,12 +9485,21 @@ Q.displayDuration = function Q_displayDuration(milliseconds, forceShow) {
 	var seconds = Math.floor(milliseconds / 1000);
 	var minutes = Math.floor(seconds / 60);
 	var hours = Math.floor(minutes / 60);
-	var components = [minutes % 60];
+
+	minutes = (minutes % 60).toString();
+	if (minutes.length === 1) {
+		minutes = '0' + minutes;
+	}
+	var components = [minutes];
 	if (seconds || forceShow.seconds) {
-		components.push(seconds % 60);
+		seconds = (seconds % 60).toString();
+		if (seconds.length === 1) {
+			seconds = '0' + seconds;
+		}
+		components.push(seconds);
 	}
 	if (hours || forceShow.hours) {
-		components.shift(hours);
+		components.unshift(hours);
 	}
 	return components.join(':');
 };
@@ -9713,7 +9800,9 @@ Q.baseUrl = function _Q_host(where) {
 Q.baseUrl.routers = []; // functions returning a custom url
 
 /**
- * Given an index and field values, returns the hostname and port for connecting to a Node.js server running Q
+ * Given some optional input identifying objects in the system,
+ * returns the hostname and port for connecting to a Qbix Node.js server
+ * set up for working with those objects.
  * @static
  * @method nodeUrl
  * @param {Object} where
@@ -12385,8 +12474,8 @@ function _onPointerBlurHandler() {
 Q.Dialogs = {
 
 	options: {
-		topMargin: '10%', // in percentage	
-		bottomMargin: '10%' // or in absolute pixel values
+		topMargin: '5%', // in percentage
+		bottomMargin: '5%' // or in absolute pixel values
 	},
 	
 	dialogs: [], // stack of dialogs that is currently being shown
@@ -12713,6 +12802,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
+ * @param {String} [options.className] additional class name added to dialog element
  * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
@@ -12734,6 +12824,8 @@ Q.prompt = function(message, callback, options) {
 	if (o.initialText) {
 		attr.value = o.initialText;
 	}
+
+	options.className = 'Q_prompt ' + (options.className || '');
 	var dialog = Q.Dialogs.push(Q.extend({
 		'title': o.title,
 		'content': $('<div class="Q_messagebox Q_big_prompt" />').append(
@@ -12743,7 +12835,6 @@ Q.prompt = function(message, callback, options) {
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
-		'className': 'Q_prompt',
 		'onActivate': function(dialog) {
 			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
@@ -12802,10 +12893,10 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @param {Q.Event} [options.onClose] Optional. Q.Event or function which is called after invoked container has closed
  */
 Q.invoke = function (options) {
-	var o = options;
 	if (options.template) {
 		Q.Template.render(options.template.name, options.template.fields, function (err, html) {
-			o = Q.extend({ content: html }, options);
+			options.content = html;
+			delete options.template;
 			_continue();
 		});
 	} else {
@@ -12813,7 +12904,7 @@ Q.invoke = function (options) {
 	}
 	function _continue() {
 		Q.each(Q.invoke.handlers, function (i, handler) {
-			var ret = Q.handle(handler, Q, [o]);
+			var ret = Q.handle(handler, Q, [options]);
 			if (ret === false) {
 				return false
 			}
@@ -13091,7 +13182,7 @@ Q.Audio.speak = function (text, options) {
 		Q.Text.get(source, function (err, content) {
 			var text = Q.getObject(pathArray, content);
 			if (text) {
-				_proceed(text)
+				_proceed(text);
 			}
 		});
 	} else {
@@ -13151,7 +13242,8 @@ Q.Audio.speak = function (text, options) {
 		if (typeof text !== "string") {
 			throw new Q.Error("Q.Audio.speak: the text for speech must be a string");
 		}
-		Q.text.interpolate(Q.text);
+		text = text.interpolate(Q.text);
+
 		if (root.TTS) {
 			TTS.speak({
 				text: text,
@@ -13240,11 +13332,8 @@ Q.Masks = {
 		key = Q.calculateKey(key);
 		var mask;
 		if (key in Q.Masks.collection) {
-			mask = Q.Masks.collection[key];
-			if (options && options.zIndex) {
-				mask.element.style.zIndex = options.zIndex;
-			}
-			return mask;
+			Q.Masks.collection[key].element.remove();
+			delete Q.Masks.collection[key];
 		}
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
@@ -14325,9 +14414,16 @@ Q.Notices = {
 			options.type = 'common';
 			var json = this.getAttribute('data-notice');
 			var o = JSON.parse(json) || {};
+			// turn to boolean
+			Q.each(o, function (i) {
+				if (this === "true") {
+					o[i] = true;
+				} else if (this === "false") {
+					o[i] = false;
+				}
+			});
 			Q.extend(options, o);
 			this.remove(); // need to remove before adding because can be keys conflict
-			delete options.persistent; // this was already set on the server
 			Q.Notices.add(options);
 		});
 	}
@@ -14365,15 +14461,7 @@ Q.beforeInit.addOnce(function () {
 		}
 	}
 
-	// This loads bluebird library to enable Promise for browsers which do not
-	// support Promise natively. For example: IE, Opera Mini.
-	// WARN: Could have race conditions:
-	if (!(typeof Promise !== "undefined"
-	&& Promise.toString().indexOf("[native code]") !== -1)) {
-		Q.addScript(Q.url(Q.libraries.bluebird), function() {
-			Q.Promise = Promise;
-		});
-	}
+	Q.ensure('Promise');
 }, 'Q');
 
 /**

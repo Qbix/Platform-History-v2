@@ -224,6 +224,9 @@ body.Q_preventScroll {
 .Q_prompt .Q_dialog_content {
 	text-align: center;
 }
+.Q_confirm .Q_dialog_content p:empty {
+	display: none;
+}
 .Q_prompt .Q_big_prompt p:empty {
 	display: none;
 }
@@ -660,6 +663,19 @@ html.Q_scanning body > .Q_scanning_code {
 	animation: Q_newsflash 2s ease-in-out;
 }
 
+@-webkit-keyframes Q_errorFlash {
+	0%   { background-color: red; }
+	100% { background-color: transparent; }
+}
+@keyframes Q_errorFlash {
+	0%   { background-color: red; }
+	100% { background-color: transparent; }
+}
+.Q_errorFlash {
+	background-image: none !important;
+	animation: Q_errorFlash 2s ease-in-out;
+}
+
 #notices_slot {
 	width: 100%;
 }
@@ -764,6 +780,14 @@ html.Q_scanning body > .Q_scanning_code {
 	opacity: 0.5;
 	pointer-events: none;
 	filter: blur(1px);
+	transition: all 300ms linear;
+}
+.Q_disabled_2 {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	filter: grayscale(100%);
+	pointer-events: none;
 	transition: all 300ms linear;
 }
 
