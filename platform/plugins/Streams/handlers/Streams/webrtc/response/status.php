@@ -10,7 +10,7 @@ function Streams_webrtc_response_status($params = array()) {
     $stream = Streams::fetchOne($loggedUserId, $publisherId, 'Streams/webrtc/' . $roomId);
     $endTime = $stream->getAttribute('endTime');
     Q_Response::setSlot('status', [
-        'live' => is_null($endTime) ? true : false,
+        'live' => is_null($endTime) && is_null($stream->fields['closedTime']) ? true : false,
         'stream' => $stream
     ]);
 }

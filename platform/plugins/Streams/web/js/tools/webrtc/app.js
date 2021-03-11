@@ -5129,6 +5129,11 @@ window.WebRTCconferenceLib = function app(options){
                     log('trackIsBeingAdded screenSharingTrackHandler', e.track, data)
                     if(e.participant != participant) return;
                     e.track.screensharing = true;
+
+                    if(options.onlyOneScreenSharingAllowed == true) {
+                        app.screenSharing.stopShareScreen();
+                    }
+
                     app.event.dispatch('screensharingStarted', {content:data.content != null ? data.content : null, participant: participant});
 
                     app.event.off('trackSubscribed', screenSharingTrackHandler);
@@ -6872,7 +6877,12 @@ window.WebRTCconferenceLib = function app(options){
                 var localTracks = streams[s].getTracks();
 
                 for (var i in localTracks) {
-                    var trackToAttach = new Track();
+                    var trackTo
+
+
+
+
+                    Attach = new Track();
                     trackToAttach.sid = localTracks[i].id;
                     trackToAttach.kind = localTracks[i].kind
                     trackToAttach.isLocal = true;
@@ -9281,96 +9291,4 @@ window.WebRTCconferenceLib = function app(options){
     }
 
     return app;
-}
-
-window.startTimer = function(countTo) {
-    var digits = document.createElement('div');
-    digits.style.fontSize = '80px'
-    digits.style.position = 'absolute'
-    digits.style.bottom = '0'
-    digits.style.left = '50%'
-    digits.style.zIndex = '999999999999'
-    digits.style.background = '#fff'
-    digits.className = 'digits';
-    var secondTens = document.createElement('div');
-    secondTens.style.display = 'inline-block'
-    var secondOnes = document.createElement('div');
-    secondOnes.style.display = 'inline-block'
-    var colon = document.createElement('div');
-    colon.style.display = 'inline-block'
-    colon.innerHTML = ':'
-    var msHundreds = document.createElement('div');
-    msHundreds.style.display = 'inline-block'
-    var msTens = document.createElement('div');
-    msTens.style.display = 'inline-block'
-
-    digits.appendChild(secondTens)
-    digits.appendChild(secondOnes)
-    digits.appendChild(colon)
-    digits.appendChild(msHundreds)
-    digits.appendChild(msTens)
-    document.body.appendChild(digits);
-
-    timer();
-
-    function timer() {
-        //1) init is going to set millisecond to 0 to start our timer, and set digits to 0
-        init();
-
-        function init() {
-            let ms = 0
-            secondTens.textContent = '0'
-            secondOnes.textContent = '0'
-            msHundreds.textContent= '0'
-            msTens.textContent='0'
-
-            //2) setInterval method calls a function or evaluates an expression at specificed intervals in ms & continues to until clearInterval or window closed
-            //3) timerInterval is going to keep track of our interval.  Every 10 ms, we need something on the DOM to change and increment.
-
-            const timerInterval = window.setInterval(() => {
-                ms += 10;
-                if (ms === countTo) {
-                    endTimer(timerInterval);
-                }
-                updateTimer(ms);
-            }, 10);
-        }
-
-        //Increment
-        function increment(string) {
-            let number = Number(string) + 1
-            return number.toString();
-        }
-
-        //4) End Timer using clearInterval
-
-        function endTimer(intervalId) {
-            clearInterval(intervalId);
-            Array.from(digits.children).forEach(digit => {
-                digit.classList.add("redDigit");
-            });
-        }
-        //5) Update Timer
-
-        function updateTimer(ms) {
-            //console.log('updateTimer ms')
-            if (ms === 10000) {
-                secondTens.innerHTML = '';
-                secondOnes.innerHTML = increment(secondOnes.innerHTML);
-
-                // secondOnes.innerHTML = "0";
-                // msHundreds.innerHTML = "0";
-                //msTens.innerHTML = "0";
-            } else if (ms % 1000 === 0) {
-                secondOnes.innerHTML = increment(secondOnes.innerHTML);
-                msHundreds.innerHTML = "0";
-                msTens.innerHTML = "0";
-            } else if (ms % 100 === 0) {
-                msHundreds.innerHTML = increment(msHundreds.innerHTML);
-                msTens.innerHTML = "0";
-            } else {
-                msTens.innerHTML = increment(msTens.innerHTML);
-            }
-        }
-    }
 }
