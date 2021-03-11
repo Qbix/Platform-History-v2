@@ -79,7 +79,10 @@
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
