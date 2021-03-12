@@ -597,7 +597,9 @@
 				"username": "Streams/user/username",
 				"icon": "Streams/user/icon",
 				"emailAddress": "Streams/user/emailAddress",
-				"mobileNumber": "Streams/user/mobileNumber"
+				"emailAddressPending": "Streams/user/emailAddress",
+				"mobileNumber": "Streams/user/mobileNumber",
+				"mobileNumberPending": "Streams/user/mobileNumber"
 			}
 		}, 
 		"rules": {
