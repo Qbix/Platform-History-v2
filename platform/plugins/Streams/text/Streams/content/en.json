@@ -72,6 +72,7 @@
             "chooseAgainFromContacts": "Choose Again from Contacts",
             "inviteSelectedContacts": "Invite Selected Contacts",
             "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
             "photo": "Take a photo",
             "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
             "to": "To: {{Stream Title}}",
