@@ -142,7 +142,8 @@
             "PricePlaceholder": "Set price",
             "LinkPlaceholder": "set additional info link",
             "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service"
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Select Required Participants"
         },
         "ManageServiceTemplates": "Manage Service Templates",
         "ManageServices": "Manage Services",

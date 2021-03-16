@@ -10,9 +10,13 @@
 }
 .Assets_service_composer .Q_dialog_content input,
 .Assets_service_composer .Q_dialog_content select {
+	width: 100%;
 	height: 40px;
 	margin-bottom: 10px;
 	border-radius: 5px;
+}
+.Assets_service_composer .Q_dialog_content select[multiple] {
+	height: 80px;
 }
 .Assets_service_composer .Q_dialog_content input[name=price] {
 	padding-left: 20px;

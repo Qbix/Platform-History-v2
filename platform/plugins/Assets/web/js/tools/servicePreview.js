@@ -14,13 +14,19 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 	preview.state.creatable.preprocess = function (_proceed) {
 		tool.openDialog(function (dialog) {
+			var requiredParticipants = $("select[name=requiredParticipants]", dialog).val() || null;
+			if (typeof requiredParticipants === "string") {
+				requiredParticipants = [requiredParticipants];
+			}
+
 			Q.handle(_proceed, preview, [{
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
 					price: $("input[name=price]", dialog).val(),
 					link: $("input[name=link]", dialog).val(),
-					payment: $("select[name=payment]", dialog).val()
+					payment: $("select[name=payment]", dialog).val(),
+					requiredParticipants: requiredParticipants
 				}
 			}]);
 		}, function () {
@@ -159,6 +165,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				title: stream.fields.title,
 				payment: stream.getAttribute('payment'),
 				price: stream.getAttribute('price'),
+				selectedParticipants: stream.getAttribute('requiredParticipants'),
 				link: stream.getAttribute('link'),
 				description: stream.fields.content
 			});
@@ -166,12 +173,24 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
 		var tool = this;
+		var relatedParticipants = Q.getObject("Assets.service.relatedParticipants", Q);
+		var selectedParticipants = Q.getObject("selectedParticipants", fields);
+		if (selectedParticipants) {
+			Q.each(relatedParticipants, function (index) {
+				if (selectedParticipants.includes(index)) {
+					relatedParticipants[index].selected = true;
+				}
+			});
+		}
 
 		Q.Dialogs.push({
 			title: Q.getObject("services.NewServiceTemplate.Title", tool.text) || "New Service Template",
 			template: {
 				name: "Assets/service/composer",
-				fields: Q.extend({text: tool.text}, fields)
+				fields: Q.extend({
+					relatedParticipants: relatedParticipants,
+					text: tool.text
+				}, fields)
 			},
 			className: "Assets_service_composer",
 			onActivate: function (dialog) {
@@ -239,6 +258,14 @@ Q.Template.set("Assets/service/composer",
 	'	<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">' +
 	'	<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>' +
 	'	<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>' +
+	'	{{#if relatedParticipants}}' +
+	'		<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>' +
+	'		<select name="requiredParticipants" multiple>' +
+	'			{{#each relatedParticipants}}' +
+	'				<option value="{{this.streamName}}" {{#if this.selected}}selected{{/if}}>{{this.streamName}}</option>' +
+	'			{{/each}}' +
+	'		</select>' +
+	'	{{/if}}' +
 	'	<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">' +
 	'	<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>' +
 	'	<button name="save" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>' +
