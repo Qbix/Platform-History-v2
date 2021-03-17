@@ -69,6 +69,7 @@ function _Streams_participants(options) {
 
 {
 	invite: {
+		userChooser: true,
 		appUrl: function () {
 			return location.href;
 		}
