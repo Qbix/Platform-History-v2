@@ -1055,6 +1055,7 @@
 				};
 				this.onMessage('Assets/credits/received').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/sent').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/spent').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/granted').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 			});
