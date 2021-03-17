@@ -325,6 +325,8 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t send to yourself'));
 		}
 
+		$more['amount'] = $amount;
+
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
@@ -401,7 +403,6 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	private static function fillInstructions ($assetsCredits, $more = array()) {
 		$more['messageId'] = $assetsCredits->id;
-		$more['amount'] = $assetsCredits->credits;
 		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
 		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
