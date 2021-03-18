@@ -15,6 +15,8 @@
  *   @param {Object} [options.invite] Pass an object here to pass as fields to 
  *     Streams/participants/invite template, otherwise the invite button doesn't appear.
  *   @param {Boolean} [options.showSummary] Whether to show a summary
+ *   @param {Array} [options.ordering] Array of user id's to order avatars in participants list.
+ *   Only users mentioned in this array will ordered. Other users order none change.
  *   @param {Boolean} [options.showBlanks] Whether to show blank avatars in place of remaining spots
  *   @param {Number} [options.max]
  *    The number, if any, to show in the denominator of the summary
@@ -59,7 +61,9 @@ function _Streams_participants(options) {
 			}
 		}
 	}, tool);
-	
+
+	tool.Q.onStateChanged('ordering').set(this.orderAvatars.bind(this));
+
 	tool.refresh(function () {
 		tool.forEachChild('Users/avatar', function () {
 			tool.$elements[this.state.userId] = $(this.element);
@@ -74,6 +78,7 @@ function _Streams_participants(options) {
 			return location.href;
 		}
 	},
+	ordering: [],
 	hideIfNoParticipants: false,
 	maxShow: 10,
 	maxLoad: 100,
@@ -300,7 +305,7 @@ function _Streams_participants(options) {
 			});
 		}
 
-		function _addAvatar(userId, prepend, participant) {
+		function _addAvatar(userId, prepend) {
 			var $e = userId ? tool.$avatars : tool.$blanks;
 			if (userId && $(".Users_avatar_tool[id*=" + userId + "]", $e).length) {
 				return;
@@ -315,9 +320,13 @@ function _Streams_participants(options) {
 				userId || null, 
 				tool.prefix)
 			);
-			if (false !== Q.handle(state.filter, tool, [userId, $element[0]])) {
-				$element[prepend?'prependTo':'appendTo']($e).activate();
+			if (false === Q.handle(state.filter, tool, [userId, $element[0]])) {
+				return;
 			}
+
+			$element[prepend?'prependTo':'appendTo']($e).activate();
+
+			tool.orderAvatars();
 		}
 		
 		function _removeAvatar(userId) {
@@ -354,10 +363,59 @@ function _Streams_participants(options) {
 
 			tool.$pc.width(w - pm);
 		}
-	}
-}
+	},
+	/**
+	 * Reorder avatars according to state.orders array
+	 * @method orderAvatars
+	 */
+	orderAvatars: function () {
+		var tool = this;
+		var state = this.state;
+		var $avatars = $(".Users_avatar_tool", tool.$avatars);
 
-);
+		// if state.ordering array empty, this method have no sense
+		if (Q.isEmpty(state.ordering)) {
+			return;
+		}
+
+		$avatars.each(function () {
+			var avatarTool = Q.Tool.from(this, "Users/avatar");
+			if (!avatarTool) {
+				return;
+			}
+
+			var userId = avatarTool.state.userId;
+			var $element = $(this);
+
+			if (state.ordering.includes(userId)) {
+				var elementInsertAfter = null;
+				var $avatars = $(".Users_avatar_tool", tool.$avatars);
+
+				for (var i = 0; i < state.ordering.length; i++) {
+					if (state.ordering[i] === userId) {
+						elementInsertAfter ? $element.insertAfter(elementInsertAfter) : $element.prependTo(tool.$avatars);
+						break;
+					}
+
+					$avatars.each(function () {
+						if (Q.getObject("state.userId", Q.Tool.from(this, "Users/avatar")) === state.ordering[i]) {
+							elementInsertAfter = this;
+						}
+					});
+				}
+
+				$element.addClass("Streams_participants_ordered");
+			} else {
+				var $lastOrdered = $(".Streams_participants_ordered", tool.$avatars).last();
+				if ($lastOrdered.length) {
+					$element.insertAfter($lastOrdered);
+				} else {
+					$element.prependTo(tool.$avatars);
+				}
+			}
+		});
+	}
+});
 
 Q.Template.set('Streams/participants/invite',
 	'<div class="Streams_participants_invite Streams_inviteTrigger">' +
