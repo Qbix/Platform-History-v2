@@ -70,7 +70,6 @@
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control{
     display: flex;
     justify-content: center;
-    padding-top: 15px;
     bottom:0;
     position: fixed;
     z-index: 9999999;
@@ -538,14 +537,8 @@
     position: absolute;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     background:white;
-
-    position: absolute;
     bottom: 170%;
     right: 0;
-    padding: 0;
-    margin: 0;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
-    background: white;
     width: 90vw;
     z-index: 9999999999;
 }
@@ -1150,7 +1143,6 @@ and (max-device-width : 320px) {
     background-color: #fff;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
     overflow: hidden;
-    position: absolute;
     /* margin: 15px; */
     /* overflow: hidden; */
     position: relative;
@@ -1198,9 +1190,6 @@ and (max-device-width : 320px) {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    display: flex;
     width: 100vw;
     height: 100vh;
 }
@@ -1230,7 +1219,6 @@ and (max-device-width : 320px) {
    text-align: left;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_video-thumbs-wrapper .Streams_webrtc_flex-row-item {
-    display: block;
     width: 105px;
     height: 80px;
     display: inline-block;
@@ -1270,7 +1258,6 @@ and (max-device-width : 320px) {
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream .Streams_webrtc_chat-participant {
-    height: auto;
     position: absolute;
     height: 95%;
 }
@@ -1938,17 +1925,6 @@ and (max-device-width : 320px) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-}
-Streams_webrtc_mobile-screen.Streams_webrtc_popup-box {
-    background: white;
-    overflow: hidden;
-}
-Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
-    background: white;
-    overflow: visible;
-}
-.Q_dialog_content {
-    overflow: hidden;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device,
 .dialog-box .Streams_webrtc_choose-device {
