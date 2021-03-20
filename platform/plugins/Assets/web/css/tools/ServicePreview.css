@@ -47,3 +47,22 @@
 .Assets_service_preview_tool .Streams_preview_title {
 	display: inline-block;
 }
+.Assets_service_composer .Assets_service_requiredParticipants {
+	border: 1px solid silver;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.Assets_service_composer .Assets_service_requiredParticipants div[data-streamName] {
+	height: 40px;
+	line-height: 38px;
+	cursor: pointer;
+	padding-left: 5px;
+	margin-bottom: 5px;
+}
+.Assets_service_composer .Assets_service_requiredParticipants div[data-streamName]:last-child {
+	margin-bottom: 0;
+}
+.Assets_service_composer .Assets_service_requiredParticipants > div.Q_selected {
+	background-color: blue;
+	color: #fff;
+}

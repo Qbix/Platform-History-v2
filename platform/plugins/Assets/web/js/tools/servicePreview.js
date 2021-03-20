@@ -14,10 +14,10 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 	preview.state.creatable.preprocess = function (_proceed) {
 		tool.openDialog(function (dialog) {
-			var requiredParticipants = $("select[name=requiredParticipants]", dialog).val() || null;
-			if (typeof requiredParticipants === "string") {
-				requiredParticipants = [requiredParticipants];
-			}
+			var requiredParticipants = [];
+			$(".Assets_service_requiredParticipants div[data-streamName].Q_selected").each(function () {
+				requiredParticipants.push($(this).attr("data-streamName"));
+			});
 
 			Q.handle(_proceed, preview, [{
 				title: $("input[name=title]", dialog).val(),
@@ -153,6 +153,11 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			tool.openDialog(function (dialog) {
 				stream.pendingFields.title = $("input[name=title]", dialog).val();
 				stream.pendingFields.content = $("textarea[name=description]", dialog).val();
+				var requiredParticipants = [];
+				$(".Assets_service_requiredParticipants div[data-streamName].Q_selected").each(function () {
+					requiredParticipants.push($(this).attr("data-streamName"));
+				});
+				stream.setAttribute('requiredParticipants', requiredParticipants);
 				stream.setAttribute('payment', $("select[name=payment]", dialog).val());
 				stream.setAttribute('price', $("input[name=price]", dialog).val());
 				stream.setAttribute('link', $("input[name=link]", dialog).val());
@@ -177,9 +182,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		var selectedParticipants = Q.getObject("selectedParticipants", fields);
 		if (selectedParticipants) {
 			Q.each(relatedParticipants, function (index) {
-				if (selectedParticipants.includes(index)) {
-					relatedParticipants[index].selected = true;
-				}
+				relatedParticipants[index].selected = selectedParticipants.includes(index);
 			});
 		}
 
@@ -210,8 +213,11 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 						$price.show();
 					}
 				});
+				$payment.val(payment).trigger("change");
 
-				$payment.val(payment);
+				$(".Assets_service_requiredParticipants div[data-streamName]", dialog).on(Q.Pointer.fastclick, function () {
+					$(this).toggleClass("Q_selected");
+				});
 
 				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
 					var $form = $(this).closest("form");
@@ -260,11 +266,11 @@ Q.Template.set("Assets/service/composer",
 	'	<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>' +
 	'	{{#if relatedParticipants}}' +
 	'		<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>' +
-	'		<select name="requiredParticipants" multiple>' +
+	'		<div class="Assets_service_requiredParticipants">' +
 	'			{{#each relatedParticipants}}' +
-	'				<option value="{{this.streamName}}" {{#if this.selected}}selected{{/if}}>{{this.streamName}}</option>' +
+	'				<div data-streamName="{{this.streamName}}" class="{{#if this.selected}}Q_selected{{/if}}">{{this.streamName}}</div>' +
 	'			{{/each}}' +
-	'		</select>' +
+	'		</div>' +
 	'	{{/if}}' +
 	'	<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">' +
 	'	<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>' +

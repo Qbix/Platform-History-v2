@@ -143,7 +143,7 @@
             "LinkPlaceholder": "set additional info link",
             "DescriptionPlaceholder": "Service description",
             "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Select Required Participants"
+            "SelectRequiredParticipants": "Required Participants"
         },
         "ManageServiceTemplates": "Manage Service Templates",
         "ManageServices": "Manage Services",
