@@ -531,6 +531,10 @@
     display: block;
 }
 
+.Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_live_icon svg{
+    width:30px;
+}
+
 .Streams_webrtc_mobile-screen .Streams_webrtc_conference-control .Streams_webrtc_popup-box {
     display: none;
     padding: 0;
@@ -1536,6 +1540,9 @@ and (max-device-width : 320px) {
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_participants-live-status.isRecording {
     display: block;
 }
+.Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Streams_webrtc_live_icon svg{
+    width:30px;
+}
 
 
 /* text chat popup */
@@ -2209,6 +2216,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .Streams_webrtc_devices_dialog .Streams_webrtc_devices_dialog_inner{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -2242,8 +2250,160 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     justify-content: center;
     align-items: center;
 }
+
+
+.Streams_webrtc_preparing_dialog .Streams_webrtc_preparing_dialog_inner{
+    /*display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;*/
+}
+
+.Streams_webrtc_preparing_screen {
+    width:100%;
+    height:100%;
+}
+.Streams_webrtc_preparing_screen .Streams_webrtc_preparing_dialog_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 90%;
+    width: 100%;
+}
+.Streams_webrtc_preparing_meeting_info {
+    position: absolute;
+    right: 0;
+    display: flex;
+    padding: 10px;
+}
+.Streams_webrtc_preparing_meeting_info .Streams_webrtc_preparing_users_info_icon {
+}
+.Streams_webrtc_preparing_meeting_info .Streams_webrtc_preparing_users_info_icon svg{
+    width:30px;
+    height:27px;
+}
+.Streams_webrtc_preparing_meeting_info .Streams_webrtc_preparing_users_info_icon svg path,
+.Streams_webrtc_preparing_meeting_info .Streams_webrtc_preparing_users_info_icon svg ellipse {
+    fill: rgba(0,0,0,0.38);
+}
+.Streams_webrtc_preparing_users_num {
+    padding: 5px;
+    background: rgba(0,0,0,0.38);
+    color: rgb(255 255 255 / 70%);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 27px;
+    font-size: 14px;
+    margin-right: 2px;
+}
+.Streams_webrtc_preparing_users_num.Streams_webrtc_preparing_meeting_online {
+    background: rgb(59 170 51 / 49%);
+    color: rgb(255 255 255);
+}
+.Streams_webrtc_preparing_users_num.Streams_webrtc_preparing_meeting_offline {
+    display: none;
+}
+
+.Streams_webrtc_preparing_camera-preview {
+    max-height: 100%;
+    height: 351px;
+    max-width: 100%;
+    width: 624px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /*padding-top: 20px;
+    padding-bottom: 20px;*/
+}
+.Streams_webrtc_preparing_camera-preview-avatar-con {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    overflow: hidden;
+    margin-top:10px;
+}
+.Streams_webrtc_preparing_camera-preview img{
+    border-radius: 50%;
+    width: 40%;
+}
+.Streams_webrtc_preparing_camera-preview video:nth-last-child(1) {
+    width: 100%;
+}
+.Streams_webrtc_preparing_camera-preview video:nth-last-child(2),
+.Streams_webrtc_preparing_camera-preview video:nth-last-child(2) ~ video {
+    width: 50%;
+}
+.Streams_webrtc_devices_dialog_buttons_con {
+    bottom: 85px;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.Streams_webrtc_prep-switch-mic,
+.Streams_webrtc_prep-switch-camera,
+.Streams_webrtc_prep-switch-screen {
+    width:50px;
+    height:50px;
+}
+.Streams_webrtc_prep-switch-mic,
+.Streams_webrtc_prep-switch-camera {
+    margin-right:20px;
+}
+.Streams_webrtc_prep-switch-mic svg,
+.Streams_webrtc_prep-switch-camera svg,
+.Streams_webrtc_prep-switch-screen svg{
+    width:100%;
+    height:100%;
+}
+.Streams_webrtc_prep-switch-mic svg path,
+.Streams_webrtc_prep-switch-mic svg polygon,
+.Streams_webrtc_prep-switch-camera svg path,
+.Streams_webrtc_prep-switch-camera svg polygon,
+.Streams_webrtc_prep-switch-screen svg path,
+.Streams_webrtc_prep-switch-screen svg polygon{
+    fill: rgba(0,0,0,0.38);
+}
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-mic svg path,
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-mic svg polygon,
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-camera svg path,
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-camera svg polygon,
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-screen svg path,
+.Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-screen svg polygon{
+    fill: rgba(255,255,255,0.38);
+}
+.Streams_webrtc_join-button-con {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+.Q_button.Streams_webrtc_join-button {
+    border: 0;
+    margin: 15px;
+    padding: 7px 10px 7px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+    background: #c12236;
+    font-size: 24px;
+}
+
 .Streams_webrtc_enable-microphone-btn,
-.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn ,
+.Streams_webrtc_enable-video-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_enable-video-btn {
     border: 0;
     margin: 15px;
     padding: 7px 10px 7px 10px;
@@ -2252,17 +2412,30 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     background: #c12236;
 }
 .Streams_webrtc_enable-microphone-btn,
-.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn {
+.Q_touchscreen .Q_button.Streams_webrtc_enable-microphone-btn,
+.Streams_webrtc_enable-video-btn,
+.Q_touchscreen .Q_button.Streams_webrtc_enable-video-btn {
     background: #28a745;
 }
-.Streams_webrtc_enable-microphone-btn span{
+.Streams_webrtc_enable-microphone-btn span,
+.Streams_webrtc_enable-video-btn span{
     margin-left:10px;
     margin-right:10px;
 }
 
-.Streams_webrtc_enable-microphone-btn svg{
+.Streams_webrtc_enable-microphone-btn svg,
+.Streams_webrtc_enable-video-btn svg{
     height: 30px;
     width: 30px;
+}
+.Streams_webrtc_join-now-btn {
+    display: block;
+    clear:both;
+    margin-bottom: 20px;
+}
+.Streams_webrtc_break-el {
+    flex-basis: 100%;
+    height: 0;
 }
 .loudest-options-con select {
     -webkit-appearance: none;
