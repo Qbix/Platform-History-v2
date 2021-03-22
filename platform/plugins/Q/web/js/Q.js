@@ -1045,7 +1045,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var rect3 = this.getBoundingClientRect();
-		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
+		if (rect1.top >= rect3.bottom || rect1.bottom <= rect3.top) {
 			return;
 		}
 		var style = this.computedStyle();
