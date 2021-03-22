@@ -6222,7 +6222,9 @@ function _scheduleUpdate() {
 			// The timer was delayed for too long. Something might have changed.
 			// Streams.refresh.options.minSeconds should prevent the update
 			// from happening too frequently
-			if (!Streams.refresh.options.preventAutomatic) {
+			if (Streams.refresh.options.preventAutomatic) {
+				return;
+			} else {
 				_debouncedRefresh();
 			}
 		}
