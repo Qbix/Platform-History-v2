@@ -241,7 +241,7 @@
 					Q.req('Websites/scrape', ['result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
 						if (msg) {
-							Q.Dialogs.pop();
+							tool.closeComposer();
 							return console.warn("Q/video: " + msg);
 						}
 
@@ -270,13 +270,13 @@
 							tool.stream.save({
 								onSave: function () {
 									Q.handle(callback, tool, [params]);
-									Q.Dialogs.pop();
+									tool.closeComposer();
 								}
 							});
 						} else {
 							// new stream
 							Q.handle(callback, tool, [params]);
-							Q.Dialogs.pop();
+							tool.closeComposer();
 						}
 					}, {
 						method: 'post',
@@ -334,7 +334,7 @@
 									var key = Q.firstKey(res.slots.data, {nonEmpty: true});
 
 									Q.handle(callback, tool, [res.slots.data, key, file || null]);
-									Q.Dialogs.pop();
+									tool.closeComposer();
 								}, {
 									fields: params,
 									method: "put"
@@ -352,7 +352,7 @@
 							}
 						} else { // if new stream
 							Q.handle(callback, tool, [params]);
-							Q.Dialogs.pop();
+							tool.closeComposer();
 						}
 					};
 					reader.readAsDataURL(file);
@@ -369,7 +369,7 @@
 					tool.stream.save({
 						onSave: function () {
 							Q.handle(callback, tool);
-							Q.Dialogs.pop();
+							tool.closeComposer();
 						}
 					});
 				} else {
@@ -377,7 +377,8 @@
 				}
 			};
 
-			Q.Dialogs.push({
+			Q.invoke({
+				columnClass: "Streams_dialog_video",
 				className: 'Streams_dialog_video',
 				title: "Video",
 				template: {
@@ -390,14 +391,21 @@
 						uploadLimit: tool.text.uploadLimit.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})})
 					}
 				},
+				fullscreen: Q.info.isMobile,
 				destroyOnClose: true,
-				onActivate : function (mainDialog) {
-					state.mainDialog = mainDialog;
+				trigger: Q.info.isMobile ? tool.element : null,
+				callback: function () {
+					// if opened in columns - third argument is a column element,
+					// if opened dialog - first argument is dialog element
+					state.mainDialog = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
+					if (!(state.mainDialog instanceof $)) {
+						state.mainDialog = $(state.mainDialog);
+					}
 
 					// if stream defined, render player
 					if (tool.stream) {
-						var $videoElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_preview", mainDialog);
-						var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", mainDialog);
+						var $videoElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_preview", state.mainDialog);
+						var $clipElement = $(".Q_tabbing_container [data-content=edit] .Streams_video_composer_clip", state.mainDialog);
 
 						$videoElement.tool("Q/video", {
 							url: tool.stream.fileUrl(),
@@ -440,24 +448,24 @@
 					}
 
 					// save by URL
-					$("button[name=save]", mainDialog).on(Q.Pointer.click, function (e) {
+					$("button[name=save]", state.mainDialog).on(Q.Pointer.click, function (e) {
 						e.preventDefault();
 						e.stopPropagation();
 
-						mainDialog.addClass('Q_uploading');
+						state.mainDialog.addClass('Q_uploading');
 
 						var _error = function (err) {
-							mainDialog.removeClass('Q_uploading');
+							state.mainDialog.removeClass('Q_uploading');
 							Q.alert(err);
 						};
-						var action = mainDialog.attr("data-action");
+						var action = state.mainDialog.attr("data-action");
 
 						if (action === 'upload') {
-							if (!$("input[type=file]", mainDialog).val()) {
+							if (!$("input[type=file]", state.mainDialog).val()) {
 								return _error(tool.text.invalidFile);
 							}
 						} else if (action === 'link') {
-							var url = $("input[name=url]", mainDialog).val();
+							var url = $("input[name=url]", state.mainDialog).val();
 							if (!url.matchTypes('url').length) {
 								return _error(tool.text.invalidURL);
 							}
@@ -465,19 +473,19 @@
 							return _error(tool.text.errorNoSource);
 						}
 
-						Q.handle(_process, mainDialog);
+						Q.handle(_process, state.mainDialog);
 					});
 
 					var _selectTab = function () {
 						var $this = $(this);
 						var action = $this.attr('data-name');
 
-						mainDialog.attr("data-action", action);
+						state.mainDialog.attr("data-action", action);
 						$this.addClass('Q_current').siblings().removeClass('Q_current');
-						$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
+						$(".Q_tabbing_container .Q_tabbing_item[data-content=" + action + "]", state.mainDialog).addClass('Q_current').siblings().removeClass('Q_current');
 
 						// pause all exists players
-						Q.each($(".Q_video_tool", mainDialog), function () {
+						Q.each($(".Q_video_tool", state.mainDialog), function () {
 							var videoTool = Q.Tool.from(this, "Q/video");
 
 							if (videoTool) {
@@ -487,13 +495,13 @@
 					};
 
 					// custom tabs implementation
-					$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
+					$(".Q_tabbing_tabs .Q_tabbing_tab", state.mainDialog).on(Q.Pointer.fastclick, _selectTab);
 
 					// Reset button
-					$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
+					$("button[name=reset]", state.mainDialog).on(Q.Pointer.click, function (e) {
 						state.dataBlob = undefined;
 
-						Q.each($(".Q_tabbing_container .Q_tabbing_item[data-content=link], .Q_tabbing_container .Q_tabbing_item[data-content=upload]", mainDialog), function (i, content) {
+						Q.each($(".Q_tabbing_container .Q_tabbing_item[data-content=link], .Q_tabbing_container .Q_tabbing_item[data-content=upload]", state.mainDialog), function (i, content) {
 							var videoTool = Q.Tool.from($(".Streams_video_composer_preview", content)[0], "Q/video");
 							var clipTool = Q.Tool.from($(".Streams_video_composer_clip", content)[0], "Q/clip");
 
@@ -510,9 +518,9 @@
 					});
 
 					// set clip start/end for upload
-					$("input[type=file]", mainDialog).on('change', function () {
-						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", mainDialog);
-						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", mainDialog);
+					$("input[type=file]", state.mainDialog).on('change', function () {
+						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", state.mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", state.mainDialog);
 						var url = URL.createObjectURL(this.files[0]);
 						var toolPreview = Q.Tool.from($videoElement, "Q/video");
 
@@ -565,10 +573,10 @@
 					});
 
 					// set clip start/end for link
-					$("button[name=setClip]", mainDialog).on(Q.Pointer.fastclick, function () {
-						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_preview", mainDialog);
-						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_clip", mainDialog);
-						var url = $("input[name=url]", mainDialog).val();
+					$("button[name=setClip]", state.mainDialog).on(Q.Pointer.fastclick, function () {
+						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_preview", state.mainDialog);
+						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=link] .Streams_video_composer_clip", state.mainDialog);
+						var url = $("input[name=url]", state.mainDialog).val();
 						if (!url.matchTypes('url').length) {
 							return Q.alert(tool.text.invalidURL);
 						}
@@ -611,16 +619,22 @@
 						});
 					});
 
-					Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", mainDialog)[0]);
-				},
-				beforeClose: function(mainDialog) {
-					// clear recorder stream when dialog close.
-					// In this case every time dialog opened - user should allow to use microphone
-					if(state.recorder && state.recorder.stream) {
-						state.recorder.clearStream();
-					}
+					Q.handle(_selectTab, $(".Q_tabbing_tabs .Q_tabbing_tab:visible:first", state.mainDialog)[0]);
 				}
 			});
+		},
+		closeComposer: function () {
+			var mainDialog = this.state.mainDialog;
+			if (!mainDialog) {
+				return;
+			}
+
+			if(mainDialog.hasClass("Q_columns_column")) {
+				var columns = Q.Tool.from(mainDialog.closest(".Q_columns_tool")[0], "Q/columns");
+				columns.close({min: parseInt(mainDialog.attr("data-index"))});
+			} else {
+				Q.Dialogs.pop();
+			}
 		}
 	}
 );

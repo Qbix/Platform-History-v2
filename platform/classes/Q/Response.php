@@ -1664,7 +1664,7 @@ class Q_Response
 			return false;
 		}
 		if (Q_Request::isAjax()) {
-			Q_Valid::nonce(true); // SECURITY: prevent CSRF attacks
+			Q_Valid::nonce((bool)Users::loggedInUser(false, false)); // SECURITY: prevent CSRF attacks
 		}
 		Q::event('Q/sessionExtras', array(), $hookType);
 		return true;

@@ -8,7 +8,7 @@ function Streams_before_Q_sessionExtras()
 			Users::capability()->addPermission($permissions);
 		}
 	}
-	$user = Users::loggedInUser();
+	$user = Users::loggedInUser(false, false);
 	if ($user) {
 		Q_Response::setScriptData(
 			'Q.plugins.Users.loggedInUser.displayName', 

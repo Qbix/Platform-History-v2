@@ -9,7 +9,7 @@ function Assets_before_Streams_unrelateTo_Calendars_event ($params) {
 	}
 
 	// get credits paid for this stream
-	$assetsCredits = Assets_Credits::checkPaid($relatedTo->fromPublisherId, array(
+	$assetsCredits = Assets_Credits::checkJoinPaid($relatedTo->fromPublisherId, array(
 		'publisherId' => $relatedTo->toPublisherId,
 		'streamName' => $relatedTo->toStreamName
 	), array(

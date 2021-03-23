@@ -94,7 +94,7 @@ if ($options['action'] == "close") {
 		throw new Q_Exception_RequiredField(array("field" => "streamName"));
 	}
 
-	Q::event('Streams/Stream/delete', Q::take($options, array(
+	Q::event('Streams/stream/delete', Q::take($options, array(
 		'asUserId' => null,
 		'publisherId' => null,
 		'streamName' => null

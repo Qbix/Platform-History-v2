@@ -114,6 +114,7 @@
 				"acceptedInvite": 10
 			},
 			"exchange": {
+				"credits": 1,
 				"USD": 10
 			}
 		},

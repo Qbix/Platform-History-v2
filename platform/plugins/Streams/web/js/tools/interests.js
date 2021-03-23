@@ -35,7 +35,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			state.canAdd = text.interests.CanAdd;
 		}
 	
-		var p = new Q.Pipe();
+		var pipe = new Q.Pipe();
 		var lastVal, lastImage;
 		var revealingNewInterest = false;
 		var $te = $(tool.element);
@@ -98,7 +98,7 @@ Q.Tool.define("Streams/interests", function (options) {
 					'category': nc
 				}).addClass('Streams_interests_drilldown Q_expandable_'+nc);
 			}
-			$expandable.appendTo(tool.container).activate(p.fill(category));
+			$expandable.appendTo(tool.container).activate(pipe.fill(category));
 		}
 
 		Streams.Interests.load(state.communityId, function () {
@@ -117,7 +117,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				);
 			});
 			var waitFor = Q.copy(state.ordering).concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
-			p.add(waitFor, 1, function (params, subjects) {
+			pipe.add(waitFor, 1, function (params, subjects) {
 				tool.$('.Streams_interest_title').removeClass('Q_selected');
 				var $jq;
 				var otherInterests = {};
@@ -146,8 +146,7 @@ Q.Tool.define("Streams/interests", function (options) {
 						var parts = interestTitle.split(': ');
 						var category = parts[0];
 						var title = parts[1];
-						var id = 'Q_expandable_'+Q.normalize(category) + '_tool';
-						var $expandable = tool.$('#' + tool.prefix + id);
+						var $expandable = tool.$('#' + tool.prefix + 'Q_expandable_'+Q.normalize(category) + '_tool');
 						var $content = $expandable.find('.Q_expandable_content');
 						if (!$expandable.length) {
 							continue;
@@ -452,27 +451,28 @@ Q.Tool.define("Streams/interests", function (options) {
 					$this.val('').trigger('Q_refresh');
 				}
 			});
+
+			if (Users.loggedInUser) {
+				Interests.forMe(state.communityId, function (err, interests) {
+					if (err) {
+						return alert(Q.firstErrorMessage(err));
+					}
+					pipe.fill('my')(interests);
+				});
+			} else {
+				pipe.fill('my')({});
+			}
+
+			if (anotherUser) {
+				Interests.forUser(state.userId, state.communityId, function (err, interests) {
+					if (err) {
+						return alert(Q.firstErrorMessage(err));
+					}
+					pipe.fill('anotherUser')(interests);
+				});
+			}
 		});
-	
-		if (Users.loggedInUser) {
-			Interests.forMe(state.communityId, function (err, interests) {
-				if (err) {
-					return alert(Q.firstErrorMessage(err));
-				} 
-				p.fill('my')(interests);
-			});
-		} else {
-			p.fill('my')({});
-		}
-	
-		if (anotherUser) {
-			Interests.forUser(state.userId, state.communityId, function (err, interests) {
-				if (err) {
-					return alert(Q.firstErrorMessage(err));
-				}
-				p.fill('anotherUser')(interests);
-			});
-		}
+
 	});
 },
 
