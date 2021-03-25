@@ -5314,7 +5314,7 @@ function prepareStream(stream) {
 		delete stream.fields.relatedToTotals;
 	}
 	if ('relatedFromTotals' in stream.fields) {
-		stream.relatedFromTotals = stream.fields;
+		stream.relatedFromTotals = stream.fields.relatedFromTotals;
 		delete stream.fields.relatedFromTotals;
 	}
 	if ('isRequired' in stream.fields) {
