@@ -149,6 +149,12 @@ table { border-spacing:0; border-collapse:collapse; }
 	-webkit-transform: translateZ(0);
 }
 
+.Q_verticalOrientation .Q_orientHorizontally {
+	transform: scale(2) rotate(90deg);
+}
+
+/* Masks and dialogs */
+
 .Q_mask { display: none; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
 .Q_cancel_mask { z-index: 2000; text-align: center; }
 .Q_load_cancel { vertical-align: middle; margin-top: 80px; }
@@ -163,9 +169,6 @@ table { border-spacing:0; border-collapse:collapse; }
 
 .Q_clearfix::after { content: ""; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html[xmlns] .Q_clearfix { display: block; }
-
-/* For IE6 only */
-* html .Q_clearfix { height: 1%; }
 
 /* more Q styles */
 
