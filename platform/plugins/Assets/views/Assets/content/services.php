@@ -5,7 +5,7 @@ echo Q::tool("Streams/related", array(
 	"streamName" => "Assets/services",
 	"relationType" => "Assets/service",
 	"editable" => true,
-	"realtime" => false,
+	"realtime" => true,
 	"sortable" => false,
 	"relatedOptions" => array("withParticipant" => false),
 	"creatable" => array(

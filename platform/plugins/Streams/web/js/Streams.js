@@ -956,6 +956,7 @@ Streams.Dialogs = {
 	 * @param {object} [options] Different options
 	 * @param {string} [options.title] Custom dialog title
 	 * @param {string} [options.token] Use to set the invite token, if you have enough permissions
+	 * @param {String} [options.userChooser=false] If true allow to invite registered users with Streams/userChooser tool.
 	 */
 	invite: function(publisherId, streamName, callback, options) {
 		var stream = null;
@@ -991,18 +992,12 @@ Streams.Dialogs = {
 					name: options.templateName,
 					fields: {
 						isContactsPicker: isContactsPicker,
-						chooseFromContacts: text.chooseFromContacts,
+						userChooser: options.userChooser,
+						text: text,
 						photo: (options.photo)? text.photo: options.photo,
 						to: text.to.interpolate({"Stream Title": stream.fields.title}),
-						go: text.go,
-						placeholder: text.placeholder,
-						orInvite: text.orInvite,
 						copyLink: text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
-						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
-						email: text.byEmail,
-						text: text.byText,
-						facebook: text.byFacebook,
-						twitter: text.byTwitter
+						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap})
 					}
 				},
 				stylesheet: '{{Streams}}/css/Streams/invite.css',
@@ -1011,6 +1006,20 @@ Streams.Dialogs = {
 					if (data) {
 						dialog.addClass('Streams_suggestion_ready');
 					}
+
+					// invite user from registered users
+					var userChooserTool = Q.Tool.from($(".Streams_userChooser_tool", dialog), "Streams/userChooser");
+					if (userChooserTool) {
+						userChooserTool.state.onChoose.set(function (userId) {
+							Q.handle(callback, Streams, [{
+								userId: userId,
+								stream: stream,
+								data: data
+							}]);
+							Q.Dialogs.pop(); // close the Dialog
+						}, "Streams_invite_dialog");
+					}
+
 					// handle "choose from contacts" button
 					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
 						var $this = $(this);
@@ -1274,6 +1283,7 @@ Streams.release = function (key) {
  * @param {Boolean} [options.followup="future"] Whether to set up a followup email or sms for the user to send. Set to true to always send followup, or false to never send it. Set to "future" to send followups only to users who haven't registered yet.
  * @param {String} [options.uri] If you need to hit a custom "Module/action" endpoint
  * @param {String} [options.title] Custom dialog title.
+ * @param {String} [options.userChooser=false] If true allow to invite registered users with Streams/userChooser tool.
  * @param {Function} callback Called with (err, result) .
  *   In this way you can obtain the invite token, email addresses, etc.
  *   See Streams::invite on the PHP side for the possible return values.
@@ -1516,7 +1526,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}
 		}, {
 			title: o.title,
-			identifierTypes: o.identifierTypes
+			identifierTypes: o.identifierTypes,
+			userChooser: o.userChooser
 		});
 	});
 	return null;
@@ -6211,7 +6222,9 @@ function _scheduleUpdate() {
 			// The timer was delayed for too long. Something might have changed.
 			// Streams.refresh.options.minSeconds should prevent the update
 			// from happening too frequently
-			if (!Streams.refresh.options.preventAutomatic) {
+			if (Streams.refresh.options.preventAutomatic) {
+				return;
+			} else {
 				_debouncedRefresh();
 			}
 		}

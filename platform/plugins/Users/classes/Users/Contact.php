@@ -52,7 +52,7 @@ class Users_Contact extends Base_Users_Contact
 		$asUserId = null,
 		$unlessExists = false)
 	{
-		Q::event('Users/Contact/addContact',
+		$canAddContact = Q::event('Users/Contact/addContact',
 			compact('userId', 'asUserId', 'contactUserId', 'label'),
 			'before'
 		);
@@ -70,7 +70,7 @@ class Users_Contact extends Base_Users_Contact
 			$user = Users::loggedInUser(true);
 			$asUserId = $user->id;
 		}
-		Users::canManageContacts($asUserId, $userId, $label, true);
+		$canAddContact !== true && Users::canManageContacts($asUserId, $userId, $label, true);
 		Users_User::fetch($userId, true);
 		Users_User::fetch($contactUserId, true);
 		$labels = is_array($label) ? $label : array($label);
@@ -154,7 +154,7 @@ class Users_Contact extends Base_Users_Contact
 	 */
 	static function removeContact($userId, $label, $contactUserId, $asUserId = null)
 	{
-		Q::event('Users/Contact/removeContact',
+		$canRemoveContact = Q::event('Users/Contact/removeContact',
 			compact('userId', 'contactUserId', 'label'),
 			'before'
 		);
@@ -166,7 +166,7 @@ class Users_Contact extends Base_Users_Contact
 				));
 			}
 		}
-		Users::canManageContacts($asUserId, $userId, $label, true);
+		$canRemoveContact !== true && Users::canManageContacts($asUserId, $userId, $label, true);
 		$contact = new Users_Contact();
 		$contact->userId = $userId;
 		$contact->label = $label;

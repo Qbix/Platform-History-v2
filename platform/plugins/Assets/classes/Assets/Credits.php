@@ -31,6 +31,27 @@ class Assets_Credits extends Base_Assets_Credits
 		return isset($attr[$attributeName]) ? $attr[$attributeName] : $default;
 	}
 	/**
+	 * @method setAttribute
+	 * @param {string|array} $attributeName The name of the attribute to set,
+	 *  or an array of $attributeName => $attributeValue pairs
+	 * @param {mixed} $value The value to set the attribute to
+	 * @return Assets_Credits
+	 */
+	function setAttribute($attributeName, $value = null)
+	{
+		$attr = $this->getAllAttributes();
+		if (is_array($attributeName)) {
+			foreach ($attributeName as $k => $v) {
+				$attr[$k] = $v;
+			}
+		} else {
+			$attr[$attributeName] = $value;
+		}
+		$this->attributes = Q::json_encode($attr);
+
+		return $this;
+	}
+	/**
 	 * Get the logged-in user's credits stream
 	 * @method userStream
 	 * @param {string} [$userId=null]
@@ -46,7 +67,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function userStream($userId = null, $asUserId = null, $throwIfNotLoggedIn = false)
 	{
 		if (!isset($userId)) {
-			$user = Users::loggedInUser($throwIfNotLoggedIn);
+			$user = Users::loggedInUser($throwIfNotLoggedIn, false);
 			if (!$user) {
 				return null;
 			}
@@ -304,6 +325,8 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t send to yourself'));
 		}
 
+		$more['amount'] = $amount;
+
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
@@ -380,7 +403,6 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	private static function fillInstructions ($assetsCredits, $more = array()) {
 		$more['messageId'] = $assetsCredits->id;
-		$more['amount'] = $assetsCredits->credits;
 		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
 		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
@@ -493,8 +515,8 @@ class Assets_Credits extends Base_Assets_Credits
 		return $text;
 	}
 	/**
-	 * Check if user paid for some stream.
-	 * @method checkPaid
+	 * Check if user paid to join some stream.
+	 * @method checkJoinPaid
 	 * @static
 	 * @param {string} $userId user tested paid stream
 	 * @param {Streams_Stream|array} $toStream Stream or array('publisherId' => ..., 'streamName' => ...)
@@ -502,7 +524,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @throws
 	 * @return {Boolean|Object}
 	 */
-	static function checkPaid($userId, $toStream, $fromStream = null)
+	static function checkJoinPaid($userId, $toStream, $fromStream = null)
 	{
 		if (is_array($toStream)) {
 			$toPublisherId = $toStream['publisherId'];
@@ -563,5 +585,4 @@ class Assets_Credits extends Base_Assets_Credits
 
 		return false;
 	}
-	
 };

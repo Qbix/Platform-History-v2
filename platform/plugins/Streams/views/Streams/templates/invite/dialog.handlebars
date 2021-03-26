@@ -1,30 +1,33 @@
 <div class="Streams_invite_dialog">
+    {{#if userChooser}}
+        <div class='Q_tool Streams_userChooser_tool'><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{text.userChooserPlaceholder}}" autocomplete="off"></div>
+    {{/if}}
     {{#if isContactsPicker}}
         <div class="Streams_invite_contacts"></div>
-        <button class="Q_button Streams_invite_choose_contact">{{chooseFromContacts}}</button>
+        <button class="Q_button Streams_invite_choose_contact">{{text.chooseFromContacts}}</button>
     {{else}}
         <form class="Q_buttons Streams_invite_submit">
-            <input type="text" placeholder="{{placeholder}}">
-            <button class="Q_button">{{go}}</button>
+            <input type="text" placeholder="{{text.placeholder}}">
+            <button class="Q_button">{{text.go}}</button>
         </form>
     {{/if}}
-    <p>{{orInvite}}</p>
+    <p>{{text.orInvite}}</p>
     <div class="Q_buttons Streams_invite_social_buttons">
         <button class="Q_button Streams_invite_button_email" data-sendBy="email">
             <div class="Streams_invite_social_icons"></div>
-            <div class="Streams_invite_social_labels">{{email}}</div>
+            <div class="Streams_invite_social_labels">{{text.email}}</div>
         </button>
         <button class="Q_button Streams_invite_button_text" data-sendBy="text">
             <div class="Streams_invite_social_icons"></div>
-            <div class="Streams_invite_social_labels">{{text}}</div>
+            <div class="Streams_invite_social_labels">{{text.text}}</div>
         </button>
         <button class="Q_button Streams_invite_button_facebook" data-sendBy="facebook">
             <div class="Streams_invite_social_icons"></div>
-            <div class="Streams_invite_social_labels">{{facebook}}</div>
+            <div class="Streams_invite_social_labels">{{text.facebook}}</div>
         </button>
         <button class="Q_button Streams_invite_button_twitter" data-sendBy="twitter">
             <div class="Streams_invite_social_icons"></div>
-            <div class="Streams_invite_social_labels">{{twitter}}</div>
+            <div class="Streams_invite_social_labels">{{text.twitter}}</div>
         </button>
     </div>
 	<div class="Q_button Streams_invite_copyLink" data-sendBy="copyLink">{{copyLink}}</div>

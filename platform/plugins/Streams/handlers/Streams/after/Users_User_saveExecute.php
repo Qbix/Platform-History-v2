@@ -20,18 +20,6 @@ function Streams_after_Users_User_saveExecute($params)
 	if (isset($modifiedFields['icon'])) {
 		$updates['icon'] = $modifiedFields['icon'];
 	}
-	if (isset($modifiedFields['emailAddress'])) {
-		if ($emailStream = Streams::fetchOne($user->id, $user->id, 'Streams/user/emailAddress')) {
-			$emailStream->content = $user->emailAddress;
-			$emailStream->changed();
-		}
-	}
-	if (isset($modifiedFields['mobileNumber'])) {
-		if ($mobileStream = Streams::fetchOne($user->id, $user->id, 'Streams/user/mobileNumber')) {
-			$mobileStream->content = $user->mobileNumber;
-			$mobileStream->changed();
-		}
-	}
 
 	// if we only modified some inconsequential fields, no need to proceed
 	$mf = $modifiedFields;
@@ -250,7 +238,9 @@ function Streams_after_Users_User_saveExecute($params)
 			// to properly configure it.
 		}
 		
-	} else if ($modifiedFields) {
+	}
+
+	if ($modifiedFields) {
 		if ($updates) {
 			Streams_Avatar::update()
 				->set($updates)
@@ -260,7 +250,15 @@ function Streams_after_Users_User_saveExecute($params)
 
 		foreach ($modifiedFields as $field => $value) {
 			$name = Q_Config::get('Streams', 'onUpdate', 'Users_User', $field, null);
-			if (!$name) continue;
+			if (!$name) {
+				continue;
+			}
+
+			// when email or mobile move from pending to actual field, skip empty pending values
+			if (empty($value) && in_array($field, array("emailAddressPending", "mobileNumberPending"))) {
+				continue;
+			}
+
 			$stream = isset(Streams::$beingSaved[$field])
 				? Streams::$beingSaved[$field]
 				: Streams::fetchOne($user->id, $user->id, $name);
@@ -279,6 +277,7 @@ function Streams_after_Users_User_saveExecute($params)
 			Streams::$beingSavedQuery = $stream->changed($user->id);
 		}
 	}
+
 	Db::allowCaching($prevAllowCaching);
 
 	$processing = false;

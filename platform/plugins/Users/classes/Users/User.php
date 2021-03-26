@@ -38,7 +38,7 @@ class Users_User extends Base_Users_User
 		if (is_array($userId)) {
 			$users = Users_User::select()
 				->where(array('id' => $userId))
-				->fetchDbRows('id');
+				->fetchDbRows(null, '', 'id');
 			if ($throwIfMissing) {
 				foreach ($userId as $xid) {
 					if (!isset($users[$xid])) {

@@ -76,8 +76,33 @@ Q.Tool.define("Q/clip", function (options) {
 	 * @param {string} which Can be 'start' or 'end'
 	 */
 	setPosition: function (position, positionDisplay, which) {
-		$("button[name=" + which + "] .Q_clip_position", this.element).text(position);
-		$("button[name=" + which + "] .Q_clip_position_display", this.element).text(positionDisplay);
+		var tool = this;
+		var oppositePos;
+		var $button = $("button[name=" + which + "]", this.element);
+
+		// check conformity
+		switch (which) {
+			case "start":
+				oppositePos = parseInt(tool.getPosition("end"));
+				if (!isNaN(oppositePos) && position > oppositePos) {
+					$button.removeClass("Q_clip_fixed");
+					return Q.alert(tool.text.StartMoreEnd);
+				}
+				break;
+			case "end":
+				oppositePos = parseInt(tool.getPosition("start"));
+				if (!isNaN(oppositePos) && position < oppositePos) {
+					$button.removeClass("Q_clip_fixed");
+					return Q.alert(tool.text.EndLessStart);
+				}
+				break;
+			default:
+				$button.removeClass("Q_clip_fixed");
+				return Q.alert(tool.text.WhichInvalid);
+		}
+
+		$(".Q_clip_position", $button).text(position);
+		$(".Q_clip_position_display", $button).text(positionDisplay);
 	},
 	/**
 	 * Get position of start/end clip position

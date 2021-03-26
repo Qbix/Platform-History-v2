@@ -41,24 +41,19 @@ if(navigator.mediaDevices.getUserMedia === undefined) navigator.mediaDevices.get
 
 window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
+
+
 (function (Q, $) {
     var Streams = Q.Streams;
     var _debug = null;
     var _debugTimer = {};
-    var _texts;
-
-    Q.onReady.add(function () {
-        Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), { slotName: 'Streams' });
-        Q.Text.get("Streams/content", function (err, result) {
-            _texts = result;
-        });
-    }, "Streams/webrtc");
 
     /**
      * Manages UI of WebRTC conference
      * @class Streams.WebRTC
      * @constructor
      */
+
     Streams.WebRTC = function Streams_WebRTC() {
         var _options = {
             mode: 'node',
@@ -68,6 +63,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             startWith: {
                 audio: true,
                 video: false
+            },
+            preparing: {
+                video: false,
+                audio: false,
+                screen: false
             },
             showScreenSharingInSeparateScreen: true,
             minimizeOnPageSwitching: true,
@@ -95,6 +95,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         };
         var WebRTCconference;
 
+        var _textes = null;
         var _controls = null;
         var _controlsTool = null;
         var _roomsMedia = null;
@@ -111,9 +112,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             var ua = navigator.userAgent;
 
-            if(ua.indexOf('Android')!==-1||ua.indexOf('Windows Phone')!==-1||ua.indexOf('iPhone')!==-1||ua.indexOf('iPad')!==-1||ua.indexOf('iPod')!==-1) {
+            if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
                 _isMobile = true;
-                if(ua.indexOf('iPad')!==-1||ua.indexOf('iPhone')!==-1||ua.indexOf('iPod')!==-1) {
+                if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
                     _isiOS = true;
                 } else if (/android/i.test(ua)) {
                     _isAndroid = true;
@@ -126,10 +127,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     //browser
                 } else if ( !isSafari && !Q.info.isCordova ) {
                     _isiOSWebView = true;
-                }
+                };
             } else {
                 //not iOS
-            }
+            };
 
             var browser = determineBrowser(navigator.userAgent)
             var _localInfo = {
@@ -176,7 +177,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if (mm < 10) {
                         mm = '0' + mm;
                     }
-                    today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+                    var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
                     var errorMessage = "\n\n" + today + " Error: " + txt + ', ' +  argumentsString + "\nurl: " + location.origin + "\nline: ";
 
@@ -210,7 +211,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (mm < 10) {
                     mm = '0' + mm;
                 }
-                today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
+                var today = dd + '/' + mm + '/' + yyyy + ' ' + today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
 
                 var errMessage = "\n\n" + today + " Error: " + msg + "\nurl: " + url + "\nline: " + line + extra + "\nline: " + ua;
 
@@ -585,7 +586,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             function sendReportToServer() {
-                if(_infoLog.length === 0 || _options.roomId == null || _options.roomPublisherId == null || !Q.Users.loggedInUser) return;
+                if(_infoLog.length == 0 || _options.roomId == null || _options.roomPublisherId == null || !Q.Users.loggedInUser) return;
                 Q.req("Streams/webrtc", ["updateLog"], function (err, response) {
                     var msg = Q.firstErrorMessage(err, response && response.errors);
 
@@ -895,7 +896,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user joined',  participant);
                 if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_texts.webrtc.notices.joining.interpolate({userName: name.firstName}));
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
 
@@ -925,7 +926,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(userId != null){
                     Q.Streams.get(userId, 'Streams/user/firstName', function () {
                         var firstName = this.fields.content;
-                        notice.show(_texts.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
+                        notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
 
                     });
                 }
@@ -945,7 +946,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
                 log('you left the room')
-                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _texts));
+                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('screenAdded', function (participant) {
@@ -1130,17 +1131,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             dialogList.className = 'Streams_webrtc_instructions_dialog';
 
             if(Q.info.platform === 'ios') {
-                dialogList.innerHTML = `<div>` + _texts.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
-                //Q.getObject("webrtc.allow." + titleText, _texts)
+                dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
+                //Q.getObject("webrtc.allow." + titleText, _textes)
             } else {
-                dialogList.innerHTML = `<div>` + _texts.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _texts) + `</li>
-									<li>` + _texts.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
+                dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
+									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
             }
 
             instructionsPermissionDialog.appendChild(dialogList);
             Q.Dialogs.push({
-                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _texts),
+                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
                 className: 'Streams_webrtc_devices_dialog',
                 content: instructionsPermissionDialog,
                 apply: true
@@ -1225,7 +1226,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if (constrains.audio && constrains.video) {
                     titleText = 'cameraAndMicrophoneBtn';
                 }
-                var text = Q.getObject("webrtc.allow." + titleText, _texts);
+                var text = Q.getObject("webrtc.allow." + titleText, _textes);
                 turnOnBtn.querySelector('SPAN').innerHTML = text;
 
 
@@ -1242,13 +1243,411 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
 
                 Q.Dialogs.push({
-                    title: Q.getObject("webrtc.allow.dialogTitle", _texts),
+                    title: Q.getObject("webrtc.allow.dialogTitle", _textes),
                     className: 'Streams_webrtc_devices_dialog',
                     content: mediaDevicesDialog,
                     apply: true
                 });
 
             })
+        }
+
+        /**
+         * Show dialog with buttons to get permissions for camera and/or mirophone and "Join room" button.
+         * @method showPermissionsDialogue
+         */
+        function showPreparingDialogue(callback, closeCallback) {
+
+            var micSVG = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
+            var disabledMicSVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>';
+            var cameraSVG = '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>';
+            var disabledCameraSVG = '<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203   c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203   z"/>  <polygon fill="#FFFFFF" points="61.635,39.34 43.63,60.242 61.635,60.242 61.635,51.732 77.156,60.693 77.156,36.656 61.635,45.617    "/>  <polygon fill="#FFFFFF" points="25.223,36.822 25.223,60.242 34.391,60.242 54.564,36.822 "/>  <rect x="47.585" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3117 -20.7363)" fill="#C12337" width="4" height="73.163"/>  </svg>';
+            var screenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.072,0.054c-27.57,0-49.999,22.429-49.999,50c0,27.57,22.429,50,49.999,50  c27.571,0,50.001-22.43,50.001-50C100.073,22.484,77.644,0.054,50.072,0.054z M76.879,63.696H53.705v5.222h5.457v3.77H40.987v-3.77  h5.458v-5.222H23.268V31.439H76.88L76.879,63.696L76.879,63.696z"/> </svg>';
+            var disabledScreenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.172,100.346C22.508,100.346,0,77.838,0,50.172C0,22.508,22.508,0,50.172,0  c27.666,0,50.173,22.508,50.173,50.172C100.346,77.838,77.839,100.346,50.172,100.346z M50.172,4.084  C24.76,4.084,4.084,24.76,4.084,50.172c0,25.414,20.675,46.088,46.088,46.088c25.414,0,46.088-20.675,46.088-46.088  C96.261,24.76,75.586,4.084,50.172,4.084z"/> <g>  <polygon fill="#FCFCFC" points="60.309,31.439 23.268,31.439 23.268,63.696 32.533,63.696 "/>  <polygon fill="#FCFCFC" points="68.252,31.439 40.478,63.696 46.444,63.696 46.444,68.918 40.987,68.918 40.987,72.688   59.162,72.688 59.162,68.918 53.705,68.918 53.705,63.696 76.879,63.696 76.88,63.696 76.88,31.439 "/> </g> <rect x="47.83" y="11.444" transform="matrix(-0.7577 -0.6526 0.6526 -0.7577 56.1462 117.2643)" fill="#C12337" width="4.02" height="73.532"/> </svg>';
+            var userSVG = '<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path d="M65.904,52.834c-4.734,3.725-10.695,5.955-17.172,5.955c-6.316,0-12.146-2.119-16.821-5.68C16.654,55.575,5,68.803,5,84.757  c0,11.78,14.356,10.197,32.065,10.197h25.869C80.643,94.954,95,97,95,84.757C95,68.051,82.221,54.333,65.904,52.834z"/> <path d="M48.732,55.057c13.286,0,24.092-10.809,24.092-24.095c0-13.285-10.807-24.094-24.092-24.094  c-13.285,0-24.093,10.809-24.093,24.094C24.64,44.248,35.448,55.057,48.732,55.057z"/> </svg>';
+
+            var usersAvatar = null;
+            var preJoiningStreams = [];
+
+            var md = (Q.info.isCordova && Q.info.platform === 'ios') ? cordova.plugins.iosrtc : navigator.mediaDevices;
+
+            var setAvatarOnPreview = function(cameraPreview) {
+                if(usersAvatar != null) {
+                    cameraPreview.innerHTML = '';
+                    cameraPreview.appendChild(usersAvatar);
+                } else {
+                    Q.Streams.Avatar.get(Q.Users.loggedInUserId(), function (err, avatar) {
+                        if (!avatar) {
+                            return;
+                        }
+
+                        var src = Q.url(avatar.iconUrl(400));
+                        if(src != null) {
+                            var avatarImg = new Image();
+                            avatarImg.src = src;
+                            log('setUserAvatar set');
+                            let avatarCon = document.createElement('DIV');
+                            avatarCon.className = 'Streams_webrtc_preparing_camera-preview-avatar-con';
+                            avatarCon.appendChild(avatarImg);
+                            cameraPreview.innerHTML = '';
+                            cameraPreview.appendChild(avatarCon);
+                            usersAvatar = avatarCon;
+
+                        }
+                    });
+                }
+            }
+
+
+            var gotDevicesList = function(mediaDevices) {
+                var videoDevices = 0;
+                var audioDevices = 0;
+                for(var i in mediaDevices) {
+                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+                        videoDevices++;
+                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+                        audioDevices++;
+                    }
+                }
+
+                var mediaDevicesDialog = document.createElement('DIV');
+                mediaDevicesDialog.className = 'Streams_webrtc_preparing_dialog_inner';
+
+                var meetingStatus = document.createElement('DIV');
+                meetingStatus.className = 'Streams_webrtc_preparing_meeting_info';
+                var participantsIcon = document.createElement('DIV');
+                participantsIcon.className = 'Streams_webrtc_preparing_users_info_icon';
+                participantsIcon.innerHTML = userSVG;
+                var participantsNum = document.createElement('DIV');
+                participantsNum.className = 'Streams_webrtc_preparing_users_num Streams_webrtc_preparing_meeting_offline';
+                participantsNum.innerHTML = 'offline';
+
+                var cameraPreview = document.createElement('DIV');
+                cameraPreview.className = 'Streams_webrtc_preparing_camera-preview';
+
+
+                var buttonsCon = document.createElement('DIV');
+                buttonsCon.className = 'Streams_webrtc_devices_dialog_buttons_con';
+
+                if(Q.info.isCordova && Q.info.platform === 'ios') {
+                    buttonsCon.style.position = 'relative';
+                    mediaDevicesDialog.classList.add('Streams_webrtc_preparing_dialog_inner_cordova');
+                    mediaDevicesDialog.style.background = 'black';
+                }
+
+                var switchMicBtn = document.createElement('DIV');
+                switchMicBtn.type = 'button';
+                switchMicBtn.className = 'Streams_webrtc_prep-switch-mic';
+                switchMicBtn.innerHTML = disabledMicSVG;
+
+                var switchCameraBtn = document.createElement('DIV');
+                switchCameraBtn.type = 'button';
+                switchCameraBtn.className = 'Streams_webrtc_prep-switch-camera';
+                switchCameraBtn.innerHTML = disabledCameraSVG;
+
+                var switchScreenSharingBtn = document.createElement('DIV');
+                switchScreenSharingBtn.type = 'button';
+                switchScreenSharingBtn.className = 'Streams_webrtc_prep-switch-screen';
+                switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
+
+                var joinButtonCon = document.createElement('DIV');
+                joinButtonCon.className = 'Streams_webrtc_join-button-con';
+                var joinButton = document.createElement('DIV');
+                joinButton.type = 'button';
+                joinButton.className = 'Q_button Streams_webrtc_join-button';
+                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", _textes);
+
+
+                meetingStatus.appendChild(participantsNum);
+                //meetingStatus.appendChild(participantsIcon);
+                mediaDevicesDialog.appendChild(meetingStatus);
+                mediaDevicesDialog.appendChild(cameraPreview);
+                buttonsCon.appendChild(switchMicBtn);
+                buttonsCon.appendChild(switchCameraBtn);
+                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsCon.appendChild(switchScreenSharingBtn);
+                mediaDevicesDialog.appendChild(buttonsCon);
+                joinButtonCon.appendChild(joinButton);
+                mediaDevicesDialog.appendChild(joinButtonCon);
+                //mediaDevicesDialog.appendChild(breakEl);
+
+                setAvatarOnPreview(cameraPreview);
+
+                var switchMic = function (off) {
+                    if(audioDevices == 0) {
+                        Q.alert('Audio input devices were not found on your device.')
+                        return
+                    }
+
+                    let audioIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'audio') {
+                            audioIsAlreadyEnabled = s;
+                        }
+                    }
+                    console.log('audioIsAlreadyEnabled', audioIsAlreadyEnabled)
+
+                    if(audioIsAlreadyEnabled === false && off == null) {
+                        md.getUserMedia({audio:true})
+                            .then(function (stream) {
+                                preJoiningStreams.push({kind:'audio', stream:stream})
+                                switchMicBtn.innerHTML = micSVG;
+                                _options.startWith.audio = true;
+                            }).catch(function (err) {
+                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+                            console.error(err.name + ": " + err.message);
+                        });
+                    } else if(audioIsAlreadyEnabled !== false) {
+                        let tracks = preJoiningStreams[audioIsAlreadyEnabled].stream.getAudioTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+                        preJoiningStreams.splice(audioIsAlreadyEnabled, 1);
+                        switchMicBtn.innerHTML = disabledMicSVG;
+                        _options.startWith.audio = false;
+                    }
+                }
+
+                if(_options.preparing.audio === true) switchMic();
+
+                switchMicBtn.addEventListener('mouseup', function () {
+                    switchMic();
+                });
+
+                var switchCamera = function (off) {
+                    console.log('switchCamera', off);
+                    if(videoDevices == 0) {
+                        Q.alert('Video input devices were not found on your device.')
+                        return
+                    }
+
+                    let cameraIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'camera') {
+                            cameraIsAlreadyEnabled = s;
+                        }
+                    }
+
+                    if(cameraIsAlreadyEnabled === false && off == null) {
+                        let constraints;
+                        if(Q.info.isCordova) {
+                            constraints = {
+                                'audio': false,
+                                'video': {
+                                    width: { min: 320, max: 1280 },
+                                    height: { min: 240, max: 720 }
+                                }
+                            }
+                        } else {
+                            constraints = {video:true};
+                        }
+                        md.getUserMedia(constraints)
+                            .then(function (stream) {
+                                preJoiningStreams.push({kind:'camera', stream:stream})
+                                let videoPreview = document.createElement('video');
+                                videoPreview.srcObject = stream;
+                                let screenVideo = cameraPreview.querySelector('video');
+                                if(screenVideo != null) {
+                                    screenVideo.parentElement.insertBefore(videoPreview, screenVideo);
+                                } else {
+                                    cameraPreview.innerHTML = '';
+                                    cameraPreview.appendChild(videoPreview);
+                                }
+                                videoPreview.play();
+                                switchCameraBtn.innerHTML = cameraSVG;
+                                _options.startWith.video = true;
+                            }).catch(function (err) {
+                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+                            console.error(err.name + ": " + err.message);
+                        });
+                    } else if(cameraIsAlreadyEnabled !== false) {
+                        let tracks = preJoiningStreams[cameraIsAlreadyEnabled].stream.getVideoTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+                        preJoiningStreams.splice(cameraIsAlreadyEnabled, 1);
+                        switchCameraBtn.innerHTML = disabledCameraSVG;
+                        let screenVideo = cameraPreview.querySelectorAll('video');
+                        if(screenVideo.length == 2) {
+                            cameraPreview.removeChild(cameraPreview.firstChild);
+                        } else {
+                            setAvatarOnPreview(cameraPreview);
+                        }
+                        _options.startWith.video = false;
+                    }
+
+                }
+                if(_options.preparing.video === true) switchCamera();
+                switchCameraBtn.addEventListener('mouseup', function () {
+                    switchCamera();
+                });
+
+                var switchScreenshare = function (off) {
+                    let screenIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'screen') {
+                            screenIsAlreadyEnabled = s;
+                        }
+                    }
+
+                    var getUserScreen = function() {
+                        /*if (!canScreenShare()) {
+                            return;
+                        }*/
+
+                        if(navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
+
+                            if(navigator.mediaDevices.getDisplayMedia) {
+                                return navigator.mediaDevices.getDisplayMedia({video: true});
+                            }
+                            else if(navigator.getDisplayMedia) {
+                                return navigator.getDisplayMedia({video: true})
+                            }
+                            return;
+                        }
+                    }
+
+                    if(screenIsAlreadyEnabled === false && off == null) {
+                        getUserScreen().then(function (stream) {
+                            preJoiningStreams.push({kind:'screen', stream:stream})
+                            let screenPreview = document.createElement('video');
+                            screenPreview.srcObject = stream;
+
+                            let cameraVideos = cameraPreview.querySelector('video');
+                            if(cameraVideos != null) {
+                                cameraPreview.appendChild(screenPreview);
+                            } else {
+                                cameraPreview.innerHTML = '';
+                                cameraPreview.appendChild(screenPreview);
+                            }
+
+                            switchScreenSharingBtn.innerHTML = screenSharingSVG;
+                            screenPreview.play();
+
+                            _options.startWith.video = true;
+                        }).catch(function(error) {
+                            console.error(error.name + ': ' + error.message);
+                        });
+                    } else if(screenIsAlreadyEnabled !== false) {
+                        let tracks = preJoiningStreams[screenIsAlreadyEnabled].stream.getVideoTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+                        preJoiningStreams.splice(screenIsAlreadyEnabled, 1);
+                        switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
+                        let screenVideo = cameraPreview.querySelectorAll('video');
+                        if(screenVideo.length == 2) {
+                            cameraPreview.removeChild(cameraPreview.lastChild);
+                        } else {
+                            setAvatarOnPreview(cameraPreview);
+                        }
+                        _options.startWith.video = false;
+                    }
+
+                }
+                if(_options.preparing.screen === true) switchScreenshare();
+                switchScreenSharingBtn.addEventListener('mouseup', function () {
+                    switchScreenshare();
+                });
+
+                var roomId = _options.roomId != null ? _options.roomId : null;
+                if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+                console.log('showPreparingDialogue ', _options.roomPublisherId, roomId)
+
+                function checkmeetingStatus() {
+                    console.log('checkmeetingStatus')
+
+                    Q.req("Streams/webrtc", ["status"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+
+                        let stream = response.slots.status.stream;
+                        let live = response.slots.status.live;
+                        if(live) {
+                            participantsNum.innerHTML = 'In Progress'
+                            if(participantsNum.classList.contains('Streams_webrtc_preparing_meeting_offline')) {
+                                participantsNum.classList.remove('Streams_webrtc_preparing_meeting_offline')
+                            }
+                            if(!participantsNum.classList.contains('Streams_webrtc_preparing_meeting_online')) {
+                                participantsNum.classList.add('Streams_webrtc_preparing_meeting_online')
+                            }
+                        } else {
+                            participantsNum.innerHTML = 'offline'
+                            if(participantsNum.classList.contains('Streams_webrtc_preparing_meeting_online')) {
+                                participantsNum.classList.remove('Streams_webrtc_preparing_meeting_online')
+                            }
+                            if(!participantsNum.classList.contains('Streams_webrtc_preparing_meeting_offline')) {
+                                participantsNum.classList.add('Streams_webrtc_preparing_meeting_offline')
+                            }
+
+                        }
+                        console.log('checkmeetingStatus stream', stream)
+                        console.log('checkmeetingStatus live', live)
+                    }, {
+                        method: 'get',
+                        fields: {
+                            roomId: roomId,
+                            publisherId: _options.roomPublisherId,
+                        }
+                    });
+                }
+                checkmeetingStatus();
+                var checkStatusInterval = setInterval(checkmeetingStatus, 3000);
+
+                var joinNow = function() {
+                    if(_options.streams == null) {
+                        _options.streams = [];
+                    }
+
+                    for(let s in preJoiningStreams) {
+                        _options.streams.push(preJoiningStreams[s].stream);
+                    }
+
+                    Q.Dialogs.pop();
+                    if(checkStatusInterval) {
+                        clearInterval(checkStatusInterval);
+                        checkStatusInterval = null;
+                    }
+
+                    let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
+                    if(preparingScreen != null && preparingScreen.parentNode != null) preparingScreen.parentNode.removeChild(preparingScreen);
+                    if(callback != null) callback()
+                }
+
+                joinButton.addEventListener('mouseup', joinNow);
+
+
+                if(Q.info.isMobile && !Q.info.isCordova) {
+                    var screen = document.createElement('DIV')
+                    screen.className = 'Streams_webrtc_preparing_screen';
+                    screen.appendChild(mediaDevicesDialog);
+                    if( _options.element != null) _options.element.appendChild(screen);
+                } else {
+                    Q.Dialogs.push({
+                        title: 'Turn camera or mic on/off before you join',
+                        className: 'Streams_webrtc_preparing_dialog',
+                        content: mediaDevicesDialog,
+                        apply: true,
+                        onClose:function () {
+                            if(checkStatusInterval) {
+                                clearInterval(checkStatusInterval);
+                                checkStatusInterval = null;
+                            }
+                            switchMic(true);
+                            switchCamera(true);
+                            switchScreenshare(true);
+                            if(closeCallback != null) closeCallback();
+                        },
+                    });
+                }
+
+
+
+            }
+
+            navigator.mediaDevices.enumerateDevices().then(gotDevicesList)
         }
 
         /**
@@ -1278,14 +1677,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
                         var dialogList = document.createElement('OL');
                         dialogList.className = 'Streams_webrtc_instructions_dialog';
-                        dialogList.innerHTML = `<div>` + _texts.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _texts) + `</li>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _texts) + `</li>
-									<li>` + _texts.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
-									<li>` + _texts.webrtc.iosInstructionsDialog.point4.interpolate({communityName: Q.Users.communityName}) + `</li>`;
+                        dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityName: Q.Users.communityName}) + `</li>`;
                         instructionsPermissionDialog.appendChild(dialogList);
                         Q.Dialogs.push({
-                            title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _texts),
+                            title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
                             className: 'Streams_webrtc_devices_dialog',
                             content: instructionsPermissionDialog,
                             apply: true
@@ -1488,7 +1887,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         connectionState.hide();
                         Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
                         _debugTimer.loadEnd = performance.now();
-                        notice.show(Q.getObject("webrtc.notices.youJoinedRoom", _texts));
+                        notice.show(Q.getObject("webrtc.notices.youJoinedRoom", _textes));
 
                         Q.activate(
                             document.body.appendChild(
@@ -1589,6 +1988,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          */
         function initWithNodeServer(socketServer, turnCredentials) {
             log('initWithNodeServer');
+
             var initConference = function(){
                 log('initWithNodeServer: initConference');
 
@@ -1618,7 +2018,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 bindConferenceEvents(WebRTCconference);
                 log('initWithNodeServer: initConference: start init');
-
+                if(Q.info.isCordova) {
+                    cordova.plugins.CordovaCall.sendCall('Daniel Marcus');
+                }
                 WebRTCconference.init(function (app) {
                     log('initWithNodeServer: initConference: inited');
                     updateParticipantData();
@@ -1627,6 +2029,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     screensRendering.updateLayout();
                     Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
+                    if(Q.info.isCordova) {
+                        cordova.plugins.CordovaCall.connectCall();
+                    }
                     Q.activate(
                         document.body.appendChild(
                             Q.Tool.setUpElement(
@@ -3581,7 +3986,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         var minimizedRect = _layoutTool.currentRects[indexToMaximize];
                         if(minimizedRect)log('maximizeScreen minimizedRect', JSON.stringify(minimizedRect))
-                        
+
                         minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
                         _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
                         _layoutTool.currentRects[indexToMaximize].y = maximizedRect.y;
@@ -5024,248 +5429,291 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {String} [options.mode] Technology that is used to start conference ('twilio' OR 'node')
          */
         function start(options) {
-            createInfoSnippet()
-            //showPageLoader();
-            log('Start WebRTC conference room');
 
-            connectionState.show('Connecting...');
+            Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
-            _debugTimer.loadStart = performance.now();
+                createInfoSnippet()
+                //showPageLoader();
+                log('Start WebRTC conference room');
 
-            _options.startTime = Date.now();
+                connectionState.show('Connecting...');
 
-            appDebug.sendReportsInterbal = setInterval(function () {
-                appDebug.sendReportToServer();
-            }, 3000);
-            overrideDefaultOptions(options);
-            
-            if(appDebug.isiOSwebView()) {
-                return Q.alert(_texts.webrtc.notices.openInBrowserAlert != null ? _texts.webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
-            }
+                _debugTimer.loadStart = performance.now();
 
-            log('start: load time ' + (performance.now() - _debugTimer.loadStart));
-            log('start: onConnect');
+                _options.startTime = Date.now();
 
-            var ua = navigator.userAgent;
-            var startWith = _options.startWith || {};
+                appDebug.sendReportsInterbal = setInterval(function () {
+                    appDebug.sendReportToServer();
+                }, 3000);
+                overrideDefaultOptions(options);
+                Q.Text.get("Streams/content", function (err, result) {
+                    log('start: translation loaded');
+
+                    _textes = result;
+
+                    if(appDebug.isiOSwebView()) {
+                        return Q.alert(_textes.webrtc.notices.openInBrowserAlert != null ? _textes.webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
+                    }
+
+                    onConnect();
+                })
+
+                function onConnect() {
+                    log('start: load time ' + (performance.now() - _debugTimer.loadStart));
+                    log('start: onConnect');
+
+                    var ua = navigator.userAgent;
+                    var startWith = _options.startWith || {};
+                    //var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!startWith.video && !startWith.audio));
+                    var preparingRoom = true;
+
+                    log('start: onConnect', preparingRoom, _options.preparing.video, _options.preparing.audio);
 
 
-            if (Q.info.isCordova && Q.info.isAndroid()) {
-                log('start: onConnect: isCordova && isAndroid');
+                    if (Q.info.isCordova && Q.info.isAndroid()) {
+                        log('start: onConnect: isCordova && isAndroid');
 
-                var showInstructions = function(kind) {
-                    var instructionsPermissionDialog = document.createElement('DIV');
-                    instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
-                    var dialogList = document.createElement('OL');
-                    dialogList.className = 'Streams_webrtc_instructions_dialog';
-                    dialogList.innerHTML = `<div>` + _texts.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-                            <li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _texts) + `</li>
-                            <li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _texts) + `</li>
-                            <li>` + _texts.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
-                            <li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _texts) + `</li>
-                            <li>` + _texts.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
-                    instructionsPermissionDialog.appendChild(dialogList);
-                    Q.Dialogs.push({
-                        title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _texts),
-                        className: 'Streams_webrtc_devices_dialog',
-                        content: instructionsPermissionDialog,
-                        apply: true
-                    });
-                }
+                        var showInstructions = function(kind) {
+                            var instructionsPermissionDialog = document.createElement('DIV');
+                            instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+                            var dialogList = document.createElement('OL');
+                            dialogList.className = 'Streams_webrtc_instructions_dialog';
+                            dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
+                            instructionsPermissionDialog.appendChild(dialogList);
+                            Q.Dialogs.push({
+                                title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
+                                className: 'Streams_webrtc_devices_dialog',
+                                content: instructionsPermissionDialog,
+                                apply: true
+                            });
+                        }
 
-                var requestMicPermission = function (callback) {
-                    cordova.plugins.permissions.checkPermission("android.permission.RECORD_AUDIO", function(result){
-                        if(!result.hasPermission) {
-                            cordova.plugins.permissions.requestPermission("android.permission.RECORD_AUDIO", function(result){
+                        var requestMicPermission = function (callback) {
+                            cordova.plugins.permissions.checkPermission("android.permission.RECORD_AUDIO", function(result){
                                 if(!result.hasPermission) {
-                                    showInstructions('audio');
+                                    cordova.plugins.permissions.requestPermission("android.permission.RECORD_AUDIO", function(result){
+                                        if(!result.hasPermission) {
+                                            showInstructions('audio');
+                                        } else {
+                                            if(callback != null) callback();
+                                        }
+                                    }, function(){console.error("Permission is not granted");})
                                 } else {
                                     if(callback != null) callback();
                                 }
                             }, function(){console.error("Permission is not granted");})
-                        } else {
-                            if(callback != null) callback();
                         }
-                    }, function(){console.error("Permission is not granted");})
-                }
 
-                var requestCameraPermission = function (callback) {
-                    cordova.plugins.permissions.checkPermission("android.permission.CAMERA", function(result){
-                        if(!result.hasPermission) {
-                            cordova.plugins.permissions.requestPermission("android.permission.CAMERA", function(result){
+                        var requestCameraPermission = function (callback) {
+                            cordova.plugins.permissions.checkPermission("android.permission.CAMERA", function(result){
                                 if(!result.hasPermission) {
-                                    showInstructions('video');
+                                    cordova.plugins.permissions.requestPermission("android.permission.CAMERA", function(result){
+                                        if(!result.hasPermission) {
+                                            showInstructions('video');
+                                        } else {
+                                            if(callback != null) callback();
+                                        }
+                                    }, function(){console.error("Permission is not granted");})
                                 } else {
+                                    //Permission granted
                                     if(callback != null) callback();
                                 }
                             }, function(){console.error("Permission is not granted");})
-                        } else {
-                            //Permission granted
-                            if(callback != null) callback();
                         }
-                    }, function(){console.error("Permission is not granted");})
-                }
 
-                if(startWith.audio && startWith.video) {
-                    requestMicPermission(function () {
-                        requestCameraPermission(function () {
-                            publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                        if(startWith.audio && startWith.video) {
+                            requestMicPermission(function () {
+                                requestCameraPermission(function () {
+                                    publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                                });
+                            });
+                        } else if (startWith.audio) {
+                            requestMicPermission(function () {
+                                publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                            });
+                        } else if (startWith.video) {
+                            requestCameraPermission(function () {
+                                publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                            });
+                        }
+
+                    } else if(Q.info.isCordova && Q.info.platform === 'ios'){
+                        log('start: onConnect: isCordova && isiOS');
+                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                    } else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
+                        log('start: onConnect: isDesktop');
+                    }
+
+
+
+                    if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
+                        Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
+                    }
+
+                    if(_options.leaveOtherActiveRooms) {
+                        log('start: onConnect: leave existing rooms');
+                        if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
+                            for(var r in Q.Streams.WebRTCRooms) {
+                                Q.Streams.WebRTCRooms[r].stop();
+                            }
+                        }
+                    }
+
+                    var roomId = _options.roomId != null ? _options.roomId : null;
+                    if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+
+                    var roomsMedia = document.createElement('DIV');
+                    roomsMedia.className = 'Streams_webrtc_room-media';
+                    var dashboard = document.getElementById('dashboard_slot');
+                    if(Q.info.isMobile && !Q.info.isTablet) {
+                        roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
+                        roomsMedia.style.top = dashboard.offsetHeight + 'px';
+                    }
+
+                    _options.element.appendChild(roomsMedia);
+                    _roomsMedia = roomsMedia;
+                    if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            _roomsMedia, // or pass an existing element
+                            "Q/layouts",
+                            {alternativeContainer: Q.info.isMobile ? null : document.body}
+                        ),
+                        {},
+                        function () {
+                            _layoutTool = this;
+                            window.layoutTool = _layoutTool;
+                            _layoutTool.currentRects = [];
+                            _layoutTool.basicGridRects = [];
+                        }
+                    );
+
+
+                    var createOrJoinRoomStream = function (roomId, asPublisherId) {
+                        log('createRoomStream')
+                        try {
+                            var err = (new Error);
+                            console.log(err.stack);
+                        } catch (e) {
+
+                        }
+
+                        Q.req("Streams/webrtc", ["room"], function (err, response) {
+                            var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                            if (msg) {
+                                return Q.alert(msg);
+                            }
+                            log('createRoomStream: joined/connected');
+
+                            roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+                            var turnCredentials = response.slots.room.turnCredentials;
+                            var socketServer = response.slots.room.socketServer;
+                            _debug = response.slots.room.debug;
+
+                            overrideDefaultOptions(response.slots.room.options);
+
+                            //var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
+                            //connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
+                            Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                                log('createRoomStream: joined/connected: pull stream');
+
+                                _roomStream = stream;
+                                if(Q.Streams.WebRTCRooms == null){
+                                    Q.Streams.WebRTCRooms = [];
+                                }
+
+                                Q.Streams.WebRTCRooms.push(webRTCInstance);
+
+                                _options.conferenceStartedTime = stream.getAttribute('startTime');
+                                log('start: createOrJoinRoomStream: mode ' + _options.mode)
+                                bindStreamsEvents(stream);
+                                if(_options.mode === 'twilio') {
+                                    startTwilioRoom(roomId, response.slots.room.accessToken);
+                                } else {
+                                    initWithNodeServer(socketServer, turnCredentials);
+                                }
+
+                                //window.addEventListener('beforeunload', webRTCInstance.stop);
+
+                            });
+
+                        }, {
+                            method: 'post',
+                            fields: {
+                                roomId: roomId,
+                                publisherId: asPublisherId,
+                                adapter: _options.mode
+                            }
                         });
-                    });
-                } else if (startWith.audio) {
-                    requestMicPermission(function () {
-                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
-                    });
-                } else if (startWith.video) {
-                    requestCameraPermission(function () {
-                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
-                    });
-                }
-
-            } else if(Q.info.isCordova && Q.info.platform === 'ios'){
-                log('start: onConnect: isCordova && isiOS');
-                publishMediaTracks({video: startWith.video, audio: startWith.audio});
-            } else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
-                log('start: onConnect: isDesktop');
-
-                publishMediaTracks({video: startWith.video, audio: startWith.audio});
-                if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
-                    setTimeout(function () {
-                        if(_options.streams != null) return;
-                        showPermissionsDialogue({video: startWith.video, audio: startWith.audio});
-                    }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
-
-                }
-            }
-
-
-
-            if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
-                Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
-            }
-
-            if(_options.leaveOtherActiveRooms) {
-                log('start: onConnect: leave existing rooms');
-                if(Q.Streams.WebRTCRooms != null && Q.Streams.WebRTCRooms.length != 0) {
-                    for(var r in Q.Streams.WebRTCRooms) {
-                        Q.Streams.WebRTCRooms[r].stop();
                     }
-                }
-            }
-
-            var roomId = _options.roomId != null ? _options.roomId : null;
-            if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
-            if(roomId != null) _options.roomId = roomId;
-
-            var roomsMedia = document.createElement('DIV');
-            roomsMedia.className = 'Streams_webrtc_room-media';
-            var dashboard = document.getElementById('dashboard_slot');
-            if(Q.info.isMobile && !Q.info.isTablet) {
-                roomsMedia.style.height = 'calc(100% - ' + dashboard.offsetHeight + 'px)';
-                roomsMedia.style.top = dashboard.offsetHeight + 'px';
-            }
-
-            _options.element.appendChild(roomsMedia);
-            _roomsMedia = roomsMedia;
-            if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
-            Q.activate(
-                Q.Tool.setUpElement(
-                    _roomsMedia, // or pass an existing element
-                    "Q/layouts",
-                    {alternativeContainer: Q.info.isMobile ? null : document.body}
-                ),
-                {},
-                function () {
-                    _layoutTool = this;
-                    window.layoutTool = _layoutTool;
-                    _layoutTool.currentRects = [];
-                    _layoutTool.basicGridRects = [];
-                }
-            );
 
 
-            var createOrJoinRoomStream = function (roomId, asPublisherId) {
-                log('createRoomStream')
 
-                Q.req("Streams/webrtc", ["room"], function (err, response) {
-                    var msg = Q.firstErrorMessage(err, response && response.errors);
+                    if(roomId == null && _options.roomPublisherId == null) return;
 
-                    if (msg) {
-                        return Q.alert(msg);
-                    }
-                    log('createRoomStream: joined/connected');
+                    if((Q.info.isMobile || Q.info.isTablet)  && !Q.info.isCordova) {
+                        log('start: onConnect: connect from mobile/tablet browser');
 
-                    roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
-                    var turnCredentials = response.slots.room.turnCredentials;
-                    var socketServer = response.slots.room.socketServer;
-                    _debug = response.slots.room.debug;
-
-                    overrideDefaultOptions(response.slots.room.options);
-
-                    //var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
-                    //connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
-                    Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-                        log('createRoomStream: joined/connected: pull stream');
-
-                        _roomStream = stream;
-                        if(Q.Streams.WebRTCRooms == null){
-                            Q.Streams.WebRTCRooms = [];
-                        }
-
-                        Q.Streams.WebRTCRooms.push(webRTCInstance);
-
-                        _options.conferenceStartedTime = stream.getAttribute('startTime');
-                        log('start: createOrJoinRoomStream: mode ' + _options.mode)
-                        bindStreamsEvents(stream);
-                        if(_options.mode === 'twilio') {
-                            startTwilioRoom(roomId, response.slots.room.accessToken);
+                        if(preparingRoom) {
+                            showPreparingDialogue(function () {
+                                createOrJoinRoomStream(roomId, _options.roomPublisherId);
+                            }, function () {
+                                connectionState.update('Disconnected')
+                            });
                         } else {
-                            initWithNodeServer(socketServer, turnCredentials);
+                            var permissionPopupTimeout;
+                            var premissionGrantedCallback = function () {
+                                if(permissionPopupTimeout != null) clearTimeout(permissionPopupTimeout);
+                                createOrJoinRoomStream(roomId, _options.roomPublisherId);
+                            };
+                            publishMediaTracks({video: startWith.video, audio: true}, premissionGrantedCallback);
+
+                            permissionPopupTimeout = setTimeout(function () {
+                                if(_options.streams != null) return;
+                                showPermissionsDialogue({video: startWith.video, audio: true}, premissionGrantedCallback);
+                            }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
                         }
 
-                        //window.addEventListener('beforeunload', webRTCInstance.stop);
+                    } else {
+                        log('start: onConnect: regular connect (desktop)');
 
-                    });
 
-                }, {
-                    method: 'post',
-                    fields: {
-                        roomId: roomId,
-                        publisherId: asPublisherId,
-                        adapter: _options.mode
+                        if(preparingRoom) {
+                            showPreparingDialogue(function () {
+                                createOrJoinRoomStream(roomId, _options.roomPublisherId);
+                            }, function () {
+                                connectionState.updateStatus('Disconnected')
+                            });
+                        } else {
+                            publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                            if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
+                                setTimeout(function () {
+                                    if(_options.streams != null) return;
+                                    showPermissionsDialogue({video: startWith.video, audio: startWith.audio});
+                                }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+
+                            }
+                            createOrJoinRoomStream(roomId, _options.roomPublisherId);
+                        }
+
+
                     }
-                });
-            }
 
-
-
-            if(roomId != null && _options.roomPublisherId != null) {
-                if((Q.info.isMobile || Q.info.isTablet)  && !Q.info.isCordova) {
-                    log('start: onConnect: connect from mobile/tablet browser');
-
-                    var permissionPopupTimeout;
-                    var premissionGrantedCallback = function () {
-                        if(permissionPopupTimeout != null) clearTimeout(permissionPopupTimeout);
-                        createOrJoinRoomStream(roomId, _options.roomPublisherId);
-                    };
-                    publishMediaTracks({video: startWith.video, audio: true}, premissionGrantedCallback);
-
-                    permissionPopupTimeout = setTimeout(function () {
-                        if(_options.streams != null) return;
-                        showPermissionsDialogue({video: startWith.video, audio: true}, premissionGrantedCallback);
-                    }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
-                } else {
-                    log('start: onConnect: regular connect');
-
-                    createOrJoinRoomStream(roomId, _options.roomPublisherId);
                 }
-            }
+            });
+
         }
 
         function switchTo(publisherId, streamName, callback, options) {
             //showPageLoader();
             log('switch WebRTC conference room');
-            
+
             var roomId = _options.roomId != null ? _options.roomId : null;
             if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
             if(roomId != null) _options.roomId = roomId;
@@ -5305,7 +5753,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             newInstance.event.on('initNegotiationEnded', function () {
                                 WebRTCconference = newInstance;
-                               // prevRoom.disconnect(true);
+                                // prevRoom.disconnect(true);
                                 updateParticipantData();
                                 _controlsTool.state.webRTClibraryInstance = WebRTCconference;
                                 _controlsTool.refresh();
@@ -5455,7 +5903,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 return _options;
             },
             textes: function () {
-                return _texts;
+                return _textes;
             },
             loader: connectionState,
             notice: notice
@@ -5470,13 +5918,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {Object} options options for the method
      * @param {String} options.publisherId Required. Publisher of stream to which webrtc will be related.
      * @param {String} options.streamName Required. Name of stream to which webrtc will be related.
-     * @param {String} [options.relationType='Streams/webrtc']
      * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
      * @param {String} [options.mode='node'] Technology that is used to start conference ('twillio' OR 'node')
      * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
-     * @param {String} [options.useExisting=true] If false, don't request related stream to use, but create new.
-     * @param {String} [options.resumeClosed=true]  If false, close stream completely (unrelate) when last participant
-     * left, and create new stream next time instead resume.
      * @param {Function} [options.onWebrtcControlsCreated] Callback called when Webrtc Controls Created
      * @param {Function} [options.onStart] Callback called when Webrtc started.
      * @param {Function} [options.onEnd] Callback called when Webrtc ended.
@@ -5485,83 +5929,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         options = Q.extend({
             element: document.body,
             mode: 'node',
-            tool: true,
-            relationType: "Streams/webrtc",
-            useExisting: true,
-            resumeClosed: true
+            tool: true
         }, options);
 
         var userId = Q.Users.loggedInUserId();
-
-        function _createStream () {
-            Q.req("Streams/webrtc", ["room"], function (err, response) {
-                var msg = Q.firstErrorMessage(err, response && response.errors);
-                if (msg) {
-                    return Q.alert(msg);
-                }
-
-                Q.Streams.get(userId, response.slots.room.roomId, function (err) {
-                    var fem = Q.firstErrorMessage(err);
-                    if (fem) {
-                        return console.warn("Streams.webrtc.start.create: " + fem);
-                    }
-
-                    _createRoom(this);
-                });
-            }, {
-                method: 'post',
-                fields: {
-                    publisherId: userId,
-                    resumeClosed: options.resumeClosed,
-                    content: options.content || null,
-                    adapter: options.mode,
-                    relate: {
-                        publisherId: options.publisherId,
-                        streamName: options.streamName,
-                        relationType: options.relationType
-                    }
-                }
-            });
-        }
-
-        function _createRoom(stream) {
-            // connect to this particular conversation
-            Q.Streams.WebRTC().start({
-                element: options.element,
-                roomId: stream.fields.name,
-                roomPublisherId: stream.fields.publisherId,
-                mode: options.mode,
-                onWebrtcControlsCreated: function () {
-                    //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
-                    // may be tool doesn't close at all?
-
-                    Q.handle(options.onWebrtcControlsCreated, this, [stream]);
-
-                    this.Q.beforeRemove.set(function () {
-                        Q.handle(options.onEnd, this, [stream]);
-                    }, this);
-
-                    // this is duplicate to above approach
-                    Q.Streams.Stream.onMessage(stream.fields.publisherId, stream.fields.name, 'Streams/leave').set(function(stream, message) {
-                        if (message.byUserId !== userId) {
-                            return;
-                        }
-
-                        Q.handle(options.onEnd, this, [stream]);
-                    }, options.tool);
-                },
-                onWebRTCRoomCreated: function () {
-                    Q.handle(options.onStart, this, [stream]);
-                },
-                onWebRTCRoomEnded: function () {
-                    Q.handle(options.onEnd, this, [stream]);
-                }
-            });
-        }
-
-        if (!options.useExisting) {
-            return _createStream();
-        }
 
         Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true} , function (err) {
             if (err) {
@@ -5571,14 +5942,84 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             // get first property from relatedStreams (actually it should be only one)
             var stream = Q.first(this.relatedStreams);
 
+            function _createRoom(publisherId, streamName) {
+                // connect to this particular conversation
+                Q.Streams.WebRTC().start({
+                    element: options.element,
+                    roomId: streamName,
+                    roomPublisherId: publisherId,
+                    mode: options.mode,
+                    onWebrtcControlsCreated: function () {
+                        //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
+                        // may be tool doesn't close at all?
+
+                        Q.handle(options.onWebrtcControlsCreated, this, [stream]);
+
+                        this.Q.beforeRemove.set(function () {
+                            Q.handle(options.onEnd, this, [stream]);
+                        }, this);
+
+                        // this is duplicate to above approach
+                        Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/leave').set(function(stream, message) {
+                            if (message.byUserId !== userId) {
+                                return;
+                            }
+
+                            Q.handle(options.onEnd, this, [stream]);
+                        }, options.tool);
+                    },
+                    onWebRTCRoomCreated: function () {
+                        Q.handle(options.onStart, this, [stream]);
+                    },
+                    onWebRTCRoomEnded: function () {
+                        Q.handle(options.onEnd, this, [stream]);
+                    }
+                });
+            };
+
             if (stream && !stream.getAttribute('endTime')) {
                 if (!stream.testWriteLevel('join')) {
-                    return Q.alert(_texts.webrtc.notAllowedToJoinCall);
+                    return Q.Text.get("Streams/content", function (err, text) {
+                        var msg = Q.firstErrorMessage(err);
+                        if (msg) {
+                            return console.warn(msg);
+                        }
+
+                        Q.alert(text.webrtc.notAllowedToJoinCall);
+                    });
                 }
 
-                _createRoom(stream);
+                _createRoom(stream.fields.publisherId, stream.fields.name);
             } else {
-                _createStream();
+                Q.req("Streams/webrtc", ["room"], function (err, response) {
+                    var msg = Q.firstErrorMessage(err, response && response.errors);
+                    if (msg) {
+                        return Q.alert(msg);
+                    }
+
+                    Q.Streams.get(userId, response.slots.room.roomId, function (err) {
+                        var fem = Q.firstErrorMessage(err);
+                        if (fem) {
+                            return console.warn("Streams.webrtc.start.create: " + fem);
+                        }
+
+                        var stream = this;
+                        stream.relateTo('Streams/webrtc', options.publisherId, options.streamName, function (err) {
+                            var fem = Q.firstErrorMessage(err);
+                            if (fem) {
+                                return console.warn("Streams.webrtc.start.relate: " + fem);
+                            }
+
+                            _createRoom(stream.fields.publisherId, stream.fields.name);
+                        });
+                    });
+                }, {
+                    method: 'post',
+                    fields: {
+                        publisherId: userId,
+                        adapter: options.mode
+                    }
+                });
             }
         });
     }

@@ -196,7 +196,6 @@
 					}
 
 					var initMoving = function(evt){
-						console.log('initMoving');
 						if(tool.state.ignoreOnElements.length != 0) {
 							var ignoreEls = tool.state.ignoreOnElements;
 							for(var e in ignoreEls) {
@@ -810,10 +809,7 @@
 						if(tool.state.move) {
 
 							Q.addEventListener(activateOnElement, Q.Pointer.move, function (e) {
-								console.log('event: MOVE');
 								if(!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10){
-                                    console.log('event: MOVE: before initMoving');
-
                                     _dragElement.initMoving(e);
 								}
 							});

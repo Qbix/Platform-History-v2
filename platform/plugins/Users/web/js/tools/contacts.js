@@ -83,7 +83,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 
 					if (false === Q.handle(state.onClick, tool, [selectedLabel, labelTitle])) {
 						return;
-					};
+					}
 
 					$this.addClass('Q_selected').siblings().removeClass('Q_selected');
 				});
@@ -99,6 +99,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 						addLabel: selectedLabel,
 						followup: state.followup,
 						alwaysSend: true,
+						userChooser: true,
 						title: tool.text.inviteRole.interpolate({role: labelTitle})
 					}, function (err, info) {
 						var msg = Q.firstErrorMessage(err);
