@@ -481,19 +481,26 @@ class Assets_Credits extends Base_Assets_Credits
 		return $assets_credits;
 	}
 	/**
-	 * Convert reason to readable text.
-	 * @method convertToCredits
+	 * Convert amount from one currency to another
+	 * @method convert
 	 * @static
-	 * @param {string} $key json key to search in Assets/content/credits.
-	 * @param {array} $more additional data need to interpolate json with.
+	 * @param {number} $amount
+	 * @param {string} $fromCurrency
+	 * @param {string} $toCurrency
 	 * @return {string}
 	 */
-	static function convertToCredits($amount, $currency)
+	static function convert($amount, $fromCurrency, $toCurrency)
 	{
-		$rate = Q_Config::expect('Assets', 'credits', 'exchange', $currency);
-		$credits = ceil($amount * $rate);
+		$amount = (float)$amount;
+		if ($fromCurrency == "credits") {
+			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
+			$res = ceil($amount / $rate);
+		} else {
+			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
+			$res = ceil($amount * $rate);
+		}
 
-		return $credits;
+		return $res;
 	}
 	/**
 	 * Convert reason to readable text.

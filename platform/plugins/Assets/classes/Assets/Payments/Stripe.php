@@ -72,7 +72,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			"metadata" => !empty($options['metadata']) ? $options['metadata'] : null
 		);
 		Q::take($options, array('description', 'metadata'), $params);
-		\Stripe\Charge::create($params); // can throw some exception
+		$res = \Stripe\Charge::create($params); // can throw some exception
 		return $customer->customerId;
 	}
 	/**

@@ -15,7 +15,6 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 		return true;
 	}
 
-
 	// check if stream payment required
 	$amount = Q::ifset($event->getAttribute("payment"), "amount", null);
 	$currency = Q::ifset($event->getAttribute("payment"), "currency", null);
@@ -34,6 +33,6 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 		return true;
 	}
 
-	$needCredits = Assets_Credits::convertToCredits($amount, $currency);
+	$needCredits = Assets_Credits::convert($amount, $currency, "credits");
 	Assets_Credits::spend($needCredits, Assets::JOINED_PAID_STREAM, $stream->publisherId, compact("toPublisherId", "toStreamName", "fromPublisherId", "fromStreamName"));
 }
