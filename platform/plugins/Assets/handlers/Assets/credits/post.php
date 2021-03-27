@@ -7,7 +7,7 @@ function Assets_credits_post($params = array(), $securedParams = array())
 	$loggedUserId = Q::ifset($securedParams, "loggedUserId", Users::loggedInUser(true)->id);
 	$user = Users::fetch($loggedUserId);
 	$amount = (float)$req['amount'];
-	$credits = (int)Assets_Credits::amount();
+	$credits = (int)Assets_Credits::amount($loggedUserId);
 	$currency = $req['currency'];
 	$needCredits = $currency == "credits" ? $amount : (int)Assets_Credits::convert($amount, $currency, "credits");
 
