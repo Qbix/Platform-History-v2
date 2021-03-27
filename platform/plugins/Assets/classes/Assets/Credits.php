@@ -76,7 +76,7 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams::fetchOne($asUserId, $userId, $streamName);
+		$stream = Streams::fetchOne($asUserId, $userId, $streamName, "*", array("refetch" => true));
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
 				'name' => 'Assets/user/credits',
