@@ -492,15 +492,17 @@ class Assets_Credits extends Base_Assets_Credits
 	static function convert($amount, $fromCurrency, $toCurrency)
 	{
 		$amount = (float)$amount;
-		if ($fromCurrency == "credits") {
+		if ($fromCurrency == $toCurrency) {
+			return $amount;
+		} elseif ($fromCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
-			$res = ceil($amount / $rate);
+			$amount = ceil($amount / $rate);
 		} else {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
-			$res = ceil($amount * $rate);
+			$amount = ceil($amount * $rate);
 		}
 
-		return $res;
+		return $amount;
 	}
 	/**
 	 * Convert reason to readable text.
@@ -565,6 +567,8 @@ class Assets_Credits extends Base_Assets_Credits
 			'fromStreamName' => $fromStreamName,
 			'reason' => 'JoinedPaidStream'
 		))
+		->ignoreCache()
+		->options(array("dontCache" => true))
 		->orderBy('insertedTime', false)
 		->limit(1)
 		->fetchDbRow();
@@ -579,6 +583,8 @@ class Assets_Credits extends Base_Assets_Credits
 				'fromStreamName' => $fromStreamName,
 				'reason' => 'LeftPaidStream'
 			))
+			->ignoreCache()
+			->options(array("dontCache" => true))
 			->orderBy('insertedTime', false)
 			->limit(1)
 			->fetchDbRow();
