@@ -20,7 +20,7 @@ function Assets_credits_post($params = array(), $securedParams = array())
 			Assets::charge("stripe", Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, compact('user'));
 			// if charge success, turn off forcePayment and try again
 			$params["forcePayment"] = false;
-			return Q::event("Assets/credits/post", $params);
+			return Q::event("Assets/credits/post", $params, $securedParams);
 		}
 
 		Q_response::setSlot('status', false);
