@@ -9668,9 +9668,15 @@ function _activateTools(toolElement, options, shared) {
 		if (shared.canceled) {
 			return;
 		}
-		var key;
 		if (pendingParentEvent) {
-			key = pendingParentEvent.add(_reallyConstruct, toolId + ' ' + toolName);
+			var eventKey = toolId + ' ' + toolName;
+			var eventKeyPrefix = 0;
+			// in order to avoid replace handlers in pendingParentEvent we need to avoid adding handlers with same keys
+			// So while key exists in pendingParentEvent.keys we update new id with counter.
+			while(pendingParentEvent.keys.includes(eventKey)) {
+				eventKey += '_' + eventKeyPrefix++;
+			}
+			pendingParentEvent.add(_reallyConstruct, eventKey);
 		} else {
 			_reallyConstruct();
 		}
