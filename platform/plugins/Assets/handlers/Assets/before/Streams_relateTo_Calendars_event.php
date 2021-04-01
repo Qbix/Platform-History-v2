@@ -18,7 +18,9 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	// check if stream payment required
 	$amount = Q::ifset($event->getAttribute("payment"), "amount", null);
 	$currency = Q::ifset($event->getAttribute("payment"), "currency", null);
-	if (!$amount || !$currency) {
+	$isPublisher = $stream->publisherId == $event->publisherId;
+	$isAdmin = Calendars_Event::isAdmin($stream->publisherId, $event->getAttribute("communityId"));
+	if ($isPublisher || $isAdmin || !$amount || !$currency) {
 		return true;
 	}
 
