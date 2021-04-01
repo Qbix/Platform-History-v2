@@ -111,6 +111,7 @@ Q.Tool.define("Assets/payment", function (options) {
 				$te.html(html);
 
 				var _pay = function () {
+					state.userId = Q.Users.loggedInUserId();
 					Q.Assets.Payments[payments.toLowerCase()](state, function (err) {
 						if (err) {
 							if (err.code !== 20) {
