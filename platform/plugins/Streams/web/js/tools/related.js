@@ -137,7 +137,18 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	toolName: function (streamType) {
 		return streamType+'/preview';
 	},
-	beforeRenderPreview: new Q.Event(),
+	beforeRenderPreview: new Q.Event(function (tff) {
+		var alreadyExists = false;
+		$(".Streams_preview_tool", this.element).each(function () {
+			var publisherId = this.getAttribute("data-publisherId");
+			var streamName = this.getAttribute("data-streamName");
+			var streamType = this.getAttribute("data-streamType");
+			if (publisherId === tff.publisherId && streamName === tff.name && streamType === tff.type) {
+				alreadyExists = true;
+			}
+		});
+		return !alreadyExists;
+	}, "Streams/related"),
 	onUpdate: new Q.Event(
 	function _Streams_related_onUpdate(result, entering, exiting, updating) {
 		function addComposer(streamType, params, creatable, oldElement) {
@@ -148,11 +159,22 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 			params.streamType = streamType;
 
+			var tff = {
+				publisherId: params.publisherId || tool.state.publisherId,
+				name: "",
+				type: streamType,
+				previewOptions: Q.extend(state.previewOptions, { creatable: params }),
+				specificOptions: state.specificOptions
+			};
+
 			var element = tool.elementForStream(
-				params.publisherId || tool.state.publisherId, "", streamType, null,
-				Q.extend(state.previewOptions, { creatable: params }),
-				state.specificOptions
+				tff.publisherId, tff.name, tff.type, null, tff.previewOptions, tff.specificOptions
 			).addClass('Streams_related_composer Q_contextual_inactive');
+
+			if (Q.handle(state.beforeRenderPreview, tool, [tff, element]) === false) {
+				return;
+			}
+
 			if (tool.tabs) {
 				element.addClass('Q_tabs_tab');
 			}
@@ -198,10 +220,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var ascending = Q.getObject("ascending", state.relatedOptions) || false;
 
 		if (result.stream.testWriteLevel('relate')) {
-			if (!state.composersCreated) {
-				Q.each(state.creatable, addComposer);
-				state.composersCreated = true;
-			}
+			Q.each(state.creatable, addComposer);
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
 				if (state.realtime) {
 					alert("Streams/related: can't mix realtime and sortable options yet");
@@ -620,6 +639,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			toolOptions,
 			null, this.prefix
 		);
+		// we need these attributes to check if this preview tool already exists to avoid doublicated previews
+		e.setAttribute('data-publisherId', publisherId);
+		e.setAttribute('data-streamName', streamName);
+		e.setAttribute('data-streamType', streamType);
  		return e;
 	},
 
