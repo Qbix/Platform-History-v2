@@ -19,12 +19,15 @@
  *   @param {Object} [options.exclude] hash of {userId: true},
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.
+ *   @param {Object} [options.resultsHeight="auto"] Height of results layer. Sometimes need to set height to make this
+ *   layer scrollable, because results go beyond screen.
  *   @param {string} [options.position=bottom] Vertical position of results related to input. Can be 'top', 'bottom'
  */
 Q.Tool.define("Streams/userChooser", function(o) {
     Q.Streams.cache.userChooser = Q.Streams.cache.userChooser || {};
 
 	var tool = this;
+	var state = this.state;
 
 	tool.onChoose = o.onChoose;
 	tool.delay = o.delay;
@@ -36,24 +39,26 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	if (!offset) {
 		return; // some error
 	}
-	var cached = {};
 	var focusedResults = false;
-	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />')
-		.css({
-			display: 'none',
-			position: 'absolute',
-			left: offset.left + 'px',
-			top: offset.top + tool.$input.outerHeight() + 'px',
-			width: tool.$input.outerWidth(),
-			'z-index': tool.getMaxZIndex() + 1,
-			background: 'white',
-			border: 'solid 1px #99a',
-			'tab-index': 9000
-		}).on(Q.Pointer.start.eventName + ' focusin', function () {
-			focusedResults = true;
-		}).appendTo('body');
+	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />').css({
+		display: 'none',
+		position: 'absolute',
+		left: offset.left + 'px',
+		top: offset.top + tool.$input.outerHeight() + 'px',
+		width: tool.$input.outerWidth(),
+		'z-index': tool.getMaxZIndex() + 1,
+		background: 'white',
+		border: 'solid 1px #99a',
+		height: state.resultsHeight,
+		'tab-index': 9000
+	}).on(Q.Pointer.start.eventName + ' focusin', function () {
+		focusedResults = true;
+	}).appendTo('body');
 
-	var t = null;
+	tool.Q.onStateChanged('resultsHeight').set(function () {
+		tool.$results.css("height", state.resultsHeight);
+	}, tool);
+
 	tool.$input.on('blur', function (event) {
 		setTimeout(function () {
 			if (!focusedResults) {
@@ -151,7 +156,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					continue;
 				}
 
-				if ((tool.state.communitiesOnly && !Q.Users.isCommunityId(k)) || (!tool.state.communitiesOnly && Q.Users.isCommunityId(k))) {
+				if ((state.communitiesOnly && !Q.Users.isCommunityId(k)) || (!state.communitiesOnly && Q.Users.isCommunityId(k))) {
 					continue;
 				}
 
@@ -186,7 +191,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 				var position = tool.$input.offset().top + tool.$input.outerHeight();
 				var height = 300 - tool.$input.outerHeight();
-				if (tool.state.position === 'top') {
+				if (state.position === 'top') {
 					tool.$results.css({
 						'max-height': height,
 						'overflow-y': 'auto',
@@ -212,6 +217,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	onChoose: new Q.Event(),
 	delay: 500,
 	communitiesOnly: false,
+	resultsHeight: "auto",
 	exclude: {}
 },
 
