@@ -1010,7 +1010,7 @@ Streams.Dialogs = {
 					// invite user from registered users
 					var userChooserTool = Q.Tool.from($(".Streams_userChooser_tool", dialog), "Streams/userChooser");
 					if (userChooserTool) {
-						userChooserTool.state.resultsHeight = dialog.height()/2;
+						userChooserTool.state.resultsHeight = 180;
 						userChooserTool.stateChanged("resultsHeight");
 						userChooserTool.state.onChoose.set(function (userId) {
 							Q.handle(callback, Streams, [{
