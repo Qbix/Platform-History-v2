@@ -265,8 +265,21 @@
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
+                tool.WebRTCLib.event.on('videoTrackLoaded', function (e) {
+                    if(tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.scenesInterface.sourcesInterface.syncList();
+                });
+                tool.WebRTCLib.event.on('audioTrackLoaded', function (e) {
+                	if(tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.scenesInterface.sourcesInterface.syncList();
+                });
+                tool.WebRTCLib.event.on('participantConnected', function (e) {
+                	if(tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.scenesInterface.sourcesInterface.syncList();
+                });
+                tool.WebRTCLib.event.on('participantDisconnected', function (e) {
+                	if(tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.scenesInterface.sourcesInterface.syncList();
+                });
 
 				tool.WebRTCLib.event.on('liveStreamingStarted', function (e) {
+					console.log('liveStreamingStarted', e)
 					if(e.platform && e.platform.content == 'facebook') {
                         if (e.participant.isLocal) {
                             if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
@@ -455,6 +468,7 @@
 			 * @method bindRTCEvents
 			 */
 			createControlBar: function() {
+				console.log('createControlBar');
 				var tool = this;
 				var controlBar = document.createElement('DIV');
 				controlBar.className = 'Streams_webrtc_conference-control';
@@ -943,6 +957,7 @@
 				if(tool.controlBar == null) return;
 				var localParticipant = tool.WebRTCLib.localParticipant();
 				var conferenceControl = tool.WebRTCLib.conferenceControl;
+                console.log('updateControlBar: enabledAudioTracks', tool.WebRTCLib.roomParticipants().length)
 
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
@@ -968,11 +983,18 @@
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
+				console.log('updateControlBar: enabledAudioTracks', enabledAudioTracks)
 				if(enabledAudioTracks == 0 && tool.WebRTCLib.localParticipant().audioStream == null) {
+                    console.log('updateControlBar: enabledAudioTracks if1')
+
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(!conferenceControl.micIsEnabled()) {
+                    console.log('updateControlBar: enabledAudioTracks if2')
+
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(conferenceControl.micIsEnabled()) {
+                    console.log('updateControlBar: enabledAudioTracks if3')
+
                     tool.microphoneBtn.innerHTML = icons.microphone;
 				}
 
@@ -2386,6 +2408,7 @@
 						}
 					};
 					this.showLiveIcon = function(platform) {
+						console.log('showLiveIcon', platform)
                         if(platform == 'facebook') {
                         	let iconCon = document.createElement('DIV');
                             iconCon.className = 'Streams_webrtc_fblive_icon';
@@ -3217,6 +3240,7 @@
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
+										console.log('response.secure_stream_url', response.secure_stream_url)
 										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url, 'facebook');
 										_liveInfo = response;
 										if (callback != null) callback(response);
@@ -3381,9 +3405,12 @@
                 tool.advancedLiveStreaming = (function() {
                 	var _dialogueEl = null;
                 	var _previewEl = null;
+                    var _resizingElement = null;
+                    var _resizingElementTool = null;
+                    var _streamingCanvas = null;
                 	var _scenesEl = null;
                 	var _sourcesEl = null;
-                	var _audioEl = null;
+                	var _optionsEl = null;
 
                     createPopup();
 
@@ -3418,6 +3445,9 @@
 
                         var sourcesInterface = (function () {
                             var _list = [];
+                            window.getList = function() {
+                            	return _list;
+							}
                             var _selectedSource = null;
 
                             var SourcesListItem = function (name) {
@@ -3426,7 +3456,7 @@
                                 this.title = name != null ? name : null;
                                 this.itemEl = null;
                                 this.visibilityEl = null;
-                                this.sourceInstance = null;
+                                this._sourceInstance = null;
                                 this.remove = function () {
                                     var currentitem = this;
                                     if(this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
@@ -3438,21 +3468,43 @@
                                     }
                                 };
                                 this.isActive = function() {
+                                	console.log('isActive', this)
                                     var currentitem = this;
                                     var sources = _activeScene.sceneInstance.sources;
+                                    console.log('isActive active', _activeScene.sceneInstance.sources)
+
                                     for(let s in sources) {
-                                        if(sources[s] == currentitem.sourceInstance) return true;
+                                        console.log('isActive for', sources[s], currentitem._sourceInstance)
+
+                                        if(sources[s] == currentitem._sourceInstance) {
+                                            console.log('isActive active')
+
+                                            return true;
+                                        }
                                     }
+                                    console.log('isActive inactive')
 
                                     return false;
                                 };
                                 this.show = function() {
-                                    this.sourceInstance.active = true;
-                                    this.visibilityEl.innerHTML = _icons.visible;
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.showSource(this.sourceInstance);
+
+                                    //this.sourceInstance.active = true;
+                                    this.switchVisibilityIcon(true);
+                                    syncList();
                                 };
                                 this.hide = function() {
-                                    this.sourceInstance.active = false;
-                                    this.visibilityEl.innerHTML = _icons.hidden;
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideSource(this.sourceInstance);
+                                    //this.sourceInstance.active = false;
+                                    this.switchVisibilityIcon(false);
+                                    syncList();
+                                };
+                                this.switchVisibilityIcon = function (visibility) {
+									if(visibility === true) {
+                                        this.visibilityEl.innerHTML = _icons.visible;
+									} else if (visibility === false) {
+                                        this.visibilityEl.innerHTML = _icons.hidden;
+									}
                                 };
                                 this.toggle = function() {
                                     if(sourceInstance.sourceInstance.active == true) {
@@ -3477,15 +3529,46 @@
                                 itemEl.appendChild(itemElControl);
                                 this.visibilityEl = itemElControlVisibility;
                                 this.itemEl = itemEl;
+                                this.titleEl = itemElText;
                                 this.itemEl.addEventListener('click', function () {
+                                	console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
+                                	if(sourceInstance.sourceInstance.sourceType == 'group' && sourceInstance.sourceInstance.groupType == 'webrtc') {
+                                        optionsColumn.canvasLayoutOptions.show();
+									} else if(sourceInstance.sourceInstance.sourceType == 'image') {
+                                        optionsColumn.imageSourceOptions.show(sourceInstance);
+                                    } else if(sourceInstance.sourceInstance.sourceType == 'video') {
+                                        optionsColumn.videoSourceOptions.show(sourceInstance);
+                                    } else {
+                                        optionsColumn.hideActiveView();
+									}
                                     selectSource(sourceInstance);
                                 })
                                 itemElControlVisibility.addEventListener('click', this.toggle)
                             }
 
                             Object.defineProperties(SourcesListItem.prototype, {
+                                'sourceInstance': {
+                                    'set': function(instance) {
+                                        console.log('sourceInstance set', instance)
+
+                                        this._sourceInstance = instance;
+                                    	//if(instance == null) return;
+                                    	var sourceItem = this;
+                                        sourceItem.title = instance.name;
+                                        instance.on('nameChanged', function (newName) {
+                                            console.log('nameChanged set', instance)
+
+                                            sourceItem.title = newName;
+                                        })
+									},
+                                    'get': function() {
+                                    	return this._sourceInstance;
+									}
+                                }
+                            });
+                            Object.defineProperties(SourcesListItem.prototype, {
                                 'title': {
-                                    'set': function(val) { if(this.itemEl) this.itemEl.innerHTML = val; }
+                                    'set': function(val) { if(this.titleEl) this.titleEl.innerHTML = val; }
                                 }
                             });
 
@@ -3503,21 +3586,19 @@
                             function addItem(item) {
                                 if(item == null) return;
                                 console.log('addItem', item)
+                                console.log('addItem itemEl', item.itemEl)
                                 _list.push(item)
                                 console.log('addItem _sourcesEl', _sourcesEl)
 
-                                _sourcesEl.appendChild(item.itemEl);
+                                _sourcesEl.insertBefore(item.itemEl, _sourcesEl.firstChild);
                             }
 
                             function addImageSource(e) {
                             	if(typeof e == 'string') {
                                     var img = new Image();
                                     img.src = e;
-                                    var listItem = new SourcesListItem(e);
-                                    listItem.image = img;
-                                    addItem(listItem);
                                     img.onload = function () {
-                                        listItem.sourceInstance = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
                                             sourceType: 'image',
                                             title: e,
                                             imageInstance: img,
@@ -3530,12 +3611,8 @@
                                     function loadImage(fileReader) {
                                         var img = new Image();
                                         img.src = fileReader.result;
-
-                                        var listItem = new SourcesListItem(files[0].name);
-                                        listItem.image = img;
-                                        addItem(listItem);
                                         img.onload = function () {
-                                            listItem.sourceInstance = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                            tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
                                                 sourceType: 'image',
                                                 title: files[0].name,
                                                 imageInstance: img,
@@ -3558,43 +3635,51 @@
                                     video.src = e;
                                     video.muted = true;
                                     video.loop = true;
-                                    var listItem = new SourcesListItem(e);
-                                    listItem.video = video;
-                                    addItem(listItem);
-                                    listItem.sourceInstance = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
                                         sourceType: 'video',
                                         title: e,
                                         videoInstance: video,
                                     });
-                                    console.log('addVideoSource  listItem.sourceInstance',  listItem.sourceInstance);
                                     //https://www.w3schools.com/html/mov_bbb.mp4
                                 } else {
-                                    var tgt = evt.target || window.event.srcElement,
+                                    var tgt = e.target || window.event.srcElement,
                                         files = tgt.files;
 
-                                    function loadImage(fileReader) {
-                                        var img = new Image();
-                                        img.src = fileReader.result;
+                                    if (FileReader && files && files.length) {
+                                        var video = document.createElement('VIDEO');
+                                        video.muted = true;
+                                        video.loop = true;
+                                        video.addEventListener('loadedmetadata', event => {
+                                            console.log(video.videoWidth, video.videoHeight)
+                                        })
 
-                                        var listItem = new SourcesListItem(files[0]);
-										//https://www.w3schools.com/html/mov_bbb.mp4ame);
-										listItem.image = img;
-                                        addItem(listItem);
-                                        img.onload = function () {
-                                            listItem.sourceInstance = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+
+                                        let file = files[0], mime = file.type;
+                                        let reader = new  FileReader();
+                                        reader.readAsArrayBuffer(file);
+                                        reader.onload = function(e) {
+                                            // The file reader gives us an ArrayBuffer:
+                                            let buffer = e.target.result;
+
+                                            // We have to convert the buffer to a blob:
+                                            let videoBlob = new Blob([new Uint8Array(buffer)], { type: mime });
+
+                                            // The blob gives us a URL to the video file:
+                                            let url = window.URL.createObjectURL(videoBlob);
+
+                                            video.src = url;
+
+                                            tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
                                                 sourceType: 'video',
                                                 title: files[0].name,
-                                                imageInstance: img,
+                                                videoInstance: video,
                                             });
-                                        };
+                                        }
 
-                                    }
 
-                                    if (FileReader && files && files.length) {
-                                        var fr = new FileReader();
-                                        fr.onload = () => loadImage(fr);
-                                        fr.readAsDataURL(files[0]);
-                                    }
+
+									}
+
                                 }
                             }
 
@@ -3614,17 +3699,102 @@
 										(_list[i].itemEl).classList.remove('Streams_webrtc_popup-sources-item-active');
                                     }
                                 }
+
+                                console.log('selectSource _selectedSource', _selectedSource)
+
+                                var left = 0, top = 0;
+                                if(_streamingCanvas != null) {
+                                    left = _streamingCanvas.offsetLeft;
+                                    top = _streamingCanvas.offsetTop;
+                                }
+                                var canvasSize = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                                var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
+                                var realcanvasSize = _streamingCanvas.getBoundingClientRect();
+                                var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
+                                var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
+                                console.log('selectSource timesbigger', prmtr1, prmtr2, timesBigger)
+                                if(_resizingElementTool != null) {
+                                	_resizingElementTool.state.onMoving.removeAllHandlers();
+                                	_resizingElementTool.state.onResizing.removeAllHandlers();
+                                }
+                                if(_selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
+                                    var webrtcLayoutRect = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                                    console.log('selectSource if1')
+
+
+                                    _resizingElement.style.width = webrtcLayoutRect.width / timesBigger + 'px';
+                                    _resizingElement.style.height = webrtcLayoutRect.height / timesBigger+ 'px';
+                                    _resizingElement.style.top = top + webrtcLayoutRect.y / timesBigger + 'px';
+                                    _resizingElement.style.left = left + webrtcLayoutRect.x / timesBigger + 'px';
+                                    _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
+                                    _resizingElementTool.state.onMoving.set(function (x, y) {
+                                        console.log('_resizingElementTool onMoving')
+                                        let currentRect = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(currentRect.width, currentRect.height, (x - left) * timesBigger, (y - top)  * timesBigger);
+                                    });
+                                    _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
+                                    	console.log('_resizingElementTool onResizing',width, height, x, y)
+                                        let currentRect = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect()
+                                        let outWidth = width != null ? width * timesBigger : currentRect.width;
+                                        let outHeight = height != null ? height * timesBigger : currentRect.height;
+                                        let outLeft = x != null ? (x - left) * timesBigger : currentRect.x;
+                                        let outTop = y != null ? (y - top) * timesBigger : currentRect.y;
+                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(outWidth, outHeight, outLeft, outTop);
+                                    });
+                                } else if(_selectedSource.sourceInstance.sourceType == 'image' || _selectedSource.sourceInstance.sourceType == 'video') {
+                                    console.log('selectSource if2')
+
+                                    var sourceRect = _selectedSource.sourceInstance.rect;
+                                    console.log('selectSource sourceRect', sourceRect)
+                                    console.log('selectSource sourceRect 1', sourceRect.width,  sourceRect.height,  sourceRect.x,  sourceRect.y)
+
+                                    _resizingElement.style.width = sourceRect._width / timesBigger + 'px';
+                                    _resizingElement.style.height = sourceRect._height / timesBigger+ 'px';
+                                    _resizingElement.style.top = top + sourceRect._y / timesBigger + 'px';
+                                    _resizingElement.style.left = left + sourceRect._x / timesBigger + 'px';
+                                    _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
+
+
+                                    _resizingElementTool.state.onMoving.set(function (x, y) {
+                                        _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
+                                        _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
+                                    });
+
+                                    _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
+                                        if(width != null) _selectedSource.sourceInstance.rect.width = width * timesBigger;
+                                        if(height != null) _selectedSource.sourceInstance.rect.height = height * timesBigger;
+                                        if(x != null) _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
+                                        if(y != null) _selectedSource.sourceInstance.rect.y = (y - top) * timesBigger;
+                                    });
+
+								}
+
                             }
 
                             function syncList() {
                                 var sources = _activeScene.sceneInstance.sources;
-                                console.log('syncList _activeScene', _activeScene);
-                                console.log('syncList sources', sources);
-                                for (let i in _list) {
-                                    if(_list[i].isActive() == false) _list[i].remove();
+                                console.log('syncList _list', _list.length);
+                                console.log('syncList sources', sources.length);
+
+                                for (let i = _list.length - 1; i >= 0; i--) {
+                                    console.log('syncList _list', _list[i]);
+                                    if(_list[i] == null) continue;
+
+                                    if(_list[i].isActive() == false) {
+                                        console.log('syncList remove',  _list[i]);
+
+                                        _list[i].remove();
+                                        continue;
+                                    }
+                                    if(_list[i].sourceInstance.active === true) {
+                                        _list[i].switchVisibilityIcon(true);
+									} else if(_list[i].sourceInstance.active === false) {
+                                        _list[i].switchVisibilityIcon(false);
+                                    }
                                 }
 
                                 for (let s in sources) {
+                                	if(sources[s].sourceType == 'webrtcrect' || sources[s].sourceType == 'webrtctext') continue;
                                     let newSource = true;
                                     for (let i in _list) {
                                         if(sources[s] == _list[i].sourceInstance) {
@@ -3638,34 +3808,47 @@
 											].title : (sources[s].name != null ? sources[s].name : sources[s].sourceType);
                                         var listItem = new SourcesListItem(title);
                                         listItem.sourceInstance = sources[s];
+                                        console.log('syncList add',  listItem);
+                                        if(sources[s].active === true) {
+                                            listItem.switchVisibilityIcon(true);
+                                        } else if(sources[s].active === false) {
+                                            listItem.switchVisibilityIcon(false);
+                                        }
                                         addItem(listItem);
                                     }
                                 }
+
+                                sortList();
                             }
+
+                            tool.WebRTCLib.screensInterface.canvasComposer.on('sourceAdded', function (source) {
+                                syncList();
+                                setTimeout(function(){
+                                    if(source.sourceType == 'webrtc' && source.participant != null) {
+                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayName(source.participant);
+                                    }
+								}, 3000)
+
+                            })
+
+                            tool.WebRTCLib.screensInterface.canvasComposer.on('sourceRemoved', function () {
+                                syncList();
+                            })
+
+                            tool.WebRTCLib.screensInterface.canvasComposer.on('sourceMoved', function () {
+                                syncList();
+                            })
                             window.syncList = syncList;
 
                             function sortList() {
+                                console.log('sortList: sources', _activeScene.sceneInstance.sources);
                                 var sources = _activeScene.sceneInstance.sources;
+
+                                if(sources.length !== _list.length) {
+                                    return;
+                                }
                                 var sourcesElements = _sourcesEl.children;
                                 var skipElements = [];
-
-
-                                /*function sortFunc(a, b) {
-                                	console.log('sortFunc', _activeScene.sceneInstance.sources.find(function (obj, index) {
-                                		console.log('aaaaa',a.sourceInstance, obj)
-                                        if(a.sourceInstance == obj) return true;
-                                    }));
-                                	console.log('sortFunc2',_activeScene.sceneInstance.sources.find(function (obj, index) {
-                                        if(b.sourceInstance == obj) return true;
-                                    }));
-                                    return _activeScene.sceneInstance.sources.findIndex(function (obj, index) {
-										if(a.sourceInstance == obj) return true;
-                                    }) - _activeScene.sceneInstance.sources.findIndex(function (obj, index) {
-										if(b.sourceInstance == obj) return true;
-                                    });
-                                }
-
-                                _list.sort(sortFunc);*/
 
                                 var shouldSkip= function (item) {
 									for(let i in skipElements) {
@@ -3676,8 +3859,17 @@
 
 
                                 function applySort() {
+                                    console.log('applySort: start');
+                                    try {
+                                        var err = (new Error);
+                                        console.log(err.stack);
+                                    } catch (e) {
+
+                                    }
+
                                     for(let i in _list) {
-                                        console.log('applySort: array', _activeScene.sceneInstance.sources);
+                                        console.log('applySort: i ' + i);
+
                                         if(shouldSkip(_list[i])){
                                             console.log('applySort: skip');
                                             continue;
@@ -3688,11 +3880,12 @@
                                             if(_list[i].sourceInstance == _activeScene.sceneInstance.sources[s]) {
                                                 console.log('applySort: array item', i, s);
                                                 skipElements.push(_list[i]);
-                                                moveItem(i, parseInt(s));
+                                                if(s !== i) moveItem(i, parseInt(s));
                                                 break;
                                             }
                                         }
                                     }
+                                    console.log('applySort: length', skipElements.length, _list.length);
 
                                     if(skipElements.length != _list.length) return applySort();
                                 }
@@ -3750,6 +3943,23 @@
                                 }
 
                                 applySortElements();
+
+
+                                for(let i in _list) {
+                                    console.log('source level for', i)
+                                    console.log('source level parentGroup', _list[i].sourceInstance.parentGroup)
+
+                                    let level = 0;
+                                    let currentListItem = _list[i].sourceInstance.parentGroup;
+                                    while (currentListItem) {
+                                        console.log('source level for f', currentListItem,  _list[i].sourceInstance)
+
+                                        currentListItem = currentListItem.parentGroup ? currentListItem.parentGroup.parentGroup : null;
+                                        level++;
+                                    }
+                                    if(level != 0) _list[i].itemEl.style.paddingLeft = 20*level + 'px';
+                                    console.log('source level', level)
+                                }
                             }
                             window.sortList = sortList
 
@@ -3772,7 +3982,7 @@
                                 return _list;
                             }
 
-                            function moveForward() {
+                            function moveBackward() {
                             	console.log('moveForward');
                                 /*for(var i in _list) {
                                     if(_list[i] == _selectedSource) {
@@ -3787,7 +3997,7 @@
                                 return false;
                             }
 
-                            function moveBackward() {
+                            function moveForward() {
                                 console.log('moveBackward', _selectedSource);
                                /* for(var i in _list) {
                                     if(_list[i] == _selectedSource) {
@@ -3800,14 +4010,27 @@
                                 return false;
                             }
 
+                            function getSelectedSource() {
+								return _selectedSource;
+                            }
+
+                            function removeSource() {
+								if(_selectedSource != null) {
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
+                                    syncList();
+								};
+                            }
+
                             return {
                                 addItem: addItem,
                                 loadList: loadList,
                                 syncList: syncList,
                                 moveUp: moveBackward,
                                 moveDown: moveForward,
+                                removeSource: removeSource,
                                 addImageSource: addImageSource,
-                                addVideoSource: addVideoSource
+                                addVideoSource: addVideoSource,
+                                getSelectedSource: getSelectedSource
                             }
 
                         }())
@@ -3879,8 +4102,6 @@
                         }
 
                         return {
-                        	createScenesCol: createScenesCol,
-                        	createSourcesCol: createSourcesCol,
                         	sourcesInterface: sourcesInterface
 						}
 
@@ -3904,12 +4125,12 @@
                         boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
                         var boxContentText=document.createElement('DIV');
                         boxContentText.innerHTML = 'Please choose file from yout computer or enter the link.';
-                        var imageItemInput = document.createElement('INPUT');
-                        imageItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
-                        imageItemInput.type = 'file';
-                        imageItemInput.name = 'fileImageSource';
-                        imageItemInput.accept = 'image/png, image/jpeg'
-                        imageItemInput.addEventListener('change', function (e) {
+                        var videoItemInput = document.createElement('INPUT');
+                        videoItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                        videoItemInput.type = 'file';
+                        videoItemInput.name = 'fileVideoSource';
+                        videoItemInput.accept = 'video/mp4, video/*'
+                        videoItemInput.addEventListener('change', function (e) {
                             scenesInterface.sourcesInterface.addVideoSource(e);
                             hideDialog();
                         })
@@ -3923,13 +4144,13 @@
                         imageItemLinkInput.name = 'fileImageLink';
 
                         boxContent.appendChild(boxContentText);
-                        boxContent.appendChild(imageItemInput);
+                        boxContent.appendChild(videoItemInput);
                         boxContent.appendChild(boxContentText2);
                         boxContent.appendChild(imageItemLinkInput);
 
                         var close=document.createElement('div');
                         close.className = 'close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '"';
+                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';
                         close.style.backgroundSize = 'cover';
                         close.addEventListener('click', function() {
@@ -3981,7 +4202,7 @@
 
 
                         close.addEventListener('click', function () {
-
+                            hideDialog();
                         });
 
                         function closeOnWindowClick(e) {
@@ -4080,7 +4301,7 @@
 
                         var close=document.createElement('div');
                         close.className = 'close-dialog-sign';
-                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '"';
+                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';
                         close.style.backgroundSize = 'cover';
                         close.addEventListener('click', function() {
@@ -4132,7 +4353,7 @@
 
 
                         close.addEventListener('click', function () {
-
+                            hideDialog();
                         });
 
                         function closeOnWindowClick(e) {
@@ -4187,6 +4408,852 @@
                             toggle: toggle
                         }
                     }())
+
+                    var optionsColumn = (function () {
+                    	var _activeView = null;
+
+                    	function hideActiveView() {
+                            if(_activeView != null) {
+                                _activeView.hide();
+							}
+                            /*if(_activeView && _activeView.parentNode != null) {
+                                _activeView.parentNode.removeChild(_activeView);
+                            }*/
+                        }
+                        var canvasLayoutOptions = (function () {
+                            var _dialogueEl = null;
+                            var _layoutTabs = null;
+                            var _dialogueBody = null;
+                            var _layoutList = [];
+                            var _selectedLayout = null;
+                            var _layoutListEl = null;
+                            var _layoutParamsEl = null;
+
+                            function LayoutListItem(name) {
+                                var listInstance = this;
+                                this.active = true;
+                                this.title = name != null ? name : null;
+                                this.itemEl = null;
+                                this.handler = function () {
+									
+                                }
+                                this.isActive = function() {
+
+                                };
+                                this.turnOn = function() {
+
+                                };
+                                this.turnOff = function() {
+
+                                };
+
+                                var itemEl = document.createElement('DIV');
+                                itemEl.className = 'Streams_webrtc_canvas-popup-list-item';
+                                var itemElText = document.createElement('DIV');
+                                itemElText.innerHTML = name ? name : '';
+                                itemElText.className = 'Streams_webrtc_canvas-popup-list-text';
+                                itemEl.appendChild(itemElText);
+                                this.itemEl = itemEl;
+                                this.itemEl.addEventListener('click', function () {
+                                    selectLayout(listInstance)
+                                })
+                            }
+
+                            function selectLayout(layoutItem) {
+                            	console.log('selectLayout', layoutItem)
+                                if(layoutItem.itemEl && !layoutItem.itemEl.classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
+                                	(layoutItem.itemEl).classList.add('Streams_webrtc_canvas-popup-list-item-active');
+                                }
+
+                                _selectedLayout = layoutItem;
+                                for(let i in _layoutList) {
+                                    console.log('selectLayout for', _layoutList[i], _selectedLayout)
+                                    if(_layoutList[i] == _selectedLayout) continue;
+                                    console.log('selectLayout for --', layoutItem.itemEl, (layoutItem.itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active'))
+
+                                    if((_layoutList[i].itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
+                                        console.log('selectLayout remove');
+                                        (_layoutList[i].itemEl).classList.remove('Streams_webrtc_canvas-popup-list-item-active');
+                                    }
+                                }
+
+                                tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.updateWebRTCCanvasLayout(layoutItem.key);
+                            }
+
+                            function createLayoutList() {
+                                if(_layoutListEl != null) return _layoutListEl;
+                                var dialogBodyInner = document.createElement('DIV');
+                                dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-layouts-body';
+
+                                var tiledLayout = new LayoutListItem('Tiled');
+                                tiledLayout.key = 'tiledHorizontalMobile';
+                                _layoutList.push(tiledLayout);
+                                dialogBodyInner.appendChild(tiledLayout.itemEl);
+
+                                var fullScreenLayout = new LayoutListItem('Screen sharing');
+                                fullScreenLayout.key = 'screenSharing';
+                                _layoutList.push(fullScreenLayout);
+                                dialogBodyInner.appendChild(fullScreenLayout.itemEl);
+
+                                var audioOnlyLayout = new LayoutListItem('Audio only');
+                                audioOnlyLayout.key = 'audioOnly';
+                                _layoutList.push(audioOnlyLayout);
+                                dialogBodyInner.appendChild(audioOnlyLayout.itemEl);
+
+                                var audioScreenLayout = new LayoutListItem('Audio only + screen sharing');
+                                audioScreenLayout.key = 'audioScreenSharing';
+                                _layoutList.push(audioScreenLayout);
+                                dialogBodyInner.appendChild(audioScreenLayout.itemEl);
+
+                                _layoutListEl = dialogBodyInner;
+
+                                return dialogBodyInner;
+							}
+
+                            function createParamsList() {
+                            	if(_layoutParamsEl != null) return _layoutParamsEl;
+                                var dialogBodyInner = document.createElement('DIV');
+                                dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+
+                                var showNameCon = document.createElement('DIV');
+                                var showName = document.createElement('INPUT');
+                                showName.type = 'checkbox';
+                                showName.id = 'showNames';
+                                showName.name = 'showNames';
+                                showName.checked = tool.WebRTCLib.getOptions().liveStreaming.showLabelWithNames;
+                                var showNameLabel = document.createElement('Label');
+                                showNameLabel.appendChild(showName);
+                                showNameLabel.appendChild(document.createTextNode("Show participants' name"));
+                                showNameCon.appendChild(showNameLabel);
+
+                                var showBordersCon = document.createElement('DIV');
+                                var showBorders = document.createElement('INPUT');
+                                showBorders.type = 'checkbox';
+                                showBorders.id = 'showBorders';
+                                showBorders.name = 'showBorders';
+                                showBorders.checked = tool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders;
+                                var showBordersLabel = document.createElement('Label');
+                                showBordersLabel.appendChild(showBorders);
+                                showBordersLabel.appendChild(document.createTextNode("Show layout borders"));
+                                showBordersCon.appendChild(showBordersLabel);
+
+                                /*var audioOnlyCon = document.createElement('DIV');
+                                var audioOnly = document.createElement('INPUT');
+                                audioOnly.type = 'checkbox';
+                                audioOnly.id = 'audioOnly';
+                                audioOnly.name = 'audioOnly';
+                                audioOnly.checked = tool.WebRTCLib.getOptions().liveStreaming.audioOnlyLayout;
+                                var audioOnlyLabel = document.createElement('Label');
+                                audioOnlyLabel.appendChild(audioOnly);
+                                audioOnlyLabel.appendChild(document.createTextNode("Audio-only layout"));
+                                audioOnlyCon.appendChild(audioOnlyLabel);*/
+                                
+                                var webrtcLayoutRect = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
+
+                                //size
+                                var sizeAndPositionCon = document.createElement('DIV');
+                                sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+
+                                var sizeCon = document.createElement('DIV');
+                                sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                                sizeAndPositionCon.appendChild(sizeCon);
+
+                                var sizeWidthCon = document.createElement('DIV');
+                                sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                                sizeCon.appendChild(sizeWidthCon);
+                                var widthText = document.createElement('SPAN');
+                                widthText.innerHTML = 'Width: ';
+                                sizeWidthCon.appendChild(widthText);
+                                var width = document.createElement('INPUT');
+                                width.type = 'text';
+                                width.value = webrtcLayoutRect.width;
+                                sizeWidthCon.appendChild(width);
+
+                                var sizeHeightCon = document.createElement('DIV');
+                                sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                                sizeCon.appendChild(sizeHeightCon);
+                                var heightText = document.createElement('SPAN');
+                                heightText.innerHTML = 'Height: ';
+                                sizeHeightCon.appendChild(heightText);
+                                var height = document.createElement('INPUT');
+                                height.type = 'text';
+                                height.value = webrtcLayoutRect.height;
+                                sizeHeightCon.appendChild(height);
+
+
+                                //position
+                                var positionCon = document.createElement('DIV');
+                                positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                                sizeAndPositionCon.appendChild(positionCon);
+
+                                var topPositionCon = document.createElement('DIV');
+                                topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                                positionCon.appendChild(topPositionCon);
+                                var topText = document.createElement('SPAN');
+                                topText.innerHTML = 'Top: ';
+                                topPositionCon.appendChild(topText);
+                                var topPos = document.createElement('INPUT');
+                                topPos.type = 'text';
+                                topPos.value = webrtcLayoutRect.y;
+                                topPositionCon.appendChild(topPos);
+
+                                var leftPositionCon = document.createElement('DIV');
+                                leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                                positionCon.appendChild(leftPositionCon);
+                                var leftText = document.createElement('SPAN');
+                                leftText.innerHTML = 'Left: ';
+                                leftPositionCon.appendChild(leftText);
+                                var leftPos = document.createElement('INPUT');
+                                leftPos.type = 'text';
+                                leftPos.value = webrtcLayoutRect.x;
+                                leftPositionCon.appendChild(leftPos);
+
+                                var audioBgCon = document.createElement('DIV');
+                                audioBgCon.className = 'Streams_webrtc_popup-options-params-position-audio-bg'
+                                var audioBg = document.createElement('INPUT');
+                                audioBg.type = 'color';
+                                audioBg.id = 'audioBgColor';
+                                audioBg.name = 'audioBgColor';
+                                audioBg.value = tool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor;
+                                var removeBg = document.createElement('DIV');
+                                removeBg.className = 'Streams_webrtc_popup-options-params-position-audio-res'
+                                removeBg.innerHTML = '&#10060;'
+                                audioBgCon.appendChild(document.createTextNode("Layout background color: "));
+                                audioBgCon.appendChild(audioBg);
+                                audioBgCon.appendChild(removeBg);
+
+                                dialogBodyInner.appendChild(showNameCon);
+                                dialogBodyInner.appendChild(showBordersCon);
+                                //dialogBodyInner.appendChild(audioOnlyCon);
+                                dialogBodyInner.appendChild(sizeAndPositionCon);
+                                dialogBodyInner.appendChild(audioBgCon);
+
+                                _layoutParamsEl = dialogBodyInner;
+
+                                showNameLabel.addEventListener('click', function (e) {
+                                    tool.WebRTCLib.getOptions().liveStreaming.showLabelWithNames = showName.checked;
+                                })
+
+                                showBorders.addEventListener('change', function () {
+                                    tool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders = showBorders.checked;
+                                })
+
+                                /*audioOnly.addEventListener('change', function () {
+                                    tool.WebRTCLib.getOptions().liveStreaming.audioOnlyLayout = audioOnly.checked;
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.updateWebRTCCanvasLayout();
+                                })*/
+
+                                audioBg.addEventListener('change', function () {
+                                    tool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor = audioBg.value;
+                                })
+
+                                removeBg.addEventListener('click', function () {
+                                    tool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor = 'rgba(0, 0, 0, 0)';
+                                })
+
+								function updateWebrtcRect (e) {
+                                    let layoutWidth = width.value;
+                                    let layoutHeight = height.value;
+                                    let x = leftPos.value;
+                                    let y = topPos.value;
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
+                                }
+                                width.addEventListener('blur', updateWebrtcRect)
+                                height.addEventListener('blur', updateWebrtcRect)
+                                topPos.addEventListener('blur', updateWebrtcRect)
+                                leftPos.addEventListener('blur', updateWebrtcRect)
+
+                                return dialogBodyInner;
+							}
+
+							function showLayoutList() {
+                                _dialogueBody.innerHTML = '';
+                                _dialogueBody.appendChild(createLayoutList());
+                            }
+
+							function showLayoutParams() {
+                                _dialogueBody.innerHTML = '';
+                                _dialogueBody.appendChild(createParamsList());
+                            }
+
+                            function showDialog() {
+                            	console.log('showDialog', this, _activeView)
+                                hideActiveView();
+                                _optionsEl.appendChild(_dialogueEl);
+                                _activeView = this;
+                            }
+
+                            function hideDialog() {
+                                console.log('hideDialog', _dialogueEl)
+
+                                if(_dialogueEl && _dialogueEl.parentNode != null) {
+                                    _dialogueEl.parentNode.removeChild(_dialogueEl);
+                                }
+                            }
+
+                            function tabHandler(e) {
+                            	var tabEl = e.currentTarget;
+                                console.log('tabHandler tabEl', tabEl)
+
+                                var tabName = tabEl.dataset.tab;
+                            	if(!tabName) return;
+                            	if(tabName == 'layouts') {
+                            		showLayoutList();
+								} else if(tabName == 'params') {
+                                    showLayoutParams();
+                                }
+
+                                for(let e in _layoutTabs.children) {
+                            		if(typeof _layoutTabs.children[e] != 'object') continue;
+                            		console.log('tabHandler', _layoutTabs.children[e])
+                            		if(_layoutTabs.children[e] == tabEl) {
+                            			if(!_layoutTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                            _layoutTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                        }
+                            			continue;
+									}
+                                    if(_layoutTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                        _layoutTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                    }
+								}
+							}
+
+                            console.log('addImagePopup')
+                            _dialogueEl = document.createElement('DIV');
+                            _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                            var dialogTitle = document.createElement('DIV');
+                            dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                            var dialogTitleInner = _layoutTabs = document.createElement('DIV');
+                            dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+
+                            var layoutsTab = document.createElement('DIV');
+                            layoutsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                            layoutsTab.dataset.tab = 'layouts';
+                            var layoutsTabInner = document.createElement('DIV');
+                            layoutsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                            layoutsTabInner.innerHTML = 'Layouts';
+                            layoutsTab.appendChild(layoutsTabInner);
+                            dialogTitleInner.appendChild(layoutsTab);
+                            var paramsTab = document.createElement('DIV');
+                            paramsTab.className = 'Streams_webrtc_popup-options-title-tab';
+                            paramsTab.dataset.tab = 'params';
+                            var paramsTabInner = document.createElement('DIV');
+                            paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                            paramsTabInner.innerHTML = 'Params';
+                            paramsTab.appendChild(paramsTabInner);
+                            dialogTitleInner.appendChild(paramsTab);
+                            dialogTitle.appendChild(dialogTitleInner);
+                            _dialogueEl.appendChild(dialogTitle);
+                            var dialogBody = _dialogueBody = document.createElement('DIV');
+                            dialogBody.className = 'Streams_webrtc_popup-options-body';
+
+                            dialogBody.appendChild(createLayoutList());
+                            _dialogueEl.appendChild(dialogBody);
+
+                            layoutsTab.addEventListener('click', tabHandler);
+                            paramsTab.addEventListener('click', tabHandler);
+
+                            return {
+                                hide: hideDialog,
+                                show: showDialog,
+                                showLayoutList: showLayoutList,
+                                showLayoutParams: showLayoutParams,
+                            }
+                        }())
+
+
+                        var imageSourceOptions = (function (source) {
+                            var _dialogueEl = null;
+                            var _optionsTabs = null;
+                            var _dialogueBody = null;
+                            var _layoutParamsEl = null;
+                            var _selectedSource = null;
+                            var _generatedDialogs = [];
+
+                            function createParamsList() {
+
+                            	for(let d in _generatedDialogs) {
+                            		if(_generatedDialogs[d].source == _selectedSource) {
+                            			return _generatedDialogs[d].dialogue;
+									}
+								}
+
+                                var dialogBodyInner = document.createElement('DIV');
+                                dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+
+                                var keepRatioCon = document.createElement('DIV');
+                                var keepRatio = document.createElement('INPUT');
+                                keepRatio.type = 'checkbox';
+                                keepRatio.id = 'Streams_webrtc_popup-options-keep-ratio';
+                                keepRatio.name = 'keepRatio';
+                                keepRatio.checked = true;
+                                var keepRatioLabel = document.createElement('Label');
+                                keepRatioLabel.appendChild(keepRatio);
+                                keepRatioLabel.appendChild(document.createTextNode("Keep ratio"));
+                                keepRatioCon.appendChild(keepRatioLabel);
+
+                                //size
+                                var sizeAndPositionCon = document.createElement('DIV');
+                                sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+
+                                var sizeCon = document.createElement('DIV');
+                                sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                                sizeAndPositionCon.appendChild(sizeCon);
+
+                                var sizeWidthCon = document.createElement('DIV');
+                                sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                                sizeCon.appendChild(sizeWidthCon);
+                                var widthText = document.createElement('SPAN');
+                                widthText.innerHTML = 'Width: ';
+                                sizeWidthCon.appendChild(widthText);
+                                var width = document.createElement('INPUT');
+                                width.type = 'text';
+                                width.value = _selectedSource.sourceInstance.rect._width;
+                                sizeWidthCon.appendChild(width);
+
+                                var sizeHeightCon = document.createElement('DIV');
+                                sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                                sizeCon.appendChild(sizeHeightCon);
+                                var heightText = document.createElement('SPAN');
+                                heightText.innerHTML = 'Height: ';
+                                sizeHeightCon.appendChild(heightText);
+                                var height = document.createElement('INPUT');
+                                height.type = 'text';
+                                height.value = _selectedSource.sourceInstance.rect._height;
+                                sizeHeightCon.appendChild(height);
+
+
+                                //position
+                                var positionCon = document.createElement('DIV');
+                                positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                                sizeAndPositionCon.appendChild(positionCon);
+
+                                var topPositionCon = document.createElement('DIV');
+                                topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                                positionCon.appendChild(topPositionCon);
+                                var topText = document.createElement('SPAN');
+                                topText.innerHTML = 'Top: ';
+                                topPositionCon.appendChild(topText);
+                                var topPos = document.createElement('INPUT');
+                                topPos.type = 'text';
+                                topPos.value = _selectedSource.sourceInstance.rect._y;
+                                topPositionCon.appendChild(topPos);
+
+                                var leftPositionCon = document.createElement('DIV');
+                                leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                                positionCon.appendChild(leftPositionCon);
+                                var leftText = document.createElement('SPAN');
+                                leftText.innerHTML = 'Left: ';
+                                leftPositionCon.appendChild(leftText);
+                                var leftPos = document.createElement('INPUT');
+                                leftPos.type = 'text';
+                                leftPos.value = _selectedSource.sourceInstance.rect._x;
+                                leftPositionCon.appendChild(leftPos);
+
+
+                                dialogBodyInner.appendChild(keepRatioCon);
+                                dialogBodyInner.appendChild(sizeAndPositionCon);
+
+                                _layoutParamsEl = dialogBodyInner;
+
+                                function updateSourceRect () {
+                                	var canvasSize = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                                	var keepAspectRatio = keepRatio.checked;
+                                    var currentWidth = _selectedSource.sourceInstance.rect._width;
+                                    var currentHeight = _selectedSource.sourceInstance.rect._height;
+                                    var w = parseFloat(width.value);
+                                    var h = parseFloat(height.value);
+                                    var x = parseFloat(leftPos.value);
+                                    var y = parseFloat(topPos.value);
+
+                                    var ratio = currentWidth / currentHeight;
+
+                                    console.log('updateSourceRect width', w, currentWidth)
+                                    console.log('updateSourceRect height', h, currentHeight)
+                                    console.log('updateSourceRect ratio', ratio)
+
+                                    var resWidth, resHeight;
+                                    if(keepAspectRatio) {
+                                        if (w != currentWidth) {
+                                            resWidth = w;
+                                            resHeight = parseInt(resWidth / ratio);
+                                            height.value = resHeight;
+                                            console.log('updateSourceRect 1 resHeight', resHeight)
+                                        } else if (h != currentHeight) {
+
+                                            resHeight = h;
+                                            resWidth = parseInt(resHeight * ratio);
+                                            width.value = resWidth;
+                                            console.log('updateSourceRect 2 resWidth', resWidth)
+
+                                        } else {
+                                            console.log('updateSourceRect 3')
+                                            resWidth = currentWidth;
+                                            resHeight = currentHeight;
+                                        }
+                                    } else {
+                                        if (w != currentWidth) {
+                                            resWidth = w;
+                                            resHeight = h;
+                                        } else if (h != currentHeight) {
+                                            resHeight = h;
+                                            resWidth = w;
+                                        } else {
+                                            resWidth = currentWidth;
+                                            resHeight = currentHeight;
+                                        }
+									}
+
+                                    _selectedSource.sourceInstance.updateRect(resWidth, resHeight, x, y)
+                                }
+                                width.addEventListener('blur', updateSourceRect)
+                                height.addEventListener('blur', updateSourceRect)
+                                topPos.addEventListener('blur', updateSourceRect)
+                                leftPos.addEventListener('blur', updateSourceRect)
+                                _selectedSource.sourceInstance.on('rectChanged', function () {
+                                    width.value = _selectedSource.sourceInstance.rect._width;
+                                    height.value = _selectedSource.sourceInstance.rect._height;
+                                    leftPos.value = _selectedSource.sourceInstance.rect._x;
+                                    topPos.value = _selectedSource.sourceInstance.rect._y;
+                                });
+
+                                _generatedDialogs.push({
+									source: _selectedSource,
+									dialogue:  dialogBodyInner
+								})
+                                return dialogBodyInner;
+                            }
+
+                            function showParams() {
+                                _dialogueBody.innerHTML = '';
+                                _dialogueBody.appendChild(createParamsList());
+                            }
+
+                            function showDialog(source) {
+                            	_selectedSource = source;
+                                console.log('showDialog', this, _activeView)
+                                hideActiveView();
+                                showParams();
+                                _optionsEl.appendChild(_dialogueEl);
+                                _activeView = this;
+                            }
+
+                            function hideDialog() {
+                                console.log('hideDialog', _dialogueEl)
+
+                                if(_dialogueEl && _dialogueEl.parentNode != null) {
+                                    _dialogueEl.parentNode.removeChild(_dialogueEl);
+                                }
+                            }
+
+                            function tabHandler(e) {
+                                var tabEl = e.currentTarget;
+                                console.log('tabHandler tabEl', tabEl)
+
+                                var tabName = tabEl.dataset.tab;
+                                if(!tabName) return;
+                                if(tabName == 'params') {
+                                    showParams();
+                                }
+
+                                for(let e in _optionsTabs.children) {
+                                    if(typeof _optionsTabs.children[e] != 'object') continue;
+                                    console.log('tabHandler', _optionsTabs.children[e])
+                                    if(_optionsTabs.children[e] == tabEl) {
+                                        if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                            _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                        }
+                                        continue;
+                                    }
+                                    if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                    }
+                                }
+                            }
+
+                            console.log('addImagePopup')
+                            _dialogueEl = document.createElement('DIV');
+                            _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                            var dialogTitle = document.createElement('DIV');
+                            dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                            var dialogTitleInner = _optionsTabs = document.createElement('DIV');
+                            dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+
+                            var paramsTab = document.createElement('DIV');
+                            paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                            paramsTab.dataset.tab = 'params';
+                            var paramsTabInner = document.createElement('DIV');
+                            paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                            paramsTabInner.innerHTML = 'Params';
+                            paramsTab.appendChild(paramsTabInner);
+                            dialogTitleInner.appendChild(paramsTab);
+                            dialogTitle.appendChild(dialogTitleInner);
+                            _dialogueEl.appendChild(dialogTitle);
+                            var dialogBody = _dialogueBody = document.createElement('DIV');
+                            dialogBody.className = 'Streams_webrtc_popup-options-body';
+
+                            //dialogBody.appendChild(createParamsList());
+                            _dialogueEl.appendChild(dialogBody);
+
+                            paramsTab.addEventListener('click', tabHandler);
+
+                            return {
+                                hide: hideDialog,
+                                show: showDialog,
+                                showParams: showParams
+                            }
+                        }())
+
+
+						var videoSourceOptions = (function (source) {
+                            var _dialogueEl = null;
+                            var _optionsTabs = null;
+                            var _dialogueBody = null;
+                            var _layoutParamsEl = null;
+                            var _selectedSource = null;
+                            var _generatedDialogs = [];
+
+                            function createParamsList() {
+
+                            	for(let d in _generatedDialogs) {
+                            		if(_generatedDialogs[d].source == _selectedSource) {
+                            			return _generatedDialogs[d].dialogue;
+									}
+								}
+
+                                var dialogBodyInner = document.createElement('DIV');
+                                dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+
+                                var keepRatioCon = document.createElement('DIV');
+                                var keepRatio = document.createElement('INPUT');
+                                keepRatio.type = 'checkbox';
+                                keepRatio.id = 'Streams_webrtc_popup-options-keep-ratio';
+                                keepRatio.name = 'keepRatio';
+                                keepRatio.checked = true;
+                                var keepRatioLabel = document.createElement('Label');
+                                keepRatioLabel.appendChild(keepRatio);
+                                keepRatioLabel.appendChild(document.createTextNode("Keep ratio"));
+                                keepRatioCon.appendChild(keepRatioLabel);
+
+                                //size
+                                var sizeAndPositionCon = document.createElement('DIV');
+                                sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+
+                                var sizeCon = document.createElement('DIV');
+                                sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                                sizeAndPositionCon.appendChild(sizeCon);
+
+                                var sizeWidthCon = document.createElement('DIV');
+                                sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                                sizeCon.appendChild(sizeWidthCon);
+                                var widthText = document.createElement('SPAN');
+                                widthText.innerHTML = 'Width: ';
+                                sizeWidthCon.appendChild(widthText);
+                                var width = document.createElement('INPUT');
+                                width.type = 'text';
+                                width.value = _selectedSource.sourceInstance.rect._width;
+                                sizeWidthCon.appendChild(width);
+
+                                var sizeHeightCon = document.createElement('DIV');
+                                sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                                sizeCon.appendChild(sizeHeightCon);
+                                var heightText = document.createElement('SPAN');
+                                heightText.innerHTML = 'Height: ';
+                                sizeHeightCon.appendChild(heightText);
+                                var height = document.createElement('INPUT');
+                                height.type = 'text';
+                                height.value = _selectedSource.sourceInstance.rect._height;
+                                sizeHeightCon.appendChild(height);
+
+
+                                //position
+                                var positionCon = document.createElement('DIV');
+                                positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                                sizeAndPositionCon.appendChild(positionCon);
+
+                                var topPositionCon = document.createElement('DIV');
+                                topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                                positionCon.appendChild(topPositionCon);
+                                var topText = document.createElement('SPAN');
+                                topText.innerHTML = 'Top: ';
+                                topPositionCon.appendChild(topText);
+                                var topPos = document.createElement('INPUT');
+                                topPos.type = 'text';
+                                topPos.value = _selectedSource.sourceInstance.rect._y;
+                                topPositionCon.appendChild(topPos);
+
+                                var leftPositionCon = document.createElement('DIV');
+                                leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                                positionCon.appendChild(leftPositionCon);
+                                var leftText = document.createElement('SPAN');
+                                leftText.innerHTML = 'Left: ';
+                                leftPositionCon.appendChild(leftText);
+                                var leftPos = document.createElement('INPUT');
+                                leftPos.type = 'text';
+                                leftPos.value = _selectedSource.sourceInstance.rect._x;
+                                leftPositionCon.appendChild(leftPos);
+
+
+                                dialogBodyInner.appendChild(keepRatioCon);
+                                dialogBodyInner.appendChild(sizeAndPositionCon);
+
+                                _layoutParamsEl = dialogBodyInner;
+
+                                function updateSourceRect () {
+                                	var canvasSize = tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                                	var keepAspectRatio = keepRatio.checked;
+                                    var currentWidth = _selectedSource.sourceInstance.rect._width;
+                                    var currentHeight = _selectedSource.sourceInstance.rect._height;
+                                    var w = parseFloat(width.value);
+                                    var h = parseFloat(height.value);
+                                    var x = parseFloat(leftPos.value);
+                                    var y = parseFloat(topPos.value);
+
+                                    var ratio = currentWidth / currentHeight;
+
+                                    console.log('updateSourceRect width', w, currentWidth)
+                                    console.log('updateSourceRect height', h, currentHeight)
+                                    console.log('updateSourceRect ratio', ratio)
+
+                                    var resWidth, resHeight;
+                                    if(keepAspectRatio) {
+                                        if (w != currentWidth) {
+                                            resWidth = w;
+                                            resHeight = parseInt(resWidth / ratio);
+                                            height.value = resHeight;
+                                            console.log('updateSourceRect 1 resHeight', resHeight)
+                                        } else if (h != currentHeight) {
+
+                                            resHeight = h;
+                                            resWidth = parseInt(resHeight * ratio);
+                                            width.value = resWidth;
+                                            console.log('updateSourceRect 2 resWidth', resWidth)
+
+                                        } else {
+                                            console.log('updateSourceRect 3')
+                                            resWidth = currentWidth;
+                                            resHeight = currentHeight;
+                                        }
+                                    } else {
+                                        if (w != currentWidth) {
+                                            resWidth = w;
+                                            resHeight = h;
+                                        } else if (h != currentHeight) {
+                                            resHeight = h;
+                                            resWidth = w;
+                                        } else {
+                                            resWidth = currentWidth;
+                                            resHeight = currentHeight;
+                                        }
+									}
+
+                                    _selectedSource.sourceInstance.updateRect(resWidth, resHeight, x, y)
+                                }
+                                width.addEventListener('blur', updateSourceRect)
+                                height.addEventListener('blur', updateSourceRect)
+                                topPos.addEventListener('blur', updateSourceRect)
+                                leftPos.addEventListener('blur', updateSourceRect)
+                                _selectedSource.sourceInstance.on('rectChanged', function () {
+                                    width.value = _selectedSource.sourceInstance.rect._width;
+                                    height.value = _selectedSource.sourceInstance.rect._height;
+                                    leftPos.value = _selectedSource.sourceInstance.rect._x;
+                                    topPos.value = _selectedSource.sourceInstance.rect._y;
+                                });
+
+                                _generatedDialogs.push({
+									source: _selectedSource,
+									dialogue:  dialogBodyInner
+								})
+                                return dialogBodyInner;
+                            }
+
+                            function showParams() {
+                                _dialogueBody.innerHTML = '';
+                                _dialogueBody.appendChild(createParamsList());
+                            }
+
+                            function showDialog(source) {
+                            	_selectedSource = source;
+                                console.log('showDialog', this, _activeView)
+                                hideActiveView();
+                                showParams();
+                                _optionsEl.appendChild(_dialogueEl);
+                                _activeView = this;
+                            }
+
+                            function hideDialog() {
+                                console.log('hideDialog', _dialogueEl)
+
+                                if(_dialogueEl && _dialogueEl.parentNode != null) {
+                                    _dialogueEl.parentNode.removeChild(_dialogueEl);
+                                }
+                            }
+
+                            function tabHandler(e) {
+                                var tabEl = e.currentTarget;
+                                console.log('tabHandler tabEl', tabEl)
+
+                                var tabName = tabEl.dataset.tab;
+                                if(!tabName) return;
+                                if(tabName == 'params') {
+                                    showParams();
+                                }
+
+                                for(let e in _optionsTabs.children) {
+                                    if(typeof _optionsTabs.children[e] != 'object') continue;
+                                    console.log('tabHandler', _optionsTabs.children[e])
+                                    if(_optionsTabs.children[e] == tabEl) {
+                                        if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                            _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                        }
+                                        continue;
+                                    }
+                                    if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                    }
+                                }
+                            }
+
+                            console.log('addImagePopup')
+                            _dialogueEl = document.createElement('DIV');
+                            _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                            var dialogTitle = document.createElement('DIV');
+                            dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                            var dialogTitleInner = _optionsTabs = document.createElement('DIV');
+                            dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+
+                            var paramsTab = document.createElement('DIV');
+                            paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                            paramsTab.dataset.tab = 'params';
+                            var paramsTabInner = document.createElement('DIV');
+                            paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                            paramsTabInner.innerHTML = 'Params';
+                            paramsTab.appendChild(paramsTabInner);
+                            dialogTitleInner.appendChild(paramsTab);
+                            dialogTitle.appendChild(dialogTitleInner);
+                            _dialogueEl.appendChild(dialogTitle);
+                            var dialogBody = _dialogueBody = document.createElement('DIV');
+                            dialogBody.className = 'Streams_webrtc_popup-options-body';
+
+                            //dialogBody.appendChild(createParamsList());
+                            _dialogueEl.appendChild(dialogBody);
+
+                            paramsTab.addEventListener('click', tabHandler);
+
+                            return {
+                                hide: hideDialog,
+                                show: showDialog,
+                                showParams: showParams
+                            }
+                        }())
+
+						return {
+                            canvasLayoutOptions: canvasLayoutOptions,
+                            imageSourceOptions: imageSourceOptions,
+                            videoSourceOptions: videoSourceOptions,
+                            hideActiveView: hideActiveView
+						}
+					}())
 
 					function createAddSourceMenu() {
                 		var dropUp = document.createElement('DIV');
@@ -4247,9 +5314,13 @@
                         var sourcesColumnTitleInner = document.createElement('DIV');
                         sourcesColumnTitleInner.className = 'Streams_webrtc_popup-sources-title-inner';
                         var sourcesColumnTitleTab = document.createElement('DIV');
-                        sourcesColumnTitleTab.className = 'Streams_webrtc_popup-sources-title-tab';
-                        sourcesColumnTitleTab.innerHTML = 'Sources';
+                        sourcesColumnTitleTab.className = 'Streams_webrtc_popup-sources-title-tab Streams_webrtc_popup-sources-title-tab-active';
+                        var sourcesColumnTitleTabInner = document.createElement('DIV');
+                        sourcesColumnTitleTabInner.className = 'Streams_webrtc_popup-sources-title-tab-inner';
+                        sourcesColumnTitleTabInner.innerHTML = 'Sources';
+                        sourcesColumnTitleTab.appendChild(sourcesColumnTitleTabInner);
                         sourcesColumnTitleInner.appendChild(sourcesColumnTitleTab);
+                        sourcesColumnTitle.appendChild(sourcesColumnTitleInner);
 
                         var sourcesColumnControl = document.createElement('DIV');
                         sourcesColumnControl.className = 'Streams_webrtc_popup-sources-control';
@@ -4281,10 +5352,6 @@
                                 dropUpMenu.classList.add('Streams_webrtc_popup-sources-add-menu-show');
                                 window.addEventListener('mousedown', hideOnClick)
 							}
-
-
-                            //event.preventDefault();
-                           // event.stopPropagation();
                         });
 
                         sourcesColumnControl.appendChild(sourcesColumnControlAddBtn);
@@ -4292,6 +5359,9 @@
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-remove';
                         sourcesColumnControlBtn.innerHTML = _icons.removeItem;
+                        sourcesColumnControlBtn.addEventListener('click', function () {
+                            scenesInterface.sourcesInterface.removeSource();
+                        })
                         sourcesColumnControl.appendChild(sourcesColumnControlBtn);
                         var sourcesColumnControlBtn = document.createElement('DIV');
                         sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn';
@@ -4314,7 +5384,6 @@
                         var sourcesColumnBodyInner = document.createElement('DIV');
                         sourcesColumnBodyInner.className = 'Streams_webrtc_popup-sources-body-inner';
                         sourcesColumn.appendChild(sourcesColumnTitle);
-                        sourcesColumnBody.appendChild(sourcesColumnTitleInner);
                         sourcesColumnBody.appendChild(sourcesColumnBodyInner);
                         sourcesColumn.appendChild(sourcesColumnBody);
                         sourcesColumn.appendChild(sourcesColumnControl);
@@ -4330,8 +5399,11 @@
                         var scenesColumnTitleInner = document.createElement('DIV');
                         scenesColumnTitleInner.className = 'Streams_webrtc_popup-scenes-title-inner';
                         var scenesColumnTitleTab = document.createElement('DIV');
-                        scenesColumnTitleTab.className = 'Streams_webrtc_popup-scenes-title-tab';
-                        scenesColumnTitleTab.innerHTML = 'Rooms';
+                        scenesColumnTitleTab.className = 'Streams_webrtc_popup-scenes-title-tab Streams_webrtc_popup-scenes-title-tab-active';
+                        var scenesColumnTitleTabInner = document.createElement('DIV');
+                        scenesColumnTitleTabInner.className = 'Streams_webrtc_popup-scenes-title-tab-inner';
+                        scenesColumnTitleTabInner.innerHTML = 'Rooms';
+                        scenesColumnTitleTab.appendChild(scenesColumnTitleTabInner);
                         scenesColumnTitleInner.appendChild(scenesColumnTitleTab);
                         scenesColumnTitle.appendChild(scenesColumnTitleInner);
                         scenesColumn.appendChild(scenesColumnTitle);
@@ -4368,6 +5440,9 @@
                         previewBoxBody.className = 'Streams_webrtc_popup-preview-body';
                         var previewBoxBodyInner = document.createElement('DIV');
                         previewBoxBodyInner.className = 'Streams_webrtc_popup-preview-body-inner';
+                        var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                        sourceResizingEl.className = 'Streams_webrtc_popup-preview-resizing';
+                        previewBoxBodyInner.appendChild(sourceResizingEl);
                         previewBoxBody.appendChild(previewBoxBodyInner);
                         previewBox.appendChild(previewBoxBody);
                         boxContent.appendChild(previewBox);
@@ -4381,31 +5456,20 @@
 
                         var sourcesColumn = createSourcesCol();
 
-                        var audioColumn = document.createElement('DIV');
-                        audioColumn.className = 'Streams_webrtc_popup-audio';
-                        var audioColumnTitle = document.createElement('DIV');
-                        audioColumnTitle.className = 'Streams_webrtc_popup-audio-title';
-                        var audioColumnTitleInner = document.createElement('DIV');
-                        audioColumnTitleInner.className = 'Streams_webrtc_popup-audio-title-inner';
-                        audioColumnTitleInner.innerHTML = 'Audio';
-                        audioColumnTitle.appendChild(audioColumnTitleInner);
-                        audioColumn.appendChild(audioColumnTitle);
-                        var audioColumnBody = document.createElement('DIV');
-                        audioColumnBody.className = 'Streams_webrtc_popup-audio-body';
-                        var audioColumnBodyInner = document.createElement('DIV');
-                        audioColumnBodyInner.className = 'Streams_webrtc_popup-audio-body-inner';
-                        audioColumnBody.appendChild(audioColumnBodyInner);
-                        audioColumn.appendChild(audioColumnBody);
+                        var optionsColumn = document.createElement('DIV');
+                        optionsColumn.className = 'Streams_webrtc_popup-options';
+                        _optionsEl = optionsColumn;
 
                         streamingControls.appendChild(scenesColumn);
                         streamingControls.appendChild(sourcesColumn);
-                        streamingControls.appendChild(audioColumn);
+                        streamingControls.appendChild(optionsColumn);
 
                         var close=document.createElement('div');
                         close.className = 'close-dialog-sign';
                         close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';
                         close.style.backgroundSize = 'cover';
+                        close.style.animation = 'none';
 
 
                         boxContent.appendChild(streamingControls);
@@ -4415,12 +5479,33 @@
                         dialogue.appendChild(close);
                         dialogue.appendChild(dialogInner);
 
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                _resizingElement,
+                                "Q/resize",
+                                {
+                                    move: true,
+                                    resize: true,
+                                    active: true,
+                                    //elementPosition: 'fixed',
+                                    moveWithinArea: 'parent',
+                                    negativeMoving: true,
+                                    onMoving: function () {
+
+                                    }
+                                }
+                            ),
+                            {},
+                            function () {
+                                _resizingElementTool = this;
+                            }
+                        );
 
                         tool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
                         setTimeout(function () {
                             Q.activate(
                                 Q.Tool.setUpElement(
-                                    dialogue, // or pass an existing element
+                                    dialogue,
                                     "Q/resize",
                                     {
                                         move: true,
@@ -4451,7 +5536,7 @@
 
 
                         close.addEventListener('click', function () {
-
+                            tool.advancedLiveStreamingBox.hide()
                         });
 
                         tool.advancedStreamingDialogue = boxContent;
@@ -4499,7 +5584,7 @@
                                         }
                                     }
 
-                                    var streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
+                                    var streamingCanvas = _streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
                                     if(streamingCanvas != null) {
                                         streamingCanvas.style.top = '';
                                         streamingCanvas.style.left = '';
@@ -4530,6 +5615,9 @@
 
                     }
 
+                    return {
+                        scenesInterface: scenesInterface
+					}
                 }());
 
 			},
