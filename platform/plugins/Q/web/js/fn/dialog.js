@@ -456,6 +456,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			});
 			$(document.body).prepend($this);
 			$this.addClass('Q_fullscreen_dialog');
+			o.className && $this.addClass(o.className);
 			$this.css({
 				'width': Q.Pointer.windowWidth() + 'px',
 				'height': Q.Pointer.windowHeight() + 'px'

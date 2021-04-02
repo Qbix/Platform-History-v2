@@ -1,7 +1,7 @@
 <?php
 
 /**
- * HTTP method for starting a payment
+ * HTTP method for starting a payment. Requires a user to be logged in.
  * @param {array} $_REQUEST
  * @param {string} $_REQUEST.payments Required. Should be either "authnet" or "stripe"
  *  @param {String} [$_REQUEST.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
@@ -21,16 +21,17 @@ function Assets_payment_post($params = array())
 	if ($publisherId and $streamName) {
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName, true);
 	}
+	$userId = Users::loggedInUser(true)->id;
 
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
 	$token = $req['token'];
 	$currency = Q::ifset($req, 'currency', 'USD');
-	$user = Users::fetch(Q::ifset($req, 'userId', null));
+	$user = Users::fetch($userId);
 	$metadata = array(
 		'streamName' => $streamName,
 		'publisherId' => $publisherId,
-		'userId' => $user ? $user->id : null,
+		'userId' => $userId,
 		'description' => Q::ifset($req, 'description', null)
 	);
 	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact('token', 'stream',  'metadata', 'user'));

@@ -1045,7 +1045,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
 	Q.each(pn.children, function () {
 		if (this === element || !this.isVisible()) return;
 		var rect3 = this.getBoundingClientRect();
-		if (rect1.top > rect3.bottom || rect1.bottom < rect3.top) {
+		if (rect1.top >= rect3.bottom || rect1.bottom <= rect3.top) {
 			return;
 		}
 		var style = this.computedStyle();
@@ -9902,7 +9902,8 @@ Q.Template.compile = function _Q_Template_compile (content, type) {
 	return r[content];
 };
 Q.Template.compile.options = {
-	preventIndent: true
+	preventIndent: true,
+	noEscape: true
 };
 Q.Template.compile.results = {};
 

@@ -23,7 +23,7 @@ function Places_user_location_tool($options)
 {
 	if (empty($options['meters'])) {
 		$options['meters'] = array();
-		$units = Q::ifset($options, 'units', null);
+		$units = Q::ifset($options, 'units', Q_Config::get('Places', 'nearby', 'units', null));
 		foreach (Q_Config::expect('Places', 'nearby', 'meters') as $m) {
 			$options['meters'][$m] = Places::distanceLabel($m, $units);
 		}

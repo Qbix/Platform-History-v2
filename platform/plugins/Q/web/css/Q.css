@@ -149,6 +149,23 @@ table { border-spacing:0; border-collapse:collapse; }
 	-webkit-transform: translateZ(0);
 }
 
+.Q_verticalOrientation .Q_orientHorizontally {
+	transform: scale(1.5) rotate(90deg);
+}
+.Q_verticalOrientation .Q_orientHorizontally::after {
+	display: block;
+	width: 100px;
+	height: 100px;
+	border-radius: 10px;
+	margin: -100px auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	background-image: url(../img/hints/rotate-left.gif);
+	background-size: cover;
+	content: "";
+}
+
+/* Masks and dialogs */
+
 .Q_mask { display: none; position: absolute; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; }
 .Q_cancel_mask { z-index: 2000; text-align: center; }
 .Q_load_cancel { vertical-align: middle; margin-top: 80px; }
@@ -163,9 +180,6 @@ table { border-spacing:0; border-collapse:collapse; }
 
 .Q_clearfix::after { content: ""; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html[xmlns] .Q_clearfix { display: block; }
-
-/* For IE6 only */
-* html .Q_clearfix { height: 1%; }
 
 /* more Q styles */
 
@@ -895,17 +909,18 @@ html.Q_layout_sidebar {
 .Q_tabbing_tabs .Q_tabbing_tab.Q_current {
 	border: 1px solid #777;
 	border-bottom: solid 1px transparent;
-	background-color: #fff;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
+	background-color: #fff;
+	color: #000;
 }
 .Q_tabbing_container {
 	margin-top: -1px;
 	border: 1px solid #777;
 	background: white;
 }
-Q_tabbing_container .Q_tabbing_item.Q_tabs_switchingTo,
-Q_tabbing_container .Q_tabbing_item.Q_current:not(.Q_tabs_switchingFrom) {
+.Q_tabbing_container .Q_tabbing_item.Q_tabs_switchingTo,
+.Q_tabbing_container .Q_tabbing_item.Q_current:not(.Q_tabs_switchingFrom) {
 	background-color: white;
 }
 .Q_tabbing_container .Q_tabbing_item {

@@ -1329,19 +1329,19 @@ class Q
 		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
 		$tooLargeString = "\n\nLog file has grown too large.\n\nPlease delete it and fix the issue before continuing.\n";
 		$maxFileSize = Q_Config::get('Q', 'log', 'maxFileSize', 100000000);
-		if (!file_exists($realPath.DS.$filename)) {
-			// about to create a new file, remove any old logs
-			self::removeOldLogs();
-		} else if (filesize($realPath.DS.$filename) >= $maxFileSize) {
-			$handle = fopen($realPath.DS.$filename, 'r');
+		$realPath = $realPath.DS.$filename;
+		if (file_exists($realPath) && filesize($realPath) >= $maxFileSize) {
+			$handle = fopen($realPath, 'r');
 			$len = strlen($tooLargeString) * 2;
 			fseek($handle, -$len, SEEK_END);
 			$ending = fread($handle, $len);
 			if (strpos($ending, $tooLargeString) === false) {
-				file_put_contents($realPath.DS.$filename, $tooLargeString, FILE_APPEND);
+				file_put_contents($realPath, $tooLargeString, FILE_APPEND);
 			}
 		} else {
-			file_put_contents($realPath.DS.$filename, $toSave, FILE_APPEND);
+			// about to create a new file, remove any old logs
+			self::removeOldLogs();
+			file_put_contents($realPath, $toSave, FILE_APPEND);
 		}
 		umask($mask);
 	}

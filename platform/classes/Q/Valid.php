@@ -277,7 +277,7 @@ class Q_Valid
 		}
 		$gp = array_merge($_GET, $_POST);
 		$rn = Q_Request::special($snf, null, $gp);
-		if (!isset($sn) or ($rn !== $nonce1 and $rn !== $nonce2)) {
+		if (!isset($sn) || ($rn !== $nonce1 && $rn !== $nonce2)) {
 			if (!$throwIfInvalid) {
 				return false;
 			}

@@ -65,8 +65,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			if (!$this.closest('body').length) {
 				return;
 			}
-			if (timing.waitingPeriod
-			&& Date.now() - originalTime >= timing.waitingPeriod) {
+			if (isNaN(timing.waitingPeriod) || Date.now() - originalTime >= timing.waitingPeriod) {
 				return;
 			}
 			if (timing.waitingInterval) {

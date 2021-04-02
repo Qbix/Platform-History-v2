@@ -901,7 +901,10 @@ Q.Tool.define("Q/video", function (options) {
 						player.pause();
 
 						// this event need to set status paused, because for some reason it stay in status vjs-playing
-						player.trigger && player.trigger('pause');
+						if (player.trigger) {
+							player.trigger('pause');
+							player.removeClass('vjs-playing');
+						}
 					}
 
 					clearInterval(intervalId);

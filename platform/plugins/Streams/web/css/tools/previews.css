@@ -274,4 +274,5 @@
 	display: block;
 	overflow: hidden;
 	text-align: left;
+	white-space: nowrap;
 }

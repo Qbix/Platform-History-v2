@@ -29,6 +29,7 @@
         "PaymentFor": "Payment for \"{{1}}\"",
         "PaymentTo": "Payment to {{1}}",
         "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
         "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
         "CreatedCommunity": "for creating community \"{{communityId}}\"",
         "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
@@ -56,9 +57,10 @@
         "From": "from",
         "SeeHistory": "See payment history for {{1}}",
         "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Spent {{amount}} credits",
+        "PaymentFor": "Sent {{amount}} credits",
         "PaymentTo": "Sent {{amount}} credits",
         "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "JoinedPaidStream": {
             "+": "Earned {{amount}} credits",
             "-": "Spent {{amount}} credits"
@@ -140,7 +142,8 @@
             "PricePlaceholder": "Set price",
             "LinkPlaceholder": "set additional info link",
             "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service"
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
         "ManageServiceTemplates": "Manage Service Templates",
         "ManageServices": "Manage Services",
