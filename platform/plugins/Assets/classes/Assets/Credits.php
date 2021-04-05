@@ -76,7 +76,7 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams::fetchOne($asUserId, $userId, $streamName);
+		$stream = Streams::fetchOne($asUserId, $userId, $streamName, "*", array("refetch" => true));
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
 				'name' => 'Assets/user/credits',
@@ -481,19 +481,28 @@ class Assets_Credits extends Base_Assets_Credits
 		return $assets_credits;
 	}
 	/**
-	 * Convert reason to readable text.
-	 * @method convertToCredits
+	 * Convert amount from one currency to another
+	 * @method convert
 	 * @static
-	 * @param {string} $key json key to search in Assets/content/credits.
-	 * @param {array} $more additional data need to interpolate json with.
+	 * @param {number} $amount
+	 * @param {string} $fromCurrency
+	 * @param {string} $toCurrency
 	 * @return {string}
 	 */
-	static function convertToCredits($amount, $currency)
+	static function convert($amount, $fromCurrency, $toCurrency)
 	{
-		$rate = Q_Config::expect('Assets', 'credits', 'exchange', $currency);
-		$credits = ceil($amount * $rate);
+		$amount = (float)$amount;
+		if ($fromCurrency == $toCurrency) {
+			return $amount;
+		} elseif ($fromCurrency == "credits") {
+			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
+			$amount = ceil($amount / $rate);
+		} else {
+			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
+			$amount = ceil($amount * $rate);
+		}
 
-		return $credits;
+		return $amount;
 	}
 	/**
 	 * Convert reason to readable text.
@@ -558,6 +567,8 @@ class Assets_Credits extends Base_Assets_Credits
 			'fromStreamName' => $fromStreamName,
 			'reason' => 'JoinedPaidStream'
 		))
+		->ignoreCache()
+		->options(array("dontCache" => true))
 		->orderBy('insertedTime', false)
 		->limit(1)
 		->fetchDbRow();
@@ -572,6 +583,8 @@ class Assets_Credits extends Base_Assets_Credits
 				'fromStreamName' => $fromStreamName,
 				'reason' => 'LeftPaidStream'
 			))
+			->ignoreCache()
+			->options(array("dontCache" => true))
 			->orderBy('insertedTime', false)
 			->limit(1)
 			->fetchDbRow();

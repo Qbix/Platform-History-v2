@@ -125,7 +125,7 @@ abstract class Assets extends Base_Assets
 			"amount" => sprintf("%0.2f", $amount),
 			"currency" => $currency,
 			"communityId" => $communityId,
-			"credits" =>  Assets_Credits::convertToCredits($amount, $currency)
+			"credits" =>  Assets_Credits::convert($amount, $currency, "credits")
 		);
 		$charge->attributes = Q::json_encode($attributes);
 		$charge->save();

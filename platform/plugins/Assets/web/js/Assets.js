@@ -180,7 +180,7 @@
 					fields: {
 						amount: options.amount,
 						currency: options.currency,
-						userId: options.userId,
+						toUserId: options.userId,
 						toStream: options.toStream,
 						reason: options.reason,
 						items: options.items

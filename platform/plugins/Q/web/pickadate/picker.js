@@ -851,7 +851,7 @@ function PickerConstructor( ELEMENT, NAME, COMPONENT, OPTIONS ) {
 
 
     function handleFocusToOpenEvent(event) {
-
+        return;
         // Stop the event from propagating to the doc.
         event.stopPropagation()
 

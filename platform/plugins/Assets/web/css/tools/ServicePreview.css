@@ -42,6 +42,10 @@
 .Assets_service_composer .Q_dialog_content button {
 	margin: 0 auto;
 }
+.Assets_service_preview_tool {
+	cursor: pointer;
+}
+
 .Assets_service_preview_tool .Assets_service_preview_price {
 	padding-left: 10px;
 }
