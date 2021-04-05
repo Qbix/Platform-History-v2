@@ -29,6 +29,7 @@
 			elementPosition: null,
 			snapToSidesOnly: false,
             moveWithinArea: 'parent',
+			negativeMoving: false,
 			resizeByWheel: true,
 			ignoreOnElements: [],
 			activateOnElement: null,
@@ -36,7 +37,9 @@
 			appliedRecently: false,
 			onMoved: new Q.Event(),
 			onResized: new Q.Event(),
+            onResizing: new Q.Event(),
 			onMovingStart: new Q.Event(),
+			onMoving: new Q.Event(),
 			onMovingStop: new Q.Event(),
 			onUpdate: new Q.Event(),
 			onRefresh: new Q.Event(),
@@ -105,7 +108,9 @@
 						}
 
 						if(currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10) ) tool.state.appliedRecently = true;
-					}
+                        tool.state.onMoving.handle.call(tool, xpos, ypos);
+
+                    }
 
 					var drag = function(evt){
 						if(tool.isScreenResizing || (Q.info.isTouchscreen && (tool.isScreenResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1))) return;
@@ -124,8 +129,8 @@
 						aX = posX - diffX;
 						aY = posY - diffY;
 
-						if (aX < 0) aX = 0;
-						if (aY < 0) aY = 0;
+						if (tool.state.negativeMoving == false && aX < 0) aX = 0;
+						if (tool.state.negativeMoving == false && aY < 0) aY = 0;
 						if (aX + eWi > cWi) aX = cWi - eWi;
 
 						if (aY + eHe > cHe) aY = cHe - eHe;
@@ -241,8 +246,8 @@
 							divLeft = elementToMove.offsetLeft,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
-							cWi = parseInt(tool.state.moveWithinArea == 'parent' ? moveWithinEl.offsetWidth : window.innerWidth),
-							cHe = parseInt(tool.state.moveWithinArea == 'parent' ? moveWithinEl.offsetHeight : window.innerHeight);
+							cWi = 1000000000,
+							cHe = 1000000000;
 						diffX = posX - divLeft, diffY = posY - divTop;
 
 						tool.state.onMovingStart.handle.call(tool);
@@ -330,14 +335,14 @@
 
 						originalWidth = parseFloat(getComputedStyle(_elementToResize, null).getPropertyValue('width').replace('px', ''));
 						originalHeight = parseFloat(getComputedStyle(_elementToResize, null).getPropertyValue('height').replace('px', ''));
-						originalX = _elementToResize.getBoundingClientRect().left;
-						originalY = _elementToResize.getBoundingClientRect().top;
+						originalX = tool.state.moveWithinArea == 'parent' ? _elementToResize.offsetLeft : _elementToResize.getBoundingClientRect().left;
+						originalY = tool.state.moveWithinArea == 'parent' ? _elementToResize.offsetTop : _elementToResize.getBoundingClientRect().top;
 						originalMouseX = e.pageX;
 						originalMouseY = e.pageY;
 
 						tool.isScreenResizing = true;
-						Q.addEventListener(window, 'mousemove', _startResizing);
-						Q.addEventListener(window, 'mouseup', _stopResizing);
+						window.addEventListener('mousemove', _startResizing);
+						window.addEventListener('mouseup', _stopResizing);
 					}
 
 					function keepRatio(width, height){
@@ -388,7 +393,7 @@
 						let width, height;
 						if(isNearEdges(e.pageX, e.pageY)) return;
 						if(_handlerPosition == 'bottomright') {
-
+							console.log('resize: if1')
 							width = originalWidth + (e.pageX - originalMouseX);
 							height = originalHeight + (e.pageY - originalMouseY)
 
@@ -402,7 +407,10 @@
 							if (height > minimumSize) {
 								_elementToResize.style.height = height + 'px'
 							}
-						} else if(_handlerPosition == 'bottomleft') {
+                            tool.state.onResizing.handle.call(tool, width, height);
+
+                        } else if(_handlerPosition == 'bottomleft') {
+                            console.log('resize: if2')
 
 							height = originalHeight + (e.pageY - originalMouseY)
 							width = originalWidth - (e.pageX - originalMouseX)
@@ -414,45 +422,70 @@
 							if (height > minimumSize) {
 								_elementToResize.style.height = height + 'px'
 							}
+							let leftPos = null;
 							if (width > minimumSize) {
+								leftPos = originalX + (e.pageX - originalMouseX);
 								_elementToResize.style.width = width + 'px'
-								_elementToResize.style.left = originalX + (e.pageX - originalMouseX) + 'px'
+								_elementToResize.style.left = leftPos + 'px'
 							}
+                            //tool.state.onMoving.handle.call(tool, leftPos, null);
+                            tool.state.onResizing.handle.call(tool, width, height, leftPos, null);
 
-						} else if(_handlerPosition == 'topright') {
-							width = originalWidth + (e.pageX - originalMouseX)
+                        } else if(_handlerPosition == 'topright') {
+                            console.log('resize: if3')
+
+                            width = originalWidth + (e.pageX - originalMouseX)
 							height = originalHeight - (e.pageY - originalMouseY)
+                            console.log('resize: if3 originalWidth, originalHeight', originalWidth, originalHeight)
+                            console.log('resize: if3 width, height', width, height)
 
 							let newSize = keepRatio(width, height);
 							width = newSize.width;
 							height = newSize.height;
 
 							if (width > minimumSize) {
-								_elementToResize.style.width = width + 'px'
-							}
-							if (height > minimumSize) {
-								_elementToResize.style.height = height + 'px'
-								_elementToResize.style.top = originalY + originalHeight - height + 'px'
-							}
+                                console.log('resize: if3 : if1')
 
-						} else {
-							width = originalWidth - (e.pageX - originalMouseX)
+                                _elementToResize.style.width = width + 'px'
+							}
+							let topPos = null;
+							if (height > minimumSize) {
+                                console.log('resize: if3 : if2')
+
+                                topPos = originalY + originalHeight - height;
+								_elementToResize.style.height = height + 'px'
+								_elementToResize.style.top = topPos + 'px'
+							}
+                            //tool.state.onMoving.handle.call(tool, null, topPos);
+                            tool.state.onResizing.handle.call(tool, width, height, null, topPos);
+
+
+                        } else {
+                            console.log('resize: if4')
+
+                            width = originalWidth - (e.pageX - originalMouseX)
 							height = originalHeight - (e.pageY - originalMouseY)
 
 							let newSize = keepRatio(width, height);
 							width = newSize.width;
 							height = newSize.height;
 
-
+							let leftPos = null;
+							let topPos = null;
 							if (width > minimumSize) {
+                                leftPos = originalX + (e.pageX - originalMouseX);
 								_elementToResize.style.width = width + 'px'
-								_elementToResize.style.left = originalX + (e.pageX - originalMouseX) + 'px'
+								_elementToResize.style.left = leftPos + 'px'
 							}
 							if (height > minimumSize) {
+								topPos = originalY + originalHeight - height;
 								_elementToResize.style.height = height + 'px'
-								_elementToResize.style.top = originalY + originalHeight - height + 'px'
+								_elementToResize.style.top = topPos + 'px'
 							}
-						}
+                            //tool.state.onMoving.handle.call(tool, leftPos, topPos);
+                            tool.state.onResizing.handle.call(tool, width, height, leftPos, topPos);
+
+                        }
 
 						tool.state.appliedRecently = true;
 
@@ -461,8 +494,9 @@
 					function _stopResizing(e) {
 						e.preventDefault();
 						e.stopPropagation();
-						Q.removeEventListener(window, 'mousemove', _startResizing);
-						Q.removeEventListener(window, 'mouseup', _stopResizing);
+						console.log('_stopResizing')
+                        window.removeEventListener('mousemove', _startResizing);
+                        window.removeEventListener('mouseup', _stopResizing);
 						_ratio = null;
 						tool.isScreenResizing = false;
 

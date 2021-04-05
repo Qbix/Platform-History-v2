@@ -84,6 +84,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 drawBackground: false,
                 timeSlice: 6000,
                 sounds:true,
+                showLabelWithNames: true,
+                audioLayoutBgColor: '#000',
+                showLayoutBorders: true,
+                audioOnlyLayout: true
                 /*chunkSize: 10000*/
             },
             eyesDetection: true,
@@ -1373,6 +1377,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 setAvatarOnPreview(cameraPreview);
 
                 var switchMic = function (off) {
+                    console.log('switchMic', off)
+
                     if(audioDevices == 0) {
                         Q.alert('Audio input devices were not found on your device.')
                         return
@@ -1605,7 +1611,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.streams.push(preJoiningStreams[s].stream);
                     }
 
-                    Q.Dialogs.pop();
+                    var dialog = Q.Dialogs.pop(true);
+                    if(dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
+
                     if(checkStatusInterval) {
                         clearInterval(checkStatusInterval);
                         checkStatusInterval = null;
@@ -1630,6 +1638,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         className: 'Streams_webrtc_preparing_dialog',
                         content: mediaDevicesDialog,
                         apply: true,
+                        hidePrevious:true,
+                        removeOnClose: true,
                         onClose:function () {
                             if(checkStatusInterval) {
                                 clearInterval(checkStatusInterval);
@@ -5465,7 +5475,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var ua = navigator.userAgent;
                     var startWith = _options.startWith || {};
                     //var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!startWith.video && !startWith.audio));
-                    var preparingRoom = true;
+                    var preparingRoom = false;
 
                     log('start: onConnect', preparingRoom, _options.preparing.video, _options.preparing.audio);
 
