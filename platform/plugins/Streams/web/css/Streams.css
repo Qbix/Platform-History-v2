@@ -182,7 +182,7 @@
 .Streams_participants_tool {
 	padding: 0 5px;
 	overflow: hidden;
-	height: 70px;
+	height: 60px;
 	text-align: left;
 }
 
@@ -193,7 +193,7 @@
 .Streams_participants_tool .Users_avatar_tool,
 .Streams_participants_tool .Streams_participants_invite {
 	display: inline-block;
-	padding: 7px;
+	padding: 3px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
