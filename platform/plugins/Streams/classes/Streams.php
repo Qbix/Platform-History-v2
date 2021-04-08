@@ -1540,6 +1540,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $streams reference to array of Streams_Stream to fill with streams
 	 * @param {array} $options=array() An array of options that can include:
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just relates the stream to the category
+	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
 	 */
 	private static function getRelations(
 		&$asUserId,
@@ -1605,19 +1606,27 @@ abstract class Streams extends Base_Streams
 			'toPublisherId', 'toStreamName', 
 			'type', 'fromPublisherId', 'fromStreamName'
 		);
-		
+
+		$ignoreCache = Q::ifset($options, "ignoreCache", false);
+
 		// Fetch relatedTo
 		if ($relatedTo !== false) {
 			$relatedTo = Streams_RelatedTo::select()
-			->where($criteria)
-			->fetchDbRows(null, null, $arrayField);
+			->where($criteria);
+			if ($ignoreCache) {
+				$relatedTo->ignoreCache();
+			}
+			$relatedTo = $relatedTo->fetchDbRows(null, null, $arrayField);
 		}
 		
 		// Fetch relatedFrom
 		if ($relatedFrom !== false) {
 			$relatedFrom = Streams_RelatedFrom::select()
-			->where($criteria)
-			->fetchDbRows(null, null, $arrayField);
+			->where($criteria);
+			if ($ignoreCache) {
+				$relatedFrom->ignoreCache();
+			}
+			$relatedFrom = $relatedFrom->fetchDbRows(null, null, $arrayField);
 		}
 		
 		// Recover from inconsistency:
@@ -1686,6 +1695,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.extra] Can be array of ($streamName => $extra) info
 	 *  to save in the "extra" field.
 	 * @param {boolean} [$options.inheritAccess=false] If true, inherit access from category to related stream.
+	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
 	 * @return {array|boolean}
 	 *  Returns false if the operation was canceled by a hook
 	 *  Returns true if relation was already there
