@@ -1957,25 +1957,6 @@ Q.shuffle = function _Q_shuffle( arr ) {
 };
 
 /**
- * Returns the number of milliseconds since the first call to this function
- * i.e. since this script was parsed.
- * @method milliseconds
- * @param {Boolean} sinceEpoch
- *  Defaults to false. If true, just returns the number of milliseconds in the UNIX timestamp.
- * @return {number}
- *  The number of milliseconds, with fractional part
- */
-Q.milliseconds = function _Q_microtime(sinceEpoch) {
-	var now = Date.now();
-	if (sinceEpoch) {
-		return now;
-	}
-	Q.milliseconds.started = Q.milliseconds.started || now;
-	return now - Q.milliseconds.started;
-};
-Q.milliseconds();
-
-/**
  * Returns the number of milliseconds since the
  * first call to this function (i.e. since script started).
  * @method milliseconds

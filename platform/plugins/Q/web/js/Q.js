@@ -1141,25 +1141,6 @@ if (!root.requestAnimationFrame) {
  */
 
 /**
- * Returns the number of milliseconds since the first call to this function
- * i.e. since this script was parsed.
- * @method milliseconds
- * @param {boolean} sinceEpoch
- *  Defaults to false. If true, just returns the number of milliseconds in the UNIX timestamp.
- * @return {number}
- *  The number of milliseconds, with fractional part
- */
-Q.milliseconds = function _Q_microtime(sinceEpoch) {
-	var now = Date.now();
-	if (sinceEpoch) {
-		return now;
-	}
-	Q.milliseconds.started = Q.milliseconds.started || now;
-	return now - Q.milliseconds.started;
-};
-Q.milliseconds();
-
-/**
  * Returns the number of milliseconds since the
  * first call to this function (i.e. since script started).
  * @static
@@ -1175,6 +1156,31 @@ Q.milliseconds = function (sinceEpoch) {
 	return result - Q.milliseconds.start;
 };
 Q.milliseconds.start = Date.now();
+
+/**
+ * Format time related to locale (13:00 or 1pm)
+ * @static
+ * @method timeInLocale
+ * @param {string} time String in format hh or hh:mm or hh:mm:ss
+ * @param {object} [options]
+ * @param {object} [options.locale] Locale to relate format time
+ * @return {String}
+ */
+Q.timeInLocale = function (time, options) {
+	var date = new Date();
+	var timeSplitted = time.split(":");
+	Date.prototype.setHours.apply(date, timeSplitted);
+	var locale = Q.getObject("locale", options) || navigator.language;
+	var params = {hour: '2-digit'};
+	if (timeSplitted.length > 1) {
+		params.minute = '2-digit';
+	}
+	if (timeSplitted.length > 2) {
+		params.second = '2-digit';
+	}
+
+	return date.toLocaleTimeString(locale, params).replace(/^0+/, '');
+}
 
 /**
  * Creates a copied object which you can extend, using existing object as prototype
