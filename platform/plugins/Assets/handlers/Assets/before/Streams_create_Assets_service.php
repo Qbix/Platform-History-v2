@@ -5,7 +5,8 @@
  * @param {array} $params
  * @param {Streams_Stream} $params.stream
  */
-function Assets_after_Streams_create_Assets_service($params)
+function Assets_before_Streams_create_Assets_service($params, $stream)
 {
-	Streams::getInterest('Service: '.$params['stream']->title);
+	$interest = Streams::getInterest($stream->title);
+	$stream->icon = $interest->icon;
 }

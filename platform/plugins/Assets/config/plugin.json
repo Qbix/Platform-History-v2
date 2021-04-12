@@ -11,14 +11,14 @@
 		"handlersBeforeEvent": {
 			"Q/responseExtras": ["Assets/before/Q_responseExtras"],
 			"Streams/relateTo/Calendars/event": ["Assets/before/Streams_relateTo_Calendars_event"],
-			"Streams/unrelateTo/Calendars/event": ["Assets/before/Streams_unrelateTo_Calendars_event"]
+			"Streams/unrelateTo/Calendars/event": ["Assets/before/Streams_unrelateTo_Calendars_event"],
+			"Streams/create/Assets/service": ["Assets/before/Streams_create_Assets_service"]
 		},
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
-			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Streams/create/Assets/service": ["Assets/after/Streams_create_Assets_service"]
+			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"]
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
