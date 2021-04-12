@@ -43,6 +43,13 @@
 			"Assets/charged.php": {"html": true},
 			"Assets/startedSubscription.php": {"html": true},
 			"Assets/startSubscription.php": {"html": true}
+		},
+		"images": {
+			"Assets/service": {
+				"sizes": ["40", "50", "80", "200", "400", "400x", "x400", "x100", "500x"],
+				"defaultSize": "400",
+				"maxStretch": 2
+			}
 		}
 	},
 	"Streams": {
