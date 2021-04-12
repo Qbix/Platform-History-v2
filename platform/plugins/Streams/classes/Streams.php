@@ -4719,7 +4719,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream}
 	 */
 	static function getInterest ($title, $publisherId = null) {
-		$streamName = 'Streams/interest/' . Q_Utils::normalize($title);
+		$streamName = 'Streams/interest/' . Q_Utils::normalize(trim($title));
 		$publisherId = $publisherId ?: Users::communityId();
 
 		$stream = Streams::fetchOne(null, $publisherId, $streamName);
@@ -4731,13 +4731,21 @@ abstract class Streams extends Base_Streams
 			if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
 				$stream->icon = $streamName;
 			} else {
-				$parts = explode(': ', $title, 2);
-				$keywords = implode(' ', $parts);
-				$tries = array($keywords, $parts[1]);
+				// if char colon exists, remove from title colon and all before
+				if (strstr($title, ':')) {
+					$title = preg_replace("/.+:\s/", '', $title);
+				}
+				$keywords = explode(' ', $title);
 				$data = null;
-				foreach ($tries as $t) {
+				while (sizeof($keywords)) {
+					$subpath = "Streams/interest/".strtolower(implode("_", $keywords));
+					if (is_dir(STREAMS_PLUGIN_FILES_DIR.DS."Streams".DS."icons".DS.$subpath)) {
+						$stream->icon = $subpath;
+						break;
+					}
+
 					try {
-						$data = Q_Image::pixabay($t, array(
+						$data = Q_Image::pixabay(strtolower(implode(" ", $keywords)), array(
 							'orientation' => 'horizontal',
 							'min_width' => '500',
 							'safesearch' => 'true',
@@ -4747,7 +4755,9 @@ abstract class Streams extends Base_Streams
 						Q::log("Exception during Streams/interest post: " . $e->getMessage());
 						$data = null;
 					}
-					if ($data) {
+					if (empty($data)) {
+						array_pop($keywords);
+					} else {
 						break;
 					}
 				}
@@ -4755,12 +4765,12 @@ abstract class Streams extends Base_Streams
 					$params = array(
 						'data' => $data,
 						'path' => "{{Streams}}/img/icons",
-						'subpath' => $streamName,
+						'subpath' => $subpath,
 						'save' => 'Streams/interest',
 						'skipAccess' => true
 					);
 					Q_Image::save($params);
-					$stream->icon = $streamName;
+					$stream->icon = $subpath;
 				}
 			}
 			$stream->save();
