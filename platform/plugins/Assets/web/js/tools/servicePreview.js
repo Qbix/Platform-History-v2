@@ -178,7 +178,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
 		var tool = this;
-		var relatedParticipants = Q.getObject("Assets.service.relatedParticipants", Q);
+		var relatedParticipants = Q.extend({}, Q.getObject("Assets.service.relatedParticipants", Q));
 		var selectedParticipants = Q.getObject("selectedParticipants", fields);
 		if (selectedParticipants) {
 			Q.each(relatedParticipants, function (index) {

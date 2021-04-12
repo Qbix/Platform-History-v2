@@ -11,7 +11,7 @@ function Assets_after_Assets_charge($params)
 	$options = $params['options'];
 
 	// rate for currency required
-	$credits = Assets_Credits::convertToCredits($amount, $currency);
+	$credits = Assets_Credits::convert($amount, $currency, "credits");
 
 	Assets_Credits::grant($credits, 'BoughtCredits', $user->id);
 

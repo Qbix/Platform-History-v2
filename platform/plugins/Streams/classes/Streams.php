@@ -4532,14 +4532,10 @@ abstract class Streams extends Base_Streams
 				$mt = array($mt);
 			}
 			ksort($mt);
-			$j = json_encode($mt);
-			$infoForTotals[$j] = array($n, $mt);
-		}
-		foreach ($infoForTotals as $info) {
 			$frows = Streams_MessageTotal::select()->where(array(
 				'publisherId' => $publisherId,
-				'streamName' => $info[0],
-				'messageType' => $info[1]
+				'streamName' => $n,
+				'messageType' => $mt
 			))->fetchDbRows();
 			$trows = array_merge($trows, $frows);
 		}
@@ -4600,20 +4596,16 @@ abstract class Streams extends Base_Streams
 				$mt = array($mt);
 			}
 			ksort($mt);
-			$j = json_encode($mt);
-			$infoForTotals[$j] = array($n, $mt);
-		}
-		foreach ($infoForTotals as $info) {
-			if ($info[1] === array(true)) { // all relations
+			if ($mt === array(true)) { // all relations
 				$frows = Streams_RelatedToTotal::select()->where(array(
 					'toPublisherId' => $publisherId,
-					'toStreamName' => $info[0]
+					'toStreamName' => $n
 				))->fetchDbRows();
 			} else { // particular relations
 				$frows = Streams_RelatedToTotal::select()->where(array(
 					'toPublisherId' => $publisherId,
-					'toStreamName' => $info[0],
-					'relationType' => $info[1]
+					'toStreamName' => $n,
+					'relationType' => $mt
 				))->fetchDbRows();
 			}
 			$trows = array_merge($trows, $frows);
@@ -4677,20 +4669,16 @@ abstract class Streams extends Base_Streams
 				$mt = array($mt);
 			}
 			ksort($mt);
-			$j = json_encode($mt);
-			$infoForTotals[$j] = array($n, $mt);
-		}
-		foreach ($infoForTotals as $info) {
-			if ($info[1] === array(true)) { // all relations
+			if ($mt === array(true)) { // all relations
 				$frows = Streams_RelatedFromTotal::select()->where(array(
 					'fromPublisherId' => $publisherId,
-					'fromStreamName' => $info[0]
+					'fromStreamName' => $n
 				))->fetchDbRows();
 			} else { // particular relations
 				$frows = Streams_RelatedFromTotal::select()->where(array(
 					'fromPublisherId' => $publisherId,
-					'fromStreamName' => $info[0],
-					'relationType' => $info[1]
+					'fromStreamName' => $n,
+					'relationType' => $mt
 				))->fetchDbRows();
 			}
 			$trows = array_merge($trows, $frows);
