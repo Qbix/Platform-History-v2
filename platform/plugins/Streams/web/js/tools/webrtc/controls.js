@@ -1951,156 +1951,87 @@
 
 
                         function createRecordingLink() {
-                            var recordingLinkCon = document.createElement('DIV');
-                            recordingLinkCon.className = 'Streams_webrtc_recording Streams_webrtc_streaming_recording_item'
+                            var recordingCon = document.createElement('DIV');
+                            recordingCon.className = 'Streams_webrtc_streaming Streams_webrtc_streaming_recording_item'
+
+                            var recordingItem = document.createElement('DIV');
+                            recordingItem.className = 'Streams_webrtc_streaming_item';
+                            var recordingTextLabel = document.createElement('SPAN');
+                            recordingTextLabel.innerHTML =  Q.getObject("webrtc.settingsPopup.startRecording", tool.textes);
+                            var recordingIcon = document.createElement('SPAN');
+                            recordingIcon.className = 'Streams_webrtc_streaming_recording_icon';
+                            recordingIcon.innerHTML = icons.recordingIcon;
+                            recordingItem.appendChild(recordingTextLabel);
+                            recordingItem.appendChild(recordingIcon);
+
+                            var recordingSettings = document.createElement('DIV');
+                            recordingSettings.className = 'Streams_webrtc_streaming_start_settings';
+
+                            var startRecordingBtnCon = document.createElement('DIV');
+                            startRecordingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+                            var startRecordingBtn = document.createElement('BUTTON');
+                            startRecordingBtn.type = 'button';
+                            startRecordingBtn.className = 'Q_button';
+                            startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.textes);
+
+                            var stopRecordingBtnCon = document.createElement('DIV');
+                            stopRecordingBtnCon.className = 'Streams_webrtc_streaming_stop';
+
+                            var stopRecordingBtn = document.createElement('BUTTON');
+                            stopRecordingBtn.type = 'button';
+                            stopRecordingBtn.className = 'Q_button';
+                            stopRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.stop", tool.textes);
+
+                            recordingCon.appendChild(recordingItem);
+
+                            startRecordingBtnCon.appendChild(startRecordingBtn);
+                            recordingSettings.appendChild(startRecordingBtnCon);
 
 
-                            var videoRecordingItem = document.createElement('DIV');
-                            videoRecordingItem.className = 'Streams_webrtc_recording_item';
-                            var fbLivetextLabel = document.createElement('SPAN');
-                            fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", tool.textes);
-                            var fbLiveIcon = document.createElement('SPAN');
-                            fbLiveIcon.className = 'Streams_webrtc_streaming_recording_icon';
-                            fbLiveIcon.innerHTML = icons.recordingIcon;
-                            videoRecordingItem.appendChild(fbLivetextLabel);
-                            videoRecordingItem.appendChild(fbLiveIcon);
-
-                            var fbStreamingSettings = document.createElement('DIV');
-                            fbStreamingSettings.className = 'Streams_webrtc_streaming_settings'
-
-                            var fbStreamingStartSettings = document.createElement('DIV');
-                            fbStreamingStartSettings.className = 'Streams_webrtc_streaming_start_settings';
-
-                            var fbPreviousStreamings = document.createElement('DIV');
-                            fbPreviousStreamings.className = 'Streams_webrtc_streaming_previous';
-
-                            var facebookLiveTtle = document.createElement('LABEL');
-                            facebookLiveTtle.className = 'Streams_webrtc_streaming_title';
-
-                            var facebookLiveTtleInput = document.createElement('INPUT');
-                            facebookLiveTtleInput.type = 'text';
-                            facebookLiveTtleInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveTitle", tool.textes);
-
-                            var facebookLiveDesc = document.createElement('LABEL');
-                            facebookLiveDesc.className = 'Streams_webrtc_streaming_desc';
-
-                            var facebookLiveDescInput = document.createElement('INPUT');
-                            facebookLiveDescInput.type = 'text';
-                            facebookLiveDescInput.placeholder = Q.getObject("webrtc.settingsPopup.fbLiveDescription", tool.textes);
-
-                            var startStreamingBtnCon = document.createElement('DIV');
-                            startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
-
-                            var privacySelect = document.createElement('SELECT');
-                            var option1 = document.createElement('OPTION');
-                            option1.name = 'privacy';
-                            option1.value = 'EVERYONE';
-                            option1.innerHTML = Q.getObject("webrtc.settingsPopup.fbPublicAccess", tool.textes);
-                            option1.selected = true;
-                            var option2 = document.createElement('OPTION');
-                            option2.innerHTML = Q.getObject("webrtc.settingsPopup.fbFriendsAccess", tool.textes);
-                            option2.name = 'privacy';
-                            option2.value = 'ALL_FRIENDS';
-                            var option3 = document.createElement('OPTION');
-                            option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
-                            option3.name = 'privacy';
-                            option3.value = 'SELF';
-
-                            var startStreamingBtn = document.createElement('BUTTON');
-                            startStreamingBtn.type = 'button';
-                            startStreamingBtn.className = 'Q_button';
-                            startStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStartLive", tool.textes);
-
-
-
-                            var fbStreamingLiveSection = document.createElement('DIV');
-                            fbStreamingLiveSection.style.display = 'none';
-                            fbStreamingLiveSection.className = 'Streams_webrtc_streaming_live';
-
-                            var facebookLiveEmbed = document.createElement('DIV');
-                            facebookLiveEmbed.className = "Streams_webrtc_streaming_url";
-
-                            var facebookLiveUrl = document.createElement('INPUT');
-                            facebookLiveUrl.type = 'text';
-                            tool.facebookLiveUrlInput = facebookLiveUrl;
-
-                            var facebookLiveCopy = document.createElement('DIV');
-                            facebookLiveCopy.className = 'Streams_webrtc_streaming_copy_url_btn';
-                            var facebookLiveCopyLink = document.createElement('SPAN');
-                            facebookLiveCopyLink.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
-
+                            var activeRecordingSection = document.createElement('DIV');
+                            activeRecordingSection.style.display = 'none';
+                            activeRecordingSection.className = 'Streams_webrtc_streaming_live';
                             var buttonsCon = document.createElement('DIV');
                             buttonsCon.className = 'Streams_webrtc_streaming_buttons';
 
-                            var getIframeBtnCon = document.createElement('DIV');
-                            getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
+                            stopRecordingBtnCon.appendChild(stopRecordingBtn);
+                            buttonsCon.appendChild(stopRecordingBtnCon);
+                            activeRecordingSection.appendChild(buttonsCon);
 
-                            var getIframeBtn = document.createElement('BUTTON');
-                            getIframeBtn.type = 'button';
-                            getIframeBtn.className = 'Q_button';
-                            getIframeBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
+                            recordingCon.appendChild(recordingSettings);
+                            recordingCon.appendChild(activeRecordingSection);
 
-                            var stopStreamingBtnCon = document.createElement('DIV');
-                            stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
-
-                            var stopStreamingBtn = document.createElement('BUTTON');
-                            stopStreamingBtn.type = 'button';
-                            stopStreamingBtn.className = 'Q_button';
-                            stopStreamingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.fbStopLive", tool.textes);
-
-
-                            facebookLiveCopy.appendChild(facebookLiveCopyLink);
-                            facebookLiveEmbed.appendChild(facebookLiveUrl);
-                            facebookLiveEmbed.appendChild(facebookLiveCopy);
-                            streamingAndUploading.appendChild(facebookLiveItem);
-                            if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
-                                facebookLiveTtle.appendChild(facebookLiveTtleInput);
-                                fbStreamingStartSettings.appendChild(facebookLiveTtle);
-                                facebookLiveDesc.appendChild(facebookLiveDescInput);
-                                fbStreamingStartSettings.appendChild(facebookLiveDesc);
-
-                                privacySelect.appendChild(option1);
-                                privacySelect.appendChild(option2);
-                                privacySelect.appendChild(option3);
-                                startStreamingBtnCon.appendChild(privacySelect);
-                            }
-
-
-                            startStreamingBtnCon.appendChild(startStreamingBtn);
-                            fbStreamingStartSettings.appendChild(startStreamingBtnCon);
-                            fbStreamingLiveSection.appendChild(facebookLiveEmbed);
-                            getIframeBtnCon.appendChild(getIframeBtn);
-                            buttonsCon.appendChild(getIframeBtnCon);
-                            stopStreamingBtnCon.appendChild(stopStreamingBtn);
-                            buttonsCon.appendChild(stopStreamingBtnCon);
-                            fbStreamingLiveSection.appendChild(buttonsCon);
-
-                            streamingAndUploading.appendChild(fbStreamingStartSettings);
-                            streamingAndUploading.appendChild(fbStreamingLiveSection);
-                            streamingAndUploading.appendChild(fbPreviousStreamings);
-
-                            recordingLinkCon.appendChild(videoRecordingItem);
-
-                            videoRecordingItem.addEventListener('click', function () {
-                                if(fbStreamingStartSettings.classList.contains('shown')) {
-                                    fbStreamingStartSettings.classList.remove('shown');
+                            recordingItem.addEventListener('click', function (e) {
+                                if(recordingSettings.classList.contains('shown')) {
+                                    recordingSettings.classList.remove('shown');
                                 } else {
-                                    fbStreamingStartSettings.classList.add('shown');
-                                    facebookLiveTtleInput.focus();
+                                    recordingSettings.classList.add('shown');
                                 }
                             })
 
-                            videoRecordingItem.addEventListener('click', function () {
-                                if(!recordingLinkCon.classList.contains('Q_working')) recordingLinkCon.classList.add('Q_working');
+                            startRecordingBtn.addEventListener('click', function () {
+                                if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                                tool.WebRTCLib.screensInterface.videoRecorder.startRecording(function (liveInfo) {
-                                    if(recordingLinkCon.classList.contains('Q_working')) recordingLinkCon.classList.remove('Q_working');
-                                    fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.", tool.textes);
+                                tool.WebRTCLib.screensInterface.localRecorder.startRecording(function (liveInfo) {
+                                    if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                    recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", tool.textes);
+                                    recordingSettings.style.display = 'none';
+                                    activeRecordingSection.style.display = 'block';
+                                });
+                            })
+                            stopRecordingBtn.addEventListener('click', function () {
+                                if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
+                                tool.WebRTCLib.screensInterface.localRecorder.stopRecording(function () {
+                                    if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                    recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", tool.textes);
+                                    activeRecordingSection.style.display = 'none';
+                                    recordingSettings.style.display = 'block';
                                 });
                             })
 
-                            return recordingLinkCon;
+                            return recordingCon;
                         }
 
                         function createStreamingAndRecordingSection() {
@@ -3445,9 +3376,6 @@
 
                         var sourcesInterface = (function () {
                             var _list = [];
-                            window.getList = function() {
-                            	return _list;
-							}
                             var _selectedSource = null;
 
                             var SourcesListItem = function (name) {
@@ -3532,16 +3460,9 @@
                                 this.titleEl = itemElText;
                                 this.itemEl.addEventListener('click', function () {
                                 	console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
-                                	if(sourceInstance.sourceInstance.sourceType == 'group' && sourceInstance.sourceInstance.groupType == 'webrtc') {
-                                        optionsColumn.canvasLayoutOptions.show();
-									} else if(sourceInstance.sourceInstance.sourceType == 'image') {
-                                        optionsColumn.imageSourceOptions.show(sourceInstance);
-                                    } else if(sourceInstance.sourceInstance.sourceType == 'video') {
-                                        optionsColumn.videoSourceOptions.show(sourceInstance);
-                                    } else {
-                                        optionsColumn.hideActiveView();
-									}
                                     selectSource(sourceInstance);
+
+                                    optionsColumn.update();
                                 })
                                 itemElControlVisibility.addEventListener('click', this.toggle)
                             }
@@ -3838,7 +3759,7 @@
                             tool.WebRTCLib.screensInterface.canvasComposer.on('sourceMoved', function () {
                                 syncList();
                             })
-                            window.syncList = syncList;
+                            //window.syncList = syncList;
 
                             function sortList() {
                                 console.log('sortList: sources', _activeScene.sceneInstance.sources);
@@ -3961,7 +3882,6 @@
                                     console.log('source level', level)
                                 }
                             }
-                            window.sortList = sortList
 
                             function moveItem(old_index, new_index) {
                                 console.log('moveItem', old_index, new_index);
@@ -4018,7 +3938,12 @@
 								if(_selectedSource != null) {
                                     tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
                                     syncList();
+                                    _selectedSource = null;
 								};
+                                _resizingElement.style.width = '0px'
+                                _resizingElement.style.height = '0px'
+                                _resizingElement.style.border = 'none'
+								optionsColumn.update();
                             }
 
                             return {
@@ -5247,11 +5172,25 @@
                             }
                         }())
 
+						function update() {
+                    		var selectedSource = scenesInterface.sourcesInterface.getSelectedSource();
+                            if(selectedSource && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
+                                optionsColumn.canvasLayoutOptions.show();
+                            } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'image') {
+                                optionsColumn.imageSourceOptions.show(selectedSource);
+                            } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'video') {
+                                optionsColumn.videoSourceOptions.show(selectedSource);
+                            } else {
+                                optionsColumn.hideActiveView();
+                            }
+                        }
+
 						return {
                             canvasLayoutOptions: canvasLayoutOptions,
                             imageSourceOptions: imageSourceOptions,
                             videoSourceOptions: videoSourceOptions,
-                            hideActiveView: hideActiveView
+                            hideActiveView: hideActiveView,
+                            update: update
 						}
 					}())
 
@@ -5446,7 +5385,6 @@
                         previewBoxBody.appendChild(previewBoxBodyInner);
                         previewBox.appendChild(previewBoxBody);
                         boxContent.appendChild(previewBox);
-                        //window.streamingPreview = previewBoxBody;
 
 
                         var streamingControls=document.createElement('DIV');
@@ -5604,7 +5542,7 @@
                             }
                         }
 
-                        window.advStreaming = tool.advancedLiveStreamingBox;
+                        //window.advStreaming = tool.advancedLiveStreamingBox;
 
                         tool.textChatBtn.addEventListener('click', function (e) {
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");

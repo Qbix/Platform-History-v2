@@ -232,6 +232,8 @@
             "stopFBLive": "Stop Facebook Livestream",
             "startRecording": "Start Recording",
             "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
             "recordingInProgress": "Recording is in progress...",
             "fbLiveTitle": "Live Title",
             "fbLiveDescription": "Live Description",

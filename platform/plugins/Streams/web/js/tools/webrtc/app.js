@@ -716,7 +716,7 @@ window.WebRTCconferenceLib = function app(options){
 
             document.body.appendChild(_commonAudioEl);
             app.event.on('audioTrackLoaded', function(e) {
-              _commonMediaStream.addTrack(e.track.mediaStreamTrack)
+                _commonMediaStream.addTrack(e.track.mediaStreamTrack)
             })
             var playCommonAudio = function(){
                 //alert('123')
@@ -1505,19 +1505,19 @@ window.WebRTCconferenceLib = function app(options){
 
             if(!participant.isLocal && track.kind == 'video') {
                 remoteStreamEl.muted = true;
-
+                remoteStreamEl.autoplay = true;
+                remoteStreamEl.load();
+                remoteStreamEl.playsInline = true;
+                remoteStreamEl.setAttribute('webkit-playsinline', true);
             }
 
-            remoteStreamEl.autoplay = true;
-            remoteStreamEl.load();
-            if(!track.isLocal && track.kind == 'audio') {
-                //remoteStreamEl.play();
-
-                log('createTrackElement: play()', remoteStreamEl)
+            if(!participant.isLocal && track.kind == 'audio') {
+                remoteStreamEl.autoplay = true;
+                remoteStreamEl.load();
+                remoteStreamEl.playsInline = true;
+                remoteStreamEl.setAttribute('webkit-playsinline', true);
             }
-            remoteStreamEl.playsInline = true;
-            remoteStreamEl.setAttribute('webkit-playsinline', true);
-            ///remoteStreamEl.muted = true;
+
             if(participant.isLocal) {
                 remoteStreamEl.volume = 0;
                 remoteStreamEl.muted = true;
@@ -1547,6 +1547,15 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
             }
+            remoteStreamEl.addEventListener('play', function (e) {
+                let time = performance.timeOrigin + performance.now();
+                app.event.dispatch('audioTrackPlay', {
+                    time: time,
+                    participant: participant,
+                    trackEl: e.target,
+                    track:track
+                });
+            })
             remoteStreamEl.onloadedmetadata = function () {
                 log('createTrackElement: onloadedmetadata', remoteStreamEl)
             }
@@ -1837,7 +1846,7 @@ window.WebRTCconferenceLib = function app(options){
                 var _webrtcGroup = null;
                 var _availableWebRTCSources = [];
                 var _size = {width:1280, height: 720};
-                var _webrtcLayoutRect = {width:1280, height: 720, x: 0, y: 0};
+                var _webrtcLayoutRect = {width:1280, height: 720, x: 0, y: 0, updateTimeout: null};
                 var _inputCtx = null;
                 var _outputCtx = null;
                 var _isActive = null;
@@ -1891,8 +1900,15 @@ window.WebRTCconferenceLib = function app(options){
                     if(x != null) _webrtcLayoutRect.x = parseFloat(x);
                     if(y != null) _webrtcLayoutRect.y = parseFloat(y);
                     log('setWebrtcLayoutRect _webrtcLayoutRect', _webrtcLayoutRect);
+                    if(_webrtcLayoutRect.updateTimeout != null) {
+                        clearTimeout(_webrtcLayoutRect.updateTimeout);
+                        _webrtcLayoutRect.updateTimeout = null;
+                    }
+                    _webrtcLayoutRect.updateTimeout = setTimeout(function () {
+                            updateWebRTCCanvasLayout();
 
-                    updateWebRTCCanvasLayout();
+                    }, 100)
+
                 }
 
                 function getWebrtcLayoutRect(){
@@ -2044,11 +2060,8 @@ window.WebRTCconferenceLib = function app(options){
                             this._y = value;
                             if(videoInstance.eventDispatcher != null) videoInstance.eventDispatcher.dispatch('rectChanged')
                         },
-                        get x() {                     return this._x;},
-                        get y() {
-                            this._y = value;
-                            if(videoInstance.eventDispatcher != null) videoInstance.eventDispatcher.dispatch('rectChanged')
-                        }
+                        get x() {return this._x;},
+                        get y() {return this._y;}
                     };
                     this.updateRect = function (width, height, x, y) {
                         this.rect._width = width;
@@ -2167,14 +2180,14 @@ window.WebRTCconferenceLib = function app(options){
                         let webrtcGroup = getWebrtcGroupIndex();
 
 
-                            let h = webrtcGroup.index + 1, sourceStream = _activeScene.sources[h];
-                            while (sourceStream != null && sourceStream.sourceType == 'webrtc') {
-                                h++
-                                sourceStream = _activeScene.sources[h];
-                            }
-                            log('addSource add at the end ' + (h), _activeScene.sources.length)
+                        let h = webrtcGroup.index + 1, sourceStream = _activeScene.sources[h];
+                        while (sourceStream != null && sourceStream.sourceType == 'webrtc') {
+                            h++
+                            sourceStream = _activeScene.sources[h];
+                        }
+                        log('addSource add at the end ' + (h), _activeScene.sources.length)
 
-                            _activeScene.sources.splice((h), 0, newSource)
+                        _activeScene.sources.splice((h), 0, newSource)
 
 
                         log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
@@ -2250,7 +2263,6 @@ window.WebRTCconferenceLib = function app(options){
                         return source.sourceType == type && source.parentGroup != null && source.parentGroup.groupType == 'webrtc' && source.active === true;
                     });
                 }
-                window.getSources = getSources;
 
                 function moveSource(old_index, new_index) {
                     console.log('moveSource', old_index, new_index);
@@ -2496,9 +2508,8 @@ window.WebRTCconferenceLib = function app(options){
 
                                 if(!trackCurrentlyRendered) {
                                     log('updateWebRTCCanvasLayout !trackCurrentlyRendered')
-                                    let audioOnly = layoutName == 'audioOnly' || _currentLayout == 'audioOnly';
-
-                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || _currentLayout == 'audioScreenSharing') && !vTracks[s].screensharing;
+                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
+                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing')) && !vTracks[s].screensharing;
                                     if(audioOnly || notScreensharingVideo) {
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered if1')
 
@@ -2584,8 +2595,8 @@ window.WebRTCconferenceLib = function app(options){
                                 } else {
                                     log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false')
 
-                                    let audioOnly = layoutName == 'audioOnly' || _currentLayout == 'audioOnly';
-                                    let audioScreenSharing =  layoutName == 'audioScreenSharing' || _currentLayout == 'audioScreenSharing';
+                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
+                                    let audioScreenSharing =  layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing');
                                     if((!audioOnly && !audioScreenSharing) || (!audioOnly && audioScreenSharing && trackCurrentlyRendered.screenSharing)) {
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false if1')
 
@@ -2954,13 +2965,14 @@ window.WebRTCconferenceLib = function app(options){
                                 if(a === 0) {
                                     for (let j in _activeScene.sources) {
                                         if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
-                                            log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares add after index ' + j)
-                                            let h = j + 1, sourceStream = _activeScene.sources[h];
+                                            log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares add after index ' + j, j)
+                                            let h = parseInt(j) + 1, sourceStream = _activeScene.sources[h];
                                             while (sourceStream != null && sourceStream.sourceType == 'webrtc') {
                                                 h++
                                                 sourceStream = _activeScene.sources[h];
                                             }
-                                            log('addSource add at the end ' + (h + 1), _activeScene.sources.length)
+                                            log('addSource add add after webrtc ' + h)
+                                            log('addSource add at the end ' + (parseInt(h) + 1), _activeScene.sources.length)
 
                                             moveSource(index,  parseInt(h) + 1)
                                             break;
@@ -3044,37 +3056,28 @@ window.WebRTCconferenceLib = function app(options){
                     _inputCtx.clearRect(0, 0, _size.width, _size.height);
 
                     for(let i = _activeScene.sources.length - 1; i >= 0; i--) {
-                        if(window.debugg == true) console.log('_activeScene.sources i' + i)
                         if(_activeScene.sources[i].active == false ||_activeScene.sources[i].sourceType == 'group') continue;
-                        if(window.debugg == true) console.log('_activeScene.sources', _activeScene.sources.length)
 
                         let streamData = _activeScene.sources[i];
 
                         if(streamData.sourceType == 'webrtc' && streamData.kind == 'video') {
-                            if(window.debugg == true) console.log('_activeScene.sources if1')
-                            //log('drawVideosOnCanvas 1')
-
                             drawSingleVideoOnCanvas(streamData.htmlVideoEl, streamData, _size.width, _size.height, streamData.htmlVideoEl.videoWidth, streamData.htmlVideoEl.videoHeight);
                             streamData.eventDispatcher.dispatch('userRendered')
 
                         } else if(streamData.sourceType == 'webrtc' && streamData.kind == 'audio') {
-                            //log('drawVideosOnCanvas 1')
-                            if(window.debugg == true) console.log('_activeScene.sources if2')
-
                             drawSingleAudioOnCanvas(streamData);
                             streamData.eventDispatcher.dispatch('userRendered')
 
                         } else if(streamData.sourceType == 'image') {
-                            //log('drawVideosOnCanvas 1')
-                            if(window.debugg == true) console.log('_activeScene.sources if3')
-
                             drawImage(streamData);
                         } else if(streamData.sourceType == 'video') {
-                            //log('drawVideosOnCanvas 1')
-                            if(window.debugg == true) console.log('_activeScene.sources if3')
-
                             drawVideo(streamData);
                         } else if(streamData.sourceType == 'webrtcrect') {
+
+                            _inputCtx.save();
+                            _inputCtx.beginPath();
+                            _inputCtx.rect(streamData.baseSource.rect.x, streamData.baseSource.rect.y, streamData.baseSource.rect.width, streamData.baseSource.rect.height);
+                            _inputCtx.clip();
 
                             _inputCtx.fillStyle = streamData.fill;
                             _inputCtx.fillRect( getX(streamData),  getY(streamData),getWidth(streamData), getHeight(streamData));
@@ -3084,7 +3087,15 @@ window.WebRTCconferenceLib = function app(options){
                                 streamData.eventDispatcher.dispatch('animationEnded');
                                 streamData.frame = streamData.frame + 1;
                             }
+
+                            _inputCtx.restore();
+
+
                         } else if(streamData.sourceType == 'webrtctext') {
+                            _inputCtx.save();
+                            _inputCtx.beginPath();
+                            _inputCtx.rect(streamData.baseSource.baseSource.rect.x, streamData.baseSource.baseSource.rect.y, streamData.baseSource.baseSource.rect.width, streamData.baseSource.baseSource.rect.height);
+                            _inputCtx.clip();
 
                             _inputCtx.font = streamData.font;
                             _inputCtx.fillStyle = streamData.fillStyle;
@@ -3096,6 +3107,8 @@ window.WebRTCconferenceLib = function app(options){
                                 streamData.eventDispatcher.dispatch('animationEnded');
                                 streamData.frame = streamData.frame + 1;
                             }
+
+                            _inputCtx.restore();
                         }
                     }
 
@@ -3122,10 +3135,7 @@ window.WebRTCconferenceLib = function app(options){
                         y = imageSource.rect._y;
                         outWidth = imageSource.rect._width;
                         outHeight = imageSource.rect._height;
-                        if(window.debug4) console.log('drawImage 1')
                     } else {
-                        if(window.debug4) console.log('drawImage 2')
-
                         x = (_size.width / 2) - (width / 2) * scale;
                         y = (_size.height / 2) - (height / 2) * scale;
                         outWidth = width * scale;
@@ -3145,11 +3155,11 @@ window.WebRTCconferenceLib = function app(options){
                 function drawVideo(videoSource) {
 
                     var videoOrImg = videoSource.videoInstance;
-                        videoOrImg.play();
-                        videoOrImg.volume = 0;
+                    videoOrImg.play();
+                    videoOrImg.volume = 0;
 
-                        var width = videoOrImg.videoWidth;
-                        var height = videoOrImg.videoHeight;
+                    var width = videoOrImg.videoWidth;
+                    var height = videoOrImg.videoHeight;
 
                     var scale = Math.max(_size.width / width, _size.height / height);
 
@@ -3159,7 +3169,6 @@ window.WebRTCconferenceLib = function app(options){
                         y = videoSource.rect._y;
                         outWidth = videoSource.rect._width;
                         outHeight = videoSource.rect._height;
-                        if(window.debug4) console.log('drawVideo 1', x, y)
                     } else if (width != 0 && height != 0) {
                         x = (_size.width / 2) - (width / 2) * scale;
                         y = (_size.height / 2) - (height / 2) * scale;
@@ -3169,7 +3178,6 @@ window.WebRTCconferenceLib = function app(options){
                         videoSource.rect.y = y;
                         videoSource.rect.width = outWidth;
                         videoSource.rect.height = outHeight;
-                        if(window.debug4) console.log('drawVideo 2', width, height)
                     } else {
                         return;
                     }
@@ -3244,7 +3252,6 @@ window.WebRTCconferenceLib = function app(options){
                         var freeHeightPx = ( data.rect.height - outHeight ) / 2
                         var centerShift_x = data.rect.x + freeWidthPx;
                         var centerShift_y = data.rect.y + freeHeightPx;
-                        //if(window.debug2) console.log('currentWidth ' +  outWidth + '==' + data.rect.width)
 
                         _inputCtx.drawImage( localVideo,
                             0, 0,
@@ -3346,30 +3353,44 @@ window.WebRTCconferenceLib = function app(options){
                     }
 
                 }
-                
+
                 function displayName(participant) {
 
                     var webrtcSource = _activeScene.sources.filter(function (source) {
                         return source.sourceType == 'webrtc'/* && source.participant == participant */? true : false;
-                    })[0];
+                    })[1];
 
                     if(webrtcSource == null) return;
 
                     var text = webrtcSource.participant.username;
                     _inputCtx.font = "30px Arial";
                     var textWidth = _inputCtx.measureText(text).width;
+                    var percentWidth = (webrtcSource.rect.width / 100 * 70);
+                    var rectHeight = 60;
+                    var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
+                    var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
+                    var yTo;
+                    if(rectHeight < (webrtcSource.rect.height / 100 * 20)) {
+                        yTo = function () {
+                            return webrtcSource.rect.y + webrtcSource.rect.height - 100;
+                        }
+                    } else {
+                        yTo = function () {
+                            return webrtcSource.rect.y + webrtcSource.rect.height - rectHeight;
+                        }
+                    }
                     var nameLabel = new RectObjectSource({
                         baseSource: webrtcSource,
                         frame: 0,
                         frames: 100,
-                        widthFrom: textWidth + 50,
-                        widthTo: textWidth + 50                                 ,
+                        widthFrom: rectWidth,
+                        widthTo: rectWidth,
                         heightFrom: 60,
                         heightTo: 60,
-                        xFrom: webrtcSource.rect.x + (webrtcSource.rect.width - (webrtcSource.rect.width / 100 * 80)) / 2,
-                        xTo: webrtcSource.rect.x + (webrtcSource.rect.width - (webrtcSource.rect.width / 100 * 80)) / 2,
+                        xFrom: xPos,
+                        xTo: xPos,
                         yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
-                        yTo: webrtcSource.rect.y + webrtcSource.rect.height - 100,
+                        yTo: yTo(),
                         fill: 'rgb(255 255 255 / 65%)'
                     });
                     nameLabel.name = 'Rectangle';
@@ -3377,12 +3398,12 @@ window.WebRTCconferenceLib = function app(options){
                     Object.defineProperties(nameLabel, {
                         'xFrom': {
                             'get': function() {
-                                return this.baseSource.rect.x + (this.baseSource.rect.width - (this.baseSource.rect.width / 100 * 80)) / 2;
+                                return this.baseSource.rect.x + (( this.baseSource.rect.width - rectWidth) / 2);
                             }
                         },
                         'xTo': {
                             'get': function() {
-                                return this.baseSource.rect.x + (this.baseSource.rect.width - (this.baseSource.rect.width / 100 * 80)) / 2;
+                                return this.baseSource.rect.x + (( this.baseSource.rect.width - rectWidth) / 2);
                             }
                         },
                         'yFrom': {
@@ -3392,7 +3413,7 @@ window.WebRTCconferenceLib = function app(options){
                         },
                         'yTo': {
                             'get': function() {
-                                return this.baseSource.rect.y + this.baseSource.rect.height - 100;
+                                return yTo();
                             }
                         }
                     });
@@ -3450,7 +3471,7 @@ window.WebRTCconferenceLib = function app(options){
                         Object.defineProperties(nameLabel, {
                             'yFrom': {
                                 'get': function() {
-                                    return this.baseSource.rect.y + this.baseSource.rect.height - 100;
+                                    return yTo();
                                 }
                             },
                             'yTo': {
@@ -3481,7 +3502,6 @@ window.WebRTCconferenceLib = function app(options){
                         });
                     }, 4000)
                 }
-                window.displayName = displayName;
 
                 function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
                     var analyser = data.participant.soundMeter.analyser;
@@ -3924,12 +3944,12 @@ window.WebRTCconferenceLib = function app(options){
                                     y = prevRect.y - (rectHeight + spaceBetween);
                                     x = prevRect.x;
                                 } else if(createNewColOnRight) {
-                                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                    y = size.y + ((size.parentHeight - 66) - (rectHeight + spaceBetween));
                                     x = prevRect.x - (rectWidth + spaceBetween);
                                     createNewColOnRight = false;
                                 } else {
-                                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
-                                    x = size.parentWidth - (rectWidth + spaceBetween);
+                                    y = size.y + ((size.parentHeight - 66) - (rectHeight + spaceBetween));
+                                    x = size.x + (size.parentWidth - (rectWidth + spaceBetween));
                                 }
                                 rightSideCounter++;
 
@@ -3947,12 +3967,12 @@ window.WebRTCconferenceLib = function app(options){
                                     y = prevRect.y - (rectHeight + spaceBetween);
                                     x = prevRect.x;
                                 } else if(createNewColOnLeft) {
-                                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
+                                    y = size.y + ((size.parentHeight - 66) - (rectHeight + spaceBetween));
                                     x = prevRect.x + prevRect.width + spaceBetween;
                                     createNewColOnLeft = false;
                                 } else {
-                                    y = (size.parentHeight - 66) - (rectHeight + spaceBetween);
-                                    x = spaceBetween;
+                                    y = size.y + ((size.parentHeight - 66) - (rectHeight + spaceBetween));
+                                    x = size.x + spaceBetween;
                                 }
                                 leftSideCounter++;
 
@@ -4054,11 +4074,11 @@ window.WebRTCconferenceLib = function app(options){
                                 x = prevRect.x - (rectWidth + spaceBetween);
                             } else if(createNewRow) {
                                 y = prevRect.y - (rectHeight + spaceBetween);
-                                x = size.parentWidth - (rectWidth + spaceBetween);
+                                x = size.x + (size.parentWidth - (rectWidth + spaceBetween));
                                 createNewRow = false;
                             } else {
-                                y = size.parentHeight - (rectHeight + spaceBetween);
-                                x = size.parentWidth - (rectWidth + spaceBetween);
+                                y = size.y + (size.parentHeight - (rectHeight + spaceBetween));
+                                x = size.x + (size.parentWidth - (rectWidth + spaceBetween));
                             }
                             rowItemCounter++;
 
@@ -4600,95 +4620,528 @@ window.WebRTCconferenceLib = function app(options){
             }
         }(app))
 
-        var videoRecorder = (function () {
-            var _videoStream = {blobs: [], allBlobs: [], size: 0}
+        var localRecorder = (function () {
 
-            function onDataAvailablehandler(blob) {
+            var _recorder = null;
+            var _recorderStartTime = null;
+            var _recorderStartTimecode = null;
+            var _recorderPrevTime = null;
+            var _recorderPrevTimecode = null;
+            var _totalLength = 0;
 
-                _videoStream.blobs.push(blob);
-                _videoStream.allBlobs.push(blob);
+            var _otherRecordings = [];
+            var _saveToDbTimer = null;
+            var _sendToServerTimer = null;
+            var _sendingInProgress = false;
+            var _lastChunkCreatedTime = null;
+            var _lastChunkSendTime = null;
+            var _recordingInProgress = false;
 
-                _videoStream.size += blob.size;
+            function saveAudioChunks(blobsToSend) {
+                console.log('saveAudioChunks', blobsToSend)
+                if(blobsToSend.size == 0) return;
+                _lastChunkCreatedTime = Date.now();
+
+               // var mergedBlob = new Blob(blobsToSend);
+                console.log('SAVE LOCAL AUDIO')
+                console.log('SAVE LOCAL AUDIO _otherRecordings', _otherRecordings[0])
+                let otherRecordingsTimecode = _otherRecordings.splice(0, _otherRecordings.length);
+                mediaDB('localAudio').save({blob:blobsToSend, roomId: options.roomName, otherRecordings:otherRecordingsTimecode, timestamp: Date.now()}, function () {
+
+                });
             }
 
-            function saveToFile(file, fileName) {
-                log('saveToFile')
-                if (!file) {
-                    throw 'Blob object is required.';
-                }
+            function sendAudioChunks() {
+                _lastChunkSendTime = Date.now();
+                console.log('sendAudioChunks');
+                mediaDB('localAudio').getStorage(function (results) {
+                    console.log('sendAudioChunks: get audio: results', results)
 
-                if (!file.type) {
-                    try {
-                        file.type = 'video/webm';
-                    } catch (e) {}
-                }
+                    results.sort(function(a, b){
+                        var x = a.timestamp;
+                        var y = b.timestamp;
+                        if (x < y) {return -1;}
+                        if (x > y) {return 1;}
+                        return 0;
+                    });
 
-                var fileExtension = (file.type || 'video/webm').split('/')[1];
+                    if(results.length == 0) {
+                        _sendToServerTimer = setTimeout(sendAudioChunks, 1000);
 
-                if (fileName && fileName.indexOf('.') !== -1) {
-                    var splitted = fileName.split('.');
-                    fileName = splitted[0];
-                    fileExtension = splitted[1];
-                }
+                        return;
+                    }
 
-                var fileFullName = (fileName || (Math.round(Math.random() * 9999999999) + 888888888)) + '.' + fileExtension;
 
-                if (typeof navigator.msSaveOrOpenBlob !== 'undefined') {
-                    return navigator.msSaveOrOpenBlob(file, fileFullName);
-                } else if (typeof navigator.msSaveBlob !== 'undefined') {
-                    return navigator.msSaveBlob(file, fileFullName);
-                }
+                    function sendToServer(index) {
+                        var startUploadTime = Date.now();
+                        console.log('sendAudioChunks: get audio: sendToServer', results)
 
-                var hyperlink = document.createElement('a');
-                hyperlink.href = URL.createObjectURL(file);
-                hyperlink.download = fileFullName;
+                        if(results[index] != null && results[index].blob != null) {
+                            let audioBlob = new Blob([results[index].blob]);
+                            let otherRecordings = results[index].otherRecordings.length != 0 ? results[index].otherRecordings : [];
+                            socket.emit('Streams/webrtc/localMedia', audioBlob, otherRecordings, _recordingInProgress === false, function () {
+                                console.log('sendAudioChunks: get audio: sendToServer: upload end', Date.now() - startUploadTime)
 
-                hyperlink.style = 'display:none;opacity:0;color:transparent;';
-                (document.body || document.documentElement).appendChild(hyperlink);
+                                mediaDB('localAudio').remove(results[index].objectId, null, null, function () {
+                                    console.log('sendAudioChunks: get audio: sendToServer: removeFromDB')
 
-                if (typeof hyperlink.click === 'function') {
-                    hyperlink.click();
-                } else {
-                    hyperlink.target = '_blank';
-                    hyperlink.dispatchEvent(new MouseEvent('click', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: true
-                    }));
-                }
+                                    if(index == results.length - 1) {
+                                        if(_lastChunkCreatedTime > _lastChunkSendTime){
+                                            console.log('sendAudioChunks: get audio: sendToServer: removeFromDB: right after')
 
-                URL.revokeObjectURL(hyperlink.href);
+                                            sendAudioChunks();
+                                        } else if (_recordingInProgress) {
+                                            console.log('sendAudioChunks: get audio: sendToServer: removeFromDB: timer 1000')
+
+                                            _sendToServerTimer = setTimeout(sendAudioChunks, 1000);
+                                        }
+
+                                        return;
+                                    }
+
+                                    console.log('sendAudioChunks: get audio: sendToServer: removeFromDB: continue')
+
+                                    sendToServer(index + 1);
+                                });
+
+                            });
+
+                        }
+
+                    }
+
+                    sendToServer(0);
+
+                }, null, 'roomId', options.roomName);
             }
 
             function startRecording(callback) {
                 log('startRecording');
+                var audioTracks = localParticipant.audioTracks();
+                var videoTracks = localParticipant.videoTracks();
+                log('startRecording: audio tracks: ', audioTracks);
+                log('startRecording: videoTracks tracks: ', videoTracks);
+                //var streamToRectord = new MediaStream(localParticipant.tracks.map(function(o){return o.mediaStreamTrack}));
+                var streamToRectord = new MediaStream();
 
-                canvasComposer.captureStream(function (blob) {
-                    onDataAvailablehandler(blob);
+
+                for(let a in audioTracks) {
+                    streamToRectord.addTrack(audioTracks[a].mediaStreamTrack);
+                }
+                for(let a in videoTracks) {
+                    streamToRectord.addTrack(videoTracks[a].mediaStreamTrack);
+
+                }
+
+                options = {
+                    /*audioBitsPerSecond : 128000,
+                    videoBitsPerSecond : 2500000*/
+                }
+
+                var options;
+                if (MediaRecorder.isTypeSupported('video/webm;codecs=opus,vp9')) {
+                    log('startRecording: isTypeSupported video/webm;codecs="opus,vp9"');
+
+                    options.mimeType = 'video/webm; codecs="opus,vp9"';
+                } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,vp8"')) {
+                    log('startRecording: isTypeSupported video/webm;codecs="opus,vp8"');
+
+                    options.mimeType = 'video/webm; codecs=vp8';
+                } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,h264"')) {
+                    log('startRecording: isTypeSupported video/webm;codecs="opus,h264"');
+
+                    options.mimeType = 'video/webm;codecs="h264"';
+                }
+
+                _recorder = new MediaRecorder(streamToRectord,  options);
+                _recordingInProgress = true;
+
+                _recorder.addEventListener("start", event => {
+                    console.log('startRecording: start event');
+                    _recorderStartTime = _recorderPrevTime = performance.timeOrigin + performance.now();
+                    app.eventBinding.sendDataTrackMessage("localRecordingStarted");
                 });
 
+                _recorder.addEventListener("dataavailable", event => {
+                    log('startRecording: dataavailable ', event.timecode);
+
+                   if(_recorderPrevTimecode != null) console.log('startRecording: dataavailable diff timecode', event.timecode - _recorderPrevTimecode);
+                   if(_recorderPrevTime != null) console.log('startRecording: dataavailable diff time', (performance.timeOrigin + performance.now()) - _recorderPrevTime);
+
+
+                    if(_recorderStartTimecode == null) {
+
+                        _recorderStartTimecode = event.timecode - ((performance.timeOrigin + performance.now()) - _recorderPrevTime);
+                        _totalLength = _totalLength + (event.timecode - _recorderStartTimecode)
+                        console.log('_recorderStartTimecode', _recorderStartTimecode, event.timecode, _recorderStartTimecode)
+                    } else {
+                        _totalLength = _totalLength + (event.timecode - _recorderPrevTimecode)
+                    }
+
+                    _recorderPrevTime = performance.timeOrigin + performance.now();
+                    _recorderPrevTimecode = event.timecode;
+                    console.log('_totalLength', _totalLength)
+
+                    saveAudioChunks(event.data);
+                });
+
+                function newTrackPlay(e) {
+                    console.log('newTrackPlay');
+                    let currentSliceOffset = (performance.timeOrigin + performance.now()) - _recorderPrevTime;
+                    console.log('newTrackPlay currentSliceOffset', currentSliceOffset);
+                    _otherRecordings.push({time:_totalLength + currentSliceOffset, participant: {sid: e.participant.sid, username: e.participant.identity}});
+                }
+                app.event.on('localRecordingStarted', newTrackPlay);
+
+                console.log('startRecording: start');
+                _recorder.start(5000);
+
+                //_saveToDbTimer = setTimeout(saveAudioChunks, 6000);
+                sendAudioChunks();
+                //_sendToServerTimer = setTimeout(sendAudioChunks, 6000);
+
                 if(callback != null) callback();
-                app.event.dispatch('videoRecordingStarted', localParticipant);
+                //app.event.dispatch('videoRecordingStarted', localParticipant);
                 //app.eventBinding.sendDataTrackMessage("liveStreamingStarted");
             }
 
             function stopRecording(callback) {
                 log('stopRecording');
+                _recorder.addEventListener("stop", () => {
+                    /*const audioBlob = new Blob(_mediaChunks.blobs);
+                    const audioUrl = URL.createObjectURL(audioBlob);
+                    const audio = new Audio(audioUrl);
+                    audio.play();*/
 
-                canvasComposer.stopRecorder();
+                    /*mediaDB('localAudio').getStorage(function (results) {
+                        console.log('stopRecording: get audio: results', results)
+                        var buffer = results.map(function (o) {
+                            return o.blob;
+                        })
+                        if(buffer.length == 0) return;
+                        const audioBlob = new Blob(buffer);
+                        console.log('stopRecording: get audio: buffer', buffer)
+
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const audio = new Audio(audioUrl);
+                        audio.play();
+                        socket.emit('Streams/webrtc/localMedia', audioBlob);
+
+
+                    }, null, 'roomId', options.roomName);*/
+                });
+
+                /*if(_saveToDbTimer != null) {
+                    clearTimeout(_saveToDbTimer);
+                    _saveToDbTimer = null;
+                }
+
+                if(_sendToServerTimer != null) {
+                    clearTimeout(_sendToServerTimer);
+                    _sendToServerTimer = null;
+                }*/
+
+                _recordingInProgress = false;
+                log('stopRecording: requestData');
+                _recorder.requestData()
+                _recorder.stop();
                 if(callback != null) callback();
-                app.event.dispatch('videoRecordingStopped', localParticipant);
+                //app.event.dispatch('videoRecordingStopped', localParticipant);
                 //app.eventBinding.sendDataTrackMessage("liveStreamingEnded");
             }
 
+            var audioRecorder = (function () {
+                var _sampleRate = 44100;
+                var _recordingLength = 0;
+                var _rightChannel = [];
+                var _leftChannel = [];
+                var _timer = null;
+                var _timerIterval = 5000;
+                var _source = null;
+                var _processor = null;
+                var _context = null;
+
+                function saveBuffer() {
+                    log('saveBuffer')
+                    let leftChannel = _leftChannel.splice(0, _leftChannel.length)
+                    let rightChannel = _rightChannel.splice(0, _rightChannel.length)
+                    let recordingLength = _recordingLength;
+                    log('saveBuffer leftChannel', leftChannel.length)
+                    log('saveBuffer rightChannel', rightChannel.length)
+
+                    if(leftChannel.length == 0 && rightChannel.length == 0) return;
+
+                    var leftBuffer = flattenArray(leftChannel, recordingLength);
+                    var rightBuffer = flattenArray(rightChannel, recordingLength);
+                    // we interleave both channels together
+                    // [left[0],right[0],left[1],right[1],...]
+                    var interleaved = interleave(leftBuffer, rightBuffer);
+
+                    // we create our wav file
+                    var buffer = new ArrayBuffer(44 + interleaved.length * 2);
+                    var view = new DataView(buffer);
+
+                    // RIFF chunk descriptor
+                    writeUTFBytes(view, 0, 'RIFF');
+                    view.setUint32(4, 44 + interleaved.length * 2, true);
+                    writeUTFBytes(view, 8, 'WAVE');
+                    // FMT sub-chunk
+                    writeUTFBytes(view, 12, 'fmt ');
+                    view.setUint32(16, 16, true); // chunkSize
+                    view.setUint16(20, 1, true); // wFormatTag
+                    view.setUint16(22, 2, true); // wChannels: stereo (2 channels)
+                    view.setUint32(24, _sampleRate, true); // dwSamplesPerSec
+                    view.setUint32(28, _sampleRate * 4, true); // dwAvgBytesPerSec
+                    view.setUint16(32, 4, true); // wBlockAlign
+                    view.setUint16(34, 16, true); // wBitsPerSample
+                    // data sub-chunk
+                    writeUTFBytes(view, 36, 'data');
+                    view.setUint32(40, interleaved.length * 2, true);
+
+                    // write the PCM samples
+                    var index = 44;
+                    var volume = 1;
+                    for (var i = 0; i < interleaved.length; i++) {
+                        view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
+                        index += 2;
+                    }
+
+                    // our final blob
+                    let blob = new Blob([view], { type: 'audio/wav' });
+                    saveAudioChunks(blob);
+
+                    _timer = setTimeout(saveBuffer, _timerIterval)
+                }
+
+                function flattenArray(channelBuffer, recordingLength) {
+                    var result = new Float32Array(recordingLength);
+                    var offset = 0;
+                    for (var i = 0; i < channelBuffer.length; i++) {
+                        var buffer = channelBuffer[i];
+                        result.set(buffer, offset);
+                        offset += buffer.length;
+                    }
+                    return result;
+                }
+
+                function interleave(leftChannel, rightChannel) {
+                    var length = leftChannel.length + rightChannel.length;
+                    var result = new Float32Array(length);
+
+                    var inputIndex = 0;
+
+                    for (var index = 0; index < length;) {
+                        result[index++] = leftChannel[inputIndex];
+                        result[index++] = rightChannel[inputIndex];
+                        inputIndex++;
+                    }
+                    return result;
+                }
+
+                function writeUTFBytes(view, offset, string) {
+                    for (var i = 0; i < string.length; i++) {
+                        view.setUint8(offset + i, string.charCodeAt(i));
+                    }
+                }
+
+                function startRecording() {
+                    log('startRecording');
+                    var streamToRectord = new MediaStream();
+                    var audioTracks = localParticipant.audioTracks();
+                    log('startRecording: audio tracks: ', audioTracks);
+
+                    for(let a in audioTracks) {
+                        streamToRectord.addTrack(audioTracks[a].mediaStreamTrack);
+
+                    }
+
+                    var bufferSize = 2048;
+                    var numberOfInputChannels = 2;
+                    var numberOfOutputChannels = 2;
+                    _context = new AudioContext();
+                    _source = _context.createMediaStreamSource(streamToRectord);
+                    _processor = _context.createScriptProcessor(bufferSize, numberOfInputChannels, numberOfOutputChannels);
+
+                    _source.connect(_processor);
+                    _processor.connect(_context.destination);
+
+                    _processor.onaudioprocess = function(e) {
+                        _leftChannel.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+                        _rightChannel.push(new Float32Array(e.inputBuffer.getChannelData(1)));
+                        _recordingLength += bufferSize;
+                    };
+
+                    _recordingInProgress = true;
+                    _timer = setTimeout(saveBuffer, _timerIterval)
+
+                    sendAudioChunks();
+
+                }
+
+                function stopRecording() {
+                    log('stopRecording');
+
+                    _recordingInProgress = false;
+                    log('stopRecording: requestData');
+                    _processor.disconnect(_context.destination);
+                    _source.disconnect(_processor)
+                }
+                return {
+                    start:startRecording,
+                    stop:stopRecording
+                }
+            }())
+
+            //window.audioRecorder = audioRecorder;
+
+            var mediaDB = (function (objectsStoreName) {
+                // IndexedDB
+                var indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB;
+                var dbVersion = 1;
+                var baseName = "mediaDB";
+                var objectStores = ['localAudio'];
+                var storeName = objectsStoreName;
+                var shouldInit = true;
+
+                function _logerr(err){
+                    log('%c mediaDB: error', 'background:red;color:white', err);
+                }
+
+                function _openDb(f) {
+                    log('%c mediaDB: _openDb', 'background:red;color:white');
+                    var request = indexedDB.open(baseName, dbVersion);
+                    request.onerror = _logerr;
+
+                    request.onupgradeneeded = function (e) {
+                        var db = e.currentTarget.result;
+                        log('%c mediaDB: request.onupgradeneeded oldVersion=' + e.oldVersion, 'background:blue;color:white');
+
+                        if(!db.objectStoreNames.contains('localAudio')) {
+                            var localAudioStore = db.createObjectStore("localAudio", {
+                                keyPath: "objectId",
+                                autoIncrement: true
+                            });
+                            localAudioStore.createIndex("roomId", "roomId", { unique: false });
+
+                        }
+                        shouldInit = false;
+                        //_openDb(f);
+
+                    }
+                    request.onsuccess = function () {
+                        log('%c mediaDB: request.onsuccess', 'background:blue;color:white');
+
+                        f(request.result);
+                    }
+                }
+
+                function isOpened() {
+                    return isDbCreated;
+                }
+
+                function get(file, f){
+                    log('%c mediaDB: get', 'background:red;color:white');
+
+                    _openDb(function(db){
+                        var request = db.transaction([storeName], "readonly").objectStore(storeName).get(file);
+                        request.onerror = _logerr;
+                        request.onsuccess = function(){
+                            f(request.result ? request.result : -1);
+                        }
+                    });
+                }
+
+                function getStorage(f, limit, index, indexValue){
+                    _openDb(function(db){
+                        var rows = [];
+                        var i = 0;
+                        var store = db.transaction([storeName], "readonly").objectStore(storeName);
+                        var keyRange = indexValue != null ? IDBKeyRange.only(indexValue) : null;
+                        log('index', index, indexValue)
+                        if(index != null) store = store.index(index);
+
+                        if(store.mozGetAll && !limit)
+                            store.mozGetAll().onsuccess = function(e){
+                                f(e.target.result);
+                            };
+                        else
+                            store.openCursor(keyRange).onsuccess = function(e) {
+                                var cursor = e.target.result;
+                                if((cursor && !limit) || (cursor && limit && i < limit)){
+                                    rows.push(cursor.value);
+                                    cursor.continue();
+                                }
+                                else {
+                                    f(rows);
+                                }
+                                i++;
+                            };
+                    });
+                }
+
+                function countImages(f){
+                    _openDb(function(db){
+                        var request = db.transaction([storeName], "readonly").objectStore(storeName).count();
+                        request.onerror = _logerr;
+                        request.onsuccess = function(){
+                            f(request.result ? request.result : -1);
+                        }
+                    });
+                }
+
+                function save(object, f){
+
+                    if(object.blob instanceof Blob) {
+                        object.blob.arrayBuffer().then(function (buffer) {
+                            object.blob = buffer;
+                            mediaDB(storeName).save(object, f);
+                        });
+                        return;
+                    }
+
+                    _openDb(function(db){
+
+                        var request = db.transaction([storeName], "readwrite").objectStore(storeName).put(object);
+                        request.onerror = _logerr;
+                        request.onsuccess = function(){
+
+                            f(request.result);
+                        }
+                    });
+                }
+
+                function deleteObj(objId, index, indexValue, f){
+                    _openDb(function(db){
+                        var request = db.transaction([storeName], "readwrite").objectStore(storeName);
+
+                        var key = indexValue != null ? IDBKeyRange.only(indexValue) : objId;
+                        request.delete(key);
+
+                        request.onerror = _logerr;
+                        request.transaction.oncomplete = function(e) {
+                            if(f != null) f()
+                        };
+
+                    });
+                }
+
+                return {
+                    save: save,
+                    getStorage: getStorage,
+                    get: get,
+                    remove: deleteObj,
+                    count: countImages
+                }
+
+            })
+
             return {
                 startRecording: startRecording,
-                stopRecording: stopRecording,
-                isRecording: function () {
-                    return false;
-                }
+                stopRecording: stopRecording
             }
         }())
+
+        //window.localRecorder = localRecorder;
         var url = new URL(location.href);
 
         var mode = url.searchParams.get("mode");
@@ -5622,7 +6075,7 @@ window.WebRTCconferenceLib = function app(options){
             audioVisualization: audioVisualization,
             createAudioAnalyser: createAudioAnalyser,
             canvasComposer:canvasComposer,
-            videoRecorder:videoRecorder,
+            localRecorder:localRecorder,
             fbLive:fbLive,
             youtubeLiveUploader:youtubeLiveUploader,
             addScreenToCommonList:addScreenToCommonList,
@@ -5985,6 +6438,8 @@ window.WebRTCconferenceLib = function app(options){
             } else if(data.type == 'liveStreamingEnded') {
                 participant.fbLiveStreamingActive = false;
                 app.event.dispatch('liveStreamingEnded', {participant:participant, platform:data});
+            } else if(data.type == 'localRecordingStarted') {
+                app.event.dispatch('localRecordingStarted', {participant:participant});
             } else if(data.type == 'online') {
                 //log('processDataTrackMessage online')
 
@@ -7685,12 +8140,12 @@ window.WebRTCconferenceLib = function app(options){
                         console.error(e.name + ': ' + e.message);
                     });
             } else {*/
-                log('iceConfigurationReceived: add to queue')
+            log('iceConfigurationReceived: add to queue')
 
-                senderParticipant.iceCandidatesQueue.push({
-                    peerConnection: peerConnection,
-                    candidate: candidate
-                });
+            senderParticipant.iceCandidatesQueue.push({
+                peerConnection: peerConnection,
+                candidate: candidate
+            });
             //}
 
 

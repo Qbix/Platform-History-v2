@@ -10,9 +10,10 @@ module.exports = function(socket,io) {
         if(_debug) console.log('Got message: joined ', identity, nspName + '#' + socket.client.id);
         socket.username = identity.username;
         socket.userPlatformId = identity.username.split('\t')[0];
+        socket.startTime = identity.username.split('\t')[1];
         socket.info = identity.info;
         socket.roomId = roomId = identity.room;
-        roomPublisherId = identity.roomPublisher;
+        socket.roomPublisherId = roomPublisherId = identity.roomPublisher;
 
         if(_debug) console.log('rooms: ', socket.adapter.rooms);
         for (var key in socket.adapter.rooms) {
