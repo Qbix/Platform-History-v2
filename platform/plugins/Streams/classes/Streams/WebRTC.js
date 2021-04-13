@@ -8,6 +8,7 @@
 const Q = require('Q');
 const fs = require('fs');
 const { PassThrough } = require('stream');
+const path = require('path');
 
 var express = require('express');
 var app = express();
@@ -18,6 +19,8 @@ const Streams_Avatar = Q.require('Streams/Avatar');
 const Users = Q.require('Users');
 
 const child_process = require('child_process');
+const appDir = path.dirname(require.main.filename) + '/../../';
+const appName =  Q.Config.get(['Q','app']);
 
 /**
  * Static methods for WebRTC
@@ -170,6 +173,7 @@ WebRTC.Participant = function (id) {
     this.RTCPeerConnection = null;
     this.tracks = [];
     this.liveStreaming = {connectionManager: null, room: null, canvasComposer: null};
+    this.recording = {path: null, paralelRecordings:[]};
     this.videoTracks = function (activeTracksOnly) {
         if(activeTracksOnly) {
             return this.tracks.filter(function (trackObj) {
@@ -231,6 +235,9 @@ WebRTC.listen = function () {
 
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
+
+        var _localRecordDir = null;
+        var _localMediaStream = null;
 
         let rtmpUrl = socket.handshake.query.rtmp;
         if ( rtmpUrl != null ) {
@@ -346,7 +353,77 @@ WebRTC.listen = function () {
         require('./WebRTC/signaling')(socket, io);
 
         //console.log('rtmpUrl', rtmpUrl)
-        //require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
+        require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
+
+        socket.on('Streams/webrtc/localMedia', function (data, paralelRecordings, end, callback) {
+
+            function writeToStream() {
+                if(!end) {
+                    _localMediaStream.write(data, function () {
+                        if(_debug) console.log('LOCAL MEDIA: write to stream finished', _localMediaStream.bytesWritten);
+
+                        if(callback != null) {
+                            callback({
+                                status: "ok"
+                            });
+                        }
+                    });
+                } else {
+                    _localMediaStream.end(data, function () {
+                        if(_debug) console.log('LOCAL MEDIA: write to stream finished (END)', _localMediaStream.bytesWritten);
+
+                        if(callback != null) {
+                            callback({
+                                status: "ok"
+                            });
+                        }
+                    });
+                }
+            }
+            if(_debug) console.log('LOCAL MEDIA', end);
+            if(_debug) console.log('LOCAL MEDIA paralelRecordings', paralelRecordings);
+            if(_localMediaStream != null) {
+                if(_debug) console.log('LOCAL MEDIA: write to stream');
+
+                writeToStream();
+            } else {
+                if(_debug) console.log('LOCAL MEDIA: create stream');
+
+                var streamName = 'Streams/webrtc/' + socket.roomId;
+                Q.plugins.Streams.fetchOne(socket.userPlatformId, socket.roomPublisherId, streamName, function (err, stream) {
+                    if(err || !stream) {
+                        return;
+                    }
+                    if(_debug) console.log('LOCAL MEDIA: got webrtc stream ' + stream.getAttribute('startTime'));
+
+                    var localRecordDir = appDir + 'files/' +  appName + '/uploads/Streams/webrtc_rec/' + socket.roomId + '/' + stream.getAttribute('startTime') + '/' + socket.userPlatformId + '/' + socket.startTime;
+                    if (!fs.existsSync(localRecordDir)){
+                        fs.mkdirSync(localRecordDir, {recursive: true});
+                    }
+                    _localMediaStream = fs.createWriteStream(localRecordDir + '/video.webm', {
+                        'flags': 'a',
+                        'encoding': null,
+                        'mode': '0666'
+                    });
+                    _localMediaStream.on('error', (e) => {
+                        console.log('ERRRORRR', e)
+                    });
+                    _localMediaStream.on('error', () => {
+                        console.log('CLOSED')
+                    });
+                    _localMediaStream.on('finish', () => {
+                        console.log('FINISHED')
+                    });
+
+                    socket.webrtcParticipant.recording.path = localRecordDir + '/video.webm';
+
+                    writeToStream();
+
+
+                });
+
+            }
+        });
 
         socket.on('Streams/webrtc/log', function (message) {
             if(_debug) console.log('CONSOLE.LOG', message);

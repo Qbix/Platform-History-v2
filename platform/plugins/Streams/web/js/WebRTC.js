@@ -87,7 +87,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 showLabelWithNames: true,
                 audioLayoutBgColor: '#000',
                 showLayoutBorders: true,
-                audioOnlyLayout: true
                 /*chunkSize: 10000*/
             },
             eyesDetection: true,
