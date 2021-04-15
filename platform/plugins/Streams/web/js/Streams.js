@@ -5040,12 +5040,13 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			$this.removeData('cancelSubmit');
 			$b.addClass('Q_working')[0].disabled = true;
 			document.activeElement.blur();
-			if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
+			var $usersAgree = $('#Users_agree', register_form);
+			if ($usersAgree.length && !$usersAgree.is(':checked')) {
 				$this.data('cancelSubmit', true);
 				setTimeout(function () {
 					if (confirm(Q.text.Users.login.confirmTerms)) {
-						$('#Users_agree').attr('checked', 'checked');
-						$('#Users_agree')[0].checked = true;
+						$usersAgree.attr('checked', 'checked');
+						$usersAgree[0].checked = true;
 						$b.addClass('Q_working')[0].disabled = true;
 						$this.submit();
 					}
@@ -5068,6 +5069,16 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 				.append($('<label for="Users_agree" />').html(json.termsLabel))
 		);
+
+		Q.Text.get('Users/content', function(err, text) {
+			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.fastclick, function () {
+				Q.Dialogs.push({
+					title: text.authorize.TermsTitle,
+					className: 'Users_authorize_terms',
+					url: this.href
+				});
+			});
+		});
 	}
 
 	var authResponse;
