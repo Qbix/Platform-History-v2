@@ -232,7 +232,12 @@ class Streams_Invite extends Base_Streams_Invite
 				$access->save(true);
 			}
 		}
-		
+
+		$onInvited = Q_Config::get("Streams", "types", $stream->type, "onInvited", null);
+		if ($onInvited) {
+			$options["subscribe"] = $onInvited == "subscribe";
+			$options["join"] = $onInvited == "join";
+		}
 		if (Q::ifset($options, "subscribe", false)) {
 			$participant = new Streams_Participant();
 			$participant->publisherId = $stream->publisherId;
@@ -254,7 +259,7 @@ class Streams_Invite extends Base_Streams_Invite
 					// this exception, they could have written this code block themselves.
 				}
 			}
-		} else {
+		} else if (Q::ifset($options, "join", true)) {
 			$stream->join($userId, $this->publisherId, $this->streamName, array(
 				'extra' => array('Streams/invitingUserId' => $this->invitingUserId),
 				'noVisit' => true
