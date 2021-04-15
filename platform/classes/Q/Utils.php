@@ -1457,9 +1457,7 @@ class Q_Utils
 			umask($mask);
 		}
 
-		$is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
-
-		if (is_dir($link) && !$is_win && !is_link($link)) {
+		if (is_dir($link) && !is_link($link)) {
 			echo Q_Utils::colored(
 				"[WARN] Symlink '$link' (target: '$target') was not created".PHP_EOL, 
 				'red', 'yellow'
@@ -1471,19 +1469,15 @@ class Q_Utils
 			if ($skipIfExists) {
 				return false;
 			}
-			if ($is_win && is_dir($link)) {
+			if (is_dir($link)) {
 				rmdir($link);
 			} else if (is_link($link)) {
 				unlink($link);
 			}
 		}
 
-		if ($is_win) {
-			exec('mklink /j "' . $link . '" "' . $target . '"');
-		} else {
-			@symlink($target, $link);
-		}
-		
+		@symlink($target, $link);
+
 		if (!file_exists($link)) {
 			throw new Q_Exception("Link $link to target $target was not created");
 		}

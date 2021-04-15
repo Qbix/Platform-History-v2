@@ -10,6 +10,9 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 	var tool = this;
 	tool.preview = preview;
 
+	// to set uploaded images sizes
+	tool.preview.state.imagepicker.save = "Assets/service";
+
 	Q.addStylesheet('{{Assets}}/css/tools/ServicePreview.css', { slotName: 'Assets' });
 
 	preview.state.creatable.preprocess = function (_proceed) {

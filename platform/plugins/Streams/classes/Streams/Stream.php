@@ -402,6 +402,14 @@ class Streams_Stream extends Base_Streams_Stream
 					}
 				}
 			}
+
+			/**
+			 * @event Streams/create/$streamType {before}
+			 * @param {Streams_Stream} stream
+			 */
+			Q::event("Streams/create/{$this->type}", array(
+				'stream' => $this,
+			), 'before', false, $this);
 		}
 		
 		foreach ($this->fields as $name => $value) {
