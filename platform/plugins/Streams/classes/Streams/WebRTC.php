@@ -83,7 +83,7 @@ abstract class Streams_WebRTC
         }
 
         // check quota
-        //$quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
+        $quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
         $text = Q_Text::get('Streams/content');
         $fields = array(
             'title' => Q::interpolate($text['webrtc']['streamTitle'], array(Streams::displayName($publisherId)))
@@ -96,8 +96,8 @@ abstract class Streams_WebRTC
         $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', $fields);
 
         // set quota
-        if ($stream/* && $quota instanceof Users_Quota*/) {
-            //$quota->used();
+        if ($stream && $quota instanceof Users_Quota) {
+            $quota->used();
 
             return $stream;
         }
