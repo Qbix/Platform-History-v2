@@ -66,7 +66,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             preparing: {
                 video: false,
-                audio: false,
+                audio: true,
                 screen: false
             },
             showScreenSharingInSeparateScreen: true,
@@ -1275,6 +1275,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             var md = (Q.info.isCordova && Q.info.platform === 'ios') ? cordova.plugins.iosrtc : navigator.mediaDevices;
 
             var setAvatarOnPreview = function(cameraPreview) {
+                if(!cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) cameraPreview.parentNode.classList.add('Streams_webrtc_preparing_active-audio');
+
                 if(usersAvatar != null) {
                     cameraPreview.innerHTML = '';
                     cameraPreview.appendChild(usersAvatar);
@@ -1328,9 +1330,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var cameraPreview = document.createElement('DIV');
                 cameraPreview.className = 'Streams_webrtc_preparing_camera-preview';
 
-
                 var buttonsCon = document.createElement('DIV');
                 buttonsCon.className = 'Streams_webrtc_devices_dialog_buttons_con';
+                var buttonsInner = document.createElement('DIV');
+                buttonsInner.className = 'Streams_webrtc_devices_dialog_buttons_inner_con';
 
                 if(Q.info.isCordova && Q.info.platform === 'ios') {
                     buttonsCon.style.position = 'relative';
@@ -1365,9 +1368,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //meetingStatus.appendChild(participantsIcon);
                 mediaDevicesDialog.appendChild(meetingStatus);
                 mediaDevicesDialog.appendChild(cameraPreview);
-                buttonsCon.appendChild(switchMicBtn);
-                buttonsCon.appendChild(switchCameraBtn);
-                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsCon.appendChild(switchScreenSharingBtn);
+                buttonsInner.appendChild(switchMicBtn);
+                buttonsInner.appendChild(switchCameraBtn);
+                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsInner.appendChild(switchScreenSharingBtn);
+                buttonsCon.appendChild(buttonsInner);
                 mediaDevicesDialog.appendChild(buttonsCon);
                 joinButtonCon.appendChild(joinButton);
                 mediaDevicesDialog.appendChild(joinButtonCon);
@@ -1457,6 +1461,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     cameraPreview.innerHTML = '';
                                     cameraPreview.appendChild(videoPreview);
                                 }
+                                if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
+                                    cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
+                                }
+
                                 videoPreview.play();
                                 switchCameraBtn.innerHTML = cameraSVG;
                                 _options.startWith.video = true;
@@ -1523,6 +1531,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             } else {
                                 cameraPreview.innerHTML = '';
                                 cameraPreview.appendChild(screenPreview);
+                            }
+
+                            if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
+                                cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
                             }
 
                             switchScreenSharingBtn.innerHTML = screenSharingSVG;
@@ -1606,12 +1618,23 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.streams = [];
                     }
 
+                    let audioEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'audio') {
+                            audioEnabled = true;
+                        }
+                    }
+                    if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && audioEnabled == false) {
+                        if(connectionState) connectionState.show('You should to turn microphone on to be able to join');
+                        return;
+                    }
+
                     for(let s in preJoiningStreams) {
                         _options.streams.push(preJoiningStreams[s].stream);
                     }
 
                     var dialog = Q.Dialogs.pop(true);
-                    if(dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
+                    if(dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
 
                     if(checkStatusInterval) {
                         clearInterval(checkStatusInterval);
@@ -1637,6 +1660,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         className: 'Streams_webrtc_preparing_dialog',
                         content: mediaDevicesDialog,
                         apply: true,
+                        mask: false,
                         hidePrevious:true,
                         removeOnClose: true,
                         onClose:function () {
@@ -5473,8 +5497,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     var ua = navigator.userAgent;
                     var startWith = _options.startWith || {};
-                    //var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!startWith.video && !startWith.audio));
-                    var preparingRoom = false;
+                    var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!startWith.video && !startWith.audio));
+                    //var preparingRoom = false;
 
                     log('start: onConnect', preparingRoom, _options.preparing.video, _options.preparing.audio);
 
@@ -5657,7 +5681,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             fields: {
                                 roomId: roomId,
                                 publisherId: asPublisherId,
-                                adapter: _options.mode
+                                adapter: _options.mode,
+                                resumeClosed: _options.resumeClosed
                             }
                         });
                     }
@@ -5778,7 +5803,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     fields: {
                         roomId: roomId,
                         publisherId: asPublisherId,
-                        adapter: _options.mode
+                        adapter: _options.mode,
+                        resumeClosed: _options.resumeClosed
                     }
                 });
             }

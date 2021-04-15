@@ -46,7 +46,7 @@ function Streams_webrtc_post($params = array())
 	$className = "Streams_WebRTC_".ucfirst($adapter);
 
 	$webrtc = new $className();
-	$result = $webrtc->createOrJoinRoom($publisherId, $roomId);
+	$result = $webrtc->createOrJoinRoom($publisherId, $roomId, $resumeClosed);
 
 	if ($publisherId == $loggedInUserId) {
 		if ($content) {
