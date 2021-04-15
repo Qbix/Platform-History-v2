@@ -14,14 +14,15 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
      * @method createOrJoinRoom
      * @param {string} $publisherId Id of room's publisher/initiator
      * @param {string} $roomId Room id in Qbix (last marp of stream name)
+     * @param {string} $resumeClosed Use existing stream if it exists
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
-    function createOrJoinRoom($publisherId, $roomId) {
+    function createOrJoinRoom($publisherId, $roomId, $resumeClosed) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
-        $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId);
+        $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed);
 
         $endTime = $stream->getAttribute('endTime');
         $startTime = $stream->getAttribute('startTime');

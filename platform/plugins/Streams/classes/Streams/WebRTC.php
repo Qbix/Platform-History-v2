@@ -23,7 +23,7 @@ interface Streams_WebRTC_Interface
      * @param {string} $roomId Room id in Qbix (last marp of stream name)
      * @return {Object}
      */
-    function createOrJoinRoom($publisherId, $roomId);
+    function createOrJoinRoom($publisherId, $roomId, $resumeClosed);
 
 }
 
@@ -57,9 +57,10 @@ abstract class Streams_WebRTC
      * @method getOrCreateStream
      * @param {string} $publisherId publisher of stream
      * @param {string} $roomId Room Id of room (last part of stream name)
+     * @param {string} $resumeClosed Return existing stream if it exist, or create new otherwise
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
-    static function getOrCreateStream($publisherId, $roomId) {
+    static function getOrCreateStream($publisherId, $roomId, $resumeClosed) {
         $streamName = null;
 
         if(strpos($roomId, 'Streams/webrtc/') !== false) {
@@ -70,13 +71,19 @@ abstract class Streams_WebRTC
             $streamName = "Streams/webrtc/$roomId";
             $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
 
-            if ($stream && empty($stream->closedTime)) {
+            if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
+
+                if($resumeClosed) {
+                    $stream->closedTime = null;
+                    $stream->save();
+
+                }
                 return $stream;
             }
         }
 
         // check quota
-        $quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
+        //$quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
         $text = Q_Text::get('Streams/content');
         $fields = array(
             'title' => Q::interpolate($text['webrtc']['streamTitle'], array(Streams::displayName($publisherId)))
@@ -89,8 +96,8 @@ abstract class Streams_WebRTC
         $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', $fields);
 
         // set quota
-        if ($stream && $quota instanceof Users_Quota) {
-            $quota->used();
+        if ($stream/* && $quota instanceof Users_Quota*/) {
+            //$quota->used();
 
             return $stream;
         }

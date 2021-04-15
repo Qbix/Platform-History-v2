@@ -41,7 +41,6 @@ window.WebRTCconferenceLib = function app(options){
         showScreenSharingInSeparateScreen: false,
         streams: null,
         sounds: null,
-        singleElementForAudio: true,
         twilioAccessToken: null,
         disconnectTime: 3000,
         turnCredentials: null,
@@ -165,12 +164,6 @@ window.WebRTCconferenceLib = function app(options){
         } else if (/android/i.test(ua)) {
             _isAndroid = true;
         }
-    }
-
-    /*if user didn't give access to mic, autobplay will not work and user should unmute each audio track. If we have
-    * single audio element for all audio tracks, then user should tap to unmute only once*/
-    if(_isMobile) {
-        options.singleElementForAudio = true;
     }
 
     var browser = determineBrowser(navigator.userAgent)
@@ -354,11 +347,7 @@ window.WebRTCconferenceLib = function app(options){
             for(var i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
-                if(!options.singleElementForAudio){
-                    track.trackEl.muted = true;
-                } else {
-                    track.mediaStreamTrack.enabled = false
-                }
+                track.trackEl.muted = true;
             }
             this.audioIsMuted = true;
             app.event.dispatch('audioMuted', this);
@@ -369,11 +358,7 @@ window.WebRTCconferenceLib = function app(options){
             for(var i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
-                if(!options.singleElementForAudio){
-                    track.trackEl.muted = false;
-                } else {
-                    track.mediaStreamTrack.enabled = true;
-                }
+                track.trackEl.muted = false;
             }
             this.audioIsMuted = false;
             app.event.dispatch('audioUnmuted', this);
@@ -694,40 +679,6 @@ window.WebRTCconferenceLib = function app(options){
     app.screensInterface = (function () {
         var viewMode;
         var activeScreen;
-        var _commonAudioEl;
-        var _commonMediaStream;
-        if(options.singleElementForAudio) {
-            _commonAudioEl = document.createElement('AUDIO');
-            _commonMediaStream = new MediaStream();
-            _commonAudioEl.srcObject = _commonMediaStream;
-            let silence = () => {
-                let ctx = new AudioContext(), oscillator = ctx.createOscillator();
-                let dst = oscillator.connect(ctx.createMediaStreamDestination());
-                oscillator.start();
-                return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
-            }
-
-            var silentTrack = silence();
-            /*var silentStream = new MediaStream();
-            silentStream.addTrack(silentTrack);
-            let source = audio.createMediaStreamSource(silentStream);
-            source.connect(_dest);*/
-            _commonMediaStream.addTrack(silentTrack);
-
-            document.body.appendChild(_commonAudioEl);
-            app.event.on('audioTrackLoaded', function(e) {
-                _commonMediaStream.addTrack(e.track.mediaStreamTrack)
-            })
-            var playCommonAudio = function(){
-                //alert('123')
-                _commonAudioEl.play();
-            }
-            window.addEventListener('click', playCommonAudio)
-
-            /*setInterval(function () {
-                console.log('_commonMediaStream active=' + _commonMediaStream.active)
-            }, 2000)*/
-        }
 
         var Screen = function () {
             this.sid = null;
@@ -920,7 +871,7 @@ window.WebRTCconferenceLib = function app(options){
             } else if(track.kind == 'audio') {
 
                 var trackEl = createTrackElement(track, participant);
-                if(!options.singleElementForAudio) track.trackEl = trackEl;
+                track.trackEl = trackEl;
                 //_commonMediaStream.addTrack(track.mediaStreamTrack)
                 participant.audioEl = trackEl;
 
@@ -1459,8 +1410,12 @@ window.WebRTCconferenceLib = function app(options){
                     log('createTrackElement: stream exists');
 
                     if(track.kind == 'audio' && participant.audioEl != null) {
+                        log('createTrackElement: stream exists: el exists');
+
                         remoteStreamEl = participant.audioEl;
                     } else {
+                        log('createTrackElement: stream exists: create el');
+
                         remoteStreamEl = document.createElement(track.kind);
                     }
 
@@ -6062,9 +6017,6 @@ window.WebRTCconferenceLib = function app(options){
         }
 
         return {
-            getCommonAudioElement: function () {
-                return _commonAudioEl;
-            },
             attachTrack: attachTrack,
             detachTracks: detachTracks,
             supportsVideoType: supportsVideoType,
@@ -8115,9 +8067,12 @@ window.WebRTCconferenceLib = function app(options){
 
         function iceConfigurationReceived(message) {
             log('iceConfigurationReceived: ' + JSON.stringify(message));
+            log('iceConfigurationReceived: roomParticipants', roomParticipants);
             var senderParticipant = roomParticipants.filter(function (localParticipant) {
                 return localParticipant.sid == message.fromSid;
             })[0];
+
+            if(senderParticipant == null) return;
 
             //var candidate = new IceCandidate({sdpMLineIndex:message.label, candidate:message.candidate});
             var peerConnection, candidate;
@@ -10318,8 +10273,6 @@ window.WebRTCconferenceLib = function app(options){
                 localParticipant.online = true;
                 roomParticipants.push(localParticipant);
             }
-
-            if(_isMobile) app.screensInterface.getCommonAudioElement().play()
 
             if(typeof cordova != 'undefined' && _isiOS) {
                 iosrtcLocalPeerConnection.create(function () {

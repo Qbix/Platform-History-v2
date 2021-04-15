@@ -353,7 +353,8 @@ WebRTC.listen = function () {
         require('./WebRTC/signaling')(socket, io);
 
         //console.log('rtmpUrl', rtmpUrl)
-        require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
+        //require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
+        require('./WebRTC/roomManager')(socket, io);
 
         socket.on('Streams/webrtc/localMedia', function (data, paralelRecordings, end, callback) {
 
@@ -371,6 +372,7 @@ WebRTC.listen = function () {
                 } else {
                     _localMediaStream.end(data, function () {
                         if(_debug) console.log('LOCAL MEDIA: write to stream finished (END)', _localMediaStream.bytesWritten);
+                        socket.webrtcParticipant.recording.stoppedTime = Date.now();
 
                         if(callback != null) {
                             callback({
@@ -415,6 +417,7 @@ WebRTC.listen = function () {
                         console.log('FINISHED')
                     });
 
+                    socket.webrtcParticipant.recording.startedTime = Date.now();
                     socket.webrtcParticipant.recording.path = localRecordDir + '/video.webm';
 
                     writeToStream();
@@ -423,6 +426,61 @@ WebRTC.listen = function () {
                 });
 
             }
+        });
+
+        socket.on('disconnect', function() {
+            console.log('disconnect');
+            if(!socket.webrtcRoom) return;
+            var recordings = socket.webrtcRoom.participants.map(function (p) {
+                return p.recording;
+            })
+            console.log('disconnect: recordings', recordings)
+
+            var startRecording = recordings.reduce(function(prev, current) {
+                return current.startTime < prev.startTime ? current : prev
+            });
+
+            recordings.sort(function(a, b){
+                if(a.stopTime - a.startTime > b.stopTime - b.startTime){
+                    return -1;
+                }
+                if(a.stopTime - a.startTime < b.stopTime - b.startTime){
+                    return 1;
+                }
+                return 0
+            })
+
+            function getNext(prevRecording) {
+                for (let i in recordings) {
+                    if(recordings[i].startTime > prevRecording.startTime && recordings[i].startTime < prevRecording.stopTime && recordings[i].stopTime > prevRecording.stopTime) {
+                        return recordings[i]
+                    }
+                }
+                return null;
+            }
+
+            var basicRecordings = [];
+            basicRecordings.push(startRecording);
+
+            var prevRecording = startRecording;
+            while(prevRecording != null) {
+                console.log('disconnect: sortMedia', prevRecording)
+                prevRecording = getNext(prevRecording);
+                basicRecordings.push(prevRecording);
+            }
+
+            console.log('disconnect: startRecording', startRecording);
+            console.log('disconnect: basicRecordings', basicRecordings)
+
+
+            if(socket.webrtcParticipant.id == socket.client.id) {
+                console.log('disconnect socket.webrtcParticipant.id != socket.client.id', socket.webrtcParticipant.id, socket.client.id)
+                socket.webrtcParticipant.online = false;
+                socket.webrtcRoom.event.dispatch('participantDisconnected', socket.webrtcParticipant);
+            }
+            io.of('/webrtc').in(socket.webrtcRoom.id).clients(function (error, clients) {
+                if(clients.length == 0) socket.webrtcRoom.close();
+            });
         });
 
         socket.on('Streams/webrtc/log', function (message) {

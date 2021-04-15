@@ -1587,6 +1587,7 @@ and (max-device-width : 320px) {
 .notice-container.shown {
     opacity: 1;
     transform: scaleX(1);
+    z-index: 9999999999;
 }
 
 .dialog-bg {
@@ -2332,7 +2333,9 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     align-items: center;
 }
 
-
+.Streams_webrtc_preparing_dialog {
+    z-index: 9999999 !important;
+}
 .Streams_webrtc_preparing_dialog .Streams_webrtc_preparing_dialog_inner{
     /*display: flex;
     flex-direction: row;
@@ -2427,13 +2430,22 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     position: absolute;
     display: flex;
     justify-content: center;
+}
+.Streams_webrtc_devices_dialog_buttons_inner_con {
+    bottom: 0;
+    position: absolute;
+    display: flex;
+    justify-content: center;
     padding: 15px;
+    /*background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 7px;*/
 }
 .Streams_webrtc_prep-switch-mic,
 .Streams_webrtc_prep-switch-camera,
 .Streams_webrtc_prep-switch-screen {
     width:50px;
     height:50px;
+    cursor: pointer;
 }
 .Streams_webrtc_prep-switch-mic,
 .Streams_webrtc_prep-switch-camera {
@@ -2444,13 +2456,15 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .Streams_webrtc_prep-switch-screen svg{
     width:100%;
     height:100%;
+    -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 0px 0px 2px rgba(0, 0, 0, .6));
 }
-.Streams_webrtc_prep-switch-mic svg path,
-.Streams_webrtc_prep-switch-mic svg polygon,
-.Streams_webrtc_prep-switch-camera svg path,
-.Streams_webrtc_prep-switch-camera svg polygon,
-.Streams_webrtc_prep-switch-screen svg path,
-.Streams_webrtc_prep-switch-screen svg polygon{
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-mic svg path,
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-mic svg polygon,
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-camera svg path,
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-camera svg polygon,
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-screen svg path,
+.Streams_webrtc_preparing_active-audio .Streams_webrtc_prep-switch-screen svg polygon{
     fill: rgba(0,0,0,0.38);
 }
 .Streams_webrtc_preparing_dialog_inner.Streams_webrtc_preparing_dialog_inner_cordova .Streams_webrtc_prep-switch-mic svg path,
