@@ -13752,6 +13752,12 @@ function _addHandlebarsHelpers() {
 			return "{{call "+path+" not found}}";
 		});
 	}
+	if (!Handlebars.helpers.ifEquals) {
+		/* helper to compare two arguemnts for equal: {{#ifEquals arg1 arg2}} */
+		Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
+			return (arg1 == arg2) ? options.fn(this) : options.inverse(this);
+		});
+	}
 	if (!Handlebars.helpers.tool) {
 		Handlebars.registerHelper('idPrefix', function () {
 			var ba = Q.Tool.beingActivated;
