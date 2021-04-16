@@ -1380,8 +1380,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 setAvatarOnPreview(cameraPreview);
 
                 var switchMic = function (off) {
-                    console.log('switchMic', off)
-
                     if(audioDevices == 0) {
                         Q.alert('Audio input devices were not found on your device.')
                         return
@@ -1393,7 +1391,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             audioIsAlreadyEnabled = s;
                         }
                     }
-                    console.log('audioIsAlreadyEnabled', audioIsAlreadyEnabled)
 
                     if(audioIsAlreadyEnabled === false && off == null) {
                         md.getUserMedia({audio:true})
@@ -1423,7 +1420,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
 
                 var switchCamera = function (off) {
-                    console.log('switchCamera', off);
                     if(videoDevices == 0) {
                         Q.alert('Video input devices were not found on your device.')
                         return
@@ -1521,6 +1517,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     if(screenIsAlreadyEnabled === false && off == null) {
                         getUserScreen().then(function (stream) {
+                            stream.getVideoTracks()[0].contentHint = 'detail';
                             preJoiningStreams.push({kind:'screen', stream:stream})
                             let screenPreview = document.createElement('video');
                             screenPreview.srcObject = stream;
@@ -1568,10 +1565,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var roomId = _options.roomId != null ? _options.roomId : null;
                 if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
-                console.log('showPreparingDialogue ', _options.roomPublisherId, roomId)
 
                 function checkmeetingStatus() {
-                    console.log('checkmeetingStatus')
 
                     Q.req("Streams/webrtc", ["status"], function (err, response) {
                         var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -1600,8 +1595,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
 
                         }
-                        console.log('checkmeetingStatus stream', stream)
-                        console.log('checkmeetingStatus live', live)
                     }, {
                         method: 'get',
                         fields: {
@@ -2433,7 +2426,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 chatParticipantName.appendChild(screensBtns);
 
                 if(screen.screensharing) {
-                    console.log('screen screensharing', screen)
                     fullScreenBtn.addEventListener('click', function (e) {
                         renderFullScreenLayout(screen, 300);
                         e.preventDefault();
@@ -5780,7 +5772,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
-                        console.log('WebRTCconference', WebRTCconference)
                         WebRTCconference.switchTo(Q.Users.communityName, streamName, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;

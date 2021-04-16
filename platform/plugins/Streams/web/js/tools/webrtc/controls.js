@@ -236,7 +236,7 @@
 				tool.WebRTCLib.event.on('screenRemoved', function (e) {
 					tool.participantsPopup().update(e.participant);
 				});
-				tool.WebRTCLib.event.on('trackAdded', function () {
+				tool.WebRTCLib.event.on('trackAdded', function (e) {
 					tool.updateControlBar();
 				});
 				tool.WebRTCLib.event.on('cameraEnabled', function () {
@@ -279,7 +279,6 @@
                 });
 
 				tool.WebRTCLib.event.on('liveStreamingStarted', function (e) {
-					console.log('liveStreamingStarted', e)
 					if(e.platform && e.platform.content == 'facebook') {
                         if (e.participant.isLocal) {
                             if (!tool.cameraBtn.classList.contains('isRecording')) tool.cameraBtn.classList.add('isRecording');
@@ -369,7 +368,6 @@
 
                 tool.WebRTCLib.event.on('screensharingStarted', function (e) {
                     var participant = e.participant;
-
                     //tool.participantsPopup().(participant);
 
                     for(var i in participant.screens) {
@@ -468,7 +466,6 @@
 			 * @method bindRTCEvents
 			 */
 			createControlBar: function() {
-				console.log('createControlBar');
 				var tool = this;
 				var controlBar = document.createElement('DIV');
 				controlBar.className = 'Streams_webrtc_conference-control';
@@ -957,7 +954,6 @@
 				if(tool.controlBar == null) return;
 				var localParticipant = tool.WebRTCLib.localParticipant();
 				var conferenceControl = tool.WebRTCLib.conferenceControl;
-                console.log('updateControlBar: enabledAudioTracks', tool.WebRTCLib.roomParticipants().length)
 
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
@@ -983,18 +979,11 @@
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				console.log('updateControlBar: enabledAudioTracks', enabledAudioTracks)
 				if(enabledAudioTracks == 0 && tool.WebRTCLib.localParticipant().audioStream == null) {
-                    console.log('updateControlBar: enabledAudioTracks if1')
-
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(!conferenceControl.micIsEnabled()) {
-                    console.log('updateControlBar: enabledAudioTracks if2')
-
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
 				} else if(conferenceControl.micIsEnabled()) {
-                    console.log('updateControlBar: enabledAudioTracks if3')
-
                     tool.microphoneBtn.innerHTML = icons.microphone;
 				}
 
@@ -1393,7 +1382,6 @@
                                 }
                             });
 
-
                             var anotherScreenSharingRadioItem = document.createElement('DIV');
                             anotherScreenSharingRadioItem.className = 'Streams_webrtc_hidden Streams_webrtc_settings_popup_item Streams_webrtc_video_anotherScreen';
                             anotherScreenSharingRadioItem.dataset.deviceId = 'anotherScreen';
@@ -1490,6 +1478,10 @@
                                 }
                             });
 
+                            if(tool.WebRTCLib.screenSharing.isActive()) {
+                                toggleRadioButton(_startScreenSharingBtn);
+                            }
+
                             var turnOffradioBtnItem = document.createElement('DIV');
                             turnOffradioBtnItem.className = 'Streams_webrtc_settings_popup_item Streams_webrtc_turn_video_off';
                             turnOffradioBtnItem.dataset.deviceId = 'off';
@@ -1545,7 +1537,10 @@
                         return {
                         	createVideoInputList: createVideoInputList,
                             loadCamerasList: loadCamerasList,
-                            turnOnCamera: turnOnCamera
+                            turnOnCamera: turnOnCamera,
+                            screenSharingButton: function () {
+								return _startScreenSharingBtn;
+                            }
 						}
                     }());
 
@@ -2339,7 +2334,6 @@
 						}
 					};
 					this.showLiveIcon = function(platform) {
-						console.log('showLiveIcon', platform)
                         if(platform == 'facebook') {
                         	let iconCon = document.createElement('DIV');
                             iconCon.className = 'Streams_webrtc_fblive_icon';
@@ -3171,7 +3165,6 @@
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
-										console.log('response.secure_stream_url', response.secure_stream_url)
 										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url, 'facebook');
 										_liveInfo = response;
 										if (callback != null) callback(response);

@@ -6261,10 +6261,18 @@ window.WebRTCconferenceLib = function app(options){
             }
         }
 
+        function isActive() {
+            for(let t in localParticipant.tracks){
+                if(localParticipant.tracks[t].screensharing) return true;
+            }
+            return false;
+        }
+
         return {
             getUserScreen: getUserScreen,
             startShareScreen: startShareScreen,
-            stopShareScreen: stopShareScreen
+            stopShareScreen: stopShareScreen,
+            isActive: isActive
         }
     }())
 
@@ -8119,6 +8127,7 @@ window.WebRTCconferenceLib = function app(options){
                     trackToAttach.kind = localTracks[i].kind
                     trackToAttach.isLocal = true;
                     trackToAttach.stream = streams[s];
+                    trackToAttach.screensharing = localTracks[i].contentHint == 'detail' ? true : false;
                     trackToAttach.mediaStreamTrack = localTracks[i];
 
                     app.screensInterface.attachTrack(trackToAttach, localParticipant);
