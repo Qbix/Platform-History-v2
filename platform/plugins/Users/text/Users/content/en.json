@@ -6,7 +6,9 @@
         "Monthly": "Monthly",
         "Application": "Application",
         "Pages": "Pages",
-        "Services": "Services"
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
     },
     "actions": {
         "LogIn": "log in",

@@ -6,16 +6,34 @@ function Users_analytics_response_content($params) {
 		"weekly" => $day * 7,
 		"monthly" => date("t") * $day
 	);
-
+	$types = array("app", "page", "Assets/service", "faq");
 	$results = Users_Vote::select()->where(array(
-		"forType" => array("app", "page", "Assets/service")
+		"forType" => $types
 	))->fetchDbRows();
 	$stats = array();
+	$weekDaysStat = array();
+	foreach ($types as $type) {
+		$weekDaysStat[$type] = array(
+			"Mon" => 0,
+			"Tue" => 0,
+			"Wed" => 0,
+			"Thu" => 0,
+			"Fri" => 0,
+			"Sat" => 0,
+			"Sun" => 0
+		);
+	}
+
 	foreach ($results as $result) {
 		$parsed = explode("/", $result->forId);
 		foreach ($periods as $period => $value) {
 			if ($parsed[3] != $value) {
 				continue;
+			}
+
+			// collect stats per week day
+			if ($value == $day) {
+				$weekDaysStat[$result->forType][date("D", $parsed[4])]++;
 			}
 
 			if (!is_array($stats[$period])) {
@@ -24,7 +42,7 @@ function Users_analytics_response_content($params) {
 
 			$params = array("forType" => $result->forType, "userId" => $result->userId);
 			if ($result->forType == "page") {
-				$params["url"] = base64_decode($parsed[2]);
+				$params["name"] = base64_decode($parsed[2]);
 			} else {
 				$params["name"] = $parsed[2];
 			}
@@ -32,7 +50,7 @@ function Users_analytics_response_content($params) {
 		}
 	}
 
-	$options = compact("stats", "periods");
+	$options = compact("stats", "periods", "weekDaysStat");
 
 	Q_Response::addStylesheet("{{Users}}/css/analytics.css");
 	Q_Response::addScript("{{Users}}/js/pages/analytics.js");

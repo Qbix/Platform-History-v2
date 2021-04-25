@@ -1,9 +1,9 @@
 Q.page("Users/analytics", function () {
 	
-	var $tables = $("#content table");
+	var $tables = $("#content table.Users_analytics_sortable");
 
 	// make all tables same witdh
-	var maxWidth = 0;
+	/*var maxWidth = 0;
 	var thWidth = [];
 	$tables.each(function () {
 		var width = $(this).width();
@@ -18,13 +18,34 @@ Q.page("Users/analytics", function () {
 			}
 		});
 	});
-	$tables.width(maxWidth);
+	$tables.width(maxWidth);*/
 	$tables.each(function () {
-		$("th", this).each(function (i) {
+		/*$("th", this).each(function (i) {
 			$(this).width(thWidth[i]);
-		});
+		});*/
 
 		sorttable.makeSortable(this);
+	});
+
+	// tabs
+	$(".Users_analytics #content .Communities_tab").on(Q.Pointer.fastclick, function(e){
+		var x = Q.Pointer.getX(e);
+		var y = Q.Pointer.getY(e);
+		var $this = $(document.elementFromPoint(x, y));
+		if (!$this.hasClass('Communities_tab')) {
+			$this = $(this);
+		}
+		var val = $this.attr("data-val");
+
+		if ($this.hasClass("Q_current")) {
+			return false;
+		}
+
+		var $parent = $this.closest(".Communities_tabs");
+		$this.addClass("Q_current").siblings(".Communities_tab").removeClass("Q_current");
+
+		$parent.siblings("[class*='_tabContent']").removeClass("Q_current");
+		$parent.siblings("[class*='_tabContent'][data-val=" + val + "]").addClass("Q_current");
 	});
 
 	return function () {
