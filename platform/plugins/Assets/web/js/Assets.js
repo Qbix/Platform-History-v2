@@ -51,12 +51,20 @@
 					YouMissingCredits = Assets.texts.credits.YouMissingCredits.interpolate({amount: options.amount});
 				}
 
+				var bonuses = [];
+				Q.each(Q.getObject("credits.bonus.bought", Assets), function (credits, bonus) {
+					bonuses.push(Assets.texts.credits.BuyBonus.interpolate({amount: "<span class='credits'>" + credits + "</span>", bonus: "<span class='bonus'>" + bonus + "</span>"}));
+				});
+
 				Q.Template.set('Assets/credits/missing',
 					'<div class="Assets_credits_buy_missing">{{YouMissingCredits}}</div>' +
 					'<input type="hidden" name="amount" value="{{amount}}">' +
 					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
 				);
 				Q.Template.set('Assets/credits/buy',
+			'{{#each bonuses}}' +
+					'	<div class="Assets_credits_bonus">{{this}}</div>' +
+					'{{/each}}' +
 					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
 					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
 				);
@@ -75,6 +83,7 @@
 						fields: {
 							amount: options.amount,
 							YouMissingCredits: YouMissingCredits,
+							bonuses: bonuses,
 							texts: Assets.texts.credits
 						}
 					},
@@ -1058,6 +1067,7 @@
 				this.onMessage('Assets/credits/spent').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/granted').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/bonus').set(_createNotice, 'Assets');
 			});
 		};
 

@@ -123,6 +123,12 @@
 			"exchange": {
 				"credits": 1,
 				"USD": 10
+			},
+			"bonus": {
+				"bought": {
+					"500": 50, /* if user bought 500 credits at once, he will get 50 credits bonus */
+					"1000": 150 /* if user bought 1000 credits at once, he will get 150 credits bonus */
+				}
 			}
 		},
 		"currencies": {
