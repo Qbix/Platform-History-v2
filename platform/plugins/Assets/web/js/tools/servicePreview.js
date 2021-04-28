@@ -113,10 +113,12 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 
 {
 	refresh: function (stream, callback) {
+		// track stream changes online
+		stream.observe();
+
 		var tool = this;
 		tool.stream = stream;
 		var ps = tool.preview.state;
-		var $toolElement = $(tool.element);
 		var price = stream.getAttribute('price');
 
 		Q.Template.render('Assets/service/preview', {
@@ -250,6 +252,13 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 				Q.handle(closeCallback, dialog, [dialog]);
 			}
 		});
+	},
+	Q: {
+		beforeRemove: function () {
+			if (this.stream) {
+				this.stream.neglect();
+			}
+		}
 	}
 });
 
