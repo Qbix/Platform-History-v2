@@ -45,6 +45,12 @@
  */
 Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	var $this = $(this);
+
+	// if id empty, set random unique id
+	if (!$this.attr("id")) {
+		$this.attr("id", Math.abs(~~(Math.random() * new Date())));
+	}
+
 	var state = $this.state('Q/clickable');
 	$this.on('invoke.Q_clickable', function () {
 		$(this).trigger('mousedown');
@@ -78,7 +84,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			var state = $this.state('Q/clickable');
 			$this.plugin('Q/clickable', 'remove')
 				.plugin('Q/clickable', state);	
-		}, 'Q/clickable');
+		}, "Q_clickable_" + $this.attr("id"));
 
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');
