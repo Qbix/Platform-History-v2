@@ -1007,25 +1007,78 @@ Streams.Dialogs = {
 						dialog.addClass('Streams_suggestion_ready');
 					}
 
+					var $eContacts = $(".Streams_invite_contacts", dialog);
+
+					var _renderInviteList = function (contacts) {
+						Q.Template.render("Users/templates/contacts/display", {
+							contacts: contacts,
+							text: text
+						}, function (err, html) {
+							if (err) {
+								return;
+							}
+
+							$eContacts.html(html).activate();
+
+							$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+								var inviteParams;
+								for(var i in contacts) {
+									inviteParams = {
+										stream: stream,
+										data: data
+									};
+
+									if (contacts[i].prefix === "user") {
+										inviteParams.userId = contacts[i]["id"];
+									} else {
+										inviteParams.identifier = contacts[i][contacts[i].prefix];
+									}
+									Q.handle(callback, Streams, [inviteParams]);
+								}
+								Q.Dialogs.pop(); // close the Dialog
+							});
+
+							$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+								var $this = $(this);
+								var id = $this.attr('data-id');
+								$this.closest("tr").remove();
+								delete contacts[id];
+
+								$eContacts.data("contacts", contacts);
+
+								if ($.isEmptyObject(contacts)) {
+									$("button.Streams_invite_submit_contact", $eContacts).remove();
+								}
+							});
+						});
+					};
+
 					// invite user from registered users
 					var userChooserTool = Q.Tool.from($(".Streams_userChooser_tool", dialog), "Streams/userChooser");
 					if (userChooserTool) {
 						userChooserTool.state.resultsHeight = 180;
 						userChooserTool.stateChanged("resultsHeight");
-						userChooserTool.state.onChoose.set(function (userId) {
-							Q.handle(callback, Streams, [{
+						userChooserTool.state.onChoose.set(function (userId, avatar) {
+							var contacts = $eContacts.data("contacts") || {};
+							contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
+
+							_renderInviteList(contacts);
+
+							$eContacts.data("contacts", contacts);
+
+							/*Q.handle(callback, Streams, [{
 								userId: userId,
 								stream: stream,
 								data: data
 							}]);
-							Q.Dialogs.pop(); // close the Dialog
+							Q.Dialogs.pop(); // close the Dialog*/
+
 						}, "Streams_invite_dialog");
 					}
 
 					// handle "choose from contacts" button
 					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
 						var $this = $(this);
-						var $eContacts = $(".Streams_invite_contacts", dialog);
 						$eContacts.empty();
 
 						var params = {
@@ -1044,45 +1097,7 @@ Streams.Dialogs = {
 								return;
 							}
 
-							var aContacts = [];
-							for(var i in contacts) {
-								aContacts.push(contacts[i]);
-							}
-
-							Q.Template.render("Users/templates/contacts/display", {
-								contacts: aContacts,
-								text: text
-							}, function (err, html) {
-								if (err) {
-									return;
-								}
-
-								$eContacts.html(html);
-
-								$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-									for(var i in contacts) {
-										Q.handle(callback, Streams, [{
-											identifier: contacts[i][contacts[i].prefix],
-											stream: stream,
-											data: data
-										}]);
-									}
-									Q.Dialogs.pop(); // close the Dialog
-								});
-
-								$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
-									var $this = $(this);
-									var id = $this.attr('data-id');
-									$this.closest("tr").remove();
-									delete contacts[id];
-
-									$eContacts.data("contacts", contacts);
-
-									if ($.isEmptyObject(contacts)) {
-										$("button.Streams_invite_submit_contact", $eContacts).remove();
-									}
-								});
-							});
+							_renderInviteList(contacts);
 
 							$this.text(text.chooseAgainFromContacts).addClass("");
 						})
@@ -1582,7 +1597,7 @@ Streams.followup = function (options, callback) {
 			}
 			function _emails() {
 				var url = Q.Links.email(
-					params.subject[1], params.body[1], null, null, e.addresses
+					Q.getObject(["subject", 1], params), Q.getObject(["body", 1], params), null, null, e.addresses
 				);
 				Q.handle(callback, Streams, [url, e.addresses, params]);
 				window.location = url;
@@ -4986,7 +5001,7 @@ Streams.showNoticeIfSubscribed = function (options) {
 	});
 };
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
-	var src = json.entry[0].thumbnailUrl;
+	var src = Q.getObject(["entry", 0, "thumbnailUrl"], json);
 	var src40 = src, src50 = src, src80 = src;
 	var firstName = '', lastName = '';
 	if (priv.registerInfo) {
@@ -5040,12 +5055,13 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			$this.removeData('cancelSubmit');
 			$b.addClass('Q_working')[0].disabled = true;
 			document.activeElement.blur();
-			if ($('#Users_agree').length && !$('#Users_agree').is(':checked')) {
+			var $usersAgree = $('#Users_agree', register_form);
+			if ($usersAgree.length && !$usersAgree.is(':checked')) {
 				$this.data('cancelSubmit', true);
 				setTimeout(function () {
 					if (confirm(Q.text.Users.login.confirmTerms)) {
-						$('#Users_agree').attr('checked', 'checked');
-						$('#Users_agree')[0].checked = true;
+						$usersAgree.attr('checked', 'checked');
+						$usersAgree[0].checked = true;
 						$b.addClass('Q_working')[0].disabled = true;
 						$this.submit();
 					}
@@ -5068,6 +5084,16 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 				.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
 				.append($('<label for="Users_agree" />').html(json.termsLabel))
 		);
+
+		Q.Text.get('Users/content', function(err, text) {
+			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.fastclick, function () {
+				Q.Dialogs.push({
+					title: text.authorize.TermsTitle,
+					className: 'Users_authorize_terms',
+					url: this.href
+				});
+			});
+		});
 	}
 
 	var authResponse;

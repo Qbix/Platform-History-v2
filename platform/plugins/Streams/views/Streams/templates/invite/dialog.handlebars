@@ -2,8 +2,8 @@
     {{#if userChooser}}
         <div class='Q_tool Streams_userChooser_tool'><input name="query" value="" type="text" class="text Streams_userChooser_input" placeholder="{{text.userChooserPlaceholder}}" autocomplete="off"></div>
     {{/if}}
+    <div class="Streams_invite_contacts"></div>
     {{#if isContactsPicker}}
-        <div class="Streams_invite_contacts"></div>
         <button class="Q_button Streams_invite_choose_contact">{{text.chooseFromContacts}}</button>
     {{else}}
         <form class="Q_buttons Streams_invite_submit">

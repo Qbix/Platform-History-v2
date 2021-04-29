@@ -44,6 +44,7 @@
 }
 .Assets_service_preview_tool {
 	cursor: pointer;
+	margin-bottom: 5px;
 }
 
 .Assets_service_preview_tool .Assets_service_preview_price {

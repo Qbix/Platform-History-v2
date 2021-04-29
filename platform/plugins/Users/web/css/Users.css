@@ -350,6 +350,16 @@ a.Users_activation_resend:active {
 #Users_authorize_buttons .Q_button,
 #Users_session_buttons .Q_button { font-size: 36px; line-height: 80px; }
 
+.Daycare_terms #content,
+.Users_authorize_terms .Q_dialog_content {
+	padding: 0 10px;
+}
+.Daycare_terms #content h1,
+.Users_authorize_terms .Q_dialog_content h1 {
+	text-align: center;
+}
+.Daycare_terms #content {}
+
 .Users_fromServer,
 .Users_fromYahoo { font-family: "Comic Sans MS"; font-weight: 100; }
 

@@ -1,0 +1,41 @@
+.Users_analytics #content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.Users_analytics table {
+    display: table;
+    margin: 0 auto;
+}
+.Users_analytics table th,
+.Users_analytics table td {
+    height: 40px;
+    padding: 0 10px;
+}
+.Users_analytics table td {
+    padding-bottom: 10px;
+}
+.Users_analytics table .Users_analytics_url,
+.Users_analytics table .Users_analytics_service {
+    padding-left: 20px;
+}
+.Users_analytics table th[colspan] {
+    border-bottom: 1px solid silver;
+}
+.Users_analytics table .Users_analytics_url a {
+    white-space: nowrap;
+    color: var(--dashboard-main-color);
+}
+.Users_analytics table .Users_analytics_stat {
+    text-align: center;
+}
+.Users_analytics table.Users_analytics_sortable .Users_analytics_period {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.Users_analytics #content .Communities_tab {
+    padding: 5px;
+}
+.Users_analytics #content .Communities_tabContent {
+    border-top: 1px solid #d4d4d4;
+}

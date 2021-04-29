@@ -5955,9 +5955,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {Object} options options for the method
      * @param {String} options.publisherId Required. Publisher of stream to which webrtc will be related.
      * @param {String} options.streamName Required. Name of stream to which webrtc will be related.
+     * @param {String} [options.relationType='Streams/webrtc']
      * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
      * @param {String} [options.mode='node'] Technology that is used to start conference ('twillio' OR 'node')
      * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
+     * @param {String} [options.useExisting=true] If false, don't request related stream to use, but create new.
+     * @param {String} [options.resumeClosed=true]  If false, close stream completely (unrelate) when last participant
+     * left, and create new stream next time instead resume.
      * @param {Function} [options.onWebrtcControlsCreated] Callback called when Webrtc Controls Created
      * @param {Function} [options.onStart] Callback called when Webrtc started.
      * @param {Function} [options.onEnd] Callback called when Webrtc ended.
@@ -5966,10 +5970,83 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         options = Q.extend({
             element: document.body,
             mode: 'node',
-            tool: true
+            tool: true,
+            relationType: "Streams/webrtc",
+            useExisting: true,
+            resumeClosed: true
         }, options);
 
         var userId = Q.Users.loggedInUserId();
+
+        function _createStream () {
+            Q.req("Streams/webrtc", ["room"], function (err, response) {
+                var msg = Q.firstErrorMessage(err, response && response.errors);
+                if (msg) {
+                    return Q.alert(msg);
+                }
+
+                Q.Streams.get(userId, response.slots.room.roomId, function (err) {
+                    var fem = Q.firstErrorMessage(err);
+                    if (fem) {
+                        return console.warn("Streams.webrtc.start.create: " + fem);
+                    }
+
+                    _createRoom(this);
+                });
+            }, {
+                method: 'post',
+                fields: {
+                    publisherId: userId,
+                    resumeClosed: options.resumeClosed,
+                    content: options.content || null,
+                    adapter: options.mode,
+                    relate: {
+                        publisherId: options.publisherId,
+                        streamName: options.streamName,
+                        relationType: options.relationType
+                    }
+                }
+            });
+        }
+
+        function _createRoom(stream) {
+            // connect to this particular conversation
+            Q.Streams.WebRTC().start({
+                element: options.element,
+                roomId: stream.fields.name,
+                roomPublisherId: stream.fields.publisherId,
+                mode: options.mode,
+                onWebrtcControlsCreated: function () {
+                    //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
+                    // may be tool doesn't close at all?
+
+                    Q.handle(options.onWebrtcControlsCreated, this, [stream]);
+
+                    this.Q.beforeRemove.set(function () {
+                        Q.handle(options.onEnd, this, [stream]);
+                    }, this);
+
+                    // this is duplicate to above approach
+                    Q.Streams.Stream.onMessage(stream.fields.publisherId, stream.fields.name, 'Streams/leave').set(function(stream, message) {
+                        if (message.byUserId !== userId) {
+                            return;
+                        }
+
+                        Q.handle(options.onEnd, this, [stream]);
+                    }, options.tool);
+                },
+                onWebRTCRoomCreated: function () {
+                    Q.handle(options.onStart, this, [stream]);
+                },
+                onWebRTCRoomEnded: function () {
+                    Q.handle(options.onEnd, this, [stream]);
+                }
+            });
+        }
+
+        if (!options.useExisting) {
+            return _createStream();
+        }
 
         Streams.related.force(options.publisherId,  options.streamName,  'Streams/webrtc',  true, {limit: 1, stream: true} , function (err) {
             if (err) {
@@ -5979,84 +6056,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             // get first property from relatedStreams (actually it should be only one)
             var stream = Q.first(this.relatedStreams);
 
-            function _createRoom(publisherId, streamName) {
-                // connect to this particular conversation
-                Q.Streams.WebRTC().start({
-                    element: options.element,
-                    roomId: streamName,
-                    roomPublisherId: publisherId,
-                    mode: options.mode,
-                    onWebrtcControlsCreated: function () {
-                        //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
-                        // may be tool doesn't close at all?
-
-                        Q.handle(options.onWebrtcControlsCreated, this, [stream]);
-
-                        this.Q.beforeRemove.set(function () {
-                            Q.handle(options.onEnd, this, [stream]);
-                        }, this);
-
-                        // this is duplicate to above approach
-                        Q.Streams.Stream.onMessage(publisherId, streamName, 'Streams/leave').set(function(stream, message) {
-                            if (message.byUserId !== userId) {
-                                return;
-                            }
-
-                            Q.handle(options.onEnd, this, [stream]);
-                        }, options.tool);
-                    },
-                    onWebRTCRoomCreated: function () {
-                        Q.handle(options.onStart, this, [stream]);
-                    },
-                    onWebRTCRoomEnded: function () {
-                        Q.handle(options.onEnd, this, [stream]);
-                    }
-                });
-            };
-
             if (stream && !stream.getAttribute('endTime')) {
                 if (!stream.testWriteLevel('join')) {
-                    return Q.Text.get("Streams/content", function (err, text) {
-                        var msg = Q.firstErrorMessage(err);
-                        if (msg) {
-                            return console.warn(msg);
-                        }
-
-                        Q.alert(text.webrtc.notAllowedToJoinCall);
-                    });
+                    return Q.alert(_texts.webrtc.notAllowedToJoinCall);
                 }
 
-                _createRoom(stream.fields.publisherId, stream.fields.name);
+                _createRoom(stream);
             } else {
-                Q.req("Streams/webrtc", ["room"], function (err, response) {
-                    var msg = Q.firstErrorMessage(err, response && response.errors);
-                    if (msg) {
-                        return Q.alert(msg);
-                    }
-
-                    Q.Streams.get(userId, response.slots.room.roomId, function (err) {
-                        var fem = Q.firstErrorMessage(err);
-                        if (fem) {
-                            return console.warn("Streams.webrtc.start.create: " + fem);
-                        }
-
-                        var stream = this;
-                        stream.relateTo('Streams/webrtc', options.publisherId, options.streamName, function (err) {
-                            var fem = Q.firstErrorMessage(err);
-                            if (fem) {
-                                return console.warn("Streams.webrtc.start.relate: " + fem);
-                            }
-
-                            _createRoom(stream.fields.publisherId, stream.fields.name);
-                        });
-                    });
-                }, {
-                    method: 'post',
-                    fields: {
-                        publisherId: userId,
-                        adapter: options.mode
-                    }
-                });
+                _createStream();
             }
         });
     }

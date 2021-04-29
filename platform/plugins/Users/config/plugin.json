@@ -26,11 +26,13 @@
 			"Users/setEmailAddress": ["Users/after/Users_setEmailAddress"],
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
-			"Q/request/languages": ["Users/after/Q_request_languages"]
+			"Q/request/languages": ["Users/after/Q_request_languages"],
+			"Q/response/content": ["Users/after/Q_response_content"]
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},
 			"Users/session": {"module": "Users", "action": "session"},
+			"Users/analytics": {"module": "Users", "action": "analytics"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
