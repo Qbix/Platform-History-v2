@@ -38,4 +38,7 @@ function Streams_before_Q_responseExtras()
 		$typeUrls[$type] = $content['url'];
 	}
 	Q_Response::setScriptData('Q.plugins.Streams.urls', $typeUrls);
+
+	// allowed related streams
+	Q_Response::setScriptData('Q.plugins.Streams.chat.allowedRelatedStreams', Q_Config::get("Streams", "chat", "allowedRelatedStreams", null));
 }
