@@ -28,9 +28,16 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         $startTime = $stream->getAttribute('startTime');
         if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
 
-            $stream->setAttribute('startTime', round(microtime(true) * 1000));
+            $startTime =  round(microtime(true) * 1000);
+            $stream->setAttribute('startTime', $startTime);
             $stream->clearAttribute('endTime');
             $stream->save();
+
+            /*$recStream = Streams::create($publisherId, $publisherId, 'Streams/webrtc/recordings', array(
+                'name' => 'Streams/webrtc/' . $roomId . '/' . $startTime
+            ));
+
+            $recStream->relateFrom($stream, 'Streams/webrtc/recordings', $publisherId);*/
         }
 
         $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);

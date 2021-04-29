@@ -34,6 +34,7 @@ window.WebRTCconferenceLib = function app(options){
         mode: 'node',
         nodeServer: '',
         roomName: null,
+        roomStartTime: null,
         roomPublisher: null,
         audio: false,
         video: false,
@@ -1873,6 +1874,7 @@ window.WebRTCconferenceLib = function app(options){
                 var Scene = function () {
                     this.title = null;
                     this.sources = [];
+                    this.audioSources = [];
                 }
 
                 var defaultScene = new Scene();
@@ -2269,7 +2271,7 @@ window.WebRTCconferenceLib = function app(options){
                             } else if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[i].parentGroup == _activeScene.sources[indexToInsert].parentGroup) {
                                 moveSource(i, indexToInsert + childItems);
                                 break;
-                            } else if(_activeScene.sources[indexToInsert].sourceType == 'group') {
+                            } else if(_activeScene.sources[indexToInsert] && _activeScene.sources[indexToInsert].sourceType == 'group') {
                                 for(let i in _activeScene.sources) {
                                     let groupToSkip = _activeScene.sources[indexToInsert].parentGroup != null ? _activeScene.sources[indexToInsert].parentGroup :  _activeScene.sources[indexToInsert];
                                     if(_activeScene.sources[i].parentGroup == groupToSkip) {
@@ -2318,7 +2320,7 @@ window.WebRTCconferenceLib = function app(options){
                             let childItems = 0;
                             console.log('moveSourceForward for parentGroup', _activeScene.sources[i].parentGroup);
 
-                            if(_activeScene.sources[i].parentGroup == null && _activeScene.sources[indexToInsert].parentGroup != null) {
+                            if(_activeScene.sources[i].parentGroup == null && _activeScene.sources[indexToInsert] && _activeScene.sources[indexToInsert].parentGroup != null) {
                                 for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i].parentGroup ==  _activeScene.sources[indexToInsert].parentGroup) {
                                         childItems++;
@@ -2326,7 +2328,7 @@ window.WebRTCconferenceLib = function app(options){
                                 }
                                 console.log('moveSourceForward for 1');
 
-                            } else if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[i].parentGroup == _activeScene.sources[indexToInsert]) {
+                            } else if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[indexToInsert] && _activeScene.sources[i].parentGroup == _activeScene.sources[indexToInsert]) {
                                 return;
                             }
                             console.log('moveSourceForward for childItems', childItems);
@@ -3008,6 +3010,7 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function drawVideosOnCanvas() {
+                    if(_isActive === false) return;
                     _inputCtx.clearRect(0, 0, _size.width, _size.height);
 
                     for(let i = _activeScene.sources.length - 1; i >= 0; i--) {
@@ -3684,8 +3687,8 @@ window.WebRTCconferenceLib = function app(options){
                     if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 
                     updateWebRTCCanvasLayout();
-                    drawVideosOnCanvas();
                     _isActive = true;
+                    drawVideosOnCanvas();
                     refreshEventListeners(_roomInstance);
                 }
 
@@ -3705,6 +3708,18 @@ window.WebRTCconferenceLib = function app(options){
                     roomInstance.event.on('screenShown', updateCanvas);
                     roomInstance.event.on('audioMuted', updateCanvas);
                     roomInstance.event.on('audioUnmuted', updateCanvas);
+
+                    _eventDispatcher.on('drawingStop', function () {
+                        roomInstance.event.off('videoTrackLoaded', updateCanvas);
+                        roomInstance.event.off('audioTrackLoaded', updateCanvas);
+                        roomInstance.event.off('participantDisconnected', updateCanvas);
+                        roomInstance.event.off('trackMuted', updateCanvas);
+                        roomInstance.event.off('trackUnmuted', updateCanvas);
+                        roomInstance.event.off('screenHidden', updateCanvas);
+                        roomInstance.event.off('screenShown', updateCanvas);
+                        roomInstance.event.off('audioMuted', updateCanvas);
+                        roomInstance.event.off('audioUnmuted', updateCanvas);
+                    });
                 }
 
                 function switchingRoom(value) {
@@ -4061,15 +4076,11 @@ window.WebRTCconferenceLib = function app(options){
                         if(_canvas.parentNode != null) _canvas.parentNode.removeChild(_canvas);
                     }
 
-                    if(_canvasMediStream != null) {
-                        /*var streamTracks = _canvasMediStream.getTracks();
-						for(var t in streamTracks) {
-							streamTracks[t].stop();
-						}*/
-                    }
-
                     _isActive = false;
-                    if(_activeScene != null) _activeScene.sources = [];
+                    //if(_activeScene != null) _activeScene.sources = [];
+
+                    _eventDispatcher.dispatch('drawingStop');
+
                 }
 
                 function isActive() {
@@ -4577,6 +4588,8 @@ window.WebRTCconferenceLib = function app(options){
 
         var localRecorder = (function () {
 
+            var _recordingLib = 'MediaRecorder'; //MediaRecorder || RecordRTC
+            var _extension = null;
             var _recorder = null;
             var _recorderStartTime = null;
             var _recorderStartTimecode = null;
@@ -4584,12 +4597,14 @@ window.WebRTCconferenceLib = function app(options){
             var _recorderPrevTimecode = null;
             var _totalLength = 0;
 
-            var _otherRecordings = [];
+            var _recordingInfoSent = [];
+            var _parallelRecordings = [];
             var _saveToDbTimer = null;
             var _sendToServerTimer = null;
             var _sendingInProgress = false;
             var _lastChunkCreatedTime = null;
             var _lastChunkSendTime = null;
+            var _chunkNum = 0;
             var _recordingInProgress = false;
 
             function saveAudioChunks(blobsToSend) {
@@ -4599,16 +4614,17 @@ window.WebRTCconferenceLib = function app(options){
 
                // var mergedBlob = new Blob(blobsToSend);
                 console.log('SAVE LOCAL AUDIO')
-                console.log('SAVE LOCAL AUDIO _otherRecordings', _otherRecordings[0])
-                let otherRecordingsTimecode = _otherRecordings.splice(0, _otherRecordings.length);
-                mediaDB('localAudio').save({blob:blobsToSend, roomId: options.roomName, otherRecordings:otherRecordingsTimecode, timestamp: Date.now()}, function () {
+                console.log('SAVE LOCAL AUDIO _parallelRecordings', _parallelRecordings[0])
+                let parallelRecordingsTimecode = _parallelRecordings.splice(0, _parallelRecordings.length);
+                mediaDB('localAudio').save({blob:blobsToSend, roomId: options.roomName, parallelRecordings:parallelRecordingsTimecode, timestamp: Date.now()}, function () {
+                    console.log('SAVE LOCAL AUDIO: END')
 
                 });
             }
 
             function sendAudioChunks() {
                 _lastChunkSendTime = Date.now();
-                console.log('sendAudioChunks');
+                console.log('sendAudioChunks', _recordingInProgress);
                 mediaDB('localAudio').getStorage(function (results) {
                     console.log('sendAudioChunks: get audio: results', results)
 
@@ -4620,7 +4636,9 @@ window.WebRTCconferenceLib = function app(options){
                         return 0;
                     });
 
-                    if(results.length == 0) {
+                    if(results.length == 0 && _recordingInProgress) {
+                        console.log('sendAudioChunks: setTimeout', results)
+
                         _sendToServerTimer = setTimeout(sendAudioChunks, 1000);
 
                         return;
@@ -4633,8 +4651,12 @@ window.WebRTCconferenceLib = function app(options){
 
                         if(results[index] != null && results[index].blob != null) {
                             let audioBlob = new Blob([results[index].blob]);
-                            let otherRecordings = results[index].otherRecordings.length != 0 ? results[index].otherRecordings : [];
-                            socket.emit('Streams/webrtc/localMedia', audioBlob, otherRecordings, _recordingInProgress === false, function () {
+                            _chunkNum = _chunkNum + 1;
+                            let parallelRecordings = results[index].parallelRecordings.length != 0 ? results[index].parallelRecordings : [];
+                            console.log('sendAudioChunks: get audio: sendToServer: upload start', index, results.length, _recordingInProgress)
+
+                            let lastChunk = _recordingInProgress === false && index == (results.length - 1);
+                            socket.emit('Streams/webrtc/localMedia', audioBlob, {parallelRecordings: parallelRecordings, extension: _extension}, _chunkNum, lastChunk, function () {
                                 console.log('sendAudioChunks: get audio: sendToServer: upload end', Date.now() - startUploadTime)
 
                                 mediaDB('localAudio').remove(results[index].objectId, null, null, function () {
@@ -4670,6 +4692,30 @@ window.WebRTCconferenceLib = function app(options){
                 }, null, 'roomId', options.roomName);
             }
 
+            function mediaDataChunk(event) {
+                log('startRecording: dataavailable ', event.timecode);
+
+                let blobData = event instanceof Blob ? event : event.data;
+                if(_recorderPrevTimecode != null) console.log('startRecording: dataavailable diff timecode', event.timecode - _recorderPrevTimecode);
+                if(_recorderPrevTime != null) console.log('startRecording: dataavailable diff time', (performance.timeOrigin + performance.now()) - _recorderPrevTime);
+
+
+                if(_recorderStartTimecode == null) {
+
+                    _recorderStartTimecode = event.timecode - ((performance.timeOrigin + performance.now()) - _recorderPrevTime);
+                    _totalLength = _totalLength + (event.timecode - _recorderStartTimecode)
+                    console.log('_recorderStartTimecode', _recorderStartTimecode, event.timecode, _recorderStartTimecode)
+                } else {
+                    _totalLength = _totalLength + (event.timecode - _recorderPrevTimecode)
+                }
+
+                _recorderPrevTime = performance.timeOrigin + performance.now();
+                _recorderPrevTimecode = event.timecode;
+                console.log('_totalLength', _totalLength)
+
+                saveAudioChunks(blobData);
+            }
+
             function startRecording(callback) {
                 log('startRecording');
                 var audioTracks = localParticipant.audioTracks();
@@ -4688,68 +4734,67 @@ window.WebRTCconferenceLib = function app(options){
 
                 }
 
-                options = {
-                    /*audioBitsPerSecond : 128000,
-                    videoBitsPerSecond : 2500000*/
-                }
 
-                var options;
-                if (MediaRecorder.isTypeSupported('video/webm;codecs=opus,vp9')) {
-                    log('startRecording: isTypeSupported video/webm;codecs="opus,vp9"');
-
-                    options.mimeType = 'video/webm; codecs="opus,vp9"';
-                } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,vp8"')) {
-                    log('startRecording: isTypeSupported video/webm;codecs="opus,vp8"');
-
-                    options.mimeType = 'video/webm; codecs=vp8';
-                } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,h264"')) {
-                    log('startRecording: isTypeSupported video/webm;codecs="opus,h264"');
-
-                    options.mimeType = 'video/webm;codecs="h264"';
-                }
-
-                _recorder = new MediaRecorder(streamToRectord,  options);
-                _recordingInProgress = true;
-
-                _recorder.addEventListener("start", event => {
+                if(_recordingLib == 'RecordRTC') {
+                    _recordingInProgress = true;
+                    _recorder = RecordRTC(streamToRectord, {
+                        recorderType:StereoAudioRecorder,
+                        type: 'audio',
+                        mimeType: 'video/wav',
+                        timeSlice: 5000,
+                        ondataavailable:mediaDataChunk
+                    });
+                    _recorder.startRecording();
                     console.log('startRecording: start event');
                     _recorderStartTime = _recorderPrevTime = performance.timeOrigin + performance.now();
-                    app.eventBinding.sendDataTrackMessage("localRecordingStarted");
-                });
+                    _recordingInfoSent = roomParticipants.map(function (p) {
+                        return {sid: p.sid, recording: false};
+                    });
+                    app.eventBinding.sendDataTrackMessage("localRecordingStarted", {
+                        type:'notification'
+                    });
 
-                _recorder.addEventListener("dataavailable", event => {
-                    log('startRecording: dataavailable ', event.timecode);
+                } else {
 
-                   if(_recorderPrevTimecode != null) console.log('startRecording: dataavailable diff timecode', event.timecode - _recorderPrevTimecode);
-                   if(_recorderPrevTime != null) console.log('startRecording: dataavailable diff time', (performance.timeOrigin + performance.now()) - _recorderPrevTime);
-
-
-                    if(_recorderStartTimecode == null) {
-
-                        _recorderStartTimecode = event.timecode - ((performance.timeOrigin + performance.now()) - _recorderPrevTime);
-                        _totalLength = _totalLength + (event.timecode - _recorderStartTimecode)
-                        console.log('_recorderStartTimecode', _recorderStartTimecode, event.timecode, _recorderStartTimecode)
-                    } else {
-                        _totalLength = _totalLength + (event.timecode - _recorderPrevTimecode)
+                    let options = {
+                        mimeType: 'audio/wav'
+                        /*audioBitsPerSecond : 128000,
+                        videoBitsPerSecond : 2500000*/
                     }
 
-                    _recorderPrevTime = performance.timeOrigin + performance.now();
-                    _recorderPrevTimecode = event.timecode;
-                    console.log('_totalLength', _totalLength)
+                    if (MediaRecorder.isTypeSupported('video/webm;codecs=opus,vp9')) {
+                        log('startRecording: isTypeSupported video/webm;codecs="opus,vp9"');
+                        options.mimeType = 'video/webm; codecs="opus,vp9"';
+                        _extension = 'webm';
+                    } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,vp8"')) {
+                        log('startRecording: isTypeSupported video/webm;codecs="opus,vp8"');
+                        options.mimeType = 'video/webm; codecs=vp8';
+                        _extension = 'webm';
+                    } else if (MediaRecorder.isTypeSupported('video/webm;codecs="opus,h264"')) {
+                        log('startRecording: isTypeSupported video/webm;codecs="opus,h264"');
+                        options.mimeType = 'video/webm;codecs="h264"';
+                        _extension = 'webm';
+                    }
 
-                    saveAudioChunks(event.data);
-                });
+                    _recorder = new MediaRecorder(streamToRectord,  options);
+                    _recordingInProgress = true;
 
-                function newTrackPlay(e) {
-                    console.log('newTrackPlay');
-                    let currentSliceOffset = (performance.timeOrigin + performance.now()) - _recorderPrevTime;
-                    console.log('newTrackPlay currentSliceOffset', currentSliceOffset);
-                    _otherRecordings.push({time:_totalLength + currentSliceOffset, participant: {sid: e.participant.sid, username: e.participant.identity}});
+                    _recorder.addEventListener("start", event => {
+                        console.log('startRecording: start event');
+                        _recorderStartTime = _recorderPrevTime = performance.timeOrigin + performance.now();
+                        _recordingInfoSent = roomParticipants.map(function (p) {
+                            return {sid: p.sid, recording: false};
+                        });
+                        app.eventBinding.sendDataTrackMessage("localRecordingStarted", {
+                            type:'notification'
+                        });
+                    });
+
+                    _recorder.addEventListener("dataavailable", mediaDataChunk);
+
+                    console.log('startRecording: start');
+                    _recorder.start(5000);
                 }
-                app.event.on('localRecordingStarted', newTrackPlay);
-
-                console.log('startRecording: start');
-                _recorder.start(5000);
 
                 //_saveToDbTimer = setTimeout(saveAudioChunks, 6000);
                 sendAudioChunks();
@@ -4760,50 +4805,265 @@ window.WebRTCconferenceLib = function app(options){
                 //app.eventBinding.sendDataTrackMessage("liveStreamingStarted");
             }
 
-            function stopRecording(callback) {
-                log('stopRecording');
-                _recorder.addEventListener("stop", () => {
-                    /*const audioBlob = new Blob(_mediaChunks.blobs);
-                    const audioUrl = URL.createObjectURL(audioBlob);
-                    const audio = new Audio(audioUrl);
-                    audio.play();*/
+            function somebodyStartedRecording(e) {
+                console.log('somebodyStartedRecording', _recordingInfoSent);
+                if(e.participant.signalingRole == 'polite') {
+                    let shouldIgnore = false;
+                    for (let i in _recordingInfoSent) {
+                        if (_recordingInfoSent[i].sid == e.participant.sid) {
+                            if (_recordingInfoSent[i].recording === true || _recordingInfoSent[i].recording === null) {
+                                shouldIgnore = true
+                            } else if (_recordingInfoSent[i].recording === false) {
+                                shouldIgnore = false
+                            }
+                        }
+                    }
 
-                    /*mediaDB('localAudio').getStorage(function (results) {
-                        console.log('stopRecording: get audio: results', results)
-                        var buffer = results.map(function (o) {
-                            return o.blob;
-                        })
-                        if(buffer.length == 0) return;
-                        const audioBlob = new Blob(buffer);
-                        console.log('stopRecording: get audio: buffer', buffer)
-
-                        const audioUrl = URL.createObjectURL(audioBlob);
-                        const audio = new Audio(audioUrl);
-                        audio.play();
-                        socket.emit('Streams/webrtc/localMedia', audioBlob);
-
-
-                    }, null, 'roomId', options.roomName);*/
-                });
-
-                /*if(_saveToDbTimer != null) {
-                    clearTimeout(_saveToDbTimer);
-                    _saveToDbTimer = null;
+                    if(shouldIgnore) {
+                        return;
+                    }
                 }
 
-                if(_sendToServerTimer != null) {
-                    clearTimeout(_sendToServerTimer);
-                    _sendToServerTimer = null;
-                }*/
 
-                _recordingInProgress = false;
-                log('stopRecording: requestData');
-                _recorder.requestData()
-                _recorder.stop();
+                let currentSliceOffset = (performance.timeOrigin + performance.now()) - _recorderPrevTime;
+                console.log('somebodyStartedRecording currentSliceOffset', currentSliceOffset);
+                _parallelRecordings.push({time:_totalLength + currentSliceOffset, participant: {sid: e.participant.sid, username: e.participant.identity}});
+            }
+
+            app.event.on('localRecordingStarted', function (e) {
+                console.log('remoteRecordingStarted', _recordingInfoSent, e.data);
+
+                if(e.data.type == 'notification') {
+                    console.log('remoteRecordingStarted notification');
+
+                    if(!localRecorder.isActive()) {
+                        app.eventBinding.sendDataTrackMessage("localRecordingStarted", {
+                            type:'answer',
+                            recording: false
+                        });
+
+                        return false;
+                    } else {
+                        app.eventBinding.sendDataTrackMessage("localRecordingStarted", {
+                            type:'answer',
+                            recording: true
+                        });
+                    }
+                    somebodyStartedRecording(e);
+                } else if(e.data.type == 'answer') {
+                    console.log('remoteRecordingStarted answer');
+
+                    for (let i in _recordingInfoSent) {
+                        if (_recordingInfoSent[i].sid == e.participant.sid) {
+                            _recordingInfoSent[i].recording = e.data.recording
+                        }
+                    }
+                }
+
+            });
+
+            function stopRecording(callback) {
+                log('stopRecording');
+                if(_recordingLib == 'RecordRTC') {
+                    _recorder.stopRecording();
+                    _recordingInProgress = false;
+                } else {
+                    _recorder.addEventListener("stop", () => {
+                        /*const audioBlob = new Blob(_mediaChunks.blobs);
+                        const audioUrl = URL.createObjectURL(audioBlob);
+                        const audio = new Audio(audioUrl);
+                        audio.play();*/
+
+                        /*mediaDB('localAudio').getStorage(function (results) {
+                            console.log('stopRecording: get audio: results', results)
+                            var buffer = results.map(function (o) {
+                                return o.blob;
+                            })
+                            if(buffer.length == 0) return;
+                            const audioBlob = new Blob(buffer);
+                            console.log('stopRecording: get audio: buffer', buffer)
+
+                            const audioUrl = URL.createObjectURL(audioBlob);
+                            const audio = new Audio(audioUrl);
+                            audio.play();
+                            socket.emit('Streams/webrtc/localMedia', audioBlob);
+
+
+                        }, null, 'roomId', options.roomName);*/
+                    });
+
+                    /*if(_saveToDbTimer != null) {
+                        clearTimeout(_saveToDbTimer);
+                        _saveToDbTimer = null;
+                    }
+
+                    if(_sendToServerTimer != null) {
+                        clearTimeout(_sendToServerTimer);
+                        _sendToServerTimer = null;
+                    }*/
+
+                    _recordingInProgress = false;
+                    log('stopRecording: requestData');
+                    _recorder.requestData()
+                    _recorder.stop();
+                }
+
                 if(callback != null) callback();
                 //app.event.dispatch('videoRecordingStopped', localParticipant);
                 //app.eventBinding.sendDataTrackMessage("liveStreamingEnded");
             }
+
+            var audioVisualization = (function () {
+                var _canvas = null;
+                var _inputCtx = null;
+                var _size = {width:1280, height: 720, x: 0, y: 0};
+
+                function createCanvas() {
+                    var videoCanvas = document.createElement("CANVAS");
+                    videoCanvas.className = "Streams_webrtc_video-stream-canvas";
+                    videoCanvas.style.position = 'absolute';
+                    videoCanvas.style.top = '0';
+                    //videoCanvas.style.top = '0';
+                    videoCanvas.style.left = '0';
+                    //videoCanvas.style.zIndex = '9999999999999999999';
+                    videoCanvas.style.backgroundColor = '#000000';
+                    videoCanvas.width = _size.width;
+                    videoCanvas.height = _size.height;
+
+                    _inputCtx = videoCanvas.getContext('2d');
+                    _canvas = videoCanvas;
+
+                }
+                createCanvas();
+
+                function start() {
+                    if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
+                    drawVideoOnCanvas();
+                }
+
+                function drawVideoOnCanvas() {
+                    //if(_isActive === false) return;
+                    _inputCtx.clearRect(0, 0, _size.width, _size.height);
+
+                    drawSingleAudioOnCanvas();
+
+                    requestAnimationFrame(function(){
+                        drawVideoOnCanvas();
+                    })
+                }
+
+                function drawSingleAudioOnCanvas() {
+                    //if(data.participant.online == false) return;
+
+                    _inputCtx.fillStyle = options.liveStreaming.audioLayoutBgColor;
+                    _inputCtx.fillRect(_size.x, _size.y, _size.width, _size.height);
+
+
+                    var width, height;
+                    if(localParticipant.avatar != null) {
+
+                        var avatar = localParticipant.avatar.image;
+                        width = avatar.width;
+                        height = avatar.height;
+
+                        var scale = Math.min( (_size.width / 2) / width,  (_size.height / 2) / height);
+                        var scaledWidth = width * scale;
+                        var scaledHeight = height * scale;
+                        // get the top left position of the image
+                        var x = _size.x + (( _size.width / 2) - (width / 2) * scale);
+                        var y;
+                        if(options.liveStreaming.showLabelWithNames) {
+                            y = (_size.y + 36) + (((_size.height - 36) / 2) - (height / 2) * scale);
+                        } else {
+                            y = _size.y + ((_size.height / 2) - (height / 2) * scale);
+                        }
+
+                        var size = Math.min(scaledHeight, scaledWidth);
+                        var radius =  size / 2;
+
+                        drawSimpleCircleAudioVisualization(x, y, radius, scale, size);
+
+
+                        _inputCtx.save();
+
+
+                        _inputCtx.beginPath();
+                        _inputCtx.arc(x + (size / 2), y + (size / 2), radius, 0, Math.PI * 2 , false); //draw the circle
+                        _inputCtx.clip(); //call the clip method so the next render is clipped in last path
+                        //_inputCtx.strokeStyle = "blue";
+                        //_inputCtx.stroke();
+                        _inputCtx.closePath();
+
+                        _inputCtx.drawImage(avatar,
+                            x, y,
+                            width * scale, height * scale);
+                        _inputCtx.restore();
+
+
+
+                        if(options.liveStreaming.showLayoutBorders) {
+                            _inputCtx.strokeStyle = "rgba(0, 0, 0, 0.5)";
+                            _inputCtx.strokeRect(_size.x, _size.y, _size.width, _size.height);
+                        }
+                    }
+
+                    if(options.liveStreaming.showLabelWithNames) {
+                        //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
+                        _inputCtx.fillStyle = "#232323";
+                        _inputCtx.fillRect(_size.x, _size.y, _size.width, 36);
+
+                        _inputCtx.font = "16px Arial";
+                        _inputCtx.fillStyle = "white";
+                        _inputCtx.fillText(localParticipant.username, _size.x + 10, _size.y + 36 + 16 - 18 - 8);
+                    }
+
+                }
+
+                function drawSimpleCircleAudioVisualization(x, y, radius, scale) {
+                    var analyser = localParticipant.soundMeter.analyser;
+                    if(analyser == null) return;
+                    var bufferLength = analyser.frequencyBinCount;
+                    var dataArray = new Uint8Array(bufferLength);
+                    analyser.getByteFrequencyData(dataArray);
+                    //just show bins with a value over the treshold
+                    var threshold = 0;
+                    // clear the current state
+                    //_inputCtx.clearRect(_size.x, _size.y, _size.width, _size.height);
+                    //the max count of bins for the visualization
+                    var maxBinCount = dataArray.length;
+
+
+                    _inputCtx.save();
+                    _inputCtx.beginPath();
+                    _inputCtx.rect(_size.x, _size.y, _size.width, _size.height);
+                    _inputCtx.clip();
+                    //_inputCtx.stroke();
+
+                    //var bass = Math.floor(dataArray[1]); //1Hz Frequenz
+                    var rms = localParticipant.soundMeter.slowRms * 100;
+                    //console.log(rms, bass)
+                    var radius = ((radius / 100 * rms) + radius);
+                    if(window.debug7) {
+                        console.log(radius)
+                    }
+                    //_inputCtx.fillStyle = "#505050";
+                    _inputCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
+                    _inputCtx.beginPath();
+                    if(options.liveStreaming.showLabelWithNames) {
+                        _inputCtx.arc(_size.x + (_size.width / 2), (_size.y + 36) + ( (_size.height - 36) / 2), radius, 0, 2 * Math.PI);
+                    } else {
+                        _inputCtx.arc(_size.x + (_size.width / 2), _size.y + (_size.height / 2), radius, 0, 2 * Math.PI);
+                    }
+                    _inputCtx.fill();
+                    //var radius =  _size / 2  + (bass * 0.25);
+
+                    _inputCtx.restore();
+                }
+
+                return {
+                    start:start
+                }
+            }())
 
             var audioRecorder = (function () {
                 var _sampleRate = 44100;
@@ -4941,6 +5201,7 @@ window.WebRTCconferenceLib = function app(options){
                     _processor.disconnect(_context.destination);
                     _source.disconnect(_processor)
                 }
+
                 return {
                     start:startRecording,
                     stop:stopRecording
@@ -5045,7 +5306,7 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function save(object, f){
-
+                    console.log('save', object);
                     if(object.blob instanceof Blob) {
                         object.blob.arrayBuffer().then(function (buffer) {
                             object.blob = buffer;
@@ -5090,13 +5351,22 @@ window.WebRTCconferenceLib = function app(options){
 
             })
 
+            function isActive() {
+                if(_recorder != null && _recorder.state == 'recording') {
+                    return true;
+                }
+                return false;
+            }
+
             return {
+                audioVisualization: audioVisualization,
                 startRecording: startRecording,
-                stopRecording: stopRecording
+                stopRecording: stopRecording,
+                isActive: isActive
             }
         }())
 
-        //window.localRecorder = localRecorder;
+        window.localRecorder = localRecorder;
         var url = new URL(location.href);
 
         var mode = url.searchParams.get("mode");
@@ -6399,7 +6669,7 @@ window.WebRTCconferenceLib = function app(options){
                 participant.fbLiveStreamingActive = false;
                 app.event.dispatch('liveStreamingEnded', {participant:participant, platform:data});
             } else if(data.type == 'localRecordingStarted') {
-                app.event.dispatch('localRecordingStarted', {participant:participant});
+                app.event.dispatch('localRecordingStarted', {participant:participant, data:data.content});
             } else if(data.type == 'online') {
                 //log('processDataTrackMessage online')
 
@@ -8147,7 +8417,7 @@ window.WebRTCconferenceLib = function app(options){
             sendOnlineStatus();
             checkOnlineStatus();
             log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-            socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
+            socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, roomStartTime: options.roomStartTime, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
         }
 
         return {
@@ -10267,7 +10537,7 @@ window.WebRTCconferenceLib = function app(options){
             if(app.state == 'reconnecting') {
                 app.state = 'connected';
                 log('initWithNodeJs: socket: RECONNECTED')
-                socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
+                socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:localParticipant.sid, room:options.roomName, roomStartTime: options.roomStartTime, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
                 localParticipant.sid = socket.id;
                 return;
             }

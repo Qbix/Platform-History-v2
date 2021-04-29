@@ -13,6 +13,7 @@ module.exports = function(socket,io) {
         socket.startTime = identity.username.split('\t')[1];
         socket.info = identity.info;
         socket.roomId = roomId = identity.room;
+        socket.roomStartTime = identity.roomStartTime;
         socket.roomPublisherId = roomPublisherId = identity.roomPublisher;
 
         if(_debug) console.log('rooms: ', socket.adapter.rooms);

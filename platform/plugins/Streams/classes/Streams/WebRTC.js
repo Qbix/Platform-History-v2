@@ -173,7 +173,7 @@ WebRTC.Participant = function (id) {
     this.RTCPeerConnection = null;
     this.tracks = [];
     this.liveStreaming = {connectionManager: null, room: null, canvasComposer: null};
-    this.recording = {path: null, paralelRecordings:[]};
+    this.recording = {path: null, startTime: null, stopTime: null, parallelRecordings:[], parallelRecordingsFile:null};
     this.videoTracks = function (activeTracksOnly) {
         if(activeTracksOnly) {
             return this.tracks.filter(function (trackObj) {
@@ -238,6 +238,7 @@ WebRTC.listen = function () {
 
         var _localRecordDir = null;
         var _localMediaStream = null;
+        var _chunksNum = 0;
 
         let rtmpUrl = socket.handshake.query.rtmp;
         if ( rtmpUrl != null ) {
@@ -356,12 +357,27 @@ WebRTC.listen = function () {
         //require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
         require('./WebRTC/roomManager')(socket, io);
 
-        socket.on('Streams/webrtc/localMedia', function (data, paralelRecordings, end, callback) {
+        function processChunk(data, infoData, chunkNum, end, callback) {
+            var parallelRecordings = infoData.parallelRecordings;
+            var extension = infoData.extension;
+            if(_debug) console.log('LOCAL MEDIA:', socket.id);
+            if(_debug) console.log('LOCAL MEDIA: chunkNum', chunkNum, _chunksNum);
+
+            if(parallelRecordings.length != 0) {
+                for (let i in parallelRecordings) {
+                    socket.webrtcParticipant.recording.parallelRecordings.push(parallelRecordings[i]);
+                }
+                //fs.writeFileSync(socket.webrtcParticipant.recording.parallelRecordingsFile, JSON.stringify(socket.webrtcParticipant.recording.parallelRecordings))
+            }
 
             function writeToStream() {
                 if(!end) {
                     _localMediaStream.write(data, function () {
                         if(_debug) console.log('LOCAL MEDIA: write to stream finished', _localMediaStream.bytesWritten);
+                        _chunksNum = chunkNum;
+                        socket.webrtcParticipant.recording.latestChunkTime = Date.now();
+
+                        fs.writeFileSync(socket.webrtcParticipant.recording.recordingInfo, JSON.stringify(socket.webrtcParticipant.recording))
 
                         if(callback != null) {
                             callback({
@@ -372,18 +388,45 @@ WebRTC.listen = function () {
                 } else {
                     _localMediaStream.end(data, function () {
                         if(_debug) console.log('LOCAL MEDIA: write to stream finished (END)', _localMediaStream.bytesWritten);
-                        socket.webrtcParticipant.recording.stoppedTime = Date.now();
+                        socket.webrtcParticipant.recording.stopTime = Date.now();
+                        _chunksNum = chunkNum;
+
+                        fs.writeFileSync(socket.webrtcParticipant.recording.recordingInfo, JSON.stringify(socket.webrtcParticipant.recording))
 
                         if(callback != null) {
                             callback({
                                 status: "ok"
                             });
                         }
+
+
                     });
                 }
+
+
+                let chunkStream = fs.createWriteStream(socket.webrtcParticipant.recording.path, {
+                    'flags': 'a',
+                    'encoding': null,
+                    'mode': '0666'
+                });
+
+                chunkStream.on('error', (e) => {
+                    console.log('ERRRORRR', e)
+                });
+                chunkStream.on('error', () => {
+                    console.log('CLOSED')
+                });
+                chunkStream.on('finish', () => {
+                    console.log('FINISHED')
+                });
+
+                chunkStream.write(data, function () {
+
+                });
             }
-            if(_debug) console.log('LOCAL MEDIA', end);
-            if(_debug) console.log('LOCAL MEDIA paralelRecordings', paralelRecordings);
+            if(_debug) console.log('LOCAL MEDIA end ', end);
+            if(_debug) console.log('LOCAL MEDIA parallelRecordings', parallelRecordings);
+
             if(_localMediaStream != null) {
                 if(_debug) console.log('LOCAL MEDIA: write to stream');
 
@@ -400,13 +443,12 @@ WebRTC.listen = function () {
 
                     var localRecordDir = appDir + 'files/' +  appName + '/uploads/Streams/webrtc_rec/' + socket.roomId + '/' + stream.getAttribute('startTime') + '/' + socket.userPlatformId + '/' + socket.startTime;
                     if (!fs.existsSync(localRecordDir)){
-                        fs.mkdirSync(localRecordDir, {recursive: true});
+                        var oldmask = process.umask(0);
+                        fs.mkdirSync(localRecordDir, {recursive: true, mode: '0777'});
+                        process.umask(oldmask);
                     }
-                    _localMediaStream = fs.createWriteStream(localRecordDir + '/video.webm', {
-                        'flags': 'a',
-                        'encoding': null,
-                        'mode': '0666'
-                    });
+                    let filePath = localRecordDir + '/audio.' + extension;
+                    _localMediaStream = fs.createWriteStream(filePath);
                     _localMediaStream.on('error', (e) => {
                         console.log('ERRRORRR', e)
                     });
@@ -417,28 +459,39 @@ WebRTC.listen = function () {
                         console.log('FINISHED')
                     });
 
-                    socket.webrtcParticipant.recording.startedTime = Date.now();
-                    socket.webrtcParticipant.recording.path = localRecordDir + '/video.webm';
-
+                    socket.webrtcParticipant.recording.startTime = Date.now();
+                    socket.webrtcParticipant.recording.path = filePath;
+                    socket.webrtcParticipant.recording.localRecordDir = localRecordDir;
+                    socket.webrtcParticipant.recording.recordingInfo = localRecordDir + '/../../' + socket.userPlatformId + '_' + socket.startTime + '.json';
                     writeToStream();
-
-
                 });
 
             }
-        });
 
-        socket.on('disconnect', function() {
-            console.log('disconnect');
+
+
+
+        }
+
+        socket.on('Streams/webrtc/localMedia', processChunk);
+
+        function processRecordings() {
+            console.log('processRecordings');
             if(!socket.webrtcRoom) return;
-            var recordings = socket.webrtcRoom.participants.map(function (p) {
+            var recordings = (socket.webrtcRoom.participants.map(function (p) {
+                p.recording.participant = p;
                 return p.recording;
+            })).filter(function(r) {
+                return r.path != null ? true : false;
             })
-            console.log('disconnect: recordings', recordings)
+            console.log('processRecordings: recordings', recordings)
+
+            if(recordings.length == 0) return;
 
             var startRecording = recordings.reduce(function(prev, current) {
                 return current.startTime < prev.startTime ? current : prev
             });
+            console.log('processRecordings: startRecording', startRecording)
 
             recordings.sort(function(a, b){
                 if(a.stopTime - a.startTime > b.stopTime - b.startTime){
@@ -450,36 +503,120 @@ WebRTC.listen = function () {
                 return 0
             })
 
-            function getNext(prevRecording) {
-                for (let i in recordings) {
-                    if(recordings[i].startTime > prevRecording.startTime && recordings[i].startTime < prevRecording.stopTime && recordings[i].stopTime > prevRecording.stopTime) {
-                        return recordings[i]
+            //map parallel recordings info to recording path
+            function getRecordingInstance(rec) {
+                for(let r in socket.webrtcRoom.participants) {
+                    let participant = socket.webrtcRoom.participants[r];
+                    if(participant.username == rec.participant.username && participant.sid == '/webrtc#' + rec.participant.sid) {
+                        return participant.recording;
                     }
                 }
-                return null;
             }
 
-            var basicRecordings = [];
-            basicRecordings.push(startRecording);
-
-            var prevRecording = startRecording;
-            while(prevRecording != null) {
-                console.log('disconnect: sortMedia', prevRecording)
-                prevRecording = getNext(prevRecording);
-                basicRecordings.push(prevRecording);
+            for (let r in recordings) {
+                let currentRecording = recordings[r];
+                for(let p in currentRecording.parallelRecordings) {
+                    let rec = currentRecording.parallelRecordings[p];
+                    rec.recordingInstance = getRecordingInstance(rec);
+                }
             }
 
-            console.log('disconnect: startRecording', startRecording);
-            console.log('disconnect: basicRecordings', basicRecordings)
 
+            //add recordings as ffmpeg inputs
 
+            var inputsNum = 1;
+            var inputsLet = 'a';
+            var offsetFromFirstRec = 0;
+            var offsets = [];
+            var processedRecsToSkip = [];
+            var offsetsIndexes = [];
+            var inputs = [];
+            inputs.push('-i', startRecording.path)
+            processedRecsToSkip.push(startRecording.participant.username)
+            var currentRecording = startRecording;
+            /*while(currentRecording != null) {
+                console.log('processRecordings: currentRecording', currentRecording);
+
+                if(currentRecording.parallelRecordings.length == 0) {
+                    currentRecording = null;
+                    continue;
+                }
+
+                for(let p in currentRecording.parallelRecordings) {
+                    let paralelRec = currentRecording.parallelRecordings[p];
+                    console.log('processRecordings: parallelRecordings rec', paralelRec);
+
+                    if(processedRecsToSkip.indexOf(paralelRec.participant.username) != -1) {
+                        continue;
+                    }
+
+                    inputs.push('-i', paralelRec.recordingInstance.path);
+                    inputsLet =  String.fromCharCode(inputsLet.charCodeAt(0) + 1);
+                    offsets.push('[' + inputsNum + ']adelay=' + (offsetFromFirstRec + parseFloat(paralelRec.time)) + '|' + (offsetFromFirstRec + parseFloat(paralelRec.time)) + '[' + inputsLet + ']');
+                    offsetsIndexes.push('[' + inputsLet + ']');
+                    inputsNum++;
+                    processedRecsToSkip.push(paralelRec.participant.username);
+                }
+
+                var parallelRecThatEndsLast = currentRecording.parallelRecordings.reduce(function(prev, current) {
+                    return current.recordingInstance.stopTime > prev.recordingInstance.stopTime ? current : prev
+                });
+
+                console.log('processRecordings: parallelRecThatEndsLast', parallelRecThatEndsLast);
+                offsetFromFirstRec = parseFloat(offsetFromFirstRec) + parseFloat(parallelRecThatEndsLast.time);
+                currentRecording = parallelRecThatEndsLast.stopTime > currentRecording.stopTime ? parallelRecThatEndsLast.recordingInstance : null;
+                console.log('processRecordings: offsetFromFirstRec', offsetFromFirstRec);
+            }*/
+
+            console.log('processRecordings: startRecording', startRecording);
+            console.log('inputs.length', inputs.length);
+            console.log('recordings.length', recordings.length);
+
+            var localRecordDir = appDir + 'files/' +  appName + '/uploads/Streams/webrtc_rec/' + socket.roomId + '/' + socket.roomStartTime;
+
+            inputs.unshift('-y');
+
+            var amix = '[0]';
+
+            for(let i in offsetsIndexes) {
+                amix += offsetsIndexes[i];
+            }
+
+            var delays = offsets.join(';');
+            inputs.push('-filter_complex', delays + (delays != ''? ';' : '') + amix + 'amix=inputs=' + inputsNum);
+            inputs.push(
+                //'-acodec', 'libmp3lame',
+                //'-f', 'mp3',
+                localRecordDir + '/audio.wav');
+            console.log('inputs', inputs);
+            return;
+            ffmpeg = child_process.spawn('ffmpeg', inputs);
+            ffmpeg.on('close', (code, signal) => {
+                console.log('FFmpeg child process closed, code ' + code + ', signal ' + signal);
+                ffmpeg = null;
+            });
+            ffmpeg.stdin.on('error', (e) => {
+                console.log('FFmpeg STDIN Error', e);
+            });
+            ffmpeg.stderr.on('data', (data) => {
+                console.log('FFmpeg STDERR:', data.toString());
+            });
+        }
+
+        socket.on('disconnect', function() {
             if(socket.webrtcParticipant.id == socket.client.id) {
                 console.log('disconnect socket.webrtcParticipant.id != socket.client.id', socket.webrtcParticipant.id, socket.client.id)
                 socket.webrtcParticipant.online = false;
+                if(socket.webrtcParticipant.recording.stopTime == null) {
+                    socket.webrtcParticipant.recording.stopTime = socket.webrtcParticipant.recording.latestChunkTime;
+                }
                 socket.webrtcRoom.event.dispatch('participantDisconnected', socket.webrtcParticipant);
             }
             io.of('/webrtc').in(socket.webrtcRoom.id).clients(function (error, clients) {
-                if(clients.length == 0) socket.webrtcRoom.close();
+                if(clients.length == 0) {
+                    processRecordings();
+                    socket.webrtcRoom.close();
+                }
             });
         });
 

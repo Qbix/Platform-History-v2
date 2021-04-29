@@ -104,4 +104,185 @@ abstract class Streams_WebRTC
 
         throw new Q_Exception("Failed during create webrtc stream");
     }
+
+    /**
+     * Create or fetch Streams/webrtc stream
+     * @method mergeRecordings
+     * @param {string} $publisherId publisher of stream
+     * @param {string} $roomId Room Id of room (last part of stream name)
+     * @param {string} $resumeClosed Return existing stream if it exist, or create new otherwise
+     * @return {array} The keys are "stream", "created", "roomId", "socketServer"
+     */
+    static function mergeRecordings($publisherId, $roomId) {
+        $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
+        $luid = Users::loggedInUser(true)->id;
+        $app = Q::app();
+
+        $task = isset($_REQUEST['taskStreamName'])
+            ? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
+            : Streams::create($luid, $communityId, 'Streams/task', array(
+                'skipAccess' => true,
+            ), array(
+                'publisherId' => $app,
+                'streamName' => "Streams/tasks/app",
+                'type' => 'Streams/import'
+            ));
+
+        if(strpos($roomId, 'Streams/webrtc/') !== false) {
+            $roomId = explode('/', $roomId)[2];
+        }
+
+        $app = Q::app();
+        $recsPath = (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$app.DS.'uploads'.DS.'Streams'.DS.'webrtc_rec'.DS.$roomId;
+
+        $startTimes = array_diff(scandir($recsPath), array('.', '..'));
+
+        //check if call already merged
+        $callsToMerge = [];
+        foreach ($startTimes as $dir) {
+            if (!file_exists($recsPath.DS.$dir.DS.'audio.mp3')) {
+                array_push($callsToMerge, $dir);
+            }
+        }
+
+        $recordings = [];
+        //scan calls that were happened at specific times
+        foreach ($callsToMerge as $callTime) {
+            $callUsers = array_diff(scandir($recsPath.DS.$callTime), array('.', '..'));
+
+            //scan users directories
+            foreach ($callUsers as $usersRecordingsDir) {
+                $fileInfo = pathinfo($usersRecordingsDir);
+                if($fileInfo['extension'] == 'json') {
+                    $recInfo = file_get_contents($recsPath.DS.$callTime.DS.$usersRecordingsDir);
+                    $filename = explode('_', $fileInfo['filename']);
+                    $recordings[$callTime][$filename[0] . "\t" . $filename[1]] = json_decode($recInfo, true);
+                    continue;
+                } else {
+                    continue;
+                }
+            }
+
+        }
+
+        if(count($recordings) == 0) {
+            return false;
+        }
+
+        function isStartRecording($username, $users) {
+            foreach ($users as $key => $recording) {
+                if(!array_key_exists('parallelRecordings', $recording)) {
+                    continue;
+                }
+
+                foreach ($recording['parallelRecordings'] as $parallelRecording) {
+                    if($parallelRecording['participant']['username'] == $username)
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        function getPath($parallelRecording, $room) {
+            foreach ($room as $username => $info) {
+
+                if($username == $parallelRecording['participant']['username']) {
+                    return $room[$username];
+                }
+            }
+            return null;
+        }
+
+        function setParallelRecPath($room) {
+            foreach ($room as $username => $info) {
+                if(!array_key_exists('parallelRecordings', $info)) {
+                    continue;
+                }
+                foreach ($info['parallelRecordings'] as $key => $parallelRecording) {
+                    $user = getPath($parallelRecording, $room);
+                    if(!is_null($user)) {
+                        $info['parallelRecordings'][$key]['path'] = $user['path'];
+                        $info['parallelRecordings'][$key]['recordingInstance'] = $user;
+                    }
+                }
+
+                $room[$username]['parallelRecordings'] = $info['parallelRecordings'];
+
+
+            }
+
+            return $room;
+        }
+
+
+        foreach ($recordings as $key => $room) {
+            $recordings[$key] = setParallelRecPath($room);
+
+            $startRecording = null;
+            foreach ( $recordings[$key] as $username => $info) {
+                if(isStartRecording($username, $room)) {
+                    $startRecording = $info;
+                }
+            }
+
+            $localRecordDir = $recsPath . '/' . $key;
+            $inputsNum = 1;
+            $inputsLet = 'a';
+            $offsetFromFirstRec = 0;
+            $offsets = [];
+            $processedRecsToSkip = [];
+            $offsetsIndexes = [];
+            $inputs = [];
+            array_push($inputs, '-i', $startRecording['path']);
+            array_push($startRecording['participant']['username'], $processedRecsToSkip);
+            $currentRecording = $startRecording;
+            while($currentRecording != null) {
+                if(count($currentRecording['parallelRecordings']) == 0) {
+                    $currentRecording = null;
+                    continue;
+                }
+
+                foreach($currentRecording['parallelRecordings'] as $paralelRec) {
+                    if(array_search($paralelRec['participant']['username'], $processedRecsToSkip) !== false) {
+                        continue;
+                    }
+
+                    array_push($inputs, '-i', $paralelRec['path']);
+                    $inputsLet =  chr(ord(substr($inputsLet, 0)) + 1);
+                    array_push($offsets, '[' . $inputsNum . ']adelay=' . ($offsetFromFirstRec + floatval($paralelRec['time'])) . '|' . ($offsetFromFirstRec + floatval($paralelRec['time'])) . '[' . $inputsLet . ']');
+                    array_push($offsetsIndexes, '[' . $inputsLet . ']');
+
+                    $inputsNum++;
+                    array_push($processedRecsToSkip, $paralelRec['participant']['username']);
+                }
+
+                $parallelRecThatEndsLast = array_reduce($currentRecording['parallelRecordings'], function($prev, $current) {
+                        return $current['recordingInstance']['stopTime'] > $prev['recordingInstance']['stopTime'] ? $current : $prev;
+                });
+
+                $offsetFromFirstRec = floatval($offsetFromFirstRec) + floatval($parallelRecThatEndsLast['time']);
+                $currentRecording = $parallelRecThatEndsLast['stopTime'] > $currentRecording['stopTime'] ? $parallelRecThatEndsLast['recordingInstance'] : null;
+            }
+
+            array_unshift($inputs,'-y');
+
+            $amix = '[0]';
+            foreach($offsetsIndexes as  $offset) {
+                $amix .= $offset;
+            }
+
+            $delays = implode(';', $offsets);
+            array_push($inputs, '-filter_complex', '"' . $delays . ($delays != ''? ';' : '') . $amix . 'amix=inputs=' . $inputsNum . '"');
+            array_push($inputs,
+                '-acodec', 'libmp3lame',
+                $localRecordDir . '/audio.mp3');
+            $output=null;
+            $retval=null;
+            $command = "/usr/bin/ffmpeg " . (implode(' ', $inputs)) . ' 2>&1';
+            exec($command,$output);
+            print_r($command);
+            print_r($output);die;
+        }
+    }
 };

@@ -106,6 +106,7 @@
             this.participantsList = [];
             this.chatBox = this.chatDialogue = null;
             this.advancedStreamingDialogue = null;
+            this.advancedLiveStreamingBox = null;
 
             $(this.element).addClass('Q_floatAboveDocument');
 
@@ -3486,6 +3487,12 @@
                                 }
                             });
 
+                            function loadSources(scene) {
+                                if(scene == null) return;
+                                console.log('loadSources', scene)
+                                loadList(scene.sources);
+                            }
+
                             function loadList(sourcesList) {
                                 if(sourcesList == null) return;
                                 console.log('loadList', sourcesList)
@@ -3943,6 +3950,7 @@
                                 addItem: addItem,
                                 loadList: loadList,
                                 syncList: syncList,
+                                loadSources: loadSources,
                                 moveUp: moveBackward,
                                 moveDown: moveForward,
                                 removeSource: removeSource,
@@ -3964,7 +3972,7 @@
                             if(sceneItem.itemEl && !sceneItem.itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) sceneItem.itemEl.classList.add('Streams_webrtc_popup-scenes-item-active');
 
                             if(switchScene) {
-                            	sourcesInterface.loadList(sceneItem.sceneInstance.sources);
+                            	sourcesInterface.loadSources(sceneItem.sceneInstance.sources);
                             } else {
                             	sourcesInterface.syncList();
 							}
@@ -5252,7 +5260,17 @@
                         sourcesColumnTitleTabInner.innerHTML = 'Sources';
                         sourcesColumnTitleTab.appendChild(sourcesColumnTitleTabInner);
                         sourcesColumnTitleInner.appendChild(sourcesColumnTitleTab);
+                        var audioColumnTitleTab = document.createElement('DIV');
+                        audioColumnTitleTab.className = 'Streams_webrtc_popup-sources-title-tab';
+                        var audioColumnTitleTabInner = document.createElement('DIV');
+                        audioColumnTitleTabInner.className = 'Streams_webrtc_popup-sources-title-tab-inner';
+                        audioColumnTitleTabInner.innerHTML = 'Audio';
+                        audioColumnTitleTab.appendChild(audioColumnTitleTabInner);
+                        sourcesColumnTitleInner.appendChild(audioColumnTitleTab);
                         sourcesColumnTitle.appendChild(sourcesColumnTitleInner);
+
+                        audioColumnTitleTab.addEventListener('click', tabHandler);
+                        sourcesColumnTitleTab.addEventListener('click', tabHandler);
 
                         var sourcesColumnControl = document.createElement('DIV');
                         sourcesColumnControl.className = 'Streams_webrtc_popup-sources-control';
@@ -5488,10 +5506,15 @@
                                         document.body.appendChild(streamingCanvas);
                                     }
 
+                                    if(!tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.stop();
+                                    }
                                 }
                             },
                             show: function () {
                                 if(this.dialogueEl.classList.contains('Streams_webrtc_hidden')) {
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
+
                                     this.dialogueEl.classList.remove('Streams_webrtc_hidden');
                                     this.isHidden = false;
 

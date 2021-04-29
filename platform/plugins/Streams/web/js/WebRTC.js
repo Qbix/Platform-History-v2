@@ -1606,6 +1606,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 checkmeetingStatus();
                 var checkStatusInterval = setInterval(checkmeetingStatus, 3000);
 
+                var joinAction = false;
                 var joinNow = function() {
                     if(_options.streams == null) {
                         _options.streams = [];
@@ -1626,8 +1627,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.streams.push(preJoiningStreams[s].stream);
                     }
 
-                    var dialog = Q.Dialogs.pop(true);
-                    if(dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
+                    joinAction = true;
+                    var dialog = Q.Dialogs.pop();
+                    joinAction = false;
+                    //if(dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
 
                     if(checkStatusInterval) {
                         clearInterval(checkStatusInterval);
@@ -1652,11 +1655,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         title: 'Turn camera or mic on/off before you join',
                         className: 'Streams_webrtc_preparing_dialog',
                         content: mediaDevicesDialog,
-                        apply: true,
+                        apply: false,
                         mask: false,
                         hidePrevious:true,
                         removeOnClose: true,
-                        onClose:function () {
+                        beforeClose: function() {
+                            if(joinAction) return;
                             if(checkStatusInterval) {
                                 clearInterval(checkStatusInterval);
                                 checkStatusInterval = null;
@@ -1664,6 +1668,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             switchMic(true);
                             switchCamera(true);
                             switchScreenshare(true);
+                        },
+                        onClose:function () {
                             if(closeCallback != null) closeCallback();
                         },
                     });
@@ -2020,13 +2026,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(typeof window.WebRTCconferenceLib == 'undefined') return;
                 var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+                var roomStartTime = _roomStream.getAttribute('startTime');
                 log('initWithNodeServer: initConference: roomId = ' + roomId)
+                log('initWithNodeServer: initConference: roomStartTime = ' + roomStartTime)
+                log('initWithNodeServer: initConference: _roomStream = ', _roomStream)
 
                 WebRTCconference = window.WebRTCconferenceLib({
                     mode:'node',
                     useAsLibrary: true,
                     nodeServer: socketServer,
                     roomName: roomId,
+                    roomStartTime: roomStartTime,
                     roomPublisher: _roomStream.getAll().publisherId,
                     sid: Q.Users.loggedInUser.id,
                     username:  Q.Users.loggedInUser.id + '\t' + _options.startTime,
@@ -2134,6 +2144,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('initWithNodeServer: add app.js');
                 Q.addScript([
                     "{{Streams}}/js/tools/webrtc/app.js",
+                    "{{Streams}}/js/tools/webrtc/RecordRTC.js",
                 ], function () {
 
                     /*var gApi = document.createElement('SCRIPT');
@@ -5818,7 +5829,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 return Q.handle(callback);
             }
 
-            if(WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
+            if(WebRTCconference && WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
 
             /*if(WebRTCconference.roomParticipants().length === 0) {
 
