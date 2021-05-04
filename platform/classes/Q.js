@@ -2650,7 +2650,7 @@ function _removeOldLogs()
 			var now = Date.now() / 1000;
 			var today = now - now % 86400;
 			if (today - timestamp > days * 86400) {
-				fs.unlink(path + Q.DS + filename);
+				fs.unlink(path + Q.DS + filename, function () {});
 				++count;
 			}
 		});
