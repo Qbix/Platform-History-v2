@@ -69,10 +69,10 @@ Q.Tool.define("Assets/history", function (options) {
 			}
 
 			Q.Template.render('Assets/history/' + state.type, {
-					rows: rows,
-					text: tool.text
-				},
-				function (err, html) {
+				rows: rows,
+				text: tool.text
+			},
+			function (err, html) {
 					if (err) return;
 
 					$te.html(html);
