@@ -83,6 +83,9 @@ function Assets_history_response_tool($options)
 				$reason = $row->reason;
 			}
 
+			// remove operation from reason to avoid repeat
+			$reason = str_replace($operation, "", $reason);
+
 			$res[] = array(
 				'date' => $row->insertedTime,
 				'amount' => $amount,
