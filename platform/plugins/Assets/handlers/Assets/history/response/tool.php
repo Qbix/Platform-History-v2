@@ -67,10 +67,7 @@ function Assets_history_response_tool($options)
 				);
 			}
 
-			$operation = Q::ifset($texts, 'history', $row->reason, $sign, null);
-			if (!$operation) {
-				$operation = Q::ifset($texts, 'history', $row->reason, null);
-			}
+			$operation = Q::ifset($texts, 'history', $row->reason, $sign, Q::ifset($texts, 'history', $row->reason, null));
 			if ($operation) {
 				$operation = Q::interpolate($operation, compact("amount"));
 			} else {
