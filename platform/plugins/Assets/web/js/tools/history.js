@@ -52,8 +52,14 @@ Q.Tool.define("Assets/history", function (options) {
 		this.onMessage('Assets/credits/bonus').set(tool.refresh.bind(tool), tool);
 	});
 
-	$(this.element).on(Q.Pointer.fastclick, "button[name=test]", function () {
-		tool.updateHistory();
+	// generate table
+	Q.Template.render('Assets/history/' + state.type, {
+		text: tool.text
+	},
+	function (err, html) {
+		if (err) return;
+
+		$(tool.element).html(html);
 	});
 },
 
@@ -68,7 +74,8 @@ Q.Tool.define("Assets/history", function (options) {
 	refresh: function () {
 		var tool = this;
 		var state = tool.state;
-		var $te = $(tool.element);
+		var $table = $("table.Assets_history tbody", tool.element);
+		var operation = $table.is(':empty') ? "append" : "prepend";
 
 		Q.req('Assets/history', ['tool'], function (err, data) {
 			var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
@@ -78,34 +85,43 @@ Q.Tool.define("Assets/history", function (options) {
 
 			var rows = data.slots.tool;
 
-			if (Q.typeOf(rows) !== 'array' || !rows.length) {
+			/*if (Q.typeOf(rows) !== 'array' || !rows.length) {
 				$te.attr('data-empty', true);
 				return $te.html(tool.text.HistoryEmpty);
-			}
+			}*/
 
-			Q.Template.render('Assets/history/' + state.type, {
-				rows: rows,
-				text: tool.text
-			},
-			function (err, html) {
-				if (err) return;
+			Q.each(rows, function (i, row) {
+				// skip duplicated requests for same message
+				if ($("tr#" + row.id, $table).length) {
+					return;
+				}
 
-				$te.html(html);
+				Q.Template.render("Assets/row/" + state.type, row,function (err, html) {
+					if (err) return;
 
-				$('.Assets_history_client a', $te).on(Q.Pointer.fastclick, function () {
-					var $this = $(this);
+					var $tr = $(html).attr("id", row.id).addClass("Q_newsflash");
 
-					Q.handle(state.onClient, tool, [$this.attr('data-userId'), $this.text()]);
-				});
+					$tr.on("webkitAnimationEnd oanimationend msAnimationEnd animationend transitionend MSTransitionEnd webkitTransitionEnd oTransitionEnd", function() {
+						$tr.removeClass("Q_newsflash");
+					});
 
-				$('.Assets_history_description a[data-streamName]', $te).on(Q.Pointer.fastclick, function () {
-					var $this = $(this);
-					var publisherId = $this.attr('data-publisherId');
-					var streamName = $this.attr('data-streamName');
+					$('.Assets_history_client a', $tr).on(Q.Pointer.fastclick, function () {
+						var $this = $(this);
 
-					if (publisherId && streamName) {
-						Q.handle(state.onStream, tool, [publisherId, streamName]);
-					}
+						Q.handle(state.onClient, tool, [$this.attr('data-userId'), $this.text()]);
+					});
+
+					$('.Assets_history_description a[data-streamName]', $tr).on(Q.Pointer.fastclick, function () {
+						var $this = $(this);
+						var publisherId = $this.attr('data-publisherId');
+						var streamName = $this.attr('data-streamName');
+
+						if (publisherId && streamName) {
+							Q.handle(state.onStream, tool, [publisherId, streamName]);
+						}
+					});
+
+					$table[operation]($tr);
 				});
 			});
 		}, {
@@ -113,79 +129,32 @@ Q.Tool.define("Assets/history", function (options) {
 				type: state.type
 			}
 		});
-
-	},
-	/**
-	 * Get message and add row to history
-	 * @method updateHistory
-	 */
-	updateHistory: function (stream, message) {
-		var tool = this;
-		var tmpName = 'Assets/credits/row';
-		var $table = $("table.Assets_history tbody", tool.element);
-		var fields = {
-			date: message.insertedTime,
-		};
-		var rowId = Q.normalize(message.publisherId + message.streamName + message.ordinal);
-
-		// skip duplicated requests for same message
-		if ($("tr#" + rowId, $table).length) {
-			return;
-		}
-
-		if (message.type === "Assets/credits/bought") {
-			tmpName = 'Assets/charge/row';
-			var charge = message.getInstruction('charge');
-			fields.currency = charge.currency;
-			fields.amount = parseFloat(charge.amount).toFixed(2);
-			fields.description = message.content;
-		}
-
-		Q.Template.render(tmpName, fields, function (err, html) {
-			if (err) return;
-
-			$table.prepend($(html).attr("id", rowId));
-		});
 	}
 });
 
 Q.Template.set('Assets/history/credits',
 	'<table class="Assets_history" data-type="credits">' +
 	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Client}}</th><th>{{text.Description}}</th></tr></thead>' +
-	'	<tbody>' +
-	'	{{#each rows}}' +
-	'		{{> Assets/credits/row}}' +
-	'	{{/each}}' +
-	'	</tbody>' +
+	'	<tbody></tbody>' +
 	'</table>'
 );
-Handlebars.registerPartial('Assets/credits/row',
-	'<tr><td class="Assets_history_date">{{this.date}}</td>' +
-	'<td class="Assets_history_amount">{{this.operation}}</td>' +
-	'<td class="Assets_history_client">{{this.clientInfo.direction}} <a data-userId="{{this.clientInfo.id}}">{{this.clientInfo.name}}</a></td>' +
-	'<td class="Assets_history_description">{{& this.reason}}</td></tr>'
-);
-Q.Template.set('Assets/credits/row',
-	'{{> Assets/credits/row}}'
+Q.Template.set('Assets/row/credits',
+	'<tr><td class="Assets_history_date">{{date}}</td>' +
+	'<td class="Assets_history_amount">{{operation}}</td>' +
+	'<td class="Assets_history_client">{{clientInfo.direction}} <a data-userId="{{clientInfo.id}}">{{clientInfo.name}}</a></td>' +
+	'<td class="Assets_history_description">{{& reason}}</td></tr>'
 );
 
 Q.Template.set('Assets/history/charges',
 	'<table class="Assets_history" data-type="charges">' +
 	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Description}}</th></tr></thead>' +
-	'	<tbody>' +
-	'	{{#each rows}}' +
-	'		{{> Assets/charge/row}}' +
-	'	{{/each}}' +
-	'	</tbody>' +
+	'	<tbody></tbody>' +
 	'</table>'
 );
-Q.Template.set('Assets/charge/row',
-	'{{> Assets/charge/row}}'
-);
-Handlebars.registerPartial('Assets/charge/row',
-	'<tr><td class="Assets_history_date">{{this.date}}</td>' +
-	'<td class="Assets_history_amount">{{this.currency}} {{this.amount}}</td>' +
-	'<td class="Assets_history_description">{{this.description}}</td></tr>'
+Q.Template.set('Assets/row/charges',
+	'<tr><td class="Assets_history_date">{{date}}</td>' +
+	'<td class="Assets_history_amount">{{currency}} {{amount}}</td>' +
+	'<td class="Assets_history_description">{{description}}</td></tr>'
 );
 
 })(window, Q, jQuery);

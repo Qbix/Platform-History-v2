@@ -36,6 +36,7 @@ function Assets_history_response_tool($options)
 		->where(array('fromUserId' => $userId))
 		->orWhere(array('toUserId' => $userId))
 		->orderBy('insertedTime', false)
+		->limit(20, 0)
 		->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
@@ -84,6 +85,7 @@ function Assets_history_response_tool($options)
 			$reason = str_replace($operation, "", $reason);
 
 			$res[] = array(
+				'id' => $row->id,
 				'date' => $row->insertedTime,
 				'amount' => $amount,
 				'operation' => $operation,
@@ -110,6 +112,7 @@ function Assets_history_response_tool($options)
 				$description = $row->description;
 			}
 			$res[] = array(
+				'id' => $row->id,
 				'gateway' => $attributes->payments,
 				'amount' => $attributes->amount,
 				'currency' => $attributes->currency,
