@@ -20,7 +20,7 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	$currency = Q::ifset($event->getAttribute("payment"), "currency", null);
 	$isPublisher = $stream->publisherId == $event->publisherId;
 	$isAdmin = Calendars_Event::isAdmin($stream->publisherId, $event->getAttribute("communityId"));
-	if ($isPublisher || $isAdmin || !$amount || !$currency) {
+	if (!$amount || !$currency) {
 		return true;
 	}
 
@@ -32,6 +32,19 @@ function Assets_before_Streams_relateTo_Calendars_event ($params) {
 	$participant->userId = $stream->publisherId;
 	$participant->state = 'participating';
 	if (!$participant->retrieve()) {
+		return true;
+	}
+
+	if ($isPublisher || $isAdmin) {
+		Streams_Message::post($stream->publisherId, $stream->publisherId, "Calendars/user/reminders", array(
+			"type" => "Calendars/payment/skip",
+			"instructions" => array(
+				"publisherId" => $event->publisherId,
+				"streamName" => $event->name,
+				"reason" => $isPublisher ? "publisher" : "admin"
+			)
+		), true);
+
 		return true;
 	}
 

@@ -280,10 +280,12 @@ class Assets_Credits extends Base_Assets_Credits
 		);
 		if ($reason == 'BoughtCredits') {
 			$type = 'Assets/credits/bought';
+			$instructions['charge'] = $more["charge"];
 		} elseif ($reason == 'BonusCredits') {
 			$type = 'Assets/credits/bonus';
 		} else {
 			$type = 'Assets/credits/granted';
+			$instructions = array_merge($instructions, $more);
 			$instructions['reason'] = self::reasonToText($reason, $more);
 		}
 
@@ -292,7 +294,7 @@ class Assets_Credits extends Base_Assets_Credits
 			'type' => $type,
 			'content' => Q::interpolate($content, compact('amount')),
 			'byClientId' => Q::ifset($more, 'publisherId', null),
-			'instructions' => Q::json_encode(array_merge($instructions, $more))
+			'instructions' => Q::json_encode($instructions)
 		));
 
 		// check Assets/credits/bonus

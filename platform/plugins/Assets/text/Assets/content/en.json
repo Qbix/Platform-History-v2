@@ -64,6 +64,10 @@
         "PaymentTo": "Sent {{amount}} credits",
         "PaymentToUser": "Sent {{amount}} credits",
         "CreatePaidStream": "Spent {{amount}} credits",
+        "WatchClip": {
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
+        },
         "JoinedPaidStream": {
             "+": "Earned {{amount}} credits",
             "-": "Spent {{amount}} credits"

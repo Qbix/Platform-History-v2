@@ -639,6 +639,9 @@
 		},
 		"calls": {
 			"answered": ["Users/owners", "Users/admins"]
+		},
+		"chat": {
+			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image"]
 		}
 	}
 }

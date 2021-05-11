@@ -36,6 +36,7 @@ function Assets_history_response_tool($options)
 		->where(array('fromUserId' => $userId))
 		->orWhere(array('toUserId' => $userId))
 		->orderBy('insertedTime', false)
+		->limit(20, 0)
 		->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
@@ -67,10 +68,7 @@ function Assets_history_response_tool($options)
 				);
 			}
 
-			$operation = Q::ifset($texts, 'history', $row->reason, $sign, null);
-			if (!$operation) {
-				$operation = Q::ifset($texts, 'history', $row->reason, null);
-			}
+			$operation = Q::ifset($texts, 'history', $row->reason, $sign, Q::ifset($texts, 'history', $row->reason, null));
 			if ($operation) {
 				$operation = Q::interpolate($operation, compact("amount"));
 			} else {
@@ -83,7 +81,11 @@ function Assets_history_response_tool($options)
 				$reason = $row->reason;
 			}
 
+			// remove operation from reason to avoid repeat
+			$reason = str_replace($operation, "", $reason);
+
 			$res[] = array(
+				'id' => $row->id,
 				'date' => $row->insertedTime,
 				'amount' => $amount,
 				'operation' => $operation,
@@ -110,6 +112,7 @@ function Assets_history_response_tool($options)
 				$description = $row->description;
 			}
 			$res[] = array(
+				'id' => $row->id,
 				'gateway' => $attributes->payments,
 				'amount' => $attributes->amount,
 				'currency' => $attributes->currency,

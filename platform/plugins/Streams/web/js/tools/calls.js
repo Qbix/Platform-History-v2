@@ -22,6 +22,7 @@ Q.Tool.define("Streams/calls", function(options) {
 
 	var pipe = new Q.pipe(["style", "text", "stream"], function () {
 		if (tool.stream.testWriteLevel("edit")) {
+			state.isAdmin = true;
 			tool.settings();
 		} else {
 			tool.call();
@@ -148,8 +149,23 @@ Q.Tool.define("Streams/calls", function(options) {
 							maxRelations[state.relationType] = maxCalls;
 							tool.stream.setAttribute("maxRelations", maxRelations).save();
 						}
-
 					});
+
+					parentElement.forEachTool("Streams/webrtc/preview", function () {
+						this.state.onWebRTCRoomEnded.set(function () {
+							if (!state.isAdmin) {
+								return;
+							}
+
+							Q.Streams.unrelate(
+								state.publisherId,
+								state.streamName,
+								state.relationType,
+								this.stream.fields.publisherId,
+								this.stream.fields.name
+							);
+						}, tool);
+					}, tool);
 				}
 			});
 		});
