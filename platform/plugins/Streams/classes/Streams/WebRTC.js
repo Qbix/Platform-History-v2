@@ -261,12 +261,15 @@ WebRTC.listen = function () {
                     //'-r', '30',
                     //'-f', 'rawvideo',
                     //'-s', '1280x768',
+                    '-y',
+                    '-stream_loop', '-1',
                     '-re',
                     // FFmpeg will read input video from STDIN
                     //'-f', 's16be',
                     //'-ar', '48k',
                     //'-ac', '1',
                     '-i', '-',
+                    //'-i', '/var/www/testStream.flv',
 
                     // Because we're using a generated audio source which never ends,
                     // specify that we'll stop at end of other input.  Remove this line if you
@@ -277,11 +280,13 @@ WebRTC.listen = function () {
                     // so that we don't waste any CPU and quality with unnecessary transcoding.
                     // If the browser doesn't support H.264, set the video codec to 'libx264'
                     // or similar to transcode it to H.264 here on the server.
-                    '-vcodec', encoder,
+                    '-vcodec', 'libx264',
 
                     // AAC audio is required for Facebook Live.  No browser currently supports
                     // encoding AAC, so we must transcode the audio to AAC here on the server.
                     '-acodec', 'aac',
+                    '-flv_full_metadata', '1',
+                    //'-aac_coder', 'fast',
 
                     //'-map', '0:0',
                     //'-map', '0:1',
@@ -295,7 +300,8 @@ WebRTC.listen = function () {
                     // For debugging, you could set this to a filename like 'test.flv', and play
                     // the resulting file with VLC.  Please also read the security considerations
                     // later on in this tutorial.
-                    rtmpUrl
+                    //rtmpUrl
+                    '/var/www/testStream.flv'
                 ]);
 
                 /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
@@ -330,6 +336,8 @@ WebRTC.listen = function () {
 
             _streamingData.on('data', function (data) {
                 if(ffmpeg != null) {
+                    console.log('WRITE', data);
+
                     ffmpeg.stdin.write(data);
                 } else {
                     createFfmpegProcess();
@@ -338,7 +346,9 @@ WebRTC.listen = function () {
             // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
             socket.on('Streams/webrtc/videoData', function(data) {
                 console.log('VIDEODATA', data);
-                _streamingData.push(data);
+                for(let d in data) {
+                    _streamingData.push(data[d]);
+                }
                 //socket.broadcast.emit('video', data);
             });
 
@@ -604,7 +614,7 @@ WebRTC.listen = function () {
         }
 
         socket.on('disconnect', function() {
-            if(socket.webrtcParticipant.id == socket.client.id) {
+            if(socket.webrtcParticipant && socket.webrtcParticipant.id == socket.client.id) {
                 console.log('disconnect socket.webrtcParticipant.id != socket.client.id', socket.webrtcParticipant.id, socket.client.id)
                 socket.webrtcParticipant.online = false;
                 if(socket.webrtcParticipant.recording.stopTime == null) {

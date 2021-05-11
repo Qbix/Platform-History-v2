@@ -114,19 +114,6 @@ abstract class Streams_WebRTC
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
     static function mergeRecordings($publisherId, $roomId) {
-        $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
-        $luid = Users::loggedInUser(true)->id;
-        $app = Q::app();
-
-        $task = isset($_REQUEST['taskStreamName'])
-            ? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
-            : Streams::create($luid, $communityId, 'Streams/task', array(
-                'skipAccess' => true,
-            ), array(
-                'publisherId' => $app,
-                'streamName' => "Streams/tasks/app",
-                'type' => 'Streams/import'
-            ));
 
         if(strpos($roomId, 'Streams/webrtc/') !== false) {
             $roomId = explode('/', $roomId)[2];

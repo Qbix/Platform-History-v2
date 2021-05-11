@@ -246,8 +246,8 @@
 							divLeft = elementToMove.offsetLeft,
 							eWi = parseInt(elementToMove.offsetWidth),
 							eHe = parseInt(elementToMove.offsetHeight),
-							cWi = 1000000000,
-							cHe = 1000000000;
+							cWi = moveWithinEl == window ? window.innerWidth : moveWithinEl.offsetWidth,
+							cHe = moveWithinEl == window ? window.innerHeight : moveWithinEl.offsetHeight;
 						diffX = posX - divLeft, diffY = posY - divTop;
 
 						tool.state.onMovingStart.handle.call(tool);

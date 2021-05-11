@@ -1812,6 +1812,19 @@ and (max-device-width : 320px) {
 .Streams_webrtc_popup-scenes-body-inner, .Streams_webrtc_popup-options-body-inner {
     padding-top: 10px;
     padding-bottom: 10px;
+
+}
+.Streams_webrtc_popup-sources-body {
+    display: flex;
+    flex-direction: column;
+}
+.Streams_webrtc_popup-sources-body .Streams_webrtc_popup-sources-visual-body{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.Streams_webrtc_popup-sources-body .Streams_webrtc_popup-sources-visual-body .Streams_webrtc_popup-sources-body-inner{
+    flex: 1;
 }
 .Streams_webrtc_popup-streaming-box.Streams_webrtc_popup-box .Streams_webrtc_popup-preview-body-inner {
     display: flex;
@@ -1861,7 +1874,11 @@ and (max-device-width : 320px) {
     display: flex;
     flex-direction: row;
 }
-.Streams_webrtc_popup-sources-item-control svg path{
+.Streams_webrtc_popup-sources-item-control .Streams_webrtc_popup-sources-item-visibility{
+    height: 24px;
+}
+.Streams_webrtc_popup-sources-item-control svg path,
+.Streams_webrtc_popup-sources-item-control svg polygon{
     fill: white;
 }
 
