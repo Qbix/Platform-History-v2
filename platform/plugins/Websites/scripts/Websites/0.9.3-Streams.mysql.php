@@ -10,8 +10,16 @@ function Websites_0_9_3_Streams_mysql()
 		$userId = $r['id'];
 		$suffixes = array('units', 'placements', 'creatives', 'campaigns');
 		foreach ($suffixes as $suffix) {
+			$streamName = "Websites/advert/$suffix";
+			if (Streams_Stream::select()->where(array(
+				"publisherId" => $userId,
+				"name" => $streamName
+			))->fetchDbRow()) {
+				continue;
+			}
+			
 			Streams::create($userId, $userId, 'Streams/category', array(
-				'name' => "Websites/advert/$suffix"
+				'name' => $streamName
 			));
 		}
 		++$i;
