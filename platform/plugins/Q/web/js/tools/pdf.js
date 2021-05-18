@@ -12,6 +12,7 @@
  *  @param {string} [options.url] Source to get pdf from. Can be remote url or "blob:" for local files
  *  @param {string} [options.clipStart] Clip start position in percents
  *  @param {string} [options.clipEnd] Clip end position in percents
+ *  @param {Float} [options.scale=0.5] Page scale. More
  *  @param {Q.Event} [options.onSuccess] Call when save or upload action successfully ended.
  *  @param {Q.Event} [options.onFinish] Call when save or upload action ended.
  *  @param {Q.Event} [options.onError] Call when error occur.
@@ -53,6 +54,7 @@ Q.Tool.define("Q/pdf", function (options) {
 	currentPosition: 0,
 	clipStart: null,
 	clipEnd: null,
+	scale: 0.5,
 	pdfInfo: {},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
@@ -158,12 +160,11 @@ Q.Tool.define("Q/pdf", function (options) {
 
 		//This gives us the page's dimensions at full scale
 		var viewport = page.getViewport({
-			scale: $toolElement.width()/page.getViewport({scale: 0.5}).width
+			scale: $toolElement.width()/page.getViewport({scale: state.scale}).width
 		});
 
 		//We'll create a canvas for each page to draw it on
 		var canvas = document.createElement("canvas");
-		canvas.style.display = "block";
 		canvas.height = viewport.height;
 		canvas.width = viewport.width;
 
