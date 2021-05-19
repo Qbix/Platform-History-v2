@@ -209,7 +209,7 @@
       // apparently parallax equation everyone uses
       var percentageY = dataPercentage ? dataPercentage : (posY - blockTop + screenY) / (blockHeight + screenY);
       var percentageX = dataPercentage ? dataPercentage : (posX - blockLeft + screenX) / (blockWidth + screenX);
-      if(self.options.center){ percentageX = 0.322; percentageY = 0.322; }
+      if(self.options.center){ percentageX = 0.33; percentageY = 0.33; }
 
       // Optional individual block speed as data attr, otherwise global speed
       var speed = dataSpeed ? dataSpeed : self.options.speed;
