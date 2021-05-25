@@ -66,7 +66,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             preparing: {
                 video: false,
-                audio: true,
+                audio: false,
                 screen: false
             },
             showScreenSharingInSeparateScreen: true,
@@ -87,6 +87,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 showLabelWithNames: true,
                 audioLayoutBgColor: '#000',
                 showLayoutBorders: true,
+                loopAudio: true,
+                loopVideo: true,
+                localOutput: true
                 /*chunkSize: 10000*/
             },
             eyesDetection: true,
@@ -962,6 +965,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('trackAdded', function (e) {
                 log('track added', e)
+                if(e.track.kind == 'video') screensRendering.newTrackAdded(e.track, e.screen);
                 //screensRendering.updateLayout();
             });
 
@@ -988,7 +992,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 screensRendering.updateLayout();
 
                 screensRendering.hideLoader('videoTrackLoaded', {screen: e.screen, participant: e.screen.participant});
-                screensRendering.fitScreenToVideo(e.trackEl, e.screen, e.reset, e.oldSize);
+                screensRendering.fitScreenToVideo(e.trackEl, e.screen);
 
                 if(e.trackEl) {
                     e.trackEl.play();
@@ -2373,13 +2377,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 chatParticipantEl.className = 'Streams_webrtc_chat-participant';
                 chatParticipantEl.dataset.participantName = screen.sid;
                 if(screen.screensharing) chatParticipantEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
-                var chatParticipantVideoCon = screen.videoCon;
-                //var chatParticipantVideoCon = document.createElement("DIV");
-                //chatParticipantVideoCon.className = 'Streams_webrtc_chat-participant-video Q_tool Q_resize_tool';
+                var chatParticipantVideoCon = screen.videoCon = document.createElement('DIV');
                 chatParticipantVideoCon.className = 'Streams_webrtc_chat-participant-video';
                 var chatParticipantName = document.createElement('DIV');
                 chatParticipantName.className = 'Streams_webrtc_chat-participant-name';
-                var participantVoice = screen.soundEl;
+                var participantVoice = screen.soundEl = document.createElement('DIV');
                 participantVoice.className = "Streams_webrtc_participant-voice";
                 var participantNameTextCon = document.createElement("DIV");
                 participantNameTextCon.className = "Streams_webrtc_participant-name-text";
@@ -2502,6 +2504,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 return chatParticipantEl;
             }
 
+
+            /**
+             * Appends HTML media element of the track to existing screen
+             * @method newTrackAdded
+             * @param {Object} [track] new track
+             * @return {HTMLElement}
+             */
+            function newTrackAdded(track, screen) {
+                if(screen.screenEl == null) createRoomScreen(screen);
+
+                if(screen.videoCon != null) {
+                    if(track.kind == 'video') screen.videoCon.appendChild(track.trackEl);
+                }
+            }
+
             /**
              * Make screens resizible and movable
              * @method bindScreensEvents
@@ -2562,11 +2579,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @param {Object} [screen] Parent screen of video element
              * @param {Boolean} [reset] Whether to reset current screen's size in case if it was resized manually.
              */
-            function fitScreenToVideo(videoEl, screen, reset, oldSize) {
+            function fitScreenToVideo(videoEl, screen) {
                 log('fitScreenToVideo');
                 if(videoEl.videoHeight != null && videoEl.videoWidth != null && videoEl.videoHeight != 0 && videoEl.videoWidth != 0 && videoEl.parentNode != null) {
 
-                    var videoCon = screen.videoCon;
                     if (videoEl.videoHeight > videoEl.videoWidth) {
                         if ((viewMode == 'maximized' || viewMode == 'maximizedMobile' || viewMode == 'regular') && !videoEl.parentNode.classList.contains('isVertical')) videoEl.parentNode.classList.add('isVertical');
                         videoEl.className = 'isVertical';
@@ -2581,28 +2597,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(resizeTool != null) {
                     resizeTool.state.keepRatioBasedOnElement = videoEl;
                 }
-
-                return;
-                if((screen.screenEl.style.width != '' || screen.screenEl.style.height != '') && !reset) return;
-                if(videoEl.videoHeight == null || videoEl.videoWidth == null) return;
-
-                var videoCon = screen.videoCon;
-                var elRect = screen.screenEl.getBoundingClientRect();
-                var nameElRect = screen.nameEl.getBoundingClientRect();
-
-                var videoElWidth;
-                var videoElHeight;
-                var ratio0 = videoEl.videoWidth / videoEl.videoHeight;
-                var elementWidth, elementHeight;
-                if (ratio0 < 1) {
-                    videoEl.style.display = '';
-                    screensRendering.updateLayout();
-
-                } else {
-                    videoEl.style.display = '';
-                    screensRendering.updateLayout();
-                }
-
             }
 
             /**
@@ -5429,6 +5423,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 getActiveViewMode:getActiveViewMode,
                 getActiveSreen:getActiveSreen,
                 createRoomScreen:createRoomScreen,
+                newTrackAdded:newTrackAdded,
                 fitScreenToVideo:fitScreenToVideo,
                 toggleViewMode:toggleViewMode,
                 updateLocalScreenClasses:updateLocalScreenClasses,
