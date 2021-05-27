@@ -210,17 +210,7 @@
 									return e.preventDefault();
 							
 								Q.Contextual.current = i;
-								if (Q.info.platform === 'android')
-								{
-									setTimeout(function()
-									{
-										Q.Contextual.show();
-									}, 0);
-								}
-								else
-								{
-									Q.Contextual.show();
-								}
+								Q.Contextual.show();
 								var cs = trigger.state('Q/contextual');
 								if (cs) {
 									Q.layout(cs.contextual[0]);
@@ -289,9 +279,6 @@
 
 					var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
 					var offset = contextual.offset();
-					if (Q.info.platform === 'android')
-						offset.top -= window.scrollY;
-
 					var info = Q.Contextual.collection[Q.Contextual.current].info;
 
 					var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
@@ -332,12 +319,6 @@
 					var trigger = current.trigger;
 					var triggerOffset = (trigger.length !== 0 ? trigger.offset() : { 'top': -1000, 'left': -1000 });
 					var info = current.info;
-					if (Q.info.platform === 'android')
-					{
-						conOffset.top -= window.scrollY;
-						triggerOffset.top -= window.scrollY;
-					}
-
 					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
 					var px = Q.Contextual.currentMousePosition[0];
 					var py = Q.Contextual.currentMousePosition[1];
@@ -435,9 +416,6 @@
 					var trigger = current.trigger;
 					var info = current.info;
 					var offset = trigger.offset();
-					if (Q.info.platform === 'android')
-						offset.top -= window.scrollY;
-
 					var listingWrapper = null;
 					if (contextual.find('.Q_scroller_wrapper').length !== 0)
 						listingWrapper = contextual.find('.Q_scroller_wrapper');
@@ -474,11 +452,9 @@
 					}
 					else
 					{
-						// if ((info.curScroll == 'iScroll' || info.curScroll == 'touchscroll' || listingWrapper.css('overflow') == 'auto') &&
-						// 		 Math.abs(info.moveY - info.startY) >= 5)
-						// {
-						// 	return;
-						// }
+						/*if ((info.curScroll === 'iScroll' || info.curScroll === 'touchscroll' || listingWrapper.css('overflow') === 'auto') && Math.abs(info.moveY - info.startY) >= 5) {
+							return;
+						}*/
 						while (element)
 						{
 							if (element.tagName && element.tagName.toLowerCase() === 'li' && $(element).parents('.Q_contextual').length !== 0)
