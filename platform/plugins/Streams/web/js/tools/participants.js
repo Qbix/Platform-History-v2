@@ -93,7 +93,14 @@ function _Streams_participants(options) {
 	showControls: false,
 	showBlanks: false,
 	onRefresh: new Q.Event(),
-	onInvited: new Q.Event(),
+	onInvited: new Q.Event(function (err, data) {
+		var msg = Q.firstErrorMessage(err, data);
+		if (msg) {
+			if (msg.includes("not logged")) {
+				Q.Users.login();
+			}
+		}
+	}),
 	templates: {
 		invite: {
 			name: 'Streams/participants/invite',
