@@ -1909,7 +1909,7 @@
 
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
-                            rtmpLiveURLInput.placeholder ='RTMP URL';
+                            rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
                             rtmpLiveURLInput.value ='';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');

@@ -10207,40 +10207,48 @@ Q.Text = {
 	 * @param {Object} [options] Options to use for Q.request . May also include:
 	 * @param {Boolean} [options.ignoreCache=false] If true, reloads the text source even if it's been already cached.
 	 * @param {Boolean} [options.merge=false] For Q.Text.set if content is loaded
-	 * @return {Boolean|Q.Request} Returns true if content was already loaded,
-	 *   otherwise calls the result of Q.request
+	 * @return {Q.Promise} Returns a promise, that is already resolved if the content
+	 *  was already loaded, otherwise resolves later (asynchronously)
 	 */
 	get: function (name, callback, options) {
 		options = options || {};
-		var dir = Q.Text.dir;
-		var lls = Q.Text.languageLocaleString;
-		var content = Q.getObject([lls, name], Q.Text.collection);
-		if (content) {
-			Q.handle(callback, Q.Text, [null, content]);
-			return true;
-		}
-		var func = _Q_Text_getter;
-		if (options && options.ignoreCache) {
-			func = func.force;
-		}
-		var names = Q.isArrayLike(name) ? name : [name];
-		var pipe = Q.pipe(names, function (params, subjects) {
-			var result = {};
-			var errors = null;
-			for (var i=0, l=names.length; i<l; ++i) {
-				var name = names[i];
-				if (params[name][0]) {
-					errors = errors || {};
-					errors[name] = params[name][0];
-				} else if (params[name][1]) {
-					Q.extend(result, 10, params[name][1]);
-				}
+		return new Q.Promise(function (resolve, reject) {
+			var dir = Q.Text.dir;
+			var lls = Q.Text.languageLocaleString;
+			var content = Q.getObject([lls, name], Q.Text.collection);
+			if (content) {
+				Q.handle(callback, Q.Text, [null, content]);
+				resolve(content);
+				return;
 			}
-			Q.handle(callback, Q.Text, [errors, result]);
-		});
-		Q.each(names, function (i, name) {
-			var url = Q.url(dir + '/' + name + '/' + lls + '.json');
-			return func(name, url, pipe.fill(name), options);
+			var func = _Q_Text_getter;
+			if (options && options.ignoreCache) {
+				func = func.force;
+			}
+			var names = Q.isArrayLike(name) ? name : [name];
+			var pipe = Q.pipe(names, function (params, subjects) {
+				var result = {};
+				var errors = null;
+				for (var i=0, l=names.length; i<l; ++i) {
+					var name = names[i];
+					if (params[name][0]) {
+						errors = errors || {};
+						errors[name] = params[name][0];
+					} else if (params[name][1]) {
+						Q.extend(result, 10, params[name][1]);
+					}
+				}
+				Q.handle(callback, Q.Text, [errors, result]);
+				if (Q.isEmpty(errors)) {
+					resolve(result);
+				} else {
+					reject(errors);
+				}
+			});
+			Q.each(names, function (i, name) {
+				var url = Q.url(dir + '/' + name + '/' + lls + '.json');
+				return func(name, url, pipe.fill(name), options);
+			});	
 		});
 	},
 	
