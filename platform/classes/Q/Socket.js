@@ -43,7 +43,7 @@ Socket.listen = function (options) {
 		console.log("Starting socket server on http"+s+"://"+server.host+":"+server.port);
 		try {
 			server.attached.socket = new Q.Socket(server, Q.take(options, [
-				'path', 'serveClient', 'adapter', 'origins', 'parser'
+				'path', 'serveClient', 'adapter', 'origins', 'parser', 'cors'
 			]));
 		} catch (e) {
 			console.log("Socket was not attached.", e);
