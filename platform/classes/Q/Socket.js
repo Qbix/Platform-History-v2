@@ -5,6 +5,7 @@
 var Q = require('../Q');
 var events = require('events');
 var util = require('util');
+var url = require("url");
 
 /**
  * Attach socket to server
@@ -28,14 +29,19 @@ function Socket (server, options) {
  * @param {Object} [options.port] Set the port to listen on
  * @param {Object} [options.socket={}] Options for the socket server
  * @param {Object} [options.socket.path]
- * @param {Object} options.https If you use https, pass https options here (see Q.listen)
+ * @param {Object} [options.origins] Array of allowed origins for requests, defaults to Q.app.url
+ * @param {Object} [options.https] If you use https, pass https options here (see Q.listen)
  */
 Socket.listen = function (options) {
 	options = options || {};
 	Q.extend(options, Q.Config.get(['Q', 'node', 'socket']));
+	var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
 	if (options.path) {
-		var baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl'], options.baseUrl);
 		options.path = options.path.interpolate({baseUrl: baseUrl});
+	}
+	if (!options.origins) {
+		var parsed = url.parse(baseUrl);
+		options.origins = [parsed.protocol + '//' + parsed.host];
 	}
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
@@ -43,7 +49,7 @@ Socket.listen = function (options) {
 		console.log("Starting socket server on http"+s+"://"+server.host+":"+server.port);
 		try {
 			server.attached.socket = new Q.Socket(server, Q.take(options, [
-				'path', 'serveClient', 'adapter', 'origins', 'parser', 'cors'
+				'path', 'serveClient', 'adapter', 'origins', 'parser'
 			]));
 		} catch (e) {
 			console.log("Socket was not attached.", e);
