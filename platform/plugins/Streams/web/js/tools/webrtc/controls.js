@@ -1850,8 +1850,8 @@
 
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
-                            rtmpLiveURLInput.placeholder ='RTMP URL';
-                            rtmpLiveURLInput.value ='rtmp://a.rtmp.youtube.com/live2/8s2g-3xcr-641k-6cus-8keq';
+                            rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
+                            rtmpLiveURLInput.value ='';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_desc';
