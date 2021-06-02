@@ -249,6 +249,7 @@ WebRTC.listen = function () {
 
             var ffmpeg;
             var encoder = (isAndroid || usersInfo.ua.toLowerCase().indexOf('firefox') != -1) ? 'libx264' : 'copy';
+            var format = encoder == 'libx264' ? 'mp4' : 'webm';
             function createFfmpegProcess() {
                 // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
                 // If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.
@@ -259,15 +260,17 @@ WebRTC.listen = function () {
 
                     //set input framerate to 24 fps
                     //'-r', '30',
-                    //'-f', 'rawvideo',
+
                     //'-s', '1280x768',
-                    '-y',
-                    '-stream_loop', '-1',
+                    //'-y',
+                    //'-stream_loop', '-1',
+                    //'-video_size', '1280x720',
                     '-re',
                     // FFmpeg will read input video from STDIN
                     //'-f', 's16be',
                     //'-ar', '48k',
                     //'-ac', '1',
+                    '-f', format,
                     '-i', '-',
                     //'-i', '/var/www/testStream.flv',
 
@@ -280,13 +283,23 @@ WebRTC.listen = function () {
                     // so that we don't waste any CPU and quality with unnecessary transcoding.
                     // If the browser doesn't support H.264, set the video codec to 'libx264'
                     // or similar to transcode it to H.264 here on the server.
-                    '-vcodec', 'libx264',
+                    '-vcodec', encoder,
+                    '-preset', 'veryfast', '-b:v', '1984k', '-maxrate', '1984k', '-bufsize', '3968k',
+                    //'-vf', 'format=yuv420p',
 
                     // AAC audio is required for Facebook Live.  No browser currently supports
                     // encoding AAC, so we must transcode the audio to AAC here on the server.
-                    '-acodec', 'aac',
-                    '-flv_full_metadata', '1',
-                    //'-aac_coder', 'fast',
+                    //'-g', '20',
+                    //'-codec:a', 'libfdk_aac',
+                    '-codec:a', 'aac',
+                    '-strict', '-2', '-ar', '44100',
+                    '-af', 'aresample=async=1',
+                    //'-af', 'equalizer=f=100:t=h:width=200:g=-64',
+                    //'-ar', '44100',
+                    //'-threads', '6',
+                    //'-b:a', '11025',
+                    '-bufsize', '512k',
+                //'-aac_coder', 'fast',
 
                     //'-map', '0:0',
                     //'-map', '0:1',
@@ -300,8 +313,10 @@ WebRTC.listen = function () {
                     // For debugging, you could set this to a filename like 'test.flv', and play
                     // the resulting file with VLC.  Please also read the security considerations
                     // later on in this tutorial.
-                    //rtmpUrl
-                    '/var/www/testStream.flv'
+                    rtmpUrl
+                    //'/var/www/testStream.flv'
+
+
                 ]);
 
                 /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
@@ -319,7 +334,6 @@ WebRTC.listen = function () {
                     }
                     ffmpeg = null;
                 });
-
                 // Handle STDIN pipe errors by logging to the console.
                 // These errors most commonly occur when FFmpeg closes and there is still
                 // data to write.  If left unhandled, the server will crash.
@@ -346,6 +360,9 @@ WebRTC.listen = function () {
             // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
             socket.on('Streams/webrtc/videoData', function(data) {
                 console.log('VIDEODATA', data);
+                _streamingData.push(data);
+
+                return;
                 for(let d in data) {
                     _streamingData.push(data[d]);
                 }
@@ -622,12 +639,14 @@ WebRTC.listen = function () {
                 }
                 socket.webrtcRoom.event.dispatch('participantDisconnected', socket.webrtcParticipant);
             }
-            io.of('/webrtc').in(socket.webrtcRoom.id).clients(function (error, clients) {
-                if(clients.length == 0) {
-                    processRecordings();
-                    socket.webrtcRoom.close();
-                }
-            });
+            if(socket.webrtcRoom != null) {
+                io.of('/webrtc').in(socket.webrtcRoom.id).clients(function (error, clients) {
+                    if (clients.length == 0) {
+                        processRecordings();
+                        socket.webrtcRoom.close();
+                    }
+                });
+            }
         });
 
         socket.on('Streams/webrtc/log', function (message) {
