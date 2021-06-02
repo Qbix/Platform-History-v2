@@ -11,6 +11,7 @@
  * @param {Object} [options] options to pass to this tool, besides the ones passed to preview
  *   @param {String} [options.windowName='file'] the name of the window in which to open files. Set it to blank to open in the current window.
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
+ *   @param {Boolean} [options.skipImagePicker=false] If true skip apply Q/imagepicker plugin on icon
  *   @uses Q inplace
  *   @param {Object} [options.templates] Under the keys "views", "edit" and "create" you can override options for Q.Template.render .
  *     @param {Object} [options.templates.view]
@@ -65,6 +66,7 @@ function _Streams_file_preview(options, preview) {
 },
 
 {
+	skipImagePicker: false,
 	inplace: {},
 	windowName: 'file',
 	templates: {
@@ -136,7 +138,12 @@ function _Streams_file_preview(options, preview) {
 				Q.activate(tool, function () {
 					// load the icon
 					var jq = tool.$('img.Streams_preview_icon');
-					tool.preview.icon(jq[0], p.fill('icon'));
+					if (state.skipImagePicker) {
+						p.fill('icon')();
+					} else {
+						tool.preview.icon(jq[0], p.fill('icon'));
+					}
+
 					var $pc = tool.$('.Streams_preview_contents');
 					$pc.width(0).width($pc[0].remainingWidth());
 					Q.onLayout(tool.element).set(function () {
@@ -187,6 +194,11 @@ function _Streams_file_preview(options, preview) {
 		/*$container.on([Q.Pointer.fastclick, ".Streams_file_preview"], function () {
 			$file.trigger("click");
 		});*/
+
+		var $icon = tool.$("img.Q_imagepicker");
+		if ($icon.length) {
+			$icon.plugin('Q/imagepicker', 'remove');
+		}
 
 		$file.on("click", function (event) {
 			event.stopPropagation();
