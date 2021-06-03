@@ -2568,7 +2568,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @return {HTMLElement}
              */
             function createRoomScreen(participant) {
-                log('createRoomScreen', participant);
+                log('createRoomScreen', participant, participant.isLocal);
+                try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
+
+                }
                 var screen = new Screen();
                 screen.sid = participant.sid;
                 screen.participant = participant;
@@ -2808,17 +2814,25 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              * @return {HTMLElement}
              */
             function newTrackAdded(track, participant) {
-                //if(track.kind == 'video') {
-                var trackParentScreen;
-                if(track.parentScreen != null) {
-                    trackParentScreen = track.parentScreen;
-                }  else if(participant.screens.length == 1 && participant.screens[0].tracks.length == 0){
-                    trackParentScreen = participant.screens[0];
-                } else {
-                    trackParentScreen = createRoomScreen(participant);
+                log('newTrackAdded', participant.screens.length, participant.isLocal);
+                if(participant.screens.length >= 1) log('newTrackAdded', participant.screens[0].tracks.length);
+
+                if(track.kind == 'video') {
+                    var trackParentScreen;
+                    if(track.parentScreen != null) {
+                        trackParentScreen = track.parentScreen;
+                    }  else if(participant.screens.length == 1 && participant.screens[0].tracks.length == 0){
+                        log('newTrackAdded if2');
+
+                        trackParentScreen = participant.screens[0];
+                    } else {
+                        log('newTrackAdded else');
+                        trackParentScreen = createRoomScreen(participant);
+                    }
+
+                    trackParentScreen.videoScreen.videoCon.appendChild(track.trackEl);
                 }
-                if(track.kind == 'video') trackParentScreen.videoScreen.videoCon.appendChild(track.trackEl);
-                //}
+
             }
 
 
@@ -3385,7 +3399,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     for(let p in participants) {
                         let pScreens = participants[p].screens;
                         for (let s = pScreens.length - 1; s >= 0; s--) {
-                            log('switchScreenType for', s)
+                            log('switchScreenType fortchScreenType for', s)
 
                             pScreens[s].switchToVideoScreen();
                         }
@@ -3906,8 +3920,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(typeof duration == 'undefined') duration = 500;
                 log('renderMaximizedScreensGrid', screenToMaximize)
                 //TODO: check if "(screenToMaximize != null && screenToMaximize == activeScreen)" impacts updating layout
-                if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
-                if(screenToMaximize != null) activeScreen = screenToMaximize;
+                if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen && !(viewMode == 'screenSharing' || viewMode == 'fullScreen'))) return;
+
+                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
+
+                if(screenToMaximize != null && screenToMaximize.isActive) activeScreen = screenToMaximize;
                 if(screenToMaximize == null && (activeScreen == null || activeScreen.isLocal) /*&& roomScreens.length == 2*/) {
 
                     var screensToTakeInc = roomScreens.filter(function (s) {
@@ -3928,7 +3945,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     return customLayouts.minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
                 });
 
-                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
                 var elements = toggleScreensClass('maximizedScreensGrid');
                 prevViewMode = viewMode;
                 _layoutTool.animate('maximizedScreensGrid', elements, duration, true);
@@ -3948,26 +3964,37 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function renderFullScreenLayout(screenToMaximize) {
                 log('renderFullScreenLayout', screenToMaximize, activeScreen)
                 if(_layoutTool == null || _controls == null/* || (screenToMaximize != null && screenToMaximize == activeScreen)*/) return;
+                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
+
                 _layoutTool.maximizedScreen = null;
                 if(screenToMaximize != null) activeScreen = screenToMaximize;
-                if(screenToMaximize == null && (activeScreen == null || !activeScreen.isActive)) {
+                if((screenToMaximize != null && !screenToMaximize.isActive) || (screenToMaximize == null && (activeScreen == null || !activeScreen.isActive))) {
 
-                    var i, screen;
-                    for(i = 0; screen = roomScreens[i]; i++) {
-                        if(!screen.isLocal) {
-                            activeScreen = screen;
+                    var screenToActivate;
+                    for(let i in roomScreens) {
+                        let screen = roomScreens[i];
+                        if(!screen.isLocal && screen.isActive) {
+                            screenToActivate = screen;
                         }
                     }
+                    if(screenToActivate == null) {
+                        for(let i in roomScreens) {
+                            let screen = roomScreens[i];
+
+                            if(!screen.isLocal) {
+                                screenToActivate = screen;
+                            }
+                        }
+                    }
+
+                    activeScreen = screenToActivate;
                 }
                 log('renderFullScreenLayout activeScreen 0', activeScreen);
 
-                //if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen.show();
 
-                log('renderFullScreenLayout activeScreen 1', activeScreen);
 
                 var elements = toggleScreensClass(activeScreen && activeScreen.screensharing ? 'screenSharing' : 'fullScreen');
                 log('renderFullScreenLayout length', elements.length)
-                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
                 prevViewMode = viewMode;
                 _layoutTool.animate('fullScreen', elements, 100, true);
                 viewMode = activeScreen && activeScreen.screensharing ? 'screenSharing' : 'fullScreen';
@@ -3987,7 +4014,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function renderMaximizedScreensGridMobile(screenToMaximize) {
                 log('renderMaximizedScreensGridMobile')
                 if(_layoutTool == null || _controls == null || (screenToMaximize != null && screenToMaximize == activeScreen)) return;
-                if(screenToMaximize != null) activeScreen = screenToMaximize;
+                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
+
+                if(screenToMaximize != null && screenToMaximize.isActive) activeScreen = screenToMaximize;
                 if(screenToMaximize == null && (activeScreen == null /*|| activeScreen.isLocal*/)/* && roomScreens.length == 2*/) {
 
                     var i, screen;
@@ -3999,8 +4028,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 if(activeScreen == null || !_roomsMedia.contains(activeScreen.screenEl)) activeScreen = roomScreens[0];
-
-                if(prevViewMode == 'audio' || viewMode == 'audio') switchScreenType('video');
 
                 if(window.innerHeight > window.innerWidth) {
                     var elements = toggleScreensClass('maximizedVerticalMobile');

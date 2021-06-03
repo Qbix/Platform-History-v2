@@ -590,12 +590,14 @@ window.WebRTCconferenceLib = function app(options){
         this.screensharing = null;
         this.remove = function () {
 
-            var index = this.parentScreen.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
-            this.parentScreen.tracks[index] = null;
-            this.parentScreen.tracks = this.parentScreen.tracks.filter(function (obj) {
-                return obj != null;
-            })
-            //if(this.kind == 'video') this.parentScreen.videoTrack = null;
+            if(this.parentScreen != null) {
+                var index = this.parentScreen.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
+                this.parentScreen.tracks[index] = null;
+                this.parentScreen.tracks = this.parentScreen.tracks.filter(function (obj) {
+                    return obj != null;
+                })
+                //if(this.kind == 'video') this.parentScreen.videoTrack = null;
+            }
 
             var index = this.participant.tracks.map(function(e) { return e.mediaStreamTrack.id; }).indexOf(this.mediaStreamTrack.id);
             this.participant.tracks[index] = null;
@@ -2243,7 +2245,7 @@ window.WebRTCconferenceLib = function app(options){
                         log('updateWebRTCCanvasLayout rendered currentWebRTCSources', currentWebRTCSources)
 
                         vTracks = vTracks.filter(function (o) {
-                            return o.parentScreen.isActive;
+                            return o.parentScreen && o.parentScreen.isActive;
                         });
                         log('updateWebRTCCanvasLayout vTracks', vTracks)
 
@@ -2444,7 +2446,7 @@ window.WebRTCconferenceLib = function app(options){
 
                             if(renderedTracks[x].kind == 'video') {
                                 for (let m in vTracks) {
-                                    if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen.isActive) {
+                                    if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen && vTracks[m].parentScreen.isActive) {
                                         log('updateWebRTCCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
 
                                         trackIsLive = true;
