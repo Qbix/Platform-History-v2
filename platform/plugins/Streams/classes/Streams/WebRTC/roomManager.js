@@ -59,6 +59,9 @@ module.exports = function(socket, io) {
 
         if(socket.webrtcParticipant == null) {
             var currentParticipant = new WebRTC.Participant(socket.client.id)
+            currentParticipant.sid = identity.sid;
+            currentParticipant.username = identity.username;
+            currentParticipant.connectedTime = identity.username.split('\t')[1];
             currentParticipant.userPlatformId = identity.username.split('\t')[0];
             socket.webrtcParticipant = currentParticipant;
             socket.webrtcRoom.addParticipant(currentParticipant);

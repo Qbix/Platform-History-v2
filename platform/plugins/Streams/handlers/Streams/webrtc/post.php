@@ -20,7 +20,6 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 function Streams_webrtc_post($params = array())
 {
 	$params = array_merge($_REQUEST, $params);
-	Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
@@ -28,8 +27,49 @@ function Streams_webrtc_post($params = array())
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
+	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
 
-	// check maxCalls
+    if(Q_Request::slotName('recording')) {
+        $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
+        $luid = Users::loggedInUser(true)->id;
+        $app = Q::app();
+
+        $task = isset($_REQUEST['taskStreamName'])
+            ? Streams::fetchOne($luid, $communityId, $taskStreamName, true)
+            : Streams::create($luid, $communityId, 'Streams/task', array(
+                'skipAccess' => true,
+            )/*, array(
+                'publisherId' => $app,
+                'streamName' => "Streams/webrtc/meeting4",
+                'type' => 'Streams/webrtc'
+            )*/);
+        Q_Response::setSlot("recording", $task);
+
+        //Streams_WebRTC::mergeRecordings($publisherId, $roomId);
+        return;
+    } else if(Q_Request::slotName('progress')) {
+        $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
+        $luid = Users::loggedInUser(true)->id;
+        $app = Q::app();
+
+        $taskStream = Streams::fetchOne($luid, $communityId, $taskStreamName, true);
+        $progress = '30';
+        $taskStream->setAttribute('progress', $progress);
+        $taskStream->save();
+        $taskStream->post($luid, array(
+            'type' => 'Streams/task/progress',
+            'instructions' => compact('progress'),
+        ), true);
+
+        Q_Response::setSlot("progress", $taskStream);
+
+        return;
+    }
+
+    Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
+
+
+    // check maxCalls
 	if (!empty($relate)) {
 		// if calls unavailable, throws exception
 		Streams::checkAvailableRelations($publisherId, $relate["publisherId"], $relate["streamName"], $relate["relationType"], array(
