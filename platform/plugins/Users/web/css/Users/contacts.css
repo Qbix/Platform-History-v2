@@ -4,6 +4,7 @@
 }
 .Users_contacts_display td {
 	text-align: left;
+	height: 40px;
 }
 .Users_contacts_display td span {
 	margin: 0;

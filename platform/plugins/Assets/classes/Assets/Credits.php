@@ -280,8 +280,12 @@ class Assets_Credits extends Base_Assets_Credits
 		);
 		if ($reason == 'BoughtCredits') {
 			$type = 'Assets/credits/bought';
+			$instructions['charge'] = $more["charge"];
+		} elseif ($reason == 'BonusCredits') {
+			$type = 'Assets/credits/bonus';
 		} else {
 			$type = 'Assets/credits/granted';
+			$instructions = array_merge($instructions, $more);
 			$instructions['reason'] = self::reasonToText($reason, $more);
 		}
 
@@ -290,8 +294,13 @@ class Assets_Credits extends Base_Assets_Credits
 			'type' => $type,
 			'content' => Q::interpolate($content, compact('amount')),
 			'byClientId' => Q::ifset($more, 'publisherId', null),
-			'instructions' => Q::json_encode(array_merge($instructions, $more))
+			'instructions' => Q::json_encode($instructions)
 		));
+
+		// check Assets/credits/bonus
+		if ($reason == 'BoughtCredits') {
+			self::payBonus($amount, $userId);
+		}
 	}
 	
 	/**
@@ -606,5 +615,33 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 
 		return false;
+	}
+
+	/**
+	 * Pay bonus to user if credits amount
+	 * @method payBonus
+	 * @static
+	 * @param {string|number} $amount Amount of credits to pay bonus from
+	 * @param {string} [$userId] User id to pay bonus. If empty - logged in user.
+	 */
+	static function payBonus ($amount, $userId=null) {
+		$amount = (int)$amount;
+
+		if (!$userId) {
+			$userId = Users::loggedInUser(true)->id;
+		}
+
+		$bonuses = Q_Config::get("Assets", "credits", "bonus", "bought", null);
+		if (!is_array($bonuses) || empty($bonuses)) {
+			return;
+		}
+
+		krsort($bonuses, SORT_NUMERIC);
+		foreach ($bonuses as $key => $bonus) {
+			if ($amount >= $key) {
+				self::grant($bonus, "BonusCredits", $userId);
+				return;
+			}
+		}
 	}
 };

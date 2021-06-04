@@ -34,18 +34,21 @@
         "CreatedCommunity": "for creating community \"{{communityId}}\"",
         "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
         "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
         "BuyAmountCredits": "Buy {{amount}} credits",
         "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
         "MissingCredits": "Missing Credits",
         "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
         "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
         "Buy": "Buy",
         "PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
         "ErrorInvalidAmount": "Amount invalid",
         "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
@@ -61,6 +64,10 @@
         "PaymentTo": "Sent {{amount}} credits",
         "PaymentToUser": "Sent {{amount}} credits",
         "CreatePaidStream": "Spent {{amount}} credits",
+        "WatchClip": {
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
+        },
         "JoinedPaidStream": {
             "+": "Earned {{amount}} credits",
             "-": "Spent {{amount}} credits"
@@ -71,6 +78,7 @@
         },
         "CreatedCommunity": "Spent {{amount}} credits",
         "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
         "InviteAcceptedBy": "Earned {{amount}} credits",
         "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
@@ -124,6 +132,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Bought {{amount}} credits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
             "content": "Spent {{amount}} credits"

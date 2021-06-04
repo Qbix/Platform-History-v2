@@ -1,7 +1,13 @@
 <table class="Users_contacts_display">
 {{#each contacts}}
 	<tr>
-		<td><i class='qp-communities-{{this.prefix}}'></i></td>
+		<td>
+		    {{#ifEquals this.prefix "user"}}
+		        {{&tool "Users/avatar" userId=this.id icon=40 contents=false}}
+		    {{else}}
+		        <i class='qp-communities-{{this.prefix}}'></i>
+		    {{/ifEquals }}
+		</td>
 		<td><span>{{this.name}}</span></td>
 		<td><i class='qp-communities-close' data-id="{{this.id}}"></i></td>
 	</tr>

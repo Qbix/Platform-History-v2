@@ -242,13 +242,15 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 				}
 			},
 			onFinish: {'Streams/image/preview': function (data, key, file) {
-				Q.Streams.relate(
-					ps.related.publisherId,
-					ps.related.streamName,
-					ps.related.type,
-					ps.publisherId,
-					ps.streamName
-				);
+				if (Q.getObject("related.publisherId", ps) && Q.getObject("related.streamName", ps)) {
+					Q.Streams.relate(
+						ps.related.publisherId,
+						ps.related.streamName,
+						ps.related.type,
+						ps.publisherId,
+						ps.streamName
+					);
+				}
 
 				Q.Streams.Stream.refresh(ps.publisherId, ps.streamName, null, {
 					messages: true,

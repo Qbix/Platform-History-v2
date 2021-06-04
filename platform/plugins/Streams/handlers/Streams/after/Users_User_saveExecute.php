@@ -140,23 +140,26 @@ function Streams_after_Users_User_saveExecute($params)
 	foreach ($toInsert as $name) {
 		if (!empty($existing[$name])) {
 			continue;
-			$stream = new Streams_Stream();
-			$stream->publisherId = $user->id;
-			$stream->name = $name;
 		}
-		$s = array(
-			'publisherId' => $user->id,
-			'name' => $name,
-			'type' => $p->expect($name, 'type'),
-			'title' => $p->expect($name, 'title'),
-			'content' => ($userField = $p->get($name, 'userField', null))
-				? $user->$userField
-				: $p->get($name, "content", ''), // usually empty
-			'attributes' => $p->get($name, 'attributes', array()),
-			'readLevel' => $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']),
-			'writeLevel' => $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']),
-			'adminLevel' => $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel'])
-		);
+
+		// use try/catch to avoid crush of whole streams creation process because of error in some configs
+		try {
+			$s = array(
+				'publisherId' => $user->id,
+				'name' => $name,
+				'type' => $p->expect($name, 'type'),
+				'title' => $p->expect($name, 'title'),
+				'content' => ($userField = $p->get($name, 'userField', null))
+					? $user->$userField
+					: $p->get($name, "content", ''), // usually empty
+				'attributes' => $p->get($name, 'attributes', array()),
+				'readLevel' => $p->get($name, 'readLevel', Streams_Stream::$DEFAULTS['readLevel']),
+				'writeLevel' => $p->get($name, 'writeLevel', Streams_Stream::$DEFAULTS['writeLevel']),
+				'adminLevel' => $p->get($name, 'adminLevel', Streams_Stream::$DEFAULTS['adminLevel'])
+			);
+		} catch (Exception $e) {
+			continue;
+		}
 		if ($name === 'Streams/user/icon') {
 			$sizes = Q_Image::getSizes('Users/icon');
 			ksort($sizes);

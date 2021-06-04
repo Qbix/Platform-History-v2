@@ -111,3 +111,6 @@
 .Q_dialog_pdf .Q_pdf_composer_submit button[name=reset] {
     display: none;
 }
+.Q_pdf_tool canvas {
+    display: block;
+}

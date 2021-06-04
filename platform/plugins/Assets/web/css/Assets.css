@@ -80,6 +80,7 @@
 
 .Assets_credits_buy .Q_dialog_content {
 	min-width: 300px;
+	padding: 10px;
 }
 .Assets_credits_buy .Q_dialog_content .Assets_credits_buy_missing,
 .Assets_credits_buy .Q_dialog_content .Assets_credits_buy {
@@ -101,4 +102,16 @@
 .Assets_credits_buy .Q_dialog_content button[name=buy] {
 	display: block;
 	margin: 0 auto 10px;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_bonus {
+	margin-bottom: 10px;
+	color: blue;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_bonus .credits {
+	font-weight: bold;
+	color: red;
+}
+.Assets_credits_buy .Q_dialog_content .Assets_credits_bonus .bonus {
+	font-weight: bold;
+	color: green;
 }

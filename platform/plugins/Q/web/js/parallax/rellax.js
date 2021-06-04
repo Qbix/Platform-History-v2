@@ -85,7 +85,6 @@
       wrapper: null,
       relativeToWrapper: false,
       round: true,
-      optimize: false, // if true set opacity=0 when element scrolled out
       vertical: true,
       horizontal: false,
       verticalScrollAxis: "y",
@@ -210,7 +209,7 @@
       // apparently parallax equation everyone uses
       var percentageY = dataPercentage ? dataPercentage : (posY - blockTop + screenY) / (blockHeight + screenY);
       var percentageX = dataPercentage ? dataPercentage : (posX - blockLeft + screenX) / (blockWidth + screenX);
-      if(self.options.center){ percentageX = 0.5; percentageY = 0.5; }
+      if(self.options.center){ percentageX = 0.33; percentageY = 0.33; }
 
       // Optional individual block speed as data attr, otherwise global speed
       var speed = dataSpeed ? dataSpeed : self.options.speed;
@@ -412,12 +411,6 @@
         // (Set the new translation and append initial inline transforms.)
         var translate = 'translate3d(' + (self.options.horizontal ? positionX : '0') + 'px,' + (self.options.vertical ? positionY : '0') + 'px,' + zindex + 'px) ' + blocks[i].transform;
         self.elems[i].style[transformProp] = translate;
-
-        if (self.options.optimize && positions.y > (blocks[i].height + blocks[i].top)) {
-			self.elems[i].style['opacity'] = 0;
-		} else {
-			self.elems[i].style['opacity'] = 1;
-		}
       }
       self.options.callback(positions);
     };

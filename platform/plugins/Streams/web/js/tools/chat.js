@@ -35,7 +35,7 @@
  *   @param {Object} [options.startWebRTC=false] If true, start webrtc once tool activated. Also if startWebRTC exist somewhere in GET params.
  *   @param {Object} [options.preprocess=[]] Array of functions which call one by one before message post.
  *   Each function will get callback as argument. Need to call this callback when ready to go further.
- *   @param {Array} [option.excludedRelatedStreams] Array with types of related streams excluded from display as chat message.
+ *   @param {Array} [option.allowedRelatedStreams] Array of related streams types allowed to display as chat message.
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
  *   @param {Q.Event} [options.onRender] Event when tool element rendered
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
@@ -146,7 +146,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			activeSrc: '{{Streams}}/img/chat/vote-flag-active.png'
 		}
 	},
-	excludedRelatedStreams: ["Streams/question"],
+	allowedRelatedStreams: Q.getObject("chat.allowedRelatedStreams", Q.Streams) || [],
 	seen: true,
 	scrollToBottom: true,
 	overflowed: {
@@ -637,8 +637,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		if (!msg) return;
 		var fields = {
-			errorText: msg,
-			time: Date.now() / 1000
+			errorText: msg
 		};
 
 		Q.Template.render(
@@ -649,11 +648,13 @@ Q.Tool.define('Streams/chat', function(options) {
     	
 				tool.$('.Streams_chat_noMessages').remove();
 				tool.$('.Streams_chat_messages').append(html);
-    	
+				var timestamp = data.date || Date.now()/1000;
 				tool.findMessage('last')
 					.find('.Streams_chat_timestamp')
-					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date), true)
-					.activate();
+					.tool("Q/timestamp", {
+						time: timestamp * 1000,
+						capitalized: true
+					}).activate();
 			},
 			state.templates.message.error
 		);
@@ -1070,7 +1071,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		var instructions = message.getAllInstructions();
 
-		if (state.excludedRelatedStreams.includes(instructions.fromType)) {
+		if (!state.allowedRelatedStreams.includes(instructions.fromType)) {
 			return Q.handle(callback, message, [null]);
 		}
 
@@ -1292,7 +1293,7 @@ Q.Template.set('Streams/chat/message/notification',
 Q.Template.set('Streams/chat/message/error',
 	'<div class="Streams_chat_item Q_error">'+
 		'<div class="Streams_chat_container">'+
-			'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
+			'<div class="Streams_chat_timestamp"></div>'+
 			'<div class="Streams_chat_error">'+
 				'{{errorText}}'+
 			'</div>'+

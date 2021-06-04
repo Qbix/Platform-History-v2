@@ -23,8 +23,7 @@
      *  @param {integer} [options.imgHeight]
      *  @param {boolean} [options.autoRotate]
      *  @param {integer} [options.rotateSpeed]
-     *  Hash of possible options
-     *  Hash of possible options
+     *  @param {Q.Event} [options.onActivateItem] event occur when element start active
      */
     Q.Tool.define("Q/carousel", function(options) {
             var tool = this;
@@ -41,23 +40,23 @@
             autoRotate: true,
             direction: 'left',
             rotateSpeed: 60000,
-            debug: false
+            debug: false,
+            onActivateItem: new Q.Event()
         },
 
         {
             create: function() {
                 var tool = this;
+                var state = this.state;
 
                 var pointerIsDragging = false;
                 var rotatingIsPasused = null;
-                var imgWidth = tool.state.imgWidth;
-                var imgHeight = tool.state.imgHeight;
-                var radius = tool.state.radius;
-                var autoRotate = tool.state.autoRotate;
-                var direction = tool.state.direction;
-                var rotateSpeed = tool.state.rotateSpeed;
-                var imgWidth = tool.state.imgWidth;
-                var imgHeight = tool.state.imgHeight;
+                var imgWidth = state.imgWidth;
+                var imgHeight = state.imgHeight;
+                var radius = state.radius;
+                var autoRotate = state.autoRotate;
+                var direction = state.direction;
+                var rotateSpeed = state.rotateSpeed;
                 var selectedIndex = 0;
                 var currentOrderIndex = 0;
                 var currentLapNum = 0;
@@ -115,7 +114,7 @@
                  ground.style.height = radius * 3 + "px";*/
 
                 function init(delayTime, callback) {
-                    if(tool.state.debug) console.log('init : radius', radius);
+                    if(state.debug) console.log('init : radius', radius);
                     let l = aEle.length;
                     for (let i = 0; i < aEle.length; i++) {
                         if(i!==0) {
@@ -140,8 +139,8 @@
 
                     }
 
-                    if(tool.state.debug) console.log('init : theta', 360 / aEle.length);
-                    if(tool.state.debug) console.log('init : elements num', negativeDeg, positiveDeg, aEle.length);
+                    if(state.debug) console.log('init : theta', 360 / aEle.length);
+                    if(state.debug) console.log('init : elements num', negativeDeg, positiveDeg, aEle.length);
 
                 }
 
@@ -149,7 +148,7 @@
 
                 function toggleActive(selectedIndex) {
                     if(aEle[selectedIndex] == null) return;
-                    if(tool.state.debug) console.log('toggleActive')
+                    if(state.debug) console.log('toggleActive')
 
 
                     for (let i = 0; i < aEle.length; i++) {
@@ -157,11 +156,14 @@
                         aEle[i].classList.remove('activeItem')
                     }
 
-                    if(!aEle[selectedIndex].classList.contains('activeItem')) aEle[selectedIndex].classList.add('activeItem');
+                    if(!aEle[selectedIndex].classList.contains('activeItem')) {
+                        aEle[selectedIndex].classList.add('activeItem');
+                        Q.handle(state.onActivateItem, tool, [selectedIndex, aEle[selectedIndex]]);
+                    }
                 }
 
                 function togglePreActive(selectedIndex) {
-                    if(tool.state.debug) console.log('togglePreActive')
+                    if(state.debug) console.log('togglePreActive')
                     var toogleClass = function (prevIndex, nextIndex) {
                         for (let i = 0; i < aEle.length; i++) {
 
@@ -201,7 +203,7 @@
                 }
 
                 function draggingIsActive(yes) {
-                    if(tool.state.debug) console.log('draggingIsActive START', yes, rotatingIsPasused);
+                    if(state.debug) console.log('draggingIsActive START', yes, rotatingIsPasused);
                     if(yes) {
                         if(rotateRoundTimer != null) {
                             clearTimeout(rotateRoundTimer);
@@ -209,7 +211,7 @@
                         }
 
                         if(roundTimer.start != null && !rotatingIsPasused) {
-                            if(tool.state.debug) console.log('draggingIsActive YES');
+                            if(state.debug) console.log('draggingIsActive YES');
 
                             roundTimer.pause = performance.now()
                             var timePassed = roundTimer.pause - roundTimer.start;
@@ -217,7 +219,7 @@
                             var thetaDegPassed = theta / 100 * percentTimePassed;
                             var degPassed = tX + (theta - thetaDegPassed);
 
-                            if(tool.state.debug) console.log('draggingIsActive : degPassed', degPassed);
+                            if(state.debug) console.log('draggingIsActive : degPassed', degPassed);
 
                             tX = degPassed;
                             obox.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (degPassed) + "deg)";
@@ -226,10 +228,10 @@
                         rotatingIsPasused = true;
                         if(!obox.classList.contains('draggingActive')) obox.classList.add('draggingActive');
                     } else {
-                        if(tool.state.debug) console.log('draggingIsActive : NO');
+                        if(state.debug) console.log('draggingIsActive : NO');
 
                         if(autoRotate) {
-                            if(tool.state.debug) console.log('draggingIsActive : stop : restart autorotate');
+                            if(state.debug) console.log('draggingIsActive : stop : restart autorotate');
 
                             if(restartRotateRoundTimer != null){
                                 clearTimeout(restartRotateRoundTimer);
@@ -238,34 +240,34 @@
 
                             var circlesNum = Math.floor(Math.abs(tX)/360);
                             var degreeBelow360 =  Math.abs(tX) - 360 * circlesNum
-                            if(tool.state.debug) console.log('draggingIsActive : degreeBelow360', degreeBelow360);
+                            if(state.debug) console.log('draggingIsActive : degreeBelow360', degreeBelow360);
 
                             let closestDegIndex;
                             let belowZero = Math.sign(tX) === -1 || Math.sign(tX) === 0;
-                            if(belowZero && direction == 'left') {
-                                if(tool.state.debug) console.log('draggingIsActive : closest : cur deg is <0');
+                            if(belowZero && direction === 'left') {
+                                if(state.debug) console.log('draggingIsActive : closest : cur deg is <0');
                                 closestDegIndex = closest(negativeDeg, -degreeBelow360)
                                 tX = -degreeBelow360;
-                            } else if (!belowZero && direction == 'left') {
-                                if(tool.state.debug) console.log('draggingIsActive : closest : direction is left');
+                            } else if (!belowZero && direction === 'left') {
+                                if(state.debug) console.log('draggingIsActive : closest : direction is left');
                                 closestDegIndex = closest(negativeDeg, -degreeBelow360)
                                 tX = degreeBelow360
                             } else {
-                                if(tool.state.debug) console.log('draggingIsActive : closest : cur deg is >0')
+                                if(state.debug) console.log('draggingIsActive : closest : cur deg is >0')
                                 closestDegIndex = closest(positiveDeg, degreeBelow360)
                                 tX = degreeBelow360;
                             }
 
                             currentOrderIndex = selectedIndex = closestDegIndex
 
-                            if(tool.state.debug) console.log('draggingIsActive : new tX', tX);
+                            if(state.debug) console.log('draggingIsActive : new tX', tX);
 
                             obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
 
-                            if(tool.state.debug) console.log('draggingIsActive : closestIndex, currentOrderIndex', closestDegIndex);
+                            if(state.debug) console.log('draggingIsActive : closestIndex, currentOrderIndex', closestDegIndex);
                             rotatingIsPasused = false;
                             restartRotateRoundTimer = setTimeout(function () {
-                                if(rotatingIsPasused == true) return;
+                                if(rotatingIsPasused === true) return;
                                 obox.classList.remove('draggingActive');
                                 startAutoRotate(tX);
                             }, 500)
@@ -273,7 +275,6 @@
                     }
 
                 }
-
 
                 function stopRotating() {
                     rotatingIsPasused = true;
@@ -290,10 +291,10 @@
 
                     let closestDegIndex;
                     if(Math.sign(tX) === -1 || Math.sign(tX) === 0) {
-                        if(tool.state.debug) console.log('applyTranform : negative tX')
+                        if(state.debug) console.log('applyTranform : negative tX')
                         closestDegIndex = closest(negativeDeg, -degreeBelow360)
                     } else {
-                        if(tool.state.debug) console.log('applyTranform : positive tX')
+                        if(state.debug) console.log('applyTranform : positive tX')
                         closestDegIndex = closest(positiveDeg, degreeBelow360)
                     }
 
@@ -301,12 +302,12 @@
 
                     togglePreActive(closestDegIndex);
                     toggleActive(closestDegIndex);
-                    if(tool.state.debug) console.log('applyTranform: tX, closestDegIndex', tX, closestDegIndex);
+                    if(state.debug) console.log('applyTranform: tX, closestDegIndex', tX, closestDegIndex);
                     obj.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (tX) + "deg)";
                 }
 
                 function rotateCarousel(transitionTime, endCallback, manualTx, toZeroFix, startNum) {
-                    if(tool.state.debug) {
+                    if(state.debug) {
                         console.log('rotateCarousel START: starts num', startNum)
                         console.log('rotateCarousel START: tX', manualTx, tX)
                         console.log('rotateCarousel : index : next, current', selectedIndex, currentOrderIndex)
@@ -319,33 +320,33 @@
 
                     let belowZero = (Math.sign(manualTx) === -1);
 
-                    if (direction == 'left' && (manualTx === 0 || manualTx < theta) && toZeroFix) {
-                        if(tool.state.debug) console.log('rotateCarousel : toZeroFix');
+                    if (direction === 'left' && (manualTx === 0 || manualTx < theta) && toZeroFix) {
+                        if(state.debug) console.log('rotateCarousel : toZeroFix');
                         tX = 0;
-                    } else if (direction == 'left' && toZeroFix == null) {
-                        if(tool.state.debug) console.log('rotateCarousel : regular left direction');
+                    } else if (direction === 'left' && toZeroFix == null) {
+                        if(state.debug) console.log('rotateCarousel : regular left direction');
                         tX = theta * selectedIndex * -1;
-                    }  else if (direction == 'left' && !belowZero) {
-                        if(tool.state.debug) console.log('rotateCarousel : toZeroFix 2')
+                    }  else if (direction === 'left' && !belowZero) {
+                        if(state.debug) console.log('rotateCarousel : toZeroFix 2')
                         tX = tX - theta;
                     } else {
-                        if(tool.state.debug) console.log('rotateCarousel : right');
+                        if(state.debug) console.log('rotateCarousel : right');
                         tX = theta * selectedIndex;
                     }
 
                     var circlesNum = Math.floor(tX/360);
-                    if(tool.state.debug) console.log('rotateCarousel : circlesNum', circlesNum)
+                    if(state.debug) console.log('rotateCarousel : circlesNum', circlesNum)
 
                     var itemsNum = selectedIndex;
                     var itemsCounted = Math.floor(itemsNum/aEle.length);
                     currentOrderIndex = itemsNum - aEle.length*itemsCounted
-                    if(tool.state.debug) console.log('rotateCarousel : currentOrderIndex', currentOrderIndex)
+                    if(state.debug) console.log('rotateCarousel : currentOrderIndex', currentOrderIndex)
 
                     let closestDegIndex = getCurrentActiveItem()
                     togglePreActive(closestDegIndex);
                     toggleActive(closestDegIndex);
 
-                    if(tool.state.debug) console.log('rotateCarousel : rotate', tX, transitionTime)
+                    if(state.debug) console.log('rotateCarousel : rotate', tX, transitionTime)
                     roundTimer.start = performance.now();
                     roundTimer.startIndex = selectedIndex;
                     roundTimer.transitionTime = transitionTime;
@@ -353,38 +354,38 @@
                     obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
 
                     if(endCallback != null) {
-                        if(tool.state.debug) console.log('rotateCarousel : rotateRoundTimer : endCallback well run in', transitionTime);
+                        if(state.debug) console.log('rotateCarousel : rotateRoundTimer : endCallback well run in', transitionTime);
                         if(rotateRoundTimer != null) {
                             clearTimeout(rotateRoundTimer);
                             rotateRoundTimer = null;
                         }
                         rotateRoundTimer = setTimeout(function () {
-                            if(tool.state.debug) console.log('rotateCarousel : rotateRoundTimer : run endCallback');
+                            if(state.debug) console.log('rotateCarousel : rotateRoundTimer : run endCallback');
                             endCallback()
                         }, transitionTime);
                     }
                 }
 
                 function getCurrentActiveItem() {
-                    if(tool.state.debug) console.log('getCurrentActiveItem : tX', tX);
+                    if(state.debug) console.log('getCurrentActiveItem : tX', tX);
 
                     var circlesNum = Math.floor(tX/360);
-                    if(tool.state.debug) console.log('getCurrentActiveItem : circlesNum', circlesNum);
+                    if(state.debug) console.log('getCurrentActiveItem : circlesNum', circlesNum);
 
                     var degreeBelow360 =  (tX <= 360 && tX >= 0) || (tX >= -360 && tX < 0) ? tX : tX - 360*circlesNum;
-                    if(tool.state.debug) console.log('getCurrentActiveItem : degreeBelow360', degreeBelow360);
+                    if(state.debug) console.log('getCurrentActiveItem : degreeBelow360', degreeBelow360);
 
                     let closestDegIndex;
                     if((Math.sign(degreeBelow360) === -1 || Math.sign(degreeBelow360) === 0)) {
-                        if(tool.state.debug) console.log('getCurrentActiveItem : if1 (sign is -)');
+                        if(state.debug) console.log('getCurrentActiveItem : if1 (sign is -)');
 
                         closestDegIndex = closest(negativeDeg, degreeBelow360);
                     } else {
-                        if(tool.state.debug) console.log('getCurrentActiveItem : if2 (sign is +)')
+                        if(state.debug) console.log('getCurrentActiveItem : if2 (sign is +)')
 
                         closestDegIndex = closest(positiveDeg, degreeBelow360);
                     }
-                    if(tool.state.debug) console.log('getCurrentActiveItem : closestDegIndex', closestDegIndex);
+                    if(state.debug) console.log('getCurrentActiveItem : closestDegIndex', closestDegIndex);
 
                     return closestDegIndex;
                 }
@@ -411,13 +412,13 @@
 
                 //var autorotateNum = 0;
                 function startAutoRotate(manualTx) {
-                    if(tool.state.debug) console.log('startAutoRotate', manualTx);
+                    if(state.debug) console.log('startAutoRotate', manualTx);
                     var circleTime = rotateSpeed/aEle.length;
                     obox.classList.remove('rotatingPaused');
                     rotatingIsPasused = false;
 
                     function startNormally() {
-                        if(tool.state.debug) console.log('startAutoRotate : startNormally')
+                        if(state.debug) console.log('startAutoRotate : startNormally')
                         autorotateStartsNum++
                         selectedIndex++;
                         function rotateLoop() {
@@ -430,11 +431,11 @@
 
                     let belowZero = (Math.sign(manualTx) === -1 || Math.sign(manualTx) === 0);
                     if (manualTx != null && !belowZero) {
-                        if(tool.state.debug) console.log('startAutoRotate : tX is !belowZero')
+                        if(state.debug) console.log('startAutoRotate : tX is !belowZero')
 
                         let transitionTime = circleTime;
                         selectedIndex = Math.floor(manualTx/theta);
-                        if(tool.state.debug) console.log('startAutoRotate : selectedIndex', selectedIndex)
+                        if(state.debug) console.log('startAutoRotate : selectedIndex', selectedIndex)
 
                         if(manualTx < theta) {
                             transitionTime = transitionTime * (manualTx/theta);
@@ -443,7 +444,7 @@
                         function rotateLoop(manualTx) {
 
                             if(selectedIndex !== 0) selectedIndex--;
-                            if(tool.state.debug) console.log('startAutoRotate: rotateLoop : (tX is !belowZero) : selectedIndex', selectedIndex)
+                            if(state.debug) console.log('startAutoRotate: rotateLoop : (tX is !belowZero) : selectedIndex', selectedIndex)
 
                             if(selectedIndex == 0 || manualTx == 0) {
                                 startNormally();
@@ -513,7 +514,7 @@
                     }, 17);
 
                     removeEventListeners();
-                };
+                }
 
                 function onDocumentLeave() {
                     removeEventListeners()
@@ -547,7 +548,7 @@
                     }
 
                     return false;
-                };
+                }
 
                 if(!Q.info.isTouchscreen) {
                     obox.addEventListener('mousedown', onpointerdown)
@@ -556,7 +557,7 @@
                 }
 
                 function onTabSwitch() {
-                    if(tool.state.debug) console.log('visibilitychange', tX, obox.style.transform)
+                    if(state.debug) console.log('visibilitychange', tX, obox.style.transform)
                 }
 
                 document.addEventListener("visibilitychange", onTabSwitch);

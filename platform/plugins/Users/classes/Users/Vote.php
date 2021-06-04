@@ -157,6 +157,49 @@ class Users_Vote extends Base_Users_Vote
 		return $result;
 	}
 
+	/**
+	 * Save stats
+	 * @method setStat
+	 * @param {String} $type forType column
+	 * @param {String} $name
+	 */
+	static function setStat ($type, $name) {
+		$user = Users::loggedInUser();
+		if (!$user) {
+			return;
+		}
+
+		$day = 60 * 60 * 24;
+		$week = $day * 7;
+		$month = date("t") * $day;
+		foreach (compact("day", "week", "month") as $period => $duration) {
+			switch ($period) {
+				case "day":
+					$timestamp = strtotime("today");
+					break;
+				case "week":
+					$timestamp = mktime(0, 0, 0, date("n"), date("j") - date("N") + 1);
+					break;
+				case "month":
+					$timestamp = mktime(0, 0, 0, date("m"), 1);
+					break;
+				default:
+					return;
+			}
+
+			$forId = "Metrics/activity/$name/$duration/$timestamp";
+
+			$usersVote = new Users_Vote();
+			$usersVote->userId = $user->id;
+			$usersVote->forType = $type;
+			$usersVote->forId = $forId;
+			$usersVote->value = 1;
+			if (!$usersVote->retrieve()) {
+				$usersVote->save();
+			}
+		}
+	}
+
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
