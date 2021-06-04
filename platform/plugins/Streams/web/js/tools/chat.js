@@ -637,8 +637,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		if (!msg) return;
 		var fields = {
-			errorText: msg,
-			time: Date.now() / 1000
+			errorText: msg
 		};
 
 		Q.Template.render(
@@ -649,11 +648,13 @@ Q.Tool.define('Streams/chat', function(options) {
     	
 				tool.$('.Streams_chat_noMessages').remove();
 				tool.$('.Streams_chat_messages').append(html);
-    	
+				var timestamp = data.date || Date.now()/1000;
 				tool.findMessage('last')
 					.find('.Streams_chat_timestamp')
-					.html(Q.Tool.setUpElement('div', 'Q/timestamp', data.date), true)
-					.activate();
+					.tool("Q/timestamp", {
+						time: timestamp * 1000,
+						capitalized: true
+					}).activate();
 			},
 			state.templates.message.error
 		);
@@ -1292,7 +1293,7 @@ Q.Template.set('Streams/chat/message/notification',
 Q.Template.set('Streams/chat/message/error',
 	'<div class="Streams_chat_item Q_error">'+
 		'<div class="Streams_chat_container">'+
-			'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
+			'<div class="Streams_chat_timestamp"></div>'+
 			'<div class="Streams_chat_error">'+
 				'{{errorText}}'+
 			'</div>'+

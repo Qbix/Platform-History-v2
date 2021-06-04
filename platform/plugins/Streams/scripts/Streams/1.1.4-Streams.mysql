@@ -1,0 +1,2 @@
+create index delay_message on streams_message(publisherId, streamName, byUserId);
+create index insertedTime on streams_message(insertedTime);
