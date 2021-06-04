@@ -1700,6 +1700,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   fetching in reverse order, so 'ascending' will default to false.
 	 * @param {integer} [options.type] Optional string specifying the particular type of messages to get
 	 * @param {boolean} [$options.skipLimiting=false] Pass true here to not cut the limit off by the getMessagesLimit from config. It's here to protect against excessively large queries.
+	 * @param {boolean} [$options.updateSeen=false] Pass true here to update the streams_participant.seenOrdinal, if any, with the latest ordinal
+	 * @return {array} Returns an array of ($ordinal => Streams_Message) pairs.
 	 */
 	function getMessages($options)
 	{
@@ -1749,7 +1751,15 @@ class Streams_Stream extends Base_Streams_Stream
 		));
 		$q->limit($limit);
 		$q->orderBy('ordinal', isset($options['ascending']) ? $options['ascending'] : $ascending);
-		return $q->fetchDbRows(null, '', 'ordinal');
+		$rows = $q->fetchDbRows(null, '', 'ordinal');
+		if (empty($options['updateSeen'])) {
+			return $rows;
+		}
+		$max = 0;
+		foreach ($rows as $ordinal => $r) {
+			$max = max($max, $ordinal);
+		}
+		return $rows;
 	}
 
 	/**

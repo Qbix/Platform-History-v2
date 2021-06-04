@@ -2265,7 +2265,7 @@ window.WebRTCconferenceLib = function app(options){
                             let indexToInsert = parseInt(i) + 1;
                             let childItems = 0;
                             if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[i].parentGroup != _activeScene.sources[indexToInsert].parentGroup) {
-                                break
+                                break;
                             } else if(_activeScene.sources[i].parentGroup != null && _activeScene.sources[i].parentGroup == _activeScene.sources[indexToInsert].parentGroup) {
                                 moveSource(i, indexToInsert + childItems);
                                 break;
