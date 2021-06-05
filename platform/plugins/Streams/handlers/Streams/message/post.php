@@ -27,15 +27,16 @@ function Streams_message_post () {
 	$delay = (int)Q_Config::get("Streams", "chat", "delay", null);
 	if ($delay) {
 		$delayTime = time() - $delay;
-		$delayedMessage = Streams_Message::select()->where(array(
+		$lastMessage = Streams_Message::select()->where(array(
 			"publisherId" => $publisherId,
 			"streamName" => $streamName,
 			"byUserId" => $user->id
-		))->andWhere(new Db_Expression(
-			"UNIX_TIMESTAMP(insertedTime) > ".$delayTime
-		))->orderBy("insertedTime", false)->fetchDbRow();
-		if ($delayedMessage) {
-			throw new Q_Exception("Delay between messages ".$delay." seconds (".(strtotime($delayedMessage->insertedTime) - $delayTime)." seconds left).");
+		))->orderBy("insertedTime", false)->limit(1)->fetchDbRow();
+		if ($lastMessage) {
+			$delayDiff = strtotime($lastMessage->insertedTime) - $delayTime;
+			if ($delayDiff > 0) {
+				throw new Q_Exception("Delay between messages ".$delay." seconds (".$delayDiff." seconds left).");
+			}
 		}
 	}
 
