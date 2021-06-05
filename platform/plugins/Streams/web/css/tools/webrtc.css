@@ -395,6 +395,9 @@
     height: 100%;
     width: 100%;
 }
+.Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_room-media.Streams_webrtc_side-by-side-screens-grid {
+    background: black;
+}
 
 .Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_room-media {
     position: fixed;
@@ -884,6 +887,9 @@ and (max-device-width : 320px) {
     z-index: 9;
     background-color: black;
     color: white;
+}
+.Streams_webrtc_mobile-screen .Streams_webrtc_side-by-side-screens-grid .Streams_webrtc_chat-participant-name {
+    display: none;
 }
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text{
