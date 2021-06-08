@@ -979,6 +979,7 @@ and (max-device-width : 320px) {
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar {
     border-radius: 50%;
     border: 3px solid white;
+    background: transparent;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-con svg{
     position: absolute;
@@ -991,6 +992,8 @@ and (max-device-width : 320px) {
     width: 100%;
     object-fit: cover;
     height: 100%;
+    border-radius: 50%;
+    background: transparent;
 }
 
 .Streams_webrtc_desktop-screen .video-thumbs-row .Streams_webrtc_flex-row-item {
@@ -2098,6 +2101,62 @@ and (max-device-width : 320px) {
     margin-left: 20px;
 }
 
+/*progress bar of loading sources*/
+.Streams_webrtc_popup-progress-bar-popup {
+    position: absolute;
+}
+.Streams_webrtc_popup-progress-bar {
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    outline: thin solid #727272;
+    background-color: #676767;
+    position: relative;
+    width: 100%;
+}
+.Streams_webrtc_popup-close-dialog-sign {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    font-size: 25px;
+    right: 0;
+    color: #979797;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.Streams_webrtc_popup-progress-bar span{
+    background-color: #979797;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 0px;
+    padding-right: 5px;
+}
+/*.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-seekbar span.Streams_webrtc_popup-options-seekbar-hover:after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    !*background-color: #C12236;
+    top: -5px;
+    border-radius: 50%;
+    right: -10px;
+    width: 20px;
+    height: 20px;*!
+
+    background-color: #983030;
+    top:0;
+    right: -5px;
+    width:10px;
+    height:100%
+}*/
+/*end*/
+
 .Streams_webrtc_popup-scenes-body-inner, .Streams_webrtc_popup-sources-body-inner,
 .Streams_webrtc_popup-scenes-body-inner, .Streams_webrtc_popup-options-body-inner {
     padding-top: 10px;
@@ -2192,7 +2251,6 @@ and (max-device-width : 320px) {
 
 .Streams_webrtc_popup-sources-control {
     display: flex;
-    flex-direction: revert;
     padding: 5px 10px;
     border-top: 1px solid #424242;
 }
@@ -2351,7 +2409,7 @@ Streams_webrtc_mobile-screen.Streams_webrtc_popup-box {
     background: white;
     overflow: hidden;
 }
-Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
+Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     background: white;
     overflow: visible;
 }
@@ -2666,6 +2724,9 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 .Streams_webrtc_preparing_screen {
     width:100%;
     height:100%;
+    z-index: 999999;
+    position: absolute;
+    background: white;
 }
 .Streams_webrtc_preparing_screen .Streams_webrtc_preparing_dialog_inner {
     display: flex;
@@ -2745,15 +2806,18 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_devices_dialog_buttons_con {
     bottom: 85px;
+    height: 80px;
     width: 100%;
     position: absolute;
     display: flex;
     justify-content: center;
+    z-index: 99999;
 }
 .Streams_webrtc_devices_dialog_buttons_inner_con {
     bottom: 0;
     position: absolute;
     display: flex;
+    flex-direction: row;
     justify-content: center;
     padding: 15px;
     /*background-color: rgba(0, 0, 0, 0.3);
@@ -2801,6 +2865,7 @@ Streams_webrtc_desktop-screen. .Streams_webrtc_popup-box {
     display: flex;
     justify-content: center;
     padding: 15px;
+    z-index: 99999;
 }
 .Q_button.Streams_webrtc_join-button {
     border: 0;
