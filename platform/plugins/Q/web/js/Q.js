@@ -8302,15 +8302,14 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	options.info = {};
 	href = Q.url(href, null, options);
 	if (!media) media = 'screen,print';
-	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
-	var i, e, h, m, p;
+	var i, e, h, m;
+	var href2 = href.split('?')[0];
 	for (i=0; i<links.length; ++i) {
 		e = links[i];
 		m = e.getAttribute('media');
 		h = e.getAttribute('href');
-		if ((m && m !== media)
-		|| (h !== href && h !== href2)) {
+		if ((m && m !== media) || h.split('?')[0] !== href2) {
 			continue;
 		}
 		// A link element with this media and href is already found in the document.
@@ -8326,7 +8325,6 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		if (outside) {
 			container.appendChild(e);
 		}
-		var href2 = href.split('?')[0];
 		if (Q.addStylesheet.loaded[href]
 		|| Q.addStylesheet.loaded[href2]
 		|| !Q.addStylesheet.added[href]) {
@@ -9029,7 +9027,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										if (stylesheet.href === e.href
+										if (stylesheet.href.split("?")[0] === e.href.split("?")[0]
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
