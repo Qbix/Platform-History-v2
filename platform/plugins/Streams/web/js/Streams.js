@@ -4129,9 +4129,13 @@ var MTotal = Streams.Message.Total = {
 					MTotal.get.onError.handle.call(this, msg, args);
 					return callback && callback.call(this, msg, args);
 				}
-				var messageTotals = Q.isArrayLike(messageType)
-					? Q.copy(data.messageTotals)
-					: data.messageTotals[messageType];
+
+				var messageTotals = 0;
+				if (data.messageTotals) {
+					messageTotals = Q.isArrayLike(messageType)
+						? Q.copy(data.messageTotals)
+						: data.messageTotals[messageType];
+				}
 				callback && callback.call(MTotal, err, messageTotals || 0);
 			});
 	},
