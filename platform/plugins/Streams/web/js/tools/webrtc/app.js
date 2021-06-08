@@ -1391,7 +1391,6 @@ window.WebRTCconferenceLib = function app(options){
                 //remoteStreamEl.load();
             }
 
-            alert('123')
             if(!participant.isLocal && track.kind == 'audio') {
                 remoteStreamEl.autoplay = true;
                 remoteStreamEl.load();
