@@ -2336,6 +2336,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
+                this.hasLiveTracks = function () {
+                    var hasLiveTracks = false;
+                    for(let t in this.tracks) {
+                        let track = this.tracks[t];
+                        if(track.mediaStreamTrack.enabled == true && track.mediaStreamTrack.readyState == 'live') {
+                            hasLiveTracks = true;
+                            break;
+                        }
+                    }
+                    return hasLiveTracks;
+                }
                 this.audioTracks = function () {
                     return this.tracks.filter(function (trackObj) {
                         return trackObj.kind == 'audio';
@@ -6311,7 +6322,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 //if track is still muted after 3s, hide parent screen
                 track.parentScreen.removeTimer = setTimeout(function () {
-                    if(track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended'){
+                    var hasLiveTracks = track.parentScreen.hasLiveTracks()
+                    //alert('asdf ' + hasLiveTracks)
+                    if((track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended') && hasLiveTracks == false){
                         removeScreenFromCommonList(track.parentScreen);
                         track.parentScreen.removeTimer = null;
                     }
