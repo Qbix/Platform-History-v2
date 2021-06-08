@@ -1464,6 +1464,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 preJoiningStreams.push({kind:'camera', stream:stream})
                                 let videoPreview = document.createElement('video');
                                 let screenVideo = cameraPreview.querySelector('video');
+                                videoPreview.srcObject = stream;
+
+                                videoPreview.setAttributeNode(document.createAttribute('autoplay'));
+                                videoPreview.setAttributeNode(document.createAttribute('playsinline'));
                                 if(screenVideo != null) {
                                     screenVideo.parentElement.insertBefore(videoPreview, screenVideo);
                                 } else {
@@ -1475,10 +1479,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
                                 }
 
-                                videoPreview.srcObject = stream;
 
-                                videoPreview.setAttributeNode(document.createAttribute('autoplay'));
-                                videoPreview.setAttributeNode(document.createAttribute('playsinline'));
 
                                 videoPreview.play().then((e) => {
                                     console.log('camera: play func success')
@@ -6281,9 +6282,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(track.parentScreen == null || track.kind != 'video') return;
 
-                //workaround for abug on iOS (iPad): if to turn camera off, the remote video on another side will be still
+                //workaround for a bug on iOS (iPad): if to turn camera off, the remote video on another side will be still
                 //live for some reason and will be toggling mute/unmute status each ~5s.
-                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && track.muteCounter.counter == 1) {
+                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && tdsasdfsdasfrack.muteCounter.counter == 1) {
                     log('mediaStreamTrack mute if1');
 
                     if(participant.remoteCameraIsEnabled == false) {

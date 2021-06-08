@@ -1383,9 +1383,15 @@ window.WebRTCconferenceLib = function app(options){
                 remoteStreamEl.autoplay = true;
                 remoteStreamEl.playsInline = true;
                 remoteStreamEl.setAttribute('webkit-playsinline', true);
-                remoteStreamEl.load();
+
+                remoteStreamEl.setAttributeNode(document.createAttribute('webkit-playsinline'));
+                remoteStreamEl.setAttributeNode(document.createAttribute('autoplay'));
+                remoteStreamEl.setAttributeNode(document.createAttribute('playsInline'));
+                remoteStreamEl.setAttributeNode(document.createAttribute('muted'));
+                //remoteStreamEl.load();
             }
 
+            alert('123')
             if(!participant.isLocal && track.kind == 'audio') {
                 remoteStreamEl.autoplay = true;
                 remoteStreamEl.load();
@@ -1394,9 +1400,11 @@ window.WebRTCconferenceLib = function app(options){
             }
 
             if(participant.isLocal) {
+                remoteStreamEl.setAttribute('webkit-playsinline', true);
                 remoteStreamEl.volume = 0;
                 remoteStreamEl.muted = true;
-
+                remoteStreamEl.autoplay = true;
+                remoteStreamEl.playsInline = true;
                 if(track.kind == 'video') localParticipant.videoStream = stream;
                 if (track.kind == 'audio') localParticipant.audioStream = stream;
             }
