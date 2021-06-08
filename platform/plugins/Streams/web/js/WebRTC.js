@@ -6295,7 +6295,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 //workaround for a bug on iOS (iPad): if to turn camera off, the remote video on another side will be still
                 //live for some reason and will be toggling mute/unmute status each ~5s.
-                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && tdsasdfsdasfrack.muteCounter.counter == 1) {
+                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && track.muteCounter.counter == 1) {
                     log('mediaStreamTrack mute if1');
 
                     if(participant.remoteCameraIsEnabled == false) {
