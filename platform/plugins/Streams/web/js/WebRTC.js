@@ -2336,6 +2336,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
+                this.hasLiveTracks = function () {
+                    var hasLiveTracks = false;
+                    for(let t in this.tracks) {
+                        let track = this.tracks[t];
+                        if(track.mediaStreamTrack.enabled == true && track.mediaStreamTrack.readyState == 'live') {
+                            hasLiveTracks = true;
+                            break;
+                        }
+                    }
+                    return hasLiveTracks;
+                }
                 this.audioTracks = function () {
                     return this.tracks.filter(function (trackObj) {
                         return trackObj.kind == 'audio';
@@ -6284,7 +6295,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 //workaround for a bug on iOS (iPad): if to turn camera off, the remote video on another side will be still
                 //live for some reason and will be toggling mute/unmute status each ~5s.
-                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && tdsasdfsdasfrack.muteCounter.counter == 1) {
+                if(track.muteCounter && (Date.now() - track.muteCounter.lastMuteTime) < (1000*15) && track.muteCounter.counter == 1) {
                     log('mediaStreamTrack mute if1');
 
                     if(participant.remoteCameraIsEnabled == false) {
@@ -6311,7 +6322,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 //if track is still muted after 3s, hide parent screen
                 track.parentScreen.removeTimer = setTimeout(function () {
-                    if(track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended'){
+                    var hasLiveTracks = track.parentScreen.hasLiveTracks()
+                    //alert('asdf ' + hasLiveTracks)
+                    if((track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended') && hasLiveTracks == false){
                         removeScreenFromCommonList(track.parentScreen);
                         track.parentScreen.removeTimer = null;
                     }
