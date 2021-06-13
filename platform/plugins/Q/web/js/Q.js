@@ -8301,6 +8301,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
+	var href2 = href.split('?')[0];
 	if (!media) media = 'screen,print';
 	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
@@ -8326,7 +8327,6 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 		if (outside) {
 			container.appendChild(e);
 		}
-		var href2 = href.split('?')[0];
 		if (Q.addStylesheet.loaded[href]
 		|| Q.addStylesheet.loaded[href2]
 		|| !Q.addStylesheet.added[href]) {
@@ -9029,7 +9029,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										if (stylesheet.href === e.href
+										var sh = stylesheet.href, eh = e.href;
+										if ((sh && sh.split('?')[0]) === (eh && eh.split('?')[0])
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
