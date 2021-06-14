@@ -9016,7 +9016,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							return;
 						}
 						Q.each(document.getElementsByTagName(tag), function (k, e) {
-							if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
+							if (tag === 'link' && e.getAttribute('rel').toLowerCase() !== 'stylesheet') {
 								return;
 							}
 
@@ -9027,7 +9027,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										if (stylesheet.href.split("?")[0] === e.href.split("?")[0]
+										var href1 = Q.getObject("href", stylesheet);
+										var href2 = Q.getObject("href", e);
+										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
@@ -13478,7 +13480,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+				//mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;
