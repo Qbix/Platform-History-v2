@@ -6,8 +6,7 @@
     height: 100%;
 }
 .Streams_webrtc_room-media {
-    /*position: fixed;*/
-    position: relative;
+    position: fixed;
     top: 0;
     left: 0;
     height:100%;
@@ -19,6 +18,7 @@
 .Streams_webrtc_room-media.Streams_webrtc_audio-screens-grid {
     /*pointer-events: all !important;*/
     overflow: auto;
+    position: relative;
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_controls_tool {
