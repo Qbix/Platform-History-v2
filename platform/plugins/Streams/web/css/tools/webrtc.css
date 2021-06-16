@@ -6,13 +6,19 @@
     height: 100%;
 }
 .Streams_webrtc_room-media {
-    position: fixed;
+    /*position: fixed;*/
+    position: relative;
     top: 0;
     left: 0;
-    height:100vh;
-    width:100vw;
-    z-index: 99999 !important;
+    height:100%;
+    width:100%;
     pointer-events: none;
+    z-index: 999999999999999999999 !important;
+}
+
+.Streams_webrtc_room-media.Streams_webrtc_audio-screens-grid {
+    /*pointer-events: all !important;*/
+    overflow: auto;
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_controls_tool {
@@ -27,7 +33,7 @@
 .Streams_webrtc_mobile-screen .Streams_webrtc_controls_tool {
     display: flex;
     justify-content: center;
-    z-index: 999999 !important;
+    z-index: 999999999999 !important;
     position: fixed;
     width:100%;
     bottom: 0;
@@ -963,11 +969,23 @@ and (max-device-width : 320px) {
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-name{
     /*position: absolute;
     bottom: -40px;*/
+    flex:none;
     display: flex;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
     background: none;
-    margin-top:10px;
-    height:40px;
+    margin-top: 5px;
+    height: 19px;
+    padding:0;
+    overflow: visible;
+}
+
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_participant-name-text{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-con {
@@ -1192,6 +1210,7 @@ and (max-device-width : 320px) {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     max-width: 100%;
     z-index: 10;
     font-weight: bold;
@@ -1699,7 +1718,6 @@ and (max-device-width : 320px) {
 
 .notice-container {
     position:absolute;
-    right:0;
     top:20px;
     background: #18aa8d;
     padding: 10px 20px 10px 10px;
@@ -1714,6 +1732,14 @@ and (max-device-width : 320px) {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
+}
+.notice-container.Streams_webrtc_notice_position_left {
+    left:0;
+    right: auto;
+}
+.notice-container.Streams_webrtc_notice_position_right {
+    left:auto;
+    right: 0;
 }
 .notice-container.shown {
     opacity: 1;
@@ -2722,11 +2748,21 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 }
 
 .Streams_webrtc_preparing_screen {
+    top: 0;
+    left: 0;
     width:100%;
     height:100%;
     z-index: 999999;
     position: absolute;
     background: white;
+}
+
+.Streams_webrtc_preparing_screen .Streams_webrtc_popup-close-dialog-sign{
+    width: 35px;
+    height: 35px;
+    font-size: 35px;
+    right: 5px;
+    top: 5px;
 }
 .Streams_webrtc_preparing_screen .Streams_webrtc_preparing_dialog_inner {
     display: flex;

@@ -80,25 +80,39 @@
             },
             snapTo: function(position) {
                 var tool = this;
-                var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
+
                 var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
 
-                var cHe = moveWithinEl == window ? window.innerHeight : moveWithinEl.offsetHeight;
+                var moveWithinRect;
+
+                if(typeof tool.state.moveWithinArea == 'object' && tool.state.moveWithinArea.constructor.name == 'DOMRect') {
+                    moveWithinRect = tool.state.moveWithinArea;
+                } else if(tool.state.moveWithinArea == 'parent') {
+                    moveWithinRect = elementToMove.parentElement.getBoundingClientRect();
+                } else if(tool.state.moveWithinArea == 'window' || tool.state.moveWithinArea == window) {
+                    moveWithinRect = new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+                }
+
+                var cHe = moveWithinRect.height;
 
                 if(position == 'top') {
                     if(!elementToMove.classList.contains('Q_resize_snapped_top')) {
                         elementToMove.classList.add('Q_resize_snapped_top');
                         elementToMove.style.position = tool.state.elementPosition;
+                        elementToMove.style.top = moveWithinRect.y + 'px';
                     }
                 } else if(position == 'bottom') {
                     if(!elementToMove.classList.contains('Q_resize_snapped_bottom')) {
                         elementToMove.classList.add('Q_resize_snapped_bottom');
                         elementToMove.style.position = tool.state.elementPosition;
+                        var elHeight = elementToMove.offsetHeight;
+                        elementToMove.style.top = ((moveWithinRect.y + moveWithinRect.height) - elHeight) + 'px';
                     }
                 } else if(position == 'left') {
                     if(!elementToMove.classList.contains('Q_resize_snapped_left')) {
                         elementToMove.classList.add('Q_resize_snapped_left');
                         elementToMove.style.position = tool.state.elementPosition;
+                        elementToMove.style.left = moveWithinRect.x + 'px';
                         var elHeight = elementToMove.offsetHeight;
                         elementToMove.style.top = (cHe / 2) - (elHeight / 2) + 'px';
                     }
@@ -106,11 +120,52 @@
                     if(!elementToMove.classList.contains('Q_resize_snapped_right')) {
                         elementToMove.classList.add('Q_resize_snapped_right');
                         elementToMove.style.position = tool.state.elementPosition;
+
                         var elHeight = elementToMove.offsetHeight;
+                        var elWidth = elementToMove.offsetWidth;
+                        elementToMove.style.left = ((moveWithinRect.x + moveWithinRect.width) - elWidth) + 'px';
                         elementToMove.style.top = (cHe / 2) - (elHeight / 2) + 'px';
                     }
                 }
 
+                tool.snappedTo = position;
+
+            },
+            getContainerRect: function () {
+                var tool = this;
+                var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+
+                var moveWithinRect;
+                if(typeof tool.state.moveWithinArea == 'object' && tool.state.moveWithinArea.constructor.name == 'DOMRect') {
+                    moveWithinRect = tool.state.moveWithinArea;
+                } else if(tool.state.moveWithinArea == 'parent') {
+                    moveWithinRect = elementToMove.parentElement.getBoundingClientRect();
+                } else if(tool.state.moveWithinArea == 'window' || tool.state.moveWithinArea == window) {
+                    moveWithinRect = new DOMRect(0, 0, window.innerWidth, window.innerHeight);
+                }
+
+                return moveWithinRect;
+            },
+            setContainerRect: function (domRect) {
+                var tool = this;
+                var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+                var elementWidth = parseInt(elementToMove.offsetWidth);
+                var elementHeight = parseInt(elementToMove.offsetHeight);
+
+                var moveWithinRect;
+                tool.state.moveWithinArea = moveWithinRect = domRect;
+                if(tool.state.snapToSidesOnly &&  tool.snappedTo != null){
+
+                    if(tool.snappedTo == 'right') {
+                        elementToMove.style.left = ((moveWithinRect.x + moveWithinRect.width) - elementWidth) + 'px';
+                    } else if(tool.snappedTo == 'bottom') {
+                        elementToMove.style.top = ((moveWithinRect.y + moveWithinRect.height) - elementHeight) + 'px';
+                    } else if(tool.snappedTo == 'left') {
+                        elementToMove.style.left = moveWithinRect.x + 'px';
+                    } else if(tool.snappedTo == 'top') {
+                        elementToMove.style.top = moveWithinRect.y + 'px';
+                    }
+                }
             },
             eventBinding: function () {
                 var tool = this;
@@ -120,8 +175,12 @@
                 var elementComputedStyle = window.getComputedStyle(elementToResize);
                 var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
 
+
+
                 var _dragElement = (function (){
-                    var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, diffX, diffY, snappedTo;
+                    var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, maxX, maxY, diffX, diffY, snappedTo;
+                    var moveWithinRect;
+
 
                     var move = function(xpos,ypos){
                         var currentTop = parseInt(elementToMove.style.top, 10)
@@ -129,12 +188,16 @@
                         if(tool.state.snapToSidesOnly){
                             if(snappedTo == 'right') {
                                 elementToMove.style.top = ypos + 'px';
+                                elementToMove.style.left = ((moveWithinRect.x + moveWithinRect.width) - eWi) + 'px';
                             } else if(snappedTo == 'bottom') {
+                                elementToMove.style.top = ((moveWithinRect.y + moveWithinRect.height) - eHe) + 'px';
                                 elementToMove.style.left = xpos + 'px';
                             } else if(snappedTo == 'left') {
                                 elementToMove.style.top = ypos + 'px';
+                                elementToMove.style.left = moveWithinRect.x + 'px';
                             } else if(snappedTo == 'top') {
                                 elementToMove.style.left = xpos + 'px';
+                                elementToMove.style.top = moveWithinRect.y + 'px';
                             }
                         } else {
                             elementToMove.style.left = xpos + 'px';
@@ -205,27 +268,27 @@
 
                         }
 
-                        if(((cWi - posX) < (cHe - posY)) && ((cWi - posX) < posY) && ((cWi - posX) < posX)) {
+                        if(((maxX - posX) < (maxY - posY)) && ((maxX - posX) < posY) && ((maxX - posX) < posX)) {
 
                             if(snappedTo != 'right') {
                                 toggleClass('Q_resize_snapped_right');
                             }
                             snappedTo = 'right';
 
-                        } else if(((cHe - posY) < (cWi - posX)) && ((cHe - posY) < posY) && ((cHe - posY) < posX)) {
+                        } else if(((maxY - posY) < (maxX - posX)) && ((maxY - posY) < posY) && ((maxY - posY) < posX)) {
                             if(snappedTo != 'bottom') {
                                 toggleClass('Q_resize_snapped_bottom');
                             }
                             snappedTo = 'bottom';
 
-                        } else if((posX < (cWi - posX)) && (posX < posY) && (posX < (cHe - posY))) {
+                        } else if((posX < (maxX - posX)) && (posX < posY) && (posX < (maxY - posY))) {
 
                             if(snappedTo != 'left') {
                                 toggleClass('Q_resize_snapped_left');
                             }
                             snappedTo = 'left';
 
-                        } else if((posY < (cWi - posX)) && (posY < posX) && (posY < (cHe - posY))) {
+                        } else if((posY < (maxX - posX)) && (posY < posX) && (posY < (maxY - posY))) {
 
                             if(snappedTo != 'top') {
                                 toggleClass('Q_resize_snapped_top');
@@ -233,6 +296,8 @@
                             snappedTo = 'top';
 
                         }
+
+                        tool.snappedTo = snappedTo;
                     }
 
                     var initMoving = function(evt){
@@ -274,7 +339,11 @@
                         if(tool.state.showShadow) tool.element.style.boxShadow = '10px -10px 60px 0 rgba(0,0,0,0.5)';
 
                         evt = evt || window.event;
-                        var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
+
+                        moveWithinRect = tool.getContainerRect();
+
+
+                        //var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
 
                         posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
                             posY = Q.info.isTouchscreen ? evt.touches[0].clientY : evt.clientY,
@@ -282,8 +351,10 @@
                             divLeft = elementToMove.offsetLeft,
                             eWi = parseInt(elementToMove.offsetWidth),
                             eHe = parseInt(elementToMove.offsetHeight),
-                            cWi = moveWithinEl == window ? window.innerWidth : moveWithinEl.offsetWidth,
-                            cHe = moveWithinEl == window ? window.innerHeight : moveWithinEl.offsetHeight;
+                            cWi = moveWithinRect.width,
+                            cHe = moveWithinRect.height;
+                            maxX = moveWithinRect.x + moveWithinRect.width;
+                            maxY = moveWithinRect.y + moveWithinRect.height;
                         diffX = posX - divLeft, diffY = posY - divTop;
 
                         tool.state.onMovingStart.handle.call(tool);

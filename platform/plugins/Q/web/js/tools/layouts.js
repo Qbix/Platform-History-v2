@@ -187,7 +187,6 @@
         },
 
         tiledVerticalMobile: function (container, count) {
-            console.log('tiledVerticalMobile');
             var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
             var size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
 
@@ -647,7 +646,6 @@
     }
 
     function simpleGrid(count, size, perRow, rowsNum) {
-        console.log('simpleGrid', count, size, perRow, rowsNum)
         var rects = [];
         var rectHeight;
         var rectWidth = size.parentWidth / perRow;
@@ -710,8 +708,6 @@
 
             if(rowItemCounter == 1) {
                 var y = (prevRect.y + prevRect.height);
-                console.log('simpleGridBasedOnRowsNum', y, currentRow);
-                console.log('simpleGridBasedOnRowsNum perRow', perRow);
                 var x = 0;
             } else {
                 var y = prevRect.y;
