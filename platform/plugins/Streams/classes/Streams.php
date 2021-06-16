@@ -2964,7 +2964,7 @@ abstract class Streams extends Base_Streams
 					'streamName' => $sn,
 					'userId' => $asUserId,
 					'streamType' => $stream->type,
-					'state' => 'participating',
+					'state' => $state,
 					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
 					'posted' => !empty($options['posted']) ? 'yes' : 'no',
 					'extra' => !empty($options['extra']) ? $options['extra'] : ''
