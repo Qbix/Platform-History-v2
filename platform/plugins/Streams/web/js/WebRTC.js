@@ -1830,7 +1830,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
 									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
 									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityName: Q.Users.communityName}) + `</li>`;
+									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
                         instructionsPermissionDialog.appendChild(dialogList);
                         Q.Dialogs.push({
                             title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
@@ -6611,7 +6611,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
 									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
 									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityName: Q.Users.communityName}) + `</li>
+									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityId: Q.Users.communityId}) + `</li>
 									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
 									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
                             instructionsPermissionDialog.appendChild(dialogList);
@@ -6950,7 +6950,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
                         bindStreamsEvents(stream);
-                        WebRTCconference.switchTo(Q.Users.communityName, streamName, function (newInstance) {
+                        WebRTCconference.switchTo(Q.Users.communityId, streamName, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
 

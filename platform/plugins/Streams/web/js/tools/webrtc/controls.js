@@ -451,7 +451,7 @@
 					dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your iOS Settings</li>
 									<li>Open "Privacy"</li>
 									<li>Find "` + kind + `" and open it</li>
-									<li>Find "` + Q.Users.communityName + `" and enable</li>`;
+									<li>Find "` + Q.Users.communityId + `" and enable</li>`;
 					instructionsPermissionDialog.appendChild(dialogList);
 					Q.Dialogs.push({
 						title: 'Instructions',
@@ -468,7 +468,7 @@
 					dialogList.className = 'Streams_webrtc_instructions_dialog';
 					dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your Android Settings</li>
 									<li>Open "Apps & notifications"</li>
-									<li>Find "` + (Q.Users.communityName) + `" and open it</li>
+									<li>Find "` + (Q.Users.communityId) + `" and open it</li>
 									<li>Tap on Permissions</li>
 									<li>Enable ` + kind + `</li>`;
 					instructionsPermissionDialog.appendChild(dialogList);
