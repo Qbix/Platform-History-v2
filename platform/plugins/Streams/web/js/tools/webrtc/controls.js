@@ -1074,9 +1074,9 @@
 						viewModeToApply = 'loudest';
 					} else if(tool.state.loudestMode == 'allButMe') {
 						viewModeToApply = 'loudestExceptMe';
-					} /*else {
-						viewModeToApply = 'maximizeStatic';
-					}*/
+					} else {
+						viewModeToApply = 'fullScreen';
+					}
 				} else if(activeViewMode == 'tiled' || activeViewMode == 'tiledMobile') {
 					viewModeToApply = 'tiledView';
 				} else if(activeViewMode == 'regular') {
@@ -3993,8 +3993,18 @@
                                         let file = files[0], mime = file.type;
                                         let reader = new  FileReader();
                                         reader.readAsArrayBuffer(file);
-                                        reader.onload = function(e) {
-                                            // The file reader gives us an ArrayBuffer:
+                                        reader.addEventListener('loadstart', loadStartHandler);
+                                        reader.addEventListener('load', loadHandler);
+                                        reader.addEventListener('loadend', loadEndHandler);
+                                        reader.addEventListener('progress', updateProgress);
+                                        reader.addEventListener('error', errorHandler);
+                                        reader.addEventListener('abort', abortHandler);
+
+                                        var loadProgressBar = new ProgressBar();
+                                        loadProgressBar.show();
+
+                                        function loadHandler(e) {
+											// The file reader gives us an ArrayBuffer:
                                             let buffer = e.target.result;
 
                                             // We have to convert the buffer to a blob:
@@ -4007,10 +4017,124 @@
                                                 sourceType: 'video',
                                                 title: files[0].name,
                                                 url: url,
+                                            }, function () {
+                                                loadProgressBar.updateTextStatus('loaded');
+                                                loadProgressBar.hide();
+                                            }, function (e) {
+                                                loadProgressBar.updateTextStatus('<span style="color:#ff9f9f;">' + e.message + '</span>');
                                             });
+
+                                            loadProgressBar.updateProgress(100);
+
+
                                         }
 
+                                        function loadStartHandler(evt) {
 
+                                        }
+
+                                        function loadEndHandler(evt) {
+
+                                        }
+
+                                        function abortHandler(evt) {
+                                            loadProgressBar.updateTextStatus('<span style="color:#ff9f9f;">File read cancelled</span>');
+                                        }
+
+                                        function errorHandler(evt) {
+                                        	console.log('errorHandler',  evt.target.error)
+
+                                            switch (evt.target.error.code) {
+                                                case evt.target.error.NOT_FOUND_ERR:
+                                                    loadProgressBar.updateTextStatus('<span style="color:#ff9f9f;">File Not Found!</span>');
+                                                    break;
+                                                case evt.target.error.NOT_READABLE_ERR:
+                                                    loadProgressBar.updateTextStatus('<span style="color:#ff9f9f;">File is not readable</span>');
+                                                    break;
+                                                case evt.target.error.ABORT_ERR:
+                                                    break; // noop
+                                                default:
+                                                    loadProgressBar.updateTextStatus('<span style="color:#ff9f9f;">An error occurred reading this file.</span>');
+                                            };
+                                        }
+
+                                        function updateProgress(evt) {
+                                            // evt is an ProgressEvent.
+                                            if (evt.lengthComputable) {
+                                                var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+                                                // Increase the progress bar length.
+                                                if (percentLoaded < 100) {
+                                                    loadProgressBar.updateProgress(percentLoaded);
+                                                }
+                                            }
+                                        }
+
+                                        function ProgressBar() {
+                                            var _progrssBarPopup = null;
+                                            var _barProggressEl = null;
+                                            var _progressText = null;
+                                            var _isHidden = true;
+                                            var _barWidth = 300;
+                                            var _barheight = 100;
+
+                                            console.log('createProgressBar')
+                                            var dialogue=document.createElement('DIV');
+                                            dialogue.className = 'Streams_webrtc_popup-progress-bar-popup';
+                                            dialogue.style.width = _barWidth + 'px';
+                                            dialogue.style.height = _barheight + 'px';
+                                            _progrssBarPopup = dialogue;
+
+                                            var dialogInner=document.createElement('DIV');
+                                            dialogInner.className = 'Streams_webrtc_popup-progress-bar-popup-inner';
+                                            var boxContent=document.createElement('DIV');
+                                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                                            var boxContentText = _progressText = document.createElement('DIV');
+                                            boxContentText.innerHTML = 'loading...';
+                                            var progressBar = document.createElement('DIV');
+                                            progressBar.className = 'Streams_webrtc_popup-progress-bar';
+                                            var progressEl = _barProggressEl = document.createElement('SPAN');
+                                            progressEl.className = 'Streams_webrtc_popup-progress-el';
+
+
+                                            progressBar.appendChild(progressEl);
+                                            boxContent.appendChild(boxContentText);
+                                            boxContent.appendChild(progressBar);
+
+                                            var close=document.createElement('div');
+                                            close.className = 'Streams_webrtc_popup-close-dialog-sign';
+                                            close.innerHTML = '&#10005;';
+                                            var popupinstance = this;
+                                            close.addEventListener('click', function() {
+                                                popupinstance.hide();
+                                            });
+                                            dialogue.appendChild(close);
+
+                                            dialogInner.appendChild(boxContent);
+                                            dialogue.appendChild(dialogInner);
+
+                                            this.show = function() {
+                                            	var boxRect = tool.advancedLiveStreamingBox.dialogueEl.getBoundingClientRect();
+                                            	var x = (boxRect.width / 2) - (_barWidth / 2);
+                                            	var y = (boxRect.height / 2) - (_barheight / 2);
+                                                _progrssBarPopup.style.top = y + 'px';
+                                                _progrssBarPopup.style.left = x + 'px';
+                                                tool.advancedLiveStreamingBox.dialogueEl.appendChild(_progrssBarPopup);
+                                            }
+
+                                            this.hide = function() {
+                                            	if(!tool.advancedLiveStreamingBox.dialogueEl.contains(_progrssBarPopup)) return;
+                                                tool.advancedLiveStreamingBox.dialogueEl.removeChild(_progrssBarPopup);
+                                            }
+
+                                            this.updateProgress = function(percemt) {
+                                                _barProggressEl.style.width = percemt + '%';
+                                                _barProggressEl.innerHTML = percemt + '%';
+                                            }
+
+                                            this.updateTextStatus = function(text) {
+                                                _progressText.innerHTML = text;
+                                            }
+										}
 
                                     }
 
@@ -6593,7 +6717,7 @@
                             dialogue.style.bottom = (controlsRect.height + 10) + 'px';
                         } else {
                             dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            //dialogue.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
+                            dialogue.style.top = '100px';
                         }
 
 

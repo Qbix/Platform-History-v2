@@ -8301,6 +8301,7 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
+	var href2 = href.split('?')[0];
 	if (!media) media = 'screen,print';
 	var links = document.getElementsByTagName('link');
 	var i, e, h, m;
@@ -9027,9 +9028,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										var href1 = Q.getObject("href", stylesheet);
-										var href2 = Q.getObject("href", e);
-										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
+										var sh = stylesheet.href, eh = e.href;
+										if ((sh && sh.split('?')[0]) === (eh && eh.split('?')[0])
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
