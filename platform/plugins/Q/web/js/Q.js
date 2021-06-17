@@ -8303,15 +8303,14 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	href = Q.url(href, null, options);
 	var href2 = href.split('?')[0];
 	if (!media) media = 'screen,print';
-	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
-	var i, e, h, m, p;
+	var i, e, h, m;
+	var href2 = href.split('?')[0];
 	for (i=0; i<links.length; ++i) {
 		e = links[i];
 		m = e.getAttribute('media');
 		h = e.getAttribute('href');
-		if ((m && m !== media)
-		|| (h !== href && h !== href2)) {
+		if ((m && m !== media) || h.split('?')[0] !== href2) {
 			continue;
 		}
 		// A link element with this media and href is already found in the document.
@@ -9018,7 +9017,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							return;
 						}
 						Q.each(document.getElementsByTagName(tag), function (k, e) {
-							if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
+							if (tag === 'link' && e.getAttribute('rel').toLowerCase() !== 'stylesheet') {
 								return;
 							}
 
@@ -13481,7 +13480,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+				//mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;
