@@ -229,24 +229,13 @@ Sp.encodeHTML = function _String_prototype_encodeHTML(convert) {
 /**
  * Reverses what encodeHTML does
  * @method decodeHTML
- * @param {Array} [convert] Array of codes to unconvert. Can include
- *  '&amp;', '&lt;', '&gt;, '&quot;', '&apos;', "<br>", "<br />"
  * @return {String}
  */
-Sp.decodeHTML = function _String_prototype_decodeHTML(unconvert) {
-	var conversions = {
-		'&amp;': '&',
-		'&lt;': '<',
-		'&gt;': '>',
-		'&quot;': '"',
-		'&apos;': "'",
-		"<br>": "\n",
-		"<br />": "\n"
-	};
-	if (unconvert) {
-		conversions = Q.take(conversions, unconvert);
-	}
-	return this.replaceAll(conversions);
+Sp.decodeHTML = function _String_prototype_decodeHTML() {
+	var e = document.createElement('textarea');
+	e.innerHTML = this;
+	// handle case of empty input
+	return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 };
 
 /**
@@ -5103,7 +5092,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		function _loadToolScript_loaded(params, subjects) {
 			// in this function, toolConstructor starts as a string
 			if (params.html) {
-				var element = document.createElement('div');
+				var div = document.createElement('div');
 				div.innerHTML = html;
 				var scripts = div.getElementsByTagName('script');
 				Q.each(scripts, function () { // run scripts in order
@@ -9951,21 +9940,20 @@ function _processTemplateElements(container) {
 	var tpi = Q.Template.info;
 	var trash = [];
 	Q.each(container.getElementsByTagName('template'), function () {
+		var element = this;
 		var id = this.id || this.getAttribute('data-name');
 		var type = this.getAttribute('data-type') || 'handlebars';
-		var text = this.getAttribute('data-text');
-		text = text ? [text] : [];
 		var n = Q.normalize(id);
-		tpl[n] = script.innerHTML.trim();
-		tpl[n] = {type: type};
+		tpl[n] = this.innerHTML.decodeHTML().trim();
+		tpi[n] = {type: type};
 		Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
-			var attr = script.getAttribute('data-' + aspect);
+			var attr = element.getAttribute('data-' + aspect);
 			var value = attr && JSON.parse(attr);
 			if (value) {
 				tpi[n][aspect] = value;
 			}
 		});
-		trash.unshift(script);
+		trash.unshift(element);
 	});
 	Q.each(trash, function () {
 		Q.removeElement(this);
@@ -10001,15 +9989,14 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	// defaults to handlebars templates
 	var o = Q.extend({}, Q.Template.load.options, options);
 	var tpl = Q.Template.collection;
-	var tpi = Q.Template.info;
-	
+
 	_processTemplateElements(document);
 
 	// check if template is cached
 	var n = Q.normalize(name);
 	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
-		callback(null, result);
+		Q.handle(callback, this, [null, result]);
 		return true;
 	}
 	// now try to load template from server
