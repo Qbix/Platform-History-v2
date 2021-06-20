@@ -1082,9 +1082,7 @@ class Q_Response
 		$tags = array();
 		foreach ($templates as $template) {
 			$attributes = array(
-				'cdata' => false,
-				'raw' => true,
-				'type' => 'text/'.$template['type'], 
+				'data-type' => $template['type'], 
 				'id' => Q_Utils::normalize($template['name']),
 				'data-slot' => $template['slot']
 			);
@@ -1093,7 +1091,7 @@ class Q_Response
 					$attributes["data-$aspect"] = Q::json_encode($template[$aspect]);
 				}
 			}
-			$tags[] = Q_Html::script($template['content'], $attributes);
+			$tags[] = Q_Html::tag('template', $attributes, $template['content']);
 		}
 		return implode($between, $tags);
 	}
