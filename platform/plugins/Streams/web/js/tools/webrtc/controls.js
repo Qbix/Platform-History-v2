@@ -451,7 +451,7 @@
 					dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your iOS Settings</li>
 									<li>Open "Privacy"</li>
 									<li>Find "` + kind + `" and open it</li>
-									<li>Find "` + Q.Users.communityName + `" and enable</li>`;
+									<li>Find "` + Q.Users.communityId + `" and enable</li>`;
 					instructionsPermissionDialog.appendChild(dialogList);
 					Q.Dialogs.push({
 						title: 'Instructions',
@@ -468,7 +468,7 @@
 					dialogList.className = 'Streams_webrtc_instructions_dialog';
 					dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Go to your Android Settings</li>
 									<li>Open "Apps & notifications"</li>
-									<li>Find "` + (Q.Users.communityName) + `" and open it</li>
+									<li>Find "` + (Q.Users.communityId) + `" and open it</li>
 									<li>Tap on Permissions</li>
 									<li>Enable ` + kind + `</li>`;
 					instructionsPermissionDialog.appendChild(dialogList);
@@ -2309,12 +2309,16 @@
 						var screens = participant.screens;
 
 						this.manuallyToggled = manually;
+                        var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
+                        console.log('activeViewMode', activeViewMode)
 						if(this.isActive == false) {
                             for(let s in screens) {
                                 if(screens[s].screensharing || (screens[s].trackEl && !screens[s].trackEl.srcObject.active)) continue;
                                 this.showPartcicipantScreens(screens[s], manually);
                             }
-                            if(screens.length != 0) {
+                            console.log('activeViewMode screens.length', screens.length, screens.length != 0 || activeViewMode == 'audio', screens.length != 0, activeViewMode == 'audio')
+
+                            if(screens.length != 0 || activeViewMode == 'audio') {
                             	this.unmuteVideo();
                             } else {
                                 tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
@@ -2382,12 +2386,16 @@
                             screens = this.participant.screens;
 						}
 
-						for(var s in screens) {
+                        var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
+
+
+                        for(var s in screens) {
 							let screen = screens[s];
 
 							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
                             if(hasNoVideo && manually) {
 								tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
+								//if(activeViewMode == 'audio') screen.show();
 								return;
 							} else if(hasNoVideo && !screen.videoIsChanging) {
 								return;
