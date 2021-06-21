@@ -158,7 +158,9 @@ table { table-layout: fixed; }
 #dashboard .Q_tabs_tab.Streams_preview_tool { padding-left: 10px; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background-color: #222; color: white; width: 100%; }
-#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab::before,
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; vertical-align: bottom; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; }
 #dashboard .Q_tabs_tab * { white-space: nowrap; overflow-x: hidden; overflow-y: visible; text-overflow: ellipsis; vertical-align: top; }
 #dashboard .Q_tabs_vertical .Q_tabs_tab { background: transparent; }
 #dashboard .Q_tabs_tab,
