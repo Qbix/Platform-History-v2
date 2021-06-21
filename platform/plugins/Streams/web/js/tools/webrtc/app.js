@@ -10697,7 +10697,7 @@ window.WebRTCconferenceLib = function app(options){
 
     }
 
-    var initWithNodeJs = function(callback){
+    var initWithNodeJs = function(oldLocalParticipant, callback){
         log('initWithNodeJs');
 
         var findScript = function (src) {
@@ -10733,13 +10733,19 @@ window.WebRTCconferenceLib = function app(options){
 
             //enableiOSDebug();
             log('initWithNodeJs: socket: connected: ' + socket.connected + ',  app.state: ' +  app.state);
-            if(localParticipant == null) {
+            log('initWithNodeJs: socket: localParticipant', localParticipant);
+            if(localParticipant == null && oldLocalParticipant == null) {
                 localParticipant = new Participant();
                 localParticipant.sid = socket.id;
                 localParticipant.identity = options.username;
                 localParticipant.isLocal = true;
                 localParticipant.online = true;
                 roomParticipants.push(localParticipant);
+            } else if(oldLocalParticipant != null) {
+                log('initWithNodeJs: switchRoom');
+
+                oldLocalParticipant.sid = socket.id;
+                localParticipant = oldLocalParticipant;
             }
 
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) {
@@ -10859,8 +10865,15 @@ window.WebRTCconferenceLib = function app(options){
             Twilio = window.Twilio = options.TwilioInstance;
             initWithTwilio(callback);
         } else {
-            initWithNodeJs(callback);
+            initWithNodeJs(null, callback);
         }
+    }
+
+    app.switchFrom = function(localParticipant, callback){
+        app.state = 'connecting';
+        log('app.switchFrom')
+        log('app.switchFrom localParticipant', localParticipant.audioTracks())
+        initWithNodeJs(localParticipant, callback);
     }
 
     app.switchTo = function(publisherId, streamName, callback){
@@ -10876,12 +10889,12 @@ window.WebRTCconferenceLib = function app(options){
         var initOptions = options;
         initOptions.roomName = streamName;
         initOptions.roomPublisher = publisherId;
-        initOptions.streams = currentStreams;
+        initOptions.streams = [];
         let streamingParticipant = app.screensInterface.fbLive.streamingParticipant();
         initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.screensInterface.fbLive.streamingParticipant() != null ? app.screensInterface.fbLive.streamingParticipant().connection : null};
         initOptions.startWith = {
-            audio:app.conferenceControl.micIsEnabled() ? true : false,
-            video:app.conferenceControl.cameraIsEnabled() || app.conferenceControl.screensharingIsEnabled() ? true : false
+            audio:false,
+            video:false
         };
 
         var newConferenceInstance = window.WebRTCconferenceLib(initOptions);
@@ -10890,7 +10903,9 @@ window.WebRTCconferenceLib = function app(options){
         //newConferenceInstance.screensInterface.canvasComposer.audioComposer.mix();
         newConferenceInstance.screensInterface.fbLive = app.screensInterface.fbLive;
 
-        newConferenceInstance.init();
+        //newConferenceInstance.init();
+
+        app.switchFrom(localParticipant);
 
         newConferenceInstance.event.on('initNegotiationEnded', function (roomParticipants) {
             console.log('initNegotiationEnded switch', newConferenceInstance)

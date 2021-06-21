@@ -100,7 +100,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             faces: false,
             onWebRTCRoomCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
-            onWebrtcControlsCreated: new Q.Event()
+            onWebrtcControlsCreated: new Q.Event(),
+            hosts:[]
         };
         var WebRTCconference;
 
@@ -2796,6 +2797,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 } catch (e) {
 
                 }
+                //check whether it was room switching
+                /*if(participant.isLocal) {
+                    for(let s in roomScreens) {
+                        log('onParticipantConnected for', participant.isLocal, roomScreens[s].participant.sid == participant.sid)
+
+                        if(roomScreens[s].participant.isLocal && roomScreens[s].participant.sid != participant.sid) {
+                            log('onParticipantConnected for break', roomScreens[s].participant.sid, participant.sid)
+
+                            roomScreens[s].participant = participant;
+                            return;
+                        }
+                    }
+                }*/
                 var screen = new Screen();
                 screen.sid = participant.sid;
                 screen.participant = participant;
@@ -3062,6 +3076,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
             function onParticipantConnected(participant) {
+                log('onParticipantConnected', participant,participant.isLocal)
+
                 if(participant.screens.length == 0) {
                     var newScreen = createRoomScreen(participant);
                     addScreenToCommonList(newScreen);
@@ -3970,7 +3986,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(layout == 'audioScreensGrid') {
                     var screenClass = 'Streams_webrtc_audio-screen';
 
-                    var elements = roomScreens.map(function (screen) {
+                    var elements = [];
+                    for(var s in roomScreens) {
+                        let screen = roomScreens[s];
 
                         for (var o in screenClasses) {
                             if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
@@ -3980,10 +3998,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             screen.screenEl.classList.add(screenClass);
                         }
 
-                        return screen.screenEl;
-                    }).filter(function (e) {
-                        return e != null;
-                    });
+                        var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : null;
+
+                        if(_options.hosts.indexOf(userId) != -1) {
+                            elements.unshift(screen.screenEl);
+                        } else {
+                            elements.push(screen.screenEl);
+                        }
+                    }
 
                     var containerClass = 'Streams_webrtc_audio-screens-grid';
                     for (var x in gridClasses) {
@@ -4588,8 +4610,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var ratio = parentRect.width / parentRect.height;
                     var isRatherMobile = parentRect.width < 360 || parentRect.height < 360;
                     if(isRatherMobile && ratio > 4.2) {
-                        var rectWidth = parentRect.height / 100  * 50;
-                        var rectHeight = rectWidth + 19;
+                        var rectHeight = (parentRect.height / 100  * 80) + 19;
+                        if(rectHeight > parentRect.height) rectHeight = parentRect.height;
+                        var rectWidth = rectHeight - 19;
                         var spaceBetween = 15;
                         var startFrom  = (parentRect.width / 2) - ((rectWidth * count) + (spaceBetween * count)) / 2;
                         var prevRect = new DOMRect(startFrom, 0, 0, 0);
@@ -6831,6 +6854,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 Q.Streams.WebRTCRooms.push(webRTCInstance);
 
                                 _options.conferenceStartedTime = stream.getAttribute('startTime');
+                                _options.hosts = response.slots.room.hosts;
                                 log('start: createOrJoinRoomStream: mode ' + _options.mode)
                                 bindStreamsEvents(stream);
                                 if(_options.mode === 'twilio') {
@@ -6944,8 +6968,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         if(Q.Streams.WebRTCRooms == null){
                             Q.Streams.WebRTCRooms = [];
                         }
-
-                        Q.Streams.WebRTCRooms.push(webRTCInstance);
 
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)

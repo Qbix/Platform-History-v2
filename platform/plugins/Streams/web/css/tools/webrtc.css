@@ -16,7 +16,7 @@
 }
 
 .Streams_webrtc_room-media.Streams_webrtc_audio-screens-grid {
-    /*pointer-events: all !important;*/
+    pointer-events: all !important;
     overflow: auto;
     position: relative;
 }
@@ -983,9 +983,9 @@ and (max-device-width : 320px) {
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_participant-name-text{
     width: 100%;
-    white-space: nowrap;
+    /*white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;*/
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-con {
