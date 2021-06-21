@@ -274,8 +274,8 @@ span.c3 { font-weight: bold; }
 
 .Q_notMobile .MyApp_dashboard_logo { float: left; padding: 0; margin: 5px 0 0 10px; background-position: left top; }
 .Q_notMobile .MyApp_dashboard_logo h1 { padding: 0; margin: 0; padding: 0 0 0 50px; line-height: 40px; }
-.Q_notMobile #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
-.Q_notMobile #dashboard .Q_tabs_tab { margin: 0 10px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tab { margin: 0 10px; }
 
 /* The following lines override default styles for a sidebar-style website */
 /* You can remove them or set the config Q/response/layout/sidebar = true */
