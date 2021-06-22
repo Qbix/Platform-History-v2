@@ -782,6 +782,7 @@
                     }
 
                     function onWheel(e) {
+                        if(!tool.state.active) return;
                         _elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
                         var elRect = _elementToMove.getBoundingClientRect();
                         var elementPosition = elementToMove.style.position;
