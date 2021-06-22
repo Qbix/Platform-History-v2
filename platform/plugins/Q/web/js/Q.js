@@ -13219,7 +13219,7 @@ Q.Audio.speak = function (text, options) {
 		_proceed(text);
 	}
 	function _chooseVoice(text, voicesList, knownVoices) {
-		var language = o.locale.split('-')[0];
+		var language = o.locale.split('-')[0].toLowerCase();
 		var gender = o.gender;
 		var voice = null;
 		var toggled = false;
@@ -13229,8 +13229,17 @@ Q.Audio.speak = function (text, options) {
 		function _search() {
 			var result = null;
 			var av = Q.getObject([gender, o.locale], knownVoices)
-				|| Q.getObject([gender, language], knownVoices)
-				|| [];
+				|| Q.getObject([gender, language], knownVoices);
+			if (!av) {
+				var prefix = language + '-';
+				Q.each(knownVoices[gender], function (key) {
+					if (key.toLowerCase().startsWith(prefix)) {
+						av = this;
+						return false;
+					}
+				});
+			}
+			av = av || [];
 			if (typeof av !== "object" || !av.length){
 				return {error: "Q.Audio.speak: no such known voice"};
 			}
