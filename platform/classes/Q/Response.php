@@ -1840,6 +1840,7 @@ class Q_Response
 		if (empty(self::$cookies)) {
 			return;
 		}
+
 		foreach (self::$cookiesToRemove as $name => $args) {
 			list($path, $domain, $secure, $httponly) = $args;
 			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly);
