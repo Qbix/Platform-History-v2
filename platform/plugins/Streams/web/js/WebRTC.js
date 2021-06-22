@@ -7220,6 +7220,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 roomId: stream.fields.name,
                 roomPublisherId: stream.fields.publisherId,
                 mode: options.mode,
+                defaultDesktopViewMode: options.defaultDesktopViewMode,
+                defaultMobileViewMode: options.defaultDesktopViewMode,
                 onWebrtcControlsCreated: function () {
                     //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
                     // may be tool doesn't close at all?

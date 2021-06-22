@@ -111,7 +111,9 @@
                         element.style.width = 'auto';
                     }
 
+                    let notRenderedYet = false;
                     if (!container.contains(element)) {
+                        notRenderedYet = true;
                         container.appendChild(element);
                     }
 
@@ -119,11 +121,20 @@
                         element.style.position = 'absolute';
                     }
                     var elementRect = element.getBoundingClientRect();
+                    var elementTop = element.offsetTop;
+                    var elementLeft = element.offsetLeft;
                     /*if(elementRect.width != 0 && elementRect.height != 0 && layoutRect.width != 0 && layoutRect.height != 0 && element.style.height == 'auto') {
                         element.style.height = '';
                         element.style.width = '';
                     }*/
-                    rects.push(elementRect);
+                    if(notRenderedYet == false) {
+                        elementRect = new DOMRect(elementLeft, elementTop, elementRect.width, elementRect.height);
+                        rects.push(elementRect);
+                    } else {
+                        elementRect = new DOMRect(0, 0, elementRect.width, elementRect.height);
+                        rects.push(elementRect);
+                    }
+
                     tool.state.currentMappedRects.push({rect: layoutRect, el: element});
 
                 }
@@ -140,7 +151,8 @@
                         var ts = elements[i].style;
 
                         if(ts.left == '') ts.left = rect2.left + 'px';
-                        if(ts.top == '') ts.top = rect2.top + 'px';
+                        if(ts.top == '')  ts.top = rect2.top + 'px';
+
                         if(ts.width == '') ts.width = rect2.width + 'px';
                         if(ts.height == '') ts.height = rect2.height + 'px';
 
@@ -149,8 +161,8 @@
                         var currentWidth = parseFloat(ts.width);
                         var currentHeight = parseFloat(ts.height);
 
-                        if(currentLeft !== rect2.left) ts.left = rect1.left + (rect2.left - rect1.left) * y + 'px';
-                        if(currentTop !== rect2.top) ts.top = rect1.top + (rect2.top - rect1.top) * y + 'px';
+                        if(currentLeft !== rect2.left) ts.left = (rect1.left + (rect2.left - rect1.left) * x) + 'px';
+                        if(currentTop !== rect2.top) ts.top = (rect1.top + (rect2.top - rect1.top) * y) + 'px';
 
 
                         if((rect2.width != 0 && currentWidth != rect2.width) && currentWidth !== rect2.width) ts.width = rect1.width + (rect2.width - rect1.width) * y + 'px';

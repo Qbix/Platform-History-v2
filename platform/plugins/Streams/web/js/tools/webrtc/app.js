@@ -8575,6 +8575,7 @@ window.WebRTCconferenceLib = function app(options){
             app.state = 'connected';
 
             for (var s in streams) {
+                if(streams[s] == null) continue;
                 var localTracks = streams[s].getTracks();
 
                 for (var i in localTracks) {
