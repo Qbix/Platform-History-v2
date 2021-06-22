@@ -101,7 +101,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             onWebRTCRoomCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
-            hosts:[]
+            hosts:[],
+            defaultDesktopViewMode:null,
+            defaultMobileViewMode:null
         };
         var WebRTCconference;
 
@@ -2659,9 +2661,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             };
 
             if(Q.info.isMobile){
-                viewMode = prevViewMode = 'maximizedMobile';
-            } else viewMode = prevViewMode = 'regular';
+                viewMode = prevViewMode = _options.defaultMobileViewMode || 'maximizedMobile';
 
+            } else viewMode = prevViewMode = _options.defaultDesktopViewMode || 'regular';
+            console.log('viewMode', viewMode);
             if(_options.minimizeOnPageSwitching) {
                 Q.Page.onActivate('').set(function(){
                     if(viewMode == 'minimized' || viewMode == 'minimizedMobile') return;
@@ -2671,6 +2674,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }, 'Streams.WebRTC');
             }
 
+            function setViewMode(mode) {
+                viewMode = mode;
+                updateLayout();
+            }
 
             /**
              * Updates current layout; usually is called by handlers binded on events triggered by WebRTC lib (app.js)
@@ -6527,6 +6534,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             return {
+                setViewMode:setViewMode,
                 updateLayout:updateLayout,
                 removeScreensByParticipant:removeScreensByParticipant,
                 removeScreenFromCommonList:removeScreenFromCommonList,
@@ -6566,6 +6574,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(key == 'mode') continue;
                     _options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
                 }
+
+                if(!Q.info.isMobile && options.defaultDesktopViewMode != null) {
+                    screensRendering.setViewMode(options.defaultDesktopViewMode );
+                } else if(Q.info.isMobile && options.defaultMobileViewMode != null) {
+                    screensRendering.setViewMode(options.defaultMobileViewMode);
+                }
             }
 
         }
@@ -6600,6 +6614,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     appDebug.sendReportToServer();
                 }, 3000);
                 overrideDefaultOptions(options);
+
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
