@@ -573,7 +573,7 @@ class Q
 		 */
 		$result = self::event(
 			'Q/readFile',
-			compact('filename', 'params', 'once', 'get_vars'),
+			compact('filename', 'options'),
 			'before',
 			true
 		);

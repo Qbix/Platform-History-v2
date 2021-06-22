@@ -1882,7 +1882,7 @@ class Q_Response
 		if ($domain === true) {
 			$domain2 = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
 		} else {
-			$domain2 = $domain ? $domain : null;
+			$domain2 = $domain ? $domain : '';
 		}
 		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
 	}
