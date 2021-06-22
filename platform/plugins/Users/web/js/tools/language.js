@@ -54,12 +54,12 @@ Q.Tool.define('Users/language', function () {
 			name: tool.name
 		}).on('change', function () {
 			var $this = $(this);
-			var newLang = $this.val();
+			var language = $this.val();
 
 			// if user doesn't logged, just return new language, without request to server
 			if (!currentUser) {
-				tool.currentLanguage = newLang;
-				Q.handle(state.onComplete, tool, [newLang]);
+				tool.currentLanguage = language;
+				Q.handle(state.onComplete, tool, [language]);
 				return true;
 			}
 
@@ -72,12 +72,12 @@ Q.Tool.define('Users/language', function () {
 					return Q.alert("Users/language tool: " + msg);
 				}
 
-				tool.currentLanguage = newLang;
-				Q.handle(state.onComplete, tool, [newLang]);
+				tool.currentLanguage = language;
+				Q.handle(state.onComplete, tool, [language]);
 			}, {
 				method: 'post',
 				fields: {
-					newLang: newLang
+					language: language
 				}
 			});
 		});

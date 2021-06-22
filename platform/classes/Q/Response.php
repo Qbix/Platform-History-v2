@@ -1536,13 +1536,13 @@ class Q_Response
 	 * of the output page. Defaults to "en". It is used in htmlAttributes method.
 	 * @method language
 	 * @static
-	 * @param {string} [$newLanguage] Set a new code here to change the language
+	 * @param {string} [$language] Set a new code here to change the language
 	 * @return {string}
 	 */
-	static function language($newLanguage = null)
+	static function language($language = null)
 	{
-		if (isset($newLanguage)) {
-			self::$language = $newLanguage;
+		if (isset($language)) {
+			self::$language = $language;
 		}
 		return self::$language;
 	}
