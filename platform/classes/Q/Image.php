@@ -368,6 +368,7 @@ class Q_Image
 				$mh = imagesy($merge);
 			}
 		}
+		$dwMax = $dhMax = 0;
 		ksort($sizes); // to make sure square sizes get listed before others, because names are shorter
 		foreach ($sizes as $size => $name) {
 			if (empty($name)) {
@@ -417,7 +418,7 @@ class Q_Image
 				$sx = round($sx + ($sw - $w2) / 2);
 				$sy = round($sy + ($sh - $h2) / 2);
 			} else {
-				$size = '';
+				$size = 'x';
 				$dw = $w2 = $sw;
 				$dh = $h2 = $sh;
 			}
@@ -442,9 +443,9 @@ class Q_Image
 			
 			if ($dw === $dh and !$square) {
 				// save symlinks when possible, instead of copying large images
-				$squarefilename = $writePath.DS."$dw.$ext";
+				$squarefilename = $writePath."$dw.$ext";
 				if (file_exists($squarefilename)) {
-					Q_Utils::symlink($squarefilename, $writePath.DS.$name);
+					Q_Utils::symlink($squarefilename, $writePath.$name);
 					continue;
 				}
 			}
@@ -472,6 +473,14 @@ class Q_Image
 			if ($res = call_user_func($func, $thumb, $writePath.$name)) {
 				$data[$size] = $subpath ? "$path/$subpath/$name" : "$path/$name";
 			}
+			if ($dw > $dwMax and $size !== 'x') {
+				$dwMax = $dw;
+				$data['largestWidthSize'] = $size;
+			}
+			if ($dh > $dhMax and $size !== 'x') {
+				$dhMax = $dh;
+				$data['largestHeightSize'] = $size;
+			}
 		}
 		$data[''] = $subpath ? "$path/$subpath" : "$path";
 
@@ -489,6 +498,30 @@ class Q_Image
 			'after'
 		);
 		return $data;
+	}
+	
+	/**
+	 * Call this when handling an HTTP request that submitted the image,
+	 * either in the $_FILES superglobal or pass inside the "data" parameter.
+	 * You can also override any of the parameters from the request, by passing them in.
+	 * @method saveFromRequest
+	 * @param {array} [$params] Parameters that can come from the request
+	 *   @param {string} [$params.icon.data]  Required if $_FILES is empty. Base64-encoded  data URI - see RFC 2397
+	 *   @param {string} [$params.icon.path="Q/uploads"] parent path under web dir (see subpath)
+	 *   @param {string} [$params.icon.subpath=""] subpath that should follow the path, to save the image under
+	 *   @param {string} [$params.icon.merge=""] path under web dir for an optional image to use as a background
+	 *   @param {string} [$params.icon.crop] array with keys "x", "y", "w", "h" to crop the original image
+	 * @param {string} [$params.save='x'] name of config under Q/image/sizes, which
+	 *  are an array of $size => $basename pairs
+	 *  where the size is of the format "WxH", and either W or H can be empty.
+	 *  These are stored in the config for various types of images, 
+	 *  and you pass the name of the config, so that e.g. clients can't simply
+	 *  specify their own sizes.
+	 * @return {array} Information about the saved image
+	 */
+	function saveFromRequest($params = null)
+	{
+		return Q::event('Q/image/post', $params);
 	}
 	
 	/**

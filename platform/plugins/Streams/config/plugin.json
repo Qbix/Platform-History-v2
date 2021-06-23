@@ -139,7 +139,7 @@
 					"leftCount"
 				],
 				"admins": ["Users/owners", "Users/admins"],
-				"create": ["Users/owners", "Users/admins"],
+				"canCreate": ["Users/owners", "Users/admins"],
 				"invite": {
 					"dialog": {
 						"templateName": "Streams/invite"
