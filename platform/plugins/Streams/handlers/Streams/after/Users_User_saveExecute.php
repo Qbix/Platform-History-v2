@@ -57,7 +57,7 @@ function Streams_after_Users_User_saveExecute($params)
 	and !$user->get('skipIconSearch', false)
 	and $search = Q_Config::get('Users', 'icon', 'search', array())
 	and !Users::isCustomIcon($user->icon)) {
-		foreach ($search as $service) {
+		if ($search) foreach ($search as $service) {
 			try {
 				$fullName = Q::ifset(Streams::$cache, 'fullName', null);
 
