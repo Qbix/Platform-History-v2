@@ -55,7 +55,7 @@ function Streams_after_Users_User_saveExecute($params)
 	}
 	if (!$user->get('leaveDefaultIcon', false)
 	and !$user->get('skipIconSearch', false)
-	and $search = Q_Config::get('Users', 'icon', 'search', array())
+	and $search = Q_Config::get('Users', 'register', 'icon', 'search', array())
 	and !Users::isCustomIcon($user->icon)) {
 		if ($search) foreach ($search as $service) {
 			try {
