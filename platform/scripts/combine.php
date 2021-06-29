@@ -243,7 +243,7 @@ function Q_combine_preload($matches)
 	file_put_contents($filename, $contents);
 	echo "\t Saving $basename\n";
 	$preloadUrl = substr($dirname, strlen(APP_WEB_DIR)+1) . '/'
-		. str_replace(DS, '/', $filename);
+		. str_replace(DS, '/', $basename);
 	$preload[$dest][] = $preloadUrl;
 	return $filename;
 }
