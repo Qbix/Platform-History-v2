@@ -11,19 +11,20 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 {
     /**
      * Creates or joins a room
-     * @method createOrJoinRoom
+     * @method getRoomStream
      * @param {string} $publisherId Id of room's publisher/initiator
      * @param {string} $roomId Room id in Qbix (last marp of stream name)
      * @param {string} $resumeClosed Use existing stream if it exists
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
-    function createOrJoinRoom($publisherId, $roomId, $resumeClosed) {
+    function getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
-        $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed);
+        $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed, $writeLevel);
 
+        //print_r($stream->get('writeLevel'));die;
         $endTime = $stream->getAttribute('endTime');
         $startTime = $stream->getAttribute('startTime');
         if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
@@ -62,15 +63,8 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             }
         }
 
-        $hosts = Users_Contact::select()->where(array(
-            'userId' => Users::currentCommunityId(true),
-            'label' => array("Users/hosts")
-        ))->fetchDbRows(null, null, 'contactUserId');
-        $hosts = array_keys($hosts);
-
         return array(
             'stream' => $stream,
-            'hosts' => $hosts,
             'roomId' => $stream->name,
             'socketServer' => $socketServer,
             'turnCredentials' => $turnServers,

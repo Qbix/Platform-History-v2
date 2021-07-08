@@ -273,6 +273,14 @@
 						});
 					}
 				}
+				tool.WebRTCLib.event.on('joined', function (participant) {
+					if(participant.sid == 'recording') return;
+
+					var participantsCount = tool.WebRTCLib.roomParticipants().length;
+					console.log('controls:participantConnected ', participantsCount)
+					tool.usersCounter.innerHTML = participantsCount;
+
+				});
 				tool.WebRTCLib.event.on('participantConnected', function (participant) {
 					if(participant.sid == 'recording') return;
 					setRealName(participant, function(name){
@@ -945,7 +953,7 @@
 			 * @method toggleAudio
 			 */
 			toggleAudio: function () {
-				var tool = this;
+                var tool = this;
 				if(_isAndroidCordova && !tool.microphonePermissionGranted) {
 					tool.WebRTCLib.conferenceControl.requestAndroidMediaPermissions({audio: true}, function(){
 						tool.microphonePermissionGranted = true;
@@ -961,10 +969,15 @@
 				}).length;
 
 				if(tool.WebRTCLib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
+					console.log('toggleAudio disable audio', )
 					tool.WebRTCLib.conferenceControl.disableAudio();
 				} else {
-					tool.WebRTCLib.conferenceControl.enableAudio(function (e) {
-						if(_isiOSCordova)
+                    console.log('toggleAudio enable audio', )
+
+                    tool.WebRTCLib.conferenceControl.enableAudio(function (e) {
+                        console.log('toggleAudio enable audio callback', )
+
+                        if(_isiOSCordova)
 							tool.showIosPermissionsInstructions('Microphone');
 						else if(e.name == 'NotAllowedError' || e.name == 'MediaStreamError') tool.showBrowserPermissionsInstructions('microphone');
 					});
@@ -1016,16 +1029,21 @@
 			 * @method updateControlBar
 			 */
 			updateControlBar: function () {
+				console.log('updateControlBar')
 				var tool = this;
 				if(tool.controlBar == null) return;
 				var localParticipant = tool.WebRTCLib.localParticipant();
 				var conferenceControl = tool.WebRTCLib.conferenceControl;
+                console.log('updateControlBar localParticipant', localParticipant)
 
 				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				if(enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
+                console.log('updateControlBar enabledVideoTracks', enabledVideoTracks, tool.WebRTCLib.localParticipant().videoStream)
+
+
+                if(enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(!conferenceControl.cameraIsEnabled()) {
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
@@ -1044,6 +1062,8 @@
 				var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
 					return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
+                console.log('updateControlBar enabledAudioTracks', enabledAudioTracks, tool.WebRTCLib.localParticipant().audioStream)
+                console.log('updateControlBar !conferenceControl.micIsEnabled()', !conferenceControl.micIsEnabled())
 
 				if(enabledAudioTracks == 0 && tool.WebRTCLib.localParticipant().audioStream == null) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;

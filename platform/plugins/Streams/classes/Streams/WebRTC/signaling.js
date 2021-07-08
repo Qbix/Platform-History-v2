@@ -108,7 +108,7 @@ module.exports = function(socket,io) {
                 }
                 stream.setAttribute('endTime', +Date.now());
                 stream.save();
-                if ([false, "false"].includes(stream.getAttribute('resumeClosed'))) {
+                if ([false, "false"].includes(stream.getAttribute('resumeClosed')) && (stream.getAttribute('closeManually') == null || [false, "false"].includes(stream.getAttribute('closeManually')))) {
                     Q.plugins.Streams.close(socket.userPlatformId, roomPublisherId, streamName);
                 }
             });

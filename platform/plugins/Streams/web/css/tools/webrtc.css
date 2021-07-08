@@ -975,7 +975,7 @@ and (max-device-width : 320px) {
     justify-content: center;
     align-items: center;
     background: none;
-    margin-top: 5px;
+    margin-top: 0;
     height: 19px;
     padding:0;
     overflow: visible;

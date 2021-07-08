@@ -11,7 +11,10 @@
 	 * @param {Q.Event} [options.onWebRTCRoomEnded]
 	 */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
+            console.log('preview.js: options', preview)
+
             var tool = this;
+            this.state = Q.extend({}, this.state, options);
             var state = this.state;
             tool.preview = preview;
 			
@@ -34,6 +37,7 @@
 
 {
 			editable: false,
+			mainWebrtcStream: null,
 			templates: {
 				view: {
 					name: 'Streams/webrtc/preview/view',
@@ -57,6 +61,8 @@
 
             tool.stream = stream;
 
+            console.log('preview.js: state', state)
+            console.log('preview.js: stream', stream)
             // retain with stream
             Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
 
@@ -106,9 +112,80 @@
 				state.templates.view
 			);
 
-            $toolElement.on(Q.Pointer.fastclick, function () {
+            var acceptButton = tool.$('.Streams_preview_accept_button');
+            var disconnectButton = tool.$('.Streams_preview_disconnect_button');
+            var mainWebRTCStreamPublisher = state.mainWebrtcStream.fields.publisherId
+            var mainWebRTCStreamName = state.mainWebrtcStream.fields.name
+
+            acceptButton.on(Q.Pointer.fastclick, function () {
+                Q.Streams.get(fields.publisherId, fields.streamName, function() {
+                    var guestWebrtcStream = this;
+
+                    Q.req({
+                        publisherId: mainWebRTCStreamPublisher,
+                        streamName: mainWebRTCStreamName,
+                        ofUserId: fields.publisherId,
+                        readLevel: 40,
+                        writeLevel: 10,
+                        adminLevel: -1,
+                        'Q.method': 'put'
+                    }, "Streams/access", ['data'], function (err, data) {
+                        var msg;
+                        if (msg = Q.firstErrorMessage(err, data && data.errors)) {
+                            alert(msg);
+                        }
+                        guestWebrtcStream.post({
+                            type: 'Streams/webrtc/invite',
+                            content: JSON.stringify({publisherId: mainWebRTCStreamPublisher, name: mainWebRTCStreamName}),
+                        }, function() {
+                            console.log('sent')
+                        })
+
+                        acceptButton.css('display', 'none');
+                        disconnectButton.css('display', 'flex');
+                    });
+
+                })
+            });
+
+            disconnectButton.on(Q.Pointer.fastclick, function () {
+                Q.Streams.get(mainWebRTCStreamPublisher, mainWebRTCStreamName, function() {
+                    console.log('disconnectButton stream', this, mainWebRTCStreamPublisher, mainWebRTCStreamName)
+
+                   tool.state.mainWebrtcStream.post({
+                        type: 'Streams/webrtc/forceDisconnect',
+                        content: JSON.stringify({
+                            publisherId: mainWebRTCStreamPublisher,
+                            name: mainWebRTCStreamName,
+                            userId: fields.publisherId,
+                            clipStreamPublisherId:tool.stream.fields.publisherId,
+                            clipStreamName:tool.stream.fields.name
+                        }),
+                    }, function() {
+                        console.log('disconnectButton: sent')
+
+                       //acceptButton.css('display', 'flex');
+                       //disconnectButton.css('display', 'none');
+                       tool.preview.delete();
+
+                       Q.req({
+                           publisherId: mainWebRTCStreamPublisher,
+                           streamName: mainWebRTCStreamName,
+                           ofUserId: fields.publisherId,
+                           'Q.method': 'delete'
+                       }, "Streams/access", ['data'], function (err, data) {
+                           console.log('access removed')
+                       });
+                    })
+
+                })
+
+            });
+
+            console.log('staaaate', tool.state)
+            /*$toolElement.on(Q.Pointer.fastclick, function () {
                 var WebConference = Q.Streams.WebRTC();
-                WebConference.start({
+                WebConference.start({,
                     element: document.body,
                     roomId: stream.fields.name.split('/').pop(),
                     roomPublisherId: stream.fields.publisherId,
@@ -127,7 +204,7 @@
 						Q.handle(state.onWebRTCRoomEnded, tool, [WebConference]);
 					}
                 });
-            });
+            });*/
         }
     });
 	
@@ -139,6 +216,10 @@ Q.Template.set('Streams/webrtc/preview/view',
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
 	+ '<div class="Streams_preview_content">{{content}}</div>'
 	+ '{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true}}'
+    + '<div class="Streams_preview_call_control">'
+    + '<div class="Streams_preview_call_control_allow">'
+    + '<div class="Streams_preview_accept_button" style="width:100px;height:40px;">accept</div>'
+    + '<div class="Streams_preview_disconnect_button" style="width:100px;height:40px;">disconnect</div></div></div>'
 	+ '</div></div>'
 );
 

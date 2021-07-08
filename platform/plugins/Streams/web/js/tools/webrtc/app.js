@@ -50,7 +50,7 @@ window.WebRTCconferenceLib = function app(options){
         onlyOneScreenSharingAllowed: null,
         liveStreaming: {},
         TwilioInstance: null,
-        useCordovaPlugins: true
+        useCordovaPlugins: false
     };
 
     if(typeof options === 'object') {
@@ -166,6 +166,10 @@ window.WebRTCconferenceLib = function app(options){
         ua: navigator.userAgent,
         browserName: browser[0],
         browserVersion: parseInt(browser[1])
+    }
+
+    if(_isiOS && _localInfo.browserName == 'Safari' && _localInfo.browserVersion < 14.4){
+        _options.useCordovaPlugins = true;
     }
 
     var icons = {
@@ -373,6 +377,9 @@ window.WebRTCconferenceLib = function app(options){
                     this.tracks[t].stream.getTracks()[0].stop();
                 }
             }
+
+            if(this.RTCPeerConnection != null) this.RTCPeerConnection.close();
+
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) iosrtcLocalPeerConnection.removeLocalNativeStreams();
             for(var p = roomParticipants.length - 1; p >= 0; p--){
                 if(roomParticipants[p].sid == this.sid) {
@@ -676,6 +683,12 @@ window.WebRTCconferenceLib = function app(options){
          */
         function attachTrack(track, participant) {
             log('attachTrack ' + track.kind);
+            try {
+                var err = (new Error);
+                console.log(err.stack);
+            } catch (e) {
+
+            }
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
                 log('attachTrack: iosrtc track video');
                 iosrtcLocalPeerConnection.addStream(track.stream);
@@ -1036,6 +1049,7 @@ window.WebRTCconferenceLib = function app(options){
 
         }
 
+        var commonVisualization = null;
         function audioVisualization() {
             log('audiovis: audioVisualization');
 
@@ -1275,15 +1289,183 @@ window.WebRTCconferenceLib = function app(options){
 
                 if(visualisation.type == 'circles') {
                     buildCircularVisualization(visualisation);
-                     return;
+                    return;
                 }
 
                 buildBarsVisualization(visualisation);
 
             }
 
+            function buildCommonVisualization(options) {
+                log('audiovis: buildCommonVisualization: buildVisualization try', commonVisualization);
+
+                if(commonVisualization != null) return;
+                log('audiovis: buildCommonVisualization: buildVisualization', commonVisualization, options);
+
+                var name = options.name;
+                var element = options.element;
+
+                commonVisualization = {};
+                commonVisualization.element = element;
+                commonVisualization.type = options.type;
+                commonVisualization.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
+
+
+                /*commonVisualization.reset = function () {
+                    setTimeout(function () {
+                        updatVisualizationWidth(participant, commonVisualization)
+                    }, 300);
+                };
+                commonVisualization.remove = function () {
+                    delete options.participant.soundMeter.visualizations[name];
+                    if(commonVisualization.svg && commonVisualization.svg.parentNode != null) commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
+                };*/
+
+
+
+
+                if(commonVisualization.svg && commonVisualization.svg.parentNode) {
+                    commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
+                }
+                commonVisualization.soundBars = [];
+
+                var elWidth, elHeight;
+                if(commonVisualization.element != null){
+                    var rect = commonVisualization.element.getBoundingClientRect();
+                    elWidth = rect.width;
+                    elHeight = rect.height;
+                }
+                var svgWidth = elWidth;
+                var svgHeight = elHeight;
+                commonVisualization.width = svgWidth;
+                commonVisualization.height = svgHeight;
+                var xmlns = 'http://www.w3.org/2000/svg';
+                var svg = document.createElementNS(xmlns, 'svg');
+                svg.style.position = 'absolute';
+                svg.style.top = '0';
+                svg.setAttribute('width', svgWidth);
+                svg.setAttribute('height', svgHeight);
+                commonVisualization.svg = svg;
+                commonVisualization.element.appendChild(commonVisualization.svg);
+                var clippath = document.createElementNS(xmlns, 'clipPath');
+                clippath.setAttributeNS(null, 'id', 'waveform-mask');
+                console.log('buildCommonVisualization elWidth, elHeight', elWidth, elHeight);
+
+                var bucketSVGWidth = 4;
+                var bucketSVGHeight = 0;
+                var spaceBetweenRects = 1;
+                var totalBarsNum =  Math.floor(svgWidth / (bucketSVGWidth + spaceBetweenRects));
+                console.log('buildCommonVisualization totalBarsNum', totalBarsNum);
+
+                var i;
+                for(i = 0; i < totalBarsNum; i++) {
+                    var rect = document.createElementNS(xmlns, 'rect');
+                    var x = (bucketSVGWidth * i + (spaceBetweenRects * (i + 1)))
+                    var y = 0;
+                    var fillColor = '#95ffff';
+                    rect.setAttributeNS(null, 'x', x);
+                    rect.setAttributeNS(null, 'y', 0);
+                    rect.setAttributeNS(null, 'width', bucketSVGWidth + 'px');
+                    rect.setAttributeNS(null, 'height', bucketSVGHeight + 'px');
+                    rect.setAttributeNS(null, 'fill', fillColor);
+                    rect.style.strokeWidth = '1';
+                    rect.style.stroke = '#1479b5';
+
+                    var barObject = {
+                        volume: 0,
+                        rect: rect,
+                        x: x,
+                        y: y,
+                        width: bucketSVGWidth,
+                        height: bucketSVGHeight,
+                        fill: fillColor
+                    }
+
+                    commonVisualization.soundBars.push(barObject);
+                    svg.appendChild(rect);
+                }
+                commonVisualization.barsLength = commonVisualization.soundBars.length;
+                commonVisualization.audioContextArr = [];
+
+                renderCommonVisualization();
+            }
+
+            function renderCommonVisualization() {
+                var freqDataMany = [];
+                var agg = [];
+
+
+                for(let p in roomParticipants) {
+                    let participant = roomParticipants[p];
+                    if(participant.soundMeter == null || participant.soundMeter.analyser == null) continue;
+                    let bufferLength =  participant.soundMeter.analyser.frequencyBinCount;
+                    let freqData = new Uint8Array(bufferLength);
+
+                    participant.soundMeter.analyser.getByteFrequencyData(freqData); // populate with data
+                    freqDataMany.push(freqData);
+                }
+
+                if (freqDataMany.length > 0) {
+                    for (let i = 0; i < freqDataMany[0].length; i++) {
+                        agg.push(0);
+                        freqDataMany.forEach((data) => {
+                            agg[i] += data[i];
+                        });
+                    }
+                }
+
+                var barsLength = commonVisualization.barsLength;
+                var i;
+                for(i = 0; i < barsLength; i++){
+                    var bar = commonVisualization.soundBars[i];
+                    if(i == barsLength - 1) {
+                        var height = (agg[i] * 0.4);
+                        if (height > 100) {
+                            height = 100;
+                        } else if(agg[i] < 0.005) height = 0.1;
+                        bar.y = commonVisualization.height - (commonVisualization.height / 100 * height);
+                        bar.height = height;
+                        bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+                        bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+                        bar.rect.setAttributeNS(null, 'y', bar.y);
+                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+
+                    } else {
+                        var nextBar = commonVisualization.soundBars[i + 1];
+                        bar.volume = nextBar.volume;
+                        bar.height = nextBar.height;
+                        bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+                        bar.y = nextBar.y;
+                        bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+                        bar.rect.setAttributeNS(null, 'y', bar.y);
+                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+                    }
+                }
+
+                commonVisualization.animationFrame = requestAnimationFrame(renderCommonVisualization);
+            }
+            
+            function removeCommonVisualization() {
+                if(commonVisualization && commonVisualization.animationFrame) {
+                    cancelAnimationFrame(commonVisualization.animationFrame);
+                }
+                if(commonVisualization.svg && commonVisualization.svg.parentNode != null) {
+                    commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
+                }
+                commonVisualization = null;
+
+            }
+
+            function updateCommonVisualizationWidth() {
+                updatVisualizationWidth(null, commonVisualization);
+            }
+
             return {
-                build: buildVisualization
+                build: buildVisualization,
+                buildCommonVisualization: buildCommonVisualization,
+                removeCommonVisualization: removeCommonVisualization,
+                updateCommonVisualizationWidth: updateCommonVisualizationWidth
             }
         }
 
@@ -1405,8 +1587,8 @@ window.WebRTCconferenceLib = function app(options){
                 remoteStreamEl.muted = true;
                 remoteStreamEl.autoplay = true;
                 remoteStreamEl.playsInline = true;
-                if(track.kind == 'video') localParticipant.videoStream = stream;
-                if (track.kind == 'audio') localParticipant.audioStream = stream;
+                /*if(!('ontrack' in testPeerConnection) && track.kind == 'video') */localParticipant.videoStream = stream;
+                /*if (!('ontrack' in testPeerConnection) && track.kind == 'audio') */localParticipant.audioStream = stream;
             }
 
             var supportableFormats = supportsVideoType(remoteStreamEl);
@@ -8264,6 +8446,12 @@ window.WebRTCconferenceLib = function app(options){
             function publishLocalVideo(RTCPeerConnection) {
                 var localTracks = localParticipant.tracks;
                 log('offerReceived: publishLocalVideo: cameraIsEnabled = ' + (app.conferenceControl.cameraIsEnabled()));
+                try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
+
+                }
 
                 //if(app.conferenceControl.cameraIsEnabled()){
                 if ('ontrack' in RTCPeerConnection) {
@@ -8301,13 +8489,6 @@ window.WebRTCconferenceLib = function app(options){
                 let stream = canvas.captureStream();
                 return Object.assign(stream.getVideoTracks()[0], {enabled: false});
 
-            }
-
-            function publishLocalMedia(RTCPeerConnection) {
-                log('publishLocalMedia');
-
-                publishLocalVideo(RTCPeerConnection);
-                publishLocalAudio(RTCPeerConnection);
             }
 
             function process(message) {
@@ -10747,6 +10928,7 @@ window.WebRTCconferenceLib = function app(options){
 
                 oldLocalParticipant.sid = socket.id;
                 localParticipant = oldLocalParticipant;
+                roomParticipants.push(localParticipant);
             }
 
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) {
@@ -10894,8 +11076,8 @@ window.WebRTCconferenceLib = function app(options){
         let streamingParticipant = app.screensInterface.fbLive.streamingParticipant();
         initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.screensInterface.fbLive.streamingParticipant() != null ? app.screensInterface.fbLive.streamingParticipant().connection : null};
         initOptions.startWith = {
-            audio:false,
-            video:false
+            audio: app.conferenceControl.micIsEnabled(),
+            video: app.conferenceControl.cameraIsEnabled()
         };
 
         var newConferenceInstance = window.WebRTCconferenceLib(initOptions);
@@ -10906,7 +11088,7 @@ window.WebRTCconferenceLib = function app(options){
 
         //newConferenceInstance.init();
 
-        app.switchFrom(localParticipant);
+        newConferenceInstance.switchFrom(localParticipant);
 
         newConferenceInstance.event.on('initNegotiationEnded', function (roomParticipants) {
             console.log('initNegotiationEnded switch', newConferenceInstance)
@@ -10956,7 +11138,7 @@ window.WebRTCconferenceLib = function app(options){
                 if (roomParticipants[p].iosrtcRTCPeerConnection != null) roomParticipants[p].iosrtcRTCPeerConnection.close();
             }
 
-            roomParticipants[p].remove();
+            if(!switchRoom) roomParticipants[p].remove();
         }
 
         app.event.destroy();

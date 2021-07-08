@@ -276,3 +276,23 @@
 	text-align: left;
 	white-space: nowrap;
 }
+
+.Streams_preview_call_control {
+	padding: 10px 5px 5px 5px;
+}
+.Streams_preview_accept_button, .Streams_preview_disconnect_button {
+	width: 100px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	border-radius: 4px;
+}
+.Streams_preview_accept_button {
+	background: #37c837;
+}
+.Streams_preview_disconnect_button {
+	display: none;
+	background: #f93b2f;
+}

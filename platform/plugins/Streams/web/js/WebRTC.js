@@ -66,7 +66,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             preparing: {
                 video: false,
-                audio: true,
+                audio: false,
                 screen: false
             },
             useCordovaPlugins: false,
@@ -103,7 +103,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             onWebrtcControlsCreated: new Q.Event(),
             hosts:[],
             defaultDesktopViewMode:null,
-            defaultMobileViewMode:null
+            defaultMobileViewMode:null,
+            writeLevel:10
         };
         var WebRTCconference;
 
@@ -114,46 +115,54 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var _layoutTool = null;
         var _roomStream = null;
         var _renderedScreens = [];
+        var _resizeObserver = null;
+        var _isMobile = null;
+        var _isAndroid = null;
+        var _isiOS = null;
+        var _isiOSWebView = null;
+
+        var ua = navigator.userAgent;
+
+        if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
+            _isMobile = true;
+            if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
+                _isiOS = true;
+            } else if (/android/i.test(ua)) {
+                _isAndroid = true;
+            }
+        }
+
+        var isSafari = /safari/.test( ua.toLowerCase());
+        if( _isiOS ) {
+            if ( isSafari ) {
+                //browser
+            } else if ( !isSafari && !Q.info.isCordova ) {
+                _isiOSWebView = true;
+            };
+        } else {
+            //not iOS
+        };
+
+        var browser = determineBrowser(navigator.userAgent)
+        var _localInfo = {
+            isMobile: _isMobile,
+            platform: _isiOS ? 'ios' : (_isAndroid ? 'android' : null),
+            isCordova: typeof cordova != 'undefined',
+            isiOSWebView: _isiOSWebView,
+            ua: navigator.userAgent,
+            browserName: browser[0],
+            browserVersion: browser[1]
+        }
+
+        if(_isiOS && _localInfo.browserName == 'Safari' && _localInfo.browserVersion < 14.4){
+            _options.useCordovaPlugins = true;
+            if(!navigator) navigator = {};
+        }
 
         var appDebug = (function () {
-            var _isMobile = false;
-            var _isiOS = false;
-            var _isAndroid= false;
-            var _isiOSWebView = false;
             var _infoLog = [];
 
-            var ua = navigator.userAgent;
-
-            if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
-                _isMobile = true;
-                if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
-                    _isiOS = true;
-                } else if (/android/i.test(ua)) {
-                    _isAndroid = true;
-                }
-            }
-
-            var isSafari = /safari/.test( ua.toLowerCase());
-            if( _isiOS ) {
-                if ( isSafari ) {
-                    //browser
-                } else if ( !isSafari && !Q.info.isCordova ) {
-                    _isiOSWebView = true;
-                };
-            } else {
-                //not iOS
-            };
-
-            var browser = determineBrowser(navigator.userAgent)
-            var _localInfo = {
-                isMobile: _isMobile,
-                platform: _isiOS ? 'ios' : (_isAndroid ? 'android' : null),
-                isCordova: typeof cordova != 'undefined',
-                isiOSWebView: _isiOSWebView,
-                ua: navigator.userAgent,
-                browserName: browser[0],
-                browserVersion: browser[1]
-            }
+            console.log('_localInfo',_localInfo)
 
             _infoLog.push({type: 'info', log:_localInfo});
 
@@ -630,47 +639,84 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         window.webrtcDebug = appDebug;
 
         /**
-         * Update page URI. Usually is used when new room is created.
-         * @method updateQueryStringParameter
-         * @param {String} [uri] Current location.href
-         * @param {String} [key] Get parameter to set
-         * @param {String} [value] Value of get parameter that is being set
-         * @return {String}
+         * Event system of app
+         *
+         * @method app.event
+         * @return {Object}
          */
-        function updateQueryStringParameter(uri, key, value) {
-            var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
-            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-            if (uri.match(re)) {
-                return uri.replace(re, '$1' + key + "=" + value + '$2');
-            }
-            else {
-                return uri + separator + key + "=" + value;
-            }
-        }
+        function EventSystem(){
 
-        /**
-         * Show animated page loader while joining the room
-         * @method showPageLoader
-         */
-        function showPageLoader() {
-            if(document.querySelector('.Streams_webrtc_page-loader-con') == null) {
-                var loader = document.createElement('DIV');
-                loader.className = 'Streams_webrtc_page-loader-con';
-                loader.innerHTML = `<div class="Streams_webrtc_loader">
-										<span class="Q_working">Connecting...</span>
-									</div>`;
-                document.body.appendChild(loader);
-            }
-        }
+            var events = {};
 
-        /**
-         * Hide animated page loader after user joined ther room.
-         * @method hidePageLoader
-         */
-        function hidePageLoader() {
-            var loader = document.querySelector('.Streams_webrtc_page-loader-con');
-            if(loader != null && loader.parentNode != null) {
-                loader.parentNode.removeChild(loader);
+            var CustomEvent = function (eventName) {
+
+                this.eventName = eventName;
+                this.callbacks = [];
+
+                this.registerCallback = function(callback) {
+                    this.callbacks.push(callback);
+                }
+
+                this.unregisterCallback = function(callback) {
+                    const index = this.callbacks.indexOf(callback);
+                    if (index > -1) {
+                        this.callbacks.splice(index, 1);
+                    }
+                }
+
+                this.fire = function(data) {
+                    const callbacks = this.callbacks.slice(0);
+                    callbacks.forEach((callback) => {
+                        callback(data);
+                    });
+                }
+            }
+
+            var dispatch = function(eventName, data) {
+                if(!doesHandlerExist(eventName)) {
+                    return;
+                }
+
+                const event = events[eventName];
+                if (event) {
+                    event.fire(data);
+                }
+            }
+
+            var on = function(eventName, callback) {
+                let event = events[eventName];
+                if (!event) {
+                    event = new CustomEvent(eventName);
+                    events[eventName] = event;
+                }
+                event.registerCallback(callback);
+            }
+
+            var off = function(eventName, callback) {
+                const event = events[eventName];
+                if (event && event.callbacks.indexOf(callback) > -1) {
+                    event.unregisterCallback(callback);
+                    if (event.callbacks.length === 0) {
+                        delete events[eventName];
+                    }
+                }
+            }
+
+            var doesHandlerExist = function (eventName) {
+                if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
+                return false;
+            }
+
+            var destroy = function () {
+                events = {};
+            }
+
+            return {
+                dispatch:dispatch,
+                on:on,
+                off:off,
+                doesHandlerExist:doesHandlerExist,
+                destroy:destroy
             }
         }
 
@@ -823,19 +869,59 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Object} [stream] stream that represents room
          */
         function bindStreamsEvents(stream) {
-            var tool = this;
-
+            log('bindStreamsEvents', stream)
             stream.onMessage('Streams/join').set(function (stream, message) {
 
-            }, 'Streams/webrtc');
+            });
 
             stream.onMessage('Streams/connected').set(function (stream, message) {
 
-            }, 'Streams/webrtc');
+            });
 
             stream.onMessage("Streams/leave").set(function (stream, message) {
 
-            }, 'Streams/webrtc');
+            });
+
+            stream.onMessage("Streams/webrtc/invite").set(function (stream, message) {
+                console.log('bindStreamsEvents: Streams/webrtc/invite', stream, message);
+                if(webRTCInstance== null || WebRTCconference == null) return;
+                var streamToJoin = JSON.parse(message.content);
+                webRTCInstance.switchTo(streamToJoin.publisherId, streamToJoin.name);
+            });
+
+
+            stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
+                console.log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
+                if(webRTCInstance== null || WebRTCconference == null) return;
+                var message = JSON.parse(message.content);
+                var roomParticipants = WebRTCconference.roomParticipants();
+                var localParticipant = WebRTCconference.localParticipant();
+
+                var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
+
+
+                if(message.userId == userId) {
+                    WebRTCconference.disconnect();
+                    webRTCInstance.stop();
+
+                    /*Q.Streams.unrelate(
+                        state.publisherId,
+                        state.streamName,
+                        state.relationType,
+                        this.stream.fields.publisherId,
+                        this.stream.fields.name
+                    );*/
+                } else {
+                    for(let p in roomParticipants) {
+                        if(roomParticipants[p].isLocal) continue;
+                        var platformId = roomParticipants[p].identity != null ? roomParticipants[p].identity.split('\t')[0] : null;
+                        if(userId == platformId) {
+                            roomParticipants[p].remove();
+                        }
+                    }
+                }
+
+            });
         }
 
         /**
@@ -1108,6 +1194,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var connectionState = (function () {
 
             var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!_options.startWith.video && !_options.startWith.audio));
+            var preparingRoom = false;
 
             var _notice = null;
             var _currentState = preparingRoom ? "Checking room's state" : 'Connecting...';
@@ -1290,7 +1377,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @method showPermissionsDialogue
          */
         function showPreparingDialogue(callback, closeCallback) {
-            console.log(showPreparingDialogue);
             var micSVG = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
             var disabledMicSVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>';
             var cameraSVG = '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>';
@@ -1786,6 +1872,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             switchMic(true);
                             switchCamera(true);
                             switchScreenshare(true);
+                            Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
                             if(closeCallback != null) closeCallback();
 
                         },
@@ -1798,8 +1885,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
             }
+            if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
+                cordova.plugins.iosrtc.enumerateDevices().then(gotDevicesList)
+            } else {
+                navigator.mediaDevices.enumerateDevices().then(gotDevicesList)
+            }
 
-            navigator.mediaDevices.enumerateDevices().then(gotDevicesList)
         }
 
         /**
@@ -2433,6 +2524,43 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             var viewMode;
             var prevViewMode;
             var roomScreens = [];
+            var layoutEvents = new EventSystem();
+
+            layoutEvents.on('layoutRendered', function (e) {
+
+                if(e.viewMode == 'audio') {
+                    console.log('layoutrendered : audio', e);
+                    WebRTCconference.screensInterface.audioVisualization().buildCommonVisualization({
+                        name: 'common',
+                        type: 'bars',
+                        element: _options.element
+                    });
+
+                    if(_controlsTool) _controlsTool.updateViewModeBtns();
+                    lockScreenResizingAndDragging();
+                } else if(e.viewMode == 'minimized') {
+                    updateScreensButtons();
+                    resetAudioVisualization();
+                    if(_controlsTool != null) {
+                        _controlsTool.participantsPopup().disableLoudesScreenMode();
+                        _controlsTool.updateViewModeBtns();
+                    }
+                    unlockScreenResizingAndDragging();
+                    WebRTCconference.screensInterface.audioVisualization().removeCommonVisualization();
+                } else if(e.viewMode == 'screenSharing' || e.viewMode == 'fullScreen') {
+                    if(_controlsTool) _controlsTool.updateViewModeBtns();
+                    updateScreensButtons()
+                    resetAudioVisualization();
+                    lockScreenResizingAndDragging();
+                    WebRTCconference.screensInterface.audioVisualization().removeCommonVisualization();
+                } else {
+                    if(_controlsTool) _controlsTool.updateViewModeBtns();
+                    updateScreensButtons();
+                    resetAudioVisualization();
+                    unlockScreenResizingAndDragging();
+                    WebRTCconference.screensInterface.audioVisualization().removeCommonVisualization();
+                }
+            })
 
             var Screen = function () {
                 this.sid = null;
@@ -2590,7 +2718,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 };
                 this.show = function() {
-                    log('screen.show');
+                    log('screen.show', this.participant.isLocal, this.participant.identity);
+                    log('screen.show: ', roomScreens.length);
                     try {
                         var err = (new Error);
                         console.log(err.stack);
@@ -2615,6 +2744,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen.isActive = true;
 
                     if(!presentInScreensList) roomScreens.push(screen);
+                    log('screen.show: after ', roomScreens.length);
+
                     WebRTCconference.event.dispatch('screenShown', screen);
 
                     if(screen.activeScreenType == 'video') {
@@ -4007,7 +4138,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : null;
 
-                        if(_options.hosts.indexOf(userId) != -1) {
+                        if(_options.hosts && _options.hosts.indexOf(userId) != -1) {
                             elements.unshift(screen.screenEl);
                         } else {
                             elements.push(screen.screenEl);
@@ -4058,9 +4189,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 viewMode = 'tiledMobile';
                 activeScreen = null;
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+                /*updateScreensButtons();
                 resetAudioVisualization();
-                if(_controlsTool) _controlsTool.updateViewModeBtns();
+                if(_controlsTool) _controlsTool.updateViewModeBtns();*/
             }
 
             /**
@@ -4088,9 +4220,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 viewMode = 'sideBySideMobile';
                 activeScreen = null;
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*updateScreensButtons();
                 resetAudioVisualization();
-                if(_controlsTool) _controlsTool.updateViewModeBtns();
+                if(_controlsTool) _controlsTool.updateViewModeBtns();*/
             }
 
             /**
@@ -4116,10 +4250,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 viewMode = 'tiled';
                 activeScreen = null;
 
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+                /*updateScreensButtons();
                 resetAudioVisualization();
                 if(_controlsTool) _controlsTool.updateViewModeBtns();
-                unlockScreenResizingAndDragging();
+                unlockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4146,10 +4281,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 _layoutTool.animate('regularScreensGrid', elements, 500, true);
                 viewMode = 'regular';
 
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*updateScreensButtons();
                 resetAudioVisualization();
                 if(_controlsTool) _controlsTool.updateViewModeBtns();
-                unlockScreenResizingAndDragging();
+                unlockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4174,11 +4311,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 prevViewMode = viewMode;
                 _layoutTool.animate('audioScreensGrid', elements, 500, true);
+
                 viewMode = 'audio';
+
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+                /*WebRTCconference.screensInterface.audioVisualization().buildCommonVisualization({
+                    name: 'common',
+                    type: 'bars',
+                    element: _options.element,
+                });
                 //updateScreensButtons();
                 //resetAudioVisualization();
                 if(_controlsTool) _controlsTool.updateViewModeBtns();
-                lockScreenResizingAndDragging();
+                lockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4203,10 +4348,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 _layoutTool.animate('manualScreensGrid', elements, 500, true);
                 viewMode = 'manual';
 
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*updateScreensButtons();
                 resetAudioVisualization();
                 if(_controlsTool) _controlsTool.updateViewModeBtns();
-                unlockScreenResizingAndDragging();
+                unlockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4233,13 +4380,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 _layoutTool.animate('minimizedScreensGrid', elements, 500, true);
                 viewMode = 'minimized';
 
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*updateScreensButtons();
                 resetAudioVisualization();
                 if(_controlsTool != null) {
                     _controlsTool.participantsPopup().disableLoudesScreenMode();
                     _controlsTool.updateViewModeBtns();
                 }
-                unlockScreenResizingAndDragging();
+                unlockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4280,10 +4429,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 _layoutTool.animate('maximizedScreensGrid', elements, duration, true);
                 viewMode = 'maximized';
 
-                updateScreensButtons();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*updateScreensButtons();
                 resetAudioVisualization();
                 if(_controlsTool) _controlsTool.updateViewModeBtns();
-                unlockScreenResizingAndDragging();
+                unlockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4330,10 +4481,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 viewMode = activeScreen && activeScreen.screensharing ? 'screenSharing' : 'fullScreen';
 
                 log('renderFullScreenLayout activeScreen 2', activeScreen);
-                if(_controlsTool) _controlsTool.updateViewModeBtns();
+
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*if(_controlsTool) _controlsTool.updateViewModeBtns();
                 updateScreensButtons()
                 resetAudioVisualization();
-                lockScreenResizingAndDragging();
+                lockScreenResizingAndDragging();*/
             }
 
             /**
@@ -4372,9 +4526,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 viewMode = 'maximizedMobile';
-                if(_controlsTool) _controlsTool.updateViewModeBtns();
+
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+                /*if(_controlsTool) _controlsTool.updateViewModeBtns();
                 updateScreensButtons()
-                resetAudioVisualization();
+                resetAudioVisualization();*/
             }
 
             /**
@@ -4399,10 +4555,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 viewMode = 'minimizedMobile';
-                if(_controlsTool) _controlsTool.updateViewModeBtns();
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*if(_controlsTool) _controlsTool.updateViewModeBtns();
 
                 updateScreensButtons();
-                resetAudioVisualization();
+                resetAudioVisualization();*/
             }
 
             /**
@@ -4605,8 +4763,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  */
                 audioScreensGrid: function (container, roomScreens) {
                     var parentRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                    if(parentRect == 0 || parentRect.height == 0) return false;
                     var count = roomScreens.length;
                     var rects = [];
+                    console.log('parentRect', parentRect)
 
                     //var mainRadius = Math.min(size.parentWidth, size.parentHeight);
 
@@ -4615,10 +4775,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var spaceBetween = 15;
 
                     var ratio = parentRect.width / parentRect.height;
-                    var isRatherMobile = parentRect.width < 360 || parentRect.height < 360;
-                    if(isRatherMobile && ratio > 4.2) {
+                    var isRatherNotMobile = parentRect.width < 360 || parentRect.height < 360;
+                    console.log('isRatherNotMobile', isRatherNotMobile)
+                    try {
+                        var err = (new Error);
+                        console.log(err.stack);
+                    } catch (e) {
+
+                    }
+
+                    if(ratio > 4.2 || (isRatherNotMobile && ratio > 3.8)) {
                         var rectHeight = (parentRect.height / 100  * 80) + 19;
-                        if(rectHeight > parentRect.height) rectHeight = parentRect.height;
+                        console.log('rectHeight', rectHeight, parentRect.height)
+                        if(rectHeight > parentRect.height) rectHeight = parentRect.height - 5;
                         var rectWidth = rectHeight - 19;
                         var spaceBetween = 15;
                         var startFrom  = (parentRect.width / 2) - ((rectWidth * count) + (spaceBetween * count)) / 2;
@@ -4633,7 +4802,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         return rects;
-                    } else  if(isRatherMobile && ratio < 0.40) {
+                    } else  if(isRatherNotMobile && ratio < 0.40) {
                         var rectWidth = parentRect.width / 100  * 70;
                         var rectHeight = rectWidth + 19; //19 - height of "name" element
                         var spaceBetween = 10;
@@ -4651,7 +4820,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         return rects;
                     } else if(count === 1) {
-                        var rectWidth = 150;
+                        var basicSize = Math.min(parentRect.width, parentRect.height)
+                        var maxSize = basicSize / 100  * 70;
+                        var rectWidth = maxSize > 150 ? 150 : maxSize;
                         var rectHeight = rectWidth + 19;
                         let x = (parentRect.width / 2) - (rectWidth / 2);
                         let y = (parentRect.height / 2) - (rectHeight / 2);
@@ -4721,9 +4892,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     for ( var i=0; i<=count; i++ ) {
                         var newRect = radCircle(rad, step);
+                        console.log('newRect', newRect)
 
                         var twentyPercent = ((newRect.width / 2) / 100 * 20);
 
+                        console.log('twentyPercent', twentyPercent)
                         if(spaceBetween > twentyPercent) {
 
                             if( _layoutTool.mainCircleRadius + twentyPercent * count < (minSide / 2) - (newRect.width / 2) ) {
@@ -4820,1016 +4993,368 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  * @param {Boolean} [maximized] Render maximized view mode.
                  * @return {Array} List of DOMRects that will be passed to Q.layout.
                  */
-                minimizedOrMaximizedScreenGrid: function (container, count, elementToWrap, maximized) {
-                    log('minimizedOrMaximizedScreenGrid: maximized=' + maximized);
-                    var wrapElement = elementToWrap;
-                    var elementToWrap = elementToWrap.getBoundingClientRect();
+                minimizedOrMaximizedScreenGrid: function minimizedOrMaximizedScreenGrid(container, count, elementToWrap, maximized) {
+                        console.log('minimizedOrMaximizedScreenGrid', container, count, _layoutTool.currentRects.length)
+                        console.log('minimizedOrMaximizedScreenGrid active', activeScreen, count, _layoutTool.currentRects.length)
+                        log('minimizedOrMaximizedScreenGrid: maximized=' + maximized);
+                        var wrapElement = elementToWrap;
+                        var elementToWrap = elementToWrap.getBoundingClientRect();
 
-                    if(roomScreens.length == 0) return;
-                    var rebuild;
+                        if(roomScreens.length == 0) return;
+                        var rebuild;
 
-                    var prevElPos = _layoutTool.elementToWrapPosition;
-                    if(prevElPos)log('minimizedOrMaximizedScreenGrid: elementToWrapPosition', elementToWrap.top, prevElPos.top, elementToWrap.left,prevElPos.left);
+                        var prevElPos = _layoutTool.elementToWrapPosition;
+                        if(prevElPos)log('minimizedOrMaximizedScreenGrid: elementToWrap rect', elementToWrap);
+                        if(prevElPos)log('minimizedOrMaximizedScreenGrid: elementToWrapPosition', elementToWrap.top, prevElPos.top, elementToWrap.left,prevElPos.left);
 
-                    if((prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left))
-                        || (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid')) {
-                        log('minimizedOrMaximizedScreenGrid: rebuild=true if1', (prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left)));
-                        log('minimizedOrMaximizedScreenGrid: rebuild=true if2', (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid'));
+                        if((prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left))
+                            || (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid')) {
+                            log('minimizedOrMaximizedScreenGrid: rebuild=true if1', (prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left)));
+                            log('minimizedOrMaximizedScreenGrid: rebuild=true if2', (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid'));
 
-                        _layoutTool.currentRects = [];
-                        _layoutTool.state.currentMappedRects = [];
-                        rebuild = true;
-                    }
-                    _layoutTool.elementToWrapPosition = elementToWrap;
-
-                    var rectWidth = 90;
-                    var rectHeight = 90;
-                    var spaceBetween = 10;
-
-                    var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                    var parentWidth = containerRect.width;
-                    var parentHeight = containerRect.height;
-
-                    if(!maximized) {
-                        _layoutTool.currentGenerator = 'minimizedScreensGrid';
-                    } else {
-                        _layoutTool.currentGenerator = 'maximizedScreensGrid';
-                    }
-
-                    if(_layoutTool.basicGridRects.length < count || rebuild) {
-                        _layoutTool.basicGridRects = build(container, count, elementToWrap, maximized);
-                    }
-
-
-                    if(_layoutTool.currentRects.length == 0 || rebuild) {
-                        log('minimizedOrMaximizedScreenGrid: build');
-                        _layoutTool.currentRects = build(container, count, elementToWrap, maximized);
-                        log('minimizedOrMaximizedScreenGrid: build currentRects', JSON.stringify(_layoutTool.currentRects));
-                    } else {
-
-                        if(count > _layoutTool.currentRects.length) {
-                            var availableRects = addAndUpdate(container, count, elementToWrap, maximized);
-                            _layoutTool.currentRects = _layoutTool.currentRects.concat(availableRects);
-                            log('minimizedOrMaximizedScreenGrid: addAndUpdate currentRects', JSON.stringify(_layoutTool.currentRects), JSON.stringify(availableRects));
-
-                        } else if(count < _layoutTool.currentRects.length) {
-
-                            _layoutTool.currentRects = removeAndUpdate(container, count, elementToWrap, maximized);
-                            log('minimizedOrMaximizedScreenGrid: removeAndUpdate currentRects', JSON.stringify(_layoutTool.currentRects));
-
+                            _layoutTool.currentRects = [];
+                            _layoutTool.state.currentMappedRects = [];
+                            rebuild = true;
                         }
-                    }
-                    log('minimizedOrMaximizedScreenGrid: currentRects', JSON.stringify(_layoutTool.currentRects));
-
-                    if(maximized || activeScreen != null) {
-                        log('minimizedOrMaximizedScreenGrid: maximize');
-
-                        _layoutTool.currentRects = maximizeScreen();
-                    } else if(!maximized) {
-                        log('minimizedOrMaximizedScreenGrid: minimize');
-
-                        _layoutTool.currentRects = minimizeScreen();
-                    }
-                    log('minimizedOrMaximizedScreenGrid: result rects',  JSON.stringify(_layoutTool.currentRects));
-
-                    return  _layoutTool.currentRects;
-
-                    function getControlsAlign() {
-                        var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                        var parentHeight = containerRect.height;
-
-                        if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top < parentHeight / 2) {
-                            return 'topleft';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top > parentHeight / 2) {
-                            return 'bottomleft';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top < parentHeight / 2) {
-                            return 'topright';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top > parentHeight / 2) {
-                            return 'bottomright';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_top')) {
-                            return 'top';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_bottom')) {
-                            return 'bottom';
-                        } else {
-                            return 'bottom';
-                        }
-                    }
-
-                    function maximizeScreen(){
-                        log('maximizeScreen activeScreen', activeScreen)
-
-                        var indexToMaximize;
-
-                        for(let s in roomScreens) {
-                            if(activeScreen == roomScreens[s]) {
-                                indexToMaximize = s;
-                                break;
-                            }
-                        }
-
-                        var currentMaximizedIndex;
-                        if(_layoutTool.maximizedScreen != null) {
-                            for(let s in roomScreens) {
-                                if(_layoutTool.maximizedScreen == roomScreens[s]) {
-                                    currentMaximizedIndex = s;
-                                    break;
-                                }
-                            }
-                        }
-
-                        log('maximizeScreen : currentMaximizedIndex, indexToMaximize', currentMaximizedIndex, indexToMaximize);
-
-                        var align = getControlsAlign();
-
-                        if(activeScreenRect != null) {
-                            var rectsToTakeInc = _layoutTool.currentRects.filter(function(r, i){
-                                return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
-                                && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
-                            });
-                            var minY = Math.min.apply(Math, rectsToTakeInc.map(function(o) { return o.y; }));
-                            var maxY = Math.max.apply(Math, rectsToTakeInc.map(function(o) { return o.y + o.height; }));
-                        } else {
-                            var minY = Math.min.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y; }));
-                            var maxY = Math.max.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y + o.height; }));
-                        }
-
-
-                        var y, baseHeight;
-                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                            baseHeight = (minY - spaceBetween) - 50;
-                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                            baseHeight = parentHeight - (maxY + spaceBetween) - 50;
-                        }
-                        var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
-                        var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
-                        var mainScreenSize = getElementSizeKeepingRatio({
-                            width: videoWidth,
-                            height: videoHeight
-                        }, {width: parentWidth / 100 * 90, height: Math.min(baseHeight - 50, ((parentHeight - (align == 'top' || align == 'bottom' ? elementToWrap.height : spaceBetween)) / 100 * 90) - 50)})
-                        mainScreenSize.height = mainScreenSize.height + 50;
-
-                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                            if(align == 'bottom') minY = count > 1 ? minY : parentHeight - elementToWrap.height;
-                            y = (minY / 2) - mainScreenSize.height / 2;
-                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                            y = ((parentHeight - maxY) / 2) - (mainScreenSize.height / 2) + maxY;
-
-                        }
-
-                        var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, y, mainScreenSize.width, mainScreenSize.height);
-
-                        var minimizedRect = _layoutTool.currentRects[indexToMaximize];
-                        if(minimizedRect)log('maximizeScreen minimizedRect', JSON.stringify(minimizedRect))
-
-                        minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
-                        _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
-                        _layoutTool.currentRects[indexToMaximize].y = maximizedRect.y;
-                        _layoutTool.currentRects[indexToMaximize].width = maximizedRect.width;
-                        _layoutTool.currentRects[indexToMaximize].height = maximizedRect.height;
-
-                        activeScreenRect = _layoutTool.currentRects[indexToMaximize];
-                        log('maximizeScreen currentRects.length', _layoutTool.currentRects.length)
-
-                        if(!currentMaximizedIndex && indexToMaximize || currentMaximizedIndex == indexToMaximize) {
-                            if(_layoutTool.currentRects.length == 3 && roomScreens[1] == activeScreen) {
-                                log('maximizeScreen currentRects.length == 3')
-
-                                _layoutTool.currentRects[2].x = minimizedRect.x;
-                                _layoutTool.currentRects[2].y = minimizedRect.y;
-                                _layoutTool.currentRects[2].width = minimizedRect.width;
-                                _layoutTool.currentRects[2].height = minimizedRect.height;
-                            }
-                        }
-
-                        if(currentMaximizedIndex && currentMaximizedIndex != indexToMaximize) {
-                            log('maximizeScreen currentMaximizedIndex', currentMaximizedIndex)
-
-                            _layoutTool.currentRects[currentMaximizedIndex].x = minimizedRect.x;
-                            _layoutTool.currentRects[currentMaximizedIndex].y = minimizedRect.y;
-                            _layoutTool.currentRects[currentMaximizedIndex].width = minimizedRect.width;
-                            _layoutTool.currentRects[currentMaximizedIndex].height = minimizedRect.height;
-                        } else {
-                            log('maximizeScreen no currentMaximizedIndex')
-                            _layoutTool.currentRects = fillFreeSpaceWithClosestRects(minimizedRect, _layoutTool.currentRects, (activeScreenRect ? [activeScreenRect] : null))
-                        }
-
-                        _layoutTool.maximizedScreen = activeScreen;
-                        log('maximizeScreen result rects', _layoutTool.currentRects)
-
-                        return _layoutTool.currentRects;
-                    }
-
-                    function minimizeScreen(){
-                        log('minimizeScreen : maximizedScreen', _layoutTool.maximizedScreen);
-
-                        var currentMaximizedIndex;
-                        if(_layoutTool.maximizedScreen != null) {
-                            for (var s in roomScreens) {
-                                if (_layoutTool.maximizedScreen == roomScreens[s]) {
-                                    currentMaximizedIndex = parseInt(s, 10);
-                                    break;
-                                }
-                            }
-                        }
-
-                        var count = _layoutTool.currentRects.length + 1
-                        var rect = addAndUpdate(container, count, elementToWrap, maximized);
-
-                        _layoutTool.currentRects[currentMaximizedIndex] = new DOMRect(rect[0].x, rect[0].y, rect[0].width, rect[0].height);
-                        activeScreenRect = _layoutTool.maximizedScreen = null
-
-                        return _layoutTool.currentRects;
-                    }
-
-                    function build(container, count, elementToWrap, maximized) {
-
-                        var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                        var parentWidth = containerRect.width;
-                        var parentHeight = containerRect.height;
-
-                        var align = getControlsAlign();
+                        _layoutTool.elementToWrapPosition = elementToWrap;
 
                         var rectWidth = 90;
                         var rectHeight = 90;
                         var spaceBetween = 10;
-                        var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                        var defaultSide = 'top-full';
 
-                        var rectsOnLeftSide, rectsOnRightSide, rectsToTheTop
-                        if(align == 'bottom' || align == 'top') {
-                            rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                            rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
-                            //rectsToTheTop = Math.floor((elementToWrap.top + spaceBetween) / (rectWidth + spaceBetween));
-                            if (align == 'bottom') {
-                                rectsToTheTop = Math.floor((elementToWrap.height) / (rectHeight + spaceBetween));
-                            } else if (align == 'top') {
-                                rectsToTheTop = Math.floor((elementToWrap.top + elementToWrap.height) / (rectHeight + spaceBetween));
-                            }
-                        } else if(align == 'bottomleft' || align == 'bottomright') {
-                            rectsOnLeftSide = rectsOnRightSide =  Math.floor(perRow / 2);
-                            rectsToTheTop = Math.floor(parentHeight / (rectHeight + spaceBetween));
-                        } else if(align == 'topleft' || align == 'topright') {
-                            rectsOnLeftSide = rectsOnRightSide = Math.floor(perRow / 2);
-                            rectsToTheTop = Math.floor(parentHeight / (rectHeight + spaceBetween));
-                        }
+                        var containerRect = container.getBoundingClientRect();
+                        log('containerRect', containerRect)
+                        var parentWidth = containerRect.width;
+                        var parentHeight = containerRect.height;
 
-                        if(rectsToTheTop == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) rectsToTheTop = 1;
-                        var totalRectsOnSides = (rectsOnLeftSide * rectsToTheTop) + (rectsOnRightSide * rectsToTheTop);
-                        if(count < totalRectsOnSides) totalRectsOnSides = count;
-
-
-                        var rects = [];
-                        var currentRowRects = [];
-
-                        /*if(maximized) {
-							count = totalRectsOnSides = count - 1;
-						}*/
-
-                        if(align == 'top' || align == 'bottom') {
-                            var isNextNewLast = false;
-                            var startFrom, side;
-                            startFrom = side = rectsOnRightSide != 0 ? 'right' : 'left';
-                            var rowItemCounter = 1;
-                            var leftSideCounter = 0;
-                            var rightSideCounter = 0;
-                            var createNewRowOnLeft = false;
-                            var createNewRowOnRight = false;
-                            var i, x, y, prevRect, latestLeftRect, latestRightRect;
-                            for (i = 0; i < totalRectsOnSides; i++) {
-                                if (side == "right") {
-                                    if (latestRightRect) prevRect = latestRightRect
-                                    if (rightSideCounter >= 1) {
-
-                                        y = prevRect.y;
-                                        x = prevRect.x + (rectWidth + spaceBetween);
-
-                                    } else if (createNewRowOnRight) {
-                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y = prevRect.y - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y = prevRect.y + prevRect.height + spaceBetween;
-                                        }
-
-                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                            x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
-                                        } else {
-                                            var allRects = currentRowRects;
-                                            for (var a in rects) {
-                                                allRects = allRects.concat(rects[a]);
-                                            }
-                                            x = allRects.filter(function (rect) {
-                                                return rect.side == 'right';
-                                            }).reduce(function (prev, current) {
-                                                return (prev.rect.x < current.rect.x) ? prev : current;
-                                            }).rect.x
-                                        }
-
-                                        createNewRowOnRight = false;
-                                    } else {
-
-                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y = parentHeight - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y = spaceBetween;
-                                        }
-
-                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                            x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
-                                        } else {
-                                            x = (elementToWrap.left + elementToWrap.width + spaceBetween);
-                                        }
-
-                                    }
-
-                                    rightSideCounter++;
-
-                                    if (rightSideCounter == rectsOnRightSide) {
-                                        createNewRowOnRight = true;
-                                        if (createNewRowOnRight) rightSideCounter = 0;
-                                    }
-                                    if (rectsOnLeftSide != 0) {
-                                        if (rectsOnLeftSide == rectsOnRightSide) {
-                                            side = 'left';
-                                        } else if (rectsOnLeftSide != rectsOnRightSide) {
-                                            if ((!createNewRowOnLeft && !createNewRowOnRight)
-                                                || (createNewRowOnRight && !createNewRowOnLeft)
-                                                || (createNewRowOnLeft && rightSideCounter == 1 && !createNewRowOnRight)) {
-                                                side = 'left';
-                                            } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
-                                                side = 'right';
-                                            }
-                                        }
-
-                                    }
-
-                                    var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                    log('build: right');
-                                    currentRowRects.push({side: 'right', rect: rect});
-                                } else if (side == "left") {
-                                    if (latestLeftRect) prevRect = latestLeftRect;
-
-                                    if (leftSideCounter >= 1) {
-
-                                        y = prevRect.y;
-                                        x = prevRect.x - (rectWidth + spaceBetween);
-
-                                    } else if (createNewRowOnLeft) {
-                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y = prevRect.y - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y = prevRect.y + (rectHeight + spaceBetween);
-                                        }
-
-                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                            x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
-                                        } else {
-                                            var allRects = currentRowRects;
-                                            for (var a in rects) {
-                                                allRects = allRects.concat(rects[a]);
-                                            }
-                                            x = allRects.filter(function (rect) {
-                                                return rect.side == 'left';
-                                            }).reduce(function (prev, current) {
-                                                return (prev.rect.x > current.rect.x) ? prev : current;
-                                            }).rect.x;
-                                        }
-
-                                        createNewRowOnLeft = false;
-                                    } else {
-                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y = parentHeight - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y = spaceBetween;
-                                        }
-
-                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                            x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
-                                        } else {
-                                            x = (elementToWrap.left - (rectWidth + spaceBetween));
-                                        }
-                                    }
-
-                                    leftSideCounter++;
-
-                                    if (leftSideCounter == rectsOnLeftSide) {
-                                        createNewRowOnLeft = true;
-                                        leftSideCounter = 0;
-                                    }
-
-                                    if (rectsOnRightSide != 0) {
-                                        if (rectsOnLeftSide == rectsOnRightSide) {
-                                            side = 'right';
-                                        } else if (rectsOnLeftSide != rectsOnRightSide) {
-                                            if (createNewRowOnRight && !createNewRowOnLeft) {
-                                                side = 'left';
-                                            } else if ((!createNewRowOnLeft && !createNewRowOnRight) || (createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && !createNewRowOnRight)) {
-                                                side = 'right';
-                                            }
-                                        }
-                                    }
-
-                                    var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                    log('build: left');
-                                    currentRowRects.push({side: 'left', rect: rect});
-                                }
-
-                                if (i == perRow - 1 || i == totalRectsOnSides - 1) {
-                                    rects.push(currentRowRects);
-                                    currentRowRects = [];
-                                }
-
-                                count = count - 1;
-                            }
-                        }
-                        log('build: rects', JSON.stringify(rects));
-
-
-                        if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                            for(var i in rects){
-                                var currentRowRects = rects[i];
-                                var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
-                                var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                var rowWidth = maxX - minX;
-
-                                var newMinX = parentWidth / 2 - rowWidth / 2;
-
-                                var fixOn = Math.abs(minX - newMinX);
-                                for (var r = 0; r < currentRowRects.length; r++) {
-                                    if(minX > parentWidth - maxX) {
-                                        currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
-                                    } else {
-                                        currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
-                                    }
-                                }
-                            }
-
-                        }
-
-                        var arr = [];
-                        for(var i in rects){
-                            arr = arr.concat(rects[i]);
-                        }
-                        rects = arr;
-
-                        log('build: rects', JSON.stringify(rects));
-
-
-                        var minX, maxX, minY, maxY;
-                        if(align == 'bottom' || align == 'top') {
-                            minX = Math.min.apply(Math, rects.map(function (o) {
-                                return o.rect.x;
-                            }));
-                            maxX = Math.max.apply(Math, rects.map(function (o) {
-                                return o.rect.x + o.rect.width;
-                            }));
-                            if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                            if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-                            minY = Math.min.apply(Math, rects.map(function (o) {
-                                return o.rect.y;
-                            }));
-                            maxY = Math.max.apply(Math, rects.map(function (o) {
-                                return o.rect.y;
-                            }));
-
-                            var rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
-                            rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
-                            perRow =  Math.ceil(rectsNum);
+                        if(!maximized) {
+                            _layoutTool.state.currentGenerator = 'minimizedScreensGrid';
                         } else {
-                            //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-
-                            perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                            if(align == 'bottomleft' || align == 'topleft') {
-                                maxX =  parentWidth - spaceBetween;
-                            } else if (align == 'bottomright' || align == 'topright') {
-                                maxX = elementToWrap.left - spaceBetween;
-                            }
-
-                            minY = spaceBetween;
-                            maxY = parentHeight;
+                            _layoutTool.state.currentGenerator = 'maximizedScreensGrid';
                         }
+                        log('minimizedOrMaximizedScreenGrid: rectWidth=' + rectWidth);
+
+                        if(_layoutTool.basicGridRects.length < count || rebuild) {
+                            _layoutTool.basicGridRects = build(container, count, elementToWrap, maximized);
+                        }
+                        log('minimizedOrMaximizedScreenGrid: rectWidth2=' + rectWidth);
 
 
+                        if(_layoutTool.currentRects.length == 0 || rebuild) {
+                            log('minimizedOrMaximizedScreenGrid: build');
+                            log('minimizedOrMaximizedScreenGrid: rectWidth3=' + rectWidth);
 
-                        var latestRect;
-                        var isNextNewLast = false;
-                        var rowItemCounter = 1;
-                        var i;
-                        for (i = 1; i <= count; i++) {
-                            //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-                            if(latestRect != null) var prevRect = latestRect;
-                            var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
-                            var isNextNewRow  = rowItemCounter  == perRow;
-                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+                            _layoutTool.currentRects = build(container, count, elementToWrap, maximized);
+                            log('minimizedOrMaximizedScreenGrid: rectWidth4=' + rectWidth);
 
-                            var x,y
-                            if(rowItemCounter > 1) {
-                                y = prevRect.y;
-                                x = prevRect.x - (rectWidth + spaceBetween);
+                            log('minimizedOrMaximizedScreenGrid: build currentRects', JSON.stringify(_layoutTool.currentRects));
+                        } else {
+
+                            if(count > _layoutTool.currentRects.length) {
+                                var availableRects = addAndUpdate(container, count, elementToWrap, maximized);
+                                _layoutTool.currentRects = _layoutTool.currentRects.concat(availableRects);
+                                log('minimizedOrMaximizedScreenGrid: addAndUpdate currentRects'/*, JSON.stringify(_layoutTool.currentRects), JSON.stringify(availableRects)*/);
+
+                            } else if(count < _layoutTool.currentRects.length) {
+
+                                _layoutTool.currentRects = removeAndUpdate(container, count, elementToWrap, maximized);
+                                log('minimizedOrMaximizedScreenGrid: removeAndUpdate currentRects', JSON.stringify(_layoutTool.currentRects));
+
+                            }
+                        }
+                        //log('minimizedOrMaximizedScreenGrid: currentRects', JSON.stringify(_layoutTool.currentRects));
+
+                        if(maximized || (activeScreen != null && maximized != false)) {
+                            log('minimizedOrMaximizedScreenGrid: maximize');
+
+                            _layoutTool.currentRects = maximizeScreen();
+                        } else if(!maximized) {
+                            log('minimizedOrMaximizedScreenGrid: minimize');
+
+                            _layoutTool.currentRects = minimizeScreen();
+                        }
+                        //log('minimizedOrMaximizedScreenGrid: result rects',  JSON.stringify(_layoutTool.currentRects));
+
+                        return  _layoutTool.currentRects;
+
+                        function getControlsAlign() {
+
+                            if(!document.body.contains(wrapElement)) return defaultSide;
+                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                            var parentHeight = containerRect.height;
+
+                            if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top < parentHeight / 2) {
+                                return 'topleft';
+                            } else if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top > parentHeight / 2) {
+                                return 'bottomleft';
+                            } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top < parentHeight / 2) {
+                                return 'topright';
+                            } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top > parentHeight / 2) {
+                                return 'bottomright';
+                            } else if(wrapElement.classList.contains('Q_resize_snapped_top')) {
+                                return 'top';
+                            } else if(wrapElement.classList.contains('Q_resize_snapped_bottom')) {
+                                return 'bottom';
                             } else {
-
-                                var startX = maxX;
-                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                    var startY = prevRect != null ? prevRect.y : maxY;
-                                    y = startY - (rectHeight + spaceBetween);
-                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                    y = prevRect != null ? (prevRect.y + rectHeight + spaceBetween) : minY;
-                                }
-                                x = startX - rectWidth;
+                                return 'bottom';
                             }
-                            var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                            rects.push({side:null, rect: rect});
-
-                            if(rowItemCounter == perRow) {
-                                rowItemCounter = 1;
-                            } else rowItemCounter++;
                         }
 
-                        rects = rects.map(function(rectObj){
-                            return rectObj.rect;
-                        });
+                        function maximizeScreen(){
+                            log('maximizeScreen activeScreen', activeScreen)
 
-                        //return alignFullRows(rects)
-                        return rects;
-                    }
+                            var indexToMaximize;
 
-                    function addAndUpdate(container, count, elementToWrap, maximized) {
-                        log('addAndUpdate')
+                            for(let s in roomScreens) {
+                                if(activeScreen == roomScreens[s]) {
+                                    indexToMaximize = s;
+                                    break;
+                                }
+                            }
 
-                        var align = getControlsAlign();
-
-                        var rectWidth = 90;
-                        var rectHeight = 90;
-                        var spaceBetween = 10;
-
-                        var currentRects = _layoutTool.currentRects;
-
-                        if(_layoutTool.maximizedScreen != null) {
-                            currentRects = _layoutTool.currentRects.filter(function(r, i){
-                                return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
-                                && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
-                            });
-                        } else {
-                            currentRects = _layoutTool.currentRects;
-                        }
-
-                        var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                        var parentWidth = containerRect.width;
-                        var parentHeight = containerRect.height;
-                        var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-
-                        var rectsOnLeftSide, rectsOnRightSide, rectsToTheTop;
-                        if(align == 'top' || align == 'bottom') {
-                            rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                            rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
-
-                            rectsToTheTop = Math.floor((elementToWrap.height + spaceBetween) / (rectHeight + spaceBetween));
-                        } else {
-                            rectsOnLeftSide = rectsOnRightSide = rectsToTheTop = 0;
-                        }
-
-                        var getRectsRows = function () {
-                            var rows = {};
-                            var left = [];
-                            var right = [];
-                            var none = [];
-                            var i, count = currentRects.length;
-                            for(i = 0; i < count; i++) {
-                                var rect = currentRects[i];
-
-
-                                if(align == 'bottom' || align == 'top') {
-                                    if(rect.left < elementToWrap.left) {
-                                        if(rows[rect.top + '_l'] == null) rows[rect.top + '_l'] = [];
-
-                                        rows[rect.top + '_l'].push({indx: i, top: rect.top, rect:rect, side:'left'});
-                                    } else {
-                                        if(rows[rect.top + '_r'] == null) rows[rect.top + '_r'] = [];
-
-                                        rows[rect.top + '_r'].push({indx: i, top: rect.top, rect:rect, side:'right'});
+                            var currentMaximizedIndex;
+                            if(_layoutTool.maximizedScreen != null) {
+                                for(let s in roomScreens) {
+                                    if(_layoutTool.maximizedScreen == roomScreens[s]) {
+                                        currentMaximizedIndex = s;
+                                        break;
                                     }
-                                } else {
-                                    if(rows[rect.top] == null) rows[rect.top] = [];
-
-                                    rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
                                 }
                             }
 
-                            var rowsArray = [];
-                            for (var property in rows) {
-                                if (rows.hasOwnProperty(property)) {
-                                    if(rows[property][0].side == 'left') {
-                                        left.push(rows[property]);
-                                    } else if(rows[property][0].side == 'right') {
-                                        right.push(rows[property]);
-                                    } else {
-                                        none.push(rows[property]);
+                            log('maximizeScreen : currentMaximizedIndex, indexToMaximize', currentMaximizedIndex, indexToMaximize);
+
+                            var align = getControlsAlign();
+
+                            if(activeScreenRect != null) {
+                                var rectsToTakeInc = _layoutTool.currentRects.filter(function(r, i){
+                                    return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
+                                    && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
+                                });
+                                var minY = Math.min.apply(Math, rectsToTakeInc.map(function(o) { return o.y; }));
+                                var maxY = Math.max.apply(Math, rectsToTakeInc.map(function(o) { return o.y + o.height; }));
+                            } else {
+                                var minY = Math.min.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y; }));
+                                var maxY = Math.max.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y + o.height; }));
+                            }
+
+
+                            var y, baseHeight;
+                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                baseHeight = (minY - spaceBetween) - 50;
+                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                baseHeight = parentHeight - (maxY + spaceBetween) - 50;
+                            }
+                            var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
+                            var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
+                            log('maximizeScreen minY', minY, maxY)
+
+                            var mainScreenSize = getElementSizeKeepingRatio({
+                                width: videoWidth,
+                                height: videoHeight
+                            }, {width: parentWidth / 100 * 90, height: Math.min(baseHeight - 50, ((parentHeight - (align == 'top' || align == 'bottom' ? elementToWrap.height : spaceBetween)) / 100 * 90) - 50)})
+                            mainScreenSize.height = mainScreenSize.height + 50;
+
+                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                if(align == 'bottom') minY = count > 1 ? minY : parentHeight - elementToWrap.height;
+                                y = (minY / 2) - mainScreenSize.height / 2;
+                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                y = ((parentHeight - maxY) / 2) - (mainScreenSize.height / 2) + maxY;
+
+                            }
+
+                            var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, y, mainScreenSize.width, mainScreenSize.height);
+
+                            if(indexToMaximize) {
+                                var minimizedRect = _layoutTool.currentRects[indexToMaximize];
+                                if(minimizedRect)log('maximizeScreen minimizedRect', JSON.stringify(minimizedRect))
+
+                                minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
+                                _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
+                                _layoutTool.currentRects[indexToMaximize].y = maximizedRect.y;
+                                _layoutTool.currentRects[indexToMaximize].width = maximizedRect.width;
+                                _layoutTool.currentRects[indexToMaximize].height = maximizedRect.height;
+
+                                activeScreenRect = _layoutTool.currentRects[indexToMaximize];
+                            }
+
+                            log('maximizeScreen currentRects.length', _layoutTool.currentRects.length)
+
+                            if(!currentMaximizedIndex && indexToMaximize || currentMaximizedIndex == indexToMaximize) {
+                                if(_layoutTool.currentRects.length == 3 && roomScreens[1] == activeScreen) {
+                                    log('maximizeScreen currentRects.length == 3')
+
+                                    _layoutTool.currentRects[2].x = minimizedRect.x;
+                                    _layoutTool.currentRects[2].y = minimizedRect.y;
+                                    _layoutTool.currentRects[2].width = minimizedRect.width;
+                                    _layoutTool.currentRects[2].height = minimizedRect.height;
+                                }
+                            }
+
+                            if(currentMaximizedIndex && currentMaximizedIndex != indexToMaximize) {
+                                log('maximizeScreen currentMaximizedIndex', currentMaximizedIndex)
+
+                                _layoutTool.currentRects[currentMaximizedIndex].x = minimizedRect.x;
+                                _layoutTool.currentRects[currentMaximizedIndex].y = minimizedRect.y;
+                                _layoutTool.currentRects[currentMaximizedIndex].width = minimizedRect.width;
+                                _layoutTool.currentRects[currentMaximizedIndex].height = minimizedRect.height;
+                            } else {
+                                log('maximizeScreen no currentMaximizedIndex')
+                                _layoutTool.currentRects = fillFreeSpaceWithClosestRects(minimizedRect, _layoutTool.currentRects, (activeScreenRect ? [activeScreenRect] : null))
+                            }
+
+                            _layoutTool.maximizedScreen = activeScreen;
+                            log('maximizeScreen result rects', _layoutTool.currentRects)
+
+                            return _layoutTool.currentRects;
+                        }
+
+                        function minimizeScreen(){
+                            log('minimizeScreen : minimizeScreen', _layoutTool.maximizedScreen);
+
+                            var currentMaximizedIndex;
+                            if(_layoutTool.maximizedScreen != null) {
+                                for (var s in roomScreens) {
+                                    if (_layoutTool.maximizedScreen == roomScreens[s]) {
+                                        currentMaximizedIndex = parseInt(s, 10);
+                                        break;
                                     }
-                                    rowsArray.push(rows[property]);
                                 }
                             }
+
+                            var count = _layoutTool.currentRects.length + 1
+                            var rect = addAndUpdate(container, count, elementToWrap, maximized);
+                            _layoutTool.currentRects[currentMaximizedIndex] = new DOMRect(rect[0].x, rect[0].y, rect[0].width, rect[0].height);
+                            activeScreenRect = activeScreen = _layoutTool.maximizedScreen = null
+
+                            return _layoutTool.currentRects;
+                        }
+
+                        function getRectsGridParams(wrapElPosition) {
+                            var rectsPerRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+
+                            var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
+                            if(wrapElPosition == 'bottom' || wrapElPosition == 'top') {
+                                rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
+                                rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
+                                //numOfRowsAlongWrapEl = Math.floor((elementToWrap.top + spaceBetween) / (rectWidth + spaceBetween));
+                                if (wrapElPosition == 'bottom') {
+                                    numOfRowsAlongWrapEl = Math.ceil((parentHeight - elementToWrap.top) / (rectHeight + spaceBetween));
+                                } else if (wrapElPosition == 'top') {
+                                    numOfRowsAlongWrapEl = Math.ceil((elementToWrap.top + elementToWrap.height) / (rectHeight + spaceBetween));
+                                }
+                            } else if(wrapElPosition == 'bottomleft' || wrapElPosition == 'bottomright') {
+                                rectsOnLeftSide = rectsOnRightSide =  Math.floor(rectsPerRow / 2);
+                                numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            } else if(wrapElPosition == 'topleft' || wrapElPosition == 'topright') {
+                                rectsOnLeftSide = rectsOnRightSide = Math.floor(rectsPerRow / 2);
+                                numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            } else {
+                                rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
+                            }
+
 
                             return {
-                                left: left,
-                                right: right,
-                                none: none,
-                                all: rowsArray
-                            };
+                                rectsOnLeftSide: rectsOnLeftSide,
+                                rectsOnRightSide: rectsOnRightSide,
+                                numOfRowsAlongWrapEl: numOfRowsAlongWrapEl,
+                                rectsPerRow: rectsPerRow
+                            }
                         }
 
-                        var getAvailableRects = function (sortedRows) {
-                            log('getAvailableRects', sortedRows)
-                            var  rows = sortedRows.all;
-                            var availableRects = [];
-                            var availableRectsFullRow = [];
-                            var availableRectsOnLeft = [];
-                            var availableRectsOnRight = [];
+                        function build(container, count, elementToWrap, maximized) {
 
-
-                            var minX, maxX, minY, maxY;
-                            if(align == 'bottom' || align == 'top') {
-                                minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
-                                maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
-
-                                if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-
-
-                            } else {
-                                //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-
-                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                                if(align == 'bottomleft' || align == 'topleft') {
-                                    maxX =  parentWidth - spaceBetween;
-                                    minX =  elementToWrap.left + elementToWrap.width + spaceBetween;
-                                } else if (align == 'bottomright' || align == 'topright') {
-                                    maxX = elementToWrap.left - spaceBetween;
-                                    minX = spaceBetween;
-                                }
-                            }
-
-                            /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-							var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
-                            var maxWidth = maxX - minX;
-
-
-                            var i, rowsCount = rows.length;
-                            for(i = 0; i < rowsCount; i++) {
-                                var row = rows[i];
-                                var sampleRect = row[0];
-
-                                if(sampleRect.side == 'left') {
-
-                                    var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
-
-                                    if(row.length != maxRectsOnLeftSide){
-                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                        var r, numRectsToAdd = maxRectsOnLeftSide - row.length, prevRect;
-                                        for(r = 0; r < numRectsToAdd; r++){
-                                            var newRect;
-                                            if(r == 0) {
-                                                newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            } else {
-                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            }
-                                            availableRectsOnLeft.push(newRect);
-
-                                            prevRect = newRect;
-                                        }
-                                    }
-
-                                } else if (sampleRect.side == 'right') {
-
-                                    var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
-
-                                    if(row.length != maxRectsOnRightSide){
-                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                        var r, numRectsToAdd = maxRectsOnRightSide - row.length, prevRect;
-                                        for(r = 0; r < numRectsToAdd; r++){
-                                            var newRect;
-                                            if(r == 0) {
-                                                newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            } else {
-                                                newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            }
-                                            availableRectsOnRight.push(newRect);
-
-                                            prevRect = newRect;
-                                        }
-                                    }
-
-                                } else {
-
-                                    var maxRectsInCurrentRow = Math.floor((maxWidth + spaceBetween) / (sampleRect.rect.width + spaceBetween));
-                                    if(row.length != maxRectsInCurrentRow){
-                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                        var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
-                                        for(r = 0; r < numRectsToAdd; r++){
-                                            var newRect;
-                                            if(r == 0) {
-                                                newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            } else {
-                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            }
-                                            availableRectsFullRow.push(newRect);
-
-                                            prevRect = newRect;
-                                        }
-                                    }
-                                }
-
-                            }
-
-                            if(sortedRows.left.length != sortedRows.right.length) {
-                                if(sortedRows.left.length > sortedRows.right.length && rectsOnRightSide != 0){
-
-                                    var rowsToCreate = sortedRows.left.length - sortedRows.right.length;
-
-                                    var i;
-                                    for(i = sortedRows.right.length; i < sortedRows.left.length; i++) {
-                                        var leftRow = sortedRows.left[i];
-                                        var sampleRect = leftRow[0];
-
-                                        var rowsMinX = elementToWrap.left + elementToWrap.width + spaceBetween;
-                                        var rowsMaxX = parentWidth - spaceBetween;
-
-                                        var r, prevRect;
-                                        for(r = 0; r < rectsOnRightSide; r++){
-                                            var newRect;
-                                            if(r == 0) {
-                                                newRect = new DOMRect(elementToWrap.left + elementToWrap.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
-                                            } else {
-                                                newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
-                                            }
-                                            availableRectsOnRight.push(newRect);
-
-                                            prevRect = newRect;
-                                        }
-
-                                    }
-
-                                } else if(sortedRows.right.length > sortedRows.left.length && rectsOnLeftSide != 0) {
-                                    var rowsToCreate = sortedRows.right.length - sortedRows.left.length;
-
-                                    var i;
-                                    for(i = sortedRows.left.length; i < sortedRows.right.length; i++) {
-
-                                        var rightRow = sortedRows.right[i];
-                                        var sampleRect = rightRow[0];
-
-                                        var rowsMinX = spaceBetween;
-                                        var rowsMaxX = elementToWrap.left - spaceBetween;
-
-                                        var r, prevRect;
-                                        for(r = 0; r < rectsOnLeftSide; r++){
-                                            var newRect;
-                                            if(r == 0) {
-                                                newRect = new DOMRect(elementToWrap.left - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            } else {
-                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                            }
-                                            availableRectsOnLeft.push(newRect);
-
-                                            prevRect = newRect;
-                                        }
-
-                                    }
-
-                                }
-                            }
-
-
-                            var longerSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnRight : availableRectsOnLeft;
-                            var shorterSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnLeft : availableRectsOnRight;
-
-                            var alternatedArray = [];
-
-                            var i, length = longerSide.length;
-                            for (i = 0; i < length; i++) {
-                                var sampleRect = longerSide[i];
-
-                                var currentLeftRow = sortedRows.left.filter(function(r){
-                                    return r[0].top == sampleRect.top ? true : false;
-                                })[0];
-                                var currentRightRow = sortedRows.right.filter(function(r){
-                                    return r[0].top == sampleRect.top ? true : false;
-                                })[0];
-
-                                if(currentLeftRow != null && currentRightRow != null && currentLeftRow.length != 0 && currentRightRow.length != 0) {
-                                    if(currentRightRow.length <= currentLeftRow.length) {
-                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                    } else {
-                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                    }
-                                } else if(currentLeftRow == null && currentRightRow != null) {
-                                    if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                    if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                } else if(currentLeftRow != null && currentRightRow == null) {
-                                    if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                    if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                }
-
-                            }
-
-                            availableRects = availableRects.concat(alternatedArray);
-                            availableRects = availableRects.concat(availableRectsFullRow);
-                            return availableRects;
-                        }
-
-                        var createNewRows = function(numRectsToAdd, rows, availableRects) {
-                            var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                             var parentWidth = containerRect.width;
                             var parentHeight = containerRect.height;
 
                             var align = getControlsAlign();
 
+
+                            console.log('build: rectWidth', rectWidth)
+
                             var rectWidth = 90;
                             var rectHeight = 90;
                             var spaceBetween = 10;
-                            var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                            var gridParams = getRectsGridParams(align);
+                            var rectsOnLeftSide = gridParams.rectsOnLeftSide;
+                            var rectsOnRightSide = gridParams.rectsOnRightSide;
+                            var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
+                            var perRow = gridParams.rectsPerRow;
 
-                            var rectsOnLeftSide, rectsOnRightSide, rowsAlongControls;
+
+                            if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
+                            var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
+                            if(count < totalRectsOnSides) totalRectsOnSides = count;
+
+                            log('build : rectsOnLeftSide', rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl);
+                            log('build : totalRectsOnSides', totalRectsOnSides);
+
+                            var rects = [];
+                            var currentRowRects = [];
+
+                            /*if(maximized) {
+                                count = totalRectsOnSides = count - 1;
+                            }*/
+
                             if(align == 'top' || align == 'bottom') {
-                                rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                                rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
-
-                                rowsAlongControls = Math.ceil((elementToWrap.height + spaceBetween) / (rectHeight + spaceBetween));
-                            } else {
-                                rectsOnLeftSide = rectsOnRightSide = rowsAlongControls = 0;
-                            }
-
-                            var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
-                            var maxWidth = maxX - minX;
-                            var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
-                            var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
-
-                            var newRects = [];
-
-                            var craeteRowsOnControlsSides = function(){
-                                log('craeteRowsOnControlsSides');
-                                var rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                                var rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
-
+                                var isNextNewLast = false;
                                 var startFrom, side;
-                                var minLeftY, minRightY, maxLeftY, maxRightY;
-
-                                var figureOutCoordsonLeft = function() {
-                                    log('craeteRowsOnControlsSides figureOutCoordsonLeft');
-
-                                    if(rows.left.length != 0) {
-                                        var allrects = [];
-                                        for(var l in rows.left) {
-                                            allrects = allrects.concat(rows.left[l])
-                                        }
-                                        minLeftY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
-                                        maxLeftY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
-                                    } else {
-                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            minLeftY = maxLeftY = parentHeight;
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            minLeftY = maxLeftY = (0 - rectHeight);
-                                        }
-                                    }
-                                }
-
-                                var figureOutCoordsonRight = function() {
-                                    log('craeteRowsOnControlsSides figureOutCoordsonRight');
-
-                                    if(rows.right.length != 0) {
-                                        var allrects = [];
-                                        for(var l in rows.right) {
-                                            allrects = allrects.concat(rows.right[l])
-                                        }
-                                        minRightY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
-                                        maxRightY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
-                                    } else {
-                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            minRightY = maxRightY = parentHeight;
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            minRightY = maxRightY = (0 - rectHeight);
-                                        }
-
-                                    }
-                                }
-
-                                if(rows.left.length == rows.right.length) {
-                                    figureOutCoordsonRight();
-                                    figureOutCoordsonLeft();
-                                    startFrom = side = 'right';
-
-                                } else if (rectsOnRightSide != 0 && rectsOnLeftSide != 0) {
-                                    figureOutCoordsonRight();
-                                    figureOutCoordsonLeft();
-
-                                    if (rows.right.length < rows.left.length) {
-                                        startFrom = side = 'right';
-                                    } else if (rows.left.length < rows.right.length) {
-                                        startFrom = side = 'left';
-                                    }
-                                } else if (rectsOnLeftSide != 0) {
-                                    figureOutCoordsonLeft();
-
-                                    startFrom = side = 'left';
-                                } else if (rectsOnRightSide != 0) {
-                                    figureOutCoordsonRight();
-
-                                    startFrom = side = 'right';
-                                } else {
-
-                                }
-
-                                var rectsToTheTop, rectsToTheTopOnLeft, rectsToTheTopOnRight;
-
-                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                    rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
-                                    rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
-
-                                    if(minY < elementToWrap.top) {
-                                        rectsToTheTop = 0;
-                                        rectsToTheTopOnLeft = 0;
-                                        rectsToTheTopOnRight = 0;
-                                    }
-
-                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                    rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
-                                    rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
-
-                                    if(minY < elementToWrap.top) {
-                                        rectsToTheTop = 0;
-                                        rectsToTheTopOnLeft = 0;
-                                        rectsToTheTopOnRight = 0;
-                                    }
-                                }
-
-                                var count = numRectsToAdd;
-                                var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
-                                var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
-                                var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
-                                if(count < totalRectsOnSides) totalRectsOnSides = count;
-
-
-                                var rects = [];
-                                var currentRowRects = [];
-
-                                /*if(maximized) {
-									count = totalRectsOnSides = count - 1;
-								}*/
-
-
+                                startFrom = side = rectsOnRightSide != 0 ? 'right' : 'left';
+                                var rowItemCounter = 1;
                                 var leftSideCounter = 0;
                                 var rightSideCounter = 0;
                                 var createNewRowOnLeft = false;
                                 var createNewRowOnRight = false;
                                 var i, x, y, prevRect, latestLeftRect, latestRightRect;
                                 for (i = 0; i < totalRectsOnSides; i++) {
-                                    if(side == "right") {
-                                        if(latestRightRect) prevRect = latestRightRect
-                                        if(rightSideCounter >= 1) {
+                                    log('build : totalRectsOnSides for', i);
 
+                                    if (side == "right") {
+                                        log('build : totalRectsOnSides for if1', prevRect, latestRightRect);
+
+                                        if (latestRightRect) prevRect = latestRightRect
+                                        if (rightSideCounter >= 1) {
                                             y = prevRect.y;
                                             x = prevRect.x + (rectWidth + spaceBetween);
+                                            log('build : totalRectsOnSides for if1 prevRect.x', x, prevRect.x);
 
-                                        } else if(createNewRowOnRight) {
+                                        } else if (createNewRowOnRight) {
+                                            log('build : totalRectsOnSides for if2');
 
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = prevRect.y - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
                                                 y = prevRect.y + prevRect.height + spaceBetween;
                                             }
 
-                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                             } else {
                                                 var allRects = currentRowRects;
                                                 for (var a in rects) {
                                                     allRects = allRects.concat(rects[a]);
                                                 }
-                                                x = allRects.filter(function(rect){
+                                                x = allRects.filter(function (rect) {
                                                     return rect.side == 'right';
-                                                }).reduce(function(prev, current) {
+                                                }).reduce(function (prev, current) {
                                                     return (prev.rect.x < current.rect.x) ? prev : current;
                                                 }).rect.x
                                             }
 
                                             createNewRowOnRight = false;
                                         } else {
+                                            log('build : totalRectsOnSides for if3');
 
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                y = minRightY - (rectHeight + spaceBetween);
+
+                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                y = parentHeight - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                y = maxRightY + rectHeight + spaceBetween;
+                                                y = spaceBetween;
                                             }
 
-                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                             } else {
                                                 x = (elementToWrap.left + elementToWrap.width + spaceBetween);
@@ -5839,64 +5364,66 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                         rightSideCounter++;
 
-                                        if(rightSideCounter == rectsOnRightSide) {
+                                        if (rightSideCounter == rectsOnRightSide) {
                                             createNewRowOnRight = true;
-                                            rightSideCounter = 0;
+                                            if (createNewRowOnRight) rightSideCounter = 0;
                                         }
-                                        if (totalRectsOnLeftSide != 0) {
+                                        if (rectsOnLeftSide != 0) {
                                             if (rectsOnLeftSide == rectsOnRightSide) {
                                                 side = 'left';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnLeft) {
-                                                side = 'left';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
-                                                side = 'left';
+                                            } else if (rectsOnLeftSide != rectsOnRightSide) {
+                                                if ((!createNewRowOnLeft && !createNewRowOnRight)
+                                                    || (createNewRowOnRight && !createNewRowOnLeft)
+                                                    || (createNewRowOnLeft && rightSideCounter == 1 && !createNewRowOnRight)) {
+                                                    side = 'left';
+                                                } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
+                                                    side = 'right';
+                                                }
                                             }
 
                                         }
+
                                         var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        log('craeteRowsOnControlsSides right', rect);
-                                        currentRowRects.push({side:'right', rect: rect});
+                                        log('build: right');
+                                        currentRowRects.push({side: 'right', rect: rect});
+                                    } else if (side == "left") {
+                                        if (latestLeftRect) prevRect = latestLeftRect;
 
-                                    } else if(side == "left") {
-                                        if(latestLeftRect) prevRect = latestLeftRect;
-
-                                        if(leftSideCounter >= 1 ) {
+                                        if (leftSideCounter >= 1) {
 
                                             y = prevRect.y;
                                             x = prevRect.x - (rectWidth + spaceBetween);
 
-                                        } else if(createNewRowOnLeft) {
-
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                        } else if (createNewRowOnLeft) {
+                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = prevRect.y - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
                                                 y = prevRect.y + (rectHeight + spaceBetween);
                                             }
 
-                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                             } else {
                                                 var allRects = currentRowRects;
                                                 for (var a in rects) {
                                                     allRects = allRects.concat(rects[a]);
                                                 }
-                                                x = allRects.filter(function(rect){
+                                                x = allRects.filter(function (rect) {
                                                     return rect.side == 'left';
-                                                }).reduce(function(prev, current) {
+                                                }).reduce(function (prev, current) {
                                                     return (prev.rect.x > current.rect.x) ? prev : current;
                                                 }).rect.x;
                                             }
 
                                             createNewRowOnLeft = false;
                                         } else {
-
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                y = minLeftY - (rectHeight + spaceBetween);
+                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                y = parentHeight - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                y = maxLeftY + rectHeight + spaceBetween;
+                                                y = spaceBetween;
                                             }
 
-                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                             } else {
                                                 x = (elementToWrap.left - (rectWidth + spaceBetween));
@@ -5905,476 +5432,1276 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                         leftSideCounter++;
 
-                                        if(leftSideCounter == rectsOnLeftSide) {
+                                        if (leftSideCounter == rectsOnLeftSide) {
                                             createNewRowOnLeft = true;
                                             leftSideCounter = 0;
                                         }
 
-                                        if (totalRectsOnRightSide != 0) {
+                                        if (rectsOnRightSide != 0) {
                                             if (rectsOnLeftSide == rectsOnRightSide) {
                                                 side = 'right';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnRight) {
-                                                side = 'right';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
-                                                side = 'right';
+                                            } else if (rectsOnLeftSide != rectsOnRightSide) {
+                                                if (createNewRowOnRight && !createNewRowOnLeft) {
+                                                    side = 'left';
+                                                } else if ((!createNewRowOnLeft && !createNewRowOnRight) || (createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && !createNewRowOnRight)) {
+                                                    side = 'right';
+                                                }
                                             }
                                         }
 
                                         var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        currentRowRects.push({side:'left', rect: rect});
-                                        log('craeteRowsOnControlsSides left', rect);
-
-
+                                        log('build: left');
+                                        currentRowRects.push({side: 'left', rect: rect});
                                     }
 
-                                    if(i == perRow - 1 || i == totalRectsOnSides - 1) {
+                                    if (i == perRow - 1 || i == totalRectsOnSides - 1) {
                                         rects.push(currentRowRects);
                                         currentRowRects = [];
                                     }
 
                                     count = count - 1;
                                 }
-
-
-                                var arr = [];
-                                for(var i in rects){
-                                    arr = arr.concat(rects[i]);
-                                }
-                                log('craeteRowsOnControlsSides arr', JSON.stringify(arr));
-
-                                return arr.map(function(rectObj){
-                                    return rectObj.rect;
-                                });
                             }
 
-                            var createFullRows = function(count) {
-                                log('createFullRows');
+                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                log('build: rects', JSON.stringify(rects));
 
-                                var allRects = currentRects.concat(newRects).concat(availableRects);
-                                var minX, maxX, rectsNum;
-                                if(align == 'top' || align == 'bottom') {
-                                    var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
-                                    var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
-                                    if(minX > elementToWrap.left) minX = elementToWrap.left;
-                                    if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-                                    rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
-                                    rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+                                for(var i in rects){
+                                    var currentRowRects = rects[i];
+                                    var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
+                                    var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
 
+                                    var rowWidth = maxX - minX;
+
+                                    var newMinX = parentWidth / 2 - rowWidth / 2;
+
+                                    var fixOn = Math.abs(minX - newMinX);
+                                    for (var r = 0; r < currentRowRects.length; r++) {
+                                        if(minX > parentWidth - maxX) {
+                                            currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
+                                        } else {
+                                            currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            var arr = [];
+                            for(var i in rects){
+                                arr = arr.concat(rects[i]);
+                            }
+                            rects = arr;
+
+                            log('build: rects', JSON.stringify(rects));
+
+
+                            var minX, maxX, minY, maxY;
+                            log('build: 0  minX, maxX, minY, maxY',  minX, maxX, minY, maxY);
+
+                            if(align == 'bottom' || align == 'top') {
+                                minX = Math.min.apply(Math, rects.map(function (o) {
+                                    return o.rect.x;
+                                }));
+                                maxX = Math.max.apply(Math, rects.map(function (o) {
+                                    return o.rect.x + o.rect.width;
+                                }));
+                                if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                                if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                                minY = Math.min.apply(Math, rects.map(function (o) {
+                                    return o.rect.y;
+                                }));
+                                maxY = Math.max.apply(Math, rects.map(function (o) {
+                                    return o.rect.y;
+                                }));
+
+                                var rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
+                                rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+                                perRow =  Math.ceil(rectsNum);
+                            } else if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+
+                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                if(align == 'bottomleft' || align == 'topleft') {
+                                    maxX =  parentWidth - spaceBetween;
+                                } else if (align == 'bottomright' || align == 'topright') {
+                                    maxX = elementToWrap.left - spaceBetween;
+                                }
+
+                                minY = spaceBetween;
+                                maxY = parentHeight;
+                            } else {
+                                minX = spaceBetween;
+                                maxX = parentWidth - spaceBetween;
+                                minY = spaceBetween;
+                                maxY = parentHeight;
+                            }
+
+                            log('build:  minX, maxX, minY, maxY',  minX, maxX, minY, maxY);
+
+
+                            var latestRect;
+                            var isNextNewLast = false;
+                            var rowItemCounter = 1;
+                            var i;
+                            for (i = 1; i <= count; i++) {
+                                //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                                if(latestRect != null) var prevRect = latestRect;
+                                var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+                                var isNextNewRow  = rowItemCounter  == perRow;
+                                isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+                                var x,y
+                                if(rowItemCounter > 1 && prevRect) {
+                                    log('build: row rect 1')
+                                    y = prevRect.y;
+                                    x = prevRect.x - (rectWidth + spaceBetween);
                                 } else {
-                                    if(align == 'bottomleft' || align == 'topleft') {
+                                    log('build: row rect 2');
+
+                                    var startX = maxX;
+                                    if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                        var startY = prevRect != null ? prevRect.y : maxY;
+                                        y = startY - (rectHeight + spaceBetween);
+                                    } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                        y = prevRect != null ? (prevRect.y + rectHeight + spaceBetween) : minY;
+                                    } else if (align == 'top-full'){
+                                        var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween: minY;
+                                        y = startY;
+                                    } else if (align == 'bottom-full'){
+                                        var startY = prevRect != null ? prevRect.y : maxY;
+                                        y = startY - (rectHeight + spaceBetween);
+                                    }
+                                    x = startX - rectWidth;
+                                }
+                                var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+                                log('build:  rect push',  rect);
+
+                                rects.push({side:null, rect: rect});
+
+                                if(rowItemCounter == perRow) {
+                                    rowItemCounter = 1;
+                                } else rowItemCounter++;
+                            }
+
+                            rects = rects.map(function(rectObj){
+                                return rectObj.rect;
+                            });
+
+                            //return alignFullRows(rects)
+                            return rects;
+                        }
+
+                        function addAndUpdate(container, count, elementToWrap, maximized) {
+                            log('addAndUpdate')
+
+                            var align = getControlsAlign();
+
+                            var currentRects = _layoutTool.currentRects;
+
+                            if(_layoutTool.maximizedScreen != null) {
+                                currentRects = _layoutTool.currentRects.filter(function(r, i){
+                                    return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
+                                    && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
+                                });
+                            } else {
+                                currentRects = _layoutTool.currentRects;
+                            }
+
+                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+
+
+                            var gridParams = getRectsGridParams(align);
+                            var rectsOnLeftSide = gridParams.rectsOnLeftSide;
+                            var rectsOnRightSide = gridParams.rectsOnRightSide;
+                            var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
+                            var perRow = gridParams.rectsPerRow;
+
+
+                            var getRectsRows = function () {
+                                var rows = {};
+                                var left = [];
+                                var right = [];
+                                var none = [];
+                                var i, count = currentRects.length;
+                                for(i = 0; i < count; i++) {
+                                    var rect = currentRects[i];
+
+
+                                    if(align == 'bottom' || align == 'top') {
+                                        let isTopFullRow = align == 'top' && rect.top > elementToWrap.bottom
+                                        let isBottomFullRow = align == 'bottom' && rect.bottom < elementToWrap.top
+                                        if(rect.left < elementToWrap.left && !isTopFullRow && !isBottomFullRow) {
+                                            if(rows[rect.top + '_l'] == null) rows[rect.top + '_l'] = [];
+
+                                            rows[rect.top + '_l'].push({indx: i, top: rect.top, rect:rect, side:'left'});
+                                        } else if (rect.left >= elementToWrap.left && !isTopFullRow && !isBottomFullRow){
+                                            if(rows[rect.top + '_r'] == null) rows[rect.top + '_r'] = [];
+
+                                            rows[rect.top + '_r'].push({indx: i, top: rect.top, rect:rect, side:'right'});
+                                        } else {
+                                            if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                            rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
+                                        }
+                                    } else {
+                                        if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                        rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
+                                    }
+                                }
+
+                                var rowsArray = [];
+                                for (var property in rows) {
+                                    if (rows.hasOwnProperty(property)) {
+                                        if(rows[property][0].side == 'left') {
+                                            left.push(rows[property]);
+                                        } else if(rows[property][0].side == 'right') {
+                                            right.push(rows[property]);
+                                        } else {
+                                            none.push(rows[property]);
+                                        }
+                                        rowsArray.push(rows[property]);
+                                    }
+                                }
+
+                                return {
+                                    left: left,
+                                    right: right,
+                                    none: none,
+                                    all: rowsArray
+                                };
+                            }
+
+                            var getAvailableRects = function (sortedRows) {
+                                log('getAvailableRects', sortedRows)
+                                var  rows = sortedRows.all;
+                                var availableRects = [];
+                                var availableRectsFullRow = [];
+                                var availableRectsOnLeft = [];
+                                var availableRectsOnRight = [];
+
+
+                                var minX, maxX, minY, maxY;
+                                log('getAvailableRects: align', align)
+
+                                if(align == 'bottom' || align == 'top') {
+                                    log('getAvailableRects: align: top|bottom');
+
+                                    minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
+                                    maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
+
+                                    if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                                    if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+
+
+                                } else if(align == 'bottomleft' || align == 'topleft') {
+                                    log('getAvailableRects: align: left|right');
+                                    //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                    perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                    maxX =  parentWidth - spaceBetween;
+                                    minX =  elementToWrap.left + elementToWrap.width + spaceBetween;
+                                } else if(align == 'bottomright' || align == 'topright') {
+                                    perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                    maxX = elementToWrap.left - spaceBetween;
+                                    minX = spaceBetween;
+                                } else {
+                                    perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                    minX = spaceBetween;
+                                    maxX = parentWidth - spaceBetween;
+                                }
+
+                                /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                                var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
+                                var maxWidth = maxX - minX;
+
+
+                                var i, rowsCount = rows.length;
+                                for(i = 0; i < rowsCount; i++) {
+                                    var row = rows[i];
+                                    var sampleRect = row[0];
+
+                                    if(sampleRect.side == 'left') {
+
+                                        var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
+                                        //log('getAvailableRects: side = left', row.length, maxRectsOnLeftSide);
+
+                                        if(row.length != maxRectsOnLeftSide){
+                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                            var r, numRectsToAdd = maxRectsOnLeftSide - row.length, prevRect;
+                                            for(r = 0; r < numRectsToAdd; r++){
+                                                var newRect;
+                                                if(r == 0) {
+                                                    newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                } else {
+                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                }
+                                                availableRectsOnLeft.push(newRect);
+
+                                                prevRect = newRect;
+                                            }
+                                        }
+
+                                    } else if (sampleRect.side == 'right') {
+
+                                        var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
+                                        //log('getAvailableRects: side = right', row.length, maxRectsOnRightSide);
+
+                                        if(row.length != maxRectsOnRightSide){
+                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                            var r, numRectsToAdd = maxRectsOnRightSide - row.length, prevRect;
+                                            for(r = 0; r < numRectsToAdd; r++){
+                                                var newRect;
+                                                if(r == 0) {
+                                                    newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                } else {
+                                                    newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                }
+                                                availableRectsOnRight.push(newRect);
+
+                                                prevRect = newRect;
+                                            }
+                                        }
+
+                                    } else {
+
+                                        var maxRectsInCurrentRow = Math.floor((maxWidth + spaceBetween) / (sampleRect.rect.width + spaceBetween));
+                                        //log('getAvailableRects: side = full row0', maxWidth, spaceBetween, sampleRect.rect.width, spaceBetween);
+                                        //log('getAvailableRects: side = full row', row.length, maxRectsInCurrentRow);
+
+                                        if(row.length != maxRectsInCurrentRow){
+                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                            var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
+                                            for(r = 0; r < numRectsToAdd; r++){
+                                                var newRect;
+                                                if(r == 0) {
+                                                    newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                } else {
+                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                }
+                                                availableRectsFullRow.push(newRect);
+
+                                                prevRect = newRect;
+                                            }
+                                        }
+                                    }
+
+                                }
+
+                                if(sortedRows.left.length != sortedRows.right.length) {
+                                    log('getAvailableRects: sortedRows.left.length != sortedRows.right.length');
+
+                                    //if there are more rows on the left side than on the right, complete row on the right side
+                                    if(sortedRows.left.length > sortedRows.right.length && rectsOnRightSide != 0){
+                                        log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if1');
+
+                                        var rowsToCreate = sortedRows.left.length - sortedRows.right.length;
+
+                                        var i;
+                                        for(i = sortedRows.right.length; i < sortedRows.left.length; i++) {
+                                            var leftRow = sortedRows.left[i];
+                                            var sampleRect = leftRow[0];
+
+                                            var rowsMinX = elementToWrap.left + elementToWrap.width + spaceBetween;
+                                            var rowsMaxX = parentWidth - spaceBetween;
+
+                                            var r, prevRect;
+                                            for(r = 0; r < rectsOnRightSide; r++){
+                                                var newRect;
+                                                if(r == 0) {
+                                                    newRect = new DOMRect(elementToWrap.left + elementToWrap.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
+                                                } else {
+                                                    newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
+                                                }
+                                                log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if1: add rect', newRect);
+
+                                                availableRectsOnRight.push(newRect);
+
+                                                prevRect = newRect;
+                                            }
+
+                                        }
+
+                                    } else if(sortedRows.right.length > sortedRows.left.length && rectsOnLeftSide != 0) {
+                                        log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if2');
+
+                                        var rowsToCreate = sortedRows.right.length - sortedRows.left.length;
+
+                                        var i;
+                                        for(i = sortedRows.left.length; i < sortedRows.right.length; i++) {
+
+                                            var rightRow = sortedRows.right[i];
+                                            var sampleRect = rightRow[0];
+
+                                            var rowsMinX = spaceBetween;
+                                            var rowsMaxX = elementToWrap.left - spaceBetween;
+
+                                            var r, prevRect;
+                                            for(r = 0; r < rectsOnLeftSide; r++){
+                                                var newRect;
+                                                if(r == 0) {
+                                                    newRect = new DOMRect(elementToWrap.left - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                } else {
+                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                }
+                                                log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if2: add rect', newRect);
+
+                                                availableRectsOnLeft.push(newRect);
+
+                                                prevRect = newRect;
+                                            }
+
+                                        }
+
+                                    }
+                                }
+
+
+                                var longerSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnRight : availableRectsOnLeft;
+                                var shorterSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnLeft : availableRectsOnRight;
+
+                                var alternatedArray = [];
+
+                                var i, length = longerSide.length;
+                                for (i = 0; i < length; i++) {
+                                    var sampleRect = longerSide[i];
+
+                                    var currentLeftRow = sortedRows.left.filter(function(r){
+                                        return r[0].top == sampleRect.top ? true : false;
+                                    })[0];
+                                    var currentRightRow = sortedRows.right.filter(function(r){
+                                        return r[0].top == sampleRect.top ? true : false;
+                                    })[0];
+
+                                    if(currentLeftRow != null && currentRightRow != null && currentLeftRow.length != 0 && currentRightRow.length != 0) {
+                                        if(currentRightRow.length <= currentLeftRow.length) {
+                                            if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                            if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                        } else {
+                                            if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                            if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                        }
+                                    } else if(currentLeftRow == null && currentRightRow != null) {
+                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                    } else if(currentLeftRow != null && currentRightRow == null) {
+                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                    }
+
+                                }
+
+                                availableRects = availableRects.concat(alternatedArray);
+                                availableRects = availableRects.concat(availableRectsFullRow);
+                                return availableRects;
+                            }
+
+                            var createNewRows = function(numRectsToAdd, rows, availableRects) {
+                                // var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                                var parentWidth = containerRect.width;
+                                var parentHeight = containerRect.height;
+
+                                var align = getControlsAlign();
+
+                                var gridParams = getRectsGridParams(align);
+                                var rectsOnLeftSide = gridParams.rectsOnLeftSide;
+                                var rectsOnRightSide = gridParams.rectsOnRightSide;
+                                var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
+                                var perRow = gridParams.rectsPerRow;
+
+                                var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                                var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
+                                var maxWidth = maxX - minX;
+                                var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
+                                var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
+
+                                var newRects = [];
+
+                                var craeteRowsOnControlsSides = function(){
+                                    log('craeteRowsOnControlsSides');
+
+                                    var startFrom, side;
+                                    var minLeftY, minRightY, maxLeftY, maxRightY;
+
+                                    var figureOutCoordsonLeft = function() {
+                                        log('craeteRowsOnControlsSides figureOutCoordsonLeft');
+
+                                        if(rows.left.length != 0) {
+                                            log('craeteRowsOnControlsSides figureOutCoordsonLeft 1');
+                                            var allrects = [];
+                                            for(var l in rows.left) {
+                                                allrects = allrects.concat(rows.left[l])
+                                            }
+                                            minLeftY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
+                                            maxLeftY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
+                                        } else {
+                                            log('craeteRowsOnControlsSides figureOutCoordsonLeft 2');
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                                minLeftY = maxLeftY = parentHeight;
+                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                                minLeftY = maxLeftY = (0 - rectHeight);
+                                            }
+                                        }
+                                    }
+
+                                    var figureOutCoordsonRight = function() {
+                                        log('craeteRowsOnControlsSides figureOutCoordsonRight');
+
+                                        if(rows.right.length != 0) {
+                                            log('craeteRowsOnControlsSides figureOutCoordsonRight if1');
+
+                                            var allrects = [];
+                                            for(var l in rows.right) {
+                                                allrects = allrects.concat(rows.right[l])
+                                            }
+                                            minRightY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
+                                            maxRightY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
+                                        } else {
+                                            log('craeteRowsOnControlsSides figureOutCoordsonRight if2');
+
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                                minRightY = maxRightY = parentHeight;
+                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                                minRightY = maxRightY = (0 - rectHeight);
+                                            }
+
+                                        }
+                                    }
+
+                                    if(rows.left.length == rows.right.length && rows.right.length != 0) {
+                                        log('craeteRowsOnControlsSides if1');
+
+                                        figureOutCoordsonRight();
+                                        figureOutCoordsonLeft();
+                                        startFrom = side = 'right';
+
+                                    } else if (rectsOnRightSide != 0 && rectsOnLeftSide != 0) {
+                                        log('craeteRowsOnControlsSides if2');
+
+                                        figureOutCoordsonRight();
+                                        figureOutCoordsonLeft();
+
+                                        if (rows.right.length < rows.left.length) {
+                                            startFrom = side = 'right';
+                                        } else if (rows.left.length < rows.right.length) {
+                                            startFrom = side = 'left';
+                                        } else {
+                                            startFrom = side = 'right';
+                                        }
+                                    } else if (rectsOnLeftSide != 0) {
+                                        log('craeteRowsOnControlsSides if3');
+                                        figureOutCoordsonLeft();
+
+                                        startFrom = side = 'left';
+                                    } else if (rectsOnRightSide != 0) {
+                                        log('craeteRowsOnControlsSides if4');
+                                        figureOutCoordsonRight();
+
+                                        startFrom = side = 'right';
+                                    } else {
+
+                                    }
+
+                                    log('craeteRowsOnControlsSides figure', minLeftY, maxLeftY);
+
+                                    var numOfRowsAlongWrapEl, rectsToTheTopOnLeft, rectsToTheTopOnRight;
+
+                                    if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                        rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
+                                        rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
+
+                                        if(minY < elementToWrap.top) {
+                                            numOfRowsAlongWrapEl = 0;
+                                            rectsToTheTopOnLeft = 0;
+                                            rectsToTheTopOnRight = 0;
+                                        }
+
+                                    } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                        rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+                                        rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+
+                                        if(minY < elementToWrap.top) {
+                                            numOfRowsAlongWrapEl = 0;
+                                            rectsToTheTopOnLeft = 0;
+                                            rectsToTheTopOnRight = 0;
+                                        }
+                                    }
+
+                                    var count = numRectsToAdd;
+                                    var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
+                                    var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
+                                    var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
+                                    log('craeteRowsOnControlsSides totalRectsOnSides', side);
+
+                                    if(count < totalRectsOnSides) totalRectsOnSides = count;
+
+
+                                    var rects = [];
+                                    var currentRowRects = [];
+
+                                    /*if(maximized) {
+                                        count = totalRectsOnSides = count - 1;
+                                    }*/
+
+
+                                    var leftSideCounter = 0;
+                                    var rightSideCounter = 0;
+                                    var createNewRowOnLeft = false;
+                                    var createNewRowOnRight = false;
+                                    var i, x, y, prevRect, latestLeftRect, latestRightRect;
+                                    for (i = 0; i < totalRectsOnSides; i++) {
+                                        if(side == "right") {
+                                            log('craeteRowsOnControlsSides for right');
+
+                                            if(latestRightRect) prevRect = latestRightRect
+                                            if(rightSideCounter >= 1) {
+
+                                                y = prevRect.y;
+                                                x = prevRect.x + (rectWidth + spaceBetween);
+
+                                            } else if(createNewRowOnRight) {
+
+                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                    y = prevRect.y - (rectHeight + spaceBetween);
+                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                                    y = prevRect.y + prevRect.height + spaceBetween;
+                                                }
+
+                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                                    x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
+                                                } else {
+                                                    var allRects = currentRowRects;
+                                                    for (var a in rects) {
+                                                        allRects = allRects.concat(rects[a]);
+                                                    }
+                                                    x = allRects.filter(function(rect){
+                                                        return rect.side == 'right';
+                                                    }).reduce(function(prev, current) {
+                                                        return (prev.rect.x < current.rect.x) ? prev : current;
+                                                    }).rect.x
+                                                }
+
+                                                createNewRowOnRight = false;
+                                            } else {
+
+                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                    y = minRightY - (rectHeight + spaceBetween);
+                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                                    y = maxRightY + rectHeight + spaceBetween;
+                                                }
+
+                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                                    x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
+                                                } else {
+                                                    x = (elementToWrap.left + elementToWrap.width + spaceBetween);
+                                                }
+
+                                            }
+
+                                            rightSideCounter++;
+
+                                            if(rightSideCounter == rectsOnRightSide) {
+                                                createNewRowOnRight = true;
+                                                rightSideCounter = 0;
+                                            }
+                                            if (totalRectsOnLeftSide != 0) {
+                                                if (rectsOnLeftSide == rectsOnRightSide) {
+                                                    side = 'left';
+                                                } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnLeft) {
+                                                    side = 'left';
+                                                } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
+                                                    side = 'left';
+                                                }
+
+                                            }
+                                            var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
+                                            log('craeteRowsOnControlsSides right', rect);
+                                            currentRowRects.push({side:'right', rect: rect});
+
+                                        } else if(side == "left") {
+                                            log('craeteRowsOnControlsSides for left');
+
+                                            if(latestLeftRect) prevRect = latestLeftRect;
+
+                                            if(leftSideCounter >= 1 ) {
+
+                                                y = prevRect.y;
+                                                x = prevRect.x - (rectWidth + spaceBetween);
+
+                                            } else if(createNewRowOnLeft) {
+
+                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                    y = prevRect.y - (rectHeight + spaceBetween);
+                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                                    y = prevRect.y + (rectHeight + spaceBetween);
+                                                }
+
+                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                                    x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
+                                                } else {
+                                                    var allRects = currentRowRects;
+                                                    for (var a in rects) {
+                                                        allRects = allRects.concat(rects[a]);
+                                                    }
+                                                    x = allRects.filter(function(rect){
+                                                        return rect.side == 'left';
+                                                    }).reduce(function(prev, current) {
+                                                        return (prev.rect.x > current.rect.x) ? prev : current;
+                                                    }).rect.x;
+                                                }
+
+                                                createNewRowOnLeft = false;
+                                            } else {
+
+                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                    y = minLeftY - (rectHeight + spaceBetween);
+                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                                    y = maxLeftY + rectHeight + spaceBetween;
+                                                }
+
+                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                                    x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
+                                                } else {
+                                                    x = (elementToWrap.left - (rectWidth + spaceBetween));
+                                                }
+                                            }
+
+                                            leftSideCounter++;
+
+                                            if(leftSideCounter == rectsOnLeftSide) {
+                                                createNewRowOnLeft = true;
+                                                leftSideCounter = 0;
+                                            }
+
+                                            if (totalRectsOnRightSide != 0) {
+                                                if (rectsOnLeftSide == rectsOnRightSide) {
+                                                    side = 'right';
+                                                } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnRight) {
+                                                    side = 'right';
+                                                } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
+                                                    side = 'right';
+                                                }
+                                            }
+
+                                            var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
+                                            currentRowRects.push({side:'left', rect: rect});
+                                            log('craeteRowsOnControlsSides left', rect);
+
+
+                                        }
+
+                                        if(i == perRow - 1 || i == totalRectsOnSides - 1) {
+                                            rects.push(currentRowRects);
+                                            currentRowRects = [];
+                                        }
+
+                                        count = count - 1;
+                                    }
+
+
+                                    var arr = [];
+                                    for(var i in rects){
+                                        arr = arr.concat(rects[i]);
+                                    }
+                                    log('craeteRowsOnControlsSides arr', JSON.stringify(arr));
+
+                                    return arr.map(function(rectObj){
+                                        return rectObj.rect;
+                                    });
+                                }
+
+                                var createFullRows = function(count) {
+                                    log('createFullRows', count);
+
+                                    var allRects = currentRects.concat(newRects).concat(availableRects);
+                                    var minX, maxX, rectsNum;
+                                    if(align == 'top' || align == 'bottom') {
+                                        log('createFullRows if1', rectWidth);
+
+                                        var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
+                                        var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
+                                        log('createFullRows : maxX0', maxX, minX);
+
+                                        if(minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                                        if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                                        log('createFullRows : maxX1', maxX, minX);
+
+                                        rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
+                                        rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+
+                                    } else if (align == 'bottomleft' || align == 'topleft') {
+                                        log('createFullRows maxx if2');
                                         maxX =  parentWidth - spaceBetween;
                                         minX =  elementToWrap.left + spaceBetween;
+                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
+
                                     } else if (align == 'bottomright' || align == 'topright') {
+                                        log('createFullRows maxx if3');
                                         maxX = elementToWrap.left - spaceBetween;
                                         minX = spaceBetween;
-                                    }
-
-                                    rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
-
-                                }
-
-                                var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
-                                var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
-
-                                var perRow =  rectsNum;
-
-                                var rects = []
-                                var latestRect, createNewRow;
-                                var isNextNewLast = false;
-                                var rowItemCounter = 1;
-                                var i;
-                                for (i = 1; i <= count; i++) {
-                                    //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-                                    var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
-                                    var isNextNewRow = rowItemCounter == perRow;
-                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
-
-                                    var x,y
-                                    if(rowItemCounter > 1) {
-                                        y = latestRect.y;
-                                        x = latestRect.x - (rectWidth + spaceBetween);
-                                    } else if(createNewRow) {
-                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y =  latestRect.y - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y =  latestRect.y + latestRect.height + spaceBetween;
-                                        }
-                                        x = maxX - rectWidth;
-                                        createNewRow = false;
+                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                     } else {
-                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                            y = minY - (rectHeight + spaceBetween);
-                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                            y = maxY + rectHeight + spaceBetween;
-                                        }
-                                        x = maxX - rectWidth;
+
+                                        log('createFullRows else');
+                                        maxX = parentWidth - spaceBetween;
+                                        minX = spaceBetween;
+                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                     }
-                                    var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
 
-                                    rects.push({side:null, rect: rect});
+                                    if (align == 'top-full') {
+                                        log('createFullRows maxy if1');
+                                        var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                        var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
+                                    } else {
+                                        var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                        var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
+                                    }
 
-                                    if(rowItemCounter == perRow) {
-                                        createNewRow = true;
-                                        rowItemCounter = 1;
-                                    } else rowItemCounter++;
+
+                                    log('createFullRows : rectsNum', rectsNum, rectWidth);
+
+                                    var perRow = rectsNum;
+
+                                    var rects = []
+                                    var latestRect, createNewRow;
+                                    var isNextNewLast = false;
+                                    var rowItemCounter = 1;
+                                    console.log('createFullRows rowItemCounter', rowItemCounter)
+
+                                    var i;
+                                    for (i = 1; i <= count; i++) {
+                                        //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                                        var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+                                        var isNextNewRow = rowItemCounter == perRow;
+                                        isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+                                        var x,y
+                                        if(rowItemCounter > 1) {
+                                            console.log('createFullRows if0')
+                                            y = latestRect.y;
+                                            x = latestRect.x - (rectWidth + spaceBetween);
+                                        } else if(createNewRow) {
+                                            console.log('createFullRows if1')
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                                y =  latestRect.y - (rectHeight + spaceBetween);
+                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                                y =  latestRect.y + latestRect.height + spaceBetween;
+                                            }
+                                            x = maxX - rectWidth;
+                                            createNewRow = false;
+                                        } else {
+                                            console.log('createFullRows if2')
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                y = minY - (rectHeight + spaceBetween);
+                                            } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                                y = maxY + rectHeight + spaceBetween;
+                                            } else if (align == 'top-full'){
+                                                y = maxY + spaceBetween;
+                                            } else if (align == 'bottom-full'){
+                                                y = minY - (rectHeight + spaceBetween);
+                                            }
+                                            x = maxX - rectWidth;
+                                        }
+                                        var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                        rects.push({side:null, rect: rect});
+                                        console.log('createFullRows new row',rect, rowItemCounter, perRow)
+
+                                        if(rowItemCounter == perRow) {
+                                            createNewRow = true;
+                                            rowItemCounter = 1;
+                                        } else rowItemCounter++;
+
+                                    }
+
+                                    return rects.map(function(rectObj){
+                                        return rectObj.rect;
+                                    });
                                 }
 
-                                return rects.map(function(rectObj){
-                                    return rectObj.rect;
-                                });
-                            }
+                                log('createNewRows : if', rows.left.length, numOfRowsAlongWrapEl, rows.right.length, numOfRowsAlongWrapEl, rectsOnLeftSide, rectsOnRightSide);
 
-                            if((rows.left.length == rowsAlongControls && rows.right.length == rowsAlongControls) || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
-                                log('createNewRows : createFullRows');
+                                if((rows.left.length == numOfRowsAlongWrapEl && rows.right.length == numOfRowsAlongWrapEl)
+                                    || (rows.left.length == 0 && rows.right.length == numOfRowsAlongWrapEl)
+                                    || (rows.right.length == 0 && rows.left.length == numOfRowsAlongWrapEl)
+                                    || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
+                                    log('createNewRows : createFullRows');
 
-                                newRects = createFullRows(numRectsToAdd);
-                            } else {
-                                log('createNewRows : craeteRowsOnControlsSides');
+                                    newRects = createFullRows(numRectsToAdd);
+                                } else {
+                                    log('createNewRows : craeteRowsOnControlsSides');
 
-                                newRects = craeteRowsOnControlsSides();
+                                    newRects = craeteRowsOnControlsSides();
 
-                                if(newRects.length < numRectsToAdd) {
-                                    newRects = newRects.concat(createFullRows(numRectsToAdd - newRects.length));
+                                    if(newRects.length < numRectsToAdd) {
+                                        newRects = newRects.concat(createFullRows(numRectsToAdd - newRects.length));
+                                    }
+
                                 }
 
+                                return newRects;
                             }
 
-                            return newRects;
+                            var rectsToAddNum = count - _layoutTool.currentRects.length;
+
+                            var rows = getRectsRows();
+                            log('addAndUpdate : rectsToAddNum', rectsToAddNum);
+                            log('addAndUpdate : rows', rows);
+                            var availableRects = getAvailableRects(rows);
+                            log('addAndUpdate : getAvailableRects', availableRects);
+                            var newRows;
+                            if(rectsToAddNum > availableRects.length) {
+                                rectsToAddNum = (rectsToAddNum - availableRects.length);
+                                newRows = createNewRows(rectsToAddNum, rows, availableRects);
+                                availableRects = availableRects.concat(newRows);
+                            } else if(availableRects.length > rectsToAddNum) {
+                                availableRects = availableRects.slice(0, rectsToAddNum);
+                            }
+
+                            //resultRects = alignFullRows(resultRects);
+
+                            return availableRects;
+
                         }
 
-                        var rectsToAddNum = count - _layoutTool.currentRects.length;
+                        function alignFullRows(elementRects) {
+                            log('alignFullRows');
+                            var groupBy = function(xs, key) {
+                                var groupedRows = xs.reduce(function(rv, x) {
+                                    (rv[x[key]] = rv[x[key]] || []).unshift(x);
+                                    return rv;
+                                }, {});
 
-                        var rows = getRectsRows();
-                        log('addAndUpdate : rectsToAddNum', rectsToAddNum);
-                        var availableRects = getAvailableRects(rows);
-                        log('addAndUpdate : getAvailableRects', availableRects);
-                        var newRows;
-                        if(rectsToAddNum > availableRects.length) {
-                            rectsToAddNum = (rectsToAddNum - availableRects.length);
-                            newRows = createNewRows(rectsToAddNum, rows, availableRects);
-                            availableRects = availableRects.concat(newRows);
-                        } else if(availableRects.length > rectsToAddNum) {
-                            availableRects = availableRects.slice(0, rectsToAddNum);
-                        }
+                                var groupedArray = [];
+                                for (var property in groupedRows) {
+                                    if (groupedRows.hasOwnProperty(property)) {
+                                        groupedArray.push(groupedRows[property]);
+                                    }
+                                }
 
-                        //resultRects = alignFullRows(resultRects);
+                                return groupedArray;
+                            };
 
-                        return availableRects;
+                            var sortByX = function compare( a, b ) {
+                                if ( a.rect.left < b.rect.left ){
+                                    return -1;
+                                }
+                                if ( a.rect.left > b.rect.left ){
+                                    return 1;
+                                }
+                                return 0;
+                            }
 
-                    }
-
-                    function alignFullRows(elementRects) {
-                        log('alignFullRows');
-                        var groupBy = function(xs, key) {
-                            var groupedRows = xs.reduce(function(rv, x) {
-                                (rv[x[key]] = rv[x[key]] || []).unshift(x);
-                                return rv;
-                            }, {});
-
-                            var groupedArray = [];
-                            for (var property in groupedRows) {
-                                if (groupedRows.hasOwnProperty(property)) {
-                                    groupedArray.push(groupedRows[property]);
+                            var fullRowsRects = [];
+                            var i, count = elementRects.length;
+                            for (i = 0; i < count; i++) {
+                                var rect = elementRects[i];
+                                if(rect.top + rect.height <= elementToWrap.top) {
+                                    fullRowsRects.push({indx: i, top: rect.top, rect: rect});
                                 }
                             }
 
-                            return groupedArray;
+                            var fullWidthRows = groupBy(fullRowsRects, 'top');
+
+                            var minX = Math.min.apply(Math, elementRects.map(function(o) { return o.x; }));
+                            var maxX = Math.max.apply(Math, elementRects.map(function(o) { return o.x+o.width; }));
+
+                            var i, rowCount = fullWidthRows.length;
+
+                            for (i = 0; i < rowCount; i++) {
+                                var row = fullWidthRows[i];
+                                row.sort(sortByX);
+
+                                var x, rectsCount = row.length, widthSum = 0;
+                                for (x = 0; x < rectsCount; x++) {
+                                    let rect = row[x];
+                                    widthSum += rect.rect.width;
+                                }
+                                widthSum = widthSum + ((rectsCount - 1) * spaceBetween)
+
+
+                                var newMinX = ((maxX - minX) / 2) - (widthSum / 2) + minX;
+
+                                let prevRect = null;
+                                for (let r = 0; r < row.length; r++) {
+
+
+                                    if(r != 0) {
+                                        elementRects[row[r].indx].x = prevRect.x + prevRect.width + spaceBetween;
+                                    } else {
+                                        elementRects[row[r].indx].x = newMinX;
+                                    }
+
+                                    prevRect = elementRects[row[r].indx];
+                                }
+
+                            }
+
+                            return elementRects;
                         };
 
-                        var sortByX = function compare( a, b ) {
-                            if ( a.rect.left < b.rect.left ){
-                                return -1;
+                        function compareLayoutStates(prevRects, newRects) {
+                            log('compareLayoutStates START', JSON.stringify(prevRects));
+                            var diffEls = [];
+                            var count = prevRects.length;
+
+                            var findInCurrentLayout = function (prevLayoutRect) {
+                                log('compareLayoutStates: findInCurrentLayout START', prevLayoutRect);
+
+                                //log('compareLayoutStates: findInCurrentLayout', prevLayoutRect);
+
+                                var count = newRects.length;
+                                for (var c = 0; c < count; c++) {
+                                    log('compareLayoutStates: findInCurrentLayout: top left', prevLayoutRect.top, prevLayoutRect.left, newRects[c].top,  newRects[c].left);
+
+                                    var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
+                                    var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
+
+                                    //log('compareLayoutStates: findInCurrentLayout: diffTop + diffLeft', diffTop + diffLeft / 2 );
+                                    log('compareLayoutStates: findInCurrentLayout:', (diffTop + diffLeft) / 2);
+
+                                    if((diffTop + diffLeft) / 2 < 2) {
+                                        //log('compareLayoutStates: findInCurrentLayout: true', newRects[c]);
+
+                                        return true;
+                                    }
+                                }
+
+                                return false;
                             }
-                            if ( a.rect.left > b.rect.left ){
-                                return 1;
+
+                            for (let i = 0; i < count; i++) {
+                                var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
+                                if(!findInCurrentLayout(prevLayoutRect)) {
+                                    log('compareLayoutStates: !findInCurrentLayout', prevLayoutRect);
+
+                                    diffEls.push(prevLayoutRect);
+                                }
                             }
-                            return 0;
+
+                            return diffEls;
                         }
 
-                        var fullRowsRects = [];
-                        var i, count = elementRects.length;
-                        for (i = 0; i < count; i++) {
-                            var rect = elementRects[i];
-                            if(rect.top + rect.height <= elementToWrap.top) {
-                                fullRowsRects.push({indx: i, top: rect.top, rect: rect});
+                        function changeRectPosition(oldRect, newRect, rects) {
+                            log('changeRectPosition', oldRect, newRect);
+                            var i, count = rects.length;
+                            for (i = 0; i < count; i++) {
+                                if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
+                                    rects[i] = newRect;
+                                    break;
+                                }
                             }
+                            return rects;
                         }
 
-                        var fullWidthRows = groupBy(fullRowsRects, 'top');
+                        function findClosest(diffRect, rects) {
+                            log('findClosest : START', diffRect);
+                            if(!diffRect) return null;
+                            var closestOnTop = findClosesVerticallyRect(diffRect, rects);
 
-                        var minX = Math.min.apply(Math, elementRects.map(function(o) { return o.x; }));
-                        var maxX = Math.max.apply(Math, elementRects.map(function(o) { return o.x+o.width; }));
 
-                        var i, rowCount = fullWidthRows.length;
+                            log('findClosest : closestOnTop', closestOnTop);
 
-                        for (i = 0; i < rowCount; i++) {
-                            var row = fullWidthRows[i];
-                            row.sort(sortByX);
+                            if(closestOnTop != null) {
+                                return closestOnTop
+                            } else {
+                                var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
+                                log('findClosest : closestOnSide', closestOnSide);
 
-                            var x, rectsCount = row.length, widthSum = 0;
-                            for (x = 0; x < rectsCount; x++) {
-                                let rect = row[x];
-                                widthSum += rect.rect.width;
+                                if(closestOnSide != null) {
+                                    return closestOnSide;
+                                }
                             }
-                            widthSum = widthSum + ((rectsCount - 1) * spaceBetween)
+                            return null;
+                        }
 
 
-                            var newMinX = ((maxX - minX) / 2) - (widthSum / 2) + minX;
 
-                            let prevRect = null;
-                            for (let r = 0; r < row.length; r++) {
+                        function findClosesVerticallyRect(rect, rects) {
+                            log('findClosesVerticallyRect', rect);
+                            var distance = function (x1,y1,x2,y2) {
+                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                            }
 
+                            var align = getControlsAlign();
 
-                                if(r != 0) {
-                                    elementRects[row[r].indx].x = prevRect.x + prevRect.width + spaceBetween;
+                            var nextRow;
+                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                nextRow = rects.filter(function (r) {
+                                    if (r.top < rect.top) return true;
+                                    return false;
+                                })
+
+                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                nextRow = rects.filter(function (r) {
+                                    if (r.top > rect.top) return true;
+                                    return false;
+                                })
+                            }
+                            log('findClosesVerticallyRect : nextRow', nextRow);
+
+                            if(nextRow.length != 0) {
+                                var isRowFull
+                                if(align == 'bottom') {
+                                    isRowFull = nextRow[0].top + nextRow[0].height < elementToWrap.top;
+
+                                } else if (align == 'top') {
+                                    isRowFull = nextRow[0].top > elementToWrap.top;
                                 } else {
-                                    elementRects[row[r].indx].x = newMinX;
+                                    isRowFull = true;
                                 }
 
-                                prevRect = elementRects[row[r].indx];
-                            }
+                                var closestVerticaly;
+                                closestVerticaly = nextRow.reduce(function (prev, current) {
+                                    return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
+                                    //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
+                                })
 
-                        }
 
-                        return elementRects;
-                    };
 
-                    function compareLayoutStates(prevRects, newRects) {
-                        log('compareLayoutStates', prevRects, newRects);
-                        var diffEls = [];
-                        var count = prevRects.length;
-
-                        var findInCurrentLayout = function (prevLayoutRect) {
-                            var count = newRects.length;
-                            for (var c = 0; c < count; c++) {
-
-                                var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
-                                var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
-
-                                if((diffTop + diffLeft) / 2 < 2) {
-                                    return true;
+                                if ((!isRowFull && Math.sign(90 - Math.abs((closestVerticaly.left + 90) - (rect.left + 90))) >= 0) || isRowFull) {
+                                    return closestVerticaly;
+                                } else {
+                                    return null;
                                 }
-                            }
-
-                            return false;
-                        }
-
-                        for (let i = 0; i < count; i++) {
-                            var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
-                            if(!findInCurrentLayout(prevLayoutRect)) {
-
-                                diffEls.push(prevLayoutRect);
+                            } else {
+                                return null;
                             }
                         }
 
-                        return diffEls;
-                    }
-
-                    function changeRectPosition(oldRect, newRect, rects) {
-                        log('changeRectPosition', oldRect, newRect);
-                        var i, count = rects.length;
-                        for (i = 0; i < count; i++) {
-                            if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
-                                rects[i] = newRect;
-                                break;
+                        function findClosesHorizontalyRect(rect, rects) {
+                            //log('findClosesHorizontalyRect', rect)
+                            var distance = function (x1,y1,x2,y2) {
+                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
                             }
-                        }
-                        return rects;
-                    }
 
-                    function findClosest(diffRect, rects) {
-                        var closestOnTop = findClosesVerticallyRect(diffRect, rects);
+                            var align = getControlsAlign();
 
-                        if(closestOnTop != null) {
-                            return closestOnTop
-                        } else {
-                            var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
-                            if(closestOnSide != null) {
-                                return closestOnSide;
-                            }
-                        }
-                        return null;
-                    }
-
-
-
-                    function findClosesVerticallyRect(rect, rects) {
-                        log('findClosesVerticallyRect', rect);
-                        var distance = function (x1,y1,x2,y2) {
-                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                        }
-
-                        var align = getControlsAlign();
-
-                        var nextRow;
-                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                            nextRow = rects.filter(function (r) {
-                                if (r.top < rect.top) return true;
-                                return false;
-                            })
-
-                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                            nextRow = rects.filter(function (r) {
-                                if (r.top > rect.top) return true;
-                                return false;
-                            })
-                        }
-
-                        if(nextRow.length != 0) {
                             var isRowFull
                             if(align == 'bottom') {
-                                isRowFull = nextRow[0].top + nextRow[0].height < elementToWrap.top;
+                                isRowFull = rect.top + rect.height < elementToWrap.top;
 
                             } else if (align == 'top') {
-                                isRowFull = nextRow[0].top > elementToWrap.top;
+                                isRowFull = rect.top > elementToWrap.top + elementToWrap.height;
                             } else {
                                 isRowFull = true;
                             }
 
-                            var closestVerticaly;
-                            closestVerticaly = nextRow.reduce(function (prev, current) {
-                                return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
-                                //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
-                            })
-
-
-
-                            if ((!isRowFull && Math.sign(90 - Math.abs((closestVerticaly.left + 90) - (rect.left + 90))) >= 0) || isRowFull) {
-                                return closestVerticaly;
-                            } else {
-                                return null;
-                            }
-                        } else {
-                            return null;
-                        }
-                    }
-
-                    function findClosesHorizontalyRect(rect, rects) {
-                        log('findClosesHorizontalyRect', rect)
-                        var distance = function (x1,y1,x2,y2) {
-                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                        }
-
-                        var align = getControlsAlign();
-
-                        var isRowFull
-                        if(align == 'bottom') {
-                            isRowFull = rect.top + rect.height < elementToWrap.top;
-
-                        } else if (align == 'top') {
-                            isRowFull = rect.top > elementToWrap.top + elementToWrap.height;
-                        } else {
-                            isRowFull = true;
-                        }
-
-                        var currentRowRect;
-                        if(isRowFull) {
-                            currentRowRect = rects.filter(function (r) {
-                                if (r.top == rect.top && r.left < rect.left) {
-                                    return true
-                                }
-                                return false;
-                            })
-                        } else if(rect.left <= elementToWrap.left) {
-                            currentRowRect = rects.filter(function (r) {
-                                if (r.top == rect.top && r.left < rect.left && rect.left < elementToWrap.left) {
-                                    return true
-                                }
-                                return false;
-                            })
-                        } else {
-                            currentRowRect = rects.filter(function (r) {
-                                if (r.top == rect.top && r.left > rect.left && rect.left > elementToWrap.left) {
-                                    return true
-                                }
-                                return false;
-                            })
-                        }
-
-                        if(currentRowRect.length != 0) {
-                            var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
-                                return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
-                                //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
-                            })
-
-                            return closestHorizontaly;
-                        }
-
-                        return null;
-                        /*for (var i = 0; i < count; i++) {
-							var rect = newRects[i];
-							if(rect.top + rect.height )
-						}*/
-                    }
-
-                    function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
-                        log('fillFreeSpaceWithClosestRects', spaceToFill, skipRects);
-
-                        var closest;
-                        if(skipRects != null) {
-                            closest = findClosest(spaceToFill, rects.filter(function(o, i) {
-                                var exclude = false;
-                                for(let r in skipRects) {
-                                    if(skipRects[r].x == o.x && skipRects[r].y == o.y
-                                        && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
-
-                                        exclude = true;
-                                        break;
+                            var currentRowRect;
+                            if(isRowFull) {
+                                currentRowRect = rects.filter(function (r) {
+                                    if (r.top == rect.top && r.left < rect.left) {
+                                        return true
                                     }
+                                    return false;
+                                })
+                            } else if(rect.left <= elementToWrap.left) {
+                                currentRowRect = rects.filter(function (r) {
+                                    if (r.top == rect.top && r.left < rect.left && rect.left < elementToWrap.left) {
+                                        return true
+                                    }
+                                    return false;
+                                })
+                            } else {
+                                currentRowRect = rects.filter(function (r) {
+                                    if (r.top == rect.top && r.left > rect.left && rect.left > elementToWrap.left) {
+                                        return true
+                                    }
+                                    return false;
+                                })
+                            }
+
+                            if(currentRowRect.length != 0) {
+                                var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
+                                    return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
+                                    //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
+                                })
+
+                                return closestHorizontaly;
+                            }
+
+                            return null;
+                            /*for (var i = 0; i < count; i++) {
+                                var rect = newRects[i];
+                                if(rect.top + rect.height )
+                            }*/
+                        }
+
+                        function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
+                            log('fillFreeSpaceWithClosestRects', spaceToFill, skipRects);
+
+                            var closest;
+                            if(skipRects != null) {
+                                closest = findClosest(spaceToFill, rects.filter(function(o, i) {
+                                    var exclude = false;
+                                    for(let r in skipRects) {
+                                        if(skipRects[r].x == o.x && skipRects[r].y == o.y
+                                            && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
+
+                                            exclude = true;
+                                            break;
+                                        }
+                                    }
+
+                                    return (exclude == false ? true : false);
+                                }));
+                            } else {
+                                closest = findClosest(spaceToFill, rects);
+                            }
+
+                            if(closest != null) {
+                                changeRectPosition(closest, spaceToFill, rects);
+                                return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
+                            } else {
+                                //rects = alignFullRows(rects);
+                                return rects;
+                            }
+                        }
+
+                        function removeAndUpdate() {
+                            log('removeAndUpdate');
+                            var count = roomScreens.length;
+
+                            var elementRects = [];
+
+                            var currentlyMaximizedElIndex;
+                            for (let i = 0; i < count; i++) {
+                                var screen = roomScreens[i];
+                                if(screen == activeScreen) currentlyMaximizedElIndex = i;
+                                var screenRect = screen.screenEl.getBoundingClientRect();
+                                if(_roomsMedia.contains(screen.screenEl)) elementRects.push(screenRect);
+                            }
+
+                            var actualLayoutRects = []
+                            for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
+                                if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
+                                    actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
                                 }
+                            }
+                            log('compareLayoutStates : compareLayoutStates : _layoutTool.basicGridRects', _layoutTool.basicGridRects);
 
-                                return (exclude == false ? true : false);
-                            }));
-                        } else {
-                            closest = findClosest(spaceToFill, rects);
-                        }
+                            var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
 
-                        if(closest != null) {
-                            changeRectPosition(closest, spaceToFill, rects);
-                            return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
-                        } else {
-                            //rects = alignFullRows(rects);
-                            return rects;
+                            log('compareLayoutStates : compareLayoutStates diff', diff);
+                            var resultLayoutRects;
+
+                            if(diff.length != 0) {
+
+                                for(var s in diff) {
+                                    resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
+                                }
+                            } else resultLayoutRects = elementRects;
+
+
+                            return resultLayoutRects;
                         }
                     }
-
-                    function removeAndUpdate() {
-                        log('removeAndUpdate');
-                        var count = roomScreens.length;
-
-                        var elementRects = [];
-
-                        var currentlyMaximizedElIndex;
-                        for (let i = 0; i < count; i++) {
-                            var screen = roomScreens[i];
-                            if(screen == activeScreen) currentlyMaximizedElIndex = i;
-                            var screenRect = screen.screenEl.getBoundingClientRect();
-                            if(_roomsMedia.contains(screen.screenEl)) elementRects.push(screenRect);
-                        }
-
-                        var actualLayoutRects = []
-                        for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
-                            if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
-                                actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
-                            }
-                        }
-
-                        var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
-
-                        log('compareLayoutStates : compareLayoutStates', diff);
-                        var resultLayoutRects;
-
-                        if(diff.length != 0) {
-
-                            for(var s in diff) {
-                                resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
-                            }
-                        } else resultLayoutRects = elementRects;
-
-
-                        return resultLayoutRects;
-                    }
-                }
             }
 
             window.layouts = customLayouts;
@@ -6584,6 +6911,26 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         }
 
+        function unsetResizeObserver() {
+           if(_resizeObserver == null) return;
+
+            _resizeObserver.unobserve(_options.element);
+        }
+
+        function setResizeObserver() {
+            if(typeof ResizeObserver == 'undefined') return;
+            _resizeObserver = new ResizeObserver(entries => {
+                console.log('Size changed');
+                screensRendering.updateLayout();
+                WebRTCconference.screensInterface.audioVisualization().updateCommonVisualizationWidth();
+
+            });
+            console.log('_options.element', _options.element);
+
+            _resizeObserver.observe(_options.element);
+        }
+
+
         /**
          * Start WebRTC conference room
          * @method start
@@ -6602,7 +6949,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //showPageLoader();
                 log('Start WebRTC conference room');
 
-                var preparingRoom = true;
+                var preparingRoom = false;
 
                 connectionState.show(preparingRoom ? "Checking room's state" : 'Connecting...');
 
@@ -6614,7 +6961,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     appDebug.sendReportToServer();
                 }, 3000);
                 overrideDefaultOptions(options);
-
+                setResizeObserver();
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
@@ -6710,7 +7057,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             });
                         }
 
-                    } else if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins){
+                    } else if(Q.info.isCordova && Q.info.platform === 'ios' && !_options.useCordovaPlugins){
                         log('start: onConnect: isCordova && isiOS');
                         //publishMediaTracks({video: startWith.video, audio: startWith.audio});
                         showPreparingDialogue(function () {
@@ -6720,7 +7067,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             setTimeout(function() {
                                 connectionState.hide();
                             }, 3000);
+                            unsetResizeObserver();
                         });
+                    } else if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins){
+                        log('start: onConnect: isCordova && isiOS');
+                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
                     } else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
                         log('start: onConnect: isDesktop');
                     }
@@ -6888,7 +7239,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 roomId: roomId,
                                 publisherId: asPublisherId,
                                 adapter: _options.mode,
-                                resumeClosed: _options.resumeClosed
+                                resumeClosed: _options.resumeClosed,
+                                writeLevel: _options.writeLevel
                             }
                         });
                     }
@@ -6908,6 +7260,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 setTimeout(function() {
                                     connectionState.hide();
                                 }, 3000);
+                                unsetResizeObserver();
                             });
                         } else {
                             var permissionPopupTimeout;
@@ -6917,13 +7270,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             };
                             publishMediaTracks({video: startWith.video, audio: true}, premissionGrantedCallback);
 
-                            permissionPopupTimeout = setTimeout(function () {
+                            /*permissionPopupTimeout = setTimeout(function () {
                                 if(_options.streams != null) return;
                                 showPermissionsDialogue({video: startWith.video, audio: true}, premissionGrantedCallback);
-                            }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+                            }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);*/
                         }
 
                     } else {
+
                         log('start: onConnect: regular connect (desktop)');
 
 
@@ -6931,6 +7285,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             showPreparingDialogue(function () {
                                 createOrJoinRoomStream(roomId, _options.roomPublisherId);
                             }, function () {
+                                unsetResizeObserver();
                                 connectionState.updateStatus('Disconnected')
                             });
                         } else {
@@ -6955,14 +7310,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         function switchTo(publisherId, streamName, callback, options) {
             //showPageLoader();
-            log('switch WebRTC conference room');
+            log('switch WebRTC conference room', publisherId, streamName);
 
-            var roomId = _options.roomId != null ? _options.roomId : null;
-            if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
-            if(roomId != null) _options.roomId = roomId;
-
-            var createOrJoinRoomStream = function (roomId, asPublisherId) {
                 log('createRoomStream')
+                var roomIdToJoin = streamName.replace('Streams/webrtc/', '');
 
                 Q.req("Streams/webrtc", ["room"], function (err, response) {
                     var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -6972,12 +7323,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                     log('createRoomStream: joined/connected');
 
-                    roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
                     var turnCredentials = response.slots.room.turnCredentials;
                     var socketServer = response.slots.room.socketServer;
 
-                    Q.Streams.get(asPublisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
-                        log('createRoomStream: joined/connected: pull stream');
+                    Q.Streams.get(publisherId, 'Streams/webrtc/' + roomIdToJoin, function (err, stream) {
+                        log('createRoomStream: joined/connected: pull stream', stream);
+                        console.log('createRoomStream: joined/connected: roomScreens.length', screensRendering.getScreens().length);
 
                         _roomStream = stream;
                         if(Q.Streams.WebRTCRooms == null){
@@ -6986,19 +7337,26 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
                         log('start: createOrJoinRoomStream: mode ' + _options.mode)
-                        bindStreamsEvents(stream);
-                        WebRTCconference.switchTo(Q.Users.communityId, streamName, function (newInstance) {
+                        bindStreamsEvents(_roomStream);
+                        WebRTCconference.switchTo(publisherId, roomIdToJoin, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
+                            console.log('createRoomStream: joined/connected: roomScreens.length0', screensRendering.getScreens().length);
+                            console.log('createRoomStream: joined/connected:  newInstance.event',  newInstance.event);
 
                             newInstance.event.on('initNegotiationEnded', function () {
+                                console.log('createRoomStream: joined/connected: roomScreens.length1', screensRendering.getScreens().length);
+
                                 WebRTCconference = newInstance;
                                 // prevRoom.disconnect(true);
+
                                 updateParticipantData();
                                 _controlsTool.state.webRTClibraryInstance = WebRTCconference;
                                 _controlsTool.refresh();
 
                                 screensRendering.updateLayout();
+                                log('createRoomStream: joined/connected: roomScreens.length2', screensRendering.getScreens().length);
+
                             });
                         });
                         //initWithNodeServer(socketServer, turnCredentials);
@@ -7007,15 +7365,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }, {
                     method: 'post',
                     fields: {
-                        roomId: roomId,
-                        publisherId: asPublisherId,
+                        roomId: roomIdToJoin,
+                        publisherId: publisherId,
                         adapter: _options.mode,
                         resumeClosed: _options.resumeClosed
                     }
                 });
-            }
 
-            createOrJoinRoomStream(roomId, _options.roomPublisherId);
+
 
 
         }
@@ -7077,6 +7434,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             _layoutTool.clearCustomGenerators();
             Q.Tool.remove(_layoutTool);
             window.removeEventListener('beforeunload', webRTCInstance.stop);
+            unsetResizeObserver();
             WebRTCconference = null;
             Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
 
@@ -7204,6 +7562,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     resumeClosed: options.resumeClosed,
                     content: options.content || null,
                     adapter: options.mode,
+                    writeLevel: options.writeLevel,
+                    closeManually: options.closeManually,
                     relate: {
                         publisherId: options.publisherId,
                         streamName: options.streamName,
@@ -7222,6 +7582,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 mode: options.mode,
                 defaultDesktopViewMode: options.defaultDesktopViewMode,
                 defaultMobileViewMode: options.defaultDesktopViewMode,
+                writeLevel: options.writeLevel,
                 onWebrtcControlsCreated: function () {
                     //TODO: for some reason this.Q.beforeRemove doesn't call when user leave conference
                     // may be tool doesn't close at all?

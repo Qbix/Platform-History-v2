@@ -20,6 +20,7 @@ Q.Tool.define("Streams/calls", function(options) {
 	var tool = this;
 	var state = this.state;
 
+	console.log('caaaals', state)
 	var pipe = new Q.pipe(["style", "text", "stream"], function () {
 		if (tool.stream.testWriteLevel("edit")) {
 			state.isAdmin = true;
@@ -129,7 +130,9 @@ Q.Tool.define("Streams/calls", function(options) {
 				callback: function () {
 					// if opened in columns - third argument is a column element,
 					// if opened dialog - first argument is dialog element
-					var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
+                    console.log('Streams_calls_related0', state.publisherId, state.streamName);
+
+                    var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
 					$(".Streams_calls_related", parentElement).tool("Streams/related", {
 						publisherId: state.publisherId,
 						streamName: state.streamName,
@@ -138,7 +141,9 @@ Q.Tool.define("Streams/calls", function(options) {
 						closeable: true,
 						sortable: false,
 						realtime: true
-					}).activate();
+					}).activate(function (e) {
+						console.log('Streams_calls_related', e, this);
+                    });
 
 					$("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
 						var maxCalls = parseInt($("input[name=maxCalls]", parentElement).val());
@@ -152,10 +157,22 @@ Q.Tool.define("Streams/calls", function(options) {
 					});
 
 					parentElement.forEachTool("Streams/webrtc/preview", function () {
+						console.log('calls.js; state.mainWebrtcStream', state.parentClipTool.webrtcStream,  state.parentClipTool.state.webrtcStream)
+						var previewTool = this;
+                        this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
 						this.state.onWebRTCRoomEnded.set(function () {
 							if (!state.isAdmin) {
 								return;
 							}
+
+                            Q.req({
+                                publisherId: tool.state.mainWebrtcStream.fields.publisherId ,
+                                streamName: tool.state.mainWebrtcStream.fields.name ,
+                                ofUserId: previewTool.state.publisherId,
+                                'Q.method': 'delete'
+                            }, "Streams/access", ['data'], function (err, data) {
+                            	console.log('access removed')
+                            });
 
 							Q.Streams.unrelate(
 								state.publisherId,
@@ -192,6 +209,7 @@ Q.Tool.define("Streams/calls", function(options) {
 					content: content,
 					resumeClosed: false,
 					useExisting: false,
+					closeManually: true,
 					tool: tool
 				});
 			}, {

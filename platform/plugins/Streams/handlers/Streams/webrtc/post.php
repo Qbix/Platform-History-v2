@@ -14,6 +14,7 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  * @param {array} [$_REQUEST] Parameters that can come from the request
  *   @param {string} $_REQUEST.publisherId  Required. The id of the user to publish the stream.
  *   @param {string} $_REQUEST.roomId Pass an ID for the room from the client, may already exist
+ *   @param {string} $_REQUEST.closeManually If true, stream is not closed automatically by node.js
  *   @param {string} [$_REQUEST.adapter='node'] Required. The type of the message.
  * @return {void}
  */
@@ -28,6 +29,8 @@ function Streams_webrtc_post($params = array())
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
+    $writeLevel = Q::ifset($params, 'writeLevel', 10);
+    $closeManually = Q::ifset($params, 'closeManually', null);
 
     if(Q_Request::slotName('recording')) {
         $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
@@ -86,7 +89,7 @@ function Streams_webrtc_post($params = array())
 	$className = "Streams_WebRTC_".ucfirst($adapter);
 
 	$webrtc = new $className();
-	$result = $webrtc->createOrJoinRoom($publisherId, $roomId, $resumeClosed);
+	$result = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
 
 	if ($publisherId == $loggedInUserId) {
 		if ($content) {
@@ -107,6 +110,9 @@ function Streams_webrtc_post($params = array())
 
 	if ($resumeClosed !== null) {
 		$result['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+	}
+	if ($closeManually !== null) {
+		$result['stream']->setAttribute("closeManually", $closeManually)->save();
 	}
 	$result['stream']->join();
 

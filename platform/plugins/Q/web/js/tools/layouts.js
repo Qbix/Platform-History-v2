@@ -94,7 +94,7 @@
                 var container = tool.element;
                 var wrappingContainer = tool.state.alternativeContainer != null ? tool.state.alternativeContainer : tool.element;
                 var layout = g(wrappingContainer, elements.length);
-
+                if(!layout) return;
                 tool.state.currentMappedRects = [];
 
                 if (container.computedStyle('position') === 'static') {
