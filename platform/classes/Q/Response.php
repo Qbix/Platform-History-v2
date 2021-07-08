@@ -1082,9 +1082,7 @@ class Q_Response
 		$tags = array();
 		foreach ($templates as $template) {
 			$attributes = array(
-				'cdata' => false,
-				'raw' => true,
-				'type' => 'text/'.$template['type'], 
+				'data-type' => $template['type'], 
 				'id' => Q_Utils::normalize($template['name']),
 				'data-slot' => $template['slot']
 			);
@@ -1093,7 +1091,7 @@ class Q_Response
 					$attributes["data-$aspect"] = Q::json_encode($template[$aspect]);
 				}
 			}
-			$tags[] = Q_Html::script($template['content'], $attributes);
+			$tags[] = Q_Html::tag('template', $attributes, $template['content']);
 		}
 		return implode($between, $tags);
 	}
@@ -1538,13 +1536,13 @@ class Q_Response
 	 * of the output page. Defaults to "en". It is used in htmlAttributes method.
 	 * @method language
 	 * @static
-	 * @param {string} [$newLanguage] Set a new code here to change the language
+	 * @param {string} [$language] Set a new code here to change the language
 	 * @return {string}
 	 */
-	static function language($newLanguage = null)
+	static function language($language = null)
 	{
-		if (isset($newLanguage)) {
-			self::$language = $newLanguage;
+		if (isset($language)) {
+			self::$language = $language;
 		}
 		return self::$language;
 	}
@@ -1842,6 +1840,7 @@ class Q_Response
 		if (empty(self::$cookies)) {
 			return;
 		}
+
 		foreach (self::$cookiesToRemove as $name => $args) {
 			list($path, $domain, $secure, $httponly) = $args;
 			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly);
@@ -1884,7 +1883,7 @@ class Q_Response
 		if ($domain === true) {
 			$domain2 = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
 		} else {
-			$domain2 = $domain ? $domain : null;
+			$domain2 = $domain ? $domain : '';
 		}
 		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
 	}

@@ -843,10 +843,11 @@ abstract class Streams extends Base_Streams
 			$authorized = true; // user can publish streams under their own name
 		}
 
-		// user can publish streams on behalf of publisher if user is admin of publisher
-		$labelsAuthorized = Q_Config::get("Streams", "create", "admins", array(
-			"Users/admins", "Users/owners"
-		));	
+		// user can publish streams of this type
+		// on behalf of publisher if the user is in "admins" config for that type
+		$labelsAuthorized = Streams_Stream::getConfigField(
+			$streamType, array('canCreate'), array()
+		);
 		if (Users::roles($publisherId, $labelsAuthorized, array(), $userId)) {
 			$authorized = true;
 		}
@@ -2964,7 +2965,7 @@ abstract class Streams extends Base_Streams
 					'streamName' => $sn,
 					'userId' => $asUserId,
 					'streamType' => $stream->type,
-					'state' => 'participating',
+					'state' => $state,
 					'subscribed' => !empty($options['subscribed']) ? 'yes' : 'no',
 					'posted' => !empty($options['posted']) ? 'yes' : 'no',
 					'extra' => !empty($options['extra']) ? $options['extra'] : ''
@@ -4298,7 +4299,6 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$overrides.writeLevel]
 	 * @param {array} [$overrides.adminLevel]
 	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
-	 *  Otherwise tries to look in Streams/types/$streamType/admins
 	 * @param {array} [$accessLevels=array('max','max','max')]
 	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows
 	 *  (can include strings or numbers, including -1 to not affect the type of access)
@@ -4311,9 +4311,6 @@ abstract class Streams extends Base_Streams
 		$accessLabels = null,
 		$accessLevels = array(40, 40, 40))
 	{
-		if (!isset($accessLabels)) {
-			$accessLabels = Streams_Stream::getConfigField($streamType, 'admins', array());
-		}
 		$defaults = Streams_Stream::getConfigField($streamType, 'defaults', Streams_Stream::$DEFAULTS);
 		$templateName = $streamType . '/';
 		$template = new Streams_Stream();

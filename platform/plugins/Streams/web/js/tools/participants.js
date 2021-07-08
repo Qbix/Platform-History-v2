@@ -331,9 +331,9 @@ function _Streams_participants(options) {
 				return;
 			}
 
-			$element[prepend?'prependTo':'appendTo']($e).activate();
-
-			tool.orderAvatars();
+			$element[prepend?'prependTo':'appendTo']($e).activate(function () {
+				tool.orderAvatars();
+			});
 		}
 		
 		function _removeAvatar(userId) {

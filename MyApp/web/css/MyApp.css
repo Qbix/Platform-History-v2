@@ -48,7 +48,7 @@ table { table-layout: fixed; }
     background: #555; /* for non-css3 browsers */
     background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444)); /* for webkit browsers */
     background: -moz-linear-gradient(top,  #555,  #444); /* for firefox 3.6+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444'); /* for IE */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444'); /* for IE */;
 }
 #dashboard_slot * { color: white; font-size: 24px; font-family: Arial, sans-serif; }
 #dashboard_slot input,
@@ -158,7 +158,9 @@ table { table-layout: fixed; }
 #dashboard .Q_tabs_tab.Streams_preview_tool { padding-left: 10px; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
 #dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background-color: #222; color: white; width: 100%; }
-#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab::before,
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; vertical-align: bottom; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; }
 #dashboard .Q_tabs_tab * { white-space: nowrap; overflow-x: hidden; overflow-y: visible; text-overflow: ellipsis; vertical-align: top; }
 #dashboard .Q_tabs_vertical .Q_tabs_tab { background: transparent; }
 #dashboard .Q_tabs_tab,
@@ -274,8 +276,8 @@ span.c3 { font-weight: bold; }
 
 .Q_notMobile .MyApp_dashboard_logo { float: left; padding: 0; margin: 5px 0 0 10px; background-position: left top; }
 .Q_notMobile .MyApp_dashboard_logo h1 { padding: 0; margin: 0; padding: 0 0 0 50px; line-height: 40px; }
-.Q_notMobile #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
-.Q_notMobile #dashboard .Q_tabs_tab { margin: 0 10px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tab { margin: 0 10px; }
 
 /* The following lines override default styles for a sidebar-style website */
 /* You can remove them or set the config Q/response/layout/sidebar = true */

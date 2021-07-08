@@ -185,8 +185,8 @@ class Q_Request
 		$request_uri = $_SERVER['REQUEST_URI'];
 		
 		// determing whether this should be reported as https
-		$https === empty($_SERVER['HTTPS'])
-			|| !empty($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https';
+		$https = empty($_SERVER['HTTPS'])
+			|| Q::ifset($_SERVER, 'HTTP_X_FORWARDED_PROTO', null) === 'https';
 		
 		// Deal with the querystring
 		$r_parts = explode('?', $request_uri);
@@ -1138,8 +1138,8 @@ class Q_Request
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
 		
-		$https === empty($_SERVER['HTTPS'])
-			|| !empty($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https';
+		$https = empty($_SERVER['HTTPS'])
+			|| Q::ifset($_SERVER, 'HTTP_X_FORWARDED_PROTO', null) === 'https';
 
 		return sprintf('http%s://%s%s%s%s%s%s', 
 			$https ? '' : 's',
@@ -1170,8 +1170,8 @@ class Q_Request
 		if ($server_name[0] === '*') {
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
-		$https === empty($_SERVER['HTTPS'])
-			|| !empty($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https';
+		$https = empty($_SERVER['HTTPS'])
+			|| Q::ifset($_SERVER, 'HTTP_X_FORWARDED_PROTO', null) === 'https';
 		return sprintf('http%s://%s%s%s%s%s%s', 
 			$https ? '' : 's',
 			isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',

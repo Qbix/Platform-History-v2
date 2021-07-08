@@ -156,7 +156,7 @@ class Handlebars_Tokenizer
                 } elseif ($this->tagChange(self::T_UNESCAPED.$this->otag, $text, $i) and $this->escaped) {
                     $this->buffer .= "{{{";
                     $i += 2;
-                    continue;
+                    break;
                 } elseif ($this->tagChange($this->otag, $text, $i) and !$this->escaped) {
                     $i--;
                     $this->flushBuffer();
@@ -198,7 +198,7 @@ class Handlebars_Tokenizer
             default:
                 if ($this->tagChange(self::T_TRIM . $this->ctag, $text, $i)) {
                     $this->trimRight = true;
-                    continue;
+                    break;
                 }
                 if ($this->tagChange($this->ctag, $text, $i)) {
                     // Sections (Handlebars_Helpers) can accept parameters

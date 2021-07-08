@@ -39,10 +39,6 @@ Socket.listen = function (options) {
 	if (options.path) {
 		options.path = options.path.interpolate({baseUrl: baseUrl});
 	}
-	if (!options.origins) {
-		var parsed = url.parse(baseUrl);
-		options.origins = [parsed.protocol + '//' + parsed.host];
-	}
 	var server = Q.listen(options);
 	if (!server.attached.socket) {
 		var s = !Q.isEmpty(options.https) ? 's' : '';

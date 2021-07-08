@@ -229,24 +229,13 @@ Sp.encodeHTML = function _String_prototype_encodeHTML(convert) {
 /**
  * Reverses what encodeHTML does
  * @method decodeHTML
- * @param {Array} [convert] Array of codes to unconvert. Can include
- *  '&amp;', '&lt;', '&gt;, '&quot;', '&apos;', "<br>", "<br />"
  * @return {String}
  */
-Sp.decodeHTML = function _String_prototype_decodeHTML(unconvert) {
-	var conversions = {
-		'&amp;': '&',
-		'&lt;': '<',
-		'&gt;': '>',
-		'&quot;': '"',
-		'&apos;': "'",
-		"<br>": "\n",
-		"<br />": "\n"
-	};
-	if (unconvert) {
-		conversions = Q.take(conversions, unconvert);
-	}
-	return this.replaceAll(conversions);
+Sp.decodeHTML = function _String_prototype_decodeHTML() {
+	var e = document.createElement('textarea');
+	e.innerHTML = this;
+	// handle case of empty input
+	return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
 };
 
 /**
@@ -4143,7 +4132,8 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
  *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
  * @param {string} [ctor.js] filenames containing Javascript to load for the tool
- * @param {string} [ctor.css] filenames containing CSS to load for the tool
+ * @param {string} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
+ * @param {string} [ctor.html] filenames containing HTML to load for the tool, including templates
  * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
  * @param {String} [ctor.placeholder.html] literal HTML to insert
  * @param {String} [ctor.placeholder.template] the name of a template to insert
@@ -5099,9 +5089,23 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
 		var toolPlaceholder = _qtp[toolName];
-		function _loadToolScript_loaded() {
+		function _loadToolScript_loaded(params, subjects) {
 			// in this function, toolConstructor starts as a string
-			if (Q.Tool.latestName) {
+			if (params.html) {
+				var div = document.createElement('div');
+				div.innerHTML = html;
+				var scripts = div.getElementsByTagName('script');
+				Q.each(scripts, function () { // run scripts in order
+					document.head.appendChild(this);
+					document.head.removeChild(this);
+				});
+				var styles = div.getElementsByTagName('style');
+				Q.each(styles, function () { // permanently add any styles to document
+					document.head.appendChild(this);
+				});
+				_processTemplateElements(div);
+			}
+			if (Q.Tool.latestName) { // Q.Tool.define() was called
 				_qtc[toolName] = _qtc[Q.Tool.latestName];
 				Q.Tool.latestNames[toolConstructor] = Q.Tool.latestName;
 			}
@@ -5164,14 +5168,22 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			return;
 		}
 		if (typeof toolConstructor === 'string') {
-			if (Q.Tool.latestNames[toolConstructor]) {
-				Q.Tool.latestName = Q.Tool.latestNames[toolConstructor];
-				_loadToolScript_loaded();
+			if (toolConstructor.split('.').pop() === 'js') {
+				toolConstructor = { js: toolConstructor };
 			} else {
-				Q.Tool.latestName = null;
-				Q.addScript(toolConstructor, _loadToolScript_loaded);
+				toolConstructor = { html: toolConstructor };
 			}
-		} else if (Q.isPlainObject(toolConstructor)) {
+		}
+		if (Q.isPlainObject(toolConstructor)) {
+			var toolConstructorSrc = toolConstructor.js || toolConstructor.html;
+			if (!toolConstructorSrc) {
+				throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
+			}
+			if (Q.Tool.latestNames[toolConstructorSrc]) {
+				Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
+				return _loadToolScript_loaded();
+			}
+			Q.Tool.latestName = null;
 			var pipe = Q.pipe(), waitFor = [];
 			if (toolConstructor.js) {
 				waitFor.push('js');
@@ -5180,6 +5192,10 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			if (toolConstructor.css) {
 				waitFor.push('css');
 				Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
+			}
+			if (toolConstructor.html) {
+				waitFor.push('html');
+				Q.request(toolConstructor.html, pipe.fill('html'), { extend: false });
 			}
 			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 		} else {
@@ -8301,17 +8317,15 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
-	var href2 = href.split('?')[0];
 	if (!media) media = 'screen,print';
-	var insertBefore = null;
 	var links = document.getElementsByTagName('link');
-	var i, e, h, m, p;
+	var i, e, h, m;
+	var href2 = href.split('?')[0];
 	for (i=0; i<links.length; ++i) {
 		e = links[i];
 		m = e.getAttribute('media');
 		h = e.getAttribute('href');
-		if ((m && m !== media)
-		|| (h !== href && h !== href2)) {
+		if ((m && m !== media) || h.split('?')[0] !== href2) {
 			continue;
 		}
 		// A link element with this media and href is already found in the document.
@@ -9018,7 +9032,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 							return;
 						}
 						Q.each(document.getElementsByTagName(tag), function (k, e) {
-							if (tag === 'link' && e.getAttribute('rel').toLowerCase() != 'stylesheet') {
+							if (tag === 'link' && e.getAttribute('rel').toLowerCase() !== 'stylesheet') {
 								return;
 							}
 
@@ -9029,8 +9043,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 									var stylesheets = response.stylesheets[slot];
 									for (var i=0, l=stylesheets.length; i<l; ++i) {
 										var stylesheet = stylesheets[i];
-										var sh = stylesheet.href, eh = e.href;
-										if ((sh && sh.split('?')[0]) === (eh && eh.split('?')[0])
+										var href1 = Q.getObject("href", stylesheet);
+										var href2 = Q.getObject("href", e);
+										if (href1 && href2 && href1.split("?")[0] === href2.split("?")[0]
 										&& (!stylesheet.media || stylesheet.media === e.media)) {
 											found = true;
 											break;
@@ -9920,6 +9935,31 @@ Q.Template.compile.options = {
 };
 Q.Template.compile.results = {};
 
+function _processTemplateElements(container) {
+	var tpl = Q.Template.collection;
+	var tpi = Q.Template.info;
+	var trash = [];
+	Q.each(container.getElementsByTagName('template'), function () {
+		var element = this;
+		var id = this.id || this.getAttribute('data-name');
+		var type = this.getAttribute('data-type') || 'handlebars';
+		var n = Q.normalize(id);
+		tpl[n] = this.innerHTML.decodeHTML().trim();
+		tpi[n] = {type: type};
+		Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
+			var attr = element.getAttribute('data-' + aspect);
+			var value = attr && JSON.parse(attr);
+			if (value) {
+				tpi[n][aspect] = value;
+			}
+		});
+		trash.unshift(element);
+	});
+	Q.each(trash, function () {
+		Q.removeElement(this);
+	});
+}
+
 /**
  * Load template from server and store to cache
  * @static
@@ -9949,46 +9989,14 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 	// defaults to handlebars templates
 	var o = Q.extend({}, Q.Template.load.options, options);
 	var tpl = Q.Template.collection;
-	var tpi = Q.Template.info;
-	
-	// Now attempt to load the template.
-	// First, search the DOM for templates loaded inside script tag with type "text/theType",
-	// e.g. "text/handlebars" and id matching the template name.
-	var i, l, script;
-	var scripts = document.getElementsByTagName('script');
-	var trash = [];
-	for (i = 0, l = scripts.length; i < l; i++) {
-		script = scripts[i];
-		var type = script.getAttribute('type');
-		var t;
-		if (script && script.id && script.innerHTML
-		&& type && type.substr(0, 5) === 'text/'
-		&& o.types[t = type.substr(5)]) {
-			var n = Q.normalize(script.id);
-			tpl[n] = script.innerHTML.trim();
-			tpi[n] = { type: t };
-			Q.each(['partials', 'helpers', 'text'], function (i, aspect) {
-				var attr = script.getAttribute('data-' + aspect);
-				var value = attr && JSON.parse(attr);
-				if (value) {
-					tpi[n][aspect] = value;
-				}
-			});
-			trash.unshift(script);
-		}
-	}
-	// For efficiency process all found scripts and remove them from DOM
-	for (i = 0, l = trash.length; i < l; i++) {
-		Q.removeElement(trash[i]);
-	}
-	
-	// TODO: REMOVE THE ABOVE BLOCK SO IT DOESNT EXECUTE EVERY TIME A TEMPLATE IS RENDERED
-	
+
+	_processTemplateElements(document);
+
 	// check if template is cached
 	var n = Q.normalize(name);
 	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
-		callback(null, result);
+		Q.handle(callback, this, [null, result]);
 		return true;
 	}
 	// now try to load template from server
@@ -13211,7 +13219,7 @@ Q.Audio.speak = function (text, options) {
 		_proceed(text);
 	}
 	function _chooseVoice(text, voicesList, knownVoices) {
-		var language = o.locale.split('-')[0];
+		var language = o.locale.split('-')[0].toLowerCase();
 		var gender = o.gender;
 		var voice = null;
 		var toggled = false;
@@ -13221,8 +13229,17 @@ Q.Audio.speak = function (text, options) {
 		function _search() {
 			var result = null;
 			var av = Q.getObject([gender, o.locale], knownVoices)
-				|| Q.getObject([gender, language], knownVoices)
-				|| [];
+				|| Q.getObject([gender, language], knownVoices);
+			if (!av) {
+				var prefix = language + '-';
+				Q.each(knownVoices[gender], function (key) {
+					if (key.toLowerCase().startsWith(prefix)) {
+						av = this;
+						return false;
+					}
+				});
+			}
+			av = av || [];
 			if (typeof av !== "object" || !av.length){
 				return {error: "Q.Audio.speak: no such known voice"};
 			}
@@ -13481,7 +13498,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+				//mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
 			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;

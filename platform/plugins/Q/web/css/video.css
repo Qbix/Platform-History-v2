@@ -110,7 +110,6 @@
 }
 .Q_video_twitch {
     overflow: hidden;
-    padding-top: 56.25%;
     position: relative;
     min-width: 480px;
     min-height: 268px;
