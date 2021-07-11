@@ -111,10 +111,13 @@
             this.advancedLiveStreamingBox = null;
 
             $(this.element).addClass('Q_floatAboveDocument');
+            console.log('controls: before create1', options.webrtcClass)
 
 			if (!options.webRTClibraryInstance || !options.webrtcClass) {
+            	alert('123')
 				throw "Video room should be created";
 			}
+            console.log('controls: before create2')
 
             this.state = Q.extend({}, this.state, options);
 
@@ -140,6 +143,7 @@
 
 		{
 			create: function() {
+				console.log('controls: create')
 				var tool = this;
                 this.WebRTCLib = this.state.webRTClibraryInstance;
                 this.WebRTCClass = this.state.webrtcClass;
