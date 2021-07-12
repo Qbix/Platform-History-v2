@@ -169,7 +169,7 @@ window.WebRTCconferenceLib = function app(options){
     }
 
     if(_isiOS && _localInfo.browserName == 'Safari' && _localInfo.browserVersion < 14.4){
-        _options.useCordovaPlugins = true;
+        options.useCordovaPlugins = true;
     }
 
     var icons = {
@@ -1393,17 +1393,21 @@ window.WebRTCconferenceLib = function app(options){
             function renderCommonVisualization() {
                 var freqDataMany = [];
                 var agg = [];
-
+                //var sum = 0;
 
                 for(let p in roomParticipants) {
                     let participant = roomParticipants[p];
-                    if(participant.soundMeter == null || participant.soundMeter.analyser == null) continue;
+                    if(participant.online == false || participant.soundMeter == null || participant.soundMeter.analyser == null) continue;
                     let bufferLength =  participant.soundMeter.analyser.frequencyBinCount;
                     let freqData = new Uint8Array(bufferLength);
 
                     participant.soundMeter.analyser.getByteFrequencyData(freqData); // populate with data
                     freqDataMany.push(freqData);
+
+                    //sum +=  participant.soundMeter.rms;
                 }
+
+                //var average = sum / roomParticipants.length;
 
                 if (freqDataMany.length > 0) {
                     for (let i = 0; i < freqDataMany[0].length; i++) {
@@ -1419,10 +1423,11 @@ window.WebRTCconferenceLib = function app(options){
                 for(i = 0; i < barsLength; i++){
                     var bar = commonVisualization.soundBars[i];
                     if(i == barsLength - 1) {
-                        var height = (agg[i] * 0.4);
+                        let average = (agg[0] / roomParticipants.length);
+                        var height = (average * 0.4);
                         if (height > 100) {
                             height = 100;
-                        } else if(agg[i] < 0.005) height = 0.1;
+                        } else if(average < 0.005) height = 0.1;
                         bar.y = commonVisualization.height - (commonVisualization.height / 100 * height);
                         bar.height = height;
                         bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
@@ -1445,12 +1450,12 @@ window.WebRTCconferenceLib = function app(options){
 
                 commonVisualization.animationFrame = requestAnimationFrame(renderCommonVisualization);
             }
-            
+
             function removeCommonVisualization() {
                 if(commonVisualization && commonVisualization.animationFrame) {
                     cancelAnimationFrame(commonVisualization.animationFrame);
                 }
-                if(commonVisualization.svg && commonVisualization.svg.parentNode != null) {
+                if(commonVisualization && commonVisualization.svg && commonVisualization.svg.parentNode != null) {
                     commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
                 }
                 commonVisualization = null;
@@ -1897,7 +1902,7 @@ window.WebRTCconferenceLib = function app(options){
                         _webrtcLayoutRect.updateTimeout = null;
                     }
                     _webrtcLayoutRect.updateTimeout = setTimeout(function () {
-                            updateWebRTCCanvasLayout();
+                        updateWebRTCCanvasLayout();
 
                     }, 100)
 
@@ -2222,7 +2227,7 @@ window.WebRTCconferenceLib = function app(options){
                             playPromise.then(function() {
                                 if(successCallback != null) successCallback();
                             }).catch(function(error) {
-                               if(failureCallback != null) failureCallback(error);
+                                if(failureCallback != null) failureCallback(error);
                             });
                         }
                         audioComposer.addSource(videoSource);
@@ -4497,7 +4502,7 @@ window.WebRTCconferenceLib = function app(options){
                             }
                         } else
 
-                        log('updateWebRTCAudioSources isLive', isLive)
+                            log('updateWebRTCAudioSources isLive', isLive)
                         log('updateWebRTCAudioSources index', index)
 
                         var audioSource = null;
@@ -4541,12 +4546,12 @@ window.WebRTCconferenceLib = function app(options){
                     if(_dest == null) _dest = audioContext.createMediaStreamDestination();
 
 
-                   /* let silence = () => {
-                        let ctx = new AudioContext(), oscillator = ctx.createOscillator();
-                        let dst = oscillator.connect(ctx.createMediaStreamDestination());
-                        oscillator.start();
-                        return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
-                    }*/
+                    /* let silence = () => {
+                         let ctx = new AudioContext(), oscillator = ctx.createOscillator();
+                         let dst = oscillator.connect(ctx.createMediaStreamDestination());
+                         oscillator.start();
+                         return Object.assign(dst.stream.getAudioTracks()[0], {enabled: false});
+                     }*/
 
                     /*var silentTrack = silence();
                     var silentStream = new MediaStream();
@@ -5037,7 +5042,7 @@ window.WebRTCconferenceLib = function app(options){
                 if(blobsToSend.size == 0) return;
                 _lastChunkCreatedTime = Date.now();
 
-               // var mergedBlob = new Blob(blobsToSend);
+                // var mergedBlob = new Blob(blobsToSend);
                 log('SAVE LOCAL AUDIO _parallelRecordings', _parallelRecordings[0])
                 let parallelRecordingsTimecode = _parallelRecordings.splice(0, _parallelRecordings.length);
                 mediaDB('localAudio').save({blob:blobsToSend, roomId: options.roomName, parallelRecordings:parallelRecordingsTimecode, timestamp: Date.now()}, function () {

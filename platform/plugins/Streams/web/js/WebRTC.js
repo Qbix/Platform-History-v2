@@ -66,7 +66,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             },
             preparing: {
                 video: false,
-                audio: false,
+                audio: true,
                 screen: false
             },
             useCordovaPlugins: false,
@@ -1194,7 +1194,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var connectionState = (function () {
 
             var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!_options.startWith.video && !_options.startWith.audio));
-            var preparingRoom = false;
 
             var _notice = null;
             var _currentState = preparingRoom ? "Checking room's state" : 'Connecting...';
@@ -4994,9 +4993,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  * @return {Array} List of DOMRects that will be passed to Q.layout.
                  */
                 minimizedOrMaximizedScreenGrid: function minimizedOrMaximizedScreenGrid(container, count, elementToWrap, maximized) {
-                        console.log('minimizedOrMaximizedScreenGrid', container, count, _layoutTool.currentRects.length)
-                        console.log('minimizedOrMaximizedScreenGrid active', activeScreen, count, _layoutTool.currentRects.length)
-                        log('minimizedOrMaximizedScreenGrid: maximized=' + maximized);
+                        log('minimizedOrMaximizedScreenGrid', container, count, _layoutTool.currentRects.length)
                         var wrapElement = elementToWrap;
                         var elementToWrap = elementToWrap.getBoundingClientRect();
 
@@ -5004,14 +5001,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         var rebuild;
 
                         var prevElPos = _layoutTool.elementToWrapPosition;
-                        if(prevElPos)log('minimizedOrMaximizedScreenGrid: elementToWrap rect', elementToWrap);
-                        if(prevElPos)log('minimizedOrMaximizedScreenGrid: elementToWrapPosition', elementToWrap.top, prevElPos.top, elementToWrap.left,prevElPos.left);
 
                         if((prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left))
                             || (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid')) {
-                            log('minimizedOrMaximizedScreenGrid: rebuild=true if1', (prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left)));
-                            log('minimizedOrMaximizedScreenGrid: rebuild=true if2', (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid'));
-
                             _layoutTool.currentRects = [];
                             _layoutTool.state.currentMappedRects = [];
                             rebuild = true;
@@ -5024,7 +5016,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         var defaultSide = 'top-full';
 
                         var containerRect = container.getBoundingClientRect();
-                        log('containerRect', containerRect)
                         var parentWidth = containerRect.width;
                         var parentHeight = containerRect.height;
 
@@ -5033,48 +5024,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         } else {
                             _layoutTool.state.currentGenerator = 'maximizedScreensGrid';
                         }
-                        log('minimizedOrMaximizedScreenGrid: rectWidth=' + rectWidth);
 
                         if(_layoutTool.basicGridRects.length < count || rebuild) {
                             _layoutTool.basicGridRects = build(container, count, elementToWrap, maximized);
                         }
-                        log('minimizedOrMaximizedScreenGrid: rectWidth2=' + rectWidth);
-
 
                         if(_layoutTool.currentRects.length == 0 || rebuild) {
-                            log('minimizedOrMaximizedScreenGrid: build');
-                            log('minimizedOrMaximizedScreenGrid: rectWidth3=' + rectWidth);
-
                             _layoutTool.currentRects = build(container, count, elementToWrap, maximized);
-                            log('minimizedOrMaximizedScreenGrid: rectWidth4=' + rectWidth);
-
-                            log('minimizedOrMaximizedScreenGrid: build currentRects', JSON.stringify(_layoutTool.currentRects));
                         } else {
 
                             if(count > _layoutTool.currentRects.length) {
                                 var availableRects = addAndUpdate(container, count, elementToWrap, maximized);
                                 _layoutTool.currentRects = _layoutTool.currentRects.concat(availableRects);
-                                log('minimizedOrMaximizedScreenGrid: addAndUpdate currentRects'/*, JSON.stringify(_layoutTool.currentRects), JSON.stringify(availableRects)*/);
 
                             } else if(count < _layoutTool.currentRects.length) {
-
                                 _layoutTool.currentRects = removeAndUpdate(container, count, elementToWrap, maximized);
-                                log('minimizedOrMaximizedScreenGrid: removeAndUpdate currentRects', JSON.stringify(_layoutTool.currentRects));
-
                             }
                         }
-                        //log('minimizedOrMaximizedScreenGrid: currentRects', JSON.stringify(_layoutTool.currentRects));
 
                         if(maximized || (activeScreen != null && maximized != false)) {
-                            log('minimizedOrMaximizedScreenGrid: maximize');
-
                             _layoutTool.currentRects = maximizeScreen();
                         } else if(!maximized) {
-                            log('minimizedOrMaximizedScreenGrid: minimize');
-
                             _layoutTool.currentRects = minimizeScreen();
                         }
-                        //log('minimizedOrMaximizedScreenGrid: result rects',  JSON.stringify(_layoutTool.currentRects));
 
                         return  _layoutTool.currentRects;
 
@@ -5102,8 +5074,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function maximizeScreen(){
-                            log('maximizeScreen activeScreen', activeScreen)
-
                             var indexToMaximize;
 
                             for(let s in roomScreens) {
@@ -5122,8 +5092,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     }
                                 }
                             }
-
-                            log('maximizeScreen : currentMaximizedIndex, indexToMaximize', currentMaximizedIndex, indexToMaximize);
 
                             var align = getControlsAlign();
 
@@ -5148,7 +5116,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
                             var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
                             var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
-                            log('maximizeScreen minY', minY, maxY)
 
                             var mainScreenSize = getElementSizeKeepingRatio({
                                 width: videoWidth,
@@ -5168,7 +5135,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             if(indexToMaximize) {
                                 var minimizedRect = _layoutTool.currentRects[indexToMaximize];
-                                if(minimizedRect)log('maximizeScreen minimizedRect', JSON.stringify(minimizedRect))
 
                                 minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
                                 _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
@@ -5179,11 +5145,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 activeScreenRect = _layoutTool.currentRects[indexToMaximize];
                             }
 
-                            log('maximizeScreen currentRects.length', _layoutTool.currentRects.length)
-
                             if(!currentMaximizedIndex && indexToMaximize || currentMaximizedIndex == indexToMaximize) {
                                 if(_layoutTool.currentRects.length == 3 && roomScreens[1] == activeScreen) {
-                                    log('maximizeScreen currentRects.length == 3')
 
                                     _layoutTool.currentRects[2].x = minimizedRect.x;
                                     _layoutTool.currentRects[2].y = minimizedRect.y;
@@ -5193,26 +5156,21 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
 
                             if(currentMaximizedIndex && currentMaximizedIndex != indexToMaximize) {
-                                log('maximizeScreen currentMaximizedIndex', currentMaximizedIndex)
 
                                 _layoutTool.currentRects[currentMaximizedIndex].x = minimizedRect.x;
                                 _layoutTool.currentRects[currentMaximizedIndex].y = minimizedRect.y;
                                 _layoutTool.currentRects[currentMaximizedIndex].width = minimizedRect.width;
                                 _layoutTool.currentRects[currentMaximizedIndex].height = minimizedRect.height;
                             } else {
-                                log('maximizeScreen no currentMaximizedIndex')
                                 _layoutTool.currentRects = fillFreeSpaceWithClosestRects(minimizedRect, _layoutTool.currentRects, (activeScreenRect ? [activeScreenRect] : null))
                             }
 
                             _layoutTool.maximizedScreen = activeScreen;
-                            log('maximizeScreen result rects', _layoutTool.currentRects)
 
                             return _layoutTool.currentRects;
                         }
 
                         function minimizeScreen(){
-                            log('minimizeScreen : minimizeScreen', _layoutTool.maximizedScreen);
-
                             var currentMaximizedIndex;
                             if(_layoutTool.maximizedScreen != null) {
                                 for (var s in roomScreens) {
@@ -5271,9 +5229,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             var align = getControlsAlign();
 
-
-                            console.log('build: rectWidth', rectWidth)
-
                             var rectWidth = 90;
                             var rectHeight = 90;
                             var spaceBetween = 10;
@@ -5287,9 +5242,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
                             var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
                             if(count < totalRectsOnSides) totalRectsOnSides = count;
-
-                            log('build : rectsOnLeftSide', rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl);
-                            log('build : totalRectsOnSides', totalRectsOnSides);
 
                             var rects = [];
                             var currentRowRects = [];
@@ -5309,19 +5261,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 var createNewRowOnRight = false;
                                 var i, x, y, prevRect, latestLeftRect, latestRightRect;
                                 for (i = 0; i < totalRectsOnSides; i++) {
-                                    log('build : totalRectsOnSides for', i);
-
                                     if (side == "right") {
-                                        log('build : totalRectsOnSides for if1', prevRect, latestRightRect);
 
                                         if (latestRightRect) prevRect = latestRightRect
                                         if (rightSideCounter >= 1) {
                                             y = prevRect.y;
                                             x = prevRect.x + (rectWidth + spaceBetween);
-                                            log('build : totalRectsOnSides for if1 prevRect.x', x, prevRect.x);
 
                                         } else if (createNewRowOnRight) {
-                                            log('build : totalRectsOnSides for if2');
 
                                             if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = prevRect.y - (rectHeight + spaceBetween);
@@ -5345,8 +5292,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                             createNewRowOnRight = false;
                                         } else {
-                                            log('build : totalRectsOnSides for if3');
-
 
                                             if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = parentHeight - (rectHeight + spaceBetween);
@@ -5384,7 +5329,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         }
 
                                         var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        log('build: right');
                                         currentRowRects.push({side: 'right', rect: rect});
                                     } else if (side == "left") {
                                         if (latestLeftRect) prevRect = latestLeftRect;
@@ -5450,7 +5394,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         }
 
                                         var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        log('build: left');
                                         currentRowRects.push({side: 'left', rect: rect});
                                     }
 
@@ -5464,7 +5407,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
 
                             if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                log('build: rects', JSON.stringify(rects));
 
                                 for(var i in rects){
                                     var currentRowRects = rects[i];
@@ -5493,11 +5435,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
                             rects = arr;
 
-                            log('build: rects', JSON.stringify(rects));
-
-
                             var minX, maxX, minY, maxY;
-                            log('build: 0  minX, maxX, minY, maxY',  minX, maxX, minY, maxY);
 
                             if(align == 'bottom' || align == 'top') {
                                 minX = Math.min.apply(Math, rects.map(function (o) {
@@ -5537,9 +5475,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 maxY = parentHeight;
                             }
 
-                            log('build:  minX, maxX, minY, maxY',  minX, maxX, minY, maxY);
-
-
                             var latestRect;
                             var isNextNewLast = false;
                             var rowItemCounter = 1;
@@ -5553,12 +5488,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 var x,y
                                 if(rowItemCounter > 1 && prevRect) {
-                                    log('build: row rect 1')
                                     y = prevRect.y;
                                     x = prevRect.x - (rectWidth + spaceBetween);
                                 } else {
-                                    log('build: row rect 2');
-
                                     var startX = maxX;
                                     if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                         var startY = prevRect != null ? prevRect.y : maxY;
@@ -5575,7 +5507,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     x = startX - rectWidth;
                                 }
                                 var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                log('build:  rect push',  rect);
 
                                 rects.push({side:null, rect: rect});
 
@@ -5593,7 +5524,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function addAndUpdate(container, count, elementToWrap, maximized) {
-                            log('addAndUpdate')
 
                             var align = getControlsAlign();
 
@@ -5674,7 +5604,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
 
                             var getAvailableRects = function (sortedRows) {
-                                log('getAvailableRects', sortedRows)
                                 var  rows = sortedRows.all;
                                 var availableRects = [];
                                 var availableRectsFullRow = [];
@@ -5683,10 +5612,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                                 var minX, maxX, minY, maxY;
-                                log('getAvailableRects: align', align)
 
                                 if(align == 'bottom' || align == 'top') {
-                                    log('getAvailableRects: align: top|bottom');
 
                                     minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
                                     maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
@@ -5696,7 +5623,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                                 } else if(align == 'bottomleft' || align == 'topleft') {
-                                    log('getAvailableRects: align: left|right');
                                     //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
                                     perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
                                     maxX =  parentWidth - spaceBetween;
@@ -5724,7 +5650,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     if(sampleRect.side == 'left') {
 
                                         var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
-                                        //log('getAvailableRects: side = left', row.length, maxRectsOnLeftSide);
 
                                         if(row.length != maxRectsOnLeftSide){
                                             var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
@@ -5747,7 +5672,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     } else if (sampleRect.side == 'right') {
 
                                         var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
-                                        //log('getAvailableRects: side = right', row.length, maxRectsOnRightSide);
 
                                         if(row.length != maxRectsOnRightSide){
                                             var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
@@ -5770,8 +5694,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     } else {
 
                                         var maxRectsInCurrentRow = Math.floor((maxWidth + spaceBetween) / (sampleRect.rect.width + spaceBetween));
-                                        //log('getAvailableRects: side = full row0', maxWidth, spaceBetween, sampleRect.rect.width, spaceBetween);
-                                        //log('getAvailableRects: side = full row', row.length, maxRectsInCurrentRow);
 
                                         if(row.length != maxRectsInCurrentRow){
                                             var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
@@ -5795,11 +5717,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 }
 
                                 if(sortedRows.left.length != sortedRows.right.length) {
-                                    log('getAvailableRects: sortedRows.left.length != sortedRows.right.length');
 
                                     //if there are more rows on the left side than on the right, complete row on the right side
                                     if(sortedRows.left.length > sortedRows.right.length && rectsOnRightSide != 0){
-                                        log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if1');
 
                                         var rowsToCreate = sortedRows.left.length - sortedRows.right.length;
 
@@ -5819,7 +5739,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                                 } else {
                                                     newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
                                                 }
-                                                log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if1: add rect', newRect);
 
                                                 availableRectsOnRight.push(newRect);
 
@@ -5829,7 +5748,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         }
 
                                     } else if(sortedRows.right.length > sortedRows.left.length && rectsOnLeftSide != 0) {
-                                        log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if2');
 
                                         var rowsToCreate = sortedRows.right.length - sortedRows.left.length;
 
@@ -5850,7 +5768,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                                 } else {
                                                     newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
                                                 }
-                                                log('getAvailableRects: sortedRows.left.length != sortedRows.right.length: if2: add rect', newRect);
 
                                                 availableRectsOnLeft.push(newRect);
 
@@ -5924,16 +5841,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 var newRects = [];
 
                                 var craeteRowsOnControlsSides = function(){
-                                    log('craeteRowsOnControlsSides');
 
                                     var startFrom, side;
                                     var minLeftY, minRightY, maxLeftY, maxRightY;
 
                                     var figureOutCoordsonLeft = function() {
-                                        log('craeteRowsOnControlsSides figureOutCoordsonLeft');
-
                                         if(rows.left.length != 0) {
-                                            log('craeteRowsOnControlsSides figureOutCoordsonLeft 1');
                                             var allrects = [];
                                             for(var l in rows.left) {
                                                 allrects = allrects.concat(rows.left[l])
@@ -5941,7 +5854,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             minLeftY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
                                             maxLeftY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
                                         } else {
-                                            log('craeteRowsOnControlsSides figureOutCoordsonLeft 2');
                                             if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
                                                 minLeftY = maxLeftY = parentHeight;
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
@@ -5951,10 +5863,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     }
 
                                     var figureOutCoordsonRight = function() {
-                                        log('craeteRowsOnControlsSides figureOutCoordsonRight');
-
                                         if(rows.right.length != 0) {
-                                            log('craeteRowsOnControlsSides figureOutCoordsonRight if1');
 
                                             var allrects = [];
                                             for(var l in rows.right) {
@@ -5963,7 +5872,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             minRightY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
                                             maxRightY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
                                         } else {
-                                            log('craeteRowsOnControlsSides figureOutCoordsonRight if2');
 
                                             if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
                                                 minRightY = maxRightY = parentHeight;
@@ -5975,15 +5883,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     }
 
                                     if(rows.left.length == rows.right.length && rows.right.length != 0) {
-                                        log('craeteRowsOnControlsSides if1');
-
                                         figureOutCoordsonRight();
                                         figureOutCoordsonLeft();
                                         startFrom = side = 'right';
 
                                     } else if (rectsOnRightSide != 0 && rectsOnLeftSide != 0) {
-                                        log('craeteRowsOnControlsSides if2');
-
                                         figureOutCoordsonRight();
                                         figureOutCoordsonLeft();
 
@@ -5995,20 +5899,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             startFrom = side = 'right';
                                         }
                                     } else if (rectsOnLeftSide != 0) {
-                                        log('craeteRowsOnControlsSides if3');
                                         figureOutCoordsonLeft();
 
                                         startFrom = side = 'left';
                                     } else if (rectsOnRightSide != 0) {
-                                        log('craeteRowsOnControlsSides if4');
                                         figureOutCoordsonRight();
 
                                         startFrom = side = 'right';
                                     } else {
 
                                     }
-
-                                    log('craeteRowsOnControlsSides figure', minLeftY, maxLeftY);
 
                                     var numOfRowsAlongWrapEl, rectsToTheTopOnLeft, rectsToTheTopOnRight;
 
@@ -6037,7 +5937,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
                                     var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
                                     var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
-                                    log('craeteRowsOnControlsSides totalRectsOnSides', side);
 
                                     if(count < totalRectsOnSides) totalRectsOnSides = count;
 
@@ -6057,7 +5956,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     var i, x, y, prevRect, latestLeftRect, latestRightRect;
                                     for (i = 0; i < totalRectsOnSides; i++) {
                                         if(side == "right") {
-                                            log('craeteRowsOnControlsSides for right');
 
                                             if(latestRightRect) prevRect = latestRightRect
                                             if(rightSideCounter >= 1) {
@@ -6121,11 +6019,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                             }
                                             var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                            log('craeteRowsOnControlsSides right', rect);
                                             currentRowRects.push({side:'right', rect: rect});
 
                                         } else if(side == "left") {
-                                            log('craeteRowsOnControlsSides for left');
 
                                             if(latestLeftRect) prevRect = latestLeftRect;
 
@@ -6191,7 +6087,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                             var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
                                             currentRowRects.push({side:'left', rect: rect});
-                                            log('craeteRowsOnControlsSides left', rect);
 
 
                                         }
@@ -6209,7 +6104,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     for(var i in rects){
                                         arr = arr.concat(rects[i]);
                                     }
-                                    log('craeteRowsOnControlsSides arr', JSON.stringify(arr));
 
                                     return arr.map(function(rectObj){
                                         return rectObj.rect;
@@ -6217,45 +6111,36 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 }
 
                                 var createFullRows = function(count) {
-                                    log('createFullRows', count);
 
                                     var allRects = currentRects.concat(newRects).concat(availableRects);
                                     var minX, maxX, rectsNum;
                                     if(align == 'top' || align == 'bottom') {
-                                        log('createFullRows if1', rectWidth);
 
                                         var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
                                         var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
-                                        log('createFullRows : maxX0', maxX, minX);
 
                                         if(minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
                                         if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-                                        log('createFullRows : maxX1', maxX, minX);
 
                                         rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
                                         rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
 
                                     } else if (align == 'bottomleft' || align == 'topleft') {
-                                        log('createFullRows maxx if2');
                                         maxX =  parentWidth - spaceBetween;
                                         minX =  elementToWrap.left + spaceBetween;
                                         rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
 
                                     } else if (align == 'bottomright' || align == 'topright') {
-                                        log('createFullRows maxx if3');
                                         maxX = elementToWrap.left - spaceBetween;
                                         minX = spaceBetween;
                                         rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                     } else {
-
-                                        log('createFullRows else');
                                         maxX = parentWidth - spaceBetween;
                                         minX = spaceBetween;
                                         rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                     }
 
                                     if (align == 'top-full') {
-                                        log('createFullRows maxy if1');
                                         var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
                                         var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
                                     } else {
@@ -6263,16 +6148,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
                                     }
 
-
-                                    log('createFullRows : rectsNum', rectsNum, rectWidth);
-
                                     var perRow = rectsNum;
 
                                     var rects = []
                                     var latestRect, createNewRow;
                                     var isNextNewLast = false;
                                     var rowItemCounter = 1;
-                                    console.log('createFullRows rowItemCounter', rowItemCounter)
 
                                     var i;
                                     for (i = 1; i <= count; i++) {
@@ -6283,11 +6164,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                         var x,y
                                         if(rowItemCounter > 1) {
-                                            console.log('createFullRows if0')
                                             y = latestRect.y;
                                             x = latestRect.x - (rectWidth + spaceBetween);
                                         } else if(createNewRow) {
-                                            console.log('createFullRows if1')
                                             if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
                                                 y =  latestRect.y - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
@@ -6296,7 +6175,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             x = maxX - rectWidth;
                                             createNewRow = false;
                                         } else {
-                                            console.log('createFullRows if2')
                                             if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = minY - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
@@ -6311,7 +6189,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
 
                                         rects.push({side:null, rect: rect});
-                                        console.log('createFullRows new row',rect, rowItemCounter, perRow)
 
                                         if(rowItemCounter == perRow) {
                                             createNewRow = true;
@@ -6325,17 +6202,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     });
                                 }
 
-                                log('createNewRows : if', rows.left.length, numOfRowsAlongWrapEl, rows.right.length, numOfRowsAlongWrapEl, rectsOnLeftSide, rectsOnRightSide);
-
                                 if((rows.left.length == numOfRowsAlongWrapEl && rows.right.length == numOfRowsAlongWrapEl)
                                     || (rows.left.length == 0 && rows.right.length == numOfRowsAlongWrapEl)
                                     || (rows.right.length == 0 && rows.left.length == numOfRowsAlongWrapEl)
                                     || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
-                                    log('createNewRows : createFullRows');
 
                                     newRects = createFullRows(numRectsToAdd);
                                 } else {
-                                    log('createNewRows : craeteRowsOnControlsSides');
 
                                     newRects = craeteRowsOnControlsSides();
 
@@ -6351,10 +6224,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var rectsToAddNum = count - _layoutTool.currentRects.length;
 
                             var rows = getRectsRows();
-                            log('addAndUpdate : rectsToAddNum', rectsToAddNum);
-                            log('addAndUpdate : rows', rows);
                             var availableRects = getAvailableRects(rows);
-                            log('addAndUpdate : getAvailableRects', availableRects);
                             var newRows;
                             if(rectsToAddNum > availableRects.length) {
                                 rectsToAddNum = (rectsToAddNum - availableRects.length);
@@ -6371,7 +6241,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function alignFullRows(elementRects) {
-                            log('alignFullRows');
                             var groupBy = function(xs, key) {
                                 var groupedRows = xs.reduce(function(rv, x) {
                                     (rv[x[key]] = rv[x[key]] || []).unshift(x);
@@ -6447,28 +6316,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         };
 
                         function compareLayoutStates(prevRects, newRects) {
-                            log('compareLayoutStates START', JSON.stringify(prevRects));
                             var diffEls = [];
                             var count = prevRects.length;
 
                             var findInCurrentLayout = function (prevLayoutRect) {
-                                log('compareLayoutStates: findInCurrentLayout START', prevLayoutRect);
-
-                                //log('compareLayoutStates: findInCurrentLayout', prevLayoutRect);
 
                                 var count = newRects.length;
                                 for (var c = 0; c < count; c++) {
-                                    log('compareLayoutStates: findInCurrentLayout: top left', prevLayoutRect.top, prevLayoutRect.left, newRects[c].top,  newRects[c].left);
 
                                     var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
                                     var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
 
-                                    //log('compareLayoutStates: findInCurrentLayout: diffTop + diffLeft', diffTop + diffLeft / 2 );
-                                    log('compareLayoutStates: findInCurrentLayout:', (diffTop + diffLeft) / 2);
-
                                     if((diffTop + diffLeft) / 2 < 2) {
-                                        //log('compareLayoutStates: findInCurrentLayout: true', newRects[c]);
-
                                         return true;
                                     }
                                 }
@@ -6479,7 +6338,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             for (let i = 0; i < count; i++) {
                                 var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
                                 if(!findInCurrentLayout(prevLayoutRect)) {
-                                    log('compareLayoutStates: !findInCurrentLayout', prevLayoutRect);
 
                                     diffEls.push(prevLayoutRect);
                                 }
@@ -6489,7 +6347,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function changeRectPosition(oldRect, newRect, rects) {
-                            log('changeRectPosition', oldRect, newRect);
                             var i, count = rects.length;
                             for (i = 0; i < count; i++) {
                                 if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
@@ -6501,18 +6358,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function findClosest(diffRect, rects) {
-                            log('findClosest : START', diffRect);
                             if(!diffRect) return null;
                             var closestOnTop = findClosesVerticallyRect(diffRect, rects);
-
-
-                            log('findClosest : closestOnTop', closestOnTop);
 
                             if(closestOnTop != null) {
                                 return closestOnTop
                             } else {
                                 var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
-                                log('findClosest : closestOnSide', closestOnSide);
 
                                 if(closestOnSide != null) {
                                     return closestOnSide;
@@ -6524,7 +6376,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                         function findClosesVerticallyRect(rect, rects) {
-                            log('findClosesVerticallyRect', rect);
                             var distance = function (x1,y1,x2,y2) {
                                 return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
                             }
@@ -6544,7 +6395,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     return false;
                                 })
                             }
-                            log('findClosesVerticallyRect : nextRow', nextRow);
 
                             if(nextRow.length != 0) {
                                 var isRowFull
@@ -6576,7 +6426,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function findClosesHorizontalyRect(rect, rects) {
-                            //log('findClosesHorizontalyRect', rect)
                             var distance = function (x1,y1,x2,y2) {
                                 return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
                             }
@@ -6634,7 +6483,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
-                            log('fillFreeSpaceWithClosestRects', spaceToFill, skipRects);
 
                             var closest;
                             if(skipRects != null) {
@@ -6665,7 +6513,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         function removeAndUpdate() {
-                            log('removeAndUpdate');
                             var count = roomScreens.length;
 
                             var elementRects = [];
@@ -6684,11 +6531,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
                                 }
                             }
-                            log('compareLayoutStates : compareLayoutStates : _layoutTool.basicGridRects', _layoutTool.basicGridRects);
 
                             var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
 
-                            log('compareLayoutStates : compareLayoutStates diff', diff);
                             var resultLayoutRects;
 
                             if(diff.length != 0) {
@@ -6904,7 +6749,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(!Q.info.isMobile && options.defaultDesktopViewMode != null) {
                     screensRendering.setViewMode(options.defaultDesktopViewMode );
-                } else if(Q.info.isMobile && options.defaultMobileViewMode != null) {
+                } else if(Q.info.isMobile && options.defaultMobilevViewMode != null) {
                     screensRendering.setViewMode(options.defaultMobileViewMode);
                 }
             }
@@ -6922,7 +6767,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             _resizeObserver = new ResizeObserver(entries => {
                 console.log('Size changed');
                 screensRendering.updateLayout();
-                WebRTCconference.screensInterface.audioVisualization().updateCommonVisualizationWidth();
+                if(WebRTCconference) WebRTCconference.screensInterface.audioVisualization().updateCommonVisualizationWidth();
 
             });
             console.log('_options.element', _options.element);
@@ -6949,7 +6794,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //showPageLoader();
                 log('Start WebRTC conference room');
 
-                var preparingRoom = false;
+                var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!_options.startWith.video && !_options.startWith.audio));
 
                 connectionState.show(preparingRoom ? "Checking room's state" : 'Connecting...');
 
