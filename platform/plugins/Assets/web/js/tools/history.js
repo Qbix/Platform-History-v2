@@ -15,6 +15,7 @@
  *  Passed tool as context and userId, userName as arguments.
  *  @param {Q.Event} [options.onStream] Event occur when user click on stream title link.
  *  Passed tool as context and publisherId, streamName as arguments.
+ *  @param {boolean} [options.mergeRows=false] If true merge rows with same "amount" field
  */
 
 Q.Tool.define("Assets/history", function (options) {
@@ -65,6 +66,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 { // default options here
 	type: null,
+	mergeRows: false,
 	userId: Q.Users.loggedInUserId(),
 	onClient: new Q.Event(),
 	onStream: new Q.Event()
@@ -120,6 +122,39 @@ Q.Tool.define("Assets/history", function (options) {
 							Q.handle(state.onStream, tool, [publisherId, streamName]);
 						}
 					});
+
+					// merge rows with same amount field
+					if (state.mergeRows) {
+						var $rows = $("tr:visible", $table);
+						var $sibling = operation === "append" ? $rows.last() : $rows.first();
+						if ($sibling.length && $(".Assets_history_amount", $sibling).html() === row.operation) {
+							$tr.removeClass("Q_newsflash").attr("data-category", $sibling.attr("id")).hide();
+							$sibling.addClass("Q_newsflash");
+
+							var $bookmark = $(".bookmark div", $sibling);
+							if (!$bookmark.length) {
+								$("<td><div></div></td>")
+								.addClass("bookmark")
+								.attr("data-status", 0)
+								.on(Q.Pointer.fastclick, function () {
+									var $this = $(this);
+									var status = $this.attr("data-status");
+
+									$this.attr("data-status", status === "0" ? "1" : "0");
+
+									var $nested = $("tr[data-category=" + $sibling.attr("id") + "]", $table);
+									if (status === "0") {
+										$nested.show();
+									} else {
+										$nested.hide();
+									}
+								})
+								.appendTo($sibling);
+								$bookmark = $(".bookmark div", $sibling);
+							}
+							$bookmark.html((parseInt($bookmark.html()) || 0) + 1);
+						}
+					}
 
 					$table[operation]($tr);
 				});
