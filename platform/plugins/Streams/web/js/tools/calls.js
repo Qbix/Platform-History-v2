@@ -159,6 +159,8 @@ Q.Tool.define("Streams/calls", function(options) {
 					parentElement.forEachTool("Streams/webrtc/preview", function () {
 						console.log('calls.js; state.mainWebrtcStream', state.parentClipTool.webrtcStream,  state.parentClipTool.state.webrtcStream)
 						var previewTool = this;
+                        this.state.parentClipTool = state.parentClipTool;
+                        this.state.mainWebrtcRoom = state.parentClipTool.state.mainWebrtcRoom;
                         this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
 						this.state.onWebRTCRoomEnded.set(function () {
 							if (!state.isAdmin) {

@@ -64,6 +64,11 @@
     margin-top: 10px;
 }
 .Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_icon,
-.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_preamble {
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_preamble,
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_participants_summary {
     display: none;
+}
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_body {
+    display: flex;
+    justify-content: space-between;
 }

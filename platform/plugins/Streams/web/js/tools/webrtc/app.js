@@ -1592,8 +1592,8 @@ window.WebRTCconferenceLib = function app(options){
                 remoteStreamEl.muted = true;
                 remoteStreamEl.autoplay = true;
                 remoteStreamEl.playsInline = true;
-                /*if(!('ontrack' in testPeerConnection) && track.kind == 'video') */localParticipant.videoStream = stream;
-                /*if (!('ontrack' in testPeerConnection) && track.kind == 'audio') */localParticipant.audioStream = stream;
+                if(track.kind == 'video') localParticipant.videoStream = stream;
+                if (track.kind == 'audio') localParticipant.audioStream = stream;
             }
 
             var supportableFormats = supportsVideoType(remoteStreamEl);
@@ -8817,6 +8817,7 @@ window.WebRTCconferenceLib = function app(options){
         var cameraIsDisabled = options.startWith.video === true ? false : true;
         var micIsDisabled = options.startWith.audio === true ? false : true;
         log('micIsDisabled', micIsDisabled, options.startWith.audio);
+        log('cameraIsDisabled', cameraIsDisabled, options.startWith.video);
 
         var screensharingIsDisabled = true;
         var speakerIsDisabled = false;
@@ -10999,7 +11000,7 @@ window.WebRTCconferenceLib = function app(options){
         } else {
             log('initWithNodeJs: add socket.io');
 
-            var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'
+            var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.min.js'
             var xhr = new XMLHttpRequest();
 
             xhr.open('GET', url, true);

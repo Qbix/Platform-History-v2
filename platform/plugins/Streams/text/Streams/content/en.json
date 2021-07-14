@@ -202,6 +202,8 @@
             "youJoinedRoom": "You joined the room",
             "joining": "Joining: {{userName}}",
             "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
             "youLeftRoom": "You left the room",
             "codeCopied": "You left the room",
             "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
@@ -245,7 +247,8 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "End Live",
             "fbEmbedCode": "Embed",
-            "copy": "Copy"
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",

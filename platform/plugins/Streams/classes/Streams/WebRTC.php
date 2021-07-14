@@ -70,7 +70,7 @@ abstract class Streams_WebRTC
 
                 if($resumeClosed) {
                     $stream->closedTime = null;
-                    $stream->save();
+                    $stream->changed();
 
                 }
 
@@ -97,7 +97,7 @@ abstract class Streams_WebRTC
             }
         }
 
-        return false;
+        return null;
     }
 
     /**
@@ -116,7 +116,7 @@ abstract class Streams_WebRTC
         }
 
         // check quota
-        $quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
+        //UNCOMMENT BEFORE COMMIT$quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
         $text = Q_Text::get('Streams/content');
         $fields = array(
             'title' => Q::interpolate($text['webrtc']['streamTitle'], array(Streams::displayName($publisherId)))
@@ -128,11 +128,11 @@ abstract class Streams_WebRTC
         $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', $fields);
         if ($stream) return $stream;
         // set quota
-        if ($stream && $quota instanceof Users_Quota) {
+        /*UNCOMMENT BEFORE COMMIT if ($stream && $quota instanceof Users_Quota) {
             $quota->used();
 
             return $stream;
-        }
+        }*/
 
         throw new Q_Exception("Failed during create webrtc stream");
     }
@@ -153,7 +153,8 @@ abstract class Streams_WebRTC
         }
 
         $existingRoomStream = self::fetchStream($publisherId, $roomId, $resumeClosed);
-        if($existingRoomStream) {
+
+        if(!is_null($existingRoomStream)) {
             return $existingRoomStream;
         } else {
             return self::createStream($publisherId, $roomId, $resumeClosed, $writeLevel);

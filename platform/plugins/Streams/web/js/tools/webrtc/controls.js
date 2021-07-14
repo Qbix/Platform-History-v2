@@ -1044,10 +1044,14 @@
 
 
                 if(enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
-					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
+                    console.log('updateControlBar 1')
+
+                    tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(!conferenceControl.cameraIsEnabled()) {
+                    console.log('updateControlBar 2')
 					tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
 				} else if(conferenceControl.cameraIsEnabled()) {
+                    console.log('updateControlBar 3')
 					tool.cameraBtnIcon.innerHTML = icons.camera;
 				}
 
@@ -1600,6 +1604,7 @@
                             var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
                                 return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                             }).length;
+                            console.log('_turnOffCameraBtn', enabledVideoTracks, localParticipant.videoStream)
                             if(enabledVideoTracks == 0 && localParticipant.videoStream == null) {
                                 toggleRadioButton(_turnOffCameraBtn);
                             }
@@ -1918,7 +1923,7 @@
                             var rtmpStreamingItem = document.createElement('DIV');
                             rtmpStreamingItem.className = 'Streams_webrtc_streaming_item';
                             var rtmpStreamingTextLabel = document.createElement('SPAN');
-                            rtmpStreamingTextLabel.innerHTML = 'Streaming to custom RTMP';
+                            rtmpStreamingTextLabel.innerHTML = tool.textes.webrtc.settingsPopup.streamToRTMP;
                             var rtmpStreamingIcon = document.createElement('SPAN');
                             rtmpStreamingIcon.className = 'Streams_webrtc_streaming_recording_icon';
                             rtmpStreamingIcon.innerHTML = icons.rtmpLive;

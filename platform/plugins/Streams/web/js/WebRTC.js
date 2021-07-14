@@ -62,7 +62,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             mediaDevicesDialog: {timeout:2000},
             startWith: {
                 audio: true,
-                video: true
+                video: false
             },
             preparing: {
                 video: false,
@@ -886,6 +886,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 console.log('bindStreamsEvents: Streams/webrtc/invite', stream, message);
                 if(webRTCInstance== null || WebRTCconference == null) return;
                 var streamToJoin = JSON.parse(message.content);
+                if(streamToJoin.userId != Q.Users.loggedInUserId()) return;
+
                 webRTCInstance.switchTo(streamToJoin.publisherId, streamToJoin.name);
             });
 
@@ -901,8 +903,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                 if(message.userId == userId) {
-                    WebRTCconference.disconnect();
-                    webRTCInstance.stop();
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
+
+                    setTimeout(function () {
+                        WebRTCconference.disconnect();
+                        webRTCInstance.stop();
+                    }, 5000);
+
 
                     /*Q.Streams.unrelate(
                         state.publisherId,
@@ -7156,6 +7163,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         function switchTo(publisherId, streamName, callback, options) {
             //showPageLoader();
             log('switch WebRTC conference room', publisherId, streamName);
+            log('switch WebRTCconference', WebRTCconference);
+            if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
 
                 log('createRoomStream')
                 var roomIdToJoin = streamName.replace('Streams/webrtc/', '');
@@ -7181,7 +7190,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
 
                         _options.conferenceStartedTime = stream.getAttribute('startTime');
-                        log('start: createOrJoinRoomStream: mode ' + _options.mode)
+                        log('switchTo: createOrJoinRoomStream: mode ' + _options.mode)
+                        log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
                         bindStreamsEvents(_roomStream);
                         WebRTCconference.switchTo(publisherId, roomIdToJoin, function (newInstance) {
                             bindConferenceEvents(newInstance);
@@ -7191,7 +7201,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             newInstance.event.on('initNegotiationEnded', function () {
                                 console.log('createRoomStream: joined/connected: roomScreens.length1', screensRendering.getScreens().length);
-
+                                log('switchTo: createOrJoinRoomStream: newInstance', newInstance)
                                 WebRTCconference = newInstance;
                                 // prevRoom.disconnect(true);
 
@@ -7200,6 +7210,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 _controlsTool.refresh();
 
                                 screensRendering.updateLayout();
+                                if(callback) callback();
                                 log('createRoomStream: joined/connected: roomScreens.length2', screensRendering.getScreens().length);
 
                             });
@@ -7213,7 +7224,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         roomId: roomIdToJoin,
                         publisherId: publisherId,
                         adapter: _options.mode,
-                        resumeClosed: _options.resumeClosed
+                        resumeClosed: options && options.resumeClosed != null ? options.resumeClosed : _options.resumeClosed
                     }
                 });
 
@@ -7229,7 +7240,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {function} callback executed when all actions done.
          */
         function stop(callback) {
-            log('WebRTC.stop');
+            log('WebRTC.stop', WebRTCconference);
 
             if (_roomStream == null) {
                 return Q.handle(callback);
