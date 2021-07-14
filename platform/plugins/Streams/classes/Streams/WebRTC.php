@@ -74,25 +74,6 @@ abstract class Streams_WebRTC
 
                 }
 
-                $userId = Users::loggedInUser(true)->id;
-
-                if((int) $stream->fields['writeLevel'] == 0 && $stream->fields['publisherId'] != $userId) {
-
-                    /*$invites = Streams_Invited::select()->where(
-                        compact('publisherId', 'streamName', 'userId')
-                    )->fetchDbRows();
-                    $invites = Streams_Invite::forStream($publisherId, $streamName, $user->id);
-                    print_r($invites);die;*/
-                    $access = new Streams_Access();
-                    $access->publisherId = $publisherId;
-                    $access->streamName = $streamName;
-                    $access->ofUserId = $userId;
-                    if (!$access->retrieve()) {
-                        throw new Users_Exception_NotAuthorized();
-                    }
-
-                }
-
                 return $stream;
             }
         }

@@ -198,6 +198,50 @@ Q.Tool.define("Streams/calls", function(options) {
 		var state = tool.state;
 		var $toolElement = $(tool.element);
 
+        function getMainWebRTCStreams(callback) {
+            state.parentClipTool.stream.relatedTo(Q.Media.clip.webrtc.relations.main, function(){
+                var keys = Object.keys(this.relatedStreams);
+                console.log('getMainWebRTCStreams this.relatedStreams', this.relatedStreams)
+                var stream = this.relatedStreams[keys[0]];
+                if(callback) callback(stream);
+            })
+        }
+        getMainWebRTCStreams(function (stream) {
+            console.log('getMainWebRTCStreams stream', stream)
+        });
+        state.parentClipTool.stream.onMessage("Media/webrtc/guest").set(function (stream, message) {
+
+            console.log('call: Media/webrtc/guest', stream, message);
+            var invite = JSON.parse(message.instructions);
+            if(invite.userId != Q.Users.loggedInUserId()) return;
+
+            if(invite.joined == true) {
+                getMainWebRTCStreams(function (stream) {
+                    console.log('getMainWebRTCStreams stream',stream)
+
+                    if(tool.webrtcClassInstance == null) {
+                        Streams.WebRTC.start({
+                            publisherId: stream.fields.publisherId,
+                            streamName: stream.fields.name,
+                            resumeClosed: false,
+                            useExisting: false,
+                            closeManually: true,
+                            tool: tool,
+                            onStart: function (webrtcClassInstance) {
+                                tool.webrtcClassInstance = webrtcClassInstance;
+                            }
+                        });
+                    } else {
+                        tool.webrtcClassInstance.switchTo(stream.fields.publisherId, stream.fields.name);
+                    }
+                })
+			} else {
+                if(tool.webrtcClassInstance != null) tool.webrtcClassInstance.stop();
+			}
+
+
+        });
+
 		$toolElement.addClass("Streams_calls_call").on(Q.Pointer.fastclick, function () {
 			Q.prompt(null, function (content) {
 				if (!content) {
@@ -212,7 +256,11 @@ Q.Tool.define("Streams/calls", function(options) {
 					resumeClosed: false,
 					useExisting: false,
 					closeManually: true,
-					tool: tool
+					tool: tool,
+                    onStart: function (webrtcClassInstance) {
+						console.log('webrtcClassInstance', this)
+						tool.webrtcClassInstance = this;
+                    }
 				});
 			}, {
 				title: tool.text.calls.CallReasonTitle,

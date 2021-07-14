@@ -107,6 +107,8 @@
             }
 
             function renderTool(mainWebRTCStreamPublisher, mainWebRTCStreamName) {
+                console.log('renderTool:', mainWebRTCStreamPublisher, mainWebRTCStreamName)
+
                 Q.Template.render(
                     'Streams/webrtc/preview/view',
                     fields,
@@ -177,41 +179,19 @@
                 }
 
                 acceptButton.on(Q.Pointer.fastclick, function () {
-                    Q.Streams.get(fields.publisherId, fields.streamName, function() {
-                        var guestWebrtcStream = this;
-
-                        console.log('Streams/access', mainWebRTCStreamPublisher, mainWebRTCStreamName, fields.publisherId)
-                        Q.req({
-                            publisherId: mainWebRTCStreamPublisher,
-                            streamName: mainWebRTCStreamName,
-                            ofUserId: fields.publisherId,
-                            readLevel: 40,
-                            writeLevel: 10,
-                            adminLevel: -1,
-                            'Q.method': 'put'
-                        }, "Streams/access", ['data'], function (err, data) {
-                            var msg;
-                            if (msg = Q.firstErrorMessage(err, data && data.errors)) {
-                                alert(msg);
-                            }
-                            guestWebrtcStream.post({
-                                type: 'Streams/webrtc/invite',
-                                content: JSON.stringify({publisherId: mainWebRTCStreamPublisher, name: mainWebRTCStreamName, userId: stream.fields.publisherId}),
-                            }, function() {
-                                console.log('sent')
-                            })
-
-                            if(tool.state.mainWebrtcRoom != null) {
-                                switchBack(true);
-                            }
-
-                            acceptButton.css('display', 'none');
-                            disconnectButton.css('display', 'flex');
-                            callButton.css('display', 'none');
-
-                        });
-
+                    Q.req('Media/live', 'manage', function () {
+                       /* state.parentClipTool.stream.post({
+                            type: 'Streams/webrtc/invite',
+                            content: JSON.stringify({publisherId: mainWebRTCStreamPublisher, name: mainWebRTCStreamName, userId: stream.fields.publisherId}),
+                        }, function() {
+                            console.log('sent')
+                        })*/
+                    }, {
+                        fields: {
+                            action: 'join', userId: fields.publisherId
+                        }
                     })
+
                 });
 
                 disconnectButton.on(Q.Pointer.fastclick, function () {

@@ -24,7 +24,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 
         $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed, $writeLevel);
 
-        //print_r($stream->get('writeLevel'));die;
+        //print_r($stream);die;
         $endTime = $stream->getAttribute('endTime');
         $startTime = $stream->getAttribute('startTime');
         if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
