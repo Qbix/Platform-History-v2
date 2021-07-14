@@ -125,7 +125,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 					// merge rows with same amount field
 					if (state.mergeRows) {
-						var $rows = $("tr:visible", $table);
+						var $rows = $("tr:not([data-category])", $table);
 						var $sibling = operation === "append" ? $rows.last() : $rows.first();
 						if ($sibling.length && $(".Assets_history_amount", $sibling).html() === row.operation) {
 							$tr.removeClass("Q_newsflash").attr("data-category", $sibling.attr("id")).hide();
