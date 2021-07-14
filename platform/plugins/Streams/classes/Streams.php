@@ -933,6 +933,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.streamName] The name of the category stream
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
+	 * @param {string} [$relate.inheritAccess=true] If false skip inherit access from category.
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
 	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
@@ -1006,7 +1007,7 @@ abstract class Streams extends Base_Streams
 		}
 	
 		// ready to persist this stream to the database
-		if (!empty($relate['streamName'])) {
+		if (!empty($relate['streamName']) && Q::ifset($relate, 'inheritAccess', true)) {
 			$rs = Streams::fetchOne(
 				$asUserId,
 				$relate['publisherId'],
