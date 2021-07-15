@@ -1090,7 +1090,7 @@
 		var json = response.slots.data;
 		var step2_form;
 		var autologin = false;
-		var setupRegisterForm = Users.login.options.setupRegisterForm || defaultSetupRegisterForm;
+		var setupRegisterForm = Users.login.options.setupRegisterForm || Users.login.setupRegisterForm;
 		if (form.data('used') === 'facebook') {
 			// logged in with FB
 			autologin = true;
