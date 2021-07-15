@@ -10282,7 +10282,8 @@ var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 		} else {
 			Q.Text.set(name, content, o.merge);
 		}
-		Q.handle(callback, Q.Text, [err, content]);
+		var content2 = Q.getObject([Q.Text.languageLocaleString, name], Q.Text.collection) || content;
+		Q.handle(callback, Q.Text, [err, content2]);
 	}, o);
 }, {
 	cache: Q.Cache.document('Q.Text.get', 100),

@@ -35,5 +35,12 @@
 		"SubscribedToPlan": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
 		"YouSubscribedToPlan": "You have been subscribed to {{plan.title'}}",
 		"Enabled": "Notifications have been enabled."
+	},
+	"@override": {
+		"Streams/content": {
+		    "login": {
+				"prompt": "Let friends recognize you:"
+			}
+		}
 	}
 }
