@@ -10244,7 +10244,11 @@ Q.Text = {
 						errors = errors || {};
 						errors[name] = params[name][0];
 					} else if (params[name][1]) {
-						Q.extend(result, 10, params[name][1]);
+						var text = Q.getObject(
+							[Q.Text.languageLocaleString, name],
+							Q.Text.collection
+						) || params[name][1];
+						Q.extend(result, 10, text);
 					}
 				}
 				Q.handle(callback, Q.Text, [errors, result]);
@@ -10282,8 +10286,7 @@ var _Q_Text_getter = Q.getter(function (name, url, callback, options) {
 		} else {
 			Q.Text.set(name, content, o.merge);
 		}
-		var content2 = Q.getObject([Q.Text.languageLocaleString, name], Q.Text.collection) || content;
-		Q.handle(callback, Q.Text, [err, content2]);
+		Q.handle(callback, Q.Text, [err, content]);
 	}, o);
 }, {
 	cache: Q.Cache.document('Q.Text.get', 100),
