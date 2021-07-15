@@ -1,0 +1,3 @@
+ALTER TABLE {{prefix}}customer
+ADD COLUMN insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ADD COLUMN updatedTime timestamp NULL DEFAULT NULL;
