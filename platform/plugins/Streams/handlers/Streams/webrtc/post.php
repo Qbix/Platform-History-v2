@@ -20,6 +20,21 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  */
 function Streams_webrtc_post($params = array())
 {
+
+    $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
+    $socketServerHost = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', $socketServerHost), '/');
+    $socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
+    if(!empty($socketServerHost) && !empty($socketServerHost)){
+        $socketServer = $socketServerHost . ':' . $socketServerPort;
+    } else {
+        $socketServer = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', Q_Config::get('Q', 'node', 'url', null)), '/');
+    }
+
+    $turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
+    $useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
+    $liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
+    $debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
+
 	$params = array_merge($_REQUEST, $params);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
@@ -31,6 +46,7 @@ function Streams_webrtc_post($params = array())
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
     $writeLevel = Q::ifset($params, 'writeLevel', 10);
     $closeManually = Q::ifset($params, 'closeManually', null);
+    $useRelatedTo = Q::ifset($params, 'useRelatedTo', null);
 
     if(Q_Request::slotName('recording')) {
         $communityId = Q::ifset($_REQUEST, 'communityId', Users::communityId());
@@ -69,11 +85,51 @@ function Streams_webrtc_post($params = array())
         return;
     }
 
-    Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
+    //Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
 
+    if (!in_array($adapter, array('node', 'twilio'))) {
+        throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
+    }
+
+    $className = "Streams_WebRTC_".ucfirst($adapter);
+
+    $webrtc = new $className();
+
+    if($useTwilioTurn) {
+        try {
+            $turnCredentials = $webrtc->getTwilioTurnCredentials();
+            $turnServers[] = $turnCredentials;
+        } catch (Exception $e) {
+        }
+    }
+
+    $response = array(
+        'socketServer' => $socketServer,
+        'turnCredentials' => $turnServers,
+        'debug' => $debug,
+        'options' => array(
+            'liveStreaming' => $liveStreamingConfig
+        )
+    );
+
+    $webrtcStream = null;
+    if(!empty($useRelatedTo) && !empty($useRelatedTo["publisherId"]) && !empty($useRelatedTo["streamName"]) && !empty($useRelatedTo["relationType"])) {
+
+        $webrtcStream = $webrtc->getRoomStreamRelatedTo($useRelatedTo["publisherId"], $useRelatedTo["streamName"], $useRelatedTo["relationType"], $resumeClosed);
+
+        if(is_null($webrtcStream)) {
+            $webrtcStream = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
+        }
+
+    } else {
+        $webrtcStream = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
+    }
+
+    $response['stream'] = $webrtcStream;
+    $response['roomId'] = $webrtcStream->name;
 
     // check maxCalls
-	if (!empty($relate)) {
+	if (!empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
 		// if calls unavailable, throws exception
 		Streams::checkAvailableRelations($publisherId, $relate["publisherId"], $relate["streamName"], $relate["relationType"], array(
 			"postMessage" => false,
@@ -82,39 +138,31 @@ function Streams_webrtc_post($params = array())
 		));
 	}
 
-	if (!in_array($adapter, array('node', 'twilio'))) {
-		throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
-	}
-
-	$className = "Streams_WebRTC_".ucfirst($adapter);
-
-	$webrtc = new $className();
-	$result = $webrtc->getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
-
 	if ($publisherId == $loggedInUserId) {
 		if ($content) {
-			$result['stream']->content = $content;
-			$result['stream']->changed();
+            $response['stream']->content = $content;
+            $response['stream']->changed();
 		}
 	}
 
-	if (!empty($relate)) {
-		$result['stream']->relateTo((object)array(
+	if (!empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
+        $response['stream']->relateTo((object)array(
 			"publisherId" => $relate["publisherId"],
 			"name" => $relate["streamName"]
-		), $relate["relationType"], $result['stream']->publisherId, array(
+		), $relate["relationType"], $response['stream']->publisherId, array(
 			"inheritAccess" => true,
 			"weight" => time()
 		));
 	}
 
 	if ($resumeClosed !== null) {
-		$result['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+        $response['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
 	}
-	if ($closeManually !== null) {
-		$result['stream']->setAttribute("closeManually", $closeManually)->save();
-	}
-	$result['stream']->join();
 
-	Q_Response::setSlot("room", $result);
+	if ($closeManually !== null) {
+        $response['stream']->setAttribute("closeManually", $closeManually)->save();
+	}
+    $response['stream']->join();
+
+	Q_Response::setSlot("room", $response);
 }

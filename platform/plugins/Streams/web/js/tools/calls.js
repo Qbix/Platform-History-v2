@@ -197,7 +197,7 @@ Q.Tool.define("Streams/calls", function(options) {
 		var tool = this;
 		var state = tool.state;
 		var $toolElement = $(tool.element);
-
+        var $hostsParticipants = $(".Media_clip_hosts_participants", state.parentClipTool.element);
         function getMainWebRTCStreams(callback) {
             state.parentClipTool.stream.relatedTo(Q.Media.clip.webrtc.relations.main, function(){
                 var keys = Object.keys(this.relatedStreams);
@@ -217,10 +217,11 @@ Q.Tool.define("Streams/calls", function(options) {
 
             if(invite.joined == true) {
                 getMainWebRTCStreams(function (stream) {
-                    console.log('getMainWebRTCStreams stream',stream)
+                    console.log('getMainWebRTCStreams stream', stream)
+                    console.log('getMainWebRTCStreams tool.webrtcClassInstance', tool.webrtcClassInstance)
 
                     if(tool.webrtcClassInstance == null) {
-                        Streams.WebRTC.start({
+                        /*tool.webrtcClassInstance = Streams.WebRTC.start({
                             publisherId: stream.fields.publisherId,
                             streamName: stream.fields.name,
                             resumeClosed: false,
@@ -230,7 +231,7 @@ Q.Tool.define("Streams/calls", function(options) {
                             onStart: function (webrtcClassInstance) {
                                 tool.webrtcClassInstance = webrtcClassInstance;
                             }
-                        });
+                        });*/
                     } else {
                         tool.webrtcClassInstance.switchTo(stream.fields.publisherId, stream.fields.name);
                     }
@@ -248,9 +249,9 @@ Q.Tool.define("Streams/calls", function(options) {
 					return;
 				}
 
-				Streams.WebRTC.start({
-					publisherId: state.publisherId,
-					streamName: state.streamName,
+                /*tool.webrtcClassInstance = Q.Streams.WebRTC.start({
+                    element: $hostsParticipants[0],
+                    roomPublisherId: state.publisherId,
 					relationType: state.relationType,
 					content: content,
 					resumeClosed: false,
@@ -258,10 +259,20 @@ Q.Tool.define("Streams/calls", function(options) {
 					closeManually: true,
 					tool: tool,
                     onStart: function (webrtcClassInstance) {
-						console.log('webrtcClassInstance', this)
-						tool.webrtcClassInstance = this;
+						console.log('Streams.WebRTC.start onStart', this)
                     }
-				});
+				});*/
+
+                tool.webrtcClassInstance = Streams.WebRTC.start({
+                    publisherId: state.publisherId,
+                    streamName: state.streamName,
+                    relationType: state.relationType,
+                    content: content,
+                    resumeClosed: false,
+                    useExisting: false,
+                    closeManually: true,
+                    tool: tool,
+                });
 			}, {
 				title: tool.text.calls.CallReasonTitle,
 				noClose: false

@@ -65,7 +65,6 @@ abstract class Streams_WebRTC
         if (!empty($roomId)) {
             $streamName = "Streams/webrtc/$roomId";
             $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
-
             if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
 
                 if($resumeClosed) {

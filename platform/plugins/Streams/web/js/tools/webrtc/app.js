@@ -10270,14 +10270,10 @@ window.WebRTCconferenceLib = function app(options){
                     console.error(err.name + ": " + err.message);
                 });
 
-            }).catch(function(err) {
-                console.error(err.name + ": " + err.message);
-            });
+            })
 
         })
-            .catch(function(err) {
-                console.error(err.name + ": " + err.message);
-            });
+
 
 
     }

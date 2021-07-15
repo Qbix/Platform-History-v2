@@ -186,6 +186,14 @@
                         }, function() {
                             console.log('sent')
                         })*/
+
+                        if(tool.state.mainWebrtcRoom != null) {
+                            switchBack(true);
+                        }
+
+                        acceptButton.css('display', 'none');
+                        disconnectButton.css('display', 'flex');
+                        callButton.css('display', 'none');
                     }, {
                         fields: {
                             action: 'join', userId: fields.publisherId
@@ -197,32 +205,34 @@
                 disconnectButton.on(Q.Pointer.fastclick, function () {
                     Q.Streams.get(mainWebRTCStreamPublisher, mainWebRTCStreamName, function() {
                         console.log('disconnectButton stream', this, mainWebRTCStreamPublisher, mainWebRTCStreamName)
-
-                        tool.state.mainWebrtcStream.post({
-                            type: 'Streams/webrtc/forceDisconnect',
-                            content: JSON.stringify({
-                                publisherId: mainWebRTCStreamPublisher,
-                                name: mainWebRTCStreamName,
-                                userId: fields.publisherId,
-                                clipStreamPublisherId:tool.stream.fields.publisherId,
-                                clipStreamName:tool.stream.fields.name
-                            }),
-                        }, function() {
-                            console.log('disconnectButton: sent')
-
-                            //acceptButton.css('display', 'flex');
-                            //disconnectButton.css('display', 'none');
+                        Q.req('Media/live', 'manage', function () {
                             tool.preview.delete();
 
-                            Q.req({
-                                publisherId: mainWebRTCStreamPublisher,
-                                streamName: mainWebRTCStreamName,
-                                ofUserId: fields.publisherId,
-                                'Q.method': 'delete'
-                            }, "Streams/access", ['data'], function (err, data) {
-                                console.log('access removed')
-                            });
+                            tool.state.mainWebrtcStream.post({
+                                type: 'Streams/webrtc/forceDisconnect',
+                                content: JSON.stringify({
+                                    publisherId: mainWebRTCStreamPublisher,
+                                    name: mainWebRTCStreamName,
+                                    userId: fields.publisherId,
+                                    clipStreamPublisherId:tool.stream.fields.publisherId,
+                                    clipStreamName:tool.stream.fields.name
+                                }),
+                            }, function() {
+                                console.log('disconnectButton: sent')
+
+                                /* //acceptButton.css('display', 'flex');
+                                 //disconnectButton.css('display', 'none');
+                                 tool.preview.delete();*/
+
+                            })
+
+                        }, {
+                            fields: {
+                                action: 'leave', userId: fields.publisherId
+                            }
                         })
+
+
 
                     })
 
