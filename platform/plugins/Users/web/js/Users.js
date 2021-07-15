@@ -1090,7 +1090,7 @@
 		var json = response.slots.data;
 		var step2_form;
 		var autologin = false;
-		var setupRegisterForm = Users.login.options.setupRegisterForm || Users.login.setupRegisterForm;
+		var setupRegisterForm = Users.login.options.setupRegisterForm || defaultSetupRegisterForm;
 		if (form.data('used') === 'facebook') {
 			// logged in with FB
 			autologin = true;
@@ -1296,7 +1296,7 @@
 			return identifier_form;
 		}
 
-		Users.login.setupRegisterForm = function defaultSetupRegisterForm(identifier, json, priv, dialog) {
+		function defaultSetupRegisterForm(identifier, json, priv, dialog) {
 			var src = json.entry[0].photos && json.entry[0].photos.length ? json.entry[0].photos[0].value : json.entry[0].thumbnailUrl;
 			var src40 = src, src50 = src, src80 = src;
 			var username = json.entry[0].preferredUsername || json.entry[0].displayName;
