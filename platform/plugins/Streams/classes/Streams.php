@@ -638,7 +638,25 @@ abstract class Streams extends Base_Streams
 		if (empty($streams2)) {
 			return 0;
 		}
-		
+
+		// this key will use to cache calculated streams
+		$cacheKey = $asUserId.":".$publisherId.":{{streamName}}:".$actualPublisherId.":".$inheritAccess;
+
+		if (!isset(self::$cache["calculateAccess"])) {
+			self::$cache["calculateAccess"] = array();
+		}
+
+		// use this method to save cache and return
+		if (!function_exists("_calculateAccessReturn")) {
+			function _calculateAccessReturn ($streams, $cacheKey) {
+				foreach ($streams as $s) {
+					Streams::$cache["calculateAccess"][Q::interpolate($cacheKey, array("streamName" => $s->name))] = true;
+				}
+
+				return count($streams);
+			}
+		}
+
 		$public_source = Streams::$ACCESS_SOURCES['public'];
 		$contact_source = Streams::$ACCESS_SOURCES['contact'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
@@ -649,6 +667,12 @@ abstract class Streams extends Base_Streams
 			if ($s->get('asUserId', null) === $asUserId) {
 				continue;
 			}
+
+			// if stream already calculated, skip calculate it again
+			if (!$recalculate && Q::ifset(Streams::$cache, "calculateAccess", Q::interpolate($cacheKey, array("streamName" => $s->name)), false)) {
+				continue;
+			}
+
 			$s->set('asUserId', $asUserId);
 			if ($asUserId and $asUserId == $actualPublisherId) {
 				// The publisher should have full access to every one of their streams.
@@ -682,7 +706,7 @@ abstract class Streams extends Base_Streams
 		}
 		
 		if (empty($streams3)) {
-			return count($streams2);
+			return _calculateAccessReturn($streams2, $cacheKey);
 		}
 
 		$names = array_unique($names);
@@ -800,8 +824,8 @@ abstract class Streams extends Base_Streams
 				$s->inheritAccess(); 
 			}
 		}
-		
-		return count($streams2);
+
+		return _calculateAccessReturn($streams2, $cacheKey);
 	}
 	
 	/**
