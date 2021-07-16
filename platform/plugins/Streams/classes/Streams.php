@@ -640,17 +640,13 @@ abstract class Streams extends Base_Streams
 		}
 
 		// this key will use to cache calculated streams
-		$cacheKey = $asUserId.":".$publisherId.":{{streamName}}:".$actualPublisherId.":".$inheritAccess;
-
-		if (!isset(self::$cache["calculateAccess"])) {
-			self::$cache["calculateAccess"] = array();
-		}
+		$cacheKey = $asUserId.":".$publisherId.":".$actualPublisherId.":".$inheritAccess;
 
 		// use this method to save cache and return
 		if (!function_exists("_calculateAccessReturn")) {
 			function _calculateAccessReturn ($streams, $cacheKey) {
 				foreach ($streams as $s) {
-					Streams::$cache["calculateAccess"][Q::interpolate($cacheKey, array("streamName" => $s->name))] = true;
+					$s->set("AccessCalculated", $cacheKey);
 				}
 
 				return count($streams);
@@ -669,7 +665,7 @@ abstract class Streams extends Base_Streams
 			}
 
 			// if stream already calculated, skip calculate it again
-			if (!$recalculate && Q::ifset(Streams::$cache, "calculateAccess", Q::interpolate($cacheKey, array("streamName" => $s->name)), false)) {
+			if (!$recalculate && $s->get("AccessCalculated") == $cacheKey) {
 				continue;
 			}
 
