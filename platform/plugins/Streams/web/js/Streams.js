@@ -283,6 +283,10 @@ Streams.ADMIN_LEVEL = {
 
 Streams.defined = {};
 
+Streams.options = {
+	overrideUserRegistrationForm: true
+};
+
 /**
  * Call this function to define a stream type
  * @static
@@ -5514,7 +5518,9 @@ Q.onInit.add(function _Streams_onInit() {
 		Q.extend(Q.text.Streams, 10, text);
 	});
 	
-	Users.login.options.setupRegisterForm = Streams.setupRegisterForm;
+	if (Streams.options.overrideUserRegistrationForm) {
+		Users.login.options.setupRegisterForm = Streams.setupRegisterForm;	
+	}
 	Q.text.Users.login.placeholders.fullName = 'Enter your full name';
 	Q.text.Users.login.maxlengths.fullName = 50;
 
