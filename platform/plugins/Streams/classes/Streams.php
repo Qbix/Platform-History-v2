@@ -577,7 +577,7 @@ abstract class Streams extends Base_Streams
 		}
 		return reset($streams);
 	}
-	
+
 	/**
 	 * Calculates the access for one or more streams by querying the database
 	 * Modifies the objects in the $streams array, setting their access levels.
@@ -639,20 +639,6 @@ abstract class Streams extends Base_Streams
 			return 0;
 		}
 
-		// this key will use to cache calculated streams
-		$cacheKey = $asUserId.":".$publisherId.":".$actualPublisherId.":".$inheritAccess;
-
-		// use this method to save cache and return
-		if (!function_exists("_calculateAccessReturn")) {
-			function _calculateAccessReturn ($streams, $cacheKey) {
-				foreach ($streams as $s) {
-					$s->set("AccessCalculated", $cacheKey);
-				}
-
-				return count($streams);
-			}
-		}
-
 		$public_source = Streams::$ACCESS_SOURCES['public'];
 		$contact_source = Streams::$ACCESS_SOURCES['contact'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
@@ -663,12 +649,6 @@ abstract class Streams extends Base_Streams
 			if ($s->get('asUserId', null) === $asUserId) {
 				continue;
 			}
-
-			// if stream already calculated, skip calculate it again
-			if (!$recalculate && $s->get("AccessCalculated") == $cacheKey) {
-				continue;
-			}
-
 			$s->set('asUserId', $asUserId);
 			if ($asUserId and $asUserId == $actualPublisherId) {
 				// The publisher should have full access to every one of their streams.
@@ -700,9 +680,9 @@ abstract class Streams extends Base_Streams
 			$names[] = $s->type."*";
 			$streams3[] = $s;
 		}
-		
+
 		if (empty($streams3)) {
-			return _calculateAccessReturn($streams2, $cacheKey);
+			return count($streams2);
 		}
 
 		$names = array_unique($names);
@@ -710,11 +690,11 @@ abstract class Streams extends Base_Streams
 		// Get the per-label access data
 		// Avoid making a join to allow more flexibility for sharding
 		$accesses = Streams_Access::select()
-		->where(array(
-			'publisherId' => array($publisherId, ''),
-			'streamName' => $names,
-			'ofUserId' => array('', $asUserId)
-		))->ignoreCache()->fetchDbRows();
+			->where(array(
+				'publisherId' => array($publisherId, ''),
+				'streamName' => $names,
+				'ofUserId' => array('', $asUserId)
+			))->ignoreCache()->fetchDbRows();
 
 		$labels = array();
 		foreach ($accesses as $access) {
@@ -739,7 +719,7 @@ abstract class Streams extends Base_Streams
 						$tail = substr($access->streamName, -1);
 						$head = substr($access->streamName, 0, -1);
 						if ($stream->name !== $access->streamName
-						and ($tail !== '*' or $head !== $stream->type)) {
+							and ($tail !== '*' or $head !== $stream->type)) {
 							continue;
 						}
 						$readLevel = $stream->get('readLevel', 0);
@@ -765,14 +745,14 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
-	
+
 		// Override with per-user access data
 		foreach ($accesses as $access) {
 			foreach ($streams3 as $stream) {
 				$tail = substr($access->streamName, -1);
 				$head = substr($access->streamName, 0, -1);
 				if ($stream->name !== $access->streamName
-				and ($tail !== '*' or $head !== $stream->type)) {
+					and ($tail !== '*' or $head !== $stream->type)) {
 					continue;
 				}
 				if ($access->ofUserId === $asUserId) {
@@ -793,7 +773,7 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
-		
+
 		if ($inheritAccess) {
 			$streams4 = array();
 			$toFetch = array();
@@ -817,11 +797,11 @@ abstract class Streams extends Base_Streams
 			}
 			// this will now use the cached results of the above calls to Streams::fetch
 			foreach ($streams4 as $s) {
-				$s->inheritAccess(); 
+				$s->inheritAccess();
 			}
 		}
 
-		return _calculateAccessReturn($streams2, $cacheKey);
+		return count($streams2);
 	}
 	
 	/**
