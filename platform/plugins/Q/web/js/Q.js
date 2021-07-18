@@ -4134,6 +4134,7 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @param {string} [ctor.js] filenames containing Javascript to load for the tool
  * @param {string} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
  * @param {string} [ctor.html] filenames containing HTML to load for the tool, including templates
+ * @param {string} [ctor.text] list any text files to load (for the current language) before the tool constructor
  * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
  * @param {String} [ctor.placeholder.html] literal HTML to insert
  * @param {String} [ctor.placeholder.template] the name of a template to insert
@@ -5091,13 +5092,14 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded(params, subjects) {
 			// in this function, toolConstructor starts as a string
-			if (params.html) {
+			// and we expect the script to call Q.Tool.define()
+			if (params.html && !params.html[0] && params.html[1]
+			&& typeof _qtc[toolName] !== 'function') {
 				var div = document.createElement('div');
-				div.innerHTML = html;
+				div.innerHTML = params.html[1];
 				var scripts = div.getElementsByTagName('script');
 				Q.each(scripts, function () { // run scripts in order
-					document.head.appendChild(this);
-					document.head.removeChild(this);
+					eval(this.innerHTML);
 				});
 				var styles = div.getElementsByTagName('style');
 				Q.each(styles, function () { // permanently add any styles to document
@@ -5195,7 +5197,11 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 			if (toolConstructor.html) {
 				waitFor.push('html');
-				Q.request(toolConstructor.html, pipe.fill('html'), { extend: false });
+				Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
+			}
+			if (toolConstructor.text) {
+				waitFor.push('text');
+				Q.request.once(toolConstructor.text, pipe.fill('text'), { extend: false, parse: false });
 			}
 			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 		} else {
@@ -7569,6 +7575,10 @@ Q.request = function (url, slotNames, callback, options) {
 };
 
 Q.request.callbacks = []; // used by Q.request
+
+Q.request.once = Q.getter(Q.request, {
+	cache: Q.Cache.document('Q.request', 1)
+});
 
 /**
  * Try to find an error message assuming typical error data structures for the arguments
