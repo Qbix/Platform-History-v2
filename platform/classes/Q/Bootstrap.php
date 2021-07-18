@@ -187,6 +187,7 @@ class Q_Bootstrap
 			$app_tree->load('config/Q.json');
 			$app_tree->load('config/app.json');
 			$app_tree->load('local/app.json');
+			$app_tree->load('local/app.json.php');
 
 			$config_files = $app_tree->get('Q', 'configFiles', array());
 			foreach ($config_files as $cf) {
@@ -213,6 +214,7 @@ class Q_Bootstrap
 		// Get the app config, but don't load it yet
 		$app_tree->load('config/app.json');
 		$app_tree->load('local/app.json');
+		$app_tree->load('local/app.json.php');
 		
 		// Load all the plugin config files first
 		$paths = explode(PS, get_include_path());
