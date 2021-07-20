@@ -30,7 +30,7 @@ Q.Tool.define("Assets/history", function (options) {
 		throw new Q.Error("Assets/history: type required");
 	}
 
-	var pipe = Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
+	var pipe = Q.pipe(['styles', 'texts', 'table'], tool.refresh.bind(tool));
 
 	Q.addStylesheet('{{Assets}}/css/tools/AssetsHistory.css', pipe.fill("styles"), { slotName: 'Assets' });
 	Q.Text.get('Assets/content', function (err, text) {
@@ -61,6 +61,7 @@ Q.Tool.define("Assets/history", function (options) {
 		if (err) return;
 
 		$(tool.element).html(html);
+		pipe.fill("table")();
 	});
 },
 
