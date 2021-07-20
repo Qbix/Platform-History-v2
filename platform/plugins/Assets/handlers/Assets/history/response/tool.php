@@ -36,7 +36,6 @@ function Assets_history_response_tool($options)
 		->where(array('fromUserId' => $userId))
 		->orWhere(array('toUserId' => $userId))
 		->orderBy('insertedTime', false)
-		->limit(20, 0)
 		->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
