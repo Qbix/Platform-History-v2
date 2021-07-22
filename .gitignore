@@ -5,7 +5,6 @@
 .idea/
 .bin/
 docs/
-/*
 !platform
 platform/.idea/
 platform/local/*

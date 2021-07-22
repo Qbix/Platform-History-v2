@@ -173,7 +173,7 @@ table { table-layout: fixed; }
 #dashboard .Q_tabs_tab.Q_current * { color: black; }
 #dashboard .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; width: 28px; height: 28px; }
 .Q_mobile #dashboard .Q_tabs_tool { height: 40px; max-width: 80%; overflow: hidden; }
-.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tool { height: 40px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tool { height: 40px; display: inherit; }
 .Q_layout_sidebar #dashboard .Q_tabs_tab { padding: 5px; }
 body .Q_tabs_contextual .Q_listing li { text-align: left; }
 html .Q_listing img { height: 30px; }
