@@ -67,3 +67,6 @@
 .Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_preamble {
     display: none;
 }
+.Streams_calls_settings .Streams_calls_related .Streams_participants_summary {
+    display: none !important;
+}

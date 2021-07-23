@@ -136,7 +136,8 @@ Q.Tool.define("Streams/calls", function(options) {
 					// if opened in columns - third argument is a column element,
 					// if opened dialog - first argument is dialog element
 					var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
-					$(".Streams_calls_related", parentElement).tool("Streams/related", {
+					var $callsRelated = $(".Streams_calls_related", parentElement);
+					$callsRelated.tool("Streams/related", {
 						publisherId: state.publisherId,
 						streamName: state.streamName,
 						relationType: state.relationType,
@@ -145,6 +146,11 @@ Q.Tool.define("Streams/calls", function(options) {
 						sortable: false,
 						realtime: true
 					}).activate();
+					$callsRelated[0].forEachTool("Streams/webrtc/preview", function () {
+						this.state.onRender.add(function () {
+							$(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom);
+						});
+					});
 
 					$("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
 						var maxCalls = parseInt($select.val());
