@@ -54,7 +54,7 @@
 				identifier: "your mobile # or email",
 				mobile: "enter your mobile #",
 				email: "enter your email address",
-				username: "username"
+				username: "use letters and numbers only"
 			},
 			maxlengths: {
 				identifier: 100,
@@ -1317,7 +1317,6 @@
 					.attr('maxlength', Q.text.Users.login.maxlengths.username)
 					.attr('placeholder', Q.text.Users.login.placeholders.username)
 					.val(username)
-					.width($('#Users_login_identifier').width() - 30)
 			);
 			var $b = $('<button />', {
 				"type": "submit",

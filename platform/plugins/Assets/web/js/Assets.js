@@ -482,6 +482,14 @@
 					return Q.handle(callback, null, [err]);
 				}
 
+				if (!Users.loggedInUser) {
+					return Q.Users.login({
+						onSuccess: function () {
+							Q.handle(window.location.href);
+						}
+					});
+				}
+
 				options.email = options.email || Q.getObject("loggedInUser.email", Users);
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();

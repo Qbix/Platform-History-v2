@@ -7,6 +7,10 @@ The Qbix Platform
 
 ### [Developer Guide](https://qbix.com/platform/guide) - an overview of every feature.
 
+### [Token Economics](https://qbix.com/QBUX/whitepaper.html#ECONOMICS) - from feudalism to a free market
+
+### [Social Operating System](https://qbix.com/QBUX/whitepaper.html#Distributed-Operating-System) - social operating system
+
 For Developers
 ===
 

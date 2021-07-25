@@ -342,11 +342,15 @@ class Q_Tree
 			try {
 				// get file contents, remove comments and parse
 				$config = Q_Config::get('Q', 'tree', array());
-				$json = Q::readFile($filename2, Q::take($config, array(
-					'ignoreCache' => true,
-					'dontCache' => true,
-					'duration' => 3600
-				)));
+				if (strtolower(substr($filename, -4)) === '.php') {
+					$json = include($filename2);
+				} else {
+					$json = Q::readFile($filename2, Q::take($config, array(
+						'ignoreCache' => true,
+						'dontCache' => true,
+						'duration' => 3600
+					)));
+				}
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
 				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {
@@ -409,6 +413,10 @@ class Q_Tree
 
 		$mask = umask(Q_Config::get('Q', 'internal','umask' , 0000));
 		$flags = JSON_UNESCAPED_SLASHES | $flags;
+		$content = !empty($toSave) ? Q::json_encode($toSave, $flags) : '{}';
+		if (strtolower(substr($filename, -4)) === '.php') {
+			$content = "<?php return <<<EOT".PHP_EOL.$content.PHP_EOL."EOT;";
+		}
 		$success = file_put_contents(
 			$filename2, 
 			!empty($toSave) 
