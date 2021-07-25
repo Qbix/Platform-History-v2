@@ -8964,8 +8964,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
-		
+
+		loadMetas();
 		loadTemplates();
+
 		var newScripts;
 		
 		if (!o.ignoreDialogs) {
@@ -9276,7 +9278,33 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			});
 			return newStyles;
 		}
-		
+
+		function loadMetas() {
+			if (!response.metas) {
+				return null;
+			}
+
+			var elHead = document.getElementsByTagName('head')[0];
+			for (var slotName in response.metas) {
+				Q.each(response.metas[slotName], function (i) {
+					var metaData = this;
+					var metas = document.querySelectorAll("meta[" + metaData.attrName + "='" + metaData.attrValue + "']");
+					if (!metas.length) {
+						var meta = document.createElement("meta");
+						meta.setAttribute(this.attrName, metaData.attrValue);
+						meta.setAttribute("content", metaData.content);
+						elHead.appendChild(meta);
+						return;
+					}
+
+					Q.each(metas, function (j) {
+						this.setAttribute(metaData.attrName, metaData.attrValue);
+						this.setAttribute("content", metaData.content);
+					});
+				});
+			}
+		}
+
 		function loadTemplates() {
 			if (!response.templates) {
 				return null;

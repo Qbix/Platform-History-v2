@@ -9,6 +9,7 @@
 	 * @param {Q.Event} [options.onWebRTCRoomCreated]
 	 * @param {Q.Event} [options.onWebrtcControlsCreated]
 	 * @param {Q.Event} [options.onWebRTCRoomEnded]
+	 * @param {Q.Event} [options.onRender] called when tool element completely rendered
 	 */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
             var tool = this;
@@ -42,7 +43,8 @@
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event(),
-			onWebRTCRoomEnded: new Q.Event()
+			onWebRTCRoomEnded: new Q.Event(),
+			onRender: new Q.Event()
 		},
 
 {

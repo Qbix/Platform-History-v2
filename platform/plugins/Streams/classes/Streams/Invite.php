@@ -274,10 +274,10 @@ class Streams_Invite extends Base_Streams_Invite
 				$labels = array($labels);
 			}
 			$can = Users_Label::can($stream->publisherId, $this->invitingUserId);
-			foreach ($labels as $label) {
-				if (in_array($label, $can["add"])) {
+			if ($can["manageContacts"]) {
+				foreach ($labels as $label) {
 					Users_Contact::addContact(
-						$stream->publisherId, $label, $userId, 
+						$stream->publisherId, $label, $userId,
 						null, $this->invitingUserId, true
 					);
 				}

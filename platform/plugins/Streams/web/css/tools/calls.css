@@ -26,7 +26,7 @@
 .Streams_calls_tool.Streams_calls_call:before {
     content: "\e942"; color: blue;
 }
-.Streams_calls_settings input[name=maxCalls] {
+.Streams_calls_settings select[name=maxCalls] {
     margin-left: 10px;
     height: 40px;
     width: 80px;
@@ -66,4 +66,7 @@
 .Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_icon,
 .Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_preamble {
     display: none;
+}
+.Streams_calls_settings .Streams_calls_related .Streams_participants_summary {
+    display: none !important;
 }
