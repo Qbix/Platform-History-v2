@@ -506,6 +506,12 @@ class Q_Response
 		if ($params['attrValue'] == 'og:image') {
 			$filename = Q_Uri::filenameFromUrl($params['content']);
 			$size = $filename ? getimagesize($filename) : null;
+
+			// if remote image try to get size
+			if (!is_array($size) && Q_Valid::url($params['content'])) {
+				$size = getimagesize($params['content']);
+			}
+
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
 					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),

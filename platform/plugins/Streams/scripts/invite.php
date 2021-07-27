@@ -21,10 +21,10 @@ identifier
 Can be an email address or mobile number
 
 communityId
-Defaults to the app's name, as found under the "Q"/"app" config.
+Defaults to the app's name, as found under the Users/community/id config.
 
 labels
-Defaults to \$App/admins but you can override it with a space-separated list.
+Defaults to Users/admins but you can override it with a space-separated list.
 
 Options:
 
@@ -75,22 +75,17 @@ try {
 }
 
 // get all CLI options
-$longopts = array('always-send');
+$longopts = array("always-send");
 $options = getopt('', $longopts);
-if (isset($options['help'])) {
-	echo $help;
-	exit;
-}
 
-$app = Q::app();
 $identifier = $FROM_APP ? $argv[1] : $argv[2];
 $communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
 $labels = array_slice($argv, $FROM_APP ? 3 : 4);
-$addLabel = empty($labels) ? "$app/admins" : $labels;
-$asUserId = $app;
+$addLabel = empty($labels) ? "Users/admins" : $labels;
+$asUserId = $communityId;
 $skipAccess = true;
 $appUrl = Q_Uri::url('Communities/onboarding?communityId='.urlencode($communityId));
-$alwaysSend = isset($options['always-send']);
+$alwaysSend = Q::ifset($options, "always-send", true);
 
 Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
 echo "Successfully invited $identifier\n";

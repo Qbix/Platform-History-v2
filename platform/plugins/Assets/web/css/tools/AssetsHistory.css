@@ -4,6 +4,9 @@
 	color: #979797;
 	font-style: italic;
 }
+.Assets_history_tool table.Assets_history {
+	margin: 0 auto;
+}
 .Assets_history_tool table.Assets_history th {
 	text-align: center;
 	padding: 5px;
@@ -14,4 +17,30 @@
 	font-size: 0.8em;
 	padding: 5px;
 	border-bottom: 1px solid black;
+}
+.Assets_history_tool table.Assets_history td.bookmark {
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+.Assets_history_tool table.Assets_history td.bookmark div {
+	border: 1px solid red;
+	border-radius: 5px;
+	padding: 5px 5px 5px 20px;
+	margin-left: 5px;
+	position: relative;
+}
+.Assets_history_tool table.Assets_history td.bookmark div:before {
+	font-family: 'qplatform-communities' !important;
+	display: block;
+	font-size: 20px;
+	width: 10px;
+	position: absolute;
+	left: 0;
+}
+.Assets_history_tool table.Assets_history td.bookmark[data-status="0"] div:before {
+	content: "\e932";
+}
+.Assets_history_tool table.Assets_history td.bookmark[data-status="1"] div:before {
+	content: "\e939";
 }

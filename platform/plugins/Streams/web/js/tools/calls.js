@@ -121,16 +121,23 @@ Q.Tool.define("Streams/calls", function(options) {
 				template: {
 					name: "Streams/calls/settings",
 					fields: {
-						text: tool.text.calls,
-						maxCalls: tool.getMaxCalls()
+						text: tool.text.calls
 					}
 				},
 				trigger: $toolElement[0],
 				callback: function () {
+					// max calls select element
+					var $select = $("select[name=maxCalls]", parentElement);
+					for (var i = 1; i <= 100; i++) {
+						$select.append($("<option>" + i + "</option>"));
+					}
+					$select.val(tool.getMaxCalls());
+
 					// if opened in columns - third argument is a column element,
 					// if opened dialog - first argument is dialog element
 					var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
-					$(".Streams_calls_related", parentElement).tool("Streams/related", {
+					var $callsRelated = $(".Streams_calls_related", parentElement);
+					$callsRelated.tool("Streams/related", {
 						publisherId: state.publisherId,
 						streamName: state.streamName,
 						relationType: state.relationType,
@@ -139,9 +146,14 @@ Q.Tool.define("Streams/calls", function(options) {
 						sortable: false,
 						realtime: true
 					}).activate();
+					$callsRelated[0].forEachTool("Streams/webrtc/preview", function () {
+						this.state.onRender.add(function () {
+							$(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom);
+						});
+					});
 
 					$("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
-						var maxCalls = parseInt($("input[name=maxCalls]", parentElement).val());
+						var maxCalls = parseInt($select.val());
 						var maxRelations = tool.stream.getAttribute("maxRelations") || {};
 						var oldMaxCalls = parseInt(Q.getObject(state.relationType, maxRelations));
 
@@ -204,7 +216,7 @@ Q.Tool.define("Streams/calls", function(options) {
 
 Q.Template.set("Streams/calls/settings",
 	'<div class="Streams_calls_related"></div>' +
-	'<label>{{text.MaxCalls}}</label><input name="maxCalls" type="number" value="{{maxCalls}}">' +
+	'<label>{{text.MaxCalls}}</label><select name="maxCalls"></select>' +
 	'<button class="Q_button" name="update">{{text.Update}}</button>'
 );
 

@@ -119,6 +119,7 @@
         "Owner": "Owner",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }
