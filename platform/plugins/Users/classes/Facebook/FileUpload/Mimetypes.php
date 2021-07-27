@@ -373,7 +373,7 @@ class Mimetypes
         'jpgm' => 'video/jpm',
         'jpgv' => 'video/jpeg',
         'jpm' => 'video/jpm',
-        'js' => 'text/javascript',
+        'js' => 'application/javascript',
         'json' => 'application/json',
         'kar' => 'audio/midi',
         'karbon' => 'application/vnd.kde.karbon',

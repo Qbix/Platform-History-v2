@@ -6012,7 +6012,7 @@ function WebAssemblyRecorder(stream, config) {
 
         if (!config.workerPath && buffer instanceof ArrayBuffer) {
             var blob = new Blob([buffer], {
-                type: 'text/javascript'
+                type: 'application/javascript'
             });
             config.workerPath = URL.createObjectURL(blob);
         }

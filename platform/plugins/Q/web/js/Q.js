@@ -8130,7 +8130,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 
 	// Create the script tag and insert it into the document
 	script = document.createElement('script');
-	script.setAttribute('type', 'text/javascript');
+	script.setAttribute('type', 'application/javascript');
 	if (options.info.h && !options.skipIntegrity) {
 		if (Q.info.urls && Q.info.urls.integrity) {
 			script.setAttribute('integrity', 'sha256-' + options.info.h);

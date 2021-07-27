@@ -155,7 +155,7 @@ function Q_response($params)
 <!doctype html><html lang=en>
 <head><meta charset=utf-8><title>Q Result</title></head>
 <body>
-<script type="text/javascript">
+<script type="application/javascript">
 window.result = function () { return $json };
 </script>
 </body>
