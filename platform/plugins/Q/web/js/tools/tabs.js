@@ -459,10 +459,10 @@
 				var state = tool.state;
 				var $te = $(tool.element);
 				var html, $copied;
-				var w = Math.min(
+				var w = Math.ceil(Math.min(
 					$te[0].getBoundingClientRect().width,
 					$te[0].remainingWidth(true)
-				);
+				));
 				var w2 = 0, w3 = 0, w4 = 0, index = -10;
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
