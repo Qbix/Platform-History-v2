@@ -6,9 +6,9 @@
 
 .Q_tabs_contextual .Q_tabs_tab { display: block; float: none; line-height: 40px; border: 0; } 
 
-.Q_js .Q_tabs_tab { visibility: hidden; }
-
 .Q_tabs_tabs .Q_tabs_tab .Q_tabs_overflowGlyph { display: inline-block; margin: 0 5px; font-size: 100%; text-indent: 0; }
+
+.Q_tabs_compact { white-space: nowrap; }
 
 .Q_tabs_compact .Q_tabs_overflowGlyph { float: right; }
 
@@ -17,3 +17,7 @@
 .Q_tabs_tab * { max-width: 100%; }
 
 .Q_tabs_overflow .Q_actions_container { display: none; }
+
+.Q_js .Q_tabs_tab { visibility: hidden; }
+.Q_js .Q_tabs_tool.Q_tabs_arranged .Q_tabs_tab,
+.Q_js .Q_tabs_contextual .Q_tabs_tab { visibility: visible; }

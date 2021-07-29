@@ -71,7 +71,8 @@
 			// catches events that bubble up from any child elements
 			_addListeners(tool, $te);
 
-			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
+			tool.$tabs = tool.$('.Q_tabs_tab');
+			tool.element.removeClass('Q_tabs_arranged');	
 			setTimeout(function () {
 				Q.onLayout(tool).add(Q.throttle(function () {
 					tool.refresh();
@@ -482,17 +483,17 @@
 					var cs = $o.state('Q/contextual');
 					if (cs) {
 						if (cs.contextual) {
-							tool.$tabs.css('visibility', 'hidden');
+							tool.element.addClass('Q_tabs_arranging');
 							$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 						}
 						$o.plugin("Q/contextual", "remove");
 					}
 					$o.remove();
 				}
+				tool.element.addClass('Q_tabs_arranged');
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
-					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(this);
 				}
@@ -571,7 +572,6 @@
 				}
 				if (!$overflow) {
 					tool.$overflow = null;
-					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}
@@ -611,9 +611,9 @@
 						defaultHandler: state.contextualHandler,
 						onConstruct: function ($contextual) {
 							_addListeners(tool, $contextual);
-							tool.$tabs.css('visibility', 'visible');
 							Q.handle(state.onRefresh, this);
 							Q.handle(callback, tool);
+							tool.element.addClass('Q_tabs_arranged');
 							$overflow.css('visibility', 'visible');
 						},
 						onShow: function (cs) {
