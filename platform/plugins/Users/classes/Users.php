@@ -1598,7 +1598,7 @@ abstract class Users extends Base_Users
 						imagesavealpha($image, true);
 						imagealphablending($image, true);
 						break;
-					case 'jpeg':
+					case 'jpg':
 					case 'jpeg':
 						$func = 'imagejpeg';
 						break;

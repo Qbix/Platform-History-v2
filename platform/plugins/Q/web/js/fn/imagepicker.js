@@ -283,7 +283,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			var height = Math.max.apply( Math, heights );
 
 			return { width: width, height: height };
-		};
+		}
 
 		function _checkRequiredSize(requiredSize, imageSize) {
 			if (state.useAnySize) {
@@ -445,20 +445,35 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 							apply: true,
 							onActivate : {
 								"Q/imagepicker": function ($dialog) {
-									var w = requiredSize.width / isw;
-									var h = requiredSize.height / ish;
-									var rsw1 = rsw2 = Math.min(requiredSize.width, isw);
-									var rsh1 = rsh2 = Math.min(requiredSize.height, ish);
+									var kw = requiredSize.width / isw;
+									var kh = requiredSize.height / ish;
+									var rsw1, rsw2, rsh1, rsh2;
+
+									// if required size more than real size, we need to reduce viewport size proportionately
+									// to send croped image to backend, because otherwise image will be resized disproportionately
+									if (kw > 1 || kh > 1) {
+										if (isw > ish) {
+											rsw1 = rsw2 = requiredSize.width / kh;
+											rsh1 = rsh2 = requiredSize.height / kh;
+										} else {
+											rsw1 = rsw2 = requiredSize.width / kw;
+											rsh1 = rsh2 = requiredSize.height / kw;
+										}
+									} else {
+										rsw1 = rsw2 = requiredSize.width;
+										rsh1 = rsh2 = requiredSize.height;
+									}
+
 									var dw = this.width();
 									var dh = this.height();
-									if (rsw2 != dw) {
+									if (rsw2 !== dw) {
 										rsh2 *= dw / rsw1;
 										rsw2 = dw;
 									}
-									// if (rsh2 > dh) {
-									// 	rsw2 *= dh / rsh2;
-									// 	rsh2 = dh;
-									// }
+									/*if (rsh2 > dh) {
+										rsw2 *= dh / rsh2;
+										rsh2 = dh;
+									}*/
 									var maxScale = Math.min(rsw2 / rsw1, rsh2 / rsh1);
 									$croppingElement.plugin('Q/viewport', {
 										initial: {
