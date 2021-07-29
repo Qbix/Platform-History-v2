@@ -483,7 +483,6 @@
 					var cs = $o.state('Q/contextual');
 					if (cs) {
 						if (cs.contextual) {
-							tool.element.addClass('Q_tabs_arranging');
 							$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 						}
 						$o.plugin("Q/contextual", "remove");
