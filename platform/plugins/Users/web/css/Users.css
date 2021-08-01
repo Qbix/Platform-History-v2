@@ -316,6 +316,7 @@
 a.Users_activation_resend:link,
 a.Users_activation_resend:visited,
 a.Users_activation_resend:active {
+	display: block;
 	color: #fff;
 	background: green;
 }
