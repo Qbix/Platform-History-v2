@@ -545,9 +545,10 @@
 					more: Q.text.Q.tabs.more,
 					classes: $tab.attr('class')
 				};
-				var html = this.state.overflow.content.interpolate(values);
+				var html;
 				if (index >= 0 && state.overflow) {
 					tabAlreadyVisible = ($tab.data('index') < index);
+					html = this.state.overflow.content.interpolate(values);
 					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
 						.empty().append($copied);
@@ -568,6 +569,8 @@
 							oneLess = true;
 						}
 					}
+					++values.count;
+					html = this.state.overflow.content.interpolate(values);
 					if (oneLess) {
 						--index;
 						values.count = $tabs.length - index - 1;
