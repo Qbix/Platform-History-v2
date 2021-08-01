@@ -563,7 +563,7 @@
 							var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
 								.html(state.overflow.glyph.interpolate(values))
 								.appendTo($overflow);
-							if (!state.compact && $overflow.outerWidth(true) > w - w4 - 1) {
+							if (!state.compact && $overflow.outerWidth(true) > w - w4) {
 								$glyph.remove(); // better to at least fit on the line
 							}
 						}
