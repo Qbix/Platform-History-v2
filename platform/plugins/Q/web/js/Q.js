@@ -11209,22 +11209,6 @@ Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
 var de = document.documentElement;
 de.addClass('Q_js');
-de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
-de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
-de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
-de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
-de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
-de.removeClass(Q.info.isTouchscreen  ? 'Q_notTouchscreen' : 'Q_touchscreen');
-de.removeClass(Q.info.isMobile ? 'Q_notMobile' : 'Q_mobile');
-de.removeClass(Q.info.isAndroid() ? 'Q_notAndroid' : 'Q_android');
-de.removeClass(Q.info.isStandalone ? 'Q_notStandalone' : 'Q_standalone');
-de.removeClass(Q.info.isWebView ? 'Q_notWebView' : 'Q_webView');
-if (Q.info.isAndroidStock) {
-	de.addClass('Q_androidStock');
-}
-if (Q.info.hasNotch) {
-	de.addClass('Q_notch');
-}
 
 Q.ignoreBackwardCompatibility = {
 	dashboard: false,
@@ -13633,6 +13617,22 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
+	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
+	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
+	de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
+	de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
+	de.removeClass(Q.info.isTouchscreen  ? 'Q_notTouchscreen' : 'Q_touchscreen');
+	de.removeClass(Q.info.isMobile ? 'Q_notMobile' : 'Q_mobile');
+	de.removeClass(Q.info.isAndroid() ? 'Q_notAndroid' : 'Q_android');
+	de.removeClass(Q.info.isStandalone ? 'Q_notStandalone' : 'Q_standalone');
+	de.removeClass(Q.info.isWebView ? 'Q_notWebView' : 'Q_webView');
+	if (Q.info.isAndroidStock) {
+		de.addClass('Q_androidStock');
+	}
+	if (Q.info.hasNotch) {
+		de.addClass('Q_notch');
+	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.baseUrl().length + 1);
 	if (window.history.pushState) {
