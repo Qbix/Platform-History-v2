@@ -525,12 +525,12 @@
 				}
 				var $tab = $(state.tab);
 				var $clone = $tab.clone();
-				$clone.find('*').each(function () {
+				$clone.appendTo('body').find('*').each(function () {
 					var $this = $(this);
 					if ($this.css('display') === 'none') {
 						$this.remove();
 					}
-				});
+				}).remove();
 				var values = {
 					count: $tabs.length - index - 1,
 					text: $clone.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
