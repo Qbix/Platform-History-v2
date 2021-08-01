@@ -531,7 +531,7 @@
 					top: "-1000px",
 					left: "-1000px"
 				});
-				$clone.appendTo('body').find('*:not(:visible)').end().remove();
+				$clone.appendTo('body').find('*:not(:visible)').remove().end().remove();
 				var values = {
 					count: $tabs.length - index - 1,
 					text: $clone.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
