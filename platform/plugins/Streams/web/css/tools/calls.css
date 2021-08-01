@@ -17,7 +17,7 @@
     display: block;
     position: absolute;
     font-size: 35px;
-    font-family: streams-icons;
+    font-family: qplatform-streams;
     text-align: center;
 }
 .Streams_calls_tool.Streams_calls_settings:before {

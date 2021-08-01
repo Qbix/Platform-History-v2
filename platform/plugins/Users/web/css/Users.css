@@ -1,3 +1,5 @@
+@import "icons.css";
+
 #dashboard .Users_dashboard_user { text-align: right; }
 #dashboard a.Users_login,
 #dashboard a.Users_logout { padding: 8px 12px 8px 12px; font-weight: bold; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; color: white;  font-size: 14px; }

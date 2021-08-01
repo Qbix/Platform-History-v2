@@ -524,9 +524,16 @@
 					$tabs.removeAttr('data-touchlabel');
 				}
 				var $tab = $(state.tab);
+				var $t = $tab.clone();
+				$t.children().each(function () {
+					var $this = $(this);
+					if ($this.css('display') === 'none') {
+						$this.remove();
+					}
+				});
 				var values = {
 					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					text: $t.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
 					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
 					more: Q.text.Q.tabs.more,
 					classes: $tab.attr('class')
