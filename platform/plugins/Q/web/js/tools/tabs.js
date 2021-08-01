@@ -538,10 +538,11 @@
 						++visibleCount;
 					}
 				});
+				var text = $clone.text().trim();
 				var values = {
 					count: visibleCount - index - 1,
-					text: $clone.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
-					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
+					text: text || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					html: (text && $clone.html()) || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
 					more: Q.text.Q.tabs.more,
 					classes: $tab.attr('class')
 				};
