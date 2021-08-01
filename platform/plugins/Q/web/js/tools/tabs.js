@@ -532,8 +532,14 @@
 					left: "-1000px"
 				});
 				$clone.appendTo('body').find('*:not(:visible)').remove().end().remove();
+				var visibleCount = 0;
+				$tabs.each(function () {
+					if ($(this).css('display') !== 'none') {
+						++visibleCount;
+					}
+				});
 				var values = {
-					count: $tabs.length - index - 1,
+					count: visibleCount - index - 1,
 					text: $clone.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
 					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
 					more: Q.text.Q.tabs.more,
