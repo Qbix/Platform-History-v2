@@ -11214,6 +11214,11 @@ de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
 de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
 de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
+de.removeClass(Q.info.isTouchscreen  ? 'Q_notTouchscreen' : 'Q_touchscreen');
+de.removeClass(Q.info.isMobile ? 'Q_notMobile' : 'Q_mobile');
+de.removeClass(Q.info.isAndroid() ? 'Q_notAndroid' : 'Q_android');
+de.removeClass(Q.info.isStandalone ? 'Q_notStandalone' : 'Q_standalone');
+de.removeClass(Q.info.isWebView ? 'Q_notWebView' : 'Q_webView');
 if (Q.info.isAndroidStock) {
 	de.addClass('Q_androidStock');
 }
