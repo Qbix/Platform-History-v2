@@ -524,7 +524,13 @@
 					$tabs.removeAttr('data-touchlabel');
 				}
 				var $tab = $(state.tab);
-				var $clone = $tab.clone();
+				var $clone = $tab.clone().css({
+					visibility: 'visible',
+					display: 'inline-block',
+					position: 'absolute', // so appending won't mess up layout
+					top: "-1000px",
+					left: "-1000px"
+				});
 				$clone.appendTo('body').find('*:not(:visible)').end().remove();
 				var values = {
 					count: $tabs.length - index - 1,
