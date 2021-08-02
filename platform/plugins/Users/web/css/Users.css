@@ -1,3 +1,5 @@
+@import "icons.css";
+
 #dashboard .Users_dashboard_user { text-align: right; }
 #dashboard a.Users_login,
 #dashboard a.Users_logout { padding: 8px 12px 8px 12px; font-weight: bold; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; color: white;  font-size: 14px; }
@@ -277,17 +279,6 @@
 	vertical-align: middle;
 }
 
-
-#Users_login_username
-{
-	width: 225px;
-}
-
-#Users_login_password
-{
-	width: 210px;
-}
-
 #Users_login_step2 td {
 	vertical-align: top;
 }
@@ -304,7 +295,7 @@
 
 #Users_login_step1_form { width: 100%; }
 #Users_login_identifier { width: 75%; padding: 2%; }
-#Users_login_username { width: 96%; padding: 2%; }
+#Users_login_username, #Users_login_password { width: 96%; padding: 2%; }
 #Users_setIdentifier_identifier { width: 100%; padding: 2%; }
 #Users_login_go { width: 23%; margin: 1%; text-align: center; vertical-align: middle; }
 #Users_login_noPassphrase { font-size: 14px; font-weight: bold; color: #a00; text-align: center; }
@@ -313,7 +304,6 @@
 #Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
 #Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: left; }
 #Users_form_passphrase { width: 100%; padding: 2%; }
-#Users_login_username { width: 200px; }
 .Users_login_get_started { text-align: center; margin-top: 10px; }
 
 #Users_login_passphrase_div { position: relative; }
@@ -326,6 +316,7 @@
 a.Users_activation_resend:link,
 a.Users_activation_resend:visited,
 a.Users_activation_resend:active {
+	display: block;
 	color: #fff;
 	background: green;
 }

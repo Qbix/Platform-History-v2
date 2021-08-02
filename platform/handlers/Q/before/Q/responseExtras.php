@@ -99,6 +99,9 @@ function Q_before_Q_responseExtras()
 	} else {
 		Q_Response::addHtmlCssClass('Q_layout_widebar');
 	}
+	Q_Response::setScriptData('Q.info.isTouchscreen', Q_Request::isTouchscreen());
+	Q_Response::setScriptData('Q.info.isMobile', Q_Request::isMobile());
+	Q_Response::setScriptData('Q.info.isTablet', Q_Request::isTablet());
 	
 	$textLoadBeforeInit = Q_Config::get('Q', 'text', 'loadBeforeInit', array());
 	Q_Response::setScriptData('Q.Text.loadBeforeInit', $textLoadBeforeInit);

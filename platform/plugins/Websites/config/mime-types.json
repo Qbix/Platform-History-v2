@@ -23,6 +23,7 @@
 		"application/java-archive": "jar",
 		"image/jpeg": "jpg",
 		"text/javascript": "js",
+		"application/javascript": "js",
 		"application/json": "json",
 		"application/ld+json": "jsonld",
 		"audio/midi": "mid",

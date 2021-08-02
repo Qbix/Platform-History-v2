@@ -577,7 +577,7 @@ abstract class Streams extends Base_Streams
 		}
 		return reset($streams);
 	}
-	
+
 	/**
 	 * Calculates the access for one or more streams by querying the database
 	 * Modifies the objects in the $streams array, setting their access levels.
@@ -638,7 +638,7 @@ abstract class Streams extends Base_Streams
 		if (empty($streams2)) {
 			return 0;
 		}
-		
+
 		$public_source = Streams::$ACCESS_SOURCES['public'];
 		$contact_source = Streams::$ACCESS_SOURCES['contact'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
@@ -680,7 +680,7 @@ abstract class Streams extends Base_Streams
 			$names[] = $s->type."*";
 			$streams3[] = $s;
 		}
-		
+
 		if (empty($streams3)) {
 			return count($streams2);
 		}
@@ -690,11 +690,11 @@ abstract class Streams extends Base_Streams
 		// Get the per-label access data
 		// Avoid making a join to allow more flexibility for sharding
 		$accesses = Streams_Access::select()
-		->where(array(
-			'publisherId' => array($publisherId, ''),
-			'streamName' => $names,
-			'ofUserId' => array('', $asUserId)
-		))->ignoreCache()->fetchDbRows();
+			->where(array(
+				'publisherId' => array($publisherId, ''),
+				'streamName' => $names,
+				'ofUserId' => array('', $asUserId)
+			))->ignoreCache()->fetchDbRows();
 
 		$labels = array();
 		foreach ($accesses as $access) {
@@ -719,7 +719,7 @@ abstract class Streams extends Base_Streams
 						$tail = substr($access->streamName, -1);
 						$head = substr($access->streamName, 0, -1);
 						if ($stream->name !== $access->streamName
-						and ($tail !== '*' or $head !== $stream->type)) {
+							and ($tail !== '*' or $head !== $stream->type)) {
 							continue;
 						}
 						$readLevel = $stream->get('readLevel', 0);
@@ -745,14 +745,14 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
-	
+
 		// Override with per-user access data
 		foreach ($accesses as $access) {
 			foreach ($streams3 as $stream) {
 				$tail = substr($access->streamName, -1);
 				$head = substr($access->streamName, 0, -1);
 				if ($stream->name !== $access->streamName
-				and ($tail !== '*' or $head !== $stream->type)) {
+					and ($tail !== '*' or $head !== $stream->type)) {
 					continue;
 				}
 				if ($access->ofUserId === $asUserId) {
@@ -773,7 +773,7 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
-		
+
 		if ($inheritAccess) {
 			$streams4 = array();
 			$toFetch = array();
@@ -797,10 +797,10 @@ abstract class Streams extends Base_Streams
 			}
 			// this will now use the cached results of the above calls to Streams::fetch
 			foreach ($streams4 as $s) {
-				$s->inheritAccess(); 
+				$s->inheritAccess();
 			}
 		}
-		
+
 		return count($streams2);
 	}
 	
@@ -933,6 +933,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$relate.streamName] The name of the category stream
 	 * @param {string} [$relate.type] The type of relation, defaults to ""
 	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
+	 * @param {string} [$relate.inheritAccess=true] If false skip inherit access from category.
 	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
 	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
@@ -1006,7 +1007,7 @@ abstract class Streams extends Base_Streams
 		}
 	
 		// ready to persist this stream to the database
-		if (!empty($relate['streamName'])) {
+		if (!empty($relate['streamName']) && Q::ifset($relate, 'inheritAccess', true)) {
 			$rs = Streams::fetchOne(
 				$asUserId,
 				$relate['publisherId'],

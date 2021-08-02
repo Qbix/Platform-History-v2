@@ -92,7 +92,7 @@
             "identifier": "your mobile # or email",
             "mobile": "enter your mobile #",
             "email": "enter your email address",
-            "username": "username"
+            "username": "use letters and numbers only"
         },
         "confirmTerms": "Accept the Terms of Service?",
         "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
@@ -119,6 +119,7 @@
         "Owner": "Owner",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

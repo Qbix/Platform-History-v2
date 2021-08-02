@@ -506,6 +506,12 @@ class Q_Response
 		if ($params['attrValue'] == 'og:image') {
 			$filename = Q_Uri::filenameFromUrl($params['content']);
 			$size = $filename ? getimagesize($filename) : null;
+
+			// if remote image try to get size
+			if (!is_array($size) && Q_Valid::url($params['content'])) {
+				$size = getimagesize($params['content']);
+			}
+
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
 					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
@@ -905,10 +911,10 @@ class Q_Response
 	 * @static
 	 * @param {string} $src
 	 * @param {string} [$slotName=null]
-	 * @param {string} [$type='text/javascript']
+	 * @param {string} [$type='application/javascript']
 	 * @return {boolean} returns false if script was already added, else returns true
 	 */
-	static function addScript ($src, $slotName = null, $type = 'text/javascript')
+	static function addScript ($src, $slotName = null, $type = 'application/javascript')
 	{
 		/**
 		 * @event Q/response/addScript {before}

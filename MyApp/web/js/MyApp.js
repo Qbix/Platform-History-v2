@@ -20,6 +20,11 @@ var MyApp = (function (Q, $) {
 		}
 	};
 	
+	Q.onInit.set(function () {
+		// you can override some default strings client-side:
+		Q.Text.get('MyApp/content');
+	}, 'MyApp', true);
+	
 	// The following code is for all pages.
 	// For specific pages, see web/js/pages directory. 
 	Q.page('', function () {

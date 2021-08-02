@@ -56,9 +56,11 @@ Q.Tool.define("Users/status", function(options) {
 			_wireup();
 		} else {
 			Q.Text.get('Users/content', function (err, text) {
+				var $div = $('<div class="Users_status_login_title" />')
+					.html(text.actions.LogIn);
 				$(tool.element).empty().append(
 					$('<div class="Users_status_login" />')
-					.append(text.actions.LogIn)
+					.append($div)
 				);
 				_wireup();
 			});

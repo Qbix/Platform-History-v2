@@ -55,7 +55,7 @@ function Users_oauthed_response()
 <!doctype html><html lang=en>
 <head><meta charset=utf-8><title>oAuth</title></head>
 <body>
-<script type="text/javascript">
+<script type="application/javascript">
 window.name = "Q_Users_oAuth_$result";
 </script>
 </body>

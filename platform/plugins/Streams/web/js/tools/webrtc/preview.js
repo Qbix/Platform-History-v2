@@ -9,15 +9,14 @@
 	 * @param {Q.Event} [options.onWebRTCRoomCreated]
 	 * @param {Q.Event} [options.onWebrtcControlsCreated]
 	 * @param {Q.Event} [options.onWebRTCRoomEnded]
+	 * @param {Q.Event} [options.onRender] called when tool element completely rendered
 	 */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
-            console.log('preview.js: options', preview)
-
             var tool = this;
             this.state = Q.extend({}, this.state, options);
             var state = this.state;
             tool.preview = preview;
-			
+
 			preview.state.editable = state.editable;
 
             //preview.state.creatable.preprocess = tool.composer.bind(this);
@@ -33,6 +32,8 @@
                 tool.text = text;
                 preview.state.onRefresh.add(tool.refresh.bind(tool));
             });
+
+            tool.refresh();
         },
 
 {
@@ -46,7 +47,8 @@
 			},
 			onWebRTCRoomCreated: new Q.Event(),
 			onWebrtcControlsCreated: new Q.Event(),
-			onWebRTCRoomEnded: new Q.Event()
+			onWebRTCRoomEnded: new Q.Event(),
+			onRender: new Q.Event()
 		},
 
 {
@@ -61,8 +63,6 @@
 
             tool.stream = stream;
 
-            console.log('preview.js: state', state)
-            console.log('preview.js: stream', stream)
             // retain with stream
             Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
 
@@ -94,11 +94,9 @@
                 })
             }
 
-            if(state.mainWebrtcStream != null && 2 < 1) {
-                console.log('renderTool: before 1')
+            if(state.mainWebrtcStream != null) {
                 renderTool(state.mainWebrtcStream.fields.publisherId, state.mainWebrtcStream.fields.name);
             } else {
-                console.log('renderTool: before 2')
                 getMainWebRTCStreams(function (relatedStreams) {
                     var keys = Object.keys(relatedStreams);
                     var stream = relatedStreams[keys[0]];
@@ -107,7 +105,6 @@
             }
 
             function renderTool(mainWebRTCStreamPublisher, mainWebRTCStreamName) {
-                console.log('renderTool:', mainWebRTCStreamPublisher, mainWebRTCStreamName)
 
                 Q.Template.render(
                     'Streams/webrtc/preview/view',
@@ -159,13 +156,14 @@
                             })
                         })
                     }
-                    if(tool.state.mainWebrtcRoom == null) {
+                    if(tool.state.guestWaitingRoom == null) {
                         acceptButton.css('display', 'none');
                         switchBackButton.css('display', 'none');
                         if(accept != null) disconnectButton.css('display', 'flex');
                         if(accept == null) forceDisconnect();
                     } else {
-                        tool.state.mainWebrtcRoom.switchTo(mainWebRTCStreamPublisher, mainWebRTCStreamName, function () {
+
+                        tool.state.guestWaitingRoom.switchTo(mainWebRTCStreamPublisher, mainWebRTCStreamName, function () {
                             acceptButton.css('display', 'none');
                             switchBackButton.css('display', 'none');
 
@@ -187,7 +185,7 @@
                             console.log('sent')
                         })*/
 
-                        if(tool.state.mainWebrtcRoom != null) {
+                        if(tool.state.guestWaitingRoom != null) {
                             switchBack(true);
                         }
 
@@ -204,7 +202,6 @@
 
                 disconnectButton.on(Q.Pointer.fastclick, function () {
                     Q.Streams.get(mainWebRTCStreamPublisher, mainWebRTCStreamName, function() {
-                        console.log('disconnectButton stream', this, mainWebRTCStreamPublisher, mainWebRTCStreamName)
                         Q.req('Media/live', 'manage', function () {
                             tool.preview.delete();
 
@@ -218,7 +215,6 @@
                                     clipStreamName:tool.stream.fields.name
                                 }),
                             }, function() {
-                                console.log('disconnectButton: sent')
 
                                 /* //acceptButton.css('display', 'flex');
                                  //disconnectButton.css('display', 'none');
@@ -238,37 +234,36 @@
 
                 });
 
-                console.log('staaaate', tool.state)
 
 
                 callButton.on(Q.Pointer.fastclick, function () {
 
-                    if(tool.state.mainWebrtcRoom == null) {
+                    if(tool.state.mainWebrtcRoom == null || (tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.currentConferenceLibInstance() == null)) {
+
                         var WebConference = Q.Streams.WebRTC();
-                        WebConference.start({
+                        tool.state.guestWaitingRoom = WebConference.start({
                             element: document.body,
                             roomId: stream.fields.name.split('/').pop(),
                             roomPublisherId: stream.fields.publisherId,
                             mode: 'node',
                             startWith: {video: false, audio: true},
                             onWebRTCRoomCreated: function() {
-                                console.log('onWebRTCRoomCreated', this);
                                 callButton.css('display', 'none');
                                 switchBackButton.css('display', 'flex');
                                 Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
                             },
                             onWebrtcControlsCreated: function() {
-                                console.log('onWebrtcControlsCreated', this);
                                 Q.handle(state.onWebrtcControlsCreated, tool, [tool.state.waitingtWebRTCRoom]);
                             },
                             onWebRTCRoomEnded: function () {
-                                console.log('onWebRTCRoomEnded', this);
                                 Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
                             }
                         });
                     } else {
+
                         tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), function () {
-                            console.log('onWebRTCRoomCreated', this);
+                            tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
+                            tool.state.mainWebrtcRoom = null;
                             callButton.css('display', 'none');
                             switchBackButton.css('display', 'flex');
                             Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
@@ -285,7 +280,7 @@
             }
         }
     });
-	
+
 Q.Template.set('Streams/webrtc/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon">'

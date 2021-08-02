@@ -178,14 +178,14 @@ class Users_Contact extends Base_Users_Contact
 	 * Retrieve contacts belonging to label
 	 * @method fetch
 	 * @static
-	 * @param {string} $userId
-	 * @param {string|array|Db_Range|Db_Expression} $label
+	 * @param {string} $userId The user whose contacts to fetch
+	 * @param {string|array|Db_Range|Db_Expression} $label Optionally filter contacts by label
 	 * @param {array} [$options=array()]
 	 * @param {integer} [$options.limit=false]
 	 * @param {integer} [$options.offset=0] 
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
-	 * @param {string|array} [$options.contactUserId=null]
+	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
 	 * @return {array}
 	 */
 	static function fetch($userId, $label = null, /* string|Db_Range, */ $options = array())

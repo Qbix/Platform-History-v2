@@ -1,14 +1,14 @@
 .Q_tabs_tabs { text-align: center; border-bottom: solid 1px #aaa; width: 100%; margin: 0; padding: 0; list-style-type: none; }
-.Q_tabs_tab { vertical-align: middle; cursor: pointer; display: inline-block; line-height: 30px; border-bottom: 0; border-left: 0; margin-bottom: -1px; background-color: #f8f8f8; font-weight: 400; list-style-type: none; text-indent: 0; white-space: nowrap;  }
+.Q_tabs_tab { vertical-align: middle; cursor: pointer; display: inline-block; font-size: 100%; line-height: 100%; border-bottom: 0; border-left: 0; margin-bottom: -1px; background-color: #f8f8f8; font-weight: 400; list-style-type: none; text-indent: 0; white-space: nowrap;  }
 .Q_tabs_tab::before { line-height: 100%; }
 .Q_tabs_title { position: relative; display: inline; }
 .Q_tabs_vertical>.Q_tabs_tab { display: block; float: none; }
 
 .Q_tabs_contextual .Q_tabs_tab { display: block; float: none; line-height: 40px; border: 0; } 
 
-.Q_js .Q_tabs_tab { visibility: hidden; }
-
 .Q_tabs_tabs .Q_tabs_tab .Q_tabs_overflowGlyph { display: inline-block; margin: 0 5px; font-size: 100%; text-indent: 0; }
+
+.Q_tabs_compact { white-space: nowrap; }
 
 .Q_tabs_compact .Q_tabs_overflowGlyph { float: right; }
 
@@ -17,3 +17,7 @@
 .Q_tabs_tab * { max-width: 100%; }
 
 .Q_tabs_overflow .Q_actions_container { display: none; }
+
+.Q_js .Q_tabs_tab { visibility: hidden; }
+.Q_js .Q_tabs_tool.Q_tabs_arranged .Q_tabs_tab,
+.Q_js .Q_tabs_contextual .Q_tabs_tab { visibility: visible; }

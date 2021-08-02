@@ -33,7 +33,7 @@
 	<title id="title_slot"><?php echo $title; ?></title>
 	<link rel="shortcut icon" href="<?php echo Q_Request::baseUrl() ?>/favicon.ico" type="image/x-icon">
 	
-	<script type="text/javascript">
+	<script type="application/javascript">
 		document.documentElement.className += ' Q_js'; // better than noscript
 	</script>
 

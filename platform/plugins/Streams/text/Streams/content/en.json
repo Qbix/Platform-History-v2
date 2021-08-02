@@ -508,7 +508,7 @@
         "MaxCalls": "Max calls",
         "Update": "Update",
         "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?"
-
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

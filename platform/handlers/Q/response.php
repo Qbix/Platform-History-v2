@@ -120,7 +120,9 @@ function Q_response($params)
 					if ($temp) $to_encode['scriptData'][$slotName] = $temp;
 					$temp = Q_Response::templateData($slotName);
 					if ($temp) $to_encode['templates'][$slotName] = $temp;
-					$to_encode['sessionDataPaths'] = 
+					$temp = Q_Response::metasArray($slotName);
+					if ($temp) $to_encode['metas'][$slotName] = $temp;
+					$to_encode['sessionDataPaths'] =
 						!empty(Q_Response::$sessionDataPaths)
 						? Q_Response::$sessionDataPaths
 						: array();
@@ -135,6 +137,8 @@ function Q_response($params)
 					if ($temp) $to_encode['scriptData'][$slotName] = $temp;
 					$temp = Q_Response::scriptLines($slotName, true, "\n", false);
 					if ($temp) $to_encode['scriptLines'][$slotName] = $temp;
+					$temp = Q_Response::metasArray($slotName);
+					if ($temp) $to_encode['metas'][$slotName] = $temp;
 				}
 			}
 		}
@@ -155,7 +159,7 @@ function Q_response($params)
 <!doctype html><html lang=en>
 <head><meta charset=utf-8><title>Q Result</title></head>
 <body>
-<script type="text/javascript">
+<script type="application/javascript">
 window.result = function () { return $json };
 </script>
 </body>

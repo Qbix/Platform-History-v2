@@ -252,9 +252,11 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 * @static
 	 * @param {array} $options
 	 * @param {string} [$options.videoId] id of youtube video to get info about single video
-	 * @param {string} [$options.query] query string to search videos
+	 * @param {string|array} [$options.query] If string - query string to search videos. If array - replace ytQuery object.
 	 * @param {string} [$options.channel] youtube channel id
 	 * @param {integer} [$options.maxResults=10] limit search results
+	 * @param {string} [$options.order=date] Results order by.
+	 * @param {boolean} [$options.pureResult=false] If true, return exactly result got from youtube API
 	 * @param {integer} [$options.cacheDuration] response cache life time in seconds
 	 * @return {array|boolean} decoded json if found or false
 	 */
@@ -262,6 +264,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$apiKey = Q_Config::expect("Websites", "youtube", "keys", "server");
 		$videoId = Q::ifset($options, "videoId", null);
 		$query = Q::ifset($options, "query", null);
+		$pureResult = Q::ifset($options, "pureResult", false);
 
 		if ($videoId === null && $query === null) {
 			throw new Exception('Websites_Webpage::youtube: videoId or query should defined');
@@ -270,25 +273,32 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$type = $videoId ? "videos" : "search";
 		$endPoint = "https://youtube.googleapis.com/youtube/v3/".$type;
 
-		$query = array(
+		$ytQuery = is_array($query) ? $query : array(
 			"part" => "snippet"
 		);
 
 		if ($type == "search") {
-			$query["maxResults"] = Q::ifset($options, "maxResults", 10);
-			$query["order"] = "date";
-			$query["q"] = $query;
+			$ytQuery["maxResults"] = Q::ifset($options, "maxResults", 10);
+			$ytQuery["order"] = Q::ifset($options, "order", "date");
+			if (is_string($query)) {
+				$ytQuery["q"] = $query;
+			}
 
 			$channelId = Q::ifset($options, "channel", null);
 			if ($channelId) {
-				$query["channelId"] = $channelId;
+				$ytQuery["channelId"] = $channelId;
 			}
 		} elseif ($type == "videos") {
-			$query["id"] = $videoId;
+			$ytQuery["id"] = $videoId;
 		}
 
-		if (!function_exists('_returnYoutube')) {
-			function returnYoutube ($data) {
+		if (!function_exists('returnYoutube')) {
+			function returnYoutube ($data, $pureResult) {
+
+				if ($pureResult) {
+					return $data;
+				}
+
 				$results = array();
 
 				foreach ($data["items"] as $item) {
@@ -321,23 +331,23 @@ class Websites_Webpage extends Base_Websites_Webpage
 			}
 		}
 
-		$cacheUrl = $endPoint.'?'.http_build_query($query);
+		$cacheUrl = $endPoint.'?'.http_build_query($ytQuery);
 
 		// check for cache
 		$cached = Websites_Webpage::cacheGet($cacheUrl);
 		if ($cached) {
-			return returnYoutube($cached);
+			return returnYoutube($cached, $pureResult);
 		}
 
-		$query["key"] = $apiKey;
+		$ytQuery["key"] = $apiKey;
 
 		// docs: https://developers.google.com/youtube/v3/docs/search/list
-		$youtubeApiUrl = $endPoint.'?'.http_build_query($query);
+		$youtubeApiUrl = $endPoint.'?'.http_build_query($ytQuery);
 		$result = Q::json_decode(Q_Utils::get($youtubeApiUrl), true);
-		$duration = $type == "search" ? Q::ifset($options, "cacheDuration", Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200)) : null; // for youtube search results cache duration 12 hours
-		Websites_Webpage::cacheSet($cacheUrl, $result, $duration);
+		$cacheDuration = $type == "search" ? Q::ifset($options, "cacheDuration", Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200)) : null; // for youtube search results cache duration 12 hours
+		Websites_Webpage::cacheSet($cacheUrl, $result, $cacheDuration);
 
-		return returnYoutube($result);
+		return returnYoutube($result, $pureResult);
 	}
 	/**
 	 * Get cached url response

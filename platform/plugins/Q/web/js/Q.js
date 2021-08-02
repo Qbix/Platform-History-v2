@@ -4134,6 +4134,7 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @param {string} [ctor.js] filenames containing Javascript to load for the tool
  * @param {string} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
  * @param {string} [ctor.html] filenames containing HTML to load for the tool, including templates
+ * @param {string} [ctor.text] list any text files to load (for the current language) before the tool constructor
  * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
  * @param {String} [ctor.placeholder.html] literal HTML to insert
  * @param {String} [ctor.placeholder.template] the name of a template to insert
@@ -5091,13 +5092,14 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		var toolPlaceholder = _qtp[toolName];
 		function _loadToolScript_loaded(params, subjects) {
 			// in this function, toolConstructor starts as a string
-			if (params.html) {
+			// and we expect the script to call Q.Tool.define()
+			if (params.html && !params.html[0] && params.html[1]
+			&& typeof _qtc[toolName] !== 'function') {
 				var div = document.createElement('div');
-				div.innerHTML = html;
+				div.innerHTML = params.html[1];
 				var scripts = div.getElementsByTagName('script');
 				Q.each(scripts, function () { // run scripts in order
-					document.head.appendChild(this);
-					document.head.removeChild(this);
+					eval(this.innerHTML);
 				});
 				var styles = div.getElementsByTagName('style');
 				Q.each(styles, function () { // permanently add any styles to document
@@ -5195,7 +5197,11 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			}
 			if (toolConstructor.html) {
 				waitFor.push('html');
-				Q.request(toolConstructor.html, pipe.fill('html'), { extend: false });
+				Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
+			}
+			if (toolConstructor.text) {
+				waitFor.push('text');
+				Q.request.once(toolConstructor.text, pipe.fill('text'), { extend: false, parse: false });
 			}
 			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 		} else {
@@ -7570,6 +7576,10 @@ Q.request = function (url, slotNames, callback, options) {
 
 Q.request.callbacks = []; // used by Q.request
 
+Q.request.once = Q.getter(Q.request, {
+	cache: Q.Cache.document('Q.request', 1)
+});
+
 /**
  * Try to find an error message assuming typical error data structures for the arguments
  * @static
@@ -8120,7 +8130,7 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 
 	// Create the script tag and insert it into the document
 	script = document.createElement('script');
-	script.setAttribute('type', 'text/javascript');
+	script.setAttribute('type', 'application/javascript');
 	if (options.info.h && !options.skipIntegrity) {
 		if (Q.info.urls && Q.info.urls.integrity) {
 			script.setAttribute('integrity', 'sha256-' + options.info.h);
@@ -8954,8 +8964,10 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
-		
+
+		loadMetas();
 		loadTemplates();
+
 		var newScripts;
 		
 		if (!o.ignoreDialogs) {
@@ -9266,7 +9278,33 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			});
 			return newStyles;
 		}
-		
+
+		function loadMetas() {
+			if (!response.metas) {
+				return null;
+			}
+
+			var elHead = document.getElementsByTagName('head')[0];
+			for (var slotName in response.metas) {
+				Q.each(response.metas[slotName], function (i) {
+					var metaData = this;
+					var metas = document.querySelectorAll("meta[" + metaData.attrName + "='" + metaData.attrValue + "']");
+					if (!metas.length) {
+						var meta = document.createElement("meta");
+						meta.setAttribute(this.attrName, metaData.attrValue);
+						meta.setAttribute("content", metaData.content);
+						elHead.appendChild(meta);
+						return;
+					}
+
+					Q.each(metas, function (j) {
+						this.setAttribute(metaData.attrName, metaData.attrValue);
+						this.setAttribute("content", metaData.content);
+					});
+				});
+			}
+		}
+
 		function loadTemplates() {
 			if (!response.templates) {
 				return null;
@@ -10244,7 +10282,11 @@ Q.Text = {
 						errors = errors || {};
 						errors[name] = params[name][0];
 					} else if (params[name][1]) {
-						Q.extend(result, 10, params[name][1]);
+						var text = Q.getObject(
+							[Q.Text.languageLocaleString, name],
+							Q.Text.collection
+						) || params[name][1];
+						Q.extend(result, 10, text);
 					}
 				}
 				Q.handle(callback, Q.Text, [errors, result]);
@@ -11167,17 +11209,6 @@ Q.info.isMobile = Q.info.isTouchscreen && !Q.info.isTablet;
 Q.info.formFactor = Q.info.isMobile ? 'mobile' : (Q.info.isTablet ? 'tablet' : 'desktop');
 var de = document.documentElement;
 de.addClass('Q_js');
-de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
-de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
-de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
-de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
-de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
-if (Q.info.isAndroidStock) {
-	de.addClass('Q_androidStock');
-}
-if (Q.info.hasNotch) {
-	de.addClass('Q_notch');
-}
 
 Q.ignoreBackwardCompatibility = {
 	dashboard: false,
@@ -13586,6 +13617,22 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
+	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
+	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
+	de.addClass(Q.info.isStandalone ? 'Q_standalone' : 'Q_notStandalone');
+	de.addClass(Q.info.isWebView ? 'Q_webView' : 'Q_notWebView');
+	de.removeClass(Q.info.isTouchscreen  ? 'Q_notTouchscreen' : 'Q_touchscreen');
+	de.removeClass(Q.info.isMobile ? 'Q_notMobile' : 'Q_mobile');
+	de.removeClass(Q.info.isAndroid() ? 'Q_notAndroid' : 'Q_android');
+	de.removeClass(Q.info.isStandalone ? 'Q_notStandalone' : 'Q_standalone');
+	de.removeClass(Q.info.isWebView ? 'Q_notWebView' : 'Q_webView');
+	if (Q.info.isAndroidStock) {
+		de.addClass('Q_androidStock');
+	}
+	if (Q.info.hasNotch) {
+		de.addClass('Q_notch');
+	}
 	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
 		.substr(Q.baseUrl().length + 1);
 	if (window.history.pushState) {

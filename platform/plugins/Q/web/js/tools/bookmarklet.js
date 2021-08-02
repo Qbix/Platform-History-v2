@@ -142,7 +142,7 @@ Q.Tool.define('Q/bookmarklet', function () {
 + ' 	return callback();'
 + '   }'
 + '   var script = document.createElement("script");'
-+ '   script.type = "text/javascript";'
++ '   script.type = "application/javascript";'
 + '   if (script.readyState) {'
 + '     script.onreadystatechange = function () {'
 + '       if (script.readyState == "loaded" || script.readyState == "complete") {'

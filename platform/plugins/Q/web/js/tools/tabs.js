@@ -71,7 +71,8 @@
 			// catches events that bubble up from any child elements
 			_addListeners(tool, $te);
 
-			tool.$tabs = tool.$('.Q_tabs_tab').css('visibility', 'hidden');
+			tool.$tabs = tool.$('.Q_tabs_tab');
+			tool.element.removeClass('Q_tabs_arranged');	
 			setTimeout(function () {
 				Q.onLayout(tool).add(Q.throttle(function () {
 					tool.refresh();
@@ -458,10 +459,10 @@
 				var state = tool.state;
 				var $te = $(tool.element);
 				var html, $copied;
-				var w = Math.min(
+				var w = Math.ceil(Math.min(
 					$te[0].getBoundingClientRect().width,
 					$te[0].remainingWidth(true)
-				);
+				));
 				var w2 = 0, w3 = 0, w4 = 0, index = -10;
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
@@ -482,17 +483,16 @@
 					var cs = $o.state('Q/contextual');
 					if (cs) {
 						if (cs.contextual) {
-							tool.$tabs.css('visibility', 'hidden');
 							$('.Q_tabs_tab', cs.contextual).insertAfter($o);
 						}
 						$o.plugin("Q/contextual", "remove");
 					}
 					$o.remove();
 				}
+				tool.element.addClass('Q_tabs_arranged');
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
-					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(this);
 				}
@@ -524,16 +524,32 @@
 					$tabs.removeAttr('data-touchlabel');
 				}
 				var $tab = $(state.tab);
+				var $clone = $tab.clone().css({
+					visibility: 'visible',
+					display: 'inline-block',
+					position: 'absolute', // so appending won't mess up layout
+					top: "-1000px",
+					left: "-1000px"
+				});
+				$clone.appendTo('body').find('*:not(:visible)').remove().end().remove();
+				var visibleCount = 0;
+				$tabs.each(function () {
+					if ($(this).css('display') !== 'none') {
+						++visibleCount;
+					}
+				});
+				var text = $clone.text().trim();
 				var values = {
-					count: $tabs.length - index - 1,
-					text: $tab.text() || state.overflow.defaultText || Q.text.Q.tabs.Menu,
-					html: $tab.html() || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
+					count: visibleCount - index - 1,
+					text: text || state.overflow.defaultText || Q.text.Q.tabs.Menu,
+					html: (text && $clone.html()) || state.overflow.defaultHtml || Q.text.Q.tabs.Menu,
 					more: Q.text.Q.tabs.more,
 					classes: $tab.attr('class')
 				};
-				var html = this.state.overflow.content.interpolate(values);
+				var html;
 				if (index >= 0 && state.overflow) {
 					tabAlreadyVisible = ($tab.data('index') < index);
+					html = this.state.overflow.content.interpolate(values);
 					$copied = $('<span class="Q_tabs_copiedTitle">').html(html);
 					$overflow = $('<li class="Q_tabs_tab Q_tabs_overflow" />')
 						.empty().append($copied);
@@ -554,6 +570,8 @@
 							oneLess = true;
 						}
 					}
+					++values.count;
+					html = this.state.overflow.content.interpolate(values);
 					if (oneLess) {
 						--index;
 						values.count = $tabs.length - index - 1;
@@ -563,7 +581,7 @@
 							var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
 								.html(state.overflow.glyph.interpolate(values))
 								.appendTo($overflow);
-							if (!state.compact && $overflow.outerWidth(true) > w - w4 - 1) {
+							if (!state.compact && $overflow.outerWidth(true) > w - w4) {
 								$glyph.remove(); // better to at least fit on the line
 							}
 						}
@@ -571,7 +589,6 @@
 				}
 				if (!$overflow) {
 					tool.$overflow = null;
-					tool.$tabs.css('visibility', 'visible');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}
@@ -611,9 +628,9 @@
 						defaultHandler: state.contextualHandler,
 						onConstruct: function ($contextual) {
 							_addListeners(tool, $contextual);
-							tool.$tabs.css('visibility', 'visible');
 							Q.handle(state.onRefresh, this);
 							Q.handle(callback, tool);
+							tool.element.addClass('Q_tabs_arranged');
 							$overflow.css('visibility', 'visible');
 						},
 						onShow: function (cs) {
