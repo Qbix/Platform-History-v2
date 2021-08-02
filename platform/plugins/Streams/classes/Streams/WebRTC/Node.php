@@ -76,23 +76,8 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
             return $webrtcStream;
         }
 
-        $hosts = Users_Contact::select()->where(array(
-            'userId' => Users::currentCommunityId(true),
-            'label' => array("Users/hosts")
-        ))->fetchDbRows(null, null, 'contactUserId');
-        $hosts = array_keys($hosts);
 
-        return array(
-            'stream' => $stream,
-            'hosts' => $hosts,
-            'roomId' => $stream->name,
-            'socketServer' => $socketServer,
-            'turnCredentials' => $turnServers,
-            'debug' => $debug,
-            'options' => array(
-                'liveStreaming' => $liveStreamingConfig
-            )
-        );
+        return null;
     }
 
     /**
