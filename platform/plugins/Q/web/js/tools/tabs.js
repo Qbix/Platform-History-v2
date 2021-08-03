@@ -398,7 +398,6 @@
 				} else {
 					url = Q.url(url);
 				}
-				var state = tool.state;
 				var defaultTab = null;
 				if (!tab) {
 					$tabs.each(function (k, t) {
