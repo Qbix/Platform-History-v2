@@ -783,13 +783,31 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Method is called before setting the field and verifies that, if it is a string,
 	 * it contains a JSON array.
+	 * @method beforeSet_attributes
+	 * @param {string|array} $value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_attributes($value)
+	{
+		if (is_array($value)) {
+			$value = Q::json_encode($value);
+		}
+		return parent::beforeSet_attributes($value);
+	}
+	
+	/**
+	 * Method is called before setting the field and verifies that, if it is a string,
+	 * it contains a JSON array.
 	 * @method beforeSet_permissions
-	 * @param {string} $value
+	 * @param {string|array} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_permissions($value)
 	{
+		if (is_array($value)) {
+			$value = Q::json_encode($value);
+		}
 		if (is_string($value)) {
 			$decoded = Q::json_decode($value, true);
 			if (!is_array($decoded) or Q::isAssociative($decoded)) {
