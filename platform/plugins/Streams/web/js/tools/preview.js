@@ -377,7 +377,6 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				|| Q.first(si.saveSizeName, {nonEmptyKey: true})
 				|| (oss && (oss[sfi] || oss['']));
 			var full = si.saveSizeName[si.fullSize] || file;
-			var size = si.saveSizeName[si.showSize];
 			var defaultIcon = (options.defaultIcon) || 'default';
 			var icon = (sfi && sfi !== 'default') ? sfi : defaultIcon;
 
