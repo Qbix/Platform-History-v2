@@ -2467,7 +2467,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $relationType The type of the relation
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.postMessage=true] Whether to post messages Streams/relation/available, Streams/relation/unavailable
-	 * @param {boolean} [$options.throw=false] If true and relation unavailbale, throws exception
+	 * @param {boolean} [$options.throwIfUnavailable=false] If true and relation unavailbale, throws exception
 	 * @param {boolean} [$options.singleRelation=false] If true, check that user already related stream to category. If yes throws exception.
 	 * @return {boolean} if available or not
 	 */
@@ -2479,16 +2479,16 @@ abstract class Streams extends Base_Streams
 		}
 
 		$postMessage = Q::ifset($options, "postMessage", true);
-		$throw = Q::ifset($options, "throw", false);
+		$throwIfUnavailable = Q::ifset($options, "throwIfUnavailable", false);
 		$singleRelation = Q::ifset($options, "singleRelation", false);
 		$texts = Q_Text::get("Streams/content");
 		$exceededText = Q::ifset($texts, "types", $relationType, "MaxRelationsExceeded", "Max relations exceeded");
 
-		$currentRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+		$currentRelations = (int)Streams_RelatedTo::select("COUNT(1)")->where(array(
 			"toPublisherId" => $publisherId,
 			"toStreamName" => $streamName,
 			"type" => $relationType
-		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+		))->execute()->fetchColumn(0)
 
 		$available = $maxRelations - $currentRelations;
 		if ($available > 0) {
@@ -2500,18 +2500,17 @@ abstract class Streams extends Base_Streams
 			}
 
 			if ($singleRelation) {
-				$selfRelations = (int)Streams_RelatedTo::select("count(*) as relationCount")->where(array(
+				$selfRelations = (int)Streams_RelatedTo::select("COUNT(1)")->where(array(
 					"toPublisherId" => $publisherId,
 					"toStreamName" => $streamName,
 					"type" => $relationType,
 					"fromPublisherId" => $asUserId
-				))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["relationCount"];
+				))->execute()->fetchColumn(0);
 				if ($selfRelations) {
-					if ($throw) {
+					if ($$throwIfUnavailable) {
 						throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
-					} else {
-						return false;
 					}
+					return false;
 				}
 			}
 

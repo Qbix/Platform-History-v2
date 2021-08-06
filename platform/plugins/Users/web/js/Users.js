@@ -354,6 +354,13 @@
 		});
 	};
 	
+	Users.authenticate.handlers.web3 = function (platform, onSuccess, onCancel, options) {
+		_doAuthenticate({
+			udid: Q.info.udid, // TODO: sign this with private key
+			platform: platform
+		}, platform, onSuccess, onCancel, options);
+	};
+	
 	function _doSuccess(user, platform, onSuccess, onCancel, options) {
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
