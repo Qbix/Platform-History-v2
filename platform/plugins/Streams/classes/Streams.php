@@ -2488,7 +2488,7 @@ abstract class Streams extends Base_Streams
 			"toPublisherId" => $publisherId,
 			"toStreamName" => $streamName,
 			"type" => $relationType
-		))->execute()->fetchColumn(0)
+		))->execute()->fetchColumn(0);
 
 		$available = $maxRelations - $currentRelations;
 		if ($available > 0) {
