@@ -5184,7 +5184,7 @@ function updateAvatarCache(stream) {
 			cache = Users.get.cache;
 			if (item = cache.get([userId])) {
 				var user = item.subject;
-				avatar[field] = sf.content;
+				user[field] = sf.content;
 				cache.set([userId], 0, item.subject, [null, item.subject]);
 			}
 		}
