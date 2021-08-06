@@ -16,6 +16,7 @@ var Interests = Streams.Interests;
  * @param {Object} [options] This is an object of parameters for this function
  *  @param {String} [options.communityId=Q.Users.communityId] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
+ *  @param {Boolean} [options.skipSelect=false] If true skip mark interests as selected
  *  @param {Array} [options.ordering=[]] To override what interest categories to show and in what order
  *  @param {String|null} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
  *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
@@ -116,14 +117,17 @@ Q.Tool.define("Streams/interests", function (options) {
 					{ascending: true}
 				);
 			});
-			var waitFor = Q.copy(state.ordering).concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
+			var waitFor = Q.copy(state.ordering);
+			if (!state.skipSelect) {
+				waitFor.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
+			}
 			pipe.add(waitFor, 1, function (params, subjects) {
 				tool.$('.Streams_interest_title').removeClass('Q_selected');
 				var $jq;
 				var otherInterests = {};
 				var normalized, expandable;
-				var interests = anotherUser ? params.anotherUser[0] : params.my[0];
-				var myInterests = params.my[0];
+				var myInterests = Q.getObject(["my", 0], params) || [];
+				var interests = anotherUser ? params.anotherUser[0] : myInterests;
 				for (normalized in interests) {
 					$jq = tool.$('#Streams_interest_title_' + normalized)
 					.addClass('Streams_interests_anotherUser');
@@ -479,6 +483,7 @@ Q.Tool.define("Streams/interests", function (options) {
 {
 	communityId: null,
 	expandable: {},
+	skipSelect: false,
 	cacheBust: 1000*60*60*24,
 	ordering: null,
 	all: false,
