@@ -126,7 +126,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var $jq;
 				var otherInterests = {};
 				var normalized, expandable;
-				var myInterests = Q.getObject(["my", 0], params) || [];
+				var myInterests = state.skipSelect ? [] : Q.getObject(["my", 0], params) || [];
 				var interests = anotherUser ? params.anotherUser[0] : myInterests;
 				for (normalized in interests) {
 					$jq = tool.$('#Streams_interest_title_' + normalized)
