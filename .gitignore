@@ -5,6 +5,7 @@
 .idea/
 .bin/
 docs/
+/*
 !platform
 platform/.idea/
 platform/local/*
@@ -58,5 +59,4 @@ platform/plugins/Travel
 composer.lock
 platform/plugins/Streams/files/Streams/icons.tar.gz
 
-platform/plugins/Streams/web/css/selection.json
 platform/files/Q/logs/

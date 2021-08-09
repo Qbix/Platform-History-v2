@@ -72,7 +72,7 @@
 				"sizes": ["40", "50", "80", "200", "400"],
 				"defaultSize": "40",
 				"defaultCacheBust": 1000,
-				"maxStretch": 2
+				"maxStretch": 3
 			}
 		}
 	},
