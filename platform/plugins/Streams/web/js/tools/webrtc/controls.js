@@ -1943,14 +1943,12 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
-                            rtmpLiveURLInput.value ='rtmps://live-api-s.facebook.com:443/rtmp/';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_desc';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
-                            rtmpLiveStreamKeyInput.value = 'FB-1958752670950486-0-AbxdC37YQxtOwzPl';
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
