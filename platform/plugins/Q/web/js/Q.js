@@ -6110,6 +6110,11 @@ Q.init = function _Q_init(options) {
 		Q.Text.get(Q.Text.loadBeforeInit, p2.fill('Q.Text.loadBeforeInit'));
 	}
 	p2.add(waitFor, 1, function () {
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		if (preferredLanguage) {
+			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
+		}
+
 		Q.handle(Q.onInit, Q);
 	}).run();
 };
@@ -13650,11 +13655,6 @@ Q.onInit.add(function () {
 		}
 	}, 'Q.Socket');
 
-	var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
-	var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
-	if (info) {
-		Q.Text.setLanguage.apply(Q.Text, info);
-	}
 	var QtQw = Q.text.Q.words;
 	QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 	QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;

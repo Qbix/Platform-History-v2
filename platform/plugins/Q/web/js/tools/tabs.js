@@ -398,7 +398,6 @@
 				} else {
 					url = Q.url(url);
 				}
-				var state = tool.state;
 				var defaultTab = null;
 				if (!tab) {
 					$tabs.each(function (k, t) {
@@ -507,7 +506,7 @@
 						w2 += this.getBoundingClientRect().width
 							+ parseFloat(cs.marginLeft)
 							+ parseFloat(cs.marginRight);
-						if (w2 > w) {
+						if (Math.floor(w2) > w) {
 							index = i-1;
 							return false;
 						}
