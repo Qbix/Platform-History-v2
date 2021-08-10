@@ -266,24 +266,17 @@ WebRTC.listen = function () {
             function createFfmpegProcess() {
                 // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
                 // If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.
-                ffmpeg = child_process.spawn('ffmpeg', [
+                var params = ['-re'];
+                if(format != 'webm') {
+                    params.push('-f', format);
+                }
+                params = params.concat([
                     // Facebook requires an audio track, so we create a silent one here.
                     // Remove this line, as well as `-shortest`, if you send audio from the browser.
                     //'-f', 'lavfi', '-i', 'anullsrc',
 
                     //set input framerate to 24 fps
                     //'-r', '30',
-
-                    //'-s', '1280x768',
-                    //'-y',
-                    //'-stream_loop', '-1',
-                    //'-video_size', '1280x720',
-                    '-re',
-                    // FFmpeg will read input video from STDIN
-                    //'-f', 's16be',
-                    //'-ar', '48k',
-                    //'-ac', '1',
-                    '-f', format,
                     '-i', '-',
                     //'-i', '/var/www/testStream.flv',
 
@@ -312,7 +305,7 @@ WebRTC.listen = function () {
                     //'-threads', '6',
                     //'-b:a', '11025',
                     '-bufsize', '512k',
-                //'-aac_coder', 'fast',
+                    //'-aac_coder', 'fast',
 
                     //'-map', '0:0',
                     //'-map', '0:1',
@@ -331,6 +324,7 @@ WebRTC.listen = function () {
 
 
                 ]);
+                ffmpeg = child_process.spawn('ffmpeg', params);
 
                 /*ffmpeg -re -i SampleM.flv -acodec libmp3lame -ar 44100 -b:a 128k \
   -pix_fmt yuv420p -profile:v baseline -s 426x240 -bufsize 6000k \
