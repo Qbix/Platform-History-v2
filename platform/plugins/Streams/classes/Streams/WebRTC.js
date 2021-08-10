@@ -247,9 +247,22 @@ WebRTC.listen = function () {
             var platform = socket.handshake.query.platform;
             var isAndroid = usersInfo.platform == 'android' ? true : false
 
+            if(_debug) console.log('usersInfo', usersInfo);
             var ffmpeg;
-            var encoder = (isAndroid || usersInfo.ua.toLowerCase().indexOf('firefox') != -1) ? 'libx264' : 'copy';
-            var format = encoder == 'libx264' ? 'mp4' : 'webm';
+            var m264BrowserSupport = false
+            for(let c in usersInfo.supportedVideoMimeTypes) {
+                let mimeType = usersInfo.supportedVideoMimeTypes[c];
+                if(mimeType.toLowerCase().indexOf('h264') != -1) {
+                    m264BrowserSupport = true;
+                    break;
+                }
+            }
+            var mp4IsSupported = usersInfo.supportedVideoMimeTypes.indexOf('video/mp4') != -1;
+            var encoder = !m264BrowserSupport && !mp4IsSupported ? 'libx264' : 'copy';
+            var format = mp4IsSupported ? 'mov,mp4,m4a,3gp,3g2,mj2' : 'webm'; //mov,mp4,m4a,3gp,3g2,mj2
+            if(_debug) console.log('m264BrowserSupport ' +  m264BrowserSupport);
+            if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
+
             function createFfmpegProcess() {
                 // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
                 // If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.

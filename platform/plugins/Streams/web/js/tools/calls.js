@@ -220,7 +220,8 @@
                 var tool = this;
                 var state = tool.state;
                 var $toolElement = $(tool.element);
-
+                var $clipToolElement = $(state.parentClipTool.element);
+                var $hostsParticipants = $(".Media_clip_hosts_participants", $clipToolElement);
                 $toolElement.addClass("Streams_calls_call").on(Q.Pointer.fastclick, function () {
                     Q.prompt(null, function (content) {
                         if (!content) {
@@ -228,6 +229,7 @@
                         }
 
                         state.waitingRoom = Streams.WebRTC.start({
+                            element: $hostsParticipants[0],
                             publisherId: state.publisherId,
                             streamName: state.streamName,
                             relationType: state.relationType,

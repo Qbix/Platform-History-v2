@@ -16,7 +16,7 @@
 }
 
 .Streams_webrtc_room-media.Streams_webrtc_audio-screens-grid {
-    pointer-events: all !important;
+    /*pointer-events: all !important;*/
     overflow: auto;
     position: relative;
 }
@@ -770,7 +770,8 @@ and (max-device-width : 320px) {
     overflow: hidden;
 }
 
-.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video {
+.Streams_webrtc_mobile-screen .Streams_webrtc_tiled-grid-screen .Streams_webrtc_chat-participant-video video,
+.Streams_webrtc_mobile-screen .Streams_webrtc_squares-grid-screen .Streams_webrtc_chat-participant-video video {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -864,6 +865,9 @@ and (max-device-width : 320px) {
     background: linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.97) 3%, rgba(0,0,0,0) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000', GradientType=1 );
 }
+.Streams_webrtc_mobile-screen .Streams_webrtc_squares-grid-screen .Streams_webrtc_participant-voice:before {
+    display: none;
+}
 .Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-voice {
     top: 0;
 }
@@ -911,6 +915,27 @@ and (max-device-width : 320px) {
 }
 
 
+.Streams_webrtc_mobile-screen .Streams_webrtc_squares-screens-grid {
+    overflow-y: scroll;
+    pointer-events: all;
+}
+.Streams_webrtc_mobile-screen .Streams_webrtc_squares-screens-grid .Streams_webrtc_chat-participant {
+    border-radius: 5px;
+}
+
+.Streams_webrtc_mobile-screen .Streams_webrtc_squares-screens-grid .Streams_webrtc_chat-participant-name {
+    padding: 8px 5px 8px 10px;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 9;
+    background-color: transparent;
+    color: white;
+    text-shadow: 0px 0px 5px rgb(83 83 83);
+}
 
 
 /*desktop version*/
@@ -1766,7 +1791,7 @@ and (max-device-width : 320px) {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 9999990;
+    z-index: 9999999999999;
     overflow: hidden;
 }
 .dialog-box {
@@ -2680,11 +2705,11 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    padding: 10px;
+    padding: 5px;
 }
 .participants-list-btns svg {
-    height:50px;
-    width:50px;
+    height:45px;
+    width:45px;
 }
 .participants-list-btns button{
     box-shadow: 0 5px 20px -5px #0048b5;

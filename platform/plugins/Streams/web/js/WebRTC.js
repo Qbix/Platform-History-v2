@@ -1634,13 +1634,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 }).catch((e) => {
                                     console.error(e)
                                     console.log('camera: play func error')
-
                                 });
 
                                 videoPreview.addEventListener('canplay', function () {
                                     console.log('camera: canplay')
-
-
                                 });
                                 videoPreview.addEventListener('emptied', function () {
                                     console.log('camera: emptied')
@@ -2541,7 +2538,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             layoutEvents.on('layoutRendered', function (e) {
 
                 if(e.viewMode == 'audio') {
-                    console.log('layoutrendered : audio', e);
                     WebRTCconference.screensInterface.audioVisualization().buildCommonVisualization({
                         name: 'common',
                         type: 'bars',
@@ -2560,6 +2556,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     unlockScreenResizingAndDragging();
                     WebRTCconference.screensInterface.audioVisualization().removeCommonVisualization();
                 } else if(e.viewMode == 'screenSharing' || e.viewMode == 'fullScreen') {
+                    if(_controlsTool) _controlsTool.updateViewModeBtns();
+                    updateScreensButtons()
+                    resetAudioVisualization();
+                    lockScreenResizingAndDragging();
+                    WebRTCconference.screensInterface.audioVisualization().removeCommonVisualization();
+                } else if(e.viewMode == 'squaresGrid') {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons()
                     resetAudioVisualization();
@@ -2730,14 +2732,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 };
                 this.show = function() {
-                    log('screen.show', this.participant.isLocal, this.participant.identity);
-                    log('screen.show: ', roomScreens.length);
-                    try {
-                        var err = (new Error);
-                        console.log(err.stack);
-                    } catch (e) {
-
-                    }
                     let screen = this;
                     log('screen.show: screen before check', screen);
 
@@ -2807,7 +2801,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 viewMode = prevViewMode = _options.defaultMobileViewMode || 'maximizedMobile';
 
             } else viewMode = prevViewMode = _options.defaultDesktopViewMode || 'regular';
-            console.log('viewMode', viewMode);
             if(_options.minimizeOnPageSwitching) {
                 Q.Page.onActivate('').set(function(){
                     if(viewMode == 'minimized' || viewMode == 'minimizedMobile') return;
@@ -2885,6 +2878,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         renderMinimizedScreensGridMobile();
                     } else if(viewMode == 'audio') {
                         renderAudioScreensGrid();
+                    } else if(viewMode == 'squaresGrid') {
+                        renderSquaresGridMobile();
                     }
 
                     doPlayTracks();
@@ -2941,12 +2936,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
              */
             function createRoomScreen(participant) {
                 log('createRoomScreen', participant, participant.isLocal);
-                try {
-                    var err = (new Error);
-                    console.log(err.stack);
-                } catch (e) {
-
-                }
                 //check whether it was room switching
                 /*if(participant.isLocal) {
                     for(let s in roomScreens) {
@@ -3444,7 +3433,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     }
 
-                } else if(viewMode == 'minimized' || viewMode == 'tiled' || viewMode == 'minimizedMobile') {
+                } else if(viewMode == 'minimized' || viewMode == 'tiled' || viewMode == 'minimizedMobile' || viewMode == 'squaresGrid') {
                     var i, screen;
                     for (i = 0; screen = roomScreens[i]; i++) {
                         var maximizeBtn = screen.videoScreen.nameEl.querySelector('.Streams_webrtc_maximize-btn');
@@ -3666,7 +3655,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('toggleViewModeByScreenClick')
                 log('toggleViewModeByScreenClick: current viewMode', viewMode)
 
-                if(viewMode == 'audio') return;
+                if(viewMode == 'audio' || viewMode == 'squaresGrid') return;
 
                 e.stopImmediatePropagation();
                 e.preventDefault();
@@ -3841,6 +3830,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function toggleScreensClass(layout) {
                 var gridClasses = [
                     'Streams_webrtc_tiled-screens-grid',
+                    'Streams_webrtc_squares-screens-grid',
                     'Streams_webrtc_side-by-side-screens-grid',
                     'Streams_webrtc_maximized-screens-grid',
                     'Streams_webrtc_fullscreen-grid',
@@ -3848,6 +3838,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     'Streams_webrtc_audio-screens-grid',
                 ];
                 var screenClasses = [
+                    'Streams_webrtc_squares-grid-screen',
                     'Streams_webrtc_tiled-grid-screen',
                     'Streams_webrtc_minimized-small-screen',
                     'Streams_webrtc_maximized-main-screen',
@@ -3911,6 +3902,39 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                     var containerClass = layout == 'sideBySideMobile' ? 'Streams_webrtc_side-by-side-screens-grid' : 'Streams_webrtc_tiled-screens-grid';
+                    for (var x in gridClasses) {
+                        if(gridClasses[x] == containerClass) continue;
+                        if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
+                    }
+                    _roomsMedia.classList.add(containerClass);
+
+                    return elements;
+
+                }
+
+                if(layout == 'squaresGrid') {
+                    var screenClass = 'Streams_webrtc_squares-grid-screen';
+                    var elements = [];
+                    for(var s in roomScreens) {
+                        let screen = roomScreens[s];
+                        if(screen.activeScreenType == 'audio') continue;
+                        for (var o in screenClasses) {
+                            if(screenClasses[o] == screenClass) continue;
+                            if (screen.screenEl.classList.contains(screenClasses[o])) screen.screenEl.classList.remove(screenClasses[o]);
+                        }
+                        if(!screen.screenEl.classList.contains(screenClass)) screen.screenEl.classList.add(screenClass);
+
+                        /*if(!_roomsMedia.contains(screen.screenEl)) {
+							screen.videoScreen.videoCon.style.display = 'none';
+						} else {
+							screen.videoScreen.videoCon.style.display = '';
+						}*/
+
+                        elements.push(screen.screenEl);
+                    }
+
+
+                    var containerClass = 'Streams_webrtc_squares-screens-grid';
                     for (var x in gridClasses) {
                         if(gridClasses[x] == containerClass) continue;
                         if (_roomsMedia.classList.contains(gridClasses[x])) _roomsMedia.classList.remove(gridClasses[x]);
@@ -4576,6 +4600,34 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             /**
+             * Renders screens in scrollable container.
+             * @method renderSquaresGridMobile
+             */
+            function renderSquaresGridMobile() {
+                log('renderSquaresGridMobile')
+                if(_layoutTool == null || _controls == null) return;
+                activeScreen = null;
+
+                switchScreenType('video');
+                if(!_layoutTool.getLayoutGenerator('squaresGrid')) _layoutTool.setLayoutGenerator('squaresGrid', function (container, count) {
+                    return customLayouts.squaresGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
+                });
+                var elements = toggleScreensClass('squaresGrid');
+                log('renderSquaresGridMobile: elements', elements)
+
+                prevViewMode = viewMode;
+                _layoutTool.animate('squaresGrid', elements, 100, true);
+
+                viewMode = 'squaresGrid';
+                layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+
+                /*if(_controlsTool) _controlsTool.updateViewModeBtns();
+
+                updateScreensButtons();
+                resetAudioVisualization();*/
+            }
+
+            /**
              * Custom layouts for Q.layout tool (layouts are taking into accout ratio of participants' video).
              */
             var customLayouts = {
@@ -4778,7 +4830,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(parentRect == 0 || parentRect.height == 0) return false;
                     var count = roomScreens.length;
                     var rects = [];
-                    console.log('parentRect', parentRect)
 
                     //var mainRadius = Math.min(size.parentWidth, size.parentHeight);
 
@@ -4788,17 +4839,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     var ratio = parentRect.width / parentRect.height;
                     var isRatherNotMobile = parentRect.width < 360 || parentRect.height < 360;
-                    console.log('isRatherNotMobile', isRatherNotMobile)
-                    try {
-                        var err = (new Error);
-                        console.log(err.stack);
-                    } catch (e) {
-
-                    }
 
                     if(ratio > 4.2 || (isRatherNotMobile && ratio > 3.8)) {
                         var rectHeight = (parentRect.height / 100  * 80) + 19;
-                        console.log('rectHeight', rectHeight, parentRect.height)
                         if(rectHeight > parentRect.height) rectHeight = parentRect.height - 5;
                         var rectWidth = rectHeight - 19;
                         var spaceBetween = 15;
@@ -4807,7 +4850,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         for ( var i=0; i<=count; i++ ) {
                             let x = prevRect.x + prevRect.width + spaceBetween;
                             let y = (parentRect.height / 2) - (rectHeight / 2);
-                            console.log('y',y,parentRect.height)
                             let newRect = new DOMRect(x, y, rectWidth, rectHeight);
                             rects.push(newRect);
                             prevRect = newRect;
@@ -4824,7 +4866,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         for ( var i=0; i<=count; i++ ) {
                             let x = (parentRect.width / 2) - (rectWidth / 2);
                             let y = prevRect.y + prevRect.height + spaceBetween;
-                            console.log('y',y,parentRect.height)
                             let newRect = new DOMRect(x, y, rectWidth, rectHeight);
                             rects.push(newRect);
                             prevRect = newRect;
@@ -4904,11 +4945,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     for ( var i=0; i<=count; i++ ) {
                         var newRect = radCircle(rad, step);
-                        console.log('newRect', newRect)
 
                         var twentyPercent = ((newRect.width / 2) / 100 * 20);
 
-                        console.log('twentyPercent', twentyPercent)
                         if(spaceBetween > twentyPercent) {
 
                             if( _layoutTool.mainCircleRadius + twentyPercent * count < (minSide / 2) - (newRect.width / 2) ) {
@@ -6559,10 +6598,489 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             return resultLayoutRects;
                         }
-                    }
-            }
+                    },
+                squaresGrid: function (container, count) {
+                    if(roomScreens.length == 0) return;
 
-            window.layouts = customLayouts;
+                    var rectWidth = 90;
+                    var rectHeight = 90;
+                    var spaceBetween = 10;
+                    var defaultSide = 'top-full';
+
+                    var containerRect = container.getBoundingClientRect();
+                    var parentWidth = containerRect.width;
+                    var parentHeight = containerRect.height;
+
+                    _layoutTool.state.currentGenerator = 'squaresGrid';
+                    if(_layoutTool.basicGridRects.length < count) {
+                        _layoutTool.basicGridRects = build(container, count);
+                    }
+
+
+                    if(_layoutTool.currentRects.length == 0) {
+                        _layoutTool.currentRects = build(container, count);
+                    } else {
+                        if(count > _layoutTool.currentRects.length) {
+                            var availableRects = addAndUpdate(container, count);
+                            _layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
+                        } else if(count < _layoutTool.currentRects.length) {
+                            _layoutTool.currentRects = removeAndUpdate();
+                        }
+                    }
+
+                    return  _layoutTool.currentRects;
+
+                    function getLayoutType() {
+                        return defaultSide;
+                    }
+
+                    function build(container, count) {
+                        if(count == 1) {
+                            return buildGrid(container, count, 2)
+                        } else/* if(count == 2 || count == 3 || count == 4 || count == 6) */{
+                            return buildGrid(container, count, 2)
+                        }
+                    }
+
+                    function buildGrid(container, count, perRow) {
+
+                        //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                        var parentWidth = containerRect.width;
+                        var parentHeight = containerRect.height;
+
+                        var align = getLayoutType();
+
+                        var rectWidth = 90;
+                        var rectHeight = 90;
+                        var spaceBetween = 10;
+
+                        var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
+                        if(perRow == 1) {
+                            rectWidth = parentWidth - (spaceBetween * 2);
+                            rectHeight = (rectWidth / 16) * 9;
+                        } else if(perRow == 2) {
+                            rectWidth = (parentWidth - (spaceBetween * (perRow + 1))) / 2;
+                            rectHeight = rectWidth / 4 * 3;
+                        } else if(perRow == 3) {
+                            rectWidth = (parentWidth - (spaceBetween * (perRow + 1))) / 3;
+                            rectHeight = rectWidth / 4 * 3;
+                        } else {
+                            rectWidth = (parentWidth - (spaceBetween * (perRow + 1))) / perRow;
+                            rectHeight = rectWidth / 4 * 3;
+                        }
+
+                        if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
+                        var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
+                        if(count < totalRectsOnSides) totalRectsOnSides = count;
+
+                        var rects = [];
+                        var currentRowRects = [];
+
+                        var arr = [];
+                        for(var i in rects){
+                            arr = arr.concat(rects[i]);
+                        }
+                        rects = arr;
+
+                        var minX = spaceBetween;
+                        var maxX = parentWidth;
+                        var minY = spaceBetween;
+                        var maxY = parentHeight;
+
+                        var latestRect;
+                        var isNextNewLast = false;
+                        var rowItemCounter = 1;
+                        var i;
+                        for (i = 1; i <= count; i++) {
+                            //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                            if(latestRect != null) var prevRect = latestRect;
+                            var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+                            var isNextNewRow  = rowItemCounter  == perRow;
+                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+                            var x,y
+                            if(rowItemCounter > 1 && prevRect) {
+                                y = prevRect.y;
+                                x = prevRect.x + (rectWidth + spaceBetween);
+                            } else {
+                                if (align == 'top-full'){
+                                    x = minX;
+                                    var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween: minY;
+                                    y = startY;
+                                } else if (align == 'bottom-full'){
+                                    var startY = prevRect != null ? prevRect.y : maxY;
+                                    y = startY - (rectHeight + spaceBetween);
+                                    x = minX;
+                                }
+
+                            }
+                            var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                            rects.push({side:null, rect: rect});
+
+                            if(rowItemCounter == perRow) {
+                                rowItemCounter = 1;
+                            } else rowItemCounter++;
+                        }
+
+                        rects = rects.map(function(rectObj){
+                            return rectObj.rect;
+                        });
+
+                        //return alignFullRows(rects)
+                        return rects;
+                    }
+
+                    function addAndUpdate(container, count, perRow) {
+                        var align = getLayoutType();
+
+                        var currentRects = _layoutTool.currentRects;
+
+                        var getRectsRows = function () {
+                            var rows = {};
+                            var none = [];
+                            var i, count = currentRects.length;
+                            for(i = 0; i < count; i++) {
+                                var rect = currentRects[i];
+
+                                if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
+                            }
+
+                            var rowsArray = [];
+                            for (var property in rows) {
+                                if (rows.hasOwnProperty(property)) {
+                                    none.push(rows[property]);
+                                    rowsArray.push(rows[property]);
+                                }
+                            }
+
+                            return {
+                                none: none,
+                                all: rowsArray
+                            };
+                        }
+
+                        var getAvailableRects = function (sortedRows) {
+                            var  rows = sortedRows.all;
+                            var availableRects = [];
+                            var availableRectsFullRow = [];
+
+                            var minX = spaceBetween;
+                            var maxX = parentWidth - spaceBetween;
+
+                            /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
+                            var maxWidth = maxX - minX;
+
+                            var i, rowsCount = rows.length;
+                            for(i = 0; i < rowsCount; i++) {
+                                var row = rows[i];
+                                var sampleRect = row[0];
+
+                                var maxRectsInCurrentRow = Math.floor(maxWidth / (sampleRect.rect.width));
+
+                                if(row.length != maxRectsInCurrentRow){
+                                    var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                    var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                    var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
+                                    for(r = 0; r < numRectsToAdd; r++){
+                                        var newRect;
+                                        if(r == 0) {
+                                            newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                        } else {
+                                            newRect = new DOMRect(prevRect.x + sampleRect.rect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                        }
+                                        availableRectsFullRow.push(newRect);
+
+                                        prevRect = newRect;
+                                    }
+                                }
+
+                            }
+
+                            availableRects = availableRects.concat(availableRectsFullRow);
+                            return availableRects;
+                        }
+
+                        var createNewRows = function(numRectsToAdd, rows, availableRects) {
+                            // var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                            var parentWidth = containerRect.width;
+                            var parentHeight = containerRect.height;
+
+                            var align = getLayoutType();
+
+                            var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
+                            var maxWidth = maxX - minX;
+                            var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
+                            var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
+
+                            var newRects = [];
+
+                            var createFullRows = function(count) {
+                                var allRects = currentRects.concat(newRects).concat(availableRects);
+                                var minX, maxX, rectsNum;
+                                maxX = parentWidth - spaceBetween;
+                                minX = spaceBetween;
+
+                                if(!perRow) {
+                                    var sampleRect = allRects[allRects.length - 1];
+                                    rectWidth = sampleRect.width;
+                                    rectHeight = sampleRect.height;
+                                    rectsNum = Math.floor((maxX-minX)/(rectWidth));
+                                } else {
+                                    rectWidth = (parentWidth - (spaceBetween * (perRow + 1))) / perRow;
+                                    rectHeight = rectWidth / 4 * 3;
+                                    rectsNum = Math.floor((maxX-minX)/(rectWidth));
+                                }
+
+                                if (align == 'top-full') {
+                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
+                                } else {
+                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
+                                }
+
+                                var rectsPerRow = rectsNum;
+
+                                var rects = []
+                                var latestRect, createNewRow;
+                                var isNextNewLast = false;
+                                var rowItemCounter = 1;
+
+                                var i;
+                                for (i = 1; i <= count; i++) {
+                                    //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                                    var currentRow = isNextNewLast  ? rectsPerRow : Math.ceil(i/rectsPerRow);
+                                    var isNextNewRow = rowItemCounter == rectsPerRow;
+                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rectsPerRow;
+
+                                    var x,y
+                                    if(rowItemCounter > 1) {
+                                        y = latestRect.y;
+                                        x = latestRect.x + (rectWidth + spaceBetween);
+                                    } else if(createNewRow) {
+                                        if(align == 'bottom-full') {
+                                            y =  latestRect.y - (rectHeight + spaceBetween);
+                                        } else if (align == 'top-full') {
+                                            y =  latestRect.y + latestRect.height + spaceBetween;
+                                        }
+                                        x = minX;
+                                        createNewRow = false;
+                                    } else {
+                                        if (align == 'top-full'){
+                                            y = maxY + spaceBetween;
+                                        } else if (align == 'bottom-full'){
+                                            y = minY - (rectHeight + spaceBetween);
+                                        }
+                                        x = minX;
+                                    }
+                                    var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                    rects.push({side:null, rect: rect});
+
+                                    if(rowItemCounter == rectsPerRow) {
+                                        createNewRow = true;
+                                        rowItemCounter = 1;
+                                    } else rowItemCounter++;
+
+                                }
+
+                                return rects.map(function(rectObj){
+                                    return rectObj.rect;
+                                });
+                            }
+
+
+                            newRects = createFullRows(numRectsToAdd);
+
+                            return newRects;
+                        }
+
+                        var rectsToAddNum = count - _layoutTool.currentRects.length;
+
+                        var rows = getRectsRows();
+                        var availableRects = getAvailableRects(rows);
+                        var newRows;
+                        if(rectsToAddNum > availableRects.length) {
+                            rectsToAddNum = (rectsToAddNum - availableRects.length);
+                            newRows = createNewRows(rectsToAddNum, rows, availableRects);
+                            availableRects = availableRects.concat(newRows);
+                        } else if(availableRects.length > rectsToAddNum) {
+                            availableRects = availableRects.slice(0, rectsToAddNum);
+                        }
+
+                        return availableRects;
+                    }
+
+                    function compareLayoutStates(prevRects, newRects) {
+                        var diffEls = [];
+                        var count = prevRects.length;
+
+                        var findInCurrentLayout = function (prevLayoutRect) {
+                            var count = newRects.length;
+                            for (var c = 0; c < count; c++) {
+                                var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
+                                var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
+
+                                if((diffTop + diffLeft) / 2 < 2) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        }
+
+                        for (let i = 0; i < count; i++) {
+                            var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
+                            if(!findInCurrentLayout(prevLayoutRect)) {
+                                diffEls.push(prevLayoutRect);
+                            }
+                        }
+
+                        return diffEls;
+                    }
+
+                    function changeRectPosition(oldRect, newRect, rects) {
+                        var i, count = rects.length;
+                        for (i = 0; i < count; i++) {
+                            if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
+                                rects[i] = newRect;
+                                break;
+                            }
+                        }
+                        return rects;
+                    }
+
+                    function findClosest(diffRect, rects) {
+                        if(!diffRect) return null;
+                        var closestOnTop = findClosesVerticallyRect(diffRect, rects);
+
+                        if(closestOnTop != null) {
+                            return closestOnTop
+                        } else {
+                            var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
+
+                            if(closestOnSide != null) {
+                                return closestOnSide;
+                            }
+                        }
+                        return null;
+                    }
+
+
+                    function findClosesVerticallyRect(rect, rects) {
+                        var distance = function (x1,y1,x2,y2) {
+                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                        }
+
+                        var align = getLayoutType();
+
+                        var nextRow;
+                        if(align == 'bottom-full') {
+                            nextRow = rects.filter(function (r) {
+                                if (r.top < rect.top) return true;
+                                return false;
+                            })
+
+                        } else if (align == 'top-full') {
+                            nextRow = rects.filter(function (r) {
+                                if (r.top > rect.top) return true;
+                                return false;
+                            })
+                        }
+
+                        if(nextRow.length != 0) {
+                            return nextRow.reduce(function (prev, current) {
+                                return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
+                                //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
+                            })
+                        } else {
+                            return null;
+                        }
+                    }
+
+                    function findClosesHorizontalyRect(rect, rects) {
+                        var distance = function (x1,y1,x2,y2) {
+                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                        }
+
+                        var currentRowRect = rects.filter(function (r) {
+                            if (r.top == rect.top && r.left > rect.left) {
+                                return true
+                            }
+                            return false;
+                        })
+
+                        if(currentRowRect.length != 0) {
+                            var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
+                                return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
+                                //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
+                            })
+
+                            return closestHorizontaly;
+                        }
+
+                        return null;
+                    }
+
+                    function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
+                        var closest;
+                        if(skipRects != null) {
+                            closest = findClosest(spaceToFill, rects.filter(function(o, i) {
+                                var exclude = false;
+                                for(let r in skipRects) {
+                                    if(skipRects[r].x == o.x && skipRects[r].y == o.y
+                                        && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
+
+                                        exclude = true;
+                                        break;
+                                    }
+                                }
+
+                                return (exclude == false ? true : false);
+                            }));
+                        } else {
+                            closest = findClosest(spaceToFill, rects);
+                        }
+
+                        if(closest != null) {
+                            changeRectPosition(closest, spaceToFill, rects);
+                            return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
+                        } else {
+                            return rects;
+                        }
+                    }
+
+                    function removeAndUpdate() {
+                        var elementRects = [];
+
+                        var actualLayoutRects = []
+                        for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
+                            if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
+                                actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
+                            }
+                        }
+
+                        var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
+
+                        var resultLayoutRects;
+
+                        if(diff.length != 0) {
+
+                            for(var s in diff) {
+                                resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
+                            }
+                        } else resultLayoutRects = elementRects;
+
+                        return resultLayoutRects;
+                    }
+                }
+            }
 
             function removeScreensByParticipant(participant) {
                 log('removeScreensByParticipant', participant);
@@ -6582,7 +7100,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             function addScreenToCommonList(screen) {
                 log('addScreenToCommonList');
-
                 try {
                     var err = (new Error);
                     console.log(err.stack);
@@ -6748,6 +7265,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 renderManualScreensGrid:renderManualScreensGrid,
                 renderFullScreenLayout:renderFullScreenLayout,
                 renderAudioScreensGrid:renderAudioScreensGrid,
+                renderSquaresGridMobile:renderSquaresGridMobile,
                 showLoader:showLoader,
                 hideLoader:hideLoader
             };
@@ -6778,12 +7296,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         function setResizeObserver() {
             if(typeof ResizeObserver == 'undefined') return;
             _resizeObserver = new ResizeObserver(entries => {
-                console.log('Size changed');
                 screensRendering.updateLayout();
                 if(WebRTCconference) WebRTCconference.screensInterface.audioVisualization().updateCommonVisualizationWidth();
 
             });
-            console.log('_options.element', _options.element);
 
             _resizeObserver.observe(_options.element);
         }
@@ -7195,7 +7711,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     Q.Streams.get(publisherId, 'Streams/webrtc/' + roomIdToJoin, function (err, stream) {
                         log('createRoomStream: joined/connected: pull stream', stream);
-                        console.log('createRoomStream: joined/connected: roomScreens.length', screensRendering.getScreens().length);
 
                         _roomStream = stream;
                         if(Q.Streams.WebRTCRooms == null){
@@ -7209,11 +7724,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         WebRTCconference.switchTo(publisherId, roomIdToJoin, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
-                            console.log('createRoomStream: joined/connected: roomScreens.length0', screensRendering.getScreens().length);
-                            console.log('createRoomStream: joined/connected:  newInstance.event',  newInstance.event);
 
                             newInstance.event.on('initNegotiationEnded', function () {
-                                console.log('createRoomStream: joined/connected: roomScreens.length1', screensRendering.getScreens().length);
                                 log('switchTo: createOrJoinRoomStream: newInstance', newInstance)
                                 WebRTCconference = newInstance;
                                 // prevRoom.disconnect(true);
@@ -7398,7 +7910,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {Function} [options.onEnd] Callback called when Webrtc ended.
      */
     Streams.WebRTC.start = function (options) {
-        console.log('Streams.WebRTC.start', options);
         options = Q.extend({
             element: document.body,
             mode: 'node',
