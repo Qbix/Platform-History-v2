@@ -2447,6 +2447,55 @@ Q.openUrl = function (url, name = "_blank") {
 };
 
 /**
+ * Get Unix timestamp as argument and return json of days, hours, minutes, seconds elapsed from current time to this timestamp.
+ * @static
+ * @method remain
+ * @param {integer} date Unix timestamp
+ * @return {object} json {days: ..., hours: ..., minutes: ..., seconds: ...}
+ */
+Q.remain = function (date) {
+	var seconds = (new Date(date) - Date.now()) / 1000;
+	if (seconds < 0) {
+		return {
+			days: 0,
+			hours: 0,
+			minutes: 0,
+			seconds: 0
+		}
+	}
+	var result = {};
+	result.days = Math.floor(seconds / 60 / 60 / 24);
+	seconds -= result.days * 60 * 60 * 24;
+	result.hours = Math.floor(seconds / 60 / 60);
+	seconds -= result.hours * 60 * 60;
+	result.minutes = Math.floor(seconds / 60);
+	result.seconds = parseInt(seconds - result.minutes * 60);
+	return result;
+};
+
+/**
+ *
+ * @static
+ * @method countdown
+ * @param {jQuery} $elements elements with attribute data-timestamp to fill with days, hours, minutes, seconds
+ * @param {function} called every time data-timestamp element processed
+ * @return {number} identifies the timer created by the call to setInterval
+ */
+Q.countdown = function ($elements, callback) {
+	return setInterval(function () {
+		$elements.each(function () {
+			var $this = $(this);
+			var r = Q.remain(parseInt($this.attr("data-timestamp")) * 1000);
+			$this.find(".days").text(r.days);
+			$this.find(".hours").text(r.hours);
+			$this.find(".minutes").text(r.minutes);
+			$this.find(".seconds").text(r.seconds);
+			Q.handle(callback, $this);
+		});
+	}, 1000);
+}
+
+/**
  * Wraps a callable in a Q.Event object
  * @class Q.Event
  * @namespace Q
