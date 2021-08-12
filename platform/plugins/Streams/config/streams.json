@@ -69,7 +69,10 @@
 		"platforms": {
 			"facebook": "pic",
 			"twitter": "profile_image_url"
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/username": {
 		"type": "Streams/text/name",
@@ -79,7 +82,10 @@
 		"platforms": {
 			"facebook": "username",
 			"twitter": "screen_name"
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/firstName": {
 		"type": "Streams/text/name",
@@ -92,7 +98,10 @@
 				" ",
 				0
 			]
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/middleName": {
 		"type": "Streams/text/name",
@@ -105,7 +114,10 @@
 				" ",
 				1
 			]
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/lastName": {
 		"type": "Streams/text/name",
@@ -113,7 +125,10 @@
 		"icon": "",
 		"platforms": {
 			"facebook": "last_name"
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 0,
+		"adminLevel": 0
 	},
 	"Streams/user/emailAddress": {
 		"type": "Streams/text/emailAddress",
