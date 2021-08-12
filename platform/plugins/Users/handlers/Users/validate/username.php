@@ -20,7 +20,7 @@ function Users_validate_username($params)
 	if (strlen($username) < 4) {
 		throw new Q_Exception("usernames are at least 4 characters long", array('username'));
 	}
-	if (strlen($username) > 16) {
+	if (strlen($username) > (new Users_User())->maxSize_username()) {
 		throw new Q_Exception("usernames are at most 16 characters long", array('username'));
 	}
 	$match = preg_match('/^[a-zA-Z][a-zA-Z0-9-_]+$/', $username);
