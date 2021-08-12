@@ -4610,7 +4610,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 switchScreenType('video');
                 if(!_layoutTool.getLayoutGenerator('squaresGrid')) _layoutTool.setLayoutGenerator('squaresGrid', function (container, count) {
-                    return customLayouts.squaresGrid(new DOMRect(0, 0, 385, 812), count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
+                    return customLayouts.squaresGrid(new DOMRect(0, 0, 375, 812), count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
                 });
                 var elements = toggleScreensClass('squaresGrid');
                 log('renderSquaresGridMobile: elements', elements)

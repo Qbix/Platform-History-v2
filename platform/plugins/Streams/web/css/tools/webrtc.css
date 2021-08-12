@@ -729,12 +729,11 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
-@media only screen
-and (max-device-width : 320px) {
+/*@media only screen and (max-device-width : 320px) {
     .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list .Streams_webrtc_participants-identity .Users_avatar_icon {
         display: none;
     }
-}
+}*/
 .Streams_webrtc_mobile-screen.Q_horizontalOrientation .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant,
 .Streams_webrtc_mobile-screen.Q_verticalOrientation .Streams_webrtc_chat-participant {
     display: flex;
@@ -1943,6 +1942,7 @@ and (max-device-width : 320px) {
     padding: 10px 15px 11px 15px;
     background: #525252;
     border-right: 1px solid #383838;
+    height: 40px;
 }
 .Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-scenes-title-tab-active .Streams_webrtc_popup-scenes-title-tab-inner,
 .Streams_webrtc_popup-streaming-box .Streams_webrtc_popup-sources-title-tab-active .Streams_webrtc_popup-sources-title-tab-inner,
@@ -2421,6 +2421,7 @@ and (max-device-width : 320px) {
     animation: Q_wiggle 5s ease-in-out infinite, Q_grayscale 5s ease-in-out infinite;
     animation-delay: 5s;
     z-index: 999;
+    cursor: pointer;
 }
 .dialog-box .close-dialog-sign:before {
     /*content: "\02715";
@@ -2598,6 +2599,7 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start,
 .Streams_webrtc_streaming .Streams_webrtc_streaming_stop,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_settings,
 .Streams_webrtc_streaming .Streams_webrtc_streaming_embed {
     display: flex;
     justify-content: flex-end;
@@ -2612,7 +2614,10 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     min-width: 0;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start button {
-    margin-left: 20px;
+    margin-left: 10px;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings {
+    margin-right: 10px;
 }
 
 .Streams_webrtc_popup-box .dialog-btns-group,

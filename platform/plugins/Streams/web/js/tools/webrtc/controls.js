@@ -1684,6 +1684,11 @@
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
+                            var settingsBtn = document.createElement('BUTTON');
+                            settingsBtn.type = 'button';
+                            settingsBtn.className = 'Streams_webrtc_streaming_fb_settings Q_button';
+                            settingsBtn.innerHTML = Q.getObject("webrtc.settingsPopup.streamingSettings", tool.textes);
+
                             var privacySelect = document.createElement('SELECT');
                             var privacyBlock = document.createElement('OPTGROUP');
                             privacyBlock.label = Q.getObject("webrtc.settingsPopup.publishOnTimeline", tool.textes);
@@ -1700,7 +1705,6 @@
                             option3.innerHTML = Q.getObject("webrtc.settingsPopup.fbOnlyMeLiveAccess", tool.textes);
                             option3.name = 'privacy';
                             option3.value = 'SELF';
-
 
                             var startStreamingBtn = document.createElement('BUTTON');
                             startStreamingBtn.type = 'button';
@@ -1728,6 +1732,14 @@
                             var buttonsCon = document.createElement('DIV');
                             buttonsCon.className = 'Streams_webrtc_streaming_buttons';
 
+                            var settingsBtnActiveCon = document.createElement('DIV');
+                            settingsBtnActiveCon.className = 'Streams_webrtc_streaming_settings';
+
+                            var settingsBtnActive = document.createElement('BUTTON');
+                            settingsBtnActive.type = 'button';
+                            settingsBtnActive.className = 'Q_button';
+                            settingsBtnActive.innerHTML = Q.getObject("webrtc.settingsPopup.streamingSettings", tool.textes);
+
                             var getIframeBtnCon = document.createElement('DIV');
                             getIframeBtnCon.className = 'Streams_webrtc_streaming_embed';
 
@@ -1749,6 +1761,8 @@
                             facebookLiveEmbed.appendChild(facebookLiveUrl);
                             facebookLiveEmbed.appendChild(facebookLiveCopy);
                             streamingAndUploading.appendChild(facebookLiveItem);
+
+                            startStreamingBtnCon.appendChild(settingsBtn);
                             if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
                                 facebookLiveTtle.appendChild(facebookLiveTtleInput);
                                 fbStreamingStartSettings.appendChild(facebookLiveTtle);
@@ -1766,6 +1780,8 @@
                             startStreamingBtnCon.appendChild(startStreamingBtn);
                             fbStreamingStartSettings.appendChild(startStreamingBtnCon);
                             fbStreamingLiveSection.appendChild(facebookLiveEmbed);
+                            settingsBtnActiveCon.appendChild(settingsBtnActive);
+                            buttonsCon.appendChild(settingsBtnActiveCon);
                             getIframeBtnCon.appendChild(getIframeBtn);
                             buttonsCon.appendChild(getIframeBtnCon);
                             stopStreamingBtnCon.appendChild(stopStreamingBtn);
@@ -1905,6 +1921,15 @@
 
                                 });
                             })
+
+                            settingsBtn.addEventListener('click', function () {
+                                tool.advancedLiveStreamingBox.show();
+                            })
+
+                            settingsBtnActive.addEventListener('click', function () {
+                                tool.advancedLiveStreamingBox.show();
+                            })
+
                             getIframeBtn.addEventListener('click', function () {
                                 tool.fbLiveInterface.getIframe();
                             })
@@ -1953,10 +1978,23 @@
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
 
+                            var settingsBtn = document.createElement('BUTTON');
+                            settingsBtn.type = 'button';
+                            settingsBtn.className = 'Q_button';
+                            settingsBtn.innerHTML = Q.getObject("webrtc.settingsPopup.streamingSettings", tool.textes);
+
                             var startStreamingBtn = document.createElement('BUTTON');
                             startStreamingBtn.type = 'button';
                             startStreamingBtn.className = 'Q_button';
                             startStreamingBtn.innerHTML = 'Go Live';
+
+                            var streamingSettingsBtnCon = document.createElement('DIV');
+                            streamingSettingsBtnCon.className = 'Streams_webrtc_streaming_settings';
+
+                            var streamingSettingsBtn = document.createElement('BUTTON');
+                            streamingSettingsBtn.type = 'button';
+                            streamingSettingsBtn.className = 'Q_button';
+                            streamingSettingsBtn.innerHTML = Q.getObject("webrtc.settingsPopup.streamingSettings", tool.textes);
 
                             var stopStreamingBtnCon = document.createElement('DIV');
                             stopStreamingBtnCon.className = 'Streams_webrtc_streaming_stop';
@@ -1974,6 +2012,7 @@
                             rtmpStreamingSettings.appendChild(rtmpLiveStreamKey);
 
 
+                            startStreamingBtnCon.appendChild(settingsBtn);
                             startStreamingBtnCon.appendChild(startStreamingBtn);
                             rtmpStreamingSettings.appendChild(startStreamingBtnCon);
 
@@ -1984,6 +2023,8 @@
                             var buttonsCon = document.createElement('DIV');
                             buttonsCon.className = 'Streams_webrtc_streaming_buttons';
 
+                            streamingSettingsBtnCon.appendChild(streamingSettingsBtn);
+                            buttonsCon.appendChild(streamingSettingsBtnCon);
                             stopStreamingBtnCon.appendChild(stopStreamingBtn);
                             buttonsCon.appendChild(stopStreamingBtnCon);
                             rtmpLiveSection.appendChild(buttonsCon);
@@ -2030,6 +2071,14 @@
 
                             stopStreamingBtn.addEventListener('click', function () {
                                 tool.WebRTCLib.screensInterface.fbLive.endStreaming('custom');
+                            })
+
+                            settingsBtn.addEventListener('click', function () {
+                                tool.advancedLiveStreamingBox.show();
+                            })
+
+                            streamingSettingsBtn.addEventListener('click', function () {
+                                tool.advancedLiveStreamingBox.show();
                             })
 
                             tool.WebRTCLib.event.on('liveStreamingEnded', function () {

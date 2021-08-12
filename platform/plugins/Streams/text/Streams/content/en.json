@@ -246,6 +246,7 @@
             "publishToGroup": "Publish to group",
             "fbStartLive": "Go Live",
             "fbStopLive": "End Live",
+            "streamingSettings": "Settings",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
             "streamToRTMP": "Stream to custom RTMP"
