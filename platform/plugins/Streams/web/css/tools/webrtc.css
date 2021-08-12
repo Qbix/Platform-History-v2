@@ -27,7 +27,7 @@
     bottom:0;
     position: fixed;
     width:100%;
-    z-index: 9999999;
+    z-index: 9999999999;
 }
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_controls_tool {

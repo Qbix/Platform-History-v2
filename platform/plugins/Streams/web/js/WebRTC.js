@@ -4610,7 +4610,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 switchScreenType('video');
                 if(!_layoutTool.getLayoutGenerator('squaresGrid')) _layoutTool.setLayoutGenerator('squaresGrid', function (container, count) {
-                    return customLayouts.squaresGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
+                    return customLayouts.squaresGrid(new DOMRect(0, 0, 385, 812), count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
                 });
                 var elements = toggleScreensClass('squaresGrid');
                 log('renderSquaresGridMobile: elements', elements)
@@ -6602,29 +6602,34 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 squaresGrid: function (container, count) {
                     if(roomScreens.length == 0) return;
 
-                    var rectWidth = 90;
-                    var rectHeight = 90;
-                    var spaceBetween = 10;
                     var defaultSide = 'top-full';
 
-                    var containerRect = container.getBoundingClientRect();
+                    var containerRect = container.constructor.name != 'DOMRect' ? container.getBoundingClientRect() : container;
                     var parentWidth = containerRect.width;
                     var parentHeight = containerRect.height;
+                    var startFromX = container.constructor.name == 'DOMRect' ? container.x : 0;
+                    var startFromY = container.constructor.name == 'DOMRect' ? container.y : 0;
 
                     _layoutTool.state.currentGenerator = 'squaresGrid';
-                    if(_layoutTool.basicGridRects.length < count) {
-                        _layoutTool.basicGridRects = build(container, count);
-                    }
-
 
                     if(_layoutTool.currentRects.length == 0) {
                         _layoutTool.currentRects = build(container, count);
                     } else {
+
                         if(count > _layoutTool.currentRects.length) {
-                            var availableRects = addAndUpdate(container, count);
-                            _layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
+                            _layoutTool.basicGridRects = build(container, count);
+                            //var availableRects = addAndUpdate(container, count);
+                            //_layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
+                            let numOfEls = _layoutTool.basicGridRects.length - _layoutTool.currentRects.length;
+                            let last = _layoutTool.basicGridRects.slice(Math.max(_layoutTool.basicGridRects.length - numOfEls, 0))
+
+                            let updatedRects = updateRealToBasicGrid();
+                            _layoutTool.currentRects = updatedRects.concat(last);
+
                         } else if(count < _layoutTool.currentRects.length) {
-                            _layoutTool.currentRects = removeAndUpdate();
+                            _layoutTool.basicGridRects = build(container, count);
+                            _layoutTool.currentRects = updateRealToBasicGrid();
+                            //_layoutTool.currentRects = removeAndUpdate();
                         }
                     }
 
@@ -6636,25 +6641,35 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     function build(container, count) {
                         if(count == 1) {
+                            return buildGrid(container, count, 1)
+                        } else if(count == 2) {
                             return buildGrid(container, count, 2)
+                        } else if(count == 3 ) {
+
+                            var first = buildGrid(container, 1, 1)
+                            var second = buildGrid(container, count - 1, 2, first)
+                            return first.concat(second);
+
+                        } else if(count == 4) {
+
+                            return buildGrid(container, count, 2)
+
                         } else/* if(count == 2 || count == 3 || count == 4 || count == 6) */{
+
                             return buildGrid(container, count, 2)
+
                         }
+
+
                     }
 
-                    function buildGrid(container, count, perRow) {
-
-                        //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                        var parentWidth = containerRect.width;
-                        var parentHeight = containerRect.height;
-
+                    function buildGrid(container, count, perRow, existingRects) {
                         var align = getLayoutType();
 
                         var rectWidth = 90;
                         var rectHeight = 90;
-                        var spaceBetween = 10;
+                        var spaceBetween = 5;
 
-                        var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
                         if(perRow == 1) {
                             rectWidth = parentWidth - (spaceBetween * 2);
                             rectHeight = (rectWidth / 16) * 9;
@@ -6669,12 +6684,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             rectHeight = rectWidth / 4 * 3;
                         }
 
-                        if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
-                        var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
-                        if(count < totalRectsOnSides) totalRectsOnSides = count;
-
                         var rects = [];
-                        var currentRowRects = [];
 
                         var arr = [];
                         for(var i in rects){
@@ -6682,10 +6692,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                         rects = arr;
 
-                        var minX = spaceBetween;
-                        var maxX = parentWidth;
-                        var minY = spaceBetween;
-                        var maxY = parentHeight;
+                        var minX, maxX, minY, maxY;
+                        if(existingRects != null) {
+                            minX = Math.min.apply(Math, existingRects.map(function(o) { return o.x; }));
+                            maxX = Math.max.apply(Math, existingRects.map(function(o) { return o.x+o.width; }));
+                            minY = Math.min.apply(Math, existingRects.map(function(o) { return o.y; }));
+                            maxY = Math.max.apply(Math, existingRects.map(function(o) { return o.y + o.height; }));
+                        } else {
+                            minX = startFromX + spaceBetween;
+                            maxX = parentWidth;
+                            minY = startFromY + spaceBetween;
+                            maxY = spaceBetween;
+                        }
 
                         var latestRect;
                         var isNextNewLast = false;
@@ -6705,14 +6723,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             } else {
                                 if (align == 'top-full'){
                                     x = minX;
-                                    var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween: minY;
+                                    var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween : maxY + spaceBetween;
                                     y = startY;
                                 } else if (align == 'bottom-full'){
-                                    var startY = prevRect != null ? prevRect.y : maxY;
+                                    var startY = prevRect != null ? prevRect.y : parentHeight;
                                     y = startY - (rectHeight + spaceBetween);
                                     x = minX;
                                 }
-
+                            }
+                            if(i == count && rowItemCounter != perRow) {
+                                x = startFromX + ((parentWidth / 2) - (rectWidth / 2))
                             }
                             var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
 
@@ -6731,353 +6751,62 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return rects;
                     }
 
-                    function addAndUpdate(container, count, perRow) {
-                        var align = getLayoutType();
-
-                        var currentRects = _layoutTool.currentRects;
-
-                        var getRectsRows = function () {
-                            var rows = {};
-                            var none = [];
-                            var i, count = currentRects.length;
-                            for(i = 0; i < count; i++) {
-                                var rect = currentRects[i];
-
-                                if(rows[rect.top] == null) rows[rect.top] = [];
-
-                                rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
-                            }
-
-                            var rowsArray = [];
-                            for (var property in rows) {
-                                if (rows.hasOwnProperty(property)) {
-                                    none.push(rows[property]);
-                                    rowsArray.push(rows[property]);
-                                }
-                            }
-
-                            return {
-                                none: none,
-                                all: rowsArray
-                            };
-                        }
-
-                        var getAvailableRects = function (sortedRows) {
-                            var  rows = sortedRows.all;
-                            var availableRects = [];
-                            var availableRectsFullRow = [];
-
-                            var minX = spaceBetween;
-                            var maxX = parentWidth - spaceBetween;
-
-                            /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
-                            var maxWidth = maxX - minX;
-
-                            var i, rowsCount = rows.length;
-                            for(i = 0; i < rowsCount; i++) {
-                                var row = rows[i];
-                                var sampleRect = row[0];
-
-                                var maxRectsInCurrentRow = Math.floor(maxWidth / (sampleRect.rect.width));
-
-                                if(row.length != maxRectsInCurrentRow){
-                                    var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                    var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                    var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
-                                    for(r = 0; r < numRectsToAdd; r++){
-                                        var newRect;
-                                        if(r == 0) {
-                                            newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                        } else {
-                                            newRect = new DOMRect(prevRect.x + sampleRect.rect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                        }
-                                        availableRectsFullRow.push(newRect);
-
-                                        prevRect = newRect;
-                                    }
-                                }
-
-                            }
-
-                            availableRects = availableRects.concat(availableRectsFullRow);
-                            return availableRects;
-                        }
-
-                        var createNewRows = function(numRectsToAdd, rows, availableRects) {
-                            // var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                            var parentWidth = containerRect.width;
-                            var parentHeight = containerRect.height;
-
-                            var align = getLayoutType();
-
-                            var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
-                            var maxWidth = maxX - minX;
-                            var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
-                            var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
-
-                            var newRects = [];
-
-                            var createFullRows = function(count) {
-                                var allRects = currentRects.concat(newRects).concat(availableRects);
-                                var minX, maxX, rectsNum;
-                                maxX = parentWidth - spaceBetween;
-                                minX = spaceBetween;
-
-                                if(!perRow) {
-                                    var sampleRect = allRects[allRects.length - 1];
-                                    rectWidth = sampleRect.width;
-                                    rectHeight = sampleRect.height;
-                                    rectsNum = Math.floor((maxX-minX)/(rectWidth));
-                                } else {
-                                    rectWidth = (parentWidth - (spaceBetween * (perRow + 1))) / perRow;
-                                    rectHeight = rectWidth / 4 * 3;
-                                    rectsNum = Math.floor((maxX-minX)/(rectWidth));
-                                }
-
-                                if (align == 'top-full') {
-                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
-                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
-                                } else {
-                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
-                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
-                                }
-
-                                var rectsPerRow = rectsNum;
-
-                                var rects = []
-                                var latestRect, createNewRow;
-                                var isNextNewLast = false;
-                                var rowItemCounter = 1;
-
-                                var i;
-                                for (i = 1; i <= count; i++) {
-                                    //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-                                    var currentRow = isNextNewLast  ? rectsPerRow : Math.ceil(i/rectsPerRow);
-                                    var isNextNewRow = rowItemCounter == rectsPerRow;
-                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rectsPerRow;
-
-                                    var x,y
-                                    if(rowItemCounter > 1) {
-                                        y = latestRect.y;
-                                        x = latestRect.x + (rectWidth + spaceBetween);
-                                    } else if(createNewRow) {
-                                        if(align == 'bottom-full') {
-                                            y =  latestRect.y - (rectHeight + spaceBetween);
-                                        } else if (align == 'top-full') {
-                                            y =  latestRect.y + latestRect.height + spaceBetween;
-                                        }
-                                        x = minX;
-                                        createNewRow = false;
-                                    } else {
-                                        if (align == 'top-full'){
-                                            y = maxY + spaceBetween;
-                                        } else if (align == 'bottom-full'){
-                                            y = minY - (rectHeight + spaceBetween);
-                                        }
-                                        x = minX;
-                                    }
-                                    var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                                    rects.push({side:null, rect: rect});
-
-                                    if(rowItemCounter == rectsPerRow) {
-                                        createNewRow = true;
-                                        rowItemCounter = 1;
-                                    } else rowItemCounter++;
-
-                                }
-
-                                return rects.map(function(rectObj){
-                                    return rectObj.rect;
-                                });
-                            }
-
-
-                            newRects = createFullRows(numRectsToAdd);
-
-                            return newRects;
-                        }
-
-                        var rectsToAddNum = count - _layoutTool.currentRects.length;
-
-                        var rows = getRectsRows();
-                        var availableRects = getAvailableRects(rows);
-                        var newRows;
-                        if(rectsToAddNum > availableRects.length) {
-                            rectsToAddNum = (rectsToAddNum - availableRects.length);
-                            newRows = createNewRows(rectsToAddNum, rows, availableRects);
-                            availableRects = availableRects.concat(newRows);
-                        } else if(availableRects.length > rectsToAddNum) {
-                            availableRects = availableRects.slice(0, rectsToAddNum);
-                        }
-
-                        return availableRects;
-                    }
-
-                    function compareLayoutStates(prevRects, newRects) {
-                        var diffEls = [];
-                        var count = prevRects.length;
-
-                        var findInCurrentLayout = function (prevLayoutRect) {
-                            var count = newRects.length;
-                            for (var c = 0; c < count; c++) {
-                                var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
-                                var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
-
-                                if((diffTop + diffLeft) / 2 < 2) {
-                                    return true;
-                                }
-                            }
-
-                            return false;
-                        }
-
-                        for (let i = 0; i < count; i++) {
-                            var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
-                            if(!findInCurrentLayout(prevLayoutRect)) {
-                                diffEls.push(prevLayoutRect);
-                            }
-                        }
-
-                        return diffEls;
-                    }
-
-                    function changeRectPosition(oldRect, newRect, rects) {
-                        var i, count = rects.length;
-                        for (i = 0; i < count; i++) {
-                            if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
-                                rects[i] = newRect;
-                                break;
-                            }
-                        }
-                        return rects;
-                    }
-
-                    function findClosest(diffRect, rects) {
-                        if(!diffRect) return null;
-                        var closestOnTop = findClosesVerticallyRect(diffRect, rects);
-
-                        if(closestOnTop != null) {
-                            return closestOnTop
-                        } else {
-                            var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
-
-                            if(closestOnSide != null) {
-                                return closestOnSide;
-                            }
-                        }
-                        return null;
-                    }
-
-
-                    function findClosesVerticallyRect(rect, rects) {
-                        var distance = function (x1,y1,x2,y2) {
-                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                        }
-
-                        var align = getLayoutType();
-
-                        var nextRow;
-                        if(align == 'bottom-full') {
-                            nextRow = rects.filter(function (r) {
-                                if (r.top < rect.top) return true;
-                                return false;
-                            })
-
-                        } else if (align == 'top-full') {
-                            nextRow = rects.filter(function (r) {
-                                if (r.top > rect.top) return true;
-                                return false;
-                            })
-                        }
-
-                        if(nextRow.length != 0) {
-                            return nextRow.reduce(function (prev, current) {
-                                return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
-                                //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
-                            })
-                        } else {
-                            return null;
-                        }
-                    }
-
-                    function findClosesHorizontalyRect(rect, rects) {
-                        var distance = function (x1,y1,x2,y2) {
-                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                        }
-
-                        var currentRowRect = rects.filter(function (r) {
-                            if (r.top == rect.top && r.left > rect.left) {
-                                return true
-                            }
-                            return false;
-                        })
-
-                        if(currentRowRect.length != 0) {
-                            var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
-                                return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
-                                //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
-                            })
-
-                            return closestHorizontaly;
-                        }
-
-                        return null;
-                    }
-
-                    function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
-                        var closest;
-                        if(skipRects != null) {
-                            closest = findClosest(spaceToFill, rects.filter(function(o, i) {
-                                var exclude = false;
-                                for(let r in skipRects) {
-                                    if(skipRects[r].x == o.x && skipRects[r].y == o.y
-                                        && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
-
-                                        exclude = true;
-                                        break;
-                                    }
-                                }
-
-                                return (exclude == false ? true : false);
-                            }));
-                        } else {
-                            closest = findClosest(spaceToFill, rects);
-                        }
-
-                        if(closest != null) {
-                            changeRectPosition(closest, spaceToFill, rects);
-                            return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
-                        } else {
-                            return rects;
-                        }
-                    }
-
-                    function removeAndUpdate() {
-                        var elementRects = [];
+                    function updateRealToBasicGrid() {
 
                         var actualLayoutRects = []
                         for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
                             if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
-                                actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
+                                actualLayoutRects.push({
+                                    key: actualLayoutRects.length,
+                                    rect: _layoutTool.state.currentMappedRects[i].rect
+                                });
                             }
                         }
 
-                        var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
+                        let actualLayoutRectsClone = [...actualLayoutRects];
 
-                        var resultLayoutRects;
+                        for(let r in _layoutTool.basicGridRects) {
+                            let rect = _layoutTool.basicGridRects[r];
 
-                        if(diff.length != 0) {
+                            let closestIndex = closest(rect, actualLayoutRectsClone);
 
-                            for(var s in diff) {
-                                resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
+                            if(closestIndex == null) continue;
+
+                            actualLayoutRects[closestIndex].rect.x = rect.x;
+                            actualLayoutRects[closestIndex].rect.y = rect.y;
+                            actualLayoutRects[closestIndex].rect.width = rect.width;
+                            actualLayoutRects[closestIndex].rect.height = rect.height;
+                            //rectsToSkip.push(closestIndex);
+
+                            for(let c in actualLayoutRectsClone) {
+                                if(actualLayoutRectsClone[c].key == closestIndex) {
+                                    actualLayoutRectsClone.splice(c, 1);
+                                }
+
                             }
-                        } else resultLayoutRects = elementRects;
+                        }
 
-                        return resultLayoutRects;
+                        return actualLayoutRects.map(function (o) {
+                            return o.rect;
+                        })
+
+                        function closest(rect, rects) {
+                            var distance = function (x1,y1,x2,y2) {
+                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                            }
+
+                            if(rects.length != 0) {
+
+                                let closestRect = rects.reduce(function (prev, current, index) {
+                                    return (distance(current.rect.left, current.rect.top + current.rect.height, rect.left, rect.top + rect.height) < distance(prev.rect.left, prev.rect.top + prev.rect.height, rect.left, rect.top + rect.height)) ? current : prev;
+                                })
+
+                                return closestRect.key;
+
+                            } else {
+                                return null;
+                            }
+                        }
                     }
                 }
             }
