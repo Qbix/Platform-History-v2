@@ -2447,6 +2447,33 @@ Q.openUrl = function (url, name = "_blank") {
 };
 
 /**
+ * Get Unix timestamp as argument and return json of days, hours, minutes, seconds elapsed from current time to this timestamp.
+ * @static
+ * @method timeRemaining
+ * @param {integer} timestamp Unix timestamp in milliseconds
+ * @return {Object} contains properties "days", "hours", "minutes", "seconds"
+ */
+Q.timeRemaining = function (timestamp) {
+	var seconds = (new Date(timestamp) - Date.now()) / 1000;
+	if (seconds < 0) {
+		return {
+			days: 0,
+			hours: 0,
+			minutes: 0,
+			seconds: 0
+		}
+	}
+	var result = {};
+	result.days = Math.floor(seconds / 60 / 60 / 24);
+	seconds -= result.days * 60 * 60 * 24;
+	result.hours = Math.floor(seconds / 60 / 60);
+	seconds -= result.hours * 60 * 60;
+	result.minutes = Math.floor(seconds / 60);
+	result.seconds = parseInt(seconds - result.minutes * 60);
+	return result;
+};
+
+/**
  * Wraps a callable in a Q.Event object
  * @class Q.Event
  * @namespace Q
@@ -13719,6 +13746,7 @@ Q.onJQuery.add(function ($) {
 		"Q/panel": "{{Q}}/js/tools/panel.js",
 		"Q/ticker": "{{Q}}/js/tools/ticker.js",
 		"Q/timestamp": "{{Q}}/js/tools/timestamp.js",
+		"Q/countdown": "{{Q}}/js/tools/countdown.js",
 		"Q/bookmarklet": "{{Q}}/js/tools/bookmarklet.js",
 		"Q/columns": "{{Q}}/js/tools/columns.js",
 		"Q/drawers": "{{Q}}/js/tools/drawers.js",
