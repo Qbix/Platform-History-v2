@@ -119,7 +119,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			});
 			var waitFor = Q.copy(state.ordering);
 			if (!state.skipSelect) {
-				waitFor.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
+				waitFor = waitFor.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
 			}
 			pipe.add(waitFor, 1, function (params, subjects) {
 				tool.$('.Streams_interest_title').removeClass('Q_selected');
