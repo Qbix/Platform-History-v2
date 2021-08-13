@@ -68,6 +68,7 @@
 }
 
 .carousel-wrap .drag-container figcaption {
+	pointer-events: none;
     font-size: 14px;
     text-shadow: 1px 1px 2px white;
     color: #333;
