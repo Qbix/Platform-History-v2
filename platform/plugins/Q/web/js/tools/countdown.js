@@ -33,7 +33,7 @@ Q.Tool.define('Q/countdown', function q_countdown () {
 			}	
 		}
 
-		Q.handle(state.onRefresh, tool.element);
+		Q.handle(state.onRefresh, tool);
 	}, 1000);
 }, {
 	timestamp: null,
