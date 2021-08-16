@@ -231,29 +231,128 @@
             if(count == 2) return simpleGridBasedOnRowsNum(count, 1, size);
         },
         tiledHorizontalMobile: function (container, count) {
-            var size;
-            if(container.width != null && container.height != null) {
-                size = {parentWidth:container.width, parentHeight:container.height};
-            } else {
-                var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
-            }
-            switch (count) {
-                case 1:
-                    return simpleGrid(count, size, 1);
-                case 2:
-                    return simpleGrid(count, size, 2);
-                case 3:
-                    return simpleGrid(count, size, 3);
-                case 4:
-                    return simpleGrid(count, size, 2);
-                case 5:
-                    return simpleGridBasedOnRowsNum(count, 3, size)
-                case 6:
-                    return simpleGrid(count, size, 2);
-                default:
-                    return simpleGrid(count, size, 2);
+            var containerRect = container.constructor.name != 'DOMRect' ? container.getBoundingClientRect() : container;
+            var parentWidth = containerRect.width;
+            var parentHeight = containerRect.height;
+            var startFromX = container.constructor.name == 'DOMRect' ? container.x : 0;
+            var startFromY = container.constructor.name == 'DOMRect' ? container.y : 0;
 
+            _layoutTool.state.currentGenerator = 'squaresGrid';
+
+            if(_layoutTool.currentRects.length == 0) {
+                _layoutTool.currentRects = build(container, count);
+            } else {
+
+                if(count > _layoutTool.currentRects.length) {
+                    _layoutTool.basicGridRects = build(container, count);
+                    //var availableRects = addAndUpdate(container, count);
+                    //_layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
+                    let numOfEls = _layoutTool.basicGridRects.length - _layoutTool.currentRects.length;
+                    let last = _layoutTool.basicGridRects.slice(Math.max(_layoutTool.basicGridRects.length - numOfEls, 0))
+
+                    let updatedRects = updateRealToBasicGrid();
+                    _layoutTool.currentRects = updatedRects.concat(last);
+
+                } else if(count < _layoutTool.currentRects.length) {
+                    _layoutTool.basicGridRects = build(container, count);
+                    _layoutTool.currentRects = updateRealToBasicGrid();
+                    //_layoutTool.currentRects = removeAndUpdate();
+                }
+            }
+
+            return  _layoutTool.currentRects;
+
+            function build() {
+                var size;
+                if(container.width != null && container.height != null) {
+                    size = {parentWidth:container.width, parentHeight:container.height};
+                } else {
+                    var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                    size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
+                }
+
+                switch (count) {
+                    case 1:
+                        return simpleGrid(count, size, 1);
+                    case 2:
+                        return simpleGridBasedOnRowsNum(count, 1, size)
+                    case 3:
+                        return simpleGrid(count, size, 3);
+                    case 4:
+                        return simpleGrid(count, size, 2);
+                    case 5:
+                        return simpleGridBasedOnRowsNum(count, 3, size)
+                    case 6:
+                        return simpleGrid(count, size, 2);
+                    default:
+                        return simpleGrid(count, size, 2);
+
+                }
+            }
+
+            function updateRealToBasicGrid() {
+
+                var actualLayoutRects = []
+                for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
+                    if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
+                        actualLayoutRects.push({
+                            key: actualLayoutRects.length,
+                            rect: _layoutTool.state.currentMappedRects[i].rect
+                        });
+                    }
+                }
+
+                let actualLayoutRectsClone = [...actualLayoutRects];
+
+                // for(let r = _layoutTool.basicGridRects.length - 1; r >= 0 ; r--){
+                for(let r in _layoutTool.basicGridRects) {
+                    let rect = _layoutTool.basicGridRects[r];
+
+                    let closestIndex = closest(rect, actualLayoutRectsClone);
+
+                    console.log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                    console.log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                    if(actualLayoutRects[closestIndex]) {
+                        console.log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].rect.x, actualLayoutRects[closestIndex].rect.y, actualLayoutRects[closestIndex].rect.width, actualLayoutRects[closestIndex].rect.height);
+                    }
+
+                    if(closestIndex == null) continue;
+
+                    actualLayoutRects[closestIndex].rect.x = rect.x;
+                    actualLayoutRects[closestIndex].rect.y = rect.y;
+                    actualLayoutRects[closestIndex].rect.width = rect.width;
+                    actualLayoutRects[closestIndex].rect.height = rect.height;
+                    //rectsToSkip.push(closestIndex);
+
+                    for(let c in actualLayoutRectsClone) {
+                        if(actualLayoutRectsClone[c].key == closestIndex) {
+                            actualLayoutRectsClone.splice(c, 1);
+                        }
+
+                    }
+                }
+
+                return actualLayoutRects.map(function (o) {
+                    return o.rect;
+                })
+
+                function closest(rect, rects) {
+                    var distance = function (x1,y1,x2,y2) {
+                        return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                    }
+
+                    if(rects.length != 0) {
+
+                        let closestRect = rects.reduce(function (prev, current, index) {
+                            return (distance(current.rect.left + (current.rect.width / 2), current.rect.top + (current.rect.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2)) < distance(prev.rect.left + (prev.rect.width / 2), prev.rect.top + (prev.rect.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2))) ? current : prev;
+                        })
+
+                        return closestRect.key;
+
+                    } else {
+                        return null;
+                    }
+                }
             }
         },
         maximizedVerticalMobile: function (container, count) {
@@ -719,7 +818,7 @@
             isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
 
             if(rowItemCounter == 1) {
-                var y = (prevRect.y + prevRect.height);
+                var y = (prevRect.height) * (currentRow - 1);
                 var x = 0;
             } else {
                 var y = prevRect.y;
