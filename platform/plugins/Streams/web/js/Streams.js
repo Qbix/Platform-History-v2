@@ -3329,6 +3329,7 @@ Stream.leave.onError = new Q.Event();
  * @param {Function} [callback] receives (err, participant) as parameters
  * @param {Object} [options] optional object that can include:
  *   @param {bool} [options.device] Whether to subscribe device when user subscribed to some stream
+ *   @param {array} [options.slots] Used to attach additional slot names to request
  */
 Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback, options) {
 	if (!Q.plugins.Users.loggedInUser) {
@@ -3337,14 +3338,21 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 
 	options = Q.extend({}, Stream.subscribe.options, options);
 
-	var slotName = "participant";
+	var slotNames = ["participant"];
+	if (Q.isArrayLike(options.slots)) {
+		// concatenate two arrays
+		slotNames = slotNames.concat(options.slots);
+
+		// unique array elements
+		slotNames = slotNames.filter((item, pos) => slotNames.indexOf(item) === pos);
+	}
 	var fields = {"publisherId": publisherId, "name": streamName};
 	var baseUrl = Q.baseUrl({
 		"publisherId": publisherId,
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/subscribe', [slotName], function (err, data) {
+	Q.req('Streams/subscribe', slotNames, function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -3357,7 +3365,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 			[participant.publisherId, participant.streamName, participant.userId],
 			0, participant, [err, participant]
 		);
-		callback && callback.call(participant, err, participant || null);
+		callback && callback.call(participant, err, participant || null, data);
 		_refreshUnlessSocket(publisherId, streamName);
 
 		// check whether subscribe device and subscribe if yes
