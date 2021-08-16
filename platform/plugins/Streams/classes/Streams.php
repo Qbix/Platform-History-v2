@@ -2262,6 +2262,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
+	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
@@ -2389,6 +2390,9 @@ abstract class Streams extends Base_Streams
 			$query = $query->where(new Db_Expression(
 				"SUBSTRING($col, -1, 1) != '/'"
 			));
+		}
+		if (Q::ifset($options, "ignoreCache", false)) {
+			$query->ignoreCache();
 		}
 		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
