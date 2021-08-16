@@ -11,4 +11,16 @@ function Streams_subscribe_post()
 	if ($participant = $stream->subscribe()) {
 		Q_Response::setSlot('participant', $participant->exportArray());
 	}
+
+	// if skit totalSubscribed requested, calculate total subscribed and return
+	if (Q_Request::slotName("totalSubscribed")) {
+		$subscribers = Streams_Participant::select("count(*) as res")->where(array(
+			"publisherId" => $publisherId,
+			"streamName" => $streamName,
+			"userId !=" => $publisherId,
+			"subscribed" => "yes"
+		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
+
+		Q_Response::setSlot("totalSubscribed", $subscribers);
+	}
 }
