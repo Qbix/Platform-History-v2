@@ -8844,9 +8844,11 @@ window.WebRTCconferenceLib = function app(options){
         var currentAudioOutputMode = 'speaker';
 
         var audioInputDevices = [];
+        var audioOutputDevices = [];
         var videoInputDevices = [];
         var currentCameraDevice;
-        var currentAudioDevice;
+        var currentAudioInputDevice;
+        var currentAudioOutputDevice;
         var frontCameraDevice;
 
         function loadDevicesList(mediaDevicesList, reload) {
@@ -8870,7 +8872,7 @@ window.WebRTCconferenceLib = function app(options){
                             }
                         }
                     }
-                    if (device.kind.indexOf('audio') != -1) {
+                    if (device.kind == 'audioinput') {
                         audioInputDevices.push(device);
                         for (var x in localParticipant.tracks) {
                             var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
@@ -8878,7 +8880,21 @@ window.WebRTCconferenceLib = function app(options){
                             if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
                                 if (mediaStreamTrack.enabled == true
                                     && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
-                                    currentAudioDevice = device;
+                                    currentAudioInputDevice = device;
+                                }
+                            }
+                        }
+                    } else if (device.kind == 'audiooutput') {
+                        audioOutputDevices.push(device);
+                    } else if (device.kind.indexOf('audio') != -1) {
+                        audioInputDevices.push(device);
+                        for (var x in localParticipant.tracks) {
+                            var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+
+                            if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
+                                if (mediaStreamTrack.enabled == true
+                                    && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
+                                    currentAudioInputDevice = device;
                                 }
                             }
                         }
@@ -8894,7 +8910,7 @@ window.WebRTCconferenceLib = function app(options){
                 });
             }
             log('currentCameraDevice', currentCameraDevice);
-            log('currentAudioDevice', currentAudioDevice);
+            log('currentAudioInputDevice', currentAudioInputDevice);
             log('frontCameraDevice', frontCameraDevice);
         }
 
@@ -8902,8 +8918,12 @@ window.WebRTCconferenceLib = function app(options){
             return videoInputDevices;
         }
 
-        function getAudioDevices() {
+        function getAudioInputDevices() {
             return audioInputDevices;
+        }
+
+        function getAudioOutputDevices() {
+            return audioOutputDevices;
         }
 
         function getCurrentCameraDevice() {
@@ -8914,8 +8934,8 @@ window.WebRTCconferenceLib = function app(options){
             return frontCameraDevice;
         }
 
-        function getCurrentAudioDevice() {
-            return currentAudioDevice;
+        function getCurrentAudioInputDevice() {
+            return currentAudioInputDevice;
         }
 
         function toggleCameras(camera, callback, failureCallback) {
@@ -9100,6 +9120,127 @@ window.WebRTCconferenceLib = function app(options){
                 console.error('trackPublication ERROR' + err.name + ": " + err.message);
             });
 
+        }
+
+        function toggleAudioInputs(audioDevice, callback, failureCallback) {
+            log('toggleAudioInputs: audioDevice = ' + audioDevice)
+            app.eventBinding.sendDataTrackMessage("beforeAudioInputToggle");
+
+            var i, device, deviceToSwitch;
+
+            for(i = 0; device = audioInputDevices[i]; i++){
+
+                if(device == currentAudioInputDevice) {
+                    if(i != audioInputDevices.length-1){
+                        deviceToSwitch = audioInputDevices[i+1];
+                    } else deviceToSwitch = audioInputDevices[0];
+                    break;
+                }
+
+                if(deviceToSwitch == null) audioInputDevices[0];
+            };
+
+            var constrains
+            if(audioDevice != null && audioDevice.deviceId != null && audioDevice.deviceId != '') {
+                constrains = {deviceId: {exact: audioDevice.deviceId}};
+                if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
+                    constrains = {deviceId: audioDevice.deviceId}
+                }
+            } else if(audioDevice != null && audioDevice.groupId != null && audioDevice.groupId != '') {
+                constrains = {groupId: {exact: audioDevice.groupId}};
+                if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
+                    constrains = {groupId: audioDevice.groupId}
+                }
+            } else if(deviceToSwitch != null && deviceToSwitch.deviceId != null && deviceToSwitch.deviceId != '') {
+                constrains = {groupId: {exact: deviceToSwitch.groupId}};
+                if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) {
+                    constrains = {groupId: deviceToSwitch.groupId}
+                }
+            }
+
+            var toggleAudioInputs = function(audioStream) {
+                var audioTrack = audioStream.getAudioTracks()[0];
+                var trackToAttach = new Track();
+                trackToAttach.sid = audioTrack.id;
+                trackToAttach.mediaStreamTrack = audioTrack;
+                trackToAttach.kind = audioTrack.kind;
+                trackToAttach.isLocal = true;
+                trackToAttach.stream = audioStream;
+
+                var currentAudioTracks;
+                if(options.showScreenSharingInSeparateScreen) {
+                    currentAudioTracks = localParticipant.tracks.filter(function (t) {
+                        return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                    });
+                } else {
+                    currentAudioTracks = localParticipant.tracks.filter(function (t) {
+                        return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                    });
+                }
+                log('toggleAudioInputs: currentAudioTracks ' + currentAudioTracks.length);
+                log('toggleAudioInputs: micIsEnabled ' + app.conferenceControl.micIsEnabled());
+
+                if(app.conferenceControl.micIsEnabled() && currentAudioTracks.length != 0) {
+                    log('toggleAudioInputs: replace track');
+                    if(!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) app.conferenceControl.replaceTrack(audioTrack);
+                    app.screensInterface.attachTrack(trackToAttach, localParticipant);
+                } else {
+                    log('toggleAudioInputs: add track');
+
+                    app.screensInterface.attachTrack(trackToAttach, localParticipant);
+                    app.conferenceControl.enableAudio();
+
+                    app.event.dispatch('audioInputToggled');
+                }
+
+                if(camera != null && camera.deviceId != null && camera.deviceId != '') {
+                    currentAudioInputDevice = audioInputDevices.filter(function (d) {
+                        return d.deviceId == camera.deviceId;
+                    })[0];
+                } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                    currentAudioInputDevice = audioInputDevices.filter(function (d) {
+                        return d.groupId == camera.groupId;
+                    })[0];
+                } else currentAudioInputDevice = deviceToSwitch;
+            }
+
+            var i;
+            var tracksNum = localParticipant.tracks.length - 1;
+            for (i = tracksNum; i >= 0; i--) {
+                if(localParticipant.tracks[i].kind == 'video') continue;
+                if(localParticipant.tracks[i].mediaStreamTrack.readyState == 'ended' || localParticipant.tracks[i].mediaStreamTrack.enabled == false) continue;
+                localParticipant.tracks[i].mediaStreamTrack.stop();
+                localParticipant.tracks[i].mediaStreamTrack.dispatchEvent(new Event("ended"));
+
+            }
+
+            if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) {
+                cordova.plugins.iosrtc.getUserMedia({
+                    'audio': constrains,
+                    'video': false
+                }).then(function (audioStream) {
+                    log('toggleAudioInputs: iosrtc: got stream', audioStream)
+
+                    toggleAudioInputs(audioStream);
+                }).catch(function (error) {
+                    console.error(error.name + ': ' + error.message);
+                    if(failureCallback != null) failureCallback(error);
+                });
+            } else {
+                navigator.mediaDevices.getUserMedia({
+                    'audio': constrains,
+                    'video': false
+                }).then(function (audioStream) {
+                    log('toggleAudioInputs: got stream', audioStream)
+
+                    toggleAudioInputs(audioStream);
+
+                })
+                    .catch(function (error) {
+                        console.error(error.name + ': ' + error.message);
+                        if(failureCallback != null) failureCallback(error);
+                    });
+            }
         }
 
         function enableCamera(callback, failureCallback) {
@@ -9984,6 +10125,7 @@ window.WebRTCconferenceLib = function app(options){
             disableAudio: disableAudioTracks,
             toggleVideo: toggleVideo,
             toggleAudio: toggleAudio,
+            toggleAudioInputs: toggleAudioInputs,
             toggleCameras: toggleCameras,
             requestCamera: enableCamera,
             requestMicrophone: enableMicrophone,
@@ -9998,10 +10140,11 @@ window.WebRTCconferenceLib = function app(options){
             speakerIsEnabled: speakerIsEnabled,
             loadDevicesList: loadDevicesList,
             videoInputDevices: getVideoDevices,
-            audioInputDevices: getAudioDevices,
+            audioInputDevices: getAudioInputDevices,
+            audioOutputDevices: getAudioOutputDevices,
             currentCameraDevice: getCurrentCameraDevice,
             frontCameraDevice: getFrontCameraDevice,
-            currentAudioDevice: getCurrentAudioDevice
+            currentAudioInputDevice: getCurrentAudioInputDevice
         }
     }())
 
