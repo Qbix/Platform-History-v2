@@ -1595,6 +1595,21 @@ window.WebRTCconferenceLib = function app(options){
                 remoteStreamEl.load();
                 remoteStreamEl.playsInline = true;
                 remoteStreamEl.setAttribute('webkit-playsinline', true);
+
+                var speaker = app.conferenceControl.currentAudioOutputDevice();
+                if(speaker != null && typeof remoteStreamEl.sinkId !== 'undefined') {
+                    remoteStreamEl.setSinkId(speaker.deviceId)
+                        .then(() => {
+                            console.log(`createTrackElement: Success, audio output device attached: ${speaker.deviceId}`);
+                        })
+                        .catch(error => {
+                            let errorMessage = error;
+                            if (error.name === 'SecurityError') {
+                                errorMessage = `createTrackElement: You need to use HTTPS for selecting audio output device: ${error}`;
+                            }
+                            console.error(errorMessage);
+                        });
+                }
             }
 
             if(participant.isLocal) {
@@ -8885,6 +8900,9 @@ window.WebRTCconferenceLib = function app(options){
                             }
                         }
                     } else if (device.kind == 'audiooutput') {
+                        if(currentAudioOutputDevice == null && (device.deviceId == 'default' || device.label == 'default')) {
+                            currentAudioOutputDevice = device;
+                        }
                         audioOutputDevices.push(device);
                     } else if (device.kind.indexOf('audio') != -1) {
                         audioInputDevices.push(device);
@@ -8936,6 +8954,10 @@ window.WebRTCconferenceLib = function app(options){
 
         function getCurrentAudioInputDevice() {
             return currentAudioInputDevice;
+        }
+
+        function getCurrentAudioOutputDevice() {
+            return currentAudioOutputDevice;
         }
 
         function toggleCameras(camera, callback, failureCallback) {
@@ -9239,8 +9261,34 @@ window.WebRTCconferenceLib = function app(options){
                     .catch(function (error) {
                         console.error(error.name + ': ' + error.message);
                         if(failureCallback != null) failureCallback(error);
-                    });
+                    });680
             }
+        }
+        
+        function toggleAudioOutputs(outputDevice) {
+
+            for(let p in roomParticipants) {
+                let audioTracks = roomParticipants[p].audioTracks();
+                for(let t in audioTracks) {
+                    if(audioTracks[t].trackEl == null) continue;
+                    if (typeof audioTracks[t].trackEl.sinkId == 'undefined') {
+                        console.warn('Browser does not support output device selection.');
+                        break;
+                    }
+                    audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
+                        .then(() => {
+                            console.log(`Success, audio output device attached: ${outputDevice.deviceId}`);
+                        })
+                        .catch(error => {
+                            let errorMessage = error;
+                            if (error.name === 'SecurityError') {
+                                errorMessage = `You need to use HTTPS for selecting audio output device: ${error}`;
+                            }
+                            console.error(errorMessage);
+                        });
+                }
+            }
+            currentAudioOutputDevice = outputDevice;
         }
 
         function enableCamera(callback, failureCallback) {
@@ -10126,6 +10174,7 @@ window.WebRTCconferenceLib = function app(options){
             toggleVideo: toggleVideo,
             toggleAudio: toggleAudio,
             toggleAudioInputs: toggleAudioInputs,
+            toggleAudioOutputs: toggleAudioOutputs,
             toggleCameras: toggleCameras,
             requestCamera: enableCamera,
             requestMicrophone: enableMicrophone,
@@ -10144,7 +10193,8 @@ window.WebRTCconferenceLib = function app(options){
             audioOutputDevices: getAudioOutputDevices,
             currentCameraDevice: getCurrentCameraDevice,
             frontCameraDevice: getFrontCameraDevice,
-            currentAudioInputDevice: getCurrentAudioInputDevice
+            currentAudioInputDevice: getCurrentAudioInputDevice,
+            currentAudioOutputDevice: getCurrentAudioOutputDevice
         }
     }())
 

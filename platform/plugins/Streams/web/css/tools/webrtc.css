@@ -2468,9 +2468,21 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 .Streams_webrtc_popup-box .Q_dialog_content {
     overflow: hidden;
 }
+
+.Streams_webrtc_popup-box .Streams_webrtc_choose-output-device-con {
+    margin-top:15px;
+}
+.Streams_webrtc_popup-box .Streams_webrtc_choose-device-title {
+    padding: 0 15px 0 15px;
+}
 .Streams_webrtc_popup-box .Streams_webrtc_choose-device,
 .dialog-box .Streams_webrtc_choose-device {
     padding: 15px;
+}
+
+.Streams_webrtc_popup-box .Streams_webrtc_choose-input-audio-con .Streams_webrtc_choose-device,
+.Streams_webrtc_popup-box .Streams_webrtc_choose-output-device-con .Streams_webrtc_choose-device {
+    padding-top:5px;
 }
 .Streams_webrtc_streaming_recording {
     border-top: 1px solid #ccc;
