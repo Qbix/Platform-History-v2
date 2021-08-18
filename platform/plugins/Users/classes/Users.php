@@ -1507,8 +1507,9 @@ abstract class Users extends Base_Users
 			$filename = $directory.DS.$basename;
 			$info = pathinfo($filename);
 			$parts = explode('x', $info['filename']);
-			if (count($parts) === 1) {
-				$width = $height = $parts[0];
+			if ($parts[0] && $parts[1]) {
+				$width = $parts[0];
+				$height = $parts[1];
 			} else if (!$parts[0]) {
 				$width = $height = $parts[1];
 			} else if (!$parts[1]) {
@@ -1567,7 +1568,7 @@ abstract class Users extends Base_Users
 				if (count($parts) === 1) {
 					$w = $h = $parts[0];
 				} else {
-					if (!$parts[0] and $parts[1]) {
+					if ($parts[0] && $parts[1]) {
 						$w = $sw;
 						$h = $sh;
 					} else if (!$parts[0]) {
