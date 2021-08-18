@@ -38,6 +38,7 @@ function Streams_inplace_tool($options)
 		$stream = $options['stream'];
 	}
 	$inplaceType = Q::ifset($options, 'inplaceType', 'textarea');
+	$URLtoLink = Q::ifset($options, 'URLtoLink', false);
 	$inplace = array(
 		'action' => $stream->actionUrl(),
 		'method' => 'PUT',
@@ -75,9 +76,11 @@ function Streams_inplace_tool($options)
 		default:
 			return "inplaceType must be 'textarea' or 'text'";
 	}
+
 	$toolOptions = array(
 		'publisherId' => $stream->publisherId,
-		'streamName' => $stream->name
+		'streamName' => $stream->name,
+		'URLtoLink' => $URLtoLink
 	);
 	Q::take($options, array('attribute', 'field', 'convert'), $toolOptions);
 	Q_Response::setToolOptions($toolOptions);

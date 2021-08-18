@@ -18,6 +18,7 @@
  *   @param {String} [options.field] Optional, name of a field to change instead of the content of the stream
  *   @param {String} [options.attribute] Optional, name of an attribute to change instead of a field.
  *   @param {Object} [options.inplace] Additional fields to pass to the child Q/inplace tool, if any
+ *   @param {boolean} [options.URLtoLink=false] If true, replace all URLs with links.
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
  *     call the callback with (err, stream). If omitted, then the tool doesn't render.
@@ -29,7 +30,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $te = $(tool.element);
-	var container = $('.Q_inplace_tool_container', $te);
+	var $container = $('.Q_inplace_tool_container', $te);
 	
 	// if activated with JS should have following options:
 	//  - stream: a Streams.Stream object that was already constructed
@@ -55,45 +56,61 @@ Q.Tool.define("Streams/inplace", function (options) {
 			} else if (!tool.$static) {
 				tool.$static = tool.$('.Q_inplace_tool_static, .Q_inplace_tool_blockstatic');
 			}
-			Q.Streams.get(state.publisherId, state.streamName, function () {
-				var placeholder = tool.inplace && tool.inplace.state.placeholder
-					&& String(tool.inplace.state.placeholder).encodeHTML();
-				var $e, html = (
-					(state.inplaceType === 'select')
-					?  String(state.inplace.options[content] || '').encodeHTML()
-					: String(content || '').encodeHTML()
-				) || '<span class="Q_placeholder">'+placeholder+'</div>';
-					
-				if (state.inplaceType === 'textarea') {
-					var convert = {};
-					if (content) {
-						var replacements = {
-							"\n": '<br>',
-						 	' ': '&nbsp;'
-						};
-						if (state.convert) {
-							for (var i=0, l=state.convert.length; i<l; ++i) {
-								var c = state.convert[i];
-								convert[c] = replacements[c];
-							}
+
+			// replace URLs with links
+			if (state.URLtoLink) {
+				var contentWithLinks = content;
+				var aURLs = contentWithLinks.matchTypes("url");
+				if (!Q.isEmpty(aURLs)) {
+					var oURLs = {};
+					Q.each(aURLs, function (i, url) {
+						var parsedUrl = url;
+						if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+							parsedUrl = "http://" + url;
+						}
+						oURLs[url] = '<a href="' + parsedUrl + '" target="_blank">' + url + '</a>';
+					});
+					contentWithLinks = contentWithLinks.replaceAll(oURLs);
+				}
+			}
+
+			var placeholder = tool.inplace && tool.inplace.state.placeholder
+				&& String(tool.inplace.state.placeholder).encodeHTML();
+			var $e, html = (
+				(state.inplaceType === 'select')
+				?  String(state.inplace.options[content] || '').encodeHTML()
+				: state.URLtoLink ? String(contentWithLinks || '') : String(content || '').encodeHTML()
+			) || '<span class="Q_placeholder">'+placeholder+'</div>';
+
+			if (state.inplaceType === 'textarea') {
+				var convert = {};
+				if (content) {
+					var replacements = {
+						"\n": '<br>',
+						' ': '&nbsp;'
+					};
+					if (state.convert) {
+						for (var i=0, l=state.convert.length; i<l; ++i) {
+							var c = state.convert[i];
+							convert[c] = replacements[c];
 						}
 					}
-					var toSet = html.replaceAll(convert);
 				}
-				if (tool.inplace) {
-					var $input = tool.inplace.$input;
-					if (currentContent !== content) {
-						$input.val(currentContent = content);
-					}
-					if ($input.is(":visible")) {
-						var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
-						tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
-					}
+				var toSet = html.replaceAll(convert);
+			}
+			if (tool.inplace) {
+				var $input = tool.inplace.$input;
+				if (currentContent !== content) {
+					$input.val(currentContent = content);
 				}
-				if (currentHtml !== html) {
-					tool.$static.html(currentHtml = html);
+				if ($input.is(":visible")) {
+					var margin = $input.outerHeight() + parseInt($input.css('margin-top'));
+					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 				}
-			});
+			}
+			if (currentHtml !== html) {
+				tool.$static.html(currentHtml = html);
+			}
 		};
 
 		if (state.attribute) {
@@ -120,7 +137,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 			}, tool);
 		}
 		
-		if (!container.length) {
+		if (!$container.length) {
 			// dynamically construct the tool
 			var ipo = Q.extend(state.inplace, {
 				action: stream.actionUrl(),
@@ -202,6 +219,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	inplaceType: 'textarea',
 	editable: true,
 	create: null,
+	URLtoLink: false,
 	inplace: {},
 	convert: [],
 	onLoad: new Q.Event(),
