@@ -93,6 +93,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				'Q_expandable_' + nc,
 				tool.prefix
 			));
+			$expandable.attr("data-name", nc);
 			if (info.drilldown) {
 				$expandable.attr({
 					'drilldown': info.drilldown,
