@@ -57,10 +57,17 @@ Q.Tool.define("Streams/inplace", function (options) {
 				tool.$static = tool.$('.Q_inplace_tool_static, .Q_inplace_tool_blockstatic');
 			}
 
+			var placeholder = tool.inplace && tool.inplace.state.placeholder
+				&& String(tool.inplace.state.placeholder).encodeHTML();
+			var $e, html = (
+				(state.inplaceType === 'select')
+				? String(state.inplace.options[content] || '').encodeHTML()
+				: String(content || '').encodeHTML()
+			) || '<span class="Q_placeholder">'+placeholder+'</div>';
+
 			// replace URLs with links
 			if (state.URLtoLink) {
-				var contentWithLinks = content;
-				var aURLs = contentWithLinks.matchTypes("url");
+				var aURLs = html.matchTypes("url");
 				if (!Q.isEmpty(aURLs)) {
 					var oURLs = {};
 					Q.each(aURLs, function (i, url) {
@@ -70,17 +77,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 						}
 						oURLs[url] = '<a href="' + parsedUrl + '" target="_blank">' + url + '</a>';
 					});
-					contentWithLinks = contentWithLinks.replaceAll(oURLs);
+					html = html.replaceAll(oURLs);
 				}
 			}
-
-			var placeholder = tool.inplace && tool.inplace.state.placeholder
-				&& String(tool.inplace.state.placeholder).encodeHTML();
-			var $e, html = (
-				(state.inplaceType === 'select')
-				?  String(state.inplace.options[content] || '').encodeHTML()
-				: state.URLtoLink ? String(contentWithLinks || '') : String(content || '').encodeHTML()
-			) || '<span class="Q_placeholder">'+placeholder+'</div>';
 
 			if (state.inplaceType === 'textarea') {
 				var convert = {};
