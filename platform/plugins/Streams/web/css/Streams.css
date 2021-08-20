@@ -446,7 +446,7 @@
 
 /* User Chooser tool  */
 .Streams_userChooser_tool input { width: 100%; }
-.Streams_userChooser_results { overflow-y: auto; max-height: 500px; }
+.Streams_userChooser_results { overflow-y: auto; overflow-x: hidden; max-height: 500px; }
 .Streams_userChooser_results a { cursor: pointer; }
 
 /* Streams subcription tool */
