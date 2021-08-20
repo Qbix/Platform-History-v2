@@ -486,7 +486,7 @@ Sp.matchTypes = function (types, options) {
 
 Sp.matchTypes.adapters = {
 	url: function (options) {
-		var parts = this.split(' ');
+		var parts = this.split(/\n|\<br\>| /);
 		var res = [];
 		var regexp = (options && options.requireScheme)
 			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)([a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
