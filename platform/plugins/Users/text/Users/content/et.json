@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Kas nõustute teenusetingimustega?",
         "facebookNoEmail": "Teie facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse oma loomulikult.",
-        "picTooltip": "Seda pilti saate hiljem muuta"
+        "picTooltip": "Seda pilti saate hiljem muuta",
+        "wallet": {
+            "payload": "Logige sisse {{host}} ajal {{timestamp}}",
+            "alert": {
+                "title": "Rahakotile ümbersuunamine",
+                "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Lisage sisselogimisviis",
@@ -108,6 +115,18 @@
         "Owner": "Omanik",
         "Admin": "Administraator",
         "Member": "Liige",
-        "Guest": "Külaline"
+        "Guest": "Külaline",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Iga päev",
+        "Weekly": "Iganädalane",
+        "Monthly": "Igakuine",
+        "Application": "Rakendus",
+        "Pages": "Lehed",
+        "Services": "Teenused",
+        "Faq": "KKK",
+        "WeekDays": "Nädalapäevad"
     }
 }

@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Aanvaar u die diensbepalings?",
         "facebookNoEmail": "U bevestigde e-posadres ontbreek in u Facebook-rekening. Teken eenvoudig die oorspronklike manier aan.",
-        "picTooltip": "U kan hierdie foto later verander"
+        "picTooltip": "U kan hierdie foto later verander",
+        "wallet": {
+            "payload": "Meld tydig by {{host}} aan {{timestamp}}",
+            "alert": {
+                "title": "Herlei na Wallet",
+                "content": "Sodra u hierdie dialoog sluit, word u na u beursie geneem. Keer terug na hierdie bladsy nadat u aangemeld het."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Voeg &#39;n manier by om aan te meld",
@@ -108,6 +115,18 @@
         "Owner": "Eienaar",
         "Admin": "admin",
         "Member": "lid",
-        "Guest": "gaste"
+        "Guest": "gaste",
+        "Host": "Gasheer"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daagliks",
+        "Weekly": "Weekliks",
+        "Monthly": "Maandeliks",
+        "Application": "Aansoek",
+        "Pages": "Bladsye",
+        "Services": "Dienste",
+        "Faq": "FAQ",
+        "WeekDays": "Weekdae"
     }
 }

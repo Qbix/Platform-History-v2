@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Aceite os Termos de Serviço?",
         "facebookNoEmail": "Sua conta do Facebook está faltando um endereço de e-mail confirmado. Simplesmente faça o log in nativo.",
-        "picTooltip": "Você pode mudar esta foto depois"
+        "picTooltip": "Você pode mudar esta foto depois",
+        "wallet": {
+            "payload": "Faça login em {{host}} às {{timestamp}}",
+            "alert": {
+                "title": "Redirecionando para carteira",
+                "content": "Depois de fechar esta caixa de diálogo, você será direcionado para sua carteira. Depois de entrar, volte a esta página."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Adicione uma maneira de fazer login",
@@ -108,6 +115,18 @@
         "Owner": "Proprietário",
         "Admin": "Admin",
         "Member": "Membro",
-        "Guest": "Hóspede"
+        "Guest": "Hóspede",
+        "Host": "Hospedeiro"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Diário",
+        "Weekly": "Semanalmente",
+        "Monthly": "Por mês",
+        "Application": "Aplicativo",
+        "Pages": "Páginas",
+        "Services": "Serviços",
+        "Faq": "Perguntas frequentes",
+        "WeekDays": "Dias úteis"
     }
 }

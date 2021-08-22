@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Glac leis na Téarmaí Seirbhíse?",
         "facebookNoEmail": "Tá seoladh ríomhphoist deimhnithe ar iarraidh i do chuntas facebook. Níl ort ach logáil isteach ar an mbealach dúchais.",
-        "picTooltip": "Is féidir leat an pictiúr seo a athrú níos déanaí"
+        "picTooltip": "Is féidir leat an pictiúr seo a athrú níos déanaí",
+        "wallet": {
+            "payload": "Logáil isteach ar {{host}} ag am {{timestamp}}",
+            "alert": {
+                "title": "Atreorú chuig Sparán",
+                "content": "Nuair a dhúnann tú an dialóg seo, tabharfar chuig do sparán tú. Tar éis duit síniú isteach, filleadh ar an leathanach seo."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Cuir bealach isteach le logáil isteach",
@@ -108,6 +115,18 @@
         "Owner": "Úinéir",
         "Admin": "Riarachán",
         "Member": "Comhalta",
-        "Guest": "Aoi"
+        "Guest": "Aoi",
+        "Host": "Óstach"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Laethúil",
+        "Weekly": "Seachtainiúil",
+        "Monthly": "Míosúil",
+        "Application": "Iarratas",
+        "Pages": "Leathanaigh",
+        "Services": "Seirbhísí",
+        "Faq": "CC",
+        "WeekDays": "Laethanta na Seachtaine"
     }
 }

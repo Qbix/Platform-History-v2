@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Elfogadja a Szolgáltatási feltételeket?",
         "facebookNoEmail": "A facebook-fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
-        "picTooltip": "Ezt a képet később megváltoztathatja"
+        "picTooltip": "Ezt a képet később megváltoztathatja",
+        "wallet": {
+            "payload": "Jelentkezzen be {{host}} időpontban {{timestamp}}",
+            "alert": {
+                "title": "Átirányítás a Wallet szolgáltatásba",
+                "content": "Miután bezárta ezt a párbeszédablakot, a pénztárcájába kerül. Bejelentkezés után térjen vissza erre az oldalra."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Adjon hozzá egy módot a bejelentkezéshez",
@@ -108,6 +115,18 @@
         "Owner": "Tulajdonos",
         "Admin": "admin",
         "Member": "Tag",
-        "Guest": "Vendég"
+        "Guest": "Vendég",
+        "Host": "Házigazda"
+    },
+    "analytics": {
+        "Title": "Analitika",
+        "Daily": "Napi",
+        "Weekly": "Heti",
+        "Monthly": "Havi",
+        "Application": "Alkalmazás",
+        "Pages": "Oldalak",
+        "Services": "Szolgáltatások",
+        "Faq": "GYIK",
+        "WeekDays": "Heti napok"
     }
 }

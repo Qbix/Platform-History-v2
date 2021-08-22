@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accettare i Termini di servizio?",
         "facebookNoEmail": "Nel tuo account Facebook manca un indirizzo email confermato. Accedi semplicemente in modo nativo.",
-        "picTooltip": "Puoi cambiare questa immagine in seguito"
+        "picTooltip": "Puoi cambiare questa immagine in seguito",
+        "wallet": {
+            "payload": "Accedi a {{host}} alle ore {{timestamp}}",
+            "alert": {
+                "title": "Reindirizzamento a Wallet",
+                "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Aggiungi un modo per accedere",
@@ -108,6 +115,18 @@
         "Owner": "Proprietario",
         "Admin": "Admin",
         "Member": "Membro",
-        "Guest": "ospite"
+        "Guest": "ospite",
+        "Host": "Ospite"
+    },
+    "analytics": {
+        "Title": "Analisi",
+        "Daily": "Quotidiano",
+        "Weekly": "settimanalmente",
+        "Monthly": "Mensile",
+        "Application": "Applicazione",
+        "Pages": "Pagine",
+        "Services": "Servizi",
+        "Faq": "FAQ",
+        "WeekDays": "Giorni della settimana"
     }
 }

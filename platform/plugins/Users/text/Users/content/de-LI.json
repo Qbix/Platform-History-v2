@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Nutzungsbedingungen akzeptieren?",
         "facebookNoEmail": "In Ihrem Facebook-Konto fehlt eine bestätigte E-Mail-Adresse. Einfach auf native Weise einloggen.",
-        "picTooltip": "Sie können dieses Bild später ändern"
+        "picTooltip": "Sie können dieses Bild später ändern",
+        "wallet": {
+            "payload": "Melden Sie sich zum Zeitpunkt {{timestamp}} bei {{host}} an",
+            "alert": {
+                "title": "Weiterleitung an Wallet",
+                "content": "Sobald Sie dieses Dialogfeld schließen, werden Sie zu Ihrem Wallet weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Füge eine Möglichkeit hinzu, sich anzumelden",
@@ -108,6 +115,18 @@
         "Owner": "Inhaber",
         "Admin": "Administrator",
         "Member": "Mitglied",
-        "Guest": "Gast"
+        "Guest": "Gast",
+        "Host": "Gastgeber"
+    },
+    "analytics": {
+        "Title": "Analytik",
+        "Daily": "Täglich",
+        "Weekly": "Wöchentlich",
+        "Monthly": "Monatlich",
+        "Application": "Anwendung",
+        "Pages": "Seiten",
+        "Services": "Dienstleistungen",
+        "Faq": "FAQ",
+        "WeekDays": "Wochentage"
     }
 }

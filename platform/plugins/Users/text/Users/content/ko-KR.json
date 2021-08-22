@@ -85,7 +85,14 @@
         },
         "confirmTerms": "서비스 약관에 동의하십니까?",
         "facebookNoEmail": "페이스 북 계정에 확인 된 이메일 주소가 없습니다. 기본 방식으로 로그인하면됩니다.",
-        "picTooltip": "나중에이 사진을 변경할 수 있습니다"
+        "picTooltip": "나중에이 사진을 변경할 수 있습니다",
+        "wallet": {
+            "payload": "{{host}} 시간에 {{timestamp}}에 로그인합니다.",
+            "alert": {
+                "title": "지갑으로 리디렉션",
+                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
+            }
+        }
     },
     "setIdentifier": {
         "title": "로그인 방법 추가",
@@ -108,6 +115,18 @@
         "Owner": "소유자",
         "Admin": "관리자",
         "Member": "회원",
-        "Guest": "손님"
+        "Guest": "손님",
+        "Host": "주인"
+    },
+    "analytics": {
+        "Title": "해석학",
+        "Daily": "일일",
+        "Weekly": "주간",
+        "Monthly": "월간 간행물",
+        "Application": "애플리케이션",
+        "Pages": "페이지",
+        "Services": "서비스",
+        "Faq": "자주하는 질문",
+        "WeekDays": "요일"
     }
 }

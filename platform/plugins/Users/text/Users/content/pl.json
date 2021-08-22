@@ -74,7 +74,7 @@
         "notVerified": "Musisz wysłać sobie wiadomość aktywacyjną, aby się zalogować.",
         "emailExists": "Czy próbowałeś wcześniej zarejestrować się przy użyciu tego e-maila? Jeśli tak, sprawdź skrzynkę odbiorczą, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość<\/a>",
         "mobileExists": "Czy próbowałeś wcześniej zarejestrować się przy użyciu tego numeru telefonu komórkowego? Jeśli tak, sprawdź SMS, aby aktywować konto. <a href='#resend' class='Q_button Users_activation_resend'>Kliknij, aby ponownie wysłać wiadomość<\/a>",
-        "usingOther": "lub możesz",
+        "usingOther": "czy możesz",
         "prompt": "Wybierz nazwę użytkownika:",
         "newUser": "lub utwórz nowe konto poniżej",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Zaakceptować warunki usługi?",
         "facebookNoEmail": "Twoje konto na Facebooku nie ma potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
-        "picTooltip": "Możesz zmienić to zdjęcie później"
+        "picTooltip": "Możesz zmienić to zdjęcie później",
+        "wallet": {
+            "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
+            "alert": {
+                "title": "Przekierowanie do Portfela",
+                "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Dodaj sposób logowania",
@@ -108,6 +115,18 @@
         "Owner": "Właściciel",
         "Admin": "Administrator",
         "Member": "Członek",
-        "Guest": "Gość"
+        "Guest": "Gość",
+        "Host": "Gospodarz"
+    },
+    "analytics": {
+        "Title": "Analityka",
+        "Daily": "Codzienny",
+        "Weekly": "Co tydzień",
+        "Monthly": "Miesięczny",
+        "Application": "Podanie",
+        "Pages": "Strony",
+        "Services": "Usługi",
+        "Faq": "FAQ",
+        "WeekDays": "Dni tygodnia"
     }
 }

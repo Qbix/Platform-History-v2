@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Samþykkja þjónustuskilmálana?",
         "facebookNoEmail": "Það vantar staðfest netfang hjá facebook reikningnum þínum. Einfaldlega skráðu þig inn á innfægan hátt.",
-        "picTooltip": "Þú getur breytt þessari mynd síðar"
+        "picTooltip": "Þú getur breytt þessari mynd síðar",
+        "wallet": {
+            "payload": "Skráðu þig inn á {{host}} á þeim tíma {{timestamp}}",
+            "alert": {
+                "title": "Beinir að Veski",
+                "content": "Þegar þú hefur lokað þessum glugga verðurðu fluttur í veskið þitt. Þegar þú hefur skráð þig inn, farðu aftur á þessa síðu."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Bættu við leið til að skrá þig inn",
@@ -108,6 +115,18 @@
         "Owner": "Eigandi",
         "Admin": "Stjórnandi",
         "Member": "Meðlimur",
-        "Guest": "Gestur"
+        "Guest": "Gestur",
+        "Host": "Gestgjafi"
+    },
+    "analytics": {
+        "Title": "Greining",
+        "Daily": "Daglega",
+        "Weekly": "Vikulega",
+        "Monthly": "Mánaðarlega",
+        "Application": "Umsókn",
+        "Pages": "Síður",
+        "Services": "Þjónusta",
+        "Faq": "Algengar spurningar",
+        "WeekDays": "Vikudagar"
     }
 }

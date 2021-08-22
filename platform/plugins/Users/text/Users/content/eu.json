@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Onartu Zerbitzuaren baldintzak?",
         "facebookNoEmail": "Zure Facebook kontuan konfirmatutako helbide elektronikoa falta da. Besterik gabe, hasi jatorrizko moduan.",
-        "picTooltip": "Argazki hau gero alda dezakezu"
+        "picTooltip": "Argazki hau gero alda dezakezu",
+        "wallet": {
+            "payload": "Hasi saioa {{host}} unean {{timestamp}}",
+            "alert": {
+                "title": "Wallet-era birbideratzen",
+                "content": "Elkarrizketa hau ixten duzunean, zorroan sartuko zara. Saioa hasi ondoren, itzuli orrialde honetara."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Gehitu saioa hasteko modu bat",
@@ -108,6 +115,18 @@
         "Owner": "Jabea",
         "Admin": "admin",
         "Member": "kidea",
-        "Guest": "Gonbidatua"
+        "Guest": "Gonbidatua",
+        "Host": "Ostalaria"
+    },
+    "analytics": {
+        "Title": "Analitika",
+        "Daily": "Egunero",
+        "Weekly": "Astero",
+        "Monthly": "Hilabetekaria",
+        "Application": "Aplikazio",
+        "Pages": "Orriak",
+        "Services": "Zerbitzuak",
+        "Faq": "Ohiko galderak",
+        "WeekDays": "Aste Egunak"
     }
 }
