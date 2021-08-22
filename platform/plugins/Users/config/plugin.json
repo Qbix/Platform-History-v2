@@ -96,7 +96,7 @@
 		},
 		"login": {
 			"identifierType": "email,mobile",
-			"using": "native,facebook",
+			"using": "native,wallet,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
 			"gravatar": true,

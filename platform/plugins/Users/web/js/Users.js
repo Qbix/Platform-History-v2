@@ -48,6 +48,7 @@
 			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			usingOther: "or you can ",
 			facebookSrc: null,
+			walletSrc: null,
 			prompt: "Choose a username:",
 			newUser: "or create a new account below",
 			placeholders: {
@@ -63,7 +64,14 @@
 			},
 			confirmTerms: "Accept the Terms of Service?",
 			facebookNoEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-			picTooltip: "You can change this picture later"
+			picTooltip: "You can change this picture later",
+			wallet: {
+				payload: "Log into {{host}} at time {{timestamp}}",
+				alert: {
+					title: "Redirecting to Wallet",
+					content: "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page.",
+				}
+			}
 		},
 
 		setIdentifier: {
@@ -354,12 +362,125 @@
 		});
 	};
 	
-	Users.authenticate.handlers.web3 = function (platform, onSuccess, onCancel, options) {
-		_doAuthenticate({
-			udid: Q.info.udid, // TODO: sign this with private key
-			platform: platform
-		}, platform, onSuccess, onCancel, options);
+	Users.authenticate.handlers.wallet = function (platform, onSuccess, onCancel, options) {
+		options = Q.extend(Users.authenticate.handlers.wallet.options, options);
+		Q.addScript([
+			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
+			'{{Users}}/js/wallet/evm-chains.min.js',
+			'{{Users}}/js/wallet/fortmatic.js',
+			'{{Users}}/js/wallet/walletconnect.min.js',
+			'{{Users}}/js/wallet/web3.min.js',
+			'{{Users}}/js/wallet/web3modal.js'
+		], function () {
+			 // Unpkg imports
+			var appId = options.appId || Q.info.app;
+			var Web3Modal = window.Web3Modal.default;
+			var WalletConnectProvider = window.WalletConnectProvider.default;
+			var Fortmatic = window.Fortmatic;
+			var evmChains = window.evmChains;
+			var web3Modal, provider, selectedAccount;
+			var infuraProjectId = Q.getObject(['wallet', appId, 'infura', 'projectId'], Users.apps);
+			var providerOptions = {
+				walletconnect: {
+					package: WalletConnectProvider,
+					options: {
+						infuraId: infuraProjectId
+					}
+				}
+			};
+			Users.Wallet.web3Modal = web3Modal = new Web3Modal({
+				chain: options.chain,
+				network: options.network,
+				cacheProvider: false, // optional
+				providerOptions: providerOptions, // required
+				disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
+		    });
+			web3Modal.connect().then(function (provider) {
+				Users.Wallet.provider = provider;
+			    // Subscribe to accounts change
+			    provider.on("accountsChanged", (accounts) => {
+					console.log('accounts', accounts);
+					//fetchAccountData();
+			    });
+
+			    // Subscribe to chainId change
+			    provider.on("chainChanged", (chainId) => {
+					console.log('chainId', chainId);
+					//fetchAccountData();
+			    });
+			    // Subscribe to networkId change
+			    provider.on("networkChanged", (networkId) => {
+					console.log('networkId', networkId);
+					//fetchAccountData();
+			    });
+				// Subscribe to provider disconnection
+				provider.on("connect", (info) => {
+					console.log(info);
+				});
+				// Subscribe to provider disconnection
+				provider.on("disconnect", (error) => {
+					if (!Users.logout.occurring) {
+						Q.Users.logout({using: 'wallet'});
+					}
+					console.log("Disconnecting: " + error);
+				});
+				var payload = Q.text.Users.login.wallet.payload.interpolate({
+					host: location.host,
+					timestamp: Math.floor(Date.now() / 1000)
+				});
+				var w3 = new Web3(provider);
+				var network, accounts;
+				w3.eth.getAccounts().then(function (accounts) {
+				    if (provider.wc) {
+						Q.alert(Q.text.Users.login.wallet.alert.content, {
+							title: Q.text.Users.login.wallet.alert.title,
+							onClose: function () {
+								var web3 = new Web3();
+								var address = accounts[0];
+								const res = provider.request({
+									method: 'personal_sign',
+									params: [ 
+										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
+										address.toLowerCase()
+									]
+								}).then(_proceed)
+								.catch(_cancel);	
+							}
+						});
+				    } else {
+						var signer = new ethers.providers.Web3Provider(provider).getSigner();
+				      	signer.signMessage(payload)
+						.then(_proceed)
+						.catch(_cancel);
+				    }
+					function _proceed(signature) {
+						_doAuthenticate({
+							xid: accounts[0],
+							signature: signature,
+							platform: 'wallet',
+							chainId: provider.chainId
+						}, platform, onSuccess, onCancel, options);
+					}
+				}).catch(_cancel);
+			}).catch(_cancel);
+			function _cancel() {
+				Q.handle(onCancel, Users, [options]);
+			}
+		});
 	};
+	
+	Users.authenticate.handlers.wallet.options = {
+		chain: 'MATIC',
+		network: 'mainnet'
+	};
+	
+	function _authenticate(platform) {
+		Users.authenticate(platform, function (user) {
+			priv.login_onConnect(user);
+		}, function () {
+			priv.login_onCancel();
+		}, {"prompt": false});
+	}
 	
 	function _doSuccess(user, platform, onSuccess, onCancel, options) {
 		// if the user hasn't changed then user is null here
@@ -610,7 +731,7 @@
 	 * @param {Object} [options] You can pass several options here
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when login or authentication "using" a platform is successful. It is passed (user, options, result, used) where user is the Users.User object (null if it was unchanged),
 	 options were the options used in the call to Users.login, result is one of "registered", "adopted", "connected" or "authorized" (see Users::authenticate)
-	 and 'used' is "native", or the name of the platform used, such as "facebook".
+	 and 'used' is "native", "wallet", or the name of the platform used, such as "facebook"
 	 *  @param {Function} [options.onCancel] event that occurs when login or authentication "using" a platform was canceled.
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess, onCancel, or onRequireComplete
 	 *  @param {String} [options.successUrl] If the default onSuccess implementation is used, the browser is redirected here. Defaults to Q.uris[Q.info.app+'/home']
@@ -654,11 +775,17 @@
 		return false;
 
 		function _doLogin() {
-			// try quietly, possible only with facebook
+			// try quietly, possible only with one of "facebook" or "wallet"
 			if (o.tryQuietly) {
 				if (o.using.indexOf('facebook') >= 0) {
 					o.force = true;
 					Users.authenticate('facebook', function (user) {
+						_onConnect(user);
+					}, function () {
+						_onCancel();
+					}, o);
+				} else if (o.using.indexOf('wallet') >= 0) {
+					Users.authenticate('wallet', function (user) {
 						_onConnect(user);
 					}, function () {
 						_onCancel();
@@ -675,9 +802,12 @@
 			// perform actual login
 			if (o.using.indexOf('native') >= 0) {
 				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
-				var usingPlatforms = (o.using.indexOf('facebook') >= 0)
-					? {facebook: appId}
-					: {};
+				var usingPlatforms = {};
+				Q.each(['wallet', 'facebook'], function (i, platform) {
+					if ((o.using.indexOf('facebook') >= 0)) {
+						usingPlatforms[platform] = appId;	
+					}
+				});
 				// set up dialog
 				login_setupDialog(usingPlatforms, o);
 				priv.linkToken = null;
@@ -699,7 +829,7 @@
 							return;
 						}
 						if (Q.isEmpty(o.scope)) {
-							_success();
+							_authenticate('facebook');
 							return;
 						}
 						// some permissions were requested
@@ -714,15 +844,7 @@
 									return;
 								}
 							}
-							_success();
-
-							function _success() {
-								Users.authenticate('facebook', function (user) {
-									_onConnect(user);
-								}, function () {
-									_onCancel();
-								}, {"prompt": false});
-							}
+							_authenticate('facebook');
 						}, {
 							check: o.scope
 						});
@@ -730,6 +852,8 @@
 				}, {
 					appId: appId
 				});
+			} else if (o.using[0] === 'wallet') { // only wallet used. Open wallet login right away
+				_authenticate('wallet');
 			}
 
 			delete priv.login_connected; // if we connect, it will be filled
@@ -798,7 +922,8 @@
 	 * @param {Object} [options] You can pass several options here
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.url] the URL to hit to log out. You should usually not change this.
-	 *  @param {String} [options.using] can be "native" or "native,facebook" to log out of both
+	 *  @param {String} [options.using] can be "native", "facebook", "wallet", or "native,facebook,wallet"
+	 *   to log out of multiple
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when logout is successful.
 	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
 	 */
@@ -807,6 +932,9 @@
 			options = {onSuccess: {'options': options}};
 		}
 		var o = Q.extend({}, Users.logout.options, options);
+		if (!o.using) {
+			o.using = 'native';
+		}
 		if (typeof o.using === 'string') {
 			o.using = o.using.split(',');
 		}
@@ -822,9 +950,6 @@
 					alert(e);
 				}
 			}
-			setTimeout(function () {
-				Users.logout.occurring = false;
-			}, 0);
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
@@ -851,11 +976,36 @@
 							Users.onLogout.handle.call(this, o);
 							Q.handle(o.onSuccess, this, [o]);
 						}
+						setTimeout(function () {
+							Users.logout.occurring = false;
+						}, 0);
 					}, true);
 				}, {
 					appId: appId
 				});
-			} else {
+			}
+			if (o.using.indexOf('wallet') >= 0) {
+				var p = Users.Wallet.provider;
+			    if (p && p.close) {
+					p.close().then(function (result) {
+						Users.Wallet.web3Modal.clearCachedProvider();
+						Users.Wallet.provider = null;
+						setTimeout(function () {
+							Users.logout.occurring = false;
+						}, 0);
+					});
+			    } else {
+					if (p._handleDisconnect) {
+						p._handleDisconnect();
+					}
+					Users.Wallet.web3Modal.clearCachedProvider();
+					Users.Wallet.provider = null;
+					setTimeout(function () {
+						Users.logout.occurring = false;
+					}, 0);
+			    }
+			}
+			if (o.using.indexOf('native') >= 0) {
 				// if we log out without logging out of facebook,
 				// then we should ignore the logged-in user's fb_xid
 				// when authenticating, until it is forced
@@ -867,6 +1017,9 @@
 				Q.nonce = Q.cookie('Q_nonce');
 				Users.onLogout.handle.call(this, o);
 				Q.handle(o.onSuccess, this, [o]);
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
 			}
 		}
 
@@ -1588,9 +1741,10 @@
 
 		step1_form.plugin('Q/validator');
 		var step1_usingPlatforms_div = $('<div id="Users_login_usingPlatforms" />');
-		var platformCount = 0;
+		var $buttons = $([]);
 		for (var platform in usingPlatforms) {
 			var appId = usingPlatforms[platform];
+			var $button = null;
 			switch (platform) {
 				case 'facebook':
 					var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
@@ -1598,12 +1752,10 @@
 						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
 						break;
 					}
-					++platformCount;
-					var facebookLogin = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
+					$button = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 						$('<img alt="login with facebook" />')
 							.attr('src', Q.text.Users.login.facebookSrc || Q.url('{{Users}}/img/facebook-login.png'))
-					)
-					.css({'display': 'inline-block', 'vertical-align': 'middle'})
+					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (location.search.includes('handoff=yes')) {
 							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
@@ -1617,17 +1769,36 @@
 								appId: appId
 							});
 						}
-
 						return false;
 					});
-					step1_usingPlatforms_div.append(Q.text.Users.login.usingOther).append(facebookLogin);
 					// Load the facebook script now, so clicking on the facebook button
 					// can trigger a popup directly, otherwise popup blockers may complain:
 					Q.addScript('https://connect.facebook.net/en_US/sdk.js');
 					break;
+				case 'wallet':
+					$button = $('<a href="#login_wallet" id="Users_login_with_wallet" />').append(
+						$('<img alt="login with wallet" />')
+							.attr('src', Q.text.Users.login.walletSrc || Q.url('{{Users}}/img/wallet-login.png'))
+					).css({'display': 'inline-block', 'vertical-align': 'middle'})
+					.click(function () {
+						if (login_setupDialog.dialog) {
+							login_setupDialog.dialog.data('Q/dialog').close();
+						}
+						_authenticate('wallet');
+						return false;
+					});
+					break;
 			}
+			$buttons = $buttons.add($button);
 		}
-		if (platformCount) {
+		if ($buttons.length > 0) {
+			step1_usingPlatforms_div.append(Q.text.Users.login.usingOther);
+			if ($buttons.length > 1) {
+				step1_usingPlatforms_div.append('<br>');
+			}
+			$buttons.each(function () {
+				step1_usingPlatforms_div.append(this);
+			});
 			step1_div.append(step1_usingPlatforms_div);
 		}
 
@@ -3517,6 +3688,11 @@
 			}
 		}
 
+	};
+	
+	Users.Wallet = {
+		provider: null,
+		web3Modal: null
 	};
 
 	Q.onReady.add(function () {
