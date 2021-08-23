@@ -456,6 +456,7 @@
 					function _proceed(signature) {
 						_doAuthenticate({
 							xid: accounts[0],
+							payload: payload,
 							signature: signature,
 							platform: 'wallet',
 							chainId: provider.chainId
@@ -984,9 +985,9 @@
 					appId: appId
 				});
 			}
-			if (o.using.indexOf('wallet') >= 0) {
-				var p = Users.Wallet.provider;
-			    if (p && p.close) {
+			var p = Users.Wallet.provider;
+			if (p && o.using.indexOf('wallet') >= 0) {
+			    if (p.close) {
 					p.close().then(function (result) {
 						Users.Wallet.web3Modal.clearCachedProvider();
 						Users.Wallet.provider = null;
