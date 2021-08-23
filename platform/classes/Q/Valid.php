@@ -112,7 +112,7 @@ class Q_Valid
 		//see http://bugs.php.net/bug.php?id=30931
 		
 
-		if ($path{strlen($path) - 1} == '/') { // recursively return a temporary file path
+		if ($path[strlen($path) - 1] == '/') { // recursively return a temporary file path
 			return self::writable($path . uniqid(mt_rand()) . '.tmp');
 		} else if (dir($path)) {
 			return self::writable($path . '/' . uniqid(mt_rand()) . '.tmp');
