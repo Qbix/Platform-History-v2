@@ -4,6 +4,8 @@
  * @module Users
  */
 
+use Crypto\EthSigRecover;
+
 /**
  * Class representing Wallet app user.
  *
@@ -36,10 +38,21 @@ class Users_ExternalFrom_Wallet extends Users_ExternalFrom implements Users_Exte
 				'problem' => "appId has to be a numeric chainId, not $platformAppId"
 			));
 		}
-
-		$xid = Q::ifset($_REQUEST, 'xid', null);
-		$signature = Q::ifset($_REQUEST, 'signature', null);
-		// TODO: ecrecover xid from signature, we shouldn't trust the client
+		$xid = strtolower(Q::ifset($_REQUEST, 'xid', null));
+		if (is_callable('gmp_add') and is_callable('gmp_mod')) {
+			Q_Request::requireFields(array('payload', 'signature'), true);
+			$e = new Crypto\EthSigRecover();
+			$recoveredXid = strtolower(
+				$e->personal_ecRecover($_REQUEST['payload'], $_REQUEST['signature'])
+			);
+			if ($xid and strtolower($recoveredXid) != $xid) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'xid',
+					'range' => $xid
+				));
+			}
+			$xid = $recoveredXid;
+		}
 		if (!$xid) {
 			$xid = Q::ifset($_COOKIE, 'Q_Users_wallet_address', null);
 		}

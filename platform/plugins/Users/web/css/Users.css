@@ -582,3 +582,8 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	line-height: normal;
 	vertical-align: baseline;
 }
+
+#WEB3_CONNECT_MODAL_ID {
+	position: absolute;
+	z-index: 99999999;
+}
