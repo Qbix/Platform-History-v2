@@ -32,14 +32,14 @@ use function mb_substr;
 
 final class Keccak
 {
-    private const KECCAK_ROUNDS = 24;
-    private const LFSR = 0x01;
-    private const ENCODING = '8bit';
-    private static $keccakf_rotc = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 2, 14, 27, 41, 56, 8, 25, 43, 62, 18, 39, 61, 20, 44];
-    private static $keccakf_piln = [10, 7, 11, 17, 18, 3, 5, 16, 8, 21, 24, 4, 15, 23, 19, 13, 12,2, 20, 14, 22, 9, 6, 1];
-    private static $x64 = (PHP_INT_SIZE === 8);
+    const KECCAK_ROUNDS = 24;
+    const LFSR = 0x01;
+    const ENCODING = '8bit';
+    static $keccakf_rotc = [1, 3, 6, 10, 15, 21, 28, 36, 45, 55, 2, 14, 27, 41, 56, 8, 25, 43, 62, 18, 39, 61, 20, 44];
+    static $keccakf_piln = [10, 7, 11, 17, 18, 3, 5, 16, 8, 21, 24, 4, 15, 23, 19, 13, 12,2, 20, 14, 22, 9, 6, 1];
+    static $x64 = (PHP_INT_SIZE === 8);
 
-    private static function keccakf64(&$st, $rounds): void {
+    static function keccakf64(&$st, $rounds) {
         $keccakf_rndc = [
             [0x00000000, 0x00000001], [0x00000000, 0x00008082], [0x80000000, 0x0000808a], [0x80000000, 0x80008000],
             [0x00000000, 0x0000808b], [0x00000000, 0x80000001], [0x80000000, 0x80008081], [0x80000000, 0x00008009],
@@ -119,7 +119,7 @@ final class Keccak
         }
     }
 
-    private static function keccak64($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
+    static function keccak64($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
         $capacity /= 8;
 
         $inlen = mb_strlen($in_raw, self::ENCODING);
@@ -170,7 +170,7 @@ final class Keccak
         return $raw_output ? $r : bin2hex($r);
     }
 
-    private static function keccakf32(&$st, $rounds): void {
+    static function keccakf32(&$st, $rounds) {
         $keccakf_rndc = [
             [0x0000, 0x0000, 0x0000, 0x0001], [0x0000, 0x0000, 0x0000, 0x8082], [0x8000, 0x0000, 0x0000, 0x0808a], [0x8000, 0x0000, 0x8000, 0x8000],
             [0x0000, 0x0000, 0x0000, 0x808b], [0x0000, 0x0000, 0x8000, 0x0001], [0x8000, 0x0000, 0x8000, 0x08081], [0x8000, 0x0000, 0x0000, 0x8009],
@@ -256,7 +256,7 @@ final class Keccak
         }
     }
 
-    private static function keccak32($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
+    static function keccak32($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
         $capacity /= 8;
 
         $inlen = mb_strlen($in_raw, self::ENCODING);
@@ -311,7 +311,7 @@ final class Keccak
         return $raw_output ? $r: bin2hex($r);
     }
 
-    private static function keccak($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
+    static function keccak($in_raw, int $capacity, int $outputlength, $suffix, bool $raw_output): string {
         return self::$x64
             ? self::keccak64($in_raw, $capacity, $outputlength, $suffix, $raw_output)
             : self::keccak32($in_raw, $capacity, $outputlength, $suffix, $raw_output);
