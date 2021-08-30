@@ -74,7 +74,7 @@
         "notVerified": "ログインするには、アクティベーションメッセージを自分で送信する必要があります。",
         "emailExists": "以前にこのメールで登録しようとしましたか？その場合は、受信ボックスをチェックしてアカウントを有効にします。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します</a>",
         "mobileExists": "以前にこの携帯電話番号で登録しようとしましたか？その場合は、SMSを確認してアカウントを有効にしてください。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します</a>",
-        "usingOther": "またはあなたはできます",
+        "usingOther": "またはあなたができる",
         "prompt": "ユーザー名を選択：",
         "newUser": "または以下で新しいアカウントを作成してください",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "利用規約に同意しますか？",
         "facebookNoEmail": "Facebookアカウントに確認済みのメールアドレスがありません。ネイティブの方法でログインするだけです。",
-        "picTooltip": "この写真は後で変更できます"
+        "picTooltip": "この写真は後で変更できます",
+        "wallet": {
+            "payload": "時間{{timestamp}}に{{host}}にログインします",
+            "alert": {
+                "title": "ウォレットへのリダイレクト",
+                "content": "このダイアログを閉じると、ウォレットに移動します。サインインしたら、このページに戻ります。"
+            }
+        }
     },
     "setIdentifier": {
         "title": "ログインする方法を追加する",
@@ -108,6 +115,18 @@
         "Owner": "オーナー",
         "Admin": "管理者",
         "Member": "メンバー",
-        "Guest": "ゲスト"
+        "Guest": "ゲスト",
+        "Host": "ホスト"
+    },
+    "analytics": {
+        "Title": "分析",
+        "Daily": "毎日",
+        "Weekly": "毎週",
+        "Monthly": "毎月",
+        "Application": "応用",
+        "Pages": "ページ",
+        "Services": "サービス",
+        "Faq": "よくある質問",
+        "WeekDays": "平日"
     }
 }

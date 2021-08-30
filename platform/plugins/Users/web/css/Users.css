@@ -302,7 +302,7 @@
 #Users_login_notVerified { font-size: 14px; font-weight: bold; text-align: center; }
 #Users_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
 #Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
-#Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: left; }
+#Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: center; }
 #Users_form_passphrase { width: 100%; padding: 2%; }
 .Users_login_get_started { text-align: center; margin-top: 10px; }
 
@@ -581,4 +581,9 @@ html.Users_loggedIn .Users_whenLoggedOut {
 #notices_slot ul li * {
 	line-height: normal;
 	vertical-align: baseline;
+}
+
+#WEB3_CONNECT_MODAL_ID {
+	position: absolute;
+	z-index: 99999999;
 }

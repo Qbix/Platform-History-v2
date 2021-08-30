@@ -74,7 +74,7 @@
         "notVerified": "Norėdami prisijungti, turite išsiųsti sau aktyvinimo pranešimą.",
         "emailExists": "Ar bandėte anksčiau registruotis šiuo el. Laišku? Jei taip, patikrinkite gautuosius, kad suaktyvintumėte savo sąskaitą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite, jei norite dar kartą išsiųsti pranešimą</a>",
         "mobileExists": "Ar bandėte anksčiau registruotis šiuo mobiliojo telefono numeriu? Jei taip, patikrinkite SMS, kad suaktyvintumėte savo sąskaitą. <a href='#resend' class='Q_button Users_activation_resend'>Spustelėkite, jei norite dar kartą išsiųsti pranešimą</a>",
-        "usingOther": "ar galite",
+        "usingOther": "arba tu gali",
         "prompt": "Pasirinkite vartotojo vardą:",
         "newUser": "arba sukurkite naują sąskaitą žemiau",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Sutikti su paslaugų teikimo sąlygomis?",
         "facebookNoEmail": "Jūsų „Facebook“ paskyroje nėra patvirtinto el. Pašto adreso. Tiesiog prisijunkite savo būdu.",
-        "picTooltip": "Vėliau galėsite pakeisti šį paveikslėlį"
+        "picTooltip": "Vėliau galėsite pakeisti šį paveikslėlį",
+        "wallet": {
+            "payload": "Prisijunkite prie {{host}} {{timestamp}}",
+            "alert": {
+                "title": "Peradresavimas į Piniginę",
+                "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Pridėkite prisijungimo būdą",
@@ -108,6 +115,18 @@
         "Owner": "Savininkas",
         "Admin": "Administratorius",
         "Member": "Narys",
-        "Guest": "Svečias"
+        "Guest": "Svečias",
+        "Host": "Šeimininkas"
+    },
+    "analytics": {
+        "Title": "„Analytics“",
+        "Daily": "Kasdien",
+        "Weekly": "Kas savaitę",
+        "Monthly": "Mėnesio",
+        "Application": "Taikymas",
+        "Pages": "Puslapiai",
+        "Services": "Paslaugos",
+        "Faq": "DUK",
+        "WeekDays": "Darbo dienomis"
     }
 }

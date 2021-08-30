@@ -81,11 +81,18 @@
             "identifier": "your mobile # or email",
             "mobile": "enter your mobile #",
             "email": "enter your email address",
-            "username": "username"
+            "username": "use letters and numbers only"
         },
         "confirmTerms": "Accept the Terms of Service?",
         "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later"
+        "picTooltip": "You can change this picture later",
+        "wallet": {
+            "payload": "Log into {{host}} at time {{timestamp}}",
+            "alert": {
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Add a way to log in",
@@ -108,6 +115,18 @@
         "Owner": "Owner",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
     }
 }

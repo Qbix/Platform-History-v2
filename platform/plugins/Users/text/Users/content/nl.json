@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accepteer de Servicevoorwaarden?",
         "facebookNoEmail": "Er ontbreekt een bevestigd e-mailadres in je Facebook-account. Log gewoon in op de native manier.",
-        "picTooltip": "U kunt deze afbeelding later wijzigen"
+        "picTooltip": "U kunt deze afbeelding later wijzigen",
+        "wallet": {
+            "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
+            "alert": {
+                "title": "Omleiden naar Wallet",
+                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Een manier toevoegen om in te loggen",
@@ -108,6 +115,18 @@
         "Owner": "Eigenaar",
         "Admin": "beheerder",
         "Member": "Lid",
-        "Guest": "Gast"
+        "Guest": "Gast",
+        "Host": "Gastheer"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Dagelijks",
+        "Weekly": "Wekelijks",
+        "Monthly": "Maandelijks",
+        "Application": "Sollicitatie",
+        "Pages": "Pagina&#39;s",
+        "Services": "Diensten",
+        "Faq": "FAQ",
+        "WeekDays": "Doordeweekse dagen"
     }
 }

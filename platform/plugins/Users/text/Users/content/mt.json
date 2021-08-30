@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Taċċetta t-Termini tas-Servizz?",
         "facebookNoEmail": "Il-kont ta ’facebook tiegħek għandu nieqes indirizz elettroniku kkonfermat. Sempliċement idħol fil-mod indiġenu.",
-        "picTooltip": "Tista &#39;tbiddel din l-istampa aktar tard"
+        "picTooltip": "Tista &#39;tbiddel din l-istampa aktar tard",
+        "wallet": {
+            "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
+            "alert": {
+                "title": "Ir-ridirezzjoni lejn il-Kartiera",
+                "content": "Ladarba tagħlaq din id-djalogu, tkun meħud lejn il-kartiera tiegħek. Wara li tiffirma, irritorna għal din il-paġna."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Żid mod kif tidħol",
@@ -108,6 +115,18 @@
         "Owner": "Sid il-prodott",
         "Admin": "Amministratur",
         "Member": "Membru",
-        "Guest": "Mistieden"
+        "Guest": "Mistieden",
+        "Host": "Ospitanti"
+    },
+    "analytics": {
+        "Title": "Analitiċi",
+        "Daily": "Kuljum",
+        "Weekly": "Kull ġimgħa",
+        "Monthly": "Kull xahar",
+        "Application": "Applikazzjoni",
+        "Pages": "Paġni",
+        "Services": "Servizzi",
+        "Faq": "FAQ",
+        "WeekDays": "Ġranet tal-Ġimgħa"
     }
 }

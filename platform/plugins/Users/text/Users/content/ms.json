@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Terima Syarat Perkhidmatan?",
         "facebookNoEmail": "Akaun facebook anda tiada alamat e-mel yang disahkan. Hanya log masuk dengan cara yang asli.",
-        "picTooltip": "Anda boleh menukar gambar ini kemudian"
+        "picTooltip": "Anda boleh menukar gambar ini kemudian",
+        "wallet": {
+            "payload": "Log masuk ke {{host}} pada masa {{timestamp}}",
+            "alert": {
+                "title": "Mengalihkan ke Wallet",
+                "content": "Setelah anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Tambah cara untuk log masuk",
@@ -108,6 +115,18 @@
         "Owner": "Pemilik",
         "Admin": "Admin",
         "Member": "Ahli",
-        "Guest": "Tetamu"
+        "Guest": "Tetamu",
+        "Host": "Tuan rumah"
+    },
+    "analytics": {
+        "Title": "Analisis",
+        "Daily": "Setiap hari",
+        "Weekly": "Setiap minggu",
+        "Monthly": "Bulanan",
+        "Application": "Permohonan",
+        "Pages": "Halaman",
+        "Services": "Perkhidmatan",
+        "Faq": "Soalan Lazim",
+        "WeekDays": "Hari Minggu"
     }
 }

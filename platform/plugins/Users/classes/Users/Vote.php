@@ -158,16 +158,17 @@ class Users_Vote extends Base_Users_Vote
 	}
 
 	/**
-	 * Save stats
-	 * @method setStat
+	 * Save user activity as a vote
+	 * @method saveActivity
 	 * @param {String} $type forType column
 	 * @param {String} $name
 	 */
-	static function setStat ($type, $name) {
+	static function saveActivity ($type, $name) {
 		$user = Users::loggedInUser();
 		if (!$user) {
 			return;
 		}
+		$n = Q_Utils::normalize($name);
 
 		$day = 60 * 60 * 24;
 		$week = $day * 7;
@@ -187,7 +188,7 @@ class Users_Vote extends Base_Users_Vote
 					return;
 			}
 
-			$forId = "Metrics/activity/$name/$duration/$timestamp";
+			$forId = "Users/activity/$n/$duration/$timestamp";
 
 			$usersVote = new Users_Vote();
 			$usersVote->userId = $user->id;

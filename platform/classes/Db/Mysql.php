@@ -124,7 +124,7 @@ class Db_Mysql implements Db_Interface
 		$password = isset($modifications['password']) ? $modifications['password'] : $connectionInfo['password'];
 		$driver_options = isset($modifications['driver_options']) 
 			? $modifications['driver_options'] 
-			: isset($connectionInfo['driver_options']) ? $connectionInfo['driver_options'] : null;
+			: (isset($connectionInfo['driver_options']) ? $connectionInfo['driver_options'] : null);
 
 		// More dsn changes
 		$dsn_fields = array();

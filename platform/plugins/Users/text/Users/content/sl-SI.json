@@ -74,7 +74,7 @@
         "notVerified": "Če se želite prijaviti, morate poslati sporočilo o aktivaciji.",
         "emailExists": "Ste se že poskusili registrirati s tem e-poštnim sporočilom? V tem primeru preverite prejeto pošto, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite, če želite sporočilo ponovno poslati</a>",
         "mobileExists": "Ste se že poskusili registrirati s to mobilno številko? Če je tako, preverite svoj SMS, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite, če želite sporočilo ponovno poslati</a>",
-        "usingOther": "ali lahko",
+        "usingOther": "ali pa lahko",
         "prompt": "Izberi uporabniško ime:",
         "newUser": "ali ustvarite nov račun spodaj",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Sprejmete pogoje storitve?",
         "facebookNoEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domač način.",
-        "picTooltip": "To sliko lahko spremenite pozneje"
+        "picTooltip": "To sliko lahko spremenite pozneje",
+        "wallet": {
+            "payload": "Prijavite se {{host}} ob {{timestamp}}",
+            "alert": {
+                "title": "Preusmeritev v Denarnico",
+                "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v denarnico. Ko se prijavite, se vrnite na to stran."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Dodajte način za prijavo",
@@ -108,6 +115,18 @@
         "Owner": "Lastnik",
         "Admin": "Administrator",
         "Member": "Poslanec",
-        "Guest": "Gost"
+        "Guest": "Gost",
+        "Host": "Gostitelj"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Dnevno",
+        "Weekly": "Tedensko",
+        "Monthly": "Mesečno",
+        "Application": "Uporaba",
+        "Pages": "Strani",
+        "Services": "Storitve",
+        "Faq": "Pogosta vprašanja",
+        "WeekDays": "Tedenski dnevi"
     }
 }

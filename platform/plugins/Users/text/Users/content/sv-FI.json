@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accepterar användarvillkoren?",
         "facebookNoEmail": "Ditt facebookkonto saknar en bekräftad e-postadress. Logga bara in på det ursprungliga sättet.",
-        "picTooltip": "Du kan ändra den här bilden senare"
+        "picTooltip": "Du kan ändra den här bilden senare",
+        "wallet": {
+            "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
+            "alert": {
+                "title": "Omdirigerar till Wallet",
+                "content": "När du stänger den här dialogrutan kommer du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Lägg till ett sätt att logga in",
@@ -108,6 +115,18 @@
         "Owner": "Ägare",
         "Admin": "Administration",
         "Member": "Medlem",
-        "Guest": "Gäst"
+        "Guest": "Gäst",
+        "Host": "Värd"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Dagligen",
+        "Weekly": "Varje vecka",
+        "Monthly": "En gång i månaden",
+        "Application": "Ansökan",
+        "Pages": "Sidor",
+        "Services": "Tjänster",
+        "Faq": "Vanliga frågor",
+        "WeekDays": "Veckodagar"
     }
 }

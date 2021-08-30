@@ -74,7 +74,7 @@
         "notVerified": "Heu d’enviar un missatge d’activació per iniciar la sessió.",
         "emailExists": "Heu provat abans de registrar-vos amb aquest correu electrònic? En cas afirmatiu, comproveu la vostra safata d&#39;entrada per activar el compte. <a href='#resend' class='Q_button Users_activation_resend'>Feu clic per tornar a enviar el missatge<\/a>",
         "mobileExists": "Ja havíeu intentat registrar-vos amb aquest número de mòbil? En cas afirmatiu, comproveu el vostre SMS per activar el vostre compte. <a href='#resend' class='Q_button Users_activation_resend'>Feu clic per tornar a enviar el missatge<\/a>",
-        "usingOther": "o podeu",
+        "usingOther": "o pots",
         "prompt": "Escull un nom d&#39;usuari:",
         "newUser": "o bé creeu un compte nou a continuació",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accepteu les Condicions del servei?",
         "facebookNoEmail": "Al vostre compte de Facebook falta una adreça de correu electrònic confirmada. Simplement inicieu la sessió amb la forma nativa.",
-        "picTooltip": "Podeu canviar aquesta imatge més endavant"
+        "picTooltip": "Podeu canviar aquesta imatge més endavant",
+        "wallet": {
+            "payload": "Inicieu la sessió a {{host}} alhora {{timestamp}}",
+            "alert": {
+                "title": "Redirecció a Wallet",
+                "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Afegeix una manera de iniciar la sessió",
@@ -108,6 +115,18 @@
         "Owner": "Propietari",
         "Admin": "Administrador",
         "Member": "Membre",
-        "Guest": "Convidat"
+        "Guest": "Convidat",
+        "Host": "Amfitrió"
+    },
+    "analytics": {
+        "Title": "Analítica",
+        "Daily": "Diàriament",
+        "Weekly": "Setmanalment",
+        "Monthly": "Mensual",
+        "Application": "Aplicació",
+        "Pages": "Pàgines",
+        "Services": "Serveis",
+        "Faq": "Preguntes freqüents",
+        "WeekDays": "Dies de setmana"
     }
 }

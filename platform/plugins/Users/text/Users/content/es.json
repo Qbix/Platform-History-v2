@@ -85,7 +85,14 @@
         },
         "confirmTerms": "¿Acepta los términos del servicio?",
         "facebookNoEmail": "A su cuenta de Facebook le falta una dirección de correo electrónico confirmada. Simplemente inicie sesión de forma nativa.",
-        "picTooltip": "Puedes cambiar esta imagen más tarde"
+        "picTooltip": "Puedes cambiar esta imagen más tarde",
+        "wallet": {
+            "payload": "Inicie sesión en {{host}} a la hora {{timestamp}}",
+            "alert": {
+                "title": "Redirigiendo a Wallet",
+                "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Agregar una forma de iniciar sesión",
@@ -108,6 +115,18 @@
         "Owner": "Propietario",
         "Admin": "Administración",
         "Member": "Miembro",
-        "Guest": "Huésped"
+        "Guest": "Huésped",
+        "Host": "Anfitrión"
+    },
+    "analytics": {
+        "Title": "Analítica",
+        "Daily": "Diario",
+        "Weekly": "Semanalmente",
+        "Monthly": "Mensual",
+        "Application": "Solicitud",
+        "Pages": "Paginas",
+        "Services": "Servicios",
+        "Faq": "Preguntas más frecuentes",
+        "WeekDays": "Días de la semana"
     }
 }
