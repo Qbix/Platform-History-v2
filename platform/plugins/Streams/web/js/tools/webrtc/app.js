@@ -3412,18 +3412,14 @@ window.WebRTCconferenceLib = function app(options){
                     _inputCtx.font = "30px Arial";
                     var textWidth = _inputCtx.measureText(text).width;
                     var percentWidth = (webrtcSource.rect.width / 100 * 70);
-                    var rectHeight = 60;
-                    var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
+                    //var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
+                    var rectWidth = webrtcSource.rect.width;
                     var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
+                    var rectHeight = webrtcSource.rect.height / 100 * 20;
+                    if(rectHeight > 100) rectHeight = 100;
                     var yTo;
-                    if(rectHeight < (webrtcSource.rect.height / 100 * 20)) {
-                        yTo = function () {
-                            return webrtcSource.rect.y + webrtcSource.rect.height - 100;
-                        }
-                    } else {
-                        yTo = function () {
-                            return webrtcSource.rect.y + webrtcSource.rect.height - rectHeight;
-                        }
+                    yTo = function () {
+                        return webrtcSource.rect.y + webrtcSource.rect.height - rectHeight;
                     }
                     var nameLabel = new RectObjectSource({
                         baseSource: webrtcSource,
@@ -3431,13 +3427,13 @@ window.WebRTCconferenceLib = function app(options){
                         frames: 100,
                         widthFrom: rectWidth,
                         widthTo: rectWidth,
-                        heightFrom: 60,
-                        heightTo: 60,
+                        heightFrom: rectHeight,
+                        heightTo: rectHeight,
                         xFrom: xPos,
                         xTo: xPos,
                         yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
                         yTo: yTo(),
-                        fill: 'rgb(255 255 255 / 65%)'
+                        fill: 'rgb(38 165 83 / 100%)'
                     });
                     nameLabel.name = 'Rectangle';
 
@@ -3506,7 +3502,7 @@ window.WebRTCconferenceLib = function app(options){
 
                     addSource(nameText);
 
-                    webrtcSource.displayNameTimeout = setTimeout(function () {
+                    /*webrtcSource.displayNameTimeout = setTimeout(function () {
                         console.log('nameText.yFrom', nameText.yFrom)
                         console.log('nameText.yTo', nameText.yTo)
                         var neYFrom = nameLabel.yTo;
@@ -3548,7 +3544,66 @@ window.WebRTCconferenceLib = function app(options){
                         });
 
                         webrtcSource.displayNameTimeout = null;
-                    }, 4000)
+                    }, 4000)*/
+                }
+
+                function hideName(participant) {
+                    var webrtcSource, nameBgSource, nameTextSource;
+                    webrtcSource = _activeScene.sources.filter(function (source) {
+                        return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
+                    })[0];
+                    for(let i in _activeScene.sources) {
+                        if(_activeScene.sources[i].sourceType != 'webrtcrect' || _activeScene.sources[i].baseSource.participant != participant) continue;
+                        nameBgSource = _activeScene.sources[i];
+                        break;
+                    }
+                    for(let i in _activeScene.sources) {
+                        if(_activeScene.sources[i].baseSource != nameBgSource || _activeScene.sources[i].sourceType != 'webrtctext') continue;
+                        nameTextSource = _activeScene.sources[i];
+                        break;
+                    }
+
+                    console.log('nameText.yFrom', nameTextSource.yFrom)
+                    console.log('nameText.yTo', nameTextSource.yTo)
+                    var neYFrom = nameBgSource.yTo;
+                    var neYTo = nameBgSource.yFrom + 100;
+                    nameBgSource.yFrom = neYFrom;
+                    var oldYTo = nameBgSource.yTo;
+                    nameBgSource.yTo = neYTo;
+
+                    Object.defineProperties(nameBgSource, {
+                        'yFrom': {
+                            'get': function() {
+                                return oldYTo;
+                            }
+                        },
+                        'yTo': {
+                            'get': function() {
+                                return this.baseSource.rect.y + this.baseSource.rect.height;
+                            }
+                        }
+                    });
+                    nameBgSource.frame = 0;
+
+                    nameTextSource.yFrom = nameTextSource.yTo;
+                    nameTextSource.yTo = nameTextSource.yFrom + 100;
+                    nameTextSource.frame = 0;
+                    nameTextSource.on('animationEnded', function() {
+                        console.log('animationEnded')
+                        let index = _activeScene.sources.indexOf(nameTextSource);
+                        if(index != -1) {
+                            _activeScene.sources.splice(index, 1)
+                        }
+                    });
+
+                    nameBgSource.on('animationEnded', function() {
+                        console.log('animationEnded 2')
+                        let index = _activeScene.sources.indexOf(nameBgSource);
+                        if(index != -1) {
+                            _activeScene.sources.splice(index, 1)
+                        }
+                    });
+
                 }
 
                 function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
@@ -4336,7 +4391,8 @@ window.WebRTCconferenceLib = function app(options){
                     setWebrtcLayoutRect: setWebrtcLayoutRect,
                     getWebrtcLayoutRect: getWebrtcLayoutRect,
                     getCanvasSize: getCanvasSize,
-                    displayName: displayName
+                    displayName: displayName,
+                    hideName: hideName
                 }
             }());
 
