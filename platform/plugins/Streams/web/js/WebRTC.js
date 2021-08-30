@@ -2189,7 +2189,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 initConference();
             } else {
                 Q.addScript([
-                    "{{Streams}}/js/tools/webrtc/app.js"
+                    "{{Streams}}/js/tools/webrtc/app.js?time=" + Date.now()
                 ], function () {
                     initConference();
                 });
@@ -7083,7 +7083,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     var ua = navigator.userAgent;
                     var startWith = _options.startWith || {};
-                    //var preparingRoom = false;
+                    var preparingRoom = false;
 
                     log('start: onConnect', preparingRoom, _options.preparing.video, _options.preparing.audio);
 

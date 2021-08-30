@@ -240,6 +240,16 @@
 				tool.bindRTCEvents();
 
 			},
+			show: function() {
+				if(this.element != null) {
+                    this.element.style.display = '';
+				}
+			},
+			hide: function() {
+                if(this.element != null) {
+                    this.element.style.display = 'none';
+                }
+			},
 
 			/**
 			 * Bind WebRTCconference events to update controls UI
@@ -2031,15 +2041,18 @@
                             var rtmpStreamingSettings = document.createElement('DIV');
                             rtmpStreamingSettings.className = 'Streams_webrtc_streaming_start_settings';
 
+                            var rtmpLiveItem = document.createElement('DIV');
+                            rtmpLiveItem.className = 'Streams_webrtc_streaming_rtmp_item';
+
                             var rtmpLiveURL = document.createElement('LABEL');
-                            rtmpLiveURL.className = 'Streams_webrtc_streaming_title';
+                            rtmpLiveURL.className = 'Streams_webrtc_streaming_rtmp_url';
 
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
-                            rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_desc';
+                            rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
@@ -2051,6 +2064,11 @@
                             settingsBtn.type = 'button';
                             settingsBtn.className = 'Q_button';
                             settingsBtn.innerHTML = Q.getObject("webrtc.settingsPopup.streamingSettings", tool.textes);
+
+                            var addUrlBtn = document.createElement('BUTTON');
+                            addUrlBtn.type = 'button';
+                            addUrlBtn.className = 'Q_button Streams_webrtc_streaming_add_rtmp';
+                            addUrlBtn.innerHTML = 'Add RTMP';
 
                             var startStreamingBtn = document.createElement('BUTTON');
                             startStreamingBtn.type = 'button';
@@ -2076,11 +2094,13 @@
                             rtmpStreaming.appendChild(rtmpStreamingItem);
 
                             rtmpLiveURL.appendChild(rtmpLiveURLInput);
-                            rtmpStreamingSettings.appendChild(rtmpLiveURL);
                             rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
-                            rtmpStreamingSettings.appendChild(rtmpLiveStreamKey);
+                            rtmpLiveItem.appendChild(rtmpLiveURL);
+                            rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+                            rtmpStreamingSettings.appendChild(rtmpLiveItem);
 
 
+                            startStreamingBtnCon.appendChild(addUrlBtn);
                             startStreamingBtnCon.appendChild(settingsBtn);
                             startStreamingBtnCon.appendChild(startStreamingBtn);
                             rtmpStreamingSettings.appendChild(startStreamingBtnCon);
@@ -2101,6 +2121,31 @@
                             rtmpStreaming.appendChild(rtmpStreamingSettings);
                             rtmpStreaming.appendChild(rtmpLiveSection);
 
+                            addUrlBtn.addEventListener('click', function (e) {
+                                var rtmpLiveItem = document.createElement('DIV');
+                                rtmpLiveItem.className = 'Streams_webrtc_streaming_rtmp_item';
+
+                                var rtmpLiveURL = document.createElement('LABEL');
+                                rtmpLiveURL.className = 'Streams_webrtc_streaming_rtmp_url';
+
+                                var rtmpLiveURLInput = document.createElement('INPUT');
+                                rtmpLiveURLInput.type = 'text';
+                                rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
+
+                                var rtmpLiveStreamKey = document.createElement('LABEL');
+                                rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
+                                var rtmpLiveStreamKeyInput = document.createElement('INPUT');
+                                rtmpLiveStreamKeyInput.type = 'password';
+                                rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+
+                                rtmpLiveURL.appendChild(rtmpLiveURLInput);
+                                rtmpLiveStreamKey.appendChild(rtmpLiveStreamKeyInput);
+                                rtmpLiveItem.appendChild(rtmpLiveURL);
+                                rtmpLiveItem.appendChild(rtmpLiveStreamKey);
+
+                                rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
+                            })
+
                             rtmpStreamingItem.addEventListener('click', function (e) {
                                 if(rtmpStreamingSettings.classList.contains('shown')) {
                                     rtmpStreamingSettings.classList.remove('shown');
@@ -2115,14 +2160,24 @@
                             		alert('MediaRecorder is not supported in your browser.')
 									return;
 								}
-                                var rtmpURL = rtmpLiveURLInput.value.trim();
-                                var streamKey = rtmpLiveStreamKeyInput.value.trim();
-                                var fullRtmpURL = rtmpURL;
-                                if(streamKey != null && streamKey != '') {
-                                    fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
-                                }
 
-                                tool.WebRTCLib.screensInterface.fbLive.startStreaming(fullRtmpURL, 'custom');
+								var rtmpUrls = Array.from(rtmpStreamingSettings.querySelectorAll('.Streams_webrtc_streaming_rtmp_item'));
+
+                            	var rtmpUrlsArr = [];
+                            	for(let i in rtmpUrls) {
+                            		var inputs = rtmpUrls[i].querySelectorAll('input');
+                                    var rtmpURL = inputs[0].value.trim();
+                                    var streamKey = inputs[1].value.trim();
+                                    var fullRtmpURL = rtmpURL;
+                                    if(streamKey != null && streamKey != '') {
+                                        fullRtmpURL = rtmpURL.endsWith('/') ? fullRtmpURL + streamKey : fullRtmpURL + '/' + streamKey;
+                                    }
+                                    rtmpUrlsArr.push(fullRtmpURL);
+								}
+
+
+
+                                tool.WebRTCLib.screensInterface.fbLive.startStreaming(rtmpUrlsArr, 'custom');
 
                                 rtmpStreamingSettings.style.display = 'none';
                                 rtmpLiveSection.style.display = 'block';
@@ -2414,7 +2469,7 @@
                                 var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count  }`);
                                 var checkmark = document.createElement('SPAN');
                                 checkmark.className = 'Streams_webrtc_radio-checkmark';
-                                checkmark.innerHTML = icons.microphoneTransparent;
+                                checkmark.innerHTML = icons.enabledSpeaker;
                                 textLabelCon.appendChild(textLabel);
                                 radioBtnItem.appendChild(textLabelCon);
                                 radioBtnItem.appendChild(checkmark);
@@ -4077,7 +4132,7 @@
                         }
 
                         function addSceneItemToList(item) {
-                            if(item == null) return;
+                            if(item == null || _scenesEl == null) return;
                             _scenesList.push(item)
                             _scenesEl.appendChild(item.itemEl);
                             _scenesEl.addEventListener('click', function (e) {
@@ -4508,7 +4563,7 @@
                             window.syncList = syncList;
 
                             function addItem(item) {
-                                if(item == null) return;
+                                if(item == null || _visualSourcesListEl == null) return;
                                 console.log('visual: addItem', item)
                                 console.log('visual: addItem itemEl', item.itemEl)
                                 _visualList.push(item)
@@ -5434,7 +5489,7 @@
                             AudioListItem.prototype = new ListItem();
 
                             function addItem(item) {
-                                if (item == null) return;
+                                if (item == null || _audioSourcesListEl == null) return;
                                 console.log('visual: addItem', item)
                                 console.log('visual: addItem itemEl', item.itemEl)
 								if(item.sourceInstance.sourceType == 'webrtc' && item.sourceInstance.participant.isLocal) {
@@ -5845,6 +5900,8 @@
                         function createSourcesCol() {
                             var sourcesColumn = document.createElement('DIV');
                             sourcesColumn.className = 'Streams_webrtc_popup-sources';
+                            var sourcesColumnInner = document.createElement('DIV');
+                            sourcesColumnInner.className = 'Streams_webrtc_popup-sources-inner';
                             var sourcesColumnTitle = document.createElement('DIV');
                             sourcesColumnTitle.className = 'Streams_webrtc_popup-sources-title';
                             var sourcesColumnTitleInner = _sourcesTabs = document.createElement('DIV');
@@ -5870,8 +5927,9 @@
 
                             var sourcesColumnBody = document.createElement('DIV');
                             sourcesColumnBody.className = 'Streams_webrtc_popup-sources-body';
-                            sourcesColumn.appendChild(sourcesColumnTitle);
-                            sourcesColumn.appendChild(sourcesColumnBody);
+                            sourcesColumnInner.appendChild(sourcesColumnTitle);
+                            sourcesColumnInner.appendChild(sourcesColumnBody);
+                            sourcesColumn.appendChild(sourcesColumnInner);
                             _sourcesEl = sourcesColumnBody;
 
                             _sourcesEl.appendChild(visualSources.createOrGet());
@@ -6296,7 +6354,7 @@
                                 dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-layouts-body';
 
                                 var tiledLayout = new LayoutListItem('Tiled');
-                                tiledLayout.key = 'tiledHorizontalMobile';
+                                tiledLayout.key = 'tiledStreamingLayout';
                                 _layoutList.push(tiledLayout);
                                 dialogBodyInner.appendChild(tiledLayout.itemEl);
 
@@ -7220,7 +7278,17 @@
                         previewBoxBodyInner.className = 'Streams_webrtc_popup-preview-body-inner';
                         var sourceResizingEl = _resizingElement = document.createElement('DIV');
                         sourceResizingEl.className = 'Streams_webrtc_popup-preview-resizing';
+
+                        var previewButtons = document.createElement('DIV');
+                        previewButtons.className = 'Streams_webrtc_popup-preview-buttons';
+                        var startRecordingBtn = document.createElement('BUTTON');
+                        startRecordingBtn.type = 'button';
+                        startRecordingBtn.className = 'Q_button';
+                        startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.textes);
+
+                        //previewButtons.appendChild(startRecordingBtn);
                         previewBoxBodyInner.appendChild(sourceResizingEl);
+                        previewBoxBody.appendChild(previewButtons);
                         previewBoxBody.appendChild(previewBoxBodyInner);
                         previewBox.appendChild(previewBoxBody);
                         boxContent.appendChild(previewBox);
@@ -7286,6 +7354,194 @@
                                     "Q/resize",
                                     {
                                         move: true,
+										elementPosition: 'fixed',
+                                        activateOnElement: dialogTitle,
+                                        keepInitialSize: true,
+                                        resize: false,
+                                        active: true,
+                                        moveWithinArea: 'window',
+                                    }
+                                ),
+                                {},
+                                function () {
+
+                                }
+                            );
+                        }, 3000)
+
+                        var controlsRect = tool.controlBar.getBoundingClientRect();
+                        var dialogWidth = 996;
+                        dialogue.style.width = dialogWidth + 'px';
+                        console.log('dialogWidth', dialogWidth);
+                        if(Q.info.isMobile) {
+                            //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                        } else {
+                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            //dialogue.style.top = '100px';
+                        }
+
+
+                        close.addEventListener('click', function () {
+                            tool.advancedLiveStreamingBox.hide()
+                        });
+
+                        tool.advancedStreamingDialogue = boxContent;
+                        console.log('advancedLiveStreamingBox 111');
+
+                        return {
+                            dialogueEl: dialogue,
+                            previewBoxEl: previewBoxBodyInner
+                        }
+                	}
+
+                    function createPopupHorizontalMobile() {
+                		console.log('createPopup 00', scenesInterface)
+                        var dialogue=document.createElement('DIV');
+                        dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden';
+                        _dialogueEl = dialogue;
+                        var dialogTitle=document.createElement('H3');
+                        dialogTitle.innerHTML = 'Streaming settings';
+                        dialogTitle.className = 'dialog-header Q_dialog_title';
+
+                        var dialogInner=document.createElement('DIV');
+                        dialogInner.className = 'dialog-inner';
+                        var boxContent=document.createElement('DIV');
+                        boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+
+                        var previewBox = document.createElement('DIV');
+                        previewBox.className = 'Streams_webrtc_popup-preview';
+                        var previewBoxBody = document.createElement('DIV');
+                        previewBoxBody.className = 'Streams_webrtc_popup-preview-body';
+                        var previewBoxBodyInner = document.createElement('DIV');
+                        previewBoxBodyInner.className = 'Streams_webrtc_popup-preview-body-inner';
+                        var sourceResizingEl = _resizingElement = document.createElement('DIV');
+                        sourceResizingEl.className = 'Streams_webrtc_popup-preview-resizing';
+
+
+                        var previewButtons = document.createElement('DIV');
+                        previewButtons.className = 'Streams_webrtc_popup-preview-buttons';
+                        var startRecordingBtn = document.createElement('BUTTON');
+                        startRecordingBtn.type = 'button';
+                        startRecordingBtn.className = 'Q_button';
+                        startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.textes);
+
+                        previewButtons.appendChild(startRecordingBtn);
+
+                        previewBoxBodyInner.appendChild(sourceResizingEl);
+                        previewBoxBody.appendChild(previewBoxBodyInner);
+                        //previewBoxBody.appendChild(previewButtons);
+                        previewBox.appendChild(previewBoxBody);
+                        boxContent.appendChild(previewBox);
+
+
+                        var streamingControls=document.createElement('DIV');
+                        streamingControls.className = 'Streams_webrtc_popup-streaming-controls';
+
+                        var scenesColumn = scenesInterface.createScenesCol();
+
+                        var sourcesColumn = sourcesInterface.createSourcesCol();
+
+                        var scrollerBtn = document.createElement('DIV')
+                        scrollerBtn.className = 'Streams_webrtc_popup-streaming-controls-scroller';
+                        sourcesColumn.appendChild(scrollerBtn);
+
+                        var optionsColumn = document.createElement('DIV');
+                        optionsColumn.className = 'Streams_webrtc_popup-options';
+                        _optionsEl = optionsColumn;
+
+                        //streamingControls.appendChild(scenesColumn);
+                        streamingControls.appendChild(sourcesColumn);
+                        streamingControls.appendChild(optionsColumn);
+
+                        var close=document.createElement('div');
+                        close.className = 'close-dialog-sign';
+                        close.innerHTML = '';
+                       /* close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
+                        close.style.backgroundRepeat = 'no-repeat';
+                        close.style.backgroundSize = 'cover';*/
+                        close.style.animation = 'none';
+
+
+                        boxContent.appendChild(streamingControls);
+                        dialogInner.appendChild(dialogTitle);
+                        dialogInner.appendChild(boxContent);
+
+                        dialogue.appendChild(close);
+                        dialogue.appendChild(dialogInner);
+
+
+                        startRecordingBtn.addEventListener('click', function () {
+                            if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                            tool.WebRTCLib.screensInterface.localRecorder.startRecording(function (liveInfo) {
+                                if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", tool.textes);
+                                recordingSettings.style.display = 'none';
+                                activeRecordingSection.style.display = 'block';
+                            });
+                        })
+                        /*stopRecordingBtn.addEventListener('click', function () {
+                            if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                            tool.WebRTCLib.screensInterface.localRecorder.stopRecording(function () {
+                                if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", tool.textes);
+                                activeRecordingSection.style.display = 'none';
+                                recordingSettings.style.display = 'block';
+                            });
+                        })*/
+
+                        scrollerBtn.addEventListener('click', function () {
+                            let leftPos = optionsColumn.offsetLeft;
+                            if(streamingControls.scrollLeft >= leftPos / 2) {
+                                streamingControls.scrollLeft = 0;
+                            } else {
+                                streamingControls.scrollLeft = leftPos;
+                            }
+                        })
+
+                        streamingControls.addEventListener('scroll', function () {
+                            if(streamingControls.scrollLeft >= optionsColumn.offsetLeft / 2) {
+                                if(!scrollerBtn.classList.contains('Streams_webrtc_popup-streaming-scroller-back')) {
+                                    scrollerBtn.classList.add('Streams_webrtc_popup-streaming-scroller-back')
+								}
+							} else {
+                                scrollerBtn.classList.remove('Streams_webrtc_popup-streaming-scroller-back')
+                            }
+                        });
+
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                _resizingElement,
+                                "Q/resize",
+                                {
+                                    move: true,
+                                    resize: true,
+                                    active: true,
+                                    //elementPosition: 'fixed',
+                                    moveWithinArea: 'parent',
+                                    negativeMoving: true,
+                                    onMoving: function () {
+
+                                    }
+                                }
+                            ),
+                            {},
+                            function () {
+                                _resizingElementTool = this;
+                            }
+                        );
+
+                        tool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                        setTimeout(function () {
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    dialogue,
+                                    "Q/resize",
+                                    {
+                                        move: true,
+										elementPosition: 'fixed',
                                         activateOnElement: dialogTitle,
                                         resize: false,
                                         active: true,
@@ -7304,12 +7560,13 @@
                         dialogue.style.width = dialogWidth + 'px';
                         console.log('dialogWidth', dialogWidth);
                         if(Q.info.isMobile) {
-                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                            //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
                         } else {
                             dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                             dialogue.style.top = '100px';
                         }
+
 
 
                         close.addEventListener('click', function () {
@@ -7319,79 +7576,123 @@
                         tool.advancedStreamingDialogue = boxContent;
                         console.log('advancedLiveStreamingBox 111');
 
-                        tool.advancedLiveStreamingBox = {
-                            dialogueEl: dialogue,
-                            static: false,
-                            isHidden: true,
-                            hide: function () {
-                                if(!this.dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                                    this.dialogueEl.classList.add('Streams_webrtc_hidden');
-                                    this.isHidden = true;
-                                    var streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
-                                    if(streamingCanvas != null) {
-                                        streamingCanvas.style.top = '-999999999px';
-                                        streamingCanvas.style.left = '0';
-                                        document.body.appendChild(streamingCanvas);
-                                    }
-
-                                    if(!tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
-                                        tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.stop();
-                                    }
-                                }
-                            },
-                            show: function () {
-                                if(this.dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
-
-                                    this.dialogueEl.classList.remove('Streams_webrtc_hidden');
-                                    this.isHidden = false;
-
-                                    tool.newMessagesCounter.innerHTML = '0';
-                                    var msgCounter = tool.newMessagesCounter.parentNode;
-
-                                    var controlsRect = tool.controlBar.getBoundingClientRect();
-                                    if(Q.info.isMobile) {
-                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                        dialogue.style.bottom = (controlsRect.height + 10) + 'px';
-                                    } else {
-                                        var winWidth = window.innerWidth;
-                                        var availableSpace = winWidth - (controlsRect.left + controlsRect.width);
-                                        if(availableSpace >= (dialogWidth+15)) {
-                                            dialogue.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
-                                            dialogue.style.bottom = 0;
-
-                                        } else {
-                                            dialogue.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
-                                            dialogue.style.bottom = (controlsRect.height + 10) + 'px';
-                                        }
-                                    }
-
-                                    var streamingCanvas = _streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
-                                    if(streamingCanvas != null) {
-                                        streamingCanvas.style.top = '';
-                                        streamingCanvas.style.left = '';
-                                        previewBoxBodyInner.appendChild(streamingCanvas);
-                                    }
-
-                                    scenesInterface.syncList();
-                                }
-                            },
-                            toggle: function () {
-                                if(this.isHidden) {
-                                    this.show();
-                                } else this.hide();
-                            },
-                            scrollToTheBottom: function () {
-                                if(!Q.getObject(['textChat', 'chatTool', 'element'], tool)) return;
-                                tool.textChat.chatTool.element.scrollTop = tool.textChat.chatTool.element.scrollHeight;
-                            }
-                        }
-
-                        //window.advStreaming = tool.advancedLiveStreamingBox;
-
+                        return {
+                        	dialogueEl: dialogue,
+                        	previewBoxEl: previewBoxBodyInner
+						}
                     }
 
-                    createPopup();
+                    var dialogWidth = 996;
+                    tool.advancedLiveStreamingBox = {
+                        desktopDialogueEl: null,
+                        mobileHorizontaldialogueEl: null,
+                        mobileVerticaldialogueEl: null,
+                        activeDialogue: null,
+                        static: false,
+                        isHidden: true,
+                        hide: function () {
+                        	if(this.activeDialogue == null) return;
+                            if(!this.activeDialogue.dialogueEl.classList.contains('Streams_webrtc_hidden')){
+                                this.activeDialogue.dialogueEl.classList.add('Streams_webrtc_hidden');
+                                this.isHidden = true;
+                                var streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
+                                if(streamingCanvas != null) {
+                                    streamingCanvas.style.position = 'absolute';
+                                    streamingCanvas.style.top = '-999999999px';
+                                    streamingCanvas.style.left = '0';
+                                    document.body.appendChild(streamingCanvas);
+                                }
+
+                                if(!tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+                                    tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.stop();
+                                }
+                            }
+                            if(Q.info.isMobile) tool.show();
+                        },
+                        show: function () {
+                        	var dialogue, previewBox;
+                            if(Q.info.isMobile){
+                                if(window.innerWidth > window.innerHeight) {
+                                	if(this.mobileHorizontaldialogueEl == null) {
+                                        this.mobileHorizontaldialogueEl = createPopupHorizontalMobile();
+                                    }
+
+                                    dialogue = this.mobileHorizontaldialogueEl.dialogueEl;
+                                    previewBox = this.mobileHorizontaldialogueEl.previewBoxEl;
+                                    this.activeDialogue = this.mobileHorizontaldialogueEl;
+                                } else {
+
+                                }
+                                if(this.mobileHorizontaldialogueEl == null) return;
+                            } else {
+                                if(this.desktopDialogueEl == null) {
+                                    this.desktopDialogueEl = createPopup();
+                                }
+
+                                dialogue = this.desktopDialogueEl.dialogueEl;
+                                previewBox = this.desktopDialogueEl.previewBoxEl;
+                                this.activeDialogue = this.desktopDialogueEl;
+                                if(this.desktopDialogueEl == null) return;
+                            }
+
+
+
+                            if(dialogue.classList.contains('Streams_webrtc_hidden')) {
+                                tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
+
+                                dialogue.classList.remove('Streams_webrtc_hidden');
+                                this.isHidden = false;
+
+                                tool.newMessagesCounter.innerHTML = '0';
+
+                                var controlsRect = tool.controlBar.getBoundingClientRect();
+                                if(Q.info.isMobile) {
+                                    dialogue.style.position = 'fixed';
+                                    dialogue.style.width = '100%';
+                                    dialogue.style.height = '100%';
+                                    dialogue.style.maxWidth = 'none';
+                                    dialogue.style.top = '0';
+                                    dialogue.style.left = '0';
+                                    //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                    //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                } else {
+                                    var winWidth = window.innerWidth;
+                                    var availableSpace = winWidth - (controlsRect.left + controlsRect.width);
+                                    if(availableSpace >= (dialogWidth+15)) {
+                                        dialogue.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
+                                        //dialogue.style.bottom = 0;
+
+                                    } else {
+                                        dialogue.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
+                                        //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                    }
+                                }
+
+                                var streamingCanvas = _streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
+                                if(streamingCanvas != null) {
+                                    streamingCanvas.style.position = '';
+                                    streamingCanvas.style.top = '';
+                                    streamingCanvas.style.left = '';
+                                    previewBox.appendChild(streamingCanvas);
+                                }
+
+                                scenesInterface.syncList();
+                                if(Q.info.isMobile) tool.hide();
+                            }
+                        },
+                        toggle: function () {
+                            if(this.isHidden) {
+                                this.show();
+                            } else this.hide();
+                        },
+                        scrollToTheBottom: function () {
+                            if(!Q.getObject(['textChat', 'chatTool', 'element'], tool)) return;
+                            tool.textChat.chatTool.element.scrollTop = tool.textChat.chatTool.element.scrollHeight;
+                        }
+                    }
+
+
+
                     scenesInterface.syncList();
 
                     return {

@@ -2821,10 +2821,12 @@ window.WebRTCconferenceLib = function app(options){
                                 layoutRects = layoutGenerator('screenSharing', streamsNum);
                                 _currentLayout = 'screenSharing';
                             } else {
-                                console.log('updateWebRTCCanvasLayout layout tiledHorizontalMobile');
+                                console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout');
 
-                                layoutRects = layoutGenerator('tiledHorizontalMobile', streamsNum);
-                                _currentLayout = 'tiledHorizontalMobile';
+                                layoutRects = layoutGenerator('tiledStreamingLayout', streamsNum);
+                                console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout after', layoutRects);
+
+                                _currentLayout = 'tiledStreamingLayout';
                             }
                         }
                     }
@@ -3831,32 +3833,23 @@ window.WebRTCconferenceLib = function app(options){
                     _isChangingRoom = Date.now();
                 }
 
+                var _layoutTool = {
+                    currentRects: [],
+                    basicGridRects: [],
+                    state: {
+                        customGenerators: [],
+                        currentGenerator: [],
+                        currentMappedRects: []
+                    }
+                };
                 function layoutGenerator(layoutName, numberOfRects) {
                     log('layoutGenerator', layoutName)
 
                     var layouts = {
-                        tiledHorizontalMobile: function (container, count) {
+                        tiledStreamingLayout: function (container, count) {
                             //var size = {parentWidth: _size.width, parentHeight: _size.height};
                             var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
-                            log('layoutGenerator size', size)
-
-                            switch (count) {
-                                case 1:
-                                    return simpleGrid(count, size, 1);
-                                case 2:
-                                    return simpleGrid(count, size, 2);
-                                case 3:
-                                    return simpleGrid(count, size, 3);
-                                case 4:
-                                    return simpleGrid(count, size, 2);
-                                case 5:
-                                    return simpleGridBasedOnRowsNum(count, 3, size)
-                                case 6:
-                                    return simpleGrid(count, size, 2);
-                                default:
-                                    return simpleGrid(count, size, 2);
-
-                            }
+                            return tiledStreamingLayout(container, count);
                         },
                         screenSharing: function (container, count) {
                             var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
@@ -3870,91 +3863,247 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     }
 
-                    function simpleGrid(count, size, perRow, rowsNum) {
-                        var rects = [];
-                        var rectHeight;
-                        var rectWidth = size.parentWidth / perRow;
-                        if(rowsNum == null) {
-                            rectHeight = size.parentHeight / Math.ceil(count / perRow);
-                            rowsNum = Math.floor(size.parentHeight / rectHeight);
+                    function tiledStreamingLayout(container, count) {
+                        console.log('tiledStreamingLayout', container, count)
+                        var containerRect = container.constructor.name != 'DOMRect' ? container.getBoundingClientRect() : container;
+
+                        if(_layoutTool.currentRects.length == 0) {
+                            _layoutTool.currentRects = build(container, count);
                         } else {
-                            rectHeight = size.parentHeight / rowsNum;
+
+                            if(count > _layoutTool.currentRects.length) {
+                                _layoutTool.basicGridRects = build(container, count);
+                                //var availableRects = addAndUpdate(container, count);
+                                //_layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
+                                let numOfEls = _layoutTool.basicGridRects.length - _layoutTool.currentRects.length;
+                                let last = _layoutTool.basicGridRects.slice(Math.max(_layoutTool.basicGridRects.length - numOfEls, 0))
+
+                                let updatedRects = updateRealToBasicGrid();
+                                _layoutTool.currentRects = updatedRects.concat(last);
+
+                            } else if(count < _layoutTool.currentRects.length) {
+                                _layoutTool.basicGridRects = build(container, count);
+                                _layoutTool.currentRects = updateRealToBasicGrid();
+                                //_layoutTool.currentRects = removeAndUpdate();
+                            }
                         }
 
+                        _layoutTool.state.currentMappedRects = _layoutTool.currentRects
+                        return _layoutTool.currentRects;
 
-                        var isNextNewLast = false;
-                        var rowItemCounter = 1;
-                        var i;
-                        for (i = 1; i <= count; i++) {
-                            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, size.x, size.y) ;
-                            var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
-                            var isNextNewRow  = rowItemCounter == perRow;
-                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
-
-                            if(rowItemCounter == 1) {
-                                var y = size.y + (prevRect.height * (currentRow - 1));
-                                var x = size.x;
+                        function build() {
+                            var size;
+                            if(container.width != null && container.height != null) {
+                                size = {parentWidth:container.width, parentHeight:container.height};
                             } else {
-                                var y = prevRect.y;
-                                var x = prevRect.x + prevRect.width;
+                                var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                                size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
                             }
 
-                            var rect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                            if (isNextNewRow && isNextNewLast) {
-                                perRow = count - i;
-                                rectWidth = size.parentWidth / perRow;
-
-                            }
-                            rects.push(rect);
-
-                            if (isNextNewRow) {
-                                rowItemCounter = 1;
-                            } else rowItemCounter++;
-
-                        }
-
-                        return rects;
-                    }
-
-                    function simpleGridBasedOnRowsNum(count, rowsNum, size) {
-                        var rects = []
-                        var perRow = Math.floor(count / rowsNum);
-
-                        var rectWidth = size.parentWidth / perRow;
-                        var rectHeight = size.parentHeight / rowsNum;
-                        var isNextNewLast   = false;
-                        var rowItemCounter = 1;
-                        var i;
-                        for (i = 1; i <= count; i++) {
-                            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, size.x, size.y) ;
-                            var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
-                            var isNextNewRow  = rowItemCounter == perRow;
-                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
-
-                            if(rowItemCounter == 1) {
-                                var y = size.y + prevRect.height * (currentRow - 1);
-                                var x = size.x;
+                            if(count == 1) {
+                                return simpleGrid(count, size, 1);
+                            } else if(count == 2) {
+                                return simpleGrid(count, size, 2);
+                            } else if(count == 3) {
+                                return simpleGrid(count, size, 3);
+                            } else if(count == 4) {
+                                return simpleGrid(count, size, 2);
+                            } else if(count == 5) {
+                                return simpleGrid(count, size, 3);
+                            } else if(count >= 6 && count < 13) {
+                                return simpleGrid(count, size, 3);
                             } else {
-                                var y = prevRect.y;
-                                var x = prevRect.x + prevRect.width;
+                                return simpleGrid(count, size, 4);
                             }
-                            var rect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                            if(isNextNewRow && isNextNewLast) {
-                                perRow = count - i;
-                                rectWidth = size.parentWidth / perRow;
-                            }
-
-
-                            rects.push(rect);
-
-                            if(isNextNewRow) {
-                                rowItemCounter = 1;
-                            } else rowItemCounter++
                         }
 
-                        return rects;
+                        function updateRealToBasicGrid() {
+
+                            var actualLayoutRects = [];
+                            for(let i in _activeScene.sources) {
+                                if(_activeScene.sources[i].sourceType != 'webrtc') continue;
+                                actualLayoutRects.push({
+                                    key: actualLayoutRects.length,
+                                    rect: _activeScene.sources[i].rect
+                                });
+                            }
+                            var actualLayoutRectsClone = [...actualLayoutRects];
+                            console.log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+
+                            // for(let r = _layoutTool.basicGridRects.length - 1; r >= 0 ; r--){ryb
+                            for(let r in _layoutTool.basicGridRects) {
+                                let rect = _layoutTool.basicGridRects[r];
+
+                                let closestIndex = closest(rect, actualLayoutRectsClone);
+
+                                console.log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                                console.log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                                if(actualLayoutRects[closestIndex]) {
+                                    console.log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                                }
+
+                                if(closestIndex == null) continue;
+
+                                actualLayoutRects[closestIndex].x = rect.x;
+                                actualLayoutRects[closestIndex].y = rect.y;
+                                actualLayoutRects[closestIndex].width = rect.width;
+                                actualLayoutRects[closestIndex].height = rect.height;
+                                //rectsToSkip.push(closestIndex);
+
+                                for(let c in actualLayoutRectsClone) {
+                                    if(actualLayoutRectsClone[c].key == closestIndex) {
+                                        actualLayoutRectsClone.splice(c, 1);
+                                    }
+
+                                }
+                            }
+
+                            return actualLayoutRects;
+
+                            function closest(rect, rects) {
+                                var distance = function (x1,y1,x2,y2) {
+                                    return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                                }
+
+                                if(rects.length != 0) {
+
+                                    let closestRect = rects.reduce(function (prev, current, index) {
+                                        return (distance(current.left + (current.width / 2), current.top + (current.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2)) < distance(prev.left + (prev.width / 2), prev.top + (prev.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2))) ? current : prev;
+                                    })
+
+                                    return closestRect.key;
+
+                                } else {
+                                    return null;
+                                }
+                            }
+                        }
+
+                        function getElementSizeKeepingRatio(initSize, baseSize) {
+                            console.log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
+                            var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
+
+                            return { width: Math.floor(initSize.width*ratio), height: Math.floor(initSize.height*ratio)};
+                        }
+                        
+                        function simpleGrid(count, size, perRow, rowsNum) {
+                            console.log('simpleGrid');
+                            var rects = [];
+                            var spaceBetween = 10;
+                            var centerX = containerRect.width / 2;
+                            var centerY = containerRect.height / 2;
+                            var rectHeight;
+                            var rectWidth = (size.parentWidth / perRow) - (spaceBetween*(perRow - 1));
+                            if(rowsNum == null) {
+                                rectHeight = size.parentHeight / Math.ceil(count / perRow) - (spaceBetween*(perRow - 1));
+                            } else {
+                                rectHeight = size.parentHeight / rowsNum - (spaceBetween*(perRow - 1));
+                            }
+                            var newRectSize = getElementSizeKeepingRatio({
+                                width: 1280,
+                                height: 720
+                            }, {width: rectWidth, height: rectHeight})
+
+                            rectWidth = newRectSize.width;
+                            rectHeight = newRectSize.height;
+                            rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
+                            console.log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+
+                            var isNextNewLast = false;
+                            var rowItemCounter = 1;
+                            var i;
+                            for (i = 1; i <= count; i++) {
+                                console.log('simpleGrid for', currentRow, rowsNum);
+
+                                var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
+                                var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
+                                var isNextNewRow  = rowItemCounter == perRow;
+                                isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+
+                                if(rowItemCounter == 1) {
+                                    var y = (prevRect.y + prevRect.height) + spaceBetween;
+                                    var x = spaceBetween;
+                                } else {
+                                    var y = prevRect.y;
+                                    var x = prevRect.x + prevRect.width + spaceBetween;
+                                }
+
+                                var rect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                rects.push(rect);
+
+                                if (rowItemCounter == perRow) {
+                                    rowItemCounter = 1;
+                                } else rowItemCounter++;
+                            }
+
+                            console.log('simpleGrid rects', rects);
+
+                            //return rects;
+                            return centralizeRects(rects);
+                        }
+
+                        function getRectsRows(rects) {
+                            var rows = {};
+                            var i, count = rects.length;
+                            for(i = 0; i < count; i++) {
+                                var rect = rects[i];
+
+                                if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
+
+                            }
+
+                            var rowsArray = [];
+                            for (var property in rows) {
+                                if (rows.hasOwnProperty(property)) {
+                                    rowsArray.push(rows[property]);
+                                }
+                            }
+
+                            return rowsArray;
+                        }
+
+                        function centralizeRects(rects) {
+
+                            var centerX = containerRect.width / 2;
+                            var centerY = containerRect.height / 2;
+
+                            var minY = Math.min.apply(Math, rects.map(function(r) { return r.y; }));
+                            var maxY = Math.max.apply(Math, rects.map(function(r) { return r.y + r.height;}));
+
+                            var sortedRows = getRectsRows(rects);
+                            console.log('centralizeRects sortedRows', sortedRows)
+
+                            var alignedRects = []
+                            for(let r in sortedRows) {
+                                let row = sortedRows[r].map(function(r) { return r.rect; });
+                                var rowMinX = Math.min.apply(Math, row.map(function(r) { return r.x; }));
+                                var rowMaxX = Math.max.apply(Math, row.map(function(r) { return r.x + r.width;}));
+                                var rowTotalWidth = rowMaxX - rowMinX;
+                                console.log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
+                                console.log('centralizeRects centerX', centerX)
+                                var newXPosition = centerX - (rowTotalWidth / 2);
+                                console.log('centralizeRects newXPosition', newXPosition)
+
+                                var moveAllRectsOn = newXPosition - rowMinX;
+
+                                for(let s = 0; s < row.length; s++) {
+                                    alignedRects.push(new DOMRect(row[s].left + moveAllRectsOn, row[s].top, row[s].width, row[s].height));
+                                }
+                            }
+
+                            var totalHeight = maxY - minY;
+
+                            var newTopPosition = centerY - (totalHeight / 2);
+                            var moveAllRectsOn = newTopPosition - minY;
+                            for(let s = 0; s < alignedRects.length; s++) {
+                                alignedRects[s] = new DOMRect(alignedRects[s].left, alignedRects[s].top + moveAllRectsOn, alignedRects[s].width, alignedRects[s].height);
+                            }
+
+                            return alignedRects;
+                        }
                     }
 
                     function screenSharingLayout(count, size, maximized) {
@@ -4150,7 +4299,7 @@ window.WebRTCconferenceLib = function app(options){
                         return rects;
                     }
 
-                    return layouts[layoutName]({width: _size.width, height: _size.height}, numberOfRects);
+                    return layouts[layoutName](new DOMRect(0, 0, _size.width, _size.height), numberOfRects);
                 }
 
                 function stopAndRemove() {
@@ -4884,14 +5033,14 @@ window.WebRTCconferenceLib = function app(options){
 
             var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
-            function connect(streamUrl, platform, callback) {
+            function connect(rtmpUrls, platform, callback) {
                 if(typeof io == 'undefined') return;
                 log('startStreaming connect');
 
                 var secure = options.nodeServer.indexOf('https://') == 0;
                 _streamingSocket = window.sSocket = io.connect(options.nodeServer + '/webrtc', {
                     query: {
-                        rtmp: streamUrl,
+                        rtmp: JSON.stringify(rtmpUrls),
                         localInfo: JSON.stringify(_localInfo),
                         platform: platform
                     },
@@ -4955,10 +5104,10 @@ window.WebRTCconferenceLib = function app(options){
 
             }
 
-            function startStreaming(fbStreamUrl, service) {
-                log('startStreaming', fbStreamUrl);
+            function startStreaming(rtmpUrls, service) {
+                log('startStreaming', rtmpUrls);
 
-                connect(fbStreamUrl, service, function () {
+                connect(rtmpUrls, service, function () {
                     log('startStreaming connected');
                     if(!_streamUsingWebRTC) {
                         canvasComposer.captureStream(function (blob) {
@@ -4969,7 +5118,7 @@ window.WebRTCconferenceLib = function app(options){
                             if(_videoStream.blobs.length != 0) {
                                 let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
                                 var mergedBlob = new Blob(blobsToSend);
-                                _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
+                                if(_streamingSocket) _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
                             }
                             _videoStream.timer = setTimeout(timer, 6000);
                         }
@@ -4980,7 +5129,7 @@ window.WebRTCconferenceLib = function app(options){
                         _roomInstance.eventBinding.sendDataTrackMessage("liveStreamingStarted", service);
 
                     } else {
-                        socket.emit('Streams/webrtc/recording', {url:fbStreamUrl});
+                        socket.emit('Streams/webrtc/recording', {url:rtmpUrls});
                         var getStreamingParticipant = function (streamingParticipant) {
                             log('startLivestreaming getStreamingParticipant', streamingParticipant)
                             log('startLivestreaming getStreamingParticipant', streamingParticipant.connection ? streamingParticipant.connection.initiatorId : null, localParticipant.sid)
