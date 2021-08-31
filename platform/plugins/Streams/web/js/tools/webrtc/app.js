@@ -2175,6 +2175,7 @@ window.WebRTCconferenceLib = function app(options){
                     this.htmlVideoEl = null;
                     this.screenSharing = false;
                     this.sourceType = 'webrtc';
+                    this.caption = 'participant';
                     this.eventDispatcher = new EventSystem();
                 }
                 WebRTCStreamSource.prototype = new Source();
@@ -3408,10 +3409,10 @@ window.WebRTCconferenceLib = function app(options){
 
                     if(webrtcSource == null || webrtcSource.displayNameTimeout != null) return;
 
-                    var text = webrtcSource.participant.username;
-                    _inputCtx.font = "30px Arial";
-                    var textWidth = _inputCtx.measureText(text).width;
-                    var percentWidth = (webrtcSource.rect.width / 100 * 70);
+                    //var text = webrtcSource.participant.username;
+                    //_inputCtx.font = "30px Arial";
+                    //var textWidth = _inputCtx.measureText(text).width;
+                    //var percentWidth = (webrtcSource.rect.width / 100 * 70);
                     //var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
                     var rectWidth = webrtcSource.rect.width;
                     var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
@@ -3421,31 +3422,54 @@ window.WebRTCconferenceLib = function app(options){
                     yTo = function () {
                         return webrtcSource.rect.y + webrtcSource.rect.height - rectHeight;
                     }
+                    height = function () {
+                        return webrtcSource.rect.height / 100 * 20;
+                    }
                     var nameLabel = new RectObjectSource({
                         baseSource: webrtcSource,
                         frame: 0,
                         frames: 100,
-                        widthFrom: rectWidth,
-                        widthTo: rectWidth,
-                        heightFrom: rectHeight,
-                        heightTo: rectHeight,
-                        xFrom: xPos,
-                        xTo: xPos,
-                        yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
-                        yTo: yTo(),
+                        //widthFrom: rectWidth,
+                        //widthTo: rectWidth,
+                        //heightFrom: rectHeight,
+                        //heightTo: rectHeight,
+                        //xFrom: xPos,
+                        //xTo: xPos,
+                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
+                        //yTo: yTo(),
                         fill: 'rgb(38 165 83 / 100%)'
                     });
                     nameLabel.name = 'Rectangle';
 
                     Object.defineProperties(nameLabel, {
+                        'widthFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.width;
+                            }
+                        },
+                        'widthTo': {
+                            'get': function() {
+                                return this.baseSource.rect.width;
+                            }
+                        },
+                        'heightFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.height / 100 * 20;
+                            }
+                        },
+                        'heightTo': {
+                            'get': function() {
+                                return this.baseSource.rect.height / 100 * 20;
+                            }
+                        },
                         'xFrom': {
                             'get': function() {
-                                return this.baseSource.rect.x + (( this.baseSource.rect.width - rectWidth) / 2);
+                                return this.baseSource.rect.x + (( this.baseSource.rect.width - this.widthFrom) / 2);
                             }
                         },
                         'xTo': {
                             'get': function() {
-                                return this.baseSource.rect.x + (( this.baseSource.rect.width - rectWidth) / 2);
+                                return this.baseSource.rect.x + (( this.baseSource.rect.width - this.widthTo) / 2);
                             }
                         },
                         'yFrom': {
@@ -3455,27 +3479,40 @@ window.WebRTCconferenceLib = function app(options){
                         },
                         'yTo': {
                             'get': function() {
-                                return yTo();
+                                return webrtcSource.rect.y + webrtcSource.rect.height - this.heightTo;
                             }
                         }
                     });
 
+                    let fontSize = (rectHeight / 100 * 40);
+                    var textName = webrtcSource.participant.username;
+                    _inputCtx.font = fontSize + "px Arial";
+                    var nameTextSize = _inputCtx.measureText(textName);
+                    var nameTextHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
 
                     var nameText = new TextObjectSource({
                         baseSource: nameLabel,
                         frame: 0,
                         frames: 100,
-                        xFrom: nameLabel.xFrom + 20,
-                        xTo: nameLabel.xTo + 20,
-                        yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 2) + 8,
-                        yTo: nameLabel.yTo + (nameLabel.heightTo / 2) + 8,
-                        fillStyle: '#000000',
-                        font: '30px Arial',
-                        text: text
+                        textHeight: nameTextHeight,
+                        //xFrom: nameLabel.xFrom + 20,
+                        //xTo: nameLabel.xTo + 20,
+                        //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 100 * 1),
+                        //yTo: nameLabel.yTo + (nameLabel.heightTo / 100 * 1),
+                        fillStyle: '#FFFFFF',
+                        //font: fontSize + 'px Arial',
+                        latestSize: fontSize,
+                        text: textName.toUpperCase()
                     });
-                    nameText.name = 'Text: ' + text;
+                    nameText.name = 'Text: ' + textName;
 
+                    console.log('nameTextHeight', nameTextHeight)
                     Object.defineProperties(nameText, {
+                        'xFrom': {
+                            'get': function() {
+                                return this.baseSource.xFrom + 20;
+                            }
+                        },
                         'xFrom': {
                             'get': function() {
                                 return this.baseSource.xFrom + 20;
@@ -3488,12 +3525,94 @@ window.WebRTCconferenceLib = function app(options){
                         },
                         'yFrom': {
                             'get': function() {
-                                return this.baseSource.yFrom + (this.baseSource.heightFrom / 2) + 8;
+                                return this.baseSource.yFrom + this.textHeight + (this.baseSource.heightFrom / 100 * 5);
                             }
                         },
                         'yTo': {
                             'get': function() {
-                                return this.baseSource.yTo + (this.baseSource.heightTo / 2) + 8;
+                                return this.baseSource.yTo + this.textHeight + (this.baseSource.heightTo / 100 * 5);
+                            }
+                        },
+                        'font': {
+                            'get': function() {
+                                let size = (this.baseSource.heightTo / 100 * 40);
+                                if(this.latestSize === size) {
+                                    return size + 'px Arial';
+                                }
+
+                                //layout should be updated as some changes were applied
+                                this.latestSize = size;
+                                _inputCtx.font = size + "px Arial";
+                                console.log('updating.....')
+                                let nameTextSize = _inputCtx.measureText(textName);
+                                this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
+
+                                return size + 'px Arial';
+                            }
+                        }
+                    });
+
+
+                    let captionFontSize = (rectHeight / 100 * 20);
+                    var captionText = webrtcSource.caption;
+                    _inputCtx.font = captionFontSize + "px Arial";
+                    var captionTextSize = _inputCtx.measureText(captionText);
+                    var captionTextWidth = captionTextSize.width;
+                    var captionTextHeight =  captionTextSize.fontBoundingBoxAscent + captionTextSize.fontBoundingBoxDescent;
+                    console.log('nameTextHeight', captionTextHeight)
+
+                    var captionText = new TextObjectSource({
+                        baseSource: nameLabel,
+                        frame: 0,
+                        frames: 100,
+                        textHeight: captionTextHeight,
+                        //xFrom: nameLabel.xFrom + 20,
+                        //xTo: nameLabel.xTo + 20,
+                        //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 2) + 8,
+                        //yTo: nameLabel.yTo + (nameLabel.heightTo / 2) + 8,
+                        fillStyle: '#FFFFFF',
+                        latestSize: captionFontSize,
+                        font: captionFontSize + 'px Arial',
+                        text: captionText
+                    });
+                    captionText.name = 'Text: ' + captionText;
+
+                    Object.defineProperties(captionText, {
+                        'xFrom': {
+                            'get': function() {
+                                return this.baseSource.xFrom + 20;
+                            }
+                        },
+                        'xTo': {
+                            'get': function() {
+                                return this.baseSource.xTo + 20;
+                            }
+                        },
+                        'yFrom': {
+                            'get': function() {
+                                return this.baseSource.yFrom + nameText.textHeight + this.textHeight + (this.baseSource.heightFrom / 100 * 10);
+                            }
+                        },
+                        'yTo': {
+                            'get': function() {
+                                return this.baseSource.yTo + nameText.textHeight + this.textHeight + (this.baseSource.heightTo / 100 * 10);
+                            }
+                        },
+                        'font': {
+                            'get': function() {
+                                let size = (this.baseSource.heightTo / 100 * 20);
+                                if(this.latestSize === size) {
+                                    return size + 'px Arial';
+                                }
+
+                                //layout should be updated as some changes were applied
+                                this.latestSize = size;
+                                _inputCtx.font = size + "px Arial";
+                                console.log('updating.....')
+                                let nameTextSize = _inputCtx.measureText(textName);
+                                this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
+
+                                return size + 'px Arial';
                             }
                         }
                     });
@@ -3502,53 +3621,13 @@ window.WebRTCconferenceLib = function app(options){
 
                     addSource(nameText);
 
-                    /*webrtcSource.displayNameTimeout = setTimeout(function () {
-                        console.log('nameText.yFrom', nameText.yFrom)
-                        console.log('nameText.yTo', nameText.yTo)
-                        var neYFrom = nameLabel.yTo;
-                        var neYTo = nameLabel.yFrom + 100;
-                        nameLabel.yFrom = neYFrom;
-                        nameLabel.yTo = neYTo;
-
-                        Object.defineProperties(nameLabel, {
-                            'yFrom': {
-                                'get': function() {
-                                    return yTo();
-                                }
-                            },
-                            'yTo': {
-                                'get': function() {
-                                    return this.baseSource.rect.y + this.baseSource.rect.height;
-                                }
-                            }
-                        });
-                        nameLabel.frame = 0;
-
-                        nameText.yFrom = nameText.yTo;
-                        nameText.yTo = nameText.yFrom + 100;
-                        nameText.frame = 0;
-                        nameText.on('animationEnded', function() {
-                            console.log('animationEnded')
-                            let index = _activeScene.sources.indexOf(nameText);
-                            if(index != -1) {
-                                _activeScene.sources.splice(index, 1)
-                            }
-                        });
-
-                        nameLabel.on('animationEnded', function() {
-                            console.log('animationEnded 2')
-                            let index = _activeScene.sources.indexOf(nameLabel);
-                            if(index != -1) {
-                                _activeScene.sources.splice(index, 1)
-                            }
-                        });
-
-                        webrtcSource.displayNameTimeout = null;
-                    }, 4000)*/
+                    addSource(captionText);
                 }
 
+                /*hides name label and all text sources that are related to it */
                 function hideName(participant) {
-                    var webrtcSource, nameBgSource, nameTextSource;
+                    var dependentTextSources = [];
+                    var webrtcSource, nameBgSource;
                     webrtcSource = _activeScene.sources.filter(function (source) {
                         return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
                     })[0];
@@ -3559,12 +3638,9 @@ window.WebRTCconferenceLib = function app(options){
                     }
                     for(let i in _activeScene.sources) {
                         if(_activeScene.sources[i].baseSource != nameBgSource || _activeScene.sources[i].sourceType != 'webrtctext') continue;
-                        nameTextSource = _activeScene.sources[i];
-                        break;
+                        dependentTextSources.push( _activeScene.sources[i]);
                     }
 
-                    console.log('nameText.yFrom', nameTextSource.yFrom)
-                    console.log('nameText.yTo', nameTextSource.yTo)
                     var neYFrom = nameBgSource.yTo;
                     var neYTo = nameBgSource.yFrom + 100;
                     nameBgSource.yFrom = neYFrom;
@@ -3585,23 +3661,19 @@ window.WebRTCconferenceLib = function app(options){
                     });
                     nameBgSource.frame = 0;
 
-                    nameTextSource.yFrom = nameTextSource.yTo;
-                    nameTextSource.yTo = nameTextSource.yFrom + 100;
-                    nameTextSource.frame = 0;
-                    nameTextSource.on('animationEnded', function() {
-                        console.log('animationEnded')
-                        let index = _activeScene.sources.indexOf(nameTextSource);
-                        if(index != -1) {
-                            _activeScene.sources.splice(index, 1)
-                        }
-                    });
+                    for(let r in dependentTextSources) {
+                        let textSource = dependentTextSources[r];
+                        textSource.yFrom = textSource.yTo;
+                        textSource.yTo = textSource.yFrom + 100;
+                        textSource.frame = 0;
+                        textSource.on('animationEnded', function() {
+                            removeSource(textSource);
+
+                        });
+                    }
 
                     nameBgSource.on('animationEnded', function() {
-                        console.log('animationEnded 2')
-                        let index = _activeScene.sources.indexOf(nameBgSource);
-                        if(index != -1) {
-                            _activeScene.sources.splice(index, 1)
-                        }
+                        removeSource(nameBgSource);
                     });
 
                 }
@@ -3940,6 +4012,9 @@ window.WebRTCconferenceLib = function app(options){
                                 _layoutTool.basicGridRects = build(container, count);
                                 _layoutTool.currentRects = updateRealToBasicGrid();
                                 //_layoutTool.currentRects = removeAndUpdate();
+                            } else {
+                                _layoutTool.basicGridRects = build(container, count);
+                                _layoutTool.currentRects = updateRealToBasicGrid();
                             }
                         }
 
@@ -4044,7 +4119,9 @@ window.WebRTCconferenceLib = function app(options){
                         function simpleGrid(count, size, perRow, rowsNum) {
                             console.log('simpleGrid');
                             var rects = [];
-                            var spaceBetween = 10;
+                            var spaceBetween = parseInt(options.liveStreaming.tiledLayoutMargins);
+                            console.log('simpleGrid spaceBetween', spaceBetween);
+
                             var centerX = containerRect.width / 2;
                             var centerY = containerRect.height / 2;
                             var rectHeight;

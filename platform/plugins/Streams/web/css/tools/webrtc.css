@@ -1984,10 +1984,24 @@
 .Streams_webrtc_popup-options-params-body > div {
     margin-top:10px
 }
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-margins{
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-margins input{
+    margin-left:20px;
+    width: 50px;
+}
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos{
     display: flex;
-    justify-content: space-evenly;
-    margin-top: 5px;
+    justify-content: start;
+    margin-top: 10px;
+}
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos .Streams_webrtc_popup-options-params-position{
+    margin-left: 30px;
 }
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos input[type=text]{
     width: 50px;
@@ -2010,7 +2024,11 @@
     padding: 5px 0 5px 0;
 }
 
-
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-webrtc-desc-inner > div {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0 5px 0;
+}
 
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size span {
     display: block;

@@ -2361,6 +2361,18 @@
                     showBordersLabel.appendChild(document.createTextNode("Show layout borders"));
                     showBordersCon.appendChild(showBordersLabel);
 
+                    var marginsCon = document.createElement('DIV');
+                    marginsCon.className = 'Streams_webrtc_popup-options-params-margins';
+                    var marginsInput = document.createElement('INPUT');
+                    marginsInput.type = 'number';
+                    marginsInput.id = 'layoutMargins';
+                    marginsInput.name = 'layoutMargins';
+                    marginsInput.value = tool.WebRTCLib.getOptions().liveStreaming.tiledLayoutMargins;
+                    var marginsInputLabel = document.createElement('Label');
+                    marginsInputLabel.appendChild(document.createTextNode("Layout margins:"));
+                    marginsCon.appendChild(marginsInputLabel);
+                    marginsCon.appendChild(marginsInput);
+
                     /*var audioOnlyCon = document.createElement('DIV');
                                 var audioOnly = document.createElement('INPUT');
                                 audioOnly.type = 'checkbox';
@@ -2448,6 +2460,7 @@
 
                     dialogBodyInner.appendChild(showNameCon);
                     dialogBodyInner.appendChild(showBordersCon);
+                    dialogBodyInner.appendChild(marginsCon);
                     //dialogBodyInner.appendChild(audioOnlyCon);
                     dialogBodyInner.appendChild(sizeAndPositionCon);
                     dialogBodyInner.appendChild(audioBgCon);
@@ -2460,6 +2473,10 @@
 
                     showBorders.addEventListener('change', function () {
                         tool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders = showBorders.checked;
+                    })
+
+                    marginsInput.addEventListener('change', function () {
+                        tool.WebRTCLib.getOptions().liveStreaming.tiledLayoutMargins = marginsInput.value;
                     })
 
                     /*audioOnly.addEventListener('change', function () {
@@ -2482,6 +2499,7 @@
                         let y = topPos.value;
                         tool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
                     }
+                    marginsInput.addEventListener('blur', updateWebrtcRect)
                     width.addEventListener('blur', updateWebrtcRect)
                     height.addEventListener('blur', updateWebrtcRect)
                     topPos.addEventListener('blur', updateWebrtcRect)
@@ -2624,7 +2642,7 @@
                     showNameCon.appendChild(showNameLabel);
 
                     var descNameCon = document.createElement('DIV');
-                    descNameCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                    descNameCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc-name';
                     descriptionInner.appendChild(descNameCon);
                     var nameText = document.createElement('SPAN');
                     nameText.innerHTML = 'Name: ';
@@ -2635,13 +2653,14 @@
                     descNameCon.appendChild(nameInput);
 
                     var descCaptionCon = document.createElement('DIV');
-                    descCaptionCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                    descCaptionCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc-caption';
                     descriptionInner.appendChild(descCaptionCon);
                     var captionText = document.createElement('SPAN');
                     captionText.innerHTML = 'Caption: ';
                     descCaptionCon.appendChild(captionText);
                     var captionInput = document.createElement('INPUT');
                     captionInput.type = 'text';
+                    captionInput.value = _selectedSource.sourceInstance.caption;
                     descCaptionCon.appendChild(captionInput);
                     
                     dialogBodyInner.appendChild(showNameCon);
@@ -2662,7 +2681,8 @@
                         _selectedSource.sourceInstance.participant.username = nameInput.value;
                     })
                     captionInput.addEventListener('blur', function () {
-                        
+                        _selectedSource.sourceInstance.caption = captionInput.value;
+
                     })
                     
                     /*_selectedSource.sourceInstance.on('rectChanged', function () {

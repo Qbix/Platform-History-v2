@@ -90,6 +90,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 showLabelWithNames: true,
                 audioLayoutBgColor: '#000',
                 showLayoutBorders: true,
+                tiledLayoutMargins: 20,
                 loopAudio: true,
                 loopVideo: true,
                 localOutput: true
