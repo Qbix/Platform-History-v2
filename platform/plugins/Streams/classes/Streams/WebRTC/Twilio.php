@@ -14,7 +14,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 
 	/**
 	 * Creates or joins a room
-	 * @method createOrJoinRoom
+	 * @method getRoomStream
 	 * @param {string} $publisherId Id of room's publisher/initiator
 	 * @param {string} $roomId Room id in Qbix (last marp of stream name)
 	 * @return {array} The keys are "stream", "created", "roomId", "socketServer"
@@ -22,7 +22,7 @@ class Streams_WebRTC_Twilio extends Streams_WebRTC implements Streams_WebRTC_Int
 	 * @throws Q_Exception_RequiredField
 	 * @throws Users_Exception_NotAuthorized
 	 */
-    function createOrJoinRoom($publisherId, $roomId)
+    function getRoomStream($publisherId, $roomId)
     {
 
         if (empty($publisherId)) {

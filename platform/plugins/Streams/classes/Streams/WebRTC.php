@@ -18,12 +18,12 @@ interface Streams_WebRTC_Interface
      */
 
     /**
-     * @method createOrJoinRoom
+     * @method getRoomStream
      * @param {string} $publisherId Id of room's publisher/initiator
      * @param {string} $roomId Room id in Qbix (last marp of stream name)
      * @return {Object}
      */
-    function createOrJoinRoom($publisherId, $roomId, $resumeClosed);
+    function getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel);
 
 }
 
@@ -52,6 +52,71 @@ abstract class Streams_WebRTC
 
         return $token->iceServers[1];
     }
+
+    /**
+     * Fetch Streams/webrtc stream and check permissions
+     * @method fetchStream
+     * @param {string} $publisherId publisher of stream
+     * @param {string} $roomId Room Id of room (last part of stream name)
+     * @param {string} $resumeClosed Return existing stream if it exist, or create new otherwise
+     * @return {array} The keys are "stream", "created", "roomId", "socketServer"
+     */
+    static function fetchStream($publisherId, $roomId, $resumeClosed) {
+        if (!empty($roomId)) {
+            $streamName = "Streams/webrtc/$roomId";
+            $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+            if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
+
+                if($resumeClosed) {
+                    $stream->closedTime = null;
+                    $stream->changed();
+
+                }
+
+                return $stream;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Create Streams/webrtc stream
+     * @method createStream
+     * @param {string} $publisherId publisher of stream
+     * @param {string} $roomId Room Id of room (last part of stream name)
+     * @param {string} $resumeClosed Return existing stream if it exist, or create new otherwise
+     * @return {array} The keys are "stream", "created", "roomId", "socketServer"
+     */
+    static function createStream($publisherId, $roomId, $resumeClosed, $writeLevel) {
+        $streamName = null;
+
+        if (!empty($roomId)) {
+            $streamName = "Streams/webrtc/$roomId";
+        }
+
+        // check quota
+        //UNCOMMENT BEFORE COMMIT$quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
+        $text = Q_Text::get('Streams/content');
+        $fields = array(
+            'title' => Q::interpolate($text['webrtc']['streamTitle'], array(Streams::displayName($publisherId)))
+        );
+
+        $fields['name'] = $streamName;
+        $fields['writeLevel'] = $writeLevel;
+
+        $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', $fields);
+        if ($stream) return $stream;
+        // set quota
+        /*UNCOMMENT BEFORE COMMIT if ($stream && $quota instanceof Users_Quota) {
+            $quota->used();
+
+            return $stream;
+        }*/
+
+        throw new Q_Exception("Failed during create webrtc stream");
+    }
+
     /**
      * Create or fetch Streams/webrtc stream
      * @method getOrCreateStream
@@ -60,46 +125,19 @@ abstract class Streams_WebRTC
      * @param {string} $resumeClosed Return existing stream if it exist, or create new otherwise
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
-    static function getOrCreateStream($publisherId, $roomId, $resumeClosed) {
+    static function getOrCreateStream($publisherId, $roomId, $resumeClosed, $writeLevel) {
         $streamName = null;
 
         if(strpos($roomId, 'Streams/webrtc/') !== false) {
             $roomId = explode('/', $roomId)[2];
         }
 
-        if (!empty($roomId)) {
-            $streamName = "Streams/webrtc/$roomId";
-            $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+        $existingRoomStream = self::fetchStream($publisherId, $roomId, $resumeClosed);
 
-            if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
-
-                if($resumeClosed) {
-                    $stream->closedTime = null;
-                    $stream->save();
-
-                }
-                return $stream;
-            }
-        }
-
-        // check quota
-        $quota = Users_Quota::check($publisherId, '', 'Streams/webrtc', true, 1, Users::roles());
-        $text = Q_Text::get('Streams/content');
-        $fields = array(
-            'title' => Q::interpolate($text['webrtc']['streamTitle'], array(Streams::displayName($publisherId)))
-        );
-
-        // if stream with this roomId exist, create stream with new roomId
-        if (!$stream) {
-            $fields['name'] = $streamName;
-        }
-        $stream = Streams::create($publisherId, $publisherId, 'Streams/webrtc', $fields);
-
-        // set quota
-        if ($stream && $quota instanceof Users_Quota) {
-            $quota->used();
-
-            return $stream;
+        if(!is_null($existingRoomStream)) {
+            return $existingRoomStream;
+        } else {
+            return self::createStream($publisherId, $roomId, $resumeClosed, $writeLevel);
         }
 
         throw new Q_Exception("Failed during create webrtc stream");

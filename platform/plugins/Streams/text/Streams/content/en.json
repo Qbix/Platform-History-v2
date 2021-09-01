@@ -202,6 +202,8 @@
             "youJoinedRoom": "You joined the room",
             "joining": "Joining: {{userName}}",
             "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
             "youLeftRoom": "You left the room",
             "codeCopied": "You left the room",
             "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
@@ -226,8 +228,10 @@
             "shareAnotherScreen": "Share another screen",
             "turnOffCameras": "Turn off camera",
             "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
             "turnOffScreenSharing": "Turn off screen sharing",
             "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
             "startFBLive": "Start Facebook Livestream",
             "stopFBLive": "Stop Facebook Livestream",
             "startRecording": "Start Recording",
@@ -244,8 +248,10 @@
             "publishToGroup": "Publish to group",
             "fbStartLive": "Go Live",
             "fbStopLive": "End Live",
+            "streamingSettings": "Settings",
             "fbEmbedCode": "Embed",
-            "copy": "Copy"
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
