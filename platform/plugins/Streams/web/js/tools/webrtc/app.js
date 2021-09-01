@@ -1844,6 +1844,7 @@ window.WebRTCconferenceLib = function app(options){
             var Scene = function () {
                 this.title = null;
                 this.sources = [];
+                this.additionalSources = [];
                 this.audioSources = [];
             }
 
@@ -1947,6 +1948,7 @@ window.WebRTCconferenceLib = function app(options){
                     this.on = function (event, callback) {
                         if(this.eventDispatcher != null) this.eventDispatcher.on(event, callback)
                     };
+                    this.params = {};
                 }
 
                 Object.defineProperties(Source.prototype, {
@@ -1972,20 +1974,6 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     }
                 });
-
-                var WebRTCStreamSource = function (participant) {
-                    this.kind = null;
-                    this.participant = participant;
-                    this.name = participant.username;
-                    this.avatar = participant.avatar ? participant.avatar.image : null;
-                    this.track = null;
-                    this.mediaStream = null;
-                    this.htmlVideoEl = null;
-                    this.screenSharing = false;
-                    this.sourceType = 'webrtc';
-                    this.eventDispatcher = new EventSystem();
-                }
-                WebRTCStreamSource.prototype = new Source();
 
                 var ImageSource = function () {
                     var imageInstance = this;
@@ -2177,11 +2165,32 @@ window.WebRTCconferenceLib = function app(options){
                     this.sourceType = 'webrtc';
                     this.caption = 'participant';
                     this.eventDispatcher = new EventSystem();
+                    this.params = {
+                        captionBgColor: '#26A553',
+                        captionFontColor: '#FFFFFF'
+                    };
                 }
                 WebRTCStreamSource.prototype = new Source();
 
-                function addSource(newSource, successCallback, failureCallback) {
+                _eventDispatcher.on('sourceRemoved', function (removedSource) {
+                    for(let s in _scenes) {
+                        let scene = _scenes[s];
+                        for(let i = scene.sources.length - 1; i >= 0; i--) {
+                            let source = scene.sources[i];
+                            if(source.baseSource == removedSource) {
+                                removeSource(source);
+                            }
+                        }
+                    }
+                });
 
+                function addSource(newSource, successCallback, failureCallback) {
+                    console.log('addSource', newSource instanceof RectObjectSource)
+                    if( newSource instanceof RectObjectSource || newSource instanceof TextObjectSource) {
+                        addAdditionalSource(newSource);
+                        return;
+                    }
+                    
                     function getWebrtcGroupIndex() {
                         for (let j in _activeScene.sources) {
                             if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
@@ -2267,11 +2276,18 @@ window.WebRTCconferenceLib = function app(options){
                         //_eventDispatcher.dispatch('sourceAdded', newSource);
 
                     }
+                }
 
-
+                function addAdditionalSource(newSource) {
+                    _activeScene.additionalSources.unshift(newSource);
+                    _eventDispatcher.dispatch('sourceAdded', newSource);
                 }
 
                 function removeSource(source) {
+                    if( source instanceof RectObjectSource || source instanceof TextObjectSource) {
+                        removeAdditionalSource(source);
+                        return;
+                    }
                     for (let j in _activeScene.sources) {
                         if (_activeScene.sources[j] == source) {
                             _activeScene.sources.splice(j, 1)
@@ -2279,6 +2295,16 @@ window.WebRTCconferenceLib = function app(options){
                     }
                     if(source.videoInstance != null) source.videoInstance.pause();
                     audioComposer.muteSourceLocally(source);
+                    _eventDispatcher.dispatch('sourceRemoved', source);
+                }
+                
+                function removeAdditionalSource(source) {
+                    for (let j in _activeScene.additionalSources) {
+                        if (_activeScene.additionalSources[j] == source) {
+                            _activeScene.additionalSources.splice(j, 1)
+                        }
+                    }
+                    _eventDispatcher.dispatch('sourceRemoved', source);
                 }
 
                 function getSources(type, active) {
@@ -2784,9 +2810,10 @@ window.WebRTCconferenceLib = function app(options){
 
                         function remove() {
                             _inputCtx.clearRect(_activeScene.sources[d].rect.x, _activeScene.sources[d].rect.y, _activeScene.sources[d].rect.width, _activeScene.sources[d].rect.height);
+                            let removedSource = _activeScene.sources[d];
                             _activeScene.sources[d] = null;
                             _activeScene.sources.splice(d, 1);
-                            _eventDispatcher.dispatch('sourceRemoved');
+                            _eventDispatcher.dispatch('sourceRemoved', removedSource);
                         }
 
                         for(let n in tracksToRemove) {
@@ -3111,7 +3138,15 @@ window.WebRTCconferenceLib = function app(options){
                             drawImage(streamData);
                         } else if(streamData.sourceType == 'video') {
                             drawVideo(streamData);
-                        } else if(streamData.sourceType == 'webrtcrect') {
+                        }
+                    }
+
+                    for(let i = _activeScene.additionalSources.length - 1; i >= 0; i--) {
+                        if(_activeScene.additionalSources[i].active == false ||_activeScene.additionalSources[i].sourceType == 'group') continue;
+
+                        let streamData = _activeScene.additionalSources[i];
+
+                        if(streamData.sourceType == 'webrtcrect') {
 
                             _inputCtx.save();
                             _inputCtx.beginPath();
@@ -3137,6 +3172,10 @@ window.WebRTCconferenceLib = function app(options){
                             _inputCtx.clip();
 
                             _inputCtx.font = streamData.font;
+                            _inputCtx.shadowBlur = 5;
+                            _inputCtx.shadowOffsetX = 2;
+                            _inputCtx.shadowOffsetY = 3;
+                            _inputCtx.shadowColor = "black";
                             _inputCtx.fillStyle = streamData.fillStyle;
                             _inputCtx.fillText(streamData.text, getX(streamData),  getY(streamData));
 
@@ -3392,6 +3431,7 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function displayName(participant) {
+                    if(!participant.online) return;
                     log('videoComposer: displayName')
                     try {
                         var err = (new Error);
@@ -3437,7 +3477,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: xPos,
                         //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
                         //yTo: yTo(),
-                        fill: 'rgb(38 165 83 / 100%)'
+                        fill: webrtcSource.params.captionBgColor
                     });
                     nameLabel.name = 'Rectangle';
 
@@ -3499,7 +3539,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: nameLabel.xTo + 20,
                         //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 100 * 1),
                         //yTo: nameLabel.yTo + (nameLabel.heightTo / 100 * 1),
-                        fillStyle: '#FFFFFF',
+                        fillStyle: webrtcSource.params.captionFontColor,
                         //font: fontSize + 'px Arial',
                         latestSize: fontSize,
                         text: textName.toUpperCase()
@@ -3570,7 +3610,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: nameLabel.xTo + 20,
                         //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 2) + 8,
                         //yTo: nameLabel.yTo + (nameLabel.heightTo / 2) + 8,
-                        fillStyle: '#FFFFFF',
+                        fillStyle: webrtcSource.params.captionFontColor,
                         latestSize: captionFontSize,
                         font: captionFontSize + 'px Arial',
                         text: captionText
@@ -3626,19 +3666,20 @@ window.WebRTCconferenceLib = function app(options){
 
                 /*hides name label and all text sources that are related to it */
                 function hideName(participant) {
+                    if(!participant.online) return;
                     var dependentTextSources = [];
                     var webrtcSource, nameBgSource;
                     webrtcSource = _activeScene.sources.filter(function (source) {
                         return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
                     })[0];
-                    for(let i in _activeScene.sources) {
-                        if(_activeScene.sources[i].sourceType != 'webrtcrect' || _activeScene.sources[i].baseSource.participant != participant) continue;
-                        nameBgSource = _activeScene.sources[i];
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].sourceType != 'webrtcrect' || _activeScene.additionalSources[i].baseSource.participant != participant) continue;
+                        nameBgSource = _activeScene.additionalSources[i];
                         break;
                     }
-                    for(let i in _activeScene.sources) {
-                        if(_activeScene.sources[i].baseSource != nameBgSource || _activeScene.sources[i].sourceType != 'webrtctext') continue;
-                        dependentTextSources.push( _activeScene.sources[i]);
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].baseSource != nameBgSource || _activeScene.additionalSources[i].sourceType != 'webrtctext') continue;
+                        dependentTextSources.push( _activeScene.additionalSources[i]);
                     }
 
                     var neYFrom = nameBgSource.yTo;

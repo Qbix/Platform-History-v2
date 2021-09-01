@@ -155,6 +155,7 @@
 				tool.updateControlBar();
 
 				if(tool.controlBar.parentNode == null) tool.element.appendChild(controlBar);
+                tool.hoverTimeout = {settingsPopup: null, audioSettingsPopup: null, participantsPopup: null};
 
 				tool.textChat().init();
 				tool.createSettingsPopup();
@@ -2205,6 +2206,7 @@
 
                             settingsBtn.addEventListener('click', function () {
                                 tool.advancedLiveStreaming.show();
+                                if(tool.settingsPopup != null) tool.settingsPopup.hide();
                             })
 
                             streamingSettingsBtn.addEventListener('click', function () {
@@ -2320,6 +2322,14 @@
                         	createSection: createStreamingAndRecordingSection
 						}
                     }());
+					
+					function show() {
+                        tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                    }
+					
+					function hide() {
+                        tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                    }
 
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
@@ -2332,15 +2342,14 @@
 
                         videoInputListSection.loadCamerasList();
 
-                        tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
                         if(!Q.info.isMobile && !Q.info.isTablet) {
                             tool.cameraBtn.addEventListener('mouseenter', function (e) {
                                 tool.hideAllPopups();
-                                if (tool.hoverTimeout.setttingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.setttingsPopup);
-                                    tool.hoverTimeout.setttingsPopup = null;
+                                if (tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
                                 }
-                                tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                                show();
                             });
 
                             tool.cameraBtn.addEventListener('mouseleave', function (e) {
@@ -2348,21 +2357,21 @@
                                     e.stopPropagation();
                                     e.preventDefault();
                                 }
-                                tool.hoverTimeout.setttingsPopup = setTimeout(function () {
-                                    tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
                                 }, 600)
                             });
 
                             settingsPopup.addEventListener('mouseenter', function (e) {
 
-                                if(tool.hoverTimeout.setttingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.setttingsPopup);
-                                    tool.hoverTimeout.setttingsPopup = null;
+                                if(tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
                                 }
                             })
                             settingsPopup.addEventListener('mouseleave', function (e) {
-                                setTimeout(function () {
-                                    tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
                                 }, 600)
 
                             });
@@ -2372,7 +2381,9 @@
 
                     return {
 						createSettingsPopUp: createSettingsPopUp,
-						videoInputListSection: videoInputListSection
+						videoInputListSection: videoInputListSection,
+						show: show,
+						hide: hide
 					}
                 }());
 
@@ -4076,7 +4087,7 @@
 
 			initAdvancedLiveStreaming: function() {
 				var tool = this;
-                var src = Q.url('{{Streams}}/js/tools/webrtc/livestreamingDialogue.js');
+                var src = Q.url('{{Streams}}/js/tools/webrtc/livestreamingDialogue.js?time=' + Date.now());
                 console.log('livestreamingDialog src', src)
                 var xhr = new XMLHttpRequest();
 

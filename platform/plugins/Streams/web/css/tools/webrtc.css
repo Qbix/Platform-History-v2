@@ -2006,12 +2006,16 @@
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos input[type=text]{
     width: 50px;
 }
-.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg{
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-captionbg,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-font-color {
     margin-top: 10px;
     display: flex;
     align-items: center;
 }
-.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg input{
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg input,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-captionbg input,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-font-color input{
     margin-left: 10px;
     margin-right: 5px;
 }

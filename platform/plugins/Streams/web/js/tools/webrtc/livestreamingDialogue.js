@@ -346,6 +346,7 @@
             var visualSources = (function () {
                 var VisualListItem = function (name) {
                     var sourceInstance =this;
+                    this.listType = 'video';
                     this.title = name != null ? name : null;
                     this.remove = function () {
                         var currentitem = this;
@@ -745,6 +746,7 @@
 
                 function selectSource(sourceItem) {
                     console.log('selectSource', _visualList)
+                    console.log('selectSource sourceItem', sourceItem)
                     if(sourceItem.itemEl && !sourceItem.itemEl.classList.contains('Streams_webrtc_popup-sources-item-active')) (sourceItem.itemEl).classList.add('Streams_webrtc_popup-sources-item-active');
 
                     _selectedSource = sourceItem;
@@ -1321,6 +1323,7 @@
             var audioSources = (function () {
                 var AudioListItem = function (name) {
                     var sourceInstance =this;
+                    this.listType = 'audio';
                     this.title = name != null ? name : null;
                     this.remove = function () {
                         var currentitem = this;
@@ -2613,6 +2616,7 @@
 
                 function createParamsList() {
 
+                    console.log('createParamsList', _selectedSource.sourceInstance)
                     for(let d in _generatedDialogs) {
                         if(_generatedDialogs[d].source == _selectedSource) {
                             return _generatedDialogs[d].dialogue;
@@ -2662,9 +2666,39 @@
                     captionInput.type = 'text';
                     captionInput.value = _selectedSource.sourceInstance.caption;
                     descCaptionCon.appendChild(captionInput);
+
+                    var bgColorCon = document.createElement('DIV');
+                    bgColorCon.className = 'Streams_webrtc_popup-options-params-captionbg'
+                    var bgColorInput = document.createElement('INPUT');
+                    bgColorInput.type = 'color';
+                    bgColorInput.id = 'captionBgColor';
+                    bgColorInput.name = 'captionBgColor';
+                    bgColorInput.value = _selectedSource.sourceInstance.params.captionBgColor;
+                    var removeBg = document.createElement('DIV');
+                    removeBg.className = 'Streams_webrtc_popup-options-params-captionbg-rem'
+                    removeBg.innerHTML = '&#10060;'
+                    bgColorCon.appendChild(document.createTextNode("Caption background color: "));
+                    bgColorCon.appendChild(bgColorInput);
+                    bgColorCon.appendChild(removeBg);
+
+                    var fontColorCon = document.createElement('DIV');
+                    fontColorCon.className = 'Streams_webrtc_popup-options-params-font-color'
+                    var fontColorInput = document.createElement('INPUT');
+                    fontColorInput.type = 'color';
+                    fontColorInput.id = 'captionFontColor';
+                    fontColorInput.name = 'captionFontColor';
+                    fontColorInput.value = _selectedSource.sourceInstance.params.captionFontColor;
+                    var removeColor = document.createElement('DIV');
+                    removeColor.className = 'Streams_webrtc_popup-options-params-font-color-rem'
+                    removeColor.innerHTML = '&#10060;'
+                    fontColorCon.appendChild(document.createTextNode("Caption font color: "));
+                    fontColorCon.appendChild(fontColorInput);
+                    fontColorCon.appendChild(removeColor);
                     
                     dialogBodyInner.appendChild(showNameCon);
                     dialogBodyInner.appendChild(descriptionCon);
+                    dialogBodyInner.appendChild(bgColorCon);
+                    dialogBodyInner.appendChild(fontColorCon);
 
                     _layoutParamsEl = dialogBodyInner;
 
@@ -2683,6 +2717,12 @@
                     captionInput.addEventListener('blur', function () {
                         _selectedSource.sourceInstance.caption = captionInput.value;
 
+                    })
+                    bgColorInput.addEventListener('change', function () {
+                        _selectedSource.sourceInstance.params.captionBgColor = bgColorInput.value;
+                    })
+                    fontColorInput.addEventListener('change', function () {
+                        _selectedSource.sourceInstance.params.captionFontColor = fontColorInput.value;
                     })
                     
                     /*_selectedSource.sourceInstance.on('rectChanged', function () {
@@ -3381,10 +3421,10 @@
 
             function update() {
                 var selectedSource = sourcesInterface.getSelectedSource();
-                console.log('update ', selectedSource)
-                if(selectedSource && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
+                console.log('update ', selectedSource, selectedSource.listType)
+                if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
                     optionsColumn.canvasLayoutOptions.show();
-                } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'webrtc') {
+                } else if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
                     optionsColumn.webrtcParticipantOptions.show(selectedSource);
                 } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'image') {
                     optionsColumn.imageSourceOptions.show(selectedSource);
@@ -3550,7 +3590,7 @@
         function createPopupHorizontalMobile() {
             console.log('createPopup 00', scenesInterface)
             var dialogue=document.createElement('DIV');
-            dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden';
+            dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
             _dialogueEl = dialogue;
             var dialogTitle=document.createElement('H3');
             dialogTitle.innerHTML = 'Streaming settings';
@@ -3768,7 +3808,13 @@
                         previewBox = mobileHorizontaldialogueEl.previewBoxEl;
                         activeDialogue = mobileHorizontaldialogueEl;
                     } else {
+                        if(mobileHorizontaldialogueEl == null) {
+                            mobileHorizontaldialogueEl = createPopupHorizontalMobile();
+                        }
 
+                        dialogue = mobileHorizontaldialogueEl.dialogueEl;
+                        previewBox = mobileHorizontaldialogueEl.previewBoxEl;
+                        activeDialogue = mobileHorizontaldialogueEl;
                     }
                     if(this.mobileHorizontaldialogueEl == null) return;
                 } else {
