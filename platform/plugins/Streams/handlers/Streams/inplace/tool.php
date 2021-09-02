@@ -85,18 +85,7 @@ function Streams_inplace_tool($options)
 	Q::take($options, array('attribute', 'field', 'convert'), $toolOptions);
 	Q_Response::setToolOptions($toolOptions);
 	if (!$stream->testWriteLevel('suggest')) {
-		if (!isset($options['classes'])) {
-			$options['classes'] = '';
-		}
-		Q_Response::setToolOptions(array(
-			'publisherId' => $stream->publisherId,
-			'streamName' => $stream->name
-		));
-		$staticClass = ($inplaceType === 'textarea')
-			? 'Q_inplace_tool_blockstatic'
-			: 'Q_inplace_tool_static';
-		return "<span class='Q_inplace_tool_container $options[classes]' style='position: relative;'>"
-			. "<div class='$staticClass'>$inplace[staticHtml]</div></span>";
+		return "";
 	}
 	$toolOptions['inplace'] = $inplace;
 	$toolOptions['inplaceType'] = $inplaceType;

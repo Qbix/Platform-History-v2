@@ -88,7 +88,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 						"\n": '<br>',
 						' ': '&nbsp;'
 					};
-					if (state.convert) {
+					if (!Q.isEmpty(state.convert)) {
 						for (var i=0, l=state.convert.length; i<l; ++i) {
 							var c = state.convert[i];
 							convert[c] = replacements[c];
