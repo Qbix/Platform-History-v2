@@ -85,7 +85,14 @@
         },
         "confirmTerms": "接受服务条款？",
         "facebookNoEmail": "您的Facebook帐户缺少确认的电子邮件地址。只需以原生方式登录即可。",
-        "picTooltip": "您可以稍后更改此图片"
+        "picTooltip": "您可以稍后更改此图片",
+        "wallet": {
+            "payload": "在 {{timestamp}} 时间登录 {{host}}",
+            "alert": {
+                "title": "重定向到钱包",
+                "content": "关闭此对话框后，您将被带到您的钱包。登录后，返回此页面。"
+            }
+        }
     },
     "setIdentifier": {
         "title": "添加登录方式",
@@ -108,6 +115,18 @@
         "Owner": "所有者",
         "Admin": "管理员",
         "Member": "会员",
-        "Guest": "来宾"
+        "Guest": "来宾",
+        "Host": "主持人"
+    },
+    "analytics": {
+        "Title": "分析",
+        "Daily": "日常的",
+        "Weekly": "每周",
+        "Monthly": "每月",
+        "Application": "应用",
+        "Pages": "页面",
+        "Services": "服务",
+        "Faq": "常问问题",
+        "WeekDays": "工作日"
     }
 }

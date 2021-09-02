@@ -74,7 +74,7 @@
         "notVerified": "Para iniciar sesión ten que enviar unha mensaxe de activación.",
         "emailExists": "¿Intentaches rexistrar con este correo antes? En caso afirmativo, comproba a túa caixa de entrada para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe</a>",
         "mobileExists": "¿Intentaches rexistrar con este número de móbil antes? Se é así, comproba o teu SMS para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe</a>",
-        "usingOther": "ou pode",
+        "usingOther": "ou podes",
         "prompt": "Escolle un nome de usuario:",
         "newUser": "ou crea unha nova conta a continuación",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "¿Acepta os termos de servizo?",
         "facebookNoEmail": "A súa conta de Facebook carece dun enderezo de correo electrónico confirmado. Basta con iniciar sesión na forma nativa.",
-        "picTooltip": "Máis tarde podes cambiar esta foto"
+        "picTooltip": "Máis tarde podes cambiar esta foto",
+        "wallet": {
+            "payload": "Iniciar sesión en {{host}} á vez {{timestamp}}",
+            "alert": {
+                "title": "Redireccionando a Wallet",
+                "content": "Unha vez que peche este diálogo, dirixirase á súa carteira. Despois de iniciar sesión, volve a esta páxina."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Engade un xeito de iniciar sesión",
@@ -108,6 +115,18 @@
         "Owner": "Propietario",
         "Admin": "Administrador",
         "Member": "Membro",
-        "Guest": "Convidado"
+        "Guest": "Convidado",
+        "Host": "Anfitrión"
+    },
+    "analytics": {
+        "Title": "Analítica",
+        "Daily": "Diario",
+        "Weekly": "Semanalmente",
+        "Monthly": "Mensual",
+        "Application": "Solicitude",
+        "Pages": "Páxinas",
+        "Services": "Servizos",
+        "Faq": "FAQ",
+        "WeekDays": "Días da semana"
     }
 }

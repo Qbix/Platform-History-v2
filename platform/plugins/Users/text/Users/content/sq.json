@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Pranoni Kushtet e Shërbimit?",
         "facebookNoEmail": "Në llogarinë tuaj në facebook mungon një adresë e konfirmuar e-mail. Thjesht futuni në mënyrën amtare.",
-        "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë"
+        "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë",
+        "wallet": {
+            "payload": "Hyni në {{host}} në kohën {{timestamp}}",
+            "alert": {
+                "title": "Përcjellja në Wallet",
+                "content": "Pasi ta mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të regjistroheni, kthehuni në këtë faqe."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Shtoni një mënyrë për t&#39;u regjistruar",
@@ -108,6 +115,18 @@
         "Owner": "pronar",
         "Admin": "admin",
         "Member": "anëtar",
-        "Guest": "mysafir"
+        "Guest": "mysafir",
+        "Host": "Mikpritës"
+    },
+    "analytics": {
+        "Title": "Analitikë",
+        "Daily": "Të përditshme",
+        "Weekly": "Javore",
+        "Monthly": "Mujore",
+        "Application": "Aplikacion",
+        "Pages": "Faqet",
+        "Services": "Shërbimet",
+        "Faq": "Fak",
+        "WeekDays": "Ditët e Javës"
     }
 }

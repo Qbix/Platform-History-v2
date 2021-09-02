@@ -11,74 +11,73 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
 {
     /**
      * Creates or joins a room
-     * @method createOrJoinRoom
+     * @method getRoomStream
      * @param {string} $publisherId Id of room's publisher/initiator
      * @param {string} $roomId Room id in Qbix (last marp of stream name)
      * @param {string} $resumeClosed Use existing stream if it exists
      * @return {array} The keys are "stream", "created", "roomId", "socketServer"
      */
-    function createOrJoinRoom($publisherId, $roomId, $resumeClosed) {
+    function getRoomStream($publisherId, $roomId, $resumeClosed, $writeLevel) {
+        if (empty($publisherId)) {
+            throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
+        }
+        $webrtcStream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed, $writeLevel);
+
+        if ($webrtcStream && $resumeClosed) {
+            $webrtcStream->closedTime = null;
+            $webrtcStream->changed();
+
+            $endTime = $webrtcStream->getAttribute('endTime');
+            $startTime = $webrtcStream->getAttribute('startTime');
+            if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
+                $startTime =  round(microtime(true) * 1000);
+                $webrtcStream->setAttribute('startTime', $startTime);
+                $webrtcStream->clearAttribute('endTime');
+                $webrtcStream->save();
+            }
+        }
+
+        return $webrtcStream;
+    }
+
+    function getRoomStreamRelatedTo($publisherId, $streamName, $type, $resumeClosed) {
         if (empty($publisherId)) {
             throw new Q_Exception_RequiredField(array('field' => 'publisherId'));
         }
 
-        $stream = Streams_WebRTC::getOrCreateStream($publisherId, $roomId, $resumeClosed);
+        $lastRelated = Streams_RelatedTo::select()->where(array(
+            "toPublisherId" => $publisherId,
+            "toStreamName" => $streamName,
+            "type" => $type
+        ))->orderBy("weight", false)->limit(1)->fetchDbRow();
 
-        $endTime = $stream->getAttribute('endTime');
-        $startTime = $stream->getAttribute('startTime');
-        if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
+        if ($lastRelated) {
+            $webrtcStream = Streams::fetchOne(null, $lastRelated->fields['fromPublisherId'], $lastRelated->fields['fromStreamName']);
 
-            $startTime =  round(microtime(true) * 1000);
-            $stream->setAttribute('startTime', $startTime);
-            $stream->clearAttribute('endTime');
-            $stream->save();
+            if ($webrtcStream && $resumeClosed) {
+                $webrtcStream->closedTime = null;
+                $webrtcStream->changed();
 
-            /*$recStream = Streams::create($publisherId, $publisherId, 'Streams/webrtc/recordings', array(
-                'name' => 'Streams/webrtc/' . $roomId . '/' . $startTime
-            ));
+                $endTime = $webrtcStream->getAttribute('endTime');
+                $startTime = $webrtcStream->getAttribute('startTime');
+                if($startTime == null || ($endTime != null && round(microtime(true) * 1000) > $endTime)) {
+                    $startTime =  round(microtime(true) * 1000);
+                    $webrtcStream->setAttribute('startTime', $startTime);
+                    $webrtcStream->clearAttribute('endTime');
+                    $webrtcStream->save();
+                }
 
-            $recStream->relateFrom($stream, 'Streams/webrtc/recordings', $publisherId);*/
-        }
 
-        $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
-        $socketServerHost = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', $socketServerHost), '/');
-        $socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
-        if(!empty($socketServerHost) && !empty($socketServerHost)){
-            $socketServer = $socketServerHost . ':' . $socketServerPort;
-        } else {
-            $socketServer = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', Q_Config::get('Q', 'node', 'url', null)), '/');
-        }
-
-        $turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
-        $useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
-        $liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
-        $debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
-
-        if($useTwilioTurn) {
-            try {
-                $turnCredentials = $this->getTwilioTurnCredentials();
-                $turnServers[] = $turnCredentials;
-            } catch (Exception $e) {
             }
+
+            if (!$webrtcStream->testWriteLevel('join')) {
+                throw new Users_Exception_NotAuthorized();
+            }
+            return $webrtcStream;
         }
 
-        $hosts = Users_Contact::select()->where(array(
-            'userId' => Users::currentCommunityId(true),
-            'label' => array("Users/hosts")
-        ))->fetchDbRows(null, null, 'contactUserId');
-        $hosts = array_keys($hosts);
 
-        return array(
-            'stream' => $stream,
-            'hosts' => $hosts,
-            'roomId' => $stream->name,
-            'socketServer' => $socketServer,
-            'turnCredentials' => $turnServers,
-            'debug' => $debug,
-            'options' => array(
-                'liveStreaming' => $liveStreamingConfig
-            )
-        );
+        return null;
     }
 
     /**

@@ -190,7 +190,7 @@ class Q
 		$errstr,
 		$errfile,
 		$errline,
-		$errcontext)
+		$errcontext = null)
 	{
 	    if (!(error_reporting()  & $errno)) {
 	        // This error code is not included in error_reporting

@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Chấp nhận Điều khoản dịch vụ?",
         "facebookNoEmail": "Tài khoản facebook của bạn đang thiếu một địa chỉ email được xác nhận. Đơn giản chỉ cần đăng nhập theo cách bản địa.",
-        "picTooltip": "Bạn có thể thay đổi hình ảnh này sau"
+        "picTooltip": "Bạn có thể thay đổi hình ảnh này sau",
+        "wallet": {
+            "payload": "Đăng nhập vào {{host}} cùng lúc {{timestamp}}",
+            "alert": {
+                "title": "Chuyển hướng đến Wallet",
+                "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Thêm một cách để đăng nhập",
@@ -108,6 +115,18 @@
         "Owner": "Chủ nhân",
         "Admin": "quản trị viên",
         "Member": "Hội viên",
-        "Guest": "Khách"
+        "Guest": "Khách",
+        "Host": "Tổ chức"
+    },
+    "analytics": {
+        "Title": "phân tích",
+        "Daily": "Hằng ngày",
+        "Weekly": "Hàng tuần",
+        "Monthly": "Hàng tháng",
+        "Application": "Ứng dụng",
+        "Pages": "Các trang",
+        "Services": "Dịch vụ",
+        "Faq": "Câu hỏi thường gặp",
+        "WeekDays": "Ngày trong tuần"
     }
 }

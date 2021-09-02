@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accepter les conditions d&#39;utilisation?",
         "facebookNoEmail": "Il manque une adresse email confirmée à votre compte facebook. Connectez-vous simplement à la manière native.",
-        "picTooltip": "Vous pouvez changer cette image plus tard"
+        "picTooltip": "Vous pouvez changer cette image plus tard",
+        "wallet": {
+            "payload": "Connectez-vous à {{host}} à l&#39;heure {{timestamp}}",
+            "alert": {
+                "title": "Redirection vers le portefeuille",
+                "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ajouter un moyen de se connecter",
@@ -108,6 +115,18 @@
         "Owner": "Propriétaire",
         "Admin": "Admin",
         "Member": "Membre",
-        "Guest": "Client"
+        "Guest": "Client",
+        "Host": "Hôte"
+    },
+    "analytics": {
+        "Title": "Analytique",
+        "Daily": "du quotidien",
+        "Weekly": "Hebdomadaire",
+        "Monthly": "Mensuel",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Prestations de service",
+        "Faq": "FAQ",
+        "WeekDays": "Jours de la semaine"
     }
 }

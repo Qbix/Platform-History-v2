@@ -34,6 +34,8 @@
             ignoreOnElements: [],
             activateOnElement: null,
             keepRatioBasedOnElement: null,
+            keepInitialSize: false,
+            initialSize: {width:null, height:null},
             appliedRecently: false,
             onMoved: new Q.Event(),
             onResized: new Q.Event(),
@@ -318,9 +320,15 @@
                         tool.state.isMoving = true;
 
                         var elRect = elementToMove.getBoundingClientRect();
-                        if(elementToMove == elementToResize) {
+                        if(elementToMove == elementToResize && !tool.state.keepInitialSize) {
                             elementToMove.style.width = elRect.width + 'px';
                             elementToMove.style.height = elRect.height + 'px';
+                        }
+                        if(tool.state.keepInitialSize){
+                            tool.state.initialSize = {
+                                width: elementToMove.style.width,
+                                height: elementToMove.style.height
+                            }
                         }
                         var elementPosition = tool.state.elementPosition ? tool.state.elementPosition : 'absolute';
 
@@ -365,6 +373,7 @@
                     }
 
                     var stopMoving = function(e){
+
                         if(Q.info.isTouchscreen) {
                             window.removeEventListener('touchmove', drag, { passive: false });
                         } else window.removeEventListener('mousemove', drag, { passive: false });
@@ -375,6 +384,16 @@
 
                         tool.state.onMovingStop.handle.call(tool);
                         tool.state.isMoving = false;
+
+                        var elementToMove = tool.state.elementToMove != null ? tool.state.elementToMove : tool.element;
+
+                        //elementToMove.style.position = '';
+
+                        if(tool.state.keepInitialSize) {
+                            if(tool.state.initialSize.width != null) elementToResize.style.width = tool.state.initialSize.width;
+                            if(tool.state.initialSize.height != null) elementToResize.style.height = tool.state.initialSize.height;
+                        }
+
                         if (tool.state.appliedRecently) {
                             tool.state.onMoved.handle.call(tool);
 

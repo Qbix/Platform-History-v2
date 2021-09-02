@@ -276,3 +276,36 @@
 	text-align: left;
 	white-space: nowrap;
 }
+
+.Streams_preview_call_control {
+	display: flex;
+	padding: 10px 5px 5px 5px;
+}
+.Streams_preview_accept_button, .Streams_preview_disconnect_button, .Streams_preview_call_button, .Streams_preview_switch_back_button {
+	width: 100px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px;
+	border-radius: 4px;
+}
+.Streams_preview_accept_button {
+	background: #37c837;
+	width:80px;
+	height:40px;
+}
+.Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
+	display: none;
+	background: #f93b2f;
+	width:100px;
+	height:40px;
+}
+.Streams_preview_call_control_call {
+	margin-right: 10px;
+}
+.Streams_preview_call_button {
+	background: #007bff;
+	width:60px;
+	height:40px;
+}

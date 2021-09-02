@@ -97,9 +97,16 @@
 			}
 		},
 		"apps": {
-			"platforms": ["facebook", "ios", "android"],
-			"export": ["facebook"],
+			"platforms": ["wallet", "facebook", "ios", "android"],
+			"export": ["wallet", "facebook"],
 			/* TODO: set up your external apps on external services */
+			"wallet": {
+				"MyApp": {
+					"chain": "ETH",
+					"network": "mainnet",
+					"appId": "EVM CHAIN ID HERE"
+				}
+			},
 			"facebook": {
 				"MyApp": {
 					"name": "FACEBOOK APP NAME HERE",

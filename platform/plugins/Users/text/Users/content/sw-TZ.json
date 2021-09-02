@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Kukubali Masharti ya Huduma?",
         "facebookNoEmail": "Akaunti yako ya facebook inakosa anwani ya barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
-        "picTooltip": "Unaweza kubadilisha picha hii baadaye"
+        "picTooltip": "Unaweza kubadilisha picha hii baadaye",
+        "wallet": {
+            "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
+            "alert": {
+                "title": "Inaelekeza kwenye mkoba",
+                "content": "Mara baada ya kufunga mazungumzo haya, utapelekwa kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ongeza njia ya kuingia",
@@ -108,6 +115,18 @@
         "Owner": "Mmiliki",
         "Admin": "Usimamizi",
         "Member": "Mwanachama",
-        "Guest": "Mgeni"
+        "Guest": "Mgeni",
+        "Host": "Mwenyeji"
+    },
+    "analytics": {
+        "Title": "Takwimu",
+        "Daily": "Kila siku",
+        "Weekly": "Kila wiki",
+        "Monthly": "Kila mwezi",
+        "Application": "Maombi",
+        "Pages": "Kurasa",
+        "Services": "Huduma",
+        "Faq": "Maswali",
+        "WeekDays": "Siku za Wiki"
     }
 }

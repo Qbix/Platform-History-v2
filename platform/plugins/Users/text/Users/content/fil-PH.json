@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
         "facebookNoEmail": "Kulang ang iyong facebook account ng isang nakumpirma na email address. Mag-log in lamang sa katutubong paraan.",
-        "picTooltip": "Maaari mong baguhin ang larawang ito mamaya"
+        "picTooltip": "Maaari mong baguhin ang larawang ito mamaya",
+        "wallet": {
+            "payload": "Mag-log in sa {{host}} sa oras na {{timestamp}}",
+            "alert": {
+                "title": "Pag-redirect sa Wallet",
+                "content": "Kapag naisara mo na ang dayalogo na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa pahinang ito."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Magdagdag ng isang paraan upang mag-log in",
@@ -108,6 +115,18 @@
         "Owner": "May-ari",
         "Admin": "Admin",
         "Member": "Miyembro",
-        "Guest": "Bisita"
+        "Guest": "Bisita",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Araw-araw",
+        "Weekly": "Lingguhan",
+        "Monthly": "Buwanang",
+        "Application": "Paglalapat",
+        "Pages": "Mga pahina",
+        "Services": "Mga serbisyo",
+        "Faq": "Faq",
+        "WeekDays": "Mga Araw ng Linggo"
     }
 }

@@ -10903,7 +10903,7 @@ function _listenForVisibilityChange() {
 		}
 	});
 	Q.addEventListener(document, visibilityChange, function () {
-		Q.onVisibilityChange.handle(document, [document[hidden]]);
+		Q.onVisibilityChange.handle.call(document, [!document[hidden]]);
 	}, false);
 	Q.isDocumentHidden = function () {
 		return document[hidden];

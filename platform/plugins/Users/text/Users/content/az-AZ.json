@@ -74,7 +74,7 @@
         "notVerified": "Daxil olmaq üçün özünüzə bir aktivasiya mesajı göndərməlisiniz.",
         "emailExists": "Daha əvvəl bu e-poçtla qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün inboxunuzu yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün vurun</a>",
         "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-i yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün vurun</a>",
-        "usingOther": "ya da edə bilərsən",
+        "usingOther": "yoxsa edə bilərsən",
         "prompt": "İstifadəçi adı seçin:",
         "newUser": "və ya aşağıda yeni bir hesab yaradın",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Xidmət şərtlərini qəbul edirsiniz?",
         "facebookNoEmail": "Facebook hesabınızda təsdiqlənmiş bir e-poçt ünvanı yoxdur. Sadəcə doğma şəkildə daxil olun.",
-        "picTooltip": "Daha sonra bu şəkli dəyişə bilərsiniz"
+        "picTooltip": "Daha sonra bu şəkli dəyişə bilərsiniz",
+        "wallet": {
+            "payload": "{{timestamp}} vaxtında {{host}} saytına daxil olun",
+            "alert": {
+                "title": "Cüzdana yönləndirilir",
+                "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Giriş etdikdən sonra bu səhifəyə qayıdın."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Giriş üçün bir yol əlavə edin",
@@ -108,6 +115,18 @@
         "Owner": "Sahib",
         "Admin": "Admin",
         "Member": "Üzv",
-        "Guest": "Qonaq"
+        "Guest": "Qonaq",
+        "Host": "Ev sahibi"
+    },
+    "analytics": {
+        "Title": "Analitik",
+        "Daily": "Gündəlik",
+        "Weekly": "Həftəlik",
+        "Monthly": "Aylıq",
+        "Application": "Tətbiq",
+        "Pages": "Səhifələr",
+        "Services": "Xidmətlər",
+        "Faq": "FAQ",
+        "WeekDays": "Həftə içi"
     }
 }

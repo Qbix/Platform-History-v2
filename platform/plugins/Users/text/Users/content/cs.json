@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Přijímáte smluvní podmínky?",
         "facebookNoEmail": "Na vašem facebookovém účtu chybí potvrzená e-mailová adresa. Stačí se přihlásit nativním způsobem.",
-        "picTooltip": "Tento obrázek můžete později změnit"
+        "picTooltip": "Tento obrázek můžete později změnit",
+        "wallet": {
+            "payload": "Přihlásit se do služby {{host}} v čase {{timestamp}}",
+            "alert": {
+                "title": "Přesměrování do Peněženky",
+                "content": "Po zavření tohoto dialogu se dostanete do své peněženky. Po přihlášení se vraťte na tuto stránku."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Přidejte způsob přihlášení",
@@ -108,6 +115,18 @@
         "Owner": "Majitel",
         "Admin": "Správce",
         "Member": "Člen",
-        "Guest": "Host"
+        "Guest": "Host",
+        "Host": "Hostitel"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Denně",
+        "Weekly": "Týdně",
+        "Monthly": "Měsíční",
+        "Application": "aplikace",
+        "Pages": "Stránky",
+        "Services": "Služby",
+        "Faq": "Časté dotazy",
+        "WeekDays": "Týden Dny"
     }
 }

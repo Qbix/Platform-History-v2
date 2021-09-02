@@ -74,7 +74,7 @@
         "notVerified": "Aby ste sa mohli prihlásiť, musíte si poslať aktivačnú správu.",
         "emailExists": "Skúsili ste sa predtým zaregistrovať v tomto e-maile? Ak áno, aktivujte svoj účet v doručenej pošte. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete</a>",
         "mobileExists": "Skúsili ste sa predtým zaregistrovať v tomto mobilnom čísle? Ak je to tak, skontrolujte svoju SMS a aktivujte svoj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete</a>",
-        "usingOther": "alebo môžete",
+        "usingOther": "alebo môžeš",
         "prompt": "Zvoľ si používateľské meno:",
         "newUser": "alebo si vytvorte nový účet nižšie",
         "placeholders": {
@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Prijímate zmluvné podmienky?",
         "facebookNoEmail": "Vo vašom facebookovom účte chýba potvrdená e-mailová adresa. Jednoducho sa prihláste natívnym spôsobom.",
-        "picTooltip": "Tento obrázok môžete neskôr zmeniť"
+        "picTooltip": "Tento obrázok môžete neskôr zmeniť",
+        "wallet": {
+            "payload": "Prihlásiť sa do služby {{host}} v čase {{timestamp}}",
+            "alert": {
+                "title": "Prebieha presmerovanie do Peňaženky",
+                "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Pridajte spôsob prihlásenia",
@@ -108,6 +115,18 @@
         "Owner": "vlastník",
         "Admin": "admin",
         "Member": "člen",
-        "Guest": "Hosť"
+        "Guest": "Hosť",
+        "Host": "Hostiteľ"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Denne",
+        "Weekly": "Týždenne",
+        "Monthly": "Mesačne",
+        "Application": "Aplikácia",
+        "Pages": "Stránky",
+        "Services": "Služby",
+        "Faq": "Časté otázky",
+        "WeekDays": "Dni v týždni"
     }
 }

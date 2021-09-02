@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Hizmet Şartlarını Kabul Etmek?",
         "facebookNoEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel yoldan giriş yapın.",
-        "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz"
+        "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz",
+        "wallet": {
+            "payload": "{{host}}&#39;da {{timestamp}} saatinde oturum açın",
+            "alert": {
+                "title": "Cüzdan&#39;a Yönlendirme",
+                "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Giriş yapmanın bir yolunu ekleyin",
@@ -108,6 +115,18 @@
         "Owner": "Sahip",
         "Admin": "yönetim",
         "Member": "üye",
-        "Guest": "Konuk"
+        "Guest": "Konuk",
+        "Host": "Ev sahibi"
+    },
+    "analytics": {
+        "Title": "Analitik",
+        "Daily": "Günlük",
+        "Weekly": "Haftalık",
+        "Monthly": "Aylık",
+        "Application": "Başvuru",
+        "Pages": "Sayfalar",
+        "Services": "Hizmetler",
+        "Faq": "SSS",
+        "WeekDays": "Hafta içi"
     }
 }

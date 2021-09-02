@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Hyväksytkö palvelun ehdot?",
         "facebookNoEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu vain omalla tavallaan.",
-        "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin"
+        "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
+        "wallet": {
+            "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
+            "alert": {
+                "title": "Uudelleenohjaus Walletiin",
+                "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Lisää tapa kirjautua sisään",
@@ -108,6 +115,18 @@
         "Owner": "Omistaja",
         "Admin": "admin",
         "Member": "Jäsen",
-        "Guest": "vieras"
+        "Guest": "vieras",
+        "Host": "Isäntä"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Päivittäin",
+        "Weekly": "Viikoittain",
+        "Monthly": "Kuukausittain",
+        "Application": "Sovellus",
+        "Pages": "Sivut",
+        "Services": "Palvelut",
+        "Faq": "FAQ",
+        "WeekDays": "Viikonpäivät"
     }
 }

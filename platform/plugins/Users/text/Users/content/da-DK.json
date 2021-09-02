@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accepterer du servicevilkårene?",
         "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mail-adresse. Log ind på den oprindelige måde.",
-        "picTooltip": "Du kan ændre dette billede senere"
+        "picTooltip": "Du kan ændre dette billede senere",
+        "wallet": {
+            "payload": "Log ind på {{host}} på et tidspunkt {{timestamp}}",
+            "alert": {
+                "title": "Omdirigerer til Wallet",
+                "content": "Når du lukker denne dialog, bliver du ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Tilføj en måde at logge ind på",
@@ -108,6 +115,18 @@
         "Owner": "Ejer",
         "Admin": "Admin",
         "Member": "Medlem",
-        "Guest": "Gæst"
+        "Guest": "Gæst",
+        "Host": "Vært"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daglige",
+        "Weekly": "Ugentlig",
+        "Monthly": "Månedlige",
+        "Application": "Ansøgning",
+        "Pages": "sider",
+        "Services": "Services",
+        "Faq": "Ofte stillede spørgsmål",
+        "WeekDays": "Ugedage"
     }
 }
