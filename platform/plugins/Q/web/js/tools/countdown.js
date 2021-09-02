@@ -33,7 +33,7 @@
                 }
             }
 
-            Q.handle(state.onRefresh, tool.element);
+            Q.handle(state.onRefresh, tool);
         }, 1000);
     }, {
         timestamp: null,
