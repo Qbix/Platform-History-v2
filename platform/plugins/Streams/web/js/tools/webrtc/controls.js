@@ -128,9 +128,6 @@
 
 			this.state.onCreate.handle.call(this);
 
-
-
-
 		},
 
 		{
@@ -4087,26 +4084,22 @@
 
 			initAdvancedLiveStreaming: function() {
 				var tool = this;
-                var src = Q.url('{{Streams}}/js/tools/webrtc/livestreamingDialogue.js?time=' + Date.now());
-                console.log('livestreamingDialog src', src)
-                var xhr = new XMLHttpRequest();
 
-                xhr.open('GET', src, true);
-                xhr.onload = function(e) {
-                    var script = e.target.response || e.target.responseText;
-                    if (e.target.readyState === 4) {
-                        switch( e.target.status) {
-                            case 200:
-                                var evalResult = eval.apply( tool, [script] );
-                                tool.advancedLiveStreaming = evalResult.init(tool);
-                                console.log('livestreamingDialog evalResult', evalResult)
-                                break;
-                            default:
-                                console.error("ERROR: script not loaded: ", url);
+                Q.activate(
+                    Q.Tool.setUpElement(
+                        "div", // or pass an existing element
+                        "Streams/webrtc/streamingEditor",
+                        {
+                            controlsTool: tool
                         }
+                    ),
+                    {},
+                    function () {
+                    	console.log('Streams/webrtc/streamingEditor', this)
+                        tool.advancedLiveStreaming = this.get();
+
                     }
-                }
-                xhr.send();
+                );
 			},
 
 			closeAllDialogues: function () {

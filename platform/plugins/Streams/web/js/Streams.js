@@ -583,6 +583,7 @@ Q.Tool.define({
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
 	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
+	"Streams/webrtc/streamingEditor"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
