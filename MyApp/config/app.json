@@ -132,7 +132,8 @@
 			}
 		},
 		"uris": {
-			"MyApp/afterActivate": "MyApp/home"
+			"MyApp/afterActivate": "MyApp/home",
+			"MyApp/successUrl": "MyApp/home"
 		},
 		"login": {
 			"identifierType": "email,mobile"

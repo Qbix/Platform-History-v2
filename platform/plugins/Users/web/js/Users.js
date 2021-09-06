@@ -120,20 +120,22 @@
 		console.log("Device registered for user with id " + Users.loggedInUserId());
 	}, 'Users.onError');
 
+	Users.init = {};
+
 	/**
 	 * Initialize facebook by adding FB script and running FB.init().
 	 * Ensures that this is done only once
-	 * @method initFacebook
+	 * @method init.facebook
 	 * @param {Function} callback , This function called after Facebook init completed
 	 * @param {Object} options for overriding the options passed to FB.init , and also
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
-	Users.initFacebook = function (callback, options) {
+	Users.init.facebook = function (callback, options) {
 
 		var appId = (options && options.appId) || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (!fbAppId) {
-			throw new Q.Error("Users.initFacebook: missing facebook app info for '" + appId + "'");
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		if (!platformAppId) {
+			throw new Q.Error("Users.init.facebook: missing facebook app info for '" + appId + "'");
 		}
 
 		/*	Q.onReady.add(function () {
@@ -141,24 +143,24 @@
 			});*/
 
 		// should be only called once per app
-		if (Users.initFacebook.completed[Q.info.app]) {
+		if (Users.init.facebook.completed[Q.info.app]) {
 			callback && callback();
 			return;
 		}
 
 		function _init() {
-			if (!Users.initFacebook.completed[appId] && fbAppId) {
+			if (!Users.init.facebook.completed[appId] && platformAppId) {
 				FB.init(Q.extend({
-					appId: fbAppId,
+					appId: platformAppId,
 					version: 'v8.0',
 					status: true,
 					cookie: true,
 					oauth: true,
 					xfbml: true
-				}, Users.initFacebook.options, options));
-				Users.onInitFacebook.handle(Users, window.FB, [appId]);
+				}, Users.init.facebook.options, options));
+				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
-			Users.initFacebook.completed[appId] = true;
+			Users.init.facebook.completed[appId] = true;
 			callback && callback();
 		}
 
@@ -175,9 +177,28 @@
 			}
 		);
 	};
-	Users.initFacebook.completed = {};
-	Users.initFacebook.options = {
+	Users.init.facebook.completed = {};
+	Users.init.facebook.options = {
 		frictionlessRequests: true
+	};
+	
+	/**
+	 * Initialize wallet
+	 * Ensures that this is done only once
+	 * @method init.facebook
+	 * @param {Function} callback , This function called after Facebook init completed
+	 * @param {Object} options for overriding the options passed to FB.init , and also
+	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
+	 */
+	Users.init.wallet = function (callback, options) {
+		Q.addScript([
+			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
+			'{{Users}}/js/wallet/evm-chains.min.js',
+			'{{Users}}/js/wallet/fortmatic.js',
+			'{{Users}}/js/wallet/walletconnect.min.js',
+			'{{Users}}/js/wallet/web3.min.js',
+			'{{Users}}/js/wallet/web3modal.js'
+		], callback, options);
 	};
 
 	/**
@@ -212,19 +233,19 @@
 
 	/**
 	 * You can wrap all uses of FB object with this
-	 * @method initFacebook.ready
+	 * @method init.facebook.ready
 	 * @param {String} [appId=Q.info.app] only specify this if you have multiple facebook apps
 	 * @param {Function} callback this function called after Facebook application access token or user status response
 	 */
-	Users.initFacebook.ready = function (appId, callback) {
+	Users.init.facebook.ready = function (appId, callback) {
 		if (typeof appId === 'function') {
 			callback = appId;
 			appId = Q.info.app;
 		}
-		if (Users.initFacebook.completed[appId]) {
+		if (Users.init.facebook.completed[appId]) {
 			_proceed();
 		} else {
-			Users.onInitFacebook.set(_proceed, "Users.initFacebook.ready");
+			Users.init.facebook.onInit.set(_proceed, "Users.init.facebook.ready");
 		}
 
 		function _proceed() {
@@ -255,6 +276,7 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.authenticate = function (platform, onSuccess, onCancel, options) {
+		options = options || {};
 		var handler = Users.authenticate.handlers[platform];
 		if (!handler) {
 			var handlers = Object.keys(Users.authenticate.handlers);
@@ -263,98 +285,47 @@
 			);
 		}
 		Users.authenticate.occurring = true;
-		return handler.call(this, platform, onSuccess, onCancel, options);
+		var appId = options.appId || Q.info.app;
+		var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
+		if (!platformAppId) {
+			console.warn(
+				"Users.authenticate: missing " + 
+				["Users", "apps", platform, appId, "appId"].join('.')
+			);
+			return;
+		}
+		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
 	Users.authenticate.handlers = {};
 	
 	Users.authenticate.handlers.ios = 
-	Users.authenticate.handlers.android = function (platform, onSuccess, onCancel, options) {
+	Users.authenticate.handlers.android = function (platform, platformAppId, onSuccess, onCancel, options) {
 		_doAuthenticate({
-			udid: Q.info.udid, // TODO: sign this with private key
+			udid: Q.info.udid, // TODO: sign this with private key on cordova side
 			platform: platform
-		}, platform, onSuccess, onCancel, options);
+		}, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate.handlers.facebook = function (platform, onSuccess, onCancel, options) {
+	Users.authenticate.handlers.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = options || {};
 		var fields = {};
 
-		var appId = options.appId || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (!fbAppId) {
-			console.warn("Users.authenticate: missing Users.apps.facebook." + appId + ".appId");
-			return;
-		}
-
 		// make sure facebook is initialized
-		Users.initFacebook(function () {
+		Users.init.facebook(function () {
 			// check if user is connected to facebook
 			Users.Facebook.getLoginStatus(function (response) {
 				if (response.status === 'connected') {
-					var fb_xid = response.authResponse.userID;
-					var ignoreXid = Q.cookie('Users_ignorePlatformXid');
-					// the following line prevents multiple prompts for the same user,
-					// which can be a problem especially if the authenticate() is called
-					// multiple times on the same page, or because the page is reloaded
-					Q.cookie('Users_ignorePlatformXid', fb_xid);
-
-					var key = "facebook\t" + fbAppId;
-					if (Users.loggedInUser && Users.loggedInUser.xids[key] == fb_xid) {
-						// The correct user is already logged in.
-						// Call onSuccess but do not pass a user object -- the user didn't change.
-						_doSuccess(null, platform, onSuccess, onCancel, options);
-						return;
-					}
-					if (options.prompt === undefined || options.prompt === null) {
-						// show prompt only if we aren't ignoring this facebook xid
-						if (fb_xid == ignoreXid) {
-							_doCancel(null, platform, onSuccess, onCancel, options);
-						} else {
-							Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
-						}
-					} else if (options.prompt === false) {
-						// authenticate without prompting
-						__doAuthenticate();
-					} else if (options.prompt === true) {
-						// show the usual prompt no matter what
-						Users.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
-					} else if (typeof options.prompt === 'function') {
-						// custom prompt
-						options.prompt('facebook', fb_xid, __doAuthenticate, __doCancel);
-					} else {
-						Users.authenticate.occurring = false;
-						throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
-					}
-				} else if (fbAppId) {
+					_handleXid(
+						platform, platformAppId, response.authResponse.userID,
+						onSuccess, onCancel, options
+					);
+				} else if (platformAppId) {
 					// let's delete any stale facebook cookies there might be
 					// otherwise they might confuse our server-side authentication.
-					Q.cookie('fbs_' + fbAppId, null, {path: '/'});
-					Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
-					_doCancel(null, platform, onSuccess, onCancel, options);
-				}
-				
-				function __doCancel(x) {
-					_doCancel.call(this, x, platform, onSuccess, onCancel, options);
-				}
-
-				function __doAuthenticate() {
-					if (!Users.Facebook.getAuthResponse()) {
-						// in some rare cases, the user may have logged out of facebook
-						// while our prompt was visible, so there is no longer a valid
-						// facebook authResponse. In this case, even though they want
-						// to authenticate, we must cancel it.
-						alert("Connection to facebook was lost. Try connecting again.");
-						_doCancel(null, platform, onSuccess, onCancel, options);
-						return;
-					}
-					var ar = response.authResponse;
-					ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
-					ar.fbAppId = fbAppId;
-					ar.appId = appId;
-					fields['Q.Users.facebook.authResponse'] = ar;
-					fields.platform = 'facebook';
-					_doAuthenticate(fields, platform, onSuccess, onCancel, options);
+					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
+					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
 				}
 			}, options.force ? true : false);
 		}, {
@@ -362,16 +333,26 @@
 		});
 	};
 	
-	Users.authenticate.handlers.wallet = function (platform, onSuccess, onCancel, options) {
+	Users.authenticate.handlers.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = Q.extend(Users.authenticate.handlers.wallet.options, options);
-		Q.addScript([
-			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
-			'{{Users}}/js/wallet/evm-chains.min.js',
-			'{{Users}}/js/wallet/fortmatic.js',
-			'{{Users}}/js/wallet/walletconnect.min.js',
-			'{{Users}}/js/wallet/web3.min.js',
-			'{{Users}}/js/wallet/web3modal.js'
-		], function () {
+		Users.init.wallet(function () {
+			try {
+				var wsr_json = Q.cookie('wsr_1');
+				if (wsr_json) {
+					var wsr = JSON.parse(wsr_json);	
+					var hash = ethers.utils.hashMessage(wsr[0]);
+					var xid = ethers.utils.recoverAddress(hash, wsr[1]);
+					if (xid) {
+						return _handleXid(
+							platform, platformAppId, xid,
+							onSuccess, onCancel, options
+						);	
+					}
+				}
+			} catch (e) {
+				console.warn(e);
+				// wasn't able to get the current authenticated xid from cookie
+			}
 			 // Unpkg imports
 			var appId = options.appId || Q.info.app;
 			var Web3Modal = window.Web3Modal.default;
@@ -398,31 +379,28 @@
 			web3Modal.connect().then(function (provider) {
 				Users.Wallet.provider = provider;
 			    // Subscribe to accounts change
-			    provider.on("accountsChanged", (accounts) => {
-					console.log('accounts', accounts);
-					//fetchAccountData();
+			    provider.on("accountsChanged", function (accounts) {
+					console.log('provider.accountsChanged', accounts);
 			    });
 
 			    // Subscribe to chainId change
-			    provider.on("chainChanged", (chainId) => {
-					console.log('chainId', chainId);
-					//fetchAccountData();
+			    provider.on("chainChanged", function (chainId) {
+					console.log('provider.chainChanged', chainId);
 			    });
 			    // Subscribe to networkId change
-			    provider.on("networkChanged", (networkId) => {
-					console.log('networkId', networkId);
-					//fetchAccountData();
+			    provider.on("networkChanged", function (networkId) {
+					console.log('provider.networkChanged', networkId);
 			    });
 				// Subscribe to provider disconnection
-				provider.on("connect", (info) => {
-					console.log(info);
+				provider.on("connect", function (info) {
+					console.log('provider.connect', info);
 				});
 				// Subscribe to provider disconnection
-				provider.on("disconnect", (error) => {
+				provider.on("disconnect", function (error) {
 					if (!Users.logout.occurring) {
 						Q.Users.logout({using: 'wallet'});
 					}
-					console.log("Disconnecting: " + error);
+					console.log("provider.disconnect: ", error);
 				});
 				var payload = Q.text.Users.login.wallet.payload.interpolate({
 					host: location.host,
@@ -431,6 +409,13 @@
 				var w3 = new Web3(provider);
 				var network, accounts;
 				w3.eth.getAccounts().then(function (accounts) {
+					var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
+					if (walletAddress && accounts.includes(walletAddress)) {
+						var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
+						if (loginExpires > Date.now() / 1000) {
+							_proceed();
+						}
+					}
 				    if (provider.wc) {
 						Q.alert(Q.text.Users.login.wallet.alert.content, {
 							title: Q.text.Users.login.wallet.alert.title,
@@ -460,7 +445,7 @@
 							signature: signature,
 							platform: 'wallet',
 							chainId: provider.chainId
-						}, platform, onSuccess, onCancel, options);
+						}, platform, platformAppId, onSuccess, onCancel, options);
 					}
 				}).catch(_cancel);
 			}).catch(_cancel);
@@ -471,7 +456,7 @@
 	};
 	
 	Users.authenticate.handlers.wallet.options = {
-		chain: 'MATIC',
+		chain: 'ETH',
 		network: 'mainnet'
 	};
 	
@@ -483,7 +468,69 @@
 		}, {"prompt": false});
 	}
 	
-	function _doSuccess(user, platform, onSuccess, onCancel, options) {
+	function _handleXid(platform, platformAppId, xid, onSuccess, onCancel, options) {
+		var ignoreXid = Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId);
+
+		// the following line prevents multiple prompts for the same user,
+		// which can be a problem especially if the authenticate() is called
+		// multiple times on the same page, or because the page is reloaded
+		Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId, xid);
+
+		var key = platform + "\t" + platformAppId;
+		if (Users.loggedInUser && Users.loggedInUser.xids[key] == xid) {
+			// The correct user is already logged in.
+			// Call onSuccess but do not pass a user object -- the user didn't change.
+			_doSuccess(null, platform, platformAppId, onSuccess, onCancel, options);
+			return;
+		}
+		if (options.prompt === undefined || options.prompt === null) {
+			// show prompt only if we aren't ignoring this platform xid
+			if (xid == ignoreXid) {
+				_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+			} else {
+				Users.prompt(platform, xid, __doAuthenticate, __doCancel);
+			}
+		} else if (options.prompt === false) {
+			// authenticate without prompting
+			__doAuthenticate();
+		} else if (options.prompt === true) {
+			// show the usual prompt no matter what
+			Users.prompt(platform, xid, __doAuthenticate, __doCancel);
+		} else if (typeof options.prompt === 'function') {
+			// custom prompt
+			options.prompt(platform, xid, __doAuthenticate, __doCancel);
+		} else {
+			Users.authenticate.occurring = false;
+			throw new Q.Error("Users.authenticate: options.prompt is the wrong type");
+		}
+		
+		function __doCancel(x) {
+			_doCancel.call(this, platform, platformAppId, x, onSuccess, onCancel, options);
+		}
+
+		function __doAuthenticate() {
+			var fields = {};
+			if (platform === 'facebook') {
+				if (!Users.Facebook.getAuthResponse()) {
+					// in some rare cases, the user may have logged out of facebook
+					// while our prompt was visible, so there is no longer a valid
+					// facebook authResponse. In this case, even though they want
+					// to authenticate, we must cancel it.
+					alert("Connection to facebook was lost. Try connecting again.");
+					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+					return;
+				}
+				var ar = response.authResponse;
+				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
+				ar.fbAppId = platformAppId;
+				ar.appId = appId;
+				fields['Q.Users.facebook.authResponse'] = ar;
+			}
+			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
+		}
+	}
+	
+	function _doSuccess(user, platform, platformAppId, onSuccess, onCancel, options) {
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
@@ -491,8 +538,8 @@
 		Users.authenticate.occurring = false;
 	}
 
-	function _doCancel(ignoreXid, platform, onSuccess, onCancel, options) {
-		if (ignoreXid) {
+	function _doCancel(platform, platformAppId, xid, onSuccess, onCancel, options) {
+		if (xid) {
 			// NOTE: the following line makes us ignore this xid
 			// until the user explicitly wants to connect.
 			// This usually has the right effect -- because the user
@@ -501,20 +548,20 @@
 			// and then the javascript discovers that the platform connection was lost,
 			// the user will not be prompted to restore it when it becomes available again.
 			// They will have to do it explicitly (calling Users.authenticate with prompt: true)
-			Q.cookie('Users_ignorePlatformXid', ignoreXid);
+			Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId, xid);
 		}
 		delete Users.connected[platform];
-		Users.onConnectionLost.handle.call(Users, platform, options);
+		Users.onDisconnected.handle.call(Users, platform, options);
 		Q.handle(onCancel, Users, [options]);
 		Users.authenticate.occurring = false;
 	}
 	
-	function _doAuthenticate(fields, platform, onSuccess, onCancel, options) {
+	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
 		Q.req('Users/authenticate', 'data', function (err, response) {
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
-				return _doCancel(null, platform, onSuccess, onCancel, options);
+				return _doCancel(platform, platformAppId, onSuccess, onCancel, options);
 			}
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
@@ -525,10 +572,10 @@
 			user.used = platform;
 			Users.loggedInUser = new Users.User(user);
 			Q.nonce = Q.cookie('Q_nonce');
-			_doSuccess(user, platform, onSuccess, onCancel, options);
+			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
-			fields: fields
+			fields: Q.extend({ platform: platform }, fields)
 		});
 	}
 
@@ -551,7 +598,7 @@
 		}
 
 		var appId = (options && options.appId) || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
 		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
@@ -573,9 +620,9 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_xid;
-			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_xid, noLongerUsing));
+			var xid;
+			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
+				content_div.append(_usingInformation(xid, noLongerUsing));
 				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
@@ -607,9 +654,9 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var fb_xid;
-			if (fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users)) {
-				content_div.append(_usingInformation(fb_xid, noLongerUsing));
+			var xid;
+			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
+				content_div.append(_usingInformation(xid, noLongerUsing));
 				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
@@ -636,7 +683,7 @@
 			alignByParent: false,
 			doNotRemove: true,
 			onActivate: function () {
-				Users.initFacebook(function () {
+				Users.init.facebook(function () {
 					FB.XFBML.parse(content_div.get(0));
 				}, {
 					appId: appId
@@ -698,8 +745,8 @@
 			throw new Q.Error("Users.scope: The only supported platform for now is facebook");
 		}
 		var appId = (options && options.appId) || Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		Users.initFacebook(function () {
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		Users.init.facebook(function () {
 			if (!Users.Facebook.getAuthResponse()) {
 				callback(null);
 			}
@@ -778,20 +825,18 @@
 		function _doLogin() {
 			// try quietly, possible only with one of "facebook" or "wallet"
 			if (o.tryQuietly) {
-				if (o.using.indexOf('facebook') >= 0) {
-					o.force = true;
-					Users.authenticate('facebook', function (user) {
-						_onConnect(user);
-					}, function () {
-						_onCancel();
-					}, o);
-				} else if (o.using.indexOf('wallet') >= 0) {
-					Users.authenticate('wallet', function (user) {
-						_onConnect(user);
-					}, function () {
-						_onCancel();
-					}, o);
-				}
+				var platform = (typeof o.tryQuietly === 'string') ? o.tryQuietly : '';
+				var using = (typeof o.using === 'string') ? [o.using] : o.using;
+				Q.each(['facebook', 'wallet'], function (i, k) {
+					if (!using && o.using.indexOf(k)) {
+						using = k;
+					}
+				});
+				Users.authenticate(platform, function (user) {
+					_onConnect(user);
+				}, function () {
+					_onCancel();
+				}, o);
 				return false;
 			}
 
@@ -823,7 +868,7 @@
 				$('#Users_login_step1_form *').removeAttr('disabled');
 				$('#Users_login_identifierType').val(o.identifierType);
 			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
-				Users.initFacebook(function () {
+				Users.init.facebook(function () {
 					Users.Facebook.login(function (response) {
 						if (!response.authResponse) {
 							_onCancel();
@@ -954,18 +999,18 @@
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
-			if (fbAppId && o.using.indexOf('facebook') >= 0) {
-				var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-				if (!fbAppId) {
+			if (platformAppId && o.using.indexOf('facebook') >= 0) {
+				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+				if (!platformAppId) {
 					console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
 				}
-				Q.cookie('fbs_' + fbAppId, null, {path: '/'});
-				Q.cookie('fbsr_' + fbAppId, null, {path: '/'});
+				Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+				Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
 				if ((o.using[0] === 'native' || o.using[1] === 'native')) {
 					Users.loggedInUser = null;
 					Q.nonce = Q.cookie('Q_nonce'); // null
 				}
-				Users.initFacebook(function logoutCallback() {
+				Users.init.facebook(function logoutCallback() {
 					Users.Facebook.getLoginStatus(function (response) {
 						if (response.authResponse) {
 							FB.logout(function () {
@@ -1008,11 +1053,12 @@
 			}
 			if (o.using.indexOf('native') >= 0) {
 				// if we log out without logging out of facebook,
-				// then we should ignore the logged-in user's fb_xid
+				// then we should ignore the logged-in user's xid
 				// when authenticating, until it is forced
-				var fb_xid = Q.getObject(['loggedInUser', 'identifiers', 'facebook'], Users);
-				if (fb_xid) {
-					Q.cookie('Users_ignorePlatformXid', fb_xid);
+				var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
+				for (var key in xids) {
+					var parts = key.split("\t");
+					Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
@@ -1539,15 +1585,15 @@
 			if ($form.data('used') === 'facebook') {
 				var platforms = $form.data('platforms');
 				var appId = platforms.facebook || Q.info.app;
-				var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-				if (!fbAppId) {
+				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+				if (!platformAppId) {
 					console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook." + appId + ".appId");
 				}
-				Users.initFacebook(function () {
+				Users.init.facebook(function () {
 					var k;
 					if ((authResponse = Users.Facebook.getAuthResponse())) {
 						authResponse.appId = appId;
-						authResponse.fbAppId = fbAppId;
+						authResponse.fbAppId = platformAppId;
 						for (k in authResponse) {
 							register_form.append(
 								$('<input type="hidden" />')
@@ -1748,8 +1794,8 @@
 			var $button = null;
 			switch (platform) {
 				case 'facebook':
-					var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-					if (!fbAppId) {
+					var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
+					if (!platformAppId) {
 						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
 						break;
 					}
@@ -1762,7 +1808,7 @@
 							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
 							location.href = scheme + '#facebookLogin=1';
 						} else {
-							Users.initFacebook(function () {
+							Users.init.facebook(function () {
 								Users.Facebook.usingPlatforms = usingPlatforms;
 								Users.Facebook.scope = options.scope;
 								Users.Facebook.login();
@@ -2743,9 +2789,11 @@
 		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
 
 		var appId = Q.info.app;
-		var fbAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (fbAppId) {
-			Users.initFacebook();
+		for (var platform in Users.apps) {
+			var platformAppId = Q.getObject([platformAppId, appId, 'appId'], Users.apps);
+			if (platformAppId) {
+				Users.init[platform]();
+			}
 		}
 		OAuth.redirectUri = Q.action('Users/oauthed');
 	}, 'Users');
@@ -2867,7 +2915,7 @@
 		}
 	}, 'Users');
 
-	Users.onInitFacebook = new Q.Event();
+	Users.init.facebook.onInit = new Q.Event();
 	var ddc = document.documentElement;
 	Users.onLogin = new Q.Event(function () {
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
@@ -2888,7 +2936,7 @@
 		console.warn("Call to server was made which normally requires user login.");
 	});
 	Users.onConnected = new Q.Event();
-	Users.onConnectionLost = new Q.Event();
+	Users.onDisconnected = new Q.Event();
 	
 	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
 		Q.loadNonce(function () {
@@ -2925,7 +2973,9 @@
 			];
 
 			navigator.contacts.find(fields, function (data) {
-				data = data.sort((a,b) => (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0));
+				data = data.sort(function (a, b) {
+					return (a.name.formatted > b.name.formatted) ? 1 : ((b.name.formatted > a.name.formatted) ? -1 : 0)
+				});
 
 				Q.each(data, function (i, obj) {
 					obj.displayName = obj.displayName || obj.name.formatted;

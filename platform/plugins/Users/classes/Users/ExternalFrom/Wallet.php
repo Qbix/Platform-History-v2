@@ -39,26 +39,39 @@ class Users_ExternalFrom_Wallet extends Users_ExternalFrom implements Users_Exte
 			));
 		}
 		$xid = strtolower(Q::ifset($_REQUEST, 'xid', null));
-		if (is_callable('gmp_add') and is_callable('gmp_mod')) {
-			Q_Request::requireFields(array('payload', 'signature'), true);
-			$e = new Crypto\EthSigRecover();
-			$recoveredXid = strtolower(
-				$e->personal_ecRecover($_REQUEST['payload'], $_REQUEST['signature'])
-			);
-			if ($xid and strtolower($recoveredXid) != $xid) {
-				throw new Q_Exception_WrongValue(array(
-					'field' => 'xid',
-					'range' => $xid
-				));
+		if (!is_callable('gmp_add') or !is_callable('gmp_mod')) {
+			throw new Q_Exception('Wallet authentication requires installing PHP gmp extensions');
+		}
+		$payload = Q::ifset($_REQUEST, 'payload', null);
+		$signature = Q::ifset($_REQUEST, 'signature', null);
+		if (!$payload or $signature) {
+			$cookieName = "wsr_$platformAppId";
+			if (isset($_COOKIE[$cookieName])) {
+				// A previous request has set the wsr cookie
+				$wsr_json = $_COOKIE[$cookieName];
+				if ($wsr = Q::json_decode($wsr_json, true)) {
+					list($payload, $signature) = $wsr;
+				}
 			}
-			$xid = $recoveredXid;
 		}
-		if (!$xid) {
-			$xid = Q::ifset($_COOKIE, 'Q_Users_wallet_address', null);
+		Q_Valid::requireFields(array('payload', 'signature'), compact('payload', 'signature'),true);
+		$e = new Crypto\EthSigRecover();
+		$recoveredXid = strtolower(
+			$e->personal_ecRecover($payload, $signature)
+		);
+		if ($xid and strtolower($recoveredXid) != $xid) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'xid',
+				'range' => $xid
+			));
 		}
+		$xid = $recoveredXid;
 		$expires = time() + Q::ifset($appInfo, 'expires', 60*60);
+		$cookieNames = array("wsr_$platformAppId", "wsr_$platformAppId".'_expires');
 		if ($xid and $setCookie) {
-			Q_Response::setCookie("Q_Users_wallet_address", $xid, $expires);
+			$parts = array($payload, $signature);
+			Q_Response::setCookie($cookieNames[0], Q::json_encode($parts), $expires);
+			Q_Response::setCookie($cookieNames[1], $expires, $expires);
 		}
 		$ef = new Users_ExternalFrom_Wallet();
 		// note that $ef->userId was not set
@@ -67,6 +80,7 @@ class Users_ExternalFrom_Wallet extends Users_ExternalFrom implements Users_Exte
 		$ef->xid = $xid;
 		$ef->accessToken = null;
 		$ef->expires = $expires;
+		$ef->set('cookiesToClearOnLogout', $cookieNames);
 		return $ef;
 	}
 
