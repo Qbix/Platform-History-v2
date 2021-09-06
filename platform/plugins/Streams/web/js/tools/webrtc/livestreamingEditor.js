@@ -92,7 +92,6 @@
         {
             create: function() {
                 if(this.advancedLiveStreamingBox != null) return this.advancedLiveStreamingBox;
-                console.log('advancedLiveStreamingBox',this.state.controlsTool );
                 var tool = this;
                 var controlsTool = this.state.controlsTool;
                 var desktopDialogueEl = null;
@@ -795,17 +794,17 @@
                                         dialogue.appendChild(dialogInner);
 
                                         this.show = function() {
-                                            var boxRect = activeDialogue.getBoundingClientRect();
+                                            var boxRect = activeDialogue.dialogueEl.getBoundingClientRect();
                                             var x = (boxRect.width / 2) - (_barWidth / 2);
                                             var y = (boxRect.height / 2) - (_barheight / 2);
                                             _progrssBarPopup.style.top = y + 'px';
                                             _progrssBarPopup.style.left = x + 'px';
-                                            activeDialogue.appendChild(_progrssBarPopup);
+                                            activeDialogue.dialogueEl.appendChild(_progrssBarPopup);
                                         }
 
                                         this.hide = function() {
-                                            if(!activeDialogue.contains(_progrssBarPopup)) return;
-                                            activeDialogue.removeChild(_progrssBarPopup);
+                                            if(!activeDialogue.dialogueEl.contains(_progrssBarPopup)) return;
+                                            activeDialogue.dialogueEl.removeChild(_progrssBarPopup);
                                         }
 
                                         this.updateProgress = function(percemt) {
@@ -2534,8 +2533,8 @@
                             audioBgCon.appendChild(audioBg);
                             audioBgCon.appendChild(removeBg);
 
-                            dialogBodyInner.appendChild(showNameCon);
-                            dialogBodyInner.appendChild(showBordersCon);
+                            //dialogBodyInner.appendChild(showNameCon);
+                            //dialogBodyInner.appendChild(showBordersCon);
                             dialogBodyInner.appendChild(marginsCon);
                             //dialogBodyInner.appendChild(audioOnlyCon);
                             dialogBodyInner.appendChild(sizeAndPositionCon);
@@ -2718,6 +2717,17 @@
                             showNameLabel.appendChild(document.createTextNode("Show participants' name"));
                             showNameCon.appendChild(showNameLabel);
 
+                            var showBorderCon = document.createElement('DIV');
+                            var showBorder = document.createElement('INPUT');
+                            showBorder.type = 'checkbox';
+                            showBorder.id = 'showBorder';
+                            showBorder.name = 'showBorder';
+                            showBorder.checked = false;
+                            var ShowBorderLabel = document.createElement('Label');
+                            ShowBorderLabel.appendChild(showBorder);
+                            ShowBorderLabel.appendChild(document.createTextNode("Show borders"));
+                            showBorderCon.appendChild(ShowBorderLabel);
+
                             var descNameCon = document.createElement('DIV');
                             descNameCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc-name';
                             descriptionInner.appendChild(descNameCon);
@@ -2769,6 +2779,7 @@
                             fontColorCon.appendChild(removeColor);
 
                             dialogBodyInner.appendChild(showNameCon);
+                            dialogBodyInner.appendChild(showBorderCon);
                             dialogBodyInner.appendChild(descriptionCon);
                             dialogBodyInner.appendChild(bgColorCon);
                             dialogBodyInner.appendChild(fontColorCon);
@@ -2781,6 +2792,14 @@
                                     controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance.participant);
                                 } else {
                                     controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance.participant);
+
+                                }
+                            })
+                            showBorder.addEventListener('change', function () {
+                                if( showBorder.checked) {
+                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayBorder(_selectedSource.sourceInstance.participant);
+                                } else {
+                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideBorder(_selectedSource.sourceInstance.participant);
 
                                 }
                             })
@@ -3501,7 +3520,6 @@
 
                     function update() {
                         var selectedSource = sourcesInterface.getSelectedSource();
-                        console.log('update ', selectedSource, selectedSource.listType)
                         if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
                             optionsColumn.canvasLayoutOptions.show();
                         } else if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
@@ -3619,7 +3637,7 @@
                     );
 
                     controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
-                    setTimeout(function () {
+                    //setTimeout(function () {
                         Q.activate(
                             Q.Tool.setUpElement(
                                 dialogue,
@@ -3639,7 +3657,7 @@
 
                             }
                         );
-                    }, 3000)
+                    //}, 3000)
 
                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
@@ -3915,7 +3933,6 @@
 
 
                     if(dialogue.classList.contains('Streams_webrtc_hidden')) {
-                        console.log('streamingEditor if1')
                         controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
 
                         dialogue.classList.remove('Streams_webrtc_hidden');
@@ -3923,7 +3940,6 @@
 
                         var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                         if(Q.info.isMobile) {
-                            console.log('streamingEditor if1 if1')
 
                             dialogue.style.position = 'fixed';
                             dialogue.style.width = '100%';
