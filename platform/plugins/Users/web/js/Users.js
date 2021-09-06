@@ -2792,7 +2792,7 @@
 		for (var platform in Users.apps) {
 			var platformAppId = Q.getObject([platformAppId, appId, 'appId'], Users.apps);
 			if (platformAppId) {
-				Users.init[platform]();
+				Q.handle(Users.init[platform]);
 			}
 		}
 		OAuth.redirectUri = Q.action('Users/oauthed');
