@@ -113,7 +113,7 @@ class Q_IPFS {
 		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
 		curl_setopt($ch, CURLOPT_HEADER, 0);
 		curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
-		 
+
 		if ($data != "") {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data; boundary=a831rwxi1a3gzaorw1w2z49dlsor')); 
 			curl_setopt($ch, CURLOPT_POST, 1);

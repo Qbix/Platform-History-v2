@@ -5107,7 +5107,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 
 	var authResponse;
 	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
-		Users.initFacebook(function() {
+		Users.init.facebook(function() {
 			if ((authResponse = FB.getAuthResponse())) {
 				for (var k in authResponse) {
 					register_form.append(
@@ -5128,7 +5128,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		if (!fbAppId) {
 			console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook."+appId+".appId");
 		}
-		Users.initFacebook(function() {
+		Users.init.facebook(function() {
 			var k;
 			if ((authResponse = FB.getAuthResponse())) {
 				authResponse.appId = appId;

@@ -65,8 +65,6 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 				$fbsr = $_POST['signed_request'];
 			} else if (isset($_COOKIE["fbsr_$fbAppId"])) {
 				// A previous request has set the fbsr cookie
-				// note: the accessToken and expires are not set in this case,
-				// and should be retrieved from the Users_ExternalFrom in the database
 				$fbsr = $_COOKIE["fbsr_$fbAppId"];
 			}
 		}
@@ -101,8 +99,10 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 			$result['accessToken'] = $defaultAccessToken->getValue();
 			$result['expires'] = $expiresAt ? $expiresAt->getTimestamp() : null;
 		}
+		$cookieNames = array("fbsr_$fbAppId", "fbsr_$fbAppId"."_expires");
 		if ($fbsr and $setCookie) {
-			Q_Response::setCookie("fbsr_$fbAppId", $fbsr, $result['expires']);
+			Q_Response::setCookie($cookieNames[0], $fbsr, $result['expires']);
+			Q_Response::setCookie($cookieNames[1], $result['expires'], $result['expires']);
 		}
 		if ($facebook instanceof Facebook\Facebook
 		and $app = $facebook->getApp()) {
@@ -116,6 +116,7 @@ class Users_ExternalFrom_Facebook extends Users_ExternalFrom implements Users_Ex
 				? $result['expires']
 				: Db::fromDateTime($result['expires']);
 			$ef->facebook = $facebook;
+			$ef->set('cookiesToClearOnLogout', $cookieNames);
 			return $ef;
 		}
 		return null;

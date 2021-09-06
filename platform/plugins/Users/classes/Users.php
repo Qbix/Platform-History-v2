@@ -560,6 +560,7 @@ abstract class Users extends Base_Users
 		Users::$cache['platformUserData'] = null; // in case some other user is saved later
 		Users::$cache['authenticated'] = $authenticated;
 		Users::$cache['user'] = $user;
+		Users::$cache['externalFrom'] = $externalFrom;
 
 		if (!empty($imported['email']) and empty($user->emailAddress)) {
 			$emailAddress = $imported['email'];
@@ -573,8 +574,9 @@ abstract class Users extends Base_Users
 				$email->sendMessage($emailAddress, $emailSubject, $emailView);
 			}
 		}
+		$cookiesToClearOnLogout = $externalFrom->get('cookiesToClearOnLogout', null);
 		if (!$userWasLoggedIn) {
-			self::setLoggedInUser($user);
+			self::setLoggedInUser($user, compact('cookiesToClearOnLogout'));
 		}
 
 		if ($retrieved) {
@@ -812,6 +814,12 @@ abstract class Users extends Base_Users
 			))->execute();
 		}
 
+		if (!empty($_SESSION['Users']['cookiesToClearOnLogout'])) {
+			foreach ($_SESSION['Users']['cookiesToClearOnLogout'] as $parts) {
+				Q_Response::clearCookie($parts[0], $parts[1]);
+			}
+		}
+
 		// Destroy the current session, which clears the $_SESSION and all notices, etc.
 		Q_Session::destroy();
 		
@@ -877,6 +885,8 @@ abstract class Users extends Base_Users
 	 *  Set to true to skip regenerating the session id, perhaps because you just
 	 *  generated your own session id and you are sure that 
 	 *  there cannot be any session fixation attacks.
+	 * @param {array} [$options.cookiesToClearOnLogout=array()]
+	 *  Array of cookie names or [$cookieName, $path] to clear on logout, stored in the session.
 	 * @return {boolean} Whether logged in user id was changed.
 	 */
 	static function setLoggedInUser($user = null, $options = array())
@@ -955,6 +965,12 @@ abstract class Users extends Base_Users
 		// The consistency of this mechanism across sessions is not perfect, i.e.
 		// the same hint may repeat in multiple concurrent sessions, but it's ok.
 		$_SESSION['Users']['hinted'] = array_keys($votes);
+
+		if (!empty($options['cookiesToClearOnLogout'])) {
+			foreach ($options['cookiesToClearOnLogout'] as $item) {
+				$_SESSION['Users']['cookiesToClearOnLogout'][] = is_array($item) ? $item : array($item, null);
+			}
+		}
 		
 		if ($loggedInUserId) {
 			// Set a notice for the user to alert them that the account has changed
