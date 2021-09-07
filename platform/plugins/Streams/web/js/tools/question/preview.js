@@ -16,6 +16,7 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
+	preview.state.editable = ["icon"];
 	Q.Text.get('Streams/content', function (err, text) {
 		var msg = Q.firstErrorMessage(err);
 		if (msg) {
@@ -91,8 +92,8 @@ Q.Tool.define("Streams/question/preview", ["Streams/preview"], function _Streams
 				isCategory: true,
 				realtime: true,
 				sortable: false,
-				beforeRenderPreview: function (ttf) {
-					if (publisherId !== userId && ttf.publisherId !== userId) {
+				beforeRenderPreview: function (tff) {
+					if (!stream.testWriteLevel("edit") && tff.publisherId !== userId) {
 						return false;
 					}
 				},

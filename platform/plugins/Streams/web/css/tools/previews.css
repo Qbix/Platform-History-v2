@@ -233,11 +233,15 @@
 	padding: 10px;
 	min-width: 300px;
 }
+.Streams_answer_preview_tool,
+.Streams_question_preview_tool {
+	cursor: pointer;
+}
 .Streams_question_preview_tool + .Streams_related_tool {
 	margin-left: 40px;
 }
 .Streams_question_preview_tool + .Streams_related_tool:not(:last-of-type) {
-	margin-bottom: 5px;
+	margin-bottom: 20px;
 }
 .Streams_question_preview_tool + .Streams_related_tool .Streams_related_composer {
 	display: none;
