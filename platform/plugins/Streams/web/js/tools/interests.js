@@ -127,7 +127,12 @@ Q.Tool.define("Streams/interests", function (options) {
 				var otherInterests = {};
 				var normalized, expandable;
 				var myInterests = state.skipSelect ? [] : Q.getObject(["my", 0], params) || [];
-				var interests = anotherUser ? params.anotherUser[0] : myInterests;
+				var interests = anotherUser ? Q.getObject(["anotherUser", 0], params) : myInterests;
+				if (Q.isEmpty(interests)) {
+					$(".Streams_interests_filter", tool.element).hide();
+				} else {
+					$(".Streams_interests_filter", tool.element).show();
+				}
 				for (normalized in interests) {
 					$jq = tool.$('#Streams_interest_title_' + normalized)
 					.addClass('Streams_interests_anotherUser');
