@@ -186,16 +186,12 @@ Q.Tool.define("Streams/question", function(options) {
 
 			// if radio checked, uncheck all checkboxes and radios
 			$("input[type=radio]", tool.element).on(Q.Pointer.fastclick, function () {
-				$("input[type=radio], input[type=checkbox]", tool.element).prop("checked", false);
+				$("input[type=radio]", tool.element).prop("checked", false);
 				$(this).prop("checked", true);
 			});
 
 			// if checkbox checked, uncheck all radios
-			$("input[type=checkbox]", tool.element).on(Q.Pointer.fastclick, function () {
-				if ($(this).prop("checked")) {
-					$("input[type=radio]", tool.element).prop("checked", false);
-				}
-			});
+			$("input[type=checkbox]", tool.element).on(Q.Pointer.fastclick, function () {});
 
 			// submit question
 			$("button[name=submit]", tool.element).on(Q.Pointer.fastclick, function () {
