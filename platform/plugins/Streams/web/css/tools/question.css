@@ -11,7 +11,7 @@
 
 .Streams_question_tool .Streams_question_head {
     border-bottom: 1px solid #000;
-    padding: 0;
+    padding-bottom: 5px;
     line-height: 20px;
 }
 
@@ -69,6 +69,7 @@
     display: block;
     padding: 5px;
     margin-bottom: 10px;
+    text-align: left;
 }
 .Streams_dialog_answer .Streams_question_answers input[type=checkbox],
 .Streams_dialog_answer .Streams_question_answers input[type=radio] {

@@ -259,6 +259,14 @@
 .Streams_answer_preview_tool .Users_avatar_name {
 	display: none;
 }
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static,
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Streams_preview_title,
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static_container,
+.Streams_answer_preview_tool.Q_actions_tool .Streams_preview_contents .Streams_preview_title {
+	white-space: normal;
+	padding-right: 30px;
+
+}
 /* </Streams_question_preview> */
 
 /* <Streams_webrtc_preview> */
