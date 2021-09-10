@@ -1056,7 +1056,7 @@
 	 * Disconnect external platforms
 	 */
 	Users.disconnect = {};
-	Users.disconnect.facebook = function (appId, options) {
+	Users.disconnect.facebook = function (appId, callback) {
 		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 		if (!platformAppId) {
 			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
