@@ -99,7 +99,11 @@ Q.Tool.define("Streams/question", function(options) {
 
 					$answer.attr("data-type", type);
 
-					$input.prop("disabled", type === "textarea");
+					if (type === "textarea") {
+						$input.attr("placeholder", tool.text.Placeholder);
+					} else {
+						$input.removeAttr("placeholder");
+					}
 				}).trigger("change");
 			});
 		};
@@ -135,13 +139,14 @@ Q.Tool.define("Streams/question", function(options) {
 					var $this = $(this);
 					var $content = $("input[name=value]", $this);
 					var content = $content.val();
+					var type = $("select[name=type]", $this).val();
 
-					if (!$content.prop("disabled") && !content) {
+					if (type !== "textarea" && !content) {
 						return;
 					}
 
 					answers.push({
-						type: $("select[name=type]", $this).val(),
+						type: type,
 						content: content
 					});
 				});
@@ -180,7 +185,7 @@ Q.Tool.define("Streams/question", function(options) {
 				} else if (this.type === "option.exclusive") {
 					$("<label><input type='radio' value='" + i + "'> <span>" + this.content + "</span></label>").appendTo($answers);
 				} else if (this.type === "textarea") {
-					$("<textarea placeholder='" + tool.text.FreeAnswer + "'></textarea>").appendTo($answers);
+					$("<textarea placeholder='" + (this.content || tool.text.FreeAnswer) + "'></textarea>").appendTo($answers);
 				}
 			});
 
