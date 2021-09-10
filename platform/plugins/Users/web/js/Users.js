@@ -301,8 +301,6 @@
 		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate = {};
-	
 	Users.authenticate.ios = 
 	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
 		_doAuthenticate({
