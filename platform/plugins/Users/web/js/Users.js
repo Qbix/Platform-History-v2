@@ -133,7 +133,7 @@
 	Users.init.facebook = function (callback, options) {
 
 		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps) || appId;
 		if (!platformAppId) {
 			throw new Q.Error("Users.init.facebook: missing facebook app info for '" + appId + "'");
 		}
@@ -151,13 +151,14 @@
 		function _init() {
 			if (!Users.init.facebook.completed[appId] && platformAppId) {
 				FB.init(Q.extend({
-					appId: platformAppId,
 					version: 'v8.0',
 					status: true,
 					cookie: true,
 					oauth: true,
 					xfbml: true
-				}, Users.init.facebook.options, options));
+				}, Users.init.facebook.options, options, {
+					appId: platformAppId
+				}));
 				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
 			Users.init.facebook.completed[appId] = true;
@@ -771,7 +772,7 @@
 				}
 			});
 		}, {
-			appId: appId
+			appId: platformAppId
 		});
 	};
 
