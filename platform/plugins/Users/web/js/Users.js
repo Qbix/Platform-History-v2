@@ -1007,11 +1007,11 @@
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
-			if (platformAppId && o.using.indexOf('facebook') >= 0) {
-				Users.disconnect.facebook(appId, platformAppId);
+			if (appId && o.using.indexOf('facebook') >= 0) {
+				Users.disconnect.facebook(appId);
 			}
 			if (o.using.indexOf('wallet') >= 0) {
-			    Q.Users.disconnect.wallet(appId, platformAppId);
+			    Q.Users.disconnect.wallet(appId);
 			}
 			if (o.using.indexOf('native') >= 0) {
 				// if we log out without logging out of facebook,
@@ -1046,7 +1046,7 @@
 	 * Disconnect external platforms
 	 */
 	Users.disconnect = {};
-	Users.disconnect.facebook = function (appId, platformAppId) {
+	Users.disconnect.facebook = function (appId) {
 		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 		if (!platformAppId) {
 			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
@@ -1077,7 +1077,7 @@
 			appId: appId
 		});
 	};
-	Users.disconnect.wallet = function (appId, platformAppId) {
+	Users.disconnect.wallet = function (appId) {
 		var p = Users.Wallet.provider;
 		(new window.Web3Modal.default).clearCachedProvider();
 		if (!p) {
