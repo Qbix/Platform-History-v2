@@ -278,9 +278,11 @@
 	 */
 	Users.authenticate = function (platform, onSuccess, onCancel, options) {
 		options = options || {};
-		var handler = Users.authenticate.handlers[platform];
+		var handler = Users.authenticate[platform];
 		if (!handler) {
-			var handlers = Object.keys(Users.authenticate.handlers);
+			var handlers = Object.keys(Users.authenticate).filter(function (k) {
+				return Users.authenticate.hasOwnProperty(k);
+			});
 			throw new Q.Error(
 				"Users.authenticate: platform must be one of " + handlers.join(', ')
 			);
@@ -299,17 +301,17 @@
 		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate.handlers = {};
+	Users.authenticate = {};
 	
-	Users.authenticate.handlers.ios = 
-	Users.authenticate.handlers.android = function (platform, platformAppId, onSuccess, onCancel, options) {
+	Users.authenticate.ios = 
+	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
 		_doAuthenticate({
 			udid: Q.info.udid, // TODO: sign this with private key on cordova side
 			platform: platform
 		}, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate.handlers.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
+	Users.authenticate.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = options || {};
 		var fields = {};
 
@@ -335,8 +337,8 @@
 		});
 	};
 	
-	Users.authenticate.handlers.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = Q.extend(Users.authenticate.handlers.wallet.options, options);
+	Users.authenticate.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
+		options = Q.extend(Users.authenticate.wallet.options, options);
 		Users.init.wallet(function () {
 			try {
 				var wsr_json = Q.cookie('wsr_1');
@@ -355,8 +357,11 @@
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
 			}
-			 // Unpkg imports
+			// Disconnect any current wallet sessions
 			var appId = options.appId || Q.info.app;
+			Users.disconnect.wallet(platformAppId);
+			
+			// Unpkg imports	
 			var Web3Modal = window.Web3Modal.default;
 			var WalletConnectProvider = window.WalletConnectProvider.default;
 			var Fortmatic = window.Fortmatic;
@@ -457,7 +462,7 @@
 		});
 	};
 	
-	Users.authenticate.handlers.wallet.options = {
+	Users.authenticate.wallet.options = {
 		chain: 'ETH',
 		network: 'mainnet'
 	};
@@ -1003,56 +1008,11 @@
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
 			if (platformAppId && o.using.indexOf('facebook') >= 0) {
-				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-				if (!platformAppId) {
-					console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
-				}
-				Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-				Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-				if (o.using.indexOf('native') >= 0) {
-					Users.loggedInUser = null;
-					Q.nonce = Q.cookie('Q_nonce'); // null
-				}
-				Users.init.facebook(function logoutCallback() {
-					Users.Facebook.getLoginStatus(function (response) {
-						if (response.authResponse) {
-							FB.logout(function () {
-								delete Users.connected.facebook;
-								Users.onLogout.handle.call(this, o);
-								Q.handle(o.onSuccess, this, [o]);
-							});
-						} else {
-							Users.onLogout.handle.call(this, o);
-							Q.handle(o.onSuccess, this, [o]);
-						}
-						setTimeout(function () {
-							Users.logout.occurring = false;
-						}, 0);
-					}, true);
-				}, {
-					appId: appId
-				});
+				Users.disconnect.facebook();
 			}
 			var p = Users.Wallet.provider;
 			if (p && o.using.indexOf('wallet') >= 0) {
-			    if (p.close) {
-					p.close().then(function (result) {
-						Users.Wallet.web3Modal.clearCachedProvider();
-						Users.Wallet.provider = null;
-						setTimeout(function () {
-							Users.logout.occurring = false;
-						}, 0);
-					});
-			    } else {
-					if (p._handleDisconnect) {
-						p._handleDisconnect();
-					}
-					Users.Wallet.web3Modal.clearCachedProvider();
-					Users.Wallet.provider = null;
-					setTimeout(function () {
-						Users.logout.occurring = false;
-					}, 0);
-			    }
+			    Q.Users.disconnect.wallet();
 			}
 			if (o.using.indexOf('native') >= 0) {
 				// if we log out without logging out of facebook,
@@ -1081,6 +1041,62 @@
 		var url = o.url + (o.url.indexOf('?') < 0 ? '?' : '') + '&logout=1';
 		Q.request(url, 'script', callback, {"method": "post"});
 		return true;
+	};
+	
+	/**
+	 * Disconnect external platforms
+	 */
+	Users.disconnect = {};
+	Users.disconnect.facebook = function (appId, platformAppId) {
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		if (!platformAppId) {
+			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
+		}
+		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
+		if (o.using.indexOf('native') >= 0) {
+			Users.loggedInUser = null;
+			Q.nonce = Q.cookie('Q_nonce'); // null
+		}
+		Users.init.facebook(function logoutCallback() {
+			Users.Facebook.getLoginStatus(function (response) {
+				if (response.authResponse) {
+					FB.logout(function () {
+						delete Users.connected.facebook;
+						Users.onLogout.handle.call(this, o);
+						Q.handle(o.onSuccess, this, [o]);
+					});
+				} else {
+					Users.onLogout.handle.call(this, o);
+					Q.handle(o.onSuccess, this, [o]);
+				}
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
+			}, true);
+		}, {
+			appId: appId
+		});
+	};
+	Users.disconnect.wallet = function (appId, platformAppId) {
+	    if (p.close) {
+			p.close().then(function (result) {
+				Users.Wallet.web3Modal.clearCachedProvider();
+				Users.Wallet.provider = null;
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
+			});
+	    } else {
+			if (p._handleDisconnect) {
+				p._handleDisconnect();
+			}
+			Users.Wallet.web3Modal.clearCachedProvider();
+			Users.Wallet.provider = null;
+			setTimeout(function () {
+				Users.logout.occurring = false;
+			}, 0);
+	    }
 	};
 
 	/**
