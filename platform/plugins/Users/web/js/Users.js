@@ -1064,10 +1064,6 @@
 		}
 		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-		if (options.using.indexOf('native') >= 0) {
-			Users.loggedInUser = null;
-			Q.nonce = Q.cookie('Q_nonce'); // null
-		}
 		Users.init.facebook(function logoutCallback() {
 			Users.Facebook.getLoginStatus(function (response) {
 				setTimeout(function () {
