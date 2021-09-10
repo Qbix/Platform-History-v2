@@ -1084,6 +1084,7 @@
 		var p = Users.Wallet.provider;
 		(new window.Web3Modal.default).clearCachedProvider();
 		if (!p) {
+			Q.handle(callback);
 			return false;
 		}
 	    if (p.close) {
@@ -1106,6 +1107,7 @@
 			Users.Wallet.provider = null;
 			Q.handle(callback);
 	    }
+		return true;
 	};
 
 	/**
