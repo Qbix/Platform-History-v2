@@ -1008,8 +1008,7 @@
 			if (platformAppId && o.using.indexOf('facebook') >= 0) {
 				Users.disconnect.facebook(appId, platformAppId);
 			}
-			var p = Users.Wallet.provider;
-			if (p && o.using.indexOf('wallet') >= 0) {
+			if (o.using.indexOf('wallet') >= 0) {
 			    Q.Users.disconnect.wallet(appId, platformAppId);
 			}
 			if (o.using.indexOf('native') >= 0) {
@@ -1077,6 +1076,10 @@
 		});
 	};
 	Users.disconnect.wallet = function (appId, platformAppId) {
+		var p Users.Wallet.provider;
+		if (!p) {
+			return false;
+		}
 	    if (p.close) {
 			p.close().then(function (result) {
 				Users.Wallet.web3Modal.clearCachedProvider();
