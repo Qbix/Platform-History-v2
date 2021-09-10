@@ -212,16 +212,16 @@
 				"Users/owners": {
 					"title": "Owner",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
-					"canAdd": ["Users/admins", "Users/members", "Users/guests"],
-					"canRemove": ["Users/admins", "Users/members", "Users/guests"],
-					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+					"canAdd": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canRemove": ["Users/admins", "Users/members", "Users/guests", "Users/testers"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
 				},
 				"Users/admins": {
 					"title": "Admin",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
-					"canAdd": ["Users/members", "Users/guests"],
-					"canRemove": ["Users/members", "Users/guests"],
-					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests"]
+					"canAdd": ["Users/members", "Users/guests", "Users/testers"],
+					"canRemove": ["Users/members", "Users/guests", "Users/testers"],
+					"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers"]
 				},
 				"Users/members": {
 					"title": "Member",
@@ -233,6 +233,13 @@
 				"Users/guests": {
 					"title": "Guest",
 					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
+					"canAdd": [],
+					"canRemove": [],
+					"canSee": []
+				},
+				"Users/testers": {
+					"title": "Tester",
+					"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/testers",
 					"canAdd": [],
 					"canRemove": [],
 					"canSee": []
