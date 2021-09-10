@@ -1077,12 +1077,12 @@
 	};
 	Users.disconnect.wallet = function (appId, platformAppId) {
 		var p = Users.Wallet.provider;
+		Users.Wallet.web3Modal.clearCachedProvider();
 		if (!p) {
 			return false;
 		}
 	    if (p.close) {
 			p.close().then(function (result) {
-				Users.Wallet.web3Modal.clearCachedProvider();
 				Users.Wallet.provider = null;
 				setTimeout(function () {
 					Users.logout.occurring = false;
@@ -1092,7 +1092,6 @@
 			if (p._handleDisconnect) {
 				p._handleDisconnect();
 			}
-			Users.Wallet.web3Modal.clearCachedProvider();
 			Users.Wallet.provider = null;
 			setTimeout(function () {
 				Users.logout.occurring = false;
