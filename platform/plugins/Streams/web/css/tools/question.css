@@ -1,3 +1,6 @@
+.Streams_question_tool {
+    text-align: center;
+}
 .Streams_question_tool input[name=title],
 .Streams_question_tool textarea[name=content] {
     display: block;
@@ -23,8 +26,11 @@
     cursor: pointer;
 }
 .Streams_question_tool div.Streams_question_add {
+    display: inline-block;
     margin-top: 5px;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 .Streams_question_tool i.Streams_question_add {
     background-image: url(../../../Q/img/actions/add.png);

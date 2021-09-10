@@ -118,7 +118,7 @@ Q.Tool.define("Streams/question", function(options) {
 			var $answers = $(".Streams_question_answers", tool.element);
 
 			// add answer composer
-			$("i.Streams_question_add", tool.element).on(Q.Pointer.fastclick, _addAnswer);
+			$(".Streams_question_add", tool.element).on(Q.Pointer.fastclick, _addAnswer);
 			_addAnswer();
 
 			// submit question
