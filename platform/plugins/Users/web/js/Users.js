@@ -1007,29 +1007,40 @@
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
+			var p = new Pipe();
+			var loggedOutOf = {};
 			if (appId && o.using.indexOf('facebook') >= 0) {
-				Users.disconnect.facebook(appId);
+				loggedOutOf.facebook = true;
+				Users.disconnect.facebook(appId, p.fill('facebook'));
 			}
 			if (o.using.indexOf('wallet') >= 0) {
-			    Q.Users.disconnect.wallet(appId);
+				loggedOutOf.wallet = true;
+			    Q.Users.disconnect.wallet(appId, p.fill('wallet'));
 			}
 			if (o.using.indexOf('native') >= 0) {
-				// if we log out without logging out of facebook,
-				// then we should ignore the logged-in user's xid
-				// when authenticating, until it is forced
-				var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
-				for (var key in xids) {
-					var parts = key.split("\t");
-					Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
-				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
-				Users.onLogout.handle.call(this, o);
-				Q.handle(o.onSuccess, this, [o]);
-				setTimeout(function () {
-					Users.logout.occurring = false;
-				}, 0);
+				if (Q.isEmpty(loggedOutOf)) {
+					loggedOutOf.native = true;
+					p.fill('native')();
+					// if we log out natively without disconnecting others,
+					// then we should ignore the logged-in user's xid
+					// when authenticating, until it is forced
+					var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
+					for (var key in xids) {
+						var parts = key.split("\t");
+						Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
+					}
+					setTimeout(function () {
+						Users.logout.occurring = false;
+					}, 0);
+				}
+				_disconnected();
 			}
+			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
+				Users.onLogout.handle.call(Users, loggedOutOf, o);
+				Q.handle(options.onSuccess, Users, [loggedOutOf, o]);
+			});
 		}
 
 		if (!o.url) {
@@ -1046,38 +1057,35 @@
 	 * Disconnect external platforms
 	 */
 	Users.disconnect = {};
-	Users.disconnect.facebook = function (appId) {
+	Users.disconnect.facebook = function (appId, options) {
 		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
 		if (!platformAppId) {
 			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
 		}
 		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-		if (o.using.indexOf('native') >= 0) {
+		if (options.using.indexOf('native') >= 0) {
 			Users.loggedInUser = null;
 			Q.nonce = Q.cookie('Q_nonce'); // null
 		}
 		Users.init.facebook(function logoutCallback() {
 			Users.Facebook.getLoginStatus(function (response) {
-				if (response.authResponse) {
-					FB.logout(function () {
-						delete Users.connected.facebook;
-						Users.onLogout.handle.call(this, o);
-						Q.handle(o.onSuccess, this, [o]);
-					});
-				} else {
-					Users.onLogout.handle.call(this, o);
-					Q.handle(o.onSuccess, this, [o]);
-				}
 				setTimeout(function () {
 					Users.logout.occurring = false;
 				}, 0);
+				if (!response.authResponse) {
+					return callback();
+				}
+				return FB.logout(function () {
+					delete Users.connected.facebook;
+					callback();
+				});
 			}, true);
 		}, {
 			appId: appId
 		});
 	};
-	Users.disconnect.wallet = function (appId) {
+	Users.disconnect.wallet = function (appId, callback) {
 		var p = Users.Wallet.provider;
 		(new window.Web3Modal.default).clearCachedProvider();
 		if (!p) {
@@ -1085,19 +1093,23 @@
 		}
 	    if (p.close) {
 			p.close().then(function (result) {
+				delete Users.connected.facebook;
 				Users.Wallet.provider = null;
 				setTimeout(function () {
 					Users.logout.occurring = false;
+					Q.handle(callback);
 				}, 0);
 			});
 	    } else {
-			if (p._handleDisconnect) {
-				p._handleDisconnect();
-			}
-			Users.Wallet.provider = null;
 			setTimeout(function () {
 				Users.logout.occurring = false;
 			}, 0);
+			if (p._handleDisconnect) {
+				p._handleDisconnect();
+			}
+			delete Users.connected.facebook;
+			Users.Wallet.provider = null;
+			Q.handle(callback);
 	    }
 	};
 
