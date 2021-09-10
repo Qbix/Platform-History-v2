@@ -1019,7 +1019,6 @@
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
-					loggedOutOf.native = true;
 					// if we log out natively without disconnecting others,
 					// then we should ignore the logged-in user's xid
 					// when authenticating, until it is forced
@@ -1034,12 +1033,13 @@
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
+				loggedOutOf.native = true;
 				p.fill('native')();
 			}
 			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
 				Users.onLogout.handle.call(Users, loggedOutOf, o);
 				Q.handle(options.onSuccess, Users, [loggedOutOf, o]);
-			});
+			}).run();
 		}
 
 		if (!o.url) {
