@@ -1076,7 +1076,7 @@
 		});
 	};
 	Users.disconnect.wallet = function (appId, platformAppId) {
-		var p Users.Wallet.provider;
+		var p = Users.Wallet.provider;
 		if (!p) {
 			return false;
 		}
