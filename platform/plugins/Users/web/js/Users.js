@@ -1037,6 +1037,7 @@
 				p.fill('native')();
 			}
 			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
+				Users.logout.occurring = false;
 				Users.onLogout.handle.call(Users, loggedOutOf, o);
 				Q.handle(options.onSuccess, Users, [loggedOutOf, o]);
 			}).run();
@@ -1081,6 +1082,10 @@
 		});
 	};
 	Users.disconnect.wallet = function (appId, callback) {
+		if (Users.disconnect.wallet.occurring) {
+			return false;
+		}
+		Users.disconnect.wallet.occurring = true;
 		var p = Users.Wallet.provider;
 		(new window.Web3Modal.default).clearCachedProvider();
 		if (!p) {
@@ -1092,7 +1097,7 @@
 				delete Users.connected.facebook;
 				Users.Wallet.provider = null;
 				setTimeout(function () {
-					Users.logout.occurring = false;
+					Users.disconnect.wallet.occurring = false;
 					Q.handle(callback);
 				}, 0);
 			});
@@ -1106,6 +1111,7 @@
 			delete Users.connected.facebook;
 			Users.Wallet.provider = null;
 			Q.handle(callback);
+			Users.disconnect.wallet.occurring = false;
 	    }
 		return true;
 	};
