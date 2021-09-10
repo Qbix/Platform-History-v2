@@ -1035,7 +1035,6 @@
 						Users.logout.occurring = false;
 					}, 0);
 				}
-				_disconnected();
 			}
 			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
 				Users.onLogout.handle.call(Users, loggedOutOf, o);
