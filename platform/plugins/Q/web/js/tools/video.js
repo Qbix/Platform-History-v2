@@ -133,7 +133,7 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
-			var start = state.start || state.clipStart;
+			var start = state.start || state.clipStart || 0;
 			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
 
 			var videoId = state.url.match(/\/videos?\/([0-9]+).*$/);
