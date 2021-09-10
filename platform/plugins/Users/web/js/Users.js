@@ -511,6 +511,7 @@
 
 		function __doAuthenticate() {
 			var fields = {};
+			var appId = (options && options.appId) || Q.info.app;
 			if (platform === 'facebook') {
 				var ar = Users.Facebook.getAuthResponse();
 				if (!ar) {
