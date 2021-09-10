@@ -1007,7 +1007,7 @@
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
-			var p = new Pipe();
+			var p = new Q.Pipe();
 			var loggedOutOf = {};
 			if (appId && o.using.indexOf('facebook') >= 0) {
 				loggedOutOf.facebook = true;
