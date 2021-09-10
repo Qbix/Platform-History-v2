@@ -294,7 +294,8 @@
 			);
 			return;
 		}
-		return handler.call(this, platform, appId, onSuccess, onCancel, options);
+		options.appId = appId;
+		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
 	Users.authenticate.handlers = {};
@@ -329,7 +330,7 @@
 				}
 			}, options.force ? true : false);
 		}, {
-			appId: platformAppId
+			appId: options.appId
 		});
 	};
 	
