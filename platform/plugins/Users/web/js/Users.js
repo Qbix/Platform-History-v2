@@ -982,7 +982,7 @@
 		}
 		var o = Q.extend({}, Users.logout.options, options);
 		if (!o.using) {
-			o.using = 'native';
+			o.using = Q.getObject('login.options.using', Users) || ['native'];
 		}
 		if (typeof o.using === 'string') {
 			o.using = o.using.split(',');
@@ -1009,7 +1009,7 @@
 				}
 				Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 				Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-				if ((o.using[0] === 'native' || o.using[1] === 'native')) {
+				if (o.using.indexOf('native') >= 0) {
 					Users.loggedInUser = null;
 					Q.nonce = Q.cookie('Q_nonce'); // null
 				}
