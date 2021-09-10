@@ -380,7 +380,8 @@
 				disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
 		    });
 			web3Modal.clearCachedProvider();
-			setTimeout(function () {
+			web3Modal.resetState().then(_connect);
+			function _connect() {
 				web3Modal.connect().then(function (provider) {
 					Users.Wallet.provider = provider;
 				    // Subscribe to accounts change
@@ -454,7 +455,7 @@
 						}
 					}).catch(_cancel);
 				}).catch(_cancel);
-			}, 0);
+			}
 			function _cancel() {
 				Q.handle(onCancel, Users, [options]);
 			}
