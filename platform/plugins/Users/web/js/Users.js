@@ -329,7 +329,7 @@
 				}
 			}, options.force ? true : false);
 		}, {
-			appId: appId
+			appId: platformAppId
 		});
 	};
 	
