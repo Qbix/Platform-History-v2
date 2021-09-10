@@ -986,7 +986,7 @@
 			options = {onSuccess: {'options': options}};
 		}
 		var o = Q.extend({}, Users.logout.options, options);
-		if (!o.using) {
+		if (!o.using || o.using === '*') {
 			o.using = Q.getObject('login.options.using', Users) || ['native'];
 		}
 		if (typeof o.using === 'string') {
@@ -2773,7 +2773,7 @@
 
 		Q.Users.logout.options = Q.extend({
 			url: Q.action('Users/logout'),
-			using: 'native',
+			using: '*',
 			onSuccess: new Q.Event(function (options) {
 				var urls = Q.urls || {};
 				Q.handle(options.welcomeUrl
