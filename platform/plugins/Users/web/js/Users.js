@@ -355,9 +355,7 @@
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
 			}
-			// Disconnect any current wallet sessions
 			var appId = options.appId || Q.info.app;
-			Users.disconnect.wallet(appId, platformAppId);
 			
 			// Unpkg imports	
 			var Web3Modal = window.Web3Modal.default;
@@ -381,79 +379,82 @@
 				providerOptions: providerOptions, // required
 				disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
 		    });
-			web3Modal.connect().then(function (provider) {
-				Users.Wallet.provider = provider;
-			    // Subscribe to accounts change
-			    provider.on("accountsChanged", function (accounts) {
-					console.log('provider.accountsChanged', accounts);
-			    });
+			web3Modal.clearCachedProvider();
+			setTimeout(function () {
+				web3Modal.connect().then(function (provider) {
+					Users.Wallet.provider = provider;
+				    // Subscribe to accounts change
+				    provider.on("accountsChanged", function (accounts) {
+						console.log('provider.accountsChanged', accounts);
+				    });
 
-			    // Subscribe to chainId change
-			    provider.on("chainChanged", function (chainId) {
-					console.log('provider.chainChanged', chainId);
-			    });
-			    // Subscribe to networkId change
-			    provider.on("networkChanged", function (networkId) {
-					console.log('provider.networkChanged', networkId);
-			    });
-				// Subscribe to provider disconnection
-				provider.on("connect", function (info) {
-					console.log('provider.connect', info);
-				});
-				// Subscribe to provider disconnection
-				provider.on("disconnect", function (error) {
-					if (!Users.logout.occurring) {
-						Q.Users.logout({using: 'wallet'});
-					}
-					console.log("provider.disconnect: ", error);
-				});
-				var payload = Q.text.Users.login.wallet.payload.interpolate({
-					host: location.host,
-					timestamp: Math.floor(Date.now() / 1000)
-				});
-				var w3 = new Web3(provider);
-				var network, accounts;
-				w3.eth.getAccounts().then(function (accounts) {
-					var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
-					if (walletAddress && accounts.includes(walletAddress)) {
-						var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
-						if (loginExpires > Date.now() / 1000) {
-							_proceed();
+				    // Subscribe to chainId change
+				    provider.on("chainChanged", function (chainId) {
+						console.log('provider.chainChanged', chainId);
+				    });
+				    // Subscribe to networkId change
+				    provider.on("networkChanged", function (networkId) {
+						console.log('provider.networkChanged', networkId);
+				    });
+					// Subscribe to provider disconnection
+					provider.on("connect", function (info) {
+						console.log('provider.connect', info);
+					});
+					// Subscribe to provider disconnection
+					provider.on("disconnect", function (error) {
+						if (!Users.logout.occurring) {
+							Q.Users.logout({using: 'wallet'});
 						}
-					}
-				    if (provider.wc) {
-						Q.alert(Q.text.Users.login.wallet.alert.content, {
-							title: Q.text.Users.login.wallet.alert.title,
-							onClose: function () {
-								var web3 = new Web3();
-								var address = accounts[0];
-								const res = provider.request({
-									method: 'personal_sign',
-									params: [ 
-										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
-										address.toLowerCase()
-									]
-								}).then(_proceed)
-								.catch(_cancel);	
+						console.log("provider.disconnect: ", error);
+					});
+					var payload = Q.text.Users.login.wallet.payload.interpolate({
+						host: location.host,
+						timestamp: Math.floor(Date.now() / 1000)
+					});
+					var w3 = new Web3(provider);
+					var network, accounts;
+					w3.eth.getAccounts().then(function (accounts) {
+						var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
+						if (walletAddress && accounts.includes(walletAddress)) {
+							var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
+							if (loginExpires > Date.now() / 1000) {
+								_proceed();
 							}
-						});
-				    } else {
-						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-				      	signer.signMessage(payload)
-						.then(_proceed)
-						.catch(_cancel);
-				    }
-					function _proceed(signature) {
-						_doAuthenticate({
-							xid: accounts[0],
-							payload: payload,
-							signature: signature,
-							platform: 'wallet',
-							chainId: provider.chainId
-						}, platform, platformAppId, onSuccess, onCancel, options);
-					}
+						}
+					    if (provider.wc) {
+							Q.alert(Q.text.Users.login.wallet.alert.content, {
+								title: Q.text.Users.login.wallet.alert.title,
+								onClose: function () {
+									var web3 = new Web3();
+									var address = accounts[0];
+									const res = provider.request({
+										method: 'personal_sign',
+										params: [ 
+											ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
+											address.toLowerCase()
+										]
+									}).then(_proceed)
+									.catch(_cancel);	
+								}
+							});
+					    } else {
+							var signer = new ethers.providers.Web3Provider(provider).getSigner();
+					      	signer.signMessage(payload)
+							.then(_proceed)
+							.catch(_cancel);
+					    }
+						function _proceed(signature) {
+							_doAuthenticate({
+								xid: accounts[0],
+								payload: payload,
+								signature: signature,
+								platform: 'wallet',
+								chainId: provider.chainId
+							}, platform, platformAppId, onSuccess, onCancel, options);
+						}
+					}).catch(_cancel);
 				}).catch(_cancel);
-			}).catch(_cancel);
+			}, 0);
 			function _cancel() {
 				Q.handle(onCancel, Users, [options]);
 			}
