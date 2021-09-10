@@ -359,7 +359,7 @@
 			}
 			// Disconnect any current wallet sessions
 			var appId = options.appId || Q.info.app;
-			Users.disconnect.wallet(platformAppId);
+			Users.disconnect.wallet(appId, platformAppId);
 			
 			// Unpkg imports	
 			var Web3Modal = window.Web3Modal.default;
@@ -1008,11 +1008,11 @@
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
 			if (platformAppId && o.using.indexOf('facebook') >= 0) {
-				Users.disconnect.facebook();
+				Users.disconnect.facebook(appId, platformAppId);
 			}
 			var p = Users.Wallet.provider;
 			if (p && o.using.indexOf('wallet') >= 0) {
-			    Q.Users.disconnect.wallet();
+			    Q.Users.disconnect.wallet(appId, platformAppId);
 			}
 			if (o.using.indexOf('native') >= 0) {
 				// if we log out without logging out of facebook,
