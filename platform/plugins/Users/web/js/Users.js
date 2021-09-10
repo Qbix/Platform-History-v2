@@ -1077,7 +1077,7 @@
 	};
 	Users.disconnect.wallet = function (appId, platformAppId) {
 		var p = Users.Wallet.provider;
-		Users.Wallet.web3Modal.clearCachedProvider();
+		(new window.Web3Modal.default).clearCachedProvider();
 		if (!p) {
 			return false;
 		}
