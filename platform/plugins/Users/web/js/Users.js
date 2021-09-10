@@ -318,7 +318,7 @@
 				if (response.status === 'connected') {
 					_handleXid(
 						platform, platformAppId, response.authResponse.userID,
-						onSuccess, onCancel, options
+						onSuccess, onCancel, Q.extend({response: response}, options)
 					);
 				} else if (platformAppId) {
 					// let's delete any stale facebook cookies there might be
@@ -511,7 +511,8 @@
 		function __doAuthenticate() {
 			var fields = {};
 			if (platform === 'facebook') {
-				if (!Users.Facebook.getAuthResponse()) {
+				var ar = Users.Facebook.getAuthResponse();
+				if (!ar) {
 					// in some rare cases, the user may have logged out of facebook
 					// while our prompt was visible, so there is no longer a valid
 					// facebook authResponse. In this case, even though they want
@@ -520,7 +521,6 @@
 					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
 					return;
 				}
-				var ar = response.authResponse;
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
 				ar.fbAppId = platformAppId;
 				ar.appId = appId;
