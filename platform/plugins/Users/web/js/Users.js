@@ -1018,11 +1018,8 @@
 			    Q.Users.disconnect.wallet(appId, p.fill('wallet'));
 			}
 			if (o.using.indexOf('native') >= 0) {
-				Users.loggedInUser = null;
-				Q.nonce = Q.cookie('Q_nonce');
 				if (Q.isEmpty(loggedOutOf)) {
 					loggedOutOf.native = true;
-					p.fill('native')();
 					// if we log out natively without disconnecting others,
 					// then we should ignore the logged-in user's xid
 					// when authenticating, until it is forced
@@ -1035,6 +1032,9 @@
 						Users.logout.occurring = false;
 					}, 0);
 				}
+				Users.loggedInUser = null;
+				Q.nonce = Q.cookie('Q_nonce');
+				p.fill('native')();
 			}
 			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
 				Users.onLogout.handle.call(Users, loggedOutOf, o);
