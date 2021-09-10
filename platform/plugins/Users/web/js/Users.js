@@ -294,7 +294,7 @@
 			);
 			return;
 		}
-		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
+		return handler.call(this, platform, appId, onSuccess, onCancel, options);
 	};
 	
 	Users.authenticate.handlers = {};
