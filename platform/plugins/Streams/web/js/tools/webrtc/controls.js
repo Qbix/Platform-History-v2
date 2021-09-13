@@ -3808,7 +3808,7 @@
 									if(callback != null) callback(linkToStream);
 								});
 
-								tool.WebRTCLib.screensInterface.fbLive.startStreaming(createRes.secure_stream_url, 'facebook');
+								tool.WebRTCLib.screensInterface.fbLive.startStreaming([createRes.secure_stream_url], 'facebook');
 							});
 						}
 
@@ -3916,7 +3916,7 @@
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
-										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url, 'facebook');
+										tool.WebRTCLib.screensInterface.fbLive.startStreaming([response.secure_stream_url], 'facebook');
 										_liveInfo = response;
 										if (callback != null) callback(response);
 									});
