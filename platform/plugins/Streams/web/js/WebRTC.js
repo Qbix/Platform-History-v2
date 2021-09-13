@@ -2275,9 +2275,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 bindConferenceEvents(WebRTCconference);
                 log('initWithNodeServer: initConference: start init');
-                if(Q.info.isCordova) {
-                    cordova.plugins.CordovaCall.sendCall('Daniel Marcus');
-                }
+                log('initWithNodeServer: initConference: start init plugins');
+
                 WebRTCconference.init(function (app) {
                     log('initWithNodeServer: initConference: inited');
                     updateParticipantData();
@@ -2286,9 +2285,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     screensRendering.updateLayout();
                     Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
-                    if(Q.info.isCordova) {
+                    /*if(Q.info.isCordova) {
                         cordova.plugins.CordovaCall.connectCall();
-                    }
+                    }*/
                     Q.activate(
                         document.body.appendChild(
                             Q.Tool.setUpElement(
@@ -2307,6 +2306,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         {},
                         function () {
                             log('initWithNodeServer: initConference: activate controls');
+
 
                             _controls = this.element;
                             _controlsTool = this;
@@ -2351,7 +2351,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                             var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
-                            Q.activate(
+                            /*Q.activate(
                                 Q.Tool.setUpElement(
                                     _controls.firstChild, // or pass an existing element
                                     "Q/resize",
@@ -2393,13 +2393,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                     }
 
-                                    screen.orientation.addEventListener("change", function() {
-                                        setTimeout(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        }, 1000);
-                                    });
+                                    if(typeof screen != 'undefined' && screen.orientation != null) {
+                                        screen.orientation.addEventListener("change", function () {
+                                            setTimeout(function () {
+                                                var moveWithinArea = updateArearectangle();
+                                                resizeTool.setContainerRect(moveWithinArea);
+                                                screensRendering.updateLayout();
+                                            }, 1000);
+                                        });
+                                    }
 
                                     window.addEventListener("resize", function() {
                                         setTimeout(function () {
@@ -2419,7 +2421,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         this.snapTo('right');
                                     } else {
                                         this.snapTo('bottom');
-                                        /*var dashboard = document.getElementById('dashboard_slot');
+                                        /!*var dashboard = document.getElementById('dashboard_slot');
                                         if(dashboard && Q.info.isMobile && !Q.info.isTablet) {
                                             var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
                                             if(dashboardPos == 'top') {
@@ -2428,10 +2430,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                                 this.snapTo('top');
                                             }
 
-                                        }*/
+                                        }*!/
                                     }
                                 }
-                            );
+                            );*/
                         }
                     );
                 });
@@ -2455,7 +2457,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             } else {
                 log('initWithNodeServer: add app.js');
                 Q.addScript([
-                    "{{Streams}}/js/tools/webrtc/app.js",
+                    "{{Streams}}/js/tools/webrtc/app.js?time=" + Date.now(),
                     "{{Streams}}/js/tools/webrtc/RecordRTC.js",
                 ], function () {
 
@@ -7180,15 +7182,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     } else if(Q.info.isCordova && Q.info.platform === 'ios' && !_options.useCordovaPlugins){
                         log('start: onConnect: isCordova && isiOS');
                         //publishMediaTracks({video: startWith.video, audio: startWith.audio});
-                        showPreparingDialogue(function () {
-                            createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
-                        }, function () {
-                            connectionState.updateStatus('Disconnected');
-                            setTimeout(function() {
-                                connectionState.hide();
-                            }, 3000);
-                            unsetResizeObserver();
-                        });
+                        if(preparingRoom) {
+                            showPreparingDialogue(function () {
+                                createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
+                            }, function () {
+                                connectionState.updateStatus('Disconnected');
+                                setTimeout(function () {
+                                    connectionState.hide();
+                                }, 3000);
+                                unsetResizeObserver();
+                            });
+                        }
                     } else if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins){
                         log('start: onConnect: isCordova && isiOS');
                         publishMediaTracks({video: startWith.video, audio: startWith.audio});

@@ -663,7 +663,7 @@
                                 controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
                                     sourceType: 'video',
                                     title: e,
-                                    videoInstance: video,
+                                    url: e,
                                 });
                                 //https://www.w3schools.com/html/mov_bbb.mp4
                             } else {
@@ -3667,7 +3667,7 @@
                         //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                         //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
                     } else {
-                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                        //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                         //dialogue.style.top = '100px';
                     }
 
@@ -3951,15 +3951,14 @@
                             //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
                         } else {
                             var winWidth = window.innerWidth;
-                            var availableSpace = winWidth - (controlsRect.left + controlsRect.width);
-                            if(availableSpace >= (dialogWidth+15)) {
-                                dialogue.style.left = (controlsRect.left + controlsRect.width + 15) + 'px';
-                                //dialogue.style.bottom = 0;
-
-                            } else {
+                            if(winWidth > dialogWidth) {
                                 dialogue.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
-                                //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                            } else {
+                                let left = (winWidth / 100 * 2) / 2;
+                                dialogue.style.left = left + 'px';
                             }
+                            //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+
                         }
 
                         var streamingCanvas = _streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');

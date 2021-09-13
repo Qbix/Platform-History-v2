@@ -19,6 +19,7 @@
                 prevX: 0,
             };
 
+
             Q.addStylesheet('{{Q}}/css/resize.css');
         },
 
@@ -951,7 +952,6 @@
                                 Q.removeEventListener(window, Q.Pointer.move, capturePointer);
                             });
                         });
-
 
                         if(tool.state.move) {
 

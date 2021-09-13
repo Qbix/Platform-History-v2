@@ -2304,11 +2304,9 @@ window.WebRTCconferenceLib = function app(options){
                         console.log('addSource video')
                         let webrtcGroup = getWebrtcGroupIndex();
 
-
                         var video = document.createElement('VIDEO');
                         video.muted = true;
                         video.loop = options.liveStreaming.loopVideo;
-
                         video.addEventListener('loadedmetadata', event => {
                             console.log(video.videoWidth, video.videoHeight)
                         })
@@ -9534,6 +9532,7 @@ window.WebRTCconferenceLib = function app(options){
                 var i, device;
                 for (i = 0; device = mediaDevicesList[i]; i++) {
                     log('loadDevicesList: ' + device.kind);
+                    log('loadDevicesList: ', device);
                     if (device.kind.indexOf('video') != -1) {
                         videoInputDevices.push(device);
                         for (var x in localParticipant.tracks) {
@@ -9874,13 +9873,13 @@ window.WebRTCconferenceLib = function app(options){
                     app.event.dispatch('audioInputToggled');
                 }
 
-                if(camera != null && camera.deviceId != null && camera.deviceId != '') {
+                if(audioDevice != null && audioDevice.deviceId != null && audioDevice.deviceId != '') {
                     currentAudioInputDevice = audioInputDevices.filter(function (d) {
-                        return d.deviceId == camera.deviceId;
+                        return d.deviceId == audioDevice.deviceId;
                     })[0];
-                } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                } else if(audioDevice != null && audioDevice.groupId != null && audioDevice.groupId != '') {
                     currentAudioInputDevice = audioInputDevices.filter(function (d) {
-                        return d.groupId == camera.groupId;
+                        return d.groupId == audioDevice.groupId;
                     })[0];
                 } else currentAudioInputDevice = deviceToSwitch;
             }
@@ -9920,7 +9919,7 @@ window.WebRTCconferenceLib = function app(options){
                     .catch(function (error) {
                         console.error(error.name + ': ' + error.message);
                         if(failureCallback != null) failureCallback(error);
-                    });680
+                    });
             }
         }
         
@@ -11902,9 +11901,11 @@ window.WebRTCconferenceLib = function app(options){
         }
 
 
-        screen.orientation.addEventListener("change", function() {
-            if(_isMobile) app.views.updateOrientation();
-		});
+        if(typeof screen != 'undefined' && screen.orientation != null) {
+            screen.orientation.addEventListener("change", function() {
+                if(_isMobile) app.views.updateOrientation();
+            });
+        }
 
 		window.addEventListener("resize", function() {
 			setTimeout(function () {

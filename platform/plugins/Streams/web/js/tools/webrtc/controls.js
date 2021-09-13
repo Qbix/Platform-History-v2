@@ -352,7 +352,9 @@
 				});
 				tool.WebRTCLib.event.on('deviceListUpdated', function () {
 					tool.loadCamerasList();
-				});
+                    tool.loadAudioOutputList();
+                    tool.loadAudioInputList();
+                });
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
@@ -1375,6 +1377,8 @@
                         }
 
                         function loadCamerasList () {
+                        	console.log('loadCamerasList')
+                            //location.reload();
                             var count = 1;
 
                             clearCameraList();
@@ -2473,7 +2477,7 @@
                             clearAudioOutputList();
 
                             tool.WebRTCLib.conferenceControl.audioOutputDevices().forEach(function(mediaDevice){
-                            	console.log('loadAudioInputList', mediaDevice);
+                            	console.log('loadAudioOutputList', mediaDevice);
                                 var radioBtnItem = document.createElement('DIV');
                                 radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
                                 radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
