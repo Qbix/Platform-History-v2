@@ -192,6 +192,10 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		tool.element.addClass('Q_loading');
 		
 		Streams.Avatar.get(state.userId, function (err, avatar) {
+			var fem = Q.firstErrorMessage(err, avatar);
+			if (fem) {
+				return console.warn(fem);
+			}
 			var fields;
 			tool.element.removeClass('Q_loading');
 			if (!avatar) {

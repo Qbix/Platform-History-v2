@@ -133,7 +133,7 @@
 	Users.init.facebook = function (callback, options) {
 
 		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps) || appId;
 		if (!platformAppId) {
 			throw new Q.Error("Users.init.facebook: missing facebook app info for '" + appId + "'");
 		}
@@ -151,13 +151,14 @@
 		function _init() {
 			if (!Users.init.facebook.completed[appId] && platformAppId) {
 				FB.init(Q.extend({
-					appId: platformAppId,
 					version: 'v8.0',
 					status: true,
 					cookie: true,
 					oauth: true,
 					xfbml: true
-				}, Users.init.facebook.options, options));
+				}, Users.init.facebook.options, options, {
+					appId: platformAppId
+				}));
 				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
 			Users.init.facebook.completed[appId] = true;
@@ -277,9 +278,11 @@
 	 */
 	Users.authenticate = function (platform, onSuccess, onCancel, options) {
 		options = options || {};
-		var handler = Users.authenticate.handlers[platform];
+		var handler = Users.authenticate[platform];
 		if (!handler) {
-			var handlers = Object.keys(Users.authenticate.handlers);
+			var handlers = Object.keys(Users.authenticate).filter(function (k) {
+				return Users.authenticate.hasOwnProperty(k);
+			});
 			throw new Q.Error(
 				"Users.authenticate: platform must be one of " + handlers.join(', ')
 			);
@@ -294,20 +297,19 @@
 			);
 			return;
 		}
+		options.appId = appId;
 		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate.handlers = {};
-	
-	Users.authenticate.handlers.ios = 
-	Users.authenticate.handlers.android = function (platform, platformAppId, onSuccess, onCancel, options) {
+	Users.authenticate.ios = 
+	Users.authenticate.android = function (platform, platformAppId, onSuccess, onCancel, options) {
 		_doAuthenticate({
 			udid: Q.info.udid, // TODO: sign this with private key on cordova side
 			platform: platform
 		}, platform, platformAppId, onSuccess, onCancel, options);
 	};
 	
-	Users.authenticate.handlers.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
+	Users.authenticate.facebook = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = options || {};
 		var fields = {};
 
@@ -318,7 +320,7 @@
 				if (response.status === 'connected') {
 					_handleXid(
 						platform, platformAppId, response.authResponse.userID,
-						onSuccess, onCancel, options
+						onSuccess, onCancel, Q.extend({response: response}, options)
 					);
 				} else if (platformAppId) {
 					// let's delete any stale facebook cookies there might be
@@ -329,12 +331,12 @@
 				}
 			}, options.force ? true : false);
 		}, {
-			appId: appId
+			appId: options.appId
 		});
 	};
 	
-	Users.authenticate.handlers.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = Q.extend(Users.authenticate.handlers.wallet.options, options);
+	Users.authenticate.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
+		options = Q.extend(Users.authenticate.wallet.options, options);
 		Users.init.wallet(function () {
 			try {
 				var wsr_json = Q.cookie('wsr_1');
@@ -353,8 +355,9 @@
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
 			}
-			 // Unpkg imports
 			var appId = options.appId || Q.info.app;
+			
+			// Unpkg imports	
 			var Web3Modal = window.Web3Modal.default;
 			var WalletConnectProvider = window.WalletConnectProvider.default;
 			var Fortmatic = window.Fortmatic;
@@ -376,86 +379,90 @@
 				providerOptions: providerOptions, // required
 				disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
 		    });
-			web3Modal.connect().then(function (provider) {
-				Users.Wallet.provider = provider;
-			    // Subscribe to accounts change
-			    provider.on("accountsChanged", function (accounts) {
-					console.log('provider.accountsChanged', accounts);
-			    });
+			web3Modal.clearCachedProvider();
+			web3Modal.resetState().then(_connect);
+			function _connect() {
+				web3Modal.connect().then(function (provider) {
+					Users.Wallet.provider = provider;
+				    // Subscribe to accounts change
+				    provider.on("accountsChanged", function (accounts) {
+						console.log('provider.accountsChanged', accounts);
+				    });
 
-			    // Subscribe to chainId change
-			    provider.on("chainChanged", function (chainId) {
-					console.log('provider.chainChanged', chainId);
-			    });
-			    // Subscribe to networkId change
-			    provider.on("networkChanged", function (networkId) {
-					console.log('provider.networkChanged', networkId);
-			    });
-				// Subscribe to provider disconnection
-				provider.on("connect", function (info) {
-					console.log('provider.connect', info);
-				});
-				// Subscribe to provider disconnection
-				provider.on("disconnect", function (error) {
-					if (!Users.logout.occurring) {
-						Q.Users.logout({using: 'wallet'});
-					}
-					console.log("provider.disconnect: ", error);
-				});
-				var payload = Q.text.Users.login.wallet.payload.interpolate({
-					host: location.host,
-					timestamp: Math.floor(Date.now() / 1000)
-				});
-				var w3 = new Web3(provider);
-				var network, accounts;
-				w3.eth.getAccounts().then(function (accounts) {
-					var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
-					if (walletAddress && accounts.includes(walletAddress)) {
-						var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
-						if (loginExpires > Date.now() / 1000) {
-							_proceed();
+				    // Subscribe to chainId change
+				    provider.on("chainChanged", function (chainId) {
+						console.log('provider.chainChanged', chainId);
+				    });
+				    // Subscribe to networkId change
+				    provider.on("networkChanged", function (networkId) {
+						console.log('provider.networkChanged', networkId);
+				    });
+					// Subscribe to provider disconnection
+					provider.on("connect", function (info) {
+						console.log('provider.connect', info);
+					});
+					// Subscribe to provider disconnection
+					provider.on("disconnect", function (error) {
+						if (!Users.logout.occurring) {
+							Q.Users.logout({using: 'wallet'});
 						}
-					}
-				    if (provider.wc) {
-						Q.alert(Q.text.Users.login.wallet.alert.content, {
-							title: Q.text.Users.login.wallet.alert.title,
-							onClose: function () {
-								var web3 = new Web3();
-								var address = accounts[0];
-								const res = provider.request({
-									method: 'personal_sign',
-									params: [ 
-										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
-										address.toLowerCase()
-									]
-								}).then(_proceed)
-								.catch(_cancel);	
+						console.log("provider.disconnect: ", error);
+					});
+					var payload = Q.text.Users.login.wallet.payload.interpolate({
+						host: location.host,
+						timestamp: Math.floor(Date.now() / 1000)
+					});
+					var w3 = new Web3(provider);
+					var network, accounts;
+					w3.eth.getAccounts().then(function (accounts) {
+						var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
+						if (walletAddress && accounts.includes(walletAddress)) {
+							var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
+							if (loginExpires > Date.now() / 1000) {
+								_proceed();
 							}
-						});
-				    } else {
-						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-				      	signer.signMessage(payload)
-						.then(_proceed)
-						.catch(_cancel);
-				    }
-					function _proceed(signature) {
-						_doAuthenticate({
-							xid: accounts[0],
-							payload: payload,
-							signature: signature,
-							platform: 'wallet',
-							chainId: provider.chainId
-						}, platform, platformAppId, onSuccess, onCancel, options);
-					}
+						}
+					    if (provider.wc) {
+							Q.alert(Q.text.Users.login.wallet.alert.content, {
+								title: Q.text.Users.login.wallet.alert.title,
+								onClose: function () {
+									var web3 = new Web3();
+									var address = accounts[0];
+									const res = provider.request({
+										method: 'personal_sign',
+										params: [ 
+											ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
+											address.toLowerCase()
+										]
+									}).then(_proceed)
+									.catch(_cancel);	
+								}
+							});
+					    } else {
+							var signer = new ethers.providers.Web3Provider(provider).getSigner();
+					      	signer.signMessage(payload)
+							.then(_proceed)
+							.catch(_cancel);
+					    }
+						function _proceed(signature) {
+							_doAuthenticate({
+								xid: accounts[0],
+								payload: payload,
+								signature: signature,
+								platform: 'wallet',
+								chainId: provider.chainId
+							}, platform, platformAppId, onSuccess, onCancel, options);
+						}
+					}).catch(_cancel);
 				}).catch(_cancel);
-			}).catch(_cancel);
+			}
 			function _cancel() {
 				Q.handle(onCancel, Users, [options]);
 			}
 		});
 	};
 	
-	Users.authenticate.handlers.wallet.options = {
+	Users.authenticate.wallet.options = {
 		chain: 'ETH',
 		network: 'mainnet'
 	};
@@ -510,8 +517,10 @@
 
 		function __doAuthenticate() {
 			var fields = {};
+			var appId = (options && options.appId) || Q.info.app;
 			if (platform === 'facebook') {
-				if (!Users.Facebook.getAuthResponse()) {
+				var ar = Users.Facebook.getAuthResponse();
+				if (!ar) {
 					// in some rare cases, the user may have logged out of facebook
 					// while our prompt was visible, so there is no longer a valid
 					// facebook authResponse. In this case, even though they want
@@ -520,7 +529,6 @@
 					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
 					return;
 				}
-				var ar = response.authResponse;
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
 				ar.fbAppId = platformAppId;
 				ar.appId = appId;
@@ -769,7 +777,7 @@
 				}
 			});
 		}, {
-			appId: appId
+			appId: platformAppId
 		});
 	};
 
@@ -978,8 +986,8 @@
 			options = {onSuccess: {'options': options}};
 		}
 		var o = Q.extend({}, Users.logout.options, options);
-		if (!o.using) {
-			o.using = 'native';
+		if (!o.using || o.using === '*') {
+			o.using = Q.getObject('login.options.using', Users) || ['native'];
 		}
 		if (typeof o.using === 'string') {
 			o.using = o.using.split(',');
@@ -999,75 +1007,40 @@
 			Users.lastSeenNonce = Q.cookie('Q_nonce');
 			Users.roles = {};
 			var appId = o.appId || Q.info.app;
-			if (platformAppId && o.using.indexOf('facebook') >= 0) {
-				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-				if (!platformAppId) {
-					console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
-				}
-				Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-				Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-				if ((o.using[0] === 'native' || o.using[1] === 'native')) {
-					Users.loggedInUser = null;
-					Q.nonce = Q.cookie('Q_nonce'); // null
-				}
-				Users.init.facebook(function logoutCallback() {
-					Users.Facebook.getLoginStatus(function (response) {
-						if (response.authResponse) {
-							FB.logout(function () {
-								delete Users.connected.facebook;
-								Users.onLogout.handle.call(this, o);
-								Q.handle(o.onSuccess, this, [o]);
-							});
-						} else {
-							Users.onLogout.handle.call(this, o);
-							Q.handle(o.onSuccess, this, [o]);
-						}
-						setTimeout(function () {
-							Users.logout.occurring = false;
-						}, 0);
-					}, true);
-				}, {
-					appId: appId
-				});
+			var p = new Q.Pipe();
+			var loggedOutOf = {};
+			if (appId && o.using.indexOf('facebook') >= 0) {
+				loggedOutOf.facebook = true;
+				Users.disconnect.facebook(appId, p.fill('facebook'));
 			}
-			var p = Users.Wallet.provider;
-			if (p && o.using.indexOf('wallet') >= 0) {
-			    if (p.close) {
-					p.close().then(function (result) {
-						Users.Wallet.web3Modal.clearCachedProvider();
-						Users.Wallet.provider = null;
-						setTimeout(function () {
-							Users.logout.occurring = false;
-						}, 0);
-					});
-			    } else {
-					if (p._handleDisconnect) {
-						p._handleDisconnect();
+			if (o.using.indexOf('wallet') >= 0) {
+				loggedOutOf.wallet = true;
+			    Q.Users.disconnect.wallet(appId, p.fill('wallet'));
+			}
+			if (o.using.indexOf('native') >= 0) {
+				if (Q.isEmpty(loggedOutOf)) {
+					// if we log out natively without disconnecting others,
+					// then we should ignore the logged-in user's xid
+					// when authenticating, until it is forced
+					var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
+					for (var key in xids) {
+						var parts = key.split("\t");
+						Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
 					}
-					Users.Wallet.web3Modal.clearCachedProvider();
-					Users.Wallet.provider = null;
 					setTimeout(function () {
 						Users.logout.occurring = false;
 					}, 0);
-			    }
-			}
-			if (o.using.indexOf('native') >= 0) {
-				// if we log out without logging out of facebook,
-				// then we should ignore the logged-in user's xid
-				// when authenticating, until it is forced
-				var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
-				for (var key in xids) {
-					var parts = key.split("\t");
-					Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
 				}
 				Users.loggedInUser = null;
 				Q.nonce = Q.cookie('Q_nonce');
-				Users.onLogout.handle.call(this, o);
-				Q.handle(o.onSuccess, this, [o]);
-				setTimeout(function () {
-					Users.logout.occurring = false;
-				}, 0);
+				loggedOutOf.native = true;
+				p.fill('native')();
 			}
+			p.add(Object.keys(loggedOutOf), 1, function _disconnected() {
+				Users.logout.occurring = false;
+				Users.onLogout.handle.call(Users, loggedOutOf, o);
+				Q.handle(options.onSuccess, Users, [loggedOutOf, o]);
+			}).run();
 		}
 
 		if (!o.url) {
@@ -1077,6 +1050,69 @@
 
 		var url = o.url + (o.url.indexOf('?') < 0 ? '?' : '') + '&logout=1';
 		Q.request(url, 'script', callback, {"method": "post"});
+		return true;
+	};
+	
+	/**
+	 * Disconnect external platforms
+	 */
+	Users.disconnect = {};
+	Users.disconnect.facebook = function (appId, callback) {
+		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		if (!platformAppId) {
+			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
+		}
+		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
+		Users.init.facebook(function logoutCallback() {
+			Users.Facebook.getLoginStatus(function (response) {
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
+				if (!response.authResponse) {
+					return callback();
+				}
+				return FB.logout(function () {
+					delete Users.connected.facebook;
+					callback();
+				});
+			}, true);
+		}, {
+			appId: appId
+		});
+	};
+	Users.disconnect.wallet = function (appId, callback) {
+		if (Users.disconnect.wallet.occurring) {
+			return false;
+		}
+		Users.disconnect.wallet.occurring = true;
+		var p = Users.Wallet.provider;
+		(new window.Web3Modal.default).clearCachedProvider();
+		if (!p) {
+			Q.handle(callback);
+			return false;
+		}
+	    if (p.close) {
+			p.close().then(function (result) {
+				delete Users.connected.facebook;
+				Users.Wallet.provider = null;
+				setTimeout(function () {
+					Users.disconnect.wallet.occurring = false;
+					Q.handle(callback);
+				}, 0);
+			});
+	    } else {
+			setTimeout(function () {
+				Users.logout.occurring = false;
+			}, 0);
+			if (p._handleDisconnect) {
+				p._handleDisconnect();
+			}
+			delete Users.connected.facebook;
+			Users.Wallet.provider = null;
+			Q.handle(callback);
+			Users.disconnect.wallet.occurring = false;
+	    }
 		return true;
 	};
 
@@ -2752,7 +2788,7 @@
 
 		Q.Users.logout.options = Q.extend({
 			url: Q.action('Users/logout'),
-			using: 'native',
+			using: '*',
 			onSuccess: new Q.Event(function (options) {
 				var urls = Q.urls || {};
 				Q.handle(options.welcomeUrl
