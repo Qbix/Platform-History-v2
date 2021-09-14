@@ -7087,10 +7087,12 @@ Q.url = function _Q_url(what, fields, options) {
 	}
 	if (info) {
 		if (Q.info.urls && Q.info.urls.caching && info.t) {
-			var parts = what3.split('?');
+			parts = what3.split('?');
 			if (parts.length > 1) {
 				parts[1] = parts[1].queryField('Q.cacheBust', info.t);
 				what3 = parts[0] + '?' + parts[1];	
+			} else {
+				what3 = parts[0] + '?Q.cacheBust=' + info.t;
 			}
 			if (info.cacheBaseUrl && info.t < Q.cookie('Q_ct')) {
 				baseUrl = info.cacheBaseUrl;
