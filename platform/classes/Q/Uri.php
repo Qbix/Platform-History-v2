@@ -12,7 +12,11 @@ class Q_Uri
 	 */
 	protected function __construct()
 	{
-		
+		// trying to get caching $urls
+		if (empty(self::$urls)) {
+			$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
+			is_file($urlsFile) && require_once($urlsFile);
+		}
 	}
 	
 	/**
@@ -993,7 +997,7 @@ class Q_Uri
 		}
 		if ($fileTimestamp) {
 			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cacheBust');
-			$fields = parse_str($tail);
+			parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);
 			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
