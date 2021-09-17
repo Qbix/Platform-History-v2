@@ -22,6 +22,7 @@ platform/plugins/Users/vendor/
 platform/plugins/Streams/vendor/
 !platform/plugins/Users/files/Users/icons/default
 !platform/plugins/Users/files/Users/icons/future
+!platform/plugins/Users/files/Users/icons/labels/Users
 platform/plugins/Streams/files/Streams/icons/*
 platform/plugins/Streams/web/img/icons/*
 !platform/plugins/Streams/files/Streams/icons/default
