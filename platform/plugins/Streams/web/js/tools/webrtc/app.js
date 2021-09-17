@@ -1844,6 +1844,7 @@ window.WebRTCconferenceLib = function app(options){
             var Scene = function () {
                 this.title = null;
                 this.sources = [];
+                this.additionalSources = [];
                 this.audioSources = [];
             }
 
@@ -1918,6 +1919,7 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function setWebrtcLayoutRect(width, height, x, y){
+                    console.log('setWebrtcLayoutRect', width, height, x, y);
                     if(width === null || height === null || x === null || y === null) return;
                     if(width != null) _webrtcLayoutRect.width = parseFloat(width);
                     if(height != null) _webrtcLayoutRect.height = parseFloat(height);
@@ -1947,6 +1949,7 @@ window.WebRTCconferenceLib = function app(options){
                     this.on = function (event, callback) {
                         if(this.eventDispatcher != null) this.eventDispatcher.on(event, callback)
                     };
+                    this.params = {};
                 }
 
                 Object.defineProperties(Source.prototype, {
@@ -1972,20 +1975,6 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     }
                 });
-
-                var WebRTCStreamSource = function (participant) {
-                    this.kind = null;
-                    this.participant = participant;
-                    this.name = participant.username;
-                    this.avatar = participant.avatar ? participant.avatar.image : null;
-                    this.track = null;
-                    this.mediaStream = null;
-                    this.htmlVideoEl = null;
-                    this.screenSharing = false;
-                    this.sourceType = 'webrtc';
-                    this.eventDispatcher = new EventSystem();
-                }
-                WebRTCStreamSource.prototype = new Source();
 
                 var ImageSource = function () {
                     var imageInstance = this;
@@ -2134,6 +2123,26 @@ window.WebRTCconferenceLib = function app(options){
                 }
                 RectObjectSource.prototype = new Source();
 
+                var StrokeRectObjectSource = function (rect) {
+                    this.sourceType = 'strokerect';
+                    this.widthFrom = rect.widthFrom;
+                    this.widthTo = rect.widthTo;
+                    this.heightFrom = rect.heightFrom;
+                    this.heightTo = rect.heightTo;
+                    this.frame = rect.frame;
+                    this.frames= rect.frames;
+                    this.xFrom = rect.xFrom;
+                    this.xTo = rect.xTo;
+                    this.yFrom = rect.yFrom;
+                    this.yTo = rect.yTo;
+                    this.strokeStyle = rect.strokeStyle;
+                    this.lineWidth = rect.lineWidth;
+                    this.baseSource = rect.baseSource;
+                    this.eventDispatcher = new EventSystem();
+
+                }
+                StrokeRectObjectSource.prototype = new Source();
+
                 var TextObjectSource = function (text) {
                     this.sourceType = 'webrtctext';
                     this.text = text.text;
@@ -2177,11 +2186,71 @@ window.WebRTCconferenceLib = function app(options){
                     this.sourceType = 'webrtc';
                     this.caption = 'participant';
                     this.eventDispatcher = new EventSystem();
+                    this.params = {
+                        captionBgColor: '#26A553',
+                        captionFontColor: '#FFFFFF'
+                    };
                 }
                 WebRTCStreamSource.prototype = new Source();
 
-                function addSource(newSource, successCallback, failureCallback) {
+                _eventDispatcher.on('sourceRemoved', function (removedSource) {
+                    console.log('sourceRemoved', removedSource)
+                    function removeChildSources(parentSources) {
+                        console.log('removeChildSources', parentSources)
 
+                        var nextToRemove = [];
+                        for(let c in parentSources) {
+                            let parentSource = parentSources[c];
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                for (let i = scene.sources.length - 1; i >= 0; i--) {
+                                    let source = scene.sources[i];
+                                    if (source.baseSource == parentSource) {
+                                        nextToRemove.push(source);
+                                        removeSource(source, true);
+                                    }
+                                }
+                            }
+                            var nextToRemove = [];
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                let i = scene.additionalSources.length;
+                                while (i--) {
+                                    console.log('removeChildSources while', parentSources)
+                                    console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+
+                                    if (scene.additionalSources[i].baseSource == parentSource) {
+                                        nextToRemove.push(scene.additionalSources[i]);
+                                        removeAdditionalSource(scene.additionalSources[i], true);
+                                    }
+                                }
+                            }
+                        }
+                        if(nextToRemove.length != 0) {
+                            removeChildSources(nextToRemove);
+                        }
+                    }
+                    removeChildSources([removedSource])
+                });
+                /*_eventDispatcher.on('adittionalSourceRemoved', function (removedSource) {
+                    for(let s in _scenes) {
+                        let scene = _scenes[s];
+                        for(let i = scene.additionalSources.length - 1; i >= 0; i--) {
+                            let source = scene.additionalSources[i];
+                            if(source.baseSource == removedSource) {
+                                removeSource(source);
+                            }
+                        }
+                    }
+                });*/
+
+                function addSource(newSource, successCallback, failureCallback) {
+                    console.log('addSource', newSource instanceof RectObjectSource)
+                    if( newSource instanceof RectObjectSource || newSource instanceof StrokeRectObjectSource || newSource instanceof TextObjectSource) {
+                        addAdditionalSource(newSource);
+                        return;
+                    }
+                    
                     function getWebrtcGroupIndex() {
                         for (let j in _activeScene.sources) {
                             if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
@@ -2235,11 +2304,9 @@ window.WebRTCconferenceLib = function app(options){
                         console.log('addSource video')
                         let webrtcGroup = getWebrtcGroupIndex();
 
-
                         var video = document.createElement('VIDEO');
                         video.muted = true;
                         video.loop = options.liveStreaming.loopVideo;
-
                         video.addEventListener('loadedmetadata', event => {
                             console.log(video.videoWidth, video.videoHeight)
                         })
@@ -2267,18 +2334,42 @@ window.WebRTCconferenceLib = function app(options){
                         //_eventDispatcher.dispatch('sourceAdded', newSource);
 
                     }
-
-
                 }
 
-                function removeSource(source) {
+                function addAdditionalSource(newSource, backward) {
+                    if(backward){
+                        _activeScene.additionalSources.push(newSource);
+                    } else {
+                        _activeScene.additionalSources.unshift(newSource);
+                    }
+                    _eventDispatcher.dispatch('sourceAdded', newSource);
+                }
+
+                function removeSource(source, doNotFireEvent) {
+                    log('removeSource', source)
+                    if( source instanceof RectObjectSource || source instanceof TextObjectSource) {
+                        removeAdditionalSource(source, doNotFireEvent);
+                        return;
+                    }
                     for (let j in _activeScene.sources) {
                         if (_activeScene.sources[j] == source) {
                             _activeScene.sources.splice(j, 1)
+                            break;
                         }
                     }
                     if(source.videoInstance != null) source.videoInstance.pause();
                     audioComposer.muteSourceLocally(source);
+                    if(!doNotFireEvent) _eventDispatcher.dispatch('sourceRemoved', source);
+                }
+                
+                function removeAdditionalSource(source, doNotFireEvent) {
+                    for (let j in _activeScene.additionalSources) {
+                        if (_activeScene.additionalSources[j] == source) {
+                            _activeScene.additionalSources.splice(j, 1)
+                            break;
+                        }
+                    }
+                    if(!doNotFireEvent) _eventDispatcher.dispatch('sourceRemoved', source);
                 }
 
                 function getSources(type, active) {
@@ -2435,6 +2526,40 @@ window.WebRTCconferenceLib = function app(options){
                         updateWebRTCCanvasLayout();
                         audioComposer.updateWebRTCAudioSources();
                     }
+
+                    function showChildSources(parentSources) {
+                        var nextToShow = [];
+                        for(let c in parentSources) {
+                            let parentSource = parentSources[c];
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                for (let i = scene.sources.length - 1; i >= 0; i--) {
+                                    let source = scene.sources[i];
+                                    if (source.baseSource == parentSource) {
+                                        nextToShow.push(source);
+                                        source.active = true;
+                                    }
+                                }
+                            }
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                let i = scene.additionalSources.length;
+                                while (i--) {
+                                    console.log('removeChildSources while', parentSources)
+                                    console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+
+                                    if (scene.additionalSources[i].baseSource == parentSource) {
+                                        nextToShow.push(scene.additionalSources[i]);
+                                        scene.additionalSources[i].active = true;
+                                    }
+                                }
+                            }
+                        }
+                        if(nextToShow.length != 0) {
+                            showChildSources(nextToShow);
+                        }
+                    }
+                    showChildSources([source])
                 }
 
                 function hideSource(source) {
@@ -2453,6 +2578,43 @@ window.WebRTCconferenceLib = function app(options){
                         updateWebRTCCanvasLayout();
                         audioComposer.updateWebRTCAudioSources();
                     }
+
+                    function hideChildSources(parentSources) {
+                        console.log('removeChildSources', parentSources)
+
+                        var nextToHide = [];
+                        for(let c in parentSources) {
+                            let parentSource = parentSources[c];
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                for (let i = scene.sources.length - 1; i >= 0; i--) {
+                                    let source = scene.sources[i];
+                                    if (source.baseSource == parentSource) {
+                                        nextToHide.push(source);
+                                        source.active = false;
+                                    }
+                                }
+                            }
+                            //var nextToRemove = [];
+                            for (let s in _scenes) {
+                                let scene = _scenes[s];
+                                let i = scene.additionalSources.length;
+                                while (i--) {
+                                    console.log('removeChildSources while', parentSources)
+                                    console.log('removeChildSources while baseSource', scene.additionalSources[i].baseSource)
+
+                                    if (scene.additionalSources[i].baseSource == parentSource) {
+                                        nextToHide.push(scene.additionalSources[i]);
+                                        scene.additionalSources[i].active = false;
+                                    }
+                                }
+                            }
+                        }
+                        if(nextToHide.length != 0) {
+                            hideChildSources(nextToHide);
+                        }
+                    }
+                    hideChildSources([source])
                 }
 
                 function updateWebRTCCanvasLayout(layoutName) {
@@ -2784,9 +2946,10 @@ window.WebRTCconferenceLib = function app(options){
 
                         function remove() {
                             _inputCtx.clearRect(_activeScene.sources[d].rect.x, _activeScene.sources[d].rect.y, _activeScene.sources[d].rect.width, _activeScene.sources[d].rect.height);
+                            let removedSource = _activeScene.sources[d];
                             _activeScene.sources[d] = null;
                             _activeScene.sources.splice(d, 1);
-                            _eventDispatcher.dispatch('sourceRemoved');
+                            _eventDispatcher.dispatch('sourceRemoved', removedSource);
                         }
 
                         for(let n in tracksToRemove) {
@@ -3111,7 +3274,16 @@ window.WebRTCconferenceLib = function app(options){
                             drawImage(streamData);
                         } else if(streamData.sourceType == 'video') {
                             drawVideo(streamData);
-                        } else if(streamData.sourceType == 'webrtcrect') {
+                        }
+                    }
+
+
+                    for(let i = _activeScene.additionalSources.length - 1; i >= 0; i--) {
+                        if(_activeScene.additionalSources[i] == null || _activeScene.additionalSources[i].active == false ||_activeScene.additionalSources[i].sourceType == 'group') continue;
+
+                        let streamData = _activeScene.additionalSources[i];
+
+                        if(streamData.sourceType == 'webrtcrect') {
 
                             _inputCtx.save();
                             _inputCtx.beginPath();
@@ -3130,6 +3302,26 @@ window.WebRTCconferenceLib = function app(options){
                             _inputCtx.restore();
 
 
+                        } else if(streamData.sourceType == 'strokerect') {
+
+                            _inputCtx.save();
+                            _inputCtx.beginPath();
+                            _inputCtx.rect(streamData.baseSource.rect.x, streamData.baseSource.rect.y, streamData.baseSource.rect.width, streamData.baseSource.rect.height);
+                            _inputCtx.clip();
+
+                            _inputCtx.lineWidth = streamData.lineWidth;
+                            _inputCtx.strokeStyle = streamData.strokeStyle;
+                            _inputCtx.strokeRect( getX(streamData), getY(streamData), getWidth(streamData), getHeight(streamData));
+                            if (streamData.frame < streamData.frames) {
+                                streamData.frame = streamData.frame + 1;
+                            } else if (streamData.frame == streamData.frames){
+                                streamData.eventDispatcher.dispatch('animationEnded');
+                                streamData.frame = streamData.frame + 1;
+                            }
+
+                            _inputCtx.restore();
+
+
                         } else if(streamData.sourceType == 'webrtctext') {
                             _inputCtx.save();
                             _inputCtx.beginPath();
@@ -3137,6 +3329,10 @@ window.WebRTCconferenceLib = function app(options){
                             _inputCtx.clip();
 
                             _inputCtx.font = streamData.font;
+                            _inputCtx.shadowBlur = 5;
+                            _inputCtx.shadowOffsetX = 2;
+                            _inputCtx.shadowOffsetY = 3;
+                            _inputCtx.shadowColor = "black";
                             _inputCtx.fillStyle = streamData.fillStyle;
                             _inputCtx.fillText(streamData.text, getX(streamData),  getY(streamData));
 
@@ -3326,6 +3522,7 @@ window.WebRTCconferenceLib = function app(options){
 
                     //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
+                    if(window.debug7) console.log('data.rect.x', data.rect.x)
                     _inputCtx.fillStyle = options.liveStreaming.audioLayoutBgColor;
                     _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
@@ -3374,8 +3571,9 @@ window.WebRTCconferenceLib = function app(options){
 
 
                         if(options.liveStreaming.showLayoutBorders) {
-                            _inputCtx.strokeStyle = "rgba(0, 0, 0, 0.5)";
-                            _inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
+                            /*_inputCtx.strokeStyle = "rgba(38, 165, 83, 1)";
+                            _inputCtx.lineWidth = 8;
+                            _inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);*/
                         }
                     }
 
@@ -3392,13 +3590,8 @@ window.WebRTCconferenceLib = function app(options){
                 }
 
                 function displayName(participant) {
+                    if(!participant.online) return;
                     log('videoComposer: displayName')
-                    try {
-                        var err = (new Error);
-                        console.log(err.stack);
-                    } catch (e) {
-
-                    }
                     var webrtcSource = _activeScene.sources.filter(function (source) {
                         log('videoComposer: displayName: filter', source)
 
@@ -3437,7 +3630,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: xPos,
                         //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
                         //yTo: yTo(),
-                        fill: 'rgb(38 165 83 / 100%)'
+                        fill: webrtcSource.params.captionBgColor
                     });
                     nameLabel.name = 'Rectangle';
 
@@ -3464,12 +3657,12 @@ window.WebRTCconferenceLib = function app(options){
                         },
                         'xFrom': {
                             'get': function() {
-                                return this.baseSource.rect.x + (( this.baseSource.rect.width - this.widthFrom) / 2);
+                                return this.baseSource.rect.x;
                             }
                         },
                         'xTo': {
                             'get': function() {
-                                return this.baseSource.rect.x + (( this.baseSource.rect.width - this.widthTo) / 2);
+                                return this.baseSource.rect.x;
                             }
                         },
                         'yFrom': {
@@ -3499,7 +3692,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: nameLabel.xTo + 20,
                         //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 100 * 1),
                         //yTo: nameLabel.yTo + (nameLabel.heightTo / 100 * 1),
-                        fillStyle: '#FFFFFF',
+                        fillStyle: webrtcSource.params.captionFontColor,
                         //font: fontSize + 'px Arial',
                         latestSize: fontSize,
                         text: textName.toUpperCase()
@@ -3570,7 +3763,7 @@ window.WebRTCconferenceLib = function app(options){
                         //xTo: nameLabel.xTo + 20,
                         //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 2) + 8,
                         //yTo: nameLabel.yTo + (nameLabel.heightTo / 2) + 8,
-                        fillStyle: '#FFFFFF',
+                        fillStyle: webrtcSource.params.captionFontColor,
                         latestSize: captionFontSize,
                         font: captionFontSize + 'px Arial',
                         text: captionText
@@ -3617,28 +3810,29 @@ window.WebRTCconferenceLib = function app(options){
                         }
                     });
 
-                    addSource(nameLabel);
+                    addAdditionalSource(nameLabel, true);
 
-                    addSource(nameText);
+                    addAdditionalSource(nameText);
 
-                    addSource(captionText);
+                    addAdditionalSource(captionText);
                 }
 
                 /*hides name label and all text sources that are related to it */
                 function hideName(participant) {
+                    if(!participant.online) return;
                     var dependentTextSources = [];
                     var webrtcSource, nameBgSource;
                     webrtcSource = _activeScene.sources.filter(function (source) {
                         return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
                     })[0];
-                    for(let i in _activeScene.sources) {
-                        if(_activeScene.sources[i].sourceType != 'webrtcrect' || _activeScene.sources[i].baseSource.participant != participant) continue;
-                        nameBgSource = _activeScene.sources[i];
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].sourceType != 'webrtcrect' || _activeScene.additionalSources[i].baseSource.participant != participant) continue;
+                        nameBgSource = _activeScene.additionalSources[i];
                         break;
                     }
-                    for(let i in _activeScene.sources) {
-                        if(_activeScene.sources[i].baseSource != nameBgSource || _activeScene.sources[i].sourceType != 'webrtctext') continue;
-                        dependentTextSources.push( _activeScene.sources[i]);
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].baseSource != nameBgSource || _activeScene.additionalSources[i].sourceType != 'webrtctext') continue;
+                        dependentTextSources.push( _activeScene.additionalSources[i]);
                     }
 
                     var neYFrom = nameBgSource.yTo;
@@ -3667,16 +3861,193 @@ window.WebRTCconferenceLib = function app(options){
                         textSource.yTo = textSource.yFrom + 100;
                         textSource.frame = 0;
                         textSource.on('animationEnded', function() {
-                            removeSource(textSource);
+                            removeAdditionalSource(textSource);
 
                         });
                     }
 
                     nameBgSource.on('animationEnded', function() {
-                        removeSource(nameBgSource);
+                        removeAdditionalSource(nameBgSource);
                     });
 
                 }
+
+
+                function displayBorder(participant) {
+                    if(!participant.online) return;
+
+                    var webrtcSource = _activeScene.sources.filter(function (source) {
+                        log('videoComposer: displayName: filter', source)
+
+                        return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
+                    })[0];
+
+                    if(webrtcSource == null) return;
+
+                    //var text = webrtcSource.participant.username;
+                    //_inputCtx.font = "30px Arial";
+                    //var textWidth = _inputCtx.measureText(text).width;
+                    //var percentWidth = (webrtcSource.rect.width / 100 * 70);
+                    //var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
+                    var rectWidth = webrtcSource.rect.width;
+                    var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
+                    var rectHeight = webrtcSource.rect.height;
+
+                    var whiteBorderWidth = 6;
+                    var doubleBorderWidth = whiteBorderWidth * 2;
+                    var dividedBorderWidth = whiteBorderWidth / 2;
+
+                    var border = new StrokeRectObjectSource({
+                        baseSource: webrtcSource,
+                        frame: 0,
+                        frames: 0,
+                        //widthFrom: rectWidth,
+                        //widthTo: rectWidth,
+                        //heightFrom: rectHeight,
+                        //heightTo: rectHeight,
+                        //xFrom: xPos,
+                        //xTo: xPos,
+                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
+                        //yTo: yTo(),
+                        lineWidth:whiteBorderWidth,
+                        strokeStyle: '#FFFFFF'
+                    });
+                    border.name = 'whiteBorder';
+
+                    Object.defineProperties(border, {
+                        'widthFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.width - whiteBorderWidth;
+                            }
+                        },
+                        'widthTo': {
+                            'get': function() {
+                                return this.baseSource.rect.width - whiteBorderWidth;
+                            }
+                        },
+                        'heightFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.height - whiteBorderWidth;
+                            }
+                        },
+                        'heightTo': {
+                            'get': function() {
+                                return this.baseSource.rect.height - whiteBorderWidth;
+                            }
+                        },
+                        'xFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.x + dividedBorderWidth;
+                            }
+                        },
+                        'xTo': {
+                            'get': function() {
+                                return this.baseSource.rect.x + dividedBorderWidth;
+                            }
+                        },
+                        'yFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.y + dividedBorderWidth;
+                            }
+                        },
+                        'yTo': {
+                            'get': function() {
+                                return this.baseSource.rect.y + dividedBorderWidth;
+                            }
+                        }
+                    });
+
+                    var colorBorderLineWidth = 10;
+                    var doubleColorBorderWidth = colorBorderLineWidth * 2;
+                    var halfColorBorderWidth = colorBorderLineWidth / 2;
+
+                    var colorBorder = new StrokeRectObjectSource({
+                        baseSource: webrtcSource,
+                        frame: 0,
+                        frames: 0,
+                        //widthFrom: rectWidth,
+                        //widthTo: rectWidth,
+                        //heightFrom: rectHeight,
+                        //heightTo: rectHeight,
+                        //xFrom: xPos,
+                        //xTo: xPos,
+                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
+                        //yTo: yTo(),
+                        lineWidth:colorBorderLineWidth,
+                        strokeStyle: webrtcSource.params.captionBgColor
+                    });
+                    colorBorder.name = 'colorBorder';
+
+                    Object.defineProperties(colorBorder, {
+                        'widthFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.width - doubleBorderWidth - colorBorderLineWidth;
+                            }
+                        },
+                        'widthTo': {
+                            'get': function() {
+                                return this.baseSource.rect.width - doubleBorderWidth - colorBorderLineWidth;
+                            }
+                        },
+                        'heightFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.height - doubleBorderWidth - colorBorderLineWidth;
+                            }
+                        },
+                        'heightTo': {
+                            'get': function() {
+                                return this.baseSource.rect.height - doubleBorderWidth - colorBorderLineWidth;
+                            }
+                        },
+                        'xFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.x + whiteBorderWidth + halfColorBorderWidth;
+                            }
+                        },
+                        'xTo': {
+                            'get': function() {
+                                return this.baseSource.rect.x + whiteBorderWidth + halfColorBorderWidth;
+                            }
+                        },
+                        'yFrom': {
+                            'get': function() {
+                                return this.baseSource.rect.y + whiteBorderWidth + halfColorBorderWidth;
+                            }
+                        },
+                        'yTo': {
+                            'get': function() {
+                                return this.baseSource.rect.y + whiteBorderWidth + halfColorBorderWidth;
+                            }
+                        }
+                    });
+
+                    addAdditionalSource(border);
+                    addAdditionalSource(colorBorder, true);
+                }
+
+                function hideBorder(participant) {
+                    if(!participant.online) return;
+                    var dependentTextSources = [];
+                    var whiteBorder, colorBorder;
+                    var webrtcSource = _activeScene.sources.filter(function (source) {
+                        return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
+                    })[0];
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].name != 'whiteBorder' || _activeScene.additionalSources[i].baseSource.participant != participant) continue;
+                        whiteBorder = _activeScene.additionalSources[i];
+                        break;
+                    }
+
+                    for(let i in _activeScene.additionalSources) {
+                        if(_activeScene.additionalSources[i].name != 'colorBorder' || _activeScene.additionalSources[i].baseSource.participant != participant) continue;
+                        colorBorder = _activeScene.additionalSources[i];
+                        break;
+                    }
+
+                    removeAdditionalSource(whiteBorder);
+                    removeAdditionalSource(colorBorder);
+                }
+
 
                 function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
                     var analyser = data.participant.soundMeter.analyser;
@@ -3970,13 +4341,13 @@ window.WebRTCconferenceLib = function app(options){
                     }
                 };
                 function layoutGenerator(layoutName, numberOfRects) {
-                    log('layoutGenerator', layoutName)
+                    log('layoutGenerator', layoutName, _webrtcLayoutRect)
 
                     var layouts = {
                         tiledStreamingLayout: function (container, count) {
                             //var size = {parentWidth: _size.width, parentHeight: _size.height};
                             var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
-                            return tiledStreamingLayout(container, count);
+                            return tiledStreamingLayout(size, count);
                         },
                         screenSharing: function (container, count) {
                             var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
@@ -3992,13 +4363,17 @@ window.WebRTCconferenceLib = function app(options){
 
                     function tiledStreamingLayout(container, count) {
                         console.log('tiledStreamingLayout', container, count)
-                        var containerRect = container.constructor.name != 'DOMRect' ? container.getBoundingClientRect() : container;
+                        var containerRect = container;
 
                         if(_layoutTool.currentRects.length == 0) {
+                            console.log('tiledStreamingLayout 0')
+
                             _layoutTool.currentRects = build(container, count);
                         } else {
 
                             if(count > _layoutTool.currentRects.length) {
+                                console.log('tiledStreamingLayout 1')
+
                                 _layoutTool.basicGridRects = build(container, count);
                                 //var availableRects = addAndUpdate(container, count);
                                 //_layoutTool.currentRects = _layoutTool.basicGridRects = _layoutTool.currentRects.concat(availableRects);
@@ -4009,10 +4384,14 @@ window.WebRTCconferenceLib = function app(options){
                                 _layoutTool.currentRects = updatedRects.concat(last);
 
                             } else if(count < _layoutTool.currentRects.length) {
+                                console.log('tiledStreamingLayout 2')
+
                                 _layoutTool.basicGridRects = build(container, count);
                                 _layoutTool.currentRects = updateRealToBasicGrid();
                                 //_layoutTool.currentRects = removeAndUpdate();
                             } else {
+                                console.log('tiledStreamingLayout 3')
+
                                 _layoutTool.basicGridRects = build(container, count);
                                 _layoutTool.currentRects = updateRealToBasicGrid();
                             }
@@ -4022,13 +4401,9 @@ window.WebRTCconferenceLib = function app(options){
                         return _layoutTool.currentRects;
 
                         function build() {
-                            var size;
-                            if(container.width != null && container.height != null) {
-                                size = {parentWidth:container.width, parentHeight:container.height};
-                            } else {
-                                var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                                size = {parentWidth:containerRect.width, parentHeight:containerRect.height};
-                            }
+                            console.log('build')
+                            var size = container;
+
 
                             if(count == 1) {
                                 return simpleGrid(count, size, 1);
@@ -4117,13 +4492,11 @@ window.WebRTCconferenceLib = function app(options){
                         }
                         
                         function simpleGrid(count, size, perRow, rowsNum) {
-                            console.log('simpleGrid');
+                            console.log('simpleGrid', size);
                             var rects = [];
                             var spaceBetween = parseInt(options.liveStreaming.tiledLayoutMargins);
                             console.log('simpleGrid spaceBetween', spaceBetween);
 
-                            var centerX = containerRect.width / 2;
-                            var centerY = containerRect.height / 2;
                             var rectHeight;
                             var rectWidth = (size.parentWidth / perRow) - (spaceBetween*(perRow - 1));
                             if(rowsNum == null) {
@@ -4147,14 +4520,14 @@ window.WebRTCconferenceLib = function app(options){
                             for (i = 1; i <= count; i++) {
                                 console.log('simpleGrid for', currentRow, rowsNum);
 
-                                var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0) ;
+                                var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0) ;
                                 var currentRow = isNextNewLast  ? rowsNum : Math.ceil(i/perRow);
                                 var isNextNewRow  = rowItemCounter == perRow;
                                 isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
 
                                 if(rowItemCounter == 1) {
                                     var y = (prevRect.y + prevRect.height) + spaceBetween;
-                                    var x = spaceBetween;
+                                    var x = size.x + spaceBetween;
                                 } else {
                                     var y = prevRect.y;
                                     var x = prevRect.x + prevRect.width + spaceBetween;
@@ -4199,8 +4572,8 @@ window.WebRTCconferenceLib = function app(options){
 
                         function centralizeRects(rects) {
 
-                            var centerX = containerRect.width / 2;
-                            var centerY = containerRect.height / 2;
+                            var centerX = container.x + container.parentWidth / 2;
+                            var centerY = container.y + container.parentHeight / 2;
 
                             var minY = Math.min.apply(Math, rects.map(function(r) { return r.y; }));
                             var maxY = Math.max.apply(Math, rects.map(function(r) { return r.y + r.height;}));
@@ -4469,7 +4842,9 @@ window.WebRTCconferenceLib = function app(options){
                     getWebrtcLayoutRect: getWebrtcLayoutRect,
                     getCanvasSize: getCanvasSize,
                     displayName: displayName,
-                    hideName: hideName
+                    hideName: hideName,
+                    displayBorder: displayBorder,
+                    hideBorder: hideBorder
                 }
             }());
 
@@ -9157,6 +9532,7 @@ window.WebRTCconferenceLib = function app(options){
                 var i, device;
                 for (i = 0; device = mediaDevicesList[i]; i++) {
                     log('loadDevicesList: ' + device.kind);
+                    log('loadDevicesList: ', device);
                     if (device.kind.indexOf('video') != -1) {
                         videoInputDevices.push(device);
                         for (var x in localParticipant.tracks) {
@@ -9497,13 +9873,13 @@ window.WebRTCconferenceLib = function app(options){
                     app.event.dispatch('audioInputToggled');
                 }
 
-                if(camera != null && camera.deviceId != null && camera.deviceId != '') {
+                if(audioDevice != null && audioDevice.deviceId != null && audioDevice.deviceId != '') {
                     currentAudioInputDevice = audioInputDevices.filter(function (d) {
-                        return d.deviceId == camera.deviceId;
+                        return d.deviceId == audioDevice.deviceId;
                     })[0];
-                } else if(camera != null && camera.groupId != null && camera.groupId != '') {
+                } else if(audioDevice != null && audioDevice.groupId != null && audioDevice.groupId != '') {
                     currentAudioInputDevice = audioInputDevices.filter(function (d) {
-                        return d.groupId == camera.groupId;
+                        return d.groupId == audioDevice.groupId;
                     })[0];
                 } else currentAudioInputDevice = deviceToSwitch;
             }
@@ -9543,7 +9919,7 @@ window.WebRTCconferenceLib = function app(options){
                     .catch(function (error) {
                         console.error(error.name + ': ' + error.message);
                         if(failureCallback != null) failureCallback(error);
-                    });680
+                    });
             }
         }
         
@@ -11525,17 +11901,17 @@ window.WebRTCconferenceLib = function app(options){
         }
 
 
-        /*window.addEventListener("orientationchange", function() {
-			setTimeout(function () {
-				if(_isMobile) app.views.updateOrientation();
-			}, 1500);
-		});
+        if(typeof screen != 'undefined' && screen.orientation != null) {
+            screen.orientation.addEventListener("change", function() {
+                if(_isMobile) app.views.updateOrientation();
+            });
+        }
 
 		window.addEventListener("resize", function() {
 			setTimeout(function () {
 				if(_isMobile) app.views.updateOrientation();
-			}, 1500);
-		});*/
+			}, 1000);
+		});
     }
 
     app.init = function(callback){

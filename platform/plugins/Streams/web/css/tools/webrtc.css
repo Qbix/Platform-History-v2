@@ -13,6 +13,10 @@
     width:100%;
     pointer-events: none;
     z-index: 999999999999999999999 !important;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .Streams_webrtc_room-media.Streams_webrtc_audio-screens-grid {
@@ -1819,7 +1823,9 @@
     padding: 0;
     margin: 0;
     width:700px;
+    max-width: 98%;
     left: 0;
+    pointer-events: all;
 }
 .dialog-box.advanced-streaming .dialog-inner{
     height: 100%;
@@ -1838,10 +1844,12 @@
     position: absolute;
     background: #424242;
     z-index: 99999999;
+    border-radius: 5px;
 }
-.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box, .Streams_webrtc_popup-add-video, .Streams_webrtc_popup-add-audio, .Streams_webrtc_popup-box{
+.Streams_webrtc_popup-box{
     padding:10px;
 }
+
 .Streams_webrtc_popup-add-image .Streams_webrtc_popup-box input[type=file],
 .Streams_webrtc_popup-add-video .Streams_webrtc_popup-box input[type=file],
 .Streams_webrtc_popup-add-audio .Streams_webrtc_popup-box input[type=file] {
@@ -1971,7 +1979,14 @@
     background: #282828;
 }
 .Streams_webrtc_popup-scenes-body, .Streams_webrtc_popup-sources-body, .Streams_webrtc_popup-options-body{
-    max-height:250px;
+    height:200px;
+    border-top: 1px solid #383838;
+    flex-grow: 1;
+
+    overflow-y: scroll;
+}
+.Streams_webrtc_popup-scenes-body, .Streams_webrtc_popup-sources-body, .Streams_webrtc_popup-options-body{
+    height:200px;
     border-top: 1px solid #383838;
     flex-grow: 1;
 
@@ -2006,12 +2021,16 @@
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos input[type=text]{
     width: 50px;
 }
-.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg{
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-captionbg,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-font-color {
     margin-top: 10px;
     display: flex;
     align-items: center;
 }
-.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg input{
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg input,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-captionbg input,
+.Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-font-color input{
     margin-left: 10px;
     margin-right: 5px;
 }
@@ -2610,6 +2629,9 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.Streams_webrtc_popup-add-image, .Streams_webrtc_popup-add-video, .Streams_webrtc_popup-add-audio {
+    border-radius: 0;
 }
 Streams_webrtc_mobile-screen .Streams_webrtc_popup-box {
     background: white;
@@ -3478,6 +3500,19 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     -webkit-animation: bounce-middle 0.6s ease 0.2s infinite;
     animation: bounce-middle 0.6s ease 0.2s infinite;
 }
+
+/*horizontal orientation required (for streaming editor)*/
+.Q_webrtc_orientHorizontally {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+}
+
 
 /*page loader*/
 .Streams_webrtc_page-loader-con {

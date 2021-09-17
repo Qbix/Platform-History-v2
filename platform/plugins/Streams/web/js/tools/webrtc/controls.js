@@ -128,9 +128,6 @@
 
 			this.state.onCreate.handle.call(this);
 
-
-
-
 		},
 
 		{
@@ -155,6 +152,7 @@
 				tool.updateControlBar();
 
 				if(tool.controlBar.parentNode == null) tool.element.appendChild(controlBar);
+                tool.hoverTimeout = {settingsPopup: null, audioSettingsPopup: null, participantsPopup: null};
 
 				tool.textChat().init();
 				tool.createSettingsPopup();
@@ -354,7 +352,9 @@
 				});
 				tool.WebRTCLib.event.on('deviceListUpdated', function () {
 					tool.loadCamerasList();
-				});
+                    tool.loadAudioOutputList();
+                    tool.loadAudioInputList();
+                });
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
@@ -1377,6 +1377,8 @@
                         }
 
                         function loadCamerasList () {
+                        	console.log('loadCamerasList')
+                            //location.reload();
                             var count = 1;
 
                             clearCameraList();
@@ -2205,6 +2207,7 @@
 
                             settingsBtn.addEventListener('click', function () {
                                 tool.advancedLiveStreaming.show();
+                                if(tool.settingsPopup != null) tool.settingsPopup.hide();
                             })
 
                             streamingSettingsBtn.addEventListener('click', function () {
@@ -2320,6 +2323,14 @@
                         	createSection: createStreamingAndRecordingSection
 						}
                     }());
+					
+					function show() {
+                        tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                    }
+					
+					function hide() {
+                        tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                    }
 
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
@@ -2332,15 +2343,14 @@
 
                         videoInputListSection.loadCamerasList();
 
-                        tool.hoverTimeout = {setttingsPopup: null, participantsPopup: null};
                         if(!Q.info.isMobile && !Q.info.isTablet) {
                             tool.cameraBtn.addEventListener('mouseenter', function (e) {
                                 tool.hideAllPopups();
-                                if (tool.hoverTimeout.setttingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.setttingsPopup);
-                                    tool.hoverTimeout.setttingsPopup = null;
+                                if (tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
                                 }
-                                tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                                show();
                             });
 
                             tool.cameraBtn.addEventListener('mouseleave', function (e) {
@@ -2348,21 +2358,21 @@
                                     e.stopPropagation();
                                     e.preventDefault();
                                 }
-                                tool.hoverTimeout.setttingsPopup = setTimeout(function () {
-                                    tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
                                 }, 600)
                             });
 
                             settingsPopup.addEventListener('mouseenter', function (e) {
 
-                                if(tool.hoverTimeout.setttingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.setttingsPopup);
-                                    tool.hoverTimeout.setttingsPopup = null;
+                                if(tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
                                 }
                             })
                             settingsPopup.addEventListener('mouseleave', function (e) {
-                                setTimeout(function () {
-                                    tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
                                 }, 600)
 
                             });
@@ -2372,7 +2382,9 @@
 
                     return {
 						createSettingsPopUp: createSettingsPopUp,
-						videoInputListSection: videoInputListSection
+						videoInputListSection: videoInputListSection,
+						show: show,
+						hide: hide
 					}
                 }());
 
@@ -2465,7 +2477,7 @@
                             clearAudioOutputList();
 
                             tool.WebRTCLib.conferenceControl.audioOutputDevices().forEach(function(mediaDevice){
-                            	console.log('loadAudioInputList', mediaDevice);
+                            	console.log('loadAudioOutputList', mediaDevice);
                                 var radioBtnItem = document.createElement('DIV');
                                 radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
                                 radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -3796,7 +3808,7 @@
 									if(callback != null) callback(linkToStream);
 								});
 
-								tool.WebRTCLib.screensInterface.fbLive.startStreaming(createRes.secure_stream_url, 'facebook');
+								tool.WebRTCLib.screensInterface.fbLive.startStreaming([createRes.secure_stream_url], 'facebook');
 							});
 						}
 
@@ -3904,7 +3916,7 @@
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
 
-										tool.WebRTCLib.screensInterface.fbLive.startStreaming(response.secure_stream_url, 'facebook');
+										tool.WebRTCLib.screensInterface.fbLive.startStreaming([response.secure_stream_url], 'facebook');
 										_liveInfo = response;
 										if (callback != null) callback(response);
 									});
@@ -4076,26 +4088,22 @@
 
 			initAdvancedLiveStreaming: function() {
 				var tool = this;
-                var src = Q.url('{{Streams}}/js/tools/webrtc/livestreamingDialogue.js');
-                console.log('livestreamingDialog src', src)
-                var xhr = new XMLHttpRequest();
 
-                xhr.open('GET', src, true);
-                xhr.onload = function(e) {
-                    var script = e.target.response || e.target.responseText;
-                    if (e.target.readyState === 4) {
-                        switch( e.target.status) {
-                            case 200:
-                                var evalResult = eval.apply( tool, [script] );
-                                tool.advancedLiveStreaming = evalResult.init(tool);
-                                console.log('livestreamingDialog evalResult', evalResult)
-                                break;
-                            default:
-                                console.error("ERROR: script not loaded: ", url);
+                Q.activate(
+                    Q.Tool.setUpElement(
+                        "div", // or pass an existing element
+                        "Streams/webrtc/streamingEditor",
+                        {
+                            controlsTool: tool
                         }
+                    ),
+                    {},
+                    function () {
+                    	console.log('Streams/webrtc/streamingEditor', this)
+                        tool.advancedLiveStreaming = this.get();
+
                     }
-                }
-                xhr.send();
+                );
 			},
 
 			closeAllDialogues: function () {
