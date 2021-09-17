@@ -929,6 +929,7 @@
 	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
 	 */
 	Users.logout = function (options) {
+		options = options || {};
 		if (typeof options === 'function') {
 			options = {onSuccess: {'options': options}};
 		}
