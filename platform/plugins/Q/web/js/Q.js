@@ -13766,7 +13766,8 @@ Q.onJQuery.add(function ($) {
 		"Q/video": "{{Q}}/js/tools/video.js",
 		"Q/pdf": "{{Q}}/js/tools/pdf.js",
 		"Q/image": "{{Q}}/js/tools/image.js",
-		"Q/clip": "{{Q}}/js/tools/clip.js"
+		"Q/clip": "{{Q}}/js/tools/clip.js",
+		"Q/floating": "{{Q}}/js/tools/floating.js"
 	});
 	
 	Q.Tool.jQuery({

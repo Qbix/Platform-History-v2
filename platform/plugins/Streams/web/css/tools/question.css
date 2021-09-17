@@ -1,3 +1,6 @@
+.Streams_question_tool {
+    text-align: center;
+}
 .Streams_question_tool input[name=title],
 .Streams_question_tool textarea[name=content] {
     display: block;
@@ -8,7 +11,7 @@
 
 .Streams_question_tool .Streams_question_head {
     border-bottom: 1px solid #000;
-    padding: 0;
+    padding-bottom: 5px;
     line-height: 20px;
 }
 
@@ -23,8 +26,11 @@
     cursor: pointer;
 }
 .Streams_question_tool div.Streams_question_add {
+    display: inline-block;
     margin-top: 5px;
     text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
 .Streams_question_tool i.Streams_question_add {
     background-image: url(../../../Q/img/actions/add.png);
@@ -63,6 +69,7 @@
     display: block;
     padding: 5px;
     margin-bottom: 10px;
+    text-align: left;
 }
 .Streams_dialog_answer .Streams_question_answers input[type=checkbox],
 .Streams_dialog_answer .Streams_question_answers input[type=radio] {

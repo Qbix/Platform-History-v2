@@ -13,6 +13,8 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 	var state = this.state;
 	tool.preview = preview;
 
+	preview.state.editable = false;
+
 	Q.addStylesheet('{{Streams}}/css/tools/previews.css', { slotName: 'Streams' });
 
 	Q.Text.get('Streams/content', function (err, text) {
