@@ -35,7 +35,27 @@ class Q_Bootstrap
 	 */
 	static function registerAutoload()
 	{
-		spl_autoload_register(array('Q', 'autoload'));
+		// Register Q's autoload
+		spl_autoload_register(array('Q', 'autoload'), true, true);
+		// Register SodiumCompat first
+		require_once(Q_CLASSES_DIR.DS.'SodiumCompat'.DS.'autoload.php');
+		// Integrating with Composer first (TODO: think of optimizations)
+		// requires "vendor/autoload.php" from all plugins, implementing PSR-4
+		$composerAutoload = Q_Config::get('Q', 'composer', 'autoload', '*');
+		if (!$composerAutoload) {
+			return;
+		}
+		static $loaded = array();
+		foreach (Q_Bootstrap::plugins() as $name => $path) {
+			if (!empty($loaded[$name])) {
+				continue;
+			}
+			$filename = $path . DS . 'vendor' . DS . 'autoload.php';
+			if (file_exists($filename)) {
+				include_once$filename;
+			};
+			$loaded[$name] = true;
+		}
 	}
 	
 	

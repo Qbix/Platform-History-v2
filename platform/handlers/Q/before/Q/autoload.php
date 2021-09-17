@@ -1,11 +1,7 @@
 <?php
 
 function Q_before_Q_autoload ($params, &$filename)
-{	
-	// TODO: Integrate with Composer
-	// require "vendor/autoload.php", implementing PSR-4
-	// look at optimizations:
-	
+{		
 	// Workaround for Zend Framework, because it has require_once
 	// in various places, instead of just relying on autoloading.
 	// As a result, we need to add some more directories to the path.

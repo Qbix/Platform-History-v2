@@ -182,6 +182,9 @@
 		},
 		"urls": {
 			"skip": ["Q/urls", "Q/uploads"]
+		},
+		"composer": {
+			"autoload": "*"
 		}
 	},
 	"Db": {
