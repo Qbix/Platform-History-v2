@@ -1410,6 +1410,12 @@ class Q_Response
 		$baseUrl = Q_Request::baseUrl();
 		$tags = array();
 		foreach ($stylesheets as $stylesheet) {
+			$rel = 'stylesheet';
+			$href = '';
+			$media = 'screen,print';
+			$type = 'text/css';
+			$hash = null;
+			extract($stylesheet, EXTR_IF_EXISTS);
 			if (Q::startsWith($href, $baseUrl)) {
 				$tail = substr($href, strlen($baseUrl)+1);
 				if (!$skipPreloads) {
@@ -1429,12 +1435,6 @@ class Q_Response
 					}
 				}
 			}
-			$rel = 'stylesheet';
-			$href = '';
-			$media = 'screen,print';
-			$type = 'text/css';
-			$hash = null;
-			extract($stylesheet, EXTR_IF_EXISTS);
 			$attributes = compact('rel', 'type', 'href', 'media');
 			$attributes['data-slot'] = $stylesheet['slot'];
 			$tags[] = Q_Html::tag('link', $attributes, null, compact('hash'));

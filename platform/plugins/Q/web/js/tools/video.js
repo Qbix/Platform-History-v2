@@ -21,6 +21,7 @@
  *  @param {integer} [options.clips.oneSecondPercent=1/6] How much percents one second used on timeline. By default 1/6 - which means 60 seconds will use 10% of timeline.
  *  @param {Integer} [options.positionUpdatePeriod=1] Time period in seconds to check new play position.
  *  @param {boolean} [options.autoplay=false] If true - start play on load
+ *  @param {boolean} [options.loop=false] 
  *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
  */
 Q.Tool.define("Q/video", function (options) {
@@ -133,7 +134,7 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
-			var start = state.start || state.clipStart;
+			var start = state.start || state.clipStart || 0;
 			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
 
 			var videoId = state.url.match(/\/videos?\/([0-9]+).*$/);
@@ -230,6 +231,7 @@ Q.Tool.define("Q/video", function (options) {
 {
 	url: null,
 	autoplay: false,
+	loop: false,
 	throttle: 10,
 	currentPosition: 0,
 	className: null,
@@ -418,6 +420,7 @@ Q.Tool.define("Q/video", function (options) {
 
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
+			loop: state.loop ? 'loop' : '',
 			timeOut: state.adsTimeOut
 		}, function (err, html) {
 			tool.element.innerHTML = html;
@@ -1017,7 +1020,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} playsinline webkit-playsinline />'
+	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} playsinline webkit-playsinline />'
 );
 
 Q.Template.set("Q/video/skip",

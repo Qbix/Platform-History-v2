@@ -3782,7 +3782,15 @@ abstract class Streams extends Base_Streams
 			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
 			if ($label) {
-				$invite->extra = compact($label);
+				if (Q::isAssociative($label)) {
+					$label = json_encode($label);
+				} elseif (is_array($label)) {
+					$label = json_encode(array("label" => $label));
+				} else {
+					$label = compact("label");
+				}
+
+				$invite->extra = $label;
 			}
 			$invite->save();
 			$return['invite'] = $invite->exportArray();

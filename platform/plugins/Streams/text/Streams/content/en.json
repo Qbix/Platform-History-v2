@@ -491,7 +491,7 @@
         "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "free answer...",
+        "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
         "AddAnotherAnswer": "Add another answer",
@@ -499,7 +499,8 @@
         "AlreadyAnswered": "Already answered",
         "TitlePlaceholder": "Type your question",
         "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required"
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
         "NewExperience": "New Experience",
