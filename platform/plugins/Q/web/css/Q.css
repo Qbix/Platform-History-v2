@@ -218,7 +218,7 @@ body.Q_preventScroll {
 	cursor: default;
 	background: #444; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); /* for IE */
-	background: linear-gradient(top,  #444,  #111);
+	background: linear-gradient( #444,  #111);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -325,12 +325,12 @@ body.Q_preventScroll {
 	background: #444; /* for non-css3 browsers */
 
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#333222'); /* for IE */
-	background: linear-gradient(top,  #444,  #333);
+	background: linear-gradient( #444,  #333);
 }
 .Q_touchscreen .Q_button {
 	box-shadow: 0 0 5px rgba(50,50,50,0.5);
 }
-.Q_button:disabled { cursor: default; background: linear-gradient(top,  #AAA,  #888); opacity: 0.8; }
+.Q_button:disabled { cursor: default; background: linear-gradient( #AAA,  #888); opacity: 0.8; }
 .Q_button img { vertical-align: middle; margin-right: 5px; }
 
 .Q_button:focus,
@@ -350,9 +350,9 @@ body.Q_preventScroll {
 	color: #fff;
 }
 .Q_notTouchscreen button:hover:disabled,
-.Q_button:hover:disabled { cursor: default; background: linear-gradient(top,  #AAA,  #888); }
+.Q_button:hover:disabled { cursor: default; background: linear-gradient( #AAA,  #888); }
 button:focus:disabled,
-.Q_button:focus:disabled { cursor: default; background: linear-gradient(top,  #AAA,  #888); }
+.Q_button:focus:disabled { cursor: default; background: linear-gradient( #AAA,  #888); }
 button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
@@ -367,7 +367,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_button.Q_aspect_who {
 	background: #394ad5; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#394ad5', endColorstr='#2839c4'); /* for IE */
-	background: linear-gradient(top,  #394ad5,  #2839c4); /* for firefox 3.6+ */
+	background: linear-gradient( #394ad5,  #2839c4); /* for firefox 3.6+ */
 	color: white;
 }
 .Q_button.Q_aspect_who:active,
@@ -379,7 +379,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_button.Q_aspect_what {
 	background: #bf1118; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bf1118', endColorstr='#72090d'); /* for IE */
-	background: linear-gradient(top,  #bf1118,  #a10e14); /* for firefox 3.6+ */
+	background: linear-gradient( #bf1118,  #a10e14); /* for firefox 3.6+ */
 	color: white;
 }
 .Q_button.Q_aspect_what:active,
@@ -392,7 +392,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_button.Q_aspect_where {
 	background: #737373; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#737373', endColorstr='#626262'); /* for IE */
-	background: linear-gradient(top,  #737373,  #626262); /* for firefox 3.6+ */
+	background: linear-gradient( #737373,  #626262); /* for firefox 3.6+ */
 	color: white;
 }
 .Q_button.Q_aspect_info:active,
@@ -405,7 +405,7 @@ button.basic16 { background-color: #eee; color: black; }
 .Q_button.Q_aspect_when {
 	background: #449944; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#449944', endColorstr='#196019'); /* for IE */
-	background: linear-gradient(top,  #449944,  #338833); /* for firefox 3.6+ */
+	background: linear-gradient( #449944,  #338833); /* for firefox 3.6+ */
 	color: white;
 }
 .Q_button.Q_aspect_when:active,
