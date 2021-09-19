@@ -151,17 +151,17 @@ Email
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email {
 	background-color: #8a5900;
-	background: -moz-linear-gradient(top, #b57500, #8a5900);
-	background: -webkit-linear-gradient(top, #b57500, #8a5900);
+	background: -moz-linear-gradient(#b57500, #8a5900);
+	background: -webkit-linear-gradient(#b57500, #8a5900);
 	border: 1px solid #8a5900;
 	text-shadow: 0 -1px -1px #613400;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email:hover {
 	background-color: #b57500; /* fallback color */
-	background: -moz-linear-gradient(top, #8a5900, #b57500);
-	background: -ms-linear-gradient(top, #8a5900, #b57500);
-	background: -webkit-linear-gradient(top, #8a5900, #b57500);
+	background: -moz-linear-gradient(#8a5900, #b57500);
+	background: -ms-linear-gradient(#8a5900, #b57500);
+	background: -webkit-linear-gradient(#8a5900, #b57500);
 }
 
 .Streams_invite_dialog .Streams_invite_button_email .Streams_invite_social_icons {
@@ -173,18 +173,18 @@ Text
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
 	background: #227722;
-	background: -ms-linear-gradient(top, #449944, #227722);
-	background: -moz-linear-gradient(top, #449944, #227722);
-	background: -webkit-linear-gradient(top, #449944, #227722);
+	background: -ms-linear-gradient(#449944, #227722);
+	background: -moz-linear-gradient(#449944, #227722);
+	background: -webkit-linear-gradient(#449944, #227722);
 	border: 1px solid #227722;
 	text-shadow: 0 -1px -1px #114c11;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text:hover {
 	background-color: #449944; /* fallback color */
-	background: -moz-linear-gradient(top, #227722, #449944);
-	background: -ms-linear-gradient(top, #227722, #449944);
-	background: -webkit-linear-gradient(top, #227722, #449944);
+	background: -moz-linear-gradient(#227722, #449944);
+	background: -ms-linear-gradient(#227722, #449944);
+	background: -webkit-linear-gradient(#227722, #449944);
 }
 
 .Streams_invite_dialog .Streams_invite_button_text .Streams_invite_social_icons {
@@ -196,18 +196,18 @@ Facebook
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_facebook {
 	background-color: #2b4170; /* fallback color */
-	background: -moz-linear-gradient(top, #3b5998, #2b4170);
-	background: -ms-linear-gradient(top, #3b5998, #2b4170);
-	background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+	background: -moz-linear-gradient(#3b5998, #2b4170);
+	background: -ms-linear-gradient(#3b5998, #2b4170);
+	background: -webkit-linear-gradient(#3b5998, #2b4170);
 	border: 1px solid #2b4170;
 	text-shadow: 0 -1px -1px #1f2f52;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_facebook:hover {
 	background-color: #3b5998; /* fallback color */
-	background: -moz-linear-gradient(top, #2b4170, #3b5998);
-	background: -ms-linear-gradient(top, #2b4170, #3b5998);
-	background: -webkit-linear-gradient(top, #2b4170, #3b5998);
+	background: -moz-linear-gradient(#2b4170, #3b5998);
+	background: -ms-linear-gradient(#2b4170, #3b5998);
+	background: -webkit-linear-gradient(#2b4170, #3b5998);
 }
 
 .Streams_invite_dialog .Streams_invite_button_facebook .Streams_invite_social_icons {
@@ -219,18 +219,18 @@ Twitter
 ------------------------------------------------------------ */
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_twitter {
 	background-color: #0081ce; /* fallback color */
-	background: -moz-linear-gradient(top, #00aced, #0081ce);
-	background: -ms-linear-gradient(top, #00aced, #0081ce);
-	background: -webkit-linear-gradient(top, #00aced, #0081ce);
+	background: -moz-linear-gradient(#00aced, #0081ce);
+	background: -ms-linear-gradient(#00aced, #0081ce);
+	background: -webkit-linear-gradient(#00aced, #0081ce);
 	border: 1px solid #0081ce;
 	text-shadow: 0 -1px -1px #005ea3;
 }
 
 .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_twitter:hover {
 	background-color: #00aced; /* fallback color */
-	background: -moz-linear-gradient(top, #0081ce, #00aced);
-	background: -ms-linear-gradient(top, #0081ce, #00aced);
-	background: -webkit-linear-gradient(top, #0081ce, #00aced);
+	background: -moz-linear-gradient(#0081ce, #00aced);
+	background: -ms-linear-gradient(#0081ce, #00aced);
+	background: -webkit-linear-gradient(#0081ce, #00aced);
 }
 
 .Streams_invite_dialog .Streams_invite_button_twitter .Streams_invite_social_icons {
