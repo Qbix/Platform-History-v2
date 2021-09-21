@@ -195,7 +195,7 @@ class Users_Vote extends Base_Users_Vote
 			$usersVote->forType = $type;
 			$usersVote->forId = $forId;
 			$usersVote->value = 1;
-			if (!$usersVote->retrieve()) {
+			if (!$usersVote->retrieve(null, false, array("ignoreCache" => true))) {
 				$usersVote->save();
 			}
 		}
