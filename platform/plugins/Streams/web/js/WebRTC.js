@@ -7542,6 +7542,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
             _roomStream.leave();
             WebRTCconference.disconnect();
+
+            if(Q.Socket.getAll()['/webrtc']) {
+                Q.Socket.getAll()['/webrtc'] = null;
+            }
+
             _options.streams = null;
             if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
             if(_controls != null) {

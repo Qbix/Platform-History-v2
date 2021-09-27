@@ -11824,6 +11824,8 @@ window.WebRTCRoomClient = function app(options){
             //let io = io('/webrtc');
             var secure = options.nodeServer.indexOf('https://') == 0;
             if(old) {
+                log('initWithNodeJs: connect old', io.connect);
+
                 socket = io.connect('/webrtc', options.nodeServer, function (io) {
                     log('initWithNodeJs: connect socket', io);
 
@@ -11848,10 +11850,14 @@ window.WebRTCRoomClient = function app(options){
                         app.state = 'reconnecting';
                         app.event.dispatch('reconnectAttempt', e);
                     });
+                }, function () {
+                    log('initWithNodeJs: connect old callback 2');
+
                 });
-                log('initWithNodeJs: connect socket', socket);
 
             } else {
+                log('initWithNodeJs: connect new');
+
                 socket = io.connect(options.nodeServer + '/webrtc', {
                     transports: ['websocket'],
                     // path: options.roomName,
