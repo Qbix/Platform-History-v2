@@ -331,6 +331,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 			width: container_span.outerWidth() + 'px'
 		});
 		event && event.preventDefault && event.preventDefault();
+		return false;
 	};
 	function onSave () {
 		var form = $('.Q_inplace_tool_form', $te);

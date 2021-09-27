@@ -97,7 +97,6 @@ require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');
 require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Query.php');
 require_once(Q_CLASSES_DIR.DS.'PasswordCompat'.DS.'password.php');
 require_once(Q_CLASSES_DIR.DS.'RandomCompat'.DS.'random.php');
-require_once(Q_CLASSES_DIR.DS.'SodiumCompat'.DS.'autoload.php');
 
 //
 // Set things up
@@ -107,8 +106,8 @@ Q::milliseconds();
 Q_Bootstrap::registerShutdownFunction();
 Q_Bootstrap::setDefaultTimezone();
 Q_Bootstrap::setIncludePath();
-Q_Bootstrap::registerAutoload();
 Q_Bootstrap::defineFunctions();
+Q_Bootstrap::registerAutoload();
 Q_Bootstrap::registerExceptionHandler();
 Q_Bootstrap::registerErrorHandler();
 Q_Bootstrap::revertSlashes();

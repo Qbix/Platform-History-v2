@@ -15,6 +15,7 @@ use RuntimeException;
 use InvalidArgumentException;
 use stdClass;
 use kornrunner\Keccak;
+class_alias('phpseclib3\Math\BigInteger', 'phpseclib\Math\BigInteger');
 use phpseclib\Math\BigInteger as BigNumber;
 
 class Utils
@@ -293,7 +294,7 @@ class Utils
      * 
      * @param BigNumber|string $number
      * @param string $unit
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public static function toWei($number, $unit)
     {
@@ -381,7 +382,7 @@ class Utils
      * 
      * @param BigNumber|string|int $number
      * @param string $unit
-     * @return \phpseclib\Math\BigInteger
+     * @return \phpseclib3\Math\BigInteger
      */
     public static function fromWei($number, $unit)
     {
@@ -484,7 +485,7 @@ class Utils
      * Change number or number string to bignumber.
      * 
      * @param BigNumber|string|int $number
-     * @return array|\phpseclib\Math\BigInteger
+     * @return array|\phpseclib3\Math\BigInteger
      */
     public static function toBn($number)
     {

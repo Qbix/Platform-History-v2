@@ -777,7 +777,7 @@ class Q_Utils
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
-	 * @param {string} [$header=null] Optional string to replace the entire POST header
+	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
 	 * 
@@ -803,7 +803,7 @@ class Q_Utils
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
-	 * @param {string} [$header=null] Optional string to replace the entire POST header
+	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @return {string|false} The response, or false if not received
 	 *
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -827,7 +827,7 @@ class Q_Utils
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
-	 * @param {string} [$header=null] Optional string to replace the entire GET header
+	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @return {string|false} The response, or false if not received
 	 * 
@@ -855,7 +855,7 @@ class Q_Utils
 	 * @param {array|string} $data The data content to post or an array of ($field => $value) pairs
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
 	 * @param {string} [$curl_opts=array()] Any curl options you want define obviously. These options will rewrite default.
-	 * @param {string} [$header=null] Optional string to replace the entire header
+	 * @param {string|array} [$header=null] Set the headers, if any, here instead of curl_opts
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
 	 *  called with the CURL handle before it's closed, if CURL was used.

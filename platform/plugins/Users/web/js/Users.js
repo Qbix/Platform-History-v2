@@ -982,6 +982,7 @@
 	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
 	 */
 	Users.logout = function (options) {
+		options = options || {};
 		if (typeof options === 'function') {
 			options = {onSuccess: {'options': options}};
 		}
@@ -1087,14 +1088,19 @@
 		}
 		Users.disconnect.wallet.occurring = true;
 		var p = Users.Wallet.provider;
-		(new window.Web3Modal.default).clearCachedProvider();
+		if (window.Web3Modal && Web3Modal.default) {
+			var w = new window.Web3Modal.default;
+			if (w.clearCachedProvider) {
+				w.clearCachedProvider();
+			}
+		}
 		if (!p) {
 			Q.handle(callback);
 			return false;
 		}
 	    if (p.close) {
 			p.close().then(function (result) {
-				delete Users.connected.facebook;
+				delete Users.connected.wallet;
 				Users.Wallet.provider = null;
 				setTimeout(function () {
 					Users.disconnect.wallet.occurring = false;
@@ -1108,7 +1114,7 @@
 			if (p._handleDisconnect) {
 				p._handleDisconnect();
 			}
-			delete Users.connected.facebook;
+			delete Users.connected.wallet;
 			Users.Wallet.provider = null;
 			Q.handle(callback);
 			Users.disconnect.wallet.occurring = false;

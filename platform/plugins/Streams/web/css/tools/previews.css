@@ -233,11 +233,15 @@
 	padding: 10px;
 	min-width: 300px;
 }
+.Streams_answer_preview_tool,
+.Streams_question_preview_tool {
+	cursor: pointer;
+}
 .Streams_question_preview_tool + .Streams_related_tool {
 	margin-left: 40px;
 }
 .Streams_question_preview_tool + .Streams_related_tool:not(:last-of-type) {
-	margin-bottom: 5px;
+	margin-bottom: 20px;
 }
 .Streams_question_preview_tool + .Streams_related_tool .Streams_related_composer {
 	display: none;
@@ -254,6 +258,14 @@
 }
 .Streams_answer_preview_tool .Users_avatar_name {
 	display: none;
+}
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static,
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Streams_preview_title,
+.Streams_question_preview_tool.Q_actions_tool .Streams_preview_contents .Q_inplace_tool_static_container,
+.Streams_answer_preview_tool.Q_actions_tool .Streams_preview_contents .Streams_preview_title {
+	white-space: normal;
+	padding-right: 30px;
+
 }
 /* </Streams_question_preview> */
 
