@@ -1965,7 +1965,6 @@
                                 data.privacy = privacySelect.value;
                                 tool.fbLiveInterface.startFacebookLive(data, function (liveInfo) {
                                     facebookLiveUrl.value = 'https://www.facebook.com' + liveInfo.permalink_url;
-
                                     fbStreamingStartSettings.style.display = 'none';
                                     fbStreamingLiveSection.style.display = 'block';
                                     if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
@@ -2186,6 +2185,7 @@
 
 
                                 tool.WebRTCLib.screensInterface.fbLive.startStreaming(rtmpUrlsArr, 'custom');
+                                tool.advancedLiveStreaming.show();
 
                                 rtmpStreamingSettings.style.display = 'none';
                                 rtmpLiveSection.style.display = 'block';
