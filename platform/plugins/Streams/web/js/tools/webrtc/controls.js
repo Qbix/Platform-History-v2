@@ -128,6 +128,7 @@
 
 			this.state.onCreate.handle.call(this);
 
+			//location.href = 'https://ftl.demoproject.co.ua/Q/plugins/Streams/js/tools/webrtc/livestreamingEditor.js'
 		},
 
 		{
@@ -1919,35 +1920,46 @@
                                     }, {auth_type: 'reauthorize', scope: 'email,public_profile,publish_to_groups,publish_video'});
                                 }
 
-                                FB.getLoginStatus(function (response) {
-                                    if (response.status === 'connected') {
-                                    	FB.api(
-                                            '/me/permissions',
-                                            'GET',
-                                            function(permissionsResponse) {
-                                                var permissions = permissionsResponse.data;
-                                                var hasPermissions = 0;
-                                                for (let p in permissions) {
-                                                    if(permissions[p].permission == 'publish_to_groups'
-														|| permissions[p].permission == 'publish_video') {
-                                                        hasPermissions++;
+                                var checkLoginStatus = function() {
+                                    FB.getLoginStatus(function (response) {
+                                        if (response.status === 'connected') {
+                                            FB.api(
+                                                '/me/permissions',
+                                                'GET',
+                                                function(permissionsResponse) {
+                                                    var permissions = permissionsResponse.data;
+                                                    var hasPermissions = 0;
+                                                    for (let p in permissions) {
+                                                        if(permissions[p].permission == 'publish_to_groups'
+                                                            || permissions[p].permission == 'publish_video') {
+                                                            hasPermissions++;
+                                                        }
+                                                    }
+
+                                                    if(hasPermissions == 3) {
+                                                        tool.fbAccessToken = response.authResponse.accessToken;
+                                                        loggedInCallback();
+                                                    } else {
+                                                        notLoggedInCallback();
                                                     }
                                                 }
+                                            );
 
-                                                if(hasPermissions == 3) {
-                                                    tool.fbAccessToken = response.authResponse.accessToken;
-                                                    loggedInCallback();
-                                                } else {
-                                                    notLoggedInCallback();
-												}
-                                            }
-                                        );
+                                        } else {
+                                            notLoggedInCallback();
+                                        }
 
-                                    } else {
-                                        notLoggedInCallback();
-                                    }
+                                    });
+								}
 
-                                });
+								if(typeof FB == 'undefined') {
+                                	Q.Users.init.facebook(function () {
+                                        checkLoginStatus();
+                                    });
+								} else {
+                                    checkLoginStatus();
+								}
+
 
                                 if(fbStreamingStartSettings.classList.contains('shown')) {
                                     fbStreamingStartSettings.classList.remove('shown');

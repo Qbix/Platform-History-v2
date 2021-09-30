@@ -3892,11 +3892,23 @@
                     if(Q.info.isMobile) controlsTool.show();
                 }
 
+                function showHorizontalRequired() {
+                    var horizontalRequiredCon = document.createElement('DIV')
+                    horizontalRequiredCon.className = 'Q_webrtc_orientHorizontally Q_orientHorizontally Q_floatAboveDocument';
+                    horizontalRequiredCon.style.zIndex = '9999999999999999999999999999999999999999';
+                    document.body.appendChild(horizontalRequiredCon);
+                }
+
+                function hideHorizontalRequired() {
+                    var horizontalRequiredCon = document.querySelector('.Q_webrtc_orientHorizontally');
+                    if(horizontalRequiredCon && horizontalRequiredCon.parentNode != null) horizontalRequiredCon.parentNode.removeChild(horizontalRequiredCon) ;
+                }
+
                 function show() {
                     var dialogue, previewBox;
                     if(Q.info.isMobile){
                         if(window.innerWidth > window.innerHeight) {
-
+                            console.log('show horizontal')
                             if(mobileHorizontaldialogueEl == null) {
                                 mobileHorizontaldialogueEl = createPopupHorizontalMobile();
                             }
@@ -3904,18 +3916,33 @@
                             dialogue = mobileHorizontaldialogueEl.dialogueEl;
                             previewBox = mobileHorizontaldialogueEl.previewBoxEl;
                             activeDialogue = mobileHorizontaldialogueEl;
+                            function resizeHandler() {
+                                setTimeout(function () {
+                                    if(!dialogue.classList.contains('Streams_webrtc_hidden') && window.innerWidth < window.innerHeight) {
+                                        hide();
+                                        show();
+                                    }
+                                }, 1600)
+                                window.removeEventListener('resize', resizeHandler);
+
+                            }
+                            window.addEventListener('resize', resizeHandler);
+
+
                         } else {
-                            var horizontalRequiredCon = document.createElement('DIV')
-                            horizontalRequiredCon.className = 'Q_webrtc_orientHorizontally Q_orientHorizontally Q_floatAboveDocument';
-                            horizontalRequiredCon.style.zIndex = '9999999999999999999999999999999999999999';
-                            document.body.appendChild(horizontalRequiredCon);
+                            console.log('show vertical')
+
+                            showHorizontalRequired();
 
                             function resizeHandler() {
                                 setTimeout(show, 1600)
-                                if(horizontalRequiredCon.parentNode != null) horizontalRequiredCon.parentNode.removeChild(horizontalRequiredCon) ;
+                                hideHorizontalRequired();
                                 window.removeEventListener('resize', resizeHandler);
                             }
                             window.addEventListener('resize', resizeHandler);
+                            if(typeof screen != 'undefined' && screen.orientation != null) {
+                                screen.orientation.addEventListener("change", resizeHandler);
+                            }
                         }
 
                         if(mobileHorizontaldialogueEl == null) return;
@@ -3932,7 +3959,7 @@
 
 
 
-                    if(dialogue.classList.contains('Streams_webrtc_hidden')) {
+                    if(dialogue && dialogue.classList.contains('Streams_webrtc_hidden')) {
                         controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
 
                         dialogue.classList.remove('Streams_webrtc_hidden');
