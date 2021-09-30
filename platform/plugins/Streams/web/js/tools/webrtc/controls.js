@@ -1969,7 +1969,7 @@
                                     fbStreamingLiveSection.style.display = 'block';
                                     if(fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
                                     fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.textes);
-
+                                    tool.advancedLiveStreaming.show();
                                 });
                             })
                             stopStreamingBtn.addEventListener('click', function () {
