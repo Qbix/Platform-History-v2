@@ -125,12 +125,12 @@
 	border: 1px solid #ccc;
 	cursor: pointer;
 	font-family: Arial;
-	width: 30px;
-	height: 30px;
+	width: 40px;
+	height: 40px;
 	color: #3f76e6;
 	background-color: #fff;
 	font-size: 45px;
-	line-height: 30px;
+	line-height: 40px;
 	text-align: center;
 }
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon,
@@ -265,7 +265,7 @@
 	display: block;
 	padding: 6px;
 	margin-left: 50px;
-	height: 30px;
+	height: 40px;
 	color: black;
 }
 .Streams_chat_composer input[type=text] {
@@ -274,10 +274,10 @@
 	display: block;
 	padding: 6px;
 	margin-left: 35px;
-	height: 30px;
+	height: 40px;
 	width: calc(100% - 35px);
 	color: black;
-	padding-right: 30px;
+	padding-right: 40px;
 }
 .Streams_chat_composer .Streams_chat_submit,
 .Streams_chat_composer .Streams_chat_call,
