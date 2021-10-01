@@ -337,6 +337,11 @@
 	
 	Users.authenticate.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = Q.extend(Users.authenticate.wallet.options, options);
+		var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
+		if (Q.isEmpty(supportedNetwork)) {
+			return Q.alert("Config exception! Please define chain network");
+		}
+
 		Users.init.wallet(function () {
 			try {
 				var wsr_json = Q.cookie('wsr_1');
@@ -445,13 +450,47 @@
 							.catch(_cancel);
 					    }
 						function _proceed(signature) {
-							_doAuthenticate({
-								xid: accounts[0],
-								payload: payload,
-								signature: signature,
-								platform: 'wallet',
-								chainId: provider.chainId
-							}, platform, platformAppId, onSuccess, onCancel, options);
+					    	var _authenticate = function () {
+								_doAuthenticate({
+									xid: accounts[0],
+									payload: payload,
+									signature: signature,
+									platform: 'wallet',
+									chainId: provider.chainId
+								}, platform, platformAppId, onSuccess, onCancel, options);
+							};
+
+							// check network connected
+							if (window.ethereum.chainId === supportedNetwork.chainId) {
+								_authenticate();
+							} else {
+								//return Q.alert("Please use " + supportedNetwork.name + " network to work with app");
+								provider.request({
+									method: 'wallet_switchEthereumChain',
+									params: [{chainId: supportedNetwork.chainId}]
+								}).then(_authenticate).catch(function (e) {
+									if (e.code === 4902) {
+										console.log('chain is not added');
+										provider.request({
+											method: 'wallet_addEthereumChain',
+											params: [{
+												chainId: supportedNetwork.chainId,
+												chainName: supportedNetwork.name,
+												nativeCurrency: {
+													name: supportedNetwork.currency.name,
+													symbol: supportedNetwork.currency.symbol,
+													decimals: supportedNetwork.currency.decimals
+												},
+												rpcUrls: supportedNetwork.rpcUrls,
+												blockExplorerUrls: supportedNetwork.blockExplorerUrls
+											}]
+										}).then(_proceed).catch((error) => {
+											console.log(error)
+										});
+									}
+								});
+							}
+
 						}
 					}).catch(_cancel);
 				}).catch(_cancel);

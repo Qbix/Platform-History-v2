@@ -26,6 +26,7 @@ function Users_before_Q_responseExtras()
 		$setIdentifierOptions = Q::take($loginOptions, array('identifierType'));
 		Q_Response::setScriptData('Q.plugins.Users.setIdentifier.serverOptions', $setIdentifierOptions);
 	}
+	Q_Response::setScriptData('Q.plugins.Users.Wallet.network', Q_Config::get("Users", "apps", "wallet", Users::communityId(), "network", null));
 	Q_Response::setScriptData('Q.plugins.Users.communityId', Users::communityId());
 	Q_Response::setScriptData('Q.plugins.Users.communityName', Users::communityName());
 	Q_Response::setScriptData('Q.plugins.Users.communitySuffix', Users::communitySuffix());
