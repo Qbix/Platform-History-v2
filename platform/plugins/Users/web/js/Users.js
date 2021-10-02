@@ -337,11 +337,6 @@
 	
 	Users.authenticate.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
 		options = Q.extend(Users.authenticate.wallet.options, options);
-		var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
-		if (Q.isEmpty(supportedNetwork)) {
-			return Q.alert("Config exception! Please define chain network");
-		}
-
 		Users.init.wallet(function () {
 			try {
 				var wsr_json = Q.cookie('wsr_1');
@@ -460,34 +455,37 @@
 								}, platform, platformAppId, onSuccess, onCancel, options);
 							};
 
-							// check network connected
-							if (window.ethereum.chainId === supportedNetwork.chainId) {
+							// check if network is connected
+							var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
+							if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
 								_authenticate();
 							} else {
-								//return Q.alert("Please use " + supportedNetwork.name + " network to work with app");
 								provider.request({
 									method: 'wallet_switchEthereumChain',
 									params: [{chainId: supportedNetwork.chainId}]
-								}).then(_authenticate).catch(function (e) {
-									if (e.code === 4902) {
-										console.log('chain is not added');
-										provider.request({
-											method: 'wallet_addEthereumChain',
-											params: [{
-												chainId: supportedNetwork.chainId,
-												chainName: supportedNetwork.name,
-												nativeCurrency: {
-													name: supportedNetwork.currency.name,
-													symbol: supportedNetwork.currency.symbol,
-													decimals: supportedNetwork.currency.decimals
-												},
-												rpcUrls: supportedNetwork.rpcUrls,
-												blockExplorerUrls: supportedNetwork.blockExplorerUrls
-											}]
-										}).then(_proceed).catch((error) => {
-											console.log(error)
-										});
+								}).then(_authenticate)
+								.catch(function (e) {
+									if (e.code !== 4902) {
+										return;
 									}
+									console.warn('Users.authenticate.wallet: chain ' 
+										     + supportedNetwork.chainId + ' is not added');
+									provider.request({
+										method: 'wallet_addEthereumChain',
+										params: [{
+											chainId: supportedNetwork.chainId,
+											chainName: supportedNetwork.name,
+											nativeCurrency: {
+												name: supportedNetwork.currency.name,
+												symbol: supportedNetwork.currency.symbol,
+												decimals: supportedNetwork.currency.decimals
+											},
+											rpcUrls: supportedNetwork.rpcUrls,
+											blockExplorerUrls: supportedNetwork.blockExplorerUrls
+										}]
+									}).then(_proceed).catch((error) => {
+										console.log(error)
+									});
 								});
 							}
 
