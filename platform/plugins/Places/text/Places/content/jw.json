@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ing {{1}}"
+    },
+    "units": {
+        "meter": "meter",
+        "meters": "meter",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mil",
+        "miles": "mil",
+        "mi": "mi",
+        "foot": "sikil",
+        "feet": "sikil",
+        "inches": "inci"
+    },
+    "location": {
+        "interested": "Aku kasengsem karo kedadeyan ing {{select}} saka",
+        "update": "Anyari Lokasi Aku",
+        "set": "Setel Lokasi Kula",
+        "prompt": "{{ClickOrTap}} ing kene kanggo<br> atur sampeyan<br> lokasi",
+        "myCurrentLocation": "Lokasi saiki",
+        "enterAddress": "Ketik alamat",
+        "enterPostcode": "Ketik kode pos \/ kode pos",
+        "create": {
+            "action": "Tambah Lokasi",
+            "title": "Lokasi Anyar",
+            "nameYourLocation": "Jeneng lokasi sampeyan"
+        },
+        "confirm": {
+            "title": "Simpen lokasi iki?",
+            "message": "Apa sampeyan rencana nggunakake lokasi iki maneh mbesuk?",
+            "ok": "Nggih",
+            "cancel": "Ora"
+        },
+        "add": {
+            "title": "Jeneng lokasi iki",
+            "placeholder": "Omah, Makarya lsp.",
+            "ok": "Ngirit"
+        },
+        "dialog": {
+            "title": "Pilih Lokasi"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Apa area ing lokasi iki?",
+        "newArea": "Area anyar",
+        "promptTitle": "Ketik jeneng kanggo wilayah kasebut:",
+        "absent": "Mangga atur area",
+        "error": "Kesalahan",
+        "exist": "Area wis ana",
+        "addNewArea": "Tambah wilayah anyar",
+        "add": "Tambah"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kumpulan lokasi",
+            "displayType": "Lokasi"
+        },
+        "Places\/location": {
+            "description": "Makili bangunan, papan, kapal, taman, lsp.",
+            "displayType": "Lokasi"
+        },
+        "Places\/area": {
+            "description": "Makili area ing lokasi, kayata kamar utawa suite",
+            "displayType": "Area"
+        },
+        "Places\/floor": {
+            "description": "Makili lantai ing bangunan utawa kapal",
+            "displayType": "Lantai"
+        },
+        "Places\/column": {
+            "description": "Makili kolom ing bangunan utawa kapal",
+            "displayType": "Kolom"
+        },
+        "Places\/nearby": {
+            "description": "Kategori kanggo samubarang jarak geohash tartamtu",
+            "displayType": "Cedhak karo panggonan"
+        },
+        "Places\/interest": {
+            "description": "Kategori kanggo samubarang jarak geohash tartamtu, cocog karo minat",
+            "displayType": "Kapentingan panggonan"
+        }
+    }
+}

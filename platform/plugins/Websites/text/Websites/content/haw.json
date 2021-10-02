@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Loulou e paipai",
+                "startDate": "Lā Hoʻomaka",
+                "startTime": "Manawa Hoʻomaka",
+                "endDate": "Lā Hoʻomaha",
+                "endTime": "Manawa Pau",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Kānana ma ka hoihoi",
+                "FilterInterests": "E hoʻomaka e kikokiko i kahi hoihoi ..."
+            },
+            "Interest": "Hoihoi",
+            "Location": "Kahi"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Hele",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Mākaʻikaʻi",
+            "WriteToStartConversation": "Kākau i kou mau manaʻo e hoʻomaka i ke kamaʻilio ʻana",
+            "StartConversation": "Hoʻomaka Kamaʻilio",
+            "GotoConversation": "E hele i ke kamaʻilio",
+            "reset": "Hoʻihoʻi hou",
+            "edit": "Hoʻoponopono",
+            "link": "Loulou",
+            "setUrl": "Hoʻonohonoho URL",
+            "save": "Mālama",
+            "setClip": "ʻOki ʻoki",
+            "invalidURL": "Hewa URL"
+        },
+        "FileTooLarge": "Nui loa ka faila no ka ahu hoʻokoe. Ka nui o ka faile {{size}}",
+        "InvalidPDF": "ʻAʻole kūpono ka faile ma PDF",
+        "StartTypingTitleOrKeywords": "E hoʻomaka i ka kikokiko ʻana i ka poʻo inoa a i ʻole nā huaʻōlelo nui ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "He palapala HTML i hiki i nā mea hoʻohana like ʻole ke nānā a hoʻoponopono",
+            "displayType": "Paukū"
+        },
+        "Websites\/slide": {
+            "description": "ʻO kahi pāheʻe i kahi hōʻike, hiki ke hoʻokomo iā HTML, nā leo a pēlā aku.",
+            "displayType": "Pāheʻe"
+        },
+        "Websites\/presentation": {
+            "description": "ʻO kahi hōʻike e pili ana i nā pāheʻe like ʻole",
+            "displayType": "Hōʻike"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ʻO kahi ʻāpana hoʻolaha ma kahi pūnaewele",
+            "displayType": "ʻĀpana hoʻolaha"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Ke ala o ka hōʻuluʻulu ʻana i nā ʻāpana hoʻolaha ma lalo o kahi inoa",
+            "displayType": "Hoʻonoho hoʻolaha"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ʻImi no kahi hoʻolaha",
+            "displayType": "Hoʻolālā hoʻolaha"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "He hoʻolaha hoʻolaha",
+            "displayType": "Hoʻolaha hoʻolaha"
+        },
+        "Websites\/webpage": {
+            "description": "Hōʻike i kahi pūnaewele nona ka metadata i wili ʻia",
+            "displayType": "ʻAoʻao pūnaewele"
+        }
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Toccate per pagà"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: carica trattata per {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Grazie per u vostru pagamentu à {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abbunatu à {{plan.title}}",
+        "YouSubscribedTo": "Site statu abbonatu à {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Uttenite u pagamentu di {{displayAmount}} da {{call 'publisher.displayName'}} da &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ehi, hè solu per fassi sapè {{1}} hè statu incaricatu {{2}} per {{3}} da {{4}}"
+    },
+    "charged": {
+        "Subject": "Grazie per u vostru pagamentu per &quot;{{description}}&quot;",
+        "HavePaid": "Salute {{1}}, hè solu una cunferma rapida chì avete pagatu bè {{2}} à {{3}} per {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Infurmazione nantu à l&#39;ordine",
+        "PaymentMethod": "Metudu di pagamentu",
+        "ContactInfo": "Infurmazioni di cuntattu",
+        "Pay": "Pagà"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitu accettatu da {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Avete {{amount}} crediti per cumincià",
+        "PaymentFor": "Pagamentu per &quot;{{1}}&quot;",
+        "PaymentTo": "Pagamentu à {{1}}",
+        "PaymentToUser": "Pagamentu à {{toUserName}}",
+        "CreatePaidStream": "per creà {{toStreamName}}",
+        "JoinedPaidStream": "per riservazione in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "per creà a cumunità &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "cum&#39;è rimbursu di riservazione in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Cumpratu {{amount}} crediti",
+        "BonusCredits": "Bonus {{amount}} crediti",
+        "BuyAmountCredits": "Cumprate crediti {{amount}}",
+        "WatchClip": "Guadagnatu {{amount}} crediti per fighjà {{fromStreamTitle}}",
+        "MissingCredits": "Crediti mancanti",
+        "YouMissingCredits": "Avete bisognu di {{amount}} crediti addiziunali per prucede.",
+        "BuyCredits": "Cumprate crediti",
+        "BuyBonus": "Cumprà {{amount}} crediti subitu, cunducerà à {{bonus}} bonus di crediti.",
+        "Buy": "Cumprà",
+        "PurchaseCredits": "Cumprà Crediti",
+        "Credits": "Crediti",
+        "ErrorInvalidAmount": "Quantità invalida",
+        "ErrorInvalidCurrency": "Sfurtunatamente ùn sustenimu ancu a muneta {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} crediti",
+            "BonusCredits": "{{amount}} crediti"
+        }
+    },
+    "history": {
+        "Date": "Data",
+        "Amount": "Quantità",
+        "Description": "Description",
+        "Client": "Cliente",
+        "To": "à",
+        "From": "da",
+        "SeeHistory": "Vede a storia di pagamentu per {{1}}",
+        "HistoryEmpty": "Ùn avete ancu dati",
+        "PaymentFor": "Mandatu {{amount}} crediti",
+        "PaymentTo": "Mandatu {{amount}} crediti",
+        "PaymentToUser": "Mandatu {{amount}} crediti",
+        "CreatePaidStream": "Spediti {{amount}} crediti",
+        "WatchClip": {
+            "+": "Guadagnatu {{amount}} crediti",
+            "-": "Spediti {{amount}} crediti"
+        },
+        "JoinedPaidStream": {
+            "+": "Guadagnatu {{amount}} crediti",
+            "-": "Spediti {{amount}} crediti"
+        },
+        "LeftPaidStream": {
+            "+": "Ricivutu {{amount}} crediti",
+            "-": "Mandatu {{amount}} crediti"
+        },
+        "CreatedCommunity": "Spediti {{amount}} crediti",
+        "BoughtCredits": "Cumpratu {{amount}} crediti",
+        "BonusCredits": "Avete bonus {{amount}} crediti",
+        "InviteAcceptedBy": "Guadagnatu {{amount}} crediti",
+        "YouHaveCreditsToStart": "Guadagnatu {{amount}} crediti"
+    },
+    "subscriptions": {
+        "infoTitle": "Impostate l&#39;infurmazioni di pagamentu",
+        "confirm": {
+            "title": "Principià Abbunamentu",
+            "message": "Vulete arrugà si à {{title}}?",
+            "ok": "OK",
+            "cancel": "Annulla"
+        },
+        "CreditOrDebitCard": "Carta di creditu o debitu",
+        "SubscribePayment": "Abbunà Pagamentu",
+        "ImmediatePayment": "Pagamentu Immediatu"
+    },
+    "payments": {
+        "infoTitle": "Impostate l&#39;infurmazioni di pagamentu",
+        "BuyAmountCredits": "Cumprate crediti {{amount}}",
+        "confirm": {
+            "title": "Fate un Pagamentu",
+            "message": "Accettate di pagà {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Annulla"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Crediti",
+            "description": "tene traccia di i crediti è di i pagamenti"
+        },
+        "Assets\/plan": {
+            "displayType": "Pianu di sottumissione",
+            "description": "pianu d&#39;abbunamentu"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abbunamentu",
+            "description": "abbunamentu"
+        },
+        "Assets\/product": {
+            "displayType": "Produttu",
+            "description": "pruduttu vindutu"
+        },
+        "Assets\/service": {
+            "displayType": "Serviziu",
+            "description": "serviziu uffertu"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Guadagnatu {{amount}} crediti"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Cumpratu {{amount}} crediti"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} crediti"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Spediti {{amount}} crediti"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Mandatu {{amount}} crediti à {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ricivutu {{amount}} crediti da {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Serviziu Novu",
+            "TitlePlaceholder": "Titulu di serviziu",
+            "PricePlaceholder": "Fissà u prezzu",
+            "LinkPlaceholder": "stabilisce ligame d&#39;infurmazioni addiziunali",
+            "DescriptionPlaceholder": "Descrizzione di serviziu",
+            "SaveService": "Salvà u Serviziu",
+            "SelectRequiredParticipants": "Participanti richiesti"
+        },
+        "ManageServiceTemplates": "Gestite i mudelli di serviziu",
+        "ManageServices": "Gestisce i servizii",
+        "Free": "Gratuitu",
+        "OptionalContribution": "Cuntribuzione facultativa",
+        "RequiredPayment": "Pagamentu necessariu",
+        "AreYouSureDelete": "Site sicuru di vulè sguassà stu serviziu?",
+        "AmountServicesRelated": "Ci hè {{amount}} dispunibilità in relazione à stu serviziu. Sò ancu seranu rimossi."
+    }
+}

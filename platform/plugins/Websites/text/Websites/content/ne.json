@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "प्रचार गर्न को लागी लिंक",
+                "startDate": "सुरू मिति",
+                "startTime": "समय सुरु गर्नुहोस्",
+                "endDate": "अन्त्य मिति",
+                "endTime": "अन्त्य समय",
+                "budget": "बजेट"
+            },
+            "interests": {
+                "Title": "ब्याज द्वारा फिल्टर",
+                "FilterInterests": "रुचि टाइप गर्न सुरु गर्नुहोस् ..."
+            },
+            "Interest": "ब्याज",
+            "Location": "स्थान"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "जानुहोस्",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "ब्राउज गर्नुहोस्",
+            "WriteToStartConversation": "कुराकानी शुरू गर्न को लागी तपाइँको विचार लेख्नुहोस्",
+            "StartConversation": "कुराकानी सुरु गर्नुहोस्",
+            "GotoConversation": "कुराकानीमा जानुहोस्",
+            "reset": "रिसेट गर्नुहोस्",
+            "edit": "सम्पादन गर्नुहोस्",
+            "link": "लि्क",
+            "setUrl": "URL सेट गर्नुहोस्",
+            "save": "सुरक्षित गर्नुहोस्",
+            "setClip": "क्लिप काट्नुहोस्",
+            "invalidURL": "अमान्य URL"
+        },
+        "FileTooLarge": "क्यासिंग को लागी फाइल धेरै ठुलो छ। अधिकतम फाइल आकार {{size}}",
+        "InvalidPDF": "फाइल वैध PDF हैन",
+        "StartTypingTitleOrKeywords": "शीर्षक वा कीवर्ड टाइप गर्न सुरु गर्नुहोस् ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "एक HTML दस्तावेज हो कि विभिन्न प्रयोगकर्ताहरु हेर्न र सम्पादन गर्न सक्नुहुन्छ",
+            "displayType": "लेख"
+        },
+        "Websites\/slide": {
+            "description": "एक प्रस्तुति मा एक स्लाइड, HTML, अडियो आदि समावेश गर्न सक्नुहुन्छ।",
+            "displayType": "स्लाइड"
+        },
+        "Websites\/presentation": {
+            "description": "एक प्रस्तुति विभिन्न स्लाइडहरु मिलेर बनेको छ",
+            "displayType": "प्रस्तुति"
+        },
+        "Websites\/advert\/unit": {
+            "description": "एक वेबसाइट मा एक विज्ञापन इकाई",
+            "displayType": "विज्ञापन एकाइ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "एक नाम अन्तर्गत विज्ञापन एकाइहरु समूहीकरण को एक तरीका",
+            "displayType": "विज्ञापन प्लेसमेन्ट"
+        },
+        "Websites\/advert\/creative": {
+            "description": "एक विज्ञापन को लागी सामग्री",
+            "displayType": "रचनात्मक विज्ञापन"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "एक विज्ञापन अभियान",
+            "displayType": "विज्ञापन अभियान"
+        },
+        "Websites\/webpage": {
+            "description": "एक वेबसाइट को प्रतिनिधित्व गर्दछ जसको मेटाडेटा स्क्र्याप गरिएको थियो",
+            "displayType": "वेब पेज"
+        }
+    }
+}

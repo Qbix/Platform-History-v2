@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "د تادیې لپاره ټپ کړئ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: د {{call 'user.displayName'}} لپاره پروسس شوی",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ته ستاسو د تادیې لپاره مننه",
+        "SubscribedTo": "{{call 'user.displayName'}} په {{plan.title}} کې ګډون کړی",
+        "YouSubscribedTo": "تاسو {{plan.title}} ته ګډون کړی"
+    },
+    "charge": {
+        "Subject": "تاسو د &quot;{{description}}&quot; لخوا له {{call 'publisher.displayName'}} څخه د {{displayAmount}} تادیه ترلاسه کوئ",
+        "HasBeenCharged": "سلام ، دا یوازې تاسو ته خبر درکوم چې {{1}} د {{3}} لپاره د {{4}} لخوا {{2}} چارج شوی"
+    },
+    "charged": {
+        "Subject": "د &quot;{{description}}&quot; لپاره ستاسو د تادیې څخه مننه",
+        "HavePaid": "سلام {{1}} ، دا یوازې یو ګړندی تایید دی چې تاسو د {{4}} لپاره {{3}} ته په بریالیتوب سره {{2}} تادیه کړې"
+    },
+    "payment": {
+        "AboutOrder": "د امر په اړه معلومات",
+        "PaymentMethod": "د تادیې طریقه",
+        "ContactInfo": "د اړیکو معلومات",
+        "Pay": "ورکړه"
+    },
+    "credits": {
+        "InviteAcceptedBy": "بلنه د {{invitedUserName}} لخوا ومنل شوه",
+        "YouHaveCreditsToStart": "تاسو د پیل لپاره {{amount}} کریډیټونه لرئ",
+        "PaymentFor": "د &quot;{{1}}&quot; لپاره تادیه",
+        "PaymentTo": "{{1}} ته تادیه",
+        "PaymentToUser": "{{toUserName}} ته تادیه",
+        "CreatePaidStream": "د جوړولو لپاره {{toStreamName}}",
+        "JoinedPaidStream": "په &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; کې د ریزرویشن لپاره",
+        "CreatedCommunity": "د ټولنې د جوړولو لپاره &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>په &quot;{{toStreamTitle}}<\/a> &quot; کې د ریزرویشن بیرته ورکولو په توګه",
+        "BoughtCredits": "{{amount}} کریډیټونه وپیرل",
+        "BonusCredits": "بونس {{amount}} کریډیټونه",
+        "BuyAmountCredits": "{{amount}} کریډیټونه وپیرئ",
+        "WatchClip": "د {{fromStreamTitle}} لیدو لپاره {{amount}} کریډیټونه ترلاسه کړل",
+        "MissingCredits": "ورک شوي کریډیټونه",
+        "YouMissingCredits": "تاسو د دوام لپاره اضافي {{amount}} کریډیټونو ته اړتیا لرئ.",
+        "BuyCredits": "کریډیټونه واخلئ",
+        "BuyBonus": "په یوځل د {{amount}} کریډیټونو اخیستل ، د {{bonus}} کریډیټ بونس لامل کیږي.",
+        "Buy": "اخلي",
+        "PurchaseCredits": "د کریډیټونو پیرود",
+        "Credits": "کریډیټونه",
+        "ErrorInvalidAmount": "اندازه ناسمه ده",
+        "ErrorInvalidCurrency": "بدبختانه موږ لاهم د {{currency}} اسعارو ملاتړ نه کوو",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} کریډیټونه",
+            "BonusCredits": "{{amount}} کریډیټونه"
+        }
+    },
+    "history": {
+        "Date": "نیټه",
+        "Amount": "مقدار",
+        "Description": "تفصیل",
+        "Client": "مراجع",
+        "To": "ته",
+        "From": "څخه",
+        "SeeHistory": "د {{1}} لپاره د تادیې تاریخ وګورئ",
+        "HistoryEmpty": "تاسو تر اوسه هیڅ معلومات نلرئ",
+        "PaymentFor": "{{amount}} کریډیټونه لیږل شوي",
+        "PaymentTo": "{{amount}} کریډیټونه لیږل شوي",
+        "PaymentToUser": "{{amount}} کریډیټونه لیږل شوي",
+        "CreatePaidStream": "{{amount}} کریډیټونه مصرف کړل",
+        "WatchClip": {
+            "+": "{{amount}} کریډیټونه ترلاسه کړل",
+            "-": "{{amount}} کریډیټونه مصرف کړل"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} کریډیټونه ترلاسه کړل",
+            "-": "{{amount}} کریډیټونه مصرف کړل"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} کریډیټونه ترلاسه کړل",
+            "-": "{{amount}} کریډیټونه لیږل شوي"
+        },
+        "CreatedCommunity": "{{amount}} کریډیټونه مصرف کړل",
+        "BoughtCredits": "{{amount}} کریډیټونه وپیرل",
+        "BonusCredits": "بونس {{amount}} کریډیټونه ترلاسه کړل",
+        "InviteAcceptedBy": "{{amount}} کریډیټونه ترلاسه کړل",
+        "YouHaveCreditsToStart": "{{amount}} کریډیټونه ترلاسه کړل"
+    },
+    "subscriptions": {
+        "infoTitle": "د تادیاتو معلومات تنظیم کړئ",
+        "confirm": {
+            "title": "ګډون پیل کړئ",
+            "message": "ایا تاسو غواړئ چې {{title}} ته ګډون وکړئ؟",
+            "ok": "سمه ده",
+            "cancel": "لغوه کول"
+        },
+        "CreditOrDebitCard": "کریډیټ یا ډبټ کارت",
+        "SubscribePayment": "د تادیې ګډون وکړئ",
+        "ImmediatePayment": "سمدستي تادیه"
+    },
+    "payments": {
+        "infoTitle": "د تادیاتو معلومات تنظیم کړئ",
+        "BuyAmountCredits": "{{amount}} کریډیټونه وپیرئ",
+        "confirm": {
+            "title": "تادیه وکړئ",
+            "message": "ایا تاسو موافق یاست چې {{symbol}} {{amount}} ورکړئ؟",
+            "ok": "سمه ده",
+            "cancel": "لغوه کول"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "کریډیټونه",
+            "description": "د کریډیټونو او تادیاتو تعقیب ساتي"
+        },
+        "Assets\/plan": {
+            "displayType": "د ګډون پلان",
+            "description": "د ګډون پلان"
+        },
+        "Assets\/subscription": {
+            "displayType": "ګډون",
+            "description": "ګډون"
+        },
+        "Assets\/product": {
+            "displayType": "محصول",
+            "description": "محصول پلورل کیږي"
+        },
+        "Assets\/service": {
+            "displayType": "خدمت",
+            "description": "خدمت وړاندې کیږي"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} کریډیټونه ترلاسه کړل"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} کریډیټونه وپیرل"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "بونس {{amount}} کریډیټونه"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} کریډیټونه مصرف کړل"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} کریډیټونه {{toUserName}} ته واستول شول"
+        },
+        "Assets\/credits\/received": {
+            "content": "د {{fromUserName}} څخه {{amount}} کریډیټونه ترلاسه کړل"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "نوی خدمت",
+            "TitlePlaceholder": "د خدمت سرلیک",
+            "PricePlaceholder": "قیمت ټاکل",
+            "LinkPlaceholder": "د اضافي معلوماتو لینک تنظیم کړئ",
+            "DescriptionPlaceholder": "د خدمت توضیحات",
+            "SaveService": "خدمت خوندي کړئ",
+            "SelectRequiredParticipants": "اړین برخه اخیستونکي"
+        },
+        "ManageServiceTemplates": "د خدمت نمونې اداره کړئ",
+        "ManageServices": "د خدماتو اداره کول",
+        "Free": "وړیا",
+        "OptionalContribution": "اختیاري مرسته",
+        "RequiredPayment": "اړین تادیه",
+        "AreYouSureDelete": "ایا تاسو واقعیا غواړئ دا خدمت حذف کړئ؟",
+        "AmountServicesRelated": "د دې خدمت اړوند {{amount}} موجودیتونه شتون لري. دوی به هم لرې شي."
+    }
+}

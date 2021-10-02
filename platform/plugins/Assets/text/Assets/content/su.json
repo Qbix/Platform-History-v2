@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ketok pikeun mayar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: muatan diproses pikeun {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Hatur nuhun pikeun mayar anjeun ka {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ngalanggan {{plan.title}}",
+        "YouSubscribedTo": "Anjeun parantos ngalanggan {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Anjeun kéngingkeun pembayaran tina {{displayAmount}} tina {{call 'publisher.displayName'}} ku &quot;{{description}}&quot;",
+        "HasBeenCharged": "Héi, ieu ngan ukur pikeun nyaritakeun anjeun {{1}} parantos ditagihkeun {{2}} pikeun {{3}} ku {{4}}"
+    },
+    "charged": {
+        "Subject": "Hatur nuhun kana pamayaran kanggo &quot;{{description}}&quot;",
+        "HavePaid": "Héi {{1}}, ieu ngan ukur konfirmasi gancang yén anjeun parantos berhasil mayar {{2}} ka {{3}} kanggo {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Inpo ngeunaan urutan",
+        "PaymentMethod": "Cara pembayaran",
+        "ContactInfo": "Inpo kontak",
+        "Pay": "Mayar"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Undang anu ditampi ku {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Anjeun gaduh kiridit {{amount}} pikeun ngamimitian",
+        "PaymentFor": "Pamayaran kanggo &quot;{{1}}&quot;",
+        "PaymentTo": "Pamayaran ka {{1}}",
+        "PaymentToUser": "Pamayaran ka {{toUserName}}",
+        "CreatePaidStream": "pikeun nyiptakeun {{toStreamName}}",
+        "JoinedPaidStream": "pikeun reservasi dina &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "pikeun nyiptakeun komunitas &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "salaku ngabalikeun duit reservasi dina &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Meuli kiridit {{amount}}",
+        "BonusCredits": "Kiridit bonus {{amount}}",
+        "BuyAmountCredits": "Mésér kiridit {{amount}}",
+        "WatchClip": "Kéngingkeun {{amount}} kiridit kanggo nonton {{fromStreamTitle}}",
+        "MissingCredits": "Kiridit leungit",
+        "YouMissingCredits": "Anjeun peryogi kiridit tambahan {{amount}} kanggo neraskeun.",
+        "BuyCredits": "Mésér kiridit",
+        "BuyBonus": "Mésér kiridit {{amount}} sakaligus, bakal ngakibatkeun {{bonus}} bonus kiridit.",
+        "Buy": "Mésér",
+        "PurchaseCredits": "Mésér Kredit",
+        "Credits": "Kiridit",
+        "ErrorInvalidAmount": "Jumlah henteu valid",
+        "ErrorInvalidCurrency": "Hanjakalna kami henteu acan ngadukung mata uang {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "Kiridit {{amount}}",
+            "BonusCredits": "Kiridit {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Kaping",
+        "Amount": "Jumlah",
+        "Description": "Katerangan",
+        "Client": "Klién",
+        "To": "ka",
+        "From": "ti",
+        "SeeHistory": "Tingali riwayat pamayaran kanggo {{1}}",
+        "HistoryEmpty": "Anjeun teu acan gaduh data",
+        "PaymentFor": "Dikirim kiridit {{amount}}",
+        "PaymentTo": "Dikirim kiridit {{amount}}",
+        "PaymentToUser": "Dikirim kiridit {{amount}}",
+        "CreatePaidStream": "Méakkeun kiridit {{amount}}",
+        "WatchClip": {
+            "+": "Ngahasilkeun kiridit {{amount}}",
+            "-": "Méakkeun kiridit {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Ngahasilkeun kiridit {{amount}}",
+            "-": "Méakkeun kiridit {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Nampi kiridit {{amount}}",
+            "-": "Dikirim kiridit {{amount}}"
+        },
+        "CreatedCommunity": "Méakkeun kiridit {{amount}}",
+        "BoughtCredits": "Meuli kiridit {{amount}}",
+        "BonusCredits": "Ngagaduhan kiridit bonus {{amount}}",
+        "InviteAcceptedBy": "Ngahasilkeun kiridit {{amount}}",
+        "YouHaveCreditsToStart": "Ngahasilkeun kiridit {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Atur Inpormasi pamayaran",
+        "confirm": {
+            "title": "Ngalanggan Langganan",
+            "message": "Naha anjeun hoyong langganan {{title}}?",
+            "ok": "Oké",
+            "cancel": "Ngabatalkeun"
+        },
+        "CreditOrDebitCard": "Kiridit atanapi kartu debit",
+        "SubscribePayment": "Ngalanggan Pamayaran",
+        "ImmediatePayment": "Pamayaran geuwat"
+    },
+    "payments": {
+        "infoTitle": "Atur Inpormasi pamayaran",
+        "BuyAmountCredits": "Mésér kiridit {{amount}}",
+        "confirm": {
+            "title": "Ngadamel Pamayaran",
+            "message": "Naha anjeun satuju mayar {{symbol}} {{amount}}?",
+            "ok": "Oké",
+            "cancel": "Ngabatalkeun"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kiridit",
+            "description": "ngalacak kiridit sareng pamayaran"
+        },
+        "Assets\/plan": {
+            "displayType": "Rencana Langganan",
+            "description": "rencana langganan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Langganan",
+            "description": "langganan"
+        },
+        "Assets\/product": {
+            "displayType": "Produk",
+            "description": "produk anu dijual"
+        },
+        "Assets\/service": {
+            "displayType": "Palayanan",
+            "description": "jasa ditawarkeun"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Ngahasilkeun kiridit {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Meuli kiridit {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Kiridit bonus {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Méakkeun kiridit {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ngirim kiridit {{amount}} ka {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Nampi kiridit {{amount}} tina {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Layanan Anyar",
+            "TitlePlaceholder": "Judul jasa",
+            "PricePlaceholder": "Harga set",
+            "LinkPlaceholder": "nyetél tautan inpormasi tambihan",
+            "DescriptionPlaceholder": "Pedaran jasa",
+            "SaveService": "Simpen Service",
+            "SelectRequiredParticipants": "Peserta anu Diperyogikeun"
+        },
+        "ManageServiceTemplates": "Ngatur Citakan Layanan",
+        "ManageServices": "Ngatur Jasa",
+        "Free": "Gratis",
+        "OptionalContribution": "Kontribusi opsional",
+        "RequiredPayment": "Pamayaran diperyogikeun",
+        "AreYouSureDelete": "Naha anjeun yakin rék mupus jasa ieu?",
+        "AmountServicesRelated": "Aya kasadiaan {{amount}} anu aya hubunganana sareng jasa ieu. Éta ogé bakal dihapus."
+    }
+}

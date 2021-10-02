@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "പണമടയ്ക്കാൻ ടാപ്പ് ചെയ്യുക"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ചാർജ് പ്രോസസ്സ് ചെയ്തത് {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} എന്നതിലേക്കുള്ള നിങ്ങളുടെ പേയ്‌മെന്റിന് നന്ദി",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} വരിക്കാരായി",
+        "YouSubscribedTo": "നിങ്ങൾ {{plan.title}} വരിക്കാരായി"
+    },
+    "charge": {
+        "Subject": "&quot;{{description}}&quot; വഴി നിങ്ങൾക്ക് {{call 'publisher.displayName'}} നിന്ന് {{displayAmount}} പേയ്‌മെന്റ് ലഭിക്കും",
+        "HasBeenCharged": "ഹേയ്, {{3}} എന്നതിന് {{3}} {{2}} ഈടാക്കിയത് {{1}} നിങ്ങളെ അറിയിക്കാനാണിത്"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; എന്നതിനുള്ള നിങ്ങളുടെ പേയ്‌മെന്റിന് നന്ദി",
+        "HavePaid": "ഹേയ് {{1}}, {{4}} എന്നതിനായി നിങ്ങൾ {{2}} {{3}} - ന് വിജയകരമായി പണമടച്ചു എന്നതിന്റെ ഒരു ദ്രുത സ്ഥിരീകരണം മാത്രമാണ് ഇത്"
+    },
+    "payment": {
+        "AboutOrder": "ഓർഡറിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ",
+        "PaymentMethod": "പണംകൊടുക്കൽരീതി",
+        "ContactInfo": "ബന്ധപ്പെടുന്നതിനുള്ള വിവരം",
+        "Pay": "പണമടയ്ക്കുക"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ക്ഷണം {{invitedUserName}} സ്വീകരിച്ചു",
+        "YouHaveCreditsToStart": "നിങ്ങൾക്ക് ആരംഭിക്കാൻ {{amount}} ക്രെഡിറ്റുകൾ ഉണ്ട്",
+        "PaymentFor": "&quot;{{1}}&quot; എന്നതിനുള്ള പേയ്‌മെന്റ്",
+        "PaymentTo": "{{1}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
+        "PaymentToUser": "{{toUserName}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
+        "CreatePaidStream": "സൃഷ്ടിക്കുന്നതിന് {{toStreamName}}",
+        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ൽ റിസർവേഷനായി",
+        "CreatedCommunity": "കമ്മ്യൂണിറ്റി സൃഷ്ടിക്കുന്നതിന് &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ൽ റിസർവേഷൻ റീഫണ്ടായി",
+        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
+        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ",
+        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "WatchClip": "{{fromStreamTitle}} കാണുന്നതിനായി {{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "MissingCredits": "ക്രെഡിറ്റുകൾ കാണുന്നില്ല",
+        "YouMissingCredits": "തുടരുന്നതിന് നിങ്ങൾക്ക് ഒരു അധിക {{amount}} ക്രെഡിറ്റുകൾ ആവശ്യമാണ്.",
+        "BuyCredits": "ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "BuyBonus": "ഒരേസമയം {{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുന്നത്, {{bonus}} ക്രെഡിറ്റ് ബോണസിലേക്ക് നയിക്കും.",
+        "Buy": "വാങ്ങാൻ",
+        "PurchaseCredits": "ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "Credits": "ക്രെഡിറ്റുകൾ",
+        "ErrorInvalidAmount": "തുക അസാധുവാണ്",
+        "ErrorInvalidCurrency": "നിർഭാഗ്യവശാൽ ഞങ്ങൾ ഇതുവരെ കറൻസി {{currency}} പിന്തുണയ്ക്കുന്നില്ല",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ",
+            "BonusCredits": "{{amount}} ക്രെഡിറ്റുകൾ"
+        }
+    },
+    "history": {
+        "Date": "തീയതി",
+        "Amount": "തുക",
+        "Description": "വിവരണം",
+        "Client": "കക്ഷി",
+        "To": "വരെ",
+        "From": "മുതൽ",
+        "SeeHistory": "{{1}} എന്നതിനായുള്ള പേയ്‌മെന്റ് ചരിത്രം കാണുക",
+        "HistoryEmpty": "നിങ്ങൾക്ക് ഇതുവരെ ഡാറ്റയില്ല",
+        "PaymentFor": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "PaymentTo": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "PaymentToUser": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "CreatePaidStream": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു",
+        "WatchClip": {
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+            "-": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+            "-": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
+            "-": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു"
+        },
+        "CreatedCommunity": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു",
+        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
+        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
+        "InviteAcceptedBy": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "YouHaveCreditsToStart": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
+    },
+    "subscriptions": {
+        "infoTitle": "പേയ്മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
+        "confirm": {
+            "title": "സബ്സ്ക്രിപ്ഷൻ ആരംഭിക്കുക",
+            "message": "നിങ്ങൾക്ക് {{title}} സബ്‌സ്‌ക്രൈബുചെയ്യാൻ താൽപ്പര്യമുണ്ടോ?",
+            "ok": "ശരി",
+            "cancel": "റദ്ദാക്കുക"
+        },
+        "CreditOrDebitCard": "ക്രെഡിറ്റ് അല്ലെങ്കിൽ ഡെബിറ്റ് കാർഡ്",
+        "SubscribePayment": "പേയ്മെന്റ് സബ്സ്ക്രൈബ് ചെയ്യുക",
+        "ImmediatePayment": "ഉടനടി പണമടയ്ക്കൽ"
+    },
+    "payments": {
+        "infoTitle": "പേയ്മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
+        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "confirm": {
+            "title": "ഒരു പേയ്മെന്റ് നടത്തുക",
+            "message": "നിങ്ങൾ {{symbol}} {{amount}} അടയ്ക്കാൻ സമ്മതിക്കുന്നുണ്ടോ?",
+            "ok": "ശരി",
+            "cancel": "റദ്ദാക്കുക"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ക്രെഡിറ്റുകൾ",
+            "description": "ക്രെഡിറ്റുകളുടെയും പേയ്‌മെന്റുകളുടെയും ട്രാക്ക് സൂക്ഷിക്കുന്നു"
+        },
+        "Assets\/plan": {
+            "displayType": "സബ്സ്ക്രിപ്ഷൻ പ്ലാൻ",
+            "description": "സബ്സ്ക്രിപ്ഷൻ പ്ലാൻ"
+        },
+        "Assets\/subscription": {
+            "displayType": "സബ്സ്ക്രിപ്ഷൻ",
+            "description": "സബ്സ്ക്രിപ്ഷൻ"
+        },
+        "Assets\/product": {
+            "displayType": "ഉൽപ്പന്നം",
+            "description": "ഉൽപ്പന്നം വിൽക്കുന്നു"
+        },
+        "Assets\/service": {
+            "displayType": "സേവനം",
+            "description": "സേവനം വാഗ്ദാനം ചെയ്യുന്നു"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ {{toUserName}} എന്നതിലേക്ക് അയച്ചു"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} നിന്ന് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "പുതിയ സേവനം",
+            "TitlePlaceholder": "സേവന ശീർഷകം",
+            "PricePlaceholder": "വില നിശ്ചയിക്കുക",
+            "LinkPlaceholder": "അധിക വിവര ലിങ്ക് സജ്ജമാക്കുക",
+            "DescriptionPlaceholder": "സേവന വിവരണം",
+            "SaveService": "സേവനം സംരക്ഷിക്കുക",
+            "SelectRequiredParticipants": "ആവശ്യമായ പങ്കാളികൾ"
+        },
+        "ManageServiceTemplates": "സേവന ടെംപ്ലേറ്റുകൾ നിയന്ത്രിക്കുക",
+        "ManageServices": "സേവനങ്ങൾ നിയന്ത്രിക്കുക",
+        "Free": "സൗ ജന്യം",
+        "OptionalContribution": "ഓപ്ഷണൽ സംഭാവന",
+        "RequiredPayment": "ആവശ്യമായ പേയ്മെന്റ്",
+        "AreYouSureDelete": "നിങ്ങൾക്ക് ഈ സേവനം ഇല്ലാതാക്കണമെന്ന് തീർച്ചയാണോ?",
+        "AmountServicesRelated": "ഈ സേവനവുമായി ബന്ധപ്പെട്ട് {{amount}} ലഭ്യതകളുണ്ട്. അവയും നീക്കം ചെയ്യപ്പെടും."
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ادا ڪرڻ لاءِ ٽيپ ڪريو"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: چارج ڪيو ويو {{call 'user.displayName'}} لاءِ",
+        "ThankYouForYourPayment": "توهان جي ادائيگي لاءِ مهرباني {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} رڪنيت حاصل ڪئي {{plan.title}} ۾",
+        "YouSubscribedTo": "توھان رڪنيت حاصل ڪئي آھي {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "توھان حاصل ڪريو {{displayAmount}} جي {{call 'publisher.displayName'}} کان &quot;{{description}}&quot; پاران.",
+        "HasBeenCharged": "هي ، اهو صرف توهان کي letائڻ لاءِ آهي ته {{1}} چارج ڪيو ويو آهي {{2}} {{3}} لاءِ {{4}} طرفان"
+    },
+    "charged": {
+        "Subject": "توھان جي ادائيگي لاءِ مھرباني &quot;{{description}}&quot;",
+        "HavePaid": "هي {{1}} ، هي صرف هڪ تڪڙي تصديق آهي ته توهان ڪاميابيءَ سان {{2}} کي {{3}} کي {{4}} لاءِ ادا ڪيو آهي."
+    },
+    "payment": {
+        "AboutOrder": "آرڊر بابت اڻ",
+        "PaymentMethod": "ادائيگي جو طريقو",
+        "ContactInfo": "رابطي جي اڻ",
+        "Pay": "ادا"
+    },
+    "credits": {
+        "InviteAcceptedBy": "دعوت قبول ڪئي {{invitedUserName}} پاران",
+        "YouHaveCreditsToStart": "توھان وٽ آھي {{amount}} ڪريڊٽ شروع ڪرڻ لاءِ",
+        "PaymentFor": "ادائيگي &quot;{{1}}&quot; لاءِ",
+        "PaymentTo": "ادائيگي {{1}} کي",
+        "PaymentToUser": "ادائيگي {{toUserName}} کي",
+        "CreatePaidStream": "creatingاھڻ لاءِ {{toStreamName}}",
+        "JoinedPaidStream": "رزرويشن لاءِ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ۾",
+        "CreatedCommunity": "ڪميونٽي forاھڻ لاءِ &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "جيئن رزرويشن جي واپسي &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ۾",
+        "BoughtCredits": "خريد ڪيو {{amount}} ڪريڊٽ",
+        "BonusCredits": "بونس {{amount}} ڪريڊٽ",
+        "BuyAmountCredits": "خريد ڪريو {{amount}} ڪريڊٽ",
+        "WatchClip": "ڪمايو {{amount}} {{fromStreamTitle}} ڏسڻ لاءِ ڪريڊٽ",
+        "MissingCredits": "گم ٿيل ڪريڊٽ",
+        "YouMissingCredits": "توھان کي ا needتي و anڻ لاءِ ھڪڙو اضافي {{amount}} ڪريڊٽ گھرجن.",
+        "BuyCredits": "ڪريڊٽ خريد ڪريو",
+        "BuyBonus": "خريد ڪري {{amount}} ڪريڊٽ هڪ atيرو ، و leadي ويندا {{bonus}} ڪريڊٽ بونس جي ڪري.",
+        "Buy": "خريد ڪريو",
+        "PurchaseCredits": "ڪريڊٽ خريد ڪريو",
+        "Credits": "ڪريڊٽ",
+        "ErrorInvalidAmount": "رقم غلط آهي",
+        "ErrorInvalidCurrency": "بدقسمتيءَ سان اسان ا supportا تائين ڪرنسي {{currency}} کي سپورٽ نٿا ڪريون",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ڪريڊٽ",
+            "BonusCredits": "{{amount}} ڪريڊٽ"
+        }
+    },
+    "history": {
+        "Date": "تاريخ",
+        "Amount": "رقم",
+        "Description": "وضاحت",
+        "Client": "ڪلائنٽ",
+        "To": "جي طرف",
+        "From": "کان",
+        "SeeHistory": "ڏسو {{1}} جي ادائيگي جي تاريخ",
+        "HistoryEmpty": "توھان وٽ ا dataا تائين ڊيٽا ناھي",
+        "PaymentFor": "موڪليو ويو {{amount}} ڪريڊٽ",
+        "PaymentTo": "موڪليو ويو {{amount}} ڪريڊٽ",
+        "PaymentToUser": "موڪليو ويو {{amount}} ڪريڊٽ",
+        "CreatePaidStream": "خرچ ڪيو {{amount}} ڪريڊٽ",
+        "WatchClip": {
+            "+": "ڪمايو {{amount}} ڪريڊٽ",
+            "-": "خرچ ڪيو {{amount}} ڪريڊٽ"
+        },
+        "JoinedPaidStream": {
+            "+": "ڪمايو {{amount}} ڪريڊٽ",
+            "-": "خرچ ڪيو {{amount}} ڪريڊٽ"
+        },
+        "LeftPaidStream": {
+            "+": "حاصل ٿيو {{amount}} ڪريڊٽ",
+            "-": "موڪليو ويو {{amount}} ڪريڊٽ"
+        },
+        "CreatedCommunity": "خرچ ڪيو {{amount}} ڪريڊٽ",
+        "BoughtCredits": "خريد ڪيو {{amount}} ڪريڊٽ",
+        "BonusCredits": "مليو بونس {{amount}} ڪريڊٽ",
+        "InviteAcceptedBy": "ڪمايو {{amount}} ڪريڊٽ",
+        "YouHaveCreditsToStart": "ڪمايو {{amount}} ڪريڊٽ"
+    },
+    "subscriptions": {
+        "infoTitle": "سيٽ ڪريو ادائيگي جي معلومات",
+        "confirm": {
+            "title": "سبسڪرپشن شروع ڪريو",
+            "message": "youا توھان {{title}} جي رڪنيت حاصل ڪرڻ چاھيو ٿا؟",
+            "ok": "يڪ",
+            "cancel": "منسوخ ڪريو"
+        },
+        "CreditOrDebitCard": "ڪريڊٽ يا ڊيبٽ ڪارڊ",
+        "SubscribePayment": "رڪنيت جي ادائيگي",
+        "ImmediatePayment": "فوري ادائيگي"
+    },
+    "payments": {
+        "infoTitle": "سيٽ ڪريو ادائيگي جي معلومات",
+        "BuyAmountCredits": "خريد ڪريو {{amount}} ڪريڊٽ",
+        "confirm": {
+            "title": "ادائيگي ڪريو",
+            "message": "youا توھان متفق آھيو {{symbol}} {{amount}} ادا ڪرڻ لاءِ؟",
+            "ok": "يڪ",
+            "cancel": "منسوخ ڪريو"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ڪريڊٽ",
+            "description": "ڪريڊٽ ۽ ادائيگي جو ٽريڪ رکي ٿو"
+        },
+        "Assets\/plan": {
+            "displayType": "سبسڪرپشن پلان",
+            "description": "سبسڪرپشن پلان"
+        },
+        "Assets\/subscription": {
+            "displayType": "سبسڪرپشن",
+            "description": "سبسڪرپشن"
+        },
+        "Assets\/product": {
+            "displayType": "پيداوار",
+            "description": "پيداوار وڪرو ڪئي پئي وي"
+        },
+        "Assets\/service": {
+            "displayType": "خدمت",
+            "description": "پيش ڪيل خدمت"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "ڪمايو {{amount}} ڪريڊٽ"
+        },
+        "Assets\/credits\/bought": {
+            "content": "خريد ڪيو {{amount}} ڪريڊٽ"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "بونس {{amount}} ڪريڊٽ"
+        },
+        "Assets\/credits\/spent": {
+            "content": "خرچ ڪيو {{amount}} ڪريڊٽ"
+        },
+        "Assets\/credits\/sent": {
+            "content": "موڪليو ويو {{amount}} ڪريڊٽ {{toUserName}} ڏانھن"
+        },
+        "Assets\/credits\/received": {
+            "content": "حاصل ڪيو {{amount}} ڪريڊٽ {{fromUserName}} کان"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "نئين سروس",
+            "TitlePlaceholder": "خدمت جو عنوان",
+            "PricePlaceholder": "قيمت مقرر ڪريو",
+            "LinkPlaceholder": "مقرر ڪريو اضافي معلومات لنڪ",
+            "DescriptionPlaceholder": "خدمت جي وضاحت",
+            "SaveService": "خدمت محفوظ ڪريو",
+            "SelectRequiredParticipants": "گهربل شرڪت ڪندڙ"
+        },
+        "ManageServiceTemplates": "سروس ٽيمپليٽس جو انتظام ڪريو",
+        "ManageServices": "خدمتون سناليو",
+        "Free": "واندو",
+        "OptionalContribution": "اختياري حصو",
+        "RequiredPayment": "گهربل ادائيگي",
+        "AreYouSureDelete": "sureا توهان واقعي هن سروس کي ختم ڪرڻ چاهيو ٿا؟",
+        "AmountServicesRelated": "اتي آهن {{amount}} دستيابيون هن سروس سان لااپيل. اهي پڻ هٽايا ويندا."
+    }
+}

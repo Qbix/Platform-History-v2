@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "പ്രമോട്ടുചെയ്യാനുള്ള ലിങ്ക്",
+                "startDate": "ആരംഭിക്കുന്ന തീയതി",
+                "startTime": "ആരംഭ സമയം",
+                "endDate": "അവസാന ദിവസം",
+                "endTime": "അവസാന സമയം",
+                "budget": "ബജറ്റ്"
+            },
+            "interests": {
+                "Title": "പലിശ പ്രകാരം ഫിൽട്ടർ ചെയ്യുക",
+                "FilterInterests": "ഒരു പലിശ ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക ..."
+            },
+            "Interest": "പലിശ",
+            "Location": "സ്ഥാനം"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "പോകൂ",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "ബ്രൗസ് ചെയ്യുക",
+            "WriteToStartConversation": "സംഭാഷണം ആരംഭിക്കാൻ നിങ്ങളുടെ ചിന്തകൾ എഴുതുക",
+            "StartConversation": "സംഭാഷണം ആരംഭിക്കുക",
+            "GotoConversation": "സംഭാഷണത്തിലേക്ക് പോകുക",
+            "reset": "റീസെറ്റ് ചെയ്യുക",
+            "edit": "എഡിറ്റ് ചെയ്യുക",
+            "link": "ലിങ്ക്",
+            "setUrl": "URL സജ്ജമാക്കുക",
+            "save": "രക്ഷിക്കും",
+            "setClip": "ക്ലിപ്പ് മുറിക്കുക",
+            "invalidURL": "അസാധുവായ URL"
+        },
+        "FileTooLarge": "കാഷെ ചെയ്യാൻ ഫയൽ വളരെ വലുതാണ്. പരമാവധി ഫയൽ വലുപ്പം {{size}}",
+        "InvalidPDF": "ഫയൽ ഒരു സാധുവായ PDF അല്ല",
+        "StartTypingTitleOrKeywords": "ശീർഷകം അല്ലെങ്കിൽ കീവേഡുകൾ ടൈപ്പുചെയ്യാൻ ആരംഭിക്കുക ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "വിവിധ ഉപയോക്താക്കൾക്ക് കാണാനും എഡിറ്റുചെയ്യാനും കഴിയുന്ന ഒരു HTML പ്രമാണം",
+            "displayType": "ലേഖനം"
+        },
+        "Websites\/slide": {
+            "description": "അവതരണത്തിലെ ഒരു സ്ലൈഡിൽ HTML, ഓഡിയോ തുടങ്ങിയവ ഉൾപ്പെടുത്താം.",
+            "displayType": "സ്ലൈഡ്"
+        },
+        "Websites\/presentation": {
+            "description": "വിവിധ സ്ലൈഡുകൾ അടങ്ങുന്ന അവതരണം",
+            "displayType": "അവതരണം"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ഒരു വെബ്സൈറ്റിലെ ഒരു പരസ്യ യൂണിറ്റ്",
+            "displayType": "പരസ്യ യൂണിറ്റ്"
+        },
+        "Websites\/advert\/placement": {
+            "description": "ഒരു പേരിൽ പരസ്യ യൂണിറ്റുകൾ ഗ്രൂപ്പുചെയ്യുന്നതിനുള്ള ഒരു മാർഗ്ഗം",
+            "displayType": "പ്ലേസ്മെന്റ് പരസ്യം ചെയ്യുക"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ഒരു പരസ്യത്തിനുള്ള ഉള്ളടക്കം",
+            "displayType": "സൃഷ്ടിപരമായ പരസ്യം"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ഒരു പരസ്യ പ്രചാരണം",
+            "displayType": "പരസ്യ പ്രചാരണം"
+        },
+        "Websites\/webpage": {
+            "description": "മെറ്റാഡാറ്റ സ്ക്രാപ്പ് ചെയ്ത ഒരു വെബ്സൈറ്റിനെ പ്രതിനിധീകരിക്കുന്നു",
+            "displayType": "വെബ് പേജ്"
+        }
+    }
+}

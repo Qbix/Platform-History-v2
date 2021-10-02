@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Барои пардохт пардохт кунед"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: пардохт барои {{call 'user.displayName'}} коркард карда шуд",
+        "ThankYouForYourPayment": "Ташаккур барои пардохти шумо ба {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ба {{plan.title}} обуна шуд",
+        "YouSubscribedTo": "Шумо ба {{plan.title}} обуна шудаед"
+    },
+    "charge": {
+        "Subject": "Шумо пардохти {{displayAmount}} - ро аз {{call 'publisher.displayName'}} аз ҷониби &quot;{{description}}&quot; мегиред",
+        "HasBeenCharged": "Бале, ин танҳо ба шумо хабар додан аст, ки {{1}} аз {{2}} барои {{3}} аз ҷониби {{4}} ситонида шудааст"
+    },
+    "charged": {
+        "Subject": "Ташаккур барои пардохти шумо барои &quot;{{description}}&quot;",
+        "HavePaid": "Ҳей {{1}}, ин танҳо як тасдиқи зуд аст, ки шумо бомуваффақият ба {{2}} ба {{3}} пардохт кардед {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Маълумот дар бораи фармоиш",
+        "PaymentMethod": "Намуди пардохт",
+        "ContactInfo": "Маълумот барои тамос",
+        "Pay": "Пардохт"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Даъват аз ҷониби {{invitedUserName}} қабул карда шуд",
+        "YouHaveCreditsToStart": "Шумо барои оғоз кардан {{amount}} кредит доред",
+        "PaymentFor": "Пардохт барои &quot;{{1}}&quot;",
+        "PaymentTo": "Пардохт ба {{1}}",
+        "PaymentToUser": "Пардохт ба {{toUserName}}",
+        "CreatePaidStream": "барои сохтани {{toStreamName}}",
+        "JoinedPaidStream": "барои фармоиш дар &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "барои таъсиси ҷомеаи &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ҳамчун баргардонидани фармоиш дар &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "{{amount}} кредит харида шуд",
+        "BonusCredits": "Кредити бонус {{amount}}",
+        "BuyAmountCredits": "{{amount}} кредит харед",
+        "WatchClip": "{{amount}} кредит барои тамошои {{fromStreamTitle}} ба даст овард",
+        "MissingCredits": "Қарзҳои гумшуда",
+        "YouMissingCredits": "Барои идома додан ба шумо боз {{amount}} кредит лозим аст.",
+        "BuyCredits": "Кредит харед",
+        "BuyBonus": "Харидани якбора {{amount}} кредит боиси бонуси {{bonus}} кредит мегардад.",
+        "Buy": "Харидан",
+        "PurchaseCredits": "Кредитҳо харед",
+        "Credits": "Қарзҳо",
+        "ErrorInvalidAmount": "Маблағ беэътибор аст",
+        "ErrorInvalidCurrency": "Мутаассифона, мо ҳоло асъори {{currency}} -ро дастгирӣ намекунем",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредит",
+            "BonusCredits": "{{amount}} кредит"
+        }
+    },
+    "history": {
+        "Date": "Сана",
+        "Amount": "Маблағ",
+        "Description": "Тавсиф",
+        "Client": "Муштарӣ",
+        "To": "ба",
+        "From": "аз",
+        "SeeHistory": "Таърихи пардохтро бинед {{1}}",
+        "HistoryEmpty": "Шумо ҳоло ягон маълумот надоред",
+        "PaymentFor": "{{amount}} кредит фиристода шуд",
+        "PaymentTo": "{{amount}} кредит фиристода шуд",
+        "PaymentToUser": "{{amount}} кредит фиристода шуд",
+        "CreatePaidStream": "Қарзҳои {{amount}} сарфшуда",
+        "WatchClip": {
+            "+": "{{amount}} кредит ба даст овард",
+            "-": "Қарзҳои {{amount}} сарфшуда"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} кредит ба даст овард",
+            "-": "Қарзҳои {{amount}} сарфшуда"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} кредит гирифтанд",
+            "-": "{{amount}} кредит фиристода шуд"
+        },
+        "CreatedCommunity": "Қарзҳои {{amount}} сарфшуда",
+        "BoughtCredits": "{{amount}} кредит харида шуд",
+        "BonusCredits": "Кредити бонусии {{amount}} гирифтанд",
+        "InviteAcceptedBy": "{{amount}} кредит ба даст овард",
+        "YouHaveCreditsToStart": "{{amount}} кредит ба даст овард"
+    },
+    "subscriptions": {
+        "infoTitle": "Маълумотро дар бораи пардохт таъин кунед",
+        "confirm": {
+            "title": "Обуна шуданро оғоз кунед",
+            "message": "Оё мехоҳед ба {{title}} обуна шавед?",
+            "ok": "Хуб",
+            "cancel": "Бекор кардан"
+        },
+        "CreditOrDebitCard": "Корти кредитӣ ё дебетӣ",
+        "SubscribePayment": "Пардохти обуна",
+        "ImmediatePayment": "Пардохти фаврӣ"
+    },
+    "payments": {
+        "infoTitle": "Маълумотро дар бораи пардохт таъин кунед",
+        "BuyAmountCredits": "{{amount}} кредит харед",
+        "confirm": {
+            "title": "Пардохт кунед",
+            "message": "Оё шумо розӣ ҳастед, ки {{symbol}} {{amount}} пардохт кунед?",
+            "ok": "Хуб",
+            "cancel": "Бекор кардан"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Қарзҳо",
+            "description": "қарзҳо ва пардохтҳоро пайгирӣ мекунад"
+        },
+        "Assets\/plan": {
+            "displayType": "Нақшаи обуна",
+            "description": "нақшаи обуна"
+        },
+        "Assets\/subscription": {
+            "displayType": "Обуна",
+            "description": "обуна"
+        },
+        "Assets\/product": {
+            "displayType": "Маҳсулот",
+            "description": "маҳсулоте, ки фурӯхта мешавад"
+        },
+        "Assets\/service": {
+            "displayType": "Хизмат",
+            "description": "хизматрасонӣ пешниҳод карда мешавад"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} кредит ба даст овард"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} кредит харида шуд"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Кредити бонус {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Қарзҳои {{amount}} сарфшуда"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ба {{toUserName}} кредити {{amount}} фиристода шуд"
+        },
+        "Assets\/credits\/received": {
+            "content": "Аз {{fromUserName}} {{amount}} кредит гирифта шуд"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Хидмати нав",
+            "TitlePlaceholder": "Унвони хидмат",
+            "PricePlaceholder": "Нархро муқаррар кунед",
+            "LinkPlaceholder": "истиноди иттилооти иловагиро насб кунед",
+            "DescriptionPlaceholder": "Тавсифи хидмат",
+            "SaveService": "Хидматро захира кунед",
+            "SelectRequiredParticipants": "Иштирокчиёни зарурӣ"
+        },
+        "ManageServiceTemplates": "Идоракунии қолабҳои хидматрасонӣ",
+        "ManageServices": "Хидматҳоро идора кунед",
+        "Free": "Озод",
+        "OptionalContribution": "Саҳми ихтиёрӣ",
+        "RequiredPayment": "Пардохти ҳатмӣ",
+        "AreYouSureDelete": "Шумо мутмаин ҳастед, ки ин хидматро нест кардан мехоҳед?",
+        "AmountServicesRelated": "Дар ин хидмат {{amount}} мавҷуд аст. Онҳо инчунин хориҷ карда мешаванд."
+    }
+}

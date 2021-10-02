@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "צאַפּן צו צאָלן"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: אָפּצאָל פּראַסעסט פֿאַר {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "דאנק איר פֿאַר דיין צאָלונג צו {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} אַבאָנירן צו {{plan.title}}",
+        "YouSubscribedTo": "איר האָט אַבאָנירן צו {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "איר באַקומען צאָלונג פון {{displayAmount}} פֿון {{call 'publisher.displayName'}} דורך &quot;{{description}}&quot;",
+        "HasBeenCharged": "היי, דאָס איז נאָר צו לאָזן איר וויסן אַז {{1}} איז טשאַרדזשד {{2}} פֿאַר {{3}} דורך {{4}}"
+    },
+    "charged": {
+        "Subject": "דאנק איר פֿאַר דיין צאָלונג פֿאַר &quot;{{description}}&quot;",
+        "HavePaid": "היי {999}}, דאָס איז בלויז אַ שנעל באַשטעטיקונג אַז איר האָט הצלחה באַצאָלט {{2}} צו {{3}} פֿאַר {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "אינפֿאָרמאַציע וועגן סדר",
+        "PaymentMethod": "צאָלונג אופֿן",
+        "ContactInfo": "קאָנטאַקט אינפֿאָרמאַציע",
+        "Pay": "באַצאָלן"
+    },
+    "credits": {
+        "InviteAcceptedBy": "פארבעטונג אנגענומען דורך {{invitedUserName}}",
+        "YouHaveCreditsToStart": "איר האָט {{amount}} קרעדיץ צו אָנהייבן",
+        "PaymentFor": "צאָלונג פֿאַר &quot;{{1}}&quot;",
+        "PaymentTo": "צאָלונג צו {{1}}",
+        "PaymentToUser": "צאָלונג צו {{toUserName}}",
+        "CreatePaidStream": "פאר שאפן {{toStreamName}}",
+        "JoinedPaidStream": "פֿאַר רעזערוואַציע אין &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "פֿאַר שאפן קהל &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ווי רעזערוואַציע צוריקצאָל אין &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "געקויפט קרעדיטן {{amount}}",
+        "BonusCredits": "באָנוס {{amount}} קרעדיץ",
+        "BuyAmountCredits": "קויפן קרעדיטן {{amount}}",
+        "WatchClip": "ערנד {{amount}} קרעדיץ פֿאַר וואַטשינג {{fromStreamTitle}}",
+        "MissingCredits": "פעלנדיק קרעדיץ",
+        "YouMissingCredits": "איר דאַרפֿן נאָך קרעדיץ פון {{amount}} צו פאָרזעצן.",
+        "BuyCredits": "קויפן קרעדיץ",
+        "BuyBonus": "אויב איר קויפן קרעדיץ פון {{amount}} גלייך, איר וועט באַקומען אַ {{bonus}} קרעדיט באָנוס.",
+        "Buy": "קויפן",
+        "PurchaseCredits": "קויפן קרעדיץ",
+        "Credits": "קרעדיץ",
+        "ErrorInvalidAmount": "סומע פאַרקריפּלט",
+        "ErrorInvalidCurrency": "צום באַדויערן, מיר שטיצן נאָך נישט די קראַנטקייַט {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "קרעדיץ {{amount}}",
+            "BonusCredits": "קרעדיץ {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "טאָג",
+        "Amount": "סכום",
+        "Description": "באַשרייַבונג",
+        "Client": "קליענט",
+        "To": "צו",
+        "From": "פון",
+        "SeeHistory": "זען צאָלונג געשיכטע פֿאַר {{1}}",
+        "HistoryEmpty": "איר האָט נאָך קיין דאַטן",
+        "PaymentFor": "געשיקט קרעדיטן {{amount}}",
+        "PaymentTo": "געשיקט קרעדיטן {{amount}}",
+        "PaymentToUser": "געשיקט קרעדיטן {{amount}}",
+        "CreatePaidStream": "אויסגעגעבן {{amount}} קרעדיץ",
+        "WatchClip": {
+            "+": "ערנד {{amount}} קרעדיץ",
+            "-": "אויסגעגעבן {{amount}} קרעדיץ"
+        },
+        "JoinedPaidStream": {
+            "+": "ערנד {{amount}} קרעדיץ",
+            "-": "אויסגעגעבן {{amount}} קרעדיץ"
+        },
+        "LeftPaidStream": {
+            "+": "באקומען {{amount}} קרעדיטן",
+            "-": "געשיקט קרעדיטן {{amount}}"
+        },
+        "CreatedCommunity": "אויסגעגעבן {{amount}} קרעדיץ",
+        "BoughtCredits": "געקויפט קרעדיטן {{amount}}",
+        "BonusCredits": "איר באַקומען באָנוס קרעדיץ פון {{amount}}",
+        "InviteAcceptedBy": "ערנד {{amount}} קרעדיץ",
+        "YouHaveCreditsToStart": "ערנד {{amount}} קרעדיץ"
+    },
+    "subscriptions": {
+        "infoTitle": "באַשטעטיק צאָלונג אינפֿאָרמאַציע",
+        "confirm": {
+            "title": "אָנהייב אַבאָנעמענט",
+            "message": "וואָלט איר ווילט אַבאָנירן צו {{title}}?",
+            "ok": "אקעי",
+            "cancel": "באָטל מאַכן"
+        },
+        "CreditOrDebitCard": "קרעדיט אָדער דעביט קאַרטל",
+        "SubscribePayment": "אַבאָנירן צאָלונג",
+        "ImmediatePayment": "באַלדיק צאָלונג"
+    },
+    "payments": {
+        "infoTitle": "באַשטעטיק צאָלונג אינפֿאָרמאַציע",
+        "BuyAmountCredits": "קויפן קרעדיטן {{amount}}",
+        "confirm": {
+            "title": "מאַכן אַ צאָלונג",
+            "message": "צי איר שטימען צו צאָלן {{symbol}} {{amount}}?",
+            "ok": "אקעי",
+            "cancel": "באָטל מאַכן"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "קרעדיץ",
+            "description": "האלט שפּור פון קרעדיץ און פּיימאַנץ"
+        },
+        "Assets\/plan": {
+            "displayType": "אַבאָנעמענט פּלאַן",
+            "description": "אַבאָנעמענט פּלאַן"
+        },
+        "Assets\/subscription": {
+            "displayType": "אַבאָנעמענט",
+            "description": "אַבאָנעמענט"
+        },
+        "Assets\/product": {
+            "displayType": "פּראָדוקט",
+            "description": "פּראָדוקט פארקויפט"
+        },
+        "Assets\/service": {
+            "displayType": "סערוויס",
+            "description": "סערוויס געפֿינט"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "ערנד {{amount}} קרעדיץ"
+        },
+        "Assets\/credits\/bought": {
+            "content": "געקויפט קרעדיטן {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "באָנוס {{amount}} קרעדיץ"
+        },
+        "Assets\/credits\/spent": {
+            "content": "אויסגעגעבן {{amount}} קרעדיץ"
+        },
+        "Assets\/credits\/sent": {
+            "content": "געשיקט {{amount}} קרעדיטן צו {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "באקומען {{amount}} קרעדיטן פֿון {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "ניו סערוויס",
+            "TitlePlaceholder": "סערוויס טיטל",
+            "PricePlaceholder": "שטעלן פּרייַז",
+            "LinkPlaceholder": "שטעלן נאָך אינפֿאָרמאַציע לינק",
+            "DescriptionPlaceholder": "סערוויס באַשרייַבונג",
+            "SaveService": "היט סערוויס",
+            "SelectRequiredParticipants": "פארלאנגט פּאַרטיסיפּאַנץ"
+        },
+        "ManageServiceTemplates": "אויפֿפּאַסן סערוויס טעמפּלאַטעס",
+        "ManageServices": "אויפֿפּאַסן סערוויסעס",
+        "Free": "פרייַ",
+        "OptionalContribution": "אָפּטיאָנאַל צושטייַער",
+        "RequiredPayment": "פארלאנגט צאָלונג",
+        "AreYouSureDelete": "ביסטו זיכער אז דו ווילסט אויסמעקן די סערוויס?",
+        "AmountServicesRelated": "עס זענען {{amount}} אַוויילאַביליטיז שייך צו דעם סערוויס. זיי וועלן אויך ווערן אַוועקגענומען."
+    }
+}

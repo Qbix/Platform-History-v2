@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Kitiho handoavana"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: namboarina ny vidin&#39;ny {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Misaotra anao amin&#39;ny fandoavanao vola any amin&#39;ny {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} nisoratra anarana tamin&#39;ny {{plan.title}}",
+        "YouSubscribedTo": "Nisoratra anarana tamin&#39;ny {{plan.title}} ianao"
+    },
+    "charge": {
+        "Subject": "Mahazo ny vola {{displayAmount}} avy amin&#39;ny {{call 'publisher.displayName'}} amin&#39;ny &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, hampahalalana anao fotsiny ity fa {{1}} dia voampanga {{2}} noho ny {{3}} nataon&#39;i {{4}}"
+    },
+    "charged": {
+        "Subject": "Misaotra anao amin&#39;ny fandoavanao ny &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, fanamafisana vetivety fotsiny izao fa efa nandoa tsara ny {{2}} tamin&#39;ny {{3}} ho an&#39;ny {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Fampahalalana momba ny filaminana",
+        "PaymentMethod": "Fomba fandoavam-bola",
+        "ContactInfo": "Fampahalalana momba ny fifandraisana",
+        "Pay": "vola"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Fanasana neken&#39;i {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Manana mari-bola {{amount}} hanombohana ianao",
+        "PaymentFor": "Fandoavana ny &quot;{{1}}&quot;",
+        "PaymentTo": "Aloavy amin&#39;ny {{1}}",
+        "PaymentToUser": "Aloavy amin&#39;ny {{toUserName}}",
+        "CreatePaidStream": "amin&#39;ny famoronana {{toStreamName}}",
+        "JoinedPaidStream": "famandrihana ao amin&#39;ny &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "amin&#39;ny famoronana &quot;{{communityId}}&quot; fiarahamonina",
+        "LeftPaidStream": "ho famerenana amin&#39;ny laoniny ny famandrihana ao amin&#39;ny &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Nividy credit {{amount}}",
+        "BonusCredits": "Famoaham-bola Bonus {{amount}}",
+        "BuyAmountCredits": "Mividiana credit {{amount}}",
+        "WatchClip": "Nahazo naoty {{amount}} amin&#39;ny fijerena {{fromStreamTitle}}",
+        "MissingCredits": "Credits tsy hita",
+        "YouMissingCredits": "Mila mari-pankasitrahana {{amount}} fanampiny vao afaka miroso.",
+        "BuyCredits": "Mividiana crédit",
+        "BuyBonus": "Ny fividianana kaonty {{amount}} indray mandeha dia hitarika amin&#39;ny bonus {{bonus}}.",
+        "Buy": "Vidio",
+        "PurchaseCredits": "Fividianana bola",
+        "Credits": "nahazoan-dalana",
+        "ErrorInvalidAmount": "Tsy mety ny sandany",
+        "ErrorInvalidCurrency": "Mampalahelo fa tsy mbola manohana vola {{currency}} izahay izao",
+        "forMessages": {
+            "BoughtCredits": "Nahazoana {{amount}}",
+            "BonusCredits": "Nahazoana {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Daty",
+        "Amount": "vola",
+        "Description": "Description",
+        "Client": "mpanjifa",
+        "To": "ny",
+        "From": "From",
+        "SeeHistory": "Jereo ny tantaran&#39;ny fandoavam-bola ny {{1}}",
+        "HistoryEmpty": "Tsy mbola manana data ianao",
+        "PaymentFor": "Nandefa naoty {{amount}}",
+        "PaymentTo": "Nandefa naoty {{amount}}",
+        "PaymentToUser": "Nandefa naoty {{amount}}",
+        "CreatePaidStream": "Nandany naoty {{amount}}",
+        "WatchClip": {
+            "+": "Nahazoana mari-bola {{amount}}",
+            "-": "Nandany naoty {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Nahazoana mari-bola {{amount}}",
+            "-": "Nandany naoty {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Nahazo naoty {{amount}}",
+            "-": "Nandefa naoty {{amount}}"
+        },
+        "CreatedCommunity": "Nandany naoty {{amount}}",
+        "BoughtCredits": "Nividy credit {{amount}}",
+        "BonusCredits": "Nahazo ny mari-pankasitrahana {{amount}}",
+        "InviteAcceptedBy": "Nahazoana mari-bola {{amount}}",
+        "YouHaveCreditsToStart": "Nahazoana mari-bola {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Mametraha fampahalalana momba ny fandoavam-bola",
+        "confirm": {
+            "title": "Atombohy ny fisoratana anarana",
+            "message": "Te hisoratra anarana amin&#39;ny {{title}} ve ianao?",
+            "ok": "ok",
+            "cancel": "hanafoana"
+        },
+        "CreditOrDebitCard": "Carte de crédit na debit",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Fandoavana eo noho eo"
+    },
+    "payments": {
+        "infoTitle": "Mametraha fampahalalana momba ny fandoavam-bola",
+        "BuyAmountCredits": "Mividiana credit {{amount}}",
+        "confirm": {
+            "title": "Mandoa vola",
+            "message": "Manaiky handoa {{symbol}} {{amount}} ve ianao?",
+            "ok": "ok",
+            "cancel": "hanafoana"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "nahazoan-dalana",
+            "description": "mitazona ny trosa sy ny fandoavam-bola"
+        },
+        "Assets\/plan": {
+            "displayType": "Drafitra famandrihana",
+            "description": "drafitra famandrihana"
+        },
+        "Assets\/subscription": {
+            "displayType": "Famandrihana",
+            "description": "famandrihana"
+        },
+        "Assets\/product": {
+            "displayType": "Vokatra",
+            "description": "vokatra amidy"
+        },
+        "Assets\/service": {
+            "displayType": "fanompoana",
+            "description": "tolotra atolotra"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Nahazoana mari-bola {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Nividy credit {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Famoaham-bola Bonus {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Nandany naoty {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Nandefa naoty {{amount}} tamin&#39;ny {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Nahazo naoty {{amount}} avy amin&#39;ny {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Serivisy vaovao",
+            "TitlePlaceholder": "Lohateny fanompoana",
+            "PricePlaceholder": "Mametraha vidiny",
+            "LinkPlaceholder": "mametraka rohy fampahalalana fanampiny",
+            "DescriptionPlaceholder": "Famaritana ny serivisy",
+            "SaveService": "Tehirizo Serivisy",
+            "SelectRequiredParticipants": "Mpandray anjara ilaina"
+        },
+        "ManageServiceTemplates": "Tantano ny maodelin&#39;ny serivisy",
+        "ManageServices": "Tantano ny serivisy",
+        "Free": "maimaim-poana",
+        "OptionalContribution": "Fandraisana anjara tsy miankina",
+        "RequiredPayment": "Fandoavana vola takiana",
+        "AreYouSureDelete": "Tena te hamafa ity serivisy ity tokoa ve ianao?",
+        "AmountServicesRelated": "Misy ny {{amount}} azo ampiasaina mifandraika amin&#39;ity serivisy ity. Izy ireo koa dia hesorina."
+    }
+}

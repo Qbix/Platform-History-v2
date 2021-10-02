@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Төлөө үчүн таптаңыз"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} үчүн төлөм иштетилди",
+        "ThankYouForYourPayment": "Төлөмүңүз үчүн рахмат {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} га жазылды",
+        "YouSubscribedTo": "Сиз {{plan.title}} га жазылдыңыз"
+    },
+    "charge": {
+        "Subject": "Сиз {{displayAmount}} төлөмдү {{call 'publisher.displayName'}} дан &quot;{{description}}&quot; аркылуу аласыз",
+        "HasBeenCharged": "Эй, бул жөн гана {{1}} {{3}} үчүн {{4}} тарабынан {{2}} өндүрүлгөндүгүн билдирүү үчүн"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; үчүн төлөмүңүз үчүн рахмат",
+        "HavePaid": "Салам {{1}}, бул {{4}} үчүн {{2}} суммасына {{3}} ийгиликтүү төлөгөнүңүздүн бат эле ырастамасы"
+    },
+    "payment": {
+        "AboutOrder": "Заказ жөнүндө маалымат",
+        "PaymentMethod": "Төлөө ыкмасы",
+        "ContactInfo": "Байланыш маалымат",
+        "Pay": "Төлөө"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Чакыруу {{invitedUserName}} тарабынан кабыл алынды",
+        "YouHaveCreditsToStart": "Баштоо үчүн {{amount}} кредитиңиз бар",
+        "PaymentFor": "&quot;{{1}}&quot; үчүн төлөм",
+        "PaymentTo": "Төлөм {{1}}",
+        "PaymentToUser": "Төлөм {{toUserName}}",
+        "CreatePaidStream": "түзүү үчүн {{toStreamName}}",
+        "JoinedPaidStream": "ээлөө үчүн &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; коомун түзүү үчүн",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ичиндеги ээлөөнү кайтаруу катары",
+        "BoughtCredits": "{{amount}} кредит сатып алынды",
+        "BonusCredits": "Бонустук {{amount}} кредит",
+        "BuyAmountCredits": "{{amount}} насыяны сатып алыңыз",
+        "WatchClip": "{{fromStreamTitle}} көрүү үчүн {{amount}} кредитке ээ болду",
+        "MissingCredits": "Кредиттер жок",
+        "YouMissingCredits": "Улантуу үчүн кошумча {{amount}} кредити керек.",
+        "BuyCredits": "Кредиттерди сатып алыңыз",
+        "BuyBonus": "Бир убакта {{amount}} кредит сатып алуу, {{bonus}} кредит бонусуна алып келет.",
+        "Buy": "Сатып алуу",
+        "PurchaseCredits": "Кредиттерди сатып алуу",
+        "Credits": "Кредиттер",
+        "ErrorInvalidAmount": "Сумма жараксыз",
+        "ErrorInvalidCurrency": "Тилекке каршы, биз {{currency}} валютасын азырынча колдоого албайбыз",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредит",
+            "BonusCredits": "{{amount}} кредит"
+        }
+    },
+    "history": {
+        "Date": "Дата",
+        "Amount": "Сумма",
+        "Description": "Description",
+        "Client": "Кардар",
+        "To": "чейин",
+        "From": "тартып",
+        "SeeHistory": "{{1}} үчүн төлөм таржымалын көрүү",
+        "HistoryEmpty": "Сизде азырынча маалымат жок",
+        "PaymentFor": "{{amount}} кредит жөнөтүлдү",
+        "PaymentTo": "{{amount}} кредит жөнөтүлдү",
+        "PaymentToUser": "{{amount}} кредит жөнөтүлдү",
+        "CreatePaidStream": "{{amount}} кредит сарпталды",
+        "WatchClip": {
+            "+": "{{amount}} кредитке ээ болду",
+            "-": "{{amount}} кредит сарпталды"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} кредитке ээ болду",
+            "-": "{{amount}} кредит сарпталды"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} кредит алынды",
+            "-": "{{amount}} кредит жөнөтүлдү"
+        },
+        "CreatedCommunity": "{{amount}} кредит сарпталды",
+        "BoughtCredits": "{{amount}} кредит сатып алынды",
+        "BonusCredits": "{{amount}} бонустук бонус алды",
+        "InviteAcceptedBy": "{{amount}} кредитке ээ болду",
+        "YouHaveCreditsToStart": "{{amount}} кредитке ээ болду"
+    },
+    "subscriptions": {
+        "infoTitle": "Төлөм маалыматын коюу",
+        "confirm": {
+            "title": "Жазылууну баштоо",
+            "message": "{{title}} жазылууну каалайсызбы?",
+            "ok": "Макул",
+            "cancel": "Жокко чыгаруу"
+        },
+        "CreditOrDebitCard": "Кредиттик же дебеттик карта",
+        "SubscribePayment": "Төлөмгө жазылуу",
+        "ImmediatePayment": "Токтоосуз төлөө"
+    },
+    "payments": {
+        "infoTitle": "Төлөм маалыматын коюу",
+        "BuyAmountCredits": "{{amount}} насыяны сатып алыңыз",
+        "confirm": {
+            "title": "Төлөм жасоо",
+            "message": "{{symbol}} {{amount}} төлөөгө макулсузбу?",
+            "ok": "Макул",
+            "cancel": "Жокко чыгаруу"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Кредиттер",
+            "description": "кредиттерди жана төлөмдөрдү эсепке алат"
+        },
+        "Assets\/plan": {
+            "displayType": "Жазылуу планы",
+            "description": "жазылуу планы"
+        },
+        "Assets\/subscription": {
+            "displayType": "Жазылуу",
+            "description": "жазылуу"
+        },
+        "Assets\/product": {
+            "displayType": "Продукт",
+            "description": "продукт сатылат"
+        },
+        "Assets\/service": {
+            "displayType": "Кызмат",
+            "description": "кызмат сунушталат"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} кредитке ээ болду"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} кредит сатып алынды"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонустук {{amount}} кредит"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} кредит сарпталды"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} га {{amount}} кредит жөнөтүлдү"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} дан {{amount}} кредит алынды"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Жаңы Кызмат",
+            "TitlePlaceholder": "Кызмат аталышы",
+            "PricePlaceholder": "Бааны коюу",
+            "LinkPlaceholder": "кошумча маалымат шилтемесин коюңуз",
+            "DescriptionPlaceholder": "Кызматтын сүрөттөмөсү",
+            "SaveService": "Кызматты сактоо",
+            "SelectRequiredParticipants": "Керектүү катышуучулар"
+        },
+        "ManageServiceTemplates": "Кызмат шаблондорун башкаруу",
+        "ManageServices": "Кызматтарды башкаруу",
+        "Free": "Бекер",
+        "OptionalContribution": "Кошумча салым",
+        "RequiredPayment": "Милдеттүү төлөм",
+        "AreYouSureDelete": "Бул кызматты чын эле жок кылгыңыз келеби?",
+        "AmountServicesRelated": "Бул кызматка байланыштуу {{amount}} мүмкүнчүлүктөр бар. Алар да алынып салынат."
+    }
+}

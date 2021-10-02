@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Жарнамалау үшін сілтеме",
+                "startDate": "Басталатын күн",
+                "startTime": "Басталу уақыты",
+                "endDate": "Аяқталу күні",
+                "endTime": "Аяқталу уақыты",
+                "budget": "Бюджет"
+            },
+            "interests": {
+                "Title": "Қызығушылық бойынша сүзу",
+                "FilterInterests": "Қызығушылықты жаза бастаңыз ..."
+            },
+            "Interest": "Қызығушылық",
+            "Location": "Орналасуы"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Бару",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Шолу",
+            "WriteToStartConversation": "Әңгімені бастау үшін өз ойларыңызды жазыңыз",
+            "StartConversation": "Сөйлесуді бастау",
+            "GotoConversation": "Сөйлесуге өтіңіз",
+            "reset": "Қалпына келтіру",
+            "edit": "Өңдеу",
+            "link": "Сілтеме",
+            "setUrl": "URL орнату",
+            "save": "Сақтау",
+            "setClip": "Клипті кесу",
+            "invalidURL": "URL жарамсыз"
+        },
+        "FileTooLarge": "Файл кэштеу үшін тым үлкен. Файлдың максималды өлшемі: {{size}}",
+        "InvalidPDF": "Файл жарамды PDF емес",
+        "StartTypingTitleOrKeywords": "Тақырыпты немесе кілт сөздерді теруді бастаңыз ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Әр түрлі пайдаланушылар қарайтын және өңдей алатын HTML құжаты",
+            "displayType": "Мақала"
+        },
+        "Websites\/slide": {
+            "description": "Презентациядағы слайд HTML, аудио және т.",
+            "displayType": "Слайд"
+        },
+        "Websites\/presentation": {
+            "description": "Түрлі слайдтардан тұратын презентация",
+            "displayType": "Презентация"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Сайттағы жарнама бірлігі",
+            "displayType": "Жарнама бірлігі"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Жарнама бірліктерін атаумен топтастыру әдісі",
+            "displayType": "Жарнамалық орналастыру"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Жарнамаға арналған мазмұн",
+            "displayType": "Шығармашылық жарнама"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Жарнамалық науқан",
+            "displayType": "Жарнамалық науқан"
+        },
+        "Websites\/webpage": {
+            "description": "Метадеректері жойылған веб -сайтты білдіреді",
+            "displayType": "веб парақ"
+        }
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "पेमेंट करण्यासाठी टॅप करा"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} साठी शुल्कावर प्रक्रिया केली",
+        "ThankYouForYourPayment": "तुमच्या {{call 'publisher.displayName'}} ला पेमेंट केल्याबद्दल धन्यवाद",
+        "SubscribedTo": "{{call 'user.displayName'}} ने {{plan.title}} ची सदस्यता घेतली",
+        "YouSubscribedTo": "तुम्ही {{plan.title}} चे सदस्यत्व घेतले आहे"
+    },
+    "charge": {
+        "Subject": "तुम्हाला &quot;{{description}}&quot; द्वारे {{call 'publisher.displayName'}} कडून {{displayAmount}} चे पेमेंट मिळते",
+        "HasBeenCharged": "अहो, हे फक्त तुम्हाला कळवण्यासाठी आहे की {{1}} ला {{3}} साठी {{4}} द्वारे {{2}} आकारण्यात आले आहे"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; साठी तुमच्या पेमेंटबद्दल धन्यवाद",
+        "HavePaid": "अहो {{1}}, ही फक्त एक द्रुत पुष्टी आहे की तुम्ही {{3}} ला {{4}} साठी {{2}} यशस्वीरित्या भरले आहे"
+    },
+    "payment": {
+        "AboutOrder": "ऑर्डर बद्दल माहिती",
+        "PaymentMethod": "पेमेंट पद्धत",
+        "ContactInfo": "संपर्क माहिती",
+        "Pay": "पे"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{invitedUserName}} द्वारे आमंत्रण स्वीकारले",
+        "YouHaveCreditsToStart": "तुमच्याकडे सुरू करण्यासाठी {{amount}} क्रेडिट आहेत",
+        "PaymentFor": "&quot;{{1}}&quot; साठी पेमेंट",
+        "PaymentTo": "{{1}} ला पेमेंट",
+        "PaymentToUser": "{{toUserName}} ला पेमेंट",
+        "CreatePaidStream": "{{toStreamName}} तयार करण्यासाठी",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; मधील आरक्षणासाठी",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; समुदाय तयार करण्यासाठी",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; मध्ये आरक्षण परतावा म्हणून",
+        "BoughtCredits": "{{amount}} क्रेडिट खरेदी केले",
+        "BonusCredits": "बोनस {{amount}} क्रेडिट",
+        "BuyAmountCredits": "{{amount}} क्रेडिट खरेदी करा",
+        "WatchClip": "{{fromStreamTitle}} पाहण्यासाठी {{amount}} क्रेडिट्स मिळवले",
+        "MissingCredits": "गहाळ क्रेडिट",
+        "YouMissingCredits": "पुढे जाण्यासाठी तुम्हाला अतिरिक्त {{amount}} क्रेडिटची आवश्यकता आहे.",
+        "BuyCredits": "क्रेडिट्स खरेदी करा",
+        "BuyBonus": "एकाच वेळी {{amount}} क्रेडिट खरेदी केल्यास, {{bonus}} क्रेडिट बोनस मिळेल.",
+        "Buy": "खरेदी करा",
+        "PurchaseCredits": "खरेदी क्रेडिट",
+        "Credits": "श्रेय",
+        "ErrorInvalidAmount": "रक्कम अवैध",
+        "ErrorInvalidCurrency": "दुर्दैवाने आम्ही अद्याप {{currency}} चलन समर्थित करत नाही",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} क्रेडिट",
+            "BonusCredits": "{{amount}} क्रेडिट"
+        }
+    },
+    "history": {
+        "Date": "तारीख",
+        "Amount": "रक्कम",
+        "Description": "वर्णन",
+        "Client": "ग्राहक",
+        "To": "ला",
+        "From": "कडून",
+        "SeeHistory": "{{1}} साठी पेमेंट इतिहास पहा",
+        "HistoryEmpty": "आपल्याकडे अद्याप कोणताही डेटा नाही",
+        "PaymentFor": "{{amount}} क्रेडिट पाठवले",
+        "PaymentTo": "{{amount}} क्रेडिट पाठवले",
+        "PaymentToUser": "{{amount}} क्रेडिट पाठवले",
+        "CreatePaidStream": "{{amount}} क्रेडिट खर्च केले",
+        "WatchClip": {
+            "+": "{{amount}} क्रेडिट्स मिळवले",
+            "-": "{{amount}} क्रेडिट खर्च केले"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} क्रेडिट्स मिळवले",
+            "-": "{{amount}} क्रेडिट खर्च केले"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} क्रेडिट मिळाले",
+            "-": "{{amount}} क्रेडिट पाठवले"
+        },
+        "CreatedCommunity": "{{amount}} क्रेडिट खर्च केले",
+        "BoughtCredits": "{{amount}} क्रेडिट खरेदी केले",
+        "BonusCredits": "बोनस {{amount}} क्रेडिट्स मिळाले",
+        "InviteAcceptedBy": "{{amount}} क्रेडिट्स मिळवले",
+        "YouHaveCreditsToStart": "{{amount}} क्रेडिट्स मिळवले"
+    },
+    "subscriptions": {
+        "infoTitle": "देय माहिती सेट करा",
+        "confirm": {
+            "title": "सदस्यता सुरू करा",
+            "message": "तुम्हाला {{title}} चे सदस्यत्व घ्यायचे आहे का?",
+            "ok": "ठीक आहे",
+            "cancel": "रद्द करा"
+        },
+        "CreditOrDebitCard": "क्रेडिट किंवा डेबिट कार्ड",
+        "SubscribePayment": "पेमेंटची सदस्यता घ्या",
+        "ImmediatePayment": "तत्काळ पेमेंट"
+    },
+    "payments": {
+        "infoTitle": "देय माहिती सेट करा",
+        "BuyAmountCredits": "{{amount}} क्रेडिट खरेदी करा",
+        "confirm": {
+            "title": "पैसे भरा",
+            "message": "तुम्ही {{symbol}} {{amount}} भरण्यास सहमत आहात का?",
+            "ok": "ठीक आहे",
+            "cancel": "रद्द करा"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "श्रेय",
+            "description": "क्रेडिट्स आणि पेमेंट्सचा मागोवा ठेवतो"
+        },
+        "Assets\/plan": {
+            "displayType": "सबस्क्रिप्शन योजना",
+            "description": "सदस्यता योजना"
+        },
+        "Assets\/subscription": {
+            "displayType": "वर्गणी",
+            "description": "वर्गणी"
+        },
+        "Assets\/product": {
+            "displayType": "उत्पादन",
+            "description": "उत्पादन विकले जात आहे"
+        },
+        "Assets\/service": {
+            "displayType": "सेवा",
+            "description": "सेवा दिली जात आहे"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} क्रेडिट्स मिळवले"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} क्रेडिट खरेदी केले"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "बोनस {{amount}} क्रेडिट"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} क्रेडिट खर्च केले"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} ला {{amount}} क्रेडिट पाठवले"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} कडून {{amount}} क्रेडिट मिळाले"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "नवीन सेवा",
+            "TitlePlaceholder": "सेवेचे शीर्षक",
+            "PricePlaceholder": "किंमत सेट करा",
+            "LinkPlaceholder": "अतिरिक्त माहिती दुवा सेट करा",
+            "DescriptionPlaceholder": "सेवेचे वर्णन",
+            "SaveService": "सेवा जतन करा",
+            "SelectRequiredParticipants": "आवश्यक सहभागी"
+        },
+        "ManageServiceTemplates": "सेवा टेम्पलेट्स व्यवस्थापित करा",
+        "ManageServices": "सेवा व्यवस्थापित करा",
+        "Free": "फुकट",
+        "OptionalContribution": "पर्यायी योगदान",
+        "RequiredPayment": "आवश्यक पेमेंट",
+        "AreYouSureDelete": "तुम्हाला खात्री आहे की तुम्ही ही सेवा हटवू इच्छिता?",
+        "AmountServicesRelated": "या सेवेशी संबंधित {{amount}} उपलब्धता आहेत. ते देखील काढले जातील."
+    }
+}

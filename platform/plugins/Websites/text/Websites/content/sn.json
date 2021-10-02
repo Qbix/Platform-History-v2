@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Batanidza kusimudzira",
+                "startDate": "Kutanga Zuva",
+                "startTime": "Kutanga Nguva",
+                "endDate": "Zuva Rokuguma",
+                "endTime": "Nguva Yokuguma",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Sefa Nekufarira",
+                "FilterInterests": "Kutanga kutaipa kufarira ..."
+            },
+            "Interest": "Kufarira",
+            "Location": "Nzvimbo"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Enda",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Bhurawuza",
+            "WriteToStartConversation": "Nyora zvaunofunga kuti utange hurukuro",
+            "StartConversation": "Tanga Kukurukurirana",
+            "GotoConversation": "Enda kuKukurukurirana",
+            "reset": "Dzorera zvakare",
+            "edit": "Hora",
+            "link": "Batanidza",
+            "setUrl": "Gadza URL",
+            "save": "Sevha",
+            "setClip": "Cheka Kunze Clip",
+            "invalidURL": "URL isiriyo"
+        },
+        "FileTooLarge": "Faira rakanyanya kukura zvekuchengetedza. Saizi yakakura saizi {{size}}",
+        "InvalidPDF": "Faira harisi rechokwadi PDF",
+        "StartTypingTitleOrKeywords": "Kutanga kutaipa zita kana mazwi akakosha ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Gwaro reHTML iro vashandisi vakasiyana vanogona kuona nekugadzirisa",
+            "displayType": "Chinyorwa"
+        },
+        "Websites\/slide": {
+            "description": "Slide mune mharidzo, inogona kusanganisira HTML, odhiyo nezvimwe.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Mharidzo ine masiraidhi akasiyana siyana",
+            "displayType": "Mharidzo"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Chikamu chekushambadzira pane webhusaiti",
+            "displayType": "Kushambadzira unit"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Nzira yekuunganidza zvikamu zvekushambadzira pasi pezita",
+            "displayType": "Kushambadzira kuiswa"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Zvemukati zveshambadziro",
+            "displayType": "Kushambadzira kwekugadzira"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Mushandirapamwe wekushambadzira",
+            "displayType": "Shambadziro yekushambadzira"
+        },
+        "Websites\/webpage": {
+            "description": "Inomiririra webhusaiti iyo metadata yakabviswa",
+            "displayType": "Peji yewebhu"
+        }
+    }
+}

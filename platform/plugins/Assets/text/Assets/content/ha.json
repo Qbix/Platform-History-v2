@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Taɓa don biyan kuɗi"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: an sarrafa cajin akan {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Na gode da biyan kuɗin ku zuwa {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ya yi rajista ga {{plan.title}}",
+        "YouSubscribedTo": "An yi rijista da ku {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Kuna samun biyan kuɗin {{displayAmount}} daga {{call 'publisher.displayName'}} ta &quot;{{description}}&quot;)",
+        "HasBeenCharged": "Hey, wannan don sanar da ku {{1}} an caje {{2}} na {1001}} ta {{4}}"
+    },
+    "charged": {
+        "Subject": "Na gode don biyan kuɗin ku na &quot;{{description}}&quot;)",
+        "HavePaid": "Hey {{1}}, wannan tabbaci ne mai sauri cewa kun sami nasarar biya {{2}} zuwa {1001}} na {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Bayani game da oda",
+        "PaymentMethod": "Hanyar biyan kuɗi",
+        "ContactInfo": "Bayanin tuntuɓa",
+        "Pay": "Biya"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{invitedUserName}} ya karɓi gayyata",
+        "YouHaveCreditsToStart": "Kuna da ƙima {{amount}} don farawa",
+        "PaymentFor": "Biyan &quot;{{1}}&quot;)",
+        "PaymentTo": "Biya ga {{1}}",
+        "PaymentToUser": "Biya ga {{toUserName}}",
+        "CreatePaidStream": "don ƙirƙirar {{toStreamName}}",
+        "JoinedPaidStream": "don ajiyar wuri a cikin &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;&#39;)",
+        "CreatedCommunity": "don ƙirƙirar al&#39;umma &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "azaman kuɗin ajiyar wuri a cikin &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;&#39;)",
+        "BoughtCredits": "Sayi ƙima {{amount}}",
+        "BonusCredits": "Kyauta {{amount}} kuɗi",
+        "BuyAmountCredits": "Sayi kuɗi {{amount}}",
+        "WatchClip": "Sami {{amount}} kuɗi don kallon {{fromStreamTitle}}",
+        "MissingCredits": "Abubuwan da aka rasa",
+        "YouMissingCredits": "Kuna buƙatar ƙarin kuɗi {{amount}} don ci gaba.",
+        "BuyCredits": "Sayi kuɗi",
+        "BuyBonus": "Sayen kuɗi {{amount}} a lokaci ɗaya, zai kai ga {{bonus}} kari na kari.",
+        "Buy": "Sayi",
+        "PurchaseCredits": "Sayen kuɗi",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Adadi baya aiki",
+        "ErrorInvalidCurrency": "Abin baƙin ciki ba mu goyi bayan kudin {{currency}} ba tukuna",
+        "forMessages": {
+            "BoughtCredits": "Darajoji {{amount}}",
+            "BonusCredits": "Darajoji {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Kwanan wata",
+        "Amount": "Adadi",
+        "Description": "Bayani",
+        "Client": "Abokin ciniki",
+        "To": "zuwa",
+        "From": "daga",
+        "SeeHistory": "Duba tarihin biyan kuɗi don {{1}}",
+        "HistoryEmpty": "Ba ku da bayanai tukuna",
+        "PaymentFor": "An aika {{amount}} kuɗi",
+        "PaymentTo": "An aika {{amount}} kuɗi",
+        "PaymentToUser": "An aika {{amount}} kuɗi",
+        "CreatePaidStream": "An kashe kuɗi {{amount}}",
+        "WatchClip": {
+            "+": "Sami kuɗi {{amount}}",
+            "-": "An kashe kuɗi {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Sami kuɗi {{amount}}",
+            "-": "An kashe kuɗi {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "An karɓi kuɗi {{amount}}",
+            "-": "An aika {{amount}} kuɗi"
+        },
+        "CreatedCommunity": "An kashe kuɗi {{amount}}",
+        "BoughtCredits": "Sayi ƙima {{amount}}",
+        "BonusCredits": "An sami kari {{amount}} kuɗi",
+        "InviteAcceptedBy": "Sami kuɗi {{amount}}",
+        "YouHaveCreditsToStart": "Sami kuɗi {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Saita Bayanin Biyan Kuɗi",
+        "confirm": {
+            "title": "Fara Biyan Kuɗi",
+            "message": "Kuna son yin rijista zuwa {{title}}?",
+            "ok": "KO",
+            "cancel": "Soke"
+        },
+        "CreditOrDebitCard": "Katin kuɗi ko katin kuɗi",
+        "SubscribePayment": "Biyan Kuɗi",
+        "ImmediatePayment": "Biyan Kuzari"
+    },
+    "payments": {
+        "infoTitle": "Saita Bayanin Biyan Kuɗi",
+        "BuyAmountCredits": "Sayi kuɗi {{amount}}",
+        "confirm": {
+            "title": "Yi Biya",
+            "message": "Shin kun yarda ku biya {{symbol}} {{amount}}?",
+            "ok": "KO",
+            "cancel": "Soke"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "yana kula da kuɗi da biyan kuɗi"
+        },
+        "Assets\/plan": {
+            "displayType": "Shirin Tallafi",
+            "description": "tsarin biyan kuɗi"
+        },
+        "Assets\/subscription": {
+            "displayType": "Biyan kuɗi",
+            "description": "biyan kuɗi"
+        },
+        "Assets\/product": {
+            "displayType": "Samfurin",
+            "description": "ana siyar da samfurin"
+        },
+        "Assets\/service": {
+            "displayType": "Sabis",
+            "description": "ana ba da sabis"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Sami kuɗi {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Sayi ƙima {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Kyauta {{amount}} kuɗi"
+        },
+        "Assets\/credits\/spent": {
+            "content": "An kashe kuɗi {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "An aika {{amount}} kuɗi zuwa {{toUserName}}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "An karɓi kuɗi {{amount}} daga {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Sabon Sabis",
+            "TitlePlaceholder": "Taken sabis",
+            "PricePlaceholder": "Saita farashin",
+            "LinkPlaceholder": "saita ƙarin hanyar haɗin bayanai",
+            "DescriptionPlaceholder": "Bayanin sabis",
+            "SaveService": "Ajiye Sabis",
+            "SelectRequiredParticipants": "Mahalarta da ake buƙata"
+        },
+        "ManageServiceTemplates": "Sarrafa Samfuran Sabis",
+        "ManageServices": "Sarrafa Sabis",
+        "Free": "Kyauta",
+        "OptionalContribution": "Gudunmawar zaɓi",
+        "RequiredPayment": "Biyan da ake buƙata",
+        "AreYouSureDelete": "Ka tabbata kana so ka goge wannan sabis ɗin?",
+        "AmountServicesRelated": "Akwai {{amount}} wadatattun abubuwan da suka shafi wannan sabis ɗin. Su ma za a cire su."
+    }
+}

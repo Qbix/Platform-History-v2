@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "မြှင့်တင်ရန်လင့်ခ်",
+                "startDate": "စတင်သည့်ရက်စွဲ",
+                "startTime": "စတင်ချိန်",
+                "endDate": "ပြီးဆုံးရက်",
+                "endTime": "ပြီးဆုံးချိန်",
+                "budget": "ဘတ်ဂျက်"
+            },
+            "interests": {
+                "Title": "အတိုးအားဖြင့်စစ်ထုတ်ပါ",
+                "FilterInterests": "စိတ်ဝင်စားမှုကိုစတင်ရိုက်ပါ။"
+            },
+            "Interest": "စိတ်ဝင်စားမှု",
+            "Location": "တည်နေရာ"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "သွားတော့",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "လှန်လှောကြည့်သည်",
+            "WriteToStartConversation": "စကားဝိုင်းကနေစဖို့အတွက်သင့်ရဲ့အတွေးတွေကိုချရေးပါ",
+            "StartConversation": "စကားဝိုင်းစတင်ပါ",
+            "GotoConversation": "Conversation ကိုသွားပါ",
+            "reset": "ပြင်ဆင်သတ်မှတ်ပါ",
+            "edit": "တည်းဖြတ်ပါ",
+            "link": "လင့်",
+            "setUrl": "URL သတ်မှတ်ပါ",
+            "save": "ကယ်ပါ",
+            "setClip": "Clip ကိုဖြတ်ပါ",
+            "invalidURL": "URL မမှန်ပါ"
+        },
+        "FileTooLarge": "သိုလှောင်ရန်ဖိုင်အလွန်ကြီးနေသည်။ အများဆုံးဖိုင်အရွယ်အစား {{size}}",
+        "InvalidPDF": "ဖိုင်သည်မှန်ကန်သော PDF မဟုတ်ပါ",
+        "StartTypingTitleOrKeywords": "ခေါင်းစဉ် (သို့) သော့ချက်စာလုံးများရိုက်ခြင်းစတင်ပါ။"
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "အမျိုးမျိုးသောအသုံးပြုသူများသည်ကြည့်ရှုတည်းဖြတ်နိုင်သော HTML စာရွက်စာတမ်းတစ်ခုဖြစ်သည်",
+            "displayType": "ဆောင်းပါး"
+        },
+        "Websites\/slide": {
+            "description": "တင်ပြမှုတစ်ခုတွင်ဆလိုက်၊ HTML၊ အသံစသည်တို့ပါဝင်နိုင်သည်။",
+            "displayType": "ပွတ်သည်"
+        },
+        "Websites\/presentation": {
+            "description": "ဆလိုက်အမျိုးမျိုးပါဝင်သောတင်ဆက်မှု",
+            "displayType": "တင်ပြခြင်း"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ဝက်ဘ်ဆိုက်တစ်ခုတွင်ကြော်ငြာယူနစ်တစ်ခု",
+            "displayType": "ကြော်ငြာယူနစ်"
+        },
+        "Websites\/advert\/placement": {
+            "description": "နာမည်တစ်ခုအောက်တွင်ကြော်ငြာယူနစ်များကိုအုပ်စုဖွဲ့ရန်နည်းလမ်းတစ်ခု",
+            "displayType": "ကြော်ငြာနေရာချထားသည်"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ကြော်ငြာအတွက်အကြောင်းအရာ",
+            "displayType": "ကြော်ငြာဖန်တီးမှု"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ကြော်ငြာလှုပ်ရှားမှုတစ်ခု",
+            "displayType": "ကြော်ငြာလှုံ့ဆော်မှု"
+        },
+        "Websites\/webpage": {
+            "description": "metadata ကိုဖြတ်တောက်ထားသော ၀ က်ဘ်ဆိုက်တစ်ခုကိုကိုယ်စားပြုသည်",
+            "displayType": "ဝက်ဘ်စာမျက်နှာ"
+        }
+    }
+}

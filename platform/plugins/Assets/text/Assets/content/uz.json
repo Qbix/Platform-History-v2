@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "To&#39;lash uchun bosing"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} uchun to&#39;lov amalga oshirildi",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ga to‘laganingiz uchun tashakkur",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} kanaliga obuna bo&#39;ldi",
+        "YouSubscribedTo": "Siz {{plan.title}} kanaliga obuna bo&#39;lgansiz"
+    },
+    "charge": {
+        "Subject": "Siz {{displayAmount}} to&#39;lovini {{call 'publisher.displayName'}} dan &quot;{{description}}&quot; orqali olasiz",
+        "HasBeenCharged": "Bu sizga xabar berish uchun, {{1}} {{3}} uchun {{3}} uchun {{2}} miqdorida to&#39;lovni olgan."
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; uchun to&#39;lovingiz uchun tashakkur",
+        "HavePaid": "Salom, {{1}}, bu {{4}} uchun {{2}} ni {{3}} ga muvaffaqiyatli to&#39;laganingizning tezkor tasdig&#39;i."
+    },
+    "payment": {
+        "AboutOrder": "Buyurtma haqida ma&#39;lumot",
+        "PaymentMethod": "To&#39;lov usuli",
+        "ContactInfo": "Aloqa ma&#39;lumotlari",
+        "Pay": "To&#39;lash"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Taklif {{invitedUserName}} tomonidan qabul qilingan",
+        "YouHaveCreditsToStart": "Sizda {{amount}} kredit bor",
+        "PaymentFor": "&quot;{{1}}&quot; uchun to&#39;lov",
+        "PaymentTo": "To‘lov: {{1}}",
+        "PaymentToUser": "To‘lov: {{toUserName}}",
+        "CreatePaidStream": "yaratish uchun {{toStreamName}}",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; da band qilish uchun",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; hamjamiyatini yaratish uchun",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; da bandlovni qaytarish sifatida",
+        "BoughtCredits": "{{amount}} ta kredit sotib olindi",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyAmountCredits": "{{amount}} ta kredit sotib oling",
+        "WatchClip": "{{fromStreamTitle}} tomoshasi uchun {{amount}} ta kredit olindi",
+        "MissingCredits": "Kreditlar etishmayapti",
+        "YouMissingCredits": "Davom etish uchun sizga qo&#39;shimcha {{amount}} kredit kerak.",
+        "BuyCredits": "Kredit sotib olish",
+        "BuyBonus": "Birdaniga {{amount}} ta kredit sotib olsangiz, {{bonus}} bonusli bonusga ega bo&#39;lasiz.",
+        "Buy": "Sotib oling",
+        "PurchaseCredits": "Kredit sotib olish",
+        "Credits": "Kreditlar",
+        "ErrorInvalidAmount": "Miqdori yaroqsiz",
+        "ErrorInvalidCurrency": "Afsuski, biz hali ham {{currency}} valyutasini qo&#39;llab -quvvatlamaymiz",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        }
+    },
+    "history": {
+        "Date": "Sana",
+        "Amount": "Miqdori",
+        "Description": "Tavsif",
+        "Client": "Mijoz",
+        "To": "ga",
+        "From": "dan",
+        "SeeHistory": "{{1}} uchun to&#39;lovlar tarixini ko&#39;ring",
+        "HistoryEmpty": "Sizda hozircha hech qanday ma&#39;lumot yo&#39;q",
+        "PaymentFor": "{{amount}} ta kredit yuborildi",
+        "PaymentTo": "{{amount}} ta kredit yuborildi",
+        "PaymentToUser": "{{amount}} ta kredit yuborildi",
+        "CreatePaidStream": "{{amount}} ta kredit sarflandi",
+        "WatchClip": {
+            "+": "{{amount}} ta kredit oldi",
+            "-": "{{amount}} ta kredit sarflandi"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} ta kredit oldi",
+            "-": "{{amount}} ta kredit sarflandi"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} ta kredit olindi",
+            "-": "{{amount}} ta kredit yuborildi"
+        },
+        "CreatedCommunity": "{{amount}} ta kredit sarflandi",
+        "BoughtCredits": "{{amount}} ta kredit sotib olindi",
+        "BonusCredits": "{{amount}} bonusli bonusga ega bo&#39;ldingiz",
+        "InviteAcceptedBy": "{{amount}} ta kredit oldi",
+        "YouHaveCreditsToStart": "{{amount}} ta kredit oldi"
+    },
+    "subscriptions": {
+        "infoTitle": "To&#39;lov ma&#39;lumotlarini o&#39;rnatish",
+        "confirm": {
+            "title": "Obunani boshlang",
+            "message": "{{title}} kanaliga obuna bo&#39;lishni xohlaysizmi?",
+            "ok": "OK",
+            "cancel": "Bekor qilish"
+        },
+        "CreditOrDebitCard": "Kredit yoki debet karta",
+        "SubscribePayment": "To&#39;lovga obuna bo&#39;lish",
+        "ImmediatePayment": "Darhol to&#39;lov"
+    },
+    "payments": {
+        "infoTitle": "To&#39;lov ma&#39;lumotlarini o&#39;rnatish",
+        "BuyAmountCredits": "{{amount}} ta kredit sotib oling",
+        "confirm": {
+            "title": "To&#39;lovni amalga oshirish",
+            "message": "Siz {{symbol}} {{amount}} to&#39;lashga rozilik bildirasizmi?",
+            "ok": "OK",
+            "cancel": "Bekor qilish"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kreditlar",
+            "description": "kreditlar va to&#39;lovlarni hisobga oladi"
+        },
+        "Assets\/plan": {
+            "displayType": "Obuna bo&#39;lish rejasi",
+            "description": "obuna rejasi"
+        },
+        "Assets\/subscription": {
+            "displayType": "Obuna",
+            "description": "obuna"
+        },
+        "Assets\/product": {
+            "displayType": "Mahsulot",
+            "description": "sotiladigan mahsulot"
+        },
+        "Assets\/service": {
+            "displayType": "Xizmat",
+            "description": "taklif etilayotgan xizmat"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} ta kredit oldi"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} ta kredit sotib olindi"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredit"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} ta kredit sarflandi"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} ga {{amount}} ta kredit yuborildi"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} dan {{amount}} ta kredit olindi"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Yangi xizmat",
+            "TitlePlaceholder": "Xizmat nomi",
+            "PricePlaceholder": "Narxni belgilang",
+            "LinkPlaceholder": "qo&#39;shimcha ma&#39;lumot havolasini o&#39;rnating",
+            "DescriptionPlaceholder": "Xizmat tavsifi",
+            "SaveService": "Xizmatni saqlash",
+            "SelectRequiredParticipants": "Kerakli ishtirokchilar"
+        },
+        "ManageServiceTemplates": "Xizmat shablonlarini boshqarish",
+        "ManageServices": "Xizmatlarni boshqarish",
+        "Free": "Ozod",
+        "OptionalContribution": "Majburiy emas",
+        "RequiredPayment": "Majburiy to&#39;lov",
+        "AreYouSureDelete": "Haqiqatan ham bu xizmatni o‘chirib tashlamoqchimisiz?",
+        "AmountServicesRelated": "Bu xizmat bilan bog&#39;liq {{amount}} ta imkoniyat bor. Ular ham olib tashlanadi."
+    }
+}

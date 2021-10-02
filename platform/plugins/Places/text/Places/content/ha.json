@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng))",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "a cikin {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "kiometers",
+        "km": "km da",
+        "mile": "mil",
+        "miles": "mil",
+        "mi": "mi",
+        "foot": "kafa",
+        "feet": "ƙafafu",
+        "inches": "inci"
+    },
+    "location": {
+        "interested": "Ina sha&#39;awar abubuwan da ke faruwa a cikin {{select}} na",
+        "update": "Locationaukaka Wuri na",
+        "set": "Saita Wurina",
+        "prompt": "{{ClickOrTap}} zuwa nan<br> saita ku<br> wuri",
+        "myCurrentLocation": "Wuri na na yanzu",
+        "enterAddress": "Shigar da adireshi",
+        "enterPostcode": "Da fatan za a shigar da lambar akwatin gidan waya \/ lambarku",
+        "create": {
+            "action": "Ƙara Wuri",
+            "title": "Sabon Wuri",
+            "nameYourLocation": "Sanya wurin da kake"
+        },
+        "confirm": {
+            "title": "Ajiye wannan wurin?",
+            "message": "Kuna shirin sake amfani da wannan wurin nan gaba?",
+            "ok": "Na&#39;am",
+            "cancel": "A&#39;a"
+        },
+        "add": {
+            "title": "Suna wannan wuri",
+            "placeholder": "Gida, Aiki da dai sauransu.",
+            "ok": "Ajiye"
+        },
+        "dialog": {
+            "title": "Zaɓi Wuri"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Duk wani yanki a cikin wannan wurin?",
+        "newArea": "Sabuwar yanki",
+        "promptTitle": "Shigar da suna don yankin:",
+        "absent": "Da fatan a saita yanki",
+        "error": "Kuskure",
+        "exist": "Akwai wuri",
+        "addNewArea": "Ƙara sabon yanki",
+        "add": "Ƙara"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "tarin wurare",
+            "displayType": "Wurare"
+        },
+        "Places\/location": {
+            "description": "Wakilin gini, wuri, jirgi, wurin shakatawa, da sauransu.",
+            "displayType": "Wuri"
+        },
+        "Places\/area": {
+            "description": "Yana wakiltar yanki a cikin wuri, kamar ɗaki ko ɗaki",
+            "displayType": "Yanki"
+        },
+        "Places\/floor": {
+            "description": "Yana wakiltar bene a cikin gini ko jirgin ruwa",
+            "displayType": "Ƙasa"
+        },
+        "Places\/column": {
+            "description": "Yana wakiltar shafi a cikin gini ko jirgi",
+            "displayType": "Shafi"
+        },
+        "Places\/nearby": {
+            "description": "Nau&#39;i don abubuwa a cikin wani tazarar geohash",
+            "displayType": "Kusa da wurare"
+        },
+        "Places\/interest": {
+            "description": "Nau&#39;i don abubuwa a cikin wani tazarar geohash, daidai da sha&#39;awa",
+            "displayType": "Wuraren sha&#39;awa"
+        }
+    }
+}

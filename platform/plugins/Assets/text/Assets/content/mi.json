@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Patohia ki te utu"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ka utua mo {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Mauruuru mo to utu ki {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ohauru ki {{plan.title}}",
+        "YouSubscribedTo": "Kua ohauru koe ki {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Ka utua e koe te {{displayAmount}} mai i {{call 'publisher.displayName'}} e &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, hei whakaatu tenei ki a koe kua utua {{1}} ki {{2}} mo {{3}} e {{4}}"
+    },
+    "charged": {
+        "Subject": "Mauruuru mo to utu mo &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, he tohu tere tenei na te mea kua utua e koe te {{2}} ki te {{3}} mo {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "He korero mo te ota",
+        "PaymentMethod": "Tikanga utu",
+        "ContactInfo": "Mōhiohio whakapā",
+        "Pay": "Utu"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Karangatia e {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Kei a koe nga nama {{amount}} hei tiimata",
+        "PaymentFor": "Utu mo &quot;{{1}}&quot;",
+        "PaymentTo": "Utu ki {{1}}",
+        "PaymentToUser": "Utu ki {{toUserName}}",
+        "CreatePaidStream": "hei hanga i te {{toStreamName}}",
+        "JoinedPaidStream": "mo te rahui i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "hei hanga i te hapori &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "hei utu rahui i roto i te &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Hokona nga whiwhinga {{amount}}",
+        "BonusCredits": "Nga whiwhinga Takoha {{amount}}",
+        "BuyAmountCredits": "Hokona nga whiwhinga {{amount}}",
+        "WatchClip": "I whiwhi {{amount}} nga whiwhinga hei matakitaki {{fromStreamTitle}}",
+        "MissingCredits": "Whiwhinga Ngaro",
+        "YouMissingCredits": "Me whiwhi koe i etahi atu whiwhinga {{amount}} kia haere.",
+        "BuyCredits": "Hokona nga whiwhinga",
+        "BuyBonus": "Ko te hoko mai i nga nama {{amount}} i te wa kotahi, ka tae ki te {{bonus}} bonus whiwhinga.",
+        "Buy": "Hokona",
+        "PurchaseCredits": "Whiwhinga Whiwhinga",
+        "Credits": "Whiwhinga",
+        "ErrorInvalidAmount": "He muhu te moni",
+        "ErrorInvalidCurrency": "Kia aroha mai kaore ano matou kia tautoko i te moni {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "Nga whiwhinga {{amount}}",
+            "BonusCredits": "Nga whiwhinga {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Te Ra",
+        "Amount": "Tapeke",
+        "Description": "Whakaahuatanga",
+        "Client": "Kaihoko",
+        "To": "ki",
+        "From": "Tuhinga ka whai mai",
+        "SeeHistory": "Tirohia te hitori utu mo {{1}}",
+        "HistoryEmpty": "Kaore ano o raraunga",
+        "PaymentFor": "I tukuna mai nga whiwhinga {{amount}}",
+        "PaymentTo": "I tukuna mai nga whiwhinga {{amount}}",
+        "PaymentToUser": "I tukuna mai nga whiwhinga {{amount}}",
+        "CreatePaidStream": "I whakapaua nga nama {{amount}}",
+        "WatchClip": {
+            "+": "I whiwhi whiwhinga {{amount}}",
+            "-": "I whakapaua nga nama {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "I whiwhi whiwhinga {{amount}}",
+            "-": "I whakapaua nga nama {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Kua whiwhi whiwhinga {{amount}} ki a koe",
+            "-": "I tukuna mai nga whiwhinga {{amount}}"
+        },
+        "CreatedCommunity": "I whakapaua nga nama {{amount}}",
+        "BoughtCredits": "Hokona nga whiwhinga {{amount}}",
+        "BonusCredits": "I whiwhi whiwhinga bonus {{amount}}",
+        "InviteAcceptedBy": "I whiwhi whiwhinga {{amount}}",
+        "YouHaveCreditsToStart": "I whiwhi whiwhinga {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Whakaritehia nga korero Utu",
+        "confirm": {
+            "title": "Tīmata Ohaurunga",
+            "message": "Kei te hiahia ohauru koe ki {{title}}?",
+            "ok": "OK",
+            "cancel": "Whakakore"
+        },
+        "CreditOrDebitCard": "Kaari nama, nama ranei",
+        "SubscribePayment": "Ohauru Utu",
+        "ImmediatePayment": "Utu tonu"
+    },
+    "payments": {
+        "infoTitle": "Whakaritehia nga korero Utu",
+        "BuyAmountCredits": "Hokona nga whiwhinga {{amount}}",
+        "confirm": {
+            "title": "Mahia he Utu",
+            "message": "Kei te whakaae koe ki te utu i te {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Whakakore"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Whiwhinga",
+            "description": "te pupuri i nga whiwhinga me nga utu"
+        },
+        "Assets\/plan": {
+            "displayType": "Mahere Hoko",
+            "description": "mahere ohaurunga"
+        },
+        "Assets\/subscription": {
+            "displayType": "Ohaurunga",
+            "description": "ohaurunga"
+        },
+        "Assets\/product": {
+            "displayType": "Hua",
+            "description": "hua e hokona ana"
+        },
+        "Assets\/service": {
+            "displayType": "Ratonga",
+            "description": "ratonga e tukuna ana"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "I whiwhi whiwhinga {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Hokona nga whiwhinga {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Nga whiwhinga Takoha {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "I whakapaua nga nama {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "I tukuna nga nama ki {{amount}} ki {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Kua riro mai i a {{amount}} nga whiwhinga mai i {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Ratonga Hou",
+            "TitlePlaceholder": "Taitara Ratonga",
+            "PricePlaceholder": "Whakatakotoria te utu",
+            "LinkPlaceholder": "tautuhia he taapiri hono hono",
+            "DescriptionPlaceholder": "Whakaahuatanga Ratonga",
+            "SaveService": "Tiaki Ratonga",
+            "SelectRequiredParticipants": "Nga Kaiuru e hiahiatia ana"
+        },
+        "ManageServiceTemplates": "Whakahaerehia nga Tātauira Ratonga",
+        "ManageServices": "Whakahaere Ratonga",
+        "Free": "Koreutu",
+        "OptionalContribution": "Te koha whakauru",
+        "RequiredPayment": "Utu e hiahiatia ana",
+        "AreYouSureDelete": "Me muku tonu tenei ratonga?",
+        "AmountServicesRelated": "He {{amount}} nga kaupapa whai waahi e pa ana ki tenei ratonga. Ka nekehia atu ano hoki."
+    }
+}

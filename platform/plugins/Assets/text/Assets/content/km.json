@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ប៉ះដើម្បីបង់ប្រាក់"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}៖ ដំណើរការគិតថ្លៃសម្រាប់ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "សូមអរគុណចំពោះការទូទាត់របស់អ្នកទៅ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} បានជាវ {{plan.title}}",
+        "YouSubscribedTo": "អ្នកបានជាវ {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "អ្នកទទួលបានការទូទាត់ចំនួន {9999} ពី {{call 'publisher.displayName'}} ដោយ &quot;{{description}}&quot;",
+        "HasBeenCharged": "ហេនេះគ្រាន់តែដើម្បីឱ្យអ្នកដឹងថា {{1}} ត្រូវបានគិតថ្លៃ {{2}} សម្រាប់ {{3}} ដោយ {{4}}"
+    },
+    "charged": {
+        "Subject": "សូមអរគុណចំពោះការទូទាត់របស់អ្នកសម្រាប់ &quot;{{description}}&quot;",
+        "HavePaid": "សួស្តី {{1}} នេះគ្រាន់តែជាការបញ្ជាក់យ៉ាងរហ័សថាអ្នកបានបង់ប្រាក់ដោយជោគជ័យចំនួន {{2}} ទៅ {{3}} ក្នុងតម្លៃ {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "ព័ត៌មានអំពីការបញ្ជាទិញ",
+        "PaymentMethod": "វិធី​សា​ស្រ្ត​ទូទាត់",
+        "ContactInfo": "ព័ត៌មានទំនាក់ទំនង",
+        "Pay": "បង់"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ទទួលយកការអញ្ជើញដោយ {{invitedUserName}}",
+        "YouHaveCreditsToStart": "អ្នកមានឥណទាន {{amount}} ដើម្បីចាប់ផ្តើម",
+        "PaymentFor": "ការទូទាត់សម្រាប់ &quot;{{1}}&quot;",
+        "PaymentTo": "ការទូទាត់ទៅ {{1}}",
+        "PaymentToUser": "ការទូទាត់ទៅ {{toUserName}}",
+        "CreatePaidStream": "សម្រាប់បង្កើត {{toStreamName}}",
+        "JoinedPaidStream": "សម្រាប់ការកក់នៅ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "សម្រាប់បង្កើតសហគមន៍ &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ជាការសងប្រាក់កក់នៅ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "បានទិញឥណទាន {{amount}}",
+        "BonusCredits": "ប្រាក់រង្វាន់ {{amount}} ក្រេឌីត",
+        "BuyAmountCredits": "ទិញឥណទាន {{amount}}",
+        "WatchClip": "ទទួលបានឥណទាន {{amount}} សម្រាប់ការមើល {{fromStreamTitle}}",
+        "MissingCredits": "បាត់ឥណទាន",
+        "YouMissingCredits": "អ្នកត្រូវការឥណទាន {{amount}} បន្ថែមដើម្បីដំណើរការ។",
+        "BuyCredits": "ទិញឥណទាន",
+        "BuyBonus": "ការទិញឥណទាន {{amount}} ក្នុងពេលតែមួយនឹងនាំឱ្យមានប្រាក់រង្វាន់ឥណទាន {{bonus}} ។",
+        "Buy": "ទិញ",
+        "PurchaseCredits": "ទិញឥណទាន",
+        "Credits": "ក្រេឌីត",
+        "ErrorInvalidAmount": "ចំនួនទឹកប្រាក់មិនត្រឹមត្រូវ",
+        "ErrorInvalidCurrency": "ជាអកុសលយើងមិនគាំទ្ររូបិយប័ណ្ណ {{currency}} នៅឡើយទេ",
+        "forMessages": {
+            "BoughtCredits": "ឥណទាន {{amount}}",
+            "BonusCredits": "ឥណទាន {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "កាលបរិច្ឆេទ",
+        "Amount": "ចំនួនទឹកប្រាក់",
+        "Description": "ការពិពណ៌នា",
+        "Client": "អតិថិជន",
+        "To": "ទៅ",
+        "From": "ពី",
+        "SeeHistory": "មើលប្រវត្តិទូទាត់ប្រាក់សម្រាប់ {{1}}",
+        "HistoryEmpty": "អ្នកមិនទាន់មានទិន្នន័យនៅឡើយទេ",
+        "PaymentFor": "បានផ្ញើឥណទាន {{amount}}",
+        "PaymentTo": "បានផ្ញើឥណទាន {{amount}}",
+        "PaymentToUser": "បានផ្ញើឥណទាន {{amount}}",
+        "CreatePaidStream": "បានចំណាយឥណទាន {{amount}}",
+        "WatchClip": {
+            "+": "ទទួលបានឥណទាន {{amount}}",
+            "-": "បានចំណាយឥណទាន {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "ទទួលបានឥណទាន {{amount}}",
+            "-": "បានចំណាយឥណទាន {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "បានទទួលឥណទាន {{amount}}",
+            "-": "បានផ្ញើឥណទាន {{amount}}"
+        },
+        "CreatedCommunity": "បានចំណាយឥណទាន {{amount}}",
+        "BoughtCredits": "បានទិញឥណទាន {{amount}}",
+        "BonusCredits": "ទទួលបានប្រាក់រង្វាន់ {{amount}} ក្រេឌីត",
+        "InviteAcceptedBy": "ទទួលបានឥណទាន {{amount}}",
+        "YouHaveCreditsToStart": "ទទួលបានឥណទាន {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "កំណត់ព័ត៌មានទូទាត់",
+        "confirm": {
+            "title": "ចាប់ផ្តើមការជាវ",
+            "message": "តើអ្នកចង់ជាវប្រចាំទៅ {{title}} ទេ?",
+            "ok": "យល់ព្រម",
+            "cancel": "បោះបង់"
+        },
+        "CreditOrDebitCard": "កាតឥណទានឬឥណពន្ធ",
+        "SubscribePayment": "ជាវបង់ប្រាក់",
+        "ImmediatePayment": "ការទូទាត់ភ្លាមៗ"
+    },
+    "payments": {
+        "infoTitle": "កំណត់ព័ត៌មានទូទាត់",
+        "BuyAmountCredits": "ទិញឥណទាន {{amount}}",
+        "confirm": {
+            "title": "ធ្វើ​ការ​ទូទាត់",
+            "message": "តើអ្នកយល់ព្រមបង់ប្រាក់ {{symbol}} {{amount}} ទេ?",
+            "ok": "យល់ព្រម",
+            "cancel": "បោះបង់"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ក្រេឌីត",
+            "description": "តាមដានឥណទាននិងការទូទាត់"
+        },
+        "Assets\/plan": {
+            "displayType": "ផែនការជាវ",
+            "description": "ផែនការជាវ"
+        },
+        "Assets\/subscription": {
+            "displayType": "ការជាវ",
+            "description": "ការជាវ"
+        },
+        "Assets\/product": {
+            "displayType": "ផលិតផល",
+            "description": "ផលិតផលកំពុងត្រូវបានលក់"
+        },
+        "Assets\/service": {
+            "displayType": "សេវាកម្ម",
+            "description": "សេវាកម្មកំពុងផ្តល់ជូន"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "ទទួលបានឥណទាន {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "បានទិញឥណទាន {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ប្រាក់រង្វាន់ {{amount}} ក្រេឌីត"
+        },
+        "Assets\/credits\/spent": {
+            "content": "បានចំណាយឥណទាន {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "បានផ្ញើឥណទាន {{amount}} ទៅ {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "បានទទួលឥណទាន {{amount}} ពី {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "សេវាកម្មថ្មី",
+            "TitlePlaceholder": "ចំណងជើងសេវាកម្ម",
+            "PricePlaceholder": "កំណត់តម្លៃ",
+            "LinkPlaceholder": "កំណត់តំណព័ត៌មានបន្ថែម",
+            "DescriptionPlaceholder": "ការពិពណ៌នាអំពីសេវាកម្ម",
+            "SaveService": "រក្សាទុកសេវាកម្ម",
+            "SelectRequiredParticipants": "អ្នកចូលរួមដែលត្រូវការ"
+        },
+        "ManageServiceTemplates": "គ្រប់គ្រងគំរូសេវាកម្ម",
+        "ManageServices": "គ្រប់គ្រងសេវាកម្ម",
+        "Free": "ឥតគិតថ្លៃ",
+        "OptionalContribution": "ការរួមចំណែកជាជម្រើស",
+        "RequiredPayment": "ការទូទាត់ចាំបាច់",
+        "AreYouSureDelete": "តើអ្នកប្រាកដថាចង់លុបសេវាកម្មនេះឬ?",
+        "AmountServicesRelated": "មាន {{amount}} លទ្ធភាពទាក់ទងនឹងសេវាកម្មនេះ។ ពួកគេក៏នឹងត្រូវដកចេញដែរ។"
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Thepha ukuze ukhokhe"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ukukhokhiswa kucutshungulelwe i- {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Siyabonga ngenkokhelo yakho eya ku- {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ubhalisele i- {{plan.title}}",
+        "YouSubscribedTo": "Ubhalisele i- {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Uthola ukukhokhelwa kwe- {{displayAmount}} kusuka ku - {{call 'publisher.displayName'}} ngu - &quot;{{description}}&quot;",
+        "HasBeenCharged": "Sawubona, lokhu kwenzelwa ukukwazisa ukuthi {{1}} ukhokhiswe {{2}} u- {{3}} ngu - {{4}}"
+    },
+    "charged": {
+        "Subject": "Siyabonga ngenkokhelo yakho ye - &quot;{{description}}&quot;",
+        "HavePaid": "Sawubona {{1}}, lesi isiqinisekiso nje esisheshayo sokuthi ukhokhele ngempumelelo {{2}} ku - {{3}} ku - {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Ulwazi mayelana nokuhleleka",
+        "PaymentMethod": "Indlela yokukhokha",
+        "ContactInfo": "Imininingwane yokuxhumana",
+        "Pay": "Khokha"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Isimemo samukelwe ngu - {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Unamakhredithi angu- {{amount}} ongawaqala",
+        "PaymentFor": "Inkokhelo ye - &quot;{{1}}&quot;",
+        "PaymentTo": "Ukukhokha ku- {{1}}",
+        "PaymentToUser": "Ukukhokha ku- {{toUserName}}",
+        "CreatePaidStream": "ngokudala i- {{toStreamName}}",
+        "JoinedPaidStream": "ngokubhuka ku - &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ngokudala umphakathi &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "njengembuyiselo yokubhuka ku - &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Uthenge amakhredithi angu- {{amount}}",
+        "BonusCredits": "Amakhredithi ebhonasi {{amount}}",
+        "BuyAmountCredits": "Thenga amakhredithi angu- {{amount}}",
+        "WatchClip": "Kutholwe amakhredithi angu- {{amount}} ngokubuka {{fromStreamTitle}}",
+        "MissingCredits": "Amakhredithi Alahlekile",
+        "YouMissingCredits": "Udinga amanye amakhredithi angu- {{amount}} ukuze uqhubeke.",
+        "BuyCredits": "Thenga amakhredithi",
+        "BuyBonus": "Ukuthenga amakhredithi angu- {{amount}} ngasikhathi sinye, kuzoholela kumabhonasi wamakhredithi angu- {{bonus}}.",
+        "Buy": "Thenga",
+        "PurchaseCredits": "Amakhredithi Wokuthenga",
+        "Credits": "Amakhredithi",
+        "ErrorInvalidAmount": "Inani alivumelekile",
+        "ErrorInvalidCurrency": "Ngeshwa asisekeli uhlobo lwemali {{currency}} okwamanje",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} amakhredithi",
+            "BonusCredits": "{{amount}} amakhredithi"
+        }
+    },
+    "history": {
+        "Date": "Usuku",
+        "Amount": "Inani",
+        "Description": "Incazelo",
+        "Client": "Iklayenti",
+        "To": "uku",
+        "From": "kusuka",
+        "SeeHistory": "Bona umlando wokukhokha we - {{1}}",
+        "HistoryEmpty": "Awunayo idatha okwamanje",
+        "PaymentFor": "Amakhredithi athunyelwe {{amount}}",
+        "PaymentTo": "Amakhredithi athunyelwe {{amount}}",
+        "PaymentToUser": "Amakhredithi athunyelwe {{amount}}",
+        "CreatePaidStream": "Kusetshenziswe amakhredithi angu- {{amount}}",
+        "WatchClip": {
+            "+": "Amakhredithi atholiwe angu- {{amount}}",
+            "-": "Kusetshenziswe amakhredithi angu- {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Amakhredithi atholiwe angu- {{amount}}",
+            "-": "Kusetshenziswe amakhredithi angu- {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Kutholwe amakhredithi angu- {{amount}}",
+            "-": "Amakhredithi athunyelwe {{amount}}"
+        },
+        "CreatedCommunity": "Kusetshenziswe amakhredithi angu- {{amount}}",
+        "BoughtCredits": "Uthenge amakhredithi angu- {{amount}}",
+        "BonusCredits": "Uthole amakhredithi we - {{amount}}",
+        "InviteAcceptedBy": "Amakhredithi atholiwe angu- {{amount}}",
+        "YouHaveCreditsToStart": "Amakhredithi atholiwe angu- {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Setha Ulwazi Lokukhokha",
+        "confirm": {
+            "title": "Qala Ukubhalisa",
+            "message": "Ungathanda ukubhalisela i- {{title}}?",
+            "ok": "KULUNGILE",
+            "cancel": "Khansela"
+        },
+        "CreditOrDebitCard": "Ikhadi lesikweletu noma lasebhange",
+        "SubscribePayment": "Bhalisa Inkokhelo",
+        "ImmediatePayment": "Ukukhokha Ngokushesha"
+    },
+    "payments": {
+        "infoTitle": "Setha Ulwazi Lokukhokha",
+        "BuyAmountCredits": "Thenga amakhredithi angu- {{amount}}",
+        "confirm": {
+            "title": "Yenza Inkokhelo",
+            "message": "Uyavuma ukukhokha i- {{symbol}} {{amount}}?",
+            "ok": "KULUNGILE",
+            "cancel": "Khansela"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Amakhredithi",
+            "description": "ubala amakhredithi nezinkokhelo"
+        },
+        "Assets\/plan": {
+            "displayType": "Uhlelo lokubhaliselwe",
+            "description": "uhlelo lokubhalisa"
+        },
+        "Assets\/subscription": {
+            "displayType": "Okubhaliselwe",
+            "description": "okubhaliselwe"
+        },
+        "Assets\/product": {
+            "displayType": "Umkhiqizo",
+            "description": "umkhiqizo uyathengiswa"
+        },
+        "Assets\/service": {
+            "displayType": "Insiza",
+            "description": "isevisi enikezwayo"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Amakhredithi atholiwe angu- {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Uthenge amakhredithi angu- {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Amakhredithi ebhonasi {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Kusetshenziswe amakhredithi angu- {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Kuthunyelwe amakhredithi angu - {{amount}} ku- {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Kutholwe amakhredithi angu- {{amount}} kusuka ku- {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Isevisi entsha",
+            "TitlePlaceholder": "Isihloko sesevisi",
+            "PricePlaceholder": "Setha intengo",
+            "LinkPlaceholder": "setha isixhumanisi semininingwane eyengeziwe",
+            "DescriptionPlaceholder": "Incazelo yesevisi",
+            "SaveService": "Londoloza Insiza",
+            "SelectRequiredParticipants": "Abahlanganyeli Abadingekayo"
+        },
+        "ManageServiceTemplates": "Phatha izifanekiso Zesevisi",
+        "ManageServices": "Phatha Imisebenzi",
+        "Free": "Mahhala",
+        "OptionalContribution": "Umnikelo ongawukhetha",
+        "RequiredPayment": "Inkokhelo edingekayo",
+        "AreYouSureDelete": "Uqinisekile ukuthi ufuna ukususa le sevisi?",
+        "AmountServicesRelated": "Kukhona {{amount}} ukutholakala okuhlobene nale sevisi. Futhi zizosuswa."
+    }
+}

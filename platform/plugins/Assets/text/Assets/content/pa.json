@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਟੈਪ ਕਰੋ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} ਲਈ ਚਾਰਜ ਦੀ ਪ੍ਰਕਿਰਿਆ ਕੀਤੀ ਗਈ",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ਨੂੰ ਤੁਹਾਡੇ ਭੁਗਤਾਨ ਲਈ ਧੰਨਵਾਦ",
+        "SubscribedTo": "{{call 'user.displayName'}} ਨੇ {{plan.title}} ਦੀ ਗਾਹਕੀ ਲਈ",
+        "YouSubscribedTo": "ਤੁਸੀਂ {{plan.title}} ਦੇ ਗਾਹਕ ਬਣ ਗਏ ਹੋ"
+    },
+    "charge": {
+        "Subject": "ਤੁਹਾਨੂੰ &quot;{{description}}&quot; ਦੁਆਰਾ {{call 'publisher.displayName'}} ਤੋਂ {{displayAmount}} ਦਾ ਭੁਗਤਾਨ ਪ੍ਰਾਪਤ ਹੁੰਦਾ ਹੈ",
+        "HasBeenCharged": "ਸਤਿ ਸ੍ਰੀ ਅਕਾਲ, ਇਹ ਸਿਰਫ ਤੁਹਾਨੂੰ ਦੱਸਣ ਲਈ ਹੈ ਕਿ {{1}} ਦਾ {{3}} ਲਈ {{4}} ਦੁਆਰਾ {{2}} ਖਰਚਾ ਲਿਆ ਗਿਆ ਹੈ"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; ਲਈ ਤੁਹਾਡੇ ਭੁਗਤਾਨ ਲਈ ਧੰਨਵਾਦ",
+        "HavePaid": "ਹੈਲੋ {{1}}, ਇਹ ਸਿਰਫ ਇੱਕ ਤਤਕਾਲ ਪੁਸ਼ਟੀ ਹੈ ਕਿ ਤੁਸੀਂ {{3}} ਨੂੰ {{4}} ਲਈ ਸਫਲਤਾਪੂਰਵਕ {{2}} ਦਾ ਭੁਗਤਾਨ ਕੀਤਾ ਹੈ"
+    },
+    "payment": {
+        "AboutOrder": "ਆਰਡਰ ਬਾਰੇ ਜਾਣਕਾਰੀ",
+        "PaymentMethod": "ਭੁਗਤਾਨੇ ਦੇ ਢੰਗ",
+        "ContactInfo": "ਸੰਪਰਕ ਜਾਣਕਾਰੀ",
+        "Pay": "ਭੁਗਤਾਨ ਕਰੋ"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{invitedUserName}} ਦੁਆਰਾ ਸੱਦਾ ਸਵੀਕਾਰ ਕੀਤਾ ਗਿਆ",
+        "YouHaveCreditsToStart": "ਤੁਹਾਡੇ ਕੋਲ ਸ਼ੁਰੂ ਕਰਨ ਲਈ {{amount}} ਕ੍ਰੈਡਿਟ ਹਨ",
+        "PaymentFor": "&quot;{{1}}&quot; ਲਈ ਭੁਗਤਾਨ",
+        "PaymentTo": "{{1}} ਨੂੰ ਭੁਗਤਾਨ",
+        "PaymentToUser": "{{toUserName}} ਨੂੰ ਭੁਗਤਾਨ",
+        "CreatePaidStream": "{{toStreamName}} ਬਣਾਉਣ ਲਈ",
+        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ਵਿੱਚ ਰਿਜ਼ਰਵੇਸ਼ਨ ਲਈ",
+        "CreatedCommunity": "ਭਾਈਚਾਰਾ &quot;{{communityId}}&quot; ਬਣਾਉਣ ਲਈ",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ਵਿੱਚ ਰਿਜ਼ਰਵੇਸ਼ਨ ਰਿਫੰਡ ਵਜੋਂ",
+        "BoughtCredits": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦਿਆ",
+        "BonusCredits": "ਬੋਨਸ {{amount}} ਕ੍ਰੈਡਿਟ",
+        "BuyAmountCredits": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦੋ",
+        "WatchClip": "{{fromStreamTitle}} ਦੇਖਣ ਲਈ {{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ",
+        "MissingCredits": "ਗੁੰਮਸ਼ੁਦਾ ਕ੍ਰੈਡਿਟ",
+        "YouMissingCredits": "ਅੱਗੇ ਵਧਣ ਲਈ ਤੁਹਾਨੂੰ ਇੱਕ ਵਾਧੂ {{amount}} ਕ੍ਰੈਡਿਟਸ ਦੀ ਲੋੜ ਹੈ.",
+        "BuyCredits": "ਕ੍ਰੈਡਿਟ ਖਰੀਦੋ",
+        "BuyBonus": "ਇੱਕ ਵਾਰ ਵਿੱਚ {{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦਣ ਨਾਲ, {{bonus}} ਕ੍ਰੈਡਿਟ ਬੋਨਸ ਮਿਲੇਗਾ.",
+        "Buy": "ਖਰੀਦੋ",
+        "PurchaseCredits": "ਕ੍ਰੈਡਿਟ ਖਰੀਦੋ",
+        "Credits": "ਕ੍ਰੈਡਿਟਸ",
+        "ErrorInvalidAmount": "ਰਕਮ ਅਵੈਧ ਹੈ",
+        "ErrorInvalidCurrency": "ਬਦਕਿਸਮਤੀ ਨਾਲ ਅਸੀਂ ਅਜੇ ਮੁਦਰਾ {{currency}} ਦਾ ਸਮਰਥਨ ਨਹੀਂ ਕਰਦੇ",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ਕ੍ਰੈਡਿਟ",
+            "BonusCredits": "{{amount}} ਕ੍ਰੈਡਿਟ"
+        }
+    },
+    "history": {
+        "Date": "ਤਾਰੀਖ਼",
+        "Amount": "ਦੀ ਰਕਮ",
+        "Description": "ਵਰਣਨ",
+        "Client": "ਕਲਾਇੰਟ",
+        "To": "ਨੂੰ",
+        "From": "ਤੋਂ",
+        "SeeHistory": "{{1}} ਲਈ ਭੁਗਤਾਨ ਇਤਿਹਾਸ ਦੇਖੋ",
+        "HistoryEmpty": "ਤੁਹਾਡੇ ਕੋਲ ਅਜੇ ਕੋਈ ਡਾਟਾ ਨਹੀਂ ਹੈ",
+        "PaymentFor": "{{amount}} ਕ੍ਰੈਡਿਟ ਭੇਜੇ ਗਏ",
+        "PaymentTo": "{{amount}} ਕ੍ਰੈਡਿਟ ਭੇਜੇ ਗਏ",
+        "PaymentToUser": "{{amount}} ਕ੍ਰੈਡਿਟ ਭੇਜੇ ਗਏ",
+        "CreatePaidStream": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰਚ ਕੀਤੇ",
+        "WatchClip": {
+            "+": "{{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ",
+            "-": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰਚ ਕੀਤੇ"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ",
+            "-": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰਚ ਕੀਤੇ"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} ਕ੍ਰੈਡਿਟ ਪ੍ਰਾਪਤ ਹੋਏ",
+            "-": "{{amount}} ਕ੍ਰੈਡਿਟ ਭੇਜੇ ਗਏ"
+        },
+        "CreatedCommunity": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰਚ ਕੀਤੇ",
+        "BoughtCredits": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦਿਆ",
+        "BonusCredits": "ਬੋਨਸ {{amount}} ਕ੍ਰੈਡਿਟ ਪ੍ਰਾਪਤ ਹੋਏ",
+        "InviteAcceptedBy": "{{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ",
+        "YouHaveCreditsToStart": "{{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ"
+    },
+    "subscriptions": {
+        "infoTitle": "ਭੁਗਤਾਨ ਜਾਣਕਾਰੀ ਸੈਟ ਕਰੋ",
+        "confirm": {
+            "title": "ਗਾਹਕੀ ਸ਼ੁਰੂ ਕਰੋ",
+            "message": "ਕੀ ਤੁਸੀਂ {{title}} ਦੇ ਗਾਹਕ ਬਣਨਾ ਚਾਹੋਗੇ?",
+            "ok": "ਠੀਕ ਹੈ",
+            "cancel": "ਰੱਦ ਕਰੋ"
+        },
+        "CreditOrDebitCard": "ਕ੍ਰੈਡਿਟ ਜਾਂ ਡੈਬਿਟ ਕਾਰਡ",
+        "SubscribePayment": "ਭੁਗਤਾਨ ਦੀ ਗਾਹਕੀ ਲਓ",
+        "ImmediatePayment": "ਤੁਰੰਤ ਭੁਗਤਾਨ"
+    },
+    "payments": {
+        "infoTitle": "ਭੁਗਤਾਨ ਜਾਣਕਾਰੀ ਸੈਟ ਕਰੋ",
+        "BuyAmountCredits": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦੋ",
+        "confirm": {
+            "title": "ਇੱਕ ਭੁਗਤਾਨ ਕਰੋ",
+            "message": "ਕੀ ਤੁਸੀਂ {{symbol}} {{amount}} ਦਾ ਭੁਗਤਾਨ ਕਰਨ ਲਈ ਸਹਿਮਤ ਹੋ?",
+            "ok": "ਠੀਕ ਹੈ",
+            "cancel": "ਰੱਦ ਕਰੋ"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ਕ੍ਰੈਡਿਟਸ",
+            "description": "ਕ੍ਰੈਡਿਟਸ ਅਤੇ ਭੁਗਤਾਨਾਂ ਦਾ ਧਿਆਨ ਰੱਖਦਾ ਹੈ"
+        },
+        "Assets\/plan": {
+            "displayType": "ਸਬਸਕ੍ਰਿਪਸ਼ਨ ਯੋਜਨਾ",
+            "description": "ਗਾਹਕੀ ਯੋਜਨਾ"
+        },
+        "Assets\/subscription": {
+            "displayType": "ਗਾਹਕੀ",
+            "description": "ਗਾਹਕੀ"
+        },
+        "Assets\/product": {
+            "displayType": "ਉਤਪਾਦ",
+            "description": "ਉਤਪਾਦ ਵੇਚਿਆ ਜਾ ਰਿਹਾ ਹੈ"
+        },
+        "Assets\/service": {
+            "displayType": "ਸੇਵਾ",
+            "description": "ਸੇਵਾ ਪੇਸ਼ ਕੀਤੀ ਜਾ ਰਹੀ ਹੈ"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} ਕ੍ਰੈਡਿਟ ਹਾਸਲ ਕੀਤੇ"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰੀਦਿਆ"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ਬੋਨਸ {{amount}} ਕ੍ਰੈਡਿਟ"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} ਕ੍ਰੈਡਿਟ ਖਰਚ ਕੀਤੇ"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} ਨੂੰ {{amount}} ਕ੍ਰੈਡਿਟ ਭੇਜੇ ਗਏ"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} ਤੋਂ {{amount}} ਕ੍ਰੈਡਿਟ ਪ੍ਰਾਪਤ ਹੋਏ"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "ਨਵੀਂ ਸੇਵਾ",
+            "TitlePlaceholder": "ਸੇਵਾ ਦਾ ਸਿਰਲੇਖ",
+            "PricePlaceholder": "ਕੀਮਤ ਨਿਰਧਾਰਤ ਕਰੋ",
+            "LinkPlaceholder": "ਵਾਧੂ ਜਾਣਕਾਰੀ ਲਿੰਕ ਸੈਟ ਕਰੋ",
+            "DescriptionPlaceholder": "ਸੇਵਾ ਦਾ ਵਰਣਨ",
+            "SaveService": "ਸੇਵਾ ਸੰਭਾਲੋ",
+            "SelectRequiredParticipants": "ਲੋੜੀਂਦੇ ਭਾਗੀਦਾਰ"
+        },
+        "ManageServiceTemplates": "ਸੇਵਾ ਨਮੂਨੇ ਪ੍ਰਬੰਧਿਤ ਕਰੋ",
+        "ManageServices": "ਸੇਵਾਵਾਂ ਦਾ ਪ੍ਰਬੰਧਨ ਕਰੋ",
+        "Free": "ਖਾਲੀ",
+        "OptionalContribution": "ਵਿਕਲਪਿਕ ਯੋਗਦਾਨ",
+        "RequiredPayment": "ਲੋੜੀਂਦਾ ਭੁਗਤਾਨ",
+        "AreYouSureDelete": "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਸੇਵਾ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?",
+        "AmountServicesRelated": "ਇਸ ਸੇਵਾ ਨਾਲ ਸੰਬੰਧਿਤ {{amount}} ਉਪਲਬਧਤਾ ਹਨ. ਉਹ ਵੀ ਹਟਾ ਦਿੱਤੇ ਜਾਣਗੇ."
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} ناوخته ، {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "په {{1}} کې"
+    },
+    "units": {
+        "meter": "متره",
+        "meters": "متره",
+        "kilometer": "کیلومتره",
+        "kilometers": "کیومیټرونه",
+        "km": "کیلومتره",
+        "mile": "میل",
+        "miles": "میلونه",
+        "mi": "mi",
+        "foot": "پښه",
+        "feet": "پښې",
+        "inches": "انچونه"
+    },
+    "location": {
+        "interested": "زه د هغه شیانو سره علاقه لرم چې د {{select}} دننه پیښیږي",
+        "update": "زما ځای تازه کړئ",
+        "set": "زما ځای تنظیم کړئ",
+        "prompt": "{{ClickOrTap}} دلته<br> خپل تنظیم کړئ<br> ځای",
+        "myCurrentLocation": "زما اوسنی موقعیت",
+        "enterAddress": "یو ادرس دننه کړئ",
+        "enterPostcode": "مهرباني وکړئ خپل پوسټ کوډ \/ زپ کوډ دننه کړئ",
+        "create": {
+            "action": "ځای اضافه کړئ",
+            "title": "نوی ځای",
+            "nameYourLocation": "خپل ځای نوم کړئ"
+        },
+        "confirm": {
+            "title": "دا ځای خوندي کړئ؟",
+            "message": "ایا تاسو پلان لرئ په راتلونکي کې دا ځای بیا وکاروئ؟",
+            "ok": "هو",
+            "cancel": "نه"
+        },
+        "add": {
+            "title": "دا ځای نوم کړئ",
+            "placeholder": "کور ، کار او داسې نور.",
+            "ok": "خوندي کول"
+        },
+        "dialog": {
+            "title": "ځای غوره کړئ"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "په دې موقعیت کې کومه سیمه شته؟",
+        "newArea": "نوې سیمه",
+        "promptTitle": "د سیمې لپاره نوم دننه کړئ:",
+        "absent": "مهرباني وکړئ ساحه تنظیم کړئ",
+        "error": "تېروتنه",
+        "exist": "ساحه لا دمخه شتون لري",
+        "addNewArea": "نوې ساحه اضافه کړئ",
+        "add": "اضافه کړئ"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "د ځایونو ټولګه",
+            "displayType": "ځایونه"
+        },
+        "Places\/location": {
+            "description": "د ودانۍ ، ځای ، کښتۍ ، پارک ، او نورو نمایندګي کوي.",
+            "displayType": "ځای"
+        },
+        "Places\/area": {
+            "description": "په یوه موقعیت کې د سیمې نمایندګي کوي ، لکه خونه یا سویټ",
+            "displayType": "سیمه"
+        },
+        "Places\/floor": {
+            "description": "په ودانۍ یا کښتۍ کې د پوړ استازیتوب کوي",
+            "displayType": "پوړ"
+        },
+        "Places\/column": {
+            "description": "په ودانۍ یا کښتۍ کې د کالم استازیتوب کوي",
+            "displayType": "کالم"
+        },
+        "Places\/nearby": {
+            "description": "د جیوهش په ټاکلي واټن کې د شیانو لپاره کټګوري",
+            "displayType": "د ځایونو سره نږدې"
+        },
+        "Places\/interest": {
+            "description": "د جیوهش په ټاکلي واټن کې د شیانو لپاره کټګوري ، د ګټو سره سم",
+            "displayType": "د ګټو ځایونه"
+        }
+    }
+}

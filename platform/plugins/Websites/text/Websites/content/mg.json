@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Rohy hampiroborobo",
+                "startDate": "Daty nanombohana",
+                "startTime": "Fotoana fanombohana",
+                "endDate": "Daty famaranana",
+                "endTime": "Fotoana farany",
+                "budget": "Tetibola"
+            },
+            "interests": {
+                "Title": "Sivanina amin&#39;ny zanabola",
+                "FilterInterests": "Manomboha manorata fahalianana ..."
+            },
+            "Interest": "Interest",
+            "Location": "Toerana"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Mandehana",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Mizaha",
+            "WriteToStartConversation": "Soraty ny hevitrao hanombohana ilay resaka",
+            "StartConversation": "Atombohy ny resaka",
+            "GotoConversation": "Mandehana amin&#39;ny Resadresaka",
+            "reset": "Mamerina",
+            "edit": "Ovay",
+            "link": "Rohy",
+            "setUrl": "Mametraha URL",
+            "save": "afa-tsy",
+            "setClip": "Hetezo ny clip",
+            "invalidURL": "URL tsy mety"
+        },
+        "FileTooLarge": "File be loatra amin&#39;ny cache. Haben&#39;ny Max {{size}}",
+        "InvalidPDF": "Ny rakitra dia tsy PDF mety",
+        "StartTypingTitleOrKeywords": "Manomboha manoratra lohanteny na teny lakile ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Antontan-taratasy HTML izay azon&#39;ny mpampiasa isan-karazany atao ny mijery sy manitsy",
+            "displayType": "Andininy"
+        },
+        "Websites\/slide": {
+            "description": "Slide amin&#39;ny fampisehoana iray, mety ahitana HTML, audio sns.",
+            "displayType": "tsary"
+        },
+        "Websites\/presentation": {
+            "description": "Fampisehoana ahitana slides isan-karazany",
+            "displayType": "Presentation"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Sehatra fanaovana dokam-barotra amin&#39;ny tranokala",
+            "displayType": "Unit unit"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Fomba iray hanangonana vondrona dokam-barotra amin&#39;ny anarana",
+            "displayType": "Fametrahana advert"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Votoatin&#39;ny doka",
+            "displayType": "Advert mamorona"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Fanentanana amin&#39;ny doka",
+            "displayType": "Fanentanana amin&#39;ny dokambarotra"
+        },
+        "Websites\/webpage": {
+            "description": "Manome tranonkala iray izay nesorina ny metadata",
+            "displayType": "pejin-tranonkala"
+        }
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "mkati mwa {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mamita",
+        "kilometer": "kilomita",
+        "kilometers": "makina",
+        "km": "Km",
+        "mile": "Mailo",
+        "miles": "mamailosi",
+        "mi": "mi",
+        "foot": "phazi",
+        "feet": "mapazi",
+        "inches": "mainchesi"
+    },
+    "location": {
+        "interested": "Ndimachita chidwi ndi zinthu zomwe zikuchitika mkati mwa {{select}} kuchokera",
+        "update": "Sinthani Malo Anga",
+        "set": "Khazikitsani Malo Anga",
+        "prompt": "{{ClickOrTap}} pano ku<br> khalani yanu<br> malo",
+        "myCurrentLocation": "Malo omwe ndili",
+        "enterAddress": "Lowetsani adilesi",
+        "enterPostcode": "Chonde lowetsani postcode \/ zipcode yanu",
+        "create": {
+            "action": "Onjezani Malo",
+            "title": "Malo Atsopano",
+            "nameYourLocation": "Tchulani malo omwe muli"
+        },
+        "confirm": {
+            "title": "Sungani malowa?",
+            "message": "Kodi mukufuna kugwiritsa ntchito malowa mtsogolomo?",
+            "ok": "Inde",
+            "cancel": "Ayi"
+        },
+        "add": {
+            "title": "Tchulani malowa",
+            "placeholder": "Kunyumba, Ntchito etc.",
+            "ok": "Sungani"
+        },
+        "dialog": {
+            "title": "Sankhani Malo"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Malo aliwonse mkati mwa malowa?",
+        "newArea": "Dera latsopano",
+        "promptTitle": "Lowetsani dzina m&#39;derali:",
+        "absent": "Chonde ikani malo",
+        "error": "Cholakwika",
+        "exist": "Dera lilipo kale",
+        "addNewArea": "Onjezani malo atsopano",
+        "add": "Onjezani"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "malo osiyanasiyana",
+            "displayType": "Malo"
+        },
+        "Places\/location": {
+            "description": "Zimayimira nyumba, malo, sitima, paki, ndi zina zambiri.",
+            "displayType": "Malo"
+        },
+        "Places\/area": {
+            "description": "Imayimira dera lomwe lili mkati, monga chipinda kapena chipinda",
+            "displayType": "Malo"
+        },
+        "Places\/floor": {
+            "description": "Imayimira pansi mu nyumba kapena sitima",
+            "displayType": "Pansi"
+        },
+        "Places\/column": {
+            "description": "Imayimira gawo munyumba kapena sitimayo",
+            "displayType": "Mzere"
+        },
+        "Places\/nearby": {
+            "description": "Gulu la zinthu zomwe zili patali ndi geohash",
+            "displayType": "Pafupi ndi malo"
+        },
+        "Places\/interest": {
+            "description": "Gulu la zinthu mtunda wina wa geohash, lofananira ndi chidwi",
+            "displayType": "Malo chidwi"
+        }
+    }
+}

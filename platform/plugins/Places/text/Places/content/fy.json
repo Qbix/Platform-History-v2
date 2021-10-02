@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "binnen {{1}}"
+    },
+    "units": {
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "myl",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foet",
+        "feet": "fuotten",
+        "inches": "inches"
+    },
+    "location": {
+        "interested": "Ik bin ynteressearre yn dingen dy&#39;t plakfine binnen {{select}} fan",
+        "update": "Myn lokaasje bywurkje",
+        "set": "Stel myn lokaasje yn",
+        "prompt": "{{ClickOrTap}} hjir nei<br> set dyn<br> lokaasje",
+        "myCurrentLocation": "Myn hjoeddeistige lokaasje",
+        "enterAddress": "Fier in adres yn",
+        "enterPostcode": "Fier jo postkoade \/ postkoade yn",
+        "create": {
+            "action": "Lokaasje taheakje",
+            "title": "Nije lokaasje",
+            "nameYourLocation": "Namme jo lokaasje"
+        },
+        "confirm": {
+            "title": "Bewarje dizze lokaasje?",
+            "message": "Binne jo fan plan om dizze lokaasje yn &#39;e takomst nochris te brûken?",
+            "ok": "Ja",
+            "cancel": "Nee"
+        },
+        "add": {
+            "title": "Neam dizze lokaasje",
+            "placeholder": "Thús, wurk ensfh.",
+            "ok": "Rêde"
+        },
+        "dialog": {
+            "title": "Kies Lokaasje"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Elk gebiet binnen dizze lokaasje?",
+        "newArea": "Nij gebiet",
+        "promptTitle": "Fier in namme yn foar it gebiet:",
+        "absent": "Set asjebleaft gebiet",
+        "error": "Fersin",
+        "exist": "Gebiet bestiet al",
+        "addNewArea": "Nij gebiet taheakje",
+        "add": "Taheakje"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "in samling lokaasjes",
+            "displayType": "Lokaasjes"
+        },
+        "Places\/location": {
+            "description": "Fertsjintwurdiget in gebou, lokaasje, skip, park, ensfh.",
+            "displayType": "Lokaasje"
+        },
+        "Places\/area": {
+            "description": "Fertsjintwurdiget in gebiet binnen in lokaasje, lykas in keamer as suite",
+            "displayType": "Krite"
+        },
+        "Places\/floor": {
+            "description": "Fertsjintwurdiget in flier yn in gebou as skip",
+            "displayType": "Flier"
+        },
+        "Places\/column": {
+            "description": "Fertsjintwurdiget in kolom yn in gebou as skip",
+            "displayType": "Pylder"
+        },
+        "Places\/nearby": {
+            "description": "Kategory foar dingen binnen in bepaalde ôfstân fan in geohash",
+            "displayType": "Nearby plakken"
+        },
+        "Places\/interest": {
+            "description": "Kategory foar dingen binnen in bepaalde ôfstân fan in geohash, oerienkommende mei in belang",
+            "displayType": "Plakken ynteresse"
+        }
+    }
+}

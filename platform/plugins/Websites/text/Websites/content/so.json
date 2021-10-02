@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link si kor loogu qaado",
+                "startDate": "Taariikhda billowga",
+                "startTime": "Waqtiga Bilowga",
+                "endDate": "Dhammaadka Taariikhda",
+                "endTime": "Waqtiga Dhamaadka",
+                "budget": "Miisaaniyadda"
+            },
+            "interests": {
+                "Title": "Ku Sifee Xiisaha",
+                "FilterInterests": "Bilow garaacida dulsaarka ..."
+            },
+            "Interest": "Xiisaha",
+            "Location": "Goobta"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Tag",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Baadh",
+            "WriteToStartConversation": "Qor fikradahaaga si aad u bilowdo wada hadalka",
+            "StartConversation": "Wadahadal Bilow",
+            "GotoConversation": "Tag Wadahadalka",
+            "reset": "Dib u celi",
+            "edit": "Tafatir",
+            "link": "Xiriir",
+            "setUrl": "Samee URL",
+            "save": "Badbaadi",
+            "setClip": "Gooyo Goos goos ah",
+            "invalidURL": "URL aan ansax ahayn"
+        },
+        "FileTooLarge": "Fayl aad u weyn u kaydsiga. Baaxadda faylka ugu badan {{size}}",
+        "InvalidPDF": "Faylku ma aha PDF sax ah",
+        "StartTypingTitleOrKeywords": "Bilow qorista cinwaanka ama ereyada muhiimka ah ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Dukumenti HTML ah oo adeegsadayaasha kala duwan arki karaan oo tafatiri karaan",
+            "displayType": "Qodobka"
+        },
+        "Websites\/slide": {
+            "description": "Sawir -soo -jeedinta bandhigga, waxaa ku jiri kara HTML, maqal iwm.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Bandhig ka kooban bogag kala duwan",
+            "displayType": "Soo bandhigid"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Unug xayeysiis ku leh mareegaha",
+            "displayType": "Qaybta xayeysiiska"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Habka koox -kooxeedyada xayaysiinta magac ahaan",
+            "displayType": "Meelaynta xayeysiiska"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Waxyaabaha ku jira xayaysiis",
+            "displayType": "Xayeysiis hal abuur leh"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Olole xayaysiis",
+            "displayType": "Ololaha xayeysiiska"
+        },
+        "Websites\/webpage": {
+            "description": "Wuxuu matalaa mareegta metadata la xoqay",
+            "displayType": "Bogga internetka"
+        }
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat ፣ {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "በ {{1}} ውስጥ"
+    },
+    "units": {
+        "meter": "ሜትር",
+        "meters": "ሜትር",
+        "kilometer": "ኪሎሜትር",
+        "kilometers": "ኪዮሜትሮች",
+        "km": "ኪ.ሜ",
+        "mile": "ማይል",
+        "miles": "ማይሎች",
+        "mi": "ማይ",
+        "foot": "እግር",
+        "feet": "እግሮች",
+        "inches": "ኢንች"
+    },
+    "location": {
+        "interested": "በ {{select}} ውስጥ ባሉ ነገሮች ላይ ፍላጎት አለኝ",
+        "update": "የእኔን አካባቢ አዘምን",
+        "set": "የእኔን አካባቢ ያዘጋጁ",
+        "prompt": "{{ClickOrTap}} እዚህ<br> አዘጋጅ<br> ቦታ",
+        "myCurrentLocation": "የአሁኑ ሥፍራዬ",
+        "enterAddress": "አድራሻ ያስገቡ",
+        "enterPostcode": "እባክዎን የፖስታ ኮድ \/ ዚፕ ኮድዎን ያስገቡ",
+        "create": {
+            "action": "አካባቢ ያክሉ",
+            "title": "አዲስ አካባቢ",
+            "nameYourLocation": "ቦታዎን ይሰይሙ"
+        },
+        "confirm": {
+            "title": "ይህ አካባቢ ይቀመጥ?",
+            "message": "ለወደፊቱ ይህንን ቦታ እንደገና ለመጠቀም አቅደዋል?",
+            "ok": "አዎ",
+            "cancel": "አይ"
+        },
+        "add": {
+            "title": "ይህንን ቦታ ይሰይሙ",
+            "placeholder": "ቤት ፣ ሥራ ፣ ወዘተ.",
+            "ok": "አስቀምጥ"
+        },
+        "dialog": {
+            "title": "አካባቢ ይምረጡ"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "በዚህ ቦታ ውስጥ ማንኛውም አካባቢ አለ?",
+        "newArea": "አዲስ አካባቢ",
+        "promptTitle": "ለአካባቢው ስም ያስገቡ ፦",
+        "absent": "እባክዎን አካባቢ ያዘጋጁ",
+        "error": "ስህተት",
+        "exist": "አካባቢ አስቀድሞ አለ",
+        "addNewArea": "አዲስ አካባቢ ያክሉ",
+        "add": "አክል"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "የቦታዎች ስብስብ",
+            "displayType": "ቦታዎች"
+        },
+        "Places\/location": {
+            "description": "አንድ ሕንፃ ፣ ቦታ ፣ መርከብ ፣ መናፈሻ ፣ ወዘተ ይወክላል።",
+            "displayType": "አካባቢ"
+        },
+        "Places\/area": {
+            "description": "በአንድ ክፍል ውስጥ እንደ ክፍል ወይም ስብስብ ያሉ አካባቢን ይወክላል",
+            "displayType": "አካባቢ"
+        },
+        "Places\/floor": {
+            "description": "በህንፃ ወይም በመርከብ ውስጥ ወለሉን ይወክላል",
+            "displayType": "ወለል"
+        },
+        "Places\/column": {
+            "description": "በህንፃ ወይም በመርከብ ውስጥ ዓምድ ይወክላል",
+            "displayType": "አምድ"
+        },
+        "Places\/nearby": {
+            "description": "በጂኦሃሽ በተወሰነ ርቀት ውስጥ ላሉት ነገሮች ምድብ",
+            "displayType": "በቦታዎች አቅራቢያ"
+        },
+        "Places\/interest": {
+            "description": "ከአንድ ጂኦሃሽ በተወሰነ ርቀት ውስጥ ላሉ ነገሮች ፣ ከፍላጎት ጋር የሚዛመድ",
+            "displayType": "ቦታዎች ወለድ"
+        }
+    }
+}

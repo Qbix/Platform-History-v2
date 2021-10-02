@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Dodirnite za plaćanje"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: obrađeno zaduženje za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Hvala vam na uplati u iznosu od {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} pretplaćen na {{plan.title}}",
+        "YouSubscribedTo": "Pretplaćeni ste na {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Plaćate {{displayAmount}} od {{call 'publisher.displayName'}} putem &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, ovo je samo da vas obavijestim da je {{1}} {{3}} naplatio {{2}} za {{3}}"
+    },
+    "charged": {
+        "Subject": "Hvala vam na uplati za &quot;{{description}}&quot;",
+        "HavePaid": "Hej {{1}}, ovo je samo kratka potvrda da ste uspješno platili {{2}} korisniku {{3}} za {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Podaci o narudžbi",
+        "PaymentMethod": "Način plaćanja",
+        "ContactInfo": "Kontakt info",
+        "Pay": "Plati"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Poziv prihvatio {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Imate {{amount}} kredita za početak",
+        "PaymentFor": "Plaćanje za &quot;{{1}}&quot;",
+        "PaymentTo": "Plaćanje na {{1}}",
+        "PaymentToUser": "Plaćanje na {{toUserName}}",
+        "CreatePaidStream": "za kreiranje {{toStreamName}}",
+        "JoinedPaidStream": "za rezervaciju na &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "za stvaranje zajednice &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kao povrat rezervacije u &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kupio {{amount}} kredita",
+        "BonusCredits": "Bonus {{amount}} kredita",
+        "BuyAmountCredits": "Kupite {{amount}} kredita",
+        "WatchClip": "Zaradio {{amount}} kredita za gledanje {{fromStreamTitle}}",
+        "MissingCredits": "Nedostaju krediti",
+        "YouMissingCredits": "Za nastavak vam je potrebno dodatnih {{amount}} kredita.",
+        "BuyCredits": "Kupujte kredite",
+        "BuyBonus": "Kupovinom {{amount}} kredita odjednom, doći ćete do {{bonus}} bonusa kredita.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Krediti za kupovinu",
+        "Credits": "Krediti",
+        "ErrorInvalidAmount": "Iznos je nevažeći",
+        "ErrorInvalidCurrency": "Nažalost, još ne podržavamo valutu {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredita",
+            "BonusCredits": "{{amount}} kredita"
+        }
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Iznos",
+        "Description": "Opis",
+        "Client": "Klijent",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "Pogledajte historiju plaćanja za {{1}}",
+        "HistoryEmpty": "Nemate još podataka",
+        "PaymentFor": "Poslano {{amount}} kredita",
+        "PaymentTo": "Poslano {{amount}} kredita",
+        "PaymentToUser": "Poslano {{amount}} kredita",
+        "CreatePaidStream": "Potrošili {{amount}} kredita",
+        "WatchClip": {
+            "+": "Zaradio {{amount}} kredita",
+            "-": "Potrošili {{amount}} kredita"
+        },
+        "JoinedPaidStream": {
+            "+": "Zaradio {{amount}} kredita",
+            "-": "Potrošili {{amount}} kredita"
+        },
+        "LeftPaidStream": {
+            "+": "Primljeno {{amount}} kredita",
+            "-": "Poslano {{amount}} kredita"
+        },
+        "CreatedCommunity": "Potrošili {{amount}} kredita",
+        "BoughtCredits": "Kupio {{amount}} kredita",
+        "BonusCredits": "Imam bonus {{amount}} kredita",
+        "InviteAcceptedBy": "Zaradio {{amount}} kredita",
+        "YouHaveCreditsToStart": "Zaradio {{amount}} kredita"
+    },
+    "subscriptions": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "confirm": {
+            "title": "Započni pretplatu",
+            "message": "Želite li se pretplatiti na {{title}}?",
+            "ok": "uredu",
+            "cancel": "Cancel"
+        },
+        "CreditOrDebitCard": "Kreditna ili debitna kartica",
+        "SubscribePayment": "Pretplatite se na plaćanje",
+        "ImmediatePayment": "Odmah plaćanje"
+    },
+    "payments": {
+        "infoTitle": "Postavite podatke o plaćanju",
+        "BuyAmountCredits": "Kupite {{amount}} kredita",
+        "confirm": {
+            "title": "Platiti",
+            "message": "Slažete li se da platite {{symbol}} {{amount}}?",
+            "ok": "uredu",
+            "cancel": "Cancel"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Krediti",
+            "description": "prati kredite i plaćanja"
+        },
+        "Assets\/plan": {
+            "displayType": "Plan pretplate",
+            "description": "pretplatnički plan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Pretplata",
+            "description": "pretplata"
+        },
+        "Assets\/product": {
+            "displayType": "Proizvod",
+            "description": "proizvod koji se prodaje"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "usluga koja se nudi"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Zaradio {{amount}} kredita"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Kupio {{amount}} kredita"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredita"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Potrošili {{amount}} kredita"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Poslano {{amount}} kredita na {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Dobili ste {{amount}} kredita od {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nova usluga",
+            "TitlePlaceholder": "Naslov usluge",
+            "PricePlaceholder": "Postavljena cena",
+            "LinkPlaceholder": "postavite vezu za dodatne informacije",
+            "DescriptionPlaceholder": "Opis usluge",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Potrebni učesnici"
+        },
+        "ManageServiceTemplates": "Upravljanje predlošcima usluga",
+        "ManageServices": "Upravljajte uslugama",
+        "Free": "Besplatno",
+        "OptionalContribution": "Fakultativni doprinos",
+        "RequiredPayment": "Obavezna uplata",
+        "AreYouSureDelete": "Jeste li sigurni da želite izbrisati ovu uslugu?",
+        "AmountServicesRelated": "Postoji {{amount}} dostupnosti vezanih za ovu uslugu. Oni će takođe biti uklonjeni."
+    }
+}

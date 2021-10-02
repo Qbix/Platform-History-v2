@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tinya kuti ubhadhare"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: kubhadharisa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Ndatenda nemubhadharo wenyu ku {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} akanyoresa ku {{plan.title}}",
+        "YouSubscribedTo": "Wakanyoresa ku {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Unobhadharwa {{displayAmount}} kubva ku {{call 'publisher.displayName'}} na &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, izvi ndezve kungokuzivisai kuti {{1}} yabhadhariswa {{2}} ye {{3}} na {{4}}"
+    },
+    "charged": {
+        "Subject": "Ndatenda nemubhadharo wenyu &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, ichi chingori chiratidzo chekukurumidza kuti wabudirira kubhadhara {{2}} ku {{3}} kwe {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Info nezve kurongeka",
+        "PaymentMethod": "Nzira yekubhadhara",
+        "ContactInfo": "Info info",
+        "Pay": "Bhadhara"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kukoka kunotambirwa na {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Une zvikwereti {{amount}} zvekutanga",
+        "PaymentFor": "Kubhadhara kwe &quot;{{1}}&quot;",
+        "PaymentTo": "Kubhadhara ku {{1}}",
+        "PaymentToUser": "Kubhadhara ku {{toUserName}}",
+        "CreatePaidStream": "Zvekugadzira {{toStreamName}}",
+        "JoinedPaidStream": "yekuchengetedza mu &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "pakugadzira nharaunda &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "sekudzoreredza semugove mu &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Tenga {{amount}} zvikwereti",
+        "BonusCredits": "Bhonasi {{amount}} zvikwereti",
+        "BuyAmountCredits": "Tenga zvikwereti zve {{amount}}",
+        "WatchClip": "Zvikwereti {{amount}} zvakawanikwa zvekutarisa {{fromStreamTitle}}",
+        "MissingCredits": "Kurasikirwa Kwezvikwereti",
+        "YouMissingCredits": "Unoda imwezve {{amount}} kiredhiti kuti uenderere mberi.",
+        "BuyCredits": "Tenga zvikwereti",
+        "BuyBonus": "Kutenga madhimoni e {{amount}} kamwechete, kunoendesa ku {{bonus}} bhonasi yezvikwereti.",
+        "Buy": "Tenga",
+        "PurchaseCredits": "Tenga Zvikwereti",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Huwandu hahushandi",
+        "ErrorInvalidCurrency": "Zvinosuruvarisa hatisati tatsigira mari {{currency}} parizvino",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} zvikwereti",
+            "BonusCredits": "{{amount}} zvikwereti"
+        }
+    },
+    "history": {
+        "Date": "Zuva",
+        "Amount": "Mari",
+        "Description": "Tsananguro",
+        "Client": "Mutengi",
+        "To": "ku",
+        "From": "kubva",
+        "SeeHistory": "Ona nhoroondo yekubhadhara ye {{1}}",
+        "HistoryEmpty": "Iwe hauna data parizvino",
+        "PaymentFor": "Kutumira {{amount}} zvikwereti",
+        "PaymentTo": "Kutumira {{amount}} zvikwereti",
+        "PaymentToUser": "Kutumira {{amount}} zvikwereti",
+        "CreatePaidStream": "Akashandisa {{amount}} zvikwereti",
+        "WatchClip": {
+            "+": "Zvikwereti zve {{amount}}",
+            "-": "Akashandisa {{amount}} zvikwereti"
+        },
+        "JoinedPaidStream": {
+            "+": "Zvikwereti zve {{amount}}",
+            "-": "Akashandisa {{amount}} zvikwereti"
+        },
+        "LeftPaidStream": {
+            "+": "Wakatambira {{amount}} zvikwereti",
+            "-": "Kutumira {{amount}} zvikwereti"
+        },
+        "CreatedCommunity": "Akashandisa {{amount}} zvikwereti",
+        "BoughtCredits": "Tenga {{amount}} zvikwereti",
+        "BonusCredits": "Une bhonasi {{amount}} zvikwereti",
+        "InviteAcceptedBy": "Zvikwereti zve {{amount}}",
+        "YouHaveCreditsToStart": "Zvikwereti zve {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Gadza Ruzivo rweKubhadhara",
+        "confirm": {
+            "title": "Kutanga Kunyorera",
+            "message": "Unoda here kunyorera ku {{title}}?",
+            "ok": "Zvakanaka",
+            "cancel": "Kanzura"
+        },
+        "CreditOrDebitCard": "Kiredhiti kana kiredhiti kadhi",
+        "SubscribePayment": "Nyorera Mubhadharo",
+        "ImmediatePayment": "Kubhadhara Kwazvino"
+    },
+    "payments": {
+        "infoTitle": "Gadza Ruzivo rweKubhadhara",
+        "BuyAmountCredits": "Tenga zvikwereti zve {{amount}}",
+        "confirm": {
+            "title": "Ita Mubhadharo",
+            "message": "Unobvuma kubhadhara {{symbol}} {{amount}}?",
+            "ok": "Zvakanaka",
+            "cancel": "Kanzura"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "inochengeta kiredhiti uye kubhadhara"
+        },
+        "Assets\/plan": {
+            "displayType": "Chirongwa chekunyorera",
+            "description": "chirongwa chekunyorera"
+        },
+        "Assets\/subscription": {
+            "displayType": "Kunyorera",
+            "description": "kunyoresa"
+        },
+        "Assets\/product": {
+            "displayType": "Chigadzirwa",
+            "description": "chigadzirwa chiri kutengeswa"
+        },
+        "Assets\/service": {
+            "displayType": "Sevhisi",
+            "description": "sevhisi iri kupihwa"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Zvikwereti zve {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Tenga {{amount}} zvikwereti"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bhonasi {{amount}} zvikwereti"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Akashandisa {{amount}} zvikwereti"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Kutumira {{amount}} zvikwereti ku {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Wakatambira {{amount}} zvikwereti kubva ku {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "New Service",
+            "TitlePlaceholder": "Zita rebasa",
+            "PricePlaceholder": "Gadza mutengo",
+            "LinkPlaceholder": "seta yekuwedzera info chinongedzo",
+            "DescriptionPlaceholder": "Tsananguro yebasa",
+            "SaveService": "Sevha Sevhisi",
+            "SelectRequiredParticipants": "Zvinodiwa Vatori vechikamu"
+        },
+        "ManageServiceTemplates": "Manage Service Matemplate",
+        "ManageServices": "Manage Services",
+        "Free": "Mahara",
+        "OptionalContribution": "Inesarudzo mupiro",
+        "RequiredPayment": "Inodiwa kubhadhara",
+        "AreYouSureDelete": "Une chokwadi here kuti unoda kudzima sevhisi iyi?",
+        "AmountServicesRelated": "Pane {{amount}} zviripo zvine chekuita nebasa iri. Naivowo zvichabviswa."
+    }
+}

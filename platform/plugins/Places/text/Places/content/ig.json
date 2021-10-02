@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng))",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "n&#39;ime {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "kilomita",
+        "mi": "mi",
+        "foot": "ụkwụ",
+        "feet": "ụkwụ",
+        "inches": "sentimita asatọ"
+    },
+    "location": {
+        "interested": "Enwere m mmasị n&#39;ihe na -eme n&#39;ime {{select}} nke",
+        "update": "Melite ebe m",
+        "set": "Tọọ ebe m",
+        "prompt": "{{ClickOrTap}} ebe a ka<br> setịpụ gị<br> ọnọdụ",
+        "myCurrentLocation": "Ebe m nọ ugbu a",
+        "enterAddress": "Tinye adreesị",
+        "enterPostcode": "Biko tinye koodu nzipu ozi gị \/ zipcode",
+        "create": {
+            "action": "Tinye ebe",
+            "title": "Ebe ọhụrụ",
+            "nameYourLocation": "Aha ebe gị"
+        },
+        "confirm": {
+            "title": "Chekwaa ọnọdụ a?",
+            "message": "Ị na -eme atụmatụ iji ebe a ọzọ n&#39;ọdịnihu?",
+            "ok": "Ee",
+            "cancel": "Mba"
+        },
+        "add": {
+            "title": "Aha ebe a",
+            "placeholder": "Ụlọ, ọrụ wdg.",
+            "ok": "Chekwa"
+        },
+        "dialog": {
+            "title": "Họrọ Ebe"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Enwere ngalaba ọ bụla n&#39;ime ebe a?",
+        "newArea": "Mpaghara ohuru",
+        "promptTitle": "Tinye aha maka mpaghara:",
+        "absent": "Biko tọọ mpaghara",
+        "error": "Mperi",
+        "exist": "Mpaghara adịlarị",
+        "addNewArea": "Tinye mpaghara ọhụrụ",
+        "add": "Tinye"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "nchịkọta ebe",
+            "displayType": "Ọnọdụ"
+        },
+        "Places\/location": {
+            "description": "Na -anọchite anya ụlọ, ebe mgbakọ, ụgbọ mmiri, ogige, wdg.",
+            "displayType": "Ebe"
+        },
+        "Places\/area": {
+            "description": "Na -anọchite anya mpaghara n&#39;ime ọnọdụ, dị ka ime ụlọ ma ọ bụ ụlọ",
+            "displayType": "Mpaghara"
+        },
+        "Places\/floor": {
+            "description": "Na -anọchite anya ala n&#39;ime ụlọ ma ọ bụ ụgbọ mmiri",
+            "displayType": "Ala"
+        },
+        "Places\/column": {
+            "description": "Na -anọchite anya kọlụm n&#39;ime ụlọ ma ọ bụ ụgbọ mmiri",
+            "displayType": "Kọlụm"
+        },
+        "Places\/nearby": {
+            "description": "Udi maka ihe di n&#39;ime anya nke geohash",
+            "displayType": "Na nso ebe"
+        },
+        "Places\/interest": {
+            "description": "Udi maka ihe dị n&#39;ime anya nke geohash, dabara na mmasị",
+            "displayType": "Ebe mmasị"
+        }
+    }
+}

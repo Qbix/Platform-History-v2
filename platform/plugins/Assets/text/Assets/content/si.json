@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ගෙවීමට තට්ටු කරන්න"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ගාස්තුව {{call 'user.displayName'}} සඳහා සකසන ලදි",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} වෙත ගෙවූ ඔබට ස්තුතියි",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} වෙත දායක වී ඇත",
+        "YouSubscribedTo": "ඔබ {{plan.title}} වෙත දායක වී ඇත"
+    },
+    "charge": {
+        "Subject": "ඔබට &quot;{{description}}&quot; මඟින් {{call 'publisher.displayName'}} වෙතින් {{displayAmount}} ගෙවීමක් ලැබේ",
+        "HasBeenCharged": "ඒයි, මෙය ඔබට {{4}} විසින් {{3}} සඳහා {{2}} අය කර ඇති බව {{1}} දැන ගැනීමටයි"
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; සඳහා ඔබේ ගෙවීමට ස්තූතියි",
+        "HavePaid": "ඒයි {{1}}, මෙය {{4}} සඳහා ඔබ {{2}} වෙත {{3}} වෙත සාර්ථකව ගෙවා ඇති බව ක්‍ෂණික තහවුරු කිරීමකි."
+    },
+    "payment": {
+        "AboutOrder": "ඇණවුම පිළිබඳ තොරතුරු",
+        "PaymentMethod": "ගෙවීමේ ක්රමය",
+        "ContactInfo": "සම්බන්ධතා තොරතුරු",
+        "Pay": "ගෙවන්න"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ආරාධනය පිළිගත්තේ {{invitedUserName}}",
+        "YouHaveCreditsToStart": "ආරම්භ කිරීමට ඔබට බැර කිරීම් {{amount}} ක් ඇත",
+        "PaymentFor": "&quot;{{1}}&quot; සඳහා ගෙවීම",
+        "PaymentTo": "{{1}} වෙත ගෙවීම",
+        "PaymentToUser": "{{toUserName}} වෙත ගෙවීම",
+        "CreatePaidStream": "නිර්මාණය කිරීම සඳහා {{toStreamName}}",
+        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; හි වෙන් කිරීම සඳහා",
+        "CreatedCommunity": "ප්‍රජාව නිර්මානය කිරීම සඳහා &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; හි වෙන් කිරීමේ මුදල් ආපසු ගෙවීමක් ලෙස",
+        "BoughtCredits": "බැර {{amount}} මිලදී ගත්තා",
+        "BonusCredits": "බෝනස් ණය {{amount}}",
+        "BuyAmountCredits": "ණය {{amount}} මිලදී ගන්න",
+        "WatchClip": "නැරඹීම සඳහා ගෞරව {{amount}} ක් උපයා ඇත {{fromStreamTitle}}",
+        "MissingCredits": "අතුරුදහන් වූ ණය",
+        "YouMissingCredits": "ඉදිරියට යාමට ඔබට අතිරේක ණය {{amount}} ක් අවශ්‍යයි.",
+        "BuyCredits": "ණය මිලදී ගන්න",
+        "BuyBonus": "එකවර ණය {{amount}} ක් මිලදී ගැනීම, ණය ප්‍රසාද දීමනාවට {{bonus}} හේතු වේ.",
+        "Buy": "මිලදී ගන්න",
+        "PurchaseCredits": "මිලදී ගැනීමේ ණය",
+        "Credits": "පින්",
+        "ErrorInvalidAmount": "වලංගු නොවන මුදල",
+        "ErrorInvalidCurrency": "අවාසනාවකට මෙන් අපි තවමත් {{currency}} මුදලට සහය නොදක්වමු",
+        "forMessages": {
+            "BoughtCredits": "ණය {{amount}}",
+            "BonusCredits": "ණය {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "දිනය",
+        "Amount": "ප්රමාණය",
+        "Description": "විස්තර",
+        "Client": "සේවාලාභියා",
+        "To": "වෙත",
+        "From": "සිට",
+        "SeeHistory": "{{1}} සඳහා ගෙවීම් ඉතිහාසය බලන්න",
+        "HistoryEmpty": "ඔබට තවමත් දත්ත නොමැත",
+        "PaymentFor": "ණය {{amount}} ක් යවන ලදි",
+        "PaymentTo": "ණය {{amount}} ක් යවන ලදි",
+        "PaymentToUser": "ණය {{amount}} ක් යවන ලදි",
+        "CreatePaidStream": "ණය {{amount}} ක් වියදම් කළා",
+        "WatchClip": {
+            "+": "ණය {{amount}} ක් උපයා ඇත",
+            "-": "ණය {{amount}} ක් වියදම් කළා"
+        },
+        "JoinedPaidStream": {
+            "+": "ණය {{amount}} ක් උපයා ඇත",
+            "-": "ණය {{amount}} ක් වියදම් කළා"
+        },
+        "LeftPaidStream": {
+            "+": "ණය {{amount}} ක් ලැබුණි",
+            "-": "ණය {{amount}} ක් යවන ලදි"
+        },
+        "CreatedCommunity": "ණය {{amount}} ක් වියදම් කළා",
+        "BoughtCredits": "බැර {{amount}} මිලදී ගත්තා",
+        "BonusCredits": "ප්‍රසාද ණය {{amount}} ක් ලැබුණි",
+        "InviteAcceptedBy": "ණය {{amount}} ක් උපයා ඇත",
+        "YouHaveCreditsToStart": "ණය {{amount}} ක් උපයා ඇත"
+    },
+    "subscriptions": {
+        "infoTitle": "ගෙවීම් තොරතුරු සකසන්න",
+        "confirm": {
+            "title": "දායක වීම ආරම්භ කරන්න",
+            "message": "ඔබ {{title}} වෙත දායක වීමට කැමතිද?",
+            "ok": "හරි",
+            "cancel": "අවලංගු කරන්න"
+        },
+        "CreditOrDebitCard": "ණය හෝ හර පතක්",
+        "SubscribePayment": "දායක ගෙවීම",
+        "ImmediatePayment": "ක්ෂණික ගෙවීම"
+    },
+    "payments": {
+        "infoTitle": "ගෙවීම් තොරතුරු සකසන්න",
+        "BuyAmountCredits": "ණය {{amount}} මිලදී ගන්න",
+        "confirm": {
+            "title": "ගෙවීමක් කරන්න",
+            "message": "ඔබ {{symbol}} {{amount}} ගෙවීමට එකඟද?",
+            "ok": "හරි",
+            "cancel": "අවලංගු කරන්න"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "පින්",
+            "description": "ණය සහ ගෙවීම් පිළිබඳ වාර්තාවක් තබා ගනී"
+        },
+        "Assets\/plan": {
+            "displayType": "දායකත්ව සැලැස්ම",
+            "description": "දායක වීමේ සැලැස්ම"
+        },
+        "Assets\/subscription": {
+            "displayType": "දායක වීම",
+            "description": "දායක"
+        },
+        "Assets\/product": {
+            "displayType": "නිෂ්පාදන",
+            "description": "නිෂ්පාදන විකුණනු ලැබේ"
+        },
+        "Assets\/service": {
+            "displayType": "සේවා",
+            "description": "සපයනු ලබන සේවාව"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "ණය {{amount}} ක් උපයා ඇත"
+        },
+        "Assets\/credits\/bought": {
+            "content": "බැර {{amount}} මිලදී ගත්තා"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "බෝනස් ණය {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "ණය {{amount}} ක් වියදම් කළා"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} වෙත බැර {{amount}} ක් යවන ලදි"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} වෙතින් ණය {{amount}} ක් ලැබුණි"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "නව සේවාව",
+            "TitlePlaceholder": "සේවා මාතෘකාව",
+            "PricePlaceholder": "මිල නියම කරන්න",
+            "LinkPlaceholder": "අතිරේක තොරතුරු සම්බන්ධක සකසන්න",
+            "DescriptionPlaceholder": "සේවා විස්තරය",
+            "SaveService": "සේවාව සුරකින්න",
+            "SelectRequiredParticipants": "අවශ්‍ය සහභාගිවන්නන්"
+        },
+        "ManageServiceTemplates": "සේවා ආකෘති කළමනාකරණය කරන්න",
+        "ManageServices": "සේවා කළමනාකරණය",
+        "Free": "නිදහස්",
+        "OptionalContribution": "විකල්ප දායකත්වය",
+        "RequiredPayment": "අවශ්‍ය ගෙවීම",
+        "AreYouSureDelete": "ඔබට මෙම සේවාව මැකීමට අවශ්‍ය බව ඔබට විශ්වාසද?",
+        "AmountServicesRelated": "මෙම සේවාව හා සම්බන්ධව {{amount}} ක් තිබේ. ඒවා ද ඉවත් කරනු ඇත."
+    }
+}

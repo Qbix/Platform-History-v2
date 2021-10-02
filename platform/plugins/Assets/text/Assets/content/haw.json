@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Piula e uku"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: hana ʻia ka uku no {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Mahalo no kou uku ʻana iā {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Ua kau inoa ʻo {{call 'user.displayName'}} iā {{plan.title}}",
+        "YouSubscribedTo": "Ua kau inoa ʻoe iā {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Loaʻa iā ʻoe ka uku o {{displayAmount}} mai {{call 'publisher.displayName'}} e &quot;{{description}}&quot;",
+        "HasBeenCharged": "ʻEā, e haʻi wale kēia iā ʻoe ua {{1}} uku ʻia {{2}} no {{3}} e {{4}}"
+    },
+    "charged": {
+        "Subject": "Mahalo no kou uku ʻana no &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, he hōʻoia wikiwiki wale nō kēia ua uku maikaʻi ʻoe i {{2}} iā {{3}} no {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "ʻIke e pili ana i ke kauoha",
+        "PaymentMethod": "ʻOihana uku",
+        "ContactInfo": "ʻIke pili",
+        "Pay": "Uku"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Kono ʻia e {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Loaʻa iā ʻoe nā hōʻaiʻe {{amount}} e hoʻomaka",
+        "PaymentFor": "Uku no ka &quot;{{1}}&quot;",
+        "PaymentTo": "Uku iā {{1}}",
+        "PaymentToUser": "Uku iā {{toUserName}}",
+        "CreatePaidStream": "no ka hana ʻana iā {{toStreamName}}",
+        "JoinedPaidStream": "no ka hoʻāhu ʻana ma &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "no ka hana ʻana i ke kaiāulu &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ma ke ʻano hoʻihoʻi hoʻihoʻi i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kūʻai nā hōʻaiʻe {{amount}}",
+        "BonusCredits": "Nā hōʻaiʻē Bonus {{amount}}",
+        "BuyAmountCredits": "Kūʻai nā hōʻaiʻē {{amount}}",
+        "WatchClip": "Loaʻa nā hōʻaiʻē {{amount}} no ka nānā ʻana iā {{fromStreamTitle}}",
+        "MissingCredits": "Nā manaʻo loaʻa",
+        "YouMissingCredits": "Pono ʻoe i kahi hōʻaiʻe {{amount}} hou e hoʻomaka.",
+        "BuyCredits": "Kūʻai i nā hōʻaiʻē",
+        "BuyBonus": "Ke kūʻai ʻana i nā hōʻaiʻe {{amount}} i ka manawa hoʻokahi, e alakaʻi ʻia i ka bonus bonus {{bonus}}.",
+        "Buy": "Kūʻai",
+        "PurchaseCredits": "Kūʻai kūʻai",
+        "Credits": "Nā manaʻo",
+        "ErrorInvalidAmount": "Hewa kūpono ʻole",
+        "ErrorInvalidCurrency": "Minamina ʻaʻole mākou e kākoʻo kālā {{currency}} i kēia manawa",
+        "forMessages": {
+            "BoughtCredits": "Nā hōʻaiʻe {{amount}}",
+            "BonusCredits": "Nā hōʻaiʻe {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Lā",
+        "Amount": "Huina",
+        "Description": "Wehewehe",
+        "Client": "Mea kūʻai aku",
+        "To": "i",
+        "From": "mai",
+        "SeeHistory": "E ʻike i ka mōʻaukala uku no {{1}}",
+        "HistoryEmpty": "ʻAʻohe ou ʻikepili",
+        "PaymentFor": "Hoʻouna ʻia nā hōʻaiʻē {{amount}}",
+        "PaymentTo": "Hoʻouna ʻia nā hōʻaiʻē {{amount}}",
+        "PaymentToUser": "Hoʻouna ʻia nā hōʻaiʻē {{amount}}",
+        "CreatePaidStream": "Hoʻolilo i nā hōʻaiʻē {{amount}}",
+        "WatchClip": {
+            "+": "Loaʻa nā hōʻaiʻē {{amount}}",
+            "-": "Hoʻolilo i nā hōʻaiʻē {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Loaʻa nā hōʻaiʻē {{amount}}",
+            "-": "Hoʻolilo i nā hōʻaiʻē {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Loaʻa nā hōʻaiʻē {{amount}}",
+            "-": "Hoʻouna ʻia nā hōʻaiʻē {{amount}}"
+        },
+        "CreatedCommunity": "Hoʻolilo i nā hōʻaiʻē {{amount}}",
+        "BoughtCredits": "Kūʻai nā hōʻaiʻe {{amount}}",
+        "BonusCredits": "Loaʻa nā hōʻaiʻē bonus {{amount}}",
+        "InviteAcceptedBy": "Loaʻa nā hōʻaiʻē {{amount}}",
+        "YouHaveCreditsToStart": "Loaʻa nā hōʻaiʻē {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Kau i ka ʻike uku",
+        "confirm": {
+            "title": "Hoʻomaka Hoʻomoe",
+            "message": "Makemake ʻoe e kau inoa iā {{title}}?",
+            "ok": "OK",
+            "cancel": "Hoʻopau"
+        },
+        "CreditOrDebitCard": "Kāleka hōʻaiʻē a i ʻole kāleka hōʻaiʻē",
+        "SubscribePayment": "Kakau Uku",
+        "ImmediatePayment": "Uku koke"
+    },
+    "payments": {
+        "infoTitle": "Kau i ka ʻike uku",
+        "BuyAmountCredits": "Kūʻai nā hōʻaiʻē {{amount}}",
+        "confirm": {
+            "title": "Hana i kahi uku",
+            "message": "ʻAe ʻae ʻoe e uku iā {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Hoʻopau"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Nā manaʻo",
+            "description": "mālama i nā hōʻaiʻē a me nā uku"
+        },
+        "Assets\/plan": {
+            "displayType": "Palapala Hoʻohui",
+            "description": "hoʻolālā kau inoa"
+        },
+        "Assets\/subscription": {
+            "displayType": "Kakau inoa",
+            "description": "kau inoa"
+        },
+        "Assets\/product": {
+            "displayType": "Huahana",
+            "description": "ke kūʻai aku nei ka huahana"
+        },
+        "Assets\/service": {
+            "displayType": "Lawelawe lawelawe",
+            "description": "hāʻawi ʻia ka lawelawe"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Loaʻa nā hōʻaiʻē {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Kūʻai nā hōʻaiʻe {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Nā hōʻaiʻē Bonus {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Hoʻolilo i nā hōʻaiʻe {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ua hoʻouna ʻia nā hōʻaiʻē {{amount}} iā {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Loaʻa nā hōʻaiʻe {{amount}} mai {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Lawelawe Hou",
+            "TitlePlaceholder": "Poʻo inoa",
+            "PricePlaceholder": "Hoʻonohonoho kumukūʻai",
+            "LinkPlaceholder": "hoʻonoho i ka loulou ʻikepili hou aʻe",
+            "DescriptionPlaceholder": "Hōʻike lawelawe",
+            "SaveService": "Mālama Hana",
+            "SelectRequiredParticipants": "Pono nā mea komo"
+        },
+        "ManageServiceTemplates": "Hoʻoponopono i nā anakuhi lawelawe",
+        "ManageServices": "Mālama i nā lawelawe",
+        "Free": "Manuahi",
+        "OptionalContribution": "Hāʻawi i ke koho",
+        "RequiredPayment": "Uku koi",
+        "AreYouSureDelete": "Makemake ʻoe e kāpae i kēia lawelawe?",
+        "AmountServicesRelated": "Aia he {{amount}} mea pili pono e pili ana i kēia lawelawe. E wehe ʻia lākou."
+    }
+}

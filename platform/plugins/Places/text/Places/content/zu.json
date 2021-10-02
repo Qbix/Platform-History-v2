@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ngaphakathi {{1}}"
+    },
+    "units": {
+        "meter": "imitha",
+        "meters": "amamitha",
+        "kilometer": "ikhilomitha",
+        "kilometers": "ama-kiometers",
+        "km": "km",
+        "mile": "imayela",
+        "miles": "amamayela",
+        "mi": "mi",
+        "foot": "unyawo",
+        "feet": "izinyawo",
+        "inches": "amasentimitha"
+    },
+    "location": {
+        "interested": "Nginentshisekelo ezintweni ezenzeka phakathi kuka- {{select}}",
+        "update": "Buyekeza Indawo Yami",
+        "set": "Setha indawo yami",
+        "prompt": "{{ClickOrTap}} lapha ku<br> setha yakho<br> indawo",
+        "myCurrentLocation": "Indawo yami yamanje",
+        "enterAddress": "Faka ikheli",
+        "enterPostcode": "Sicela ufake ikhodi yeposi \/ ikhodi yakho yeposi",
+        "create": {
+            "action": "Faka Indawo",
+            "title": "Indawo Entsha",
+            "nameYourLocation": "Qamba indawo okuyo"
+        },
+        "confirm": {
+            "title": "Londoloza le ndawo?",
+            "message": "Ingabe uhlela ukusebenzisa le ndawo futhi ngokuzayo?",
+            "ok": "Yebo",
+            "cancel": "Cha"
+        },
+        "add": {
+            "title": "Qamba le ndawo",
+            "placeholder": "Ikhaya, Umsebenzi njll.",
+            "ok": "Gcina"
+        },
+        "dialog": {
+            "title": "Khetha Indawo"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Ingabe kukhona indawo ngaphakathi kwale ndawo?",
+        "newArea": "Indawo entsha",
+        "promptTitle": "Faka igama lendawo:",
+        "absent": "Sicela usethe indawo",
+        "error": "Iphutha",
+        "exist": "Indawo isivele ikhona",
+        "addNewArea": "Faka indawo entsha",
+        "add": "Faka"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "iqoqo lezindawo",
+            "displayType": "Izindawo"
+        },
+        "Places\/location": {
+            "description": "Imele isakhiwo, indawo, umkhumbi, ipaki, njll.",
+            "displayType": "Indawo"
+        },
+        "Places\/area": {
+            "description": "Imelela indawo ngaphakathi kwendawo, njengegumbi noma indawo",
+            "displayType": "Indawo"
+        },
+        "Places\/floor": {
+            "description": "Imele iphansi esakhiweni noma emkhunjini",
+            "displayType": "Phansi"
+        },
+        "Places\/column": {
+            "description": "Imelela ikholomu esakhiweni noma emkhunjini",
+            "displayType": "Ikholomu"
+        },
+        "Places\/nearby": {
+            "description": "Isigaba sezinto ezikubanga elithile le-geohash",
+            "displayType": "Eduze kwezindawo"
+        },
+        "Places\/interest": {
+            "description": "Isigaba sezinto ezisebangeni elithile le-geohash, ngokufana nentshisekelo",
+            "displayType": "Izindawo ezithakazelisayo"
+        }
+    }
+}

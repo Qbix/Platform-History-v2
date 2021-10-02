@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Fọwọ ba lati sanwo"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: a ti gba owó lọ́wọ́ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "O ṣeun fun isanwo rẹ si {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ṣe alabapin si {{plan.title}}",
+        "YouSubscribedTo": "O ti ṣe alabapin si {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "O gba isanwo ti {{displayAmount}} lati ọdọ {{call 'publisher.displayName'}} nipasẹ “{{description}}”",
+        "HasBeenCharged": "Hey, eyi jẹ lati jẹ ki o mọ {{1}} ti gba agbara {{2}} fun {{3}} nipasẹ {{4}}"
+    },
+    "charged": {
+        "Subject": "O ṣeun fun isanwo rẹ fun &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, eyi jẹ ijẹrisi iyara kan ti o ti ṣaṣeyọri san {{2}} si {1001}} fun {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Alaye nipa aṣẹ",
+        "PaymentMethod": "Eto isanwo",
+        "ContactInfo": "Alaye olubasọrọ",
+        "Pay": "Sanwo"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Pipe gba nipasẹ {{invitedUserName}}",
+        "YouHaveCreditsToStart": "O ni awọn kirediti {{amount}} lati bẹrẹ",
+        "PaymentFor": "Owo sisan fun &quot;{{1}}&quot;",
+        "PaymentTo": "Sisanwo si {{1}}",
+        "PaymentToUser": "Sisanwo si {{toUserName}}",
+        "CreatePaidStream": "fun ṣiṣẹda {{toStreamName}}",
+        "JoinedPaidStream": "fun ifiṣura ni &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "fun ṣiṣẹda agbegbe &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "bi agbapada ifiṣura ni &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Ti ra awọn kirediti {{amount}}",
+        "BonusCredits": "Ajeseku {{amount}} awọn kirediti",
+        "BuyAmountCredits": "Ra awọn kirediti {{amount}}",
+        "WatchClip": "O gba awọn kirẹditi {{amount}} fun wiwo {{fromStreamTitle}}",
+        "MissingCredits": "Awọn kirediti ti o padanu",
+        "YouMissingCredits": "O nilo afikun kirediti {{amount}} lati tẹsiwaju.",
+        "BuyCredits": "Ra awọn kirediti",
+        "BuyBonus": "Ifẹ si awọn kirẹditi {{amount}} ni ẹẹkan, yoo yorisi ajeseku {{bonus}} kirẹditi.",
+        "Buy": "Ra",
+        "PurchaseCredits": "Awọn kirediti rira",
+        "Credits": "Awọn kirediti",
+        "ErrorInvalidAmount": "Iye ti ko wulo",
+        "ErrorInvalidCurrency": "Laanu a ko ṣe atilẹyin owo {{currency}} sibẹsibẹ",
+        "forMessages": {
+            "BoughtCredits": "Awọn kirediti {{amount}}",
+            "BonusCredits": "Awọn kirediti {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Ọjọ",
+        "Amount": "Iye",
+        "Description": "Apejuwe",
+        "Client": "Onibara",
+        "To": "si",
+        "From": "lati",
+        "SeeHistory": "Wo itan isanwo fun {{1}}",
+        "HistoryEmpty": "O ko ni data sibẹsibẹ",
+        "PaymentFor": "Ti firanṣẹ awọn kirẹditi {{amount}}",
+        "PaymentTo": "Ti firanṣẹ awọn kirẹditi {{amount}}",
+        "PaymentToUser": "Ti firanṣẹ awọn kirẹditi {{amount}}",
+        "CreatePaidStream": "Lo awọn kirediti {{amount}}",
+        "WatchClip": {
+            "+": "Awon kirediti {{amount}} ti mina",
+            "-": "Lo awọn kirediti {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Awon kirediti {{amount}} ti mina",
+            "-": "Lo awọn kirediti {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Ti gba awọn kirediti {{amount}}",
+            "-": "Ti firanṣẹ awọn kirẹditi {{amount}}"
+        },
+        "CreatedCommunity": "Lo awọn kirediti {{amount}}",
+        "BoughtCredits": "Ti ra awọn kirediti {{amount}}",
+        "BonusCredits": "Ni ẹbun {{amount}} awọn kirediti",
+        "InviteAcceptedBy": "Awon kirediti {{amount}} ti mina",
+        "YouHaveCreditsToStart": "Awon kirediti {{amount}} ti mina"
+    },
+    "subscriptions": {
+        "infoTitle": "Ṣeto Alaye Isanwo",
+        "confirm": {
+            "title": "Bẹrẹ Alabapin",
+            "message": "Ṣe o fẹ ṣe alabapin si {{title}}?",
+            "ok": "O DARA",
+            "cancel": "Fagilee"
+        },
+        "CreditOrDebitCard": "Kirẹditi tabi kaadi sisan",
+        "SubscribePayment": "Alabapin Isanwo",
+        "ImmediatePayment": "Owo sisan Lẹsẹkẹsẹ"
+    },
+    "payments": {
+        "infoTitle": "Ṣeto Alaye Isanwo",
+        "BuyAmountCredits": "Ra awọn kirediti {{amount}}",
+        "confirm": {
+            "title": "Ṣe Isanwo kan",
+            "message": "Ṣe o gba lati sanwo {{symbol}} {{amount}}?",
+            "ok": "O DARA",
+            "cancel": "Fagilee"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Awọn kirediti",
+            "description": "ntọju orin kirediti ati owo sisan"
+        },
+        "Assets\/plan": {
+            "displayType": "Eto iforukọsilẹ",
+            "description": "alabapin ètò"
+        },
+        "Assets\/subscription": {
+            "displayType": "Alabapin",
+            "description": "ṣiṣe alabapin"
+        },
+        "Assets\/product": {
+            "displayType": "Ọja",
+            "description": "ọja ti n ta"
+        },
+        "Assets\/service": {
+            "displayType": "Iṣẹ",
+            "description": "iṣẹ ti a nṣe"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Awon kirediti {{amount}} ti mina"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Ti ra awọn kirediti {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Ajeseku {{amount}} awọn kirediti"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Lo awọn kirediti {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ti firanṣẹ {999}} awọn kirediti si {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ti gba awọn kirẹditi {{amount}} lati ọdọ {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Iṣẹ titun",
+            "TitlePlaceholder": "Akọle iṣẹ",
+            "PricePlaceholder": "Ṣeto idiyele",
+            "LinkPlaceholder": "ṣeto ọna asopọ alaye ni afikun",
+            "DescriptionPlaceholder": "Apejuwe iṣẹ",
+            "SaveService": "Fipamọ Iṣẹ",
+            "SelectRequiredParticipants": "Awọn alabaṣepọ ti a beere"
+        },
+        "ManageServiceTemplates": "Ṣakoso awọn awoṣe Iṣẹ",
+        "ManageServices": "Ṣakoso awọn Iṣẹ",
+        "Free": "Ọfẹ",
+        "OptionalContribution": "Aṣayan ilowosi",
+        "RequiredPayment": "Owo sisan ti a beere",
+        "AreYouSureDelete": "Ṣe o da ọ loju pe o fẹ paarẹ iṣẹ yii bi?",
+        "AmountServicesRelated": "Awọn anfani {{amount}} ti o nii ṣe pẹlu iṣẹ yii wa. Wọn yoo tun yọ kuro."
+    }
+}

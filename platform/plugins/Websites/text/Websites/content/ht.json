@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link pou ankouraje",
+                "startDate": "Dat Kòmanse",
+                "startTime": "Tan Kòmanse",
+                "endDate": "Dat Fen",
+                "endTime": "Tan Fen",
+                "budget": "Bidjè"
+            },
+            "interests": {
+                "Title": "Filtre pa enterè",
+                "FilterInterests": "Kòmanse tape yon enterè ..."
+            },
+            "Interest": "Enterè",
+            "Location": "Kote"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ale",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Ekri panse ou yo kòmanse konvèsasyon an",
+            "StartConversation": "Kòmanse Konvèsasyon",
+            "GotoConversation": "Ale nan Konvèsasyon",
+            "reset": "Reyajiste",
+            "edit": "Edite",
+            "link": "Lyen",
+            "setUrl": "Mete URL",
+            "save": "Sove",
+            "setClip": "Koupe Clip",
+            "invalidURL": "URL ki pa valab"
+        },
+        "FileTooLarge": "Dosye twò gwo pou kachèt. Gwosè dosye max {{size}}",
+        "InvalidPDF": "Dosye se pa yon PDF ki valab",
+        "StartTypingTitleOrKeywords": "Kòmanse tape tit oswa mo kle ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Yon dokiman HTML ke divinò divès kalite ka wè ak modifye",
+            "displayType": "Atik"
+        },
+        "Websites\/slide": {
+            "description": "Yon glise nan yon prezantasyon, ka gen ladan HTML, odyo elatriye.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Yon prezantasyon ki gen plizyè glisad",
+            "displayType": "Prezantasyon"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Yon inite piblisite sou yon sit entènèt",
+            "displayType": "Inite anons"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Yon fason pou gwoupman inite piblisite yo anba yon non",
+            "displayType": "Plasman anons"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Kontni pou yon reklam",
+            "displayType": "Piblisite kreyatif"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Yon kanpay piblisite",
+            "displayType": "Kanpay anons"
+        },
+        "Websites\/webpage": {
+            "description": "Reprezante yon sit entènèt ki gen metadata te grate",
+            "displayType": "Paj entènèt"
+        }
+    }
+}

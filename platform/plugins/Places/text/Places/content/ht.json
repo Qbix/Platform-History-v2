@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "nan {{1}}"
+    },
+    "units": {
+        "meter": "mèt",
+        "meters": "mèt",
+        "kilometer": "kilomèt",
+        "kilometers": "kiomèt",
+        "km": "km",
+        "mile": "mil",
+        "miles": "kilomèt",
+        "mi": "mwen",
+        "foot": "pye",
+        "feet": "pye",
+        "inches": "pous"
+    },
+    "location": {
+        "interested": "Mwen enterese nan bagay kap fèt nan {{select}} nan",
+        "update": "Mete ajou Kote mwen an",
+        "set": "Mete Kote mwen an",
+        "prompt": "{{ClickOrTap}} isit la<br> mete ou<br> kote",
+        "myCurrentLocation": "Kote mwen ye kounye a",
+        "enterAddress": "Mete yon adrès",
+        "enterPostcode": "Tanpri antre kòd postal \/ postal ou",
+        "create": {
+            "action": "Ajoute Kote",
+            "title": "Nouvo Kote",
+            "nameYourLocation": "Nonmen kote ou ye a"
+        },
+        "confirm": {
+            "title": "Sove kote sa a?",
+            "message": "Èske w gen plan pou itilize kote sa a ankò nan tan kap vini an?",
+            "ok": "Wi",
+            "cancel": "Non"
+        },
+        "add": {
+            "title": "Nonmen kote sa a",
+            "placeholder": "Lakay, Travay elatriye.",
+            "ok": "Sove"
+        },
+        "dialog": {
+            "title": "Chwazi Kote"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Nenpòt zòn andedan kote sa a?",
+        "newArea": "Nouvo zòn nan",
+        "promptTitle": "Mete yon non pou zòn nan:",
+        "absent": "Tanpri mete zòn nan",
+        "error": "Erè",
+        "exist": "Zòn deja egziste",
+        "addNewArea": "Add nouvo zòn",
+        "add": "Ajoute"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "yon koleksyon kote",
+            "displayType": "Kote yo ye"
+        },
+        "Places\/location": {
+            "description": "Reprezante yon bilding, pidevan, bato, pak, elatriye.",
+            "displayType": "Kote"
+        },
+        "Places\/area": {
+            "description": "Reprezante yon zòn nan yon kote, tankou yon chanm oswa suite",
+            "displayType": "Zòn"
+        },
+        "Places\/floor": {
+            "description": "Reprezante yon etaj nan yon bilding oswa bato",
+            "displayType": "Etaj"
+        },
+        "Places\/column": {
+            "description": "Reprezante yon kolòn nan yon bilding oswa bato",
+            "displayType": "Kolòn"
+        },
+        "Places\/nearby": {
+            "description": "Kategori pou bagay ki nan yon distans sèten nan yon geohash",
+            "displayType": "Toupre kote"
+        },
+        "Places\/interest": {
+            "description": "Kategori pou bagay ki nan yon distans sèten nan yon geohash, matche yon enterè",
+            "displayType": "Kote enterè"
+        }
+    }
+}

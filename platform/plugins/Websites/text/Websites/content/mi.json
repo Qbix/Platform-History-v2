@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Hononga ki te whakatairanga",
+                "startDate": "Ra Timata",
+                "startTime": "Wā Timata",
+                "endDate": "Ra Whakamutunga",
+                "endTime": "Wā Whakamutunga",
+                "budget": "Pūtea"
+            },
+            "interests": {
+                "Title": "Tātari Ma Te Paanga",
+                "FilterInterests": "Tiimata ki te patohia he paanga ..."
+            },
+            "Interest": "Paanga",
+            "Location": "Tauwāhi"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Haere",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Tirotiro",
+            "WriteToStartConversation": "Tuhia o whakaaro kia tiimata te korero",
+            "StartConversation": "Tīmata Whakawhiti Kōrero",
+            "GotoConversation": "Haere ki te Whakawhiti Korero",
+            "reset": "Tautuhi Anō",
+            "edit": "Whakatika",
+            "link": "Hono",
+            "setUrl": "Tautuhia te URL",
+            "save": "Penapena",
+            "setClip": "Tapahia te Topenga",
+            "invalidURL": "URL muhu"
+        },
+        "FileTooLarge": "He nui rawa te konae mo te Keteroki. Te rahi o te konae Max {{size}}",
+        "InvalidPDF": "Ehara te konae i te PDF tika",
+        "StartTypingTitleOrKeywords": "Me tiimata te patopato i te taitara, ma te matua ranei ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "He tuhinga HTML ka taea e nga kaiwhakamahi te tiro me te whakatika",
+            "displayType": "Tuhinga"
+        },
+        "Websites\/slide": {
+            "description": "He kiriata i roto i te whakaaturanga, ka taea te whakauru HTML, oro, etc.",
+            "displayType": "Kiriata"
+        },
+        "Websites\/presentation": {
+            "description": "He whakaaturanga kei roto nga kiriata",
+            "displayType": "Whakaaturanga"
+        },
+        "Websites\/advert\/unit": {
+            "description": "He waahanga panui kei runga paetukutuku",
+            "displayType": "Wae whakatairanga"
+        },
+        "Websites\/advert\/placement": {
+            "description": "He huarahi hei whakarōpū i nga wae whakatairanga i raro i te ingoa",
+            "displayType": "Whakanohonga whakanoho"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Ihirangi mo te whakatairanga",
+            "displayType": "Panui auaha"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "He kaupapa whakatairanga",
+            "displayType": "Pakanga whakatairanga"
+        },
+        "Websites\/webpage": {
+            "description": "He kanohi mo tetahi paetukutuku nona nga metadata i warewarehia",
+            "displayType": "Wharangi paetukutuku"
+        }
+    }
+}
