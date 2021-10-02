@@ -445,13 +445,50 @@
 							.catch(_cancel);
 					    }
 						function _proceed(signature) {
-							_doAuthenticate({
-								xid: accounts[0],
-								payload: payload,
-								signature: signature,
-								platform: 'wallet',
-								chainId: provider.chainId
-							}, platform, platformAppId, onSuccess, onCancel, options);
+					    	var _authenticate = function () {
+								_doAuthenticate({
+									xid: accounts[0],
+									payload: payload,
+									signature: signature,
+									platform: 'wallet',
+									chainId: provider.chainId
+								}, platform, platformAppId, onSuccess, onCancel, options);
+							};
+
+							// check if network is connected
+							var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
+							if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
+								_authenticate();
+							} else {
+								provider.request({
+									method: 'wallet_switchEthereumChain',
+									params: [{chainId: supportedNetwork.chainId}]
+								}).then(_authenticate)
+								.catch(function (e) {
+									if (e.code !== 4902) {
+										return;
+									}
+									console.warn('Users.authenticate.wallet: chain ' 
+										     + supportedNetwork.chainId + ' is not added');
+									provider.request({
+										method: 'wallet_addEthereumChain',
+										params: [{
+											chainId: supportedNetwork.chainId,
+											chainName: supportedNetwork.name,
+											nativeCurrency: {
+												name: supportedNetwork.currency.name,
+												symbol: supportedNetwork.currency.symbol,
+												decimals: supportedNetwork.currency.decimals
+											},
+											rpcUrls: supportedNetwork.rpcUrls,
+											blockExplorerUrls: supportedNetwork.blockExplorerUrls
+										}]
+									}).then(_proceed).catch((error) => {
+										console.log(error)
+									});
+								});
+							}
+
 						}
 					}).catch(_cancel);
 				}).catch(_cancel);

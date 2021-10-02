@@ -760,6 +760,9 @@ abstract class Users extends Base_Users
 			}
 		}
 
+		// Now save this user in the session as the logged-in user
+		self::setLoggedInUser($user);
+
 		/**
 		 * @event Users/login {after}
 		 * @param {string} identifier
@@ -769,10 +772,8 @@ abstract class Users extends Base_Users
 		Q::event('Users/login', compact(
 			'identifier', 'passphrase', 'user'
 		), 'after');
-		// Now save this user in the session as the logged-in user
-		self::setLoggedInUser($user);
-		return $user;
 
+		return $user;
 	}
 
 	/**
