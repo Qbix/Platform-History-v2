@@ -944,7 +944,7 @@ abstract class Db
 	/**
 	 * Turn off automatic caching on fetchAll and fetchDbRows.
 	 * @method caching
-	 * @param {boolean} $$allow Pass false to suppress all caching.
+	 * @param {boolean} $allow Pass false to suppress all caching.
 	 *  Pass true to enable caching, for queries with $query->caching() as true.
 	 * @return {Db_Query_Mysql}
 	 */
