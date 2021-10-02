@@ -2808,6 +2808,13 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     padding: 10px 0 30px 0;
     margin-left: 10px;
 }
+
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start,
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_stop,
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_settings,
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_embed {
+    flex-wrap: wrap;
+}
 .Streams_webrtc_streaming .Streams_webrtc_streaming_buttons {
     display: flex;
     justify-content: flex-end;
@@ -2820,6 +2827,12 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings {
     margin-right: 10px;
+}
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start select,
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start button,
+.Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings {
+   width:100%;
+    margin:5px;
 }
 
 .Streams_webrtc_popup-box .dialog-btns-group,
