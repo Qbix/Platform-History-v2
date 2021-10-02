@@ -36,8 +36,12 @@
         "WatchClip": "{{fromStreamTitle}} filmini izləmək üçün {{amount}} kredit qazandı",
         "PurchaseCredits": "Satınalma kreditləri",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredit"
-        }
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        },
+        "CreatePaidStream": "yaratmaq üçün {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} krediti",
+        "BuyBonus": "Bir anda {{amount}} krediti alsanız, {{bonus}} kredit bonusu əldə edəcəksiniz."
     },
     "history": {
         "Date": "Tarix",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} kreditləri sərf etdi",
         "BoughtCredits": "{{amount}} kredit aldı",
         "InviteAcceptedBy": "Qazanılmış {{amount}} kredit",
-        "YouHaveCreditsToStart": "Qazanılmış {{amount}} kredit"
+        "YouHaveCreditsToStart": "Qazanılmış {{amount}} kredit",
+        "CreatePaidStream": "{{amount}} kredit xərcləndi",
+        "WatchClip": {
+            "+": "{{amount}} kredit qazandı",
+            "-": "{{amount}} kredit xərcləndi"
+        },
+        "BonusCredits": "Bonus {{amount}} krediti var"
     },
     "subscriptions": {
         "infoTitle": "Ödəniş məlumatlarını təyin edin",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} kredit aldı"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} krediti"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Qiyməti təyin edin",
             "LinkPlaceholder": "əlavə məlumat bağlantısı qurun",
             "DescriptionPlaceholder": "Xidmətin təsviri",
-            "SaveService": "Xidməti Saxla"
+            "SaveService": "Xidməti Saxla",
+            "SelectRequiredParticipants": "Tələb olunan İştirakçılar"
         },
         "ManageServiceTemplates": "Xidmət şablonlarını idarə edin",
         "ManageServices": "Xidmətləri idarə et",

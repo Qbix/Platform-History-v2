@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Людзі, якіх я запрасіў",
-        "Streams\/invitedMe": "Хто запрасіў мяне"
+        "Streams\/invitedMe": "Хто запрасіў мяне",
+        "AreYouAgree": "Вы згодныя?",
+        "Yes": "Так",
+        "No": "Не"
     },
     "interests": {
         "Filter": "Што вам падабаецца?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
             "inviteSelectedContacts": "Запрасіце выбраныя кантакты",
             "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны",
-            "copyLink": "{{ClickOrTap}} скапіяваць запрашальную спасылку"
+            "copyLink": "{{ClickOrTap}} скапіяваць запрашальную спасылку",
+            "userChooserPlaceholder": "Пошук па назве"
         },
         "email": {
             "subject": "Эй, праверыць гэта",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "У ўдзельніка няма відэа",
             "openInBrowserAlert": "Адкрыйце спасылку ў браўзэры Safari, каб далучыцца да канферэнцыі.",
             "youBeganVideoRecording": "Вы пачалі запісваць гэтую канферэнцыю",
-            "youStoppedVideoRecording": "Вы спынілі запіс гэтай канферэнцыі"
+            "youStoppedVideoRecording": "Вы спынілі запіс гэтай канферэнцыі",
+            "switchingRoom": "Размяшчэнне ...",
+            "forceDisconnecting": "Вы будзеце адключаны на працягу 5 секунд",
+            "youStartedLive": "Вы пачалі трансляваць гэты выклік на карыстальніцкі RTMP",
+            "youStoppedLive": "Вы спынілі трансляцыю гэтага выкліку на карыстальніцкі RTMP",
+            "sbStartedLiveStreaming": "{{userName}} пачалі жыць",
+            "sbStoppedLiveStreaming": "{{userName}} скончылася ў прамым эфіры",
+            "liveStopped": "Адбылася памылка пры адпраўцы відэа на канчатковую кропку"
         },
         "settingsPopup": {
             "webCamera": "Вэб-камера",
@@ -205,7 +216,13 @@
             "stopRecording": "Спыніць запіс",
             "recordingInProgress": "Запіс ідзе ...",
             "publishOnTimeline": "Апублікаваць на часовай шкале",
-            "publishToGroup": "Апублікаваць у групе"
+            "publishToGroup": "Апублікаваць у групе",
+            "turnOffAudioInput": "Выключэнне мікрафона",
+            "micIsTurnedOff": "Мікрафон адключаны",
+            "start": "Пачаць",
+            "stop": "Стоп",
+            "streamingSettings": "Налады",
+            "streamToRTMP": "Паток у карыстацкі RTMP"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
         "streamTitle": "{{1}} Жывы званок",
         "preview": {
-            "preamble": "Сустрэча:"
+            "preamble": "Сустрэча:",
+            "Meeting": "Сустрэча",
+            "MeetingEnded": "Сустрэча скончылася"
+        },
+        "preparing": {
+            "micIsOff": "Мікрафон выключаны",
+            "micIsOn": "Мікрафон уключаны",
+            "cameraIsOff": "Камера выключана",
+            "cameraIsOn": "Камера ўключана",
+            "screenSharingIsOn": "Скрынінг уключаны",
+            "screenSharingIsOff": "Абагуліць экран",
+            "joinNow": "Далучайцеся да выкліку"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Адкажыце",
             "description": "паток адказаў"
+        },
+        "Streams\/calls": {
+            "displayType": "Званкі",
+            "description": "катэгорыя для патокаў\/webrtc",
+            "MaxRelationsExceeded": "Максімальныя выклікі перавышаны"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Няправільны файл",
         "errorNoSource": "Няма крыніцы выявы",
         "uploadLimit": "Максімальны памер файла: {{size}}",
-        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}",
+        "uploadedImage": "Запампаваны відарыс",
+        "imageTitle": "Назва выявы"
     },
     "questions": {
         "Questions": "Пытанні",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Ужо адказаў",
         "TitlePlaceholder": "Набярыце пытанне",
         "ContentPlaceholder": "Дадайце сюды дадатковую інфармацыю, каб дапамагчы людзям адказаць",
-        "ErrorTitle": "Пытанне патрабуецца"
+        "ErrorTitle": "Пытанне патрабуецца",
+        "Placeholder": "Запаўняльнік"
     },
     "experience": {
-        "NewExperience": "Новы досвед"
+        "NewExperience": "Новы досвед",
+        "DefineTitle": "Вызначце назву",
+        "Create": "Стварыць"
+    },
+    "calls": {
+        "SettingsTitle": "Званкі",
+        "MaxCalls": "Макс тэлефануе",
+        "Update": "Абнаўленне",
+        "NoCallsYet": "Званкоў пакуль няма",
+        "CallReasonTitle": "Пра што гэты званок?",
+        "WaitingRoom": "Зала чакання"
     }
 }

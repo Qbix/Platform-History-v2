@@ -117,7 +117,10 @@
         "SetClipStart": "Nastavte začátek klipu",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Nastavte konec klipu",
-        "ClipEnd": "Konec klipu"
+        "ClipEnd": "Konec klipu",
+        "StartMoreEnd": "Počáteční pozice nemůže být větší než koncová poloha",
+        "EndLessStart": "Koncová poloha nesmí být menší než počáteční poloha",
+        "WhichInvalid": "Argument „který“ je neplatný"
     },
     "durations": {
         "second": "druhý",

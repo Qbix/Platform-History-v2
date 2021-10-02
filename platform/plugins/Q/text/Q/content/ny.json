@@ -113,7 +113,10 @@
         "SetClipStart": "Khazikitsani Clip Start",
         "ClipStart": "Yambani Clip",
         "SetClipEnd": "Khazikitsani Mapeto",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Malo oyambira sangakhale opitilira kumapeto",
+        "EndLessStart": "Mapeto malo sangakhale ocheperako poyambira",
+        "WhichInvalid": "Kutsutsana &#39;komwe&#39; kulakwika"
     },
     "tabs": {
         "more": "Zambiri",

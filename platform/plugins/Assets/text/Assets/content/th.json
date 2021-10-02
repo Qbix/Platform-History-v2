@@ -36,8 +36,12 @@
         "WatchClip": "ได้รับ {{amount}} เครดิตสำหรับการรับชม {{fromStreamTitle}}",
         "PurchaseCredits": "ซื้อเครดิต",
         "forMessages": {
-            "BoughtCredits": "{{amount}} เครดิต"
-        }
+            "BoughtCredits": "{{amount}} เครดิต",
+            "BonusCredits": "{{amount}} หน่วยกิต"
+        },
+        "CreatePaidStream": "สำหรับการสร้าง {{toStreamName}}",
+        "BonusCredits": "โบนัส {{amount}} หน่วยกิต",
+        "BuyBonus": "การซื้อเครดิตมูลค่า {{amount}} หน่วยในคราวเดียว จะนำไปสู่โบนัสเครดิตจำนวน {{bonus}} หน่วย"
     },
     "history": {
         "Date": "วันที่",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "ใช้ไป {{amount}} หน่วยกิต",
         "BoughtCredits": "ซื้อ {{amount}} หน่วยกิต",
         "InviteAcceptedBy": "รับ {{amount}} หน่วยกิต",
-        "YouHaveCreditsToStart": "รับ {{amount}} หน่วยกิต"
+        "YouHaveCreditsToStart": "รับ {{amount}} หน่วยกิต",
+        "CreatePaidStream": "ใช้ไป {{amount}} หน่วยกิต",
+        "WatchClip": {
+            "+": "ได้รับ {{amount}} เครดิต",
+            "-": "ใช้ไป {{amount}} หน่วยกิต"
+        },
+        "BonusCredits": "ได้รับโบนัส {{amount}} หน่วยกิต"
     },
     "subscriptions": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "ซื้อ {{amount}} หน่วยกิต"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "โบนัส {{amount}} หน่วยกิต"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "กำหนดราคา",
             "LinkPlaceholder": "ตั้งค่าลิงค์ข้อมูลเพิ่มเติม",
             "DescriptionPlaceholder": "รายละเอียดการบริการ",
-            "SaveService": "บันทึกบริการ"
+            "SaveService": "บันทึกบริการ",
+            "SelectRequiredParticipants": "ผู้เข้าร่วมที่ต้องการ"
         },
         "ManageServiceTemplates": "จัดการเทมเพลตบริการ",
         "ManageServices": "จัดการบริการ",

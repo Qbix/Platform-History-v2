@@ -113,7 +113,10 @@
         "SetClipStart": "Seti le Amata Vasega",
         "ClipStart": "Clip Amata",
         "SetClipEnd": "Seti Faʻaiʻu le kilipa",
-        "ClipEnd": "Faʻaiuga o le kilipa"
+        "ClipEnd": "Faʻaiuga o le kilipa",
+        "StartMoreEnd": "Amata tulaga e le mafai ona sili atu nai lo iʻuga tulaga",
+        "EndLessStart": "O le tulaga faʻaiʻu e le mafai ona laʻititi nai lo le tulaga amata",
+        "WhichInvalid": "Finauga &#39;o le&#39; le faʻamaonia"
     },
     "tabs": {
         "more": "sili atu",

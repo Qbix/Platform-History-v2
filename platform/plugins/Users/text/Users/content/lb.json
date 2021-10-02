@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Akzeptéieren Dir d&#39;Konditioune vum Service?",
         "facebookNoEmail": "Äre Facebook Kont fehlt eng bestätegt E-mail Adress. Logt Iech einfach op déi gebierteg Manéier.",
-        "picTooltip": "Dir kënnt dëst Bild méi spéit änneren"
+        "picTooltip": "Dir kënnt dëst Bild méi spéit änneren",
+        "wallet": {
+            "payload": "Aloggen op {{host}} zu Zäit {{timestamp}}",
+            "alert": {
+                "title": "Ëmgeleet op Portemonnaie",
+                "content": "Wann Dir dësen Dialog zoumaacht, gitt Dir an Äre Portemonnaie bruecht. Nodeems Dir Iech ugemellt hutt, gitt zréck op dës Säit."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Füügt e Wee fir ze aloggen",
@@ -108,6 +115,18 @@
         "Owner": "Besëtzer",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Gaascht"
+        "Guest": "Gaascht",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Deeglech",
+        "Weekly": "Wochemaart",
+        "Monthly": "Monatlech",
+        "Application": "Applikatioun",
+        "Pages": "Säiten",
+        "Services": "Servicer",
+        "Faq": "FAQ",
+        "WeekDays": "Woch Deeg"
     }
 }

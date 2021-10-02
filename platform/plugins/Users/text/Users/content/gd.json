@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Gabh ris na Cumhachan Seirbheis?",
         "facebookNoEmail": "Tha do chunntas facebook ag ionndrainn seòladh puist-d dearbhte. Dìreach dèan log a-steach san dòigh dhùthchasach.",
-        "picTooltip": "Faodaidh tu an dealbh seo atharrachadh nas fhaide air adhart"
+        "picTooltip": "Faodaidh tu an dealbh seo atharrachadh nas fhaide air adhart",
+        "wallet": {
+            "payload": "Log a-steach do {{host}} aig àm {{timestamp}}",
+            "alert": {
+                "title": "Ag ath-stiùireadh gu Wallet",
+                "content": "Cho luath ‘s a dhùineas tu an còmhradh seo, thèid do thoirt chun wallet agad. Às deidh dhut clàradh a-steach, till air ais chun duilleag seo."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Cuir dòigh air logadh a-steach",
@@ -108,6 +115,18 @@
         "Owner": "Sealbhadair",
         "Admin": "Rianachd",
         "Member": "Ball",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Gach latha",
+        "Weekly": "Gach seachdain",
+        "Monthly": "Mìos",
+        "Application": "Iarrtas",
+        "Pages": "Duilleagan",
+        "Services": "Seirbheisean",
+        "Faq": "Faq",
+        "WeekDays": "Làithean seachdain"
     }
 }

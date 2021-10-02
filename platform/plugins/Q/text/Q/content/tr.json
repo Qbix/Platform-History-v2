@@ -117,7 +117,10 @@
         "SetClipStart": "Klip Başlangıcını Ayarla",
         "ClipStart": "Klip Başlangıcı",
         "SetClipEnd": "Klip Sonunu Ayarla",
-        "ClipEnd": "Klip Sonu"
+        "ClipEnd": "Klip Sonu",
+        "StartMoreEnd": "Başlangıç konumu, bitiş konumundan fazla olamaz",
+        "EndLessStart": "Bitiş konumu, başlangıç konumundan daha az olamaz",
+        "WhichInvalid": "Argüman &#39;hangisi&#39; geçersiz"
     },
     "durations": {
         "second": "ikinci",

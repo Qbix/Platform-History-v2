@@ -36,8 +36,12 @@
         "WatchClip": "Κερδίσατε {{amount}} πιστώσεις για παρακολούθηση {{fromStreamTitle}}",
         "PurchaseCredits": "Αγορά πιστώσεων",
         "forMessages": {
-            "BoughtCredits": "{{amount}} πιστώσεις"
-        }
+            "BoughtCredits": "{{amount}} πιστώσεις",
+            "BonusCredits": "Πιστώσεις {{amount}}"
+        },
+        "CreatePaidStream": "για τη δημιουργία {{toStreamName}}",
+        "BonusCredits": "Μπόνους {{amount}} πιστώσεις",
+        "BuyBonus": "Η αγορά πιστωτικών μονάδων {{amount}} ταυτόχρονα θα οδηγήσει σε μπόνους πίστωσης {{bonus}}."
     },
     "history": {
         "Date": "Ημερομηνία",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Δαπανήθηκαν {{amount}} μονάδες",
         "BoughtCredits": "Αγοράσατε {{amount}} πιστώσεις",
         "InviteAcceptedBy": "Κερδίσατε {{amount}} πιστώσεις",
-        "YouHaveCreditsToStart": "Κερδίσατε {{amount}} πιστώσεις"
+        "YouHaveCreditsToStart": "Κερδίσατε {{amount}} πιστώσεις",
+        "CreatePaidStream": "Ξόδεψε {{amount}} πιστώσεις",
+        "WatchClip": {
+            "+": "Κερδίσατε {{amount}} πιστώσεις",
+            "-": "Ξόδεψε {{amount}} πιστώσεις"
+        },
+        "BonusCredits": "Έχετε πιστώσεις μπόνους {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Ορίστε τις πληροφορίες πληρωμής",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Αγοράσατε {{amount}} πιστώσεις"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Μπόνους {{amount}} πιστώσεις"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Ορίστε την τιμή",
             "LinkPlaceholder": "ορίστε πρόσθετο σύνδεσμο πληροφοριών",
             "DescriptionPlaceholder": "Περιγραφή υπηρεσίας",
-            "SaveService": "Αποθήκευση υπηρεσίας"
+            "SaveService": "Αποθήκευση υπηρεσίας",
+            "SelectRequiredParticipants": "Απαιτούμενοι συμμετέχοντες"
         },
         "ManageServiceTemplates": "Διαχείριση προτύπων υπηρεσίας",
         "ManageServices": "Διαχείριση υπηρεσιών",

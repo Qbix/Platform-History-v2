@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Moun mwen envite",
-        "Streams\/invitedMe": "Ki moun ki envite m &#39;"
+        "Streams\/invitedMe": "Ki moun ki envite m &#39;",
+        "AreYouAgree": "Èske ou dakò?",
+        "Yes": "Wi",
+        "No": "Non"
     },
     "interests": {
         "Filter": "Kisa ou renmen?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} si yo te eskane kòd la",
-            "copyLink": "{{ClickOrTap}} kopye lyen envite"
+            "copyLink": "{{ClickOrTap}} kopye lyen envite",
+            "userChooserPlaceholder": "Rechèch pa non"
         },
         "email": {
             "subject": "Hey, tcheke sa a soti",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Patisipan an pa gen okenn videyo",
             "openInBrowserAlert": "Louvri lyen nan navigatè Safari pou rantre nan konferans lan.",
             "youBeganVideoRecording": "Ou te kòmanse anrejistre konferans sa a",
-            "youStoppedVideoRecording": "Ou te sispann anrejistre konferans sa a"
+            "youStoppedVideoRecording": "Ou te sispann anrejistre konferans sa a",
+            "switchingRoom": "Chanje chanm ...",
+            "forceDisconnecting": "Ou pral dekonekte nan lespas 5 segonn",
+            "youStartedLive": "Ou te kòmanse difize apèl sa a nan koutim RTMP",
+            "youStoppedLive": "Ou sispann difize apèl sa a sou koutim RTMP",
+            "sbStartedLiveStreaming": "{{userName}} te kòmanse ap viv",
+            "sbStoppedLiveStreaming": "{{userName}} te fini ap viv",
+            "liveStopped": "Erè pandan y ap voye videyo nan pwen final ki te fèt"
         },
         "settingsPopup": {
             "webCamera": "Kamera entènèt",
@@ -192,7 +203,13 @@
             "stopRecording": "One Stop anrejistreman",
             "recordingInProgress": "Anrejistreman an nan pwogrè ...",
             "publishOnTimeline": "Pibliye sou delè",
-            "publishToGroup": "Pibliye nan gwoup la"
+            "publishToGroup": "Pibliye nan gwoup la",
+            "turnOffAudioInput": "Mikwofòn bèbè",
+            "micIsTurnedOff": "Mikwofòn etenn",
+            "start": "Kòmanse",
+            "stop": "Sispann",
+            "streamingSettings": "Anviwònman",
+            "streamToRTMP": "Kouran nan koutim RTMP"
         },
         "participantsPopup": {
             "disconnect": "Dekonekte",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan kouran sa a.",
         "streamTitle": "{{1}} apèl viv",
         "preview": {
-            "preamble": "Reyinyon:"
+            "preamble": "Reyinyon:",
+            "Meeting": "Reyinyon",
+            "MeetingEnded": "Reyinyon te fini"
+        },
+        "preparing": {
+            "micIsOff": "Mic se koupe",
+            "micIsOn": "Mic sou",
+            "cameraIsOff": "Kamera koupe",
+            "cameraIsOn": "Kamera sou",
+            "screenSharingIsOn": "Screensharing se sou",
+            "screenSharingIsOff": "Pataje ekran",
+            "joinNow": "Antre nan apèl la"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Reponn",
             "description": "kouran repons"
+        },
+        "Streams\/calls": {
+            "displayType": "Apèl",
+            "description": "kategori pou Streams \/ webrtc",
+            "MaxRelationsExceeded": "Max apèl depase"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Dosye ki pa valab",
         "errorNoSource": "Pa gen sous imaj",
         "uploadLimit": "Gwosè dosye max: {{size}}",
-        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}",
+        "uploadedImage": "Uploaded imaj",
+        "imageTitle": "Tit imaj la"
     },
     "questions": {
         "Questions": "Kesyon",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Deja reponn",
         "TitlePlaceholder": "Tape kesyon ou an",
         "ContentPlaceholder": "Mete nenpòt lòt enfòmasyon isit la pou ede moun yo reponn",
-        "ErrorTitle": "Kesyon obligatwa"
+        "ErrorTitle": "Kesyon obligatwa",
+        "Placeholder": "Plasman"
     },
     "experience": {
-        "NewExperience": "Nouvo Eksperyans"
+        "NewExperience": "Nouvo Eksperyans",
+        "DefineTitle": "Tanpri defini yon tit",
+        "Create": "Kreye"
+    },
+    "calls": {
+        "SettingsTitle": "Apèl",
+        "MaxCalls": "Max apèl",
+        "Update": "Mizajou",
+        "NoCallsYet": "Pa gen apèl ankò",
+        "CallReasonTitle": "Ki sa ki rele sa a sou?",
+        "WaitingRoom": "Sal datant"
     }
 }

@@ -113,7 +113,10 @@
         "SetClipStart": "Suidhich Clip Start",
         "ClipStart": "Clip Tòisich",
         "SetClipEnd": "Suidhich Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Chan urrainn don t-suidheachadh tòiseachaidh a bhith nas motha na an suidheachadh crìochnachaidh",
+        "EndLessStart": "Chan urrainn don t-suidheachadh crìochnachaidh a bhith nas lugha na an suidheachadh tòiseachaidh",
+        "WhichInvalid": "Argamaid &#39;a tha&#39; neo-dhligheach"
     },
     "tabs": {
         "more": "tuilleadh",

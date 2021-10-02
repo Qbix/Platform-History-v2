@@ -36,8 +36,12 @@
         "WatchClip": "{{1000} watching দেখার জন্য {Ear 999}} ক্রেডিট অর্জন করেছেন",
         "PurchaseCredits": "ক্রয় ক্রেডিট",
         "forMessages": {
-            "BoughtCredits": "{9 999}} ক্রেডিট"
-        }
+            "BoughtCredits": "{9 999}} ক্রেডিট",
+            "BonusCredits": "{{amount}} ক্রেডিট"
+        },
+        "CreatePaidStream": "{{toStreamName}} তৈরির জন্য",
+        "BonusCredits": "বোনাস {{amount}} ক্রেডিট",
+        "BuyBonus": "একবারে {{amount}} ক্রেডিট কিনলে, {{bonus}} ক্রেডিট বোনাস পাবে।"
     },
     "history": {
         "Date": "তারিখ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{9 999}} ক্রেডিট ব্যয় করেছেন",
         "BoughtCredits": "{999}} ক্রেডিট কিনেছেন",
         "InviteAcceptedBy": "{999}} ক্রেডিট অর্জন করেছেন",
-        "YouHaveCreditsToStart": "{999}} ক্রেডিট অর্জন করেছেন"
+        "YouHaveCreditsToStart": "{999}} ক্রেডিট অর্জন করেছেন",
+        "CreatePaidStream": "{{amount}} ক্রেডিট ব্যয় করেছেন",
+        "WatchClip": {
+            "+": "{{amount}} ক্রেডিট পেয়েছেন",
+            "-": "{{amount}} ক্রেডিট ব্যয় করেছেন"
+        },
+        "BonusCredits": "বোনাস {{amount}} ক্রেডিট পেয়েছেন"
     },
     "subscriptions": {
         "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{999}} ক্রেডিট কিনেছেন"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "বোনাস {{amount}} ক্রেডিট"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "দাম নির্ধারণ করো",
             "LinkPlaceholder": "অতিরিক্ত তথ্য লিঙ্ক সেট করুন",
             "DescriptionPlaceholder": "সেবা বর্ণনা",
-            "SaveService": "পরিষেবা সংরক্ষণ করুন"
+            "SaveService": "পরিষেবা সংরক্ষণ করুন",
+            "SelectRequiredParticipants": "প্রয়োজনীয় অংশগ্রহণকারীরা"
         },
         "ManageServiceTemplates": "পরিষেবা টেম্পলেটগুলি পরিচালনা করুন",
         "ManageServices": "পরিষেবাদি পরিচালনা করুন",

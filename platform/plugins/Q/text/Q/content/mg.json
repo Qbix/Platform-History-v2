@@ -113,7 +113,10 @@
         "SetClipStart": "Mametraha Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Mametraha Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Ny toerana fanombohana dia tsy tokony mihoatra ny toerana farany",
+        "EndLessStart": "Ny toerana farany dia tsy tokony ho ambany noho ny toerana fanombohana",
+        "WhichInvalid": "Argument &#39;izay&#39; tsy mety"
     },
     "tabs": {
         "more": "Bebe kokoa",

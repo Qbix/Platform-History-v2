@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "E persone ch&#39;e aghju invitato",
-        "Streams\/invitedMe": "Chi mi ha invitatu"
+        "Streams\/invitedMe": "Chi mi ha invitatu",
+        "AreYouAgree": "Site d’accunsentu?",
+        "Yes": "Iè",
+        "No": "Innò"
     },
     "interests": {
         "Filter": "Cosa ti piace?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu",
-            "copyLink": "{{ClickOrTap}} per copià u ligame d&#39;invitu"
+            "copyLink": "{{ClickOrTap}} per copià u ligame d&#39;invitu",
+            "userChooserPlaceholder": "Ricerca per nome"
         },
         "email": {
             "subject": "Hey, fighjate questu",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "U participante ùn hà micca alcun video",
             "openInBrowserAlert": "Link aperto in u navigatore Safari per unisce à a cunferenza.",
             "youBeganVideoRecording": "Avete cuminciatu à registrà sta cunferenza",
-            "youStoppedVideoRecording": "Avete firmatu di registrà sta cunferenza"
+            "youStoppedVideoRecording": "Avete firmatu di registrà sta cunferenza",
+            "switchingRoom": "Cambia ...",
+            "forceDisconnecting": "Sarete disconnessu in 5 secondi",
+            "youStartedLive": "Avete cuminciatu à trasmette sta chjamata à RTMP persunalizata",
+            "youStoppedLive": "Avete smessu di trasmette sta chjamata à RTMP persunalizata",
+            "sbStartedLiveStreaming": "{{userName}} hà principiatu in diretta",
+            "sbStoppedLiveStreaming": "{{userName}} finita in diretta",
+            "liveStopped": "Errore durante l&#39;inviu di u video à l&#39;endpoint"
         },
         "settingsPopup": {
             "webCamera": "Camera Web",
@@ -192,7 +203,13 @@
             "stopRecording": "Pare a registrazione",
             "recordingInProgress": "A registrazione hè in corsu ...",
             "publishOnTimeline": "Publicà nantu à a cronologia",
-            "publishToGroup": "Publicà à u gruppu"
+            "publishToGroup": "Publicà à u gruppu",
+            "turnOffAudioInput": "Micca u micrufonu",
+            "micIsTurnedOff": "U microfonu hè disattivatu",
+            "start": "Principià",
+            "stop": "Piantà",
+            "streamingSettings": "Impostazioni",
+            "streamToRTMP": "Stream à RTMP persunalizatu"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à questu flussu.",
         "streamTitle": "{{1}} chiamata in diretta",
         "preview": {
-            "preamble": "Riunione:"
+            "preamble": "Riunione:",
+            "Meeting": "Riunione",
+            "MeetingEnded": "A riunione hè finita"
+        },
+        "preparing": {
+            "micIsOff": "Mic hè spente",
+            "micIsOn": "Mic hè accesa",
+            "cameraIsOff": "A fotocamera hè spenta",
+            "cameraIsOn": "A camera hè accesa",
+            "screenSharingIsOn": "Screensharing hè attivatu",
+            "screenSharingIsOff": "Schernu di sparte",
+            "joinNow": "Unisciti à a Chjama"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Rispondi",
             "description": "flussu di risposta"
+        },
+        "Streams\/calls": {
+            "displayType": "Chjamate",
+            "description": "categuria per Streams \/ webrtc",
+            "MaxRelationsExceeded": "Max chiamate superate"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fichju invalidu",
         "errorNoSource": "Nisuna surghjente di maghjina",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
-        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}",
+        "uploadedImage": "Imagine caricata",
+        "imageTitle": "Titulu di l&#39;immagine"
     },
     "questions": {
         "Questions": "Dumande",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Digià rispostu",
         "TitlePlaceholder": "Scrivite a vostra dumanda",
         "ContentPlaceholder": "Mettite ogni infurmazione addiziunale quì per aiutà a ghjente à risponde",
-        "ErrorTitle": "Dumanda necessaria"
+        "ErrorTitle": "Dumanda necessaria",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Nova Esperienza"
+        "NewExperience": "Nova Esperienza",
+        "DefineTitle": "Per piacè definite un titulu",
+        "Create": "Creà"
+    },
+    "calls": {
+        "SettingsTitle": "Chjamate",
+        "MaxCalls": "Max chjama",
+        "Update": "Aghjurnamentu",
+        "NoCallsYet": "Mancu chjama",
+        "CallReasonTitle": "Di chì tratta sta chjama?",
+        "WaitingRoom": "Sala d&#39;attesa"
     }
 }

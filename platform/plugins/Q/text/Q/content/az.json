@@ -117,7 +117,10 @@
         "SetClipStart": "Klip Başlanğıcını təyin edin",
         "ClipStart": "Klip Başlayın",
         "SetClipEnd": "Klip Sonunu təyin edin",
-        "ClipEnd": "Klip sonu"
+        "ClipEnd": "Klip sonu",
+        "StartMoreEnd": "Başlanğıc mövqeyi son mövqedən çox ola bilməz",
+        "EndLessStart": "Son mövqe başlanğıc mövqeyindən az ola bilməz",
+        "WhichInvalid": "&quot;Hansı&quot; etibarsızdır"
     },
     "durations": {
         "second": "ikinci",

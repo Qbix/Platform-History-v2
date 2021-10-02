@@ -117,7 +117,10 @@
         "SetClipStart": "A Clip Start beállítása",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Állítsa be a klip végét",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "A kiindulási helyzet nem lehet több, mint a véghelyzet",
+        "EndLessStart": "A véghelyzet nem lehet kevesebb, mint a kiindulási helyzet",
+        "WhichInvalid": "Érvénytelen érv"
     },
     "durations": {
         "second": "második",

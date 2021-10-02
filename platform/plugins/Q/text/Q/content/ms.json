@@ -117,7 +117,10 @@
         "SetClipStart": "Tetapkan Mula Klip",
         "ClipStart": "Mula Klip",
         "SetClipEnd": "Tetapkan Klip Akhir",
-        "ClipEnd": "Akhir Klip"
+        "ClipEnd": "Akhir Klip",
+        "StartMoreEnd": "Kedudukan permulaan tidak boleh lebih daripada kedudukan akhir",
+        "EndLessStart": "Posisi akhir tidak boleh kurang daripada kedudukan permulaan",
+        "WhichInvalid": "Hujah &#39;yang&#39; tidak sah"
     },
     "durations": {
         "second": "kedua",

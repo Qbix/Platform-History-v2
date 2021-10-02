@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "私が招待した人",
-        "Streams\/invitedMe": "誰が私を招待しました"
+        "Streams\/invitedMe": "誰が私を招待しました",
+        "AreYouAgree": "賛成ですか？",
+        "Yes": "はい",
+        "No": "番号"
     },
     "interests": {
         "Filter": "何を楽しんでいますか？",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "連絡先からもう一度選択",
             "inviteSelectedContacts": "選択した連絡先を招待",
             "scannedQR": "{{ClickOrTap}}コードがスキャンされた場合",
-            "copyLink": "招待リンクをコピーするには{{ClickOrTap}}"
+            "copyLink": "招待リンクをコピーするには{{ClickOrTap}}",
+            "userChooserPlaceholder": "名前で検索"
         },
         "email": {
             "subject": "こんにちは、これをチェックしてください",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "参加者にはビデオがありません",
             "openInBrowserAlert": "Safariブラウザーでリンクを開き、会議に参加します。",
             "youBeganVideoRecording": "この会議の録音を開始しました",
-            "youStoppedVideoRecording": "この会議の記録を停止しました"
+            "youStoppedVideoRecording": "この会議の記録を停止しました",
+            "switchingRoom": "スイッチングルーム...",
+            "forceDisconnecting": "5秒以内に切断されます",
+            "youStartedLive": "この通話をカスタムRTMPにブロードキャストし始めました",
+            "youStoppedLive": "この通話のカスタムRTMPへのブロードキャストを停止しました",
+            "sbStartedLiveStreaming": "{{userName}}がライブを開始しました",
+            "sbStoppedLiveStreaming": "{{userName}}はライブで終了しました",
+            "liveStopped": "エンドポイントへのビデオ送信中にエラーが発生しました"
         },
         "settingsPopup": {
             "webCamera": "ウェブカメラ",
@@ -205,7 +216,13 @@
             "stopRecording": "記録を停止",
             "recordingInProgress": "記録中です...",
             "publishOnTimeline": "タイムラインで公開",
-            "publishToGroup": "グループに公開"
+            "publishToGroup": "グループに公開",
+            "turnOffAudioInput": "マイクをミュート",
+            "micIsTurnedOff": "マイクがオフになっている",
+            "start": "始める",
+            "stop": "やめる",
+            "streamingSettings": "設定",
+            "streamToRTMP": "カスタムRTMPにストリーミング"
         },
         "participantsPopup": {
             "disconnect": "切断する",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
         "streamTitle": "{{1}}ライブ通話",
         "preview": {
-            "preamble": "会議："
+            "preamble": "会議：",
+            "Meeting": "ミーティング",
+            "MeetingEnded": "会議は終了しました"
+        },
+        "preparing": {
+            "micIsOff": "マイクがオフになっています",
+            "micIsOn": "マイクがオンになっています",
+            "cameraIsOff": "カメラがオフになっています",
+            "cameraIsOn": "カメラがオンになっています",
+            "screenSharingIsOn": "画面共有がオンになっています",
+            "screenSharingIsOff": "画面を共有",
+            "joinNow": "通話に参加する"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "回答",
             "description": "回答ストリーム"
+        },
+        "Streams\/calls": {
+            "displayType": "呼び出し",
+            "description": "Streams \/ webrtcのカテゴリ",
+            "MaxRelationsExceeded": "最大通話数を超えました"
         }
     },
     "messages": {
@@ -449,7 +482,9 @@
         "invalidFile": "無効なファイル",
         "errorNoSource": "画像ソースなし",
         "uploadLimit": "最大ファイルサイズ：{{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です"
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイルサイズは{{size}}です",
+        "uploadedImage": "アップロードした画像",
+        "imageTitle": "画像タイトル"
     },
     "questions": {
         "Questions": "質問",
@@ -470,9 +505,20 @@
         "AlreadyAnswered": "すでに回答済み",
         "TitlePlaceholder": "質問を入力してください",
         "ContentPlaceholder": "人々が答えるのを助けるためにここに追加情報を入れてください",
-        "ErrorTitle": "質問が必要です"
+        "ErrorTitle": "質問が必要です",
+        "Placeholder": "プレースホルダー"
     },
     "experience": {
-        "NewExperience": "新しい経験"
+        "NewExperience": "新しい経験",
+        "DefineTitle": "タイトルを定義してください",
+        "Create": "作成"
+    },
+    "calls": {
+        "SettingsTitle": "呼び出し",
+        "MaxCalls": "最大呼び出し",
+        "Update": "アップデート",
+        "NoCallsYet": "まだ電話はありません",
+        "CallReasonTitle": "この呼びかけは何についてですか？",
+        "WaitingRoom": "待合室"
     }
 }

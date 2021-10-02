@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Mirovên ku ez vexwendin",
-        "Streams\/invitedMe": "Yê ku min vexwendin"
+        "Streams\/invitedMe": "Yê ku min vexwendin",
+        "AreYouAgree": "Hûn hevî dikin?",
+        "Yes": "Erê",
+        "No": "Na"
     },
     "interests": {
         "Filter": "Hûn bi kêfê dikin?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "The 99 999}} heke kodê nexşandî bû",
-            "copyLink": "99 99 999}} ji bo kopkirina girêdana vexwendinê"
+            "copyLink": "99 99 999}} ji bo kopkirina girêdana vexwendinê",
+            "userChooserPlaceholder": "Bi navê bigerin"
         },
         "email": {
             "subject": "Hey, vê yekê bibînin",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Beşdarê vîdyoyê tune",
             "openInBrowserAlert": "Zencîre vekirî di geroka Safari de da ku beşdarî konferansê bibe.",
             "youBeganVideoRecording": "We dest bi tomara vê konferansê kir",
-            "youStoppedVideoRecording": "We tomarkirina vê konferansê rawestand"
+            "youStoppedVideoRecording": "We tomarkirina vê konferansê rawestand",
+            "switchingRoom": "Odeya guheztinê ...",
+            "forceDisconnecting": "Hûn ê di nav 5 çirkeyan de qut bibin",
+            "youStartedLive": "We dest bi weşana vê bangê li RTMP -ya xwerû kir",
+            "youStoppedLive": "We weşana vê bangê ji RTMP -ya xwerû re rawestand",
+            "sbStartedLiveStreaming": "{{userName}} zindî dest pê kir",
+            "sbStoppedLiveStreaming": "{{userName}} bi zindî qediya",
+            "liveStopped": "Dema şandina vîdyoyê ji bo xala paşîn xeletî çêbû"
         },
         "settingsPopup": {
             "webCamera": "Kamera Web",
@@ -192,7 +203,13 @@
             "stopRecording": "Xwe tomar bikin",
             "recordingInProgress": "Dabeşandin di pêşde ye ...",
             "publishOnTimeline": "Li ser timelê çap bikin",
-            "publishToGroup": "Ji bo komê bide weşandin"
+            "publishToGroup": "Ji bo komê bide weşandin",
+            "turnOffAudioInput": "Mîkrofon bêdeng kirin",
+            "micIsTurnedOff": "Mîkrofon girtî ye",
+            "start": "Destpêkirin",
+            "stop": "Rawestan",
+            "streamingSettings": "Settings",
+            "streamToRTMP": "Li RTMP -ya xwerû biherikin"
         },
         "participantsPopup": {
             "disconnect": "Hevqetandin",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Tu destûr naye ku hûn beşdarî vê streamê bibin.",
         "streamTitle": "99 999} call banga zindî",
         "preview": {
-            "preamble": "Hevdîtinî:"
+            "preamble": "Hevdîtinî:",
+            "Meeting": "Hevdîtinî",
+            "MeetingEnded": "Civîn bi dawî bû"
+        },
+        "preparing": {
+            "micIsOff": "Mîkrofon girtî ye",
+            "micIsOn": "Mîk li ser e",
+            "cameraIsOff": "Kamera girtî ye",
+            "cameraIsOn": "Kamera vekirî ye",
+            "screenSharingIsOn": "Parvekirina ekranê li ser e",
+            "screenSharingIsOff": "Parvekirina ekranê",
+            "joinNow": "Tevlî Bangewaziyê bibin"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Bersiv",
             "description": "bersiva çemê"
+        },
+        "Streams\/calls": {
+            "displayType": "Gazî dike",
+            "description": "kategorî ji bo Streams\/webrtc",
+            "MaxRelationsExceeded": "Telefonên Max derbas bûn"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Pelê nederbasdar",
         "errorNoSource": "Çavkaniya wêneyê tune",
         "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
-        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
+        "errorFileSize": "Bibore, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e",
+        "uploadedImage": "Wêneyê barkirî",
+        "imageTitle": "Sernavê wêneyê"
     },
     "questions": {
         "Questions": "Pirs",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Jixwe bersiv da",
         "TitlePlaceholder": "Pirsa xwe binivîse",
         "ContentPlaceholder": "Ji bo ku mirov bersîvê bide her agahdariyek din li vir bixe",
-        "ErrorTitle": "Pirs pêwîst e"
+        "ErrorTitle": "Pirs pêwîst e",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Tecrubeya Nû"
+        "NewExperience": "Tecrubeya Nû",
+        "DefineTitle": "Ji kerema xwe sernavek diyar bikin",
+        "Create": "Xûliqandin"
+    },
+    "calls": {
+        "SettingsTitle": "Gazî dike",
+        "MaxCalls": "Max bang dike",
+        "Update": "Rojanekirin",
+        "NoCallsYet": "Têlefon hîn tune",
+        "CallReasonTitle": "Ev bang ji bo çi ye?",
+        "WaitingRoom": "Odeya Çaverêkirinê"
     }
 }

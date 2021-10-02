@@ -113,7 +113,10 @@
         "SetClipStart": "Sett Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Sett Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Startposisjon kan ikke være mer enn sluttposisjon",
+        "EndLessStart": "Sluttposisjon kan ikke være mindre enn startposisjon",
+        "WhichInvalid": "Argumentet &#39;hvilket&#39; er ugyldig"
     },
     "tabs": {
         "more": "mer",

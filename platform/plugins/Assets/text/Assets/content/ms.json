@@ -36,8 +36,12 @@
         "WatchClip": "Memperoleh {{amount}} kredit untuk menonton {{fromStreamTitle}}",
         "PurchaseCredits": "Beli Kredit",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredit"
-        }
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        },
+        "CreatePaidStream": "kerana membuat {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan menghasilkan bonus {{bonus}} kredit."
     },
     "history": {
         "Date": "Tarikh",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Membelanjakan {{amount}} kredit",
         "BoughtCredits": "Membeli {{amount}} kredit",
         "InviteAcceptedBy": "Memperoleh {{amount}} kredit",
-        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit"
+        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit",
+        "CreatePaidStream": "Membelanjakan {{amount}} kredit",
+        "WatchClip": {
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Membelanjakan {{amount}} kredit"
+        },
+        "BonusCredits": "Mendapat bonus {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Maklumat Pembayaran",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Membeli {{amount}} kredit"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredit"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Tetapkan harga",
             "LinkPlaceholder": "tetapkan pautan maklumat tambahan",
             "DescriptionPlaceholder": "Penerangan perkhidmatan",
-            "SaveService": "Jimat Perkhidmatan"
+            "SaveService": "Jimat Perkhidmatan",
+            "SelectRequiredParticipants": "Peserta Wajib"
         },
         "ManageServiceTemplates": "Urus Templat Perkhidmatan",
         "ManageServices": "Urus Perkhidmatan",

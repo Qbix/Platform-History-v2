@@ -36,8 +36,12 @@
         "WatchClip": "Hai ottenuto {{amount}} crediti per la visione di {{fromStreamTitle}}",
         "PurchaseCredits": "Acquista crediti",
         "forMessages": {
-            "BoughtCredits": "{{amount}} crediti"
-        }
+            "BoughtCredits": "{{amount}} crediti",
+            "BonusCredits": "{{amount}} crediti"
+        },
+        "CreatePaidStream": "per aver creato {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} crediti",
+        "BuyBonus": "Acquistando {{amount}} crediti in una volta, otterrai un bonus di {{bonus}} crediti."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Spesi {{amount}} crediti",
         "BoughtCredits": "Ha acquistato crediti {{amount}}",
         "InviteAcceptedBy": "Hai guadagnato {{amount}} crediti",
-        "YouHaveCreditsToStart": "Hai guadagnato {{amount}} crediti"
+        "YouHaveCreditsToStart": "Hai guadagnato {{amount}} crediti",
+        "CreatePaidStream": "Hai speso {{amount}} crediti",
+        "WatchClip": {
+            "+": "Hai guadagnato {{amount}} crediti",
+            "-": "Hai speso {{amount}} crediti"
+        },
+        "BonusCredits": "Hai ottenuto {{amount}} crediti bonus"
     },
     "subscriptions": {
         "infoTitle": "Imposta le informazioni di pagamento",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Ha acquistato crediti {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} crediti"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Prezzo stabilito",
             "LinkPlaceholder": "imposta un collegamento informativo aggiuntivo",
             "DescriptionPlaceholder": "Descrizione del servizio",
-            "SaveService": "Salva servizio"
+            "SaveService": "Salva servizio",
+            "SelectRequiredParticipants": "Partecipanti richiesti"
         },
         "ManageServiceTemplates": "Gestisci modelli di servizio",
         "ManageServices": "Gestire i servizi",

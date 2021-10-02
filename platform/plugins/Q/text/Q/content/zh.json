@@ -117,7 +117,10 @@
         "SetClipStart": "设置剪辑开始",
         "ClipStart": "剪辑开始",
         "SetClipEnd": "设置剪辑结束",
-        "ClipEnd": "夹端"
+        "ClipEnd": "夹端",
+        "StartMoreEnd": "开始位置不能超过结束位置",
+        "EndLessStart": "结束位置不能小于开始位置",
+        "WhichInvalid": "参数“which”无效"
     },
     "durations": {
         "second": "第二",

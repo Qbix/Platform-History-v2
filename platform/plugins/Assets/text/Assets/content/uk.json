@@ -36,8 +36,12 @@
         "WatchClip": "Зароблені кредити на {{amount}} за перегляд {{fromStreamTitle}}",
         "PurchaseCredits": "Покупка кредитів",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредитів"
-        }
+            "BoughtCredits": "{{amount}} кредитів",
+            "BonusCredits": "{{amount}} кредитів"
+        },
+        "CreatePaidStream": "для створення {{toStreamName}}",
+        "BonusCredits": "Бонусні кредити {{amount}}",
+        "BuyBonus": "Купуючи {{amount}} кредитів одночасно, ви отримаєте бонус {{bonus}} кредитів."
     },
     "history": {
         "Date": "Дата",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Витрачено {{amount}} кредитів",
         "BoughtCredits": "Купив {{amount}} кредитів",
         "InviteAcceptedBy": "Зароблено {{amount}} кредитів",
-        "YouHaveCreditsToStart": "Зароблено {{amount}} кредитів"
+        "YouHaveCreditsToStart": "Зароблено {{amount}} кредитів",
+        "CreatePaidStream": "Витрачено {{amount}} кредитів",
+        "WatchClip": {
+            "+": "Заробили {{amount}} кредитів",
+            "-": "Витрачено {{amount}} кредитів"
+        },
+        "BonusCredits": "Отримав бонусні кредити {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Встановити платіжну інформацію",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Купив {{amount}} кредитів"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонусні кредити {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Встановити ціну",
             "LinkPlaceholder": "встановити додаткове інформаційне посилання",
             "DescriptionPlaceholder": "Опис послуги",
-            "SaveService": "Зберегти сервіс"
+            "SaveService": "Зберегти сервіс",
+            "SelectRequiredParticipants": "Обов’язкові учасники"
         },
         "ManageServiceTemplates": "Управління шаблонами обслуговування",
         "ManageServices": "Управління послугами",

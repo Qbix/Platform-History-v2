@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Whakaaehia nga Ture o te Ratonga?",
         "facebookNoEmail": "Kei te ngaro to pūkete facebook i tetahi wahitau imeera kua whakaatuhia. Ka takiuru noa te huarahi taketake.",
-        "picTooltip": "Ka taea te huri i tenei pikitia i muri mai"
+        "picTooltip": "Ka taea te huri i tenei pikitia i muri mai",
+        "wallet": {
+            "payload": "Takiuru ki {{host}} i te wa tika {{timestamp}}",
+            "alert": {
+                "title": "Te Huringa ki te Putea",
+                "content": "Ka katia e koe tenei korero, ka haria atu koe ki to putea. Whai muri i to hainatanga, hoki ki tenei whaarangi."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Taapirihia he huarahi whakauru",
@@ -108,6 +115,18 @@
         "Owner": "Kai-rangatira",
         "Admin": "Tauhokohoko",
         "Member": "Mema",
-        "Guest": "Manuhiri"
+        "Guest": "Manuhiri",
+        "Host": "Kaihautu"
+    },
+    "analytics": {
+        "Title": "Tauhokohoko",
+        "Daily": "Ia Ra",
+        "Weekly": "Wiki",
+        "Monthly": "Marama",
+        "Application": "Tono",
+        "Pages": "Wharangi",
+        "Services": "Ratonga",
+        "Faq": "Patai",
+        "WeekDays": "Ra Wiki"
     }
 }

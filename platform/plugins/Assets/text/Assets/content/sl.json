@@ -36,8 +36,12 @@
         "WatchClip": "Prislužili ste si {{amount}} dobroimetja za ogled {{fromStreamTitle}}",
         "PurchaseCredits": "Nakup kreditov",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kreditov"
-        }
+            "BoughtCredits": "{{amount}} kreditov",
+            "BonusCredits": "{{amount}} kreditov"
+        },
+        "CreatePaidStream": "za ustvarjanje {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kreditov",
+        "BuyBonus": "Če kupite {{amount}} kreditov naenkrat, boste imeli bonus v višini {{bonus}} kreditov."
     },
     "history": {
         "Date": "Datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Potrošite {{amount}} kreditov",
         "BoughtCredits": "Kupil {{amount}} kreditov",
         "InviteAcceptedBy": "Zaslužen {{amount}} kreditov",
-        "YouHaveCreditsToStart": "Zaslužen {{amount}} kreditov"
+        "YouHaveCreditsToStart": "Zaslužen {{amount}} kreditov",
+        "CreatePaidStream": "Porabili {{amount}} kreditov",
+        "WatchClip": {
+            "+": "Zaslužili ste {{amount}} kreditov",
+            "-": "Porabili {{amount}} kreditov"
+        },
+        "BonusCredits": "Imam bonus {{amount}} kreditov"
     },
     "subscriptions": {
         "infoTitle": "Nastavite podatke o plačilu",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Kupil {{amount}} kreditov"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kreditov"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Nastavite ceno",
             "LinkPlaceholder": "nastavite dodatno info povezavo",
             "DescriptionPlaceholder": "Opis storitve",
-            "SaveService": "Shrani storitev"
+            "SaveService": "Shrani storitev",
+            "SelectRequiredParticipants": "Zahtevani udeleženci"
         },
         "ManageServiceTemplates": "Upravljajte predloge storitev",
         "ManageServices": "Upravljanje storitev",

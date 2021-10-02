@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Jalma Kuring diondang",
-        "Streams\/invitedMe": "Anu diondang kuring"
+        "Streams\/invitedMe": "Anu diondang kuring",
+        "AreYouAgree": "Naha anjeun satuju?",
+        "Yes": "Leres",
+        "No": "Henteu"
     },
     "interests": {
         "Filter": "Naon anu anjeun resep?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} upami kodena diimbas",
-            "copyLink": "{{ClickOrTap}} pikeun nyalin tautan ngajak"
+            "copyLink": "{{ClickOrTap}} pikeun nyalin tautan ngajak",
+            "userChooserPlaceholder": "Milarian dumasar nami"
         },
         "email": {
             "subject": "Héy, parios ieu kaluarna",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Peserta teu gaduh pidio",
             "openInBrowserAlert": "Link kabuka dina browser Safari pikeun ngiringan konperénsi.",
             "youBeganVideoRecording": "Anjeun mimiti ngarékam konperénsi ieu",
-            "youStoppedVideoRecording": "Anjeun lirén ngarékam konperénsi ieu"
+            "youStoppedVideoRecording": "Anjeun lirén ngarékam konperénsi ieu",
+            "switchingRoom": "Ruang ganti ...",
+            "forceDisconnecting": "Anjeun bakal dipegatkeun dina waktos 5 detik",
+            "youStartedLive": "Anjeun ngamimitian nyiarkeun telepon ieu ka RTMP khusus",
+            "youStoppedLive": "Anjeun lirén nyiarkeun telepon ieu ka RTMP khusus",
+            "sbStartedLiveStreaming": "{{userName}} mimiti langsung",
+            "sbStoppedLiveStreaming": "{{userName}} réngsé sacara langsung",
+            "liveStopped": "Kasalahan nalika ngirim pidéo kana titik akhir lumangsung"
         },
         "settingsPopup": {
             "webCamera": "Kaméra Wéb",
@@ -192,7 +203,13 @@
             "stopRecording": "Eureun Rékam",
             "recordingInProgress": "Ngarekam nuju kamajuan ...",
             "publishOnTimeline": "Nyebarkeun dina waktosna",
-            "publishToGroup": "Ngubarkeun ka grup"
+            "publishToGroup": "Ngubarkeun ka grup",
+            "turnOffAudioInput": "Ngajempékeun mikropon",
+            "micIsTurnedOff": "Mikropon dipareuman",
+            "start": "Mimitian",
+            "stop": "Eureun",
+            "streamingSettings": "Setélan",
+            "streamToRTMP": "Aliran ka RTMP khusus"
         },
         "participantsPopup": {
             "disconnect": "Pegatkeun",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Anjeun teu gaduh idin pikeun ngiringan aliran ieu.",
         "streamTitle": "Panggero {{1}} langsung",
         "preview": {
-            "preamble": "Rapat:"
+            "preamble": "Rapat:",
+            "Meeting": "Rapat",
+            "MeetingEnded": "Rapat réngsé"
+        },
+        "preparing": {
+            "micIsOff": "Mic pareum",
+            "micIsOn": "Mic dihurungkeun",
+            "cameraIsOff": "Kaméra pareum",
+            "cameraIsOn": "Kaméra dihurungkeun",
+            "screenSharingIsOn": "Screensharing parantos diaktipkeun",
+            "screenSharingIsOff": "Layar Bagikeun",
+            "joinNow": "Miluan Telepon"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Waleranana",
             "description": "waleran stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Telepon",
+            "description": "kategori pikeun Aliran \/ webrtc",
+            "MaxRelationsExceeded": "Panggilan maksimal ngaleuwihan"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "File henteu leres",
         "errorNoSource": "Teu aya sumber gambar",
         "uploadLimit": "Ukuran file maksimal: {{size}}",
-        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}"
+        "errorFileSize": "Hapunten, tapi file ageung teuing.<br> Ukuran file maksimal nyaéta {{size}}",
+        "uploadedImage": "Gambar anu diunggah",
+        "imageTitle": "Judul gambar"
     },
     "questions": {
         "Questions": "Patarosan",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Parantos ngajawab",
         "TitlePlaceholder": "Ketik patarosan anjeun",
         "ContentPlaceholder": "Pasang inpormasi tambihan didieu kanggo ngabantosan jalma-jalma ngajawab",
-        "ErrorTitle": "Patarosan diperyogikeun"
+        "ErrorTitle": "Patarosan diperyogikeun",
+        "Placeholder": "Panyekel Tempat"
     },
     "experience": {
-        "NewExperience": "Pangalaman Anyar"
+        "NewExperience": "Pangalaman Anyar",
+        "DefineTitle": "Punten tangtoskeun judulna",
+        "Create": "Nyiptakeun"
+    },
+    "calls": {
+        "SettingsTitle": "Telepon",
+        "MaxCalls": "Telepon Max",
+        "Update": "Ngamutahirkeun",
+        "NoCallsYet": "Teu acan nelepon",
+        "CallReasonTitle": "Naon telepon ieu?",
+        "WaitingRoom": "Ruang Ngantosan"
     }
 }

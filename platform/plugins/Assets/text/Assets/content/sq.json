@@ -36,8 +36,12 @@
         "WatchClip": "Fitua {{amount}} kredite për të shikuar {{fromStreamTitle}}",
         "PurchaseCredits": "Blerjet e kredive",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredite"
-        }
+            "BoughtCredits": "{{amount}} kredite",
+            "BonusCredits": "Kredite {{amount}}"
+        },
+        "CreatePaidStream": "për krijimin e {{toStreamName}}",
+        "BonusCredits": "Bonuse {{amount}} kredite",
+        "BuyBonus": "Blerja e {{amount}} krediteve njëherësh, do të çojë në bonus {{bonus}} kredite."
     },
     "history": {
         "Date": "data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Kredi Sp 999 kredite",
         "BoughtCredits": "Blerë kredi {999",
         "InviteAcceptedBy": "Fituar kredi {999",
-        "YouHaveCreditsToStart": "Fituar kredi {999"
+        "YouHaveCreditsToStart": "Fituar kredi {999",
+        "CreatePaidStream": "Shpenzoi {{amount}} kredite",
+        "WatchClip": {
+            "+": "Fitoi {{amount}} kredite",
+            "-": "Shpenzoi {{amount}} kredite"
+        },
+        "BonusCredits": "Mori bonus kreditit {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Vendosni informacionin e pagesës",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Blerë kredi {999"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonuse {{amount}} kredite"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Cmimi i caktuar",
             "LinkPlaceholder": "caktoni lidhje shtesë informacioni",
             "DescriptionPlaceholder": "Përshkrimi i shërbimit",
-            "SaveService": "Ruani shërbimin"
+            "SaveService": "Ruani shërbimin",
+            "SelectRequiredParticipants": "Pjesëmarrësit e kërkuar"
         },
         "ManageServiceTemplates": "Menaxhoni Modelet e Shërbimit",
         "ManageServices": "Menaxhoni Shërbimet",

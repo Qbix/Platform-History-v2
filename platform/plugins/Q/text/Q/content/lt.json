@@ -117,7 +117,10 @@
         "SetClipStart": "Nustatykite „Clip Start“",
         "ClipStart": "„Clip Start“",
         "SetClipEnd": "Nustatyti „Clip End“",
-        "ClipEnd": "Klipo pabaiga"
+        "ClipEnd": "Klipo pabaiga",
+        "StartMoreEnd": "Pradinė padėtis negali būti didesnė už galutinę",
+        "EndLessStart": "Pabaigos padėtis negali būti mažesnė už pradinę padėtį",
+        "WhichInvalid": "Argumentas „kuris“ negalioja"
     },
     "durations": {
         "second": "antra",

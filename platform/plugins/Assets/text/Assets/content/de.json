@@ -36,8 +36,12 @@
         "WatchClip": "Verdiente {{amount}} Credits für das Ansehen von {{fromStreamTitle}}",
         "PurchaseCredits": "Guthaben kaufen",
         "forMessages": {
-            "BoughtCredits": "{{amount}} Credits"
-        }
+            "BoughtCredits": "{{amount}} Credits",
+            "BonusCredits": "{{amount}} Credits"
+        },
+        "CreatePaidStream": "zum Erstellen von {{toStreamName}}",
+        "BonusCredits": "{{amount}} Bonus-Credits",
+        "BuyBonus": "Der gleichzeitige Kauf von {{amount}} Credits führt zu einem Bonus von {{bonus}} Credits."
     },
     "history": {
         "Date": "Datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Verbrachte {{amount}} Credits",
         "BoughtCredits": "Gekaufte {{amount}} Credits",
         "InviteAcceptedBy": "Verdiente {{amount}} Credits",
-        "YouHaveCreditsToStart": "Verdiente {{amount}} Credits"
+        "YouHaveCreditsToStart": "Verdiente {{amount}} Credits",
+        "CreatePaidStream": "{{amount}} Credits ausgegeben",
+        "WatchClip": {
+            "+": "{{amount}} Credits verdient",
+            "-": "{{amount}} Credits ausgegeben"
+        },
+        "BonusCredits": "Bonus-Guthaben von {{amount}} erhalten"
     },
     "subscriptions": {
         "infoTitle": "Legen Sie die Zahlungsinformationen fest",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Gekaufte {{amount}} Credits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "{{amount}} Bonus-Credits"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Preis festsetzen",
             "LinkPlaceholder": "zusätzlichen Info-Link setzen",
             "DescriptionPlaceholder": "Leistungsbeschreibung",
-            "SaveService": "Service speichern"
+            "SaveService": "Service speichern",
+            "SelectRequiredParticipants": "Erforderliche Teilnehmer"
         },
         "ManageServiceTemplates": "Servicevorlagen verwalten",
         "ManageServices": "Dienste verwalten",

@@ -36,8 +36,12 @@
         "WatchClip": "Зарадио сте {{amount}} кредита за гледање {{fromStreamTitle}}",
         "PurchaseCredits": "Кредити за куповину",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредита"
-        }
+            "BoughtCredits": "{{amount}} кредита",
+            "BonusCredits": "{{amount}} кредита"
+        },
+        "CreatePaidStream": "за креирање {{toStreamName}}",
+        "BonusCredits": "Бонус {{amount}} кредита",
+        "BuyBonus": "Куповином {{amount}} кредита одједном доћи ћете до {{bonus}} бонуса кредита."
     },
     "history": {
         "Date": "Датум",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Потрошите {{amount}} кредита",
         "BoughtCredits": "Купио је {{amount}} кредита",
         "InviteAcceptedBy": "Зарадио {{amount}} кредита",
-        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита"
+        "YouHaveCreditsToStart": "Зарадио {{amount}} кредита",
+        "CreatePaidStream": "Потрошили {{amount}} кредита",
+        "WatchClip": {
+            "+": "Зарадио {{amount}} кредита",
+            "-": "Потрошили {{amount}} кредита"
+        },
+        "BonusCredits": "Имам бонус {999}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Подесите информације о плаћању",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Купио је {{amount}} кредита"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонус {{amount}} кредита"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Подесите цену",
             "LinkPlaceholder": "подесите додатну инфо везу",
             "DescriptionPlaceholder": "Опис услуге",
-            "SaveService": "Сачувај услугу"
+            "SaveService": "Сачувај услугу",
+            "SelectRequiredParticipants": "Потребни учесници"
         },
         "ManageServiceTemplates": "Управљајте сервисним предлошцима",
         "ManageServices": "Управљање услугама",

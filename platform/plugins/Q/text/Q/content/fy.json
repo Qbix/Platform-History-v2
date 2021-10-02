@@ -113,7 +113,10 @@
         "SetClipStart": "Stel Clip Start yn",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Klem ein sette",
-        "ClipEnd": "Clip Ein"
+        "ClipEnd": "Clip Ein",
+        "StartMoreEnd": "Startposysje kin net mear wêze as einposysje",
+        "EndLessStart": "Eindeposysje kin net minder wêze dan startposysje",
+        "WhichInvalid": "Argumint &#39;hokker&#39; ûnjildich"
     },
     "tabs": {
         "more": "mear",

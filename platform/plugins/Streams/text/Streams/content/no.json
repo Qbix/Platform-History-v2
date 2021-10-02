@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Folk jeg inviterte",
-        "Streams\/invitedMe": "Hvem inviterte meg"
+        "Streams\/invitedMe": "Hvem inviterte meg",
+        "AreYouAgree": "Er du enig?",
+        "Yes": "Ja",
+        "No": "Nei"
     },
     "interests": {
         "Filter": "Hva liker du?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} hvis koden ble skannet",
-            "copyLink": "{{ClickOrTap}} for å kopiere invitasjonslink"
+            "copyLink": "{{ClickOrTap}} for å kopiere invitasjonslink",
+            "userChooserPlaceholder": "Søk etter navn"
         },
         "email": {
             "subject": "Hei, sjekk dette ut",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Deltakeren har ingen video",
             "openInBrowserAlert": "Åpne lenken i Safari-nettleseren for å delta i konferansen.",
             "youBeganVideoRecording": "Du begynte å spille inn denne konferansen",
-            "youStoppedVideoRecording": "Du sluttet å spille inn denne konferansen"
+            "youStoppedVideoRecording": "Du sluttet å spille inn denne konferansen",
+            "switchingRoom": "Bytte rom ...",
+            "forceDisconnecting": "Du blir koblet fra innen 5 sekunder",
+            "youStartedLive": "Du begynte å kringkaste denne samtalen til tilpasset RTMP",
+            "youStoppedLive": "Du sluttet å kringkaste denne samtalen til tilpasset RTMP",
+            "sbStartedLiveStreaming": "{{userName}} startet direkte",
+            "sbStoppedLiveStreaming": "{{userName}} endte direkte",
+            "liveStopped": "Det oppstod en feil under sending av video til sluttpunkt"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Stopp innspillingen",
             "recordingInProgress": "Innspillingen pågår ...",
             "publishOnTimeline": "Publiser på tidslinjen",
-            "publishToGroup": "Publiser til gruppe"
+            "publishToGroup": "Publiser til gruppe",
+            "turnOffAudioInput": "Demp mikrofonen",
+            "micIsTurnedOff": "Mikrofonen er slått av",
+            "start": "Start",
+            "stop": "Stoppe",
+            "streamingSettings": "Innstillinger",
+            "streamToRTMP": "Strøm til tilpasset RTMP"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Du har ikke tillatelse til å bli med i denne strømmen.",
         "streamTitle": "{{1}} direktesendt samtale",
         "preview": {
-            "preamble": "Møte:"
+            "preamble": "Møte:",
+            "Meeting": "Møte",
+            "MeetingEnded": "Møtet avsluttet"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofonen er av",
+            "micIsOn": "Mikrofonen er på",
+            "cameraIsOff": "Kameraet er slått av",
+            "cameraIsOn": "Kameraet er på",
+            "screenSharingIsOn": "Skjermdeling er på",
+            "screenSharingIsOff": "Del skjerm",
+            "joinNow": "Bli med i samtalen"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Svar",
             "description": "svarstrøm"
+        },
+        "Streams\/calls": {
+            "displayType": "Samtaler",
+            "description": "kategori for Streams\/webrtc",
+            "MaxRelationsExceeded": "Maks antall anrop overskredet"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Ugyldig fil",
         "errorNoSource": "Ingen bildekilde",
         "uploadLimit": "Maks filstørrelse: {{size}}",
-        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}"
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks filstørrelse er {{size}}",
+        "uploadedImage": "Lastet opp bilde",
+        "imageTitle": "Bilde tittel"
     },
     "questions": {
         "Questions": "Spørsmål",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Svarte allerede",
         "TitlePlaceholder": "Skriv inn spørsmålet ditt",
         "ContentPlaceholder": "Legg ytterligere informasjon her for å hjelpe folk med å svare",
-        "ErrorTitle": "Spørsmål kreves"
+        "ErrorTitle": "Spørsmål kreves",
+        "Placeholder": "Plassholder"
     },
     "experience": {
-        "NewExperience": "Ny erfaring"
+        "NewExperience": "Ny erfaring",
+        "DefineTitle": "Definer en tittel",
+        "Create": "Skape"
+    },
+    "calls": {
+        "SettingsTitle": "Samtaler",
+        "MaxCalls": "Max ringer",
+        "Update": "Oppdater",
+        "NoCallsYet": "Ingen samtaler ennå",
+        "CallReasonTitle": "Hva handler denne samtalen om?",
+        "WaitingRoom": "Vente rom"
     }
 }

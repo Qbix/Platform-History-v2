@@ -117,7 +117,10 @@
         "SetClipStart": "Setați Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Setați Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Poziția inițială nu poate fi mai mult decât poziția finală",
+        "EndLessStart": "Poziția finală nu poate fi mai mică decât poziția inițială",
+        "WhichInvalid": "Argumentul „care” este invalid"
     },
     "durations": {
         "second": "al doilea",

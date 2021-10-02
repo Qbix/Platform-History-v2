@@ -117,7 +117,10 @@
         "SetClipStart": "Ezarri Clip Start",
         "ClipStart": "Clip Hasi",
         "SetClipEnd": "Ezarri kliparen amaiera",
-        "ClipEnd": "Kliparen amaiera"
+        "ClipEnd": "Kliparen amaiera",
+        "StartMoreEnd": "Hasierako posizioa ezin da amaierako posizioa baino gehiago izan",
+        "EndLessStart": "Amaiera posizioa ezin da hasierako posizioa baino txikiagoa izan",
+        "WhichInvalid": "&#39;Zein&#39; argumentua baliogabea da"
     },
     "durations": {
         "second": "bigarrena",

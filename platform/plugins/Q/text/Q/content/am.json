@@ -113,7 +113,10 @@
         "SetClipStart": "ቅንጥብ ጅምርን ያዘጋጁ",
         "ClipStart": "ቅንጥብ ጀምር",
         "SetClipEnd": "ቅንጥብ ማብቂያ ያዘጋጁ",
-        "ClipEnd": "ክሊፕ መጨረሻ"
+        "ClipEnd": "ክሊፕ መጨረሻ",
+        "StartMoreEnd": "የመነሻ አቀማመጥ ከመጨረሻ ቦታ በላይ መሆን አይችልም",
+        "EndLessStart": "የመጨረሻ ቦታ ከመነሻ ቦታ ያነሰ ሊሆን አይችልም",
+        "WhichInvalid": "ክርክር &#39;የትኛው&#39; ልክ ያልሆነ"
     },
     "tabs": {
         "more": "ተጨማሪ",

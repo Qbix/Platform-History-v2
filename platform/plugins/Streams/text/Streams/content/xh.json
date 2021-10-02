@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Abantu ndiwameme",
-        "Streams\/invitedMe": "Ngubani owamemileyo"
+        "Streams\/invitedMe": "Ngubani owamemileyo",
+        "AreYouAgree": "Ngaba uyavuma?",
+        "Yes": "Ewe",
+        "No": "Hayi"
     },
     "interests": {
         "Filter": "Uyakuthanda ntoni?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ukuba ikhowudi iskenisiwe",
-            "copyLink": "{{ClickOrTap}} ukukopa ikhonkco lesimemo"
+            "copyLink": "{{ClickOrTap}} ukukopa ikhonkco lesimemo",
+            "userChooserPlaceholder": "Khangela ngegama"
         },
         "email": {
             "subject": "Hayi, khangela oku",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Umthathi-nxaxheba akanayo ividiyo",
             "openInBrowserAlert": "Vula ikhonkco kwi-Safari browser ukuze ujoyine inkomfa.",
             "youBeganVideoRecording": "Uqale ukurekhoda le nkomfa",
-            "youStoppedVideoRecording": "Uyekile ukurekhoda le nkomfa"
+            "youStoppedVideoRecording": "Uyekile ukurekhoda le nkomfa",
+            "switchingRoom": "Igumbi lokutshintsha ...",
+            "forceDisconnecting": "Uya kucinywa phakathi kwemizuzwana emi-5",
+            "youStartedLive": "Uqale ukusasaza le fowuni kwiRTMP yesiko",
+            "youStoppedLive": "Uyeke ukusasaza le fowuni kwiRTMP yesiko",
+            "sbStartedLiveStreaming": "{{userName}} uqale bukhoma",
+            "sbStoppedLiveStreaming": "{{userName}} iphele ngoku",
+            "liveStopped": "Impazamo xa kuthunyelwa ividiyo kwindawo yokugqibela yenzekile"
         },
         "settingsPopup": {
             "webCamera": "Ikhamera yeWebhu",
@@ -192,7 +203,13 @@
             "stopRecording": "Yekani ukuRekhoda",
             "recordingInProgress": "Ukurekhoda kuyaqhubeka ...",
             "publishOnTimeline": "Shicilela kumda wexesha",
-            "publishToGroup": "Shicilela kwiqela"
+            "publishToGroup": "Shicilela kwiqela",
+            "turnOffAudioInput": "Thulisa imakrofoni",
+            "micIsTurnedOff": "Imakrofoni icinyiwe",
+            "start": "Qalisa",
+            "stop": "Yeka",
+            "streamingSettings": "Useto",
+            "streamToRTMP": "Sakaza kwi-RTMP yesiko"
         },
         "participantsPopup": {
             "disconnect": "Nqamla",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Awunayo imvume yokujoyina lo msele.",
         "streamTitle": "{{1}} umnxeba ophilayo",
         "preview": {
-            "preamble": "Intlanganiso:"
+            "preamble": "Intlanganiso:",
+            "Meeting": "Intlanganiso",
+            "MeetingEnded": "Intlanganiso yaphela"
+        },
+        "preparing": {
+            "micIsOff": "UMic ucimile",
+            "micIsOn": "Mic ivuliwe",
+            "cameraIsOff": "Ikhamera icinyiwe",
+            "cameraIsOn": "Ikhamera ivuliwe",
+            "screenSharingIsOn": "Ukwabelana ngesikrini kuvuliwe",
+            "screenSharingIsOff": "Yabelana ngescreen",
+            "joinNow": "Joyina umnxeba"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Phendula",
             "description": "umjelo wempendulo"
+        },
+        "Streams\/calls": {
+            "displayType": "Iifowuni",
+            "description": "Udidi lweMisinga \/ webrtc",
+            "MaxRelationsExceeded": "Ubuninzi beminxeba bugqithile"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "NONE",
         "errorNoSource": "Akukho mthombo womfanekiso",
         "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
-        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}",
+        "uploadedImage": "Umfanekiso olayishiwe",
+        "imageTitle": "Isihloko somfanekiso"
     },
     "questions": {
         "Questions": "Imibuzo",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Sele iphendulwe",
         "TitlePlaceholder": "Chwetheza umbuzo wakho",
         "ContentPlaceholder": "Beka naluphi na ulwazi olongezelelweyo apha ukunceda abantu baphendule",
-        "ErrorTitle": "Kufuneka umbuzo"
+        "ErrorTitle": "Kufuneka umbuzo",
+        "Placeholder": "Isibambi-ndawo"
     },
     "experience": {
-        "NewExperience": "Amava amatsha"
+        "NewExperience": "Amava amatsha",
+        "DefineTitle": "Nceda uchaze isihloko",
+        "Create": "Yenza"
+    },
+    "calls": {
+        "SettingsTitle": "Iifowuni",
+        "MaxCalls": "Iifowuni zikaMax",
+        "Update": "Uhlaziyo",
+        "NoCallsYet": "Azikho iifowuni okwangoku",
+        "CallReasonTitle": "Ithetha ngantoni le fowuni?",
+        "WaitingRoom": "Indlu yokulinda"
     }
 }

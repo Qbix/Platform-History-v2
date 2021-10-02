@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "מענטשן איך פארבעטן",
-        "Streams\/invitedMe": "ווער געבעטן מיר"
+        "Streams\/invitedMe": "ווער געבעטן מיר",
+        "AreYouAgree": "ביסטו מסכים?",
+        "Yes": "יא",
+        "No": "ניין"
     },
     "interests": {
         "Filter": "וואָס טאָן דו הנאה?",
@@ -80,7 +83,8 @@
             "byFacebook": "פאַסעבאָאָק",
             "byTwitter": "טוויטער",
             "scannedQR": "{{ClickOrTap}} אויב די קאָד איז געווען סקאַנד",
-            "copyLink": "{{ClickOrTap}} צו צייכענען די פאַרבעטן לינק"
+            "copyLink": "{{ClickOrTap}} צו צייכענען די פאַרבעטן לינק",
+            "userChooserPlaceholder": "זוך מיטן נאָמען"
         },
         "email": {
             "subject": "היי, קאָנטראָלירן דעם אויס",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "דער באַטייליקטער האט קיין ווידעא",
             "openInBrowserAlert": "עפֿן לינק אין Safari בלעטערער צו פאַרבינדן די זיצונג.",
             "youBeganVideoRecording": "איר האָט רעקאָרדינג די זיצונג",
-            "youStoppedVideoRecording": "איר סטאַפּט רעקאָרדינג די זיצונג"
+            "youStoppedVideoRecording": "איר סטאַפּט רעקאָרדינג די זיצונג",
+            "switchingRoom": "סוויטשינג צימער ...",
+            "forceDisconnecting": "איר וועט זיין דיסקאַנעקטיד אין 5 סעקונדעס",
+            "youStartedLive": "איר האָט סטאַרטעד בראָדקאַסטינג דעם רופן צו מנהג RTMP",
+            "youStoppedLive": "איר האָט פארשטאפט בראָדקאַסטינג דעם רופן צו מנהג RTMP",
+            "sbStartedLiveStreaming": "{{userName}} האָט אָנגעהויבן לעבן",
+            "sbStoppedLiveStreaming": "{{userName}} האָט געענדיקט לעבן",
+            "liveStopped": "א טעות ביי שיקט ווידעא צו ענדפּוינט פארגעקומען"
         },
         "settingsPopup": {
             "webCamera": "וועב קאַמעראַ",
@@ -192,7 +203,13 @@
             "stopRecording": "האַלטן רעקאָרדינג",
             "recordingInProgress": "די רעקאָרדינג איז אין פּראָגרעס ...",
             "publishOnTimeline": "אַרויסגעבן אויף טיימליין",
-            "publishToGroup": "אַרויסגעבן צו גרופּע"
+            "publishToGroup": "אַרויסגעבן צו גרופּע",
+            "turnOffAudioInput": "שטום מיקראָפאָן",
+            "micIsTurnedOff": "מיקראָפאָן איז פארקערט אַוועק",
+            "start": "אָנהייב",
+            "stop": "אָפּשטעל",
+            "streamingSettings": "סעטטינגס",
+            "streamToRTMP": "סטרים צו מנהג RTMP"
         },
         "participantsPopup": {
             "disconnect": "דיסקאַנעקט",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם טייַך.",
         "streamTitle": "{{1}} לעבן רופן",
         "preview": {
-            "preamble": "פאַרזאַמלונג:"
+            "preamble": "פאַרזאַמלונג:",
+            "Meeting": "באַגעגעניש",
+            "MeetingEnded": "פאַרזאַמלונג געענדיקט"
+        },
+        "preparing": {
+            "micIsOff": "מיק איז אַוועק",
+            "micIsOn": "מיקראָפאָן איז אויף",
+            "cameraIsOff": "קאַמעראַ איז אַוועק",
+            "cameraIsOn": "קאַמעראַ איז אויף",
+            "screenSharingIsOn": "Screensharing איז אויף",
+            "screenSharingIsOff": "שער פאַרשטעלן",
+            "joinNow": "פאַרבינדן די רופן"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ענטפער",
             "description": "ענטפֿערן טייַך"
+        },
+        "Streams\/calls": {
+            "displayType": "רופט",
+            "description": "קאַטעגאָריע פֿאַר סטרימז\/וועברטק",
+            "MaxRelationsExceeded": "מאַקס קאַללס יקסידיד"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "אונגילטיג טעקע",
         "errorNoSource": "קיין בילד מקור",
         "uploadLimit": "מאקס טעקע גרייס: {{size}}",
-        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}",
+        "uploadedImage": "ופּלאָאַדעד בילד",
+        "imageTitle": "בילד טיטל"
     },
     "questions": {
         "Questions": "פֿראגן",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "שוין געענטפערט",
         "TitlePlaceholder": "טיפּ דיין קשיא",
         "ContentPlaceholder": "שטעלן דאָ נאָך אינפֿאָרמאַציע צו העלפֿן מענטשן ענטפֿערן",
-        "ErrorTitle": "קשיא פארלאנגט"
+        "ErrorTitle": "קשיא פארלאנגט",
+        "Placeholder": "אָרטהאָלדער"
     },
     "experience": {
-        "NewExperience": "ניו עקספּעריענסע"
+        "NewExperience": "ניו עקספּעריענסע",
+        "DefineTitle": "ביטע דעפינירן א טיטל",
+        "Create": "שאַפֿן"
+    },
+    "calls": {
+        "SettingsTitle": "רופט",
+        "MaxCalls": "מאַקס רופט",
+        "Update": "דערהייַנטיקן",
+        "NoCallsYet": "קיין רופט נאָך",
+        "CallReasonTitle": "וואָס איז דעם רופן וועגן?",
+        "WaitingRoom": "ווארט צימער"
     }
 }

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Men taklif qilingan odamlar",
-        "Streams\/invitedMe": "Meni kim taklif qildi?"
+        "Streams\/invitedMe": "Meni kim taklif qildi?",
+        "AreYouAgree": "Rozimisiz?",
+        "Yes": "Ha",
+        "No": "Yo&#39;q"
     },
     "interests": {
         "Filter": "Siz nimani yoqtirasiz?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "Agar kod skanerlangan bo&#39;lsa {{ClickOrTap}}",
-            "copyLink": "Taklif havolasini nusxalash uchun {{ClickOrTap}}"
+            "copyLink": "Taklif havolasini nusxalash uchun {{ClickOrTap}}",
+            "userChooserPlaceholder": "Ism bo&#39;yicha qidirish"
         },
         "email": {
             "subject": "Hey, buni tekshirib ko&#39;ring",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Ishtirokchining videosi yo‘q",
             "openInBrowserAlert": "Konferentsiyada ishtirok etish uchun Safari brauzerida havolani oching.",
             "youBeganVideoRecording": "Siz ushbu konferentsiyani yozishni boshladingiz",
-            "youStoppedVideoRecording": "Siz ushbu konferentsiyani yozishni to&#39;xtatdingiz"
+            "youStoppedVideoRecording": "Siz ushbu konferentsiyani yozishni to&#39;xtatdingiz",
+            "switchingRoom": "Kommutatsiya xonasi ...",
+            "forceDisconnecting": "Siz 5 soniya ichida uzilasiz",
+            "youStartedLive": "Siz ushbu qo&#39;ng&#39;iroqni maxsus RTMP -ga uzatishni boshladingiz",
+            "youStoppedLive": "Siz bu qo&#39;ng&#39;iroqni maxsus RTMPga uzatishni to&#39;xtatdingiz",
+            "sbStartedLiveStreaming": "{{userName}} jonli efirda boshlandi",
+            "sbStoppedLiveStreaming": "{{userName}} jonli efirda yakunlandi",
+            "liveStopped": "Videoni so&#39;nggi nuqtaga yuborishda xatolik yuz berdi"
         },
         "settingsPopup": {
             "webCamera": "Veb-kamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Yozishni to&#39;xtatish",
             "recordingInProgress": "Yozib olish davom etmoqda ...",
             "publishOnTimeline": "Vaqt jadvalida e&#39;lon qiling",
-            "publishToGroup": "Guruhga nashr qilish"
+            "publishToGroup": "Guruhga nashr qilish",
+            "turnOffAudioInput": "Mikrofonni o&#39;chirish",
+            "micIsTurnedOff": "Mikrofon o&#39;chirilgan",
+            "start": "Boshlash",
+            "stop": "STOP",
+            "streamingSettings": "Sozlamalar",
+            "streamToRTMP": "Maxsus RTMP -ga o&#39;tish"
         },
         "participantsPopup": {
             "disconnect": "Uzing",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Ushbu translatsiyaga qo&#39;shilish uchun sizda ruxsat yo&#39;q.",
         "streamTitle": "{{1}} jonli qo&#39;ng&#39;iroq",
         "preview": {
-            "preamble": "Uchrashuv:"
+            "preamble": "Uchrashuv:",
+            "Meeting": "Uchrashuv",
+            "MeetingEnded": "Uchrashuv tugadi"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon o&#39;chirilgan",
+            "micIsOn": "Mikrofon yoqilgan",
+            "cameraIsOff": "Kamera o‘chiq",
+            "cameraIsOn": "Kamera yoqilgan",
+            "screenSharingIsOn": "Ekranni ulashish yoqilgan",
+            "screenSharingIsOff": "Ekranni ulashish",
+            "joinNow": "Qo&#39;ng&#39;iroqqa qo&#39;shiling"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Javob",
             "description": "javoblar oqimi"
+        },
+        "Streams\/calls": {
+            "displayType": "Qo&#39;ng&#39;iroqlar",
+            "description": "Streams\/webrtc uchun toifalar",
+            "MaxRelationsExceeded": "Maksimal qo&#39;ng&#39;iroqlar oshdi"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fayl yaroqsiz",
         "errorNoSource": "Rasm manbai yo‘q",
         "uploadLimit": "Faylning maksimal hajmi: {{size}}",
-        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}"
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Faylning maksimal hajmi: {{size}}",
+        "uploadedImage": "Yuklangan rasm",
+        "imageTitle": "Rasm sarlavhasi"
     },
     "questions": {
         "Questions": "Savollar",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Javob berdim",
         "TitlePlaceholder": "Savolingizni kiriting",
         "ContentPlaceholder": "Odamlarga javob berishga yordam berish uchun qo&#39;shimcha ma&#39;lumotlarni bu erga joylashtiring",
-        "ErrorTitle": "Savol talab qilinadi"
+        "ErrorTitle": "Savol talab qilinadi",
+        "Placeholder": "O&#39;rindiq"
     },
     "experience": {
-        "NewExperience": "Yangi tajriba"
+        "NewExperience": "Yangi tajriba",
+        "DefineTitle": "Iltimos, sarlavha belgilang",
+        "Create": "Yaratmoq"
+    },
+    "calls": {
+        "SettingsTitle": "Qo&#39;ng&#39;iroqlar",
+        "MaxCalls": "Maksimal qo&#39;ng&#39;iroqlar",
+        "Update": "Yangilash",
+        "NoCallsYet": "Hozircha qo&#39;ng&#39;iroqlar yo&#39;q",
+        "CallReasonTitle": "Bu qo&#39;ng&#39;iroq nima haqida?",
+        "WaitingRoom": "Kutish xonasi"
     }
 }

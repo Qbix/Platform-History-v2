@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ny olona nasaina",
-        "Streams\/invitedMe": "Izay nanasa ahy"
+        "Streams\/invitedMe": "Izay nanasa ahy",
+        "AreYouAgree": "Manaiky ve ianao?",
+        "Yes": "ENY",
+        "No": "tsy misy"
     },
     "interests": {
         "Filter": "Inona no tianao?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} raha namboarina ilay kaody",
-            "copyLink": "{{ClickOrTap}} handika rohy fanasana"
+            "copyLink": "{{ClickOrTap}} handika rohy fanasana",
+            "userChooserPlaceholder": "Karohy amin&#39;ny anarany"
         },
         "email": {
             "subject": "Hey, jereo ity",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Tsy mandray horonantsary ny mpandray anjara",
             "openInBrowserAlert": "Sokafy ny rohy eo amin&#39;ny navigateur Safari mba hanatevenana ny federasiona.",
             "youBeganVideoRecording": "Nanomboka nandrakitra ity fihaonambe ity ianao",
-            "youStoppedVideoRecording": "Nijanona ny firaketana an&#39;ity fihaonambe ity"
+            "youStoppedVideoRecording": "Nijanona ny firaketana an&#39;ity fihaonambe ity",
+            "switchingRoom": "Efitra fanovana ...",
+            "forceDisconnecting": "Ho tapaka ao anatin&#39;ny 5 segondra ianao",
+            "youStartedLive": "Nanomboka nandefa an&#39;ity antso ity ho an&#39;ny RTMP mahazatra ianao",
+            "youStoppedLive": "Najanonao ny fampielezana ity antso ity ho an&#39;ny RTMP mahazatra",
+            "sbStartedLiveStreaming": "{{userName}} dia nanomboka mivantana",
+            "sbStoppedLiveStreaming": "{{userName}} niaina mivantana",
+            "liveStopped": "Nisy lesoka teo am-pandefasana horonan-tsary tamina teboka farany"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -192,7 +203,13 @@
             "stopRecording": "Ajanony ny fandraisana an-tsoratra",
             "recordingInProgress": "Efa mandeha ny fandraketana ...",
             "publishOnTimeline": "Avoahy ny fandaharam-potoana",
-            "publishToGroup": "Avoahy ny vondrona"
+            "publishToGroup": "Avoahy ny vondrona",
+            "turnOffAudioInput": "Hamafiso mikrô",
+            "micIsTurnedOff": "Novonoina ny mikrô",
+            "start": "fanombohana",
+            "stop": "Mijanòna",
+            "streamingSettings": "Fikirana",
+            "streamToRTMP": "Mizotra mankany amin&#39;ny RTMP manokana"
         },
         "participantsPopup": {
             "disconnect": "elektrônika",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity stream ity ianao.",
         "streamTitle": "Antso {{1}} mivantana",
         "preview": {
-            "preamble": "fivoriana:"
+            "preamble": "fivoriana:",
+            "Meeting": "fihaonana",
+            "MeetingEnded": "Tapitra ny fivoriana"
+        },
+        "preparing": {
+            "micIsOff": "Maty i Mic",
+            "micIsOn": "Mic dia mandeha",
+            "cameraIsOff": "Tsy mandeha ny fakantsary",
+            "cameraIsOn": "Ny fakantsary dia mandeha",
+            "screenSharingIsOn": "Efa eo ny fizarana fizarana sary",
+            "screenSharingIsOff": "Kitapo fizarana",
+            "joinNow": "Midira amin&#39;ny antso"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "valiny",
             "description": "valiny"
+        },
+        "Streams\/calls": {
+            "displayType": "antso",
+            "description": "sokajy ho an&#39;ny Streams \/ webrtc",
+            "MaxRelationsExceeded": "Nihoatra ny antso Max"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "File tsy mety",
         "errorNoSource": "Tsy misy loharano",
         "uploadLimit": "Haben&#39;ny Max: {{size}}",
-        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}"
+        "errorFileSize": "Miala tsiny fa be loatra ny fisie.<br> Ny haben&#39;ny Max dia {{size}}",
+        "uploadedImage": "Sary nakarina",
+        "imageTitle": "Lohateny sary"
     },
     "questions": {
         "Questions": "fanontaniana",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Efa namaly",
         "TitlePlaceholder": "Soraty ny fanontanianao",
         "ContentPlaceholder": "Apetraho eto ny fampahalalana fanampiny hanampiana ny olona hamaly",
-        "ErrorTitle": "Fanontaniana ilaina"
+        "ErrorTitle": "Fanontaniana ilaina",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Fanandramana vaovao"
+        "NewExperience": "Fanandramana vaovao",
+        "DefineTitle": "Farito azafady ny lohateny",
+        "Create": "MANANGANA"
+    },
+    "calls": {
+        "SettingsTitle": "antso",
+        "MaxCalls": "Miantso Max",
+        "Update": "vaovao farany",
+        "NoCallsYet": "Tsy mbola misy antso",
+        "CallReasonTitle": "Inona no antsoin&#39;ity antso ity?",
+        "WaitingRoom": "Efitrano fiandrasana"
     }
 }

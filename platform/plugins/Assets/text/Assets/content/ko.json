@@ -36,8 +36,12 @@
         "WatchClip": "{{fromStreamTitle}}을 시청하여 {{amount}} 크레딧을 받았습니다.",
         "PurchaseCredits": "크레딧 구매",
         "forMessages": {
-            "BoughtCredits": "{{amount}} 크레딧"
-        }
+            "BoughtCredits": "{{amount}} 크레딧",
+            "BonusCredits": "{{amount}} 크레딧"
+        },
+        "CreatePaidStream": "생성을 위해 {{toStreamName}}",
+        "BonusCredits": "보너스 {{amount}} 크레딧",
+        "BuyBonus": "한 번에 {{amount}} 크레딧을 구매하면 {{bonus}} 크레딧 보너스가 제공됩니다."
     },
     "history": {
         "Date": "날짜",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "사용한 {{amount}} 크레딧",
         "BoughtCredits": "{{amount}} 크레딧 구매",
         "InviteAcceptedBy": "{{amount}} 크레딧 획득",
-        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득"
+        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득",
+        "CreatePaidStream": "{{amount}} 크레딧 사용",
+        "WatchClip": {
+            "+": "{{amount}} 크레딧 획득",
+            "-": "{{amount}} 크레딧 사용"
+        },
+        "BonusCredits": "보너스 {{amount}} 크레딧 획득"
     },
     "subscriptions": {
         "infoTitle": "지불 정보 설정",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} 크레딧 구매"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "보너스 {{amount}} 크레딧"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "가격 설정",
             "LinkPlaceholder": "추가 정보 링크 설정",
             "DescriptionPlaceholder": "서비스 설명",
-            "SaveService": "서비스 저장"
+            "SaveService": "서비스 저장",
+            "SelectRequiredParticipants": "필수 참가자"
         },
         "ManageServiceTemplates": "서비스 템플릿 관리",
         "ManageServices": "서비스 관리",

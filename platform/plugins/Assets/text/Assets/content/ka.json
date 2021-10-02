@@ -36,8 +36,12 @@
         "WatchClip": "მოიპოვა {{amount}} კრედიტი {{fromStreamTitle}} - ის ყურებისას",
         "PurchaseCredits": "კრედიტების შეძენა",
         "forMessages": {
-            "BoughtCredits": "{{amount}} კრედიტი"
-        }
+            "BoughtCredits": "{{amount}} კრედიტი",
+            "BonusCredits": "{{amount}} კრედიტი"
+        },
+        "CreatePaidStream": "{{toStreamName}} - ის შესაქმნელად",
+        "BonusCredits": "ბონუს {{amount}} კრედიტი",
+        "BuyBonus": "ერთდროულად {{amount}} კრედიტის ყიდვა გამოიწვევს {{bonus}} კრედიტის ბონუსს."
     },
     "history": {
         "Date": "თარიღი",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "დახარჯული {999}} კრედიტი",
         "BoughtCredits": "იყიდა 99 999}} კრედიტი",
         "InviteAcceptedBy": "იშოვა {999}} კრედიტი",
-        "YouHaveCreditsToStart": "იშოვა {999}} კრედიტი"
+        "YouHaveCreditsToStart": "იშოვა {999}} კრედიტი",
+        "CreatePaidStream": "დაიხარჯა {{amount}} კრედიტი",
+        "WatchClip": {
+            "+": "მოიპოვა {{amount}} კრედიტი",
+            "-": "დაიხარჯა {{amount}} კრედიტი"
+        },
+        "BonusCredits": "მიიღეთ ბონუს {{amount}} კრედიტი"
     },
     "subscriptions": {
         "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "იყიდა 99 999}} კრედიტი"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ბონუს {{amount}} კრედიტი"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "დაწესებული ფასი",
             "LinkPlaceholder": "დააყენეთ დამატებითი ინფორმაცია ბმული",
             "DescriptionPlaceholder": "მომსახურების აღწერა",
-            "SaveService": "დაზოგეთ მომსახურება"
+            "SaveService": "დაზოგეთ მომსახურება",
+            "SelectRequiredParticipants": "საჭირო მონაწილეები"
         },
         "ManageServiceTemplates": "მართვის შაბლონების მართვა",
         "ManageServices": "სერვისების მართვა",

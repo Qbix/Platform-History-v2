@@ -36,8 +36,12 @@
         "WatchClip": "Заработано {{amount}} кредитов за просмотр {{fromStreamTitle}}",
         "PurchaseCredits": "Покупка кредитов",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредиты"
-        }
+            "BoughtCredits": "{{amount}} кредиты",
+            "BonusCredits": "{{amount}} кредиты"
+        },
+        "CreatePaidStream": "для создания {{toStreamName}}",
+        "BonusCredits": "Бонусные {{amount}} кредиты",
+        "BuyBonus": "Покупка {{amount}} кредитов сразу приведет к бонусу в размере {{bonus}} кредитов."
     },
     "history": {
         "Date": "Дата",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Потрачено {{amount}} кредитов",
         "BoughtCredits": "Куплено {{amount}} кредитов",
         "InviteAcceptedBy": "Заработанные {{amount}} кредиты",
-        "YouHaveCreditsToStart": "Заработанные {{amount}} кредиты"
+        "YouHaveCreditsToStart": "Заработанные {{amount}} кредиты",
+        "CreatePaidStream": "Израсходовано {{amount}} кредитов",
+        "WatchClip": {
+            "+": "Заработано {{amount}} кредитов",
+            "-": "Израсходовано {{amount}} кредитов"
+        },
+        "BonusCredits": "Получил бонусные {{amount}} баллы"
     },
     "subscriptions": {
         "infoTitle": "Установить информацию об оплате",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Куплено {{amount}} кредитов"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонусные {{amount}} кредиты"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Установить цену",
             "LinkPlaceholder": "установить дополнительную информационную ссылку",
             "DescriptionPlaceholder": "Описание услуг",
-            "SaveService": "Сохранить Сервис"
+            "SaveService": "Сохранить Сервис",
+            "SelectRequiredParticipants": "Обязательные участники"
         },
         "ManageServiceTemplates": "Управление шаблонами обслуживания",
         "ManageServices": "Управление услугами",

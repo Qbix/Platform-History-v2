@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "ਜਿਨ੍ਹਾਂ ਲੋਕਾਂ ਨੂੰ ਮੈਂ ਸੱਦੇ ਦਿੱਤਾ",
-        "Streams\/invitedMe": "ਕੌਣ ਮੈਨੂੰ ਸੱਦਾ ਦਿੱਤਾ"
+        "Streams\/invitedMe": "ਕੌਣ ਮੈਨੂੰ ਸੱਦਾ ਦਿੱਤਾ",
+        "AreYouAgree": "ਕੀ ਤੁਸੀਂ ਸਹਿਮਤ ਹੋ?",
+        "Yes": "ਹਾਂ",
+        "No": "ਨਹੀਂ"
     },
     "interests": {
         "Filter": "ਤੁਸੀਂ ਕੀ ਮਾਣਦੇ ਹੋ?",
@@ -80,7 +83,8 @@
             "byFacebook": "ਫੇਸਬੁੱਕ",
             "byTwitter": "ਟਵਿੱਟਰ",
             "scannedQR": "ਜੇ ਕੋਡ ਸਕੈਨ ਕੀਤਾ ਗਿਆ ਸੀ ਤਾਂ. 9 999..",
-            "copyLink": "Invite 9{} invite invite ਸੱਦਾ ਲਿੰਕ ਨੂੰ ਨਕਲ ਕਰਨ ਲਈ"
+            "copyLink": "Invite 9{} invite invite ਸੱਦਾ ਲਿੰਕ ਨੂੰ ਨਕਲ ਕਰਨ ਲਈ",
+            "userChooserPlaceholder": "ਨਾਮ ਦੁਆਰਾ ਖੋਜ ਕਰੋ"
         },
         "email": {
             "subject": "Hey, ਇਸ ਦੀ ਜਾਂਚ ਕਰੋ",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "ਭਾਗੀਦਾਰ ਦਾ ਕੋਈ ਵੀਡੀਓ ਨਹੀਂ ਹੈ",
             "openInBrowserAlert": "ਕਾਨਫਰੰਸ ਵਿਚ ਸ਼ਾਮਲ ਹੋਣ ਲਈ ਸਫਾਰੀ ਬ੍ਰਾ .ਜ਼ਰ ਵਿਚ ਲਿੰਕ ਖੋਲ੍ਹੋ.",
             "youBeganVideoRecording": "ਤੁਸੀਂ ਇਸ ਕਾਨਫਰੰਸ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨਾ ਸ਼ੁਰੂ ਕੀਤਾ",
-            "youStoppedVideoRecording": "ਤੁਸੀਂ ਇਸ ਕਾਨਫਰੰਸ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ"
+            "youStoppedVideoRecording": "ਤੁਸੀਂ ਇਸ ਕਾਨਫਰੰਸ ਨੂੰ ਰਿਕਾਰਡ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ",
+            "switchingRoom": "ਕਮਰਾ ਬਦਲਣਾ ...",
+            "forceDisconnecting": "ਤੁਹਾਨੂੰ 5 ਸਕਿੰਟਾਂ ਦੇ ਅੰਦਰ ਡਿਸਕਨੈਕਟ ਕਰ ਦਿੱਤਾ ਜਾਵੇਗਾ",
+            "youStartedLive": "ਤੁਸੀਂ ਇਸ ਕਾਲ ਨੂੰ ਕਸਟਮ RTMP ਤੇ ਪ੍ਰਸਾਰਿਤ ਕਰਨਾ ਅਰੰਭ ਕੀਤਾ",
+            "youStoppedLive": "ਤੁਸੀਂ ਇਸ ਕਾਲ ਨੂੰ ਕਸਟਮ RTMP ਤੇ ਪ੍ਰਸਾਰਿਤ ਕਰਨਾ ਬੰਦ ਕਰ ਦਿੱਤਾ ਹੈ",
+            "sbStartedLiveStreaming": "{{userName}} ਨੇ ਲਾਈਵ ਅਰੰਭ ਕੀਤਾ",
+            "sbStoppedLiveStreaming": "{{userName}} ਲਾਈਵ ਸਮਾਪਤ ਹੋਇਆ",
+            "liveStopped": "ਵੀਡੀਓ ਨੂੰ ਐਂਡਪੁਆਇੰਟ ਤੇ ਭੇਜਣ ਦੌਰਾਨ ਗਲਤੀ ਆਈ"
         },
         "settingsPopup": {
             "webCamera": "ਵੈੱਬ ਕੈਮਰਾ",
@@ -192,7 +203,13 @@
             "stopRecording": "ਰਿਕਾਰਡਿੰਗ ਰੋਕੋ",
             "recordingInProgress": "ਰਿਕਾਰਡਿੰਗ ਜਾਰੀ ਹੈ ...",
             "publishOnTimeline": "ਟਾਈਮਲਾਈਨ &#39;ਤੇ ਪ੍ਰਕਾਸ਼ਤ ਕਰੋ",
-            "publishToGroup": "ਸਮੂਹ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਤ ਕਰੋ"
+            "publishToGroup": "ਸਮੂਹ ਵਿੱਚ ਪ੍ਰਕਾਸ਼ਤ ਕਰੋ",
+            "turnOffAudioInput": "ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਮਿ Mਟ ਕਰੋ",
+            "micIsTurnedOff": "ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਬੰਦ ਹੈ",
+            "start": "ਸ਼ੁਰੂ ਕਰੋ",
+            "stop": "ਰੂਕੋ",
+            "streamingSettings": "ਸੈਟਿੰਗਜ਼",
+            "streamToRTMP": "ਕਸਟਮ RTMP ਤੇ ਸਟ੍ਰੀਮ ਕਰੋ"
         },
         "participantsPopup": {
             "disconnect": "ਡਿਸਕਨੈਕਟ",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "ਤੁਹਾਨੂੰ ਇਸ ਸਟ੍ਰੀਮ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਣ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ.",
         "streamTitle": "Call {999}} ਲਾਈਵ ਕਾਲ",
         "preview": {
-            "preamble": "ਮੁਲਾਕਾਤ:"
+            "preamble": "ਮੁਲਾਕਾਤ:",
+            "Meeting": "ਮੀਟਿੰਗ",
+            "MeetingEnded": "ਮੀਟਿੰਗ ਸਮਾਪਤ ਹੋਈ"
+        },
+        "preparing": {
+            "micIsOff": "ਮਾਈਕ ਬੰਦ ਹੈ",
+            "micIsOn": "ਮਾਈਕ ਚਾਲੂ ਹੈ",
+            "cameraIsOff": "ਕੈਮਰਾ ਬੰਦ ਹੈ",
+            "cameraIsOn": "ਕੈਮਰਾ ਚਾਲੂ ਹੈ",
+            "screenSharingIsOn": "ਸਕ੍ਰੀਨ ਸ਼ੇਅਰਿੰਗ ਚਾਲੂ ਹੈ",
+            "screenSharingIsOff": "ਸਕ੍ਰੀਨ ਸਾਂਝੀ ਕਰੋ",
+            "joinNow": "ਕਾਲ ਵਿੱਚ ਸ਼ਾਮਲ ਹੋਵੋ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ਜਵਾਬ",
             "description": "ਜਵਾਬ ਦੀ ਧਾਰਾ"
+        },
+        "Streams\/calls": {
+            "displayType": "ਕਾਲਾਂ",
+            "description": "ਸਟ੍ਰੀਮਜ਼\/ਵੈਬਆਰਟੀਸੀ ਲਈ ਸ਼੍ਰੇਣੀ",
+            "MaxRelationsExceeded": "ਅਧਿਕਤਮ ਕਾਲਾਂ ਪਾਰ ਹੋ ਗਈਆਂ"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "ਗਲਤ ਫਾਈਲ",
         "errorNoSource": "ਕੋਈ ਚਿੱਤਰ ਸਰੋਤ ਨਹੀਂ",
         "uploadLimit": "ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ: {{999}",
-        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ"
+        "errorFileSize": "ਮੁਆਫ ਕਰਨਾ, ਪਰ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ.<br> ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{999} is ਹੈ",
+        "uploadedImage": "ਅਪਲੋਡ ਕੀਤਾ ਚਿੱਤਰ",
+        "imageTitle": "ਚਿੱਤਰ ਦਾ ਸਿਰਲੇਖ"
     },
     "questions": {
         "Questions": "ਪ੍ਰਸ਼ਨ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ਪਹਿਲਾਂ ਹੀ ਜਵਾਬ ਦਿੱਤਾ ਗਿਆ ਹੈ",
         "TitlePlaceholder": "ਆਪਣਾ ਪ੍ਰਸ਼ਨ ਟਾਈਪ ਕਰੋ",
         "ContentPlaceholder": "ਲੋਕਾਂ ਦੇ ਜਵਾਬ ਦੇਣ ਵਿੱਚ ਸਹਾਇਤਾ ਲਈ ਇੱਥੇ ਕੋਈ ਵਾਧੂ ਜਾਣਕਾਰੀ ਪਾਓ",
-        "ErrorTitle": "ਪ੍ਰਸ਼ਨ ਲੋੜੀਂਦੇ ਹਨ"
+        "ErrorTitle": "ਪ੍ਰਸ਼ਨ ਲੋੜੀਂਦੇ ਹਨ",
+        "Placeholder": "ਪਲੇਸਹੋਲਡਰ"
     },
     "experience": {
-        "NewExperience": "ਨਵਾਂ ਤਜਰਬਾ"
+        "NewExperience": "ਨਵਾਂ ਤਜਰਬਾ",
+        "DefineTitle": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਸਿਰਲੇਖ ਪਰਿਭਾਸ਼ਤ ਕਰੋ",
+        "Create": "ਬਣਾਉ"
+    },
+    "calls": {
+        "SettingsTitle": "ਕਾਲਾਂ",
+        "MaxCalls": "ਅਧਿਕਤਮ ਕਾਲਾਂ",
+        "Update": "ਅਪਡੇਟ",
+        "NoCallsYet": "ਅਜੇ ਕੋਈ ਕਾਲਾਂ ਨਹੀਂ ਹਨ",
+        "CallReasonTitle": "ਇਹ ਕਾਲ ਕਿਸ ਬਾਰੇ ਹੈ?",
+        "WaitingRoom": "ਉਡੀਕ ਘਰ"
     }
 }

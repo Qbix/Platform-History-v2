@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Mga tawo nga akong gidapit",
-        "Streams\/invitedMe": "Kinsa ang nagdapit kanako"
+        "Streams\/invitedMe": "Kinsa ang nagdapit kanako",
+        "AreYouAgree": "Uyon ka ba?",
+        "Yes": "Oo",
+        "No": "Dili"
     },
     "interests": {
         "Filter": "Unsay imong natagamtam?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} kung ang code gi-scan",
-            "copyLink": "{{ClickOrTap}} aron kopyahon ang link sa pagdapit"
+            "copyLink": "{{ClickOrTap}} aron kopyahon ang link sa pagdapit",
+            "userChooserPlaceholder": "Pagpangita sa ngalan"
         },
         "email": {
             "subject": "Hoy, susiha kini",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Wala’y video ang partisipante",
             "openInBrowserAlert": "Buksi ang link sa Safari browser aron moapil sa komperensya",
             "youBeganVideoRecording": "Gisugdan nimo ang pagrekord niini nga komperensya",
-            "youStoppedVideoRecording": "Mihunong ka sa pagrekord niini nga komperensya"
+            "youStoppedVideoRecording": "Mihunong ka sa pagrekord niini nga komperensya",
+            "switchingRoom": "Nagbalhinbalhin nga kuwarto ...",
+            "forceDisconnecting": "Ikaw maputol sa sulud sa 5 segundo",
+            "youStartedLive": "Gisugdan nimo ang pagsibya sa kini nga tawag sa naandan nga RTMP",
+            "youStoppedLive": "Mihunong ka sa pagsibya sa kini nga tawag sa naandan nga RTMP",
+            "sbStartedLiveStreaming": "Gisugdan live ang {{userName}}",
+            "sbStoppedLiveStreaming": "Ang {{userName}} natapos nga live",
+            "liveStopped": "Ang sayup samtang nagpadala sa video sa endpoint nahinabo"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -192,7 +203,13 @@
             "stopRecording": "Hunong Pagrekord",
             "recordingInProgress": "Nagpadayon ang pagrekord ...",
             "publishOnTimeline": "I-publish sa timeline",
-            "publishToGroup": "I-publish sa grupo"
+            "publishToGroup": "I-publish sa grupo",
+            "turnOffAudioInput": "I-mute ang mikropono",
+            "micIsTurnedOff": "Napatay ang mikropono",
+            "start": "Pagsugod",
+            "stop": "Hunong na",
+            "streamingSettings": "Mga setting",
+            "streamToRTMP": "Pag-stream sa custom RTMP"
         },
         "participantsPopup": {
             "disconnect": "Pagdugtong",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Wala kay pagtugot nga moapil sa kini nga sapa.",
         "streamTitle": "{{1}} live nga tawag",
         "preview": {
-            "preamble": "Tigum:"
+            "preamble": "Tigum:",
+            "Meeting": "Tigum",
+            "MeetingEnded": "Natapos ang tigum"
+        },
+        "preparing": {
+            "micIsOff": "Napatay na si Mic",
+            "micIsOn": "Naa si Mic",
+            "cameraIsOff": "Napatay ang camera",
+            "cameraIsOn": "Ang camera naa sa",
+            "screenSharingIsOn": "Ang pag-screenshot adunay",
+            "screenSharingIsOff": "Ipakita ang screen",
+            "joinNow": "Pag-apil sa Tawag"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Tubag",
             "description": "tubag sapa"
+        },
+        "Streams\/calls": {
+            "displayType": "Mga Pagtawag",
+            "description": "kategorya alang sa Streams \/ webrtc",
+            "MaxRelationsExceeded": "Milapas ang Max nga tawag"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Dili balido nga File",
         "errorNoSource": "Wala’y gigikanan sa imahe",
         "uploadLimit": "Max nga kadako sa file: {{size}}",
-        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}"
+        "errorFileSize": "Pasensya na, apan dako kaayo ang file.<br> Ang kadako sa gidak-on sa file mao ang {{size}}",
+        "uploadedImage": "Gi-upload nga imahe",
+        "imageTitle": "Titulo sa imahe"
     },
     "questions": {
         "Questions": "Mga pangutana",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Gitubag na",
         "TitlePlaceholder": "Type ang imong pangutana",
         "ContentPlaceholder": "Ibutang dinhi ang bisan unsang dugang nga kasayuran aron matabangan ang mga tawo nga makatubag",
-        "ErrorTitle": "Kinahanglan nga pangutana"
+        "ErrorTitle": "Kinahanglan nga pangutana",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Bag-ong Kasinatian"
+        "NewExperience": "Bag-ong Kasinatian",
+        "DefineTitle": "Palihug pasabut usa ka ulohan",
+        "Create": "Paghimo"
+    },
+    "calls": {
+        "SettingsTitle": "Mga Pagtawag",
+        "MaxCalls": "Nanawag si Max",
+        "Update": "Pagbag-o",
+        "NoCallsYet": "Wala pa tawag",
+        "CallReasonTitle": "Unsa man kini nga tawag?",
+        "WaitingRoom": "Naghulat nga Silid"
     }
 }

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Daoine a thug cuireadh dom",
-        "Streams\/invitedMe": "Cé a thug cuireadh dom"
+        "Streams\/invitedMe": "Cé a thug cuireadh dom",
+        "AreYouAgree": "An aontaíonn tú?",
+        "Yes": "Sea",
+        "No": "Níl"
     },
     "interests": {
         "Filter": "Cad é a thaitníonn leat?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
             "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe",
             "scannedQR": "{{ClickOrTap}} má scanadh an cód",
-            "copyLink": "{{ClickOrTap}} chun nasc cuireadh a chóipeáil"
+            "copyLink": "{{ClickOrTap}} chun nasc cuireadh a chóipeáil",
+            "userChooserPlaceholder": "Cuardaigh de réir ainm"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí",
             "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun dul isteach sa chomhdháil.",
             "youBeganVideoRecording": "Thosaigh tú ag taifeadadh na comhdhála seo",
-            "youStoppedVideoRecording": "Stop tú ag taifeadadh na comhdhála seo"
+            "youStoppedVideoRecording": "Stop tú ag taifeadadh na comhdhála seo",
+            "switchingRoom": "Seomra lasctha ...",
+            "forceDisconnecting": "Beidh tú dícheangailte laistigh de 5 soicind",
+            "youStartedLive": "Thosaigh tú ag craoladh an ghlao seo chuig RTMP saincheaptha",
+            "youStoppedLive": "Stop tú an glao seo a chraoladh chuig RTMP saincheaptha",
+            "sbStartedLiveStreaming": "Thosaigh {{userName}} beo",
+            "sbStoppedLiveStreaming": "Tháinig deireadh le {{userName}} beo",
+            "liveStopped": "Tharla earráid agus físeán á sheoladh chuig críochphointe"
         },
         "settingsPopup": {
             "webCamera": "Ceamara Gréasáin",
@@ -205,7 +216,13 @@
             "stopRecording": "Stop Taifeadadh",
             "recordingInProgress": "Tá an taifeadadh ar siúl ...",
             "publishOnTimeline": "Foilsigh ar an amlíne",
-            "publishToGroup": "Foilsigh don ghrúpa"
+            "publishToGroup": "Foilsigh don ghrúpa",
+            "turnOffAudioInput": "Micreafón balbh",
+            "micIsTurnedOff": "Tá micreafón casta as",
+            "start": "Tosaigh",
+            "stop": "Stop",
+            "streamingSettings": "Socruithe",
+            "streamToRTMP": "Sruth go RTMP saincheaptha"
         },
         "participantsPopup": {
             "disconnect": "Dícheangail",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
         "streamTitle": "{{1}} glao beo",
         "preview": {
-            "preamble": "Cruinniú:"
+            "preamble": "Cruinniú:",
+            "Meeting": "Cruinniú",
+            "MeetingEnded": "Cuireadh deireadh leis an gcruinniú"
+        },
+        "preparing": {
+            "micIsOff": "Tá Mic as",
+            "micIsOn": "Tá Mic ar",
+            "cameraIsOff": "Tá an ceamara as",
+            "cameraIsOn": "Tá an ceamara ar",
+            "screenSharingIsOn": "Tá scagthástáil ar",
+            "screenSharingIsOff": "Scáileán roinnte",
+            "joinNow": "Bí ar an nGlao"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Freagra",
             "description": "sruth freagraí"
+        },
+        "Streams\/calls": {
+            "displayType": "Glaonna",
+            "description": "catagóir le haghaidh Srutháin \/ webrtc",
+            "MaxRelationsExceeded": "Sáraíodh uasghlaonna"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Comhad Neamhbhailí",
         "errorNoSource": "Gan foinse íomhá",
         "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}",
+        "uploadedImage": "Íomhá uaslódáilte",
+        "imageTitle": "Teideal íomhá"
     },
     "questions": {
         "Questions": "Ceisteanna",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Freagraíodh cheana",
         "TitlePlaceholder": "Clóscríobh do cheist",
         "ContentPlaceholder": "Cuir aon fhaisnéis bhreise anseo chun cabhrú le daoine freagra a thabhairt",
-        "ErrorTitle": "Ceist ag teastáil"
+        "ErrorTitle": "Ceist ag teastáil",
+        "Placeholder": "Áititheoir"
     },
     "experience": {
-        "NewExperience": "Taithí Nua"
+        "NewExperience": "Taithí Nua",
+        "DefineTitle": "Sainmhínigh teideal le do thoil",
+        "Create": "Cruthaigh"
+    },
+    "calls": {
+        "SettingsTitle": "Glaonna",
+        "MaxCalls": "Glaonna Max",
+        "Update": "Nuashonrú",
+        "NoCallsYet": "Níl aon ghlaonna fós",
+        "CallReasonTitle": "Cad faoi a bhfuil an glao seo?",
+        "WaitingRoom": "Seomra feithimh"
     }
 }

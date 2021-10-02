@@ -36,8 +36,12 @@
         "WatchClip": "Získali ste {{amount}} kredity za sledovanie {{fromStreamTitle}}",
         "PurchaseCredits": "Nákup kreditov",
         "forMessages": {
-            "BoughtCredits": "Kreditov: {{amount}}"
-        }
+            "BoughtCredits": "Kreditov: {{amount}}",
+            "BonusCredits": "{{amount}} kreditov"
+        },
+        "CreatePaidStream": "na vytvorenie {{toStreamName}}",
+        "BonusCredits": "Bonusové kredity {{amount}}",
+        "BuyBonus": "Nákupom kreditu {{amount}} naraz získate bonus k kreditu {{bonus}}."
     },
     "history": {
         "Date": "dátum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Strávil {{amount}} kreditov",
         "BoughtCredits": "Kúpené kredity {{amount}}",
         "InviteAcceptedBy": "Získané kredity {{amount}}",
-        "YouHaveCreditsToStart": "Získané kredity {{amount}}"
+        "YouHaveCreditsToStart": "Získané kredity {{amount}}",
+        "CreatePaidStream": "Minuté {{amount}} kredity",
+        "WatchClip": {
+            "+": "Získané kredity: {{amount}}",
+            "-": "Minuté {{amount}} kredity"
+        },
+        "BonusCredits": "Získali ste bonusové kredity {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Nastavte informácie o platbe",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Kúpené kredity {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonusové kredity {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Nastaviť cenu",
             "LinkPlaceholder": "nastaviť odkaz na ďalšie informácie",
             "DescriptionPlaceholder": "Popis služby",
-            "SaveService": "Uložiť službu"
+            "SaveService": "Uložiť službu",
+            "SelectRequiredParticipants": "Povinní účastníci"
         },
         "ManageServiceTemplates": "Správa šablón služieb",
         "ManageServices": "Správa služieb",

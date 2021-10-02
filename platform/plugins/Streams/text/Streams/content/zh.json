@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "我邀请的人",
-        "Streams\/invitedMe": "谁邀请了我"
+        "Streams\/invitedMe": "谁邀请了我",
+        "AreYouAgree": "你同意吗？",
+        "Yes": "是的",
+        "No": "不"
     },
     "interests": {
         "Filter": "你喜欢什么？",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "从联系人中再次选择",
             "inviteSelectedContacts": "邀请选定的联系人",
             "scannedQR": "{{ClickOrTap}}如果扫描了代码",
-            "copyLink": "{{ClickOrTap}}复制邀请链接"
+            "copyLink": "{{ClickOrTap}}复制邀请链接",
+            "userChooserPlaceholder": "按名称搜索"
         },
         "email": {
             "subject": "嘿，看看这个",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "参加者没有视频",
             "openInBrowserAlert": "在Safari浏览器中打开链接以加入会议。",
             "youBeganVideoRecording": "您开始录制此会议",
-            "youStoppedVideoRecording": "您已停止录制此会议"
+            "youStoppedVideoRecording": "您已停止录制此会议",
+            "switchingRoom": "换房...",
+            "forceDisconnecting": "您将在 5 秒内断开连接",
+            "youStartedLive": "您开始将此调用广播到自定义 RTMP",
+            "youStoppedLive": "您已停止将此调用广播到自定义 RTMP",
+            "sbStartedLiveStreaming": "{{userName}} 开始直播",
+            "sbStoppedLiveStreaming": "{{userName}} 结束直播",
+            "liveStopped": "向端点发送视频时发生错误"
         },
         "settingsPopup": {
             "webCamera": "网络摄像头",
@@ -205,7 +216,13 @@
             "stopRecording": "停止录音",
             "recordingInProgress": "录音正在进行中...",
             "publishOnTimeline": "在时间表上发布",
-            "publishToGroup": "发布到群组"
+            "publishToGroup": "发布到群组",
+            "turnOffAudioInput": "静音麦克风",
+            "micIsTurnedOff": "麦克风已关闭",
+            "start": "开始",
+            "stop": "停止",
+            "streamingSettings": "设置",
+            "streamToRTMP": "流式传输到自定义 RTMP"
         },
         "participantsPopup": {
             "disconnect": "断开",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "您无权加入此信息流。",
         "streamTitle": "{{1}}现场通话",
         "preview": {
-            "preamble": "会议："
+            "preamble": "会议：",
+            "Meeting": "会议",
+            "MeetingEnded": "会议结束"
+        },
+        "preparing": {
+            "micIsOff": "麦克风关闭",
+            "micIsOn": "麦克风已开启",
+            "cameraIsOff": "相机已关闭",
+            "cameraIsOn": "相机已开启",
+            "screenSharingIsOn": "屏幕共享已开启",
+            "screenSharingIsOff": "共享屏幕",
+            "joinNow": "加入通话"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "回答",
             "description": "答案流"
+        },
+        "Streams\/calls": {
+            "displayType": "通话",
+            "description": "Streams\/webrtc 的类别",
+            "MaxRelationsExceeded": "超过最大调用次数"
         }
     },
     "messages": {
@@ -449,7 +482,9 @@
         "invalidFile": "无效的文件",
         "errorNoSource": "没有图像源",
         "uploadLimit": "档案大小上限：{{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}"
+        "errorFileSize": "抱歉，文件太大。<br>档案大小上限为{{size}}",
+        "uploadedImage": "上传的图片",
+        "imageTitle": "图片标题"
     },
     "questions": {
         "Questions": "问题",
@@ -470,9 +505,20 @@
         "AlreadyAnswered": "已经回答",
         "TitlePlaceholder": "输入您的问题",
         "ContentPlaceholder": "在此处放置任何其他信息以帮助人们回答",
-        "ErrorTitle": "需要提问"
+        "ErrorTitle": "需要提问",
+        "Placeholder": "占位符"
     },
     "experience": {
-        "NewExperience": "新体验"
+        "NewExperience": "新体验",
+        "DefineTitle": "请定义一个标题",
+        "Create": "创建"
+    },
+    "calls": {
+        "SettingsTitle": "通话",
+        "MaxCalls": "最大通话次数",
+        "Update": "更新",
+        "NoCallsYet": "暂无来电",
+        "CallReasonTitle": "这个电话是关于什么的？",
+        "WaitingRoom": "等候室"
     }
 }

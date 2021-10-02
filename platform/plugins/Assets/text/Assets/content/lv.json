@@ -36,8 +36,12 @@
         "WatchClip": "Nopelnīti {{amount}} kredīti par skatīšanos {{fromStreamTitle}}",
         "PurchaseCredits": "Iegādājieties kredītus",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredīti"
-        }
+            "BoughtCredits": "{{amount}} kredīti",
+            "BonusCredits": "{{amount}} kredīti"
+        },
+        "CreatePaidStream": "izveidošanai {{toStreamName}}",
+        "BonusCredits": "Bonuss {{amount}} kredīti",
+        "BuyBonus": "Iegādājoties {{amount}} kredītus uzreiz, saņemsiet {{bonus}} kredītu bonusu."
     },
     "history": {
         "Date": "Datums",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Izlietoti {{amount}} kredīti",
         "BoughtCredits": "Nopirka {{amount}} kredītus",
         "InviteAcceptedBy": "Nopelnīti {{amount}} kredīti",
-        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredīti"
+        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredīti",
+        "CreatePaidStream": "Izlietoti {{amount}} kredīti",
+        "WatchClip": {
+            "+": "Nopelnīti {{amount}} kredīti",
+            "-": "Izlietoti {{amount}} kredīti"
+        },
+        "BonusCredits": "Ieguvāt bonusa {{amount}} kredītus"
     },
     "subscriptions": {
         "infoTitle": "Iestatiet maksājumu informāciju",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Nopirka {{amount}} kredītus"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonuss {{amount}} kredīti"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Iestatiet cenu",
             "LinkPlaceholder": "iestatīt papildu informācijas saiti",
             "DescriptionPlaceholder": "Pakalpojuma apraksts",
-            "SaveService": "Saglabāt pakalpojumu"
+            "SaveService": "Saglabāt pakalpojumu",
+            "SelectRequiredParticipants": "Nepieciešamie dalībnieki"
         },
         "ManageServiceTemplates": "Pārvaldiet pakalpojumu veidnes",
         "ManageServices": "Pārvaldīt pakalpojumus",

@@ -36,8 +36,12 @@
         "WatchClip": "Zdobyto {{amount}} kredytów za oglądanie {{fromStreamTitle}}",
         "PurchaseCredits": "Kup kredyty",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredytów"
-        }
+            "BoughtCredits": "{{amount}} kredytów",
+            "BonusCredits": "{{amount}} kredytów"
+        },
+        "CreatePaidStream": "za tworzenie {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kredytów",
+        "BuyBonus": "Kupując {{amount}} kredytów na raz, otrzymasz {{bonus}} bonusu kredytów."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Wydali {{amount}} kredytów",
         "BoughtCredits": "Kupił {{amount}} kredytów",
         "InviteAcceptedBy": "Zdobyto {{amount}} kredytów",
-        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów"
+        "YouHaveCreditsToStart": "Zdobyto {{amount}} kredytów",
+        "CreatePaidStream": "Wydane {{amount}} kredytów",
+        "WatchClip": {
+            "+": "Zdobyto {{amount}} kredytów",
+            "-": "Wydane {{amount}} kredytów"
+        },
+        "BonusCredits": "Otrzymałem bonus {{amount}} kredytów"
     },
     "subscriptions": {
         "infoTitle": "Ustaw informacje o płatności",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Kupił {{amount}} kredytów"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredytów"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Ustalić cenę",
             "LinkPlaceholder": "ustaw link do dodatkowych informacji",
             "DescriptionPlaceholder": "Opis usługi",
-            "SaveService": "Zapisz usługę"
+            "SaveService": "Zapisz usługę",
+            "SelectRequiredParticipants": "Wymagani uczestnicy"
         },
         "ManageServiceTemplates": "Zarządzaj szablonami usług",
         "ManageServices": "Zarządzaj usługami",

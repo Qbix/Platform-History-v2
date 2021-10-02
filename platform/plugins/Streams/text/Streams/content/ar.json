@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "الناس الذين دعوتهم",
-        "Streams\/invitedMe": "من دعاني"
+        "Streams\/invitedMe": "من دعاني",
+        "AreYouAgree": "هل أنت موافق؟",
+        "Yes": "نعم",
+        "No": "لا"
     },
     "interests": {
         "Filter": "ماذا تستمتع",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "اختر مرة أخرى من جهات الاتصال",
             "inviteSelectedContacts": "دعوة جهات الاتصال المحددة",
             "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز",
-            "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة"
+            "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة",
+            "userChooserPlaceholder": "البحث عن طريق الإسم"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "المشارك ليس لديه فيديو",
             "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر.",
             "youBeganVideoRecording": "لقد بدأت تسجيل هذا المؤتمر",
-            "youStoppedVideoRecording": "لقد توقفت عن تسجيل هذا المؤتمر"
+            "youStoppedVideoRecording": "لقد توقفت عن تسجيل هذا المؤتمر",
+            "switchingRoom": "غرفة التبديل ...",
+            "forceDisconnecting": "سيتم قطع اتصالك في غضون 5 ثوان",
+            "youStartedLive": "لقد بدأت في بث هذه المكالمة إلى RTMP المخصص",
+            "youStoppedLive": "لقد توقفت عن بث هذه المكالمة إلى RTMP المخصص",
+            "sbStartedLiveStreaming": "{{userName}} بدأ البث المباشر",
+            "sbStoppedLiveStreaming": "انتهى {{userName}} مباشرة",
+            "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية"
         },
         "settingsPopup": {
             "webCamera": "كاميرا ويب",
@@ -205,7 +216,13 @@
             "stopRecording": "إيقاف التسجيل",
             "recordingInProgress": "التسجيل قيد التقدم ...",
             "publishOnTimeline": "نشر على الجدول الزمني",
-            "publishToGroup": "نشر إلى المجموعة"
+            "publishToGroup": "نشر إلى المجموعة",
+            "turnOffAudioInput": "كتم صوت الميكروفون",
+            "micIsTurnedOff": "تم إيقاف تشغيل الميكروفون",
+            "start": "يبدأ",
+            "stop": "قف",
+            "streamingSettings": "إعدادات",
+            "streamToRTMP": "دفق إلى RTMP مخصص"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
         "streamTitle": "{{1}} مكالمة مباشرة",
         "preview": {
-            "preamble": "لقاء:"
+            "preamble": "لقاء:",
+            "Meeting": "لقاء",
+            "MeetingEnded": "انتهى الاجتماع"
+        },
+        "preparing": {
+            "micIsOff": "الميكروفون متوقف",
+            "micIsOn": "الميكروفون قيد التشغيل",
+            "cameraIsOff": "الكاميرا متوقفة",
+            "cameraIsOn": "الكاميرا قيد التشغيل",
+            "screenSharingIsOn": "مشاركة الشاشة قيد التشغيل",
+            "screenSharingIsOff": "شاشة المشاركة",
+            "joinNow": "انضم إلى المكالمة"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "إجابة",
             "description": "الجواب تيار"
+        },
+        "Streams\/calls": {
+            "displayType": "المكالمات",
+            "description": "فئة لتيارات \/ webrtc",
+            "MaxRelationsExceeded": "تم تجاوز الحد الأقصى من المكالمات"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "ملف غير صالح",
         "errorNoSource": "لا يوجد مصدر للصورة",
         "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
-        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}",
+        "uploadedImage": "الصورة التي تم تحميلها",
+        "imageTitle": "عنوان الصورة"
     },
     "questions": {
         "Questions": "أسئلة",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "تمت الاجابة مسبقا",
         "TitlePlaceholder": "اكتب سؤالك",
         "ContentPlaceholder": "ضع أي معلومات إضافية هنا لمساعدة الناس على الإجابة",
-        "ErrorTitle": "السؤال مطلوب"
+        "ErrorTitle": "السؤال مطلوب",
+        "Placeholder": "نائب"
     },
     "experience": {
-        "NewExperience": "تجربة جديدة"
+        "NewExperience": "تجربة جديدة",
+        "DefineTitle": "يرجى تحديد العنوان",
+        "Create": "إنشاء"
+    },
+    "calls": {
+        "SettingsTitle": "المكالمات",
+        "MaxCalls": "مكالمات ماكس",
+        "Update": "تحديث",
+        "NoCallsYet": "لا توجد مكالمات حتى الآن",
+        "CallReasonTitle": "عن ماذا تتحدث هذه المكالمة؟",
+        "WaitingRoom": "غرفة الانتظار"
     }
 }

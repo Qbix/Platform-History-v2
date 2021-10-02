@@ -113,7 +113,10 @@
         "SetClipStart": "Setel Clip Start",
         "ClipStart": "Miwiti Klip",
         "SetClipEnd": "Setel Klip Pungkasan",
-        "ClipEnd": "Klip Pungkasan"
+        "ClipEnd": "Klip Pungkasan",
+        "StartMoreEnd": "Posisi wiwitan ora bisa luwih saka posisi pungkasan",
+        "EndLessStart": "Posisi pungkasan ora bisa kurang saka posisi wiwitan",
+        "WhichInvalid": "Argumentasi &#39;sing&#39; ora valid"
     },
     "tabs": {
         "more": "liyane",

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Οι άνθρωποι που προσκάλεσα",
-        "Streams\/invitedMe": "Ποιος με προσκάλεσε"
+        "Streams\/invitedMe": "Ποιος με προσκάλεσε",
+        "AreYouAgree": "Συμφωνείς?",
+        "Yes": "Ναί",
+        "No": "Οχι"
     },
     "interests": {
         "Filter": "Τί απολαμβάνεις?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Επιλέξτε ξανά από τις Επαφές",
             "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών",
             "scannedQR": "{{ClickOrTap}} αν ο κώδικας έχει σαρωθεί",
-            "copyLink": "{{ClickOrTap}} για να αντιγράψετε το σύνδεσμο πρόσκλησης"
+            "copyLink": "{{ClickOrTap}} για να αντιγράψετε το σύνδεσμο πρόσκλησης",
+            "userChooserPlaceholder": "Αναζήτηση με όνομα"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Ο συμμετέχων δεν έχει βίντεο",
             "openInBrowserAlert": "Άνοιγμα συνδέσμου στο πρόγραμμα περιήγησης Safari για να συμμετάσχετε στο συνέδριο.",
             "youBeganVideoRecording": "Ξεκινήσατε να ηχογραφείτε αυτό το συνέδριο",
-            "youStoppedVideoRecording": "Σταματήσατε να καταγράφετε αυτό το συνέδριο"
+            "youStoppedVideoRecording": "Σταματήσατε να καταγράφετε αυτό το συνέδριο",
+            "switchingRoom": "Αλλαγή δωματίου ...",
+            "forceDisconnecting": "Θα αποσυνδεθείτε μέσα σε 5 δευτερόλεπτα",
+            "youStartedLive": "Ξεκινήσατε να μεταδίδετε αυτήν την κλήση στο προσαρμοσμένο RTMP",
+            "youStoppedLive": "Διακόψατε τη μετάδοση αυτής της κλήσης σε προσαρμοσμένο RTMP",
+            "sbStartedLiveStreaming": "Το {{userName}} ξεκίνησε ζωντανά",
+            "sbStoppedLiveStreaming": "Το {{userName}} έληξε ζωντανά",
+            "liveStopped": "Παρουσιάστηκε σφάλμα κατά την αποστολή βίντεο στο τελικό σημείο"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -205,7 +216,13 @@
             "stopRecording": "Διακοπή εγγραφής",
             "recordingInProgress": "Η εγγραφή βρίσκεται σε εξέλιξη ...",
             "publishOnTimeline": "Δημοσίευση στο χρονολόγιο",
-            "publishToGroup": "Δημοσίευση σε ομάδα"
+            "publishToGroup": "Δημοσίευση σε ομάδα",
+            "turnOffAudioInput": "Σίγαση μικροφώνου",
+            "micIsTurnedOff": "Το μικρόφωνο είναι απενεργοποιημένο",
+            "start": "Αρχή",
+            "stop": "Να σταματήσει",
+            "streamingSettings": "Ρυθμίσεις",
+            "streamToRTMP": "Ροή σε προσαρμοσμένο RTMP"
         },
         "participantsPopup": {
             "disconnect": "Διαχωρίζω",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Δεν έχετε άδεια να συμμετάσχετε σε αυτήν τη ροή.",
         "streamTitle": "{{1}} ζωντανή κλήση",
         "preview": {
-            "preamble": "Συνάντηση:"
+            "preamble": "Συνάντηση:",
+            "Meeting": "Συνάντηση",
+            "MeetingEnded": "Η συνάντηση έληξε"
+        },
+        "preparing": {
+            "micIsOff": "Το μικρόφωνο είναι απενεργοποιημένο",
+            "micIsOn": "Το μικρόφωνο είναι ενεργοποιημένο",
+            "cameraIsOff": "Η κάμερα είναι απενεργοποιημένη",
+            "cameraIsOn": "Η κάμερα είναι ενεργοποιημένη",
+            "screenSharingIsOn": "Η κοινή χρήση οθόνης είναι ενεργή",
+            "screenSharingIsOff": "Κοινή χρήση οθόνης",
+            "joinNow": "Λάβετε μέρος στην κλήση"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Απάντηση",
             "description": "ροή απαντήσεων"
+        },
+        "Streams\/calls": {
+            "displayType": "Κλήσεις",
+            "description": "κατηγορία για ροές\/webrtc",
+            "MaxRelationsExceeded": "Υπέρβαση μέγιστων κλήσεων"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Μη έγκυρο αρχείο",
         "errorNoSource": "Δεν υπάρχει πηγή εικόνας",
         "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
-        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+        "errorFileSize": "Συγγνώμη, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}",
+        "uploadedImage": "Ανέβασε εικόνα",
+        "imageTitle": "Τίτλος εικόνας"
     },
     "questions": {
         "Questions": "Ερωτήσεις",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Έχει ήδη απαντηθεί",
         "TitlePlaceholder": "Πληκτρολογήστε την ερώτησή σας",
         "ContentPlaceholder": "Βάλτε τυχόν επιπλέον πληροφορίες εδώ για να βοηθήσετε τους χρήστες να απαντήσουν",
-        "ErrorTitle": "Απαιτείται ερώτηση"
+        "ErrorTitle": "Απαιτείται ερώτηση",
+        "Placeholder": "Σύμβολο κράτησης θέσης"
     },
     "experience": {
-        "NewExperience": "Νέα εμπειρία"
+        "NewExperience": "Νέα εμπειρία",
+        "DefineTitle": "Ορίστε έναν τίτλο",
+        "Create": "Δημιουργώ"
+    },
+    "calls": {
+        "SettingsTitle": "Κλήσεις",
+        "MaxCalls": "Max κλήσεις",
+        "Update": "Εκσυγχρονίζω",
+        "NoCallsYet": "Δεν υπάρχουν ακόμη κλήσεις",
+        "CallReasonTitle": "Τι αφορά αυτό το κάλεσμα;",
+        "WaitingRoom": "Αίθουσα αναμονής"
     }
 }

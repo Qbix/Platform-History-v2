@@ -113,7 +113,10 @@
         "SetClipStart": "Tọọ mkpido mmalite",
         "ClipStart": "Mbido clip",
         "SetClipEnd": "Nịm Clip End",
-        "ClipEnd": "Clip Ọgwụgwụ"
+        "ClipEnd": "Clip Ọgwụgwụ",
+        "StartMoreEnd": "Ọnọdụ mbido enweghị ike ịbụ ọnọdụ karịrị njedebe",
+        "EndLessStart": "Ọnọdụ ikpeazụ enweghị ike ịbụ ihe na -erughị mmalite ọnọdụ",
+        "WhichInvalid": "Arụmụka &#39;nke&#39; adịghị mma"
     },
     "tabs": {
         "more": "Ọzọ",

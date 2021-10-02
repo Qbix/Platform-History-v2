@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Адамдар мен чакырды",
-        "Streams\/invitedMe": "Ким мени чакырды"
+        "Streams\/invitedMe": "Ким мени чакырды",
+        "AreYouAgree": "Сиз макулсузбу?",
+        "Yes": "Ооба",
+        "No": "Жок"
     },
     "interests": {
         "Filter": "Сен эмне жагат?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "коду сканерден болсо {{ClickOrTap}}",
-            "copyLink": "Чакыруу шилтемесин көчүрүү үчүн {{ClickOrTap}}"
+            "copyLink": "Чакыруу шилтемесин көчүрүү үчүн {{ClickOrTap}}",
+            "userChooserPlaceholder": "Аты боюнча издөө"
         },
         "email": {
             "subject": "Эй, бул текшерип",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Катышуучу жок Video элек",
             "openInBrowserAlert": "жыйынында Safari браузер ачуу кошулуу.",
             "youBeganVideoRecording": "Бул конференцияны жаза баштадыңыз",
-            "youStoppedVideoRecording": "Бул конференцияны жазууну токтоттуңуз"
+            "youStoppedVideoRecording": "Бул конференцияны жазууну токтоттуңуз",
+            "switchingRoom": "Комната бөлмөсү ...",
+            "forceDisconnecting": "Сиз 5 секунддун ичинде ажыратыласыз",
+            "youStartedLive": "Сиз бул чалууну салт RTMPге тарата баштадыңыз",
+            "youStoppedLive": "Бул чалууну салт RTMPге берүүнү токтоттуңуз",
+            "sbStartedLiveStreaming": "{{userName}} түз ободо баштады",
+            "sbStoppedLiveStreaming": "{{userName}} түз ободо аяктады",
+            "liveStopped": "Видеону акыркы чекитке жөнөтүүдө ката кетти"
         },
         "settingsPopup": {
             "webCamera": "Желе Камера",
@@ -192,7 +203,13 @@
             "stopRecording": "Жазууну токтотуу",
             "recordingInProgress": "Жаздыруу аткарылууда ...",
             "publishOnTimeline": "Убакыт тилкесинде жарыялаңыз",
-            "publishToGroup": "Топко жарыялоо"
+            "publishToGroup": "Топко жарыялоо",
+            "turnOffAudioInput": "Микрофондун үнүн басуу",
+            "micIsTurnedOff": "Микрофон өчүрүлгөн",
+            "start": "Баштоо",
+            "stop": "Токто",
+            "streamingSettings": "Орнотуулар",
+            "streamToRTMP": "Ыңгайлаштырылган RTMPге агым"
         },
         "participantsPopup": {
             "disconnect": "ажыратуу",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Бул агымга кошулууга уруксатыңыз жок.",
         "streamTitle": "{{1}} жандуу чалуу",
         "preview": {
-            "preamble": "Жолугушуу:"
+            "preamble": "Жолугушуу:",
+            "Meeting": "Жолугушуу",
+            "MeetingEnded": "Жолугушуу аяктады"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон өчүк",
+            "micIsOn": "Микрофон күйүк",
+            "cameraIsOff": "Камера өчүк",
+            "cameraIsOn": "Камера күйүк",
+            "screenSharingIsOn": "Экран бөлүшүү күйүк",
+            "screenSharingIsOff": "Экранды бөлүшүү",
+            "joinNow": "Чалууга кошулуңуз"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Жооп",
             "description": "жооп агымы"
+        },
+        "Streams\/calls": {
+            "displayType": "Чалуулар",
+            "description": "Агымдар\/webrtc үчүн категория",
+            "MaxRelationsExceeded": "Чалуулардын чегинен ашты"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Жараксыз файл",
         "errorNoSource": "Сүрөт булагы жок",
         "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
-        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}",
+        "uploadedImage": "Жүктөлгөн сүрөт",
+        "imageTitle": "Сүрөттүн аталышы"
     },
     "questions": {
         "Questions": "Суроолор",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Буга чейин жооп берген",
         "TitlePlaceholder": "Сурооңузду териңиз",
         "ContentPlaceholder": "Адамдар жооп бергенге жардам берүү үчүн кошумча маалыматты ушул жерге коюңуз",
-        "ErrorTitle": "Суроо талап кылынат"
+        "ErrorTitle": "Суроо талап кылынат",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Жаңы тажрыйба"
+        "NewExperience": "Жаңы тажрыйба",
+        "DefineTitle": "Сураныч, аталышын аныктаңыз",
+        "Create": "Түзүү"
+    },
+    "calls": {
+        "SettingsTitle": "Чалуулар",
+        "MaxCalls": "Макс чалуулар",
+        "Update": "Жаңыртуу",
+        "NoCallsYet": "Азырынча чалуулар жок",
+        "CallReasonTitle": "Бул эмне жөнүндө чакырык?",
+        "WaitingRoom": "Күтүү бөлмөсү"
     }
 }

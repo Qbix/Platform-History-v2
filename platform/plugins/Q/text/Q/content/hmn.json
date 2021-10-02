@@ -113,7 +113,10 @@
         "SetClipStart": "Teem Clip Pib",
         "ClipStart": "Clip Pib",
         "SetClipEnd": "Teev Clip Kawg",
-        "ClipEnd": "Clip Xaus"
+        "ClipEnd": "Clip Xaus",
+        "StartMoreEnd": "Txoj haujlwm pib tsis tuaj yeem yog ntau dua txoj haujlwm kawg",
+        "EndLessStart": "Txoj haujlwm kawg tsis tuaj yeem tsawg dua pib txoj haujlwm",
+        "WhichInvalid": "Kev sib cav &#39;uas&#39; tsis raug"
     },
     "tabs": {
         "more": "ntxiv",

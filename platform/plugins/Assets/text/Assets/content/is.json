@@ -36,8 +36,12 @@
         "WatchClip": "Fékk {{amount}} einingar fyrir að horfa á {{fromStreamTitle}}",
         "PurchaseCredits": "Kaup inneign",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ein"
-        }
+            "BoughtCredits": "{{amount}} ein",
+            "BonusCredits": "{{amount}} inneign"
+        },
+        "CreatePaidStream": "til að búa til {{toStreamName}}",
+        "BonusCredits": "Bónus {{amount}} inneign",
+        "BuyBonus": "Að kaupa {{amount}} inneign í einu mun leiða til {{bonus}} eininga bónus."
     },
     "history": {
         "Date": "Dagsetning",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Eytt {{amount}} einingum",
         "BoughtCredits": "Keypti {{amount}} ein",
         "InviteAcceptedBy": "Aflað {{amount}} eininga",
-        "YouHaveCreditsToStart": "Aflað {{amount}} eininga"
+        "YouHaveCreditsToStart": "Aflað {{amount}} eininga",
+        "CreatePaidStream": "Eyddi {{amount}} einingum",
+        "WatchClip": {
+            "+": "Fékk {{amount}} inneign",
+            "-": "Eyddi {{amount}} einingum"
+        },
+        "BonusCredits": "Fékk bónus {{amount}} inneign"
     },
     "subscriptions": {
         "infoTitle": "Stilltu greiðsluupplýsingar",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Keypti {{amount}} ein"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bónus {{amount}} inneign"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Stilla verð",
             "LinkPlaceholder": "stilla viðbótarupplýsingatengil",
             "DescriptionPlaceholder": "Þjónustulýsing",
-            "SaveService": "Vista þjónustu"
+            "SaveService": "Vista þjónustu",
+            "SelectRequiredParticipants": "Nauðsynlegir þátttakendur"
         },
         "ManageServiceTemplates": "Stjórna þjónustusniðmátum",
         "ManageServices": "Stjórna þjónustu",

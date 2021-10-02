@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Vanhu vandakakokwa",
-        "Streams\/invitedMe": "Ndiani akandidana"
+        "Streams\/invitedMe": "Ndiani akandidana",
+        "AreYouAgree": "Unobvumirana nazvo here?",
+        "Yes": "Ehe",
+        "No": "Aihwa"
     },
     "interests": {
         "Filter": "Unofarira chii?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} kana iyo kodhi yakaongororwa",
-            "copyLink": "{{ClickOrTap}} kutevedzera kukoka link"
+            "copyLink": "{{ClickOrTap}} kutevedzera kukoka link",
+            "userChooserPlaceholder": "Tsvaga nemazita"
         },
         "email": {
             "subject": "Hey, chengeta izvi",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Mutori wechikamu haana vhidhiyo",
             "openInBrowserAlert": "Vhura chinongedzo muSafari browser kuti ubatane nemusangano.",
             "youBeganVideoRecording": "Wakatanga kurekodha musangano uyu",
-            "youStoppedVideoRecording": "Wakarega kunyora musangano uyu"
+            "youStoppedVideoRecording": "Wakarega kunyora musangano uyu",
+            "switchingRoom": "Kuchinja imba ...",
+            "forceDisconnecting": "Unozobviswa mukati memasekonzi mashanu",
+            "youStartedLive": "Iwe wakatanga kutepfenyura kufona uku kune tsika RTMP",
+            "youStoppedLive": "Wakamira kutepfenyura kufona uku kune tsika RTMP",
+            "sbStartedLiveStreaming": "{{userName}} akatanga kurarama",
+            "sbStoppedLiveStreaming": "{{userName}} zvakapera",
+            "liveStopped": "Kukanganisa pakutumira vhidhiyo kumagumo kwakaitika"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -192,7 +203,13 @@
             "stopRecording": "Regedza Kurekodha",
             "recordingInProgress": "Rekodha riri kuenderera ...",
             "publishOnTimeline": "Shambadza pane mutsara wenguva",
-            "publishToGroup": "Dhinda kune boka"
+            "publishToGroup": "Dhinda kune boka",
+            "turnOffAudioInput": "Nyarara maikorofoni",
+            "micIsTurnedOff": "Maikorofoni yakadzimwa",
+            "start": "Kutanga",
+            "stop": "Mira",
+            "streamingSettings": "Zvirongwa",
+            "streamToRTMP": "Tenderera kune yakasarudzika RTMP"
         },
         "participantsPopup": {
             "disconnect": "Regedza",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha rwizi urwu.",
         "streamTitle": "{{1}} chaiyo yekufona",
         "preview": {
-            "preamble": "Musangano:"
+            "preamble": "Musangano:",
+            "Meeting": "Musangano",
+            "MeetingEnded": "Musangano wakapera"
+        },
+        "preparing": {
+            "micIsOff": "Mic yakadzimwa",
+            "micIsOn": "Mic iripo",
+            "cameraIsOff": "Kamera yakavharwa",
+            "cameraIsOn": "Kamera yakavhurwa",
+            "screenSharingIsOn": "Screensharing iriko",
+            "screenSharingIsOff": "Goverana skrini",
+            "joinNow": "Joinha Kufona"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Pindura",
             "description": "mhinduro rukova"
+        },
+        "Streams\/calls": {
+            "displayType": "Kudanwa",
+            "description": "chikamu cheRukova \/ webrtc",
+            "MaxRelationsExceeded": "Max mafoni akapfuura"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Faira Haisiriyo",
         "errorNoSource": "Hapana chinyorwa chinyorwa",
         "uploadLimit": "Saizi yakakura saizi: {{size}}",
-        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura iri {{size}}"
+        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura iri {{size}}",
+        "uploadedImage": "Mufananidzo wakaiswa",
+        "imageTitle": "Mufananidzo zita"
     },
     "questions": {
         "Questions": "Mibvunzo",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Yatopindurwa",
         "TitlePlaceholder": "Nyora mubvunzo wako",
         "ContentPlaceholder": "Isa chero ruzivo rwekuwedzera pano kubatsira vanhu kupindura",
-        "ErrorTitle": "Mubvunzo unodiwa"
+        "ErrorTitle": "Mubvunzo unodiwa",
+        "Placeholder": "Chinobata"
     },
     "experience": {
-        "NewExperience": "New Zvakaitika"
+        "NewExperience": "New Zvakaitika",
+        "DefineTitle": "Ndokumbira utsanangure zita remusoro",
+        "Create": "Gadzira"
+    },
+    "calls": {
+        "SettingsTitle": "Kudanwa",
+        "MaxCalls": "Max anodana",
+        "Update": "Kwidziridza",
+        "NoCallsYet": "Hapana mafoni parizvino",
+        "CallReasonTitle": "Kufonera uku ndekwei?",
+        "WaitingRoom": "Imba Yekumirira"
     }
 }

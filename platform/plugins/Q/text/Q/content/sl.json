@@ -117,7 +117,10 @@
         "SetClipStart": "Nastavite Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Nastavite konec posnetka",
-        "ClipEnd": "Konec posnetka"
+        "ClipEnd": "Konec posnetka",
+        "StartMoreEnd": "Začetni položaj ne sme biti več kot končni položaj",
+        "EndLessStart": "Končni položaj ne sme biti manjši od začetnega",
+        "WhichInvalid": "Argument &#39;ki&#39; neveljaven"
     },
     "durations": {
         "second": "drugič",

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Tagata na ou valaauliaina",
-        "Streams\/invitedMe": "O ai na valaauliaina au"
+        "Streams\/invitedMe": "O ai na valaauliaina au",
+        "AreYouAgree": "O e malilie?",
+        "Yes": "ioe",
+        "No": "leai"
     },
     "interests": {
         "Filter": "O a mea e te fiafia i ai?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} pe afai na siakiina le code",
-            "copyLink": "{{ClickOrTap}} e kopi ai valaaulia valaʻaulia"
+            "copyLink": "{{ClickOrTap}} e kopi ai valaaulia valaʻaulia",
+            "userChooserPlaceholder": "Saili i lou igoa"
         },
         "email": {
             "subject": "Hey, siaki le mea lenei",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "E leai se vitio e auai",
             "openInBrowserAlert": "Tatala avanoa i le saogala Safari e auai i le konafesi.",
             "youBeganVideoRecording": "Oe amata pueina lenei konafesi",
-            "youStoppedVideoRecording": "Ua e le toe pueina lenei konafesi"
+            "youStoppedVideoRecording": "Ua e le toe pueina lenei konafesi",
+            "switchingRoom": "Fesuiaʻi potu ...",
+            "forceDisconnecting": "Oe o le a vavaeʻese i totonu o le 5 sekone",
+            "youStartedLive": "Na e amata faʻasalalau lenei valaʻau ile aganuu RTMP",
+            "youStoppedLive": "Ua e le toe faʻasalalauina lenei valaʻau ile masani RTMP",
+            "sbStartedLiveStreaming": "{{userName}} amata ola",
+            "sbStoppedLiveStreaming": "{{userName}} faʻaiʻu ola",
+            "liveStopped": "Ua tupu le sese a o lafoina le vitio i le faaiuga"
         },
         "settingsPopup": {
             "webCamera": "Upega Tafaʻilagi",
@@ -192,7 +203,13 @@
             "stopRecording": "Taofi le pueina",
             "recordingInProgress": "O loʻo faagasolo faamaumauga i totonu ...",
             "publishOnTimeline": "Lomiga i taimi",
-            "publishToGroup": "Lolomi i le kulupu"
+            "publishToGroup": "Lolomi i le kulupu",
+            "turnOffAudioInput": "Faʻaleaoga le leo leo leo",
+            "micIsTurnedOff": "Ua tape le masini faaleoteleleo",
+            "start": "Amata",
+            "stop": "Taofi",
+            "streamingSettings": "Tulaga",
+            "streamToRTMP": "Alu i le custom RTMP"
         },
         "participantsPopup": {
             "disconnect": "Alu ese",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "E leai sau faʻatagaina e te auai i lenei vaitafe.",
         "streamTitle": "{{1}} ola valaʻau",
         "preview": {
-            "preamble": "Fonotaga:"
+            "preamble": "Fonotaga:",
+            "Meeting": "Fonotaga",
+            "MeetingEnded": "Na uma le fonotaga"
+        },
+        "preparing": {
+            "micIsOff": "Ua alu Mika",
+            "micIsOn": "Ua alu Mika",
+            "cameraIsOff": "Ua tape le meapueata",
+            "cameraIsOn": "Ua ki le meapueata",
+            "screenSharingIsOn": "Ua i luga le suʻega suʻega",
+            "screenSharingIsOff": "Faasoa atu lau",
+            "joinNow": "Auai i le Valaʻau"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Tali",
             "description": "tali vaitafe"
+        },
+        "Streams\/calls": {
+            "displayType": "Valaau",
+            "description": "vaega mo Vaitafe \/ webrtc",
+            "MaxRelationsExceeded": "Ua sili atu Max telefoni"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Faila le saʻo",
         "errorNoSource": "Leai se ata e maua",
         "uploadLimit": "Max faila tele: {{size}}",
-        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}",
+        "uploadedImage": "Ata faʻapipiʻi",
+        "imageTitle": "Igoa Igoa"
     },
     "questions": {
         "Questions": "Fesili",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Ua uma ona tali",
         "TitlePlaceholder": "Ituaiga lau fesili",
         "ContentPlaceholder": "Tuʻu nisi faʻamatalaga faʻaopopo e fesoasoani i tagata e tali",
-        "ErrorTitle": "Fesili e manaʻomia"
+        "ErrorTitle": "Fesili e manaʻomia",
+        "Placeholder": "Pasi"
     },
     "experience": {
-        "NewExperience": "Aafiaga Fou"
+        "NewExperience": "Aafiaga Fou",
+        "DefineTitle": "Faʻamolemole faʻamalamalama se ulutala",
+        "Create": "Fausia"
+    },
+    "calls": {
+        "SettingsTitle": "Valaau",
+        "MaxCalls": "Ua telefoni Max",
+        "Update": "Faʻafouga",
+        "NoCallsYet": "Leai ni telefoni",
+        "CallReasonTitle": "O le a le uiga o lenei valaau?",
+        "WaitingRoom": "Potu Faʻatali"
     }
 }

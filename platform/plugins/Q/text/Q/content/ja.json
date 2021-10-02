@@ -117,7 +117,10 @@
         "SetClipStart": "クリップ開始の設定",
         "ClipStart": "クリップスタート",
         "SetClipEnd": "クリップエンドを設定",
-        "ClipEnd": "クリップエンド"
+        "ClipEnd": "クリップエンド",
+        "StartMoreEnd": "開始位置は終了位置を超えることはできません",
+        "EndLessStart": "終了位置は開始位置より小さくすることはできません",
+        "WhichInvalid": "引数 &#39;which&#39;無効"
     },
     "durations": {
         "second": "2番目",

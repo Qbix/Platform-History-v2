@@ -113,7 +113,10 @@
         "SetClipStart": "Clip Start-ni o&#39;rnating",
         "ClipStart": "Klip Boshlash",
         "SetClipEnd": "Clip End-ni o&#39;rnating",
-        "ClipEnd": "Klipning oxiri"
+        "ClipEnd": "Klipning oxiri",
+        "StartMoreEnd": "Boshlang&#39;ich pozitsiyasi oxirgi pozitsiyadan oshmasligi kerak",
+        "EndLessStart": "Oxirgi pozitsiya boshlang&#39;ich pozitsiyadan kam bo&#39;lmasligi kerak",
+        "WhichInvalid": "&quot;Qaysi&quot; argumenti yaroqsiz"
     },
     "tabs": {
         "more": "Ko&#39;proq",

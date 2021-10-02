@@ -113,7 +113,10 @@
         "SetClipStart": "Ibutang ang Pagsugod sa Clip",
         "ClipStart": "Pagsugod sa Clip",
         "SetClipEnd": "Itakda ang Kataposan sa Clip",
-        "ClipEnd": "Pagtapos sa Clip"
+        "ClipEnd": "Pagtapos sa Clip",
+        "StartMoreEnd": "Ang posisyon sa pagsugod dili mahimo nga labaw pa sa katapusan nga posisyon",
+        "EndLessStart": "Ang posisyon sa pagtapos dili mahimong mas gamay kaysa sa posisyon sa pagsugod",
+        "WhichInvalid": "Ang pangatarungan &#39;nga&#39; dili husto"
     },
     "tabs": {
         "more": "labi pa",

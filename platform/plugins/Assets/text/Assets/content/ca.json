@@ -36,8 +36,12 @@
         "WatchClip": "He guanyat {{amount}} crèdits per veure {{fromStreamTitle}}",
         "PurchaseCredits": "Compra de crèdits",
         "forMessages": {
-            "BoughtCredits": "{{amount}} crèdits"
-        }
+            "BoughtCredits": "{{amount}} crèdits",
+            "BonusCredits": "{{amount}} crèdits"
+        },
+        "CreatePaidStream": "per crear {{toStreamName}}",
+        "BonusCredits": "Bono {{amount}} de crèdits",
+        "BuyBonus": "Si compreu {{amount}} crèdits alhora, obtindreu una bonificació de {{bonus}} crèdits."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Es van gastar {{amount}} crèdits",
         "BoughtCredits": "Es van comprar {{amount}} crèdits",
         "InviteAcceptedBy": "Obtinguts {{amount}} crèdits",
-        "YouHaveCreditsToStart": "Obtinguts {{amount}} crèdits"
+        "YouHaveCreditsToStart": "Obtinguts {{amount}} crèdits",
+        "CreatePaidStream": "Crèdits gastats {{amount}}",
+        "WatchClip": {
+            "+": "He guanyat {{amount}} crèdits",
+            "-": "Crèdits gastats {{amount}}"
+        },
+        "BonusCredits": "He obtingut crèdits de bonificació de {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Establiu la informació de pagament",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Es van comprar {{amount}} crèdits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bono {{amount}} de crèdits"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Preu fixat",
             "LinkPlaceholder": "configura un enllaç d&#39;informació addicional",
             "DescriptionPlaceholder": "Descripció del servei",
-            "SaveService": "Servei d’estalvi"
+            "SaveService": "Servei d’estalvi",
+            "SelectRequiredParticipants": "Participants obligatoris"
         },
         "ManageServiceTemplates": "Gestiona les plantilles de servei",
         "ManageServices": "Serveis de Gestió",

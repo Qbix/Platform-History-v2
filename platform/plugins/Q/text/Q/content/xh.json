@@ -113,7 +113,10 @@
         "SetClipStart": "Cwangcisa ukuqala kwesiqwengana",
         "ClipStart": "Isiqalo sokuqala",
         "SetClipEnd": "Cwangcisa ukuphela kwesiqwengana",
-        "ClipEnd": "Ukuphela kwesiqwengana"
+        "ClipEnd": "Ukuphela kwesiqwengana",
+        "StartMoreEnd": "Indawo yokuqala ayinakuba ngaphezulu kwesiphelo",
+        "EndLessStart": "Indawo yokuphela ayinakuba ngaphantsi kwesikhundla sokuqala",
+        "WhichInvalid": "Impikiswano &#39;engavumelekanga"
     },
     "tabs": {
         "more": "Kaninzi",

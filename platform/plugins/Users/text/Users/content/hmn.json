@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Txais Cov Lus Qhia Kev Pabcuam?",
         "facebookNoEmail": "Koj tus facebook account ploj lawm ib qho chaw nyob email. Cias teev nyob rau hauv txoj kev ib txwm nyob.",
-        "picTooltip": "Koj tuaj yeem hloov cov duab tom qab"
+        "picTooltip": "Koj tuaj yeem hloov cov duab tom qab",
+        "wallet": {
+            "payload": "Nkag mus rau hauv {{host}} lub sijhawm {{timestamp}}",
+            "alert": {
+                "title": "Hloov mus rau Lub Hnab",
+                "content": "Thaum koj kaw qhov kev sib tham no, koj yuav raug coj mus rau koj lub hnab nyiaj. Tom qab koj nkag mus, rov qab mus rau nplooj ntawv no."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ntxiv ib txoj hauv kev kom nkag mus",
@@ -108,6 +115,18 @@
         "Owner": "Tus tswv tsev",
         "Admin": "Cov thawj coj",
         "Member": "Tswvcuab",
-        "Guest": "Qhua"
+        "Guest": "Qhua",
+        "Host": "Tus tswv tsev"
+    },
+    "analytics": {
+        "Title": "Ntsuam xyuas",
+        "Daily": "Txhua hnub",
+        "Weekly": "Txhua lub lim tiam",
+        "Monthly": "Txhua hli",
+        "Application": "Daim ntawv thov",
+        "Pages": "Nplooj ntawv",
+        "Services": "Cov kev pabcuam",
+        "Faq": "FAQ",
+        "WeekDays": "Hnub Hnub"
     }
 }

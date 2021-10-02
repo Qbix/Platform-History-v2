@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ihmiset, joita olen kutsunut",
-        "Streams\/invitedMe": "Kuka kutsui minut"
+        "Streams\/invitedMe": "Kuka kutsui minut",
+        "AreYouAgree": "Oletko samaa mieltä?",
+        "Yes": "Joo",
+        "No": "Ei"
     },
     "interests": {
         "Filter": "Mistä nautit?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
             "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
             "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin",
-            "copyLink": "{{ClickOrTap}} kopioida kutsulinkki"
+            "copyLink": "{{ClickOrTap}} kopioida kutsulinkki",
+            "userChooserPlaceholder": "Hae nimen perusteella"
         },
         "email": {
             "subject": "Hei, tarkista tämä",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Osallistujalla ei ole videota",
             "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin.",
             "youBeganVideoRecording": "Aloitit tämän konferenssin nauhoittamisen",
-            "youStoppedVideoRecording": "Lopetit tämän konferenssin nauhoittamisen"
+            "youStoppedVideoRecording": "Lopetit tämän konferenssin nauhoittamisen",
+            "switchingRoom": "Vaihdetaan huonetta ...",
+            "forceDisconnecting": "Yhteys katkeaa 5 sekunnin kuluessa",
+            "youStartedLive": "Aloitit lähettää tämän puhelun mukautetulle RTMP: lle",
+            "youStoppedLive": "Lopetit tämän puhelun lähettämisen mukautettuun RTMP: hen",
+            "sbStartedLiveStreaming": "{{userName}} aloitti livenä",
+            "sbStoppedLiveStreaming": "{{userName}} päättyi livenä",
+            "liveStopped": "Tapahtui virhe lähetettäessä videota päätepisteeseen"
         },
         "settingsPopup": {
             "webCamera": "Nettikamera",
@@ -205,7 +216,13 @@
             "stopRecording": "Lopeta tallennus",
             "recordingInProgress": "Tallennus on käynnissä ...",
             "publishOnTimeline": "Julkaise aikajanaan",
-            "publishToGroup": "Julkaise ryhmälle"
+            "publishToGroup": "Julkaise ryhmälle",
+            "turnOffAudioInput": "Mykistä mikrofoni",
+            "micIsTurnedOff": "Mikrofoni on pois päältä",
+            "start": "alkaa",
+            "stop": "Lopettaa",
+            "streamingSettings": "asetukset",
+            "streamToRTMP": "Suoratoista mukautettuun RTMP: hen"
         },
         "participantsPopup": {
             "disconnect": "Katkaista",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
         "streamTitle": "{{1}} suora puhelu",
         "preview": {
-            "preamble": "Tapaaminen:"
+            "preamble": "Tapaaminen:",
+            "Meeting": "Tapaaminen",
+            "MeetingEnded": "Kokous päättyi"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofoni on pois päältä",
+            "micIsOn": "Mikrofoni on päällä",
+            "cameraIsOff": "Kamera on pois päältä",
+            "cameraIsOn": "Kamera on päällä",
+            "screenSharingIsOn": "Näytön jakaminen on käytössä",
+            "screenSharingIsOff": "Jaa näyttö",
+            "joinNow": "Liity puheluun"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Vastaus",
             "description": "vastausvirta"
+        },
+        "Streams\/calls": {
+            "displayType": "Puhelut",
+            "description": "Streams\/webrtc -luokka",
+            "MaxRelationsExceeded": "Maksimipuhelut ylitetty"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Virheellinen tiedosto",
         "errorNoSource": "Ei kuvalähdettä",
         "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}",
+        "uploadedImage": "Ladattu kuva",
+        "imageTitle": "Kuvan otsikko"
     },
     "questions": {
         "Questions": "Kysymyksiä",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Vastasin jo",
         "TitlePlaceholder": "Kirjoita kysymyksesi",
         "ContentPlaceholder": "Lisää tähän lisätietoja auttaaksesi ihmisiä vastaamaan",
-        "ErrorTitle": "Kysymys vaaditaan"
+        "ErrorTitle": "Kysymys vaaditaan",
+        "Placeholder": "Paikanpitäjä"
     },
     "experience": {
-        "NewExperience": "Uusi kokemus"
+        "NewExperience": "Uusi kokemus",
+        "DefineTitle": "Määritä otsikko",
+        "Create": "Luoda"
+    },
+    "calls": {
+        "SettingsTitle": "Puhelut",
+        "MaxCalls": "Max puhelut",
+        "Update": "Päivittää",
+        "NoCallsYet": "Ei vielä puheluita",
+        "CallReasonTitle": "Mistä tässä puhelussa on kyse?",
+        "WaitingRoom": "Odotushuone"
     }
 }

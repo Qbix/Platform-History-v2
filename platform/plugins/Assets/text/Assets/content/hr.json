@@ -36,8 +36,12 @@
         "WatchClip": "Zaradio ste {{amount}} kredita za gledanje filma {{fromStreamTitle}}",
         "PurchaseCredits": "Kupnja kredita",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredita"
-        }
+            "BoughtCredits": "{{amount}} kredita",
+            "BonusCredits": "{{amount}} kredita"
+        },
+        "CreatePaidStream": "za stvaranje {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kredita",
+        "BuyBonus": "Kupovinom {{amount}} kredita odjednom doći ćete do {{bonus}} bonusa kredita."
     },
     "history": {
         "Date": "Datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Potrošite {{amount}} kredita",
         "BoughtCredits": "Kupio {{amount}} kredita",
         "InviteAcceptedBy": "Zarađeno {{amount}} kredita",
-        "YouHaveCreditsToStart": "Zarađeno {{amount}} kredita"
+        "YouHaveCreditsToStart": "Zarađeno {{amount}} kredita",
+        "CreatePaidStream": "Potrošili {{amount}} kredita",
+        "WatchClip": {
+            "+": "Ostvarili ste {{amount}} kredita",
+            "-": "Potrošili {{amount}} kredita"
+        },
+        "BonusCredits": "Dobili ste bonus {{amount}} kredita"
     },
     "subscriptions": {
         "infoTitle": "Postavite podatke o plaćanju",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Kupio {{amount}} kredita"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredita"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Postavite cijenu",
             "LinkPlaceholder": "postavi dodatnu info vezu",
             "DescriptionPlaceholder": "Opis usluge",
-            "SaveService": "Spremite uslugu"
+            "SaveService": "Spremite uslugu",
+            "SelectRequiredParticipants": "Potrebni sudionici"
         },
         "ManageServiceTemplates": "Upravljanje predlozima usluga",
         "ManageServices": "Upravljanje uslugama",

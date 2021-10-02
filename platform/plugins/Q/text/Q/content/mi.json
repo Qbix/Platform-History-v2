@@ -113,7 +113,10 @@
         "SetClipStart": "Whakatakotoria te Tiimata Topenga",
         "ClipStart": "Tīmata Topenga",
         "SetClipEnd": "Whakatakotoria te Whakamutu Mutu",
-        "ClipEnd": "Topenga topenga"
+        "ClipEnd": "Topenga topenga",
+        "StartMoreEnd": "Ko te tuunga tiimata kaore e nui ake i te tuunga mutunga",
+        "EndLessStart": "Ko te tuunga mutunga kaore e iti ake i te tuunga tiimata",
+        "WhichInvalid": "Tohenga &#39;e&#39; hē ana"
     },
     "tabs": {
         "more": "atu",

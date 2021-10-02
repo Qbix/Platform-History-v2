@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Oameni pe care i-am invitat",
-        "Streams\/invitedMe": "Cine ma invitat"
+        "Streams\/invitedMe": "Cine ma invitat",
+        "AreYouAgree": "Ești de acord?",
+        "Yes": "da",
+        "No": "Nu"
     },
     "interests": {
         "Filter": "Ce iti place?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Alegeți din nou din Contacte",
             "inviteSelectedContacts": "Invitați contactele selectate",
             "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat",
-            "copyLink": "{{ClickOrTap}} pentru a copia linkul de invitație"
+            "copyLink": "{{ClickOrTap}} pentru a copia linkul de invitație",
+            "userChooserPlaceholder": "Cauta dupa nume"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Participantul nu are niciun videoclip",
             "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a vă alătura conferinței.",
             "youBeganVideoRecording": "Ai început să înregistrezi această conferință",
-            "youStoppedVideoRecording": "Ați oprit înregistrarea acestei conferințe"
+            "youStoppedVideoRecording": "Ați oprit înregistrarea acestei conferințe",
+            "switchingRoom": "Vestiar ...",
+            "forceDisconnecting": "Veți fi deconectat în 5 secunde",
+            "youStartedLive": "Ați început să transmiteți acest apel către RTMP personalizat",
+            "youStoppedLive": "Ați încetat să transmiteți acest apel către RTMP personalizat",
+            "sbStartedLiveStreaming": "{{userName}} a început live",
+            "sbStoppedLiveStreaming": "{{userName}} s-a încheiat live",
+            "liveStopped": "A apărut o eroare la trimiterea videoclipului către punctul final"
         },
         "settingsPopup": {
             "webCamera": "Camera web",
@@ -205,7 +216,13 @@
             "stopRecording": "Opriți înregistrarea",
             "recordingInProgress": "Înregistrarea este în curs ...",
             "publishOnTimeline": "Publicați pe cronologie",
-            "publishToGroup": "Publicați în grup"
+            "publishToGroup": "Publicați în grup",
+            "turnOffAudioInput": "Dezactivează microfonul",
+            "micIsTurnedOff": "Microfonul este oprit",
+            "start": "start",
+            "stop": "Stop",
+            "streamingSettings": "Setări",
+            "streamToRTMP": "Transmiteți la RTMP personalizat"
         },
         "participantsPopup": {
             "disconnect": "Deconectat",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
         "streamTitle": "{{1}} apel live",
         "preview": {
-            "preamble": "Întâlnire:"
+            "preamble": "Întâlnire:",
+            "Meeting": "Întâlnire",
+            "MeetingEnded": "Întâlnirea sa încheiat"
+        },
+        "preparing": {
+            "micIsOff": "Microfonul este oprit",
+            "micIsOn": "Microfonul este pornit",
+            "cameraIsOff": "Camera foto este oprită",
+            "cameraIsOn": "Camera foto este pornită",
+            "screenSharingIsOn": "Partajarea ecranului este activată",
+            "screenSharingIsOff": "Distribuie ecran",
+            "joinNow": "Alăturați-vă apelului"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Răspuns",
             "description": "flux de răspuns"
+        },
+        "Streams\/calls": {
+            "displayType": "Apeluri",
+            "description": "categorie pentru fluxuri \/ webrtc",
+            "MaxRelationsExceeded": "Numărul maxim de apeluri a fost depășit"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Nicio sursă de imagine",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}",
+        "uploadedImage": "Imagine încărcată",
+        "imageTitle": "Titlul imaginii"
     },
     "questions": {
         "Questions": "Întrebări",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Am răspuns deja",
         "TitlePlaceholder": "Tastați-vă întrebarea",
         "ContentPlaceholder": "Puneți orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
-        "ErrorTitle": "Întrebare necesară"
+        "ErrorTitle": "Întrebare necesară",
+        "Placeholder": "Substituent"
     },
     "experience": {
-        "NewExperience": "Experienta noua"
+        "NewExperience": "Experienta noua",
+        "DefineTitle": "Vă rugăm să definiți un titlu",
+        "Create": "Crea"
+    },
+    "calls": {
+        "SettingsTitle": "Apeluri",
+        "MaxCalls": "Apeluri max",
+        "Update": "Actualizați",
+        "NoCallsYet": "Niciun apel încă",
+        "CallReasonTitle": "Despre ce este vorba?",
+        "WaitingRoom": "Sală de așteptare"
     }
 }

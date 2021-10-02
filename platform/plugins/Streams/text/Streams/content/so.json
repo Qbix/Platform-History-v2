@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Dadka aan ku casuumay",
-        "Streams\/invitedMe": "Yaa iigu yeedhay"
+        "Streams\/invitedMe": "Yaa iigu yeedhay",
+        "AreYouAgree": "Ma ku raacsan tahay?",
+        "Yes": "Haa",
+        "No": "Maya"
     },
     "interests": {
         "Filter": "Maxaad ku raaxaysataa?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} haddii koodhkaas la-sawiray",
-            "copyLink": "{{ClickOrTap}} si loo nuqulo xiriirika martiqaadka"
+            "copyLink": "{{ClickOrTap}} si loo nuqulo xiriirika martiqaadka",
+            "userChooserPlaceholder": "Magac ku raadi"
         },
         "email": {
             "subject": "Hey, hubi tan",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal",
             "openInBrowserAlert": "Ku fur xiriiriyaha Safari biraawsarka si aad ugu biirto shirka.",
             "youBeganVideoRecording": "Waxaad bilawday duubista shirkan",
-            "youStoppedVideoRecording": "Waad joojisay duubista shirkan"
+            "youStoppedVideoRecording": "Waad joojisay duubista shirkan",
+            "switchingRoom": "Bedelka qolka ...",
+            "forceDisconnecting": "Waxaa lagaa jari doonaa 5 ilbidhiqsi gudahood",
+            "youStartedLive": "Waxaad bilowday baahinta wicitaankan RTMP -ga caadada u ah",
+            "youStoppedLive": "Waxaad joojisay baahinta wicitaankan RTMP -ga caadada u ah",
+            "sbStartedLiveStreaming": "{{userName}} toos baa loo bilaabay",
+            "sbStoppedLiveStreaming": "{{userName}} si toos ah baa loo dhammeeyay",
+            "liveStopped": "Cilad markii loo dirayay fiidiyaha barta dhammaadka ayaa dhacday"
         },
         "settingsPopup": {
             "webCamera": "Kaamirada Websaydhka",
@@ -192,7 +203,13 @@
             "stopRecording": "Jooji Duubista",
             "recordingInProgress": "Duubista ayaa socota ...",
             "publishOnTimeline": "Ku daabac jadwalka waqtiga",
-            "publishToGroup": "Daabac kooxda"
+            "publishToGroup": "Daabac kooxda",
+            "turnOffAudioInput": "Codbaahiyaha makarafoonka",
+            "micIsTurnedOff": "Mikrafoon waa la damiyay",
+            "start": "Bilow",
+            "stop": "Jooji",
+            "streamingSettings": "Dejinta",
+            "streamToRTMP": "Ku qulquli RTMP -ga caadada u ah"
         },
         "participantsPopup": {
             "disconnect": "Kala goynta",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Uma lihin ogolaansho inaad ku biirto qulqulkaan.",
         "streamTitle": "{{1}} wicitaan toos ah",
         "preview": {
-            "preamble": "Kulan:"
+            "preamble": "Kulan:",
+            "Meeting": "Kulanka",
+            "MeetingEnded": "Kulanku wuu dhammaaday"
+        },
+        "preparing": {
+            "micIsOff": "Mikirifoonku waa dansan yahay",
+            "micIsOn": "Mic ayaa daaran",
+            "cameraIsOff": "Kamaradu waa dansan tahay",
+            "cameraIsOn": "Kamaradu way shidan tahay",
+            "screenSharingIsOn": "Shaashadda shaashadu waa daaran tahay",
+            "screenSharingIsOff": "La wadaag shaashadda",
+            "joinNow": "Ku biir Wicitaanka"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Jawaab",
             "description": "jawaabta qulqulka"
+        },
+        "Streams\/calls": {
+            "displayType": "Wicitaanada",
+            "description": "qaybta loogu talagalay Streams\/webrtc",
+            "MaxRelationsExceeded": "Wicitaanadii ugu badnaa way dhaafeen"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fayl aan ansax ahayn",
         "errorNoSource": "Ma jiro ilo sawir",
         "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
-        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}",
+        "uploadedImage": "Sawirka la soo geliyay",
+        "imageTitle": "Cinwaanka sawirka"
     },
     "questions": {
         "Questions": "Su&#39;aalaha",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Horaa looga jawaabay",
         "TitlePlaceholder": "Qor su&#39;aashaada",
         "ContentPlaceholder": "Macluumaad kasta oo dheeri ah halkaan dhig si aad uga caawiso dadka inay ka jawaabaan",
-        "ErrorTitle": "Su&#39;aal ayaa loo baahan yahay"
+        "ErrorTitle": "Su&#39;aal ayaa loo baahan yahay",
+        "Placeholder": "Meesha"
     },
     "experience": {
-        "NewExperience": "Khibrad Cusub"
+        "NewExperience": "Khibrad Cusub",
+        "DefineTitle": "Fadlan qeex cinwaan",
+        "Create": "Abuur"
+    },
+    "calls": {
+        "SettingsTitle": "Wicitaanada",
+        "MaxCalls": "Wicitaanada Max",
+        "Update": "Cusboonaysii",
+        "NoCallsYet": "Wicitaanno weli ma jiro",
+        "CallReasonTitle": "Muxuu yahay baaqani?",
+        "WaitingRoom": "Qolka Sugitaanka"
     }
 }

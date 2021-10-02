@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ludzie, których zaprosiłem",
-        "Streams\/invitedMe": "Kto mnie zaprosił"
+        "Streams\/invitedMe": "Kto mnie zaprosił",
+        "AreYouAgree": "Zgadzasz się?",
+        "Yes": "tak",
+        "No": "Nie"
     },
     "interests": {
         "Filter": "Co lubisz?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Wybierz ponownie z kontaktów",
             "inviteSelectedContacts": "Zaproś wybrane kontakty",
             "scannedQR": "{{ClickOrTap}} jeśli kod został zeskanowany",
-            "copyLink": "{{ClickOrTap}}, aby skopiować link do zaproszenia"
+            "copyLink": "{{ClickOrTap}}, aby skopiować link do zaproszenia",
+            "userChooserPlaceholder": "Szukaj według nazwy"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Uczestnik nie ma filmu",
             "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji.",
             "youBeganVideoRecording": "Zacząłeś nagrywać tę konferencję",
-            "youStoppedVideoRecording": "Przestałeś nagrywać tę konferencję"
+            "youStoppedVideoRecording": "Przestałeś nagrywać tę konferencję",
+            "switchingRoom": "Łącznia...",
+            "forceDisconnecting": "Zostaniesz rozłączony w ciągu 5 sekund",
+            "youStartedLive": "Rozpocząłeś transmisję tego połączenia do niestandardowego protokołu RTMP",
+            "youStoppedLive": "Zatrzymałeś transmisję tego połączenia do niestandardowego protokołu RTMP",
+            "sbStartedLiveStreaming": "{{userName}} rozpoczęło transmisję na żywo",
+            "sbStoppedLiveStreaming": "{{userName}} zakończyło się na żywo",
+            "liveStopped": "Wystąpił błąd podczas wysyłania wideo do punktu końcowego"
         },
         "settingsPopup": {
             "webCamera": "Kamerka internetowa",
@@ -205,7 +216,13 @@
             "stopRecording": "Zatrzymaj nagrywanie",
             "recordingInProgress": "Trwa nagrywanie ...",
             "publishOnTimeline": "Publikuj na osi czasu",
-            "publishToGroup": "Opublikuj w grupie"
+            "publishToGroup": "Opublikuj w grupie",
+            "turnOffAudioInput": "Wycisz mikrofon",
+            "micIsTurnedOff": "Mikrofon jest wyłączony",
+            "start": "Początek",
+            "stop": "Zatrzymać",
+            "streamingSettings": "Ustawienia",
+            "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP"
         },
         "participantsPopup": {
             "disconnect": "Rozłączyć się",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
         "streamTitle": "{{1}} połączenie na żywo",
         "preview": {
-            "preamble": "Spotkanie:"
+            "preamble": "Spotkanie:",
+            "Meeting": "Spotkanie",
+            "MeetingEnded": "Spotkanie zakończone"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon jest wyłączony",
+            "micIsOn": "Mikrofon jest włączony",
+            "cameraIsOff": "Aparat jest wyłączony",
+            "cameraIsOn": "Kamera jest włączona",
+            "screenSharingIsOn": "Udostępnianie ekranu jest włączone",
+            "screenSharingIsOff": "Udostępnij ekran",
+            "joinNow": "Dołącz do rozmowy"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Odpowiedź",
             "description": "strumień odpowiedzi"
+        },
+        "Streams\/calls": {
+            "displayType": "Połączenia",
+            "description": "kategoria dla strumieni\/webrtc",
+            "MaxRelationsExceeded": "Przekroczono maksymalną liczbę połączeń"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Niepoprawny plik",
         "errorNoSource": "Brak źródła obrazu",
         "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
-        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}",
+        "uploadedImage": "Przesłany obraz",
+        "imageTitle": "Tytuł obrazu"
     },
     "questions": {
         "Questions": "pytania",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Już odpowiedziałem",
         "TitlePlaceholder": "Wpisz swoje pytanie",
         "ContentPlaceholder": "Umieść tutaj dodatkowe informacje, aby pomóc innym odpowiedzieć",
-        "ErrorTitle": "Wymagane pytanie"
+        "ErrorTitle": "Wymagane pytanie",
+        "Placeholder": "Symbol zastępczy"
     },
     "experience": {
-        "NewExperience": "Nowe doświadczenie"
+        "NewExperience": "Nowe doświadczenie",
+        "DefineTitle": "Podaj tytuł",
+        "Create": "Tworzyć"
+    },
+    "calls": {
+        "SettingsTitle": "Połączenia",
+        "MaxCalls": "Maksymalna liczba połączeń",
+        "Update": "Aktualizacja",
+        "NoCallsYet": "Brak połączeń",
+        "CallReasonTitle": "O co chodzi w tym telefonie?",
+        "WaitingRoom": "Poczekalnia"
     }
 }

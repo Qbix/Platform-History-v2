@@ -117,7 +117,10 @@
         "SetClipStart": "Gosod Clip Start",
         "ClipStart": "Cychwyn Clip",
         "SetClipEnd": "Gosod Diwedd Clip",
-        "ClipEnd": "Diwedd Clip"
+        "ClipEnd": "Diwedd Clip",
+        "StartMoreEnd": "Ni all y sefyllfa gychwyn fod yn fwy na safle diwedd",
+        "EndLessStart": "Ni all y safle terfynol fod yn llai na safle cychwyn",
+        "WhichInvalid": "Dadl &#39;sy&#39;n&#39; annilys"
     },
     "durations": {
         "second": "yn ail",

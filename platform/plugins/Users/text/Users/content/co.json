@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Acepta i Termini di serviziu?",
         "facebookNoEmail": "U vostru contu di Facebook manca un indirizzu email cunfirmatu. Basta à cunnette in a manera nativa.",
-        "picTooltip": "Pudete cambià sta stampa più tardi"
+        "picTooltip": "Pudete cambià sta stampa più tardi",
+        "wallet": {
+            "payload": "Cunnettatevi {{host}} à tempu {{timestamp}}",
+            "alert": {
+                "title": "Reindirizzamentu à Wallet",
+                "content": "Una volta chjusu stu dialogu, sarete purtatu à u vostru portafogliu. Dopu avè firmatu, tornate à sta pagina."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Aghjunghjite una manera di login",
@@ -108,6 +115,18 @@
         "Owner": "Pruprietariu",
         "Admin": "Amministratore",
         "Member": "Membru",
-        "Guest": "Invitatu"
+        "Guest": "Invitatu",
+        "Host": "Òspite"
+    },
+    "analytics": {
+        "Title": "Analitica",
+        "Daily": "Ogni ghjornu",
+        "Weekly": "Semanale",
+        "Monthly": "Mensili",
+        "Application": "Applicazione",
+        "Pages": "Pagine",
+        "Services": "I servizii",
+        "Faq": "Faq",
+        "WeekDays": "Ghjorni di a Settimana"
     }
 }

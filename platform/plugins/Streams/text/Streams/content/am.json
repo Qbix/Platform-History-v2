@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "የጋበዝኳቸው ሰዎች",
-        "Streams\/invitedMe": "ማን እንደጋበዘኝ"
+        "Streams\/invitedMe": "ማን እንደጋበዘኝ",
+        "AreYouAgree": "እርስዎ ይስማማሉ?",
+        "Yes": "አዎ",
+        "No": "አይ"
     },
     "interests": {
         "Filter": "ምን ደስ ይልዎታል?",
@@ -80,7 +83,8 @@
             "byFacebook": "ፌስቡክ",
             "byTwitter": "ትዊተር",
             "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}",
-            "copyLink": "የግብዣ አገናኝን ለመቅዳት {{ClickOrTap}}"
+            "copyLink": "የግብዣ አገናኝን ለመቅዳት {{ClickOrTap}}",
+            "userChooserPlaceholder": "በስም ይፈልጉ"
         },
         "email": {
             "subject": "ሄይ, ይህን አረጋግጡ",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም",
             "openInBrowserAlert": "ጉባኤውን ለመቀላቀል Safari አሳሽ ውስጥ አገናኝን ይክፈቱ።",
             "youBeganVideoRecording": "ይህንን ስብሰባ መቅዳት ጀምረዋል",
-            "youStoppedVideoRecording": "ይህንን ስብሰባ መቅዳት አቁመዋል"
+            "youStoppedVideoRecording": "ይህንን ስብሰባ መቅዳት አቁመዋል",
+            "switchingRoom": "የመቀየሪያ ክፍል ...",
+            "forceDisconnecting": "በ 5 ሰከንዶች ውስጥ ይቋረጣሉ",
+            "youStartedLive": "ይህን ጥሪ ለብጁ RTMP ማሰራጨት ጀመሩ",
+            "youStoppedLive": "ይህን ጥሪ ለብጁ RTMP ማሰራጨት አቁመዋል",
+            "sbStartedLiveStreaming": "{{userName}} በቀጥታ ጀምሯል",
+            "sbStoppedLiveStreaming": "{{userName}} በቀጥታ ጨርሷል",
+            "liveStopped": "ቪዲዮን ወደ መጨረሻው ነጥብ በመላክ ላይ ስህተት ተከስቷል"
         },
         "settingsPopup": {
             "webCamera": "የድር ካሜራ",
@@ -192,7 +203,13 @@
             "stopRecording": "መቅዳት አቁም",
             "recordingInProgress": "ቀረጻ በሂደት ላይ ነው ...",
             "publishOnTimeline": "በጊዜ መስመር ላይ ያትሙ",
-            "publishToGroup": "ወደ ቡድን ያትሙ"
+            "publishToGroup": "ወደ ቡድን ያትሙ",
+            "turnOffAudioInput": "ማይክሮፎን ድምጸ -ከል ያድርጉ",
+            "micIsTurnedOff": "ማይክሮፎን ጠፍቷል",
+            "start": "ጀምር",
+            "stop": "ተወ",
+            "streamingSettings": "ቅንብሮች",
+            "streamToRTMP": "ወደ ብጁ RTMP ይልቀቁ"
         },
         "participantsPopup": {
             "disconnect": "ግንኙነት አቋርጥ",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "ይህንን ጅረት ለመቀላቀል ፈቃድ የልዎትም።",
         "streamTitle": "{{1}} የቀጥታ ጥሪ",
         "preview": {
-            "preamble": "ስብሰባ"
+            "preamble": "ስብሰባ",
+            "Meeting": "ስብሰባ",
+            "MeetingEnded": "ስብሰባ ተጠናቀቀ"
+        },
+        "preparing": {
+            "micIsOff": "ማይክ ጠፍቷል",
+            "micIsOn": "ማይክ በርቷል",
+            "cameraIsOff": "ካሜራ ጠፍቷል",
+            "cameraIsOn": "ካሜራ በርቷል",
+            "screenSharingIsOn": "የማያ ገጽ ማጋራት በርቷል",
+            "screenSharingIsOff": "ማያ ገጽ አጋራ",
+            "joinNow": "ጥሪውን ይቀላቀሉ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "መልስ",
             "description": "መልስ ዥረት"
+        },
+        "Streams\/calls": {
+            "displayType": "ጥሪዎች",
+            "description": "ለዥረቶች\/webrtc ምድብ",
+            "MaxRelationsExceeded": "ከፍተኛ ጥሪዎች ታልፈዋል"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "ልክ ያልሆነ ፋይል",
         "errorNoSource": "የምስል ምንጭ የለም",
         "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
-        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው",
+        "uploadedImage": "የተሰቀለ ምስል",
+        "imageTitle": "የምስል ርዕስ"
     },
     "questions": {
         "Questions": "ጥያቄዎች",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ቀድሞውኑ መልስ ተሰጥቷል",
         "TitlePlaceholder": "ጥያቄዎን ይተይቡ",
         "ContentPlaceholder": "ሰዎች መልስ እንዲሰጡ ለማገዝ ማንኛውንም ተጨማሪ መረጃ እዚህ ያኑሩ",
-        "ErrorTitle": "ጥያቄ ያስፈልጋል"
+        "ErrorTitle": "ጥያቄ ያስፈልጋል",
+        "Placeholder": "ቦታ ያዥ"
     },
     "experience": {
-        "NewExperience": "አዲስ ተሞክሮ"
+        "NewExperience": "አዲስ ተሞክሮ",
+        "DefineTitle": "እባክዎ ርዕስ ይግለጹ",
+        "Create": "ፍጠር"
+    },
+    "calls": {
+        "SettingsTitle": "ጥሪዎች",
+        "MaxCalls": "ማክስ ጥሪዎች",
+        "Update": "አዘምን",
+        "NoCallsYet": "ገና ጥሪዎች የሉም",
+        "CallReasonTitle": "ይህ ጥሪ ምንድነው?",
+        "WaitingRoom": "መቆያ ክፍል"
     }
 }

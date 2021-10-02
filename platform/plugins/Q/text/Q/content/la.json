@@ -113,7 +113,10 @@
         "SetClipStart": "Satus set clip",
         "ClipStart": "Satus clip",
         "SetClipEnd": "Set finem clip",
-        "ClipEnd": "finis clip"
+        "ClipEnd": "finis clip",
+        "StartMoreEnd": "Initium loci non plus quam finis positionis",
+        "EndLessStart": "Finis positio non minus quam principium positio",
+        "WhichInvalid": "Argumentum quod irritum"
     },
     "tabs": {
         "more": "magis",

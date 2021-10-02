@@ -113,7 +113,10 @@
         "SetClipStart": "Mete Clip Start",
         "ClipStart": "Clip Kòmanse",
         "SetClipEnd": "Mete Clip Fen",
-        "ClipEnd": "Clip Fen"
+        "ClipEnd": "Clip Fen",
+        "StartMoreEnd": "Kòmanse pozisyon pa ka plis pase pozisyon fen",
+        "EndLessStart": "Pozisyon fen pa ka mwens pase pozisyon kòmanse",
+        "WhichInvalid": "Agiman &#39;ki&#39; valab"
     },
     "tabs": {
         "more": "plis",

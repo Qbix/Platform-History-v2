@@ -36,8 +36,12 @@
         "WatchClip": "Optjent {{amount}} kredit for at se {{fromStreamTitle}}",
         "PurchaseCredits": "Købskreditter",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kreditter"
-        }
+            "BoughtCredits": "{{amount}} kreditter",
+            "BonusCredits": "{{amount}} kreditter"
+        },
+        "CreatePaidStream": "til oprettelse af {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}}",
+        "BuyBonus": "Hvis du køber {{amount}} credits på én gang, vil det føre til en {{bonus}} credits bonus."
     },
     "history": {
         "Date": "Dato",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Brugte {{amount}} kreditter",
         "BoughtCredits": "Købt {{amount}} credits",
         "InviteAcceptedBy": "Optjent {{amount}} credits",
-        "YouHaveCreditsToStart": "Optjent {{amount}} credits"
+        "YouHaveCreditsToStart": "Optjent {{amount}} credits",
+        "CreatePaidStream": "Brugte {{amount}} credits",
+        "WatchClip": {
+            "+": "Optjent {{amount}} credits",
+            "-": "Brugte {{amount}} credits"
+        },
+        "BonusCredits": "Fik bonus {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Angiv betalingsoplysninger",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Købt {{amount}} credits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Sæt pris",
             "LinkPlaceholder": "indstil yderligere infolink",
             "DescriptionPlaceholder": "Servicebeskrivelse",
-            "SaveService": "Gem service"
+            "SaveService": "Gem service",
+            "SelectRequiredParticipants": "Påkrævede deltagere"
         },
         "ManageServiceTemplates": "Administrer serviceskabeloner",
         "ManageServices": "Administrer tjenester",

@@ -113,7 +113,10 @@
         "SetClipStart": "Agordi Klipan Komencon",
         "ClipStart": "Klipa Komenco",
         "SetClipEnd": "Agordi Klipfinon",
-        "ClipEnd": "Klipa Fino"
+        "ClipEnd": "Klipa Fino",
+        "StartMoreEnd": "Komenca pozicio ne povas esti pli ol fina pozicio",
+        "EndLessStart": "Fina pozicio ne povas esti malpli ol komenca pozicio",
+        "WhichInvalid": "Argumento &#39;kiu&#39; malvalida"
     },
     "tabs": {
         "more": "pli",

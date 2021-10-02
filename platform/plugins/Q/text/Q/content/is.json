@@ -117,7 +117,10 @@
         "SetClipStart": "Stilltu klemmu byrjun",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Stilltu klemmuenda",
-        "ClipEnd": "Klemmuenda"
+        "ClipEnd": "Klemmuenda",
+        "StartMoreEnd": "Upphafsstaða getur ekki verið meira en lokastaða",
+        "EndLessStart": "Lokastaða getur ekki verið minni en upphafsstaða",
+        "WhichInvalid": "Rökin „sem“ eru ógild"
     },
     "durations": {
         "second": "annað",

@@ -117,7 +117,10 @@
         "SetClipStart": "Issettja Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Issettja t-Tmiem tal-Klipp",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Il-pożizzjoni tal-bidu ma tistax tkun iktar mill-pożizzjoni tat-tmiem",
+        "EndLessStart": "Il-pożizzjoni tat-tarf ma tistax tkun inqas mill-pożizzjoni tal-bidu",
+        "WhichInvalid": "Argument &quot;li&quot; invalidu"
     },
     "durations": {
         "second": "it-tieni",

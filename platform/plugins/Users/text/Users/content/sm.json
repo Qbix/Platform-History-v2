@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Talia le Tuutuuga o Auaunaga?",
         "facebookNoEmail": "O lau facebook tala o loʻo misi se tuatusi imeli imeli. Faʻasinoa le ala i le auala masani.",
-        "picTooltip": "E mafai ona e suia lenei ata mulimuli ane"
+        "picTooltip": "E mafai ona e suia lenei ata mulimuli ane",
+        "wallet": {
+            "payload": "Alu i totonu {{host}} i le taimi {{timestamp}}",
+            "alert": {
+                "title": "Faʻatonutonuina i Wallet",
+                "content": "O le taimi lava e te tapunia ai lenei talanoaga, o le a aveina oe i lau atotupe. A uma ona e saini i totonu, toe foi i lenei itulau."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Faʻaopoopo se auala e teu ai",
@@ -108,6 +115,18 @@
         "Owner": "Pule",
         "Admin": "Pule",
         "Member": "Sui",
-        "Guest": "Tagata asiasi"
+        "Guest": "Tagata asiasi",
+        "Host": "Talimalo"
+    },
+    "analytics": {
+        "Title": "Auiliiliga",
+        "Daily": "Aso uma",
+        "Weekly": "Vaiaso",
+        "Monthly": "Masina taʻitasi",
+        "Application": "Talosaga",
+        "Pages": "Itulau",
+        "Services": "Tautua",
+        "Faq": "Faq",
+        "WeekDays": "Vaiaso Aso"
     }
 }

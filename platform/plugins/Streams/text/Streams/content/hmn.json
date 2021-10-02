@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Cov neeg kuv tau caw",
-        "Streams\/invitedMe": "Leej twg caw kuv"
+        "Streams\/invitedMe": "Leej twg caw kuv",
+        "AreYouAgree": "Koj puas pom zoo?",
+        "Yes": "Yog lawm",
+        "No": "Tsis yog"
     },
     "interests": {
         "Filter": "Koj nyiam dab tsi?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} yog tias pom cov cai",
-            "copyLink": "{{ClickOrTap}} theej qhov caw txuas"
+            "copyLink": "{{ClickOrTap}} theej qhov caw txuas",
+            "userChooserPlaceholder": "Tshawb los ntawm lub npe"
         },
         "email": {
             "subject": "Hav, kos qhov no",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Cov tuaj koom tsis muaj daim vis dis aus",
             "openInBrowserAlert": "Qhib qhov txuas hauv Safari browser kom koom nrog lub rooj sib tham.",
             "youBeganVideoRecording": "Koj pib sau cov lus no",
-            "youStoppedVideoRecording": "Koj tsum tsis sau cov lus sib tham no"
+            "youStoppedVideoRecording": "Koj tsum tsis sau cov lus sib tham no",
+            "switchingRoom": "Hloov chaw ...",
+            "forceDisconnecting": "Koj yuav raug kaw tsis pub dhau 5 vib nas this",
+            "youStartedLive": "Koj pib tshaj tawm qhov kev hu xov tooj no rau kev cai RTMP",
+            "youStoppedLive": "Koj tsis tau tshaj tawm qhov kev hu xov tooj no rau kev cai RTMP",
+            "sbStartedLiveStreaming": "{{userName}} pib nyob",
+            "sbStoppedLiveStreaming": "{{userName}} xaus nyob",
+            "liveStopped": "Yuam kev thaum xa video mus rau qhov kawg tshwm sim"
         },
         "settingsPopup": {
             "webCamera": "Lub Koob Yees Duab Web",
@@ -192,7 +203,13 @@
             "stopRecording": "Nres Txias",
             "recordingInProgress": "Cov ntaubntawv pov thawj yog nyob rau hauv kev kawm ...",
             "publishOnTimeline": "Luam tawm rau ncua sijhawm",
-            "publishToGroup": "Tshaj tawm rau pawg"
+            "publishToGroup": "Tshaj tawm rau pawg",
+            "turnOffAudioInput": "Mute lub microphone",
+            "micIsTurnedOff": "Microphone raug tua",
+            "start": "Pib",
+            "stop": "Nres",
+            "streamingSettings": "Chaw",
+            "streamToRTMP": "Kwj rau kev cai RTMP"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog cov kwj deg no.",
         "streamTitle": "{{1}} nyob ntawm kev hu xov tooj",
         "preview": {
-            "preamble": "Lub rooj sib tham:"
+            "preamble": "Lub rooj sib tham:",
+            "Meeting": "Lub rooj sib tham",
+            "MeetingEnded": "Lub rooj sib tham xaus"
+        },
+        "preparing": {
+            "micIsOff": "Mic tawm",
+            "micIsOn": "Mic nyob",
+            "cameraIsOff": "Lub koob yees duab tawm",
+            "cameraIsOn": "Lub koob yees duab nyob ntawm",
+            "screenSharingIsOn": "Screensharing yog nyob",
+            "screenSharingIsOff": "Qhia tawm screen",
+            "joinNow": "Koom Nrog Hu"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Teb",
             "description": "teb kwj"
+        },
+        "Streams\/calls": {
+            "displayType": "Hu",
+            "description": "qeb rau Streams\/webrtc",
+            "MaxRelationsExceeded": "Max hu ntau tshaj"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Ntaub Ntawv Tsis Txaus",
         "errorNoSource": "Tsis muaj cov duab chaw",
         "uploadLimit": "Max cov ntaub ntawv loj: {{size}}",
-        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}"
+        "errorFileSize": "Thov txim, tab sis ntawv loj dhau.<br> Max cov ntawv loj yog {{size}}",
+        "uploadedImage": "Duab tso tawm",
+        "imageTitle": "Lub npe duab"
     },
     "questions": {
         "Questions": "Cov lus nug",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Twb teb tau",
         "TitlePlaceholder": "Ntaus koj lo lus nug",
         "ContentPlaceholder": "Tso cov ntaub ntawv ntxiv ntawm no los pab tib neeg teb",
-        "ErrorTitle": "Yuav tsum muaj lus nug"
+        "ErrorTitle": "Yuav tsum muaj lus nug",
+        "Placeholder": "Qhov chaw"
     },
     "experience": {
-        "NewExperience": "Kev Paub Tshiab"
+        "NewExperience": "Kev Paub Tshiab",
+        "DefineTitle": "Thov txhais lub npe",
+        "Create": "Tsim"
+    },
+    "calls": {
+        "SettingsTitle": "Hu",
+        "MaxCalls": "Max hu",
+        "Update": "Hloov tshiab",
+        "NoCallsYet": "Tsis tau hu dua",
+        "CallReasonTitle": "Qhov kev hu no yog dab tsi?",
+        "WaitingRoom": "Chav Tos"
     }
 }

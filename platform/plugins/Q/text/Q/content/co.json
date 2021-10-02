@@ -113,7 +113,10 @@
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip Fine"
+        "ClipEnd": "Clip Fine",
+        "StartMoreEnd": "A pusizione iniziale ùn pò esse più cà a pusizione finale",
+        "EndLessStart": "A pusizione finale ùn pò esse menu di a pusizione iniziale",
+        "WhichInvalid": "Argumentu &quot;chì&quot; invalidu"
     },
     "tabs": {
         "more": "più",

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Persones que he convidat",
-        "Streams\/invitedMe": "Qui em va convidar"
+        "Streams\/invitedMe": "Qui em va convidar",
+        "AreYouAgree": "Estàs d&#39;acord?",
+        "Yes": "Sí",
+        "No": "No"
     },
     "interests": {
         "Filter": "Què us agrada?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Trieu de nou els contactes",
             "inviteSelectedContacts": "Convida a contactes seleccionats",
             "scannedQR": "{{ClickOrTap}} si es va escanejar el codi",
-            "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç de la invitació"
+            "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç de la invitació",
+            "userChooserPlaceholder": "Cerca per nom"
         },
         "email": {
             "subject": "Hola, comprova-ho",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "El participant no té cap vídeo",
             "openInBrowserAlert": "Obrir un enllaç al navegador Safari per unir-se a la conferència.",
             "youBeganVideoRecording": "Vau començar a enregistrar aquesta conferència",
-            "youStoppedVideoRecording": "Heu deixat de gravar aquesta conferència"
+            "youStoppedVideoRecording": "Heu deixat de gravar aquesta conferència",
+            "switchingRoom": "Canvi de vestuari ...",
+            "forceDisconnecting": "Es desconnectarà en un termini de 5 segons",
+            "youStartedLive": "Has començat a emetre aquesta trucada a RTMP personalitzat",
+            "youStoppedLive": "Heu deixat d&#39;emetre aquesta trucada a RTMP personalitzat",
+            "sbStartedLiveStreaming": "{{userName}} va començar en directe",
+            "sbStoppedLiveStreaming": "{{userName}} ha finalitzat en directe",
+            "liveStopped": "S&#39;ha produït un error en enviar el vídeo al punt final"
         },
         "settingsPopup": {
             "webCamera": "Càmera web",
@@ -205,7 +216,13 @@
             "stopRecording": "Deixa de gravar",
             "recordingInProgress": "La gravació està en curs ...",
             "publishOnTimeline": "Publica-la a la línia de temps",
-            "publishToGroup": "Publica per agrupar"
+            "publishToGroup": "Publica per agrupar",
+            "turnOffAudioInput": "Silencia el micròfon",
+            "micIsTurnedOff": "El micròfon està apagat",
+            "start": "Començar",
+            "stop": "Atura",
+            "streamingSettings": "Configuració",
+            "streamToRTMP": "Transmet a RTMP personalitzat"
         },
         "participantsPopup": {
             "disconnect": "Desconnecta",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
         "streamTitle": "{{1}} trucada en directe",
         "preview": {
-            "preamble": "Reunió:"
+            "preamble": "Reunió:",
+            "Meeting": "Reunió",
+            "MeetingEnded": "La reunió va acabar"
+        },
+        "preparing": {
+            "micIsOff": "El micròfon està apagat",
+            "micIsOn": "El micròfon està activat",
+            "cameraIsOff": "La càmera està apagada",
+            "cameraIsOn": "La càmera està engegada",
+            "screenSharingIsOn": "La pantalla compartida està activada",
+            "screenSharingIsOff": "Compartir pantalla",
+            "joinNow": "Uniu-vos a la trucada"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Resposta",
             "description": "corrent de respostes"
+        },
+        "Streams\/calls": {
+            "displayType": "Trucades",
+            "description": "categoria per a Streams \/ webrtc",
+            "MaxRelationsExceeded": "S&#39;han superat les trucades màximes"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fitxer no vàlid",
         "errorNoSource": "No hi ha cap font d’imatge",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
-        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}",
+        "uploadedImage": "Imatge carregada",
+        "imageTitle": "Títol de la imatge"
     },
     "questions": {
         "Questions": "Preguntes",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Ja contestat",
         "TitlePlaceholder": "Escriviu la vostra pregunta",
         "ContentPlaceholder": "Poseu informació addicional aquí per ajudar la gent a respondre",
-        "ErrorTitle": "Pregunta obligatòria"
+        "ErrorTitle": "Pregunta obligatòria",
+        "Placeholder": "Posseïdor del lloc"
     },
     "experience": {
-        "NewExperience": "Nova experiència"
+        "NewExperience": "Nova experiència",
+        "DefineTitle": "Definiu un títol",
+        "Create": "Crear"
+    },
+    "calls": {
+        "SettingsTitle": "Trucades",
+        "MaxCalls": "Trucades màximes",
+        "Update": "Actualització",
+        "NoCallsYet": "Encara no hi ha trucades",
+        "CallReasonTitle": "De què tracta aquesta trucada?",
+        "WaitingRoom": "Sala d&#39;espera"
     }
 }

@@ -36,8 +36,12 @@
         "WatchClip": "{{1000} watch చూడటానికి {{amount}} క్రెడిట్లను సంపాదించింది",
         "PurchaseCredits": "క్రెడిట్లను కొనండి",
         "forMessages": {
-            "BoughtCredits": "{{amount}} క్రెడిట్స్"
-        }
+            "BoughtCredits": "{{amount}} క్రెడిట్స్",
+            "BonusCredits": "{{amount}} క్రెడిట్‌లు"
+        },
+        "CreatePaidStream": "సృష్టించడానికి {{toStreamName}}",
+        "BonusCredits": "బోనస్ {{amount}} క్రెడిట్‌లు",
+        "BuyBonus": "ఒకేసారి {{amount}} క్రెడిట్‌లను కొనుగోలు చేస్తే, అది {{bonus}} క్రెడిట్‌ల బోనస్‌కి దారి తీస్తుంది."
     },
     "history": {
         "Date": "తేదీ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} క్రెడిట్‌లను ఖర్చు చేశారు",
         "BoughtCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసింది",
         "InviteAcceptedBy": "{{amount}} క్రెడిట్‌లను సంపాదించింది",
-        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను సంపాదించింది"
+        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను సంపాదించింది",
+        "CreatePaidStream": "{{amount}} క్రెడిట్‌లను ఖర్చు చేసింది",
+        "WatchClip": {
+            "+": "{{amount}} క్రెడిట్‌లను సంపాదించారు",
+            "-": "{{amount}} క్రెడిట్‌లను ఖర్చు చేసింది"
+        },
+        "BonusCredits": "బోనస్ {{amount}} క్రెడిట్‌లు పొందారు"
     },
     "subscriptions": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసింది"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "బోనస్ {{amount}} క్రెడిట్‌లు"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "ధరను నిర్ణయించండి",
             "LinkPlaceholder": "అదనపు సమాచార లింక్‌ను సెట్ చేయండి",
             "DescriptionPlaceholder": "సేవా వివరణ",
-            "SaveService": "సేవను సేవ్ చేయండి"
+            "SaveService": "సేవను సేవ్ చేయండి",
+            "SelectRequiredParticipants": "అవసరమైన పాల్గొనేవారు"
         },
         "ManageServiceTemplates": "సేవా టెంప్లేట్‌లను నిర్వహించండి",
         "ManageServices": "సేవలను నిర్వహించండి",

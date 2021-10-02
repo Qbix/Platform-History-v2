@@ -117,7 +117,10 @@
         "SetClipStart": "클립 시작 설정",
         "ClipStart": "클립 시작",
         "SetClipEnd": "클립 끝 설정",
-        "ClipEnd": "클립 끝"
+        "ClipEnd": "클립 끝",
+        "StartMoreEnd": "시작 위치는 끝 위치보다 클 수 없습니다.",
+        "EndLessStart": "종료 위치는 시작 위치보다 작을 수 없습니다.",
+        "WhichInvalid": "&#39;어떤&#39; 인수가 유효하지 않습니다."
     },
     "durations": {
         "second": "둘째",

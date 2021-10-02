@@ -113,7 +113,10 @@
         "SetClipStart": "Destpêka Klîbê saz bikin",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Dawiya Klîpê saz bikin",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Helwesta destpêkî ji pozîsyona dawiyê zêdetir nabe",
+        "EndLessStart": "Helwesta dawîn nikare ji pozîsyona destpêkê kêmtir be",
+        "WhichInvalid": "Argumenta &#39;kîjan&#39; nederbasdar e"
     },
     "tabs": {
         "more": "zêde",

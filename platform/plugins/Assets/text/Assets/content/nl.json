@@ -36,8 +36,12 @@
         "WatchClip": "{{amount}} credits verdiend voor het kijken naar {{fromStreamTitle}}",
         "PurchaseCredits": "Koop tegoeden",
         "forMessages": {
-            "BoughtCredits": "{{amount}} tegoeden"
-        }
+            "BoughtCredits": "{{amount}} tegoeden",
+            "BonusCredits": "{{amount}} tegoeden"
+        },
+        "CreatePaidStream": "voor het maken van {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} tegoeden",
+        "BuyBonus": "Als u {{amount}} credits in één keer koopt, krijgt u een bonus van {{bonus}} credits."
     },
     "history": {
         "Date": "Datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} credits uitgegeven",
         "BoughtCredits": "{{amount}} credits gekocht",
         "InviteAcceptedBy": "{{amount}} credits verdiend",
-        "YouHaveCreditsToStart": "{{amount}} credits verdiend"
+        "YouHaveCreditsToStart": "{{amount}} credits verdiend",
+        "CreatePaidStream": "{{amount}} tegoeden besteed",
+        "WatchClip": {
+            "+": "{{amount}} credits verdiend",
+            "-": "{{amount}} tegoeden besteed"
+        },
+        "BonusCredits": "Heb bonus {{amount}} tegoeden"
     },
     "subscriptions": {
         "infoTitle": "Stel betalingsinformatie in",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} credits gekocht"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} tegoeden"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Prijs instellen",
             "LinkPlaceholder": "stel extra info link in",
             "DescriptionPlaceholder": "Dienstbeschrijving",
-            "SaveService": "Bespaar service"
+            "SaveService": "Bespaar service",
+            "SelectRequiredParticipants": "Vereiste deelnemers"
         },
         "ManageServiceTemplates": "Servicesjablonen beheren",
         "ManageServices": "Services beheren",

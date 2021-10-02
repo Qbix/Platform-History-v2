@@ -117,7 +117,10 @@
         "SetClipStart": "Ustaw początek klipu",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Ustaw koniec obcinania",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Pozycja początkowa nie może być większa niż pozycja końcowa",
+        "EndLessStart": "Pozycja końcowa nie może być mniejsza niż pozycja początkowa",
+        "WhichInvalid": "Argument „który” jest nieprawidłowy"
     },
     "durations": {
         "second": "druga",

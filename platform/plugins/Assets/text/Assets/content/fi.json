@@ -36,8 +36,12 @@
         "WatchClip": "Ansaitsi {{amount}} hyvitystä katsellessasi {{fromStreamTitle}}",
         "PurchaseCredits": "Osta hyvityksiä",
         "forMessages": {
-            "BoughtCredits": "{{amount}} hyvitystä"
-        }
+            "BoughtCredits": "{{amount}} hyvitystä",
+            "BonusCredits": "{{amount}} krediittiä"
+        },
+        "CreatePaidStream": "luomiseen {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} hyvitystä",
+        "BuyBonus": "Jos ostat {{amount}} krediittiä kerralla, saat {{bonus}} krediittibonuksen."
     },
     "history": {
         "Date": "Treffi",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Käytetty {{amount}} hyvitystä",
         "BoughtCredits": "Osti {{amount}} opintopistettä",
         "InviteAcceptedBy": "Ansainnut {{amount}} hyvitystä",
-        "YouHaveCreditsToStart": "Ansainnut {{amount}} hyvitystä"
+        "YouHaveCreditsToStart": "Ansainnut {{amount}} hyvitystä",
+        "CreatePaidStream": "Kulutti {{amount}} luottoa",
+        "WatchClip": {
+            "+": "Ansaittu {{amount}} krediittiä",
+            "-": "Kulutti {{amount}} luottoa"
+        },
+        "BonusCredits": "Sait bonus {{amount}} krediittiä"
     },
     "subscriptions": {
         "infoTitle": "Aseta maksutiedot",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Osti {{amount}} opintopistettä"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} hyvitystä"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Aseta hinta",
             "LinkPlaceholder": "aseta lisätietolinkki",
             "DescriptionPlaceholder": "Palvelun kuvaus",
-            "SaveService": "Tallenna palvelu"
+            "SaveService": "Tallenna palvelu",
+            "SelectRequiredParticipants": "Pakolliset osallistujat"
         },
         "ManageServiceTemplates": "Hallitse palvelumalleja",
         "ManageServices": "Hallitse palveluita",

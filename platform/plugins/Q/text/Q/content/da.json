@@ -117,7 +117,10 @@
         "SetClipStart": "Indstil Clip Start",
         "ClipStart": "Klip Start",
         "SetClipEnd": "Indstil klipende",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Startposition kan ikke være mere end slutposition",
+        "EndLessStart": "Slutposition kan ikke være mindre end startposition",
+        "WhichInvalid": "Argumentet &#39;hvilket&#39; er ugyldigt"
     },
     "durations": {
         "second": "anden",

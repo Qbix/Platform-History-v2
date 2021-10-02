@@ -36,8 +36,12 @@
         "WatchClip": "Alipewa sifa za {{amount}} za kutazama {{fromStreamTitle}}",
         "PurchaseCredits": "Salio la Ununuzi",
         "forMessages": {
-            "BoughtCredits": "Salio za {{amount}}"
-        }
+            "BoughtCredits": "Salio za {{amount}}",
+            "BonusCredits": "Salio za {{amount}}"
+        },
+        "CreatePaidStream": "kwa kuunda {{toStreamName}}",
+        "BonusCredits": "Salio la ziada la {{amount}}",
+        "BuyBonus": "Kununua salio la {{amount}} mara moja, kutasababisha bonasi ya {{bonus}}."
     },
     "history": {
         "Date": "Tarehe",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Alitumia mikopo {{amount}}",
         "BoughtCredits": "Imenunua mikopo {{amount}}",
         "InviteAcceptedBy": "Amepata mikopo {{amount}}",
-        "YouHaveCreditsToStart": "Amepata mikopo {{amount}}"
+        "YouHaveCreditsToStart": "Amepata mikopo {{amount}}",
+        "CreatePaidStream": "Alitumia salio {{amount}}",
+        "WatchClip": {
+            "+": "Salio zilizopatikana {{amount}}",
+            "-": "Alitumia salio {{amount}}"
+        },
+        "BonusCredits": "Una salio za {{amount}} za ziada"
     },
     "subscriptions": {
         "infoTitle": "Weka Habari ya Malipo",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Imenunua mikopo {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Salio la ziada la {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Bei ya bei",
             "LinkPlaceholder": "weka kiunga cha habari cha ziada",
             "DescriptionPlaceholder": "Maelezo ya huduma",
-            "SaveService": "Okoa Huduma"
+            "SaveService": "Okoa Huduma",
+            "SelectRequiredParticipants": "Washiriki wanaohitajika"
         },
         "ManageServiceTemplates": "Simamia templeti za Huduma",
         "ManageServices": "Dhibiti Huduma",
