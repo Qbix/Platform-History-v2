@@ -28,7 +28,7 @@
  * @param {Object} [TwilioInstance] if mode is 'twilio', it is instance of Twilio Video library
  * @return {Object} instance of WebRTC chat
  */
-window.WebRTCconferenceLib = function app(options){
+window.WebRTCRoomClient = function app(options){
     var app = {};
     var defaultOptions = {
         mode: 'node',
@@ -50,7 +50,8 @@ window.WebRTCconferenceLib = function app(options){
         onlyOneScreenSharingAllowed: null,
         liveStreaming: {},
         TwilioInstance: null,
-        useCordovaPlugins: false
+        useCordovaPlugins: false,
+        socket: null
     };
 
     if(typeof options === 'object') {
@@ -95,7 +96,7 @@ window.WebRTCconferenceLib = function app(options){
 
     //node.js vars
     var socket;
-    app.socketConnection = function() { return localParticipant; }
+    app.socketConnection = function() { return socket; }
 
 
     var _isMobile;
@@ -112,7 +113,7 @@ window.WebRTCconferenceLib = function app(options){
             }/*,
              {
 				 'url': 'turn:194.44.93.224:3478',
-				 'credential': 'qbixpass123',
+				 'credential': 'qbixpass',
 				 'username': 'qbix'
 			 }*/
         ],
@@ -148,6 +149,7 @@ window.WebRTCconferenceLib = function app(options){
         var testPeerConnection = new RTCPeerConnection(pc_config);
     }
 
+    console.log('pc_config', pc_config);
     if(ua.indexOf('Android')!=-1||ua.indexOf('Windows Phone')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPad')!=-1||ua.indexOf('iPod')!=-1) {
         _isMobile = true;
         if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) {
@@ -5391,10 +5393,11 @@ window.WebRTCconferenceLib = function app(options){
                     }
 
                     _mediaRecorder.addEventListener('dataavailable', function(e) {
+                        console.log('dataavailable',e);
                         trigerDataListeners(e.data);
                     });
 
-                    _mediaRecorder.start(100); // Start recording, and dump data every second
+                    _mediaRecorder.start(1000); // Start recording, and dump data every second
                 }
 
             }
@@ -11815,55 +11818,71 @@ window.WebRTCconferenceLib = function app(options){
             if(socket.connected && app.state == 'connecting') initOrConnectWithNodeJs(callback);
         }
 
-        var connect = function () {
-            log('initWithNodeJs: connect', window.WebRTCSocket != null ? false : true);
+        var connect = function (io, old) {
+            log('initWithNodeJs: connect');
 
             //let io = io('/webrtc');
             var secure = options.nodeServer.indexOf('https://') == 0;
-            socket = io.connect(options.nodeServer + '/webrtc', {
-                transports: ['websocket'],
-                // path: options.roomName,
-                'force new connection': window.WebRTCSocket != null ? false : true,
-                /* channel:'webrtc',
-                 publish_key:'webrtc_test',
-                 subscribe:'webrtc_test',*/
-                secure:secure,
-                reconnection: true,
-                reconnectionDelay: 1000,
-                reconnectionDelayMax: 5000,
-                reconnectionAttempts: 5
-            });
-            socket.on('connect', onConnect);
-            socket.on('connect_error', function(e) {
-                log('initWithNodeJs: connect_error');
-                app.event.dispatch('connectError');
-                console.log('Connection failed');
-                console.error(e);
-            });
+            if(old) {
+                log('initWithNodeJs: connect old', io.connect);
 
-            socket.on('reconnect_failed', function(e) {
-                log('initWithNodeJs: reconnect_failed');
-                console.log(e)
-                app.event.dispatch('reconnectError');
-            });
-            socket.on('reconnect_attempt', function(e) {
-                log('initWithNodeJs: reconnect_attempt');
-                console.log('reconnect_attempt', e)
-                app.state = 'reconnecting';
-                app.event.dispatch('reconnectAttempt', e);
-            });
+                socket = io.connect('/webrtc', options.nodeServer, function (io) {
+                    log('initWithNodeJs: connect socket', io);
+
+                    socket = io.socket;
+                    socket.on('connect', onConnect);
+                    onConnect();
+                    socket.on('connect_error', function(e) {
+                        log('initWithNodeJs: connect_error');
+                        app.event.dispatch('connectError');
+                        console.log('Connection failed');
+                        console.error(e);
+                    });
+
+                    socket.on('reconnect_failed', function(e) {
+                        log('initWithNodeJs: reconnect_failed');
+                        console.log(e)
+                        app.event.dispatch('reconnectError');
+                    });
+                    socket.on('reconnect_attempt', function(e) {
+                        log('initWithNodeJs: reconnect_attempt');
+                        console.log('reconnect_attempt', e)
+                        app.state = 'reconnecting';
+                        app.event.dispatch('reconnectAttempt', e);
+                    });
+                }, function () {
+                    log('initWithNodeJs: connect old callback 2');
+
+                });
+
+            } else {
+                log('initWithNodeJs: connect new');
+
+                socket = io.connect(options.nodeServer + '/webrtc', {
+                    transports: ['websocket'],
+                    // path: options.roomName,
+                    'force new connection': window.WebRTCSocket != null ? false : true,
+                    /* channel:'webrtc',
+                     publish_key:'webrtc_test',
+                     subscribe:'webrtc_test',*/
+                    secure:secure,
+                    reconnection: true,
+                    reconnectionDelay: 1000,
+                    reconnectionDelayMax: 5000,
+                    reconnectionAttempts: 5
+                });
+            }
+
         }
 
         log('initWithNodeJs: find socket.io');
 
-        if(typeof options.nodeServer == 'object') {
-            socket = options.nodeServer;
-            onConnect();
-            return;
-        }
-
-        if(findScript('socket.io.js') && typeof io != 'undefined') {
-            connect();
+        if(typeof options.socket != null) {
+            log('initWithNodeJs: use options.socket');
+            connect(options.socket, true);
+        } else if(findScript('socket.io.js') && typeof io != 'undefined') {
+            log('initWithNodeJs: use existing');
+            connect(io);
         } else {
             log('initWithNodeJs: add socket.io');
 
@@ -11878,7 +11897,7 @@ window.WebRTCconferenceLib = function app(options){
                     switch( e.target.status) {
                         case 200:
                             eval.apply( window, [script] );
-                            connect();
+                            connect(io);
                             break;
                         default:
                             console.error("ERROR: script not loaded: ", url);

@@ -103,7 +103,7 @@ function Streams_stream_put($params) {
 	// Process any file that was posted
 	if (!empty($req['file']) and is_array($req['file'])) {
 		$file = $req['file'];
-		$file["name"] = $req["title"];
+		$file["name"] = Q::ifset($file, "name", Q::ifset($req, "title", null));
 		unset($req['file']);
 
 		if (empty($file['path'])) {
