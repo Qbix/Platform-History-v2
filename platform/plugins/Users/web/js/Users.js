@@ -472,9 +472,7 @@
 									provider.request({
 										method: 'wallet_switchEthereumChain',
 										params: [{chainId: supportedNetwork.chainId}]
-									}).then(function () {
-										_authenticate();
-									}).catch(function (e) {
+									}).then(_authenticate).catch(function (e) {
 										if (e.code !== 4902) {
 											return;
 										}
@@ -493,7 +491,7 @@
 												rpcUrls: supportedNetwork.rpcUrls,
 												blockExplorerUrls: supportedNetwork.blockExplorerUrls
 											}]
-										}).then(_proceed).catch((error) => {
+										}).then(_authenticate).catch((error) => {
 											console.log(error)
 										});
 									});
