@@ -15,7 +15,7 @@
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {string} [options.className] Additional class name to add to tool element
  *  @param {object} [options.metrics] Params for State.Metrics (publisherId and streamName required)
- *  @param {string} [options.poster] URL of video poster
+ *  @param {string} [options.image] URL of image which will show as illustration before play.
  *  @param {object} [options.clips] Contains options for "clips" mode.
  *  @param {function} [options.clips.handler] The main option which return clip url for some timestamp. If it null - means mode is not "clips"
  *  @param {integer} [options.clips.duration] Clips duration in seconds. If defined the clips will play this fixed duration. If null clips will play till the end.
@@ -236,7 +236,7 @@ Q.Tool.define("Q/video", function (options) {
 	throttle: 10,
 	currentPosition: 0,
 	className: null,
-	poster: null,
+	image: null,
 	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
@@ -423,7 +423,7 @@ Q.Tool.define("Q/video", function (options) {
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
 			loop: state.loop ? 'loop' : '',
-			poster: state.poster ? 'poster="' + Q.url(state.poster) + '"' : '',
+			poster: state.image ? 'poster="' + Q.url(state.image) + '"' : '',
 			timeOut: state.adsTimeOut
 		}, function (err, html) {
 			tool.element.innerHTML = html;
