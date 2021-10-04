@@ -470,30 +470,20 @@
 								web3Modal.connect().then(function () {
 									Users.Wallet.switchNetworkOccuring = true;
 									provider.request({
-										method: 'wallet_switchEthereumChain',
-										params: [{chainId: supportedNetwork.chainId}]
-									}).then(_authenticate).catch(function (e) {
-										if (e.code !== 4902) {
-											return;
-										}
-										console.warn('Users.authenticate.wallet: chain '
-											+ supportedNetwork.chainId + ' is not added');
-										provider.request({
-											method: 'wallet_addEthereumChain',
-											params: [{
-												chainId: supportedNetwork.chainId,
-												chainName: supportedNetwork.name,
-												nativeCurrency: {
-													name: supportedNetwork.currency.name,
-													symbol: supportedNetwork.currency.symbol,
-													decimals: supportedNetwork.currency.decimals
-												},
-												rpcUrls: supportedNetwork.rpcUrls,
-												blockExplorerUrls: supportedNetwork.blockExplorerUrls
-											}]
-										}).then(_authenticate).catch((error) => {
-											console.log(error)
-										});
+										method: 'wallet_addEthereumChain',
+										params: [{
+											chainId: supportedNetwork.chainId,
+											chainName: supportedNetwork.name,
+											nativeCurrency: {
+												name: supportedNetwork.currency.name,
+												symbol: supportedNetwork.currency.symbol,
+												decimals: supportedNetwork.currency.decimals
+											},
+											rpcUrls: supportedNetwork.rpcUrls,
+											blockExplorerUrls: supportedNetwork.blockExplorerUrls
+										}]
+									}).then(_authenticate).catch((error) => {
+										console.log(error)
 									});
 								}).catch(_cancel);
 							}
