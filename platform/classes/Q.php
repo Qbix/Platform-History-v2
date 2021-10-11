@@ -637,6 +637,13 @@ class Q
 				'before', false, $filename
 			);
 
+			if (!empty(Q::$autoloadRequires[$className]['PHP'])) {
+				$version = Q::$autoloadRequires[$className]['PHP'];
+				if (version_compare(PHP_VERSION, $$version, '<')) {
+					throw new Q_Exception_MissingPHPVersion(compact('version'));
+				}
+			}
+
 			// Now we can include the file
 			try {
 				self::includeFile($filename);
@@ -2091,6 +2098,14 @@ class Q
 	 * @static
 	 */
 	public static $bootstrapped = false;
+
+	/**
+	 * This is an array of [$className]['PHP'] for requiring certain PHP version.
+	 * @property $autoloadRequires
+	 * @type array
+	 * @static
+	 */
+	public static $autoloadRequires = false;
 
 	/**
 	 * @property $toolName

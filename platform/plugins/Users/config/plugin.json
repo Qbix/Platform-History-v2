@@ -17,6 +17,13 @@
 			"Q/session/save": ["Users/before/Q_session_save"],
 			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"]
 		},
+		"autoload": {
+			"requires": {
+				"Users_Web3": {
+					"PHP": 7.3
+				}
+			}
+		},
 		"handlersAfterEvent": {
 			"Q/session/write": ["Users/after/Q_session_write"],
 			"Q/session/destroy": ["Users/after/Q_session_destroy"],

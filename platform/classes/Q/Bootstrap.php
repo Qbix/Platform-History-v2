@@ -315,6 +315,8 @@ class Q_Bootstrap
 		}
 		set_time_limit(Q_Config::get('Q', 'internal', 'phpTimeout', 300));
 		self::setDefaultTimezone();
+
+		Q::$autoloadRequires = Q_Config::get('Q', 'autoload', 'requires', array());
 		
 		Q::event('Q/configure', compact(
 			'app_tree', 'config_files', 'script_files'

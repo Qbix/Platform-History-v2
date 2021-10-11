@@ -130,7 +130,7 @@ class Q_Exception extends Exception
 	 * @param {string} $message The description of the error. Will be eval()-ed before rendering,
 	 *  so it can include references to parameters, such as $my_param.
 	 * @param {number|string} $header Any HTTP response code to set, such as 404,
-	 *  or a string header to set with ehader()
+	 *  or a string header to set with header()
 	 * @param {array} [$rethrowDestClasses=array()] The name of the class that should handle this exception,
 	 * @param {string} [$baseClassName=null] Here you can pass the name of different base class than Q_Exception
 	 *  should it be thrown. Almost all catch() blocks in your code should use
