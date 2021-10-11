@@ -639,7 +639,7 @@ class Q
 
 			if (!empty(Q::$autoloadRequires[$className]['PHP'])) {
 				$version = Q::$autoloadRequires[$className]['PHP'];
-				if (version_compare(PHP_VERSION, $$version, '<')) {
+				if (version_compare(PHP_VERSION, $version, '<')) {
 					throw new Q_Exception_MissingPHPVersion(compact('version'));
 				}
 			}
