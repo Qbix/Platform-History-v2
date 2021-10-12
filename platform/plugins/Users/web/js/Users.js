@@ -442,12 +442,12 @@
 							};
 
 							// check if network is connected
-							var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
-							if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
+							//var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
+							//if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
 								_authenticate();
-							} else {
-								Users.Wallet.setNetwork(supportedNetwork, _authenticate, _cancel);
-							}
+							//} else {
+							//	Users.Wallet.setNetwork(supportedNetwork, _authenticate, _cancel);
+							//}
 						}
 					}).catch(_cancel);
 				}).catch(_cancel);
