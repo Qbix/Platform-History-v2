@@ -3814,10 +3814,9 @@
 		 * @param {Function} onError
 		 */
 		setNetwork: function (info, onSuccess, onError) {
-			var provider = Users.Wallet.provider;
 			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
 
-			web3Modal.connect().then(function () {
+			web3Modal.connect().then(function (provider) {
 				Users.Wallet.switchNetworkOccuring = true;
 				provider.request({
 					method: 'wallet_addEthereumChain',
