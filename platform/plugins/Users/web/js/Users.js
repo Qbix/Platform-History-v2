@@ -3831,7 +3831,9 @@
 						rpcUrls: info.rpcUrls,
 						blockExplorerUrls: info.blockExplorerUrls
 					}]
-				}).then(onSuccess).catch((error) => {
+				}).then(function () {
+					provider.once("networkChanged", onSuccess);
+				}).catch((error) => {
 					console.log(error)
 				});
 			}).catch(onError);
