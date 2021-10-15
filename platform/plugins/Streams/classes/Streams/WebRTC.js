@@ -264,6 +264,7 @@ WebRTC.listen = function () {
             var format = mp4IsSupported ? 'mov,mp4,m4a,3gp,3g2,mj2' : 'webm'; //mov,mp4,m4a,3gp,3g2,mj2
             if(_debug) console.log('m264BrowserSupport ' +  m264BrowserSupport);
             if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
+            if(_debug) console.log('usersInfo.supportedVideoMimeTypes ', usersInfo.supportedVideoMimeTypes);
             var outputEndpoints = '';
             for(let u in rtmpUrls) {
                 if(u == rtmpUrls.length - 1) {
@@ -302,7 +303,7 @@ WebRTC.listen = function () {
                     // so that we don't waste any CPU and quality with unnecessary transcoding.
                     // If the browser doesn't support H.264, set the video codec to 'libx264'
                     // or similar to transcode it to H.264 here on the server.
-                    '-vcodec', encoder,
+                    '-vcodec', 'libx264',
                     '-preset', 'veryfast', '-b:v', '1984k', '-maxrate', '1984k', '-bufsize', '3968k',
                     //'-vf', 'format=yuv420p',
 

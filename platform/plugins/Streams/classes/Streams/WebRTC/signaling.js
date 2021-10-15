@@ -6,7 +6,7 @@ module.exports = function(socket,io) {
     var webrtcNamespace = io.of(nspName);
     var roomPublisherId;
     var roomId;
-    socket.on('Streams/webrtc/joined', function (identity) {
+    socket.on('Streams/webrtc/joined', function (identity, cb) {
         if(_debug) console.log('Got message: joined ', identity, nspName + '#' + socket.client.id);
         socket.username = identity.username;
         socket.userPlatformId = identity.username.split('\t')[0];
@@ -26,18 +26,6 @@ module.exports = function(socket,io) {
             }
         }
 
-        io.of('/webrtc').in(roomId).clients(function (error, clients) {
-            if(_debug) console.log(clients);
-            var participantsList = [];
-            for (var i in clients) {
-                console.log('Streams/webrtc/roomParticipants', clients[i])
-                if (nspName + '#' + socket.client.id != clients[i]) {
-                    participantsList.push({sid: clients[i]});
-                }
-            }
-            webrtcNamespace.to(nspName + '#' + socket.client.id).emit('Streams/webrtc/roomParticipants', participantsList);
-        });
-
         socket.join(roomId, function () {
             if(_debug) console.log(nspName + '#' + socket.client.id + ' now in rooms: ', socket.rooms);
             io.of('/webrtc').in(roomId).clients(function (error, clients) {
@@ -54,6 +42,21 @@ module.exports = function(socket,io) {
             info:identity.info,
             fromSid:identity.sid
         });
+
+        io.of('/webrtc').in(roomId).clients(function (error, clients) {
+            if(_debug) console.log(clients);
+            var participantsList = [];
+            for (var i in clients) {
+                console.log('Streams/webrtc/roomParticipants', clients[i])
+                if (nspName + '#' + socket.client.id != clients[i]) {
+                    participantsList.push({sid: clients[i]});
+                }
+            }
+            webrtcNamespace.to(nspName + '#' + socket.client.id).emit('Streams/webrtc/roomParticipants', participantsList);
+            if(cb != null) cb(JSON.stringify(participantsList));
+
+        });
+
     });
 
     socket.on('Streams/webrtc/confirmOnlineStatus', function(message) {

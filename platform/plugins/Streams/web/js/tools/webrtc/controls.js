@@ -2069,12 +2069,14 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
+                            rtmpLiveURLInput.value ='';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+                            rtmpLiveStreamKeyInput.value = '';
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
@@ -3797,7 +3799,6 @@
 					var _accessToken;
 
 					function goLiveDialog(callback) {
-						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
 								display: 'iframe',

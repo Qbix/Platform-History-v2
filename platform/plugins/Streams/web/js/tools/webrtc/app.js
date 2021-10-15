@@ -87,6 +87,7 @@ window.WebRTCRoomClient = function app(options){
     }
 
 
+    if(typeof cordova != 'undefined') AudioToggle.setAudioMode(AudioToggle.EARPIECE);
     app.addParticipant = function(participant) {roomParticipants.unshift(participant);}
 
     var localParticipant;
@@ -1600,7 +1601,7 @@ window.WebRTCRoomClient = function app(options){
 
                 var speaker = app.conferenceControl.currentAudioOutputDevice();
                 if(speaker != null && typeof remoteStreamEl.sinkId !== 'undefined') {
-                    remoteStreamEl.setSinkId(speaker.deviceId)
+                    /*remoteStreamEl.setSinkId(speaker.deviceId)
                         .then(() => {
                             console.log(`createTrackElement: Success, audio output device attached: ${speaker.deviceId}`);
                         })
@@ -1610,7 +1611,7 @@ window.WebRTCRoomClient = function app(options){
                                 errorMessage = `createTrackElement: You need to use HTTPS for selecting audio output device: ${error}`;
                             }
                             console.error(errorMessage);
-                        });
+                        });*/
                 }
             }
 
@@ -2994,6 +2995,7 @@ window.WebRTCRoomClient = function app(options){
 
                                 _currentLayout = 'tiledStreamingLayout';
                             }
+
                         }
                     }
 
@@ -5185,13 +5187,13 @@ window.WebRTCRoomClient = function app(options){
                         let audioTracks = participants[v].audioTracks();
 
                         var isLive = false;
-                        if( _canvasMediStream != null && _activeScene.audioSources[index].mediaStreamTrack != null) {
+                        if( _canvasMediStream != null && index != null && _activeScene.audioSources[index].mediaStreamTrack != null) {
                             for(let t in _canvasMediStream.getAudioTracks()) {
                                 if(_canvasMediStream.getAudioTracks()[t] == _activeScene.audioSources[index].mediaStreamTrack) {
                                     isLive = true;
                                 }
                             }
-                        } else
+                        }
 
                             log('updateWebRTCAudioSources isLive', isLive)
                         log('updateWebRTCAudioSources index', index)
@@ -5334,10 +5336,44 @@ window.WebRTCRoomClient = function app(options){
                 }
             }
 
-            function captureStream(ondataavailable) {
+            function captureStream() {
                 log('captureStream');
+
+                videoComposer.compositeVideosAndDraw();
+
+                _canvasMediStream = _canvas.captureStream(30); // 30 FPS
+
+                audioComposer.mix();
+
+                return _canvasMediStream;
+            }
+
+            function stopStreamCapture() {
+                log('captureStream');
+
+                videoComposer.stop();
+
+                if(_canvasMediStream != null) {
+                    let tracks = _canvasMediStream.getTracks();
+                    for(let t in tracks) {
+                        tracks[t].stop()
+                    }
+                    _canvasMediStream = null;
+                }
+
+                audioComposer.stop();
+            }
+
+            function startRecorder(ondataavailable) {
                 if(ondataavailable != null){
                     addDataListener(ondataavailable);
+                }
+                if(_mediaRecorder != null){
+                    return;
+                }
+
+                if(_canvasMediStream == null) {
+                    captureStream();
                 }
 
                 var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
@@ -5356,10 +5392,6 @@ window.WebRTCRoomClient = function app(options){
                 if(options.liveStreaming.useRecordRTCLibrary) {
                     log('captureStream if1');
 
-                    videoComposer.compositeVideosAndDraw();
-
-                    _canvasMediStream = canvasComposer.canvas().captureStream(25);
-                    audioComposer.mix();
 
                     _mediaRecorder = RecordRTC(_canvasMediStream, {
                         recorderType:MediaStreamRecorder,
@@ -5371,21 +5403,12 @@ window.WebRTCRoomClient = function app(options){
                 } else {
                     log('captureStream if1 else');
 
-                    if(_mediaRecorder != null){
-                        return;
-                    }
-
-                    videoComposer.compositeVideosAndDraw();
-
-                    _canvasMediStream = _canvas.captureStream(30); // 30 FPS
-
-                    audioComposer.mix();
 
                     _mediaRecorder = new MediaRecorder(_canvasMediStream, {
                         //mimeType: 'video/webm',
                         mimeType: codecs,
-                        audioBitsPerSecond : 128000,
-                        videoBitsPerSecond : 2500000
+                        /*audioBitsPerSecond : 128000,*/
+                        videoBitsPerSecond : 3 * 1024 * 1024
                     });
 
                     _mediaRecorder.onerror = function(e) {
@@ -5399,7 +5422,6 @@ window.WebRTCRoomClient = function app(options){
 
                     _mediaRecorder.start(1000); // Start recording, and dump data every second
                 }
-
             }
 
             function stopRecorder() {
@@ -5439,8 +5461,9 @@ window.WebRTCRoomClient = function app(options){
 
                     })*/
                 }
-                videoComposer.stop();
-                audioComposer.stop();
+                /*videoComposer.stop();
+                audioComposer.stop();*/
+                stopStreamCapture();
                 _mediaRecorder = null;
             }
 
@@ -5516,6 +5539,7 @@ window.WebRTCRoomClient = function app(options){
                 endStreaming: function () {
                     stopRecorder();
                 },
+                startRecorder: startRecorder,
                 stopRecorder: stopRecorder,
                 isActive: function () {
                     if(_mediaRecorder != null) return true;
@@ -5621,20 +5645,21 @@ window.WebRTCRoomClient = function app(options){
                 connect(rtmpUrls, service, function () {
                     log('startStreaming connected');
                     if(!_streamUsingWebRTC) {
-                        canvasComposer.captureStream(function (blob) {
-                            onDataAvailablehandler(blob);
+                        canvasComposer.startRecorder(function (blob) {
+                            //onDataAvailablehandler(blob);
+                            if(_streamingSocket) _streamingSocket.emit('Streams/webrtc/videoData', blob);
                         });
 
-                        var timer = function() {
+                        /*var timer = function() {
                             if(_videoStream.blobs.length != 0) {
                                 let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
                                 var mergedBlob = new Blob(blobsToSend);
                                 if(_streamingSocket) _streamingSocket.emit('Streams/webrtc/videoData', mergedBlob);
                             }
-                            _videoStream.timer = setTimeout(timer, 6000);
+                            _videoStream.timer = setTimeout(timer, 5000);
                         }
 
-                        _videoStream.timer = setTimeout(timer, 6000);
+                        _videoStream.timer = setTimeout(timer, 5000);*/
 
                         _roomInstance.event.dispatch('liveStreamingStarted', {participant:localParticipant, platform:service});
                         _roomInstance.eventBinding.sendDataTrackMessage("liveStreamingStarted", service);
@@ -6592,7 +6617,7 @@ window.WebRTCRoomClient = function app(options){
                         log('startStreaming', fbStreamUrl);
 
                         connect(fbStreamUrl, function () {
-                            canvasComposer.captureStream(function (blob) {
+                            canvasComposer.startRecorder(function (blob) {
                                 onDataAvailablehandler(blob);
                                 //_streamingSocket.emit('Streams/webrtc/videoData', blob);
                             });
@@ -7178,7 +7203,7 @@ window.WebRTCRoomClient = function app(options){
                 _videoStream.size = 0
                 _videoStream.blobs = [];
                 _videoStream.recordingStopped = false;
-                canvasComposer.captureStream(onDataAvailablehandler);
+                canvasComposer.startRecorder(onDataAvailablehandler);
             }
 
             function stopRecording() {
@@ -7299,7 +7324,7 @@ window.WebRTCRoomClient = function app(options){
                     log('VIMEO createVideo response', response);
                     if (e.target.status < 400) {
                         _location = response.upload.upload_link;
-                        canvasComposer.captureStream(onDataAvailablehandler);
+                        canvasComposer.startRecorder(onDataAvailablehandler);
                     } else {
                         onUploadError(e);
                     }
@@ -9434,19 +9459,19 @@ window.WebRTCRoomClient = function app(options){
             log('iceConfigurationReceived: canTrickleIceCandidates = ' + peerConnection.canTrickleIceCandidates)
 
 
-            /*if(peerConnection.remoteDescription != null && peerConnection.signalingState == 'stable') {
+            if(peerConnection.remoteDescription != null && peerConnection.signalingState == 'stable') {
                 peerConnection.addIceCandidate(candidate)
                     .catch(function(e) {
                         console.error(e.name + ': ' + e.message);
                     });
-            } else {*/
+            } else {
             log('iceConfigurationReceived: add to queue')
 
             senderParticipant.iceCandidatesQueue.push({
                 peerConnection: peerConnection,
                 candidate: candidate
             });
-            //}
+            }
 
 
         }
@@ -9485,7 +9510,16 @@ window.WebRTCRoomClient = function app(options){
             sendOnlineStatus();
             checkOnlineStatus();
             log('joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName})
-            socket.emit('Streams/webrtc/joined', {username:localParticipant.identity, sid:socket.id, room:options.roomName, roomStartTime: options.roomStartTime, roomPublisher: options.roomPublisher, isiOS: _isiOS, info: _localInfo});
+            socket.emit('Streams/webrtc/joined', {
+                username:localParticipant.identity,
+                sid:socket.id,
+                room:options.roomName,
+                roomStartTime: options.roomStartTime,
+                roomPublisher: options.roomPublisher,
+                isiOS: _isiOS,
+                info: _localInfo}, function (data) {
+                console.log('Streams/webrtc/joined CB', data)
+            });
         }
 
         return {
@@ -9936,7 +9970,7 @@ window.WebRTCRoomClient = function app(options){
                         console.warn('Browser does not support output device selection.');
                         break;
                     }
-                    audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
+                    /*audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
                         .then(() => {
                             console.log(`Success, audio output device attached: ${outputDevice.deviceId}`);
                         })
@@ -9946,7 +9980,7 @@ window.WebRTCRoomClient = function app(options){
                                 errorMessage = `You need to use HTTPS for selecting audio output device: ${error}`;
                             }
                             console.error(errorMessage);
-                        });
+                        });*/
                 }
             }
             currentAudioOutputDevice = outputDevice;
@@ -10276,7 +10310,9 @@ window.WebRTCRoomClient = function app(options){
             }
 
             function setCurrentMode(mode) {
-                log('audioOutputMode: setCurrentMode = ' + mode)
+                log('audioOutputMode: setCurrentMode = ' + mode, currentAudioOutputMode)
+                if(typeof cordova != 'undefined')log('audioOutputMode: setCurrentMode plugins', cordova.plugins)
+                if(typeof cordova != 'undefined')log('audioOutputMode: setCurrentMode plugins AudioToggle', AudioToggle)
 
                 if(mode == 'speaker') {
                     AudioToggle.setAudioMode(AudioToggle.SPEAKER);
