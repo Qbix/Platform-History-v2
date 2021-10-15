@@ -11,7 +11,7 @@ use Web3\Contract;
  *
  * @class Users_Web3
  */
-class Users_Web3 {
+class Users_Web3 extends Base_Users_Web3 {
 
 	static $web3 = null;
 	static $contrcat = null;
@@ -134,7 +134,18 @@ class Users_Web3 {
 	 * @return array
 	 */
 	static function authorOf ($tokenId, $contractAddress = null) {
-		return self::aggregator("authorOf", $tokenId, $contractAddress);
+		$contractAddress = $contractAddress ?: self::getCurrentNetwork()["contract"];
+		$cache = new Users_Web3();
+		$cache->tokenId = $tokenId;
+		$cache->contract = $contractAddress;
+		if ($cache->retrieve() && $cache->author) {
+			return $cache->author;
+		}
+
+		$cache->author = self::aggregator("authorOf", $tokenId, $contractAddress);
+		$cache->save();
+
+		return $cache->author;
 	}
 
 	/**
@@ -145,7 +156,18 @@ class Users_Web3 {
 	 * @return array
 	 */
 	static function ownerOf ($tokenId, $contractAddress = null) {
-		return self::aggregator("ownerOf", $tokenId, $contractAddress);
+		$contractAddress = $contractAddress ?: self::getCurrentNetwork()["contract"];
+		$cache = new Users_Web3();
+		$cache->tokenId = $tokenId;
+		$cache->contract = $contractAddress;
+		if ($cache->retrieve() && $cache->owner) {
+			return $cache->owner;
+		}
+
+		$cache->owner = self::aggregator("ownerOf", $tokenId, $contractAddress);
+		$cache->save();
+
+		return $cache->owner;
 	}
 
 	/**
@@ -156,8 +178,24 @@ class Users_Web3 {
 	 * @return array
 	 */
 	static function saleInfo ($tokenId, $contractAddress = null) {
+		$contractAddress = $contractAddress ?: self::getCurrentNetwork()["contract"];
+		$cache = new Users_Web3();
+		$cache->tokenId = $tokenId;
+		$cache->contract = $contractAddress;
+		if ($cache->retrieve()) {
+			$saleInfo = Q::json_decode($cache->saleInfo);
+			if (!empty($saleInfo) && (array)$saleInfo) {
+				return $saleInfo;
+			}
+		}
+
 		$data = self::aggregator("saleInfo", $tokenId, $contractAddress);
 		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
+
+		$cache->saleInfo = Q::json_encode($data);
+		$cache->onSale = $data[2] ? 1 : 0;
+		$cache->save();
+
 		return $data;
 	}
 };

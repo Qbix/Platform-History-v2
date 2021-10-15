@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS {{prefix}}web3;
+CREATE TABLE {{prefix}}Web3 (
+  tokenId int NOT NULL,
+  contract varchar(42) NOT NULL,
+  author varchar(42) DEFAULT NULL,
+  owner varchar(42) DEFAULT NULL,
+  onSale int DEFAULT NULL,
+  saleInfo varchar(1023) DEFAULT '{}' COMMENT 'JSON with sale info (price, currency, onSale)',
+  updatedTime timestamp NULL DEFAULT NULL,
+  extra varchar(1023) DEFAULT '{}' COMMENT 'JSON with any extra attributes',
+  PRIMARY KEY (tokenId,contract)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT 'Represents using external apps to authenticate';
