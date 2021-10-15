@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Thepha ukuze uhlawule"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ukuhlawuliswa nge {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Enkosi ngentlawulo yakho ku {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ubhalise kwi {{plan.title}}",
+        "YouSubscribedTo": "Ubhalisele kwi {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Ufumana intlawulo ka {{displayAmount}} ukusuka {{call 'publisher.displayName'}} ngo &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hee, yenzelwe nje ukukwazisa {{1}} uhlawulisiwe {{2}} ngo {{3}} ngu {{4}}"
+    },
+    "charged": {
+        "Subject": "Enkosi ngentlawulo yakho ye - &quot;{{description}}&quot;",
+        "HavePaid": "Hayi {{1}}, sisiqinisekiso nje esikhawulezileyo sokuba uhlawule ngempumelelo {{2}} ku {{3}} ye {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Ulwazi malunga nomyalelo",
+        "PaymentMethod": "Uhlobo lokuhlawula",
+        "ContactInfo": "Ulwazi loqhakamshelwano",
+        "Pay": "Hlawula"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Isimemo samkelwe ngu {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Une {{amount}} iikhredithi ongaqala ngazo",
+        "PaymentFor": "Intlawulo ye &quot;{{1}}&quot;",
+        "PaymentTo": "Intlawulo ku {{1}}",
+        "PaymentToUser": "Intlawulo ku {{toUserName}}",
+        "CreatePaidStream": "ngokudala {{toStreamName}}",
+        "JoinedPaidStream": "yokubekisa kwi &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ngokudala uluntu &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "njengembuyekezo yembuyekezo kwi &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Uthenge {{amount}} iikhredithi",
+        "BonusCredits": "Ibhonasi {{amount}} iikhredithi",
+        "BuyAmountCredits": "Thenga {{amount}} iikhredithi",
+        "WatchClip": "Kufunyenwe {{amount}} ikhredithi ngokubukela {{fromStreamTitle}}",
+        "MissingCredits": "Iikhredithi ezingekhoyo",
+        "YouMissingCredits": "Ufuna olongezelelweyo {{amount}} iikhredithi ukuze uqhubeke.",
+        "BuyCredits": "Thenga iikhredithi",
+        "BuyBonus": "Ukuthenga iikhredithi ezi {{amount}} ngaxeshanye, kuya kukhokelela kwi {{bonus}} ibhonasi yeekhredithi.",
+        "Buy": "Thenga",
+        "PurchaseCredits": "Ukuthenga iikhredithi",
+        "Credits": "Imivuzo",
+        "ErrorInvalidAmount": "Isixa-mali asisebenzi",
+        "ErrorInvalidCurrency": "Ngelishwa asiyixhasi imali {{currency}} okwangoku",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} iikhredithi",
+            "BonusCredits": "{{amount}} iikhredithi"
+        }
+    },
+    "history": {
+        "Date": "Umhla",
+        "Amount": "Isixa",
+        "Description": "Inkcazo",
+        "Client": "Umxhasi",
+        "To": "ukuya",
+        "From": "ukusuka",
+        "SeeHistory": "Jonga imbali yentlawulo ye- {{1}}",
+        "HistoryEmpty": "Awukabinayo idatha okwangoku",
+        "PaymentFor": "Ithumele {{amount}} iikhredithi",
+        "PaymentTo": "Ithumele {{amount}} iikhredithi",
+        "PaymentToUser": "Ithumele {{amount}} iikhredithi",
+        "CreatePaidStream": "Isetyenzisiwe {{amount}} iikhredithi",
+        "WatchClip": {
+            "+": "Kufunyenwe {{amount}} iikhredithi",
+            "-": "Isetyenzisiwe {{amount}} iikhredithi"
+        },
+        "JoinedPaidStream": {
+            "+": "Kufunyenwe {{amount}} iikhredithi",
+            "-": "Isetyenzisiwe {{amount}} iikhredithi"
+        },
+        "LeftPaidStream": {
+            "+": "Kufunyenwe {{amount}} iikhredithi",
+            "-": "Ithumele {{amount}} iikhredithi"
+        },
+        "CreatedCommunity": "Isetyenzisiwe {{amount}} iikhredithi",
+        "BoughtCredits": "Uthenge {{amount}} iikhredithi",
+        "BonusCredits": "Unebhonasi {{amount}} iikhredithi",
+        "InviteAcceptedBy": "Kufunyenwe {{amount}} iikhredithi",
+        "YouHaveCreditsToStart": "Kufunyenwe {{amount}} iikhredithi"
+    },
+    "subscriptions": {
+        "infoTitle": "Cwangcisa ulwazi ngeNtlawulo",
+        "confirm": {
+            "title": "Qalisa ukurhuma",
+            "message": "Ungathanda ukubhalisa kwi {{title}}?",
+            "ok": "Kulungile",
+            "cancel": "Rhoxisa"
+        },
+        "CreditOrDebitCard": "Ikhadi letyala okanye ledebhithi",
+        "SubscribePayment": "Rhuma Intlawulo",
+        "ImmediatePayment": "Intlawulo kwangoko"
+    },
+    "payments": {
+        "infoTitle": "Cwangcisa ulwazi ngeNtlawulo",
+        "BuyAmountCredits": "Thenga {{amount}} iikhredithi",
+        "confirm": {
+            "title": "Yenza Intlawulo",
+            "message": "Uyavuma ukuhlawula {{symbol}} {{amount}}?",
+            "ok": "Kulungile",
+            "cancel": "Rhoxisa"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Imivuzo",
+            "description": "Ugcina iikhredithi kunye neentlawulo"
+        },
+        "Assets\/plan": {
+            "displayType": "Isicwangciso sobhaliso",
+            "description": "isicwangciso sokubhalisa"
+        },
+        "Assets\/subscription": {
+            "displayType": "Umrhumo",
+            "description": "umrhumo"
+        },
+        "Assets\/product": {
+            "displayType": "Imveliso",
+            "description": "imveliso ethengiswayo"
+        },
+        "Assets\/service": {
+            "displayType": "Inkonzo",
+            "description": "inkonzo enikezelwayo"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Kufunyenwe {{amount}} iikhredithi"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Uthenge {{amount}} iikhredithi"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Ibhonasi {{amount}} iikhredithi"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Isetyenzisiwe {{amount}} iikhredithi"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Thumela {{amount}} iikhredithi ku {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ufumene {{amount}} iikhredithi ukusuka {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "INkonzo eNtsha",
+            "TitlePlaceholder": "Itayitile yenkonzo",
+            "PricePlaceholder": "Cwangcisa ixabiso",
+            "LinkPlaceholder": "setha ikhonkco lolwazi olongezelelweyo",
+            "DescriptionPlaceholder": "Inkcazo yenkonzo",
+            "SaveService": "Gcina Inkonzo",
+            "SelectRequiredParticipants": "Abathathi-nxaxheba abafunekayo"
+        },
+        "ManageServiceTemplates": "Lawula iitemplate zeNkonzo",
+        "ManageServices": "Lawula iiNkonzo",
+        "Free": "Simahla",
+        "OptionalContribution": "Igalelo ongalikhetha",
+        "RequiredPayment": "Intlawulo efunekayo",
+        "AreYouSureDelete": "Uqinisekile ufuna ukuyicima le nkonzo?",
+        "AmountServicesRelated": "Kukho {{amount}} izinto ezihambelana nale nkonzo. Kananjalo ziya kususwa."
+    }
+}

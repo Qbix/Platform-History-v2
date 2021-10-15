@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ene de {{1}}"
+    },
+    "units": {
+        "meter": "metro",
+        "meters": "metroj",
+        "kilometer": "kilometro",
+        "kilometers": "kiometroj",
+        "km": "km",
+        "mile": "mejlo",
+        "miles": "mejloj",
+        "mi": "mi",
+        "foot": "piedo",
+        "feet": "piedoj",
+        "inches": "coloj"
+    },
+    "location": {
+        "interested": "Mi interesiĝas pri aferoj okazantaj ene de {{select}} de",
+        "update": "Ĝisdatigu Mian Lokon",
+        "set": "Agordi Mian Lokon",
+        "prompt": "{{ClickOrTap}} ĉi tie al<br> starigu vian<br> loko",
+        "myCurrentLocation": "Mia nuna loko",
+        "enterAddress": "Enigu adreson",
+        "enterPostcode": "Bonvolu enigi vian poŝtkodon \/ poŝtkodon",
+        "create": {
+            "action": "Aldonu lokon",
+            "title": "Nova Loko",
+            "nameYourLocation": "Nomu vian lokon"
+        },
+        "confirm": {
+            "title": "Ĉu konservi ĉi tiun lokon?",
+            "message": "Ĉu vi planas uzi ĉi tiun lokon denove en la estonteco?",
+            "ok": "Jes",
+            "cancel": "Ne"
+        },
+        "add": {
+            "title": "Nomu ĉi tiun lokon",
+            "placeholder": "Hejmo, Laboro ktp.",
+            "ok": "Savi"
+        },
+        "dialog": {
+            "title": "Elektu Lokon"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Iu areo ene de ĉi tiu loko?",
+        "newArea": "Nova areo",
+        "promptTitle": "Enigu nomon por la areo:",
+        "absent": "Bonvolu agordi areon",
+        "error": "Eraro",
+        "exist": "Areo jam ekzistas",
+        "addNewArea": "Aldonu novan areon",
+        "add": "Aldoni"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kolekto de lokoj",
+            "displayType": "Lokoj"
+        },
+        "Places\/location": {
+            "description": "Reprezentas konstruaĵon, ejon, ŝipon, parkon, ktp.",
+            "displayType": "Loko"
+        },
+        "Places\/area": {
+            "description": "Reprezentas areon ene de loko, kiel ĉambro aŭ serio",
+            "displayType": "Areo"
+        },
+        "Places\/floor": {
+            "description": "Reprezentas plankon en konstruaĵo aŭ ŝipo",
+            "displayType": "Etaĝo"
+        },
+        "Places\/column": {
+            "description": "Reprezentas kolumnon en konstruaĵo aŭ ŝipo",
+            "displayType": "Kolumno"
+        },
+        "Places\/nearby": {
+            "description": "Kategorio por aferoj en certa distanco de geoŝaĉo",
+            "displayType": "Proksime de lokoj"
+        },
+        "Places\/interest": {
+            "description": "Kategorio por aferoj en certa distanco de geoŝaĉo, kongruanta kun intereso",
+            "displayType": "Lokoj interesas"
+        }
+    }
+}

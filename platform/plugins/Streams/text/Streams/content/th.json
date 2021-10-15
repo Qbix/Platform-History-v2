@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "คนที่ฉันเชิญ",
-        "Streams\/invitedMe": "ใครเชิญฉัน"
+        "Streams\/invitedMe": "ใครเชิญฉัน",
+        "AreYouAgree": "คุณเห็นด้วยหรือไม่?",
+        "Yes": "ใช่",
+        "No": "เลขที่"
     },
     "interests": {
         "Filter": "คุณชอบอะไร",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "เลือกอีกครั้งจากที่อยู่ติดต่อ",
             "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้",
             "scannedQR": "{{ClickOrTap}} หากสแกนรหัสแล้ว",
-            "copyLink": "{{ClickOrTap}} เพื่อคัดลอกลิงก์เชิญ"
+            "copyLink": "{{ClickOrTap}} เพื่อคัดลอกลิงก์เชิญ",
+            "userChooserPlaceholder": "ค้นหาด้วยชื่อ"
         },
         "email": {
             "subject": "เฮ้ลองดูนี่สิ",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
             "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม",
             "youBeganVideoRecording": "คุณเริ่มบันทึกการประชุมนี้",
-            "youStoppedVideoRecording": "คุณหยุดบันทึกการประชุมนี้"
+            "youStoppedVideoRecording": "คุณหยุดบันทึกการประชุมนี้",
+            "switchingRoom": "ห้องเปลี่ยน...",
+            "forceDisconnecting": "คุณจะถูกตัดการเชื่อมต่อภายใน 5 วินาที",
+            "youStartedLive": "คุณเริ่มแพร่ภาพการโทรนี้ไปยัง RTMP . ที่กำหนดเอง",
+            "youStoppedLive": "คุณหยุดออกอากาศการโทรนี้ไปยัง RTMP . ที่กำหนดเอง",
+            "sbStartedLiveStreaming": "{{userName}} เริ่มถ่ายทอดสด",
+            "sbStoppedLiveStreaming": "{{userName}} สิ้นสุดการถ่ายทอดสด",
+            "liveStopped": "เกิดข้อผิดพลาดขณะส่งวิดีโอไปยังปลายทาง"
         },
         "settingsPopup": {
             "webCamera": "กล้องเว็บ",
@@ -205,7 +216,13 @@
             "stopRecording": "หยุดการบันทึก",
             "recordingInProgress": "กำลังบันทึก ...",
             "publishOnTimeline": "เผยแพร่บนไทม์ไลน์",
-            "publishToGroup": "เผยแพร่ไปยังกลุ่ม"
+            "publishToGroup": "เผยแพร่ไปยังกลุ่ม",
+            "turnOffAudioInput": "ปิดเสียงไมโครโฟน",
+            "micIsTurnedOff": "ไมโครโฟนปิดอยู่",
+            "start": "เริ่ม",
+            "stop": "หยุด",
+            "streamingSettings": "การตั้งค่า",
+            "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง"
         },
         "participantsPopup": {
             "disconnect": "ปลด",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
         "streamTitle": "{{1}} การโทรสด",
         "preview": {
-            "preamble": "การประชุม:"
+            "preamble": "การประชุม:",
+            "Meeting": "การประชุม",
+            "MeetingEnded": "สิ้นสุดการประชุม"
+        },
+        "preparing": {
+            "micIsOff": "ไมค์ปิดอยู่",
+            "micIsOn": "ไมค์เปิดอยู่",
+            "cameraIsOff": "กล้องปิดอยู่",
+            "cameraIsOn": "กล้องเปิดอยู่",
+            "screenSharingIsOn": "การแชร์หน้าจอเปิดอยู่",
+            "screenSharingIsOff": "แชร์หน้าจอ",
+            "joinNow": "เข้าร่วมการโทร"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "ตอบ",
             "description": "ตอบสตรีม"
+        },
+        "Streams\/calls": {
+            "displayType": "โทร",
+            "description": "หมวดหมู่สำหรับ Streams\/webrtc",
+            "MaxRelationsExceeded": "เกินการโทรสูงสุด"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "ไฟล์ไม่ถูกต้อง",
         "errorNoSource": "ไม่มีแหล่งที่มาของรูปภาพ",
         "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}",
+        "uploadedImage": "รูปภาพที่อัพโหลด",
+        "imageTitle": "ชื่อภาพ"
     },
     "questions": {
         "Questions": "คำถาม",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ตอบไปแล้ว",
         "TitlePlaceholder": "พิมพ์คำถามของคุณ",
         "ContentPlaceholder": "ใส่ข้อมูลเพิ่มเติมที่นี่เพื่อช่วยคนตอบ",
-        "ErrorTitle": "ต้องมีคำถาม"
+        "ErrorTitle": "ต้องมีคำถาม",
+        "Placeholder": "ตัวยึด"
     },
     "experience": {
-        "NewExperience": "ประสบการณ์ใหม่"
+        "NewExperience": "ประสบการณ์ใหม่",
+        "DefineTitle": "โปรดระบุชื่อเรื่อง",
+        "Create": "สร้าง"
+    },
+    "calls": {
+        "SettingsTitle": "โทร",
+        "MaxCalls": "โทรสูงสุด",
+        "Update": "อัปเดต",
+        "NoCallsYet": "ยังไม่รับสาย",
+        "CallReasonTitle": "นี่โทรมาเรื่องอะไร?",
+        "WaitingRoom": "ห้องรอ"
     }
 }

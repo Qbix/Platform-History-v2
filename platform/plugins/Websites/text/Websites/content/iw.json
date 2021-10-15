@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "קישור לקידום",
+                "startDate": "תאריך התחלה",
+                "startTime": "שעת התחלה",
+                "endDate": "תאריך סיום",
+                "endTime": "שעת סיום",
+                "budget": "תַקצִיב"
+            },
+            "interests": {
+                "Title": "סנן לפי עניין",
+                "FilterInterests": "התחל להקליד עניין ..."
+            },
+            "Interest": "ריבית",
+            "Location": "מקום"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ללכת",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "לְדַפדֵף",
+            "WriteToStartConversation": "כתוב את מחשבותיך כדי להתחיל את השיחה",
+            "StartConversation": "התחל שיחה",
+            "GotoConversation": "עבור אל שיחה",
+            "reset": "אִתחוּל",
+            "edit": "לַעֲרוֹך",
+            "link": "קישור",
+            "setUrl": "הגדר כתובת URL",
+            "save": "להציל",
+            "setClip": "קליפ גזור",
+            "invalidURL": "כתובת אתר לא חוקית"
+        },
+        "FileTooLarge": "הקובץ גדול מדי לשמירה במטמון. גודל קובץ מרבי {{size}}",
+        "InvalidPDF": "הקובץ אינו קובץ PDF חוקי",
+        "StartTypingTitleOrKeywords": "התחל להקליד כותרת או מילות מפתח ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "מסמך HTML שמשתמשים שונים יכולים לצפות ולערוך",
+            "displayType": "מאמר"
+        },
+        "Websites\/slide": {
+            "description": "שקופית במצגת, יכולה לכלול HTML, אודיו וכו &#39;.",
+            "displayType": "שקופית"
+        },
+        "Websites\/presentation": {
+            "description": "מצגת המורכבת משקופיות שונות",
+            "displayType": "הַצָגָה"
+        },
+        "Websites\/advert\/unit": {
+            "description": "יחידת פרסום באתר",
+            "displayType": "יחידת פרסום"
+        },
+        "Websites\/advert\/placement": {
+            "description": "דרך לקבץ יחידות פרסום בשם",
+            "displayType": "מיקום מודעה"
+        },
+        "Websites\/advert\/creative": {
+            "description": "תוכן לפרסומת",
+            "displayType": "קריאייטיב לפרסום"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "קמפיין פרסום",
+            "displayType": "קמפיין פרסום"
+        },
+        "Websites\/webpage": {
+            "description": "מייצג אתר שהמטא נתונים שלו נגרדו",
+            "displayType": "עמוד אינטרנט"
+        }
+    }
+}

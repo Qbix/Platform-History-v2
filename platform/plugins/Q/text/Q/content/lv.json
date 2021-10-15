@@ -117,7 +117,10 @@
         "SetClipStart": "Iestatiet Clip Start",
         "ClipStart": "Sākt klipu",
         "SetClipEnd": "Iestatīt klipa beigas",
-        "ClipEnd": "Klipa beigas"
+        "ClipEnd": "Klipa beigas",
+        "StartMoreEnd": "Sākuma stāvoklis nedrīkst būt lielāks par beigu stāvokli",
+        "EndLessStart": "Beigu stāvoklis nedrīkst būt mazāks par sākuma stāvokli",
+        "WhichInvalid": "Arguments “kas” nav derīgs"
     },
     "durations": {
         "second": "otrais",

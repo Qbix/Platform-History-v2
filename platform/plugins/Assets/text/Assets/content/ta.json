@@ -36,8 +36,12 @@
         "WatchClip": "{{1000} watch பார்ப்பதற்கான {{amount}} வரவுகளை சம்பாதித்தார்",
         "PurchaseCredits": "வரவுகளை வாங்கவும்",
         "forMessages": {
-            "BoughtCredits": "{{amount}} வரவு"
-        }
+            "BoughtCredits": "{{amount}} வரவு",
+            "BonusCredits": "{{amount}} வரவுகள்"
+        },
+        "CreatePaidStream": "உருவாக்குவதற்கு {{toStreamName}}",
+        "BonusCredits": "போனஸ் {{amount}} வரவுகள்",
+        "BuyBonus": "ஒரே நேரத்தில் {{amount}} கிரெடிட்களை வாங்குவது, {{bonus}} கிரெடிட் போனஸுக்கு வழிவகுக்கும்."
     },
     "history": {
         "Date": "தேதி",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} வரவுகளை செலவிட்டார்",
         "BoughtCredits": "{{amount}} வரவுகளை வாங்கியது",
         "InviteAcceptedBy": "{{amount}} வரவுகளை சம்பாதித்தார்",
-        "YouHaveCreditsToStart": "{{amount}} வரவுகளை சம்பாதித்தார்"
+        "YouHaveCreditsToStart": "{{amount}} வரவுகளை சம்பாதித்தார்",
+        "CreatePaidStream": "{{amount}} வரவுகளை செலவிட்டார்",
+        "WatchClip": {
+            "+": "{{amount}} வரவுகளைப் பெற்றார்",
+            "-": "{{amount}} வரவுகளை செலவிட்டார்"
+        },
+        "BonusCredits": "போனஸ் {{amount}} வரவுகள் கிடைத்தன"
     },
     "subscriptions": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} வரவுகளை வாங்கியது"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "போனஸ் {{amount}} வரவுகள்"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "விலையை நிர்ணயிக்கவும்",
             "LinkPlaceholder": "கூடுதல் தகவல் இணைப்பை அமைக்கவும்",
             "DescriptionPlaceholder": "சேவை விளக்கம்",
-            "SaveService": "சேவையைச் சேமிக்கவும்"
+            "SaveService": "சேவையைச் சேமிக்கவும்",
+            "SelectRequiredParticipants": "தேவையான பங்கேற்பாளர்கள்"
         },
         "ManageServiceTemplates": "சேவை வார்ப்புருக்களை நிர்வகிக்கவும்",
         "ManageServices": "சேவைகளை நிர்வகிக்கவும்",

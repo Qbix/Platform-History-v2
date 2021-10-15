@@ -117,7 +117,10 @@
         "SetClipStart": "Définir le début du clip",
         "ClipStart": "Début du clip",
         "SetClipEnd": "Définir la fin du clip",
-        "ClipEnd": "Fin du clip"
+        "ClipEnd": "Fin du clip",
+        "StartMoreEnd": "La position de départ ne peut pas être supérieure à la position de fin",
+        "EndLessStart": "La position de fin ne peut pas être inférieure à la position de début",
+        "WhichInvalid": "Argument « quel » invalide"
     },
     "durations": {
         "second": "seconde",

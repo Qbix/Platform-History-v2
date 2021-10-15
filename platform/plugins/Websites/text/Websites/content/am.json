@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ለማስተዋወቅ አገናኝ",
+                "startDate": "የመጀመሪያ ቀን",
+                "startTime": "የመነሻ ሰዓት",
+                "endDate": "ማብቂያ ቀን",
+                "endTime": "የማብቂያ ጊዜ",
+                "budget": "በጀት"
+            },
+            "interests": {
+                "Title": "በፍላጎት ያጣሩ",
+                "FilterInterests": "ፍላጎት መተየብ ይጀምሩ ..."
+            },
+            "Interest": "ፍላጎት",
+            "Location": "አካባቢ"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ሂድ",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "ያስሱ",
+            "WriteToStartConversation": "ውይይቱን ለመጀመር ሀሳቦችዎን ይፃፉ",
+            "StartConversation": "ውይይት ይጀምሩ",
+            "GotoConversation": "ወደ ውይይት ይሂዱ",
+            "reset": "ዳግም አስጀምር",
+            "edit": "አርትዕ",
+            "link": "አገናኝ",
+            "setUrl": "ዩአርኤል አዘጋጅ",
+            "save": "አስቀምጥ",
+            "setClip": "ቅንጥብ ይቁረጡ",
+            "invalidURL": "ልክ ያልሆነ ዩአርኤል"
+        },
+        "FileTooLarge": "ለመሸጎጫ ፋይል በጣም ትልቅ ነው። ከፍተኛው የፋይል መጠን {{size}}",
+        "InvalidPDF": "ፋይሉ የሚሰራ ፒዲኤፍ አይደለም",
+        "StartTypingTitleOrKeywords": "ርዕስ ወይም ቁልፍ ቃላትን መተየብ ይጀምሩ ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "የተለያዩ ተጠቃሚዎች ማየት እና ማርትዕ የሚችሉበት የኤችቲኤምኤል ሰነድ",
+            "displayType": "አንቀጽ"
+        },
+        "Websites\/slide": {
+            "description": "በዝግጅት አቀራረብ ውስጥ ስላይድ ፣ ኤችቲኤምኤል ፣ ኦዲዮ ወዘተ ሊያካትት ይችላል",
+            "displayType": "ተንሸራታች"
+        },
+        "Websites\/presentation": {
+            "description": "የተለያዩ ስላይዶችን ያካተተ አቀራረብ",
+            "displayType": "የዝግጅት አቀራረብ"
+        },
+        "Websites\/advert\/unit": {
+            "description": "በአንድ ድር ጣቢያ ላይ የማስታወቂያ ክፍል",
+            "displayType": "የማስታወቂያ ክፍል"
+        },
+        "Websites\/advert\/placement": {
+            "description": "የማስታወቂያ ክፍሎችን በስም የመመደብ መንገድ",
+            "displayType": "የማስታወቂያ አቀማመጥ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ለማስታወቂያ ይዘት",
+            "displayType": "ፈጠራን ያስተዋውቁ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "የማስታወቂያ ዘመቻ",
+            "displayType": "የማስታወቂያ ዘመቻ"
+        },
+        "Websites\/webpage": {
+            "description": "ዲበ ውሂቡ የተቧጨበትን ድር ጣቢያ ይወክላል",
+            "displayType": "ድረገፅ"
+        }
+    }
+}

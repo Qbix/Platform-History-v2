@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "לינק צו מעלדן",
+                "startDate": "אנהייב דאטום",
+                "startTime": "אָנהייב צייט",
+                "endDate": "סוף טאָג",
+                "endTime": "סוף צייט",
+                "budget": "בודזשעט"
+            },
+            "interests": {
+                "Title": "פילטער לויט אינטערעס",
+                "FilterInterests": "אָנהייב טייפּינג אַן אינטערעס ..."
+            },
+            "Interest": "אינטערעס",
+            "Location": "אָרט"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "גיין",
+            "PasteLinkHere": "הטטפּס: \/\/ ...",
+            "BrowseTheWeb": "בלעטער",
+            "WriteToStartConversation": "שרייב דיין געדאנקען צו אָנהייבן דעם שמועס",
+            "StartConversation": "אָנהייב קאָנווערסאַטיאָן",
+            "GotoConversation": "גיין צו קאָנווערסאַטיאָן",
+            "reset": "באַשטעטיק",
+            "edit": "רעדאַגירן",
+            "link": "לינק",
+            "setUrl": "באַשטעטיק URL",
+            "save": "היט",
+            "setClip": "קאַט אָוט קליפּ",
+            "invalidURL": "אונגילטיג URL"
+        },
+        "FileTooLarge": "די טעקע איז צו גרויס פֿאַר קאַטשינג. מאקס טעקע גרייס {{size}}",
+        "InvalidPDF": "טעקע איז נישט אַ גילטיק פּדף",
+        "StartTypingTitleOrKeywords": "אָנהייב טייפּינג טיטל אָדער טערמינען ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "א HTML דאָקומענט וואָס פאַרשידן יוזערז קענען זען און רעדאַגירן",
+            "displayType": "אַרטיקל"
+        },
+        "Websites\/slide": {
+            "description": "א רוק אין אַ פּרעזענטירונג, קענען אַרייַננעמען HTML, אַודיאָ עטק.",
+            "displayType": "רוק"
+        },
+        "Websites\/presentation": {
+            "description": "א פּרעזענטירונג קאַנסיסטינג פון פאַרשידן סליידז",
+            "displayType": "פּרעזענטירונג"
+        },
+        "Websites\/advert\/unit": {
+            "description": "אַ גאַנצע אַפּאַראַט אויף אַ וועבזייטל",
+            "displayType": "גאַנצע אַפּאַראַט"
+        },
+        "Websites\/advert\/placement": {
+            "description": "א וועג צו גרופּינג גאַנצע וניץ אונטער אַ נאָמען",
+            "displayType": "גאַנצע פּלייסמאַנט"
+        },
+        "Websites\/advert\/creative": {
+            "description": "אינהאַלט פֿאַר אַ אַדווערטייזמאַנט",
+            "displayType": "גאַנצע שעפעריש"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "א גאַנצע קאמפאניע",
+            "displayType": "גאַנצע קאמפאניע"
+        },
+        "Websites\/webpage": {
+            "description": "רעפּראַזענץ אַ וועבזייטל וועמענס מעטאַדאַטאַ איז סקרייפּט",
+            "displayType": "וועב בלאַט"
+        }
+    }
+}

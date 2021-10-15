@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Prihvaćate Uslove usluge?",
         "facebookNoEmail": "Na vašem facebook računu nedostaje potvrđena adresa e-pošte. Jednostavno se prijavite na izvorni način.",
-        "picTooltip": "Tu sliku možete naknadno promijeniti"
+        "picTooltip": "Tu sliku možete naknadno promijeniti",
+        "wallet": {
+            "payload": "Prijavite se {{host}} u vrijeme {{timestamp}}",
+            "alert": {
+                "title": "Preusmjeravanje na Novčanik",
+                "content": "Nakon što zatvorite ovaj dijalog, bit ćete preusmjereni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Dodajte način za prijavu",
@@ -108,6 +115,18 @@
         "Owner": "Vlasnik",
         "Admin": "Admin",
         "Member": "Član",
-        "Guest": "Gost"
+        "Guest": "Gost",
+        "Host": "Domaćin"
+    },
+    "analytics": {
+        "Title": "Analitika",
+        "Daily": "Daily",
+        "Weekly": "Nedeljno",
+        "Monthly": "Mjesečno",
+        "Application": "Aplikacija",
+        "Pages": "Stranice",
+        "Services": "Usluge",
+        "Faq": "Česta pitanja",
+        "WeekDays": "Nedeljni dani"
     }
 }

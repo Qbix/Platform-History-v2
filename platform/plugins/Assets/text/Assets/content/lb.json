@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tippen fir ze bezuelen"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Käschte verschafft fir {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Merci fir Är Bezuelung un {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnéiert op {{plan.title}}",
+        "YouSubscribedTo": "Dir sidd op {{plan.title}} abonnéiert"
+    },
+    "charge": {
+        "Subject": "Dir kritt Bezuelung vun {{displayAmount}} vun {{call 'publisher.displayName'}} mam &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, dëst ass just fir Iech matzedeelen datt {{1}} {{2}} fir {{3}} vun {{4}} reprochéiert gouf"
+    },
+    "charged": {
+        "Subject": "Merci fir Är Bezuelung fir &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, dëst ass nëmmen eng séier Bestätegung datt Dir erfollegräich {{2}} un {{3}} fir {{4}} bezuelt hutt"
+    },
+    "payment": {
+        "AboutOrder": "Info iwwer Bestellung",
+        "PaymentMethod": "Bezuelmethod",
+        "ContactInfo": "Kontakt Info",
+        "Pay": "Bezuelen"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitatioun ugeholl vum {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Dir hutt {{amount}} Credits fir unzefänken",
+        "PaymentFor": "Bezuelung fir &quot;{{1}}&quot;",
+        "PaymentTo": "Bezuelung un {{1}}",
+        "PaymentToUser": "Bezuelung un {{toUserName}}",
+        "CreatePaidStream": "fir {{toStreamName}} ze kreéieren",
+        "JoinedPaidStream": "fir Reservatioun am &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "fir d&#39;Gemeinschaft &quot;{{communityId}}&quot; ze kreéieren",
+        "LeftPaidStream": "als Reservéierungsremboursement an &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kaaft {{amount}} Credits",
+        "BonusCredits": "Bonus {{amount}} Credits",
+        "BuyAmountCredits": "Kaaft {{amount}} Credits",
+        "WatchClip": "Verdéngt {{amount}} Credits fir ze kucken {{fromStreamTitle}}",
+        "MissingCredits": "Vermësst Credits",
+        "YouMissingCredits": "Dir braucht zousätzlech {{amount}} Kreditter fir weiderzemaachen.",
+        "BuyCredits": "Kreditter kafen",
+        "BuyBonus": "Kaafen vun {{amount}} Kreditter gläichzäiteg féiert zu engem {{bonus}} Kredittbonus.",
+        "Buy": "Kafen",
+        "PurchaseCredits": "Kaf Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Betrag ongëlteg",
+        "ErrorInvalidCurrency": "Leider ënnerstëtze mir nach keng Währung {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} Credits",
+            "BonusCredits": "{{amount}} Credits"
+        }
+    },
+    "history": {
+        "Date": "Datum",
+        "Amount": "Betrag",
+        "Description": "Beschreiwung",
+        "Client": "Client",
+        "To": "zu",
+        "From": "vun",
+        "SeeHistory": "Kuckt d&#39;Bezuelungsgeschicht fir {{1}}",
+        "HistoryEmpty": "Dir hutt nach keng Daten",
+        "PaymentFor": "Geschéckt {{amount}} Credits",
+        "PaymentTo": "Geschéckt {{amount}} Credits",
+        "PaymentToUser": "Geschéckt {{amount}} Credits",
+        "CreatePaidStream": "Verbréngt {{amount}} Credits",
+        "WatchClip": {
+            "+": "Verdéngt {{amount}} Credits",
+            "-": "Verbréngt {{amount}} Credits"
+        },
+        "JoinedPaidStream": {
+            "+": "Verdéngt {{amount}} Credits",
+            "-": "Verbréngt {{amount}} Credits"
+        },
+        "LeftPaidStream": {
+            "+": "Kritt {{amount}} Credits",
+            "-": "Geschéckt {{amount}} Credits"
+        },
+        "CreatedCommunity": "Verbréngt {{amount}} Credits",
+        "BoughtCredits": "Kaaft {{amount}} Credits",
+        "BonusCredits": "Kritt Bonus {{amount}} Kreditter",
+        "InviteAcceptedBy": "Verdéngt {{amount}} Credits",
+        "YouHaveCreditsToStart": "Verdéngt {{amount}} Credits"
+    },
+    "subscriptions": {
+        "infoTitle": "Set Bezuelungsinformatioun",
+        "confirm": {
+            "title": "Start Abonnement",
+            "message": "Wëllt Dir Iech op {{title}} abonnéieren?",
+            "ok": "ok",
+            "cancel": "Ofbriechen"
+        },
+        "CreditOrDebitCard": "Kreditt- oder Bankkaart",
+        "SubscribePayment": "Abonnéiert Bezuelung",
+        "ImmediatePayment": "Direkt Bezuelung"
+    },
+    "payments": {
+        "infoTitle": "Set Bezuelungsinformatioun",
+        "BuyAmountCredits": "Kaaft {{amount}} Credits",
+        "confirm": {
+            "title": "Maacht eng Bezuelung",
+            "message": "Sidd Dir averstanen fir {{symbol}} {{amount}} ze bezuelen?",
+            "ok": "ok",
+            "cancel": "Ofbriechen"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "hält Kreditter a Bezuelungen op"
+        },
+        "Assets\/plan": {
+            "displayType": "Abonnementsplang",
+            "description": "Abonnementsplang"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abonnement",
+            "description": "Abonnement"
+        },
+        "Assets\/product": {
+            "displayType": "Produkt",
+            "description": "Produkt verkaaft"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "Service ugebuede gëtt"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Verdéngt {{amount}} Credits"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Kaaft {{amount}} Credits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} Credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Verbréngt {{amount}} Credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} Kreditter un {{toUserName}} geschéckt"
+        },
+        "Assets\/credits\/received": {
+            "content": "Kritt {{amount}} Kreditter vun {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Neie Service",
+            "TitlePlaceholder": "Service Titel",
+            "PricePlaceholder": "Set Präis",
+            "LinkPlaceholder": "set zousätzlech Info Link",
+            "DescriptionPlaceholder": "Service Beschreiwung",
+            "SaveService": "Service späicheren",
+            "SelectRequiredParticipants": "Noutwendeg Participanten"
+        },
+        "ManageServiceTemplates": "Service Templates managen",
+        "ManageServices": "Servicer verwalten",
+        "Free": "Fräi",
+        "OptionalContribution": "Fakultativ Bäitrag",
+        "RequiredPayment": "Noutwendeg Bezuelung",
+        "AreYouSureDelete": "Sidd Dir sécher Dir wëllt dëse Service läschen?",
+        "AmountServicesRelated": "Et gi {{amount}} Disponibilitéiten am Zesummenhang mat dësem Service. Si ginn och ewechgeholl."
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ਪ੍ਰਚਾਰ ਕਰਨ ਲਈ ਲਿੰਕ",
+                "startDate": "ਤਾਰੀਖ ਸ਼ੁਰੂ",
+                "startTime": "ਅਰੰਭ ਸਮਾਂ",
+                "endDate": "ਸਮਾਪਤੀ ਤਾਰੀਖ",
+                "endTime": "ਸਮਾਪਤੀ ਸਮਾਂ",
+                "budget": "ਬਜਟ"
+            },
+            "interests": {
+                "Title": "ਦਿਲਚਸਪੀ ਅਨੁਸਾਰ ਫਿਲਟਰ ਕਰੋ",
+                "FilterInterests": "ਕੋਈ ਦਿਲਚਸਪੀ ਟਾਈਪ ਕਰਨਾ ਅਰੰਭ ਕਰੋ ..."
+            },
+            "Interest": "ਦਿਲਚਸਪੀ",
+            "Location": "ਟਿਕਾਣਾ"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ਜਾਣਾ",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "ਬਰਾਊਜ਼ ਕਰੋ",
+            "WriteToStartConversation": "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਆਪਣੇ ਵਿਚਾਰ ਲਿਖੋ",
+            "StartConversation": "ਗੱਲਬਾਤ ਸ਼ੁਰੂ ਕਰੋ",
+            "GotoConversation": "ਗੱਲਬਾਤ ਤੇ ਜਾਓ",
+            "reset": "ਰੀਸੈਟ ਕਰੋ",
+            "edit": "ਸੰਪਾਦਿਤ ਕਰੋ",
+            "link": "ਲਿੰਕ",
+            "setUrl": "URL ਸੈਟ ਕਰੋ",
+            "save": "ਸੰਭਾਲੋ",
+            "setClip": "ਕਲਿੱਪ ਕੱਟੋ",
+            "invalidURL": "ਅਵੈਧ URL"
+        },
+        "FileTooLarge": "ਕੈਚਿੰਗ ਲਈ ਫਾਈਲ ਬਹੁਤ ਵੱਡੀ ਹੈ. ਅਧਿਕਤਮ ਫਾਈਲ ਅਕਾਰ {{size}}",
+        "InvalidPDF": "ਫਾਈਲ ਇੱਕ ਵੈਧ PDF ਨਹੀਂ ਹੈ",
+        "StartTypingTitleOrKeywords": "ਸਿਰਲੇਖ ਜਾਂ ਕੀਵਰਡਸ ਟਾਈਪ ਕਰਨਾ ਅਰੰਭ ਕਰੋ ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "ਇੱਕ HTML ਦਸਤਾਵੇਜ਼ ਜਿਸਨੂੰ ਬਹੁਤ ਸਾਰੇ ਉਪਯੋਗਕਰਤਾ ਵੇਖ ਅਤੇ ਸੰਪਾਦਿਤ ਕਰ ਸਕਦੇ ਹਨ",
+            "displayType": "ਲੇਖ"
+        },
+        "Websites\/slide": {
+            "description": "ਇੱਕ ਪੇਸ਼ਕਾਰੀ ਵਿੱਚ ਇੱਕ ਸਲਾਈਡ, HTML, ਆਡੀਓ ਆਦਿ ਸ਼ਾਮਲ ਕਰ ਸਕਦੀ ਹੈ.",
+            "displayType": "ਸਲਾਈਡ"
+        },
+        "Websites\/presentation": {
+            "description": "ਇੱਕ ਪੇਸ਼ਕਾਰੀ ਜਿਸ ਵਿੱਚ ਵੱਖ ਵੱਖ ਸਲਾਈਡਾਂ ਸ਼ਾਮਲ ਹਨ",
+            "displayType": "ਪੇਸ਼ਕਾਰੀ"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ਇੱਕ ਵੈਬਸਾਈਟ ਤੇ ਇੱਕ ਇਸ਼ਤਿਹਾਰਬਾਜ਼ੀ ਇਕਾਈ",
+            "displayType": "ਇਸ਼ਤਿਹਾਰ ਇਕਾਈ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "ਇੱਕ ਨਾਮ ਦੇ ਅਧੀਨ ਇਸ਼ਤਿਹਾਰਬਾਜ਼ੀ ਇਕਾਈਆਂ ਨੂੰ ਸਮੂਹਬੱਧ ਕਰਨ ਦਾ ਇੱਕ ਤਰੀਕਾ",
+            "displayType": "ਇਸ਼ਤਿਹਾਰਬਾਜ਼ੀ ਪਲੇਸਮੈਂਟ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ਕਿਸੇ ਇਸ਼ਤਿਹਾਰ ਲਈ ਸਮਗਰੀ",
+            "displayType": "ਵਿਗਿਆਪਨ ਰਚਨਾਤਮਕ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ਇੱਕ ਇਸ਼ਤਿਹਾਰਬਾਜ਼ੀ ਮੁਹਿੰਮ",
+            "displayType": "ਇਸ਼ਤਿਹਾਰਬਾਜ਼ੀ ਮੁਹਿੰਮ"
+        },
+        "Websites\/webpage": {
+            "description": "ਇੱਕ ਵੈਬਸਾਈਟ ਦੀ ਨੁਮਾਇੰਦਗੀ ਕਰਦਾ ਹੈ ਜਿਸਦਾ ਮੈਟਾਡੇਟਾ ਖਤਮ ਕੀਤਾ ਗਿਆ ਸੀ",
+            "displayType": "ਵੇਬ ਪੇਜ"
+        }
+    }
+}

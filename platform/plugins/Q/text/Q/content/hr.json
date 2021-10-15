@@ -117,7 +117,10 @@
         "SetClipStart": "Postavite Clip Start",
         "ClipStart": "Isječak Start",
         "SetClipEnd": "Postavi kraj isječka",
-        "ClipEnd": "Kraj isječka"
+        "ClipEnd": "Kraj isječka",
+        "StartMoreEnd": "Početni položaj ne može biti više od krajnjeg položaja",
+        "EndLessStart": "Krajnji položaj ne može biti manji od početnog",
+        "WhichInvalid": "Argument &#39;koji&#39; nije valjan"
     },
     "durations": {
         "second": "drugi",

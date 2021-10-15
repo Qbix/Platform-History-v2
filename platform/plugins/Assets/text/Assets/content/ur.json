@@ -36,8 +36,12 @@
         "WatchClip": "watching {1000} watching دیکھنے کے لئے {{amount}} کریڈٹ حاصل ہوا",
         "PurchaseCredits": "خریداری کریڈٹ",
         "forMessages": {
-            "BoughtCredits": "its 9 999} its کریڈٹ"
-        }
+            "BoughtCredits": "its 9 999} its کریڈٹ",
+            "BonusCredits": "{{amount}} کریڈٹ۔"
+        },
+        "CreatePaidStream": "{{toStreamName}} بنانے کے لیے",
+        "BonusCredits": "بونس {{amount}} کریڈٹس۔",
+        "BuyBonus": "ایک بار میں {{amount}} کریڈٹ خریدنا ، {{bonus}} کریڈٹس بونس کا باعث بنے گا۔"
     },
     "history": {
         "Date": "تاریخ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{9 999}} کریڈٹ خرچ کیا",
         "BoughtCredits": "{9 999}} کریڈٹ خریدے",
         "InviteAcceptedBy": "حاصل کردہ {9 999} its کریڈٹ",
-        "YouHaveCreditsToStart": "حاصل کردہ {9 999} its کریڈٹ"
+        "YouHaveCreditsToStart": "حاصل کردہ {9 999} its کریڈٹ",
+        "CreatePaidStream": "{{amount}} کریڈٹ خرچ کیے۔",
+        "WatchClip": {
+            "+": "{{amount}} کریڈٹ حاصل کیے۔",
+            "-": "{{amount}} کریڈٹ خرچ کیے۔"
+        },
+        "BonusCredits": "بونس {{amount}} کریڈٹس مل گئے۔"
     },
     "subscriptions": {
         "infoTitle": "ادائیگی کی معلومات مرتب کریں۔",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{9 999}} کریڈٹ خریدے"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "بونس {{amount}} کریڈٹس۔"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "قیمت مقرر کریں",
             "LinkPlaceholder": "اضافی معلومات کا لنک مرتب کریں",
             "DescriptionPlaceholder": "خدمت کی تفصیل",
-            "SaveService": "خدمت کو محفوظ کریں"
+            "SaveService": "خدمت کو محفوظ کریں",
+            "SelectRequiredParticipants": "مطلوبہ شرکاء۔"
         },
         "ManageServiceTemplates": "سروس ٹیمپلیٹس کا نظم کریں",
         "ManageServices": "خدمات کا انتظام کریں",

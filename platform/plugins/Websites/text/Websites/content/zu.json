@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Xhumanisa nokukhuthaza",
+                "startDate": "Usuku okuqalwa ngalo",
+                "startTime": "Isikhathi sokuqala",
+                "endDate": "Usuku Lokuphela",
+                "endTime": "Isikhathi Sokuphela",
+                "budget": "Isabelomali"
+            },
+            "interests": {
+                "Title": "Hlunga ngentshisekelo",
+                "FilterInterests": "Qala ukuthayipha intshisekelo ..."
+            },
+            "Interest": "Inzalo",
+            "Location": "Indawo"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Hambani",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Dlulisa amehlo",
+            "WriteToStartConversation": "Bhala imicabango yakho ukuqala ingxoxo",
+            "StartConversation": "Qala Ingxoxo",
+            "GotoConversation": "Iya Engxoxweni",
+            "reset": "Setha kabusha",
+            "edit": "Hlela",
+            "link": "Xhumanisa",
+            "setUrl": "Setha i-URL",
+            "save": "Gcina",
+            "setClip": "Sika isiqeshana",
+            "invalidURL": "I-URL engavumelekile"
+        },
+        "FileTooLarge": "Ifayela likhulu kakhulu kunqolobane. Usayizi wefayela omkhulu {{size}}",
+        "InvalidPDF": "Ifayela akuyona i-PDF evumelekile",
+        "StartTypingTitleOrKeywords": "Qala ukuthayipha isihloko noma amagama angukhiye ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Idokhumenti ye-HTML abasebenzisi abahlukahlukene abangayibuka futhi bahlele",
+            "displayType": "Isigaba"
+        },
+        "Websites\/slide": {
+            "description": "Isilayidi kusethulo, singafaka i-HTML, umsindo njll.",
+            "displayType": "Slayida"
+        },
+        "Websites\/presentation": {
+            "description": "Isethulo esinezilayidi ezahlukahlukene",
+            "displayType": "Isethulo"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Iyunithi yokukhangisa kuwebhusayithi",
+            "displayType": "Iyunithi yezikhangiso"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Indlela yokuqoqa amayunithi wokukhangisa ngaphansi kwegama",
+            "displayType": "Ukubekwa kwezikhangiso"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Okuqukethwe kwesikhangiso",
+            "displayType": "Ukudala kwezikhangiso"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Umkhankaso wokukhangisa",
+            "displayType": "Umkhankaso wokukhangisa"
+        },
+        "Websites\/webpage": {
+            "description": "Imelela iwebhusayithi imethadatha yayo esuliwe",
+            "displayType": "Iwebhusayithi"
+        }
+    }
+}

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Мардон даъват карданд",
-        "Streams\/invitedMe": "Ки маро даъват кард"
+        "Streams\/invitedMe": "Ки маро даъват кард",
+        "AreYouAgree": "Шумо розӣ ҳастед?",
+        "Yes": "Бале",
+        "No": "Не"
     },
     "interests": {
         "Filter": "Шумо аз чӣ истифода мекунед?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} агар код скан карда шуда бошад",
-            "copyLink": "{{ClickOrTap}} -ро нусхабардорӣ кардани истинод даъватнома"
+            "copyLink": "{{ClickOrTap}} -ро нусхабардорӣ кардани истинод даъватнома",
+            "userChooserPlaceholder": "Ҷустуҷӯ аз рӯи ном"
         },
         "email": {
             "subject": "Ҳа, ин тафтиш кунед",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Иштирокчӣ видео надорад",
             "openInBrowserAlert": "Барои ҳамроҳ шудан ба конфронс дар браузери Safari пайванд кушоед.",
             "youBeganVideoRecording": "Шумо сабти ин конфронсро оғоз кардед",
-            "youStoppedVideoRecording": "Шумо сабти ин конфронсро қатъ кардед"
+            "youStoppedVideoRecording": "Шумо сабти ин конфронсро қатъ кардед",
+            "switchingRoom": "Хонаи мубодила ...",
+            "forceDisconnecting": "Шумо дар давоми 5 сония ҷудо мешавед",
+            "youStartedLive": "Шумо пахши ин зангро ба фармоишгари RTMP оғоз кардед",
+            "youStoppedLive": "Шумо пахши ин зангро ба фармоишгари RTMP қатъ кардед",
+            "sbStartedLiveStreaming": "{{userName}} мустақиман оғоз ёфт",
+            "sbStoppedLiveStreaming": "{{userName}} ба таври зинда пахш шуд",
+            "liveStopped": "Ҳангоми фиристодани видео ба нуқтаи ниҳоӣ хато ба амал омад"
         },
         "settingsPopup": {
             "webCamera": "Веб камера",
@@ -192,7 +203,13 @@
             "stopRecording": "Сабтро қатъ кунед",
             "recordingInProgress": "Сабт идома дорад ...",
             "publishOnTimeline": "Дар ҷадвал нашр кунед",
-            "publishToGroup": "Нашр ба гурӯҳ"
+            "publishToGroup": "Нашр ба гурӯҳ",
+            "turnOffAudioInput": "Микрофонро хомӯш кунед",
+            "micIsTurnedOff": "Микрофон хомӯш карда шудааст",
+            "start": "Оғоз кунед",
+            "stop": "Ист",
+            "streamingSettings": "Танзимот",
+            "streamToRTMP": "Ба RTMP фармоишӣ интиқол диҳед"
         },
         "participantsPopup": {
             "disconnect": "Қатъи",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин ҷараёнро надоред.",
         "streamTitle": "{{1}} занги мустақим",
         "preview": {
-            "preamble": "Маҷлис:"
+            "preamble": "Маҷлис:",
+            "Meeting": "Вохӯрӣ",
+            "MeetingEnded": "Вохӯрӣ ба охир расид"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон хомӯш аст",
+            "micIsOn": "Микрофон фаъол аст",
+            "cameraIsOff": "Камера хомӯш аст",
+            "cameraIsOn": "Камера фаъол аст",
+            "screenSharingIsOn": "Мубодилаи экран фаъол аст",
+            "screenSharingIsOff": "Экрани мубодила",
+            "joinNow": "Ба Занг ҳамроҳ шавед"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Ҷавоб",
             "description": "ҷараёни посух"
+        },
+        "Streams\/calls": {
+            "displayType": "Зангҳо",
+            "description": "категория барои ҷараёнҳо\/webrtc",
+            "MaxRelationsExceeded": "Зангҳои ҳадди аксар зиёд шуданд"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Файл нодуруст аст",
         "errorNoSource": "Манбаи тасвир нест",
         "uploadLimit": "Андозаи максималии файл: {{size}}",
-        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}",
+        "uploadedImage": "Тасвири боршуда",
+        "imageTitle": "Номи тасвир"
     },
     "questions": {
         "Questions": "Саволҳо",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Аллакай ҷавоб дод",
         "TitlePlaceholder": "Саволи худро нависед",
         "ContentPlaceholder": "Дар ин ҷо ягон маълумоти иловагӣ гузоред, то ба одамон ҷавоб диҳанд",
-        "ErrorTitle": "Савол талаб карда мешавад"
+        "ErrorTitle": "Савол талаб карда мешавад",
+        "Placeholder": "Ҷойгиркунанда"
     },
     "experience": {
-        "NewExperience": "Таҷрибаи нав"
+        "NewExperience": "Таҷрибаи нав",
+        "DefineTitle": "Лутфан унвонеро муайян кунед",
+        "Create": "Эҷод кунед"
+    },
+    "calls": {
+        "SettingsTitle": "Зангҳо",
+        "MaxCalls": "Зангҳои максималӣ",
+        "Update": "Навсозӣ",
+        "NoCallsYet": "Ҳоло занг нест",
+        "CallReasonTitle": "Ин даъват чист?",
+        "WaitingRoom": "Хонаи интизорӣ"
     }
 }

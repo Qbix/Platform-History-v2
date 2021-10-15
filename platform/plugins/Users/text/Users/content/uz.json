@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Foydalanish shartlari qabul qilinsinmi?",
         "facebookNoEmail": "Sizning Facebook hisob qaydnomangizda tasdiqlangan elektron pochta manzili yo&#39;q. Tizimga oddiygina kiring.",
-        "picTooltip": "Keyinchalik bu rasmni o&#39;zgartirishingiz mumkin"
+        "picTooltip": "Keyinchalik bu rasmni o&#39;zgartirishingiz mumkin",
+        "wallet": {
+            "payload": "{{host}} ga {{timestamp}} vaqtida kiring",
+            "alert": {
+                "title": "Hamyonga yo&#39;naltirilmoqda",
+                "content": "Ushbu dialogni yopganingizdan so&#39;ng, siz hamyoningizga o&#39;tasiz. Tizimga kirganingizdan so&#39;ng, ushbu sahifaga qayting."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Kirish uchun usul qo&#39;shing",
@@ -108,6 +115,18 @@
         "Owner": "Egasi",
         "Admin": "Admin",
         "Member": "A&#39;zo",
-        "Guest": "Mehmon"
+        "Guest": "Mehmon",
+        "Host": "Xost"
+    },
+    "analytics": {
+        "Title": "Tahlil",
+        "Daily": "Kundalik",
+        "Weekly": "Haftalik",
+        "Monthly": "Oylik",
+        "Application": "Ilova",
+        "Pages": "Sahifalar",
+        "Services": "Xizmatlar",
+        "Faq": "Tss",
+        "WeekDays": "Hafta kunlari"
     }
 }

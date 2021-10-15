@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Awọn eniyan Mo pe",
-        "Streams\/invitedMe": "Tani o pe mi"
+        "Streams\/invitedMe": "Tani o pe mi",
+        "AreYouAgree": "Ṣe o gba?",
+        "Yes": "Bẹẹni",
+        "No": "Rara"
     },
     "interests": {
         "Filter": "Kini o ni igbadun?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ti koodu naa ba ṣayẹwo",
-            "copyLink": "{{ClickOrTap}} lati daakọ ọna asopọ ifiwepe"
+            "copyLink": "{{ClickOrTap}} lati daakọ ọna asopọ ifiwepe",
+            "userChooserPlaceholder": "Ṣewadii nipa orukọ"
         },
         "email": {
             "subject": "Hey, ṣayẹwo eyi jade",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Olukopa ko ni fidio",
             "openInBrowserAlert": "Ṣii ọna asopọ ni ẹrọ lilọ-kiri Safari lati darapọ mọ apejọ.",
             "youBeganVideoRecording": "O bẹrẹ gbigbasilẹ apejọ yii",
-            "youStoppedVideoRecording": "O da gbigbasilẹ apejọ yii duro"
+            "youStoppedVideoRecording": "O da gbigbasilẹ apejọ yii duro",
+            "switchingRoom": "Iyipada yara ...",
+            "forceDisconnecting": "Iwọ yoo ge asopọ laarin iṣẹju -aaya 5",
+            "youStartedLive": "O bẹrẹ ikede yii si RTMP aṣa",
+            "youStoppedLive": "O dẹkun ikede yii si RTMP aṣa",
+            "sbStartedLiveStreaming": "{{userName}} bẹrẹ ifiwe",
+            "sbStoppedLiveStreaming": "{{userName}} pari ni ifiwe",
+            "liveStopped": "Aṣiṣe lakoko fifiranṣẹ fidio si ipari ipari ṣẹlẹ"
         },
         "settingsPopup": {
             "webCamera": "Kamẹra wẹẹbu",
@@ -192,7 +203,13 @@
             "stopRecording": "Duro Gbigbasilẹ",
             "recordingInProgress": "Gbigbasilẹ wa ni ilọsiwaju ...",
             "publishOnTimeline": "Atẹjade lori Ago",
-            "publishToGroup": "Ṣe atẹjade si ẹgbẹ"
+            "publishToGroup": "Ṣe atẹjade si ẹgbẹ",
+            "turnOffAudioInput": "Dakẹ gbohungbohun",
+            "micIsTurnedOff": "Gbohungbohun wa ni pipa",
+            "start": "Bẹrẹ",
+            "stop": "Duro",
+            "streamingSettings": "Ètò",
+            "streamToRTMP": "San si RTMP aṣa"
         },
         "participantsPopup": {
             "disconnect": "Ge asopọ",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Iwọ ko ni aṣẹ lati darapọ mọ ṣiṣan yii.",
         "streamTitle": "{{1}} ipe laaye",
         "preview": {
-            "preamble": "Ipade:"
+            "preamble": "Ipade:",
+            "Meeting": "Ipade",
+            "MeetingEnded": "Ipade ti pari"
+        },
+        "preparing": {
+            "micIsOff": "Gbohungbohun wa ni pipa",
+            "micIsOn": "Mic ti wa ni titan",
+            "cameraIsOff": "Kamẹra ti wa ni pipa",
+            "cameraIsOn": "Kamẹra ti wa ni titan",
+            "screenSharingIsOn": "Iboju iboju wa ni titan",
+            "screenSharingIsOff": "Pin iboju",
+            "joinNow": "Darapọ mọ Ipe"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Idahun",
             "description": "san san"
+        },
+        "Streams\/calls": {
+            "displayType": "Awọn ipe",
+            "description": "ẹka fun Awọn ṣiṣan\/webrtc",
+            "MaxRelationsExceeded": "Awọn ipe Max ti pọ ju"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Faili ti ko fẹ",
         "errorNoSource": "Ko si orisun aworan",
         "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
-        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}",
+        "uploadedImage": "Pipa aworan",
+        "imageTitle": "Akọle aworan"
     },
     "questions": {
         "Questions": "Awọn ibeere",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Ti dahun tẹlẹ",
         "TitlePlaceholder": "Tẹ ibeere rẹ",
         "ContentPlaceholder": "Fi eyikeyi alaye diẹ sii nibi lati ṣe iranlọwọ fun eniyan lati dahun",
-        "ErrorTitle": "Ibeere nilo"
+        "ErrorTitle": "Ibeere nilo",
+        "Placeholder": "Olugbe ibi"
     },
     "experience": {
-        "NewExperience": "Iriri Tuntun"
+        "NewExperience": "Iriri Tuntun",
+        "DefineTitle": "Jọwọ setumo akọle kan",
+        "Create": "Ṣẹda"
+    },
+    "calls": {
+        "SettingsTitle": "Awọn ipe",
+        "MaxCalls": "Awọn ipe Max",
+        "Update": "Imudojuiwọn",
+        "NoCallsYet": "Ko si awọn ipe sibẹsibẹ",
+        "CallReasonTitle": "Kini ipe yii nipa?",
+        "WaitingRoom": "Iduro yara"
     }
 }

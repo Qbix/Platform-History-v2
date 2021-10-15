@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "មនុស្សដែលខ្ញុំបានអញ្ជើញ",
-        "Streams\/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ"
+        "Streams\/invitedMe": "តើអ្នកណាបានអញ្ជើញខ្ញុំ",
+        "AreYouAgree": "តើ​អ្នក​យល់ស្រប​ទេ?",
+        "Yes": "បាទ",
+        "No": "ទេ"
     },
     "interests": {
         "Filter": "តើអ្នកចូលចិត្តអ្វី?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ប្រសិនបើលេខកូដត្រូវបានស្កេន",
-            "copyLink": "{{ClickOrTap}} ដើម្បីចម្លងតំណអញ្ជើញ"
+            "copyLink": "{{ClickOrTap}} ដើម្បីចម្លងតំណអញ្ជើញ",
+            "userChooserPlaceholder": "ស្វែងរកតាមឈ្មោះ"
         },
         "email": {
             "subject": "ហេសូមពិនិត្យមើលវាចេញ",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "អ្នកចូលរួមមិនមានវីដេអូទេ",
             "openInBrowserAlert": "បើកតំណនៅក្នុងកម្មវិធីរុករក Safari ដើម្បីចូលរួមសន្និសីទ។",
             "youBeganVideoRecording": "អ្នកចាប់ផ្តើមកត់ត្រាសន្និសីទនេះ",
-            "youStoppedVideoRecording": "អ្នកឈប់ថតសន្និសិទនេះ"
+            "youStoppedVideoRecording": "អ្នកឈប់ថតសន្និសិទនេះ",
+            "switchingRoom": "ការផ្លាស់ប្តូរបន្ទប់ ...",
+            "forceDisconnecting": "អ្នកនឹងត្រូវផ្តាច់ក្នុងរយៈពេល ៥ វិនាទី",
+            "youStartedLive": "អ្នកបានចាប់ផ្តើមផ្សាយការហៅនេះទៅ RTMP ផ្ទាល់ខ្លួន",
+            "youStoppedLive": "អ្នកឈប់ផ្សាយការហៅនេះទៅ RTMP ផ្ទាល់ខ្លួន",
+            "sbStartedLiveStreaming": "{{userName}} បានចាប់ផ្តើមផ្សាយបន្តផ្ទាល់",
+            "sbStoppedLiveStreaming": "{{userName}} បានបញ្ចប់ការផ្សាយបន្តផ្ទាល់",
+            "liveStopped": "កំហុសខណៈពេលផ្ញើវីដេអូទៅចំណុចបញ្ចប់បានកើតឡើង"
         },
         "settingsPopup": {
             "webCamera": "ម៉ាស៊ីនថតគេហទំព័រ",
@@ -192,7 +203,13 @@
             "stopRecording": "បញ្ឈប់ការកត់ត្រា",
             "recordingInProgress": "ការថតកំពុងដំណើរការ ...",
             "publishOnTimeline": "ផ្សព្វផ្សាយតាមពេលវេលាកំណត់",
-            "publishToGroup": "ផ្សព្វផ្សាយទៅក្រុម"
+            "publishToGroup": "ផ្សព្វផ្សាយទៅក្រុម",
+            "turnOffAudioInput": "បិទសំឡេងមីក្រូហ្វូន",
+            "micIsTurnedOff": "មីក្រូហ្វូនត្រូវបានបិទ",
+            "start": "ចាប់ផ្តើម",
+            "stop": "ឈប់",
+            "streamingSettings": "ការកំណត់",
+            "streamToRTMP": "ស្ទ្រីមទៅ RTMP ផ្ទាល់ខ្លួន"
         },
         "participantsPopup": {
             "disconnect": "ផ្តាច់",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "អ្នកមិនមានសិទ្ធិចូលរួមក្នុងស្ទ្រីមនេះទេ។",
         "streamTitle": "ការហៅបន្តផ្ទាល់ {{៩៩៩}}",
         "preview": {
-            "preamble": "ការប្រជុំ៖"
+            "preamble": "ការប្រជុំ៖",
+            "Meeting": "កិច្ចប្រជុំ",
+            "MeetingEnded": "កិច្ចប្រជុំបានបញ្ចប់"
+        },
+        "preparing": {
+            "micIsOff": "មីក្រូបានបិទ",
+            "micIsOn": "មីក្រូបានបើក",
+            "cameraIsOff": "កាមេរ៉ាបិទ",
+            "cameraIsOn": "កាមេរ៉ាបានបើក",
+            "screenSharingIsOn": "ការចែករំលែកអេក្រង់បានបើក",
+            "screenSharingIsOff": "ចែករំលែកអេក្រង់",
+            "joinNow": "ចូលរួមការហៅ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ចម្លើយ",
             "description": "ស្ទ្រីមចម្លើយ"
+        },
+        "Streams\/calls": {
+            "displayType": "ការហៅ",
+            "description": "ប្រភេទសម្រាប់ស្ទ្រីម\/webrtc",
+            "MaxRelationsExceeded": "ការហៅអតិបរមាបានលើស"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "ឯកសារមិនត្រឹមត្រូវ",
         "errorNoSource": "គ្មានប្រភពរូបភាពទេ",
         "uploadLimit": "ទំហំឯកសារអតិបរមា៖ {{៩៩៩}}",
-        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}"
+        "errorFileSize": "សូមទោសតែឯកសារធំពេក។<br> ទំហំឯកសារអតិបរមាគឺ {{៩៩៩}}",
+        "uploadedImage": "រូបភាពដែលបានផ្ទុកឡើង",
+        "imageTitle": "ចំណងជើងរូបភាព"
     },
     "questions": {
         "Questions": "សំណួរ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "បានឆ្លើយរួចហើយ",
         "TitlePlaceholder": "វាយបញ្ចូលសំណួររបស់អ្នក",
         "ContentPlaceholder": "ដាក់ព័ត៌មានបន្ថែមនៅទីនេះដើម្បីជួយមនុស្សឆ្លើយ",
-        "ErrorTitle": "ត្រូវការសំណួរ"
+        "ErrorTitle": "ត្រូវការសំណួរ",
+        "Placeholder": "កន្លែងដាក់"
     },
     "experience": {
-        "NewExperience": "បទពិសោធន៍ថ្មី"
+        "NewExperience": "បទពិសោធន៍ថ្មី",
+        "DefineTitle": "សូមកំណត់ចំណងជើង",
+        "Create": "បង្កើត"
+    },
+    "calls": {
+        "SettingsTitle": "ការហៅ",
+        "MaxCalls": "ការហៅអតិបរមា",
+        "Update": "ធ្វើឱ្យទាន់សម័យ",
+        "NoCallsYet": "គ្មានការហៅនៅឡើយទេ",
+        "CallReasonTitle": "តើការហៅនេះនិយាយអំពីអ្វី?",
+        "WaitingRoom": "បន្ទប់​រង់ចាំ"
     }
 }

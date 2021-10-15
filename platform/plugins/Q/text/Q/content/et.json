@@ -117,7 +117,10 @@
         "SetClipStart": "Määra Clip Start",
         "ClipStart": "Klipi algus",
         "SetClipEnd": "Määra klipi lõpp",
-        "ClipEnd": "Klipi lõpp"
+        "ClipEnd": "Klipi lõpp",
+        "StartMoreEnd": "Alguspositsioon ei tohi olla rohkem kui lõppasend",
+        "EndLessStart": "Lõppasend ei tohi olla väiksem kui algasend",
+        "WhichInvalid": "Argument „mis” on kehtetu"
     },
     "durations": {
         "second": "teine",

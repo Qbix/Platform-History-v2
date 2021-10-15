@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "hauv {{1}}"
+    },
+    "units": {
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometers",
+        "kilometers": "kev ntsuas",
+        "km": "km",
+        "mile": "mais",
+        "miles": "mais",
+        "mi": "kuv",
+        "foot": "ko taw",
+        "feet": "ko taw",
+        "inches": "ntiv tes"
+    },
+    "location": {
+        "interested": "Kuv txaus siab rau yam uas tshwm sim hauv {{select}} ntawm",
+        "update": "Hloov Kho Kuv Qhov Chaw Nyob",
+        "set": "Teem Kuv Qhov Chaw Nyob",
+        "prompt": "{{ClickOrTap}} ntawm no<br> set koj<br> qhov chaw",
+        "myCurrentLocation": "Kuv qhov chaw nyob tam sim no",
+        "enterAddress": "Sau qhov chaw nyob",
+        "enterPostcode": "Thov sau koj tus lej xov tooj \/ tus lej zip code",
+        "create": {
+            "action": "Ntxiv Qhov Chaw",
+            "title": "Qhov chaw tshiab",
+            "nameYourLocation": "Npe koj qhov chaw nyob"
+        },
+        "confirm": {
+            "title": "Txuag qhov chaw no?",
+            "message": "Koj puas npaj yuav siv qhov chaw no dua yav tom ntej?",
+            "ok": "Yog lawm",
+            "cancel": "Tsis yog"
+        },
+        "add": {
+            "title": "Npe lub chaw no",
+            "placeholder": "Tsev, Ua haujlwm thiab lwm yam.",
+            "ok": "Txuag"
+        },
+        "dialog": {
+            "title": "Xaiv Qhov Chaw"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Puas muaj ib cheeb tsam hauv qhov chaw no?",
+        "newArea": "Thaj chaw tshiab",
+        "promptTitle": "Sau ib lub npe rau cheeb tsam:",
+        "absent": "Thov teem cheeb tsam",
+        "error": "Yuam kev",
+        "exist": "Cheeb tsam twb muaj lawm",
+        "addNewArea": "Ntxiv thaj tsam tshiab",
+        "add": "Ntxiv"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "sau los ntawm qhov chaw",
+            "displayType": "Qhov chaw"
+        },
+        "Places\/location": {
+            "description": "Sawv cev rau lub tsev, chaw, nkoj, chaw ua si, thiab lwm yam.",
+            "displayType": "Qhov chaw"
+        },
+        "Places\/area": {
+            "description": "Sawv cev ib cheeb tsam hauv ib qho chaw, xws li chav lossis chav",
+            "displayType": "Thaj tsam"
+        },
+        "Places\/floor": {
+            "description": "Sawv cev hauv pem teb hauv tsev lossis nkoj",
+            "displayType": "Hauv pem teb"
+        },
+        "Places\/column": {
+            "description": "Sawv cev rau ib kem hauv ib lub tsev lossis nkoj",
+            "displayType": "Kab"
+        },
+        "Places\/nearby": {
+            "description": "Qeb rau yam tsis pub dhau ib qho kev deb ntawm geohash",
+            "displayType": "Nyob ze ntawm qhov chaw"
+        },
+        "Places\/interest": {
+            "description": "Qeb rau yam khoom nyob hauv qee qhov deb ntawm geohash, sib piv qhov kev txaus siab",
+            "displayType": "Qhov chaw txaus siab"
+        }
+    }
+}

@@ -113,7 +113,10 @@
         "SetClipStart": "Saita Fara Clip",
         "ClipStart": "Fara Clip",
         "SetClipEnd": "Saita liparshen shirin",
-        "ClipEnd": "Endarshen Yankewa"
+        "ClipEnd": "Endarshen Yankewa",
+        "StartMoreEnd": "Matsayin farawa ba zai iya wuce matsayin ƙarshe ba",
+        "EndLessStart": "Matsayin ƙarshe ba zai iya zama ƙasa da farkon farawa ba",
+        "WhichInvalid": "Hujja &#39;wacce&#39; bata da inganci"
     },
     "tabs": {
         "more": "Kara",

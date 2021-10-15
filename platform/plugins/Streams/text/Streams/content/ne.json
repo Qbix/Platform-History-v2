@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "मैले आमन्त्रित गरे",
-        "Streams\/invitedMe": "कसले मलाई निम्तायो"
+        "Streams\/invitedMe": "कसले मलाई निम्तायो",
+        "AreYouAgree": "के तिमि सहमत छौ?",
+        "Yes": "हो",
+        "No": "होइन"
     },
     "interests": {
         "Filter": "तपाई के मज्जा लिनुहुन्छ?",
@@ -80,7 +83,8 @@
             "byFacebook": "फेसबुक",
             "byTwitter": "ट्विटर",
             "scannedQR": "Scan {9{}} कोड स्क्यान गरिएको थियो भने",
-            "copyLink": "आमन्त्रित लिंकको प्रतिलिपि गर्न {invite 9{}।।"
+            "copyLink": "आमन्त्रित लिंकको प्रतिलिपि गर्न {invite 9{}।।",
+            "userChooserPlaceholder": "नाम बाट खोज"
         },
         "email": {
             "subject": "अरे, यो जाँच गर्नुहोस्",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "सहभागीको कुनै भिडियो छैन",
             "openInBrowserAlert": "सम्मेलनमा सामेल हुन सफारी ब्राउजरमा लिंक खोल्नुहोस्।",
             "youBeganVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न सुरु गर्नुभयो",
-            "youStoppedVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न रोक्नुभयो"
+            "youStoppedVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न रोक्नुभयो",
+            "switchingRoom": "कोठा बदल्दै ...",
+            "forceDisconnecting": "तपाइँ ५ सेकेन्ड भित्र बिच्छेद हुनुहुनेछ",
+            "youStartedLive": "तपाइँ यो कल कस्टम RTMP लाई प्रसारण गर्न थाल्नुभयो",
+            "youStoppedLive": "तपाइँ अनुकूल RTMP मा यो कल प्रसारण बन्द गर्नुभयो",
+            "sbStartedLiveStreaming": "{{99}}} लाइभ सुरु भयो",
+            "sbStoppedLiveStreaming": "{{userName}} लाइभ समाप्त भयो",
+            "liveStopped": "एन्डपोइन्टमा भिडियो पठाउँदा त्रुटि भयो"
         },
         "settingsPopup": {
             "webCamera": "वेब क्यामेरा",
@@ -192,7 +203,13 @@
             "stopRecording": "रेकर्डि Stop रोक्नुहोस्",
             "recordingInProgress": "रेकर्डि progress प्रगतिमा छ ...",
             "publishOnTimeline": "टाइमलाइनमा प्रकाशित गर्नुहोस्",
-            "publishToGroup": "समूहमा प्रकाशित गर्नुहोस्"
+            "publishToGroup": "समूहमा प्रकाशित गर्नुहोस्",
+            "turnOffAudioInput": "माइक्रोफोन म्यूट गर्नुहोस्",
+            "micIsTurnedOff": "माइक्रोफोन बन्द छ",
+            "start": "सुरु गर्नुहोस्",
+            "stop": "रोक",
+            "streamingSettings": "सेटिंग्स",
+            "streamToRTMP": "कस्टम RTMP स्ट्रिम"
         },
         "participantsPopup": {
             "disconnect": "विच्छेद गर्नुहोस्",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "तपाईंसँग यस स्ट्रिममा सहभागी हुन अनुमति छैन।",
         "streamTitle": "Call {9{}} call प्रत्यक्ष कल",
         "preview": {
-            "preamble": "बैठक:"
+            "preamble": "बैठक:",
+            "Meeting": "बैठक",
+            "MeetingEnded": "बैठक सकियो"
+        },
+        "preparing": {
+            "micIsOff": "माइक बन्द छ",
+            "micIsOn": "माइक अन छ",
+            "cameraIsOff": "क्यामेरा बन्द छ",
+            "cameraIsOn": "क्यामेरा सक्रिय छ",
+            "screenSharingIsOn": "स्क्रिन सेयरि on सक्रिय छ",
+            "screenSharingIsOff": "स्क्रीन साझा गर्नुहोस्",
+            "joinNow": "कल मा सामेल हुनुहोस्"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "उत्तर",
             "description": "उत्तर प्रवाह"
+        },
+        "Streams\/calls": {
+            "displayType": "कलहरु",
+            "description": "धारा\/webrtc को लागी श्रेणी",
+            "MaxRelationsExceeded": "अधिकतम कल पार भयो"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "अमान्य फाइल",
         "errorNoSource": "कुनै छवि स्रोत छैन",
         "uploadLimit": "अधिकतम फाईल आकार: {{9{}}",
-        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाइल आकार {{9{} is is हो"
+        "errorFileSize": "माफ गर्नुहोस्, तर फाईल ज्यादै ठूलो छ।<br> अधिकतम फाइल आकार {{9{} is is हो",
+        "uploadedImage": "अपलोड छवि",
+        "imageTitle": "छवि शीर्षक"
     },
     "questions": {
         "Questions": "प्रश्नहरू",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "पहिले नै उत्तर दिइयो",
         "TitlePlaceholder": "तपाईंको प्रश्न टाइप गर्नुहोस्",
         "ContentPlaceholder": "व्यक्तिलाई जवाफ दिन सहयोग गर्न यहाँ कुनै थप जानकारी राख्नुहोस्",
-        "ErrorTitle": "प्रश्न आवाश्यक छ"
+        "ErrorTitle": "प्रश्न आवाश्यक छ",
+        "Placeholder": "प्लेसहोल्डर"
     },
     "experience": {
-        "NewExperience": "नयाँ अनुभव"
+        "NewExperience": "नयाँ अनुभव",
+        "DefineTitle": "कृपया एउटा शीर्षक परिभाषित गर्नुहोस्",
+        "Create": "सिर्जना गर्नुहोस्"
+    },
+    "calls": {
+        "SettingsTitle": "कलहरु",
+        "MaxCalls": "अधिकतम कल",
+        "Update": "अपडेट गर्नुहोस्",
+        "NoCallsYet": "अझै कुनै कल छैन",
+        "CallReasonTitle": "यो कल के बारे मा छ?",
+        "WaitingRoom": "प्रतीक्षालय"
     }
 }

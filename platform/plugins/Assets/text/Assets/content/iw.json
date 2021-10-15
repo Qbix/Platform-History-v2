@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "הקש כדי לשלם"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: החיוב מעובד עבור {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "תודה על התשלום שלך אל {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} נרשם כמנוי ל- {{plan.title}}",
+        "YouSubscribedTo": "נרשמת ל- {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "אתה מקבל תשלום של {{displayAmount}} מ- {{call 'publisher.displayName'}} באמצעות &quot;{{description}}&quot;",
+        "HasBeenCharged": "היי, זה רק כדי ליידע אותך ש {{1}} חויבה {{2}} בגין {{3}} על ידי {{4}}"
+    },
+    "charged": {
+        "Subject": "תודה על התשלום שלך עבור &quot;{{description}}&quot;",
+        "HavePaid": "היי {{1}}, זוהי רק אישור מהיר לכך ששילמת בהצלחה {{2}} ל- {{3}} עבור {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "מידע על הזמנה",
+        "PaymentMethod": "אמצעי תשלום",
+        "ContactInfo": "פרטים ליצירת קשר",
+        "Pay": "לְשַׁלֵם"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ההזמנה התקבלה על ידי {{invitedUserName}}",
+        "YouHaveCreditsToStart": "יש לך {{amount}} זיכויים להתחיל",
+        "PaymentFor": "תשלום עבור &quot;{{1}}&quot;",
+        "PaymentTo": "תשלום ל- {{1}}",
+        "PaymentToUser": "תשלום ל- {{toUserName}}",
+        "CreatePaidStream": "ליצירת {{toStreamName}}",
+        "JoinedPaidStream": "להזמנה ב &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ליצירת קהילה &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "כהחזר הזמנה ב &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "נקנה זיכויים של {{amount}}",
+        "BonusCredits": "זיכויים של בונוס {{amount}}",
+        "BuyAmountCredits": "קנה זיכויים של {{amount}}",
+        "WatchClip": "צבר זיכויים של {{amount}} לצפייה {{fromStreamTitle}}",
+        "MissingCredits": "חסר זיכויים",
+        "YouMissingCredits": "אתה צריך זיכויים נוספים של {{amount}} כדי להמשיך.",
+        "BuyCredits": "קנה זיכויים",
+        "BuyBonus": "קניית {{amount}} זיכויים בבת אחת תוביל לבונוס של {{bonus}} זיכויים.",
+        "Buy": "לִקְנוֹת",
+        "PurchaseCredits": "זיכויי רכישה",
+        "Credits": "נקודות זכות",
+        "ErrorInvalidAmount": "הסכום לא חוקי",
+        "ErrorInvalidCurrency": "לצערנו אנו עדיין לא תומכים במטבע {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "זיכויים של {{amount}}",
+            "BonusCredits": "זיכויים של {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "תַאֲרִיך",
+        "Amount": "כמות",
+        "Description": "תיאור",
+        "Client": "לָקוּחַ",
+        "To": "ל",
+        "From": "מ",
+        "SeeHistory": "עיין בהיסטוריית התשלומים עבור {{1}}",
+        "HistoryEmpty": "עדיין אין לך נתונים",
+        "PaymentFor": "נשלח זיכויים של {{amount}}",
+        "PaymentTo": "נשלח זיכויים של {{amount}}",
+        "PaymentToUser": "נשלח זיכויים של {{amount}}",
+        "CreatePaidStream": "הוצאת {{amount}} זיכויים",
+        "WatchClip": {
+            "+": "קיבלתם {{amount}} זיכויים",
+            "-": "הוצאת {{amount}} זיכויים"
+        },
+        "JoinedPaidStream": {
+            "+": "קיבלתם {{amount}} זיכויים",
+            "-": "הוצאת {{amount}} זיכויים"
+        },
+        "LeftPaidStream": {
+            "+": "קיבל זיכויים של {{amount}}",
+            "-": "נשלח זיכויים של {{amount}}"
+        },
+        "CreatedCommunity": "הוצאת {{amount}} זיכויים",
+        "BoughtCredits": "נקנה זיכויים של {{amount}}",
+        "BonusCredits": "קיבלתי זיכויים של {{amount}} בונוס",
+        "InviteAcceptedBy": "קיבלתם {{amount}} זיכויים",
+        "YouHaveCreditsToStart": "קיבלתם {{amount}} זיכויים"
+    },
+    "subscriptions": {
+        "infoTitle": "הגדר פרטי תשלום",
+        "confirm": {
+            "title": "התחל הרשמה",
+            "message": "האם תרצה להירשם כמנוי ל- {{title}}?",
+            "ok": "בסדר",
+            "cancel": "לְבַטֵל"
+        },
+        "CreditOrDebitCard": "כרטיס אשראי או כרטיס חיוב",
+        "SubscribePayment": "הירשם לתשלום",
+        "ImmediatePayment": "תשלום מיידי"
+    },
+    "payments": {
+        "infoTitle": "הגדר פרטי תשלום",
+        "BuyAmountCredits": "קנה זיכויים של {{amount}}",
+        "confirm": {
+            "title": "לבצע תשלום",
+            "message": "האם אתה מסכים לשלם {{symbol}} {{amount}}?",
+            "ok": "בסדר",
+            "cancel": "לְבַטֵל"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "נקודות זכות",
+            "description": "עוקב אחר זיכויים ותשלומים"
+        },
+        "Assets\/plan": {
+            "displayType": "תוכנית מנוי",
+            "description": "תוכנית מנוי"
+        },
+        "Assets\/subscription": {
+            "displayType": "מִנוּי",
+            "description": "מִנוּי"
+        },
+        "Assets\/product": {
+            "displayType": "מוצר",
+            "description": "המוצר שנמכר"
+        },
+        "Assets\/service": {
+            "displayType": "שֵׁרוּת",
+            "description": "השירות המוצע"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "קיבלתם {{amount}} זיכויים"
+        },
+        "Assets\/credits\/bought": {
+            "content": "נקנה זיכויים של {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "זיכויים של בונוס {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "הוצאת {{amount}} זיכויים"
+        },
+        "Assets\/credits\/sent": {
+            "content": "נשלח זיכויים של {{amount}} אל {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "קיבל זיכויים של {{amount}} מ- {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "שירות חדש",
+            "TitlePlaceholder": "שם שירות",
+            "PricePlaceholder": "קבע מחיר",
+            "LinkPlaceholder": "הגדר קישור מידע נוסף",
+            "DescriptionPlaceholder": "תיאור השירות",
+            "SaveService": "שמור שירות",
+            "SelectRequiredParticipants": "משתתפים נדרשים"
+        },
+        "ManageServiceTemplates": "נהל תבניות שירות",
+        "ManageServices": "ניהול שירותים",
+        "Free": "חינם",
+        "OptionalContribution": "תרומה אופציונלית",
+        "RequiredPayment": "תשלום חובה",
+        "AreYouSureDelete": "האם אתה בטוח שברצונך למחוק שירות זה?",
+        "AmountServicesRelated": "ישנם {{amount}} זמינות הקשורות לשירות זה. הם גם יוסרו."
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Frapu por pagi"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: procezo procesita por {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Dankon pro via pago al {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonis al {{plan.title}}",
+        "YouSubscribedTo": "Vi abonis al {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Vi ricevas pagon de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot;{{description}}&quot;",
+        "HasBeenCharged": "He, ĉi tio nur informas vin, ke {{1}} estas ŝargita {{2}} por {{3}} de {{4}}"
+    },
+    "charged": {
+        "Subject": "Dankon pro via pago por &quot;{{description}}&quot;",
+        "HavePaid": "Hej {{1}}, ĉi tio estas nur rapida konfirmo, ke vi sukcese pagis {{2}} al {{3}} por {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Informoj pri mendo",
+        "PaymentMethod": "Pagmaniero",
+        "ContactInfo": "Kontaktinformoj",
+        "Pay": "Pagu"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invito akceptita de {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Vi havas {{amount}} kreditojn por komenci",
+        "PaymentFor": "Pago por &quot;{{1}}&quot;",
+        "PaymentTo": "Pago al {{1}}",
+        "PaymentToUser": "Pago al {{toUserName}}",
+        "CreatePaidStream": "por krei {{toStreamName}}",
+        "JoinedPaidStream": "por rezervo en &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "por krei komunumon &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kiel rezerva repago en &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Aĉetis {{amount}} kreditojn",
+        "BonusCredits": "Bonusaj {{amount}} kreditoj",
+        "BuyAmountCredits": "Aĉetu {{amount}} kreditojn",
+        "WatchClip": "Gajnis {{amount}} kreditaĵojn por spekti {{fromStreamTitle}}",
+        "MissingCredits": "Mankas Kreditoj",
+        "YouMissingCredits": "Vi bezonas pliajn {{amount}} kreditojn por daŭrigi.",
+        "BuyCredits": "Aĉetu kreditojn",
+        "BuyBonus": "Aĉeti {{amount}} kreditojn samtempe kondukos al {{bonus}} kreditoj krom.",
+        "Buy": "Aĉeti",
+        "PurchaseCredits": "Aĉetu Kreditaĵojn",
+        "Credits": "Kreditoj",
+        "ErrorInvalidAmount": "Kvanto nevalida",
+        "ErrorInvalidCurrency": "Bedaŭrinde ni ankoraŭ ne subtenas valuton {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kreditoj",
+            "BonusCredits": "{{amount}} kreditoj"
+        }
+    },
+    "history": {
+        "Date": "Dato",
+        "Amount": "Kvanto",
+        "Description": "Priskribo",
+        "Client": "Kliento",
+        "To": "al",
+        "From": "de",
+        "SeeHistory": "Vidu paghistorion por {{1}}",
+        "HistoryEmpty": "Vi ankoraŭ ne havas datumojn",
+        "PaymentFor": "Sendis {{amount}} kreditaĵojn",
+        "PaymentTo": "Sendis {{amount}} kreditaĵojn",
+        "PaymentToUser": "Sendis {{amount}} kreditaĵojn",
+        "CreatePaidStream": "Eluzitaj {{amount}} kreditoj",
+        "WatchClip": {
+            "+": "Gajnis {{amount}} kreditaĵojn",
+            "-": "Eluzitaj {{amount}} kreditoj"
+        },
+        "JoinedPaidStream": {
+            "+": "Gajnis {{amount}} kreditaĵojn",
+            "-": "Eluzitaj {{amount}} kreditoj"
+        },
+        "LeftPaidStream": {
+            "+": "Ricevis {{amount}} kreditojn",
+            "-": "Sendis {{amount}} kreditaĵojn"
+        },
+        "CreatedCommunity": "Eluzitaj {{amount}} kreditoj",
+        "BoughtCredits": "Aĉetis {{amount}} kreditojn",
+        "BonusCredits": "Ricevis bonajn {{amount}} kreditojn",
+        "InviteAcceptedBy": "Gajnis {{amount}} kreditaĵojn",
+        "YouHaveCreditsToStart": "Gajnis {{amount}} kreditaĵojn"
+    },
+    "subscriptions": {
+        "infoTitle": "Agordi Pagan Informon",
+        "confirm": {
+            "title": "Komencu Abonon",
+            "message": "Ĉu vi ŝatus aboni {{title}}?",
+            "ok": "bone",
+            "cancel": "Nuligi"
+        },
+        "CreditOrDebitCard": "Kredita aŭ debeta karto",
+        "SubscribePayment": "Aboni Pagon",
+        "ImmediatePayment": "Tuja Pago"
+    },
+    "payments": {
+        "infoTitle": "Agordi Pagan Informon",
+        "BuyAmountCredits": "Aĉetu {{amount}} kreditojn",
+        "confirm": {
+            "title": "Faru Pagon",
+            "message": "Ĉu vi konsentas pagi {{symbol}} {{amount}}?",
+            "ok": "bone",
+            "cancel": "Nuligi"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kreditoj",
+            "description": "registras kreditojn kaj pagojn"
+        },
+        "Assets\/plan": {
+            "displayType": "Abona plano",
+            "description": "abona plano"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abono",
+            "description": "abono"
+        },
+        "Assets\/product": {
+            "displayType": "Produkto",
+            "description": "produkto vendata"
+        },
+        "Assets\/service": {
+            "displayType": "Servo",
+            "description": "servo ofertata"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Gajnis {{amount}} kreditaĵojn"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Aĉetis {{amount}} kreditojn"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonusaj {{amount}} kreditoj"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Eluzitaj {{amount}} kreditoj"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sendis {{amount}} kreditojn al {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ricevis {{amount}} kreditaĵojn de {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nova Servo",
+            "TitlePlaceholder": "Servotitolo",
+            "PricePlaceholder": "Fiksi prezon",
+            "LinkPlaceholder": "agordi aldonan informligon",
+            "DescriptionPlaceholder": "Serva priskribo",
+            "SaveService": "Konservu Servon",
+            "SelectRequiredParticipants": "Bezonataj Partoprenantoj"
+        },
+        "ManageServiceTemplates": "Administri Servajn Ŝablonojn",
+        "ManageServices": "Administri Servojn",
+        "Free": "Senpaga",
+        "OptionalContribution": "Laŭvola kontribuo",
+        "RequiredPayment": "Bezonata pago",
+        "AreYouSureDelete": "Ĉu vi certas, ke vi volas forigi ĉi tiun servon?",
+        "AmountServicesRelated": "Estas {{amount}} haveblecoj rilataj al ĉi tiu servo. Ili ankaŭ estos forigitaj."
+    }
+}

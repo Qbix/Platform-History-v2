@@ -36,8 +36,12 @@
         "WatchClip": "Ksibt {{amount}} krediti talli segwi {{fromStreamTitle}}",
         "PurchaseCredits": "Ixtri Krediti",
         "forMessages": {
-            "BoughtCredits": "{{amount}} krediti"
-        }
+            "BoughtCredits": "{{amount}} krediti",
+            "BonusCredits": "{{amount}} krediti"
+        },
+        "CreatePaidStream": "għall-ħolqien ta &#39;{{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} krediti",
+        "BuyBonus": "Ix-xiri ta &#39;{{amount}} krediti f&#39;daqqa, iwassal għal bonus ta&#39; {{bonus}} krediti."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Intnefqu {{amount}} kredti",
         "BoughtCredits": "Xtrajt {{amount}} kredti",
         "InviteAcceptedBy": "Kiseb {{amount}} kredti",
-        "YouHaveCreditsToStart": "Kiseb {{amount}} kredti"
+        "YouHaveCreditsToStart": "Kiseb {{amount}} kredti",
+        "CreatePaidStream": "Krediti li ntefqu {{amount}}",
+        "WatchClip": {
+            "+": "Miksuba {{amount}} krediti",
+            "-": "Krediti li ntefqu {{amount}}"
+        },
+        "BonusCredits": "Ghandek bonus ta &#39;{{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Xtrajt {{amount}} kredti"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} krediti"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Issettja l-prezz",
             "LinkPlaceholder": "waqqaf link addizzjonali ta &#39;informazzjoni",
             "DescriptionPlaceholder": "Deskrizzjoni tas-Servizz",
-            "SaveService": "Issejvja s-Servizz"
+            "SaveService": "Issejvja s-Servizz",
+            "SelectRequiredParticipants": "Parteċipanti Meħtieġa"
         },
         "ManageServiceTemplates": "Immaniġġja Templates tas-Servizz",
         "ManageServices": "Servizzi ta &#39;Ġestjoni",

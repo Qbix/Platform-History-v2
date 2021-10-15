@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Mutane da na kira su",
-        "Streams\/invitedMe": "Wane ne ya gayyace ni"
+        "Streams\/invitedMe": "Wane ne ya gayyace ni",
+        "AreYouAgree": "Kun yarda?",
+        "Yes": "Na&#39;am",
+        "No": "A&#39;a"
     },
     "interests": {
         "Filter": "Me kuke jin dadi?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} idan aka kirkiri lambar",
-            "copyLink": "{{ClickOrTap}} don kwafar hanyar gayyata"
+            "copyLink": "{{ClickOrTap}} don kwafar hanyar gayyata",
+            "userChooserPlaceholder": "Bincika da suna"
         },
         "email": {
             "subject": "Hey, duba wannan",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Mai halarta bashi da bidiyo",
             "openInBrowserAlert": "Buɗe hanyar haɗi a mai binciken Safari don shiga taron.",
             "youBeganVideoRecording": "Kun fara rikodin wannan taron",
-            "youStoppedVideoRecording": "Kun dakatar da yin wannan taron"
+            "youStoppedVideoRecording": "Kun dakatar da yin wannan taron",
+            "switchingRoom": "Dakin canzawa ...",
+            "forceDisconnecting": "Za a cire haɗin ku a cikin dakika 5",
+            "youStartedLive": "Kun fara watsa wannan kiran zuwa RTMP na al&#39;ada",
+            "youStoppedLive": "Kun daina watsa wannan kiran zuwa RTMP na al&#39;ada",
+            "sbStartedLiveStreaming": "{{userName}} ya fara kai tsaye",
+            "sbStoppedLiveStreaming": "{{userName}} ya ƙare kai tsaye",
+            "liveStopped": "An sami kuskure yayin aika bidiyo zuwa ƙarshen magana"
         },
         "settingsPopup": {
             "webCamera": "Kyamarar Yanar gizo",
@@ -192,7 +203,13 @@
             "stopRecording": "Tsaya Rikodi",
             "recordingInProgress": "Rikodin suna kan ...",
             "publishOnTimeline": "Buga kan saiti",
-            "publishToGroup": "Bugawa zuwa rukuni"
+            "publishToGroup": "Bugawa zuwa rukuni",
+            "turnOffAudioInput": "Muryar makirufo",
+            "micIsTurnedOff": "An kashe makirufo",
+            "start": "Fara",
+            "stop": "Tsaya",
+            "streamingSettings": "Saituna",
+            "streamToRTMP": "Jera zuwa RTMP na al&#39;ada"
         },
         "participantsPopup": {
             "disconnect": "Cire haɗin",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Baka da izinin shiga wannan rafin.",
         "streamTitle": "{{1}} kiran bidiyo",
         "preview": {
-            "preamble": "Gamuwa:"
+            "preamble": "Gamuwa:",
+            "Meeting": "Ganawa",
+            "MeetingEnded": "An gama taro"
+        },
+        "preparing": {
+            "micIsOff": "Mic a kashe",
+            "micIsOn": "Mic yana kunne",
+            "cameraIsOff": "An kashe kamara",
+            "cameraIsOn": "Kamara tana kunne",
+            "screenSharingIsOn": "Ana kunna allo",
+            "screenSharingIsOff": "Share allo",
+            "joinNow": "Haɗa Kira"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Amsa",
             "description": "amsar rafi"
+        },
+        "Streams\/calls": {
+            "displayType": "Kira",
+            "description": "rukuni don Streams\/webrtc",
+            "MaxRelationsExceeded": "An wuce kiran max"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fayil mara aiki",
         "errorNoSource": "Babu tushen hoto",
         "uploadLimit": "Matsakaicin girman fayil: {{size}}",
-        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}",
+        "uploadedImage": "Hoton da aka ɗora",
+        "imageTitle": "Taken hoton"
     },
     "questions": {
         "Questions": "Tambayoyi",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "An riga an amsa",
         "TitlePlaceholder": "Buga tambayarka",
         "ContentPlaceholder": "Sanya kowane ƙarin bayani anan don taimakawa mutane amsa",
-        "ErrorTitle": "Tambaya ake bukata"
+        "ErrorTitle": "Tambaya ake bukata",
+        "Placeholder": "Mai riƙe wuri"
     },
     "experience": {
-        "NewExperience": "Sabuwar Kwarewa"
+        "NewExperience": "Sabuwar Kwarewa",
+        "DefineTitle": "Da fatan a ayyana take",
+        "Create": "Ƙirƙiri"
+    },
+    "calls": {
+        "SettingsTitle": "Kira",
+        "MaxCalls": "Max kira",
+        "Update": "Sabuntawa",
+        "NoCallsYet": "Babu kira tukuna",
+        "CallReasonTitle": "Menene wannan kiran?",
+        "WaitingRoom": "Dakin Jira"
     }
 }

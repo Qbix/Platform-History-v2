@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Истинод барои таблиғ",
+                "startDate": "Саршавии Сана",
+                "startTime": "Вақти оғоз",
+                "endDate": "Санаи анҷом",
+                "endTime": "Вақти анҷом",
+                "budget": "Буҷет"
+            },
+            "interests": {
+                "Title": "Филтр аз рӯи фоизҳо",
+                "FilterInterests": "Ба навиштани фоизҳо оғоз кунед ..."
+            },
+            "Interest": "Фоиз",
+            "Location": "Макон"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Бирав",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Мурури",
+            "WriteToStartConversation": "Барои оғози сӯҳбат андешаҳои худро нависед",
+            "StartConversation": "Сӯҳбатро оғоз кунед",
+            "GotoConversation": "Ба Гуфтугӯ гузаред",
+            "reset": "Аз нав танзим кардан",
+            "edit": "Таҳрир кардан",
+            "link": "Пайванд",
+            "setUrl": "URL -ро таъин кунед",
+            "save": "Захира кунед",
+            "setClip": "Клипро буред",
+            "invalidURL": "URL нодуруст"
+        },
+        "FileTooLarge": "Файл барои кэшкунӣ хеле калон аст. Андозаи максималии файл {{size}}",
+        "InvalidPDF": "Файл PDF -и дуруст нест",
+        "StartTypingTitleOrKeywords": "Ба навиштани унвон ё калимаҳои калидӣ оғоз кунед ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Ҳуҷҷати HTML, ки корбарони гуногун метавонанд дидан ва таҳрир кунанд",
+            "displayType": "Мақола"
+        },
+        "Websites\/slide": {
+            "description": "Слайд дар презентатсия метавонад HTML, аудио ва ғайраҳоро дар бар гирад.",
+            "displayType": "Слайд"
+        },
+        "Websites\/presentation": {
+            "description": "Презентатсия аз слайдҳои гуногун",
+            "displayType": "Муаррифӣ"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Воҳиди таблиғ дар вебсайт",
+            "displayType": "Воҳиди таблиғ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Усули гурӯҳбандии воҳидҳои таблиғотӣ ба ном",
+            "displayType": "Ҷойгиркунии таблиғ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Мундариҷа барои таблиғ",
+            "displayType": "Рекламаи эҷодӣ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Маъракаи таблиғотӣ",
+            "displayType": "Маъракаи таблиғотӣ"
+        },
+        "Websites\/webpage": {
+            "description": "Вебсайтро ифода мекунад, ки метамаълумоташ канда шудаанд",
+            "displayType": "торнамо"
+        }
+    }
+}

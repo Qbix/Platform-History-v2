@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "dina {{1}}"
+    },
+    "units": {
+        "meter": "méteran",
+        "meters": "méter",
+        "kilometer": "kilométer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mil",
+        "miles": "mil",
+        "mi": "mi",
+        "foot": "suku",
+        "feet": "suku",
+        "inches": "inci"
+    },
+    "location": {
+        "interested": "Abdi resep kana hal-hal anu lumangsung dina waktos {{select}} ti",
+        "update": "Perbarui Lokasi Abdi",
+        "set": "Atur Lokasi Abdi",
+        "prompt": "{{ClickOrTap}} di dieu pikeun<br> atur anjeun<br> lokasi",
+        "myCurrentLocation": "Lokasi kuring ayeuna",
+        "enterAddress": "Lebetkeun alamat",
+        "enterPostcode": "Punten lebetkeun postcode \/ zipcode anjeun",
+        "create": {
+            "action": "Tambihkeun Lokasi",
+            "title": "Lokasi Anyar",
+            "nameYourLocation": "Nami lokasi anjeun"
+        },
+        "confirm": {
+            "title": "Simpen lokasi ieu?",
+            "message": "Naha anjeun ngarencanakeun nganggo lokasi ieu deui kapayunna?",
+            "ok": "Leres",
+            "cancel": "Henteu"
+        },
+        "add": {
+            "title": "Sebutkeun lokasi ieu",
+            "placeholder": "Bumi, Pagawean jsb.",
+            "ok": "Ngahémat"
+        },
+        "dialog": {
+            "title": "Pilih Lokasi"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Naon waé daérah di jero lokasi ieu?",
+        "newArea": "Daérah anyar",
+        "promptTitle": "Lebetkeun nami kanggo daérah éta:",
+        "absent": "Punten diaturkeun daérah",
+        "error": "Kasalahan",
+        "exist": "Daérah parantos aya",
+        "addNewArea": "Tambihkeun daérah énggal",
+        "add": "Tambihkeun"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kumpulan lokasi",
+            "displayType": "Lokasi"
+        },
+        "Places\/location": {
+            "description": "Ngalambangkeun gedong, tempat, kapal, taman, jst.",
+            "displayType": "Lokasi"
+        },
+        "Places\/area": {
+            "description": "Ngagambarkeun area dina lokasi, sapertos kamar atanapi suite",
+            "displayType": "Daérah"
+        },
+        "Places\/floor": {
+            "description": "Ngagambarkeun lanté dina gedong atanapi kapal",
+            "displayType": "Lantai"
+        },
+        "Places\/column": {
+            "description": "Ngagambarkeun kolom dina wangunan atanapi kapal",
+            "displayType": "Kolom"
+        },
+        "Places\/nearby": {
+            "description": "Kategori pikeun hal-hal dina jarak anu tangtu tina geohash",
+            "displayType": "Deukeut ku tempat"
+        },
+        "Places\/interest": {
+            "description": "Kategori pikeun hal-hal dina jarak anu tangtu tina geohash, cocog sareng minat",
+            "displayType": "Kapentingan tempat"
+        }
+    }
+}

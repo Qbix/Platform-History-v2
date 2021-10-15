@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Nies li stiedejt",
-        "Streams\/invitedMe": "Min stiedenni"
+        "Streams\/invitedMe": "Min stiedenni",
+        "AreYouAgree": "Taqbel?",
+        "Yes": "Iva",
+        "No": "Le"
     },
     "interests": {
         "Filter": "Xi tħobb?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Agħżel darb&#39;oħra mill-Kuntatti",
             "inviteSelectedContacts": "Stieden Kuntatti Magħżula",
             "scannedQR": "{{ClickOrTap}} jekk il-kodiċi kien skannjat",
-            "copyLink": "{{ClickOrTap}} biex tikkopja link għall-istedina"
+            "copyLink": "{{ClickOrTap}} biex tikkopja link għall-istedina",
+            "userChooserPlaceholder": "Fittex bl-isem"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Parteċipant m&#39;għandux video",
             "openInBrowserAlert": "Rabta miftuħa fil-browser Safari biex tingħaqad mal-konferenza.",
             "youBeganVideoRecording": "Int bdejt tirrekordja din il-konferenza",
-            "youStoppedVideoRecording": "Int waqaf tirreġistra din il-konferenza"
+            "youStoppedVideoRecording": "Int waqaf tirreġistra din il-konferenza",
+            "switchingRoom": "Kamra tal-iswiċċjar ...",
+            "forceDisconnecting": "Tkun skonnettjat fi żmien 5 sekondi",
+            "youStartedLive": "Bdejt ixandar din is-sejħa lill-RTMP apposta",
+            "youStoppedLive": "Waqaft ixxandar din is-sejħa lil RTMP apposta",
+            "sbStartedLiveStreaming": "{{userName}} beda live",
+            "sbStoppedLiveStreaming": "{{userName}} intemm live",
+            "liveStopped": "Sar żball waqt li bagħtet vidjo lill-endpoint"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -205,7 +216,13 @@
             "stopRecording": "Waqqaf ir-Reġistrazzjoni",
             "recordingInProgress": "Ir-reġistrazzjoni tinsab għaddejja ...",
             "publishOnTimeline": "Ippubblika fuq l-iskeda ta ’żmien",
-            "publishToGroup": "Ippubblika għall-grupp"
+            "publishToGroup": "Ippubblika għall-grupp",
+            "turnOffAudioInput": "Mikrofonu mutu",
+            "micIsTurnedOff": "Il-mikrofonu huwa mitfi",
+            "start": "Ibda",
+            "stop": "Waqfa",
+            "streamingSettings": "Settings",
+            "streamToRTMP": "Stream għal RTMP apposta"
         },
         "participantsPopup": {
             "disconnect": "Skonnettja",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
         "streamTitle": "{{1}} telefonata diretta",
         "preview": {
-            "preamble": "Laqgħa:"
+            "preamble": "Laqgħa:",
+            "Meeting": "Laqgħa",
+            "MeetingEnded": "Laqgħa ntemmet"
+        },
+        "preparing": {
+            "micIsOff": "Mic huwa mitfi",
+            "micIsOn": "Mic huwa mixgħul",
+            "cameraIsOff": "Il-kamera hija mitfija",
+            "cameraIsOn": "Il-kamera hija mixgħula",
+            "screenSharingIsOn": "Screensharing huwa mixgħul",
+            "screenSharingIsOff": "Jaqsam l-iskrin",
+            "joinNow": "Ingħaqad mas-Sejħa"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Tweġiba",
             "description": "risposta fluss"
+        },
+        "Streams\/calls": {
+            "displayType": "Sejħiet",
+            "description": "kategorija għal Streams \/ webrtc",
+            "MaxRelationsExceeded": "It-telefonati massimi inqabżu"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fajl Invalidu",
         "errorNoSource": "L-ebda sors ta &#39;immaġni",
         "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
-        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+        "errorFileSize": "Jiddispjacini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}",
+        "uploadedImage": "Immaġni mtella &#39;",
+        "imageTitle": "Titlu tal-immaġni"
     },
     "questions": {
         "Questions": "Mistoqsijiet",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Diġà wieġeb",
         "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
         "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
-        "ErrorTitle": "Mistoqsija meħtieġa"
+        "ErrorTitle": "Mistoqsija meħtieġa",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Esperjenza Ġdida"
+        "NewExperience": "Esperjenza Ġdida",
+        "DefineTitle": "Jekk jogħġbok iddefinixxi titlu",
+        "Create": "Oħloq"
+    },
+    "calls": {
+        "SettingsTitle": "Sejħiet",
+        "MaxCalls": "Max isejjaħ",
+        "Update": "Aġġornament",
+        "NoCallsYet": "L-ebda telefonata għadha",
+        "CallReasonTitle": "Din is-sejħa dwar xiex inhi?",
+        "WaitingRoom": "Waiting Room"
     }
 }

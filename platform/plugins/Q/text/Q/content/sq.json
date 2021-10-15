@@ -117,7 +117,10 @@
         "SetClipStart": "Vendos Clip Start",
         "ClipStart": "Fillo klipin",
         "SetClipEnd": "Cakto fundin e klipit",
-        "ClipEnd": "Fundi i Klipit"
+        "ClipEnd": "Fundi i Klipit",
+        "StartMoreEnd": "Pozicioni fillestar nuk mund të jetë më shumë se pozicioni përfundimtar",
+        "EndLessStart": "Pozicioni përfundimtar nuk mund të jetë më pak se pozicioni fillestar",
+        "WhichInvalid": "Argumenti &#39;cili&#39; i pavlefshëm"
     },
     "durations": {
         "second": "e dyta",

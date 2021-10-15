@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "მე მოწვეული ხალხი",
-        "Streams\/invitedMe": "ვინ მიმიწვია"
+        "Streams\/invitedMe": "ვინ მიმიწვია",
+        "AreYouAgree": "თანახმა ხარ?",
+        "Yes": "დიახ",
+        "No": "არა"
     },
     "interests": {
         "Filter": "რა სარგებლობ?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "აირჩიეთ კონტაქტებისგან",
             "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები",
             "scannedQR": "99 99 999}} თუ კოდი დასკანერებული იყო",
-            "copyLink": "Invite 999}} მოწვევის ბმულის ასლის ასათვისებლად"
+            "copyLink": "Invite 999}} მოწვევის ბმულის ასლის ასათვისებლად",
+            "userChooserPlaceholder": "ძიება სახელის მიხედვით"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "მონაწილეს ვიდეო არ აქვს",
             "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში კონფერენციაში შესასვლელად.",
             "youBeganVideoRecording": "თქვენ დაიწყეთ ამ კონფერენციის ჩაწერა",
-            "youStoppedVideoRecording": "თქვენ შეაჩერეთ ამ კონფერენციის ჩაწერა"
+            "youStoppedVideoRecording": "თქვენ შეაჩერეთ ამ კონფერენციის ჩაწერა",
+            "switchingRoom": "გადართვის ოთახი ...",
+            "forceDisconnecting": "თქვენ გათიშული იქნებით 5 წამში",
+            "youStartedLive": "თქვენ დაიწყეთ ამ ზარის გადაცემა მორგებულ RTMP– ზე",
+            "youStoppedLive": "თქვენ შეწყვიტეთ ამ ზარის მაუწყებლობა მორგებულ RTMP– ზე",
+            "sbStartedLiveStreaming": "{{userName}} დაიწყო პირდაპირ ეთერში",
+            "sbStoppedLiveStreaming": "{{userName}} დასრულდა პირდაპირ ეთერში",
+            "liveStopped": "მოხდა შეცდომა ვიდეოს ბოლო წერტილში გაგზავნისას"
         },
         "settingsPopup": {
             "webCamera": "Ვებ კამერა",
@@ -205,7 +216,13 @@
             "stopRecording": "ჩაწერის შეჩერება",
             "recordingInProgress": "ჩაწერა მიმდინარეობს ...",
             "publishOnTimeline": "ვადებში გამოქვეყნება",
-            "publishToGroup": "ჯგუფურად გამოქვეყნება"
+            "publishToGroup": "ჯგუფურად გამოქვეყნება",
+            "turnOffAudioInput": "მიკროფონის დადუმება",
+            "micIsTurnedOff": "მიკროფონი გამორთულია",
+            "start": "დაწყება",
+            "stop": "გაჩერდი",
+            "streamingSettings": "პარამეტრები",
+            "streamToRTMP": "ნაკადი მორგებულ RTMP– ზე"
         },
         "participantsPopup": {
             "disconnect": "გათიშვა",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
         "streamTitle": "99 999}} ცოცხალი ზარი",
         "preview": {
-            "preamble": "Შეხვედრა:"
+            "preamble": "Შეხვედრა:",
+            "Meeting": "Შეხვედრა",
+            "MeetingEnded": "შეხვედრა დასრულდა"
+        },
+        "preparing": {
+            "micIsOff": "მიკროფონი გამორთულია",
+            "micIsOn": "მიკროფონი ჩართულია",
+            "cameraIsOff": "კამერა გამორთულია",
+            "cameraIsOn": "კამერა ჩართულია",
+            "screenSharingIsOn": "ეკრანის გაზიარება ჩართულია",
+            "screenSharingIsOff": "ეკრანის გაზიარება",
+            "joinNow": "შეუერთდით ზარს"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "პასუხი",
             "description": "პასუხის ნაკადი"
+        },
+        "Streams\/calls": {
+            "displayType": "ზარები",
+            "description": "ნაკადი ნაკადებისთვის\/webrtc",
+            "MaxRelationsExceeded": "ზარების გადაჭარბება"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Არასწორი ფაილი",
         "errorNoSource": "სურათის წყარო არ არის",
         "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
-        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}",
+        "uploadedImage": "ატვირთული სურათი",
+        "imageTitle": "სურათის სათაური"
     },
     "questions": {
         "Questions": "კითხვები",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "უკვე უპასუხა",
         "TitlePlaceholder": "აკრიფეთ თქვენი კითხვა",
         "ContentPlaceholder": "განათავსეთ აქ ნებისმიერი დამატებითი ინფორმაცია, რომ დაეხმაროთ ხალხს პასუხის გაცემაში",
-        "ErrorTitle": "საჭიროა კითხვა"
+        "ErrorTitle": "საჭიროა კითხვა",
+        "Placeholder": "ადგილის შემცვლელი"
     },
     "experience": {
-        "NewExperience": "Ახალი გამოცდილება"
+        "NewExperience": "Ახალი გამოცდილება",
+        "DefineTitle": "გთხოვთ განსაზღვროთ სათაური",
+        "Create": "Შექმნა"
+    },
+    "calls": {
+        "SettingsTitle": "ზარები",
+        "MaxCalls": "მაქსი ურეკავს",
+        "Update": "განახლება",
+        "NoCallsYet": "ზარები ჯერ არ არის",
+        "CallReasonTitle": "რა არის ეს მოწოდება?",
+        "WaitingRoom": "Მოსაცდელი ოთახი"
     }
 }

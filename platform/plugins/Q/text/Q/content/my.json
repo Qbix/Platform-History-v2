@@ -113,7 +113,10 @@
         "SetClipStart": "Clip Start ကိုသတ်မှတ်ပါ",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Clip အဆုံးကိုသတ်မှတ်ပါ",
-        "ClipEnd": "Clip အဆုံး"
+        "ClipEnd": "Clip အဆုံး",
+        "StartMoreEnd": "အစနေရာသည်အဆုံးသတ်အနေအထားထက်မပိုနိုင်ပါ",
+        "EndLessStart": "အဆုံးသတ်အနေအထားသည်အစနေရာထက်မငယ်နိုင်ပါ",
+        "WhichInvalid": "မမှန်ကန်သောအငြင်းအခုံ"
     },
     "tabs": {
         "more": "နောက်ထပ်",

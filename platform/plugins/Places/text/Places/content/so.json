@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "gudaha {{1}}"
+    },
+    "units": {
+        "meter": "mitir",
+        "meters": "mitir",
+        "kilometer": "kiiloomitir",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mayl",
+        "miles": "mayl",
+        "mi": "mi",
+        "foot": "cagta",
+        "feet": "cagaha",
+        "inches": "inji"
+    },
+    "location": {
+        "interested": "Waxaan xiiseynayaa waxyaabaha ka dhacaya gudaha {{select}} ee",
+        "update": "Cusboonaysii Goobtayda",
+        "set": "Deji Goobtayda",
+        "prompt": "{{ClickOrTap}} halkan<br> dhig<br> goobta",
+        "myCurrentLocation": "Goobtayda hadda",
+        "enterAddress": "Geli cinwaan",
+        "enterPostcode": "Fadlan geli koodhkaaga \/ summadahaaga",
+        "create": {
+            "action": "Ku dar Goobta",
+            "title": "Goobta Cusub",
+            "nameYourLocation": "Magaca goobtaada"
+        },
+        "confirm": {
+            "title": "Keyd meeshan?",
+            "message": "Ma qorshaynaysaa inaad mar kale isticmaasho goobtan mustaqbalka?",
+            "ok": "Haa",
+            "cancel": "Maya"
+        },
+        "add": {
+            "title": "Magaca meeshan",
+            "placeholder": "Guri, Shaqo iwm.",
+            "ok": "Badbaadi"
+        },
+        "dialog": {
+            "title": "Dooro Goob"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Aag kasta oo ku yaal gudaha goobtan?",
+        "newArea": "Aag cusub",
+        "promptTitle": "Ku qor magac aagga:",
+        "absent": "Fadlan meel dhig",
+        "error": "Khalad",
+        "exist": "Aaggu hore ayuu u jiray",
+        "addNewArea": "Ku dar aag cusub",
+        "add": "Ku dar"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "ururinta goobo",
+            "displayType": "Goobaha"
+        },
+        "Places\/location": {
+            "description": "Wuxuu matalaa dhisme, goob, markab, baarkin, iwm.",
+            "displayType": "Goobta"
+        },
+        "Places\/area": {
+            "description": "Wuxuu matalaa aag meel ku yaal, sida qol ama suite",
+            "displayType": "Aagga"
+        },
+        "Places\/floor": {
+            "description": "Wuxuu matalaa sagxad dhisme ama markab",
+            "displayType": "Dabaqa"
+        },
+        "Places\/column": {
+            "description": "Wuxuu matalaa tiir ku yaal dhisme ama markab",
+            "displayType": "Tiirka"
+        },
+        "Places\/nearby": {
+            "description": "Qaybta alaabta ku jirta masaafo cayiman oo geohash ah",
+            "displayType": "U dhow meelaha"
+        },
+        "Places\/interest": {
+            "description": "Noocyada wax u jira masaafo cayiman oo geohash ah, oo u dhigma dulsaar",
+            "displayType": "Meelaha xiisaha leh"
+        }
+    }
+}

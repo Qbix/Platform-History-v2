@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Lumikizani kuti mupititse patsogolo",
+                "startDate": "Tsiku loyambira",
+                "startTime": "Nthawi Yoyambira",
+                "endDate": "Tsiku lomaliza",
+                "endTime": "Nthawi Yotsiriza",
+                "budget": "Bajeti"
+            },
+            "interests": {
+                "Title": "Sefa Mwa Chidwi",
+                "FilterInterests": "Yambani kulemba chidwi ..."
+            },
+            "Interest": "Chidwi",
+            "Location": "Malo"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Pitani",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Sakatulani",
+            "WriteToStartConversation": "Lembani malingaliro anu kuti muyambe kukambirana",
+            "StartConversation": "Yambani Kukambirana",
+            "GotoConversation": "Pitani ku Kukambirana",
+            "reset": "Bwezeretsani",
+            "edit": "Sinthani",
+            "link": "Lumikizani",
+            "setUrl": "Khazikitsani URL",
+            "save": "Sungani",
+            "setClip": "Dulani Clip",
+            "invalidURL": "URL yolakwika"
+        },
+        "FileTooLarge": "Fayilo yayikulu kwambiri kuti munthu asayike posungira Kukula kwa kukula kwa fayilo {{size}}",
+        "InvalidPDF": "Fayilo si PDF yovomerezeka",
+        "StartTypingTitleOrKeywords": "Yambani kulemba mutu kapena mawu osakira ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Tsamba la HTML lomwe ogwiritsa ntchito osiyanasiyana amatha kuwona ndikusintha",
+            "displayType": "Nkhani"
+        },
+        "Websites\/slide": {
+            "description": "Chithunzi chofotokozera, chitha kuphatikizira HTML, mawu ndi zina.",
+            "displayType": "Wopanda"
+        },
+        "Websites\/presentation": {
+            "description": "Chiwonetsero chokhala ndi zithunzi zosiyanasiyana",
+            "displayType": "Kupereka"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Malo otsatsa patsamba lawebusayiti",
+            "displayType": "Chotsatsa"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Njira yophatikizira magulu otsatsa omwe ali ndi dzina",
+            "displayType": "Kuyika malonda"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Zolemba zotsatsa",
+            "displayType": "Malonda opanga"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampeni yotsatsa",
+            "displayType": "Ntchito yotsatsa"
+        },
+        "Websites\/webpage": {
+            "description": "Imayimira tsamba lawebusayiti lomwe metadata yake idachotsedwa",
+            "displayType": "tsamba la webu"
+        }
+    }
+}

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Batho bao ke ba memileng",
-        "Streams\/invitedMe": "Ke mang ea nketselitseng"
+        "Streams\/invitedMe": "Ke mang ea nketselitseng",
+        "AreYouAgree": "Na ua lumela?",
+        "Yes": "Ho joalo",
+        "No": "Che"
     },
     "interests": {
         "Filter": "U thabela eng?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} haeba khoutu e hlahlojoa",
-            "copyLink": "{{ClickOrTap}} ho kopitsa sehokelo sa memo"
+            "copyLink": "{{ClickOrTap}} ho kopitsa sehokelo sa memo",
+            "userChooserPlaceholder": "Batla ka mabitso"
         },
         "email": {
             "subject": "Hey, hlahloba sena",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Morupeluoa ha a na video",
             "openInBrowserAlert": "Bula sehokelo ka sebatli sa Safari ho kenela kopano.",
             "youBeganVideoRecording": "O qalile ho rekota kopano ena",
-            "youStoppedVideoRecording": "O emisitse ho rekota kopano ena"
+            "youStoppedVideoRecording": "O emisitse ho rekota kopano ena",
+            "switchingRoom": "Ho fetola kamore ...",
+            "forceDisconnecting": "O tla hakolloa kamora metsotsoana e 5",
+            "youStartedLive": "O qalile ho phatlalatsa mohala ona ho RTMP ea tloaelo",
+            "youStoppedLive": "U emisitse ho phatlalatsa mohala ona ho RTMP ea tloaelo",
+            "sbStartedLiveStreaming": "{{userName}} e qalile ka kotloloho",
+            "sbStoppedLiveStreaming": "{{userName}} e fedile hang",
+            "liveStopped": "Phoso ha ho romelloa video ho fihla qetellong e etsahetse"
         },
         "settingsPopup": {
             "webCamera": "Khamera ea Webo",
@@ -192,7 +203,13 @@
             "stopRecording": "Emisa ho Rekota",
             "recordingInProgress": "Ho rekota hoa tsoela pele ...",
             "publishOnTimeline": "Hatisa ka tatellano ea nako",
-            "publishToGroup": "Phatlalatsa ho sehlopha"
+            "publishToGroup": "Phatlalatsa ho sehlopha",
+            "turnOffAudioInput": "Khutsa maekrofono",
+            "micIsTurnedOff": "Maekrofouno o timme",
+            "start": "Qala",
+            "stop": "Ema",
+            "streamingSettings": "Litlhophiso",
+            "streamToRTMP": "Phallela ho RTMP ea tloaelo"
         },
         "participantsPopup": {
             "disconnect": "Lahla",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Ha u na tumello ea ho kenella molatsoaneng ona.",
         "streamTitle": "{{1}} mohala o tsitsitseng",
         "preview": {
-            "preamble": "Seboka:"
+            "preamble": "Seboka:",
+            "Meeting": "Kopano",
+            "MeetingEnded": "Kopano e ile ea fela"
+        },
+        "preparing": {
+            "micIsOff": "Mic e tima",
+            "micIsOn": "Mic e buletsoe",
+            "cameraIsOff": "Khamera e timme",
+            "cameraIsOn": "Khamera e buletsoe",
+            "screenSharingIsOn": "Screensharing e butsoe",
+            "screenSharingIsOff": "Abelana skrine",
+            "joinNow": "Eba mohala"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Karabo",
             "description": "karabo ea karabo"
+        },
+        "Streams\/calls": {
+            "displayType": "Di-call",
+            "description": "sehlopha bakeng sa Melapo \/ webrtc",
+            "MaxRelationsExceeded": "Mehala e mengata e fete"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Faele e fosahetseng",
         "errorNoSource": "Ha ho mohloli oa setšoantšo",
         "uploadLimit": "Boholo ba faele: {{size}}",
-        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}",
+        "uploadedImage": "Setšoantšo se kentsoeng",
+        "imageTitle": "Sehlooho sa setšoantšo"
     },
     "questions": {
         "Questions": "Lipotso",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "E se e arabiloe",
         "TitlePlaceholder": "Ngola potso ea hau",
         "ContentPlaceholder": "Beha lintlha tse ling tse tlatsetso mona ho thusa batho ho araba",
-        "ErrorTitle": "Potso ea hlokahala"
+        "ErrorTitle": "Potso ea hlokahala",
+        "Placeholder": "Setholi"
     },
     "experience": {
-        "NewExperience": "Phihlelo e Ncha"
+        "NewExperience": "Phihlelo e Ncha",
+        "DefineTitle": "Ka kopo hlalosa sehlooho",
+        "Create": "Theha"
+    },
+    "calls": {
+        "SettingsTitle": "Di-call",
+        "MaxCalls": "Max oa letsa",
+        "Update": "Nchafatsa",
+        "NoCallsYet": "Ha ho li-call hajoale",
+        "CallReasonTitle": "Mohala ona ke oa eng?",
+        "WaitingRoom": "Kamore ea ho Leta"
     }
 }

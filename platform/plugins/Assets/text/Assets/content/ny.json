@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Dinani kuti mulipire"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: kulipiritsa kwa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Zikomo chifukwa cholipira ku {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} adalembetsa ku {{plan.title}}",
+        "YouSubscribedTo": "Mwalembetsa ku {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Mumalandira ndalama za {{displayAmount}} kuchokera ku {{call 'publisher.displayName'}} wolemba &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, ndikungokudziwitsani kuti {{1}} amalipiritsa {{2}} pa {{3}} ndi {{4}}"
+    },
+    "charged": {
+        "Subject": "Zikomo chifukwa cholipira &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, ichi ndi chitsimikiziro chachangu kuti mwalipira {{2}} kwa {{3}} kwa {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Zambiri zokhudza dongosolo",
+        "PaymentMethod": "Njira yolipirira",
+        "ContactInfo": "Zambiri zamalumikizidwe",
+        "Pay": "Lipirani"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Oitanidwa avomerezedwa ndi {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Muli ndi mbiri {{amount}} yoyambira",
+        "PaymentFor": "Malipiro a &quot;{{1}}&quot;",
+        "PaymentTo": "Malipiro kwa {{1}}",
+        "PaymentToUser": "Malipiro kwa {{toUserName}}",
+        "CreatePaidStream": "zopanga {{toStreamName}}",
+        "JoinedPaidStream": "kusungitsa malo mu &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "popanga dera &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "monga ndalama zobwezeretsera mu &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Wagula {{amount}} mbiri",
+        "BonusCredits": "Bonasi {{amount}} ngongole",
+        "BuyAmountCredits": "Gulani mbiri ya {{amount}}",
+        "WatchClip": "Zopindulitsa za {{amount}} zowonera {{fromStreamTitle}}",
+        "MissingCredits": "Kuyamikira Zosowa",
+        "YouMissingCredits": "Mufunika zowonjezera {{amount}} kuti mupitilize.",
+        "BuyCredits": "Gulani ngongole",
+        "BuyBonus": "Kugula ngongole za {{amount}} nthawi imodzi, zipangitsa kuti pakhale bonasi ya {{bonus}}.",
+        "Buy": "Gulani",
+        "PurchaseCredits": "Zogula Zolemba",
+        "Credits": "Zowonjezera",
+        "ErrorInvalidAmount": "Kuchuluka kosagwira",
+        "ErrorInvalidCurrency": "Tsoka ilo sitikuthandizira ndalama {{currency}} pano",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} ngongole",
+            "BonusCredits": "{{amount}} ngongole"
+        }
+    },
+    "history": {
+        "Date": "Tsiku",
+        "Amount": "Kuchuluka",
+        "Description": "Kufotokozera",
+        "Client": "Makasitomala",
+        "To": "kuti",
+        "From": "kuchokera",
+        "SeeHistory": "Onani mbiri yakulipira kwa {{1}}",
+        "HistoryEmpty": "Mulibe deta pano",
+        "PaymentFor": "Anatumiza {{amount}} kuyamika",
+        "PaymentTo": "Anatumiza {{amount}} kuyamika",
+        "PaymentToUser": "Anatumiza {{amount}} kuyamika",
+        "CreatePaidStream": "Anagwiritsa ntchito ngongole ya {{amount}}",
+        "WatchClip": {
+            "+": "Zopeza za {{amount}}",
+            "-": "Anagwiritsa ntchito ngongole ya {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Zopeza za {{amount}}",
+            "-": "Anagwiritsa ntchito ngongole ya {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Adalandira mbiri {{amount}}",
+            "-": "Anatumiza {{amount}} kuyamika"
+        },
+        "CreatedCommunity": "Anagwiritsa ntchito ngongole ya {{amount}}",
+        "BoughtCredits": "Wagula {{amount}} mbiri",
+        "BonusCredits": "Muli ndi bonasi ya {{amount}}",
+        "InviteAcceptedBy": "Zopeza za {{amount}}",
+        "YouHaveCreditsToStart": "Zopeza za {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Ikani Zambiri Zamalipiro",
+        "confirm": {
+            "title": "Yambani Kulembetsa",
+            "message": "Kodi mukufuna kulembetsa ku {{title}}?",
+            "ok": "Chabwino",
+            "cancel": "Kuletsa"
+        },
+        "CreditOrDebitCard": "Khadi la ngongole kapena debit",
+        "SubscribePayment": "Lembetsani Malipiro",
+        "ImmediatePayment": "Malipiro Pomwepo"
+    },
+    "payments": {
+        "infoTitle": "Ikani Zambiri Zamalipiro",
+        "BuyAmountCredits": "Gulani mbiri ya {{amount}}",
+        "confirm": {
+            "title": "Pangani Malipiro",
+            "message": "Mukuvomera kulipira {{symbol}} {{amount}}?",
+            "ok": "Chabwino",
+            "cancel": "Kuletsa"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Zowonjezera",
+            "description": "amasunga ngongole ndi zolipira"
+        },
+        "Assets\/plan": {
+            "displayType": "Ndondomeko Yolembetsa",
+            "description": "dongosolo lolembetsa"
+        },
+        "Assets\/subscription": {
+            "displayType": "Kulembetsa",
+            "description": "kulembetsa"
+        },
+        "Assets\/product": {
+            "displayType": "Mankhwala",
+            "description": "malonda akugulitsidwa"
+        },
+        "Assets\/service": {
+            "displayType": "Utumiki",
+            "description": "ntchito yoperekedwa"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Zopeza za {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Wagula {{amount}} mbiri"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonasi {{amount}} ngongole"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Anagwiritsa ntchito ngongole ya {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Kutumiza {{amount}} kuyamika kwa {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Adalandira ndalama {{amount}} kuchokera ku {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Utumiki Watsopano",
+            "TitlePlaceholder": "Udindo wautumiki",
+            "PricePlaceholder": "Ikani mtengo",
+            "LinkPlaceholder": "ikani zina zowonjezera ulalo",
+            "DescriptionPlaceholder": "Kufotokozera kwautumiki",
+            "SaveService": "Sungani Ntchito",
+            "SelectRequiredParticipants": "Ophunzira Ofunika"
+        },
+        "ManageServiceTemplates": "Sinthani ma templates a Service",
+        "ManageServices": "Sinthani Ntchito",
+        "Free": "Kwaulere",
+        "OptionalContribution": "Chopereka mwakufuna kwanu",
+        "RequiredPayment": "Malipiro oyenera",
+        "AreYouSureDelete": "Mukutsimikiza kuti mukufuna kufufuta ntchitoyi?",
+        "AmountServicesRelated": "Pali {{amount}} zopezeka zokhudzana ndi ntchitoyi. Iwonso adzachotsedwa."
+    }
+}

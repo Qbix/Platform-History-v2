@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Targ&#39;ib qilish uchun havola",
+                "startDate": "Boshlanish vaqti",
+                "startTime": "Boshlanish vaqti",
+                "endDate": "Tugash sanasi",
+                "endTime": "Tugash vaqti",
+                "budget": "Byudjet"
+            },
+            "interests": {
+                "Title": "Qiziqish bo&#39;yicha filtrlash",
+                "FilterInterests": "Qiziqishni yozishni boshlang ..."
+            },
+            "Interest": "Qiziqish",
+            "Location": "Manzil"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Boring",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Ko&#39;rib chiqish",
+            "WriteToStartConversation": "Suhbatni boshlash uchun o&#39;z fikrlaringizni yozing",
+            "StartConversation": "Suhbatni boshlash",
+            "GotoConversation": "Suhbatga o&#39;ting",
+            "reset": "Qayta o&#39;rnatish",
+            "edit": "Tahrirlash",
+            "link": "Havola",
+            "setUrl": "URL manzilini o&#39;rnating",
+            "save": "Saqlash",
+            "setClip": "Klipni kesib tashlash",
+            "invalidURL": "URL noto‘g‘ri"
+        },
+        "FileTooLarge": "Fayl keshlash uchun juda katta. Maksimal fayl hajmi {{size}}",
+        "InvalidPDF": "Fayl PDF formatida emas",
+        "StartTypingTitleOrKeywords": "Sarlavha yoki kalit so&#39;zlarni yozishni boshlang ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Turli foydalanuvchilar ko&#39;rishi va tahrir qilishi mumkin bo&#39;lgan HTML hujjat",
+            "displayType": "Maqola"
+        },
+        "Websites\/slide": {
+            "description": "Taqdimotdagi slayd HTML, audio va boshqalarni o&#39;z ichiga olishi mumkin.",
+            "displayType": "Slayd"
+        },
+        "Websites\/presentation": {
+            "description": "Turli slaydlardan iborat taqdimot",
+            "displayType": "Taqdimot"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Saytdagi reklama bo&#39;limi",
+            "displayType": "Reklama birligi"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Nom ostida reklama birliklarini guruhlash usuli",
+            "displayType": "Reklamani joylashtirish"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Reklama uchun kontent",
+            "displayType": "Ijodiy reklama"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklama kampaniyasi",
+            "displayType": "Reklama kampaniyasi"
+        },
+        "Websites\/webpage": {
+            "description": "Meta -ma&#39;lumotlari qirib tashlangan veb -saytni ifodalaydi",
+            "displayType": "veb-sahifa"
+        }
+    }
+}

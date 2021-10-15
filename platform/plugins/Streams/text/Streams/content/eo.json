@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Homoj, kiujn mi invitis",
-        "Streams\/invitedMe": "Kiu invitis min"
+        "Streams\/invitedMe": "Kiu invitis min",
+        "AreYouAgree": "Ĉu vi konsentas?",
+        "Yes": "Jes",
+        "No": "Ne"
     },
     "interests": {
         "Filter": "Kion vi ĝuas?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} se la kodo estis skanita",
-            "copyLink": "{{ClickOrTap}} por kopii invitan ligon"
+            "copyLink": "{{ClickOrTap}} por kopii invitan ligon",
+            "userChooserPlaceholder": "Serĉu laŭ nomo"
         },
         "email": {
             "subject": "Hej, kontrolu ĉi tion",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Partoprenanto ne havas filmeton",
             "openInBrowserAlert": "Malferma ligo en Safari-retumilo por aliĝi al la konferenco.",
             "youBeganVideoRecording": "Vi komencis registri ĉi tiun konferencon",
-            "youStoppedVideoRecording": "Vi ĉesis registri ĉi tiun konferencon"
+            "youStoppedVideoRecording": "Vi ĉesis registri ĉi tiun konferencon",
+            "switchingRoom": "Ŝanĝĉambro ...",
+            "forceDisconnecting": "Vi estos malkonektita ene de 5 sekundoj",
+            "youStartedLive": "Vi komencis dissendi ĉi tiun alvokon al laŭmenda RTMP",
+            "youStoppedLive": "Vi ĉesis elsendi ĉi tiun alvokon al laŭmenda RTMP",
+            "sbStartedLiveStreaming": "{{userName}} ekfunkciis",
+            "sbStoppedLiveStreaming": "{{userName}} finiĝis vive",
+            "liveStopped": "Eraro dum sendado de video al finpunkto okazis"
         },
         "settingsPopup": {
             "webCamera": "Reta fotilo",
@@ -192,7 +203,13 @@
             "stopRecording": "Ĉesu Registri",
             "recordingInProgress": "Registrado estas en progreso ...",
             "publishOnTimeline": "Publikigu laŭ templinio",
-            "publishToGroup": "Eldonu al grupo"
+            "publishToGroup": "Eldonu al grupo",
+            "turnOffAudioInput": "Muta mikrofono",
+            "micIsTurnedOff": "Mikrofono estas malŝaltita",
+            "start": "Komencu",
+            "stop": "Haltu",
+            "streamingSettings": "Agordoj",
+            "streamToRTMP": "Transdoni al laŭmenda RTMP"
         },
         "participantsPopup": {
             "disconnect": "Malkonekti",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu rivereto.",
         "streamTitle": "{{1}} viva alvoko",
         "preview": {
-            "preamble": "Kunveno:"
+            "preamble": "Kunveno:",
+            "Meeting": "Kunveno",
+            "MeetingEnded": "Kunveno finiĝis"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofono estas malŝaltita",
+            "micIsOn": "Mikrofono estas ŝaltita",
+            "cameraIsOff": "Fotilo estas malŝaltita",
+            "cameraIsOn": "Fotilo estas ŝaltita",
+            "screenSharingIsOn": "Ekrankomputado estas aktiva",
+            "screenSharingIsOff": "Kunhavigi ekranon",
+            "joinNow": "Aliĝu al la Voko"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Respondo",
             "description": "responda rivereto"
+        },
+        "Streams\/calls": {
+            "displayType": "Alvokoj",
+            "description": "kategorio por Rojoj \/ webrtc",
+            "MaxRelationsExceeded": "Maksimumaj vokoj superis"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Nevalida Dosiero",
         "errorNoSource": "Neniu bildfonto",
         "uploadLimit": "Maksimuma grandeco de dosiero: {{size}}",
-        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}",
+        "uploadedImage": "Alŝutita bildo",
+        "imageTitle": "Bildtitolo"
     },
     "questions": {
         "Questions": "Demandoj",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Jam respondis",
         "TitlePlaceholder": "Tajpu vian demandon",
         "ContentPlaceholder": "Metu ĉi tien pliajn informojn por helpi homojn respondi",
-        "ErrorTitle": "Demando necesas"
+        "ErrorTitle": "Demando necesas",
+        "Placeholder": "Loktenilo"
     },
     "experience": {
-        "NewExperience": "Nova Sperto"
+        "NewExperience": "Nova Sperto",
+        "DefineTitle": "Bonvolu difini titolon",
+        "Create": "Kreu"
+    },
+    "calls": {
+        "SettingsTitle": "Alvokoj",
+        "MaxCalls": "Max vokas",
+        "Update": "Ĝisdatigu",
+        "NoCallsYet": "Ankoraŭ neniuj alvokoj",
+        "CallReasonTitle": "Pri kio temas ĉi tiu alvoko?",
+        "WaitingRoom": "Atendejo"
     }
 }

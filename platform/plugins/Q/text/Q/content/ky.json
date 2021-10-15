@@ -113,7 +113,10 @@
         "SetClipStart": "Клипти Баштоо орнотуу",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Клип Аяктоону коюңуз",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Баштапкы позиция акыркы позициядан ашпашы керек",
+        "EndLessStart": "Аяктоо позициясы баштапкы абалынан кем болбошу керек",
+        "WhichInvalid": "&quot;Кайсы&quot; деген аргумент жараксыз"
     },
     "tabs": {
         "more": "көбүрөөк",

@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Zencîre ji bo danasînê",
+                "startDate": "Dîroka Destpêkê",
+                "startTime": "Dema Destpêkê",
+                "endDate": "Dîroka Dawiyê",
+                "endTime": "Dema Dawiyê",
+                "budget": "Sermîyan"
+            },
+            "interests": {
+                "Title": "Parzûna Bi Berjewendî",
+                "FilterInterests": "Dest bi nivîsandina berjewendiyek bikin ..."
+            },
+            "Interest": "Zem",
+            "Location": "Cîh"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Çûyin",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Fikrên xwe binivîsin da ku dest bi axaftinê bikin",
+            "StartConversation": "Danûstendinê Dest pê bikin",
+            "GotoConversation": "Herin Gotûbêjê",
+            "reset": "Reset bike",
+            "edit": "Weşandin",
+            "link": "Pêvek",
+            "setUrl": "URL saz bikin",
+            "save": "Rizgarkirin",
+            "setClip": "Clip Derkeve",
+            "invalidURL": "URL nederbasdar e"
+        },
+        "FileTooLarge": "Pel ji bo kaşkirinê pir mezin e. Mezinahiya pelê herî zêde {{size}}",
+        "InvalidPDF": "Pel PDFek derbasdar nine",
+        "StartTypingTitleOrKeywords": "Dest bi nivîsandina sernav an bêjeyên sereke bikin ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Belgeyek HTML -ya ku bikarhênerên cihêreng dikarin bibînin û biguherînin",
+            "displayType": "Tişt"
+        },
+        "Websites\/slide": {
+            "description": "Slaytek di danasînê de, dikare HTML, deng hwd.",
+            "displayType": "Şemitîn"
+        },
+        "Websites\/presentation": {
+            "description": "Pêşandanek ku ji slaytên cihêreng pêk tê",
+            "displayType": "Pêşkêşî"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Yekîneyek reklamê li ser malperê",
+            "displayType": "Yekîneya reklamê"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Awayê komkirina yekîneyên reklamê di bin navekî de",
+            "displayType": "Danîna reklamê"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Naveroka ji bo reklamek",
+            "displayType": "Advert creative"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampanyayek reklamê",
+            "displayType": "Kampanya reklamê"
+        },
+        "Websites\/webpage": {
+            "description": "Malperek ku metadata wê hatî qulipandin temsîl dike",
+            "displayType": "Web page"
+        }
+    }
+}

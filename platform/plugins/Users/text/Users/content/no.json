@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Godta vilkårene for bruk?",
         "facebookNoEmail": "Facebook-kontoen din mangler en bekreftet e-postadresse. Bare logg inn på den opprinnelige måten.",
-        "picTooltip": "Du kan endre dette bildet senere"
+        "picTooltip": "Du kan endre dette bildet senere",
+        "wallet": {
+            "payload": "Logg deg på {{host}} om gangen {{timestamp}}",
+            "alert": {
+                "title": "Viderekobler til Wallet",
+                "content": "Når du lukker denne dialogboksen, blir du ført til lommeboken din. Etter at du har logget deg på, går du tilbake til denne siden."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Legg til en måte å logge på",
@@ -108,6 +115,18 @@
         "Owner": "Eieren",
         "Admin": "admin",
         "Member": "Medlem",
-        "Guest": "Gjest"
+        "Guest": "Gjest",
+        "Host": "Vert"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daglig",
+        "Weekly": "Ukentlig",
+        "Monthly": "Månedlig",
+        "Application": "applikasjon",
+        "Pages": "Sider",
+        "Services": "Tjenester",
+        "Faq": "FAQ",
+        "WeekDays": "Uke dager"
     }
 }

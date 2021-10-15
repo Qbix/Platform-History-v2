@@ -36,8 +36,12 @@
         "WatchClip": "Watching {1000} watching જોવા માટે {{amount}} કમાણી",
         "PurchaseCredits": "ખરીદી ક્રેડિટ્સ",
         "forMessages": {
-            "BoughtCredits": "Its 9 999}} ક્રેડિટ્સ"
-        }
+            "BoughtCredits": "Its 9 999}} ક્રેડિટ્સ",
+            "BonusCredits": "{{amount}} ક્રેડિટ"
+        },
+        "CreatePaidStream": "{{toStreamName}} બનાવવા માટે",
+        "BonusCredits": "બોનસ {{amount}} ક્રેડિટ",
+        "BuyBonus": "એક સાથે {{amount}} ક્રેડિટ ખરીદવાથી, {{bonus}} ક્રેડિટ બોનસ તરફ દોરી જશે."
     },
     "history": {
         "Date": "તારીખ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{9 999}} ક્રેડિટ્સ ખર્ચ્યા",
         "BoughtCredits": "{9 999} its ક્રેડિટ્સ ખરીદ્યો",
         "InviteAcceptedBy": "{9 999}} કમાણી",
-        "YouHaveCreditsToStart": "{9 999}} કમાણી"
+        "YouHaveCreditsToStart": "{9 999}} કમાણી",
+        "CreatePaidStream": "{{amount}} ક્રેડિટ ખર્ચ્યા",
+        "WatchClip": {
+            "+": "{{amount}} ક્રેડિટ મેળવી",
+            "-": "{{amount}} ક્રેડિટ ખર્ચ્યા"
+        },
+        "BonusCredits": "બોનસ {{amount}} ક્રેડિટ્સ મળી"
     },
     "subscriptions": {
         "infoTitle": "ચુકવણીની માહિતી સેટ કરો",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{9 999} its ક્રેડિટ્સ ખરીદ્યો"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "બોનસ {{amount}} ક્રેડિટ"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "ભાવ નક્કી કરો",
             "LinkPlaceholder": "વધારાની માહિતી લિંક સેટ કરો",
             "DescriptionPlaceholder": "સેવા વર્ણન",
-            "SaveService": "સેવા બચાવો"
+            "SaveService": "સેવા બચાવો",
+            "SelectRequiredParticipants": "જરૂરી સહભાગીઓ"
         },
         "ManageServiceTemplates": "સેવા નમૂનાઓ મેનેજ કરો",
         "ManageServices": "સેવાઓ મેનેજ કરો",

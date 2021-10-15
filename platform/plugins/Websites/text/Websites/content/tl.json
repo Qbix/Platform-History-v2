@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link upang itaguyod",
+                "startDate": "Petsa ng Simula",
+                "startTime": "Oras ng umpisa",
+                "endDate": "Petsa ng Pagtatapos",
+                "endTime": "Pagtatapos ng Oras",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Salain Ayon sa Interes",
+                "FilterInterests": "Simulang mag-type ng interes ..."
+            },
+            "Interest": "Interes",
+            "Location": "Lokasyon"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Punta ka na",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Mag-browse",
+            "WriteToStartConversation": "Isulat ang iyong mga saloobin upang simulan ang pag-uusap",
+            "StartConversation": "Simulan ang Pag-uusap",
+            "GotoConversation": "Pumunta sa Pag-uusap",
+            "reset": "I-reset",
+            "edit": "I-edit",
+            "link": "Link",
+            "setUrl": "Itakda ang URL",
+            "save": "Magtipid",
+            "setClip": "Gupitin ang Clip",
+            "invalidURL": "Di-wastong URL"
+        },
+        "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file na {{size}}",
+        "InvalidPDF": "Ang file ay hindi wastong PDF",
+        "StartTypingTitleOrKeywords": "Simulang mag-type ng pamagat o mga keyword ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Isang dokumentong HTML na maaaring matingnan at mai-edit ng iba&#39;t ibang mga gumagamit",
+            "displayType": "Artikulo"
+        },
+        "Websites\/slide": {
+            "description": "Ang isang slide sa isang pagtatanghal, maaaring magsama ng HTML, audio atbp.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Isang pagtatanghal na binubuo ng iba&#39;t ibang mga slide",
+            "displayType": "Paglalahad"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Isang yunit ng advertising sa isang website",
+            "displayType": "Unit ng advert"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Isang paraan ng pagpapangkat ng mga yunit ng advertising sa ilalim ng isang pangalan",
+            "displayType": "Paglalagay ng advert"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Nilalaman para sa isang ad",
+            "displayType": "Malikhain ang advert"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Isang kampanya sa advertising",
+            "displayType": "Kampanya sa advert"
+        },
+        "Websites\/webpage": {
+            "description": "Kumakatawan sa isang website na ang metadata ay na-scrap",
+            "displayType": "Pahina ng web"
+        }
+    }
+}

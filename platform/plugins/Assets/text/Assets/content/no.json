@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Trykk for å betale"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: belastningen er behandlet for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Takk for betalingen til {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnerte på {{plan.title}}",
+        "YouSubscribedTo": "Du har abonnert på {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Du får betaling av {{displayAmount}} fra {{call 'publisher.displayName'}} med &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, dette er bare for å fortelle deg at {{1}} er belastet {{2}} for {{3}} av {{4}}"
+    },
+    "charged": {
+        "Subject": "Takk for betalingen for &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, dette er bare en rask bekreftelse på at du har betalt {{2}} til {{3}} for {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Info om bestilling",
+        "PaymentMethod": "Betalingsmetode",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Betale"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invitasjon godtatt av {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Du har {{amount}} studiepoeng for å starte",
+        "PaymentFor": "Betaling for &quot;{{1}}&quot;",
+        "PaymentTo": "Betaling til {{1}}",
+        "PaymentToUser": "Betaling til {{toUserName}}",
+        "CreatePaidStream": "for å lage {{toStreamName}}",
+        "JoinedPaidStream": "for reservasjon i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "for å lage fellesskap &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "som refusjon for reservasjoner i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kjøpte {{amount}} kreditter",
+        "BonusCredits": "Bonus {{amount}}",
+        "BuyAmountCredits": "Kjøp {{amount}} kreditter",
+        "WatchClip": "Fikk {{amount}} studiepoeng for å se {{fromStreamTitle}}",
+        "MissingCredits": "Mangler studiepoeng",
+        "YouMissingCredits": "Du trenger ytterligere {{amount}} studiepoeng for å fortsette.",
+        "BuyCredits": "Kjøp kreditter",
+        "BuyBonus": "Hvis du kjøper {{amount}} kreditter samtidig, vil det føre til en {{bonus}} kredittbonus.",
+        "Buy": "Kjøpe",
+        "PurchaseCredits": "Kjøpskreditter",
+        "Credits": "Studiepoeng",
+        "ErrorInvalidAmount": "Beløpet er ugyldig",
+        "ErrorInvalidCurrency": "Dessverre støtter vi ikke valuta {{currency}} ennå",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} studiepoeng",
+            "BonusCredits": "{{amount}} studiepoeng"
+        }
+    },
+    "history": {
+        "Date": "Dato",
+        "Amount": "Beløp",
+        "Description": "Beskrivelse",
+        "Client": "Klient",
+        "To": "til",
+        "From": "fra",
+        "SeeHistory": "Se betalingsloggen for {{1}}",
+        "HistoryEmpty": "Du har ingen data ennå",
+        "PaymentFor": "Sendte {{amount}} kreditter",
+        "PaymentTo": "Sendte {{amount}} kreditter",
+        "PaymentToUser": "Sendte {{amount}} kreditter",
+        "CreatePaidStream": "Brukte {{amount}} studiepoeng",
+        "WatchClip": {
+            "+": "Fikk {{amount}} studiepoeng",
+            "-": "Brukte {{amount}} studiepoeng"
+        },
+        "JoinedPaidStream": {
+            "+": "Fikk {{amount}} studiepoeng",
+            "-": "Brukte {{amount}} studiepoeng"
+        },
+        "LeftPaidStream": {
+            "+": "Mottatt {{amount}} studiepoeng",
+            "-": "Sendte {{amount}} kreditter"
+        },
+        "CreatedCommunity": "Brukte {{amount}} studiepoeng",
+        "BoughtCredits": "Kjøpte {{amount}} kreditter",
+        "BonusCredits": "Fikk bonus {{amount}}",
+        "InviteAcceptedBy": "Fikk {{amount}} studiepoeng",
+        "YouHaveCreditsToStart": "Fikk {{amount}} studiepoeng"
+    },
+    "subscriptions": {
+        "infoTitle": "Angi betalingsinformasjon",
+        "confirm": {
+            "title": "Start abonnement",
+            "message": "Vil du abonnere på {{title}}?",
+            "ok": "OK",
+            "cancel": "Avbryt"
+        },
+        "CreditOrDebitCard": "Kreditt- eller debetkort",
+        "SubscribePayment": "Abonner på betaling",
+        "ImmediatePayment": "Umiddelbar betaling"
+    },
+    "payments": {
+        "infoTitle": "Angi betalingsinformasjon",
+        "BuyAmountCredits": "Kjøp {{amount}} kreditter",
+        "confirm": {
+            "title": "Gjennomføre en betaling",
+            "message": "Godtar du å betale {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Avbryt"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Studiepoeng",
+            "description": "holder oversikt over kreditter og betalinger"
+        },
+        "Assets\/plan": {
+            "displayType": "Abonnementsplan",
+            "description": "abonnementsplan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abonnement",
+            "description": "abonnement"
+        },
+        "Assets\/product": {
+            "displayType": "Produkt",
+            "description": "produktet selges"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "tjenesten som tilbys"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Fikk {{amount}} studiepoeng"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Kjøpte {{amount}} kreditter"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Brukte {{amount}} studiepoeng"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sendte {{amount}} kreditter til {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Mottatt {{amount}} studiepoeng fra {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Ny tjeneste",
+            "TitlePlaceholder": "Tjenestetittel",
+            "PricePlaceholder": "Sett pris",
+            "LinkPlaceholder": "angi tilleggsinfolink",
+            "DescriptionPlaceholder": "Tjenestebeskrivelse",
+            "SaveService": "Lagre tjenesten",
+            "SelectRequiredParticipants": "Nødvendige deltakere"
+        },
+        "ManageServiceTemplates": "Administrer tjenestemaler",
+        "ManageServices": "Administrer tjenester",
+        "Free": "Gratis",
+        "OptionalContribution": "Valgfritt bidrag",
+        "RequiredPayment": "Påkrevd betaling",
+        "AreYouSureDelete": "Er du sikker på at du vil slette denne tjenesten?",
+        "AmountServicesRelated": "Det er {{amount}} tilgjengeligheter knyttet til denne tjenesten. De blir også fjernet."
+    }
+}

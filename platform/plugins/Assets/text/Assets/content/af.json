@@ -36,8 +36,12 @@
         "WatchClip": "Verdien {{amount}} krediete vir kyk {{fromStreamTitle}}",
         "PurchaseCredits": "Koop krediete",
         "forMessages": {
-            "BoughtCredits": "{{amount}} krediete"
-        }
+            "BoughtCredits": "{{amount}} krediete",
+            "BonusCredits": "{{amount}} krediete"
+        },
+        "CreatePaidStream": "vir die skep van {{toStreamName}}",
+        "BonusCredits": "Bonuskrediete van {{amount}}",
+        "BuyBonus": "As u tegelyk {{amount}} krediete koop, lei dit tot &#39;n bonus van {{bonus}} krediete."
     },
     "history": {
         "Date": "datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} krediete bestee",
         "BoughtCredits": "Het {{amount}} krediete gekoop",
         "InviteAcceptedBy": "{{amount}} krediete verdien",
-        "YouHaveCreditsToStart": "{{amount}} krediete verdien"
+        "YouHaveCreditsToStart": "{{amount}} krediete verdien",
+        "CreatePaidStream": "Het {{amount}} krediete bestee",
+        "WatchClip": {
+            "+": "Verdien {{amount}} krediete",
+            "-": "Het {{amount}} krediete bestee"
+        },
+        "BonusCredits": "Het bonuskrediete van {{amount}} gekry"
     },
     "subscriptions": {
         "infoTitle": "Stel betalinginligting op",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Het {{amount}} krediete gekoop"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonuskrediete van {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Stel prys",
             "LinkPlaceholder": "stel addisionele inligtingskakel",
             "DescriptionPlaceholder": "Diensbeskrywing",
-            "SaveService": "Stoor diens"
+            "SaveService": "Stoor diens",
+            "SelectRequiredParticipants": "Vereiste deelnemers"
         },
         "ManageServiceTemplates": "Bestuur diensjablone",
         "ManageServices": "Bestuur dienste",

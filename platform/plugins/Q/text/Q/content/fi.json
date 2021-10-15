@@ -117,7 +117,10 @@
         "SetClipStart": "Aseta Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Aseta leikkeen loppu",
-        "ClipEnd": "Leikkeen loppu"
+        "ClipEnd": "Leikkeen loppu",
+        "StartMoreEnd": "Aloitusasento ei voi olla enempää kuin pääteasento",
+        "EndLessStart": "Pääteasema ei saa olla pienempi kuin aloitusasento",
+        "WhichInvalid": "Argumentti &quot;mikä&quot; on virheellinen"
     },
     "durations": {
         "second": "toinen",

@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Raiso ny fepetra momba ny serivisy?",
         "facebookNoEmail": "Ny kaontinao facebook dia tsy misy adiresy mailaka voamarina. Midira fotsiny amin&#39;ny fomba niaviany.",
-        "picTooltip": "Azonao atao ny manova an&#39;ity sary ity avy eo"
+        "picTooltip": "Azonao atao ny manova an&#39;ity sary ity avy eo",
+        "wallet": {
+            "payload": "Midira amin&#39;ny {{host}} ara-potoana {{timestamp}}",
+            "alert": {
+                "title": "Famindrana mankany amin&#39;ny Wallet",
+                "content": "Raha vao manidy ity dinika ity ianao dia hoentina any amin&#39;ny kitapom-bolanao. Aorian&#39;ny fidiranao dia miverena amin&#39;ity pejy ity."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Manampia fomba fidirana miditra",
@@ -108,6 +115,18 @@
         "Owner": "Owner",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "miaramila"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Isan&#39;andro",
+        "Weekly": "isan-kerinandro",
+        "Monthly": "Isam-bolana",
+        "Application": "Fampiharana",
+        "Pages": "Pejy",
+        "Services": "tolotra",
+        "Faq": "FAQ",
+        "WeekDays": "Herinandro herinandro"
     }
 }

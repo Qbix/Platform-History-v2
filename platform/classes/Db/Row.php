@@ -1370,8 +1370,7 @@ class Db_Row implements Iterator
 	 *  All but the second-to-last parameter are interpreted as keys.
 	 */
 	function clear(
-	 $key1,
-	 $value)
+	 $key1)
 	{
 		$args = func_get_args();
 		if (!isset($this->p)) {

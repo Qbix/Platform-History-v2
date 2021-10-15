@@ -36,8 +36,12 @@
         "WatchClip": "Зароблена {{amount}} крэдытаў за прагляд {{fromStreamTitle}}",
         "PurchaseCredits": "Пакупка крэдытаў",
         "forMessages": {
-            "BoughtCredits": "{{amount}} крэдытаў"
-        }
+            "BoughtCredits": "{{amount}} крэдытаў",
+            "BonusCredits": "{{amount}} крэдытаў"
+        },
+        "CreatePaidStream": "для стварэння {{toStreamName}}",
+        "BonusCredits": "Бонусныя крэдыты {{amount}}",
+        "BuyBonus": "Купля адразу {{amount}} крэдытаў прывядзе да бонусу крэдытаў {{bonus}}."
     },
     "history": {
         "Date": "Дата",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Выдаткаваны {{amount}} крэдытаў",
         "BoughtCredits": "Купіў {{amount}} крэдытаў",
         "InviteAcceptedBy": "Зарабіў {{amount}} крэдытаў",
-        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў"
+        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў",
+        "CreatePaidStream": "Вытрачаны {{amount}} крэдытаў",
+        "WatchClip": {
+            "+": "Зарабілі {{amount}} крэдытаў",
+            "-": "Вытрачаны {{amount}} крэдытаў"
+        },
+        "BonusCredits": "Атрымаў бонус {{amount}} крэдытаў"
     },
     "subscriptions": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Купіў {{amount}} крэдытаў"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонусныя крэдыты {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Усталюйце цану",
             "LinkPlaceholder": "ўсталяваць дадатковую інфармацыйную спасылку",
             "DescriptionPlaceholder": "Апісанне паслугі",
-            "SaveService": "Захаваць сэрвіс"
+            "SaveService": "Захаваць сэрвіс",
+            "SelectRequiredParticipants": "Абавязковыя ўдзельнікі"
         },
         "ManageServiceTemplates": "Кіраванне службовымі шаблонамі",
         "ManageServices": "Кіраванне паслугамі",

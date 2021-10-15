@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Ligo por reklami",
+                "startDate": "Komenca dato",
+                "startTime": "Komenca Tempo",
+                "endDate": "Fina dato",
+                "endTime": "Fina Tempo",
+                "budget": "Buĝeto"
+            },
+            "interests": {
+                "Title": "Filtrilo Laŭ Intereso",
+                "FilterInterests": "Komencu tajpi intereson ..."
+            },
+            "Interest": "Intereso",
+            "Location": "Loko"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Iru",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Foliumi",
+            "WriteToStartConversation": "Skribu viajn pensojn por komenci la konversacion",
+            "StartConversation": "Komencu Konversacion",
+            "GotoConversation": "Iru al Konversacio",
+            "reset": "Restarigi",
+            "edit": "Redaktu",
+            "link": "Ligilo",
+            "setUrl": "Agordi URL",
+            "save": "Savi",
+            "setClip": "Eltranĉita Klipo",
+            "invalidURL": "Nevalida URL"
+        },
+        "FileTooLarge": "Dosiero tro granda por konservado. Maksimuma dosiergrandeco {{size}}",
+        "InvalidPDF": "Dosiero ne estas valida PDF",
+        "StartTypingTitleOrKeywords": "Komencu tajpi titolon aŭ ŝlosilvortojn ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML-dokumento, kiun diversaj uzantoj povas vidi kaj redakti",
+            "displayType": "Artikolo"
+        },
+        "Websites\/slide": {
+            "description": "Glitado en prezento, povas inkluzivi HTML, aŭdion ktp.",
+            "displayType": "Gliti"
+        },
+        "Websites\/presentation": {
+            "description": "Prezento konsistanta el diversaj lumbildoj",
+            "displayType": "Prezento"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Reklamunuo en retejo",
+            "displayType": "Reklamunuo"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Maniero grupigi reklamajn unuojn sub nomo",
+            "displayType": "Anonca lokigo"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Enhavo por reklamo",
+            "displayType": "Reklamokrea"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Reklamkampanjo",
+            "displayType": "Reklamkampanjo"
+        },
+        "Websites\/webpage": {
+            "description": "Reprezentas retejon kies metadatenoj estis skrapitaj",
+            "displayType": "retpaĝo"
+        }
+    }
+}

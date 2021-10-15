@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Yarda da Sharuɗɗan sabis?",
         "facebookNoEmail": "Adireshin facebook naku ya rasa adireshin imel da aka tabbatar. Kawai shiga cikin asalin ƙasar.",
-        "picTooltip": "Kuna iya canza wannan hoto nan gaba"
+        "picTooltip": "Kuna iya canza wannan hoto nan gaba",
+        "wallet": {
+            "payload": "Shiga cikin {{host}} a lokacin {{timestamp}}",
+            "alert": {
+                "title": "Canza hanya zuwa Wallet",
+                "content": "Da zarar kun rufe wannan zancen, za a kai ku zuwa walat ɗin ku. Bayan ka shiga, koma wannan shafin."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Sanya wata hanyar shiga",
@@ -108,6 +115,18 @@
         "Owner": "Mai mallaka",
         "Admin": "Admin",
         "Member": "Memba",
-        "Guest": "Bako"
+        "Guest": "Bako",
+        "Host": "Mai watsa shiri"
+    },
+    "analytics": {
+        "Title": "Nazari",
+        "Daily": "Kullum",
+        "Weekly": "Mako -mako",
+        "Monthly": "Watanni",
+        "Application": "Aikace -aikace",
+        "Pages": "Shafuka",
+        "Services": "Ayyuka",
+        "Faq": "Tambaya",
+        "WeekDays": "Kwanaki Mako"
     }
 }

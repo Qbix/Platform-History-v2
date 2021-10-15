@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Gba awọn ofin ti Iṣẹ?",
         "facebookNoEmail": "Àkọọlẹ facebook rẹ n padanu adirẹsi imeeli ti timo. Nìkan wọle si ọna abinibi.",
-        "picTooltip": "O le yi aworan pada nigbamii"
+        "picTooltip": "O le yi aworan pada nigbamii",
+        "wallet": {
+            "payload": "Wọle si {{host}} ni akoko {{timestamp}}",
+            "alert": {
+                "title": "Ìtúnjúwe sí Apamọwọ",
+                "content": "Ni kete ti o ti pa ajọṣọ yii, iwọ yoo mu lọ si apamọwọ rẹ. Lẹhin ti o wọle, pada si oju -iwe yii."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ṣafikun ọna lati wọle",
@@ -108,6 +115,18 @@
         "Owner": "Eni",
         "Admin": "Abojuto",
         "Member": "Ọmọ ẹgbẹ",
-        "Guest": "Alejo"
+        "Guest": "Alejo",
+        "Host": "Ogun"
+    },
+    "analytics": {
+        "Title": "Awọn atupale",
+        "Daily": "Ojoojumọ",
+        "Weekly": "Osẹ -osẹ",
+        "Monthly": "Oṣooṣu",
+        "Application": "Ohun elo",
+        "Pages": "Awọn oju -iwe",
+        "Services": "Awọn iṣẹ",
+        "Faq": "Faq",
+        "WeekDays": "Ọjọ Ọsẹ"
     }
 }

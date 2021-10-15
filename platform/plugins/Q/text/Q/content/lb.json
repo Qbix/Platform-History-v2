@@ -113,7 +113,10 @@
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip Enn"
+        "ClipEnd": "Clip Enn",
+        "StartMoreEnd": "Start Positioun kann net méi wéi d&#39;Enn Positioun sinn",
+        "EndLessStart": "Enn Positioun kann net manner sinn wéi Start Positioun",
+        "WhichInvalid": "Argument &#39;wat&#39; ongëlteg"
     },
     "tabs": {
         "more": "méi",

@@ -117,7 +117,10 @@
         "SetClipStart": "شروع کلیپ را تنظیم کنید",
         "ClipStart": "شروع کلیپ",
         "SetClipEnd": "Clip End را تنظیم کنید",
-        "ClipEnd": "پایان کلیپ"
+        "ClipEnd": "پایان کلیپ",
+        "StartMoreEnd": "موقعیت شروع نمی تواند بیشتر از موقعیت پایان باشد",
+        "EndLessStart": "موقعیت نهایی نمی تواند کمتر از موقعیت شروع باشد",
+        "WhichInvalid": "استدلال &quot;کدام&quot; نامعتبر است"
     },
     "durations": {
         "second": "دومین",

@@ -36,8 +36,12 @@
         "WatchClip": "{{fromStreamTitle}} izleyerek {{amount}} kredi kazandım",
         "PurchaseCredits": "satın alma kredisi",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredi"
-        }
+            "BoughtCredits": "{{amount}} kredi",
+            "BonusCredits": "{{amount}} kredi"
+        },
+        "CreatePaidStream": "{{toStreamName}} oluşturmak için",
+        "BonusCredits": "Bonus {{amount}} kredi",
+        "BuyBonus": "Tek seferde {{amount}} kredi satın almak {{bonus}} kredi bonusu kazandıracaktır."
     },
     "history": {
         "Date": "tarih",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} kredi harcadı",
         "BoughtCredits": "{{amount}} kredi satın aldı",
         "InviteAcceptedBy": "{{amount}} kredi kazanıldı",
-        "YouHaveCreditsToStart": "{{amount}} kredi kazanıldı"
+        "YouHaveCreditsToStart": "{{amount}} kredi kazanıldı",
+        "CreatePaidStream": "{{amount}} kredi harcandı",
+        "WatchClip": {
+            "+": "{{amount}} kredi kazanıldı",
+            "-": "{{amount}} kredi harcandı"
+        },
+        "BonusCredits": "{{amount}} kredi kazandınız"
     },
     "subscriptions": {
         "infoTitle": "Ödeme Bilgilerini Ayarla",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} kredi satın aldı"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredi"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Fiyat belirle",
             "LinkPlaceholder": "ek bilgi bağlantısı ayarla",
             "DescriptionPlaceholder": "Servis açıklaması",
-            "SaveService": "Hizmeti Kaydet"
+            "SaveService": "Hizmeti Kaydet",
+            "SelectRequiredParticipants": "Gerekli Katılımcılar"
         },
         "ManageServiceTemplates": "Hizmet Şablonlarını Yönetme",
         "ManageServices": "Hizmetleri Yönetin",

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Люди, которых я пригласил",
-        "Streams\/invitedMe": "Кто меня пригласил"
+        "Streams\/invitedMe": "Кто меня пригласил",
+        "AreYouAgree": "Ты согласен?",
+        "Yes": "да",
+        "No": "Нет"
     },
     "interests": {
         "Filter": "Что тебе нравится?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Выберите снова из контактов",
             "inviteSelectedContacts": "Пригласить выбранные контакты",
             "scannedQR": "{{ClickOrTap}} если код был отсканирован",
-            "copyLink": "{{ClickOrTap}} скопировать ссылку приглашения"
+            "copyLink": "{{ClickOrTap}} скопировать ссылку приглашения",
+            "userChooserPlaceholder": "Поиск по имени"
         },
         "email": {
             "subject": "Эй, проверь это",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "У участника нет видео",
             "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции.",
             "youBeganVideoRecording": "Вы начали запись этой конференции",
-            "youStoppedVideoRecording": "Вы прекратили запись этой конференции"
+            "youStoppedVideoRecording": "Вы прекратили запись этой конференции",
+            "switchingRoom": "Коммутационная ...",
+            "forceDisconnecting": "Вы будете отключены в течение 5 секунд",
+            "youStartedLive": "Вы начали транслировать этот звонок на настраиваемый RTMP",
+            "youStoppedLive": "Вы перестали транслировать этот вызов на настраиваемый RTMP",
+            "sbStartedLiveStreaming": "{{userName}} началось в прямом эфире",
+            "sbStoppedLiveStreaming": "{{userName}} закончился в прямом эфире",
+            "liveStopped": "Произошла ошибка при отправке видео на конечную точку"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -205,7 +216,13 @@
             "stopRecording": "Остановить запись",
             "recordingInProgress": "Запись идет ...",
             "publishOnTimeline": "Опубликовать на временной шкале",
-            "publishToGroup": "Опубликовать в группу"
+            "publishToGroup": "Опубликовать в группу",
+            "turnOffAudioInput": "Отключить микрофон",
+            "micIsTurnedOff": "Микрофон выключен",
+            "start": "Начинать",
+            "stop": "Стоп",
+            "streamingSettings": "Настройки",
+            "streamToRTMP": "Трансляция в настраиваемый RTMP"
         },
         "participantsPopup": {
             "disconnect": "Отключить",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
         "streamTitle": "{{1}} живой звонок",
         "preview": {
-            "preamble": "Встреча:"
+            "preamble": "Встреча:",
+            "Meeting": "Встреча",
+            "MeetingEnded": "Встреча закончилась"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон выключен",
+            "micIsOn": "Микрофон включен",
+            "cameraIsOff": "Камера выключена",
+            "cameraIsOn": "Камера включена",
+            "screenSharingIsOn": "Показ экрана включен",
+            "screenSharingIsOff": "Поделиться экраном",
+            "joinNow": "Присоединяйтесь к звонку"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Ответ",
             "description": "поток ответов"
+        },
+        "Streams\/calls": {
+            "displayType": "Звонки",
+            "description": "Категория для потоков \/ webrtc",
+            "MaxRelationsExceeded": "Превышено максимальное количество звонков"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Файл поврежден",
         "errorNoSource": "Нет источника изображения",
         "uploadLimit": "Максимальный размер файла: {{size}}",
-        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}"
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла: {{size}}",
+        "uploadedImage": "Загруженное изображение",
+        "imageTitle": "Название изображения"
     },
     "questions": {
         "Questions": "Вопросов",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Уже ответил",
         "TitlePlaceholder": "Введите свой вопрос",
         "ContentPlaceholder": "Разместите здесь любую дополнительную информацию, чтобы помочь людям ответить",
-        "ErrorTitle": "Требуется вопрос"
+        "ErrorTitle": "Требуется вопрос",
+        "Placeholder": "Заполнитель"
     },
     "experience": {
-        "NewExperience": "Новый опыт"
+        "NewExperience": "Новый опыт",
+        "DefineTitle": "Пожалуйста, определите заголовок",
+        "Create": "Создавать"
+    },
+    "calls": {
+        "SettingsTitle": "Звонки",
+        "MaxCalls": "Макс звонков",
+        "Update": "Обновлять",
+        "NoCallsYet": "Пока звонков нет",
+        "CallReasonTitle": "О чем этот звонок?",
+        "WaitingRoom": "Зал ожидания"
     }
 }

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Төлбөр хийхийн тулд товшино уу"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: төлбөрийг {{call 'user.displayName'}} - д боловсруулсан",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} - д төлбөр хийсэнд баярлалаа",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} - д бүртгүүлсэн",
+        "YouSubscribedTo": "Та {{plan.title}} - д бүртгүүлсэн байна"
+    },
+    "charge": {
+        "Subject": "Та {{displayAmount}} - н төлбөрийг {{call 'publisher.displayName'}} - с &quot;{{description}}&quot; - р авна",
+        "HasBeenCharged": "Хөөе, энэ нь танд {{1}} -с {{3}} - с {{4}} - с {{2}} - н төлбөр төлсөн болохыг дуулгая."
+    },
+    "charged": {
+        "Subject": "&quot;{{description}}&quot; - ийн төлбөрт баярлалаа",
+        "HavePaid": "Хөөе {{1}}, энэ нь та {{4}} - н төлбөрийг {{2}} - с {{3}} - д амжилттай төлсөн гэсэн баталгаа юм."
+    },
+    "payment": {
+        "AboutOrder": "Захиалгын талаархи мэдээлэл",
+        "PaymentMethod": "Төлбөрийн нөхцөл",
+        "ContactInfo": "Холбоо барих мэдээлэл",
+        "Pay": "Төлбөр хийх"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Урилгыг {{invitedUserName}} хүлээн зөвшөөрсөн",
+        "YouHaveCreditsToStart": "Танд эхлэх {{amount}} кредит байна",
+        "PaymentFor": "&quot;{{1}}&quot; - н төлбөр",
+        "PaymentTo": "{{1}} руу хийсэн төлбөр",
+        "PaymentToUser": "{{toUserName}} руу хийсэн төлбөр",
+        "CreatePaidStream": "үүсгэхийн тулд {{toStreamName}}",
+        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; - д захиалга өгөх",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; нийгэмлэг үүсгэхэд зориулагдсан",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; дахь захиалгын буцаан олголт",
+        "BoughtCredits": "{{amount}} кредит худалдаж авсан",
+        "BonusCredits": "Шагналт {{amount}} кредит",
+        "BuyAmountCredits": "{{amount}} кредит худалдаж аваарай",
+        "WatchClip": "{{fromStreamTitle}} үзэхийн тулд {{amount}} кредит авсан",
+        "MissingCredits": "Зээл дутуу байна",
+        "YouMissingCredits": "Үргэлжлүүлэхийн тулд танд нэмэлт {{amount}} кредит хэрэгтэй.",
+        "BuyCredits": "Зээл худалдаж авах",
+        "BuyBonus": "Нэг удаа {{amount}} кредит худалдаж авснаар {{bonus}} кредит бонус авах болно.",
+        "Buy": "Худалдан авах",
+        "PurchaseCredits": "Кредит худалдаж авах",
+        "Credits": "Зээл",
+        "ErrorInvalidAmount": "Хүчин төгөлдөр бус байна",
+        "ErrorInvalidCurrency": "Харамсалтай нь бид {{currency}} валютыг хараахан дэмждэггүй",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} кредит",
+            "BonusCredits": "{{amount}} кредит"
+        }
+    },
+    "history": {
+        "Date": "Огноо",
+        "Amount": "Хэмжээ",
+        "Description": "Тодорхойлолт",
+        "Client": "Үйлчлүүлэгч",
+        "To": "руу",
+        "From": "-аас",
+        "SeeHistory": "{{1}} - н төлбөрийн түүхийг харах",
+        "HistoryEmpty": "Танд одоогоор мэдээлэл алга байна",
+        "PaymentFor": "{{amount}} кредит илгээсэн",
+        "PaymentTo": "{{amount}} кредит илгээсэн",
+        "PaymentToUser": "{{amount}} кредит илгээсэн",
+        "CreatePaidStream": "{{amount}} кредит зарцуулсан",
+        "WatchClip": {
+            "+": "{{amount}} кредит авсан",
+            "-": "{{amount}} кредит зарцуулсан"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} кредит авсан",
+            "-": "{{amount}} кредит зарцуулсан"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} кредит авсан",
+            "-": "{{amount}} кредит илгээсэн"
+        },
+        "CreatedCommunity": "{{amount}} кредит зарцуулсан",
+        "BoughtCredits": "{{amount}} кредит худалдаж авсан",
+        "BonusCredits": "Бонус {{amount}} кредит авсан",
+        "InviteAcceptedBy": "{{amount}} кредит авсан",
+        "YouHaveCreditsToStart": "{{amount}} кредит авсан"
+    },
+    "subscriptions": {
+        "infoTitle": "Төлбөрийн мэдээллийг тохируулах",
+        "confirm": {
+            "title": "Захиалгыг эхлүүлэх",
+            "message": "Та {{title}} - д бүртгүүлэхийг хүсч байна уу?",
+            "ok": "БОЛЖ БАЙНА УУ",
+            "cancel": "Цуцлах"
+        },
+        "CreditOrDebitCard": "Зээлийн эсвэл дебит карт",
+        "SubscribePayment": "Төлбөрийг захиалах",
+        "ImmediatePayment": "Шууд төлбөр"
+    },
+    "payments": {
+        "infoTitle": "Төлбөрийн мэдээллийг тохируулах",
+        "BuyAmountCredits": "{{amount}} кредит худалдаж аваарай",
+        "confirm": {
+            "title": "Төлбөр хийх",
+            "message": "Та {{symbol}} {{amount}} төлөхийг зөвшөөрч байна уу?",
+            "ok": "БОЛЖ БАЙНА УУ",
+            "cancel": "Цуцлах"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Зээл",
+            "description": "зээл, төлбөрийг хянадаг"
+        },
+        "Assets\/plan": {
+            "displayType": "Захиалгын төлөвлөгөө",
+            "description": "захиалгын төлөвлөгөө"
+        },
+        "Assets\/subscription": {
+            "displayType": "Захиалга",
+            "description": "захиалга"
+        },
+        "Assets\/product": {
+            "displayType": "Бүтээгдэхүүн",
+            "description": "борлуулж буй бүтээгдэхүүн"
+        },
+        "Assets\/service": {
+            "displayType": "Үйлчилгээ",
+            "description": "үйлчилгээ үзүүлж байна"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} кредит авсан"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} кредит худалдаж авсан"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Шагналт {{amount}} кредит"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} кредит зарцуулсан"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{toUserName}} - д {{amount}} кредит илгээсэн"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} - с {{amount}} кредит авсан"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Шинэ үйлчилгээ",
+            "TitlePlaceholder": "Үйлчилгээний нэр",
+            "PricePlaceholder": "Үнэ тогтоох",
+            "LinkPlaceholder": "нэмэлт мэдээллийн холбоосыг тохируулах",
+            "DescriptionPlaceholder": "Үйлчилгээний тодорхойлолт",
+            "SaveService": "Үйлчилгээг хадгалах",
+            "SelectRequiredParticipants": "Шаардлагатай оролцогчид"
+        },
+        "ManageServiceTemplates": "Үйлчилгээний загварыг удирдах",
+        "ManageServices": "Үйлчилгээг удирдах",
+        "Free": "Үнэгүй",
+        "OptionalContribution": "Нэмэлт хувь нэмэр",
+        "RequiredPayment": "Шаардлагатай төлбөр",
+        "AreYouSureDelete": "Та энэ үйлчилгээг устгахдаа итгэлтэй байна уу?",
+        "AmountServicesRelated": "Энэ үйлчилгээтэй холбоотой {{amount}} боломж байгаа. Тэд мөн хасагдах болно."
+    }
+}

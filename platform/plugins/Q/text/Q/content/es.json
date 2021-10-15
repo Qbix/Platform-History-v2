@@ -117,7 +117,10 @@
         "SetClipStart": "Establecer inicio de clip",
         "ClipStart": "Inicio del clip",
         "SetClipEnd": "Establecer final de clip",
-        "ClipEnd": "Final del clip"
+        "ClipEnd": "Final del clip",
+        "StartMoreEnd": "La posición inicial no puede ser más que la posición final",
+        "EndLessStart": "La posición final no puede ser menor que la posición inicial",
+        "WhichInvalid": "Argumento &#39;que&#39; no es válido"
     },
     "durations": {
         "second": "segundo",

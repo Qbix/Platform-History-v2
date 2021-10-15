@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link til markedsføring",
+                "startDate": "Startdato",
+                "startTime": "Starttid",
+                "endDate": "Sluttdato",
+                "endTime": "Sluttid",
+                "budget": "Budsjett"
+            },
+            "interests": {
+                "Title": "Filtrer etter renter",
+                "FilterInterests": "Begynn å skrive en interesse ..."
+            },
+            "Interest": "Renter",
+            "Location": "plassering"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gå",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Bla gjennom",
+            "WriteToStartConversation": "Skriv tankene dine for å starte samtalen",
+            "StartConversation": "Start samtale",
+            "GotoConversation": "Gå til Samtale",
+            "reset": "Nullstille",
+            "edit": "Redigere",
+            "link": "Lenke",
+            "setUrl": "Angi URL",
+            "save": "Lagre",
+            "setClip": "Klipp ut klipp",
+            "invalidURL": "ugyldig URL"
+        },
+        "FileTooLarge": "Filen er for stor til hurtigbufring. Maks filstørrelse {{size}}",
+        "InvalidPDF": "Filen er ikke en gyldig PDF",
+        "StartTypingTitleOrKeywords": "Begynn å skrive tittel eller søkeord ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Et HTML -dokument som ulike brukere kan se og redigere",
+            "displayType": "Artikkel"
+        },
+        "Websites\/slide": {
+            "description": "Et lysbilde i en presentasjon, kan inneholde HTML, lyd etc.",
+            "displayType": "Lysbilde"
+        },
+        "Websites\/presentation": {
+            "description": "En presentasjon bestående av forskjellige lysbilder",
+            "displayType": "Presentasjon"
+        },
+        "Websites\/advert\/unit": {
+            "description": "En reklameenhet på et nettsted",
+            "displayType": "Annonseenhet"
+        },
+        "Websites\/advert\/placement": {
+            "description": "En måte å gruppere reklameenheter under et navn",
+            "displayType": "Annonseplassering"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Innhold for en annonse",
+            "displayType": "Annonsekreativ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "En reklamekampanje",
+            "displayType": "Annonsekampanje"
+        },
+        "Websites\/webpage": {
+            "description": "Representerer et nettsted hvis metadata ble skrapt",
+            "displayType": "nettside"
+        }
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap bikin ku bidin"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: xerca ji bo {{call 'user.displayName'}} hatî kirin",
+        "ThankYouForYourPayment": "Spas ji bo tezmînata te ji bo {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} bû aboneyê {{plan.title}}",
+        "YouSubscribedTo": "Hûn bûne aboneyê {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Hûn peredana {{displayAmount}} ji {{call 'publisher.displayName'}} ji hêla &quot;{{description}}&quot; distînin",
+        "HasBeenCharged": "Hey, ev tenê ji bo ku hûn agahdar bikin {{1}} ji bo {{3}} ji hêla {{4}} ve hatî barkirin {{2}}"
+    },
+    "charged": {
+        "Subject": "Spas ji bo dayîna te ya ji bo &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, ev tenê piştrastkirinek bilez e ku we bi serfirazî {{2}} daye {{3}} ji bo {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Agahî li ser fermanê",
+        "PaymentMethod": "Rêbaza dayinê",
+        "ContactInfo": "Agahdariya têkiliyê",
+        "Pay": "Diravdanî"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Vexwendin ji hêla {{invitedUserName}} ve hatî pejirandin",
+        "YouHaveCreditsToStart": "Ji bo destpêkirinê {{amount}} krediyên we hene",
+        "PaymentFor": "Peredana ji bo &quot;{{1}}&quot;",
+        "PaymentTo": "Tezmînat ji bo {{1}}",
+        "PaymentToUser": "Tezmînat ji bo {{toUserName}}",
+        "CreatePaidStream": "ji bo afirandina {{toStreamName}}",
+        "JoinedPaidStream": "ji bo rezervasyona li &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ji bo afirandina civakê &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "wekî vegerandina rezervasyonê li &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "{{amount}} kredî kirîn",
+        "BonusCredits": "Bonusên {{amount}}",
+        "BuyAmountCredits": "Krediyên {{amount}} bikirin",
+        "WatchClip": "Ji bo temaşekirina {{amount}} kredî qezenc kir",
+        "MissingCredits": "Krediyên wenda",
+        "YouMissingCredits": "Ji bo domandinê hewcedariya we bi {{amount}} krediyên zêde heye.",
+        "BuyCredits": "Kredî bikirin",
+        "BuyBonus": "Kirîna {{amount}} krediyan bi yek carî, dibe sedema bonusa {{bonus}} krediyê.",
+        "Buy": "Kirrîn",
+        "PurchaseCredits": "Krediyên Kirînê",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Hejmara nederbasdar",
+        "ErrorInvalidCurrency": "Mixabin em hîn jî diravê {{currency}} piştgirî nakin",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredî",
+            "BonusCredits": "{{amount}} kredî"
+        }
+    },
+    "history": {
+        "Date": "Rojek",
+        "Amount": "Biha",
+        "Description": "Terîf",
+        "Client": "Kirrîxwaz",
+        "To": "ber",
+        "From": "ji",
+        "SeeHistory": "Dîroka dravdana ji bo {{1}} bibînin",
+        "HistoryEmpty": "Hîn agahiya we tune",
+        "PaymentFor": "{{amount}} kredî şandin",
+        "PaymentTo": "{{amount}} kredî şandin",
+        "PaymentToUser": "{{amount}} kredî şandin",
+        "CreatePaidStream": "{{amount}} kredî xerc kirin",
+        "WatchClip": {
+            "+": "Krediyên {{amount}} qezenc kirin",
+            "-": "{{amount}} kredî xerc kirin"
+        },
+        "JoinedPaidStream": {
+            "+": "Krediyên {{amount}} qezenc kirin",
+            "-": "{{amount}} kredî xerc kirin"
+        },
+        "LeftPaidStream": {
+            "+": "Krediyên {{amount}} wergirt",
+            "-": "{{amount}} kredî şandin"
+        },
+        "CreatedCommunity": "{{amount}} kredî xerc kirin",
+        "BoughtCredits": "{{amount}} kredî kirîn",
+        "BonusCredits": "Bonusên {{amount}} hene",
+        "InviteAcceptedBy": "Krediyên {{amount}} qezenc kirin",
+        "YouHaveCreditsToStart": "Krediyên {{amount}} qezenc kirin"
+    },
+    "subscriptions": {
+        "infoTitle": "Agahdariya Dravdanê Bikin",
+        "confirm": {
+            "title": "Dest bi Abonetiyê bikin",
+            "message": "Ma tu dixwazî bibî aboneyê {{title}}?",
+            "ok": "OK",
+            "cancel": "Bişûndekirin"
+        },
+        "CreditOrDebitCard": "Qerta krediyê an debîtê",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Payment Immediate"
+    },
+    "payments": {
+        "infoTitle": "Agahdariya Dravdanê Bikin",
+        "BuyAmountCredits": "Krediyên {{amount}} bikirin",
+        "confirm": {
+            "title": "Payment bikin",
+            "message": "Ma hûn qebûl dikin ku {{symbol}} {{amount}} bidin?",
+            "ok": "OK",
+            "cancel": "Bişûndekirin"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "şopa kredî û dravdanan digire"
+        },
+        "Assets\/plan": {
+            "displayType": "Plana Subsription",
+            "description": "plana abonetiyê"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abonetî",
+            "description": "abonetî"
+        },
+        "Assets\/product": {
+            "displayType": "Mal",
+            "description": "hilberê ku tê firotin"
+        },
+        "Assets\/service": {
+            "displayType": "Xizmetkar",
+            "description": "xizmet tê pêşkêş kirin"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Krediyên {{amount}} qezenc kirin"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{amount}} kredî kirîn"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonusên {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} kredî xerc kirin"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} kredî şandin {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ji {{fromUserName}} krediyên {{amount}} wergirt"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Xizmeta Nû",
+            "TitlePlaceholder": "Sernavê xizmetê",
+            "PricePlaceholder": "Bihayê destnîşan bikin",
+            "LinkPlaceholder": "girêdana agahdariya zêde saz bikin",
+            "DescriptionPlaceholder": "Danasîna karûbarê",
+            "SaveService": "Xizmeta Xilas bike",
+            "SelectRequiredParticipants": "Beşdarên pêwîst"
+        },
+        "ManageServiceTemplates": "Ageablonên Karûbarê Birêvebirin",
+        "ManageServices": "Karûbarên Birêvebirin",
+        "Free": "Belaş",
+        "OptionalContribution": "Beşdariya vebijarkî",
+        "RequiredPayment": "Peredana pêwîst",
+        "AreYouSureDelete": "Ji dil dixwazî vê xizmetê jê bibî?",
+        "AmountServicesRelated": "Bi vê xizmetê {{amount}} berdestî hene. Ew jî dê bêne rakirin."
+    }
+}

@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Nabata Usoro ọrụ?",
         "facebookNoEmail": "Akaụntụ email gị na-efu na adreesị ozi-e enyochaghị. Nanị banye n&#39;ụzọ amaala.",
-        "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa"
+        "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa",
+        "wallet": {
+            "payload": "Banye na {{host}} n&#39;oge {{timestamp}}",
+            "alert": {
+                "title": "Na -atụgharị na obere akpa",
+                "content": "Ozugbo ị mechiri mkparịta ụka a, a ga -akpọga gị n&#39;akpa gị. Mgbe ị banyere, laghachi na ibe a."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Tinye uzo iji banye",
@@ -108,6 +115,18 @@
         "Owner": "Nwe",
         "Admin": "Ijikwa",
         "Member": "Onye otu",
-        "Guest": "Onye ọbịa"
+        "Guest": "Onye ọbịa",
+        "Host": "Onye ọbịa"
+    },
+    "analytics": {
+        "Title": "Nchịkọta",
+        "Daily": "Kwa ụbọchị",
+        "Weekly": "Kwa izu",
+        "Monthly": "Kwa ọnwa",
+        "Application": "Ngwa",
+        "Pages": "Ibe akwụkwọ",
+        "Services": "Ọrụ",
+        "Faq": "Ajụjụ",
+        "WeekDays": "Ụbọchị Izu"
     }
 }

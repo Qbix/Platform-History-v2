@@ -117,7 +117,10 @@
         "SetClipStart": "Weka Kuanza kwa klipu",
         "ClipStart": "Anza cha picha ya video",
         "SetClipEnd": "Weka Mwisho wa klipu",
-        "ClipEnd": "Clip Mwisho"
+        "ClipEnd": "Clip Mwisho",
+        "StartMoreEnd": "Nafasi ya kuanza haiwezi kuwa zaidi ya nafasi ya mwisho",
+        "EndLessStart": "Nafasi ya kumaliza haiwezi kuwa chini ya nafasi ya kuanza",
+        "WhichInvalid": "Hoja &#39;ambayo&#39; ni batili"
     },
     "durations": {
         "second": "pili",

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "මම ආරාධනා කළ අය",
-        "Streams\/invitedMe": "කවුද මට ආරාධනා කළේ"
+        "Streams\/invitedMe": "කවුද මට ආරාධනා කළේ",
+        "AreYouAgree": "ඔබ එකඟ ද?",
+        "Yes": "ඔව්",
+        "No": "නැත"
     },
     "interests": {
         "Filter": "ඔබ භුක්ති විඳින්නේ කුමක්ද?",
@@ -80,7 +83,8 @@
             "byFacebook": "ෆේස්බුක්",
             "byTwitter": "ට්විටර්",
             "scannedQR": "කේතය පරිලෝකනය කර ඇත්නම් {{ClickOrTap}}",
-            "copyLink": "ආරාධනා සබැඳිය පිටපත් කිරීමට {99 999}}"
+            "copyLink": "ආරාධනා සබැඳිය පිටපත් කිරීමට {99 999}}",
+            "userChooserPlaceholder": "නමින් සොයන්න"
         },
         "email": {
             "subject": "හේයි, මෙය පරීක්ෂා කරන්න",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "සහභාගිවන්නාට වීඩියෝවක් නොමැත",
             "openInBrowserAlert": "සමුළුවට සම්බන්ධ වීමට සෆාරි බ්‍රව්සරයේ සබැඳිය විවෘත කරන්න.",
             "youBeganVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීමට පටන් ගත්තා",
-            "youStoppedVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීම නැවැත්තුවා"
+            "youStoppedVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීම නැවැත්තුවා",
+            "switchingRoom": "මාරු කරන කාමරය ...",
+            "forceDisconnecting": "තත්පර 5 ක් ඇතුළත ඔබ විසන්ධි වේ",
+            "youStartedLive": "ඔබ මෙම ඇමතුම අභිරුචි RTMP වෙත විකාශනය කිරීමට පටන් ගත්තේය",
+            "youStoppedLive": "ඔබ මෙම ඇමතුම අභිරුචි RTMP වෙත විකාශනය කිරීම නැවැත්වීය",
+            "sbStartedLiveStreaming": "{{userName}} සජීවී ලෙස ආරම්භ කරන ලදි",
+            "sbStoppedLiveStreaming": "{{userName}} සජීවීව අවසන් විය",
+            "liveStopped": "වීඩියෝව අවසන් ස්ථානයට යැවීමේදී දෝෂයක් සිදු විය"
         },
         "settingsPopup": {
             "webCamera": "වෙබ් කැමරාව",
@@ -192,7 +203,13 @@
             "stopRecording": "පටිගත කිරීම නවත්වන්න",
             "recordingInProgress": "පටිගත කිරීම සිදු වෙමින් පවතී ...",
             "publishOnTimeline": "කාලරාමුව මත ප්‍රකාශයට පත් කරන්න",
-            "publishToGroup": "කණ්ඩායමට ප්‍රකාශයට පත් කරන්න"
+            "publishToGroup": "කණ්ඩායමට ප්‍රකාශයට පත් කරන්න",
+            "turnOffAudioInput": "මයික්‍රෆෝනය නිහ කරන්න",
+            "micIsTurnedOff": "මයික්‍රෆෝනය ක්‍රියා විරහිත කර ඇත",
+            "start": "ආරම්භ කරන්න",
+            "stop": "නවත්වන්න",
+            "streamingSettings": "සැකසුම්",
+            "streamToRTMP": "අභිරුචි RTMP වෙත ප්‍රවාහ කරන්න"
         },
         "participantsPopup": {
             "disconnect": "විසන්ධි කරන්න",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "මෙම ප්‍රවාහයට සම්බන්ධ වීමට ඔබට අවසර නැත.",
         "streamTitle": "{{1}} සජීවී ඇමතුම",
         "preview": {
-            "preamble": "රැස්වීම:"
+            "preamble": "රැස්වීම:",
+            "Meeting": "රැස්වීම",
+            "MeetingEnded": "හමුව අවසන්"
+        },
+        "preparing": {
+            "micIsOff": "මයික් ක්‍රියා විරහිතයි",
+            "micIsOn": "මයික් ක්‍රියාත්මකයි",
+            "cameraIsOff": "කැමරාව අක්‍රියයි",
+            "cameraIsOn": "කැමරාව ක්‍රියාත්මකයි",
+            "screenSharingIsOn": "තිර බෙදා ගැනීම ක්‍රියාත්මකයි",
+            "screenSharingIsOff": "තිරය බෙදා ගන්න",
+            "joinNow": "ඇමතුමට සම්බන්ධ වන්න"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "පිළිතුර",
             "description": "පිළිතුරු ප්‍රවාහය"
+        },
+        "Streams\/calls": {
+            "displayType": "ඇමතුම්",
+            "description": "ප්‍රවාහ\/වෙබ්ර්ට්සී සඳහා කාණ්ඩය",
+            "MaxRelationsExceeded": "උපරිම ඇමතුම් ඉක්මවා ඇත"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "වලංගු නොවන ගොනු",
         "errorNoSource": "රූප ප්‍රභවයක් නොමැත",
         "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
-        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is"
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව ඉතා විශාලය.<br> උපරිම ගොනු ප්‍රමාණය {{999} is",
+        "uploadedImage": "උඩුගත කළ රූපය",
+        "imageTitle": "රූප මාතෘකාව"
     },
     "questions": {
         "Questions": "ප්රශ්නය",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "දැනටමත් පිළිතුරු දී ඇත",
         "TitlePlaceholder": "ඔබේ ප්‍රශ්නය ටයිප් කරන්න",
         "ContentPlaceholder": "මිනිසුන්ට පිළිතුරු දීමට අමතර තොරතුරු මෙහි තබන්න",
-        "ErrorTitle": "ප්‍රශ්නය අවශ්‍යයි"
+        "ErrorTitle": "ප්‍රශ්නය අවශ්‍යයි",
+        "Placeholder": "ස්ථාන දරන්නා"
     },
     "experience": {
-        "NewExperience": "නව අත්දැකීම්"
+        "NewExperience": "නව අත්දැකීම්",
+        "DefineTitle": "කරුණාකර මාතෘකාවක් නිර්වචනය කරන්න",
+        "Create": "සාදන්න"
+    },
+    "calls": {
+        "SettingsTitle": "ඇමතුම්",
+        "MaxCalls": "උපරිම ඇමතුම්",
+        "Update": "යාවත්කාලීන කරන්න",
+        "NoCallsYet": "තවමත් ඇමතුම් නැත",
+        "CallReasonTitle": "මෙම ඇමතුම කුමක් ගැනද?",
+        "WaitingRoom": "නැවතීම් ශාලාව"
     }
 }

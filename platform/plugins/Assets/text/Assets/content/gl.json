@@ -36,8 +36,12 @@
         "WatchClip": "Obtivo {{amount}} créditos por ver {{fromStreamTitle}}",
         "PurchaseCredits": "Compra de créditos",
         "forMessages": {
-            "BoughtCredits": "{{amount}} créditos"
-        }
+            "BoughtCredits": "{{amount}} créditos",
+            "BonusCredits": "{{amount}} créditos"
+        },
+        "CreatePaidStream": "por crear {{toStreamName}}",
+        "BonusCredits": "Bonos de {{amount}} créditos",
+        "BuyBonus": "A compra de {{amount}} créditos á vez levará a bonos de {{bonus}} créditos."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Gastou {{amount}} créditos",
         "BoughtCredits": "Comprou {{amount}} créditos",
         "InviteAcceptedBy": "Obtivo {{amount}} créditos",
-        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos"
+        "YouHaveCreditsToStart": "Obtivo {{amount}} créditos",
+        "CreatePaidStream": "Gastou {{amount}} créditos",
+        "WatchClip": {
+            "+": "Obtivo {{amount}} créditos",
+            "-": "Gastou {{amount}} créditos"
+        },
+        "BonusCredits": "Recibiches bonos de {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Establecer información de pago",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Comprou {{amount}} créditos"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonos de {{amount}} créditos"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Prezo definido",
             "LinkPlaceholder": "establece unha ligazón de información adicional",
             "DescriptionPlaceholder": "Descrición do servizo",
-            "SaveService": "Gardar o servizo"
+            "SaveService": "Gardar o servizo",
+            "SelectRequiredParticipants": "Participantes requiridos"
         },
         "ManageServiceTemplates": "Xestionar modelos de servizo",
         "ManageServices": "Servizos de xestión",

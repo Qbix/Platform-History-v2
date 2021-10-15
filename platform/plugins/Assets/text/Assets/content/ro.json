@@ -36,8 +36,12 @@
         "WatchClip": "Ați câștigat {{amount}} credite pentru vizionarea {{fromStreamTitle}}",
         "PurchaseCredits": "Achiziționați credite",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credite"
-        }
+            "BoughtCredits": "{{amount}} credite",
+            "BonusCredits": "{{amount}} credite"
+        },
+        "CreatePaidStream": "pentru crearea {{toStreamName}}",
+        "BonusCredits": "Credite bonus {{amount}}",
+        "BuyBonus": "Cumpărarea de credite {{amount}} simultan va duce la bonusuri de {{bonus}} credite."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Au cheltuit {{amount}} credite",
         "BoughtCredits": "Cumpărate {{amount}} credite",
         "InviteAcceptedBy": "Câștigat {{amount}} credite",
-        "YouHaveCreditsToStart": "Câștigat {{amount}} credite"
+        "YouHaveCreditsToStart": "Câștigat {{amount}} credite",
+        "CreatePaidStream": "Credite cheltuite {{amount}}",
+        "WatchClip": {
+            "+": "Ați câștigat {{amount}} credite",
+            "-": "Credite cheltuite {{amount}}"
+        },
+        "BonusCredits": "Am primit credite bonus de {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Setați informații de plată",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Cumpărate {{amount}} credite"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Credite bonus {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Preț stabilit",
             "LinkPlaceholder": "setați linkul de informații suplimentare",
             "DescriptionPlaceholder": "Descrierea serviciului",
-            "SaveService": "Salvare serviciu"
+            "SaveService": "Salvare serviciu",
+            "SelectRequiredParticipants": "Participanți necesari"
         },
         "ManageServiceTemplates": "Gestionați șabloanele de servicii",
         "ManageServices": "Gestionarea serviciilor",

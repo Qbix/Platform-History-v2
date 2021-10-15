@@ -36,8 +36,12 @@
         "WatchClip": "Ganhou {{amount}} créditos por assistir {{fromStreamTitle}}",
         "PurchaseCredits": "Comprar Créditos",
         "forMessages": {
-            "BoughtCredits": "{{amount}} créditos"
-        }
+            "BoughtCredits": "{{amount}} créditos",
+            "BonusCredits": "{{amount}} créditos"
+        },
+        "CreatePaidStream": "para criar {{toStreamName}}",
+        "BonusCredits": "Bônus de {{amount}} créditos",
+        "BuyBonus": "Comprar {{amount}} créditos de uma vez, resultará em um bônus de {{bonus}} créditos."
     },
     "history": {
         "Date": "Encontro",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} créditos gastos",
         "BoughtCredits": "Comprou {{amount}} créditos",
         "InviteAcceptedBy": "Ganhou {{amount}} créditos",
-        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos"
+        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos",
+        "CreatePaidStream": "Gastou {{amount}} créditos",
+        "WatchClip": {
+            "+": "Ganhou {{amount}} créditos",
+            "-": "Gastou {{amount}} créditos"
+        },
+        "BonusCredits": "Recebeu bônus de {{amount}} créditos"
     },
     "subscriptions": {
         "infoTitle": "Definir informações de pagamento",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Comprou {{amount}} créditos"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bônus de {{amount}} créditos"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Definir preço",
             "LinkPlaceholder": "definir link de informações adicionais",
             "DescriptionPlaceholder": "Descrição do Serviço",
-            "SaveService": "Salvar serviço"
+            "SaveService": "Salvar serviço",
+            "SelectRequiredParticipants": "Participantes Requeridos"
         },
         "ManageServiceTemplates": "Gerenciar modelos de serviço",
         "ManageServices": "Gerenciar serviços",

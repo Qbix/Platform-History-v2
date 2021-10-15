@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link fir ze promoten",
+                "startDate": "Ufanks Datum",
+                "startTime": "Startzäit",
+                "endDate": "Enn Datum",
+                "endTime": "Enn Zäit",
+                "budget": "Budget"
+            },
+            "interests": {
+                "Title": "Filter no Interessi",
+                "FilterInterests": "Fänkt en Interessi un ze tippen ..."
+            },
+            "Interest": "Interessi",
+            "Location": "Location"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gitt",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Sichen",
+            "WriteToStartConversation": "Schreift Är Gedanken fir d&#39;Gespréich unzefänken",
+            "StartConversation": "Gespréich ufänken",
+            "GotoConversation": "Gitt op Gespréich",
+            "reset": "Reset",
+            "edit": "Editéieren",
+            "link": "Link",
+            "setUrl": "URL setzen",
+            "save": "Späicheren",
+            "setClip": "Ausgeschnidden Clip",
+            "invalidURL": "Ongëlteg URL"
+        },
+        "FileTooLarge": "Datei ze grouss fir ze cache. Max Dateigréisst {{size}}",
+        "InvalidPDF": "Datei ass net e gültege PDF",
+        "StartTypingTitleOrKeywords": "Fänkt den Titel oder d&#39;Schlësselwieder un ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "En HTML Dokument dat verschidde Benotzer kënne gesinn an änneren",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "E Rutsch an enger Presentatioun, kann HTML, Audio etc.",
+            "displayType": "Rutsch"
+        },
+        "Websites\/presentation": {
+            "description": "Eng Presentatioun déi aus verschiddene Rutschen besteet",
+            "displayType": "Presentatioun"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Eng Reklammseenheet op enger Websäit",
+            "displayType": "Annonce Eenheet"
+        },
+        "Websites\/advert\/placement": {
+            "description": "E Wee fir Reklammunitéiten ënner engem Numm ze gruppéieren",
+            "displayType": "Annonceplacement"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Inhalt fir eng Annonce",
+            "displayType": "Reklamm kreativ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Eng Werbekampagne",
+            "displayType": "Annoncekampagne"
+        },
+        "Websites\/webpage": {
+            "description": "Vertrëtt eng Websäit där hir Metadaten verschrott goufen",
+            "displayType": "Web Säit"
+        }
+    }
+}

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "ປະຊາຊົນຂ້າພະເຈົ້າໄດ້ເຊື້ອເຊີນ",
-        "Streams\/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ"
+        "Streams\/invitedMe": "ຜູ້ທີ່ເຊື້ອເຊີນຂ້ອຍ",
+        "AreYouAgree": "ເຈົ້າເຫັນດີບໍ?",
+        "Yes": "ແມ່ນແລ້ວ",
+        "No": "ບໍ່"
     },
     "interests": {
         "Filter": "ເຈົ້າຊອບສິ່ງໃດ?",
@@ -80,7 +83,8 @@
             "byFacebook": "ເຟສບຸກ",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ຖ້າລະຫັດຖືກສະແກນ",
-            "copyLink": "{{ClickOrTap}} ເພື່ອ ສຳ ເນົາລິ້ງເຊີນ"
+            "copyLink": "{{ClickOrTap}} ເພື່ອ ສຳ ເນົາລິ້ງເຊີນ",
+            "userChooserPlaceholder": "ຄົ້ນຫາໂດຍຊື່"
         },
         "email": {
             "subject": "Hey, ກວດເບິ່ງນີ້ອອກ",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ",
             "openInBrowserAlert": "ເປີດລິ້ງໃນ browser browser ເພື່ອເຂົ້າຮ່ວມການປະຊຸມ.",
             "youBeganVideoRecording": "ທ່ານເລີ່ມບັນທຶກກອງປະຊຸມນີ້",
-            "youStoppedVideoRecording": "ທ່ານຢຸດການບັນທຶກກອງປະຊຸມນີ້"
+            "youStoppedVideoRecording": "ທ່ານຢຸດການບັນທຶກກອງປະຊຸມນີ້",
+            "switchingRoom": "ກຳ ລັງປ່ຽນຫ້ອງ ...",
+            "forceDisconnecting": "ທ່ານຈະຖືກຕັດການເຊື່ອມຕໍ່ພາຍໃນ 5 ວິນາທີ",
+            "youStartedLive": "ທ່ານໄດ້ເລີ່ມອອກອາກາດການໂທນີ້ຫາ RTMP ແບບ ກຳ ນົດເອງ",
+            "youStoppedLive": "ທ່ານຢຸດການອອກອາກາດການໂທນີ້ຫາ RTMP ແບບ ກຳ ນົດເອງ",
+            "sbStartedLiveStreaming": "{{userName}} ເລີ່ມຖ່າຍທອດສົດແລ້ວ",
+            "sbStoppedLiveStreaming": "{{userName}} ສິ້ນສຸດການຖ່າຍທອດສົດແລ້ວ",
+            "liveStopped": "ເກີດຄວາມຜິດພາດໃນການສົ່ງວິດີໂອຫາຈຸດສິ້ນສຸດ"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -192,7 +203,13 @@
             "stopRecording": "ຢຸດການບັນທຶກ",
             "recordingInProgress": "ການບັນທຶກ ກຳ ລັງ ດຳ ເນີນຢູ່ ...",
             "publishOnTimeline": "ເຜີຍແຜ່ຕາມ ກຳ ນົດເວລາ",
-            "publishToGroup": "ເຜີຍແຜ່ໃຫ້ກຸ່ມ"
+            "publishToGroup": "ເຜີຍແຜ່ໃຫ້ກຸ່ມ",
+            "turnOffAudioInput": "ປິດສຽງໄມໂຄຣໂຟນ",
+            "micIsTurnedOff": "ໄມໂຄຣໂຟນປິດຢູ່",
+            "start": "ເລີ່ມ",
+            "stop": "ຢຸດ",
+            "streamingSettings": "ການຕັ້ງຄ່າ",
+            "streamToRTMP": "ຖ່າຍທອດເປັນ RTMP ແບບ ກຳ ນົດເອງ"
         },
         "participantsPopup": {
             "disconnect": "ຕັດຂາດ",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "ທ່ານບໍ່ມີສິດເຂົ້າຮ່ວມກະແສນີ້.",
         "streamTitle": "{{1}} ການໂທໂດຍກົງ",
         "preview": {
-            "preamble": "ກອງປະຊຸມ:"
+            "preamble": "ກອງປະຊຸມ:",
+            "Meeting": "ກອງປະຊຸມ",
+            "MeetingEnded": "ການປະຊຸມສິ້ນສຸດລົງ"
+        },
+        "preparing": {
+            "micIsOff": "ໄມປິດຢູ່",
+            "micIsOn": "ໄມເປີດຢູ່",
+            "cameraIsOff": "ກ້ອງປິດຢູ່",
+            "cameraIsOn": "ກ້ອງເປີດຢູ່",
+            "screenSharingIsOn": "ການແບ່ງປັນ ໜ້າ ຈໍເປີດຢູ່",
+            "screenSharingIsOff": "ແບ່ງປັນ ໜ້າ ຈໍ",
+            "joinNow": "ເຂົ້າຮ່ວມການໂທ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ຕອບ",
             "description": "ກະແສຕອບ"
+        },
+        "Streams\/calls": {
+            "displayType": "ໂທ",
+            "description": "ປະເພດສໍາລັບ Streams\/webrtc",
+            "MaxRelationsExceeded": "ໂທເກີນ ກຳ ນົດແລ້ວ"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "ເອກະສານບໍ່ຖືກຕ້ອງ",
         "errorNoSource": "ບໍ່ມີແຫຼ່ງຮູບພາບ",
         "uploadLimit": "ຂະ ໜາດ ໄຟລ໌ສູງສຸດ: {{size}}",
-        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
+        "errorFileSize": "ຂໍໂທດ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະ ໜາດ ໄຟລ໌ສູງສຸດແມ່ນ {{size}}",
+        "uploadedImage": "ຮູບທີ່ອັບໂຫລດ",
+        "imageTitle": "ຊື່ຮູບ"
     },
     "questions": {
         "Questions": "ຄຳ ຖາມ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ຕອບແລ້ວ",
         "TitlePlaceholder": "ພິມ ຄຳ ຖາມຂອງທ່ານ",
         "ContentPlaceholder": "ໃສ່ຂໍ້ມູນເພີ່ມເຕີມໃສ່ບ່ອນນີ້ເພື່ອຊ່ວຍຄົນຕອບ",
-        "ErrorTitle": "ຕ້ອງມີ ຄຳ ຖາມ"
+        "ErrorTitle": "ຕ້ອງມີ ຄຳ ຖາມ",
+        "Placeholder": "ຕົວຍຶດບ່ອນ"
     },
     "experience": {
-        "NewExperience": "ປະສົບການ ໃໝ່"
+        "NewExperience": "ປະສົບການ ໃໝ່",
+        "DefineTitle": "ກະລຸນາ ກຳ ນົດຫົວຂໍ້",
+        "Create": "ສ້າງ"
+    },
+    "calls": {
+        "SettingsTitle": "ໂທ",
+        "MaxCalls": "ໂທສູງສຸດ",
+        "Update": "ອັບເດດ",
+        "NoCallsYet": "ບໍ່ມີສາຍເທື່ອ",
+        "CallReasonTitle": "ການໂທນີ້ກ່ຽວກັບຫຍັງ?",
+        "WaitingRoom": "ຫ້ອງ​ລໍ​ຖ້າ"
     }
 }

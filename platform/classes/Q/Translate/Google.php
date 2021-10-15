@@ -62,7 +62,7 @@ class   Q_Translate_Google {
 		foreach ($data as $d) {
 			$dirname = $d['dirname'];
 			$arr =& $jsonFiles[$dirname];
-			if (!sizeof($arr)) {
+			if (!$arr or !sizeof($arr)) {
 				$arr = array();
 			}
 			array_push($d['key'], $d['value']);

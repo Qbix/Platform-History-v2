@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Link kanggo promosi",
+                "startDate": "Tanggal Mulai",
+                "startTime": "Wektu Wiwitan",
+                "endDate": "Tanggal Akhir",
+                "endTime": "Wektu Pungkasan",
+                "budget": "Anggaran"
+            },
+            "interests": {
+                "Title": "Saring Miturut Kapentingan",
+                "FilterInterests": "Mulai ngetik minat ..."
+            },
+            "Interest": "Minat",
+            "Location": "Lokasi"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Ayo",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Telusuri",
+            "WriteToStartConversation": "Tulis pikirane kanggo miwiti obrolan",
+            "StartConversation": "Miwiti Obrolan",
+            "GotoConversation": "Bukak Obrolan",
+            "reset": "Reset",
+            "edit": "Sunting",
+            "link": "Link",
+            "setUrl": "Setel URL",
+            "save": "Ngirit",
+            "setClip": "Klip Potong",
+            "invalidURL": "URL ora valid"
+        },
+        "FileTooLarge": "File gedhe banget kanggo cache. Ukuran file maksimal {{size}}",
+        "InvalidPDF": "File dudu PDF sing bener",
+        "StartTypingTitleOrKeywords": "Miwiti ngetik judhul utawa tembung kunci ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Dokumen HTML sing bisa dideleng lan diowahi dening macem-macem pangguna",
+            "displayType": "Artikel"
+        },
+        "Websites\/slide": {
+            "description": "Slide ing presentasi, bisa kalebu HTML, audio lsp.",
+            "displayType": "Geser"
+        },
+        "Websites\/presentation": {
+            "description": "Presentasi sing kalebu macem-macem slide",
+            "displayType": "Presentasi"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Unit iklan ing situs web",
+            "displayType": "Unit iklan"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Cara nglumpukake unit iklan kanthi jeneng",
+            "displayType": "Panggenan pariwara"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Konten kanggo pariwara",
+            "displayType": "Iklan kreatif"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampanye pariwara",
+            "displayType": "Kampanye advert"
+        },
+        "Websites\/webpage": {
+            "description": "Makili situs web sing metadata di-scrape",
+            "displayType": "Kaca web"
+        }
+    }
+}

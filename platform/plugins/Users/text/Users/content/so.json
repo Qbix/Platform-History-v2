@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Oggolow shuruudaha adeegga?",
         "facebookNoEmail": "Koontadaada facebook ayaa ka maqan cinwaan email ah oo la xaqiijiyay. Si fudud u gal habka asalka ah.",
-        "picTooltip": "Waad beddeli kartaa sawirkan goor dambe"
+        "picTooltip": "Waad beddeli kartaa sawirkan goor dambe",
+        "wallet": {
+            "payload": "Gal {{host}} wakhtiga {{timestamp}}",
+            "alert": {
+                "title": "Dib ugu noqoshada Wallet",
+                "content": "Markaad xirto wada hadalkan, waxaa lagu geyn doonaa boorsadaada. Kadib markaad saxiixdo, ku noqo boggan."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Kudar hab lagu galo",
@@ -108,6 +115,18 @@
         "Owner": "Milkiilaha",
         "Admin": "Maamulka",
         "Member": "Xubin",
-        "Guest": "Marti"
+        "Guest": "Marti",
+        "Host": "Marti -geliyaha"
+    },
+    "analytics": {
+        "Title": "Falanqaynta",
+        "Daily": "Maalin kasta",
+        "Weekly": "Toddobaadle",
+        "Monthly": "Bil walba",
+        "Application": "Codsiga",
+        "Pages": "Bogagga",
+        "Services": "Adeegyada",
+        "Faq": "Su&#39;aal",
+        "WeekDays": "Maalmaha Toddobaadka"
     }
 }

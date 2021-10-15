@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "i totonu o le {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "maila",
+        "miles": "maila",
+        "mi": "mi",
+        "foot": "vae",
+        "feet": "vae",
+        "inches": "inisi"
+    },
+    "location": {
+        "interested": "Ou te fiafia i mea o loʻo tutupu i totonu o le {{select}} o",
+        "update": "Faʻaleleia Lou Nofoaga",
+        "set": "Seti Loʻu Nofoaga",
+        "prompt": "{{ClickOrTap}} ii i<br> seti lau<br> nofoaga",
+        "myCurrentLocation": "Loʻu nofoaga o iai nei",
+        "enterAddress": "Ulufale se tuatusi",
+        "enterPostcode": "Faʻamolemole ulufale i lau postcode \/ zipcode",
+        "create": {
+            "action": "Faʻaopopo Nofoaga",
+            "title": "Nofoaga Fou",
+            "nameYourLocation": "Taʻu lou nofoaga"
+        },
+        "confirm": {
+            "title": "Sefe lenei nofoaga?",
+            "message": "O e fuafua e toe faʻaaoga lenei nofoaga i le lumanaʻi?",
+            "ok": "ioe",
+            "cancel": "leai"
+        },
+        "add": {
+            "title": "Taʻu lenei nofoaga",
+            "placeholder": "Fale, Galuega etc.",
+            "ok": "Sefe"
+        },
+        "dialog": {
+            "title": "Filifili Nofoaga"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "E i ai se vaega i totonu o lenei nofoaga?",
+        "newArea": "Eria fou",
+        "promptTitle": "Ulufale se igoa mo le eria:",
+        "absent": "Faʻamolemole seti le eria",
+        "error": "Sese",
+        "exist": "Eria ua uma ona i ai",
+        "addNewArea": "Faʻaopopo se vaega fou",
+        "add": "Faʻaopopo"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "o se faʻaputuga o nofoaga",
+            "displayType": "Nofoaga"
+        },
+        "Places\/location": {
+            "description": "Faʻaalia se fale, nofoaga, vaʻa, paka, ma isi.",
+            "displayType": "Nofoaga"
+        },
+        "Places\/area": {
+            "description": "Faʻaalia se vaega i totonu o se nofoaga, pei o se potu poʻo se potu",
+            "displayType": "Eria"
+        },
+        "Places\/floor": {
+            "description": "Faʻaalia se foloa i se fale poʻo se vaʻa",
+            "displayType": "Fogafale"
+        },
+        "Places\/column": {
+            "description": "Faʻaalia se koluma i se fale poʻo se vaʻa",
+            "displayType": "Koluma"
+        },
+        "Places\/nearby": {
+            "description": "Vaega mo mea i totonu o se mamao mamao o le geohash",
+            "displayType": "Latalata i nofoaga"
+        },
+        "Places\/interest": {
+            "description": "Vaega mo mea i totonu o se mamao mamao o le geohash, fetaui ma se fiafia",
+            "displayType": "Nofoaga fiafia"
+        }
+    }
+}

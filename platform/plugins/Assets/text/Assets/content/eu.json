@@ -36,8 +36,12 @@
         "WatchClip": "{{amount}} kreditu irabazi dituzu {{fromStreamTitle}} ikusteagatik",
         "PurchaseCredits": "Erosi kredituak",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kreditu"
-        }
+            "BoughtCredits": "{{amount}} kreditu",
+            "BonusCredits": "{{amount}} kreditu"
+        },
+        "CreatePaidStream": "{{toStreamName}} sortzeagatik",
+        "BonusCredits": "Hobari {{amount}} kredituak",
+        "BuyBonus": "{{amount}} kreditu aldi berean erosteak {{bonus}} kreditu hobea ekarriko du."
     },
     "history": {
         "Date": "data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} kreditu igorri dira",
         "BoughtCredits": "Erosi {{amount}} kreditu",
         "InviteAcceptedBy": "Irabazitako {{amount}} kredituak",
-        "YouHaveCreditsToStart": "Irabazitako {{amount}} kredituak"
+        "YouHaveCreditsToStart": "Irabazitako {{amount}} kredituak",
+        "CreatePaidStream": "{{amount}} kreditu gastatu",
+        "WatchClip": {
+            "+": "Irabazitako {{amount}} kreditu",
+            "-": "{{amount}} kreditu gastatu"
+        },
+        "BonusCredits": "{{amount}} kreditu hobeak lortu dituzu"
     },
     "subscriptions": {
         "infoTitle": "Ezarri ordainketa informazioa",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Erosi {{amount}} kreditu"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Hobari {{amount}} kredituak"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Ezarri prezioa",
             "LinkPlaceholder": "ezarri esteka informazio gehigarria",
             "DescriptionPlaceholder": "Zerbitzuaren deskribapena",
-            "SaveService": "Gorde zerbitzua"
+            "SaveService": "Gorde zerbitzua",
+            "SelectRequiredParticipants": "Beharrezko Partehartzaileak"
         },
         "ManageServiceTemplates": "Zerbitzuaren txantiloiak kudeatu",
         "ManageServices": "Zerbitzuak kudeatu",

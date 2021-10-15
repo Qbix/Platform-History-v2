@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Yamukela imigomo yesevisi?",
         "facebookNoEmail": "I-akhawunti yakho ye-facebook ishoda ngekheli le-imeyili eliqinisekisiwe. Mane ungene ngemvume ngendlela yendabuko.",
-        "picTooltip": "Ungasiguqula lesi sithombe ngokuhamba kwesikhathi"
+        "picTooltip": "Ungasiguqula lesi sithombe ngokuhamba kwesikhathi",
+        "wallet": {
+            "payload": "Ngena ngemvume ku - {{host}} ngesikhathi {{timestamp}}",
+            "alert": {
+                "title": "Iqondisa kabusha ku-Wallet",
+                "content": "Lapho usuvale le ngxoxo, uzoyiswa esikhwameni sakho semali. Ngemuva kokungena ngemvume, buyela kuleli khasi."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Faka indlela yokungena ngemvume",
@@ -108,6 +115,18 @@
         "Owner": "Umnikazi",
         "Admin": "Ukuphatha",
         "Member": "Ilungu",
-        "Guest": "Isimenywa"
+        "Guest": "Isimenywa",
+        "Host": "Umsingathi"
+    },
+    "analytics": {
+        "Title": "Izibalo",
+        "Daily": "Nsuku zonke",
+        "Weekly": "Masonto onke",
+        "Monthly": "Nyanga zonke",
+        "Application": "Isicelo",
+        "Pages": "Amakhasi",
+        "Services": "Imisebenzi",
+        "Faq": "Imibuzo evame ukubuzwa",
+        "WeekDays": "Izinsuku Zamasonto"
     }
 }

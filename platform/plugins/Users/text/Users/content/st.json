@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Amohela Melao ea Tšebeletso?",
         "facebookNoEmail": "Ak&#39;haonte ea hau ea facebook e haelloa ke aterese ea lengolo-tsoibila. Kenya feela tsela ea tlhaho.",
-        "picTooltip": "U ka fetola setšoantšo sena hamorao"
+        "picTooltip": "U ka fetola setšoantšo sena hamorao",
+        "wallet": {
+            "payload": "Kena ho {{host}} ka nako {{timestamp}}",
+            "alert": {
+                "title": "E lebisitse ho Wallet",
+                "content": "Hang ha u koala lebokose lena, u tla isoa sepacheng sa hau. Kamora hore o kene, khutlela leqepheng lena."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Kenya tsela ea ho kena",
@@ -108,6 +115,18 @@
         "Owner": "Mong",
         "Admin": "Tsamaiso",
         "Member": "Setho",
-        "Guest": "Moeti"
+        "Guest": "Moeti",
+        "Host": "Moamoheli"
+    },
+    "analytics": {
+        "Title": "Ditlhahlobo",
+        "Daily": "Letsatsi le letsatsi",
+        "Weekly": "Beke le beke",
+        "Monthly": "Khoeli le khoeli",
+        "Application": "Kopo",
+        "Pages": "Maqephe",
+        "Services": "Litšebeletso",
+        "Faq": "LBH",
+        "WeekDays": "Matsatsi a Beke"
     }
 }

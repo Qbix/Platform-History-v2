@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ljudi koje sam pozvao",
-        "Streams\/invitedMe": "Ko me je pozvao"
+        "Streams\/invitedMe": "Ko me je pozvao",
+        "AreYouAgree": "Slažete li se?",
+        "Yes": "Da",
+        "No": "Ne"
     },
     "interests": {
         "Filter": "Šta uživate?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ako je kod skeniran",
-            "copyLink": "{{ClickOrTap}} za kopiranje pozivnice"
+            "copyLink": "{{ClickOrTap}} za kopiranje pozivnice",
+            "userChooserPlaceholder": "Pretražujte po imenu"
         },
         "email": {
             "subject": "Hej, vidi ovo",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Učesnik nema video",
             "openInBrowserAlert": "Otvorite vezu u pregledniku Safari da biste se pridružili konferenciji.",
             "youBeganVideoRecording": "Počeli ste snimati ovu konferenciju",
-            "youStoppedVideoRecording": "Prestali ste snimati ovu konferenciju"
+            "youStoppedVideoRecording": "Prestali ste snimati ovu konferenciju",
+            "switchingRoom": "Smenjivanje ...",
+            "forceDisconnecting": "Prekinut ćete vezu u roku od 5 sekundi",
+            "youStartedLive": "Počeli ste emitirati ovaj poziv na prilagođeni RTMP",
+            "youStoppedLive": "Prestali ste emitirati ovaj poziv na prilagođeni RTMP",
+            "sbStartedLiveStreaming": "{{userName}} počeo uživo",
+            "sbStoppedLiveStreaming": "{{userName}} završilo uživo",
+            "liveStopped": "Došlo je do greške pri slanju videa na krajnju tačku"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Zaustavite snimanje",
             "recordingInProgress": "Snimanje je u toku ...",
             "publishOnTimeline": "Objavite na vremenskoj traci",
-            "publishToGroup": "Objavite u grupi"
+            "publishToGroup": "Objavite u grupi",
+            "turnOffAudioInput": "Isključivanje mikrofona",
+            "micIsTurnedOff": "Mikrofon je isključen",
+            "start": "Počni",
+            "stop": "Stop",
+            "streamingSettings": "Postavke",
+            "streamToRTMP": "Prijenos prema prilagođenom RTMP -u"
         },
         "participantsPopup": {
             "disconnect": "Prekini vezu",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom toku.",
         "streamTitle": "{999}} poziv uživo",
         "preview": {
-            "preamble": "Sastanak:"
+            "preamble": "Sastanak:",
+            "Meeting": "Sastanak",
+            "MeetingEnded": "Sastanak je završen"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon je isključen",
+            "micIsOn": "Mikrofon je uključen",
+            "cameraIsOff": "Kamera je isključena",
+            "cameraIsOn": "Kamera je uključena",
+            "screenSharingIsOn": "Dijeljenje ekrana je uključeno",
+            "screenSharingIsOff": "Dijeli ekran",
+            "joinNow": "Pridružite se pozivu"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Odgovorite",
             "description": "tok odgovora"
+        },
+        "Streams\/calls": {
+            "displayType": "Pozivi",
+            "description": "kategorija za Streams\/webrtc",
+            "MaxRelationsExceeded": "Maksimalan broj poziva je premašen"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Nevažeća datoteka",
         "errorNoSource": "Nema izvora slike",
         "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
-        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}",
+        "uploadedImage": "Otpremljena slika",
+        "imageTitle": "Naslov slike"
     },
     "questions": {
         "Questions": "Pitanja",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Već sam odgovorio",
         "TitlePlaceholder": "Upišite svoje pitanje",
         "ContentPlaceholder": "Ovdje dodajte sve dodatne informacije kako biste pomogli ljudima da odgovore",
-        "ErrorTitle": "Pitanje potrebno"
+        "ErrorTitle": "Pitanje potrebno",
+        "Placeholder": "Čuvar mesta"
     },
     "experience": {
-        "NewExperience": "Novo iskustvo"
+        "NewExperience": "Novo iskustvo",
+        "DefineTitle": "Molimo definirajte naslov",
+        "Create": "Stvoriti"
+    },
+    "calls": {
+        "SettingsTitle": "Pozivi",
+        "MaxCalls": "Max zove",
+        "Update": "Update",
+        "NoCallsYet": "Još nema poziva",
+        "CallReasonTitle": "O čemu se radi u ovom pozivu?",
+        "WaitingRoom": "Čekaonica"
     }
 }

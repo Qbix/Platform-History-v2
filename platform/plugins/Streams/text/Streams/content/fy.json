@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Minsken dy&#39;t ik útnoege",
-        "Streams\/invitedMe": "Wa hat my frege"
+        "Streams\/invitedMe": "Wa hat my frege",
+        "AreYouAgree": "Bist it der mei iens?",
+        "Yes": "Ja",
+        "No": "Nee"
     },
     "interests": {
         "Filter": "Wat wolle jo?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} as de koade waard skand",
-            "copyLink": "{{ClickOrTap}} om útnoegingslink te kopiearjen"
+            "copyLink": "{{ClickOrTap}} om útnoegingslink te kopiearjen",
+            "userChooserPlaceholder": "Sykje op namme"
         },
         "email": {
             "subject": "Hjir, kontrolearje dit út",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Dielnimmer hat gjin fideo",
             "openInBrowserAlert": "Iepenje kepling yn &#39;e Safari-blêder om mei te dwaan oan&#39; e konferinsje.",
             "youBeganVideoRecording": "Jo begon dizze konferinsje op te nimmen",
-            "youStoppedVideoRecording": "Jo binne ophâlden mei it opnimmen fan dizze konferinsje"
+            "youStoppedVideoRecording": "Jo binne ophâlden mei it opnimmen fan dizze konferinsje",
+            "switchingRoom": "Wikselkeamer ...",
+            "forceDisconnecting": "Jo wurde binnen 5 sekonden loskeppele",
+            "youStartedLive": "Jo binne begon mei it útstjoeren fan dizze oprop nei oanpaste RTMP",
+            "youStoppedLive": "Jo binne stoppe mei it útstjoeren fan dizze oprop nei oanpaste RTMP",
+            "sbStartedLiveStreaming": "{{userName}} begon live",
+            "sbStoppedLiveStreaming": "{{userName}} einige live",
+            "liveStopped": "Flater by ferstjoeren fan fideo nei einpunt barde"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Opname stopje",
             "recordingInProgress": "Opname is oan &#39;e gong ...",
             "publishOnTimeline": "Publisearje op tiidline",
-            "publishToGroup": "Publisearje nei groep"
+            "publishToGroup": "Publisearje nei groep",
+            "turnOffAudioInput": "Demp mikrofoan",
+            "micIsTurnedOff": "De mikrofoan is útskeakele",
+            "start": "Start",
+            "stop": "Ophâlde",
+            "streamingSettings": "Ynstellings",
+            "streamToRTMP": "Stream nei oanpaste RTMP"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dizze stream.",
         "streamTitle": "{{1}} live oprop",
         "preview": {
-            "preamble": "Moeting:"
+            "preamble": "Moeting:",
+            "Meeting": "Moeting",
+            "MeetingEnded": "Gearkomst einige"
+        },
+        "preparing": {
+            "micIsOff": "Mic is út",
+            "micIsOn": "Mic is oan",
+            "cameraIsOff": "Kamera is út",
+            "cameraIsOn": "Kamera is oan",
+            "screenSharingIsOn": "Screensharing is oan",
+            "screenSharingIsOff": "Diel skerm",
+            "joinNow": "Doch mei oan &#39;e oprop"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Antwurd",
             "description": "antwurdstream"
+        },
+        "Streams\/calls": {
+            "displayType": "Oproppen",
+            "description": "kategory foar Streams\/webrtc",
+            "MaxRelationsExceeded": "Maksimum oproppen oertroffen"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Unjildich bestân",
         "errorNoSource": "Gjin ôfbyldingsboarne",
         "uploadLimit": "Maksimum bestânsgrutte: {{size}}",
-        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}"
+        "errorFileSize": "Sorry, mar bestân te grut.<br> Maksimum bestânsgrutte is {{size}}",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Ofbylding titel"
     },
     "questions": {
         "Questions": "Fragen",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Al beäntwurde",
         "TitlePlaceholder": "Typ jo fraach",
         "ContentPlaceholder": "Set hjir ekstra ynformaasje om minsken te beantwurdzjen",
-        "ErrorTitle": "Fraach ferplicht"
+        "ErrorTitle": "Fraach ferplicht",
+        "Placeholder": "Plakhâlder"
     },
     "experience": {
-        "NewExperience": "Nije Underfining"
+        "NewExperience": "Nije Underfining",
+        "DefineTitle": "Definearje asjebleaft in titel",
+        "Create": "Meitsje"
+    },
+    "calls": {
+        "SettingsTitle": "Oproppen",
+        "MaxCalls": "Max ropt",
+        "Update": "Update",
+        "NoCallsYet": "Noch gjin oproppen",
+        "CallReasonTitle": "Wêr giet dizze oprop oer?",
+        "WaitingRoom": "Wachtkeamer"
     }
 }

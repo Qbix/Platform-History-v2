@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Mense wat ek genooi het",
-        "Streams\/invitedMe": "Wie het my genooi"
+        "Streams\/invitedMe": "Wie het my genooi",
+        "AreYouAgree": "Stem jy saam?",
+        "Yes": "Ja",
+        "No": "Geen"
     },
     "interests": {
         "Filter": "Wat geniet jy?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Kies weer uit kontakte",
             "inviteSelectedContacts": "Nooi geselekteerde kontakte uit",
             "scannedQR": "{{ClickOrTap}} as die kode geskandeer is",
-            "copyLink": "{{ClickOrTap}} om die uitnodigingsskakel te kopieer"
+            "copyLink": "{{ClickOrTap}} om die uitnodigingsskakel te kopieer",
+            "userChooserPlaceholder": "Soek op naam"
         },
         "email": {
             "subject": "Hey, check dit uit",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Deelnemer het geen video nie",
             "openInBrowserAlert": "Maak &#39;n skakel oop in die Safari-blaaier om aan die konferensie deel te neem.",
             "youBeganVideoRecording": "U het hierdie konferensie begin opneem",
-            "youStoppedVideoRecording": "U het opgehou om hierdie konferensie op te neem"
+            "youStoppedVideoRecording": "U het opgehou om hierdie konferensie op te neem",
+            "switchingRoom": "Wissel kamer ...",
+            "forceDisconnecting": "U sal binne 5 sekondes ontkoppel word",
+            "youStartedLive": "U het hierdie oproep begin uitsaai na aangepaste RTMP",
+            "youStoppedLive": "U het opgehou om hierdie oproep na persoonlike RTMP uit te saai",
+            "sbStartedLiveStreaming": "{{userName}} het regstreeks begin",
+            "sbStoppedLiveStreaming": "{{userName}} het regstreeks geëindig",
+            "liveStopped": "Kon nie video stuur na eindpunt nie"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -205,7 +216,13 @@
             "stopRecording": "Stop opname",
             "recordingInProgress": "Opname is aan die gang ...",
             "publishOnTimeline": "Publiseer op tydlyn",
-            "publishToGroup": "Publiseer in groep"
+            "publishToGroup": "Publiseer in groep",
+            "turnOffAudioInput": "Demp mikrofoon",
+            "micIsTurnedOff": "Die mikrofoon is afgeskakel",
+            "start": "Begin",
+            "stop": "Stop",
+            "streamingSettings": "Instellings",
+            "streamToRTMP": "Stroom na pasgemaakte RTMP"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
         "streamTitle": "{{1}} regstreekse oproep",
         "preview": {
-            "preamble": "Vergadering:"
+            "preamble": "Vergadering:",
+            "Meeting": "Ontmoeting",
+            "MeetingEnded": "Vergadering geëindig"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofoon is af",
+            "micIsOn": "Mikrofoon is aan",
+            "cameraIsOff": "Kamera is af",
+            "cameraIsOn": "Kamera is aan",
+            "screenSharingIsOn": "Skermdeling is aan",
+            "screenSharingIsOff": "Deel skerm",
+            "joinNow": "Sluit aan by die oproep"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Antwoord",
             "description": "antwoordstroom"
+        },
+        "Streams\/calls": {
+            "displayType": "Oproepe",
+            "description": "kategorie vir strome\/webrtc",
+            "MaxRelationsExceeded": "Maksimum oproepe oorskry"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Ongeldige lêer",
         "errorNoSource": "Geen beeldbron nie",
         "uploadLimit": "Maksimum lêergrootte: {{size}}",
-        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}"
+        "errorFileSize": "Jammer, maar lêer is te groot.<br> Maksimum lêergrootte is {{size}}",
+        "uploadedImage": "Opgelaaide prent",
+        "imageTitle": "Beeldtitel"
     },
     "questions": {
         "Questions": "Vrae",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Al beantwoord",
         "TitlePlaceholder": "Tik u vraag in",
         "ContentPlaceholder": "Plaas addisionele inligting hier om mense te help beantwoord",
-        "ErrorTitle": "Vraag vereis"
+        "ErrorTitle": "Vraag vereis",
+        "Placeholder": "Plekhouer"
     },
     "experience": {
-        "NewExperience": "Nuwe ervaring"
+        "NewExperience": "Nuwe ervaring",
+        "DefineTitle": "Definieer asseblief &#39;n titel",
+        "Create": "Skep"
+    },
+    "calls": {
+        "SettingsTitle": "Oproepe",
+        "MaxCalls": "Max bel",
+        "Update": "Opdateer",
+        "NoCallsYet": "Nog geen oproepe nie",
+        "CallReasonTitle": "Waaroor gaan hierdie oproep?",
+        "WaitingRoom": "Wagkamer"
     }
 }

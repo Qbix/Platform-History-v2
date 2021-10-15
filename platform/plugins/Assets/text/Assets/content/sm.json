@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Maua e totogi"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: totogi faʻasolosolo mo {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Faʻafetai mo lau totogi i le {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} saini ile {{plan.title}}",
+        "YouSubscribedTo": "Ua uma ona e lesitala ile {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "E te mauaina le totogiina o le {{displayAmount}} mai le {{call 'publisher.displayName'}} e le &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ei, na o lenei e faʻailoa atu ia oe {{1}} ua molia {{2}} mo {{3}} e {{4}}"
+    },
+    "charged": {
+        "Subject": "Faʻafetai mo lau totogi mo le &quot;{{description}}&quot;",
+        "HavePaid": "Ei {{1}}, ua naʻo se vave faʻamaoniaina na e totogi lelei le {{2}} i le {{3}} mo {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Faʻamatalaga e uiga i le faʻatonuga",
+        "PaymentMethod": "Totogi auala",
+        "ContactInfo": "Faʻamatalaga faʻafesoʻotaʻi",
+        "Pay": "Totogi"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Na talia e le {{invitedUserName}}",
+        "YouHaveCreditsToStart": "E iai ou faʻailoga ile {{amount}} e amata ai",
+        "PaymentFor": "Totogi mo le &quot;{{1}}&quot;",
+        "PaymentTo": "Totogi i le {{1}}",
+        "PaymentToUser": "Totogi i le {{toUserName}}",
+        "CreatePaidStream": "mo le fausiaina o le {{toStreamName}}",
+        "JoinedPaidStream": "mo le faʻasoa i le &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "mo le fausiaina o le afioʻaga &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "pei o se tupe toe faʻafoʻi i le &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Faʻatau {{amount}} togi",
+        "BonusCredits": "Faʻailoga togi {{amount}}",
+        "BuyAmountCredits": "Faʻatau aitalafu {{amount}}",
+        "WatchClip": "Maua togi {{amount}} togi mo matamata {{fromStreamTitle}}",
+        "MissingCredits": "Tupe leiloa",
+        "YouMissingCredits": "Oe manaʻomia se faʻaopopo faʻaopopo {{amount}} faʻasolosolo atu.",
+        "BuyCredits": "Faʻatau faʻailoga",
+        "BuyBonus": "Faʻatau ile {{amount}} faʻailoga i le taimi e tasi, o le a tau atu ai i le {{bonus}} faʻailoga tupe.",
+        "Buy": "Faʻatau",
+        "PurchaseCredits": "Faʻatau Tupe",
+        "Credits": "Tupe maua",
+        "ErrorInvalidAmount": "Aofaʻiga le aoga",
+        "ErrorInvalidCurrency": "Ae paga lea, matou te leʻo lagolagoina le tupe {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} togi",
+            "BonusCredits": "{{amount}} togi"
+        }
+    },
+    "history": {
+        "Date": "Aso",
+        "Amount": "Aofaʻiga",
+        "Description": "Faʻamatalaga",
+        "Client": "Tagata tautua",
+        "To": "i le",
+        "From": "mai",
+        "SeeHistory": "Vaʻai le talaaga o totogi mo {{1}}",
+        "HistoryEmpty": "E leai sau faʻamatalaga",
+        "PaymentFor": "Lafo aitalafu i le {{amount}}",
+        "PaymentTo": "Lafo aitalafu i le {{amount}}",
+        "PaymentToUser": "Lafo aitalafu i le {{amount}}",
+        "CreatePaidStream": "Faʻaalu {{amount}} togi",
+        "WatchClip": {
+            "+": "Maua togi {{amount}} togi",
+            "-": "Faʻaalu {{amount}} togi"
+        },
+        "JoinedPaidStream": {
+            "+": "Maua togi {{amount}} togi",
+            "-": "Faʻaalu {{amount}} togi"
+        },
+        "LeftPaidStream": {
+            "+": "Maua togi {{amount}}",
+            "-": "Lafo aitalafu i le {{amount}}"
+        },
+        "CreatedCommunity": "Faʻaalu {{amount}} togi",
+        "BoughtCredits": "Faʻatau {{amount}} togi",
+        "BonusCredits": "Maua togi togi {{amount}}",
+        "InviteAcceptedBy": "Maua togi {{amount}} togi",
+        "YouHaveCreditsToStart": "Maua togi {{amount}} togi"
+    },
+    "subscriptions": {
+        "infoTitle": "Seti Faʻamatalaga Totogiina",
+        "confirm": {
+            "title": "Amata le lesitala",
+            "message": "E te manaʻo e te lesitala ia {{title}}?",
+            "ok": "Ua lelei",
+            "cancel": "Faalēaogāina"
+        },
+        "CreditOrDebitCard": "Credit card poo le credit card",
+        "SubscribePayment": "Totogi Totogi",
+        "ImmediatePayment": "Totogi vave"
+    },
+    "payments": {
+        "infoTitle": "Seti Faʻamatalaga Totogiina",
+        "BuyAmountCredits": "Faʻatau aitalafu {{amount}}",
+        "confirm": {
+            "title": "Fai se Totogi",
+            "message": "E te malilie e totogi le {{symbol}} {{amount}}?",
+            "ok": "Ua lelei",
+            "cancel": "Faalēaogāina"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Tupe maua",
+            "description": "tusia tala o faʻailoga ma totogi"
+        },
+        "Assets\/plan": {
+            "displayType": "Fuafuaga o le lesitala",
+            "description": "fuafuaga o le lesitala"
+        },
+        "Assets\/subscription": {
+            "displayType": "Lesitala",
+            "description": "lesitala"
+        },
+        "Assets\/product": {
+            "displayType": "Oloa",
+            "description": "oloa o loʻo faʻatau atu"
+        },
+        "Assets\/service": {
+            "displayType": "Auaunaga",
+            "description": "tautua ua ofoina atu"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Maua togi {{amount}} togi"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Faʻatau {{amount}} togi"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Faʻailoga togi {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Faʻaalu {{amount}} togi"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Lafo togi i le {{amount}} i le {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Mauaina faʻailoga {{amount}} mai le {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Tautua Fou",
+            "TitlePlaceholder": "Igoa ole tautua",
+            "PricePlaceholder": "Seti tau",
+            "LinkPlaceholder": "seti faʻamatalaga faʻaopoopo fesoʻotaʻiga",
+            "DescriptionPlaceholder": "Faʻamatalaga tautua",
+            "SaveService": "Sefe Auaunaga",
+            "SelectRequiredParticipants": "Tagata Auai e Manaomia"
+        },
+        "ManageServiceTemplates": "Faʻataʻitaʻi Auaunaga Mamanu",
+        "ManageServices": "Pulea Tautua",
+        "Free": "Taoloto",
+        "OptionalContribution": "Tuu i le faitalia filifiliga",
+        "RequiredPayment": "Totogi manaʻomia",
+        "AreYouSureDelete": "O e mautinoa e te manaʻo e aveese lenei tautua?",
+        "AmountServicesRelated": "E i ai {{amount}} avanoa talafeagai e faʻatatau i lenei tautua. O i latou foi o le a aveʻesea."
+    }
+}

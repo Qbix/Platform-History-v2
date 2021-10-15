@@ -117,7 +117,10 @@
         "SetClipStart": "Đặt bắt đầu clip",
         "ClipStart": "Bắt đầu clip",
         "SetClipEnd": "Đặt kết thúc clip",
-        "ClipEnd": "Clip kết thúc"
+        "ClipEnd": "Clip kết thúc",
+        "StartMoreEnd": "Vị trí bắt đầu không được nhiều hơn vị trí kết thúc",
+        "EndLessStart": "Vị trí kết thúc không được nhỏ hơn vị trí bắt đầu",
+        "WhichInvalid": "Đối số &#39;mà&#39; không hợp lệ"
     },
     "durations": {
         "second": "thứ hai",

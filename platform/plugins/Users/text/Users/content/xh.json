@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Uyayamkela iMigaqo yeNkonzo?",
         "facebookNoEmail": "Iakhawunti yakho ye-facebook ilahlekile idilesi ye-imeyile. Ngena nje ngendlela yemveli.",
-        "picTooltip": "Ungawutshintsha lo mfanekiso kamva"
+        "picTooltip": "Ungawutshintsha lo mfanekiso kamva",
+        "wallet": {
+            "payload": "Ngena kwi {{host}} ngexesha {{timestamp}}",
+            "alert": {
+                "title": "Ukuqondisa kwakhona kwiWallet",
+                "content": "Nje ukuba uvale le ncoko, uya kusiwa kwisipaji sakho. Emva kokuba ungene, buyela kweli phepha."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Yongeza indlela yokungena",
@@ -108,6 +115,18 @@
         "Owner": "Umnini",
         "Admin": "Ulawulo",
         "Member": "Ilungu",
-        "Guest": "Undwendwe"
+        "Guest": "Undwendwe",
+        "Host": "Umgcini"
+    },
+    "analytics": {
+        "Title": "Uhlalutyo",
+        "Daily": "Yonke imihla",
+        "Weekly": "Ngeveki",
+        "Monthly": "Ngenyanga",
+        "Application": "Ukusetyenziswa",
+        "Pages": "Amaphepha",
+        "Services": "Iinkonzo",
+        "Faq": "FAQ",
+        "WeekDays": "Iintsuku zeveki"
     }
 }

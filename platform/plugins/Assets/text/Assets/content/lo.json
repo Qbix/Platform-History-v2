@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ແຕະເພື່ອຈ່າຍ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ປະມວນການເກັບເງິນ ສຳ ລັບ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "ຂໍຂອບໃຈສໍາລັບການຊໍາລະຂອງທ່ານຫາ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ສະtoັກໃຊ້ {{plan.title}} ແລ້ວ",
+        "YouSubscribedTo": "ທ່ານໄດ້ສະັກໃຊ້ {{plan.title}} ແລ້ວ"
+    },
+    "charge": {
+        "Subject": "ທ່ານໄດ້ຮັບການຊໍາລະເງິນຈໍານວນ {{displayAmount}} ຈາກ {{call 'publisher.displayName'}} ໂດຍ &quot;{{description}}&quot;",
+        "HasBeenCharged": "ສະບາຍດີ, ນີ້ພຽງເພື່ອແຈ້ງໃຫ້ເຈົ້າຮູ້ວ່າ {{1}} ໄດ້ຖືກຮຽກເກັບເງິນແລ້ວ {{2}} ສໍາລັບ {{3}} ໂດຍ {{4}}"
+    },
+    "charged": {
+        "Subject": "ຂອບໃຈສໍາລັບການຊໍາລະເງິນຂອງເຈົ້າສໍາລັບ &quot;{{description}}&quot;",
+        "HavePaid": "ສະບາຍດີ {{1}}, ນີ້ເປັນພຽງການຢືນຢັນດ່ວນວ່າເຈົ້າໄດ້ຊໍາລະເງິນ {{2}} ຫາ {{3}} ສໍາລັບ {{4}} ສໍາເລັດແລ້ວ."
+    },
+    "payment": {
+        "AboutOrder": "ຂໍ້ມູນກ່ຽວກັບການສັ່ງ",
+        "PaymentMethod": "ວິທີການຊໍາລະເງິນ",
+        "ContactInfo": "ຂໍ້​ມູນ​ຕິດ​ຕໍ່",
+        "Pay": "ຈ່າຍ"
+    },
+    "credits": {
+        "InviteAcceptedBy": "ຍອມຮັບ ຄຳ ເຊີນໂດຍ {{invitedUserName}}",
+        "YouHaveCreditsToStart": "ທ່ານມີເຄຣດິດ {{amount}} ເພື່ອເລີ່ມຕົ້ນ",
+        "PaymentFor": "ການຊໍາລະເງິນສໍາລັບ &quot;{{1}}&quot;",
+        "PaymentTo": "ການຈ່າຍເງິນໃຫ້ {{1}}",
+        "PaymentToUser": "ການຈ່າຍເງິນໃຫ້ {{toUserName}}",
+        "CreatePaidStream": "ສໍາລັບການສ້າງ {{toStreamName}}",
+        "JoinedPaidStream": "ສຳ ລັບການຈອງໃນ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ສໍາລັບການສ້າງຊຸມຊົນ &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ເປັນການຄືນເງິນການຈອງໃນ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "ໄດ້ຊື້ເຄຣດິດ {{amount}}",
+        "BonusCredits": "ເຄຣດິດໂບນັດ {{amount}}",
+        "BuyAmountCredits": "ຊື້ເຄຣດິດ {{amount}}",
+        "WatchClip": "ໄດ້ຮັບເຄຣດິດ {{amount}} ສໍາລັບການເບິ່ງ {{fromStreamTitle}}",
+        "MissingCredits": "ບໍ່ມີເຄຣດິດ",
+        "YouMissingCredits": "ທ່ານຕ້ອງການເຄຣດິດ {{amount}} ເພີ່ມເຕີມເພື່ອດໍາເນີນການຕໍ່.",
+        "BuyCredits": "ຊື້ສິນເຊື່ອ",
+        "BuyBonus": "ການຊື້ເຄຣດິດ {{amount}} ພ້ອມກັນ, ຈະນໍາໄປສູ່ໂບນັດເຄຣດິດ {{bonus}}.",
+        "Buy": "ຊື້",
+        "PurchaseCredits": "ຊື້ສິນເຊື່ອ",
+        "Credits": "ສິນເຊື່ອ",
+        "ErrorInvalidAmount": "ຈຳ ນວນບໍ່ຖືກຕ້ອງ",
+        "ErrorInvalidCurrency": "ຂໍອະໄພ, ພວກເຮົາບໍ່ຮອງຮັບສະກຸນເງິນ {{currency}} ເທື່ອ",
+        "forMessages": {
+            "BoughtCredits": "ເຄຣດິດ {{amount}}",
+            "BonusCredits": "ເຄຣດິດ {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "ວັນທີ",
+        "Amount": "ຈໍາ​ນວນ",
+        "Description": "ລາຍລະອຽດ",
+        "Client": "ລູກ​ຄ້າ",
+        "To": "ເຖິງ",
+        "From": "ຈາກ",
+        "SeeHistory": "ເບິ່ງປະຫວັດການຈ່າຍເງິນ ສຳ ລັບ {{1}}",
+        "HistoryEmpty": "ເຈົ້າບໍ່ມີຂໍ້ມູນເທື່ອ",
+        "PaymentFor": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "PaymentTo": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "PaymentToUser": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "CreatePaidStream": "ໃຊ້ໄປແລ້ວ {{amount}} ເຄຣດິດ",
+        "WatchClip": {
+            "+": "ໄດ້ຮັບເຄຣດິດ {{amount}}",
+            "-": "ໃຊ້ໄປແລ້ວ {{amount}} ເຄຣດິດ"
+        },
+        "JoinedPaidStream": {
+            "+": "ໄດ້ຮັບເຄຣດິດ {{amount}}",
+            "-": "ໃຊ້ໄປແລ້ວ {{amount}} ເຄຣດິດ"
+        },
+        "LeftPaidStream": {
+            "+": "ໄດ້ຮັບເຄຣດິດ {{amount}}",
+            "-": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ"
+        },
+        "CreatedCommunity": "ໃຊ້ໄປແລ້ວ {{amount}} ເຄຣດິດ",
+        "BoughtCredits": "ໄດ້ຊື້ເຄຣດິດ {{amount}}",
+        "BonusCredits": "ໄດ້ຮັບໂບນັດ {{amount}} ເຄຣດິດ",
+        "InviteAcceptedBy": "ໄດ້ຮັບເຄຣດິດ {{amount}}",
+        "YouHaveCreditsToStart": "ໄດ້ຮັບເຄຣດິດ {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "ຕັ້ງຂໍ້ມູນການຊໍາລະເງິນ",
+        "confirm": {
+            "title": "ເລີ່ມການສະັກໃຊ້",
+            "message": "ທ່ານຕ້ອງການສັ່ງຈອງກັບ {{title}} ບໍ?",
+            "ok": "ຕົກ​ລົງ",
+            "cancel": "ຍົກເລີກ"
+        },
+        "CreditOrDebitCard": "ບັດເຄຣດິດຫຼືບັດເດບິດ",
+        "SubscribePayment": "ຈອງການຊໍາລະເງິນ",
+        "ImmediatePayment": "ການຊໍາລະເງິນທັນທີ"
+    },
+    "payments": {
+        "infoTitle": "ຕັ້ງຂໍ້ມູນການຊໍາລະເງິນ",
+        "BuyAmountCredits": "ຊື້ເຄຣດິດ {{amount}}",
+        "confirm": {
+            "title": "ຊໍາລະເງິນ",
+            "message": "ເຈົ້າເຫັນດີທີ່ຈະຈ່າຍ {{symbol}} {{amount}} ບໍ?",
+            "ok": "ຕົກ​ລົງ",
+            "cancel": "ຍົກເລີກ"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "ສິນເຊື່ອ",
+            "description": "ຕິດຕາມສິນເຊື່ອແລະການຊໍາລະເງິນ"
+        },
+        "Assets\/plan": {
+            "displayType": "ແຜນການສະັກສະມາຊິກ",
+            "description": "ແຜນການສະັກໃຊ້"
+        },
+        "Assets\/subscription": {
+            "displayType": "ການສະັກໃຊ້",
+            "description": "ການສະັກໃຊ້"
+        },
+        "Assets\/product": {
+            "displayType": "ຜະລິດຕະພັນ",
+            "description": "ຜະລິດຕະພັນທີ່ຖືກຂາຍ"
+        },
+        "Assets\/service": {
+            "displayType": "ການບໍລິການ",
+            "description": "ການບໍລິການກໍາລັງສະເຫນີ"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "ໄດ້ຮັບເຄຣດິດ {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "ໄດ້ຊື້ເຄຣດິດ {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ເຄຣດິດໂບນັດ {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "ໃຊ້ໄປແລ້ວ {{amount}} ເຄຣດິດ"
+        },
+        "Assets\/credits\/sent": {
+            "content": "ສົ່ງເຄຣດິດ {{amount}} ໄປຫາ {{toUserName}} ແລ້ວ"
+        },
+        "Assets\/credits\/received": {
+            "content": "ໄດ້ຮັບເຄຣດິດ {{amount}} ຈາກ {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "ບໍລິການໃ່",
+            "TitlePlaceholder": "ຊື່ການບໍລິການ",
+            "PricePlaceholder": "ຕັ້ງລາຄາ",
+            "LinkPlaceholder": "ກໍານົດການເຊື່ອມຕໍ່ຂໍ້ມູນເພີ່ມເຕີມ",
+            "DescriptionPlaceholder": "ລາຍລະອຽດການບໍລິການ",
+            "SaveService": "ບັນທຶກການບໍລິການ",
+            "SelectRequiredParticipants": "ຕ້ອງການຜູ້ເຂົ້າຮ່ວມ"
+        },
+        "ManageServiceTemplates": "ຈັດການແມ່ແບບບໍລິການ",
+        "ManageServices": "ຈັດການບໍລິການ",
+        "Free": "ບໍ່ເສຍຄ່າ",
+        "OptionalContribution": "ການປະກອບສ່ວນທາງເລືອກ",
+        "RequiredPayment": "ການຊໍາລະທີ່ຕ້ອງການ",
+        "AreYouSureDelete": "ເຈົ້າແນ່ໃຈບໍວ່າເຈົ້າຕ້ອງການລຶບການບໍລິການນີ້?",
+        "AmountServicesRelated": "ມີ {{amount}} ຄວາມພ້ອມທີ່ກ່ຽວຂ້ອງກັບການບໍລິການນີ້. ເຂົາເຈົ້າຄືກັນຈະຖືກເອົາອອກໄປ."
+    }
+}

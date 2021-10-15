@@ -117,7 +117,10 @@
         "SetClipStart": "Stel Clip Start",
         "ClipStart": "Knip begin",
         "SetClipEnd": "Stel die einde van die knip",
-        "ClipEnd": "Knip einde"
+        "ClipEnd": "Knip einde",
+        "StartMoreEnd": "Beginposisie kan nie meer as eindposisie wees nie",
+        "EndLessStart": "Die eindposisie kan nie minder wees as die beginposisie nie",
+        "WhichInvalid": "Argument &#39;wat&#39; ongeldig is"
     },
     "durations": {
         "second": "tweede",

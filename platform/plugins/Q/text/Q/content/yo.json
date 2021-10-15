@@ -113,7 +113,10 @@
         "SetClipStart": "Ṣeto Bẹrẹ Agekuru",
         "ClipStart": "Bẹrẹ Agekuru",
         "SetClipEnd": "Ṣeto Agekuru Ipari",
-        "ClipEnd": "Agekuru Ipari"
+        "ClipEnd": "Agekuru Ipari",
+        "StartMoreEnd": "Ipo ibẹrẹ ko le ju ipo ipari lọ",
+        "EndLessStart": "Ipo ipari ko le dinku ju ipo ibẹrẹ lọ",
+        "WhichInvalid": "Ariyanjiyan &#39;eyiti&#39; ko wulo"
     },
     "tabs": {
         "more": "siwaju sii",

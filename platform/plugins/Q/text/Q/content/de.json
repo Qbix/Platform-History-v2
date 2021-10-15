@@ -117,7 +117,10 @@
         "SetClipStart": "Stellen Sie den Clip-Start ein",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Clip-Ende einstellen",
-        "ClipEnd": "Clip-Ende"
+        "ClipEnd": "Clip-Ende",
+        "StartMoreEnd": "Startposition darf nicht mehr als Endposition sein",
+        "EndLessStart": "Endposition darf nicht kleiner als Startposition sein",
+        "WhichInvalid": "Argument &#39;welches&#39; ungültig"
     },
     "durations": {
         "second": "zweite",

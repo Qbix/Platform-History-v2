@@ -36,8 +36,12 @@
         "WatchClip": "{{fromStreamTitle}} अर्जित {{fromStreamTitle}} देखने का श्रेय",
         "PurchaseCredits": "खरीद क्रेडिट",
         "forMessages": {
-            "BoughtCredits": "{{amount}} साख"
-        }
+            "BoughtCredits": "{{amount}} साख",
+            "BonusCredits": "{{amount}} क्रेडिट"
+        },
+        "CreatePaidStream": "{{toStreamName}} बनाने के लिए",
+        "BonusCredits": "बोनस {{amount}} क्रेडिट",
+        "BuyBonus": "एक बार में {{amount}} क्रेडिट ख़रीदने पर, {{bonus}} क्रेडिट बोनस मिलेगा।"
     },
     "history": {
         "Date": "दिनांक",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} क्रेडिट खर्च किया",
         "BoughtCredits": "{{amount}} क्रेडिट खरीदा",
         "InviteAcceptedBy": "अर्जित {{amount}} क्रेडिट",
-        "YouHaveCreditsToStart": "अर्जित {{amount}} क्रेडिट"
+        "YouHaveCreditsToStart": "अर्जित {{amount}} क्रेडिट",
+        "CreatePaidStream": "खर्च किए गए {{amount}} क्रेडिट",
+        "WatchClip": {
+            "+": "अर्जित {{amount}} क्रेडिट",
+            "-": "खर्च किए गए {{amount}} क्रेडिट"
+        },
+        "BonusCredits": "बोनस मिला {{amount}} क्रेडिट"
     },
     "subscriptions": {
         "infoTitle": "भुगतान जानकारी सेट करें",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} क्रेडिट खरीदा"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "बोनस {{amount}} क्रेडिट"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "कीमत निर्धारित करें",
             "LinkPlaceholder": "अतिरिक्त जानकारी लिंक सेट करें",
             "DescriptionPlaceholder": "सेवा विवरण",
-            "SaveService": "सेव सेव"
+            "SaveService": "सेव सेव",
+            "SelectRequiredParticipants": "आवश्यक प्रतिभागी"
         },
         "ManageServiceTemplates": "सेवा टेम्पलेट प्रबंधित करें",
         "ManageServices": "सेवाएँ प्रबंधित करें",

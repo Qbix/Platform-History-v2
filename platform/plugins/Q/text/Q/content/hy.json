@@ -113,7 +113,10 @@
         "SetClipStart": "Սահմանեք Clip Start- ը",
         "ClipStart": "Clip Start- ը",
         "SetClipEnd": "Սահմանել տեսահոլովակի վերջը",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Մեկնարկային դիրքը չի կարող լինել ավելին, քան վերջնական դիրքը",
+        "EndLessStart": "Վերջնական դիրքը չի կարող պակաս լինել, քան մեկնարկային դիրքը",
+        "WhichInvalid": "Փաստարկ «որն» անվավեր է"
     },
     "tabs": {
         "more": "ավելին",

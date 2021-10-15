@@ -113,7 +113,10 @@
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Kutanga",
         "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Kutanga chinzvimbo hakugone kupfuura chinopera nzvimbo",
+        "EndLessStart": "Nzvimbo yekuguma haigone kuve yakaderera pane kutanga chinzvimbo",
+        "WhichInvalid": "Kupokana &#39;izvo&#39; zvisina basa"
     },
     "tabs": {
         "more": "zvimwe",

@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Aksepte kondisyon ki nan sèvis la?",
         "facebookNoEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman ale nan fason natif natal la.",
-        "picTooltip": "Ou ka chanje foto sa a pita"
+        "picTooltip": "Ou ka chanje foto sa a pita",
+        "wallet": {
+            "payload": "Konekte nan {{host}} nan moman {{timestamp}}",
+            "alert": {
+                "title": "Redireksyon nan bous",
+                "content": "Yon fwa ou fèmen dyalòg sa a, ou pral pran nan bous ou. Apre ou fin siyen an, retounen nan paj sa a."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ajoute yon fason pou ouvri sesyon an",
@@ -108,6 +115,18 @@
         "Owner": "Pwopriyetè",
         "Admin": "Admin",
         "Member": "Manm",
-        "Guest": "Guest"
+        "Guest": "Guest",
+        "Host": "Akèy"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Chak jou",
+        "Weekly": "Chak semèn",
+        "Monthly": "Chak mwa",
+        "Application": "Aplikasyon",
+        "Pages": "Paj",
+        "Services": "Sèvis",
+        "Faq": "FAQ",
+        "WeekDays": "Jou Semèn"
     }
 }

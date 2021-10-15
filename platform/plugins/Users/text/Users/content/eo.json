@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Akcepti la Kondiĉojn de Servo?",
         "facebookNoEmail": "Via facebook-konto mankas konfirmitan retpoŝtadreson. Simple ensalutu la denaskan manieron.",
-        "picTooltip": "Vi povas ŝanĝi ĉi tiun bildon poste"
+        "picTooltip": "Vi povas ŝanĝi ĉi tiun bildon poste",
+        "wallet": {
+            "payload": "Ensalutu {{host}} samtempe {{timestamp}}",
+            "alert": {
+                "title": "Alidirektado al Monujo",
+                "content": "Post kiam vi fermos ĉi tiun dialogon, vi estos kondukita al via monujo. Post kiam vi ensalutis, revenu al ĉi tiu paĝo."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Aldonu manieron ensaluti",
@@ -108,6 +115,18 @@
         "Owner": "Mastro",
         "Admin": "Admin",
         "Member": "Membro",
-        "Guest": "Gasto"
+        "Guest": "Gasto",
+        "Host": "Gastiganto"
+    },
+    "analytics": {
+        "Title": "Analitiko",
+        "Daily": "Ĉiutage",
+        "Weekly": "Semajna",
+        "Monthly": "Monata",
+        "Application": "Apliko",
+        "Pages": "Paĝoj",
+        "Services": "Servoj",
+        "Faq": "Oftaj Demandoj",
+        "WeekDays": "Semajnaj Tagoj"
     }
 }

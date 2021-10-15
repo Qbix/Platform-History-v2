@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Invitavit mihi populus",
-        "Streams\/invitedMe": "Quis praeter me"
+        "Streams\/invitedMe": "Quis praeter me",
+        "AreYouAgree": "Sint in vobis?",
+        "Yes": "Ita",
+        "No": "No"
     },
     "interests": {
         "Filter": "Quid frui?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{Si}} CMXCIX cum codice lustrabat lumine",
-            "copyLink": "{{CMXCIX}} invite ut effingo link Index"
+            "copyLink": "{{CMXCIX}} invite ut effingo link Index",
+            "userChooserPlaceholder": "Quaere nomine"
         },
         "email": {
             "subject": "Nullam Lorem ista",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Video non habet participem",
             "openInBrowserAlert": "Link to join aperta Safari pasco ad colloquium.",
             "youBeganVideoRecording": "Vos coepi, haec conquiri colloquium",
-            "youStoppedVideoRecording": "Et haec conquiri colloquium veniens staret"
+            "youStoppedVideoRecording": "Et haec conquiri colloquium veniens staret",
+            "switchingRoom": "Commutationis locus...",
+            "forceDisconnecting": "V seconds eris in disiungitur",
+            "youStartedLive": "Hanc vocationem ad consuetudinem RTMP evulgandas coepisti",
+            "youStoppedLive": "Hoc vocationem ad consuetudinem RTMP molestie lacus cessasti",
+            "sbStartedLiveStreaming": "{{userName}} incepit vivere",
+            "sbStoppedLiveStreaming": "{{userName}} vitam finivit",
+            "liveStopped": "Error cum mittens video ad endpoint occurrit"
         },
         "settingsPopup": {
             "webCamera": "Web DE CAMERA",
@@ -192,7 +203,13 @@
             "stopRecording": "Book subsisto",
             "recordingInProgress": "Book progressus est ...",
             "publishOnTimeline": "Publish in timeline",
-            "publishToGroup": "Publish catervae"
+            "publishToGroup": "Publish catervae",
+            "turnOffAudioInput": "tortor ligula, muta",
+            "micIsTurnedOff": "Tortor est off",
+            "start": "Satus",
+            "stop": "prohibere",
+            "streamingSettings": "Occasus",
+            "streamToRTMP": "Amnis ad morem RTMP"
         },
         "participantsPopup": {
             "disconnect": "Kill",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Haec tibi non liceat iungere amnis.",
         "streamTitle": "{{CMXCIX vivere vocationem}}",
         "preview": {
-            "preamble": "testimonii:"
+            "preamble": "testimonii:",
+            "Meeting": "Conventus",
+            "MeetingEnded": "occurrens finita"
+        },
+        "preparing": {
+            "micIsOff": "Mic non vigilat",
+            "micIsOn": "C. est on",
+            "cameraIsOff": "Camera non vigilat",
+            "cameraIsOn": "Camera on",
+            "screenSharingIsOn": "Screensharing in",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Iungere Call"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Et respondendum est,",
             "description": "responsum amnis"
+        },
+        "Streams\/calls": {
+            "displayType": "vocat",
+            "description": "genus pro rivi\/webrtc",
+            "MaxRelationsExceeded": "Max vocat exceditur"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Aliquam File",
         "errorNoSource": "Nulla imago fons",
         "uploadLimit": "Max file size: {{CMXCIX}}",
-        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}"
+        "errorFileSize": "Nos paenitet, sed lima quoque magnus.<br> {{Max file magnitudine est CMXCIX}}",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Imago titulus"
     },
     "questions": {
         "Questions": "quaestiones",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "iam respondit",
         "TitlePlaceholder": "Typus quaeris,",
         "ContentPlaceholder": "Ad auxilium populus quaelibet informationis hic respondere",
-        "ErrorTitle": "quaestio requiratur"
+        "ErrorTitle": "quaestio requiratur",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Usus novum"
+        "NewExperience": "Usus novum",
+        "DefineTitle": "Quaeso definias titulum",
+        "Create": "Create"
+    },
+    "calls": {
+        "SettingsTitle": "vocat",
+        "MaxCalls": "Max vocat",
+        "Update": "Renovatio",
+        "NoCallsYet": "No vocat adhuc",
+        "CallReasonTitle": "Quid est hoc de vocatione?",
+        "WaitingRoom": "Expectantes locus"
     }
 }

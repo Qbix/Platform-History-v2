@@ -36,8 +36,12 @@
         "WatchClip": "Creidmheasanna {{amount}} tuillte as féachaint ar {{fromStreamTitle}}",
         "PurchaseCredits": "Creidmheasanna Ceannaigh",
         "forMessages": {
-            "BoughtCredits": "{{amount}} creidmheasanna"
-        }
+            "BoughtCredits": "{{amount}} creidmheasanna",
+            "BonusCredits": "{{amount}} creidmheasanna"
+        },
+        "CreatePaidStream": "chun {{toStreamName}} a chruthú",
+        "BonusCredits": "Creidmheasanna bónais {{amount}}",
+        "BuyBonus": "Mar thoradh ar {{amount}} creidmheas a cheannach ag an am céanna, beidh bónas creidmheasanna {{bonus}} ann."
     },
     "history": {
         "Date": "Dáta",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Creidmheasanna caite {{amount}}",
         "BoughtCredits": "Creidmheasanna {{amount}} ceannaithe",
         "InviteAcceptedBy": "Creidmheasanna {{amount}} tuillte",
-        "YouHaveCreditsToStart": "Creidmheasanna {{amount}} tuillte"
+        "YouHaveCreditsToStart": "Creidmheasanna {{amount}} tuillte",
+        "CreatePaidStream": "Creidmheasanna caite {{amount}}",
+        "WatchClip": {
+            "+": "Creidmheasanna {{amount}} tuillte",
+            "-": "Creidmheasanna caite {{amount}}"
+        },
+        "BonusCredits": "Fuair sé creidmheasanna {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Faisnéis Socraithe Íocaíochta",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Creidmheasanna {{amount}} ceannaithe"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Creidmheasanna bónais {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Praghas socraithe",
             "LinkPlaceholder": "socraigh nasc eolais breise",
             "DescriptionPlaceholder": "Cur síos ar an tseirbhís",
-            "SaveService": "Seirbhís Sábháil"
+            "SaveService": "Seirbhís Sábháil",
+            "SelectRequiredParticipants": "Rannpháirtithe Riachtanacha"
         },
         "ManageServiceTemplates": "Bainistigh Teimpléid Seirbhíse",
         "ManageServices": "Bainistigh Seirbhísí",

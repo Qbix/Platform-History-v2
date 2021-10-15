@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ka hare ho {{1}}"
+    },
+    "units": {
+        "meter": "metara",
+        "meters": "limithara",
+        "kilometer": "kilomitara",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "lik&#39;hilomithara tse ngata",
+        "mi": "me",
+        "foot": "leoto",
+        "feet": "maoto",
+        "inches": "lisenthimithara"
+    },
+    "location": {
+        "interested": "Ke khahloa ke lintho tse etsahalang nakong ea {{select}} ea",
+        "update": "Ntlafatsa Sebaka sa Ka",
+        "set": "Beha Sebaka sa Ka",
+        "prompt": "{{ClickOrTap}} mona ho<br> seta file ea hau ea<br> sebaka",
+        "myCurrentLocation": "Sebaka sa heso sa hona joale",
+        "enterAddress": "Kenya aterese",
+        "enterPostcode": "Ka kopo kenya khoutu ea poso \/ zipcode",
+        "create": {
+            "action": "Kenya Sebaka",
+            "title": "Sebaka se secha",
+            "nameYourLocation": "Bolela sebaka seo u leng ho sona"
+        },
+        "confirm": {
+            "title": "Boloka sebaka sena?",
+            "message": "Na u rerile ho sebelisa sebaka sena hape nakong e tlang?",
+            "ok": "Ho joalo",
+            "cancel": "Che"
+        },
+        "add": {
+            "title": "Bolela sebaka sena",
+            "placeholder": "Lehae, Mosebetsi jj.",
+            "ok": "Boloka"
+        },
+        "dialog": {
+            "title": "Khetha Sebaka"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Sebaka sefe kapa sefe ka hare ho sebaka sena?",
+        "newArea": "Sebaka se secha",
+        "promptTitle": "Kenya lebitso la sebaka seo:",
+        "absent": "Ka kopo hlopha sebaka",
+        "error": "Phoso",
+        "exist": "Sebaka se se se ntse se le teng",
+        "addNewArea": "Kenya sebaka se secha",
+        "add": "Eketsa"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "pokello ea libaka",
+            "displayType": "Libaka"
+        },
+        "Places\/location": {
+            "description": "E emela moaho, sebaka, sekepe, phakeng, jj.",
+            "displayType": "Sebaka"
+        },
+        "Places\/area": {
+            "description": "E emela sebaka se kahara sebaka, joalo ka kamore kapa suite",
+            "displayType": "Sebaka"
+        },
+        "Places\/floor": {
+            "description": "E emela mokato mohahong kapa sekepeng",
+            "displayType": "Mokatong"
+        },
+        "Places\/column": {
+            "description": "E emetse kholomo moahong kapa sekepeng",
+            "displayType": "Lenaneng"
+        },
+        "Places\/nearby": {
+            "description": "Sehlopha sa lintho tse sebakeng se itseng sa geohash",
+            "displayType": "Haufi le libaka"
+        },
+        "Places\/interest": {
+            "description": "Mokgahlelo wa dintho tse hole le geohash, ho bapisa tswala",
+            "displayType": "Libaka tse khahlisang"
+        }
+    }
+}

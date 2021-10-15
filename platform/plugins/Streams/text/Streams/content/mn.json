@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Миний урьсан хүмүүс",
-        "Streams\/invitedMe": "Хэн намайг урьсан юм бэ?"
+        "Streams\/invitedMe": "Хэн намайг урьсан юм бэ?",
+        "AreYouAgree": "Та санал нийлж байна уу?",
+        "Yes": "Тийм ээ",
+        "No": "Үгүй"
     },
     "interests": {
         "Filter": "Та юунд дуртай вэ?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Твиттер",
             "scannedQR": "{{ClickOrTap}} хэрэв код сканнердсан бол",
-            "copyLink": "Урилгын холбоосыг хуулах {{ClickOrTap}} дээр дарна уу"
+            "copyLink": "Урилгын холбоосыг хуулах {{ClickOrTap}} дээр дарна уу",
+            "userChooserPlaceholder": "Нэрээр нь хайх"
         },
         "email": {
             "subject": "Хөөе, үүнийг шалга",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Оролцогч видео байхгүй байна",
             "openInBrowserAlert": "Конференцид элсэхийн тулд Safari хөтөч дээр холбоосыг нээнэ.",
             "youBeganVideoRecording": "Та энэ хурлыг тэмдэглэж эхэлсэн",
-            "youStoppedVideoRecording": "Та энэ хурлыг бичихээ зогсоосон"
+            "youStoppedVideoRecording": "Та энэ хурлыг бичихээ зогсоосон",
+            "switchingRoom": "Өрөө солих ...",
+            "forceDisconnecting": "Та 5 секундын дотор салгагдах болно",
+            "youStartedLive": "Та энэ дуудлагыг захиалгат RTMP руу цацаж эхлэв",
+            "youStoppedLive": "Та энэ дуудлагыг захиалгат RTMP руу дамжуулахаа больсон",
+            "sbStartedLiveStreaming": "{{userName}} шууд дамжуулж эхлэв",
+            "sbStoppedLiveStreaming": "{{userName}} шууд дамжуулж дууссан",
+            "liveStopped": "Видео бичлэгийг эцсийн цэг рүү илгээх явцад алдаа гарлаа"
         },
         "settingsPopup": {
             "webCamera": "Вэб камер",
@@ -192,7 +203,13 @@
             "stopRecording": "Бичлэг хийхээ боль",
             "recordingInProgress": "Бичлэг хийгдэж байна ...",
             "publishOnTimeline": "Он цагийн хэлхээн дээр нийтлэх",
-            "publishToGroup": "Бүлэгт нийтлэх"
+            "publishToGroup": "Бүлэгт нийтлэх",
+            "turnOffAudioInput": "Микрофоны дууг хаах",
+            "micIsTurnedOff": "Микрофон унтарсан байна",
+            "start": "Эхлэх",
+            "stop": "Зогс",
+            "streamingSettings": "Тохиргоо",
+            "streamToRTMP": "Захиалгат RTMP руу дамжуулах"
         },
         "participantsPopup": {
             "disconnect": "Салгах",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Танд энэ цацалтад нэгдэх зөвшөөрөл байхгүй байна.",
         "streamTitle": "{{1}} шууд дуудлага",
         "preview": {
-            "preamble": "Уулзалт:"
+            "preamble": "Уулзалт:",
+            "Meeting": "Уулзалт",
+            "MeetingEnded": "Уулзалт өндөрлөв"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон унтраалттай байна",
+            "micIsOn": "Микрофон асаалттай байна",
+            "cameraIsOff": "Камер унтраалттай байна",
+            "cameraIsOn": "Камер асаалттай байна",
+            "screenSharingIsOn": "Дэлгэц хуваалцах асаалттай байна",
+            "screenSharingIsOff": "Дэлгэц хуваалцах",
+            "joinNow": "Дуудлагад нэгдээрэй"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Хариулт",
             "description": "хариултын урсгал"
+        },
+        "Streams\/calls": {
+            "displayType": "Дуудлага",
+            "description": "Урсгал\/webrtc ангилал",
+            "MaxRelationsExceeded": "Хамгийн их дуудлага хэтэрсэн байна"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Буруу файл",
         "errorNoSource": "Зургийн эх сурвалж байхгүй",
         "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
-        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}"
+        "errorFileSize": "Уучлаарай, гэхдээ хэтэрхий том файл.<br> Файлын дээд хэмжээ {{size}}",
+        "uploadedImage": "Байршуулсан зураг",
+        "imageTitle": "Зургийн гарчиг"
     },
     "questions": {
         "Questions": "Асуултууд",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Аль хэдийн хариулсан",
         "TitlePlaceholder": "Асуултаа бичнэ үү",
         "ContentPlaceholder": "Хүмүүс хариулахад нь туслах нэмэлт мэдээллийг энд байрлуул",
-        "ErrorTitle": "Асуулт шаардлагатай"
+        "ErrorTitle": "Асуулт шаардлагатай",
+        "Placeholder": "Орлуулагч"
     },
     "experience": {
-        "NewExperience": "Шинэ туршлага"
+        "NewExperience": "Шинэ туршлага",
+        "DefineTitle": "Гарчиг тодорхойлно уу",
+        "Create": "Үүсгэх"
+    },
+    "calls": {
+        "SettingsTitle": "Дуудлага",
+        "MaxCalls": "Хамгийн их дуудлага",
+        "Update": "Шинэчлэх",
+        "NoCallsYet": "Одоогоор дуудлага хийгээгүй байна",
+        "CallReasonTitle": "Энэ дуудлага юуны тухай вэ?",
+        "WaitingRoom": "Хүлээлгийн өрөө"
     }
 }

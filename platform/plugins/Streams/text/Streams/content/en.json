@@ -402,7 +402,7 @@
         },
         "Streams\/calls": {
             "displayType": "Calls",
-            "description": "category for Streams/webrtc",
+            "description": "category for Streams\/webrtc",
             "MaxRelationsExceeded": "Max calls exceeded"
         }
     },

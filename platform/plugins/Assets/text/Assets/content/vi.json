@@ -36,8 +36,12 @@
         "WatchClip": "Đã kiếm được {{amount}} tín dụng khi xem {{fromStreamTitle}}",
         "PurchaseCredits": "Mua tín dụng",
         "forMessages": {
-            "BoughtCredits": "{{amount}} tín dụng"
-        }
+            "BoughtCredits": "{{amount}} tín dụng",
+            "BonusCredits": "{{amount}} tín dụng"
+        },
+        "CreatePaidStream": "để tạo {{toStreamName}}",
+        "BonusCredits": "Thưởng {{amount}} tín dụng",
+        "BuyBonus": "Mua {{amount}} tín dụng cùng một lúc, sẽ dẫn đến phần thưởng {{bonus}} tín dụng."
     },
     "history": {
         "Date": "Ngày",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Tín dụng {{amount}}",
         "BoughtCredits": "Tín dụng {{amount}} đã mua",
         "InviteAcceptedBy": "Kiếm được {{amount}} tín dụng",
-        "YouHaveCreditsToStart": "Kiếm được {{amount}} tín dụng"
+        "YouHaveCreditsToStart": "Kiếm được {{amount}} tín dụng",
+        "CreatePaidStream": "Đã tiêu {{amount}} tín dụng",
+        "WatchClip": {
+            "+": "Đã kiếm được {{amount}} tín dụng",
+            "-": "Đã tiêu {{amount}} tín dụng"
+        },
+        "BonusCredits": "Nhận được khoản tín dụng {{amount}} tiền thưởng"
     },
     "subscriptions": {
         "infoTitle": "Đặt thông tin thanh toán",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Tín dụng {{amount}} đã mua"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Thưởng {{amount}} tín dụng"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Đặt giá",
             "LinkPlaceholder": "đặt liên kết thông tin bổ sung",
             "DescriptionPlaceholder": "Dịch vụ Mô tả",
-            "SaveService": "Lưu dịch vụ"
+            "SaveService": "Lưu dịch vụ",
+            "SelectRequiredParticipants": "Người tham gia bắt buộc"
         },
         "ManageServiceTemplates": "Quản lý mẫu dịch vụ",
         "ManageServices": "Quản lý dịch vụ",

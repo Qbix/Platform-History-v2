@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "laarin {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "maili",
+        "miles": "maili",
+        "mi": "mi",
+        "foot": "ẹsẹ",
+        "feet": "ẹsẹ",
+        "inches": "inches"
+    },
+    "location": {
+        "interested": "Mo nifẹ si awọn nkan ti n ṣẹlẹ laarin {{select}} ti",
+        "update": "Ṣe imudojuiwọn Ipo mi",
+        "set": "Ṣeto Ipo mi",
+        "prompt": "{{ClickOrTap}} nibi lati<br> ṣeto rẹ<br> ipo",
+        "myCurrentLocation": "Ipo mi lọwọlọwọ",
+        "enterAddress": "Tẹ adirẹsi sii",
+        "enterPostcode": "Jọwọ tẹ koodu ifiweranṣẹ \/ koodu iwọle rẹ sii",
+        "create": {
+            "action": "Fi Ipo sii",
+            "title": "Ipo Tuntun",
+            "nameYourLocation": "Lorukọ ipo rẹ"
+        },
+        "confirm": {
+            "title": "Ṣe fipamọ ipo yii bi?",
+            "message": "Ṣe o gbero lati tun lo ipo yii ni ọjọ iwaju?",
+            "ok": "Bẹẹni",
+            "cancel": "Rara"
+        },
+        "add": {
+            "title": "Lorukọ ipo yii",
+            "placeholder": "Ile, Iṣẹ abbl.",
+            "ok": "Fipamọ"
+        },
+        "dialog": {
+            "title": "Yan Ibi"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Eyikeyi agbegbe inu ipo yii?",
+        "newArea": "Agbegbe tuntun",
+        "promptTitle": "Tẹ orukọ sii fun agbegbe naa:",
+        "absent": "Jọwọ ṣeto agbegbe",
+        "error": "Aṣiṣe",
+        "exist": "Agbegbe ti wa tẹlẹ",
+        "addNewArea": "Fi agbegbe titun kun",
+        "add": "Fikun -un"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "akojọpọ awọn ipo",
+            "displayType": "Awọn ipo"
+        },
+        "Places\/location": {
+            "description": "Ṣe aṣoju ile kan, ibi isere, ọkọ oju omi, itura, abbl.",
+            "displayType": "Ipo"
+        },
+        "Places\/area": {
+            "description": "Ṣe aṣoju agbegbe laarin ipo kan, gẹgẹ bi yara tabi suite",
+            "displayType": "Agbegbe"
+        },
+        "Places\/floor": {
+            "description": "Ṣe aṣoju ilẹ ni ile kan tabi ọkọ oju omi",
+            "displayType": "Ilẹ -ilẹ"
+        },
+        "Places\/column": {
+            "description": "Ṣe aṣoju iwe ni ile kan tabi ọkọ oju omi",
+            "displayType": "Ọwọn"
+        },
+        "Places\/nearby": {
+            "description": "Ẹka fun awọn nkan laarin ijinna kan ti geohash kan",
+            "displayType": "Nitosi awọn aaye"
+        },
+        "Places\/interest": {
+            "description": "Ẹka fun awọn nkan laarin ijinna kan ti geohash, ibaamu iwulo kan",
+            "displayType": "Awọn ibi anfani"
+        }
+    }
+}

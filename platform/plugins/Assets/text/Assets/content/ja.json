@@ -36,8 +36,12 @@
         "WatchClip": "{{fromStreamTitle}}を視聴したことで{{amount}}クレジットを獲得",
         "PurchaseCredits": "購入クレジット",
         "forMessages": {
-            "BoughtCredits": "{{amount}}クレジット"
-        }
+            "BoughtCredits": "{{amount}}クレジット",
+            "BonusCredits": "{{amount}}クレジット"
+        },
+        "CreatePaidStream": "{{toStreamName}}を作成するため",
+        "BonusCredits": "ボーナス{{amount}}クレジット",
+        "BuyBonus": "{{amount}}クレジットを一度に購入すると、{{bonus}}クレジットボーナスが発生します。"
     },
     "history": {
         "Date": "日付",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}}クレジット使用済み",
         "BoughtCredits": "{{amount}}クレジットを購入しました",
         "InviteAcceptedBy": "{{amount}}クレジットを獲得しました",
-        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得しました"
+        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得しました",
+        "CreatePaidStream": "使用済み{{amount}}クレジット",
+        "WatchClip": {
+            "+": "{{amount}}クレジットを獲得",
+            "-": "使用済み{{amount}}クレジット"
+        },
+        "BonusCredits": "ボーナス{{amount}}クレジットを取得しました"
     },
     "subscriptions": {
         "infoTitle": "支払い情報を設定する",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}}クレジットを購入しました"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ボーナス{{amount}}クレジット"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "設定価格",
             "LinkPlaceholder": "追加情報リンクを設定する",
             "DescriptionPlaceholder": "サービスの説明",
-            "SaveService": "サービスを保存"
+            "SaveService": "サービスを保存",
+            "SelectRequiredParticipants": "必要な参加者"
         },
         "ManageServiceTemplates": "サービステンプレートの管理",
         "ManageServices": "サービスを管理する",

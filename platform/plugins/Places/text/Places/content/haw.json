@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ma loko o {{1}}"
+    },
+    "units": {
+        "meter": "mika",
+        "meters": "mika",
+        "kilometer": "kilomita",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "mile",
+        "mi": "mi",
+        "foot": "wāwae",
+        "feet": "wawae",
+        "inches": "iniha"
+    },
+    "location": {
+        "interested": "Makemake au i nā mea e hana ʻia ma loko o {{select}} o",
+        "update": "Hoʻohou i kaʻu Kahi",
+        "set": "E hoʻonoho i kaʻu wahi",
+        "prompt": "{{ClickOrTap}} ma aneʻi i<br> hoʻonoho i kāu<br> wahi",
+        "myCurrentLocation": "Koʻu wahi ʻānō",
+        "enterAddress": "E hoʻokomo i kahi helu",
+        "enterPostcode": "E ʻoluʻolu e hoʻokomo i kāu postcode \/ zipcode",
+        "create": {
+            "action": "Hoʻohui Kahi",
+            "title": "Kahi Hou",
+            "nameYourLocation": "Kapa i kou wahi"
+        },
+        "confirm": {
+            "title": "Mālama i kēia wahi?",
+            "message": "Hoʻolālā ʻoe e hoʻohana hou i kēia wahi i ka wā e hiki mai ana?",
+            "ok": "ae",
+            "cancel": "Aʻole"
+        },
+        "add": {
+            "title": "E inoa i kēia wahi",
+            "placeholder": "Ka home, hana etc.",
+            "ok": "Mālama"
+        },
+        "dialog": {
+            "title": "Koho Kahi"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Kekahi ʻāpana o loko o kēia wahi?",
+        "newArea": "Wahi hou",
+        "promptTitle": "E hoʻokomo i kahi inoa no kēia wahi:",
+        "absent": "E ʻoluʻolu e hoʻonohonoho i kahi",
+        "error": "Hewa",
+        "exist": "Aia nō kahi ʻāpana",
+        "addNewArea": "Hoʻohui i kahi hou",
+        "add": "Pākuʻi"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "kahi hōʻiliʻili o nā wahi",
+            "displayType": "Kahi"
+        },
+        "Places\/location": {
+            "description": "Ke pani nei i kahi hale, wahi, moku, paka, a pēlā aku.",
+            "displayType": "Kahi"
+        },
+        "Places\/area": {
+            "description": "Hōʻike i kahi ma loko o kahi, e like me kahi lumi a i ʻole suite",
+            "displayType": "ʻĀpana"
+        },
+        "Places\/floor": {
+            "description": "Hōʻike i kahi papahele i kahi hale a moku paha",
+            "displayType": "Papahele"
+        },
+        "Places\/column": {
+            "description": "Hōʻike i kahi kolamu i kahi hale a moku paha",
+            "displayType": "Kolamu"
+        },
+        "Places\/nearby": {
+            "description": "Māhele no nā mea ma loko o kahi mamao o kahi geohash",
+            "displayType": "Kokoke ma nā wahi"
+        },
+        "Places\/interest": {
+            "description": "Māhele no nā mea ma loko o kahi mamao o kahi geohash, e kūlike ana i kahi hoihoi",
+            "displayType": "Nā wahi hoihoi"
+        }
+    }
+}

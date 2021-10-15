@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Людей, яких я запросив",
-        "Streams\/invitedMe": "Хто мене запросив"
+        "Streams\/invitedMe": "Хто мене запросив",
+        "AreYouAgree": "Ви згодні?",
+        "Yes": "Так",
+        "No": "Немає"
     },
     "interests": {
         "Filter": "Що вам подобається?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Виберіть &quot;Знову&quot; у списку &quot;Контакти&quot;",
             "inviteSelectedContacts": "Запросити вибрані контакти",
             "scannedQR": "{{ClickOrTap}}, якщо код був відсканований",
-            "copyLink": "{{ClickOrTap}}, щоб скопіювати посилання на запрошення"
+            "copyLink": "{{ClickOrTap}}, щоб скопіювати посилання на запрошення",
+            "userChooserPlaceholder": "Пошук за назвою"
         },
         "email": {
             "subject": "Ей, перевірте це",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Учасник не має відео",
             "openInBrowserAlert": "Відкрийте посилання в браузері Safari, щоб приєднатися до конференції.",
             "youBeganVideoRecording": "Ви почали записувати цю конференцію",
-            "youStoppedVideoRecording": "Ви припинили запис цієї конференції"
+            "youStoppedVideoRecording": "Ви припинили запис цієї конференції",
+            "switchingRoom": "Роздягальня ...",
+            "forceDisconnecting": "Вас буде відключено протягом 5 секунд",
+            "youStartedLive": "Ви почали транслювати цей дзвінок на користувацький RTMP",
+            "youStoppedLive": "Ви припинили трансляцію цього дзвінка на користувацький RTMP",
+            "sbStartedLiveStreaming": "{{userName}} почав жити",
+            "sbStoppedLiveStreaming": "{{userName}} закінчився в прямому ефірі",
+            "liveStopped": "Сталася помилка під час надсилання відео до кінцевої точки"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -205,7 +216,13 @@
             "stopRecording": "Зупинити запис",
             "recordingInProgress": "Запис триває ...",
             "publishOnTimeline": "Опублікувати на часовій шкалі",
-            "publishToGroup": "Опублікувати в групі"
+            "publishToGroup": "Опублікувати в групі",
+            "turnOffAudioInput": "Вимкнення мікрофона",
+            "micIsTurnedOff": "Мікрофон вимкнено",
+            "start": "Почати",
+            "stop": "Стій",
+            "streamingSettings": "Налаштування",
+            "streamToRTMP": "Потік на користувацький RTMP"
         },
         "participantsPopup": {
             "disconnect": "Відключити",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
         "streamTitle": "{{1}} прямий дзвінок",
         "preview": {
-            "preamble": "Зустріч:"
+            "preamble": "Зустріч:",
+            "Meeting": "Зустріч",
+            "MeetingEnded": "Зустріч закінчилася"
+        },
+        "preparing": {
+            "micIsOff": "Мікрофон вимкнено",
+            "micIsOn": "Мікрофон увімкнено",
+            "cameraIsOff": "Камера вимкнена",
+            "cameraIsOn": "Камера увімкнена",
+            "screenSharingIsOn": "Увімкнено спільний доступ до екрана",
+            "screenSharingIsOff": "Поділитися екраном",
+            "joinNow": "Приєднуйтесь до дзвінка"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Відповідь",
             "description": "відповідь потік"
+        },
+        "Streams\/calls": {
+            "displayType": "Дзвінки",
+            "description": "категорія для потоків\/webrtc",
+            "MaxRelationsExceeded": "Перевищено максимальну кількість дзвінків"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Недійсний файл",
         "errorNoSource": "Немає джерела зображення",
         "uploadLimit": "Максимальний розмір файлу: {{size}}",
-        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}"
+        "errorFileSize": "На жаль, але файл завеликий.<br> Максимальний розмір файлу - {{size}}",
+        "uploadedImage": "Завантажене зображення",
+        "imageTitle": "Назва зображення"
     },
     "questions": {
         "Questions": "Питання",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Вже відповів",
         "TitlePlaceholder": "Введіть своє запитання",
         "ContentPlaceholder": "Додайте сюди будь-яку додаткову інформацію, щоб допомогти людям відповісти",
-        "ErrorTitle": "Потрібне запитання"
+        "ErrorTitle": "Потрібне запитання",
+        "Placeholder": "Заповнювач"
     },
     "experience": {
-        "NewExperience": "Новий досвід"
+        "NewExperience": "Новий досвід",
+        "DefineTitle": "Будь ласка, визначте назву",
+        "Create": "Створити"
+    },
+    "calls": {
+        "SettingsTitle": "Дзвінки",
+        "MaxCalls": "Макс дзвонить",
+        "Update": "Оновлення",
+        "NoCallsYet": "Поки що дзвінків немає",
+        "CallReasonTitle": "Про що цей дзвінок?",
+        "WaitingRoom": "Зал очікування"
     }
 }

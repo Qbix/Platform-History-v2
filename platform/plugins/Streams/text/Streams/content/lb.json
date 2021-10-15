@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Leit, déi ech invitéiert hunn",
-        "Streams\/invitedMe": "Wien huet mech invitéiert"
+        "Streams\/invitedMe": "Wien huet mech invitéiert",
+        "AreYouAgree": "Sidd Dir d&#39;accord?",
+        "Yes": "Jo",
+        "No": "Nee"
     },
     "interests": {
         "Filter": "Wat Iech gutt?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} wann de Code gescannt gouf",
-            "copyLink": "{{ClickOrTap}} fir Invitatiounslink ze kopéieren"
+            "copyLink": "{{ClickOrTap}} fir Invitatiounslink ze kopéieren",
+            "userChooserPlaceholder": "Sich mam Numm"
         },
         "email": {
             "subject": "Hey, kontrolléiert dat aus",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "De Participant huet kee Video",
             "openInBrowserAlert": "Open Link am Safari Browser fir mat der Konferenz matzemaachen.",
             "youBeganVideoRecording": "Dir hutt dës Konferenz opgeholl",
-            "youStoppedVideoRecording": "Dir hutt dës Konferenz opgeholl"
+            "youStoppedVideoRecording": "Dir hutt dës Konferenz opgeholl",
+            "switchingRoom": "Schaltraum ...",
+            "forceDisconnecting": "Dir wäert bannent 5 Sekonne getrennt sinn",
+            "youStartedLive": "Dir hutt ugefaang dësen Uruff op personaliséiert RTMP ze iwwerdroen",
+            "youStoppedLive": "Dir hutt opgehalen dësen Uruff op personaliséiert RTMP ze iwwerdroen",
+            "sbStartedLiveStreaming": "{{userName}} huet live ugefaang",
+            "sbStoppedLiveStreaming": "{{userName}} live opgehalen",
+            "liveStopped": "Feeler beim Schécken vum Video op den Endpunkt ass geschitt"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Stop Enregistréiere",
             "recordingInProgress": "D&#39;Recording ass amgaang ...",
             "publishOnTimeline": "Verëffentlecht op Timeline",
-            "publishToGroup": "Verëffentlechen op Grupp"
+            "publishToGroup": "Verëffentlechen op Grupp",
+            "turnOffAudioInput": "Mute Mikrofon",
+            "micIsTurnedOff": "De Mikrofon ass ausgeschalt",
+            "start": "Start",
+            "stop": "Stop",
+            "streamingSettings": "Astellungen",
+            "streamToRTMP": "Stream op personaliséiert RTMP"
         },
         "participantsPopup": {
             "disconnect": "Trennen",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Dir hutt net déi néideg Rechter fir matzemaachen.",
         "streamTitle": "{{1}} Live Uruff",
         "preview": {
-            "preamble": "Versammlung:"
+            "preamble": "Versammlung:",
+            "Meeting": "Treffen",
+            "MeetingEnded": "Versammlung eriwwer"
+        },
+        "preparing": {
+            "micIsOff": "De Mic ass aus",
+            "micIsOn": "De Mic ass op",
+            "cameraIsOff": "D&#39;Kamera ass aus",
+            "cameraIsOn": "D&#39;Kamera ass op",
+            "screenSharingIsOn": "Screensharing ass op",
+            "screenSharingIsOff": "Écran deelen",
+            "joinNow": "Maacht mat beim Call"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Äntwert",
             "description": "Äntwert Stroum"
+        },
+        "Streams\/calls": {
+            "displayType": "Appellen",
+            "description": "Kategorie fir Streams\/webrtc",
+            "MaxRelationsExceeded": "Max Uriff iwwerschratt"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Ongülteg Datei",
         "errorNoSource": "Keng Bildquell",
         "uploadLimit": "Max Dateigréisst: {{size}}",
-        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}"
+        "errorFileSize": "Entschëllegt, awer Datei ze grouss.<br> Max Dateigréisst ass {{size}}",
+        "uploadedImage": "Eroplueden Bild",
+        "imageTitle": "Bildtitel"
     },
     "questions": {
         "Questions": "Froen",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Scho geäntwert",
         "TitlePlaceholder": "Typ Är Fro",
         "ContentPlaceholder": "Setzt all zousätzlech Informatioun hei fir de Leit z&#39;äntweren",
-        "ErrorTitle": "Fro gefrot"
+        "ErrorTitle": "Fro gefrot",
+        "Placeholder": "Plazhalter"
     },
     "experience": {
-        "NewExperience": "Nei Erfahrung"
+        "NewExperience": "Nei Erfahrung",
+        "DefineTitle": "Definéiert w.e.g. en Tittel",
+        "Create": "Schafen"
+    },
+    "calls": {
+        "SettingsTitle": "Appellen",
+        "MaxCalls": "Max rifft",
+        "Update": "Update",
+        "NoCallsYet": "Nach keng Uriff",
+        "CallReasonTitle": "Iwwer wat geet dësen Opruff?",
+        "WaitingRoom": "Waardezëmmer"
     }
 }

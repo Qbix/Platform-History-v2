@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Nga tangata i karangatia",
-        "Streams\/invitedMe": "Ko wai i kii mai ki ahau"
+        "Streams\/invitedMe": "Ko wai i kii mai ki ahau",
+        "AreYouAgree": "Kei te whakaae koe?",
+        "Yes": "Ae",
+        "No": "No."
     },
     "interests": {
         "Filter": "He aha koe e koa ana?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} mena kua tohua te tohu",
-            "copyLink": "{{ClickOrTap}} hei kape i te hono panui"
+            "copyLink": "{{ClickOrTap}} hei kape i te hono panui",
+            "userChooserPlaceholder": "Rapua ingoa"
         },
         "email": {
             "subject": "Tena, tirohia tenei",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Kaore he ataata",
             "openInBrowserAlert": "Whakatuwherahia te hono ki te pūtirotiro Safari kia uru atu ki nga huihuinga.",
             "youBeganVideoRecording": "I timata koe i te tuhi i tenei hui",
-            "youStoppedVideoRecording": "Ka mutu koe ki te tuhi i tenei hui"
+            "youStoppedVideoRecording": "Ka mutu koe ki te tuhi i tenei hui",
+            "switchingRoom": "Ruma whakawhiti ...",
+            "forceDisconnecting": "Ka motuhia atu koe i roto i te 5 hēkona",
+            "youStartedLive": "I tiimata koe ki te tuku i tenei piiraa ki te RTMP ritenga",
+            "youStoppedLive": "I mutu to whakatairanga i tenei piiraa ki te RTMP ritenga",
+            "sbStartedLiveStreaming": "I tiimata ora te {{userName}}",
+            "sbStoppedLiveStreaming": "{{userName}} mutu ora",
+            "liveStopped": "I hapa te tuku ataata ki te pito mutunga"
         },
         "settingsPopup": {
             "webCamera": "Kāmera Tukutuku",
@@ -192,7 +203,13 @@
             "stopRecording": "Aukati Te Whakaaturanga",
             "recordingInProgress": "Kei te haere tonu te rekoata ...",
             "publishOnTimeline": "Whakaputa i te tohu tohu waa",
-            "publishToGroup": "Panui ki te roopu"
+            "publishToGroup": "Panui ki te roopu",
+            "turnOffAudioInput": "Whakakorea te hopuoro",
+            "micIsTurnedOff": "Kua whakaweto te hopuoro",
+            "start": "Timata",
+            "stop": "Kati",
+            "streamingSettings": "Tautuhinga",
+            "streamToRTMP": "Rere ki te RTMP ritenga"
         },
         "participantsPopup": {
             "disconnect": "Whakapore",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Kaore koe e whakaae kia uru atu ki tenei awa.",
         "streamTitle": "{{1}} karanga ora",
         "preview": {
-            "preamble": "Hui:"
+            "preamble": "Hui:",
+            "Meeting": "Hui",
+            "MeetingEnded": "Kua mutu te hui"
+        },
+        "preparing": {
+            "micIsOff": "Kua kore a Mic",
+            "micIsOn": "Kei runga a Mic",
+            "cameraIsOff": "Kua whakaweto te Kamera",
+            "cameraIsOn": "Kei te kei te kāmera",
+            "screenSharingIsOn": "Kei te whakaatuhia te Matapihi Matapihi",
+            "screenSharingIsOff": "Tiri mata",
+            "joinNow": "Hono ki te Waea"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Whakautu",
             "description": "rerenga whakautu"
+        },
+        "Streams\/calls": {
+            "displayType": "Karanga",
+            "description": "waahanga mo nga Rawa \/ webrtc",
+            "MaxRelationsExceeded": "Kua roa te waea Max"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Kōnae Muhu",
         "errorNoSource": "Kaore he puna ahua",
         "uploadLimit": "Te rahi o te konae: {{size}}",
-        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}",
+        "uploadedImage": "Whakaahua i tukuna",
+        "imageTitle": "Taitara whakaahua"
     },
     "questions": {
         "Questions": "Nga Patai",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Kua whakautu kē",
         "TitlePlaceholder": "Patohia to patai",
         "ContentPlaceholder": "Tuhia etahi atu korero ki konei hei awhina i nga tangata ki te whakautu",
-        "ErrorTitle": "He patai e hiahiatia ana"
+        "ErrorTitle": "He patai e hiahiatia ana",
+        "Placeholder": "Puriwāhi"
     },
     "experience": {
-        "NewExperience": "Wheako Hou"
+        "NewExperience": "Wheako Hou",
+        "DefineTitle": "Tautuhia koa he taitara",
+        "Create": "Hangaia"
+    },
+    "calls": {
+        "SettingsTitle": "Karanga",
+        "MaxCalls": "Karanga a Max",
+        "Update": "Whakahou",
+        "NoCallsYet": "Kaore ano kia waea",
+        "CallReasonTitle": "He aha te karanga a tenei?",
+        "WaitingRoom": "Ruma Tatari"
     }
 }

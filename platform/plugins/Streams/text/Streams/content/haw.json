@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ka poʻe i konoʻia au",
-        "Streams\/invitedMe": "ʻO wai ka mea i kono iaʻu"
+        "Streams\/invitedMe": "ʻO wai ka mea i kono iaʻu",
+        "AreYouAgree": "ʻAe ʻae ʻoe?",
+        "Yes": "ae",
+        "No": "Aʻole"
     },
     "interests": {
         "Filter": "He aha kāu mea hauʻoli?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} inā he kāwele ʻia ka helu",
-            "copyLink": "{{ClickOrTap}} e kope i ka pilina kono"
+            "copyLink": "{{ClickOrTap}} e kope i ka pilina kono",
+            "userChooserPlaceholder": "Huli ma ka inoa"
         },
         "email": {
             "subject": "E nānā, e nānā i kēia",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "ʻAʻohe wahi wikiō",
             "openInBrowserAlert": "E wehe i kahi loulou ma ka polokalamu ʻo Safari e hui pū i ia kūkā",
             "youBeganVideoRecording": "Ua hoʻomaka ʻoe e hoʻopaʻa i kēia kūkā",
-            "youStoppedVideoRecording": "Ua hoʻōki ʻoe i ka hoʻopaʻa ʻana i kēia kūkā"
+            "youStoppedVideoRecording": "Ua hoʻōki ʻoe i ka hoʻopaʻa ʻana i kēia kūkā",
+            "switchingRoom": "Keena kuapo ...",
+            "forceDisconnecting": "E hoʻokaʻawale ʻia ʻoe i loko o 5 kekona",
+            "youStartedLive": "Ua hoʻomaka ʻoe e hoʻolele i kēia kāhea i ka RTMP maa mau",
+            "youStoppedLive": "Ua hooki ʻoe i ka hoʻolele ʻana i kēia kāhea i ka RTMP kuʻuna",
+            "sbStartedLiveStreaming": "Ua hoʻomaka ke ola ʻo {{userName}}",
+            "sbStoppedLiveStreaming": "Ua pau ke ola {{userName}}",
+            "liveStopped": "Ua hewa ka hoʻouna ʻana i ke wikiō i ka hopena"
         },
         "settingsPopup": {
             "webCamera": "ʻ .lelo kamera",
@@ -192,7 +203,13 @@
             "stopRecording": "Hoʻopau i ka hoʻopaʻa ʻana",
             "recordingInProgress": "Ke holomua nei ka hoʻopaʻa ʻana ...",
             "publishOnTimeline": "Kūkulu i ka manawa",
-            "publishToGroup": "E hoʻolaha i ka hui"
+            "publishToGroup": "E hoʻolaha i ka hui",
+            "turnOffAudioInput": "Hūnā microphone",
+            "micIsTurnedOff": "Ua pio ka microphone",
+            "start": "Hoʻomaka",
+            "stop": "Kū",
+            "streamingSettings": "Nā koho",
+            "streamToRTMP": "Kahe i ka RTMP maʻamau"
         },
         "participantsPopup": {
             "disconnect": "Hoʻololi",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "ʻAʻole ʻae ʻia ʻoe e komo i kēia kahawai.",
         "streamTitle": "{{1}} kāhea ola",
         "preview": {
-            "preamble": "Halawai:"
+            "preamble": "Halawai:",
+            "Meeting": "Halawai",
+            "MeetingEnded": "Pau ka hālāwai"
+        },
+        "preparing": {
+            "micIsOff": "Ua pio ʻo Mika",
+            "micIsOn": "Aia ʻo Mika",
+            "cameraIsOff": "Paʻa kāmera",
+            "cameraIsOn": "Aia ka pahupaʻiwikiō",
+            "screenSharingIsOn": "Aia ka Screensharing",
+            "screenSharingIsOff": "Pale hōʻike",
+            "joinNow": "Hui i ke Kāhea"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Pane",
             "description": "kahawai pane"
+        },
+        "Streams\/calls": {
+            "displayType": "Kāhea",
+            "description": "mahele no nā kahawai \/ webrtc",
+            "MaxRelationsExceeded": "Ua kāhea ʻo Max"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Waihona kūpono ʻole",
         "errorNoSource": "ʻAʻohe kumu kiʻi",
         "uploadLimit": "Ka nui o ka faile: {{size}}",
-        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}"
+        "errorFileSize": "E kala mai, akā nui loa ka faile.<br> ʻO ka nui o ka faile ʻo {{size}}",
+        "uploadedImage": "Kiʻi i hoʻouka ʻia",
+        "imageTitle": "Poʻo inoa kiʻi"
     },
     "questions": {
         "Questions": "Nā Nīnau",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Ua pane ʻia",
         "TitlePlaceholder": "E kikokiko i kāu nīnau",
         "ContentPlaceholder": "E hoʻokau i kahi ʻike hou ma aneʻi e kōkua i ka poʻe e pane",
-        "ErrorTitle": "Nīnau koi ʻia"
+        "ErrorTitle": "Nīnau koi ʻia",
+        "Placeholder": "Mea lawe wahi"
     },
     "experience": {
-        "NewExperience": "ʻIke Hou"
+        "NewExperience": "ʻIke Hou",
+        "DefineTitle": "E ʻoluʻolu e wehewehe i kahi poʻo inoa",
+        "Create": "Hana"
+    },
+    "calls": {
+        "SettingsTitle": "Kāhea",
+        "MaxCalls": "Kāhea ʻo Max",
+        "Update": "Hoʻohou",
+        "NoCallsYet": "ʻAʻohe kelepona ʻana",
+        "CallReasonTitle": "He aha kēia kāhea?",
+        "WaitingRoom": "Lumi kali"
     }
 }

@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ප්‍රවර්‍ධනය සඳහා සම්බන්ධක",
+                "startDate": "ආරම්භක දිනය",
+                "startTime": "ආරම්භක වේලාව",
+                "endDate": "අවසාන දිනය",
+                "endTime": "අවසන් කාලය",
+                "budget": "අයවැය"
+            },
+            "interests": {
+                "Title": "පොලී අනුව පෙරහන කරන්න",
+                "FilterInterests": "පොලියක් ටයිප් කිරීමට පටන් ගන්න ..."
+            },
+            "Interest": "පොලී",
+            "Location": "ස්ථානය"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "යන්න",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "පිරික්සන්න",
+            "WriteToStartConversation": "සංවාදය ආරම්භ කිරීමට ඔබේ අදහස් ලියන්න",
+            "StartConversation": "සංවාදය ආරම්භ කරන්න",
+            "GotoConversation": "සංවාදය වෙත යන්න",
+            "reset": "නැවත සකසන්න",
+            "edit": "සංස්කරණය කරන්න",
+            "link": "සම්බන්ධක",
+            "setUrl": "යූආර්එල් සකසන්න",
+            "save": "සුරකින්න",
+            "setClip": "ක්ලිප් කපන්න",
+            "invalidURL": "වලංගු නැති URL"
+        },
+        "FileTooLarge": "හැඹිලිය සඳහා ගොනුව ඉතා විශාලයි. උපරිම ගොනු විශාලත්වය {{size}}",
+        "InvalidPDF": "ගොනුව වලංගු PDF එකක් නොවේ",
+        "StartTypingTitleOrKeywords": "මාතෘකාව හෝ මූල පද ටයිප් කිරීම ආරම්භ කරන්න ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "විවිධ පරිශීලකයින්ට බැලීමට සහ සංස්කරණය කිරීමට හැකි HTML ලේඛනයක්",
+            "displayType": "ලිපිය"
+        },
+        "Websites\/slide": {
+            "description": "ඉදිරිපත් කිරීමක විනිවිදකයකට HTML, ශ්‍රව්‍ය යනාදිය ඇතුළත් කළ හැකිය.",
+            "displayType": "ස්ලයිඩ්"
+        },
+        "Websites\/presentation": {
+            "description": "විවිධ විනිවිදක වලින් සමන්විත ඉදිරිපත් කිරීම",
+            "displayType": "ඉදිරිපත් කිරීම"
+        },
+        "Websites\/advert\/unit": {
+            "description": "වෙබ් අඩවියක වෙළඳ දැන්වීම් ඒකකයක්",
+            "displayType": "දැන්වීම් ඒකකය"
+        },
+        "Websites\/advert\/placement": {
+            "description": "නමක් යටතේ වෙළඳ දැන්වීම් ඒකක කාණ්ඩගත කිරීමේ ක්‍රමයක්",
+            "displayType": "දැන්වීම් ස්ථානගත කිරීම"
+        },
+        "Websites\/advert\/creative": {
+            "description": "වෙළඳ දැන්වීමක් සඳහා අන්තර්ගතය",
+            "displayType": "නිර්මාණාත්මක දැන්වීම"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "වෙළඳ දැන්වීම් ව්‍යාපාරයක්",
+            "displayType": "ප්රචාරණ ව්යාපාරය"
+        },
+        "Websites\/webpage": {
+            "description": "පාර -දත්ත සීරීමට ලක් කළ වෙබ් අඩවියක් නියෝජනය කරයි",
+            "displayType": "වෙබ් පිටුව"
+        }
+    }
+}

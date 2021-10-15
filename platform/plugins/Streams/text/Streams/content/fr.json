@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Les gens que j&#39;ai invités",
-        "Streams\/invitedMe": "Qui m&#39;a invité"
+        "Streams\/invitedMe": "Qui m&#39;a invité",
+        "AreYouAgree": "Es-tu d&#39;accord?",
+        "Yes": "Oui",
+        "No": "Non"
     },
     "interests": {
         "Filter": "Qu&#39;est ce que tu aimes?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Choisissez à nouveau dans Contacts",
             "inviteSelectedContacts": "Inviter des contacts sélectionnés",
             "scannedQR": "{{ClickOrTap}} si le code a été scanné",
-            "copyLink": "{{ClickOrTap}} pour copier le lien d&#39;invitation"
+            "copyLink": "{{ClickOrTap}} pour copier le lien d&#39;invitation",
+            "userChooserPlaceholder": "Recherche par nom"
         },
         "email": {
             "subject": "Hé, regarde ça",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Le participant n&#39;a pas de vidéo",
             "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence.",
             "youBeganVideoRecording": "Vous avez commencé à enregistrer cette conférence",
-            "youStoppedVideoRecording": "Vous avez arrêté l&#39;enregistrement de cette conférence"
+            "youStoppedVideoRecording": "Vous avez arrêté l&#39;enregistrement de cette conférence",
+            "switchingRoom": "Salle de commutation...",
+            "forceDisconnecting": "Vous serez déconnecté dans les 5 secondes",
+            "youStartedLive": "Vous avez commencé à diffuser cet appel vers un RTMP personnalisé",
+            "youStoppedLive": "Vous avez arrêté de diffuser cet appel vers le RTMP personnalisé",
+            "sbStartedLiveStreaming": "{{userName}} a commencé en direct",
+            "sbStoppedLiveStreaming": "{{userName}} s&#39;est terminé en direct",
+            "liveStopped": "Une erreur s&#39;est produite lors de l&#39;envoi de la vidéo au point de terminaison"
         },
         "settingsPopup": {
             "webCamera": "Webcam",
@@ -205,7 +216,13 @@
             "stopRecording": "Arrête d&#39;enregistrer",
             "recordingInProgress": "L&#39;enregistrement est en cours ...",
             "publishOnTimeline": "Publier sur la chronologie",
-            "publishToGroup": "Publier dans le groupe"
+            "publishToGroup": "Publier dans le groupe",
+            "turnOffAudioInput": "Couper le micro",
+            "micIsTurnedOff": "Le microphone est éteint",
+            "start": "Début",
+            "stop": "Arrêter",
+            "streamingSettings": "Paramètres",
+            "streamToRTMP": "Diffuser vers un RTMP personnalisé"
         },
         "participantsPopup": {
             "disconnect": "Déconnecter",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
         "streamTitle": "{{1}} appel en direct",
         "preview": {
-            "preamble": "Réunion:"
+            "preamble": "Réunion:",
+            "Meeting": "Réunion",
+            "MeetingEnded": "Réunion terminée"
+        },
+        "preparing": {
+            "micIsOff": "Le micro est éteint",
+            "micIsOn": "Le micro est allumé",
+            "cameraIsOff": "La caméra est éteinte",
+            "cameraIsOn": "La caméra est allumée",
+            "screenSharingIsOn": "Le partage d&#39;écran est activé",
+            "screenSharingIsOff": "Partager l&#39;écran",
+            "joinNow": "Rejoignez l&#39;appel"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Répondre",
             "description": "flux de réponse"
+        },
+        "Streams\/calls": {
+            "displayType": "Appels",
+            "description": "catégorie pour Streams\/webrtc",
+            "MaxRelationsExceeded": "Nombre maximum d&#39;appels dépassé"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fichier non valide",
         "errorNoSource": "Aucune source d&#39;image",
         "uploadLimit": "Taille maximale du fichier: {{size}}",
-        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}"
+        "errorFileSize": "Désolé, mais fichier trop volumineux.<br> La taille maximale du fichier est de {{size}}",
+        "uploadedImage": "Image téléchargée",
+        "imageTitle": "Titre de l&#39;image"
     },
     "questions": {
         "Questions": "Des questions",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Déjà répondu",
         "TitlePlaceholder": "Tapez votre question",
         "ContentPlaceholder": "Mettez ici toute information supplémentaire pour aider les gens à répondre",
-        "ErrorTitle": "Question requise"
+        "ErrorTitle": "Question requise",
+        "Placeholder": "Espace réservé"
     },
     "experience": {
-        "NewExperience": "Nouvelle expérience"
+        "NewExperience": "Nouvelle expérience",
+        "DefineTitle": "Veuillez définir un titre",
+        "Create": "Créer"
+    },
+    "calls": {
+        "SettingsTitle": "Appels",
+        "MaxCalls": "Appels max.",
+        "Update": "Mettre à jour",
+        "NoCallsYet": "Pas encore d&#39;appels",
+        "CallReasonTitle": "De quoi parle cet appel ?",
+        "WaitingRoom": "Salle d&#39;attente"
     }
 }

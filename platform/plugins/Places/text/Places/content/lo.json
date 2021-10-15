@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "ພາຍໃນ {{1}}"
+    },
+    "units": {
+        "meter": "ແມັດ",
+        "meters": "ແມັດ",
+        "kilometer": "ກິໂລແມັດ",
+        "kilometers": "ກິໂລແມັດ",
+        "km": "ກມ",
+        "mile": "ໄມລ",
+        "miles": "ໄມ",
+        "mi": "ໄມ",
+        "foot": "ຕີນ",
+        "feet": "ຕີນ",
+        "inches": "ນິ້ວ"
+    },
+    "location": {
+        "interested": "ຂ້ອຍສົນໃຈສິ່ງທີ່ເກີດຂຶ້ນພາຍໃນ {{select}} ຂອງ",
+        "update": "ອັບເດດສະຖານທີ່ຂອງຂ້ອຍ",
+        "set": "ກໍານົດສະຖານທີ່ຂອງຂ້ອຍ",
+        "prompt": "{{ClickOrTap}} ບ່ອນນີ້<br> ກໍານົດຂອງທ່ານ<br> ສະຖານທີ່",
+        "myCurrentLocation": "ສະຖານທີ່ປະຈຸບັນຂອງຂ້ອຍ",
+        "enterAddress": "ໃສ່ທີ່ຢູ່",
+        "enterPostcode": "ກະລຸນາໃສ່ລະຫັດໄປສະນີ \/ ລະຫັດໄປສະນີຂອງເຈົ້າ",
+        "create": {
+            "action": "ເພີ່ມສະຖານທີ່",
+            "title": "ສະຖານທີ່ໃ່",
+            "nameYourLocation": "ຕັ້ງຊື່ສະຖານທີ່ຂອງເຈົ້າ"
+        },
+        "confirm": {
+            "title": "ບັນທຶກສະຖານທີ່ນີ້ບໍ?",
+            "message": "ເຈົ້າວາງແຜນທີ່ຈະໃຊ້ສະຖານທີ່ນີ້ອີກໃນອະນາຄົດບໍ?",
+            "ok": "ແມ່ນແລ້ວ",
+            "cancel": "ບໍ່"
+        },
+        "add": {
+            "title": "ຕັ້ງຊື່ສະຖານທີ່ນີ້",
+            "placeholder": "ບ້ານ, ບ່ອນເຮັດວຽກແລະອື່ນ.",
+            "ok": "ບັນທຶກ"
+        },
+        "dialog": {
+            "title": "ເລືອກສະຖານທີ່"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "ພື້ນທີ່ໃດນຶ່ງຢູ່ໃນບ່ອນນີ້?",
+        "newArea": "ພື້ນທີ່ໃຫມ່",
+        "promptTitle": "ໃສ່ຊື່ສໍາລັບພື້ນທີ່:",
+        "absent": "ກະລຸນາ ກຳ ນົດພື້ນທີ່",
+        "error": "ຜິດພາດ",
+        "exist": "ມີພື້ນທີ່ຢູ່ກ່ອນແລ້ວ",
+        "addNewArea": "ເພີ່ມພື້ນທີ່ໃ່",
+        "add": "ຕື່ມ"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "ການເກັບກໍາສະຖານທີ່",
+            "displayType": "ສະຖານທີ່"
+        },
+        "Places\/location": {
+            "description": "ສະແດງເຖິງອາຄານ, ສະຖານທີ່, ເຮືອ, ສວນສາທາລະນະ, ແລະອື່ນ.",
+            "displayType": "ສະຖານທີ່"
+        },
+        "Places\/area": {
+            "description": "ເປັນຕົວແທນຂອງພື້ນທີ່ພາຍໃນສະຖານທີ່, ເຊັ່ນ: ຫ້ອງຫຼືຊຸດ",
+            "displayType": "ພື້ນທີ່"
+        },
+        "Places\/floor": {
+            "description": "ເປັນຕົວແທນຂອງພື້ນໃນອາຄານຫຼືເຮືອ",
+            "displayType": "ຊັ້ນ"
+        },
+        "Places\/column": {
+            "description": "ເປັນຕົວແທນຂອງຖັນຢູ່ໃນອາຄານຫຼືເຮືອ",
+            "displayType": "ຖັນ"
+        },
+        "Places\/nearby": {
+            "description": "Categoryວດforູ່ ສຳ ລັບສິ່ງຕ່າງ within ທີ່ຢູ່ໃນໄລຍະທີ່ແນ່ນອນຂອງ geohash",
+            "displayType": "ໃກ້ກັບສະຖານທີ່ຕ່າງ"
+        },
+        "Places\/interest": {
+            "description": "Categoryວດforູ່ ສຳ ລັບສິ່ງຕ່າງ within ທີ່ຢູ່ໃນໄລຍະທາງສະເພາະຂອງ geohash, ກົງກັບຄວາມສົນໃຈ",
+            "displayType": "ຄວາມສົນໃຈຂອງສະຖານທີ່"
+        }
+    }
+}

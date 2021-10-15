@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Mercên karûbar qebûl dikin?",
         "facebookNoEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi hêsanî bi rengek xweser têkevin.",
-        "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin"
+        "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin",
+        "wallet": {
+            "payload": "Têkeve {{host}} wextê {{timestamp}}",
+            "alert": {
+                "title": "Beralîkirina li Wallet",
+                "content": "Gava ku hûn vê diyalogê bigire, hûn ê werin berîka xwe. Piştî ku hûn têkevinê, vegerin ser vê rûpelê."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Awirek ku têkeve hundurê",
@@ -108,6 +115,18 @@
         "Owner": "Xwedî",
         "Admin": "Rêvebir",
         "Member": "Endam",
-        "Guest": "Mêvan"
+        "Guest": "Mêvan",
+        "Host": "Mazûban"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Rojane",
+        "Weekly": "Heftane",
+        "Monthly": "Mehane",
+        "Application": "Bikaranînî",
+        "Pages": "Rûpelan",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Rojên Hefteyê"
     }
 }

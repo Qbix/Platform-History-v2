@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Tautan pikeun ngamajukeun",
+                "startDate": "Tanggal mimiti",
+                "startTime": "Waktos Mimitian",
+                "endDate": "Tanggal Tungtung",
+                "endTime": "Waktos Akhir",
+                "budget": "Anggaran"
+            },
+            "interests": {
+                "Title": "Saring Ku Minat",
+                "FilterInterests": "Mimitian ngetik minat ..."
+            },
+            "Interest": "Minat",
+            "Location": "Lokasi"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Indit",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Ngotéktak",
+            "WriteToStartConversation": "Tulis pikiran anjeun pikeun ngamimitian paguneman",
+            "StartConversation": "Mimitian Paguneman",
+            "GotoConversation": "Buka Paguneman",
+            "reset": "Reset",
+            "edit": "Édit",
+            "link": "Tautan",
+            "setUrl": "Nyetél URL",
+            "save": "Ngahémat",
+            "setClip": "Motong Klip",
+            "invalidURL": "URL henteu valid"
+        },
+        "FileTooLarge": "File ageung teuing pikeun cache. Ukuran file maksimal {{size}}",
+        "InvalidPDF": "File sanés PDF anu valid",
+        "StartTypingTitleOrKeywords": "Ngamimitian ngetikkeun judul atanapi kecap konci ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Dokumén HTML anu rupa-rupa pangguna tiasa ningali sareng diédit",
+            "displayType": "Pasal"
+        },
+        "Websites\/slide": {
+            "description": "Slide dina presentasi, tiasa kalebet HTML, audio jsb.",
+            "displayType": "Ngageser"
+        },
+        "Websites\/presentation": {
+            "description": "A presentasi diwangun ku rupa-rupa slide",
+            "displayType": "Presentasi"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Unit iklan dina halaman wéb",
+            "displayType": "Unit iklan"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Cara ngagolongkeun unit iklan dina nami",
+            "displayType": "Panempatan advert"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Eusi pikeun iklan",
+            "displayType": "Iklan kreatif"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Kampanye iklan",
+            "displayType": "Kampanye advert"
+        },
+        "Websites\/webpage": {
+            "description": "Ngalambangkeun halaman wéb anu metadata na corétan",
+            "displayType": "kaca wéb"
+        }
+    }
+}

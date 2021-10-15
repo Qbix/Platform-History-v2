@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Дэмжих линк",
+                "startDate": "Эхлэх өдөр",
+                "startTime": "Эхлэх цаг",
+                "endDate": "Дуусах огноо",
+                "endTime": "Дуусах цаг",
+                "budget": "Төсөв"
+            },
+            "interests": {
+                "Title": "Сонирхлын дагуу шүүх",
+                "FilterInterests": "Сонирхол бичиж эхлээрэй ..."
+            },
+            "Interest": "Хүү",
+            "Location": "Байршил"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Яв",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Хайх",
+            "WriteToStartConversation": "Яриагаа эхлүүлэхийн тулд өөрийн бодлоо бичээрэй",
+            "StartConversation": "Харилцан яриаг эхлүүлэх",
+            "GotoConversation": "Ярилцлага руу очно уу",
+            "reset": "Дахин тохируулах",
+            "edit": "Засах",
+            "link": "Холбоос",
+            "setUrl": "URL тохируулах",
+            "save": "Хадгалах",
+            "setClip": "Клип хайчил",
+            "invalidURL": "Буруу URL"
+        },
+        "FileTooLarge": "Файлыг кэш хийхэд хэт том байна. Файлын дээд хэмжээ {{size}}",
+        "InvalidPDF": "Файл нь хүчин төгөлдөр PDF биш байна",
+        "StartTypingTitleOrKeywords": "Гарчиг эсвэл түлхүүр үгээ бичиж эхлээрэй ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Янз бүрийн хэрэглэгчид үзэх, засах боломжтой HTML баримт бичиг",
+            "displayType": "Нийтлэл"
+        },
+        "Websites\/slide": {
+            "description": "Үзүүлэнгийн слайд нь HTML, аудио гэх мэтийг багтааж болно.",
+            "displayType": "Слайд"
+        },
+        "Websites\/presentation": {
+            "description": "Төрөл бүрийн слайдуудаас бүрдсэн танилцуулга",
+            "displayType": "Танилцуулга"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Вэбсайт дээрх зар сурталчилгааны нэгж",
+            "displayType": "Зар сурталчилгааны нэгж"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Зар сурталчилгааны нэгжүүдийг нэрээр нь бүлэглэх арга",
+            "displayType": "Байршуулах зар"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Зар сурталчилгааны контент",
+            "displayType": "Бүтээлч сурталчилгаа хийх"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Зар сурталчилгааны кампанит ажил",
+            "displayType": "Зар сурталчилгааны кампанит ажил"
+        },
+        "Websites\/webpage": {
+            "description": "Мета өгөгдлийг хуссан вэбсайтыг төлөөлдөг",
+            "displayType": "Вэб хуудас"
+        }
+    }
+}

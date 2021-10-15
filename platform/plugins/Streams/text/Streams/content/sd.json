@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "اتي مون کي دعوت ڏني",
-        "Streams\/invitedMe": "مون کي دعوت ڏني"
+        "Streams\/invitedMe": "مون کي دعوت ڏني",
+        "AreYouAgree": "؟ا توهان متفق آهيو؟",
+        "Yes": "ها",
+        "No": "نه"
     },
     "interests": {
         "Filter": "توهان ڪهڙو مزو آهيو؟",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ڪوڊ ڪوڊ ڪيو ويو هو",
-            "copyLink": "دعوت واري لنڪ ڪاپي ڪرڻ {{ClickOrTap}}"
+            "copyLink": "دعوت واري لنڪ ڪاپي ڪرڻ {{ClickOrTap}}",
+            "userChooserPlaceholder": "نالي سان وليو"
         },
         "email": {
             "subject": "ائو، هن کي چيڪ ڪريو",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "شرڪت ڪندڙ ڪا وڊيو ناهي",
             "openInBrowserAlert": "ڪانفرنس ۾ شامل ٿيڻ لاء صفاري برائوزر ۾ لنڪ کوليو.",
             "youBeganVideoRecording": "توهان ڪانفرنس شروع ڪري رڪارڊ ڪرڻ شروع ڪيو",
-            "youStoppedVideoRecording": "توهان هن ڪانفرنس کي رڪارڊ ڪرڻ بند ڪري ڇڏيو"
+            "youStoppedVideoRecording": "توهان هن ڪانفرنس کي رڪارڊ ڪرڻ بند ڪري ڇڏيو",
+            "switchingRoom": "سوئچنگ روم ...",
+            "forceDisconnecting": "توھان 5 سيڪنڊن اندر ڊسڪنيٽ ٿي ويندا",
+            "youStartedLive": "توھان ھن ڪال کي ڪسٽم RTMP ڏانھن نشر ڪرڻ شروع ڪيو",
+            "youStoppedLive": "توھان ھن ڪال کي نشر ڪرڻ بند ڪيو آھي ڪسٽم RTMP ڏانھن",
+            "sbStartedLiveStreaming": "{{userName}} شروع ٿيو",
+            "sbStoppedLiveStreaming": "{{userName}} ختم ٿي ويو",
+            "liveStopped": "وڊيو موڪلڻ دوران غلطي ٿي وئي آخري پوائنٽ ڏانھن"
         },
         "settingsPopup": {
             "webCamera": "ويب ڪيمرا",
@@ -192,7 +203,13 @@
             "stopRecording": "رڪارڊنگ بند ڪيو",
             "recordingInProgress": "رڪارڊنگ جاري آهي ...",
             "publishOnTimeline": "وقت تي شايع ڪريو",
-            "publishToGroup": "گروپ ڏانھن شايع ڪريو"
+            "publishToGroup": "گروپ ڏانھن شايع ڪريو",
+            "turnOffAudioInput": "مائڪروفون خاموش ڪريو",
+            "micIsTurnedOff": "مائڪروفون بند آهي",
+            "start": "شروع",
+            "stop": "روڪيو",
+            "streamingSettings": "جوڙ",
+            "streamToRTMP": "وهڪرو ڪسٽم RTMP ڏانھن"
         },
         "participantsPopup": {
             "disconnect": "ناڪاري",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "توهان کي هن وهڪري ۾ شامل ٿيڻ جي اجازت ناهي.",
         "streamTitle": "{{1}} لائيو ڪال",
         "preview": {
-            "preamble": "گڏجاڻي:"
+            "preamble": "گڏجاڻي:",
+            "Meeting": "گڏجاڻي",
+            "MeetingEnded": "گڏجاڻي ختم ٿي وئي"
+        },
+        "preparing": {
+            "micIsOff": "مائڪ بند آهي",
+            "micIsOn": "مائڪ آن آهي",
+            "cameraIsOff": "ڪئميرا بند آهي",
+            "cameraIsOn": "ڪئميرا چالو آهي",
+            "screenSharingIsOn": "اسڪرين شيئرنگ جاري آھي",
+            "screenSharingIsOff": "اسڪرين شيئر ڪريو",
+            "joinNow": "ڪال ۾ شامل ٿيو"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "جواب",
             "description": "جواب جو وهڪرو"
+        },
+        "Streams\/calls": {
+            "displayType": "ڪالون",
+            "description": "درجه بندي وهڪرو\/webrtc لاءِ",
+            "MaxRelationsExceeded": "و calls ۾ و calls ڪالون وي ويون"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "غلط فائيل",
         "errorNoSource": "تصويري جو ماخذ ڪونهي",
         "uploadLimit": "وڌ ۾ وڌ فائل جي سائيز: {{size}}",
-        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي"
+        "errorFileSize": "معاف ڪجو ، پر فائل تمام وڏي.<br> وڌ کان وڌ فائل جي ماپ {{size}} آهي",
+        "uploadedImage": "اپ لوڊ ٿيل تصوير",
+        "imageTitle": "تصوير جو عنوان"
     },
     "questions": {
         "Questions": "سوالَ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "اڳ ۾ ئي جواب ڏنل آهي",
         "TitlePlaceholder": "پنهنجي سوال کي ٽائپ ڪيو",
         "ContentPlaceholder": "ماڻهن کي جواب ڏيڻ ۾ مدد لاءِ هتي اضافي معلومات وجهي ڇڏيو",
-        "ErrorTitle": "گهربل سوال"
+        "ErrorTitle": "گهربل سوال",
+        "Placeholder": "جاءِ والاريندڙ"
     },
     "experience": {
-        "NewExperience": "نئون تجربو"
+        "NewExperience": "نئون تجربو",
+        "DefineTitle": "مھرباني ڪري عنوان جي وضاحت ڪريو",
+        "Create": "Createاھيو"
+    },
+    "calls": {
+        "SettingsTitle": "ڪالون",
+        "MaxCalls": "و Max ۾ و calls ڪالون",
+        "Update": "اپ ڊيٽ",
+        "NoCallsYet": "ا callsا تائين ڪا ڪال ناهي آئي",
+        "CallReasonTitle": "هي ڪال Whatا بابت آهي؟",
+        "WaitingRoom": "ويٽنگ روم"
     }
 }

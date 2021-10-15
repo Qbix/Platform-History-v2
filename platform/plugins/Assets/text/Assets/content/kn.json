@@ -36,8 +36,12 @@
         "WatchClip": "ವೀಕ್ಷಣೆಗಾಗಿ {{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ {{fromStreamTitle}}",
         "PurchaseCredits": "ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಿ",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ಸಾಲಗಳು"
-        }
+            "BoughtCredits": "{{amount}} ಸಾಲಗಳು",
+            "BonusCredits": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು"
+        },
+        "CreatePaidStream": "ರಚಿಸಲು {{toStreamName}}",
+        "BonusCredits": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು",
+        "BuyBonus": "ಒಮ್ಮೆ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಿದರೆ, ಅದು {{bonus}} ಕ್ರೆಡಿಟ್‌ಗಳ ಬೋನಸ್‌ಗೆ ಕಾರಣವಾಗುತ್ತದೆ."
     },
     "history": {
         "Date": "ದಿನಾಂಕ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು",
         "BoughtCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ",
         "InviteAcceptedBy": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
-        "YouHaveCreditsToStart": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ"
+        "YouHaveCreditsToStart": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
+        "CreatePaidStream": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡಿದೆ",
+        "WatchClip": {
+            "+": "ಗಳಿಸಿದ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು",
+            "-": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡಿದೆ"
+        },
+        "BonusCredits": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಪಡೆದುಕೊಂಡಿದೆ"
     },
     "subscriptions": {
         "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "ಬೆಲೆಯನ್ನು ನಿಗದಿಪಡಿಸಿ",
             "LinkPlaceholder": "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಲಿಂಕ್ ಅನ್ನು ಹೊಂದಿಸಿ",
             "DescriptionPlaceholder": "ಸೇವಾ ವಿವರಣೆ",
-            "SaveService": "ಸೇವೆಯನ್ನು ಉಳಿಸಿ"
+            "SaveService": "ಸೇವೆಯನ್ನು ಉಳಿಸಿ",
+            "SelectRequiredParticipants": "ಅಗತ್ಯ ಭಾಗವಹಿಸುವವರು"
         },
         "ManageServiceTemplates": "ಸೇವಾ ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
         "ManageServices": "ಸೇವೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",

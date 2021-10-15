@@ -36,8 +36,12 @@
         "WatchClip": "观看{{fromStreamTitle}}可赚取{{amount}}积分",
         "PurchaseCredits": "购买积分",
         "forMessages": {
-            "BoughtCredits": "{{amount}}个积分"
-        }
+            "BoughtCredits": "{{amount}}个积分",
+            "BonusCredits": "{{amount}} 学分"
+        },
+        "CreatePaidStream": "用于创建 {{toStreamName}}",
+        "BonusCredits": "奖金 {{amount}} 学分",
+        "BuyBonus": "一次购买 {{amount}} 积分，将获得 {{bonus}} 积分奖励。"
     },
     "history": {
         "Date": "日期",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "消费了{{amount}}个学分",
         "BoughtCredits": "购买了{{amount}}个积分",
         "InviteAcceptedBy": "赚取了{{amount}}积分",
-        "YouHaveCreditsToStart": "赚取了{{amount}}积分"
+        "YouHaveCreditsToStart": "赚取了{{amount}}积分",
+        "CreatePaidStream": "花费了 {{amount}} 学分",
+        "WatchClip": {
+            "+": "获得 {{amount}} 学分",
+            "-": "花费了 {{amount}} 学分"
+        },
+        "BonusCredits": "获得奖金 {{amount}} 积分"
     },
     "subscriptions": {
         "infoTitle": "设置付款信息",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "购买了{{amount}}个积分"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "奖金 {{amount}} 学分"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "设定价",
             "LinkPlaceholder": "设置其他信息链接",
             "DescriptionPlaceholder": "服务说明",
-            "SaveService": "保存服务"
+            "SaveService": "保存服务",
+            "SelectRequiredParticipants": "所需参与者"
         },
         "ManageServiceTemplates": "管理服务模板",
         "ManageServices": "管理服务",

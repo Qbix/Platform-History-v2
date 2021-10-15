@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Njikọ iji kwalite",
+                "startDate": "Ụbọchị mmalite",
+                "startTime": "Oge Mbido",
+                "endDate": "Ụbọchị Ọgwụgwụ",
+                "endTime": "Ọgwụgwụ Oge",
+                "budget": "Mmefu ego"
+            },
+            "interests": {
+                "Title": "Nyocha site na mmasị",
+                "FilterInterests": "Bido ịpịnye mmasị ..."
+            },
+            "Interest": "Mmasị",
+            "Location": "Ebe"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Gaa",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Chọgharịa",
+            "WriteToStartConversation": "Dee echiche gị ka ịmalite mkparịta ụka ahụ",
+            "StartConversation": "Malite Mkparịta ụka",
+            "GotoConversation": "Gaa na Mkparịta ụka",
+            "reset": "Tọgharia",
+            "edit": "Dezie",
+            "link": "Njikọ",
+            "setUrl": "Tọọ URL",
+            "save": "Chekwa",
+            "setClip": "Ebipụ Clip",
+            "invalidURL": "URL na ezighi ezi"
+        },
+        "FileTooLarge": "Faịlụ buru oke ibu maka ịchekwa ihe. Ogo faịlụ kacha {{size}}",
+        "InvalidPDF": "Faịlụ abụghị PDF ziri ezi",
+        "StartTypingTitleOrKeywords": "Malite ịpị aha ma ọ bụ mkpụrụokwu ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Akwụkwọ HTML nke ndị ọrụ dị iche iche nwere ike ịlele ma dezie",
+            "displayType": "Nkeji edemede"
+        },
+        "Websites\/slide": {
+            "description": "Ihe mmịfe na ngosi, nwere ike ịgụnye HTML, ọdịyo wdg.",
+            "displayType": "Ihe mmịfe"
+        },
+        "Websites\/presentation": {
+            "description": "Ihe ngosi nke nwere ihe mmịfe dị iche iche",
+            "displayType": "Ngosi"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Ngalaba mgbasa ozi na weebụsaịtị",
+            "displayType": "Ngalaba mgbasa ozi"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Ụzọ nke ijikọ nkeji mgbasa ozi n&#39;okpuru aha",
+            "displayType": "Ebe mgbasa ozi"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Ọdịnaya maka mgbasa ozi",
+            "displayType": "Mgbasa ozi okike"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Mgbasa ozi mgbasa ozi",
+            "displayType": "Mgbasa ozi"
+        },
+        "Websites\/webpage": {
+            "description": "Na -anọchite anya weebụsaịtị nke kpochapụrụ metadata ya",
+            "displayType": "ibe weebụ"
+        }
+    }
+}

@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Ceangal gus adhartachadh",
+                "startDate": "Ceann-latha tòiseachaidh",
+                "startTime": "Ùine tòiseachaidh",
+                "endDate": "Ceann-latha crìochnachaidh",
+                "endTime": "Ùine crìochnachaidh",
+                "budget": "Buidseat"
+            },
+            "interests": {
+                "Title": "Filter a rèir ùidh",
+                "FilterInterests": "Tòisich a ’taipeadh ùidh ..."
+            },
+            "Interest": "Ùidh",
+            "Location": "Àite"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Rach",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Dèan brobhsadh",
+            "WriteToStartConversation": "Sgrìobh do bheachdan gus tòiseachadh air a ’chòmhradh",
+            "StartConversation": "Tòisich Còmhradh",
+            "GotoConversation": "Rach gu Còmhradh",
+            "reset": "Ath-shuidhich",
+            "edit": "Deasaich",
+            "link": "Ceangal",
+            "setUrl": "Suidhich URL",
+            "save": "Sàbhail",
+            "setClip": "Gearradh a-mach clip",
+            "invalidURL": "URL mì-dhligheach"
+        },
+        "FileTooLarge": "Faidhle ro mhòr airson caching. Meud faidhle as àirde {{size}}",
+        "InvalidPDF": "Chan e faidhle dligheach a th ’ann am faidhle",
+        "StartTypingTitleOrKeywords": "Tòisich a ’taipeadh tiotal no prìomh fhaclan ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Sgrìobhainn HTML a dh&#39;fhaodas diofar luchd-cleachdaidh fhaicinn agus a dheasachadh",
+            "displayType": "Artaigil"
+        },
+        "Websites\/slide": {
+            "description": "Faodaidh sleamhnag ann an taisbeanadh a bhith a ’toirt a-steach HTML, claisneachd msaa.",
+            "displayType": "Sleamhnachadh"
+        },
+        "Websites\/presentation": {
+            "description": "Taisbeanadh anns a bheil grunn shleamhnagan",
+            "displayType": "Taisbeanadh"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Aonad sanasachd air làrach-lìn",
+            "displayType": "Aonad sanasachd"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Dòigh air aonadan sanasachd a chuir còmhla fo ainm",
+            "displayType": "Suidheachadh sanasachd"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Susbaint airson sanas",
+            "displayType": "Dèan sanasachd cruthachail"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Iomairt sanasachd",
+            "displayType": "Iomairt sanasachd"
+        },
+        "Websites\/webpage": {
+            "description": "A ’riochdachadh làrach-lìn far an deach meata-dàta a sgrìobadh",
+            "displayType": "duilleag-lìn"
+        }
+    }
+}

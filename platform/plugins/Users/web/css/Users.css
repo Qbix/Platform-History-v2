@@ -313,6 +313,10 @@
 
 #Users_login_resend_success { text-align: center; }
 
+a.Users_activation_resend {
+	width: 100%;
+	padding: 0;
+}
 a.Users_activation_resend:link,
 a.Users_activation_resend:visited,
 a.Users_activation_resend:active {
@@ -523,7 +527,7 @@ button.Users_getintouch_call {
 	background: #394ad5; /* for non-css3 browsers */
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#394ad5', endColorstr='#2839c4'); /* for IE */
 	background: -webkit-gradient(linear, left top, left bottom, from(#394ad5), to(#2839c4)); /* for webkit browsers */
-	background: -moz-linear-gradient( #394ad5,  #2839c4); /* for firefox 3.6+ */
+	background: -moz-linear-gradient(top,  #394ad5,  #2839c4); /* for firefox 3.6+ */
 	color: white;
 }
 .Q_button.Users_aspect_communities:active,

@@ -113,7 +113,10 @@
         "SetClipStart": "Deji Bilowga Clip",
         "ClipStart": "Bilow Clip",
         "SetClipEnd": "Deji Clip End",
-        "ClipEnd": "Dhamaadka Clip"
+        "ClipEnd": "Dhamaadka Clip",
+        "StartMoreEnd": "Meesha bilawga ahi ma noqon karto wax ka badan booska dhammaadka",
+        "EndLessStart": "Meesha ugu dambaysa kama yaraan karto booska bilowga",
+        "WhichInvalid": "Muran &#39;kaas oo&#39; aan ansax ahayn"
     },
     "tabs": {
         "more": "dheeraad ah",

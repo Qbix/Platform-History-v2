@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "di nav {{1}} de"
+    },
+    "units": {
+        "meter": "jimarvan",
+        "meters": "metre",
+        "kilometer": "kîlometr",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mîl",
+        "miles": "mîl",
+        "mi": "mi",
+        "foot": "ling",
+        "feet": "pê",
+        "inches": "inches"
+    },
+    "location": {
+        "interested": "Ez bi tiştên ku di hundurê {{select}} de diqewimin re eleqedar dibim",
+        "update": "Cihê Min Rojanekirin",
+        "set": "Cihê Min Bikin",
+        "prompt": "{{ClickOrTap}} li vir<br> ya xwe danîn<br> cîh",
+        "myCurrentLocation": "Cihê min ê niha",
+        "enterAddress": "Navnîşanek binivîse",
+        "enterPostcode": "Ji kerema xwe koda postê \/ posta xwe binivîsin",
+        "create": {
+            "action": "Cihê lê zêde bike",
+            "title": "Cihê Nû",
+            "nameYourLocation": "Navê cîhê xwe bikin"
+        },
+        "confirm": {
+            "title": "Vê cîh xilas bike?",
+            "message": "Ma hûn plan dikin ku di pêşerojê de vê cîhê dîsa bikar bînin?",
+            "ok": "Erê",
+            "cancel": "Na"
+        },
+        "add": {
+            "title": "Navê vî cihî bikin",
+            "placeholder": "Mal, Kar hwd.",
+            "ok": "Rizgarkirin"
+        },
+        "dialog": {
+            "title": "Cihê Hilbijêre"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Li hundurê vê deverê deverek heye?",
+        "newArea": "Qada nû",
+        "promptTitle": "Navê herêmê binivîse:",
+        "absent": "Ji kerema xwe qadê diyar bikin",
+        "error": "Şaşî",
+        "exist": "Herêm jixwe heye",
+        "addNewArea": "Qada nû lê zêde bikin",
+        "add": "Lêzêdekirin"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "berhevkirina cihan",
+            "displayType": "Locations"
+        },
+        "Places\/location": {
+            "description": "Avahî, cîh, keştî, park, hwd temsîl dike.",
+            "displayType": "Cîh"
+        },
+        "Places\/area": {
+            "description": "Herêmek di nav cîhek de, wekî jûreyek an jûreyek nûnertî dike",
+            "displayType": "Dewer"
+        },
+        "Places\/floor": {
+            "description": "Di avahiyek an keştiyek de qatek temsîl dike",
+            "displayType": "Erd"
+        },
+        "Places\/column": {
+            "description": "Di avahiyek an keştiyek de stûnek temsîl dike",
+            "displayType": "Ling"
+        },
+        "Places\/nearby": {
+            "description": "Kategorî ji bo tiştên di navbêna dûr a geohash de",
+            "displayType": "Nêzîkî cihan"
+        },
+        "Places\/interest": {
+            "description": "Kategorî ji bo tiştên di navbêna dûr a geohash de, lihevhatinek berjewendiyek",
+            "displayType": "Places interest"
+        }
+    }
+}

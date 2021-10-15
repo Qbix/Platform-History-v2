@@ -113,7 +113,10 @@
         "SetClipStart": "Beha Clip Start",
         "ClipStart": "Qala Clip",
         "SetClipEnd": "Hlopha Clip End",
-        "ClipEnd": "Qetella"
+        "ClipEnd": "Qetella",
+        "StartMoreEnd": "Boemo ba ho qala bo ke ke ba feta boemo ba ho fela",
+        "EndLessStart": "Boemo ba ho qetela bo ka se be tlase ho boemo ba qalo",
+        "WhichInvalid": "Khang &#39;e&#39; sa sebetseng"
     },
     "tabs": {
         "more": "Hape",

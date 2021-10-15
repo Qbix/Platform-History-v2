@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tlanya ho lefa"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tefiso e sebetsitsoe bakeng sa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Re leboha tefo ea hau ho {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} o ngolisitse ho {{plan.title}}",
+        "YouSubscribedTo": "U ngolisitse ho {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "O lefa {{displayAmount}} ho tsoa ho {{call 'publisher.displayName'}} ke &quot;{{description}}&quot;",
+        "HasBeenCharged": "Lumela, sena ke ho u tsebisa feela {{1}} e lefisitsoe {{2}} bakeng sa {{3}} ke {{4}}"
+    },
+    "charged": {
+        "Subject": "Re leboha tefo ea hau ea &quot;{{description}}&quot;",
+        "HavePaid": "Lumela {{1}}, hona ke tiiso e potlakileng ea hore u atlehile ho lefa {{2}} ho {{3}} bakeng sa {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Tsebiso ka odara",
+        "PaymentMethod": "Mokhoa oa tefo",
+        "ContactInfo": "Lintlha tsa ho ikopanya",
+        "Pay": "Lefa"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Memo e amohetsoe ke {{invitedUserName}}",
+        "YouHaveCreditsToStart": "O na le mekitlane e {{amount}} ea ho qala",
+        "PaymentFor": "Tefo ea &quot;{{1}}&quot;",
+        "PaymentTo": "Tefo ho {{1}}",
+        "PaymentToUser": "Tefo ho {{toUserName}}",
+        "CreatePaidStream": "ea ho theha {999}}",
+        "JoinedPaidStream": "ea ho boloka &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "bakeng sa ho theha sechaba &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "e le pusetso ea peeletso ho &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Rekile {{amount}} mekitlane",
+        "BonusCredits": "Mekitlane ea bonase {{amount}}",
+        "BuyAmountCredits": "Reka mekoloto e {{amount}}",
+        "WatchClip": "O amohetse mekitlane e {{amount}} ka ho shebella {{fromStreamTitle}}",
+        "MissingCredits": "Likoloto Tse Seng Teng",
+        "YouMissingCredits": "U hloka mekoloto e meng e {{amount}} ho tsoela pele.",
+        "BuyCredits": "Reka mekitlane",
+        "BuyBonus": "Ho reka mekoloto ea {{amount}} hang, ho tla lebisa ho {{bonus}} bonase ea mekoloto.",
+        "Buy": "Reka",
+        "PurchaseCredits": "Reka Credits",
+        "Credits": "Litlhophiso",
+        "ErrorInvalidAmount": "Palo ha e sebetse",
+        "ErrorInvalidCurrency": "Ka bomalimabe ha re sa ts&#39;ehetsa chelete {{currency}} hajoale",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} mekitlane",
+            "BonusCredits": "{{amount}} mekitlane"
+        }
+    },
+    "history": {
+        "Date": "Letsatsi",
+        "Amount": "Chelete",
+        "Description": "Tlhaloso",
+        "Client": "Mofani",
+        "To": "ho",
+        "From": "ho tloha",
+        "SeeHistory": "Sheba nalane ea tefo ea {{1}}",
+        "HistoryEmpty": "Ha o na data hajoale",
+        "PaymentFor": "Rometse {{amount}} mekitlane",
+        "PaymentTo": "Rometse {{amount}} mekitlane",
+        "PaymentToUser": "Rometse {{amount}} mekitlane",
+        "CreatePaidStream": "Sebedisitse mekoloto ea {{amount}}",
+        "WatchClip": {
+            "+": "Ho fumanwe mekitlane e {{amount}}",
+            "-": "Sebedisitse mekoloto ea {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Ho fumanwe mekitlane e {{amount}}",
+            "-": "Sebedisitse mekoloto ea {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Re amohetse mekoloto e {{amount}}",
+            "-": "Rometse {{amount}} mekitlane"
+        },
+        "CreatedCommunity": "Sebedisitse mekoloto ea {{amount}}",
+        "BoughtCredits": "Rekile {{amount}} mekitlane",
+        "BonusCredits": "U na le mekitlane ea bonase {{amount}}",
+        "InviteAcceptedBy": "Ho fumanwe mekitlane e {{amount}}",
+        "YouHaveCreditsToStart": "Ho fumanwe mekitlane e {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Beha Tlhahisoleseling ea Tefo",
+        "confirm": {
+            "title": "Qala ho Ngolisa",
+            "message": "O ka rata ho ingolisa ho {{title}}?",
+            "ok": "OK",
+            "cancel": "Hlakola"
+        },
+        "CreditOrDebitCard": "Karete ea mokitlane kapa ea banka",
+        "SubscribePayment": "Ngolisa Tefo",
+        "ImmediatePayment": "Tefo ea hanghang"
+    },
+    "payments": {
+        "infoTitle": "Beha Tlhahisoleseling ea Tefo",
+        "BuyAmountCredits": "Reka mekoloto e {{amount}}",
+        "confirm": {
+            "title": "Etsa Tefo",
+            "message": "Na u lumela ho lefa {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Hlakola"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Litlhophiso",
+            "description": "e boloka tlaleho ea likalimo le litefo"
+        },
+        "Assets\/plan": {
+            "displayType": "Morero oa peeletso",
+            "description": "moralo oa ho ngolisa"
+        },
+        "Assets\/subscription": {
+            "displayType": "Peeletso",
+            "description": "tshebeletso"
+        },
+        "Assets\/product": {
+            "displayType": "Sehlahisoa",
+            "description": "sehlahisoa se rekisoang"
+        },
+        "Assets\/service": {
+            "displayType": "Tshebeletso",
+            "description": "tšebeletso e fanoang"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Ho fumanwe mekitlane e {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Rekile {{amount}} mekitlane"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Mekitlane ea bonase {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Sebedisitse mekoloto ea {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Romella {{amount}} mekitlane ho {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Re amohetse mekoloto e {{amount}} ho tsoa ho {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Tšebeletso e ncha",
+            "TitlePlaceholder": "Sehlooho sa ts&#39;ebeletso",
+            "PricePlaceholder": "Ipehele theko",
+            "LinkPlaceholder": "seta sehokela sa lintlha tse ling",
+            "DescriptionPlaceholder": "Tlhaloso ea ts&#39;ebeletso",
+            "SaveService": "Boloka Tšebeletso",
+            "SelectRequiredParticipants": "Barupeluoa ba Hlokehang"
+        },
+        "ManageServiceTemplates": "Laola Litempele tsa Ts&#39;ebeletso",
+        "ManageServices": "Laola Litšebeletso",
+        "Free": "Mahala",
+        "OptionalContribution": "Monehelo oa boikhethelo",
+        "RequiredPayment": "Tefo e hlokahalang",
+        "AreYouSureDelete": "U na le bonnete ba hore u batla ho hlakola ts&#39;ebeletso ee?",
+        "AmountServicesRelated": "Ho na le {{amount}} liphallelo tse amanang le ts&#39;ebeletso ena. Le tsona li tla tlosoa."
+    }
+}

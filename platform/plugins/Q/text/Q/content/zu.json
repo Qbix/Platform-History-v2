@@ -113,7 +113,10 @@
         "SetClipStart": "Setha isiqeshana sesiqeshana",
         "ClipStart": "Isiqeshana Qala",
         "SetClipEnd": "Setha ukuphela kwesiqeshana",
-        "ClipEnd": "Isiqeshana Siphelile"
+        "ClipEnd": "Isiqeshana Siphelile",
+        "StartMoreEnd": "Indawo yokuqala ayikwazi ukuba ngaphezu kwesikhundla sokuphela",
+        "EndLessStart": "Indawo yokuphela ayikwazi ukuba ngaphansi kwesikhundla sokuqala",
+        "WhichInvalid": "Ukungqubuzana &#39;okungavumelekile"
     },
     "tabs": {
         "more": "Okuningi",

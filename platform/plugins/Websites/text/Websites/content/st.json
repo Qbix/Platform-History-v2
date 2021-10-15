@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Khokahano ea ho khothaletsa",
+                "startDate": "Letsatsi la qalo",
+                "startTime": "Nako ea Qalo",
+                "endDate": "Letsatsi la ho qetela",
+                "endTime": "Nako ea ho Qetela",
+                "budget": "Tekanyetso"
+            },
+            "interests": {
+                "Title": "Sefa ka Thahasello",
+                "FilterInterests": "Qala ho thaepa thahasello ..."
+            },
+            "Interest": "Thahasello",
+            "Location": "Sebaka"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Tsamaea",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Sheba",
+            "WriteToStartConversation": "Ngola mehopolo ea hau ho qala moqoqo",
+            "StartConversation": "Qala Moqoqo",
+            "GotoConversation": "Eya ho Moqoqo",
+            "reset": "Seta bocha",
+            "edit": "Edita",
+            "link": "Khokahano",
+            "setUrl": "Seta URL",
+            "save": "Boloka",
+            "setClip": "Khaola Sekoto",
+            "invalidURL": "URL e fosahetseng"
+        },
+        "FileTooLarge": "Faele e kholo haholo bakeng sa ho boloka polokelo. Boholo ba faele boholo {{size}}",
+        "InvalidPDF": "Faele ha se PDF e nepahetseng",
+        "StartTypingTitleOrKeywords": "Qala ho thaepa sehlooho kapa mantsoe a bohlokoa ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "Tokomane ea HTML eo basebelisi ba fapaneng ba ka e bonang le ho e hlophisa",
+            "displayType": "Sengoloa"
+        },
+        "Websites\/slide": {
+            "description": "Slide se hlahisong se ka kenyelletsa HTML, audio le tse ling.",
+            "displayType": "Slide"
+        },
+        "Websites\/presentation": {
+            "description": "Tlhahiso e nang le li-slide tse fapaneng",
+            "displayType": "Tlhahiso"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Setsi sa papatso webosaeteng",
+            "displayType": "Setsi sa papatso"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Mokhoa oa ho arola lihlopha tsa papatso tlasa lebitso",
+            "displayType": "Ho beoa papatso"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Likahare tsa papatso",
+            "displayType": "Phatlalatso ea papatso"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Letšolo la papatso",
+            "displayType": "Letšolo la papatso"
+        },
+        "Websites\/webpage": {
+            "description": "E emela sebaka sa marang-rang seo metadata ea sona e ileng ea hlakoloa",
+            "displayType": "leqephe la tepo"
+        }
+    }
+}

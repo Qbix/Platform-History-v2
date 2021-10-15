@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "ICTUS ut stipendium"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: crimen discursum pro {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Gratias ago tibi pro solutione tua ad {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscripserunt ad {{plan.title}}",
+        "YouSubscribedTo": "subscripta sunt {999}}"
+    },
+    "charge": {
+        "Subject": "{999}} ab {1000}} ab &quot;{{description}}&quot; solutionem accipis",
+        "HasBeenCharged": "Heus, hoc iustum est ut scias {{1}} accusatus est {{2}} pro {{3}} a {{4}}"
+    },
+    "charged": {
+        "Subject": "Gratias ago tibi pro mercede tua &quot;{999}}&quot;",
+        "HavePaid": "Heus {{1}}, haec confirmatio celeris iusta est te bene solvisse {{2}} ad {{3}} pro {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Info de ordine",
+        "PaymentMethod": "Solucionis methodo",
+        "ContactInfo": "Contactus info",
+        "Pay": "Stipendium"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Invita acceptum ab {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Habes {999}} credit incipere",
+        "PaymentFor": "Mercedem &quot;{999}}&quot;",
+        "PaymentTo": "Mercedem ad {{1}}",
+        "PaymentToUser": "Mercedem ad {{toUserName}}",
+        "CreatePaidStream": "ad partum {999}}",
+        "JoinedPaidStream": "ad reservationem in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ad communitatem creandam &quot;{999}}&quot;",
+        "LeftPaidStream": "ut reservatio refugium in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{100}}<\/a> &quot;",
+        "BoughtCredits": "Emit {{amount}} creditorum",
+        "BonusCredits": "Bonus {{amount}} credit",
+        "BuyAmountCredits": "Eme {{amount}} creditorum",
+        "WatchClip": "Meruit {999}} credita pro spectandis {{fromStreamTitle}}",
+        "MissingCredits": "Absentis Credits",
+        "YouMissingCredits": "Additamenta ad {{amount}} credita procedere.",
+        "BuyCredits": "Buy credit",
+        "BuyBonus": "Merces {{amount}} creditorum statim ducet ad {{bonus}} creditorum bonum.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Quantum invalidum",
+        "ErrorInvalidCurrency": "Infeliciter monetam non sustinemus {{currency}} adhuc",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} creditorum",
+            "BonusCredits": "{{amount}} creditorum"
+        }
+    },
+    "history": {
+        "Date": "Date",
+        "Amount": "Moles",
+        "Description": "Descriptio",
+        "Client": "Client",
+        "To": "to",
+        "From": "e*",
+        "SeeHistory": "Vide historiam solutionis pro {{1}}",
+        "HistoryEmpty": "Nullas notitia adhuc",
+        "PaymentFor": "Missi {{amount}} creditorum",
+        "PaymentTo": "Missi {{amount}} creditorum",
+        "PaymentToUser": "Missi {{amount}} creditorum",
+        "CreatePaidStream": "Consumpta {{amount}} credit",
+        "WatchClip": {
+            "+": "Meruit {{amount}} credit",
+            "-": "Consumpta {{amount}} credit"
+        },
+        "JoinedPaidStream": {
+            "+": "Meruit {{amount}} credit",
+            "-": "Consumpta {{amount}} credit"
+        },
+        "LeftPaidStream": {
+            "+": "Receptum {999}} creditorum",
+            "-": "Missi {{amount}} creditorum"
+        },
+        "CreatedCommunity": "Consumpta {{amount}} credit",
+        "BoughtCredits": "Emit {{amount}} creditorum",
+        "BonusCredits": "Obtinuit bonus {{amount}} credit",
+        "InviteAcceptedBy": "Meruit {{amount}} credit",
+        "YouHaveCreditsToStart": "Meruit {{amount}} credit"
+    },
+    "subscriptions": {
+        "infoTitle": "Set Payment Information",
+        "confirm": {
+            "title": "Satus Subscription",
+            "message": "Visne subscribere {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        },
+        "CreditOrDebitCard": "Credit vel debitum card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediata Payment"
+    },
+    "payments": {
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Eme {{amount}} creditorum",
+        "confirm": {
+            "title": "Mercedem facere",
+            "message": "Placetne tibi reddere {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Credits",
+            "description": "servat track creditorum et solutionum"
+        },
+        "Assets\/plan": {
+            "displayType": "Subsription Plan",
+            "description": "subscriptione consilium"
+        },
+        "Assets\/subscription": {
+            "displayType": "Subscription",
+            "description": "subscriptione"
+        },
+        "Assets\/product": {
+            "displayType": "Productum",
+            "description": "productum quod vendidit"
+        },
+        "Assets\/service": {
+            "displayType": "Service",
+            "description": "munus oblatum"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Meruit {{amount}} credit"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Emit {{amount}} creditorum"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} credit"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Consumpta {{amount}} credit"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Missus est {999}} credit ad {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Acceptae sunt {999}} creditorum ab {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nova Service",
+            "TitlePlaceholder": "Servitium titulum",
+            "PricePlaceholder": "Pretium",
+            "LinkPlaceholder": "pone additional info link",
+            "DescriptionPlaceholder": "Servitium descriptio",
+            "SaveService": "Servare Service",
+            "SelectRequiredParticipants": "Participes required"
+        },
+        "ManageServiceTemplates": "Administrare Service Templates",
+        "ManageServices": "Curo Services",
+        "Free": "Liber",
+        "OptionalContribution": "Ad libitum conlationem",
+        "RequiredPayment": "Requiritur solucionis",
+        "AreYouSureDelete": "Visne vero hoc officium delere?",
+        "AmountServicesRelated": "Sunt {999}} auxilia ad hoc servitium pertinentia. Ipsae etiam ut per."
+    }
+}

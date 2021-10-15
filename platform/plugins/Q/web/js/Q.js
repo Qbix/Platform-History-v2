@@ -12146,7 +12146,7 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
-	 * @param {Boolean} [msUntilStopCancelClick=300] Pass a number here to change
+	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to change
 	 *   how many milliseconds until setting Q.Pointer.canceledClick = false .
 	 * @return {boolean}
 	 */
@@ -12158,9 +12158,6 @@ Q.Pointer = {
 		Q.Pointer.canceledEvent = event;
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
-		}
-		if (msUntilStopCancelClick === undefined) {
-			msUntilStopCancelClick = 500;
 		}
 		if (msUntilStopCancelClick) {
 			++_cancelClick_counter;

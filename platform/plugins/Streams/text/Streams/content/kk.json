@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Мен шақырған адамдар",
-        "Streams\/invitedMe": "Маған кім шақырды"
+        "Streams\/invitedMe": "Маған кім шақырды",
+        "AreYouAgree": "Сіз келісесіз бе?",
+        "Yes": "Иә",
+        "No": "Жоқ"
     },
     "interests": {
         "Filter": "Сізге не ұнайды?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "Егер код сканерленген болса {{ClickOrTap}}",
-            "copyLink": "Шақыру сілтемесін көшіру үшін {{ClickOrTap}}"
+            "copyLink": "Шақыру сілтемесін көшіру үшін {{ClickOrTap}}",
+            "userChooserPlaceholder": "Аты бойынша іздеу"
         },
         "email": {
             "subject": "Hey, мұны тексеріңіз",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Қатысушының бейнесі жоқ",
             "openInBrowserAlert": "Конференцияға қатысу үшін Safari шолғышында сілтемені ашыңыз.",
             "youBeganVideoRecording": "Сіз осы конференцияны жаза бастадыңыз",
-            "youStoppedVideoRecording": "Сіз бұл конференцияны жазуды тоқтаттыңыз"
+            "youStoppedVideoRecording": "Сіз бұл конференцияны жазуды тоқтаттыңыз",
+            "switchingRoom": "Ауыстыру бөлмесі ...",
+            "forceDisconnecting": "Сіз 5 секунд ішінде ажыратыласыз",
+            "youStartedLive": "Сіз бұл қоңырауды арнайы RTMP -ге жібере бастадыңыз",
+            "youStoppedLive": "Сіз бұл қоңырауды арнайы RTMP -ге жіберуді тоқтаттыңыз",
+            "sbStartedLiveStreaming": "{{userName}} тікелей эфирде бастады",
+            "sbStoppedLiveStreaming": "{{userName}} тікелей эфирде аяқталды",
+            "liveStopped": "Бейнені соңғы нүктеге жіберу кезінде қате орын алды"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -192,7 +203,13 @@
             "stopRecording": "Жазуды тоқтату",
             "recordingInProgress": "Жазу орындалуда ...",
             "publishOnTimeline": "Уақыт кестесінде жариялау",
-            "publishToGroup": "Топқа жариялау"
+            "publishToGroup": "Топқа жариялау",
+            "turnOffAudioInput": "Микрофонды өшіру",
+            "micIsTurnedOff": "Микрофон өшірулі",
+            "start": "Бастау",
+            "stop": "Тоқта",
+            "streamingSettings": "Параметрлер",
+            "streamToRTMP": "Реттелетін RTMP -ге ағын"
         },
         "participantsPopup": {
             "disconnect": "Ажырату",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Бұл ағынға қосылуға рұқсатыңыз жоқ.",
         "streamTitle": "{{1}} тікелей қоңырау",
         "preview": {
-            "preamble": "Кездесу:"
+            "preamble": "Кездесу:",
+            "Meeting": "Кездесу",
+            "MeetingEnded": "Жиналыс аяқталды"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон өшірулі",
+            "micIsOn": "Микрофон қосулы",
+            "cameraIsOff": "Камера өшірулі",
+            "cameraIsOn": "Камера қосулы",
+            "screenSharingIsOn": "Экранды бөлісу қосулы",
+            "screenSharingIsOff": "Бөлісу экраны",
+            "joinNow": "Қоңырауға қосылыңыз"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Жауап",
             "description": "жауаптар ағыны"
+        },
+        "Streams\/calls": {
+            "displayType": "Қоңыраулар",
+            "description": "Streams\/webrtc санаты",
+            "MaxRelationsExceeded": "Ең көп қоңыраулар асып кетті"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Жарамсыз файл",
         "errorNoSource": "Кескін көзі жоқ",
         "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
-        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}",
+        "uploadedImage": "Жүктелген сурет",
+        "imageTitle": "Кескін атауы"
     },
     "questions": {
         "Questions": "Сұрақтар",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Қазірдің өзінде жауап берді",
         "TitlePlaceholder": "Сұрағыңызды теріңіз",
         "ContentPlaceholder": "Адамдарға жауап беру үшін кез-келген қосымша ақпаратты осы жерге салыңыз",
-        "ErrorTitle": "Сұрақ қажет"
+        "ErrorTitle": "Сұрақ қажет",
+        "Placeholder": "Орын толтырғыш"
     },
     "experience": {
-        "NewExperience": "Жаңа тәжірибе"
+        "NewExperience": "Жаңа тәжірибе",
+        "DefineTitle": "Тақырыпты анықтаңыз",
+        "Create": "Жасау"
+    },
+    "calls": {
+        "SettingsTitle": "Қоңыраулар",
+        "MaxCalls": "Максималды қоңыраулар",
+        "Update": "Жаңарту",
+        "NoCallsYet": "Әлі қоңырау жоқ",
+        "CallReasonTitle": "Бұл қоңырау не туралы?",
+        "WaitingRoom": "Күту бөлмесі"
     }
 }

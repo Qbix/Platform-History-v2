@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "i roto i te {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kiromita",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "maero",
+        "miles": "maero",
+        "mi": "mi",
+        "foot": "waewae",
+        "feet": "waewae",
+        "inches": "inihi"
+    },
+    "location": {
+        "interested": "Kei te hiahia ahau ki nga mea e mahia ana i roto i te {{select}} o",
+        "update": "Whakahoutia Taku Tauwāhi",
+        "set": "Whakatakotoria Taku Tauwāhi",
+        "prompt": "{{ClickOrTap}} konei ki<br> whakatauhia to<br> wāhi",
+        "myCurrentLocation": "Ko taku waahi inaianei",
+        "enterAddress": "Whakauruhia he wahitau",
+        "enterPostcode": "Tena koa whakauruhia to waeapata \/ waeherehere",
+        "create": {
+            "action": "Taapiri Tauwāhi",
+            "title": "Tauwāhi Hou",
+            "nameYourLocation": "Whakaingoatia to waahi"
+        },
+        "confirm": {
+            "title": "Tiakina tenei tauwāhi?",
+            "message": "Kei te whakaaro koe ki te whakamahi ano i tenei waahi a meake nei?",
+            "ok": "Ae",
+            "cancel": "No."
+        },
+        "add": {
+            "title": "Whakaingoatia tenei waahi",
+            "placeholder": "Kaainga, Mahi etc.",
+            "ok": "Penapena"
+        },
+        "dialog": {
+            "title": "Kōwhiria te Wāhi"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "He rohe kei roto i tenei waahi?",
+        "newArea": "Rohe hou",
+        "promptTitle": "Whakauruhia he ingoa mo te rohe:",
+        "absent": "Tena tohua he waahanga",
+        "error": "Hapa",
+        "exist": "Kei te tīariari kē te rohe",
+        "addNewArea": "Taapirihia he waahanga hou",
+        "add": "Taapirihia"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "he kohinga o nga waahi",
+            "displayType": "Nga waahi"
+        },
+        "Places\/location": {
+            "description": "He whare mo te whare, waahi, kaipuke, papa, etc.",
+            "displayType": "Tauwāhi"
+        },
+        "Places\/area": {
+            "description": "He tohu i tetahi waahanga i roto i tetahi waahi, penei i te ruuma, i te waahanga ranei",
+            "displayType": "Rohe"
+        },
+        "Places\/floor": {
+            "description": "He tohu i te papa o te whare, o te kaipuke ranei",
+            "displayType": "Papa"
+        },
+        "Places\/column": {
+            "description": "He tohu i tetahi pou i roto i te whare, i te kaipuke ranei",
+            "displayType": "Tīwae"
+        },
+        "Places\/nearby": {
+            "description": "Kāwai mo nga mea i roto i tetahi waahi tawhiti o te geohash",
+            "displayType": "Tata ki nga waahi"
+        },
+        "Places\/interest": {
+            "description": "Kāwai mo nga mea i roto i tetahi waahi tawhiti o te geohash, e haangai ana ki te paanga",
+            "displayType": "Nga paanga o nga waahi"
+        }
+    }
+}

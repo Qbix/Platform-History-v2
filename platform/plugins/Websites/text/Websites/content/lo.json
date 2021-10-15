@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "ເຊື່ອມຕໍ່ເພື່ອສົ່ງເສີມການ",
+                "startDate": "ວັນ​ທີ່​ເລີ່ມ",
+                "startTime": "ເວລາເລີ່ມຕົ້ນ",
+                "endDate": "ວັນທີສິ້ນສຸດ",
+                "endTime": "ເວລາສິ້ນສຸດ",
+                "budget": "ງົບປະມານ"
+            },
+            "interests": {
+                "Title": "ກັ່ນຕອງຕາມຄວາມສົນໃຈ",
+                "FilterInterests": "ເລີ່ມພິມຄວາມສົນໃຈ ..."
+            },
+            "Interest": "ດອກເບ້ຍ",
+            "Location": "ສະຖານທີ່"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "ໄປ",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "ຊອກຫາ",
+            "WriteToStartConversation": "ຂຽນຄວາມຄິດຂອງເຈົ້າເພື່ອເລີ່ມການສົນທະນາ",
+            "StartConversation": "ເລີ່ມການສົນທະນາ",
+            "GotoConversation": "ໄປທີ່ການສົນທະນາ",
+            "reset": "ຣີເຊັດ",
+            "edit": "ແກ້ໄຂ",
+            "link": "ການເຊື່ອມຕໍ່",
+            "setUrl": "ກໍານົດ URL",
+            "save": "ບັນທຶກ",
+            "setClip": "ຕັດອອກຄລິບ",
+            "invalidURL": "URL ບໍ່ຖືກຕ້ອງ"
+        },
+        "FileTooLarge": "ໄຟລ large ໃຫຍ່ເກີນໄປ ສຳ ລັບແຄດ. ຂະ ໜາດ ໄຟລ Max ສູງສຸດ {{size}}",
+        "InvalidPDF": "ໄຟລ is ບໍ່ແມ່ນ PDF ທີ່ຖືກຕ້ອງ",
+        "StartTypingTitleOrKeywords": "ເລີ່ມພິມຊື່ຫຼືຄີເວີດ ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "ເອກະສານ HTML ທີ່ຜູ້ໃຊ້ຕ່າງ can ສາມາດເບິ່ງແລະແກ້ໄຂໄດ້",
+            "displayType": "ມາດຕາ"
+        },
+        "Websites\/slide": {
+            "description": "ສະໄລ້ໃນບົດ ນຳ ສະ ເໜີ, ສາມາດລວມມີ HTML, ສຽງແລະອື່ນ.",
+            "displayType": "ສະໄລ້"
+        },
+        "Websites\/presentation": {
+            "description": "ບົດ ນຳ ສະ ເໜີ ທີ່ປະກອບດ້ວຍສະໄລ້ຕ່າງ various",
+            "displayType": "ການນໍາສະເຫນີ"
+        },
+        "Websites\/advert\/unit": {
+            "description": "ໜ່ວຍ ໂຄສະນາຢູ່ໃນເວັບໄຊທ",
+            "displayType": "ໜ່ວຍ ໂຄສະນາ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "ວິທີການຈັດກຸ່ມ ໜ່ວຍ ໂຄສະນາພາຍໃຕ້ຊື່",
+            "displayType": "ການວາງ ຕຳ ແໜ່ງ ໂຄສະນາ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "ເນື້ອຫາສໍາລັບການໂຄສະນາ",
+            "displayType": "ໂຄສະນາສ້າງສັນ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "ການໂຄສະນາ",
+            "displayType": "ການໂຄສະນາ"
+        },
+        "Websites\/webpage": {
+            "description": "ເປັນຕົວແທນຂອງເວັບໄຊທ whose ທີ່ມີການລຶບຂໍ້ມູນເມຕາດາ",
+            "displayType": "ຫນ້າ​ເວັບ"
+        }
+    }
+}

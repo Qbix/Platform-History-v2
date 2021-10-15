@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "فروغ ڏيڻ لاءِ لنڪ",
+                "startDate": "شروعاتي تاريخ",
+                "startTime": "شروعاتي وقت",
+                "endDate": "ختم ٿيڻ جي تاريخ",
+                "endTime": "آخري وقت",
+                "budget": "بجيٽ"
+            },
+            "interests": {
+                "Title": "دلچسپيءَ سان فلٽر ڪريو",
+                "FilterInterests": "دلچسپي لکڻ شروع ڪريو ..."
+            },
+            "Interest": "دلچسپي",
+            "Location": "جھ"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "و",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "براؤز ڪريو",
+            "WriteToStartConversation": "گفتگو شروع ڪرڻ لاءِ پنھنجا خيال لکو",
+            "StartConversation": "گفتگو شروع ڪريو",
+            "GotoConversation": "و Goو گفتگوءَ ڏانھن",
+            "reset": "ري سيٽ ڪريو",
+            "edit": "تبديلي آڻيو",
+            "link": "ن",
+            "setUrl": "URL سيٽ ڪريو",
+            "save": "بچايو",
+            "setClip": "ڪٽ آئوٽ ڪلپ",
+            "invalidURL": "غلط URL"
+        },
+        "FileTooLarge": "فائل ڪيش ڪرڻ لاءِ تمام وڏي آھي. و Max ۾ و file فائيل سائيز {{size}}",
+        "InvalidPDF": "فائل صحيح PDF ناھي",
+        "StartTypingTitleOrKeywords": "شروع ڪريو عنوان يا لفظ لکڻ."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "ھڪڙو HTML دستاويز جيڪو مختلف استعمال ڪندڙ ڏسي ۽ تدوين ڪري سگھن ٿا",
+            "displayType": "آرٽيڪل"
+        },
+        "Websites\/slide": {
+            "description": "ھڪڙي سلائيڊ ھڪڙي پيشڪش ۾ ، شامل ڪري سگھي ٿي HTML ، آڊيو وغيره.",
+            "displayType": "سلائيڊ"
+        },
+        "Websites\/presentation": {
+            "description": "هڪ پيشڪش جنهن ۾ مختلف سلائيڊون شامل آهن",
+            "displayType": "پيشڪش"
+        },
+        "Websites\/advert\/unit": {
+            "description": "هڪ اشتهارسازي يونٽ هڪ ويب سائيٽ تي",
+            "displayType": "اشتھار يونٽ"
+        },
+        "Websites\/advert\/placement": {
+            "description": "ھڪڙي نالي سان اشتهارن جي يونٽن کي گروھ ڪرڻ جو طريقو",
+            "displayType": "اشتھار جي جھ"
+        },
+        "Websites\/advert\/creative": {
+            "description": "اشتهار لاءِ مواد",
+            "displayType": "اشتھار تخليقي"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "هڪ اشتهاري مهم",
+            "displayType": "اشتهار مهم"
+        },
+        "Websites\/webpage": {
+            "description": "نمائندگي ڪري ٿي ھڪڙي ويب سائيٽ جنھن جو ميٽاداٽ ختم ڪيو ويو ھو",
+            "displayType": "ويب پيج"
+        }
+    }
+}

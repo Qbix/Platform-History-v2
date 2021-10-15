@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tap air pàigheadh"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: cosgais air a phròiseasadh airson {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tapadh leibh airson do phàigheadh gu {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Tha {{call 'user.displayName'}} fo-sgrìobhadh do {{plan.title}}",
+        "YouSubscribedTo": "Tha thu air fo-sgrìobhadh gu {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Gheibh thu pàigheadh de {{displayAmount}} bho {{call 'publisher.displayName'}} le &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, tha seo dìreach airson fios a leigeil dhut gu bheil {{1}} air {{2}} airson {{3}} le {{4}}"
+    },
+    "charged": {
+        "Subject": "Tapadh leibh airson do phàigheadh airson &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, chan eil an seo ach dearbhadh sgiobalta gu bheil thu air {{2}} a phàigheadh gu {{3}} airson {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Fiosrachadh mu òrdugh",
+        "PaymentMethod": "Modh pàighidh",
+        "ContactInfo": "Fiosrachadh conaltraidh",
+        "Pay": "Pàigh"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Cuireadh air gabhail ris le {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Tha {{amount}} creideas agad airson tòiseachadh",
+        "PaymentFor": "Pàigheadh airson &quot;{{1}}&quot;",
+        "PaymentTo": "Pàigheadh gu {{1}}",
+        "PaymentToUser": "Pàigheadh gu {{toUserName}}",
+        "CreatePaidStream": "airson cruthachadh {{toStreamName}}",
+        "JoinedPaidStream": "airson glèidhte ann an &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "airson coimhearsnachd a chruthachadh &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "mar ath-dhìoladh glèidhte ann an &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Cheannaich {{amount}} creideas",
+        "BonusCredits": "Creideasan bònas {{amount}}",
+        "BuyAmountCredits": "Ceannaich {{amount}} creideas",
+        "WatchClip": "Creideasan {{amount}} air a chosnadh airson a bhith a ’coimhead {{fromStreamTitle}}",
+        "MissingCredits": "Creideasan a dhìth",
+        "YouMissingCredits": "Feumaidh tu {{amount}} creideas a bharrachd gus a dhol air adhart.",
+        "BuyCredits": "Ceannaich creideasan",
+        "BuyBonus": "Ma cheannaicheas tu {{amount}} creideas aig an aon àm, thig {{bonus}} bònas creideas.",
+        "Buy": "Ceannaich",
+        "PurchaseCredits": "Creideasan Ceannach",
+        "Credits": "Creideasan",
+        "ErrorInvalidAmount": "Meud neo-dhligheach",
+        "ErrorInvalidCurrency": "Gu mì-fhortanach chan eil sinn a ’toirt taic do airgead {{currency}} fhathast",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} creideas",
+            "BonusCredits": "{{amount}} creideas"
+        }
+    },
+    "history": {
+        "Date": "Ceann-latha",
+        "Amount": "Meud",
+        "Description": "Tuairisgeul",
+        "Client": "Cliant",
+        "To": "gu",
+        "From": "bho",
+        "SeeHistory": "Faic eachdraidh pàighidh airson {{1}}",
+        "HistoryEmpty": "Chan eil dàta agad fhathast",
+        "PaymentFor": "Chuir {{amount}} creideas",
+        "PaymentTo": "Chuir {{amount}} creideas",
+        "PaymentToUser": "Chuir {{amount}} creideas",
+        "CreatePaidStream": "Creideas caithte {{amount}}",
+        "WatchClip": {
+            "+": "Creideasan air a chosnadh {{amount}}",
+            "-": "Creideas caithte {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Creideasan air a chosnadh {{amount}}",
+            "-": "Creideas caithte {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Fhuair {{amount}} creideas",
+            "-": "Chuir {{amount}} creideas"
+        },
+        "CreatedCommunity": "Creideas caithte {{amount}}",
+        "BoughtCredits": "Cheannaich {{amount}} creideas",
+        "BonusCredits": "Fhuair bònas {{amount}} creideas",
+        "InviteAcceptedBy": "Creideasan air a chosnadh {{amount}}",
+        "YouHaveCreditsToStart": "Creideasan air a chosnadh {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Suidhich fiosrachadh pàighidh",
+        "confirm": {
+            "title": "Tòisich fo-sgrìobhadh",
+            "message": "Am bu mhath leat fo-sgrìobhadh gu {{title}}?",
+            "ok": "Ceart gu leòr",
+            "cancel": "Sguir dheth"
+        },
+        "CreditOrDebitCard": "Cairt creideis no cunntais",
+        "SubscribePayment": "Pàigheadh ballrachd",
+        "ImmediatePayment": "Pàigheadh sa bhad"
+    },
+    "payments": {
+        "infoTitle": "Suidhich fiosrachadh pàighidh",
+        "BuyAmountCredits": "Ceannaich {{amount}} creideas",
+        "confirm": {
+            "title": "Dèan Pàigheadh",
+            "message": "A bheil thu ag aontachadh {{symbol}} a phàigheadh {{amount}}?",
+            "ok": "Ceart gu leòr",
+            "cancel": "Sguir dheth"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Creideasan",
+            "description": "a ’cumail sùil air creideasan agus pàighidhean"
+        },
+        "Assets\/plan": {
+            "displayType": "Plana Subsription",
+            "description": "plana ballrachd"
+        },
+        "Assets\/subscription": {
+            "displayType": "Fo-sgrìobhadh",
+            "description": "ballrachd"
+        },
+        "Assets\/product": {
+            "displayType": "Bathar",
+            "description": "toradh ga reic"
+        },
+        "Assets\/service": {
+            "displayType": "Seirbheis",
+            "description": "seirbheis ga thabhann"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Creideasan air a chosnadh {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Cheannaich {{amount}} creideas"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Creideasan bònas {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Creideas caithte {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Chuir {{amount}} creideas gu {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Fhuair {{amount}} creideas bho {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Seirbheis ùr",
+            "TitlePlaceholder": "Tiotal seirbheis",
+            "PricePlaceholder": "Prìs suidhichte",
+            "LinkPlaceholder": "suidhich ceangal fiosrachaidh a bharrachd",
+            "DescriptionPlaceholder": "Tuairisgeul seirbheis",
+            "SaveService": "Seirbheis Sàbhail",
+            "SelectRequiredParticipants": "Com-pàirtichean a tha a dhìth"
+        },
+        "ManageServiceTemplates": "Stiùirich teamplaidean seirbheis",
+        "ManageServices": "Stiùirich Seirbheisean",
+        "Free": "An-asgaidh",
+        "OptionalContribution": "Tabhartas roghainneil",
+        "RequiredPayment": "Pàigheadh a tha a dhìth",
+        "AreYouSureDelete": "A bheil thu cinnteach gu bheil thu airson an t-seirbheis seo a dhubhadh às?",
+        "AmountServicesRelated": "Tha {{amount}} ri fhaighinn co-cheangailte ris an t-seirbheis seo. Thèid an toirt air falbh cuideachd."
+    }
+}

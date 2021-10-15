@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Dawata ang Mga Termino sa Pag-alagad?",
         "facebookNoEmail": "Nawala ang imong facebook account sa usa ka nakumpirma nga email address. Pag-log in sa lumad nga paagi.",
-        "picTooltip": "Mahimo nimo nga usbon kini nga litrato sa ulahi"
+        "picTooltip": "Mahimo nimo nga usbon kini nga litrato sa ulahi",
+        "wallet": {
+            "payload": "Pag-log in sa {{host}} sa oras nga {{timestamp}}",
+            "alert": {
+                "title": "Pagdiretso sa Wallet",
+                "content": "Sa higayon nga imong gisirhan kini nga dayalogo, dad-on ka sa imong pitaka. Pagkahuman sa imong pag-sign in, pagbalik sa kini nga panid."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Pagdugang usa ka paagi aron maka-log in",
@@ -108,6 +115,18 @@
         "Owner": "Tag-iya",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Bisita"
+        "Guest": "Bisita",
+        "Host": "Tagbalay"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Adlaw-adlaw",
+        "Weekly": "Matag semana",
+        "Monthly": "Binulan",
+        "Application": "Pag-aplay",
+        "Pages": "Mga panid",
+        "Services": "Mga serbisyo",
+        "Faq": "Faq",
+        "WeekDays": "Mga Adlaw sa Semana"
     }
 }

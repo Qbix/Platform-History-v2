@@ -14,7 +14,8 @@
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {string} [options.className] Additional class name to add to tool element
- *  @param {object} [options.metrics=null] Params for State.Metrics (publisherId and streamName required)
+ *  @param {object} [options.metrics] Params for State.Metrics (publisherId and streamName required)
+ *  @param {string} [options.poster] URL of video poster
  *  @param {object} [options.clips] Contains options for "clips" mode.
  *  @param {function} [options.clips.handler] The main option which return clip url for some timestamp. If it null - means mode is not "clips"
  *  @param {integer} [options.clips.duration] Clips duration in seconds. If defined the clips will play this fixed duration. If null clips will play till the end.
@@ -235,6 +236,7 @@ Q.Tool.define("Q/video", function (options) {
 	throttle: 10,
 	currentPosition: 0,
 	className: null,
+	poster: null,
 	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
@@ -421,6 +423,7 @@ Q.Tool.define("Q/video", function (options) {
 		Q.Template.render('Q/video/videojs', {
 			autoplay: state.autoplay ? 'autoplay' : '',
 			loop: state.loop ? 'loop' : '',
+			poster: state.poster ? 'poster="' + Q.url(state.poster) + '"' : '',
 			timeOut: state.adsTimeOut
 		}, function (err, html) {
 			tool.element.innerHTML = html;
@@ -1020,7 +1023,7 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} playsinline webkit-playsinline />'
+	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} {{poster}} playsinline webkit-playsinline />'
 );
 
 Q.Template.set("Q/video/skip",

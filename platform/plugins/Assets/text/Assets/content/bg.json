@@ -36,8 +36,12 @@
         "WatchClip": "Спечелени {{amount}} кредита за гледане на {{fromStreamTitle}}",
         "PurchaseCredits": "Кредити за покупка",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредити"
-        }
+            "BoughtCredits": "{{amount}} кредити",
+            "BonusCredits": "{{amount}} кредити"
+        },
+        "CreatePaidStream": "за създаване на {{toStreamName}}",
+        "BonusCredits": "Бонус {{amount}} кредита",
+        "BuyBonus": "Закупуването на {{amount}} кредита наведнъж ще доведе до {{bonus}} бонуса за кредити."
     },
     "history": {
         "Date": "Дата",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Похарчени {{amount}} кредити",
         "BoughtCredits": "Закупени {{amount}} кредити",
         "InviteAcceptedBy": "Спечелени {{amount}} кредити",
-        "YouHaveCreditsToStart": "Спечелени {{amount}} кредити"
+        "YouHaveCreditsToStart": "Спечелени {{amount}} кредити",
+        "CreatePaidStream": "Похарчени {{amount}} кредита",
+        "WatchClip": {
+            "+": "Спечелени {{amount}} кредита",
+            "-": "Похарчени {{amount}} кредита"
+        },
+        "BonusCredits": "Получих бонус {{amount}} кредита"
     },
     "subscriptions": {
         "infoTitle": "Задайте информация за плащане",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Закупени {{amount}} кредити"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонус {{amount}} кредита"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Задайте цена",
             "LinkPlaceholder": "задайте допълнителна информационна връзка",
             "DescriptionPlaceholder": "Описание на услугата",
-            "SaveService": "Запазване на услугата"
+            "SaveService": "Запазване на услугата",
+            "SelectRequiredParticipants": "Задължителни участници"
         },
         "ManageServiceTemplates": "Управление на сервизните шаблони",
         "ManageServices": "Управление на услугите",

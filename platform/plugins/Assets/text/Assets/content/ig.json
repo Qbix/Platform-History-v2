@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Pịa iji kwụọ ụgwọ"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: a haziri ụgwọ maka {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Daalụ maka ịkwụ ụgwọ gị na {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} denyere aha na {{plan.title}}",
+        "YouSubscribedTo": "Edebanyela aha gị na {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Ị nweta ụgwọ nke {{displayAmount}} site na {{call 'publisher.displayName'}} site na &#39;{{description}}&#39; &#39;",
+        "HasBeenCharged": "Ehee, nke a bụ iji mee ka ị mara {{1}} akwụla ụgwọ {{2}} maka {{3}} site na {{4}}"
+    },
+    "charged": {
+        "Subject": "Daalụ maka ịkwụ ụgwọ gị maka &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, nke a bụ naanị nkwenye ngwa ngwa na ị kwụọla ụgwọ {{2}} nke ọma na {{3}} maka {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Ozi gbasara ịtụ",
+        "PaymentMethod": "Ụzọ nkwụnye ụgwọ",
+        "ContactInfo": "Ama kọntaktị",
+        "Pay": "Kwụọ ụgwọ"
+    },
+    "credits": {
+        "InviteAcceptedBy": "{{invitedUserName}} nabatara ịkpọ oku",
+        "YouHaveCreditsToStart": "Ị nwere kredit {{amount}} ịmalite",
+        "PaymentFor": "Ịkwụ ụgwọ maka &quot;{{1}}&quot;",
+        "PaymentTo": "Ịkwụ ụgwọ nye {{1}}",
+        "PaymentToUser": "Ịkwụ ụgwọ nye {{toUserName}}",
+        "CreatePaidStream": "maka imepụta {{toStreamName}}",
+        "JoinedPaidStream": "maka ndoputa na &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "maka ịmepụta obodo &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "dị ka nkwụghachi nkwụghachi ụgwọ na &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Zụtara kredit {{amount}}",
+        "BonusCredits": "Ego nzere {{amount}}",
+        "BuyAmountCredits": "Zụrụ kredit {{amount}}",
+        "WatchClip": "Enwetara nzere {{amount}} maka ilele {{fromStreamTitle}}",
+        "MissingCredits": "Ebe E Si Nweta efu",
+        "YouMissingCredits": "Ị ga -achọ kredit {{amount}} ọzọ ka ịga n&#39;ihu.",
+        "BuyCredits": "Zụrụ kredit",
+        "BuyBonus": "Ịzụta kredit {{amount}} n&#39;otu oge, ga -eduga na {{bonus}} kredit kredit.",
+        "Buy": "Zụrụ",
+        "PurchaseCredits": "Ịzụta Ebe E Si Nweta",
+        "Credits": "Ebe E Si Nweta",
+        "ErrorInvalidAmount": "Ọnụ ego adabaghị",
+        "ErrorInvalidCurrency": "Ọ dị nwute na anyị anaghị akwado ego {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "Kredit {{amount}}",
+            "BonusCredits": "Kredit {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Ụbọchị",
+        "Amount": "Ọnụ ego",
+        "Description": "Nkọwa",
+        "Client": "Onye ahịa",
+        "To": "na",
+        "From": "site",
+        "SeeHistory": "Hụ akụkọ ịkwụ ụgwọ maka {{1}}",
+        "HistoryEmpty": "Ị nweghị data ma",
+        "PaymentFor": "Ezitere kredit {{amount}}",
+        "PaymentTo": "Ezitere kredit {{amount}}",
+        "PaymentToUser": "Ezitere kredit {{amount}}",
+        "CreatePaidStream": "Emefuru kredit {{amount}}",
+        "WatchClip": {
+            "+": "Kredit nwetara {{amount}}",
+            "-": "Emefuru kredit {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Kredit nwetara {{amount}}",
+            "-": "Emefuru kredit {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Enwetara kredit {{amount}}",
+            "-": "Ezitere kredit {{amount}}"
+        },
+        "CreatedCommunity": "Emefuru kredit {{amount}}",
+        "BoughtCredits": "Zụtara kredit {{amount}}",
+        "BonusCredits": "Enwetara m nzere {{amount}}",
+        "InviteAcceptedBy": "Kredit nwetara {{amount}}",
+        "YouHaveCreditsToStart": "Kredit nwetara {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Nịm Ozi Ịkwụ Ụgwọ",
+        "confirm": {
+            "title": "Malite ndebanye aha",
+            "message": "Ọ ga -amasị gị ịdebanye aha na {{title}}?",
+            "ok": "Ọ DỊ MMA",
+            "cancel": "Kagbuo"
+        },
+        "CreditOrDebitCard": "Kaadị kredit ma ọ bụ debit",
+        "SubscribePayment": "Idenye aha Ịkwụ Ụgwọ",
+        "ImmediatePayment": "Ịkwụ ụgwọ ozugbo"
+    },
+    "payments": {
+        "infoTitle": "Nịm Ozi Ịkwụ Ụgwọ",
+        "BuyAmountCredits": "Zụrụ kredit {{amount}}",
+        "confirm": {
+            "title": "Mee ugwo",
+            "message": "Ị kwenyere ịkwụ ụgwọ {{symbol}} {{amount}}?",
+            "ok": "Ọ DỊ MMA",
+            "cancel": "Kagbuo"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Ebe E Si Nweta",
+            "description": "na -edekọ kredit na ịkwụ ụgwọ"
+        },
+        "Assets\/plan": {
+            "displayType": "Atụmatụ ntinye ego",
+            "description": "atụmatụ ndenye aha"
+        },
+        "Assets\/subscription": {
+            "displayType": "Ịdenye aha",
+            "description": "ndenye aha"
+        },
+        "Assets\/product": {
+            "displayType": "Ngwaahịa",
+            "description": "a na -ere ngwaahịa"
+        },
+        "Assets\/service": {
+            "displayType": "Ọrụ",
+            "description": "ọrụ a na -enye"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Kredit nwetara {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Zụtara kredit {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Ego nzere {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Emefuru kredit {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Ezitere {999}} kredit na {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Enwetara kredit {{amount}} n&#39;aka {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Ozi Ọhụrụ",
+            "TitlePlaceholder": "Aha ọrụ",
+            "PricePlaceholder": "Tọọ ọnụahịa",
+            "LinkPlaceholder": "tọọ njikọ ozi ọzọ",
+            "DescriptionPlaceholder": "Nkọwa ọrụ",
+            "SaveService": "Chekwa Ọrụ",
+            "SelectRequiredParticipants": "Ndị sonyere achọrọ"
+        },
+        "ManageServiceTemplates": "Jikwaa ndebiri ọrụ",
+        "ManageServices": "Jikwaa Ọrụ",
+        "Free": "Free",
+        "OptionalContribution": "Ntinye nhọrọ",
+        "RequiredPayment": "Ịkwụ ụgwọ achọrọ",
+        "AreYouSureDelete": "Ị ji n&#39;aka na ị chọrọ ihichapụ ọrụ a?",
+        "AmountServicesRelated": "Enwere ohere {{amount}} metụtara ọrụ a. A ga -ewepụkwa ha."
+    }
+}

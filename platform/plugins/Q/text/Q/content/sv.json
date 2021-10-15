@@ -117,7 +117,10 @@
         "SetClipStart": "Ställ in Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Ställ in klippänden",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Startposition kan inte vara mer än slutposition",
+        "EndLessStart": "Slutposition kan inte vara mindre än startposition",
+        "WhichInvalid": "Argumentet &#39;vilket&#39; är ogiltigt"
     },
     "durations": {
         "second": "andra",

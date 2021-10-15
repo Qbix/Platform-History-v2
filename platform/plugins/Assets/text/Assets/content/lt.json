@@ -36,8 +36,12 @@
         "WatchClip": "Uždirbote {{amount}} kreditą už žiūrėjimą {{fromStreamTitle}}",
         "PurchaseCredits": "Pirkite kreditus",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kreditų"
-        }
+            "BoughtCredits": "{{amount}} kreditų",
+            "BonusCredits": "{{amount}} kreditų"
+        },
+        "CreatePaidStream": "sukurti {{toStreamName}}",
+        "BonusCredits": "Premija {{amount}} kreditų",
+        "BuyBonus": "Perkant {{amount}} kreditų vienu metu, gausite {{bonus}} kreditų premiją."
     },
     "history": {
         "Date": "Data",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Panaudoti {{amount}} kreditai",
         "BoughtCredits": "Nupirko {{amount}} kreditų",
         "InviteAcceptedBy": "Uždirbti {{amount}} kreditai",
-        "YouHaveCreditsToStart": "Uždirbti {{amount}} kreditai"
+        "YouHaveCreditsToStart": "Uždirbti {{amount}} kreditai",
+        "CreatePaidStream": "Išleista {{amount}} kreditų",
+        "WatchClip": {
+            "+": "Uždirbta {{amount}} kreditų",
+            "-": "Išleista {{amount}} kreditų"
+        },
+        "BonusCredits": "Gavote premiją {{amount}} kreditų"
     },
     "subscriptions": {
         "infoTitle": "Nustatykite mokėjimo informaciją",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Nupirko {{amount}} kreditų"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Premija {{amount}} kreditų"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Nustatykite kainą",
             "LinkPlaceholder": "nustatyti papildomos informacijos saitą",
             "DescriptionPlaceholder": "Aptarnavimo Aprašymas",
-            "SaveService": "Išsaugoti paslaugą"
+            "SaveService": "Išsaugoti paslaugą",
+            "SelectRequiredParticipants": "Reikalingi dalyviai"
         },
         "ManageServiceTemplates": "Tvarkykite paslaugų šablonus",
         "ManageServices": "Valdyti paslaugas",

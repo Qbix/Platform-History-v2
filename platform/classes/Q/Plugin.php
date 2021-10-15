@@ -807,7 +807,7 @@ EOT;
 		echo "Installing composer packages into $dir".DS."vendor\n";
 		$cwd = getcwd();
 		chdir($dir);
-		shell_exec("composer install");
+		shell_exec("composer install --ignore-platform-reqs");
 		chdir($cwd);
 		return true;
 	}

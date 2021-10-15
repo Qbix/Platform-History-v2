@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Mag-tap upang magbayad"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: naproseso ang singil para sa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Salamat sa iyong pagbabayad sa {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Nag-subscribe ang {{call 'user.displayName'}} sa {{plan.title}}",
+        "YouSubscribedTo": "Na-subscribe ka sa {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Makakatanggap ka ng bayad na {{displayAmount}} mula sa {{call 'publisher.displayName'}} ni &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, ito ay upang ipaalam lamang sa iyo na {{1}} sinisingil ng {{2}} para sa {{3}} ni {{4}}"
+    },
+    "charged": {
+        "Subject": "Salamat sa iyong pagbabayad para sa &quot;{{description}}&quot;",
+        "HavePaid": "Hoy {{1}}, isa lamang itong mabilis na kumpirmasyon na matagumpay mong nabayaran ang {{2}} kay {{3}} para sa {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Impormasyon tungkol sa order",
+        "PaymentMethod": "Paraan ng Pagbayad",
+        "ContactInfo": "Impormasyon sa pakikipag-ugnay",
+        "Pay": "Magbayad"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Tinanggap ng paanyaya ni {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Mayroon kang mga kredito na {{amount}} upang magsimula",
+        "PaymentFor": "Pagbabayad para sa &quot;{{1}}&quot;",
+        "PaymentTo": "Pagbabayad sa {{1}}",
+        "PaymentToUser": "Pagbabayad sa {{toUserName}}",
+        "CreatePaidStream": "para sa paglikha ng {{toStreamName}}",
+        "JoinedPaidStream": "para sa pagpapareserba sa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "para sa paglikha ng komunidad na &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "bilang refund ng reservation sa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Bumili ng mga kredito sa {{amount}}",
+        "BonusCredits": "Mga kredito ng bonus na {{amount}}",
+        "BuyAmountCredits": "Bumili ng mga kredito ng {{amount}}",
+        "WatchClip": "Kumita ng mga kredito sa {{amount}} para sa panonood ng {{fromStreamTitle}}",
+        "MissingCredits": "Nawawalang Mga Kredito",
+        "YouMissingCredits": "Kailangan mo ng karagdagang mga kredito na {{amount}} upang magpatuloy.",
+        "BuyCredits": "Bumili ng mga kredito",
+        "BuyBonus": "Ang pagbili ng mga kredito na {{amount}} nang sabay-sabay, ay hahantong sa {{bonus}} na mga credit bonus.",
+        "Buy": "Bumili",
+        "PurchaseCredits": "Bumili ng Mga Kredito",
+        "Credits": "Mga Kredito",
+        "ErrorInvalidAmount": "Di-wasto ang halaga",
+        "ErrorInvalidCurrency": "Sa kasamaang palad hindi pa namin sinusuportahan ang currency na {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "Mga kredito ng {{amount}}",
+            "BonusCredits": "Mga kredito ng {{amount}}"
+        }
+    },
+    "history": {
+        "Date": "Petsa",
+        "Amount": "Halaga",
+        "Description": "Paglalarawan",
+        "Client": "Kliyente",
+        "To": "sa",
+        "From": "mula sa",
+        "SeeHistory": "Tingnan ang kasaysayan ng pagbabayad para sa {{1}}",
+        "HistoryEmpty": "Wala ka pang data",
+        "PaymentFor": "Nagpadala ng {{amount}} na mga kredito",
+        "PaymentTo": "Nagpadala ng {{amount}} na mga kredito",
+        "PaymentToUser": "Nagpadala ng {{amount}} na mga kredito",
+        "CreatePaidStream": "Nagastos ang mga kredito na {{amount}}",
+        "WatchClip": {
+            "+": "Kumita ng mga kredito na {{amount}}",
+            "-": "Nagastos ang mga kredito na {{amount}}"
+        },
+        "JoinedPaidStream": {
+            "+": "Kumita ng mga kredito na {{amount}}",
+            "-": "Nagastos ang mga kredito na {{amount}}"
+        },
+        "LeftPaidStream": {
+            "+": "Nakatanggap ng mga kredito ng {{amount}}",
+            "-": "Nagpadala ng {{amount}} na mga kredito"
+        },
+        "CreatedCommunity": "Nagastos ang mga kredito na {{amount}}",
+        "BoughtCredits": "Bumili ng mga kredito sa {{amount}}",
+        "BonusCredits": "Nakakuha ng mga kredito ng bonus na {{amount}}",
+        "InviteAcceptedBy": "Kumita ng mga kredito na {{amount}}",
+        "YouHaveCreditsToStart": "Kumita ng mga kredito na {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
+        "confirm": {
+            "title": "Simulan ang Subscription",
+            "message": "Nais mo bang mag-subscribe sa {{title}}?",
+            "ok": "OK lang",
+            "cancel": "Kanselahin"
+        },
+        "CreditOrDebitCard": "Credit o debit card",
+        "SubscribePayment": "Mag-subscribe Bayad",
+        "ImmediatePayment": "Agarang Pagbabayad"
+    },
+    "payments": {
+        "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
+        "BuyAmountCredits": "Bumili ng mga kredito ng {{amount}}",
+        "confirm": {
+            "title": "Magbayad",
+            "message": "Sumasang-ayon ka bang magbayad ng {{symbol}} {{amount}}?",
+            "ok": "OK lang",
+            "cancel": "Kanselahin"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Mga Kredito",
+            "description": "sinusubaybayan ang mga kredito at pagbabayad"
+        },
+        "Assets\/plan": {
+            "displayType": "Plano ng Subsr ngirim",
+            "description": "plano ng subscription"
+        },
+        "Assets\/subscription": {
+            "displayType": "Subscription",
+            "description": "subscription"
+        },
+        "Assets\/product": {
+            "displayType": "Produkto",
+            "description": "ipinagbibiling produkto"
+        },
+        "Assets\/service": {
+            "displayType": "Serbisyo",
+            "description": "inaalok na serbisyo"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Kumita ng mga kredito na {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Bumili ng mga kredito sa {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Mga kredito ng bonus na {{amount}}"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Nagastos ang mga kredito na {{amount}}"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Nagpadala ng {{amount}} na mga kredito sa {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Nakatanggap ng mga kredito ng {{amount}} mula sa {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Bagong Serbisyo",
+            "TitlePlaceholder": "Pamagat ng serbisyo",
+            "PricePlaceholder": "Itakda ang presyo",
+            "LinkPlaceholder": "magtakda ng karagdagang link ng impormasyon",
+            "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
+            "SaveService": "I-save ang Serbisyo",
+            "SelectRequiredParticipants": "Mga Kinakailangan na Kalahok"
+        },
+        "ManageServiceTemplates": "Pamahalaan ang Mga Template ng Serbisyo",
+        "ManageServices": "Pamahalaan ang Mga Serbisyo",
+        "Free": "Libre",
+        "OptionalContribution": "Opsyonal na kontribusyon",
+        "RequiredPayment": "Kinakailangan na pagbabayad",
+        "AreYouSureDelete": "Sigurado ka bang nais mong tanggalin ang serbisyong ito?",
+        "AmountServicesRelated": "Mayroong {{amount}} mga kakayahang magamit na nauugnay sa serbisyong ito. Ang mga ito rin ay aalisin."
+    }
+}

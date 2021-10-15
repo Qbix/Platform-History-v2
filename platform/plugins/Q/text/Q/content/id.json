@@ -113,7 +113,10 @@
         "SetClipStart": "Setel Mulai Klip",
         "ClipStart": "Klip Mulai",
         "SetClipEnd": "Setel Akhir Klip",
-        "ClipEnd": "Klip Akhir"
+        "ClipEnd": "Klip Akhir",
+        "StartMoreEnd": "Posisi awal tidak boleh lebih dari posisi akhir",
+        "EndLessStart": "Posisi akhir tidak boleh kurang dari posisi awal",
+        "WhichInvalid": "Argumen &#39;yang&#39; tidak valid"
     },
     "tabs": {
         "more": "lebih",

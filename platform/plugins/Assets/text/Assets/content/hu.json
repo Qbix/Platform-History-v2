@@ -36,8 +36,12 @@
         "WatchClip": "Kért {{amount}} kreditet a (z) {{fromStreamTitle}} megtekintéséért",
         "PurchaseCredits": "Vásároljon krediteket",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredit"
-        }
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        },
+        "CreatePaidStream": "létrehozásához {{toStreamName}}",
+        "BonusCredits": "Bónusz {{amount}} kredit",
+        "BuyBonus": "Ha egyszerre {{amount}} kreditet vásárol, {{bonus}} kreditet kap."
     },
     "history": {
         "Date": "Dátum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Kihasznált {{amount}} kredit",
         "BoughtCredits": "Vásárolt {{amount}} kredit",
         "InviteAcceptedBy": "Keressen {{amount}} kredit",
-        "YouHaveCreditsToStart": "Keressen {{amount}} kredit"
+        "YouHaveCreditsToStart": "Keressen {{amount}} kredit",
+        "CreatePaidStream": "{{amount}} kreditet költött",
+        "WatchClip": {
+            "+": "{{amount}} kreditet szerzett",
+            "-": "{{amount}} kreditet költött"
+        },
+        "BonusCredits": "Bónusz {{amount}} kreditet kapott"
     },
     "subscriptions": {
         "infoTitle": "Állítsa be a fizetési információkat",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Vásárolt {{amount}} kredit"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bónusz {{amount}} kredit"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Állítsa be az árat",
             "LinkPlaceholder": "állítson be további információs linket",
             "DescriptionPlaceholder": "Szolgáltatás leírása",
-            "SaveService": "Szolgáltatás mentése"
+            "SaveService": "Szolgáltatás mentése",
+            "SelectRequiredParticipants": "Szükséges résztvevők"
         },
         "ManageServiceTemplates": "Szolgáltatási sablonok kezelése",
         "ManageServices": "Szolgáltatások kezelése",

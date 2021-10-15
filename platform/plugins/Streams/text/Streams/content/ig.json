@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Ndị m kpọrọ",
-        "Streams\/invitedMe": "Ònye kpọrọ m"
+        "Streams\/invitedMe": "Ònye kpọrọ m",
+        "AreYouAgree": "Ị kwenyere?",
+        "Yes": "Ee",
+        "No": "Mba"
     },
     "interests": {
         "Filter": "Kedu ihe na-atọ gị ụtọ?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ma ọ bụrụ na nyochapụrụ koodu ahụ",
-            "copyLink": "{{ClickOrTap}} idetuo njikọ njikọ"
+            "copyLink": "{{ClickOrTap}} idetuo njikọ njikọ",
+            "userChooserPlaceholder": "Chọọ n&#39;aha"
         },
         "email": {
             "subject": "Hey, lelee nke a",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Onye so na ya enweghị vidiyo",
             "openInBrowserAlert": "Mepee njikọ na ihe nchọgharị Safari iji sonyere ogbako ahụ.",
             "youBeganVideoRecording": "Began malitere idekọ ogbako a",
-            "youStoppedVideoRecording": "Kwụsịrị idekọ ogbako a"
+            "youStoppedVideoRecording": "Kwụsịrị idekọ ogbako a",
+            "switchingRoom": "Ụlọ na -agbanwe ...",
+            "forceDisconnecting": "A ga -ewepụ gị n&#39;ime sekọnd 5",
+            "youStartedLive": "Ị malitere ịgbasa oku a na RTMP omenala",
+            "youStoppedLive": "Ị kwụsịrị ịgbasa oku a na RTMP omenala",
+            "sbStartedLiveStreaming": "{{userName}} malitere ndụ",
+            "sbStoppedLiveStreaming": "{{userName}} kwụsịrị ndụ",
+            "liveStopped": "Enwere mperi mgbe izipu vidiyo na ngwụcha"
         },
         "settingsPopup": {
             "webCamera": "Igwefoto weebụ",
@@ -192,7 +203,13 @@
             "stopRecording": "Kwụsị ndekọ",
             "recordingInProgress": "Ndekọ na-aga n&#39;ihu ...",
             "publishOnTimeline": "Mbipụta na usoro iheomume",
-            "publishToGroup": "Kwusaanụ otu"
+            "publishToGroup": "Kwusaanụ otu",
+            "turnOffAudioInput": "Gbanyụọ igwe okwu",
+            "micIsTurnedOff": "A na -agbanyụ igweokwu",
+            "start": "Malite",
+            "stop": "Kwụsị",
+            "streamingSettings": "Ntọala",
+            "streamToRTMP": "Gaa na RTMP omenala"
         },
         "participantsPopup": {
             "disconnect": "Kwupu",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "I nweghi ikike isonye na mmiri iyi a.",
         "streamTitle": "{{1}} oku di ndu",
         "preview": {
-            "preamble": "Nzukọ:"
+            "preamble": "Nzukọ:",
+            "Meeting": "Nzukọ",
+            "MeetingEnded": "Nzukọ a kwụsịrị"
+        },
+        "preparing": {
+            "micIsOff": "Igwe agbanyụla",
+            "micIsOn": "Mic nọ",
+            "cameraIsOff": "Agbanyụrụ igwefoto",
+            "cameraIsOn": "Igwefoto dị",
+            "screenSharingIsOn": "Agbanyere nseta ihuenyo",
+            "screenSharingIsOff": "Ekekọrịta ihuenyo",
+            "joinNow": "Jikọọ na oku"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Azịza",
             "description": "azịza iyi"
+        },
+        "Streams\/calls": {
+            "displayType": "Oku",
+            "description": "ụdị maka Streams\/webrtc",
+            "MaxRelationsExceeded": "Oke oku gafere"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Faịlụ na ezighi ezi",
         "errorNoSource": "Enweghị isi iyi onyonyo",
         "uploadLimit": "Ogo faịlụ kachasị: {{size}}",
-        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}"
+        "errorFileSize": "Ndo, ma faịlụ buru oke ibu.<br> Max file size bụ {{size}}",
+        "uploadedImage": "Ebugoro onyonyo",
+        "imageTitle": "Aha aha"
     },
     "questions": {
         "Questions": "Mme mbụme",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Azala ya",
         "TitlePlaceholder": "Pịnye ajụjụ gị",
         "ContentPlaceholder": "Tinye ozi ndị ọzọ ebe a iji nyere ndị mmadụ aka ịza",
-        "ErrorTitle": "Achọrọ ajụjụ"
+        "ErrorTitle": "Achọrọ ajụjụ",
+        "Placeholder": "Onye na -edebe ebe"
     },
     "experience": {
-        "NewExperience": "New Ahụmahụ"
+        "NewExperience": "New Ahụmahụ",
+        "DefineTitle": "Biko kọwaa aha",
+        "Create": "Mepụta"
+    },
+    "calls": {
+        "SettingsTitle": "Oku",
+        "MaxCalls": "Max na -akpọ",
+        "Update": "Melite",
+        "NoCallsYet": "Enweghị oku ọ bụla",
+        "CallReasonTitle": "Gịnị bụ oku a gbasara?",
+        "WaitingRoom": "Ime ụlọ na -echere"
     }
 }

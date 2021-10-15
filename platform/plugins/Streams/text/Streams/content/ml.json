@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "ഞാൻ ക്ഷണിച്ച ആളുകൾ",
-        "Streams\/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്"
+        "Streams\/invitedMe": "ആരാണ് എന്നെ ക്ഷണിച്ചത്",
+        "AreYouAgree": "നിങ്ങൾ സമ്മതിക്കുന്നുണ്ടോ?",
+        "Yes": "അതെ",
+        "No": "ഇല്ല"
     },
     "interests": {
         "Filter": "നിങ്ങൾ എന്താണ് ആസ്വദിക്കുന്നത്?",
@@ -80,7 +83,8 @@
             "byFacebook": "ഫേസ്ബുക്ക്",
             "byTwitter": "ട്വിറ്റർ",
             "scannedQR": "കോഡ് സ്കാൻ ചെയ്തിട്ടുണ്ടെങ്കിൽ {{ClickOrTap}}",
-            "copyLink": "ക്ഷണ ലിങ്ക് പകർത്താൻ {{ClickOrTap}}"
+            "copyLink": "ക്ഷണ ലിങ്ക് പകർത്താൻ {{ClickOrTap}}",
+            "userChooserPlaceholder": "പേരിൽ തിരയുക"
         },
         "email": {
             "subject": "ഹേയ്, ഇത് പരിശോധിക്കുക",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "പങ്കെടുക്കുന്നയാൾക്ക് വീഡിയോയില്ല",
             "openInBrowserAlert": "കോൺഫറൻസിൽ ചേരാൻ സഫാരി ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.",
             "youBeganVideoRecording": "നിങ്ങൾ ഈ കോൺഫറൻസ് റെക്കോർഡുചെയ്യാൻ തുടങ്ങി",
-            "youStoppedVideoRecording": "നിങ്ങൾ ഈ കോൺഫറൻസ് റെക്കോർഡുചെയ്യുന്നത് നിർത്തി"
+            "youStoppedVideoRecording": "നിങ്ങൾ ഈ കോൺഫറൻസ് റെക്കോർഡുചെയ്യുന്നത് നിർത്തി",
+            "switchingRoom": "റൂം മാറുന്നത് ...",
+            "forceDisconnecting": "5 സെക്കൻഡിനുള്ളിൽ നിങ്ങൾ വിച്ഛേദിക്കപ്പെടും",
+            "youStartedLive": "നിങ്ങൾ ഈ കോൾ കസ്റ്റം RTMP- ലേക്ക് പ്രക്ഷേപണം ചെയ്യാൻ തുടങ്ങി",
+            "youStoppedLive": "കസ്റ്റം RTMP- ലേക്ക് നിങ്ങൾ ഈ കോൾ പ്രക്ഷേപണം ചെയ്യുന്നത് നിർത്തി",
+            "sbStartedLiveStreaming": "{{userName}} തത്സമയം ആരംഭിച്ചു",
+            "sbStoppedLiveStreaming": "{{userName}} തത്സമയം അവസാനിച്ചു",
+            "liveStopped": "എൻഡ് പോയിന്റിലേക്ക് വീഡിയോ അയയ്ക്കുമ്പോൾ പിശക് സംഭവിച്ചു"
         },
         "settingsPopup": {
             "webCamera": "വെബ് ക്യാമറ",
@@ -192,7 +203,13 @@
             "stopRecording": "റെക്കോർഡിംഗ് നിർത്തുക",
             "recordingInProgress": "റെക്കോർഡിംഗ് പുരോഗതിയിലാണ് ...",
             "publishOnTimeline": "ടൈംലൈനിൽ പ്രസിദ്ധീകരിക്കുക",
-            "publishToGroup": "ഗ്രൂപ്പിലേക്ക് പ്രസിദ്ധീകരിക്കുക"
+            "publishToGroup": "ഗ്രൂപ്പിലേക്ക് പ്രസിദ്ധീകരിക്കുക",
+            "turnOffAudioInput": "മൈക്രോഫോൺ നിശബ്ദമാക്കുക",
+            "micIsTurnedOff": "മൈക്രോഫോൺ ഓഫാക്കിയിരിക്കുന്നു",
+            "start": "ആരംഭിക്കുക",
+            "stop": "നിർത്തുക",
+            "streamingSettings": "ക്രമീകരണങ്ങൾ",
+            "streamToRTMP": "കസ്റ്റം RTMP- ലേക്ക് സ്ട്രീം ചെയ്യുക"
         },
         "participantsPopup": {
             "disconnect": "വിച്ഛേദിക്കുക",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "ഈ സ്ട്രീമിൽ ചേരാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
         "streamTitle": "{{1}} തത്സമയ കോൾ",
         "preview": {
-            "preamble": "യോഗം:"
+            "preamble": "യോഗം:",
+            "Meeting": "യോഗം",
+            "MeetingEnded": "മീറ്റിംഗ് അവസാനിച്ചു"
+        },
+        "preparing": {
+            "micIsOff": "മൈക്ക് ഓഫാണ്",
+            "micIsOn": "മൈക്ക് ഓണാണ്",
+            "cameraIsOff": "ക്യാമറ ഓഫാണ്",
+            "cameraIsOn": "ക്യാമറ ഓണാണ്",
+            "screenSharingIsOn": "സ്ക്രീൻ പങ്കിടൽ ഓണാണ്",
+            "screenSharingIsOff": "സ്ക്രീൻ പങ്കിടുക",
+            "joinNow": "കോളിൽ ചേരുക"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ഉത്തരം",
             "description": "ഉത്തര സ്ട്രീം"
+        },
+        "Streams\/calls": {
+            "displayType": "കോളുകൾ",
+            "description": "സ്ട്രീമുകൾ\/webrtc- യ്ക്കുള്ള വിഭാഗം",
+            "MaxRelationsExceeded": "പരമാവധി കോളുകൾ കവിഞ്ഞു"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "അസാധുവായ ഫയൽ",
         "errorNoSource": "ഇമേജ് ഉറവിടമൊന്നുമില്ല",
         "uploadLimit": "പരമാവധി ഫയൽ വലുപ്പം: {{size}}",
-        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്"
+        "errorFileSize": "ക്ഷമിക്കണം, ഫയൽ വളരെ വലുതാണ്.<br> പരമാവധി ഫയൽ വലുപ്പം {{999} is ആണ്",
+        "uploadedImage": "ചിത്രം അപ്‌ലോഡ് ചെയ്തു",
+        "imageTitle": "ചിത്രത്തിന്റെ ശീർഷകം"
     },
     "questions": {
         "Questions": "ചോദ്യങ്ങൾ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ഇതിനകം ഉത്തരം നൽകി",
         "TitlePlaceholder": "നിങ്ങളുടെ ചോദ്യം ടൈപ്പുചെയ്യുക",
         "ContentPlaceholder": "ഉത്തരം നൽകാൻ ആളുകളെ സഹായിക്കുന്നതിന് ഏതെങ്കിലും അധിക വിവരങ്ങൾ ഇവിടെ ഇടുക",
-        "ErrorTitle": "ചോദ്യം ആവശ്യമാണ്"
+        "ErrorTitle": "ചോദ്യം ആവശ്യമാണ്",
+        "Placeholder": "പ്ലെയ്സ്ഹോൾഡർ"
     },
     "experience": {
-        "NewExperience": "പുതിയ അനുഭവം"
+        "NewExperience": "പുതിയ അനുഭവം",
+        "DefineTitle": "ദയവായി ഒരു ശീർഷകം നിർവ്വചിക്കുക",
+        "Create": "സൃഷ്ടിക്കാൻ"
+    },
+    "calls": {
+        "SettingsTitle": "കോളുകൾ",
+        "MaxCalls": "പരമാവധി കോളുകൾ",
+        "Update": "അപ്ഡേറ്റ് ചെയ്യുക",
+        "NoCallsYet": "ഇതുവരെ കോളുകളൊന്നുമില്ല",
+        "CallReasonTitle": "ഈ കോൾ എന്തിനെക്കുറിച്ചാണ്?",
+        "WaitingRoom": "വെയിറ്റിംഗ് റൂം"
     }
 }

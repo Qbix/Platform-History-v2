@@ -85,7 +85,14 @@
         },
         "confirmTerms": "De tsjinstbetingsten akseptearje?",
         "facebookNoEmail": "Jo facebook-account mist in befêstige e-postadres. Meld jo gewoan de native manier oan.",
-        "picTooltip": "Jo kinne dizze ôfbylding letter feroarje"
+        "picTooltip": "Jo kinne dizze ôfbylding letter feroarje",
+        "wallet": {
+            "payload": "Oanmelde by {{host}} op &#39;e tiid {{timestamp}}",
+            "alert": {
+                "title": "Trochferwize nei Wallet",
+                "content": "As jo dit dialooch slute, wurde jo nei jo portemonnee brocht. Neidat jo jo oanmeld hawwe, gean werom nei dizze side."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Foegje in manier om oan te melden",
@@ -108,6 +115,18 @@
         "Owner": "Eigner",
         "Admin": "Behearder",
         "Member": "Lid",
-        "Guest": "Gast"
+        "Guest": "Gast",
+        "Host": "Gasthear"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Deistich",
+        "Weekly": "Wykliks",
+        "Monthly": "Moanne",
+        "Application": "Oanfraach",
+        "Pages": "Siden",
+        "Services": "Tsjinsten",
+        "Faq": "FAQ",
+        "WeekDays": "Wykdagen"
     }
 }

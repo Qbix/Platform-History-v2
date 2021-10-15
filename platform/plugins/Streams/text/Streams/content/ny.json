@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Anthu omwe ndinawaitana",
-        "Streams\/invitedMe": "Ndani anandiitana"
+        "Streams\/invitedMe": "Ndani anandiitana",
+        "AreYouAgree": "Kodi mukuvomereza?",
+        "Yes": "Inde",
+        "No": "Ayi"
     },
     "interests": {
         "Filter": "Kodi mumakonda chiyani?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ngati nambala idaseweredwa",
-            "copyLink": "{{ClickOrTap}} kuti mukope ulalo woyitanitsa"
+            "copyLink": "{{ClickOrTap}} kuti mukope ulalo woyitanitsa",
+            "userChooserPlaceholder": "Sakani ndi dzina"
         },
         "email": {
             "subject": "Eya, fufuzani izi",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "Wophunzira alibe kanema",
             "openInBrowserAlert": "Tsegulani ulalo mu msakatuli wa Safari kuti mulowe nawo msonkhano.",
             "youBeganVideoRecording": "Munayamba kujambula msonkhano uno",
-            "youStoppedVideoRecording": "Mwaleka kujambula msonkhano uno"
+            "youStoppedVideoRecording": "Mwaleka kujambula msonkhano uno",
+            "switchingRoom": "Kusintha chipinda ...",
+            "forceDisconnecting": "Mudzachotsedwa pakadutsa mphindi 5",
+            "youStartedLive": "Munayamba kufalitsa kuyimbaku ku RTMP yachikhalidwe",
+            "youStoppedLive": "Mwasiya kulengeza kuyimbaku ku RTMP yachikhalidwe",
+            "sbStartedLiveStreaming": "{{userName}} ayamba kuwonetsedwa",
+            "sbStoppedLiveStreaming": "{{userName}} zatha",
+            "liveStopped": "Panali vuto potumiza kanema kumapeto"
         },
         "settingsPopup": {
             "webCamera": "Kamera Yapaintaneti",
@@ -192,7 +203,13 @@
             "stopRecording": "Siyani Kulemba",
             "recordingInProgress": "Kulemba zikuyenda ...",
             "publishOnTimeline": "Sindikizani pamndandanda wa nthawi",
-            "publishToGroup": "Sindikizani pagulu"
+            "publishToGroup": "Sindikizani pagulu",
+            "turnOffAudioInput": "Lankhulani maikolofoni",
+            "micIsTurnedOff": "Maikolofoni imazimitsidwa",
+            "start": "Yambani",
+            "stop": "Imani",
+            "streamingSettings": "Zokonzera",
+            "streamToRTMP": "Sungani ku RTMP yanu"
         },
         "participantsPopup": {
             "disconnect": "Chotsani",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo mtsinje uwu.",
         "streamTitle": "{{1}} mayankho amoyo",
         "preview": {
-            "preamble": "Msonkhano:"
+            "preamble": "Msonkhano:",
+            "Meeting": "Kukumana",
+            "MeetingEnded": "Msonkhano unatha"
+        },
+        "preparing": {
+            "micIsOff": "Mic ndi yozimitsa",
+            "micIsOn": "Mic ili mkati",
+            "cameraIsOff": "Kamera idazimitsidwa",
+            "cameraIsOn": "Kamera ndiyotsegula",
+            "screenSharingIsOn": "Kusintha kwazithunzi kuli",
+            "screenSharingIsOff": "Gawani chinsalu",
+            "joinNow": "Lowani nawo Kuyimbako"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "Yankho",
             "description": "yankho mtsinje"
+        },
+        "Streams\/calls": {
+            "displayType": "Kuyitana",
+            "description": "gulu la Mitsinje \/ webrtc",
+            "MaxRelationsExceeded": "Maitanidwe a Max apitilira"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "Fayilo Yolakwika",
         "errorNoSource": "Palibe chithunzi",
         "uploadLimit": "Kukula kwa fayilo: {{size}}",
-        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwamafayilo ndi {{size}}"
+        "errorFileSize": "Pepani, koma file lalikulu kwambiri.<br> Kukula kwa kukula kwamafayilo ndi {{size}}",
+        "uploadedImage": "Chithunzi chojambulidwa",
+        "imageTitle": "Mutu wa chithunzi"
     },
     "questions": {
         "Questions": "Mafunso",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Yankhani kale",
         "TitlePlaceholder": "Lembani funso lanu",
         "ContentPlaceholder": "Ikani zambiri zowonjezera apa kuti muthandize anthu kuyankha",
-        "ErrorTitle": "Funso likufunika"
+        "ErrorTitle": "Funso likufunika",
+        "Placeholder": "Chosungira malo"
     },
     "experience": {
-        "NewExperience": "Zochitika Zatsopano"
+        "NewExperience": "Zochitika Zatsopano",
+        "DefineTitle": "Chonde tanthauzirani mutu",
+        "Create": "Pangani"
+    },
+    "calls": {
+        "SettingsTitle": "Kuyitana",
+        "MaxCalls": "Max akuyimba",
+        "Update": "Kusintha",
+        "NoCallsYet": "Palibe mafoni pano",
+        "CallReasonTitle": "Kodi kuyitanaku ndikotani?",
+        "WaitingRoom": "Malo Oyembekezera"
     }
 }

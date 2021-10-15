@@ -117,7 +117,10 @@
         "SetClipStart": "Socraigh Tosaigh Gearrthóg",
         "ClipStart": "Gearrthóg Tosaigh",
         "SetClipEnd": "Socraigh Deireadh Gearrthóg",
-        "ClipEnd": "Gearrthóg"
+        "ClipEnd": "Gearrthóg",
+        "StartMoreEnd": "Ní féidir leis an suíomh tosaigh a bheith níos mó ná an seasamh deiridh",
+        "EndLessStart": "Ní féidir leis an suíomh deiridh a bheith níos lú ná an seasamh tosaigh",
+        "WhichInvalid": "Argóint &#39;atá&#39; neamhbhailí"
     },
     "durations": {
         "second": "dara",

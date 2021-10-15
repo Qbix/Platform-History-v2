@@ -85,7 +85,14 @@
         },
         "confirmTerms": "የአገልግሎት ውሉን ይቀበሉ?",
         "facebookNoEmail": "የእርስዎ facebook መለያ የተረጋገጠ የኢሜይል አድራሻ ይጎድለዋል። በቀላሉ በአገሬው መንገድ ይግቡ።",
-        "picTooltip": "ይህንን ስዕል በኋላ ላይ መለወጥ ይችላሉ"
+        "picTooltip": "ይህንን ስዕል በኋላ ላይ መለወጥ ይችላሉ",
+        "wallet": {
+            "payload": "ወደ {{host}} በወቅቱ {{timestamp}} ይግቡ",
+            "alert": {
+                "title": "ወደ Wallet በማዛወር ላይ",
+                "content": "አንዴ ይህንን መገናኛ ከዘጋዎት በኋላ ወደ ቦርሳዎ ይወሰዳሉ። ከገቡ በኋላ ወደዚህ ገጽ ይመለሱ።"
+            }
+        }
     },
     "setIdentifier": {
         "title": "ለመግባት መንገድ ያክሉ",
@@ -108,6 +115,18 @@
         "Owner": "ባለቤት",
         "Admin": "አስተዳዳሪ",
         "Member": "አባል",
-        "Guest": "እንግዳ"
+        "Guest": "እንግዳ",
+        "Host": "አስተናጋጅ"
+    },
+    "analytics": {
+        "Title": "ትንታኔዎች",
+        "Daily": "በየቀኑ",
+        "Weekly": "ሳምንታዊ",
+        "Monthly": "ወርሃዊ",
+        "Application": "ማመልከቻ",
+        "Pages": "ገጾች",
+        "Services": "አገልግሎቶች",
+        "Faq": "በየጥ",
+        "WeekDays": "የሳምንት ቀናት"
     }
 }

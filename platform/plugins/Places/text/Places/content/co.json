@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "in {{1}}"
+    },
+    "units": {
+        "meter": "metru",
+        "meters": "metri",
+        "kilometer": "chilometru",
+        "kilometers": "kiometri",
+        "km": "km",
+        "mile": "migliu",
+        "miles": "miglia",
+        "mi": "mi",
+        "foot": "pede",
+        "feet": "pedi",
+        "inches": "pollici"
+    },
+    "location": {
+        "interested": "Sò interessatu à e cose chì si passanu in {{select}} di",
+        "update": "Aghjurnà A mo Situazione",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} quì à<br> stabilisce u vostru<br> locu",
+        "myCurrentLocation": "A mo situazione attuale",
+        "enterAddress": "Inserite un indirizzu",
+        "enterPostcode": "Inserite puru u vostru còdice postale \/ codice postale",
+        "create": {
+            "action": "Aghjunghje Location",
+            "title": "New Location",
+            "nameYourLocation": "Nome u vostru locu"
+        },
+        "confirm": {
+            "title": "Salvà stu locu?",
+            "message": "Pensate à aduprà torna stu locu in u futuru?",
+            "ok": "Iè",
+            "cancel": "Innò"
+        },
+        "add": {
+            "title": "Nome stu locu",
+            "placeholder": "Casa, travagliu etc.",
+            "ok": "Salvà"
+        },
+        "dialog": {
+            "title": "Sceglite Situazione"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Qualchidia zona in questu locu?",
+        "newArea": "Zona nova",
+        "promptTitle": "Inserite un nome per a zona:",
+        "absent": "Per piacè stabilisce zona",
+        "error": "Errore",
+        "exist": "A zona esiste dighjà",
+        "addNewArea": "Aghjunghje nova zona",
+        "add": "Aghjunghje"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "una cullizzioni di lochi",
+            "displayType": "Locazioni"
+        },
+        "Places\/location": {
+            "description": "Rapprisenta un edifiziu, un locu, una nave, un parcu, ecc.",
+            "displayType": "Situazione"
+        },
+        "Places\/area": {
+            "description": "Rapprisenta una zona in un locu, cum&#39;è una stanza o una suite",
+            "displayType": "Zona"
+        },
+        "Places\/floor": {
+            "description": "Rapprisenta un pianu in un edifiziu o nave",
+            "displayType": "Pianu"
+        },
+        "Places\/column": {
+            "description": "Rapprisenta una colonna in un edifiziu o nave",
+            "displayType": "Culonna"
+        },
+        "Places\/nearby": {
+            "description": "Categoria per e cose à una certa distanza da un geohash",
+            "displayType": "Vicinu à i lochi"
+        },
+        "Places\/interest": {
+            "description": "Categoria per e cose à una certa distanza da un geohash, currispondendu à un interessu",
+            "displayType": "I posti interessu"
+        }
+    }
+}

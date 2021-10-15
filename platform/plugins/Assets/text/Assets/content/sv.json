@@ -36,8 +36,12 @@
         "WatchClip": "Fick {{amount}} poäng för att titta på {{fromStreamTitle}}",
         "PurchaseCredits": "Köpkrediter",
         "forMessages": {
-            "BoughtCredits": "{{amount}} poäng"
-        }
+            "BoughtCredits": "{{amount}} poäng",
+            "BonusCredits": "{{amount}} krediter"
+        },
+        "CreatePaidStream": "för att skapa {{toStreamName}}",
+        "BonusCredits": "Bonuskrediter på {{amount}}",
+        "BuyBonus": "Att köpa {{amount}} krediter på en gång leder till en {{bonus}} krediterbonus."
     },
     "history": {
         "Date": "Datum",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Tillbringade {{amount}} krediter",
         "BoughtCredits": "Köpte {{amount}} högskolepoäng",
         "InviteAcceptedBy": "Tjäna {{amount}} högskolepoäng",
-        "YouHaveCreditsToStart": "Tjäna {{amount}} högskolepoäng"
+        "YouHaveCreditsToStart": "Tjäna {{amount}} högskolepoäng",
+        "CreatePaidStream": "Tillbringade {{amount}} krediter",
+        "WatchClip": {
+            "+": "Tjänade {{amount}} poäng",
+            "-": "Tillbringade {{amount}} krediter"
+        },
+        "BonusCredits": "Fick bonus {{amount}}"
     },
     "subscriptions": {
         "infoTitle": "Ställ in betalningsinformation",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Köpte {{amount}} högskolepoäng"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonuskrediter på {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Sätt pris",
             "LinkPlaceholder": "ange ytterligare infolänk",
             "DescriptionPlaceholder": "Service beskrivning",
-            "SaveService": "Spara service"
+            "SaveService": "Spara service",
+            "SelectRequiredParticipants": "Obligatoriska deltagare"
         },
         "ManageServiceTemplates": "Hantera servicemallar",
         "ManageServices": "Hantera tjänster",

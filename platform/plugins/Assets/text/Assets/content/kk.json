@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Төлеу үшін түртіңіз"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: төлем {{call 'user.displayName'}} үшін өңделді",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} төлеміне рахмет",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} жазылды",
+        "YouSubscribedTo": "Сіз {{plan.title}} жазылдыңыз"
+    },
+    "charge": {
+        "Subject": "Сіз {{displayAmount}} төлемін {{call 'publisher.displayName'}} дан «{{description}}» арқылы аласыз",
+        "HasBeenCharged": "Сәлеметсіз бе, бұл сізге {{1}} {{3}} үшін {{4}} {{2}} төленгенін хабарлау үшін."
+    },
+    "charged": {
+        "Subject": "«{{description}}» төлеміне рахмет",
+        "HavePaid": "Сәлеметсіз бе, {{1}}, бұл {{4}} үшін {{3}} сомасына {{2}} сомасын сәтті төлегеніңіздің растауы."
+    },
+    "payment": {
+        "AboutOrder": "Тапсырыс туралы ақпарат",
+        "PaymentMethod": "Төлем тәсілі",
+        "ContactInfo": "Байланыс ақпараты",
+        "Pay": "Төлеу"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Шақыруды {{invitedUserName}} қабылдады",
+        "YouHaveCreditsToStart": "Сізде {{amount}} несие бар",
+        "PaymentFor": "«{{1}}» төлемі",
+        "PaymentTo": "Төлем {{1}}",
+        "PaymentToUser": "Төлем {{toUserName}}",
+        "CreatePaidStream": "жасау үшін {{toStreamName}}",
+        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>«{{toStreamTitle}}<\/a> » брондау үшін",
+        "CreatedCommunity": "«{{communityId}}» қауымдастығын құру үшін",
+        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>«{{toStreamTitle}}<\/a> » бойынша брондауды қайтару ретінде",
+        "BoughtCredits": "{{999}) несие сатып алынды",
+        "BonusCredits": "Бонустық {{amount}} несие",
+        "BuyAmountCredits": "{{amount}} несие сатып алыңыз",
+        "WatchClip": "{{fromStreamTitle}} көру үшін {{amount}} балл жинады",
+        "MissingCredits": "Несиелер жоқ",
+        "YouMissingCredits": "Жалғастыру үшін сізге қосымша {{amount}} несие қажет.",
+        "BuyCredits": "Несие сатып алыңыз",
+        "BuyBonus": "Бір уақытта {{amount}} несие сатып алу, {{bonus}} несие бонусына әкеледі.",
+        "Buy": "Сатып алу",
+        "PurchaseCredits": "Несие сатып алу",
+        "Credits": "Несие",
+        "ErrorInvalidAmount": "Жарамсыз сома",
+        "ErrorInvalidCurrency": "Өкінішке орай, біз әлі валютаны {{999}) қолдамаймыз",
+        "forMessages": {
+            "BoughtCredits": "{{999}) несие",
+            "BonusCredits": "{{999}) несие"
+        }
+    },
+    "history": {
+        "Date": "Күні",
+        "Amount": "Сомасы",
+        "Description": "Сипаттама",
+        "Client": "Клиент",
+        "To": "дейін",
+        "From": "бастап",
+        "SeeHistory": "{{1}} үшін төлем тарихын қараңыз",
+        "HistoryEmpty": "Сізде әлі деректер жоқ",
+        "PaymentFor": "{{amount}} несие жіберілді",
+        "PaymentTo": "{{amount}} несие жіберілді",
+        "PaymentToUser": "{{amount}} несие жіберілді",
+        "CreatePaidStream": "{{amount}} несие жұмсалды",
+        "WatchClip": {
+            "+": "{{amount}} несие алды",
+            "-": "{{amount}} несие жұмсалды"
+        },
+        "JoinedPaidStream": {
+            "+": "{{amount}} несие алды",
+            "-": "{{amount}} несие жұмсалды"
+        },
+        "LeftPaidStream": {
+            "+": "{{amount}} несие алынды",
+            "-": "{{amount}} несие жіберілді"
+        },
+        "CreatedCommunity": "{{amount}} несие жұмсалды",
+        "BoughtCredits": "{{999}) несие сатып алынды",
+        "BonusCredits": "{{amount}} бонустық бонусқа ие болды",
+        "InviteAcceptedBy": "{{amount}} несие алды",
+        "YouHaveCreditsToStart": "{{amount}} несие алды"
+    },
+    "subscriptions": {
+        "infoTitle": "Төлем туралы ақпаратты орнатыңыз",
+        "confirm": {
+            "title": "Жазылымды бастау",
+            "message": "{{title}} жазылғыңыз келе ме?",
+            "ok": "ЖАРАЙДЫ МА",
+            "cancel": "Бас тарту"
+        },
+        "CreditOrDebitCard": "Несиелік немесе дебеттік карта",
+        "SubscribePayment": "Төлемге жазылу",
+        "ImmediatePayment": "Жедел төлем"
+    },
+    "payments": {
+        "infoTitle": "Төлем туралы ақпаратты орнатыңыз",
+        "BuyAmountCredits": "{{amount}} несие сатып алыңыз",
+        "confirm": {
+            "title": "Төлем жасаңыз",
+            "message": "{{symbol}} {{amount}} төлеуге келісесіз бе?",
+            "ok": "ЖАРАЙДЫ МА",
+            "cancel": "Бас тарту"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Несие",
+            "description": "несиелер мен төлемдердің есебін жүргізеді"
+        },
+        "Assets\/plan": {
+            "displayType": "Жазылу жоспары",
+            "description": "жазылу жоспары"
+        },
+        "Assets\/subscription": {
+            "displayType": "Жазылым",
+            "description": "жазылу"
+        },
+        "Assets\/product": {
+            "displayType": "Өнім",
+            "description": "сатылатын өнім"
+        },
+        "Assets\/service": {
+            "displayType": "Қызмет",
+            "description": "қызмет ұсынылады"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "{{amount}} несие алды"
+        },
+        "Assets\/credits\/bought": {
+            "content": "{{999}) несие сатып алынды"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Бонустық {{amount}} несие"
+        },
+        "Assets\/credits\/spent": {
+            "content": "{{amount}} несие жұмсалды"
+        },
+        "Assets\/credits\/sent": {
+            "content": "{{amount}} несие {{toUserName}} жіберілді"
+        },
+        "Assets\/credits\/received": {
+            "content": "{{fromUserName}} дан {{amount}} несие алынды"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Жаңа қызмет",
+            "TitlePlaceholder": "Қызмет атауы",
+            "PricePlaceholder": "Бағаны орнату",
+            "LinkPlaceholder": "қосымша ақпарат сілтемесін орнатыңыз",
+            "DescriptionPlaceholder": "Қызмет сипаттамасы",
+            "SaveService": "Қызметті сақтау",
+            "SelectRequiredParticipants": "Қажетті қатысушылар"
+        },
+        "ManageServiceTemplates": "Қызмет үлгілерін басқару",
+        "ManageServices": "Қызметтерді басқару",
+        "Free": "Тегін",
+        "OptionalContribution": "Қосымша үлес",
+        "RequiredPayment": "Міндетті төлем",
+        "AreYouSureDelete": "Бұл қызметті шынымен жойғыңыз келе ме?",
+        "AmountServicesRelated": "Бұл қызметке қатысты {{amount}} қолжетімділік бар. Олар да жойылады."
+    }
+}

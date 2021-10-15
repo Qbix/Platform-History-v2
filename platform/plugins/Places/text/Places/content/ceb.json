@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "sulud sa {{1}}"
+    },
+    "units": {
+        "meter": "metro",
+        "meters": "metro",
+        "kilometer": "kilometro",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "milya",
+        "miles": "milya",
+        "mi": "mi",
+        "foot": "tiil",
+        "feet": "mga tiil",
+        "inches": "pulgada"
+    },
+    "location": {
+        "interested": "Interesado ako sa mga butang nga nahinabo sa sulud sa {{select}} sa",
+        "update": "Pagbag-o sa Akong Lokasyon",
+        "set": "Ibutang ang Akong Lokasyon",
+        "prompt": "{{ClickOrTap}} dinhi sa<br> ibutang ang imong<br> lokasyon",
+        "myCurrentLocation": "Ang akong lokasyon karon",
+        "enterAddress": "Pagsulud usa ka adres",
+        "enterPostcode": "Palihug isulud ang imong postcode \/ zipcode",
+        "create": {
+            "action": "Idugang ang Lokasyon",
+            "title": "Bag-ong Lokasyon",
+            "nameYourLocation": "Nganli ang imong lokasyon"
+        },
+        "confirm": {
+            "title": "I-save kini nga lokasyon?",
+            "message": "Plano ba nimo nga gamiton kini nga lokasyon sa umaabot?",
+            "ok": "Oo",
+            "cancel": "Dili"
+        },
+        "add": {
+            "title": "Nganli kini nga lokasyon",
+            "placeholder": "Balay, Trabaho ug uban pa.",
+            "ok": "Pagtipig"
+        },
+        "dialog": {
+            "title": "Pilia ang Lokasyon"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Adunay bisan unsang lugar sa sulud niini nga lokasyon?",
+        "newArea": "Bag-ong lugar",
+        "promptTitle": "Pagsulud usa ka ngalan alang sa lugar:",
+        "absent": "Palihug ibutang ang lugar",
+        "error": "Sayup",
+        "exist": "Naa na ang lugar",
+        "addNewArea": "Pagdugang bag-ong lugar",
+        "add": "Idugang"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "usa ka koleksyon sa mga lokasyon",
+            "displayType": "Mga lokasyon"
+        },
+        "Places\/location": {
+            "description": "Nagrepresentar sa usa ka bilding, venue, barko, parke, ug uban pa.",
+            "displayType": "Lokasyon"
+        },
+        "Places\/area": {
+            "description": "Nagrepresenta sa usa ka lugar sa sulud sa usa ka lokasyon, sama sa usa ka kuwarto o suite",
+            "displayType": "Dapit"
+        },
+        "Places\/floor": {
+            "description": "Nagrepresentar sa usa ka salog sa usa ka bilding o barko",
+            "displayType": "Salog"
+        },
+        "Places\/column": {
+            "description": "Nagrepresenta sa usa ka kolum sa usa ka bilding o barko",
+            "displayType": "Kolum"
+        },
+        "Places\/nearby": {
+            "description": "Kategoryang alang sa mga butang sa sulud sa usa ka gilay-on sa usa ka geohash",
+            "displayType": "Duol sa mga lugar"
+        },
+        "Places\/interest": {
+            "description": "Ang kategorya alang sa mga butang sa sulud sa usa ka gilay-on sa usa ka geohash, nga nagpares sa usa ka interes",
+            "displayType": "Mga lugar nga interes"
+        }
+    }
+}

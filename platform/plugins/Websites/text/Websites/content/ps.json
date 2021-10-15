@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "د تشویق لپاره لینک",
+                "startDate": "پیل نېټه",
+                "startTime": "د پيل وخت",
+                "endDate": "د پای نیټه",
+                "endTime": "د پای وخت",
+                "budget": "بودیجه"
+            },
+            "interests": {
+                "Title": "د ګټو له مخې فلټر کړئ",
+                "FilterInterests": "د ګټو ټایپ کول پیل کړئ ..."
+            },
+            "Interest": "سود",
+            "Location": "ځای"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "لاړ شه",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "لټون",
+            "WriteToStartConversation": "د خبرو پیل کولو لپاره خپل افکار ولیکئ",
+            "StartConversation": "خبرې اترې پیل کړئ",
+            "GotoConversation": "خبرو اترو ته لاړشئ",
+            "reset": "بیا تنظیم کړئ",
+            "edit": "سمول",
+            "link": "لینک",
+            "setUrl": "URL تنظیم کړئ",
+            "save": "خوندي کول",
+            "setClip": "کلیپ پرې کړئ",
+            "invalidURL": "ناسم URL"
+        },
+        "FileTooLarge": "د کیچ کولو لپاره فایل خورا لوی دی. د فایل اعظمي اندازه {{size}}",
+        "InvalidPDF": "فایل د اعتبار وړ PDF ندی",
+        "StartTypingTitleOrKeywords": "د سرلیک یا کلیمو ټایپ کول پیل کړئ ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "د HTML سند چې مختلف کاروونکي یې لیدلی او ایډیټ کولی شي",
+            "displayType": "مقاله"
+        },
+        "Websites\/slide": {
+            "description": "په پریزینټیشن کې یو سلایډ ، کولی شي HTML ، آډیو او نور شامل کړي.",
+            "displayType": "سلایډ"
+        },
+        "Websites\/presentation": {
+            "description": "یو پریزینټیشن چې مختلف سلایډونه پکې شامل دي",
+            "displayType": "پریزنټشن"
+        },
+        "Websites\/advert\/unit": {
+            "description": "په ویب پا onه کې د اعلاناتو واحد",
+            "displayType": "د اعلان واحد"
+        },
+        "Websites\/advert\/placement": {
+            "description": "د نوم لاندې د اعلاناتو واحدونو ګروپ کولو یوه لاره",
+            "displayType": "د اعلان اعلان"
+        },
+        "Websites\/advert\/creative": {
+            "description": "د اعلان لپاره مینځپانګه",
+            "displayType": "تخلیقی اعلان وکړئ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "د اعلاناتو کمپاین",
+            "displayType": "د اعلان کمپاین"
+        },
+        "Websites\/webpage": {
+            "description": "د یوې ویب پاې نمایندګي کوي چې میټا ډیټا یې سکریپ شوې وه",
+            "displayType": "ویب پاڼه"
+        }
+    }
+}

@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "هغه کسان چې ما بلنه کړې وه",
-        "Streams\/invitedMe": "چا چا ته بلنه ورکړه؟"
+        "Streams\/invitedMe": "چا چا ته بلنه ورکړه؟",
+        "AreYouAgree": "آیا ته موافق یې؟",
+        "Yes": "هو",
+        "No": "نه"
     },
     "interests": {
         "Filter": "تاسو څه خوند اخلئ؟",
@@ -80,7 +83,8 @@
             "byFacebook": "فیسبوک",
             "byTwitter": "ټویټر",
             "scannedQR": "{9 999}} که کوډ سکین شوی و",
-            "copyLink": "د بلنې لینک کاپي کولو لپاره {9 999}."
+            "copyLink": "د بلنې لینک کاپي کولو لپاره {9 999}.",
+            "userChooserPlaceholder": "د نوم له مخې لټون وکړئ"
         },
         "email": {
             "subject": "هو، دا وګوره",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "برخه وال هیڅ ویډیو نلري",
             "openInBrowserAlert": "کنفرانس کې د ګډون لپاره په سفاري براوزر کې لینک خلاص کړئ.",
             "youBeganVideoRecording": "تاسو د دې کنفرانس ثبت کول پیل کړل",
-            "youStoppedVideoRecording": "تاسو د دې کنفرانس ثبتول بند کړل"
+            "youStoppedVideoRecording": "تاسو د دې کنفرانس ثبتول بند کړل",
+            "switchingRoom": "د بدلولو خونه ...",
+            "forceDisconnecting": "تاسو به په 5 ثانیو کې وصل شئ",
+            "youStartedLive": "تاسو دودیز RTMP ته د دې زنګ خپرول پیل کړل",
+            "youStoppedLive": "تاسو دودیز RTMP ته د دې زنګ خپرول بند کړل",
+            "sbStartedLiveStreaming": "{{userName}} په ژوندۍ به پیل شو",
+            "sbStoppedLiveStreaming": "{{userName}} په ژوندۍ به پای ته ورسید",
+            "liveStopped": "د پای نقطې ته د ویډیو لیږلو پرمهال ستونزه رامینځته شوه"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمره",
@@ -192,7 +203,13 @@
             "stopRecording": "ثبتول ودروئ",
             "recordingInProgress": "ثبتول د پرمختګ په حال کې دي ...",
             "publishOnTimeline": "د مهال ویش په خپرولو سره",
-            "publishToGroup": "ډلې ته نشر کړئ"
+            "publishToGroup": "ډلې ته نشر کړئ",
+            "turnOffAudioInput": "مایکروفون خاموش کړئ",
+            "micIsTurnedOff": "مایکروفون بند دی",
+            "start": "پیل کړئ",
+            "stop": "درېدل",
+            "streamingSettings": "ترتیبات",
+            "streamToRTMP": "دودیز RTMP ته جریان"
         },
         "participantsPopup": {
             "disconnect": "منقول",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "تاسو په دې جریان کې د شاملیدو اجازه نلرئ.",
         "streamTitle": "} {999}} ژوندی زنګ",
         "preview": {
-            "preamble": "ناسته:"
+            "preamble": "ناسته:",
+            "Meeting": "غونډه",
+            "MeetingEnded": "غونډه پای ته ورسیده"
+        },
+        "preparing": {
+            "micIsOff": "مایک بند دی",
+            "micIsOn": "مایک روان دی",
+            "cameraIsOff": "کیمره بنده ده",
+            "cameraIsOn": "کیمره روانه ده",
+            "screenSharingIsOn": "د سکرین شریکول روان دي",
+            "screenSharingIsOff": "سکرین شریک کړئ",
+            "joinNow": "په زنګ کې ګډون وکړئ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "ځواب",
             "description": "د ځواب جریان"
+        },
+        "Streams\/calls": {
+            "displayType": "زنګونه",
+            "description": "د جریانونو\/ویب آر ټي سي لپاره کټګوري",
+            "MaxRelationsExceeded": "اعظمي تلیفونونه تیر شول"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "ناباوره دوتنه",
         "errorNoSource": "د عکس سرچینه نشته",
         "uploadLimit": "د فایل اندازه اندازه: {{999}",
-        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده"
+        "errorFileSize": "بښنه غواړو ، مګر فایل ډیر لوی دی<br> د فایل اندازه اندازه {{999} is ده",
+        "uploadedImage": "پورته شوی انځور",
+        "imageTitle": "د انځور سرلیک"
     },
     "questions": {
         "Questions": "پوښتنې",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "دمخه ځواب شوی",
         "TitlePlaceholder": "خپله پوښتنه ولیکئ",
         "ContentPlaceholder": "کوم اضافي معلومات دلته ولیکئ ترڅو خلکو ته ځواب ویلو کې مرسته وکړي",
-        "ErrorTitle": "پوښتنه ضروري ده"
+        "ErrorTitle": "پوښتنه ضروري ده",
+        "Placeholder": "د ځای ساتونکی"
     },
     "experience": {
-        "NewExperience": "نوې تجربه"
+        "NewExperience": "نوې تجربه",
+        "DefineTitle": "مهرباني وکړئ سرلیک تعریف کړئ",
+        "Create": "جوړول"
+    },
+    "calls": {
+        "SettingsTitle": "زنګونه",
+        "MaxCalls": "میکس زنګونه",
+        "Update": "تازه کول",
+        "NoCallsYet": "تر اوسه هیڅ تلیفون نشته",
+        "CallReasonTitle": "دا زنګ د څه په اړه دی؟",
+        "WaitingRoom": "د انتظار خونه"
     }
 }

@@ -113,7 +113,10 @@
         "SetClipStart": "Postavite Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Postavi kraj isječka",
-        "ClipEnd": "Clip End"
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Početna pozicija ne može biti više od krajnje",
+        "EndLessStart": "Krajnji položaj ne može biti manji od početnog",
+        "WhichInvalid": "Argument &#39;koji&#39; je nevažeći"
     },
     "tabs": {
         "more": "više",

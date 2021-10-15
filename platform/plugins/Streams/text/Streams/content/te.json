@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "నేను ఆహ్వానించిన వ్యక్తులు",
-        "Streams\/invitedMe": "ఎవరు నన్ను ఆహ్వానించారు"
+        "Streams\/invitedMe": "ఎవరు నన్ను ఆహ్వానించారు",
+        "AreYouAgree": "మీరు అంగీకరిస్తారా?",
+        "Yes": "అవును",
+        "No": "లేదు"
     },
     "interests": {
         "Filter": "మీరు ఏమి ఆనందిస్తున్నారు?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "పరిచయాల నుండి మళ్ళీ ఎంచుకోండి",
             "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి",
             "scannedQR": "కోడ్ స్కాన్ చేయబడితే {{ClickOrTap}}",
-            "copyLink": "ఆహ్వాన లింక్‌ను కాపీ చేయడానికి {{ClickOrTap}}"
+            "copyLink": "ఆహ్వాన లింక్‌ను కాపీ చేయడానికి {{ClickOrTap}}",
+            "userChooserPlaceholder": "పేరు ద్వారా శోధించండి"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "పాల్గొనేవారికి వీడియో లేదు",
             "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ను తెరవండి.",
             "youBeganVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ప్రారంభించారు",
-            "youStoppedVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం మానేశారు"
+            "youStoppedVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం మానేశారు",
+            "switchingRoom": "రూమ్ మారడం ...",
+            "forceDisconnecting": "మీరు 5 సెకన్లలో డిస్‌కనెక్ట్ చేయబడతారు",
+            "youStartedLive": "మీరు ఈ కాల్‌ను అనుకూల RTMP కి ప్రసారం చేయడం ప్రారంభించారు",
+            "youStoppedLive": "మీరు కస్టమ్ RTMP కి ఈ కాల్ ప్రసారాన్ని ఆపివేశారు",
+            "sbStartedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ప్రారంభించారు",
+            "sbStoppedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ముగిసింది",
+            "liveStopped": "ఎండ్ పాయింట్‌కి వీడియోను పంపేటప్పుడు లోపం సంభవించింది"
         },
         "settingsPopup": {
             "webCamera": "వెబ్ కెమెరా",
@@ -205,7 +216,13 @@
             "stopRecording": "రికార్డింగ్ ఆపు",
             "recordingInProgress": "రికార్డింగ్ పురోగతిలో ఉంది ...",
             "publishOnTimeline": "కాలక్రమంలో ప్రచురించండి",
-            "publishToGroup": "సమూహానికి ప్రచురించండి"
+            "publishToGroup": "సమూహానికి ప్రచురించండి",
+            "turnOffAudioInput": "మైక్రోఫోన్‌ను మ్యూట్ చేయండి",
+            "micIsTurnedOff": "మైక్రోఫోన్ ఆఫ్ చేయబడింది",
+            "start": "ప్రారంభించు",
+            "stop": "ఆపు",
+            "streamingSettings": "సెట్టింగులు",
+            "streamToRTMP": "అనుకూల RTMP కి ప్రసారం చేయండి"
         },
         "participantsPopup": {
             "disconnect": "డిస్కనెక్ట్",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
         "streamTitle": "{{1}} ప్రత్యక్ష కాల్",
         "preview": {
-            "preamble": "సమావేశం:"
+            "preamble": "సమావేశం:",
+            "Meeting": "సమావేశం",
+            "MeetingEnded": "సమావేశం ముగిసింది"
+        },
+        "preparing": {
+            "micIsOff": "మైక్ ఆఫ్ చేయబడింది",
+            "micIsOn": "మైక్ ఆన్‌లో ఉంది",
+            "cameraIsOff": "కెమెరా ఆఫ్‌లో ఉంది",
+            "cameraIsOn": "కెమెరా ఆన్‌లో ఉంది",
+            "screenSharingIsOn": "స్క్రీన్ షేరింగ్ ఆన్‌లో ఉంది",
+            "screenSharingIsOff": "స్క్రీన్‌ను షేర్ చేయండి",
+            "joinNow": "కాల్‌లో చేరండి"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "సమాధానం",
             "description": "జవాబు ప్రసారం"
+        },
+        "Streams\/calls": {
+            "displayType": "కాల్స్",
+            "description": "స్ట్రీమ్స్\/webrtc కొరకు వర్గం",
+            "MaxRelationsExceeded": "గరిష్ట కాల్‌లు మించిపోయాయి"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
         "errorNoSource": "చిత్ర మూలం లేదు",
         "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
-        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is"
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{999} is",
+        "uploadedImage": "చిత్రం అప్‌లోడ్ చేయబడింది",
+        "imageTitle": "చిత్రం శీర్షిక"
     },
     "questions": {
         "Questions": "ప్రశ్నలు",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ఇప్పటికే సమాధానం ఇచ్చారు",
         "TitlePlaceholder": "మీ ప్రశ్నను టైప్ చేయండి",
         "ContentPlaceholder": "ప్రజలకు సమాధానం ఇవ్వడానికి ఏదైనా అదనపు సమాచారం ఇక్కడ ఉంచండి",
-        "ErrorTitle": "ప్రశ్న అవసరం"
+        "ErrorTitle": "ప్రశ్న అవసరం",
+        "Placeholder": "ప్లేస్‌హోల్డర్"
     },
     "experience": {
-        "NewExperience": "కొత్త అనుభవం"
+        "NewExperience": "కొత్త అనుభవం",
+        "DefineTitle": "దయచేసి శీర్షికను నిర్వచించండి",
+        "Create": "సృష్టించు"
+    },
+    "calls": {
+        "SettingsTitle": "కాల్స్",
+        "MaxCalls": "గరిష్ట కాల్స్",
+        "Update": "అప్‌డేట్",
+        "NoCallsYet": "ఇంకా కాల్‌లు లేవు",
+        "CallReasonTitle": "ఈ కాల్ దేని గురించి?",
+        "WaitingRoom": "వేచివుండు గది"
     }
 }

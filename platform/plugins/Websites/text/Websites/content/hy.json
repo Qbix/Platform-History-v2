@@ -1,0 +1,74 @@
+{
+    "advert": {
+        "campaign": {
+            "placeholders": {
+                "link": "Խթանման հղում",
+                "startDate": "Մեկնարկի ամսաթիվ",
+                "startTime": "Սկսելու ժամանակը",
+                "endDate": "Ավարտի ամսաթիվը",
+                "endTime": "Ավարտի ժամանակը",
+                "budget": "Բյուջե"
+            },
+            "interests": {
+                "Title": "Filտել ըստ հետաքրքրության",
+                "FilterInterests": "Սկսեք հետաքրքրություն մուտքագրել ..."
+            },
+            "Interest": "Հետաքրքրություն",
+            "Location": "Գտնվելու վայրը"
+        }
+    },
+    "webpage": {
+        "composer": {
+            "Go": "Գնա",
+            "PasteLinkHere": "https: \/\/ ...",
+            "BrowseTheWeb": "Թերթել",
+            "WriteToStartConversation": "Գրեք ձեր մտքերը ՝ խոսակցությունը սկսելու համար",
+            "StartConversation": "Սկսեք խոսակցություն",
+            "GotoConversation": "Գնալ դեպի versրույց",
+            "reset": "Վերակայել",
+            "edit": "Խմբագրել",
+            "link": "Հղում",
+            "setUrl": "Սահմանել URL- ը",
+            "save": "Պահել",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Անվավեր URL"
+        },
+        "FileTooLarge": "Պահեստավորման համար ֆայլը չափազանց մեծ է: Ֆայլի առավելագույն չափը {{size}}",
+        "InvalidPDF": "Ֆայլը վավեր PDF չէ",
+        "StartTypingTitleOrKeywords": "Սկսեք մուտքագրել վերնագիր կամ հիմնաբառեր ..."
+    },
+    "types": {
+        "Websites\/article": {
+            "description": "HTML փաստաթուղթ, որը տարբեր օգտվողներ կարող են դիտել և խմբագրել",
+            "displayType": "Հոդված"
+        },
+        "Websites\/slide": {
+            "description": "Ներկայացման սլայդը կարող է ներառել HTML, աուդիո և այլն:",
+            "displayType": "Սլայդ"
+        },
+        "Websites\/presentation": {
+            "description": "Տարբեր սլայդներից բաղկացած ներկայացում",
+            "displayType": "Ներկայացում"
+        },
+        "Websites\/advert\/unit": {
+            "description": "Գովազդային միավոր կայքում",
+            "displayType": "Գովազդային միավոր"
+        },
+        "Websites\/advert\/placement": {
+            "description": "Գովազդային միավորների անվան տակ խմբավորման եղանակ",
+            "displayType": "Գովազդի տեղադրում"
+        },
+        "Websites\/advert\/creative": {
+            "description": "Գովազդի բովանդակություն",
+            "displayType": "Ստեղծագործական գովազդ"
+        },
+        "Websites\/advert\/campaign": {
+            "description": "Գովազդային արշավ",
+            "displayType": "Գովազդային արշավ"
+        },
+        "Websites\/webpage": {
+            "description": "Ներկայացնում է մի կայք, որի մետատվյալները ջնջվել են",
+            "displayType": "ինտերնետային էջ"
+        }
+    }
+}

@@ -1,0 +1,88 @@
+{
+    "LatLng": "({{1}} lat, {{2}} lng)",
+    "nearby": {
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "mukati me {{1}}"
+    },
+    "units": {
+        "meter": "mita",
+        "meters": "mamita",
+        "kilometer": "kiromita",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mamaira",
+        "miles": "mamaira",
+        "mi": "mi",
+        "foot": "tsoka",
+        "feet": "tsoka",
+        "inches": "masendimita"
+    },
+    "location": {
+        "interested": "Ndiri kufarira zvinhu zviri kuitika mukati me {{select}} kubva",
+        "update": "Gadziridza Kwangu Nzvimbo",
+        "set": "Gadza Nzvimbo Yangu",
+        "prompt": "{{ClickOrTap}} pano ku<br> gadza yako<br> nzvimbo",
+        "myCurrentLocation": "Kwangu kwazvino",
+        "enterAddress": "Isa kero",
+        "enterPostcode": "Ndokumbira upinze yako yepositi \/ zipcode",
+        "create": {
+            "action": "Wedzera Nzvimbo",
+            "title": "Nzvimbo Itsva",
+            "nameYourLocation": "Taura nzvimbo yako"
+        },
+        "confirm": {
+            "title": "Sevha nzvimbo ino?",
+            "message": "Iwe unoronga kushandisa ino nzvimbo zvakare mune ramangwana?",
+            "ok": "Ehe",
+            "cancel": "Aihwa"
+        },
+        "add": {
+            "title": "Taura nzvimbo ino",
+            "placeholder": "Kumba, Kushanda, etc.",
+            "ok": "Sevha"
+        },
+        "dialog": {
+            "title": "Sarudza Nzvimbo"
+        }
+    },
+    "areas": {
+        "filterPlaceholder": "Chero nzvimbo mukati meino nzvimbo?",
+        "newArea": "Nzvimbo nyowani",
+        "promptTitle": "Isa zita renzvimbo yacho:",
+        "absent": "Ndapota sarudza nzvimbo",
+        "error": "Kukanganisa",
+        "exist": "Nzvimbo yatovepo",
+        "addNewArea": "Wedzera nzvimbo nyowani",
+        "add": "Wedzera"
+    },
+    "types": {
+        "Places\/locations": {
+            "description": "muunganidzwa wenzvimbo",
+            "displayType": "Nzvimbo"
+        },
+        "Places\/location": {
+            "description": "Inomiririra chivakwa, nzvimbo, chikepe, paki, nezvimwe.",
+            "displayType": "Nzvimbo"
+        },
+        "Places\/area": {
+            "description": "Inomiririra nzvimbo iri munzvimbo, senge kamuri kana suite",
+            "displayType": "Nzvimbo"
+        },
+        "Places\/floor": {
+            "description": "Inomiririra uriri muchivako kana chikepe",
+            "displayType": "Uriri"
+        },
+        "Places\/column": {
+            "description": "Inomiririra ikholamu muchivako kana chikepe",
+            "displayType": "Column"
+        },
+        "Places\/nearby": {
+            "description": "Chikamu chezvinhu mukati meimwe nhambwe yegeohash",
+            "displayType": "Pedyo nenzvimbo"
+        },
+        "Places\/interest": {
+            "description": "Chikamu chezvinhu mukati meimwe nhambwe yegeohash, inofanidza kufarira",
+            "displayType": "Nzvimbo dzinofarira"
+        }
+    }
+}

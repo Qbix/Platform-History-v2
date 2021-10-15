@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Landirani Malangizo?",
         "facebookNoEmail": "Akaunti yanu ya facebook ikusowa imelo yosatsimikizika. Ingolowetsani momwe mwakhalira.",
-        "picTooltip": "Mutha kusintha chithunzichi pambuyo pake"
+        "picTooltip": "Mutha kusintha chithunzichi pambuyo pake",
+        "wallet": {
+            "payload": "Lowani mu {{host}} nthawi {{timestamp}}",
+            "alert": {
+                "title": "Kulunjika ku Wallet",
+                "content": "Mukatseka bokosili, mudzatengeredwa ku chikwama chanu. Mukasainira, bwererani patsamba lino."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Onjezani njira yolowera",
@@ -108,6 +115,18 @@
         "Owner": "Mwini wake",
         "Admin": "Admin",
         "Member": "Membala",
-        "Guest": "Mlendo"
+        "Guest": "Mlendo",
+        "Host": "Wokonda"
+    },
+    "analytics": {
+        "Title": "Kusanthula",
+        "Daily": "Tsiku lililonse",
+        "Weekly": "Mlungu uliwonse",
+        "Monthly": "Mwezi uliwonse",
+        "Application": "Kugwiritsa ntchito",
+        "Pages": "Masamba",
+        "Services": "Mapulogalamu",
+        "Faq": "FAQ",
+        "WeekDays": "Masiku Amasabata"
     }
 }

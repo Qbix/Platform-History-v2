@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Taabo si aad u bixiso"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: lacag ayaa laga baaraandegay {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Waad ku mahadsan tahay lacag bixintaada {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ayaa iska diiwaangeliyay {{plan.title}}",
+        "YouSubscribedTo": "Waxaa laguu qoray {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Waxaad ka heleysaa lacag bixinta {{displayAmount}} laga bilaabo {{call 'publisher.displayName'}} &quot;{{description}}&quot;",
+        "HasBeenCharged": "Haye, tani waa uun inaan ku ogeysiiyo {{1}} waxaa lagaa dalacay {{2}} ee {{3}} {{4}}"
+    },
+    "charged": {
+        "Subject": "Waad ku mahadsan tahay lacag bixintaada &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, kani waa xaqiijin degdeg ah oo aad si guul leh ugu bixisay {{2}} ilaa {{3}} {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Macluumaadka ku saabsan amarka",
+        "PaymentMethod": "Qaabka mushaar-bixinta",
+        "ContactInfo": "Macluumaadka xiriirka",
+        "Pay": "Bixi"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Martiqaadka waa aqbalay {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Waxaad haysataa {{amount}} dhibco si aad u bilowdo",
+        "PaymentFor": "Lacag -bixinta &quot;{{1}}&quot;",
+        "PaymentTo": "Lacag -bixinta {{1}}",
+        "PaymentToUser": "Lacag -bixinta {{toUserName}}",
+        "CreatePaidStream": "loogu talagalay abuurista {{toStreamName}}",
+        "JoinedPaidStream": "boos sii qabsashada &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "loogu talagalay abuuritaanka bulshada &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "sida soo celinta boos celinta ee &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "La iibsaday {{amount}} dhibcaha",
+        "BonusCredits": "Gunnada {{amount}} dhibcaha",
+        "BuyAmountCredits": "Iibso {{amount}} dhibcaha",
+        "WatchClip": "La kasbaday {{amount}} dhibcaha daawashada {{fromStreamTitle}}",
+        "MissingCredits": "Dhibcaha maqan",
+        "YouMissingCredits": "Waxaad u baahan tahay dhibco dheeraad ah {{amount}} si aad u sii wadato.",
+        "BuyCredits": "Iibso dhibcaha",
+        "BuyBonus": "Iibsashada {{amount}} dhibcaha hal mar, waxay u horseedi doontaa {{bonus}} gunno gunno ah.",
+        "Buy": "Iibso",
+        "PurchaseCredits": "Dhibcaha Iibsashada",
+        "Credits": "Heerarka",
+        "ErrorInvalidAmount": "Qadarka ma shaqaynayo",
+        "ErrorInvalidCurrency": "Nasiib darro wali ma taageerno lacagta {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} dhibcaha",
+            "BonusCredits": "{{amount}} dhibcaha"
+        }
+    },
+    "history": {
+        "Date": "Taariikhda",
+        "Amount": "Lacagta",
+        "Description": "Sharaxaad",
+        "Client": "Macmiilka",
+        "To": "ku",
+        "From": "laga bilaabo",
+        "SeeHistory": "Eeg taariikhda lacag bixinta ee {{1}}",
+        "HistoryEmpty": "Wali wax xog ah ma lihid",
+        "PaymentFor": "La diray {{amount}} dhibcaha",
+        "PaymentTo": "La diray {{amount}} dhibcaha",
+        "PaymentToUser": "La diray {{amount}} dhibcaha",
+        "CreatePaidStream": "Bixiyay {{amount}} dhibcaha",
+        "WatchClip": {
+            "+": "Helay dhibcaha {{amount}}",
+            "-": "Bixiyay {{amount}} dhibcaha"
+        },
+        "JoinedPaidStream": {
+            "+": "Helay dhibcaha {{amount}}",
+            "-": "Bixiyay {{amount}} dhibcaha"
+        },
+        "LeftPaidStream": {
+            "+": "La helay dhibcaha {{amount}}",
+            "-": "La diray {{amount}} dhibcaha"
+        },
+        "CreatedCommunity": "Bixiyay {{amount}} dhibcaha",
+        "BoughtCredits": "La iibsaday {{amount}} dhibcaha",
+        "BonusCredits": "Helay gunno {{amount}} dhibco",
+        "InviteAcceptedBy": "Helay dhibcaha {{amount}}",
+        "YouHaveCreditsToStart": "Helay dhibcaha {{amount}}"
+    },
+    "subscriptions": {
+        "infoTitle": "Samee Macluumaadka Lacag -bixinta",
+        "confirm": {
+            "title": "Bilow Diiwaangelinta",
+            "message": "Ma jeclaan lahayd inaad iska qorto {{title}}?",
+            "ok": "OK",
+            "cancel": "Jooji"
+        },
+        "CreditOrDebitCard": "Kaarka amaahda ama deynta",
+        "SubscribePayment": "Bixinta Lacag -bixinta",
+        "ImmediatePayment": "Bixinta Degdegga ah"
+    },
+    "payments": {
+        "infoTitle": "Samee Macluumaadka Lacag -bixinta",
+        "BuyAmountCredits": "Iibso {{amount}} dhibcaha",
+        "confirm": {
+            "title": "Samee Bixinta",
+            "message": "Ma ogoshahay inaad bixiso {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Jooji"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Heerarka",
+            "description": "wuxuu la socdaa dhibcaha iyo lacag -bixinta"
+        },
+        "Assets\/plan": {
+            "displayType": "Qorshaha Hoosaadinta",
+            "description": "qorshaha isqorista"
+        },
+        "Assets\/subscription": {
+            "displayType": "Diiwaangelinta",
+            "description": "rukunka"
+        },
+        "Assets\/product": {
+            "displayType": "Alaabta",
+            "description": "badeecada la iibinayo"
+        },
+        "Assets\/service": {
+            "displayType": "Adeeg",
+            "description": "adeeg la bixinayo"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Helay dhibcaha {{amount}}"
+        },
+        "Assets\/credits\/bought": {
+            "content": "La iibsaday {{amount}} dhibcaha"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Gunnada {{amount}} dhibcaha"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Bixiyay {{amount}} dhibcaha"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Loo diray {{amount}} dhibcaha {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Ka helay {{amount}} dhibco ka yimid {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Adeeg Cusub",
+            "TitlePlaceholder": "Cinwaanka adeegga",
+            "PricePlaceholder": "Qiimee go&#39;an",
+            "LinkPlaceholder": "deji xiriirinta macluumaad dheeri ah",
+            "DescriptionPlaceholder": "Sharaxaadda adeegga",
+            "SaveService": "Adeegga Badbaadinta",
+            "SelectRequiredParticipants": "Ka -qaybgalayaasha loo baahan yahay"
+        },
+        "ManageServiceTemplates": "Maamul Habyaalada Adeegga",
+        "ManageServices": "Maaree Adeegyada",
+        "Free": "Bilaash",
+        "OptionalContribution": "Ku -biirinta ikhtiyaariga ah",
+        "RequiredPayment": "Bixinta loo baahan yahay",
+        "AreYouSureDelete": "Ma hubtaa inaad rabto inaad tirtirto adeeggan?",
+        "AmountServicesRelated": "Waxaa jira {{amount}} oo la heli karo oo la xiriira adeeggan. Iyaguna waa laga saari doonaa."
+    }
+}

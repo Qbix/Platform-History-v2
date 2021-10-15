@@ -36,8 +36,12 @@
         "WatchClip": "حصلت على {{amount}} أرصدة مقابل مشاهدة {{fromStreamTitle}}",
         "PurchaseCredits": "قروض شراء",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ائتمانات"
-        }
+            "BoughtCredits": "{{amount}} ائتمانات",
+            "BonusCredits": "{{amount}} ائتمانات"
+        },
+        "CreatePaidStream": "لإنشاء {{toStreamName}}",
+        "BonusCredits": "منحة {{amount}} ائتمانات",
+        "BuyBonus": "سيؤدي شراء رصيد بقيمة {999}} مرة واحدة إلى الحصول على {{bonus}} رصيد إضافي."
     },
     "history": {
         "Date": "تاريخ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "نفقت أرصدة {{amount}}",
         "BoughtCredits": "اشترى {{amount}} ائتمانات",
         "InviteAcceptedBy": "ربح {{amount}} رصيد",
-        "YouHaveCreditsToStart": "ربح {{amount}} رصيد"
+        "YouHaveCreditsToStart": "ربح {{amount}} رصيد",
+        "CreatePaidStream": "أنفقت {{amount}} من الاعتمادات",
+        "WatchClip": {
+            "+": "حصلت على {{amount}} ائتمانات",
+            "-": "أنفقت {{amount}} من الاعتمادات"
+        },
+        "BonusCredits": "حصلت على مكافأة {{amount}} ائتمانات"
     },
     "subscriptions": {
         "infoTitle": "ضبط معلومات الدفع",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "اشترى {{amount}} ائتمانات"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "منحة {{amount}} ائتمانات"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "ضع سعر",
             "LinkPlaceholder": "تعيين ارتباط معلومات إضافية",
             "DescriptionPlaceholder": "وصف الخدمة",
-            "SaveService": "حفظ الخدمة"
+            "SaveService": "حفظ الخدمة",
+            "SelectRequiredParticipants": "المشاركون المطلوبون"
         },
         "ManageServiceTemplates": "إدارة قوالب الخدمة",
         "ManageServices": "إدارة الخدمات",

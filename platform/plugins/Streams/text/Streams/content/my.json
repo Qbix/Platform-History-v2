@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "ငါကိုဖိတ်ကြားပြည်သူ့",
-        "Streams\/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်"
+        "Streams\/invitedMe": "ငါ့ကိုရန်ဖိတ်ခေါ်အဘယ်သူသည်",
+        "AreYouAgree": "မင်းသဘောတူလား?",
+        "Yes": "ဟုတ်တယ်",
+        "No": "မဟုတ်ဘူး"
     },
     "interests": {
         "Filter": "သငျသညျအဘယျသို့ပျော်မွေ့သလဲ?",
@@ -80,7 +83,8 @@
             "byFacebook": "Facebook က",
             "byTwitter": "တွစ်တာ",
             "scannedQR": "{{ClickOrTap}} ကုဒ် scan ဖတ်ခဲ့လျှင်",
-            "copyLink": "{{ClickOrTap}} ဖိတ်ကြားထားသောလင့်ခ်ကိုကူးယူရန်"
+            "copyLink": "{{ClickOrTap}} ဖိတ်ကြားထားသောလင့်ခ်ကိုကူးယူရန်",
+            "userChooserPlaceholder": "နာမည်ဖြင့်ရှာပါ"
         },
         "email": {
             "subject": "ဟေ့, ဒီထုတ်စစ်ဆေး",
@@ -167,7 +171,14 @@
             "userHasNoVideo": "ပါဝင်သူတွင်ဗီဒီယိုမရှိပါ",
             "openInBrowserAlert": "ဆွေးနွေးပွဲသို့ဝင်ရောက်ရန် Safari browser တွင် link ကိုဖွင့်ပါ",
             "youBeganVideoRecording": "ဒီကွန်ဖရင့်ကိုသင်စတင်မှတ်တမ်းတင်ခဲ့တယ်",
-            "youStoppedVideoRecording": "သင်သည်ဤကွန်ဖရန့်ကိုမှတ်တမ်းတင်ခြင်းမပြုတော့ပါ"
+            "youStoppedVideoRecording": "သင်သည်ဤကွန်ဖရန့်ကိုမှတ်တမ်းတင်ခြင်းမပြုတော့ပါ",
+            "switchingRoom": "အခန်းပြောင်း ...",
+            "forceDisconnecting": "၅ စက္ကန့်အတွင်းသင်အဆက်အသွယ်ဖြတ်လိမ့်မည်",
+            "youStartedLive": "သင်သည်ဤခေါ်ဆိုမှုကိုစိတ်ကြိုက် RTMP သို့စတင်ထုတ်လွှင့်ခဲ့သည်",
+            "youStoppedLive": "သင်သည်ဤခေါ်ဆိုမှုကိုစိတ်ကြိုက် RTMP သို့ထုတ်လွှင့်ခြင်းကိုရပ်လိုက်ပါသည်",
+            "sbStartedLiveStreaming": "{{userName}} တိုက်ရိုက်လွှင့်ခဲ့သည်",
+            "sbStoppedLiveStreaming": "{{userName}} တိုက်ရိုက်လွှင့်ခဲ့သည်",
+            "liveStopped": "ဗီဒီယိုကို endpoint သို့ပို့နေစဉ်အမှားဖြစ်သွားသည်"
         },
         "settingsPopup": {
             "webCamera": "ဝက်ဘ်ကင်မရာ",
@@ -192,7 +203,13 @@
             "stopRecording": "မှတ်တမ်းတင်ခြင်းရပ်ပါ",
             "recordingInProgress": "အသံသွင်းနေသည် ...",
             "publishOnTimeline": "အချိန်ဇယားအပေါ်ထုတ်ဝေပါ",
-            "publishToGroup": "အုပ်စုလိုက်ထုတ်ဝေပါ"
+            "publishToGroup": "အုပ်စုလိုက်ထုတ်ဝေပါ",
+            "turnOffAudioInput": "မိုက်ခရိုဖုန်းအသံတိတ်ရန်",
+            "micIsTurnedOff": "မိုက်ခရိုဖုန်းပိတ်ထားသည်",
+            "start": "စတင်ပါ",
+            "stop": "ရပ်",
+            "streamingSettings": "ဆက်တင်များ",
+            "streamToRTMP": "စိတ်ကြိုက် RTMP သို့တိုက်ရိုက်လွှင့်ပါ"
         },
         "participantsPopup": {
             "disconnect": "အဆက်ဖြတ်လိုက်ပါ",
@@ -213,7 +230,18 @@
         "notAllowedToJoinCall": "သင်ဤစီးဝင်ရန်ခွင့်ပြုချက်မရှိပါ",
         "streamTitle": "{{1}} တိုက်ရိုက်ခေါ်ဆိုမှု",
         "preview": {
-            "preamble": "အစည်းအဝေး:"
+            "preamble": "အစည်းအဝေး:",
+            "Meeting": "အစည်းအဝေး",
+            "MeetingEnded": "အစည်းအဝေးပြီးဆုံးသည်"
+        },
+        "preparing": {
+            "micIsOff": "မိုက်ကပိတ်ထားသည်",
+            "micIsOn": "မိုက်ကိုဖွင့်ထားသည်",
+            "cameraIsOff": "ကင်မရာပိတ်ထားသည်",
+            "cameraIsOn": "ကင်မရာဖွင့်ထားသည်",
+            "screenSharingIsOn": "ဖန်သားပြင်မျှဝေခြင်းကိုဖွင့်ထားသည်",
+            "screenSharingIsOff": "မျက်နှာပြင်ကိုမျှဝေပါ",
+            "joinNow": "ခေါ်ဆိုမှုကိုပူးပေါင်းပါ"
         }
     },
     "messages": {
@@ -360,6 +388,11 @@
         "Streams\/answer": {
             "displayType": "အဖြေ",
             "description": "အဖြေစီးပါ"
+        },
+        "Streams\/calls": {
+            "displayType": "ရှစ်ပါး",
+            "description": "Streams\/webrtc အတွက်အမျိုးအစား",
+            "MaxRelationsExceeded": "အများဆုံးခေါ်ဆိုမှုများကျော်လွန်သွားသည်"
         }
     },
     "participating": {
@@ -448,7 +481,9 @@
         "invalidFile": "မမှန်ကန်သောဖိုင်",
         "errorNoSource": "ပုံအရင်းအမြစ်မရှိပါ",
         "uploadLimit": "ဖိုင်အရွယ်အစား - {{size}}",
-        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။"
+        "errorFileSize": "စိတ်မကောင်းပါ၊ ဖိုင်ကြီးလွန်းသည်<br> ဖိုင်အရွယ်အစားသည် {{size}} ဖြစ်သည်။",
+        "uploadedImage": "တင်ထားသောပုံ",
+        "imageTitle": "ပုံခေါင်းစဉ်"
     },
     "questions": {
         "Questions": "မေးခွန်းများ",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "ဖြေပြီးသား",
         "TitlePlaceholder": "သင်၏မေးခွန်းရိုက်ပါ",
         "ContentPlaceholder": "လူများဖြေဆိုရန်ကူညီရန်နောက်ထပ်သတင်းအချက်အလက်များကိုဤနေရာတွင်ထားပါ",
-        "ErrorTitle": "မေးခွန်းလိုအပ်သည်"
+        "ErrorTitle": "မေးခွန်းလိုအပ်သည်",
+        "Placeholder": "နေရာယူသည်"
     },
     "experience": {
-        "NewExperience": "အတွေ့အကြုံအသစ်"
+        "NewExperience": "အတွေ့အကြုံအသစ်",
+        "DefineTitle": "ကျေးဇူးပြု၍ ခေါင်းစဉ်တစ်ခုသတ်မှတ်ပါ",
+        "Create": "ဖန်တီးပါ"
+    },
+    "calls": {
+        "SettingsTitle": "ခေါ်ဆိုမှုများ",
+        "MaxCalls": "မက်စ်ဖုန်းခေါ်ဆိုမှု",
+        "Update": "Update လုပ်ပါ",
+        "NoCallsYet": "ခေါ်ဆိုမှုမရှိသေးပါ",
+        "CallReasonTitle": "ဒီခေါ်ဆိုမှုကဘာလဲ။",
+        "WaitingRoom": "အခန်းစောင့်"
     }
 }

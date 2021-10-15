@@ -36,8 +36,12 @@
         "WatchClip": "برای تماشای {{fromStreamTitle}} اعتبار {{amount}} کسب کرده اید",
         "PurchaseCredits": "اعتبارات خرید",
         "forMessages": {
-            "BoughtCredits": "{{amount}} اعتبار"
-        }
+            "BoughtCredits": "{{amount}} اعتبار",
+            "BonusCredits": "اعتبار {{amount}}"
+        },
+        "CreatePaidStream": "برای ایجاد {{toStreamName}}",
+        "BonusCredits": "اعتبار {{amount}} پاداش",
+        "BuyBonus": "خرید اعتبار {{amount}} به طور همزمان منجر به پاداش اعتبار {{bonus}} می شود."
     },
     "history": {
         "Date": "تاریخ",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "اعتبار {999 صرف کرد",
         "BoughtCredits": "اعتبار 99 999 خریداری کرد",
         "InviteAcceptedBy": "اعتبار 99 999 کسب کرده است",
-        "YouHaveCreditsToStart": "اعتبار 99 999 کسب کرده است"
+        "YouHaveCreditsToStart": "اعتبار 99 999 کسب کرده است",
+        "CreatePaidStream": "اعتبار {{amount}} خرج کرد",
+        "WatchClip": {
+            "+": "اعتبار {{amount}} کسب کرد",
+            "-": "اعتبار {{amount}} خرج کرد"
+        },
+        "BonusCredits": "اعتبار {{amount}} دریافت کرده اید"
     },
     "subscriptions": {
         "infoTitle": "اطلاعات پرداخت را تنظیم کنید",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "اعتبار 99 999 خریداری کرد"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "اعتبار {{amount}} پاداش"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "قیمت تعیین شده",
             "LinkPlaceholder": "پیوند اطلاعات اضافی را تنظیم کنید",
             "DescriptionPlaceholder": "شرح خدمات",
-            "SaveService": "ذخیره سرویس"
+            "SaveService": "ذخیره سرویس",
+            "SelectRequiredParticipants": "شرکت کنندگان مورد نیاز"
         },
         "ManageServiceTemplates": "مدیریت الگوهای خدمات",
         "ManageServices": "مدیریت خدمات",

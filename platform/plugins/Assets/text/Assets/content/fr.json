@@ -36,8 +36,12 @@
         "WatchClip": "Vous avez gagné {{amount}} crédits pour regarder {{fromStreamTitle}}",
         "PurchaseCredits": "Achat de crédits",
         "forMessages": {
-            "BoughtCredits": "{{amount}} crédits"
-        }
+            "BoughtCredits": "{{amount}} crédits",
+            "BonusCredits": "{{amount}} crédits"
+        },
+        "CreatePaidStream": "pour créer {{toStreamName}}",
+        "BonusCredits": "Crédits bonus {{amount}}",
+        "BuyBonus": "L&#39;achat de {{amount}} crédits en une seule fois, entraînera un bonus de {{bonus}} crédits."
     },
     "history": {
         "Date": "Rendez-vous amoureux",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "{{amount}} crédits dépensés",
         "BoughtCredits": "A acheté {{amount}} crédits",
         "InviteAcceptedBy": "A obtenu {{amount}} crédits",
-        "YouHaveCreditsToStart": "A obtenu {{amount}} crédits"
+        "YouHaveCreditsToStart": "A obtenu {{amount}} crédits",
+        "CreatePaidStream": "{{amount}} crédits dépensés",
+        "WatchClip": {
+            "+": "{{amount}} crédits gagnés",
+            "-": "{{amount}} crédits dépensés"
+        },
+        "BonusCredits": "Vous avez {{amount}} crédits bonus"
     },
     "subscriptions": {
         "infoTitle": "Définir les informations de paiement",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "A acheté {{amount}} crédits"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Crédits bonus {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Fixer le prix",
             "LinkPlaceholder": "définir un lien d&#39;information supplémentaire",
             "DescriptionPlaceholder": "Description du service",
-            "SaveService": "Enregistrer le service"
+            "SaveService": "Enregistrer le service",
+            "SelectRequiredParticipants": "Participants requis"
         },
         "ManageServiceTemplates": "Gérer les modèles de service",
         "ManageServices": "Gérer les services",

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Tape pou peye"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: chaj trete pou {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Mèsi pou peman ou bay {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abònman nan {{plan.title}}",
+        "YouSubscribedTo": "Ou te enskri nan {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Ou jwenn peman {{displayAmount}} nan {{call 'publisher.displayName'}} pa &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, sa a se jis fè w konnen {{1}} te chaje {{2}} pou {{3}} pa {{4}}"
+    },
+    "charged": {
+        "Subject": "Mèsi pou peman ou pou &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, sa a se jis yon konfimasyon rapid ke ou te avèk siksè peye {{2}} a {{3}} pou {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Enfòmasyon sou lòd",
+        "PaymentMethod": "Metòd peman",
+        "ContactInfo": "Enfòmasyon sou kontak",
+        "Pay": "Peye"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Envite aksepte pa {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Ou gen {{amount}} kredi pou kòmanse",
+        "PaymentFor": "Peman pou &quot;{{1}}&quot;",
+        "PaymentTo": "Peman pou {{1}}",
+        "PaymentToUser": "Peman pou {{toUserName}}",
+        "CreatePaidStream": "pou kreye {{toStreamName}}",
+        "JoinedPaidStream": "pou rezèvasyon nan &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "pou kreye kominote &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kòm ranbousman rezèvasyon nan &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Achte {{amount}} kredi",
+        "BonusCredits": "Bonus {{amount}} kredi",
+        "BuyAmountCredits": "Achte {{amount}} kredi",
+        "WatchClip": "Touche {{amount}} kredi pou gade {{fromStreamTitle}}",
+        "MissingCredits": "Kredi ki manke",
+        "YouMissingCredits": "Ou bezwen yon lòt {{amount}} kredi pou kontinye.",
+        "BuyCredits": "Achte kredi",
+        "BuyBonus": "Achte {{amount}} kredi nan yon fwa, ap mennen nan {{bonus}} kredi bonis.",
+        "Buy": "Achte",
+        "PurchaseCredits": "Achte Kredi",
+        "Credits": "Kredi",
+        "ErrorInvalidAmount": "Kantite envalid",
+        "ErrorInvalidCurrency": "Malerezman nou pa sipòte lajan {{currency}} ankò",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredi",
+            "BonusCredits": "{{amount}} kredi"
+        }
+    },
+    "history": {
+        "Date": "Dat",
+        "Amount": "Kantite lajan",
+        "Description": "Deskripsyon",
+        "Client": "Kliyan",
+        "To": "a",
+        "From": "soti nan",
+        "SeeHistory": "Gade istwa peman pou {{1}}",
+        "HistoryEmpty": "Ou poko gen done",
+        "PaymentFor": "Voye {{amount}} kredi",
+        "PaymentTo": "Voye {{amount}} kredi",
+        "PaymentToUser": "Voye {{amount}} kredi",
+        "CreatePaidStream": "Depanse {{amount}} kredi",
+        "WatchClip": {
+            "+": "Touche {{amount}} kredi",
+            "-": "Depanse {{amount}} kredi"
+        },
+        "JoinedPaidStream": {
+            "+": "Touche {{amount}} kredi",
+            "-": "Depanse {{amount}} kredi"
+        },
+        "LeftPaidStream": {
+            "+": "Resevwa kredi {{amount}}",
+            "-": "Voye {{amount}} kredi"
+        },
+        "CreatedCommunity": "Depanse {{amount}} kredi",
+        "BoughtCredits": "Achte {{amount}} kredi",
+        "BonusCredits": "Te resevwa bonis {{amount}} kredi",
+        "InviteAcceptedBy": "Touche {{amount}} kredi",
+        "YouHaveCreditsToStart": "Touche {{amount}} kredi"
+    },
+    "subscriptions": {
+        "infoTitle": "Mete Enfòmasyon sou Peman",
+        "confirm": {
+            "title": "Kòmanse Abònman",
+            "message": "Èske ou ta renmen abònman nan {{title}}?",
+            "ok": "OK",
+            "cancel": "Anile"
+        },
+        "CreditOrDebitCard": "Kat kredi oswa debi",
+        "SubscribePayment": "Abònman Peman",
+        "ImmediatePayment": "Peman imedyat"
+    },
+    "payments": {
+        "infoTitle": "Mete Enfòmasyon sou Peman",
+        "BuyAmountCredits": "Achte {{amount}} kredi",
+        "confirm": {
+            "title": "Fè yon Peman",
+            "message": "Èske ou dakò pou peye {{symbol}} {{amount}}?",
+            "ok": "OK",
+            "cancel": "Anile"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kredi",
+            "description": "kenbe tras nan kredi ak peman yo"
+        },
+        "Assets\/plan": {
+            "displayType": "Plan abònman",
+            "description": "plan abònman"
+        },
+        "Assets\/subscription": {
+            "displayType": "Abònman",
+            "description": "abònman"
+        },
+        "Assets\/product": {
+            "displayType": "Pwodwi",
+            "description": "pwodwi yo te vann"
+        },
+        "Assets\/service": {
+            "displayType": "Sèvis",
+            "description": "sèvis yo ofri"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Touche {{amount}} kredi"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Achte {{amount}} kredi"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredi"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Depanse {{amount}} kredi"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Voye {{amount}} kredi nan {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Resevwa kredi {{amount}} nan men {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Nouvo Sèvis",
+            "TitlePlaceholder": "Tit sèvis",
+            "PricePlaceholder": "Mete pri",
+            "LinkPlaceholder": "mete lyen enfomasyon anplis",
+            "DescriptionPlaceholder": "Sèvis deskripsyon",
+            "SaveService": "Sove Sèvis",
+            "SelectRequiredParticipants": "Patisipan obligatwa yo"
+        },
+        "ManageServiceTemplates": "Jere Modèl Sèvis yo",
+        "ManageServices": "Jere Sèvis yo",
+        "Free": "Gratis",
+        "OptionalContribution": "Si ou vle kontribisyon",
+        "RequiredPayment": "Peman obligatwa",
+        "AreYouSureDelete": "Èske ou sèten ou vle efase sèvis sa a?",
+        "AmountServicesRelated": "Gen {{amount}} disponiblite ki gen rapò ak sèvis sa a. Yo menm tou yo pral retire li."
+    }
+}

@@ -1,0 +1,167 @@
+{
+    "browsertab": {
+        "html": "{{button}}",
+        "button": "Ketuk untuk membayar"
+    },
+    "notifications": {
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tagihan diproses untuk {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Terima kasih atas pembayaran Anda ke {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} berlangganan {{plan.title}}",
+        "YouSubscribedTo": "Anda telah berlangganan {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "Anda mendapatkan pembayaran {{displayAmount}} dari {{call 'publisher.displayName'}} dengan &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hai, ini hanya untuk memberi tahu Anda {{1}} telah ditagih {{2}} untuk {{3}} oleh {{4}}"
+    },
+    "charged": {
+        "Subject": "Terima kasih atas pembayaran Anda untuk &quot;{{description}}&quot;",
+        "HavePaid": "Hai {{1}}, ini hanya konfirmasi singkat bahwa Anda telah berhasil membayar {{2}} ke {{3}} untuk {{4}}"
+    },
+    "payment": {
+        "AboutOrder": "Info tentang pemesanan",
+        "PaymentMethod": "Cara Pembayaran",
+        "ContactInfo": "Info kontak",
+        "Pay": "Membayar"
+    },
+    "credits": {
+        "InviteAcceptedBy": "Undangan diterima oleh {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Anda memiliki {{amount}} kredit untuk memulai",
+        "PaymentFor": "Pembayaran untuk &quot;{{1}}&quot;",
+        "PaymentTo": "Pembayaran ke {{1}}",
+        "PaymentToUser": "Pembayaran ke {{toUserName}}",
+        "CreatePaidStream": "untuk membuat {{toStreamName}}",
+        "JoinedPaidStream": "untuk reservasi di &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "untuk membuat komunitas &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "sebagai pengembalian dana reservasi di &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyAmountCredits": "Beli {{amount}} kredit",
+        "WatchClip": "Memperoleh kredit {{amount}} karena menonton {{fromStreamTitle}}",
+        "MissingCredits": "Kredit Hilang",
+        "YouMissingCredits": "Anda memerlukan kredit {{amount}} tambahan untuk melanjutkan.",
+        "BuyCredits": "Membeli kredit",
+        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan menghasilkan {{bonus}} bonus kredit.",
+        "Buy": "Membeli",
+        "PurchaseCredits": "Beli Kredit",
+        "Credits": "Kredit",
+        "ErrorInvalidAmount": "Jumlah tidak valid",
+        "ErrorInvalidCurrency": "Sayangnya kami belum mendukung mata uang {{currency}}",
+        "forMessages": {
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        }
+    },
+    "history": {
+        "Date": "Tanggal",
+        "Amount": "Jumlah",
+        "Description": "Keterangan",
+        "Client": "Klien",
+        "To": "ke",
+        "From": "dari",
+        "SeeHistory": "Lihat riwayat pembayaran untuk {{1}}",
+        "HistoryEmpty": "Anda belum memiliki data",
+        "PaymentFor": "Mengirim {{amount}} kredit",
+        "PaymentTo": "Mengirim {{amount}} kredit",
+        "PaymentToUser": "Mengirim {{amount}} kredit",
+        "CreatePaidStream": "Menghabiskan {{amount}} kredit",
+        "WatchClip": {
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Menghabiskan {{amount}} kredit"
+        },
+        "JoinedPaidStream": {
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Menghabiskan {{amount}} kredit"
+        },
+        "LeftPaidStream": {
+            "+": "Menerima {{amount}} kredit",
+            "-": "Mengirim {{amount}} kredit"
+        },
+        "CreatedCommunity": "Menghabiskan {{amount}} kredit",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "BonusCredits": "Mendapat bonus {{amount}} kredit",
+        "InviteAcceptedBy": "Memperoleh {{amount}} kredit",
+        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit"
+    },
+    "subscriptions": {
+        "infoTitle": "Setel Informasi Pembayaran",
+        "confirm": {
+            "title": "Mulai Berlangganan",
+            "message": "Apakah Anda ingin berlangganan {{title}}?",
+            "ok": "oke",
+            "cancel": "Membatalkan"
+        },
+        "CreditOrDebitCard": "Kartu kredit atau debit",
+        "SubscribePayment": "Pembayaran Berlangganan",
+        "ImmediatePayment": "Pembayaran langsung"
+    },
+    "payments": {
+        "infoTitle": "Setel Informasi Pembayaran",
+        "BuyAmountCredits": "Beli {{amount}} kredit",
+        "confirm": {
+            "title": "Melakukan pembayaran",
+            "message": "Apakah Anda setuju untuk membayar {{symbol}}{{amount}}?",
+            "ok": "oke",
+            "cancel": "Membatalkan"
+        }
+    },
+    "types": {
+        "Assets\/credits": {
+            "displayType": "Kredit",
+            "description": "melacak kredit dan pembayaran"
+        },
+        "Assets\/plan": {
+            "displayType": "Paket Berlangganan",
+            "description": "paket berlangganan"
+        },
+        "Assets\/subscription": {
+            "displayType": "Berlangganan",
+            "description": "berlangganan"
+        },
+        "Assets\/product": {
+            "displayType": "Produk",
+            "description": "produk yang dijual"
+        },
+        "Assets\/service": {
+            "displayType": "Melayani",
+            "description": "layanan yang ditawarkan"
+        }
+    },
+    "messages": {
+        "Assets\/credits\/earned": {
+            "content": "Memperoleh {{amount}} kredit"
+        },
+        "Assets\/credits\/bought": {
+            "content": "Membeli {{amount}} kredit"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredit"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Menghabiskan {{amount}} kredit"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Mengirim {{amount}} kredit ke {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Menerima {{amount}} kredit dari {{fromUserName}}"
+        }
+    },
+    "services": {
+        "NewServiceTemplate": {
+            "Title": "Layanan Baru",
+            "TitlePlaceholder": "Judul layanan",
+            "PricePlaceholder": "Tetapkan harga",
+            "LinkPlaceholder": "atur tautan info tambahan",
+            "DescriptionPlaceholder": "Deskripsi layanan",
+            "SaveService": "Simpan Layanan",
+            "SelectRequiredParticipants": "Wajib Peserta"
+        },
+        "ManageServiceTemplates": "Kelola Template Layanan",
+        "ManageServices": "Kelola Layanan",
+        "Free": "Gratis",
+        "OptionalContribution": "Kontribusi opsional",
+        "RequiredPayment": "Pembayaran yang diperlukan",
+        "AreYouSureDelete": "Anda yakin ingin menghapus layanan ini?",
+        "AmountServicesRelated": "Ada {{amount}} ketersediaan yang terkait dengan layanan ini. Mereka juga akan dihapus."
+    }
+}

@@ -36,8 +36,12 @@
         "WatchClip": "Teenisite {{fromStreamTitle}} vaatamise eest {{amount}} krediiti",
         "PurchaseCredits": "Ostu krediiti",
         "forMessages": {
-            "BoughtCredits": "{{amount}} krediiti"
-        }
+            "BoughtCredits": "{{amount}} krediiti",
+            "BonusCredits": "{{amount}} krediiti"
+        },
+        "CreatePaidStream": "loomise eest {{toStreamName}}",
+        "BonusCredits": "Boonus {{amount}} krediiti",
+        "BuyBonus": "Ostes korraga {{amount}} krediiti, saate {{bonus}} krediiti."
     },
     "history": {
         "Date": "Kuupäev",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Kulutatud {{amount}} krediiti",
         "BoughtCredits": "Ostetud {{amount}} krediiti",
         "InviteAcceptedBy": "Teenitud {{amount}} krediiti",
-        "YouHaveCreditsToStart": "Teenitud {{amount}} krediiti"
+        "YouHaveCreditsToStart": "Teenitud {{amount}} krediiti",
+        "CreatePaidStream": "Kulutas {{amount}} krediiti",
+        "WatchClip": {
+            "+": "Teenitud {{amount}} krediiti",
+            "-": "Kulutas {{amount}} krediiti"
+        },
+        "BonusCredits": "Soodustas {{amount}} krediiti"
     },
     "subscriptions": {
         "infoTitle": "Määrake makseteave",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Ostetud {{amount}} krediiti"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Boonus {{amount}} krediiti"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Määra hind",
             "LinkPlaceholder": "määrake täiendav infolink",
             "DescriptionPlaceholder": "Teenuse kirjeldus",
-            "SaveService": "Salvesta teenus"
+            "SaveService": "Salvesta teenus",
+            "SelectRequiredParticipants": "Nõutavad osalejad"
         },
         "ManageServiceTemplates": "Hallake teenuse malle",
         "ManageServices": "Teenuste haldamine",

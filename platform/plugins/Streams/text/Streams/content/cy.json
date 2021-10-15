@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams\/invited": "Pobl a wahoddais",
-        "Streams\/invitedMe": "Pwy a&#39;m gwahoddodd"
+        "Streams\/invitedMe": "Pwy a&#39;m gwahoddodd",
+        "AreYouAgree": "Ydych chi&#39;n cytuno?",
+        "Yes": "Ydw",
+        "No": "Na"
     },
     "interests": {
         "Filter": "Beth ydych chi&#39;n ei fwynhau?",
@@ -80,7 +83,8 @@
             "chooseAgainFromContacts": "Dewiswch eto o gysylltiadau",
             "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol",
             "scannedQR": "{{ClickOrTap}} os sganiwyd y cod",
-            "copyLink": "{{ClickOrTap}} i gopïo dolen gwahodd"
+            "copyLink": "{{ClickOrTap}} i gopïo dolen gwahodd",
+            "userChooserPlaceholder": "Chwilio yn ôl enw"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -180,7 +184,14 @@
             "userHasNoVideo": "Nid oes gan y cyfranogwr fideo",
             "openInBrowserAlert": "Dolen agored ym mhorwr Safari i ymuno â&#39;r gynhadledd.",
             "youBeganVideoRecording": "Dechreuoch chi recordio&#39;r gynhadledd hon",
-            "youStoppedVideoRecording": "Fe wnaethoch chi roi&#39;r gorau i recordio&#39;r gynhadledd hon"
+            "youStoppedVideoRecording": "Fe wnaethoch chi roi&#39;r gorau i recordio&#39;r gynhadledd hon",
+            "switchingRoom": "Ystafell newid ...",
+            "forceDisconnecting": "Byddwch yn cael eich datgysylltu o fewn 5 eiliad",
+            "youStartedLive": "Dechreuoch chi ddarlledu&#39;r alwad hon i RTMP arferiad",
+            "youStoppedLive": "Fe wnaethoch chi roi&#39;r gorau i ddarlledu&#39;r alwad hon i RTMP arferiad",
+            "sbStartedLiveStreaming": "Dechreuodd {{userName}} yn fyw",
+            "sbStoppedLiveStreaming": "Daeth {{userName}} i ben yn fyw",
+            "liveStopped": "Digwyddodd gwall wrth anfon fideo i endpoint"
         },
         "settingsPopup": {
             "webCamera": "Camera Gwe",
@@ -205,7 +216,13 @@
             "stopRecording": "Stopio Recordio",
             "recordingInProgress": "Mae recordio ar y gweill ...",
             "publishOnTimeline": "Cyhoeddi ar y llinell amser",
-            "publishToGroup": "Cyhoeddi i&#39;r grŵp"
+            "publishToGroup": "Cyhoeddi i&#39;r grŵp",
+            "turnOffAudioInput": "Meicroffon mud",
+            "micIsTurnedOff": "Mae&#39;r meicroffon wedi&#39;i ddiffodd",
+            "start": "Dechrau",
+            "stop": "Stopiwch",
+            "streamingSettings": "Gosodiadau",
+            "streamToRTMP": "Ffrwd i RTMP arferiad"
         },
         "participantsPopup": {
             "disconnect": "Datgysylltwch",
@@ -226,7 +243,18 @@
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
         "streamTitle": "{{1}} galwad byw",
         "preview": {
-            "preamble": "Cyfarfod:"
+            "preamble": "Cyfarfod:",
+            "Meeting": "Cyfarfod",
+            "MeetingEnded": "Daeth y cyfarfod i ben"
+        },
+        "preparing": {
+            "micIsOff": "Mae Mic i ffwrdd",
+            "micIsOn": "Mae Mic ymlaen",
+            "cameraIsOff": "Mae&#39;r camera i ffwrdd",
+            "cameraIsOn": "Mae&#39;r camera ymlaen",
+            "screenSharingIsOn": "Mae rhannu sgrin ymlaen",
+            "screenSharingIsOff": "Sgrin rhannu",
+            "joinNow": "Ymunwch â&#39;r Alwad"
         }
     },
     "types": {
@@ -354,6 +382,11 @@
         "Streams\/answer": {
             "displayType": "Ateb",
             "description": "ffrwd ateb"
+        },
+        "Streams\/calls": {
+            "displayType": "Galwadau",
+            "description": "categori ar gyfer Ffrydiau \/ webrtc",
+            "MaxRelationsExceeded": "Rhagorwyd ar alwadau Max"
         }
     },
     "messages": {
@@ -448,7 +481,9 @@
         "invalidFile": "Ffeil annilys",
         "errorNoSource": "Dim ffynhonnell ddelwedd",
         "uploadLimit": "Maint ffeil Max: {{size}}",
-        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}"
+        "errorFileSize": "Sori, ond ffeil yn rhy fawr.<br> Maint ffeil Max yw {{size}}",
+        "uploadedImage": "Delwedd wedi&#39;i llwytho i fyny",
+        "imageTitle": "Teitl y ddelwedd"
     },
     "questions": {
         "Questions": "Cwestiynau",
@@ -469,9 +504,20 @@
         "AlreadyAnswered": "Atebwyd eisoes",
         "TitlePlaceholder": "Teipiwch eich cwestiwn",
         "ContentPlaceholder": "Rhowch unrhyw wybodaeth ychwanegol yma i helpu pobl i ateb",
-        "ErrorTitle": "Angen cwestiwn"
+        "ErrorTitle": "Angen cwestiwn",
+        "Placeholder": "Deiliad Lle"
     },
     "experience": {
-        "NewExperience": "Profiad Newydd"
+        "NewExperience": "Profiad Newydd",
+        "DefineTitle": "Diffiniwch deitl os gwelwch yn dda",
+        "Create": "Creu"
+    },
+    "calls": {
+        "SettingsTitle": "Galwadau",
+        "MaxCalls": "Mae Max yn galw",
+        "Update": "Diweddariad",
+        "NoCallsYet": "Dim galwadau eto",
+        "CallReasonTitle": "Am beth mae&#39;r alwad hon?",
+        "WaitingRoom": "Ystafell aros"
     }
 }

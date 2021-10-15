@@ -113,7 +113,10 @@
         "SetClipStart": "ຕັ້ງ Clip ເລີ່ມຕົ້ນ",
         "ClipStart": "ຄລິບເລີ່ມຕົ້ນ",
         "SetClipEnd": "ຕັ້ງ Clip ຈົບ",
-        "ClipEnd": "Clip ຈົບ"
+        "ClipEnd": "Clip ຈົບ",
+        "StartMoreEnd": "ຕຳ ແໜ່ງ ເລີ່ມຕົ້ນບໍ່ສາມາດຫຼາຍກວ່າ ຕຳ ແໜ່ງ ສິ້ນສຸດໄດ້",
+        "EndLessStart": "ຕຳ ແໜ່ງ ສິ້ນສຸດບໍ່ສາມາດ ໜ້ອຍ ກວ່າ ຕຳ ແໜ່ງ ເລີ່ມຕົ້ນໄດ້",
+        "WhichInvalid": "Argument &#39;ເຊິ່ງ&#39; ບໍ່ຖືກຕ້ອງ"
     },
     "tabs": {
         "more": "ຫຼາຍ",

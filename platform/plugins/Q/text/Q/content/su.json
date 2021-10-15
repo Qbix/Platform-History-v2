@@ -113,7 +113,10 @@
         "SetClipStart": "Atur Klip Mimitian",
         "ClipStart": "Klip Mimitian",
         "SetClipEnd": "Atur Klip Tungtung",
-        "ClipEnd": "Klip Tungtung"
+        "ClipEnd": "Klip Tungtung",
+        "StartMoreEnd": "Posisi mimiti henteu tiasa langkung ti posisi tungtung",
+        "EndLessStart": "Posisi tungtung teu tiasa kirang ti posisi mimiti",
+        "WhichInvalid": "Argumen &#39;anu&#39; henteu leres"
     },
     "tabs": {
         "more": "Tambih deui",

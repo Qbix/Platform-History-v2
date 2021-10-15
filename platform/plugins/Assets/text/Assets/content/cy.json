@@ -36,8 +36,12 @@
         "WatchClip": "Credydau {{amount}} a enillwyd am wylio {{fromStreamTitle}}",
         "PurchaseCredits": "Credydau Prynu",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credyd"
-        }
+            "BoughtCredits": "{{amount}} credyd",
+            "BonusCredits": "Credydau {{amount}}"
+        },
+        "CreatePaidStream": "am greu {{toStreamName}}",
+        "BonusCredits": "Credydau bonws {{amount}}",
+        "BuyBonus": "Bydd prynu credydau {{amount}} ar unwaith, yn arwain at fonws credydau {{bonus}}."
     },
     "history": {
         "Date": "Dyddiad",
@@ -62,7 +66,13 @@
         "CreatedCommunity": "Credydau a dreuliwyd {{amount}}",
         "BoughtCredits": "Prynu credydau {{amount}}",
         "InviteAcceptedBy": "Credydau {{amount}} a enillwyd",
-        "YouHaveCreditsToStart": "Credydau {{amount}} a enillwyd"
+        "YouHaveCreditsToStart": "Credydau {{amount}} a enillwyd",
+        "CreatePaidStream": "Credydau a dreuliwyd {{amount}}",
+        "WatchClip": {
+            "+": "Credydau {{amount}} a enillwyd",
+            "-": "Credydau a dreuliwyd {{amount}}"
+        },
+        "BonusCredits": "Wedi cael bonws {{amount}} credyd"
     },
     "subscriptions": {
         "infoTitle": "Gosod Gwybodaeth Taliad",
@@ -123,6 +133,9 @@
         },
         "Assets\/credits\/bought": {
             "content": "Prynu credydau {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Credydau bonws {{amount}}"
         }
     },
     "charge": {
@@ -140,7 +153,8 @@
             "PricePlaceholder": "Pris gosod",
             "LinkPlaceholder": "gosod dolen wybodaeth ychwanegol",
             "DescriptionPlaceholder": "Disgrifiad o&#39;r gwasanaeth",
-            "SaveService": "Gwasanaeth Arbed"
+            "SaveService": "Gwasanaeth Arbed",
+            "SelectRequiredParticipants": "Cyfranogwyr Gofynnol"
         },
         "ManageServiceTemplates": "Rheoli Templedi Gwasanaeth",
         "ManageServices": "Rheoli Gwasanaethau",

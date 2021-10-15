@@ -85,7 +85,14 @@
         },
         "confirmTerms": "Accipe iussis Terms servitii?",
         "facebookNoEmail": "Absentis ratio vestri Facebook electronica confirmata. Log tantum modo in patria.",
-        "picTooltip": "Te potest mutare post hanc"
+        "picTooltip": "Te potest mutare post hanc",
+        "wallet": {
+            "payload": "Log in {{host}} tempore {{timestamp}}",
+            "alert": {
+                "title": "Redirecting to Wallet",
+                "content": "Semel hunc alternis claudis, crumenam eris. Post signum in, hanc paginam redi."
+            }
+        }
     },
     "setIdentifier": {
         "title": "Ita in ut addere log",
@@ -108,6 +115,18 @@
         "Owner": "dominus",
         "Admin": "Maecenas et ipsum",
         "Member": "socius",
-        "Guest": "hospes"
+        "Guest": "hospes",
+        "Host": "Host"
+    },
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Cotidiana",
+        "Weekly": "Weekly",
+        "Monthly": "Menstrua",
+        "Application": "Applicationem",
+        "Pages": "Paginae",
+        "Services": "Officia",
+        "Faq": "Faq",
+        "WeekDays": "Hebdomadae diebus"
     }
 }
