@@ -592,7 +592,7 @@ class Q_Session
 			false,
 			$result
 		);
-		return $result;
+		return $result ? $result : '';
 	}
 
 	/**
@@ -662,6 +662,7 @@ class Q_Session
 				}
 				$row = self::$session_db_row;
 				$row->$id_field = $id;
+				$sess_file = null;
 			} else {
 				$duration_name = self::durationName();
 				$id1 = substr($id, 0, 4);

@@ -45,6 +45,7 @@ function Q_tabs_tool($options)
 	);
 	$urls = array();
 	$attributes = array();
+	$defaultTabName = $loader = $beforeSwitch = $beforeScripts = null;
 	extract($options);
 	if (!isset($tabs)) {
 		return '';
