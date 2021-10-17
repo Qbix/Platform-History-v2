@@ -93,8 +93,8 @@ class Users_Device extends Base_Users_Device
 			$alert = Q::interpolate($alert, array(), array(
 				'language' => $user->preferredLanguage
 			));
-			$payload = compact('userId');
-			$deviceRow->pushNotification(compact('alert', 'payload'));
+			$payload = @compact('userId');
+			$deviceRow->pushNotification(@compact('alert', 'payload'));
 		}
 		if ($exists and $deviceRow->toArray() == $existingRow->toArray()) {
 			return $deviceRow; // no changes
@@ -142,7 +142,7 @@ class Users_Device extends Base_Users_Device
 			$appId = $appInfo['appId'];
 		}
 		return Users_Device::select()
-			->where(compact('userId', 'platform', 'appId'))
+			->where(@compact('userId', 'platform', 'appId'))
 			->orderBy('insertedTime', false)
 			->fetchDbRows();
 	}

@@ -20,5 +20,5 @@ function Q_response_dashboard()
 		'home' => 'MyApp/home',
 		'about' => 'MyApp/about'
 	);
-	return Q::view("$app/dashboard.php", compact('slogan', 'user', 'tabs', 'urls', 'text'));
+	return Q::view("$app/dashboard.php", @compact('slogan', 'user', 'tabs', 'urls', 'text'));
 }

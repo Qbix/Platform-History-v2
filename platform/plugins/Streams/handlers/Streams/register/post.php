@@ -36,7 +36,7 @@ function Streams_register_post()
 		Streams::splitFullName($fullName), 
 		Users::requestedIdentifier(), 
 		true,
-		compact('activation')
+		@compact('activation')
 	);
 	Users::setLoggedInUser($user);
 	

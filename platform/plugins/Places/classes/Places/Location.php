@@ -159,7 +159,7 @@ class Places_Location extends Base_Places_Location
 				'streamName' => 'Places/user/locations',
 				'type' => 'Places/locations'
 			));
-			$pl = new Places_Location(compact(
+			$pl = new Places_Location(@compact(
 				'geohash', 'publisherId','streamName'
 			));
 			$pl->save(true);
@@ -208,7 +208,7 @@ class Places_Location extends Base_Places_Location
 				'columnName' => $columnName
 			);
 			$area = Streams::create($asUserId, $publisherId, 'Places/area',
-				compact('name', 'title', 'skipAccess', 'attributes')
+				@compact('name', 'title', 'skipAccess', 'attributes')
 			);
 			$area->relateTo($location, 'Places/areas', $asUserId, $options);
 			if ($floorName) {
@@ -216,7 +216,7 @@ class Places_Location extends Base_Places_Location
 				$title = $location->title." floor $floor";
 				if (!($floor = Streams::fetchOne($asUserId, $publisherId, $name))) {
 					$floor = Streams::create($asUserId, $publisherId, 'Places/floor',
-						compact('name', 'title', 'skipAccess')
+						@compact('name', 'title', 'skipAccess')
 					);
 				}
 				$area->relateTo($floor, 'Places/floor', $asUserId, $options);
@@ -226,7 +226,7 @@ class Places_Location extends Base_Places_Location
 				$title = $location->title." column $column";
 				if (!($column = Streams::fetchOne($asUserId, $publisherId, $name))) {
 					$column = Streams::create($asUserId, $publisherId, 'Places/column',
-						compact('name', 'title', 'skipAccess')
+						@compact('name', 'title', 'skipAccess')
 					);
 				}
 				$area->relateTo($column, 'Places/column', $asUserId, $options);

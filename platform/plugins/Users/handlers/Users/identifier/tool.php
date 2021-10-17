@@ -63,8 +63,8 @@ function Users_identifier_tool($options)
 	
 	$onSuccess = Q_Request::special('onSuccess', Q_Request::url());
 	
-	$form = $static = compact('fields');
-	return Q::tool('Q/panel', compact(
+	$form = $static = @compact('fields');
+	return Q::tool('Q/panel', @compact(
 		'uri', 'onSuccess', 'form', 'static', 'title',
 		'collapsed', 'toggle', 'complete', 'editing', 'inProcess',
 		'setSlots'

@@ -77,7 +77,7 @@ class Q_File
 		 */
 		Q::event(
 			'Q/file/save', 
-			compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl', 'size', 'skipAccess', 'audio'),
+			@compact('path', 'subpath', 'name', 'writePath', 'data', 'tailUrl', 'size', 'skipAccess', 'audio'),
 			'after'
 		);
 		return array($name => $tailUrl);

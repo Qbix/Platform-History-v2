@@ -61,7 +61,7 @@ EOT;
 		$content .= str_repeat(' ', 512); // because of chrome
 		$title = "Exception occurred";
 		$dashboard = "";
-		echo Q::view('Q/layout/html.php', compact('content', 'dashboard', 'title'));
+		echo Q::view('Q/layout/html.php', @compact('content', 'dashboard', 'title'));
 	}
 	$app = Q_Config::get('Q', 'app', null);
 	$colored = Q_Exception::coloredString($exception);

@@ -54,7 +54,7 @@ function Streams_before_Q_objects()
 		}
 		if ($exception) {
 			$shouldThrow = Q::event('Streams/objects/inviteException', 
-				compact('invite', 'exception'), 'before'
+				@compact('invite', 'exception'), 'before'
 			);
 			if ($shouldThrow === null) {
 				Q_Response::setNotice('Streams/objects', $exception->getMessage());

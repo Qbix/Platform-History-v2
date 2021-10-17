@@ -34,7 +34,7 @@ function Q_expandable_tool($options)
 	}
 	foreach (array('title', 'content') as $field) {
 		if (!isset($options[$field])) {
-			throw new Q_Exception_RequiredField(compact('field'));
+			throw new Q_Exception_RequiredField(@compact('field'));
 		}
 	}
 	Q_Response::addScript('{{Q}}/js/tools/expandable.js', 'Q');

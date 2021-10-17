@@ -292,7 +292,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$content = Q::ifset($text, 'messages', $type, "content", "Granted {{amount}} credits");
 		$stream->post($userId, array(
 			'type' => $type,
-			'content' => Q::interpolate($content, compact('amount')),
+			'content' => Q::interpolate($content, @compact('amount')),
 			'byClientId' => Q::ifset($more, 'publisherId', null),
 			'instructions' => Q::json_encode($instructions)
 		));

@@ -54,5 +54,5 @@ function Assets_payment_response_tool($options)
 
 	$text = Q_Text::get('Assets/content');
 
-	return compact('token', 'action', 'publishableKey', 'symbol', 'text');
+	return @compact('token', 'action', 'publishableKey', 'symbol', 'text');
 };

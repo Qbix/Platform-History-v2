@@ -274,7 +274,7 @@ class Q_Exception extends Exception
 				$fields = $e->inputFields();
 			}
 			$classname = get_class($e);
-			$results[] = compact('message', 'code', 'line', 'file', 'trace', 'fields', 'classname');
+			$results[] = @compact('message', 'code', 'line', 'file', 'trace', 'fields', 'classname');
 		}
 		if ($array_was_passed) {
 			return $results;

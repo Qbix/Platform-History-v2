@@ -570,7 +570,7 @@ abstract class Streams extends Base_Streams
 			if ($throwIfMissing) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => 'Stream', 
-					'criteria' => Q::json_encode(compact('publisherId', 'name'))
+					'criteria' => Q::json_encode(@compact('publisherId', 'name'))
 				));
 			}
 			return null;
@@ -1108,7 +1108,7 @@ abstract class Streams extends Base_Streams
 				$a = Q::json_encode($a);
 				$f['inheritAccess'] = $a;
 			}
-			$tc = compact('publisherId');
+			$tc = @compact('publisherId');
 			if ($name = isset($f['name']) ? $f['name'] : null) {
 				if ($info = $p->get($name, array())) {
 					foreach ($streamFieldNames as $fn) {
@@ -1604,7 +1604,7 @@ abstract class Streams extends Base_Streams
 		// Fetch member streams, the streams which are being related
 		$streams = Streams::fetch($asUserId, $fromPublisherId, $fromStreamName);
 		
-		$criteria = compact(
+		$criteria = @compact(
 			'toPublisherId', 'toStreamName', 
 			'type', 'fromPublisherId', 'fromStreamName'
 		);
@@ -1750,7 +1750,7 @@ abstract class Streams extends Base_Streams
 				), 'weight');
 			}
 			$rows = Streams_RelatedTo::select('toStreamName, MAX(weight) w')
-				->where(compact('toPublisherId', 'toStreamName', 'type'))
+				->where(@compact('toPublisherId', 'toStreamName', 'type'))
 				->groupBy('toStreamName')
 				->ignoreCache()
 				->fetchAll(PDO::FETCH_ASSOC);
@@ -1810,13 +1810,13 @@ abstract class Streams extends Base_Streams
 			 */
 			if (false === Q::event(
 				"Streams/relateFrom/{$stream->type}",
-				compact('asUserId', 'category', 'stream', 'type'),
+				@compact('asUserId', 'category', 'stream', 'type'),
 				'before'
 			)) {
 				continue;
 			}
 			$tsn = ($arrayField === 'toStreamName') ? $sn : $toStreamName;
-			$newRT[$sn] = $newRF[$sn] = compact(
+			$newRT[$sn] = $newRF[$sn] = @compact(
 				'toPublisherId', 'type', 'fromPublisherId'
 			);
 			if (isset($extra)) {
@@ -1902,7 +1902,7 @@ abstract class Streams extends Base_Streams
 			$categoryName = explode('/', $category->name);
 			$streamName = explode('/', $stream->name);
 
-			$params = compact(
+			$params = @compact(
 				'relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream',
 				'fromUri', 'fromUrl',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType',
@@ -1945,7 +1945,7 @@ abstract class Streams extends Base_Streams
 			// node server will be notified by Streams_Message::post
 			// DISTRIBUTED: in the future, the publishers may be on separate domains
 			// so posting this message may require internet communication.
-			$instructions = compact(
+			$instructions = @compact(
 				'fromPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl', 'toTitle',
 				'fromIcon', 'fromTitle', 'fromType', 'fromDisplayType', 'description'
@@ -1972,7 +1972,7 @@ abstract class Streams extends Base_Streams
 			// node server will be notified by Streams_Message::post
 			// DISTRIBUTED: in the future, the publishers may be on separate domains
 			// so posting this message may require internet communication.
-			$instructions = compact(
+			$instructions = @compact(
 				'toPublisherId', 'type', 'weight', 'displayType',
 				'fromUrl', 'toUrl', 'fromUri', 'toUri', 
 				'toIcon', 'toTitle', 'toType', 'toDisplayType', 'content', 'description'
@@ -1996,7 +1996,7 @@ abstract class Streams extends Base_Streams
 			 */
 			Q::event(
 				"Streams/relateFrom/{$stream->type}",
-				compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'extra', 'type'),
+				@compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'extra', 'type'),
 				'after'
 			);
 			/**
@@ -2009,7 +2009,7 @@ abstract class Streams extends Base_Streams
 			 */
 			Q::event(
 				"Streams/relateTo/{$category->type}",
-				compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'type'),
+				@compact('relatedToArray', 'relatedFromArray', 'asUserId', 'category', 'stream', 'type'),
 				'after'
 			);
 
@@ -2034,7 +2034,7 @@ abstract class Streams extends Base_Streams
 			list($messagesFrom, $s) = Streams_Message::postMessages($asUserId, $relatedFrom_messages, true);
 		}
 
-		return compact('messagesTo', 'messagesFrom');
+		return @compact('messagesTo', 'messagesFrom');
 	}
 
 	/**
@@ -2113,7 +2113,7 @@ abstract class Streams extends Base_Streams
 		 */
 		if (Q::event(
 			"Streams/unrelateTo/{$category->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'),
+			@compact('relatedTo', 'relatedFrom', 'asUserId'),
 			'before') === false
 		) {
 			return;
@@ -2128,7 +2128,7 @@ abstract class Streams extends Base_Streams
 		 */
 		if (Q::event(
 			"Streams/unrelateFrom/{$stream->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'),
+			@compact('relatedTo', 'relatedFrom', 'asUserId'),
 			'before') === false
 		) {
 			return;
@@ -2167,7 +2167,7 @@ abstract class Streams extends Base_Streams
 			if (empty($options['skipMessageTo'])) {
 				Streams_Message::post($asUserId, $toPublisherId, $category->name, array(
 					'type' => 'Streams/unrelatedTo',
-					'instructions' => compact(
+					'instructions' => @compact(
 						'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
 					)
 				), true);
@@ -2189,7 +2189,7 @@ abstract class Streams extends Base_Streams
 				// node server will be notified by Streams_Message::post
 				Streams_Message::post($asUserId, $fromPublisherId, $stream->name, array(
 					'type' => 'Streams/unrelatedFrom',
-					'instructions' => compact(
+					'instructions' => @compact(
 						'toPublisherId', 'toStreamName', 'type', 'options'
 					)
 				), true);
@@ -2204,7 +2204,7 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event(
 			"Streams/unrelateFrom/{$stream->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'), 
+			@compact('relatedTo', 'relatedFrom', 'asUserId'), 
 			'after'
 		);
 
@@ -2216,7 +2216,7 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event(
 			"Streams/unrelateTo/{$category->type}",
-			compact('relatedTo', 'relatedFrom', 'asUserId'),
+			@compact('relatedTo', 'relatedFrom', 'asUserId'),
 			'after'
 		);
 
@@ -2508,7 +2508,7 @@ abstract class Streams extends Base_Streams
 				))->execute()->fetchColumn(0);
 				if ($selfRelations) {
 					if ($$throwIfUnavailable) {
-						throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+						throw new Q_Exception(Q::interpolate($exceededText, @compact("maxRelations")));
 					}
 					return false;
 				}
@@ -2523,7 +2523,7 @@ abstract class Streams extends Base_Streams
 			}
 
 			if ($throw) {
-				throw new Q_Exception(Q::interpolate($exceededText, compact("maxRelations")));
+				throw new Q_Exception(Q::interpolate($exceededText, @compact("maxRelations")));
 			}
 
 			return false;
@@ -2632,7 +2632,7 @@ abstract class Streams extends Base_Streams
 		$adjustWeightsBy = $weight < $previousWeight ? $adjustWeights : -$adjustWeights;
 		if (Q::event(
 			"Streams/updateRelation/{$stream->type}",
-			compact(
+			@compact(
 				'relatedTo', 'relatedFrom', 'type', 'weight', 
 				'previousWeight', 'adjustWeightsBy', 'asUserId', 'extra'
 			), 
@@ -2663,7 +2663,7 @@ abstract class Streams extends Base_Streams
 		// node server will be notified by Streams_Message::post
 		$message = Streams_Message::post($asUserId, $toPublisherId, $toStreamName, array(
 			'type' => 'Streams/updatedRelateTo',
-			'instructions' => compact(
+			'instructions' => @compact(
 				'fromPublisherId', 'fromStreamName', 'type', 'weight', 'previousWeight', 'adjustWeightsBy', 'asUserId'
 			)
 		), true);
@@ -2678,7 +2678,7 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event(
 			"Streams/updateRelation/{$category->type}",
-			compact(
+			@compact(
 				'relatedTo', 'relatedFrom', 'type', 'weight', 
 				'previousWeight', 'adjustWeightsBy', 'asUserId', 'extra'
 			),
@@ -2742,7 +2742,7 @@ abstract class Streams extends Base_Streams
 		$updateCounts = array();
 
 		// this fields will modified in streams_participant table row
-		$changedFields = compact('state');
+		$changedFields = @compact('state');
 		foreach ($streamNames as $sn) {
 			if (!isset($participants[$sn])) {
 				$updateCounts[''][] = $sn;
@@ -3115,7 +3115,7 @@ abstract class Streams extends Base_Streams
 		}
 		if ($streamNamesUpdate) {
 			Streams_Subscription::update()
-			->set(compact('filter', 'untilTime'))
+			->set(@compact('filter', 'untilTime'))
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => $streamNamesUpdate,
@@ -3321,7 +3321,7 @@ abstract class Streams extends Base_Streams
 				->fetchDbRows();
 		} else {
 			$participants = Streams::leave(
-				$asUserId, $publisherId, $streams2, compact('skipAccess')
+				$asUserId, $publisherId, $streams2, @compact('skipAccess')
 			);
 		}
 		$messages = array();
@@ -3542,7 +3542,7 @@ abstract class Streams extends Base_Streams
 			// validate these paths
 			$filename = APP_VIEWS_DIR.DS.$template;
 			if (!Q::realPath($filename)) {
-				throw new Q_Exception_MissingFile(compact('filename'));
+				throw new Q_Exception_MissingFile(@compact('filename'));
 			}
 			$ext = $pathinfo = pathinfo($template, PATHINFO_EXTENSION);
 			if ($ext !== 'handlebars') {
@@ -3787,7 +3787,7 @@ abstract class Streams extends Base_Streams
 				} elseif (is_array($label)) {
 					$label = json_encode(array("label" => $label));
 				} else {
-					$label = compact("label");
+					$label = @compact("label");
 				}
 
 				$invite->extra = $label;
@@ -3797,7 +3797,7 @@ abstract class Streams extends Base_Streams
 			$return['url'] = $invite->url();
 		}
 		
-		// $instructions = array_merge($who, $options, compact(
+		// $instructions = array_merge($who, $options, @compact(
 		// 	'displayName', 'appUrl', 'readLevel', 'writeLevel', 'adminLevel', 'permissions'
 		// ));
 		// Streams_Message::post($asUserId, $publisherId, $streamName, array(
@@ -3900,7 +3900,7 @@ abstract class Streams extends Base_Streams
 		 * @event Streams/request {before}
 		 * @param {Streams_Request} request
 		 */
-		Q::event('Streams/request', compact('userId'), 'before');
+		Q::event('Streams/request', @compact('userId'), 'before');
 		$request->save();
 		
 		// Send Streams/request message to the stream
@@ -3915,7 +3915,7 @@ abstract class Streams extends Base_Streams
 		 * @event Streams/request {after}
 		 * @param {Streams_Request} request
 		 */
-		Q::event('Streams/request', compact('request'), 'after');
+		Q::event('Streams/request', @compact('request'), 'after');
 
 		return $request;
 	}
@@ -4020,7 +4020,7 @@ abstract class Streams extends Base_Streams
 				$stream->post($asUserId, array(
 					'type' => 'Streams/closed',
 					'content' => '',
-					'instructions' => compact('closedTime')
+					'instructions' => @compact('closedTime')
 				), true);
 				$result = true;
 			}
@@ -4057,7 +4057,7 @@ abstract class Streams extends Base_Streams
 		$first = trim($first);
 		$last = trim($last);
 
-		return compact('first', 'last');
+		return @compact('first', 'last');
 	}
 	
 	/**
@@ -4138,7 +4138,7 @@ abstract class Streams extends Base_Streams
 		 * @param {string} icon
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Streams/register', compact(
+		$return = Q::event('Streams/register', @compact(
 			'name', 'fullName', 'identifier', 'icon', 'options'), 'before'
 		);
 		if (isset($return)) {
@@ -4164,7 +4164,7 @@ abstract class Streams extends Base_Streams
 		 * @param {Users_User} 'user'
 		 * @return {Users_User}
 		 */
-		Q::event('Streams/register', compact(
+		Q::event('Streams/register', @compact(
 			'register', 'identifier', 'icon', 'user', 'options'
 		), 'after');
 
@@ -4190,7 +4190,7 @@ abstract class Streams extends Base_Streams
 			case 'stream':
 			case 'message':
 			case 'relation':
-				$qs = http_build_query(compact('publisherId', 'name'));
+				$qs = http_build_query(@compact('publisherId', 'name'));
 				return Q_Uri::url("Streams/$what?$qs");
 		}
 		return null;
@@ -4414,7 +4414,7 @@ abstract class Streams extends Base_Streams
 			'{{app}}/uploads/Streams/invitations'
 		);
 		return APP_FILES_DIR
-			.DS.Q::interpolate($subpath, compact('app'))
+			.DS.Q::interpolate($subpath, @compact('app'))
 			.DS.Q_Utils::splitId($invitingUserId);
 	}
 	
@@ -4820,7 +4820,7 @@ abstract class Streams extends Base_Streams
 			$streamNames = array($streamNames);
 		}
 		
-		$params = compact('publisherId', 'streamNames');
+		$params = @compact('publisherId', 'streamNames');
 		
 		/**
 		 * @event Streams/remove {before}

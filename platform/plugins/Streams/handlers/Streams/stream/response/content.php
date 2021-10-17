@@ -22,7 +22,7 @@ function Streams_stream_response_content()
 	}
 
 	// show stream as usual
-	return Q::view('Streams/content/stream.php', compact(
+	return Q::view('Streams/content/stream.php', @compact(
 		'publisherId', 'name', 'fields',
 		'user', 'stream'
 	));

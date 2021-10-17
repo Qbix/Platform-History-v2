@@ -31,6 +31,6 @@ function Streams_message_response_message()
 	if (!$stream->testReadLevel('messages')) {
 		throw new Users_Exception_NotAuthorized();
 	}
-	$messages = $stream->getMessages(compact('type', 'min', 'limit'));
+	$messages = $stream->getMessages(@compact('type', 'min', 'limit'));
 	return !empty($messages) ? reset($messages)->exportArray() : null;
 }

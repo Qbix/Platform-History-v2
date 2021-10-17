@@ -526,7 +526,7 @@ class Streams_Stream extends Base_Streams_Stream
 			 * @param {string} asUserId
 			 */
 			Q::event("Streams/create/{$stream->type}",
-				compact('stream', 'asUserId'), 'after', false, $stream);
+				@compact('stream', 'asUserId'), 'after', false, $stream);
 		}
 
 		/**
@@ -599,7 +599,7 @@ class Streams_Stream extends Base_Streams_Stream
 		 * @param {Streams_Stream} stream
 		 * @param {string} asUserId
 		 */
-		Q::event("Streams/remove/{$stream->type}", compact('stream', 'result'), 'after');
+		Q::event("Streams/remove/{$stream->type}", @compact('stream', 'result'), 'after');
 
 		if ($this->name !== 'Streams/user/firstName'
 		and $this->name !== 'Streams/user/lastName'
@@ -653,7 +653,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$rows[$k] = $row;
 		}
 		$stream = $this;
-		Q::event("$type/save", compact('stream', 'rows'), 'before');
+		Q::event("$type/save", @compact('stream', 'rows'), 'before');
 		foreach ($rows as $row) {
 			$row->save();
 		}
@@ -1069,7 +1069,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$this->post($asUserId, array(
 			'type' => $messageType,
 			'content' => '',
-			'instructions' => compact('changes')
+			'instructions' => @compact('changes')
 		), true);
 		return $result;
 

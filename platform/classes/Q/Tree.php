@@ -85,7 +85,7 @@ class Q_Tree
 			if (! is_array($result)) {
 				return $default; // silently ignore the rest of the path
 				// $keys = '["' . implode('"]["', $key_array) . '"]';
-				// throw new Q_Exception_NotArray(compact('keys', 'key'));
+				// throw new Q_Exception_NotArray(@compact('keys', 'key'));
 			}
 			if (!isset($key) || !(is_string($key) || is_integer($key)) || !array_key_exists($key, $result)) {
 				return $default;
@@ -337,7 +337,7 @@ class Q_Tree
 		 * @param {string} filename
 		 * @return {array}
 		 */
-		$arr = Q::event('Q/tree/load', compact('filename'), 'before');
+		$arr = Q::event('Q/tree/load', @compact('filename'), 'before');
 		if (!isset($arr)) {
 			try {
 				// get file contents, remove comments and parse

@@ -66,7 +66,7 @@ function Streams_participants_tool($options)
 	if (!$stream->testReadLevel('participants')) {
 		throw new Users_Exception_NotAuthorized();
 	}
-	$participants = $stream->getParticipants(compact('limit', 'offset', 'state'));
+	$participants = $stream->getParticipants(@compact('limit', 'offset', 'state'));
 	
 	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
 	Q_Response::addStylesheet('{{Streams}}/css/Streams.css', 'Streams');

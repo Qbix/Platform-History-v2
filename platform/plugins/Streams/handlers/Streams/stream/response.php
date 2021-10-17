@@ -71,7 +71,7 @@ function Streams_stream_response()
 		$messages = false;
 		$type = isset($_REQUEST['messageType']) ? $_REQUEST['messageType'] : null; 
 		if ($stream->testReadLevel('messages')) {
-			$messages = Db::exportArray($stream->getMessages(compact('type', 'max', 'limit')));
+			$messages = Db::exportArray($stream->getMessages(@compact('type', 'max', 'limit')));
 		}
 		Q_Response::setSlot('messages', $messages);
 	}
@@ -81,7 +81,7 @@ function Streams_stream_response()
 		$state = 'participating';
 		$participants = false;
 		if ($stream->testReadLevel('participants')) {
-			$participants = Db::exportArray($stream->getParticipants(compact(
+			$participants = Db::exportArray($stream->getParticipants(@compact(
 				'limit', 'offset', 'state'
 			)));
 		}

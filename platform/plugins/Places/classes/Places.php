@@ -111,7 +111,7 @@ abstract class Places extends Base_Places
 		if ($types === null) {
 			unset($types);
 		}
-		$query = http_build_query(compact('key', 'input', 'types', 'location', 'radius'));
+		$query = http_build_query(@compact('key', 'input', 'types', 'location', 'radius'));
 		$url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?$query";
 		$json = self::getRemoteContents($url);
 		$response = json_decode($json, true);
@@ -260,7 +260,7 @@ abstract class Places extends Base_Places
 	{
 		$platform = Q::ifset($options, 'platform', 'google');
 		if ($platform !== 'google') {
-			throw new Q_Exception_PlatformNotSupported(compact('platform'));
+			throw new Q_Exception_PlatformNotSupported(@compact('platform'));
 		}
 		$points = Places_Polyline::decode($route["overview_polyline"]["points"]);
 		$polyline = array();
@@ -401,7 +401,7 @@ abstract class Places extends Base_Places
 		if ($onlyIfNotSet and isset($lat) and isset($lon)) {
 			return false;
 		}
-		$userLocationStream->setAttribute(compact(
+		$userLocationStream->setAttribute(@compact(
 			'latitude', 'longitude', 'meters', 'timezone',
 			'postcode', 'placeName', 'state'
 			// accuracy has been omitted
@@ -423,7 +423,7 @@ abstract class Places extends Base_Places
 		$location = "$latitude,$longitude";
 		$timestamp = time();
 		$sensor = 'false';
-		$query = http_build_query(compact('key', 'location', 'timestamp', 'sensor'));
+		$query = http_build_query(@compact('key', 'location', 'timestamp', 'sensor'));
 		$url = "https://maps.googleapis.com/maps/api/timezone/json?$query";
 		$json = self::getRemoteContents($url);
 		$response = json_decode($json, true);

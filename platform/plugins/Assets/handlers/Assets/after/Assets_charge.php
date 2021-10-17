@@ -13,7 +13,7 @@ function Assets_after_Assets_charge($params)
 	// rate for currency required
 	$credits = Assets_Credits::convert($amount, $currency, "credits");
 
-	Assets_Credits::grant($credits, 'BoughtCredits', $user->id, array("charge" => compact("amount", "currency")));
+	Assets_Credits::grant($credits, 'BoughtCredits', $user->id, array("charge" => @compact("amount", "currency")));
 
 	//TODO: as we come to use credits system, need to change this to send email with amount of credits bought
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
@@ -47,7 +47,7 @@ function Assets_after_Assets_charge($params)
 			. "?publisherId=" . urlencode($publisherId)
 			. "&userId=" . urlencode($user->id);
 
-	$fields = compact(
+	$fields = @compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency', 
 		'name', 'symbol', 'currencyName', 'amount', 'displayAmount',

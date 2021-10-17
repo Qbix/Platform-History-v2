@@ -20,12 +20,12 @@ function Streams_invite_response_suggestion()
 		$token = Streams_Invite::generateToken();
 	}
 	
-	$suggestion = compact('token');
+	$suggestion = @compact('token');
 	$suggestion = Q_Utils::sign($suggestion);
 	
 	$data = array(
 		'url' => Streams::inviteUrl($token),
-		'invite' => compact('token')
+		'invite' => @compact('token')
 	);
 	
 	Q_Response::setSlot('stream', $stream->exportArray());

@@ -26,12 +26,12 @@
 			</div>
 		</div>
 		<div class='Streams_stream_player'>
-			<?php echo Q::tool('Streams/player', compact('stream')) ?>
+			<?php echo Q::tool('Streams/player', @compact('stream')) ?>
 		</div>
 	</div>
 	<div class='Streams_stream_activity_pane'>
 		<div class='Streams_participants'>
-			<?php echo Q::tool('Streams/participants', compact('stream'))?>
+			<?php echo Q::tool('Streams/participants', @compact('stream'))?>
 		</div>
 		<div class='Streams_stream_activity'>
 			<?php echo Q::tool('Streams/activity')?>

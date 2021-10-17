@@ -26,6 +26,6 @@ function Q_filter_tool($options)
 	$class = 'Q_filter_input';
 	Q_Response::addScript('{{Q}}/js/tools/filter.js', 'Q');
 	Q_Response::addStylesheet('{{Q}}/css/filter.css', 'Q');
-	return Q_Html::input($name, $value, compact('placeholder', 'class'))
+	return Q_Html::input($name, $value, @compact('placeholder', 'class'))
 		. '<div class="Q_filter_results"></div>';
 }

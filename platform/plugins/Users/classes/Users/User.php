@@ -136,7 +136,7 @@ class Users_User extends Base_Users_User
 	function displayName($options = array())
 	{
 		$user = $this;
- 		$name = Q::event('Users/User/displayName', compact('user', 'options'), 'before');
+ 		$name = Q::event('Users/User/displayName', @compact('user', 'options'), 'before');
 		return isset($name) ? $name : $this->username;
 	}
 
@@ -163,7 +163,7 @@ class Users_User extends Base_Users_User
 	 */
 	function preparePassphrase($passphrase, $isHashed)
 	{
-		if ($result = Q::event("Users/preparePassphraseHash", compact(
+		if ($result = Q::event("Users/preparePassphraseHash", @compact(
 			'passphrase', 'isHashed', 'user'), 'before'
 		)) {
 			return $result;
@@ -269,7 +269,7 @@ class Users_User extends Base_Users_User
 			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', false);
 			if ($unique) {
 				$username = $updatedFields['username'];
-				$criteria = compact('username');
+				$criteria = @compact('username');
 				if (isset($this->id)) {
 					$criteria['id != '] = $this->id;
 				}
@@ -284,7 +284,7 @@ class Users_User extends Base_Users_User
 		$user = $this;
 		Q::event(
 			'Users/User/save', 
-			compact('user', 'updatedFields'),
+			@compact('user', 'updatedFields'),
 			'before'
 		);
 		return parent::beforeSave($updatedFields);
@@ -306,7 +306,7 @@ class Users_User extends Base_Users_User
 		}
 		Q::event(
 			'Users/User/save', 
-			compact('user', 'result', 'query', 'modifiedFields', 'where'),
+			@compact('user', 'result', 'query', 'modifiedFields', 'where'),
 			'after'
 		);
 		return $result;
@@ -504,7 +504,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/addIdentifier', compact('user', 'email', 'link', 'unsubscribe'), 'before');
+		Q::event('Users/addIdentifier', @compact('user', 'email', 'link', 'unsubscribe'), 'before');
 		$email->save();
 		
 		$this->emailAddressPending = $normalized;
@@ -545,7 +545,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/addIdentifier', compact('user', 'email', 'link'), 'after');
+		Q::event('Users/addIdentifier', @compact('user', 'email', 'link'), 'after');
 	}
 	
 	/**
@@ -620,7 +620,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/setEmailAddress', compact('user', 'email'), 'after');
+		Q::event('Users/setEmailAddress', @compact('user', 'email'), 'after');
 		return true;
 	}
 
@@ -808,7 +808,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/addIdentifier', compact('user', 'mobile', 'link'), 'before');
+		Q::event('Users/addIdentifier', @compact('user', 'mobile', 'link'), 'before');
 		$mobile->save();
 		
 		$this->mobileNumberPending = $normalized;
@@ -843,7 +843,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/addIdentifier', compact('user', 'mobile', 'link'), 'after');
+		Q::event('Users/addIdentifier', @compact('user', 'mobile', 'link'), 'after');
 	}
 	
 	/**
@@ -915,7 +915,7 @@ class Users_User extends Base_Users_User
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/setMobileNumber', compact('user', 'mobile'), 'after');
+		Q::event('Users/setMobileNumber', @compact('user', 'mobile'), 'after');
 		return true;
 	}
 	

@@ -17,7 +17,7 @@ function Streams_message_response_messages()
 	if ($withMessageTotals and !is_array($withMessageTotals)) {
 		throw new Q_Exception_WrongType(array('withMessageTotals' => 'array'));
 	}
-	$o = $withMessageTotals ? compact('withMessageTotals') : array();
+	$o = $withMessageTotals ? @compact('withMessageTotals') : array();
 	$stream = Q::ifset(Streams::$cache, 'stream', 
 		Streams::fetchOne(null, $publisherId, $streamName, true, $o)
 	);
@@ -42,6 +42,6 @@ function Streams_message_response_messages()
 		Q_Response::setSlot('messageTotals', $stream->get('messageTotals'));
 	}
 
-	$messages = $stream->getMessages(compact('type', 'min', 'max', 'limit', 'ascending'));
+	$messages = $stream->getMessages(@compact('type', 'min', 'max', 'limit', 'ascending'));
 	return Db::exportArray($messages);
 }

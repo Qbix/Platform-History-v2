@@ -18,7 +18,7 @@ function Streams_after_Q_objects () {
 		$showDialog = true;
 	}
 	
-	$p = compact('user', 'invite', 'displayName');
+	$p = @compact('user', 'invite', 'displayName');
 	Q::event('Streams/inviteDialog', $p, 'before', false, $showDialog);
 	if (!$showDialog) {
 		return;

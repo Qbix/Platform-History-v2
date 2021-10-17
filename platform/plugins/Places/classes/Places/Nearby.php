@@ -234,7 +234,7 @@ class Places_Nearby
 	static function streamName($latitude, $longitude, $meters, $experienceId = 'main')
 	{
 		if ($before = Q::event('Places/streamName',
-		compact('latitude', 'longitude', 'meters'), 'before')) {
+		@compact('latitude', 'longitude', 'meters'), 'before')) {
 			return $before;
 		}
 		$geohash = Places_Geohash::encode($latitude, $longitude, 6);
@@ -290,7 +290,7 @@ class Places_Nearby
 				if (empty($create)) {
 					continue;
 				}
-				$params = compact(
+				$params = @compact(
 					'publisherId', 'latitude', 'longitude',
 					'fromPublisherId', 'fromStreamName',
 					'transformed', 'meters',
@@ -347,7 +347,7 @@ class Places_Nearby
 			return $stream;
 		}
 		$postcode = $postcodes ? reset($postcodes) : null;
-		$attributes = compact('latitude', 'longitude', 'meters');
+		$attributes = @compact('latitude', 'longitude', 'meters');
 		if ($postcode) {
 			foreach (array('postcode', 'placeName', 'state') as $attr) {
 				$attributes[$attr] = $postcode->$attr;
@@ -474,13 +474,13 @@ class Places_Nearby
 		list($latitude, $longitude, $meters) = Places_Nearby::defaults();
 		extract(Q::take($options, array('latitude', 'longitude', 'meters')), EXTR_IF_EXISTS);
 		if (!isset($latitude) or !isset($longitude) or !isset($meters)) {
-			$o = compact('weight');
+			$o = @compact('weight');
 			return Streams_RelatedTo::fetchAll(
 				$publisherId, array($streamName), $relationType, $o
 			);
 		}
 		$categories = array('Places_Nearby', '_categories');
-		$options = compact('categories', 'experienceId', 'fromTime', 'toTime', 'weight');
+		$options = @compact('categories', 'experienceId', 'fromTime', 'toTime', 'weight');
 		return Places_Nearby::related(
 			$publisherId, $relationType, $latitude, $longitude, $meters, $options
 		);

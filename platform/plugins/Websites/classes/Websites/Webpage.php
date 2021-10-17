@@ -236,7 +236,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $videoId);
 			$videoId = reset($videoId);
-			$youtubeData = self::youtube(compact("videoId"));
+			$youtubeData = self::youtube(@compact("videoId"));
 			$youtubeData  = reset($youtubeData);
 			$result = array_merge($result, $youtubeData);
 		}

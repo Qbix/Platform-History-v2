@@ -34,7 +34,7 @@ class Assets_Badge extends Base_Assets_Badge
 		$fromTime = $fromTime ? new Db_Expression("FROM_UNIXTIME($fromTime)") : null;
 		$untilTime = $untilTime ? new Db_Expression("FROM_UNIXTIME($untilTime)") : null;
 		$earnedTime = new Db_Range($fromTime, true, false, $untilTime);
-		$criteria = compact('communityId', 'app', 'earnedTime');
+		$criteria = @compact('communityId', 'app', 'earnedTime');
 		if (isset($options['userIds'])) {
 			$criteria['userId'] = $options['userIds'];
 		}
@@ -49,7 +49,7 @@ class Assets_Badge extends Base_Assets_Badge
 			$name[] = $earned->badgeName;
 		}
 		$badges = Assets_Badge::select()
-			->where(compact('communityId', 'app', 'name'))
+			->where(@compact('communityId', 'app', 'name'))
 			->fetchDbRows('name');
 		$result = array();
 		foreach ($earned as $e) {

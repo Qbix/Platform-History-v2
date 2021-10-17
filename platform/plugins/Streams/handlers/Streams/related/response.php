@@ -40,7 +40,7 @@ function Streams_related_response()
 	));
 	$options['relationsOnly'] = !$streams_requested;
 	$options['orderBy'] = filter_var($_REQUEST['ascending'], FILTER_VALIDATE_BOOLEAN);
-	$options['fetchOptions'] = compact('withParticipant');
+	$options['fetchOptions'] = @compact('withParticipant');
 	$result = Streams::related(
 		$asUserId,
 		$publisherId,
@@ -111,7 +111,7 @@ function Streams_related_response()
 		if ($stream->testReadLevel('messages')) {
 			$type = Q::ifset($_REQUEST, 'messageType', null);
 			$messages = Db::exportArray($stream->getMessages(
-				compact('type', 'max', 'limit')
+				@compact('type', 'max', 'limit')
 			));
 		}
 		Q_Response::setSlot('messages', $messages);
@@ -122,7 +122,7 @@ function Streams_related_response()
 		$participants = false;
 		if ($stream->testReadLevel('participants')) {
 			$participants = Db::exportArray($stream->getParticipants(
-				compact('limit', 'offset')
+				@compact('limit', 'offset')
 			));
 		}
 		Q_Response::setSlot('participants', $participants);

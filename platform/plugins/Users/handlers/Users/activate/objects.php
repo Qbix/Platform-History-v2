@@ -19,7 +19,7 @@ function Users_activate_objects()
 		$type = 'mobile number';
 	}
 
-	Users::$cache = compact('user', 'email', 'mobile', 'type', 'emailAddress', 'mobileNumber');
+	Users::$cache = @compact('user', 'email', 'mobile', 'type', 'emailAddress', 'mobileNumber');
 }
 
 function Users_activate_objects_email($emailAddress, &$email)

@@ -718,7 +718,7 @@ class Db_Mysql implements Db_Interface
 				$id .= $characters[mt_rand(0, $count-1)];
 			}
 			if (!empty($options['filter'])) {
-				$ret = Q::call($options['filter'], array(compact('id', 'table', 'field', 'where', 'options')));
+				$ret = Q::call($options['filter'], array(@compact('id', 'table', 'field', 'where', 'options')));
 				if ($ret === false) {
 					continue;
 				} else if ($ret) {

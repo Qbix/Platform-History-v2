@@ -43,6 +43,6 @@ function Streams_invitations_response()
 		}
 	}
 	$content = implode("\n\n<div class='Q_pagebreak Streams_invitations_separator'></div>\n\n", $parts);
-	echo Q::view($layout, compact('title', 'content', 'parts'));
+	echo Q::view($layout, @compact('title', 'content', 'parts'));
 	return false;
 }

@@ -11,7 +11,7 @@ function Streams_avatar_response()
 		$avatars = Streams_Avatar::fetchByPrefix(
 			$asUserId, 
 			$prefix, 
-			compact('limit', 'public')
+			@compact('limit', 'public')
 		);
 	} else {
 		if (isset($batch)) {

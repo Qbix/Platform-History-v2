@@ -1236,7 +1236,7 @@ class Db_Row implements Iterator
 			$relationName, $fields, $inputs,
 			$modifyQuery, $options
 		);
-		$resume_args[] = compact(
+		$resume_args[] = @compact(
 			'many', 'options',
 			'class_name', 'root_table_fields_prefix', 'non_root_aliases'
 		);
@@ -1597,7 +1597,7 @@ class Db_Row implements Iterator
 			$row = $this;
 			if (false === Q::event(
 				"Db/Row/$class_name/remove",
-				compact('row', 'search_criteria', 'useIndex', 'commit'), 'before'
+				@compact('row', 'search_criteria', 'useIndex', 'commit'), 'before'
 			)) {
 				return false;
 			}
@@ -2049,7 +2049,7 @@ class Db_Row implements Iterator
 				$fields, $useIndex,
 				$modifyQuery, $options
 			);
-			$resume_args[] = compact(
+			$resume_args[] = @compact(
 				'use_search_criteria', 'options'
 			);
 

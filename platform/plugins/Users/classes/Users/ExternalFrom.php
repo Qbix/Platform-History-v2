@@ -80,7 +80,7 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 		}
 		$className = "Users_ExternalFrom_".ucfirst(strtolower($platform));
 		if (!class_exists($className, true)) {
-			throw new Q_Exception_MissingClass(compact('className'));
+			throw new Q_Exception_MissingClass(@compact('className'));
 		}
 		return call_user_func(array($className, 'authenticate'), $appId);
 	}

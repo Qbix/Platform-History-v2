@@ -17,5 +17,5 @@
 			'class' => 'Q_button clickable',
 		)
 	)) ?>
-	<?php echo Q::tool('Streams/relate', compact('publisherId', 'streamName', 'relationType')) ?>
+	<?php echo Q::tool('Streams/relate', @compact('publisherId', 'streamName', 'relationType')) ?>
 </div>

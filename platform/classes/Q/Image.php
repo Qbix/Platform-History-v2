@@ -494,7 +494,7 @@ class Q_Image
 		 */
 		Q::event(
 			'Q/image/save', 
-			compact('path', 'subpath', 'writePath', 'data', 'save', 'crop', 'ext'),
+			@compact('path', 'subpath', 'writePath', 'data', 'save', 'crop', 'ext'),
 			'after'
 		);
 		return $data;

@@ -37,7 +37,7 @@ class Streams_Category extends Base_Streams_Category
 	static function getRelatedTo($publisherId, $streamName, $relationType)
 	{
 		$row = Streams_Category::select()
-			->where(compact('publisherId', 'streamName'))
+			->where(@compact('publisherId', 'streamName'))
 			->fetchDbRow();
 		if (!$row) {
 			return null;

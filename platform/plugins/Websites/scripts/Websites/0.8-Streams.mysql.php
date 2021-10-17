@@ -39,7 +39,7 @@ function Websites_0_8_Streams_mysql()
 		$publisherId = (substr($streamName, -1) == '/' ? '' : $userId);
 		$level = !empty($stream['deletable']) ? 'close' : 'edit';
 		$writeLevel = Streams::$WRITE_LEVEL[$level];
-		$rows[] = compact(
+		$rows[] = @compact(
 			'publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 
 			'grantedByUserId', 'readLevel', 'writeLevel', 'adminLevel'
 		);
@@ -61,7 +61,7 @@ function Websites_0_8_Streams_mysql()
 			continue; // this tempate was already added by Streams install script
 		}
 		$publisherId = (substr($name, -1) == '/' ? '' : $userId);
-		$rows[] = compact(
+		$rows[] = @compact(
 			'publisherId', 'name', 'type', 'title', 'icon', 'content', 'attributes',
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess'
 		);

@@ -108,7 +108,7 @@ class Q_Html
 			$attributes = array();
 		}
 		$tag_params = array_merge(
-			compact('href'),
+			@compact('href'),
 			$attributes
 		);
 		return self::tag('a', $tag_params, $contents);
@@ -152,7 +152,7 @@ class Q_Html
 			unset($method);
 		}
 		$tag_params = array_merge(
-			compact('action', 'method'),
+			@compact('action', 'method'),
 			$attributes
 		);
 		if (isset($contents)) {
@@ -274,7 +274,7 @@ class Q_Html
 			$attributes = array();
 		}
 		$type = 'text';
-		$tag_params = array_merge(compact('name', 'value', 'type'), $attributes);
+		$tag_params = array_merge(@compact('name', 'value', 'type'), $attributes);
 		return self::tag('input', $tag_params, null);
 	}
 	
@@ -304,7 +304,7 @@ class Q_Html
 			}
 			$attributes = array();
 		}
-		$tag_params = array_merge(compact('name', 'rows', 'cols'), $attributes);
+		$tag_params = array_merge(@compact('name', 'rows', 'cols'), $attributes);
 		return self::tag('textarea', $tag_params, $contents);
 	}
 	
@@ -325,7 +325,7 @@ class Q_Html
 	{
 		if (!isset($attributes))
 			$attributes = array();
-		$tag_params = array_merge(compact('name'), $attributes);
+		$tag_params = array_merge(@compact('name'), $attributes);
 		return self::tag('select', $tag_params, $contents);
 	}
 	
@@ -605,7 +605,7 @@ class Q_Html
 		if (!is_string($alt)) {
 			$alt = 'not a string';
 		}
-		$tag_params = array_merge(compact('src', 'alt'), $attributes);
+		$tag_params = array_merge(@compact('src', 'alt'), $attributes);
 		$lazyload = Q_Config::get('Q', 'images', 'lazyload', array());
 		if ($lazyload and !empty($tag_params['src'])) {
 			$src = Q_Html::themedUrl($tag_params['src']);
@@ -641,7 +641,7 @@ class Q_Html
 			}
 			$attributes = array();
 		}
-		$tag_params = array_merge(compact('id', 'class'), $attributes);
+		$tag_params = array_merge(@compact('id', 'class'), $attributes);
 		return self::tag('div', $tag_params, $contents);
 	}
 	
@@ -665,7 +665,7 @@ class Q_Html
 			}
 			$attributes = array();
 		}
-		$tag_params = array_merge(compact('for'), $attributes);
+		$tag_params = array_merge(@compact('for'), $attributes);
 		return self::tag('label', $tag_params, $contents);
 	}
 	
@@ -921,14 +921,14 @@ class Q_Html
 		$contents = '';
 		$flash_params['movie'] = self::text($movie_url);
 		foreach ($flash_params as $name => $value) {
-			$contents .= self::tag('param', compact('name', 'value'));
+			$contents .= self::tag('param', @compact('name', 'value'));
 		}
 		
 		// Here, we'll only render the object tag
 		// Most modern browsers should see it.
 		if (!is_array($attributes))
 			$attributes = array();
-		$tag_params = array_merge(compact('data'), $attributes);
+		$tag_params = array_merge(@compact('data'), $attributes);
 		return self::tag('object', $tag_params, $contents);
 	}
 	
@@ -1388,7 +1388,7 @@ class Q_Html
 		 * @param {string} file_path
 		 * @return {array}
 		 */
-		$result = Q::event('Q/themedUrlFilenameAndHash', compact('file_path'), 'before');
+		$result = Q::event('Q/themedUrlFilenameAndHash', @compact('file_path'), 'before');
 		if ($result) {
 			return $result;
 		}

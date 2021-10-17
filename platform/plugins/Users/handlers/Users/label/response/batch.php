@@ -18,7 +18,7 @@ function Users_label_response_batch($params = array())
 	if (is_string($labels)) {
 		$labels = explode(",", $labels);
 	}
-	$rows = Q::event('Users/contact/response/labels', compact(
+	$rows = Q::event('Users/contact/response/labels', @compact(
 		'userIds', 'labels', 'batch'
 	));
 	$result = array();

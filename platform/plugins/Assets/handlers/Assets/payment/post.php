@@ -34,6 +34,6 @@ function Assets_payment_post($params = array())
 		'userId' => $userId,
 		'description' => Q::ifset($req, 'description', null)
 	);
-	$charge = Assets::charge($req['payments'], $req['amount'], $currency, compact('token', 'stream',  'metadata', 'user'));
+	$charge = Assets::charge($req['payments'], $req['amount'], $currency, @compact('token', 'stream',  'metadata', 'user'));
 	Q_Response::setSlot('charge', $charge);
 }

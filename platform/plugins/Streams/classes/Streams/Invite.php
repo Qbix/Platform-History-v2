@@ -53,7 +53,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$userId = $user->id;
 		}
 		return Streams_Invite::select()->where(
-			compact('publisherId', 'streamName', 'userId')
+			@compact('publisherId', 'streamName', 'userId')
 		)->fetchDbRows();
 	}
 	
@@ -96,7 +96,7 @@ class Streams_Invite extends Base_Streams_Invite
 		$clickOrTap = Q_Text::clickOrTap(false);
 		$ClickOrTap = Q_Text::clickOrTap(true);
 		$buttonClass = 'Streams_invite_accept_button';
-		$html = Q_Handlebars::render($html, compact(
+		$html = Q_Handlebars::render($html, @compact(
 			'stream', 'clickOrTap', 'ClickOrTap'
 		));
 		$key = 'Streams_Invite_possibleNotice';
@@ -159,7 +159,7 @@ class Streams_Invite extends Base_Streams_Invite
 		 * @param {Users_User} user
 		 */
 		$invite = $this;
-		if (Q::event("Streams/invite/accept", compact('invite'), 'before') === false) {
+		if (Q::event("Streams/invite/accept", @compact('invite'), 'before') === false) {
 			return false;
 		}
 
@@ -177,7 +177,7 @@ class Streams_Invite extends Base_Streams_Invite
 		 * @param {Streams_Invite} stream
 		 * @param {Users_User} user
 		 */
-		Q::event("Streams/invite/accept", compact('invite', 'participant'), 'after');
+		Q::event("Streams/invite/accept", @compact('invite', 'participant'), 'after');
 
 		$stream->post($userId, array(
 			'type' => 'Streams/invite/accept',
@@ -307,7 +307,7 @@ class Streams_Invite extends Base_Streams_Invite
 			if ($throwIfMissing) {
 				throw new Q_Exception_MissingRow(array(
 					'table' => 'Invite',
-					'criteria' => Q::json_encode(compact('token'))
+					'criteria' => Q::json_encode(@compact('token'))
 				));
 			}
 			return null;

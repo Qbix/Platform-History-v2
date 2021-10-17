@@ -116,7 +116,7 @@ class Users_Label extends Base_Users_Label
 	{
 		foreach (array('userId', 'label', 'updates') as $field) {
 			if (empty($$field)) {
-				throw new Q_Exception_RequiredField(compact($field));
+				throw new Q_Exception_RequiredField(@compact($field));
 			}
 		}
 		if (!isset($userId)) {
@@ -240,7 +240,7 @@ class Users_Label extends Base_Users_Label
 		}
 
 		// collect from other sources
-		Q::event("Users/Label/can", compact('userId', 'communityId', 'userCommunityRoles', 'communityRoles'), 'after', false, $result);
+		Q::event("Users/Label/can", @compact('userId', 'communityId', 'userCommunityRoles', 'communityRoles'), 'after', false, $result);
 
 		return $result;
 	}
@@ -342,7 +342,7 @@ class Users_Label extends Base_Users_Label
 			Users::canManageLabels($asUserId, $userId, null, true, true);
 		}
 		$prefixes = $labelNames = array();
-		$criteria = compact('userId');
+		$criteria = @compact('userId');
 		if ($filter) {
 			if (is_string($filter)) {
 				$filter = explode("\t", $filter);

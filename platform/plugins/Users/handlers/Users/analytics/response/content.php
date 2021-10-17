@@ -50,7 +50,7 @@ function Users_analytics_response_content($params) {
 		}
 	}
 
-	$options = compact("stats", "periods", "weekDaysStat");
+	$options = @compact("stats", "periods", "weekDaysStat");
 
 	Q_Response::addStylesheet("{{Users}}/css/analytics.css");
 	Q_Response::addScript("{{Users}}/js/pages/analytics.js");

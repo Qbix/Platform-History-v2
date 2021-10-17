@@ -359,7 +359,7 @@ class Q_Valid
 		if ($throwIfInvalid) {
 			header("HTTP/1.0 403 Forbidden");
 			$message = Q_Config::get('Q', 'internal', 'sigMessage', "The signature did not match.");
-			throw new Q_Exception_FailedValidation(compact('message'), array("Q.$sgf", "_[$sgf]"));
+			throw new Q_Exception_FailedValidation(@compact('message'), array("Q.$sgf", "_[$sgf]"));
 		}
 		return false;
 	}
@@ -405,7 +405,7 @@ class Q_Valid
 				$field = $fieldname;
 			}
 			if ($missing) {
-				$exception = new Q_Exception_RequiredField(compact('field'), $field);
+				$exception = new Q_Exception_RequiredField(@compact('field'), $field);
 				if ($throwIfMissing) {
 					throw $exception;
 				}

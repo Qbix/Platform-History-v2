@@ -52,7 +52,7 @@ class Users_Quota extends Base_Users_Quota
 		$privileges = array(),
 		$begin = true)
 	{
-		$quota = new Users_Quota(compact('userId', 'resourceId', 'name'));
+		$quota = new Users_Quota(@compact('userId', 'resourceId', 'name'));
 		$durations = array();
 		$quotas = Q_Config::get('Users', 'quotas', array());
 		if (!isset($quotas[$name])) {
@@ -151,7 +151,7 @@ class Users_Quota extends Base_Users_Quota
 		if ($exceeded) {
 			Users_Quota::rollback()->execute(false, $shards);
 			if ($throwIfQuota) {
-				throw new Users_Exception_Quota(compact('title'));
+				throw new Users_Exception_Quota(@compact('title'));
 			}
 			return $exceeded;
 		}

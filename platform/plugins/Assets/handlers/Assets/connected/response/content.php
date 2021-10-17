@@ -65,5 +65,5 @@ function Assets_connected_response_content()
 		}
 	}
 
-	return compact("redirectUrl");
+	return @compact("redirectUrl");
 }

@@ -13,6 +13,6 @@ function Users_device_delete($params = array())
 	$deviceId = Q::ifset($req, 'deviceId', '');
 	Db::connect('Users')
 		->delete('users_device')
-		->where(compact('userId', 'deviceId'))
+		->where(@compact('userId', 'deviceId'))
 		->execute();
 }

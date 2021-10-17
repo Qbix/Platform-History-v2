@@ -71,7 +71,7 @@ class Places_Interest
 		}
 		list($latitude, $longitude, $meters) = Places_Nearby::defaults();
 		$categories = array('Places_Interest', '_categories');
-		$options = compact('categories', 'experienceId', 'titles');
+		$options = @compact('categories', 'experienceId', 'titles');
 		return Places_Nearby::related(
 			$publisherId, $relationType, $latitude, $longitude, $meters, $options
 		);
@@ -122,7 +122,7 @@ class Places_Interest
 		}
 		extract(Q::take($options, array('latitude', 'longitude', 'meters')), EXTR_IF_EXISTS);
 		$categories = array('Places_Interest', '_categories');
-		$o = compact(
+		$o = @compact(
 			'categories', 'experienceId', 'titles',
 			'fromTime', 'toTime', 'weight'
 		);

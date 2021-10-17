@@ -14,7 +14,7 @@ function Users_user_response_batch($params = array())
 	}
 	Q_Valid::requireFields(array('userIds'), $batch, true);
 	$userIds = $batch['userIds'];
-	$users = Q::event('Users/user/response/users', compact('userIds'));
+	$users = Q::event('Users/user/response/users', @compact('userIds'));
 	$result = array();
 	foreach ($userIds as $userId) {
 		$result[] = array('slots' => 

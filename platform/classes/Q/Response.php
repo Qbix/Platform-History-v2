@@ -82,7 +82,7 @@ class Q_Response
 					 */
 					$result = Q::event(
 						"Q/response/$default_slotName",
-						compact('slotName')
+						@compact('slotName')
 					);
 					if (isset(self::$slots[$slotName])) {
 						// The slot was already filled, while we were rendering it
@@ -131,7 +131,7 @@ class Q_Response
 		 */
 		return Q::event(
 			"Q/response/$default_slotName",
-			compact('slotName')
+			@compact('slotName')
 		);
 	}
 
@@ -252,7 +252,7 @@ class Q_Response
 		if (!isset($options['closeable'])) {
 			$options['closeable'] = true;
 		}
-		$notice = compact('notice', 'options');
+		$notice = @compact('notice', 'options');
 		self::$notices[$key] = $notice;
 		if (!empty($options['persistent']) and Q_Session::id()) {
 			$_SESSION['Q']['notices'][$key] = Q::t($notice);
@@ -922,7 +922,7 @@ class Q_Response
 		 * @param {string} type
 		 * @return {array}
 		 */
-		$modify = Q::event('Q/response/addScript', compact('src', 'type'), 'before');
+		$modify = Q::event('Q/response/addScript', @compact('src', 'type'), 'before');
 		if ($modify) {
 			extract($modify);
 		}
@@ -932,7 +932,7 @@ class Q_Response
 				return false; // already added
 			}
 		}
-		self::$scripts[] = compact('src', 'type');
+		self::$scripts[] = @compact('src', 'type');
 		// Now, for the slot
 		if (!isset($slotName)) {
 			// By default, scripts won't be added "to a slot"
@@ -946,7 +946,7 @@ class Q_Response
 			if ($script['src'] == $src && $script['type'] == $type)
 				return false; // already added
 		}
-		self::$scriptsForSlot[$slotName][] = compact('src', 'type');
+		self::$scriptsForSlot[$slotName][] = @compact('src', 'type');
 
 		return true;
 	}
@@ -969,7 +969,7 @@ class Q_Response
 		$type = 'handlebars', 
 		$params = array())
 	{
-		self::$templates[] = compact('name', 'type');
+		self::$templates[] = @compact('name', 'type');
 		// Now, for the slot
 		if (!isset($slotName)) {
 			$slotName = isset(self::$slotName) ? self::$slotName : '';
@@ -986,7 +986,7 @@ class Q_Response
 		$realpath = Q::realPath($filename);
 
 		if (!$realpath) {
-			throw new Q_Exception_MissingFile(compact('filename'));
+			throw new Q_Exception_MissingFile(@compact('filename'));
 		}
 		if ($type === 'php') {
 			$ob = new Q_OutputBuffer();
@@ -1008,7 +1008,7 @@ class Q_Response
 		}
 		$parts = explode('/', "$name.$type");
 		$text = array_merge($params, Q_Text::sources($parts));
-		self::$inlineTemplates[$slotName][] = compact(
+		self::$inlineTemplates[$slotName][] = @compact(
 			'name', 'content', 'type', 'text'
 		);
 
@@ -1226,7 +1226,7 @@ class Q_Response
 				'script',
 				array('type' => $type, 'src' => $src, 'data-slot' => $script['slot']),
 				null,
-				compact('hash')
+				@compact('hash')
 			) . '</script>';
 		}
 		return implode($between, $tags);
@@ -1251,7 +1251,7 @@ class Q_Response
 		 * @param {string} type
 		 * @return {array}
 		 */
-		$modify = Q::event('Q/response/addStylesheet', compact('href', 'media', 'type'), 'before');
+		$modify = Q::event('Q/response/addStylesheet', @compact('href', 'media', 'type'), 'before');
 		if ($modify) {
 			extract($modify);
 		}
@@ -1264,7 +1264,7 @@ class Q_Response
 				return false;
 			}
 		}
-		self::$stylesheets[] = compact('href', 'media', 'type');
+		self::$stylesheets[] = @compact('href', 'media', 'type');
 
 		// Now, for the slot
 		if (!isset($slotName)) {
@@ -1281,7 +1281,7 @@ class Q_Response
 				return false;
 			}
 		}
-		self::$stylesheetsForSlot[$slotName][] = compact('href', 'media', 'type');
+		self::$stylesheetsForSlot[$slotName][] = @compact('href', 'media', 'type');
 		return true;
 	}
 
@@ -1435,9 +1435,9 @@ class Q_Response
 					}
 				}
 			}
-			$attributes = compact('rel', 'type', 'href', 'media');
+			$attributes = @compact('rel', 'type', 'href', 'media');
 			$attributes['data-slot'] = $stylesheet['slot'];
-			$tags[] = Q_Html::tag('link', $attributes, null, compact('hash'));
+			$tags[] = Q_Html::tag('link', $attributes, null, @compact('hash'));
 		}
 		return implode($between, $tags);
 	}
@@ -1453,7 +1453,7 @@ class Q_Response
 	 */
 	static function addLink($rel, $href, array $attributes = array(), $slotName = null)
 	{
-		$attributes = array_merge(compact('rel', 'href'), $attributes);
+		$attributes = array_merge(@compact('rel', 'href'), $attributes);
 		if (!isset($slotName)) {
 			$slotName = isset(self::$slotName) ? self::$slotName : '';
 		}
@@ -1732,7 +1732,7 @@ class Q_Response
 		 */
 		$result = Q::event(
 			'Q/redirect',
-			compact('uri', 'url', 'loop', 'permanently', 'noProxy', 'level'),
+			@compact('uri', 'url', 'loop', 'permanently', 'noProxy', 'level'),
 			'before'
 		);
 		if (isset($result)) {
@@ -1857,7 +1857,7 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			@compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
 			'after', false, $header
 		);
 		if ($header) {

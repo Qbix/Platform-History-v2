@@ -15,14 +15,14 @@ function Streams_get_response_player () {
 	$name = Streams::requestedName(true);
 	
 	if (substr($name, -1) === '/')
-		throw new Q_Exception("Player cannot show multiple streams", compact('publisherId', 'name'));
+		throw new Q_Exception("Player cannot show multiple streams", @compact('publisherId', 'name'));
 
 	/*
 	 * Get shall return only streams which user is authorized to see.
 	 */
 	
 	if (!($stream = Streams::get($userId, $publisherId, $name, null, true)))
-		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => compact('publisherId', 'name')));
+		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => @compact('publisherId', 'name')));
 	
 	// join the stream
 	if ($userId !== 0 && $stream->testWriteLevel('join'))
@@ -31,5 +31,5 @@ function Streams_get_response_player () {
 	// Let's be nice to poor Windows users
 	$type = join(DS, explode('/', $stream->type));
 	
-	return Q::view("Streams/$type/get.php", compact('stream', 'userId'));
+	return Q::view("Streams/$type/get.php", @compact('stream', 'userId'));
 }

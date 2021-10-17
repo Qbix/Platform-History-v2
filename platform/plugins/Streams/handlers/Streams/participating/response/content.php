@@ -30,7 +30,7 @@ function Streams_participating_response_content()
 		$iconUrl = Streams::iconUrl($participant, '40.png');
 
 		$participantsGrouped[$participant->streamType][] = Q::view("Streams/content/participatingItem.php",
-			compact('participant', 'iconUrl', 'checked')
+			@compact('participant', 'iconUrl', 'checked')
 		);
 	}
 
@@ -55,5 +55,5 @@ function Streams_participating_response_content()
 		$devicesGrouped[$device->formFactor.' '.$device->platform.' '.$device->version][] = $device;
 	}
 
-	return Q::view("Streams/content/participating.php", compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed', 'devicesGrouped'));
+	return Q::view("Streams/content/participating.php", @compact('participantsGrouped', 'user', 'emailSubscribed', 'mobileSubscribed', 'devicesGrouped'));
 }

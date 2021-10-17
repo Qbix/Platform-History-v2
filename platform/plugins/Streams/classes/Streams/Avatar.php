@@ -522,7 +522,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 		if ($updateToPublicValue) {
 			Streams_Avatar::update()
 				->set(array($field => $showToUserIds[""] ? $stream->content : ''))
-				->where(compact('publisherId'))
+				->where(@compact('publisherId'))
 				->execute();
 		}
 		Streams_Avatar::insertManyAndExecute($rows_that_show, array('onDuplicateKeyUpdate' => $updates_that_show));

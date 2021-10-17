@@ -23,7 +23,7 @@ function Streams_category_response_player () {
 	$stream_publisherId = Q::expect('Streams', $streamType, 'publisher');
 	
 	if (substr($name, -1) === '/')
-		throw new Q_Exception("Player cannot show listing for multiple categories", compact('publisherId', 'name'));
+		throw new Q_Exception("Player cannot show listing for multiple categories", @compact('publisherId', 'name'));
 	
 	/*
 	 * Get shall return only streams which user is authorized to see.
@@ -31,7 +31,7 @@ function Streams_category_response_player () {
 
 	$categories = Streams::fetch($userId, $publisherId, $name);
 	if (empty($categories))
-		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => compact('publisherId', 'name')));
+		throw new Q_Exception_MissingRow(array('table' => 'stream', 'criteria' => @compact('publisherId', 'name')));
 	$category = reset($categories);
 
 	// Are you authorized to see category content?
@@ -48,5 +48,5 @@ function Streams_category_response_player () {
 		array('prefix' => $prefix, 'skipAccess' => true)
 	);
 
-	Q::view("Stream/$type/category.php", compact('relations', 'streams', 'userId'));
+	Q::view("Stream/$type/category.php", @compact('relations', 'streams', 'userId'));
 }

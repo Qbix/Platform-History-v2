@@ -292,7 +292,7 @@ class Q_Request
 	static function filename()
 	{
 		$url = Q_Request::url();
-		$ret = Q::event("Q/request/filename", compact('url'), 'before');
+		$ret = Q::event("Q/request/filename", @compact('url'), 'before');
 		if (isset($ret)) {
 			return $ret;
 		}
@@ -910,7 +910,7 @@ class Q_Request
 		 * @param {string} mimeType
 		 * @return {boolean}
 		 */
-		$ret = Q::event('Q/request/accepts', compact('mimeType'), 'before');
+		$ret = Q::event('Q/request/accepts', @compact('mimeType'), 'before');
 		if (isset($ret)) {
 			return $ret;
 		}

@@ -26,6 +26,6 @@ function Assets_subscription_post($params = array())
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
 	$token = Q::ifset($req, 'token', null);
-	$subscription = Assets_Subscription::start($plan, $req['payments'], compact('token'));
+	$subscription = Assets_Subscription::start($plan, $req['payments'], @compact('token'));
 	Q_Response::setSlot('subscription', $subscription);
 }

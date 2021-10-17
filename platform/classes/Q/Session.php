@@ -106,7 +106,7 @@ class Q_Session
 		 * @param {string} name
 		 * @return {string}
 		 */
-		if ($name2 = Q::event('Q/session/name', compact('name'), 'before')) {
+		if ($name2 = Q::event('Q/session/name', @compact('name'), 'before')) {
 			return $name2;
 		}
 		if (isset($name)) {
@@ -149,7 +149,7 @@ class Q_Session
 		 * @param {string} savePath
 		 * @return {string}
 		 */
-		if ($savePath2 = Q::event('Q/session/savePath', compact('savePath'), 'before')) {
+		if ($savePath2 = Q::event('Q/session/savePath', @compact('savePath'), 'before')) {
 			return $savePath2;
 		}
 		if (isset($savePath)) {
@@ -276,7 +276,7 @@ class Q_Session
 			 * @param {string} id An invalid id, if any, that was passed by the client
 			 * @return {boolean}
 			 */
-			if (false === Q::event('Q/session/generate', compact('id'), 'before')) {
+			if (false === Q::event('Q/session/generate', @compact('id'), 'before')) {
 				return false;
 			}
 			$id = self::generateId();
@@ -485,7 +485,7 @@ class Q_Session
 		 * @param {Db_Interface} session_db_connection
 		 */
 		Q::event('Q/session/open',
-			compact('save_path', 'session_name', 'db_info'),
+			@compact('save_path', 'session_name', 'db_info'),
 			'before'
 		);
 
@@ -498,7 +498,7 @@ class Q_Session
 		 * @param {Db_Interface} session_db_connection
 		 */
 		Q::event('Q/session/open',
-			compact('save_path', 'session_name', 'session_db_connection'),
+			@compact('save_path', 'session_name', 'session_db_connection'),
 			'after'
 		);
 		return true;
@@ -634,7 +634,7 @@ class Q_Session
 			 */
 			if (false === Q::event(
 				'Q/session/write',
-				compact('id', 'sess_data', 'old_data', 'changed'),
+				@compact('id', 'sess_data', 'old_data', 'changed'),
 				'before'
 			)) {
 				return true;
@@ -776,7 +776,7 @@ class Q_Session
 			 */
 			$result = Q::event(
 				'Q/session/write',
-				compact(
+				@compact(
 					'id', 'data_field', 'updated_field', 'duration_field', 'platform_field',
 					'sess_file', 'row',
 					'changed', 'sess_data', 'old_data', 'existing_data', 'merged_data'
@@ -807,7 +807,7 @@ class Q_Session
 		*/
 		if (false === Q::event(
 			'Q/session/destroy',
-			compact('id'),
+			@compact('id'),
 			'before'
 		)) {
 			return false;
@@ -832,7 +832,7 @@ class Q_Session
 		 */
 		$result = Q::event(
 			'Q/session/destroy',
-			compact('id'),
+			@compact('id'),
 			'after',
 			false,
 			$result
@@ -869,7 +869,7 @@ class Q_Session
 		 */
 		if (false === Q::event(
 			'Q/session/gc',
-			compact('id', 'max_duration'),
+			@compact('id', 'max_duration'),
 			'before'
 		)) {
 			return false;
@@ -908,7 +908,7 @@ class Q_Session
 		 */
 		Q::event(
 			'Q/session/gc',
-			compact('id', 'max_duration', 'since_time'),
+			@compact('id', 'max_duration', 'since_time'),
 			'after'
 		);
 		return true;
@@ -977,9 +977,9 @@ class Q_Session
 				$message = Q::ifset($text, 'nonce', 'otherDomain', null);
 			}
 		}
-		$message = Q::interpolate($message, compact('baseUrl'));
+		$message = Q::interpolate($message, @compact('baseUrl'));
 		$field = 'nonce';
-		throw new Q_Exception_FailedValidation(compact('message', 'field'), 'Q.nonce');
+		throw new Q_Exception_FailedValidation(@compact('message', 'field'), 'Q.nonce');
 	}
 
 	static function processDbInfo()

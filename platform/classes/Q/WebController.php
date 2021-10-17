@@ -76,7 +76,7 @@ class Q_WebController
 			 * @event Q/exception
 			 * @param {Exception} exception
 			 */
-			Q::event('Q/exception', compact('exception'));
+			Q::event('Q/exception', @compact('exception'));
 		}
 	}
 }

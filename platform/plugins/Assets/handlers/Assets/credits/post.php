@@ -17,14 +17,14 @@ function Assets_credits_post($params = array(), $securedParams = array())
 		// if forcePayment defined, try to charge funds
 		if ($params["forcePayment"]) {
 			$toCurrency = $currency == "credits" ? "USD" : $currency;
-			Assets::charge("stripe", Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, compact('user'));
+			Assets::charge("stripe", Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, @compact('user'));
 			// if charge success, turn off forcePayment and try again
 			$params["forcePayment"] = false;
 			return Q::event("Assets/credits/post", $params, $securedParams);
 		}
 
 		Q_response::setSlot('status', false);
-		Q_response::setSlot('details', compact("credits", "needCredits"));
+		Q_response::setSlot('details', @compact("credits", "needCredits"));
 		return;
 	}
 
@@ -43,16 +43,16 @@ function Assets_credits_post($params = array(), $securedParams = array())
 
 	if ($toPublisherId && $toStreamName) {
 		$reason = Q::ifset($req, 'reason', Assets::JOINED_PAID_STREAM);
-		Assets_Credits::spend($needCredits, $reason, $loggedUserId, compact(
+		Assets_Credits::spend($needCredits, $reason, $loggedUserId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	} elseif ($toUserId) {
 		$reason = Q::ifset($req, 'reason', Assets::PAYMENT_TO_USER);
-		Assets_Credits::send($needCredits, $reason, $toUserId, $loggedUserId, compact(
+		Assets_Credits::send($needCredits, $reason, $toUserId, $loggedUserId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	}
 
 	Q_response::setSlot('status', true);
-	Q_response::setSlot('details', compact("credits", "needCredits"));
+	Q_response::setSlot('details', @compact("credits", "needCredits"));
 }

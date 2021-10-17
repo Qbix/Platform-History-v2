@@ -13,7 +13,7 @@ function Users_vote_response()
 		$required = array('forType', 'forId');
 		foreach ($required as $field) {
 			if (empty($_REQUEST[$field])) {
-				throw new Q_Exception_RequiredField(compact('field'));
+				throw new Q_Exception_RequiredField(@compact('field'));
 			}
 		}
 		$user = Users::loggedInUser(true);

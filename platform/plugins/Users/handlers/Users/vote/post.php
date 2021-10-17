@@ -12,7 +12,7 @@ function Users_vote_post()
 	$required = array('forType', 'forId');
 	foreach ($required as $field) {
 		if (empty($_REQUEST[$field])) {
-			throw new Q_Exception_RequiredField(compact('field'));
+			throw new Q_Exception_RequiredField(@compact('field'));
 		}
 	}
 	$value = Q_Config::get('Users', 'vote', $_REQUEST['forType'], 'value', null);
@@ -37,7 +37,7 @@ function Users_vote_post()
 	 * @event Users/vote {before}
 	 * @return {string}
 	 */
-	if (false === Q::event('Users/vote', compact('user', 'vote'), 'before')) {
+	if (false === Q::event('Users/vote', @compact('user', 'vote'), 'before')) {
 		return;
 	}
 	if (!$retrieved) {

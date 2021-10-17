@@ -42,6 +42,6 @@ function MyApp_welcome_response_content($params)
 		}
 	}
 
-	return Q::view('MyApp/content/welcome.php', compact('tabs', 'description'));
+	return Q::view('MyApp/content/welcome.php', @compact('tabs', 'description'));
 }
 
