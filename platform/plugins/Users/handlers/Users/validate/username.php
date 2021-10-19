@@ -17,7 +17,7 @@ function Users_validate_username($params)
 			return;
 		}
 	}
-	if (strlen($username) < 4) {
+	if (strlen($username) < Q_Config::get("Users", "validate", "username", "min", 4)) {
 		throw new Q_Exception("usernames are at least 4 characters long", array('username'));
 	}
 	$maxUserName = (new Users_User())->maxSize_username();

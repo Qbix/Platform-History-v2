@@ -991,6 +991,11 @@ Streams.Dialogs = {
 		var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
 
 		var pipe = Q.pipe(['stream', 'text'], function () {
+			var copyLinkText = text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+			if (Q.getObject("share", navigator)) {
+				copyLinkText = text.shareOrCopyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+			}
+
 			Q.Dialogs.push({
 				title: options.title || text.title,
 				template: {
@@ -1001,7 +1006,7 @@ Streams.Dialogs = {
 						text: text,
 						photo: (options.photo)? text.photo: options.photo,
 						to: text.to.interpolate({"Stream Title": stream.fields.title}),
-						copyLink: text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
+						copyLink: copyLinkText,
 						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap})
 					}
 				},
@@ -1442,12 +1447,13 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 				url: rsd.url,
 				title: streamName
 			}, 10, text);
-			Q.Template.render("Streams/templates/invite/sms", t,
-				function (err, text) {
-					if (err) return;
-					var url = Q.Links.sms(text);
-					window.location = url;
-				});
+			Q.Template.render("Streams/templates/invite/sms", t,function (err, text) {
+				if (err) {
+					return;
+				}
+
+				window.location = Q.Links.sms(text);
+			});
 			break;
 		case "facebook":
 			window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
@@ -1456,20 +1462,24 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
 			break;
 		case "copyLink":
-			Q.Clipboard.copy(rsd.url);
-			Q.Text.get("Streams/content", function (err, result) {
-				var text = result && result.invite;
-				if (text) {
-					var element = Q.alert(text.youCanNowPaste, {
-						title: ''
-					});
-					setTimeout(function () {
-						if (element === Q.Dialogs.element()) {
-							Q.Dialogs.pop();
-						}
-					}, Streams.invite.options.youCanNowPasteDuration);
-				}
-			});
+			if (Q.getObject("share", navigator)) {
+				navigator.share({url: rsd.url});
+			} else {
+				Q.Clipboard.copy(rsd.url);
+				Q.Text.get("Streams/content", function (err, result) {
+					var text = result && result.invite;
+					if (text) {
+						var element = Q.alert(text.youCanNowPaste, {
+							title: ''
+						});
+						setTimeout(function () {
+							if (element === Q.Dialogs.element()) {
+								Q.Dialogs.pop();
+							}
+						}, Streams.invite.options.youCanNowPasteDuration);
+					}
+				});
+			}
 			break;
 		case "QR":
 			Q.Dialogs.push({

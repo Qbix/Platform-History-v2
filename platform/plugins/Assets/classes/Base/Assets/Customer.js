@@ -24,6 +24,8 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String} [fields.payments] defaults to "stripe"
  * @param {String|Buffer} [fields.customerId] defaults to ""
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -48,6 +50,18 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * the customer id in the payments processor
+ */
+/**
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
+ * 
+ */
+/**
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
+ * 
  */
 
 /**
@@ -260,7 +274,9 @@ Base.fieldNames = function () {
 	return [
 		"userId",
 		"payments",
-		"customerId"
+		"customerId",
+		"insertedTime",
+		"updatedTime"
 	];
 };
 
@@ -361,6 +377,64 @@ Base.prototype.maxSize_customerId = function () {
 Base.column_customerId = function () {
 
 return [["varbinary","255","",false],false,"",""];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","255","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_updatedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_updatedTime = function () {
+
+return [["timestamp","255","",false],true,"",null];
+};
+
+Base.prototype.beforeSave = function (value) {
+
+	// convention: we'll have updatedTime = insertedTime if just created.
+	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
+	return value;
 };
 
 module.exports = Base;

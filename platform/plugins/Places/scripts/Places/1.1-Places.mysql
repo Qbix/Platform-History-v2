@@ -1,4 +1,4 @@
-CREATE TABLE {{prefix}}location (
+CREATE TABLE IF NOT EXISTS {{prefix}}location (
   `geohash` varchar(31) NOT NULL COMMENT 'the geohash of a real-world location',
   `publisherId` varbinary(31) NOT NULL COMMENT 'publisher of a stream with this location',
   `streamName` varbinary(255) NOT NULL COMMENT 'the name of the stream',

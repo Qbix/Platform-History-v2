@@ -107,6 +107,9 @@ Q.Tool.define("Streams/interests", function (options) {
 			var categories = Object.keys(Interests.all[state.communityId]) || [];
 			state.ordering = state.ordering || Q.getObject(['Interests', 'ordering', state.communityId], Streams) || categories;
 
+			if (state.ordering.length === 1 && Q.typeOf(Q.getObject("expandable.expanded", state)) === "undefined") {
+				state.expandable.expanded =  true;
+			}
 			Q.each(state.ordering, function (i, category) {
 				if (categories.indexOf(category) < 0) {
 					return;

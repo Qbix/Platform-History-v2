@@ -1,5 +1,4 @@
-
-CREATE TABLE {{prefix}}task (
+CREATE TABLE IF NOT EXISTS {{prefix}}task (
   publisherId varbinary(31) NOT NULL DEFAULT '' COMMENT 'id of user that publishes the stream',
   streamName varbinary(255) NOT NULL COMMENT 'the name of the stream',
   instructions longblob NULL COMMENT 'instructions for the task, encoded in binary, for workers to access',
