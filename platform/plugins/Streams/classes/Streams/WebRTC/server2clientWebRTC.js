@@ -939,7 +939,7 @@ module.exports = function(socket, io, rtmpUrl) {
                 source.onFrame(i420Frame);
                 //
                 //var imageData = createImageData(i420Frame.data, width, height);
-                //var u8Array = new Uint8Array(i420Frame.data, );
+                //var u8Array = new Uint8Array(i420Frame.data);
                 //var u8Array = new Uint8Array(imageData);
 
             });

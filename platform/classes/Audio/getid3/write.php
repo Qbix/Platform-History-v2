@@ -69,7 +69,7 @@ class getid3_writetags
 	public $tag_data           = array(array());
 
 	/**
-	 * Text encoding used for tag data ('ISO-8859-1', 'UTF-8', 'UTF-16', 'UTF-16LE', 'UTF-16BE', ).
+	 * Text encoding used for tag data ('ISO-8859-1', 'UTF-8', 'UTF-16', 'UTF-16LE', 'UTF-16BE').
 	 *
 	 * @var string
 	 */

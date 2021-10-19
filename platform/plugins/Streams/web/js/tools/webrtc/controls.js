@@ -1003,13 +1003,13 @@
 				}).length;
 
 				if(tool.WebRTCLib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
-					console.log('toggleAudio disable audio', )
+					console.log('toggleAudio disable audio')
 					tool.WebRTCLib.conferenceControl.disableAudio();
 				} else {
-                    console.log('toggleAudio enable audio', )
+                    console.log('toggleAudio enable audio')
 
                     tool.WebRTCLib.conferenceControl.enableAudio(function (e) {
-                        console.log('toggleAudio enable audio callback', )
+                        console.log('toggleAudio enable audio callback')
 
                         if(_isiOSCordova)
 							tool.showIosPermissionsInstructions('Microphone');
