@@ -1,5 +1,4 @@
-DROP TABLE IF EXISTS {{prefix}}web3;
-CREATE TABLE {{prefix}}Web3 (
+CREATE TABLE IF NOT EXISTS {{prefix}}Web3 (
   tokenId int NOT NULL,
   contract varchar(42) NOT NULL,
   author varchar(42) DEFAULT NULL,

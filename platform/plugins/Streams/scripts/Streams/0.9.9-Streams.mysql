@@ -2,7 +2,7 @@ ALTER TABLE {{prefix}}invite
 ADD COLUMN permissions varchar(255) DEFAULT NULL COMMENT 'JSON array of permission names'
 AFTER adminLevel;
 
-CREATE TABLE {{prefix}}request (
+CREATE TABLE IF NOT EXISTS {{prefix}}request (
   publisherId varbinary(31) NOT NULL COMMENT 'id of user who publishes the stream',
   streamName varbinary(255) NOT NULL COMMENT 'local to shard of publisherId',
   userId varbinary(31) NOT NULL COMMENT 'id of user who is requesting access to the stream',
