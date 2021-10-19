@@ -407,7 +407,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				// add imagepicker
 				var ipo = Q.extend({}, si, 10, {
 					preprocess: function (callback) {
-						var subpath;
+						var path, subpath;
 						Q.Streams.get(state.publisherId, state.streamName, function () {
 							var iconUrl = this.iconUrl(40);
 							var p = 'Q/plugins/';
