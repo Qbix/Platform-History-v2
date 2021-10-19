@@ -231,11 +231,11 @@ WebRTC.listen = function () {
     var io = socket.io;
     var webrtcNamespace = io.of('/webrtc');
 
-    var _streamingData = new PassThrough();
+
 
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
-
+        var _streamingData = new PassThrough();
         var _localRecordDir = null;
         var _localMediaStream = null;
         var _chunksNum = 0;
@@ -265,22 +265,21 @@ WebRTC.listen = function () {
             if(_debug) console.log('m264BrowserSupport ' +  m264BrowserSupport);
             if(_debug) console.log('mp4IsSupported ' +  mp4IsSupported, format, encoder);
             if(_debug) console.log('usersInfo.supportedVideoMimeTypes ', usersInfo.supportedVideoMimeTypes);
-            var outputEndpoints = '';
-            for(let u in rtmpUrls) {
-                if(u == rtmpUrls.length - 1) {
-                    outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
-                } else {
-                    outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
+
+            if(rtmpUrls.length > 1) {
+                var outputEndpoints = '';
+                for(let u in rtmpUrls) {
+                    if(u == rtmpUrls.length - 1) {
+                        outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
+                    } else {
+                        outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
+                    }
                 }
             }
 
+
             function createFfmpegProcess() {
-                // Launch FFmpeg to handle all appropriate transcoding, muxing, and RTMP.
-                // If 'ffmpeg' isn't in your path, specify the full path to the ffmpeg binary.
-
-
-
-                var params = ['-re'];
+                                var params = ['-re'];
                 if(format != 'webm') {
                     params.push('-f', format);
                 }
@@ -292,7 +291,7 @@ WebRTC.listen = function () {
                     //set input framerate to 24 fps
                     //'-r', '30',
                     '-i', '-',
-                    //'-i', '/var/www/testStream.flv',
+                    //'-i', '/var/www/planet.mp4',
 
                     // Because we're using a generated audio source which never ends,
                     // specify that we'll stop at end of other input.  Remove this line if you
@@ -318,27 +317,35 @@ WebRTC.listen = function () {
                     //'-ar', '44100',
                     //'-threads', '6',
                     //'-b:a', '11025',
-                    '-bufsize', '512k',
+                    //'-bufsize', '512k',
                     //'-aac_coder', 'fast',
 
-                    //'-map', '0:0',
-                    //'-map', '0:1',
-                    // FLV is the container format used in conjunction with RTMP
-                    '-map', '0',
-                    '-f', 'tee', outputEndpoints,
+
                     //set output framerate to 24 fps
                     //'-r', '24',
                     //'-s', '1280x768',
-
-                    // The output RTMP URL.
-                    // For debugging, you could set this to a filename like 'test.flv', and play
-                    // the resulting file with VLC.  Please also read the security considerations
-                    // later on in this tutorial.
-
-                    //'/var/www/testStream.flv'
-
-
                 ]);
+
+                if(rtmpUrls.length > 1) {
+                    var outputEndpoints = '';
+                    for(let u in rtmpUrls) {
+                        if(u == rtmpUrls.length - 1) {
+                            outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u];
+                        } else {
+                            outputEndpoints += '[f=flv:flvflags=no_duration_filesize:onfail=ignore]' + rtmpUrls[u] + '|'
+                        }
+                    }
+                    params = params.concat([
+                        '-map', '0',
+                        '-f', 'tee', outputEndpoints
+                    ]);
+                } else {
+                    params = params.concat([
+                        '-flvflags', 'no_duration_filesize',
+                        '-f', 'flv', rtmpUrls[0]
+                    ]);
+                }
+
                 console.log('ffmpeg params ', params)
                 ffmpeg = child_process.spawn('ffmpeg', params);
 
@@ -351,7 +358,7 @@ WebRTC.listen = function () {
 
                 // If FFmpeg stops for any reason, close the WebSocket connection.
                 ffmpeg.on('close', (code, signal) => {
-                    console.log('FFmpeg child process closed, code ' + code + ', signal ' + signal);
+                    console.log(socket.id + ' FFmpeg child process closed, code ' + code + ', signal ' + signal);
                     if (code !== 0) {
                         socket.emit('Streams/webrtc/liveStreamingStopped', {platform: platform, rtmpUrl: rtmpUrls});
                     }
@@ -362,17 +369,17 @@ WebRTC.listen = function () {
                 // These errors most commonly occur when FFmpeg closes and there is still
                 // data to write.  If left unhandled, the server will crash.
                 ffmpeg.stdin.on('error', (e) => {
-                    console.log('FFmpeg STDIN Error', e);
+                    console.log(socket.id + ' FFmpeg STDIN Error', e);
                 });
 
                 // FFmpeg outputs all of its messages to STDERR.  Let's log them to the console.
                 ffmpeg.stderr.on('data', (data) => {
-                    console.log('FFmpeg STDERR:', data.toString());
+                    console.log(socket.id + ' FFmpeg STDERR:', data.toString());
                 });
 
                 // If the client disconnects, stop FFmpeg.
                 socket.on('disconnect', function() {
-                    console.log('FFmpeg USER DISCONNECTED', ffmpeg.killed);
+                    console.log(socket.id + ' FFmpeg USER DISCONNECTED', ffmpeg.killed);
 
                     ffmpeg.kill('SIGINT');
                 });
@@ -381,7 +388,7 @@ WebRTC.listen = function () {
 
             _streamingData.on('data', function (data) {
                 if(ffmpeg != null) {
-                    console.log('WRITE', data);
+                    //console.log(socket.id + 'VIDEO DATA',);
 
                     ffmpeg.stdin.write(data);
                 } else {
@@ -389,10 +396,10 @@ WebRTC.listen = function () {
                 }
             })
             // When data comes in from the WebSocket, write it to FFmpeg's STDIN.
-            socket.on('Streams/webrtc/videoData', function(data) {
-                console.log('VIDEODATA', data);
+            socket.on('Streams/webrtc/videoData', function(data, callback) {
+                console.log(socket.id + ' VIDEODATA');
                 _streamingData.push(data);
-
+                if(callback) callback();
                 return;
                 for(let d in data) {
                     _streamingData.push(data[d]);

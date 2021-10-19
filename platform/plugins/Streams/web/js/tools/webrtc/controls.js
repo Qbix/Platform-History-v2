@@ -1003,13 +1003,13 @@
 				}).length;
 
 				if(tool.WebRTCLib.conferenceControl.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)){
-					console.log('toggleAudio disable audio', )
+					console.log('toggleAudio disable audio')
 					tool.WebRTCLib.conferenceControl.disableAudio();
 				} else {
-                    console.log('toggleAudio enable audio', )
+                    console.log('toggleAudio enable audio')
 
                     tool.WebRTCLib.conferenceControl.enableAudio(function (e) {
-                        console.log('toggleAudio enable audio callback', )
+                        console.log('toggleAudio enable audio callback')
 
                         if(_isiOSCordova)
 							tool.showIosPermissionsInstructions('Microphone');
@@ -3813,7 +3813,7 @@
 									broadcast_data: createRes
 								}, (publishRes) => {
 									if(publishRes == null || typeof publishRes == 'undefined') {
-										tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+										tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 									}
 
 									_liveId = publishRes.id
@@ -3875,7 +3875,7 @@
 								return Q.alert(msg);
 							}
 
-							tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+							tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 							if(callback != null) callback(_liveInfo);
 						}, {
 							method: 'post',
@@ -3924,7 +3924,7 @@
 								return
 							}
 							var loggedInCallback = function () {
-								if (tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+								if (tool.WebRTCLib.screensInterface.fbLive.isStreaming('facebook')) {
 									tool.facebookLiveDialog();
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
@@ -4088,7 +4088,7 @@
 				endStreamingBtn.className = 'Q_button';
 				endStreamingBtn.innerHTML = "Stop streaming";
 				endStreamingBtn.addEventListener('click', function () {
-					tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+					tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 				})
 				fbLiveDialog.appendChild(endStreamingBtn);
 				Q.Dialogs.push({
