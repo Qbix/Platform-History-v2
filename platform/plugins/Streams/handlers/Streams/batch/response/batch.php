@@ -109,11 +109,11 @@ function Streams_batch_response_batch()
 			}
 			Q::event(
 				"Streams/$action/response", 
-				compact('streams', 'publisherId', 'name', 'extra', 'user', 'userId')
+				@compact('streams', 'publisherId', 'name', 'extra', 'user', 'userId')
 			);
 			$slots = Q_Response::slots(true);
 			unset($slots['batch']);
-			$result[] = compact('slots');
+			$result[] = @compact('slots');
 			foreach ($slots as $k => $v) {
 				Q_Response::clearSlot($k);
 			}

@@ -272,7 +272,7 @@ class Q_Uri
 		 * @param {string} plugin
 		 * @return {string}
 		 */
-		if ($url = Q::event('Q/Uri/pluginUrl', compact('url'), 'before')) {
+		if ($url = Q::event('Q/Uri/pluginUrl', @compact('url'), 'before')) {
 			return;
 		}
 		return "Q/plugins/$plugin";
@@ -378,7 +378,7 @@ class Q_Uri
 		 * @param {string} url
 		 * @return {Q_Uri}
 		 */
-		$uri = Q::event('Q/Uri/fromUrl', compact('url'), 'before');
+		$uri = Q::event('Q/Uri/fromUrl', @compact('url'), 'before');
 		if (isset($uri)) {
 			$routed_cache[$url] = $uri;
 			return $uri;
@@ -400,13 +400,13 @@ class Q_Uri
 			$head = substr($dest_url, 0, $len);
 			if ($head != $base_url) {
 				// even the proxy destination doesn't match.
-				throw new Q_Exception_BadUrl(compact('base_url', 'url'));
+				throw new Q_Exception_BadUrl(@compact('base_url', 'url'));
 			}
 			$result = self::fromUrl($dest_url, $route);
 			if (!empty($result)) {
 				return $result;
 			} else {
-		    	throw new Q_Exception_BadUrl(compact('base_url', 'url'));
+		    	throw new Q_Exception_BadUrl(@compact('base_url', 'url'));
 			}
 		}
 
@@ -433,7 +433,7 @@ class Q_Uri
 
 		if ($route) {
 			if (! array_key_exists($route, $routes)) {
-				throw new Q_Exception_MissingRoute(compact('route'));
+				throw new Q_Exception_MissingRoute(@compact('route'));
 			}
 			$uri_fields = self::matchSegments($route, $segments);
 		} else {
@@ -574,7 +574,7 @@ class Q_Uri
 		 * @return {string}
 		 */
 		$uri = $this;
-		$params = compact('uri', 'route', 'pattern', 'controller', 'url');
+		$params = @compact('uri', 'route', 'pattern', 'controller', 'url');
 		$params['url'] = &$url;
 		Q::event('Q/Uri/toUrl', $params, 'before', false, $url);
 		

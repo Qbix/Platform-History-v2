@@ -77,7 +77,7 @@ function Streams_webrtc_post($params = array())
         $taskStream->save();
         $taskStream->post($luid, array(
             'type' => 'Streams/task/progress',
-            'instructions' => compact('progress'),
+            'instructions' => @compact('progress'),
         ), true);
 
         Q_Response::setSlot("progress", $taskStream);

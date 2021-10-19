@@ -39,7 +39,7 @@ class Q_ActionController
 				// Bad url was requested somehow
 				$url = Q_Request::url(true);
 				$base_url = Q_Request::baseUrl(true);
-				throw new Q_Exception_BadUrl(compact('base_url', 'url'));
+				throw new Q_Exception_BadUrl(@compact('base_url', 'url'));
 			}
 			$parts = explode('/', $tail);
 			$parts_len = count($parts);
@@ -65,7 +65,7 @@ class Q_ActionController
 			}
 						
 			// Dispatch the request
-			$uri = Q_Uri::from(compact('module', 'action'));
+			$uri = Q_Uri::from(@compact('module', 'action'));
 			Q_Dispatcher::dispatch($uri);
 			$dispatchResult = Q_Dispatcher::result();
 			if (!isset($dispatchResult)) {
@@ -91,7 +91,7 @@ class Q_ActionController
 			 * @event Q/exception
 			 * @param {Exception} exception
 			 */
-			Q::event('Q/exception', compact('exception'));
+			Q::event('Q/exception', @compact('exception'));
 		}
 	}
 }

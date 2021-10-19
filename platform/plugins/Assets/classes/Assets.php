@@ -114,7 +114,7 @@ abstract class Assets extends Base_Assets
 		 * @param {Assets_Payments} adapter
 		 * @param {array} options
 		 */
-		Q::event('Assets/charge', compact('adapter', 'options'), 'before');
+		Q::event('Assets/charge', @compact('adapter', 'options'), 'before');
 		$customerId = $adapter->charge($amount, $currency, $options);
 		$charge = new Assets_Charge();
 		$charge->userId = $user->id;
@@ -139,7 +139,7 @@ abstract class Assets extends Base_Assets
 		 * @param {Assets_Payments} adapter
 		 * @param {array} options
 		 */
-		Q::event('Assets/charge', compact(
+		Q::event('Assets/charge', @compact(
 			'payments', 'amount', 'currency', 'user', 'charge', 'adapter', 'options'
 		), 'after');
 

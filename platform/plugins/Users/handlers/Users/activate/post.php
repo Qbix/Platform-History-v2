@@ -45,7 +45,7 @@ function Users_activate_post()
 			$user->setMobileNumber($mobile->number, true); // may throw exception
 		}
 		// Log the user in, since they have just added an email to their account
-		$activated = Q::interpolate($text['notifications']['IdentifierActivated'], compact('type'));
+		$activated = Q::interpolate($text['notifications']['IdentifierActivated'], @compact('type'));
 		Users::setLoggedInUser($user); // This also saves the user.
 		Q_Response::removeNotice('Users/activate/objects');
 		Q_Response::setNotice("Users/activate/activated", $activated, array(

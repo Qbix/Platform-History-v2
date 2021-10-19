@@ -9,5 +9,5 @@ function Users_login_response_data()
 		$user['displayName'] = Streams::displayName($row);
 		$roles = Users::roles();
 	}
-	return compact('user', 'roles');
+	return @compact('user', 'roles');
 }

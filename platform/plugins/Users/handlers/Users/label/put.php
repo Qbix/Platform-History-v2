@@ -17,6 +17,6 @@ function Users_label_put($params = array())
 	$l = $req['label'];
 	$icon = Q::ifset($req, 'icon', null);
 	$title = Q::ifset($req, 'title', null);
-	$label = Users_Label::updateLabel($l, compact('icon', 'title'), $userId);
+	$label = Users_Label::updateLabel($l, @compact('icon', 'title'), $userId);
 	Q_Response::setSlot('label', $label->exportArray());
 }

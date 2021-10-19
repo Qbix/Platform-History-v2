@@ -18,7 +18,7 @@ function Streams_subscription_put($params) {
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',
-			'criteria' => compact('publisherId', 'streamName')
+			'criteria' => @compact('publisherId', 'streamName')
 		));
 	}
 

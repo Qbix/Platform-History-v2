@@ -16,5 +16,5 @@ function Websites_article_response_content($params)
 	$streamName = "Websites/article/$articleId";
 	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
 	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
-	return Q::view("Websites/content/article.php", compact('publisherId', 'streamName'));
+	return Q::view("Websites/content/article.php", @compact('publisherId', 'streamName'));
 }

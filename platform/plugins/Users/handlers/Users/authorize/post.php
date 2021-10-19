@@ -58,7 +58,7 @@ function Users_authorize_post($params = array())
 	$externalTo->token_expires_seconds = $duration; // session actually expires after $duration seconds of inactivity
 	$externalTo->save();
 	
-	Q::event('Users/authorize/success', compact('externalTo', 'duration'), 'after');
+	Q::event('Users/authorize/success', @compact('externalTo', 'duration'), 'after');
 
 	Users::$cache['externalTo'] = $externalTo;
 }

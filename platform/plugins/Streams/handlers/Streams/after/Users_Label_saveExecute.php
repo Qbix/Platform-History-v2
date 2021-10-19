@@ -16,7 +16,7 @@ function Streams_after_Users_Label_saveExecute($params)
 		$updates = array_merge($label->toArray(), $updates);
 		Streams_Message::post(null, $label->userId, "Streams/labels", array(
 			'type' => 'Streams/labels/updated',
-			'instructions' => compact('updates')
+			'instructions' => @compact('updates')
 		), true);
 	}
 }

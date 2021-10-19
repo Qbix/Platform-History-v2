@@ -116,7 +116,7 @@ abstract class Assets_Subscription
 		 * @param {string} endDate
 		 * @return {Users_User}
 		 */
-		Q::event('Assets/startSubscription', compact(
+		Q::event('Assets/startSubscription', @compact(
 			'plan', 'user', 'publisher', 'stream', 'startDate', 'endDate', 'months', 'currency'
 		), 'after');
 

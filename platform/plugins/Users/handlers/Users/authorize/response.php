@@ -40,7 +40,7 @@ function Users_authorize_response()
 	}
 	$authorize = true;
 	$automatic = Q::ifset($appInfo, 'authorize', 'automatic', false);
-	$params = compact(
+	$params = @compact(
 		'client_id', 'redirect_uri', 'scope', 'scopes', 'remaining',
 		'state', 'response_type', 'automatic', 'authorize'
 	);
@@ -88,7 +88,7 @@ function Users_authorize_response()
 	if (isset($req['Q.Users.deviceId'])) {
 		$deviceId = $req['Q.Users.deviceId'];
 	}
-	$content = Q::view('Users/content/authorize.php', compact(
+	$content = Q::view('Users/content/authorize.php', @compact(
 		'client', 'user', 'redirect_uri',  'scope', 'scopes', 'remaining',
 		'state', 'terms_label', 'response_type', 'automatic', 'deviceId'
 	));

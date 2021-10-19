@@ -114,7 +114,7 @@ class Q_TestCase
 	function testFailed($message = "failed")
 	{
 		$result = self::TEST_FAILED;
-		throw new Q_Exception_TestCaseFailed(compact('message', 'result'));
+		throw new Q_Exception_TestCaseFailed(@compact('message', 'result'));
 	}
 	
 	/**
@@ -126,7 +126,7 @@ class Q_TestCase
 	function testSkipped($message = "skipped")
 	{
 		$result = self::TEST_SKIPPED;
-		throw new Q_Exception_TestCaseSkipped(compact('message', 'result'));
+		throw new Q_Exception_TestCaseSkipped(@compact('message', 'result'));
 	}
 	
 	/**
@@ -138,7 +138,7 @@ class Q_TestCase
 	function testIncomplete($message = "incomplete")
 	{
 		$result = self::TEST_INCOMPLETE;
-		throw new Q_Exception_TestCaseIncomplete(compact('message', 'result'));
+		throw new Q_Exception_TestCaseIncomplete(@compact('message', 'result'));
 	}
 	
 	/**

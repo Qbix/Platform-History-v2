@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS {{prefix}}external_from;
 DROP TABLE IF EXISTS {{prefix}}external_to;
 
-CREATE TABLE {{prefix}}external_from (
+CREATE TABLE IF NOT EXISTS {{prefix}}external_from (
   platform varbinary(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
   appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',
   xid varbinary(200) NOT NULL DEFAULT '' COMMENT 'The user''s external id',
@@ -15,7 +15,7 @@ CREATE TABLE {{prefix}}external_from (
   PRIMARY KEY (platform,appId,xid)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT 'Represents using external apps to authenticate';
 
-CREATE TABLE {{prefix}}external_to (
+CREATE TABLE IF NOT EXISTS {{prefix}}external_to (
   userId varbinary(31) NOT NULL DEFAULT '' COMMENT 'The native user id in our platform',
   platform varbinary(31) NOT NULL DEFAULT '' COMMENT 'A platform like facebook or github or web',
   appId varbinary(200) NOT NULL DEFAULT '' COMMENT 'An ID in the local/app.json config for the app',

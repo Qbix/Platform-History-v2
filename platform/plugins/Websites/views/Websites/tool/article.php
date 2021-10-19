@@ -23,7 +23,7 @@
 		<?php echo Q_Html::form(Q_Request::baseUrl('action.php').'/Websites/article', 'put',
 			array('class' => 'Websites_getintouch')
 		) ?>
-			<?php echo Q::view('Websites/tool/getintouch.php', compact('article', 'getintouch')) ?>
+			<?php echo Q::view('Websites/tool/getintouch.php', @compact('article', 'getintouch')) ?>
 		</form>
 	<?php endif; ?>
 </div>

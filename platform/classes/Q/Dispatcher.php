@@ -65,7 +65,7 @@ class Q_Dispatcher
 		
 		// Throw an exception that only the dispatcher should catch.
 		throw new Q_Exception_DispatcherForward(
-			compact('uri', 'skip')
+			@compact('uri', 'skip')
 		);
 	}
 	
@@ -177,7 +177,7 @@ class Q_Dispatcher
 				 * @param {string} routed_uri
 				 * @return {boolean}
 				 */
-				$served = Q::event("Q/dir", compact('filename', 'routed_uri'));
+				$served = Q::event("Q/dir", @compact('filename', 'routed_uri'));
 				$dir_was_served = true;
 			} else {
 				/**
@@ -186,7 +186,7 @@ class Q_Dispatcher
 				 * @param {string} routed_uri
 				 * @return {boolean}
 				 */
-				$served = Q::event("Q/file", compact('filename', 'routed_uri'));
+				$served = Q::event("Q/file", @compact('filename', 'routed_uri'));
 				$dir_was_served = false;
 			}
 		}
@@ -317,12 +317,12 @@ class Q_Dispatcher
 						'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'
 					));
 					if (!in_array($method, $methods)) {
-						throw new Q_Exception_MethodNotSupported(compact('method'));
+						throw new Q_Exception_MethodNotSupported(@compact('method'));
 					}
 					$method_event = 'Q/'.strtolower($method);
 					if (!isset(self::$skip['Q/method']) and !isset(self::$skip[$method_event])) {
 						if (!Q::canHandle($method_event)) {
-							throw new Q_Exception_MethodNotSupported(compact('method'));
+							throw new Q_Exception_MethodNotSupported(@compact('method'));
 						}
 						Q::event($method_event);
 					}
@@ -501,7 +501,7 @@ class Q_Dispatcher
 				// We need to handle errors, but we
 				// have already tried to do it.
 				// Just show the errors view.
-				Q::event('Q/errors/native', compact('errors', 'exception', 'partialResponse', 'startedResponse'));
+				Q::event('Q/errors/native', @compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 				return;
 			}
 			self::$handlingErrors = true;
@@ -520,7 +520,7 @@ class Q_Dispatcher
 				 * @param {string} module
 				 * @param {string} partialResponse
 				 */
-				Q::event("$module/errors", compact('errors', 'exception', 'partialResponse', 'startedResponse'));
+				Q::event("$module/errors", @compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 			} else {
 				/**
 				 * @event Q/errors
@@ -528,7 +528,7 @@ class Q_Dispatcher
 				 * @param {string} module
 				 * @param {string} partialResponse
 				 */
-				Q::event("Q/errors", compact('errors', 'exception', 'partialResponse', 'startedResponse'));
+				Q::event("Q/errors", @compact('errors', 'exception', 'partialResponse', 'startedResponse'));
 			}
 		} catch (Exception $e) {
 			Q_Exception::rethrow($e, ''); // may be for forwarding
@@ -536,7 +536,7 @@ class Q_Dispatcher
 			 * @event Q/exception
 			 * @param {Exception} exception
 			 */
-			Q::event('Q/exception', compact('exception')); // the original exception
+			Q::event('Q/exception', @compact('exception')); // the original exception
 		}
 	}
 

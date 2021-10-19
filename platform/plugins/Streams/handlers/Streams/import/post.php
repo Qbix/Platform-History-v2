@@ -52,7 +52,7 @@ function Streams_import_post()
 		? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
 		: Streams::create($luid, $communityId, 'Streams/task', array(
 			'skipAccess' => true,
-			'title' => Q::interpolate($streamTitle, compact('communityName')),
+			'title' => Q::interpolate($streamTitle, @compact('communityName')),
 			'name' => "Streams/task/$sha1"
 		), array(
 			'publisherId' => $app,
@@ -189,7 +189,7 @@ function Streams_import_post()
 
 			// invite the user
 			$sn = 'Streams/experience/main';
-			$result = Streams::invite($communityId, $sn, compact('identifier'));
+			$result = Streams::invite($communityId, $sn, @compact('identifier'));
 			Users::$cache['importUserData'] = null; // already saved this data
 			$userId = reset($result['userIds']);
 			$users[$userId] = $user = Users::fetch($userId, true);
@@ -203,11 +203,11 @@ function Streams_import_post()
 			$task->setAttribute('progress', min($j / $lineCount, 1));
 			$task->post($luid, array(
 				'type' => 'Streams/task/progress',
-				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress'),
+				'instructions' => @compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress'),
 			), true);
 			foreach ($streamNames as $sn) {
 				// the following sends an invite message and link by email or mobile
-				Streams::invite($communityId, $sn, compact('identifier'));
+				Streams::invite($communityId, $sn, @compact('identifier'));
 			}
 			if (!empty($labelTitles)) {
 				$labels = Users_Label::fetch($luid);
@@ -233,7 +233,7 @@ function Streams_import_post()
 			$task->post($luid, array(
 				'type' => 'Streams/task/error',
 				'content' => $e->getMessage(),
-				'instructions' => compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress', 'file', 'line'),
+				'instructions' => @compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress', 'file', 'line'),
 			), true);
 			Q::log($e, 'Calendars_import');
 			$exceptions[$j] = $e;

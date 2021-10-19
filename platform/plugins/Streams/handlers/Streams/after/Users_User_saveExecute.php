@@ -192,7 +192,7 @@ function Streams_after_Users_User_saveExecute($params)
 		$stream = Streams::fetchOne($user->id, $user->id, $name, array('dontCache' => true));
 
 		if (!$stream) {
-			Streams::create($user->id, $user->id, "Streams/greeting", compact('name'));
+			Streams::create($user->id, $user->id, "Streams/greeting", @compact('name'));
 
 			$text = Q_Text::get('Streams/content', array(
 				'language' => Q::ifset($user, 'preferredLanguage', null)

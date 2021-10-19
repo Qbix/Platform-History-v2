@@ -21,7 +21,7 @@ function Streams_interest_delete()
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'stream', 
-			'criteria' => Q::json_encode(compact('publisherId', 'name'))
+			'criteria' => Q::json_encode(@compact('publisherId', 'name'))
 		));
 	}
 	$miPublisherId = $user->id;
@@ -60,7 +60,7 @@ function Streams_interest_delete()
 	 * @param {Streams_Stream} stream The interest stream
 	 * @param {Streams_Stream} myInterests The user's "Streams/user/interests" stream
 	 */
-	Q::event("Streams/interest/remove", compact(
+	Q::event("Streams/interest/remove", @compact(
 		'publisherId', 'title', 'subscribe', 'user', 'stream', 'myInterests'
 	), 'after');
 }

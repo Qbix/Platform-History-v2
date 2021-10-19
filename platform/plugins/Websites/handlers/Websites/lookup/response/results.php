@@ -16,6 +16,6 @@ function Websites_lookup_response_results ($params) {
 
 	if ($platforms["youtube"]) {
 		$channel = Q_Config::get("Websites", "youtube", "channelId", null);
-		return Websites_Webpage::youtube(compact("query","channel"));
+		return Websites_Webpage::youtube(@compact("query","channel"));
 	}
 }

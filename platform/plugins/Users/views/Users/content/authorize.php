@@ -38,7 +38,7 @@
 					<a class="Q_button" id="Users_login"><?php echo $authorize['GetStarted'] ?></a>
 				</div>
 			<?php endif; ?>
-			<?php echo Q_Html::hidden(compact('deviceId')) ?>
+			<?php echo Q_Html::hidden(@compact('deviceId')) ?>
 		</form>
 	</div>
 </div>

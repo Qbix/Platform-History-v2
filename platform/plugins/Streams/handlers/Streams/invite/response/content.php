@@ -17,5 +17,5 @@ function Streams_invite_response_content()
 			'criteria' => "{publisherId: '$publisherId', name: '$streamName'}"
 		));
 	}
-	return Q::tool('Streams/invite', compact('stream'));
+	return Q::tool('Streams/invite', @compact('stream'));
 }

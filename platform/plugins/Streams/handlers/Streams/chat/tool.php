@@ -44,7 +44,7 @@ function Streams_chat_tool($options)
 		if (!$stream) {
 			throw new Q_Exception_MissingRow(array(
 				'table'    => 'stream',
-				'criteria' => compact('publisherId', 'streamName')
+				'criteria' => @compact('publisherId', 'streamName')
 			));
 		}
 	}

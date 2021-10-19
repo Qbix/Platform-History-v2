@@ -21,7 +21,7 @@ function Streams_after_Q_image_save($params)
 		return;
 	}
 	$url = $data[''];
-	$stream->icon = Q_Valid::url($url) ? $url : Q_Request::baseUrl().'/'.$url;
+	$stream->icon = Q_Valid::url($url) ? $url : '{{baseUrl}}/'.$url;
 
 	if (is_array($save) && !empty($save)) {
 		$sizes = array();

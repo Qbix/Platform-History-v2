@@ -33,7 +33,7 @@ abstract class Base_Users
   10 => 'Users_Session',
   11 => 'Users_Total',
   12 => 'Users_User',
-  13 => 'Users_Vote',
+  13 => 'Users_Vote'
 );
 
 	/**

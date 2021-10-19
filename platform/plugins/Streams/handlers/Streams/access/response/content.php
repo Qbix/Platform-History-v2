@@ -22,7 +22,7 @@ function Streams_access_response_content($options)
 	$controls = !empty($options['controls']);
 	
 	Q_Response::setSlot('title', "Access to: " . $stream->title);
-	return Q::tool('Streams/access', compact(
+	return Q::tool('Streams/access', @compact(
 		'publisherId',
 		'streamName',
 		'ajax',

@@ -6,5 +6,5 @@ function Streams_basic_tool($options)
 	$prompt = 'Fill out your basic information to complete your signup.';
 	extract($options);
 	Q_Response::addScript('{{Streams}}/js/Streams.js', 'Streams');
-	return Q::view('Streams/tool/basic.php', compact('showAccess', 'prompt'));
+	return Q::view('Streams/tool/basic.php', @compact('showAccess', 'prompt'));
 }

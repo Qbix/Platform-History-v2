@@ -164,7 +164,7 @@ class Q
 			 * @event Q/exception
 			 * @param {Exception} $exception
 			 */
-			self::event('Q/exception', compact('exception'));
+			self::event('Q/exception', @compact('exception'));
 		} catch (Exception $e) {
 			/**
 			 * @event Q/exception/native
@@ -172,7 +172,7 @@ class Q
 			 */
 			// Looks like the app's custom Q/exception handler threw
 			// an exception itself. Just show Q's native exception handler.
-			self::event('Q/exception/native', compact('exception'));
+			self::event('Q/exception/native', @compact('exception'));
 		}
 	}
 
@@ -228,7 +228,7 @@ class Q
 		 * @param {integer} errline
 		 * @param {array} errcontext
 		 */
-		self::event("Q/error", compact(
+		self::event("Q/error", @compact(
 			'type','errno','errstr','errfile','errline','errcontext'
 		));
 	}
@@ -457,7 +457,7 @@ class Q
 		 * @event Q/realPath {after}
 		 * @param {string} $result
 		 */
-		Q::event('Q/realPath', compact('result'), 'after');
+		Q::event('Q/realPath', @compact('result'), 'after');
 
 	    return $result;
 
@@ -504,7 +504,7 @@ class Q
 		 */
 		$result = self::event(
 			'Q/includeFile',
-			compact('filename', 'params', 'once', 'get_vars'),
+			@compact('filename', 'params', 'once', 'get_vars'),
 			'before',
 			true
 		);
@@ -518,7 +518,7 @@ class Q
 		if (!$abs_filename or is_dir($abs_filename)) {
 			$include_path = get_include_path();
 			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
-			throw new Q_Exception_MissingFile(compact('filename', 'include_path'));
+			throw new Q_Exception_MissingFile(@compact('filename', 'include_path'));
 		}
 
 		extract($params);
@@ -573,7 +573,7 @@ class Q
 		 */
 		$result = self::event(
 			'Q/readFile',
-			compact('filename', 'options'),
+			@compact('filename', 'options'),
 			'before',
 			true
 		);
@@ -591,7 +591,7 @@ class Q
 		if (!$abs_filename or is_dir($abs_filename)) {
 			$include_path = get_include_path();
 			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFile.php');
-			throw new Q_Exception_MissingFile(compact('filename', 'include_path'));
+			throw new Q_Exception_MissingFile(@compact('filename', 'include_path'));
 		}
 		
 		if (!isset($result)) {
@@ -633,14 +633,14 @@ class Q
 			 * @return {string} the filename of the file to load
 			 */
 			$filename = self::event(
-				'Q/autoload', compact('className'), 
+				'Q/autoload', @compact('className'), 
 				'before', false, $filename
 			);
 
 			if (!empty(Q::$autoloadRequires[$className]['PHP'])) {
 				$version = Q::$autoloadRequires[$className]['PHP'];
 				if (version_compare(PHP_VERSION, $version, '<')) {
-					throw new Q_Exception_MissingPHPVersion(compact('version'));
+					throw new Q_Exception_MissingPHPVersion(@compact('version'));
 				}
 			}
 
@@ -654,7 +654,7 @@ class Q
 
 			// if (!class_exists($className) && !interface_exists($className)) {
 			// 	require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingClass.php');
-			// 	throw new Q_Exception_MissingClass(compact('className'));
+			// 	throw new Q_Exception_MissingClass(@compact('className'));
 			// }
 
 			/**
@@ -662,14 +662,14 @@ class Q
 			 * @param {string} className
 			 * @param {string} filename
 			 */
-			self::event('Q/autoload', compact('className', 'filename'), 'after');
+			self::event('Q/autoload', @compact('className', 'filename'), 'after');
 
 		} catch (Exception $exception) {
 			/**
 			 * @event Q/exception
 			 * @param {Exception} exception
 			 */
-			self::event('Q/exception', compact('exception'));
+			self::event('Q/exception', @compact('exception'));
 		}
 	}
 
@@ -717,7 +717,7 @@ class Q
 		 * @return {string}
 		 *  Optional. If set, override method return
 		 */
-		$result = self::event('Q/view', compact(
+		$result = self::event('Q/view', @compact(
 			'viewName', 'viewPath', 'params'
 		), 'before');
 		if (isset($result)) {
@@ -740,7 +740,7 @@ class Q
 			 * @param {string} viewpath
 			 * @return {string}
 			 */
-			return self::event('Q/missingView', compact('viewName', 'viewPath', 'params'));
+			return self::event('Q/missingView', @compact('viewName', 'viewPath', 'params'));
 		}
 	}
 
@@ -855,7 +855,7 @@ class Q
 				 */
 				$params = $e->params();
 				if ($params['filename'] === str_replace('/', DS, "handlers/$toolHandler.php")) {
-					$result .= self::event('Q/missingTool', compact('name', 'options'));
+					$result .= self::event('Q/missingTool', @compact('name', 'options'));
 				} else {
 					$exception = $e;
 				}
@@ -885,7 +885,7 @@ class Q
 		 */
 		Q::event(
 			'Q/tool/render',
-			compact('info', 'extra'),
+			@compact('info', 'extra'),
 			'after',
 			false,
 			$result
@@ -949,7 +949,7 @@ class Q
 		if (!isset($event_stack_limit)) {
 			$event_stack_limit = Q_Config::get('Q', 'eventStackLimit', 100);
 		}
-		self::$event_stack[] = compact('eventName', 'params', 'pure', 'skipIncludes');
+		self::$event_stack[] = @compact('eventName', 'params', 'pure', 'skipIncludes');
 		++self::$event_stack_length;
 		if (self::$event_stack_length > $event_stack_limit) {
 			if (!class_exists('Q_Exception_Recursion', false)) {
@@ -1093,7 +1093,7 @@ class Q
 			self::includeFile($filename, $params, true);
 			if (!function_exists($function_name)) {
 				require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingFunction.php');
-				throw new Q_Exception_MissingFunction(compact('function_name'));
+				throw new Q_Exception_MissingFunction(@compact('function_name'));
 			}
 		}
 		// The following avoids the bug in PHP where
@@ -1134,7 +1134,7 @@ class Q
 			if (is_array($function_name)) {
 				$function_name = implode('::', $function_name);
 			}
-			throw new Q_Exception_MissingFunction(compact('function_name'));
+			throw new Q_Exception_MissingFunction(@compact('function_name'));
 		}
 		return call_user_func_array($callback, $params);
 	}
@@ -1294,7 +1294,7 @@ class Q
 			$key = null;
 			$timestamp = true;
 		}
-		if (false === Q::event('Q/log', compact(
+		if (false === Q::event('Q/log', @compact(
 			'message', 'timestamp'
 		), 'before')) {
 			return;
@@ -1332,7 +1332,7 @@ class Q
 		}
 		$day = date("Y-m-d");
 		$filename = Q_Config::get('Q', 'log', 'pattern', '{{key}}-{{day}}.log');
-		$filename = Q::interpolate($filename, compact('key', 'day'));
+		$filename = Q::interpolate($filename, @compact('key', 'day'));
 		$toSave = "\n".($timestamp ? '['.date('Y-m-d H:i:s') . '] ' : '') .substr($message, 0, $max_len);
 		$tooLargeString = "\n\nLog file has grown too large.\n\nPlease delete it and fix the issue before continuing.\n";
 		$maxFileSize = Q_Config::get('Q', 'log', 'maxFileSize', 100000000);

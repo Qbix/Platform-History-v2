@@ -1234,7 +1234,7 @@ class Q_Utils
 		if (!empty(self::$nodeUrlRouters)) {
 			foreach (self::$nodeUrlRouters as $router) {
 				if (false === Q::event(
-					$router, compact('where'), false, false, $url
+					$router, @compact('where'), false, false, $url
 				)) {
 					break;
 				}
@@ -1326,12 +1326,12 @@ class Q_Utils
 		if (isset($throwIfNotWritable)) {
 			$result = Q::event(
 				"Q/Utils/canWriteToPath",
-				compact('path', 'throwIfNotWritable', 'mkdirIfMissing'),
+				@compact('path', 'throwIfNotWritable', 'mkdirIfMissing'),
 				'before'
 			);
 			if (isset($result)) {
 				if (!$result and $throwIfNotWritable) {
-					throw new Q_Exception_CantWriteToPath(compact('path', 'mkdirIfMissing'));
+					throw new Q_Exception_CantWriteToPath(@compact('path', 'mkdirIfMissing'));
 				}
 				return $result;
 			}
@@ -1368,7 +1368,7 @@ class Q_Utils
 			}
 		}
 		if ($throwIfNotWritable) {
-			throw new Q_Exception_CantWriteToPath(compact('path', 'mkdirIfMissing'));
+			throw new Q_Exception_CantWriteToPath(@compact('path', 'mkdirIfMissing'));
 		}
 		return false;
 	}

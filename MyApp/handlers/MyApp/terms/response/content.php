@@ -9,7 +9,7 @@ function MyApp_terms_response_content()
 	$dmcaEmail = "dmca@$host";
 	$governingLaw = 'U.S. law';
 	$jurisdiction = 'New York State';
-	echo Q::view('MyApp/content/terms.php', compact(
+	echo Q::view('MyApp/content/terms.php', @compact(
 		'communityName', 'organizationName', 'dmcaEmail', 'governingLaw', 'jurisdiction'
 	));
 }

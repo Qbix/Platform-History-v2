@@ -53,7 +53,7 @@ function Q_inplace_tool($options)
 		: '';
 
 	$classes = !empty($editing) ? 'Q_editing Q_nocancel' : '';
-	$options = compact(
+	$options = @compact(
 		'editOnClick', 'selectOnEdit', 'showEditButtons',
 		'maxWidth', 'beforeSave', 'onSave', 'placeholder', 'type'
 	);

@@ -81,6 +81,7 @@
             "placeholder": "Mobile number or email address",
             "orInvite": "Or invite people by using:",
             "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
             "QR": "{{ClickOrTap}} to generate QR code",
             "QRtitle": "Scan this QR code",
             "QRscanned": "They scanned it!",

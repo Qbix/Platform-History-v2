@@ -594,7 +594,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$upcoming = Q_Config::get('Db', 'upcoming', $connection, false);
 			if ($query->type !== Db_Query::TYPE_SELECT && $query->type !== Db_Query::TYPE_RAW) {
 				if (!empty($upcoming['block']) && $shard_name === $upcoming['shard']) {
-					throw new Db_Exception_Blocked(compact('shard_name', 'connection'));
+					throw new Db_Exception_Blocked(@compact('shard_name', 'connection'));
 				}
 			}
 			
@@ -761,7 +761,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			 * @param {Exception} exception
 			 */
 			Q::event('Db/query/exception', 
-				compact('query', 'queries', 'sql', 'exception'),
+				@compact('query', 'queries', 'sql', 'exception'),
 				'after'
 			);
 			if (!class_exists('Q_Exception_DbQuery')) {
@@ -779,7 +779,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		 * @param {array} queries
 		 * @param {string} sql
 		 */
-		Q::event('Db/query/execute', compact('query', 'queries', 'sql'), 'after');
+		Q::event('Db/query/execute', @compact('query', 'queries', 'sql'), 'after');
 
 		return new Db_Result($stmts, $this);
 	}
@@ -1645,7 +1645,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$callback,
 		$args = array())
 	{
-		$this->context = compact('callback', 'args');
+		$this->context = @compact('callback', 'args');
 	}
 
 	/**

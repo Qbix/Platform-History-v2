@@ -116,7 +116,7 @@ function Users_activate_response_content()
 	
 	$salt_json = Q::json_encode($user ? $user->salt : '');
 
-	return Q::view($view, compact(
+	return Q::view($view, @compact(
 		'identifier', 'type', 'user', 'code',
 		'suggestions', 'verb_ue', 'noun_ue', 't', 'app', 'home', 'complete', 'salt_json'
 	));

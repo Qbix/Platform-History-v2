@@ -30,7 +30,7 @@ function Places_geolocation_response_data()
 	);
 	$postcode = $postcodes ? reset($postcodes) : null;
 	$result = array(
-		'requested' => compact('latitude', 'longitude'),
+		'requested' => @compact('latitude', 'longitude'),
 		'countryCode' => $postcode->countryCode,
 		'postcode' => $postcode->postcode,
 		'placeName' => $postcode->placeName,

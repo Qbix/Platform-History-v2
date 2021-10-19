@@ -30,7 +30,7 @@ function Assets_after_Assets_startSubscription($params)
 			. "?publisherId=" . urlencode($publisherId)
 			. "&userId=" . urlencode($user->id);
 
-	$fields = compact(
+	$fields = @compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',
 		'description', 'subscription', 'stream', 'plan', 'currency',
 		'name', 'symbol', 'currencyName', 'amount', 'months', 'weeks', 'days', 'startDate', 'endDate', 'link'

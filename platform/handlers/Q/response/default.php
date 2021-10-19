@@ -35,5 +35,5 @@ function Q_response_default($params)
 		$result = isset($result) ? $result : "Don't return null from $function_name";
 		return $result;
 	}
-	throw new Q_Exception_MissingSlot(compact('event'));
+	throw new Q_Exception_MissingSlot(@compact('event'));
 }

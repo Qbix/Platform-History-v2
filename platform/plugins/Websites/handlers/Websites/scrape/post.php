@@ -24,7 +24,7 @@ function Websites_scrape_post($params)
 	$stream = Websites_Webpage::fetchStream($url);
 
 	if ($streamRequired && !$stream) {
-		$stream = Websites_Webpage::createStream(compact("url"));
+		$stream = Websites_Webpage::createStream(@compact("url"));
 	}
 
 	Q_Response::setSlot('publisherId', Q::ifset($stream, "publisherId", null));

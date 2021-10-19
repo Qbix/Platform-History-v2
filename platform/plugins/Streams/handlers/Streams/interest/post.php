@@ -72,7 +72,7 @@ function Streams_interest_post($params = array())
 	 * @param {Streams_Stream} stream The interest stream
 	 * @param {Streams_Stream} myInterests The user's "Streams/user/interests" stream
 	 */
-	Q::event("Streams/interest/add", compact(
+	Q::event("Streams/interest/add", @compact(
 		'publisherId', 'title', 'subscribe', 'userId', 'stream', 'myInterests'
 	), 'after');
 }

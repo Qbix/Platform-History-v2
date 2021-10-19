@@ -17,6 +17,6 @@ function Users_contact_put($params = array())
 	$label = $req['label'];
 	$contactUserId = $req['contactUserId'];
 	$nickname = Q::ifset($req, 'nickname', null);
-	$contact = Users_Contact::updateContact($userId, $label, $contactUserId, compact('nickname'));
+	$contact = Users_Contact::updateContact($userId, $label, $contactUserId, @compact('nickname'));
 	Q_Response::setSlot('contact', $contact->exportArray());
 }

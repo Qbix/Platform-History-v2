@@ -146,7 +146,7 @@ class Q_Bootstrap
 		/**
 		 * @event Q/shutdown {before}
 		 */
-		Q::event('Q/shutdown', compact('error'), 'before');
+		Q::event('Q/shutdown', @compact('error'), 'before');
 		Q_Cache::shutdownFunction();
 		Db_Query_Mysql::shutdownFunction();
 		if (Q_Session::id()) {
@@ -256,7 +256,7 @@ class Q_Bootstrap
 			$plugin = is_numeric($k) ? $v : $k;
 			$plugin_path = Q::realPath('plugins'.DS.$plugin);
 			if (!$plugin_path) {
-				throw new Q_Exception_MissingPlugin(compact('plugin'));
+				throw new Q_Exception_MissingPlugin(@compact('plugin'));
 			}
 			array_splice($paths, 1, 0, array($plugin_path));
 			$PLUGIN = strtoupper($plugin);
@@ -318,7 +318,7 @@ class Q_Bootstrap
 
 		Q::$autoloadRequires = Q_Config::get('Q', 'autoload', 'requires', array());
 		
-		Q::event('Q/configure', compact(
+		Q::event('Q/configure', @compact(
 			'app_tree', 'config_files', 'script_files'
 		), 'after');
 	}

@@ -15,7 +15,7 @@ function Streams_after_Users_Contact_saveExecute($params)
 		$updates = array_merge($contact->toArray(), $updates);
 		Streams_Message::post(null, $contact->userId, 'Streams/contacts', array(
 			'type' => 'Streams/contacts/updated',
-			'instructions' => compact('updates')
+			'instructions' => @compact('updates')
 		), true);
 	}
 }

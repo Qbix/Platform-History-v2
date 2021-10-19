@@ -19,5 +19,5 @@ function Assets_services_response_data($params) {
 		);
 	}
 
-	return compact("relatedServices");
+	return @compact("relatedServices");
 }

@@ -103,7 +103,7 @@ class Users_Email extends Base_Users_Email
 		 */
 		$result = Q::event(
 			'Users/email/sendMessage', 
-			compact('view', 'fields', 'options', 'subject', 'body', 'from'), 
+			@compact('view', 'fields', 'options', 'subject', 'body', 'from'), 
 			'before'
 		);
 		if (isset($result)) {
@@ -178,7 +178,7 @@ class Users_Email extends Base_Users_Email
 				 */
 				$result = Q::event(
 					'Users/email/sendMessage/email', 
-					compact('view', 'fields', 'options', 'subject', 'body', 'from', 'email'), 
+					@compact('view', 'fields', 'options', 'subject', 'body', 'from', 'email'), 
 					'before'
 				);
 				if (isset($result)) {
@@ -202,7 +202,7 @@ class Users_Email extends Base_Users_Email
 		 */
 		Q::event(
 			'Users/email/sendMessage', 
-			compact('subject', 'view', 'fields', 'options', 'mail', 'app'),
+			@compact('subject', 'view', 'fields', 'options', 'mail', 'app'),
 			'after'
 		);
 		return true;
@@ -254,7 +254,7 @@ class Users_Email extends Base_Users_Email
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/resend', compact('user', 'email', 'link', 'unsubscribe'), 'before');
+		Q::event('Users/resend', @compact('user', 'email', 'link', 'unsubscribe'), 'before');
 		$this->save();
 		$email = $this;
 		$fields2 = array_merge($fields, array(
@@ -278,7 +278,7 @@ class Users_Email extends Base_Users_Email
 		 * @param {string} user
 		 * @param {string} email
 		 */
-		Q::event('Users/resend', compact('user', 'email'), 'after');
+		Q::event('Users/resend', @compact('user', 'email'), 'after');
 	}
 
 	/* * * */

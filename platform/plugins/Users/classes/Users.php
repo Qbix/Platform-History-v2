@@ -379,7 +379,7 @@ abstract class Users extends Base_Users
 		 * @param {string} appId
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/authenticate', compact('platform', 'appId'), 'before');
+		$return = Q::event('Users/authenticate', @compact('platform', 'appId'), 'before');
 		if (isset($return)) {
 			return $return;
 		}
@@ -476,7 +476,7 @@ abstract class Users extends Base_Users
 					 * @param {string} during
 					 * @return {Users_User}
 					 */
-					$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
+					$ret = Q::event('Users/adoptFutureUser', @compact('user', 'during'), 'before');
 					if ($ret) {
 						$user = $ret;
 					}
@@ -492,7 +492,7 @@ abstract class Users extends Base_Users
 					 * @param {string} during
 					 * @return {Users_User}
 					 */
-					Q::event('Users/adoptFutureUser', compact('user', 'links', 'during'), 'after');
+					Q::event('Users/adoptFutureUser', @compact('user', 'links', 'during'), 'after');
 				} else {
 					// If we are here, that simply means that we already verified the
 					// $xid => $userId mapping for some existing user who signed up
@@ -526,7 +526,7 @@ abstract class Users extends Base_Users
 				 * @param {string} during
 				 * @return {Users_User}
 				 */
-				$ret = Q::event('Users/insertUser', compact('user', 'during'), 'before');
+				$ret = Q::event('Users/insertUser', @compact('user', 'during'), 'before');
 				if (isset($ret)) {
 					$user = $ret;
 				}
@@ -576,7 +576,7 @@ abstract class Users extends Base_Users
 		}
 		$cookiesToClearOnLogout = $externalFrom->get('cookiesToClearOnLogout', null);
 		if (!$userWasLoggedIn) {
-			self::setLoggedInUser($user, compact('cookiesToClearOnLogout'));
+			self::setLoggedInUser($user, @compact('cookiesToClearOnLogout'));
 		}
 
 		if ($retrieved) {
@@ -586,7 +586,7 @@ abstract class Users extends Base_Users
 			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/updateUser', compact('user', 'externalFrom', 'during'), 'after');
+			Q::event('Users/updateUser', @compact('user', 'externalFrom', 'during'), 'after');
 		} else {
 			/**
 			 * @event Users/insertUser {after}
@@ -594,7 +594,7 @@ abstract class Users extends Base_Users
 			 * @param {Users_ExternalFrom} externalFrom
 			 * @param {string} during
 			 */
-			Q::event('Users/insertUser', compact('user', 'externalFrom', 'during'), 'after');
+			Q::event('Users/insertUser', @compact('user', 'externalFrom', 'during'), 'after');
 		}
 
 		// Now make sure our master session contains the
@@ -620,7 +620,7 @@ abstract class Users extends Base_Users
 				 * @event Users/authenticate/updateExternalFrom {before}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+				Q::event('Users/authenticate/updateExternalFrom', @compact('user', 'externalFrom'), 'before');
 				$ef->accessToken = $accessToken;
 				$ef->expires = $sessionExpires;
 				$ef->save(); // update accessToken in externalFrom
@@ -628,7 +628,7 @@ abstract class Users extends Base_Users
 				 * @event Users/authenticate/updateExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
+				Q::event('Users/authenticate/updateExternalFrom', @compact('user', 'externalFrom'), 'after');
 			}
 		} else {
 			// We have to put the session info in
@@ -640,14 +640,14 @@ abstract class Users extends Base_Users
 					 * @event Users/authenticate/updateExternalFrom {before}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'before');
+					Q::event('Users/authenticate/updateExternalFrom', @compact('user', 'externalFrom'), 'before');
 					$externalFrom->accessToken = $accessToken;
 					$externalFrom->save(); // update accessToken in externalFrom
 					/**
 					 * @event Users/authenticate/updateExternalFrom {after}
 					 * @param {Users_User} user
 					 */
-					Q::event('Users/authenticate/updateExternalFrom', compact('user', 'externalFrom'), 'after');
+					Q::event('Users/authenticate/updateExternalFrom', @compact('user', 'externalFrom'), 'after');
 				}
 			} else {
 				/**
@@ -655,7 +655,7 @@ abstract class Users extends Base_Users
 				 * @param {Users_User} user
 				 * @param {string} 'during'
 				 */
-				Q::event('Users/insertExternalFrom', compact('user', 'during'), 'before');
+				Q::event('Users/insertExternalFrom', @compact('user', 'during'), 'before');
 				// The following may update an existing externalFrom row
 				// in the rare event that someone tries to tie the same
 				// platform account to two different accounts.
@@ -666,7 +666,7 @@ abstract class Users extends Base_Users
 				 * @event Users/authenticate/insertExternalFrom {after}
 				 * @param {Users_User} user
 				 */
-				Q::event('Users/authenticate/insertExternalFrom', compact('user'), 'after');
+				Q::event('Users/authenticate/insertExternalFrom', @compact('user'), 'after');
 
 				if (!isset($authenticated)){
 					$authenticated = 'authorized';
@@ -683,7 +683,7 @@ abstract class Users extends Base_Users
 		 * @param {string} platform
 		 * @param {string} appId
 		 */
-		Q::event('Users/authenticate', compact('platform', 'appId'), 'after');
+		Q::event('Users/authenticate', @compact('platform', 'appId'), 'after');
 
 		// At this point, $user is set.
 		return $user;
@@ -714,7 +714,7 @@ abstract class Users extends Base_Users
 		 * @param {string} passphrase
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/login', compact('identifier', 'passphrase'), 'before');
+		$return = Q::event('Users/login', @compact('identifier', 'passphrase'), 'before');
 		if (isset($return)) {
 			return $return;
 		}
@@ -737,7 +737,7 @@ abstract class Users extends Base_Users
 			), array('identifier', 'emailAddress', 'mobileNumber'));
 		}
 		if (!$user) {
-			throw new Users_Exception_NoSuchUser(compact('identifier'));
+			throw new Users_Exception_NoSuchUser(@compact('identifier'));
 		}
 
 		// First, see if we've already logged in somehow
@@ -750,13 +750,13 @@ abstract class Users extends Base_Users
 
 		// User exists in database. Now check the passphrase.
 		if (!$user->passphraseHash or $user->passphraseHash[0] !== '$') {
-			throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
+			throw new Users_Exception_WrongPassphrase(@compact('identifier'), 'passphrase');
 		} else {
 			if (!$isHashed) {
 				$passphrase = sha1($passphrase . "\t" . $user->id);
 			}
 			if (!Users::verifyPassphrase($passphrase, $user->passphraseHash)) {
-				throw new Users_Exception_WrongPassphrase(compact('identifier'), 'passphrase');
+				throw new Users_Exception_WrongPassphrase(@compact('identifier'), 'passphrase');
 			}
 		}
 
@@ -769,7 +769,7 @@ abstract class Users extends Base_Users
 		 * @param {string} passphrase
 		 * @param {Users_User} 'user'
 		 */
-		Q::event('Users/login', compact(
+		Q::event('Users/login', @compact(
 			'identifier', 'passphrase', 'user'
 		), 'after');
 
@@ -793,7 +793,7 @@ abstract class Users extends Base_Users
 		 * @event Users/logout {before}
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/logout', compact('user'), 'before');
+		Q::event('Users/logout', @compact('user'), 'before');
 
 		$deviceId = null;
 		if ($session = Q_Session::row()) {
@@ -829,7 +829,7 @@ abstract class Users extends Base_Users
 		 * @event Users/logout {after}
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/logout', compact('user'), 'after');
+		Q::event('Users/logout', @compact('user'), 'after');
 	}
 
 	/**
@@ -906,7 +906,7 @@ abstract class Users extends Base_Users
 		 * @param {Users_User} user
 		 * @param {string} loggedInUserId
 		 */
-		Q::event('Users/setLoggedInUser', compact('user', 'loggedInUserId'), 'before');
+		Q::event('Users/setLoggedInUser', @compact('user', 'loggedInUserId'), 'before');
 		
 		if ($loggedInUserId) {
 			// Always log out existing user, so their session data isn't carried over.
@@ -945,7 +945,7 @@ abstract class Users extends Base_Users
 		 * @event Users/setLoggedInUser/updateSessionId {before}
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'before');
+		Q::event('Users/setLoggedInUser/updateSessionId', @compact('user'), 'before');
 		
 		$user->sessionId = $sessionId;
 		$user->save(); // update sessionId in user
@@ -954,7 +954,7 @@ abstract class Users extends Base_Users
 		 * @event Users/setLoggedInUser/updateSessionId {after}
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/setLoggedInUser/updateSessionId', compact('user'), 'after');
+		Q::event('Users/setLoggedInUser/updateSessionId', @compact('user'), 'after');
 		
 		$votes = Users_Vote::select()
 			->where(array(
@@ -977,7 +977,7 @@ abstract class Users extends Base_Users
 			// Set a notice for the user to alert them that the account has changed
 			$template = Q_Config::expect('Users', 'login', 'notice');
 			$displayName = $user->displayName();
-			$html = Q_Handlebars::renderSource($template, compact(
+			$html = Q_Handlebars::renderSource($template, @compact(
 				'user', 'displayName'
 			));
 			Q_Response::setNotice('Users::setLoggedInUser', $html, array(
@@ -989,7 +989,7 @@ abstract class Users extends Base_Users
 		 * @event Users/setLoggedInUser {after}
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/setLoggedInUser', compact('user'), 'after');
+		Q::event('Users/setLoggedInUser', @compact('user'), 'after');
 		self::$loggedOut = false;
 		
 		return true;
@@ -1035,7 +1035,7 @@ abstract class Users extends Base_Users
 		 * @param {string} platform
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/register', compact('username', 'identifier', 'icon', 'platform', 'options'), 'before');
+		$return = Q::event('Users/register', @compact('username', 'identifier', 'icon', 'platform', 'options'), 'before');
 		if (isset($return)) {
 			return $return;
 		}
@@ -1118,7 +1118,7 @@ abstract class Users extends Base_Users
 				 * @param {string} during
 				 * @return {Users_User}
 				 */
-				$ret = Q::event('Users/adoptFutureUser', compact('user', 'during'), 'before');
+				$ret = Q::event('Users/adoptFutureUser', @compact('user', 'during'), 'before');
 				if ($ret) {
 					$user = $ret;
 				}
@@ -1132,7 +1132,7 @@ abstract class Users extends Base_Users
 			// this identifier was already verified for someone else.
 			$ui = Users::identify($signedUpWith, $ui_identifier);
 			if ($ui) {
-				throw new Users_Exception_AlreadyVerified(compact('key'), array(
+				throw new Users_Exception_AlreadyVerified(@compact('key'), array(
 					'emailAddress', 'mobileNumber', 'identifier'
 				));
 			}
@@ -1178,7 +1178,7 @@ abstract class Users extends Base_Users
 		 * @param {string} during
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/insertUser', compact('user', 'during'), 'before');
+		Q::event('Users/insertUser', @compact('user', 'during'), 'before');
 
 		// the following code could throw exceptions
 		if (empty($user->emailAddress) and empty($user->mobileNumber)
@@ -1214,7 +1214,7 @@ abstract class Users extends Base_Users
 		 * @param {string} during
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/insertUser', compact('user', 'during'), 'after');
+		Q::event('Users/insertUser', @compact('user', 'during'), 'after');
 
 		$directory = null;
 		$sizes = array_keys(Q_Image::getSizes('Users/icon'));
@@ -1259,7 +1259,7 @@ abstract class Users extends Base_Users
 		 * @param {string} platform
 		 * @return {Users_User}
 		 */
-		$return = Q::event('Users/register', compact(
+		$return = Q::event('Users/register', @compact(
 			'username', 'identifier', 'icon', 'user', 'platform', 'options', 'device'
 		), 'after');
 		
@@ -1433,14 +1433,14 @@ abstract class Users extends Base_Users
 		 * @param {string} during
 		 * @param {Users_User} 'user'
 		 */
-		Q::event('Users/insertUser', compact('user', 'during'), 'before');
+		Q::event('Users/insertUser', @compact('user', 'during'), 'before');
 		$user->save(); // sets the user's id
 		/**
 		 * @event Users/insertUser {after}
 		 * @param {string} during
 		 * @param {Users_User} user
 		 */
-		Q::event('Users/insertUser', compact('user', 'during'), 'after');
+		Q::event('Users/insertUser', @compact('user', 'during'), 'after');
 
 		if ($type != 'email' and $type != 'mobile') {
 			if ($type !== 'none') {
@@ -1869,7 +1869,7 @@ abstract class Users extends Base_Users
 		 * @event Users/saveContactsFromLinks {after}
 		 * @param {array} contacts
 		 */
-		Q::event('Users/saveContactsFromLinks', compact('contacts'), 'after');
+		Q::event('Users/saveContactsFromLinks', @compact('contacts'), 'after');
 
 		// TODO: Add a handler to this event in the Streams plugin, so that
 		// we post this information to a stream on the hub, which will
@@ -1981,7 +1981,7 @@ abstract class Users extends Base_Users
 		$authorized = false;
 		$result = Q::event(
 			"Users/canManageContacts",
-			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
+			@compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
 			'before'
 		);
 		if ($result) {
@@ -2021,7 +2021,7 @@ abstract class Users extends Base_Users
 		$authorized = false;
 		$result = Q::event(
 			"Users/canManageLabels",
-			compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
+			@compact('asUserId', 'userId', 'label', 'throwIfNotAuthorized', 'readOnly'),
 			'before'
 		);
 		if ($result) {

@@ -35,7 +35,7 @@ function Users_register_post()
 		$username, 
 		Users::requestedIdentifier(), 
 		true,
-		compact('activation')
+		@compact('activation')
 	);
 	Users::setLoggedInUser($user);
 	

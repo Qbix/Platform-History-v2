@@ -53,6 +53,6 @@ function Websites_article_tool($options)
 	Q_Response::addScript("{{Websites}}/js/Websites.js", 'Websites');
 	Q_Response::setToolOptions($options);
 	return Q::view("Websites/tool/article.php", 
-		compact('article', 'getintouch', 'canEdit', 'canView', 'html')
+		@compact('article', 'getintouch', 'canEdit', 'canView', 'html')
 	);
 }

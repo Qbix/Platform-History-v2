@@ -54,7 +54,7 @@ class Users_ExternalFrom_Wallet extends Users_ExternalFrom implements Users_Exte
 				}
 			}
 		}
-		Q_Valid::requireFields(array('payload', 'signature'), compact('payload', 'signature'),true);
+		Q_Valid::requireFields(array('payload', 'signature'), @compact('payload', 'signature'),true);
 		$e = new Crypto\EthSigRecover();
 		$recoveredXid = strtolower(
 			$e->personal_ecRecover($payload, $signature)

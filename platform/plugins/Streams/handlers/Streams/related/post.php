@@ -67,7 +67,7 @@ function Streams_related_post($params) {
 		$type, 
 		$fromPublisherId, 
 		$fromStreamName,
-		compact('weight')
+		@compact('weight')
 	);
 	Q_Response::setSlot('result', $result);
 }

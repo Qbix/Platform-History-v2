@@ -173,7 +173,7 @@ class Users_Vote extends Base_Users_Vote
 		$day = 60 * 60 * 24;
 		$week = $day * 7;
 		$month = date("t") * $day;
-		foreach (compact("day", "week", "month") as $period => $duration) {
+		foreach (@compact("day", "week", "month") as $period => $duration) {
 			switch ($period) {
 				case "day":
 					$timestamp = strtotime("today");

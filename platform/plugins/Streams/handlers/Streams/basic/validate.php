@@ -30,7 +30,7 @@ function Streams_basic_validate()
 	if (!empty($_REQUEST['birthday_month']) or !empty($_REQUEST['birthday_day']) or !empty($_REQUEST['birthday_year'])) {
 		foreach (array('birthday_month', 'birthday_day', 'birthday_year') as $field) {
 			if (empty($_REQUEST[$field]) or !trim($_REQUEST[$field])) {
-				throw new Q_Exception_RequiredField(compact('field'), $field);
+				throw new Q_Exception_RequiredField(@compact('field'), $field);
 			}
 		}
 		if (!checkdate(

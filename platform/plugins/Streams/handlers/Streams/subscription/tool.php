@@ -25,7 +25,7 @@ function Streams_subscription_tool($options) {
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',
-			'criteria' => compact('publisherId', 'streamName')
+			'criteria' => @compact('publisherId', 'streamName')
 		));
 	}
 
@@ -110,7 +110,7 @@ function Streams_subscription_tool($options) {
 	Q_Response::addScript("{{Streams}}/js/Streams.js", 'Streams');
 	Q_Response::addScript("{{Streams}}/js/tools/subscription.js", 'Streams');
 
-	Q_Response::setToolOptions(compact(
+	Q_Response::setToolOptions(@compact(
 		'items',
 		'subscribed',
 		'messageTypes',

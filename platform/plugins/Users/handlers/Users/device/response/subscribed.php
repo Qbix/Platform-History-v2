@@ -30,7 +30,7 @@ function Users_device_response_subscribed($params = array())
 	}
 
 	$subscribed = Users_Device::select()
-		->where(compact("userId", "platform"))
+		->where(@compact("userId", "platform"))
 		->fetchAll();
 
 	return Q_Response::setSlot('subscribed', !!$subscribed);

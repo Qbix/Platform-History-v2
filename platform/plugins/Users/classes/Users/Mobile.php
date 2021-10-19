@@ -63,7 +63,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 * @param {array} options
 		 * @return {boolean}
 		 */
-		$result = Q::event('Users/mobile/sendMessage', compact('view', 'body', 'fields', 'options'), 'before');
+		$result = Q::event('Users/mobile/sendMessage', @compact('view', 'body', 'fields', 'options'), 'before');
 		if (isset($result)) {
 			return $result;
 		}
@@ -102,7 +102,7 @@ class Users_Mobile extends Base_Users_Mobile
 				 * @param {Services_Twilio} client You can call methods on this before sending sms
 				 * @return {boolean}
 				 */
-				$result = Q::event('Users/mobile/sendMessage/twilio', compact('view', 'body', 'fields', 'options', 'client'), 'before');
+				$result = Q::event('Users/mobile/sendMessage/twilio', @compact('view', 'body', 'fields', 'options', 'client'), 'before');
 				if (isset($result)) {
 					return $result;
 				}
@@ -181,7 +181,7 @@ class Users_Mobile extends Base_Users_Mobile
 						 * @param {Zend_Mail} email You can call methods on this before sending sms
 						 * @return {boolean}
 						 */
-						$result = Q::event('Users/mobile/sendMessage/gateway', compact('view', 'body', 'fields', 'options', 'email'), 'before');
+						$result = Q::event('Users/mobile/sendMessage/gateway', @compact('view', 'body', 'fields', 'options', 'email'), 'before');
 						if (isset($result)) {
 							return $result;
 						}
@@ -202,7 +202,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 */
 		Q::event(
 			'Users/mobile/sendMessage', 
-			compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail'),
+			@compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail'),
 			'after'
 		);
 		return true;
@@ -248,7 +248,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/resend', compact('user', 'mobile', 'link', 'unsubscribe'), 'before');
+		Q::event('Users/resend', @compact('user', 'mobile', 'link', 'unsubscribe'), 'before');
 		$this->save();
 		$fields2 = array_merge($fields, array(
 			'user' => $user,
@@ -270,7 +270,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 * @param {string} user
 		 * @param {string} mobile
 		 */
-		Q::event('Users/resend', compact('user', 'mobile', 'communityName'), 'after');
+		Q::event('Users/resend', @compact('user', 'mobile', 'communityName'), 'after');
 	}
 
 	/* * * */

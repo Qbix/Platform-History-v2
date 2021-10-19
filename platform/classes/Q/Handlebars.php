@@ -169,7 +169,7 @@ class Q_Handlebars {
 			$classes = $o['class'];
 			unset($o['class']);
 		}
-		return Q::tool($name, $o, compact('id', 'classes', 'tag'));
+		return Q::tool($name, $o, @compact('id', 'classes', 'tag'));
 	}
 
 	static function helperLookup($template, $context, $args, $source)

@@ -77041,12 +77041,12 @@ class embeddings_Embedding extends topology_Layer {
             }
             if (args.inputLength == null) {
                 // Fix super-constructor to what it would have done if
-                // 'config.inputShape' were (None, )
+                // 'config.inputShape' were (None)
                 this.batchInputShape = [batchSize, null];
             }
             else {
                 // Fix super-constructor to what it would have done if
-                // 'config.inputShape' were (config.inputLength, )
+                // 'config.inputShape' were (config.inputLength)
                 this.batchInputShape =
                     [batchSize].concat(toList(args.inputLength));
             }

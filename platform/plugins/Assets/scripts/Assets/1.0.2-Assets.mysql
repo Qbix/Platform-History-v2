@@ -4,6 +4,6 @@ CREATE TABLE IF NOT EXISTS {{prefix}}connected (
   accountId varchar(255) NOT NULL,
   refreshToken varchar(255) NOT NULL,
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updatedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
   PRIMARY KEY (merchantUserId,payments(80))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

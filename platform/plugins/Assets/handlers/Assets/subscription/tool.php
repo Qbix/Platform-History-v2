@@ -43,7 +43,7 @@ function Assets_subscription_tool($options)
 	);
 	$subscribeButton = Q::ifset($options, 'subscribeButton', "Subscribe with " . $titles[$payments]);
     Q_Response::setToolOptions($options);
-	return Q::view("Assets/tool/subscription/$payments.php", compact(
+	return Q::view("Assets/tool/subscription/$payments.php", @compact(
 		'token', 'publishableKey', 'action',
 		'paymentButton', 'subscribeButton', 'planStreamName'
 	));

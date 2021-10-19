@@ -20,7 +20,7 @@ function Websites_0_9_1_Streams_mysql()
 		$publisherId = (substr($streamName, -1) == '/' ? '' : $userId);
 		$level = !empty($stream['deletable']) ? 'close' : 'edit';
 		$writeLevel = Streams::$WRITE_LEVEL[(!empty($stream['deletable'])) ? 'close' : 'edit'];
-		$rows[] = compact(
+		$rows[] = @compact(
 			'publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 
 			'grantedByUserId', 'readLevel', 'writeLevel', 'adminLevel'
 		);
@@ -39,7 +39,7 @@ function Websites_0_9_1_Streams_mysql()
 	foreach ($streams as $name => $s) {
 		extract($s);
 		$publisherId = (substr($name, -1) == '/' ? '' : $userId);
-		$rows[] = compact(
+		$rows[] = @compact(
 			'publisherId', 'name', 'type', 'title', 'icon', 'content', 'attributes',
 			'readLevel', 'writeLevel', 'adminLevel', 'inheritAccess'
 		);

@@ -27,6 +27,6 @@ function Streams_participant_response_participants()
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$participants = $stream->getParticipants(compact('limit', 'offset', 'state'));
+	$participants = $stream->getParticipants(@compact('limit', 'offset', 'state'));
 	return Db::exportArray($participants);
 }

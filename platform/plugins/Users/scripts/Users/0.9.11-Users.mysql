@@ -1,5 +1,4 @@
-
-CREATE TABLE {{prefix}}quota (
+CREATE TABLE IF NOT EXISTS {{prefix}}quota (
   userId varbinary(31)  NOT NULL COMMENT 'this can be a person, app or organization',
   resourceId varbinary(255) NOT NULL DEFAULT '' COMMENT 'empty string means global resource quota',
   name varbinary(255) NOT NULL COMMENT 'the name of the quota',

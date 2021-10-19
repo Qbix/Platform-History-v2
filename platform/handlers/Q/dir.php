@@ -10,7 +10,7 @@ function Q_dir()
 	$filename = Q_Request::filename();
 
 	// TODO: show directory listing
-	echo Q::view('Q/dir.php', compact('filename'));
+	echo Q::view('Q/dir.php', @compact('filename'));
 	
 	return true;
 }

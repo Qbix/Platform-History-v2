@@ -53,7 +53,7 @@ class Users_Contact extends Base_Users_Contact
 		$unlessExists = false)
 	{
 		$canAddContact = Q::event('Users/Contact/addContact',
-			compact('userId', 'asUserId', 'contactUserId', 'label'),
+			@compact('userId', 'asUserId', 'contactUserId', 'label'),
 			'before'
 		);
 
@@ -96,7 +96,7 @@ class Users_Contact extends Base_Users_Contact
 		 * @param {array} contacts
 		 */
 		Q::event('Users/Contact/addContact', 
-			compact('contactUserId', 'label', 'contacts'), 
+			@compact('contactUserId', 'label', 'contacts'), 
 			'after'
 		);
 		return $contacts;
@@ -119,7 +119,7 @@ class Users_Contact extends Base_Users_Contact
 	{
 		foreach (array('userId', 'label', 'contactUserId', 'updates') as $field) {
 			if (empty($$field)) {
-				throw new Q_Exception_RequiredField(compact($field));
+				throw new Q_Exception_RequiredField(@compact($field));
 			}
 		}
 		Users::canManageContacts($asUserId, $userId, $label, true);
@@ -155,7 +155,7 @@ class Users_Contact extends Base_Users_Contact
 	static function removeContact($userId, $label, $contactUserId, $asUserId = null)
 	{
 		$canRemoveContact = Q::event('Users/Contact/removeContact',
-			compact('userId', 'contactUserId', 'label'),
+			@compact('userId', 'contactUserId', 'label'),
 			'before'
 		);
 
@@ -206,7 +206,7 @@ class Users_Contact extends Base_Users_Contact
 			$contactUserId = $options['contactUserId'];
 		}
 		
-		$criteria = compact('userId', 'contactUserId');
+		$criteria = @compact('userId', 'contactUserId');
 		
 		if ($label) {
 			if (is_string($label) and substr($label, -1) === '/') {

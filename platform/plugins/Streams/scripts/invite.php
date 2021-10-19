@@ -87,5 +87,5 @@ $skipAccess = true;
 $appUrl = Q_Uri::url('Communities/onboarding?communityId='.urlencode($communityId));
 $alwaysSend = Q::ifset($options, "always-send", true);
 
-Streams::invite($communityId, 'Streams/experience/main', compact('identifier'), compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
+Streams::invite($communityId, 'Streams/experience/main', @compact('identifier'), @compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
 echo "Successfully invited $identifier\n";

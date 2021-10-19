@@ -47,7 +47,7 @@ class Assets_Earned extends Base_Assets_Earned
 		if (!isset($earnedTime)) {
 			$earnedTime = time();
 		}
-		$earnedBadge = (new Assets_Earned(compact(
+		$earnedBadge = (new Assets_Earned(@compact(
 			'appId', 'communityId', 'userId', 'earnedTime',
 			'badgeName', 'publisherId', 'streamName'
 		)))->save();

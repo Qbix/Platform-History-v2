@@ -355,35 +355,15 @@
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
 			}
-			var appId = options.appId || Q.info.app;
-			
-			// Unpkg imports	
-			var Web3Modal = window.Web3Modal.default;
-			var WalletConnectProvider = window.WalletConnectProvider.default;
-			var Fortmatic = window.Fortmatic;
-			var evmChains = window.evmChains;
-			var web3Modal, provider, selectedAccount;
-			var infuraProjectId = Q.getObject(['wallet', appId, 'infura', 'projectId'], Users.apps);
-			var providerOptions = {
-				walletconnect: {
-					package: WalletConnectProvider,
-					options: {
-						infuraId: infuraProjectId
-					}
-				}
-			};
-			Users.Wallet.web3Modal = web3Modal = new Web3Modal({
-				chain: options.chain,
-				network: options.network,
-				cacheProvider: false, // optional
-				providerOptions: providerOptions, // required
-				disableInjectedProvider: false, // optional. For MetaMask / Brave / Opera.
-		    });
+
+			var web3Modal = Users.Wallet.getWeb3Modal();
+
 			web3Modal.clearCachedProvider();
 			web3Modal.resetState().then(_connect);
 			function _connect() {
 				web3Modal.connect().then(function (provider) {
 					Users.Wallet.provider = provider;
+
 				    // Subscribe to accounts change
 				    provider.on("accountsChanged", function (accounts) {
 						console.log('provider.accountsChanged', accounts);
@@ -403,17 +383,23 @@
 					});
 					// Subscribe to provider disconnection
 					provider.on("disconnect", function (error) {
-						if (!Users.logout.occurring) {
-							Q.Users.logout({using: 'wallet'});
-						}
 						console.log("provider.disconnect: ", error);
+
+						if (Users.logout.occurring || Users.Wallet.switchNetworkOccuring) {
+							if (Users.Wallet.switchNetworkOccuring === true) {
+								Users.Wallet.switchNetworkOccuring = false;
+							}
+
+							return;
+						}
+
+						Q.Users.logout({using: 'wallet'});
 					});
 					var payload = Q.text.Users.login.wallet.payload.interpolate({
 						host: location.host,
 						timestamp: Math.floor(Date.now() / 1000)
 					});
 					var w3 = new Web3(provider);
-					var network, accounts;
 					w3.eth.getAccounts().then(function (accounts) {
 						var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
 						if (walletAddress && accounts.includes(walletAddress)) {
@@ -456,39 +442,12 @@
 							};
 
 							// check if network is connected
-							var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
-							if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
+							//var supportedNetwork = Q.getObject("Wallet.network", Q.Users);
+							//if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
 								_authenticate();
-							} else {
-								provider.request({
-									method: 'wallet_switchEthereumChain',
-									params: [{chainId: supportedNetwork.chainId}]
-								}).then(_authenticate)
-								.catch(function (e) {
-									if (e.code !== 4902) {
-										return;
-									}
-									console.warn('Users.authenticate.wallet: chain ' 
-										     + supportedNetwork.chainId + ' is not added');
-									provider.request({
-										method: 'wallet_addEthereumChain',
-										params: [{
-											chainId: supportedNetwork.chainId,
-											chainName: supportedNetwork.name,
-											nativeCurrency: {
-												name: supportedNetwork.currency.name,
-												symbol: supportedNetwork.currency.symbol,
-												decimals: supportedNetwork.currency.decimals
-											},
-											rpcUrls: supportedNetwork.rpcUrls,
-											blockExplorerUrls: supportedNetwork.blockExplorerUrls
-										}]
-									}).then(_proceed).catch((error) => {
-										console.log(error)
-									});
-								});
-							}
-
+							//} else {
+							//	Users.Wallet.setNetwork(supportedNetwork, _authenticate, _cancel);
+							//}
 						}
 					}).catch(_cancel);
 				}).catch(_cancel);
@@ -3822,7 +3781,63 @@
 	
 	Users.Wallet = {
 		provider: null,
-		web3Modal: null
+		web3Modal: null,
+		/**
+		 * Get web3Modal instance
+		 * @method getWeb3Modal
+		 */
+		getWeb3Modal: function () {
+			var providerOptions = {
+				walletconnect: {
+					package: window.WalletConnectProvider.default,
+					options: {
+						infuraId: Q.getObject(['wallet', Users.communityId, 'infura', 'projectId'], Users.apps)
+					}
+				}
+			};
+
+			Users.Wallet.web3Modal = new window.Web3Modal.default({
+				//chain: options.chain,
+				//network: options.network,
+				cacheProvider: false, // optional
+				providerOptions: providerOptions, // required
+				disableInjectedProvider: false // optional. For MetaMask / Brave / Opera.
+			});
+
+			return Users.Wallet.web3Modal;
+		},
+		/**
+		 * Change network
+		 * @method setNetwork
+		 * @param {Object} info
+		 * @param {Function} onSuccess
+		 * @param {Function} onError
+		 */
+		setNetwork: function (info, onSuccess, onError) {
+			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
+
+			web3Modal.connect().then(function (provider) {
+				Users.Wallet.switchNetworkOccuring = true;
+				provider.request({
+					method: 'wallet_addEthereumChain',
+					params: [{
+						chainId: info.chainId,
+						chainName: info.name,
+						nativeCurrency: {
+							name: info.currency.name,
+							symbol: info.currency.symbol,
+							decimals: info.currency.decimals
+						},
+						rpcUrls: info.rpcUrls,
+						blockExplorerUrls: info.blockExplorerUrls
+					}]
+				}).then(function () {
+					provider.once("networkChanged", onSuccess);
+				}).catch((error) => {
+					console.log(error)
+				});
+			}).catch(onError);
+		}
 	};
 
 	Q.onReady.add(function () {

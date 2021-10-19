@@ -342,7 +342,7 @@ class Q_Plugin
 					 * @param {string} $current_version
 					 * @param {string} $script The script to execute
 					 */
-					$ret = Q::event("Q/Plugin/installSchema", compact(
+					$ret = Q::event("Q/Plugin/installSchema", @compact(
 						'base_dir', 'name', 'type', 'options',
 						'conn_name', 'connection',
 						'shard', 'shard_data',
@@ -663,7 +663,7 @@ EOT;
 		 * @param {string} $plugin_name the name of the plugin
 		 * @param {array} $options options passed to the installPlugin method
 		 */
-		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'before');
+		Q::event("Q/Plugin/install", @compact('app_dir', 'plugin_name', 'options'), 'before');
 
 		echo "Installing plugin '$plugin_name' into '$app_dir'" . PHP_EOL;
 
@@ -779,7 +779,7 @@ EOT;
 		 * @param {string} $plugin_name the name of the plugin
 		 * @param {array} $options options passed to the installPlugin method
 		 */
-		Q::event("Q/Plugin/install", compact('app_dir', 'plugin_name', 'options'), 'after');
+		Q::event("Q/Plugin/install", @compact('app_dir', 'plugin_name', 'options'), 'after');
 
 		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
 	}

@@ -12,12 +12,13 @@ function Q_post($params)
 		$contentLength = (int)$_SERVER['CONTENT_LENGTH'];
 		foreach (array('upload_max_filesize', 'post_max_size') as $name) {
 			$value = ini_get($name);
+			$v = intval($value);
 			switch (substr($value, -1)) {
-				case 'K': $value = intval($value) * 1024; break;
-				case 'M': $value = intval($value) * 1024*1024; break;
-				case 'B': $value = intval($value) * 1024*1024*1024; break;
+				case 'K': $v *= 1024; break;
+				case 'M': $v *= 1024*1024; break;
+				case 'B': $v *= 1024*1024*1024; break;
 			}
-			if ($contentLength > $value) {
+			if ($contentLength > $v) {
 				throw new Q_Exception_ContentLength(array('contentLength' => $contentLength, 'exceeds' => $name));
 			}
 		}

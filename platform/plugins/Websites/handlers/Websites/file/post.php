@@ -28,9 +28,9 @@ function Websites_file_post($params)
 	$result = Websites_File::scrape($url);
 
 	if ($stream) {
-		$stream = Websites_File::editStream(compact("stream", "url", "clipStart", "clipEnd"));
+		$stream = Websites_File::editStream(@compact("stream", "url", "clipStart", "clipEnd"));
 	} elseif ($streamCreate) {
-		$stream = Websites_File::createStream(compact("url", "clipStart", "clipEnd"));
+		$stream = Websites_File::createStream(@compact("url", "clipStart", "clipEnd"));
 	}
 
 	Q_Response::setSlot('publisherId', Q::ifset($stream, "publisherId", null));

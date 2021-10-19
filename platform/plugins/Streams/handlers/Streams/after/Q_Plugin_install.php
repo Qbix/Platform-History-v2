@@ -73,6 +73,6 @@ function Streams_after_Q_Plugin_install($params)
 	    $extra = Q_Plugin::extra('Streams', 'plugin', 'Streams');
 	    $extra[$key] = is_array($extra[$key]) ? $extra[$key] : array();
 	    $extra[$key] = array_values(array_unique(array_merge($extra[$key], $streamsToInstall)));
-	    return Q_Plugin::extra('Streams', 'plugin', 'Streams', compact('extra'));
+	    return Q_Plugin::extra('Streams', 'plugin', 'Streams', @compact('extra'));
 	}
 }

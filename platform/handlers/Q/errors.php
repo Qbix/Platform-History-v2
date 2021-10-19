@@ -69,7 +69,7 @@ EOT;
 		}
 	}
 	
-	$params2 = compact('errors', 'exception', 'errors_array', 'exception_array');
+	$params2 = @compact('errors', 'exception', 'errors_array', 'exception_array');
 	
 	if (Q::eventStack('Q/response')) {
 		// Errors happened while rendering response. Just render errors view.
@@ -101,7 +101,7 @@ EOT;
 		if (Q::canHandle("$app/errors/response/content")) {
 			Q_Dispatcher::forward("$app/errors");
 		} else {
-			echo Q::view("Q/errors.php", compact('errors'));
+			echo Q::view("Q/errors.php", @compact('errors'));
 		}
 	}
 	if (!empty($e)) {
