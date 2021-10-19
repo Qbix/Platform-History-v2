@@ -8,12 +8,12 @@
 	border-top: solid 1px white;
 	border-bottom: solid 1px #CCC;
 	background: #ffffff;
-	background: -moz-linear-gradient(#ffffff 0%, #eeeeee 100%);
+	background: -moz-linear-gradient(top, #ffffff 0%, #eeeeee 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eeeeee));
-	background: -webkit-linear-gradient(#ffffff 0%,#eeeeee 100%);
-	background: -o-linear-gradient(#ffffff 0%,#eeeeee 100%);
-	background: -ms-linear-gradient(#ffffff 0%,#eeeeee 100%);
-	background: linear-gradient(#ffffff 0%,#eeeeee 100%);
+	background: -webkit-linear-gradient(top, #ffffff 0%,#eeeeee 100%);
+	background: -o-linear-gradient(top, #ffffff 0%,#eeeeee 100%);
+	background: -ms-linear-gradient(top, #ffffff 0%,#eeeeee 100%);
+	background: linear-gradient(top, #ffffff 0%,#eeeeee 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eeeeee',GradientType=0 );
 	-webkit-touch-callout: none;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -50,12 +50,12 @@
 .Q_selectable_listing .Q_permanently_selected
 {
     background: #aaa;
-	background: -moz-linear-gradient( #aaa 0%, #eee 100%);
+	background: -moz-linear-gradient(top,  #aaa 0%, #eee 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aaa), color-stop(100%,#eee));
-	background: -webkit-linear-gradient( #aaa 0%,#eee 100%);
-	background: -o-linear-gradient( #aaa 0%,#eee 100%);
-	background: -ms-linear-gradient( #aaa 0%,#eee 100%);
-	background: linear-gradient( #aaa 0%,#eee 100%);
+	background: -webkit-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: -o-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: -ms-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: linear-gradient(top,  #aaa 0%,#eee 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf5ff', endColorstr='#98bede',GradientType=0 );
 	border-top: solid 1px #eee;
 }
@@ -68,12 +68,12 @@
 .Q_selectable_listing .Q_current
 {
 	background: #eee;
-	background: -moz-linear-gradient( #aaa 0%, #eee 100%);
+	background: -moz-linear-gradient(top,  #aaa 0%, #eee 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aaa), color-stop(100%,#eee));
-	background: -webkit-linear-gradient( #aaa 0%,#eee 100%);
-	background: -o-linear-gradient( #aaa 0%,#eee 100%);
-	background: -ms-linear-gradient( #aaa 0%,#eee 100%);
-	background: linear-gradient( #aaa 0%,#eee 100%);
+	background: -webkit-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: -o-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: -ms-linear-gradient(top,  #aaa 0%,#eee 100%);
+	background: linear-gradient(top,  #aaa 0%,#eee 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#eeeeee',GradientType=0 );
 	border-top: solid 1px #999;
 	box-sizing: border-box;
@@ -90,12 +90,12 @@
 .Q_selectable_listing .Q_selected
 {
 	background: #98bede;
-	background: -moz-linear-gradient( #eaf5ff 0%, #98bede 100%);
+	background: -moz-linear-gradient(top,  #eaf5ff 0%, #98bede 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaf5ff), color-stop(100%,#98bede));
-	background: -webkit-linear-gradient( #eaf5ff 0%,#98bede 100%);
-	background: -o-linear-gradient( #eaf5ff 0%,#98bede 100%);
-	background: -ms-linear-gradient( #eaf5ff 0%,#98bede 100%);
-	background: linear-gradient( #eaf5ff 0%,#98bede 100%);
+	background: -webkit-linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
+	background: -o-linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
+	background: -ms-linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
+	background: linear-gradient(top,  #eaf5ff 0%,#98bede 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaf5ff', endColorstr='#98bede',GradientType=0 );
 	border-left-width: 0;
 	border-right-width: 0;

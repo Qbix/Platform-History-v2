@@ -40,8 +40,7 @@ Base.tableClasses = [
 	"Users_Session",
 	"Users_Total",
 	"Users_User",
-	"Users_Vote",
-	"Users_Web3"
+	"Users_Vote"
 ];
 
 /**
