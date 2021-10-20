@@ -375,11 +375,6 @@
 						Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
 						console.log('provider.chainChanged', chainId);
 				    });
-				    // Subscribe to networkId change
-				    provider.on("networkChanged", function (networkId) {
-						Q.handle(Users.Wallet.onNetworkChanged, provider, [networkId]);
-						console.log('provider.networkChanged', networkId);
-				    });
 					// Subscribe to provider disconnection
 					provider.on("connect", function (info) {
 						Q.handle(Users.Wallet.onConnect, provider, [networkId]);
@@ -3789,7 +3784,6 @@
 		web3Modal: null,
 		onAccountsChanged: new Q.Event(),
 		onChainChanged: new Q.Event(),
-		onNetworkChanged: new Q.Event(),
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
@@ -3872,7 +3866,7 @@
 						blockExplorerUrls: info.blockExplorerUrls
 					}]
 				}).then(function () {
-					provider.once("networkChanged", onSuccess);
+					provider.once("chainChanged", onSuccess);
 				}).catch((error) => {
 					console.log(error)
 				});
