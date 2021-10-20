@@ -1880,10 +1880,10 @@
                             streamingAndUploading.appendChild(fbStreamingLiveSection);
                             streamingAndUploading.appendChild(fbPreviousStreamings);
 
-                            facebookLiveItem.addEventListener('click', function () {
+                            function loadGroupsList() {
                                 var loggedInCallback = function () {
-                                	var addGroupsList = function(groups) {
-                                		if(groups.length === 0) return;
+                                    var addGroupsList = function(groups) {
+                                        if(groups.length === 0) return;
                                         var groupsBlock = document.createElement('OPTGROUP');
                                         groupsBlock.label = Q.getObject("webrtc.settingsPopup.publishToGroup", tool.textes)
 
@@ -1893,7 +1893,7 @@
                                             option.value = groups[g].id;
                                             option.innerHTML = groups[g].name;
                                             groupsBlock.appendChild(option);
-										}
+                                        }
 
                                         privacySelect.appendChild(groupsBlock);
 
@@ -1921,7 +1921,7 @@
                                 }
 
                                 var checkLoginStatus = function() {
-                                    FB.getLoginStatus(function (response) {
+                                	FB.getLoginStatus(function (response) {
                                         if (response.status === 'connected') {
                                             FB.api(
                                                 '/me/permissions',
@@ -1936,7 +1936,7 @@
                                                         }
                                                     }
 
-                                                    if(hasPermissions == 3) {
+                                                    if(hasPermissions == 2) {
                                                         tool.fbAccessToken = response.authResponse.accessToken;
                                                         loggedInCallback();
                                                     } else {
@@ -1950,15 +1950,15 @@
                                         }
 
                                     });
-								}
+                                }
 
-								if(typeof FB == 'undefined') {
-                                	Q.Users.init.facebook(function () {
+                                if(typeof FB == 'undefined') {
+                                    Q.Users.init.facebook(function () {
                                         checkLoginStatus();
                                     });
-								} else {
+                                } else {
                                     checkLoginStatus();
-								}
+                                }
 
 
                                 if(fbStreamingStartSettings.classList.contains('shown')) {
@@ -1967,7 +1967,14 @@
                                     fbStreamingStartSettings.classList.add('shown');
                                     facebookLiveTtleInput.focus();
                                 }
-                            })
+                            }
+
+                            if(Q.info.isMobile) {
+                            	facebookLiveItem.addEventListener('touchend', loadGroupsList)
+                            } else {
+                                facebookLiveItem.addEventListener('click', loadGroupsList)
+
+                            }
                             startStreamingBtn.addEventListener('click', function () {
                                 if(!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
 

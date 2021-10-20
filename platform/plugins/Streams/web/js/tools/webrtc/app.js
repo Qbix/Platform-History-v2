@@ -1569,9 +1569,6 @@ window.WebRTCRoomClient = function app(options){
 
                 stream.addTrack(track.mediaStreamTrack);
 
-                var binaryData = [];
-                binaryData.push(stream);
-
                 try{
                     remoteStreamEl.srcObject = stream;
                 } catch(e){
@@ -1601,7 +1598,7 @@ window.WebRTCRoomClient = function app(options){
 
                 var speaker = app.conferenceControl.currentAudioOutputDevice();
                 if(speaker != null && typeof remoteStreamEl.sinkId !== 'undefined') {
-                    /*remoteStreamEl.setSinkId(speaker.deviceId)
+                    remoteStreamEl.setSinkId(speaker.deviceId)
                         .then(() => {
                             console.log(`createTrackElement: Success, audio output device attached: ${speaker.deviceId}`);
                         })
@@ -1611,7 +1608,7 @@ window.WebRTCRoomClient = function app(options){
                                 errorMessage = `createTrackElement: You need to use HTTPS for selecting audio output device: ${error}`;
                             }
                             console.error(errorMessage);
-                        });*/
+                        });
                 }
             }
 
