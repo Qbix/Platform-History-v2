@@ -198,3 +198,10 @@
     -ms-transition: all .2s linear;
     transition: all .2s linear;
 }
+.Q_video_tool .Q_video_overlay_play {
+    position: absolute;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+}

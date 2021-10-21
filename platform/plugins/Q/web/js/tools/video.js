@@ -151,6 +151,16 @@ Q.Tool.define("Q/video", function (options) {
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
 
+				// place play button above the player
+				var $overlayPlay = $("<img>")
+					.prop("src", Q.url(state.overlay.play.src))
+					.addClass("Q_video_overlay_play")
+					.on(Q.Pointer.fastclick, function () {
+						$overlayPlay.hide();
+						state.player.play();
+					})
+					.appendTo(tool.element);
+
 				/**
 				 * Implemented global function "currentTime" to set/get position
 				 * @method currentTime
@@ -195,16 +205,19 @@ Q.Tool.define("Q/video", function (options) {
 					state.currentPosition = tool.getCurrentPosition();
 					//console.log("Started at position " + state.currentPosition + " milliseconds");
 					Q.handle(state.onPlay, tool);
+					$overlayPlay.hide();
 				}, throttle);
 				var onPause = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
 					//console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
+					$overlayPlay.show();
 				}, throttle);
 				var onEnded = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
 					//console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
+					$overlayPlay.show();
 				}, throttle);
 
 				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
