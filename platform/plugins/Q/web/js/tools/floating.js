@@ -16,8 +16,6 @@
 		var state = tool.state;
 		var $body = $('body');
 		var dragging = false, dragged = false;
-		var el_w = $toolElement.outerWidth(),
-			el_h = $toolElement.outerHeight();
 
 		Q.addStylesheet('{{Q}}/css/floating.css');
 
@@ -28,30 +26,30 @@
 
 			dragged = true;
 			$toolElement.offset({
-				top: Q.Pointer.getY(e) - el_h / 2,
-				left: Q.Pointer.getX(e) - el_w / 2
+				top: Q.Pointer.getY(e) - state.offset.diffTop,
+				left: Q.Pointer.getX(e) - state.offset.diffLeft
 			});
 		};
 
 		$toolElement.on(Q.Pointer.start, function (e) {
-			$toolElement.attr({
+			$(e.target).attr({
 				"unselectable": "on",
 				"data-dragging": true
 			});
+
+			state.offset = $toolElement.offset();
+			state.offset.diffTop = Q.Pointer.getY(e) - state.offset.top;
+			state.offset.diffLeft = Q.Pointer.getX(e) - state.offset.left;
 
 			dragged = false
 			$body.on(Q.Pointer.move, Q_floating_dragging);
 			dragging = true;
 		});
-		$toolElement.on(Q.Pointer.end, function (e) {
+		$body.on(Q.Pointer.end, function (e) {
 			$body.off(Q.Pointer.move, Q_floating_dragging);
 
-			$toolElement.removeAttr("unselectable").removeAttr("data-dragging");
+			$(e.target).removeAttr("unselectable").removeAttr("data-dragging");
 			dragging = false;
-
-			if (dragged) {
-				Q.Pointer.cancelClick();
-			}
 		});
 	},
 
