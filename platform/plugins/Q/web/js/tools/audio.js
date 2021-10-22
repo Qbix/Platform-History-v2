@@ -23,6 +23,7 @@
 Q.Tool.define("Q/audio", function (options) {
 	var tool = this;
 	var state = tool.state;
+	var $toolElement = $(tool.element);
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
@@ -51,18 +52,26 @@ Q.Tool.define("Q/audio", function (options) {
 					download: false
 				});
 
+				$toolElement.addClass("Q_audio_soundcloud");
+
 				Q.Template.render('Q/audio/soundcloud', {
 					url: url
 				}, function (err, html) {
 					if (showPlayer) {
 						tool.element.innerHTML = html;
+
+						var $iframe = tool.$("iframe");
+						$iframe.on("load", function () {
+							Q.handle(state.onLoad, tool);
+						});
 					} else {
-						$(tool.element).append(html);
+						$toolElement.append(html);
 					}
 				});
 
 				Q.addScript('https://w.soundcloud.com/player/api.js', function () {
-					state.audio = SC.Widget(tool.$("iframe[name=soundcloud]")[0]);
+					var $iframe = tool.$("iframe[name=soundcloud]");
+					state.audio = SC.Widget($iframe[0]);
 					var onPlay = Q.throttle(function (position) {
 						console.log("Started at position " + position + " milliseconds");
 						Q.handle(state.onPlay, tool, [position]);
@@ -102,8 +111,6 @@ Q.Tool.define("Q/audio", function (options) {
 						});
 						state.audio.getDuration(function(duration) {
 							state.duration = duration;
-
-							Q.handle(state.onLoad, tool);
 						});
 
 						if (showPlayer) {
@@ -154,7 +161,7 @@ Q.Tool.define("Q/audio", function (options) {
 			},
 			renderPlayer: function () {
 				tool.audioElement.setAttribute('controls', true);
-				$(tool.element).append(tool.audioElement);
+				$toolElement.append(tool.audioElement);
 			},
 			play: function () {
 				// if audio element visible, use it to interaction
@@ -193,6 +200,11 @@ Q.Tool.define("Q/audio", function (options) {
 
 	Q.addStylesheet("{{Q}}/css/audio.css", p.fill('stylesheet'), { slotName: 'Q' });
 	Q.Text.get('Q/content', p.fill('text'));
+
+	$toolElement.on(Q.Pointer.fastclick, ".Q_audio_close", function () {
+		tool.pause();
+		$toolElement.hide();
+	});
 },
 
 {
@@ -214,13 +226,51 @@ Q.Tool.define("Q/audio", function (options) {
 	metrics: {
 		useFaces: false
 	},
+	floating: {
+		evenIfPaused: false
+	},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
 	/* </Q/audio jquery plugin states> */
-	onLoad: new Q.Event(),
+	onLoad: new Q.Event(function () {
+		var tool = this;
+		var state = this.state;
+
+		if (state.floating.evenIfPaused) {
+			// listen element size changes
+			Q.onLayout(tool.element).set(function () {
+				var rect = tool.element.getBoundingClientRect();
+
+				if (rect.width === 0 || rect.height === 0) {
+					tool.pause();
+					if (tool.floated) {
+						var $floatedElement = $(tool.floated.element);
+						if (!$floatedElement.is(":visible")) {
+							tool.floated.setCurrentPosition(state.currentPosition);
+							$floatedElement.show();
+						}
+					} else if (!state.floated) {
+						$("<div>").appendTo("body").tool("Q/audio", {
+							url: state.url,
+							start: state.currentPosition,
+							floated: true
+						}).tool("Q/floating").activate(function () {
+							tool.floated = this;
+						});
+					}
+				} else {
+					if (tool.floated) {
+						tool.setCurrentPosition(tool.floated.state.currentPosition);
+						tool.floated.pause();
+						$(tool.floated.element).hide();
+					}
+				}
+			}, tool);
+		}
+	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
@@ -642,11 +692,14 @@ Q.Tool.define("Q/audio", function (options) {
 	 */
 	implementNativeAudio: function () {
 		var tool = this;
+		var $toolElement = $(this.element);
 		var state = this.state;
 
 		if (tool.audio) {
 			return tool.audio;
 		}
+
+		$toolElement.addClass("Q_audio_native");
 
 		var $recordTimeElement = $(".Q_audio_record_recordTime", this.element);
 
@@ -654,6 +707,8 @@ Q.Tool.define("Q/audio", function (options) {
 		tool.audioElement = tool.audio.audio;
 		tool.$audioElement = $(tool.audioElement);
 		tool.$audioElement.appendTo(tool.element);
+
+		$toolElement.append($('<div class="Q_audio_close"></div>'));
 
 		tool.audioElement.addEventListener('play', function () {
 			state.currentPosition = Math.trunc(this.currentTime * 1000);
@@ -843,11 +898,13 @@ Q.Template.set('Q/audio/general',
 	'		<span class="Q_audio_general_trackCurrent"></span>' +
 	'	</div>' +
 	'	<div class="Q_audio_general_sound" data-state="on"></div>' +
-	'</div>'
+	'</div>' +
+	'<div class="Q_audio_close"></div>'
 );
 
 Q.Template.set('Q/audio/soundcloud',
-	'<iframe id="sc-widget" name="soundcloud" width="100%" height="166" allow=autoplay scrolling="no" frameborder="no" src="{{url}}"></iframe>'
+	'<iframe id="sc-widget" name="soundcloud" width="100%" height="166" allow=autoplay scrolling="no" frameborder="no" src="{{url}}"></iframe>' +
+	'<div class="Q_audio_close"></div>'
 );
 
 Q.Template.set('Q/audio/recorder',
