@@ -366,19 +366,18 @@
 
 				    // Subscribe to accounts change
 				    provider.on("accountsChanged", function (accounts) {
+				    	Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
 						console.log('provider.accountsChanged', accounts);
 				    });
 
 				    // Subscribe to chainId change
 				    provider.on("chainChanged", function (chainId) {
+						Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
 						console.log('provider.chainChanged', chainId);
-				    });
-				    // Subscribe to networkId change
-				    provider.on("networkChanged", function (networkId) {
-						console.log('provider.networkChanged', networkId);
 				    });
 					// Subscribe to provider disconnection
 					provider.on("connect", function (info) {
+						Q.handle(Users.Wallet.onConnect, provider, [networkId]);
 						console.log('provider.connect', info);
 					});
 					// Subscribe to provider disconnection
@@ -394,6 +393,7 @@
 						}
 
 						Q.Users.logout({using: 'wallet'});
+						Q.handle(Users.Wallet.onDisconnect, provider, [networkId]);
 					});
 					var payload = Q.text.Users.login.wallet.payload.interpolate({
 						host: location.host,
@@ -3782,6 +3782,11 @@
 	Users.Wallet = {
 		provider: null,
 		web3Modal: null,
+		onAccountsChanged: new Q.Event(),
+		onChainChanged: new Q.Event(),
+		onConnect: new Q.Event(),
+		onDisconnect: new Q.Event(),
+
 		/**
 		 * Get web3Modal instance
 		 * @method getWeb3Modal
@@ -3806,6 +3811,37 @@
 
 			return Users.Wallet.web3Modal;
 		},
+
+		/**
+		 * Connect MetaMask
+		 * @method connect
+		 * @param {Function} callback
+		 */
+		connect: function (callback) {
+			if (Users.Wallet.provider) {
+				return Q.handle(callback, null, [Users.Wallet.provider]);
+			}
+
+			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
+			web3Modal.connect().then(function (provider) {
+				Users.Wallet.provider = provider;
+
+				provider.on("accountsChanged", function (accounts) {
+					Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
+				});
+				provider.on("chainChanged", function (chainId) {
+					Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
+				});
+				provider.on("connect", function (info) {
+					Q.handle(Users.Wallet.onConnect, provider, [info]);
+				});
+
+				Q.handle(callback, null, [provider]);
+			}).catch(function (ex) {
+				throw new Error(ex);
+			});
+		},
+
 		/**
 		 * Change network
 		 * @method setNetwork
@@ -3814,9 +3850,7 @@
 		 * @param {Function} onError
 		 */
 		setNetwork: function (info, onSuccess, onError) {
-			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
-
-			web3Modal.connect().then(function (provider) {
+			Users.Wallet.connect(function (provider) {
 				Users.Wallet.switchNetworkOccuring = true;
 				provider.request({
 					method: 'wallet_addEthereumChain',
@@ -3832,11 +3866,11 @@
 						blockExplorerUrls: info.blockExplorerUrls
 					}]
 				}).then(function () {
-					provider.once("networkChanged", onSuccess);
+					provider.once("chainChanged", onSuccess);
 				}).catch((error) => {
 					console.log(error)
 				});
-			}).catch(onError);
+			});
 		}
 	};
 

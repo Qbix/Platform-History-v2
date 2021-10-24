@@ -110,12 +110,12 @@ Q.Tool.define('Q/expandable', function (options) {
 		var $h2 = $('>h2', $te);
 		var $parent = $te.parent();
 		if (o.autoCollapseSiblings) {
-			$('.Q_expandable_tool > h2.Q_expanded', $parent)
-			.removeClass('Q_expanded')
-			.next().removeClass('Q_expanded')
-			.slideUp(state.duration).each(function () {
-				var t = this.parentNode.Q("Q/expandable");
-				Q.handle(t.state.beforeCollapse, t, [tool]);
+			$parent[0].forEachTool("Q/expandable", function () {
+				if (this.id === tool.id) {
+					return;
+				}
+
+				this.collapse();
 			});
 		}
 		var $expandable = $h2.next().slideDown(state.duration, 'linear');
