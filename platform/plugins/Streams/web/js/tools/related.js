@@ -199,12 +199,17 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				var previewState = preview.state;
 				tool.integrateWithTabs([element], true);
 				previewState.beforeCreate.set(function () {
-					$(this.element).addClass('Streams_related_loading').removeClass('Streams_related_composer');
+					$(this.element)
+						.addClass('Streams_related_loading')
+						.removeClass('Streams_related_composer');
 					previewState.beforeCreate.remove(tool);
 				}, tool);
-				previewState.onCreate.set(function () {
+				previewState.onNewStreamPreview.set(function () {
 					addComposer(streamType, params, null, element);
-					Q.Tool.remove(this.element, true, true);
+					if (state.realtime) {
+						Q.Tool.remove(this.element, true, true);
+						// it will reappear soon
+					}
 				}, tool);
 				Q.handle(state.onComposer, tool, [preview]);
 			});
