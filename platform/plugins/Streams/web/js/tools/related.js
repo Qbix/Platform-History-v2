@@ -333,7 +333,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				if (ascending) {
 					$container.append(element);
 				} else {
-					$container.prepend(element);
+					var $composer = $container.find('.Streams_related_composer:last');
+					if ($composer.length) {
+						$composer.after(element);
+					} else {
+						$container.prepend(element);
+					}
 				}
 			}
 		});
