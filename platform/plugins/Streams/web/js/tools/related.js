@@ -29,7 +29,7 @@ var Streams = Q.Streams;
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
- *   @param {Object} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
+ *   @param {Object|Boolean} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
@@ -51,8 +51,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	if (!state.relationType) {
 		throw new Q.Error("Streams/related tool: missing relationType");
 	}
-	if (state.sortable && typeof state.sortable !== 'object') {
-		throw new Q.Error("Streams/related tool: sortable must be an object or false");
+	if (state.sortable && state.sortable !== true && typeof state.sortable !== 'object') {
+		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
 
 	tool.previewElements = {};
@@ -223,6 +223,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
+			if (state.sortable === true) {
+				state.sortable = {
+					draggable: '.Streams_related_stream',
+					droppable: '.Streams_related_stream'
+				};
+			}
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
 				if (state.realtime) {
 					alert("Streams/related: can't mix realtime and sortable options yet");
