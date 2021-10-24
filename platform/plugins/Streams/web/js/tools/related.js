@@ -304,10 +304,13 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			if (e) { // if element exists - just insert them in order
 				if (prev_e) {
 					if (Q.getObject('ascending', state.relatedOptions)) {
-						$(e).insertAfter(prev_e);
+						$(e).insertAfter(prev_e).;
 					} else {
 						$(e).insertBefore(prev_e);
 					}
+					$(e).attr('data-weight', this.weight);
+					var tool = Q.Tool.from(e)
+					Q.setObject(['state', 'related', 'weight'], this.weight, tool);
 				}
 				prev_e = e;
 				return;
@@ -670,6 +673,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		e.setAttribute('data-publisherId', publisherId);
 		e.setAttribute('data-streamName', streamName);
 		e.setAttribute('data-streamType', streamType);
+		e.setAttribute('data-weight', weight);
  		return e;
 	},
 
