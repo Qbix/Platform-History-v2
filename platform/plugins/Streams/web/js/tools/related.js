@@ -185,9 +185,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					$(oldElement).insertAfter($last);
 				}
 			} else {
-				var $prev = $container.find('.Streams_related_stream:first').prev();
-				if ($prev.length) {
+				var $first = $container.find('.Streams_related_stream:first');
+				if ($first.length && $first.prev().length) {
 					$prev.after(element);
+				} else if ($first.length) {
+					$first.prepend(element);
 				} else {
 					$container.append(element);
 				}
