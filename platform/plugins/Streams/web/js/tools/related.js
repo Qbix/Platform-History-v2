@@ -292,6 +292,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		});
 
 		var elements = [];
+		var prev_e = null;
 		Q.each(result.relations, function (i) {
 			if (!this.from) {
 				return;
@@ -299,8 +300,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 			var tff = this.from.fields;
 
-			// if element exists - do nothing
-			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
+			var e = Q.getObject([tff.publisherId, tff.name], tool.previewElements);
+			if (e) { // if element exists - just insert them in order
+				if (prev_e) {
+					if (Q.getObject('ascending', state.relatedOptions)) {
+						e.insertAfter(prev_e);
+					} else {
+						e.insertBefore(prev_e);
+					}
+				}
+				prev_e = e;
 				return;
 			}
 
