@@ -304,6 +304,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 		$te.removeClass('Q_working').removeAttr('disabled');
+		$te.attr({
+			'data-publisherId': state.publisherId,
+			'data-streamName': state.streamName
+		});
 
 		Q.Streams.retainWith(tool).get(state.publisherId, state.streamName,
 		function (err) {
