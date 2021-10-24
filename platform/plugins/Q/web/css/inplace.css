@@ -29,7 +29,7 @@
 .Q_inplace_tool .Q_editing .Q_inplace_tool_edit { display: none; }
 .Q_inplace_tool .Q_editing .Q_inplace_tool_invisible { display: block; visibility: hidden; position: absolute; top: -20px; z-index: 1; }
 .Q_inplace_tool .Q_inplace_tool_buttons { position: absolute; left: 0; z-index: 8000; min-width: 200px; line-height: 1px; text-align: left !important; color: black !important; }
-.Q_inplace_tool .Q_inplace_tool_buttons button { background-color: #EEE; display: inline; color: black !important; box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); }
+.Q_inplace_tool .Q_inplace_tool_buttons button { padding: 0 !important; background-color: #EEE; display: inline; color: black !important; box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.5); }
 .Q_inplace_tool .Q_nocancel button.Q_inplace_tool_cancel { display: none; }
 
 * html .Q_inplace_tool .Q_inplace_tool_editbuttons,
