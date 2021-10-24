@@ -265,7 +265,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 							r.type,
 							i.publisherId,
 							i.streamName,
-							s.related.weight,
+							data.direction < 0 ? s.related.weight : s.related.weight+1,
 							1,
 							p.fill('updated')
 						);

@@ -298,7 +298,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			params.target = null;
 		} else {
 			if (data.$placeholder.next()[0] === $item[0]
-				|| data.$placeholder.prev()[0] === $item[0]) {
+			|| data.$placeholder.prev()[0] === $item[0]) {
 				params.direction = 0;
 				params.target = null;
 			} else if ($item[0].isBefore(data.$placeholder[0])) {
