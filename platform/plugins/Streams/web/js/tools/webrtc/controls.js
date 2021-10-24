@@ -2069,12 +2069,14 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
+                            rtmpLiveURLInput.value ='';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
+                            rtmpLiveStreamKeyInput.value = '';
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
@@ -3797,7 +3799,6 @@
 					var _accessToken;
 
 					function goLiveDialog(callback) {
-						//return connect('123', captureStreamAndSend);
 						var goLive = function() {
 							FB.ui({
 								display: 'iframe',
@@ -3812,7 +3813,7 @@
 									broadcast_data: createRes
 								}, (publishRes) => {
 									if(publishRes == null || typeof publishRes == 'undefined') {
-										tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+										tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 									}
 
 									_liveId = publishRes.id
@@ -3874,7 +3875,7 @@
 								return Q.alert(msg);
 							}
 
-							tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+							tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 							if(callback != null) callback(_liveInfo);
 						}, {
 							method: 'post',
@@ -3923,7 +3924,7 @@
 								return
 							}
 							var loggedInCallback = function () {
-								if (tool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
+								if (tool.WebRTCLib.screensInterface.fbLive.isStreaming('facebook')) {
 									tool.facebookLiveDialog();
 								} else {
 									tool.fbLiveInterface.createLive(data, function (response) {
@@ -4087,7 +4088,7 @@
 				endStreamingBtn.className = 'Q_button';
 				endStreamingBtn.innerHTML = "Stop streaming";
 				endStreamingBtn.addEventListener('click', function () {
-					tool.WebRTCLib.screensInterface.fbLive.endStreaming('fb');
+					tool.WebRTCLib.screensInterface.fbLive.endStreaming('facebook');
 				})
 				fbLiveDialog.appendChild(endStreamingBtn);
 				Q.Dialogs.push({

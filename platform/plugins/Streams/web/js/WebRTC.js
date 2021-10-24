@@ -79,7 +79,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             margins:null,
             sounds: {
                 participantConnected:Q.url('{{Streams}}/audio/user_disconnected.mp3'),
-                participantDisconnected:Q.url('{{Streams}}/audio/user_connected.mp3')
+                participantDisconnected:Q.url('{{Streams}}/audio/user_connected.mp3'),
+                roomSwitch:Q.url('{{Streams}}/audio/switch_room.mp3')
             },
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
@@ -7434,8 +7435,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             log('switch WebRTC conference room', publisherId, streamName);
             log('switch WebRTCconference', WebRTCconference);
             if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
+            if(Q.Socket.getAll()['/webrtc']) {
+                Q.Socket.getAll()['/webrtc'] = null;
+            }
+            function onPlayEnd() {
 
-                log('createRoomStream')
+                log('switchTo: createRoomStream')
                 var roomIdToJoin = streamName.replace('Streams/webrtc/', '');
 
                 Q.req("Streams/webrtc", ["room"], function (err, response) {
@@ -7444,13 +7449,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if (msg) {
                         return Q.alert(msg);
                     }
-                    log('createRoomStream: joined/connected');
+                    log('switchTo: createRoomStream: joined/connected');
 
                     var turnCredentials = response.slots.room.turnCredentials;
                     var socketServer = response.slots.room.socketServer;
 
                     Q.Streams.get(publisherId, 'Streams/webrtc/' + roomIdToJoin, function (err, stream) {
-                        log('createRoomStream: joined/connected: pull stream', stream);
+                        log('switchTo: createRoomStream: joined/connected: pull stream', stream);
 
                         _roomStream = stream;
                         if(Q.Streams.WebRTCRooms == null){
@@ -7464,9 +7469,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         WebRTCconference.switchTo(publisherId, roomIdToJoin, function (newInstance) {
                             bindConferenceEvents(newInstance);
                             let prevRoom = WebRTCconference;
+                            log('switchTo: createOrJoinRoomStream: newInstance', newInstance)
 
                             newInstance.event.on('initNegotiationEnded', function () {
-                                log('switchTo: createOrJoinRoomStream: newInstance', newInstance)
+                                log('switchTo: createOrJoinRoomStream: initNegotiationEnded')
                                 WebRTCconference = newInstance;
                                 // prevRoom.disconnect(true);
 
@@ -7492,9 +7498,33 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         resumeClosed: options && options.resumeClosed != null ? options.resumeClosed : _options.resumeClosed
                     }
                 });
+            }
 
+            if(Q.Audio.collection[_options.sounds.roomSwitch]) {
+                Q.Audio.collection[_options.sounds.roomSwitch].onEnded.set(function () {
 
+                    Q.Audio.collection[_options.sounds.roomSwitch].onEnded.remove('Q.WebRTC.switchTo');
+                }, 'Q.WebRTC.switchTo');
 
+                Q.Audio.collection[_options.sounds.roomSwitch].audio.play()
+            } else {
+                Q.Audio.load(_options.sounds.roomSwitch, function () {
+                    let playSwitchSound = Q.Audio.collection[_options.sounds.roomSwitch].audio.play();
+                    playSwitchSound.then(function () {
+                        log('switchTo: playSwitchSound success')
+                        Q.Audio.collection[_options.sounds.roomSwitch].onEnded.set(function () {
+                            onPlayEnd()
+
+                            Q.Audio.collection[_options.sounds.roomSwitch].onEnded.remove('Q.WebRTC.switchTo');
+                        }, 'Q.WebRTC.switchTo');
+
+                    }).catch(function(e){
+                        onPlayEnd()
+                        log('switchTo: playSwitchSound error')
+                        console.error(e);
+                    });
+                });
+            }
 
         }
 
