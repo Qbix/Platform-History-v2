@@ -60,27 +60,12 @@
                 var dataKey = 'Q/scrollbarsAutoHide margin';
                 $this.on({
                     'mouseenter.Q_scrollbar_autohide': function() {
-                        var t, w1, h1, w2, h2, m;
-                        t = $this[0];
-                        w1 = t.offsetWidth - t.clientWidth;
-                        h1 = t.offsetHeight - t.clientHeight;
                         if (state.horizontal && state.vertical) {
                             $this.css('overflow', 'auto');
                         } else if (state.horizontal) {
                             $this.css('overflow-x', 'auto');
                         } else if (state.vertical) {
                             $this.css('overflow-y', 'auto');
-                        }
-                        w2 = t.offsetWidth - t.clientWidth;
-                        h2 = t.offsetHeight - t.clientHeight;
-                        $this.data(dataKey, $this.css('margin'));
-                        if (w2 !== w1) {
-                            m = parseInt($this.css('margin-right'));
-                            $this.css('margin-right', m + w1 - w2 + 'px');
-                        }
-                        if (h2 !== h1) {
-                            m = parseInt($this.css('margin-bottom'));
-                            $this.css('margin-bottom', m + h1 - h2 + 'px');
                         }
                         if (o.scrollbarPadding) {
                             $this.css({ 'padding-right': paddingDiffRight + 'px' });
@@ -93,18 +78,15 @@
                         Q.handle(o.showHandler);
                     },
                     'mouseleave.Q_scrollbar_autohide': function() {
-                        var m;
                         $this.css({ 'overflow': 'hidden' });
                         if (o.scrollbarPadding) {
                             $this.css({ 'padding-right': newPaddingRight + 'px' });
                         }
-                        if (m = $this.data(dataKey)) {
-                            $this.css('margin', m || null);
-                        }
                         Q.handle(o.hideHandler);
                     }
                 });
-            } else if (scrollbarBottom) {
+            }
+            if (scrollbarBottom) {
 				var newPaddingBottom = Math.max(oldPaddingBottom, scrollbarWidth);
 				var paddingDiffBottom = Math.max(0, newPaddingRight - scrollbarWidth);
                 $this.css({ 'overflow': 'hidden' });
