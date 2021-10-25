@@ -48,9 +48,10 @@
  *   @param {String} [options.throbber=Q.info.imgLoading] The url of an image to use as an activity indicator when the image is loading
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
  *   @param {Q.Event} [options.beforeCreate] An event that occurs right before a composer requests to create a new stream
- *   @param {Q.Event} [options.onCreate] An event that occurs after a new stream is created by a creatable preview
+ *   @param {Q.Event} [options.onCreate] An event that occurs after a new stream is created by a creatable preview, but before the preview is rendered
  *   @param {Q.Event} [options.onComposer] An event that occurs after a composer is rendered. Tools that extend Streams/preview can bind this event to a method to override the contents of the composer.
  *   @param {Q.Event} [options.onRefresh] An event that occurs after a stream preview is rendered for an existing stream. Tools that extend Streams/preview can bind this event to a method to override the contents of the tool.
+ *   @param {Q.Event} [options.onNewStreamPreview] An event that occurs after a preview is rendered for a new stream. Tools that extend Streams/preview can bind this event to a method to override the contents of the preview.
  *   @param {Q.Event} [options.onLoad] An event that occurs after the refresh calls its callback, which should happen when everything has fully rendered
  *   @param {Q.Event} [options.beforeClose] Optionally set to a function that takes a callback, to display e.g. a dialog box confirming whether to close the stream. It should call the callback with no arguments, in order to proceed with the closing.
  *   @param {Q.Event} [options.onClose] An event that occurs after a stream with a preview has been closed
@@ -145,6 +146,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	
 	beforeCreate: new Q.Event(),
 	onCreate: new Q.Event(),
+	onNewStreamPreview: new Q.Event(),
 	onComposer: new Q.Event(),
 	onRefresh: new Q.Event(),
 	onLoad: new Q.Event(),
@@ -243,6 +245,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 				tool.element.removeClass('Streams_preview_composer');
 				tool.element.addClass('Streams_preview_stream');
 				tool.preview();
+				state.onNewStreamPreview.handle.call(tool, this);
 			}
 		}
 		var tool = this;
@@ -301,6 +304,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var state = tool.state;
 		var $te = $(tool.element);
 		$te.removeClass('Q_working').removeAttr('disabled');
+		$te.attr({
+			'data-publisherId': state.publisherId,
+			'data-streamName': state.streamName
+		});
 
 		Q.Streams.retainWith(tool).get(state.publisherId, state.streamName,
 		function (err) {

@@ -28,13 +28,14 @@
 Q.Tool.define("Q/video", function (options) {
 	var tool = this;
 	var state = tool.state;
+	var $toolElement = $(tool.element);
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
 	if (state.className) {
-		$(tool.element).addClass(state.className);
+		$toolElement.addClass(state.className);
 	}
 
 	tool.adapters = {};
@@ -148,8 +149,23 @@ Q.Tool.define("Q/video", function (options) {
 				throw new Q.Error("Q/video/twitch: none of videoId or channel filled");
 			}
 
+			$toolElement.append($("<div class='Q_video_close'>"));
+
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
+
+				// place play button above the player
+				var $overlayPlay = $("img.Q_video_overlay_play", tool.element);
+				if (!$overlayPlay.length) {
+					$overlayPlay = $("<img>")
+						.prop("src", Q.url(state.overlay.play.src))
+						.addClass("Q_video_overlay_play")
+						.on(Q.Pointer.fastclick, function () {
+							$overlayPlay.hide();
+							state.player.play();
+						})
+						.appendTo(tool.element);
+				}
 
 				/**
 				 * Implemented global function "currentTime" to set/get position
@@ -195,16 +211,19 @@ Q.Tool.define("Q/video", function (options) {
 					state.currentPosition = tool.getCurrentPosition();
 					//console.log("Started at position " + state.currentPosition + " milliseconds");
 					Q.handle(state.onPlay, tool);
+					$overlayPlay.hide();
 				}, throttle);
 				var onPause = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
 					//console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
+					$overlayPlay.show();
 				}, throttle);
 				var onEnded = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
 					//console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
+					$overlayPlay.show();
 				}, throttle);
 
 				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
@@ -227,6 +246,11 @@ Q.Tool.define("Q/video", function (options) {
 	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
 	Q.addScript("{{Q}}/js/videojs/lib.js", p.fill('scripts'));
 	Q.Text.get('Q/content', p.fill('text'));
+
+	$toolElement.on(Q.Pointer.fastclick, ".Q_video_close", function () {
+		tool.pause();
+		$toolElement.hide();
+	});
 },
 
 {
@@ -242,6 +266,9 @@ Q.Tool.define("Q/video", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	ads: [],
+	floating: {
+		evenIfPaused: true
+	},
 	adsTimeOut: 10,
 	overlay: {
 		play: {
@@ -268,12 +295,45 @@ Q.Tool.define("Q/video", function (options) {
 	}, 'Q/video'),
 	onFinish: new Q.Event(),
 	onLoad: new Q.Event(function () {
+		var tool = this;
 		var state = this.state;
 		this.setCurrentPosition(this.calculateStartPosition(), !state.skipPauseOnload, !state.skipPauseOnload);
 		this.addAdvertising();
 
 		// preload next clip
 		this.preloadNextClip();
+
+		if (state.floating.evenIfPaused) {
+			// listen element size changes
+			Q.onLayout(tool.element).set(function () {
+				var rect = tool.element.getBoundingClientRect();
+
+				if (rect.width === 0 || rect.height === 0) {
+					tool.pause();
+					if (tool.floated) {
+						var $floatedElement = $(tool.floated.element);
+						if (!$floatedElement.is(":visible")) {
+							tool.floated.setCurrentPosition(state.currentPosition);
+							$floatedElement.show();
+						}
+					} else if (!state.floated) {
+						$("<div>").appendTo("body").tool("Q/video", {
+							url: state.url,
+							start: state.currentPosition,
+							floated: true
+						}).tool("Q/floating").activate(function () {
+							tool.floated = this;
+						});
+					}
+				} else {
+					if (tool.floated) {
+						tool.setCurrentPosition(tool.floated.state.currentPosition);
+						tool.floated.pause();
+						$(tool.floated.element).hide();
+					}
+				}
+			}, tool);
+		}
 	}),
 	onCanPlay: new Q.Event(function () {
 		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
@@ -1023,7 +1083,8 @@ Q.Tool.define("Q/video", function (options) {
 });
 
 Q.Template.set("Q/video/videojs",
-	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} {{poster}} playsinline webkit-playsinline />'
+	'<video preload="auto" controls class="video-js vjs-default-skin vjs-4-3" width="100%" height="auto" {{autoplay}} {{loop}} {{poster}} playsinline webkit-playsinline /></video>' +
+	'<div class="Q_video_close"></div>'
 );
 
 Q.Template.set("Q/video/skip",

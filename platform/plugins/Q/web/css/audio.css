@@ -1,5 +1,8 @@
 @import "icons.css";
 
+.Q_audio_tool {
+	overflow: hidden;
+}
 .Q_audio_recorder .Q_audio_pie {
 	height: 100px;
 	width: 100px;
@@ -134,6 +137,30 @@
 	background-color: #fff;
 }
 /**** </Q_audio_custom_player> *****/
+
+.Q_audio_tool.Q_floating_tool {
+	padding-top: 40px;
+	background-color: blue;
+	cursor: move;
+}
+.Q_audio_tool .Q_audio_close {
+	display: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	color: red;
+	text-align: center;
+	cursor: pointer;
+}
+.Q_audio_tool .Q_audio_close:after {
+	font-size: 30px;
+	font-family: 'FontAwesome';
+	content: "\f00d";
+}
+.Q_audio_tool.Q_floating_tool .Q_audio_close {display: block}
 
 /* preload images */
 body::after{

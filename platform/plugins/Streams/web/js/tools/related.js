@@ -29,7 +29,7 @@ var Streams = Q.Streams;
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
- *   @param {Object} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
+ *   @param {Object|Boolean} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
@@ -51,8 +51,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	if (!state.relationType) {
 		throw new Q.Error("Streams/related tool: missing relationType");
 	}
-	if (state.sortable && typeof state.sortable !== 'object') {
-		throw new Q.Error("Streams/related tool: sortable must be an object or false");
+	if (state.sortable && state.sortable !== true && typeof state.sortable !== 'object') {
+		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
 
 	tool.previewElements = {};
@@ -185,9 +185,11 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					$(oldElement).insertAfter($last);
 				}
 			} else {
-				var $prev = $container.find('.Streams_related_stream:first').prev();
-				if ($prev.length) {
+				var $first = $container.find('.Streams_related_stream:first');
+				if ($first.length && $first.prev().length) {
 					$prev.after(element);
+				} else if ($first.length) {
+					$first.before(element);
 				} else {
 					$container.append(element);
 				}
@@ -197,12 +199,17 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				var previewState = preview.state;
 				tool.integrateWithTabs([element], true);
 				previewState.beforeCreate.set(function () {
-					$(this.element).addClass('Streams_related_loading').removeClass('Streams_related_composer');
+					$(this.element)
+						.addClass('Streams_related_loading')
+						.removeClass('Streams_related_composer');
 					previewState.beforeCreate.remove(tool);
 				}, tool);
-				previewState.onCreate.set(function () {
+				previewState.onNewStreamPreview.set(function () {
 					addComposer(streamType, params, null, element);
-					Q.Tool.remove(this.element, true, true);
+					if (state.realtime) {
+						Q.Tool.remove(this.element, true, true);
+						// it will reappear soon
+					}
 				}, tool);
 				Q.handle(state.onComposer, tool, [preview]);
 			});
@@ -221,6 +228,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
+			if (state.sortable === true) {
+				state.sortable = {
+					draggable: '.Streams_related_stream',
+					droppable: '.Streams_related_stream'
+				};
+			}
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
 				if (state.realtime) {
 					alert("Streams/related: can't mix realtime and sortable options yet");
@@ -252,7 +265,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 							r.type,
 							i.publisherId,
 							i.streamName,
-							s.related.weight,
+							data.direction < 0 ? s.related.weight : s.related.weight+1,
 							1,
 							p.fill('updated')
 						);
@@ -279,6 +292,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		});
 
 		var elements = [];
+		var prev_e = null;
 		Q.each(result.relations, function (i) {
 			if (!this.from) {
 				return;
@@ -286,8 +300,19 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 			var tff = this.from.fields;
 
-			// if element exists - do nothing
-			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
+			var e = Q.getObject([tff.publisherId, tff.name], tool.previewElements);
+			if (e) { // if element exists - just insert them in order
+				if (prev_e) {
+					if (Q.getObject('ascending', state.relatedOptions)) {
+						$(e).insertAfter(prev_e);
+					} else {
+						$(e).insertBefore(prev_e);
+					}
+					$(e).attr('data-weight', this.weight);
+					Q.setObject(['state', 'related', 'weight'], 
+						this.weight, Q.Tool.from(e));
+				}
+				prev_e = e;
 				return;
 			}
 
@@ -331,7 +356,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				if (ascending) {
 					$container.append(element);
 				} else {
-					$container.prepend(element);
+					var $composer = $container.find('.Streams_related_composer:last');
+					if ($composer.length) {
+						$composer.after(element);
+					} else {
+						$container.prepend(element);
+					}
 				}
 			}
 		});
@@ -643,6 +673,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		e.setAttribute('data-publisherId', publisherId);
 		e.setAttribute('data-streamName', streamName);
 		e.setAttribute('data-streamType', streamType);
+		e.setAttribute('data-weight', weight);
  		return e;
 	},
 
