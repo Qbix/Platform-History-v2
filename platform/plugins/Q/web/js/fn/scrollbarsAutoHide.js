@@ -67,13 +67,12 @@
                         $this.data(dataKey, $this.css('margin'));
                         if (w2 !== w1) {
                             m = parseInt($this.css('margin-right'));
-                            $this.css('margin-right', m + w2 - w1);
+                            $this.css('margin-right', m + w1 - w2 + 'px');
                         }
                         if (h2 !== h1) {
-                            m = parseInt($this.css('margin-right'));
-                            $this.css('margin-bottom', m + h2 - h1);
+                            m = parseInt($this.css('margin-bottom'));
+                            $this.css('margin-bottom', m + h1 - h2 + 'px');
                         }
-                        $this.css('margin-bottom', $this.css('margin-bottom'))
                         if (o.scrollbarPadding) {
                             $this.css({ 'padding-right': paddingDiffRight + 'px' });
                         }
@@ -91,7 +90,7 @@
                             $this.css({ 'padding-right': newPaddingRight + 'px' });
                         }
                         if (m = $this.data(dataKey)) {
-                            $this.css('margin', m);
+                            $this.css('margin', m || null);
                         }
                         Q.handle(o.hideHandler);
                     }
