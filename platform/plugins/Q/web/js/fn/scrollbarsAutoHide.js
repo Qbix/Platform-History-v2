@@ -60,14 +60,14 @@
                         var t, w1, h1, w2, h2, m;
                         t = $this[0];
                         w1 = t.offsetWidth - t.clientWidth;
-                        h2 = t.offsetHeight - t.clientHeight;
+                        h1 = t.offsetHeight - t.clientHeight;
                         $this.css({ 'overflow': 'auto' });
                         w2 = t.offsetWidth - t.clientWidth;
-                        h1 = t.offsetHeight - t.clientHeight;
+                        h2 = t.offsetHeight - t.clientHeight;
                         $this.data(dataKey, $this.css('margin'));
                         if (w2 !== w1) {
                             m = parseInt($this.css('margin-right'));
-                            css('margin-right', m + w2 - w1);
+                            $this.css('margin-right', m + w2 - w1);
                         }
                         if (w2 !== w1) {
                             m = parseInt($this.css('margin-right'));
