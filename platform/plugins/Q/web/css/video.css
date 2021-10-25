@@ -3,8 +3,8 @@
 .Q_video_tool {
     font-size: 0;
     position: relative;
-    width: 500px;
-    height: 275px;
+    width: 100%;
+    height: 100%;
 }
 .Q_mobile .Q_video_tool {
     width: 357px;

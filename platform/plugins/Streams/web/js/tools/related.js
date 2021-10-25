@@ -23,6 +23,7 @@ var Streams = Q.Streams;
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
  *   @param {Boolean} [options.closeable] Set to false to avoid showing even authorized users an interface to close related streams
+ *   @param {Boolean} [options.composerPosition=null] Can be "first" or "last". Where to place composer in a tool. If null, composer arranged by relatedOptions.ascending.
  *   @param {Object} [options.previewOptions] Object of options which can be passed to Streams/preview tool.
  *   @param {Object} [options.specificOptions] Object of options which can be passed to $streamType/preview tool.
  *   @param {Object} [options.creatable]  Optional pairs of {streamType: toolOptions} to render Streams/preview tools create new related streams.
@@ -51,7 +52,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	if (!state.relationType) {
 		throw new Q.Error("Streams/related tool: missing relationType");
 	}
-	if (state.sortable && state.sortable !== true && typeof state.sortable !== 'object') {
+	if (state.sortable === true) {
+		state.sortable = Q.Tool.define.options('Q/sortable');
+	}
+	if (state.sortable && typeof state.sortable !== 'object') {
 		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
 
@@ -109,6 +113,29 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 		}).activate();
 	}
+
+	// observe dom elements for mutation
+	tool.domObserver = new MutationObserver(function (mutations) {
+		mutations.forEach(function(mutation) {
+			if (mutation.type !== 'childList' || Q.isEmpty(mutation.removedNodes)) {
+				return;
+			}
+
+			mutation.removedNodes.forEach(function(removedElement) {
+				var publisherId = Q.getObject("options.streams_preview.publisherId", removedElement);
+				var streamName = Q.getObject("options.streams_preview.streamName", removedElement);
+				if (!publisherId || !streamName) {
+					return;
+				}
+
+				delete tool.previewElements[publisherId][streamName];
+				if (Q.isEmpty(tool.previewElements[publisherId])) {
+					delete tool.previewElements[publisherId];
+				}
+			});
+		});
+	});
+	tool.domObserver.observe(tool.element, {childList: true});
 },
 
 {
@@ -117,6 +144,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	relationType: null,
 	realtime: false,
 	infinitescroll: false,
+	composerPosition: null,
 	activate: {
 		batchSize: {
 			start: 20,
@@ -151,7 +179,53 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	}, "Streams/related"),
 	onUpdate: new Q.Event(
 	function _Streams_related_onUpdate(result, entering, exiting, updating) {
-		function addComposer(streamType, params, creatable, oldElement) {
+		function _placeRelatedTool (element) {
+			// select closest larger weight
+			var closestLargerWeight = null;
+			var closestLargerElement = null;
+			var elementsAmount = 0;
+			var thisWeight = Q.getObject("options.streams_preview.related.weight", element);
+			Q.each(tool.previewElements, function () {
+				Q.each(this, function () {
+					var weight = Q.getObject("options.streams_preview.related.weight", this);
+					if (weight > thisWeight && (!closestLargerWeight || weight < closestLargerWeight)) {
+						closestLargerWeight = weight;
+						closestLargerElement = this;
+					}
+					elementsAmount++;
+				});
+			});
+
+			if (closestLargerElement) {
+				if (ascending) {
+					$(closestLargerElement).before(element);
+				} else {
+					$(closestLargerElement).after(element);
+				}
+			} else if (state.composerPosition && elementsAmount === 1) {
+				if (state.composerPosition === "first") {
+					$container.append(element);
+				} else if (state.composerPosition === "last") {
+					$container.prepend(element);
+				}
+			} else {
+				if (ascending) {
+					if (elementsAmount === 1) {
+						$container.append(element);
+					} else {
+						$(".Streams_related_stream:last", $container).after(element);
+					}
+				} else {
+					if (elementsAmount === 1) {
+						$container.prepend(element);
+					} else {
+						$(".Streams_related_stream:first", $container).before(element);
+					}
+				}
+			}
+		};
+
+		function addComposer(streamType, params) {
 			// TODO: test whether the user can really create streams of this type
 			// and otherwise do not append this element
 			if (params && !Q.isPlainObject(params)) {
@@ -178,39 +252,42 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			if (tool.tabs) {
 				element.addClass('Q_tabs_tab');
 			}
-			if (oldElement) {
-				$(oldElement).before(element);
-				var $last = tool.$('>.Streams_related_composer:last');
-				if ($last.length) {
-					$(oldElement).insertAfter($last);
+
+			if (state.composerPosition) {
+				if (state.composerPosition === "first") {
+					$container.prepend(element);
+				} else if (state.composerPosition === "last") {
+					$container.append(element);
 				}
 			} else {
-				var $first = $container.find('.Streams_related_stream:first');
-				if ($first.length && $first.prev().length) {
-					$prev.after(element);
-				} else if ($first.length) {
-					$first.before(element);
+				if (ascending) {
+					$container.prepend(element);
 				} else {
 					$container.append(element);
 				}
 			}
+
 			Q.activate(element, function () {
 				var preview = Q.Tool.from(element, 'Streams/preview');
 				var previewState = preview.state;
 				tool.integrateWithTabs([element], true);
 				previewState.beforeCreate.set(function () {
-					$(this.element)
-						.addClass('Streams_related_loading')
-						.removeClass('Streams_related_composer');
+					$(this.element).addClass('Streams_related_loading').removeClass('Streams_related_composer');
 					previewState.beforeCreate.remove(tool);
 				}, tool);
-				previewState.onNewStreamPreview.set(function () {
-					addComposer(streamType, params, null, element);
-					if (state.realtime) {
-						Q.Tool.remove(this.element, true, true);
-						// it will reappear soon
-					}
+				previewState.onCreate.set(function (stream) {
+					// set data-streamName attribute to mark tool as not composer
+					element.setAttribute("data-streamName", stream.fields.name);
+
+					// set weight to element
+					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
+
+					// place new preview to the valid place in the list
+					_placeRelatedTool(element);
+
+					addComposer(streamType, params);
 				}, tool);
+
 				Q.handle(state.onComposer, tool, [preview]);
 			});
 		}
@@ -228,12 +305,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 		if (result.stream.testWriteLevel('relate')) {
 			Q.each(state.creatable, addComposer);
-			if (state.sortable === true) {
-				state.sortable = {
-					draggable: '.Streams_related_stream',
-					droppable: '.Streams_related_stream'
-				};
-			}
 			if (state.sortable && result.stream.testWriteLevel('edit')) {
 				if (state.realtime) {
 					alert("Streams/related: can't mix realtime and sortable options yet");
@@ -265,7 +336,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 							r.type,
 							i.publisherId,
 							i.streamName,
-							data.direction < 0 ? s.related.weight : s.related.weight+1,
+							s.related.weight,
 							1,
 							p.fill('updated')
 						);
@@ -285,14 +356,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			}
 
 			Q.removeElement(element, true);
-			delete tool.previewElements[publisherId][streamName];
-			if (Q.isEmpty(tool.previewElements[publisherId])) {
-				delete tool.previewElements[publisherId];
-			}
 		});
 
 		var elements = [];
-		var prev_e = null;
 		Q.each(result.relations, function (i) {
 			if (!this.from) {
 				return;
@@ -300,28 +366,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 			var tff = this.from.fields;
 
-			var e = Q.getObject([tff.publisherId, tff.name], tool.previewElements);
-			if (e) { // if element exists - just insert them in order
-				if (prev_e) {
-					if (Q.getObject('ascending', state.relatedOptions)) {
-						$(e).insertAfter(prev_e);
-					} else {
-						$(e).insertBefore(prev_e);
-					}
-					$(e).attr('data-weight', this.weight);
-					Q.setObject(['state', 'related', 'weight'], 
-						this.weight, Q.Tool.from(e));
-				}
-				prev_e = e;
+			// if element exists - do nothing
+			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
 				return;
 			}
 
-			var thisWeight = this.weight;
 			var element = tool.elementForStream(
 				tff.publisherId, 
 				tff.name, 
 				tff.type,
-				thisWeight,
+				this.weight,
 				state.previewOptions
 			);
 
@@ -333,37 +387,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			$(element).addClass('Streams_related_stream');
 			Q.setObject([tff.publisherId, tff.name], element, tool.previewElements);
 
-			// select closest larger weight
-			var closestLargerWeight = null;
-			var closestLargerElement = null;
-			Q.each(tool.previewElements, function () {
-				Q.each(this, function () {
-					var weight = Q.getObject("options.streams_preview.related.weight", this);
-					if (weight > thisWeight && (!closestLargerWeight || weight < closestLargerWeight)) {
-						closestLargerWeight = weight;
-						closestLargerElement = this;
-					}
-				});
-			});
-
-			if (closestLargerElement) {
-				if (ascending) {
-					$(closestLargerElement).before(element);
-				} else {
-					$(closestLargerElement).after(element);
-				}
-			} else {
-				if (ascending) {
-					$container.append(element);
-				} else {
-					var $composer = $container.find('.Streams_related_composer:last');
-					if ($composer.length) {
-						$composer.after(element);
-					} else {
-						$container.prepend(element);
-					}
-				}
-			}
+			_placeRelatedTool(element);
 		});
 
 		// activate the elements one by one, asynchronously
@@ -673,7 +697,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		e.setAttribute('data-publisherId', publisherId);
 		e.setAttribute('data-streamName', streamName);
 		e.setAttribute('data-streamType', streamType);
-		e.setAttribute('data-weight', weight);
  		return e;
 	},
 
@@ -707,7 +730,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (!tool.tabs) {
 			return;
 		}
-		var tabs = tool.tabs;
+		tabs = tool.tabs;
 		var $composer = tool.$('.Streams_related_composer');
 		$composer.addClass('Q_tabs_tab');
 		Q.each(elements, function (i) {
@@ -748,6 +771,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		beforeRemove: function () {
 			$(this.element).plugin('Q/sortable', 'remove');
 			this.state.onUpdate.remove("Streams/related");
+			this.domObserver.disconnect();
 		}
 	}
 }
