@@ -580,6 +580,7 @@ Q.Tool.define({
 	"Streams/form"		 : "{{Streams}}/js/tools/form.js",
 	"Streams/import"	   : "{{Streams}}/js/tools/import.js",
 	"Streams/activity"	 : "{{Streams}}/js/tools/activity.js",
+	"Streams/audioVisualization"	 : "{{Streams}}/js/tools/webrtc/audioVisualization.js",
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
 	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
