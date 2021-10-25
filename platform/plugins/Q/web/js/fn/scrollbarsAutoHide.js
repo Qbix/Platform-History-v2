@@ -63,7 +63,8 @@
                     $this.css('margin-bottom', marginDiffBottom + 'px');
                 }
             }
-            $this.on({'mouseenter.Q_scrollbar_autohide': function() {
+            $this.on({
+                'mouseenter.Q_scrollbar_autohide': function() {
                     if (state.horizontal && state.vertical) {
                         $this.css('overflow', 'auto');
                     } else if (state.horizontal) {
@@ -73,7 +74,7 @@
                     }
                     if (o.scrollbarMargin) {
                         $this.css({ 'margin-right': marginDiffRight + 'px' });
-                        $this.css({ 'margin-right': marginDiffBottom + 'px' });
+                        $this.css({ 'margin-bottom': marginDiffBottom + 'px' });
                     }
                     if (Q.Browser.detect().OS == 'mac') {
                         var scrollTop = $this.scrollTop();
@@ -88,8 +89,8 @@
                 'mouseleave.Q_scrollbar_autohide': function() {
                     $this.css({ 'overflow': 'hidden' });
                     if (o.scrollbarMargin) {
-                        $this.css('margin-bottom', newMarginBottom + 'px');
                         $this.css({ 'margin-right': newMarginRight + 'px' });
+                        $this.css('margin-bottom', newMarginBottom + 'px');
                     }
                     Q.handle(o.onHide);
                 },
