@@ -14,6 +14,8 @@
  * if there are lot of scrollable areas.
  * @class Q scrollbarsAutoHide
  * @constructor
+ * @param {Boolean} [horizontal=true] where to enable/disable horizontal scrolling
+ * @param {Boolean} [vertical=false] whether to enable/disable vertical scrolling
  * @param {Mixed} [Object_or_String] function could have String or Object parameter
  * @param {Object} [Object_or_String.Object] If an object then it's a hash of options, that can include:
  *   @param {Boolean} [Object_or_String.Object.scrollbarPadding] Boolean which indicates whether to preserve padding in a container based on scrollbar
@@ -31,6 +33,7 @@
         function (o) {
 
             var $this = this;
+            var state = $this.state('Q/scrollbarsAutoHide');
 			var element = this[0];
             if (element.scrollHeight <= element.offsetHeight
                 && element.scrollWidth <= element.offsetWidth) {
@@ -61,7 +64,13 @@
                         t = $this[0];
                         w1 = t.offsetWidth - t.clientWidth;
                         h1 = t.offsetHeight - t.clientHeight;
-                        $this.css({ 'overflow': 'auto' });
+                        if (state.horizontal && state.vertical) {
+                            $this.css('overflow', 'auto');
+                        } else if (state.horizontal) {
+                            $this.css('overflow-x', 'auto');
+                        } else if (state.vertical) {
+                            $this.css('overflow-y', 'auto');
+                        }
                         w2 = t.offsetWidth - t.clientWidth;
                         h2 = t.offsetHeight - t.clientHeight;
                         $this.data(dataKey, $this.css('margin'));
@@ -133,9 +142,11 @@
         },
 
         {
-            'scrollbarPadding': true,
-            'showHandler': new Q.Event(function() {}),
-            'hideHandler': new Q.Event(function() {})
+            scrollbarPadding: true,
+            horizontal: true,
+            vertical: false,
+            showHandler: new Q.Event(function() {}),
+            hideHandler: new Q.Event(function() {})
         },
 
         {
