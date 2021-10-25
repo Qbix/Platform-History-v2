@@ -6654,6 +6654,10 @@ Q.Browser = {
 		
 		return Q.Browser.scrollbarWidth = w1 - w2;
 	}
+
+	getScrollbarHeight: function() {
+		return this.getScrollbarWidth();
+	}
 	
 };
 
