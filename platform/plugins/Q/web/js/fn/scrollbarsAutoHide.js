@@ -69,7 +69,7 @@
                             m = parseInt($this.css('margin-right'));
                             $this.css('margin-right', m + w2 - w1);
                         }
-                        if (w2 !== w1) {
+                        if (h2 !== h1) {
                             m = parseInt($this.css('margin-right'));
                             $this.css('margin-bottom', m + h2 - h1);
                         }
