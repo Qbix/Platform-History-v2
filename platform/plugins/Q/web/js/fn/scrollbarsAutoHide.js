@@ -52,69 +52,50 @@
                 } else {
                     $this.css('margin-right', marginDiffRight + 'px');
                 }
-                var dataKey = 'Q/scrollbarsAutoHide margin';
-                $this.on({
-                    'mouseenter.Q_scrollbar_autohide': function() {
-                        if (state.horizontal && state.vertical) {
-                            $this.css('overflow', 'auto');
-                        } else if (state.horizontal) {
-                            $this.css('overflow-x', 'auto');
-                        } else if (state.vertical) {
-                            $this.css('overflow-y', 'auto');
-                        }
-                        if (o.scrollbarMargin) {
-                            $this.css({ 'margin-right': marginDiffRight + 'px' });
-                        }
-                        if (Q.Browser.detect().OS == 'mac') {
-                            var scrollTop = $this.scrollTop();
-                            $this.scrollTop(0);
-                            $this.scrollTop(scrollTop);
-                        }
-                        Q.handle(o.onShow);
-                    },
-                    'mouseleave.Q_scrollbar_autohide': function() {
-                        $this.css({ 'overflow': 'hidden' });
-                        if (o.scrollbarMargin) {
-                            $this.css({ 'margin-right': newMarginRight + 'px' });
-                        }
-                        Q.handle(o.onHide);
-                    }
-                });
             }
             if (scrollbarBottom) {
 				var newMarginBottom = oldMarginBottom + scrollbarHeight;
-				var marginDiffBottom = Math.max(0, newMarginRight - scrollbarHeight);
+				var marginDiffBottom = Math.max(0, newMarginBottom - scrollbarHeight);
                 $this.css({ 'overflow': 'hidden' });
                 if (o.scrollbarMargin) {
                     $this.css('margin-bottom', newMarginBottom + 'px');
                 } else {
                     $this.css('margin-bottom', marginDiffBottom + 'px');
                 }
-                $this.on({
-                    'mouseenter.Q_scrollbar_autohide': function() {
-                        $this.css({ 'overflow': 'auto' });
-                        if (o.scrollbarMargin) {
-                            $this.css({ 'margin-right': marginDiffBottom + 'px' });
-                        }
-                        if (Q.Browser.detect().OS == 'mac') {
-                            var scrollLeft = $this.scrollLeft();
-                            $this.scrollLeft(0);
-                            $this.scrollLeft(scrollLeft);
-                        }
-                        Q.handle(o.onShow);
-                    },
-                    'mouseleave.Q_scrollbar_autohide': function() {
-                        $this.css({ 'overflow': 'hidden' });
-		                if (o.scrollbarMargin) {
-		                    $this.css('margin-bottom', newMarginBottom + 'px');
-		                }
-                        Q.handle(o.onHide);
-                    }
-                });
             }
-
-            $this.on('mousemove.Q_scrollbar_autohide', function() {
-                $this.off('mousemove.Q_scrollbar_autohide').trigger('mouseenter');
+            $this.on({'mouseenter.Q_scrollbar_autohide': function() {
+                    if (state.horizontal && state.vertical) {
+                        $this.css('overflow', 'auto');
+                    } else if (state.horizontal) {
+                        $this.css('overflow-x', 'auto');
+                    } else if (state.vertical) {
+                        $this.css('overflow-y', 'auto');
+                    }
+                    if (o.scrollbarMargin) {
+                        $this.css({ 'margin-right': marginDiffRight + 'px' });
+                        $this.css({ 'margin-right': marginDiffBottom + 'px' });
+                    }
+                    if (Q.Browser.detect().OS == 'mac') {
+                        var scrollTop = $this.scrollTop();
+                        $this.scrollTop(0);
+                        $this.scrollTop(scrollTop);
+                        var scrollLeft = $this.scrollLeft();
+                        $this.scrollLeft(0);
+                        $this.scrollLeft(scrollLeft);
+                    }
+                    Q.handle(o.onShow);
+                },
+                'mouseleave.Q_scrollbar_autohide': function() {
+                    $this.css({ 'overflow': 'hidden' });
+                    if (o.scrollbarMargin) {
+                        $this.css('margin-bottom', newMarginBottom + 'px');
+                        $this.css({ 'margin-right': newMarginRight + 'px' });
+                    }
+                    Q.handle(o.onHide);
+                },
+                'mousemove.Q_scrollbar_autohide':  function() {
+                    $this.off('mousemove.Q_scrollbar_autohide').trigger('mouseenter');
+                }
             });
         },
 
