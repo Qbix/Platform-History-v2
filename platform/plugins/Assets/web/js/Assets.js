@@ -1047,16 +1047,6 @@
 					return 'https://link.trustwallet.com/open_coin?asset='+asset;
 				}},
 			   	/**
-			   	 * Generates a link for opening a coin
-			   	 * @static
-			   	 * @method addAsset
-			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @return {String}
-			   	 */
-			   	addAsset: { trustwallet: function (asset) {
-					return 'https://link.trustwallet.com/add_asset?asset='+asset;
-				}},
-			   	/**
 			   	 * Generates a link for sending a payment
 			   	 * @static
 			   	 * @method send
