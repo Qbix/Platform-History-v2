@@ -248,6 +248,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			if (Q.handle(state.beforeRenderPreview, tool, [tff, element]) === false) {
 				return;
 			}
+			
+			tool.element.addClass('Streams_related_hasComposers');
 
 			if (tool.tabs) {
 				element.addClass('Q_tabs_tab');
