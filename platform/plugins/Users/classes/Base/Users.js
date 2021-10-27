@@ -159,10 +159,3 @@ Base.User = Q.require('Users/User');
  * @type Users.Vote
  */
 Base.Vote = Q.require('Users/Vote');
-
-/**
- * Link to Users.Web3 model
- * @property Web3
- * @type Users.Web3
- */
-Base.Web3 = Q.require('Users/Web3');

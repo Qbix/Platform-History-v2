@@ -54,8 +54,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	}
 	if (state.sortable === true) {
 		state.sortable = Q.Tool.define.options('Streams/related').sortable;
-	}
-	if (state.sortable && typeof state.sortable !== 'object') {
+	} else if (state.sortable && typeof state.sortable !== 'object') {
 		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
 
