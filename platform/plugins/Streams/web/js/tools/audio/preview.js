@@ -125,7 +125,7 @@
 				field: 'title',
 				inplaceType: 'text'
 			},
-			fileUploadUHandler: Q.action("Streams/Stream"),
+			fileUploadUHandler: Q.action("Streams/stream"),
 			pie: {
 				borderSize: 5,
 				color: "red"
