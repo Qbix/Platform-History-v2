@@ -25,7 +25,7 @@ var Row = Q.require('Db/Row');
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String} [fields.contract] defaults to ""
- * @param {String} [fields.methodId] defaults to null
+ * @param {String} [fields.methodId] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
  * @param {String} [fields.result] defaults to null
@@ -64,7 +64,7 @@ Q.mixin(Base, Row);
 /**
  * @property methodId
  * @type String
- * @default null
+ * @default ""
  * 
  */
 /**
@@ -279,7 +279,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"chainId",
-		"contract",
+		"methodId",
 		"params"
 	];
 };
@@ -434,7 +434,7 @@ Base.prototype.maxSize_contract = function () {
 	 */
 Base.column_contract = function () {
 
-return [["varchar","42","",false],false,"PRI",null];
+return [["varchar","42","",false],false,"",null];
 };
 
 /**
@@ -446,7 +446,9 @@ return [["varchar","42","",false],false,"PRI",null];
  * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_methodId = function (value) {
-		if (value == undefined) return value;
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".methodId");
@@ -470,7 +472,7 @@ Base.prototype.maxSize_methodId = function () {
 	 */
 Base.column_methodId = function () {
 
-return [["varchar","8","",false],true,"",null];
+return [["varchar","8","",false],false,"PRI",null];
 };
 
 /**
@@ -630,7 +632,7 @@ return [["varchar","1023","",false],true,"","{}"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['chainId','contract'], i;
+	var fields = ['chainId','methodId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

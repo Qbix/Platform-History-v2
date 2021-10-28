@@ -20,7 +20,7 @@
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  * @param {string} [$fields.contract] defaults to ""
- * @param {string} [$fields.methodId] defaults to null
+ * @param {string} [$fields.methodId] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
  * @param {string} [$fields.result] defaults to null
@@ -55,7 +55,7 @@ abstract class Base_Users_Web3 extends Db_Row
 	/**
 	 * @property $methodId
 	 * @type string
-	 * @default null
+	 * @default ""
 	 * 
 	 */
 	/**
@@ -94,7 +94,7 @@ abstract class Base_Users_Web3 extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'chainId',
-			  1 => 'contract',
+			  1 => 'methodId',
 			  2 => 'params',
 			)
 		);
@@ -496,7 +496,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -512,7 +512,7 @@ return array (
 	function beforeSet_methodId($value)
 	{
 		if (!isset($value)) {
-			return array('methodId', $value);
+			$value='';
 		}
 		if ($value instanceof Db_Expression) {
 			return array('methodId', $value);
@@ -549,8 +549,8 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => true,
-  2 => '',
+  1 => false,
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -782,7 +782,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('chainId','contract') as $name) {
+			foreach (array('chainId','methodId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
