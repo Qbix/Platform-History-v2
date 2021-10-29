@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "دعوت از مخاطبین انتخابی",
             "scannedQR": "the 99 999}} اگر کد اسکن شد",
             "copyLink": "copy 999}} برای کپی کردن لینک دعوت",
-            "userChooserPlaceholder": "جستجو براساس نام"
+            "userChooserPlaceholder": "جستجو براساس نام",
+            "shareOrCopyLink": "{{ClickOrTap}} پیوند دعوت را به اشتراک بگذارید یا کپی کنید"
         },
         "email": {
             "subject": "هی، این را چک کن",
@@ -222,7 +223,8 @@
             "start": "شروع کنید",
             "stop": "متوقف کردن",
             "streamingSettings": "تنظیمات",
-            "streamToRTMP": "جریان به RTMP سفارشی"
+            "streamToRTMP": "جریان به RTMP سفارشی",
+            "dialogTitle": "تنظیمات ویدیو"
         },
         "participantsPopup": {
             "disconnect": "قطع شدن",
@@ -238,7 +240,8 @@
             "turnOnCamera": "نمایش فیلم",
             "turnOnAudio": "صدا را قطع کنید",
             "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش",
-            "fullScreen": "تمام صفحه"
+            "fullScreen": "تمام صفحه",
+            "dialogTitle": "تنظیمات شرکت کننده"
         },
         "notAllowedToJoinCall": "شما اجازه پیوستن به این جریان را ندارید.",
         "streamTitle": "99 999}} تماس زنده",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "اشتراک گذاری صفحه روشن است",
             "screenSharingIsOff": "اشتراک گذاری صفحه",
             "joinNow": "به فراخوان بپیوندید"
+        },
+        "audioSettings": {
+            "dialogTitle": "تنظیمات صدا",
+            "speakers": "بلندگوها",
+            "microphone": "میکروفون"
+        },
+        "streamingSettings": {
+            "title": "تنظیمات جریان"
         }
     },
     "types": {

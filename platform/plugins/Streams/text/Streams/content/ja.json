@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "選択した連絡先を招待",
             "scannedQR": "{{ClickOrTap}}コードがスキャンされた場合",
             "copyLink": "招待リンクをコピーするには{{ClickOrTap}}",
-            "userChooserPlaceholder": "名前で検索"
+            "userChooserPlaceholder": "名前で検索",
+            "shareOrCopyLink": "招待リンクを共有またはコピーするには{{ClickOrTap}}"
         },
         "email": {
             "subject": "こんにちは、これをチェックしてください",
@@ -222,7 +223,8 @@
             "start": "始める",
             "stop": "やめる",
             "streamingSettings": "設定",
-            "streamToRTMP": "カスタムRTMPにストリーミング"
+            "streamToRTMP": "カスタムRTMPにストリーミング",
+            "dialogTitle": "ビデオ設定"
         },
         "participantsPopup": {
             "disconnect": "切断する",
@@ -238,7 +240,8 @@
             "turnOnCamera": "ビデオを表示",
             "turnOnAudio": "音声のミュートを解除",
             "turnOnScreenSharing": "画面共有を表示",
-            "fullScreen": "全画面表示"
+            "fullScreen": "全画面表示",
+            "dialogTitle": "参加者の設定"
         },
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
         "streamTitle": "{{1}}ライブ通話",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "画面共有がオンになっています",
             "screenSharingIsOff": "画面を共有",
             "joinNow": "通話に参加する"
+        },
+        "audioSettings": {
+            "dialogTitle": "オーディオ設定",
+            "speakers": "スピーカー",
+            "microphone": "マイクロフォン"
+        },
+        "streamingSettings": {
+            "title": "ストリーミング設定"
         }
     },
     "types": {

@@ -180,7 +180,7 @@
                     function syncList() {
                         var roomStream = controlsTool.WebRTCClass.roomStream();
                         var title = roomStream.fields.name != null ? ((roomStream.fields.name).replace('Streams/webrtc/', '') + (roomStream.fields.title != null ? (' - ' + roomStream.fields.title) : '')) : '';
-                        var scenes = controlsTool.WebRTCLib.screensInterface.canvasComposer.getScenes();
+                        var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
 
                         console.log('CONTROLS ADD SCENES', scenes)
 
@@ -456,14 +456,14 @@
                                 return false;
                             };
                             this.show = function() {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.showSource(this.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.showSource(this.sourceInstance);
 
                                 //this.sourceInstance.active = true;
                                 this.switchVisibilityIcon(true);
                                 syncList();
                             };
                             this.hide = function() {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideSource(this.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideSource(this.sourceInstance);
                                 //this.sourceInstance.active = false;
                                 this.switchVisibilityIcon(false);
                                 syncList();
@@ -623,7 +623,7 @@
                                 var img = new Image();
                                 img.src = e;
                                 img.onload = function () {
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                         sourceType: 'image',
                                         title: e,
                                         imageInstance: img,
@@ -637,7 +637,7 @@
                                     var img = new Image();
                                     img.src = fileReader.result;
                                     img.onload = function () {
-                                        controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                             sourceType: 'image',
                                             title: files[0].name,
                                             imageInstance: img,
@@ -660,7 +660,7 @@
                                 video.src = e;
                                 video.muted = true;
                                 video.loop = true;
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                     sourceType: 'video',
                                     title: e,
                                     url: e,
@@ -694,7 +694,7 @@
                                         // The blob gives us a URL to the video file:
                                         let url = window.URL.createObjectURL(videoBlob);
 
-                                        controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.addSource({
+                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                             sourceType: 'video',
                                             title: files[0].name,
                                             url: url,
@@ -847,7 +847,7 @@
                                 left = _streamingCanvas.offsetLeft;
                                 top = _streamingCanvas.offsetTop;
                             }
-                            var canvasSize = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                            var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
                             var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
                             var realcanvasSize = _streamingCanvas.getBoundingClientRect();
                             var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
@@ -858,7 +858,7 @@
                                 _resizingElementTool.state.onResizing.removeAllHandlers();
                             }
                             if(_selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
-                                var webrtcLayoutRect = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                                var webrtcLayoutRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
                                 console.log('selectSource if1')
 
 
@@ -868,16 +868,16 @@
                                 _resizingElement.style.left = left + webrtcLayoutRect.x / timesBigger + 'px';
                                 _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
                                 _resizingElementTool.state.onMoving.set(function (x, y) {
-                                    let currentRect = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(currentRect.width, currentRect.height, (x - left) * timesBigger, (y - top)  * timesBigger);
+                                    let currentRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(currentRect.width, currentRect.height, (x - left) * timesBigger, (y - top)  * timesBigger);
                                 });
                                 _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                    let currentRect = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect()
+                                    let currentRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect()
                                     let outWidth = width != null ? width * timesBigger : currentRect.width;
                                     let outHeight = height != null ? height * timesBigger : currentRect.height;
                                     let outLeft = x != null ? (x - left) * timesBigger : currentRect.x;
                                     let outTop = y != null ? (y - top) * timesBigger : currentRect.y;
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(outWidth, outHeight, outLeft, outTop);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(outWidth, outHeight, outLeft, outTop);
                                 });
                             } else if(_selectedSource.sourceInstance.sourceType == 'image' || _selectedSource.sourceInstance.sourceType == 'video') {
                                 console.log('selectSource if2')
@@ -909,27 +909,27 @@
 
                         }
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceAdded', function (source) {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceAdded', function (source) {
                             syncList();
                             /*setTimeout(function(){
                         if(source.sourceType == 'webrtc' && source.participant != null) {
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayName(source.participant);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(source.participant);
                         }
                     }, 3000)*/
 
                         })
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceRemoved', function () {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceRemoved', function () {
                             syncList();
                         })
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceMoved', function () {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceMoved', function () {
                             syncList();
                         })
 
                         function moveForward() {
                             console.log('moveForward');
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.moveSourceForward(_selectedSource.sourceInstance);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.moveSourceForward(_selectedSource.sourceInstance);
 
                             sortList('visual');
                             return false;
@@ -937,7 +937,7 @@
 
                         function moveBackward() {
                             console.log('moveBackward', _selectedSource);
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.moveSourceBackward(_selectedSource.sourceInstance);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.moveSourceBackward(_selectedSource.sourceInstance);
 
                             sortList('visual');
                             return false;
@@ -949,7 +949,7 @@
 
                         function removeSource() {
                             if(_selectedSource != null) {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
                                 syncList();
                                 _selectedSource = null;
                             };
@@ -1432,14 +1432,14 @@
                                 console.log('mute')
 
                                 this.sourceInstance.active = true;
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
                                 this.switchVisibilityIcon(true);
                                 syncList();
                             };
                             this.mute = function() {
                                 console.log('mute')
                                 this.sourceInstance.active = false;
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
                                 this.switchVisibilityIcon(false);
 
                                 syncList();
@@ -1613,7 +1613,7 @@
                                 left = _streamingCanvas.offsetLeft;
                                 top = _streamingCanvas.offsetTop;
                             }
-                            var canvasSize = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                            var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
                             var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
                             var realcanvasSize = _streamingCanvas.getBoundingClientRect();
                             var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
@@ -1663,7 +1663,7 @@
                                 audio.src = e;
                                 audio.muted = true;
                                 audio.loop = true;
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.addSource({
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
                                     sourceType: 'audio',
                                     title: e,
                                     audioInstance: audio,
@@ -1689,7 +1689,7 @@
                                         // The blob gives us a URL to the video file:
                                         let url = window.URL.createObjectURL(audioBlob);
 
-                                        controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.addSource({
+                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
                                             sourceType: 'audio',
                                             title: files[0].name,
                                             url: url,
@@ -1703,28 +1703,28 @@
 
                         function removeAudioSource() {
                             if(_selectedSource != null) {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
                                 syncList();
                                 _selectedSource = null;
                             };
                             optionsColumn.update();
                         }
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceAdded', function (source) {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceAdded', function (source) {
                             syncList();
                             /*setTimeout(function(){
                         if(source.sourceType == 'webrtc' && source.participant != null) {
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayName(source.participant);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(source.participant);
                         }
                     }, 3000)*/
 
                         })
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceRemoved', function () {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceRemoved', function () {
                             syncList();
                         })
 
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.on('sourceMoved', function () {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.on('sourceMoved', function () {
                             syncList();
                         })
 
@@ -2306,9 +2306,9 @@
 
                         playLocallyCheckbox.addEventListener("click", function (e) {
                             if(this.checked) {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.unmuteSourceLocally(source.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSourceLocally(source.sourceInstance);
                             } else {
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.audioComposer.muteSourceLocally(source.sourceInstance);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSourceLocally(source.sourceInstance);
                             }
                         });
 
@@ -2376,7 +2376,7 @@
                                 }
                             }
 
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.updateWebRTCCanvasLayout(layoutItem.key);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCCanvasLayout(layoutItem.key);
                         }
 
                         function createLayoutList() {
@@ -2459,7 +2459,7 @@
                                 audioOnlyLabel.appendChild(document.createTextNode("Audio-only layout"));
                                 audioOnlyCon.appendChild(audioOnlyLabel);*/
 
-                            var webrtcLayoutRect = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                            var webrtcLayoutRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
 
                             //size
                             var sizeAndPositionCon = document.createElement('DIV');
@@ -2556,7 +2556,7 @@
 
                             /*audioOnly.addEventListener('change', function () {
                                     controlsTool.WebRTCLib.getOptions().liveStreaming.audioOnlyLayout = audioOnly.checked;
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.updateWebRTCCanvasLayout();
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCCanvasLayout();
                                 })*/
 
                             audioBg.addEventListener('change', function () {
@@ -2572,7 +2572,7 @@
                                 let layoutHeight = height.value;
                                 let x = leftPos.value;
                                 let y = topPos.value;
-                                controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
                             }
                             marginsInput.addEventListener('blur', updateWebrtcRect)
                             width.addEventListener('blur', updateWebrtcRect)
@@ -2789,17 +2789,17 @@
 
                             showName.addEventListener('change', function () {
                                 if( showName.checked) {
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance.participant);
                                 } else {
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance.participant);
 
                                 }
                             })
                             showBorder.addEventListener('change', function () {
                                 if( showBorder.checked) {
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.displayBorder(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayBorder(_selectedSource.sourceInstance.participant);
                                 } else {
-                                    controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.hideBorder(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideBorder(_selectedSource.sourceInstance.participant);
 
                                 }
                             })
@@ -3013,7 +3013,7 @@
                             _layoutParamsEl = dialogBodyInner;
 
                             function updateSourceRect () {
-                                var canvasSize = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                                var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
                                 var keepAspectRatio = keepRatio.checked;
                                 var currentWidth = _selectedSource.sourceInstance.rect._width;
                                 var currentHeight = _selectedSource.sourceInstance.rect._height;
@@ -3259,7 +3259,7 @@
                             _layoutParamsEl = dialogBodyInner;
 
                             function updateSourceRect () {
-                                var canvasSize = controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.getCanvasSize();
+                                var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
                                 var keepAspectRatio = keepRatio.checked;
                                 var currentWidth = _selectedSource.sourceInstance.rect._width;
                                 var currentHeight = _selectedSource.sourceInstance.rect._height;
@@ -3552,7 +3552,7 @@
                     dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden';
                     _dialogueEl = dialogue;
                     var dialogTitle=document.createElement('H3');
-                    dialogTitle.innerHTML = 'Streaming settings';
+                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.textes);
                     dialogTitle.className = 'dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
@@ -3763,7 +3763,7 @@
                     startRecordingBtn.addEventListener('click', function () {
                         if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                        controlsTool.WebRTCLib.screensInterface.localRecorder.startRecording(function (liveInfo) {
+                        controlsTool.WebRTCLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
                             if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
                             recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", controlsTool.textes);
                             recordingSettings.style.display = 'none';
@@ -3773,7 +3773,7 @@
                     /*stopRecordingBtn.addEventListener('click', function () {
                             if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                            controlsTool.WebRTCLib.screensInterface.localRecorder.stopRecording(function () {
+                            controlsTool.WebRTCLib.mediaManager.localRecorder.stopRecording(function () {
                                 if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
                                 recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", controlsTool.textes);
                                 activeRecordingSection.style.display = 'none';
@@ -3885,8 +3885,8 @@
                             document.body.appendChild(streamingCanvas);
                         }
 
-                        if(!controlsTool.WebRTCLib.screensInterface.fbLive.isStreaming()) {
-                            controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.stop();
+                        if(!controlsTool.WebRTCLib.mediaManager.fbLive.isStreaming()) {
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.stop();
                         }
                     }
                     if(Q.info.isMobile) controlsTool.show();
@@ -3960,7 +3960,7 @@
 
 
                     if(dialogue && dialogue.classList.contains('Streams_webrtc_hidden')) {
-                        controlsTool.WebRTCLib.screensInterface.canvasComposer.videoComposer.compositeVideosAndDraw();
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.compositeVideosAndDraw();
 
                         dialogue.classList.remove('Streams_webrtc_hidden');
                         isHidden = false;

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Povabi izbrane stike",
             "scannedQR": "{{ClickOrTap}} če je bila koda skenirana",
             "copyLink": "{{ClickOrTap}} za kopiranje vabila",
-            "userChooserPlaceholder": "Iščite po imenu"
+            "userChooserPlaceholder": "Iščite po imenu",
+            "shareOrCopyLink": "{{ClickOrTap}} za skupno rabo ali kopiranje povezave s povabilom"
         },
         "email": {
             "subject": "Hej, poglej to",
@@ -222,7 +223,8 @@
             "start": "Začni",
             "stop": "Stop",
             "streamingSettings": "Nastavitve",
-            "streamToRTMP": "Pretočno predvajajte v RTMP po meri"
+            "streamToRTMP": "Pretočno predvajajte v RTMP po meri",
+            "dialogTitle": "Nastavitve videa"
         },
         "participantsPopup": {
             "disconnect": "Prekini povezavo",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Vklopite zvok zvoka",
             "turnOnScreenSharing": "Pokažite skupno rabo zaslona",
-            "fullScreen": "Celozaslonski način"
+            "fullScreen": "Celozaslonski način",
+            "dialogTitle": "Nastavitve udeležencev"
         },
         "notAllowedToJoinCall": "Nimate dovoljenja za pridružitev temu toku.",
         "streamTitle": "{{1}} klic v živo",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Skupna raba zaslona je vklopljena",
             "screenSharingIsOff": "Zaslon za skupno rabo",
             "joinNow": "Pridružite se klicu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Nastavitve zvoka",
+            "speakers": "zvočniki",
+            "microphone": "mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Nastavitve pretakanja"
         }
     },
     "types": {

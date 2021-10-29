@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "ನಾನು ಆಮಂತ್ರಿಸಿದ ಜನರು",
-        "Streams/invitedMe": "ಯಾರು ನನ್ನನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ"
+        "Streams/invitedMe": "ಯಾರು ನನ್ನನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
+        "AreYouAgree": "ನೀವು ಒಪ್ಪುವಿರಾ?",
+        "Yes": "ಹೌದು",
+        "No": "ಇಲ್ಲ"
     },
     "interests": {
         "Filter": "ನೀವು ಏನು ಆನಂದಿಸುತ್ತೀರಿ?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "ಸಂಪರ್ಕಗಳಿಂದ ಮತ್ತೆ ಆರಿಸಿ",
             "inviteSelectedContacts": "ಆಯ್ದ ಸಂಪರ್ಕಗಳನ್ನು ಆಹ್ವಾನಿಸಿ",
             "scannedQR": "ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿದರೆ {{ClickOrTap}}",
-            "copyLink": "ಆಹ್ವಾನ ಲಿಂಕ್ ನಕಲಿಸಲು {{ClickOrTap}}"
+            "copyLink": "ಆಹ್ವಾನ ಲಿಂಕ್ ನಕಲಿಸಲು {{ClickOrTap}}",
+            "userChooserPlaceholder": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ",
+            "shareOrCopyLink": "ಆಹ್ವಾನ ಲಿಂಕ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಅಥವಾ ನಕಲಿಸಲು {{ClickOrTap}}"
         },
         "email": {
             "subject": "ಹೇ, ಇದನ್ನು ಪರಿಶೀಲಿಸಿ",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "ಭಾಗವಹಿಸುವವರಿಗೆ ಯಾವುದೇ ವೀಡಿಯೊ ಇಲ್ಲ",
             "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ.",
             "youBeganVideoRecording": "ನೀವು ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿದ್ದೀರಿ",
-            "youStoppedVideoRecording": "ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡಿಂಗ್ ಮಾಡುವುದನ್ನು ನೀವು ನಿಲ್ಲಿಸಿದ್ದೀರಿ"
+            "youStoppedVideoRecording": "ಈ ಸಮ್ಮೇಳನವನ್ನು ರೆಕಾರ್ಡಿಂಗ್ ಮಾಡುವುದನ್ನು ನೀವು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
+            "switchingRoom": "ಕೊಠಡಿಯನ್ನು ಬದಲಾಯಿಸಲಾಗುತ್ತಿದೆ ...",
+            "forceDisconnecting": "ನೀವು 5 ಸೆಕೆಂಡುಗಳಲ್ಲಿ ಸಂಪರ್ಕ ಕಡಿತಗೊಳ್ಳುತ್ತೀರಿ",
+            "youStartedLive": "ನೀವು ಈ ಕರೆಯನ್ನು ಕಸ್ಟಮ್ RTMP ಗೆ ಪ್ರಸಾರ ಮಾಡಲು ಆರಂಭಿಸಿದ್ದೀರಿ",
+            "youStoppedLive": "ನೀವು ಈ ಕರೆಯನ್ನು ಕಸ್ಟಮ್ RTMP ಗೆ ಪ್ರಸಾರ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
+            "sbStartedLiveStreaming": "{{userName}} ನೇರಪ್ರಸಾರ ಆರಂಭಿಸಿದೆ",
+            "sbStoppedLiveStreaming": "{{userName}} ಲೈವ್ ಆಗಿ ಕೊನೆಗೊಂಡಿದೆ",
+            "liveStopped": "ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗೆ ವೀಡಿಯೊ ಕಳುಹಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ"
         },
         "settingsPopup": {
             "webCamera": "ವೆಬ್ ಕ್ಯಾಮರಾ",
@@ -205,7 +217,14 @@
             "stopRecording": "ರೆಕಾರ್ಡಿಂಗ್ ನಿಲ್ಲಿಸಿ",
             "recordingInProgress": "ರೆಕಾರ್ಡಿಂಗ್ ಪ್ರಗತಿಯಲ್ಲಿದೆ ...",
             "publishOnTimeline": "ಟೈಮ್‌ಲೈನ್‌ನಲ್ಲಿ ಪ್ರಕಟಿಸಿ",
-            "publishToGroup": "ಗುಂಪಿಗೆ ಪ್ರಕಟಿಸಿ"
+            "publishToGroup": "ಗುಂಪಿಗೆ ಪ್ರಕಟಿಸಿ",
+            "turnOffAudioInput": "ಮೈಕ್ರೊಫೋನ್ ಅನ್ನು ಮ್ಯೂಟ್ ಮಾಡಿ",
+            "micIsTurnedOff": "ಮೈಕ್ರೊಫೋನ್ ಆಫ್ ಮಾಡಲಾಗಿದೆ",
+            "start": "ಆರಂಭ",
+            "stop": "ನಿಲ್ಲಿಸು",
+            "streamingSettings": "ಸಂಯೋಜನೆಗಳು",
+            "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ",
+            "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         },
         "participantsPopup": {
             "disconnect": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ",
@@ -221,12 +240,32 @@
             "turnOnCamera": "ವೀಡಿಯೊ ತೋರಿಸಿ",
             "turnOnAudio": "ಆಡಿಯೊವನ್ನು ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ",
             "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ",
-            "fullScreen": "ಪೂರ್ಣ ಪರದೆ"
+            "fullScreen": "ಪೂರ್ಣ ಪರದೆ",
+            "dialogTitle": "ಭಾಗವಹಿಸುವವರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         },
         "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "streamTitle": "{{1}} ಲೈವ್ ಕರೆ",
         "preview": {
-            "preamble": "ಸಭೆಯಲ್ಲಿ:"
+            "preamble": "ಸಭೆಯಲ್ಲಿ:",
+            "Meeting": "ಸಭೆಯಲ್ಲಿ",
+            "MeetingEnded": "ಸಭೆ ಮುಗಿಯಿತು"
+        },
+        "preparing": {
+            "micIsOff": "ಮೈಕ್ ಆಫ್ ಆಗಿದೆ",
+            "micIsOn": "ಮೈಕ್ ಆನ್ ಆಗಿದೆ",
+            "cameraIsOff": "ಕ್ಯಾಮೆರಾ ಆಫ್ ಆಗಿದೆ",
+            "cameraIsOn": "ಕ್ಯಾಮರಾ ಆನ್ ಆಗಿದೆ",
+            "screenSharingIsOn": "ಪರದೆ ಹಂಚಿಕೆ ಆನ್ ಆಗಿದೆ",
+            "screenSharingIsOff": "ಪರದೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
+            "joinNow": "ಕರೆಗೆ ಸೇರಿಕೊಳ್ಳಿ"
+        },
+        "audioSettings": {
+            "dialogTitle": "ಆಡಿಯೋ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+            "speakers": "ಸ್ಪೀಕರ್ಗಳು",
+            "microphone": "ಮೈಕ್ರೊಫೋನ್"
+        },
+        "streamingSettings": {
+            "title": "ಸ್ಟ್ರೀಮಿಂಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "ಉತ್ತರ",
             "description": "ಉತ್ತರ ಸ್ಟ್ರೀಮ್"
+        },
+        "Streams/calls": {
+            "displayType": "ಕರೆಗಳು",
+            "description": "ಸ್ಟ್ರೀಮ್‌ಗಳು/webrtc ಗಾಗಿ ವರ್ಗ",
+            "MaxRelationsExceeded": "ಗರಿಷ್ಠ ಕರೆಗಳನ್ನು ಮೀರಿದೆ"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
         "errorNoSource": "ಚಿತ್ರದ ಮೂಲವಿಲ್ಲ",
         "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
-        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is"
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{999} is",
+        "uploadedImage": "ಅಪ್‌ಲೋಡ್ ಮಾಡಿದ ಚಿತ್ರ",
+        "imageTitle": "ಚಿತ್ರದ ಶೀರ್ಷಿಕೆ"
     },
     "questions": {
         "Questions": "ಪ್ರಶ್ನೆಗಳು",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "ಈಗಾಗಲೇ ಉತ್ತರಿಸಲಾಗಿದೆ",
         "TitlePlaceholder": "ನಿಮ್ಮ ಪ್ರಶ್ನೆಯನ್ನು ಟೈಪ್ ಮಾಡಿ",
         "ContentPlaceholder": "ಜನರಿಗೆ ಉತ್ತರಿಸಲು ಸಹಾಯ ಮಾಡಲು ಯಾವುದೇ ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿಯನ್ನು ಇಲ್ಲಿ ಇರಿಸಿ",
-        "ErrorTitle": "ಪ್ರಶ್ನೆ ಅಗತ್ಯವಿದೆ"
+        "ErrorTitle": "ಪ್ರಶ್ನೆ ಅಗತ್ಯವಿದೆ",
+        "Placeholder": "ಪ್ಲೇಸ್‌ಹೋಲ್ಡರ್"
     },
     "experience": {
-        "NewExperience": "ಹೊಸ ಅನುಭವ"
+        "NewExperience": "ಹೊಸ ಅನುಭವ",
+        "DefineTitle": "ದಯವಿಟ್ಟು ಶೀರ್ಷಿಕೆಯನ್ನು ವಿವರಿಸಿ",
+        "Create": "ರಚಿಸಿ"
+    },
+    "calls": {
+        "SettingsTitle": "ಕರೆಗಳು",
+        "MaxCalls": "ಗರಿಷ್ಠ ಕರೆಗಳು",
+        "Update": "ನವೀಕರಿಸಿ",
+        "NoCallsYet": "ಇನ್ನೂ ಕರೆಗಳಿಲ್ಲ",
+        "CallReasonTitle": "ಈ ಕರೆ ಯಾವುದರ ಬಗ್ಗೆ?",
+        "WaitingRoom": "ನಿರೀಕ್ಷಣಾ ಕೋಣೆ"
     }
 }

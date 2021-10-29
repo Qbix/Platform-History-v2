@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Ausgewählte Kontakte einladen",
             "scannedQR": "{{ClickOrTap}} wenn der Code gescannt wurde",
             "copyLink": "{{ClickOrTap}}, um den Einladungslink zu kopieren",
-            "userChooserPlaceholder": "Suche mit Name"
+            "userChooserPlaceholder": "Suche mit Name",
+            "shareOrCopyLink": "{{ClickOrTap}}, um den Einladungslink zu teilen oder zu kopieren"
         },
         "email": {
             "subject": "Hey, schau dir das mal an",
@@ -222,7 +223,8 @@
             "start": "Start",
             "stop": "Halt",
             "streamingSettings": "Einstellungen",
-            "streamToRTMP": "In benutzerdefinierten RTMP streamen"
+            "streamToRTMP": "In benutzerdefinierten RTMP streamen",
+            "dialogTitle": "Video-Einstellungen"
         },
         "participantsPopup": {
             "disconnect": "Trennen",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Video anzeigen",
             "turnOnAudio": "Audio stummschalten",
             "turnOnScreenSharing": "Bildschirmfreigabe anzeigen",
-            "fullScreen": "Vollbildschirm"
+            "fullScreen": "Vollbildschirm",
+            "dialogTitle": "Teilnehmereinstellungen"
         },
         "notAllowedToJoinCall": "Sie haben keine Berechtigung, diesem Stream beizutreten.",
         "streamTitle": "{{1}} Live-Anruf",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Bildschirmfreigabe ist aktiviert",
             "screenSharingIsOff": "Bildschirm teilen",
             "joinNow": "Schließen Sie sich dem Anruf an"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Einstellungen",
+            "speakers": "Lautsprecher",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Streaming-Einstellungen"
         }
     },
     "types": {

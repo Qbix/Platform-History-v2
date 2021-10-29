@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Fto kontaktet e zgjedhura",
             "scannedQR": "99 99 999}} nëse kodi ishte skanuar",
             "copyLink": "99 99 999}} për të kopjuar lidhjen e ftesës",
-            "userChooserPlaceholder": "Kërko sipas emrit"
+            "userChooserPlaceholder": "Kërko sipas emrit",
+            "shareOrCopyLink": "{{ClickOrTap}} për të ndarë ose kopjuar lidhjen e ftesës"
         },
         "email": {
             "subject": "Hej, shiko këtë",
@@ -222,7 +223,8 @@
             "start": "Fillo",
             "stop": "Ndalo",
             "streamingSettings": "Cilësimet",
-            "streamToRTMP": "Transmetoni në RTMP të personalizuar"
+            "streamToRTMP": "Transmetoni në RTMP të personalizuar",
+            "dialogTitle": "Cilësimet e videos"
         },
         "participantsPopup": {
             "disconnect": "shqit",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Shfaq videon",
             "turnOnAudio": "Une audio",
             "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
-            "fullScreen": "Ekran i plotë"
+            "fullScreen": "Ekran i plotë",
+            "dialogTitle": "Cilësimet e pjesëmarrësve"
         },
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
         "streamTitle": "999 thirrje live",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ndarja e ekranit është aktiv",
             "screenSharingIsOff": "Ndani ekranin",
             "joinNow": "Bashkohuni me Thirrjen"
+        },
+        "audioSettings": {
+            "dialogTitle": "Cilësimet e audios",
+            "speakers": "Folësit",
+            "microphone": "Mikrofoni"
+        },
+        "streamingSettings": {
+            "title": "Cilësimet e transmetimit"
         }
     },
     "types": {

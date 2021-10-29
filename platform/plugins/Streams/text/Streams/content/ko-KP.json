@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "내가 초대 한 사람들",
-        "Streams/invitedMe": "누가 나를 초대 했어?"
+        "Streams/invitedMe": "누가 나를 초대 했어?",
+        "AreYouAgree": "동의하다?",
+        "Yes": "예",
+        "No": "아니요"
     },
     "interests": {
         "Filter": "당신은 무엇을 즐기시나요?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "연락처에서 다시 선택",
             "inviteSelectedContacts": "선택한 연락처 초대",
             "scannedQR": "코드가 스캔 된 경우 {{ClickOrTap}}",
-            "copyLink": "초대 링크를 복사하는 {{ClickOrTap}}"
+            "copyLink": "초대 링크를 복사하는 {{ClickOrTap}}",
+            "userChooserPlaceholder": "이름으로 검색",
+            "shareOrCopyLink": "{{ClickOrTap}} 초대 링크 공유 또는 복사"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "참가자는 비디오가 없습니다",
             "openInBrowserAlert": "Safari 브라우저에서 링크를 열어 회의에 참여하십시오.",
             "youBeganVideoRecording": "이 회의를 녹음하기 시작했습니다",
-            "youStoppedVideoRecording": "이 회의 녹음을 중단했습니다"
+            "youStoppedVideoRecording": "이 회의 녹음을 중단했습니다",
+            "switchingRoom": "탈의실...",
+            "forceDisconnecting": "5초 이내에 연결이 끊어집니다.",
+            "youStartedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하기 시작했습니다.",
+            "youStoppedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하는 것을 중지했습니다.",
+            "sbStartedLiveStreaming": "{{userName}} 라이브 시작",
+            "sbStoppedLiveStreaming": "{{userName}} 라이브 종료",
+            "liveStopped": "엔드포인트로 비디오를 보내는 동안 오류가 발생했습니다."
         },
         "settingsPopup": {
             "webCamera": "웹 카메라",
@@ -205,7 +217,14 @@
             "stopRecording": "녹화 중지",
             "recordingInProgress": "녹음이 진행 중입니다 ...",
             "publishOnTimeline": "타임 라인에 게시",
-            "publishToGroup": "그룹에 게시"
+            "publishToGroup": "그룹에 게시",
+            "turnOffAudioInput": "마이크 음소거",
+            "micIsTurnedOff": "마이크가 꺼져 있습니다",
+            "start": "시작",
+            "stop": "중지",
+            "streamingSettings": "설정",
+            "streamToRTMP": "사용자 지정 RTMP로 스트리밍",
+            "dialogTitle": "비디오 설정"
         },
         "participantsPopup": {
             "disconnect": "분리",
@@ -221,12 +240,32 @@
             "turnOnCamera": "비디오 표시",
             "turnOnAudio": "음소거 해제",
             "turnOnScreenSharing": "화면 공유 표시",
-            "fullScreen": "전체 화면"
+            "fullScreen": "전체 화면",
+            "dialogTitle": "참가자 설정"
         },
         "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
         "streamTitle": "{{1}} 실시간 통화",
         "preview": {
-            "preamble": "모임:"
+            "preamble": "모임:",
+            "Meeting": "회의",
+            "MeetingEnded": "회의 종료"
+        },
+        "preparing": {
+            "micIsOff": "마이크가 꺼져 있습니다",
+            "micIsOn": "마이크가 켜져 있습니다",
+            "cameraIsOff": "카메라가 꺼져 있습니다",
+            "cameraIsOn": "카메라가 켜져 있습니다.",
+            "screenSharingIsOn": "화면 공유 사용 중",
+            "screenSharingIsOff": "화면 공유",
+            "joinNow": "통화 참여"
+        },
+        "audioSettings": {
+            "dialogTitle": "오디오 설정",
+            "speakers": "스피커",
+            "microphone": "마이크로폰"
+        },
+        "streamingSettings": {
+            "title": "스트리밍 설정"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "대답",
             "description": "응답 스트림"
+        },
+        "Streams/calls": {
+            "displayType": "통화",
+            "description": "스트림/webrtc에 대한 범주",
+            "MaxRelationsExceeded": "최대 통화 초과"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "유효하지 않은 파일",
         "errorNoSource": "이미지 소스 없음",
         "uploadLimit": "최대 파일 크기 : {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}}입니다.",
+        "uploadedImage": "업로드된 이미지",
+        "imageTitle": "이미지 제목"
     },
     "questions": {
         "Questions": "질문",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "이미 답변 함",
         "TitlePlaceholder": "질문 입력",
         "ContentPlaceholder": "사람들이 답변 할 수 있도록 여기에 추가 정보를 입력하세요.",
-        "ErrorTitle": "질문 필요"
+        "ErrorTitle": "질문 필요",
+        "Placeholder": "자리 표시자"
     },
     "experience": {
-        "NewExperience": "새로운 경험"
+        "NewExperience": "새로운 경험",
+        "DefineTitle": "제목을 정의하십시오",
+        "Create": "창조하다"
+    },
+    "calls": {
+        "SettingsTitle": "통화",
+        "MaxCalls": "최대 통화",
+        "Update": "업데이트",
+        "NoCallsYet": "아직 통화 없음",
+        "CallReasonTitle": "이 전화는 무엇에 대한 것입니까?",
+        "WaitingRoom": "대기실"
     }
 }

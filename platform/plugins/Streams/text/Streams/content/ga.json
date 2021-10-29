@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe",
             "scannedQR": "{{ClickOrTap}} má scanadh an cód",
             "copyLink": "{{ClickOrTap}} chun nasc cuireadh a chóipeáil",
-            "userChooserPlaceholder": "Cuardaigh de réir ainm"
+            "userChooserPlaceholder": "Cuardaigh de réir ainm",
+            "shareOrCopyLink": "{{ClickOrTap}} chun nasc cuireadh a roinnt nó a chóipeáil"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
@@ -222,7 +223,8 @@
             "start": "Tosaigh",
             "stop": "Stop",
             "streamingSettings": "Socruithe",
-            "streamToRTMP": "Sruth go RTMP saincheaptha"
+            "streamToRTMP": "Sruth go RTMP saincheaptha",
+            "dialogTitle": "Socruithe Físe"
         },
         "participantsPopup": {
             "disconnect": "Dícheangail",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Taispeáin físeán",
             "turnOnAudio": "Fuaim unmute",
             "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin",
-            "fullScreen": "Scáileán iomlán"
+            "fullScreen": "Scáileán iomlán",
+            "dialogTitle": "Socruithe Rannpháirtithe"
         },
         "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
         "streamTitle": "{{1}} glao beo",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Tá scagthástáil ar",
             "screenSharingIsOff": "Scáileán roinnte",
             "joinNow": "Bí ar an nGlao"
+        },
+        "audioSettings": {
+            "dialogTitle": "Socruithe Fuaime",
+            "speakers": "Cainteoirí",
+            "microphone": "Micreafón"
+        },
+        "streamingSettings": {
+            "title": "Socruithe Sruthlaithe"
         }
     },
     "types": {

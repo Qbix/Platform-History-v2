@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Davet ettiğim insanlar",
-        "Streams/invitedMe": "Beni kim davet etti"
+        "Streams/invitedMe": "Beni kim davet etti",
+        "AreYouAgree": "katılıyor musun?",
+        "Yes": "Evet",
+        "No": "Numara"
     },
     "interests": {
         "Filter": "Ne yapmaktan hoşlanırsın?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Kişilerden Tekrar Seçin",
             "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
             "scannedQR": "Kod tarandıysa {{ClickOrTap}}",
-            "copyLink": "Davet bağlantısını kopyalamak için {{ClickOrTap}}"
+            "copyLink": "Davet bağlantısını kopyalamak için {{ClickOrTap}}",
+            "userChooserPlaceholder": "Ada göre ara",
+            "shareOrCopyLink": "{{ClickOrTap}} davet bağlantısını paylaşmak veya kopyalamak için"
         },
         "email": {
             "subject": "Hey, şuna bir bak",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Katılımcının videosu yok",
             "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın.",
             "youBeganVideoRecording": "Bu konferansı kaydetmeye başladınız",
-            "youStoppedVideoRecording": "Bu konferansı kaydetmeyi durdurdunuz"
+            "youStoppedVideoRecording": "Bu konferansı kaydetmeyi durdurdunuz",
+            "switchingRoom": "Anahtarlama odası...",
+            "forceDisconnecting": "5 saniye içinde bağlantınız kesilecek",
+            "youStartedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamaya başladınız",
+            "youStoppedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamayı durdurdunuz",
+            "sbStartedLiveStreaming": "{{userName}} canlı yayına başladı",
+            "sbStoppedLiveStreaming": "{{userName}} canlı olarak sona erdi",
+            "liveStopped": "Videoyu uç noktaya gönderirken hata oluştu"
         },
         "settingsPopup": {
             "webCamera": "İnternet kamerası",
@@ -205,7 +217,14 @@
             "stopRecording": "Kaydetmeyi bırak",
             "recordingInProgress": "Kayıt devam ediyor ...",
             "publishOnTimeline": "Zaman çizelgesinde yayınla",
-            "publishToGroup": "Gruba yayınla"
+            "publishToGroup": "Gruba yayınla",
+            "turnOffAudioInput": "mikrofonu sessize al",
+            "micIsTurnedOff": "Mikrofon kapalı",
+            "start": "Başlangıç",
+            "stop": "Durmak",
+            "streamingSettings": "Ayarlar",
+            "streamToRTMP": "Özel RTMP&#39;ye akış",
+            "dialogTitle": "Video ayarları"
         },
         "participantsPopup": {
             "disconnect": "kesmek",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Videoyu göster",
             "turnOnAudio": "Sesi aç",
             "turnOnScreenSharing": "Ekran paylaşımını göster",
-            "fullScreen": "Tam ekran"
+            "fullScreen": "Tam ekran",
+            "dialogTitle": "Katılımcı Ayarları"
         },
         "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
         "streamTitle": "{{1}} canlı çağrı",
         "preview": {
-            "preamble": "Toplantı:"
+            "preamble": "Toplantı:",
+            "Meeting": "Toplantı",
+            "MeetingEnded": "Toplantı sona erdi"
+        },
+        "preparing": {
+            "micIsOff": "mikrofon kapalı",
+            "micIsOn": "mikrofon açık",
+            "cameraIsOff": "kamera kapalı",
+            "cameraIsOn": "kamera açık",
+            "screenSharingIsOn": "Ekran paylaşımı açık",
+            "screenSharingIsOff": "Ekran paylaşımı",
+            "joinNow": "Çağrıya Katılın"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ses ayarları",
+            "speakers": "Hoparlörler",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Akış Ayarları"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Cevap",
             "description": "yanıt akışı"
+        },
+        "Streams/calls": {
+            "displayType": "aramalar",
+            "description": "Akışlar/webrtc kategorisi",
+            "MaxRelationsExceeded": "Maksimum arama aşıldı"
         }
     },
     "messages": {
@@ -449,7 +493,9 @@
         "invalidFile": "Geçersiz dosya",
         "errorNoSource": "Görüntü kaynağı yok",
         "uploadLimit": "Maksimum dosya boyutu: {{size}}",
-        "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}"
+        "errorFileSize": "Üzgünüm ama dosya çok büyük.<br> Maksimum dosya boyutu {{size}}",
+        "uploadedImage": "yüklenen resim",
+        "imageTitle": "Resim başlığı"
     },
     "questions": {
         "Questions": "Sorular",
@@ -470,9 +516,20 @@
         "AlreadyAnswered": "Zaten cevaplandı",
         "TitlePlaceholder": "Sorunuzu yazın",
         "ContentPlaceholder": "İnsanların yanıt vermesine yardımcı olmak için ek bilgileri buraya koyun",
-        "ErrorTitle": "Soru gerekli"
+        "ErrorTitle": "Soru gerekli",
+        "Placeholder": "Yer tutucu"
     },
     "experience": {
-        "NewExperience": "Yeni deneyim"
+        "NewExperience": "Yeni deneyim",
+        "DefineTitle": "Lütfen bir başlık tanımlayın",
+        "Create": "Oluşturmak"
+    },
+    "calls": {
+        "SettingsTitle": "aramalar",
+        "MaxCalls": "Maksimum arama",
+        "Update": "Güncelleme",
+        "NoCallsYet": "Henüz arama yok",
+        "CallReasonTitle": "Bu çağrı ne hakkında?",
+        "WaitingRoom": "Bekleme odası"
     }
 }

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Запрасіце выбраныя кантакты",
             "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны",
             "copyLink": "{{ClickOrTap}} скапіяваць запрашальную спасылку",
-            "userChooserPlaceholder": "Пошук па назве"
+            "userChooserPlaceholder": "Пошук па назве",
+            "shareOrCopyLink": "{{ClickOrTap}}, каб падзяліцца або скапіяваць спасылку на запрашэнне"
         },
         "email": {
             "subject": "Эй, праверыць гэта",
@@ -222,7 +223,8 @@
             "start": "Пачаць",
             "stop": "Стоп",
             "streamingSettings": "Налады",
-            "streamToRTMP": "Паток у карыстацкі RTMP"
+            "streamToRTMP": "Паток у карыстацкі RTMP",
+            "dialogTitle": "Налады відэа"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Паказаць відэа",
             "turnOnAudio": "Уключыць гук для гуку",
             "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана",
-            "fullScreen": "Поуны экран"
+            "fullScreen": "Поуны экран",
+            "dialogTitle": "Налады ўдзельнікаў"
         },
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
         "streamTitle": "{{1}} Жывы званок",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Скрынінг уключаны",
             "screenSharingIsOff": "Абагуліць экран",
             "joinNow": "Далучайцеся да выкліку"
+        },
+        "audioSettings": {
+            "dialogTitle": "Налады аўдыё",
+            "speakers": "Выступоўцы",
+            "microphone": "Мікрафон"
+        },
+        "streamingSettings": {
+            "title": "Налады плыні"
         }
     },
     "types": {

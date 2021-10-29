@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Convida a contactes seleccionats",
             "scannedQR": "{{ClickOrTap}} si es va escanejar el codi",
             "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç de la invitació",
-            "userChooserPlaceholder": "Cerca per nom"
+            "userChooserPlaceholder": "Cerca per nom",
+            "shareOrCopyLink": "{{ClickOrTap}} per compartir o copiar l&#39;enllaç d&#39;invitació"
         },
         "email": {
             "subject": "Hola, comprova-ho",
@@ -222,7 +223,8 @@
             "start": "Començar",
             "stop": "Atura",
             "streamingSettings": "Configuració",
-            "streamToRTMP": "Transmet a RTMP personalitzat"
+            "streamToRTMP": "Transmet a RTMP personalitzat",
+            "dialogTitle": "Configuració de vídeo"
         },
         "participantsPopup": {
             "disconnect": "Desconnecta",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Mostra vídeo",
             "turnOnAudio": "No activa el so",
             "turnOnScreenSharing": "Mostra compartició de pantalla",
-            "fullScreen": "Pantalla completa"
+            "fullScreen": "Pantalla completa",
+            "dialogTitle": "Configuració dels participants"
         },
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
         "streamTitle": "{{1}} trucada en directe",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "La pantalla compartida està activada",
             "screenSharingIsOff": "Compartir pantalla",
             "joinNow": "Uniu-vos a la trucada"
+        },
+        "audioSettings": {
+            "dialogTitle": "Configuració d&#39;àudio",
+            "speakers": "Altaveus",
+            "microphone": "Micròfon"
+        },
+        "streamingSettings": {
+            "title": "Configuració de transmissió"
         }
     },
     "types": {

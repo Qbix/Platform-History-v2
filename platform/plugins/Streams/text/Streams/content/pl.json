@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Zaproś wybrane kontakty",
             "scannedQR": "{{ClickOrTap}} jeśli kod został zeskanowany",
             "copyLink": "{{ClickOrTap}}, aby skopiować link do zaproszenia",
-            "userChooserPlaceholder": "Szukaj według nazwy"
+            "userChooserPlaceholder": "Szukaj według nazwy",
+            "shareOrCopyLink": "{{ClickOrTap}}, aby udostępnić lub skopiować link z zaproszeniem"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -222,7 +223,8 @@
             "start": "Początek",
             "stop": "Zatrzymać",
             "streamingSettings": "Ustawienia",
-            "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP"
+            "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP",
+            "dialogTitle": "Ustawienia wideo"
         },
         "participantsPopup": {
             "disconnect": "Rozłączyć się",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Pokaż wideo",
             "turnOnAudio": "Wyłącz wyciszenie dźwięku",
             "turnOnScreenSharing": "Pokaż udostępnianie ekranu",
-            "fullScreen": "Pełny ekran"
+            "fullScreen": "Pełny ekran",
+            "dialogTitle": "Ustawienia uczestnika"
         },
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
         "streamTitle": "{{1}} połączenie na żywo",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Udostępnianie ekranu jest włączone",
             "screenSharingIsOff": "Udostępnij ekran",
             "joinNow": "Dołącz do rozmowy"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ustawienia dźwięku",
+            "speakers": "Głośniki",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Ustawienia przesyłania strumieniowego"
         }
     },
     "types": {

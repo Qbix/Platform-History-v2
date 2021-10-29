@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "নির্বাচিত পরিচিতি আমন্ত্রণ জানান",
             "scannedQR": "কোডটি স্ক্যান করা থাকলে {9 999}।",
             "copyLink": "আমন্ত্রণ লিঙ্কটি অনুলিপি করতে {9 999}।",
-            "userChooserPlaceholder": "নাম দ্বারা অনুসন্ধান"
+            "userChooserPlaceholder": "নাম দ্বারা অনুসন্ধান",
+            "shareOrCopyLink": "আমন্ত্রণ লিঙ্ক শেয়ার বা কপি করতে {{ClickOrTap}}"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",
@@ -222,7 +223,8 @@
             "start": "শুরু করুন",
             "stop": "থামুন",
             "streamingSettings": "সেটিংস",
-            "streamToRTMP": "কাস্টম RTMP এ স্ট্রিম করুন"
+            "streamToRTMP": "কাস্টম RTMP এ স্ট্রিম করুন",
+            "dialogTitle": "ভিডিও সেটিংস"
         },
         "participantsPopup": {
             "disconnect": "বিযুক্ত করা",
@@ -238,7 +240,8 @@
             "turnOnCamera": "ভিডিও দেখান",
             "turnOnAudio": "অডিও নিঃশব্দ করুন",
             "turnOnScreenSharing": "স্ক্রিন ভাগ করে নেওয়া দেখান",
-            "fullScreen": "পূর্ণ পর্দা"
+            "fullScreen": "পূর্ণ পর্দা",
+            "dialogTitle": "অংশগ্রহণকারী সেটিংস"
         },
         "notAllowedToJoinCall": "আপনার কাছে এই স্ট্রিমে যোগদানের অনুমতি নেই।",
         "streamTitle": "} 9 999}} লাইভ কল",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "স্ক্রিন শেয়ারিং চালু আছে",
             "screenSharingIsOff": "ভাগ পর্দা",
             "joinNow": "কলে যোগ দিন"
+        },
+        "audioSettings": {
+            "dialogTitle": "অডিও সেটিংস",
+            "speakers": "বক্তারা",
+            "microphone": "মাইক্রোফোন"
+        },
+        "streamingSettings": {
+            "title": "স্ট্রিমিং সেটিংস"
         }
     },
     "types": {

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "მოიწვიე შერჩეული კონტაქტები",
             "scannedQR": "99 99 999}} თუ კოდი დასკანერებული იყო",
             "copyLink": "Invite 999}} მოწვევის ბმულის ასლის ასათვისებლად",
-            "userChooserPlaceholder": "ძიება სახელის მიხედვით"
+            "userChooserPlaceholder": "ძიება სახელის მიხედვით",
+            "shareOrCopyLink": "{{ClickOrTap}} მოწვევის ბმულის გასაზიარებლად ან დასაკოპირებლად"
         },
         "email": {
             "subject": "ჰეი, შეამოწმეთ ეს",
@@ -222,7 +223,8 @@
             "start": "დაწყება",
             "stop": "გაჩერდი",
             "streamingSettings": "პარამეტრები",
-            "streamToRTMP": "ნაკადი მორგებულ RTMP– ზე"
+            "streamToRTMP": "ნაკადი მორგებულ RTMP– ზე",
+            "dialogTitle": "ვიდეოს პარამეტრები"
         },
         "participantsPopup": {
             "disconnect": "გათიშვა",
@@ -238,7 +240,8 @@
             "turnOnCamera": "აჩვენეთ ვიდეო",
             "turnOnAudio": "აუდიოს გაუქმება",
             "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება",
-            "fullScreen": "Სრულ ეკრანზე"
+            "fullScreen": "Სრულ ეკრანზე",
+            "dialogTitle": "მონაწილის პარამეტრები"
         },
         "notAllowedToJoinCall": "თქვენ არ გაქვთ ამ ნაკადში შესვლის ნებართვა.",
         "streamTitle": "99 999}} ცოცხალი ზარი",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "ეკრანის გაზიარება ჩართულია",
             "screenSharingIsOff": "ეკრანის გაზიარება",
             "joinNow": "შეუერთდით ზარს"
+        },
+        "audioSettings": {
+            "dialogTitle": "აუდიო პარამეტრები",
+            "speakers": "სპიკერები",
+            "microphone": "მიკროფონი"
+        },
+        "streamingSettings": {
+            "title": "სტრიმინგის პარამეტრები"
         }
     },
     "types": {

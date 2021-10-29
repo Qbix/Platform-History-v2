@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Lidé, které jsem pozval",
-        "Streams/invitedMe": "Kdo mě pozval"
+        "Streams/invitedMe": "Kdo mě pozval",
+        "AreYouAgree": "Souhlasíš?",
+        "Yes": "Ano",
+        "No": "Ne"
     },
     "interests": {
         "Filter": "Co vás baví?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Znovu vyberte možnost Kontakty",
             "inviteSelectedContacts": "Pozvěte vybrané kontakty",
             "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
-            "copyLink": "{{ClickOrTap}} zkopírujte odkaz na pozvání"
+            "copyLink": "{{ClickOrTap}} zkopírujte odkaz na pozvání",
+            "userChooserPlaceholder": "Hledat podle jména",
+            "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou"
         },
         "email": {
             "subject": "Hej, podívejte se na to",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Účastník nemá žádné video",
             "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci.",
             "youBeganVideoRecording": "Začali jste nahrávat tuto konferenci",
-            "youStoppedVideoRecording": "Zastavili jste nahrávání této konference"
+            "youStoppedVideoRecording": "Zastavili jste nahrávání této konference",
+            "switchingRoom": "Šatna ...",
+            "forceDisconnecting": "Budete odpojeni do 5 sekund",
+            "youStartedLive": "Toto volání jste začali vysílat na vlastní RTMP",
+            "youStoppedLive": "Přestali jste vysílat tento hovor na vlastní RTMP",
+            "sbStartedLiveStreaming": "{{userName}} zahájeno živě",
+            "sbStoppedLiveStreaming": "{{userName}} skončil živě",
+            "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Zastavte nahrávání",
             "recordingInProgress": "Probíhá nahrávání ...",
             "publishOnTimeline": "Publikovat na časové ose",
-            "publishToGroup": "Publikovat do skupiny"
+            "publishToGroup": "Publikovat do skupiny",
+            "turnOffAudioInput": "Ztlumit mikrofon",
+            "micIsTurnedOff": "Mikrofon je vypnutý",
+            "start": "Start",
+            "stop": "Stop",
+            "streamingSettings": "Nastavení",
+            "streamToRTMP": "Streamujte na vlastní RTMP",
+            "dialogTitle": "Nastavení videa"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Zobrazit video",
             "turnOnAudio": "Ztlumit zvuk",
             "turnOnScreenSharing": "Zobrazit sdílení obrazovky",
-            "fullScreen": "Celá obrazovka"
+            "fullScreen": "Celá obrazovka",
+            "dialogTitle": "Nastavení účastníka"
         },
         "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto proudu.",
         "streamTitle": "{{1}} živý hovor",
         "preview": {
-            "preamble": "Setkání:"
+            "preamble": "Setkání:",
+            "Meeting": "Setkání",
+            "MeetingEnded": "Setkání skončilo"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon je vypnutý",
+            "micIsOn": "Mikrofon je zapnutý",
+            "cameraIsOff": "Fotoaparát je vypnutý",
+            "cameraIsOn": "Fotoaparát je zapnutý",
+            "screenSharingIsOn": "Sdílení obrazovky je zapnuté",
+            "screenSharingIsOff": "Sdílet obrazovku",
+            "joinNow": "Připojte se k výzvě"
+        },
+        "audioSettings": {
+            "dialogTitle": "Nastavení zvuku",
+            "speakers": "Řečníci",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Nastavení streamování"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Odpovědět",
             "description": "stream odpovědí"
+        },
+        "Streams/calls": {
+            "displayType": "Hovory",
+            "description": "kategorie pro Streams/webrtc",
+            "MaxRelationsExceeded": "Byl překročen maximální počet hovorů"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Neplatný soubor",
         "errorNoSource": "Žádný zdroj obrázku",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}",
+        "uploadedImage": "Nahraný obrázek",
+        "imageTitle": "Název obrázku"
     },
     "questions": {
         "Questions": "Dotazy",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Již odpověděl",
         "TitlePlaceholder": "Napište svůj dotaz",
         "ContentPlaceholder": "Sem vložte další informace, které lidem pomohou odpovědět",
-        "ErrorTitle": "Vyžaduje se otázka"
+        "ErrorTitle": "Vyžaduje se otázka",
+        "Placeholder": "Zástupný symbol"
     },
     "experience": {
-        "NewExperience": "Nový zážitek"
+        "NewExperience": "Nový zážitek",
+        "DefineTitle": "Definujte prosím název",
+        "Create": "Vytvořit"
+    },
+    "calls": {
+        "SettingsTitle": "Hovory",
+        "MaxCalls": "Max volá",
+        "Update": "Aktualizace",
+        "NoCallsYet": "Zatím žádné hovory",
+        "CallReasonTitle": "O čem je tento hovor?",
+        "WaitingRoom": "Čekárna"
     }
 }

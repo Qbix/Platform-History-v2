@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں",
             "scannedQR": "اگر کوڈ اسکین ہوا تو. 999 {.۔",
             "copyLink": "دعوت نامہ کاپی کرنے کیلئے {999}. پر کلک کریں",
-            "userChooserPlaceholder": "نام سے تلاش کریں۔"
+            "userChooserPlaceholder": "نام سے تلاش کریں۔",
+            "shareOrCopyLink": "{{ClickOrTap}} دعوت کے لنک کو شیئر کرنے یا کاپی کرنے کے لیے"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",
@@ -222,7 +223,8 @@
             "start": "شروع کریں",
             "stop": "رک جاؤ۔",
             "streamingSettings": "ترتیبات",
-            "streamToRTMP": "اپنی مرضی کے مطابق RTMP پر سٹریم کریں۔"
+            "streamToRTMP": "اپنی مرضی کے مطابق RTMP پر سٹریم کریں۔",
+            "dialogTitle": "ویڈیو کی ترتیبات"
         },
         "participantsPopup": {
             "disconnect": "منقطع ہونا",
@@ -238,7 +240,8 @@
             "turnOnCamera": "ویڈیو دکھائیں",
             "turnOnAudio": "آڈیو خاموش کریں",
             "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں",
-            "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین",
+            "dialogTitle": "شرکاء کی ترتیبات"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
         "streamTitle": "} 9 999}} براہ راست کال",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "اسکرین شیئرنگ آن ہے۔",
             "screenSharingIsOff": "اسکرین شیئر کریں۔",
             "joinNow": "کال میں شامل ہوں۔"
+        },
+        "audioSettings": {
+            "dialogTitle": "آڈیو کی ترتیبات",
+            "speakers": "مقررین",
+            "microphone": "مائیکروفون"
+        },
+        "streamingSettings": {
+            "title": "سلسلہ بندی کی ترتیبات"
         }
     },
     "types": {

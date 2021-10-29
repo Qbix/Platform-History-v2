@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை அழைக்கவும்",
             "scannedQR": "குறியீட்டை ஸ்கேன் செய்திருந்தால் {{ClickOrTap}}",
             "copyLink": "அழைப்பு இணைப்பை நகலெடுக்க {99 999}}",
-            "userChooserPlaceholder": "பெயரால் தேடவும்"
+            "userChooserPlaceholder": "பெயரால் தேடவும்",
+            "shareOrCopyLink": "அழைப்பு இணைப்பைப் பகிர அல்லது நகலெடுக்க {{ClickOrTap}}"
         },
         "email": {
             "subject": "ஏய், இதை பாருங்கள்",
@@ -222,7 +223,8 @@
             "start": "தொடங்கு",
             "stop": "நிறுத்து",
             "streamingSettings": "அமைப்புகள்",
-            "streamToRTMP": "தனிப்பயன் RTMP க்கு ஸ்ட்ரீம் செய்யவும்"
+            "streamToRTMP": "தனிப்பயன் RTMP க்கு ஸ்ட்ரீம் செய்யவும்",
+            "dialogTitle": "வீடியோ அமைப்புகள்"
         },
         "participantsPopup": {
             "disconnect": "துண்டி",
@@ -238,7 +240,8 @@
             "turnOnCamera": "வீடியோவைக் காட்டு",
             "turnOnAudio": "ஆடியோவை முடக்கு",
             "turnOnScreenSharing": "திரை பகிர்வைக் காட்டு",
-            "fullScreen": "முழு திரை"
+            "fullScreen": "முழு திரை",
+            "dialogTitle": "பங்கேற்பாளர் அமைப்புகள்"
         },
         "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
         "streamTitle": "{{1}} நேரடி அழைப்பு",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "திரை பகிர்வு இயக்கத்தில் உள்ளது",
             "screenSharingIsOff": "திரையைப் பகிரவும்",
             "joinNow": "அழைப்பில் சேரவும்"
+        },
+        "audioSettings": {
+            "dialogTitle": "ஆடியோ அமைப்புகள்",
+            "speakers": "பேச்சாளர்கள்",
+            "microphone": "ஒலிவாங்கி"
+        },
+        "streamingSettings": {
+            "title": "ஸ்ட்ரீமிங் அமைப்புகள்"
         }
     },
     "types": {

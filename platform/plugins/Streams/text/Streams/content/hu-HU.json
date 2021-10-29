@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Emberek, akit meghívtam",
-        "Streams/invitedMe": "Ki meghívott engem"
+        "Streams/invitedMe": "Ki meghívott engem",
+        "AreYouAgree": "Elfogadod?",
+        "Yes": "Igen",
+        "No": "Nem"
     },
     "interests": {
         "Filter": "Mit élvezel?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Válasszon újra a Névjegyek közül",
             "inviteSelectedContacts": "Meghívott partnerek meghívása",
             "scannedQR": "{{ClickOrTap}}, ha a kódot beszkennelték",
-            "copyLink": "{{ClickOrTap}} a meghívó link másolásához"
+            "copyLink": "{{ClickOrTap}} a meghívó link másolásához",
+            "userChooserPlaceholder": "Keresés név szerint",
+            "shareOrCopyLink": "{{ClickOrTap}} a meghívólink megosztásához vagy másolásához"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "A résztvevőnek nincs videója",
             "openInBrowserAlert": "Nyisson meg egy linket a Safari böngészőben a konferenciához való csatlakozáshoz.",
             "youBeganVideoRecording": "Megkezdted a konferencia felvételét",
-            "youStoppedVideoRecording": "Ön abbahagyta a konferencia felvételét"
+            "youStoppedVideoRecording": "Ön abbahagyta a konferencia felvételét",
+            "switchingRoom": "Helyiségváltás ...",
+            "forceDisconnecting": "5 másodpercen belül megszakad a kapcsolat",
+            "youStartedLive": "Elkezdte sugározni ezt a hívást az egyéni RTMP -hez",
+            "youStoppedLive": "Ön leállította a hívás egyéni RTMP -re történő továbbítását",
+            "sbStartedLiveStreaming": "{{userName}} élőben indult",
+            "sbStoppedLiveStreaming": "{{userName}} élőben ért véget",
+            "liveStopped": "Hiba történt a videó végpontra küldése közben"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -205,7 +217,14 @@
             "stopRecording": "A felvétel leállítása",
             "recordingInProgress": "A felvétel folyamatban van ...",
             "publishOnTimeline": "Közzététel az idővonalon",
-            "publishToGroup": "Közzététel csoportban"
+            "publishToGroup": "Közzététel csoportban",
+            "turnOffAudioInput": "Mikrofon némítása",
+            "micIsTurnedOff": "A mikrofon ki van kapcsolva",
+            "start": "Rajt",
+            "stop": "Álljon meg",
+            "streamingSettings": "Beállítások",
+            "streamToRTMP": "Adatfolyam egyéni RTMP -re",
+            "dialogTitle": "Videó beállítások"
         },
         "participantsPopup": {
             "disconnect": "szétkapcsol",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Videó megjelenítése",
             "turnOnAudio": "A hang némítása",
             "turnOnScreenSharing": "A képernyőmegosztás megjelenítése",
-            "fullScreen": "Teljes képernyő"
+            "fullScreen": "Teljes képernyő",
+            "dialogTitle": "Résztvevő beállításai"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
         "streamTitle": "{{1}} élő hívás",
         "preview": {
-            "preamble": "Találkozó:"
+            "preamble": "Találkozó:",
+            "Meeting": "Találkozó",
+            "MeetingEnded": "Az értekezlet véget ért"
+        },
+        "preparing": {
+            "micIsOff": "A mikrofon ki van kapcsolva",
+            "micIsOn": "A mikrofon be van kapcsolva",
+            "cameraIsOff": "A kamera ki van kapcsolva",
+            "cameraIsOn": "A kamera be van kapcsolva",
+            "screenSharingIsOn": "A képernyőmegosztás be van kapcsolva",
+            "screenSharingIsOff": "Képernyő megosztása",
+            "joinNow": "Csatlakozzon a híváshoz"
+        },
+        "audioSettings": {
+            "dialogTitle": "Hangbeállítások",
+            "speakers": "Hangszórók",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Streaming beállítások"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Válasz",
             "description": "válaszfolyam"
+        },
+        "Streams/calls": {
+            "displayType": "Hívások",
+            "description": "kategória a Streams/webrtc",
+            "MaxRelationsExceeded": "A hívások maximális száma túllépve"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Érvénytelen fájl",
         "errorNoSource": "Nincs képforrás",
         "uploadLimit": "Maximális fájlméret: {{size}}",
-        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}"
+        "errorFileSize": "Sajnáljuk, de a fájl túl nagy.<br> A fájl maximális mérete {{size}}",
+        "uploadedImage": "Feltöltött kép",
+        "imageTitle": "A kép címe"
     },
     "questions": {
         "Questions": "Kérdések",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Már válaszolt",
         "TitlePlaceholder": "Írja be kérdését",
         "ContentPlaceholder": "Tegyen ide további információkat, hogy segítsen az embereknek válaszolni",
-        "ErrorTitle": "Kérdés szükséges"
+        "ErrorTitle": "Kérdés szükséges",
+        "Placeholder": "Helykitöltő"
     },
     "experience": {
-        "NewExperience": "Új tapasztalat"
+        "NewExperience": "Új tapasztalat",
+        "DefineTitle": "Kérjük, adjon meg egy címet",
+        "Create": "Teremt"
+    },
+    "calls": {
+        "SettingsTitle": "Hívások",
+        "MaxCalls": "Max hív",
+        "Update": "Frissítés",
+        "NoCallsYet": "Még nincs hívás",
+        "CallReasonTitle": "Miről szól ez a hívás?",
+        "WaitingRoom": "Várószoba"
     }
 }

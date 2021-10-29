@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Mən dəvət etdiyim insanlar",
-        "Streams/invitedMe": "Kim məni dəvət etdi"
+        "Streams/invitedMe": "Kim məni dəvət etdi",
+        "AreYouAgree": "Razısınızmı?",
+        "Yes": "Bəli",
+        "No": "Yox"
     },
     "interests": {
         "Filter": "Nə xoşunuza gəlir?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Əlaqələrdən təkrar seçin",
             "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin",
             "scannedQR": "Kodu skan edilmişsə {{ClickOrTap}}",
-            "copyLink": "Dəvət bağlantısını kopyalamaq üçün {{ClickOrTap}}"
+            "copyLink": "Dəvət bağlantısını kopyalamaq üçün {{ClickOrTap}}",
+            "userChooserPlaceholder": "Adı ilə axtarın",
+            "shareOrCopyLink": "Dəvət linkini paylaşmaq və ya kopyalamaq üçün {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "İştirakçının videosu yoxdur",
             "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın.",
             "youBeganVideoRecording": "Bu konfransı qeyd etməyə başladınız",
-            "youStoppedVideoRecording": "Bu konfransı qeyd etməyi dayandırdın"
+            "youStoppedVideoRecording": "Bu konfransı qeyd etməyi dayandırdın",
+            "switchingRoom": "Kommutasiya otağı ...",
+            "forceDisconnecting": "5 saniyə ərzində əlaqəniz kəsiləcək",
+            "youStartedLive": "Bu çağırışı xüsusi RTMP -də yayımlamağa başladınız",
+            "youStoppedLive": "Bu çağırışı xüsusi RTMP -də yayımlamağı dayandırdınız",
+            "sbStartedLiveStreaming": "{{userName}} canlı yayımda başladı",
+            "sbStoppedLiveStreaming": "{{userName}} canlı yayımda sona çatdı",
+            "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi"
         },
         "settingsPopup": {
             "webCamera": "Veb Kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Yazmağı dayandırın",
             "recordingInProgress": "Qeyd davam edir ...",
             "publishOnTimeline": "Qrafiki çap edin",
-            "publishToGroup": "Qrupa yayımla"
+            "publishToGroup": "Qrupa yayımla",
+            "turnOffAudioInput": "Mikrofonu susdurun",
+            "micIsTurnedOff": "Mikrofon söndürüldü",
+            "start": "Başlamaq",
+            "stop": "Dur",
+            "streamingSettings": "Ayarlar",
+            "streamToRTMP": "Xüsusi RTMP -yə axın",
+            "dialogTitle": "Video Parametrləri"
         },
         "participantsPopup": {
             "disconnect": "Qoşulun",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Videonu göstərin",
             "turnOnAudio": "Səsin səsini açın",
             "turnOnScreenSharing": "Ekran paylaşımını göstərin",
-            "fullScreen": "Tam ekran"
+            "fullScreen": "Tam ekran",
+            "dialogTitle": "İştirakçı Parametrləri"
         },
         "notAllowedToJoinCall": "Bu axına qoşulmaq icazəniz yoxdur.",
         "streamTitle": "{{1}} canlı zəng",
         "preview": {
-            "preamble": "İclas:"
+            "preamble": "İclas:",
+            "Meeting": "Görüş",
+            "MeetingEnded": "Görüş başa çatdı"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon söndürüldü",
+            "micIsOn": "Mikrofon aktivdir",
+            "cameraIsOff": "Kamera deaktivdir",
+            "cameraIsOn": "Kamera aktivdir",
+            "screenSharingIsOn": "Ekran paylaşımı aktivdir",
+            "screenSharingIsOff": "Ekranı paylaşın",
+            "joinNow": "Zəngə qoşulun"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Parametrlər",
+            "speakers": "Dinamiklər",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Yayım Parametrləri"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Cavab verin",
             "description": "cavab axını"
+        },
+        "Streams/calls": {
+            "displayType": "Zənglər",
+            "description": "Axınlar/webrtc üçün kateqoriya",
+            "MaxRelationsExceeded": "Maksimum zənglər keçildi"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Yanlış Fayl",
         "errorNoSource": "Şəkil mənbəyi yoxdur",
         "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
-        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}"
+        "errorFileSize": "Üzr istəyirik, amma sənəd çox böyükdür.<br> Maksimum fayl ölçüsü {{size}}",
+        "uploadedImage": "Şəkil yükləndi",
+        "imageTitle": "Şəkil adı"
     },
     "questions": {
         "Questions": "Suallar",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Artıq cavab verdi",
         "TitlePlaceholder": "Sualınızı yazın",
         "ContentPlaceholder": "İnsanları cavablandırmaq üçün əlavə məlumatları buraya qoyun",
-        "ErrorTitle": "Sual tələb olunur"
+        "ErrorTitle": "Sual tələb olunur",
+        "Placeholder": "Yer tutucu"
     },
     "experience": {
-        "NewExperience": "Yeni təcrübə"
+        "NewExperience": "Yeni təcrübə",
+        "DefineTitle": "Zəhmət olmasa bir başlıq təyin edin",
+        "Create": "Yarat"
+    },
+    "calls": {
+        "SettingsTitle": "Zənglər",
+        "MaxCalls": "Maksimum zənglər",
+        "Update": "Yeniləyin",
+        "NoCallsYet": "Hələ zəng yoxdur",
+        "CallReasonTitle": "Bu zəng nə üçündür?",
+        "WaitingRoom": "Gözləmə otağı"
     }
 }

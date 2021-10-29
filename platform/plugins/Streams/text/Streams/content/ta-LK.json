@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "நான் அழைத்த மக்கள்",
-        "Streams/invitedMe": "என்னை அழைத்தவர் யார்?"
+        "Streams/invitedMe": "என்னை அழைத்தவர் யார்?",
+        "AreYouAgree": "நீங்கள் ஒப்பு கொள்கிறீர்களா?",
+        "Yes": "ஆம்",
+        "No": "இல்லை"
     },
     "interests": {
         "Filter": "நீங்கள் என்ன அனுபவிக்கிறீர்கள்?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "தொடர்புகளிலிருந்து மீண்டும் தேர்வுசெய்க",
             "inviteSelectedContacts": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை அழைக்கவும்",
             "scannedQR": "குறியீட்டை ஸ்கேன் செய்திருந்தால் {{ClickOrTap}}",
-            "copyLink": "அழைப்பு இணைப்பை நகலெடுக்க {99 999}}"
+            "copyLink": "அழைப்பு இணைப்பை நகலெடுக்க {99 999}}",
+            "userChooserPlaceholder": "பெயரால் தேடவும்",
+            "shareOrCopyLink": "அழைப்பு இணைப்பைப் பகிர அல்லது நகலெடுக்க {{ClickOrTap}}"
         },
         "email": {
             "subject": "ஏய், இதை பாருங்கள்",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "பங்கேற்பாளருக்கு வீடியோ இல்லை",
             "openInBrowserAlert": "மாநாட்டில் சேர சஃபாரி உலாவியில் இணைப்பைத் திறக்கவும்.",
             "youBeganVideoRecording": "இந்த மாநாட்டை நீங்கள் பதிவு செய்யத் தொடங்கினீர்கள்",
-            "youStoppedVideoRecording": "இந்த மாநாட்டை பதிவு செய்வதை நிறுத்திவிட்டீர்கள்"
+            "youStoppedVideoRecording": "இந்த மாநாட்டை பதிவு செய்வதை நிறுத்திவிட்டீர்கள்",
+            "switchingRoom": "அறை மாறுதல் ...",
+            "forceDisconnecting": "நீங்கள் 5 வினாடிகளுக்குள் துண்டிக்கப்படுவீர்கள்",
+            "youStartedLive": "தனிப்பயன் RTMP க்கு இந்த அழைப்பை ஒளிபரப்பத் தொடங்கினீர்கள்",
+            "youStoppedLive": "தனிப்பயன் RTMP க்கு இந்த அழைப்பை ஒளிபரப்புவதை நிறுத்திவிட்டீர்கள்",
+            "sbStartedLiveStreaming": "{{userName}} நேரலையில் தொடங்கியது",
+            "sbStoppedLiveStreaming": "{{userName}} நேரலையில் முடிந்தது",
+            "liveStopped": "இறுதிப் புள்ளிக்கு வீடியோவை அனுப்பும்போது பிழை ஏற்பட்டது"
         },
         "settingsPopup": {
             "webCamera": "வலை கேமரா",
@@ -205,7 +217,14 @@
             "stopRecording": "பதிவு செய்வதை நிறுத்து",
             "recordingInProgress": "பதிவுசெய்தல் நடந்து கொண்டிருக்கிறது ...",
             "publishOnTimeline": "காலவரிசையில் வெளியிடவும்",
-            "publishToGroup": "குழுவிற்கு வெளியிடுக"
+            "publishToGroup": "குழுவிற்கு வெளியிடுக",
+            "turnOffAudioInput": "மைக்ரோஃபோனை முடக்கு",
+            "micIsTurnedOff": "மைக்ரோஃபோன் அணைக்கப்பட்டுள்ளது",
+            "start": "தொடங்கு",
+            "stop": "நிறுத்து",
+            "streamingSettings": "அமைப்புகள்",
+            "streamToRTMP": "தனிப்பயன் RTMP க்கு ஸ்ட்ரீம் செய்யவும்",
+            "dialogTitle": "வீடியோ அமைப்புகள்"
         },
         "participantsPopup": {
             "disconnect": "துண்டி",
@@ -221,12 +240,32 @@
             "turnOnCamera": "வீடியோவைக் காட்டு",
             "turnOnAudio": "ஆடியோவை முடக்கு",
             "turnOnScreenSharing": "திரை பகிர்வைக் காட்டு",
-            "fullScreen": "முழு திரை"
+            "fullScreen": "முழு திரை",
+            "dialogTitle": "பங்கேற்பாளர் அமைப்புகள்"
         },
         "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
         "streamTitle": "{{1}} நேரடி அழைப்பு",
         "preview": {
-            "preamble": "சந்தித்தல்:"
+            "preamble": "சந்தித்தல்:",
+            "Meeting": "சந்தித்தல்",
+            "MeetingEnded": "கூட்டம் முடிந்தது"
+        },
+        "preparing": {
+            "micIsOff": "மைக் அணைக்கப்பட்டுள்ளது",
+            "micIsOn": "மைக் இயக்கத்தில் உள்ளது",
+            "cameraIsOff": "கேமரா முடக்கப்பட்டுள்ளது",
+            "cameraIsOn": "கேமரா இயக்கத்தில் உள்ளது",
+            "screenSharingIsOn": "திரை பகிர்வு இயக்கத்தில் உள்ளது",
+            "screenSharingIsOff": "திரையைப் பகிரவும்",
+            "joinNow": "அழைப்பில் சேரவும்"
+        },
+        "audioSettings": {
+            "dialogTitle": "ஆடியோ அமைப்புகள்",
+            "speakers": "பேச்சாளர்கள்",
+            "microphone": "ஒலிவாங்கி"
+        },
+        "streamingSettings": {
+            "title": "ஸ்ட்ரீமிங் அமைப்புகள்"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "பதில்",
             "description": "பதில் ஸ்ட்ரீம்"
+        },
+        "Streams/calls": {
+            "displayType": "அழைப்புகள்",
+            "description": "ஸ்ட்ரீம்கள்/webrtc க்கான வகை",
+            "MaxRelationsExceeded": "அதிகபட்ச அழைப்புகள் அதிகமாக உள்ளன"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "தவறான கோப்பு",
         "errorNoSource": "பட ஆதாரம் இல்லை",
         "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
-        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is"
+        "errorFileSize": "மன்னிக்கவும், ஆனால் கோப்பு மிகப் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{999} is",
+        "uploadedImage": "பதிவேற்றிய படம்",
+        "imageTitle": "படத்தின் தலைப்பு"
     },
     "questions": {
         "Questions": "கேள்விகள்",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "ஏற்கனவே பதில் அளித்துள்ளார்",
         "TitlePlaceholder": "உங்கள் கேள்வியைத் தட்டச்சு செய்க",
         "ContentPlaceholder": "மக்களுக்கு பதிலளிக்க உதவும் கூடுதல் தகவல்களை இங்கே வைக்கவும்",
-        "ErrorTitle": "கேள்வி தேவை"
+        "ErrorTitle": "கேள்வி தேவை",
+        "Placeholder": "ஒதுக்கிடம்"
     },
     "experience": {
-        "NewExperience": "புதிய அனுபவம்"
+        "NewExperience": "புதிய அனுபவம்",
+        "DefineTitle": "தயவுசெய்து தலைப்பை வரையறுக்கவும்",
+        "Create": "உருவாக்கு"
+    },
+    "calls": {
+        "SettingsTitle": "அழைப்புகள்",
+        "MaxCalls": "அதிகபட்ச அழைப்புகள்",
+        "Update": "புதுப்பிக்கவும்",
+        "NoCallsYet": "இதுவரை அழைப்புகள் இல்லை",
+        "CallReasonTitle": "இந்த அழைப்பு எதைப் பற்றியது?",
+        "WaitingRoom": "காத்திருப்பு அறை"
     }
 }

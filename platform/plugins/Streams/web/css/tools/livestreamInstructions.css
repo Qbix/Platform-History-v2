@@ -1,0 +1,46 @@
+.Streams_livestream_instructions_dialogue {
+    box-shadow: -1px 5px 15px 0px #000000;
+}
+.Streams_livestream_instructions_dialogue img{
+    max-width: 100%;
+}
+.Q_mobile .Streams_livestream_instructions_dialogue img{
+    width: 100%;
+}
+
+.livestream-instructions-tool-content {
+    padding:5px;
+}
+.Q_notMobile .livestream-instructions-tool-content {
+    width:485px;
+}
+
+.Streams_livestream_instructions_dialogue .Q_expandable_tool h2{
+    padding:4px;
+    font-weight: bold;
+    border:1px solid #c3d3e3;
+}
+.Streams_livestream_instructions_dialogue .Q_expandable_tool h2.Q_pressed,
+.Streams_livestream_instructions_dialogue .Q_expandable_tool h2.Q_expanded{
+    color: black;
+}
+.Streams_livestream_instructions_dialogue #Q_expandable_yt_live-instructions h2:first-child {
+    color:#1877f2;
+}
+.Streams_livestream_instructions_dialogue #Q_expandable_fb_live-instructions_tool h2:first-child {
+    color:#1877f2;
+}
+
+.Streams_livestream_instructions-icon-con {
+    user-select: none;
+    padding:5px;
+    color:#474747;
+    border:1px solid #999999;
+    border-radius: 50%;
+    position: absolute;
+    width:30px;
+    height:30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

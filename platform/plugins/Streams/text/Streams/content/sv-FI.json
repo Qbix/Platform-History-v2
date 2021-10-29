@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Folk jag bjöd in",
-        "Streams/invitedMe": "Vem bjöd in mig"
+        "Streams/invitedMe": "Vem bjöd in mig",
+        "AreYouAgree": "Håller du med?",
+        "Yes": "Ja",
+        "No": "Nej"
     },
     "interests": {
         "Filter": "Vad tycker du om?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Välj Återigen från Kontakter",
             "inviteSelectedContacts": "Bjud in valda kontakter",
             "scannedQR": "{{ClickOrTap}} om koden skannades",
-            "copyLink": "{{ClickOrTap}} för att kopiera inbjudningslänken"
+            "copyLink": "{{ClickOrTap}} för att kopiera inbjudningslänken",
+            "userChooserPlaceholder": "Sök efter namn",
+            "shareOrCopyLink": "{{ClickOrTap}} för att dela eller kopiera inbjudningslänken"
         },
         "email": {
             "subject": "Hej, kolla här",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Deltagaren har ingen video",
             "openInBrowserAlert": "Öppna länken i Safari-webbläsaren för att delta i konferensen.",
             "youBeganVideoRecording": "Du började spela in konferensen",
-            "youStoppedVideoRecording": "Du slutade spela in den här konferensen"
+            "youStoppedVideoRecording": "Du slutade spela in den här konferensen",
+            "switchingRoom": "Omklädningsrum ...",
+            "forceDisconnecting": "Du kommer att kopplas bort inom 5 sekunder",
+            "youStartedLive": "Du började sända detta samtal till anpassad RTMP",
+            "youStoppedLive": "Du slutade sända detta samtal till anpassad RTMP",
+            "sbStartedLiveStreaming": "{{userName}} började live",
+            "sbStoppedLiveStreaming": "{{userName}} slutade live",
+            "liveStopped": "Ett fel uppstod när videon skulle skickas till slutpunkten"
         },
         "settingsPopup": {
             "webCamera": "Webbkamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Sluta inspelningen",
             "recordingInProgress": "Inspelningen pågår ...",
             "publishOnTimeline": "Publicera på tidslinjen",
-            "publishToGroup": "Publicera i grupp"
+            "publishToGroup": "Publicera i grupp",
+            "turnOffAudioInput": "Stäng av mikrofonen",
+            "micIsTurnedOff": "Mikrofonen är avstängd",
+            "start": "Start",
+            "stop": "Sluta",
+            "streamingSettings": "inställningar",
+            "streamToRTMP": "Strömma till anpassad RTMP",
+            "dialogTitle": "Videoinställningar"
         },
         "participantsPopup": {
             "disconnect": "Koppla ifrån",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Visa video",
             "turnOnAudio": "Stäng av ljudet",
             "turnOnScreenSharing": "Visa skärmdelning",
-            "fullScreen": "Fullskärm"
+            "fullScreen": "Fullskärm",
+            "dialogTitle": "Deltagarinställningar"
         },
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
         "streamTitle": "{{1}} direktuppringning",
         "preview": {
-            "preamble": "Möte:"
+            "preamble": "Möte:",
+            "Meeting": "Möte",
+            "MeetingEnded": "Mötet slut"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofonen är avstängd",
+            "micIsOn": "Mic är på",
+            "cameraIsOff": "Kameran är avstängd",
+            "cameraIsOn": "Kameran är på",
+            "screenSharingIsOn": "Skärmdelning är på",
+            "screenSharingIsOff": "Dela skärm",
+            "joinNow": "Gå med i samtalet"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ljudinställningar",
+            "speakers": "Högtalare",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Streaminginställningar"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Svar",
             "description": "svarström"
+        },
+        "Streams/calls": {
+            "displayType": "Samtal",
+            "description": "kategori för strömmar/webrtc",
+            "MaxRelationsExceeded": "Max samtal har överskridits"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Felaktig fil",
         "errorNoSource": "Ingen bildkälla",
         "uploadLimit": "Max filstorlek: {{size}}",
-        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}"
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Högsta filstorlek är {{size}}",
+        "uploadedImage": "Uppladdad bild",
+        "imageTitle": "Bildtitel"
     },
     "questions": {
         "Questions": "Frågor",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Har redan svarat",
         "TitlePlaceholder": "Skriv din fråga",
         "ContentPlaceholder": "Lägg ytterligare information här för att hjälpa människor att svara",
-        "ErrorTitle": "Fråga krävs"
+        "ErrorTitle": "Fråga krävs",
+        "Placeholder": "Platshållare"
     },
     "experience": {
-        "NewExperience": "Ny upplevelse"
+        "NewExperience": "Ny upplevelse",
+        "DefineTitle": "Ange en titel",
+        "Create": "Skapa"
+    },
+    "calls": {
+        "SettingsTitle": "Samtal",
+        "MaxCalls": "Max samtal",
+        "Update": "Uppdatering",
+        "NoCallsYet": "Inga samtal än",
+        "CallReasonTitle": "Vad handlar detta samtal om?",
+        "WaitingRoom": "Väntrum"
     }
 }

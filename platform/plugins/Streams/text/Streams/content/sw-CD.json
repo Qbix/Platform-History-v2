@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Watu niliowaalika",
-        "Streams/invitedMe": "Ni nani aliyenialika"
+        "Streams/invitedMe": "Ni nani aliyenialika",
+        "AreYouAgree": "Je! Unakubali?",
+        "Yes": "Ndio",
+        "No": "Hapana"
     },
     "interests": {
         "Filter": "Unafurahia nini?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Chagua tena kutoka kwa wasiliana",
             "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa",
             "scannedQR": "{{ClickOrTap}} ikiwa nambari hiyo ilikaguliwa",
-            "copyLink": "{{ClickOrTap}} kuiga kiunga cha mwaliko"
+            "copyLink": "{{ClickOrTap}} kuiga kiunga cha mwaliko",
+            "userChooserPlaceholder": "Tafuta kwa jina",
+            "shareOrCopyLink": "{{ClickOrTap}} ili kushiriki au kunakili kiungo cha mwaliko"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Mshiriki hana video",
             "openInBrowserAlert": "Fungua kiunga katika kivinjari cha Safari ili ujiunge na mkutano huo.",
             "youBeganVideoRecording": "Ulianza kurekodi mkutano huu",
-            "youStoppedVideoRecording": "Uliacha kurekodi mkutano huu"
+            "youStoppedVideoRecording": "Uliacha kurekodi mkutano huu",
+            "switchingRoom": "Inabadilisha chumba ...",
+            "forceDisconnecting": "Utatenganishwa ndani ya sekunde 5",
+            "youStartedLive": "Ulianza kutangaza simu hii kwa RTMP maalum",
+            "youStoppedLive": "Uliacha kutangaza simu hii kwa RTMP maalum",
+            "sbStartedLiveStreaming": "{{userName}} ilianza moja kwa moja",
+            "sbStoppedLiveStreaming": "{{userName}} iliisha moja kwa moja",
+            "liveStopped": "Hitilafu wakati wa kutuma video hadi mwisho ilitokea"
         },
         "settingsPopup": {
             "webCamera": "Kamera ya Wavuti",
@@ -205,7 +217,14 @@
             "stopRecording": "Acha Kurekodi",
             "recordingInProgress": "Kurekodi kunaendelea ...",
             "publishOnTimeline": "Chapisha kwenye ratiba ya saa",
-            "publishToGroup": "Chapisha kwa kikundi"
+            "publishToGroup": "Chapisha kwa kikundi",
+            "turnOffAudioInput": "Zima maikrofoni",
+            "micIsTurnedOff": "Maikrofoni imezimwa",
+            "start": "Anza",
+            "stop": "Acha",
+            "streamingSettings": "Mipangilio",
+            "streamToRTMP": "Tiririka kwa RTMP ya kawaida",
+            "dialogTitle": "Mipangilio ya Video"
         },
         "participantsPopup": {
             "disconnect": "Kukata",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Onyesha video",
             "turnOnAudio": "Sikiza sauti",
             "turnOnScreenSharing": "Onyesha kushiriki skrini",
-            "fullScreen": "Screen kamili"
+            "fullScreen": "Screen kamili",
+            "dialogTitle": "Mipangilio ya Mshiriki"
         },
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
         "streamTitle": "{{1}} simu ya moja kwa moja",
         "preview": {
-            "preamble": "Mkutano:"
+            "preamble": "Mkutano:",
+            "Meeting": "Mkutano",
+            "MeetingEnded": "Mkutano ulimalizika"
+        },
+        "preparing": {
+            "micIsOff": "Maikrofoni imezimwa",
+            "micIsOn": "Mic imewashwa",
+            "cameraIsOff": "Kamera imezimwa",
+            "cameraIsOn": "Kamera imewashwa",
+            "screenSharingIsOn": "Kushiriki skrini kumewashwa",
+            "screenSharingIsOff": "Shiriki skrini",
+            "joinNow": "Jiunge na Simu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Mipangilio ya Sauti",
+            "speakers": "Wazungumzaji",
+            "microphone": "Maikrofoni"
+        },
+        "streamingSettings": {
+            "title": "Mipangilio ya Kutiririsha"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Jibu",
             "description": "mkondo wa jibu"
+        },
+        "Streams/calls": {
+            "displayType": "Wito",
+            "description": "kitengo cha Mito / webrtc",
+            "MaxRelationsExceeded": "Simu nyingi zimepitishwa"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Faili batili",
         "errorNoSource": "Hakuna chanzo cha picha",
         "uploadLimit": "Ukubwa wa faili: {{size}}",
-        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}"
+        "errorFileSize": "Samahani, lakini faili ni kubwa mno.<br> Ukubwa wa faili ni {{size}}",
+        "uploadedImage": "Picha iliyopakiwa",
+        "imageTitle": "Kichwa cha picha"
     },
     "questions": {
         "Questions": "Maswali",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Tayari imejibiwa",
         "TitlePlaceholder": "Andika swali lako",
         "ContentPlaceholder": "Weka habari yoyote ya ziada hapa kusaidia watu kujibu",
-        "ErrorTitle": "Swali linahitajika"
+        "ErrorTitle": "Swali linahitajika",
+        "Placeholder": "Kishika nafasi"
     },
     "experience": {
-        "NewExperience": "Uzoefu mpya"
+        "NewExperience": "Uzoefu mpya",
+        "DefineTitle": "Tafadhali fafanua kichwa",
+        "Create": "Unda"
+    },
+    "calls": {
+        "SettingsTitle": "Wito",
+        "MaxCalls": "Max hupiga simu",
+        "Update": "Sasisha",
+        "NoCallsYet": "Hakuna simu bado",
+        "CallReasonTitle": "Je! Simu hii inahusu nini?",
+        "WaitingRoom": "Chumba cha kusubiri"
     }
 }

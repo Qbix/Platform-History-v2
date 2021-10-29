@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Invitați contactele selectate",
             "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat",
             "copyLink": "{{ClickOrTap}} pentru a copia linkul de invitație",
-            "userChooserPlaceholder": "Cauta dupa nume"
+            "userChooserPlaceholder": "Cauta dupa nume",
+            "shareOrCopyLink": "{{ClickOrTap}} pentru a partaja sau a copia linkul de invitație"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -222,7 +223,8 @@
             "start": "start",
             "stop": "Stop",
             "streamingSettings": "Setări",
-            "streamToRTMP": "Transmiteți la RTMP personalizat"
+            "streamToRTMP": "Transmiteți la RTMP personalizat",
+            "dialogTitle": "Setari video"
         },
         "participantsPopup": {
             "disconnect": "Deconectat",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Afișați videoclipuri",
             "turnOnAudio": "Anulați sunetul",
             "turnOnScreenSharing": "Afișare partajare ecran",
-            "fullScreen": "Ecran complet"
+            "fullScreen": "Ecran complet",
+            "dialogTitle": "Setări pentru participanți"
         },
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
         "streamTitle": "{{1}} apel live",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Partajarea ecranului este activată",
             "screenSharingIsOff": "Distribuie ecran",
             "joinNow": "Alăturați-vă apelului"
+        },
+        "audioSettings": {
+            "dialogTitle": "Setari audio",
+            "speakers": "Difuzoare",
+            "microphone": "Microfon"
+        },
+        "streamingSettings": {
+            "title": "Setări de streaming"
         }
     },
     "types": {

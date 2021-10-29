@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "People I invited",
-        "Streams/invitedMe": "Who invited me"
+        "Streams/invitedMe": "Who invited me",
+        "AreYouAgree": "Are you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
         "Filter": "What do you enjoy?",
@@ -41,10 +44,10 @@
         "Streams/chat/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
         "Streams/changed": "Changes in {{stream.fields.title}}",
         "Streams/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams/announcement": "Announcement in {{& streams.fields.title}}",
-        "Streams/access": "{{&call 'avatar.displayName'}} changed access in {{& streams.fields.title}}",
-        "Streams/chat/edit": "Chat message edited in {{& streams.fields.title}}",
-        "Streams/chat/remove": "Chat message removed in {{& streams.fields.title}}",
+        "Streams/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams/chat/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams/chat/remove": "Chat message removed in {{& stream.fields.title}}",
         "Streams/closed": "{{stream.fields.title}} has been closed",
         "Streams/task/progress": "Progress made on {{stream.fields.title}}",
         "Streams/task/complete": "Task completed: {{stream.fields.title}}",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Choose Again from Contacts",
             "inviteSelectedContacts": "Invite Selected Contacts",
             "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "copyLink": "{{ClickOrTap}} to copy invite link "
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "userChooserPlaceholder": "Search by name",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link "
         },
         "email": {
             "subject": "Hey, check this out",
@@ -177,7 +182,14 @@
             "userHasNoVideo": "Participant has no video",
             "openInBrowserAlert": "Open link in Safari browser to join the conference.",
             "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference"
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -186,13 +198,13 @@
             "turnOffCameras": "Turn off camera",
             "startFBLive": "Start Facebook Livestream",
             "stopFBLive": "Stop Facebook Livestream",
-            "fbLiveTitle": "Live Title",
-            "fbLiveDescription": "Live Description",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
             "fbOnlyMeLiveAccess": "Only Me",
             "fbFriendsAccess": "Friends",
             "fbPublicAccess": "Public",
             "fbStartLive": "Go Live",
-            "fbStopLive": "End Live",
+            "fbStopLive": "End Livestream",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
             "turnOffVideo": "Turn off camera/screen sharing",
@@ -202,7 +214,14 @@
             "stopRecording": "Stop Recording",
             "recordingInProgress": "Recording is in progress...",
             "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group"
+            "publishToGroup": "Publish to group",
+            "dialogTitle": "Video Settings",
+            "turnOffAudioInput": "Mute microphone",
+            "micIsTurnedOff": "Microphone is turned off",
+            "start": "Start",
+            "stop": "Stop",
+            "streamingSettings": "Settings",
+            "streamToRTMP": "Stream to custom RTMP"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -218,12 +237,32 @@
             "turnOnCamera": "Show video",
             "turnOnAudio": "Unmute audio",
             "turnOnScreenSharing": "Show screen sharing",
-            "fullScreen": "Full Screen"
+            "fullScreen": "Full Screen",
+            "dialogTitle": "Participant Settings"
         },
         "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} live call",
+        "streamTitle": "{{1}} started a live call",
         "preview": {
-            "preamble": "Meeting:"
+            "preamble": "Meeting:",
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
         }
     },
     "types": {
@@ -351,6 +390,11 @@
         "Streams/answer": {
             "displayType": "Answer",
             "description": "answer stream"
+        },
+        "Streams/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "messages": {
@@ -445,7 +489,9 @@
         "invalidFile": "Invalid File",
         "errorNoSource": "No image source",
         "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title"
     },
     "questions": {
         "Questions": "Questions",
@@ -458,7 +504,7 @@
         "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "free answer...",
+        "FreeAnswer": "Write your answer here",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
         "AddAnotherAnswer": "Add another answer",
@@ -466,9 +512,20 @@
         "AlreadyAnswered": "Already answered",
         "TitlePlaceholder": "Type your question",
         "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required"
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
+    },
+    "calls": {
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Пригласить выбранные контакты",
             "scannedQR": "{{ClickOrTap}} если код был отсканирован",
             "copyLink": "{{ClickOrTap}} скопировать ссылку приглашения",
-            "userChooserPlaceholder": "Поиск по имени"
+            "userChooserPlaceholder": "Поиск по имени",
+            "shareOrCopyLink": "{{ClickOrTap}}, чтобы поделиться или скопировать ссылку для приглашения"
         },
         "email": {
             "subject": "Эй, проверь это",
@@ -222,7 +223,8 @@
             "start": "Начинать",
             "stop": "Стоп",
             "streamingSettings": "Настройки",
-            "streamToRTMP": "Трансляция в настраиваемый RTMP"
+            "streamToRTMP": "Трансляция в настраиваемый RTMP",
+            "dialogTitle": "Настройки видео"
         },
         "participantsPopup": {
             "disconnect": "Отключить",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Показать видео",
             "turnOnAudio": "Включить звук",
             "turnOnScreenSharing": "Показать общий доступ к экрану",
-            "fullScreen": "Полноэкранный"
+            "fullScreen": "Полноэкранный",
+            "dialogTitle": "Настройки участников"
         },
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
         "streamTitle": "{{1}} живой звонок",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Показ экрана включен",
             "screenSharingIsOff": "Поделиться экраном",
             "joinNow": "Присоединяйтесь к звонку"
+        },
+        "audioSettings": {
+            "dialogTitle": "Настройки звука",
+            "speakers": "Динамики",
+            "microphone": "Микрофон"
+        },
+        "streamingSettings": {
+            "title": "Настройки потоковой передачи"
         }
     },
     "types": {

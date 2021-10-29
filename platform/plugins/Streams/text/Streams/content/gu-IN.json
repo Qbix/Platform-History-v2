@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "મેં આમંત્રિત કર્યા છે તે લોકો",
-        "Streams/invitedMe": "મને કોણ આમંત્રણ આપ્યું"
+        "Streams/invitedMe": "મને કોણ આમંત્રણ આપ્યું",
+        "AreYouAgree": "શું તમે સહમત છો?",
+        "Yes": "હા",
+        "No": "ના"
     },
     "interests": {
         "Filter": "તમે શું માણો છો?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "સંપર્કોમાંથી ફરીથી પસંદ કરો",
             "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો",
             "scannedQR": "Scan 9 999}} જો કોડ સ્કેન કરવામાં આવ્યો હતો",
-            "copyLink": "આમંત્રિત લિંકને ક copyપિ કરવા માટે {9 999}."
+            "copyLink": "આમંત્રિત લિંકને ક copyપિ કરવા માટે {9 999}.",
+            "userChooserPlaceholder": "નામ દ્વારા શોધો",
+            "shareOrCopyLink": "આમંત્રણ લિંક શેર કરવા અથવા કૉપિ કરવા માટે {{ClickOrTap}}"
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી",
             "openInBrowserAlert": "પરિષદમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો.",
             "youBeganVideoRecording": "તમે આ પરિષદ રેકોર્ડ કરવાનું શરૂ કર્યું",
-            "youStoppedVideoRecording": "તમે આ પરિષદનું રેકોર્ડિંગ બંધ કર્યું છે"
+            "youStoppedVideoRecording": "તમે આ પરિષદનું રેકોર્ડિંગ બંધ કર્યું છે",
+            "switchingRoom": "સ્વિચિંગ રૂમ ...",
+            "forceDisconnecting": "તમે 5 સેકન્ડમાં ડિસ્કનેક્ટ થઈ જશો",
+            "youStartedLive": "તમે આ ક callલને કસ્ટમ RTMP પર પ્રસારિત કરવાનું શરૂ કર્યું",
+            "youStoppedLive": "તમે આ ક callલને કસ્ટમ RTMP પર પ્રસારિત કરવાનું બંધ કર્યું",
+            "sbStartedLiveStreaming": "{{userName}} એ લાઇવ શરૂ કર્યું",
+            "sbStoppedLiveStreaming": "{{userName}} લાઇવ સમાપ્ત થયું",
+            "liveStopped": "એન્ડપોઇન્ટ પર વિડિઓ મોકલતી વખતે ભૂલ આવી"
         },
         "settingsPopup": {
             "webCamera": "વેબ ક Cameraમેરો",
@@ -205,7 +217,14 @@
             "stopRecording": "રેકોર્ડિંગ બંધ કરો",
             "recordingInProgress": "રેકોર્ડિંગ ચાલુ છે ...",
             "publishOnTimeline": "સમયરેખા પર પ્રકાશિત કરો",
-            "publishToGroup": "જૂથ પર પ્રકાશિત કરો"
+            "publishToGroup": "જૂથ પર પ્રકાશિત કરો",
+            "turnOffAudioInput": "માઇક્રોફોન મ્યૂટ કરો",
+            "micIsTurnedOff": "માઇક્રોફોન બંધ છે",
+            "start": "શરૂઆત",
+            "stop": "બંધ",
+            "streamingSettings": "સેટિંગ્સ",
+            "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો",
+            "dialogTitle": "વિડિઓ સેટિંગ્સ"
         },
         "participantsPopup": {
             "disconnect": "ડિસ્કનેક્ટ કરો",
@@ -221,12 +240,32 @@
             "turnOnCamera": "વિડિઓ બતાવો",
             "turnOnAudio": "Mડિઓ અવાજ બંધ કરો",
             "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો",
-            "fullScreen": "સંપૂર્ણ સ્ક્રીન"
+            "fullScreen": "સંપૂર્ણ સ્ક્રીન",
+            "dialogTitle": "સહભાગી સેટિંગ્સ"
         },
         "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
         "streamTitle": "} 9 999}} લાઇવ ક callલ",
         "preview": {
-            "preamble": "સભા:"
+            "preamble": "સભા:",
+            "Meeting": "સભા",
+            "MeetingEnded": "મીટિંગ સમાપ્ત થઈ"
+        },
+        "preparing": {
+            "micIsOff": "માઇક બંધ છે",
+            "micIsOn": "માઇક ચાલુ છે",
+            "cameraIsOff": "કેમેરા બંધ છે",
+            "cameraIsOn": "કેમેરા ચાલુ છે",
+            "screenSharingIsOn": "સ્ક્રીન શેરિંગ ચાલુ છે",
+            "screenSharingIsOff": "સ્ક્રીન શેર કરો",
+            "joinNow": "ક .લમાં જોડાઓ"
+        },
+        "audioSettings": {
+            "dialogTitle": "ઑડિઓ સેટિંગ્સ",
+            "speakers": "સ્પીકર્સ",
+            "microphone": "માઇક્રોફોન"
+        },
+        "streamingSettings": {
+            "title": "સ્ટ્રીમિંગ સેટિંગ્સ"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "જવાબ",
             "description": "જવાબ પ્રવાહ"
+        },
+        "Streams/calls": {
+            "displayType": "કોલ્સ",
+            "description": "પ્રવાહો/webrtc માટે શ્રેણી",
+            "MaxRelationsExceeded": "મહત્તમ ક callsલ્સ ઓળંગી ગયા"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "અમાન્ય ફાઇલ",
         "errorNoSource": "કોઈ છબી સ્રોત નથી",
         "uploadLimit": "મહત્તમ ફાઇલ કદ: {{999}",
-        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે"
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{999} is છે",
+        "uploadedImage": "અપલોડ કરેલી છબી",
+        "imageTitle": "છબી શીર્ષક"
     },
     "questions": {
         "Questions": "પ્રશ્નો",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "પહેલેથી જ જવાબ આપ્યો છે",
         "TitlePlaceholder": "તમારો પ્રશ્ન લખો",
         "ContentPlaceholder": "લોકોને જવાબ આપવા માટે સહાય માટે અહીં કોઈ વધારાની માહિતી મૂકો",
-        "ErrorTitle": "પ્રશ્ન જરૂરી છે"
+        "ErrorTitle": "પ્રશ્ન જરૂરી છે",
+        "Placeholder": "પ્લેસહોલ્ડર"
     },
     "experience": {
-        "NewExperience": "નવો અનુભવ"
+        "NewExperience": "નવો અનુભવ",
+        "DefineTitle": "કૃપા કરીને શીર્ષક વ્યાખ્યાયિત કરો",
+        "Create": "બનાવો"
+    },
+    "calls": {
+        "SettingsTitle": "કોલ્સ",
+        "MaxCalls": "મહત્તમ કોલ્સ",
+        "Update": "અપડેટ",
+        "NoCallsYet": "હજુ સુધી કોઈ કોલ નથી",
+        "CallReasonTitle": "આ કોલ શેના માટે છે?",
+        "WaitingRoom": "પ્રતિક્ષા ખંડ"
     }
 }

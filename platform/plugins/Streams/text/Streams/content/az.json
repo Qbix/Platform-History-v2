@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Seçilmiş kontaktları dəvət edin",
             "scannedQR": "Kodu skan edilmişsə {{ClickOrTap}}",
             "copyLink": "Dəvət bağlantısını kopyalamaq üçün {{ClickOrTap}}",
-            "userChooserPlaceholder": "Adı ilə axtarın"
+            "userChooserPlaceholder": "Adı ilə axtarın",
+            "shareOrCopyLink": "Dəvət linkini paylaşmaq və ya kopyalamaq üçün {{ClickOrTap}}"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -222,7 +223,8 @@
             "start": "Başlamaq",
             "stop": "Dur",
             "streamingSettings": "Ayarlar",
-            "streamToRTMP": "Xüsusi RTMP -yə axın"
+            "streamToRTMP": "Xüsusi RTMP -yə axın",
+            "dialogTitle": "Video Parametrləri"
         },
         "participantsPopup": {
             "disconnect": "Qoşulun",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Videonu göstərin",
             "turnOnAudio": "Səsin səsini açın",
             "turnOnScreenSharing": "Ekran paylaşımını göstərin",
-            "fullScreen": "Tam ekran"
+            "fullScreen": "Tam ekran",
+            "dialogTitle": "İştirakçı Parametrləri"
         },
         "notAllowedToJoinCall": "Bu axına qoşulmaq icazəniz yoxdur.",
         "streamTitle": "{{1}} canlı zəng",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ekran paylaşımı aktivdir",
             "screenSharingIsOff": "Ekranı paylaşın",
             "joinNow": "Zəngə qoşulun"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Parametrlər",
+            "speakers": "Dinamiklər",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Yayım Parametrləri"
         }
     },
     "types": {

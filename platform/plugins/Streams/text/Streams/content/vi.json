@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn",
             "scannedQR": "{{ClickOrTap}} nếu mã được quét",
             "copyLink": "{{ClickOrTap}} để sao chép liên kết mời",
-            "userChooserPlaceholder": "Tìm kiếm theo tên"
+            "userChooserPlaceholder": "Tìm kiếm theo tên",
+            "shareOrCopyLink": "{{ClickOrTap}} để chia sẻ hoặc sao chép liên kết mời"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",
@@ -222,7 +223,8 @@
             "start": "Bắt đầu",
             "stop": "Ngừng lại",
             "streamingSettings": "Cài đặt",
-            "streamToRTMP": "Truyền đến RTMP tùy chỉnh"
+            "streamToRTMP": "Truyền đến RTMP tùy chỉnh",
+            "dialogTitle": "Cài đặt video"
         },
         "participantsPopup": {
             "disconnect": "Ngắt kết nối",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Hiển thị video",
             "turnOnAudio": "Tắt âm thanh",
             "turnOnScreenSharing": "Hiển thị chia sẻ màn hình",
-            "fullScreen": "Toàn màn hình"
+            "fullScreen": "Toàn màn hình",
+            "dialogTitle": "Cài đặt người tham gia"
         },
         "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
         "streamTitle": "{{1}} cuộc gọi trực tiếp",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Chia sẻ màn hình đang bật",
             "screenSharingIsOff": "Chia sẻ màn hình",
             "joinNow": "Tham gia cuộc gọi"
+        },
+        "audioSettings": {
+            "dialogTitle": "Cài đặt âm thanh",
+            "speakers": "Diễn giả",
+            "microphone": "Cái mic cờ rô"
+        },
+        "streamingSettings": {
+            "title": "Cài đặt phát trực tuyến"
         }
     },
     "types": {

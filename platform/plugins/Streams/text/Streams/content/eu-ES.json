@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Gonbidatu nituen jendea",
-        "Streams/invitedMe": "Nork gonbidatu ninduen"
+        "Streams/invitedMe": "Nork gonbidatu ninduen",
+        "AreYouAgree": "Ados zaude?",
+        "Yes": "Bai",
+        "No": "Ez"
     },
     "interests": {
         "Filter": "Zer gustatzen zaizu?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Aukeratu berriro Kontaktuak",
             "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu",
             "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada",
-            "copyLink": "{{ClickOrTap}} gonbidapenaren esteka kopiatzeko"
+            "copyLink": "{{ClickOrTap}} gonbidapenaren esteka kopiatzeko",
+            "userChooserPlaceholder": "Bilatu izenaren arabera",
+            "shareOrCopyLink": "{{ClickOrTap}} gonbidapen-esteka partekatzeko edo kopiatzeko"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Parte hartzaileak ez du bideorik",
             "openInBrowserAlert": "Esteka irekia Safari arakatzailean konferentzian sartzeko.",
             "youBeganVideoRecording": "Konferentzia hau grabatzen hasi zinen",
-            "youStoppedVideoRecording": "Konferentzia hau grabatzeari utzi diozu"
+            "youStoppedVideoRecording": "Konferentzia hau grabatzeari utzi diozu",
+            "switchingRoom": "Aldagela ...",
+            "forceDisconnecting": "5 segundotan deskonektatuko zara",
+            "youStartedLive": "Dei hau RTMP pertsonalizatura igortzen hasi zinen",
+            "youStoppedLive": "Dei hau RTMP pertsonalizatura igortzeari utzi diozu",
+            "sbStartedLiveStreaming": "{{userName}} zuzenean hasi zen",
+            "sbStoppedLiveStreaming": "{{userName}} zuzenean amaitu zen",
+            "liveStopped": "Errorea gertatu da bideoa amaiera puntura bidaltzean"
         },
         "settingsPopup": {
             "webCamera": "Web Kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Grabazioa gelditu",
             "recordingInProgress": "Grabaketa abian da ...",
             "publishOnTimeline": "Publikatu denbora-lerroan",
-            "publishToGroup": "Argitaratu taldean"
+            "publishToGroup": "Argitaratu taldean",
+            "turnOffAudioInput": "Mututu mikrofonoa",
+            "micIsTurnedOff": "Mikrofonoa itzalita dago",
+            "start": "Hasi",
+            "stop": "Gelditu",
+            "streamingSettings": "Ezarpenak",
+            "streamToRTMP": "Stream RTMP pertsonalizatura",
+            "dialogTitle": "Bideo ezarpenak"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Erakutsi bideoa",
             "turnOnAudio": "Ezabatu audioa",
             "turnOnScreenSharing": "Erakutsi pantaila partekatzea",
-            "fullScreen": "Pantaila osoa"
+            "fullScreen": "Pantaila osoa",
+            "dialogTitle": "Parte-hartzaileen ezarpenak"
         },
         "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
         "streamTitle": "{{1}} zuzeneko deia",
         "preview": {
-            "preamble": "Bilera:"
+            "preamble": "Bilera:",
+            "Meeting": "Bilera",
+            "MeetingEnded": "Bilera amaitu zen"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofonoa itzalita dago",
+            "micIsOn": "Mikrofonoa piztuta dago",
+            "cameraIsOff": "Kamera itzalita dago",
+            "cameraIsOn": "Kamera piztuta dago",
+            "screenSharingIsOn": "Pantaila partekatzea aktibatuta dago",
+            "screenSharingIsOff": "Partekatu pantaila",
+            "joinNow": "Sartu Deian"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio ezarpenak",
+            "speakers": "Hizlariak",
+            "microphone": "Mikrofonoa"
+        },
+        "streamingSettings": {
+            "title": "Streaming ezarpenak"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Erantzun",
             "description": "erantzun korrontea"
+        },
+        "Streams/calls": {
+            "displayType": "Deiak",
+            "description": "Streams / webrtc kategorian",
+            "MaxRelationsExceeded": "Gehienezko deiak gainditu dira"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Fitxategi baliogabea",
         "errorNoSource": "Ez dago irudi iturririk",
         "uploadLimit": "Gehienezko fitxategi tamaina: {{size}}",
-        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da"
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehieneko tamaina {{size}} da",
+        "uploadedImage": "Kargatutako irudia",
+        "imageTitle": "Irudiaren izenburua"
     },
     "questions": {
         "Questions": "Galderak",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Dagoeneko erantzuna",
         "TitlePlaceholder": "Idatzi zure galdera",
         "ContentPlaceholder": "Jarri informazio gehigarria hemen jendeari erantzuten laguntzeko",
-        "ErrorTitle": "Galdera beharrezkoa da"
+        "ErrorTitle": "Galdera beharrezkoa da",
+        "Placeholder": "Leku-marka"
     },
     "experience": {
-        "NewExperience": "Esperientzia berria"
+        "NewExperience": "Esperientzia berria",
+        "DefineTitle": "Mesedez, zehaztu izenburu bat",
+        "Create": "Sortu"
+    },
+    "calls": {
+        "SettingsTitle": "Deiak",
+        "MaxCalls": "Max deiak",
+        "Update": "Eguneratu",
+        "NoCallsYet": "Deirik ez oraindik",
+        "CallReasonTitle": "Zertan datza deialdi hau?",
+        "WaitingRoom": "Itxarongela"
     }
 }

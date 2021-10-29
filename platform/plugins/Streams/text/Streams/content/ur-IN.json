@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "میں نے مدعو کیا",
-        "Streams/invitedMe": "کون نے مجھے مدعو کیا"
+        "Streams/invitedMe": "کون نے مجھے مدعو کیا",
+        "AreYouAgree": "کیا آپ متفق ہیں؟",
+        "Yes": "جی ہاں",
+        "No": "نہیں"
     },
     "interests": {
         "Filter": "تم کیا لطف اندوز ہو",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "رابطہ سے دوبارہ منتخب کریں",
             "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں",
             "scannedQR": "اگر کوڈ اسکین ہوا تو. 999 {.۔",
-            "copyLink": "دعوت نامہ کاپی کرنے کیلئے {999}. پر کلک کریں"
+            "copyLink": "دعوت نامہ کاپی کرنے کیلئے {999}. پر کلک کریں",
+            "userChooserPlaceholder": "نام سے تلاش کریں۔",
+            "shareOrCopyLink": "{{ClickOrTap}} دعوت کے لنک کو شیئر کرنے یا کاپی کرنے کے لیے"
         },
         "email": {
             "subject": "ارے، اسے چیک کرو",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے",
             "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لئے سفاری براؤزر میں لنک کھولیں۔",
             "youBeganVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا شروع کیا",
-            "youStoppedVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا چھوڑ دیا ہے"
+            "youStoppedVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا چھوڑ دیا ہے",
+            "switchingRoom": "سوئچنگ روم ...",
+            "forceDisconnecting": "آپ 5 سیکنڈ کے اندر منقطع ہو جائیں گے۔",
+            "youStartedLive": "آپ نے اس کال کو اپنی مرضی کے مطابق RTMP پر نشر کرنا شروع کیا۔",
+            "youStoppedLive": "آپ نے اس کال کو کسٹم RTMP پر نشر کرنا بند کر دیا۔",
+            "sbStartedLiveStreaming": "{{userName}} نے براہ راست شروع کیا۔",
+            "sbStoppedLiveStreaming": "{{userName}} نے لائیو ختم کیا۔",
+            "liveStopped": "ویڈیو کو اینڈ پوائنٹ پر بھیجتے وقت خرابی پیش آگئی۔"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمرا",
@@ -205,7 +217,14 @@
             "stopRecording": "ریکارڈنگ بند کرو",
             "recordingInProgress": "ریکارڈنگ جاری ہے ...",
             "publishOnTimeline": "ٹائم لائن پر شائع کریں",
-            "publishToGroup": "گروپ میں شائع کریں"
+            "publishToGroup": "گروپ میں شائع کریں",
+            "turnOffAudioInput": "مائیکروفون خاموش کریں۔",
+            "micIsTurnedOff": "مائیکروفون آف ہے۔",
+            "start": "شروع کریں",
+            "stop": "رک جاؤ۔",
+            "streamingSettings": "ترتیبات",
+            "streamToRTMP": "اپنی مرضی کے مطابق RTMP پر سٹریم کریں۔",
+            "dialogTitle": "ویڈیو کی ترتیبات"
         },
         "participantsPopup": {
             "disconnect": "منقطع ہونا",
@@ -221,12 +240,32 @@
             "turnOnCamera": "ویڈیو دکھائیں",
             "turnOnAudio": "آڈیو خاموش کریں",
             "turnOnScreenSharing": "اسکرین کا اشتراک دکھائیں",
-            "fullScreen": "مکمل اسکرین یا بڑی اسکرین"
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین",
+            "dialogTitle": "شرکاء کی ترتیبات"
         },
         "notAllowedToJoinCall": "آپ کو اس سلسلہ میں شامل ہونے کی اجازت نہیں ہے۔",
         "streamTitle": "} 9 999}} براہ راست کال",
         "preview": {
-            "preamble": "میٹنگ:"
+            "preamble": "میٹنگ:",
+            "Meeting": "ملاقات",
+            "MeetingEnded": "میٹنگ ختم ہوئی۔"
+        },
+        "preparing": {
+            "micIsOff": "مائک بند ہے۔",
+            "micIsOn": "مائیک آن ہے۔",
+            "cameraIsOff": "کیمرا آف ہے۔",
+            "cameraIsOn": "کیمرا آن ہے۔",
+            "screenSharingIsOn": "اسکرین شیئرنگ آن ہے۔",
+            "screenSharingIsOff": "اسکرین شیئر کریں۔",
+            "joinNow": "کال میں شامل ہوں۔"
+        },
+        "audioSettings": {
+            "dialogTitle": "آڈیو کی ترتیبات",
+            "speakers": "مقررین",
+            "microphone": "مائیکروفون"
+        },
+        "streamingSettings": {
+            "title": "سلسلہ بندی کی ترتیبات"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "جواب",
             "description": "جواب کا سلسلہ"
+        },
+        "Streams/calls": {
+            "displayType": "کالز",
+            "description": "اسٹریمز/ویب آر ٹی سی کے لیے زمرہ۔",
+            "MaxRelationsExceeded": "زیادہ سے زیادہ کالیں حد سے تجاوز کر گئیں۔"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "غلط فائل",
         "errorNoSource": "تصویری ذریعہ نہیں ہے",
         "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{999}",
-        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے"
+        "errorFileSize": "معذرت ، لیکن فائل بہت بڑی ہے۔<br> زیادہ سے زیادہ فائل کا سائز {{999} is ہے",
+        "uploadedImage": "اپ لوڈ کردہ تصویر۔",
+        "imageTitle": "تصویر کا عنوان۔"
     },
     "questions": {
         "Questions": "سوالات",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "پہلے ہی جواب دیا گیا ہے",
         "TitlePlaceholder": "اپنا سوال ٹائپ کریں",
         "ContentPlaceholder": "لوگوں کو جواب دینے میں مدد کے لئے کوئی اضافی معلومات یہاں رکھیں",
-        "ErrorTitle": "سوال درکار ہے"
+        "ErrorTitle": "سوال درکار ہے",
+        "Placeholder": "پلیس ہولڈر۔"
     },
     "experience": {
-        "NewExperience": "نیا تجربہ"
+        "NewExperience": "نیا تجربہ",
+        "DefineTitle": "براہ کرم ایک عنوان کی وضاحت کریں۔",
+        "Create": "بنانا"
+    },
+    "calls": {
+        "SettingsTitle": "کالز",
+        "MaxCalls": "زیادہ سے زیادہ کالیں۔",
+        "Update": "اپ ڈیٹ",
+        "NoCallsYet": "ابھی تک کوئی کال نہیں آئی۔",
+        "CallReasonTitle": "یہ کال کس بارے میں ہے؟",
+        "WaitingRoom": "انتظار گاہ"
     }
 }

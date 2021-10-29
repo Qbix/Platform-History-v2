@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών",
             "scannedQR": "{{ClickOrTap}} αν ο κώδικας έχει σαρωθεί",
             "copyLink": "{{ClickOrTap}} για να αντιγράψετε το σύνδεσμο πρόσκλησης",
-            "userChooserPlaceholder": "Αναζήτηση με όνομα"
+            "userChooserPlaceholder": "Αναζήτηση με όνομα",
+            "shareOrCopyLink": "{{ClickOrTap}} για κοινή χρήση ή αντιγραφή συνδέσμου πρόσκλησης"
         },
         "email": {
             "subject": "Ελέγξτε αυτό",
@@ -222,7 +223,8 @@
             "start": "Αρχή",
             "stop": "Να σταματήσει",
             "streamingSettings": "Ρυθμίσεις",
-            "streamToRTMP": "Ροή σε προσαρμοσμένο RTMP"
+            "streamToRTMP": "Ροή σε προσαρμοσμένο RTMP",
+            "dialogTitle": "Ρυθμίσεις βίντεο"
         },
         "participantsPopup": {
             "disconnect": "Διαχωρίζω",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Εμφάνιση βίντεο",
             "turnOnAudio": "Σίγαση ήχου",
             "turnOnScreenSharing": "Εμφάνιση κοινής χρήσης οθόνης",
-            "fullScreen": "ΠΛΗΡΗΣ ΟΘΟΝΗ"
+            "fullScreen": "ΠΛΗΡΗΣ ΟΘΟΝΗ",
+            "dialogTitle": "Ρυθμίσεις συμμετεχόντων"
         },
         "notAllowedToJoinCall": "Δεν έχετε άδεια να συμμετάσχετε σε αυτήν τη ροή.",
         "streamTitle": "{{1}} ζωντανή κλήση",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Η κοινή χρήση οθόνης είναι ενεργή",
             "screenSharingIsOff": "Κοινή χρήση οθόνης",
             "joinNow": "Λάβετε μέρος στην κλήση"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ρυθμίσεις ήχου",
+            "speakers": "Ηχεία",
+            "microphone": "Μικρόφωνο"
+        },
+        "streamingSettings": {
+            "title": "Ρυθμίσεις ροής"
         }
     },
     "types": {

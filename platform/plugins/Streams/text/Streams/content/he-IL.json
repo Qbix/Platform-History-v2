@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "אנשים שהזמנתי",
-        "Streams/invitedMe": "מי הזמין אותי"
+        "Streams/invitedMe": "מי הזמין אותי",
+        "AreYouAgree": "אתה מסכים?",
+        "Yes": "כן",
+        "No": "לא"
     },
     "interests": {
         "Filter": "ממה אתה נהנה?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "בחר שוב מאנשי קשר",
             "inviteSelectedContacts": "הזמן אנשי קשר שנבחרו",
             "scannedQR": "{{ClickOrTap}} אם הקוד נסרק",
-            "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה"
+            "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה",
+            "userChooserPlaceholder": "חפש לפי שם",
+            "shareOrCopyLink": "{{ClickOrTap}} כדי לשתף או להעתיק את קישור ההזמנה"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
@@ -177,7 +182,14 @@
             "userHasNoVideo": "למשתתף אין סרטון",
             "openInBrowserAlert": "פתח קישור בדפדפן ספארי כדי להצטרף לוועידה.",
             "youBeganVideoRecording": "התחלת להקליט את הכנס הזה",
-            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו"
+            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו",
+            "switchingRoom": "מחליף חדר...",
+            "forceDisconnecting": "תתנתק תוך 5 שניות",
+            "youStartedLive": "התחלת לשדר את השיחה הזו ל-RTMP מותאם אישית",
+            "youStoppedLive": "הפסקת לשדר את השיחה הזו ל-RTMP מותאם אישית",
+            "sbStartedLiveStreaming": "{{userName}} התחיל בשידור חי",
+            "sbStoppedLiveStreaming": "{{userName}} הסתיים בשידור חי",
+            "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה"
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -202,7 +214,14 @@
             "stopRecording": "הפסק להקליט",
             "recordingInProgress": "ההקלטה בעיצומה ...",
             "publishOnTimeline": "פרסם בציר זמן",
-            "publishToGroup": "פרסם בקבוצה"
+            "publishToGroup": "פרסם בקבוצה",
+            "dialogTitle": "הגדרות וידאו",
+            "turnOffAudioInput": "השתקת מיקרופון",
+            "micIsTurnedOff": "המיקרופון כבוי",
+            "start": "הַתחָלָה",
+            "stop": "תפסיק",
+            "streamingSettings": "הגדרות",
+            "streamToRTMP": "הזרם ל-RTMP מותאם אישית"
         },
         "participantsPopup": {
             "disconnect": "נתק",
@@ -218,12 +237,32 @@
             "turnOnCamera": "הצג וידאו",
             "turnOnAudio": "בטל השתקת שמע",
             "turnOnScreenSharing": "הצג שיתוף מסך",
-            "fullScreen": "מסך מלא"
+            "fullScreen": "מסך מלא",
+            "dialogTitle": "הגדרות משתתף"
         },
         "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם זה.",
         "streamTitle": "{{1}} שיחה חיה",
         "preview": {
-            "preamble": "פְּגִישָׁה:"
+            "preamble": "פְּגִישָׁה:",
+            "Meeting": "פְּגִישָׁה",
+            "MeetingEnded": "הפגישה הסתיימה"
+        },
+        "preparing": {
+            "micIsOff": "המיקרופון כבוי",
+            "micIsOn": "המיקרופון פועל",
+            "cameraIsOff": "המצלמה כבויה",
+            "cameraIsOn": "המצלמה מופעלת",
+            "screenSharingIsOn": "שיתוף מסך מופעל",
+            "screenSharingIsOff": "שתף מסך",
+            "joinNow": "הצטרף לשיחה"
+        },
+        "audioSettings": {
+            "dialogTitle": "הגדרות אודיו",
+            "speakers": "רמקולים",
+            "microphone": "מִיקרוֹפוֹן"
+        },
+        "streamingSettings": {
+            "title": "הגדרות סטרימינג"
         }
     },
     "types": {
@@ -351,6 +390,11 @@
         "Streams/answer": {
             "displayType": "תשובה",
             "description": "תשובת זרם"
+        },
+        "Streams/calls": {
+            "displayType": "שיחות",
+            "description": "קטגוריה עבור Streams/webrtc",
+            "MaxRelationsExceeded": "חרג ממספר השיחות"
         }
     },
     "messages": {
@@ -445,7 +489,9 @@
         "invalidFile": "קובץ לא תקין",
         "errorNoSource": "אין מקור תמונה",
         "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
-        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+        "errorFileSize": "מצטערים, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}",
+        "uploadedImage": "תמונה שהועלתה",
+        "imageTitle": "כותרת התמונה"
     },
     "questions": {
         "Questions": "שאלות",
@@ -466,9 +512,20 @@
         "AlreadyAnswered": "כבר נענה",
         "TitlePlaceholder": "הקלד את השאלה שלך",
         "ContentPlaceholder": "הכנס כאן מידע נוסף כדי לעזור לאנשים לענות",
-        "ErrorTitle": "שאלה נדרשת"
+        "ErrorTitle": "שאלה נדרשת",
+        "Placeholder": "מציין מקום"
     },
     "experience": {
-        "NewExperience": "חוויה חדשה"
+        "NewExperience": "חוויה חדשה",
+        "DefineTitle": "נא להגדיר כותרת",
+        "Create": "לִיצוֹר"
+    },
+    "calls": {
+        "SettingsTitle": "שיחות",
+        "MaxCalls": "מקסימום שיחות",
+        "Update": "עדכון",
+        "NoCallsYet": "עדיין אין שיחות",
+        "CallReasonTitle": "על מה השיחה הזו?",
+        "WaitingRoom": "חדר המתנה"
     }
 }

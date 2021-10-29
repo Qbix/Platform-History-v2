@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Pozvať vybraných kontaktov",
             "scannedQR": "{{ClickOrTap}}, ak bol kód naskenovaný",
             "copyLink": "{{ClickOrTap}} pre kopírovanie odkazu na pozvanie",
-            "userChooserPlaceholder": "Hľadaj podľa mena"
+            "userChooserPlaceholder": "Hľadaj podľa mena",
+            "shareOrCopyLink": "{{ClickOrTap}} na zdieľanie alebo kopírovanie odkazu na pozvánku"
         },
         "email": {
             "subject": "Hej, pozrite sa na to",
@@ -222,7 +223,8 @@
             "start": "Začnite",
             "stop": "Prestaň",
             "streamingSettings": "nastavenie",
-            "streamToRTMP": "Streamujte do vlastného RTMP"
+            "streamToRTMP": "Streamujte do vlastného RTMP",
+            "dialogTitle": "Nastavenia videa"
         },
         "participantsPopup": {
             "disconnect": "odpojiť",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Zobraziť video",
             "turnOnAudio": "Obnoviť zvuk",
             "turnOnScreenSharing": "Zobraziť zdieľanie obrazovky",
-            "fullScreen": "Celá obrazovka"
+            "fullScreen": "Celá obrazovka",
+            "dialogTitle": "Nastavenia účastníka"
         },
         "notAllowedToJoinCall": "Na pripojenie k tomuto toku nemáte povolenie.",
         "streamTitle": "{{1}} živý hovor",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Zdieľanie obrazovky je zapnuté",
             "screenSharingIsOff": "Zdieľať obrazovku",
             "joinNow": "Pripojte sa k výzve"
+        },
+        "audioSettings": {
+            "dialogTitle": "Nastavenia zvuku",
+            "speakers": "Reproduktory",
+            "microphone": "Mikrofón"
+        },
+        "streamingSettings": {
+            "title": "Nastavenia streamovania"
         }
     },
     "types": {

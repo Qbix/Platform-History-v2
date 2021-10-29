@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus",
             "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts",
             "copyLink": "{{ClickOrTap}}, lai kopētu ielūguma saiti",
-            "userChooserPlaceholder": "Meklēt pēc nosaukuma"
+            "userChooserPlaceholder": "Meklēt pēc nosaukuma",
+            "shareOrCopyLink": "{{ClickOrTap}}, lai kopīgotu vai kopētu uzaicinājuma saiti"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",
@@ -222,7 +223,8 @@
             "start": "Sākt",
             "stop": "Apstāties",
             "streamingSettings": "Iestatījumi",
-            "streamToRTMP": "Straumējiet uz pielāgotu RTMP"
+            "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
+            "dialogTitle": "Video iestatījumi"
         },
         "participantsPopup": {
             "disconnect": "Atvienojiet",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Rādīt video",
             "turnOnAudio": "Ieslēgt skaņu",
             "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
-            "fullScreen": "Pilnekrāna režīmā"
+            "fullScreen": "Pilnekrāna režīmā",
+            "dialogTitle": "Dalībnieka iestatījumi"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
         "streamTitle": "{{1}} tiešais zvans",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ekrāna kopīgošana ir ieslēgta",
             "screenSharingIsOff": "Kopīgot ekrānu",
             "joinNow": "Pievienojieties aicinājumam"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio iestatījumi",
+            "speakers": "Skaļruņi",
+            "microphone": "Mikrofons"
+        },
+        "streamingSettings": {
+            "title": "Straumēšanas iestatījumi"
         }
     },
     "types": {

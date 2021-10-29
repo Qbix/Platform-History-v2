@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "जिन लोगों को मैंने आमंत्रित किया था",
-        "Streams/invitedMe": "जिसने मुझे आमंत्रित किया"
+        "Streams/invitedMe": "जिसने मुझे आमंत्रित किया",
+        "AreYouAgree": "क्या आप सहमत हैं?",
+        "Yes": "हां",
+        "No": "नहीं"
     },
     "interests": {
         "Filter": "तुम्हे किस्मे मजा आता है?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "फिर से संपर्क से चुनें",
             "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें",
             "scannedQR": "{{ClickOrTap}} यदि कोड स्कैन किया गया था",
-            "copyLink": "{{ClickOrTap}} आमंत्रित लिंक कॉपी करने के लिए"
+            "copyLink": "{{ClickOrTap}} आमंत्रित लिंक कॉपी करने के लिए",
+            "userChooserPlaceholder": "नाम से खोजें",
+            "shareOrCopyLink": "{{ClickOrTap}} आमंत्रण लिंक साझा करने या कॉपी करने के लिए"
         },
         "email": {
             "subject": "अरे, यह देखो",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "प्रतिभागी के पास कोई वीडियो नहीं है",
             "openInBrowserAlert": "सम्मेलन में शामिल होने के लिए सफारी ब्राउज़र में लिंक खोलें।",
             "youBeganVideoRecording": "आपने इस सम्मेलन की रिकॉर्डिंग शुरू की",
-            "youStoppedVideoRecording": "आपने इस सम्मेलन को रिकॉर्ड करना बंद कर दिया"
+            "youStoppedVideoRecording": "आपने इस सम्मेलन को रिकॉर्ड करना बंद कर दिया",
+            "switchingRoom": "कमरा बदल रहा है...",
+            "forceDisconnecting": "आपको 5 सेकंड के भीतर डिस्कनेक्ट कर दिया जाएगा",
+            "youStartedLive": "आपने इस कॉल को कस्टम RTMP पर प्रसारित करना शुरू कर दिया है",
+            "youStoppedLive": "आपने इस कॉल को कस्टम RTMP पर प्रसारित करना बंद कर दिया है",
+            "sbStartedLiveStreaming": "{{userName}} ने लाइव शुरू किया",
+            "sbStoppedLiveStreaming": "{{userName}} ने लाइव खत्म किया",
+            "liveStopped": "एंडपॉइंट पर वीडियो भेजते समय त्रुटि हुई"
         },
         "settingsPopup": {
             "webCamera": "वेब कैमरा",
@@ -205,7 +217,14 @@
             "stopRecording": "रिकॉर्डिंग बंद करें",
             "recordingInProgress": "रिकॉर्डिंग जारी है ...",
             "publishOnTimeline": "समय पर प्रकाशित करें",
-            "publishToGroup": "समूह में प्रकाशित करें"
+            "publishToGroup": "समूह में प्रकाशित करें",
+            "turnOffAudioInput": "माइक्रोफ़ोन म्यूट करें",
+            "micIsTurnedOff": "माइक्रोफ़ोन बंद है",
+            "start": "शुरू",
+            "stop": "विराम",
+            "streamingSettings": "समायोजन",
+            "streamToRTMP": "कस्टम RTMP पर स्ट्रीम करें",
+            "dialogTitle": "वीडियो सेटिंग्स"
         },
         "participantsPopup": {
             "disconnect": "डिस्कनेक्ट",
@@ -221,12 +240,32 @@
             "turnOnCamera": "वीडियो दिखाएं",
             "turnOnAudio": "ऑडियो को अनम्यूट करें",
             "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ",
-            "fullScreen": "पूर्ण स्क्रीन"
+            "fullScreen": "पूर्ण स्क्रीन",
+            "dialogTitle": "प्रतिभागी सेटिंग्स"
         },
         "notAllowedToJoinCall": "आपको इस स्ट्रीम में शामिल होने की अनुमति नहीं है।",
         "streamTitle": "{{1}} लाइव कॉल",
         "preview": {
-            "preamble": "मुलाकात:"
+            "preamble": "मुलाकात:",
+            "Meeting": "मुलाकात",
+            "MeetingEnded": "बैठक समाप्त"
+        },
+        "preparing": {
+            "micIsOff": "माइक बंद है",
+            "micIsOn": "माइक चालू है",
+            "cameraIsOff": "कैमरा बंद है",
+            "cameraIsOn": "कैमरा चालू है",
+            "screenSharingIsOn": "स्क्रीन साझाकरण चालू है",
+            "screenSharingIsOff": "स्क्रीन साझा करना",
+            "joinNow": "कॉल में शामिल हों"
+        },
+        "audioSettings": {
+            "dialogTitle": "आवाज की सेटिंग",
+            "speakers": "वक्ताओं",
+            "microphone": "माइक्रोफ़ोन"
+        },
+        "streamingSettings": {
+            "title": "स्ट्रीमिंग सेटिंग्स"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "उत्तर",
             "description": "उत्तर धारा"
+        },
+        "Streams/calls": {
+            "displayType": "कॉल",
+            "description": "स्ट्रीम/webrtc . के लिए श्रेणी",
+            "MaxRelationsExceeded": "अधिकतम कॉल पार हो गई"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "अवैध फाइल",
         "errorNoSource": "कोई छवि स्रोत नहीं",
         "uploadLimit": "अधिकतम फ़ाइल का आकार: {{size}}",
-        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है"
+        "errorFileSize": "क्षमा करें, लेकिन बहुत बड़ी फ़ाइल।<br> अधिकतम फ़ाइल आकार {{size}} है",
+        "uploadedImage": "अपलोड की गई छवि",
+        "imageTitle": "छवि शीर्षक"
     },
     "questions": {
         "Questions": "प्रशन",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "पहले से उत्तर दिया हुआ",
         "TitlePlaceholder": "अपना प्रश्न लिखें",
         "ContentPlaceholder": "लोगों को जवाब देने में मदद के लिए यहां कोई अतिरिक्त जानकारी रखें",
-        "ErrorTitle": "प्रश्न आवश्यक है"
+        "ErrorTitle": "प्रश्न आवश्यक है",
+        "Placeholder": "प्लेसहोल्डर"
     },
     "experience": {
-        "NewExperience": "नया अनुभव"
+        "NewExperience": "नया अनुभव",
+        "DefineTitle": "कृपया एक शीर्षक परिभाषित करें",
+        "Create": "बनाएं"
+    },
+    "calls": {
+        "SettingsTitle": "कॉल",
+        "MaxCalls": "अधिकतम कॉल",
+        "Update": "अद्यतन",
+        "NoCallsYet": "अभी तक कोई कॉल नहीं",
+        "CallReasonTitle": "यह कॉल किस बारे में है?",
+        "WaitingRoom": "प्रतीक्षालय"
     }
 }

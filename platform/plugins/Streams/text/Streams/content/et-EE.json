@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Inimesed, keda ma kutsusin",
-        "Streams/invitedMe": "Kes kutsus mind"
+        "Streams/invitedMe": "Kes kutsus mind",
+        "AreYouAgree": "Kas olete nõus?",
+        "Yes": "Jah",
+        "No": "Ei"
     },
     "interests": {
         "Filter": "Mida sa naudid?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Valige uuesti kontaktidest",
             "inviteSelectedContacts": "Kutsu valitud kontaktid",
             "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti",
-            "copyLink": "{{ClickOrTap}} kutselingi kopeerimiseks"
+            "copyLink": "{{ClickOrTap}} kutselingi kopeerimiseks",
+            "userChooserPlaceholder": "Otsi nime järgi",
+            "shareOrCopyLink": "{{ClickOrTap}} kutselingi jagamiseks või kopeerimiseks"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Osalejal pole videot",
             "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris.",
             "youBeganVideoRecording": "Hakkasite seda konverentsi lindistama",
-            "youStoppedVideoRecording": "Lõpetasite selle konverentsi salvestamise"
+            "youStoppedVideoRecording": "Lõpetasite selle konverentsi salvestamise",
+            "switchingRoom": "Ruumi vahetamine ...",
+            "forceDisconnecting": "Ühendus katkestatakse 5 sekundi jooksul",
+            "youStartedLive": "Hakkasite seda kõnet edastama kohandatud RTMP -le",
+            "youStoppedLive": "Lõpetasite selle kõne edastamise kohandatud RTMP -le",
+            "sbStartedLiveStreaming": "{{userName}} alustas otseülekannet",
+            "sbStoppedLiveStreaming": "{{userName}} lõppes otse -eetris",
+            "liveStopped": "Video lõpp -punkti saatmisel ilmnes viga"
         },
         "settingsPopup": {
             "webCamera": "Veebikaamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Lõpeta salvestamine",
             "recordingInProgress": "Salvestamine käib ...",
             "publishOnTimeline": "Avaldage ajateljel",
-            "publishToGroup": "Avaldage rühmas"
+            "publishToGroup": "Avaldage rühmas",
+            "turnOffAudioInput": "Mikrofoni vaigistamine",
+            "micIsTurnedOff": "Mikrofon on välja lülitatud",
+            "start": "Alusta",
+            "stop": "Peatus",
+            "streamingSettings": "Seaded",
+            "streamToRTMP": "Voogesitage kohandatud RTMP -le",
+            "dialogTitle": "Video seaded"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Kuva video",
             "turnOnAudio": "Vaigista heli sisse",
             "turnOnScreenSharing": "Kuva ekraani jagamine",
-            "fullScreen": "Täisekraan"
+            "fullScreen": "Täisekraan",
+            "dialogTitle": "Osaleja seaded"
         },
         "notAllowedToJoinCall": "Teil pole luba selle vooga liituda.",
         "streamTitle": "{{1}} otsekõne",
         "preview": {
-            "preamble": "Kohtumine:"
+            "preamble": "Kohtumine:",
+            "Meeting": "Koosolek",
+            "MeetingEnded": "Koosolek lõppes"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofon on välja lülitatud",
+            "micIsOn": "Mikrofon on sisse lülitatud",
+            "cameraIsOff": "Kaamera on välja lülitatud",
+            "cameraIsOn": "Kaamera on sisse lülitatud",
+            "screenSharingIsOn": "Ekraani jagamine on sisse lülitatud",
+            "screenSharingIsOff": "Jaga ekraani",
+            "joinNow": "Liituge kõnega"
+        },
+        "audioSettings": {
+            "dialogTitle": "Helisätted",
+            "speakers": "Kõlarid",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Voogesituse seaded"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Vastus",
             "description": "vastuste voog"
+        },
+        "Streams/calls": {
+            "displayType": "Kõned",
+            "description": "kategooria Streams/webrtc",
+            "MaxRelationsExceeded": "Maksimaalsed kõned on ületatud"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Vigane fail",
         "errorNoSource": "Pildiallikat pole",
         "uploadLimit": "Maksimaalne failisuurus: {{size}}",
-        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}"
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne failisuurus on {{size}}",
+        "uploadedImage": "Pilt üles laaditud",
+        "imageTitle": "Pildi pealkiri"
     },
     "questions": {
         "Questions": "Küsimused",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Vastanud juba",
         "TitlePlaceholder": "Sisestage oma küsimus",
         "ContentPlaceholder": "Siit saate lisateavet, et aidata inimestel vastata",
-        "ErrorTitle": "Küsimus on vajalik"
+        "ErrorTitle": "Küsimus on vajalik",
+        "Placeholder": "Kohatäide"
     },
     "experience": {
-        "NewExperience": "Uus kogemus"
+        "NewExperience": "Uus kogemus",
+        "DefineTitle": "Palun määratle pealkiri",
+        "Create": "Loo"
+    },
+    "calls": {
+        "SettingsTitle": "Kõned",
+        "MaxCalls": "Max helistab",
+        "Update": "Värskenda",
+        "NoCallsYet": "Kõnesid veel pole",
+        "CallReasonTitle": "Millest see kõne räägib?",
+        "WaitingRoom": "Ooteruum"
     }
 }

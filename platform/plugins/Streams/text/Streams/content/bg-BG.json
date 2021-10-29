@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Хората, които поканих",
-        "Streams/invitedMe": "Кой ме покани"
+        "Streams/invitedMe": "Кой ме покани",
+        "AreYouAgree": "Съгласни ли сте?",
+        "Yes": "Да",
+        "No": "Не"
     },
     "interests": {
         "Filter": "Какво харесваш?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Изберете Отново от Контакти",
             "inviteSelectedContacts": "Покана за избрани контакти",
             "scannedQR": "{{ClickOrTap}} ако кодът е сканиран",
-            "copyLink": "{{ClickOrTap}} за да копирате връзка за покана"
+            "copyLink": "{{ClickOrTap}} за да копирате връзка за покана",
+            "userChooserPlaceholder": "Търсете по име",
+            "shareOrCopyLink": "{{ClickOrTap}} за споделяне или копиране на връзка за покана"
         },
         "email": {
             "subject": "Хей, провери това",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Участникът няма видео",
             "openInBrowserAlert": "Отворете връзката в браузъра Safari, за да се присъедините към конференцията.",
             "youBeganVideoRecording": "Започнахте да записвате тази конференция",
-            "youStoppedVideoRecording": "Спряхте да записвате тази конференция"
+            "youStoppedVideoRecording": "Спряхте да записвате тази конференция",
+            "switchingRoom": "Стая за смяна ...",
+            "forceDisconnecting": "Ще бъдете изключени в рамките на 5 секунди",
+            "youStartedLive": "Започнахте да излъчвате това обаждане до персонализиран RTMP",
+            "youStoppedLive": "Спряхте излъчването на това обаждане към персонализиран RTMP",
+            "sbStartedLiveStreaming": "{{userName}} започна на живо",
+            "sbStoppedLiveStreaming": "{{userName}} завърши на живо",
+            "liveStopped": "Възникна грешка при изпращането на видеоклип до крайната точка"
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
@@ -205,7 +217,14 @@
             "stopRecording": "Спрете записа",
             "recordingInProgress": "Записът е в ход ...",
             "publishOnTimeline": "Публикуване на времевата линия",
-            "publishToGroup": "Публикуване в групата"
+            "publishToGroup": "Публикуване в групата",
+            "turnOffAudioInput": "Изключване на микрофона",
+            "micIsTurnedOff": "Микрофонът е изключен",
+            "start": "Старт",
+            "stop": "Спри се",
+            "streamingSettings": "Настройки",
+            "streamToRTMP": "Поток към персонализиран RTMP",
+            "dialogTitle": "Видео настройки"
         },
         "participantsPopup": {
             "disconnect": "Прекъсване на връзката",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Показване на видео",
             "turnOnAudio": "Спиране на звука",
             "turnOnScreenSharing": "Показване на споделяне на екрана",
-            "fullScreen": "Цял екран"
+            "fullScreen": "Цял екран",
+            "dialogTitle": "Настройки на участниците"
         },
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
         "streamTitle": "{{1}} обаждане на живо",
         "preview": {
-            "preamble": "Среща:"
+            "preamble": "Среща:",
+            "Meeting": "Среща",
+            "MeetingEnded": "Срещата приключи"
+        },
+        "preparing": {
+            "micIsOff": "Микрофонът е изключен",
+            "micIsOn": "Микрофонът е включен",
+            "cameraIsOff": "Камерата е изключена",
+            "cameraIsOn": "Камерата е включена",
+            "screenSharingIsOn": "Споделянето на екрани е включено",
+            "screenSharingIsOff": "сподели екран",
+            "joinNow": "Присъединете се към обаждането"
+        },
+        "audioSettings": {
+            "dialogTitle": "Аудио настройки",
+            "speakers": "Високоговорители",
+            "microphone": "микрофон"
+        },
+        "streamingSettings": {
+            "title": "Настройки за поточно предаване"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Отговор",
             "description": "отговор поток"
+        },
+        "Streams/calls": {
+            "displayType": "Обаждания",
+            "description": "категория за потоци/webrtc",
+            "MaxRelationsExceeded": "Превишен е максималният брой обаждания"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Невалиден файл",
         "errorNoSource": "Няма източник на изображение",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}",
+        "uploadedImage": "Качено изображение",
+        "imageTitle": "Заглавие на изображението"
     },
     "questions": {
         "Questions": "Въпроси",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Вече отговорих",
         "TitlePlaceholder": "Въведете въпроса си",
         "ContentPlaceholder": "Поставете допълнителна информация тук, за да помогнете на хората да отговорят",
-        "ErrorTitle": "Изисква се въпрос"
+        "ErrorTitle": "Изисква се въпрос",
+        "Placeholder": "Заместител"
     },
     "experience": {
-        "NewExperience": "Ново преживяване"
+        "NewExperience": "Ново преживяване",
+        "DefineTitle": "Моля, определете заглавие",
+        "Create": "Създайте"
+    },
+    "calls": {
+        "SettingsTitle": "Обаждания",
+        "MaxCalls": "Макс се обажда",
+        "Update": "Актуализиране",
+        "NoCallsYet": "Все още няма обаждания",
+        "CallReasonTitle": "За какво е това обаждане?",
+        "WaitingRoom": "Чакалня"
     }
 }

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Gwahodd Cysylltiadau Dethol",
             "scannedQR": "{{ClickOrTap}} os sganiwyd y cod",
             "copyLink": "{{ClickOrTap}} i gopïo dolen gwahodd",
-            "userChooserPlaceholder": "Chwilio yn ôl enw"
+            "userChooserPlaceholder": "Chwilio yn ôl enw",
+            "shareOrCopyLink": "{{ClickOrTap}} i rannu neu gopïo dolen gwahodd"
         },
         "email": {
             "subject": "Hey, gwiriwch hyn",
@@ -222,7 +223,8 @@
             "start": "Dechrau",
             "stop": "Stopiwch",
             "streamingSettings": "Gosodiadau",
-            "streamToRTMP": "Ffrwd i RTMP arferiad"
+            "streamToRTMP": "Ffrwd i RTMP arferiad",
+            "dialogTitle": "Gosodiadau Fideo"
         },
         "participantsPopup": {
             "disconnect": "Datgysylltwch",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Dangos fideo",
             "turnOnAudio": "Sain ddigamsyniol",
             "turnOnScreenSharing": "Dangos rhannu sgrin",
-            "fullScreen": "Sgrin llawn"
+            "fullScreen": "Sgrin llawn",
+            "dialogTitle": "Gosodiadau Cyfranogwyr"
         },
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r nant hon.",
         "streamTitle": "{{1}} galwad byw",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Mae rhannu sgrin ymlaen",
             "screenSharingIsOff": "Sgrin rhannu",
             "joinNow": "Ymunwch â&#39;r Alwad"
+        },
+        "audioSettings": {
+            "dialogTitle": "Gosodiadau Sain",
+            "speakers": "Siaradwyr",
+            "microphone": "Meicroffon"
+        },
+        "streamingSettings": {
+            "title": "Gosodiadau Ffrydio"
         }
     },
     "types": {

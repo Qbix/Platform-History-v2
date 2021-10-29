@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
             "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin",
             "copyLink": "{{ClickOrTap}} kopioida kutsulinkki",
-            "userChooserPlaceholder": "Hae nimen perusteella"
+            "userChooserPlaceholder": "Hae nimen perusteella",
+            "shareOrCopyLink": "{{ClickOrTap}} jakaa tai kopioida kutsulinkin"
         },
         "email": {
             "subject": "Hei, tarkista tämä",
@@ -222,7 +223,8 @@
             "start": "alkaa",
             "stop": "Lopettaa",
             "streamingSettings": "asetukset",
-            "streamToRTMP": "Suoratoista mukautettuun RTMP: hen"
+            "streamToRTMP": "Suoratoista mukautettuun RTMP: hen",
+            "dialogTitle": "Videoasetukset"
         },
         "participantsPopup": {
             "disconnect": "Katkaista",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Näytä video",
             "turnOnAudio": "Poista äänen mykistys",
             "turnOnScreenSharing": "Näytä näytön jakaminen",
-            "fullScreen": "Koko näyttö"
+            "fullScreen": "Koko näyttö",
+            "dialogTitle": "Osallistujaasetukset"
         },
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
         "streamTitle": "{{1}} suora puhelu",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Näytön jakaminen on käytössä",
             "screenSharingIsOff": "Jaa näyttö",
             "joinNow": "Liity puheluun"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ääniasetukset",
+            "speakers": "Kaiuttimet",
+            "microphone": "Mikrofoni"
+        },
+        "streamingSettings": {
+            "title": "Suoratoistoasetukset"
         }
     },
     "types": {

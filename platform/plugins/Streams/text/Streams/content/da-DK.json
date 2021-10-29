@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Folk jeg inviterede",
-        "Streams/invitedMe": "Hvem inviterede mig"
+        "Streams/invitedMe": "Hvem inviterede mig",
+        "AreYouAgree": "Er du enig?",
+        "Yes": "Ja",
+        "No": "Ingen"
     },
     "interests": {
         "Filter": "Hvad nyder du?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Vælg igen fra kontakter",
             "inviteSelectedContacts": "Inviter valgte kontakter",
             "scannedQR": "{{ClickOrTap}} hvis koden blev scannet",
-            "copyLink": "{{ClickOrTap}} for at kopiere invitationslink"
+            "copyLink": "{{ClickOrTap}} for at kopiere invitationslink",
+            "userChooserPlaceholder": "Søg efter navn",
+            "shareOrCopyLink": "{{ClickOrTap}} for at dele eller kopiere invitationslinket"
         },
         "email": {
             "subject": "Hej, tjek dette ud",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Deltageren har ingen video",
             "openInBrowserAlert": "Åbn link i Safari-browser for at deltage i konferencen.",
             "youBeganVideoRecording": "Du begyndte at optage denne konference",
-            "youStoppedVideoRecording": "Du stoppede med at optage denne konference"
+            "youStoppedVideoRecording": "Du stoppede med at optage denne konference",
+            "switchingRoom": "Omklædningsrum ...",
+            "forceDisconnecting": "Du bliver afbrudt inden for 5 sekunder",
+            "youStartedLive": "Du begyndte at sende dette opkald til tilpasset RTMP",
+            "youStoppedLive": "Du stoppede med at sende dette opkald til tilpasset RTMP",
+            "sbStartedLiveStreaming": "{{userName}} startede live",
+            "sbStoppedLiveStreaming": "{{userName}} sluttede live",
+            "liveStopped": "Der opstod en fejl under afsendelse af video til slutpunkt"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Stop optagelse",
             "recordingInProgress": "Optagelse er i gang ...",
             "publishOnTimeline": "Publicer på tidslinjen",
-            "publishToGroup": "Publicer i gruppe"
+            "publishToGroup": "Publicer i gruppe",
+            "turnOffAudioInput": "Slå mikrofonen fra",
+            "micIsTurnedOff": "Mikrofonen er slukket",
+            "start": "Start",
+            "stop": "Hold op",
+            "streamingSettings": "Indstillinger",
+            "streamToRTMP": "Stream til brugerdefineret RTMP",
+            "dialogTitle": "Videoindstillinger"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Dæmp lyden",
             "turnOnScreenSharing": "Vis skærmdeling",
-            "fullScreen": "Fuld skærm"
+            "fullScreen": "Fuld skærm",
+            "dialogTitle": "Deltagerindstillinger"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
         "streamTitle": "{{1}} liveopkald",
         "preview": {
-            "preamble": "Møde:"
+            "preamble": "Møde:",
+            "Meeting": "Møde",
+            "MeetingEnded": "Mødet sluttede"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofonen er slukket",
+            "micIsOn": "Mikrofonen er tændt",
+            "cameraIsOff": "Kameraet er slukket",
+            "cameraIsOn": "Kameraet er tændt",
+            "screenSharingIsOn": "Skærmdeling er slået til",
+            "screenSharingIsOff": "Del skærm",
+            "joinNow": "Deltag i opkaldet"
+        },
+        "audioSettings": {
+            "dialogTitle": "Lydindstillinger",
+            "speakers": "Højttalere",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Indstillinger for streaming"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Svar",
             "description": "svar stream"
+        },
+        "Streams/calls": {
+            "displayType": "Opkald",
+            "description": "kategori for Streams/webrtc",
+            "MaxRelationsExceeded": "Maks. Opkald er overskredet"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Ugyldig fil",
         "errorNoSource": "Ingen billedkilde",
         "uploadLimit": "Maks. Filstørrelse: {{size}}",
-        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}"
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maks. Filstørrelse er {{size}}",
+        "uploadedImage": "Uploadet billede",
+        "imageTitle": "Billedtitel"
     },
     "questions": {
         "Questions": "Spørgsmål",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Allerede besvaret",
         "TitlePlaceholder": "Skriv dit spørgsmål",
         "ContentPlaceholder": "Anbring yderligere oplysninger her for at hjælpe folk med at svare",
-        "ErrorTitle": "Spørgsmål krævet"
+        "ErrorTitle": "Spørgsmål krævet",
+        "Placeholder": "Pladsholder"
     },
     "experience": {
-        "NewExperience": "Ny oplevelse"
+        "NewExperience": "Ny oplevelse",
+        "DefineTitle": "Angiv en titel",
+        "Create": "skab"
+    },
+    "calls": {
+        "SettingsTitle": "Opkald",
+        "MaxCalls": "Max opkald",
+        "Update": "Opdatering",
+        "NoCallsYet": "Ingen opkald endnu",
+        "CallReasonTitle": "Hvad handler dette opkald om?",
+        "WaitingRoom": "Venteværelse"
     }
 }

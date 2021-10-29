@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "افرادی که دعوت شدند",
-        "Streams/invitedMe": "چه کسی مرا دعوت کرد"
+        "Streams/invitedMe": "چه کسی مرا دعوت کرد",
+        "AreYouAgree": "آیا موافقی؟",
+        "Yes": "آره",
+        "No": "خیر"
     },
     "interests": {
         "Filter": "چه چیزی لذت می برید؟",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "دوباره از مخاطبین را انتخاب کنید",
             "inviteSelectedContacts": "دعوت از مخاطبین انتخابی",
             "scannedQR": "the 99 999}} اگر کد اسکن شد",
-            "copyLink": "copy 999}} برای کپی کردن لینک دعوت"
+            "copyLink": "copy 999}} برای کپی کردن لینک دعوت",
+            "userChooserPlaceholder": "جستجو براساس نام",
+            "shareOrCopyLink": "{{ClickOrTap}} پیوند دعوت را به اشتراک بگذارید یا کپی کنید"
         },
         "email": {
             "subject": "هی، این را چک کن",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "شرکت کننده فیلم ندارد",
             "openInBrowserAlert": "برای پیوستن به همایش ، پیوند را در مرورگر سافاری باز کنید.",
             "youBeganVideoRecording": "شما شروع به ضبط این کنفرانس کردید",
-            "youStoppedVideoRecording": "شما ضبط این کنفرانس را متوقف کردید"
+            "youStoppedVideoRecording": "شما ضبط این کنفرانس را متوقف کردید",
+            "switchingRoom": "اتاق تعویض ...",
+            "forceDisconnecting": "در عرض 5 ثانیه ارتباط شما قطع می شود",
+            "youStartedLive": "شما پخش این تماس را به RTMP سفارشی آغاز کردید",
+            "youStoppedLive": "پخش این تماس را به RTMP سفارشی متوقف کردید",
+            "sbStartedLiveStreaming": "{{userName}} به صورت زنده شروع شد",
+            "sbStoppedLiveStreaming": "{{userName}} به صورت زنده به پایان رسید",
+            "liveStopped": "هنگام ارسال ویدئو به نقطه پایانی خطایی روی داد"
         },
         "settingsPopup": {
             "webCamera": "دوربین وب",
@@ -205,7 +217,14 @@
             "stopRecording": "ضبط را متوقف کنید",
             "recordingInProgress": "ضبط در حال انجام است ...",
             "publishOnTimeline": "در جدول زمانی منتشر شود",
-            "publishToGroup": "انتشار به گروه"
+            "publishToGroup": "انتشار به گروه",
+            "turnOffAudioInput": "بی صدا میکروفون",
+            "micIsTurnedOff": "میکروفون خاموش است",
+            "start": "شروع کنید",
+            "stop": "متوقف کردن",
+            "streamingSettings": "تنظیمات",
+            "streamToRTMP": "جریان به RTMP سفارشی",
+            "dialogTitle": "تنظیمات ویدیو"
         },
         "participantsPopup": {
             "disconnect": "قطع شدن",
@@ -221,12 +240,32 @@
             "turnOnCamera": "نمایش فیلم",
             "turnOnAudio": "صدا را قطع کنید",
             "turnOnScreenSharing": "اشتراک گذاری صفحه نمایش",
-            "fullScreen": "تمام صفحه"
+            "fullScreen": "تمام صفحه",
+            "dialogTitle": "تنظیمات شرکت کننده"
         },
         "notAllowedToJoinCall": "شما اجازه پیوستن به این جریان را ندارید.",
         "streamTitle": "99 999}} تماس زنده",
         "preview": {
-            "preamble": "ملاقات:"
+            "preamble": "ملاقات:",
+            "Meeting": "ملاقات",
+            "MeetingEnded": "جلسه به پایان رسید"
+        },
+        "preparing": {
+            "micIsOff": "میکروفون خاموش است",
+            "micIsOn": "میکروفون روشن است",
+            "cameraIsOff": "دوربین خاموش است",
+            "cameraIsOn": "دوربین روشن است",
+            "screenSharingIsOn": "اشتراک گذاری صفحه روشن است",
+            "screenSharingIsOff": "اشتراک گذاری صفحه",
+            "joinNow": "به فراخوان بپیوندید"
+        },
+        "audioSettings": {
+            "dialogTitle": "تنظیمات صدا",
+            "speakers": "بلندگوها",
+            "microphone": "میکروفون"
+        },
+        "streamingSettings": {
+            "title": "تنظیمات جریان"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "پاسخ",
             "description": "جریان پاسخ"
+        },
+        "Streams/calls": {
+            "displayType": "تماس می گیرد",
+            "description": "دسته بندی برای Streams/webrtc",
+            "MaxRelationsExceeded": "از حداکثر تماس فراتر رفت"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "فایل نامعتبر",
         "errorNoSource": "منبع تصویری وجود ندارد",
         "uploadLimit": "حداکثر اندازه پرونده: {{size}}",
-        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است"
+        "errorFileSize": "متأسفم ، اما پرونده خیلی بزرگ است.<br> حداکثر اندازه پرونده {{size}} است",
+        "uploadedImage": "تصویر بارگذاری شده",
+        "imageTitle": "عنوان تصویر"
     },
     "questions": {
         "Questions": "سوالات",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "قبلا جواب داده",
         "TitlePlaceholder": "س yourال خود را تایپ کنید",
         "ContentPlaceholder": "هرگونه اطلاعات اضافی را در اینجا قرار دهید تا به افراد کمک کند تا پاسخ دهند",
-        "ErrorTitle": "سوال لازم است"
+        "ErrorTitle": "سوال لازم است",
+        "Placeholder": "نگهدارنده مکان"
     },
     "experience": {
-        "NewExperience": "تجربه جدید"
+        "NewExperience": "تجربه جدید",
+        "DefineTitle": "لطفا یک عنوان تعریف کنید",
+        "Create": "ایجاد کردن"
+    },
+    "calls": {
+        "SettingsTitle": "تماس می گیرد",
+        "MaxCalls": "مکس تماس می گیرد",
+        "Update": "به روز رسانی",
+        "NoCallsYet": "هنوز تماس گرفته نشده است",
+        "CallReasonTitle": "این تماس درباره چیست؟",
+        "WaitingRoom": "اتاق انتظار"
     }
 }

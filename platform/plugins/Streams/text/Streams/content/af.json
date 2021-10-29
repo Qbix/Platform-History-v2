@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Nooi geselekteerde kontakte uit",
             "scannedQR": "{{ClickOrTap}} as die kode geskandeer is",
             "copyLink": "{{ClickOrTap}} om die uitnodigingsskakel te kopieer",
-            "userChooserPlaceholder": "Soek op naam"
+            "userChooserPlaceholder": "Soek op naam",
+            "shareOrCopyLink": "{{ClickOrTap}} om uitnodigingskakel te deel of te kopieer"
         },
         "email": {
             "subject": "Hey, check dit uit",
@@ -222,7 +223,8 @@
             "start": "Begin",
             "stop": "Stop",
             "streamingSettings": "Instellings",
-            "streamToRTMP": "Stroom na pasgemaakte RTMP"
+            "streamToRTMP": "Stroom na pasgemaakte RTMP",
+            "dialogTitle": "Video-instellings"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Wys video",
             "turnOnAudio": "Demp klank uit",
             "turnOnScreenSharing": "Wys skermdeling",
-            "fullScreen": "Volskerm"
+            "fullScreen": "Volskerm",
+            "dialogTitle": "Deelnemer instellings"
         },
         "notAllowedToJoinCall": "U het nie toestemming om by hierdie stroom aan te sluit nie.",
         "streamTitle": "{{1}} regstreekse oproep",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Skermdeling is aan",
             "screenSharingIsOff": "Deel skerm",
             "joinNow": "Sluit aan by die oproep"
+        },
+        "audioSettings": {
+            "dialogTitle": "Oudio-instellings",
+            "speakers": "Luidsprekers",
+            "microphone": "Mikrofoon"
+        },
+        "streamingSettings": {
+            "title": "Stroominstellings"
         }
     },
     "types": {

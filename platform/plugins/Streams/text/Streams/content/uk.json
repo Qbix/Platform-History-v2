@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Запросити вибрані контакти",
             "scannedQR": "{{ClickOrTap}}, якщо код був відсканований",
             "copyLink": "{{ClickOrTap}}, щоб скопіювати посилання на запрошення",
-            "userChooserPlaceholder": "Пошук за назвою"
+            "userChooserPlaceholder": "Пошук за назвою",
+            "shareOrCopyLink": "{{ClickOrTap}}, щоб поділитися або скопіювати посилання на запрошення"
         },
         "email": {
             "subject": "Ей, перевірте це",
@@ -222,7 +223,8 @@
             "start": "Почати",
             "stop": "Стій",
             "streamingSettings": "Налаштування",
-            "streamToRTMP": "Потік на користувацький RTMP"
+            "streamToRTMP": "Потік на користувацький RTMP",
+            "dialogTitle": "Налаштування відео"
         },
         "participantsPopup": {
             "disconnect": "Відключити",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Показати відео",
             "turnOnAudio": "Увімкнути звук",
             "turnOnScreenSharing": "Показати спільний доступ до екрана",
-            "fullScreen": "Повноекранний"
+            "fullScreen": "Повноекранний",
+            "dialogTitle": "Налаштування учасників"
         },
         "notAllowedToJoinCall": "Ви не маєте дозволу приєднатися до цього потоку.",
         "streamTitle": "{{1}} прямий дзвінок",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Увімкнено спільний доступ до екрана",
             "screenSharingIsOff": "Поділитися екраном",
             "joinNow": "Приєднуйтесь до дзвінка"
+        },
+        "audioSettings": {
+            "dialogTitle": "Налаштування звуку",
+            "speakers": "динаміки",
+            "microphone": "мікрофон"
+        },
+        "streamingSettings": {
+            "title": "Налаштування потокового передавання"
         }
     },
     "types": {
