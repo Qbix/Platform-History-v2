@@ -1,9 +1,4 @@
 <?php
-// trying to get caching $urls
-if (empty(self::$urls)) {
-	$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
-	is_file($urlsFile) && require_once($urlsFile);
-}
 
 /**
  * @module Q
@@ -1194,4 +1189,10 @@ class Q_Uri
 	 * @type array
 	 */
 	protected $Q_url = null;
+}
+
+// trying to get caching $urls
+if (empty(Q_Uri::$urls)) {
+	$urlsFile = implode(DS, array(APP_CONFIG_DIR, "Q", "urls.php"));
+	is_file($urlsFile) && require_once($urlsFile);
 }

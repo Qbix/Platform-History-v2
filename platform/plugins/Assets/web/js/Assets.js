@@ -214,7 +214,7 @@
 			}
 		},
 
-		onSuccessPayment: new Q.Event(),
+		onPaymentSuccess: new Q.Event(),
 
 		onBeforeNotice: new Q.Event(),
 		onCreditsChanged: new Q.Event(),
@@ -935,7 +935,7 @@
 						return callback(msg, null);
 					}
 					Q.handle(callback, this, [null, response.slots.charge]);
-					Assets.onSuccessPayment.handle(response);
+					Assets.onPaymentSuccess.handle(response);
 				}, {
 					method: 'post',
 					fields: fields
@@ -979,6 +979,115 @@
 				Assets.Currencies.load(function (symbols, names) {
 					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
 				});
+			}
+		},
+		
+		/**
+		 * For dealing with Web3 wallets and blockchains
+		 * @class Assets.Web3
+		 */
+		Web3: {
+			
+			NFT: {
+				/**
+				 * Various methods for dealing with NFTs
+				 * @class Assets.Web3.NFT
+				 */
+			},
+			
+		   	/**
+		   	 * Generates a link for opening a coin
+		   	 * @static
+		   	 * @method addAsset
+		   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			 * @param {String} symbol A ticker symbol or shorthand, up to 5 chars.
+			 * @param {Number} decimals The number of decimals in the token
+			 * @param {String} [image] A string url of the token logo
+		   	 * @return {String}
+		   	 */			
+			addAsset: {	
+				metamask: function (asset, symbol, decimals, image) {
+					return ethereum.request({
+						method: 'wallet_watchAsset',
+						params: {
+							type: 'ERC20',
+							options: {
+								address: asset,
+								symbol: symbol,
+								decimals: decimals,
+								image: image
+							}
+						}
+					});
+				},
+				trustwallet: function (asset) {
+					window.open(Assets.Web3.Links.addAsset.trustwallet('c60_t'+asset));
+				}
+			},
+			
+			Links: {
+			   	/**
+			   	 * Generates a link for adding an asset
+			   	 * @static
+			   	 * @method addAsset
+			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @return {String}
+			   	 */
+				addAsset: { trustwallet: function (asset) {
+					return 'https://link.trustwallet.com/add_asset?asset='+asset;
+				}},
+			   	/**
+			   	 * Generates a link for opening a coin
+			   	 * @static
+			   	 * @method openCoin
+			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @return {String}
+			   	 */
+			   	openCoin: { trustwallet: function (asset) {
+					return 'https://link.trustwallet.com/open_coin?asset='+asset;
+				}},
+			   	/**
+			   	 * Generates a link for opening a coin
+			   	 * @static
+			   	 * @method addAsset
+			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @return {String}
+			   	 */
+			   	addAsset: { trustwallet: function (asset) {
+					return 'https://link.trustwallet.com/add_asset?asset='+asset;
+				}},
+			   	/**
+			   	 * Generates a link for sending a payment
+			   	 * @static
+			   	 * @method send
+			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @param {String} address some Ethereum address
+			   	 * @param {Number} amount The amount to send
+			   	 * @param {String} [memo] What to say with the payment
+			   	 * @return {String}
+			   	 */
+			   	send: { trustwallet: function (asset, address, amount, memo) {
+					return Q.url('https://link.trustwallet.com/send', {
+						asset: asset,
+						address: address,
+						amount: amount,
+						memo: memo || ''
+					});
+				}},
+			   	/**
+			   	 * Generates a link for swapping between tokens
+			   	 * @static
+			   	 * @method addAsset
+			   	 * @param {String} from in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @param {String} to in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			   	 * @return {String}
+			   	 */
+			   	swap: { trustwallet: function (from, to) {
+					return Q.url('https://link.trustwallet.com/swap', {
+						from: from,
+						to: to,
+					});
+				}}
 			}
 		}
 	};
