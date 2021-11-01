@@ -86,6 +86,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method tokensByAuthor
 	 * @static
 	 * @param {String} $address Author wallet address
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
 	static function tokensByAuthor ($address, $contractAddress = null) {
@@ -97,9 +98,11 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method commissionInfo
 	 * @static
 	 * @param {String} $tokenId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
-	static function getCommission ($tokenId, $contractAddress = null) {
+	static function getCommission ($tokenId, $updateCache=false, $contractAddress = null) {
 		self::construct();
 		$contractAddress = $contractAddress ?: self::$currentNetwork["contract"];
 		$cache = self::getCache(__FUNCTION__);
@@ -120,6 +123,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method tokensByOwner
 	 * @static
 	 * @param {String} $address Owner wallet address
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
 	static function tokensByOwner ($address, $contractAddress = null) {
@@ -131,9 +135,11 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method authorOf
 	 * @static
 	 * @param {String} $tokenId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
-	static function authorOf ($tokenId, $contractAddress = null) {
+	static function authorOf ($tokenId, $updateCache=false, $contractAddress = null) {
 		self::construct();
 		$contractAddress = $contractAddress ?: self::$currentNetwork["contract"];
 		$cache = self::getCache(__FUNCTION__);
@@ -153,9 +159,11 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method ownerOf
 	 * @static
 	 * @param {String} $tokenId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
-	static function ownerOf ($tokenId, $contractAddress = null) {
+	static function ownerOf ($tokenId, $updateCache=false, $contractAddress = null) {
 		self::construct();
 		$contractAddress = $contractAddress ?: self::$currentNetwork["contract"];
 		$cache = self::getCache(__FUNCTION__);
@@ -175,9 +183,11 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method saleInfo
 	 * @static
 	 * @param {String} $tokenId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
-	static function saleInfo ($tokenId, $contractAddress = null) {
+	static function saleInfo ($tokenId, $updateCache=false, $contractAddress = null) {
 		self::construct();
 		$contractAddress = $contractAddress ?: self::$currentNetwork["contract"];
 		$cache = self::getCache(__FUNCTION__);
