@@ -7941,7 +7941,7 @@ Q.updateUrls = function(callback) {
 		Q.request(url, [], function (err, result) {
 			if (err) {
 				// we couldn't find a diff, so let's reload the latest.json
-				Q.request('Q/urls/urls.latest.json', function (err, result) {
+				Q.request('Q/urls/urls/latest.json', function (err, result) {
 					_update(result);
 				});
 				console.warn("Q.updateUrls couldn't load or parse " + url);
