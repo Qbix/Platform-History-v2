@@ -7940,20 +7940,28 @@ Q.updateUrls = function(callback) {
 		url = 'Q/urls/diffs/' + ut + '.json';
 		Q.request(url, [], function (err, result) {
 			if (err) {
+				// we couldn't find a diff, so let's reload the latest.json
+				Q.request('Q/urls/urls.latest.json', function (err, result) {
+					_update(result);
+				});
 				console.warn("Q.updateUrls couldn't load or parse " + url);
 				return Q.handle(callback, null, []);
+			} else {
+				_update(result);
 			}
-			var urls = JSON.parse(localStorage.getItem('Q.updateUrls.urls'));
-			if (!Q.isEmpty(urls)) {
-				Q.updateUrls.urls = urls;
-				Q.extend(Q.updateUrls.urls, 100, result);
+			function _update(result) {
+				var urls = JSON.parse(localStorage.getItem('Q.updateUrls.urls'));
+				if (!Q.isEmpty(urls)) {
+					Q.updateUrls.urls = urls;
+					Q.extend(Q.updateUrls.urls, 100, result);
+				}
+				json = JSON.stringify(Q.updateUrls.urls);
+				localStorage.setItem(Q.updateUrls.lskey, json);
+				if (timestamp = result['#timestamp']) {
+					Q.cookie('Q_ut', timestamp);
+				}
+				Q.handle(callback, null, [result, timestamp]);
 			}
-			json = JSON.stringify(Q.updateUrls.urls);
-			localStorage.setItem(Q.updateUrls.lskey, json);
-			if (timestamp = result['#timestamp']) {
-				Q.cookie('Q_ut', timestamp);
-			}
-			Q.handle(callback, null, [result, timestamp]);
 		}, { extend: false, cacheBust: 1000 });
 	} else {
 		Q.request('Q/urls/urls/latest.json', [], function (err, result) {
