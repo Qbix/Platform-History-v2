@@ -3824,6 +3824,7 @@
 
 				Q.handle(callback, null, [provider]);
 			}).catch(function (ex) {
+				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
 		},
