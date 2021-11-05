@@ -7941,7 +7941,7 @@ Q.updateUrls = function(callback) {
 		Q.request(url, [], function (err, result) {
 			if (err) {
 				// we couldn't find a diff, so let's reload the latest.json
-				Q.request('Q/urls/urls.latest.json', function (err, result) {
+				Q.request('Q/urls/urls/latest.json', function (err, result) {
 					_update(result);
 				});
 				console.warn("Q.updateUrls couldn't load or parse " + url);
@@ -11876,6 +11876,7 @@ Q.Pointer = {
 	 * @param {Integer} [options.zIndex=99999]
 	 * @param {Boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
+	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
 	 *  function for options you can pass in this object
 	 * @param {String} [options.speak.text] The text to speak.
@@ -11890,6 +11891,7 @@ Q.Pointer = {
 	 * @param {Integer} [options.hide.after=null] Set an integer here to hide the hint animation after the specified number of milliseconds
 	 * @param {Integer} [options.hide.duration=500] The duration of the hint hide animation
 	 * @param {Function} [options.hide.ease=Q.Animation.ease.smooth]
+	 * @return {HTMLElement} img1 - Hint image element
 	 */
 	hint: function (targets, options) {
 		options = options || {};
@@ -11955,9 +11957,9 @@ Q.Pointer = {
 				}
 				Q.each(imgs, function (i, img) {
 					if (typeof img.target === 'string') {
-						img.target = document.querySelector(target);
+						img.target = document.querySelector(img.target);
 					}
-					img1.timeout = false;
+					img1.timeout = options.neverRemove;
 					var point;
 					var target = img.target;
 					if (Q.instanceOf(target, Element)) {
@@ -12039,6 +12041,8 @@ Q.Pointer = {
 		} else {
 			audioEvent.handle();
 		}
+
+		return img1;
 	},
 	/**
 	 * Stops any hints that are currently being displayed
@@ -12379,6 +12383,8 @@ Q.Pointer.hint.options = {
 	width: "50px",
 	height: "50px",
 	zIndex: 2147483647,
+	neverRemove: false,
+	dontRemove: false,
 	show: {
 		delay: 500,
 		duration: 500,

@@ -366,18 +366,15 @@
 
 				    // Subscribe to accounts change
 				    provider.on("accountsChanged", function (accounts) {
-				    	Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
 						console.log('provider.accountsChanged', accounts);
 				    });
 
 				    // Subscribe to chainId change
 				    provider.on("chainChanged", function (chainId) {
-						Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
 						console.log('provider.chainChanged', chainId);
 				    });
 					// Subscribe to provider disconnection
 					provider.on("connect", function (info) {
-						Q.handle(Users.Wallet.onConnect, provider, [networkId]);
 						console.log('provider.connect', info);
 					});
 					// Subscribe to provider disconnection
@@ -393,7 +390,6 @@
 						}
 
 						Q.Users.logout({using: 'wallet'});
-						Q.handle(Users.Wallet.onDisconnect, provider, [networkId]);
 					});
 					var payload = Q.text.Users.login.wallet.payload.interpolate({
 						host: location.host,
@@ -3826,18 +3822,9 @@
 			web3Modal.connect().then(function (provider) {
 				Users.Wallet.provider = provider;
 
-				provider.on("accountsChanged", function (accounts) {
-					Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
-				});
-				provider.on("chainChanged", function (chainId) {
-					Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
-				});
-				provider.on("connect", function (info) {
-					Q.handle(Users.Wallet.onConnect, provider, [info]);
-				});
-
 				Q.handle(callback, null, [provider]);
 			}).catch(function (ex) {
+				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
 		},
@@ -3876,6 +3863,18 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
+
+		if (window.ethereum) {
+			window.ethereum.on("accountsChanged", function (accounts) {
+				Q.handle(Users.Wallet.onAccountsChanged, this, [accounts]);
+			});
+			window.ethereum.on("chainChanged", function (chainId) {
+				Q.handle(Users.Wallet.onChainChanged, this, [chainId]);
+			});
+			window.ethereum.on("connect", function (info) {
+				Q.handle(Users.Wallet.onConnect, this, [info]);
+			});
+		}
 	}, 'Users');
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog) {

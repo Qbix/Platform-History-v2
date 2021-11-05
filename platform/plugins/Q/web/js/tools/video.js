@@ -267,7 +267,7 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	ads: [],
 	floating: {
-		evenIfPaused: true
+		evenIfPaused: false
 	},
 	adsTimeOut: 10,
 	overlay: {
