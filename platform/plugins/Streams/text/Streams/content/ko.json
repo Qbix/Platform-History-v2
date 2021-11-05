@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "선택한 연락처 초대",
             "scannedQR": "코드가 스캔 된 경우 {{ClickOrTap}}",
             "copyLink": "초대 링크를 복사하는 {{ClickOrTap}}",
-            "userChooserPlaceholder": "이름으로 검색"
+            "userChooserPlaceholder": "이름으로 검색",
+            "shareOrCopyLink": "{{ClickOrTap}} 초대 링크 공유 또는 복사"
         },
         "email": {
             "subject": "헤이, 이것 좀 봐.",
@@ -222,7 +223,8 @@
             "start": "시작",
             "stop": "중지",
             "streamingSettings": "설정",
-            "streamToRTMP": "사용자 지정 RTMP로 스트리밍"
+            "streamToRTMP": "사용자 지정 RTMP로 스트리밍",
+            "dialogTitle": "비디오 설정"
         },
         "participantsPopup": {
             "disconnect": "분리",
@@ -238,7 +240,8 @@
             "turnOnCamera": "비디오 표시",
             "turnOnAudio": "음소거 해제",
             "turnOnScreenSharing": "화면 공유 표시",
-            "fullScreen": "전체 화면"
+            "fullScreen": "전체 화면",
+            "dialogTitle": "참가자 설정"
         },
         "notAllowedToJoinCall": "이 스트림에 참여할 권한이 없습니다.",
         "streamTitle": "{{1}} 실시간 통화",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "화면 공유 사용 중",
             "screenSharingIsOff": "화면 공유",
             "joinNow": "통화 참여"
+        },
+        "audioSettings": {
+            "dialogTitle": "오디오 설정",
+            "speakers": "스피커",
+            "microphone": "마이크로폰"
+        },
+        "streamingSettings": {
+            "title": "스트리밍 설정"
         }
     },
     "types": {

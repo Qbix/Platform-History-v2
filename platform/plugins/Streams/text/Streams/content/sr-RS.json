@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Људи које сам позвао",
-        "Streams/invitedMe": "Ко ме је позвао"
+        "Streams/invitedMe": "Ко ме је позвао",
+        "AreYouAgree": "Слажете ли се?",
+        "Yes": "да",
+        "No": "Не"
     },
     "interests": {
         "Filter": "Шта уживаш?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Изаберите Поново из Контаката",
             "inviteSelectedContacts": "Позови изабране контакте",
             "scannedQR": "{{ClickOrTap}} ако је код скениран",
-            "copyLink": "{{ClickOrTap}} за копирање позивнице"
+            "copyLink": "{{ClickOrTap}} за копирање позивнице",
+            "userChooserPlaceholder": "Претражујте по имену",
+            "shareOrCopyLink": "{{ClickOrTap}} da biste podelili ili kopirali vezu poziva"
         },
         "email": {
             "subject": "Хеј, види ово",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Учесник нема видео",
             "openInBrowserAlert": "Отворите везу у прегледачу Сафари да бисте се придружили конференцији.",
             "youBeganVideoRecording": "Почели сте снимати ову конференцију",
-            "youStoppedVideoRecording": "Престали сте да снимате ову конференцију"
+            "youStoppedVideoRecording": "Престали сте да снимате ову конференцију",
+            "switchingRoom": "Промена собе ...",
+            "forceDisconnecting": "Бићете искључени у року од 5 секунди",
+            "youStartedLive": "Почели сте да емитујете овај позив прилагођеном РТМП -у",
+            "youStoppedLive": "Престали сте да емитујете овај позив прилагођеном РТМП -у",
+            "sbStartedLiveStreaming": "{{userName}} почео уживо",
+            "sbStoppedLiveStreaming": "{{userName}} се завршило уживо",
+            "liveStopped": "Дошло је до грешке при слању видео записа на крајњу тачку"
         },
         "settingsPopup": {
             "webCamera": "Веб камера",
@@ -205,7 +217,14 @@
             "stopRecording": "Заустави снимање",
             "recordingInProgress": "Снимање је у току ...",
             "publishOnTimeline": "Објавите на временској траци",
-            "publishToGroup": "Објавите у групи"
+            "publishToGroup": "Објавите у групи",
+            "turnOffAudioInput": "Искључивање микрофона",
+            "micIsTurnedOff": "Микрофон је искључен",
+            "start": "Почетак",
+            "stop": "Зауставити",
+            "streamingSettings": "Подешавања",
+            "streamToRTMP": "Стримујте до прилагођеног РТМП -а",
+            "dialogTitle": "Video Settings"
         },
         "participantsPopup": {
             "disconnect": "Прекини везу",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Прикажи видео",
             "turnOnAudio": "Занемаривање звука",
             "turnOnScreenSharing": "Прикажи дељење екрана",
-            "fullScreen": "Цео екран"
+            "fullScreen": "Цео екран",
+            "dialogTitle": "Podešavanja učesnika"
         },
         "notAllowedToJoinCall": "Немате дозволу да се придружите овом току.",
         "streamTitle": "{999}} позив уживо",
         "preview": {
-            "preamble": "Састанак:"
+            "preamble": "Састанак:",
+            "Meeting": "Састанак",
+            "MeetingEnded": "Састанак је завршен"
+        },
+        "preparing": {
+            "micIsOff": "Микрофон је искључен",
+            "micIsOn": "Микрофон је укључен",
+            "cameraIsOff": "Камера је искључена",
+            "cameraIsOn": "Камера је укључена",
+            "screenSharingIsOn": "Дељење екрана је укључено",
+            "screenSharingIsOff": "Дељење екрана",
+            "joinNow": "Придружите се позиву"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio podešavanja",
+            "speakers": "Zvučnici",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Podešavanja strimovanja"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Одговор",
             "description": "ток одговора"
+        },
+        "Streams/calls": {
+            "displayType": "Позиви",
+            "description": "категорија за Стреамс/вебртц",
+            "MaxRelationsExceeded": "Максималан број позива је премашен"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Неисправан фајл",
         "errorNoSource": "Нема извора слике",
         "uploadLimit": "Максимална величина датотеке: {{size}}",
-        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}"
+        "errorFileSize": "Жао нам је, али датотека је превелика.<br> Максимална величина датотеке је {{size}}",
+        "uploadedImage": "Отпремљена слика",
+        "imageTitle": "Наслов слике"
     },
     "questions": {
         "Questions": "Питања",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Већ одговорио",
         "TitlePlaceholder": "Укуцајте своје питање",
         "ContentPlaceholder": "Овде додајте све додатне информације како бисте помогли људима да одговоре",
-        "ErrorTitle": "Питање потребно"
+        "ErrorTitle": "Питање потребно",
+        "Placeholder": "Чувар места"
     },
     "experience": {
-        "NewExperience": "Ново искуство"
+        "NewExperience": "Ново искуство",
+        "DefineTitle": "Молимо вас да дефинишете наслов",
+        "Create": "Креирај"
+    },
+    "calls": {
+        "SettingsTitle": "Позиви",
+        "MaxCalls": "Мак зове",
+        "Update": "ажурирање",
+        "NoCallsYet": "Још нема позива",
+        "CallReasonTitle": "О чему се ради у овом позиву?",
+        "WaitingRoom": "Чекаоница"
     }
 }

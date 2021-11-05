@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Convidar contatos selecionados",
             "scannedQR": "{{ClickOrTap}} se o código foi digitalizado",
             "copyLink": "{{ClickOrTap}} para copiar o link do convite",
-            "userChooserPlaceholder": "Procura por nome"
+            "userChooserPlaceholder": "Procura por nome",
+            "shareOrCopyLink": "{{ClickOrTap}} para compartilhar ou copiar o link de convite"
         },
         "email": {
             "subject": "Ei, veja isso",
@@ -222,7 +223,8 @@
             "start": "Começar",
             "stop": "Pare",
             "streamingSettings": "Definições",
-            "streamToRTMP": "Transmita para RTMP personalizado"
+            "streamToRTMP": "Transmita para RTMP personalizado",
+            "dialogTitle": "Configurações de vídeo"
         },
         "participantsPopup": {
             "disconnect": "desconectar",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Mostrar vídeo",
             "turnOnAudio": "Ativar som do áudio",
             "turnOnScreenSharing": "Mostrar compartilhamento de tela",
-            "fullScreen": "Tela cheia"
+            "fullScreen": "Tela cheia",
+            "dialogTitle": "Configurações do participante"
         },
         "notAllowedToJoinCall": "Você não tem permissão para ingressar neste fluxo.",
         "streamTitle": "{{1}} chamada ao vivo",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Compartilhamento de tela ativado",
             "screenSharingIsOff": "Compartilhar tela",
             "joinNow": "Junte-se à chamada"
+        },
+        "audioSettings": {
+            "dialogTitle": "Configurações de áudio",
+            "speakers": "caixas de som",
+            "microphone": "Microfone"
+        },
+        "streamingSettings": {
+            "title": "Configurações de streaming"
         }
     },
     "types": {

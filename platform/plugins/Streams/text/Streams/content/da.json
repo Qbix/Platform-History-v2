@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Inviter valgte kontakter",
             "scannedQR": "{{ClickOrTap}} hvis koden blev scannet",
             "copyLink": "{{ClickOrTap}} for at kopiere invitationslink",
-            "userChooserPlaceholder": "Søg efter navn"
+            "userChooserPlaceholder": "Søg efter navn",
+            "shareOrCopyLink": "{{ClickOrTap}} for at dele eller kopiere invitationslinket"
         },
         "email": {
             "subject": "Hej, tjek dette ud",
@@ -222,7 +223,8 @@
             "start": "Start",
             "stop": "Hold op",
             "streamingSettings": "Indstillinger",
-            "streamToRTMP": "Stream til brugerdefineret RTMP"
+            "streamToRTMP": "Stream til brugerdefineret RTMP",
+            "dialogTitle": "Videoindstillinger"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Dæmp lyden",
             "turnOnScreenSharing": "Vis skærmdeling",
-            "fullScreen": "Fuld skærm"
+            "fullScreen": "Fuld skærm",
+            "dialogTitle": "Deltagerindstillinger"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
         "streamTitle": "{{1}} liveopkald",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Skærmdeling er slået til",
             "screenSharingIsOff": "Del skærm",
             "joinNow": "Deltag i opkaldet"
+        },
+        "audioSettings": {
+            "dialogTitle": "Lydindstillinger",
+            "speakers": "Højttalere",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Indstillinger for streaming"
         }
     },
     "types": {

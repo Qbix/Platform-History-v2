@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Cilvēki, kurus es uzaicināju",
-        "Streams/invitedMe": "Kas mani uzaicināja"
+        "Streams/invitedMe": "Kas mani uzaicināja",
+        "AreYouAgree": "Vai jūs piekrītat?",
+        "Yes": "Jā",
+        "No": "Nē"
     },
     "interests": {
         "Filter": "Kas jums patīk?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
             "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus",
             "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts",
-            "copyLink": "{{ClickOrTap}}, lai kopētu ielūguma saiti"
+            "copyLink": "{{ClickOrTap}}, lai kopētu ielūguma saiti",
+            "userChooserPlaceholder": "Meklēt pēc nosaukuma",
+            "shareOrCopyLink": "{{ClickOrTap}}, lai kopīgotu vai kopētu uzaicinājuma saiti"
         },
         "email": {
             "subject": "Hei, pārbaudiet to",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Dalībniekam nav video",
             "openInBrowserAlert": "Lai pievienotos konferencei, pārlūkprogrammā Safari atveriet saiti.",
             "youBeganVideoRecording": "Jūs sākāt ierakstīt šo konferenci",
-            "youStoppedVideoRecording": "Jūs pārtraucāt ierakstīt šo konferenci"
+            "youStoppedVideoRecording": "Jūs pārtraucāt ierakstīt šo konferenci",
+            "switchingRoom": "Notiek telpu pārslēgšana ...",
+            "forceDisconnecting": "Jūs tiksit atvienots 5 sekunžu laikā",
+            "youStartedLive": "Jūs sākāt pārraidīt šo zvanu uz pielāgotu RTMP",
+            "youStoppedLive": "Jūs pārtraucāt pārraidīt šo zvanu uz pielāgotu RTMP",
+            "sbStartedLiveStreaming": "{{userName}} sāka tiešraidē",
+            "sbStoppedLiveStreaming": "{{userName}} beidzās tiešraidē",
+            "liveStopped": "Sūtot video uz galapunktu, radās kļūda"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Beigt ierakstīšanu",
             "recordingInProgress": "Notiek ierakstīšana ...",
             "publishOnTimeline": "Publicēt laika skalā",
-            "publishToGroup": "Publicēt grupā"
+            "publishToGroup": "Publicēt grupā",
+            "turnOffAudioInput": "Izslēgt mikrofonu",
+            "micIsTurnedOff": "Mikrofons ir izslēgts",
+            "start": "Sākt",
+            "stop": "Apstāties",
+            "streamingSettings": "Iestatījumi",
+            "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
+            "dialogTitle": "Video iestatījumi"
         },
         "participantsPopup": {
             "disconnect": "Atvienojiet",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Rādīt video",
             "turnOnAudio": "Ieslēgt skaņu",
             "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
-            "fullScreen": "Pilnekrāna režīmā"
+            "fullScreen": "Pilnekrāna režīmā",
+            "dialogTitle": "Dalībnieka iestatījumi"
         },
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
         "streamTitle": "{{1}} tiešais zvans",
         "preview": {
-            "preamble": "Tikšanās:"
+            "preamble": "Tikšanās:",
+            "Meeting": "Tikšanās",
+            "MeetingEnded": "Sapulce beigusies"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofons ir izslēgts",
+            "micIsOn": "Mikrofons ir ieslēgts",
+            "cameraIsOff": "Kamera ir izslēgta",
+            "cameraIsOn": "Kamera ir ieslēgta",
+            "screenSharingIsOn": "Ekrāna kopīgošana ir ieslēgta",
+            "screenSharingIsOff": "Kopīgot ekrānu",
+            "joinNow": "Pievienojieties aicinājumam"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio iestatījumi",
+            "speakers": "Skaļruņi",
+            "microphone": "Mikrofons"
+        },
+        "streamingSettings": {
+            "title": "Straumēšanas iestatījumi"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Atbilde",
             "description": "atbilžu straume"
+        },
+        "Streams/calls": {
+            "displayType": "Zvani",
+            "description": "kategorija straumēm/tīmekļa vietnei",
+            "MaxRelationsExceeded": "Pārsniegts maksimālais zvanu skaits"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Nederīgs fails",
         "errorNoSource": "Nav attēla avota",
         "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}",
+        "uploadedImage": "Augšupielādēts attēls",
+        "imageTitle": "Attēla nosaukums"
     },
     "questions": {
         "Questions": "Jautājumi",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Jau atbildēju",
         "TitlePlaceholder": "Ierakstiet savu jautājumu",
         "ContentPlaceholder": "Ievietojiet šeit papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
-        "ErrorTitle": "Nepieciešams jautājums"
+        "ErrorTitle": "Nepieciešams jautājums",
+        "Placeholder": "Vietturis"
     },
     "experience": {
-        "NewExperience": "Jauna pieredze"
+        "NewExperience": "Jauna pieredze",
+        "DefineTitle": "Lūdzu, definējiet nosaukumu",
+        "Create": "Izveidot"
+    },
+    "calls": {
+        "SettingsTitle": "Zvani",
+        "MaxCalls": "Maks. Zvani",
+        "Update": "Atjaunināt",
+        "NoCallsYet": "Zvanu vēl nav",
+        "CallReasonTitle": "Par ko ir šis aicinājums?",
+        "WaitingRoom": "Uzgaidāmā telpa"
     }
 }

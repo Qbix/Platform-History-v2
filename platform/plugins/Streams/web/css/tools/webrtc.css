@@ -1835,7 +1835,9 @@
 .dialog-box.advanced-streaming h3.dialog-header,
 .Streams_webrtc_popup-streaming-box .dialog-header.Q_dialog_title{
     border-bottom: none;
-    background: #525252;
+    /*background: #525252;*/
+    background: #28a745;
+    color:#ffffff;
 }
 .Streams_webrtc_popup-add-image, .Streams_webrtc_popup-add-video, .Streams_webrtc_popup-add-audio {
     padding: 0;
@@ -2785,9 +2787,11 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     transition: max-height 1s;
     overflow: hidden;
     max-height: 0;
+    position: relative;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start_settings.shown {
     max-height: 1000px;
+    overflow: visible;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start_settings.shown .Streams_webrtc_streaming_rtmp_item {
     margin-top: 10px;
@@ -2809,6 +2813,20 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     margin-left: 10px;
 }
 
+.Streams_webrtc_streaming .Streams_webrtc_streaming_stop button{
+    background-color: #C12236;
+    border-color:rgb(190 106 116);
+    border-bottom-color:rgb(142 19 34);
+    border-right-color:rgb(142 19 34);
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_stop button:focus,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_stop button:active {
+    background: #781421;
+    border-color:rgb(190 106 116);
+    border-bottom-color:rgb(142 19 34);
+    border-right-color:rgb(142 19 34);
+}
+
 .Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start,
 .Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_stop,
 .Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_settings,
@@ -2820,13 +2838,26 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     justify-content: flex-end;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start select {
-    min-width: 0;
+    margin-right: 10px;
+    max-width: 30%;
 }
 .Streams_webrtc_streaming .Streams_webrtc_streaming_start button {
-    margin-left: 10px;
-}
-.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings {
     margin-right: 10px;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start button:last-child {
+    margin-right: 0;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_settings-btn {
+    /*margin-right: 10px;*/
+    background-color: #28a745;
+    border-color: #28a745;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings:focus,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_fb_settings:active,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_settings-btn:focus,
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start .Streams_webrtc_streaming_settings-btn:active {
+    background: #1d7830;
 }
 .Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start select,
 .Streams_webrtc_mobile-screen.Streams_webrtc_portrait-screen .Streams_webrtc_streaming .Streams_webrtc_streaming_start button,
@@ -2834,6 +2865,18 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
    width:100%;
     margin:5px;
 }
+.Streams_webrtc_streaming_instructions {
+    display: none;
+    position: absolute;
+    top:-25px;
+    right:0;
+    width:30px;
+    height:30px;
+}
+.Streams_webrtc_streaming .Streams_webrtc_streaming_start_settings.shown .Streams_webrtc_streaming_instructions {
+    display: block;
+}
+
 
 .Streams_webrtc_popup-box .dialog-btns-group,
 .dialog-box .dialog-btns-group {

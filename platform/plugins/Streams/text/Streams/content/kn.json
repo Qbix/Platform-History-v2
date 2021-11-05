@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "ಆಯ್ದ ಸಂಪರ್ಕಗಳನ್ನು ಆಹ್ವಾನಿಸಿ",
             "scannedQR": "ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿದರೆ {{ClickOrTap}}",
             "copyLink": "ಆಹ್ವಾನ ಲಿಂಕ್ ನಕಲಿಸಲು {{ClickOrTap}}",
-            "userChooserPlaceholder": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ"
+            "userChooserPlaceholder": "ಹೆಸರಿನಿಂದ ಹುಡುಕಿ",
+            "shareOrCopyLink": "ಆಹ್ವಾನ ಲಿಂಕ್ ಅನ್ನು ಹಂಚಿಕೊಳ್ಳಲು ಅಥವಾ ನಕಲಿಸಲು {{ClickOrTap}}"
         },
         "email": {
             "subject": "ಹೇ, ಇದನ್ನು ಪರಿಶೀಲಿಸಿ",
@@ -222,7 +223,8 @@
             "start": "ಆರಂಭ",
             "stop": "ನಿಲ್ಲಿಸು",
             "streamingSettings": "ಸಂಯೋಜನೆಗಳು",
-            "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ"
+            "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ",
+            "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         },
         "participantsPopup": {
             "disconnect": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ",
@@ -238,7 +240,8 @@
             "turnOnCamera": "ವೀಡಿಯೊ ತೋರಿಸಿ",
             "turnOnAudio": "ಆಡಿಯೊವನ್ನು ಅನ್‌ಮ್ಯೂಟ್ ಮಾಡಿ",
             "turnOnScreenSharing": "ಪರದೆಯ ಹಂಚಿಕೆಯನ್ನು ತೋರಿಸಿ",
-            "fullScreen": "ಪೂರ್ಣ ಪರದೆ"
+            "fullScreen": "ಪೂರ್ಣ ಪರದೆ",
+            "dialogTitle": "ಭಾಗವಹಿಸುವವರ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         },
         "notAllowedToJoinCall": "ಈ ಸ್ಟ್ರೀಮ್‌ಗೆ ಸೇರಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
         "streamTitle": "{{1}} ಲೈವ್ ಕರೆ",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "ಪರದೆ ಹಂಚಿಕೆ ಆನ್ ಆಗಿದೆ",
             "screenSharingIsOff": "ಪರದೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
             "joinNow": "ಕರೆಗೆ ಸೇರಿಕೊಳ್ಳಿ"
+        },
+        "audioSettings": {
+            "dialogTitle": "ಆಡಿಯೋ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+            "speakers": "ಸ್ಪೀಕರ್ಗಳು",
+            "microphone": "ಮೈಕ್ರೊಫೋನ್"
+        },
+        "streamingSettings": {
+            "title": "ಸ್ಟ್ರೀಮಿಂಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         }
     },
     "types": {

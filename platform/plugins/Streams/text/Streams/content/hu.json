@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Meghívott partnerek meghívása",
             "scannedQR": "{{ClickOrTap}}, ha a kódot beszkennelték",
             "copyLink": "{{ClickOrTap}} a meghívó link másolásához",
-            "userChooserPlaceholder": "Keresés név szerint"
+            "userChooserPlaceholder": "Keresés név szerint",
+            "shareOrCopyLink": "{{ClickOrTap}} a meghívólink megosztásához vagy másolásához"
         },
         "email": {
             "subject": "Hé, nézd meg ezt",
@@ -222,7 +223,8 @@
             "start": "Rajt",
             "stop": "Álljon meg",
             "streamingSettings": "Beállítások",
-            "streamToRTMP": "Adatfolyam egyéni RTMP -re"
+            "streamToRTMP": "Adatfolyam egyéni RTMP -re",
+            "dialogTitle": "Videó beállítások"
         },
         "participantsPopup": {
             "disconnect": "szétkapcsol",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Videó megjelenítése",
             "turnOnAudio": "A hang némítása",
             "turnOnScreenSharing": "A képernyőmegosztás megjelenítése",
-            "fullScreen": "Teljes képernyő"
+            "fullScreen": "Teljes képernyő",
+            "dialogTitle": "Résztvevő beállításai"
         },
         "notAllowedToJoinCall": "Nincs engedélyed ahhoz, hogy csatlakozz ehhez a patakhoz.",
         "streamTitle": "{{1}} élő hívás",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "A képernyőmegosztás be van kapcsolva",
             "screenSharingIsOff": "Képernyő megosztása",
             "joinNow": "Csatlakozzon a híváshoz"
+        },
+        "audioSettings": {
+            "dialogTitle": "Hangbeállítások",
+            "speakers": "Hangszórók",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Streaming beállítások"
         }
     },
     "types": {

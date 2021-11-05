@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Покана за избрани контакти",
             "scannedQR": "{{ClickOrTap}} ако кодът е сканиран",
             "copyLink": "{{ClickOrTap}} за да копирате връзка за покана",
-            "userChooserPlaceholder": "Търсете по име"
+            "userChooserPlaceholder": "Търсете по име",
+            "shareOrCopyLink": "{{ClickOrTap}} за споделяне или копиране на връзка за покана"
         },
         "email": {
             "subject": "Хей, провери това",
@@ -222,7 +223,8 @@
             "start": "Старт",
             "stop": "Спри се",
             "streamingSettings": "Настройки",
-            "streamToRTMP": "Поток към персонализиран RTMP"
+            "streamToRTMP": "Поток към персонализиран RTMP",
+            "dialogTitle": "Видео настройки"
         },
         "participantsPopup": {
             "disconnect": "Прекъсване на връзката",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Показване на видео",
             "turnOnAudio": "Спиране на звука",
             "turnOnScreenSharing": "Показване на споделяне на екрана",
-            "fullScreen": "Цял екран"
+            "fullScreen": "Цял екран",
+            "dialogTitle": "Настройки на участниците"
         },
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
         "streamTitle": "{{1}} обаждане на живо",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Споделянето на екрани е включено",
             "screenSharingIsOff": "сподели екран",
             "joinNow": "Присъединете се към обаждането"
+        },
+        "audioSettings": {
+            "dialogTitle": "Аудио настройки",
+            "speakers": "Високоговорители",
+            "microphone": "микрофон"
+        },
+        "streamingSettings": {
+            "title": "Настройки за поточно предаване"
         }
     },
     "types": {

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Bjud in valda kontakter",
             "scannedQR": "{{ClickOrTap}} om koden skannades",
             "copyLink": "{{ClickOrTap}} för att kopiera inbjudningslänken",
-            "userChooserPlaceholder": "Sök efter namn"
+            "userChooserPlaceholder": "Sök efter namn",
+            "shareOrCopyLink": "{{ClickOrTap}} för att dela eller kopiera inbjudningslänken"
         },
         "email": {
             "subject": "Hej, kolla här",
@@ -222,7 +223,8 @@
             "start": "Start",
             "stop": "Sluta",
             "streamingSettings": "inställningar",
-            "streamToRTMP": "Strömma till anpassad RTMP"
+            "streamToRTMP": "Strömma till anpassad RTMP",
+            "dialogTitle": "Videoinställningar"
         },
         "participantsPopup": {
             "disconnect": "Koppla ifrån",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Visa video",
             "turnOnAudio": "Stäng av ljudet",
             "turnOnScreenSharing": "Visa skärmdelning",
-            "fullScreen": "Fullskärm"
+            "fullScreen": "Fullskärm",
+            "dialogTitle": "Deltagarinställningar"
         },
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i den här strömmen.",
         "streamTitle": "{{1}} direktuppringning",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Skärmdelning är på",
             "screenSharingIsOff": "Dela skärm",
             "joinNow": "Gå med i samtalet"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ljudinställningar",
+            "speakers": "Högtalare",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Streaminginställningar"
         }
     },
     "types": {

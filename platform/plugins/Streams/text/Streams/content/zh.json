@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "邀请选定的联系人",
             "scannedQR": "{{ClickOrTap}}如果扫描了代码",
             "copyLink": "{{ClickOrTap}}复制邀请链接",
-            "userChooserPlaceholder": "按名称搜索"
+            "userChooserPlaceholder": "按名称搜索",
+            "shareOrCopyLink": "{{ClickOrTap}} 分享或复制邀请链接"
         },
         "email": {
             "subject": "嘿，看看这个",
@@ -222,7 +223,8 @@
             "start": "开始",
             "stop": "停止",
             "streamingSettings": "设置",
-            "streamToRTMP": "流式传输到自定义 RTMP"
+            "streamToRTMP": "流式传输到自定义 RTMP",
+            "dialogTitle": "视频设置"
         },
         "participantsPopup": {
             "disconnect": "断开",
@@ -238,7 +240,8 @@
             "turnOnCamera": "显示影片",
             "turnOnAudio": "取消静音",
             "turnOnScreenSharing": "显示屏幕共享",
-            "fullScreen": "全屏"
+            "fullScreen": "全屏",
+            "dialogTitle": "与会者设置"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
         "streamTitle": "{{1}}现场通话",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "屏幕共享已开启",
             "screenSharingIsOff": "共享屏幕",
             "joinNow": "加入通话"
+        },
+        "audioSettings": {
+            "dialogTitle": "音频设置",
+            "speakers": "扬声器",
+            "microphone": "麦克风"
+        },
+        "streamingSettings": {
+            "title": "流媒体设置"
         }
     },
     "types": {

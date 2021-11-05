@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Pozovi odabrane kontakte",
             "scannedQR": "{{ClickOrTap}} ako je kôd skeniran",
             "copyLink": "{{ClickOrTap}} za kopiranje veze za poziv",
-            "userChooserPlaceholder": "Pretražujte po imenu"
+            "userChooserPlaceholder": "Pretražujte po imenu",
+            "shareOrCopyLink": "{{ClickOrTap}} za dijeljenje ili kopiranje veze s pozivnicom"
         },
         "email": {
             "subject": "Hej, vidi ovo",
@@ -222,7 +223,8 @@
             "start": "Početak",
             "stop": "Stop",
             "streamingSettings": "Postavke",
-            "streamToRTMP": "Stream prema prilagođenom RTMP -u"
+            "streamToRTMP": "Stream prema prilagođenom RTMP -u",
+            "dialogTitle": "Postavke videa"
         },
         "participantsPopup": {
             "disconnect": "isključiti",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Zanemarivanje zvuka",
             "turnOnScreenSharing": "Prikaži dijeljenje zaslona",
-            "fullScreen": "Puni zaslon"
+            "fullScreen": "Puni zaslon",
+            "dialogTitle": "Postavke sudionika"
         },
         "notAllowedToJoinCall": "Nemate dozvolu pridružiti se tom toku.",
         "streamTitle": "{{1}} poziv uživo",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Dijeljenje zaslona je uključeno",
             "screenSharingIsOff": "Dijelite zaslon",
             "joinNow": "Pridružite se pozivu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio postavke",
+            "speakers": "Zvučnici",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Postavke strujanja"
         }
     },
     "types": {

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Nodig geselecteerde contactpersonen uit",
             "scannedQR": "{{ClickOrTap}} als de code is gescand",
             "copyLink": "{{ClickOrTap}} om de uitnodigingslink te kopiëren",
-            "userChooserPlaceholder": "Zoek op naam"
+            "userChooserPlaceholder": "Zoek op naam",
+            "shareOrCopyLink": "{{ClickOrTap}} om de uitnodigingslink te delen of te kopiëren"
         },
         "email": {
             "subject": "Hé, kijk hier eens",
@@ -222,7 +223,8 @@
             "start": "Begin",
             "stop": "Stop",
             "streamingSettings": "Instellingen",
-            "streamToRTMP": "Stream naar aangepaste RTMP"
+            "streamToRTMP": "Stream naar aangepaste RTMP",
+            "dialogTitle": "Beeldinstellingen"
         },
         "participantsPopup": {
             "disconnect": "verbinding verbreken",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Video weergeven",
             "turnOnAudio": "Dempen van audio opheffen",
             "turnOnScreenSharing": "Scherm delen weergeven",
-            "fullScreen": "Volledig scherm"
+            "fullScreen": "Volledig scherm",
+            "dialogTitle": "Deelnemersinstellingen"
         },
         "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
         "streamTitle": "{{1}} live-oproep",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Scherm delen is ingeschakeld",
             "screenSharingIsOff": "Scherm delen",
             "joinNow": "Doe mee aan de oproep"
+        },
+        "audioSettings": {
+            "dialogTitle": "Geluidsinstellingen",
+            "speakers": "Sprekers",
+            "microphone": "Microfoon"
+        },
+        "streamingSettings": {
+            "title": "Streaminginstellingen"
         }
     },
     "types": {

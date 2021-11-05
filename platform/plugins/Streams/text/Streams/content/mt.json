@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Stieden Kuntatti Magħżula",
             "scannedQR": "{{ClickOrTap}} jekk il-kodiċi kien skannjat",
             "copyLink": "{{ClickOrTap}} biex tikkopja link għall-istedina",
-            "userChooserPlaceholder": "Fittex bl-isem"
+            "userChooserPlaceholder": "Fittex bl-isem",
+            "shareOrCopyLink": "{{ClickOrTap}} biex taqsam jew tikkopja link tal-istedina"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",
@@ -222,7 +223,8 @@
             "start": "Ibda",
             "stop": "Waqfa",
             "streamingSettings": "Settings",
-            "streamToRTMP": "Stream għal RTMP apposta"
+            "streamToRTMP": "Stream għal RTMP apposta",
+            "dialogTitle": "Settings tal-Vidjo"
         },
         "participantsPopup": {
             "disconnect": "Skonnettja",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Uri vidjow",
             "turnOnAudio": "Akkordja l-awdjo",
             "turnOnScreenSharing": "Uri l-qsim tal-iskrin",
-            "fullScreen": "Skrin sħiħ"
+            "fullScreen": "Skrin sħiħ",
+            "dialogTitle": "Settings tal-Parteċipant"
         },
         "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
         "streamTitle": "{{1}} telefonata diretta",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Screensharing huwa mixgħul",
             "screenSharingIsOff": "Jaqsam l-iskrin",
             "joinNow": "Ingħaqad mas-Sejħa"
+        },
+        "audioSettings": {
+            "dialogTitle": "Settings tal-awdjo",
+            "speakers": "Kelliema",
+            "microphone": "Mikrofonu"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
         }
     },
     "types": {

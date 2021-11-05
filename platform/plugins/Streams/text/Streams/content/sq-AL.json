@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Njerëzit që kam ftuar",
-        "Streams/invitedMe": "Kush më ftoi"
+        "Streams/invitedMe": "Kush më ftoi",
+        "AreYouAgree": "A jeni dakord?",
+        "Yes": "po",
+        "No": "Jo"
     },
     "interests": {
         "Filter": "Çfarë gëzon?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
             "inviteSelectedContacts": "Fto kontaktet e zgjedhura",
             "scannedQR": "99 99 999}} nëse kodi ishte skanuar",
-            "copyLink": "99 99 999}} për të kopjuar lidhjen e ftesës"
+            "copyLink": "99 99 999}} për të kopjuar lidhjen e ftesës",
+            "userChooserPlaceholder": "Kërko sipas emrit",
+            "shareOrCopyLink": "{{ClickOrTap}} për të ndarë ose kopjuar lidhjen e ftesës"
         },
         "email": {
             "subject": "Hej, shiko këtë",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Pjesëmarrësi nuk ka video",
             "openInBrowserAlert": "Lidhje e hapur në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
             "youBeganVideoRecording": "Ju filluat regjistrimin e kësaj konference",
-            "youStoppedVideoRecording": "Ju ndaloi regjistrimin e kësaj konference"
+            "youStoppedVideoRecording": "Ju ndaloi regjistrimin e kësaj konference",
+            "switchingRoom": "Ndërrimi i dhomës ...",
+            "forceDisconnecting": "Do të shkëputeni brenda 5 sekondave",
+            "youStartedLive": "Fillove ta transmetosh këtë telefonatë në RTMP të personalizuar",
+            "youStoppedLive": "Ndalove transmetimin e kësaj thirrjeje në RTMP të personalizuar",
+            "sbStartedLiveStreaming": "{{userName}} filloi drejtpërdrejt",
+            "sbStoppedLiveStreaming": "{{userName}} përfundoi drejtpërdrejt",
+            "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare"
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
@@ -205,7 +217,14 @@
             "stopRecording": "Ndaloni regjistrimin",
             "recordingInProgress": "Regjistrimi është në proces ...",
             "publishOnTimeline": "Publikoni në afatin kohor",
-            "publishToGroup": "Publikoni në grup"
+            "publishToGroup": "Publikoni në grup",
+            "turnOffAudioInput": "Çaktivizo mikrofonin",
+            "micIsTurnedOff": "Mikrofoni është i fikur",
+            "start": "Fillo",
+            "stop": "Ndalo",
+            "streamingSettings": "Cilësimet",
+            "streamToRTMP": "Transmetoni në RTMP të personalizuar",
+            "dialogTitle": "Cilësimet e videos"
         },
         "participantsPopup": {
             "disconnect": "shqit",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Shfaq videon",
             "turnOnAudio": "Une audio",
             "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
-            "fullScreen": "Ekran i plotë"
+            "fullScreen": "Ekran i plotë",
+            "dialogTitle": "Cilësimet e pjesëmarrësve"
         },
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
         "streamTitle": "999 thirrje live",
         "preview": {
-            "preamble": "Takimi:"
+            "preamble": "Takimi:",
+            "Meeting": "Takim",
+            "MeetingEnded": "Takimi përfundoi"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofoni është i fikur",
+            "micIsOn": "Mikrofoni është aktiv",
+            "cameraIsOff": "Kamera është e fikur",
+            "cameraIsOn": "Kamera është e ndezur",
+            "screenSharingIsOn": "Ndarja e ekranit është aktiv",
+            "screenSharingIsOff": "Ndani ekranin",
+            "joinNow": "Bashkohuni me Thirrjen"
+        },
+        "audioSettings": {
+            "dialogTitle": "Cilësimet e audios",
+            "speakers": "Folësit",
+            "microphone": "Mikrofoni"
+        },
+        "streamingSettings": {
+            "title": "Cilësimet e transmetimit"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Përgjigje",
             "description": "lumë përgjigjesh"
+        },
+        "Streams/calls": {
+            "displayType": "Telefonatat",
+            "description": "kategori për Streams/webrtc",
+            "MaxRelationsExceeded": "Thirrjet maksimale u tejkaluan"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Skedar i pavlefshëm",
         "errorNoSource": "Asnjë burim imazhi",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
-        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}",
+        "uploadedImage": "Imazhi i ngarkuar",
+        "imageTitle": "Titulli i imazhit"
     },
     "questions": {
         "Questions": "Pyetjet",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Tashmë përgjigjur",
         "TitlePlaceholder": "Shtyp pyetjen tënde",
         "ContentPlaceholder": "Vendosni ndonjë informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
-        "ErrorTitle": "Kërkohet pyetje"
+        "ErrorTitle": "Kërkohet pyetje",
+        "Placeholder": "Vendmbajtës"
     },
     "experience": {
-        "NewExperience": "Përvoja e re"
+        "NewExperience": "Përvoja e re",
+        "DefineTitle": "Ju lutemi përcaktoni një titull",
+        "Create": "Krijo"
+    },
+    "calls": {
+        "SettingsTitle": "Telefonatat",
+        "MaxCalls": "Thirrjet maksimale",
+        "Update": "Përditëso",
+        "NoCallsYet": "Ende pa thirrje",
+        "CallReasonTitle": "Për çfarë bëhet fjalë kjo thirrje?",
+        "WaitingRoom": "Dhome pritje"
     }
 }

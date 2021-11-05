@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Fólk sem ég bauð",
-        "Streams/invitedMe": "Hver bauð mér"
+        "Streams/invitedMe": "Hver bauð mér",
+        "AreYouAgree": "Ertu sammála?",
+        "Yes": "Já",
+        "No": "Nei"
     },
     "interests": {
         "Filter": "Hvað finnst þér gaman?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Veldu aftur úr tengiliðum",
             "inviteSelectedContacts": "Bjóddu valdar tengiliðir",
             "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður",
-            "copyLink": "{{ClickOrTap}} til að afrita boðstengil"
+            "copyLink": "{{ClickOrTap}} til að afrita boðstengil",
+            "userChooserPlaceholder": "Leitaðu með nafni",
+            "shareOrCopyLink": "{{ClickOrTap}} til að deila eða afrita boðstengil"
         },
         "email": {
             "subject": "Hey, athugaðu þetta út",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Þátttakandinn hefur ekkert myndband",
             "openInBrowserAlert": "Opnaðu hlekk í Safari vafranum til að taka þátt í ráðstefnunni.",
             "youBeganVideoRecording": "Þú byrjaðir að taka upp þessa ráðstefnu",
-            "youStoppedVideoRecording": "Þú hættir að taka upp þessa ráðstefnu"
+            "youStoppedVideoRecording": "Þú hættir að taka upp þessa ráðstefnu",
+            "switchingRoom": "Skipta herbergi ...",
+            "forceDisconnecting": "Þú verður aftengdur innan 5 sekúndna",
+            "youStartedLive": "Þú byrjaðir að senda þetta símtal út í sérsniðna RTMP",
+            "youStoppedLive": "Þú hættir að senda þetta símtal út á sérsniðna RTMP",
+            "sbStartedLiveStreaming": "{{userName}} byrjaði í beinni",
+            "sbStoppedLiveStreaming": "{{userName}} lauk í beinni útsendingu",
+            "liveStopped": "Villa kom upp við að senda myndskeið á endapunkt"
         },
         "settingsPopup": {
             "webCamera": "Vefmyndavél",
@@ -205,7 +217,14 @@
             "stopRecording": "Hættu að taka upp",
             "recordingInProgress": "Upptaka er í gangi ...",
             "publishOnTimeline": "Birta á tímalínu",
-            "publishToGroup": "Birta í hóp"
+            "publishToGroup": "Birta í hóp",
+            "turnOffAudioInput": "Þagga hljóðnemann",
+            "micIsTurnedOff": "Slökkt er á hljóðnema",
+            "start": "Byrja",
+            "stop": "Hættu",
+            "streamingSettings": "Stillingar",
+            "streamToRTMP": "Streymdu í sérsniðna RTMP",
+            "dialogTitle": "Myndskeiðsstillingar"
         },
         "participantsPopup": {
             "disconnect": "Aftengdu",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Sýna myndband",
             "turnOnAudio": "Slökkva á hljóði",
             "turnOnScreenSharing": "Sýna samnýtingu skjáa",
-            "fullScreen": "Fullur skjár"
+            "fullScreen": "Fullur skjár",
+            "dialogTitle": "Stillingar þátttakanda"
         },
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
         "streamTitle": "{{1}} símtal í beinni",
         "preview": {
-            "preamble": "Fundur:"
+            "preamble": "Fundur:",
+            "Meeting": "Fundur",
+            "MeetingEnded": "Fundi lokið"
+        },
+        "preparing": {
+            "micIsOff": "Slökkt er á hljóðnemanum",
+            "micIsOn": "Mic er á",
+            "cameraIsOff": "Slökkt er á myndavélinni",
+            "cameraIsOn": "Kveikt er á myndavélinni",
+            "screenSharingIsOn": "Kveikt er á skjádeilingu",
+            "screenSharingIsOff": "Deila skjá",
+            "joinNow": "Taktu þátt í símtalinu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Hljóðstillingar",
+            "speakers": "Hátalarar",
+            "microphone": "Hljóðnemi"
+        },
+        "streamingSettings": {
+            "title": "Straumstillingar"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Svaraðu",
             "description": "svara straumi"
+        },
+        "Streams/calls": {
+            "displayType": "Símtöl",
+            "description": "flokk fyrir Streams/webrtc",
+            "MaxRelationsExceeded": "Hámarkshringingum var farið yfir"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Ógild skrá",
         "errorNoSource": "Engin myndheimild",
         "uploadLimit": "Hámarks skráarstærð: {{size}}",
-        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}"
+        "errorFileSize": "Því miður, en skrá of stórt.<br> Hámarks skráarstærð er {{size}}",
+        "uploadedImage": "Hlaðið upp mynd",
+        "imageTitle": "Titill myndar"
     },
     "questions": {
         "Questions": "Spurningar",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Nú þegar svarað",
         "TitlePlaceholder": "Sláðu inn spurningu þína",
         "ContentPlaceholder": "Settu allar viðbótarupplýsingar hér til að hjálpa fólki að svara",
-        "ErrorTitle": "Spurning krafist"
+        "ErrorTitle": "Spurning krafist",
+        "Placeholder": "Staðsetning"
     },
     "experience": {
-        "NewExperience": "Ný reynsla"
+        "NewExperience": "Ný reynsla",
+        "DefineTitle": "Vinsamlegast skilgreindu titil",
+        "Create": "Búa til"
+    },
+    "calls": {
+        "SettingsTitle": "Símtöl",
+        "MaxCalls": "Max hringir",
+        "Update": "Uppfærsla",
+        "NoCallsYet": "Engin símtöl ennþá",
+        "CallReasonTitle": "Um hvað er þetta símtal?",
+        "WaitingRoom": "Biðstofa"
     }
 }

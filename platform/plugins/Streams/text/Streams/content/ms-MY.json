@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Orang yang saya jemput",
-        "Streams/invitedMe": "Siapa menjemput saya"
+        "Streams/invitedMe": "Siapa menjemput saya",
+        "AreYouAgree": "Adakah anda bersetuju?",
+        "Yes": "Ya",
+        "No": "Tidak"
     },
     "interests": {
         "Filter": "Apa yang anda nikmati?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Pilih Lagi dari Kenalan",
             "inviteSelectedContacts": "Undang Kenalan Terpilih",
             "scannedQR": "{{ClickOrTap}} jika kod tersebut diimbas",
-            "copyLink": "{{ClickOrTap}} untuk menyalin pautan undangan"
+            "copyLink": "{{ClickOrTap}} untuk menyalin pautan undangan",
+            "userChooserPlaceholder": "Cari mengikut nama",
+            "shareOrCopyLink": "{{ClickOrTap}} untuk berkongsi atau menyalin pautan jemputan"
         },
         "email": {
             "subject": "Hei, periksa ini",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Peserta tidak mempunyai video",
             "openInBrowserAlert": "Pautan terbuka dalam penyemak imbas Safari untuk menyertai persidangan.",
             "youBeganVideoRecording": "Anda mula merakam persidangan ini",
-            "youStoppedVideoRecording": "Anda berhenti merakam persidangan ini"
+            "youStoppedVideoRecording": "Anda berhenti merakam persidangan ini",
+            "switchingRoom": "Menukar bilik ...",
+            "forceDisconnecting": "Anda akan terputus dalam masa 5 saat",
+            "youStartedLive": "Anda mula menyiarkan panggilan ini ke RTMP khusus",
+            "youStoppedLive": "Anda berhenti menyiarkan panggilan ini ke RTMP tersuai",
+            "sbStartedLiveStreaming": "{{userName}} dimulakan secara langsung",
+            "sbStoppedLiveStreaming": "{{userName}} berakhir secara langsung",
+            "liveStopped": "Ralat semasa menghantar video ke titik akhir berlaku"
         },
         "settingsPopup": {
             "webCamera": "Kamera sesawang",
@@ -205,7 +217,14 @@
             "stopRecording": "Berhenti Merakam",
             "recordingInProgress": "Rakaman sedang dijalankan ...",
             "publishOnTimeline": "Terbitkan mengikut garis masa",
-            "publishToGroup": "Terbitkan ke kumpulan"
+            "publishToGroup": "Terbitkan ke kumpulan",
+            "turnOffAudioInput": "Redamkan mikrofon",
+            "micIsTurnedOff": "Mikrofon dimatikan",
+            "start": "Mulakan",
+            "stop": "Berhenti",
+            "streamingSettings": "Tetapan",
+            "streamToRTMP": "Strim ke RTMP tersuai",
+            "dialogTitle": "Tetapan Video"
         },
         "participantsPopup": {
             "disconnect": "Putuskan sambungan",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Tunjukkan video",
             "turnOnAudio": "Redamkan suara",
             "turnOnScreenSharing": "Tunjukkan perkongsian skrin",
-            "fullScreen": "Skrin penuh"
+            "fullScreen": "Skrin penuh",
+            "dialogTitle": "Tetapan Peserta"
         },
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
         "streamTitle": "{{1}} panggilan langsung",
         "preview": {
-            "preamble": "Mesyuarat:"
+            "preamble": "Mesyuarat:",
+            "Meeting": "Mesyuarat",
+            "MeetingEnded": "Mesyuarat tamat"
+        },
+        "preparing": {
+            "micIsOff": "Mic dimatikan",
+            "micIsOn": "Mic dihidupkan",
+            "cameraIsOff": "Kamera dimatikan",
+            "cameraIsOn": "Kamera dihidupkan",
+            "screenSharingIsOn": "Perkongsian Skrin dihidupkan",
+            "screenSharingIsOff": "Kongsi skrin",
+            "joinNow": "Sertai Panggilan"
+        },
+        "audioSettings": {
+            "dialogTitle": "Tetapan Audio",
+            "speakers": "Penceramah",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Tetapan Penstriman"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Jawapan",
             "description": "aliran jawapan"
+        },
+        "Streams/calls": {
+            "displayType": "Panggilan",
+            "description": "kategori untuk Aliran / webrtc",
+            "MaxRelationsExceeded": "Melebihi panggilan maksimum"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Fail Tidak Sah",
         "errorNoSource": "Tiada sumber gambar",
         "uploadLimit": "Saiz fail maksimum: {{size}}",
-        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}",
+        "uploadedImage": "Gambar yang dimuat naik",
+        "imageTitle": "Tajuk gambar"
     },
     "questions": {
         "Questions": "Soalan",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Sudah dijawab",
         "TitlePlaceholder": "Taipkan soalan anda",
         "ContentPlaceholder": "Masukkan maklumat tambahan di sini untuk membantu orang menjawab",
-        "ErrorTitle": "Soalan diperlukan"
+        "ErrorTitle": "Soalan diperlukan",
+        "Placeholder": "Pemegang tempat"
     },
     "experience": {
-        "NewExperience": "Pengalaman baru"
+        "NewExperience": "Pengalaman baru",
+        "DefineTitle": "Tentukan tajuk",
+        "Create": "Buat"
+    },
+    "calls": {
+        "SettingsTitle": "Panggilan",
+        "MaxCalls": "Panggilan maksimum",
+        "Update": "Kemas kini",
+        "NoCallsYet": "Belum ada panggilan",
+        "CallReasonTitle": "Apa maksud panggilan ini?",
+        "WaitingRoom": "Bilik menunggu"
     }
 }

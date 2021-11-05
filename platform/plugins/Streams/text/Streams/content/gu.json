@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "પસંદ કરેલા સંપર્કોને આમંત્રિત કરો",
             "scannedQR": "Scan 9 999}} જો કોડ સ્કેન કરવામાં આવ્યો હતો",
             "copyLink": "આમંત્રિત લિંકને ક copyપિ કરવા માટે {9 999}.",
-            "userChooserPlaceholder": "નામ દ્વારા શોધો"
+            "userChooserPlaceholder": "નામ દ્વારા શોધો",
+            "shareOrCopyLink": "આમંત્રણ લિંક શેર કરવા અથવા કૉપિ કરવા માટે {{ClickOrTap}}"
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -222,7 +223,8 @@
             "start": "શરૂઆત",
             "stop": "બંધ",
             "streamingSettings": "સેટિંગ્સ",
-            "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો"
+            "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો",
+            "dialogTitle": "વિડિઓ સેટિંગ્સ"
         },
         "participantsPopup": {
             "disconnect": "ડિસ્કનેક્ટ કરો",
@@ -238,7 +240,8 @@
             "turnOnCamera": "વિડિઓ બતાવો",
             "turnOnAudio": "Mડિઓ અવાજ બંધ કરો",
             "turnOnScreenSharing": "સ્ક્રીન શેરિંગ બતાવો",
-            "fullScreen": "સંપૂર્ણ સ્ક્રીન"
+            "fullScreen": "સંપૂર્ણ સ્ક્રીન",
+            "dialogTitle": "સહભાગી સેટિંગ્સ"
         },
         "notAllowedToJoinCall": "તમને આ પ્રવાહમાં જોડાવાની પરવાનગી નથી.",
         "streamTitle": "} 9 999}} લાઇવ ક callલ",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "સ્ક્રીન શેરિંગ ચાલુ છે",
             "screenSharingIsOff": "સ્ક્રીન શેર કરો",
             "joinNow": "ક .લમાં જોડાઓ"
+        },
+        "audioSettings": {
+            "dialogTitle": "ઑડિઓ સેટિંગ્સ",
+            "speakers": "સ્પીકર્સ",
+            "microphone": "માઇક્રોફોન"
+        },
+        "streamingSettings": {
+            "title": "સ્ટ્રીમિંગ સેટિંગ્સ"
         }
     },
     "types": {

@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Undang Kenalan Terpilih",
             "scannedQR": "{{ClickOrTap}} jika kod tersebut diimbas",
             "copyLink": "{{ClickOrTap}} untuk menyalin pautan undangan",
-            "userChooserPlaceholder": "Cari mengikut nama"
+            "userChooserPlaceholder": "Cari mengikut nama",
+            "shareOrCopyLink": "{{ClickOrTap}} untuk berkongsi atau menyalin pautan jemputan"
         },
         "email": {
             "subject": "Hei, periksa ini",
@@ -222,7 +223,8 @@
             "start": "Mulakan",
             "stop": "Berhenti",
             "streamingSettings": "Tetapan",
-            "streamToRTMP": "Strim ke RTMP tersuai"
+            "streamToRTMP": "Strim ke RTMP tersuai",
+            "dialogTitle": "Tetapan Video"
         },
         "participantsPopup": {
             "disconnect": "Putuskan sambungan",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Tunjukkan video",
             "turnOnAudio": "Redamkan suara",
             "turnOnScreenSharing": "Tunjukkan perkongsian skrin",
-            "fullScreen": "Skrin penuh"
+            "fullScreen": "Skrin penuh",
+            "dialogTitle": "Tetapan Peserta"
         },
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai aliran ini.",
         "streamTitle": "{{1}} panggilan langsung",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Perkongsian Skrin dihidupkan",
             "screenSharingIsOff": "Kongsi skrin",
             "joinNow": "Sertai Panggilan"
+        },
+        "audioSettings": {
+            "dialogTitle": "Tetapan Audio",
+            "speakers": "Penceramah",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Tetapan Penstriman"
         }
     },
     "types": {

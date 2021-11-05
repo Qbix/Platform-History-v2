@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Žmonės, kuriuos pakvietiau",
-        "Streams/invitedMe": "Kas mane pakvietė"
+        "Streams/invitedMe": "Kas mane pakvietė",
+        "AreYouAgree": "Ar sutinkate?",
+        "Yes": "Taip",
+        "No": "Ne"
     },
     "interests": {
         "Filter": "Ką jums patinka?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Pasirinkite vėl iš „Contacts“",
             "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus",
             "scannedQR": "{{ClickOrTap}}, jei kodas buvo nuskaitytas",
-            "copyLink": "{{ClickOrTap}} nukopijuoti pakvietimo nuorodą"
+            "copyLink": "{{ClickOrTap}} nukopijuoti pakvietimo nuorodą",
+            "userChooserPlaceholder": "Ieškokite pagal pavadinimą",
+            "shareOrCopyLink": "{{ClickOrTap}}, jei norite bendrinti arba nukopijuoti kvietimo nuorodą"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",
@@ -180,7 +185,14 @@
             "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
             "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
             "youBeganVideoRecording": "Jūs pradėjote įrašyti šią konferenciją",
-            "youStoppedVideoRecording": "Nustojote įrašyti šią konferenciją"
+            "youStoppedVideoRecording": "Nustojote įrašyti šią konferenciją",
+            "switchingRoom": "Keičiamas kambarys ...",
+            "forceDisconnecting": "Būsite atjungtas per 5 sekundes",
+            "youStartedLive": "Pradėjote transliuoti šį skambutį į pasirinktinį RTMP",
+            "youStoppedLive": "Jūs nustojote transliuoti šį skambutį į pasirinktinį RTMP",
+            "sbStartedLiveStreaming": "{{userName}} pradėjo tiesiogiai",
+            "sbStoppedLiveStreaming": "{{userName}} baigėsi tiesiogiai",
+            "liveStopped": "Siunčiant vaizdo įrašą į galinį tašką įvyko klaida"
         },
         "settingsPopup": {
             "webCamera": "Internetinė kamera",
@@ -205,7 +217,14 @@
             "stopRecording": "Sustabdyti įrašymą",
             "recordingInProgress": "Įrašymas vyksta ...",
             "publishOnTimeline": "Paskelbkite laiko juostoje",
-            "publishToGroup": "Paskelbti grupei"
+            "publishToGroup": "Paskelbti grupei",
+            "turnOffAudioInput": "Mikrofono nutildymas",
+            "micIsTurnedOff": "Mikrofonas išjungtas",
+            "start": "Pradėti",
+            "stop": "Sustabdyti",
+            "streamingSettings": "Nustatymai",
+            "streamToRTMP": "Srautas į pasirinktinį RTMP",
+            "dialogTitle": "Vaizdo įrašo nustatymai"
         },
         "participantsPopup": {
             "disconnect": "Atjunkite",
@@ -221,12 +240,32 @@
             "turnOnCamera": "Rodyti vaizdo įrašą",
             "turnOnAudio": "Įjungti garso garsą",
             "turnOnScreenSharing": "Rodyti ekrano bendrinimą",
-            "fullScreen": "Per visą ekraną"
+            "fullScreen": "Per visą ekraną",
+            "dialogTitle": "Dalyvio nustatymai"
         },
         "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
         "streamTitle": "{{1}} tiesioginis skambutis",
         "preview": {
-            "preamble": "Susitikimas:"
+            "preamble": "Susitikimas:",
+            "Meeting": "Susitikimas",
+            "MeetingEnded": "Susitikimas baigėsi"
+        },
+        "preparing": {
+            "micIsOff": "Mikrofonas išjungtas",
+            "micIsOn": "Mikrofonas įjungtas",
+            "cameraIsOff": "Fotoaparatas išjungtas",
+            "cameraIsOn": "Fotoaparatas įjungtas",
+            "screenSharingIsOn": "Ekrano bendrinimas įjungtas",
+            "screenSharingIsOff": "Bendrinti ekraną",
+            "joinNow": "Prisijunkite prie skambučio"
+        },
+        "audioSettings": {
+            "dialogTitle": "Garso nustatymai",
+            "speakers": "Garsiakalbiai",
+            "microphone": "Mikrofonas"
+        },
+        "streamingSettings": {
+            "title": "Srautinio perdavimo nustatymai"
         }
     },
     "types": {
@@ -354,6 +393,11 @@
         "Streams/answer": {
             "displayType": "Atsakymas",
             "description": "atsakymų srautas"
+        },
+        "Streams/calls": {
+            "displayType": "Skambučiai",
+            "description": "Srautų/žiniatinklio kategorija",
+            "MaxRelationsExceeded": "Viršytas maksimalus skambučių skaičius"
         }
     },
     "messages": {
@@ -448,7 +492,9 @@
         "invalidFile": "Neteisingas failas",
         "errorNoSource": "Nėra vaizdo šaltinio",
         "uploadLimit": "Maksimalus failo dydis: {{size}}",
-        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+        "errorFileSize": "Deja, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}",
+        "uploadedImage": "Įkeltas vaizdas",
+        "imageTitle": "Vaizdo pavadinimas"
     },
     "questions": {
         "Questions": "Klausimai",
@@ -469,9 +515,20 @@
         "AlreadyAnswered": "Jau atsakiau",
         "TitlePlaceholder": "Įveskite savo klausimą",
         "ContentPlaceholder": "Čia padėkite bet kokią papildomą informaciją, kad žmonės galėtų atsakyti",
-        "ErrorTitle": "Būtinas klausimas"
+        "ErrorTitle": "Būtinas klausimas",
+        "Placeholder": "Vietos ženklas"
     },
     "experience": {
-        "NewExperience": "Nauja patirtis"
+        "NewExperience": "Nauja patirtis",
+        "DefineTitle": "Apibrėžkite pavadinimą",
+        "Create": "Sukurti"
+    },
+    "calls": {
+        "SettingsTitle": "Skambučiai",
+        "MaxCalls": "Maksimalus skambutis",
+        "Update": "Atnaujinti",
+        "NoCallsYet": "Skambučių dar nėra",
+        "CallReasonTitle": "Apie ką šis skambutis?",
+        "WaitingRoom": "Laukiamasis"
     }
 }

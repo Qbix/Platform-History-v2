@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Paribisha Mawasiliano Wachaguliwa",
             "scannedQR": "{{ClickOrTap}} ikiwa nambari hiyo ilikaguliwa",
             "copyLink": "{{ClickOrTap}} kuiga kiunga cha mwaliko",
-            "userChooserPlaceholder": "Tafuta kwa jina"
+            "userChooserPlaceholder": "Tafuta kwa jina",
+            "shareOrCopyLink": "{{ClickOrTap}} ili kushiriki au kunakili kiungo cha mwaliko"
         },
         "email": {
             "subject": "Hey, angalia hii nje",
@@ -222,7 +223,8 @@
             "start": "Anza",
             "stop": "Acha",
             "streamingSettings": "Mipangilio",
-            "streamToRTMP": "Tiririka kwa RTMP ya kawaida"
+            "streamToRTMP": "Tiririka kwa RTMP ya kawaida",
+            "dialogTitle": "Mipangilio ya Video"
         },
         "participantsPopup": {
             "disconnect": "Kukata",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Onyesha video",
             "turnOnAudio": "Sikiza sauti",
             "turnOnScreenSharing": "Onyesha kushiriki skrini",
-            "fullScreen": "Screen kamili"
+            "fullScreen": "Screen kamili",
+            "dialogTitle": "Mipangilio ya Mshiriki"
         },
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
         "streamTitle": "{{1}} simu ya moja kwa moja",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Kushiriki skrini kumewashwa",
             "screenSharingIsOff": "Shiriki skrini",
             "joinNow": "Jiunge na Simu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Mipangilio ya Sauti",
+            "speakers": "Wazungumzaji",
+            "microphone": "Maikrofoni"
+        },
+        "streamingSettings": {
+            "title": "Mipangilio ya Kutiririsha"
         }
     },
     "types": {

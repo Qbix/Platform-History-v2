@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Seçilen Kişileri Davet Et",
             "scannedQR": "Kod tarandıysa {{ClickOrTap}}",
             "copyLink": "Davet bağlantısını kopyalamak için {{ClickOrTap}}",
-            "userChooserPlaceholder": "Ada göre ara"
+            "userChooserPlaceholder": "Ada göre ara",
+            "shareOrCopyLink": "{{ClickOrTap}} davet bağlantısını paylaşmak veya kopyalamak için"
         },
         "email": {
             "subject": "Hey, şuna bir bak",
@@ -222,7 +223,8 @@
             "start": "Başlangıç",
             "stop": "Durmak",
             "streamingSettings": "Ayarlar",
-            "streamToRTMP": "Özel RTMP&#39;ye akış"
+            "streamToRTMP": "Özel RTMP&#39;ye akış",
+            "dialogTitle": "Video ayarları"
         },
         "participantsPopup": {
             "disconnect": "kesmek",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Videoyu göster",
             "turnOnAudio": "Sesi aç",
             "turnOnScreenSharing": "Ekran paylaşımını göster",
-            "fullScreen": "Tam ekran"
+            "fullScreen": "Tam ekran",
+            "dialogTitle": "Katılımcı Ayarları"
         },
         "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
         "streamTitle": "{{1}} canlı çağrı",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ekran paylaşımı açık",
             "screenSharingIsOff": "Ekran paylaşımı",
             "joinNow": "Çağrıya Katılın"
+        },
+        "audioSettings": {
+            "dialogTitle": "Ses ayarları",
+            "speakers": "Hoparlörler",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Akış Ayarları"
         }
     },
     "types": {

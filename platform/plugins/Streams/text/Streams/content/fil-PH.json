@@ -4,7 +4,10 @@
     },
     "labels": {
         "Streams/invited": "Mga taong inanyayahan ko",
-        "Streams/invitedMe": "Sino ang nag-imbita sa akin"
+        "Streams/invitedMe": "Sino ang nag-imbita sa akin",
+        "AreYouAgree": "Sumasang-ayon ka ba?",
+        "Yes": "Oo",
+        "No": "Hindi"
     },
     "interests": {
         "Filter": "Ano ang iyong kinaliligayahan?",
@@ -80,7 +83,9 @@
             "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
             "inviteSelectedContacts": "Anyayahan ang Mga Napiling Mga contact",
             "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
-            "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon"
+            "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon",
+            "userChooserPlaceholder": "Maghanap ayon sa pangalan",
+            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -177,7 +182,14 @@
             "userHasNoVideo": "Ang kalahok ay walang video",
             "openInBrowserAlert": "Buksan ang link sa Safari browser upang sumali sa kumperensya.",
             "youBeganVideoRecording": "Sinimulan mo ang pagrekord sa kumperensya na ito",
-            "youStoppedVideoRecording": "Tumigil ka sa pag-record ng kumperensya na ito"
+            "youStoppedVideoRecording": "Tumigil ka sa pag-record ng kumperensya na ito",
+            "switchingRoom": "Lumipat ng kwarto...",
+            "forceDisconnecting": "Madidiskonekta ka sa loob ng 5 segundo",
+            "youStartedLive": "Sinimulan mong i-broadcast ang tawag na ito sa custom na RTMP",
+            "youStoppedLive": "Itinigil mo ang pagbo-broadcast ng tawag na ito sa custom na RTMP",
+            "sbStartedLiveStreaming": "{{userName}} nagsimula nang live",
+            "sbStoppedLiveStreaming": "{{userName}} ay natapos nang live",
+            "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -202,7 +214,14 @@
             "stopRecording": "Itigil ang Pag-record",
             "recordingInProgress": "Natapos ang pagrekord ...",
             "publishOnTimeline": "I-publish sa takdang oras",
-            "publishToGroup": "I-publish sa pangkat"
+            "publishToGroup": "I-publish sa pangkat",
+            "dialogTitle": "Mga setting ng video",
+            "turnOffAudioInput": "I-mute ang mikropono",
+            "micIsTurnedOff": "Naka-off ang mikropono",
+            "start": "Magsimula",
+            "stop": "Tumigil ka",
+            "streamingSettings": "Mga setting",
+            "streamToRTMP": "Stream sa custom na RTMP"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",
@@ -218,12 +237,32 @@
             "turnOnCamera": "Ipakita ang video",
             "turnOnAudio": "I-unute ang audio",
             "turnOnScreenSharing": "Ipakita ang pagbabahagi ng screen",
-            "fullScreen": "Buong Screen"
+            "fullScreen": "Buong Screen",
+            "dialogTitle": "Mga Setting ng Kalahok"
         },
         "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa stream na ito.",
         "streamTitle": "Live na tawag ng {{1}}",
         "preview": {
-            "preamble": "Pagpupulong:"
+            "preamble": "Pagpupulong:",
+            "Meeting": "Pagpupulong",
+            "MeetingEnded": "Natapos ang pagpupulong"
+        },
+        "preparing": {
+            "micIsOff": "Naka-off ang Mic",
+            "micIsOn": "Naka-on ang Mic",
+            "cameraIsOff": "Naka-off ang camera",
+            "cameraIsOn": "Naka-on ang camera",
+            "screenSharingIsOn": "Naka-on ang pagbabahagi ng screen",
+            "screenSharingIsOff": "Iskreen na ibinabahagi",
+            "joinNow": "Sumali sa Tawag"
+        },
+        "audioSettings": {
+            "dialogTitle": "Mga setting ng audio",
+            "speakers": "Mga nagsasalita",
+            "microphone": "mikropono"
+        },
+        "streamingSettings": {
+            "title": "Mga Setting ng Streaming"
         }
     },
     "types": {
@@ -351,6 +390,11 @@
         "Streams/answer": {
             "displayType": "Sagot",
             "description": "sagot stream"
+        },
+        "Streams/calls": {
+            "displayType": "Mga tawag",
+            "description": "kategorya para sa Mga Stream/webrtc",
+            "MaxRelationsExceeded": "Lumampas ang max na tawag"
         }
     },
     "messages": {
@@ -445,7 +489,9 @@
         "invalidFile": "Di-wastong File",
         "errorNoSource": "Walang pinagmulan ng imahe",
         "uploadLimit": "Max na laki ng file: {{size}}",
-        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}",
+        "uploadedImage": "Na-upload na larawan",
+        "imageTitle": "Pamagat ng larawan"
     },
     "questions": {
         "Questions": "Mga Katanungan",
@@ -466,9 +512,20 @@
         "AlreadyAnswered": "Sumagot na",
         "TitlePlaceholder": "I-type ang iyong katanungan",
         "ContentPlaceholder": "Maglagay ng anumang karagdagang impormasyon dito upang matulungan ang mga tao na sagutin",
-        "ErrorTitle": "Kailangan ng tanong"
+        "ErrorTitle": "Kailangan ng tanong",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Bagong karanasan"
+        "NewExperience": "Bagong karanasan",
+        "DefineTitle": "Mangyaring tukuyin ang isang pamagat",
+        "Create": "Lumikha"
+    },
+    "calls": {
+        "SettingsTitle": "Mga tawag",
+        "MaxCalls": "Tumatawag si Max",
+        "Update": "Update",
+        "NoCallsYet": "Wala pang tawag",
+        "CallReasonTitle": "Tungkol saan ang tawag na ito?",
+        "WaitingRoom": "Silidhintayan"
     }
 }

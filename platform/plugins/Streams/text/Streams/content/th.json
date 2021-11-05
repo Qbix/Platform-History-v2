@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้",
             "scannedQR": "{{ClickOrTap}} หากสแกนรหัสแล้ว",
             "copyLink": "{{ClickOrTap}} เพื่อคัดลอกลิงก์เชิญ",
-            "userChooserPlaceholder": "ค้นหาด้วยชื่อ"
+            "userChooserPlaceholder": "ค้นหาด้วยชื่อ",
+            "shareOrCopyLink": "{{ClickOrTap}} เพื่อแชร์หรือคัดลอกลิงก์เชิญ"
         },
         "email": {
             "subject": "เฮ้ลองดูนี่สิ",
@@ -222,7 +223,8 @@
             "start": "เริ่ม",
             "stop": "หยุด",
             "streamingSettings": "การตั้งค่า",
-            "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง"
+            "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง",
+            "dialogTitle": "การตั้งค่าวิดีโอ"
         },
         "participantsPopup": {
             "disconnect": "ปลด",
@@ -238,7 +240,8 @@
             "turnOnCamera": "แสดงวิดีโอ",
             "turnOnAudio": "เปิดเสียง",
             "turnOnScreenSharing": "แสดงการแชร์หน้าจอ",
-            "fullScreen": "เต็มจอ"
+            "fullScreen": "เต็มจอ",
+            "dialogTitle": "การตั้งค่าผู้เข้าร่วม"
         },
         "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
         "streamTitle": "{{1}} การโทรสด",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "การแชร์หน้าจอเปิดอยู่",
             "screenSharingIsOff": "แชร์หน้าจอ",
             "joinNow": "เข้าร่วมการโทร"
+        },
+        "audioSettings": {
+            "dialogTitle": "การตั้งค่าเสียง",
+            "speakers": "ลำโพง",
+            "microphone": "ไมโครโฟน"
+        },
+        "streamingSettings": {
+            "title": "การตั้งค่าสตรีมมิ่ง"
         }
     },
     "types": {

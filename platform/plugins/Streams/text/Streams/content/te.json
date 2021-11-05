@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి",
             "scannedQR": "కోడ్ స్కాన్ చేయబడితే {{ClickOrTap}}",
             "copyLink": "ఆహ్వాన లింక్‌ను కాపీ చేయడానికి {{ClickOrTap}}",
-            "userChooserPlaceholder": "పేరు ద్వారా శోధించండి"
+            "userChooserPlaceholder": "పేరు ద్వారా శోధించండి",
+            "shareOrCopyLink": "ఆహ్వాన లింక్‌ను భాగస్వామ్యం చేయడానికి లేదా కాపీ చేయడానికి {{ClickOrTap}}"
         },
         "email": {
             "subject": "హే, ఈ తనిఖీ",
@@ -222,7 +223,8 @@
             "start": "ప్రారంభించు",
             "stop": "ఆపు",
             "streamingSettings": "సెట్టింగులు",
-            "streamToRTMP": "అనుకూల RTMP కి ప్రసారం చేయండి"
+            "streamToRTMP": "అనుకూల RTMP కి ప్రసారం చేయండి",
+            "dialogTitle": "వీడియో సెట్టింగ్‌లు"
         },
         "participantsPopup": {
             "disconnect": "డిస్కనెక్ట్",
@@ -238,7 +240,8 @@
             "turnOnCamera": "వీడియో చూపించు",
             "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
             "turnOnScreenSharing": "స్క్రీన్ భాగస్వామ్యాన్ని చూపించు",
-            "fullScreen": "పూర్తి స్క్రీన్"
+            "fullScreen": "పూర్తి స్క్రీన్",
+            "dialogTitle": "పాల్గొనేవారి సెట్టింగ్‌లు"
         },
         "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
         "streamTitle": "{{1}} ప్రత్యక్ష కాల్",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "స్క్రీన్ షేరింగ్ ఆన్‌లో ఉంది",
             "screenSharingIsOff": "స్క్రీన్‌ను షేర్ చేయండి",
             "joinNow": "కాల్‌లో చేరండి"
+        },
+        "audioSettings": {
+            "dialogTitle": "ఆడియో సెట్టింగ్‌లు",
+            "speakers": "స్పీకర్లు",
+            "microphone": "మైక్రోఫోన్"
+        },
+        "streamingSettings": {
+            "title": "స్ట్రీమింగ్ సెట్టింగ్‌లు"
         }
     },
     "types": {

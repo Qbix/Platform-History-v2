@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "चयनित संपर्कों को आमंत्रित करें",
             "scannedQR": "{{ClickOrTap}} यदि कोड स्कैन किया गया था",
             "copyLink": "{{ClickOrTap}} आमंत्रित लिंक कॉपी करने के लिए",
-            "userChooserPlaceholder": "नाम से खोजें"
+            "userChooserPlaceholder": "नाम से खोजें",
+            "shareOrCopyLink": "{{ClickOrTap}} आमंत्रण लिंक साझा करने या कॉपी करने के लिए"
         },
         "email": {
             "subject": "अरे, यह देखो",
@@ -222,7 +223,8 @@
             "start": "शुरू",
             "stop": "विराम",
             "streamingSettings": "समायोजन",
-            "streamToRTMP": "कस्टम RTMP पर स्ट्रीम करें"
+            "streamToRTMP": "कस्टम RTMP पर स्ट्रीम करें",
+            "dialogTitle": "वीडियो सेटिंग्स"
         },
         "participantsPopup": {
             "disconnect": "डिस्कनेक्ट",
@@ -238,7 +240,8 @@
             "turnOnCamera": "वीडियो दिखाएं",
             "turnOnAudio": "ऑडियो को अनम्यूट करें",
             "turnOnScreenSharing": "स्क्रीन शेयरिंग दिखाओ",
-            "fullScreen": "पूर्ण स्क्रीन"
+            "fullScreen": "पूर्ण स्क्रीन",
+            "dialogTitle": "प्रतिभागी सेटिंग्स"
         },
         "notAllowedToJoinCall": "आपको इस स्ट्रीम में शामिल होने की अनुमति नहीं है।",
         "streamTitle": "{{1}} लाइव कॉल",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "स्क्रीन साझाकरण चालू है",
             "screenSharingIsOff": "स्क्रीन साझा करना",
             "joinNow": "कॉल में शामिल हों"
+        },
+        "audioSettings": {
+            "dialogTitle": "आवाज की सेटिंग",
+            "speakers": "वक्ताओं",
+            "microphone": "माइक्रोफ़ोन"
+        },
+        "streamingSettings": {
+            "title": "स्ट्रीमिंग सेटिंग्स"
         }
     },
     "types": {

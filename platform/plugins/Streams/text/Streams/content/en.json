@@ -224,6 +224,7 @@
             "openInBrowserAlert": "Open link in Safari browser to join the conference."
         },
         "settingsPopup": {
+            "dialogTitle": "Video Settings",
             "webCamera": "Web Camera",
             "screenSharing": "Screen Sharing",
             "shareAnotherScreen": "Share another screen",
@@ -240,21 +241,27 @@
             "start": "Start",
             "stop": "Stop",
             "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Live Title",
-            "fbLiveDescription": "Live Description",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
             "fbOnlyMeLiveAccess": "Only Me",
             "fbFriendsAccess": "Friends",
             "fbPublicAccess": "Public",
             "publishOnTimeline": "Publish on timeline",
             "publishToGroup": "Publish to group",
             "fbStartLive": "Go Live",
-            "fbStopLive": "End Live",
+            "fbStopLive": "End Livestream",
             "streamingSettings": "Settings",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
             "streamToRTMP": "Stream to custom RTMP"
         },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
         "participantsPopup": {
+            "dialogTitle": "Participant Settings",
             "disconnect": "Disconnect",
             "floatingScreens": "Floating Screens",
             "tiledScreens": "Tiled Screens",
@@ -269,6 +276,9 @@
             "turnOnCamera": "Show video",
             "turnOnAudio": "Unmute audio",
             "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
         },
         "preview": {
             "Meeting": "Meeting",

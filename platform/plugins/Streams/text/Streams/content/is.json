@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Bjóddu valdar tengiliðir",
             "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður",
             "copyLink": "{{ClickOrTap}} til að afrita boðstengil",
-            "userChooserPlaceholder": "Leitaðu með nafni"
+            "userChooserPlaceholder": "Leitaðu með nafni",
+            "shareOrCopyLink": "{{ClickOrTap}} til að deila eða afrita boðstengil"
         },
         "email": {
             "subject": "Hey, athugaðu þetta út",
@@ -222,7 +223,8 @@
             "start": "Byrja",
             "stop": "Hættu",
             "streamingSettings": "Stillingar",
-            "streamToRTMP": "Streymdu í sérsniðna RTMP"
+            "streamToRTMP": "Streymdu í sérsniðna RTMP",
+            "dialogTitle": "Myndskeiðsstillingar"
         },
         "participantsPopup": {
             "disconnect": "Aftengdu",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Sýna myndband",
             "turnOnAudio": "Slökkva á hljóði",
             "turnOnScreenSharing": "Sýna samnýtingu skjáa",
-            "fullScreen": "Fullur skjár"
+            "fullScreen": "Fullur skjár",
+            "dialogTitle": "Stillingar þátttakanda"
         },
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að taka þátt í þessum straumi.",
         "streamTitle": "{{1}} símtal í beinni",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Kveikt er á skjádeilingu",
             "screenSharingIsOff": "Deila skjá",
             "joinNow": "Taktu þátt í símtalinu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Hljóðstillingar",
+            "speakers": "Hátalarar",
+            "microphone": "Hljóðnemi"
+        },
+        "streamingSettings": {
+            "title": "Straumstillingar"
         }
     },
     "types": {

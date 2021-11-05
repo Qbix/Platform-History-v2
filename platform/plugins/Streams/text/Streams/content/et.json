@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Kutsu valitud kontaktid",
             "scannedQR": "{{ClickOrTap}}, kui kood skaneeriti",
             "copyLink": "{{ClickOrTap}} kutselingi kopeerimiseks",
-            "userChooserPlaceholder": "Otsi nime järgi"
+            "userChooserPlaceholder": "Otsi nime järgi",
+            "shareOrCopyLink": "{{ClickOrTap}} kutselingi jagamiseks või kopeerimiseks"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -222,7 +223,8 @@
             "start": "Alusta",
             "stop": "Peatus",
             "streamingSettings": "Seaded",
-            "streamToRTMP": "Voogesitage kohandatud RTMP -le"
+            "streamToRTMP": "Voogesitage kohandatud RTMP -le",
+            "dialogTitle": "Video seaded"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Kuva video",
             "turnOnAudio": "Vaigista heli sisse",
             "turnOnScreenSharing": "Kuva ekraani jagamine",
-            "fullScreen": "Täisekraan"
+            "fullScreen": "Täisekraan",
+            "dialogTitle": "Osaleja seaded"
         },
         "notAllowedToJoinCall": "Teil pole luba selle vooga liituda.",
         "streamTitle": "{{1}} otsekõne",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ekraani jagamine on sisse lülitatud",
             "screenSharingIsOff": "Jaga ekraani",
             "joinNow": "Liituge kõnega"
+        },
+        "audioSettings": {
+            "dialogTitle": "Helisätted",
+            "speakers": "Kõlarid",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Voogesituse seaded"
         }
     },
     "types": {

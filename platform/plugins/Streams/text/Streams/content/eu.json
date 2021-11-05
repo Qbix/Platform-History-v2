@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Hautatutako kontaktuak gonbidatu",
             "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada",
             "copyLink": "{{ClickOrTap}} gonbidapenaren esteka kopiatzeko",
-            "userChooserPlaceholder": "Bilatu izenaren arabera"
+            "userChooserPlaceholder": "Bilatu izenaren arabera",
+            "shareOrCopyLink": "{{ClickOrTap}} gonbidapen-esteka partekatzeko edo kopiatzeko"
         },
         "email": {
             "subject": "Hey, begiratu hau",
@@ -222,7 +223,8 @@
             "start": "Hasi",
             "stop": "Gelditu",
             "streamingSettings": "Ezarpenak",
-            "streamToRTMP": "Stream RTMP pertsonalizatura"
+            "streamToRTMP": "Stream RTMP pertsonalizatura",
+            "dialogTitle": "Bideo ezarpenak"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Erakutsi bideoa",
             "turnOnAudio": "Ezabatu audioa",
             "turnOnScreenSharing": "Erakutsi pantaila partekatzea",
-            "fullScreen": "Pantaila osoa"
+            "fullScreen": "Pantaila osoa",
+            "dialogTitle": "Parte-hartzaileen ezarpenak"
         },
         "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
         "streamTitle": "{{1}} zuzeneko deia",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Pantaila partekatzea aktibatuta dago",
             "screenSharingIsOff": "Partekatu pantaila",
             "joinNow": "Sartu Deian"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio ezarpenak",
+            "speakers": "Hizlariak",
+            "microphone": "Mikrofonoa"
+        },
+        "streamingSettings": {
+            "title": "Streaming ezarpenak"
         }
     },
     "types": {

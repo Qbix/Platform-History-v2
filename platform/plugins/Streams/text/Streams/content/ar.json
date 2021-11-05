@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "دعوة جهات الاتصال المحددة",
             "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز",
             "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة",
-            "userChooserPlaceholder": "البحث عن طريق الإسم"
+            "userChooserPlaceholder": "البحث عن طريق الإسم",
+            "shareOrCopyLink": "{{ClickOrTap}} لمشاركة أو نسخ رابط الدعوة"
         },
         "email": {
             "subject": "مهلا ، تحقق من ذلك",
@@ -222,7 +223,8 @@
             "start": "يبدأ",
             "stop": "قف",
             "streamingSettings": "إعدادات",
-            "streamToRTMP": "دفق إلى RTMP مخصص"
+            "streamToRTMP": "دفق إلى RTMP مخصص",
+            "dialogTitle": "اعدادات الفيديو"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
@@ -238,7 +240,8 @@
             "turnOnCamera": "عرض الفيديو",
             "turnOnAudio": "إلغاء كتم الصوت",
             "turnOnScreenSharing": "إظهار مشاركة الشاشة",
-            "fullScreen": "شاشة كاملة"
+            "fullScreen": "شاشة كاملة",
+            "dialogTitle": "إعدادات المشاركين"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
         "streamTitle": "{{1}} مكالمة مباشرة",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "مشاركة الشاشة قيد التشغيل",
             "screenSharingIsOff": "شاشة المشاركة",
             "joinNow": "انضم إلى المكالمة"
+        },
+        "audioSettings": {
+            "dialogTitle": "إعدادات الصوت",
+            "speakers": "مكبرات الصوت",
+            "microphone": "ميكروفون"
+        },
+        "streamingSettings": {
+            "title": "إعدادات البث"
         }
     },
     "types": {

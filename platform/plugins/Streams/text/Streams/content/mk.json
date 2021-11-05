@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Поканете ги избраните контакти",
             "scannedQR": "{99 999}} ако кодот е скениран",
             "copyLink": "Copy 99 999}} за копирање на врската за покана",
-            "userChooserPlaceholder": "Пребарај по име"
+            "userChooserPlaceholder": "Пребарај по име",
+            "shareOrCopyLink": "{{ClickOrTap}} за споделување или копирање на врската за покана"
         },
         "email": {
             "subject": "Еј, провери го ова",
@@ -222,7 +223,8 @@
             "start": "Започнете",
             "stop": "Стоп",
             "streamingSettings": "Подесувања",
-            "streamToRTMP": "Проследувајте до сопствен RTMP"
+            "streamToRTMP": "Проследувајте до сопствен RTMP",
+            "dialogTitle": "Видео поставки"
         },
         "participantsPopup": {
             "disconnect": "Исклучете се",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Покажи видео",
             "turnOnAudio": "Исклучете го аудио",
             "turnOnScreenSharing": "Прикажи споделување на екранот",
-            "fullScreen": "Цел екран"
+            "fullScreen": "Цел екран",
+            "dialogTitle": "Поставки за учесници"
         },
         "notAllowedToJoinCall": "Немате дозвола да се приклучите на овој поток.",
         "streamTitle": "99 99 999}} во живо повик",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Споделувањето на екранот е вклучено",
             "screenSharingIsOff": "Сподели екран",
             "joinNow": "Придружете се на Повикот"
+        },
+        "audioSettings": {
+            "dialogTitle": "Аудио поставки",
+            "speakers": "Звучници",
+            "microphone": "Микрофон"
+        },
+        "streamingSettings": {
+            "title": "Поставки за стриминг"
         }
     },
     "types": {

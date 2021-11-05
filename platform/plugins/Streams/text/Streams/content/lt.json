@@ -84,7 +84,8 @@
             "inviteSelectedContacts": "Pakviesti pasirinktus kontaktus",
             "scannedQR": "{{ClickOrTap}}, jei kodas buvo nuskaitytas",
             "copyLink": "{{ClickOrTap}} nukopijuoti pakvietimo nuorodą",
-            "userChooserPlaceholder": "Ieškokite pagal pavadinimą"
+            "userChooserPlaceholder": "Ieškokite pagal pavadinimą",
+            "shareOrCopyLink": "{{ClickOrTap}}, jei norite bendrinti arba nukopijuoti kvietimo nuorodą"
         },
         "email": {
             "subject": "Ei, patikrinkite tai",
@@ -222,7 +223,8 @@
             "start": "Pradėti",
             "stop": "Sustabdyti",
             "streamingSettings": "Nustatymai",
-            "streamToRTMP": "Srautas į pasirinktinį RTMP"
+            "streamToRTMP": "Srautas į pasirinktinį RTMP",
+            "dialogTitle": "Vaizdo įrašo nustatymai"
         },
         "participantsPopup": {
             "disconnect": "Atjunkite",
@@ -238,7 +240,8 @@
             "turnOnCamera": "Rodyti vaizdo įrašą",
             "turnOnAudio": "Įjungti garso garsą",
             "turnOnScreenSharing": "Rodyti ekrano bendrinimą",
-            "fullScreen": "Per visą ekraną"
+            "fullScreen": "Per visą ekraną",
+            "dialogTitle": "Dalyvio nustatymai"
         },
         "notAllowedToJoinCall": "Jūs neturite leidimo prisijungti prie šio srauto.",
         "streamTitle": "{{1}} tiesioginis skambutis",
@@ -255,6 +258,14 @@
             "screenSharingIsOn": "Ekrano bendrinimas įjungtas",
             "screenSharingIsOff": "Bendrinti ekraną",
             "joinNow": "Prisijunkite prie skambučio"
+        },
+        "audioSettings": {
+            "dialogTitle": "Garso nustatymai",
+            "speakers": "Garsiakalbiai",
+            "microphone": "Mikrofonas"
+        },
+        "streamingSettings": {
+            "title": "Srautinio perdavimo nustatymai"
         }
     },
     "types": {
