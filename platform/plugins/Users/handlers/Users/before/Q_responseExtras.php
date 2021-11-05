@@ -72,4 +72,14 @@ function Users_before_Q_responseExtras()
 
 	// fetch labels info
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
+
+	// load ethers js libs if wallet config defined
+	if (Q_Config::get("Users", "apps", "wallet", Users::communityId(), null)) {
+		Q_Response::addScript('{{Users}}/js/wallet/ethers-5.2.umd.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/wallet/evm-chains.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/wallet/fortmatic.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/wallet/walletconnect.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/wallet/web3.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/wallet/web3modal.js', 'Users');
+	}
 }
