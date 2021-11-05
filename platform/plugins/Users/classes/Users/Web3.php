@@ -18,6 +18,14 @@ class Users_Web3 extends Base_Users_Web3 {
 	static $contract = null;
 	static $currentNetwork = null;
 	static $useCache = null;
+	static $methodIDs = array(
+		'saleInfo' => 'saleInfo(uint256)',
+		'authorOf' => 'authorOf(uint256)',
+		'ownerOf' => 'ownerOf(uint256)',
+		'getCommission' => 'getCommission(uint256)',
+		'tokensByAuthor' => 'tokensByAuthor(uint256)',
+		'tokensByOwner' => 'tokensByOwner(uint256)'
+	);
 
 	/**
 	 * Get needed environment variables
@@ -214,7 +222,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		self::construct();
 		$cache = new Users_Web3();
 		$cache->chainId = (int)self::$currentNetwork["chainId"];
-		$cache->methodId = substr(Keccak::hash($methodName, 256), 0, 8);
+		$cache->methodId = substr(Keccak::hash(self::$methodIDs[$methodName], 256), 0, 8);
 		$cache->methodName = $methodName;
 		$cache->contract = self::$currentNetwork["contract"];
 		$cache->params = Q::json_encode(compact("tokenId"));
