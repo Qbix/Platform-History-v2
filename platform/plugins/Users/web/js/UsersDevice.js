@@ -83,14 +83,18 @@
 						Q.Text.get('Users/content', function (err, text) {
 							text = Q.copy(Q.getObject(["notifications"], text));
 							if (!text) {
-								console.warn('Notifications confirmations texts not found');
+								return console.warn('Notifications confirmations texts not found');
 							}
+
 							// if not - ask
 							Q.handle(Users.Device.beforeSubscribeConfirm, Users.Device, [
 								options, granted, subscribed, text
 							]);
 
 							Q.confirm(text.prompt, function (res) {
+								// stop talking when the answer is chosen
+								Q.Audio.stopSpeaking();
+
 								if (!res) {
 									// save to cache that notifications requested
 									// only if user refused, because otherwise - notifications has granted
