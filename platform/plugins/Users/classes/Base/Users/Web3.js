@@ -21,15 +21,14 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {Integer} [fields.chainId] defaults to 0
- * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
- * @param {String|Db.Expression} [fields.updatedTime] defaults to null
- * @param {String} [fields.contract] defaults to ""
- * @param {String} [fields.methodId] defaults to ""
+ * @param {String} [fields.chainId] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
+ * @param {String} [fields.contract] defaults to ""
  * @param {String} [fields.result] defaults to null
  * @param {String} [fields.extra] defaults to "{}"
+ * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
+ * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
 function Base (fields) {
 	Base.constructors.apply(this, arguments);
@@ -39,30 +38,6 @@ Q.mixin(Base, Row);
 
 /**
  * @property chainId
- * @type Integer
- * @default 0
- * 
- */
-/**
- * @property insertedTime
- * @type String|Db.Expression
- * @default new Db.Expression("CURRENT_TIMESTAMP")
- * 
- */
-/**
- * @property updatedTime
- * @type String|Db.Expression
- * @default null
- * 
- */
-/**
- * @property contract
- * @type String
- * @default ""
- * 
- */
-/**
- * @property methodId
  * @type String
  * @default ""
  * 
@@ -80,6 +55,12 @@ Q.mixin(Base, Row);
  * 
  */
 /**
+ * @property contract
+ * @type String
+ * @default ""
+ * 
+ */
+/**
  * @property result
  * @type String
  * @default null
@@ -89,7 +70,19 @@ Q.mixin(Base, Row);
  * @property extra
  * @type String
  * @default "{}"
- * JSON with any extra attributes
+ * 
+ */
+/**
+ * @property insertedTime
+ * @type String|Db.Expression
+ * @default new Db.Expression("CURRENT_TIMESTAMP")
+ * 
+ */
+/**
+ * @property updatedTime
+ * @type String|Db.Expression
+ * @default null
+ * 
  */
 
 /**
@@ -279,7 +272,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"chainId",
-		"methodId",
+		"methodName",
 		"params"
 	];
 };
@@ -302,41 +295,43 @@ Base.prototype.fieldNames = function () {
 Base.fieldNames = function () {
 	return [
 		"chainId",
-		"insertedTime",
-		"updatedTime",
-		"contract",
-		"methodId",
 		"methodName",
 		"params",
+		"contract",
 		"result",
-		"extra"
+		"extra",
+		"insertedTime",
+		"updatedTime"
 	];
 };
 
 /**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_chainId
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
 Base.prototype.beforeSet_chainId = function (value) {
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".chainId");
-		if (value < -2147483648 || value > 2147483647)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".chainId");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".chainId");
+		if (typeof value === "string" && value.length > 10)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".chainId");
 		return value;
 };
 
-/**
- * Returns the maximum integer that can be assigned to the chainId field
- * @return {integer}
- */
+	/**
+	 * Returns the maximum string length that can be assigned to the chainId field
+	 * @return {integer}
+	 */
 Base.prototype.maxSize_chainId = function () {
 
-		return 2147483647;
+		return 10;
 };
 
 	/**
@@ -345,58 +340,83 @@ Base.prototype.maxSize_chainId = function () {
 	 */
 Base.column_chainId = function () {
 
-return [["int","10","",false],false,"PRI",null];
+return [["varchar","10","",false],false,"PRI",null];
 };
 
 /**
- * Method is called before setting the field
- * @method beforeSet_insertedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_methodName
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_insertedTime = function (value) {
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== 'object' && !isNaN(value)) {
-			value = parseInt(value);
-			value = new Date(value < 10000000000 ? value * 1000 : value);
+Base.prototype.beforeSet_methodName = function (value) {
+		if (value == null) {
+			value='';
 		}
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".methodName");
+		if (typeof value === "string" && value.length > 20)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".methodName");
 		return value;
 };
 
 	/**
-	 * Returns schema information for insertedTime column
+	 * Returns the maximum string length that can be assigned to the methodName field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_methodName = function () {
+
+		return 20;
+};
+
+	/**
+	 * Returns schema information for methodName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_insertedTime = function () {
+Base.column_methodName = function () {
 
-return [["timestamp","10","",false],false,"","CURRENT_TIMESTAMP"];
+return [["varchar","20","",false],false,"PRI",null];
 };
 
 /**
- * Method is called before setting the field
- * @method beforeSet_updatedTime
- * @param {String} value
- * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_params
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_updatedTime = function (value) {
-		if (value == undefined) return value;
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== 'object' && !isNaN(value)) {
-			value = parseInt(value);
-			value = new Date(value < 10000000000 ? value * 1000 : value);
+Base.prototype.beforeSet_params = function (value) {
+		if (value == null) {
+			value='';
 		}
-		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".params");
+		if (typeof value === "string" && value.length > 100)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".params");
 		return value;
 };
 
 	/**
-	 * Returns schema information for updatedTime column
+	 * Returns the maximum string length that can be assigned to the params field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_params = function () {
+
+		return 100;
+};
+
+	/**
+	 * Returns schema information for params column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_updatedTime = function () {
+Base.column_params = function () {
 
-return [["timestamp","10","",false],true,"",null];
+return [["varchar","100","",false],false,"PRI",""];
 };
 
 /**
@@ -435,120 +455,6 @@ Base.prototype.maxSize_contract = function () {
 Base.column_contract = function () {
 
 return [["varchar","42","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_methodId
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_methodId = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".methodId");
-		if (typeof value === "string" && value.length > 8)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".methodId");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the methodId field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_methodId = function () {
-
-		return 8;
-};
-
-	/**
-	 * Returns schema information for methodId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_methodId = function () {
-
-return [["varchar","8","",false],false,"PRI",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_methodName
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_methodName = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".methodName");
-		if (typeof value === "string" && value.length > 63)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".methodName");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the methodName field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_methodName = function () {
-
-		return 63;
-};
-
-	/**
-	 * Returns schema information for methodName column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_methodName = function () {
-
-return [["varchar","63","",false],false,"",null];
-};
-
-/**
- * Method is called before setting the field and verifies if value is string of length within acceptable limit.
- * Optionally accept numeric value which is converted to string
- * @method beforeSet_params
- * @param {string} value
- * @return {string} The value
- * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
- */
-Base.prototype.beforeSet_params = function (value) {
-		if (value == null) {
-			value='';
-		}
-		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number")
-			throw new Error('Must pass a String to '+this.table()+".params");
-		if (typeof value === "string" && value.length > 720)
-			throw new Error('Exceedingly long value being assigned to '+this.table()+".params");
-		return value;
-};
-
-	/**
-	 * Returns the maximum string length that can be assigned to the params field
-	 * @return {integer}
-	 */
-Base.prototype.maxSize_params = function () {
-
-		return 720;
-};
-
-	/**
-	 * Returns schema information for params column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-Base.column_params = function () {
-
-return [["varchar","720","",false],false,"PRI",""];
 };
 
 /**
@@ -600,7 +506,7 @@ Base.prototype.beforeSet_extra = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".extra");
-		if (typeof value === "string" && value.length > 1023)
+		if (typeof value === "string" && value.length > 1024)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".extra");
 		return value;
 };
@@ -611,7 +517,7 @@ Base.prototype.beforeSet_extra = function (value) {
 	 */
 Base.prototype.maxSize_extra = function () {
 
-		return 1023;
+		return 1024;
 };
 
 	/**
@@ -620,7 +526,58 @@ Base.prototype.maxSize_extra = function () {
 	 */
 Base.column_extra = function () {
 
-return [["varchar","1023","",false],true,"","{}"];
+return [["varchar","1024","",false],true,"","{}"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_insertedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_insertedTime = function (value) {
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_insertedTime = function () {
+
+return [["timestamp","1024","",false],false,"","CURRENT_TIMESTAMP"];
+};
+
+/**
+ * Method is called before setting the field
+ * @method beforeSet_updatedTime
+ * @param {String} value
+ * @return {Date|Db.Expression} If 'value' is not Db.Expression the current date is returned
+ */
+Base.prototype.beforeSet_updatedTime = function (value) {
+		if (value == undefined) return value;
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== 'object' && !isNaN(value)) {
+			value = parseInt(value);
+			value = new Date(value < 10000000000 ? value * 1000 : value);
+		}
+		value = (value instanceof Date) ? Base.db().toDateTime(value) : value;
+		return value;
+};
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_updatedTime = function () {
+
+return [["timestamp","1024","",false],true,"",null];
 };
 
 /**
@@ -632,7 +589,7 @@ return [["varchar","1023","",false],true,"","{}"];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['chainId','methodId'], i;
+	var fields = ['chainId','methodName'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
