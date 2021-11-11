@@ -99,7 +99,7 @@ class Users_Web3 extends Base_Users_Web3 {
 
 	/**
 	 * Get comission info by token
-	 * @method commissionInfo
+	 * @method getCommission
 	 * @static
 	 * @param {String} $tokenId
 	 * @param {String} $network - chainId
@@ -107,7 +107,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {String} [$contractAddress=null] - Custom contract address
 	 * @return array
 	 */
-	static function commissionInfo ($tokenId, $network, $updateCache=false) {
+	static function getCommission ($tokenId, $network, $updateCache=false) {
 		self::construct($network);
 		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
 		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
@@ -117,7 +117,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		$data = self::aggregator("getCommission", $tokenId, $network);
+		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
 		$data["value"] = gmp_intval(Q::ifset($data, "r", "value", null));
 
 		$cache->result = Q::json_encode($data);
@@ -157,7 +157,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$cache->result = Q::json_encode($data);
+		$cache->result = $data;
 		$cache->save();
 
 		return $data;
@@ -180,7 +180,78 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$cache->result = Q::json_encode($data);
+		$cache->result = $data;
+		$cache->save();
+
+		return $data;
+	}
+
+	/**
+	 * Get URI to json with related data
+	 * @method tokenURI
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $network - chainId
+	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
+	 * @return array
+	 */
+	static function tokenURI ($tokenId, $network, $updateCache=false) {
+		self::construct($network);
+		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
+		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
+			return $cache->result;
+		}
+
+		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
+		$cache->result = $data;
+		$cache->save();
+
+		return $data;
+	}
+
+	/**
+	 * Get wallet balance
+	 * @method balanceOf
+	 * @static
+	 * @param {String} $walletAddress
+	 * @param {String} $network - chainId
+	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
+	 * @return string
+	 */
+	static function balanceOf ($walletAddress, $network, $updateCache=false) {
+		self::construct($network);
+		$cache = self::getCache(__FUNCTION__, $network, compact("walletAddress"));
+		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
+			return $cache->result;
+		}
+
+		$data = (string)self::aggregator(__FUNCTION__, $walletAddress, $network);
+
+		$cache->result = $data;
+		$cache->save();
+
+		return $data;
+	}
+
+	/**
+	 *
+	 * @method getApproved
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $network - chainId
+	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
+	 * @return string
+	 */
+	static function getApproved ($tokenId, $network, $updateCache=false) {
+		self::construct($network);
+		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
+		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
+			return $cache->result;
+		}
+
+		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
+
+		$cache->result = $data;
 		$cache->save();
 
 		return $data;
