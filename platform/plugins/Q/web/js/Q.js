@@ -12310,7 +12310,7 @@ Q.Pointer.preventRubberBand.suspend = {};
 function _cancelClickBriefly(event) {
 	// if input element stuff exceeds width of element, blur will lead to scroll element to the start
 	// this will lead to cancel first click on submit button because before click fired blur from input
-	if (Q.typeOf(event).toLowerCase() === "event" && Q.getObject("target.tagName", event).toLowerCase() === "input") {
+	if (Q.typeOf(event).toLowerCase() === "event" && ["input", "select"].includes(Q.getObject("target.tagName", event).toLowerCase())) {
 		return false;
 	}
 	if (Q.Pointer.latest.touches.length) {
