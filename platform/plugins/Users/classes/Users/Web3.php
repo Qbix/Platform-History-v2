@@ -32,7 +32,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			return;
 		}
 
-		$networks = Q_Config::expect(Users::communityId(), "networks");
+		$networks = Q_Config::expect("Assets", "Web3", "NFT", "networks");
 		foreach ($networks as $n) {
 			if ($n["chainId"] == $network) {
 				self::$networks[$network]["network"] = $n;
