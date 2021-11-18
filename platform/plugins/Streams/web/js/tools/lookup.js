@@ -24,7 +24,6 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 	this.refresh();
 }, {
 	publisherId: Q.info.app,
-	communityId: Q.Users.communityId,
 	types: [],
 	typeNames: {},
 	multiple: false,
