@@ -195,7 +195,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	protected $caching = null;
 
 	/**
-	 * Turn off automatic caching on fetchAll and fetchDbRows.
+	 * If cached data already exists on fetchAll and fetchDbRows, ignore it.
 	 * @method ignoreCache
 	 * @chainable
 	 */
