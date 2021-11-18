@@ -527,6 +527,11 @@ class Streams_Avatar extends Base_Streams_Avatar
 		}
 		Streams_Avatar::insertManyAndExecute($rows_that_show, array('onDuplicateKeyUpdate' => $updates_that_show));
 		Streams_Avatar::insertManyAndExecute($rows_that_hide, array('onDuplicateKeyUpdate' => $updates_that_hide));
+
+		Q::event('Streams/updateAvatars', 'after', compact(
+			'rows_that_show', 'rows_that_hide', 'updates_that_show', 'updates_that_hide',
+			'showToUserIds', 'updateToPublicValue'
+		));
 	}
 	
 	static function streamNames()
