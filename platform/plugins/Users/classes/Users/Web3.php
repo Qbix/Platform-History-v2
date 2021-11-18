@@ -20,30 +20,41 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * Get needed environment variables
 	 *
 	 * @method construct
-	 * @param {String} $network - chainId
+	 * @param {String} $chainId - Network chainId
 	 * @static
 	 */
-	private static function construct($network) {
+	private static function construct($chainId) {
+		if (self::$networks[$chainId]) {
+			return;
+		}
+
 		if (self::$useCache === null) {
 			self::$useCache = Q_Config::get("Users", "apps", "wallet", Users::communityId(), "Web3", "useCache", true);
 		}
 
-		if (self::$networks[$network]) {
-			return;
+		$networks = Q_Config::expect("Users", "Web3", "networks");
+		if (empty($networks)) {
+			throw new Exception("Users_Web3: networks not found");
 		}
-
-		$networks = Q_Config::expect("Assets", "Web3", "NFT", "networks");
 		foreach ($networks as $n) {
-			if ($n["chainId"] == $network) {
-				self::$networks[$network]["network"] = $n;
+			if ($n["chainId"] == $chainId) {
+				self::$networks[$chainId]["network"] = $n;
 				break;
 			}
 		}
 
-		self::$networks[$network]["web3"] = new Web3(self::$networks[$network]["network"]["rpcUrls"][0]);
+		self::$networks[$chainId]["web3"] = new Web3(self::$networks[$chainId]["network"]["rpcUrls"][0]);
 
-		$abi = file_get_contents(implode(DS, array(APP_WEB_DIR, "js", "nft-contract.abi.json")));
-		self::$networks[$network]["contract"] = new Contract(self::$networks[$network]["network"]["rpcUrls"][0], $abi);
+		$filePath = implode(DS, array(APP_WEB_DIR, "abi.json"));
+		if (!is_file($filePath)) {
+			$filePath = implode(DS, array(USERS_PLUGIN_WEB_DIR, "abi.json"));
+		}
+		if (!is_file($filePath)) {
+			throw new Exception("Users_Web3: abi.json not found");
+		}
+
+		$abi = file_get_contents($filePath);
+		self::$networks[$chainId]["contract"] = new Contract(self::$networks[$chainId]["network"]["rpcUrls"][0], $abi);
 	}
 
 	/**
@@ -55,7 +66,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {String} $network - chainId
 	 * @return array
 	 */
-	private static function aggregator ($methodName, $param, $network) {
+	static function aggregator ($methodName, $param, $network) {
 		self::construct($network);
 		$network = self::$networks[$network];
 		$contractAddress = $network["network"]["contract"];
@@ -85,31 +96,15 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
-	 * Get tokens by author
-	 * @method tokensByAuthor
+	 * @method totalSupply
 	 * @static
-	 * @param {String} $address Author wallet address
-	 * @param {String} $network - chainId
-	 * @return array
-	 */
-	static function tokensByAuthor ($address, $network) {
-		self::construct($network);
-		return self::aggregator(__FUNCTION__, $address, $network);
-	}
-
-	/**
-	 * Get comission info by token
-	 * @method getCommission
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
+	 * @param {String} $chainId - Network chainId
 	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @param {String} [$contractAddress=null] - Custom contract address
-	 * @return array
+	 * @return db_row|String
 	 */
-	static function getCommission ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
+	static function totalSupply ($chainId, $updateCache=false) {
+		self::construct($chainId);
+		$cache = self::getCache(__FUNCTION__, $chainId, array());
 		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
 			$result = Q::json_decode($cache->result);
 			if (!empty($result) && (array)$result) {
@@ -117,195 +112,10 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$data["value"] = gmp_intval(Q::ifset($data, "r", "value", null));
-
-		$cache->result = Q::json_encode($data);
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get tokens by owner
-	 * @method tokensByOwner
-	 * @static
-	 * @param {String} $address Owner wallet address
-	 * @param {String} $network - chainId
-	 * @return array
-	 */
-	static function tokensByOwner ($address, $network) {
-		self::construct($network);
-		return self::aggregator(__FUNCTION__, $address, $network);
-	}
-
-	/**
-	 * Get author of token
-	 * @method authorOf
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @param {String} [$contractAddress=null] - Custom contract address
-	 * @return array
-	 */
-	static function authorOf ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			return $cache->result;
+		$data = self::aggregator(__FUNCTION__, null, $chainId);
+		if ($data instanceof \phpseclib\Math\BigInteger) {
+			$data = (int)preg_replace("/0+$/", "", $data->toString())/100;
 		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$cache->result = $data;
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get owner of token
-	 * @method ownerOf
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @return array
-	 */
-	static function ownerOf ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			return $cache->result;
-		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$cache->result = $data;
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get URI to json with related data
-	 * @method tokenURI
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @return array
-	 */
-	static function tokenURI ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			return $cache->result;
-		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$cache->result = $data;
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get wallet balance
-	 * @method balanceOf
-	 * @static
-	 * @param {String} $walletAddress
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @return string
-	 */
-	static function balanceOf ($walletAddress, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("walletAddress"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			return $cache->result;
-		}
-
-		$data = (string)self::aggregator(__FUNCTION__, $walletAddress, $network);
-
-		$cache->result = $data;
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 *
-	 * @method getApproved
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @return string
-	 */
-	static function getApproved ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			return $cache->result;
-		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-
-		$cache->result = $data;
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get sale info by token
-	 * @method saleInfo
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function saleInfo ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			$result = Q::json_decode($cache->result);
-			if (!empty($result) && (array)$result) {
-				return $result;
-			}
-		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
-
-		$cache->result = Q::json_encode($data);
-		$cache->save();
-
-		return $data;
-	}
-
-	/**
-	 * Get sale info by token
-	 * @method saleInfo
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $network - chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function getSaleInfo ($tokenId, $network, $updateCache=false) {
-		self::construct($network);
-		$cache = self::getCache(__FUNCTION__, $network, compact("tokenId"));
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			$result = Q::json_decode($cache->result);
-			if (!empty($result) && (array)$result) {
-				return $result;
-			}
-		}
-
-		$data = self::aggregator(__FUNCTION__, $tokenId, $network);
-		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
 
 		$cache->result = Q::json_encode($data);
 		$cache->save();
@@ -318,16 +128,16 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method getCache
 	 * @static
 	 * @param {String} $methodName
-	 * @param {String} $network - chainId
+	 * @param {String} $network - Network chainId
 	 * @param {String} $params - params used to call the method
 	 * @return db_row
 	 */
-	static function getCache ($methodName, $network, $params) {
-		self::construct($network);
+	static function getCache ($methodName, $chainId, $params) {
+		self::construct($chainId);
 		$cache = new Users_Web3();
-		$cache->chainId = self::$networks[$network]["network"]["chainId"];
+		$cache->chainId = self::$networks[$chainId]["network"]["chainId"];
 		$cache->methodName = $methodName;
-		$cache->contract = self::$networks[$network]["network"]["contract"];
+		$cache->contract = self::$networks[$chainId]["network"]["contract"];
 		$cache->params = Q::json_encode($params);
 		$cache->retrieve();
 
