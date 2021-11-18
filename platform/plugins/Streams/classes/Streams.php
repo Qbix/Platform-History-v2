@@ -4206,6 +4206,8 @@ abstract class Streams extends Base_Streams
 	 *	The possible stream type, or an array of types
 	 * @param {string} $title
 	 *	A string to compare titles by using SQL's "LIKE" statement
+	 * @param {boolean} [$orderByTitle=false]
+	 *  Put true to order by title, by default it's ordered by 'type,title'
 	 */
 	static function lookup($publisherId, $types, $title)
 	{
@@ -4222,7 +4224,8 @@ abstract class Streams extends Base_Streams
 			'publisherId' => $publisherId,
 			'type' => $types,
 			'title LIKE ' => $title
-		))->limit($limit)->fetchDbRows();
+		))->orderBy($orderByTitle ? 'title' : 'type, title')
+		->limit($limit)->fetchDbRows();
 	}
 	
 	/**
