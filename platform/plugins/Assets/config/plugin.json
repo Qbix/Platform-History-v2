@@ -47,10 +47,19 @@
 				"sizes": ["40", "50", "80", "200", "400", "400x", "x400", "x100", "500x"],
 				"defaultSize": "400",
 				"maxStretch": 2
+			},
+			"NFT/icon": {
+				"sizes": ["300x420", "500x700", "700x980"],
+				"defaultSize": "300x420",
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
 			}
 		}
 	},
 	"Streams": {
+		"userStreams": {
+			"Assets": "streams.json"
+		},
 		"types": {
 			"Assets/credits": {
 				"defaults": {
@@ -99,10 +108,94 @@
 					"writeLevel": 23,
 					"adminLevel": 0
 				}
+			},
+			"Assets/NFT": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"icon": "{{baseUrl}}/img/empty_white.png"
+				}
 			}
-		}	
+		},
+		"onInsert": {
+			"community": ["Assets/NFTs"],
+			"person": ["Assets/user/NFTs"]
+		}
 	},
 	"Assets": {
+		"Web3": {
+			"NFT": {
+				"networks": [
+					{
+						"name": "Binance Smart Chain",
+						"chainId": "0x38",
+						"contract": "0xcc771bafe41f29fb6f88dc8939560bc511c6433e",
+						"rpcUrls": ["https://bsc-dataseed.binance.org/"],
+						"blockExplorerUrls": ["https://bscscan.com"]
+					},
+					{
+						"name": "Ethereum Mainnet",
+						"chainId": "0x1",
+						"contract": "???",
+						"rpcUrls": ["https://mainnet.infura.io/v3/905e942e2ccf4c8d8e86871f0950d5d8"],
+						"blockExplorerUrls": ["https://etherscan.io/"]
+					}
+				],
+				"currencies": [
+					{
+						"symbol": "BNB",
+						"name": "Binance Coin",
+						"decimals": 18,
+						"0x4": "0x5eD8BD53B0c3fa3dEaBd345430B1A3a6A4e8BD7C",
+						"0x1": "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+						"0x61": "0x0000000000000000000000000000000000000000",
+						"0x38": "0x0000000000000000000000000000000000000000",
+						"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					},
+					{
+						"symbol": "USDC",
+						"name": "USD Coin",
+						"decimals": 18,
+						"0x4": "0x5eD8BD53B0c3fa3dEaBd345430B1A3a6A4e8BD7C",
+						"0x1": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+						"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+						"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+						"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					},
+					{
+						"symbol": "BUSD",
+						"name": "Binance USD",
+						"decimals": 18,
+						"0x4": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+						"0x1": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+						"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+						"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+						"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					},
+					{
+						"symbol": "ETH",
+						"name": "Ethereum",
+						"decimals": 18,
+						"0x4": "0x0000000000000000000000000000000000000000",
+						"0x1": "0x0000000000000000000000000000000000000000",
+						"0x38": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+						"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+						"commissionToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+					},
+					{
+						"symbol": "DAI",
+						"name": "DAI",
+						"decimals": 18,
+						"0x4": "0x5eD8BD53B0c3fa3dEaBd345430B1A3a6A4e8BD7C",
+						"0x1": "0x6b175474e89094c44da98b954eedeac495271d0f",
+						"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+						"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+						"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					}
+				]
+			}
+		},
 		"payments": {
 			"stripe": {
 				"preloadAPI": true,

@@ -853,7 +853,7 @@ abstract class Db
 		if ($connection_name) {
 			return ucfirst($connection_name).'_'.implode($pieces, '');
 		}
-		return implode($pieces, '');
+		return implode('', $pieces);
 	}
 
 	static function dump_table($rows)

@@ -3815,14 +3815,14 @@
 		 */
 		connect: function (callback) {
 			if (Users.Wallet.provider) {
-				return Q.handle(callback, null, [Users.Wallet.provider]);
+				return Q.handle(callback, null, [null, Users.Wallet.provider]);
 			}
 
 			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
 			web3Modal.connect().then(function (provider) {
 				Users.Wallet.provider = provider;
 
-				Q.handle(callback, null, [provider]);
+				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
 				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
@@ -3837,8 +3837,13 @@
 		 * @param {Function} onError
 		 */
 		setNetwork: function (info, onSuccess, onError) {
-			Users.Wallet.connect(function (provider) {
+			Users.Wallet.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(onError, null, [err]);
+				}
+
 				Users.Wallet.switchNetworkOccuring = true;
+
 				provider.request({
 					method: 'wallet_addEthereumChain',
 					params: [{
@@ -3854,8 +3859,10 @@
 					}]
 				}).then(function () {
 					provider.once("chainChanged", onSuccess);
+				}, function (error) {
+					Q.handle(onError, null, [error]);
 				}).catch((error) => {
-					console.log(error)
+					Q.handle(onError, null, [error]);
 				});
 			});
 		}

@@ -1,0 +1,10 @@
+{
+  "Assets/user/NFTs": {
+    "type": "Streams/category",
+    "title": "NFT's category",
+    "icon": "",
+    "readLevel": 40,
+    "writeLevel": 10,
+    "adminLevel": 0
+  }
+}

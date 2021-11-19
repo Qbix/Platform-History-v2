@@ -15,7 +15,7 @@
  */
 function Streams_lookup_response_results()
 {
-	Q_Request::requireFields(array('publisherId', 'types', 'title'), true);
+	Q_Request::requireFields(array('types', 'title'), true);
 	$streams = Streams::lookup(
 		$_REQUEST['publisherId'],
 		$_REQUEST['types'],
