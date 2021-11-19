@@ -351,6 +351,7 @@ class Q_Tree
 						'duration' => 3600
 					)));
 				}
+				// TODO: also replace ", }" to avoid typical errors in JSON
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
 				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {
