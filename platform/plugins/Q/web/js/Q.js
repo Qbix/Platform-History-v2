@@ -13024,12 +13024,10 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @static
  * @param {Object} options These options are passed to each handler.
  *   They should contain at least "trigger", "title", and "content" (or "template")
- * @param {String|Element} options.title
- *   The title to display
- * @param {String|Element} options.content
- *   The content to display
- * @param {Element} options.trigger 
- *   The element that the user interacted with to result in this function call
+ * @param {String|Element} options.title The title to display, as HTML
+ * @param {String|Element} options.content The content to display, as HTML
+ * @param {Element} options.trigger The element that the user interacted with to result in this function call
+*  @param {String} [options.className] a CSS class name or space-separated list of classes to append to the container (dialog or column, etc.).
  * @param {Object} [options.template] can be used instead of content option.
  * @param {String} [options.template.name] names a template to render into the initial dialog content.
  * @param {String} [options.template.fields] fields to pass to the template, if any

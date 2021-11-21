@@ -142,7 +142,6 @@
                 $toolElement.addClass("Streams_calls_settings").on(Q.Pointer.fastclick, function () {
                     Q.invoke({
                         title: tool.text.calls.SettingsTitle,
-                        columnClass: "Streams_calls_settings",
                         className: "Streams_calls_settings",
                         template: {
                             name: "Streams/calls/settings",
