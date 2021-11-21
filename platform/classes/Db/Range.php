@@ -30,7 +30,24 @@ class Db_Range
 			$max = substr($min, 0, -1).chr(ord($last_char)+1);
 		}
 		$this->max = $max;
-		$this->typename = "Db.Range";
+	}
+	
+	function __toString ()
+	{
+		$min = $this->min;
+		$max = $this->max;
+		if ($includeMin and $includeMax) {
+			return "Db_Range($min <= ... <= $max)";
+		}
+		if (!$includeMin and $includeMax) {
+			return "Db_Range($min < ... <= $max)";
+		}
+		if ($includeMin and !$includeMax) {
+			return "Db_Range($min <= ... < $max)";
+		}
+		if (!$includeMin and !$includeMax) {
+			return "Db_Range($min < ... < $max)";
+		}	
 	}
 	/**
 	 * Minimal value of the range

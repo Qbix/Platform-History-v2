@@ -363,7 +363,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".methodName");
-		if (strlen($value) > 20)
+		if (strlen($value) > 63)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".methodName");
 		return array('methodName', $value);			
 	}
@@ -417,7 +417,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".params");
-		if (strlen($value) > 100)
+		if (strlen($value) > 1023)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".params");
 		return array('params', $value);			
 	}
@@ -671,6 +671,9 @@ return array (
 	function beforeSet_updatedTime($value)
 	{
 		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
+		if ($value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression) {

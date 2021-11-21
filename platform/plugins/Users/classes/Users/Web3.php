@@ -14,71 +14,70 @@ use Crypto\Keccak;
  */
 class Users_Web3 extends Base_Users_Web3 {
 	static $useCache = null;
-	static $networks = array();
 
-	/**
-	 * Get needed environment variables
-	 *
-	 * @method construct
-	 * @param {String} $chainId - Network chainId
-	 * @static
-	 */
-	private static function construct($chainId) {
-		if (self::$networks[$chainId]) {
-			return;
-		}
-
-		if (self::$useCache === null) {
-			self::$useCache = Q_Config::get("Users", "apps", "wallet", Users::communityId(), "Web3", "useCache", true);
-		}
-
-		$networks = Q_Config::expect("Users", "Web3", "networks");
-		if (empty($networks)) {
-			throw new Exception("Users_Web3: networks not found");
-		}
-		foreach ($networks as $n) {
-			if ($n["chainId"] == $chainId) {
-				self::$networks[$chainId]["network"] = $n;
-				break;
-			}
-		}
-
-		self::$networks[$chainId]["web3"] = new Web3(self::$networks[$chainId]["network"]["rpcUrls"][0]);
-
-		$filePath = implode(DS, array(APP_WEB_DIR, "abi.json"));
-		if (!is_file($filePath)) {
-			$filePath = implode(DS, array(USERS_PLUGIN_WEB_DIR, "abi.json"));
-		}
-		if (!is_file($filePath)) {
-			throw new Exception("Users_Web3: abi.json not found");
-		}
-
-		$abi = file_get_contents($filePath);
-		self::$networks[$chainId]["contract"] = new Contract(self::$networks[$chainId]["network"]["rpcUrls"][0], $abi);
+	private static function chainInfo($chainId)
+	{
+		return Q_Config::expect("Users", "web3", "chains", $chainId);
 	}
 
 	/**
-	 * Aggregator for methods
-	 * @method aggregator
+	 * Used to execute methods on the blockchain
+	 * @method execute
 	 * @static
+	 * $param {String} $contract
 	 * @param {String} $methodName
-	 * @param {String|array} $param - params sent to contract method
-	 * @param {String} $network - chainId
+	 * @param {String|array} [$params=array()] - params sent to contract method
+	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
+	 * @param {boolean|null} [$caching=null] Pass false to suppress all caching. Pass true to cache everything. The default is null, which caches everything except empty results.
 	 * @return array
 	 */
-	static function aggregator ($methodName, $param, $network) {
-		self::construct($network);
-		$network = self::$networks[$network];
-		$contractAddress = $network["network"]["contract"];
-		$contract = $network["contract"];
+	static function execute (
+		$contract,
+		$methodName,
+		$params = array(), 
+		$cacheDuration = 3600,
+		$caching = null,
+		$app = null)
+	{
+		if (!isset($appId)) {
+			$app = Q::app();
+		}
+		
+		list($appId, $appInfo) = Users::appInfo('wallet', $app, true);
+		$chainId = $appInfo['appId'];
+		
+		$cache = self::getCache($chainId, $contract, $methodName, $params, $chainId);
+		if ($cache->wasRetrieved()) {
+			return $cache;
+		}
+		
+		$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
+		$chainInfo = self::chainInfo($chainId);
+		if (empty($chainInfo['rpcUrls'][0])) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "'Users/apps/$app/rpcUrls[0]'"
+			));
+		}
+		
+		$filePath = implode(DS, array(
+			APP_VIEWS_DIR, "Users", "ABI", $contract . ".json"
+		));
+		if (!is_file($filePath)) {
+			throw new Exception("Users_Web3: $filePath not found");
+		}
+		$rpcUrl = $chainInfo['rpcUrls'][0];
+		$abi = file_get_contents($filePath);
+		$c = new Contract($rpcUrl, $abi);
+		
 		$data = array();
 
 		// call contract function
-		$contract->at($contractAddress)->call($methodName, $param, function ($err, $results) use (&$data) {
+		$c->at($contract)->call($methodName, $params,
+		function ($err, $results) use (&$data, $caching) {
 			if (empty($results)) {
+				$data = $results;
 				return;
 			}
-
 			if (sizeof($results) == 1) {
 				if (is_array($results[0])) {
 					foreach ($results[0] as $result) {
@@ -91,56 +90,51 @@ class Users_Web3 extends Base_Users_Web3 {
 				$data = $results;
 			}
 		});
-
-		return $data;
-	}
-
-	/**
-	 * @method totalSupply
-	 * @static
-	 * @param {String} $chainId - Network chainId
-	 * @param {Boolean} [$updateCache=false] - If true request blockchain to update cache
-	 * @return db_row|String
-	 */
-	static function totalSupply ($chainId, $updateCache=false) {
-		self::construct($chainId);
-		$cache = self::getCache(__FUNCTION__, $chainId, array());
-		if ($cache->retrieved && $cache->result && self::$useCache && !$updateCache) {
-			$result = Q::json_decode($cache->result);
-			if (!empty($result) && (array)$result) {
-				return $result;
-			}
-		}
-
-		$data = self::aggregator(__FUNCTION__, null, $chainId);
 		if ($data instanceof \phpseclib\Math\BigInteger) {
-			$data = (int)preg_replace("/0+$/", "", $data->toString())/100;
+			$cache->result = $data->toString();
+		} else {
+			$cache->result = Q::json_encode($data, true);
 		}
-
-		$cache->result = Q::json_encode($data);
-		$cache->save();
-
+		if (($data && $caching !== false)
+		or (!$data && $caching === true)) {
+			$cache->save(true);
+		}
 		return $data;
 	}
 
 	/**
-	 * Get cache row for method name
+	 * See if there is a cache that is at most cacheDuration seconds old,
+	 * for the given query on the given chain
 	 * @method getCache
 	 * @static
+	 * @param {String} $contract
 	 * @param {String} $methodName
-	 * @param {String} $network - Network chainId
-	 * @param {String} $params - params used to call the method
+	 * @param {String} $params params used to call the method
+	 * @param {integer} [$cacheDuration=3600]
+	 * @param {String} [$app]
 	 * @return db_row
 	 */
-	static function getCache ($methodName, $chainId, $params) {
-		self::construct($chainId);
-		$cache = new Users_Web3();
-		$cache->chainId = self::$networks[$chainId]["network"]["chainId"];
-		$cache->methodName = $methodName;
-		$cache->contract = self::$networks[$chainId]["network"]["contract"];
-		$cache->params = Q::json_encode($params);
-		$cache->retrieve();
-
-		return $cache;
+	static function getCache (
+		$chainId, 
+		$contract, 
+		$methodName, 
+		$params, 
+		$cacheDuration = 3600)
+	{
+		$cached = new Users_Web3(array(
+			'chainId' => $chainId,
+			'contract' => $contract,
+			'methodName' => $methodName,
+			'params' => Q::json_encode($params),
+			'updatedTime' => new Db_Range(
+				new Db_Expression("CURRENT_TIMESTAMP - INTERVAL $cacheDuration SECOND"),
+				false,
+				true,
+				new Db_Expression('CURRENT_TIMESTAMP')
+			)
+		));
+		$cached->retrieve();
+		return $cached;
 	}
+
 };

@@ -1716,7 +1716,7 @@ EOT;
 			
 			$null_check = $field_null ? "if (!isset(\$value)) {\n\t\t\treturn array($field_name_exported, \$value);\n\t\t}\n\t\t" : '';
 			$null_fix = $field_null ? '' : "if (!isset(\$value)) {\n\t\t\t\$value='';\n\t\t}\n\t\t";
-			$dbe_check = "if (\$value instanceof Db_Expression) {\n\t\t\treturn array($field_name_exported, \$value);\n\t\t}\n\t\t";
+			$dbe_check = "if (\$value instanceof Db_Expression\n or \$value instanceof Db_Query) {\n\t\t\treturn array($field_name_exported, \$value);\n\t\t}\n\t\t";
 			$js_null_check = $field_null ? "if (value == undefined) return value;\n\t\t" : '';
 			$js_null_fix = $field_null ? '' : "if (value == null) {\n\t\t\tvalue='';\n\t\t}\n\t\t";
 			$js_dbe_check = "if (value instanceof Db.Expression) return value;\n\t\t";
