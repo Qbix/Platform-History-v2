@@ -16,44 +16,19 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {integer} [$fields.chainId] defaults to 0
- * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
- * @param {string} [$fields.contract] defaults to ""
- * @param {string} [$fields.methodId] defaults to ""
+ * @param {string} [$fields.chainId] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
+ * @param {string} [$fields.contract] defaults to ""
  * @param {string} [$fields.result] defaults to null
  * @param {string} [$fields.extra] defaults to "{}"
+ * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
 abstract class Base_Users_Web3 extends Db_Row
 {
 	/**
 	 * @property $chainId
-	 * @type integer
-	 * @default 0
-	 * 
-	 */
-	/**
-	 * @property $insertedTime
-	 * @type string|Db_Expression
-	 * @default new Db_Expression("CURRENT_TIMESTAMP")
-	 * 
-	 */
-	/**
-	 * @property $updatedTime
-	 * @type string|Db_Expression
-	 * @default null
-	 * 
-	 */
-	/**
-	 * @property $contract
-	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
-	 * @property $methodId
 	 * @type string
 	 * @default ""
 	 * 
@@ -71,6 +46,12 @@ abstract class Base_Users_Web3 extends Db_Row
 	 * 
 	 */
 	/**
+	 * @property $contract
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
 	 * @property $result
 	 * @type string
 	 * @default null
@@ -80,7 +61,19 @@ abstract class Base_Users_Web3 extends Db_Row
 	 * @property $extra
 	 * @type string
 	 * @default "{}"
-	 * JSON with any extra attributes
+	 * 
+	 */
+	/**
+	 * @property $insertedTime
+	 * @type string|Db_Expression
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
+	 * 
+	 */
+	/**
+	 * @property $updatedTime
+	 * @type string|Db_Expression
+	 * @default null
+	 * 
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -94,7 +87,7 @@ abstract class Base_Users_Web3 extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'chainId',
-			  1 => 'methodId',
+			  1 => 'methodName',
 			  2 => 'params',
 			)
 		);
@@ -299,36 +292,36 @@ abstract class Base_Users_Web3 extends Db_Row
 	}
 	
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_chainId
-	 * @param {integer} $value
+	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_chainId($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
 			return array('chainId', $value);
 		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".chainId");
-		$value = intval($value);
-		if ($value < -2147483648 or $value > 2147483647) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".chainId");
-		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".chainId");
+		if (strlen($value) > 10)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".chainId");
 		return array('chainId', $value);			
 	}
 
 	/**
-	 * @method maxSize_chainId
-	 * Returns the maximum integer that can be assigned to the chainId field
+	 * Returns the maximum string length that can be assigned to the chainId field
 	 * @return {integer}
 	 */
 	function maxSize_chainId()
 	{
 
-		return 2147483647;			
+		return 10;			
 	}
 
 	/**
@@ -341,7 +334,7 @@ abstract class Base_Users_Web3 extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'int',
+    0 => 'varchar',
     1 => '10',
     2 => '',
     3 => false,
@@ -353,97 +346,110 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_insertedTime
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_methodName
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_insertedTime($value)
+	function beforeSet_methodName($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression) {
-			return array('insertedTime', $value);
+			return array('methodName', $value);
 		}
-		if ($value instanceof DateTime) {
-			$value = $value->getTimestamp();
-		}
-		if (is_numeric($value)) {
-			$newDateTime = new DateTime();
-			$datetime = $newDateTime->setTimestamp($value);
-		} else {
-			$datetime = new DateTime($value);
-		}
-		$value = $datetime->format("Y-m-d H:i:s");
-		return array('insertedTime', $value);			
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".methodName");
+		if (strlen($value) > 20)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".methodName");
+		return array('methodName', $value);			
 	}
 
 	/**
-	 * Returns schema information for insertedTime column
+	 * Returns the maximum string length that can be assigned to the methodName field
+	 * @return {integer}
+	 */
+	function maxSize_methodName()
+	{
+
+		return 20;			
+	}
+
+	/**
+	 * Returns schema information for methodName column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_insertedTime()
+	static function column_methodName()
 	{
 
 return array (
   0 => 
   array (
-    0 => 'timestamp',
-    1 => '10',
+    0 => 'varchar',
+    1 => '20',
     2 => '',
     3 => false,
   ),
   1 => false,
-  2 => '',
-  3 => 'CURRENT_TIMESTAMP',
+  2 => 'PRI',
+  3 => NULL,
 );			
 	}
 
 	/**
-	 * Method is called before setting the field and normalize the DateTime string
-	 * @method beforeSet_updatedTime
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_params
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_updatedTime($value)
+	function beforeSet_params($value)
 	{
 		if (!isset($value)) {
-			return array('updatedTime', $value);
+			$value='';
 		}
 		if ($value instanceof Db_Expression) {
-			return array('updatedTime', $value);
+			return array('params', $value);
 		}
-		if ($value instanceof DateTime) {
-			$value = $value->getTimestamp();
-		}
-		if (is_numeric($value)) {
-			$newDateTime = new DateTime();
-			$datetime = $newDateTime->setTimestamp($value);
-		} else {
-			$datetime = new DateTime($value);
-		}
-		$value = $datetime->format("Y-m-d H:i:s");
-		return array('updatedTime', $value);			
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".params");
+		if (strlen($value) > 100)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".params");
+		return array('params', $value);			
 	}
 
 	/**
-	 * Returns schema information for updatedTime column
+	 * Returns the maximum string length that can be assigned to the params field
+	 * @return {integer}
+	 */
+	function maxSize_params()
+	{
+
+		return 100;			
+	}
+
+	/**
+	 * Returns schema information for params column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_updatedTime()
+	static function column_params()
 	{
 
 return array (
   0 => 
   array (
-    0 => 'timestamp',
-    1 => '10',
+    0 => 'varchar',
+    1 => '100',
     2 => '',
     3 => false,
   ),
-  1 => true,
-  2 => '',
-  3 => NULL,
+  1 => false,
+  2 => 'PRI',
+  3 => '',
 );			
 	}
 
@@ -498,168 +504,6 @@ return array (
   1 => false,
   2 => '',
   3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_methodId
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_methodId($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('methodId', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".methodId");
-		if (strlen($value) > 8)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".methodId");
-		return array('methodId', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the methodId field
-	 * @return {integer}
-	 */
-	function maxSize_methodId()
-	{
-
-		return 8;			
-	}
-
-	/**
-	 * Returns schema information for methodId column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_methodId()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '8',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_methodName
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_methodName($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('methodName', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".methodName");
-		if (strlen($value) > 63)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".methodName");
-		return array('methodName', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the methodName field
-	 * @return {integer}
-	 */
-	function maxSize_methodName()
-	{
-
-		return 63;			
-	}
-
-	/**
-	 * Returns schema information for methodName column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_methodName()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '63',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_params
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_params($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression) {
-			return array('params', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".params");
-		if (strlen($value) > 720)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".params");
-		return array('params', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the params field
-	 * @return {integer}
-	 */
-	function maxSize_params()
-	{
-
-		return 720;			
-	}
-
-	/**
-	 * Returns schema information for params column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_params()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '720',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => 'PRI',
-  3 => '',
 );			
 	}
 
@@ -735,7 +579,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".extra");
-		if (strlen($value) > 1023)
+		if (strlen($value) > 1024)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".extra");
 		return array('extra', $value);			
 	}
@@ -747,7 +591,7 @@ return array (
 	function maxSize_extra()
 	{
 
-		return 1023;			
+		return 1024;			
 	}
 
 	/**
@@ -761,13 +605,108 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1023',
+    1 => '1024',
     2 => '',
     3 => false,
   ),
   1 => true,
   2 => '',
   3 => '{}',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_insertedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_insertedTime($value)
+	{
+		if ($value instanceof Db_Expression) {
+			return array('insertedTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d H:i:s");
+		return array('insertedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for insertedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_insertedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1024',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => '',
+  3 => 'CURRENT_TIMESTAMP',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and normalize the DateTime string
+	 * @method beforeSet_updatedTime
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value does not represent valid DateTime
+	 */
+	function beforeSet_updatedTime($value)
+	{
+		if (!isset($value)) {
+			return array('updatedTime', $value);
+		}
+		if ($value instanceof Db_Expression) {
+			return array('updatedTime', $value);
+		}
+		if ($value instanceof DateTime) {
+			$value = $value->getTimestamp();
+		}
+		if (is_numeric($value)) {
+			$newDateTime = new DateTime();
+			$datetime = $newDateTime->setTimestamp($value);
+		} else {
+			$datetime = new DateTime($value);
+		}
+		$value = $datetime->format("Y-m-d H:i:s");
+		return array('updatedTime', $value);			
+	}
+
+	/**
+	 * Returns schema information for updatedTime column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_updatedTime()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'timestamp',
+    1 => '1024',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -782,7 +721,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('chainId','methodId') as $name) {
+			foreach (array('chainId','methodName') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -803,7 +742,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('chainId', 'insertedTime', 'updatedTime', 'contract', 'methodId', 'methodName', 'params', 'result', 'extra');
+		$field_names = array('chainId', 'methodName', 'params', 'contract', 'result', 'extra', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

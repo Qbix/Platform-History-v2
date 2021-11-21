@@ -151,11 +151,11 @@
 					$te.removeClass('Streams_chat_preview_noParticipants');
 				}
 
-				var iconBig = webpageStream.getAttribute("iconBig");
+				var iconBig = webpageStream.getAttribute("image");
 				if (!iconBig) {
 					iconBig = webpageStream.fields.icon;
 					if (!iconBig.match(/\.[a-z]{3,4}$/i)) {
-						iconBig = webpageStream.iconUrl('80');
+						iconBig = webpageStream.iconUrl('50');
 					}
 				}
 
@@ -185,7 +185,7 @@
 						title: (Q.getObject(['fields', 'title'], interestStream) || '').replace('Websites:',''),
 						icon: iconSmall,
 					},
-					src: iconBig,
+					src: webpageStream.iconUrl('50'),
 					url: state.url,
 					text: tool.text.webpage
 				}, function (err, html) {

@@ -2262,6 +2262,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
+	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
@@ -2389,6 +2390,9 @@ abstract class Streams extends Base_Streams
 			$query = $query->where(new Db_Expression(
 				"SUBSTRING($col, -1, 1) != '/'"
 			));
+		}
+		if (Q::ifset($options, "ignoreCache", false)) {
+			$query->ignoreCache();
 		}
 		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
@@ -4209,7 +4213,7 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$orderByTitle=false]
 	 *  Put true to order by title, by default it's ordered by 'type,title'
 	 */
-	static function lookup($publisherId, $types, $title)
+	static function lookup($publisherId, $types, $title, $orderByTitle=false)
 	{
 		$fc = $title[0];
 		if ($fc === '%' and strlen($title) > 1
@@ -4220,11 +4224,15 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
-		return Streams_Stream::select()->where(array(
-			'publisherId' => $publisherId,
+		$where = array(
 			'type' => $types,
-			'title LIKE ' => $title
-		))->orderBy($orderByTitle ? 'title' : 'type, title')
+			'title LIKE ' => $title,
+			'closedTime' => null
+		);
+		if ($publisherId) {
+			$where["publisherId"] = $publisherId;
+		}
+		return Streams_Stream::select()->where($where)->orderBy($orderByTitle ? 'title' : 'type, title')
 		->limit($limit)->fetchDbRows();
 	}
 	

@@ -11674,9 +11674,39 @@ Q.Pointer = {
 		return root.pageYOffset || document.documentElement.scrollTop || (document.body && document.body.scrollTop);
 	},
 	/**
+	 * Returns the document's left position in pixels, consistently across browsers
+	 * @static
+	 * @method positionLeft
+	 * @return {number}
+	 */
+	positionLeft: function () {
+		var documentPosition = document.documentElement.getBoundingClientRect().left;
+		var bodyPosition = 0;
+		if (document.body) {
+			bodyPosition = document.body.getBoundingClientRect().left;
+		}
+
+		return root.pageXOffset || documentPosition || bodyPosition;
+	},
+	/**
+	 * Returns the document's top position in pixels, consistently across browsers
+	 * @static
+	 * @method positionTop
+	 * @return {number}
+	 */
+	positionTop: function () {
+		var documentPosition = -document.documentElement.getBoundingClientRect().top;
+		var bodyPosition = 0;
+		if (document.body) {
+			bodyPosition = -document.body.getBoundingClientRect().top;
+		}
+
+		return root.pageYOffset || documentPosition || bodyPosition;
+	},
+	/**
 	 * Returns the window's inner width, in pixels, consistently across browsers
 	 * @static
-	 * @method scrollTop
+	 * @method windowWidth
 	 * @return {number}
 	 */
 	windowWidth: function () {
@@ -11969,10 +11999,10 @@ Q.Pointer = {
 							}
 							return; // perhaps it disappeared
 						}
-						var offset = target.getBoundingClientRect(); //Q.Pointer.offset(target)
+						var offset = target.getBoundingClientRect();
 						point = {
-							x: Q.Pointer.scrollLeft() + offset.left + target.offsetWidth / 2,
-							y: Q.Pointer.scrollTop() + offset.top + target.offsetHeight / 2
+							x: Q.Pointer.positionLeft() + offset.left + target.offsetWidth / 2,
+							y: Q.Pointer.positionTop() + offset.top + target.offsetHeight / 2
 						};
 					} else {
 						point = target;
@@ -12307,7 +12337,12 @@ Q.Pointer = {
 var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
-function _cancelClickBriefly() {
+function _cancelClickBriefly(event) {
+	// if input element stuff exceeds width of element, blur will lead to scroll element to the start
+	// this will lead to cancel first click on submit button because before click fired blur from input
+	if (Q.typeOf(event).toLowerCase() === "event" && ["input", "select"].includes(Q.getObject("target.tagName", event).toLowerCase())) {
+		return false;
+	}
 	if (Q.Pointer.latest.touches.length) {
 		// no need to cancel click here, user will have to lift their fingers to click
 		return false;
