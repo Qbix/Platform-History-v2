@@ -106,6 +106,7 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.$input.addClass('Q_nonempty');
 		} else {
 			tool.$input.removeClass('Q_nonempty');
+			tool.$results.empty();
 		}
 		lastVal = val;
 	}
@@ -188,8 +189,6 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.canceledBlur = false;
 		}, 500);
 
-		tool.$input[0].copyComputedStyle(tool.$input[0]); // preserve styles
-		
 		var $te = $(tool.element);
 		$te.addClass('Q_filter_begun');
 
@@ -237,7 +236,7 @@ Q.Tool.define('Q/filter', function (options) {
 			top: state.fullscreen 
 				? 0
 				: $container.offset().top - $te.offset().top + topH
-		}).show();
+		});
 		return true;
 	},
 	/**
@@ -260,7 +259,6 @@ Q.Tool.define('Q/filter', function (options) {
 			state.begun = false;
 			var $te = $(tool.element);
 			$te.removeClass('Q_filter_begun');
-			tool.$results.hide();
 			if (state.fullscreen) {
 				$te.nextAll().removeClass('Q_filter_hide');
 				$te.insertAfter(tool.$placeholder);

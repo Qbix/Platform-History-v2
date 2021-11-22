@@ -110,7 +110,11 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 				results = $('<div class="Streams_noResults"/>')
 					.html("No results");
 				callback(results);
-				return;
+				return callback("");
+			}
+
+			if (Q.isEmpty(data.slots.results)) {
+				return callback("");
 			}
 			var $table = $('<table />');
 			Q.each(data.slots.results, function (i, result) {
@@ -119,19 +123,19 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 					.attr('data-publisherId', result.publisherId)
 					.attr('data-type', result.type)
 					.appendTo($table);
-				$('<td class="Streams_lookup_result_icon" />')
-					.append($('<img />', {'src': result.icon+'/' + (Q.getObject(["typeIconsSize", result.type], state) || 80) + '.png'}))
+				$('<td class="Streams_lookup_result_icon" style="background-image: url(' + result.icon+ '/' + (Q.getObject(["typeIconsSize", result.type], state) || 80) + '.png)" />')
 					.appendTo($tr);
 				$('<td class="Streams_lookup_result_title" />')
 					.text(result.title)
 					.appendTo($tr);
+				$('<tr class="Q_filter_spacer"><td colspan="2"></td></tr>').appendTo($table);
 			});
 			callback($table);
 		}, { fields: {
-				publisherId: publisherId,
-				title: title,
-				types: types
-			}})
+			publisherId: publisherId,
+			title: title,
+			types: types
+		}})
 	}),
 	Q: {
 		beforeRemove: function () {
