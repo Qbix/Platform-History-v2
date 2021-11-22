@@ -7,7 +7,6 @@
 }
 
 .Q_filter_results {
-	display: none;
 	position: relative;
 	padding: 5px;
 	border: solid 1px #ccc;
@@ -16,6 +15,10 @@
 	font-weight: normal;
 	font-style: normal;
 	cursor: pointer;
+}
+.Q_filter_tool:not(.Q_filter_begun) .Q_filter_results,
+.Q_filter_results:empty {
+	display: none;
 }
 
 .Q_filter_notFullscreen .Q_filter_results {
@@ -59,7 +62,8 @@
 	background-position: right center !important;
 }
 
-.Q_filter_input.Q_filter_chose.Q_nonempty { 
+.Q_filter_input.Q_filter_chose.Q_nonempty {
+	color: #000 !important;
 	background-color: #eef !important;
 	background-image: url(../img/clear.png) !important;
 	background-repeat: no-repeat !important;
