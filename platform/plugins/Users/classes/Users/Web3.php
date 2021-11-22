@@ -35,23 +35,30 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contract,
 		$methodName,
 		$params = array(), 
-		$cacheDuration = 3600,
+		$cacheDuration = null,
 		$caching = null,
 		$app = null)
 	{
 		if (!isset($appId)) {
 			$app = Q::app();
 		}
-		
+
 		list($appId, $appInfo) = Users::appInfo('wallet', $app, true);
 		$chainId = $appInfo['appId'];
-		
-		$cache = self::getCache($chainId, $contract, $methodName, $params, $chainId);
+		if ($cacheDuration === null) {
+			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
+		}
+
+		$cache = self::getCache($chainId, $contract, $methodName, $params, $cacheDuration);
 		if ($cache->wasRetrieved()) {
-			return $cache;
+			$json = Q::json_decode($cache->result);
+			if (is_array($json) || is_object($json)) {
+				return $json;
+			}
+
+			return $cache->result;
 		}
 		
-		$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		$chainInfo = self::chainInfo($chainId);
 		if (empty($chainInfo['rpcUrls'][0])) {
 			throw new Q_Exception_MissingConfig(array(
@@ -119,7 +126,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contract, 
 		$methodName, 
 		$params, 
-		$cacheDuration = 3600)
+		$cacheDuration)
 	{
 		$cached = new Users_Web3(array(
 			'chainId' => $chainId,
