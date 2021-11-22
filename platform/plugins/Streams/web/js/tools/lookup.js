@@ -110,7 +110,11 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 				results = $('<div class="Streams_noResults"/>')
 					.html("No results");
 				callback(results);
-				return;
+				return callback("");
+			}
+
+			if (Q.isEmpty(data.slots.results)) {
+				return callback("");
 			}
 			var $table = $('<table />');
 			Q.each(data.slots.results, function (i, result) {
@@ -128,10 +132,10 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 			});
 			callback($table);
 		}, { fields: {
-				publisherId: publisherId,
-				title: title,
-				types: types
-			}})
+			publisherId: publisherId,
+			title: title,
+			types: types
+		}})
 	}),
 	Q: {
 		beforeRemove: function () {
