@@ -30,8 +30,8 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$networks = Q_Config::expect("Assets", "Web3", "NFT", "networks");
-	$currencies = Q_Config::expect("Assets", "Web3", "NFT", "currencies");
+	$networks = Q_Config::expect("Users", "Web3", "chains");
+	$currencies = Q_Config::expect("Assets", "Web3", "currencies");
 	foreach ($networks as $i => $network) {
 		foreach ($currencies as $currency) {
 			if ($currency[$network["chainId"]] == "0x0000000000000000000000000000000000000000") {

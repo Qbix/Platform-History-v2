@@ -38,6 +38,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			$app = Q::app();
 		}
 
+		list($appId, $appInfo) = Users::appInfo('wallet', $app, true);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
