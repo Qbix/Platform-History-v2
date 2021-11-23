@@ -1065,7 +1065,7 @@
 					}
 
 					// loading ABI json
-					Assets.Web3.NFT.getABI(Q.url("{{Assets}}/nft-contract.abi.json"), function(ABI) {
+					Assets.Web3.NFT.getABI(Q.url("{{baseUrl}}/ABI/" + network.contract + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
 						contract = new ethers.Contract(network.contract, ABI, provider.getSigner());
 

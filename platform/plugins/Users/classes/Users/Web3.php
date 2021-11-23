@@ -67,7 +67,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		
 		$filePath = implode(DS, array(
-			APP_VIEWS_DIR, "Users", "ABI", $contract . ".json"
+			APP_WEB_DIR, "ABI", $contract . ".json"
 		));
 		if (!is_file($filePath)) {
 			throw new Exception("Users_Web3: $filePath not found");
