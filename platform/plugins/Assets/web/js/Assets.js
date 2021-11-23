@@ -1065,7 +1065,7 @@
 					}
 
 					// loading ABI json
-					Assets.Web3.NFT.getABI(Q.url("{{baseUrl}}/ABI/" + network.contract + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + network.contract + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
 						contract = new ethers.Contract(network.contract, ABI, provider.getSigner());
 
@@ -1089,15 +1089,6 @@
 						return _subMethod(contract);
 					});
 				},
-				/**
-				 * Get ABI json using Q.getter to load json file only once
-				 * @method getABI
-				 * @params {String} url json url
-				 * @params {function} callback
-				 */
-				getABI: Q.getter(function (url, callback) {
-					return $.getJSON(url, callback);
-				}),
 				/**
 				 * Get author of NFT by tokenId and network.
 				 * If wrong network selected, suggest to switch network.
