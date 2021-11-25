@@ -269,6 +269,18 @@
 					"rpcUrls": ["https://mainnet.infura.io/v3/905e942e2ccf4c8d8e86871f0950d5d8"],
 					"blockExplorerUrls": ["https://etherscan.io/"]
 				}
+			},
+			"providers": {
+				"WalletConnect": true,
+				"Fortmatic": true,
+				"Portis": true,
+				"Torus": true,
+				"Formatic": true,
+				"Arkane": true,
+				"Authereum": true,
+				"Dcent": true,
+				"Bitski": true,
+				"Frame": true
 			}
 		}
 	}

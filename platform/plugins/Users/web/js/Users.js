@@ -196,6 +196,11 @@
 			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
 			'{{Users}}/js/wallet/evm-chains.min.js',
 			'{{Users}}/js/wallet/fortmatic.js',
+			'{{Users}}/js/wallet/torus.js',
+			'{{Users}}/js/wallet/portis.js',
+			'{{Users}}/js/wallet/authereum.js',
+			'{{Users}}/js/wallet/bitski.js',
+			'{{Users}}/js/wallet/arkane.js',
 			'{{Users}}/js/wallet/walletconnect.min.js',
 			'{{Users}}/js/wallet/web3.min.js',
 			'{{Users}}/js/wallet/web3modal.js'
@@ -3788,14 +3793,82 @@
 		 * @method getWeb3Modal
 		 */
 		getWeb3Modal: function () {
-			var providerOptions = {
-				walletconnect: {
+			var providerOptions = {};
+			var allowedProviders = Users.Web3.providers;
+			if (allowedProviders.WalletConnect) {
+				providerOptions.walletconnect = {
 					package: window.WalletConnectProvider.default,
 					options: {
 						infuraId: Q.getObject(['wallet', Users.communityId, 'infura', 'projectId'], Users.apps)
 					}
+				};
+			}
+			if (allowedProviders.Fortmatic) {
+				providerOptions.fortmatic = {
+					package: window.Fortmatic, // required
+					options: {
+						key: "FORMATIC_API_KEY" // required
+					}
+				};
+			}
+			if (allowedProviders.Torus) {
+				providerOptions.torus = {
+					package: window.Torus, // required
+					options: {
+						networkParams: {
+							/*host: "https://localhost:8545", // optional
+							chainId: 1337, // optional
+							networkId: 1337 // optional*/
+						},
+						config: {
+							buildEnv: "development" // optional
+						}
+					}
+				};
+			}
+			if (allowedProviders.Portis) {
+				providerOptions.portis = {
+					package: window.Portis, // required
+					options: {
+						id: "PORTIS_ID" // required
+					}
 				}
-			};
+			}
+			if (allowedProviders.Authereum) {
+				providerOptions.authereum = {
+					package: window.Authereum // required
+				}
+			}
+			if (allowedProviders.Frame) {
+				providerOptions.frame = {
+					package: window.ethereum // required
+				}
+			}
+			if (allowedProviders.Bitski) {
+				providerOptions.bitski = {
+					package: window.Bitski, // required
+					options: {
+						clientId: "BITSKI_CLIENT_ID", // required
+						callbackUrl: "BITSKI_CALLBACK_URL" // required
+					}
+				}
+			}
+			if (allowedProviders.Arkane) {
+				providerOptions.arkane = {
+					package: window.VenlyConnect, // required
+					options: {
+						clientId: "ARKANE_CLIENT_ID" // required
+					}
+				}
+			}
+			if (allowedProviders.Dcent) {
+				providerOptions.dcentwallet = {
+					package: window.ethereum, // required
+					options: {
+						rpcUrl: "INSERT_RPC_URL" // required
+					}
+				}
+			}
 
 			Users.Wallet.web3Modal = new window.Web3Modal.default({
 				//chain: options.chain,
