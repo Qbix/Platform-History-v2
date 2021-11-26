@@ -13,44 +13,43 @@ use Crypto\Keccak;
  * @class Users_Web3
  */
 class Users_Web3 extends Base_Users_Web3 {
-	static $useCache = null;
-
 	/**
 	 * Used to execute methods on the blockchain
 	 * @method execute
 	 * @static
-	 * $param {String} $chainId
-	 * @param {String} $methodName
-	 * @param {String|array} [$params=array()] - params sent to contract method
+	 * @param {string} $contractAddress on that chain
+	 * @param {string} $methodName in the contract
+	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
 	 * @param {boolean|null} [$caching=true] Set false to ignore cache and request blocjchain
+	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
 	 * @return array
 	 */
 	static function execute (
-		$chainId,
+		$contractAddress,
 		$methodName,
 		$params = array(),
 		$caching = true,
 		$cacheDuration = null,
-		$app = null)
+		$appId = null)
 	{
-		if (!isset($app)) {
-			$app = Q::app();
+		if (!isset($appId)) {
+			$appId = Q::app();
 		}
 
-		list($appId, $appInfo) = Users::appInfo('wallet', $app, true);
+		list($chainId, $appInfo) = Users::appInfo('wallet', $appId, true);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
-
-		if (self::$useCache === null) {
-			self::$useCache = Q_Config::get("Users", "apps", "wallet", Users::communityId(), "Web3", "useCache", true);
+		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
+		if (!$chainId) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "'Users/apps/$appId/chainId'"
+			));
 		}
 
-		$chainInfo = Q_Config::expect("Users", "Web3", "chains", $chainId);
-
-		if ($caching && self::$useCache) {
-			$cache = self::getCache($chainId, $chainInfo["contract"], $methodName, $params, $cacheDuration);
+		if ($caching && $cacheDuration) {
+			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 			if ($cache->wasRetrieved()) {
 				$json = Q::json_decode($cache->result);
 				if (is_array($json) || is_object($json)) {
@@ -61,24 +60,24 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		if (empty($chainInfo['rpcUrls'][0])) {
+		if (empty($appInfo['rpcUrls'][0])) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "'Users/apps/$app/rpcUrls[0]'"
+				'fieldpath' => "Users/apps/$appId/rpcUrls[0]"
 			));
 		}
-		
-		$filePath = implode(DS, array(
-			APP_WEB_DIR, "ABI", $chainInfo["contract"] . ".json"
-		));
-		if (!is_file($filePath)) {
-			throw new Exception("Users_Web3: $filePath not found");
+		$rpcUrl = $appInfo['rpcUrls'][0];
+
+		$filename = self::getABIFilename($contractAddress);
+		if (!is_file($filename)) {
+			throw new Q_Exception_MissingFile(compact('filename'));
 		}
-		$rpcUrl = $chainInfo['rpcUrls'][0];
-		$abi = file_get_contents($filePath);
+		$abi = file_get_contents($filename);
 		$data = array();
 
 		// call contract function
-		(new Contract($rpcUrl, $abi))->at($chainInfo["contract"])->call($methodName, $params,
+		(new Contract($rpcUrl, $abi))
+		->at($contractAddress)
+		->call($methodName, $params,
 		function ($err, $results) use (&$data) {
 			if (empty($results)) {
 				$data = $results;
@@ -103,11 +102,55 @@ class Users_Web3 extends Base_Users_Web3 {
 			$cache->result = Q::json_encode($data, true);
 		}
 
-		if ($data) {
+		if (($data && $caching !== false)
+		or (!$data && $caching === true)) {
 			$cache->save(true);
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Get the filename of the ABI file for a contract. Taken from Users/web3/contracts/$contractName/ABIFilename config usually.
+	 * @method getABIFilename
+	 * @static
+	 * @param {string} $contractAddress The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
+	 * @return {string}
+	 */
+	static function getABIFilename ($contractAddress)
+	{
+		/**
+		 * @event Users/Web3/getABIFilename {before}
+		 * @param {string} $contractAddress
+		 * @param {string} $appId
+		 * @return {string} the filename of the file to load
+		 */
+		$filename = Q::event(
+			'Users/Web3/getABIFilename', compact('contractAddress', 'appId'), 
+			'before', false, $filename
+		);
+		if ($filename) {
+			return $filename;
+		}
+		if (!isset(self::$abiFilenames[$contractAddress])) {
+			$config = Q_Config::get(
+				'Users', 'web3', 'contracts', $contractAddress, array()
+			);
+			if (!empty($config['filename'])) {
+				$filename = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
+				return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
+			}
+			if (!empty($config['dir'])) {
+				$dir = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
+				return APP_WEB_DIR . DS . implode(DS, explode('/', $dir))
+					. DS . "$contractAddress.json";
+			}
+			if (!empty($config['url'])) {
+				$url = Q_Uri::interpolateUrl($url, compact('contractAddress'));
+				return Q_Uri::filenameFromUrl($url);
+			}
+		}
+		return self::$abiFilenames[$contractAddress];
 	}
 
 	/**
@@ -119,8 +162,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {String} $methodName
 	 * @param {String} $params params used to call the method
 	 * @param {integer} [$cacheDuration=3600]
-	 * @param {String} [$app]
-	 * @return db_row
+	 * @param {String} [$app] TehThe internal app ID
+	 * @return {Db_Row}
 	 */
 	static function getCache (
 		$chainId, 

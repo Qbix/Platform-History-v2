@@ -1723,8 +1723,9 @@ abstract class Users extends Base_Users
 	static function appInfo($platform, $appId, $throwIfMissing = false)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
-		if (isset($apps[$appId])) {
-			$appInfo = $apps[$appId];
+		$id = $appId;
+		if (isset($apps[$id])) {
+			$appInfo = $apps[$id];
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {
@@ -1734,12 +1735,13 @@ abstract class Users extends Base_Users
 					break;
 				}
 			}
-			$appId = $id;
 		}
-		if ($throwIfMissing and !$appInfo) {
-			throw new Q_Exception_MissingConfig("Users/apps/$platform/$appId");
+		if ($throwIfMissing and !isset($id)) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Users/apps/$platform/$appId"
+			));
 		}
-		return array($appId, $appInfo);
+		return array($id, $appInfo);
 	}
 
 	/**
