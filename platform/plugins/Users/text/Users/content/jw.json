@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ngalih menyang Dompet",
                 "content": "Sawise nutup dialog iki, sampeyan bakal digawa menyang dompet. Sawise sampeyan mlebu, bali menyang kaca iki."
-            }
+            },
+            "alt": "mlebu karo dompet"
+        },
+        "facebook": {
+            "noEmail": "Akun facebook sampeyan ora duwe alamat email sing dikonfirmasi. Cukup mlebu kanthi cara asli.",
+            "alt": "mlebu nganggo facebook"
         }
     },
     "setIdentifier": {

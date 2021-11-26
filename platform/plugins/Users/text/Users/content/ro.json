@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Redirecționare către Wallet",
                 "content": "După ce închideți acest dialog, veți fi direcționat către portofelul dvs. După ce vă conectați, reveniți la această pagină."
-            }
+            },
+            "alt": "conectați-vă cu portofel"
+        },
+        "facebook": {
+            "noEmail": "Contului tău de Facebook lipsește o adresă de e-mail confirmată. Conectați-vă pur și simplu în mod nativ.",
+            "alt": "Logheaza-te cu Facebook"
         }
     },
     "setIdentifier": {

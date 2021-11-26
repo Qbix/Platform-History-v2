@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Chuyển hướng đến Wallet",
                 "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
-            }
+            },
+            "alt": "đăng nhập bằng ví"
+        },
+        "facebook": {
+            "noEmail": "Tài khoản facebook của bạn thiếu địa chỉ email được xác nhận. Đơn giản chỉ cần đăng nhập theo cách bản địa.",
+            "alt": "đăng nhập Facebook"
         }
     },
     "setIdentifier": {

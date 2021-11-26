@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Omdirigerer til Wallet",
                 "content": "Når du lukker denne dialog, bliver du ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
-            }
+            },
+            "alt": "log ind med pung"
+        },
+        "facebook": {
+            "noEmail": "Din facebook-konto mangler en bekræftet e-mailadresse. Du skal blot logge på den oprindelige måde.",
+            "alt": "Login med Facebook"
         }
     },
     "setIdentifier": {

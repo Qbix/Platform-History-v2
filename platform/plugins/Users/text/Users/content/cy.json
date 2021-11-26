@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ailgyfeirio i&#39;r Waled",
                 "content": "Ar ôl i chi gau&#39;r ymgom hon, cewch eich cludo i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
-            }
+            },
+            "alt": "mewngofnodi gyda waled"
+        },
+        "facebook": {
+            "noEmail": "Mae eich cyfrif facebook ar goll cyfeiriad e-bost wedi&#39;i gadarnhau. Yn syml, mewngofnodwch yn y ffordd frodorol.",
+            "alt": "mewngofnodi gyda facebook"
         }
     },
     "setIdentifier": {

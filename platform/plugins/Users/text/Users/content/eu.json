@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zorroan sartuko zara. Saioa hasi ondoren, itzuli orrialde honetara."
-            }
+            },
+            "alt": "hasi saioa zorroarekin"
+        },
+        "facebook": {
+            "noEmail": "Zure facebook-eko kontuari baieztatutako helbide elektroniko bat falta zaio. Hasi saioa jatorrizko moduan.",
+            "alt": "hasi saioa facebook-ekin"
         }
     },
     "setIdentifier": {

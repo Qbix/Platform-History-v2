@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Rahakotile ümbersuunamine",
                 "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
-            }
+            },
+            "alt": "logi sisse rahakotiga"
+        },
+        "facebook": {
+            "noEmail": "Teie Facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse algsel viisil.",
+            "alt": "Logi sisse Facebookiga"
         }
     },
     "setIdentifier": {

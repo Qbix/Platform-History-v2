@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Na -atụgharị na obere akpa",
                 "content": "Ozugbo ị mechiri mkparịta ụka a, a ga -akpọga gị n&#39;akpa gị. Mgbe ị banyere, laghachi na ibe a."
-            }
+            },
+            "alt": "banye na obere akpa"
+        },
+        "facebook": {
+            "noEmail": "Akaụntụ Facebook gị enweghị adreesị ozi-e ekwenyesiri ike. Naanị banye n&#39;ụzọ nwa amaala.",
+            "alt": "banye na facebook"
         }
     },
     "setIdentifier": {

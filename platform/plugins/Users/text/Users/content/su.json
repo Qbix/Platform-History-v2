@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Mindahkeun kana Dompét",
                 "content": "Sakali anjeun nutup dialog ieu, anjeun bakal dicandak kana dompét anjeun. Saatos anjeun lebet, balik ka halaman ieu."
-            }
+            },
+            "alt": "asup jeung dompét"
+        },
+        "facebook": {
+            "noEmail": "Akun facebook anjeun leungit alamat email anu dikonfirmasi. Kantun log in cara asli.",
+            "alt": "asup jeung facebook"
         }
     },
     "setIdentifier": {

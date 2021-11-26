@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Beinir að Veski",
                 "content": "Þegar þú hefur lokað þessum glugga verðurðu fluttur í veskið þitt. Þegar þú hefur skráð þig inn, farðu aftur á þessa síðu."
-            }
+            },
+            "alt": "skráðu þig inn með veski"
+        },
+        "facebook": {
+            "noEmail": "Á Facebook reikningnum þínum vantar staðfest netfang. Skráðu þig einfaldlega á innfæddan hátt.",
+            "alt": "skráðu þig inn með facebook"
         }
     },
     "setIdentifier": {

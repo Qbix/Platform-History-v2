@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Hamyonga yo&#39;naltirilmoqda",
                 "content": "Ushbu dialogni yopganingizdan so&#39;ng, siz hamyoningizga o&#39;tasiz. Tizimga kirganingizdan so&#39;ng, ushbu sahifaga qayting."
-            }
+            },
+            "alt": "hamyon bilan tizimga kiring"
+        },
+        "facebook": {
+            "noEmail": "Facebook akkauntingizda tasdiqlangan elektron pochta manzili yo‘q. Oddiy tarzda tizimga kiring.",
+            "alt": "facebook bilan tizimga kiring"
         }
     },
     "setIdentifier": {

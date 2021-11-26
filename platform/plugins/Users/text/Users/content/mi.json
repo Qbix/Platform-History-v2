@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Te Huringa ki te Putea",
                 "content": "Ka katia e koe tenei korero, ka haria atu koe ki to putea. Whai muri i to hainatanga, hoki ki tenei whaarangi."
-            }
+            },
+            "alt": "takiuru me te putea"
+        },
+        "facebook": {
+            "noEmail": "Kei te ngaro tetahi wahitau imeera kua whakapumautia to putea facebook. Me takiuru noa i te huarahi taketake.",
+            "alt": "takiuru me te pukamata"
         }
     },
     "setIdentifier": {

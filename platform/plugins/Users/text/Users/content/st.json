@@ -91,7 +91,12 @@
             "alert": {
                 "title": "E lebisitse ho Wallet",
                 "content": "Hang ha u koala lebokose lena, u tla isoa sepacheng sa hau. Kamora hore o kene, khutlela leqepheng lena."
-            }
+            },
+            "alt": "kena ka sepache"
+        },
+        "facebook": {
+            "noEmail": "Ak&#39;haonte ea hau ea facebook ha e na aterese ea lengolo-tsoibila e netefalitsoeng. Feela kena ka tsela ea tlhaho.",
+            "alt": "kena ka facebook"
         }
     },
     "setIdentifier": {

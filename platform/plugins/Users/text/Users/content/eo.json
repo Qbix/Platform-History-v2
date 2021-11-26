@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Alidirektado al Monujo",
                 "content": "Post kiam vi fermos ĉi tiun dialogon, vi estos kondukita al via monujo. Post kiam vi ensalutis, revenu al ĉi tiu paĝo."
-            }
+            },
+            "alt": "ensalutu per monujo"
+        },
+        "facebook": {
+            "noEmail": "Al via fejsbuka konto mankas konfirmita retadreso. Simple ensalutu laŭ denaska maniero.",
+            "alt": "ensalutu per facebook"
         }
     },
     "setIdentifier": {

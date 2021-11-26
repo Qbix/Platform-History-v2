@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Viderekobler til Wallet",
                 "content": "Når du lukker denne dialogboksen, blir du ført til lommeboken din. Etter at du har logget deg på, går du tilbake til denne siden."
-            }
+            },
+            "alt": "logge inn med lommebok"
+        },
+        "facebook": {
+            "noEmail": "Facebook-kontoen din mangler en bekreftet e-postadresse. Bare logg på den opprinnelige måten.",
+            "alt": "logg inn med Facebook"
         }
     },
     "setIdentifier": {

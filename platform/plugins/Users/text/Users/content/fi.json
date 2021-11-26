@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Uudelleenohjaus Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
-            }
+            },
+            "alt": "kirjaudu sisään lompakolla"
+        },
+        "facebook": {
+            "noEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu sisään alkuperäisellä tavalla.",
+            "alt": "kirjaudu sisään facebookilla"
         }
     },
     "setIdentifier": {

@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Redirection vers le portefeuille",
                 "content": "Une fois que vous fermez cette boîte de dialogue, vous serez redirigé vers votre portefeuille. Après vous être connecté, revenez à cette page."
-            }
+            },
+            "alt": "connectez-vous avec le portefeuille"
+        },
+        "facebook": {
+            "noEmail": "Il manque une adresse e-mail confirmée sur votre compte facebook. Connectez-vous simplement de manière native.",
+            "alt": "Se connecter avec Facebook"
         }
     },
     "setIdentifier": {

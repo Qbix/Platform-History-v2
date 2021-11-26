@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Cüzdan&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
-            }
+            },
+            "alt": "cüzdan ile giriş yap"
+        },
+        "facebook": {
+            "noEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel şekilde oturum açın.",
+            "alt": "Facebook ile giriş"
         }
     },
     "setIdentifier": {

@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ëmgeleet op Portemonnaie",
                 "content": "Wann Dir dësen Dialog zoumaacht, gitt Dir an Äre Portemonnaie bruecht. Nodeems Dir Iech ugemellt hutt, gitt zréck op dës Säit."
-            }
+            },
+            "alt": "aloggen mat Portmonni"
+        },
+        "facebook": {
+            "noEmail": "Äre Facebook Kont fehlt eng bestätegt E-Mailadress. Loggt Iech einfach op déi gebierteg Manéier.",
+            "alt": "aloggen mat Facebook"
         }
     },
     "setIdentifier": {

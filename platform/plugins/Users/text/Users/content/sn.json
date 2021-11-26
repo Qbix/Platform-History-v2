@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Inonongedzera kuWallet",
                 "content": "Ukangovhara dialog iyi, uchaendeswa kuchikwama chako. Mushure mekunge mapinda, dzokerai peji ino."
-            }
+            },
+            "alt": "pinda nechikwama"
+        },
+        "facebook": {
+            "noEmail": "Yako facebook account haina email kero yakasimbiswa. Ingo pinda munzira yekuzvarwa.",
+            "alt": "pinda nefacebook"
         }
     },
     "setIdentifier": {

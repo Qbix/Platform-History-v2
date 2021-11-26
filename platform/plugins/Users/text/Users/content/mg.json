@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Famindrana mankany amin&#39;ny Wallet",
                 "content": "Raha vao manidy ity dinika ity ianao dia hoentina any amin&#39;ny kitapom-bolanao. Aorian&#39;ny fidiranao dia miverena amin&#39;ity pejy ity."
-            }
+            },
+            "alt": "midira amin&#39;ny kitapom-bola"
+        },
+        "facebook": {
+            "noEmail": "Tsy misy adiresy mailaka voamarina ny kaontinao facebook. Midira fotsiny amin&#39;ny fomba teratany.",
+            "alt": "midira amin&#39;ny facebook"
         }
     },
     "setIdentifier": {

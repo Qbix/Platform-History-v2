@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Preusmeritev v Denarnico",
                 "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v denarnico. Ko se prijavite, se vrnite na to stran."
-            }
+            },
+            "alt": "prijavite se z denarnico"
+        },
+        "facebook": {
+            "noEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domači način.",
+            "alt": "Prijava s Facebookom"
         }
     },
     "setIdentifier": {

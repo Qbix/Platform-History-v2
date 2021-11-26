@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Cüzdana yönləndirilir",
                 "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Giriş etdikdən sonra bu səhifəyə qayıdın."
-            }
+            },
+            "alt": "pul kisəsi ilə daxil olun"
+        },
+        "facebook": {
+            "noEmail": "Facebook hesabınızda təsdiqlənmiş e-poçt ünvanı yoxdur. Sadəcə yerli şəkildə daxil olun.",
+            "alt": "facebook ilə daxil olun"
         }
     },
     "setIdentifier": {

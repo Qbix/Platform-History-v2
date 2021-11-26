@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Redireccionando a Wallet",
                 "content": "Unha vez que peche este diálogo, dirixirase á súa carteira. Despois de iniciar sesión, volve a esta páxina."
-            }
+            },
+            "alt": "iniciar sesión con carteira"
+        },
+        "facebook": {
+            "noEmail": "Falta un enderezo de correo electrónico confirmado na túa conta de Facebook. Simplemente inicie sesión na forma nativa.",
+            "alt": "inicia sesión con facebook"
         }
     },
     "setIdentifier": {

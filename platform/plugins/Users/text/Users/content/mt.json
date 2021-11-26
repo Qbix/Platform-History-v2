@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ir-ridirezzjoni lejn il-Kartiera",
                 "content": "Ladarba tagħlaq din id-djalogu, tkun meħud lejn il-kartiera tiegħek. Wara li tiffirma, irritorna għal din il-paġna."
-            }
+            },
+            "alt": "idħol bil-kartiera"
+        },
+        "facebook": {
+            "noEmail": "Il-kont tal-facebook tiegħek nieqes indirizz tal-email ikkonfermat. Sempliċement log fil-mod nattiv.",
+            "alt": "idħol ma&#39; facebook"
         }
     },
     "setIdentifier": {

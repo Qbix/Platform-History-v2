@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Přesměrování do Peněženky",
                 "content": "Po zavření tohoto dialogu se dostanete do své peněženky. Po přihlášení se vraťte na tuto stránku."
-            }
+            },
+            "alt": "přihlásit se pomocí peněženky"
+        },
+        "facebook": {
+            "noEmail": "Ve vašem facebookovém účtu chybí potvrzená e-mailová adresa. Jednoduše se přihlaste nativním způsobem.",
+            "alt": "přihlásit se pomocí Facebooku"
         }
     },
     "setIdentifier": {

@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Reindirizzamentu à Wallet",
                 "content": "Una volta chjusu stu dialogu, sarete purtatu à u vostru portafogliu. Dopu avè firmatu, tornate à sta pagina."
-            }
+            },
+            "alt": "login cù wallet"
+        },
+        "facebook": {
+            "noEmail": "U vostru contu Facebook manca un indirizzu email cunfirmatu. Simply log in u modu nativu.",
+            "alt": "login cù facebook"
         }
     },
     "setIdentifier": {

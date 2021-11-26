@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ìtúnjúwe sí Apamọwọ",
                 "content": "Ni kete ti o ti pa ajọṣọ yii, iwọ yoo mu lọ si apamọwọ rẹ. Lẹhin ti o wọle, pada si oju -iwe yii."
-            }
+            },
+            "alt": "wọle pẹlu apamọwọ"
+        },
+        "facebook": {
+            "noEmail": "Iwe akọọlẹ Facebook rẹ ti nsọnu adirẹsi imeeli ti a fọwọsi. Nìkan wọle ni ọna abinibi.",
+            "alt": "wọle pẹlu facebook"
         }
     },
     "setIdentifier": {

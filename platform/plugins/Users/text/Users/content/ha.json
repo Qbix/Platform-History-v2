@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Canza hanya zuwa Wallet",
                 "content": "Da zarar kun rufe wannan zancen, za a kai ku zuwa walat ɗin ku. Bayan ka shiga, koma wannan shafin."
-            }
+            },
+            "alt": "shiga da walat"
+        },
+        "facebook": {
+            "noEmail": "Majiyarmu ta facebook ta rasa tabbataccen adireshin imel. Kawai shiga cikin hanyar asali.",
+            "alt": "shiga da facebook"
         }
     },
     "setIdentifier": {

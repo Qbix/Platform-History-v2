@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Përcjellja në Wallet",
                 "content": "Pasi ta mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të regjistroheni, kthehuni në këtë faqe."
-            }
+            },
+            "alt": "hyni me portofol"
+        },
+        "facebook": {
+            "noEmail": "Llogarisë suaj në facebook i mungon një adresë emaili e konfirmuar. Thjesht regjistrohuni në mënyrë amtare.",
+            "alt": "Kyçuni nëpërmjet facebook"
         }
     },
     "setIdentifier": {

@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Mengarahkan ke Wallet",
                 "content": "Setelah Anda menutup dialog ini, Anda akan dibawa ke dompet Anda. Setelah Anda masuk, kembali ke halaman ini."
-            }
+            },
+            "alt": "masuk dengan dompet"
+        },
+        "facebook": {
+            "noEmail": "Akun facebook Anda tidak memiliki alamat email yang dikonfirmasi. Cukup masuk dengan cara asli.",
+            "alt": "masuk dengan Facebook"
         }
     },
     "setIdentifier": {

@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Beralîkirina li Wallet",
                 "content": "Gava ku hûn vê diyalogê bigire, hûn ê werin berîka xwe. Piştî ku hûn têkevinê, vegerin ser vê rûpelê."
-            }
+            },
+            "alt": "bi walletê têkevin"
+        },
+        "facebook": {
+            "noEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi tenê bi awayê xwecî têkevin.",
+            "alt": "bi facebookê re têkevinê"
         }
     },
     "setIdentifier": {

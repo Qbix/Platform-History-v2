@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Omleiden naar Wallet",
                 "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
-            }
+            },
+            "alt": "inloggen met portemonnee"
+        },
+        "facebook": {
+            "noEmail": "Er ontbreekt een bevestigd e-mailadres in je Facebook-account. Log gewoon in op de native manier.",
+            "alt": "inloggen met Facebook"
         }
     },
     "setIdentifier": {

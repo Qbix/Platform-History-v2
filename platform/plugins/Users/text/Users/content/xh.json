@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ukuqondisa kwakhona kwiWallet",
                 "content": "Nje ukuba uvale le ncoko, uya kusiwa kwisipaji sakho. Emva kokuba ungene, buyela kweli phepha."
-            }
+            },
+            "alt": "ngena ngesipaji"
+        },
+        "facebook": {
+            "noEmail": "Iakhawunti yakho ye-facebook iswele idilesi ye-imeyile eqinisekisiweyo. Ngena ngokulula ngendlela yasekhaya.",
+            "alt": "ngena nge facebook"
         }
     },
     "setIdentifier": {

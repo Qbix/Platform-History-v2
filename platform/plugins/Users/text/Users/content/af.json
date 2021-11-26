@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Herlei na Wallet",
                 "content": "Sodra u hierdie dialoog sluit, word u na u beursie geneem. Keer terug na hierdie bladsy nadat u aangemeld het."
-            }
+            },
+            "alt": "meld aan met beursie"
+        },
+        "facebook": {
+            "noEmail": "Jou Facebook-rekening ontbreek &#39;n bevestigde e-posadres. Meld eenvoudig aan op die inheemse manier.",
+            "alt": "teken aan deur Facebook"
         }
     },
     "setIdentifier": {

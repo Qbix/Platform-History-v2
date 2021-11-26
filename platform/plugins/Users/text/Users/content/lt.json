@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Peradresavimas į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
-            }
+            },
+            "alt": "prisijungti su pinigine"
+        },
+        "facebook": {
+            "noEmail": "Jūsų Facebook paskyroje trūksta patvirtinto el. pašto adreso. Tiesiog prisijunkite vietiniu būdu.",
+            "alt": "prisijunk su facebook"
         }
     },
     "setIdentifier": {

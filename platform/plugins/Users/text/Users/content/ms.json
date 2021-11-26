@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Mengalihkan ke Wallet",
                 "content": "Setelah anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
-            }
+            },
+            "alt": "log masuk dengan dompet"
+        },
+        "facebook": {
+            "noEmail": "Akaun facebook anda tiada alamat e-mel yang disahkan. Hanya log masuk dengan cara asli.",
+            "alt": "log masuk melalui Facebook"
         }
     },
     "setIdentifier": {

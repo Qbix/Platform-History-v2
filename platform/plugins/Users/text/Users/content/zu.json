@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Iqondisa kabusha ku-Wallet",
                 "content": "Lapho usuvale le ngxoxo, uzoyiswa esikhwameni sakho semali. Ngemuva kokungena ngemvume, buyela kuleli khasi."
-            }
+            },
+            "alt": "ngena nge wallet"
+        },
+        "facebook": {
+            "noEmail": "I-akhawunti yakho ye-facebook ishoda ngekheli le-imeyili eliqinisekisiwe. Vele ungene ngendlela yomdabu.",
+            "alt": "ngena nge-facebook"
         }
     },
     "setIdentifier": {

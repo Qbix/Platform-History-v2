@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Redirecting to Wallet",
                 "content": "Semel hunc alternis claudis, crumenam eris. Post signum in, hanc paginam redi."
-            }
+            },
+            "alt": "log in pera"
+        },
+        "facebook": {
+            "noEmail": "Your Facebook account missing a confirmated email address. Simpliciter log in patrio modo.",
+            "alt": "log in cum facebook"
         }
     },
     "setIdentifier": {

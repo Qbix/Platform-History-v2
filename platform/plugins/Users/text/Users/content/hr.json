@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Preusmjeravanje na Novčanik",
                 "content": "Nakon što zatvorite ovaj dijalog, bit ćete preusmjereni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
-            }
+            },
+            "alt": "prijavite se novčanikom"
+        },
+        "facebook": {
+            "noEmail": "Vašem facebook računu nedostaje potvrđena adresa e-pošte. Jednostavno se prijavite na izvorni način.",
+            "alt": "prijavite se s facebook-om"
         }
     },
     "setIdentifier": {

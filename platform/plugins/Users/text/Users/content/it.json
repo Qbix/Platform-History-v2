@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Reindirizzamento a Wallet",
                 "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
-            }
+            },
+            "alt": "accedi con il portafoglio"
+        },
+        "facebook": {
+            "noEmail": "Nel tuo account Facebook manca un indirizzo email confermato. Accedi semplicemente in modo nativo.",
+            "alt": "Fai il login con facebook"
         }
     },
     "setIdentifier": {

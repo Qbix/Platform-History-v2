@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Ke kuhikuhi nei iā Wallet",
                 "content": "Ke hoʻopau koke ʻoe i kēia kamaʻilio, lawe ʻia ʻoe i kāu pēke. Ma hope o kou ʻeʻe ʻana, hoʻi i kēia ʻaoʻao."
-            }
+            },
+            "alt": "e komo me ka ʻeke kālā"
+        },
+        "facebook": {
+            "noEmail": "Ua nele kāu moʻokāki facebook i kahi leka uila i hoʻopaʻa ʻia. E hoʻopaʻa inoa ma ke ʻano maoli.",
+            "alt": "e komo me ka facebook"
         }
     },
     "setIdentifier": {

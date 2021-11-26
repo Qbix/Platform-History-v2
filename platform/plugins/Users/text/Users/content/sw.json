@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Inaelekeza kwenye mkoba",
                 "content": "Mara baada ya kufunga mazungumzo haya, utapelekwa kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
-            }
+            },
+            "alt": "ingia na mkoba"
+        },
+        "facebook": {
+            "noEmail": "Akaunti yako ya facebook haina barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
+            "alt": "ingia na facebook"
         }
     },
     "setIdentifier": {

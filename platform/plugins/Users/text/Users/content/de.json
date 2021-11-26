@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Weiterleitung an Wallet",
                 "content": "Sobald Sie dieses Dialogfeld schließen, werden Sie zu Ihrem Wallet weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
-            }
+            },
+            "alt": "mit Wallet einloggen"
+        },
+        "facebook": {
+            "noEmail": "Ihrem Facebook-Konto fehlt eine bestätigte E-Mail-Adresse. Melden Sie sich einfach nativ an.",
+            "alt": "Mit Facebook einloggen"
         }
     },
     "setIdentifier": {

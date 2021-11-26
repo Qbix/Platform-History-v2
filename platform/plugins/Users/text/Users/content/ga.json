@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Atreorú chuig Sparán",
                 "content": "Nuair a dhúnann tú an dialóg seo, tabharfar chuig do sparán tú. Tar éis duit síniú isteach, filleadh ar an leathanach seo."
-            }
+            },
+            "alt": "logáil isteach le sparán"
+        },
+        "facebook": {
+            "noEmail": "Tá seoladh ríomhphoist deimhnithe in easnamh ar do chuntas facebook. Níl ort ach logáil isteach ar an mbealach dúchais.",
+            "alt": "logáil isteach le facebook"
         }
     },
     "setIdentifier": {

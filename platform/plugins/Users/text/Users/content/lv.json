@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, jūs nonāksit savā makā. Pēc pierakstīšanās atgriezieties šajā lapā."
-            }
+            },
+            "alt": "piesakieties ar maku"
+        },
+        "facebook": {
+            "noEmail": "Jūsu Facebook kontā trūkst apstiprinātas e-pasta adreses. Vienkārši piesakieties vietējā veidā.",
+            "alt": "piesakieties ar facebook"
         }
     },
     "setIdentifier": {

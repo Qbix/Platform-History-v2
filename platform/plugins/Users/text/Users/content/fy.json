@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Trochferwize nei Wallet",
                 "content": "As jo dit dialooch slute, wurde jo nei jo portemonnee brocht. Neidat jo jo oanmeld hawwe, gean werom nei dizze side."
-            }
+            },
+            "alt": "ynlogge mei wallet"
+        },
+        "facebook": {
+            "noEmail": "Jo Facebook-akkount mist in befêstige e-postadres. Meld jo gewoan yn &#39;e native manier.",
+            "alt": "ynlogge mei facebook"
         }
     },
     "setIdentifier": {

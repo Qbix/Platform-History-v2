@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Kulunjika ku Wallet",
                 "content": "Mukatseka bokosili, mudzatengeredwa ku chikwama chanu. Mukasainira, bwererani patsamba lino."
-            }
+            },
+            "alt": "lowani ndi chikwama"
+        },
+        "facebook": {
+            "noEmail": "Akaunti yanu ya facebook ikusowa imelo yotsimikizika. Ingolowetsani m&#39;njira yachilengedwe.",
+            "alt": "lowani ndi facebook"
         }
     },
     "setIdentifier": {

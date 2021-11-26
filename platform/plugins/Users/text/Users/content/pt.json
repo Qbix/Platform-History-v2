@@ -91,7 +91,12 @@
             "alert": {
                 "title": "Redirecionando para carteira",
                 "content": "Depois de fechar esta caixa de diálogo, você será direcionado para sua carteira. Depois de entrar, volte a esta página."
-            }
+            },
+            "alt": "faça login com carteira"
+        },
+        "facebook": {
+            "noEmail": "Falta um endereço de e-mail confirmado em sua conta do Facebook. Simplesmente faça o login da maneira nativa.",
+            "alt": "Entrar com o Facebook"
         }
     },
     "setIdentifier": {
