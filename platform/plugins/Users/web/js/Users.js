@@ -192,15 +192,22 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.init.wallet = function (callback, options) {
-		Q.addScript([
+		var scriptsToLoad = [
 			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
 			'{{Users}}/js/wallet/evm-chains.min.js',
-			'{{Users}}/js/wallet/fortmatic.js',
-			'{{Users}}/js/wallet/portis.js',
 			'{{Users}}/js/wallet/walletconnect.min.js',
 			'{{Users}}/js/wallet/web3.min.js',
 			'{{Users}}/js/wallet/web3modal.js'
-		], callback, options);
+		];
+		var allowedProviders = Users.Web3.providers;
+		if (allowedProviders.Fortmatic) {
+			scriptsToLoad.push('{{Users}}/js/wallet/fortmatic.js');
+		}
+		if (allowedProviders.Portis) {
+			scriptsToLoad.push('{{Users}}/js/wallet/portis.js',);
+		}
+
+		Q.addScript(scriptsToLoad, callback, options);
 	};
 
 	/**
