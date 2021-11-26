@@ -58,7 +58,7 @@
                         tool.refresh(stream, author, owner, commissionInfo, saleInfo);
                         $toolElement.removeClass("Q_working");
 
-                        Q.Users.Wallet.onAccountsChanged.set(function () {
+                        Q.Users.Web3.onAccountsChanged.set(function () {
                             tool.refresh(stream, author, owner, commissionInfo, saleInfo);
                         }, tool);
                     });

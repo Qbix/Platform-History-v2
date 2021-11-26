@@ -340,8 +340,8 @@
 		});
 	};
 	
-	Users.authenticate.wallet = function (platform, platformAppId, onSuccess, onCancel, options) {
-		options = Q.extend(Users.authenticate.wallet.options, options);
+	Users.authenticate.web3 = function (platform, platformAppId, onSuccess, onCancel, options) {
+		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.init.web3(function () {
 			try {
 				var wsr_json = Q.cookie('wsr_1');
@@ -361,7 +361,7 @@
 				// wasn't able to get the current authenticated xid from cookie
 			}
 
-			var web3Modal = Users.Wallet.getWeb3Modal();
+			var web3Modal = Users.Web3.getWeb3Modal();
 
 			web3Modal.clearCachedProvider();
 			web3Modal.resetState().then(_connect);
@@ -402,9 +402,9 @@
 					});
 					var w3 = new Web3(provider);
 					w3.eth.getAccounts().then(function (accounts) {
-						var walletAddress = Q.cookie('Q_Users_wallet_address') || '';
-						if (walletAddress && accounts.includes(walletAddress)) {
-							var loginExpires = Q.cookie('Q_Users_wallet_login_expires');
+						var web3Address = Q.cookie('Q_Users_web3_address') || '';
+						if (web3Address && accounts.includes(web3Address)) {
+							var loginExpires = Q.cookie('Q_Users_web3_login_expires');
 							if (loginExpires > Date.now() / 1000) {
 								_proceed();
 							}
@@ -1864,7 +1864,7 @@
 				case 'web3':
 					$button = $('<a href="#login_web3" id="Users_login_with_web3" />').append(
 						$('<img alt="login with wallet" />')
-							.attr('src', Q.text.Users.login.walletSrc || Q.url('{{Users}}/img/web3-login.png'))
+							.attr('src', Q.text.Users.login.web3Src || Q.url('{{Users}}/img/web3-login.png'))
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (login_setupDialog.dialog) {
