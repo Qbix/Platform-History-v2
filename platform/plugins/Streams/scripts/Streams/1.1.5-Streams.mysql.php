@@ -1,29 +1,38 @@
 <?php
-	
-function Streams_1_1_5_Streams()
-{
+function Streams_1_1_5_Streams () {
 	$offset = 0;
 	$i = 0;
-	echo "Updating Streams/user/profile streams".PHP_EOL;
+	$streamName = "Streams/user/profile";
+
+	echo "Updating $streamName streams".PHP_EOL;
 	while (1) {
-		$streams = Streams_Stream::select()
-			->where(array(
-				"type" => "Streams/user/profile",
-				"closedTime" => null
-			))
+		$users = Users_User::select()
+			->where(array("signedUpWith != " => "none"))
 			->limit(100, $offset)
 			->fetchDbRows();
-		if (!$streams) {
+		if (empty($users)) {
 			break;
 		}
-		foreach ($streams as $stream) {
-			$stream->title = Streams::displayName($stream->publisherId, array('asUserId' => ''));
-			$avatar = Streams_Avatar::fetch("", $stream->publisherId);
-			$stream->icon = $avatar->icon;
-			$stream->save();
+		foreach ($users as $i => $user) {
+			$title = Streams::displayName($user->id, array('asUserId' => ''));
+			$avatar = Streams_Avatar::fetch("", $user->id);
+			$icon = $avatar->icon;
+
+			$stream = Streams::fetchOne($user->id, $user->id, $streamName);
+			if ($stream) {
+				$stream->title = $title;
+				$stream->icon = $icon;
+				$stream->save();
+			} else {
+				Streams::create($user->id, $user->id, $streamName, array(
+					"title" => $title,
+					"icon" => $icon,
+					"name" => $streamName
+				));
+			}
 
 			echo "\033[100D";
-			echo "Updated $i streams";
+			echo "Updated $i users";
 		}
 		$offset += 100;
 	};
