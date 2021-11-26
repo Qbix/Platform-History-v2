@@ -86,7 +86,7 @@
         "confirmTerms": "Akcepti la Kondiĉojn de Servo?",
         "facebookNoEmail": "Via facebook-konto mankas konfirmitan retpoŝtadreson. Simple ensalutu la denaskan manieron.",
         "picTooltip": "Vi povas ŝanĝi ĉi tiun bildon poste",
-        "wallet": {
+        "web3": {
             "payload": "Ensalutu {{host}} samtempe {{timestamp}}",
             "alert": {
                 "title": "Alidirektado al Monujo",

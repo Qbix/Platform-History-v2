@@ -86,7 +86,7 @@
         "confirmTerms": "Pranoni Kushtet e Shërbimit?",
         "facebookNoEmail": "Në llogarinë tuaj në facebook mungon një adresë e konfirmuar e-mail. Thjesht futuni në mënyrën amtare.",
         "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë",
-        "wallet": {
+        "web3": {
             "payload": "Hyni në {{host}} në kohën {{timestamp}}",
             "alert": {
                 "title": "Përcjellja në Wallet",

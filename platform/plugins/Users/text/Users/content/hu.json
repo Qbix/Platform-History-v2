@@ -86,7 +86,7 @@
         "confirmTerms": "Elfogadja a Szolgáltatási feltételeket?",
         "facebookNoEmail": "A facebook-fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
         "picTooltip": "Ezt a képet később megváltoztathatja",
-        "wallet": {
+        "web3": {
             "payload": "Jelentkezzen be {{host}} időpontban {{timestamp}}",
             "alert": {
                 "title": "Átirányítás a Wallet szolgáltatásba",

@@ -86,7 +86,7 @@
         "confirmTerms": "Mercên karûbar qebûl dikin?",
         "facebookNoEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi hêsanî bi rengek xweser têkevin.",
         "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin",
-        "wallet": {
+        "web3": {
             "payload": "Têkeve {{host}} wextê {{timestamp}}",
             "alert": {
                 "title": "Beralîkirina li Wallet",

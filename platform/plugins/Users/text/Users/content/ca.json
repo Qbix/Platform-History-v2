@@ -86,7 +86,7 @@
         "confirmTerms": "Accepteu les Condicions del servei?",
         "facebookNoEmail": "Al vostre compte de Facebook falta una adreça de correu electrònic confirmada. Simplement inicieu la sessió amb la forma nativa.",
         "picTooltip": "Podeu canviar aquesta imatge més endavant",
-        "wallet": {
+        "web3": {
             "payload": "Inicieu la sessió a {{host}} alhora {{timestamp}}",
             "alert": {
                 "title": "Redirecció a Wallet",

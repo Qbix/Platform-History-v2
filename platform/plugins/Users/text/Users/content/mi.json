@@ -86,7 +86,7 @@
         "confirmTerms": "Whakaaehia nga Ture o te Ratonga?",
         "facebookNoEmail": "Kei te ngaro to pūkete facebook i tetahi wahitau imeera kua whakaatuhia. Ka takiuru noa te huarahi taketake.",
         "picTooltip": "Ka taea te huri i tenei pikitia i muri mai",
-        "wallet": {
+        "web3": {
             "payload": "Takiuru ki {{host}} i te wa tika {{timestamp}}",
             "alert": {
                 "title": "Te Huringa ki te Putea",

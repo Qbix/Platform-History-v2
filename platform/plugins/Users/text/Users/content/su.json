@@ -86,7 +86,7 @@
         "confirmTerms": "Tampa Sarat Bidang palayanan?",
         "facebookNoEmail": "Akun facebook anjeun leungit alamat email anu dikonfirmasi. Kantun log dina cara pribumi.",
         "picTooltip": "Anjeun tiasa ngarobih gambar ieu engké",
-        "wallet": {
+        "web3": {
             "payload": "Asup kana {{host}} dina waktosna {{timestamp}}",
             "alert": {
                 "title": "Mindahkeun kana Dompét",

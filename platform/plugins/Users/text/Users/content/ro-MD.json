@@ -86,7 +86,7 @@
         "confirmTerms": "Acceptați Termenii de serviciu?",
         "facebookNoEmail": "Din contul dvs. de Facebook lipsește o adresă de e-mail confirmată. Pur și simplu autentificați-vă în modul nativ.",
         "picTooltip": "Puteți schimba această imagine mai târziu",
-        "wallet": {
+        "web3": {
             "payload": "Conectați-vă la {{host}} la ora {{timestamp}}",
             "alert": {
                 "title": "Redirecționare către Wallet",

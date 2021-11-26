@@ -86,7 +86,7 @@
         "confirmTerms": "Accettare i Termini di servizio?",
         "facebookNoEmail": "Nel tuo account Facebook manca un indirizzo email confermato. Accedi semplicemente in modo nativo.",
         "picTooltip": "Puoi cambiare questa immagine in seguito",
-        "wallet": {
+        "web3": {
             "payload": "Accedi a {{host}} alle ore {{timestamp}}",
             "alert": {
                 "title": "Reindirizzamento a Wallet",

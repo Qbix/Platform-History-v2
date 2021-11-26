@@ -86,7 +86,7 @@
         "confirmTerms": "Taċċetta t-Termini tas-Servizz?",
         "facebookNoEmail": "Il-kont ta ’facebook tiegħek għandu nieqes indirizz elettroniku kkonfermat. Sempliċement idħol fil-mod indiġenu.",
         "picTooltip": "Tista &#39;tbiddel din l-istampa aktar tard",
-        "wallet": {
+        "web3": {
             "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
             "alert": {
                 "title": "Ir-ridirezzjoni lejn il-Kartiera",

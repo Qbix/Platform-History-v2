@@ -86,7 +86,7 @@
         "confirmTerms": "Aksepte kondisyon ki nan sèvis la?",
         "facebookNoEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman ale nan fason natif natal la.",
         "picTooltip": "Ou ka chanje foto sa a pita",
-        "wallet": {
+        "web3": {
             "payload": "Konekte nan {{host}} nan moman {{timestamp}}",
             "alert": {
                 "title": "Redireksyon nan bous",

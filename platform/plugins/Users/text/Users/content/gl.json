@@ -86,7 +86,7 @@
         "confirmTerms": "¿Acepta os termos de servizo?",
         "facebookNoEmail": "A súa conta de Facebook carece dun enderezo de correo electrónico confirmado. Basta con iniciar sesión na forma nativa.",
         "picTooltip": "Máis tarde podes cambiar esta foto",
-        "wallet": {
+        "web3": {
             "payload": "Iniciar sesión en {{host}} á vez {{timestamp}}",
             "alert": {
                 "title": "Redireccionando a Wallet",

@@ -86,7 +86,7 @@
         "confirmTerms": "Accepterer du servicevilkårene?",
         "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mail-adresse. Log ind på den oprindelige måde.",
         "picTooltip": "Du kan ændre dette billede senere",
-        "wallet": {
+        "web3": {
             "payload": "Log ind på {{host}} på et tidspunkt {{timestamp}}",
             "alert": {
                 "title": "Omdirigerer til Wallet",

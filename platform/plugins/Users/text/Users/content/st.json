@@ -86,7 +86,7 @@
         "confirmTerms": "Amohela Melao ea Tšebeletso?",
         "facebookNoEmail": "Ak&#39;haonte ea hau ea facebook e haelloa ke aterese ea lengolo-tsoibila. Kenya feela tsela ea tlhaho.",
         "picTooltip": "U ka fetola setšoantšo sena hamorao",
-        "wallet": {
+        "web3": {
             "payload": "Kena ho {{host}} ka nako {{timestamp}}",
             "alert": {
                 "title": "E lebisitse ho Wallet",

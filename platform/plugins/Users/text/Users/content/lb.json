@@ -86,7 +86,7 @@
         "confirmTerms": "Akzeptéieren Dir d&#39;Konditioune vum Service?",
         "facebookNoEmail": "Äre Facebook Kont fehlt eng bestätegt E-mail Adress. Logt Iech einfach op déi gebierteg Manéier.",
         "picTooltip": "Dir kënnt dëst Bild méi spéit änneren",
-        "wallet": {
+        "web3": {
             "payload": "Aloggen op {{host}} zu Zäit {{timestamp}}",
             "alert": {
                 "title": "Ëmgeleet op Portemonnaie",

@@ -86,7 +86,7 @@
         "confirmTerms": "Landirani Malangizo?",
         "facebookNoEmail": "Akaunti yanu ya facebook ikusowa imelo yosatsimikizika. Ingolowetsani momwe mwakhalira.",
         "picTooltip": "Mutha kusintha chithunzichi pambuyo pake",
-        "wallet": {
+        "web3": {
             "payload": "Lowani mu {{host}} nthawi {{timestamp}}",
             "alert": {
                 "title": "Kulunjika ku Wallet",

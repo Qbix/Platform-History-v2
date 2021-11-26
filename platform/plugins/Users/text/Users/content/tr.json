@@ -86,7 +86,7 @@
         "confirmTerms": "Hizmet Şartlarını Kabul Etmek?",
         "facebookNoEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel yoldan giriş yapın.",
         "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz",
-        "wallet": {
+        "web3": {
             "payload": "{{host}}&#39;da {{timestamp}} saatinde oturum açın",
             "alert": {
                 "title": "Cüzdan&#39;a Yönlendirme",

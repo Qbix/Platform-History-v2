@@ -86,7 +86,7 @@
         "confirmTerms": "Accipe iussis Terms servitii?",
         "facebookNoEmail": "Absentis ratio vestri Facebook electronica confirmata. Log tantum modo in patria.",
         "picTooltip": "Te potest mutare post hanc",
-        "wallet": {
+        "web3": {
             "payload": "Log in {{host}} tempore {{timestamp}}",
             "alert": {
                 "title": "Redirecting to Wallet",

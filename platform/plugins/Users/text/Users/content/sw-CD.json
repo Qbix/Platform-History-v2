@@ -86,7 +86,7 @@
         "confirmTerms": "Kukubali Masharti ya Huduma?",
         "facebookNoEmail": "Akaunti yako ya facebook inakosa anwani ya barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
         "picTooltip": "Unaweza kubadilisha picha hii baadaye",
-        "wallet": {
+        "web3": {
             "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
             "alert": {
                 "title": "Inaelekeza kwenye mkoba",

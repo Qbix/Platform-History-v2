@@ -86,7 +86,7 @@
         "confirmTerms": "Zaakceptować warunki usługi?",
         "facebookNoEmail": "Twoje konto na Facebooku nie ma potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
         "picTooltip": "Możesz zmienić to zdjęcie później",
-        "wallet": {
+        "web3": {
             "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
             "alert": {
                 "title": "Przekierowanie do Portfela",

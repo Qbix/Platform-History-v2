@@ -86,7 +86,7 @@
         "confirmTerms": "Kas nõustute teenusetingimustega?",
         "facebookNoEmail": "Teie facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse oma loomulikult.",
         "picTooltip": "Seda pilti saate hiljem muuta",
-        "wallet": {
+        "web3": {
             "payload": "Logige sisse {{host}} ajal {{timestamp}}",
             "alert": {
                 "title": "Rahakotile ümbersuunamine",

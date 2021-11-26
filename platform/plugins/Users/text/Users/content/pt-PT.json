@@ -86,7 +86,7 @@
         "confirmTerms": "Aceite os Termos de Serviço?",
         "facebookNoEmail": "Sua conta do Facebook está faltando um endereço de e-mail confirmado. Simplesmente faça o log in nativo.",
         "picTooltip": "Você pode mudar esta foto depois",
-        "wallet": {
+        "web3": {
             "payload": "Faça login em {{host}} às {{timestamp}}",
             "alert": {
                 "title": "Redirecionando para carteira",

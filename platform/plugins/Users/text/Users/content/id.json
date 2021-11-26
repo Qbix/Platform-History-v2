@@ -86,7 +86,7 @@
         "confirmTerms": "Terima Ketentuan Layanan?",
         "facebookNoEmail": "Akun facebook Anda tidak memiliki alamat email yang dikonfirmasi. Cukup login dengan cara asli.",
         "picTooltip": "Anda dapat mengubah gambar ini nanti",
-        "wallet": {
+        "web3": {
             "payload": "Masuk ke {{host}} pada waktu {{timestamp}}",
             "alert": {
                 "title": "Mengarahkan ke Wallet",

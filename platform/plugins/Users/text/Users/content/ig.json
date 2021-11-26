@@ -86,7 +86,7 @@
         "confirmTerms": "Nabata Usoro ọrụ?",
         "facebookNoEmail": "Akaụntụ email gị na-efu na adreesị ozi-e enyochaghị. Nanị banye n&#39;ụzọ amaala.",
         "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa",
-        "wallet": {
+        "web3": {
             "payload": "Banye na {{host}} n&#39;oge {{timestamp}}",
             "alert": {
                 "title": "Na -atụgharị na obere akpa",

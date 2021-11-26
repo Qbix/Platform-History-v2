@@ -86,7 +86,7 @@
         "confirmTerms": "Samþykkja þjónustuskilmálana?",
         "facebookNoEmail": "Það vantar staðfest netfang hjá facebook reikningnum þínum. Einfaldlega skráðu þig inn á innfægan hátt.",
         "picTooltip": "Þú getur breytt þessari mynd síðar",
-        "wallet": {
+        "web3": {
             "payload": "Skráðu þig inn á {{host}} á þeim tíma {{timestamp}}",
             "alert": {
                 "title": "Beinir að Veski",

@@ -86,7 +86,7 @@
         "confirmTerms": "Xidmət şərtlərini qəbul edirsiniz?",
         "facebookNoEmail": "Facebook hesabınızda təsdiqlənmiş bir e-poçt ünvanı yoxdur. Sadəcə doğma şəkildə daxil olun.",
         "picTooltip": "Daha sonra bu şəkli dəyişə bilərsiniz",
-        "wallet": {
+        "web3": {
             "payload": "{{timestamp}} vaxtında {{host}} saytına daxil olun",
             "alert": {
                 "title": "Cüzdana yönləndirilir",

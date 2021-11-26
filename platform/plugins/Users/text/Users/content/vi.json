@@ -86,7 +86,7 @@
         "confirmTerms": "Chấp nhận Điều khoản dịch vụ?",
         "facebookNoEmail": "Tài khoản facebook của bạn đang thiếu một địa chỉ email được xác nhận. Đơn giản chỉ cần đăng nhập theo cách bản địa.",
         "picTooltip": "Bạn có thể thay đổi hình ảnh này sau",
-        "wallet": {
+        "web3": {
             "payload": "Đăng nhập vào {{host}} cùng lúc {{timestamp}}",
             "alert": {
                 "title": "Chuyển hướng đến Wallet",

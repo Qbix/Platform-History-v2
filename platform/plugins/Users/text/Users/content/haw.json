@@ -86,7 +86,7 @@
         "confirmTerms": "E hoʻokae i nā ʻ Termslelo a ke lawelawe?",
         "facebookNoEmail": "Pau ka leka uila i kāu leka uila i hōʻoia ʻia. Hoʻopili wale i ka hele kumu.",
         "picTooltip": "Hiki iā ʻoe ke hoʻololi i kēia kiʻi ma hope aku",
-        "wallet": {
+        "web3": {
             "payload": "ʻEʻe i loko {{host}} i ka manawa {{timestamp}}",
             "alert": {
                 "title": "Ke kuhikuhi nei iā Wallet",

@@ -86,7 +86,7 @@
         "confirmTerms": "Uyayamkela iMigaqo yeNkonzo?",
         "facebookNoEmail": "Iakhawunti yakho ye-facebook ilahlekile idilesi ye-imeyile. Ngena nje ngendlela yemveli.",
         "picTooltip": "Ungawutshintsha lo mfanekiso kamva",
-        "wallet": {
+        "web3": {
             "payload": "Ngena kwi {{host}} ngexesha {{timestamp}}",
             "alert": {
                 "title": "Ukuqondisa kwakhona kwiWallet",

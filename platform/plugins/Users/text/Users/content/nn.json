@@ -86,7 +86,7 @@
         "confirmTerms": "Godta vilkårene for bruk?",
         "facebookNoEmail": "Facebook-kontoen din mangler en bekreftet e-postadresse. Bare logg inn på den opprinnelige måten.",
         "picTooltip": "Du kan endre dette bildet senere",
-        "wallet": {
+        "web3": {
             "payload": "Logg deg på {{host}} om gangen {{timestamp}}",
             "alert": {
                 "title": "Viderekobler til Wallet",

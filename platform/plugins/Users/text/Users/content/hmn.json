@@ -86,7 +86,7 @@
         "confirmTerms": "Txais Cov Lus Qhia Kev Pabcuam?",
         "facebookNoEmail": "Koj tus facebook account ploj lawm ib qho chaw nyob email. Cias teev nyob rau hauv txoj kev ib txwm nyob.",
         "picTooltip": "Koj tuaj yeem hloov cov duab tom qab",
-        "wallet": {
+        "web3": {
             "payload": "Nkag mus rau hauv {{host}} lub sijhawm {{timestamp}}",
             "alert": {
                 "title": "Hloov mus rau Lub Hnab",

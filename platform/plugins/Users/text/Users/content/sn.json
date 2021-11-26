@@ -86,7 +86,7 @@
         "confirmTerms": "Gamuchira iyo Mashandiro ebasa?",
         "facebookNoEmail": "Yako facebook account iri kushaya yakasimbiswa email kero. Ingo pinda munzira yekuzvarwa.",
         "picTooltip": "Unogona kuchinja mufananidzo uyu gare gare",
-        "wallet": {
+        "web3": {
             "payload": "Pinda mu {{host}} nenguva {{timestamp}}",
             "alert": {
                 "title": "Inonongedzera kuWallet",

@@ -86,7 +86,7 @@
         "confirmTerms": "Aanvaar u die diensbepalings?",
         "facebookNoEmail": "U bevestigde e-posadres ontbreek in u Facebook-rekening. Teken eenvoudig die oorspronklike manier aan.",
         "picTooltip": "U kan hierdie foto later verander",
-        "wallet": {
+        "web3": {
             "payload": "Meld tydig by {{host}} aan {{timestamp}}",
             "alert": {
                 "title": "Herlei na Wallet",

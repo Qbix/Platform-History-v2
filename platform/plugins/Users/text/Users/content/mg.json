@@ -86,7 +86,7 @@
         "confirmTerms": "Raiso ny fepetra momba ny serivisy?",
         "facebookNoEmail": "Ny kaontinao facebook dia tsy misy adiresy mailaka voamarina. Midira fotsiny amin&#39;ny fomba niaviany.",
         "picTooltip": "Azonao atao ny manova an&#39;ity sary ity avy eo",
-        "wallet": {
+        "web3": {
             "payload": "Midira amin&#39;ny {{host}} ara-potoana {{timestamp}}",
             "alert": {
                 "title": "Famindrana mankany amin&#39;ny Wallet",

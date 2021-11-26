@@ -86,7 +86,7 @@
         "confirmTerms": "Acepta i Termini di serviziu?",
         "facebookNoEmail": "U vostru contu di Facebook manca un indirizzu email cunfirmatu. Basta à cunnette in a manera nativa.",
         "picTooltip": "Pudete cambià sta stampa più tardi",
-        "wallet": {
+        "web3": {
             "payload": "Cunnettatevi {{host}} à tempu {{timestamp}}",
             "alert": {
                 "title": "Reindirizzamentu à Wallet",

@@ -86,7 +86,7 @@
         "confirmTerms": "接受服务条款？",
         "facebookNoEmail": "您的Facebook帐户缺少确认的电子邮件地址。只需以原生方式登录即可。",
         "picTooltip": "您可以稍后更改此图片",
-        "wallet": {
+        "web3": {
             "payload": "在 {{timestamp}} 时间登录 {{host}}",
             "alert": {
                 "title": "重定向到钱包",

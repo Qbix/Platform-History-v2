@@ -86,7 +86,7 @@
         "confirmTerms": "Ditampa Katentuan Layanan?",
         "facebookNoEmail": "Akun facebook sampeyan ora ono alamat email sing wis dikonfirmasi. Mung mlebu kanthi cara asli.",
         "picTooltip": "Sampeyan bisa ngganti gambar mengko",
-        "wallet": {
+        "web3": {
             "payload": "Mlebu menyang {{host}} wektu {{timestamp}}",
             "alert": {
                 "title": "Ngalih menyang Dompet",

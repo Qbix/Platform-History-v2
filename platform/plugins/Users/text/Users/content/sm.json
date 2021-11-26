@@ -86,7 +86,7 @@
         "confirmTerms": "Talia le Tuutuuga o Auaunaga?",
         "facebookNoEmail": "O lau facebook tala o loʻo misi se tuatusi imeli imeli. Faʻasinoa le ala i le auala masani.",
         "picTooltip": "E mafai ona e suia lenei ata mulimuli ane",
-        "wallet": {
+        "web3": {
             "payload": "Alu i totonu {{host}} i le taimi {{timestamp}}",
             "alert": {
                 "title": "Faʻatonutonuina i Wallet",

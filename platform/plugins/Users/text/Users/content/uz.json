@@ -86,7 +86,7 @@
         "confirmTerms": "Foydalanish shartlari qabul qilinsinmi?",
         "facebookNoEmail": "Sizning Facebook hisob qaydnomangizda tasdiqlangan elektron pochta manzili yo&#39;q. Tizimga oddiygina kiring.",
         "picTooltip": "Keyinchalik bu rasmni o&#39;zgartirishingiz mumkin",
-        "wallet": {
+        "web3": {
             "payload": "{{host}} ga {{timestamp}} vaqtida kiring",
             "alert": {
                 "title": "Hamyonga yo&#39;naltirilmoqda",

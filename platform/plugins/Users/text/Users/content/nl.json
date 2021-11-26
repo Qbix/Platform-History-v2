@@ -86,7 +86,7 @@
         "confirmTerms": "Accepteer de Servicevoorwaarden?",
         "facebookNoEmail": "Er ontbreekt een bevestigd e-mailadres in je Facebook-account. Log gewoon in op de native manier.",
         "picTooltip": "U kunt deze afbeelding later wijzigen",
-        "wallet": {
+        "web3": {
             "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
             "alert": {
                 "title": "Omleiden naar Wallet",

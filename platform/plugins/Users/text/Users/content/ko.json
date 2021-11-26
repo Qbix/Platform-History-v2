@@ -86,7 +86,7 @@
         "confirmTerms": "서비스 약관에 동의하십니까?",
         "facebookNoEmail": "페이스 북 계정에 확인 된 이메일 주소가 없습니다. 기본 방식으로 로그인하면됩니다.",
         "picTooltip": "나중에이 사진을 변경할 수 있습니다",
-        "wallet": {
+        "web3": {
             "payload": "{{host}} 시간에 {{timestamp}}에 로그인합니다.",
             "alert": {
                 "title": "지갑으로 리디렉션",
