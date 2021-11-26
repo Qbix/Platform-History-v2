@@ -1,6 +1,6 @@
-DROP TABLE {{prefix}}Web3;
-
-CREATE TABLE `users_web3` (
+DROP TABLE IF EXISTS {{prefix}}Web3;
+DROP TABLE IF EXISTS {{prefix}}web3;
+CREATE TABLE {{prefix}}web3 (
   `chainId` varchar(10) NOT NULL,
   `methodName` varchar(63) NOT NULL DEFAULT '',
   `params` varchar(1023) NOT NULL DEFAULT '',
