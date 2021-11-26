@@ -47,7 +47,11 @@
 			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			usingOther: "or you can ",
-			facebookSrc: null,
+			facebook: {
+				src: null,
+				noEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+				alt: "log in with facebook"
+			},
 			web3Src: null,
 			prompt: "Choose a username:",
 			newUser: "or create a new account below",
@@ -63,9 +67,9 @@
 				passphrase: 100
 			},
 			confirmTerms: "Accept the Terms of Service?",
-			facebookNoEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
 			picTooltip: "You can change this picture later",
 			web3: {
+				alt: "log in with wallet",
 				payload: "Log into {{host}} at time {{timestamp}}",
 				alert: {
 					title: "Redirecting to Wallet",
@@ -1839,8 +1843,10 @@
 						break;
 					}
 					$button = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
-						$('<img alt="login with facebook" />')
-							.attr('src', Q.text.Users.login.facebookSrc || Q.url('{{Users}}/img/facebook-login.png'))
+						$('<img />').attr({
+							alt: Q.text.Users.login.facebook.alt,
+							src: Q.text.Users.login.facebook.src || Q.url('{{Users}}/img/facebook-login.png')
+						})
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (location.search.includes('handoff=yes')) {
@@ -1863,8 +1869,10 @@
 					break;
 				case 'web3':
 					$button = $('<a href="#login_web3" id="Users_login_with_web3" />').append(
-						$('<img alt="login with wallet" />')
-							.attr('src', Q.text.Users.login.web3Src || Q.url('{{Users}}/img/web3-login.png'))
+						$('<img />').attr({
+							alt: Q.text.Users.web3.alt,
+							src: Q.text.Users.login.web3Src || Q.url('{{Users}}/img/web3-login.png')
+						})
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (login_setupDialog.dialog) {
@@ -3654,7 +3662,7 @@
 				var $usersLoginIdentifier = $('#Users_login_identifier');
 				if (!me.email) {
 					step1_form.data('used', null);
-					alert(Q.text.Users.login.facebookNoEmail);
+					alert(Q.text.Users.login.facebook.noEmail);
 					$usersLoginIdentifier.plugin('Q/clickfocus');
 					return true;
 				}
