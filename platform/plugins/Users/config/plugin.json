@@ -258,15 +258,12 @@
 				"0x38": {
 					"name": "Binance Smart Chain",
 					"chainId": "0x38",
-					"contract": "0xcc771bafe41f29fb6f88dc8939560bc511c6433e",
 					"rpcUrls": ["https://bsc-dataseed.binance.org/"],
 					"blockExplorerUrls": ["https://bscscan.com"]
 				},
 				"0x1": {
 					"name": "Ethereum Mainnet",
 					"chainId": "0x1",
-					"contract": "0x1111158f88410da5f92c7e34c01e7b8649bc0155",
-					"rpcUrls": ["https://mainnet.infura.io/v3/905e942e2ccf4c8d8e86871f0950d5d8"],
 					"blockExplorerUrls": ["https://etherscan.io/"]
 				}
 			},
