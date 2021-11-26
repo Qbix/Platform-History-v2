@@ -1,10 +1,10 @@
 <div id="content">
 
     <!-- Outer container -->
-    <div class="assets_nft">
+    <div class="Assets_nft">
         <div class="layout-container">
-            <div class="assets_nft_row">
-                <div class="assets_nft_col_eight">
+            <div class="Assets_nft_row">
+                <div class="Assets_nft_col_eight">
                     <?php
                         echo Q::tool(array(
                                 "Streams/preview" => array(
@@ -22,10 +22,10 @@
                         );
                     ?>
                 </div>
-                <div class="assets_nft_col_four">
-                    <div class="assets_nft_details">
-                        <div class="assets_nft_details_header">
-                            <div class="assets_nft_details_header_left">
+                <div class="Assets_nft_col_four">
+                    <div class="Assets_nft_details">
+                        <div class="Assets_nft_details_header">
+                            <div class="Assets_nft_details_header_left">
                                 <h2><?php echo Q::tool("Streams/inplace", array(
 										"stream" => $stream,
 										"editable" => $stream->testWriteLevel("edit"),
@@ -36,30 +36,30 @@
 										)
 									), Q_Utils::normalize($stream->name . "_title")) ?></h2>
                             </div>
-                            <div class="assets_nft_details_header_right <?php echo $likes["res"] ? "Q_selected" : "" ?>">
+                            <div class="Assets_nft_details_header_right <?php echo $likes["res"] ? "Q_selected" : "" ?>">
                                 <i class="far fa-heart"></i>
                                 <span><?php echo ($likes["likes"] ?: "") ?></span>
                             </div>
                         </div>
-                        <div class="assets_nft_body">
-                            <div class="assets_nft_body_left author">
+                        <div class="Assets_nft_body">
+                            <div class="Assets_nft_body_left author">
                                 <h2>Author</h2>
-                                <div class="assets_nft_body_details">
+                                <div class="Assets_nft_body_details">
                                     <img src="../../img/t.png"/>
-                                    <span class="assets_nft_wallet"></span>
+                                    <span class="Assets_nft_wallet"></span>
                                 </div>
                             </div>
-                            <div class="assets_nft_body_left owner">
+                            <div class="Assets_nft_body_left owner">
                                 <h2>Owner</h2>
-                                <div class="assets_nft_body_details">
+                                <div class="Assets_nft_body_details">
                                     <img src="../../img/t.png"/>
-                                    <span class="assets_nft_wallet"></span>
+                                    <span class="Assets_nft_wallet"></span>
                                 </div>
                             </div>
 							<?php if (!empty($collections)) { ?>
-                                <div class="assets_nft_body_left">
+                                <div class="Assets_nft_body_left">
                                     <h2>Collection</h2>
-                                    <div class="assets_nft_body_collection">
+                                    <div class="Assets_nft_body_collection">
 										<?php
 										foreach ($collections as $collection) {
 											echo "<span>" . $collection . "</span>";
@@ -70,10 +70,10 @@
 							<?php } ?>
                         </div>
 						<?php if ($royalty) { ?>
-                            <p class="assets_nft_buttons"><?php echo $royalty ?>
+                            <p class="Assets_nft_buttons"><?php echo $royalty ?>
                                 % <?php echo $texts["NFT"]["SalesCreator"] ?></p>
 						<?php } ?>
-                        <div class="assets_nft_tabs">
+                        <div class="Assets_nft_tabs">
                             <ul>
                                 <li id="details" class="tablinks active"><?php echo $texts["NFT"]["Details"] ?></li>
                                 <li id="bids" class="tablinks" style="display: none;"><?php echo $texts["NFT"]["Bids"] ?></li>
@@ -81,7 +81,7 @@
                             </ul>
                         </div>
 						<div class="table_description">
-						    <table class="assets_collection_info">
+						    <table class="Assets_collection_info">
 							    <tr>
 							        <td>Title:</td>
                                     <td>
@@ -101,8 +101,8 @@
                                 </tr>
 							</table>
 						</div>
-                        <div class="assets_goback_section">
-                            <button class="Q_button assets_register_submit" id="assets_goback"><?php echo $texts["NFT"]["Back"] ?></button>
+                        <div class="Assets_goback_section">
+                            <button class="Q_button assets_register_submit" id="Assets_goback"><?php echo $texts["NFT"]["Back"] ?></button>
                         </div>
                         <div class="tabcontent details active-content">
 
