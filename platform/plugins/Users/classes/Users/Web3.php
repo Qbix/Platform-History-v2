@@ -15,51 +15,52 @@ use Crypto\Keccak;
 class Users_Web3 extends Base_Users_Web3 {
 	static $useCache = null;
 
-	private static function chainInfo($chainId)
-	{
-		return Q_Config::expect("Users", "web3", "chains", $chainId);
-	}
-
 	/**
 	 * Used to execute methods on the blockchain
 	 * @method execute
 	 * @static
-	 * $param {String} $contract
+	 * $param {String} $chainId
 	 * @param {String} $methodName
 	 * @param {String|array} [$params=array()] - params sent to contract method
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
-	 * @param {boolean|null} [$caching=null] Pass false to suppress all caching. Pass true to cache everything. The default is null, which caches everything except empty results.
+	 * @param {boolean|null} [$caching=true] Set false to ignore cache and request blocjchain
 	 * @return array
 	 */
 	static function execute (
-		$contract,
+		$chainId,
 		$methodName,
-		$params = array(), 
+		$params = array(),
+		$caching = true,
 		$cacheDuration = null,
-		$caching = null,
 		$app = null)
 	{
-		if (!isset($appId)) {
+		if (!isset($app)) {
 			$app = Q::app();
 		}
 
 		list($appId, $appInfo) = Users::appInfo('wallet', $app, true);
-		$chainId = $appInfo['appId'];
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
 
-		$cache = self::getCache($chainId, $contract, $methodName, $params, $cacheDuration);
-		if ($cache->wasRetrieved()) {
-			$json = Q::json_decode($cache->result);
-			if (is_array($json) || is_object($json)) {
-				return $json;
-			}
-
-			return $cache->result;
+		if (self::$useCache === null) {
+			self::$useCache = Q_Config::get("Users", "apps", "wallet", Users::communityId(), "Web3", "useCache", true);
 		}
-		
-		$chainInfo = self::chainInfo($chainId);
+
+		$chainInfo = Q_Config::expect("Users", "Web3", "chains", $chainId);
+
+		if ($caching && self::$useCache) {
+			$cache = self::getCache($chainId, $chainInfo["contract"], $methodName, $params, $cacheDuration);
+			if ($cache->wasRetrieved()) {
+				$json = Q::json_decode($cache->result);
+				if (is_array($json) || is_object($json)) {
+					return $json;
+				}
+
+				return $cache->result;
+			}
+		}
+
 		if (empty($chainInfo['rpcUrls'][0])) {
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "'Users/apps/$app/rpcUrls[0]'"
@@ -67,20 +68,18 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		
 		$filePath = implode(DS, array(
-			APP_VIEWS_DIR, "Users", "ABI", $contract . ".json"
+			APP_WEB_DIR, "ABI", $chainInfo["contract"] . ".json"
 		));
 		if (!is_file($filePath)) {
 			throw new Exception("Users_Web3: $filePath not found");
 		}
 		$rpcUrl = $chainInfo['rpcUrls'][0];
 		$abi = file_get_contents($filePath);
-		$c = new Contract($rpcUrl, $abi);
-		
 		$data = array();
 
 		// call contract function
-		$c->at($contract)->call($methodName, $params,
-		function ($err, $results) use (&$data, $caching) {
+		(new Contract($rpcUrl, $abi))->at($chainInfo["contract"])->call($methodName, $params,
+		function ($err, $results) use (&$data) {
 			if (empty($results)) {
 				$data = $results;
 				return;
@@ -97,15 +96,17 @@ class Users_Web3 extends Base_Users_Web3 {
 				$data = $results;
 			}
 		});
+
 		if ($data instanceof \phpseclib\Math\BigInteger) {
 			$cache->result = $data->toString();
 		} else {
 			$cache->result = Q::json_encode($data, true);
 		}
-		if (($data && $caching !== false)
-		or (!$data && $caching === true)) {
+
+		if ($data) {
 			$cache->save(true);
 		}
+
 		return $data;
 	}
 

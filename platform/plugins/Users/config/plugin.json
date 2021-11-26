@@ -252,6 +252,33 @@
 					"canSee": []
 				}
 			}
+		},
+		"Web3": {
+			"chains": {
+				"0x38": {
+					"name": "Binance Smart Chain",
+					"chainId": "0x38",
+					"rpcUrls": ["https://bsc-dataseed.binance.org/"],
+					"blockExplorerUrls": ["https://bscscan.com"]
+				},
+				"0x1": {
+					"name": "Ethereum Mainnet",
+					"chainId": "0x1",
+					"blockExplorerUrls": ["https://etherscan.io/"]
+				}
+			},
+			"providers": {
+				"WalletConnect": true,
+				"Fortmatic": true,
+				"Portis": true,
+				"Torus": true,
+				"Formatic": true,
+				"Arkane": true,
+				"Authereum": true,
+				"Dcent": true,
+				"Bitski": true,
+				"Frame": true
+			}
 		}
 	}
 }
