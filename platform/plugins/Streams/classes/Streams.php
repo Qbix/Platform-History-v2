@@ -1488,9 +1488,6 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string|Users_User} $userId
 	 *  Can be Users_User object or a string containing a user id
-	 * @param {array} $streams=null
-	 *  An array of streams fetched for this user.
-	 *  If it is null, we fetch them as the logged-in user.
 	 * @param {array} $options=array()
 	 *   @param {boolean} [$options.short] Show one part of the name only
 	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
