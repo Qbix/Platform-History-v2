@@ -86,12 +86,17 @@
         "confirmTerms": "Dawata ang Mga Termino sa Pag-alagad?",
         "facebookNoEmail": "Nawala ang imong facebook account sa usa ka nakumpirma nga email address. Pag-log in sa lumad nga paagi.",
         "picTooltip": "Mahimo nimo nga usbon kini nga litrato sa ulahi",
-        "wallet": {
+        "web3": {
             "payload": "Pag-log in sa {{host}} sa oras nga {{timestamp}}",
             "alert": {
                 "title": "Pagdiretso sa Wallet",
                 "content": "Sa higayon nga imong gisirhan kini nga dayalogo, dad-on ka sa imong pitaka. Pagkahuman sa imong pag-sign in, pagbalik sa kini nga panid."
-            }
+            },
+            "alt": "log in gamit ang pitaka"
+        },
+        "facebook": {
+            "noEmail": "Ang imong facebook account kulang sa usa ka kumpirmadong email address. Pag-log in sa lumad nga paagi.",
+            "alt": "log in gamit ang facebook"
         }
     },
     "setIdentifier": {

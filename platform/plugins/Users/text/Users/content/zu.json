@@ -86,12 +86,17 @@
         "confirmTerms": "Yamukela imigomo yesevisi?",
         "facebookNoEmail": "I-akhawunti yakho ye-facebook ishoda ngekheli le-imeyili eliqinisekisiwe. Mane ungene ngemvume ngendlela yendabuko.",
         "picTooltip": "Ungasiguqula lesi sithombe ngokuhamba kwesikhathi",
-        "wallet": {
+        "web3": {
             "payload": "Ngena ngemvume ku - {{host}} ngesikhathi {{timestamp}}",
             "alert": {
                 "title": "Iqondisa kabusha ku-Wallet",
                 "content": "Lapho usuvale le ngxoxo, uzoyiswa esikhwameni sakho semali. Ngemuva kokungena ngemvume, buyela kuleli khasi."
-            }
+            },
+            "alt": "ngena nge wallet"
+        },
+        "facebook": {
+            "noEmail": "I-akhawunti yakho ye-facebook ishoda ngekheli le-imeyili eliqinisekisiwe. Vele ungene ngendlela yomdabu.",
+            "alt": "ngena nge-facebook"
         }
     },
     "setIdentifier": {

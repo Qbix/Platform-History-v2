@@ -86,12 +86,17 @@
         "confirmTerms": "Zaakceptować warunki usługi?",
         "facebookNoEmail": "Twoje konto na Facebooku nie ma potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
         "picTooltip": "Możesz zmienić to zdjęcie później",
-        "wallet": {
+        "web3": {
             "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
             "alert": {
                 "title": "Przekierowanie do Portfela",
                 "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
-            }
+            },
+            "alt": "zaloguj się za pomocą portfela"
+        },
+        "facebook": {
+            "noEmail": "Na Twoim koncie Facebook brakuje potwierdzonego adresu e-mail. Po prostu zaloguj się w natywny sposób.",
+            "alt": "Zaloguj się przez facebook"
         }
     },
     "setIdentifier": {

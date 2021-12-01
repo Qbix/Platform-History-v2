@@ -86,12 +86,17 @@
         "confirmTerms": "Hizmet Şartlarını Kabul Etmek?",
         "facebookNoEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel yoldan giriş yapın.",
         "picTooltip": "Bu resmi daha sonra değiştirebilirsiniz",
-        "wallet": {
+        "web3": {
             "payload": "{{host}}&#39;da {{timestamp}} saatinde oturum açın",
             "alert": {
                 "title": "Cüzdan&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
-            }
+            },
+            "alt": "cüzdan ile giriş yap"
+        },
+        "facebook": {
+            "noEmail": "Facebook hesabınızda onaylanmış bir e-posta adresi eksik. Basitçe yerel şekilde oturum açın.",
+            "alt": "Facebook ile giriş"
         }
     },
     "setIdentifier": {

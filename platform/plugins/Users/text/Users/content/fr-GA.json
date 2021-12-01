@@ -86,7 +86,7 @@
         "confirmTerms": "Accepter les conditions d&#39;utilisation?",
         "facebookNoEmail": "Il manque une adresse email confirmée à votre compte facebook. Connectez-vous simplement à la manière native.",
         "picTooltip": "Vous pouvez changer cette image plus tard",
-        "wallet": {
+        "web3": {
             "payload": "Connectez-vous à {{host}} à l&#39;heure {{timestamp}}",
             "alert": {
                 "title": "Redirection vers le portefeuille",

@@ -86,7 +86,7 @@
         "confirmTerms": "Prijímate zmluvné podmienky?",
         "facebookNoEmail": "Vo vašom facebookovom účte chýba potvrdená e-mailová adresa. Jednoducho sa prihláste natívnym spôsobom.",
         "picTooltip": "Tento obrázok môžete neskôr zmeniť",
-        "wallet": {
+        "web3": {
             "payload": "Prihlásiť sa do služby {{host}} v čase {{timestamp}}",
             "alert": {
                 "title": "Prebieha presmerovanie do Peňaženky",

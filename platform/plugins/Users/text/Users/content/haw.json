@@ -86,12 +86,17 @@
         "confirmTerms": "E hoʻokae i nā ʻ Termslelo a ke lawelawe?",
         "facebookNoEmail": "Pau ka leka uila i kāu leka uila i hōʻoia ʻia. Hoʻopili wale i ka hele kumu.",
         "picTooltip": "Hiki iā ʻoe ke hoʻololi i kēia kiʻi ma hope aku",
-        "wallet": {
+        "web3": {
             "payload": "ʻEʻe i loko {{host}} i ka manawa {{timestamp}}",
             "alert": {
                 "title": "Ke kuhikuhi nei iā Wallet",
                 "content": "Ke hoʻopau koke ʻoe i kēia kamaʻilio, lawe ʻia ʻoe i kāu pēke. Ma hope o kou ʻeʻe ʻana, hoʻi i kēia ʻaoʻao."
-            }
+            },
+            "alt": "e komo me ka ʻeke kālā"
+        },
+        "facebook": {
+            "noEmail": "Ua nele kāu moʻokāki facebook i kahi leka uila i hoʻopaʻa ʻia. E hoʻopaʻa inoa ma ke ʻano maoli.",
+            "alt": "e komo me ka facebook"
         }
     },
     "setIdentifier": {

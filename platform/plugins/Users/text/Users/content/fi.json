@@ -86,12 +86,17 @@
         "confirmTerms": "Hyväksytkö palvelun ehdot?",
         "facebookNoEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu vain omalla tavallaan.",
         "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
-        "wallet": {
+        "web3": {
             "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
             "alert": {
                 "title": "Uudelleenohjaus Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
-            }
+            },
+            "alt": "kirjaudu sisään lompakolla"
+        },
+        "facebook": {
+            "noEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu sisään alkuperäisellä tavalla.",
+            "alt": "kirjaudu sisään facebookilla"
         }
     },
     "setIdentifier": {

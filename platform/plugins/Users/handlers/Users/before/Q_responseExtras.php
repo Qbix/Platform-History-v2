@@ -17,7 +17,7 @@ function Users_before_Q_responseExtras()
 		$loginOptions = Q_Config::get('Users', 'login', array(
 			"identifierType" => 'email,mobile', 
 			"userQueryUri" => 'Users/user',
-			"using" => "native,wallet,facebook",
+			"using" => "native,web3,facebook",
 			"noRegister" => false
 		));
 		$loginOptions["afterActivate"] = Q_Uri::url($afterActivate);
@@ -73,19 +73,19 @@ function Users_before_Q_responseExtras()
 	// fetch labels info
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
 
-	// load ethers js libs if wallet config defined
-	if (Q_Config::get("Users", "apps", "wallet", Users::communityId(), null)) {
-		Q_Response::addScript('{{Users}}/js/wallet/ethers-5.2.umd.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/evm-chains.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/fortmatic.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/torus.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/portis.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/authereum.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/bitski.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/arkane.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/walletconnect.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/web3.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/web3modal.js', 'Users');
+	// load ethers js libs if web3 config defined
+	if (Q_Config::get("Users", "apps", "web3", Users::communityId(), null)) {
+		Q_Response::addScript('{{Users}}/js/web3/ethers-5.2.umd.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/evm-chains.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/fortmatic.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/torus.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/portis.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/authereum.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/bitski.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/arkane.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
 
 		Q_Response::setScriptData("Q.plugins.Users.Web3.providers", Q_Config::expect("Users", "Web3", "providers"));
 	}

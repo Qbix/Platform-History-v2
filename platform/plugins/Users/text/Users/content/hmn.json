@@ -86,12 +86,17 @@
         "confirmTerms": "Txais Cov Lus Qhia Kev Pabcuam?",
         "facebookNoEmail": "Koj tus facebook account ploj lawm ib qho chaw nyob email. Cias teev nyob rau hauv txoj kev ib txwm nyob.",
         "picTooltip": "Koj tuaj yeem hloov cov duab tom qab",
-        "wallet": {
+        "web3": {
             "payload": "Nkag mus rau hauv {{host}} lub sijhawm {{timestamp}}",
             "alert": {
                 "title": "Hloov mus rau Lub Hnab",
                 "content": "Thaum koj kaw qhov kev sib tham no, koj yuav raug coj mus rau koj lub hnab nyiaj. Tom qab koj nkag mus, rov qab mus rau nplooj ntawv no."
-            }
+            },
+            "alt": "nkag mus nrog lub hnab nyiaj"
+        },
+        "facebook": {
+            "noEmail": "Koj tus account facebook ploj lawm ib qho email chaw nyob. Tsuas yog nkag mus rau hauv lub tebchaws.",
+            "alt": "log in nrog facebook"
         }
     },
     "setIdentifier": {

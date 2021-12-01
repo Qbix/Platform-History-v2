@@ -86,12 +86,17 @@
         "confirmTerms": "Talia le Tuutuuga o Auaunaga?",
         "facebookNoEmail": "O lau facebook tala o loʻo misi se tuatusi imeli imeli. Faʻasinoa le ala i le auala masani.",
         "picTooltip": "E mafai ona e suia lenei ata mulimuli ane",
-        "wallet": {
+        "web3": {
             "payload": "Alu i totonu {{host}} i le taimi {{timestamp}}",
             "alert": {
                 "title": "Faʻatonutonuina i Wallet",
                 "content": "O le taimi lava e te tapunia ai lenei talanoaga, o le a aveina oe i lau atotupe. A uma ona e saini i totonu, toe foi i lenei itulau."
-            }
+            },
+            "alt": "ulufale i totonu ma le atotupe"
+        },
+        "facebook": {
+            "noEmail": "O lo&#39;o misi lau fa&#39;amatalaga facebook se tuatusi imeli fa&#39;amaonia. Na&#39;o le saini i le auala masani.",
+            "alt": "ulufale i totonu ma le facebook"
         }
     },
     "setIdentifier": {

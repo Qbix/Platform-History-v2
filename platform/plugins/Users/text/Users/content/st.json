@@ -86,12 +86,17 @@
         "confirmTerms": "Amohela Melao ea Tšebeletso?",
         "facebookNoEmail": "Ak&#39;haonte ea hau ea facebook e haelloa ke aterese ea lengolo-tsoibila. Kenya feela tsela ea tlhaho.",
         "picTooltip": "U ka fetola setšoantšo sena hamorao",
-        "wallet": {
+        "web3": {
             "payload": "Kena ho {{host}} ka nako {{timestamp}}",
             "alert": {
                 "title": "E lebisitse ho Wallet",
                 "content": "Hang ha u koala lebokose lena, u tla isoa sepacheng sa hau. Kamora hore o kene, khutlela leqepheng lena."
-            }
+            },
+            "alt": "kena ka sepache"
+        },
+        "facebook": {
+            "noEmail": "Ak&#39;haonte ea hau ea facebook ha e na aterese ea lengolo-tsoibila e netefalitsoeng. Feela kena ka tsela ea tlhaho.",
+            "alt": "kena ka facebook"
         }
     },
     "setIdentifier": {

@@ -86,7 +86,7 @@
         "confirmTerms": "Onartu Zerbitzuaren baldintzak?",
         "facebookNoEmail": "Zure Facebook kontuan konfirmatutako helbide elektronikoa falta da. Besterik gabe, hasi jatorrizko moduan.",
         "picTooltip": "Argazki hau gero alda dezakezu",
-        "wallet": {
+        "web3": {
             "payload": "Hasi saioa {{host}} unean {{timestamp}}",
             "alert": {
                 "title": "Wallet-era birbideratzen",

@@ -86,12 +86,17 @@
         "confirmTerms": "Derbyn y Telerau Gwasanaeth?",
         "facebookNoEmail": "Mae eich cyfrif facebook ar goll cyfeiriad e-bost wedi&#39;i gadarnhau. Mewngofnodwch yn y ffordd frodorol.",
         "picTooltip": "Gallwch chi newid y llun hwn yn nes ymlaen",
-        "wallet": {
+        "web3": {
             "payload": "Mewngofnodi i {{host}} ar amser {{timestamp}}",
             "alert": {
                 "title": "Ailgyfeirio i&#39;r Waled",
                 "content": "Ar ôl i chi gau&#39;r ymgom hon, cewch eich cludo i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
-            }
+            },
+            "alt": "mewngofnodi gyda waled"
+        },
+        "facebook": {
+            "noEmail": "Mae eich cyfrif facebook ar goll cyfeiriad e-bost wedi&#39;i gadarnhau. Yn syml, mewngofnodwch yn y ffordd frodorol.",
+            "alt": "mewngofnodi gyda facebook"
         }
     },
     "setIdentifier": {

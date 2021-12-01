@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.10",
+				"version": "1.0.11",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -103,7 +103,7 @@
 		},
 		"login": {
 			"identifierType": "email,mobile",
-			"using": "native,wallet,facebook",
+			"using": "native,web3,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
 			"gravatar": true,

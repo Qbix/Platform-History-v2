@@ -86,7 +86,7 @@
         "confirmTerms": "Vai piekrītat pakalpojumu sniegšanas noteikumiem?",
         "facebookNoEmail": "Jūsu facebook kontā nav apstiprinātas e-pasta adreses. Vienkārši piesakieties dabiskā veidā.",
         "picTooltip": "Šo attēlu var mainīt vēlāk",
-        "wallet": {
+        "web3": {
             "payload": "Piesakieties {{host}} laikā {{timestamp}}",
             "alert": {
                 "title": "Notiek novirzīšana uz maku",

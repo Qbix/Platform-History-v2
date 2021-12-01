@@ -86,12 +86,17 @@
         "confirmTerms": "Ditampa Katentuan Layanan?",
         "facebookNoEmail": "Akun facebook sampeyan ora ono alamat email sing wis dikonfirmasi. Mung mlebu kanthi cara asli.",
         "picTooltip": "Sampeyan bisa ngganti gambar mengko",
-        "wallet": {
+        "web3": {
             "payload": "Mlebu menyang {{host}} wektu {{timestamp}}",
             "alert": {
                 "title": "Ngalih menyang Dompet",
                 "content": "Sawise nutup dialog iki, sampeyan bakal digawa menyang dompet. Sawise sampeyan mlebu, bali menyang kaca iki."
-            }
+            },
+            "alt": "mlebu karo dompet"
+        },
+        "facebook": {
+            "noEmail": "Akun facebook sampeyan ora duwe alamat email sing dikonfirmasi. Cukup mlebu kanthi cara asli.",
+            "alt": "mlebu nganggo facebook"
         }
     },
     "setIdentifier": {

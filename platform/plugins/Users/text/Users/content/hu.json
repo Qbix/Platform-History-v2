@@ -86,12 +86,17 @@
         "confirmTerms": "Elfogadja a Szolgáltatási feltételeket?",
         "facebookNoEmail": "A facebook-fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
         "picTooltip": "Ezt a képet később megváltoztathatja",
-        "wallet": {
+        "web3": {
             "payload": "Jelentkezzen be {{host}} időpontban {{timestamp}}",
             "alert": {
                 "title": "Átirányítás a Wallet szolgáltatásba",
                 "content": "Miután bezárta ezt a párbeszédablakot, a pénztárcájába kerül. Bejelentkezés után térjen vissza erre az oldalra."
-            }
+            },
+            "alt": "pénztárcával jelentkezzen be"
+        },
+        "facebook": {
+            "noEmail": "A Facebook fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
+            "alt": "Jelentkezz be facebookal"
         }
     },
     "setIdentifier": {

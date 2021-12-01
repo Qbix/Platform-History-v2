@@ -86,12 +86,17 @@
         "confirmTerms": "Onartu Zerbitzuaren baldintzak?",
         "facebookNoEmail": "Zure Facebook kontuan konfirmatutako helbide elektronikoa falta da. Besterik gabe, hasi jatorrizko moduan.",
         "picTooltip": "Argazki hau gero alda dezakezu",
-        "wallet": {
+        "web3": {
             "payload": "Hasi saioa {{host}} unean {{timestamp}}",
             "alert": {
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zorroan sartuko zara. Saioa hasi ondoren, itzuli orrialde honetara."
-            }
+            },
+            "alt": "hasi saioa zorroarekin"
+        },
+        "facebook": {
+            "noEmail": "Zure facebook-eko kontuari baieztatutako helbide elektroniko bat falta zaio. Hasi saioa jatorrizko moduan.",
+            "alt": "hasi saioa facebook-ekin"
         }
     },
     "setIdentifier": {

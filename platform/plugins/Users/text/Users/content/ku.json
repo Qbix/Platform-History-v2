@@ -86,12 +86,17 @@
         "confirmTerms": "Mercên karûbar qebûl dikin?",
         "facebookNoEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi hêsanî bi rengek xweser têkevin.",
         "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin",
-        "wallet": {
+        "web3": {
             "payload": "Têkeve {{host}} wextê {{timestamp}}",
             "alert": {
                 "title": "Beralîkirina li Wallet",
                 "content": "Gava ku hûn vê diyalogê bigire, hûn ê werin berîka xwe. Piştî ku hûn têkevinê, vegerin ser vê rûpelê."
-            }
+            },
+            "alt": "bi walletê têkevin"
+        },
+        "facebook": {
+            "noEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi tenê bi awayê xwecî têkevin.",
+            "alt": "bi facebookê re têkevinê"
         }
     },
     "setIdentifier": {

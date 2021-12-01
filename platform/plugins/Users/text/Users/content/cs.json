@@ -86,12 +86,17 @@
         "confirmTerms": "Přijímáte smluvní podmínky?",
         "facebookNoEmail": "Na vašem facebookovém účtu chybí potvrzená e-mailová adresa. Stačí se přihlásit nativním způsobem.",
         "picTooltip": "Tento obrázek můžete později změnit",
-        "wallet": {
+        "web3": {
             "payload": "Přihlásit se do služby {{host}} v čase {{timestamp}}",
             "alert": {
                 "title": "Přesměrování do Peněženky",
                 "content": "Po zavření tohoto dialogu se dostanete do své peněženky. Po přihlášení se vraťte na tuto stránku."
-            }
+            },
+            "alt": "přihlásit se pomocí peněženky"
+        },
+        "facebook": {
+            "noEmail": "Ve vašem facebookovém účtu chybí potvrzená e-mailová adresa. Jednoduše se přihlaste nativním způsobem.",
+            "alt": "přihlásit se pomocí Facebooku"
         }
     },
     "setIdentifier": {

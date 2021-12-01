@@ -86,12 +86,17 @@
         "confirmTerms": "Aanvaar u die diensbepalings?",
         "facebookNoEmail": "U bevestigde e-posadres ontbreek in u Facebook-rekening. Teken eenvoudig die oorspronklike manier aan.",
         "picTooltip": "U kan hierdie foto later verander",
-        "wallet": {
+        "web3": {
             "payload": "Meld tydig by {{host}} aan {{timestamp}}",
             "alert": {
                 "title": "Herlei na Wallet",
                 "content": "Sodra u hierdie dialoog sluit, word u na u beursie geneem. Keer terug na hierdie bladsy nadat u aangemeld het."
-            }
+            },
+            "alt": "meld aan met beursie"
+        },
+        "facebook": {
+            "noEmail": "Jou Facebook-rekening ontbreek &#39;n bevestigde e-posadres. Meld eenvoudig aan op die inheemse manier.",
+            "alt": "teken aan deur Facebook"
         }
     },
     "setIdentifier": {

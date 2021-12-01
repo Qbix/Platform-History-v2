@@ -86,12 +86,17 @@
         "confirmTerms": "Prihvaćate Uvjete pružanja usluge?",
         "facebookNoEmail": "Na vašem facebook računu nedostaje potvrđena adresa e-pošte. Jednostavno se prijavite na izvorni način.",
         "picTooltip": "Tu sliku možete naknadno promijeniti",
-        "wallet": {
+        "web3": {
             "payload": "Prijavite se {{host}} u vrijeme {{timestamp}}",
             "alert": {
                 "title": "Preusmjeravanje na Novčanik",
                 "content": "Nakon što zatvorite ovaj dijalog, bit ćete preusmjereni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
-            }
+            },
+            "alt": "prijavite se novčanikom"
+        },
+        "facebook": {
+            "noEmail": "Vašem facebook računu nedostaje potvrđena adresa e-pošte. Jednostavno se prijavite na izvorni način.",
+            "alt": "prijavite se s facebook-om"
         }
     },
     "setIdentifier": {
