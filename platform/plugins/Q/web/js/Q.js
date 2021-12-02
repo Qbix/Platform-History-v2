@@ -537,6 +537,27 @@ Sp.deobfuscate = function (key) {
 };
 
 /**
+ * Converts a decimal representation of a number to hex
+ * @method decimalToHex
+ * @return {String}
+ */
+Sp.decimalToHex = function () {
+    var dec = this.split(''), sum = [], hex = [], i, s;
+    while (dec.length) {
+        s = 1 * dec.shift();
+        for(i = 0; s || i < sum.length; i++){
+            s += (sum[i] || 0) * 10;
+            sum[i] = s % 16;
+            s = (s - sum[i]) / 16;
+        }
+    }
+    while (sum.length){
+        hex.push(sum.pop().toString(16));
+    }
+    return hex.join('');
+}
+
+/**
  * @class Function
  * @description Q extended methods for Functions
  */
