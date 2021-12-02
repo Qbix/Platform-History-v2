@@ -177,7 +177,7 @@
 		"icon": ""
 	},
 	"Streams/user/facebook": {
-		"type": "Streams/text/url",
+		"type": "Streams/text/username",
 		"title": "Facebook Profile",
 		"icon": "",
 		"platforms": {
@@ -185,7 +185,7 @@
 		}
 	},
 	"Streams/user/facebook/xid": {
-		"type": "Streams/xid",
+		"type": "Streams/text/xid",
 		"title": "Facebook UserID",
 		"icon": "",
 		"platforms": {
