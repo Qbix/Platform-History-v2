@@ -462,6 +462,7 @@ abstract class Users extends Base_Users
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
+					
 					throw new Q_Exception("Users_Identify for $platform xid $xid exists but not user with id {$ui->userId}");
 				}
 				$retrieved = true;
