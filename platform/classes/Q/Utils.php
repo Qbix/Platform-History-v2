@@ -98,7 +98,7 @@ class Q_Utils
 	 * @param {string} $ascii
 	 * @return {string} The hex string
 	 */
-	 function asc2hex ($ascii) {
+	 static function asc2hex ($ascii) {
 		$result = '';
 		$len = strlen($ascii);
 		for ($i=0; $i<$len; $i++) {
@@ -114,7 +114,7 @@ class Q_Utils
 	 * @param {string} $hex
 	 * @return {string}
 	 */
-	 function hex2asc($hex) {
+	 static function hex2asc($hex) {
 		$result = '';
 		$len = strlen($hex);
 		for ($i=0;$i<$len;$i+=2) {

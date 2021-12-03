@@ -4904,6 +4904,42 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Converts the publisherId and the first 10 characters of
+	 * an ID that is typically used as the final segment in a streamName
+	 * to a hex string starting with "0x" representing a uint256 type
+	 * @param {string} $publisherId Takes the first 8 ASCII characters
+	 * @param {string} $streamId Takes the first 24 ASCII characters
+	 * @return {string} A hex string starting with "0x..."
+	 */
+	static function toHexString($publisherId, $streamId)
+	{
+		$publisherHex = Q_Utils::asc2hex(substr($publisherId, 0, 8));
+		$streamHex = Q_Utils::asc2hex(substr($streamId, 0, 24));
+		return '0x' . str_pad($publisherHex, 16, '0', STR_PAD_LEFT)
+			. str_pad($streamHex, 48, '0', STR_PAD_LEFT);
+	}
+
+	/**
+	 * Converts a string previously generated with toHexString
+	 * back to the publisherId and up to the first 16 characters
+	 * of the streamId.
+	 * @param {string} $hexString Should start with "0x"
+	 * @param {string} $someId
+	 * @return {array} Assign to list($publisherId, $streamIdPrefix)
+	 */
+	static function fromHexString($hexString)
+	{
+		if (substr($hexString, 0, 2) === '0x') {
+			$hexString = substr($hexString, 2);
+		}
+		$publisherHex = substr($hexString, 0, 16);
+		$streamHex = substr($hexString, 16);
+		$publisherId = Q_Utils::hex2asc($publisherHex);
+		$streamIdPrefix = Q_Utils::hex2asc($streamHex);
+		return array($publisherId, $streamIdPrefix);
+	}
+
+	/**
 	 * @property $fetch
 	 * @static
 	 * @type array
