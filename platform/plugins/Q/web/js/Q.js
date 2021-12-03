@@ -13742,7 +13742,8 @@ Q.onInit.add(function () {
 	if (Q.info.hasNotch) {
 		de.addClass('Q_notch');
 	}
-	Q_hashChangeHandler.currentUrl = window.location.href.split('#')[0]
+	Q_hashChangeHandler.currentUrl = root.location.href.split('#')[0];
+	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
 		.substr(Q.baseUrl().length + 1);
 	if (window.history.pushState) {
 		Q.onPopState.set(Q_popStateHandler, 'Q.loadUrl');
