@@ -28,13 +28,15 @@
                     state.parentClipTool.stream.onMessage("Media/webrtc/guest").set(function (stream, message) {
                         let instructions = JSON.parse(message.instructions);
 
+                        console.log('Media/webrtc/guest instructions', instructions)
+                        console.log('instructions state.waitingRoom', state.waitingRoom)
                         if(instructions.joined) {
                             if(instructions.userId == Q.Users.loggedInUserId()) {
                                 if(state.waitingRoom != null) {
-                                    state.waitingRoom.switchTo(instructions.webrtcStream.publisherId, instructions.webrtcStream.name, function () {
-
-                                    }, {
+                                    state.waitingRoom.switchTo(instructions.webrtcStream.publisherId, instructions.webrtcStream.name, {
                                         resumeClosed: true
+                                    }).then(function () {
+                                        state.waitingRoom = null;
                                     });
                                 }
                             } else {
@@ -128,6 +130,8 @@
              * @params {boolean} state
              */
             getMaxCalls: function () {
+                console.log('getMaxCalls', this.stream);
+                console.log('getMaxCalls2', this.state.relationType);
                 return Q.getObject(this.state.relationType, this.stream.getAttribute("maxRelations")) || 0;
             },
             /**
@@ -227,6 +231,8 @@
                         if (!content) {
                             return;
                         }
+
+                        console.log('call state', state, state.relationType );
 
                         state.waitingRoom = Streams.WebRTC.start({
                             element: $hostsParticipants[0],

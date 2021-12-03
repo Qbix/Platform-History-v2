@@ -107,6 +107,7 @@
 		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 			tool.text = params.text[1].video;
 
+
 			Q.handle(state.onLoad, tool);
 		});
 

@@ -1,0 +1,33 @@
+video {
+    max-width: 100%;
+}
+.notice-container {
+    position:absolute;
+    top:20px;
+    background: #18aa8d;
+    padding: 10px 20px 10px 10px;
+    color: white;
+    transition-timing-function: ease-in;
+    transition-property: opacity;
+    transition: 0.2s;
+    opacity: 0;
+    z-index:9999999;
+    transform: scaleX(0);
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.2);
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.notice-container.Streams_webrtc_notice_position_left {
+    left:0;
+    right: auto;
+}
+.notice-container.Streams_webrtc_notice_position_right {
+    left:auto;
+    right: 0;
+}
+.notice-container.shown {
+    opacity: 1;
+    transform: scaleX(1);
+    z-index: 9999999999;
+}

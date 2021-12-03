@@ -205,6 +205,7 @@
             "sbLeftRoom": "{{userName}} left the room",
             "switchingRoom": "Switching room...",
             "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
             "youLeftRoom": "You left the room",
             "codeCopied": "You left the room",
             "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
@@ -253,7 +254,9 @@
             "streamingSettings": "Settings",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP"
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
         },
         "audioSettings": {
             "dialogTitle": "Audio Settings",
