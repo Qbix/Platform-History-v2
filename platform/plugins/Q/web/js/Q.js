@@ -5933,7 +5933,9 @@ Q.Page.push = function (url, title) {
 	if (typeof title === 'string') {
 		document.title = title;
 	}
-	Q_hashChangeHandler.currentUrl = url.substr(baseUrl.length + 1);
+	Q_hashChangeHandler.currentUrl = url.split('#')[0];
+	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
+		.substr(baseUrl.length + 1);
 	Q.info.url = url;
 	Q.handle(Q.Page.onPush, Q, [url, title, prevUrl]);
 };
@@ -9672,7 +9674,9 @@ function Q_hashChangeHandler() {
 		Q.handle(url.indexOf(baseUrl) == -1 ? baseUrl + '/' + url : url);
 		result = true;
 	}
-	Q_hashChangeHandler.currentUrl = url;
+	Q_hashChangeHandler.currentUrl = url.split('#')[0];
+	Q_hashChangeHandler.currentUrlTail = Q_hashChangeHandler.currentUrl
+		.substr(baseUrl.length + 1);
 	return result;
 }
 
