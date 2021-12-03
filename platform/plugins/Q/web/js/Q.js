@@ -7390,8 +7390,8 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
- * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated
- * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed
+ * @param {Q.Event} [options.onLoadStart] handlers of this event will be called after the request is initiated, if "quiet" option is false they can add some visual indicators
+ * @param {Q.Event} [options.onLoadEnd] handlers of this event will be called after the request is fully completed, if "quiet" option is false they can add some visual indicators
  * @return {Q.Request} Object corresponding to the request
  */
 Q.request = function (url, slotNames, callback, options) {
@@ -8941,9 +8941,11 @@ var _latestLoadUrlObjects = {};
  * @param {Q.Event} [options.onError] event for when an error occurs, by default shows an alert
  * @param {Q.Event} [options.onLoad] event which occurs when the parsed data comes back from the server
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
- * @param {Q.Event} [options.onLoadStart] if "quiet" option is false, anything here will be called after the request is initiated.
- * @param {Q.Event} [options.onLoadEnd] if "quiet" option is false, anything here will be called after the request is fully completed.
+ * @param {Q.Event} [options.onLoadStart] handlers of this event will be called after the request is initiated, if "quiet" option is false they can add some visual indicators
+ * @param {Q.Event} [options.onLoadEnd] handlers of this event will be called after the request is fully completed, if "quiet" option is false they can add some visual indicators
  * @param {Q.Event} [options.beforeFillSlots] handler to call before filling slots with new content
+ * @param {Q.Event} [options.beforeUnloadUrl] opportunity to save state around current url, such as scroll positions of displayed slots
+ * @param {Q.Event} [options.unloadedUrl] if the URL was already replaced by the time Q.loadUrl is called (e.g. from popState handler) pass the URL being unloaded here
  * @return {Q.Promise} Returns a promise with an extra .cancel() method to cancel the action
  */
 Q.loadUrl = function _Q_loadUrl(url, options) {
@@ -9022,6 +9024,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return Q.handle(onError, this, [response.errors[0].message]);
 		}
 		Q.handle(o.onLoad, this, [response]);
+		var unloadedUrl = o.unloadedUrl || location.href;
+		Q.handle(o.beforeUnloadUrl, this, [unloadedUrl, url, response]);
 		
 		if (redirected) {
 			Q.handle(_reject);
@@ -9420,17 +9424,16 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 
 Q.loadUrl.retainedSlots = {};
 
-Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (url) {
+Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	var slotNames = Q.info.slotNames, l, elem, i;
 	if (typeof slotNames === 'string') {
 		slotNames = slotNames.split(',');
 	}
 	l = slotNames.length;
-	var currentUrl = window.location.href;
 	for (i=0; i<l; ++i) {
 		if ((elem = document.getElementById(slotNames[i] + "_slot"))
 		&& ('scrollLeft' in elem)) {
-			Q.setObject(['Q', 'scroll', currentUrl], {
+			Q.setObject(['Q', 'scroll', fromUrl], {
 				left: elem.scrollLeft,
 				top: elem.scrollTop
 			}, elem);
@@ -9685,7 +9688,8 @@ function Q_popStateHandler() {
 			url.indexOf(baseUrl) === 0 ? url : baseUrl + '/' + url,
 			{
 				ignoreHistory: true,
-				quiet: true
+				quiet: true,
+				unloadedUrl: Q_hashChangeHandler.currentUrl
 			}
 		);
 		Q_hashChangeHandler.currentUrl = url;
@@ -14087,8 +14091,10 @@ Q.loadUrl.options = {
 	quiet: false,
 	onError: new Q.Event(),
 	onResponse: new Q.Event(),
-	onLoadStart: new Q.Event(Q.loadUrl.saveScroll, 'Q'),
+	onLoadStart: new Q.Event(),
 	onLoadEnd: new Q.Event(),
+	beforeUnloadUrl: new Q.Event(Q.loadUrl.saveScroll, 'Q'),
+	onLoad: new Q.Event(),
 	onActivate: new Q.Event(),
 	slotNames: [],
 	slotContainer: function (slotName) {
