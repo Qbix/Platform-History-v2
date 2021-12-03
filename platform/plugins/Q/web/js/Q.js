@@ -9426,10 +9426,11 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (url) {
 		slotNames = slotNames.split(',');
 	}
 	l = slotNames.length;
+	var currentUrl = window.location.href;
 	for (i=0; i<l; ++i) {
 		if ((elem = document.getElementById(slotNames[i] + "_slot"))
 		&& ('scrollLeft' in elem)) {
-			Q.setObject(['Q', 'scroll', url], {
+			Q.setObject(['Q', 'scroll', currentUrl], {
 				left: elem.scrollLeft,
 				top: elem.scrollTop
 			}, elem);
