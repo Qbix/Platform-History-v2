@@ -2361,15 +2361,15 @@ abstract class Streams extends Base_Streams
 
 		$min = null;
 		if (isset($options['min'])) {
-			$min = is_numeric($options['min']) ?: strtotime($options['min']);
+			$min = is_numeric($options['min']) ? $options['min'] : strtotime($options['min']);
 		}
 
 		$max = null;
 		if (isset($options['max'])) {
-			$max = is_numeric($options['max']) ?: strtotime($options['max']);
+			$max = is_numeric($options['max']) ? $options['max'] : strtotime($options['max']);
 		}
 		if (isset($min) or isset($max)) {
-			$range = new Db_Range($min, true, true, $max);
+			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : pow(10, 20));
 			$query = $query->where(array('weight' => $range));
 		}
 		if (isset($limit)) {
@@ -4906,7 +4906,7 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Converts the publisherId and the first 10 characters of
 	 * an ID that is typically used as the final segment in a streamName
-	 * to a hex string starting with "0x" representing a uint256 type
+	 * to a hex string starting with "0x" representing a uint256 typecd /
 	 * @param {string} $publisherId Takes the first 8 ASCII characters
 	 * @param {string} $streamId Takes the first 24 ASCII characters
 	 * @return {string} A hex string starting with "0x..."
