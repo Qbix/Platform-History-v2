@@ -577,7 +577,7 @@
 .Streams_category_preview_tool,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick,
 .Streams_category_preview_tool .Q_inplace_noEditOnClick .Q_inplace_tool_static { cursor: pointer; }
-.Q_notMobile .Streams_category_dialog { width: 60%; }
+.Q_notMobile .Q_overlay.Streams_category_invoked { width: 60%; }
 
 .Q_notMobile .Q_overlay.Streams_completeInvited_dialog,
 .Q_notMobile .Q_overlay.Streams_access_tool_dialog,

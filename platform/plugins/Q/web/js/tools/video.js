@@ -267,7 +267,7 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	ads: [],
 	floating: {
-		evenIfPaused: true
+		evenIfPaused: false
 	},
 	adsTimeOut: 10,
 	overlay: {
@@ -467,7 +467,7 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 
 		var adapterName = tool.adapterNameFromUrl();
-		tool.adapters[adapterName].init();
+		adapterName && tool.adapters[adapterName].init();
 	},
 	/**
 	 *
@@ -994,7 +994,9 @@ Q.Tool.define("Q/video", function (options) {
 	adapterNameFromUrl: function (url) {
 		url = url || this.state.url;
 		if (!url) {
-			throw new Q.Exception(this.id + ": url is required");
+			//throw new Q.Exception(this.id + ": url is required");
+			console.warn(this.id + ": url is required");
+			return null;
 		}
 		var newA = document.createElement('A');
 		newA.href = url;

@@ -21,6 +21,13 @@
 			"Streams/fetch/Websites/webpage": ["Websites/after/Streams_fetch_Websites_webpage"],
 			"Streams/fetch/Streams/video": ["Websites/after/Streams_fetch_Websites_webpage"]
 		},
+		"images": {
+			"Websites/image": {
+				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],
+				"defaultSize": "50",
+				"maxStretch": 40
+			}
+		},
 		"web": {
 			"requireValidNonce": ["Websites"]
 		},

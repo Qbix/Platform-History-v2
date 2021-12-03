@@ -1488,9 +1488,6 @@ abstract class Streams extends Base_Streams
 	 * @static
 	 * @param {string|Users_User} $userId
 	 *  Can be Users_User object or a string containing a user id
-	 * @param {array} $streams=null
-	 *  An array of streams fetched for this user.
-	 *  If it is null, we fetch them as the logged-in user.
 	 * @param {array} $options=array()
 	 *   @param {boolean} [$options.short] Show one part of the name only
 	 *   @param {boolean} [$options.show] The parts of the name to show. Can have the letters "f", "l", "u" in any order.
@@ -2262,6 +2259,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
+	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
@@ -2389,6 +2387,9 @@ abstract class Streams extends Base_Streams
 			$query = $query->where(new Db_Expression(
 				"SUBSTRING($col, -1, 1) != '/'"
 			));
+		}
+		if (Q::ifset($options, "ignoreCache", false)) {
+			$query->ignoreCache();
 		}
 		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
@@ -4206,8 +4207,10 @@ abstract class Streams extends Base_Streams
 	 *	The possible stream type, or an array of types
 	 * @param {string} $title
 	 *	A string to compare titles by using SQL's "LIKE" statement
+	 * @param {boolean} [$orderByTitle=false]
+	 *  Put true to order by title, by default it's ordered by 'type,title'
 	 */
-	static function lookup($publisherId, $types, $title)
+	static function lookup($publisherId, $types, $title, $orderByTitle=false)
 	{
 		$fc = $title[0];
 		if ($fc === '%' and strlen($title) > 1
@@ -4218,11 +4221,16 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		$limit = Q_Config::get('Streams', 'lookup', 'limit', 10);
-		return Streams_Stream::select()->where(array(
-			'publisherId' => $publisherId,
+		$where = array(
 			'type' => $types,
-			'title LIKE ' => $title
-		))->limit($limit)->fetchDbRows();
+			'title LIKE ' => $title,
+			'closedTime' => null
+		);
+		if ($publisherId) {
+			$where["publisherId"] = $publisherId;
+		}
+		return Streams_Stream::select()->where($where)->orderBy($orderByTitle ? 'title' : 'type, title')
+		->limit($limit)->fetchDbRows();
 	}
 	
 	/**
@@ -4893,6 +4901,42 @@ abstract class Streams extends Base_Streams
 		 * @param {string} $streamNames
 		 */
 		Q::event("Streams/remove", $params, 'after');
+	}
+
+	/**
+	 * Converts the publisherId and the first 10 characters of
+	 * an ID that is typically used as the final segment in a streamName
+	 * to a hex string starting with "0x" representing a uint256 type
+	 * @param {string} $publisherId Takes the first 8 ASCII characters
+	 * @param {string} $streamId Takes the first 24 ASCII characters
+	 * @return {string} A hex string starting with "0x..."
+	 */
+	static function toHexString($publisherId, $streamId)
+	{
+		$publisherHex = Q_Utils::asc2hex(substr($publisherId, 0, 8));
+		$streamHex = Q_Utils::asc2hex(substr($streamId, 0, 24));
+		return '0x' . str_pad($publisherHex, 16, '0', STR_PAD_LEFT)
+			. str_pad($streamHex, 48, '0', STR_PAD_LEFT);
+	}
+
+	/**
+	 * Converts a string previously generated with toHexString
+	 * back to the publisherId and up to the first 16 characters
+	 * of the streamId.
+	 * @param {string} $hexString Should start with "0x"
+	 * @param {string} $someId
+	 * @return {array} Assign to list($publisherId, $streamIdPrefix)
+	 */
+	static function fromHexString($hexString)
+	{
+		if (substr($hexString, 0, 2) === '0x') {
+			$hexString = substr($hexString, 2);
+		}
+		$publisherHex = substr($hexString, 0, 16);
+		$streamHex = substr($hexString, 16);
+		$publisherId = Q_Utils::hex2asc($publisherHex);
+		$streamIdPrefix = Q_Utils::hex2asc($streamHex);
+		return array($publisherId, $streamIdPrefix);
 	}
 
 	/**

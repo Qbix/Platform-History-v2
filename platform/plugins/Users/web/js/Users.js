@@ -196,6 +196,11 @@
 			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
 			'{{Users}}/js/wallet/evm-chains.min.js',
 			'{{Users}}/js/wallet/fortmatic.js',
+			'{{Users}}/js/wallet/torus.js',
+			'{{Users}}/js/wallet/portis.js',
+			'{{Users}}/js/wallet/authereum.js',
+			'{{Users}}/js/wallet/bitski.js',
+			'{{Users}}/js/wallet/arkane.js',
 			'{{Users}}/js/wallet/walletconnect.min.js',
 			'{{Users}}/js/wallet/web3.min.js',
 			'{{Users}}/js/wallet/web3modal.js'
@@ -366,18 +371,15 @@
 
 				    // Subscribe to accounts change
 				    provider.on("accountsChanged", function (accounts) {
-				    	Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
 						console.log('provider.accountsChanged', accounts);
 				    });
 
 				    // Subscribe to chainId change
 				    provider.on("chainChanged", function (chainId) {
-						Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
 						console.log('provider.chainChanged', chainId);
 				    });
 					// Subscribe to provider disconnection
 					provider.on("connect", function (info) {
-						Q.handle(Users.Wallet.onConnect, provider, [networkId]);
 						console.log('provider.connect', info);
 					});
 					// Subscribe to provider disconnection
@@ -393,7 +395,6 @@
 						}
 
 						Q.Users.logout({using: 'wallet'});
-						Q.handle(Users.Wallet.onDisconnect, provider, [networkId]);
 					});
 					var payload = Q.text.Users.login.wallet.payload.interpolate({
 						host: location.host,
@@ -1013,6 +1014,8 @@
 			if (o.using.indexOf('wallet') >= 0) {
 				loggedOutOf.wallet = true;
 			    Q.Users.disconnect.wallet(appId, p.fill('wallet'));
+				localStorage.removeItem('walletconnect');
+				localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
@@ -3792,14 +3795,82 @@
 		 * @method getWeb3Modal
 		 */
 		getWeb3Modal: function () {
-			var providerOptions = {
-				walletconnect: {
+			var providerOptions = {};
+			var allowedProviders = Users.Web3.providers;
+			if (allowedProviders.WalletConnect) {
+				providerOptions.walletconnect = {
 					package: window.WalletConnectProvider.default,
 					options: {
 						infuraId: Q.getObject(['wallet', Users.communityId, 'infura', 'projectId'], Users.apps)
 					}
+				};
+			}
+			if (allowedProviders.Fortmatic) {
+				providerOptions.fortmatic = {
+					package: window.Fortmatic, // required
+					options: {
+						key: "FORMATIC_API_KEY" // required
+					}
+				};
+			}
+			if (allowedProviders.Torus) {
+				providerOptions.torus = {
+					package: window.Torus, // required
+					options: {
+						networkParams: {
+							/*host: "https://localhost:8545", // optional
+							chainId: 1337, // optional
+							networkId: 1337 // optional*/
+						},
+						config: {
+							buildEnv: "development" // optional
+						}
+					}
+				};
+			}
+			if (allowedProviders.Portis) {
+				providerOptions.portis = {
+					package: window.Portis, // required
+					options: {
+						id: "PORTIS_ID" // required
+					}
 				}
-			};
+			}
+			if (allowedProviders.Authereum) {
+				providerOptions.authereum = {
+					package: window.Authereum // required
+				}
+			}
+			if (allowedProviders.Frame) {
+				providerOptions.frame = {
+					package: window.ethereum // required
+				}
+			}
+			if (allowedProviders.Bitski) {
+				providerOptions.bitski = {
+					package: window.Bitski, // required
+					options: {
+						clientId: "BITSKI_CLIENT_ID", // required
+						callbackUrl: "BITSKI_CALLBACK_URL" // required
+					}
+				}
+			}
+			if (allowedProviders.Arkane) {
+				providerOptions.arkane = {
+					package: window.VenlyConnect, // required
+					options: {
+						clientId: "ARKANE_CLIENT_ID" // required
+					}
+				}
+			}
+			if (allowedProviders.Dcent) {
+				providerOptions.dcentwallet = {
+					package: window.ethereum, // required
+					options: {
+						rpcUrl: "INSERT_RPC_URL" // required
+					}
+				}
+			}
 
 			Users.Wallet.web3Modal = new window.Web3Modal.default({
 				//chain: options.chain,
@@ -3819,25 +3890,16 @@
 		 */
 		connect: function (callback) {
 			if (Users.Wallet.provider) {
-				return Q.handle(callback, null, [Users.Wallet.provider]);
+				return Q.handle(callback, null, [null, Users.Wallet.provider]);
 			}
 
 			var web3Modal = Users.Wallet.web3Modal || Users.Wallet.getWeb3Modal();
 			web3Modal.connect().then(function (provider) {
 				Users.Wallet.provider = provider;
 
-				provider.on("accountsChanged", function (accounts) {
-					Q.handle(Users.Wallet.onAccountsChanged, provider, [accounts]);
-				});
-				provider.on("chainChanged", function (chainId) {
-					Q.handle(Users.Wallet.onChainChanged, provider, [chainId]);
-				});
-				provider.on("connect", function (info) {
-					Q.handle(Users.Wallet.onConnect, provider, [info]);
-				});
-
-				Q.handle(callback, null, [provider]);
+				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
+				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
 		},
@@ -3850,8 +3912,13 @@
 		 * @param {Function} onError
 		 */
 		setNetwork: function (info, onSuccess, onError) {
-			Users.Wallet.connect(function (provider) {
+			Users.Wallet.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(onError, null, [err]);
+				}
+
 				Users.Wallet.switchNetworkOccuring = true;
+
 				provider.request({
 					method: 'wallet_addEthereumChain',
 					params: [{
@@ -3867,8 +3934,10 @@
 					}]
 				}).then(function () {
 					provider.once("chainChanged", onSuccess);
+				}, function (error) {
+					Q.handle(onError, null, [error]);
 				}).catch((error) => {
-					console.log(error)
+					Q.handle(onError, null, [error]);
 				});
 			});
 		}
@@ -3876,6 +3945,18 @@
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
+
+		if (window.ethereum) {
+			window.ethereum.on("accountsChanged", function (accounts) {
+				Q.handle(Users.Wallet.onAccountsChanged, this, [accounts]);
+			});
+			window.ethereum.on("chainChanged", function (chainId) {
+				Q.handle(Users.Wallet.onChainChanged, this, [chainId]);
+			});
+			window.ethereum.on("connect", function (info) {
+				Q.handle(Users.Wallet.onConnect, this, [info]);
+			});
+		}
 	}, 'Users');
 
 	Q.Dialogs.push.options.onActivate.set(function (dialog) {

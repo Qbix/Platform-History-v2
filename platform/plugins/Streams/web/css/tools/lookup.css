@@ -1,0 +1,19 @@
+.Streams_lookup_tool .Q_filter_results table {
+    border-spacing: 0;
+}
+.Streams_lookup_tool .Streams_lookup_result .Streams_lookup_result_icon {
+    width: 50px;
+    height: 50px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.Streams_lookup_tool .Streams_lookup_result .Streams_lookup_result_title {
+    padding-left: 10px;
+}
+.Streams_lookup_tool .Q_filter_spacer td {
+    height: 5px;
+}
+.Streams_lookup_tool .Q_filter_tool .Q_filter_results tr.Q_filter_spacer:hover {
+    background: inherit;
+}

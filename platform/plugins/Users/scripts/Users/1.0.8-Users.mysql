@@ -1,0 +1,11 @@
+CREATE TABLE IF NOT EXISTS {{prefix}}web3 (
+  chainId varchar(10) NOT NULL,
+  methodName VARCHAR(20) NOT NULL,
+  params varchar(100) DEFAULT "",
+  contract varchar(42) NOT NULL,
+  result text,
+  extra varchar(1024) DEFAULT '{}',
+  insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (chainId,methodName,params)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

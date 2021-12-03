@@ -10,7 +10,7 @@ function Users_validate_username($params)
 	if (empty($username)) {
 		return;
 	}
-	if (!empty($user)) {
+	if (!empty($user) && !empty($user->id)) {
 		if (Users::isCommunityId($user->id)) {
 			// first letter is uppercase, this represents a specially recognized
 			// organization or app, so allow anything in the username

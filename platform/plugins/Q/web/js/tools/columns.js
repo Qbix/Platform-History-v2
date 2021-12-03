@@ -229,7 +229,8 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Object} options Can be used to override various tool options,
 	 *  including events such as "onActivate" and "onClose". Additional options include:
 	 *  @param {String} [options.name] any name to assign to the column
-	 *  @param {String} [options.columnClass] to add a class to the column
+	 *  @param {String} [options.columnClass] a CSS class name or space-separated list of classes to append to the column container
+	 *  @param {String} [options.className] treated same as columnClass, used for compatibility with Q.invoke()
 	 *  @param {Object} [options.data] to add data on the column element with jQuery
 	 *  @param {Object} [options.template] name of the template to render for the "column" slot
 	 *  @param {Object} [options.fields] fields for the template, if any
@@ -318,6 +319,9 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
+		if (options.className) {
+			$(div).addClass(options.className);
+		}
 		if (o.name && state.classes && state.classes[o.name]) {
 			$(div).addClass(state.classes[o.name]);
 		}
@@ -390,6 +394,9 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		if (o && o.columnClass) {
 			$div.addClass(o.columnClass);
+		}
+		if (o && o.className) {
+			$(div).addClass(o.className);
 		}
 		var dataMore = div.getAttribute('data-more');
 		tool.state.data[index] = Q.extend(

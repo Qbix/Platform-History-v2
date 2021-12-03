@@ -10,7 +10,7 @@
  * @class Streams category preview
  * @constructor
  * @param {Object} [options] this object contains function parameters
- *   @param {Object} [options.dialog] Any additional options to pass to Q.Dialogs.push
+ *   @param {Object} [options.invoke] Any additional options to pass to Q.invoke(), or pass false to cancel this feature
  *   @param {Object} [options.subcategory] Any options to pass to Streams/category tool in the dialogs
  *   @uses Q inplace
  *   @param {Object} [options.inplace] Any options to pass to the Q/inplace tool -- see its options.
@@ -48,7 +48,7 @@ function _Streams_category_preview(options, preview) {
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
 	},
-	dialog: {},
+	invoke: {},
 	subcategory: {}
 },
 
@@ -108,7 +108,7 @@ function _Streams_category_preview(options, preview) {
 						if (parent.name === 'streams_related') {
 							relatedState = parent.state;
 						}
-						Q.Dialogs.push(Q.extend(state.dialog, {
+						Q.invoke(Q.extend(state.invoke, {
 							title: stream.fields.title,
 							content: Q.Tool.setUpElement(
 								'div',
@@ -122,7 +122,7 @@ function _Streams_category_preview(options, preview) {
 									}
 								)
 							),
-							className: 'Streams_category_dialog'
+							className: 'Streams_category_invoked'
 						}));
 					});
 					var inplace = tool.child('Streams_inplace');

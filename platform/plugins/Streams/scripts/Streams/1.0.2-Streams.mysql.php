@@ -5,14 +5,14 @@ function Streams_1_0_2_Streams()
 	$offset = 0;
 	$i = 0;
 	while (1) {
-		$users = Users_User::select()
+		$userIds = Users_User::select('id')
 			->limit(100, $offset)
-			->fetchDbRows();
-		if (!$users) {
+			->fetchAll(PDO::FETCH_COLUMN, 0);
+		if (!$userIds) {
 			break;
 		}
-		foreach ($users as $user) {
-			$stream = Streams::fetchOne($user->id, $user->id, 'Streams/user/gender');
+		foreach ($userIds as $userId) {
+			$stream = Streams::fetchOne($userId, $userId, 'Streams/user/gender');
 			if (!$stream) {
 				continue;
 			}

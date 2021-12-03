@@ -47,6 +47,7 @@
  *   @param {Object} [options.overrideShowSize]  A hash of {icon: size} pairs to override imagepicker.showSize when the icon is a certain string. The empty string matches all icons.
  *   @param {String} [options.throbber=Q.info.imgLoading] The url of an image to use as an activity indicator when the image is loading
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
+ *   @param {Q.Event} [options.onInvoke] An event that occurs when someone clicks or taps on the preview element. Check publisherId and streamName, and consider making handlers use the Q.invoke() function.
  *   @param {Q.Event} [options.beforeCreate] An event that occurs right before a composer requests to create a new stream
  *   @param {Q.Event} [options.onCreate] An event that occurs after a new stream is created by a creatable preview, but before the preview is rendered
  *   @param {Q.Event} [options.onComposer] An event that occurs after a composer is rendered. Tools that extend Streams/preview can bind this event to a method to override the contents of the composer.
@@ -93,6 +94,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		state.closeable = false;
 		state.editable = false;
 	}
+
+	$(tool.element).on(Q.Pointer.fastclick, function () {
+		Q.handle(tool.state.onInvoke, tool, []);
+	});
 
 	// let the extending tool's constructor run,
 	// it may change this tool's state or methods
@@ -142,8 +147,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	actions: {
 		position: 'mr'
 	},
-	beforeClose: null,
-	
+
+	onInvoke: new Q.Event(),
 	beforeCreate: new Q.Event(),
 	onCreate: new Q.Event(),
 	onNewStreamPreview: new Q.Event(),
@@ -151,6 +156,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	onRefresh: new Q.Event(),
 	onLoad: new Q.Event(),
 	onAfterClose: new Q.Event(),
+	beforeClose: null,
 	onClose: new Q.Event(function (wasRemoved) {
 		var tool = this;
 		this.element.removeClass('Q_working');

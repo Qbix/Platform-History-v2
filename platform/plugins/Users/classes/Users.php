@@ -462,6 +462,7 @@ abstract class Users extends Base_Users
 				$user->id = $ui->userId;
 				$exists = $user->retrieve();
 				if (!$exists) {
+					
 					throw new Q_Exception("Users_Identify for $platform xid $xid exists but not user with id {$ui->userId}");
 				}
 				$retrieved = true;
@@ -1723,8 +1724,9 @@ abstract class Users extends Base_Users
 	static function appInfo($platform, $appId, $throwIfMissing = false)
 	{
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
-		if (isset($apps[$appId])) {
-			$appInfo = $apps[$appId];
+		$id = $appId;
+		if (isset($apps[$id])) {
+			$appInfo = $apps[$id];
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {
@@ -1734,12 +1736,13 @@ abstract class Users extends Base_Users
 					break;
 				}
 			}
-			$appId = $id;
 		}
-		if ($throwIfMissing and !$appInfo) {
-			throw new Q_Exception_MissingConfig("Users/apps/$platform/$appId");
+		if ($throwIfMissing and !isset($id)) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Users/apps/$platform/$appId"
+			));
 		}
-		return array($appId, $appInfo);
+		return array($id, $appInfo);
 	}
 
 	/**
@@ -2090,6 +2093,7 @@ abstract class Users extends Base_Users
 					break;
 				case 'ios':
 				case 'android':
+				case 'wallet':
 					if (!is_string($identifier)) {
 						throw new Q_Exception_WrongValue(
 							array('field' => 'identifier', 'range' => 'string xid')
