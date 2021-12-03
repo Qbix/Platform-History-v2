@@ -90,6 +90,38 @@ class Q_Utils
 			$data
 		);
 	}
+
+	/**
+	 * Converts ASCII to hex
+	 * @method asc2hex
+	 * @static
+	 * @param {string} $ascii
+	 * @return {string} The hex string
+	 */
+	 function asc2hex ($ascii) {
+		$result = '';
+		$len = strlen($ascii);
+		for ($i=0; $i<$len; $i++) {
+			$result .= sprintf("%02x",ord(substr($ascii,$i,1)));
+		}
+		return $result;
+	 }
+	 
+	/**
+	 * Converts hex to ASCII
+	 * @method hex2asc
+	 * @static
+	 * @param {string} $hex
+	 * @return {string}
+	 */
+	 function hex2asc($hex) {
+		$result = '';
+		$len = strlen($hex);
+		for ($i=0;$i<$len;$i+=2) {
+			$result.=chr(hexdec(substr($hex,$i,2)));
+		}
+		return $result;
+	 }
 	
 	/**
 	 * Decodes some data from base64
