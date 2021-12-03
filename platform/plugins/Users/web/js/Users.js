@@ -1014,6 +1014,8 @@
 			if (o.using.indexOf('wallet') >= 0) {
 				loggedOutOf.wallet = true;
 			    Q.Users.disconnect.wallet(appId, p.fill('wallet'));
+				localStorage.removeItem('walletconnect');
+				localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
