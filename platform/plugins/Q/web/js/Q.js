@@ -9682,8 +9682,8 @@ function Q_popStateHandler() {
 	if (Q.info.url === url) {
 		return; // we are already at this url
 	}
-	url = url.substr(baseUrl.length + 1);
-	if (url != Q_hashChangeHandler.currentUrl) {
+	var urlTail = url.substr(baseUrl.length + 1);
+	if (urlTail != Q_hashChangeHandler.currentUrlTail) {
 		Q.handle(
 			url.indexOf(baseUrl) === 0 ? url : baseUrl + '/' + url,
 			{
@@ -9692,6 +9692,7 @@ function Q_popStateHandler() {
 				unloadedUrl: Q_hashChangeHandler.currentUrl
 			}
 		);
+		Q_hashChangeHandler.currentUrlTail = urlTail;
 		Q_hashChangeHandler.currentUrl = url;
 		result = true;
 	}
