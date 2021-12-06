@@ -8,7 +8,6 @@
 	"require": {
 		"lordelph/icofileloader": "1.*",
 		"google/apiclient": "^2.8.1",
-		"sc0vu/web3.php": "dev-master",
-		"nelexa/zip": "^4.0"
+		"sc0vu/web3.php": "dev-master"
 	}
 }

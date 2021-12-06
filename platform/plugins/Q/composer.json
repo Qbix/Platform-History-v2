@@ -1,0 +1,11 @@
+{
+	"name": "qbix/q",
+	"authors": [
+		{
+			"name": "Qbix"
+		}
+	],
+	"require": {
+		"nelexa/zip": "^4.0"
+	}
+}
