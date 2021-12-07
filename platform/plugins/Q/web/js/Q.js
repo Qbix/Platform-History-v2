@@ -14063,9 +14063,10 @@ function _Q_trigger_recursive(tool, eventName, args) {
 
 Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 	var elements = {}, name, elem, pos;
-	var osc = options.slotContainer;
+	var o = options || {};
+	var osc = o.slotContainer;
 	if (Q.isPlainObject(osc)) {
-		options.slotContainer = function (slotName) {
+		o.slotContainer = function (slotName) {
 			return osc[slotName] || document.getElementById(slotName+"_slot");
 		};
 	}
@@ -14075,12 +14076,16 @@ Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 
 		if (name.toUpperCase() === 'TITLE') {
 			document.title = res.slots[name];
-		} else if (elem = options.slotContainer(name, res)) { 
+		} else if (elem = o.slotContainer(name, res)) { 
 			try {
 				Q.replace(elem, res.slots[name], options);
 				if (pos = Q.getObject(['Q', 'scroll', url], elem)) {
 					elem.scrollLeft = pos.left;
 					elem.scrollTop = pos.top;
+				} else {
+					// reset scrolling to top left corner by default
+					elem.scrollLeft = o.scrollLeft || 0;
+					elem.scrollTop = o.scrollTop || 0;
 				}
 			} catch (e) {
 				debugger; // pause here if debugging
