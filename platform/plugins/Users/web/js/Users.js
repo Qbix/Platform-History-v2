@@ -192,19 +192,22 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.init.wallet = function (callback, options) {
-		Q.addScript([
+		var scriptsToLoad = [
 			'{{Users}}/js/wallet/ethers-5.2.umd.min.js',
 			'{{Users}}/js/wallet/evm-chains.min.js',
-			'{{Users}}/js/wallet/fortmatic.js',
-			'{{Users}}/js/wallet/torus.js',
-			'{{Users}}/js/wallet/portis.js',
-			'{{Users}}/js/wallet/authereum.js',
-			'{{Users}}/js/wallet/bitski.js',
-			'{{Users}}/js/wallet/arkane.js',
 			'{{Users}}/js/wallet/walletconnect.min.js',
 			'{{Users}}/js/wallet/web3.min.js',
 			'{{Users}}/js/wallet/web3modal.js'
-		], callback, options);
+		];
+		var allowedProviders = Users.Web3.providers;
+		if (allowedProviders.Fortmatic) {
+			scriptsToLoad.push('{{Users}}/js/wallet/fortmatic.js');
+		}
+		if (allowedProviders.Portis) {
+			scriptsToLoad.push('{{Users}}/js/wallet/portis.js',);
+		}
+
+		Q.addScript(scriptsToLoad, callback, options);
 	};
 
 	/**
@@ -3806,69 +3809,29 @@
 				};
 			}
 			if (allowedProviders.Fortmatic) {
-				providerOptions.fortmatic = {
-					package: window.Fortmatic, // required
-					options: {
-						key: "FORMATIC_API_KEY" // required
-					}
-				};
-			}
-			if (allowedProviders.Torus) {
-				providerOptions.torus = {
-					package: window.Torus, // required
-					options: {
-						networkParams: {
-							/*host: "https://localhost:8545", // optional
-							chainId: 1337, // optional
-							networkId: 1337 // optional*/
-						},
-						config: {
-							buildEnv: "development" // optional
+				var fortmatic_key = Q.getObject(['wallet', Users.communityId, 'Fortmatic', 'key'], Users.apps);
+				if (fortmatic_key) {
+					providerOptions.fortmatic = {
+						package: window.Fortmatic, // required
+						options: {
+							key: fortmatic_key // required
 						}
-					}
-				};
+					};
+				} else {
+					console.warn("key required for Fortmatic wallet");
+				}
 			}
 			if (allowedProviders.Portis) {
-				providerOptions.portis = {
-					package: window.Portis, // required
-					options: {
-						id: "PORTIS_ID" // required
-					}
-				}
-			}
-			if (allowedProviders.Authereum) {
-				providerOptions.authereum = {
-					package: window.Authereum // required
-				}
-			}
-			if (allowedProviders.Frame) {
-				providerOptions.frame = {
-					package: window.ethereum // required
-				}
-			}
-			if (allowedProviders.Bitski) {
-				providerOptions.bitski = {
-					package: window.Bitski, // required
-					options: {
-						clientId: "BITSKI_CLIENT_ID", // required
-						callbackUrl: "BITSKI_CALLBACK_URL" // required
-					}
-				}
-			}
-			if (allowedProviders.Arkane) {
-				providerOptions.arkane = {
-					package: window.VenlyConnect, // required
-					options: {
-						clientId: "ARKANE_CLIENT_ID" // required
-					}
-				}
-			}
-			if (allowedProviders.Dcent) {
-				providerOptions.dcentwallet = {
-					package: window.ethereum, // required
-					options: {
-						rpcUrl: "INSERT_RPC_URL" // required
-					}
+				var portis_id = Q.getObject(['wallet', Users.communityId, 'Portis', 'id'], Users.apps);
+				if (portis_id) {
+					providerOptions.portis = {
+						package: window.Portis, // required
+						options: {
+							id: portis_id // required
+						}
+					};
+				} else {
+					console.warn("id required for Portis wallet");
 				}
 			}
 
@@ -3877,7 +3840,7 @@
 				//network: options.network,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
-				disableInjectedProvider: false // optional. For MetaMask / Brave / Opera.
+				disableInjectedProvider: Users.Web3.disableInjectedProvider // optional. For MetaMask / Brave / Opera.
 			});
 
 			return Users.Wallet.web3Modal;

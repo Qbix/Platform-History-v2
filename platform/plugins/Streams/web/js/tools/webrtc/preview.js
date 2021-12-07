@@ -159,16 +159,24 @@
                     if(tool.state.guestWaitingRoom == null) {
                         acceptButton.css('display', 'none');
                         switchBackButton.css('display', 'none');
-                        if(accept != null) disconnectButton.css('display', 'flex');
-                        if(accept == null) forceDisconnect();
+                        if(accept == null) {
+                            forceDisconnect();
+                        } else {
+                            tool.preview.delete();
+                            disconnectButton.css('display', 'flex');
+                        }
                     } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.currentConferenceLibInstance()) {
-                        tool.state.guestWaitingRoom.switchTo(mainWebRTCStreamPublisher, mainWebRTCStreamName, function () {
+                        tool.state.guestWaitingRoom.switchTo(mainWebRTCStreamPublisher, mainWebRTCStreamName, {
+                            resumeClosed: true
+                        }).then(function () {
                             acceptButton.css('display', 'none');
                             switchBackButton.css('display', 'none');
 
-                            if(accept == null) forceDisconnect();
-                        }, {
-                            resumeClosed: true
+                            if(accept == null) {
+                                forceDisconnect();
+                            } else {
+                                tool.preview.delete();
+                            }
                         });
                     } else {
                         tool.state.guestWaitingRoom.stop();
@@ -262,14 +270,14 @@
                         });
                     } else {
 
-                        tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), function () {
+                        tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
+                            resumeClosed: true
+                        }).then(function () {
                             tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
                             //tool.state.mainWebrtcRoom = null;
                             callButton.css('display', 'none');
                             switchBackButton.css('display', 'flex');
                             Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
-                        }, {
-                            resumeClosed: true
                         });
                     }
 

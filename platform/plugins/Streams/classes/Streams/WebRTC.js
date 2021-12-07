@@ -9,6 +9,7 @@ const Q = require('Q');
 const fs = require('fs');
 const { PassThrough } = require('stream');
 const path = require('path');
+const gfs = require('graceful-fs');
 
 var express = require('express');
 var app = express();
@@ -226,12 +227,23 @@ WebRTC.listen = function () {
     if (!socket || !socket.io) {
         return null;
     }
+    var sslConfigs = Q.Config.get(['Q', 'node', 'https'], false) || {};
+    var port = parseInt(Q.Config.get(['Q', 'node', 'port'], null)) + 5;
+    var config = {
+        sslConfigs: {
+            key: sslConfigs.key,
+            cert: sslConfigs.cert,
+            ca: sslConfigs.ca
+        },
+        port: port
+
+    };
+
+    var WebcastServer = require('./WebRTC/WebcastServer')(config);
 
     var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
     var io = socket.io;
     var webrtcNamespace = io.of('/webrtc');
-
-
 
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
@@ -279,51 +291,37 @@ WebRTC.listen = function () {
 
 
             function createFfmpegProcess() {
-                                var params = ['-re'];
+                var params = ['-re'];
+                //var params = ['-r', '24'];
                 if(format != 'webm') {
                     params.push('-f', format);
                 }
+
+                params.push('-i', '-');
+
+                if(encoder == 'copy') {
+                    params = params.concat([
+                        '-vcodec', 'copy',
+                    ]);
+                } else {
+                    params = params.concat([
+                        '-pix_fmt', 'yuv420p',
+                        '-vcodec', 'libx264',
+                        '-preset', 'slow',
+                        '-profile:v', 'high',
+                        '-b:v', '2M',
+                        '-bufsize', '512k',
+                        '-crf', '18',
+                        '-g', '30',
+                        '-bf', '2',
+                        '-movflags', '+faststart',
+                        '-max_interleave_delta', '20000000',
+                    ]);
+                }
                 params = params.concat([
-                    // Facebook requires an audio track, so we create a silent one here.
-                    // Remove this line, as well as `-shortest`, if you send audio from the browser.
-                    //'-f', 'lavfi', '-i', 'anullsrc',
-
-                    //set input framerate to 24 fps
-                    //'-r', '30',
-                    '-i', '-',
-                    //'-i', '/var/www/planet.mp4',
-
-                    // Because we're using a generated audio source which never ends,
-                    // specify that we'll stop at end of other input.  Remove this line if you
-                    // send audio from the browser.
-                    //'-shortest',
-
-                    // If we're encoding H.264 in-browser, we can set the video codec to 'copy'
-                    // so that we don't waste any CPU and quality with unnecessary transcoding.
-                    // If the browser doesn't support H.264, set the video codec to 'libx264'
-                    // or similar to transcode it to H.264 here on the server.
-                    '-vcodec', 'libx264',
-                    '-preset', 'veryfast', '-b:v', '1984k', '-maxrate', '1984k', '-bufsize', '3968k',
-                    //'-vf', 'format=yuv420p',
-
-                    // AAC audio is required for Facebook Live.  No browser currently supports
-                    // encoding AAC, so we must transcode the audio to AAC here on the server.
-                    //'-g', '20',
-                    //'-codec:a', 'libfdk_aac',
                     '-codec:a', 'aac',
                     '-strict', '-2', '-ar', '44100',
                     '-af', 'aresample=async=1',
-                    //'-af', 'equalizer=f=100:t=h:width=200:g=-64',
-                    //'-ar', '44100',
-                    //'-threads', '6',
-                    //'-b:a', '11025',
-                    //'-bufsize', '512k',
-                    //'-aac_coder', 'fast',
-
-
-                    //set output framerate to 24 fps
-                    //'-r', '24',
-                    //'-s', '1280x768',
                 ]);
 
                 if(rtmpUrls.length > 1) {
@@ -342,6 +340,7 @@ WebRTC.listen = function () {
                 } else {
                     params = params.concat([
                         '-flvflags', 'no_duration_filesize',
+                        '-r', '24',
                         '-f', 'flv', rtmpUrls[0]
                     ]);
                 }

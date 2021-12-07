@@ -322,6 +322,11 @@
 
                     tool.usersCounter.innerHTML = participantsCount;
 				});
+				tool.WebRTCLib.event.on('participantRemoved', function (participant) {
+					tool.participantsPopup().removeItem(participant);
+					var participantsCount = tool.WebRTCLib.roomParticipants().length;
+                    tool.usersCounter.innerHTML = participantsCount;
+				});
 				tool.WebRTCLib.event.on('screenAdded', function (e) {
 					tool.participantsPopup().update(e.participant);
 				});
@@ -427,6 +432,42 @@
 				tool.WebRTCLib.event.on('liveStreamingStopped', function () {
                     tool.cameraBtn.classList.remove('isRecording');
                     tool.WebRTCClass.notice.show(tool.textes.webrtc.notices.liveStopped);
+                });
+
+				tool.WebRTCLib.event.on('webcastStarted', function (e) {
+					console.log('EVENT: webcastStarted', e, tool.broadcastClient);
+                    if(tool.broadcastClient != null) {
+                        console.log('EVENT: webcastStarted emit parallelWebcastStarted');
+                        tool.WebRTCLib.signalingDispatcher.sendDataTrackMessage('parallelWebcastExists', tool.broadcastClient.getOptions().roomName, e.participant)
+                        //tool.broadcastClient.socket().emit('parallelWebcastStarted', {roomId:e.data});
+                        tool.broadcastClient.socket().emit('parallelWebcastExists', e.data);
+                    }
+                });
+
+				tool.WebRTCLib.event.on('webcastEnded', function () {
+                    if(tool.broadcastClient != null) {
+                        tool.broadcastClient.socket().emit('parallelWebcastEnded');
+                    }
+                });
+
+				tool.WebRTCLib.event.on('parallelWebcastExists', function (e) {
+                    console.log('EVENT: parallelWebcastExists', e);
+
+                    if(tool.broadcastClient != null) {
+                        tool.broadcastClient.socket().emit('parallelWebcastExists', e.data);
+                    }
+
+                });
+
+				tool.WebRTCLib.event.on('switchRoom', function (e) {
+                    console.log('EVENT: switchRoom', e);
+                    var options = tool.WebRTCClass.options();
+                    if(tool.broadcastClient != null && options.webcastSettings.disconnectOnRoomSwitch) {
+                        tool.broadcastClient.disconnect();
+                    } else if(tool.broadcastClient != null && !options.webcastSettings.disconnectOnRoomSwitch) {
+                        tool.broadcastClient.socket().emit('switchRoom', e.roomName);
+                    }
+
                 });
 
 				tool.WebRTCLib.event.on('videoRecordingStarted', function (participant) {
@@ -2078,14 +2119,14 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
-                            rtmpLiveURLInput.value ='';
+                            rtmpLiveURLInput.value ='rtmp://a.rtmp.youtube.com/live2';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
-                            rtmpLiveStreamKeyInput.value = '';
+                            rtmpLiveStreamKeyInput.value = '2p3r-cu4d-xsy5-z135-0vmu';
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
@@ -2351,11 +2392,168 @@
                             return recordingCon;
                         }
 
+                        function createBroadcastingLink() {
+                            var recordingCon = document.createElement('DIV');
+                            recordingCon.className = 'Streams_webrtc_streaming Streams_webrtc_streaming_recording_item'
+
+                            var recordingItem = document.createElement('DIV');
+                            recordingItem.className = 'Streams_webrtc_streaming_item';
+                            var recordingTextLabel = document.createElement('SPAN');
+                            recordingTextLabel.innerHTML =  Q.getObject("webrtc.settingsPopup.startBroadcasting", tool.textes);
+                            var recordingIcon = document.createElement('SPAN');
+                            recordingIcon.className = 'Streams_webrtc_streaming_recording_icon';
+                            recordingIcon.innerHTML = icons.recordingIcon;
+                            recordingItem.appendChild(recordingTextLabel);
+                            recordingItem.appendChild(recordingIcon);
+
+                            var recordingSettings = document.createElement('DIV');
+                            recordingSettings.className = 'Streams_webrtc_streaming_start_settings';
+
+                            var startRecordingBtnCon = document.createElement('DIV');
+                            startRecordingBtnCon.className = 'Streams_webrtc_streaming_start';
+
+                            var startRecordingBtn = document.createElement('BUTTON');
+                            startRecordingBtn.type = 'button';
+                            startRecordingBtn.className = 'Q_button';
+                            startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", tool.textes);
+
+                            var stopRecordingBtnCon = document.createElement('DIV');
+                            stopRecordingBtnCon.className = 'Streams_webrtc_streaming_stop';
+
+                            var stopRecordingBtn = document.createElement('BUTTON');
+                            stopRecordingBtn.type = 'button';
+                            stopRecordingBtn.className = 'Q_button';
+                            stopRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.stop", tool.textes);
+
+                            recordingCon.appendChild(recordingItem);
+
+                            startRecordingBtnCon.appendChild(startRecordingBtn);
+                            recordingSettings.appendChild(startRecordingBtnCon);
+
+
+                            var activeRecordingSection = document.createElement('DIV');
+                            activeRecordingSection.style.display = 'none';
+                            activeRecordingSection.className = 'Streams_webrtc_streaming_live';
+                            var buttonsCon = document.createElement('DIV');
+                            buttonsCon.className = 'Streams_webrtc_streaming_buttons';
+                            var linkCon = document.createElement('DIV');
+                            linkCon.className = 'Streams_webrtc_streaming_link_con';
+
+                            var roomId = 'broadcast-' + tool.WebRTCClass.options().roomId + '-' + (tool.WebRTCLib.localParticipant().sid).replace('/webrtc#', '');
+                            //var roomId = 'broadcast-' + tool.WebRTCClass.options().roomId + '-' + Q.Users.loggedInUserId();
+
+                            var linkInputCon = document.createElement('LABEL');
+                            linkInputCon.className = 'Streams_webrtc_streaming_label';
+                            var linkInput = document.createElement('INPUT');
+                            linkInput.disabled = true;
+                            linkInput.value = location.origin + '/broadcast?stream=' + roomId;
+                            var linkCopyBtn = document.createElement('BUTTON');
+                            linkCopyBtn.innerHTML = Q.getObject("webrtc.settingsPopup.copy", tool.textes);
+                            linkInputCon.appendChild(linkInput);
+                            linkCon.appendChild(linkInputCon);
+                            linkCon.appendChild(linkCopyBtn);
+
+                            linkCopyBtn.addEventListener('click', function () {
+                                copyToClipboard(linkInput);
+                                tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
+                            })
+
+                            stopRecordingBtnCon.appendChild(stopRecordingBtn);
+                            buttonsCon.appendChild(stopRecordingBtnCon);
+                            activeRecordingSection.appendChild(linkCon);
+                            activeRecordingSection.appendChild(buttonsCon);
+
+                            recordingCon.appendChild(recordingSettings);
+                            recordingCon.appendChild(activeRecordingSection);
+
+                            recordingItem.addEventListener('click', function (e) {
+                                if(recordingSettings.classList.contains('shown')) {
+                                    recordingSettings.classList.remove('shown');
+                                } else {
+                                    recordingSettings.classList.add('shown');
+                                }
+                            })
+
+                            var broadcastClient;
+                            startRecordingBtn.addEventListener('click', function () {
+                                if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                                Q.addScript('{{Streams}}/js/tools/webrtc/broadcast.js', function () {
+                                    Q.req("Streams/webcast", ["room"], function (err, response) {
+                                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                                        if (msg) {
+                                            return Q.alert(msg);
+                                        }
+
+                                       // roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
+                                        var turnCredentials = response.slots.room.turnCredentials;
+                                        var socketServer = response.slots.room.socketServer;
+
+                                        console.log('Streams/webcast', response, socketServer);
+                                        broadcastClient = window.WebRTCWebcastClient({
+                                            mode:'node',
+                                            role:'publisher',
+                                            nodeServer: socketServer,
+                                            roomName: roomId,
+                                            //turnCredentials: turnCredentials,
+                                        });
+                                        if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                        recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.broadcastingInProgress", tool.textes);
+                                        recordingSettings.style.display = 'none';
+                                        activeRecordingSection.style.display = 'block';
+
+                                        broadcastClient.init(function () {
+                                            console.log('initWithNodeServer: initConference: inited');
+
+                                            tool.WebRTCLib.mediaManager.canvasComposer.captureStream();
+                                            var stream = tool.WebRTCLib.mediaManager.canvasComposer.getMediaStream();
+
+                                            if(stream != null) stream = stream.clone();
+
+                                            broadcastClient.mediaControls.publishStream(stream);
+                                            tool.WebRTCLib.signalingDispatcher.sendDataTrackMessage('webcastStarted', roomId)
+
+                                        });
+
+                                        broadcastClient.event.on('disconnected', function () {
+                                            tool.WebRTCLib.signalingDispatcher.sendDataTrackMessage('webcastEnded')
+                                        });
+
+                                        tool.broadcastClient = broadcastClient;
+                                    }, {
+                                        method: 'post',
+                                        fields: {
+                                            roomId: roomId,
+                                            publisherId: Q.Users.communityId,
+                                        }
+                                    });
+
+                                });
+
+                            })
+                            stopRecordingBtn.addEventListener('click', function () {
+                                if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
+
+                                broadcastClient.disconnect();
+
+                                if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
+                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startBroadcasting", tool.textes);
+                                activeRecordingSection.style.display = 'none';
+                                recordingSettings.style.display = 'block';
+                            })
+
+
+
+                            return recordingCon;
+                        }
+
                         function createStreamingAndRecordingSection() {
                             _streamingAndRecordingEl = document.createElement('DIV');
                             _streamingAndRecordingEl.className = 'Streams_webrtc_streaming_recording'
                             _streamingAndRecordingEl.appendChild(createStreamingLink());
                             _streamingAndRecordingEl.appendChild(createCustomRTMPlink());
+                            _streamingAndRecordingEl.appendChild(createBroadcastingLink());
                             //_streamingAndRecordingEl.appendChild(createRecordingLink());
 
 							return _streamingAndRecordingEl;
@@ -3686,6 +3884,7 @@
 							release: {size: 1.2}
 						}).on(Q.Pointer.fastclick, function () {
 							tool.state.webrtcClass.stop();
+							if(tool.broadcastClient) tool.broadcastClient.disconnect();
 						});
 					}
 				}

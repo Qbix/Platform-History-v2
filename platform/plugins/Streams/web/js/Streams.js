@@ -586,6 +586,7 @@ Q.Tool.define({
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/streamingEditor"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",
+	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",
 	"Streams/image/album": "{{Streams}}/js/tools/album/tool.js",
 	"Streams/default/preview": "{{Streams}}/js/tools/default/preview.js",
 	"Streams/question/preview": "{{Streams}}/js/tools/question/preview.js",
@@ -4521,7 +4522,8 @@ var Ap = Avatar.prototype;
 Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	var fn = this.firstName;
 	var ln = this.lastName;
-	var u = this.username;
+	var u = this.username === fn || this.username === ln ? "" : this.username;
+
 	var fn2, ln2, u2, f2;
 	fallback = fallback || 'Someone';
 	if (options && (options.escape || options.html)) {

@@ -288,16 +288,10 @@
 			},
 			"providers": {
 				"WalletConnect": true,
-				"Fortmatic": true,
-				"Portis": true,
-				"Torus": true,
-				"Formatic": true,
-				"Arkane": true,
-				"Authereum": true,
-				"Dcent": true,
-				"Bitski": true,
-				"Frame": true
-			}
+				"Fortmatic": false,
+				"Portis": false
+			},
+			"disableInjectedProvider": false
 		}
 	}
 }
