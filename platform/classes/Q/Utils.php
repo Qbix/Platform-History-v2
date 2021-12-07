@@ -1645,6 +1645,18 @@ class Q_Utils
 		return $max_size;
 	}
 
+	/**
+	 * Used to turn a filesize into a human-readable file size
+	 * @param {integer} $bytes the number of bytes in the file
+	 * @param {integer} [$decimals=2] number of decimals to display, if any
+	 * @return {string}
+	 */
+	static function humanReadableFilesize($bytes, $decimals = 2) {
+		$sz = 'BKMGTP';
+		$factor = floor((strlen($bytes) - 1) / 3);
+		return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
+	}
+
 	protected static $urand;
 	protected static $sockets = array();
 	
