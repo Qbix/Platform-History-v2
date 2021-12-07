@@ -15,7 +15,6 @@ require STREAMS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
  *   @param {string} $_REQUEST.publisherId  Required. The id of the user to publish the stream.
  *   @param {string} $_REQUEST.roomId Pass an ID for the room from the client, may already exist
  *   @param {string} $_REQUEST.closeManually If true, stream is not closed automatically by node.js
- *   @param {string} [$_REQUEST.adapter='node'] Required. The type of the message.
  * @return {void}
  */
 function Streams_webrtc_post($params = array())
@@ -24,7 +23,7 @@ function Streams_webrtc_post($params = array())
     $socketServerHost = Q_Config::get('Streams', 'webrtc', 'socketServerHost', null);
     $socketServerHost = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', $socketServerHost), '/');
     $socketServerPort = Q_Config::get('Streams', 'webrtc', 'socketServerPort', null);
-    if(!empty($socketServerHost) && !empty($socketServerHost)){
+    if(!empty($socketServerHost) && !empty($socketServerPort)){
         $socketServer = $socketServerHost . ':' . $socketServerPort;
     } else {
         $socketServer = trim(str_replace('/(http\:\/\/) || (https\:\/\/)/', '', Q_Config::get('Q', 'node', 'url', null)), '/');
@@ -39,7 +38,6 @@ function Streams_webrtc_post($params = array())
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
-	$adapter = Q::ifset($params, 'adapter', 'node');
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
@@ -80,25 +78,18 @@ function Streams_webrtc_post($params = array())
             'instructions' => @compact('progress'),
         ), true);
 
+
         Q_Response::setSlot("progress", $taskStream);
 
         return;
     }
 
-    //Q_Valid::requireFields(array('publisherId', 'adapter'), $params, true);
-
-    if (!in_array($adapter, array('node', 'twilio'))) {
-        throw new Q_Exception_WrongValue(array('field' => 'adapter', 'range' => 'node or twilio'));
-    }
-
-    $className = "Streams_WebRTC_".ucfirst($adapter);
-
-    $webrtc = new $className();
+    $webrtc = new Streams_WebRTC_Node();
 
     if($useTwilioTurn) {
         try {
             $turnCredentials = $webrtc->getTwilioTurnCredentials();
-            $turnServers[] = $turnCredentials;
+            $turnServers = array_merge($turnServers, $turnCredentials);
         } catch (Exception $e) {
         }
     }

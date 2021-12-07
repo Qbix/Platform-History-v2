@@ -105,6 +105,7 @@
                 var _previewEl = null;
                 var _resizingElement = null;
                 var _resizingElementTool = null;
+                var _fileManagerTool = null;
                 var _streamingCanvas = null;
                 var _scenesEl = null;
                 var _sourcesEl = null;
@@ -620,12 +621,15 @@
 
                         function addImageSource(e) {
                             if(typeof e == 'string') {
+                                var pathhInfo = e.split('/');
+                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
+
                                 var img = new Image();
                                 img.src = e;
                                 img.onload = function () {
                                     controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                         sourceType: 'image',
-                                        title: e,
+                                        title: title,
                                         imageInstance: img,
                                     });
                                 };
@@ -656,16 +660,14 @@
 
                         function addVideoSource(e) {
                             if(typeof e == 'string') {
-                                var video = document.createElement('VIDEO');
-                                video.src = e;
-                                video.muted = true;
-                                video.loop = true;
+
+                                var pathhInfo = e.split('/');
+                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
                                 controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                     sourceType: 'video',
-                                    title: e,
+                                    title: title,
                                     url: e,
                                 });
-                                //https://www.w3schools.com/html/mov_bbb.mp4
                             } else {
                                 var tgt = e.target || window.event.srcElement,
                                     files = tgt.files;
@@ -1006,6 +1008,41 @@
                             videoItem.appendChild(videoItemIconText);
                             //videoItem.appendChild(videoItemInput);
                             dropUp.appendChild(videoItem);
+
+                            var savedMedia = document.createElement('DIV');
+                            savedMedia.className = 'Streams_webrtc_popup-sources-add-menu-item';
+                            var savedMediaIcon = document.createElement('DIV');
+                            savedMediaIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            var savedMediaIconText = document.createElement('DIV');
+                            savedMediaIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            savedMediaIconText.innerHTML = 'Saved Media';
+                            savedMedia.addEventListener('click', function (e) {
+                                console.log('_fileManagerTool', _fileManagerTool)
+                                if(!_fileManagerTool) return;
+
+                                _fileManagerTool.showDialogue();
+
+                                _fileManagerTool.state.onSelect.set(function (stream) {
+                                    console.log('Streams/fileManager onSelect', stream)
+                                    var attributes = JSON.parse(stream['attributes']);
+                                    var link = Q.url(attributes['Q.file.url']);
+                                    console.log('Streams/fileManager attributes', link)
+                                    if(stream['type'] == 'Streams/video') {
+                                        addVideoSource(link);
+                                    } else if(stream['type'] == 'Streams/image') {
+                                        addImageSource(link);
+                                    } else {
+                                        alert('Wrong type of file')
+                                    }
+
+                                    _fileManagerTool.closeDialogue();
+                                }, 'importVisual')
+                            })
+
+                            savedMedia.appendChild(savedMediaIcon);
+                            savedMedia.appendChild(savedMediaIconText);
+                            dropUp.appendChild(savedMedia);
+
                             //_dialogueEl.appendChild(dropUp);
                             return dropUp;
                         }
@@ -1621,6 +1658,62 @@
                             console.log('selectSource timesbigger', prmtr1, prmtr2, timesBigger)
                         }
 
+                        function createAddSourceMenu() {
+                            var dropUp = document.createElement('DIV');
+                            dropUp.className = 'Streams_webrtc_popup-sources-add-menu';
+                            var audioItem = document.createElement('DIV');
+                            audioItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-image';
+                            var audioItemIcon = document.createElement('DIV');
+                            audioItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            var audioItemIconText = document.createElement('DIV');
+                            audioItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            audioItemIconText.innerHTML = 'Browse Audio';
+                            audioItem.addEventListener('click', function (e) {
+                                addAudioPopup.showDialog(event);
+                            })
+
+                            audioItem.appendChild(audioItemIcon);
+                            audioItem.appendChild(audioItemIconText);
+                            dropUp.appendChild(audioItem);
+
+                            var savedMedia = document.createElement('DIV');
+                            savedMedia.className = 'Streams_webrtc_popup-sources-add-menu-item';
+                            var savedMediaIcon = document.createElement('DIV');
+                            savedMediaIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            var savedMediaIconText = document.createElement('DIV');
+                            savedMediaIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            savedMediaIconText.innerHTML = 'Saved Media';
+                            savedMedia.addEventListener('click', function (e) {
+                                console.log('_fileManagerTool', _fileManagerTool)
+
+                                if(!_fileManagerTool) return;
+
+                                _fileManagerTool.showDialogue();
+
+                                _fileManagerTool.state.onSelect.set(function (stream) {
+                                    console.log('Streams/fileManager onSelect', stream)
+                                    var attributes = JSON.parse(stream['attributes']);
+                                    var link = Q.url(attributes['Q.file.url']);
+                                    console.log('Streams/fileManager attributes', link)
+                                    if(stream['type'] == 'Streams/audio') {
+                                        addAudioSource(link);
+                                    } else {
+                                        alert('Wrong file type')
+                                    }
+
+                                    _fileManagerTool.closeDialogue();
+                                }, 'importAudio')
+                            })
+
+                            savedMedia.appendChild(savedMediaIcon);
+                            savedMedia.appendChild(savedMediaIconText);
+                            dropUp.appendChild(savedMedia);
+
+
+                            //_dialogueEl.appendChild(dropUp);
+                            return dropUp;
+                        }
+
                         function createAudioSourcesList() {
                             if(_audioSourcesEl != null) return _audioSourcesEl;
                             var dialogBody = document.createElement('DIV');
@@ -1633,12 +1726,31 @@
                             var sourcesColumnControl = document.createElement('DIV');
                             sourcesColumnControl.className = 'Streams_webrtc_popup-sources-control';
 
+                            var dropUpMenu = createAddSourceMenu();
+
                             var sourcesColumnControlAddBtn = document.createElement('DIV');
                             sourcesColumnControlAddBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-add';
                             sourcesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
+                            sourcesColumnControlAddBtn.appendChild(dropUpMenu);
 
                             sourcesColumnControlAddBtn.addEventListener('click', function (event) {
-                                addAudioPopup.showDialog(event);
+                                //addAudioPopup.showDialog(event);
+                                function hideOnClick(e) {
+                                    if (!(sourcesColumnControlAddBtn.contains(e.target) || e.target.matches('.Streams_webrtc_popup-sources-add-menu'))
+                                        && dropUpMenu.classList.contains('Streams_webrtc_popup-sources-add-menu-show')) {
+                                        dropUpMenu.classList.remove('Streams_webrtc_popup-sources-add-menu-show');
+                                        window.removeEventListener('click', hideOnClick)
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                    }
+                                }
+                                console.log('background', dropUpMenu)
+                                if (dropUpMenu.classList.contains('Streams_webrtc_popup-sources-add-menu-show')) {
+                                    dropUpMenu.classList.remove('Streams_webrtc_popup-sources-add-menu-show');
+                                } else {
+                                    dropUpMenu.classList.add('Streams_webrtc_popup-sources-add-menu-show');
+                                    window.addEventListener('mousedown', hideOnClick)
+                                }
                             });
 
                             sourcesColumnControl.appendChild(sourcesColumnControlAddBtn);
@@ -1657,18 +1769,15 @@
                         }
 
                         function addAudioSource(e) {
-                            console.log('addAudioSource')
+                            console.log('addAudioSource', e)
                             if(typeof e == 'string') {
-                                var audio = document.createElement('audio');
-                                audio.src = e;
-                                audio.muted = true;
-                                audio.loop = true;
+                                var pathhInfo = e.split('/');
+                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
                                 controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
                                     sourceType: 'audio',
-                                    title: e,
-                                    audioInstance: audio,
+                                    title: title,
+                                    url: e,
                                 });
-                                //https://www.w3schools.com/html/mov_bbb.mp4
                             } else {
                                 var tgt = e.target || window.event.srcElement,
                                     files = tgt.files;
@@ -3637,27 +3746,39 @@
                     );
 
                     controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
-                    //setTimeout(function () {
-                        Q.activate(
-                            Q.Tool.setUpElement(
-                                dialogue,
-                                "Q/resize",
-                                {
-                                    move: true,
-                                    elementPosition: 'fixed',
-                                    activateOnElement: dialogTitle,
-                                    keepInitialSize: true,
-                                    resize: false,
-                                    active: true,
-                                    moveWithinArea: 'window',
-                                }
-                            ),
-                            {},
-                            function () {
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            dialogue,
+                            "Q/resize",
+                            {
+                                move: true,
+                                elementPosition: 'fixed',
+                                activateOnElement: dialogTitle,
+                                keepInitialSize: true,
+                                resize: false,
+                                active: true,
+                                moveWithinArea: 'window',
+                            }
+                        ),
+                        {},
+                        function () {
+
+                        }
+                    );
+
+                    Q.activate(
+                        Q.Tool.setUpElement(
+                            _dialogueEl,
+                            "Streams/fileManager",
+                            {
 
                             }
-                        );
-                    //}, 3000)
+                        ),
+                        {},
+                        function (toolEl) {
+                            _fileManagerTool = Q.Tool.from(_dialogueEl, "Streams/fileManager");
+                        }
+                    )
 
                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;

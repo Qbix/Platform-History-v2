@@ -14,6 +14,7 @@
 		"@tensorflow/tfjs-core": "^2.6.0",
 		"crypto-js": "3.x.x",
 		"express": "^4.17.1",
+		"google-closure-compiler": "20201207.0.0",
 		"handlebars": "^4.7.6",
 		"html-entities": "^1.2.1",
 		"moment-timezone": "0.5.x",
@@ -22,8 +23,7 @@
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
 		"socket.io": "2.4.1",
-		"yuidocjs": "^0.10.2",
-		"google-closure-compiler": "20201207.0.0"
+		"yuidocjs": "^0.10.2"
 	},
 	"repository": {
 		"type": "git",

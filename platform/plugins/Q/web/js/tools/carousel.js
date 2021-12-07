@@ -37,6 +37,7 @@
             radius: 340,
             imgWidth: 170,
             imgHeight: 120,
+            delayIntroUntil: 0.5,
             autoRotate: true,
             direction: 'left',
             rotateSpeed: 60000,
@@ -75,22 +76,52 @@
                     tX = 0,
                     tY = 0;
 
-                setTimeout(function () {
-                    init(null, function () {
-                        if (autoRotate) {
-                            startAutoRotate();
-                        }
-                    });
-                }, 100);
-
 
                 var mediaContainer = tool.element;
+
+                if(state.delayIntroUntil) {
+                    let observerOptions = {
+                        threshold: state.delayIntroUntil
+                    };
+
+                    let observerCallback = (entries, observer) => {
+                        entries.forEach((entry) => {
+
+                            if (entry.intersectionRatio >= state.delayIntroUntil) {
+                                init(null, function () {
+                                    if (autoRotate) {
+                                        startAutoRotate();
+                                    }
+                                });
+                                observer.unobserve(entry.target);
+                                observer.disconnect();
+
+                            }
+                        });
+                    };
+
+                    let observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                    observer.observe(mediaContainer);
+                } else {
+                    setTimeout(function () {
+                        init(null, function () {
+                            if (autoRotate) {
+                                startAutoRotate();
+                            }
+                        });
+                    }, 100);
+                }
+
+
+
                 if(!mediaContainer.classList.contains('carousel-wrap')) mediaContainer.classList.add('carousel-wrap');
                 var obox = document.createElement('DIV');
                 obox.className = 'drag-container';
                 var ospin = document.createElement('DIV');
                 ospin.className = 'spin-container';
                 var aImg = mediaContainer.getElementsByTagName('figure');
+                var aImgCaptions = mediaContainer.getElementsByTagName('figcaption');
                 var aVid = mediaContainer.getElementsByTagName('video');
                 var aEle = [...aImg, ...aVid];
                 theta = 360 / aEle.length;
@@ -108,6 +139,10 @@
 
                 ospin.style.width = imgWidth + "px";
                 ospin.style.height = imgHeight + "px";
+
+                for (let c = 0; c < aImgCaptions.length; c++) {
+                    aImgCaptions[c].style.width = imgWidth + 'px'
+                }
 
                 /* var ground = document.getElementById('ground');
                  ground.style.width = radius * 3 + "px";

@@ -48,27 +48,60 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
     var _debug = null;
     var _debugTimer = {};
 
-    /**
-     * Manages UI of WebRTC conference
-     * @class Streams.WebRTC
-     * @constructor
-     */
-
     Streams.WebRTC = function Streams_WebRTC() {
+
+        /**
+         * WebRTC options that also can be set it local/app.json
+         * @param {Object} [_options] config options
+         * @param {Number|Boolean} [_options.showMediaDevicesDialog] How long "permissions dialogue" (mic, camera) should be shown (in milliseconds). This dialog is shown when permissions weren't get automatically
+         * @param {Object} [_options.startWith] Start conference with requesting camera and/or mic permissions. This option also is used as accessory variable.
+         * @param {Boolean} [_options.startWith.audio] Start conference with requesting the permission to use microphone.
+         * @param {Boolean} [_options.startWith.video] Start conference with requesting the permission to use camera.
+         * @param {Object|Boolean} [_options.showPreparingDialogue] Show preparing dialogue before user joins the conference. User can turn camera/mic/screensharing on/off in this dialogue. If false, dialogue will not be shown
+         * @param {Boolean} [_options.showPreparingDialogue.video] Show dialogue and request permission to camera by default
+         * @param {Boolean} [_options.showPreparingDialogue.audio] Show dialogue and request permission to microphone by default
+         * @param {Boolean} [_options.showPreparingDialogue.screen] Show dialogue and request permission to share screen by default
+         * @param {Boolean} [_options.useCordovaPlugins] Use iosrtc plugin's API to get permissions to camera/mic. Option is used for iOS < v.14
+         * @param {Boolean} [_options.showScreenSharingInSeparateScreen] Show screen sharing video in separate screen. If false, screensharing video will be shown instead of camera.
+         * @param {Boolean} [_options.minimizeOnPageSwitching] Switch layout to "minimized" when page was switched
+         * @param {Boolean} [_options.leaveOtherActiveRooms] Leave active WebRTC rooms when connecting to current one
+         * @param {Boolean} [_options.onlyOneScreenSharingAllowed] Allow only one screensharing within room
+         * @param {Boolean} [_options.disconnectBtnInParticipants] Show "hang up" button in "participants popup"
+         * @param {String} [_options.controlsPosition] Show controls on top|right|bottom|left. If not set, controls will be on bottom by default.
+         * @param {Object} [_options.sounds] Play sounds when participant connects/disconnects or switches room
+         * @param {String} [_options.sounds.participantConnected]
+         * @param {String} [_options.sounds.participantDisconnected]
+         * @param {String} [_options.sounds.roomSwitch]
+         * @param {Object} [_options.liveStreaming] Live streaming settings
+         * @param {Boolean} [_options.liveStreaming.startFbLiveViaGoLiveDialog] Start live streaming using facebook sdk
+         * @param {Boolean} [_options.liveStreaming.sounds] Include _options.sounds into live stream.
+         * @param {String} [_options.liveStreaming.audioLayoutBgColor] Background color of audio layout's participant screens
+         * @param {Number} [_options.liveStreaming.tiledLayoutMargins] Margins between tiles (user's screens) in tiled layout
+         * @param {Boolean} [_options.liveStreaming.loopAudio] Loop imported audio file
+         * @param {Boolean} [_options.liveStreaming.loopVideo] Loop imported video file
+         * @param {Boolean} [_options.liveStreaming.localOutput] Output sound of imported video/audio locally
+         * @param {Object} [_options.webcastSettings]
+         * @param {Boolean} [_options.webcastSettings.disconnectOnRoomSwitch] Disconnect users from root witch leaved/switched current room
+         * @param {Q.Event} [_options.onWebRTCRoomCreated] Event that is fired when room is created
+         * @param {Q.Event} [_options.onWebRTCRoomEnded] Event that is fired when room is ended
+         * @param {Q.Event} [_options.onWebrtcControlsCreated] Event that is fired when room controls are creted
+         * @param {Array} [_options.hosts] List of ids of room's hosts
+         * @param {String} [_options.defaultDesktopViewMode] Default view mode (layout) for rendering participants' screens on desktop (regular | audio | maximized | minimized | tiled | manual | fullScreen | screenSharing)
+         * @param {String} [_options.defaultMobileViewMode] Default view mode (layout) for rendering participants' screens on mobile (tiledMobile | sideBySideMobile | maximizedMobile | minimizedMobile | audio | squaresGrid)
+         * @param {Object} [_options.useRelatedTo] Use already related (to already existing stream) stream as main roomStream
+         * @param {String} [_options.useRelatedTo.publisherId] publisherId of a stream to which potential roomStream is related
+         * @param {String} [_options.useRelatedTo.streamName] streamName of a stream to which potential roomStream is related
+         * @param {Object} [_options.relate] Relate roomStream to another stream when roomStream is created.
+         * @param {String} [_options.relate.publisherId] publisherId of a stream to which roomStream will be related.
+         * @param {String} [_options.relate.streamName] streamName of a stream to which roomStream will be related.
+         */
         var _options = {
-            mode: 'node',
-            conferenceStartedTime: null,
-            startTime: null,
-            mediaDevicesDialog: {timeout:2000},
+            showMediaDevicesDialog: 2000,
             startWith: {
                 audio: true,
                 video: false
             },
-            preparing: {
-                video: false,
-                audio: true,
-                screen: false
-            },
+            showPreparingDialogue: false,
             useCordovaPlugins: false,
             showScreenSharingInSeparateScreen: true,
             minimizeOnPageSwitching: true,
@@ -85,21 +118,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             liveStreaming: {
                 startFbLiveViaGoLiveDialog: false,
                 useRecordRTCLibrary: true,
-                drawBackground: false,
-                timeSlice: 6000,
+                /*timeSlice: 6000,*/
                 sounds:true,
-                showLabelWithNames: true,
                 audioLayoutBgColor: '#000',
-                showLayoutBorders: true,
                 tiledLayoutMargins: 20,
                 loopAudio: true,
                 loopVideo: true,
                 localOutput: true
                 /*chunkSize: 10000*/
             },
-            eyesDetection: true,
-            eyes: true,
-            faces: false,
+            webcastSettings: {
+                disconnectOnRoomSwitch: false
+            },
             onWebRTCRoomCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
@@ -116,6 +146,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var WebRTCconference;
 
         var _textes = null;
+        var _roomStartTime = null;
         var _controls = null;
         var _controlsTool = null;
         var _roomsMedia = null;
@@ -300,7 +331,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             roomItem.dataset.startTimeDate = room.startTimeDate;
                             roomItem.dataset.roomName = room.roomName;
                             roomItem.addEventListener('click', updateParticipantsList)
-                            if(room.startTimeTs == _options.conferenceStartedTime && room.roomName == _options.roomId) {
+                            if(room.startTimeTs == _roomStream.getAttribute('startTime') && room.roomName == _options.roomId) {
                                 roomItem.classList.add('Streams_webrtc_debug_active_room');
                             }
                             roomListEl.appendChild(roomItem);
@@ -464,9 +495,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         callback(response.slots.logRoomList);
                     }, {
                         method: 'get',
-                        fields: {
-                            adapter: _options.mode
-                        }
+                        fields: {}
                     });
                 }
 
@@ -483,8 +512,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         method: 'get',
                         fields: {
                             roomId: roomId,
-                            startTimeDate: startTimeDate,
-                            adapter: _options.mode
+                            startTimeDate: startTimeDate
                         }
                     });
                 }
@@ -492,7 +520,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 function getLogByUser(roomId, callStartedDate, userId, startTime, callback) {
                     var userIdAndStartTime;
                     if(typeof userId == 'undefined' && typeof startTime == 'undefined') {
-                        userIdAndStartTime = Q.Users.loggedInUser.id + '\t' + _options.startTime;
+                        userIdAndStartTime = Q.Users.loggedInUser.id + '\t' + _roomStartTime;
                     } else {
                         userIdAndStartTime = userId + '\t' + startTime;
                     }
@@ -516,8 +544,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             roomId: roomId,
                             publisherId: _options.roomPublisherId,
                             startTime: callStartedDate,
-                            participant: userIdAndStartTime,
-                            adapter: _options.mode
+                            participant: userIdAndStartTime
                         }
                     });
                 }
@@ -628,8 +655,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         log: JSON.stringify(_infoLog.splice(0, _infoLog.length)),
                         roomId: _options.roomId,
                         publisherId: _options.roomPublisherId,
-                        participant: Q.Users.loggedInUser.id + '\t' + _options.startTime,
-                        adapter: _options.mode
+                        participant: Q.Users.loggedInUser.id + '\t' + _roomStartTime
                     }
                 });
             }
@@ -908,15 +934,19 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
 
-
                 if(message.userId == userId) {
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
-
-                    setTimeout(function () {
+                    if(message.immediate === true) {
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnectingImmediately);
                         WebRTCconference.disconnect();
                         webRTCInstance.stop();
-                    }, 5000);
+                    } else {
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
 
+                        setTimeout(function () {
+                            WebRTCconference.disconnect();
+                            webRTCInstance.stop();
+                        }, 5000);
+                    }
 
                     /*Q.Streams.unrelate(
                         state.publisherId,
@@ -1072,7 +1102,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('participantRemoved', function (participant) {
                 log('you left the room')
-                screensRendering.removeParticipantsScreens();
+                //screensRendering.removeParticipantsScreens();
+                screensRendering.onParticipantDisconnected(participant);
             });
 
 
@@ -1207,7 +1238,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          */
         var connectionState = (function () {
 
-            var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!_options.startWith.video && !_options.startWith.audio));
+            var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
 
             var _notice = null;
             var _currentState = preparingRoom ? "Checking room's state" : 'Connecting...';
@@ -1282,7 +1313,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         }
 
         /**
-         * Show dialog with buttons to get permissions for camera and/or mirophone.
+         * Show dialog with buttons to get permissions for camera and/or microphone.
          * @method showPermissionsDialogue
          */
         function showPermissionsDialogue(constrains, callback) {
@@ -1568,7 +1599,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 }
 
-                if(_options.preparing.audio === true) switchMic();
+                if(_options.showPreparingDialogue.audio === true) switchMic();
 
                 switchMicBtn.addEventListener('mouseup', function () {
                     switchMic();
@@ -1688,7 +1719,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                 }
-                if(_options.preparing.video === true) switchCamera();
+                if(_options.showPreparingDialogue.video === true) switchCamera();
                 switchCameraBtn.addEventListener('mouseup', function () {
                     switchCamera();
                 });
@@ -1778,7 +1809,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                 }
-                if(_options.preparing.screen === true) switchScreenshare();
+                if(_options.showPreparingDialogue.screen === true) switchScreenshare();
                 switchScreenSharingBtn.addEventListener('mouseup', function () {
                     switchScreenshare();
                 });
@@ -2160,7 +2191,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     roomStartTime: roomStartTime,
                     roomPublisher: _roomStream.getAll().publisherId,
                     sid: Q.Users.loggedInUser.id,
-                    username:  Q.Users.loggedInUser.id + '\t' + _options.startTime,
+                    username:  Q.Users.loggedInUser.id + '\t' + _roomStartTime,
                     video: false,
                     audio: false,
                     startWith: _options.startWith,
@@ -2483,6 +2514,82 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             })
 
+            function HookSystem(){
+
+                var events = {};
+
+                var CustomEvent = function (eventName) {
+
+                    this.eventName = eventName;
+                    this.callbacks = [];
+
+                    this.registerCallback = function(callback) {
+                        this.callbacks.push(callback);
+                    }
+
+                    this.unregisterCallback = function(callback) {
+                        const index = this.callbacks.indexOf(callback);
+                        if (index > -1) {
+                            this.callbacks.splice(index, 1);
+                        }
+                    }
+
+                    this.fire = function(data) {
+                        const callbacks = this.callbacks.slice(0);
+                        callbacks.forEach((callback) => {
+                            callback(data);
+                        });
+                    }
+                }
+
+                var dispatch = function(eventName, data) {
+                    if(!doesHandlerExist(eventName)) {
+                        return;
+                    }
+
+                    const event = events[eventName];
+                    if (event) {
+                        event.fire(data);
+                    }
+                }
+
+                var on = function(eventName, callback) {
+                    let event = events[eventName];
+                    if (!event) {
+                        event = new CustomEvent(eventName);
+                        events[eventName] = event;
+                    }
+                    event.registerCallback(callback);
+                }
+
+                var off = function(eventName, callback) {
+                    const event = events[eventName];
+                    if (event && event.callbacks.indexOf(callback) > -1) {
+                        event.unregisterCallback(callback);
+                        if (event.callbacks.length === 0) {
+                            delete events[eventName];
+                        }
+                    }
+                }
+
+                var doesHandlerExist = function (eventName) {
+                    if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
+                    return false;
+                }
+
+                var destroy = function () {
+                    events = {};
+                }
+
+                return {
+                    dispatch:dispatch,
+                    on:on,
+                    off:off,
+                    doesHandlerExist:doesHandlerExist,
+                    destroy:destroy
+                }
+            }
+
             var Screen = function () {
                 this.sid = null;
                 this.participant = null;
@@ -2722,7 +2829,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 for(i = 0; participantScreen = roomScreens[i]; i++) {
                     if(participantScreen.isLocal) updateLocalScreenClasses(participantScreen);
 
-                    //createRoomScreen(participantScreen);
                 }
 
                 function doPlayTracks() {
@@ -2742,7 +2848,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 if(Q.info.isMobile){
-
                     if(viewMode == 'tiledMobile'){
                         renderTiledScreenGridMobile();
                     } else if(viewMode == 'sideBySideMobile'){
@@ -3072,6 +3177,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 chatParticipantAvatarCon.addEventListener('click', function (e) {
                     e.preventDefault();
                 });
+
+                layoutEvents.dispatch('audioScreenCreated', {audioScreen:screen.audioScreen, participant:screen.participant});
 
                 return screen.audioScreen;
             }
@@ -4222,6 +4329,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 prevViewMode = viewMode;
+
                 _layoutTool.animate('audioScreensGrid', elements, 500, true);
 
                 viewMode = 'audio';
@@ -6795,6 +6903,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             }
 
+            function layoutEvents() {
+                return layoutEvents;
+            }
+
             return {
                 setViewMode:setViewMode,
                 updateLayout:updateLayout,
@@ -6810,6 +6922,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 getActiveViewMode:getActiveViewMode,
                 getActiveSreen:getActiveSreen,
                 getScreens:getScreens,
+                layoutEvents:layoutEvents,
                 createRoomScreen:createRoomScreen,
                 removeParticipantsScreens:removeParticipantsScreens,
                 videoTrackIsAdding:videoTrackIsAdding,
@@ -6873,7 +6986,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {String} [options.roomId] Uniq id of room that will be part of Stream name (Streams/webrtc/[roomId])
          * @param {Number} [options.roomPublisherId] Id of publisher of the stream (stream represents room).
          *      Is required as argument for getting Stream from db
-         * @param {String} [options.mode] Technology that is used to start conference ('node')
          */
         function start(options) {
 
@@ -6883,13 +6995,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 log('Start WebRTC conference room');
 
-                var preparingRoom = ((_options.preparing.video || _options.preparing.audio) || (!_options.startWith.video && !_options.startWith.audio));
+                var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
 
                 connectionState.show(preparingRoom ? "Checking room's state" : 'Connecting...');
 
                 _debugTimer.loadStart = performance.now();
 
-                _options.startTime = Date.now();
+                _roomStartTime = Date.now();
 
                 appDebug.sendReportsInterbal = setInterval(function () {
                     appDebug.sendReportToServer();
@@ -6914,9 +7026,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     var ua = navigator.userAgent;
                     var startWith = _options.startWith || {};
-                    var preparingRoom = false;
+                    var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
 
-                    log('start: onConnect', preparingRoom, _options.preparing.video, _options.preparing.audio);
+                    log('start: onConnect', preparingRoom, _options.showPreparingDialogue.video, _options.showPreparingDialogue.audio);
 
 
                     if (Q.info.isCordova && Q.info.isAndroid()) {
@@ -7158,9 +7270,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 Q.Streams.WebRTCRooms.push(webRTCInstance);
 
-                                _options.conferenceStartedTime = stream.getAttribute('startTime');
                                 _options.hosts = response.slots.room.hosts;
-                                log('start: createOrJoinRoomStream: mode ' + _options.mode)
                                 bindStreamsEvents(stream);
 
                                 initWithNodeServer(socketServer, turnCredentials);
@@ -7174,7 +7284,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             fields: {
                                 roomId: _options.roomId,
                                 publisherId: asPublisherId,
-                                adapter: _options.mode,
                                 resumeClosed: _options.resumeClosed,
                                 closeManually: _options.closeManually,
                                 writeLevel: _options.writeLevel,
@@ -7212,7 +7321,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             /*permissionPopupTimeout = setTimeout(function () {
                                 if(_options.streams != null) return;
                                 showPermissionsDialogue({video: startWith.video, audio: true}, premissionGrantedCallback);
-                            }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);*/
+                            }, _options.showMediaDevicesDialog != null ? _options.showMediaDevicesDialog : 2000);*/
                         }
 
                     } else {
@@ -7229,11 +7338,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             });
                         } else {
                             publishMediaTracks({video: startWith.video, audio: startWith.audio});
-                            if(_options.mediaDevicesDialog != null && (startWith.audio || startWith.video)) {
+                            if(_options.showMediaDevicesDialog && (startWith.audio || startWith.video)) {
                                 setTimeout(function () {
                                     if(_options.streams != null) return;
                                     showPermissionsDialogue({video: startWith.video, audio: startWith.audio});
-                                }, _options.mediaDevicesDialog.timeout != null ? _options.mediaDevicesDialog.timeout : 2000);
+                                }, _options.showMediaDevicesDialog ? _options.showMediaDevicesDialog : 2000);
 
                             }
                             createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
@@ -7291,8 +7400,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 Q.Streams.WebRTCRooms = [];
                             }
 
-                            _options.conferenceStartedTime = stream.getAttribute('startTime');
                             log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
+                            WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+
                             bindStreamsEvents(_roomStream);
                             var newRoomClientInstance = await WebRTCconference.switchTo(publisherId, roomIdToJoin);
 
@@ -7318,7 +7428,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         fields: {
                             roomId: roomIdToJoin,
                             publisherId: publisherId,
-                            adapter: _options.mode,
                             resumeClosed: options && options.resumeClosed != null ? options.resumeClosed : _options.resumeClosed
                         }
                     });
@@ -7384,7 +7493,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 					fields: {
 						roomId:  _options.roomId,
 						publisherId: _options.roomPublisherId,
-						adapter: _options.mode
 					}
 				});
 
@@ -7498,7 +7606,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {String} options.streamName Required. Name of stream to which webrtc will be related.
      * @param {String} [options.relationType='Streams/webrtc']
      * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
-     * @param {String} [options.mode='node'] Technology that is used to start conference ('twillio' OR 'node')
      * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
      * @param {String} [options.useExisting=true] If false, don't request related stream to use, but create new.
      * @param {String} [options.resumeClosed=true]  If false, close stream completely (unrelate) when last participant
@@ -7517,13 +7624,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             resumeClosed: true
         }, options);
 
-
+        console.log('Streams.WebRTC.start', options)
 
         return Q.Streams.WebRTC().start({
             element: options.element,
             roomId: options.roomId,
             roomPublisherId: options.roomPublisherId,
-            mode: options.mode,
             defaultDesktopViewMode: options.defaultDesktopViewMode,
             defaultMobileViewMode: options.defaultDesktopViewMode,
             writeLevel: options.writeLevel,

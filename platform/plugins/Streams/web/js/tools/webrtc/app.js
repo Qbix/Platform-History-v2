@@ -20,7 +20,6 @@
  * @param {Object} [liveStreaming] option for live sctreaming
  * @param {Boolean} [liveStreaming.startFbLiveViaGoLiveDialog=false] whether to start Facebook Live Video via "Go Live Dialog" (JS SDK); if false - live will be started via PHP SDK
  * @param {Boolean} [liveStreaming.useRecordRTCLibrary] whether to RecordRTC.js library while capturing compounded video from canvas
- * @param {Boolean} [liveStreaming.drawBackground] whether to draw background behid participants video on canvas (deprecated)
  * @param {Number} [liveStreaming.timeSlice] time in ms - video will be send in chunks once per <timeSlice>
  * @param {Number} [liveStreaming.chunkSize] size in bytes (if timeSlice not specified) - size of chunk to send on server
  * @return {Object} instance of WebRTC chat
@@ -3282,21 +3281,13 @@ window.WebRTCRoomClient = function app(options){
 
                     //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
 
-                    if(options.liveStreaming.showLabelWithNames) {
-                        _inputCtx.fillStyle = "#232323";
-                        _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, 36);
-
-                        _inputCtx.font = "16px Arial";
-                        _inputCtx.fillStyle = "white";
-                        _inputCtx.fillText(data.participant.username, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
-                    }
                     _inputCtx.strokeStyle = "black";
 
 
 
                     _inputCtx.beginPath();
                     _inputCtx.moveTo(data.rect.x + data.rect.width, data.rect.y);
-                    _inputCtx.lineTo(data.rect.x + data.rect.width, options.liveStreaming.showLabelWithNames ? data.rect.y + 36 : data.rect.y);
+                    _inputCtx.lineTo(data.rect.x + data.rect.width, data.rect.y);
                     _inputCtx.stroke();
 
                     //_inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
@@ -3326,11 +3317,8 @@ window.WebRTCRoomClient = function app(options){
                         // get the top left position of the image
                         var x = data.rect.x + (( data.rect.width / 2) - (width / 2) * scale);
                         var y;
-                        if(options.liveStreaming.showLabelWithNames) {
-                            y = (data.rect.y + 36) + (((data.rect.height - 36) / 2) - (height / 2) * scale);
-                        } else {
-                            y = data.rect.y + ((data.rect.height / 2) - (height / 2) * scale);
-                        }
+
+                        y = data.rect.y + ((data.rect.height / 2) - (height / 2) * scale);
 
                         var size = Math.min(scaledHeight, scaledWidth);
                         var radius =  size / 2;
@@ -3352,26 +3340,7 @@ window.WebRTCRoomClient = function app(options){
                             x, y,
                             width * scale, height * scale);
                         _inputCtx.restore();
-
-
-
-                        if(options.liveStreaming.showLayoutBorders) {
-                            /*_inputCtx.strokeStyle = "rgba(38, 165, 83, 1)";
-                            _inputCtx.lineWidth = 8;
-                            _inputCtx.strokeRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);*/
-                        }
                     }
-
-                    if(options.liveStreaming.showLabelWithNames) {
-                        //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
-                        _inputCtx.fillStyle = "#232323";
-                        _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, 36);
-
-                        _inputCtx.font = "16px Arial";
-                        _inputCtx.fillStyle = "white";
-                        _inputCtx.fillText(data.participant.username, data.rect.x + 10, data.rect.y + 36 + 16 - 18 - 8);
-                    }
-
                 }
 
                 function displayName(participant) {
@@ -3861,11 +3830,9 @@ window.WebRTCRoomClient = function app(options){
                     //_inputCtx.fillStyle = "#505050";
                     _inputCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
                     _inputCtx.beginPath();
-                    if(options.liveStreaming.showLabelWithNames) {
-                        _inputCtx.arc(data.rect.x + (data.rect.width / 2), (data.rect.y + 36) + ( (data.rect.height - 36) / 2), radius, 0, 2 * Math.PI);
-                    } else {
-                        _inputCtx.arc(data.rect.x + (data.rect.width / 2), data.rect.y + (data.rect.height / 2), radius, 0, 2 * Math.PI);
-                    }
+
+                    _inputCtx.arc(data.rect.x + (data.rect.width / 2), data.rect.y + (data.rect.height / 2), radius, 0, 2 * Math.PI);
+
                     _inputCtx.fill();
                     //var radius =  size / 2  + (bass * 0.25);
 
@@ -5052,7 +5019,7 @@ window.WebRTCRoomClient = function app(options){
                     updateWebRTCAudioSources();
 
 
-                    /*if(options.liveStreaming.sounds) {
+                    if(options.liveStreaming.sounds) {
                         _roomInstance.event.on('participantConnected', function (e) {
                             if (_canvasMediStream == null || _dest == null) return;
 
@@ -5072,10 +5039,15 @@ window.WebRTCRoomClient = function app(options){
                             disconnectedAudio.play();
                             //audioSource.disconnect(_dest);
                         })
-                    }*/
+                    }
                 }
 
                 function stop() {
+                    for (let s in _activeScene.audioSources) {
+                        if(_activeScene.audioSources[s].mediaStreamTrack) {
+                            _activeScene.audioSources[s].mediaStreamTrack.stop();
+                        }
+                    }
                     if(_dest != null) _dest.disconnect();
                     _dest = null;
                 }
@@ -5140,7 +5112,7 @@ window.WebRTCRoomClient = function app(options){
             }
 
             function stopStreamCapture() {
-                log('captureStream');
+                log('stopStreamCapture');
 
                 videoComposer.stop();
 
@@ -5207,7 +5179,7 @@ window.WebRTCRoomClient = function app(options){
                     }
 
                     _mediaRecorder.addEventListener('dataavailable', function(e) {
-                        //console.log('dataavailable',e);
+                        console.log('dataavailable',e);
                         trigerDataListeners(e.data);
                     });
 
@@ -5319,6 +5291,10 @@ window.WebRTCRoomClient = function app(options){
                 videoComposer: videoComposer,
                 audioComposer: audioComposer,
                 captureStream: captureStream,
+                stopStreamCapture: stopStreamCapture,
+                getMediaStream: function() {
+                    return _canvasMediStream;
+                },
                 addDataListener: addDataListener,
                 removeDataListener: removeDataListener,
                 mediaRecorder: function () {
@@ -6015,11 +5991,9 @@ window.WebRTCRoomClient = function app(options){
                         // get the top left position of the image
                         var x = _size.x + (( _size.width / 2) - (width / 2) * scale);
                         var y;
-                        if(options.liveStreaming.showLabelWithNames) {
-                            y = (_size.y + 36) + (((_size.height - 36) / 2) - (height / 2) * scale);
-                        } else {
-                            y = _size.y + ((_size.height / 2) - (height / 2) * scale);
-                        }
+
+                        y = _size.y + ((_size.height / 2) - (height / 2) * scale);
+
 
                         var size = Math.min(scaledHeight, scaledWidth);
                         var radius =  size / 2;
@@ -6042,22 +6016,6 @@ window.WebRTCRoomClient = function app(options){
                             width * scale, height * scale);
                         _inputCtx.restore();
 
-
-
-                        if(options.liveStreaming.showLayoutBorders) {
-                            _inputCtx.strokeStyle = "rgba(0, 0, 0, 0.5)";
-                            _inputCtx.strokeRect(_size.x, _size.y, _size.width, _size.height);
-                        }
-                    }
-
-                    if(options.liveStreaming.showLabelWithNames) {
-                        //(currentWidth/2) - (widthToGet / 2), (currentHeight/2) - (heightToGet / 2),
-                        _inputCtx.fillStyle = "#232323";
-                        _inputCtx.fillRect(_size.x, _size.y, _size.width, 36);
-
-                        _inputCtx.font = "16px Arial";
-                        _inputCtx.fillStyle = "white";
-                        _inputCtx.fillText(localParticipant.username, _size.x + 10, _size.y + 36 + 16 - 18 - 8);
                     }
 
                 }
@@ -6089,11 +6047,9 @@ window.WebRTCRoomClient = function app(options){
                     //_inputCtx.fillStyle = "#505050";
                     _inputCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
                     _inputCtx.beginPath();
-                    if(options.liveStreaming.showLabelWithNames) {
-                        _inputCtx.arc(_size.x + (_size.width / 2), (_size.y + 36) + ( (_size.height - 36) / 2), radius, 0, 2 * Math.PI);
-                    } else {
-                        _inputCtx.arc(_size.x + (_size.width / 2), _size.y + (_size.height / 2), radius, 0, 2 * Math.PI);
-                    }
+
+                    _inputCtx.arc(_size.x + (_size.width / 2), _size.y + (_size.height / 2), radius, 0, 2 * Math.PI);
+
                     _inputCtx.fill();
                     //var radius =  _size / 2  + (bass * 0.25);
 
@@ -7265,6 +7221,12 @@ window.WebRTCRoomClient = function app(options){
                 app.event.dispatch('liveStreamingEnded', {participant:participant, platform:data});
             } else if(data.type == 'localRecordingStarted') {
                 app.event.dispatch('localRecordingStarted', {participant:participant, data:data.content});
+            } else if(data.type == 'webcastStarted') {
+                app.event.dispatch('webcastStarted', {participant:participant, data:data.content});
+            } else if(data.type == 'webcastEnded') {
+                app.event.dispatch('webcastEnded', {participant:participant, data:data.content});
+            } else if(data.type == 'parallelWebcastExists') {
+                app.event.dispatch('parallelWebcastExists', {participant:participant, data:data.content});
             } else if(data.type == 'online') {
                 //log('processDataTrackMessage online')
 
@@ -10934,7 +10896,9 @@ window.WebRTCRoomClient = function app(options){
             app.disconnect(true);
         });
 
-        return     Promise.resolve(newConferenceInstance);
+        app.event.dispatch('switchRoom', {roomName: streamName});
+
+        return Promise.resolve(newConferenceInstance);
     }
 
     app.roomSwitched = function(info) {
@@ -10942,7 +10906,7 @@ window.WebRTCRoomClient = function app(options){
     }
 
     app.disconnect = function (switchRoom) {
-
+        console.log('app.disconnect', switchRoom)
         if(app.checkOnlineStatusInterval != null) {
             clearInterval(app.checkOnlineStatusInterval);
             app.checkOnlineStatusInterval = null;
@@ -10953,28 +10917,36 @@ window.WebRTCRoomClient = function app(options){
         }
 
         if(!switchRoom && app.mediaManager.fbLive.isStreaming()) {
+            console.log('app.disconnect: end fb live')
             app.mediaManager.fbLive.endStreaming();
         }
+        console.log('app.disconnect: getMediaStream', app.mediaManager.canvasComposer.getMediaStream());
+        //if(!switchRoom && app.mediaManager.canvasComposer.getMediaStream() != null) {
+            app.mediaManager.canvasComposer.stopStreamCapture();
+        //}
 
         for(var p = roomParticipants.length - 1; p >= 0; p--){
 
-            if(roomParticipants[p] == app.mediaManager.fbLive.streamingParticipant()) continue;
-            if(roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
-            if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
+            //if(roomParticipants[p] == app.mediaManager.fbLive.streamingParticipant()) continue;
+            if(roomParticipants[p] != localParticipant && roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
+            if(roomParticipants[p] != localParticipant && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
             if(!roomParticipants[p].isLocal) {
                 if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();
                 if (roomParticipants[p].iosrtcRTCPeerConnection != null) roomParticipants[p].iosrtcRTCPeerConnection.close();
             }
 
-            if(!switchRoom) roomParticipants[p].remove();
+            if((!roomParticipants[p].isLocal && switchRoom) || !switchRoom) {
+                roomParticipants[p].online = false;
+                roomParticipants[p].remove();
+            }
         }
 
-        app.event.destroy();
 
         if(socket != null) socket.disconnect();
-
         app.event.dispatch('disconnected');
+        app.event.destroy();
+
     }
 
 

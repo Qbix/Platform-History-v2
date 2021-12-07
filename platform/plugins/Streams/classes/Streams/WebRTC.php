@@ -50,7 +50,7 @@ abstract class Streams_WebRTC
 
         $token = $twilio->tokens->create();
 
-        return $token->iceServers[1];
+        return $token->iceServers;
     }
 
     /**
