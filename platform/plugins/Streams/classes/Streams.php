@@ -4904,9 +4904,12 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
-	 * Converts the publisherId and the first 10 characters of
+	 * Converts the publisherId and the first 24 characters of
 	 * an ID that is typically used as the final segment in a streamName
-	 * to a hex string starting with "0x" representing a uint256 typecd /
+	 * to a hex string starting with "0x" representing a uint256 type.
+	 * Both inputs are padded by 0's on the right in the hex string.
+	 * For example Streams::toHexString("abc", "def") returns
+	 * 0x6162630000000000646566000000000000000000000000000000000000000000
 	 * @param {string} $publisherId Takes the first 8 ASCII characters
 	 * @param {string} $streamId Takes the first 24 ASCII characters
 	 * @return {string} A hex string starting with "0x..."
@@ -4915,8 +4918,8 @@ abstract class Streams extends Base_Streams
 	{
 		$publisherHex = Q_Utils::asc2hex(substr($publisherId, 0, 8));
 		$streamHex = Q_Utils::asc2hex(substr($streamId, 0, 24));
-		return '0x' . str_pad($publisherHex, 16, '0', STR_PAD_LEFT)
-			. str_pad($streamHex, 48, '0', STR_PAD_LEFT);
+		return '0x' . str_pad($publisherHex, 16, '0', STR_PAD_RIGHT)
+			. str_pad($streamHex, 48, '0', STR_PAD_RIGHT);
 	}
 
 	/**
