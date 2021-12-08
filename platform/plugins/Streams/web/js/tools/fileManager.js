@@ -419,7 +419,10 @@
                             publisherId: fileStream.publisherId,
                             streamName: fileStream.name,
                             type: "Streams/image"
-                        }).tool("Streams/image/preview").activate(function () {
+                        }).tool("Streams/category/preview").activate(function () {
+                            var categoryPreview = Q.Tool.from(fileItemInner, "Streams/category/preview");
+                            console.log('categoryPreview', categoryPreview)
+                            categoryPreview.state.templates.edit.name = 'Streams/fileManager/category/preview/edit';
 
                         });
                     }
@@ -478,6 +481,15 @@
         + '{{#if showTitle}}'
         + '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
         + '{{/if}}'
+        + '</div></div>'
+    );
+    Q.Template.set('Streams/fileManager/category/preview/edit',
+        '<div class="Streams_preview_container Streams_preview_edit Q_clearfix">'
+        + '<div class="Streams_fileManager_file_icon_con">'
+        + '<img alt="{{alt}}" class="Streams_preview_icon">'
+        + '</div>'
+        + '<div class="Streams_preview_contents {{titleClass}}">'
+        + '<{{titleTag}} class="Streams_preview_title">{{& inplace}}</{{titleTag}}>'
         + '</div></div>'
     );
 })(window.jQuery, window);
