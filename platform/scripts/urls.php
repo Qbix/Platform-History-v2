@@ -119,6 +119,11 @@ function Q_script_urls_glob(
 			if (is_array($ignore) and in_array($ext, $ignore)) {
 				continue;
 			}
+			if (filesize($f) > Q_Config::get(
+				'Q', 'urls', 'script', 'maxFilesize', pow(2, 20)*10
+			)) { // file is too big to process
+				continue;
+			}
 			$c = file_get_contents($f);
 			$hash = hash($algo, $c);
 			$enchash = base64_encode(hex2bin($hash));
