@@ -33,10 +33,19 @@ function Assets_before_Q_responseExtras() {
 	$networks = Q_Config::expect("Users", "Web3", "chains");
 	$currencies = Q_Config::expect("Assets", "Web3", "currencies");
 	foreach ($networks as $i => $network) {
+		// if contract or rpcUrls undefined, skip this chain
+		if (!Q::ifset($network, "contract", null) || !Q::ifset($network, "rpcUrls", null)) {
+			unset($network[$i]);
+			continue;
+		}
+
+		// need for client
+		$networks[$i]["chainId"] = $i;
+
 		foreach ($currencies as $currency) {
-			if ($currency[$network["chainId"]] == "0x0000000000000000000000000000000000000000") {
+			if ($currency[$i] == "0x0000000000000000000000000000000000000000") {
 				$networks[$i]["currency"] = $currency;
-				$networks[$i]["currency"]["token"] = $currency[$network["chainId"]];
+				$networks[$i]["currency"]["token"] = $currency[$i];
 				break;
 			}
 		}
