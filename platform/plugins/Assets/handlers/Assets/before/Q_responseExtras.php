@@ -30,7 +30,7 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$networks = Q_Config::expect("Users", "Web3", "chains");
+	$networks = Q_Config::expect("Users", "apps", "web3", "TokenSociety", "chains");
 	$currencies = Q_Config::expect("Assets", "Web3", "currencies");
 	foreach ($networks as $i => $network) {
 		// if contract or rpcUrls undefined, skip this chain
