@@ -86,12 +86,17 @@
         "confirmTerms": "Samþykkja þjónustuskilmálana?",
         "facebookNoEmail": "Það vantar staðfest netfang hjá facebook reikningnum þínum. Einfaldlega skráðu þig inn á innfægan hátt.",
         "picTooltip": "Þú getur breytt þessari mynd síðar",
-        "wallet": {
+        "web3": {
             "payload": "Skráðu þig inn á {{host}} á þeim tíma {{timestamp}}",
             "alert": {
                 "title": "Beinir að Veski",
                 "content": "Þegar þú hefur lokað þessum glugga verðurðu fluttur í veskið þitt. Þegar þú hefur skráð þig inn, farðu aftur á þessa síðu."
-            }
+            },
+            "alt": "skráðu þig inn með veski"
+        },
+        "facebook": {
+            "noEmail": "Á Facebook reikningnum þínum vantar staðfest netfang. Skráðu þig einfaldlega á innfæddan hátt.",
+            "alt": "skráðu þig inn með facebook"
         }
     },
     "setIdentifier": {

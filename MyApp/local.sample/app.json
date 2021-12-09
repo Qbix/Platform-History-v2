@@ -97,10 +97,10 @@
 			}
 		},
 		"apps": {
-			"platforms": ["wallet", "facebook", "ios", "android"],
-			"export": ["wallet", "facebook"],
+			"platforms": ["web3", "facebook", "ios", "android"],
+			"export": ["web3", "facebook"],
 			/* TODO: set up your external apps on external services */
-			"wallet": {
+			"web3": {
 				"MyApp": {
 					"chain": "ETH",
 					"network": "mainnet",

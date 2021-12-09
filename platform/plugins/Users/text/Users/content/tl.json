@@ -86,12 +86,17 @@
         "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
         "facebookNoEmail": "Kulang ang iyong facebook account ng isang nakumpirma na email address. Mag-log in lamang sa katutubong paraan.",
         "picTooltip": "Maaari mong baguhin ang larawang ito mamaya",
-        "wallet": {
+        "web3": {
             "payload": "Mag-log in sa {{host}} sa oras na {{timestamp}}",
             "alert": {
                 "title": "Pag-redirect sa Wallet",
                 "content": "Kapag naisara mo na ang dayalogo na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa pahinang ito."
-            }
+            },
+            "alt": "mag-log in gamit ang wallet"
+        },
+        "facebook": {
+            "noEmail": "Walang kumpirmadong email address ang iyong facebook account. Mag-log in sa katutubong paraan.",
+            "alt": "mag login sa facebook"
         }
     },
     "setIdentifier": {

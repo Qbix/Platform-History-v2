@@ -86,12 +86,17 @@
         "confirmTerms": "Gabh ris na Cumhachan Seirbheis?",
         "facebookNoEmail": "Tha do chunntas facebook ag ionndrainn seòladh puist-d dearbhte. Dìreach dèan log a-steach san dòigh dhùthchasach.",
         "picTooltip": "Faodaidh tu an dealbh seo atharrachadh nas fhaide air adhart",
-        "wallet": {
+        "web3": {
             "payload": "Log a-steach do {{host}} aig àm {{timestamp}}",
             "alert": {
                 "title": "Ag ath-stiùireadh gu Wallet",
                 "content": "Cho luath ‘s a dhùineas tu an còmhradh seo, thèid do thoirt chun wallet agad. Às deidh dhut clàradh a-steach, till air ais chun duilleag seo."
-            }
+            },
+            "alt": "log a-steach le wallet"
+        },
+        "facebook": {
+            "noEmail": "Tha do chunntas facebook ag ionndrainn seòladh puist-d dearbhte. Dìreach log a-steach san dòigh dhùthchasach.",
+            "alt": "log a-steach le facebook"
         }
     },
     "setIdentifier": {

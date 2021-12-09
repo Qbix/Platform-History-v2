@@ -86,12 +86,17 @@
         "confirmTerms": "Aksepte kondisyon ki nan sèvis la?",
         "facebookNoEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman ale nan fason natif natal la.",
         "picTooltip": "Ou ka chanje foto sa a pita",
-        "wallet": {
+        "web3": {
             "payload": "Konekte nan {{host}} nan moman {{timestamp}}",
             "alert": {
                 "title": "Redireksyon nan bous",
                 "content": "Yon fwa ou fèmen dyalòg sa a, ou pral pran nan bous ou. Apre ou fin siyen an, retounen nan paj sa a."
-            }
+            },
+            "alt": "konekte ak bous"
+        },
+        "facebook": {
+            "noEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman konekte nan fason natif natal la.",
+            "alt": "konekte ak facebook"
         }
     },
     "setIdentifier": {

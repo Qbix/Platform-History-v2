@@ -86,12 +86,17 @@
         "confirmTerms": "Gamuchira iyo Mashandiro ebasa?",
         "facebookNoEmail": "Yako facebook account iri kushaya yakasimbiswa email kero. Ingo pinda munzira yekuzvarwa.",
         "picTooltip": "Unogona kuchinja mufananidzo uyu gare gare",
-        "wallet": {
+        "web3": {
             "payload": "Pinda mu {{host}} nenguva {{timestamp}}",
             "alert": {
                 "title": "Inonongedzera kuWallet",
                 "content": "Ukangovhara dialog iyi, uchaendeswa kuchikwama chako. Mushure mekunge mapinda, dzokerai peji ino."
-            }
+            },
+            "alt": "pinda nechikwama"
+        },
+        "facebook": {
+            "noEmail": "Yako facebook account haina email kero yakasimbiswa. Ingo pinda munzira yekuzvarwa.",
+            "alt": "pinda nefacebook"
         }
     },
     "setIdentifier": {

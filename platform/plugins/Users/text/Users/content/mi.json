@@ -86,12 +86,17 @@
         "confirmTerms": "Whakaaehia nga Ture o te Ratonga?",
         "facebookNoEmail": "Kei te ngaro to pūkete facebook i tetahi wahitau imeera kua whakaatuhia. Ka takiuru noa te huarahi taketake.",
         "picTooltip": "Ka taea te huri i tenei pikitia i muri mai",
-        "wallet": {
+        "web3": {
             "payload": "Takiuru ki {{host}} i te wa tika {{timestamp}}",
             "alert": {
                 "title": "Te Huringa ki te Putea",
                 "content": "Ka katia e koe tenei korero, ka haria atu koe ki to putea. Whai muri i to hainatanga, hoki ki tenei whaarangi."
-            }
+            },
+            "alt": "takiuru me te putea"
+        },
+        "facebook": {
+            "noEmail": "Kei te ngaro tetahi wahitau imeera kua whakapumautia to putea facebook. Me takiuru noa i te huarahi taketake.",
+            "alt": "takiuru me te pukamata"
         }
     },
     "setIdentifier": {

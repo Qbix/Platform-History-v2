@@ -86,12 +86,17 @@
         "confirmTerms": "Kas nõustute teenusetingimustega?",
         "facebookNoEmail": "Teie facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse oma loomulikult.",
         "picTooltip": "Seda pilti saate hiljem muuta",
-        "wallet": {
+        "web3": {
             "payload": "Logige sisse {{host}} ajal {{timestamp}}",
             "alert": {
                 "title": "Rahakotile ümbersuunamine",
                 "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
-            }
+            },
+            "alt": "logi sisse rahakotiga"
+        },
+        "facebook": {
+            "noEmail": "Teie Facebooki kontol puudub kinnitatud e-posti aadress. Logige lihtsalt sisse algsel viisil.",
+            "alt": "Logi sisse Facebookiga"
         }
     },
     "setIdentifier": {

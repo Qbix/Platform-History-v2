@@ -86,7 +86,7 @@
         "confirmTerms": "Sutikti su paslaugų teikimo sąlygomis?",
         "facebookNoEmail": "Jūsų „Facebook“ paskyroje nėra patvirtinto el. Pašto adreso. Tiesiog prisijunkite savo būdu.",
         "picTooltip": "Vėliau galėsite pakeisti šį paveikslėlį",
-        "wallet": {
+        "web3": {
             "payload": "Prisijunkite prie {{host}} {{timestamp}}",
             "alert": {
                 "title": "Peradresavimas į Piniginę",

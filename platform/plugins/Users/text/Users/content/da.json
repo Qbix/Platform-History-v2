@@ -86,12 +86,17 @@
         "confirmTerms": "Accepterer du servicevilkårene?",
         "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mail-adresse. Log ind på den oprindelige måde.",
         "picTooltip": "Du kan ændre dette billede senere",
-        "wallet": {
+        "web3": {
             "payload": "Log ind på {{host}} på et tidspunkt {{timestamp}}",
             "alert": {
                 "title": "Omdirigerer til Wallet",
                 "content": "Når du lukker denne dialog, bliver du ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
-            }
+            },
+            "alt": "log ind med pung"
+        },
+        "facebook": {
+            "noEmail": "Din facebook-konto mangler en bekræftet e-mailadresse. Du skal blot logge på den oprindelige måde.",
+            "alt": "Login med Facebook"
         }
     },
     "setIdentifier": {

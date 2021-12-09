@@ -86,7 +86,7 @@
         "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
         "facebookNoEmail": "Kulang ang iyong facebook account ng isang nakumpirma na email address. Mag-log in lamang sa katutubong paraan.",
         "picTooltip": "Maaari mong baguhin ang larawang ito mamaya",
-        "wallet": {
+        "web3": {
             "payload": "Mag-log in sa {{host}} sa oras na {{timestamp}}",
             "alert": {
                 "title": "Pag-redirect sa Wallet",

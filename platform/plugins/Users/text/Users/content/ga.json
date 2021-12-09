@@ -86,12 +86,17 @@
         "confirmTerms": "Glac leis na Téarmaí Seirbhíse?",
         "facebookNoEmail": "Tá seoladh ríomhphoist deimhnithe ar iarraidh i do chuntas facebook. Níl ort ach logáil isteach ar an mbealach dúchais.",
         "picTooltip": "Is féidir leat an pictiúr seo a athrú níos déanaí",
-        "wallet": {
+        "web3": {
             "payload": "Logáil isteach ar {{host}} ag am {{timestamp}}",
             "alert": {
                 "title": "Atreorú chuig Sparán",
                 "content": "Nuair a dhúnann tú an dialóg seo, tabharfar chuig do sparán tú. Tar éis duit síniú isteach, filleadh ar an leathanach seo."
-            }
+            },
+            "alt": "logáil isteach le sparán"
+        },
+        "facebook": {
+            "noEmail": "Tá seoladh ríomhphoist deimhnithe in easnamh ar do chuntas facebook. Níl ort ach logáil isteach ar an mbealach dúchais.",
+            "alt": "logáil isteach le facebook"
         }
     },
     "setIdentifier": {

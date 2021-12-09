@@ -86,12 +86,17 @@
         "confirmTerms": "Accepterar användarvillkoren?",
         "facebookNoEmail": "Ditt facebookkonto saknar en bekräftad e-postadress. Logga bara in på det ursprungliga sättet.",
         "picTooltip": "Du kan ändra den här bilden senare",
-        "wallet": {
+        "web3": {
             "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
             "alert": {
                 "title": "Omdirigerar till Wallet",
                 "content": "När du stänger den här dialogrutan kommer du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
-            }
+            },
+            "alt": "logga in med plånbok"
+        },
+        "facebook": {
+            "noEmail": "Ditt Facebook-konto saknar en bekräftad e-postadress. Logga helt enkelt på det ursprungliga sättet.",
+            "alt": "logga in med Facebook"
         }
     },
     "setIdentifier": {

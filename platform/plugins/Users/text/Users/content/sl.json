@@ -86,12 +86,17 @@
         "confirmTerms": "Sprejmete pogoje storitve?",
         "facebookNoEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domač način.",
         "picTooltip": "To sliko lahko spremenite pozneje",
-        "wallet": {
+        "web3": {
             "payload": "Prijavite se {{host}} ob {{timestamp}}",
             "alert": {
                 "title": "Preusmeritev v Denarnico",
                 "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v denarnico. Ko se prijavite, se vrnite na to stran."
-            }
+            },
+            "alt": "prijavite se z denarnico"
+        },
+        "facebook": {
+            "noEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domači način.",
+            "alt": "Prijava s Facebookom"
         }
     },
     "setIdentifier": {

@@ -86,12 +86,17 @@
         "confirmTerms": "Sutikti su paslaugų teikimo sąlygomis?",
         "facebookNoEmail": "Jūsų „Facebook“ paskyroje nėra patvirtinto el. Pašto adreso. Tiesiog prisijunkite savo būdu.",
         "picTooltip": "Vėliau galėsite pakeisti šį paveikslėlį",
-        "wallet": {
+        "web3": {
             "payload": "Prisijunkite prie {{host}} {{timestamp}}",
             "alert": {
                 "title": "Peradresavimas į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
-            }
+            },
+            "alt": "prisijungti su pinigine"
+        },
+        "facebook": {
+            "noEmail": "Jūsų Facebook paskyroje trūksta patvirtinto el. pašto adreso. Tiesiog prisijunkite vietiniu būdu.",
+            "alt": "prisijunk su facebook"
         }
     },
     "setIdentifier": {

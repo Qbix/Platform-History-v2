@@ -1013,7 +1013,7 @@
 				 * @param {function} callback
 				 */
 				checkProvider: function (network, callback) {
-					Q.Users.Wallet.connect(function (err, provider) {
+					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1022,7 +1022,7 @@
 						if (window.ethereum.chainId === network.chainId) {
 							Assets.Web3.NFT.getContract(network, callback);
 						} else { // if no, lead to switch network
-							Q.Users.Wallet.setNetwork(network, function () {
+							Q.Users.Web3.setNetwork(network, function () {
 								// after network switched need update contract
 								Assets.Web3.NFT.contracts[network.chainId] = null;
 								Assets.Web3.NFT.getContract(network, callback);
@@ -1038,7 +1038,7 @@
 				 * @params {Object} network
 				 * @params {function} callback
 				 * @params {object} [options]
-				 * @params {boolean} [options.checkWallet=false] If true, check wallet before create contract
+				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
 				 */
 				getContract: function (network, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1046,9 +1046,9 @@
 					}
 
 					var _subMethod = function (contract) {
-						// if option checkWallet defined, check if wallet connected
-						if (Q.getObject("checkWallet", options) === true) {
-							return Q.Users.Wallet.connect(function (err, provider) {
+						// if option checkWeb3 defined, check if web3 wallet connected
+						if (Q.getObject("checkWeb3", options) === true) {
+							return Q.Users.Web3.connect(function (err, provider) {
 								Q.handle(callback, null, [err, contract]);
 							});
 						}

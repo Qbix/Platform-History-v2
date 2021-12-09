@@ -86,12 +86,17 @@
         "confirmTerms": "Pranoni Kushtet e Shërbimit?",
         "facebookNoEmail": "Në llogarinë tuaj në facebook mungon një adresë e konfirmuar e-mail. Thjesht futuni në mënyrën amtare.",
         "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë",
-        "wallet": {
+        "web3": {
             "payload": "Hyni në {{host}} në kohën {{timestamp}}",
             "alert": {
                 "title": "Përcjellja në Wallet",
                 "content": "Pasi ta mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të regjistroheni, kthehuni në këtë faqe."
-            }
+            },
+            "alt": "hyni me portofol"
+        },
+        "facebook": {
+            "noEmail": "Llogarisë suaj në facebook i mungon një adresë emaili e konfirmuar. Thjesht regjistrohuni në mënyrë amtare.",
+            "alt": "Kyçuni nëpërmjet facebook"
         }
     },
     "setIdentifier": {

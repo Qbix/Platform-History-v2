@@ -86,12 +86,17 @@
         "confirmTerms": "¿Acepta os termos de servizo?",
         "facebookNoEmail": "A súa conta de Facebook carece dun enderezo de correo electrónico confirmado. Basta con iniciar sesión na forma nativa.",
         "picTooltip": "Máis tarde podes cambiar esta foto",
-        "wallet": {
+        "web3": {
             "payload": "Iniciar sesión en {{host}} á vez {{timestamp}}",
             "alert": {
                 "title": "Redireccionando a Wallet",
                 "content": "Unha vez que peche este diálogo, dirixirase á súa carteira. Despois de iniciar sesión, volve a esta páxina."
-            }
+            },
+            "alt": "iniciar sesión con carteira"
+        },
+        "facebook": {
+            "noEmail": "Falta un enderezo de correo electrónico confirmado na túa conta de Facebook. Simplemente inicie sesión na forma nativa.",
+            "alt": "inicia sesión con facebook"
         }
     },
     "setIdentifier": {

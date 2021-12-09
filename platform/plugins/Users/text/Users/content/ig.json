@@ -86,12 +86,17 @@
         "confirmTerms": "Nabata Usoro ọrụ?",
         "facebookNoEmail": "Akaụntụ email gị na-efu na adreesị ozi-e enyochaghị. Nanị banye n&#39;ụzọ amaala.",
         "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa",
-        "wallet": {
+        "web3": {
             "payload": "Banye na {{host}} n&#39;oge {{timestamp}}",
             "alert": {
                 "title": "Na -atụgharị na obere akpa",
                 "content": "Ozugbo ị mechiri mkparịta ụka a, a ga -akpọga gị n&#39;akpa gị. Mgbe ị banyere, laghachi na ibe a."
-            }
+            },
+            "alt": "banye na obere akpa"
+        },
+        "facebook": {
+            "noEmail": "Akaụntụ Facebook gị enweghị adreesị ozi-e ekwenyesiri ike. Naanị banye n&#39;ụzọ nwa amaala.",
+            "alt": "banye na facebook"
         }
     },
     "setIdentifier": {

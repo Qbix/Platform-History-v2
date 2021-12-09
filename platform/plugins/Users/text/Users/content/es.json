@@ -86,12 +86,17 @@
         "confirmTerms": "¿Acepta los términos del servicio?",
         "facebookNoEmail": "A su cuenta de Facebook le falta una dirección de correo electrónico confirmada. Simplemente inicie sesión de forma nativa.",
         "picTooltip": "Puedes cambiar esta imagen más tarde",
-        "wallet": {
+        "web3": {
             "payload": "Inicie sesión en {{host}} a la hora {{timestamp}}",
             "alert": {
                 "title": "Redirigiendo a Wallet",
                 "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
-            }
+            },
+            "alt": "iniciar sesión con billetera"
+        },
+        "facebook": {
+            "noEmail": "A su cuenta de Facebook le falta una dirección de correo electrónico confirmada. Simplemente inicie sesión de forma nativa.",
+            "alt": "iniciar sesión con Facebook"
         }
     },
     "setIdentifier": {

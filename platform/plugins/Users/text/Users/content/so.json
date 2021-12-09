@@ -86,12 +86,17 @@
         "confirmTerms": "Oggolow shuruudaha adeegga?",
         "facebookNoEmail": "Koontadaada facebook ayaa ka maqan cinwaan email ah oo la xaqiijiyay. Si fudud u gal habka asalka ah.",
         "picTooltip": "Waad beddeli kartaa sawirkan goor dambe",
-        "wallet": {
+        "web3": {
             "payload": "Gal {{host}} wakhtiga {{timestamp}}",
             "alert": {
                 "title": "Dib ugu noqoshada Wallet",
                 "content": "Markaad xirto wada hadalkan, waxaa lagu geyn doonaa boorsadaada. Kadib markaad saxiixdo, ku noqo boggan."
-            }
+            },
+            "alt": "la gal boorsada"
+        },
+        "facebook": {
+            "noEmail": "Koontadaada facebook waxaa ka maqan ciwaanka iimaylka la xaqiijiyay. Si fudud u gal habka hooyo",
+            "alt": "gal facebook"
         }
     },
     "setIdentifier": {

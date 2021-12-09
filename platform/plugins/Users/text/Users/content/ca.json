@@ -86,12 +86,17 @@
         "confirmTerms": "Accepteu les Condicions del servei?",
         "facebookNoEmail": "Al vostre compte de Facebook falta una adreça de correu electrònic confirmada. Simplement inicieu la sessió amb la forma nativa.",
         "picTooltip": "Podeu canviar aquesta imatge més endavant",
-        "wallet": {
+        "web3": {
             "payload": "Inicieu la sessió a {{host}} alhora {{timestamp}}",
             "alert": {
                 "title": "Redirecció a Wallet",
                 "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
-            }
+            },
+            "alt": "inicieu sessió amb la cartera"
+        },
+        "facebook": {
+            "noEmail": "Al teu compte de Facebook li falta una adreça de correu electrònic confirmada. Simplement inicieu sessió de manera nativa.",
+            "alt": "Inicia sessió amb Facebook"
         }
     },
     "setIdentifier": {

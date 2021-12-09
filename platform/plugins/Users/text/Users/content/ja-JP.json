@@ -86,7 +86,7 @@
         "confirmTerms": "利用規約に同意しますか？",
         "facebookNoEmail": "Facebookアカウントに確認済みのメールアドレスがありません。ネイティブの方法でログインするだけです。",
         "picTooltip": "この写真は後で変更できます",
-        "wallet": {
+        "web3": {
             "payload": "時間{{timestamp}}に{{host}}にログインします",
             "alert": {
                 "title": "ウォレットへのリダイレクト",

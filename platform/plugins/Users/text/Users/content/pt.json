@@ -86,12 +86,17 @@
         "confirmTerms": "Aceite os Termos de Serviço?",
         "facebookNoEmail": "Sua conta do Facebook está faltando um endereço de e-mail confirmado. Simplesmente faça o log in nativo.",
         "picTooltip": "Você pode mudar esta foto depois",
-        "wallet": {
+        "web3": {
             "payload": "Faça login em {{host}} às {{timestamp}}",
             "alert": {
                 "title": "Redirecionando para carteira",
                 "content": "Depois de fechar esta caixa de diálogo, você será direcionado para sua carteira. Depois de entrar, volte a esta página."
-            }
+            },
+            "alt": "faça login com carteira"
+        },
+        "facebook": {
+            "noEmail": "Falta um endereço de e-mail confirmado em sua conta do Facebook. Simplesmente faça o login da maneira nativa.",
+            "alt": "Entrar com o Facebook"
         }
     },
     "setIdentifier": {

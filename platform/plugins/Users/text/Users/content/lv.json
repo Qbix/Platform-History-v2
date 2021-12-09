@@ -86,12 +86,17 @@
         "confirmTerms": "Vai piekrītat pakalpojumu sniegšanas noteikumiem?",
         "facebookNoEmail": "Jūsu facebook kontā nav apstiprinātas e-pasta adreses. Vienkārši piesakieties dabiskā veidā.",
         "picTooltip": "Šo attēlu var mainīt vēlāk",
-        "wallet": {
+        "web3": {
             "payload": "Piesakieties {{host}} laikā {{timestamp}}",
             "alert": {
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, jūs nonāksit savā makā. Pēc pierakstīšanās atgriezieties šajā lapā."
-            }
+            },
+            "alt": "piesakieties ar maku"
+        },
+        "facebook": {
+            "noEmail": "Jūsu Facebook kontā trūkst apstiprinātas e-pasta adreses. Vienkārši piesakieties vietējā veidā.",
+            "alt": "piesakieties ar facebook"
         }
     },
     "setIdentifier": {
