@@ -996,7 +996,6 @@
 		 * @class Assets.Web3
 		 */
 		Web3: {
-			
 			NFT: {
 				onTokenRemovedFromSale: new Q.Event(),
 				onTokenAddedToSale: new Q.Event(),
@@ -1013,7 +1012,7 @@
 				 * @param {function} callback
 				 */
 				checkProvider: function (network, callback) {
-					Q.Users.Wallet.connect(function (err, provider) {
+					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1022,7 +1021,7 @@
 						if (window.ethereum.chainId === network.chainId) {
 							Assets.Web3.NFT.getContract(network, callback);
 						} else { // if no, lead to switch network
-							Q.Users.Wallet.setNetwork(network, function () {
+							Q.Users.Web3.setNetwork(network, function () {
 								// after network switched need update contract
 								Assets.Web3.NFT.contracts[network.chainId] = null;
 								Assets.Web3.NFT.getContract(network, callback);
@@ -1038,17 +1037,22 @@
 				 * @params {Object} network
 				 * @params {function} callback
 				 * @params {object} [options]
-				 * @params {boolean} [options.checkWallet=false] If true, check wallet before create contract
+				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
 				 */
 				getContract: function (network, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
 						return Q.handle(callback, null, ["Ethereum provider not found", null]);
 					}
 
+					// if network is a chainId, convert to network
+					if (Q.typeOf(network) === "string") {
+						network = Assets.Web3.NFT.networks[network];
+					}
+
 					var _subMethod = function (contract) {
-						// if option checkWallet defined, check if wallet connected
-						if (Q.getObject("checkWallet", options) === true) {
-							return Q.Users.Wallet.connect(function (err, provider) {
+						// if option checkWeb3 defined, check if web3 wallet connected
+						if (Q.getObject("checkWeb3", options) === true) {
+							return Q.Users.Web3.connect(function (err, provider) {
 								Q.handle(callback, null, [err, contract]);
 							});
 						}
@@ -1087,6 +1091,26 @@
 						Q.handle(Assets.Web3.NFT.onContractUpdated(network.chainId), null, [contract]);
 
 						return _subMethod(contract);
+					});
+				},
+				/**
+				 * Get amount of tokens by wallet and network
+				 * @method balanceOf
+				 * @params {String} tokenId NFT tokenId
+				 * @params {Object} network
+				 * @params {function} callback
+				 */
+				balanceOf: function (wallet, network, callback) {
+					Assets.Web3.NFT.getContract(network, function (err, contract) {
+						if (err) {
+							Q.handle(callback, null, [err]);
+						}
+
+						contract.balanceOf(wallet).then(function (tokensAmount) {
+							Q.handle(callback, null, [null, tokensAmount]);
+						}, function (err) {
+							Q.handle(callback, null, [err.reason]);
+						});
 					});
 				},
 				/**
@@ -1399,7 +1423,9 @@
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",
 		"Assets/history": "{{Assets}}/js/tools/history.js",
-		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js"
+		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
+		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
+		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
 	});
 	
 	Q.onInit.add(function () {
