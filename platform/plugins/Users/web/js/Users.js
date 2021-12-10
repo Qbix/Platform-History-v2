@@ -3838,12 +3838,13 @@
 				console.warn("id required for Portis wallet");
 			}
 
+			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
 			Users.Web3.web3Modal = new window.Web3Modal.default({
 				//chain: options.chain,
 				//network: options.network,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
-				disableInjectedProvider: Users.Web3.disableInjectedProvider // optional. For MetaMask / Brave / Opera.
+				disableInjectedProvider: disableInjectedProvider // optional. For MetaMask / Brave / Opera.
 			});
 
 			return Users.Web3.web3Modal;

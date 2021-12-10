@@ -92,13 +92,5 @@ function Users_before_Q_responseExtras()
 		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
-
-		if ($a = Q_Config::get("Users", "apps", "web3", $app, array())) {
-			$p = $a['providers'];
-		}
-		// $p = Q_Config::get("Users", "apps", "web3", $app, "providers");
-		// $providers = array_keys($p);
-		// Q_Response::setScriptData("Q.plugins.Users.Web3.providers", $providers);
-		// Q_Response::setScriptData("Q.plugins.Users.Web3.disableInjectedProvider", Q_Config::get("Users", "web3", "disableInjectedProvider", false));
 	}
 }

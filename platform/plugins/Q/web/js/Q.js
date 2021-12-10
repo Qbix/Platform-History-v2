@@ -11481,6 +11481,7 @@ Q.Pointer = {
 	start: function _Q_Pointer_start(params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
 		return function (e) {
+			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Pointer.recentlyScrolled) {
 				Q.Pointer.startedWhileRecentlyScrolled = true;
 			} else {
