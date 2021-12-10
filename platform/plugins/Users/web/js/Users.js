@@ -3880,7 +3880,7 @@
 		 * @param {Function} callback
 		 */
 		disconnect: function (callback) {
-			Q.Users.disconnect.web3(appId, p.fill('web3'));
+			Q.Users.disconnect.web3(Q.info.app, p.fill('web3'));
 			localStorage.removeItem('walletconnect');
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Q.handle(callback);
