@@ -66,7 +66,53 @@ class Q
 	}
 	
 	/**
-	 * Used to get information depeer inside arrarys and objects
+	 * Used to unset information deep inside arrays and objects
+	 * @method getObject
+	 * @param {&mixed} $ref
+	 *  The reference to test. Only lvalues can be passed.
+	 * @param {array} $path
+	 *  An array of one or more strings or numbers, which will be used to
+	 *  index deeper into the contained arrays or objects.
+	 * @return {boolean} Whether the value was found, before being unset
+	 */
+	static function unsetObject(& $ref, $path, $def=null)
+	{
+		$ref2 = &$ref;
+		if (is_string($path)) {
+			$path = array($path);
+		}
+		$count = count($path);
+		for ($i=0; $i<$count; ++$i) {
+			$k = $path[$i];
+			if (is_array($ref2)) {
+				$wasSet = array_key_exists($k, $ref2);
+				if (!$wasSet) {
+					return false;
+				}
+				if ($i == $count - 1) {
+					$wasSet = array_key_exists($k, $ref2);
+					unset($ref2[$k]);
+					return true;
+				}
+				$ref2 = &$ref2[$k];
+			} else if (is_object($ref2)) {
+				$wasSet = property_exists($ref2, $k);
+				if (!$wasSet) {
+					return false;
+				}
+				if ($i == $count - 1) {
+					unset($ref2->$k);
+					return true;
+				}
+				$ref2 = &$ref2->$k;
+			}
+		}
+		return false;
+	}
+	
+
+	/**
+	 * Used to get information depeer inside arrays and objects
 	 * @method getObject
 	 * @param {&mixed} $ref
 	 *  The reference to test. Only lvalues can be passed.

@@ -253,13 +253,39 @@
 				}
 			}
 		},
-		"Web3": {
-			"providers": {
-				"WalletConnect": true,
-				"Fortmatic": false,
-				"Portis": false
+		"web3": {
+			"contracts": {
+
 			},
-			"disableInjectedProvider": false
+			"chains": {
+				"0x1": {
+					"name": "Ethereum Mainnet",
+					"publicRPC": "https://main-light.eth.linkpool.io/",
+					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws"
+				},
+				"0x3": {
+					"name": "Ropsten"
+				},
+				"0x4": {
+					"name": "Rinkeby",
+					"publicRPC": "https://main-light.eth.linkpool.io/",
+					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws"
+				},
+				"0x5": {
+					"name": "Goerli",
+					"publicRPC": "https://goerli-light.eth.linkpool.io/",
+					"publicWebsocket": "wss://goerli-light.eth.linkpool.io/ws"
+				},
+				"0x38": {
+					"name": "Binance SmartChain",
+					"publicRPC": "https://bsc-dataseed.binance.org/",
+					"publicWebsocket": "wss://bsc-ws-node.nariox.org:443"
+				},
+				"0x61": {
+					"name": "Binance Smart Chain Testnet",
+					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545"
+				}
+			}
 		}
 	}
 }

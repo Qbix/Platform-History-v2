@@ -22,34 +22,103 @@
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      */
-    Q.Tool.define("Assets/NFT/preview", function(options) {
-        var tool = this;
-        var state = tool.state;
-        var data = state.data;
-        var $toolElement = $(this.element);
+    Q.Tool.define("Assets/NFT/preview", ["Streams/preview"], function(options, preview) {
+            var tool = this;
+            var state = tool.state;
+            var previewState = preview.state;
+            var $toolElement = $(this.element);
+            tool.preview = preview;
 
-        if (Q.isEmpty(data)) {
-            return Q.alert("data required!");
-        }
+            // <set Streams/preview imagepicker settings>
+            previewState.imagepicker.showSize = state.imagepicker.showSize;
+            previewState.imagepicker.fullSize = state.imagepicker.fullSize;
+            previewState.imagepicker.save = state.imagepicker.save;
+            previewState.imagepicker.saveSizeName = {};
+            Q.each(NFT.icon.sizes, function (i, size) {
+                previewState.imagepicker.saveSizeName[size] = size;
+            });
+            // </set Streams/preview imagepicker settings>
 
-        if (Q.typeOf(data) === "string") {
-            data = JSON.parse(data);
-        }
+            var pipe = Q.pipe(["stylesheet", "text", "interests", "likes"], function (params, subjects) {
+                if (!previewState.streamName) {
+                    previewState.onComposer.add(tool.composer.bind(tool), tool);
+                    return;
+                }
 
-        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
-            $toolElement.addClass("Q_working");
+                previewState.onRefresh.add(function (stream) {
+                    tool.stream = stream;
 
-            var pipe = new Q.pipe(["author", "owner", "commissionInfo", "saleInfo"], function (params, subjects) {
-                var author = params.author[1];
-                var owner = params.owner[1];
-                var commissionInfo = params.commissionInfo[1];
-                var saleInfo = params.saleInfo[1];
+                    $toolElement.addClass("Q_working");
 
-                tool.refresh(data, author, owner, commissionInfo, saleInfo);
-                $toolElement.removeClass("Q_working");
+                    var pipe = new Q.pipe(["author", "owner", "commissionInfo", "saleInfo"], function (params, subjects) {
+                        var author = params.author[1];
+                        var owner = params.owner[1];
+                        var commissionInfo = params.commissionInfo[1];
+                        var saleInfo = params.saleInfo[1];
 
-                Q.Users.Wallet.onAccountsChanged.set(function () {
-                    tool.refresh(data, author, owner, commissionInfo, saleInfo);
+                        tool.refresh(stream, author, owner, commissionInfo, saleInfo);
+                        $toolElement.removeClass("Q_working");
+
+                        Q.Users.Web3.onAccountsChanged.set(function () {
+                            tool.refresh(stream, author, owner, commissionInfo, saleInfo);
+                        }, tool);
+                    });
+
+                    var _fallback = function () {
+                        pipe.fill("author")(stream.getAttribute("author"));
+                        pipe.fill("owner")();
+                        pipe.fill("commissionInfo")();
+                        pipe.fill("saleInfo")({
+                            isSale: false,
+                            price: null,
+                            currencyToken: null
+                        });
+                    };
+                    tool.tokenId = stream.getAttribute("tokenId");
+                    tool.chainId = stream.getAttribute("chainId") || stream.getAttribute("network");
+                    $toolElement.attr("data-tokenId", tool.tokenId);
+                    $toolElement.attr("data-chainId", tool.chainId);
+
+                    tool.network = NFT.networks.filter(obj => { return obj.chainId === tool.chainId })[0];
+
+                    if (!tool.tokenId) {
+                        return _fallback();
+                    }
+
+                    if (state.useWeb3) {
+                        Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", tool.tokenId, tool.network.chainId, !!state.updateCache, function (err, data) {
+                            state.updateCache = false;
+
+                            var msg = Q.firstErrorMessage(err, data);
+                            if (msg) {
+                                return console.error(msg);
+                            }
+
+                            var currencyToken = this.saleInfo[0];
+                            var price = this.saleInfo[1];
+                            var priceDecimal = price ? parseInt(price)/1e18 : null;
+                            var isSale = this.saleInfo[2];
+
+                            pipe.fill("author")(null, this.author || stream.getAttribute("author"));
+                            pipe.fill("owner")(null, this.owner || "");
+                            pipe.fill("commissionInfo")(null, this.commissionInfo || "");
+                            pipe.fill("saleInfo")(null, {
+                                isSale: isSale,
+                                price: price,
+                                priceDecimal: priceDecimal,
+                                currencyToken: currencyToken
+                            });
+                        }]);
+                    } else {
+                        if (tool.chainId !== window.ethereum.chainId) {
+                            return _fallback();
+                        }
+
+                        Q.handle(NFT.getAuthor, tool, [tool.tokenId, tool.network, pipe.fill("author")]);
+                        Q.handle(NFT.getOwner, tool, [tool.tokenId, tool.network, pipe.fill("owner")]);
+                        Q.handle(NFT.commissionInfo, tool, [tool.tokenId, tool.network, pipe.fill("commissionInfo")]);
+                        Q.handle(NFT.saleInfo, tool, [tool.tokenId, tool.network, pipe.fill("saleInfo")]);
+                    }
                 }, tool);
             });
 
