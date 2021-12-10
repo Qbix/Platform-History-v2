@@ -12372,6 +12372,10 @@ Q.Pointer = {
 var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
+var _setCancelClickFalse = Q.debounce(function () {
+	Q.Pointer.canceledClick = false;
+}, 300);
+
 function _cancelClickBriefly(event) {
 	// if input element stuff exceeds width of element, blur will lead to scroll element to the start
 	// this will lead to cancel first click on submit button because before click fired blur from input
@@ -12383,9 +12387,7 @@ function _cancelClickBriefly(event) {
 		return false;
 	}
 	Q.Pointer.cancelClick(true);
-	setTimeout(Q.debounce(function () {
-		Q.Pointer.canceledClick = false;
-	}, 300), 100);
+	setTimeout(_setCancelClickFalse, 100);
 }
 
 function _stopHint(img, container) {
