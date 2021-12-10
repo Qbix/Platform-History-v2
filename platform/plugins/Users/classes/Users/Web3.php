@@ -37,15 +37,29 @@ class Users_Web3 extends Base_Users_Web3 {
 			$appId = Q::app();
 		}
 
-		list($chainId, $appInfo) = Users::appInfo('wallet', $appId, true);
+		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
-		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
-		if (!$chainId) {
+
+		// get chainId
+		$chainId = null;
+		$chains = Q::ifset($appInfo, "chains", []);
+		if (empty($chains)) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "'Users/apps/$appId/chainId'"
+				'fieldpath' => "'Users/apps/$appId/chains'"
 			));
+		}
+
+		foreach ($chains as $chain) {
+			if ($chain["contract"] == $contractAddress) {
+				$chainId = $chain["chainId"];
+				break;
+			}
+		}
+
+		if (empty($chainId)) {
+			throw new Exception("Chain for contract ".$contractAddress." no exists");
 		}
 
 		if ($caching && $cacheDuration) {
@@ -60,12 +74,17 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		if (empty($appInfo['rpcUrls'][0])) {
+		$rpcUrl = Q::ifset($chain, "rpcUrls", 0, null);
+		if (!$rpcUrl) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/rpcUrls[0]"
+				'fieldpath' => "Users/apps/$appId/chains/$chainId/rpcUrls[0]"
 			));
 		}
-		$rpcUrl = $appInfo['rpcUrls'][0];
+
+		$projectId = Q::ifset($chain, "infura", "projectId", null);
+		if ($projectId) {
+			$rpcUrl = Q::interpolate($rpcUrl, compact("projectId"));
+		}
 
 		$filename = self::getABIFilename($contractAddress);
 		if (!is_file($filename)) {
@@ -79,6 +98,11 @@ class Users_Web3 extends Base_Users_Web3 {
 		->at($contractAddress)
 		->call($methodName, $params,
 		function ($err, $results) use (&$data) {
+			$errMessage = Q::ifset($err, "message", null);
+			if ($errMessage) {
+				throw new Exception($errMessage);
+			}
+
 			if (empty($results)) {
 				$data = $results;
 				return;
@@ -97,10 +121,12 @@ class Users_Web3 extends Base_Users_Web3 {
 		});
 
 		if ($data instanceof \phpseclib\Math\BigInteger) {
-			$cache->result = $data->toString();
+			$data = $data->toString();
 		} else {
-			$cache->result = Q::json_encode($data, true);
+			$data = Q::json_encode($data, true);
 		}
+
+		$cache->result = $data;
 
 		if (($data && $caching !== false)
 		or (!$data && $caching === true)) {
@@ -111,11 +137,17 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
-	 * Get the filename of the ABI file for a contract. Taken from Users/web3/contracts/$contractName/ABIFilename config usually.
+	 * Get the filename of the ABI file for a contract. 
+	 * Taken from Users/web3/contracts/$contractName/filename config.
+	 * As a fallback tries Users/web3/contracts/$contractName/dir and if found,
+	 * appends "/$contractAddress.json". As a last resort, tries
+	 * Users/web3/contracts/$contractName/url and calls filenameFromUrl().
+	 * You can interpolate "baseUrl" and "contractAddress" variables in the strings.
+	 * 
 	 * @method getABIFilename
 	 * @static
 	 * @param {string} $contractAddress The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
-	 * @return {string}
+	 * @return {string|null} Tries filename, then $dir/$contractAddress.json, then url from config
 	 */
 	static function getABIFilename ($contractAddress)
 	{
@@ -132,25 +164,25 @@ class Users_Web3 extends Base_Users_Web3 {
 		if ($filename) {
 			return $filename;
 		}
-		if (!isset(self::$abiFilenames[$contractAddress])) {
-			$config = Q_Config::get(
-				'Users', 'web3', 'contracts', $contractAddress, array()
-			);
-			if (!empty($config['filename'])) {
-				$filename = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
-				return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
-			}
-			if (!empty($config['dir'])) {
-				$dir = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
-				return APP_WEB_DIR . DS . implode(DS, explode('/', $dir))
-					. DS . "$contractAddress.json";
-			}
-			if (!empty($config['url'])) {
-				$url = Q_Uri::interpolateUrl($url, compact('contractAddress'));
-				return Q_Uri::filenameFromUrl($url);
-			}
+
+		$baseUrl = Q_Request::baseUrl();
+		$config = Q_Config::get(
+			'Users', 'web3', 'contracts', $contractAddress, array()
+		);
+		if (!empty($config['filename'])) {
+			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
+			return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
 		}
-		return self::$abiFilenames[$contractAddress];
+		if (!empty($config['dir'])) {
+			return APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
+				. DS . "$contractAddress.json";
+		}
+		if (!empty($config['url'])) {
+			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
+			return Q_Uri::filenameFromUrl($url);
+		}
+
+		return implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
 	}
 
 	/**
