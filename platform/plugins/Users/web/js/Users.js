@@ -1018,7 +1018,7 @@
 			}
 			if (o.using.indexOf('web3') >= 0) {
 				loggedOutOf.web3 = true;
-				Users.Web3.disconnect();
+				Users.disconnect.web3(appId, p.fill('web3'));
 			}
 			if (o.using.indexOf('native') >= 0) {
 				if (Q.isEmpty(loggedOutOf)) {
@@ -1088,6 +1088,8 @@
 		if (Users.disconnect.web3.occurring) {
 			return false;
 		}
+		localStorage.removeItem('walletconnect');
+		localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 		Users.disconnect.web3.occurring = true;
 		var p = Users.Web3.provider;
 		if (window.Web3Modal && Web3Modal.default) {
@@ -3870,20 +3872,6 @@
 				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
-		},
-
-
-		/**
-		 * Disconnect web3 wallet session, so calling connect()
-		 * will open web3modal chooser again
-		 * @method disconnect
-		 * @param {Function} callback
-		 */
-		disconnect: function (callback) {
-			Q.Users.disconnect.web3(Q.info.app, p.fill('web3'));
-			localStorage.removeItem('walletconnect');
-			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
-			Q.handle(callback);
 		},
 
 		/**
