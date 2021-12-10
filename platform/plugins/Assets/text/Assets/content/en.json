@@ -250,6 +250,9 @@
             }
 
         },
+        "list": {
+
+        },
         "Back": "Back to Collection"
     }
 }

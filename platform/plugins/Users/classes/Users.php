@@ -2093,7 +2093,7 @@ abstract class Users extends Base_Users
 					break;
 				case 'ios':
 				case 'android':
-				case 'wallet':
+				case 'web3':
 					if (!is_string($identifier)) {
 						throw new Q_Exception_WrongValue(
 							array('field' => 'identifier', 'range' => 'string xid')
