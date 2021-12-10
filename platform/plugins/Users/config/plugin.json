@@ -253,7 +253,7 @@
 				}
 			}
 		},
-		"Web3": {
+		"web3": {
 			"contracts": {
 
 			},
@@ -285,13 +285,7 @@
 					"name": "Binance Smart Chain Testnet",
 					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545"
 				}
-			},
-			"providers": {
-				"WalletConnect": true,
-				"Fortmatic": false,
-				"Portis": false
-			},
-			"disableInjectedProvider": false
+			}
 		}
 	}
 }

@@ -30,7 +30,7 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$networks = Q_Config::expect("Users", "Web3", "chains");
+	$networks = Q_Config::expect("Users", "web3", "chains");
 	$currencies = Q_Config::expect("Assets", "Web3", "currencies");
 	foreach ($networks as $i => $network) {
 		foreach ($currencies as $currency) {
