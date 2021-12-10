@@ -11462,6 +11462,11 @@ Q.Clipboard = {
 	}
 };
 
+function _Q_Pointer_start_end_handler (e) {
+	Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
+	Q.Pointer.stopCancelingClicksOnScroll(e.target);
+}
+
 /**
  * Methods for working with pointer and touchscreen events
  * @class Q.Pointer
@@ -11476,9 +11481,8 @@ Q.Pointer = {
 		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
 		return function (e) {
 			Q.Pointer.startCancelingClicksOnScroll(e.target);
-			Q.addEventListener(e.target, Q.Pointer.end, function () {
-				Q.Pointer.stopCancelingClicksOnScroll(e.target);
-			});
+			Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
+			Q.addEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
 			return params.original.apply(this, arguments);
 		};
 	},
