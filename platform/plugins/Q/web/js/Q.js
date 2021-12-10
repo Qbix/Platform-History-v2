@@ -11463,6 +11463,7 @@ Q.Clipboard = {
 };
 
 function _Q_Pointer_start_end_handler (e) {
+	Q.Pointer.startedWhileRecentlyScrolled = false;
 	Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
 	Q.Pointer.stopCancelingClicksOnScroll(e.target);
 }
@@ -11479,6 +11480,11 @@ Q.Pointer = {
 	 */
 	start: function _Q_Pointer_start(params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		if (Q.Pointer.recentlyScrolled) {
+			Q.Pointer.startedWhileRecentlyScrolled = true;
+		} else {
+			Q.Pointer.canceledClick = false;
+		}
 		return function (e) {
 			Q.Pointer.startCancelingClicksOnScroll(e.target);
 			Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
@@ -12227,8 +12233,8 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
-	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to change
-	 *   how many milliseconds until setting Q.Pointer.canceledClick = false .
+	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to wait
+	 *   some milliseconds until setting Q.Pointer.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
@@ -12321,9 +12327,9 @@ Q.Pointer = {
 	startCancelingClicksOnScroll: function (element) {
 		var sp;
 		if (element && (sp = element.scrollingParent(true))) {
-			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
+			Q.addEventListener(sp, 'scroll', _handleScroll);
 		} else {
-			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
+			Q.addEventListener(document.body, 'scroll', _handleScroll, true);
 		}
 	},
 	/**
@@ -12336,9 +12342,9 @@ Q.Pointer = {
 	stopCancelingClicksOnScroll: function (element) {
 		if (element) {
 			var sp = element.scrollingParent(true);
-			Q.removeEventListener(sp, 'scroll', _cancelClickBriefly);
+			Q.removeEventListener(sp, 'scroll', _handleScroll);
 		} else {
-			Q.removeEventListener(document.body, 'scroll', _cancelClickBriefly);
+			Q.removeEventListener(document.body, 'scroll', _handleScroll);
 		}
 	},
 	/**
@@ -12372,22 +12378,28 @@ Q.Pointer = {
 var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
-var _setCancelClickFalse = Q.debounce(function () {
-	Q.Pointer.canceledClick = false;
+var _setRecentlyScrolledFalse = Q.debounce(function () {
+	Q.Pointer.recentlyScrolled = false;
 }, 300);
 
-function _cancelClickBriefly(event) {
+function _handleScroll(event) {
 	// if input element stuff exceeds width of element, blur will lead to scroll element to the start
 	// this will lead to cancel first click on submit button because before click fired blur from input
-	if (Q.typeOf(event).toLowerCase() === "event" && ["input", "select"].includes(Q.getObject("target.tagName", event).toLowerCase())) {
+	if (Q.typeOf(event).toLowerCase() === "event"
+	&& ["input", "select"].includes(
+		Q.getObject("target.tagName", event).toLowerCase())
+	) {
 		return false;
 	}
 	if (Q.Pointer.latest.touches.length) {
 		// no need to cancel click here, user will have to lift their fingers to click
 		return false;
 	}
-	Q.Pointer.cancelClick(true);
-	setTimeout(_setCancelClickFalse, 100);
+	Q.Pointer.recentlyScrolled = true;
+	setTimeout(_setRecentlyScrolledFalse, 100);
+	var shouldStopCancelClick = !Q.Pointer.movedTooMuchForClickLastTime
+		&& !Q.Pointer.startedWhileRecentlyScrolled;
+	Q.Pointer.cancelClick(true, null, null, shouldStopCancelClick ? 300 : 0);
 }
 
 function _stopHint(img, container) {
@@ -12549,6 +12561,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			comingFromPointerMovement: true
 		})) {
 			_pos = false;
+			Q.Pointer.movedTooMuchForClickLastTime = true;
 		}
 	}
 	var _timestamp = Q.milliseconds();
