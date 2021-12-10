@@ -11480,12 +11480,12 @@ Q.Pointer = {
 	 */
 	start: function _Q_Pointer_start(params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
-		if (Q.Pointer.recentlyScrolled) {
-			Q.Pointer.startedWhileRecentlyScrolled = true;
-		} else {
-			Q.Pointer.canceledClick = false;
-		}
 		return function (e) {
+			if (Q.Pointer.recentlyScrolled) {
+				Q.Pointer.startedWhileRecentlyScrolled = true;
+			} else {
+				Q.Pointer.canceledClick = false;
+			}
 			Q.Pointer.startCancelingClicksOnScroll(e.target);
 			Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
 			Q.addEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
