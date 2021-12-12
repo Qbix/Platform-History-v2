@@ -3638,7 +3638,12 @@ Q.getter = function _Q_getter(original, options) {
 			callbacks.push(noop);
 		}
 		
-		var ret = {dontCache: false};
+		var _resolve, _reject;
+		var ret = new Q.Promise(function (resolve, reject) {
+			_resolve = resolve;
+			_reject = reject;
+		});
+		ret.dontCache = false;
 		gw.onCalled.handle.call(this, arguments2, ret);
 
 		var cached, cbpos, cbi;
@@ -3662,8 +3667,10 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
+					_reject(e);
 					throw err;
 				}
+				_resolve(subject);
 			}
 		}
 
