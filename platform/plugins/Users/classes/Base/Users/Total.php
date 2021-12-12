@@ -289,7 +289,8 @@ abstract class Base_Users_Total extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('forType', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -343,7 +344,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('forId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -393,7 +395,8 @@ return array (
 	 */
 	function beforeSet_voteCount($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('voteCount', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -440,7 +443,8 @@ return array (
 
 	function beforeSet_weightTotal($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('weightTotal', $value);
 		}
 		if (!is_numeric($value))
@@ -472,7 +476,8 @@ return array (
 
 	function beforeSet_value($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('value', $value);
 		}
 		if (!is_numeric($value))
@@ -514,7 +519,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

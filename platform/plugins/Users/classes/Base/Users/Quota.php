@@ -280,7 +280,8 @@ abstract class Base_Users_Quota extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -334,7 +335,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('resourceId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -388,7 +390,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('name', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -438,7 +441,8 @@ return array (
 	 */
 	function beforeSet_units($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('units', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -492,7 +496,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
