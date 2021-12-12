@@ -213,14 +213,17 @@ class Q_Tree
 	 * Calculates a diff between this tree and another tree
 	 * @method diff
 	 * @param {Q_Tree} $tree
+	 * @param {bool} [$skipUndefinedValues=false] Skip if the value is now undefined
+	 *    don't save null in that spot, so the value won't be overwritten with null.
 	 * @return {Q_Tree} This tree holds the results of the diff
 	 */
-	function diff($tree)
+	function diff($tree, $skipUndefinedValues = true)
 	{
 		$context = new StdClass();
 		$context->from = $this;
 		$context->to = $tree;
 		$context->diff = new Q_Tree();
+		$context->skipUndefinedValues = $skipUndefinedValues;
 		$this->depthFirst(array($this, '_diffTo'), $context);
 		$tree->depthFirst(array($tree, '_diffFrom'), $context);
 		return $context->diff;
@@ -228,6 +231,9 @@ class Q_Tree
 	
 	private function _diffTo($path, $value, $array, $context)
 	{
+		if (empty($path)) {
+			return false;
+		}
 		$args1 = $path;
 		$args1[] = null;
 		$valueTo = call_user_func_array(array($context->to, 'get'), $args1);
@@ -239,6 +245,20 @@ class Q_Tree
 			}
 			$args2 = $path;
 			$args2[] = $valueTo;
+			if ($context->skipUndefinedValues) {
+				$key = end($path);
+				if (count($path) == 1) {
+					if (array_key_exists($key, $context->to->parameters)) {
+						return false;
+					}
+				} else {
+					$args = array_slice($path, 0, -1);
+					$arr = call_user_func_array(array($context->to, 'get'), $path);
+					if (!array_key_exists($key, $arr)) {
+						return false;
+					}
+				}
+			}
 			call_user_func_array(array($context->diff, 'set'), $args2);
 		}
 		if (!isset($valueTo)) {
@@ -248,6 +268,9 @@ class Q_Tree
 	
 	private function _diffFrom($path, $value, $array, $context)
 	{
+		if (empty($path)) {
+			return false;
+		}
 		$args1 = $path;
 		$args1[] = null;
 		$valueFrom = call_user_func_array(array($context->from, 'get'), $args1);

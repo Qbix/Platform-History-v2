@@ -179,7 +179,7 @@ function Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time)
 		}
 		$t = new Q_Tree();
 		$t->load($g);
-		$diff = $t->diff($tree);
+		$diff = $t->diff($tree, true);
 		$diff->set('#timestamp', $time);
 		$diff->save($diffs_dir.DS.$b);
 //		$tree = new Tree();
