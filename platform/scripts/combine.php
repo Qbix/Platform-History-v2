@@ -59,16 +59,16 @@ if (!defined('APP_DIR'))
 include($Q_filename);
 
 // get all CLI options
-$opts = array('afcj');
+$opts = 'afcj';
 $longopts = array('all', 'process:', 'css', 'js');
-$options = getopt(implode('', $opts), $longopts);
+$options = getopt($opts, $longopts);
 if (isset($options['help'])) {
 	echo $help;
 	exit;
 }
 
 $process = $options;
-if (empty($process	)) {
+if (empty($process)) {
 	$process['all'] = false; // process all extensions
 } else if (!empty($p = $options['process'])) {
 	if (is_string($p)) {

@@ -37,6 +37,13 @@ if ($count < 1 or !$FROM_APP)
 #Read primary arguments
 $LOCAL_DIR = $FROM_APP ? APP_DIR : $argv[1];
 
+$longopts = array('integrity');
+$options = getopt('i', $longopts);
+if (isset($options['help'])) {
+	echo $help;
+	exit;
+}
+
 #Check paths
 if (!file_exists($Q_filename = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'Q.inc.php')) #Q Platform
 	die("[ERROR] $Q_filename not found" . PHP_EOL);
@@ -100,6 +107,16 @@ function Q_script_urls_glob(
 	&$result = null,
 	$levels = 0
 ) {
+	if ($options['i'] or $options['integrity']) {
+		$calculateHashes = true;
+	} else if ($environment = Q_Config::get('Q', 'environment', '')) {
+		$calculateHashes = Q_Config::get(
+			'Q', 'environments', $environment, 'urls', 'integrity', false
+		);
+	} else {
+		$calculateHashes = false;
+	}
+
 	static $n = 0, $i = 0;
 	if (!isset($result)) {
 		$result = array();
@@ -124,10 +141,14 @@ function Q_script_urls_glob(
 			)) { // file is too big to process
 				continue;
 			}
-			$c = file_get_contents($f);
-			$hash = hash($algo, $c);
-			$enchash = base64_encode(hex2bin($hash));
-			$value = array('t' => filemtime($f), 'h' => $enchash);
+			if ($calculateHashes) {
+				$c = file_get_contents($f);
+				$hash = hash($algo, $c);
+				$enchash = base64_encode(hex2bin($hash));
+				$value = array('t' => filemtime($f), 'h' => $enchash);
+			} else {
+				$value = array('t' => filemtime($f));
+			}
 			$parts = explode(DS, $u);
 			$parts[] = $value;
 			call_user_func_array(array($tree, 'set'), $parts);
