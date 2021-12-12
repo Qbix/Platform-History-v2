@@ -351,7 +351,7 @@
 		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.init.web3(function () {
 			try {
-				var wsr_json = Q.cookie('wsr_1');
+				var wsr_json = Q.cookie('wsr_' + platformAppId);
 				if (wsr_json) {
 					var wsr = JSON.parse(wsr_json);	
 					var hash = ethers.utils.hashMessage(wsr[0]);
@@ -392,9 +392,9 @@
 				provider.on("disconnect", function (error) {
 					console.log("provider.disconnect: ", error);
 
-					if (Users.logout.occurring || Users.Web3.switchNetworkOccuring) {
-						if (Users.Web3.switchNetworkOccuring === true) {
-							Users.Web3.switchNetworkOccuring = false;
+					if (Users.logout.occurring || Users.Web3.switchChainOccuring) {
+						if (Users.Web3.switchChainOccuring === true) {
+							Users.Web3.switchChainOccuring = false;
 						}
 
 						return;
@@ -447,14 +447,7 @@
 								chainId: provider.chainId
 							}, platform, platformAppId, onSuccess, onCancel, options);
 						};
-
-						// check if network is connected
-						//var supportedNetwork = Q.getObject("Web3.network", Q.Users);
-						//if (!supportedNetwork || window.ethereum.chainId === supportedNetwork.chainId) {
-							_authenticate();
-						//} else {
-						//	Users.Web3.setNetwork(supportedNetwork, _authenticate, _cancel);
-						//}
+						_authenticate();
 					}
 				}).catch(_cancel);
 			});
@@ -3842,8 +3835,7 @@
 
 			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
 			Users.Web3.web3Modal = new window.Web3Modal.default({
-				//chain: options.chain,
-				//network: options.network,
+				// chain: options.chain,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
 				disableInjectedProvider: disableInjectedProvider // optional. For MetaMask / Brave / Opera.
@@ -3875,19 +3867,19 @@
 		},
 
 		/**
-		 * Change network
-		 * @method setNetwork
+		 * Change chain
+		 * @method setChain
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
 		 */
-		setNetwork: function (info, onSuccess, onError) {
+		setChain: function (info, onSuccess, onError) {
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(onError, null, [err]);
 				}
 
-				Users.Web3.switchNetworkOccuring = true;
+				Users.Web3.switchChainOccuring = true;
 
 				provider.request({
 					method: 'wallet_addEthereumChain',
