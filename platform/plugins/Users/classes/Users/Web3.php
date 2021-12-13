@@ -61,12 +61,18 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		if (empty($appInfo['rpcUrls'][0])) {
+		if (empty($appInfo['rpcUrl'])) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/rpcUrls[0]"
+				'fieldpath' => "Users/apps/$appId/rpcUrl"
 			));
 		}
-		$rpcUrl = $appInfo['rpcUrls'][0];
+		$infuraId = Q::ifset(
+			$appInfo, 'providers', 'walletconnect', 'infura', 'id'
+		);
+		$rpcUrl = Q::interpolate(
+			$appInfo['rpcUrl'],
+			compact('infuraId')
+		);
 
 		$filename = self::getABIFilename($contractAddress);
 		if (!is_file($filename)) {
