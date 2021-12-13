@@ -29,12 +29,13 @@ abstract class Base_Users
   6 => 'Users_Label',
   7 => 'Users_Link',
   8 => 'Users_Mobile',
-  9 => 'Users_Quota',
-  10 => 'Users_Session',
-  11 => 'Users_Total',
-  12 => 'Users_User',
-  13 => 'Users_Vote',
-  14 => 'Users_Web3',
+  9 => 'Users_Permission',
+  10 => 'Users_Quota',
+  11 => 'Users_Session',
+  12 => 'Users_Total',
+  13 => 'Users_User',
+  14 => 'Users_Vote',
+  15 => 'Users_Web3',
 );
 
 	/**

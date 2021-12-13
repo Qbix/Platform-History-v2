@@ -281,7 +281,8 @@ abstract class Base_Users_Identify extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('identifier', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -331,7 +332,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -380,7 +382,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -426,7 +429,8 @@ return array (
 	 */
 	function beforeSet_state($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('verified','future')))
@@ -468,7 +472,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

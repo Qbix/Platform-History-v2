@@ -283,7 +283,8 @@ abstract class Base_Users_Contact extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -337,7 +338,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('label', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -391,7 +393,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('contactUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -445,7 +448,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('nickname', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -495,7 +499,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {

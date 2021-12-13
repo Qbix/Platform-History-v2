@@ -358,7 +358,7 @@ Base.prototype.beforeSet_methodName = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".methodName");
-		if (typeof value === "string" && value.length > 20)
+		if (typeof value === "string" && value.length > 63)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".methodName");
 		return value;
 };
@@ -369,7 +369,7 @@ Base.prototype.beforeSet_methodName = function (value) {
 	 */
 Base.prototype.maxSize_methodName = function () {
 
-		return 20;
+		return 63;
 };
 
 	/**
@@ -378,7 +378,7 @@ Base.prototype.maxSize_methodName = function () {
 	 */
 Base.column_methodName = function () {
 
-return [["varchar","20","",false],false,"PRI",null];
+return [["varchar","63","",false],false,"PRI",""];
 };
 
 /**
@@ -396,7 +396,7 @@ Base.prototype.beforeSet_params = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".params");
-		if (typeof value === "string" && value.length > 100)
+		if (typeof value === "string" && value.length > 1023)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".params");
 		return value;
 };
@@ -407,7 +407,7 @@ Base.prototype.beforeSet_params = function (value) {
 	 */
 Base.prototype.maxSize_params = function () {
 
-		return 100;
+		return 1023;
 };
 
 	/**
@@ -416,7 +416,7 @@ Base.prototype.maxSize_params = function () {
 	 */
 Base.column_params = function () {
 
-return [["varchar","100","",false],false,"PRI",""];
+return [["varchar","1023","",false],false,"PRI",""];
 };
 
 /**
@@ -589,7 +589,7 @@ return [["timestamp","1024","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['chainId','methodName'], i;
+	var fields = ['chainId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

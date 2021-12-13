@@ -21,7 +21,7 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {String|Buffer} [fields.number] defaults to ""
+ * @param {String} [fields.number] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  * @param {String|Buffer} [fields.userId] defaults to ""
@@ -41,7 +41,7 @@ Q.mixin(Base, Row);
 
 /**
  * @property number
- * @type String|Buffer
+ * @type String
  * @default ""
  * 
  */
@@ -340,8 +340,8 @@ Base.prototype.beforeSet_number = function (value) {
 			value='';
 		}
 		if (value instanceof Db.Expression) return value;
-		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
-			throw new Error('Must pass a String or Buffer to '+this.table()+".number");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".number");
 		if (typeof value === "string" && value.length > 255)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".number");
 		return value;
@@ -362,7 +362,7 @@ Base.prototype.maxSize_number = function () {
 	 */
 Base.column_number = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varchar","255","",false],false,"PRI",null];
 };
 
 /**

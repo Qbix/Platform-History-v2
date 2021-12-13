@@ -289,7 +289,8 @@ abstract class Base_Users_Label extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -343,7 +344,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('label', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -397,7 +399,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('icon', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -451,7 +454,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('title', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -501,7 +505,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -550,7 +555,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

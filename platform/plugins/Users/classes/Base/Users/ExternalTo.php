@@ -318,7 +318,8 @@ abstract class Base_Users_ExternalTo extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -372,7 +373,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -426,7 +428,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -479,7 +482,8 @@ return array (
 		if (!isset($value)) {
 			return array('insertedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -528,7 +532,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -578,7 +583,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('xid', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -631,7 +637,8 @@ return array (
 		if (!isset($value)) {
 			return array('responseType', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('responseType', $value);
 		}
 		if (!in_array($value, array('token','code')))
@@ -673,7 +680,8 @@ return array (
 		if (!isset($value)) {
 			return array('accessToken', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('accessToken', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -726,7 +734,8 @@ return array (
 		if (!isset($value)) {
 			return array('expires', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('expires', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -776,7 +785,8 @@ return array (
 		if (!isset($value)) {
 			return array('extra', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('extra', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

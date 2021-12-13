@@ -1,0 +1,9 @@
+CREATE TABLE {{prefix}}permission (
+  `userId` varchar(31) NOT NULL DEFAULT '' COMMENT 'The user id granting the permission',
+  `label` varchar(63)  NOT NULL COMMENT 'The label to which permissions are granted',
+  `permission` varchar(255) NOT NULL DEFAULT '' COMMENT 'The canonical name of the permission',
+  `extra` varchar(255) NOT NULL DEFAULT '' COMMENT 'Can store extra JSON parameters here',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`userId`,`label`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT 'Stores cached results from querying EVM-based blockchains';

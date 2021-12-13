@@ -323,7 +323,8 @@ abstract class Base_Users_Mobile extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('number', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -353,7 +354,7 @@ abstract class Base_Users_Mobile extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varbinary',
+    0 => 'varchar',
     1 => '255',
     2 => '',
     3 => false,
@@ -373,7 +374,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -422,7 +424,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -472,7 +475,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -526,7 +530,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('extension', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -576,7 +581,8 @@ return array (
 	 */
 	function beforeSet_carrier($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('carrier', $value);
 		}
 		if (!in_array($value, array('unverified','att','cingular','sprint','tmobile','verizon')))
@@ -614,7 +620,8 @@ return array (
 	 */
 	function beforeSet_state($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('unverified','active','suspended','unsubscribed')))
@@ -652,7 +659,8 @@ return array (
 	 */
 	function beforeSet_capabilities($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('capabilities', $value);
 		}
 		if (!in_array($value, array('unverified','sms','wap','internet','sms_and_wap','sms_and_internet')))
@@ -694,7 +702,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('activationCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -747,7 +756,8 @@ return array (
 		if (!isset($value)) {
 			return array('activationCodeExpires', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -797,7 +807,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('authCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
