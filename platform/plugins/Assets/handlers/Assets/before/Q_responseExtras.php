@@ -30,13 +30,19 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$chains = Q_Config::expect("Users", "web3", "chains");
-	$currencies = Q_Config::expect("Assets", "Web3", "currencies");
+	$chains = Q_Config::get("Users", "apps", "web3", Users::communityId(), "chains", array());
+	$currencies = Q_Config::get("Assets", "Web3", "currencies", array());
 	foreach ($chains as $i => $chain) {
+		// if contract or rpcUrls undefined, skip this chain
+		if (!Q::ifset($chain, "contract", null) || !Q::ifset($chain, "rpcUrls", null)) {
+			unset($chain[$i]);
+			continue;
+		}
+
 		foreach ($currencies as $currency) {
-			if ($currency[$chain["chainId"]] == "0x0000000000000000000000000000000000000000") {
-				$chain[$i]["currency"] = $currency;
-				$chain[$i]["currency"]["token"] = $currency[$chain["chainId"]];
+			if ($currency[$i] == "0x0000000000000000000000000000000000000000") {
+				$chains[$i]["currency"] = $currency;
+				$chains[$i]["currency"]["token"] = $currency[$i];
 				break;
 			}
 		}
@@ -44,7 +50,7 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.chains', $chains);
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.currencies', $currencies);
 
-	// set TokenSociety.NFT.icon.sizes for imagepicker
+	// set Assets.Web3.NFT.icon.sizes for imagepicker
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 
 }

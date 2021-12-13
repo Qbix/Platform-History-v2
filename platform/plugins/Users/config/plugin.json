@@ -41,6 +41,7 @@
 			"Users/session": {"module": "Users", "action": "session"},
 			"Users/analytics": {"module": "Users", "action": "analytics"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"appleLogin": {"module": "Users", "action": "appleLogin"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
 			"m/:mobileNumber": { "module": "Users", "action": "activate" },
@@ -89,7 +90,7 @@
 		},
 		"apps-private": {
 			"facebook": ["secret"],
-			"ios": ["token", "device", "logging", "secret"],
+			"ios": ["token", "device", "logging", "secret", "ssl"],
 			"android": ["key", "secret"],
 			"amazon": ["key", "secret"],
 			"windows": ["key", "secret"]
@@ -103,7 +104,7 @@
 		},
 		"login": {
 			"identifierType": "email,mobile",
-			"using": "native,wallet,facebook",
+			"using": "native,web3,facebook",
 			"userQueryUri": "Users/user",
 			"iconType": "wavatar",
 			"gravatar": true,
@@ -261,7 +262,8 @@
 				"0x1": {
 					"name": "Ethereum Mainnet",
 					"publicRPC": "https://main-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws"
+					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
+					"blockExplorerUrl": "https://etherscan.io/"
 				},
 				"0x3": {
 					"name": "Ropsten"
@@ -279,7 +281,8 @@
 				"0x38": {
 					"name": "Binance SmartChain",
 					"publicRPC": "https://bsc-dataseed.binance.org/",
-					"publicWebsocket": "wss://bsc-ws-node.nariox.org:443"
+					"publicWebsocket": "wss://bsc-ws-node.nariox.org:443",
+					"blockExplorerUrl": "https://bscscan.com"
 				},
 				"0x61": {
 					"name": "Binance Smart Chain Testnet",

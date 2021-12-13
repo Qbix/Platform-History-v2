@@ -29,18 +29,19 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contractAddress,
 		$methodName,
 		$params = array(),
+		$appId = null,
 		$caching = true,
-		$cacheDuration = null,
-		$appId = null)
+		$cacheDuration = null)
 	{
 		if (!isset($appId)) {
 			$appId = Q::app();
 		}
 
-		list($chainId, $appInfo) = Users::appInfo('wallet', $appId, true);
+		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
+
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
@@ -73,12 +74,20 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		$abi = file_get_contents($filename);
 		$data = array();
+		$arguments = array($methodName);
+		if (is_array($params)) {
+			foreach ($params as $param) {
+				$arguments[] = $param;
+			}
+		} else {
+			$arguments[] = $params;
+		}
+		$arguments[] = function ($err, $results) use (&$data) {
+			$errMessage = Q::ifset($err, "message", null);
+			if ($errMessage) {
+				throw new Exception($errMessage);
+			}
 
-		// call contract function
-		(new Contract($rpcUrl, $abi))
-		->at($contractAddress)
-		->call($methodName, $params,
-		function ($err, $results) use (&$data) {
 			if (empty($results)) {
 				$data = $results;
 				return;
@@ -94,13 +103,20 @@ class Users_Web3 extends Base_Users_Web3 {
 			} else {
 				$data = $results;
 			}
-		});
+		};
+
+		// call contract function
+		$contract = (new Contract($rpcUrl, $abi))
+		->at($contractAddress);
+		call_user_func_array([$contract, "call"], $arguments);
 
 		if ($data instanceof \phpseclib\Math\BigInteger) {
-			$cache->result = $data->toString();
+			$data = $data->toString();
 		} else {
-			$cache->result = Q::json_encode($data, true);
+			$data = Q::json_encode($data, true);
 		}
+
+		$cache->result = $data;
 
 		if (($data && $caching !== false)
 		or (!$data && $caching === true)) {
@@ -109,7 +125,6 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return $data;
 	}
-
 	/**
 	 * Get the filename of the ABI file for a contract. 
 	 * Taken from Users/web3/contracts/$contractName/filename config.
@@ -138,25 +153,25 @@ class Users_Web3 extends Base_Users_Web3 {
 		if ($filename) {
 			return $filename;
 		}
-		if (!isset(self::$abiFilenames[$contractAddress])) {
-			$config = Q_Config::get(
-				'Users', 'web3', 'contracts', $contractAddress, array()
-			);
-			if (!empty($config['filename'])) {
-				$filename = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
-				return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
-			}
-			if (!empty($config['dir'])) {
-				$dir = Q::interpolate($config['filename'], compact('baseUrl', 'contractAddress'));
-				return APP_WEB_DIR . DS . implode(DS, explode('/', $dir))
-					. DS . "$contractAddress.json";
-			}
-			if (!empty($config['url'])) {
-				$url = Q_Uri::interpolateUrl($url, compact('contractAddress'));
-				return Q_Uri::filenameFromUrl($url);
-			}
+
+		$baseUrl = Q_Request::baseUrl();
+		$config = Q_Config::get(
+			'Users', 'web3', 'contracts', $contractAddress, array()
+		);
+		if (!empty($config['filename'])) {
+			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
+			return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
 		}
-		return Q::ifset(self::$abiFilenames, $contractAddress, null);
+		if (!empty($config['dir'])) {
+			return APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
+				. DS . "$contractAddress.json";
+		}
+		if (!empty($config['url'])) {
+			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
+			return Q_Uri::filenameFromUrl($url);
+		}
+
+		return implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
 	}
 
 	/**
