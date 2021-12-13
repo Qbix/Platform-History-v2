@@ -29,9 +29,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contractAddress,
 		$methodName,
 		$params = array(),
+		$appId = null,
 		$caching = true,
-		$cacheDuration = null,
-		$appId = null)
+		$cacheDuration = null)
 	{
 		if (!isset($appId)) {
 			$appId = Q::app();
@@ -42,20 +42,12 @@ class Users_Web3 extends Base_Users_Web3 {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
 
-		// get chainId
-		$chains = Q::ifset($appInfo, "chains", []);
-		if (empty($chains)) {
+		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
+		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "'Users/apps/$appId/chains'"
+				'fieldpath' => "'Users/apps/$appId/chainId'"
 			));
 		}
-
-		$chain = self::getChainByContract($contractAddress);
-		if (empty($chain)) {
-			throw new Exception("Chain for contract ".$contractAddress." no exists");
-		}
-
-		$chainId = $chain["chainId"];
 
 		if ($caching && $cacheDuration) {
 			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
@@ -69,17 +61,12 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		}
 
-		$rpcUrl = Q::ifset($chain, "rpcUrls", 0, null);
-		if (!$rpcUrl) {
+		if (empty($appInfo['rpcUrls'][0])) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/chains/$chainId/rpcUrls[0]"
+				'fieldpath' => "Users/apps/$appId/rpcUrls[0]"
 			));
 		}
-
-		$projectId = Q::ifset($chain, "infura", "projectId", null);
-		if ($projectId) {
-			$rpcUrl = Q::interpolate($rpcUrl, compact("projectId"));
-		}
+		$rpcUrl = $appInfo['rpcUrls'][0];
 
 		$filename = self::getABIFilename($contractAddress);
 		if (!is_file($filename)) {
@@ -137,45 +124,6 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		return $data;
-	}
-
-	/**
-	 * Get chain settings ("name", "blockExplorerUrls", "contract", "infura", "rpcUrls") from config by chainId
-	 * @method getChainById
-	 * @static
-	 * @param {string} $chainId
-	 * @return {object}
-	 */
-	static function getChainById ($chainId, $appId = null)
-	{
-		$appId = $appId ? $appId : Q::app();
-		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
-		$chains = Q::ifset($appInfo, "chains", []);
-		foreach ($chains as $chain) {
-			if ($chain["chainId"] == $chainId) {
-				return $chain;
-			}
-		}
-		return null;
-	}
-	/**
-	 * Get chain settings ("name", "blockExplorerUrls", "contract", "infura", "rpcUrls") from config by contractAddress
-	 * @method getChainByContract
-	 * @static
-	 * @param {string} $chainId
-	 * @return {object}
-	 */
-	static function getChainByContract ($contractAddress, $appId = null)
-	{
-		$appId = $appId ? $appId : Q::app();
-		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
-		$chains = Q::ifset($appInfo, "chains", []);
-		foreach ($chains as $chain) {
-			if ($chain["contract"] == $contractAddress) {
-				return $chain;
-			}
-		}
-		return null;
 	}
 	/**
 	 * Get the filename of the ABI file for a contract. 
