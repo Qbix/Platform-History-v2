@@ -134,7 +134,7 @@
             };
             tool.tokenId = data.attributes.tokenId;
             tool.chainId = data.attributes.network;
-            tool.network = NFT.networks[tool.chainId];
+            tool.network = NFT.chains[tool.chainId];
             $toolElement.attr("data-tokenId", tool.tokenId);
             $toolElement.attr("data-chainId", tool.chainId);
 

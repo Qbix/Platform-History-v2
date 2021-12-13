@@ -1046,7 +1046,7 @@
 
 					// if network is a chainId, convert to network
 					if (Q.typeOf(network) === "string") {
-						network = Assets.Web3.NFT.networks[network];
+						network = Assets.Web3.NFT.chains[network];
 					}
 
 					var _subMethod = function (contract) {
