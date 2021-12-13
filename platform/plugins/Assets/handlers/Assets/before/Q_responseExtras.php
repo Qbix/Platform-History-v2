@@ -30,8 +30,8 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$chains = Q_Config::get("Users", "apps", "web3", Users::communityId(), "chains", []);
-	$currencies = Q_Config::get("Assets", "Web3", "currencies", []);
+	$chains = Q_Config::get("Users", "apps", "web3", Users::communityId(), "chains", array());
+	$currencies = Q_Config::get("Assets", "Web3", "currencies", array());
 	foreach ($chains as $i => $chain) {
 		// if contract or rpcUrls undefined, skip this chain
 		if (!Q::ifset($chain, "contract", null) || !Q::ifset($chain, "rpcUrls", null)) {
