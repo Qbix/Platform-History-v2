@@ -133,8 +133,8 @@
                 });
             };
             tool.tokenId = data.attributes.tokenId;
-            tool.chainId = data.attributes.network;
-            tool.network = NFT.chains[tool.chainId];
+            tool.chainId = data.attributes.chainId || data.attributes.network;
+            tool.chain = NFT.chains[tool.chainId];
             $toolElement.attr("data-tokenId", tool.tokenId);
             $toolElement.attr("data-chainId", tool.chainId);
 
@@ -171,10 +171,10 @@
                     return _fallback();
                 }
 
-                Q.handle(NFT.getAuthor, tool, [tool.tokenId, tool.network, pipe.fill("author")]);
-                Q.handle(NFT.getOwner, tool, [tool.tokenId, tool.network, pipe.fill("owner")]);
-                Q.handle(NFT.commissionInfo, tool, [tool.tokenId, tool.network, pipe.fill("commissionInfo")]);
-                Q.handle(NFT.saleInfo, tool, [tool.tokenId, tool.network, pipe.fill("saleInfo")]);
+                Q.handle(NFT.getAuthor, tool, [tool.tokenId, tool.chain, pipe.fill("author")]);
+                Q.handle(NFT.getOwner, tool, [tool.tokenId, tool.chain, pipe.fill("owner")]);
+                Q.handle(NFT.commissionInfo, tool, [tool.tokenId, tool.chain, pipe.fill("commissionInfo")]);
+                Q.handle(NFT.saleInfo, tool, [tool.tokenId, tool.chain, pipe.fill("saleInfo")]);
             }
         });
 
@@ -378,12 +378,12 @@
                     e.stopPropagation();
                     e.preventDefault();
 
-                    NFT.checkProvider(tool.network, function (err) {
+                    NFT.checkProvider(tool.chain, function (err) {
                         if (err) {
                             return;
                         }
 
-                        NFT.buy(tool.tokenId, tool.network, currency, function (err, transaction) {});
+                        NFT.buy(tool.tokenId, tool.chain, currency, function (err, transaction) {});
                     });
                 });
 
@@ -417,7 +417,7 @@
                         onActivate: function (dialog) {
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
-                                NFT.checkProvider(tool.network, function (err, contract) {
+                                NFT.checkProvider(tool.chain, function (err, contract) {
                                     if (err) {
                                         return $toolElement.removeClass("Q_working");
                                     }
@@ -434,7 +434,7 @@
 
                             // Put NFT off sale
                             $("button[name=offSale]", dialog).on("click", function () {
-                                NFT.checkProvider(tool.network, function (err, contract) {
+                                NFT.checkProvider(tool.chain, function (err, contract) {
                                     if (err) {
                                         return $toolElement.removeClass("Q_working");
                                     }
@@ -456,7 +456,7 @@
                                         return;
                                     }
 
-                                    NFT.checkProvider(tool.network, function (err, contract) {
+                                    NFT.checkProvider(tool.chain, function (err, contract) {
                                         if (err) {
                                             return $toolElement.removeClass("Q_working");
                                         }
@@ -483,17 +483,17 @@
          * @method createToken
          * @param {number} price - Price of NFT in decimal.
          * @param {object} currency - Object with details of currency (symbol, name, decimals, token, commissionToken).
-         * @param {object} network - Object with details of network (chainId, contract, name, rpcUrls, blockExplorerUrls) selected to create token in.
+         * @param {object} chain - Object with details of chain (chainId, contract, name, rpcUrls, blockExplorerUrls) selected to create token in.
          * @param {number} royalty - Royalty in percents from price.
          * @param {boolean} [onSale=false] If false, call contract.create which just create token, but not put NFT to listForSale
          * @param {function} callback
          */
-        createToken: function (price, currency, network, royalty, onSale,  callback) {
+        createToken: function (price, currency, chain, royalty, onSale,  callback) {
             var tool = this;
             var currencyToken = currency.token;
             var commissionToken = currency.commissionToken;
 
-            NFT.checkProvider(network, function (err, contract) {
+            NFT.checkProvider(chain, function (err, contract) {
                 if (err) {
                     return Q.handle(callback, tool, [err]);
                 }
