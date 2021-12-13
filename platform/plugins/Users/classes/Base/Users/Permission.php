@@ -290,7 +290,7 @@ abstract class Base_Users_Permission extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -345,7 +345,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('label', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -400,7 +400,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('permission', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -455,7 +455,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('extra', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -506,7 +506,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -556,7 +556,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

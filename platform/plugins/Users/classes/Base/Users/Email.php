@@ -303,7 +303,7 @@ abstract class Base_Users_Email extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('address', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -333,7 +333,7 @@ abstract class Base_Users_Email extends Db_Row
 return array (
   0 => 
   array (
-    0 => 'varchar',
+    0 => 'varbinary',
     1 => '255',
     2 => '',
     3 => false,
@@ -354,7 +354,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -404,7 +404,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -455,7 +455,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -506,7 +506,7 @@ return array (
 	function beforeSet_state($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('unverified','active','suspended','unsubscribed')))
@@ -549,7 +549,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('activationCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -603,7 +603,7 @@ return array (
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -654,7 +654,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('authCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
