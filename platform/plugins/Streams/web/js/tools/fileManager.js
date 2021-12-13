@@ -423,7 +423,8 @@
                             var categoryPreview = Q.Tool.from(fileItemInner, "Streams/category/preview");
                             console.log('categoryPreview', categoryPreview)
                             categoryPreview.state.templates.edit.name = 'Streams/fileManager/category/preview/edit';
-
+                            categoryPreview.preview.options.actions.position = 'tr';
+                            categoryPreview.preview.options.actions.size = '16';
                         });
                     }
 

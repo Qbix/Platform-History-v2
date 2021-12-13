@@ -183,7 +183,7 @@
 
                 function toggleActive(selectedIndex) {
                     if(aEle[selectedIndex] == null) return;
-                    if(state.debug) console.log('toggleActive')
+                    if(state.debug) console.log('toggleActive', selectedIndex)
 
 
                     for (let i = 0; i < aEle.length; i++) {
@@ -192,6 +192,8 @@
                     }
 
                     if(!aEle[selectedIndex].classList.contains('activeItem')) {
+                        if(state.debug) console.log('toggleActive: add class', aEle[selectedIndex])
+
                         aEle[selectedIndex].classList.add('activeItem');
                         Q.handle(state.onActivateItem, tool, [selectedIndex, aEle[selectedIndex]]);
                     }
@@ -515,8 +517,8 @@
 
                     theta = 360 / aEle.length;
 
-                    tX += desX * 0.1;
-                    tY += desY * 0.1;
+                    tX += desX * 0.05;
+                    tY += desY * 0.05;
                     applyTranform(obox, e.target);
                     sX = nX;
                     sY = nY;
