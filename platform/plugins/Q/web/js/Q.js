@@ -2400,14 +2400,14 @@ Q.queue = function (original, milliseconds) {
 /**
  * Wraps a function and returns a wrapper that will call the function
  * after calls stopped coming in for a given number of milliseconds.
- * If the immediate param is true, the wrapper lets the function be called
+ * If the immediate param is true, the wrapper lets the function be called the first time
  * without waiting if it hasn't been called for the given number of milliseconds.
  * @static
  * @method debounce
  * @param {Function} original The function to wrap
  * @param {number} milliseconds The number of milliseconds
  * @param {Boolean} [immediate=false] if true, the wrapper also lets the function be called
- *   without waiting if it hasn't been called for the given number of milliseconds.
+ *   the first time without waiting if it hasn't been called for the given number of milliseconds.
  * @param {Mixed} defaultValue Value to return whenever original function isn't called
  * @return {Function} The wrapper function
  */
@@ -3617,6 +3617,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
+ * @param {Boolean} [options.firstParameterIsNotError] pass true here to not reject the promise just because the first parameter in first callback is truthy
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -3638,7 +3639,12 @@ Q.getter = function _Q_getter(original, options) {
 			callbacks.push(noop);
 		}
 		
-		var ret = {dontCache: false};
+		var _resolve, _reject;
+		var ret = new Q.Promise(function (resolve, reject) {
+			_resolve = resolve;
+			_reject = reject;
+		});
+		ret.dontCache = false;
 		gw.onCalled.handle.call(this, arguments2, ret);
 
 		var cached, cbpos, cbi;
@@ -3662,7 +3668,14 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
+					_reject(e);
 					throw err;
+				}
+				if (params[0] && !gw.firstParameterIsNotError) {
+					// assume first parameter is error
+					_reject(params[0]);
+				} else {
+					_resolve(subject);
 				}
 			}
 		}
@@ -11462,6 +11475,12 @@ Q.Clipboard = {
 	}
 };
 
+function _Q_Pointer_start_end_handler (e) {
+	Q.Pointer.startedWhileRecentlyScrolled = false;
+	Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
+	Q.Pointer.stopCancelingClicksOnScroll(e.target);
+}
+
 /**
  * Methods for working with pointer and touchscreen events
  * @class Q.Pointer
@@ -11475,10 +11494,15 @@ Q.Pointer = {
 	start: function _Q_Pointer_start(params) {
 		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
 		return function (e) {
+			Q.Pointer.movedTooMuchForClickLastTime = false;
+			if (Q.Pointer.recentlyScrolled) {
+				Q.Pointer.startedWhileRecentlyScrolled = true;
+			} else {
+				Q.Pointer.canceledClick = false;
+			}
 			Q.Pointer.startCancelingClicksOnScroll(e.target);
-			Q.addEventListener(e.target, Q.Pointer.end, function () {
-				Q.Pointer.stopCancelingClicksOnScroll(e.target);
-			});
+			Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
+			Q.addEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
 			return params.original.apply(this, arguments);
 		};
 	},
@@ -12223,8 +12247,8 @@ Q.Pointer = {
 	 *   You will want to skip the mask if you want to allow scrolling, for instance.
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
-	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to change
-	 *   how many milliseconds until setting Q.Pointer.canceledClick = false .
+	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to wait
+	 *   some milliseconds until setting Q.Pointer.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
@@ -12317,9 +12341,9 @@ Q.Pointer = {
 	startCancelingClicksOnScroll: function (element) {
 		var sp;
 		if (element && (sp = element.scrollingParent(true))) {
-			Q.addEventListener(sp, 'scroll', _cancelClickBriefly);
+			Q.addEventListener(sp, 'scroll', _handleScroll);
 		} else {
-			Q.addEventListener(document.body, 'scroll', _cancelClickBriefly, true);
+			Q.addEventListener(document.body, 'scroll', _handleScroll, true);
 		}
 	},
 	/**
@@ -12332,9 +12356,9 @@ Q.Pointer = {
 	stopCancelingClicksOnScroll: function (element) {
 		if (element) {
 			var sp = element.scrollingParent(true);
-			Q.removeEventListener(sp, 'scroll', _cancelClickBriefly);
+			Q.removeEventListener(sp, 'scroll', _handleScroll);
 		} else {
-			Q.removeEventListener(document.body, 'scroll', _cancelClickBriefly);
+			Q.removeEventListener(document.body, 'scroll', _handleScroll);
 		}
 	},
 	/**
@@ -12368,20 +12392,28 @@ Q.Pointer = {
 var _cancelClick_counter = 0;
 Q.Pointer.preventRubberBand.suspend = {};
 
-function _cancelClickBriefly(event) {
+var _setRecentlyScrolledFalse = Q.debounce(function () {
+	Q.Pointer.recentlyScrolled = false;
+}, 300);
+
+function _handleScroll(event) {
 	// if input element stuff exceeds width of element, blur will lead to scroll element to the start
 	// this will lead to cancel first click on submit button because before click fired blur from input
-	if (Q.typeOf(event).toLowerCase() === "event" && ["input", "select"].includes(Q.getObject("target.tagName", event).toLowerCase())) {
+	if (Q.typeOf(event).toLowerCase() === "event"
+	&& ["input", "select"].includes(
+		Q.getObject("target.tagName", event).toLowerCase())
+	) {
 		return false;
 	}
 	if (Q.Pointer.latest.touches.length) {
 		// no need to cancel click here, user will have to lift their fingers to click
 		return false;
 	}
-	Q.Pointer.cancelClick(true);
-	setTimeout(function () {
-		Q.Pointer.canceledClick = false;
-	}, 100);
+	Q.Pointer.recentlyScrolled = true;
+	setTimeout(_setRecentlyScrolledFalse, 100);
+	var shouldStopCancelClick = !Q.Pointer.movedTooMuchForClickLastTime
+		&& !Q.Pointer.startedWhileRecentlyScrolled;
+	Q.Pointer.cancelClick(true, null, null, shouldStopCancelClick ? 300 : 0);
 }
 
 function _stopHint(img, container) {
@@ -12543,6 +12575,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			comingFromPointerMovement: true
 		})) {
 			_pos = false;
+			Q.Pointer.movedTooMuchForClickLastTime = true;
 		}
 	}
 	var _timestamp = Q.milliseconds();

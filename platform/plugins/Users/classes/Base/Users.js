@@ -36,6 +36,7 @@ Base.tableClasses = [
 	"Users_Label",
 	"Users_Link",
 	"Users_Mobile",
+	"Users_Permission",
 	"Users_Quota",
 	"Users_Session",
 	"Users_Total",
@@ -125,6 +126,13 @@ Base.Link = Q.require('Users/Link');
  * @type Users.Mobile
  */
 Base.Mobile = Q.require('Users/Mobile');
+
+/**
+ * Link to Users.Permission model
+ * @property Permission
+ * @type Users.Permission
+ */
+Base.Permission = Q.require('Users/Permission');
 
 /**
  * Link to Users.Quota model

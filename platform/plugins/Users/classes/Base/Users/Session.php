@@ -337,7 +337,8 @@ abstract class Base_Users_Session extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('id', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -391,7 +392,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('content', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -445,7 +447,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('php', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -499,7 +502,8 @@ return array (
 		if (!isset($value)) {
 			return array('userId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -553,7 +557,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('deviceId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -603,7 +608,8 @@ return array (
 	 */
 	function beforeSet_timeout($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('timeout', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -657,7 +663,8 @@ return array (
 	 */
 	function beforeSet_duration($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('duration', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -715,7 +722,8 @@ return array (
 		if (!isset($value)) {
 			return array('platform', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -769,7 +777,8 @@ return array (
 		if (!isset($value)) {
 			return array('appId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -823,7 +832,8 @@ return array (
 		if (!isset($value)) {
 			return array('version', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('version', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -876,7 +886,8 @@ return array (
 		if (!isset($value)) {
 			return array('formFactor', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('formFactor', $value);
 		}
 		if (!in_array($value, array('mobile','tablet','desktop')))
@@ -914,7 +925,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -963,7 +975,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

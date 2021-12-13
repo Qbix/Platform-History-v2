@@ -26,7 +26,7 @@
  *  @param {string} [$options.selectors] Array of (slotName => selector) pairs, where the values are CSS style selectors indicating the element to update with javascript, and can be a parent of the tabs. Set to null to reload the page.
  *  @param {string} [$options.slot] The name of the slot to request when changing tabs with javascript.
  *  @param {string} [$options.classes] An associative array of the form name => classes, for adding classes to tabs
- *  @param {string} [$options.attributes] An associative array of the form name => classes, for adding attributes to tabs
+ *  @param {string} [$options.attributes] An associative array of the form name => attributes array, for adding attributes to tabs
  *  @param {string} [$options.titleClasses]  An associative array for adding classes to tab titles
  *  @param {string} [$options.after] Name of an event that will return HTML to place after the generated HTML in the tabs tool element
  *  @param {string} [$options.loader] Name of a function which takes url, slot, callback. It should call the callback and pass it an object with the response info. Can be used to implement caching, etc. instead of the default HTTP request. This function shall be Q.batcher getter

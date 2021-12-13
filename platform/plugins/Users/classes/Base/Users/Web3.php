@@ -304,7 +304,8 @@ abstract class Base_Users_Web3 extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('chainId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -358,7 +359,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('methodName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -375,7 +377,7 @@ return array (
 	function maxSize_methodName()
 	{
 
-		return 20;			
+		return 63;			
 	}
 
 	/**
@@ -389,13 +391,13 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '20',
+    1 => '63',
     2 => '',
     3 => false,
   ),
   1 => false,
   2 => 'PRI',
-  3 => NULL,
+  3 => '',
 );			
 	}
 
@@ -412,7 +414,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('params', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -429,7 +432,7 @@ return array (
 	function maxSize_params()
 	{
 
-		return 100;			
+		return 1023;			
 	}
 
 	/**
@@ -443,7 +446,7 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '100',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -466,7 +469,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('contract', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -520,7 +524,8 @@ return array (
 		if (!isset($value)) {
 			return array('result', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('result', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -574,7 +579,8 @@ return array (
 		if (!isset($value)) {
 			return array('extra', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('extra', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -624,7 +630,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -673,10 +680,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Range) {
-			return array('updatedTime', $value);
-		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+       or $value instanceof Db_Query) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -724,7 +729,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('chainId','methodName') as $name) {
+			foreach (array('chainId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

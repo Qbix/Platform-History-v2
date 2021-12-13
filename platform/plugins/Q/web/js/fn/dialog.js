@@ -230,9 +230,6 @@ Q.Tool.jQuery('Q/overlay',
 				Q.Pointer.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
-				if (data.options.htmlClass) {
-					$('html').removeClass(data.options.htmlClass);
-				}
 				setTimeout(function () {
 					$body.removeClass('Q_preventScroll').css(data.bodyStyle);
 					window.scrollTo(data.windowParams.scrollLeft, data.windowParams.scrollTop);
@@ -251,6 +248,9 @@ Q.Tool.jQuery('Q/overlay',
 					Q.Animation.play(function (x, y) {
 						if (x === 1) {
 							$this.hide();
+							if (data.options.htmlClass) {
+								$('html').removeClass(data.options.htmlClass);
+							}
 							Q.handle(data.options.onClose, $this, []);
 						} else {
 							$this.css('opacity', 1-y);
@@ -264,6 +264,9 @@ Q.Tool.jQuery('Q/overlay',
 				else
 				{
 					$this.hide();
+					if (data.options.htmlClass) {
+						$('html').removeClass(data.options.htmlClass);
+					}
 					if (data.options.mask)
 					{
 						Q.Masks.hide('Q.screen.mask');

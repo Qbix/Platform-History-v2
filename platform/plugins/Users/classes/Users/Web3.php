@@ -111,11 +111,17 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
-	 * Get the filename of the ABI file for a contract. Taken from Users/web3/contracts/$contractName/ABIFilename config usually.
+	 * Get the filename of the ABI file for a contract. 
+	 * Taken from Users/web3/contracts/$contractName/filename config.
+	 * As a fallback tries Users/web3/contracts/$contractName/dir and if found,
+	 * appends "/$contractAddress.json". As a last resort, tries
+	 * Users/web3/contracts/$contractName/url and calls filenameFromUrl().
+	 * You can interpolate "baseUrl" and "contractAddress" variables in the strings.
+	 * 
 	 * @method getABIFilename
 	 * @static
 	 * @param {string} $contractAddress The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
-	 * @return {string}
+	 * @return {string|null} Tries filename, then $dir/$contractAddress.json, then url from config
 	 */
 	static function getABIFilename ($contractAddress)
 	{
@@ -150,7 +156,7 @@ class Users_Web3 extends Base_Users_Web3 {
 				return Q_Uri::filenameFromUrl($url);
 			}
 		}
-		return self::$abiFilenames[$contractAddress];
+		return Q::ifset(self::$abiFilenames, $contractAddress, null);
 	}
 
 	/**

@@ -17,7 +17,7 @@ function Users_before_Q_responseExtras()
 		$loginOptions = Q_Config::get('Users', 'login', array(
 			"identifierType" => 'email,mobile', 
 			"userQueryUri" => 'Users/user',
-			"using" => "native,wallet,facebook",
+			"using" => "native,web3,facebook",
 			"noRegister" => false
 		));
 		$loginOptions["afterActivate"] = Q_Uri::url($afterActivate);
@@ -58,7 +58,7 @@ function Users_before_Q_responseExtras()
 					}
 				}
 				foreach ($private as $p) {
-					unset($apps[$platform][$appName][$p]);
+					Q::unsetObject($apps[$platform][$appName], $p);
 				}
 			}
 		}
@@ -73,21 +73,24 @@ function Users_before_Q_responseExtras()
 	// fetch labels info
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
 
-	// load ethers js libs if wallet config defined
-	if (Q_Config::get("Users", "apps", "wallet", Users::communityId(), null)) {
-		Q_Response::addScript('{{Users}}/js/wallet/ethers-5.2.umd.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/evm-chains.min.js', 'Users');
-		if (Q_Config::get("Users", "Web3", "providers", "Fortmatic", false)) {
-			Q_Response::addScript('{{Users}}/js/wallet/fortmatic.js', 'Users');
+	// load ethers js libs if web3 config defined
+	if ($config = Q_Config::get("Users", "apps", "web3", Q::app(), null)) {
+		Q_Response::addScript('{{Users}}/js/web3/ethers-5.2.umd.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/evm-chains.min.js', 'Users');
+		$providers = array();
+		if (Q::ifset($config, 'infura', null)) {
+			$providers['infura'] = array();
 		}
-		if (Q_Config::get("Users", "Web3", "providers", "Portis", false)) {
-			Q_Response::addScript('{{Users}}/js/wallet/portis.js', 'Users');
+		if (Q::ifset($config, 'fortmatic', null)) {
+			Q_Response::addScript('{{Users}}/js/web3/fortmatic.js', 'Users');
+			$providers['fortmatic'] = array();
 		}
-		Q_Response::addScript('{{Users}}/js/wallet/walletconnect.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/web3.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/wallet/web3modal.js', 'Users');
-
-		Q_Response::setScriptData("Q.plugins.Users.Web3.providers", Q_Config::expect("Users", "Web3", "providers"));
-		Q_Response::setScriptData("Q.plugins.Users.Web3.disableInjectedProvider", Q_Config::get("Users", "Web3", "disableInjectedProvider", false));
+		if (Q::ifset($config, 'portis', null)) {
+			Q_Response::addScript('{{Users}}/js/web3/portis.js', 'Users');
+			$providers['portis'] = array();
+		}
+		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
+		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
 	}
 }
