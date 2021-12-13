@@ -326,7 +326,7 @@ abstract class Base_Users_Device extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -381,7 +381,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('deviceId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -436,7 +436,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -491,7 +491,7 @@ return array (
 			return array('version', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('version', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -546,7 +546,7 @@ return array (
 			return array('appId', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -601,7 +601,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('sessionId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -655,7 +655,7 @@ return array (
 			return array('formFactor', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('formFactor', $value);
 		}
 		if (!in_array($value, array('mobile','tablet','desktop')))
@@ -694,7 +694,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -744,7 +744,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -795,7 +795,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('auth', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -850,7 +850,7 @@ return array (
 			return array('p256dh', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('p256dh', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
