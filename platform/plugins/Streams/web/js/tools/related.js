@@ -103,7 +103,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 				infiniteTool.setLoading(true);
 				infiniteTool.state.offset = offset;
-				tool.loadMore(function () {
+				tool.loadMore(offset, function () {
 					infiniteTool.setLoading(false);
 				});
 			}
@@ -540,9 +540,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	/**
 	 * Request part of related data and add previews
 	 * @method loadMore
+	 * @param {number} offset
 	 * @param {function} onUpdate callback executed when updated
 	 */
-	loadMore: function (onUpdate) {
+	loadMore: function (offset, onUpdate) {
 		var tool = this;
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
@@ -558,15 +559,16 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			streamName,
 			state.relationType,
 			state.isCategory,
-			state.relatedOptions,
+			{
+				limit: limit,
+				offset: offset
+			},
 			function (errorMessage) {
 				if (errorMessage) {
 					return console.warn("Streams/related refresh: " + errorMessage);
 				}
 
 				tool.relatedResult(this, true, onUpdate);
-
-				state.relatedOptions.offset += limit;
 			}
 		);
 	},
