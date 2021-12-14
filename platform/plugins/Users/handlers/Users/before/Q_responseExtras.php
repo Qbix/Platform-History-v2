@@ -86,6 +86,5 @@ function Users_before_Q_responseExtras()
 		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
-		Q_Response::setScriptData("Q.plugins.Users.Web3.providers", Q_Config::expect("Users", "apps", "web3", Users::communityId(), "providers"));
 	}
 }
