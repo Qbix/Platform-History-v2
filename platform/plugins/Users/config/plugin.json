@@ -287,6 +287,10 @@
 				"0x61": {
 					"name": "Binance Smart Chain Testnet",
 					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545"
+				},
+				"0x89": {
+					"name": "Polygon Mainnet",
+					"publicRPC": "https://polygon-rpc.com/"
 				}
 			}
 		}
