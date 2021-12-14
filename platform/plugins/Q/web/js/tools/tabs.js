@@ -682,7 +682,8 @@
 			setTimeout(function () {
 				tool.switchTo([element.getAttribute('data-name'), element]);
 			}, 0);
-		}).click(function (event) {
+		}).off('click.Q_tabs_preventDefault')
+		.on('click.Q_tabs_preventDefault', function (event) {
 			event.preventDefault();
 			return false;
 		});
