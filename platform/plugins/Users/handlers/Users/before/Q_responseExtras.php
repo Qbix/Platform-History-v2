@@ -58,7 +58,7 @@ function Users_before_Q_responseExtras()
 					}
 				}
 				foreach ($private as $p) {
-					Q::unsetObject($apps[$platform][$appName], $p);
+					unset($apps[$platform][$appName][$p]);
 				}
 			}
 		}
@@ -74,23 +74,18 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
 
 	// load ethers js libs if web3 config defined
-	if ($config = Q_Config::get("Users", "apps", "web3", Q::app(), null)) {
+	if (Q_Config::get("Users", "apps", "web3", Users::communityId(), null)) {
 		Q_Response::addScript('{{Users}}/js/web3/ethers-5.2.umd.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/evm-chains.min.js', 'Users');
-		$providers = array();
-		if (Q::ifset($config, 'infura', null)) {
-			$providers['infura'] = array();
-		}
-		if (Q::ifset($config, 'fortmatic', null)) {
+		if (Q_Config::get("Users", "web3", "providers", "Fortmatic", false)) {
 			Q_Response::addScript('{{Users}}/js/web3/fortmatic.js', 'Users');
-			$providers['fortmatic'] = array();
 		}
-		if (Q::ifset($config, 'portis', null)) {
+		if (Q_Config::get("Users", "web3", "providers", "Portis", false)) {
 			Q_Response::addScript('{{Users}}/js/web3/portis.js', 'Users');
-			$providers['portis'] = array();
 		}
 		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
+		Q_Response::setScriptData("Q.plugins.Users.Web3.providers", Q_Config::expect("Users", "apps", "web3", Users::communityId(), "providers"));
 	}
 }
