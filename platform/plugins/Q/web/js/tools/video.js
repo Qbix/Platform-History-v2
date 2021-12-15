@@ -124,7 +124,6 @@ Q.Tool.define("Q/video", function (options) {
 					start: state.start || 0,
 					loop: state.loop,
 					autoplay: state.autoplay,
-					muse: {
 					width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
 					height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
 					sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
@@ -135,7 +134,7 @@ Q.Tool.define("Q/video", function (options) {
 					search: false, // Set to false to hide the search functionality.
 					title: false, // Set to false to hide the title.
 					volume: 100 // Set volume to a value between 0 and 100.
-				};
+				}
 				if (defaults.autoplay) {
 					defaults.volume = 0; // otherwise browsers block it
 				}
