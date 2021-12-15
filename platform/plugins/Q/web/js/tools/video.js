@@ -1054,7 +1054,7 @@ Q.Tool.define("Q/video", function (options) {
 			return 'vimeo';
 		} else if (host.includes("twitch")) {
 			return 'twitch';
-		} else if (host.include("muse.ai")) {
+		} else if (host.includes("muse.ai")) {
 			return 'muse';
 		}
 
