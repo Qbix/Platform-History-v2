@@ -244,8 +244,8 @@ Q.Tool.define("Q/video", function (options) {
 				container: element,
 				css: '.player-cover-play{background-image: url(' + Q.url(customPlayButton) + ');top: 50%;left: 50%;transform: translate(-50%, -50%);}',
 				start: state.start || 0,
-				loop: true,
-				autoplay: true
+				loop: state.loop,
+				autoplay: state.autoplay
 			});
 
 			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
