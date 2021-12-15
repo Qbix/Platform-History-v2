@@ -123,7 +123,18 @@ Q.Tool.define("Q/video", function (options) {
 					container: tool.element,
 					start: state.start || 0,
 					loop: state.loop,
-					autoplay: state.autoplay
+					autoplay: state.autoplay,
+					muse: {
+					width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+					height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+					sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
+					style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
+					logo: false, // Set to false to hide branding on the player.
+					resume: false, // Set to true to seek back to the last viewing position when the video loads.
+					links: false, // Set to false to disable links to muse.ai.
+					search: false, // Set to false to hide the search functionality.
+					title: false, // Set to false to hide the title.
+					volume: 100 // Set volume to a value between 0 and 100.
 				};
 				if (defaults.autoplay) {
 					defaults.volume = 0; // otherwise browsers block it
@@ -294,21 +305,21 @@ Q.Tool.define("Q/video", function (options) {
 	clipEnd: null,
 	muse: {
 		//start: 0, // Time at which the video should start playing.
-		width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
-		height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
-		sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
+		//width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		//height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		//sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
 		// black bars as necessary. Set to 'fit' to span the parent container while maintaining the player's aspect ratio.
 		// When using this value make sure that the container's parent has explicit width and height that don't depend on the player.
 		// If sizing is set, width and height will be ignored.
-		style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
+		//style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
 		//loop: true,
-		logo: false, // Set to false to hide branding on the player.
-		resume: false, // Set to true to seek back to the last viewing position when the video loads.
-		links: false, // Set to false to disable links to muse.ai.
-		search: false, // Set to false to hide the search functionality.
-		title: false, // Set to false to hide the title.
+		//logo: false, // Set to false to hide branding on the player.
+		//resume: false, // Set to true to seek back to the last viewing position when the video loads.
+		//links: false, // Set to false to disable links to muse.ai.
+		//search: false, // Set to false to hide the search functionality.
+		//title: false, // Set to false to hide the title.
 		//autoplay: true,
-		volume: 100 // Set volume to a value between 0 and 100.
+		//volume: 100 // Set volume to a value between 0 and 100.
 	},
 	ads: [],
 	floating: {
