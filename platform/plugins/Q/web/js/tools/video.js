@@ -125,6 +125,9 @@ Q.Tool.define("Q/video", function (options) {
 					loop: state.loop,
 					autoplay: state.autoplay
 				};
+				if (defaults.autoplay) {
+					defaults.volume = 0; // otherwise browsers block it
+				}
 				var match = state.url.match(/\/v\/([0-9A-Za-z]+).*$/);
 				if (!match) {
 					Q.Error("Q/video/muse: need url to contain '/v/:museVideoId'");
