@@ -125,7 +125,12 @@ Q.Tool.define("Q/video", function (options) {
 					loop: state.loop,
 					autoplay: state.autoplay
 				};
+				var match = state.url.match(/\/v\/([0-9A-Za-z]+).*$/);
+				if (!match) {
+					Q.Error("Q/video/muse: need url to contain '/v/:museVideoId'");
+				}
 				var custom = {};
+				custom.video = match[1];
 				if (customPlayButton) {
 					custom.css = '.player-cover-play{background-image: url('
 					+ Q.url(customPlayButton) 
@@ -285,7 +290,7 @@ Q.Tool.define("Q/video", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	muse: {
-		video: null, // video id
+		video: null, // video id, usually parsed from url
 		container: null, // HTML element that will contain the player.
 		//start: 0, // Time at which the video should start playing.
 		width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
