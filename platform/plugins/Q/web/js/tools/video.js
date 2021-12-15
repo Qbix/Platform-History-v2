@@ -264,7 +264,7 @@ Q.Tool.define("Q/video", function (options) {
 
 	var p = Q.pipe(['stylesheet', 'text', 'scripts'], function (params, subjects) {
 		tool.text = params.text[1].video;
-		tool.implement();
+		tool.refresh();
 	});
 
 	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
@@ -290,7 +290,6 @@ Q.Tool.define("Q/video", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	muse: {
-		video: null, // video id, usually parsed from url
 		container: null, // HTML element that will contain the player.
 		//start: 0, // Time at which the video should start playing.
 		width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
@@ -505,9 +504,9 @@ Q.Tool.define("Q/video", function (options) {
 	},
 	/**
 	 * Refreshes the appearance of the tool completely
-	 * @method implement
+	 * @method refresh
 	 */
-	implement: function () {
+	refresh: function () {
 		var tool = this;
 
 		var adapterName = tool.adapterNameFromUrl();

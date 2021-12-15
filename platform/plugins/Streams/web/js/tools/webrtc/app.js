@@ -10852,7 +10852,7 @@ window.WebRTCRoomClient = function app(options){
         app.init(callback, localParticipant);
     }
 
-    app.switchTo = async function(publisherId, streamName){
+    app.switchTo = function(publisherId, streamName){
         log('app.switchTo')
         app.mediaManager.canvasComposer.videoComposer.switchingRoom(true);
         var currentStreams = localParticipant.tracks.map(function (track) {
