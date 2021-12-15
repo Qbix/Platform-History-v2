@@ -1032,11 +1032,7 @@ Q.Tool.define("Q/video", function (options) {
 	 */
 	adapterNameFromUrl: function (url) {
 		var state = this.state;
-
-		if (Q.getObject("muse.video", state)) {
-			return "muse";
-		}
-
+		
 		url = url || state.url;
 		if (!url) {
 			//throw new Q.Exception(this.id + ": url is required");
