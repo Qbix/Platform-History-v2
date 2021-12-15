@@ -10,6 +10,7 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.url] URL of video source
+ *  @param {String} [options.museVideoId] Id of video uploaded to muse.ai
  *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
@@ -236,6 +237,26 @@ Q.Tool.define("Q/video", function (options) {
 		}
 	};
 
+	tool.adapters.museVideo = {
+		activateMusePlayers: function (element) {
+			var customPlayButton = Q.getObject("overlay.play.src", state);
+			var options = Q.extend(state.museVideo, {
+				container: element,
+				css: '.player-cover-play{background-image: url(' + Q.url(customPlayButton) + ');top: 50%;left: 50%;transform: translate(-50%, -50%);}',
+				start: state.start || 0,
+				loop: true,
+				autoplay: true
+			});
+
+			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
+				state.player = MusePlayer(options);
+			});
+		},
+		init: function () {
+			this.activateMusePlayers(tool.element);
+		}
+	};
+
 	//tool.adapters.youtube = tool.adapters.vimeo = tool.adapters.mp4 = tool.adapters.webm = tool.adapters.general;
 
 	var p = Q.pipe(['stylesheet', 'text', 'scripts'], function (params, subjects) {
@@ -265,6 +286,26 @@ Q.Tool.define("Q/video", function (options) {
 	start: null,
 	clipStart: null,
 	clipEnd: null,
+	museVideo: {
+		video: null, // video id
+		container: null, // HTML element that will contain the player.
+		//start: 0, // Time at which the video should start playing.
+		width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
+		// black bars as necessary. Set to 'fit' to span the parent container while maintaining the player's aspect ratio.
+		// When using this value make sure that the container's parent has explicit width and height that don't depend on the player.
+		// If sizing is set, width and height will be ignored.
+		style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
+		//loop: true,
+		logo: false, // Set to false to hide branding on the player.
+		resume: false, // Set to true to seek back to the last viewing position when the video loads.
+		links: false, // Set to false to disable links to muse.ai.
+		search: false, // Set to false to hide the search functionality.
+		title: false, // Set to false to hide the title.
+		//autoplay: true,
+		volume: 100 // Set volume to a value between 0 and 100.
+	},
 	ads: [],
 	floating: {
 		evenIfPaused: false
@@ -992,7 +1033,13 @@ Q.Tool.define("Q/video", function (options) {
 	 * @param {string} url
 	 */
 	adapterNameFromUrl: function (url) {
-		url = url || this.state.url;
+		var state = this.state;
+
+		if (Q.getObject("museVideo.video", state)) {
+			return "museVideo";
+		}
+
+		url = url || state.url;
 		if (!url) {
 			//throw new Q.Exception(this.id + ": url is required");
 			console.warn(this.id + ": url is required");
