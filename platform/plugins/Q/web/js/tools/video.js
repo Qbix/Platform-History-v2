@@ -10,7 +10,6 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.url] URL of video source
- *  @param {String} [options.museVideoId] Id of video uploaded to muse.ai
  *  @param {string} [options.start] start position in milliseconds
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
@@ -95,7 +94,6 @@ Q.Tool.define("Q/video", function (options) {
 						playsinline: 1
 					}
 				};
-
 				tool.initVideojsPlayer(options);
 			});
 		}
@@ -113,8 +111,28 @@ Q.Tool.define("Q/video", function (options) {
 						ytControls: 2
 					}
 				};
-
 				tool.initVideojsPlayer(options);
+			});
+		}
+	};
+	tool.adapters.muse = {
+		init: function () {
+			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
+				var customPlayButton = Q.getObject("overlay.play.src", state);
+				var defaults = {
+					container: tool.element,
+					start: state.start || 0,
+					loop: state.loop,
+					autoplay: state.autoplay
+				};
+				var custom = {};
+				if (customPlayButton) {
+					custom.css = '.player-cover-play{background-image: url('
+					+ Q.url(customPlayButton) 
+					+ ');top: 50%;left: 50%;transform: translate(-50%, -50%);}';
+				}
+				var options = Q.extend({}, defaults, custom, state.muse);
+				state.player = MusePlayer(options);
 			});
 		}
 	};
@@ -237,26 +255,6 @@ Q.Tool.define("Q/video", function (options) {
 		}
 	};
 
-	tool.adapters.museVideo = {
-		activateMusePlayers: function (element) {
-			var customPlayButton = Q.getObject("overlay.play.src", state);
-			var options = Q.extend(state.museVideo, {
-				container: element,
-				css: '.player-cover-play{background-image: url(' + Q.url(customPlayButton) + ');top: 50%;left: 50%;transform: translate(-50%, -50%);}',
-				start: state.start || 0,
-				loop: state.loop,
-				autoplay: state.autoplay
-			});
-
-			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
-				state.player = MusePlayer(options);
-			});
-		},
-		init: function () {
-			this.activateMusePlayers(tool.element);
-		}
-	};
-
 	//tool.adapters.youtube = tool.adapters.vimeo = tool.adapters.mp4 = tool.adapters.webm = tool.adapters.general;
 
 	var p = Q.pipe(['stylesheet', 'text', 'scripts'], function (params, subjects) {
@@ -286,7 +284,7 @@ Q.Tool.define("Q/video", function (options) {
 	start: null,
 	clipStart: null,
 	clipEnd: null,
-	museVideo: {
+	muse: {
 		video: null, // video id
 		container: null, // HTML element that will contain the player.
 		//start: 0, // Time at which the video should start playing.
@@ -1035,8 +1033,8 @@ Q.Tool.define("Q/video", function (options) {
 	adapterNameFromUrl: function (url) {
 		var state = this.state;
 
-		if (Q.getObject("museVideo.video", state)) {
-			return "museVideo";
+		if (Q.getObject("muse.video", state)) {
+			return "muse";
 		}
 
 		url = url || state.url;
@@ -1055,6 +1053,8 @@ Q.Tool.define("Q/video", function (options) {
 			return 'vimeo';
 		} else if (host.includes("twitch")) {
 			return 'twitch';
+		} else if (host.include("muse.ai")) {
+			return 'muse';
 		}
 
 		var ext = url.split('.').pop();
