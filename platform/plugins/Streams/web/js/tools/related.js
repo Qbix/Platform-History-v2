@@ -554,15 +554,17 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			throw new Q.Error("Streams/related/loadMore: limit undefined, no sense to use loadMore, because all items loaded");
 		}
 
+		var relatedOptions = Q.extend({}, state.relatedOptions, {
+			limit: limit,
+			offset: offset
+		});
+
 		Streams.retainWith(tool).related(
 			publisherId,
 			streamName,
 			state.relationType,
 			state.isCategory,
-			{
-				limit: limit,
-				offset: offset
-			},
+			relatedOptions,
 			function (errorMessage) {
 				if (errorMessage) {
 					return console.warn("Streams/related refresh: " + errorMessage);
