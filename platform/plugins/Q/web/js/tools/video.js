@@ -290,7 +290,6 @@ Q.Tool.define("Q/video", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	muse: {
-		container: null, // HTML element that will contain the player.
 		//start: 0, // Time at which the video should start playing.
 		width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
 		height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
