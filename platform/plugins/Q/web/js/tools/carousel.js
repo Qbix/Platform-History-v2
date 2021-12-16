@@ -517,8 +517,8 @@
 
                     theta = 360 / aEle.length;
 
-                    tX += desX * 0.05;
-                    tY += desY * 0.05;
+                    tX += desX * 0.1;
+                    tY += desY * 0.1;
                     applyTranform(obox, e.target);
                     sX = nX;
                     sY = nY;
