@@ -12,7 +12,7 @@
 		"apn": "^2.2.0",
 		"fcm-node": "^1.5.1",
 		"node-adm": "^0.9.1",
-		"nodemailer": "6.3.x",
+		"nodemailer": "6.6.x",
 		"nodemailer-sendmail-transport": "1.x",
 		"nodemailer-smtp-transport": "2.7.x",
 		"twilio": "0.4.x",
