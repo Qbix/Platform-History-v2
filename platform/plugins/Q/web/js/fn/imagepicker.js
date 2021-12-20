@@ -118,7 +118,15 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		$this.addClass('Q_uploading');
 		var reader = new FileReader();
 		reader.onload = function(event) {
-			$this.plugin('Q/imagepicker', 'pick', this.result);
+			var mime = state.file.type;
+			if (mime.startsWith("image")) {
+				$this.plugin('Q/imagepicker', 'pick', this.result);
+			} else if (mime.startsWith("video")) {
+				$this.plugin('Q/imagepicker', 'doUpload', this.result);
+			} else {
+				Q.alert(Q.text.Q.imagepicker.errorType);
+			}
+
 		};
 		reader.onerror = function () { 
 			setTimeout(function() { 
@@ -655,7 +663,68 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	                          dx, dy, dw, dh );
 	   }
 	},
-	
+	/**
+	 * Just upload file to server, without any changes
+	 * @method doUpload
+	 * @param {string} data - base64 encoded file data
+	 */
+	doUpload: function (data) {
+		var $this = this;
+		var state = $this.state('Q/imagepicker');
+
+		var path = state.path;
+		path = (typeof path === 'function') ? path() : path;
+		var subpath = state.subpath;
+		subpath = (typeof subpath === 'function') ? subpath() : subpath;
+		var _callback = function (err, res) {
+			var msg = Q.firstErrorMessage(err, res);
+			if (msg) {
+				$this.attr('src', state.oldSrc).stop().removeClass('Q_uploading');
+				return Q.handle([state.onError, state.onFinish], $this, [msg]);
+			}
+			var c = Q.handle([state.onSuccess, state.onFinish], $this,
+				[res.slots.data, null, state.file || null]
+			);
+			$this.removeClass('Q_uploading');
+		};
+		var params = {
+			'name': state.file.name,
+			'data': data,
+			'path': path,
+			'subpath': subpath,
+			'url': Q.action("Q/file"),
+			'loader': state.loader
+		};
+		if (state.save) {
+			params.save = state.save;
+		}
+
+		if (params.loader) {
+			var callable = params.loader;
+			delete params.loader;
+			Q.handle(callable, null, [params, _callback]);
+		} else {
+			var url = params.url;
+			delete params.url;
+			if (window.FileReader) {
+				Q.request(url, 'data', _callback, {
+					fields: params,
+					method: 'POST'
+				});
+			} else {
+				delete params.data;
+				var $form = state.input.wrap('<form />', {
+					method: 'POST',
+					action: Q.url(url, params)
+				}).parent();
+				Q.formPost($form[0], {
+					onLoad: _callback
+				});
+				state.input.unwrap();
+			}
+		}
+	},
+
 	/**
 	 * Removes the imagepicker functionality from the element
 	 * @method remove
