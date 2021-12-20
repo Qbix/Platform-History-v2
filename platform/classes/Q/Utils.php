@@ -964,7 +964,7 @@ class Q_Utils
 					}
 					$found = false;
 					foreach ($header as $h) {
-						if (Q::startsWith($h, 'Content-type:')) {
+						if (Q::startsWith($h, 'Content-length:')) {
 							$found = true;
 						}
 					}
