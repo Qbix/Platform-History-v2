@@ -12,8 +12,9 @@
     display: -ms-flexbox;
     display: flex;
     background: white;
-    -webkit-perspective: 1000px;
-    perspective: 1000px;
+    /*-webkit-perspective: 1000px;
+    perspective: 1000px;*/
+    /*perspective: 10000px;*/
     -webkit-transform-style: preserve-3d;
     transform-style: preserve-3d;
 }
@@ -84,7 +85,7 @@
     padding-bottom: 4px;
     opacity: 0.1;
     transition: 1s ease opacity;
-    transition-delay: 2s;
+    transition-delay: 0s;
 }
 .carousel-wrap .drag-container.draggingActive figcaption {
     transition-delay: unset;

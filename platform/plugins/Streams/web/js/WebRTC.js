@@ -7357,107 +7357,121 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             return webRTCInstance;
         }
 
-        async function switchTo(publisherId, streamName, options) {
+        function switchTo(publisherId, streamName, options) {
             log('switch WebRTC conference room', publisherId, streamName);
             log('switch WebRTCconference', WebRTCconference);
 
             log('switchTo: _options.beforeSwitch', _options.beforeSwitch)
 
             if(_options.beforeSwitch) {
-                await _options.beforeSwitch();
+                _options.beforeSwitch().then(function () {
+                    return continueSwitching();
+                });
+            } else {
+                return continueSwitching();
             }
 
-            log('switchTo: promise: onResolve')
+            function continueSwitching() {
+                log('switchTo: promise: onResolve')
 
-            if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
+                if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
 
-            if(Q.Socket.getAll()['/webrtc']) {
-                Q.Socket.getAll()['/webrtc'] = null;
-            }
-
-
-            return new Promise (function (resolve, reject) {
-
-                function onPlayEnd() {
-
-                    log('switchTo: createRoomStream')
-                    var roomIdToJoin = streamName.replace('Streams/webrtc/', '');
-
-                    Q.req("Streams/webrtc", ["room"], function (err, response) {
-                        var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                        if (msg) {
-                            return Q.alert(msg);
-                        }
-                        log('switchTo: createRoomStream: joined/connected');
+                if(Q.Socket.getAll()['/webrtc']) {
+                    Q.Socket.getAll()['/webrtc'] = null;
+                }
 
 
-                        Q.Streams.get(publisherId, 'Streams/webrtc/' + roomIdToJoin, async function (err, stream) {
-                            log('switchTo: createRoomStream: joined/connected: pull stream', stream);
+                return new Promise (function (resolve, reject) {
 
-                            _roomStream = stream;
-                            if(Q.Streams.WebRTCRooms == null){
-                                Q.Streams.WebRTCRooms = [];
+                    function onPlayEnd() {
+
+                        log('switchTo: createRoomStream')
+                        var roomIdToJoin = streamName.replace('Streams/webrtc/', '');
+
+                        Q.req("Streams/webrtc", ["room"], function (err, response) {
+                            var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                            if (msg) {
+                                return Q.alert(msg);
                             }
+                            log('switchTo: createRoomStream: joined/connected');
 
-                            log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
-                            WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
 
-                            bindStreamsEvents(_roomStream);
-                            var newRoomClientInstance = await WebRTCconference.switchTo(publisherId, roomIdToJoin);
+                            Q.Streams.get(publisherId, 'Streams/webrtc/' + roomIdToJoin, function (err, stream) {
+                                log('switchTo: createRoomStream: joined/connected: pull stream', stream);
 
-                            log('switchTo: createOrJoinRoomStream: newRoomClientInstance', newRoomClientInstance)
-                            bindConferenceEvents(newRoomClientInstance);
+                                _roomStream = stream;
+                                if(Q.Streams.WebRTCRooms == null){
+                                    Q.Streams.WebRTCRooms = [];
+                                }
 
-                            newRoomClientInstance.event.on('initNegotiationEnded', function () {
-                                log('switchTo: createOrJoinRoomStream: initNegotiationEnded')
-                                WebRTCconference = newRoomClientInstance;
+                                log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
+                                WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
 
-                                updateParticipantData();
-                                _controlsTool.state.webRTClibraryInstance = WebRTCconference;
-                                _controlsTool.refresh();
+                                bindStreamsEvents(_roomStream);
+                                WebRTCconference.switchTo(publisherId, roomIdToJoin).then(function (newRoomClientInstance) {
+                                    log('switchTo: createOrJoinRoomStream: newRoomClientInstance', newRoomClientInstance)
+                                    bindConferenceEvents(newRoomClientInstance);
 
-                                screensRendering.updateLayout();
+                                    newRoomClientInstance.event.on('initNegotiationEnded', function () {
+                                        log('switchTo: createOrJoinRoomStream: initNegotiationEnded')
+                                        WebRTCconference = newRoomClientInstance;
 
-                                resolve();
+                                        updateParticipantData();
+                                        _controlsTool.state.webRTClibraryInstance = WebRTCconference;
+                                        _controlsTool.refresh();
+
+                                        screensRendering.updateLayout();
+
+                                        resolve();
+                                    });
+                                });
+
+
                             });
+
+                        }, {
+                            method: 'post',
+                            fields: {
+                                roomId: roomIdToJoin,
+                                publisherId: publisherId,
+                                resumeClosed: options && options.resumeClosed != null ? options.resumeClosed : _options.resumeClosed
+                            }
                         });
+                    }
 
-                    }, {
-                        method: 'post',
-                        fields: {
-                            roomId: roomIdToJoin,
-                            publisherId: publisherId,
-                            resumeClosed: options && options.resumeClosed != null ? options.resumeClosed : _options.resumeClosed
-                        }
-                    });
-                }
+                    function playSwitchSound() {
+                        log('switchTo: playSwitchSound')
 
-                function playSwitchSound() {
-                    let playSwitchSound = Q.Audio.collection[_options.sounds.roomSwitch].audio.play();
-                    playSwitchSound.then(function () {
-                        log('switchTo: playSwitchSound success')
-                        Q.Audio.collection[_options.sounds.roomSwitch].onEnded.set(function () {
+                        let playSwitchSound = Q.Audio.collection[_options.sounds.roomSwitch].audio.play();
+                        playSwitchSound.then(function () {
+                            log('switchTo: playSwitchSound success')
+                            Q.Audio.collection[_options.sounds.roomSwitch].onEnded.set(function () {
+                                onPlayEnd()
+
+                                Q.Audio.collection[_options.sounds.roomSwitch].onEnded.remove('Q.WebRTC.switchTo');
+                            }, 'Q.WebRTC.switchTo');
+
+                        }).catch(function(e){
+                            log('switchTo: playSwitchSound error')
                             onPlayEnd()
+                            console.error(e);
+                        });
+                    }
 
-                            Q.Audio.collection[_options.sounds.roomSwitch].onEnded.remove('Q.WebRTC.switchTo');
-                        }, 'Q.WebRTC.switchTo');
+                    if(Q.Audio.collection[_options.sounds.roomSwitch]) {
+                        log('switchTo: playSwitchSound')
 
-                    }).catch(function(e){
-                        onPlayEnd()
-                        console.error(e);
-                    });
-                }
-
-                if(Q.Audio.collection[_options.sounds.roomSwitch]) {
-                    playSwitchSound();
-                } else {
-                    Q.Audio.load(_options.sounds.roomSwitch, function () {
                         playSwitchSound();
-                    });
-                }
-            });
+                    } else {
+                        log('switchTo: .Audio.load')
 
+                        Q.Audio.load(_options.sounds.roomSwitch, function () {
+                            playSwitchSound();
+                        });
+                    }
+                });
+            }
         }
 
         /**
