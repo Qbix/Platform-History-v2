@@ -47,7 +47,11 @@ Q.Tool.define("Assets/NFT/preview", function (options) {
 		var tool = this;
 		var state = tool.state;
 
-		Q.handle(NFT.balanceOf, tool, [window.ethereum.selectedAddress, window.ethereum.chainId, function () {
+		Q.handle(NFT.balanceOf, tool, [window.ethereum.selectedAddress, window.ethereum.chainId, function (err, tokensAmount) {
+			if (err) {
+				return;
+			}
+
 
 		}]);
 	}

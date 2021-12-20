@@ -36,6 +36,8 @@ class Db_Range
 	{
 		$min = $this->min;
 		$max = $this->max;
+		$includeMin = $this->includeMin;
+		$includeMax = $this->includeMax;
 		if ($includeMin and $includeMax) {
 			return "Db_Range($min <= ... <= $max)";
 		}

@@ -219,7 +219,8 @@
         "OpenForBids": "Open for bids",
         "PriceOnePiece": "Enter price for one piece",
         "EnterMinimumBid": "Enter Minimum bid",
-        "SelectNetwork": "Select network",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
         "import": {
             "importNFT": "Importing NFT's",
             "fileNotFound": "Sorry, CSV file not found.",

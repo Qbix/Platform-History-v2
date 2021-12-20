@@ -305,7 +305,7 @@ abstract class Base_Users_Web3 extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('chainId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -360,7 +360,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('methodName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -415,7 +415,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('params', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -470,7 +470,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('contract', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -525,7 +525,7 @@ return array (
 			return array('result', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('result', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -580,7 +580,7 @@ return array (
 			return array('extra', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('extra', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -631,7 +631,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -681,7 +681,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

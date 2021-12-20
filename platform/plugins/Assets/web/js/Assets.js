@@ -1006,25 +1006,25 @@
 				contracts: [],
 
 				/**
-				 * Check web3 provider (MetaMask) connected, and switch to valid network
+				 * Check web3 provider (MetaMask) connected, and switch to valid chain
 				 * @method checkProvider
-				 * @param {Object} network
+				 * @param {Object} chain
 				 * @param {function} callback
 				 */
-				checkProvider: function (network, callback) {
+				checkProvider: function (chain, callback) {
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
-						// check valid network selected
-						if (window.ethereum.chainId === network.chainId) {
-							Assets.Web3.NFT.getContract(network, callback);
-						} else { // if no, lead to switch network
-							Q.Users.Web3.setNetwork(network, function () {
-								// after network switched need update contract
-								Assets.Web3.NFT.contracts[network.chainId] = null;
-								Assets.Web3.NFT.getContract(network, callback);
+						// check valid chain selected
+						if (window.ethereum.chainId === chain.chainId) {
+							Assets.Web3.NFT.getContract(chain, callback);
+						} else { // if no, lead to switch chain
+							Q.Users.Web3.setChain(chain, function () {
+								// after chain switched need update contract
+								Assets.Web3.NFT.contracts[chain.chainId] = null;
+								Assets.Web3.NFT.getContract(chain, callback);
 							}, function (err) {
 								Q.handle(callback, null, [err]);
 							});
@@ -1034,19 +1034,19 @@
 				/**
 				 * Create contract for user
 				 * @method getContract
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
 				 */
-				getContract: function (network, callback, options) {
+				getContract: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
 						return Q.handle(callback, null, ["Ethereum provider not found", null]);
 					}
 
-					// if network is a chainId, convert to network
-					if (Q.typeOf(network) === "string") {
-						network = Assets.Web3.NFT.networks[network];
+					// if chain is a chainId, convert to chain
+					if (Q.typeOf(chain) === "string") {
+						chain = Assets.Web3.NFT.chains[chain];
 					}
 
 					var _subMethod = function (contract) {
@@ -1061,7 +1061,7 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var contract = Assets.Web3.NFT.contracts[network.chainId];
+					var contract = Assets.Web3.NFT.contracts[chain.chainId];
 
 					// if contract exists, return one
 					if (contract) {
@@ -1069,9 +1069,9 @@
 					}
 
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + network.contract + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.contract + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						contract = new ethers.Contract(network.contract, ABI, provider.getSigner());
+						contract = new ethers.Contract(chain.contract, ABI, provider.getSigner());
 
 						contract.on("TokenRemovedFromSale", function (tokenId) {
 							Q.handle(Assets.Web3.NFT.onTokenRemovedFromSale, null, [tokenId])
@@ -1086,22 +1086,22 @@
 							Q.handle(Assets.Web3.NFT.onTransferAuthorship, null, [oldAddress, newAddress, token])
 						});
 
-						Assets.Web3.NFT.contracts[network.chainId] = contract;
+						Assets.Web3.NFT.contracts[chain.chainId] = contract;
 
-						Q.handle(Assets.Web3.NFT.onContractUpdated(network.chainId), null, [contract]);
+						Q.handle(Assets.Web3.NFT.onContractUpdated(chain.chainId), null, [contract]);
 
 						return _subMethod(contract);
 					});
 				},
 				/**
-				 * Get amount of tokens by wallet and network
+				 * Get amount of tokens by wallet and chain
 				 * @method balanceOf
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				balanceOf: function (wallet, network, callback) {
-					Assets.Web3.NFT.getContract(network, function (err, contract) {
+				balanceOf: function (wallet, chain, callback) {
+					Assets.Web3.NFT.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1114,15 +1114,15 @@
 					});
 				},
 				/**
-				 * Get author of NFT by tokenId and network.
-				 * If wrong network selected, suggest to switch network.
+				 * Get author of NFT by tokenId and chain.
+				 * If wrong chain selected, suggest to switch chain.
 				 * @method getAuthor
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				getAuthor: function (tokenId, network, callback) {
-					Assets.Web3.NFT.getContract(network, function (err, contract) {
+				getAuthor: function (tokenId, chain, callback) {
+					Assets.Web3.NFT.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1135,15 +1135,15 @@
 					});
 				},
 				/**
-				 * Get owner of NFT by tokenId and network.
-				 * If wrong network selected, suggest to switch network.
+				 * Get owner of NFT by tokenId and chain.
+				 * If wrong chain selected, suggest to switch chain.
 				 * @method getOwner
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				getOwner: function (tokenId, network, callback) {
-					Assets.Web3.NFT.getContract(network, function (err, contract) {
+				getOwner: function (tokenId, chain, callback) {
+					Assets.Web3.NFT.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1156,15 +1156,15 @@
 					});
 				},
 				/**
-				 * Get commissionInfo of NFT by tokenId and network.
-				 * If wrong network selected, suggest to switch network.
+				 * Get commissionInfo of NFT by tokenId and chain.
+				 * If wrong chain selected, suggest to switch chain.
 				 * @method commissionInfo
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				commissionInfo: function (tokenId, network, callback) {
-					Assets.Web3.NFT.getContract(network, function (err, contract) {
+				commissionInfo: function (tokenId, chain, callback) {
+					Assets.Web3.NFT.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1177,15 +1177,15 @@
 					});
 				},
 				/**
-				 * Get saleInfo of NFT by tokenId and network.
-				 * If wrong network selected, suggest to switch network.
+				 * Get saleInfo of NFT by tokenId and chain.
+				 * If wrong chain selected, suggest to switch chain.
 				 * @method saleInfo
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				saleInfo: function (tokenId, network, callback) {
-					Assets.Web3.NFT.getContract(network, function (err, contract) {
+				saleInfo: function (tokenId, chain, callback) {
+					Assets.Web3.NFT.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1207,12 +1207,12 @@
 				 * Transfer NFT from one wallet to another.
 				 * @method transferFrom
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network
+				 * @params {Object} chain
 				 * @params {String} newAddress wallet address to transfer to
 				 * @params {function} callback
 				 */
-				transferFrom: function (tokenId, network, newAddress, callback) {
-					Q.handle(Assets.Web3.NFT.getOwner, this, [tokenId, network, function (err, owner, contract) {
+				transferFrom: function (tokenId, chain, newAddress, callback) {
+					Q.handle(Assets.Web3.NFT.getOwner, this, [tokenId, chain, function (err, owner, contract) {
 						if (err) {
 							return Q.alert(err);
 						}
@@ -1226,17 +1226,17 @@
 				},
 				/**
 				 * Buy NFT.
-				 * If wrong network selected, suggest to switch network.
+				 * If wrong chain selected, suggest to switch chain.
 				 * @method buy
 				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} network Blockchain network where the tokenId was created
+				 * @params {Object} chain Blockchain chain where the tokenId was created
 				 * @params {String} currency currency of NFT
 				 * @params {function} callback
 				 */
-				buy: function (tokenId, network, currency, callback) {
-					if (window.ethereum.chainId !== network.chainId) {
+				buy: function (tokenId, chain, currency, callback) {
+					if (window.ethereum.chainId !== chain.chainId) {
 						Q.handle(callback, null, [true]);
-						return Q.alert(texts.errors.WrongNetwork.interpolate({network: network.name}), {
+						return Q.alert(Assets.texts.NFT.WrongChain.interpolate({chain: chain.name}), {
 							title: texts.errors.Error
 						});
 					}
@@ -1260,12 +1260,12 @@
 						});
 					};
 
-					Assets.Web3.NFT.saleInfo(tokenId, network, function (err, price) {
+					Assets.Web3.NFT.saleInfo(tokenId, chain, function (err, price) {
 						if (err) {
 							return console.warn(err);
 						}
 
-						Assets.Web3.NFT.getContract(network, function (err, contract) {
+						Assets.Web3.NFT.getContract(chain, function (err, contract) {
 							if (err) {
 								return;
 							}

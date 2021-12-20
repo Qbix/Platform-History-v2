@@ -669,8 +669,8 @@
 
 	function _addListeners(tool, $jq) {
 		var selector = '.Q_tabs_tab';
-		$jq.off(Q.Pointer.fastclick, selector)
-		.on(Q.Pointer.fastclick, selector, function (event) {
+		$jq.off([Q.Pointer.fastclick, '.Q_tabs'], selector)
+		.on([Q.Pointer.fastclick, '.Q_tabs'], selector, function (event) {
 			if (false === tool.state.onClick.handle.call(tool, this.getAttribute('data-name'), this)) {
 				return;
 			}
@@ -682,7 +682,8 @@
 			setTimeout(function () {
 				tool.switchTo([element.getAttribute('data-name'), element]);
 			}, 0);
-		}).click(function (event) {
+		}).off('click.Q_tabs_preventDefault')
+		.on('click.Q_tabs_preventDefault', function (event) {
 			event.preventDefault();
 			return false;
 		});

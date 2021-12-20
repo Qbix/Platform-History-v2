@@ -373,7 +373,7 @@ abstract class Base_Users_User extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('id', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -424,7 +424,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -474,7 +474,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -525,7 +525,7 @@ return array (
 			return array('sessionId', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('sessionId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -576,7 +576,7 @@ return array (
 	function beforeSet_sessionCount($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('sessionCount', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -635,7 +635,7 @@ return array (
 			return array('passphraseHash', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('passphraseHash', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -690,7 +690,7 @@ return array (
 			return array('emailAddress', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('emailAddress', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -745,7 +745,7 @@ return array (
 			return array('mobileNumber', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('mobileNumber', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -800,7 +800,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('xids', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -855,7 +855,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('emailAddressPending', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -910,7 +910,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('mobileNumberPending', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -965,7 +965,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('signedUpWith', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1020,7 +1020,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('username', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1075,7 +1075,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('icon', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1130,7 +1130,7 @@ return array (
 			return array('url', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('url', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1185,7 +1185,7 @@ return array (
 			return array('pincodeHash', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('pincodeHash', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1240,7 +1240,7 @@ return array (
 			return array('salt', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('salt', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -1295,7 +1295,7 @@ return array (
 			return array('preferredLanguage', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('preferredLanguage', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

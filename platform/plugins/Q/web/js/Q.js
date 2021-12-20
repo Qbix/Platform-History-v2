@@ -4400,6 +4400,10 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 
 Q.Tool.jQuery.loadAtStart = [];
 
+Q.Tool.jQuery.info = function (element) {
+	return jQuery.hasData(element) && jQuery._data(element);
+};
+
 /**
  * Call this function to define default options for a jQuery tool constructor,
  * even if it has not been loaded yet.

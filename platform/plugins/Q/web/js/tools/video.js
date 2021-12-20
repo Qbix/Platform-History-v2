@@ -94,7 +94,6 @@ Q.Tool.define("Q/video", function (options) {
 						playsinline: 1
 					}
 				};
-
 				tool.initVideojsPlayer(options);
 			});
 		}
@@ -112,8 +111,46 @@ Q.Tool.define("Q/video", function (options) {
 						ytControls: 2
 					}
 				};
-
 				tool.initVideojsPlayer(options);
+			});
+		}
+	};
+	tool.adapters.muse = {
+		init: function () {
+			Q.addScript("https://muse.ai/static/js/embed-player.min.js", function () {
+				var customPlayButton = Q.getObject("overlay.play.src", state);
+				var defaults = {
+					container: tool.element,
+					start: state.start || 0,
+					loop: state.loop,
+					autoplay: state.autoplay,
+					width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+					height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+					sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
+					style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
+					logo: false, // Set to false to hide branding on the player.
+					resume: false, // Set to true to seek back to the last viewing position when the video loads.
+					links: false, // Set to false to disable links to muse.ai.
+					search: false, // Set to false to hide the search functionality.
+					title: false, // Set to false to hide the title.
+					volume: 100 // Set volume to a value between 0 and 100.
+				}
+				if (defaults.autoplay) {
+					defaults.volume = 0; // otherwise browsers block it
+				}
+				var match = state.url.match(/\/v\/([0-9A-Za-z]+).*$/);
+				if (!match) {
+					Q.Error("Q/video/muse: need url to contain '/v/:museVideoId'");
+				}
+				var custom = {};
+				custom.video = match[1];
+				if (customPlayButton) {
+					custom.css = '.player-cover-play{background-image: url('
+					+ Q.url(customPlayButton) 
+					+ ');top: 50%;left: 50%;transform: translate(-50%, -50%);}';
+				}
+				var options = Q.extend({}, defaults, custom, state.muse);
+				state.player = MusePlayer(options);
 			});
 		}
 	};
@@ -240,7 +277,7 @@ Q.Tool.define("Q/video", function (options) {
 
 	var p = Q.pipe(['stylesheet', 'text', 'scripts'], function (params, subjects) {
 		tool.text = params.text[1].video;
-		tool.implement();
+		tool.refresh();
 	});
 
 	Q.addStylesheet(["{{Q}}/css/videojs.css", "{{Q}}/css/video.css"], p.fill('stylesheet'), { slotName: 'Q' });
@@ -265,6 +302,24 @@ Q.Tool.define("Q/video", function (options) {
 	start: null,
 	clipStart: null,
 	clipEnd: null,
+	muse: {
+		//start: 0, // Time at which the video should start playing.
+		//width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		//height: "100%", // Desired player height. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
+		//sizing: "fill", // Set to 'fill' to indicate that the player should fill the entire container's size and introduce
+		// black bars as necessary. Set to 'fit' to span the parent container while maintaining the player's aspect ratio.
+		// When using this value make sure that the container's parent has explicit width and height that don't depend on the player.
+		// If sizing is set, width and height will be ignored.
+		//style: 'no-controls', // Set to minimal for minimal player controls, and to no-controls to hide controls entirely.
+		//loop: true,
+		//logo: false, // Set to false to hide branding on the player.
+		//resume: false, // Set to true to seek back to the last viewing position when the video loads.
+		//links: false, // Set to false to disable links to muse.ai.
+		//search: false, // Set to false to hide the search functionality.
+		//title: false, // Set to false to hide the title.
+		//autoplay: true,
+		//volume: 100 // Set volume to a value between 0 and 100.
+	},
 	ads: [],
 	floating: {
 		evenIfPaused: false
@@ -461,9 +516,9 @@ Q.Tool.define("Q/video", function (options) {
 	},
 	/**
 	 * Refreshes the appearance of the tool completely
-	 * @method implement
+	 * @method refresh
 	 */
-	implement: function () {
+	refresh: function () {
 		var tool = this;
 
 		var adapterName = tool.adapterNameFromUrl();
@@ -992,7 +1047,9 @@ Q.Tool.define("Q/video", function (options) {
 	 * @param {string} url
 	 */
 	adapterNameFromUrl: function (url) {
-		url = url || this.state.url;
+		var state = this.state;
+		
+		url = url || state.url;
 		if (!url) {
 			//throw new Q.Exception(this.id + ": url is required");
 			console.warn(this.id + ": url is required");
@@ -1008,6 +1065,8 @@ Q.Tool.define("Q/video", function (options) {
 			return 'vimeo';
 		} else if (host.includes("twitch")) {
 			return 'twitch';
+		} else if (host.includes("muse.ai")) {
+			return 'muse';
 		}
 
 		var ext = url.split('.').pop();

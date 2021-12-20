@@ -291,7 +291,7 @@ abstract class Base_Users_Vote extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -346,7 +346,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('forType', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -401,7 +401,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('forId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -445,7 +445,7 @@ return array (
 	function beforeSet_value($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('value', $value);
 		}
 		if (!is_numeric($value))
@@ -478,7 +478,7 @@ return array (
 	function beforeSet_weight($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('weight', $value);
 		}
 		if (!is_numeric($value))
@@ -521,7 +521,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Query) {
+       or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
