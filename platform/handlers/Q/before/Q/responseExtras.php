@@ -116,4 +116,10 @@ function Q_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.info.urls', $config);
 	Q_Response::setScriptData('Q.info.cookies', array('Q_cordova', 'Q_nonce', 'Q_dpr'));
 	Q_Response::setScriptData('Q.images.lazyload', $lazyload);
+
+	// pass videos data to client
+	$videoConfig = Q_Config::get("Q", "video", array());
+	foreach ($videoConfig as $provider => $data) {
+		Q_Response::setScriptData('Q.video.'.$provider.'.url', $data["url"]);
+	}
 }
