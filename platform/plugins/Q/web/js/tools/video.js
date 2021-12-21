@@ -24,6 +24,7 @@
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  *  @param {boolean} [options.loop=false] 
  *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
+ *  @param {boolean} [options.skipPauseOnload=false] If true, skip pause when player reach start position.
  */
 Q.Tool.define("Q/video", function (options) {
 	var tool = this;
@@ -43,6 +44,13 @@ Q.Tool.define("Q/video", function (options) {
 	if (!Q.isEmpty(state.metrics)) {
 		tool.metrics = new Q.Streams.Metrics(state.metrics);
 	}
+
+	// extend videojsOptions with global options
+	state.videojsOptions = Q.extend(state.videojsOptions, {
+		autoplay: state.autoplay,
+		loop: state.loop,
+		muted: state.muted
+	});
 
 	tool.adapters.mp4 = {
 		init: function () {
@@ -135,7 +143,7 @@ Q.Tool.define("Q/video", function (options) {
 					title: false, // Set to false to hide the title.
 					volume: 100 // Set volume to a value between 0 and 100.
 				}
-				if (defaults.autoplay) {
+				if (defaults.autoplay || defaults.muted) {
 					defaults.volume = 0; // otherwise browsers block it
 				}
 				var match = state.url.match(/\/v\/([0-9A-Za-z]+).*$/);
@@ -178,7 +186,9 @@ Q.Tool.define("Q/video", function (options) {
 			element.classList.add("Q_video_twitch");
 
 			var options = {
-				autoplay: false
+				autoplay: state.autoplay,
+				loop: state.loop,
+				muted: state.muted
 				//channel: "<channel ID>",
 				//video: "782042263",
 				//collection: "<collection ID>"
@@ -306,6 +316,7 @@ Q.Tool.define("Q/video", function (options) {
 	url: null,
 	autoplay: false,
 	loop: false,
+	muted: false,
 	throttle: 10,
 	currentPosition: 0,
 	className: null,
@@ -314,6 +325,7 @@ Q.Tool.define("Q/video", function (options) {
 	start: null,
 	clipStart: null,
 	clipEnd: null,
+	skipPauseOnload: false,
 	muse: {
 		//start: 0, // Time at which the video should start playing.
 		//width: "100%", // Desired player width. Can be provided as an integer (in pixels) or a relative value as a string (e.g. '100%').
@@ -1026,7 +1038,7 @@ Q.Tool.define("Q/video", function (options) {
 
 				if (currentPosition === position || counter > 10) {
 					if (silent) {
-						player.muted(state.videojsOptions.muted || false);
+						player.muted(!!state.videojsOptions.muted);
 						player.waiting(false);
 					}
 
