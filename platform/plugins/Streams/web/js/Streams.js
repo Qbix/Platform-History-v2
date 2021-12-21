@@ -326,7 +326,7 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
+ * @param {String|Number} [basename] The last part after the slash, such as "50.png" or "50". Pass true to use default = 40. Leaving it blank skips appending "/basename"
  * @return {String} the url
  */
 Streams.iconUrl = function(icon, basename) {
@@ -334,11 +334,11 @@ Streams.iconUrl = function(icon, basename) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if (!basename || basename === true) {
+	if (basename === true) {
 		basename = '40';
 	}
 	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
-	var src = Q.interpolateUrl(icon + '/' + basename);
+	var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
@@ -2258,7 +2258,7 @@ Sp.retainWith = Streams.retainWith;
  * @return {String} the url
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
-	return Streams.iconUrl(this.fields.icon, size)
+	return Streams.iconUrl(this.fields.icon, size);
 };
 
 /**

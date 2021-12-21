@@ -1947,13 +1947,16 @@ abstract class Users extends Base_Users
 		$url = (Q_Valid::url($url) or mb_substr($icon, 0, 2) === '{{') 
 			? $url 
 			: "{{Users}}/img/icons/$url";
-		if ($basename and strpos($basename, '.') === false) {
-			$basename .= ".png";
-		}
-		if ($basename) {
+		$baseUrl = Q_Request::baseUrl();
+		$themedUrl = Q_Html::themedUrl($url);
+		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
+			if (strpos($basename, '.') === false) {
+				$basename .= ".png";
+			}
 			$url .= "/$basename";
+			return Q_Html::themedUrl($url);
 		}
-		return Q_Html::themedUrl($url);
+		return $themedUrl;
 	}
 	
 	/**

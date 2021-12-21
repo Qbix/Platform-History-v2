@@ -4088,13 +4088,15 @@ abstract class Streams extends Base_Streams
 		$url = (Q_Valid::url($url) or mb_substr($stream->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
-		if ($basename) {
+		$themedUrl = Q_Html::themedUrl($url);
+		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
 			if (strpos($basename, '.') === false) {
-				$basename = "$basename.png";
+				$basename .= '.png';
 			}
 			$url .= "/$basename";
+			return Q_Html::themedUrl($url);
 		}
-		return Q_Html::themedUrl($url);
+		return $themedUrl;
 	}
 	/**
 	 * Registers a user. Can be hooked to 'Users/register' before event

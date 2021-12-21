@@ -1858,13 +1858,12 @@ class Streams_Stream extends Base_Streams_Stream
 		$themedUrl = Q_Html::themedUrl($url);
 		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
 			if (strpos($basename, '.') === false) {
-				$basename = "$basename.png";
+				$basename .= '.png';
 			}
 			$url .= "/$basename";
 			return Q_Html::themedUrl($url);
-		} else {
-			return $themedUrl;
 		}
+		return $themedUrl;
 	}
 	
 	/**

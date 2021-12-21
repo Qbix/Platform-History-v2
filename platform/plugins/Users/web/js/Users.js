@@ -1185,7 +1185,7 @@
 	 * Calculate the url of a user's icon
 	 * @method
 	 * @param {String} icon the value of the user's "icon" field
-	 * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
+	 * @param {String|Number} [basename] The last part after the slash, such as "50.png" or "50". Pass true to use default = 40. Leaving it blank skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.iconUrl = function Users_iconUrl(icon, basename) {
@@ -1193,11 +1193,11 @@
 			console.warn("Users.iconUrl: icon is empty");
 			return '';
 		}
-		if (!basename || basename === true) {
+		if (basename === true) {
 			basename = '40';
 		}
 		basename = (String(basename).indexOf('.') >= 0) ? basename : basename + '.png';
-		var src = Q.interpolateUrl(icon + '/' + basename);
+		var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
 		return src.isUrl() || icon.substr(0, 2) === '{{'
 			? src
 			: Q.url('{{Users}}/img/icons/' + src);

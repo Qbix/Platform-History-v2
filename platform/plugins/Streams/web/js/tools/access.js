@@ -131,7 +131,7 @@ Q.Tool.define("Streams/access", function(options) {
 		if (userId !== "") {
 			tr.append(
 				$('<td style="vertical-align: middle;" />').append(
-					$('<img />').attr('src', avatar.iconUrl()).css('width', 20)
+					$('<img />').attr('src', avatar.iconUrl(true)).css('width', 20)
 				)
 			).append(
 				$('<td style="vertical-align: middle;" />')
@@ -145,7 +145,7 @@ Q.Tool.define("Streams/access", function(options) {
 		} else {
 			var label = state.labels[contactLabel];
 			var icon = $('<img />').attr('src', 
-				Q.Streams.iconUrl(state.icons[contactLabel], 40)
+				Q.Streams.iconUrl(state.icons[contactLabel], true)
 			);
 			tr.append(
 				$('<td style="vertical-align: middle;" />')
