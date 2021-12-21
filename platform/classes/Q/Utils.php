@@ -118,7 +118,10 @@ class Q_Utils
 		$result = '';
 		$len = strlen($hex);
 		for ($i=0;$i<$len;$i+=2) {
-			$result.=chr(hexdec(substr($hex,$i,2)));
+			if ($chr = hexdec(substr($hex,$i,2))) {
+				$result.=chr($chr);
+			}
+			
 		}
 		return $result;
 	 }
