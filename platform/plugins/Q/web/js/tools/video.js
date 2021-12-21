@@ -145,7 +145,7 @@ Q.Tool.define("Q/video", function (options) {
 				var custom = {};
 				custom.video = match[1];
 				if (customPlayButton) {
-					custom.css = '.player-cover-play{background-image: url('
+					custom.css = '.video-container{min-width:0; min-height:0;} .player-cover-play{background-image: url('
 					+ Q.url(customPlayButton) 
 					+ ');top: 50%;left: 50%;transform: translate(-50%, -50%);}';
 				}

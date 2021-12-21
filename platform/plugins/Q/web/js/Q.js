@@ -5287,6 +5287,16 @@ Q.Tool.onMissingConstructor = new Q.Event();
  */
 Q.Links = {
 	/**
+	 * Generates a link for making a call
+	 * @static
+	 * @method tel
+	 * @param {String} [mobileNumbers]
+	 * @return {String}
+	 */
+	tel: function (mobileNumber, extension) {
+		return 'tel:' + mobileNumber + (extension ? 'p' + extension : '');
+	},
+	/**
 	 * Generates a link for sending an sms message
 	 * @static
 	 * @method sms
