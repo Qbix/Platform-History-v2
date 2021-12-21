@@ -3867,40 +3867,51 @@
 		},
 
 		/**
-		 * Change chain
+		 * Switch provider to a different Web3 chain
 		 * @method setChain
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
 		 */
-		setChain: function (info, onSuccess, onError) {
+		switchChain: function (info, onSuccess, onError) {
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(onError, null, [err]);
 				}
 
 				Users.Web3.switchChainOccuring = true;
-
+				
 				provider.request({
-					method: 'wallet_addEthereumChain',
-					params: [{
-						chainId: info.chainId,
-						chainName: info.name,
-						nativeCurrency: {
-							name: info.currency.name,
-							symbol: info.currency.symbol,
-							decimals: info.currency.decimals
-						},
-						rpcUrls: info.rpcUrls,
-						blockExplorerUrls: info.blockExplorerUrls
-					}]
-				}).then(function () {
-					provider.once("chainChanged", onSuccess);
-				}, function (error) {
-					Q.handle(onError, null, [error]);
-				}).catch((error) => {
-					Q.handle(onError, null, [error]);
+					method: 'wallet_switchEthereumChain',
+					params: [{ chainId: '0xf00' }],
+				}).then(_continue)
+				.catch(function (switchError) {
+					// This error code indicates that the chain has not been added to MetaMask.
+					if (switchError.code !== 4902) {
+						return Q.handle(onError, null, [error]);
+					}
+					provider.request({
+						method: 'wallet_addEthereumChain',
+						params: [{
+							chainId: info.chainId,
+							chainName: info.name,
+							nativeCurrency: {
+								name: info.currency.name,
+								symbol: info.currency.symbol,
+								decimals: info.currency.decimals
+							},
+							rpcUrls: info.rpcUrls,
+							blockExplorerUrls: info.blockExplorerUrls
+						}]
+					}).then(_continue)
+					.catch(function (error) {
+						Q.handle(onError, null, [error]);
+					});
 				});
+
+				function _continue() {
+					provider.once("chainChanged", onSuccess);
+				}
 			});
 		}
 	};
