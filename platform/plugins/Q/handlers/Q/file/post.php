@@ -19,7 +19,7 @@ function Q_file_post($params = null)
 {
 	$p = $params
 		? $params
-		: Q::take($_REQUEST, array('data', 'path', 'subpath', 'audio'));
+		: Q::take($_REQUEST, array('data', 'path', 'subpath', 'audio', 'name'));
 	if (!empty($_FILES)) {
 		$file = reset($_FILES);
 		if ($tmp = $file['tmp_name']) {

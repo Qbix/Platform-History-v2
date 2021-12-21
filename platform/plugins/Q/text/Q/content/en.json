@@ -102,6 +102,7 @@
     },
     "imagepicker": {
         "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
             "prompt": "What would you like to do?",
             "photo": "Take new photo",

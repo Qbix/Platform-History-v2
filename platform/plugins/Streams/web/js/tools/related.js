@@ -63,9 +63,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	state.publisherId = state.publisherId || state.stream.fields.publisherId;
 	state.streamName = state.streamName || state.stream.fields.name;
 	
-	// save first value of relatedOptions.limit to use it to load more streams
-	state.loadMore = Q.getObject("relatedOptions.limit", state);
-
 	if (this.element.classList.contains("Streams_related_participant")) {
 		state.mode = "participant";
 	} else if (state.mode === "participant" && !this.element.classList.contains("Streams_related_participant")) {
@@ -106,7 +103,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 				infiniteTool.setLoading(true);
 				infiniteTool.state.offset = offset;
-				tool.loadMore(state.loadMore, function () {
+				tool.loadMore(offset, function () {
 					infiniteTool.setLoading(false);
 				});
 			}
@@ -153,6 +150,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	editable: true,
 	closeable: true,
 	creatable: {},
+	relatedOptions: {
+		limit: 50,
+		offset: 0
+	},
 	sortable: {
 		draggable: '.Streams_related_stream',
 		droppable: '.Streams_related_stream'
@@ -539,10 +540,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	/**
 	 * Request part of related data and add previews
 	 * @method loadMore
-	 * @param {Integer} amount How much elements to load
+	 * @param {number} offset
 	 * @param {function} onUpdate callback executed when updated
 	 */
-	loadMore: function (amount, onUpdate) {
+	loadMore: function (offset, onUpdate) {
 		var tool = this;
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
@@ -553,9 +554,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			throw new Q.Error("Streams/related/loadMore: limit undefined, no sense to use loadMore, because all items loaded");
 		}
 
-		var options = Q.extend({}, state.relatedOptions, {
-			offset: limit,
-			limit: amount
+		var relatedOptions = Q.extend({}, state.relatedOptions, {
+			limit: limit,
+			offset: offset
 		});
 
 		Streams.retainWith(tool).related(
@@ -563,15 +564,13 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			streamName,
 			state.relationType,
 			state.isCategory,
-			options,
+			relatedOptions,
 			function (errorMessage) {
 				if (errorMessage) {
 					return console.warn("Streams/related refresh: " + errorMessage);
 				}
 
 				tool.relatedResult(this, true, onUpdate);
-
-				state.relatedOptions.limit += amount;
 			}
 		);
 	},
