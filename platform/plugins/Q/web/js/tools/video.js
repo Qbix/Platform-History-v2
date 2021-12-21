@@ -14,7 +14,11 @@
  *  @param {string} [options.clipStart] Clip start position in milliseconds
  *  @param {string} [options.clipEnd] Clip end position in milliseconds
  *  @param {string} [options.className] Additional class name to add to tool element
- *  @param {object} [options.metrics] Params for State.Metrics (publisherId and streamName required)
+ *  @param {object} [options.metrics] Whether to send metrics about playback, only gets enabled if publisherId, streamName options are set
+ *  @param {string} [options.metrics.publisherId] Publisher of the stream to collect metrics for
+ *  @param {string} [options.metrics.streamName] Name of the stream to collect metrics for
+ *  @param {object} [options.metrics.useFaces] Whether to use facial recognition to track when people start and stop watching the video
+ *  @param {integer} [options.metrics.useFaces.debounce] How long to wait after person stopped watching the video and didn't return, before reporting that in metrics
  *  @param {string} [options.image] URL of image which will show as illustration before play.
  *  @param {object} [options.clips] Contains options for "clips" mode.
  *  @param {function} [options.clips.handler] The main option which return clip url for some timestamp. If it null - means mode is not "clips"
@@ -40,7 +44,8 @@ Q.Tool.define("Q/video", function (options) {
 
 	tool.adapters = {};
 
-	if (!Q.isEmpty(state.metrics)) {
+	var sm = state.metrics;
+	if (!Q.isEmpty(sm) && sm.publisherId && sm.streamName) {
 		tool.metrics = new Q.Streams.Metrics(state.metrics);
 	}
 
@@ -145,6 +150,7 @@ Q.Tool.define("Q/video", function (options) {
 				var custom = {};
 				custom.video = match[1];
 				if (customPlayButton) {
+			
 					custom.css = '.video-container{min-width:0; min-height:0;} .player-cover-play{background-image: url('
 					+ Q.url(customPlayButton) 
 					+ ');top: 50%;left: 50%;transform: translate(-50%, -50%);}';
