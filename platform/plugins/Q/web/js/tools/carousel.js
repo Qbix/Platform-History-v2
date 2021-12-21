@@ -38,6 +38,7 @@
             imgWidth: 170,
             imgHeight: 120,
             delayIntroUntil: 0.5,
+            startTransformY: 0,
             autoRotate: true,
             direction: 'left',
             rotateSpeed: 60000,
@@ -74,8 +75,9 @@
                 var sX, sY, nX, nY, desX = 0,
                     desY = 0,
                     tX = 0,
-                    tY = 0;
+                    tY = (this.state.startTransformY != null ? this.state.startTransformY : 0);
 
+                console.log('startTransformY', tY, this.state)
 
                 var mediaContainer = tool.element;
 
@@ -150,6 +152,8 @@
 
                 function init(delayTime, callback) {
                     if(state.debug) console.log('init : radius', radius);
+                    obox.style.transform = "rotateX(" + (-tY) + "deg)";
+
                     let l = aEle.length;
                     for (let i = 0; i < aEle.length; i++) {
                         if(i!==0) {
@@ -183,7 +187,7 @@
 
                 function toggleActive(selectedIndex) {
                     if(aEle[selectedIndex] == null) return;
-                    if(state.debug) console.log('toggleActive')
+                    if(state.debug) console.log('toggleActive', selectedIndex)
 
 
                     for (let i = 0; i < aEle.length; i++) {
@@ -192,6 +196,8 @@
                     }
 
                     if(!aEle[selectedIndex].classList.contains('activeItem')) {
+                        if(state.debug) console.log('toggleActive: add class', aEle[selectedIndex])
+
                         aEle[selectedIndex].classList.add('activeItem');
                         Q.handle(state.onActivateItem, tool, [selectedIndex, aEle[selectedIndex]]);
                     }

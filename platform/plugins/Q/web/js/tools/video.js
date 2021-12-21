@@ -151,6 +151,18 @@ Q.Tool.define("Q/video", function (options) {
 				}
 				var options = Q.extend({}, defaults, custom, state.muse);
 				state.player = MusePlayer(options);
+				state.player.on('play', function () {
+					Q.handle(state.onPlay, tool);
+				});
+				state.player.on('pause', function () {
+					Q.handle(state.onPause, tool);
+				});
+				state.player.on('ended', function () {
+					Q.handle(state.onEnded, tool);
+				});
+				state.player.on('metadata', function () {
+
+				});
 			});
 		}
 	};
@@ -1039,7 +1051,8 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method getCurrentPosition
 	 */
 	getCurrentPosition: function () {
-		return Math.trunc(this.state.player.currentTime() * 1000);
+		var currentTime = (Q.getObject("state.player.currentTime", this) && this.state.player.currentTime()) || 0;
+		return Math.trunc(currentTime * 1000);
 	},
 	/**
 	 * Detect adapter from url

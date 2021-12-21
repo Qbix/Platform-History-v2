@@ -10854,51 +10854,53 @@ window.WebRTCRoomClient = function app(options){
 
     app.switchTo = function(publisherId, streamName){
         log('app.switchTo')
-        app.mediaManager.canvasComposer.videoComposer.switchingRoom(true);
-        var currentStreams = localParticipant.tracks.map(function (track) {
-            return track.stream.clone();
-        })
-        var prevLocalParticipant = localParticipant.sid;
-        var prevRoomId = options.roomName;
+        return new Promise(function (resolve, reject) {
+            app.mediaManager.canvasComposer.videoComposer.switchingRoom(true);
+            var currentStreams = localParticipant.tracks.map(function (track) {
+                return track.stream.clone();
+            })
+            var prevLocalParticipant = localParticipant.sid;
+            var prevRoomId = options.roomName;
 
-        var initOptions = options;
-        initOptions.roomName = streamName;
-        initOptions.roomPublisher = publisherId;
-        initOptions.streams = [];
-        let streamingParticipant = app.mediaManager.fbLive.streamingParticipant();
-        initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.mediaManager.fbLive.streamingParticipant() != null ? app.mediaManager.fbLive.streamingParticipant().connection : null};
-        initOptions.startWith = {
-            audio: app.localMediaControls.micIsEnabled(),
-            video: app.localMediaControls.cameraIsEnabled()
-        };
-        log('app.switchTo 2')
+            var initOptions = options;
+            initOptions.roomName = streamName;
+            initOptions.roomPublisher = publisherId;
+            initOptions.streams = [];
+            let streamingParticipant = app.mediaManager.fbLive.streamingParticipant();
+            initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.mediaManager.fbLive.streamingParticipant() != null ? app.mediaManager.fbLive.streamingParticipant().connection : null};
+            initOptions.startWith = {
+                audio: app.localMediaControls.micIsEnabled(),
+                video: app.localMediaControls.cameraIsEnabled()
+            };
+            log('app.switchTo 2')
 
-        var newConferenceInstance = new WebRTCRoomClient(initOptions);
-        newConferenceInstance.mediaManager.canvasComposer = app.mediaManager.canvasComposer;
-        newConferenceInstance.mediaManager.canvasComposer.videoComposer.refreshEventListeners(newConferenceInstance);
-        //newConferenceInstance.mediaManager.canvasComposer.audioComposer.mix();
-        newConferenceInstance.mediaManager.fbLive = app.mediaManager.fbLive;
+            var newConferenceInstance = new WebRTCRoomClient(initOptions);
+            newConferenceInstance.mediaManager.canvasComposer = app.mediaManager.canvasComposer;
+            newConferenceInstance.mediaManager.canvasComposer.videoComposer.refreshEventListeners(newConferenceInstance);
+            //newConferenceInstance.mediaManager.canvasComposer.audioComposer.mix();
+            newConferenceInstance.mediaManager.fbLive = app.mediaManager.fbLive;
 
-        //newConferenceInstance.init();
-        log('app.switchTo 3')
+            //newConferenceInstance.init();
+            log('app.switchTo 3')
 
-        newConferenceInstance.switchFrom(localParticipant);
-        log('app.switchTo 4')
+            newConferenceInstance.switchFrom(localParticipant);
+            log('app.switchTo 4')
 
-        newConferenceInstance.event.on('initNegotiationEnded', function (roomParticipants) {
-            log('app.switchTo: initNegotiationEnded')
+            newConferenceInstance.event.on('initNegotiationEnded', function (roomParticipants) {
+                log('app.switchTo: initNegotiationEnded')
 
-            let newParticipantSid = newConferenceInstance.localParticipant().sid;
-            newConferenceInstance.mediaManager.canvasComposer.videoComposer.switchingRoom(false);
-            newConferenceInstance.mediaManager.fbLive.switchRoom(newConferenceInstance, roomParticipants);
-            //switchRoomForFbLive(newConferenceInstance);
-            newConferenceInstance.roomSwitched({prevParticipantId:prevLocalParticipant, prevRoom:prevRoomId});
-            app.disconnect(true);
+                let newParticipantSid = newConferenceInstance.localParticipant().sid;
+                newConferenceInstance.mediaManager.canvasComposer.videoComposer.switchingRoom(false);
+                newConferenceInstance.mediaManager.fbLive.switchRoom(newConferenceInstance, roomParticipants);
+                //switchRoomForFbLive(newConferenceInstance);
+                newConferenceInstance.roomSwitched({prevParticipantId:prevLocalParticipant, prevRoom:prevRoomId});
+                app.disconnect(true);
+            });
+
+            app.event.dispatch('switchRoom', {roomName: streamName});
+
+            resolve(newConferenceInstance);
         });
-
-        app.event.dispatch('switchRoom', {roomName: streamName});
-
-        return Promise.resolve(newConferenceInstance);
     }
 
     app.roomSwitched = function(info) {
