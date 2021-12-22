@@ -419,7 +419,6 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -537,6 +536,7 @@
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
+		Users.onLogin.handle(user);
 		Q.handle(onSuccess, this, [user, options]);
 		Users.authenticate.occurring = false;
 	}
@@ -3907,7 +3907,7 @@
 		},
 		/**
 		 * Switch provider to a different Web3 chain
-		 * @method setChain
+		 * @method switchChain
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
@@ -3922,12 +3922,12 @@
 				
 				provider.request({
 					method: 'wallet_switchEthereumChain',
-					params: [{ chainId: '0xf00' }],
+					params: [{ chainId: info.chainId }],
 				}).then(_continue)
 				.catch(function (switchError) {
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902) {
-						return Q.handle(onError, null, [error]);
+						return Q.handle(onError, null, [switchError]);
 					}
 					provider.request({
 						method: 'wallet_addEthereumChain',
@@ -3949,7 +3949,7 @@
 				});
 
 				function _continue() {
-					provider.once("chainChanged", onSuccess);
+					onSuccess && provider.once("chainChanged", onSuccess);
 				}
 			});
 		}
