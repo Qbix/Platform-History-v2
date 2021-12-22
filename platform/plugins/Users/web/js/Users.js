@@ -3859,13 +3859,52 @@
 			web3Modal.resetState();
 			web3Modal.connect().then(function (provider) {
 				Users.Web3.provider = provider;
+
+				// Detect if provider locked
+				provider.on('accountsChanged', function () {
+					if (!this.selectedAddress) {
+						Users.Web3.provider = null;
+					}
+				});
+
 				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
 				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
 		},
+		/**
+		 * Get current wallet address
+		 * @method getWallet
+		 * @param {Function} callback
+		 */
+		getWallet: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
 
+				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
+					return Q.handle(callback, null, [null, accounts[0]]);
+				});
+			});
+		},
+		/**
+		 * Get current chain id
+		 * @method getChainId
+		 * @param {Function} callback
+		 */
+		getChainId: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+
+				(new Web3(provider)).eth.net.getId().then(function (chainId) {
+					return Q.handle(callback, null, [null, chainId]);
+				});
+			});
+		},
 		/**
 		 * Switch provider to a different Web3 chain
 		 * @method setChain
