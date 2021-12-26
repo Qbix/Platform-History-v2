@@ -550,7 +550,7 @@ abstract class Streams extends Base_Streams
 	 *  specifically for $asUserId . Make sure to call the methods 
 	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
 	 *  on these streams before using them on the user's behalf.
-	 * @throws {Q_Exception_MissingRow} If the stream is missing
+	 * @throws {Q_Exception_MissingRow} If the stream is missing and $fields == true
 	 */
 	static function fetchOne(
 		$asUserId,
@@ -2474,7 +2474,7 @@ abstract class Streams extends Base_Streams
 	 */
 	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
 		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
-		$maxRelations = Q::ifset($stream->getAttribute("maxRelations"), $relationType, null);
+		$maxRelations = Q::ifset($stream->getAttribute("Streams/maxRelations"), $relationType, null);
 		if (!is_numeric($maxRelations)) {
 			return true;
 		}
@@ -4088,6 +4088,7 @@ abstract class Streams extends Base_Streams
 		$url = (Q_Valid::url($url) or mb_substr($stream->icon, 0, 2) === '{{')
 			? $url
 			: "{{Streams}}/img/icons/$url";
+		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
 		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
 			if (strpos($basename, '.') === false) {
