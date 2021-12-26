@@ -29,12 +29,14 @@
     transform-style: preserve-3d;
     -webkit-transform: rotateX(0);
     transform: rotateX(0);
+    background:transparent !important;
 }
 .carousel-wrap .drag-container {
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    background:transparent !important;
     /*margin-top: 120px;*/
     /*transition: 1s ease transform*/;
 }
@@ -69,7 +71,7 @@
 }
 
 .carousel-wrap .drag-container figcaption {
-	pointer-events: none;
+    pointer-events: none;
     font-size: 14px;
     text-shadow: 1px 1px 2px white;
     color: #333;
