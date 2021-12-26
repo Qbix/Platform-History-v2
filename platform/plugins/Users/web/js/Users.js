@@ -3913,6 +3913,40 @@
 					provider.once("chainChanged", onSuccess);
 				}
 			});
+		},
+
+		/**
+		 * Used to fetch the ethers.Contract object to use with a smart contract.
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 */
+		getContract: function(contractAddress, callback) {
+			if (window.ethereum
+			&& ethereum.chainId == Q.getObject([
+				'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
+			])) {
+				_continue(ethereum);
+			} else {
+				Q.Users.Web3.connect(function (err, provider) {
+					if (err) {
+						callback(err);
+					} else {
+						_continue(err, provider);
+					}
+				});
+			}
+			function _continue(provider) {
+				fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
+				.then(function (response) {
+					return response.json();
+				}).then(function (ABI) {
+					var signer = new ethers.providers.Web3Provider(provider).getSigner();
+					var contract = new ethers.Contract(contractAddress, ABI, signer);
+					callback(null, contract);
+				}).catch(function (err) {
+					callback(err);
+				});
+			}
 		}
 	};
 
