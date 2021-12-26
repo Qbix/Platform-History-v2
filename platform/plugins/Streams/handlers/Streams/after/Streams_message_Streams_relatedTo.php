@@ -5,7 +5,7 @@ function Streams_after_Streams_message_Streams_relatedTo($params)
 	$message = $params['message'];
 	$type = $message->getInstruction('type', null);
 	$stream = $params['stream'];
-var_dump($params);exit;
+
 	// check if new relations available and send appropriate messages
 	Streams::checkAvailableRelations($stream->publisherId, $stream->publisherId, $stream->name, $type);
 
