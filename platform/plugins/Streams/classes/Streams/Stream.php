@@ -1697,7 +1697,7 @@ class Streams_Stream extends Base_Streams_Stream
 				);
 			}
 		}
-		$result['icon'] = $this->iconUrl();
+		$result['icon'] = $this->iconUrl(false);
 		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
 		

@@ -4093,7 +4093,7 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Get the url of the stream's icon
 	 * @param {object} [$stream] Stream row or Streams_Stream object
-	 * @param {string|null} [$basename=null] The last part after the slash, such as "50.png" or "50". By default, it skips appending basename.
+	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {string} The stream's icon url
 	 */
 	static function iconUrl($stream, $basename = null)
@@ -4107,8 +4107,8 @@ abstract class Streams extends Base_Streams
 			: "{{Streams}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
-			if ($basename === true) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
 			if (strpos($basename, '.') === false) {
