@@ -3795,6 +3795,7 @@
 		/**
 		 * Get web3Modal instance
 		 * @method getWeb3Modal
+		 * @static
 		 */
 		getWeb3Modal: function (appId) {
 			appId = appId || Q.info.app;
@@ -3869,6 +3870,7 @@
 		/**
 		 * Switch provider to a different Web3 chain
 		 * @method setChain
+		 * @static
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
@@ -3915,38 +3917,84 @@
 			});
 		},
 
+		getChainId: function () {
+			var info = Q.getObject(['Q', 'Users', 'apps', 'web3', Q.info.app]);
+			return info.chainId || info.appId;
+		},
+
 		/**
-		 * Used to fetch the ethers.Contract object to use with a smart contract.
+		 * Used get the currently selected address on current ethereum chain
+		 * @method getContract
+		 * @static
 		 * @param {string} contractAddress
 		 * @param {Function} callback receives (err, contract)
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		getSelectedXid: function () {
+			var result = Q.getObject(Q.Users.Web3.provider)
+			|| (window.ethereum && ethereum.selectedAddress);
+			if (result) {
+				return result;
+			}
+		},
+
+		/**
+		 * Used to get the logged-in user's ID on any chain
+		 * @method getContract
+		 * @static
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		getLoggedInUserXid: function () {
+			var xids = Q.getObject('Q.Users.loggedInUser.xids');
+			var key = 'web3\t' + Q.Users.Web3.getChainId();
+			if (xids && xids[key]) {
+				return xids[key];
+			}
+		},
+
+		/**
+		 * Used to fetch the ethers.Contract object to use with a smart contract.
+		 * @method getContract
+		 * @static
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 * @return {Promise} that returns the ethers.Contract
 		 */
 		getContract: function(contractAddress, callback) {
-			if (window.ethereum
-			&& ethereum.chainId == Q.getObject([
-				'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-			])) {
-				_continue(ethereum);
-			} else {
-				Q.Users.Web3.connect(function (err, provider) {
-					if (err) {
-						callback(err);
-					} else {
-						_continue(err, provider);
-					}
-				});
-			}
-			function _continue(provider) {
-				fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
-				.then(function (response) {
-					return response.json();
-				}).then(function (ABI) {
-					var signer = new ethers.providers.Web3Provider(provider).getSigner();
-					var contract = new ethers.Contract(contractAddress, ABI, signer);
-					callback(null, contract);
-				}).catch(function (err) {
-					callback(err);
-				});
-			}
+			return new Q.Promise(function (resolve, reject) {
+				if (window.ethereum
+				&& ethereum.chainId == Q.getObject([
+					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
+				])) {
+					_continue(ethereum);
+				} else {
+					Q.Users.Web3.connect(function (err, provider) {
+						if (err) {
+							callback && callback(err);
+							reject(err);
+						} else {
+							_continue(err, provider);
+							resolve(provider)
+						}
+					});
+				}
+				function _continue(provider) {
+					fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
+					.then(function (response) {
+						return response.json();
+					}).then(function (ABI) {
+						var signer = new ethers.providers.Web3Provider(provider).getSigner();
+						var contract = new ethers.Contract(contractAddress, ABI, signer);
+						callback && callback(null, contract);
+						resolve(contract);
+					}).catch(function (err) {
+						callback && callback(err);
+						reject(err);
+					});
+				}
+			});
 		}
 	};
 
