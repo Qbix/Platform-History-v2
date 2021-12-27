@@ -1100,7 +1100,7 @@
 	/**
 	 * Calculate the url of a user's icon
 	 * @method
-	 * @param {Number} [size=40] the size of the icon to render.
+	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.User.prototype.iconUrl = function Users_User_iconUrl(size) {
@@ -1115,7 +1115,7 @@
 	 * Calculate the url of a user's icon
 	 * @method
 	 * @param {String} icon the value of the user's "icon" field
-	 * @param {String|Number} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+	 * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.iconUrl = function Users_iconUrl(icon, basename) {
@@ -2591,7 +2591,7 @@
 	/**
 	 * Calculate the url of a label's icon
 	 * @method
-	 * @param {Number} [size=40] the size of the icon to render.
+	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {

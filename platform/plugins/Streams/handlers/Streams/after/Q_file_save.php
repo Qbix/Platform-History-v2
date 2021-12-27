@@ -32,7 +32,7 @@ function Streams_after_Q_file_save($params)
 	if (Streams_Stream::getConfigField($stream->type, 'updateIcon', false)) {
 		// set the icon every time a new file is uploaded
 		$parts = explode('.', $name);
-		$urlPrefix = Q_Request::baseUrl().'/{{Streams}}/img/icons/files';
+		$urlPrefix = '{{baseUrl}}/{{Streams}}/img/icons/files';
 		$dirname = STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files';
 		$extension = end($parts);
 		$stream->icon = file_exists($dirname.DS.$extension)

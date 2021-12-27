@@ -2255,7 +2255,7 @@ Sp.retainWith = Streams.retainWith;
 /**
  * Calculate the url of a stream's icon
  * @method iconUrl
- * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
  * @return {String} the url
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
@@ -4581,7 +4581,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 /**
  * Get the url of the user icon from a Streams.Avatar
  * @method
- * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
+ * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
  * @return {String} the url
  */
 Ap.iconUrl = function _Avatar_prototype_iconUrl (basename) {

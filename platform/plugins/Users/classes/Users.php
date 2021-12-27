@@ -1935,7 +1935,7 @@ abstract class Users extends Base_Users
 	/**
 	 * Get the url of a user's icon
 	 * @param {string} [$icon] The contents of a user row's icon field
-	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
+	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {string} The stream's icon url
 	 */
 	static function iconUrl($icon, $basename = null)
@@ -1949,7 +1949,10 @@ abstract class Users extends Base_Users
 			: "{{Users}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+			if ($basename === null or $basename === true) {
+				$basename = '40';
+			}
 			if (strpos($basename, '.') === false) {
 				$basename .= ".png";
 			}

@@ -183,7 +183,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 
 		var fields = Q.extend({}, state.templates.icon.fields, {
-			src: Q.url(Users.iconUrl('loading', true), null),
+			src: Q.url(Users.iconUrl('loading'), null),
 			state: state
 		});
 		Q.Template.render('Users/avatar/loading', fields, function (err, html) {
