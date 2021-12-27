@@ -72,7 +72,7 @@ class Users_User extends Base_Users_User
 	
 	/**
 	 * Get the url of the user's icon
-	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
+	 * @param {string|null} [$basename=null] The last part after the slash, such as "50.png" or "50". By default, it skips appending basename.
 	 * @return {string} The stream's icon url
 	 */
 	function iconUrl($basename = null)
