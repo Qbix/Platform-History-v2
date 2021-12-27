@@ -1093,6 +1093,7 @@
 		}
 		if (!p) {
 			Q.handle(callback);
+			Users.disconnect.web3.occurring = false;
 			return false;
 		}
 	    if (p.close) {
@@ -1104,6 +1105,10 @@
 					Q.handle(callback);
 				}, 0);
 			});
+			Users.disconnect.web3.cleanupT = setTimeout(function () {
+				Users.disconnect.web3.occurring = false;
+				delete Users.disconnect.web3.cleanupT;
+			}, 300);
 	    } else {
 			setTimeout(function () {
 				Users.logout.occurring = false;
@@ -3976,7 +3981,7 @@
 							reject(err);
 						} else {
 							_continue(provider);
-							resolve(provider)
+							resolve(provider);
 						}
 					});
 				}
