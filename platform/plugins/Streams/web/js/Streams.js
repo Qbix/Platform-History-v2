@@ -326,7 +326,7 @@ Streams.define = function (type, ctor, methods) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {String|Number} [basename] The last part after the slash, such as "50.png" or "50". Pass true to use default = 40. Leaving it blank skips appending "/basename"
+ * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
  * @return {String} the url
  */
 Streams.iconUrl = function(icon, basename) {
@@ -334,7 +334,8 @@ Streams.iconUrl = function(icon, basename) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if (basename === true) {
+	if ((basename === true) // for backward compatibility
+	|| (!basename && basename !== false)) {
 		basename = '40';
 	}
 	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
