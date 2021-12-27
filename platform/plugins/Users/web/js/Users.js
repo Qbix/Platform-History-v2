@@ -400,7 +400,7 @@
 						return;
 					}
 
-					Q.Users.logout({using: 'web3'});
+					Q.Users.logout({using: 'web3', url: ''});
 				});
 				var payload = Q.text.Users.login.web3.payload.interpolate({
 					host: location.host,
@@ -972,7 +972,7 @@
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.url] the URL to hit to log out. You should usually not change this.
 	 *  @param {String} [options.using] can be "native", "facebook", "web3", or "native,facebook,web3"
-	 *   to log out of multiple
+	 *   to log out of multiple platforms in addition to logging out natively
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when logout is successful.
 	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
 	 */
