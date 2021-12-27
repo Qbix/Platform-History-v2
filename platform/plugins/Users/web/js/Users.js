@@ -3931,7 +3931,7 @@
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getSelectedXid: function () {
-			var result = Q.getObject(Q.Users.Web3.provider)
+			var result = Q.getObject('Q.Users.Web3.provider.selectedAddress')
 			|| (window.ethereum && ethereum.selectedAddress);
 			if (result) {
 				return result;
@@ -3975,12 +3975,12 @@
 							callback && callback(err);
 							reject(err);
 						} else {
-							_continue(err, provider);
+							_continue(provider);
 							resolve(provider)
 						}
 					});
 				}
-				function _continue(err, provider) {
+				function _continue(provider) {
 					fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
 					.then(function (response) {
 						return response.json();
