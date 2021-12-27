@@ -3980,7 +3980,7 @@
 						}
 					});
 				}
-				function _continue(provider) {
+				function _continue(err, provider) {
 					fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
 					.then(function (response) {
 						return response.json();
