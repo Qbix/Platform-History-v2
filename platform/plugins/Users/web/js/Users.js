@@ -1048,81 +1048,6 @@
 		Q.request(url, 'script', callback, {"method": "post"});
 		return true;
 	};
-	
-	/**
-	 * Disconnect external platforms
-	 */
-	Users.disconnect = {};
-	Users.disconnect.facebook = function (appId, callback) {
-		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (!platformAppId) {
-			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
-		}
-		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-		Users.init.facebook(function logoutCallback() {
-			Users.Facebook.getLoginStatus(function (response) {
-				setTimeout(function () {
-					Users.logout.occurring = false;
-				}, 0);
-				if (!response.authResponse) {
-					return callback();
-				}
-				return FB.logout(function () {
-					delete Users.connected.facebook;
-					callback();
-				});
-			}, true);
-		}, {
-			appId: appId
-		});
-	};
-	Users.disconnect.web3 = function (appId, callback) {
-		if (Users.disconnect.web3.occurring) {
-			return false;
-		}
-		localStorage.removeItem('walletconnect');
-		localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
-		Users.disconnect.web3.occurring = true;
-		var p = Users.Web3.provider;
-		if (window.Web3Modal && Web3Modal.default) {
-			var w = new window.Web3Modal.default;
-			if (w.clearCachedProvider) {
-				w.clearCachedProvider();
-			}
-		}
-		if (!p) {
-			Q.handle(callback);
-			Users.disconnect.web3.occurring = false;
-			return false;
-		}
-	    if (p.close) {
-			p.close().then(function (result) {
-				delete Users.connected.web3;
-				Users.Web3.provider = null;
-				setTimeout(function () {
-					Users.disconnect.web3.occurring = false;
-					Q.handle(callback);
-				}, 0);
-			});
-			Users.disconnect.web3.cleanupT = setTimeout(function () {
-				Users.disconnect.web3.occurring = false;
-				delete Users.disconnect.web3.cleanupT;
-			}, 300);
-	    } else {
-			setTimeout(function () {
-				Users.logout.occurring = false;
-			}, 0);
-			if (p._handleDisconnect) {
-				p._handleDisconnect();
-			}
-			delete Users.connected.web3;
-			Users.Web3.provider = null;
-			Q.handle(callback);
-			Users.disconnect.web3.occurring = false;
-	    }
-		return true;
-	};
 
 	/**
 	 * A shorthand way to get the id of the logged-in user, if any
@@ -3582,6 +3507,31 @@
 		scheme: null,
 		scope: 'email',
 
+		disconnect: function (appId, callback) {
+			var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			if (!platformAppId) {
+				console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
+			}
+			Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+			Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
+			Users.init.facebook(function logoutCallback() {
+				Users.Facebook.getLoginStatus(function (response) {
+					setTimeout(function () {
+						Users.logout.occurring = false;
+					}, 0);
+					if (!response.authResponse) {
+						return callback();
+					}
+					return FB.logout(function () {
+						delete Users.connected.facebook;
+						callback();
+					});
+				}, true);
+			}, {
+				appId: appId
+			});
+		},
+
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
 
@@ -3797,6 +3747,53 @@
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
+		disconnect: function (appId, callback) {
+			if (Users.disconnect.web3.occurring) {
+				return false;
+			}
+			localStorage.removeItem('walletconnect');
+			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
+			Users.disconnect.web3.occurring = true;
+			var p = Users.Web3.provider;
+			if (window.Web3Modal && Web3Modal.default) {
+				var w = new window.Web3Modal.default;
+				if (w.clearCachedProvider) {
+					w.clearCachedProvider();
+				}
+			}
+			if (!p) {
+				Q.handle(callback);
+				Users.disconnect.web3.occurring = false;
+				return false;
+			}
+			if (p.close) {
+				p.close().then(function (result) {
+					delete Users.connected.web3;
+					Users.Web3.provider = null;
+					setTimeout(function () {
+						Users.disconnect.web3.occurring = false;
+						Q.handle(callback);
+					}, 0);
+				});
+				Users.disconnect.web3.cleanupT = setTimeout(function () {
+					Users.disconnect.web3.occurring = false;
+					delete Users.disconnect.web3.cleanupT;
+				}, 300);
+			} else {
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
+				if (p._handleDisconnect) {
+					p._handleDisconnect();
+				}
+				delete Users.connected.web3;
+				Users.Web3.provider = null;
+				Q.handle(callback);
+				Users.disconnect.web3.occurring = false;
+			}
+			return true;
+		},
+
 		/**
 		 * Get web3Modal instance
 		 * @method getWeb3Modal
@@ -4002,6 +3999,13 @@
 			});
 		}
 	};
+
+	/**
+	 * Disconnect external platforms
+	 */
+	Users.disconnect = {};
+	Users.disconnect.facebook = Users.Facebook.disconnect;
+	Users.disconnect.web3 = Users.Web3.disconnect;
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
