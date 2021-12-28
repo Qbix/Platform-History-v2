@@ -33,7 +33,7 @@ class Q_Video_Muse {
 		);
 		$fields = array(
 			"file" => $cFile,
-			"visibility" => "public"
+			"visibility" => "unlisted"
 		);
 
 		$ch = curl_init();
