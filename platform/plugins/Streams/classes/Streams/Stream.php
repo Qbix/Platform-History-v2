@@ -1697,7 +1697,7 @@ class Streams_Stream extends Base_Streams_Stream
 				);
 			}
 		}
-		$result['icon'] = $this->iconUrl();
+		$result['icon'] = $this->iconUrl(false);
 		$result['url'] = $this->url();
 		$classes = Streams::getExtendClasses($this->type);
 		
@@ -1907,7 +1907,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Get the url of the stream's icon
-	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
+	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {string} The stream's icon url
 	 */
 	function iconUrl($basename = null)

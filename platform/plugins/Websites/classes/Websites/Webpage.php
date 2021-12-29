@@ -741,7 +741,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 			// trying to get icon
 			Q_Config::load(WEBSITES_PLUGIN_CONFIG_DIR.DS.'mime-types.json');
 			$extension = Q_Config::get('mime-types', $contentType, '_blank');
-			$urlPrefix = Q_Request::baseUrl().'/{{Streams}}/img/icons/files';
+			$urlPrefix = '{{baseUrl}}/{{Streams}}/img/icons/files';
 			$streamIcon = file_exists(STREAMS_PLUGIN_FILES_DIR.DS.'Streams'.DS.'icons'.DS.'files'.DS.$extension)
 				? "$urlPrefix/$extension"
 				: "$urlPrefix/_blank";

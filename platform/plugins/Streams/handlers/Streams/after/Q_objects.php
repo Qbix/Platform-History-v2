@@ -55,10 +55,10 @@ function Streams_after_Q_objects () {
 		'displayName' => $displayName,
 		'nameIsMissing' => $nameIsMissing,
 		'action' => 'Streams/basic',
-		'icon' => $user && $user->iconUrl(),
+		'icon' => $user && $user->iconUrl(false),
 		'token' => $invite->token,
 		'invitingUser' => array(
-			'icon' => $invitingUser->iconUrl(),
+			'icon' => $invitingUser->iconUrl(false),
 			'displayName' => $invitingUser->displayName(array(
 				'fullAccess' => true,
 				'show' => 'flu'

@@ -2641,23 +2641,40 @@ abstract class Streams extends Base_Streams
 		) {
 			return false;
 		}
+
+		$newWeight = null;
+		if (is_numeric($weight)) {
+			$newWeight = $weight;
+		} else if (is_string($weight)) {
+			if (Q::startsWith($weight, 'weight+')) {
+				$newWeight = $previousWeight + doubleval(substr($weight, 7));
+			} else if (Q::startsWith($weight, 'weight-')) {
+				$newWeight = $previousWeight - doubleval(substr($weight, 7));
+			}
+		}
+		if (!isset($newWeight)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'weight', 
+				'range' => 'numeric or string of type +1.5 or -1.8'
+			));
+		}
 		
 		if ($adjustWeights
-		and $weight !== $previousWeight) {
+		and $newWeight !== $previousWeight) {
 			$criteria = array(
 				'toPublisherId' => $toPublisherId,
 				'toStreamName' => $toStreamName,
 				'type' => $type,
-				'weight' => $weight < $previousWeight
-					? new Db_Range($weight, true, false, $previousWeight)
-					: new Db_Range($previousWeight, false, true, $weight)
+				'weight' => $newWeight < $previousWeight
+					? new Db_Range($newWeight, true, false, $previousWeight)
+					: new Db_Range($previousWeight, false, true, $newWeight)
 			);
 			Streams_RelatedTo::update()->set(array(
 				'weight' => new Db_Expression("weight + " . $adjustWeightsBy)
 			))->where($criteria)->execute();
 		}
 		
-		$relatedTo->weight = $weight;
+		$relatedTo->weight = $newWeight;
 		$relatedTo->save();
 		
 		// Send Streams/updatedRelateTo message to the category stream
@@ -4076,7 +4093,7 @@ abstract class Streams extends Base_Streams
 	/**
 	 * Get the url of the stream's icon
 	 * @param {object} [$stream] Stream row or Streams_Stream object
-	 * @param {string} [$basename=null] The last part after the slash, such as "50.png"
+	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {string} The stream's icon url
 	 */
 	static function iconUrl($stream, $basename = null)
@@ -4090,7 +4107,10 @@ abstract class Streams extends Base_Streams
 			: "{{Streams}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+			if ($basename === null or $basename === true) {
+				$basename = '40';
+			}
 			if (strpos($basename, '.') === false) {
 				$basename .= '.png';
 			}

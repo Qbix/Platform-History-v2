@@ -2168,7 +2168,7 @@
                                 Q.Tool.setUpElement(
                                     instructionsCon,
                                     'Streams/webrtc/livestreamInstructions',
-                                    {},
+                                    {}
                                 ),
                                 {},
                                 function () {
