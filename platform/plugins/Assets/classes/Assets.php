@@ -173,29 +173,6 @@ abstract class Assets extends Base_Assets
 	}
 
 	/**
-	 * Check if relatedParticipants category exists, and create if not
-	 * @method checkCategory
-	 * @param string $publisherId If null - logged user id used.
-	 * @param string $streamName
-	 */
-	static function checkCategory ($publisherId, $streamName) {
-		if ($publisherId === null) {
-			$publisherId = Users::loggedInUser(true)->id;
-		}
-
-		$res = Streams_Stream::select("count(*) as res")->where(array(
-			"name" => $streamName,
-			"publisherId" => $publisherId
-		))->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
-
-		if (!$res) {
-			Streams::create(null, $publisherId, 'Streams/category', array('name' => $streamName));
-		}
-
-		return Streams::fetchOne(null, $publisherId, $streamName);
-	}
-
-	/**
 	 * Get likes for stream
 	 * @method likesAmount
 	 * @param string $publisherId
@@ -263,8 +240,7 @@ abstract class Assets extends Base_Assets
 	 */
 	static function getNFTStream ($userId = null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
-		$streamName = "Assets/user/NFTs";
-		self::checkCategory($userId, $streamName);
+		self::category($userId);
 
 		$stream = Streams::related($userId, $userId, $streamName, true, array(
 			"type" => "new",
@@ -275,7 +251,7 @@ abstract class Assets extends Base_Assets
 		if (empty($stream)) {
 			return Streams::create($userId, $userId, "Assets/NFT", array(), array(
 				"publisherId" => $userId,
-				"streamName" => $streamName,
+				"streamName" => $category->name,
 				"type" => "new"
 			));
 		} else {
