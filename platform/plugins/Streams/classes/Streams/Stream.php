@@ -1078,6 +1078,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @method post
 	 * @param {string} [$asUserId=null]
 	 *  The user to post as. Defaults to the logged-in user.
+	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
+	 *  Use this only if you started a transaction before. 
 	 * @param {string} [$messageType='Streams/changed']
 	 *  The type of the message.
 	 * @param {array} [$fieldNames=null]
@@ -1088,6 +1090,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function changed(
 		$asUserId=null,
+		$commit = false,
 		$messageType='Streams/changed',
 		$fieldNames = null)
 	{
@@ -1130,7 +1133,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$changes) {
 			return false; // we found no reason to update the stream in the database
 		}
-		$result = $this->save();
+		$result = $this->save(false, $commit);
 		$this->post($asUserId, array(
 			'type' => $messageType,
 			'content' => '',
