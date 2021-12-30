@@ -86,8 +86,10 @@ class Streams_Message extends Base_Streams_Message
 			return reset($arr);
 		}
 		$results = array();
-		foreach ($posted as $p) {
-			$results[$p->streamName] = $p;
+		foreach ($posted as $p => $arr) {
+			foreach ($arr as $sn => $messages) {
+				$results[$sn] = reset($messages);
+			}
 		}
 		return $results;
 	}

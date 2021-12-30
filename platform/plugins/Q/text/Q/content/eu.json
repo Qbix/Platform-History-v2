@@ -72,7 +72,8 @@
             "title": "Doitu tamaina eta posizioa",
             "touchscreen": "Erabili hatzak handitzeko eta arrastatzeko",
             "notTouchscreen": "Erabili zure sagua eta gurpila zoom eta arrastatu"
-        }
+        },
+        "errorType": "Barkatu, baina fitxategi mota hau ez da onartzen"
     },
     "timestamp": {
         "lastNight": "bart",

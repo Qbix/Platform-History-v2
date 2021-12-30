@@ -72,7 +72,8 @@
             "title": "Ölçü və mövqeyi seçin",
             "touchscreen": "Zənginləşdirmək və sürükləmək üçün barmaqlarınızdan istifadə edin",
             "notTouchscreen": "Zənginləşdirmək və sürükləmək üçün siçanınızı və təkərdən istifadə edin"
-        }
+        },
+        "errorType": "Üzr istəyirik, lakin bu fayl növü dəstəklənmir"
     },
     "timestamp": {
         "lastNight": "keçən gecə",

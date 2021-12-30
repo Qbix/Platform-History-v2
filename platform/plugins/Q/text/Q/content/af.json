@@ -72,7 +72,8 @@
             "title": "Pas grootte en posisie aan",
             "touchscreen": "Gebruik jou vingers om te zoom en sleep",
             "notTouchscreen": "Gebruik jou muis en wiel om te zoom en sleep"
-        }
+        },
+        "errorType": "Jammer, maar hierdie lêertipe word nie ondersteun nie"
     },
     "timestamp": {
         "lastNight": "gisteraand",

@@ -66,6 +66,6 @@ function Streams_basic_post($params = array())
 		$stream->content = (string)$request[$field];
 		$stream->type = $type;
 		$stream->title = $title;
-		$stream->changed($user->id, $messageType);
+		$stream->changed($user->id, false, $messageType);
 	}
 }

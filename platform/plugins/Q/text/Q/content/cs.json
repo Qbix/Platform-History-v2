@@ -72,7 +72,8 @@
             "title": "Nastavte velikost a polohu",
             "touchscreen": "Prstem můžete přiblížit a přetáhnout",
             "notTouchscreen": "Pro přiblížení a přetažení použijte myš a kolečko"
-        }
+        },
+        "errorType": "Omlouváme se, ale tento typ souboru není podporován"
     },
     "timestamp": {
         "lastNight": "minulou noc",

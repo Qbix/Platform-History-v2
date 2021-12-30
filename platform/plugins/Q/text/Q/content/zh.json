@@ -72,7 +72,8 @@
             "title": "调整大小和位置",
             "touchscreen": "用手指进行缩放和拖动",
             "notTouchscreen": "使用鼠标和滚轮进行缩放和拖动"
-        }
+        },
+        "errorType": "抱歉，不支持此文件类型"
     },
     "timestamp": {
         "lastNight": "昨晚",

@@ -4,8 +4,8 @@ function Assets_NFT_post ($params) {
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
 
-	$stream = Assets::getNFTStream($userId);
+	$stream = Assets_NFT::stream($userId);
 	$fields = Q::take($req, array('title', 'content', 'attributes', 'interests'));
 
-	Assets::updateNFT($stream, $fields);
+	Assets_NFT::update($stream, $fields);
 }
