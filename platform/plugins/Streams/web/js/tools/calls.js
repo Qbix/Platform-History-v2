@@ -12,48 +12,56 @@
      * @class Streams calls
      * @constructor
      * @param {Object} [options] any options for the tool
-     * @param {Q.Event} [options.maxCalls=0] Max calls can be related to this category
-     * @param {Q.Event} [options.publisherId=Users.currentCommunityId] Publisher of Streams/calls/main stream
-     * @param {Q.Event} [options.streamName=Streams/calls/main] Category stream name
+     * @param {Number} [options.maxCalls=0] Max calls can be related to this category
+     * @param {String} [options.publisherId=Users.currentCommunityId] Publisher of category stream to which calls are related
+     * @param {String} [options.streamName="Streams/calls/main"] Name of category stream to which calls are related
+     * @param {Object} options.webrtc Required information for webrtc
+     * @param {WebRTC.Room} [options.webrtc.room] The WebRTC room
+     * @param {Streams.Stream} [options.webrtc.stream] The WebRTC stream
+     * @param {Element} [options.webrtc.container=document.body] The element containing the WebRTC interface and videos
      */
     Q.Tool.define("Streams/calls", function(options) {
             var tool = this;
             var state = this.state;
-            state.parentClipTool = options.parentClipTool;
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
                 if (tool.stream.testWriteLevel("edit")) {
                     state.isAdmin = true;
                     tool.settings();
                 } else {
-                    state.parentClipTool.stream.onMessage("Media/webrtc/guest").set(function (stream, message) {
-                        let instructions = JSON.parse(message.instructions);
-
-                        console.log('Media/webrtc/guest instructions', instructions)
-                        console.log('instructions state.waitingRoom', state.waitingRoom)
-                        if(instructions.joined) {
-                            if(instructions.userId == Q.Users.loggedInUserId()) {
-                                if(state.waitingRoom != null) {
-                                    state.waitingRoom.switchTo(instructions.webrtcStream.publisherId, instructions.webrtcStream.name, {
-                                        resumeClosed: true
-                                    }).then(function () {
-                                        state.waitingRoom = null;
-                                    });
-                                }
-                            } else {
-
-                            }
-                        } else {
-                            if(instructions.userId == Q.Users.loggedInUserId()) {
-                                if(state.waitingRoom != null) {
-                                    state.waitingRoom.stop();
-                                }
-                            } else {
-
-                            }
+                    Q.Streams.get(state.publisherId, state.streamName, function (err, stream) {
+                        if (Q.firstErrorMessage(err)) {
+                            console.warn(err);
+                            return;
                         }
-
-                    }, tool);
-                    tool.call();
+                        this.onMessage("Streams/webrtc/call").set(function (stream, message) {
+                            let instructions = JSON.parse(message.instructions);
+                            console.log('Streams/webrtc/call instructions', instructions)
+                            console.log('instructions state.waitingRoom', state.waitingRoom)
+                            if(instructions.joined) {
+                                if(instructions.userId == Q.Users.loggedInUserId()) {
+                                    if(state.waitingRoom != null) {
+                                        state.waitingRoom.switchTo(instructions.webrtcStream.publisherId, instructions.webrtcStream.name, {
+                                            resumeClosed: true
+                                        }).then(function () {
+                                            state.waitingRoom = null;
+                                        });
+                                    }
+                                } else {
+    
+                                }
+                            } else {
+                                if(instructions.userId == Q.Users.loggedInUserId()) {
+                                    if(state.waitingRoom != null) {
+                                        state.waitingRoom.stop();
+                                    }
+                                } else {
+    
+                                }
+                            }
+    
+                        }, tool);
+                        tool.call();
+                    });
                 }
             });
 
@@ -88,18 +96,22 @@
                 if (err) {
                     return;
                 }
-
                 tool.text = content;
                 pipe.fill("text")();
             });
-            Q.addStylesheet('{{Streams}}/css/tools/calls.css', { slotName: 'Streams' }, pipe.fill("style"));
+            Q.addStylesheet('{{Streams}}/css/tools/calls.css', { 
+                slotName: 'Streams'
+            }, pipe.fill("style"));
         },
 
         {
             maxCalls: 0,
             publisherId: Users.currentCommunityId,
             streamName: "Streams/calls/main",
-            relationType: "Streams/calls"
+            relationType: "Streams/calls",
+            webrtc: {
+                
+            }
         },
 
         {
@@ -194,9 +206,6 @@
 
                             parentElement.forEachTool("Streams/webrtc/preview", function () {
 						var previewTool = this;
-                        this.state.parentClipTool = state.parentClipTool;
-                        this.state.mainWebrtcRoom = state.parentClipTool.state.mainWebrtcRoom;
-                        this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
                                 this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {
                                         return;
@@ -223,8 +232,6 @@
                 var tool = this;
                 var state = tool.state;
                 var $toolElement = $(tool.element);
-                var $clipToolElement = $(state.parentClipTool.element);
-                var $hostsParticipants = $(".Media_clip_hosts_participants", $clipToolElement);
                 $toolElement.addClass("Streams_calls_call").on(Q.Pointer.fastclick, function () {
                     Q.prompt(null, function (content) {
                         if (!content) {
@@ -234,7 +241,7 @@
                         console.log('call state', state, state.relationType );
 
                         state.waitingRoom = Streams.WebRTC.start({
-                            element: $hostsParticipants[0],
+                            element: state.webrtc.container || document.body,
                             publisherId: state.publisherId,
                             streamName: state.streamName,
                             relationType: state.relationType,

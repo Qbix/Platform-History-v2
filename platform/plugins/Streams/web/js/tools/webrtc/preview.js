@@ -88,10 +88,14 @@
 
 
             function getMainWebRTCStreams(callback) {
-                if(!state.parentClipTool) return false;
-                state.parentClipTool.stream.relatedTo(Q.Media.clip.webrtc.relations.main, function(){
-                    if(callback) callback(this.relatedStreams);
-                })
+                if (!state.webrtc || !state.webrtc.stream) {
+                    return false;
+                }
+                state.webrtc.stream.relatedTo("Streams/webrtc/main", function(){
+                    if (callback) {
+                        callback(this.relatedStreams);
+                    }
+                });
             }
 
             if(state.mainWebrtcStream != null) {
@@ -213,15 +217,17 @@
                     Q.Streams.get(mainWebRTCStreamPublisher, mainWebRTCStreamName, function() {
                         Q.req('Media/live', 'manage', function () {
                             tool.preview.delete();
-
-                            tool.state.mainWebrtcStream.post({
+                            if (!state.webrtc || state.webrtc.stream) {
+                                return;
+                            }
+                            state.webrtc.stream.post({
                                 type: 'Streams/webrtc/forceDisconnect',
                                 content: JSON.stringify({
                                     publisherId: mainWebRTCStreamPublisher,
                                     name: mainWebRTCStreamName,
                                     userId: fields.publisherId,
-                                    clipStreamPublisherId:tool.stream.fields.publisherId,
-                                    clipStreamName:tool.stream.fields.name
+                                    clipStreamPublisherId: tool.stream.fields.publisherId,
+                                    clipStreamName: tool.stream.fields.name
                                 }),
                             }, function() {
 
