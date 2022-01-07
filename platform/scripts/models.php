@@ -15,11 +15,13 @@ if(!$FROM_APP) {
 $usage = <<<EOT
 $usage
 
+Generates models for the app.
+
 Options:
 
---all Generate also plugins models
+--all Also generates models for all the plugins.
 
---plugin=<plugin name> Generate models for this plugin only. Possible to define multiple plugins: --plugin=<plugin_1> --plugin=<plugin_2> ... 
+--plugin=<plugin name> Generate models for a specific plugin only. Possible to define multiple plugins: --plugin=<plugin_1> --plugin=<plugin_2> ... 
 
 EOT;
 
@@ -52,7 +54,7 @@ if (!empty($plugins)) {
 $connections = array_keys(Q_Config::get('Db', 'connections', array()));
 $plugins = Q::plugins();
 
-if (!isset($argv[1]) or $argv[1] != '--all') {
+if (!isset($argv[1]) or !empty($options['all'])) {
 	$connections = array_diff($connections, $plugins);
 }
 
@@ -60,13 +62,10 @@ foreach($connections as $c) {
 	if ($c === '*') {
 		continue;
 	}
-
 	$isPlugin = in_array($c, $plugins);
-
-	if (!empty($plugins) && !in_array($c, $plugins)) {
+	if (!empty($plugins) && !$isPlugin) {
 		continue;
 	}
-
 	createModels($c, $isPlugin);
 }
 echo "\nSuccess\n";
