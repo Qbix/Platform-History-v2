@@ -2702,7 +2702,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     for(let m in roomScreens) {
-
                         if(screen == roomScreens[m]){
                             screen.isActive = false;
                             roomScreens.splice(m, 1);

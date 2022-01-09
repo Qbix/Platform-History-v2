@@ -17,6 +17,8 @@
      * @param {Q.Event} [options.streamName=Streams/calls/main] Category stream name
      */
     Q.Tool.define("Streams/calls", function(options) {
+            console.log('center: Streams/calls');
+
             var tool = this;
             var state = this.state;
             state.parentClipTool = options.parentClipTool;
@@ -57,6 +59,8 @@
                 }
             });
 
+            console.log('center: Streams/calls: get stream', state.publisherId, state.streamName);
+
             Streams.get.force(state.publisherId, state.streamName, function (err) {
                 var msg = Q.firstErrorMessage(err);
                 if (msg) {
@@ -65,6 +69,7 @@
 
                 // join every user to allow get messages
                 this.join();
+                console.log('center: Streams/calls: get stream stream', this);
 
                 tool.stream = this;
 
@@ -193,10 +198,10 @@
                             });
 
                             parentElement.forEachTool("Streams/webrtc/preview", function () {
-						var previewTool = this;
-                        this.state.parentClipTool = state.parentClipTool;
-                        this.state.mainWebrtcRoom = state.parentClipTool.state.mainWebrtcRoom;
-                        this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
+                                var previewTool = this;
+                                this.state.parentClipTool = state.parentClipTool;
+                                this.state.mainWebrtcRoom = state.parentClipTool.state.mainWebrtcRoom;
+                                this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
                                 this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {
                                         return;
@@ -233,6 +238,7 @@
 
                         console.log('call state', state, state.relationType );
 
+                        //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
                             element: $hostsParticipants[0],
                             publisherId: state.publisherId,
