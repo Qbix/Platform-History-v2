@@ -3858,6 +3858,15 @@
 				return Q.handle(callback, null, [null, Users.Web3.provider]);
 			}
 
+			// Try with MetaMask-type connection first
+			if (window.ethereum && ethereum.request) {
+				return ethereum.request({ method: 'eth_requestAccounts' })
+				.then(function (accounts) {
+					Users.Web3.provider = ethereum
+					return Q.handle(callback, null, [null, Users.Web3.provider]);
+				});
+			}
+
 			var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
 			web3Modal.clearCachedProvider();
 			web3Modal.resetState();
