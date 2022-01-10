@@ -12,6 +12,8 @@
 	 * @param {Q.Event} [options.onRender] called when tool element completely rendered
 	 */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
+            console.log('center: Streams/webrtc/preview');
+
             var tool = this;
             this.state = Q.extend({}, this.state, options);
             var state = this.state;
@@ -61,6 +63,7 @@
                 return;
             }
 
+            //stream of user's waiting webrtc room
             tool.stream = stream;
 
             // retain with stream
@@ -86,7 +89,10 @@
 				preamble: preamble
 			});
 
+            console.log('preview: fields', fields);
 
+
+            //get webrtc stream of the main room
             function getMainWebRTCStreams(callback) {
                 if(!state.parentClipTool) return false;
                 state.parentClipTool.stream.relatedTo(Q.Media.clip.webrtc.relations.main, function(){
@@ -105,7 +111,7 @@
             }
 
             function renderTool(mainWebRTCStreamPublisher, mainWebRTCStreamName) {
-
+                console.log('preview: renderTool', mainWebRTCStreamPublisher, mainWebRTCStreamName);
                 Q.Template.render(
                     'Streams/webrtc/preview/view',
                     fields,
@@ -203,7 +209,7 @@
                         callButton.css('display', 'none');
                     }, {
                         fields: {
-                            action: 'join', userId: fields.publisherId
+                            action: 'join', userId: fields.publisherId, webrtcStreamPublisher: mainWebRTCStreamPublisher, webrtcStreamName: mainWebRTCStreamName,
                         }
                     })
 

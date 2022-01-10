@@ -2126,14 +2126,12 @@
                             var rtmpLiveURLInput = document.createElement('INPUT');
                             rtmpLiveURLInput.type = 'text';
                             rtmpLiveURLInput.placeholder ='Paste RTMP URL here';
-                            rtmpLiveURLInput.value ='rtmp://a.rtmp.youtube.com/live2';
 
                             var rtmpLiveStreamKey = document.createElement('LABEL');
                             rtmpLiveStreamKey.className = 'Streams_webrtc_streaming_key';
                             var rtmpLiveStreamKeyInput = document.createElement('INPUT');
                             rtmpLiveStreamKeyInput.type = 'password';
                             rtmpLiveStreamKeyInput.placeholder = 'Stream Key';
-                            rtmpLiveStreamKeyInput.value = '2p3r-cu4d-xsy5-z135-0vmu';
 
                             var startStreamingBtnCon = document.createElement('DIV');
                             startStreamingBtnCon.className = 'Streams_webrtc_streaming_start';
