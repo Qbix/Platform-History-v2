@@ -1379,6 +1379,7 @@ class Q_Html
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndHash, set hash here to avoid calling it again
+	 * @param {boolean} [$options.baseUrlPlaceholder=false] Pass true to have {{baseUrl}} placeholder instead of base URL in the string
 	 * @return {array} A three-element array containing the url, filename, hash
 	 */
 	static function themedUrlFilenameAndHash ($filePath, $options = array())
@@ -1439,6 +1440,13 @@ class Q_Html
 				}
 			}
 			$url = $theme . ($filePath2 ? '/'.$filePath2 : '');
+		}
+
+		if (!empty($options['baseUrlPlaceholder'])) {
+			$baseUrl = Q_Request::baseUrl();
+			if (Q::startsWith($url, $baseUrl)) {
+				$url = '{{baseUrl}}' . substr($url, strlen($baseUrl));
+			}
 		}
 		
 		if (!empty($options['hash'])) {

@@ -3668,7 +3668,7 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
-					_reject(e);
+					_reject(err);
 					throw err;
 				}
 				if (params[0] && !gw.firstParameterIsNotError) {

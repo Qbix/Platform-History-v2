@@ -27,7 +27,7 @@ function Websites_before_Streams_Stream_save_Websites_article($params)
 	}
 
 	if (!$stream->isCustomIcon()) {
-		$stream->icon = $user->iconUrl();
+		$stream->icon = $user->iconUrl(false);
 	}
 
 	$s = Streams::fetchOne($user->id, $user->id, "Streams/user/icon");

@@ -183,12 +183,12 @@
 
                             $("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
                                 var maxCalls = parseInt($select.val());
-                                var maxRelations = tool.stream.getAttribute("maxRelations") || {};
+                                var maxRelations = tool.stream.getAttribute("Streams/maxRelations") || {};
                                 var oldMaxCalls = parseInt(Q.getObject(state.relationType, maxRelations));
 
                                 if (maxCalls !== oldMaxCalls) {
                                     maxRelations[state.relationType] = maxCalls;
-                                    tool.stream.setAttribute("maxRelations", maxRelations).save();
+                                    tool.stream.setAttribute("Streams/maxRelations", maxRelations).save();
                                 }
                             });
 

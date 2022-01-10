@@ -39,6 +39,7 @@
             imgHeight: 120,
             delayIntroUntil: 0.5,
             startTransformY: 0,
+            perspective:null,
             autoRotate: true,
             direction: 'left',
             rotateSpeed: 60000,
@@ -118,6 +119,7 @@
 
 
                 if(!mediaContainer.classList.contains('carousel-wrap')) mediaContainer.classList.add('carousel-wrap');
+                if(state.perspective != null) mediaContainer.style.perspective = state.perspective;
                 var obox = document.createElement('DIV');
                 obox.className = 'drag-container';
                 var ospin = document.createElement('DIV');

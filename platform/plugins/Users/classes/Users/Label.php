@@ -426,7 +426,7 @@ class Users_Label extends Base_Users_Label
 		$icon['subpath'] = "$userId/label/$l->label/icon";
 		$data = Q::event("Q/image/post", $icon);
 		Q_Response::setSlot('icon', $data);
-		$l->icon = Q_Request::baseUrl().'/'.$data[''];
+		$l->icon = '{{baseUrl}}/'.$data[''];
 	}
 
 	/* * * */

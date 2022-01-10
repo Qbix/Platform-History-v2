@@ -886,7 +886,7 @@ class Q_Uri
 	 * @method interpolateUrl
 	 * @param {string} $url
 	 * @param {array} [$additional=array()] Any additional substitutions
-	 * @return {strQ_Uri::interpolateUrlitutions applied
+	 * @return {string} url with substitutions applied
 	 */
 	static function interpolateUrl($url, $additional = array())
 	{

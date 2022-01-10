@@ -72,7 +72,8 @@
             "title": "Aghjunghje a dimensione è a posizione",
             "touchscreen": "Aduprà e vostru dita per allargà è trà",
             "notTouchscreen": "Usate u vostru mouse &amp; rotella per zoomu è trascinarà"
-        }
+        },
+        "errorType": "Scusate, ma stu tipu di schedariu ùn hè micca supportatu"
     },
     "timestamp": {
         "lastNight": "a notte passata",

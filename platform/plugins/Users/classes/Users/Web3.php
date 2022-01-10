@@ -21,7 +21,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
-	 * @param {boolean|null} [$caching=true] Set false to ignore cache and request blocjchain
+	 * @param {boolean|null} [$caching=true] Set false to ignore cache and request blockchain
 	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
 	 * @return array
 	 */
@@ -67,7 +67,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			));
 		}
 		$infuraId = Q::ifset(
-			$appInfo, 'providers', 'walletconnect', 'infura', 'id'
+			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
 		);
 		$rpcUrl = Q::interpolate(
 			$appInfo['rpcUrl'],
@@ -89,9 +89,14 @@ class Users_Web3 extends Base_Users_Web3 {
 			$arguments[] = $params;
 		}
 		$arguments[] = function ($err, $results) use (&$data) {
-			$errMessage = Q::ifset($err, "message", null);
-			if ($errMessage) {
-				throw new Exception($errMessage);
+			if ($err) {
+				$errMessage = Q::ifset($err, "message", null);
+				if (!$errMessage) {
+					$errMessage = $err->getMessage();
+				}
+				if ($errMessage) {
+					throw new Exception($errMessage);
+				}
 			}
 
 			if (empty($results)) {
@@ -122,14 +127,16 @@ class Users_Web3 extends Base_Users_Web3 {
 			$data = Q::json_encode($data, true);
 		}
 
-		$cache->result = $data;
+		if ($cache) {
+			$cache->result = $data;
+		}
 
 		if (($data && $caching !== false)
 		or (!$data && $caching === true)) {
 			$cache->save(true);
 		}
 
-		return $data;
+		return Q::json_decode($data);
 	}
 	/**
 	 * Get the filename of the ABI file for a contract. 
@@ -153,7 +160,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		 * @return {string} the filename of the file to load
 		 */
 		$filename = Q::event(
-			'Users/Web3/getABIFilename', compact('contractAddress', 'appId'), 
+			'Users/Web/getABIFilename', compact('contractAddress', 'appId'), 
 			'before', false, $filename
 		);
 		if ($filename) {
@@ -189,7 +196,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {String} $methodName
 	 * @param {String} $params params used to call the method
 	 * @param {integer} [$cacheDuration=3600]
-	 * @param {String} [$app] TehThe internal app ID
+	 * @param {String} [$app] The internal app ID
 	 * @return {Db_Row}
 	 */
 	static function getCache (
@@ -199,6 +206,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		$params, 
 		$cacheDuration)
 	{
+		if ($cacheDuration === null) {
+			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
+		}
 		$cached = new Users_Web3(array(
 			'chainId' => $chainId,
 			'contract' => $contract,

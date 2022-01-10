@@ -72,7 +72,8 @@
             "title": "Ajusteu la mida i la posició",
             "touchscreen": "Utilitzeu els dits per ampliar i arrossegar",
             "notTouchscreen": "Utilitzeu el ratolí i la roda per ampliar i arrossegar"
-        }
+        },
+        "errorType": "Ho sentim, però aquest tipus de fitxer no és compatible"
     },
     "timestamp": {
         "lastNight": "La nit passada",

@@ -72,7 +72,8 @@
             "title": "Usba ang gidak-on ug posisyon",
             "touchscreen": "Gamita ang imong mga tudlo aron sa pag-zoom ug pag-drag",
             "notTouchscreen": "Gamita ang imong mouse &amp; ligid aron sa pag-zoom ug pag-drag"
-        }
+        },
+        "errorType": "Pasayloa, apan kini nga matang sa file wala gisuportahan"
     },
     "timestamp": {
         "lastNight": "kagabii",

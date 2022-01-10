@@ -72,7 +72,8 @@
             "title": "Podesite veličinu i položaj",
             "touchscreen": "Koristite prste za zumiranje i povlačenje",
             "notTouchscreen": "Koristite miš i točak za zumiranje i povlačenje"
-        }
+        },
+        "errorType": "Žao nam je, ali ova vrsta datoteke nije podržana"
     },
     "timestamp": {
         "lastNight": "prošle noći",

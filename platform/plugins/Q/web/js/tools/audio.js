@@ -828,7 +828,7 @@ Q.Tool.define("Q/audio", function (options) {
 	adapterNameFromUrl: function () {
 		var url = this.state.url || "";
 
-		if (url.includes("soundcloud.com")) {
+		if (url.includes("soundcloud.com") && !url.includes(".mp3")) {
 			return 'soundcloud';
 		}
 		if (url.split('.').pop() === 'mp3') {
