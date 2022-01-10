@@ -137,7 +137,7 @@ function Streams_stream_put($params) {
 				$stream->$f = $req[$f];
 			}
 		}
-		$stream->changed($user->id,  $suggest ? 'Streams/suggest' : 'Streams/changed');
+		$stream->changed($user->id,  false, $suggest ? 'Streams/suggest' : 'Streams/changed');
 	}
 	
 	if (!empty($req['join'])) {

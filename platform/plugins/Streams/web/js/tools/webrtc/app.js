@@ -1264,6 +1264,7 @@ window.WebRTCRoomClient = function app(options){
             }
 
             function renderCommonVisualization() {
+                if(!localParticipant.online) return;
                 var freqDataMany = [];
                 var agg = [];
                 //var sum = 0;
@@ -10926,6 +10927,8 @@ window.WebRTCRoomClient = function app(options){
         //if(!switchRoom && app.mediaManager.canvasComposer.getMediaStream() != null) {
             app.mediaManager.canvasComposer.stopStreamCapture();
         //}
+
+        app.mediaManager.audioVisualization().removeCommonVisualization();
 
         for(var p = roomParticipants.length - 1; p >= 0; p--){
 

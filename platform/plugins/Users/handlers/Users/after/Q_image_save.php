@@ -28,7 +28,9 @@ function Users_after_Q_image_save($params, &$return)
 		if (Q::startsWith($fullpath,$iconPrefix)) {
 			// modification of logged user icon
 			if ($user->icon != $subpath) {
-				$user->icon = Q_Html::themedUrl("$path/$subpath");
+				$user->icon = Q_Html::themedUrl("$path/$subpath", array(
+					'baseUrlPlaceholder' => true
+				));
 				$user->save(); // triggers any registered hooks
 				Users::$cache['iconUrlWasChanged'] = true;
 			} else {

@@ -72,7 +72,8 @@
             "title": "Rregullo madhësinë dhe pozicionin",
             "touchscreen": "Përdorni gishtat për të zmadhuar dhe zvarritur",
             "notTouchscreen": "Përdorni miun dhe timonin për të zmadhuar dhe zvarritur"
-        }
+        },
+        "errorType": "Na vjen keq, por ky lloj skedari nuk mbështetet"
     },
     "timestamp": {
         "lastNight": "natën e kaluar",

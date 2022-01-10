@@ -100,7 +100,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 		
 		var fields = Q.extend({}, state.templates.icon.fields, {
-			src: Users.iconUrl('loading', null)
+			src: Users.iconUrl('loading', 40)
 		});
 		Q.Template.render('Users/avatar/loading', fields, function (err, html) {
 			tool.element.innerHTML = html;
@@ -117,7 +117,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			if (state.icon) {
 				var src = isNaN(state.icon)
 					? state.icon
-					: Q.url(avatar.iconUrl(state.icon), null)
+					: Q.url(avatar.iconUrl(state.icon), 40);
 				fields = Q.extend({}, state.templates.icon.fields, {src: src});
 				Q.Template.render('Users/avatar/icon', fields, function (err, html) {
 					p.fill('icon')(html);

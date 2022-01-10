@@ -49,7 +49,7 @@ function Streams_0_8_1_Streams_mysql()
             'skipAccess' => true,
             'name' => $stream->name,
 		    'title' => Users::communityName(),
-		    'icon' => $user ? $user->iconUrl() : null
+		    'icon' => $user ? $user->iconUrl(false) : null
 	    ));
     }
 

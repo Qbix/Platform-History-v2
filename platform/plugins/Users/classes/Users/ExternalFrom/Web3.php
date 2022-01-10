@@ -32,10 +32,10 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		if (!$platformAppId) {
 			$platformAppId = Q::ifset($_REQUEST, 'chainId', 1);
 		}
-		if (!intval($platformAppId)) {
+		if (substr($platformAppId, 0, 2) !== '0x') {
 			throw new Q_Exception_BadValue(array(
 				'internal' => 'Users/apps config',
-				'problem' => "appId has to be a numeric chainId, not $platformAppId"
+				'problem' => "appId should be a string starting from 0x, not $platformAppId"
 			));
 		}
 		$xid = strtolower(Q::ifset($_REQUEST, 'xid', null));

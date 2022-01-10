@@ -272,21 +272,28 @@
 						var fullName = '';
 						Q.Streams.get(userId, 'Streams/user/firstName', function () {
 							firstName = this.fields.content;
+                            if (firstName != null) {
+                                fullName += firstName;
+                            }
 
-							Q.Streams.get(userId, 'Streams/user/lastName', function () {
-								lastName = this.fields.content;
-							});
+							try{
+                                Q.Streams.get(userId, 'Streams/user/lastName', function (stream) {
+                                    if(!stream) return;
+                                    lastName = this.fields.content;
 
-							if (firstName != null) {
-								fullName += firstName;
-							}
-							if (lastName != null) {
-								fullName += ' ' + lastName;
-							}
+                                    if (lastName != null) {
+                                        fullName += ' ' + lastName;
+                                    }
 
-							participant.username = fullName;
+                                    participant.username = fullName;
 
-							if (callback != null) callback({firstName: firstName, lastName: lastName});
+                                    if (callback != null) callback({firstName: firstName, lastName: lastName});
+                                });
+
+                            } catch (e) {
+                                participant.username = fullName;
+                                if (callback != null) callback({firstName: firstName, lastName: lastName});
+                            }
 
 						});
 					}
@@ -2168,7 +2175,7 @@
                                 Q.Tool.setUpElement(
                                     instructionsCon,
                                     'Streams/webrtc/livestreamInstructions',
-                                    {},
+                                    {}
                                 ),
                                 {},
                                 function () {

@@ -359,6 +359,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	 * @param {Object} [options]
 	 * @param {String} [options.defaultIcon='default']
 	 * @param {String} [options.cacheBust=null]
+	 * @param {Object} [options.overrideShowSize={}] An object containing icon: size pairs
 	 */
 	icon: function _icon (element, onLoad, options) {
 		var tool = this;
@@ -366,7 +367,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		options = options || {};
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			// icon and imagepicker
-			var oss = state.overrideShowSize;
+			var oss = Q.extend({}, state.overrideShowSize, options.overrideShowSize);
 			var fields = this.fields;
 			var si = state.imagepicker;
 			var sfi = options.icon || fields.icon;
@@ -386,9 +387,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					}
 				}
 			}
-			var file = size
-				|| Q.first(si.saveSizeName, {nonEmptyKey: true})
-				|| (oss && (oss[sfi] || oss['']));
+			var file = (oss && (oss[sfi] || oss['']))
+				|| size
+				|| Q.first(si.saveSizeName, {nonEmptyKey: true});
 			var full = si.saveSizeName[si.fullSize] || file;
 			var defaultIcon = (options.defaultIcon) || 'default';
 			var icon = (sfi && sfi !== 'default') ? sfi : defaultIcon;

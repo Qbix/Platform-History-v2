@@ -400,7 +400,7 @@
 						return;
 					}
 
-					Q.Users.logout({using: 'web3'});
+					Q.Users.logout({using: 'web3', url: ''});
 				});
 				var payload = Q.text.Users.login.web3.payload.interpolate({
 					host: location.host,
@@ -419,7 +419,6 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -537,6 +536,7 @@
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
+		Users.onLogin.handle(user);
 		Q.handle(onSuccess, this, [user, options]);
 		Users.authenticate.occurring = false;
 	}
@@ -972,7 +972,7 @@
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.url] the URL to hit to log out. You should usually not change this.
 	 *  @param {String} [options.using] can be "native", "facebook", "web3", or "native,facebook,web3"
-	 *   to log out of multiple
+	 *   to log out of multiple platforms in addition to logging out natively
 	 *  @param {Q.Event} [options.onSuccess] event that occurs when logout is successful.
 	 *  @param {String} [options.welcomeUrl] the URL of the page to show on a successful logout
 	 */
@@ -1048,76 +1048,6 @@
 		Q.request(url, 'script', callback, {"method": "post"});
 		return true;
 	};
-	
-	/**
-	 * Disconnect external platforms
-	 */
-	Users.disconnect = {};
-	Users.disconnect.facebook = function (appId, callback) {
-		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
-		if (!platformAppId) {
-			console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
-		}
-		Q.cookie('fbs_' + platformAppId, null, {path: '/'});
-		Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-		Users.init.facebook(function logoutCallback() {
-			Users.Facebook.getLoginStatus(function (response) {
-				setTimeout(function () {
-					Users.logout.occurring = false;
-				}, 0);
-				if (!response.authResponse) {
-					return callback();
-				}
-				return FB.logout(function () {
-					delete Users.connected.facebook;
-					callback();
-				});
-			}, true);
-		}, {
-			appId: appId
-		});
-	};
-	Users.disconnect.web3 = function (appId, callback) {
-		if (Users.disconnect.web3.occurring) {
-			return false;
-		}
-		localStorage.removeItem('walletconnect');
-		localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
-		Users.disconnect.web3.occurring = true;
-		var p = Users.Web3.provider;
-		if (window.Web3Modal && Web3Modal.default) {
-			var w = new window.Web3Modal.default;
-			if (w.clearCachedProvider) {
-				w.clearCachedProvider();
-			}
-		}
-		if (!p) {
-			Q.handle(callback);
-			return false;
-		}
-	    if (p.close) {
-			p.close().then(function (result) {
-				delete Users.connected.web3;
-				Users.Web3.provider = null;
-				setTimeout(function () {
-					Users.disconnect.web3.occurring = false;
-					Q.handle(callback);
-				}, 0);
-			});
-	    } else {
-			setTimeout(function () {
-				Users.logout.occurring = false;
-			}, 0);
-			if (p._handleDisconnect) {
-				p._handleDisconnect();
-			}
-			delete Users.connected.web3;
-			Users.Web3.provider = null;
-			Q.handle(callback);
-			Users.disconnect.web3.occurring = false;
-	    }
-		return true;
-	};
 
 	/**
 	 * A shorthand way to get the id of the logged-in user, if any
@@ -1170,7 +1100,7 @@
 	/**
 	 * Calculate the url of a user's icon
 	 * @method
-	 * @param {Number} [size=40] the size of the icon to render.
+	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.User.prototype.iconUrl = function Users_User_iconUrl(size) {
@@ -1185,7 +1115,7 @@
 	 * Calculate the url of a user's icon
 	 * @method
 	 * @param {String} icon the value of the user's "icon" field
-	 * @param {String|Number} [basename=40] The last part after the slash, such as "50.png"
+	 * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.iconUrl = function Users_iconUrl(icon, basename) {
@@ -1193,11 +1123,12 @@
 			console.warn("Users.iconUrl: icon is empty");
 			return '';
 		}
-		if (!basename || basename === true) {
+		if ((basename === true) // for backward compatibility
+		|| (!basename && basename !== false)) {
 			basename = '40';
 		}
 		basename = (String(basename).indexOf('.') >= 0) ? basename : basename + '.png';
-		var src = Q.interpolateUrl(icon + '/' + basename);
+		var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
 		return src.isUrl() || icon.substr(0, 2) === '{{'
 			? src
 			: Q.url('{{Users}}/img/icons/' + src);
@@ -2660,7 +2591,7 @@
 	/**
 	 * Calculate the url of a label's icon
 	 * @method
-	 * @param {Number} [size=40] the size of the icon to render.
+	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {String} the url
 	 */
 	Users.Label.prototype.iconUrl = function Users_User_iconUrl(size) {
@@ -3577,6 +3508,31 @@
 		scheme: null,
 		scope: 'email',
 
+		disconnect: function (appId, callback) {
+			var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			if (!platformAppId) {
+				console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
+			}
+			Q.cookie('fbs_' + platformAppId, null, {path: '/'});
+			Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
+			Users.init.facebook(function logoutCallback() {
+				Users.Facebook.getLoginStatus(function (response) {
+					setTimeout(function () {
+						Users.logout.occurring = false;
+					}, 0);
+					if (!response.authResponse) {
+						return callback();
+					}
+					return FB.logout(function () {
+						delete Users.connected.facebook;
+						callback();
+					});
+				}, true);
+			}, {
+				appId: appId
+			});
+		},
+
 		construct: function () {
 			Users.Facebook.appId = Q.getObject(['facebook', Q.info.app, 'appId'], Users.apps);
 
@@ -3792,9 +3748,57 @@
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
+		disconnect: function (appId, callback) {
+			if (Users.disconnect.web3.occurring) {
+				return false;
+			}
+			localStorage.removeItem('walletconnect');
+			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
+			Users.disconnect.web3.occurring = true;
+			var p = Users.Web3.provider;
+			if (window.Web3Modal && Web3Modal.default) {
+				var w = new window.Web3Modal.default;
+				if (w.clearCachedProvider) {
+					w.clearCachedProvider();
+				}
+			}
+			if (!p) {
+				Q.handle(callback);
+				Users.disconnect.web3.occurring = false;
+				return false;
+			}
+			if (p.close) {
+				p.close().then(function (result) {
+					delete Users.connected.web3;
+					Users.Web3.provider = null;
+					setTimeout(function () {
+						Users.disconnect.web3.occurring = false;
+						Q.handle(callback);
+					}, 0);
+				});
+				Users.disconnect.web3.cleanupT = setTimeout(function () {
+					Users.disconnect.web3.occurring = false;
+					delete Users.disconnect.web3.cleanupT;
+				}, 300);
+			} else {
+				setTimeout(function () {
+					Users.logout.occurring = false;
+				}, 0);
+				if (p._handleDisconnect) {
+					p._handleDisconnect();
+				}
+				delete Users.connected.web3;
+				Users.Web3.provider = null;
+				Q.handle(callback);
+				Users.disconnect.web3.occurring = false;
+			}
+			return true;
+		},
+
 		/**
 		 * Get web3Modal instance
 		 * @method getWeb3Modal
+		 * @static
 		 */
 		getWeb3Modal: function (appId) {
 			appId = appId || Q.info.app;
@@ -3854,56 +3858,202 @@
 				return Q.handle(callback, null, [null, Users.Web3.provider]);
 			}
 
+			// Try with MetaMask-type connection first
+			if (window.ethereum && ethereum.request) {
+				return ethereum.request({ method: 'eth_requestAccounts' })
+				.then(function (accounts) {
+					Users.Web3.provider = ethereum
+					return Q.handle(callback, null, [null, Users.Web3.provider]);
+				});
+			}
+
 			var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
 			web3Modal.clearCachedProvider();
 			web3Modal.resetState();
 			web3Modal.connect().then(function (provider) {
 				Users.Web3.provider = provider;
+
+				// Detect if provider locked
+				provider.on('accountsChanged', function () {
+					if (!this.selectedAddress) {
+						Users.Web3.provider = null;
+					}
+				});
+
 				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
 				Q.handle(callback, null, [ex]);
 				throw new Error(ex);
 			});
 		},
-
 		/**
-		 * Change chain
-		 * @method setChain
+		 * Get current wallet address
+		 * @method getWallet
+		 * @param {Function} callback
+		 */
+		getWallet: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+
+				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
+					return Q.handle(callback, null, [null, accounts[0]]);
+				});
+			});
+		},
+		/**
+		 * Get current chain id
+		 * @method getChainId
+		 * @param {Function} callback
+		 */
+		getChainId: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+
+				(new Web3(provider)).eth.net.getId().then(function (chainId) {
+					return Q.handle(callback, null, [null, chainId]);
+				});
+			});
+		},
+		/**
+		 * Switch provider to a different Web3 chain
+		 * @method switchChain
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
 		 */
-		setChain: function (info, onSuccess, onError) {
+		switchChain: function (info, onSuccess, onError) {
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(onError, null, [err]);
 				}
 
 				Users.Web3.switchChainOccuring = true;
-
+				
 				provider.request({
-					method: 'wallet_addEthereumChain',
-					params: [{
-						chainId: info.chainId,
-						chainName: info.name,
-						nativeCurrency: {
-							name: info.currency.name,
-							symbol: info.currency.symbol,
-							decimals: info.currency.decimals
-						},
-						rpcUrls: info.rpcUrls,
-						blockExplorerUrls: info.blockExplorerUrls
-					}]
-				}).then(function () {
-					provider.once("chainChanged", onSuccess);
-				}, function (error) {
-					Q.handle(onError, null, [error]);
-				}).catch((error) => {
-					Q.handle(onError, null, [error]);
+					method: 'wallet_switchEthereumChain',
+					params: [{ chainId: info.chainId }],
+				}).then(_continue)
+				.catch(function (switchError) {
+					// This error code indicates that the chain has not been added to MetaMask.
+					if (switchError.code !== 4902) {
+						return Q.handle(onError, null, [switchError]);
+					}
+					provider.request({
+						method: 'wallet_addEthereumChain',
+						params: [{
+							chainId: info.chainId,
+							chainName: info.name,
+							nativeCurrency: {
+								name: info.currency.name,
+								symbol: info.currency.symbol,
+								decimals: info.currency.decimals
+							},
+							rpcUrls: info.rpcUrls,
+							blockExplorerUrls: info.blockExplorerUrls
+						}]
+					}).then(_continue)
+					.catch(function (error) {
+						Q.handle(onError, null, [error]);
+					});
 				});
+
+				function _continue() {
+					onSuccess && provider.once("chainChanged", onSuccess);
+				}
+			});
+		},
+
+		getChainId: function () {
+			var info = Q.getObject(['Q', 'Users', 'apps', 'web3', Q.info.app]);
+			return info.chainId || info.appId;
+		},
+
+		/**
+		 * Used get the currently selected address on current ethereum chain
+		 * @method getContract
+		 * @static
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		getSelectedXid: function () {
+			var result = Q.getObject('Q.Users.Web3.provider.selectedAddress')
+			|| (window.ethereum && ethereum.selectedAddress);
+			if (result) {
+				return result;
+			}
+		},
+
+		/**
+		 * Used to get the logged-in user's ID on any chain
+		 * @method getContract
+		 * @static
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		getLoggedInUserXid: function () {
+			var xids = Q.getObject('Q.Users.loggedInUser.xids');
+			var key = 'web3\t' + Q.Users.Web3.getChainId();
+			if (xids && xids[key]) {
+				return xids[key];
+			}
+		},
+
+		/**
+		 * Used to fetch the ethers.Contract object to use with a smart contract.
+		 * @method getContract
+		 * @static
+		 * @param {string} contractAddress
+		 * @param {Function} callback receives (err, contract)
+		 * @return {Promise} that returns the ethers.Contract
+		 */
+		getContract: function(contractAddress, callback) {
+			return new Q.Promise(function (resolve, reject) {
+				if (window.ethereum
+				&& ethereum.chainId == Q.getObject([
+					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
+				])) {
+					_continue(ethereum);
+				} else {
+					Q.Users.Web3.connect(function (err, provider) {
+						if (err) {
+							callback && callback(err);
+							reject(err);
+						} else {
+							_continue(provider);
+							resolve(provider);
+						}
+					});
+				}
+				function _continue(provider) {
+					fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
+					.then(function (response) {
+						return response.json();
+					}).then(function (ABI) {
+						var signer = new ethers.providers.Web3Provider(provider).getSigner();
+						var contract = new ethers.Contract(contractAddress, ABI, signer);
+						callback && callback(null, contract);
+						resolve(contract);
+					}).catch(function (err) {
+						callback && callback(err);
+						reject(err);
+					});
+				}
 			});
 		}
 	};
+
+	/**
+	 * Disconnect external platforms
+	 */
+	Users.disconnect = {};
+	Users.disconnect.facebook = Users.Facebook.disconnect;
+	Users.disconnect.web3 = Users.Web3.disconnect;
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();

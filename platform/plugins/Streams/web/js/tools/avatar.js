@@ -205,7 +205,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			if (state.icon) {
 				var src = isNaN(state.icon)
 					? state.icon
-					: Q.url(avatar.iconUrl(state.icon), null);
+					: Q.url(avatar.iconUrl(state.icon, true), null);
 				fields = Q.extend({}, state.templates.icon.fields, {
 					src: src,
 					size: parseInt(state.icon) || 'icon'
