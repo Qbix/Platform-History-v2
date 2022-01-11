@@ -74,7 +74,7 @@ function Streams_after_Users_User_saveExecute($params)
 					$cookie = Q_Config::get('Q', 'images', $service, 'cookie', null);
 					Users::importIcon($user, $icon, null, $cookie);
 					$user->save();
-					$values['Streams/user/icon'] = $modifiedFields['icon'] = $user->icon;
+					$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'] = $user->icon;
 					break;
 				}
 			} catch (Exception $e) {
