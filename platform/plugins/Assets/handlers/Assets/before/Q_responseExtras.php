@@ -30,24 +30,38 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	$chains = Q_Config::get("Users", "apps", "web3", Users::communityId(), "chains", array());
-	$currencies = Q_Config::get("Assets", "Web3", "currencies", array());
+	$chains = Q_Config::get("Users", "apps", "web3", array());
+	$currencies = Q_Config::get("Assets", "web3", "currencies", array());
+	$chainsClient = array();
 	foreach ($chains as $i => $chain) {
 		// if contract or rpcUrls undefined, skip this chain
-		if (!Q::ifset($chain, "contract", null) || !Q::ifset($chain, "rpcUrls", null)) {
+		$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+		$rpcUrl = Q::ifset($chain, "rpcUrl", null);
+		$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+		$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
+		$chainId = Q::ifset($chain, "appId", null);
+
+		if (!$contract || !$rpcUrl) {
 			unset($chain[$i]);
 			continue;
 		}
 
+		$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
+		$temp = compact("chainId", "contract", "rpcUrl", "blockExplorerUrl");
+
 		foreach ($currencies as $currency) {
-			if ($currency[$i] == "0x0000000000000000000000000000000000000000") {
-				$chains[$i]["currency"] = $currency;
-				$chains[$i]["currency"]["token"] = $currency[$i];
+			if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+				$temp["currency"] = $currency;
+				$temp["currency"]["token"] = $currency[$chainId];
 				break;
 			}
 		}
+
+		$temp["default"] = $i == Users::communityId();
+
+		$chainsClient[$chainId] = $temp;
 	}
-	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.chains', $chains);
+	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.chains', $chainsClient);
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.currencies', $currencies);
 
 	// set Assets.Web3.NFT.icon.sizes for imagepicker
