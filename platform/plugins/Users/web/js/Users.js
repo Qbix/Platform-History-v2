@@ -419,6 +419,7 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
+								var web3 = new Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -536,7 +537,6 @@
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
-		Users.onLogin.handle(user);
 		Q.handle(onSuccess, this, [user, options]);
 		Users.authenticate.occurring = false;
 	}
@@ -3872,14 +3872,6 @@
 			web3Modal.resetState();
 			web3Modal.connect().then(function (provider) {
 				Users.Web3.provider = provider;
-
-				// Detect if provider locked
-				provider.on('accountsChanged', function () {
-					if (!this.selectedAddress) {
-						Users.Web3.provider = null;
-					}
-				});
-
 				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
 				Q.handle(callback, null, [ex]);
@@ -3887,40 +3879,42 @@
 			});
 		},
 		/**
-		 * Get current wallet address
-		 * @method getWallet
-		 * @param {Function} callback
+		 * Execute method on contract
+		 * @method execute
+		 * @params {string} methodName
+		 * @params {mixed} params
+		 * @params {string|object} contract
+		 * @params {function} callback
 		 */
-		getWallet: function (callback) {
-			Users.Web3.connect(function (err, provider) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
-				}
+		execute: function (methodName, params, contract, callback) {
+			if (Q.typeOf(contract) === "string") {
+				return Users.Web3.getContract(contract, function (err, contract) {
+					if (err) {
+						Q.handle(callback, null, [err]);
+					}
 
-				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
-					return Q.handle(callback, null, [null, accounts[0]]);
+					Users.Web3.execute(methodName, params, contract, callback);
 				});
-			});
-		},
-		/**
-		 * Get current chain id
-		 * @method getChainId
-		 * @param {Function} callback
-		 */
-		getChainId: function (callback) {
-			Users.Web3.connect(function (err, provider) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
-				}
+			}
 
-				(new Web3(provider)).eth.net.getId().then(function (chainId) {
-					return Q.handle(callback, null, [null, chainId]);
-				});
+			if (!contract[methodName]) {
+				return Q.handle(callback, null, ["WrongMethod"]);
+			}
+
+			if (Q.typeOf(params) !== "array") {
+				params = [params];
+			}
+
+			contract[methodName].apply(null, params).then(function (result) {
+				Q.handle(callback, null, [null, result]);
+			}, function (err) {
+				Q.handle(callback, null, [err]);
 			});
 		},
 		/**
 		 * Switch provider to a different Web3 chain
-		 * @method switchChain
+		 * @method setChain
+		 * @static
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
@@ -3935,12 +3929,12 @@
 				
 				provider.request({
 					method: 'wallet_switchEthereumChain',
-					params: [{ chainId: info.chainId }],
+					params: [{ chainId: '0xf00' }],
 				}).then(_continue)
 				.catch(function (switchError) {
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902) {
-						return Q.handle(onError, null, [switchError]);
+						return Q.handle(onError, null, [error]);
 					}
 					provider.request({
 						method: 'wallet_addEthereumChain',
@@ -3962,7 +3956,7 @@
 				});
 
 				function _continue() {
-					onSuccess && provider.once("chainChanged", onSuccess);
+					provider.once("chainChanged", onSuccess);
 				}
 			});
 		},
