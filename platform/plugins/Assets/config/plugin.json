@@ -124,7 +124,7 @@
 		}
 	},
 	"Assets": {
-		"Web3": {
+		"web3": {
 			"currencies": [
 				{
 					"symbol": "BNB",

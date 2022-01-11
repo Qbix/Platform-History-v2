@@ -1087,6 +1087,33 @@
 					});
 				},
 				/**
+				 * Execute method on contract
+				 * @method execute
+				 * @params {string} methodName
+				 * @params {mixed} params
+				 * @params {string|object} contract If string - means chainId, in this case get contract and call this
+				 * 	method again with contract.
+				 * 	If object - means contract
+				 * @params {function} callback
+				 */
+				execute: function (methodName, params, contract, callback) {
+					if (Q.typeOf(contract) === "string") {
+						return Assets.Web3.NFT.getContract(contract, function (err, contract) {
+							if (err) {
+								Q.handle(callback, null, [err]);
+							}
+
+							Assets.Web3.NFT.execute(methodName, params, contract, callback);
+						});
+					}
+
+					contract[methodName].apply(null, params).then(function (result) {
+						Q.handle(callback, null, [null, result]);
+					}, function (err) {
+						Q.handle(callback, null, [err.reason]);
+					});
+				},
+				/**
 				 * Create contract for user
 				 * @method getContract
 				 * @params {Object} chain
@@ -1480,7 +1507,8 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
-		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
+		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
+		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js"
 	});
 	
 	Q.onInit.add(function () {
