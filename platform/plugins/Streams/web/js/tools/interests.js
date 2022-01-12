@@ -16,7 +16,7 @@ var Interests = Streams.Interests;
  * @param {Object} [options] This is an object of parameters for this function
  *  @param {String} [options.communityId=Q.Users.communityId] The id of the user representing the community publishing the interests
  *  @param {String} [options.userId=Users.loggedInUserId()] The id of the user whose interests are to be displayed, defaults to the logged-in user
- *  @param {Boolean} [options.skipSelect=false] If true skip mark interests as selected
+ *  @param {Boolean} [options.dontAllowSelecting=false] If true don't allow user to select interests in the interface
  *  @param {Array} [options.ordering=[]] To override what interest categories to show and in what order
  *  @param {String|null} [options.filter] You can override the placeholder text to show in the filter, or set this to null to hide the filter
  *  @param {String} [options.trySynonyms] You can override the "try synonyms" text using this option
@@ -122,15 +122,13 @@ Q.Tool.define("Streams/interests", function (options) {
 				);
 			});
 			var waitFor = Q.copy(state.ordering);
-			if (!state.skipSelect) {
-				waitFor.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
-			}
+			waitFor = waitFor.concat(anotherUser ? ['my', 'anotherUser'] : ['my']);
 			pipe.add(waitFor, 1, function (params, subjects) {
 				tool.$('.Streams_interest_title').removeClass('Q_selected');
 				var $jq;
 				var otherInterests = {};
 				var normalized, expandable;
-				var myInterests = state.skipSelect ? [] : Q.getObject(["my", 0], params) || [];
+				var myInterests = state.dontAllowSelecting ? [] : Q.getObject(["my", 0], params) || [];
 				var interests = anotherUser ? Q.getObject(["anotherUser", 0], params) : myInterests;
 				if (Q.isEmpty(interests)) {
 					$(".Streams_interests_filter", tool.element).hide();
@@ -282,6 +280,9 @@ Q.Tool.define("Streams/interests", function (options) {
 			.on(Q.Pointer.fastclick, 'span.Streams_interest_title', function () {
 				// TODO: ignore spurious clicks that might happen
 				// when something is expanding
+				if (state.dontAllowSelecting) {
+					return;
+				}
 				var $this = $(this);
 				var tool = null;
 				var $jq = $this.closest('.Q_expandable_tool');
@@ -295,7 +296,7 @@ Q.Tool.define("Streams/interests", function (options) {
 				var category = title.split(':')[0].trim();
 				var title2 = title.split(':')[1].trim();
 				if (false === Q.handle(state.onClick, tool, 
-						[this, normalized, category, title2, wasSelected]
+					[this, normalized, category, title2, wasSelected]
 				) || !Users.loggedInUserId()) {
 					return;
 				};
@@ -492,7 +493,7 @@ Q.Tool.define("Streams/interests", function (options) {
 {
 	communityId: null,
 	expandable: {},
-	skipSelect: false,
+	dontAllowSelecting: false,
 	cacheBust: 1000*60*60*24,
 	ordering: null,
 	all: false,

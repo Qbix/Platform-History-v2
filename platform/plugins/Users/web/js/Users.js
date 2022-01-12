@@ -3862,7 +3862,7 @@
 			if (window.ethereum && ethereum.request) {
 				return ethereum.request({ method: 'eth_requestAccounts' })
 				.then(function (accounts) {
-					Users.Web3.provider = ethereum
+					Users.Web3.provider = ethereum;
 					return Q.handle(callback, null, [null, Users.Web3.provider]);
 				});
 			}
