@@ -63,9 +63,6 @@ foreach($connections as $c) {
 		continue;
 	}
 	$isPlugin = in_array($c, $plugins);
-	if (!empty($plugins) && !$isPlugin) {
-		continue;
-	}
 	createModels($c, $isPlugin);
 }
 echo "\nSuccess\n";

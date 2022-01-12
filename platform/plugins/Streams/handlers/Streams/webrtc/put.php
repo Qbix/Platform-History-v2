@@ -63,7 +63,12 @@ function Streams_webrtc_put($params = array()) {
         $result = file_put_contents($path.DS.$filename, $toSave, FILE_APPEND);
 
 
-        //removeOldLogs($logsPath);
+        try {
+            removeOldLogs($logsPath);
+        } catch (Exception $e) {
+
+        }
+
         umask($mask);
 
 		Q_Response::setSlot("updateLog", $toSave);
