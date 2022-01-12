@@ -249,7 +249,21 @@
                             useExisting: false,
                             defaultDesktopViewMode: 'audio',
                             defaultMobileViewMode: 'audio',
-                            tool: tool
+                            tool: tool,
+                            onStart: function () {
+
+                                var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
+                                console.log('conferenceSignaling', conferenceSignaling)
+
+                                if(conferenceSignaling) {
+                                    conferenceSignaling.event.on('participantConnected', function (e) {
+                                        if(conferenceSignaling.roomParticipants().length > 1) {
+                                            $clipToolElement.attr("data-visualization", "hosts");
+
+                                        }
+                                    })
+                                }
+                            },
                         });
                     }, {
                         title: tool.text.calls.CallReasonTitle,
