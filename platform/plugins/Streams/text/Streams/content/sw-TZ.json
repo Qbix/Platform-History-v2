@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Ni nani aliyenialika",
         "AreYouAgree": "Je! Unakubali?",
         "Yes": "Ndio",
-        "No": "Hapana"
+        "No": "Hapana",
+        "DoYouAgree": "Unakubali?"
     },
     "interests": {
-        "Filter": "Unafurahia nini?",
+        "Filter": "Una maslahi gani?",
         "CanAdd": "Ikiwa bado hauwezi kupata unachotafuta, unaweza kuongeza nia mpya chini:",
         "TrySynonyms": "Usiione? Jaribu maonyesho fulani.",
         "AddUnderCategory": "Ongeza chini ya kikundi ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Uliacha kutangaza simu hii kwa RTMP maalum",
             "sbStartedLiveStreaming": "{{userName}} ilianza moja kwa moja",
             "sbStoppedLiveStreaming": "{{userName}} iliisha moja kwa moja",
-            "liveStopped": "Hitilafu wakati wa kutuma video hadi mwisho ilitokea"
+            "liveStopped": "Hitilafu wakati wa kutuma video hadi mwisho ilitokea",
+            "forceDisconnectingImmediately": "Ulitenganishwa na mwenyeji"
         },
         "settingsPopup": {
             "webCamera": "Kamera ya Wavuti",
@@ -224,7 +226,9 @@
             "stop": "Acha",
             "streamingSettings": "Mipangilio",
             "streamToRTMP": "Tiririka kwa RTMP ya kawaida",
-            "dialogTitle": "Mipangilio ya Video"
+            "dialogTitle": "Mipangilio ya Video",
+            "startBroadcasting": "Anza kutangaza",
+            "broadcastingInProgress": "Utangazaji unaendelea"
         },
         "participantsPopup": {
             "disconnect": "Kukata",

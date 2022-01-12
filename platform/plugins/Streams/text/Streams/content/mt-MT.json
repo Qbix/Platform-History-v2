@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Min stiedenni",
         "AreYouAgree": "Taqbel?",
         "Yes": "Iva",
-        "No": "Le"
+        "No": "Le",
+        "DoYouAgree": "Taqbel?"
     },
     "interests": {
-        "Filter": "Xi tħobb?",
+        "Filter": "X&#39;inhuma l-interessi tiegħek?",
         "CanAdd": "Jekk xorta ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
         "TrySynonyms": "Ma narahiex? Ipprova xi sinonimi.",
         "AddUnderCategory": "Żid taħt il-kategorija ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Waqaft ixxandar din is-sejħa lil RTMP apposta",
             "sbStartedLiveStreaming": "{{userName}} beda live",
             "sbStoppedLiveStreaming": "{{userName}} intemm live",
-            "liveStopped": "Sar żball waqt li bagħtet vidjo lill-endpoint"
+            "liveStopped": "Sar żball waqt li bagħtet vidjo lill-endpoint",
+            "forceDisconnectingImmediately": "Int ġejt skonnettjat minn host"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -224,7 +226,9 @@
             "stop": "Waqfa",
             "streamingSettings": "Settings",
             "streamToRTMP": "Stream għal RTMP apposta",
-            "dialogTitle": "Settings tal-Vidjo"
+            "dialogTitle": "Settings tal-Vidjo",
+            "startBroadcasting": "Ibda x-xandir",
+            "broadcastingInProgress": "Ix-xandir għadu għaddej"
         },
         "participantsPopup": {
             "disconnect": "Skonnettja",

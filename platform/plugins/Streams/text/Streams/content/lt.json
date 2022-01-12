@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Kas mane pakvietė",
         "AreYouAgree": "Ar sutinkate?",
         "Yes": "Taip",
-        "No": "Ne"
+        "No": "Ne",
+        "DoYouAgree": "Ar sutinki?"
     },
     "interests": {
-        "Filter": "Ką jums patinka?",
+        "Filter": "Kokie tavo pomėgiai?",
         "CanAdd": "Jei vis dar negalite rasti to, ko ieškote, galite pridėti naują susidomėjimą toliau:",
         "TrySynonyms": "Nežiūrėkite? Išbandykite keletą sinonimų.",
         "AddUnderCategory": "Pridėti prie kategorijos ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Jūs nustojote transliuoti šį skambutį į pasirinktinį RTMP",
             "sbStartedLiveStreaming": "{{userName}} pradėjo tiesiogiai",
             "sbStoppedLiveStreaming": "{{userName}} baigėsi tiesiogiai",
-            "liveStopped": "Siunčiant vaizdo įrašą į galinį tašką įvyko klaida"
+            "liveStopped": "Siunčiant vaizdo įrašą į galinį tašką įvyko klaida",
+            "forceDisconnectingImmediately": "Jus atjungė šeimininkas"
         },
         "settingsPopup": {
             "webCamera": "Internetinė kamera",
@@ -224,7 +226,9 @@
             "stop": "Sustabdyti",
             "streamingSettings": "Nustatymai",
             "streamToRTMP": "Srautas į pasirinktinį RTMP",
-            "dialogTitle": "Vaizdo įrašo nustatymai"
+            "dialogTitle": "Vaizdo įrašo nustatymai",
+            "startBroadcasting": "Pradėkite transliuoti",
+            "broadcastingInProgress": "Transliacija vyksta"
         },
         "participantsPopup": {
             "disconnect": "Atjunkite",

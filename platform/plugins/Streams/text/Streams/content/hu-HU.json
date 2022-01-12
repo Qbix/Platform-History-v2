@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Ki meghívott engem",
         "AreYouAgree": "Elfogadod?",
         "Yes": "Igen",
-        "No": "Nem"
+        "No": "Nem",
+        "DoYouAgree": "Egyetértesz?"
     },
     "interests": {
-        "Filter": "Mit élvezel?",
+        "Filter": "Mik érdekelnek?",
         "CanAdd": "Ha még mindig nem találja, amit keres, az alábbi új érdeklődést teheti fel:",
         "TrySynonyms": "Nem látod? Próbáljon ki néhány szinonimát.",
         "AddUnderCategory": "Hozzáadás kategóriában ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Ön leállította a hívás egyéni RTMP -re történő továbbítását",
             "sbStartedLiveStreaming": "{{userName}} élőben indult",
             "sbStoppedLiveStreaming": "{{userName}} élőben ért véget",
-            "liveStopped": "Hiba történt a videó végpontra küldése közben"
+            "liveStopped": "Hiba történt a videó végpontra küldése közben",
+            "forceDisconnectingImmediately": "Egy házigazda megszakította a kapcsolatot"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -224,7 +226,9 @@
             "stop": "Álljon meg",
             "streamingSettings": "Beállítások",
             "streamToRTMP": "Adatfolyam egyéni RTMP -re",
-            "dialogTitle": "Videó beállítások"
+            "dialogTitle": "Videó beállítások",
+            "startBroadcasting": "Indítsa el a közvetítést",
+            "broadcastingInProgress": "A közvetítés folyamatban van"
         },
         "participantsPopup": {
             "disconnect": "szétkapcsol",

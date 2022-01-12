@@ -7,10 +7,11 @@
         "Streams/invitedMe": "چه کسی مرا دعوت کرد",
         "AreYouAgree": "آیا موافقی؟",
         "Yes": "آره",
-        "No": "خیر"
+        "No": "خیر",
+        "DoYouAgree": "موافقید؟"
     },
     "interests": {
-        "Filter": "چه چیزی لذت می برید؟",
+        "Filter": "علایق شما چیست؟",
         "CanAdd": "اگر هنوز نمیتوانید آنچه را که دنبال میکنید پیدا کنید، میتوانید یک علاقه جدید را در زیر اضافه کنید:",
         "TrySynonyms": "آیا آن را نمی بینید؟ برخی از مترادفها را امتحان کنید",
         "AddUnderCategory": "زیر رده ... اضافه کنید",
@@ -192,7 +193,8 @@
             "youStoppedLive": "پخش این تماس را به RTMP سفارشی متوقف کردید",
             "sbStartedLiveStreaming": "{{userName}} به صورت زنده شروع شد",
             "sbStoppedLiveStreaming": "{{userName}} به صورت زنده به پایان رسید",
-            "liveStopped": "هنگام ارسال ویدئو به نقطه پایانی خطایی روی داد"
+            "liveStopped": "هنگام ارسال ویدئو به نقطه پایانی خطایی روی داد",
+            "forceDisconnectingImmediately": "شما توسط یک میزبان قطع شده بودید"
         },
         "settingsPopup": {
             "webCamera": "دوربین وب",
@@ -224,7 +226,9 @@
             "stop": "متوقف کردن",
             "streamingSettings": "تنظیمات",
             "streamToRTMP": "جریان به RTMP سفارشی",
-            "dialogTitle": "تنظیمات ویدیو"
+            "dialogTitle": "تنظیمات ویدیو",
+            "startBroadcasting": "شروع به پخش کنید",
+            "broadcastingInProgress": "پخش در حال انجام است"
         },
         "participantsPopup": {
             "disconnect": "قطع شدن",

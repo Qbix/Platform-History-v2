@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Kas mani uzaicināja",
         "AreYouAgree": "Vai jūs piekrītat?",
         "Yes": "Jā",
-        "No": "Nē"
+        "No": "Nē",
+        "DoYouAgree": "Vai tu piekrīti?"
     },
     "interests": {
-        "Filter": "Kas jums patīk?",
+        "Filter": "Kādas ir tavas intereses?",
         "CanAdd": "Ja jūs joprojām nevarat atrast meklēto, varat pievienot jaunu interesi:",
         "TrySynonyms": "Neredziet to? Izmēģiniet sinonīmus.",
         "AddUnderCategory": "Pievienot kategorijā ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Jūs pārtraucāt pārraidīt šo zvanu uz pielāgotu RTMP",
             "sbStartedLiveStreaming": "{{userName}} sāka tiešraidē",
             "sbStoppedLiveStreaming": "{{userName}} beidzās tiešraidē",
-            "liveStopped": "Sūtot video uz galapunktu, radās kļūda"
+            "liveStopped": "Sūtot video uz galapunktu, radās kļūda",
+            "forceDisconnectingImmediately": "Jūs atvienoja saimnieks"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -224,7 +226,9 @@
             "stop": "Apstāties",
             "streamingSettings": "Iestatījumi",
             "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
-            "dialogTitle": "Video iestatījumi"
+            "dialogTitle": "Video iestatījumi",
+            "startBroadcasting": "Sāciet apraidi",
+            "broadcastingInProgress": "Notiek apraide"
         },
         "participantsPopup": {
             "disconnect": "Atvienojiet",

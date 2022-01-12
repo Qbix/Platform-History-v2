@@ -7,10 +7,11 @@
         "Streams/invitedMe": "ఎవరు నన్ను ఆహ్వానించారు",
         "AreYouAgree": "మీరు అంగీకరిస్తారా?",
         "Yes": "అవును",
-        "No": "లేదు"
+        "No": "లేదు",
+        "DoYouAgree": "మీరు అంగీకరిస్తారా?"
     },
     "interests": {
-        "Filter": "మీరు ఏమి ఆనందిస్తున్నారు?",
+        "Filter": "మీ అభిరుచులు ఏమిటి?",
         "CanAdd": "మీరు ఇంకా వెతుకుతున్న దాన్ని కనుగొనలేకపోతే, దిగువ కొత్త ఆసక్తిని జోడించవచ్చు:",
         "TrySynonyms": "దీన్ని చూడలేదా? కొన్ని పర్యాయపదాలు ప్రయత్నించండి.",
         "AddUnderCategory": "వర్గానికి చేర్చండి ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "మీరు కస్టమ్ RTMP కి ఈ కాల్ ప్రసారాన్ని ఆపివేశారు",
             "sbStartedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ప్రారంభించారు",
             "sbStoppedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ముగిసింది",
-            "liveStopped": "ఎండ్ పాయింట్‌కి వీడియోను పంపేటప్పుడు లోపం సంభవించింది"
+            "liveStopped": "ఎండ్ పాయింట్‌కి వీడియోను పంపేటప్పుడు లోపం సంభవించింది",
+            "forceDisconnectingImmediately": "మీరు హోస్ట్ ద్వారా డిస్‌కనెక్ట్ చేయబడ్డారు"
         },
         "settingsPopup": {
             "webCamera": "వెబ్ కెమెరా",
@@ -224,7 +226,9 @@
             "stop": "ఆపు",
             "streamingSettings": "సెట్టింగులు",
             "streamToRTMP": "అనుకూల RTMP కి ప్రసారం చేయండి",
-            "dialogTitle": "వీడియో సెట్టింగ్‌లు"
+            "dialogTitle": "వీడియో సెట్టింగ్‌లు",
+            "startBroadcasting": "ప్రసారాన్ని ప్రారంభించండి",
+            "broadcastingInProgress": "ప్రసారం జరుగుతోంది"
         },
         "participantsPopup": {
             "disconnect": "డిస్కనెక్ట్",

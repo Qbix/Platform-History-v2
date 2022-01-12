@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Hver bauð mér",
         "AreYouAgree": "Ertu sammála?",
         "Yes": "Já",
-        "No": "Nei"
+        "No": "Nei",
+        "DoYouAgree": "Ertu sammála?"
     },
     "interests": {
-        "Filter": "Hvað finnst þér gaman?",
+        "Filter": "Hver eru áhugamál þín?",
         "CanAdd": "Ef þú finnur ennþá ekki það sem þú ert að leita að getur þú bætt við nýjum áhuga hér að neðan:",
         "TrySynonyms": "Sérðu það ekki? Prófaðu samheiti.",
         "AddUnderCategory": "Bæta við undir flokki ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Þú hættir að senda þetta símtal út á sérsniðna RTMP",
             "sbStartedLiveStreaming": "{{userName}} byrjaði í beinni",
             "sbStoppedLiveStreaming": "{{userName}} lauk í beinni útsendingu",
-            "liveStopped": "Villa kom upp við að senda myndskeið á endapunkt"
+            "liveStopped": "Villa kom upp við að senda myndskeið á endapunkt",
+            "forceDisconnectingImmediately": "Þú varst aftengdur af gestgjafa"
         },
         "settingsPopup": {
             "webCamera": "Vefmyndavél",
@@ -224,7 +226,9 @@
             "stop": "Hættu",
             "streamingSettings": "Stillingar",
             "streamToRTMP": "Streymdu í sérsniðna RTMP",
-            "dialogTitle": "Myndskeiðsstillingar"
+            "dialogTitle": "Myndskeiðsstillingar",
+            "startBroadcasting": "Byrjaðu að senda út",
+            "broadcastingInProgress": "Útsending er í gangi"
         },
         "participantsPopup": {
             "disconnect": "Aftengdu",

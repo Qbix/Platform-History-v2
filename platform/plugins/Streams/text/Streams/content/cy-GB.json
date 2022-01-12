@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Pwy a&#39;m gwahoddodd",
         "AreYouAgree": "Ydych chi&#39;n cytuno?",
         "Yes": "Ydw",
-        "No": "Na"
+        "No": "Na",
+        "DoYouAgree": "Wyt ti&#39;n cytuno?"
     },
     "interests": {
-        "Filter": "Beth ydych chi&#39;n ei fwynhau?",
+        "Filter": "Beth yw eich diddordebau?",
         "CanAdd": "Os na allwch ddod o hyd i&#39;r hyn rydych chi&#39;n chwilio amdano, gallwch ychwanegu llog newydd isod:",
         "TrySynonyms": "Peidiwch â&#39;i weld? Rhowch gynnig ar rai cyfystyron.",
         "AddUnderCategory": "Ychwanegu dan y categori ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Fe wnaethoch chi roi&#39;r gorau i ddarlledu&#39;r alwad hon i RTMP arferiad",
             "sbStartedLiveStreaming": "Dechreuodd {{userName}} yn fyw",
             "sbStoppedLiveStreaming": "Daeth {{userName}} i ben yn fyw",
-            "liveStopped": "Digwyddodd gwall wrth anfon fideo i endpoint"
+            "liveStopped": "Digwyddodd gwall wrth anfon fideo i endpoint",
+            "forceDisconnectingImmediately": "Cawsoch eich datgysylltu gan westeiwr"
         },
         "settingsPopup": {
             "webCamera": "Camera Gwe",
@@ -224,7 +226,9 @@
             "stop": "Stopiwch",
             "streamingSettings": "Gosodiadau",
             "streamToRTMP": "Ffrwd i RTMP arferiad",
-            "dialogTitle": "Gosodiadau Fideo"
+            "dialogTitle": "Gosodiadau Fideo",
+            "startBroadcasting": "Dechrau darlledu",
+            "broadcastingInProgress": "Mae darlledu ar y gweill"
         },
         "participantsPopup": {
             "disconnect": "Datgysylltwch",

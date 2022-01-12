@@ -7,10 +7,11 @@
         "Streams/invitedMe": "ვინ მიმიწვია",
         "AreYouAgree": "თანახმა ხარ?",
         "Yes": "დიახ",
-        "No": "არა"
+        "No": "არა",
+        "DoYouAgree": "Მეთანხმები?"
     },
     "interests": {
-        "Filter": "რა სარგებლობ?",
+        "Filter": "Რა ინტერესები გაქვთ?",
         "CanAdd": "თუ მაინც ვერ პოულობთ რას ეძებთ, შეგიძლიათ დაამატოთ ახალი ინტერესი:",
         "TrySynonyms": "ვერ ვხედავ მას? სცადეთ გარკვეული სინონიმები.",
         "AddUnderCategory": "დამატება კატეგორიაში ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "თქვენ შეწყვიტეთ ამ ზარის მაუწყებლობა მორგებულ RTMP– ზე",
             "sbStartedLiveStreaming": "{{userName}} დაიწყო პირდაპირ ეთერში",
             "sbStoppedLiveStreaming": "{{userName}} დასრულდა პირდაპირ ეთერში",
-            "liveStopped": "მოხდა შეცდომა ვიდეოს ბოლო წერტილში გაგზავნისას"
+            "liveStopped": "მოხდა შეცდომა ვიდეოს ბოლო წერტილში გაგზავნისას",
+            "forceDisconnectingImmediately": "თქვენ გათიშეთ მასპინძელმა"
         },
         "settingsPopup": {
             "webCamera": "Ვებ კამერა",
@@ -224,7 +226,9 @@
             "stop": "გაჩერდი",
             "streamingSettings": "პარამეტრები",
             "streamToRTMP": "ნაკადი მორგებულ RTMP– ზე",
-            "dialogTitle": "ვიდეოს პარამეტრები"
+            "dialogTitle": "ვიდეოს პარამეტრები",
+            "startBroadcasting": "დაიწყეთ მაუწყებლობა",
+            "broadcastingInProgress": "მაუწყებლობა მიმდინარეობს"
         },
         "participantsPopup": {
             "disconnect": "გათიშვა",

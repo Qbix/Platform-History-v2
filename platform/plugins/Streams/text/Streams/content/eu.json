@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Nork gonbidatu ninduen",
         "AreYouAgree": "Ados zaude?",
         "Yes": "Bai",
-        "No": "Ez"
+        "No": "Ez",
+        "DoYouAgree": "Ados zaude?"
     },
     "interests": {
-        "Filter": "Zer gustatzen zaizu?",
+        "Filter": "Zeintzuk dira zure interesak?",
         "CanAdd": "Oraindik oraindik bilatzen ez baduzu aurkitu dezakezu interes gehiago nahi izanez gero:",
         "TrySynonyms": "Ez al duzu ikusten? Saiatu sinonimo batzuk.",
         "AddUnderCategory": "Gehitu kategorian ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Dei hau RTMP pertsonalizatura igortzeari utzi diozu",
             "sbStartedLiveStreaming": "{{userName}} zuzenean hasi zen",
             "sbStoppedLiveStreaming": "{{userName}} zuzenean amaitu zen",
-            "liveStopped": "Errorea gertatu da bideoa amaiera puntura bidaltzean"
+            "liveStopped": "Errorea gertatu da bideoa amaiera puntura bidaltzean",
+            "forceDisconnectingImmediately": "Ostalari batek deskonektatu zaitu"
         },
         "settingsPopup": {
             "webCamera": "Web Kamera",
@@ -224,7 +226,9 @@
             "stop": "Gelditu",
             "streamingSettings": "Ezarpenak",
             "streamToRTMP": "Stream RTMP pertsonalizatura",
-            "dialogTitle": "Bideo ezarpenak"
+            "dialogTitle": "Bideo ezarpenak",
+            "startBroadcasting": "Hasi emititzen",
+            "broadcastingInProgress": "Emisioa abian da"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",

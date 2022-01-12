@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Wie heeft mij uitgenodigd",
         "AreYouAgree": "Ben je het ermee eens?",
         "Yes": "Ja",
-        "No": "Nee"
+        "No": "Nee",
+        "DoYouAgree": "Bent u het eens?"
     },
     "interests": {
-        "Filter": "Wat vind je leuk?",
+        "Filter": "Wat zijn uw interesses?",
         "CanAdd": "Als je nog steeds niet kunt vinden wat je zoekt, kun je hieronder een nieuwe interesse toevoegen:",
         "TrySynonyms": "Zie je het niet? Probeer enkele synoniemen.",
         "AddUnderCategory": "Voeg toe onder categorie ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Je bent gestopt met het uitzenden van deze oproep naar aangepaste RTMP",
             "sbStartedLiveStreaming": "{{userName}} live gestart",
             "sbStoppedLiveStreaming": "{{userName}} live geëindigd",
-            "liveStopped": "Er is een fout opgetreden bij het verzenden van video naar het eindpunt"
+            "liveStopped": "Er is een fout opgetreden bij het verzenden van video naar het eindpunt",
+            "forceDisconnectingImmediately": "Verbinding verbroken door een host"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -224,7 +226,9 @@
             "stop": "Stop",
             "streamingSettings": "Instellingen",
             "streamToRTMP": "Stream naar aangepaste RTMP",
-            "dialogTitle": "Beeldinstellingen"
+            "dialogTitle": "Beeldinstellingen",
+            "startBroadcasting": "Begin met uitzenden",
+            "broadcastingInProgress": "Uitzending is bezig"
         },
         "participantsPopup": {
             "disconnect": "verbinding verbreken",

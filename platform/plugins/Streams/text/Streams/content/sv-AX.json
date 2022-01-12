@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Vem bjöd in mig",
         "AreYouAgree": "Håller du med?",
         "Yes": "Ja",
-        "No": "Nej"
+        "No": "Nej",
+        "DoYouAgree": "Håller du med?"
     },
     "interests": {
-        "Filter": "Vad tycker du om?",
+        "Filter": "Vad är dina intressen?",
         "CanAdd": "Om du fortfarande inte hittar det du söker kan du lägga till ett nytt intresse nedan:",
         "TrySynonyms": "Kan du inte se det? Prova några synonymer.",
         "AddUnderCategory": "Lägg till under kategori ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Du slutade sända detta samtal till anpassad RTMP",
             "sbStartedLiveStreaming": "{{userName}} började live",
             "sbStoppedLiveStreaming": "{{userName}} slutade live",
-            "liveStopped": "Ett fel uppstod när videon skulle skickas till slutpunkten"
+            "liveStopped": "Ett fel uppstod när videon skulle skickas till slutpunkten",
+            "forceDisconnectingImmediately": "Du kopplades bort av en värd"
         },
         "settingsPopup": {
             "webCamera": "Webbkamera",
@@ -224,7 +226,9 @@
             "stop": "Sluta",
             "streamingSettings": "inställningar",
             "streamToRTMP": "Strömma till anpassad RTMP",
-            "dialogTitle": "Videoinställningar"
+            "dialogTitle": "Videoinställningar",
+            "startBroadcasting": "Börja sända",
+            "broadcastingInProgress": "Sändning pågår"
         },
         "participantsPopup": {
             "disconnect": "Koppla ifrån",

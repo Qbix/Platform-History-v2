@@ -7,10 +7,11 @@
         "Streams/invitedMe": "누가 나를 초대 했어?",
         "AreYouAgree": "동의하다?",
         "Yes": "예",
-        "No": "아니요"
+        "No": "아니요",
+        "DoYouAgree": "동의하십니까?"
     },
     "interests": {
-        "Filter": "당신은 무엇을 즐기시나요?",
+        "Filter": "니가 관심 있는게 뭐니?",
         "CanAdd": "여전히 원하는 것을 찾을 수없는 경우 아래에 새로운 관심 분야를 추가 할 수 있습니다.",
         "TrySynonyms": "보지 마? 동의어를 사용해보십시오.",
         "AddUnderCategory": "카테고리 아래에 추가 ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하는 것을 중지했습니다.",
             "sbStartedLiveStreaming": "{{userName}} 라이브 시작",
             "sbStoppedLiveStreaming": "{{userName}} 라이브 종료",
-            "liveStopped": "엔드포인트로 비디오를 보내는 동안 오류가 발생했습니다."
+            "liveStopped": "엔드포인트로 비디오를 보내는 동안 오류가 발생했습니다.",
+            "forceDisconnectingImmediately": "호스트에 의해 연결이 끊어졌습니다."
         },
         "settingsPopup": {
             "webCamera": "웹 카메라",
@@ -224,7 +226,9 @@
             "stop": "중지",
             "streamingSettings": "설정",
             "streamToRTMP": "사용자 지정 RTMP로 스트리밍",
-            "dialogTitle": "비디오 설정"
+            "dialogTitle": "비디오 설정",
+            "startBroadcasting": "방송 시작",
+            "broadcastingInProgress": "방송중입니다"
         },
         "participantsPopup": {
             "disconnect": "분리",

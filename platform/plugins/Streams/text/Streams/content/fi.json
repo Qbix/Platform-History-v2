@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Kuka kutsui minut",
         "AreYouAgree": "Oletko samaa mieltä?",
         "Yes": "Joo",
-        "No": "Ei"
+        "No": "Ei",
+        "DoYouAgree": "Oletko samaa mieltä?"
     },
     "interests": {
-        "Filter": "Mistä nautit?",
+        "Filter": "Mistä olet kiinnostunut?",
         "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä alla olevan uuden kiinnostuksen:",
         "TrySynonyms": "Älä näe sitä? Kokeile synonyymejä.",
         "AddUnderCategory": "Lisää luokkaan ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Lopetit tämän puhelun lähettämisen mukautettuun RTMP: hen",
             "sbStartedLiveStreaming": "{{userName}} aloitti livenä",
             "sbStoppedLiveStreaming": "{{userName}} päättyi livenä",
-            "liveStopped": "Tapahtui virhe lähetettäessä videota päätepisteeseen"
+            "liveStopped": "Tapahtui virhe lähetettäessä videota päätepisteeseen",
+            "forceDisconnectingImmediately": "Isäntä katkaisi yhteyden sinuun"
         },
         "settingsPopup": {
             "webCamera": "Nettikamera",
@@ -224,7 +226,9 @@
             "stop": "Lopettaa",
             "streamingSettings": "asetukset",
             "streamToRTMP": "Suoratoista mukautettuun RTMP: hen",
-            "dialogTitle": "Videoasetukset"
+            "dialogTitle": "Videoasetukset",
+            "startBroadcasting": "Aloita lähetys",
+            "broadcastingInProgress": "Lähetys on käynnissä"
         },
         "participantsPopup": {
             "disconnect": "Katkaista",

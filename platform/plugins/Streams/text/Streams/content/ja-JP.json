@@ -7,10 +7,11 @@
         "Streams/invitedMe": "誰が私を招待しました",
         "AreYouAgree": "賛成ですか？",
         "Yes": "はい",
-        "No": "番号"
+        "No": "番号",
+        "DoYouAgree": "同意しますか？"
     },
     "interests": {
-        "Filter": "何を楽しんでいますか？",
+        "Filter": "あなたの興味は何ですか？",
         "CanAdd": "それでも探しているものが見つからない場合は、以下に新しい関心を追加できます。",
         "TrySynonyms": "見えない？同義語をいくつか試してください。",
         "AddUnderCategory": "カテゴリの下に追加...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "この通話のカスタムRTMPへのブロードキャストを停止しました",
             "sbStartedLiveStreaming": "{{userName}}がライブを開始しました",
             "sbStoppedLiveStreaming": "{{userName}}はライブで終了しました",
-            "liveStopped": "エンドポイントへのビデオ送信中にエラーが発生しました"
+            "liveStopped": "エンドポイントへのビデオ送信中にエラーが発生しました",
+            "forceDisconnectingImmediately": "ホストによって切断されました"
         },
         "settingsPopup": {
             "webCamera": "ウェブカメラ",
@@ -224,7 +226,9 @@
             "stop": "やめる",
             "streamingSettings": "設定",
             "streamToRTMP": "カスタムRTMPにストリーミング",
-            "dialogTitle": "ビデオ設定"
+            "dialogTitle": "ビデオ設定",
+            "startBroadcasting": "放送開始",
+            "broadcastingInProgress": "放送中です"
         },
         "participantsPopup": {
             "disconnect": "切断する",

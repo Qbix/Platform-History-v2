@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Хто мене запросив",
         "AreYouAgree": "Ви згодні?",
         "Yes": "Так",
-        "No": "Немає"
+        "No": "Немає",
+        "DoYouAgree": "Ви згодні?"
     },
     "interests": {
-        "Filter": "Що вам подобається?",
+        "Filter": "Чим ти цікавишся?",
         "CanAdd": "Якщо ви все ще не можете знайти те, що шукаєте, можна додати новий інтерес нижче:",
         "TrySynonyms": "Не бачите? Спробуйте деякі синоніми.",
         "AddUnderCategory": "Додати під категорію ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Ви припинили трансляцію цього дзвінка на користувацький RTMP",
             "sbStartedLiveStreaming": "{{userName}} почав жити",
             "sbStoppedLiveStreaming": "{{userName}} закінчився в прямому ефірі",
-            "liveStopped": "Сталася помилка під час надсилання відео до кінцевої точки"
+            "liveStopped": "Сталася помилка під час надсилання відео до кінцевої точки",
+            "forceDisconnectingImmediately": "Вас відключив хост"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -224,7 +226,9 @@
             "stop": "Стій",
             "streamingSettings": "Налаштування",
             "streamToRTMP": "Потік на користувацький RTMP",
-            "dialogTitle": "Налаштування відео"
+            "dialogTitle": "Налаштування відео",
+            "startBroadcasting": "Почніть трансляцію",
+            "broadcastingInProgress": "Трансляція триває"
         },
         "participantsPopup": {
             "disconnect": "Відключити",

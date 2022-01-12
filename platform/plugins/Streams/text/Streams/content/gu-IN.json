@@ -7,10 +7,11 @@
         "Streams/invitedMe": "મને કોણ આમંત્રણ આપ્યું",
         "AreYouAgree": "શું તમે સહમત છો?",
         "Yes": "હા",
-        "No": "ના"
+        "No": "ના",
+        "DoYouAgree": "તમે સહમત છો?"
     },
     "interests": {
-        "Filter": "તમે શું માણો છો?",
+        "Filter": "તમારી રુચિ શું છે?",
         "CanAdd": "જો તમે જે શોધી રહ્યાં છો તે હજી પણ તમને મળી શકતું નથી, તો તમે નીચે નવી રુચિ ઉમેરી શકો છો:",
         "TrySynonyms": "શું તે જોવા નથી? કેટલાક સમાનાર્થી પ્રયાસ કરો.",
         "AddUnderCategory": "શ્રેણી હેઠળ ઉમેરો ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "તમે આ ક callલને કસ્ટમ RTMP પર પ્રસારિત કરવાનું બંધ કર્યું",
             "sbStartedLiveStreaming": "{{userName}} એ લાઇવ શરૂ કર્યું",
             "sbStoppedLiveStreaming": "{{userName}} લાઇવ સમાપ્ત થયું",
-            "liveStopped": "એન્ડપોઇન્ટ પર વિડિઓ મોકલતી વખતે ભૂલ આવી"
+            "liveStopped": "એન્ડપોઇન્ટ પર વિડિઓ મોકલતી વખતે ભૂલ આવી",
+            "forceDisconnectingImmediately": "તમે હોસ્ટ દ્વારા ડિસ્કનેક્ટ થયા હતા"
         },
         "settingsPopup": {
             "webCamera": "વેબ ક Cameraમેરો",
@@ -224,7 +226,9 @@
             "stop": "બંધ",
             "streamingSettings": "સેટિંગ્સ",
             "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો",
-            "dialogTitle": "વિડિઓ સેટિંગ્સ"
+            "dialogTitle": "વિડિઓ સેટિંગ્સ",
+            "startBroadcasting": "પ્રસારણ શરૂ કરો",
+            "broadcastingInProgress": "પ્રસારણ ચાલુ છે"
         },
         "participantsPopup": {
             "disconnect": "ડિસ્કનેક્ટ કરો",

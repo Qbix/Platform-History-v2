@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Siapa yang mengundang saya",
         "AreYouAgree": "Apakah Anda setuju?",
         "Yes": "Ya",
-        "No": "Tidak"
+        "No": "Tidak",
+        "DoYouAgree": "Apa kamu setuju?"
     },
     "interests": {
-        "Filter": "Apa yang anda nikmati",
+        "Filter": "Apa saja minat kamu?",
         "CanAdd": "Jika Anda masih tidak dapat menemukan yang Anda cari, Anda dapat menambahkan minat baru di bawah:",
         "TrySynonyms": "Tidak melihatnya? Coba beberapa sinonim.",
         "AddUnderCategory": "Tambahkan dalam kategori ...",
@@ -189,7 +190,8 @@
             "youStoppedLive": "Anda berhenti menyiarkan panggilan ini ke RTMP khusus",
             "sbStartedLiveStreaming": "{{userName}} mulai siaran langsung",
             "sbStoppedLiveStreaming": "{{userName}} berakhir secara langsung",
-            "liveStopped": "Terjadi kesalahan saat mengirim video ke titik akhir"
+            "liveStopped": "Terjadi kesalahan saat mengirim video ke titik akhir",
+            "forceDisconnectingImmediately": "Anda terputus oleh tuan rumah"
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
@@ -221,7 +223,9 @@
             "start": "Awal",
             "stop": "Berhenti",
             "streamingSettings": "Pengaturan",
-            "streamToRTMP": "Streaming ke RTMP khusus"
+            "streamToRTMP": "Streaming ke RTMP khusus",
+            "startBroadcasting": "Mulai siaran",
+            "broadcastingInProgress": "Penyiaran sedang berlangsung"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",

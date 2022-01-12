@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Kush më ftoi",
         "AreYouAgree": "A jeni dakord?",
         "Yes": "po",
-        "No": "Jo"
+        "No": "Jo",
+        "DoYouAgree": "A jeni dakord?"
     },
     "interests": {
-        "Filter": "Çfarë gëzon?",
+        "Filter": "Cilat janë interesat tuaja?",
         "CanAdd": "Nëse ende nuk mund të gjesh atë që kërkon, mund të shtosh një interes të ri më poshtë:",
         "TrySynonyms": "Mos e shihni? Provoni disa sinonime.",
         "AddUnderCategory": "Shto nën kategorinë ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Ndalove transmetimin e kësaj thirrjeje në RTMP të personalizuar",
             "sbStartedLiveStreaming": "{{userName}} filloi drejtpërdrejt",
             "sbStoppedLiveStreaming": "{{userName}} përfundoi drejtpërdrejt",
-            "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare"
+            "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare",
+            "forceDisconnectingImmediately": "Je shkëputur nga një host"
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
@@ -224,7 +226,9 @@
             "stop": "Ndalo",
             "streamingSettings": "Cilësimet",
             "streamToRTMP": "Transmetoni në RTMP të personalizuar",
-            "dialogTitle": "Cilësimet e videos"
+            "dialogTitle": "Cilësimet e videos",
+            "startBroadcasting": "Filloni transmetimin",
+            "broadcastingInProgress": "Transmetimi është në vazhdim"
         },
         "participantsPopup": {
             "disconnect": "shqit",

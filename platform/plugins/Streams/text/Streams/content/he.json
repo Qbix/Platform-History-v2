@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "מי הזמין אותי",
         "AreYouAgree": "אתה מסכים?",
         "Yes": "כן",
-        "No": "לא"
+        "No": "לא",
+        "DoYouAgree": "אתה מסכים?"
     },
     "interests": {
-        "Filter": "ממה אתה נהנה?",
+        "Filter": "מה תחומי העניין שלך?",
         "CanAdd": "אם עדיין אינך מוצא את מה שאתה מחפש, תוכל להוסיף עניין חדש בהמשך:",
         "TrySynonyms": "לא רואה את זה? נסה כמה מילים נרדפות.",
         "AddUnderCategory": "הוסף בקטגוריה ...",
@@ -189,7 +190,8 @@
             "youStoppedLive": "הפסקת לשדר את השיחה הזו ל-RTMP מותאם אישית",
             "sbStartedLiveStreaming": "{{userName}} התחיל בשידור חי",
             "sbStoppedLiveStreaming": "{{userName}} הסתיים בשידור חי",
-            "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה"
+            "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה",
+            "forceDisconnectingImmediately": "ניתקת על ידי מארח"
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -221,7 +223,9 @@
             "start": "הַתחָלָה",
             "stop": "תפסיק",
             "streamingSettings": "הגדרות",
-            "streamToRTMP": "הזרם ל-RTMP מותאם אישית"
+            "streamToRTMP": "הזרם ל-RTMP מותאם אישית",
+            "startBroadcasting": "התחל לשדר",
+            "broadcastingInProgress": "השידור בעיצומו"
         },
         "participantsPopup": {
             "disconnect": "נתק",

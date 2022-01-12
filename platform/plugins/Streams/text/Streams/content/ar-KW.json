@@ -7,10 +7,11 @@
         "Streams/invitedMe": "من دعاني",
         "AreYouAgree": "هل أنت موافق؟",
         "Yes": "نعم",
-        "No": "لا"
+        "No": "لا",
+        "DoYouAgree": "هل توافق؟"
     },
     "interests": {
-        "Filter": "ماذا تستمتع",
+        "Filter": "ماهي إهتماماتك؟",
         "CanAdd": "إذا كنت لا تزال غير قادر على العثور على ما تبحث عنه ، فيمكنك إضافة اهتمام جديد أدناه:",
         "TrySynonyms": "لا ترى ذلك؟ جرب بعض المرادفات.",
         "AddUnderCategory": "إضافة تحت فئة ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "لقد توقفت عن بث هذه المكالمة إلى RTMP المخصص",
             "sbStartedLiveStreaming": "{{userName}} بدأ البث المباشر",
             "sbStoppedLiveStreaming": "انتهى {{userName}} مباشرة",
-            "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية"
+            "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية",
+            "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف"
         },
         "settingsPopup": {
             "webCamera": "كاميرا ويب",
@@ -224,7 +226,9 @@
             "stop": "قف",
             "streamingSettings": "إعدادات",
             "streamToRTMP": "دفق إلى RTMP مخصص",
-            "dialogTitle": "اعدادات الفيديو"
+            "dialogTitle": "اعدادات الفيديو",
+            "startBroadcasting": "بدء البث",
+            "broadcastingInProgress": "البث قيد التقدم"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
