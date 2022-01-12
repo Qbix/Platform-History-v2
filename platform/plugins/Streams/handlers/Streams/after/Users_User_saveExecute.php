@@ -69,16 +69,20 @@ function Streams_after_Users_User_saveExecute($params)
 				$results = call_user_func(
 					array('Q_Image', $service), $query, array(), false
 				);
-				if ($src = reset($results)) {
-					$icon = Q_Image::iconArrayWithUrl($src, 'Users/icon');
+
+				foreach ($results as $result) {
+					if (!@getimagesize($result)) {
+						continue;
+					}
+
+					$icon = Q_Image::iconArrayWithUrl($result, 'Users/icon');
 					$cookie = Q_Config::get('Q', 'images', $service, 'cookie', null);
 					Users::importIcon($user, $icon, null, $cookie);
 					$user->save();
-					$values['Streams/user/icon'] = $modifiedFields['icon'] = $user->icon;
-					break;
+					$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'] = $user->icon;
+					break 2;
 				}
-			} catch (Exception $e) {
-			}
+			} catch (Exception $e) {}
 		}
 	}
 	$toInsert = array();
