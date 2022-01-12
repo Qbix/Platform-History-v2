@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Cine ma invitat",
         "AreYouAgree": "Ești de acord?",
         "Yes": "da",
-        "No": "Nu"
+        "No": "Nu",
+        "DoYouAgree": "Ești de acord?"
     },
     "interests": {
-        "Filter": "Ce iti place?",
+        "Filter": "Care sunt interesele dumneavoastră?",
         "CanAdd": "Dacă tot nu puteți găsi ceea ce căutați, puteți adăuga un interes nou mai jos:",
         "TrySynonyms": "Nu-l vezi? Încercați unele sinonime.",
         "AddUnderCategory": "Adăugați în categoria ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Ați încetat să transmiteți acest apel către RTMP personalizat",
             "sbStartedLiveStreaming": "{{userName}} a început live",
             "sbStoppedLiveStreaming": "{{userName}} s-a încheiat live",
-            "liveStopped": "A apărut o eroare la trimiterea videoclipului către punctul final"
+            "liveStopped": "A apărut o eroare la trimiterea videoclipului către punctul final",
+            "forceDisconnectingImmediately": "Ai fost deconectat de o gazdă"
         },
         "settingsPopup": {
             "webCamera": "Camera web",
@@ -224,7 +226,9 @@
             "stop": "Stop",
             "streamingSettings": "Setări",
             "streamToRTMP": "Transmiteți la RTMP personalizat",
-            "dialogTitle": "Setari video"
+            "dialogTitle": "Setari video",
+            "startBroadcasting": "Începeți să difuzați",
+            "broadcastingInProgress": "Difuzarea este în curs"
         },
         "participantsPopup": {
             "disconnect": "Deconectat",

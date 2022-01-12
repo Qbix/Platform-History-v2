@@ -5638,25 +5638,21 @@ Q.onInit.add(function _Streams_onInit() {
 									label = [label];
 								}
 								// convert labels to readable
-								Q.each(Q.getObject("labels", Users), function (labelKey) {
+								Q.each(Users.labels, function (labelKey) {
 									var index = label.indexOf(labelKey);
 									if (index < 0 || !this.title) {
 										return;
 									}
-
 									label[index] = this.title;
 								});
-
 								html += " as " + label.join(', ');
 							}
 
-							html += "<br>" + content.labels.AreYouAgree;
+							html += "<br>" + content.labels.DoYouAgree;
 							Q.confirm(html, function (res) {
-								if (!res) {
-									return;
+								if (res) {
+									Q.handle(inviteUrl);
 								}
-
-								Q.handle(inviteUrl);
 							}, {
 								ok: content.labels.Yes,
 								cancel: content.labels.No

@@ -7,10 +7,11 @@
         "Streams/invitedMe": "ใครเชิญฉัน",
         "AreYouAgree": "คุณเห็นด้วยหรือไม่?",
         "Yes": "ใช่",
-        "No": "เลขที่"
+        "No": "เลขที่",
+        "DoYouAgree": "คุณเห็นด้วยหรือไม่?"
     },
     "interests": {
-        "Filter": "คุณชอบอะไร",
+        "Filter": "คุณสนใจอะไร?",
         "CanAdd": "หากคุณยังไม่พบสิ่งที่คุณต้องการคุณสามารถเพิ่มความสนใจใหม่ด้านล่าง:",
         "TrySynonyms": "ไม่เห็นเหรอ ลองคำพ้องความหมาย",
         "AddUnderCategory": "เพิ่มภายใต้หมวดหมู่ ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "คุณหยุดออกอากาศการโทรนี้ไปยัง RTMP . ที่กำหนดเอง",
             "sbStartedLiveStreaming": "{{userName}} เริ่มถ่ายทอดสด",
             "sbStoppedLiveStreaming": "{{userName}} สิ้นสุดการถ่ายทอดสด",
-            "liveStopped": "เกิดข้อผิดพลาดขณะส่งวิดีโอไปยังปลายทาง"
+            "liveStopped": "เกิดข้อผิดพลาดขณะส่งวิดีโอไปยังปลายทาง",
+            "forceDisconnectingImmediately": "คุณถูกตัดการเชื่อมต่อโดยโฮสต์"
         },
         "settingsPopup": {
             "webCamera": "กล้องเว็บ",
@@ -224,7 +226,9 @@
             "stop": "หยุด",
             "streamingSettings": "การตั้งค่า",
             "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง",
-            "dialogTitle": "การตั้งค่าวิดีโอ"
+            "dialogTitle": "การตั้งค่าวิดีโอ",
+            "startBroadcasting": "เริ่มออกอากาศ",
+            "broadcastingInProgress": "กำลังออกอากาศ"
         },
         "participantsPopup": {
             "disconnect": "ปลด",

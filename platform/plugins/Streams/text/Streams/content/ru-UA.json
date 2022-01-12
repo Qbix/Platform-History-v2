@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Кто меня пригласил",
         "AreYouAgree": "Ты согласен?",
         "Yes": "да",
-        "No": "Нет"
+        "No": "Нет",
+        "DoYouAgree": "Вы согласны?"
     },
     "interests": {
-        "Filter": "Что тебе нравится?",
+        "Filter": "Какие у тебя интересы?",
         "CanAdd": "Если вы все еще не можете найти то, что ищете, вы можете добавить новый интерес ниже:",
         "TrySynonyms": "Не видишь это? Попробуйте синонимы.",
         "AddUnderCategory": "Добавить в категорию ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Вы перестали транслировать этот вызов на настраиваемый RTMP",
             "sbStartedLiveStreaming": "{{userName}} началось в прямом эфире",
             "sbStoppedLiveStreaming": "{{userName}} закончился в прямом эфире",
-            "liveStopped": "Произошла ошибка при отправке видео на конечную точку"
+            "liveStopped": "Произошла ошибка при отправке видео на конечную точку",
+            "forceDisconnectingImmediately": "Вы были отключены хостом"
         },
         "settingsPopup": {
             "webCamera": "Веб-камера",
@@ -224,7 +226,9 @@
             "stop": "Стоп",
             "streamingSettings": "Настройки",
             "streamToRTMP": "Трансляция в настраиваемый RTMP",
-            "dialogTitle": "Настройки видео"
+            "dialogTitle": "Настройки видео",
+            "startBroadcasting": "Начать трансляцию",
+            "broadcastingInProgress": "Идет трансляция"
         },
         "participantsPopup": {
             "disconnect": "Отключить",

@@ -188,7 +188,7 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
 	 * @return {array}
 	 */
-	static function fetch($userId, $label = null, /* string|Db_Range, */ $options = array())
+	static function fetch($userId, $label = null, $options = array())
 	{
 		if (empty($userId)) {
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));

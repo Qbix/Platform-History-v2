@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Kim məni dəvət etdi",
         "AreYouAgree": "Razısınızmı?",
         "Yes": "Bəli",
-        "No": "Yox"
+        "No": "Yox",
+        "DoYouAgree": "Razısan?"
     },
     "interests": {
-        "Filter": "Nə xoşunuza gəlir?",
+        "Filter": "Sizin maraqlarınız nələrdir?",
         "CanAdd": "Aradığınız şeyi hələ də tapa bilmirsəniz, yeni bir maraq əlavə edə bilərsiniz:",
         "TrySynonyms": "Görmürsənmi? Bəzi sinonimlər cəhd edin.",
         "AddUnderCategory": "Kateqoriya daxil edin ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Bu çağırışı xüsusi RTMP -də yayımlamağı dayandırdınız",
             "sbStartedLiveStreaming": "{{userName}} canlı yayımda başladı",
             "sbStoppedLiveStreaming": "{{userName}} canlı yayımda sona çatdı",
-            "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi"
+            "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi",
+            "forceDisconnectingImmediately": "Ev sahibi tərəfindən əlaqəniz kəsildi"
         },
         "settingsPopup": {
             "webCamera": "Veb Kamera",
@@ -224,7 +226,9 @@
             "stop": "Dur",
             "streamingSettings": "Ayarlar",
             "streamToRTMP": "Xüsusi RTMP -yə axın",
-            "dialogTitle": "Video Parametrləri"
+            "dialogTitle": "Video Parametrləri",
+            "startBroadcasting": "Yayımlanmağa başlayın",
+            "broadcastingInProgress": "Yayım davam edir"
         },
         "participantsPopup": {
             "disconnect": "Qoşulun",

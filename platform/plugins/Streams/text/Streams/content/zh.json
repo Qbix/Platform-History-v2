@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "谁邀请了我",
         "AreYouAgree": "你同意吗？",
         "Yes": "是的",
-        "No": "不"
+        "No": "不",
+        "DoYouAgree": "你同意？"
     },
     "interests": {
-        "Filter": "你喜欢什么？",
+        "Filter": "你的兴趣是什么？",
         "CanAdd": "如果您仍然无法找到所需内容，可以在下方添加新兴趣：",
         "TrySynonyms": "看不到了吗？尝试一些同义词。",
         "AddUnderCategory": "在类别下添加...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "您已停止将此调用广播到自定义 RTMP",
             "sbStartedLiveStreaming": "{{userName}} 开始直播",
             "sbStoppedLiveStreaming": "{{userName}} 结束直播",
-            "liveStopped": "向端点发送视频时发生错误"
+            "liveStopped": "向端点发送视频时发生错误",
+            "forceDisconnectingImmediately": "您已被主机断开连接"
         },
         "settingsPopup": {
             "webCamera": "网络摄像头",
@@ -224,7 +226,9 @@
             "stop": "停止",
             "streamingSettings": "设置",
             "streamToRTMP": "流式传输到自定义 RTMP",
-            "dialogTitle": "视频设置"
+            "dialogTitle": "视频设置",
+            "startBroadcasting": "开始广播",
+            "broadcastingInProgress": "广播正在进行中"
         },
         "participantsPopup": {
             "disconnect": "断开",

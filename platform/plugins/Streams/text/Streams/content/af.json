@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Wie het my genooi",
         "AreYouAgree": "Stem jy saam?",
         "Yes": "Ja",
-        "No": "Geen"
+        "No": "Geen",
+        "DoYouAgree": "Stem jy saam?"
     },
     "interests": {
-        "Filter": "Wat geniet jy?",
+        "Filter": "Waarin stel jy belang?",
         "CanAdd": "As jy steeds nie kan kry wat jy soek nie, kan jy hieronder &#39;n nuwe belangstelling byvoeg:",
         "TrySynonyms": "Sien dit nie? Probeer sommige sinonieme.",
         "AddUnderCategory": "Voeg onder kategorie ... by",
@@ -192,7 +193,8 @@
             "youStoppedLive": "U het opgehou om hierdie oproep na persoonlike RTMP uit te saai",
             "sbStartedLiveStreaming": "{{userName}} het regstreeks begin",
             "sbStoppedLiveStreaming": "{{userName}} het regstreeks geëindig",
-            "liveStopped": "Kon nie video stuur na eindpunt nie"
+            "liveStopped": "Kon nie video stuur na eindpunt nie",
+            "forceDisconnectingImmediately": "Jy is deur &#39;n gasheer ontkoppel"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -224,7 +226,9 @@
             "stop": "Stop",
             "streamingSettings": "Instellings",
             "streamToRTMP": "Stroom na pasgemaakte RTMP",
-            "dialogTitle": "Video-instellings"
+            "dialogTitle": "Video-instellings",
+            "startBroadcasting": "Begin uitsaai",
+            "broadcastingInProgress": "Uitsaai is aan die gang"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",

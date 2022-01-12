@@ -7,10 +7,11 @@
         "Streams/invitedMe": "ಯಾರು ನನ್ನನ್ನು ಆಹ್ವಾನಿಸಿದ್ದಾರೆ",
         "AreYouAgree": "ನೀವು ಒಪ್ಪುವಿರಾ?",
         "Yes": "ಹೌದು",
-        "No": "ಇಲ್ಲ"
+        "No": "ಇಲ್ಲ",
+        "DoYouAgree": "ನೀನು ಒಪ್ಪಿಕೊಳ್ಳುತ್ತೀಯಾ?"
     },
     "interests": {
-        "Filter": "ನೀವು ಏನು ಆನಂದಿಸುತ್ತೀರಿ?",
+        "Filter": "ನಿಮ್ಮ ಆಸಕ್ತಿಗಳೇನು?",
         "CanAdd": "ನೀವು ಇನ್ನೂ ಹುಡುಕುತ್ತಿರುವುದನ್ನು ನೀವು ಇನ್ನೂ ಕಂಡುಹಿಡಿಯಲಾಗದಿದ್ದರೆ, ನೀವು ಕೆಳಗೆ ಹೊಸ ಆಸಕ್ತಿ ಸೇರಿಸಬಹುದು:",
         "TrySynonyms": "ಅದನ್ನು ನೋಡಬಾರದು? ಕೆಲವು ಸಮಾನಾರ್ಥನೆಗಳನ್ನು ಪ್ರಯತ್ನಿಸಿ.",
         "AddUnderCategory": "ವರ್ಗದಲ್ಲಿ ಅಡಿಯಲ್ಲಿ ಸೇರಿಸಿ ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "ನೀವು ಈ ಕರೆಯನ್ನು ಕಸ್ಟಮ್ RTMP ಗೆ ಪ್ರಸಾರ ಮಾಡುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದೀರಿ",
             "sbStartedLiveStreaming": "{{userName}} ನೇರಪ್ರಸಾರ ಆರಂಭಿಸಿದೆ",
             "sbStoppedLiveStreaming": "{{userName}} ಲೈವ್ ಆಗಿ ಕೊನೆಗೊಂಡಿದೆ",
-            "liveStopped": "ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗೆ ವೀಡಿಯೊ ಕಳುಹಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ"
+            "liveStopped": "ಎಂಡ್‌ಪಾಯಿಂಟ್‌ಗೆ ವೀಡಿಯೊ ಕಳುಹಿಸುವಾಗ ದೋಷ ಸಂಭವಿಸಿದೆ",
+            "forceDisconnectingImmediately": "ಹೋಸ್ಟ್‌ನಿಂದ ನೀವು ಸಂಪರ್ಕ ಕಡಿತಗೊಂಡಿದ್ದೀರಿ"
         },
         "settingsPopup": {
             "webCamera": "ವೆಬ್ ಕ್ಯಾಮರಾ",
@@ -224,7 +226,9 @@
             "stop": "ನಿಲ್ಲಿಸು",
             "streamingSettings": "ಸಂಯೋಜನೆಗಳು",
             "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ",
-            "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
+            "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
+            "startBroadcasting": "ಪ್ರಸಾರವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+            "broadcastingInProgress": "ಪ್ರಸಾರ ಪ್ರಗತಿಯಲ್ಲಿದೆ"
         },
         "participantsPopup": {
             "disconnect": "ಸಂಪರ್ಕ ಕಡಿತಗೊಳಿಸಿ",

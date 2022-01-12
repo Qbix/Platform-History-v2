@@ -7,10 +7,11 @@
         "Streams/invitedMe": "کون نے مجھے مدعو کیا",
         "AreYouAgree": "کیا آپ متفق ہیں؟",
         "Yes": "جی ہاں",
-        "No": "نہیں"
+        "No": "نہیں",
+        "DoYouAgree": "آپ اتفاق کرتے ہیں؟"
     },
     "interests": {
-        "Filter": "تم کیا لطف اندوز ہو",
+        "Filter": "آپ کے مشاغل کیا ہیں؟",
         "CanAdd": "اگر آپ ابھی تک تلاش نہیں کرسکتے ہیں، آپ ذیل میں ایک نئی دلچسپی شامل کرسکتے ہیں:",
         "TrySynonyms": "یہ نہیں دیکھا؟ کچھ متفقہ کوشش کریں.",
         "AddUnderCategory": "زمرے کے تحت شامل کریں ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "آپ نے اس کال کو کسٹم RTMP پر نشر کرنا بند کر دیا۔",
             "sbStartedLiveStreaming": "{{userName}} نے براہ راست شروع کیا۔",
             "sbStoppedLiveStreaming": "{{userName}} نے لائیو ختم کیا۔",
-            "liveStopped": "ویڈیو کو اینڈ پوائنٹ پر بھیجتے وقت خرابی پیش آگئی۔"
+            "liveStopped": "ویڈیو کو اینڈ پوائنٹ پر بھیجتے وقت خرابی پیش آگئی۔",
+            "forceDisconnectingImmediately": "آپ کو ایک میزبان نے منقطع کر دیا تھا۔"
         },
         "settingsPopup": {
             "webCamera": "ویب کیمرا",
@@ -224,7 +226,9 @@
             "stop": "رک جاؤ۔",
             "streamingSettings": "ترتیبات",
             "streamToRTMP": "اپنی مرضی کے مطابق RTMP پر سٹریم کریں۔",
-            "dialogTitle": "ویڈیو کی ترتیبات"
+            "dialogTitle": "ویڈیو کی ترتیبات",
+            "startBroadcasting": "نشریات شروع کریں۔",
+            "broadcastingInProgress": "نشریات جاری ہیں۔"
         },
         "participantsPopup": {
             "disconnect": "منقطع ہونا",

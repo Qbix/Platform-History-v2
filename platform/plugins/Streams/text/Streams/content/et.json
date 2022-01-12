@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Kes kutsus mind",
         "AreYouAgree": "Kas olete nõus?",
         "Yes": "Jah",
-        "No": "Ei"
+        "No": "Ei",
+        "DoYouAgree": "Kas sa nõustud?"
     },
     "interests": {
-        "Filter": "Mida sa naudid?",
+        "Filter": "Millised on teie huvid?",
         "CanAdd": "Kui te ikka ei leia seda, mida otsite, saate lisada uue huvi:",
         "TrySynonyms": "Ära seda näe? Proovige mõningaid sünonüüme.",
         "AddUnderCategory": "Lisa kategooriasse ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Lõpetasite selle kõne edastamise kohandatud RTMP -le",
             "sbStartedLiveStreaming": "{{userName}} alustas otseülekannet",
             "sbStoppedLiveStreaming": "{{userName}} lõppes otse -eetris",
-            "liveStopped": "Video lõpp -punkti saatmisel ilmnes viga"
+            "liveStopped": "Video lõpp -punkti saatmisel ilmnes viga",
+            "forceDisconnectingImmediately": "Host katkestas teie ühenduse"
         },
         "settingsPopup": {
             "webCamera": "Veebikaamera",
@@ -224,7 +226,9 @@
             "stop": "Peatus",
             "streamingSettings": "Seaded",
             "streamToRTMP": "Voogesitage kohandatud RTMP -le",
-            "dialogTitle": "Video seaded"
+            "dialogTitle": "Video seaded",
+            "startBroadcasting": "Alustage saateid",
+            "broadcastingInProgress": "Ringhääling on pooleli"
         },
         "participantsPopup": {
             "disconnect": "Katkesta ühendus",

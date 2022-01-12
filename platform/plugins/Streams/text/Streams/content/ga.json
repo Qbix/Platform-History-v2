@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Cé a thug cuireadh dom",
         "AreYouAgree": "An aontaíonn tú?",
         "Yes": "Sea",
-        "No": "Níl"
+        "No": "Níl",
+        "DoYouAgree": "An aontaíonn tú?"
     },
     "interests": {
-        "Filter": "Cad é a thaitníonn leat?",
+        "Filter": "Cad iad na leasanna atá agat?",
         "CanAdd": "Mura féidir leat teacht ar na rudaí atá uait, is féidir leas nua a chur leis thíos:",
         "TrySynonyms": "Ná féach air? Bain triail as roinnt comhchiallaigh.",
         "AddUnderCategory": "Cuir faoi chatagóir ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Stop tú an glao seo a chraoladh chuig RTMP saincheaptha",
             "sbStartedLiveStreaming": "Thosaigh {{userName}} beo",
             "sbStoppedLiveStreaming": "Tháinig deireadh le {{userName}} beo",
-            "liveStopped": "Tharla earráid agus físeán á sheoladh chuig críochphointe"
+            "liveStopped": "Tharla earráid agus físeán á sheoladh chuig críochphointe",
+            "forceDisconnectingImmediately": "Dhícheangail ósta thú"
         },
         "settingsPopup": {
             "webCamera": "Ceamara Gréasáin",
@@ -224,7 +226,9 @@
             "stop": "Stop",
             "streamingSettings": "Socruithe",
             "streamToRTMP": "Sruth go RTMP saincheaptha",
-            "dialogTitle": "Socruithe Físe"
+            "dialogTitle": "Socruithe Físe",
+            "startBroadcasting": "Tosaigh ag craoladh",
+            "broadcastingInProgress": "Tá an craoladh ar siúl"
         },
         "participantsPopup": {
             "disconnect": "Dícheangail",

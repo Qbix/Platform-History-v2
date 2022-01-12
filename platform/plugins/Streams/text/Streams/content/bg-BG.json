@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Кой ме покани",
         "AreYouAgree": "Съгласни ли сте?",
         "Yes": "Да",
-        "No": "Не"
+        "No": "Не",
+        "DoYouAgree": "Съгласен ли си?"
     },
     "interests": {
-        "Filter": "Какво харесваш?",
+        "Filter": "Какви са ти интересите?",
         "CanAdd": "Ако все още не можете да намерите това, което търсите, можете да добавите нов интерес по-долу:",
         "TrySynonyms": "Не го виждате? Изпробвайте някои синоними.",
         "AddUnderCategory": "Добавяне под категория ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Спряхте излъчването на това обаждане към персонализиран RTMP",
             "sbStartedLiveStreaming": "{{userName}} започна на живо",
             "sbStoppedLiveStreaming": "{{userName}} завърши на живо",
-            "liveStopped": "Възникна грешка при изпращането на видеоклип до крайната точка"
+            "liveStopped": "Възникна грешка при изпращането на видеоклип до крайната точка",
+            "forceDisconnectingImmediately": "Бяхте прекъснати от хост"
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
@@ -224,7 +226,9 @@
             "stop": "Спри се",
             "streamingSettings": "Настройки",
             "streamToRTMP": "Поток към персонализиран RTMP",
-            "dialogTitle": "Видео настройки"
+            "dialogTitle": "Видео настройки",
+            "startBroadcasting": "Започнете излъчване",
+            "broadcastingInProgress": "Излъчването е в ход"
         },
         "participantsPopup": {
             "disconnect": "Прекъсване на връзката",

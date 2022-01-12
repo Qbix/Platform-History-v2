@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Wer hat mich eingeladen?",
         "AreYouAgree": "Sind Sie einverstanden?",
         "Yes": "Jawohl",
-        "No": "Nein"
+        "No": "Nein",
+        "DoYouAgree": "Sind Sie einverstanden?"
     },
     "interests": {
-        "Filter": "Was genießt du?",
+        "Filter": "Was sind deine Interessen?",
         "CanAdd": "Wenn Sie immer noch nicht finden, wonach Sie suchen, können Sie unten ein neues Interesse hinzufügen:",
         "TrySynonyms": "Sehe es nicht Probieren Sie einige Synonyme aus.",
         "AddUnderCategory": "Unter Kategorie hinzufügen ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Sie haben die Übertragung dieses Anrufs an benutzerdefiniertes RTMP beendet",
             "sbStartedLiveStreaming": "{{userName}} live gestartet",
             "sbStoppedLiveStreaming": "{{userName}} wurde live beendet",
-            "liveStopped": "Beim Senden des Videos an den Endpunkt ist ein Fehler aufgetreten"
+            "liveStopped": "Beim Senden des Videos an den Endpunkt ist ein Fehler aufgetreten",
+            "forceDisconnectingImmediately": "Ihre Verbindung wurde von einem Host getrennt"
         },
         "settingsPopup": {
             "webCamera": "Web-Kamera",
@@ -224,7 +226,9 @@
             "stop": "Halt",
             "streamingSettings": "Einstellungen",
             "streamToRTMP": "In benutzerdefinierten RTMP streamen",
-            "dialogTitle": "Video-Einstellungen"
+            "dialogTitle": "Video-Einstellungen",
+            "startBroadcasting": "Starten Sie die Übertragung",
+            "broadcastingInProgress": "Die Ausstrahlung ist im Gange"
         },
         "participantsPopup": {
             "disconnect": "Trennen",

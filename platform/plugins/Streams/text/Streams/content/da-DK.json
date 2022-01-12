@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Hvem inviterede mig",
         "AreYouAgree": "Er du enig?",
         "Yes": "Ja",
-        "No": "Ingen"
+        "No": "Ingen",
+        "DoYouAgree": "Er du enig?"
     },
     "interests": {
-        "Filter": "Hvad nyder du?",
+        "Filter": "Hvad er dine interesser?",
         "CanAdd": "Hvis du stadig ikke kan finde det, du leder efter, kan du tilføje en ny interesse nedenfor:",
         "TrySynonyms": "Kan du ikke se det? Prøv nogle synonymer.",
         "AddUnderCategory": "Tilføj under kategori ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Du stoppede med at sende dette opkald til tilpasset RTMP",
             "sbStartedLiveStreaming": "{{userName}} startede live",
             "sbStoppedLiveStreaming": "{{userName}} sluttede live",
-            "liveStopped": "Der opstod en fejl under afsendelse af video til slutpunkt"
+            "liveStopped": "Der opstod en fejl under afsendelse af video til slutpunkt",
+            "forceDisconnectingImmediately": "Du blev afbrudt af en vært"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -224,7 +226,9 @@
             "stop": "Hold op",
             "streamingSettings": "Indstillinger",
             "streamToRTMP": "Stream til brugerdefineret RTMP",
-            "dialogTitle": "Videoindstillinger"
+            "dialogTitle": "Videoindstillinger",
+            "startBroadcasting": "Begynd at udsende",
+            "broadcastingInProgress": "Udsendelsen er i gang"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",

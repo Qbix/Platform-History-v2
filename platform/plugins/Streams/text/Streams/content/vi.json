@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Ai mời tôi",
         "AreYouAgree": "Bạn có đồng ý không?",
         "Yes": "đúng",
-        "No": "Không"
+        "No": "Không",
+        "DoYouAgree": "Bạn có đồng ý không?"
     },
     "interests": {
-        "Filter": "Bạn thích gì?",
+        "Filter": "Sở thích của bạn là gì?",
         "CanAdd": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
         "TrySynonyms": "Đừng nhìn thấy nó? Hãy thử một số từ đồng nghĩa.",
         "AddUnderCategory": "Thêm vào mục ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Bạn đã ngừng phát cuộc gọi này tới RTMP tùy chỉnh",
             "sbStartedLiveStreaming": "{{userName}} đã bắt đầu phát trực tiếp",
             "sbStoppedLiveStreaming": "{{userName}} đã kết thúc trực tiếp",
-            "liveStopped": "Đã xảy ra lỗi khi gửi video đến điểm cuối"
+            "liveStopped": "Đã xảy ra lỗi khi gửi video đến điểm cuối",
+            "forceDisconnectingImmediately": "Bạn đã bị ngắt kết nối bởi một máy chủ"
         },
         "settingsPopup": {
             "webCamera": "Máy ảnh web",
@@ -224,7 +226,9 @@
             "stop": "Ngừng lại",
             "streamingSettings": "Cài đặt",
             "streamToRTMP": "Truyền đến RTMP tùy chỉnh",
-            "dialogTitle": "Cài đặt video"
+            "dialogTitle": "Cài đặt video",
+            "startBroadcasting": "Bắt đầu phát sóng",
+            "broadcastingInProgress": "Đang phát sóng"
         },
         "participantsPopup": {
             "disconnect": "Ngắt kết nối",

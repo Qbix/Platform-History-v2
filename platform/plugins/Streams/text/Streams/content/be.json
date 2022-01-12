@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Хто запрасіў мяне",
         "AreYouAgree": "Вы згодныя?",
         "Yes": "Так",
-        "No": "Не"
+        "No": "Не",
+        "DoYouAgree": "Вы згодныя?"
     },
     "interests": {
-        "Filter": "Што вам падабаецца?",
+        "Filter": "Якія вашы інтарэсы?",
         "CanAdd": "Калі вы ўсё яшчэ не можаце знайсці тое, што вы шукаеце, вы можаце дадаць новы цікавасць ніжэй:",
         "TrySynonyms": "Калі вы не бачыце яго? Паспрабуйце сінонімы.",
         "AddUnderCategory": "Дадаць пад катэгорыю ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Вы спынілі трансляцыю гэтага выкліку на карыстальніцкі RTMP",
             "sbStartedLiveStreaming": "{{userName}} пачалі жыць",
             "sbStoppedLiveStreaming": "{{userName}} скончылася ў прамым эфіры",
-            "liveStopped": "Адбылася памылка пры адпраўцы відэа на канчатковую кропку"
+            "liveStopped": "Адбылася памылка пры адпраўцы відэа на канчатковую кропку",
+            "forceDisconnectingImmediately": "Вас адключыў хост"
         },
         "settingsPopup": {
             "webCamera": "Вэб-камера",
@@ -224,7 +226,9 @@
             "stop": "Стоп",
             "streamingSettings": "Налады",
             "streamToRTMP": "Паток у карыстацкі RTMP",
-            "dialogTitle": "Налады відэа"
+            "dialogTitle": "Налады відэа",
+            "startBroadcasting": "Пачаць трансляцыю",
+            "broadcastingInProgress": "Ідзе трансляцыя"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",

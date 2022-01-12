@@ -3647,7 +3647,7 @@ abstract class Streams extends Base_Streams
 		$alreadyParticipating = Streams_Participant::filter(
 			$userIds, $stream->publisherId, $stream->name, 'participating'
 		);
-
+		
 		$alwaysSend = Q::ifset($options, 'alwaysSend', false);
 
 		// remove already participating users if alwaysSend=false
@@ -3754,6 +3754,7 @@ abstract class Streams extends Base_Streams
 			"displayName" => $displayName,
 			"expireTime" => $expireTime
 		);
+		
 		if (!empty($template)) {
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;

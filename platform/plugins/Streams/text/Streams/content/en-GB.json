@@ -5,12 +5,13 @@
     "labels": {
         "Streams/invited": "People I invited",
         "Streams/invitedMe": "Who invited me",
-        "AreYouAgree": "Are you agree?",
+        "AreYouAgree": "Do you agree?",
         "Yes": "Yes",
-        "No": "No"
+        "No": "No",
+        "DoYouAgree": "Do you agree?"
     },
     "interests": {
-        "Filter": "What do you enjoy?",
+        "Filter": "What are your interests?",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
         "TrySynonyms": "Don't see it? Try some synonyms.",
         "AddUnderCategory": "Add under category...",
@@ -189,7 +190,8 @@
             "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
             "sbStartedLiveStreaming": "{{userName}} started live",
             "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred"
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "forceDisconnectingImmediately": "You was disconnected by a host"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -221,7 +223,9 @@
             "start": "Start",
             "stop": "Stop",
             "streamingSettings": "Settings",
-            "streamToRTMP": "Stream to custom RTMP"
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",

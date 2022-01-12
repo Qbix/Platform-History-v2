@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Quen me convidou?",
         "AreYouAgree": "Estás de acordo?",
         "Yes": "Si",
-        "No": "Non"
+        "No": "Non",
+        "DoYouAgree": "Estás de acordo?"
     },
     "interests": {
-        "Filter": "Que che gusta?",
+        "Filter": "Cales son os teus intereses?",
         "CanAdd": "Se aínda non atopas o que buscas, podes engadir un novo interese a continuación:",
         "TrySynonyms": "Non o ves? Proba algúns sinónimos.",
         "AddUnderCategory": "Engadir baixo categoría ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Deixaches de emitir esta chamada a RTMP personalizado",
             "sbStartedLiveStreaming": "{{userName}} comezou en directo",
             "sbStoppedLiveStreaming": "{{userName}} rematou en directo",
-            "liveStopped": "Produciuse un erro ao enviar o vídeo ao punto final"
+            "liveStopped": "Produciuse un erro ao enviar o vídeo ao punto final",
+            "forceDisconnectingImmediately": "Un anfitrión desconectouche"
         },
         "settingsPopup": {
             "webCamera": "Cámara web",
@@ -224,7 +226,9 @@
             "stop": "Pare",
             "streamingSettings": "Configuración",
             "streamToRTMP": "Transmite a RTMP personalizado",
-            "dialogTitle": "Configuración de vídeo"
+            "dialogTitle": "Configuración de vídeo",
+            "startBroadcasting": "Comezar a transmitir",
+            "broadcastingInProgress": "A emisión está en curso"
         },
         "participantsPopup": {
             "disconnect": "Desconectar",

@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Ποιος με προσκάλεσε",
         "AreYouAgree": "Συμφωνείς?",
         "Yes": "Ναί",
-        "No": "Οχι"
+        "No": "Οχι",
+        "DoYouAgree": "Συμφωνείς?"
     },
     "interests": {
-        "Filter": "Τί απολαμβάνεις?",
+        "Filter": "Ποια είναι τα ενδιαφέροντά σου?",
         "CanAdd": "Εάν εξακολουθείτε να μην μπορείτε να βρείτε αυτό που ψάχνετε, μπορείτε να προσθέσετε ένα νέο ενδιαφέρον παρακάτω:",
         "TrySynonyms": "Δεν το βλέπεις; Δοκιμάστε μερικά συνώνυμα.",
         "AddUnderCategory": "Προσθήκη στην κατηγορία ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Διακόψατε τη μετάδοση αυτής της κλήσης σε προσαρμοσμένο RTMP",
             "sbStartedLiveStreaming": "Το {{userName}} ξεκίνησε ζωντανά",
             "sbStoppedLiveStreaming": "Το {{userName}} έληξε ζωντανά",
-            "liveStopped": "Παρουσιάστηκε σφάλμα κατά την αποστολή βίντεο στο τελικό σημείο"
+            "liveStopped": "Παρουσιάστηκε σφάλμα κατά την αποστολή βίντεο στο τελικό σημείο",
+            "forceDisconnectingImmediately": "Αποσυνδεθήκατε από έναν κεντρικό υπολογιστή"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -224,7 +226,9 @@
             "stop": "Να σταματήσει",
             "streamingSettings": "Ρυθμίσεις",
             "streamToRTMP": "Ροή σε προσαρμοσμένο RTMP",
-            "dialogTitle": "Ρυθμίσεις βίντεο"
+            "dialogTitle": "Ρυθμίσεις βίντεο",
+            "startBroadcasting": "Ξεκινήστε τη μετάδοση",
+            "broadcastingInProgress": "Η μετάδοση είναι σε εξέλιξη"
         },
         "participantsPopup": {
             "disconnect": "Διαχωρίζω",

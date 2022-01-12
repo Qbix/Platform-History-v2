@@ -7,10 +7,11 @@
         "Streams/invitedMe": "Kdo mě pozval",
         "AreYouAgree": "Souhlasíš?",
         "Yes": "Ano",
-        "No": "Ne"
+        "No": "Ne",
+        "DoYouAgree": "Souhlasíš?"
     },
     "interests": {
-        "Filter": "Co vás baví?",
+        "Filter": "Jaké máš zájmy?",
         "CanAdd": "Pokud stále nemůžete najít to, co hledáte, můžete přidat nový zájem níže:",
         "TrySynonyms": "Nevidíš to? Vyzkoušejte některá synonyma.",
         "AddUnderCategory": "Přidat do kategorie ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "Přestali jste vysílat tento hovor na vlastní RTMP",
             "sbStartedLiveStreaming": "{{userName}} zahájeno živě",
             "sbStoppedLiveStreaming": "{{userName}} skončil živě",
-            "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě"
+            "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě",
+            "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -224,7 +226,9 @@
             "stop": "Stop",
             "streamingSettings": "Nastavení",
             "streamToRTMP": "Streamujte na vlastní RTMP",
-            "dialogTitle": "Nastavení videa"
+            "dialogTitle": "Nastavení videa",
+            "startBroadcasting": "Začněte vysílat",
+            "broadcastingInProgress": "Probíhá vysílání"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",
