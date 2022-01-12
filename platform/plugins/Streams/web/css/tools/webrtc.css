@@ -1252,6 +1252,7 @@
     overflow: hidden;
     max-width: 100%;
     display: inline-block;
+    color:black;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
     display: none;

@@ -909,6 +909,23 @@ window.WebRTCRoomClient = function app(options){
                         if(maxVolume <= 0) {
                             //participant.soundMeter.script.onaudioprocess = null;
                             log('createAudioAnalyser: resume')
+                            for (var key in participant.soundMeter.visualizations) {
+                                if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
+                                    var visualization = participant.soundMeter.visualizations[key];
+                                    log('createAudioAnalyser: resume visualization', visualization)
+
+                                    if(visualization.type == 'border-color') continue;
+                                    if(visualization.soundBars != null) {
+                                        visualization.soundBars.forEach(function (o) {
+                                            o.rect.setAttributeNS(null, 'height', '0%');
+                                        });
+                                    } else if(visualization.soundCircles != null) {
+                                        visualization.soundCircles.forEach(function (o) {
+                                            o.circle.setAttributeNS(null, 'r', '0%');
+                                        });
+                                    }
+                                }
+                            }
                             participant.soundMeter.context.suspend();
                             participant.soundMeter.script.disconnect();
                             participant.soundMeter.source.disconnect();

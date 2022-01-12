@@ -237,7 +237,7 @@
                         }
 
                         console.log('call state', state, state.relationType );
-
+                        $hostsParticipants[0].innerHTML = '';
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
                             element: $hostsParticipants[0],
@@ -247,7 +247,23 @@
                             content: content,
                             resumeClosed: false,
                             useExisting: false,
-                            tool: tool
+                            defaultDesktopViewMode: 'audio',
+                            defaultMobileViewMode: 'audio',
+                            tool: tool,
+                            onStart: function () {
+
+                                var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
+                                console.log('conferenceSignaling', conferenceSignaling)
+
+                                if(conferenceSignaling) {
+                                    conferenceSignaling.event.on('participantConnected', function (e) {
+                                        if(conferenceSignaling.roomParticipants().length > 1) {
+                                            $clipToolElement.attr("data-visualization", "hosts");
+
+                                        }
+                                    })
+                                }
+                            },
                         });
                     }, {
                         title: tool.text.calls.CallReasonTitle,
