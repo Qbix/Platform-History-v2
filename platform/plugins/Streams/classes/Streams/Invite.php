@@ -133,10 +133,13 @@ class Streams_Invite extends Base_Streams_Invite
 		
 		$userId = $this->userId ? $this->userId : Users::loggedInUser(true)->id;
 		
-		if (!$this->userId) {
-			$invited = new Streams_Invited();
-			$invited->token = $this->token;
-			$invited->userId = $userId;
+		$invited = new Streams_Invited();
+		$invited->token = $this->token;
+		$invited->userId = $userId;
+		if ($this->userId) {
+			$invited->state = 'accepted';
+			$invited->save(true);
+		} else {
 			if (!$invited->retrieve() or $invited->state !== 'accepted') {
 				$quotaName = "Streams/invite";
 				$roles = Users::roles($this->publisherId, null, null, $userId);
@@ -193,12 +196,12 @@ class Streams_Invite extends Base_Streams_Invite
 			$invitedUser = Users_User::fetch($userId, true);
 			$byUser = Users_User::fetch($this->invitingUserId, true);
 			// Set up the objects
-			$byStream = Streams::fetchOne(
+			$toStream = Streams::fetchOne(
 				$this->invitingUserId, $this->publisherId, $this->streamName, true
 			);
 			$access = new Streams_Access();
-			$access->publisherId = $byStream->publisherId;
-			$access->streamName = $byStream->name;
+			$access->publisherId = $toStream->publisherId;
+			$access->streamName = $toStream->name;
 			$access->ofUserId = $this->userId;
 			// Check if we should update the access
 			$shouldUpdateAccess = false;
@@ -211,7 +214,7 @@ class Streams_Invite extends Base_Streams_Invite
 				// However, if inviting user has a lower access level now,
 				// then give that level instead, unless it is lower than
 				// what the invited user would have had otherwise.
-				$min = min($this->$level_type, $byStream->get($level_type, 0));
+				$min = min($this->$level_type, $toStream->get($level_type, 0));
 				if ($min > $stream->get($level_type, 0)) {
 					$access->$level_type = $min;
 					$shouldUpdateAccess = true;
@@ -221,9 +224,9 @@ class Streams_Invite extends Base_Streams_Invite
 				// Grant permissions originally offered in the invite,
 				// up to and including what the inviting user currently has.
 				$permissions = Q::json_decode($access->permissions);
-				$byPermissions = $byStream->get('permissions', array());
+				$withPermissions = $toStream->get('permissions', array());
 				foreach ($permissions as $permission) {
-					if (in_array($permission, $byPermissions)) {
+					if (in_array($permission, $withPermissions)) {
 						$access->addPermission($permission);
 					}
 				}
