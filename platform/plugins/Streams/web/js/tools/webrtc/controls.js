@@ -265,21 +265,32 @@
 
 				function setRealName(participant, callback) {
 					var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
-
 					if (userId != null) {
-						var firstName;
+
+                        var firstName;
 						var lastName;
 						var fullName = '';
-						Q.Streams.get(userId, 'Streams/user/firstName', function () {
-							firstName = this.fields.content;
+						Q.Streams.get(userId, 'Streams/user/firstName', function (err, stream) {
+
+                            if(!stream || stream.fields == null) {
+                                if (callback != null) callback({firstName: 'n/a', lastName: 'n/a'});
+                                return;
+                            }
+
+							firstName = stream.fields.content;
                             if (firstName != null) {
                                 fullName += firstName;
                             }
 
 							try{
-                                Q.Streams.get(userId, 'Streams/user/lastName', function (stream) {
-                                    if(!stream) return;
-                                    lastName = this.fields.content;
+                                Q.Streams.get(userId, 'Streams/user/lastName', function (err, stream) {
+
+                                    if(!stream || ! stream.fields) {
+                                        if (callback != null) callback({firstName: firstName, lastName: ''});
+                                        return;
+                                    }
+
+                                    lastName = stream.fields.content;
 
                                     if (lastName != null) {
                                         fullName += ' ' + lastName;
@@ -307,9 +318,11 @@
 
 				});
 				tool.WebRTCLib.event.on('participantConnected', function (participant) {
-					if(participant.sid == 'recording') return;
+                    console.log('controls:participantConnected ')
+
+                    if(participant.sid == 'recording') return;
 					setRealName(participant, function(name){
-						tool.participantsPopup().addItem(participant);
+                        tool.participantsPopup().addItem(participant);
 					});
 
 					var participants = tool.WebRTCLib.roomParticipants();
@@ -3397,6 +3410,7 @@
 				 * @method addItem
 				 */
 				function addItem(roomParticipant) {
+					console.log('controls: addItem');
 					var isLocal = roomParticipant == localParticipant;
 					var participantItem = document.createElement('LI');
 					var tracksControlBtns = document.createElement('DIV');
@@ -3474,6 +3488,7 @@
 					participantItem.appendChild(participantIdentity);
 
 					tool.participantListEl.appendChild(participantItem);
+                    console.log('controls: addItem: tool.participantListEl', tool.participantListEl);
 
 					var listItem = new ListItem();
 					listItem.participant = roomParticipant;
