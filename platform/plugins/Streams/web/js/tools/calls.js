@@ -237,7 +237,7 @@
                         }
 
                         console.log('call state', state, state.relationType );
-
+                        $hostsParticipants[0].innerHTML = '';
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
                             element: $hostsParticipants[0],
@@ -247,6 +247,8 @@
                             content: content,
                             resumeClosed: false,
                             useExisting: false,
+                            defaultDesktopViewMode: 'audio',
+                            defaultMobileViewMode: 'audio',
                             tool: tool
                         });
                     }, {
