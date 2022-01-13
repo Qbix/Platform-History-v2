@@ -910,7 +910,7 @@ class Q_Utils
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
-			$user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9';
+			$user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (K HTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
 
 		$ip = null;
 		if (is_array($uri)) {
