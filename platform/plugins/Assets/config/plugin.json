@@ -21,7 +21,8 @@
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Assets/services": { "module": "Assets", "action": "services" }
+			"Assets/services": { "module": "Assets", "action": "services" },
+			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
