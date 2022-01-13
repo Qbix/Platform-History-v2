@@ -257,6 +257,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 	fields.baseUrl = Q.getObject("config.Q.web.appRootUrl", fields);
 	var message = this;
 	var messageType = this.fields.type;
+	var viewPath = instructions.template || messageType+'/email.handlebars';
 	var subject = Streams.Stream.getConfigField(
 		stream.fields.type,
 		['messages', this.fields.type, 'subject'],
@@ -417,7 +418,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _email(emailAddress, destination, callback) {
 			o.destination = 'email';
 			o.emailAddress = emailAddress;
-			var viewPath = messageType+'/email.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
@@ -452,7 +452,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _mobile(mobileNumber, destination, callback) {
 			o.destination = 'mobile';
 			o.mobileNumber = mobileNumber;
-			var viewPath = messageType+'/mobile.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
@@ -483,7 +482,6 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _device(deviceId, callback) {
 			o.destination = 'devices';
 			o.deviceId = deviceId;
-			var viewPath = messageType+'/device.handlebars';
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
