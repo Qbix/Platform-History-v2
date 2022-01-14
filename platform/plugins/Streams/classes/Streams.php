@@ -3556,7 +3556,8 @@ abstract class Streams extends Base_Streams
 			if (!is_dir($dirname)) {
 				throw new Q_Exception_MissingDir(@compact('dirname'));
 			}
-		} elseif (isset($options['html'])) {
+		}
+		if (isset($options['html'])) {
 			$html = $options['html'];
 			if (!is_array($html) or count($html) < 2) {
 				throw new Q_Exception_WrongType(array(
