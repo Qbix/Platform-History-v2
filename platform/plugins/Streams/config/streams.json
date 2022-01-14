@@ -26,7 +26,7 @@
 	"Streams/invited": {
 		"type": "Streams/invited",
 		"title": "Invited",
-		"icon": "",
+		"icon": "Streams/invited",
 		"readLevel": 0,
 		"writeLevel": 20,
 		"adminLevel": 0,
