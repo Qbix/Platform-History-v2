@@ -285,7 +285,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			streamUrl: streamUrl,
 			message: message,
 			url: message.getInstruction("url") || streamUrl,
-			icon: stream.iconUrl(80),
+			icon: Q.url(stream.iconUrl(80)),
 			user: this,
 			avatar: avatar,
 			callback: callback
