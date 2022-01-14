@@ -3507,6 +3507,7 @@ abstract class Streams extends Base_Streams
 	 *	@param {string} [$options.displayName] the display name to use to represent the inviting user
 	 *  @param {string} [$options.appUrl] Can be used to override the URL to which the invited user will be redirected and receive "Q.Streams.token" in the querystring.
 	 *	@param {array} [$options.html] an array of ($template, $batchName) such as ("MyApp/foo.handlebars", "foo") for generating html snippets which can then be viewed from and printed via the action Streams/invitations?batchName=$batchName&invitingUserId=$asUserId&limit=$limit&offset=$offset
+	 *	@param {array} [$options.template] Directory for custom templates (email.handlebars, mobile.handlebars, device.handlebars).
 	 * @param {string} [$options.asUserId=Users::loggedInUser(true)->id] Invite as this user id, defaults to logged-in user
 	 * @param {boolean} [$options.alwaysSend=false] Send invitation message even if already sent.
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks when adding labels and contacts
@@ -3529,7 +3530,8 @@ abstract class Streams extends Base_Streams
 	{
 		$options = Q::take($options, array(
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
-			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess'
+			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
+			'templateDir'
 		));
 		
 		if (isset($options['asUserId'])) {
@@ -3547,8 +3549,14 @@ abstract class Streams extends Base_Streams
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
 			throw new Users_Exception_NotAuthorized();
 		}
-		
-		if (isset($options['html'])) {
+
+		if (isset($options['templateDir'])) {
+			$templateDir = $options['templateDir'];
+			$dirname = APP_VIEWS_DIR.DS.$templateDir;
+			if (!is_dir($dirname)) {
+				throw new Q_Exception_MissingDir(@compact('dirname'));
+			}
+		} elseif (isset($options['html'])) {
 			$html = $options['html'];
 			if (!is_array($html) or count($html) < 2) {
 				throw new Q_Exception_WrongType(array(
@@ -3758,6 +3766,9 @@ abstract class Streams extends Base_Streams
 		if (!empty($template)) {
 			$params['template'] = $template;
 			$params['batchName'] = $batchName;
+		}
+		if (!empty($templateDir)) {
+			$params['templateDir'] = $templateDir;
 		}
 		try {
 			$result = Q_Utils::queryInternal('Q/node', $params);
