@@ -9,7 +9,7 @@ function Streams_batch_response_batch()
 	try {
 		$batch = json_decode($_REQUEST['batch'], true);
 	} catch (Exception $e) {
-
+		throw new Exception($e);
 	}
 	if (empty($batch)) {
 		throw new Q_Exception_WrongValue(array('field' => 'batch', 'range' => 'valid JSON'));
