@@ -279,7 +279,7 @@
 	position: unset;
 	margin: 0;
 }
-/* </Streams_webrtc_preview> */
+
 
 .Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
 .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
@@ -322,3 +322,43 @@
 	height:40px;
 }
 
+.Streams_preview_contents {
+	padding:0 0 5px 0;
+}
+.Streams_preview_container .Streams_preview_contents {
+	width: 100%;
+}
+.Streams_preview_container .Streams_preview_about {
+	display: flex;
+}
+.Streams_preview_container .Streams_chat_bubble {
+	-webkit-border-radius: 13px;
+	-moz-border-radius: 13px;
+	border-radius: 13px;
+	background-color: #cbf9fb;
+	text-align: left;
+	padding: 10px;
+	margin-right: 5px;
+	margin-left: 10px;
+	border: 1px solid #bae8ea;
+	flex: 1;
+	align-self:center;
+}
+.Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
+	float:left;
+	margin: 0 0 0 -19px;
+	width:9px;
+	height: 13px;
+}
+.Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
+	color:#222;
+	overflow: hidden;
+}
+.Streams_preview_container .Users_avatar_tool{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	font-size: 10px;
+}
+/* </Streams_webrtc_preview> */

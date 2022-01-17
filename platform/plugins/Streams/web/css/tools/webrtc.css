@@ -1243,6 +1243,13 @@
     z-index: 10;
     font-weight: bold;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text div{
+    display: inline;
+    overflow: hidden;
+    white-space: normal;
+    width: 100%;
+    text-overflow: ellipsis;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name{
     max-width: 100%;
 }

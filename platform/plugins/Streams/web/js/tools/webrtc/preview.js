@@ -12,10 +12,12 @@
 	 * @param {Q.Event} [options.onRender] called when tool element completely rendered
 	 */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
-            console.log('center: Streams/webrtc/preview');
+            console.log('center: Streams/webrtc/preview', this.state);
 
             var tool = this;
             this.state = Q.extend({}, this.state, options);
+            console.log('center: Streams/webrtc/preview2', this.state);
+
             var state = this.state;
             tool.preview = preview;
 
@@ -40,7 +42,7 @@
 
 {
 			editable: false,
-			mainWebrtcStream: null,
+            mainRoomStream: null,
 			templates: {
 				view: {
 					name: 'Streams/webrtc/preview/view',
@@ -89,210 +91,174 @@
 				preamble: preamble
 			});
 
-            console.log('preview: fields', fields);
+            console.log('preview: fields', fields, stream);
 
 
-            //get webrtc stream of the main room
-            function getMainWebRTCStreams(callback) {
-                if(!state.parentClipTool) return false;
-                state.parentClipTool.stream.relatedTo(Q.Media.clip.webrtc.relations.main, function(){
-                    if(callback) callback(this.relatedStreams);
-                })
-            }
+            if(state.mainRoomStream == null) return;
 
-            if(state.mainWebrtcStream != null) {
-                renderTool(state.mainWebrtcStream.fields.publisherId, state.mainWebrtcStream.fields.name);
-            } else {
-                getMainWebRTCStreams(function (relatedStreams) {
-                    var keys = Object.keys(relatedStreams);
-                    var stream = relatedStreams[keys[0]];
-                    renderTool(stream.fields.publisherId, stream.fields.name);
-                })
-            }
-
-            function renderTool(mainWebRTCStreamPublisher, mainWebRTCStreamName) {
-                console.log('preview: renderTool', mainWebRTCStreamPublisher, mainWebRTCStreamName);
-                Q.Template.render(
-                    'Streams/webrtc/preview/view',
-                    fields,
-                    function (err, html) {
-                        if (err) return;
-                        tool.element.innerHTML = html;
-                        Q.activate(tool, function () {
-                            // load the icon
-                            // TODO: make this use flexbox instead
-                            var jq = tool.$('img.Streams_preview_icon');
-                            tool.preview.icon(jq[0], null);
+            console.log('preview: renderTool', state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name);
+            Q.Template.render(
+                'Streams/webrtc/preview/view',
+                fields,
+                function (err, html) {
+                    if (err) return;
+                    tool.element.innerHTML = html;
+                    Q.activate(tool, function () {
+                        // load the icon
+                        // TODO: make this use flexbox instead
+                        var jq = tool.$('img.Streams_preview_icon');
+                        tool.preview.icon(jq[0], null);
+                        /*var $pc = tool.$('.Streams_preview_contents');
+                        if ($pc.parent().is(":visible")) {
+                            $pc.width(0).width($pc[0].remainingWidth());
+                        }
+                        Q.onLayout(tool.element).set(function () {
                             var $pc = tool.$('.Streams_preview_contents');
-                            if ($pc.parent().is(":visible")) {
+                            if ($pc.parent().is(':visible')) {
                                 $pc.width(0).width($pc[0].remainingWidth());
                             }
-                            Q.onLayout(tool.element).set(function () {
-                                var $pc = tool.$('.Streams_preview_contents');
-                                if ($pc.parent().is(':visible')) {
-                                    $pc.width(0).width($pc[0].remainingWidth());
-                                }
-                            }, tool);
-                            Q.handle(state.onRender, tool);
-                        });
-                    },
-                    state.templates.view
-                );
+                        }, tool);*/
+                        Q.handle(state.onRender, tool);
+                    });
+                },
+                state.templates.view
+            );
 
-                var callButton = tool.$('.Streams_preview_call_button');
-                var switchBackButton = tool.$('.Streams_preview_switch_back_button');
-                var acceptButton = tool.$('.Streams_preview_accept_button');
-                var disconnectButton = tool.$('.Streams_preview_disconnect_button');
+            var aboutContainer = tool.element.querySelector('.Streams_preview_about');
+            var previewMediaContainer = tool.element.querySelector('.Streams_preview_media_container');
+            var praticipantsContainer = tool.element.querySelector('.Streams_preview_participants');
+            var callButton = tool.$('.Streams_preview_call_button');
+            var switchBackButton = tool.$('.Streams_preview_switch_back_button');
+            var acceptButton = tool.$('.Streams_preview_accept_button');
 
-                function switchBack(accept) {
-                    var forceDisconnect = function() {
-                        tool.preview.delete();
-
-                        Q.Streams.get(fields.publisherId, fields.streamName, function(err, stream) {
-                            var guestWebrtcStream = this;
-                            var msg;
-                            if (msg = Q.firstErrorMessage(err)) {
-                                alert(msg);
-                            }
-                            guestWebrtcStream.post({
-                                type: 'Streams/webrtc/forceDisconnect',
-                                content: JSON.stringify({
-                                    userId: fields.publisherId
-                                }),
-                            })
-                        })
-                    }
-                    if(tool.state.guestWaitingRoom == null) {
-                        acceptButton.css('display', 'none');
-                        switchBackButton.css('display', 'none');
-                        if(accept == null) {
-                            forceDisconnect();
-                        } else {
-                            tool.preview.delete();
-                            disconnectButton.css('display', 'flex');
-                        }
-                    } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.currentConferenceLibInstance()) {
-                        tool.state.guestWaitingRoom.switchTo(mainWebRTCStreamPublisher, mainWebRTCStreamName, {
-                            resumeClosed: true
-                        }).then(function () {
-                            acceptButton.css('display', 'none');
-                            switchBackButton.css('display', 'none');
-
-                            if(accept == null) {
-                                forceDisconnect();
-                            } else {
-                                tool.preview.delete();
-                            }
-                        });
-                    } else {
-                        tool.state.guestWaitingRoom.stop();
+            acceptButton.on(Q.Pointer.fastclick, function () {
+                Q.req('Streams/calls', 'manage', function () {
+                    if(tool.state.guestWaitingRoom != null) {
+                        switchBack(true);
                     }
 
+                    acceptButton.css('display', 'none');
+                    callButton.css('display', 'none');
+                }, {
+                    fields: {
+                        action: 'join',
+                        userId: fields.publisherId,
+                        webrtcStreamPublisher: state.mainRoomStream.fields.publisherId,
+                        webrtcStreamName: state.mainRoomStream.fields.name,
+                        eventsStreamPublisher: state.eventsStream.fields.publisherId,
+                        eventsStreamName: state.eventsStream.fields.name,
+                    }
+                })
 
-                }
+            });
 
-                acceptButton.on(Q.Pointer.fastclick, function () {
-                    Q.req('Media/live', 'manage', function () {
-                       /* state.parentClipTool.stream.post({
-                            type: 'Streams/webrtc/invite',
-                            content: JSON.stringify({publisherId: mainWebRTCStreamPublisher, name: mainWebRTCStreamName, userId: stream.fields.publisherId}),
-                        }, function() {
-                            console.log('sent')
-                        })*/
+            callButton.on(Q.Pointer.fastclick, function () {
 
-                        if(tool.state.guestWaitingRoom != null) {
-                            switchBack(true);
-                        }
+                if(tool.state.mainWebrtcRoom == null || (tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.currentConferenceLibInstance() == null)) {
 
-                        acceptButton.css('display', 'none');
-                        disconnectButton.css('display', 'flex');
-                        callButton.css('display', 'none');
-                    }, {
-                        fields: {
-                            action: 'join', userId: fields.publisherId, webrtcStreamPublisher: mainWebRTCStreamPublisher, webrtcStreamName: mainWebRTCStreamName,
-                        }
-                    })
-
-                });
-
-                disconnectButton.on(Q.Pointer.fastclick, function () {
-                    Q.Streams.get(mainWebRTCStreamPublisher, mainWebRTCStreamName, function() {
-                        Q.req('Media/live', 'manage', function () {
-                            tool.preview.delete();
-
-                            tool.state.mainWebrtcStream.post({
-                                type: 'Streams/webrtc/forceDisconnect',
-                                content: JSON.stringify({
-                                    publisherId: mainWebRTCStreamPublisher,
-                                    name: mainWebRTCStreamName,
-                                    userId: fields.publisherId,
-                                    clipStreamPublisherId:tool.stream.fields.publisherId,
-                                    clipStreamName:tool.stream.fields.name
-                                }),
-                            }, function() {
-
-                                /* //acceptButton.css('display', 'flex');
-                                 //disconnectButton.css('display', 'none');
-                                 tool.preview.delete();*/
-
-                            })
-
-                        }, {
-                            fields: {
-                                action: 'leave', userId: fields.publisherId
-                            }
-                        })
-
-
-
-                    })
-
-                });
-
-
-
-                callButton.on(Q.Pointer.fastclick, function () {
-
-                    if(tool.state.mainWebrtcRoom == null || (tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.currentConferenceLibInstance() == null)) {
-
-                        var WebConference = Q.Streams.WebRTC();
-                        tool.state.guestWaitingRoom = WebConference.start({
-                            element: document.body,
-                            roomId: stream.fields.name.split('/').pop(),
-                            roomPublisherId: stream.fields.publisherId,
-                            mode: 'node',
-                            startWith: {video: false, audio: true},
-                            onWebRTCRoomCreated: function() {
-                                callButton.css('display', 'none');
-                                switchBackButton.css('display', 'flex');
-                                Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
-                            },
-                            onWebrtcControlsCreated: function() {
-                                Q.handle(state.onWebrtcControlsCreated, tool, [tool.state.waitingtWebRTCRoom]);
-                            },
-                            onWebRTCRoomEnded: function () {
-                                Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
-                            }
-                        });
-                    } else {
-
-                        tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
-                            resumeClosed: true
-                        }).then(function () {
-                            tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
-                            //tool.state.mainWebrtcRoom = null;
+                    var WebConference = Q.Streams.WebRTC();
+                    tool.state.guestWaitingRoom = WebConference.start({
+                        element: document.body,
+                        roomId: stream.fields.name.split('/').pop(),
+                        roomPublisherId: stream.fields.publisherId,
+                        mode: 'node',
+                        startWith: {video: false, audio: true},
+                        onWebRTCRoomCreated: function() {
                             callButton.css('display', 'none');
                             switchBackButton.css('display', 'flex');
-                            Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
-                        });
+                            Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
+                        },
+                        onWebrtcControlsCreated: function() {
+                            Q.handle(state.onWebrtcControlsCreated, tool, [tool.state.waitingtWebRTCRoom]);
+                        },
+                        onWebRTCRoomEnded: function () {
+                            Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
+                        }
+                    });
+                } else {
+
+                    tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
+                        resumeClosed: true
+                    }).then(function () {
+                        tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
+                        //tool.state.mainWebrtcRoom = null;
+
+                        moveVisualizationToPreview();
+                        praticipantsContainer.style.display = 'none';
+                        callButton.css('display', 'none');
+                        switchBackButton.css('display', 'flex');
+                        Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
+                    });
+                }
+
+
+            });
+            switchBackButton.on(Q.Pointer.fastclick, function () {
+                switchBack();
+            });
+
+            //switch the host back to the main room after he accepted or declined a guest's call
+            function switchBack(accept) {
+                var disconnectGuestFromWaitingRoom = function() {
+                    tool.preview.delete();
+
+                    tool.stream.post({
+                        type: 'Streams/webrtc/forceDisconnect',
+                        content: JSON.stringify({
+                            userId: fields.publisherId
+                        }),
+                    })
+                }
+
+                if(tool.state.guestWaitingRoom == null) {
+                    acceptButton.css('display', 'none');
+                    switchBackButton.css('display', 'none');
+                    if(accept == null) {
+                        disconnectGuestFromWaitingRoom();
+                    } else {
+                        tool.preview.delete();
                     }
+                } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.currentConferenceLibInstance()) {
+                    tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
+                        resumeClosed: true
+                    }).then(function () {
+                        acceptButton.css('display', 'none');
+                        switchBackButton.css('display', 'none');
 
-
-                });
-                switchBackButton.on(Q.Pointer.fastclick, function () {
-                    switchBack();
-                });
+                        /*if guest is not accepted to the main room, just end his waiting room; if guest is accepted,
+                         * switch him to the main room and remove his call from call list to make free slot for other calls */
+                        if(accept == null) {
+                            disconnectGuestFromWaitingRoom();
+                        } else {
+                            tool.preview.delete();
+                        }
+                        moveVisualizationToMainContainer();
+                    });
+                } else {
+                    tool.state.guestWaitingRoom.stop();
+                }
             }
+
+            function moveVisualizationToPreview() {
+                console.log('moveVisualizationToPreview');
+                let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+                if(currentMediaContainer) {
+                    previewMediaContainer.appendChild(currentMediaContainer)
+                    previewMediaContainer.style.display = 'block';
+                    aboutContainer.style.display = 'none';
+                }
+            }
+            function moveVisualizationToMainContainer() {
+                console.log('moveVisualizationToMainContainer');
+                let mediaContainerOfMainRoom = tool.state.guestWaitingRoom.options().element;
+                let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+                if(currentMediaContainer && mediaContainerOfMainRoom) {
+                    mediaContainerOfMainRoom.appendChild(currentMediaContainer)
+                    previewMediaContainer.style.display = 'none';
+                    aboutContainer.style.display = '';
+                }
+            }
+
         }
     });
 
@@ -302,9 +268,11 @@ Q.Template.set('Streams/webrtc/preview/view',
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
 	+ '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
 	+ '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
-	+ '<div class="Streams_preview_content">{{content}}</div>'
+	+ '<div class="Streams_preview_content">'
+    + '<div class="Streams_preview_about"><div class="Streams_preview_about_avatar">{{&tool "Users/avatar" userId=publisherId}}</div><div class="Streams_chat_bubble"><div class="Streams_chat_tick"></div><div class="Streams_chat_message">{{content}}</div></div></div>'
 	+ '<div class="Streams_preview_body">'
-	+ '{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}'
+	+ '<div class="Streams_preview_media_container" style="display: none;"></div>'
+	+ '<div class="Streams_preview_participants" style="display:none">{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}</div>'
     + '<div class="Streams_preview_call_control">'
     + '<div class="Streams_preview_call_control_call">'
     + '<div class="Streams_preview_call_button">Interview</div>'
@@ -312,7 +280,6 @@ Q.Template.set('Streams/webrtc/preview/view',
     + '</div>'
     + '<div class="Streams_preview_call_control_allow">'
     + '<div class="Streams_preview_accept_button">Accept The Call</div>'
-    + '<div class="Streams_preview_disconnect_button">Remove From Call</div>'
     + '</div>'
     + '</div></div></div></div>'
 );

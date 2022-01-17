@@ -17,17 +17,18 @@
      * @param {Q.Event} [options.streamName=Streams/calls/main] Category stream name
      */
     Q.Tool.define("Streams/calls", function(options) {
-            console.log('center: Streams/calls');
 
             var tool = this;
             var state = this.state;
-            state.parentClipTool = options.parentClipTool;
+            console.log('center: Streams/calls', state);
+
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
                 if (tool.stream.testWriteLevel("edit")) {
                     state.isAdmin = true;
+                    tool.initMainRoom();
                     tool.settings();
                 } else {
-                    state.parentClipTool.stream.onMessage("Media/webrtc/guest").set(function (stream, message) {
+                    tool.state.eventsStream.onMessage("Media/webrtc/guest").set(function (stream, message) {
                         let instructions = JSON.parse(message.instructions);
 
                         console.log('Media/webrtc/guest instructions', instructions)
@@ -139,6 +140,104 @@
                 console.log('getMaxCalls2', this.state.relationType);
                 return Q.getObject(this.state.relationType, this.stream.getAttribute("maxRelations")) || 0;
             },
+            initMainRoom: function() {
+                var tool = this;
+                var mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                var WebRTCClientUI = Streams.WebRTC.start({
+                    element: tool.state.mainRoomConfig.mainRoomContainer,
+                    roomPublisherId: mainRoomStream ? mainRoomStream.fields.publisherId : null,
+                    roomId: mainRoomStream ? mainRoomStream.fields.name : null,
+                    publisherId: tool.state.eventsStream.fields.publisherId,
+                    streamName: tool.state.eventsStream.fields.name, /*"Streams/webrtc/live"*/
+                    relationType: tool.state.eventsStreamRelationType,
+                    resumeClosed: true,
+                    useExisting: false,
+                    tool: tool,
+                    defaultDesktopViewMode: 'audio',
+                    defaultMobileViewMode: 'audio',
+                    writeLevel: 10,
+                    onStart: function () {
+                        tool.state.mainRoomConfig.mainRoomStream = this.roomStream();
+                        tool.state.mainWebrtcRoom = this;
+                        /*var conferenceSignaling = WebRTCClientUI.currentConferenceLibInstance();
+
+                        if(conferenceSignaling) {
+                            conferenceSignaling.event.on('participantConnected', function (e) {
+                                if(conferenceSignaling.roomParticipants().length > 1) {
+                                    $toolElement.attr("data-visualization", "hosts");
+
+                                }
+                            })
+                        }*/
+                    },
+                    onEnd: function () {
+                        //state.webrtc = 'ended';
+                    }
+                });
+
+                WebRTCClientUI.screenRendering.layoutEvents.on('layoutRendered', function (e) {
+                    let mediaContainer = WebRTCClientUI.roomsMediaContainer();
+                    console.log('layoutRendered', mediaContainer, e)
+                    if(!mediaContainer) return;
+                    /*if(e.viewMode != 'audio') {
+                        if(document.body.firstChild) document.body.insertBefore(mediaContainer, document.body.firstChild);
+                    } else {
+                        tool.state.mainRoomConfig.mainRoomContainer.appendChild(mediaContainer);
+                    }*/
+                })
+                WebRTCClientUI.screenRendering.layoutEvents.on('audioScreenCreated', function (e) {
+                    var platformId = e.participant.identity != null ? e.participant.identity.split('\t')[0] : null;
+
+                    if(platformId == null || tool.isHost(platformId)) return;
+
+                    var endCallIcon = '<svg version="1.1"  style="max-width:100%;max-height:100%;"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.067 -0.378 101 101" enable-background="new -0.067 -0.378 101 101"    xml:space="preserve">  <defs>  </defs>  <path fill="#C12236" d="M50,0C22.431,0,0,22.43,0,50s22.429,49.999,50,49.999S100,77.57,100,50C100,22.431,77.57,0,50,0z"/>  <path fill="#FFFFFF" d="M47.346,33.809c-28.439,0.546-25.041,14.627-24.39,16.693c0.699,3.513,3.39,5.271,6.12,4.276l5.196-1.627   c2.8-1.021,4.576-4.83,3.965-8.509l-0.116-0.696c9.448-2.674,17.595-1.987,23.953-0.218l-0.052,0.297   c-0.608,3.679,1.166,7.489,3.968,8.511l5.194,2.164c2.349,0.857,4.666-0.793,5.714-3.43c0.014,0.012,0.021,0.021,0.021,0.021   s0.144-0.355,0.289-0.963c0.012-0.047,0.021-0.1,0.033-0.146c0.022-0.112,0.047-0.227,0.071-0.352   c0.015-0.07,0.031-0.137,0.045-0.209l-0.006-0.004C78.111,45.135,77.328,33.237,47.346,33.809z"/>  <path fill="#FFFFFF" d="M58.133,60.57l-5.492,2.169V50.023c0-0.242-0.196-0.439-0.438-0.439H47.8c-0.244,0-0.44,0.196-0.44,0.439   v12.714l-5.493-2.168c-0.183-0.074-0.395-0.013-0.514,0.143c-0.059,0.08-0.087,0.173-0.087,0.269c0,0.093,0.03,0.188,0.091,0.269   l8.295,10.787c0.083,0.11,0.213,0.174,0.35,0.174s0.267-0.064,0.349-0.174l8.296-10.787c0.121-0.162,0.121-0.377,0.001-0.535   C58.529,60.556,58.317,60.497,58.133,60.57z"/>  </svg>'
+                    var  disconnectBtn = document.createElement('DIV');
+                    disconnectBtn.style.position = 'absolute';
+                    disconnectBtn.style.top = '0';
+                    disconnectBtn.style.right = '-10px';
+                    disconnectBtn.style.width = '30px';
+                    disconnectBtn.style.height = '30px';
+                    disconnectBtn.style.cursor = 'pointer';
+                    disconnectBtn.style.zIndex = '99999';
+                    disconnectBtn.innerHTML = endCallIcon;
+                    e.audioScreen.screenEl.appendChild(disconnectBtn);
+
+                    disconnectBtn.addEventListener('click', function () {
+                        Q.req('Streams/calls', 'manage', function () {
+                            //tool.preview.delete();
+                            tool.state.mainRoomConfig.mainRoomStream.post({
+                                type: 'Streams/webrtc/forceDisconnect',
+                                content: JSON.stringify({
+                                    publisherId: tool.state.mainRoomConfig.mainRoomStream.fields.publisherId,
+                                    name: tool.state.mainRoomConfig.mainRoomStream.fields.name,
+                                    immediate: true,
+                                    userId: platformId,
+                                    clipStreamPublisherId:tool.stream.fields.publisherId,
+                                    clipStreamName:tool.stream.fields.name
+                                }),
+                            }, function() {
+
+                                /* //acceptButton.css('display', 'flex');
+                                 //disconnectButton.css('display', 'none');
+                                 tool.preview.delete();*/
+
+                            })
+
+                        }, {
+                            fields: {
+                                action: 'leave', userId: platformId
+                            }
+                        })
+                    })
+
+                })
+
+                /*1. get last created webrtc stream that is related to clip tool and type of Q.Media.clip.webrtc.relations.main
+                * 2. if this stream exists, create webrtc room based on this stream; if doesn't exist, new
+                *    webrtc stream will be created
+                * 3. relate existing/created webrtc stream to the stream of live show
+                * */
+            },
             /**
              * Implement settings UI for admins
              * @method settings
@@ -178,7 +277,8 @@
                                 editable: false,
                                 closeable: true,
                                 sortable: false,
-                                realtime: true
+                                realtime: true,
+                                foo:'bar'
                             }).activate();
                             $callsRelated[0].forEachTool("Streams/webrtc/preview", function () {
                                 this.state.onRender.add(function () {
@@ -199,9 +299,9 @@
 
                             parentElement.forEachTool("Streams/webrtc/preview", function () {
                                 var previewTool = this;
-                                this.state.parentClipTool = state.parentClipTool;
-                                this.state.mainWebrtcRoom = state.parentClipTool.state.mainWebrtcRoom;
-                                this.state.mainWebrtcStream = state.parentClipTool.state.webrtcStream;
+                                this.state.mainWebrtcRoom = state.mainWebrtcRoom;
+                                this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                                this.state.eventsStream = tool.state.eventsStream;
                                 this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {
                                         return;
@@ -228,8 +328,6 @@
                 var tool = this;
                 var state = tool.state;
                 var $toolElement = $(tool.element);
-                var $clipToolElement = $(state.parentClipTool.element);
-                var $hostsParticipants = $(".Media_clip_hosts_participants", $clipToolElement);
                 $toolElement.addClass("Streams_calls_call").on(Q.Pointer.fastclick, function () {
                     Q.prompt(null, function (content) {
                         if (!content) {
@@ -237,14 +335,14 @@
                         }
 
                         console.log('call state', state, state.relationType );
-                        $hostsParticipants[0].innerHTML = '';
+                        tool.state.mainRoomConfig.mainRoomContainer.innerHTML = '';
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
-                            element: $hostsParticipants[0],
+                            element: tool.state.mainRoomConfig.mainRoomContainer,
                             publisherId: state.publisherId,
                             streamName: state.streamName,
                             relationType: state.relationType,
-                            content: content,
+                            description: content,
                             resumeClosed: false,
                             useExisting: false,
                             defaultDesktopViewMode: 'audio',
@@ -252,7 +350,7 @@
                             tool: tool,
                             onStart: function () {
 
-                                var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
+                                /*var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
                                 console.log('conferenceSignaling', conferenceSignaling)
 
                                 if(conferenceSignaling) {
@@ -262,7 +360,7 @@
 
                                         }
                                     })
-                                }
+                                }*/
                             },
                         });
                     }, {
@@ -270,7 +368,15 @@
                         noClose: false
                     });
                 });
-            }
+            },
+            /**
+             * Detect whether logged user is host
+             * @method isHost
+             */
+            isHost: function (userId) {
+                if(!this.state.mainRoomConfig || !this.state.mainRoomConfig.hostsUsers) return false;
+                return this.state.mainRoomConfig.hostsUsers.includes(userId);
+            },
         });
 
     Q.Template.set("Streams/calls/settings",
