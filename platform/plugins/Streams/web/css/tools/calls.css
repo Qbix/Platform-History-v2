@@ -70,9 +70,21 @@
 }
 
 .Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_body {
-    display: flex;
-    justify-content: space-between;
+    /*display: flex;
+    justify-content: space-between;*/
 }
+
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_body .Streams_preview_media_container{
+    height: 100px;
+}
+
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_body .Streams_preview_media_container .Streams_webrtc_room-media{
+    overflow: hidden;
+}
+.Streams_calls_settings .Streams_calls_related .Streams_webrtc_preview_tool .Streams_preview_body .Streams_preview_participants{
+    height: 70px;
+}
+
 .Streams_calls_settings .Streams_calls_related .Streams_participants_summary {
     display: none !important;
 }

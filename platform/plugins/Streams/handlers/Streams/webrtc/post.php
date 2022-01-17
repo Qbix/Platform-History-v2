@@ -38,6 +38,7 @@ function Streams_webrtc_post($params = array())
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
+	$callDescription = Q::ifset($params, 'description', null);
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
@@ -147,12 +148,17 @@ function Streams_webrtc_post($params = array())
 	}
 
 	if ($resumeClosed !== null) {
-        $response['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+        $response['stream']->setAttribute("resumeClosed", $resumeClosed);
 	}
 
 	if ($closeManually !== null) {
-        $response['stream']->setAttribute("closeManually", $closeManually)->save();
+        $response['stream']->setAttribute("closeManually", $closeManually);
 	}
+
+	if ($callDescription !== null) {
+        $response['stream']->content = $callDescription;
+	}
+    $response['stream']->save();
     $response['stream']->join();
 
 	Q_Response::setSlot("room", $response);

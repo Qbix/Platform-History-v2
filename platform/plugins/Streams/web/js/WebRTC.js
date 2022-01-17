@@ -706,10 +706,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             }
 
             var dispatch = function(eventName, data) {
-                if(!doesHandlerExist(eventName)) {
-                    return;
-                }
-
                 const event = events[eventName];
                 if (event) {
                     event.fire(data);
@@ -735,11 +731,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             }
 
-            var doesHandlerExist = function (eventName) {
-                if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
-                return false;
-            }
-
             var destroy = function () {
                 events = {};
             }
@@ -748,7 +739,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 dispatch:dispatch,
                 on:on,
                 off:off,
-                doesHandlerExist:doesHandlerExist,
                 destroy:destroy
             }
         }
@@ -2480,10 +2470,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             layoutEvents.on('layoutRendered', function (e) {
 
                 if(e.viewMode == 'audio') {
-                    WebRTCconference.mediaManager.audioVisualization().buildCommonVisualization({
+                    WebRTCconference.mediaManager.audioVisualization.buildCommonVisualization({
                         name: 'common',
                         type: 'bars',
-                        element: _options.element
+                        element: _roomsMedia
                     });
 
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
@@ -2496,25 +2486,25 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         _controlsTool.updateViewModeBtns();
                     }
                     unlockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
                 } else if(e.viewMode == 'screenSharing' || e.viewMode == 'fullScreen') {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons()
                     resetAudioVisualization();
                     lockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
                 } else if(e.viewMode == 'squaresGrid') {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons()
                     resetAudioVisualization();
                     lockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
                 } else {
                     if(_controlsTool) _controlsTool.updateViewModeBtns();
                     updateScreensButtons();
                     resetAudioVisualization();
                     unlockScreenResizingAndDragging();
-                    WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+                    WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
                 }
             })
 
@@ -2547,10 +2537,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 var dispatch = function(eventName, data) {
-                    if(!doesHandlerExist(eventName)) {
-                        return;
-                    }
-
                     const event = events[eventName];
                     if (event) {
                         event.fire(data);
@@ -2576,11 +2562,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
                 }
 
-                var doesHandlerExist = function (eventName) {
-                    if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
-                    return false;
-                }
-
                 var destroy = function () {
                     events = {};
                 }
@@ -2589,7 +2570,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     dispatch:dispatch,
                     on:on,
                     off:off,
-                    doesHandlerExist:doesHandlerExist,
                     destroy:destroy
                 }
             }
@@ -2768,7 +2748,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(screen.activeScreenType == 'audio') {
                         if(screen.audioScreen.avatarCon != null && screen.participant.soundMeter.visualizations['participantScreenAudio'] == null) {
 
-                            WebRTCconference.mediaManager.audioVisualization().build({
+                            WebRTCconference.mediaManager.audioVisualization.build({
                                 name: 'participantScreenAudio',
                                 type: 'circles',
                                 participant: screen.participant,
@@ -2778,7 +2758,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     } else if (screen.activeScreenType == 'video') {
                         if(screen.videoScreen.soundEl != null && screen.participant.soundMeter.visualizations['participantScreenVideo'] == null) {
-                            WebRTCconference.mediaManager.audioVisualization().build({
+                            WebRTCconference.mediaManager.audioVisualization.build({
                                 name: 'participantScreenVideo',
                                 participant: screen.participant,
                                 element: screen.videoScreen.soundEl,
@@ -3035,7 +3015,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 );
 
                 if(screen.participant.soundMeter.visualizations['participantScreenVideo'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization().build({
+                    WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreenVideo',
                         participant: screen.participant,
                         element: participantVoice,
@@ -3117,7 +3097,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var userId = screen.participant.identity != null ? screen.participant.identity.split('\t')[0] : Q.Users.loggedInUser.id;
 
                 if(screen.participant.soundMeter.visualizations['participantScreenAudio'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization().build({
+                    WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreenAudio',
                         participant: screen.participant,
                         type: 'circles',
@@ -3163,7 +3143,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                 /*if(screen.participant.soundMeter.visualizations['participantScreen'] == null) {
-                    WebRTCconference.mediaManager.audioVisualization().build({
+                    WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreen',
                         participant: screen.participant,
                         element: participantVoice,
@@ -4327,7 +4307,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var elements = toggleScreensClass('audioScreensGrid');
                 if(!_layoutTool.getLayoutGenerator('audioScreensGrid')) {
                     _layoutTool.setLayoutGenerator('audioScreensGrid', function (container, count) {
-                        return customLayouts.audioScreensGrid(_options.element, roomScreens);
+                        return customLayouts.audioScreensGrid(_roomsMedia, roomScreens);
                     });
                 }
 
@@ -6966,18 +6946,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         function unsetResizeObserver() {
            if(_resizeObserver == null) return;
 
-            _resizeObserver.unobserve(_options.element);
+            _resizeObserver.unobserve(_roomsMedia);
         }
 
         function setResizeObserver() {
             if(typeof ResizeObserver == 'undefined') return;
             _resizeObserver = new ResizeObserver(entries => {
                 screensRendering.updateLayout();
-                if(WebRTCconference) WebRTCconference.mediaManager.audioVisualization().updateCommonVisualizationWidth();
+                if(WebRTCconference) WebRTCconference.mediaManager.audioVisualization.updateCommonVisualizationWidth();
 
             });
 
-            _resizeObserver.observe(_options.element);
+            _resizeObserver.observe(_roomsMedia);
         }
 
 
@@ -7010,7 +6990,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     appDebug.sendReportToServer();
                 }, 3000);
                 overrideDefaultOptions(options);
-                setResizeObserver();
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
@@ -7223,6 +7202,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     _options.element.appendChild(roomsMedia);
                     _roomsMedia = roomsMedia;
+                    setResizeObserver();
                     if(_options.element != document.body)_options.element.dataset.webrtcContainer = true;
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -7287,6 +7267,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             fields: {
                                 roomId: _options.roomId,
                                 publisherId: asPublisherId,
+                                description: _options.description,
                                 resumeClosed: _options.resumeClosed,
                                 closeManually: _options.closeManually,
                                 writeLevel: _options.writeLevel,
@@ -7409,7 +7390,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 }
 
                                 log('switchTo: createOrJoinRoomStream: WebRTCconference', WebRTCconference)
-                                WebRTCconference.mediaManager.audioVisualization().removeCommonVisualization();
+                                WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
 
                                 bindStreamsEvents(_roomStream);
                                 WebRTCconference.switchTo(publisherId, roomIdToJoin).then(function (newRoomClientInstance) {
@@ -7519,7 +7500,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 clearTimeout(appDebug.sendReportsInterbal);
             }
             _roomStream.leave();
-            WebRTCconference.disconnect();
+            if(WebRTCconference) WebRTCconference.disconnect();
 
             if(Q.Socket.getAll()['/webrtc']) {
                 Q.Socket.getAll()['/webrtc'] = null;
@@ -7599,6 +7580,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             roomsMediaContainer: function () {
                 return _roomsMedia;
             },
+            setMediaContainer: function (el) {
+                 _roomsMedia = el;
+            },
             roomStream: function () {
                 return _roomStream;
             },
@@ -7652,6 +7636,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             writeLevel: options.writeLevel,
             resumeClosed: options.resumeClosed,
             closeManually: options.closeManually,
+            description: options.description,
             useRelatedTo: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,
