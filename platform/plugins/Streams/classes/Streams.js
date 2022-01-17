@@ -889,7 +889,9 @@ function Streams_request_handler (req, res, next) {
 						inviteUrl: inviteUrl,
 						type: stream.fields.type,
 						title: stream.fields.title,
-						content: stream.fields.content
+						content: stream.fields.content,
+						template: parsed.template,
+						templateDir: parsed.templateDir
 					})
 				};
 				invited.post(msg, function (err) {
