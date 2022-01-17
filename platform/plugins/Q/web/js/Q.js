@@ -987,6 +987,16 @@ Elp.addClass = function (className) {
 };
 
 /**
+ * Check if element instance od HTML.Element and exists in DOM.
+ * @method exists
+ * @chainable
+ * @return {Boolean}
+ */
+Elp.exists = function () {
+	return (this instanceof Element) && this.offsetParent;
+};
+
+/**
  * Adds or removes an element according to whether a condition is truthy
  * @method setClass
  * @chainable
@@ -12041,6 +12051,9 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
+						if (!targets[i].exists()) {
+							continue;
+						}
 						var img2 = img1.cloneNode(false);
 						img2.hide = img1.hide;
 						img2.dontStopBeforeShown = img1.dontStopBeforeShown;
@@ -12052,6 +12065,9 @@ Q.Pointer = {
 					}
 				} else {
 					img1.target = targets;
+					if (!targets.exists()) {
+						img1.remove();
+					}
 				}
 				Q.each(imgs, function (i, img) {
 					if (typeof img.target === 'string') {
