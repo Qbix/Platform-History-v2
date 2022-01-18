@@ -190,6 +190,15 @@ class Places_Interest
 	static function _create($params, $options)
 	{
 		$options['name'] = $params['name'];
+
+		$stream = Streams_Stream::select()->where(array(
+			"publisherId" => $params['publisherId'],
+			"name" => $params['name']
+		))->ignoreCache()->fetchDbRow();
+		if ($stream) {
+			return $stream;
+		}
+
 		return Streams::create(null, $params['publisherId'], 'Places/interest', $options);
 	}
 	
