@@ -62,23 +62,17 @@
                 var rotateSpeed = state.rotateSpeed;
                 var selectedIndex = 0;
                 var currentOrderIndex = 0;
-                var currentLapNum = 0;
                 var theta;
                 var negativeDeg = [];
                 var positiveDeg = [];
-                var roundTimer = {start:null, startIndex: null, pause:null, transitionTime:null};
-                var rotateRoundTimer = null;
                 var restartRotateRoundTimer = null;
                 var isRotating = false;
-
-                var autorotateStartsNum = 0;
 
                 var sX, sY, nX, nY, desX = 0,
                     desY = 0,
                     tX = 0,
+                    currentTx = 0,
                     tY = (this.state.startTransformY != null ? this.state.startTransformY : 0);
-
-                console.log('startTransformY', tY, this.state)
 
                 var mediaContainer = tool.element;
 
@@ -245,29 +239,9 @@
                     //pointerIsWithinContainer = false;
                 }
 
-                function draggingIsActive(yes) {
-                    if(state.debug) console.log('draggingIsActive START', yes, rotatingIsPasused);
-                    if(yes) {
-                        if(rotateRoundTimer != null) {
-                            clearTimeout(rotateRoundTimer);
-                            rotateRoundTimer = null;
-                        }
-
-                        if(roundTimer.start != null && !rotatingIsPasused) {
-                            if(state.debug) console.log('draggingIsActive YES');
-
-                            roundTimer.pause = performance.now()
-                            var timePassed = roundTimer.pause - roundTimer.start;
-                            var percentTimePassed = timePassed * 100 / roundTimer.transitionTime
-                            var thetaDegPassed = theta / 100 * percentTimePassed;
-                            var degPassed = tX + (theta - thetaDegPassed);
-
-                            if(state.debug) console.log('draggingIsActive : degPassed', degPassed);
-
-                            tX = degPassed;
-                            obox.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (degPassed) + "deg)";
-
-                        }
+                function draggingIsActive(pointerdown) {
+                    if(state.debug) console.log('draggingIsActive START', pointerdown, rotatingIsPasused);
+                    if(pointerdown) {
                         rotatingIsPasused = true;
                         if(!obox.classList.contains('draggingActive')) obox.classList.add('draggingActive');
                     } else {
@@ -281,39 +255,12 @@
                                 restartRotateRoundTimer = null;
                             }
 
-                            var circlesNum = Math.floor(Math.abs(tX)/360);
-                            var degreeBelow360 =  Math.abs(tX) - 360 * circlesNum
-                            if(state.debug) console.log('draggingIsActive : degreeBelow360', degreeBelow360);
-
-                            let closestDegIndex;
-                            let belowZero = Math.sign(tX) === -1 || Math.sign(tX) === 0;
-                            if(belowZero && direction === 'left') {
-                                if(state.debug) console.log('draggingIsActive : closest : cur deg is <0');
-                                closestDegIndex = closest(negativeDeg, -degreeBelow360)
-                                tX = -degreeBelow360;
-                            } else if (!belowZero && direction === 'left') {
-                                if(state.debug) console.log('draggingIsActive : closest : direction is left');
-                                closestDegIndex = closest(negativeDeg, -degreeBelow360)
-                                tX = degreeBelow360
-                            } else {
-                                if(state.debug) console.log('draggingIsActive : closest : cur deg is >0')
-                                closestDegIndex = closest(positiveDeg, degreeBelow360)
-                                tX = degreeBelow360;
-                            }
-
-                            currentOrderIndex = selectedIndex = closestDegIndex
-
-                            if(state.debug) console.log('draggingIsActive : new tX', tX);
-
-                            obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
-
-                            if(state.debug) console.log('draggingIsActive : closestIndex, currentOrderIndex', closestDegIndex);
                             rotatingIsPasused = false;
                             restartRotateRoundTimer = setTimeout(function () {
                                 if(rotatingIsPasused === true) return;
                                 obox.classList.remove('draggingActive');
                                 startAutoRotate(tX);
-                            }, 500)
+                            }, 2000)
                         }
                     }
 
@@ -341,7 +288,7 @@
                         closestDegIndex = closest(positiveDeg, degreeBelow360)
                     }
 
-                    currentOrderIndex = closestDegIndex
+                    currentOrderIndex = selectedIndex = closestDegIndex
 
                     togglePreActive(closestDegIndex);
                     toggleActive(closestDegIndex);
@@ -349,36 +296,34 @@
                     obj.style.transform = "rotateX(" + (-tY) + "deg) rotateY(" + (tX) + "deg)";
                 }
 
-                function rotateCarousel(transitionTime, endCallback, manualTx, toZeroFix, startNum) {
+                function rotateCarousel(transitionTime, endCallback, manualTx, toZeroFix) {
                     if(state.debug) {
-                        console.log('rotateCarousel START: starts num', startNum)
                         console.log('rotateCarousel START: tX', manualTx, tX)
                         console.log('rotateCarousel : index : next, current', selectedIndex, currentOrderIndex)
                         console.log('rotateCarousel : theta, transitionTime', theta, transitionTime)
-                        console.log('rotateCarousel : rotatingIsPasused', rotatingIsPasused)
                     }
                     if(rotatingIsPasused === true) return;
                     if(manualTx != null) tX = manualTx;
                     isRotating = true;
+                    let prevTx = tX;
+                    let belowZero = Math.sign(tX) === -1;
 
-                    let belowZero = (Math.sign(manualTx) === -1);
-
-                    if (direction === 'left' && (manualTx === 0 || manualTx < theta) && toZeroFix) {
-                        if(state.debug) console.log('rotateCarousel : toZeroFix');
-                        tX = 0;
-                    } else if (direction === 'left' && toZeroFix == null) {
+                    if (direction === 'left' && toZeroFix && !belowZero && tX !== 0) {
+                        if(state.debug) console.log('rotateCarousel : left toZeroFix');
+                        tX = theta * Math.abs(selectedIndex);
+                    } else if (direction === 'left') {
                         if(state.debug) console.log('rotateCarousel : regular left direction');
-                        tX = theta * selectedIndex * -1;
-                    }  else if (direction === 'left' && !belowZero) {
-                        if(state.debug) console.log('rotateCarousel : toZeroFix 2')
-                        tX = tX - theta;
+                        tX = theta * Math.abs(selectedIndex) * -1;
+                    } else if (direction === 'right' && toZeroFix && belowZero){
+                        if(state.debug) console.log('rotateCarousel : right toZeroFix');
+                        tX = theta * Math.abs(selectedIndex) * -1;
                     } else {
-                        if(state.debug) console.log('rotateCarousel : right');
-                        tX = theta * selectedIndex;
+                        if(state.debug) console.log('rotateCarousel : regular right');
+                        tX = theta * Math.abs(selectedIndex);
                     }
 
-                    var circlesNum = Math.floor(tX/360);
-                    if(state.debug) console.log('rotateCarousel : circlesNum', circlesNum)
+                    if(state.debug) console.log('rotateCarousel : tx', tX, currentTx, prevTx)
+
 
                     var itemsNum = selectedIndex;
                     var itemsCounted = Math.floor(itemsNum/aEle.length);
@@ -386,27 +331,41 @@
                     if(state.debug) console.log('rotateCarousel : currentOrderIndex', currentOrderIndex)
 
                     let closestDegIndex = getCurrentActiveItem()
+                    if(state.debug) console.log('rotateCarousel : closestDegIndex', closestDegIndex)
+
                     togglePreActive(closestDegIndex);
                     toggleActive(closestDegIndex);
 
                     if(state.debug) console.log('rotateCarousel : rotate', tX, transitionTime)
-                    roundTimer.start = performance.now();
-                    roundTimer.startIndex = selectedIndex;
-                    roundTimer.transitionTime = transitionTime;
-                    obox.style.transition = 'transform '+transitionTime+'ms linear';
-                    obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + tX + 'deg)';
 
-                    if(endCallback != null) {
-                        if(state.debug) console.log('rotateCarousel : rotateRoundTimer : endCallback well run in', transitionTime);
-                        if(rotateRoundTimer != null) {
-                            clearTimeout(rotateRoundTimer);
-                            rotateRoundTimer = null;
+                    var timeInfo = {
+                        start:performance.now(),
+                        total: transitionTime
+                    };
+                    function tick(now) {
+                        timeInfo.elapsed = now - timeInfo.start;
+                        let progress = timeInfo.elapsed / timeInfo.total;
+
+                        let position;
+                        if((Math.sign(tX) === -1 && direction == 'left') || (direction == 'left' && toZeroFix)) {
+                            position = currentTx = prevTx - Math.abs(progress * (tX - prevTx));
+                        } else if((Math.sign(tX) === 0 || Math.sign(tX) === 1) || (direction == 'right' && toZeroFix)){
+                            position = currentTx = prevTx + Math.abs(progress * (tX - prevTx));
                         }
-                        rotateRoundTimer = setTimeout(function () {
-                            if(state.debug) console.log('rotateCarousel : rotateRoundTimer : run endCallback');
-                            endCallback()
-                        }, transitionTime);
+
+                        obox.style.transform = 'rotateX(' + (-tY) + 'deg) rotateY(' + position + 'deg)';
+                        if(progress < 1 && rotatingIsPasused !== true) {
+                            requestAnimationFrame(tick);
+                        } else {
+                            if(state.debug) console.log('rotateCarousel : animation end: go next')
+                            if(endCallback != null) {
+                                endCallback();
+                            }
+                        }
                     }
+
+                    requestAnimationFrame(tick);
+
                 }
 
                 function getCurrentActiveItem() {
@@ -460,48 +419,67 @@
                     obox.classList.remove('rotatingPaused');
                     rotatingIsPasused = false;
 
-                    function startNormally() {
-                        if(state.debug) console.log('startAutoRotate : startNormally')
-                        autorotateStartsNum++
-                        selectedIndex++;
-                        function rotateLoop() {
-                            selectedIndex++;
-                            rotateCarousel(circleTime, rotateLoop, null, null, autorotateStartsNum)
-                        }
-
-                        rotateCarousel(circleTime, rotateLoop, manualTx, null, autorotateStartsNum)
-                    }
-
-                    let belowZero = (Math.sign(manualTx) === -1 || Math.sign(manualTx) === 0);
-                    if (manualTx != null && !belowZero) {
+                    let belowZero = (Math.sign(tX) === -1 || Math.sign(tX) === 0);
+                    if (direction == 'left') {
                         if(state.debug) console.log('startAutoRotate : tX is !belowZero')
 
                         let transitionTime = circleTime;
-                        selectedIndex = Math.floor(manualTx/theta);
+                        selectedIndex = Math.abs(Math.floor(tX/theta));
                         if(state.debug) console.log('startAutoRotate : selectedIndex', selectedIndex)
 
-                        if(manualTx < theta) {
-                            transitionTime = transitionTime * (manualTx/theta);
+                        let nextTx = Math.sign(tX) === -1 ? theta * selectedIndex * -1 : theta * selectedIndex;
+                        if(state.debug) console.log('startAutoRotate : nextTx', nextTx, nextTx - tX, selectedIndex)
+
+                        if(Math.abs(nextTx - tX) < theta) {
+
+                            transitionTime = Math.abs(transitionTime * ((nextTx - tX)/theta));
                         }
-
-                        function rotateLoop(manualTx) {
-
-                            if(selectedIndex !== 0) selectedIndex--;
-                            if(state.debug) console.log('startAutoRotate: rotateLoop : (tX is !belowZero) : selectedIndex', selectedIndex)
-
-                            if(selectedIndex == 0 || manualTx == 0) {
-                                startNormally();
-                                return;
+                        if (!belowZero) {
+                            function rotateLoop() {
+                                selectedIndex--;
+                                rotateCarousel(circleTime, rotateLoop, null, true)
                             }
-
-                            transitionTime = (tX >= theta) ? circleTime : transitionTime * (tX/theta)
+                            rotateCarousel(transitionTime, rotateLoop, tX, true)
+                        } else {
+                            function rotateLoop() {
+                                selectedIndex++;
+                                rotateCarousel(circleTime, rotateLoop, null, true)
+                            }
 
                             rotateCarousel(transitionTime, rotateLoop, tX, true)
                         }
 
-                        rotateCarousel(transitionTime, rotateLoop, manualTx, true);
                     } else {
-                        startNormally();
+                        if(state.debug) console.log('startAutoRotate : tX is belowZero')
+
+                        let transitionTime = circleTime;
+                        selectedIndex = Math.abs(Math.ceil(tX/theta));
+                        if(state.debug) console.log('startAutoRotate : selectedIndex', selectedIndex)
+
+                        let nextTx = Math.sign(tX) === -1 ? theta * selectedIndex * -1 : theta * selectedIndex;
+                        if(state.debug) console.log('startAutoRotate : nextTx', nextTx, nextTx - tX, selectedIndex)
+
+                        if(Math.abs(nextTx - tX) < theta) {
+
+                            transitionTime = Math.abs(transitionTime * ((nextTx - tX)/theta));
+                        }
+
+                        if(belowZero) {
+                            function rotateLoop() {
+                                selectedIndex--;
+                                rotateCarousel(circleTime, rotateLoop, null, true)
+                            }
+
+                            rotateCarousel(transitionTime, rotateLoop, manualTx, true)
+                        } else {
+                            function rotateLoop() {
+                                selectedIndex++;
+                                rotateCarousel(circleTime, rotateLoop, null, null)
+                            }
+
+                            rotateCarousel(transitionTime, rotateLoop, tX, null)
+                        }
+
                     }
                 }
 
@@ -522,9 +500,11 @@
                     desY = nY - sY;
 
                     theta = 360 / aEle.length;
-
-                    tX += desX * 0.1;
+                    if(state.debug) console.log('onpointermove: tx before', tX)
+                    tX = currentTx += desX * 0.1;
                     tY += desY * 0.1;
+                    if(state.debug) console.log('onpointermove: tx after', tX)
+
                     applyTranform(obox, e.target);
                     sX = nX;
                     sY = nY;
@@ -545,7 +525,7 @@
                         desX *= 0.95;
                         desY *= 0.95;
 
-                        tX += desX * 0.1;
+                        tX = currentTx += desX * 0.1;
                         tY += desY * 0.1;
                         applyTranform(obox);
                         playSpin(false);

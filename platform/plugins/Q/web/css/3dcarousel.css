@@ -99,6 +99,7 @@
 
 .carousel-wrap .drag-container figure.activeItem figcaption {
     opacity: 1;
+    color:red;
 }
 
 .carousel-wrap .drag-container img:hover, .drag-container video:hover {
