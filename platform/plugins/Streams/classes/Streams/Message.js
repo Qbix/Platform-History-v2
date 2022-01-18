@@ -285,7 +285,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			streamUrl: streamUrl,
 			message: message,
 			url: message.getInstruction("url") || streamUrl,
-			icon: stream.iconUrl(80),
+			icon: Q.url(stream.iconUrl(80)),
 			user: this,
 			avatar: avatar,
 			callback: callback
@@ -417,7 +417,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _email(emailAddress, destination, callback) {
 			o.destination = 'email';
 			o.emailAddress = emailAddress;
-			var viewPath = messageType+'/email.handlebars';
+			var viewPath = (instructions.templateDir || messageType) + '/email.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/email.handlebars';
 			}
@@ -452,7 +452,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _mobile(mobileNumber, destination, callback) {
 			o.destination = 'mobile';
 			o.mobileNumber = mobileNumber;
-			var viewPath = messageType+'/mobile.handlebars';
+			var viewPath = (instructions.templateDir || messageType) + '/mobile.handlebars';
 			if (Q.Handlebars.template(viewPath) === null) {
 				viewPath = 'Streams/message/mobile.handlebars';
 			}
@@ -483,7 +483,7 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 		function _device(deviceId, callback) {
 			o.destination = 'devices';
 			o.deviceId = deviceId;
-			var viewPath = messageType+'/device.handlebars';
+			var viewPath = (instructions.templateDir || messageType) + '/device.handlebars';
 			if (!Q.Handlebars.template(viewPath)) {
 				viewPath = 'Streams/message/device.handlebars';
 			}
