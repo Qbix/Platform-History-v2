@@ -1047,7 +1047,7 @@ class Users_User extends Base_Users_User
 	
 	/**
 	 * @method clearXid
-	 * @param {string} $platform String of the form "$platform\t$appId"
+	 * @param {string} $platform String of the form "$platform_$appId"
 	 */
 	function clearXid($platformApp)
 	{
@@ -1158,7 +1158,7 @@ class Users_User extends Base_Users_User
 		if (!is_array($xids)) {
 			$xids = array_map('trim', explode(',', $xids));
 		}
-		$platformApp = "$platform\t$appId";
+		$platformApp = $platform . '_' . $appId;
 		$users = array();
 		foreach ($xids as $xid) {
 			$users[] = Users::futureUser($platformApp, $xid, $status);

@@ -15,7 +15,7 @@ class Users_ExternalFrom_Android extends Users_ExternalFrom implements Users_Ext
 	/**
 	 * Gets a Users_ExternalFrom_Android object constructed from request and/or cookies.
 	 * It is your job to populate it with a user id and save it.
-	 * @constructor
+	 * @method authenticate
 	 * @static
 	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an Android appId.
 	 * @param {boolean} [$setCookie=true] Whether to set the Q_udid cookie

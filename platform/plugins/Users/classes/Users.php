@@ -408,7 +408,10 @@ abstract class Users extends Base_Users
 		}
 		$xid = $externalFrom->xid;
 		$authenticated = true;
-		$platformApp = "$platform\t$appId";
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
+		$platformApp = $platform . '_' . $appIdForAuth;
 		if ($retrieved) {
 			$user_xid = $user->getXid($platformApp);
 			if (!$user_xid) {
@@ -468,7 +471,7 @@ abstract class Users extends Base_Users
 				$retrieved = true;
 				if ($ui->state === 'future') {
 					$authenticated = 'adopted';
-					$platformApp = "$platform\t$appId";
+					$platformApp = $platform . '_' . $appIdForAuth;
 					$user->setXid($platformApp, $xid);
 					$user->signedUpWith = $platformApp; // should have been "none" before this
 					/**
@@ -519,7 +522,7 @@ abstract class Users extends Base_Users
 					}
 				}
 
-				$platformApp = "$platform\t$appId";
+				$platformApp = $platform . '_' . $appIdForAuth;
 				$user->setXid($platformApp, $xid);
 				/**
 				 * @event Users/insertUser {before}
@@ -539,7 +542,7 @@ abstract class Users extends Base_Users
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				$platformApp = "$platform\t$appId";
+				$platformApp = $platform . '_' . $appIdForAuth;
 				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
@@ -602,10 +605,9 @@ abstract class Users extends Base_Users
 		// session info for the platform app.
 		$accessToken = $externalFrom->accessToken;
 		$sessionExpires = $externalFrom->expires;
-		$key = $platform.'_'.$appId;
-		if (isset($_SESSION['Users']['appUsers'][$key])) {
+		if (isset($_SESSION['Users']['appUsers'][$platformApp])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
-			$pk = $_SESSION['Users']['appUsers'][$key];
+			$pk = $_SESSION['Users']['appUsers'][$platformApp];
 			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
 			if (empty($ef)) {
 				// somehow this externalFrom disappeared from the database
@@ -675,7 +677,7 @@ abstract class Users extends Base_Users
 			}
 		}
 
-		$_SESSION['Users']['appUsers'][$key] = $externalFrom->getPkValue();
+		$_SESSION['Users']['appUsers'][$platformApp] = $externalFrom->getPkValue();
 
 		Users::$cache['authenticated'] = $authenticated;
 
@@ -1271,7 +1273,7 @@ abstract class Users extends Base_Users
 	 * Returns a user in the database that corresponds to the contact info, if any.
 	 * @method userFromContactInfo
 	 * @static
-	 * @param {string} $type can be "email", "mobile", "$platform\t$appId",
+	 * @param {string} $type can be "email", "mobile", "$platform_$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. If $type is
@@ -1349,6 +1351,7 @@ abstract class Users extends Base_Users
 	 */
 	static function identify($type, $value, $state = 'verified', &$normalized=null)
 	{
+		$type = Q_Utils::normalize($type);
 		$identifiers = array();
 		$expected_array = is_array($type);
 		$types = is_array($type) ? $type : array($type => $value);
@@ -1741,6 +1744,12 @@ abstract class Users extends Base_Users
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "Users/apps/$platform/$appId"
 			));
+		}
+		if (!empty($apps['*'])) {
+			// tree-merge over default values
+			$tree = new Q_Tree($apps['*']);
+			$tree->merge($appInfo);
+			$appInfo = $tree->getAll();
 		}
 		return array($id, $appInfo);
 	}

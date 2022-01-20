@@ -53,7 +53,7 @@ function Users_before_Q_responseExtras()
 			foreach ($appInfos as $appName => $appInfo) {
 				$apps[$platform][$appName] = $appInfo;
 				foreach($appInfo as $key => $value) {
-					if (stristr($key, 'private')) {
+					if (substr($key, -8) == '-private') {
 						unset($apps[$platform][$appName][$key]);
 					}
 				}

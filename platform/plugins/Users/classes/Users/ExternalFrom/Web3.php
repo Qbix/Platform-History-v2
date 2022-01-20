@@ -17,7 +17,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 	/**
 	 * Gets a Users_ExternalFrom_Web3 object constructed from request and/or cookies.
 	 * It is your job to populate it with a user id and save it.
-	 * @constructor
+	 * @method authenticate
 	 * @static
 	 * @param {string} [$appId=Q::app()] Can either be an interal appId or an Web3 appId.
 	 * @param {boolean} [$setCookie=true] Whether to set fbsr_$appId cookie
@@ -28,16 +28,20 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 	static function authenticate($appId = null, $setCookie = true, $longLived = true)
 	{
 		list($appId, $appInfo) = Users::appInfo('web3', $appId);
-		$platformAppId = Q::ifset($appInfo, 'appId', 1);
+		$platformAppId = Q::ifset($appInfo, 'appId', 'all');
 		if (!$platformAppId) {
-			$platformAppId = Q::ifset($_REQUEST, 'chainId', 1);
+			$platformAppId = Q::ifset($_REQUEST, 'chainId', 'all');
 		}
-		if (substr($platformAppId, 0, 2) !== '0x') {
+		if ($platformAppId === 'all'
+		or substr($platformAppId, 0, 2) !== '0x') {
 			throw new Q_Exception_BadValue(array(
 				'internal' => 'Users/apps config',
 				'problem' => "appId should be a string starting from 0x, not $platformAppId"
 			));
 		}
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
 		$xid = strtolower(Q::ifset($_REQUEST, 'xid', null));
 		if (!is_callable('gmp_add') or !is_callable('gmp_mod')) {
 			throw new Q_Exception('Web3 authentication requires installing PHP gmp extensions');
@@ -67,7 +71,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		}
 		$xid = $recoveredXid;
 		$expires = time() + Q::ifset($appInfo, 'expires', 60*60);
-		$cookieNames = array("wsr_$platformAppId", "wsr_$platformAppId".'_expires');
+		$cookieNames = array("Q_Users_wsr_$appIdForAuth", "Q_Users_wsr_$appIdForAuth".'_expires');
 		if ($xid and $setCookie) {
 			$parts = array($payload, $signature);
 			Q_Response::setCookie($cookieNames[0], Q::json_encode($parts), $expires);
@@ -76,7 +80,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		$ef = new Users_ExternalFrom_Web3();
 		// note that $ef->userId was not set
 		$ef->platform = 'web3';
-		$ef->appId = $platformAppId;
+		$ef->appId = $appIdForAuth;
 		$ef->xid = $xid;
 		$ef->accessToken = null;
 		$ef->expires = $expires;

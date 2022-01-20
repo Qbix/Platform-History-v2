@@ -5435,7 +5435,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.related", 100),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
-			if (params[0]) { // some error
+			if (params[0] || subject.errors) { // some error
 				return callback(subject, params);
 			}
 			var keys = Object.keys(subject.relatedStreams).concat(['stream']);
