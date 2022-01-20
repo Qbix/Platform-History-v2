@@ -175,13 +175,6 @@ class Streams_Invite extends Base_Streams_Invite
 			$this->userId, $this->publisherId, $this->streamName, true
 		);
 		
-		/**
-		 * @event Streams/invite {after}
-		 * @param {Streams_Invite} stream
-		 * @param {Users_User} user
-		 */
-		Q::event("Streams/invite/accept", @compact('invite', 'participant'), 'after');
-
 		$stream->post($userId, array(
 			'type' => 'Streams/invite/accept',
 			'instructions' => Q::take($this->fields, array(
@@ -286,6 +279,14 @@ class Streams_Invite extends Base_Streams_Invite
 				}
 			}
 		}
+
+		/**
+		 * @event Streams/invite {after}
+		 * @param {Streams_Invite} stream
+		 * @param {Users_User} user
+		 */
+		Q::event("Streams/invite/accept", @compact('invite', 'stream'), 'after');
+
 		return true;
 	}
 	
