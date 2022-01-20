@@ -987,6 +987,16 @@ Elp.addClass = function (className) {
 };
 
 /**
+ * Check if element instance od HTML.Element and exists in DOM.
+ * @method exists
+ * @chainable
+ * @return {Boolean}
+ */
+Elp.exists = function () {
+	return (this instanceof Element) && this.offsetParent;
+};
+
+/**
  * Adds or removes an element according to whether a condition is truthy
  * @method setClass
  * @chainable
@@ -11973,7 +11983,7 @@ Q.Pointer = {
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {Boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
@@ -11993,13 +12003,12 @@ Q.Pointer = {
 	 * @return {HTMLElement} img1 - Hint image element
 	 */
 	hint: function (targets, options) {
-		options = options || {};
+		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		var img, img1, i, l;
 		var qphi = Q.Pointer.hint.imgs;
 		var imageEvent = options.imageEvent || new Q.Event();
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
-		var o = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		if (!options.dontRemove && !options.waitForEvents) {
 			for (i=0, l=qphi.length; i<l; ++i) {
 				img = qphi[i];
@@ -12010,10 +12019,10 @@ Q.Pointer = {
 			qphi = Q.Pointer.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
-		img1.setAttribute('src', Q.url(o.src));
+		img1.setAttribute('src', Q.url(options.src));
 		img1.style.position = 'absolute';
-		img1.style.width = o.width;
-		img1.style.height = o.height;
+		img1.style.width = options.width;
+		img1.style.height = options.height;
 		img1.style.left = 0;
 		img1.style.top = 0;
 		img1.style.display = 'block';
@@ -12023,8 +12032,8 @@ Q.Pointer = {
 			img1.addClass(options.classes);
 		}
 		img1.style.opacity = 0;
-		img1.hide = o.hide;
-		img1.dontStopBeforeShown = o.dontStopBeforeShown;
+		img1.hide = options.hide;
+		img1.dontStopBeforeShown = options.dontStopBeforeShown;
 		qphi.push(img1);
 		img1.style.visibility = 'hidden';
 		document.body.appendChild(img1);
@@ -12042,6 +12051,9 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
+						if (!targets[i].exists()) {
+							continue;
+						}
 						var img2 = img1.cloneNode(false);
 						img2.hide = img1.hide;
 						img2.dontStopBeforeShown = img1.dontStopBeforeShown;
@@ -12053,6 +12065,9 @@ Q.Pointer = {
 					}
 				} else {
 					img1.target = targets;
+					if (!targets.exists()) {
+						img1.remove();
+					}
 				}
 				Q.each(imgs, function (i, img) {
 					if (typeof img.target === 'string') {
@@ -12077,9 +12092,9 @@ Q.Pointer = {
 						point = target;
 					}
 					img.style.display = 'block';
-					img.style.left = point.x - img.offsetWidth * o.hotspot.x + 'px';
-					img.style.top = point.y - img.offsetHeight * o.hotspot.y + 'px';
-					img.style.zIndex = o.zIndex;
+					img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
+					img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
+					img.style.zIndex = options.zIndex;
 					var width = parseInt(img.style.width);
 					var height = parseInt(img.style.height);
 					Q.Animation.play(function (x, y) {
@@ -12089,23 +12104,23 @@ Q.Pointer = {
 						if (!options.styles || !options.styles.opacity) {
 							img.style.opacity = y;
 						}
-						if (o.show.initialScale !== 1) {
-							var z = 1 + (o.show.initialScale - 1) * (1 - y);
+						if (options.show.initialScale !== 1) {
+							var z = 1 + (options.show.initialScale - 1) * (1 - y);
 							var w = width * z;
 							var h = height * z;
 							img.style.width = w + 'px';
 							img.style.height = h + 'px';
-							img.style.left = point.x - w * o.hotspot.x + 'px';
-							img.style.top = point.y - h * o.hotspot.y + 'px';
+							img.style.left = point.x - w * options.hotspot.x + 'px';
+							img.style.top = point.y - h * options.hotspot.y + 'px';
 						}
-					}, o.show.duration, o.show.ease);
+					}, options.show.duration, options.show.ease);
 					if (options.hide && options.hide.after) {
 						setTimeout(function () {
 							_stopHint(img);
 						}, options.hide.after);
 					}
 				});
-			}, o.show.delay);
+			}, options.show.delay);
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
 			Q.Pointer.stopHintsIgnore = true;
@@ -12435,8 +12450,7 @@ function _stopHint(img, container) {
 		Q.instanceOf(container, Element)
 		&& !container.contains(img.target)
 	);
-	if ((img.timeout !== false && img.dontStopBeforeShown)
-	|| outside) {
+	if ((img.timeout !== false && img.dontStopBeforeShown) || outside) {
 		return img;
 	}
 	if (img.audio) {
