@@ -188,7 +188,6 @@
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20,
-				"Users/inviteUser": 10,
 				"createCommunity": 20
 			},
 			"granted": {
