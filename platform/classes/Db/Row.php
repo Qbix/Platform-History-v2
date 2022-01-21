@@ -210,7 +210,7 @@ class Db_Row implements Iterator
 	 * @type array
 	 * @protected
 	 */
-	protected $fieldsOriginal = array();
+	public $fieldsOriginal = array();
 	
 	/**
 	 * Used for setting and getting parameters on this Db_Row object
