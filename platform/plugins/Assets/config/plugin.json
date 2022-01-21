@@ -16,7 +16,8 @@
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
-			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"]
+			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
+			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
@@ -191,7 +192,14 @@
 				"createCommunity": 20
 			},
 			"granted": {
-				"acceptedInvite": 10
+				"acceptedInvite": 10,
+				"invitedUserEntered": {
+					"Streams/user/firstName": 1,
+					"Streams/user/lastName": 1,
+					"Streams/user/icon": 10,
+					"Places/user/location": 10,
+					"Streams/greeting/": 10
+				}
 			},
 			"exchange": {
 				"credits": 1,
