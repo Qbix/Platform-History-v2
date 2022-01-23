@@ -5,7 +5,7 @@
 	font-style: italic;
 }
 .Assets_history_tool table.Assets_history {
-	margin: 0 auto;
+	width: 100%;
 }
 .Assets_history_tool table.Assets_history th {
 	text-align: center;
@@ -15,13 +15,15 @@
 .Assets_history_tool table.Assets_history td {
 	text-align: center;
 	font-size: 0.8em;
-	padding: 5px;
+	padding: 5px 3px;
 	border-bottom: 1px solid black;
+	max-width: 80px;
 }
 .Assets_history_tool table.Assets_history td.bookmark {
 	border: none;
 	padding: 0;
 	cursor: pointer;
+	width: 50px;
 }
 .Assets_history_tool table.Assets_history td.bookmark div {
 	border: 1px solid red;
