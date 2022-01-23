@@ -24,8 +24,9 @@
 
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
                 if (tool.stream.testWriteLevel("edit")) {
+                    let getParams = new URLSearchParams(window.location.search);
                     state.isAdmin = true;
-                    tool.initMainRoom();
+                    if(getParams.get('init') != null) tool.initMainRoom();
                     tool.settings();
                 } else {
                     tool.state.eventsStream.onMessage("Media/webrtc/guest").set(function (stream, message) {
@@ -188,7 +189,7 @@
                 WebRTCClientUI.screenRendering.layoutEvents.on('audioScreenCreated', function (e) {
                     var platformId = e.participant.identity != null ? e.participant.identity.split('\t')[0] : null;
 
-                    if(platformId == null || tool.isHost(platformId)) return;
+                    if(platformId == null || tool.isHost(platformId) || WebRTCClientUI.roomStream().fields.name != tool.state.mainRoomConfig.mainRoomStream.fields.name) return;
 
                     var endCallIcon = '<svg version="1.1"  style="max-width:100%;max-height:100%;"  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.067 -0.378 101 101" enable-background="new -0.067 -0.378 101 101"    xml:space="preserve">  <defs>  </defs>  <path fill="#C12236" d="M50,0C22.431,0,0,22.43,0,50s22.429,49.999,50,49.999S100,77.57,100,50C100,22.431,77.57,0,50,0z"/>  <path fill="#FFFFFF" d="M47.346,33.809c-28.439,0.546-25.041,14.627-24.39,16.693c0.699,3.513,3.39,5.271,6.12,4.276l5.196-1.627   c2.8-1.021,4.576-4.83,3.965-8.509l-0.116-0.696c9.448-2.674,17.595-1.987,23.953-0.218l-0.052,0.297   c-0.608,3.679,1.166,7.489,3.968,8.511l5.194,2.164c2.349,0.857,4.666-0.793,5.714-3.43c0.014,0.012,0.021,0.021,0.021,0.021   s0.144-0.355,0.289-0.963c0.012-0.047,0.021-0.1,0.033-0.146c0.022-0.112,0.047-0.227,0.071-0.352   c0.015-0.07,0.031-0.137,0.045-0.209l-0.006-0.004C78.111,45.135,77.328,33.237,47.346,33.809z"/>  <path fill="#FFFFFF" d="M58.133,60.57l-5.492,2.169V50.023c0-0.242-0.196-0.439-0.438-0.439H47.8c-0.244,0-0.44,0.196-0.44,0.439   v12.714l-5.493-2.168c-0.183-0.074-0.395-0.013-0.514,0.143c-0.059,0.08-0.087,0.173-0.087,0.269c0,0.093,0.03,0.188,0.091,0.269   l8.295,10.787c0.083,0.11,0.213,0.174,0.35,0.174s0.267-0.064,0.349-0.174l8.296-10.787c0.121-0.162,0.121-0.377,0.001-0.535   C58.529,60.556,58.317,60.497,58.133,60.57z"/>  </svg>'
                     var  disconnectBtn = document.createElement('DIV');
@@ -205,6 +206,7 @@
                     disconnectBtn.addEventListener('click', function () {
                         Q.req('Streams/calls', 'manage', function () {
                             //tool.preview.delete();
+                            console.log('Streams/webrtc/forceDisconnect');
                             tool.state.mainRoomConfig.mainRoomStream.post({
                                 type: 'Streams/webrtc/forceDisconnect',
                                 content: JSON.stringify({
@@ -230,6 +232,14 @@
                         })
                     })
 
+                    WebRTCClientUI.events.on('beforeRoomSwitch', function (e) {
+                        console.log('beforeRoomSwitch', e);
+                        if(e.to.name == tool.state.mainRoomConfig.mainRoomStream.fields.name && e.to.publisherId == tool.state.mainRoomConfig.mainRoomStream.fields.publisherId) {
+                            disconnectBtn.style.display = 'block';
+                        } else {
+                            disconnectBtn.style.display = 'none';
+                        }
+                    });
                 })
 
                 /*1. get last created webrtc stream that is related to clip tool and type of Q.Media.clip.webrtc.relations.main
@@ -281,8 +291,17 @@
                                 foo:'bar'
                             }).activate();
                             $callsRelated[0].forEachTool("Streams/webrtc/preview", function () {
+                                let interviewing = false;
+                                if(this.stream) {
+                                    let interviewing = this.stream.getAttribute('interviewing');
+                                }
                                 this.state.onRender.add(function () {
-                                    $(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom);
+                                    if(interviewing) {
+                                        $(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom + ' (currently is interviewing by another host)');
+                                    } else {
+                                        $(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom);
+                                    }
+
                                 });
                             });
 
@@ -301,8 +320,9 @@
                                 var previewTool = this;
                                 this.state.mainWebrtcRoom = state.mainWebrtcRoom;
                                 this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                                this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
                                 this.state.eventsStream = tool.state.eventsStream;
-                                this.state.onWebRTCRoomEnded.set(function () {
+                                /*this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {
                                         return;
                                     }
@@ -314,7 +334,7 @@
                                         this.stream.fields.publisherId,
                                         this.stream.fields.name
                                     );
-                                }, tool);
+                                }, tool);*/
                             }, tool);
                         }
                     });
@@ -349,7 +369,6 @@
                             defaultMobileViewMode: 'audio',
                             tool: tool,
                             onStart: function () {
-
                                 /*var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
                                 console.log('conferenceSignaling', conferenceSignaling)
 
