@@ -301,7 +301,7 @@
 		}
 		Users.authenticate.occurring = true;
 		var appId = options.appId || Q.info.app;
-		var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
+		var platformAppId = Users.getPlatformAppId(platform, appId);
 		if (!platformAppId) {
 			console.warn(
 				"Users.authenticate: missing " + 
@@ -311,6 +311,12 @@
 		}
 		options.appId = appId;
 		return handler.call(this, platform, platformAppId, onSuccess, onCancel, options);
+	};
+
+	Users.getPlatformAppId = function (platform, appId) {
+		return Q.getObject([platform, appId, 'appIdForAuth'], Users.apps)
+			|| Q.getObject([platform, '*', 'appIdForAuth'], Users.apps)
+			|| Q.getObject([platform, appId, 'appId'], Users.apps);
 	};
 	
 	Users.authenticate.ios = 
@@ -351,7 +357,7 @@
 		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.init.web3(function () {
 			try {
-				var wsr_json = Q.cookie('wsr_' + platformAppId);
+				var wsr_json = Q.cookie('Q_Users_wsr_' + platformAppId);
 				if (wsr_json) {
 					var wsr = JSON.parse(wsr_json);	
 					var hash = ethers.utils.hashMessage(wsr[0]);
@@ -601,7 +607,7 @@
 		}
 
 		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
+		var platformAppId = Users.getPlatformAppId(appId);
 		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
@@ -748,7 +754,7 @@
 			throw new Q.Error("Users.scope: The only supported platform for now is facebook");
 		}
 		var appId = (options && options.appId) || Q.info.app;
-		var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+		var platformAppId = Users.getPlatformAppId(appId);
 		Users.init.facebook(function () {
 			if (!Users.Facebook.getAuthResponse()) {
 				callback(null);
@@ -2764,7 +2770,7 @@
 
 		var appId = Q.info.app;
 		for (var platform in Users.apps) {
-			var platformAppId = Q.getObject([platformAppId, appId, 'appId'], Users.apps);
+			var platformAppId = Users.getPlatformAppId(platform, appId);
 			if (platformAppId) {
 				Q.handle(Users.init[platform]);
 			}
@@ -3998,7 +4004,7 @@
 		 */
 		getLoggedInUserXid: function () {
 			var xids = Q.getObject('Q.Users.loggedInUser.xids');
-			var key = 'web3\t' + Q.Users.Web3.getChainId();
+			var key = 'web3\t*';
 			if (xids && xids[key]) {
 				return xids[key];
 			}

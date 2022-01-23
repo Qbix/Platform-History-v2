@@ -13,18 +13,7 @@ self.addEventListener('push', function (event) {
 		return;
 	}
 
-	let options = Object.assign({
-		body: data.body,
-		data: data
-	}, data);
-
-	if (options.requireInteraction === undefined) {
-		options.requireInteraction = false;
-	}
-
-	if (data.collapseId) {
-		options.tag = data.collapseId;
-	}
+	data.requireInteraction = !!data.requireInteraction;
 
 	sendMessageToAllClients({
 		Q: {
@@ -34,7 +23,7 @@ self.addEventListener('push', function (event) {
 		}
 	});
 
-	event.waitUntil(self.registration.showNotification(data.title, options));
+	event.waitUntil(self.registration.showNotification(data.title, data));
 });
 
 self.addEventListener('notificationclick', function (event) {

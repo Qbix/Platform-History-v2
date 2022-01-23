@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.11",
+				"version": "1.0.12",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -86,7 +86,17 @@
 	},
 	"Users": {
 		"apps": {
-			"platforms": []
+			"platforms": [],
+			"web3": {
+				"*": {
+					"appIdForAuth": "all"
+				}
+			},
+			"telegram": {
+				"*": {
+					"appIdForAuth": "all"
+				}
+			}
 		},
 		"apps-private": {
 			"facebook": ["secret"],

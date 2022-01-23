@@ -3,14 +3,10 @@
 function Assets_after_Streams_inviteAccept($params)
 {
 	// Make earning for invited user
-	$participant = $params['participant'];
 	$invite = $params['invite'];
-
-	if (!$invite->userId || $participant->state != 'participating') {
-		return;
-	}
-
 	$invitedUser = Users::fetch($invite->userId);
+	$stream = $params['stream'];
+
 	if (!$invitedUser) {
 		return;
 	}
@@ -18,8 +14,8 @@ function Assets_after_Streams_inviteAccept($params)
 	$credits = Q_Config::expect('Assets', 'credits', 'granted', 'acceptedInvite');
 
 	Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
-		'publisherId' => $participant->publisherId,
-		'streamName' => $participant->streamName,
+		'publisherId' => $stream->publisherId,
+		'streamName' => $stream->name,
 		'invitedUserName' => $invitedUser->displayName()
 	));
 }
