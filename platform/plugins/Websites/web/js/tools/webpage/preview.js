@@ -468,7 +468,7 @@
 				className: 'Websites_dialog_webpage',
 				title: "Webpage",
 				template: {
-					name: 'Websites/webpage/composer',
+					name: 'Websites/webpage/preview/composer',
 					fields: {
 						isComposer: state.isComposer,
 						text: tool.text.webpage.composer
@@ -637,7 +637,7 @@
 		'</div>'
 	);
 
-	Q.Template.set('Websites/webpage/composer',
+	Q.Template.set('Websites/webpage/preview/composer',
 		'<div class="Websites_webpage_composer" data-composer="{{isComposer}}"><form>'
 		+ '  <div class="Q_tabbing_tabs">'
 		+ '  	<div data-name="edit" class="Q_tabbing_tab">{{text.edit}}</div>'
