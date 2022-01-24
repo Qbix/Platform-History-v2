@@ -26,7 +26,7 @@
                 if (tool.stream.testWriteLevel("edit")) {
                     let getParams = new URLSearchParams(window.location.search);
                     state.isAdmin = true;
-                    if(getParams.get('init') != null) tool.initMainRoom();
+                    tool.initMainRoom();
                     tool.settings();
                 } else {
                     tool.state.eventsStream.onMessage("Media/webrtc/guest").set(function (stream, message) {
