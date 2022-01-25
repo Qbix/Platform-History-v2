@@ -1219,33 +1219,36 @@
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
 	 */
 	Users.setIdentifier = function (options) {
-		var o = Q.extend({}, Users.setIdentifier.options, options);
-		var identifierType = Q.getObject("identifierType", o);
+		options = Q.extend({}, Users.setIdentifier.options, options);
+		var identifierType = Q.getObject("identifierType", options);
 		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
 
 		function onSuccess(user) {
-			if (false !== Q.handle(o.onResult, this, [user])) {
-				Q.handle(o.onSuccess, this, [user]);
+			if (false !== Q.handle(options.onResult, this, [user])) {
+				Q.handle(options.onSuccess, this, [user]);
 			}
 		}
 
 		function onCancel(scope) {
-			if (false !== Q.handle(o.onResult, this, [scope])) {
-				Q.handle(o.onCancel, this, [scope]);
+			if (false !== Q.handle(options.onResult, this, [scope])) {
+				Q.handle(options.onCancel, this, [scope]);
 			}
 		}
 
 		priv.setIdentifier_onSuccess = onSuccess;
 		priv.setIdentifier_onCancel = onCancel;
 
-		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
-			setIdentifier_setupDialog(identifierType, o);
-			var d = setIdentifier_setupDialog.dialog;
+		options.onActivate = function () {
+			var d = this;
 			if (d.css('display') === 'none') {
 				d.data('Q/dialog').load();
 			}
 			$('input[name="identifierType"]', d).val(identifierType);
 			$('input[name="identifier"]', d).val(identifier);
+		};
+
+		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
+			setIdentifier_setupDialog(identifierType, options);
 		});
 	};
 
@@ -1934,15 +1937,15 @@
 	}
 
 	function setIdentifier_setupDialog(identifierType, options) {
-		var options = options || {};
+		options = options || {};
 		var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
 		var type = Q.info.isTouchscreen ? 'email' : 'text';
 		var parts = identifierType ? identifierType.split(',') : [];
 		if (parts.length === 1) {
-			if (parts[0] == 'email') {
+			if (parts[0] === 'email') {
 				type = 'email';
 				placeholder = Q.text.Users.setIdentifier.placeholders.email;
-			} else if (parts[0] == 'mobile') {
+			} else if (parts[0] === 'mobile') {
 				type = 'tel';
 				placeholder = Q.text.Users.setIdentifier.placeholders.mobile;
 			}
@@ -1968,9 +1971,9 @@
 				)
 			)
 		).submit(function (event) {
-			var h = $('#Users_setIdentifier_identifier').outerHeight() - 5;
-			;
-			$('#Users_setIdentifier_identifier').css({
+			var $identifier = $('#Users_setIdentifier_identifier');
+			var h = $identifier.outerHeight() - 5;
+			$identifier.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
 				'background-repeat': 'no-repeat',
 				'background-position': 'right center',
@@ -1979,7 +1982,6 @@
 			var url = Q.action('Users/identifier') + '?' + $(this).serialize();
 			Q.request(url, 'data', setIdentifier_callback, {"method": "post"});
 			event.preventDefault();
-			return;
 		});
 		if (options.userId) {
 			step1_form.append($('<input />').attr({
@@ -2010,6 +2012,7 @@
 				var $input = $('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus');
 				setTimeout(function () {
 					$input.val('').trigger('change');
+					Q.handle(options.onActivate, dialog);
 				}, 0);
 			},
 			onClose: function () {
@@ -3971,11 +3974,6 @@
 					onSuccess && provider.once("chainChanged", onSuccess);
 				}
 			});
-		},
-
-		getChainId: function () {
-			var info = Q.getObject(['Q', 'Users', 'apps', 'web3', Q.info.app]);
-			return info.chainId || info.appId;
 		},
 
 		/**
