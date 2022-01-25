@@ -2473,7 +2473,8 @@ Q.openUrl = function (url, name = "_blank") {
 	if (browsertab) {
 		browsertab.openUrl(url);
 	} else {
-		window.open(url, name).focus();
+		var win = window.open(url, name);
+		win && win.focus();
 	}
 };
 
