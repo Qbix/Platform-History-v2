@@ -13,7 +13,16 @@ self.addEventListener('push', function (event) {
 		return;
 	}
 
+	let options = Object.assign({
+		body: data.body,
+		data: data
+	}, data);
+
 	data.requireInteraction = !!data.requireInteraction;
+
+	if (data.collapseId) {
+		options.tag = data.collapseId;
+	}
 
 	sendMessageToAllClients({
 		Q: {
@@ -23,7 +32,7 @@ self.addEventListener('push', function (event) {
 		}
 	});
 
-	event.waitUntil(self.registration.showNotification(data.title, data));
+	event.waitUntil(self.registration.showNotification(data.title, options));
 });
 
 self.addEventListener('notificationclick', function (event) {
