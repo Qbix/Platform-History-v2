@@ -109,9 +109,12 @@ module.exports = function(socket,io) {
                 if(err || !stream) {
                     return;
                 }
+
                 stream.setAttribute('endTime', +Date.now());
                 stream.save();
                 if ([false, "false"].includes(stream.getAttribute('resumeClosed')) && (stream.getAttribute('closeManually') == null || [false, "false"].includes(stream.getAttribute('closeManually')))) {
+                    if(_debug) console.log('DISCONNECT: Q.plugins.Streams.fetchOne: CLOSE');
+
                     Q.plugins.Streams.close(socket.userPlatformId, roomPublisherId, streamName);
                 }
             });

@@ -49,7 +49,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
     var _debugTimer = {};
 
     Streams.WebRTC = function Streams_WebRTC() {
-
+        if(!new.target) {
+            return new Streams_WebRTC();
+        }
         /**
          * WebRTC options that also can be set it local/app.json
          * @param {Object} [_options] config options
@@ -143,6 +145,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 streamName: null
             }
         };
+        var publicAppInterface;
         var WebRTCconference;
 
         var _textes = null;
@@ -158,6 +161,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var _isAndroid = null;
         var _isiOS = null;
         var _isiOSWebView = null;
+        var _events = new EventSystem();
 
         var ua = navigator.userAgent;
 
@@ -669,90 +673,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 isiOSwebView: function() {return _isiOSWebView;}
             }
         }());
-        window.webrtcDebug = appDebug;
-
-        /**
-         * Event system of app
-         *
-         * @method app.event
-         * @return {Object}
-         */
-        function EventSystem(){
-
-            var events = {};
-
-            var CustomEvent = function (eventName) {
-
-                this.eventName = eventName;
-                this.callbacks = [];
-
-                this.registerCallback = function(callback) {
-                    this.callbacks.push(callback);
-                }
-
-                this.unregisterCallback = function(callback) {
-                    const index = this.callbacks.indexOf(callback);
-                    if (index > -1) {
-                        this.callbacks.splice(index, 1);
-                    }
-                }
-
-                this.fire = function(data) {
-                    const callbacks = this.callbacks.slice(0);
-                    callbacks.forEach((callback) => {
-                        callback(data);
-                    });
-                }
-            }
-
-            var dispatch = function(eventName, data) {
-                const event = events[eventName];
-                if (event) {
-                    event.fire(data);
-                }
-            }
-
-            var on = function(eventName, callback) {
-                let event = events[eventName];
-                if (!event) {
-                    event = new CustomEvent(eventName);
-                    events[eventName] = event;
-                }
-                event.registerCallback(callback);
-            }
-
-            var off = function(eventName, callback) {
-                const event = events[eventName];
-                if (event && event.callbacks.indexOf(callback) > -1) {
-                    event.unregisterCallback(callback);
-                    if (event.callbacks.length === 0) {
-                        delete events[eventName];
-                    }
-                }
-            }
-
-            var destroy = function () {
-                events = {};
-            }
-
-            return {
-                dispatch:dispatch,
-                on:on,
-                off:off,
-                destroy:destroy
-            }
-        }
-
-        /**
-         * Create snipped that is showing when participant joins/leave the room.
-         * @method createInfoSnippet
-         */
-        function createInfoSnippet(){
-            var noticeContainer = document.createElement('div');
-            noticeContainer.className = 'notice-container notice-container-default';
-
-            document.body.appendChild(noticeContainer);
-        }
 
         /**
          * Show snipped with particular message
@@ -881,1579 +801,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //}
             }
 
-            return {
-                show:show
-            }
-        }());
-
-        /**
-         * Bind Qbix stream events. Currentlt isn't in use.
-         * @method bindStreamsEvents
-         * @param {Object} [stream] stream that represents room
-         */
-        function bindStreamsEvents(stream) {
-            log('bindStreamsEvents', stream)
-            stream.onMessage('Streams/join').set(function (stream, message) {
-
-            });
-
-            stream.onMessage('Streams/connected').set(function (stream, message) {
-
-            });
-
-            stream.onMessage("Streams/leave").set(function (stream, message) {
-
-            });
-
-            stream.onMessage("Streams/webrtc/invite").set(function (stream, message) {
-                console.log('bindStreamsEvents: Streams/webrtc/invite', stream, message);
-                if(webRTCInstance== null || WebRTCconference == null) return;
-                var streamToJoin = JSON.parse(message.content);
-                if(streamToJoin.userId != Q.Users.loggedInUserId()) return;
-
-                webRTCInstance.switchTo(streamToJoin.publisherId, streamToJoin.name);
-            });
-
-
-            stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
-                console.log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
-                if(webRTCInstance== null || WebRTCconference == null) return;
-                var message = JSON.parse(message.content);
-                var roomParticipants = WebRTCconference.roomParticipants();
-                var localParticipant = WebRTCconference.localParticipant();
-
-                var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
-
-                if(message.userId == userId) {
-                    if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnectingImmediately);
-                        WebRTCconference.disconnect();
-                        webRTCInstance.stop();
-                    } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
-
-                        setTimeout(function () {
-                            WebRTCconference.disconnect();
-                            webRTCInstance.stop();
-                        }, 5000);
-                    }
-
-                    /*Q.Streams.unrelate(
-                        state.publisherId,
-                        state.streamName,
-                        state.relationType,
-                        this.stream.fields.publisherId,
-                        this.stream.fields.name
-                    );*/
-                } else {
-                    for(let p in roomParticipants) {
-                        if(roomParticipants[p].isLocal) continue;
-                        var platformId = roomParticipants[p].identity != null ? roomParticipants[p].identity.split('\t')[0] : null;
-                        if(userId == platformId) {
-                            roomParticipants[p].remove();
-                        }
-                    }
-                }
-
-            });
-        }
-
-        /**
-         * Bind events that are triggered by WebRTC library (app.js)
-         * @method bindConferenceEvents
-         */
-        function bindConferenceEvents(WebRTCconference) {
-            var tool = this;
-
-            function setRealName(participant, callback) {
-                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
-
-                if(userId != null){
-                    var firstName;
-                    var lastName;
-                    var fullName = '';
-                    Q.Streams.get(userId, 'Streams/user/firstName', function () {
-                        firstName = this.fields.content;
-                        if(firstName != null) {
-                            fullName += firstName;
-                        }
-                        try {
-                            Q.Streams.get(userId, 'Streams/user/lastName', function () {
-                                lastName = this.fields.content;
-
-                                if(lastName != null) {
-                                    fullName += ' ' + lastName;
-                                }
-
-                                participant.username = fullName;
-
-                                if(callback != null) callback({firstName:firstName, lastName:lastName});
-                            });
-                        } catch (e) {
-                            participant.username = fullName;
-                            if(callback != null) callback({firstName:firstName, lastName:lastName});
-                        }
-
-                    });
-                }
-            }
-
-            function setUserAvatar(participant) {
-                log('setUserAvatar', participant);
-                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
-
-                if(userId != null){
-                    Q.Streams.Avatar.get(userId, function (err, avatar) {
-                        if (!avatar) {
-                            return;
-                        }
-
-                        var src = Q.url(avatar.iconUrl(400));
-                        if(src != null) {
-                            var avatarImg = new Image();
-                            avatarImg.src = src;
-                            log('setUserAvatar set');
-
-                            participant.avatar = {src:src, image:avatarImg};
-                        }
-
-
-                    });
-                }
-            }
-
-            WebRTCconference.event.on('log', function (params) {
-                appDebug.logInfo(params, true);
-            });
-
-            WebRTCconference.event.on('joined', function (participant) {
-                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-                if(participant.sid == 'recording') return;
-                setRealName(participant);
-                setUserAvatar(participant);
-                screensRendering.onParticipantConnected(participant);
-            });
-
-            WebRTCconference.event.on('participantConnected', function (participant) {
-                log('user joined',  participant);
-                if(participant.sid == 'recording') return;
-                setRealName(participant, function(name){
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
-                });
-                setUserAvatar(participant);
-                screensRendering.onParticipantConnected(participant);
-
-                if(WebRTCconference.initNegotiationState == 'ended') {
-                    log('play joined music');
-
-                    if(Q.Audio.collection[_options.sounds.participantConnected]) {
-                        log('play joined music 1', _options.sounds.participantConnected, this);
-                        Q.Audio.collection[_options.sounds.participantConnected].audio.play()
-                    } else {
-                        Q.Audio.load(_options.sounds.participantConnected, function () {
-                            log('play joined music 2', _options.sounds.participantConnected, this);
-
-                            Q.Audio.collection[_options.sounds.participantConnected].audio.play()
-                        });
-                    }
-
-                }
-
-                //screensRendering.updateLayout();
-            });
-            WebRTCconference.event.on('participantDisconnected', function (participant) {
-                log('user disconnected',  participant);
-                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
-
-
-                if(userId != null){
-                    Q.Streams.get(userId, 'Streams/user/firstName', function () {
-                        var firstName = this.fields.content;
-                        notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
-
-                    });
-                }
-
-
-                if(Q.Audio.collection[_options.sounds.participantDisconnected]) {
-                    log('play leave music 1', _options.sounds.participantDisconnected, this);
-                    Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
-                } else {
-                    Q.Audio.load(_options.sounds.participantDisconnected, function () {
-                        log('play leave music 2', _options.sounds.participantDisconnected, this);
-                        Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
-                    });
-                }
-
-                screensRendering.onParticipantDisconnected(participant);
-
-                screensRendering.updateLayout();
-            });
-            WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
-                log('you left the room')
-                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
-                screensRendering.updateLayout();
-            });
-            WebRTCconference.event.on('participantRemoved', function (participant) {
-                log('you left the room')
-                //screensRendering.removeParticipantsScreens();
-                screensRendering.onParticipantDisconnected(participant);
-            });
-
-
-            WebRTCconference.event.on('screenAdded', function (participant) {
-                log('screen added', participant)
-                screensRendering.updateLayout();
-            });
-            WebRTCconference.event.on('screenRemoved', function (participant) {
-                log('screen removed', participant)
-                screensRendering.updateLayout();
-            });
-            WebRTCconference.event.on('trackAdded', function (e) {
-                log('track added', e)
-                screensRendering.newTrackAdded(e.track, e.participant);
-                //screensRendering.updateLayout();
-
-
-                //screensRendering.newTrackAdded(e.track);
-            });
-
-            WebRTCconference.event.on('trackMuted', function (e) {
-                log('track muted', e)
-                if(e.track.kind == 'video') {
-                    screensRendering.showLoader('videoMuted', {screen: e.screen, participant: e.screen.participant});
-                    screensRendering.onVideoMute(e.track, e.participant);
-                }
-
-
-            });
-
-            WebRTCconference.event.on('trackUnmuted', function (e) {
-                log('track unmuted', e)
-                if(e.track.kind == 'video') {
-                    screensRendering.hideLoader('videoUnmuted', {screen: e.screen, participant: e.screen.participant});
-                    screensRendering.onVideoUnMute(e.track);
-                }
-            });
-
-            WebRTCconference.event.on('videoTrackIsBeingAdded', function (e) {
-                log('video track is being added', e)
-                screensRendering.videoTrackIsAdding(e.track, e.participant);
-                screensRendering.updateLayout();
-            });
-
-            WebRTCconference.event.on('videoTrackLoaded', function (e) {
-                log('video track loaded', e)
-                screensRendering.onVideoTrackLoaded(e.track);
-            });
-
-            WebRTCconference.event.on('screensharingStarting', function (e) {
-                log('screen sharing is being started', e)
-
-                screensRendering.onScreensharingStarting(e);
-                screensRendering.showLoader('screensharingStarting', {participant: e.participant});
-            });
-
-            WebRTCconference.event.on('afterCamerasToggle', function (e) {
-                screensRendering.hideLoader('afterCamerasToggle', {participant: e.participant});
-            });
-            WebRTCconference.event.on('beforeCamerasToggle', function (e) {
-                screensRendering.showLoader('beforeCamerasToggle', {participant: e.participant});
-            });
-            WebRTCconference.event.on('screensharingStarted', function (e) {
-                log('screen sharing started', e)
-                /*if(screensRendering.getActiveViewMode() != 'screenSharing') {
-                    var screensharingTrack;
-				    if(e.content && e.content.trackId != null) {
-                        screensharingTrack = e.participant.videoTracks().filter(function (t) {
-                            return t.mediaStreamTrack.id == e.content.trackId ? true : false;
-                        })[0];
-                    } else {
-				        var videoTracks =e.participant.videoTracks();
-                        if(videoTracks.length != 0) screensharingTrack = videoTracks.reduce(function(prev, current) {
-                            return ((prev.trackEl.videoWidth * prev.trackEl.videoHeight) > (current.trackEl.videoWidth * current.trackEl.videoHeight)) ? prev : current;
-                        })
-                    }
-
-                    if(screensharingTrack) {
-                        screensharingTrack.screensharing = true;
-                        screensRendering.renderFullScreenLayout(screensharingTrack.parentScreen);
-                    }
-                }*/
-                //screensRendering.hideLoader('screensharingStarting', data.participant);
-            });
-            WebRTCconference.event.on('screensharingFailed', function (e) {
-                log('screen sharing failed')
-                screensRendering.hideLoader('screensharingFailed', {participant: e.participant});
-            });
-
-            WebRTCconference.event.on('connected', function () {
-                log('Connected to server')
-                connectionState.updateStatus('Connected');
-                connectionState.show();
-
-                setTimeout(function () {
-                    connectionState.hide();
-
-                }, 1000);
-            });
-            WebRTCconference.event.on('connectError', function () {
-                log('Server connection failed')
-                connectionState.show();
-                //connectionState.updateStatus('reconnecting', 'Server connection failed: ');
-            });
-            WebRTCconference.event.on('reconnectError', function () {
-                log('Server reconnection failed')
-                connectionState.updateStatus('reconnection failed', 'Server connection failed: ');
-            });
-            WebRTCconference.event.on('reconnectAttempt', function (n) {
-                log('Server reconnection attempt ' + n)
-                connectionState.updateStatus('reconnection attempt ' + n, 'Server connection failed: ');
-            });
-
-            var updateLayoutOnResize = function() {
-                setTimeout(function () {
-                    screensRendering.updateLayout();
-                }, 1000)
-            }
-
-            window.addEventListener("resize", updateLayoutOnResize);
-
-            WebRTCconference.event.on('disconnected', function () {
-                window.removeEventListener('resize', updateLayoutOnResize);
-            });
-
-        }
-
-        /**
-         * Show dialog with insturctions in case when it's impossible to access microphone or camera.
-         * @method showInstructionsDialog
-         * @param {String} [kind] Name of device that is not accessible.
-         */
-        var connectionState = (function () {
-
-            var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
-
-            var _notice = null;
-            var _currentState = preparingRoom ? "Checking room's state" : 'Connecting...';
-
-            function show(state) {
-                if(state != null) updateStatus(state);
-            }
-
-            function hide() {
-                var removeNotice = function() {
-                    if(_notice != null && _notice.element.parentNode != null && document.body.contains(_notice.element)) {
-                        _notice.remove();
-                    }
-                }
-
-                if(_currentState.toLowerCase() == 'connected') {
-                    setTimeout(removeNotice, 4000);
-                } else {
-                    removeNotice();
-                }
-
-            }
-
-            function updateStatus(state, text) {
-                _currentState = state;
-                var message = ''
-                if(text != null) message += text;
-                if(state != null) message += state;
-
-                if(_notice != null && document.body.contains(_notice.element)) {
-                    _notice.update(message);
-                } else {
-                    _notice = notice.show(message, true, true, 'left');
-                }
-            }
+            var noticeContainer = document.createElement('div');
+            noticeContainer.className = 'notice-container notice-container-default';
+            document.body.appendChild(noticeContainer);
 
             return {
                 show:show,
-                hide:hide,
-                updateStatus:updateStatus
             }
-
         }());
-
-        /**
-         * Show dialog with insturctions in case when it's impossible to access microphone or camera.
-         * @method showInstructionsDialog
-         * @param {String} [kind] Name of device that is not accessible.
-         */
-        function showInstructionsDialog(kind) {
-            var instructionsPermissionDialog = document.createElement('DIV');
-            instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
-            var dialogList = document.createElement('OL');
-            dialogList.className = 'Streams_webrtc_instructions_dialog';
-
-            if(Q.info.platform === 'ios') {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
-                //Q.getObject("webrtc.allow." + titleText, _textes)
-            } else {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
-									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
-            }
-
-            instructionsPermissionDialog.appendChild(dialogList);
-            Q.Dialogs.push({
-                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
-                className: 'Streams_webrtc_devices_dialog',
-                content: instructionsPermissionDialog,
-                apply: true
-            });
-        }
-
-        /**
-         * Show dialog with buttons to get permissions for camera and/or microphone.
-         * @method showPermissionsDialogue
-         */
-        function showPermissionsDialogue(constrains, callback) {
-
-            var micIcon = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
-            var cameraIcon = '<svg class="camera-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" class="cameraPath" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M77.156,60.693l-15.521-8.961v8.51H25.223v-23.42   h36.412v8.795l15.521-8.961V60.693z"/>  </svg>';
-
-
-            var addStreamToRoom = function(stream) {
-
-                if(WebRTCconference != null){
-
-                    var publishTracks = function () {
-                        var tracks = stream.getTracks();
-                        for(var t in tracks) {
-                            WebRTCconference.localMediaControls.addTrack(tracks[t], stream);
-                        }
-
-                        navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                            WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
-                        }).catch(function (e) {
-                            console.error('ERROR: cannot get device info: ' + e.message);
-                        });
-                    }
-
-                    if(WebRTCconference.state == 'connected' && _options.streams == null) {
-                        publishTracks();
-                    } else {
-                        WebRTCconference.event.on('joined', function () {
-                            if (_options.streams == null) {
-                                publishTracks();
-                            }
-                        });
-                    }
-
-                } else if (_options.streams == null) {
-                    if(_options.startWith.video == true || _options.startWith.audio == true) _options.streams = [stream];
-                    if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
-                        if(callback != null) callback();
-                        return;
-                    }
-                    if(callback != null) callback();
-                }
-                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-            }
-
-            navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                var videoDevices = 0;
-                var audioDevices = 0;
-                for(var i in mediaDevices) {
-                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
-                        videoDevices++;
-                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
-                        audioDevices++;
-                    }
-                }
-
-                var mediaDevicesDialog = document.createElement('DIV');
-                mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
-                var turnOnBtn = document.createElement('BUTTON');
-                turnOnBtn.type = 'button';
-                turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
-                var btnText = document.createElement('SPAN');
-                turnOnBtn.appendChild(btnText)
-                var titleText;
-                if (constrains.audio) {
-                    turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
-                    titleText = 'microphoneBtn';
-                }
-                if (constrains.video) {
-                    turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
-                    titleText = 'cameraBtn';
-                }
-                if (constrains.audio && constrains.video) {
-                    titleText = 'cameraAndMicrophoneBtn';
-                }
-                var text = Q.getObject("webrtc.allow." + titleText, _textes);
-                turnOnBtn.querySelector('SPAN').innerHTML = text;
-
-
-                mediaDevicesDialog.appendChild(turnOnBtn);
-                mediaDevicesDialog.addEventListener('mouseup', function (e) {
-                    if(_options.streams != null && _options.streams.length != 0) return;
-                    navigator.mediaDevices.getUserMedia({video: constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
-                        .then(function (stream) {
-                            addStreamToRoom(stream);
-                        }).catch(function (err) {
-                        if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
-                        console.error(err.name + ": " + err.message);
-                    });
-                });
-
-                Q.Dialogs.push({
-                    title: Q.getObject("webrtc.allow.dialogTitle", _textes),
-                    className: 'Streams_webrtc_devices_dialog',
-                    content: mediaDevicesDialog,
-                    apply: true
-                });
-
-            })
-        }
-
-        /**
-         * Show dialog with buttons to get permissions for camera and/or mirophone and "Join room" button.
-         * @method showPermissionsDialogue
-         */
-        function showPreparingDialogue(callback, closeCallback) {
-            var micSVG = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
-            var disabledMicSVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>';
-            var cameraSVG = '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>';
-            var disabledCameraSVG = '<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203   c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203   z"/>  <polygon fill="#FFFFFF" points="61.635,39.34 43.63,60.242 61.635,60.242 61.635,51.732 77.156,60.693 77.156,36.656 61.635,45.617    "/>  <polygon fill="#FFFFFF" points="25.223,36.822 25.223,60.242 34.391,60.242 54.564,36.822 "/>  <rect x="47.585" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3117 -20.7363)" fill="#C12337" width="4" height="73.163"/>  </svg>';
-            var screenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.072,0.054c-27.57,0-49.999,22.429-49.999,50c0,27.57,22.429,50,49.999,50  c27.571,0,50.001-22.43,50.001-50C100.073,22.484,77.644,0.054,50.072,0.054z M76.879,63.696H53.705v5.222h5.457v3.77H40.987v-3.77  h5.458v-5.222H23.268V31.439H76.88L76.879,63.696L76.879,63.696z"/> </svg>';
-            var disabledScreenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.172,100.346C22.508,100.346,0,77.838,0,50.172C0,22.508,22.508,0,50.172,0  c27.666,0,50.173,22.508,50.173,50.172C100.346,77.838,77.839,100.346,50.172,100.346z M50.172,4.084  C24.76,4.084,4.084,24.76,4.084,50.172c0,25.414,20.675,46.088,46.088,46.088c25.414,0,46.088-20.675,46.088-46.088  C96.261,24.76,75.586,4.084,50.172,4.084z"/> <g>  <polygon fill="#FCFCFC" points="60.309,31.439 23.268,31.439 23.268,63.696 32.533,63.696 "/>  <polygon fill="#FCFCFC" points="68.252,31.439 40.478,63.696 46.444,63.696 46.444,68.918 40.987,68.918 40.987,72.688   59.162,72.688 59.162,68.918 53.705,68.918 53.705,63.696 76.879,63.696 76.88,63.696 76.88,31.439 "/> </g> <rect x="47.83" y="11.444" transform="matrix(-0.7577 -0.6526 0.6526 -0.7577 56.1462 117.2643)" fill="#C12337" width="4.02" height="73.532"/> </svg>';
-            var userSVG = '<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path d="M65.904,52.834c-4.734,3.725-10.695,5.955-17.172,5.955c-6.316,0-12.146-2.119-16.821-5.68C16.654,55.575,5,68.803,5,84.757  c0,11.78,14.356,10.197,32.065,10.197h25.869C80.643,94.954,95,97,95,84.757C95,68.051,82.221,54.333,65.904,52.834z"/> <path d="M48.732,55.057c13.286,0,24.092-10.809,24.092-24.095c0-13.285-10.807-24.094-24.092-24.094  c-13.285,0-24.093,10.809-24.093,24.094C24.64,44.248,35.448,55.057,48.732,55.057z"/> </svg>';
-
-            var usersAvatar = null;
-            var preJoiningStreams = [];
-
-            var md = navigator.mediaDevices;
-
-            var setAvatarOnPreview = function(cameraPreview) {
-                if(!cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) cameraPreview.parentNode.classList.add('Streams_webrtc_preparing_active-audio');
-
-                if(usersAvatar != null) {
-                    cameraPreview.innerHTML = '';
-                    cameraPreview.appendChild(usersAvatar);
-                } else {
-                    Q.Streams.Avatar.get(Q.Users.loggedInUserId(), function (err, avatar) {
-                        if (!avatar) {
-                            return;
-                        }
-
-                        var src = Q.url(avatar.iconUrl(400));
-                        if(src != null) {
-                            var avatarImg = new Image();
-                            avatarImg.src = src;
-                            log('setUserAvatar set');
-                            let avatarCon = document.createElement('DIV');
-                            avatarCon.className = 'Streams_webrtc_preparing_camera-preview-avatar-con';
-                            avatarCon.appendChild(avatarImg);
-                            cameraPreview.innerHTML = '';
-                            cameraPreview.appendChild(avatarCon);
-                            usersAvatar = avatarCon;
-
-                        }
-                    });
-                }
-            }
-
-
-            var gotDevicesList = function(mediaDevices) {
-                var videoDevices = 0;
-                var audioDevices = 0;
-                for(var i in mediaDevices) {
-                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
-                        videoDevices++;
-                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
-                        audioDevices++;
-                    }
-                }
-
-                var mediaDevicesDialog = document.createElement('DIV');
-                mediaDevicesDialog.className = 'Streams_webrtc_preparing_dialog_inner';
-
-                if(Q.info.isMobile){
-                    var close=document.createElement('div');
-                    close.className = 'Streams_webrtc_popup-close-dialog-sign';
-                    close.innerHTML = '&#10005;';
-                    close.addEventListener('click', function() {
-                        let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
-                        if(preparingScreen != null && preparingScreen.parentNode != null) preparingScreen.parentNode.removeChild(preparingScreen);
-                        if(checkStatusInterval) {
-                            clearInterval(checkStatusInterval);
-                            checkStatusInterval = null;
-                        }
-                        switchMic(true);
-                        switchCamera(true);
-                        switchScreenshare(true);
-                        Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
-                        if(closeCallback != null) closeCallback();
-                    });
-                    mediaDevicesDialog.appendChild(close);
-                }
-
-
-                var cameraPreview = document.createElement('DIV');
-                cameraPreview.className = 'Streams_webrtc_preparing_camera-preview';
-
-                var buttonsCon = document.createElement('DIV');
-                buttonsCon.className = 'Streams_webrtc_devices_dialog_buttons_con';
-                var buttonsInner = document.createElement('DIV');
-                buttonsInner.className = 'Streams_webrtc_devices_dialog_buttons_inner_con';
-
-                if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
-                    buttonsCon.style.position = 'relative';
-                    mediaDevicesDialog.classList.add('Streams_webrtc_preparing_dialog_inner_cordova');
-                    mediaDevicesDialog.style.background = 'black';
-                }
-
-                var switchMicBtn = document.createElement('DIV');
-                switchMicBtn.type = 'button';
-                switchMicBtn.className = 'Streams_webrtc_prep-switch-mic';
-                switchMicBtn.innerHTML = disabledMicSVG;
-
-                var switchCameraBtn = document.createElement('DIV');
-                switchCameraBtn.type = 'button';
-                switchCameraBtn.className = 'Streams_webrtc_prep-switch-camera';
-                switchCameraBtn.innerHTML = disabledCameraSVG;
-
-                var switchScreenSharingBtn = document.createElement('DIV');
-                switchScreenSharingBtn.type = 'button';
-                switchScreenSharingBtn.className = 'Streams_webrtc_prep-switch-screen';
-                switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
-
-                var joinButtonCon = document.createElement('DIV');
-                joinButtonCon.className = 'Streams_webrtc_join-button-con';
-                var joinButton = document.createElement('DIV');
-                joinButton.type = 'button';
-                joinButton.className = 'Q_button Streams_webrtc_join-button';
-                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", _textes);
-
-
-                //meetingStatus.appendChild(participantsIcon);
-                mediaDevicesDialog.appendChild(cameraPreview);
-                buttonsInner.appendChild(switchMicBtn);
-                buttonsInner.appendChild(switchCameraBtn);
-                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsInner.appendChild(switchScreenSharingBtn);
-                buttonsCon.appendChild(buttonsInner);
-                mediaDevicesDialog.appendChild(buttonsCon);
-                joinButtonCon.appendChild(joinButton);
-                mediaDevicesDialog.appendChild(joinButtonCon);
-                //mediaDevicesDialog.appendChild(breakEl);
-
-                setAvatarOnPreview(cameraPreview);
-
-                var switchMic = function (off) {
-                    if(audioDevices == 0) {
-                        Q.alert('Audio input devices were not found on your device.')
-                        return
-                    }
-
-                    let audioIsAlreadyEnabled = false;
-                    for(let s in preJoiningStreams) {
-                        if(preJoiningStreams[s].kind == 'audio') {
-                            audioIsAlreadyEnabled = s;
-                        }
-                    }
-                    log('switchMic: audioIsAlreadyEnabled ' +  audioIsAlreadyEnabled)
-
-                    if(audioIsAlreadyEnabled === false && off == null) {
-                        log('switchMic: getUserMedia: before')
-
-                        var preStream = {kind:'audio', stream:null};
-                        preJoiningStreams.push(preStream);
-
-                        md.getUserMedia({audio:true})
-                            .then(function (stream) {
-                                log('switchMic: getUserMedia: got stream')
-
-                                preStream.stream = stream;
-                                switchMicBtn.innerHTML = micSVG;
-                                _options.startWith.audio = true;
-                            }).catch(function (err) {
-                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
-                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
-                                if(preJoiningStreams[s] == preStream) {
-                                    preJoiningStreams.splice(s, 1);
-                                }
-                            }
-                            console.error(err.name + ": " + err.message);
-                        });
-                    } else if(audioIsAlreadyEnabled !== false && preJoiningStreams[audioIsAlreadyEnabled].stream != null) {
-                        log('switchMic: audioIsAlreadyEnabled ' + audioIsAlreadyEnabled)
-
-                        let tracks = preJoiningStreams[audioIsAlreadyEnabled].stream.getAudioTracks();
-                        for(let t in tracks) {
-                            tracks[t].stop();
-                        }
-
-                        preJoiningStreams.splice(audioIsAlreadyEnabled, 1);
-                        switchMicBtn.innerHTML = disabledMicSVG;
-                        _options.startWith.audio = false;
-                    }
-                }
-
-                if(_options.showPreparingDialogue.audio === true) switchMic();
-
-                switchMicBtn.addEventListener('mouseup', function () {
-                    switchMic();
-                });
-
-                var switchCamera = function (off) {
-                    if(videoDevices == 0) {
-                        Q.alert('Video input devices were not found on your device.')
-                        return
-                    }
-
-                    let cameraIsAlreadyEnabled = false;
-                    for(let s in preJoiningStreams) {
-                        if(preJoiningStreams[s].kind == 'camera') {
-                            cameraIsAlreadyEnabled = s;
-                        }
-                    }
-
-                    if(cameraIsAlreadyEnabled === false && off == null) {
-                        log('switchCamera: getUserMedia: before')
-
-                        var preStream = {kind:'camera', stream:null};
-                        preJoiningStreams.push(preStream);
-
-                        let constraints;
-                        if(Q.info.isCordova) {
-                            constraints = {
-                                'audio': false,
-                                'video': {
-                                    width: { min: 320, max: 1280 },
-                                    height: { min: 240, max: 720 }
-                                }
-                            }
-                        } else {
-                            constraints = {video:true};
-                        }
-                        md.getUserMedia(constraints)
-                            .then(function (stream) {
-                                preStream.stream = stream;
-                                let videoPreview = document.createElement('video');
-                                let screenVideo = cameraPreview.querySelector('video');
-                                try {
-                                    videoPreview.srcObject = stream;
-
-                                } catch (e) {
-                                    console.error(e);
-                                }
-
-                                videoPreview.setAttributeNode(document.createAttribute('autoplay'));
-                                videoPreview.setAttributeNode(document.createAttribute('playsinline'));
-                                if(screenVideo != null) {
-                                    screenVideo.parentElement.insertBefore(videoPreview, screenVideo);
-                                } else {
-                                    cameraPreview.innerHTML = '';
-                                    cameraPreview.appendChild(videoPreview);
-                                }
-
-                                if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
-                                    cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
-                                }
-
-
-
-                                videoPreview.play().then((e) => {
-                                    console.log('camera: play func success')
-                                }).catch((e) => {
-                                    console.error(e)
-                                    console.log('camera: play func error')
-                                });
-
-                                videoPreview.addEventListener('canplay', function () {
-                                    console.log('camera: canplay')
-                                });
-                                videoPreview.addEventListener('emptied', function () {
-                                    console.log('camera: emptied')
-                                });
-                                videoPreview.addEventListener('loadeddata', function () {
-                                    console.log('camera: loadeddata')
-                                });
-                                videoPreview.addEventListener('loadedmetadata', function () {
-                                    console.log('camera: loadedmetadata')
-                                });
-                                videoPreview.addEventListener('loadstart', function () {
-                                    console.log('camera: loadstart')
-                                });
-                                videoPreview.addEventListener('play', function () {
-                                    console.log('camera: play')
-                                });
-                                switchCameraBtn.innerHTML = cameraSVG;
-                                _options.startWith.video = true;
-                            }).catch(function (err) {
-                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
-                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
-                                if(preJoiningStreams[s] == preStream) {
-                                    preJoiningStreams.splice(s, 1);
-                                }
-                            }
-                            console.error(err.name + ": " + err.message);
-
-                        });
-                    } else if(cameraIsAlreadyEnabled !== false && preJoiningStreams[cameraIsAlreadyEnabled].stream != null) {
-                        log('switchCamera: cameraIsAlreadyEnabled ' + cameraIsAlreadyEnabled)
-
-                        let tracks = preJoiningStreams[cameraIsAlreadyEnabled].stream.getVideoTracks();
-                        for(let t in tracks) {
-                            tracks[t].stop();
-                        }
-                        preJoiningStreams.splice(cameraIsAlreadyEnabled, 1);
-                        switchCameraBtn.innerHTML = disabledCameraSVG;
-                        let screenVideo = cameraPreview.querySelectorAll('video');
-                        if(screenVideo.length == 2) {
-                            cameraPreview.removeChild(cameraPreview.firstChild);
-                        } else {
-                            setAvatarOnPreview(cameraPreview);
-                        }
-                        _options.startWith.video = false;
-                    }
-
-                }
-                if(_options.showPreparingDialogue.video === true) switchCamera();
-                switchCameraBtn.addEventListener('mouseup', function () {
-                    switchCamera();
-                });
-
-                var switchScreenshare = function (off) {
-                    let screenIsAlreadyEnabled = false;
-                    for(let s in preJoiningStreams) {
-                        if(preJoiningStreams[s].kind == 'screen') {
-                            screenIsAlreadyEnabled = s;
-                        }
-                    }
-
-                    var getUserScreen = function() {
-                        if(navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
-
-                            if(navigator.mediaDevices.getDisplayMedia) {
-                                return navigator.mediaDevices.getDisplayMedia({video: true});
-                            }
-                            else if(navigator.getDisplayMedia) {
-                                return navigator.getDisplayMedia({video: true})
-                            }
-                            return;
-                        }
-                    }
-
-                    if(screenIsAlreadyEnabled === false && off == null) {
-                        log('switchScreenshare: getUserScreen: before')
-
-                        var preStream = {kind:'screen', stream:null};
-                        preJoiningStreams.push(preStream);
-
-                        getUserScreen().then(function (stream) {
-                            stream.getVideoTracks()[0].contentHint = 'detail';
-                            preStream.stream = stream;
-                            let screenPreview = document.createElement('video');
-                            let cameraVideos = cameraPreview.querySelector('video');
-                            if(cameraVideos != null) {
-                                cameraPreview.appendChild(screenPreview);
-                            } else {
-                                cameraPreview.innerHTML = '';
-                                cameraPreview.appendChild(screenPreview);
-                            }
-
-                            if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
-                                cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
-                            }
-
-                            screenPreview.srcObject = stream;
-                            screenPreview.setAttributeNode(document.createAttribute('autoplay'));
-                            screenPreview.setAttributeNode(document.createAttribute('playsinline'));
-
-                            switchScreenSharingBtn.innerHTML = screenSharingSVG;
-                            screenPreview.play().then((e) => {
-                                console.log('screen: play func success')
-                            }).catch((e) => {
-                                console.error(e)
-                                console.log('screen: play func error')
-
-                            });
-
-                            _options.startWith.video = true;
-                        }).catch(function(error) {
-                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
-                                if(preJoiningStreams[s] == preStream) {
-                                    preJoiningStreams.splice(s, 1);
-                                }
-                            }
-                            console.error(error.name + ': ' + error.message);
-                        });
-                    } else if(screenIsAlreadyEnabled !== false && preJoiningStreams[screenIsAlreadyEnabled].stream != null) {
-                        log('switchScreenshare: getUserScreen: screenIsAlreadyEnabled ' + screenIsAlreadyEnabled)
-
-                        let tracks = preJoiningStreams[screenIsAlreadyEnabled].stream.getVideoTracks();
-                        for(let t in tracks) {
-                            tracks[t].stop();
-                        }
-
-                        preJoiningStreams.splice(screenIsAlreadyEnabled, 1);
-                        switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
-                        let screenVideo = cameraPreview.querySelectorAll('video');
-                        if(screenVideo.length == 2) {
-                            cameraPreview.removeChild(cameraPreview.lastChild);
-                        } else {
-                            setAvatarOnPreview(cameraPreview);
-                        }
-                        _options.startWith.video = false;
-                    }
-
-                }
-                if(_options.showPreparingDialogue.screen === true) switchScreenshare();
-                switchScreenSharingBtn.addEventListener('mouseup', function () {
-                    switchScreenshare();
-                });
-
-                //var roomId = _options.roomId != null ? _options.roomId : null;
-                //if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
-
-                function checkmeetingStatus() {
-
-                    Q.req("Streams/webrtc", ["status"], function (err, response) {
-                        var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                        if (msg) {
-                            return Q.alert(msg);
-                        }
-
-                        if(!response.slots) return;
-                        let stream = response.slots.status.stream;
-                        let live = response.slots.status.live;
-                        if(live) {
-                            if(connectionState) {
-                                connectionState.updateStatus('Room is live');
-                            }
-                        } else {
-                            if(connectionState){
-                                connectionState.updateStatus('Room is offline');
-                            }
-                        }
-                    }, {
-                        method: 'get',
-                        fields: {
-                            roomId: _options.roomId,
-                            publisherId: _options.roomPublisherId,
-                        }
-                    });
-                }
-                if(_options.roomId != null && _options.roomPublisherId != null) {
-                    checkmeetingStatus();
-                    var checkStatusInterval = setInterval(checkmeetingStatus, 3000);
-                }
-
-                var joinAction = false;
-                var joinNow = function() {
-                    if(_options.streams == null) {
-                        _options.streams = [];
-                    }
-
-                    let audioEnabled = false;
-                    for(let s in preJoiningStreams) {
-                        if(preJoiningStreams[s].kind == 'audio') {
-                            audioEnabled = true;
-                        }
-                    }
-                    if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && audioEnabled == false) {
-                        if(connectionState) connectionState.show('You should to turn microphone on to be able to join');
-                        return;
-                    }
-
-                    for(let s in preJoiningStreams) {
-                        _options.streams.push(preJoiningStreams[s].stream);
-                    }
-
-                    joinAction = true;
-                    var dialog = Q.Dialogs.pop();
-                    joinAction = false;
-                    //if(dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
-
-                    if(checkStatusInterval) {
-                        clearInterval(checkStatusInterval);
-                        checkStatusInterval = null;
-                    }
-
-                    let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
-                    if(preparingScreen != null && preparingScreen.parentNode != null) preparingScreen.parentNode.removeChild(preparingScreen);
-                    if(callback != null) callback()
-                }
-
-                joinButton.addEventListener('mouseup', joinNow);
-
-
-                if(Q.info.isMobile && !Q.info.isCordova) {
-                    var screen = document.createElement('DIV')
-                    screen.className = 'Streams_webrtc_preparing_screen';
-                    screen.appendChild(mediaDevicesDialog);
-                    if( _options.element != null) document.body.appendChild(screen);
-                } else {
-
-
-                    Q.Dialogs.push({
-                        title: 'Turn camera or mic on/off before you join',
-                        className: 'Streams_webrtc_preparing_dialog',
-                        content: mediaDevicesDialog,
-                        apply: false,
-                        mask: false,
-                        hidePrevious:true,
-                        removeOnClose: true,
-                        beforeClose: function() {
-                            if(joinAction) return;
-                            if(checkStatusInterval) {
-                                clearInterval(checkStatusInterval);
-                                checkStatusInterval = null;
-                            }
-                            switchMic(true);
-                            switchCamera(true);
-                            switchScreenshare(true);
-                            Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
-                            if(closeCallback != null) closeCallback();
-
-                        },
-                        onClose:function () {
-
-                        },
-                    });
-                }
-
-
-
-            }
-            if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
-                cordova.plugins.iosrtc.enumerateDevices().then(gotDevicesList)
-            } else {
-                navigator.mediaDevices.enumerateDevices().then(gotDevicesList)
-            }
-
-        }
-
-        /**
-         * Prepare media tracks while user are joining the room and publish them after user is joined the room.
-         * @method publishMediaTracks
-         */
-        function publishMediaTracks(constrains, callback) {
-            log('publishMediaTracks: video = ' + (constrains != null && constrains.video))
-            log('publishMediaTracks: audio = ' + (constrains != null && constrains.audio))
-
-            if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
-                cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
-                    var mediaDevices = mediaDevicesList;
-
-                    var videoDevices = 0;
-                    var audioDevices = 0;
-                    for (var i in mediaDevices) {
-                        if (mediaDevices[i].kind.indexOf('video') != -1) {
-                            videoDevices++;
-                        } else if (mediaDevices[i].kind.indexOf('audio') != -1) {
-                            audioDevices++;
-                        }
-                    }
-
-                    var showInstructionsDialogIos = function(kind) {
-                        var instructionsPermissionDialog = document.createElement('DIV');
-                        instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
-                        var dialogList = document.createElement('OL');
-                        dialogList.className = 'Streams_webrtc_instructions_dialog';
-                        dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
-                        instructionsPermissionDialog.appendChild(dialogList);
-                        Q.Dialogs.push({
-                            title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
-                            className: 'Streams_webrtc_devices_dialog',
-                            content: instructionsPermissionDialog,
-                            apply: true
-                        });
-                    }
-
-                    var publishStreams = function (streams) {
-                        if (_options.streams != null) return;
-                        if (WebRTCconference != null) {
-                            _options.streams = streams;
-                            var publishTracks = function () {
-                                for (var s in streams) {
-                                    var tracks = streams[s].getTracks();
-                                    for (var t in tracks) {
-                                        WebRTCconference.localMediaControls.addTrack(tracks[t], streams[s]);
-                                    }
-                                }
-
-                                navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                                    WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
-                                }).catch(function (e) {
-                                    console.error('ERROR: cannot get device info: ' + e.message);
-                                });
-                            }
-
-                            if (WebRTCconference.state == 'connected') {
-                                log('publishMediaTracks: got stream: publishTracks');
-
-                                publishTracks();
-                                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-                            } else {
-                                log('publishMediaTracks: got stream: delay publishing');
-
-                                WebRTCconference.event.on('joined', function () {
-                                    publishTracks();
-                                    if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-                                });
-                            }
-                        } else if (_options.streams == null) {
-                            log('publishMediaTracks: got stream: add to options');
-
-                            _options.streams = streams;
-                            window.sstream = streams;
-
-                        }
-                    }
-
-                    var requestVideoStream = function (callback) {
-                        cordova.plugins.iosrtc.getUserMedia(
-                            {
-                                video: true,
-                                audio: false
-                            },
-                            function (stream) {
-                                log('requestVideoStream: got stream');
-                                if(callback != null) callback(stream);
-                            },
-                            function (error) {
-                                showInstructionsDialogIos('Camera');
-                                console.error(error);
-                            }
-                        );
-                    }
-
-                    var requestAudioStream = function (callback) {
-                        cordova.plugins.iosrtc.getUserMedia(
-                            {
-                                video: false,
-                                audio: true
-                            },
-                            function (stream) {
-                                log('publishMediaTracks: got stream');
-                                if(callback != null) callback(stream);
-                            },
-                            function (error) {
-                                showInstructionsDialogIos('Microphone');
-                                console.error(error);
-                            }
-                        );
-                    }
-
-                    if(_options.startWith.video && videoDevices != 0 && _options.startWith.audio && audioDevices != 0) {
-                        requestVideoStream(function (videoStream) {
-                            requestAudioStream(function (audioStream) {
-                                publishStreams([videoStream, audioStream]);
-                            });
-                        });
-                    } else if(_options.startWith.video && videoDevices != 0) {
-                        requestVideoStream(function (videoStream) {
-                            publishStreams([videoStream]);
-                        });
-                    } else if(_options.startWith.audio && audioDevices != 0) {
-                        requestAudioStream(function (audioStream) {
-                            publishStreams([audioStream]);
-                        });
-                    }
-
-
-                })
-                return;
-            }
-
-
-            navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                var videoDevices = 0;
-                var audioDevices = 0;
-                for(var i in mediaDevices) {
-                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
-                        videoDevices++;
-                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
-                        audioDevices++;
-                    }
-                }
-
-                if(!Q.info.isMobile && !Q.info.isTablet && (!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices == 0)) return;
-
-                navigator.mediaDevices.getUserMedia({video:constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
-                    .then(function (stream) {
-                        if(_options.streams != null) return;
-                        Q.Dialogs.pop();
-                        if(WebRTCconference != null){
-                            log('publishMediaTracks: stream is being added the room', stream);
-
-                            _options.streams = [stream];
-                            var publishTracks = function() {
-                                var tracks = stream.getTracks();
-                                log('publishMediaTracks: addTrack ', tracks);
-
-                                for(var t in tracks) {
-                                    WebRTCconference.localMediaControls.addTrack(tracks[t], stream);
-                                }
-
-                                navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
-                                    WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
-                                }).catch(function (e) {
-                                    console.error('ERROR: cannot get device info: ' + e.message);
-                                });
-                            }
-
-                            if(WebRTCconference.state == 'connected') {
-                                publishTracks();
-                                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-                            } else {
-                                WebRTCconference.event.on('joined', function () {
-                                    publishTracks();
-                                    if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
-                                });
-                            }
-                        } else if (_options.streams == null) {
-                            log('publishMediaTracks: stream is added to options', stream);
-                            _options.streams = [stream];
-                            if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
-                                if(callback != null) callback();
-                                return;
-                            }
-                            if(callback != null) callback();
-                        }
-                    }).catch(function(err) {
-                    console.error(err.name + ": " + err.message);
-                    if(err.name == 'NotAllowedError') showInstructionsDialog('camera/microphone');
-                });
-            }).catch(function (e) {
-                console.error('ERROR: cannot get device info: ' + e.message);
-            });
-        }
-
-
-        /**
-         * Update stream participant's data after user got socket id
-         * @method updateParticipantData
-         */
-        function updateParticipantData() {
-            Q.req("Streams/webrtc", ["updateParticipantSid"], function (err, response) {
-                var msg = Q.firstErrorMessage(err, response && response.errors);
-
-                if (msg) {
-                    return Q.alert(msg);
-                }
-
-            }, {
-                method: 'put',
-                fields: {
-                    streamName: _roomStream.fields.name,
-                    publisherId: _options.roomPublisherId,
-                    participantSid: WebRTCconference.localParticipant().sid
-                }
-            })
-        }
-
-        /**
-         * Init conference using own node.js server for signalling process.
-         * @method initWithStreams
-         * @param {Object} [turnCredentials] Creadentials that are needed to use TURN server.
-         * @param {String} [turnCredentials.url] Address of TURN server
-         * @param {String} [turnCredentials.credential] Passphrase
-         * @param {String} [turnCredentials.username] Username
-         */
-        function initWithNodeServer(socketServer, turnCredentials) {
-            log('initWithNodeServer');
-
-
-            var initConference = function(){
-                log('initWithNodeServer: initConference');
-
-                if(typeof window.WebRTCRoomClient == 'undefined') return;
-                var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
-                var roomStartTime = _roomStream.getAttribute('startTime');
-                log('initWithNodeServer: initConference: roomId = ' + roomId)
-                log('initWithNodeServer: initConference: roomStartTime = ' + roomStartTime)
-                log('initWithNodeServer: initConference: _roomStream = ', _roomStream)
-
-                WebRTCconference = new WebRTCRoomClient({
-                    mode:'node',
-                    useAsLibrary: true,
-                    socket: Q.Socket,
-                    nodeServer: socketServer,
-                    roomName: roomId,
-                    roomStartTime: roomStartTime,
-                    roomPublisher: _roomStream.getAll().publisherId,
-                    sid: Q.Users.loggedInUser.id,
-                    username:  Q.Users.loggedInUser.id + '\t' + _roomStartTime,
-                    video: false,
-                    audio: false,
-                    startWith: _options.startWith,
-                    streams: _options.streams != null ? _options.streams : null,
-                    sounds: _options.sounds != null ? _options.sounds : null,
-                    onlyOneScreenSharingAllowed: _options.onlyOneScreenSharingAllowed,
-                    liveStreaming: _options.liveStreaming,
-                    showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
-                    turnCredentials: turnCredentials,
-                    debug: _debug
-                });
-
-                bindConferenceEvents(WebRTCconference);
-                log('initWithNodeServer: initConference: start init');
-
-                WebRTCconference.init(function (app) {
-                    log('initWithNodeServer: initConference: inited');
-                    updateParticipantData();
-                    connectionState.hide();
-                    _debugTimer.loadEnd = performance.now();
-
-                    screensRendering.updateLayout();
-                    Q.handle(_options.onWebRTCRoomCreated, webRTCInstance);
-                    /*if(Q.info.isCordova) {
-                        cordova.plugins.CordovaCall.connectCall();
-                    }*/
-                    Q.activate(
-                        document.body.appendChild(
-                            Q.Tool.setUpElement(
-                                "div", // or pass an existing element
-                                "Streams/webrtc/controls",
-                                {
-                                    webRTClibraryInstance: WebRTCconference,
-                                    webrtcClass: webRTCInstance,
-                                    onCreate: function () {
-                                        Q.handle(_options.onWebrtcControlsCreated, this);
-                                    }
-                                }
-
-                            )
-                        ),
-                        {},
-                        function () {
-                            log('initWithNodeServer: initConference: activate controls');
-
-
-                            _controls = this.element;
-                            _controlsTool = this;
-                            screensRendering.updateLayout();
-
-                            var moveWithinArea = 'window';
-                            var columnsTools = Q.Tool.byName('Q/columns');
-                            var dashboard = document.getElementById('dashboard_slot');
-                            var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
-                            var updateArearectangle = function () {
-
-                                var moveWithinArea;
-                                if(Object.keys(columnsTools).length == 0 && dashboard) {
-                                    log('initWithNodeServer: initConference: activate controls: no columns');
-                                    var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
-
-                                    var windowWidth =  window.innerWidth;
-                                    var windowHeight =  window.innerHeight;
-                                    var dashboardHeight =  dashboard.offsetHeight;
-                                    log('initWithNodeServer: initConference: activate controls: no columns', windowWidth, windowHeight, dashboardHeight);
-
-                                    if(dashboardPos == 'bottom') {
-                                        moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
-                                    } else if(dashboardPos == 'top') {
-                                        moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
-                                    }
-                                } else {
-                                    log('initWithNodeServer: initConference: activate controls: columns != 0');
-
-                                    var currentColumn = columnsTool.state.$currentColumn.get()[0];
-                                    moveWithinArea = currentColumn.getBoundingClientRect();
-                                }
-
-                                return moveWithinArea;
-                            }
-
-                            if(Q.info.isMobile) {
-                                moveWithinArea = updateArearectangle();
-                            }
-
-                            log('initWithNodeServer: initConference: activate controls: moveWithinArea', moveWithinArea);
-
-
-                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    _controls.firstChild, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        resize: false,
-                                        active: true,
-                                        ignoreOnElements: elementsToIgnore,
-                                        elementPosition: 'fixed',
-                                        snapToSidesOnly: true,
-                                        moveWithinArea: moveWithinArea, //window/parent/DOMRect
-                                        onMovingStart: function () {
-                                            _controls.classList.add('isMoving');
-                                        },
-                                        onMovingStop: function () {
-                                            _controls.classList.remove('isMoving');
-                                        },
-                                        onMoved: function () {
-                                            screensRendering.updateLayout();
-                                        }
-                                    }
-                                ),
-                                {},
-                                function () {
-                                    log('initWithNodeServer: initConference: activated controls', this);
-
-                                    var resizeTool = this;
-                                    if(columnsTool && Q.info.isMobile) {
-                                        columnsTool.state.onActivate.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-                                        columnsTool.state.onClose.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-
-                                    }
-
-                                    if(typeof screen != 'undefined' && screen.orientation != null) {
-                                        screen.orientation.addEventListener("change", function () {
-                                            setTimeout(function () {
-                                                var moveWithinArea = updateArearectangle();
-                                                resizeTool.setContainerRect(moveWithinArea);
-                                                screensRendering.updateLayout();
-                                            }, 1000);
-                                        });
-                                    }
-
-                                    window.addEventListener("resize", function() {
-                                        setTimeout(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        }, 1000);
-                                    });
-
-                                    if(_options.controlsPosition == 'top') {
-                                        this.snapTo('top');
-                                    } else if(_options.controlsPosition == 'bottom') {
-                                        this.snapTo('bottom');
-                                    } else if(_options.controlsPosition == 'left') {
-                                        this.snapTo('left');
-                                    } else if(_options.controlsPosition == 'right') {
-                                        this.snapTo('right');
-                                    } else {
-                                        this.snapTo('bottom');
-                                        /*var dashboard = document.getElementById('dashboard_slot');
-                                        if(dashboard && Q.info.isMobile && !Q.info.isTablet) {
-                                            var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
-                                            if(dashboardPos == 'top') {
-                                                this.snapTo('bottom');
-                                            } else if (dashboardPos == 'bottom') {
-                                                this.snapTo('top');
-                                            }
-
-                                        }*/
-                                    }
-                                }
-                            );
-                        }
-                    );
-                });
-            }
-
-            var findScript = function (src) {
-                var scripts = document.getElementsByTagName('script');
-                var src = Q.url(src);
-                for (var i=0; i<scripts.length; ++i) {
-                    var srcTag = scripts[i].getAttribute('src');
-                    if (srcTag && srcTag.indexOf(src) != -1) {
-                        return true;
-                    }
-                }
-                return null;
-            };
-
-            if(findScript('{{Streams}}/js/tools/webrtc/app.js')) {
-                log('initWithNodeServer: app.js exists');
-
-                initConference();
-            } else {
-                log('initWithNodeServer: add app.js');
-                Q.addScript([
-                    "{{Streams}}/js/tools/webrtc/app.js?time=" + Date.now(),
-                    "{{Streams}}/js/tools/webrtc/RecordRTC.js",
-                ], function () {
-                    initConference();
-                });
-            }
-
-        }
-
-        var youtubeApi = (function () {
-            var api = {};
-            var CLIENT_ID = '';
-            var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
-            var SCOPES = 'https://www.googleapis.com/auth/youtube.upload https://www.googleapis.com/auth/youtube';
-            var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
-            var ACCESS_TOKEN;
-
-            var defchannel = 'dechguyweb';
-
-            function updateSigninStatus(isSignedin) {
-                if(isSignedin) {
-                    ACCESS_TOKEN = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
-                } else {
-                    ACCESS_TOKEN = null;
-                }
-            }
-
-            api.login = function () {
-                gapi.auth2.getAuthInstance().signIn();
-            }
-
-            api.logOut = function ()  {
-                gapi.auth2.getAuthInstance().signOut();
-            }
-
-            api.getChannel = function (channel) {
-                gapi.client.youtube.channels.list({
-                    'part': 'snippet,contentDetails,statistics',
-                    'forUsername': 'GoogleDevelopers'
-                }).then(function(response) {
-                    console.log(response);
-                });
-            }
-
-            function initClient() {
-                gapi.client.init({
-                    discoveryDocs: DISCOVERY_DOCS,
-                    clientId: CLIENT_ID,
-                    scope: SCOPES
-                }).then(function () {
-                    // Listen for sign-in state changes.
-                    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-                    // Handle the initial sign-in state.
-                    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
-                    /*authorizeButton.onclick = handleAuthClick;
-					signoutButton.onclick = handleSignoutClick;*/
-                });
-            }
-
-            api.handleClientLoad = function () {
-                gapi.load('client:auth2', initClient);
-
-                Q.addScript([
-                    "{{Streams}}/js/tools/webrtc/upload_video.js",
-                    "{{Streams}}/js/tools/webrtc/cors_upload.js"
-                ], function () {
-
-                });
-            }
-
-            return api;
-        }())
 
         /**
          * Render screens of all participants in the room
@@ -2507,72 +862,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     WebRTCconference.mediaManager.audioVisualization.removeCommonVisualization();
                 }
             })
-
-            function HookSystem(){
-
-                var events = {};
-
-                var CustomEvent = function (eventName) {
-
-                    this.eventName = eventName;
-                    this.callbacks = [];
-
-                    this.registerCallback = function(callback) {
-                        this.callbacks.push(callback);
-                    }
-
-                    this.unregisterCallback = function(callback) {
-                        const index = this.callbacks.indexOf(callback);
-                        if (index > -1) {
-                            this.callbacks.splice(index, 1);
-                        }
-                    }
-
-                    this.fire = function(data) {
-                        const callbacks = this.callbacks.slice(0);
-                        callbacks.forEach((callback) => {
-                            callback(data);
-                        });
-                    }
-                }
-
-                var dispatch = function(eventName, data) {
-                    const event = events[eventName];
-                    if (event) {
-                        event.fire(data);
-                    }
-                }
-
-                var on = function(eventName, callback) {
-                    let event = events[eventName];
-                    if (!event) {
-                        event = new CustomEvent(eventName);
-                        events[eventName] = event;
-                    }
-                    event.registerCallback(callback);
-                }
-
-                var off = function(eventName, callback) {
-                    const event = events[eventName];
-                    if (event && event.callbacks.indexOf(callback) > -1) {
-                        event.unregisterCallback(callback);
-                        if (event.callbacks.length === 0) {
-                            delete events[eventName];
-                        }
-                    }
-                }
-
-                var destroy = function () {
-                    events = {};
-                }
-
-                return {
-                    dispatch:dispatch,
-                    on:on,
-                    off:off,
-                    destroy:destroy
-                }
-            }
 
             var Screen = function () {
                 this.sid = null;
@@ -4967,299 +3256,994 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  * @return {Array} List of DOMRects that will be passed to Q.layout.
                  */
                 minimizedOrMaximizedScreenGrid: function minimizedOrMaximizedScreenGrid(container, count, elementToWrap, maximized) {
-                        log('minimizedOrMaximizedScreenGrid', container, count, _layoutTool.currentRects.length)
-                        var wrapElement = elementToWrap;
-                        var elementToWrap = elementToWrap.getBoundingClientRect();
+                    log('minimizedOrMaximizedScreenGrid', container, count, _layoutTool.currentRects.length)
+                    var wrapElement = elementToWrap;
+                    var elementToWrap = elementToWrap.getBoundingClientRect();
 
-                        if(roomScreens.length == 0) return;
-                        var rebuild;
+                    if(roomScreens.length == 0) return;
+                    var rebuild;
 
-                        var prevElPos = _layoutTool.elementToWrapPosition;
+                    var prevElPos = _layoutTool.elementToWrapPosition;
 
-                        if((prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left))
-                            || (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid')) {
-                            _layoutTool.currentRects = [];
-                            _layoutTool.state.currentMappedRects = [];
-                            rebuild = true;
+                    if((prevElPos != null && (elementToWrap.top != prevElPos.top || elementToWrap.left != prevElPos.left))
+                        || (_layoutTool.state.currentGenerator != 'maximizedScreensGrid' && _layoutTool.state.currentGenerator != 'minimizedScreensGrid')) {
+                        _layoutTool.currentRects = [];
+                        _layoutTool.state.currentMappedRects = [];
+                        rebuild = true;
+                    }
+                    _layoutTool.elementToWrapPosition = elementToWrap;
+
+                    var rectWidth = 90;
+                    var rectHeight = 90;
+                    var spaceBetween = 10;
+                    var defaultSide = 'top-full';
+
+                    var containerRect = container.getBoundingClientRect();
+                    var parentWidth = containerRect.width;
+                    var parentHeight = containerRect.height;
+
+                    if(!maximized) {
+                        _layoutTool.state.currentGenerator = 'minimizedScreensGrid';
+                    } else {
+                        _layoutTool.state.currentGenerator = 'maximizedScreensGrid';
+                    }
+
+                    if(_layoutTool.basicGridRects.length < count || rebuild) {
+                        _layoutTool.basicGridRects = build(container, count, elementToWrap, maximized);
+                    }
+
+                    if(_layoutTool.currentRects.length == 0 || rebuild) {
+                        _layoutTool.currentRects = build(container, count, elementToWrap, maximized);
+                    } else {
+
+                        if(count > _layoutTool.currentRects.length) {
+                            var availableRects = addAndUpdate(container, count, elementToWrap, maximized);
+                            _layoutTool.currentRects = _layoutTool.currentRects.concat(availableRects);
+
+                        } else if(count < _layoutTool.currentRects.length) {
+                            _layoutTool.currentRects = removeAndUpdate(container, count, elementToWrap, maximized);
                         }
-                        _layoutTool.elementToWrapPosition = elementToWrap;
+                    }
+
+                    if(maximized || (activeScreen != null && maximized != false)) {
+                        _layoutTool.currentRects = maximizeScreen();
+                    } else if(!maximized) {
+                        _layoutTool.currentRects = minimizeScreen();
+                    }
+
+                    return  _layoutTool.currentRects;
+
+                    function getControlsAlign() {
+
+                        if(!document.body.contains(wrapElement)) return defaultSide;
+                        //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                        var parentHeight = containerRect.height;
+
+                        if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top < parentHeight / 2) {
+                            return 'topleft';
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top > parentHeight / 2) {
+                            return 'bottomleft';
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top < parentHeight / 2) {
+                            return 'topright';
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top > parentHeight / 2) {
+                            return 'bottomright';
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_top')) {
+                            return 'top';
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_bottom')) {
+                            return 'bottom';
+                        } else {
+                            return 'bottom';
+                        }
+                    }
+
+                    function maximizeScreen(){
+                        var indexToMaximize;
+
+                        for(let s in roomScreens) {
+                            if(activeScreen == roomScreens[s]) {
+                                indexToMaximize = s;
+                                break;
+                            }
+                        }
+
+                        var currentMaximizedIndex;
+                        if(_layoutTool.maximizedScreen != null) {
+                            for(let s in roomScreens) {
+                                if(_layoutTool.maximizedScreen == roomScreens[s]) {
+                                    currentMaximizedIndex = s;
+                                    break;
+                                }
+                            }
+                        }
+
+                        var align = getControlsAlign();
+
+                        if(activeScreenRect != null) {
+                            var rectsToTakeInc = _layoutTool.currentRects.filter(function(r, i){
+                                return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
+                                && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
+                            });
+                            var minY = Math.min.apply(Math, rectsToTakeInc.map(function(o) { return o.y; }));
+                            var maxY = Math.max.apply(Math, rectsToTakeInc.map(function(o) { return o.y + o.height; }));
+                        } else {
+                            var minY = Math.min.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y; }));
+                            var maxY = Math.max.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y + o.height; }));
+                        }
+
+
+                        var y, baseHeight;
+                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                            baseHeight = (minY - spaceBetween) - 50;
+                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                            baseHeight = parentHeight - (maxY + spaceBetween) - 50;
+                        }
+                        var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
+                        var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
+
+                        var mainScreenSize = getElementSizeKeepingRatio({
+                            width: videoWidth,
+                            height: videoHeight
+                        }, {width: parentWidth / 100 * 90, height: Math.min(baseHeight - 50, ((parentHeight - (align == 'top' || align == 'bottom' ? elementToWrap.height : spaceBetween)) / 100 * 90) - 50)})
+                        mainScreenSize.height = mainScreenSize.height + 50;
+
+                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                            if(align == 'bottom') minY = count > 1 ? minY : parentHeight - elementToWrap.height;
+                            y = (minY / 2) - mainScreenSize.height / 2;
+                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                            y = ((parentHeight - maxY) / 2) - (mainScreenSize.height / 2) + maxY;
+
+                        }
+
+                        var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, y, mainScreenSize.width, mainScreenSize.height);
+
+                        if(indexToMaximize) {
+                            var minimizedRect = _layoutTool.currentRects[indexToMaximize];
+
+                            minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
+                            _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
+                            _layoutTool.currentRects[indexToMaximize].y = maximizedRect.y;
+                            _layoutTool.currentRects[indexToMaximize].width = maximizedRect.width;
+                            _layoutTool.currentRects[indexToMaximize].height = maximizedRect.height;
+
+                            activeScreenRect = _layoutTool.currentRects[indexToMaximize];
+                        }
+
+                        if(!currentMaximizedIndex && indexToMaximize || currentMaximizedIndex == indexToMaximize) {
+                            if(_layoutTool.currentRects.length == 3 && roomScreens[1] == activeScreen) {
+
+                                _layoutTool.currentRects[2].x = minimizedRect.x;
+                                _layoutTool.currentRects[2].y = minimizedRect.y;
+                                _layoutTool.currentRects[2].width = minimizedRect.width;
+                                _layoutTool.currentRects[2].height = minimizedRect.height;
+                            }
+                        }
+
+                        if(currentMaximizedIndex && currentMaximizedIndex != indexToMaximize) {
+
+                            _layoutTool.currentRects[currentMaximizedIndex].x = minimizedRect.x;
+                            _layoutTool.currentRects[currentMaximizedIndex].y = minimizedRect.y;
+                            _layoutTool.currentRects[currentMaximizedIndex].width = minimizedRect.width;
+                            _layoutTool.currentRects[currentMaximizedIndex].height = minimizedRect.height;
+                        } else {
+                            _layoutTool.currentRects = fillFreeSpaceWithClosestRects(minimizedRect, _layoutTool.currentRects, (activeScreenRect ? [activeScreenRect] : null))
+                        }
+
+                        _layoutTool.maximizedScreen = activeScreen;
+
+                        return _layoutTool.currentRects;
+                    }
+
+                    function minimizeScreen(){
+                        var currentMaximizedIndex;
+                        if(_layoutTool.maximizedScreen != null) {
+                            for (var s in roomScreens) {
+                                if (_layoutTool.maximizedScreen == roomScreens[s]) {
+                                    currentMaximizedIndex = parseInt(s, 10);
+                                    break;
+                                }
+                            }
+                        }
+
+                        var count = _layoutTool.currentRects.length + 1
+                        var rect = addAndUpdate(container, count, elementToWrap, maximized);
+                        _layoutTool.currentRects[currentMaximizedIndex] = new DOMRect(rect[0].x, rect[0].y, rect[0].width, rect[0].height);
+                        activeScreenRect = activeScreen = _layoutTool.maximizedScreen = null
+
+                        return _layoutTool.currentRects;
+                    }
+
+                    function getRectsGridParams(wrapElPosition) {
+                        var rectsPerRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+
+                        var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
+                        if(wrapElPosition == 'bottom' || wrapElPosition == 'top') {
+                            rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
+                            rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
+                            //numOfRowsAlongWrapEl = Math.floor((elementToWrap.top + spaceBetween) / (rectWidth + spaceBetween));
+                            if (wrapElPosition == 'bottom') {
+                                numOfRowsAlongWrapEl = Math.ceil((parentHeight - elementToWrap.top) / (rectHeight + spaceBetween));
+                            } else if (wrapElPosition == 'top') {
+                                numOfRowsAlongWrapEl = Math.ceil((elementToWrap.top + elementToWrap.height) / (rectHeight + spaceBetween));
+                            }
+                        } else if(wrapElPosition == 'bottomleft' || wrapElPosition == 'bottomright') {
+                            rectsOnLeftSide = rectsOnRightSide =  Math.floor(rectsPerRow / 2);
+                            numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                        } else if(wrapElPosition == 'topleft' || wrapElPosition == 'topright') {
+                            rectsOnLeftSide = rectsOnRightSide = Math.floor(rectsPerRow / 2);
+                            numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                        } else {
+                            rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
+                        }
+
+
+                        return {
+                            rectsOnLeftSide: rectsOnLeftSide,
+                            rectsOnRightSide: rectsOnRightSide,
+                            numOfRowsAlongWrapEl: numOfRowsAlongWrapEl,
+                            rectsPerRow: rectsPerRow
+                        }
+                    }
+
+                    function build(container, count, elementToWrap, maximized) {
+
+                        //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+                        var parentWidth = containerRect.width;
+                        var parentHeight = containerRect.height;
+
+                        var align = getControlsAlign();
 
                         var rectWidth = 90;
                         var rectHeight = 90;
                         var spaceBetween = 10;
-                        var defaultSide = 'top-full';
+                        var gridParams = getRectsGridParams(align);
+                        var rectsOnLeftSide = gridParams.rectsOnLeftSide;
+                        var rectsOnRightSide = gridParams.rectsOnRightSide;
+                        var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
+                        var perRow = gridParams.rectsPerRow;
 
-                        var containerRect = container.getBoundingClientRect();
-                        var parentWidth = containerRect.width;
-                        var parentHeight = containerRect.height;
 
-                        if(!maximized) {
-                            _layoutTool.state.currentGenerator = 'minimizedScreensGrid';
-                        } else {
-                            _layoutTool.state.currentGenerator = 'maximizedScreensGrid';
-                        }
+                        if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
+                        var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
+                        if(count < totalRectsOnSides) totalRectsOnSides = count;
 
-                        if(_layoutTool.basicGridRects.length < count || rebuild) {
-                            _layoutTool.basicGridRects = build(container, count, elementToWrap, maximized);
-                        }
+                        var rects = [];
+                        var currentRowRects = [];
 
-                        if(_layoutTool.currentRects.length == 0 || rebuild) {
-                            _layoutTool.currentRects = build(container, count, elementToWrap, maximized);
-                        } else {
+                        /*if(maximized) {
+                            count = totalRectsOnSides = count - 1;
+                        }*/
 
-                            if(count > _layoutTool.currentRects.length) {
-                                var availableRects = addAndUpdate(container, count, elementToWrap, maximized);
-                                _layoutTool.currentRects = _layoutTool.currentRects.concat(availableRects);
+                        if(align == 'top' || align == 'bottom') {
+                            var isNextNewLast = false;
+                            var startFrom, side;
+                            startFrom = side = rectsOnRightSide != 0 ? 'right' : 'left';
+                            var rowItemCounter = 1;
+                            var leftSideCounter = 0;
+                            var rightSideCounter = 0;
+                            var createNewRowOnLeft = false;
+                            var createNewRowOnRight = false;
+                            var i, x, y, prevRect, latestLeftRect, latestRightRect;
+                            for (i = 0; i < totalRectsOnSides; i++) {
+                                if (side == "right") {
 
-                            } else if(count < _layoutTool.currentRects.length) {
-                                _layoutTool.currentRects = removeAndUpdate(container, count, elementToWrap, maximized);
-                            }
-                        }
+                                    if (latestRightRect) prevRect = latestRightRect
+                                    if (rightSideCounter >= 1) {
+                                        y = prevRect.y;
+                                        x = prevRect.x + (rectWidth + spaceBetween);
 
-                        if(maximized || (activeScreen != null && maximized != false)) {
-                            _layoutTool.currentRects = maximizeScreen();
-                        } else if(!maximized) {
-                            _layoutTool.currentRects = minimizeScreen();
-                        }
+                                    } else if (createNewRowOnRight) {
 
-                        return  _layoutTool.currentRects;
+                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            y = prevRect.y - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                            y = prevRect.y + prevRect.height + spaceBetween;
+                                        }
 
-                        function getControlsAlign() {
+                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
+                                        } else {
+                                            var allRects = currentRowRects;
+                                            for (var a in rects) {
+                                                allRects = allRects.concat(rects[a]);
+                                            }
+                                            x = allRects.filter(function (rect) {
+                                                return rect.side == 'right';
+                                            }).reduce(function (prev, current) {
+                                                return (prev.rect.x < current.rect.x) ? prev : current;
+                                            }).rect.x
+                                        }
 
-                            if(!document.body.contains(wrapElement)) return defaultSide;
-                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                            var parentHeight = containerRect.height;
+                                        createNewRowOnRight = false;
+                                    } else {
 
-                            if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top < parentHeight / 2) {
-                                return 'topleft';
-                            } else if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top > parentHeight / 2) {
-                                return 'bottomleft';
-                            } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top < parentHeight / 2) {
-                                return 'topright';
-                            } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top > parentHeight / 2) {
-                                return 'bottomright';
-                            } else if(wrapElement.classList.contains('Q_resize_snapped_top')) {
-                                return 'top';
-                            } else if(wrapElement.classList.contains('Q_resize_snapped_bottom')) {
-                                return 'bottom';
-                            } else {
-                                return 'bottom';
-                            }
-                        }
+                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            y = parentHeight - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                            y = spaceBetween;
+                                        }
 
-                        function maximizeScreen(){
-                            var indexToMaximize;
+                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
+                                        } else {
+                                            x = (elementToWrap.left + elementToWrap.width + spaceBetween);
+                                        }
 
-                            for(let s in roomScreens) {
-                                if(activeScreen == roomScreens[s]) {
-                                    indexToMaximize = s;
-                                    break;
+                                    }
+
+                                    rightSideCounter++;
+
+                                    if (rightSideCounter == rectsOnRightSide) {
+                                        createNewRowOnRight = true;
+                                        if (createNewRowOnRight) rightSideCounter = 0;
+                                    }
+                                    if (rectsOnLeftSide != 0) {
+                                        if (rectsOnLeftSide == rectsOnRightSide) {
+                                            side = 'left';
+                                        } else if (rectsOnLeftSide != rectsOnRightSide) {
+                                            if ((!createNewRowOnLeft && !createNewRowOnRight)
+                                                || (createNewRowOnRight && !createNewRowOnLeft)
+                                                || (createNewRowOnLeft && rightSideCounter == 1 && !createNewRowOnRight)) {
+                                                side = 'left';
+                                            } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
+                                                side = 'right';
+                                            }
+                                        }
+
+                                    }
+
+                                    var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
+                                    currentRowRects.push({side: 'right', rect: rect});
+                                } else if (side == "left") {
+                                    if (latestLeftRect) prevRect = latestLeftRect;
+
+                                    if (leftSideCounter >= 1) {
+
+                                        y = prevRect.y;
+                                        x = prevRect.x - (rectWidth + spaceBetween);
+
+                                    } else if (createNewRowOnLeft) {
+                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            y = prevRect.y - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                            y = prevRect.y + (rectHeight + spaceBetween);
+                                        }
+
+                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
+                                        } else {
+                                            var allRects = currentRowRects;
+                                            for (var a in rects) {
+                                                allRects = allRects.concat(rects[a]);
+                                            }
+                                            x = allRects.filter(function (rect) {
+                                                return rect.side == 'left';
+                                            }).reduce(function (prev, current) {
+                                                return (prev.rect.x > current.rect.x) ? prev : current;
+                                            }).rect.x;
+                                        }
+
+                                        createNewRowOnLeft = false;
+                                    } else {
+                                        if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            y = parentHeight - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                            y = spaceBetween;
+                                        }
+
+                                        if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
+                                        } else {
+                                            x = (elementToWrap.left - (rectWidth + spaceBetween));
+                                        }
+                                    }
+
+                                    leftSideCounter++;
+
+                                    if (leftSideCounter == rectsOnLeftSide) {
+                                        createNewRowOnLeft = true;
+                                        leftSideCounter = 0;
+                                    }
+
+                                    if (rectsOnRightSide != 0) {
+                                        if (rectsOnLeftSide == rectsOnRightSide) {
+                                            side = 'right';
+                                        } else if (rectsOnLeftSide != rectsOnRightSide) {
+                                            if (createNewRowOnRight && !createNewRowOnLeft) {
+                                                side = 'left';
+                                            } else if ((!createNewRowOnLeft && !createNewRowOnRight) || (createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && !createNewRowOnRight)) {
+                                                side = 'right';
+                                            }
+                                        }
+                                    }
+
+                                    var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
+                                    currentRowRects.push({side: 'left', rect: rect});
                                 }
-                            }
 
-                            var currentMaximizedIndex;
-                            if(_layoutTool.maximizedScreen != null) {
-                                for(let s in roomScreens) {
-                                    if(_layoutTool.maximizedScreen == roomScreens[s]) {
-                                        currentMaximizedIndex = s;
-                                        break;
+                                if (i == perRow - 1 || i == totalRectsOnSides - 1) {
+                                    rects.push(currentRowRects);
+                                    currentRowRects = [];
+                                }
+
+                                count = count - 1;
+                            }
+                        }
+
+                        if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+
+                            for(var i in rects){
+                                var currentRowRects = rects[i];
+                                var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
+                                var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                var rowWidth = maxX - minX;
+
+                                var newMinX = parentWidth / 2 - rowWidth / 2;
+
+                                var fixOn = Math.abs(minX - newMinX);
+                                for (var r = 0; r < currentRowRects.length; r++) {
+                                    if(minX > parentWidth - maxX) {
+                                        currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
+                                    } else {
+                                        currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
                                     }
                                 }
                             }
 
-                            var align = getControlsAlign();
-
-                            if(activeScreenRect != null) {
-                                var rectsToTakeInc = _layoutTool.currentRects.filter(function(r, i){
-                                    return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
-                                    && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
-                                });
-                                var minY = Math.min.apply(Math, rectsToTakeInc.map(function(o) { return o.y; }));
-                                var maxY = Math.max.apply(Math, rectsToTakeInc.map(function(o) { return o.y + o.height; }));
-                            } else {
-                                var minY = Math.min.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y; }));
-                                var maxY = Math.max.apply(Math, _layoutTool.currentRects.map(function(o) { return o.y + o.height; }));
-                            }
-
-
-                            var y, baseHeight;
-                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                baseHeight = (minY - spaceBetween) - 50;
-                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                baseHeight = parentHeight - (maxY + spaceBetween) - 50;
-                            }
-                            var videoWidth = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoWidth != 0 ? activeScreen.videoTrack.videoWidth : 480;
-                            var videoHeight = typeof activeScreen != 'undefined' && activeScreen.videoTrack != null && activeScreen.videoTrack.videoHeight != 0 ? activeScreen.videoTrack.videoHeight : 270;
-
-                            var mainScreenSize = getElementSizeKeepingRatio({
-                                width: videoWidth,
-                                height: videoHeight
-                            }, {width: parentWidth / 100 * 90, height: Math.min(baseHeight - 50, ((parentHeight - (align == 'top' || align == 'bottom' ? elementToWrap.height : spaceBetween)) / 100 * 90) - 50)})
-                            mainScreenSize.height = mainScreenSize.height + 50;
-
-                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                if(align == 'bottom') minY = count > 1 ? minY : parentHeight - elementToWrap.height;
-                                y = (minY / 2) - mainScreenSize.height / 2;
-                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                y = ((parentHeight - maxY) / 2) - (mainScreenSize.height / 2) + maxY;
-
-                            }
-
-                            var maximizedRect = new DOMRect((parentWidth / 2) - mainScreenSize.width / 2, y, mainScreenSize.width, mainScreenSize.height);
-
-                            if(indexToMaximize) {
-                                var minimizedRect = _layoutTool.currentRects[indexToMaximize];
-
-                                minimizedRect = new DOMRect(minimizedRect.x, minimizedRect.y, minimizedRect.width, minimizedRect.height);
-                                _layoutTool.currentRects[indexToMaximize].x = maximizedRect.x;
-                                _layoutTool.currentRects[indexToMaximize].y = maximizedRect.y;
-                                _layoutTool.currentRects[indexToMaximize].width = maximizedRect.width;
-                                _layoutTool.currentRects[indexToMaximize].height = maximizedRect.height;
-
-                                activeScreenRect = _layoutTool.currentRects[indexToMaximize];
-                            }
-
-                            if(!currentMaximizedIndex && indexToMaximize || currentMaximizedIndex == indexToMaximize) {
-                                if(_layoutTool.currentRects.length == 3 && roomScreens[1] == activeScreen) {
-
-                                    _layoutTool.currentRects[2].x = minimizedRect.x;
-                                    _layoutTool.currentRects[2].y = minimizedRect.y;
-                                    _layoutTool.currentRects[2].width = minimizedRect.width;
-                                    _layoutTool.currentRects[2].height = minimizedRect.height;
-                                }
-                            }
-
-                            if(currentMaximizedIndex && currentMaximizedIndex != indexToMaximize) {
-
-                                _layoutTool.currentRects[currentMaximizedIndex].x = minimizedRect.x;
-                                _layoutTool.currentRects[currentMaximizedIndex].y = minimizedRect.y;
-                                _layoutTool.currentRects[currentMaximizedIndex].width = minimizedRect.width;
-                                _layoutTool.currentRects[currentMaximizedIndex].height = minimizedRect.height;
-                            } else {
-                                _layoutTool.currentRects = fillFreeSpaceWithClosestRects(minimizedRect, _layoutTool.currentRects, (activeScreenRect ? [activeScreenRect] : null))
-                            }
-
-                            _layoutTool.maximizedScreen = activeScreen;
-
-                            return _layoutTool.currentRects;
                         }
 
-                        function minimizeScreen(){
-                            var currentMaximizedIndex;
-                            if(_layoutTool.maximizedScreen != null) {
-                                for (var s in roomScreens) {
-                                    if (_layoutTool.maximizedScreen == roomScreens[s]) {
-                                        currentMaximizedIndex = parseInt(s, 10);
-                                        break;
+                        var arr = [];
+                        for(var i in rects){
+                            arr = arr.concat(rects[i]);
+                        }
+                        rects = arr;
+
+                        var minX, maxX, minY, maxY;
+
+                        if(align == 'bottom' || align == 'top') {
+                            minX = Math.min.apply(Math, rects.map(function (o) {
+                                return o.rect.x;
+                            }));
+                            maxX = Math.max.apply(Math, rects.map(function (o) {
+                                return o.rect.x + o.rect.width;
+                            }));
+                            if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                            if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                            minY = Math.min.apply(Math, rects.map(function (o) {
+                                return o.rect.y;
+                            }));
+                            maxY = Math.max.apply(Math, rects.map(function (o) {
+                                return o.rect.y;
+                            }));
+
+                            var rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
+                            rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+                            perRow =  Math.ceil(rectsNum);
+                        } else if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                            //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+
+                            perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                            if(align == 'bottomleft' || align == 'topleft') {
+                                maxX =  parentWidth - spaceBetween;
+                            } else if (align == 'bottomright' || align == 'topright') {
+                                maxX = elementToWrap.left - spaceBetween;
+                            }
+
+                            minY = spaceBetween;
+                            maxY = parentHeight;
+                        } else {
+                            minX = spaceBetween;
+                            maxX = parentWidth - spaceBetween;
+                            minY = spaceBetween;
+                            maxY = parentHeight;
+                        }
+
+                        var latestRect;
+                        var isNextNewLast = false;
+                        var rowItemCounter = 1;
+                        var i;
+                        for (i = 1; i <= count; i++) {
+                            //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                            if(latestRect != null) var prevRect = latestRect;
+                            var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+                            var isNextNewRow  = rowItemCounter  == perRow;
+                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+                            var x,y
+                            if(rowItemCounter > 1 && prevRect) {
+                                y = prevRect.y;
+                                x = prevRect.x - (rectWidth + spaceBetween);
+                            } else {
+                                var startX = maxX;
+                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                    var startY = prevRect != null ? prevRect.y : maxY;
+                                    y = startY - (rectHeight + spaceBetween);
+                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                    y = prevRect != null ? (prevRect.y + rectHeight + spaceBetween) : minY;
+                                } else if (align == 'top-full'){
+                                    var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween: minY;
+                                    y = startY;
+                                } else if (align == 'bottom-full'){
+                                    var startY = prevRect != null ? prevRect.y : maxY;
+                                    y = startY - (rectHeight + spaceBetween);
+                                }
+                                x = startX - rectWidth;
+                            }
+                            var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                            rects.push({side:null, rect: rect});
+
+                            if(rowItemCounter == perRow) {
+                                rowItemCounter = 1;
+                            } else rowItemCounter++;
+                        }
+
+                        rects = rects.map(function(rectObj){
+                            return rectObj.rect;
+                        });
+
+                        //return alignFullRows(rects)
+                        return rects;
+                    }
+
+                    function addAndUpdate(container, count, elementToWrap, maximized) {
+
+                        var align = getControlsAlign();
+
+                        var currentRects = _layoutTool.currentRects;
+
+                        if(_layoutTool.maximizedScreen != null) {
+                            currentRects = _layoutTool.currentRects.filter(function(r, i){
+                                return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
+                                && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
+                            });
+                        } else {
+                            currentRects = _layoutTool.currentRects;
+                        }
+
+                        //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+
+
+                        var gridParams = getRectsGridParams(align);
+                        var rectsOnLeftSide = gridParams.rectsOnLeftSide;
+                        var rectsOnRightSide = gridParams.rectsOnRightSide;
+                        var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
+                        var perRow = gridParams.rectsPerRow;
+
+
+                        var getRectsRows = function () {
+                            var rows = {};
+                            var left = [];
+                            var right = [];
+                            var none = [];
+                            var i, count = currentRects.length;
+                            for(i = 0; i < count; i++) {
+                                var rect = currentRects[i];
+
+
+                                if(align == 'bottom' || align == 'top') {
+                                    let isTopFullRow = align == 'top' && rect.top > elementToWrap.bottom
+                                    let isBottomFullRow = align == 'bottom' && rect.bottom < elementToWrap.top
+                                    if(rect.left < elementToWrap.left && !isTopFullRow && !isBottomFullRow) {
+                                        if(rows[rect.top + '_l'] == null) rows[rect.top + '_l'] = [];
+
+                                        rows[rect.top + '_l'].push({indx: i, top: rect.top, rect:rect, side:'left'});
+                                    } else if (rect.left >= elementToWrap.left && !isTopFullRow && !isBottomFullRow){
+                                        if(rows[rect.top + '_r'] == null) rows[rect.top + '_r'] = [];
+
+                                        rows[rect.top + '_r'].push({indx: i, top: rect.top, rect:rect, side:'right'});
+                                    } else {
+                                        if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                        rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
                                     }
+                                } else {
+                                    if(rows[rect.top] == null) rows[rect.top] = [];
+
+                                    rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
                                 }
                             }
 
-                            var count = _layoutTool.currentRects.length + 1
-                            var rect = addAndUpdate(container, count, elementToWrap, maximized);
-                            _layoutTool.currentRects[currentMaximizedIndex] = new DOMRect(rect[0].x, rect[0].y, rect[0].width, rect[0].height);
-                            activeScreenRect = activeScreen = _layoutTool.maximizedScreen = null
-
-                            return _layoutTool.currentRects;
-                        }
-
-                        function getRectsGridParams(wrapElPosition) {
-                            var rectsPerRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-
-                            var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
-                            if(wrapElPosition == 'bottom' || wrapElPosition == 'top') {
-                                rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                                rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
-                                //numOfRowsAlongWrapEl = Math.floor((elementToWrap.top + spaceBetween) / (rectWidth + spaceBetween));
-                                if (wrapElPosition == 'bottom') {
-                                    numOfRowsAlongWrapEl = Math.ceil((parentHeight - elementToWrap.top) / (rectHeight + spaceBetween));
-                                } else if (wrapElPosition == 'top') {
-                                    numOfRowsAlongWrapEl = Math.ceil((elementToWrap.top + elementToWrap.height) / (rectHeight + spaceBetween));
+                            var rowsArray = [];
+                            for (var property in rows) {
+                                if (rows.hasOwnProperty(property)) {
+                                    if(rows[property][0].side == 'left') {
+                                        left.push(rows[property]);
+                                    } else if(rows[property][0].side == 'right') {
+                                        right.push(rows[property]);
+                                    } else {
+                                        none.push(rows[property]);
+                                    }
+                                    rowsArray.push(rows[property]);
                                 }
-                            } else if(wrapElPosition == 'bottomleft' || wrapElPosition == 'bottomright') {
-                                rectsOnLeftSide = rectsOnRightSide =  Math.floor(rectsPerRow / 2);
-                                numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
-                            } else if(wrapElPosition == 'topleft' || wrapElPosition == 'topright') {
-                                rectsOnLeftSide = rectsOnRightSide = Math.floor(rectsPerRow / 2);
-                                numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
-                            } else {
-                                rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
                             }
-
 
                             return {
-                                rectsOnLeftSide: rectsOnLeftSide,
-                                rectsOnRightSide: rectsOnRightSide,
-                                numOfRowsAlongWrapEl: numOfRowsAlongWrapEl,
-                                rectsPerRow: rectsPerRow
-                            }
+                                left: left,
+                                right: right,
+                                none: none,
+                                all: rowsArray
+                            };
                         }
 
-                        function build(container, count, elementToWrap, maximized) {
+                        var getAvailableRects = function (sortedRows) {
+                            var  rows = sortedRows.all;
+                            var availableRects = [];
+                            var availableRectsFullRow = [];
+                            var availableRectsOnLeft = [];
+                            var availableRectsOnRight = [];
 
-                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
+
+                            var minX, maxX, minY, maxY;
+
+                            if(align == 'bottom' || align == 'top') {
+
+                                minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
+                                maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
+
+                                if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                                if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+
+
+                            } else if(align == 'bottomleft' || align == 'topleft') {
+                                //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                maxX =  parentWidth - spaceBetween;
+                                minX =  elementToWrap.left + elementToWrap.width + spaceBetween;
+                            } else if(align == 'bottomright' || align == 'topright') {
+                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                maxX = elementToWrap.left - spaceBetween;
+                                minX = spaceBetween;
+                            } else {
+                                perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                minX = spaceBetween;
+                                maxX = parentWidth - spaceBetween;
+                            }
+
+                            /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
+                            var maxWidth = maxX - minX;
+
+
+                            var i, rowsCount = rows.length;
+                            for(i = 0; i < rowsCount; i++) {
+                                var row = rows[i];
+                                var sampleRect = row[0];
+
+                                if(sampleRect.side == 'left') {
+
+                                    var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
+
+                                    if(row.length != maxRectsOnLeftSide){
+                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                        var r, numRectsToAdd = maxRectsOnLeftSide - row.length, prevRect;
+                                        for(r = 0; r < numRectsToAdd; r++){
+                                            var newRect;
+                                            if(r == 0) {
+                                                newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            } else {
+                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            }
+                                            availableRectsOnLeft.push(newRect);
+
+                                            prevRect = newRect;
+                                        }
+                                    }
+
+                                } else if (sampleRect.side == 'right') {
+
+                                    var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
+
+                                    if(row.length != maxRectsOnRightSide){
+                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                        var r, numRectsToAdd = maxRectsOnRightSide - row.length, prevRect;
+                                        for(r = 0; r < numRectsToAdd; r++){
+                                            var newRect;
+                                            if(r == 0) {
+                                                newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            } else {
+                                                newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            }
+                                            availableRectsOnRight.push(newRect);
+
+                                            prevRect = newRect;
+                                        }
+                                    }
+
+                                } else {
+
+                                    var maxRectsInCurrentRow = Math.floor((maxWidth + spaceBetween) / (sampleRect.rect.width + spaceBetween));
+
+                                    if(row.length != maxRectsInCurrentRow){
+                                        var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
+                                        var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
+
+                                        var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
+                                        for(r = 0; r < numRectsToAdd; r++){
+                                            var newRect;
+                                            if(r == 0) {
+                                                newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            } else {
+                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            }
+                                            availableRectsFullRow.push(newRect);
+
+                                            prevRect = newRect;
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            if(sortedRows.left.length != sortedRows.right.length) {
+
+                                //if there are more rows on the left side than on the right, complete row on the right side
+                                if(sortedRows.left.length > sortedRows.right.length && rectsOnRightSide != 0){
+
+                                    var rowsToCreate = sortedRows.left.length - sortedRows.right.length;
+
+                                    var i;
+                                    for(i = sortedRows.right.length; i < sortedRows.left.length; i++) {
+                                        var leftRow = sortedRows.left[i];
+                                        var sampleRect = leftRow[0];
+
+                                        var rowsMinX = elementToWrap.left + elementToWrap.width + spaceBetween;
+                                        var rowsMaxX = parentWidth - spaceBetween;
+
+                                        var r, prevRect;
+                                        for(r = 0; r < rectsOnRightSide; r++){
+                                            var newRect;
+                                            if(r == 0) {
+                                                newRect = new DOMRect(elementToWrap.left + elementToWrap.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
+                                            } else {
+                                                newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
+                                            }
+
+                                            availableRectsOnRight.push(newRect);
+
+                                            prevRect = newRect;
+                                        }
+
+                                    }
+
+                                } else if(sortedRows.right.length > sortedRows.left.length && rectsOnLeftSide != 0) {
+
+                                    var rowsToCreate = sortedRows.right.length - sortedRows.left.length;
+
+                                    var i;
+                                    for(i = sortedRows.left.length; i < sortedRows.right.length; i++) {
+
+                                        var rightRow = sortedRows.right[i];
+                                        var sampleRect = rightRow[0];
+
+                                        var rowsMinX = spaceBetween;
+                                        var rowsMaxX = elementToWrap.left - spaceBetween;
+
+                                        var r, prevRect;
+                                        for(r = 0; r < rectsOnLeftSide; r++){
+                                            var newRect;
+                                            if(r == 0) {
+                                                newRect = new DOMRect(elementToWrap.left - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            } else {
+                                                newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                            }
+
+                                            availableRectsOnLeft.push(newRect);
+
+                                            prevRect = newRect;
+                                        }
+
+                                    }
+
+                                }
+                            }
+
+
+                            var longerSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnRight : availableRectsOnLeft;
+                            var shorterSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnLeft : availableRectsOnRight;
+
+                            var alternatedArray = [];
+
+                            var i, length = longerSide.length;
+                            for (i = 0; i < length; i++) {
+                                var sampleRect = longerSide[i];
+
+                                var currentLeftRow = sortedRows.left.filter(function(r){
+                                    return r[0].top == sampleRect.top ? true : false;
+                                })[0];
+                                var currentRightRow = sortedRows.right.filter(function(r){
+                                    return r[0].top == sampleRect.top ? true : false;
+                                })[0];
+
+                                if(currentLeftRow != null && currentRightRow != null && currentLeftRow.length != 0 && currentRightRow.length != 0) {
+                                    if(currentRightRow.length <= currentLeftRow.length) {
+                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                    } else {
+                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                    }
+                                } else if(currentLeftRow == null && currentRightRow != null) {
+                                    if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                    if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                } else if(currentLeftRow != null && currentRightRow == null) {
+                                    if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
+                                    if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
+                                }
+
+                            }
+
+                            availableRects = availableRects.concat(alternatedArray);
+                            availableRects = availableRects.concat(availableRectsFullRow);
+                            return availableRects;
+                        }
+
+                        var createNewRows = function(numRectsToAdd, rows, availableRects) {
+                            // var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                             var parentWidth = containerRect.width;
                             var parentHeight = containerRect.height;
 
                             var align = getControlsAlign();
 
-                            var rectWidth = 90;
-                            var rectHeight = 90;
-                            var spaceBetween = 10;
                             var gridParams = getRectsGridParams(align);
                             var rectsOnLeftSide = gridParams.rectsOnLeftSide;
                             var rectsOnRightSide = gridParams.rectsOnRightSide;
                             var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
                             var perRow = gridParams.rectsPerRow;
 
+                            var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
+                            var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
+                            var maxWidth = maxX - minX;
+                            var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
+                            var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
 
-                            if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
-                            var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
-                            if(count < totalRectsOnSides) totalRectsOnSides = count;
+                            var newRects = [];
 
-                            var rects = [];
-                            var currentRowRects = [];
+                            var craeteRowsOnControlsSides = function(){
 
-                            /*if(maximized) {
-                                count = totalRectsOnSides = count - 1;
-                            }*/
-
-                            if(align == 'top' || align == 'bottom') {
-                                var isNextNewLast = false;
                                 var startFrom, side;
-                                startFrom = side = rectsOnRightSide != 0 ? 'right' : 'left';
-                                var rowItemCounter = 1;
+                                var minLeftY, minRightY, maxLeftY, maxRightY;
+
+                                var figureOutCoordsonLeft = function() {
+                                    if(rows.left.length != 0) {
+                                        var allrects = [];
+                                        for(var l in rows.left) {
+                                            allrects = allrects.concat(rows.left[l])
+                                        }
+                                        minLeftY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
+                                        maxLeftY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
+                                    } else {
+                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                            minLeftY = maxLeftY = parentHeight;
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                            minLeftY = maxLeftY = (0 - rectHeight);
+                                        }
+                                    }
+                                }
+
+                                var figureOutCoordsonRight = function() {
+                                    if(rows.right.length != 0) {
+
+                                        var allrects = [];
+                                        for(var l in rows.right) {
+                                            allrects = allrects.concat(rows.right[l])
+                                        }
+                                        minRightY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
+                                        maxRightY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
+                                    } else {
+
+                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                            minRightY = maxRightY = parentHeight;
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                            minRightY = maxRightY = (0 - rectHeight);
+                                        }
+
+                                    }
+                                }
+
+                                if(rows.left.length == rows.right.length && rows.right.length != 0) {
+                                    figureOutCoordsonRight();
+                                    figureOutCoordsonLeft();
+                                    startFrom = side = 'right';
+
+                                } else if (rectsOnRightSide != 0 && rectsOnLeftSide != 0) {
+                                    figureOutCoordsonRight();
+                                    figureOutCoordsonLeft();
+
+                                    if (rows.right.length < rows.left.length) {
+                                        startFrom = side = 'right';
+                                    } else if (rows.left.length < rows.right.length) {
+                                        startFrom = side = 'left';
+                                    } else {
+                                        startFrom = side = 'right';
+                                    }
+                                } else if (rectsOnLeftSide != 0) {
+                                    figureOutCoordsonLeft();
+
+                                    startFrom = side = 'left';
+                                } else if (rectsOnRightSide != 0) {
+                                    figureOutCoordsonRight();
+
+                                    startFrom = side = 'right';
+                                } else {
+
+                                }
+
+                                var numOfRowsAlongWrapEl, rectsToTheTopOnLeft, rectsToTheTopOnRight;
+
+                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                    rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
+                                    rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
+
+                                    if(minY < elementToWrap.top) {
+                                        numOfRowsAlongWrapEl = 0;
+                                        rectsToTheTopOnLeft = 0;
+                                        rectsToTheTopOnRight = 0;
+                                    }
+
+                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                    rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+                                    rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+
+                                    if(minY < elementToWrap.top) {
+                                        numOfRowsAlongWrapEl = 0;
+                                        rectsToTheTopOnLeft = 0;
+                                        rectsToTheTopOnRight = 0;
+                                    }
+                                }
+
+                                var count = numRectsToAdd;
+                                var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
+                                var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
+                                var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
+
+                                if(count < totalRectsOnSides) totalRectsOnSides = count;
+
+
+                                var rects = [];
+                                var currentRowRects = [];
+
+                                /*if(maximized) {
+                                    count = totalRectsOnSides = count - 1;
+                                }*/
+
+
                                 var leftSideCounter = 0;
                                 var rightSideCounter = 0;
                                 var createNewRowOnLeft = false;
                                 var createNewRowOnRight = false;
                                 var i, x, y, prevRect, latestLeftRect, latestRightRect;
                                 for (i = 0; i < totalRectsOnSides; i++) {
-                                    if (side == "right") {
+                                    if(side == "right") {
 
-                                        if (latestRightRect) prevRect = latestRightRect
-                                        if (rightSideCounter >= 1) {
+                                        if(latestRightRect) prevRect = latestRightRect
+                                        if(rightSideCounter >= 1) {
+
                                             y = prevRect.y;
                                             x = prevRect.x + (rectWidth + spaceBetween);
 
-                                        } else if (createNewRowOnRight) {
+                                        } else if(createNewRowOnRight) {
 
-                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = prevRect.y - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
                                                 y = prevRect.y + prevRect.height + spaceBetween;
                                             }
 
-                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                             } else {
                                                 var allRects = currentRowRects;
                                                 for (var a in rects) {
                                                     allRects = allRects.concat(rects[a]);
                                                 }
-                                                x = allRects.filter(function (rect) {
+                                                x = allRects.filter(function(rect){
                                                     return rect.side == 'right';
-                                                }).reduce(function (prev, current) {
+                                                }).reduce(function(prev, current) {
                                                     return (prev.rect.x < current.rect.x) ? prev : current;
                                                 }).rect.x
                                             }
@@ -5267,13 +4251,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             createNewRowOnRight = false;
                                         } else {
 
-                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                y = parentHeight - (rectHeight + spaceBetween);
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                y = minRightY - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                y = spaceBetween;
+                                                y = maxRightY + rectHeight + spaceBetween;
                                             }
 
-                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                             } else {
                                                 x = (elementToWrap.left + elementToWrap.width + spaceBetween);
@@ -5283,65 +4267,64 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                         rightSideCounter++;
 
-                                        if (rightSideCounter == rectsOnRightSide) {
+                                        if(rightSideCounter == rectsOnRightSide) {
                                             createNewRowOnRight = true;
-                                            if (createNewRowOnRight) rightSideCounter = 0;
+                                            rightSideCounter = 0;
                                         }
-                                        if (rectsOnLeftSide != 0) {
+                                        if (totalRectsOnLeftSide != 0) {
                                             if (rectsOnLeftSide == rectsOnRightSide) {
                                                 side = 'left';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide) {
-                                                if ((!createNewRowOnLeft && !createNewRowOnRight)
-                                                    || (createNewRowOnRight && !createNewRowOnLeft)
-                                                    || (createNewRowOnLeft && rightSideCounter == 1 && !createNewRowOnRight)) {
-                                                    side = 'left';
-                                                } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
-                                                    side = 'right';
-                                                }
+                                            } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnLeft) {
+                                                side = 'left';
+                                            } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
+                                                side = 'left';
                                             }
 
                                         }
-
                                         var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        currentRowRects.push({side: 'right', rect: rect});
-                                    } else if (side == "left") {
-                                        if (latestLeftRect) prevRect = latestLeftRect;
+                                        currentRowRects.push({side:'right', rect: rect});
 
-                                        if (leftSideCounter >= 1) {
+                                    } else if(side == "left") {
+
+                                        if(latestLeftRect) prevRect = latestLeftRect;
+
+                                        if(leftSideCounter >= 1 ) {
 
                                             y = prevRect.y;
                                             x = prevRect.x - (rectWidth + spaceBetween);
 
-                                        } else if (createNewRowOnLeft) {
-                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                        } else if(createNewRowOnLeft) {
+
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
                                                 y = prevRect.y - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
                                                 y = prevRect.y + (rectHeight + spaceBetween);
                                             }
 
-                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                             } else {
                                                 var allRects = currentRowRects;
                                                 for (var a in rects) {
                                                     allRects = allRects.concat(rects[a]);
                                                 }
-                                                x = allRects.filter(function (rect) {
+                                                x = allRects.filter(function(rect){
                                                     return rect.side == 'left';
-                                                }).reduce(function (prev, current) {
+                                                }).reduce(function(prev, current) {
                                                     return (prev.rect.x > current.rect.x) ? prev : current;
                                                 }).rect.x;
                                             }
 
                                             createNewRowOnLeft = false;
                                         } else {
-                                            if (align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                y = parentHeight - (rectHeight + spaceBetween);
+
+                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                                y = minLeftY - (rectHeight + spaceBetween);
                                             } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                y = spaceBetween;
+                                                y = maxLeftY + rectHeight + spaceBetween;
                                             }
 
-                                            if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
+                                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                             } else {
                                                 x = (elementToWrap.left - (rectWidth + spaceBetween));
@@ -5350,1177 +4333,483 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                         leftSideCounter++;
 
-                                        if (leftSideCounter == rectsOnLeftSide) {
+                                        if(leftSideCounter == rectsOnLeftSide) {
                                             createNewRowOnLeft = true;
                                             leftSideCounter = 0;
                                         }
 
-                                        if (rectsOnRightSide != 0) {
+                                        if (totalRectsOnRightSide != 0) {
                                             if (rectsOnLeftSide == rectsOnRightSide) {
                                                 side = 'right';
-                                            } else if (rectsOnLeftSide != rectsOnRightSide) {
-                                                if (createNewRowOnRight && !createNewRowOnLeft) {
-                                                    side = 'left';
-                                                } else if ((!createNewRowOnLeft && !createNewRowOnRight) || (createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && !createNewRowOnRight)) {
-                                                    side = 'right';
-                                                }
+                                            } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnRight) {
+                                                side = 'right';
+                                            } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
+                                                side = 'right';
                                             }
                                         }
 
                                         var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                        currentRowRects.push({side: 'left', rect: rect});
+                                        currentRowRects.push({side:'left', rect: rect});
+
+
                                     }
 
-                                    if (i == perRow - 1 || i == totalRectsOnSides - 1) {
+                                    if(i == perRow - 1 || i == totalRectsOnSides - 1) {
                                         rects.push(currentRowRects);
                                         currentRowRects = [];
                                     }
 
                                     count = count - 1;
                                 }
-                            }
 
-                            if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
 
+                                var arr = [];
                                 for(var i in rects){
-                                    var currentRowRects = rects[i];
-                                    var minX = Math.min.apply(Math, currentRowRects.map(function(o) { return o.rect.x; }));
-                                    var maxX = Math.max.apply(Math, currentRowRects.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                    var rowWidth = maxX - minX;
-
-                                    var newMinX = parentWidth / 2 - rowWidth / 2;
-
-                                    var fixOn = Math.abs(minX - newMinX);
-                                    for (var r = 0; r < currentRowRects.length; r++) {
-                                        if(minX > parentWidth - maxX) {
-                                            currentRowRects[r].rect.x = currentRowRects[r].rect.x - fixOn;
-                                        } else {
-                                            currentRowRects[r].rect.x = currentRowRects[r].rect.x + fixOn;
-                                        }
-                                    }
+                                    arr = arr.concat(rects[i]);
                                 }
 
+                                return arr.map(function(rectObj){
+                                    return rectObj.rect;
+                                });
                             }
 
-                            var arr = [];
-                            for(var i in rects){
-                                arr = arr.concat(rects[i]);
-                            }
-                            rects = arr;
+                            var createFullRows = function(count) {
 
-                            var minX, maxX, minY, maxY;
+                                var allRects = currentRects.concat(newRects).concat(availableRects);
+                                var minX, maxX, rectsNum;
+                                if(align == 'top' || align == 'bottom') {
 
-                            if(align == 'bottom' || align == 'top') {
-                                minX = Math.min.apply(Math, rects.map(function (o) {
-                                    return o.rect.x;
-                                }));
-                                maxX = Math.max.apply(Math, rects.map(function (o) {
-                                    return o.rect.x + o.rect.width;
-                                }));
-                                if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-                                minY = Math.min.apply(Math, rects.map(function (o) {
-                                    return o.rect.y;
-                                }));
-                                maxY = Math.max.apply(Math, rects.map(function (o) {
-                                    return o.rect.y;
-                                }));
+                                    var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
+                                    var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
 
-                                var rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
-                                rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
-                                perRow =  Math.ceil(rectsNum);
-                            } else if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                    if(minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
+                                    if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
 
-                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                                if(align == 'bottomleft' || align == 'topleft') {
+                                    rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
+                                    rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
+
+                                } else if (align == 'bottomleft' || align == 'topleft') {
                                     maxX =  parentWidth - spaceBetween;
+                                    minX =  elementToWrap.left + spaceBetween;
+                                    rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
+
                                 } else if (align == 'bottomright' || align == 'topright') {
                                     maxX = elementToWrap.left - spaceBetween;
-                                }
-
-                                minY = spaceBetween;
-                                maxY = parentHeight;
-                            } else {
-                                minX = spaceBetween;
-                                maxX = parentWidth - spaceBetween;
-                                minY = spaceBetween;
-                                maxY = parentHeight;
-                            }
-
-                            var latestRect;
-                            var isNextNewLast = false;
-                            var rowItemCounter = 1;
-                            var i;
-                            for (i = 1; i <= count; i++) {
-                                //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-                                if(latestRect != null) var prevRect = latestRect;
-                                var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
-                                var isNextNewRow  = rowItemCounter  == perRow;
-                                isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
-
-                                var x,y
-                                if(rowItemCounter > 1 && prevRect) {
-                                    y = prevRect.y;
-                                    x = prevRect.x - (rectWidth + spaceBetween);
-                                } else {
-                                    var startX = maxX;
-                                    if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                        var startY = prevRect != null ? prevRect.y : maxY;
-                                        y = startY - (rectHeight + spaceBetween);
-                                    } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                        y = prevRect != null ? (prevRect.y + rectHeight + spaceBetween) : minY;
-                                    } else if (align == 'top-full'){
-                                        var startY = prevRect != null ? prevRect.y  + rectHeight + spaceBetween: minY;
-                                        y = startY;
-                                    } else if (align == 'bottom-full'){
-                                        var startY = prevRect != null ? prevRect.y : maxY;
-                                        y = startY - (rectHeight + spaceBetween);
-                                    }
-                                    x = startX - rectWidth;
-                                }
-                                var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                                rects.push({side:null, rect: rect});
-
-                                if(rowItemCounter == perRow) {
-                                    rowItemCounter = 1;
-                                } else rowItemCounter++;
-                            }
-
-                            rects = rects.map(function(rectObj){
-                                return rectObj.rect;
-                            });
-
-                            //return alignFullRows(rects)
-                            return rects;
-                        }
-
-                        function addAndUpdate(container, count, elementToWrap, maximized) {
-
-                            var align = getControlsAlign();
-
-                            var currentRects = _layoutTool.currentRects;
-
-                            if(_layoutTool.maximizedScreen != null) {
-                                currentRects = _layoutTool.currentRects.filter(function(r, i){
-                                    return (r.x == activeScreenRect.x && r.y == activeScreenRect.y
-                                    && r.width == activeScreenRect.width && r.height == activeScreenRect.height ? false : true)
-                                });
-                            } else {
-                                currentRects = _layoutTool.currentRects;
-                            }
-
-                            //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-
-
-                            var gridParams = getRectsGridParams(align);
-                            var rectsOnLeftSide = gridParams.rectsOnLeftSide;
-                            var rectsOnRightSide = gridParams.rectsOnRightSide;
-                            var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
-                            var perRow = gridParams.rectsPerRow;
-
-
-                            var getRectsRows = function () {
-                                var rows = {};
-                                var left = [];
-                                var right = [];
-                                var none = [];
-                                var i, count = currentRects.length;
-                                for(i = 0; i < count; i++) {
-                                    var rect = currentRects[i];
-
-
-                                    if(align == 'bottom' || align == 'top') {
-                                        let isTopFullRow = align == 'top' && rect.top > elementToWrap.bottom
-                                        let isBottomFullRow = align == 'bottom' && rect.bottom < elementToWrap.top
-                                        if(rect.left < elementToWrap.left && !isTopFullRow && !isBottomFullRow) {
-                                            if(rows[rect.top + '_l'] == null) rows[rect.top + '_l'] = [];
-
-                                            rows[rect.top + '_l'].push({indx: i, top: rect.top, rect:rect, side:'left'});
-                                        } else if (rect.left >= elementToWrap.left && !isTopFullRow && !isBottomFullRow){
-                                            if(rows[rect.top + '_r'] == null) rows[rect.top + '_r'] = [];
-
-                                            rows[rect.top + '_r'].push({indx: i, top: rect.top, rect:rect, side:'right'});
-                                        } else {
-                                            if(rows[rect.top] == null) rows[rect.top] = [];
-
-                                            rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
-                                        }
-                                    } else {
-                                        if(rows[rect.top] == null) rows[rect.top] = [];
-
-                                        rows[rect.top].push({indx: i, top: rect.top, rect:rect, side:'none'});
-                                    }
-                                }
-
-                                var rowsArray = [];
-                                for (var property in rows) {
-                                    if (rows.hasOwnProperty(property)) {
-                                        if(rows[property][0].side == 'left') {
-                                            left.push(rows[property]);
-                                        } else if(rows[property][0].side == 'right') {
-                                            right.push(rows[property]);
-                                        } else {
-                                            none.push(rows[property]);
-                                        }
-                                        rowsArray.push(rows[property]);
-                                    }
-                                }
-
-                                return {
-                                    left: left,
-                                    right: right,
-                                    none: none,
-                                    all: rowsArray
-                                };
-                            }
-
-                            var getAvailableRects = function (sortedRows) {
-                                var  rows = sortedRows.all;
-                                var availableRects = [];
-                                var availableRectsFullRow = [];
-                                var availableRectsOnLeft = [];
-                                var availableRectsOnRight = [];
-
-
-                                var minX, maxX, minY, maxY;
-
-                                if(align == 'bottom' || align == 'top') {
-
-                                    minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
-                                    maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
-
-                                    if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                    if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-
-
-                                } else if(align == 'bottomleft' || align == 'topleft') {
-                                    //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-                                    perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                                    maxX =  parentWidth - spaceBetween;
-                                    minX =  elementToWrap.left + elementToWrap.width + spaceBetween;
-                                } else if(align == 'bottomright' || align == 'topright') {
-                                    perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                                    maxX = elementToWrap.left - spaceBetween;
                                     minX = spaceBetween;
+                                    rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                 } else {
-                                    perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-                                    minX = spaceBetween;
                                     maxX = parentWidth - spaceBetween;
+                                    minX = spaceBetween;
+                                    rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                 }
 
-                                /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-                                var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
-                                var maxWidth = maxX - minX;
-
-
-                                var i, rowsCount = rows.length;
-                                for(i = 0; i < rowsCount; i++) {
-                                    var row = rows[i];
-                                    var sampleRect = row[0];
-
-                                    if(sampleRect.side == 'left') {
-
-                                        var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
-
-                                        if(row.length != maxRectsOnLeftSide){
-                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                            var r, numRectsToAdd = maxRectsOnLeftSide - row.length, prevRect;
-                                            for(r = 0; r < numRectsToAdd; r++){
-                                                var newRect;
-                                                if(r == 0) {
-                                                    newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                } else {
-                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                }
-                                                availableRectsOnLeft.push(newRect);
-
-                                                prevRect = newRect;
-                                            }
-                                        }
-
-                                    } else if (sampleRect.side == 'right') {
-
-                                        var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
-
-                                        if(row.length != maxRectsOnRightSide){
-                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                            var r, numRectsToAdd = maxRectsOnRightSide - row.length, prevRect;
-                                            for(r = 0; r < numRectsToAdd; r++){
-                                                var newRect;
-                                                if(r == 0) {
-                                                    newRect = new DOMRect(rowsMaxX + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                } else {
-                                                    newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                }
-                                                availableRectsOnRight.push(newRect);
-
-                                                prevRect = newRect;
-                                            }
-                                        }
-
-                                    } else {
-
-                                        var maxRectsInCurrentRow = Math.floor((maxWidth + spaceBetween) / (sampleRect.rect.width + spaceBetween));
-
-                                        if(row.length != maxRectsInCurrentRow){
-                                            var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
-                                            var rowsMaxX = Math.max.apply(Math, row.map(function(o) { return o.rect.x+o.rect.width; }));
-
-                                            var r, numRectsToAdd = maxRectsInCurrentRow - row.length, prevRect;
-                                            for(r = 0; r < numRectsToAdd; r++){
-                                                var newRect;
-                                                if(r == 0) {
-                                                    newRect = new DOMRect(rowsMinX - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                } else {
-                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                }
-                                                availableRectsFullRow.push(newRect);
-
-                                                prevRect = newRect;
-                                            }
-                                        }
-                                    }
-
-                                }
-
-                                if(sortedRows.left.length != sortedRows.right.length) {
-
-                                    //if there are more rows on the left side than on the right, complete row on the right side
-                                    if(sortedRows.left.length > sortedRows.right.length && rectsOnRightSide != 0){
-
-                                        var rowsToCreate = sortedRows.left.length - sortedRows.right.length;
-
-                                        var i;
-                                        for(i = sortedRows.right.length; i < sortedRows.left.length; i++) {
-                                            var leftRow = sortedRows.left[i];
-                                            var sampleRect = leftRow[0];
-
-                                            var rowsMinX = elementToWrap.left + elementToWrap.width + spaceBetween;
-                                            var rowsMaxX = parentWidth - spaceBetween;
-
-                                            var r, prevRect;
-                                            for(r = 0; r < rectsOnRightSide; r++){
-                                                var newRect;
-                                                if(r == 0) {
-                                                    newRect = new DOMRect(elementToWrap.left + elementToWrap.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
-                                                } else {
-                                                    newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
-                                                }
-
-                                                availableRectsOnRight.push(newRect);
-
-                                                prevRect = newRect;
-                                            }
-
-                                        }
-
-                                    } else if(sortedRows.right.length > sortedRows.left.length && rectsOnLeftSide != 0) {
-
-                                        var rowsToCreate = sortedRows.right.length - sortedRows.left.length;
-
-                                        var i;
-                                        for(i = sortedRows.left.length; i < sortedRows.right.length; i++) {
-
-                                            var rightRow = sortedRows.right[i];
-                                            var sampleRect = rightRow[0];
-
-                                            var rowsMinX = spaceBetween;
-                                            var rowsMaxX = elementToWrap.left - spaceBetween;
-
-                                            var r, prevRect;
-                                            for(r = 0; r < rectsOnLeftSide; r++){
-                                                var newRect;
-                                                if(r == 0) {
-                                                    newRect = new DOMRect(elementToWrap.left - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                } else {
-                                                    newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
-                                                }
-
-                                                availableRectsOnLeft.push(newRect);
-
-                                                prevRect = newRect;
-                                            }
-
-                                        }
-
-                                    }
-                                }
-
-
-                                var longerSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnRight : availableRectsOnLeft;
-                                var shorterSide = availableRectsOnRight.length >= availableRectsOnLeft.length ? availableRectsOnLeft : availableRectsOnRight;
-
-                                var alternatedArray = [];
-
-                                var i, length = longerSide.length;
-                                for (i = 0; i < length; i++) {
-                                    var sampleRect = longerSide[i];
-
-                                    var currentLeftRow = sortedRows.left.filter(function(r){
-                                        return r[0].top == sampleRect.top ? true : false;
-                                    })[0];
-                                    var currentRightRow = sortedRows.right.filter(function(r){
-                                        return r[0].top == sampleRect.top ? true : false;
-                                    })[0];
-
-                                    if(currentLeftRow != null && currentRightRow != null && currentLeftRow.length != 0 && currentRightRow.length != 0) {
-                                        if(currentRightRow.length <= currentLeftRow.length) {
-                                            if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                            if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                        } else {
-                                            if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                            if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                        }
-                                    } else if(currentLeftRow == null && currentRightRow != null) {
-                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                    } else if(currentLeftRow != null && currentRightRow == null) {
-                                        if(availableRectsOnRight[i] != null) alternatedArray.push(availableRectsOnRight[i]);
-                                        if(availableRectsOnLeft[i] != null) alternatedArray.push(availableRectsOnLeft[i]);
-                                    }
-
-                                }
-
-                                availableRects = availableRects.concat(alternatedArray);
-                                availableRects = availableRects.concat(availableRectsFullRow);
-                                return availableRects;
-                            }
-
-                            var createNewRows = function(numRectsToAdd, rows, availableRects) {
-                                // var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                                var parentWidth = containerRect.width;
-                                var parentHeight = containerRect.height;
-
-                                var align = getControlsAlign();
-
-                                var gridParams = getRectsGridParams(align);
-                                var rectsOnLeftSide = gridParams.rectsOnLeftSide;
-                                var rectsOnRightSide = gridParams.rectsOnRightSide;
-                                var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
-                                var perRow = gridParams.rectsPerRow;
-
-                                var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
-                                var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));
-                                var maxWidth = maxX - minX;
-                                var minY = currentRects.length == 0 ? parentHeight : Math.min.apply(Math, currentRects.map(function(o) { return o.y; }));
-                                var maxY = Math.max.apply(Math, currentRects.map(function(o) { return o.y; }));
-
-                                var newRects = [];
-
-                                var craeteRowsOnControlsSides = function(){
-
-                                    var startFrom, side;
-                                    var minLeftY, minRightY, maxLeftY, maxRightY;
-
-                                    var figureOutCoordsonLeft = function() {
-                                        if(rows.left.length != 0) {
-                                            var allrects = [];
-                                            for(var l in rows.left) {
-                                                allrects = allrects.concat(rows.left[l])
-                                            }
-                                            minLeftY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
-                                            maxLeftY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
-                                        } else {
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                                minLeftY = maxLeftY = parentHeight;
-                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                                minLeftY = maxLeftY = (0 - rectHeight);
-                                            }
-                                        }
-                                    }
-
-                                    var figureOutCoordsonRight = function() {
-                                        if(rows.right.length != 0) {
-
-                                            var allrects = [];
-                                            for(var l in rows.right) {
-                                                allrects = allrects.concat(rows.right[l])
-                                            }
-                                            minRightY = Math.min.apply(Math, allrects.map(function(o) { return o.top; }));
-                                            maxRightY = Math.max.apply(Math, allrects.map(function(o) { return o.top; }));
-                                        } else {
-
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                                minRightY = maxRightY = parentHeight;
-                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                                minRightY = maxRightY = (0 - rectHeight);
-                                            }
-
-                                        }
-                                    }
-
-                                    if(rows.left.length == rows.right.length && rows.right.length != 0) {
-                                        figureOutCoordsonRight();
-                                        figureOutCoordsonLeft();
-                                        startFrom = side = 'right';
-
-                                    } else if (rectsOnRightSide != 0 && rectsOnLeftSide != 0) {
-                                        figureOutCoordsonRight();
-                                        figureOutCoordsonLeft();
-
-                                        if (rows.right.length < rows.left.length) {
-                                            startFrom = side = 'right';
-                                        } else if (rows.left.length < rows.right.length) {
-                                            startFrom = side = 'left';
-                                        } else {
-                                            startFrom = side = 'right';
-                                        }
-                                    } else if (rectsOnLeftSide != 0) {
-                                        figureOutCoordsonLeft();
-
-                                        startFrom = side = 'left';
-                                    } else if (rectsOnRightSide != 0) {
-                                        figureOutCoordsonRight();
-
-                                        startFrom = side = 'right';
-                                    } else {
-
-                                    }
-
-                                    var numOfRowsAlongWrapEl, rectsToTheTopOnLeft, rectsToTheTopOnRight;
-
-                                    if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                        rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
-                                        rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
-
-                                        if(minY < elementToWrap.top) {
-                                            numOfRowsAlongWrapEl = 0;
-                                            rectsToTheTopOnLeft = 0;
-                                            rectsToTheTopOnRight = 0;
-                                        }
-
-                                    } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                        rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
-                                        rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
-
-                                        if(minY < elementToWrap.top) {
-                                            numOfRowsAlongWrapEl = 0;
-                                            rectsToTheTopOnLeft = 0;
-                                            rectsToTheTopOnRight = 0;
-                                        }
-                                    }
-
-                                    var count = numRectsToAdd;
-                                    var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
-                                    var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
-                                    var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
-
-                                    if(count < totalRectsOnSides) totalRectsOnSides = count;
-
-
-                                    var rects = [];
-                                    var currentRowRects = [];
-
-                                    /*if(maximized) {
-                                        count = totalRectsOnSides = count - 1;
-                                    }*/
-
-
-                                    var leftSideCounter = 0;
-                                    var rightSideCounter = 0;
-                                    var createNewRowOnLeft = false;
-                                    var createNewRowOnRight = false;
-                                    var i, x, y, prevRect, latestLeftRect, latestRightRect;
-                                    for (i = 0; i < totalRectsOnSides; i++) {
-                                        if(side == "right") {
-
-                                            if(latestRightRect) prevRect = latestRightRect
-                                            if(rightSideCounter >= 1) {
-
-                                                y = prevRect.y;
-                                                x = prevRect.x + (rectWidth + spaceBetween);
-
-                                            } else if(createNewRowOnRight) {
-
-                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                    y = prevRect.y - (rectHeight + spaceBetween);
-                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                    y = prevRect.y + prevRect.height + spaceBetween;
-                                                }
-
-                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                                    x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
-                                                } else {
-                                                    var allRects = currentRowRects;
-                                                    for (var a in rects) {
-                                                        allRects = allRects.concat(rects[a]);
-                                                    }
-                                                    x = allRects.filter(function(rect){
-                                                        return rect.side == 'right';
-                                                    }).reduce(function(prev, current) {
-                                                        return (prev.rect.x < current.rect.x) ? prev : current;
-                                                    }).rect.x
-                                                }
-
-                                                createNewRowOnRight = false;
-                                            } else {
-
-                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                    y = minRightY - (rectHeight + spaceBetween);
-                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                    y = maxRightY + rectHeight + spaceBetween;
-                                                }
-
-                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                                    x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
-                                                } else {
-                                                    x = (elementToWrap.left + elementToWrap.width + spaceBetween);
-                                                }
-
-                                            }
-
-                                            rightSideCounter++;
-
-                                            if(rightSideCounter == rectsOnRightSide) {
-                                                createNewRowOnRight = true;
-                                                rightSideCounter = 0;
-                                            }
-                                            if (totalRectsOnLeftSide != 0) {
-                                                if (rectsOnLeftSide == rectsOnRightSide) {
-                                                    side = 'left';
-                                                } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnLeft) {
-                                                    side = 'left';
-                                                } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
-                                                    side = 'left';
-                                                }
-
-                                            }
-                                            var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                            currentRowRects.push({side:'right', rect: rect});
-
-                                        } else if(side == "left") {
-
-                                            if(latestLeftRect) prevRect = latestLeftRect;
-
-                                            if(leftSideCounter >= 1 ) {
-
-                                                y = prevRect.y;
-                                                x = prevRect.x - (rectWidth + spaceBetween);
-
-                                            } else if(createNewRowOnLeft) {
-
-                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                    y = prevRect.y - (rectHeight + spaceBetween);
-                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                    y = prevRect.y + (rectHeight + spaceBetween);
-                                                }
-
-                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                                    x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
-                                                } else {
-                                                    var allRects = currentRowRects;
-                                                    for (var a in rects) {
-                                                        allRects = allRects.concat(rects[a]);
-                                                    }
-                                                    x = allRects.filter(function(rect){
-                                                        return rect.side == 'left';
-                                                    }).reduce(function(prev, current) {
-                                                        return (prev.rect.x > current.rect.x) ? prev : current;
-                                                    }).rect.x;
-                                                }
-
-                                                createNewRowOnLeft = false;
-                                            } else {
-
-                                                if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                    y = minLeftY - (rectHeight + spaceBetween);
-                                                } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                    y = maxLeftY + rectHeight + spaceBetween;
-                                                }
-
-                                                if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
-                                                    x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
-                                                } else {
-                                                    x = (elementToWrap.left - (rectWidth + spaceBetween));
-                                                }
-                                            }
-
-                                            leftSideCounter++;
-
-                                            if(leftSideCounter == rectsOnLeftSide) {
-                                                createNewRowOnLeft = true;
-                                                leftSideCounter = 0;
-                                            }
-
-                                            if (totalRectsOnRightSide != 0) {
-                                                if (rectsOnLeftSide == rectsOnRightSide) {
-                                                    side = 'right';
-                                                } else if (rectsOnLeftSide != rectsOnRightSide && !createNewRowOnRight) {
-                                                    side = 'right';
-                                                } else if (rectsOnLeftSide != rectsOnRightSide && createNewRowOnLeft && createNewRowOnRight) {
-                                                    side = 'right';
-                                                }
-                                            }
-
-                                            var rect = latestLeftRect = new DOMRect(x, y, rectWidth, rectHeight);
-                                            currentRowRects.push({side:'left', rect: rect});
-
-
-                                        }
-
-                                        if(i == perRow - 1 || i == totalRectsOnSides - 1) {
-                                            rects.push(currentRowRects);
-                                            currentRowRects = [];
-                                        }
-
-                                        count = count - 1;
-                                    }
-
-
-                                    var arr = [];
-                                    for(var i in rects){
-                                        arr = arr.concat(rects[i]);
-                                    }
-
-                                    return arr.map(function(rectObj){
-                                        return rectObj.rect;
-                                    });
-                                }
-
-                                var createFullRows = function(count) {
-
-                                    var allRects = currentRects.concat(newRects).concat(availableRects);
-                                    var minX, maxX, rectsNum;
-                                    if(align == 'top' || align == 'bottom') {
-
-                                        var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
-                                        var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
-
-                                        if(minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                        if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
-
-                                        rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
-                                        rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
-
-                                    } else if (align == 'bottomleft' || align == 'topleft') {
-                                        maxX =  parentWidth - spaceBetween;
-                                        minX =  elementToWrap.left + spaceBetween;
-                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
-
-                                    } else if (align == 'bottomright' || align == 'topright') {
-                                        maxX = elementToWrap.left - spaceBetween;
-                                        minX = spaceBetween;
-                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
-                                    } else {
-                                        maxX = parentWidth - spaceBetween;
-                                        minX = spaceBetween;
-                                        rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
-                                    }
-
-                                    if (align == 'top-full') {
-                                        var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
-                                        var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
-                                    } else {
-                                        var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
-                                        var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
-                                    }
-
-                                    var perRow = rectsNum;
-
-                                    var rects = []
-                                    var latestRect, createNewRow;
-                                    var isNextNewLast = false;
-                                    var rowItemCounter = 1;
-
-                                    var i;
-                                    for (i = 1; i <= count; i++) {
-                                        //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
-                                        var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
-                                        var isNextNewRow = rowItemCounter == perRow;
-                                        isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
-
-                                        var x,y
-                                        if(rowItemCounter > 1) {
-                                            y = latestRect.y;
-                                            x = latestRect.x - (rectWidth + spaceBetween);
-                                        } else if(createNewRow) {
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                                y =  latestRect.y - (rectHeight + spaceBetween);
-                                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                                y =  latestRect.y + latestRect.height + spaceBetween;
-                                            }
-                                            x = maxX - rectWidth;
-                                            createNewRow = false;
-                                        } else {
-                                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                                y = minY - (rectHeight + spaceBetween);
-                                            } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                                y = maxY + rectHeight + spaceBetween;
-                                            } else if (align == 'top-full'){
-                                                y = maxY + spaceBetween;
-                                            } else if (align == 'bottom-full'){
-                                                y = minY - (rectHeight + spaceBetween);
-                                            }
-                                            x = maxX - rectWidth;
-                                        }
-                                        var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
-
-                                        rects.push({side:null, rect: rect});
-
-                                        if(rowItemCounter == perRow) {
-                                            createNewRow = true;
-                                            rowItemCounter = 1;
-                                        } else rowItemCounter++;
-
-                                    }
-
-                                    return rects.map(function(rectObj){
-                                        return rectObj.rect;
-                                    });
-                                }
-
-                                if((rows.left.length == numOfRowsAlongWrapEl && rows.right.length == numOfRowsAlongWrapEl)
-                                    || (rows.left.length == 0 && rows.right.length == numOfRowsAlongWrapEl)
-                                    || (rows.right.length == 0 && rows.left.length == numOfRowsAlongWrapEl)
-                                    || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
-
-                                    newRects = createFullRows(numRectsToAdd);
+                                if (align == 'top-full') {
+                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y+o.height; }));
                                 } else {
+                                    var minY = Math.min.apply(Math, allRects.map(function(o) { return o.y; }));
+                                    var maxY = Math.max.apply(Math, allRects.map(function(o) { return o.y; }));
+                                }
 
-                                    newRects = craeteRowsOnControlsSides();
+                                var perRow = rectsNum;
 
-                                    if(newRects.length < numRectsToAdd) {
-                                        newRects = newRects.concat(createFullRows(numRectsToAdd - newRects.length));
+                                var rects = []
+                                var latestRect, createNewRow;
+                                var isNextNewLast = false;
+                                var rowItemCounter = 1;
+
+                                var i;
+                                for (i = 1; i <= count; i++) {
+                                    //var firstRect = new DOMRect(size.parentWidth - (rectWidth + spaceBetween), size.parentHeight - (rectHeight + spaceBetween), rectWidth, rectHeight)
+                                    var currentRow = isNextNewLast  ? perRow : Math.ceil(i/perRow);
+                                    var isNextNewRow = rowItemCounter == perRow;
+                                    isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == perRow;
+
+                                    var x,y
+                                    if(rowItemCounter > 1) {
+                                        y = latestRect.y;
+                                        x = latestRect.x - (rectWidth + spaceBetween);
+                                    } else if(createNewRow) {
+                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                                            y =  latestRect.y - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                                            y =  latestRect.y + latestRect.height + spaceBetween;
+                                        }
+                                        x = maxX - rectWidth;
+                                        createNewRow = false;
+                                    } else {
+                                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
+                                            y = minY - (rectHeight + spaceBetween);
+                                        } else if (align == 'top' || align == 'topleft' || align == 'topright') {
+                                            y = maxY + rectHeight + spaceBetween;
+                                        } else if (align == 'top-full'){
+                                            y = maxY + spaceBetween;
+                                        } else if (align == 'bottom-full'){
+                                            y = minY - (rectHeight + spaceBetween);
+                                        }
+                                        x = maxX - rectWidth;
                                     }
+                                    var rect = latestRect = new DOMRect(x, y, rectWidth, rectHeight);
+
+                                    rects.push({side:null, rect: rect});
+
+                                    if(rowItemCounter == perRow) {
+                                        createNewRow = true;
+                                        rowItemCounter = 1;
+                                    } else rowItemCounter++;
 
                                 }
 
-                                return newRects;
+                                return rects.map(function(rectObj){
+                                    return rectObj.rect;
+                                });
                             }
 
-                            var rectsToAddNum = count - _layoutTool.currentRects.length;
+                            if((rows.left.length == numOfRowsAlongWrapEl && rows.right.length == numOfRowsAlongWrapEl)
+                                || (rows.left.length == 0 && rows.right.length == numOfRowsAlongWrapEl)
+                                || (rows.right.length == 0 && rows.left.length == numOfRowsAlongWrapEl)
+                                || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
 
-                            var rows = getRectsRows();
-                            var availableRects = getAvailableRects(rows);
-                            var newRows;
-                            if(rectsToAddNum > availableRects.length) {
-                                rectsToAddNum = (rectsToAddNum - availableRects.length);
-                                newRows = createNewRows(rectsToAddNum, rows, availableRects);
-                                availableRects = availableRects.concat(newRows);
-                            } else if(availableRects.length > rectsToAddNum) {
-                                availableRects = availableRects.slice(0, rectsToAddNum);
+                                newRects = createFullRows(numRectsToAdd);
+                            } else {
+
+                                newRects = craeteRowsOnControlsSides();
+
+                                if(newRects.length < numRectsToAdd) {
+                                    newRects = newRects.concat(createFullRows(numRectsToAdd - newRects.length));
+                                }
+
                             }
 
-                            //resultRects = alignFullRows(resultRects);
-
-                            return availableRects;
-
+                            return newRects;
                         }
 
-                        function alignFullRows(elementRects) {
-                            var groupBy = function(xs, key) {
-                                var groupedRows = xs.reduce(function(rv, x) {
-                                    (rv[x[key]] = rv[x[key]] || []).unshift(x);
-                                    return rv;
-                                }, {});
+                        var rectsToAddNum = count - _layoutTool.currentRects.length;
 
-                                var groupedArray = [];
-                                for (var property in groupedRows) {
-                                    if (groupedRows.hasOwnProperty(property)) {
-                                        groupedArray.push(groupedRows[property]);
-                                    }
-                                }
+                        var rows = getRectsRows();
+                        var availableRects = getAvailableRects(rows);
+                        var newRows;
+                        if(rectsToAddNum > availableRects.length) {
+                            rectsToAddNum = (rectsToAddNum - availableRects.length);
+                            newRows = createNewRows(rectsToAddNum, rows, availableRects);
+                            availableRects = availableRects.concat(newRows);
+                        } else if(availableRects.length > rectsToAddNum) {
+                            availableRects = availableRects.slice(0, rectsToAddNum);
+                        }
 
-                                return groupedArray;
-                            };
+                        //resultRects = alignFullRows(resultRects);
 
-                            var sortByX = function compare( a, b ) {
-                                if ( a.rect.left < b.rect.left ){
-                                    return -1;
-                                }
-                                if ( a.rect.left > b.rect.left ){
-                                    return 1;
-                                }
-                                return 0;
-                            }
+                        return availableRects;
 
-                            var fullRowsRects = [];
-                            var i, count = elementRects.length;
-                            for (i = 0; i < count; i++) {
-                                var rect = elementRects[i];
-                                if(rect.top + rect.height <= elementToWrap.top) {
-                                    fullRowsRects.push({indx: i, top: rect.top, rect: rect});
+                    }
+
+                    function alignFullRows(elementRects) {
+                        var groupBy = function(xs, key) {
+                            var groupedRows = xs.reduce(function(rv, x) {
+                                (rv[x[key]] = rv[x[key]] || []).unshift(x);
+                                return rv;
+                            }, {});
+
+                            var groupedArray = [];
+                            for (var property in groupedRows) {
+                                if (groupedRows.hasOwnProperty(property)) {
+                                    groupedArray.push(groupedRows[property]);
                                 }
                             }
 
-                            var fullWidthRows = groupBy(fullRowsRects, 'top');
-
-                            var minX = Math.min.apply(Math, elementRects.map(function(o) { return o.x; }));
-                            var maxX = Math.max.apply(Math, elementRects.map(function(o) { return o.x+o.width; }));
-
-                            var i, rowCount = fullWidthRows.length;
-
-                            for (i = 0; i < rowCount; i++) {
-                                var row = fullWidthRows[i];
-                                row.sort(sortByX);
-
-                                var x, rectsCount = row.length, widthSum = 0;
-                                for (x = 0; x < rectsCount; x++) {
-                                    let rect = row[x];
-                                    widthSum += rect.rect.width;
-                                }
-                                widthSum = widthSum + ((rectsCount - 1) * spaceBetween)
-
-
-                                var newMinX = ((maxX - minX) / 2) - (widthSum / 2) + minX;
-
-                                let prevRect = null;
-                                for (let r = 0; r < row.length; r++) {
-
-
-                                    if(r != 0) {
-                                        elementRects[row[r].indx].x = prevRect.x + prevRect.width + spaceBetween;
-                                    } else {
-                                        elementRects[row[r].indx].x = newMinX;
-                                    }
-
-                                    prevRect = elementRects[row[r].indx];
-                                }
-
-                            }
-
-                            return elementRects;
+                            return groupedArray;
                         };
 
-                        function compareLayoutStates(prevRects, newRects) {
-                            var diffEls = [];
-                            var count = prevRects.length;
+                        var sortByX = function compare( a, b ) {
+                            if ( a.rect.left < b.rect.left ){
+                                return -1;
+                            }
+                            if ( a.rect.left > b.rect.left ){
+                                return 1;
+                            }
+                            return 0;
+                        }
 
-                            var findInCurrentLayout = function (prevLayoutRect) {
+                        var fullRowsRects = [];
+                        var i, count = elementRects.length;
+                        for (i = 0; i < count; i++) {
+                            var rect = elementRects[i];
+                            if(rect.top + rect.height <= elementToWrap.top) {
+                                fullRowsRects.push({indx: i, top: rect.top, rect: rect});
+                            }
+                        }
 
-                                var count = newRects.length;
-                                for (var c = 0; c < count; c++) {
+                        var fullWidthRows = groupBy(fullRowsRects, 'top');
 
-                                    var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
-                                    var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
+                        var minX = Math.min.apply(Math, elementRects.map(function(o) { return o.x; }));
+                        var maxX = Math.max.apply(Math, elementRects.map(function(o) { return o.x+o.width; }));
 
-                                    if((diffTop + diffLeft) / 2 < 2) {
-                                        return true;
-                                    }
+                        var i, rowCount = fullWidthRows.length;
+
+                        for (i = 0; i < rowCount; i++) {
+                            var row = fullWidthRows[i];
+                            row.sort(sortByX);
+
+                            var x, rectsCount = row.length, widthSum = 0;
+                            for (x = 0; x < rectsCount; x++) {
+                                let rect = row[x];
+                                widthSum += rect.rect.width;
+                            }
+                            widthSum = widthSum + ((rectsCount - 1) * spaceBetween)
+
+
+                            var newMinX = ((maxX - minX) / 2) - (widthSum / 2) + minX;
+
+                            let prevRect = null;
+                            for (let r = 0; r < row.length; r++) {
+
+
+                                if(r != 0) {
+                                    elementRects[row[r].indx].x = prevRect.x + prevRect.width + spaceBetween;
+                                } else {
+                                    elementRects[row[r].indx].x = newMinX;
                                 }
 
+                                prevRect = elementRects[row[r].indx];
+                            }
+
+                        }
+
+                        return elementRects;
+                    };
+
+                    function compareLayoutStates(prevRects, newRects) {
+                        var diffEls = [];
+                        var count = prevRects.length;
+
+                        var findInCurrentLayout = function (prevLayoutRect) {
+
+                            var count = newRects.length;
+                            for (var c = 0; c < count; c++) {
+
+                                var diffTop = Math.abs(prevLayoutRect.top - newRects[c].top);
+                                var diffLeft = Math.abs(prevLayoutRect.left - newRects[c].left);
+
+                                if((diffTop + diffLeft) / 2 < 2) {
+                                    return true;
+                                }
+                            }
+
+                            return false;
+                        }
+
+                        for (let i = 0; i < count; i++) {
+                            var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
+                            if(!findInCurrentLayout(prevLayoutRect)) {
+
+                                diffEls.push(prevLayoutRect);
+                            }
+                        }
+
+                        return diffEls;
+                    }
+
+                    function changeRectPosition(oldRect, newRect, rects) {
+                        var i, count = rects.length;
+                        for (i = 0; i < count; i++) {
+                            if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
+                                rects[i] = newRect;
+                                break;
+                            }
+                        }
+                        return rects;
+                    }
+
+                    function findClosest(diffRect, rects) {
+                        if(!diffRect) return null;
+                        var closestOnTop = findClosesVerticallyRect(diffRect, rects);
+
+                        if(closestOnTop != null) {
+                            return closestOnTop
+                        } else {
+                            var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
+
+                            if(closestOnSide != null) {
+                                return closestOnSide;
+                            }
+                        }
+                        return null;
+                    }
+
+
+
+                    function findClosesVerticallyRect(rect, rects) {
+                        var distance = function (x1,y1,x2,y2) {
+                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                        }
+
+                        var align = getControlsAlign();
+
+                        var nextRow;
+                        if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
+                            nextRow = rects.filter(function (r) {
+                                if (r.top < rect.top) return true;
                                 return false;
-                            }
+                            })
 
-                            for (let i = 0; i < count; i++) {
-                                var prevLayoutRect = new DOMRect(prevRects[i].x, prevRects[i].y, prevRects[i].width, prevRects[i].height);
-                                if(!findInCurrentLayout(prevLayoutRect)) {
-
-                                    diffEls.push(prevLayoutRect);
-                                }
-                            }
-
-                            return diffEls;
+                        } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
+                            nextRow = rects.filter(function (r) {
+                                if (r.top > rect.top) return true;
+                                return false;
+                            })
                         }
 
-                        function changeRectPosition(oldRect, newRect, rects) {
-                            var i, count = rects.length;
-                            for (i = 0; i < count; i++) {
-                                if(oldRect.top == rects[i].top && oldRect.left == rects[i].left) {
-                                    rects[i] = newRect;
-                                    break;
-                                }
-                            }
-                            return rects;
-                        }
-
-                        function findClosest(diffRect, rects) {
-                            if(!diffRect) return null;
-                            var closestOnTop = findClosesVerticallyRect(diffRect, rects);
-
-                            if(closestOnTop != null) {
-                                return closestOnTop
-                            } else {
-                                var closestOnSide = findClosesHorizontalyRect(diffRect, rects);
-
-                                if(closestOnSide != null) {
-                                    return closestOnSide;
-                                }
-                            }
-                            return null;
-                        }
-
-
-
-                        function findClosesVerticallyRect(rect, rects) {
-                            var distance = function (x1,y1,x2,y2) {
-                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                            }
-
-                            var align = getControlsAlign();
-
-                            var nextRow;
-                            if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright' || align == 'bottom-full') {
-                                nextRow = rects.filter(function (r) {
-                                    if (r.top < rect.top) return true;
-                                    return false;
-                                })
-
-                            } else if (align == 'top' || align == 'topleft' || align == 'topright' || align == 'top-full') {
-                                nextRow = rects.filter(function (r) {
-                                    if (r.top > rect.top) return true;
-                                    return false;
-                                })
-                            }
-
-                            if(nextRow.length != 0) {
-                                var isRowFull
-                                if(align == 'bottom') {
-                                    isRowFull = nextRow[0].top + nextRow[0].height < elementToWrap.top;
-
-                                } else if (align == 'top') {
-                                    isRowFull = nextRow[0].top > elementToWrap.top;
-                                } else {
-                                    isRowFull = true;
-                                }
-
-                                var closestVerticaly;
-                                closestVerticaly = nextRow.reduce(function (prev, current) {
-                                    return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
-                                    //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
-                                })
-
-
-
-                                if ((!isRowFull && Math.sign(90 - Math.abs((closestVerticaly.left + 90) - (rect.left + 90))) >= 0) || isRowFull) {
-                                    return closestVerticaly;
-                                } else {
-                                    return null;
-                                }
-                            } else {
-                                return null;
-                            }
-                        }
-
-                        function findClosesHorizontalyRect(rect, rects) {
-                            var distance = function (x1,y1,x2,y2) {
-                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
-                            }
-
-                            var align = getControlsAlign();
-
+                        if(nextRow.length != 0) {
                             var isRowFull
                             if(align == 'bottom') {
-                                isRowFull = rect.top + rect.height < elementToWrap.top;
+                                isRowFull = nextRow[0].top + nextRow[0].height < elementToWrap.top;
 
                             } else if (align == 'top') {
-                                isRowFull = rect.top > elementToWrap.top + elementToWrap.height;
+                                isRowFull = nextRow[0].top > elementToWrap.top;
                             } else {
                                 isRowFull = true;
                             }
 
-                            var currentRowRect;
-                            if(isRowFull) {
-                                currentRowRect = rects.filter(function (r) {
-                                    if (r.top == rect.top && r.left < rect.left) {
-                                        return true
-                                    }
-                                    return false;
-                                })
-                            } else if(rect.left <= elementToWrap.left) {
-                                currentRowRect = rects.filter(function (r) {
-                                    if (r.top == rect.top && r.left < rect.left && rect.left < elementToWrap.left) {
-                                        return true
-                                    }
-                                    return false;
-                                })
+                            var closestVerticaly;
+                            closestVerticaly = nextRow.reduce(function (prev, current) {
+                                return (distance(current.left, current.top + current.height, rect.left, rect.top + rect.height) < distance(prev.left, prev.top + prev.height, rect.left, rect.top + rect.height)) ? current : prev;
+                                //return (Math.abs((current.left + current.width / 2) -  Math.abs(rect.left + rect.width / 2)) <  Math.abs((prev.left + prev.width / 2) - Math.abs(rect.left + rect.width / 2))) ? current : prev;
+                            })
+
+
+
+                            if ((!isRowFull && Math.sign(90 - Math.abs((closestVerticaly.left + 90) - (rect.left + 90))) >= 0) || isRowFull) {
+                                return closestVerticaly;
                             } else {
-                                currentRowRect = rects.filter(function (r) {
-                                    if (r.top == rect.top && r.left > rect.left && rect.left > elementToWrap.left) {
-                                        return true
-                                    }
-                                    return false;
-                                })
+                                return null;
                             }
-
-                            if(currentRowRect.length != 0) {
-                                var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
-                                    return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
-                                    //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
-                                })
-
-                                return closestHorizontaly;
-                            }
-
+                        } else {
                             return null;
-                            /*for (var i = 0; i < count; i++) {
-                                var rect = newRects[i];
-                                if(rect.top + rect.height )
-                            }*/
+                        }
+                    }
+
+                    function findClosesHorizontalyRect(rect, rects) {
+                        var distance = function (x1,y1,x2,y2) {
+                            return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
                         }
 
-                        function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
+                        var align = getControlsAlign();
 
-                            var closest;
-                            if(skipRects != null) {
-                                closest = findClosest(spaceToFill, rects.filter(function(o, i) {
-                                    var exclude = false;
-                                    for(let r in skipRects) {
-                                        if(skipRects[r].x == o.x && skipRects[r].y == o.y
-                                            && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
+                        var isRowFull
+                        if(align == 'bottom') {
+                            isRowFull = rect.top + rect.height < elementToWrap.top;
 
-                                            exclude = true;
-                                            break;
-                                        }
+                        } else if (align == 'top') {
+                            isRowFull = rect.top > elementToWrap.top + elementToWrap.height;
+                        } else {
+                            isRowFull = true;
+                        }
+
+                        var currentRowRect;
+                        if(isRowFull) {
+                            currentRowRect = rects.filter(function (r) {
+                                if (r.top == rect.top && r.left < rect.left) {
+                                    return true
+                                }
+                                return false;
+                            })
+                        } else if(rect.left <= elementToWrap.left) {
+                            currentRowRect = rects.filter(function (r) {
+                                if (r.top == rect.top && r.left < rect.left && rect.left < elementToWrap.left) {
+                                    return true
+                                }
+                                return false;
+                            })
+                        } else {
+                            currentRowRect = rects.filter(function (r) {
+                                if (r.top == rect.top && r.left > rect.left && rect.left > elementToWrap.left) {
+                                    return true
+                                }
+                                return false;
+                            })
+                        }
+
+                        if(currentRowRect.length != 0) {
+                            var closestHorizontaly = currentRowRect.reduce(function (prev, current) {
+                                return (distance(current.left, current.top + 90, rect.left, rect.top + 90) < distance(prev.left, prev.top + 90, rect.left, rect.top + 90)) ? current : prev;
+                                //return (90 - Math.abs((current.left+90) - (rect.left+90)) > 90 - Math.abs((prev.left+90) - (rect.left+90))) ? current : prev;
+                            })
+
+                            return closestHorizontaly;
+                        }
+
+                        return null;
+                        /*for (var i = 0; i < count; i++) {
+                            var rect = newRects[i];
+                            if(rect.top + rect.height )
+                        }*/
+                    }
+
+                    function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
+
+                        var closest;
+                        if(skipRects != null) {
+                            closest = findClosest(spaceToFill, rects.filter(function(o, i) {
+                                var exclude = false;
+                                for(let r in skipRects) {
+                                    if(skipRects[r].x == o.x && skipRects[r].y == o.y
+                                        && skipRects[r].width == o.width  && skipRects[r].height == o.height) {
+
+                                        exclude = true;
+                                        break;
                                     }
+                                }
 
-                                    return (exclude == false ? true : false);
-                                }));
-                            } else {
-                                closest = findClosest(spaceToFill, rects);
-                            }
+                                return (exclude == false ? true : false);
+                            }));
+                        } else {
+                            closest = findClosest(spaceToFill, rects);
+                        }
 
-                            if(closest != null) {
-                                changeRectPosition(closest, spaceToFill, rects);
-                                return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
-                            } else {
-                                //rects = alignFullRows(rects);
-                                return rects;
+                        if(closest != null) {
+                            changeRectPosition(closest, spaceToFill, rects);
+                            return fillFreeSpaceWithClosestRects(closest, rects, (activeScreenRect ? [activeScreenRect] : null));
+                        } else {
+                            //rects = alignFullRows(rects);
+                            return rects;
+                        }
+                    }
+
+                    function removeAndUpdate() {
+                        var count = roomScreens.length;
+
+                        var elementRects = [];
+
+                        var currentlyMaximizedElIndex;
+                        for (let i = 0; i < count; i++) {
+                            var screen = roomScreens[i];
+                            if(screen == activeScreen) currentlyMaximizedElIndex = i;
+                            var screenRect = screen.screenEl.getBoundingClientRect();
+                            if(_roomsMedia.contains(screen.screenEl)) elementRects.push(screenRect);
+                        }
+
+                        var actualLayoutRects = []
+                        for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
+                            if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
+                                actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
                             }
                         }
 
-                        function removeAndUpdate() {
-                            var count = roomScreens.length;
+                        var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
 
-                            var elementRects = [];
+                        var resultLayoutRects;
 
-                            var currentlyMaximizedElIndex;
-                            for (let i = 0; i < count; i++) {
-                                var screen = roomScreens[i];
-                                if(screen == activeScreen) currentlyMaximizedElIndex = i;
-                                var screenRect = screen.screenEl.getBoundingClientRect();
-                                if(_roomsMedia.contains(screen.screenEl)) elementRects.push(screenRect);
+                        if(diff.length != 0) {
+
+                            for(var s in diff) {
+                                resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
                             }
-
-                            var actualLayoutRects = []
-                            for(var i = 0; i < _layoutTool.state.currentMappedRects.length; i++) {
-                                if(_roomsMedia.contains(_layoutTool.state.currentMappedRects[i].el) ) {
-                                    actualLayoutRects.push(_layoutTool.state.currentMappedRects[i].rect);
-                                }
-                            }
-
-                            var diff = compareLayoutStates(_layoutTool.basicGridRects, actualLayoutRects);
-
-                            var resultLayoutRects;
-
-                            if(diff.length != 0) {
-
-                                for(var s in diff) {
-                                    resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
-                                }
-                            } else resultLayoutRects = elementRects;
+                        } else resultLayoutRects = elementRects;
 
 
-                            return resultLayoutRects;
-                        }
-                    },
+                        return resultLayoutRects;
+                    }
+                },
                 squaresGrid: function (container, count) {
                     if(roomScreens.length == 0) return;
 
@@ -6819,12 +5108,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
 
                 //if track is still muted after 3s, hide parent screen
-              /*  track.parentScreen.removeTimer = setTimeout(function () {
-                    if((track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended') && hasLiveTracks == false){
-                        removeScreenFromCommonList(track.parentScreen);
-                        track.parentScreen.removeTimer = null;
-                    }
-                }, 3000);*/
+                /*  track.parentScreen.removeTimer = setTimeout(function () {
+                      if((track.mediaStreamTrack.muted == true || track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended') && hasLiveTracks == false){
+                          removeScreenFromCommonList(track.parentScreen);
+                          track.parentScreen.removeTimer = null;
+                      }
+                  }, 3000);*/
             }
 
             function onVideoUnMute(track) {
@@ -6927,6 +5216,1502 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             };
         })()
 
+        /**
+         * Bind Qbix stream events. Currentlt isn't in use.
+         * @method bindStreamsEvents
+         * @param {Object} [stream] stream that represents room
+         */
+        function bindStreamsEvents(stream) {
+            log('bindStreamsEvents', stream)
+            stream.onMessage('Streams/join').set(function (stream, message) {
+
+            });
+
+            stream.onMessage('Streams/connected').set(function (stream, message) {
+
+            });
+
+            stream.onMessage("Streams/leave").set(function (stream, message) {
+
+            });
+
+            stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
+                console.log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
+                if(!isActive()) return;
+                var message = JSON.parse(message.content);
+                var roomParticipants = WebRTCconference.roomParticipants();
+                var localParticipant = WebRTCconference.localParticipant();
+
+                var userId = localParticipant.identity != null ? localParticipant.identity.split('\t')[0] : null;
+
+                if(message.userId == userId) {
+                    if(message.immediate === true) {
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnectingImmediately);
+                        stop();
+                    } else {
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
+
+                        setTimeout(function () {
+                            stop();
+                        }, 5000);
+                    }
+
+                    /*Q.Streams.unrelate(
+                        state.publisherId,
+                        state.streamName,
+
+                        state.relationType,
+                        this.stream.fields.publisherId,
+                        this.stream.fields.name
+                    );*/
+                } else {
+                    for(let p in roomParticipants) {
+                        if(roomParticipants[p].isLocal) continue;
+                        var platformId = roomParticipants[p].identity != null ? roomParticipants[p].identity.split('\t')[0] : null;
+                        if(userId == platformId) {
+                            roomParticipants[p].remove();
+                        }
+                    }
+                }
+
+            });
+        }
+
+        /**
+         * Bind events that are triggered by WebRTC library (app.js)
+         * @method bindConferenceEvents
+         */
+        function bindConferenceEvents(WebRTCconference) {
+            function setRealName(participant, callback) {
+                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+                if(userId != null){
+                    var firstName;
+                    var lastName;
+                    var fullName = '';
+                    Q.Streams.get(userId, 'Streams/user/firstName', function () {
+                        firstName = this.fields.content;
+                        if(firstName != null) {
+                            fullName += firstName;
+                        }
+                        try {
+                            Q.Streams.get(userId, 'Streams/user/lastName', function () {
+                                lastName = this.fields.content;
+
+                                if(lastName != null) {
+                                    fullName += ' ' + lastName;
+                                }
+
+                                participant.username = fullName;
+
+                                if(callback != null) callback({firstName:firstName, lastName:lastName});
+                            });
+                        } catch (e) {
+                            participant.username = fullName;
+                            if(callback != null) callback({firstName:firstName, lastName:lastName});
+                        }
+
+                    });
+                }
+            }
+
+            function setUserAvatar(participant) {
+                log('setUserAvatar', participant);
+                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+                if(userId != null){
+                    Q.Streams.Avatar.get(userId, function (err, avatar) {
+                        if (!avatar) {
+                            return;
+                        }
+
+                        var src = Q.url(avatar.iconUrl(400));
+                        if(src != null) {
+                            var avatarImg = new Image();
+                            avatarImg.src = src;
+                            log('setUserAvatar set');
+
+                            participant.avatar = {src:src, image:avatarImg};
+                        }
+
+
+                    });
+                }
+            }
+
+            WebRTCconference.event.on('log', function (params) {
+                appDebug.logInfo(params, true);
+            });
+
+            WebRTCconference.event.on('joined', function (participant) {
+                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                if(participant.sid == 'recording') return;
+                setRealName(participant);
+                setUserAvatar(participant);
+                screensRendering.onParticipantConnected(participant);
+            });
+
+            WebRTCconference.event.on('participantConnected', function (participant) {
+                log('user joined',  participant);
+                if(participant.sid == 'recording') return;
+                setRealName(participant, function(name){
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
+                });
+                setUserAvatar(participant);
+                screensRendering.onParticipantConnected(participant);
+
+                if(WebRTCconference.initNegotiationState == 'ended') {
+                    log('play joined music');
+
+                    if(Q.Audio.collection[_options.sounds.participantConnected]) {
+                        log('play joined music 1', _options.sounds.participantConnected, this);
+                        Q.Audio.collection[_options.sounds.participantConnected].audio.play()
+                    } else {
+                        Q.Audio.load(_options.sounds.participantConnected, function () {
+                            log('play joined music 2', _options.sounds.participantConnected, this);
+
+                            Q.Audio.collection[_options.sounds.participantConnected].audio.play()
+                        });
+                    }
+
+                }
+
+                //screensRendering.updateLayout();
+            });
+            WebRTCconference.event.on('participantDisconnected', function (participant) {
+                log('user disconnected',  participant);
+                try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
+
+                }
+                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+
+
+                if(userId != null){
+                    Q.Streams.get(userId, 'Streams/user/firstName', function () {
+                        var firstName = this.fields.content;
+                        notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
+
+                    });
+                }
+
+
+                if(Q.Audio.collection[_options.sounds.participantDisconnected]) {
+                    log('play leave music 1', _options.sounds.participantDisconnected, this);
+                    Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
+                } else {
+                    Q.Audio.load(_options.sounds.participantDisconnected, function () {
+                        log('play leave music 2', _options.sounds.participantDisconnected, this);
+                        Q.Audio.collection[_options.sounds.participantDisconnected].audio.play()
+                    });
+                }
+
+                screensRendering.onParticipantDisconnected(participant);
+
+                screensRendering.updateLayout();
+            });
+            WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
+                log('you left the room')
+                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
+                screensRendering.updateLayout();
+            });
+            WebRTCconference.event.on('participantRemoved', function (participant) {
+                log('you left the room')
+                //screensRendering.removeParticipantsScreens();
+                screensRendering.onParticipantDisconnected(participant);
+            });
+
+
+            WebRTCconference.event.on('screenAdded', function (participant) {
+                log('screen added', participant)
+                screensRendering.updateLayout();
+            });
+            WebRTCconference.event.on('screenRemoved', function (participant) {
+                log('screen removed', participant)
+                screensRendering.updateLayout();
+            });
+            WebRTCconference.event.on('trackAdded', function (e) {
+                log('track added', e)
+                screensRendering.newTrackAdded(e.track, e.participant);
+                //screensRendering.updateLayout();
+
+
+                //screensRendering.newTrackAdded(e.track);
+            });
+
+            WebRTCconference.event.on('trackMuted', function (e) {
+                log('track muted', e)
+                if(e.track.kind == 'video') {
+                    screensRendering.showLoader('videoMuted', {screen: e.screen, participant: e.screen.participant});
+                    screensRendering.onVideoMute(e.track, e.participant);
+                }
+
+
+            });
+
+            WebRTCconference.event.on('trackUnmuted', function (e) {
+                log('track unmuted', e)
+                if(e.track.kind == 'video') {
+                    screensRendering.hideLoader('videoUnmuted', {screen: e.screen, participant: e.screen.participant});
+                    screensRendering.onVideoUnMute(e.track);
+                }
+            });
+
+            WebRTCconference.event.on('videoTrackIsBeingAdded', function (e) {
+                log('video track is being added', e)
+                screensRendering.videoTrackIsAdding(e.track, e.participant);
+                screensRendering.updateLayout();
+            });
+
+            WebRTCconference.event.on('videoTrackLoaded', function (e) {
+                log('video track loaded', e)
+                screensRendering.onVideoTrackLoaded(e.track);
+            });
+
+            WebRTCconference.event.on('screensharingStarting', function (e) {
+                log('screen sharing is being started', e)
+
+                screensRendering.onScreensharingStarting(e);
+                screensRendering.showLoader('screensharingStarting', {participant: e.participant});
+            });
+
+            WebRTCconference.event.on('afterCamerasToggle', function (e) {
+                screensRendering.hideLoader('afterCamerasToggle', {participant: e.participant});
+            });
+            WebRTCconference.event.on('beforeCamerasToggle', function (e) {
+                screensRendering.showLoader('beforeCamerasToggle', {participant: e.participant});
+            });
+            WebRTCconference.event.on('screensharingStarted', function (e) {
+                log('screen sharing started', e)
+                /*if(screensRendering.getActiveViewMode() != 'screenSharing') {
+                    var screensharingTrack;
+				    if(e.content && e.content.trackId != null) {
+                        screensharingTrack = e.participant.videoTracks().filter(function (t) {
+                            return t.mediaStreamTrack.id == e.content.trackId ? true : false;
+                        })[0];
+                    } else {
+				        var videoTracks =e.participant.videoTracks();
+                        if(videoTracks.length != 0) screensharingTrack = videoTracks.reduce(function(prev, current) {
+                            return ((prev.trackEl.videoWidth * prev.trackEl.videoHeight) > (current.trackEl.videoWidth * current.trackEl.videoHeight)) ? prev : current;
+                        })
+                    }
+
+                    if(screensharingTrack) {
+                        screensharingTrack.screensharing = true;
+                        screensRendering.renderFullScreenLayout(screensharingTrack.parentScreen);
+                    }
+                }*/
+                //screensRendering.hideLoader('screensharingStarting', data.participant);
+            });
+            WebRTCconference.event.on('screensharingFailed', function (e) {
+                log('screen sharing failed')
+                screensRendering.hideLoader('screensharingFailed', {participant: e.participant});
+            });
+
+            WebRTCconference.event.on('connected', function () {
+                log('Connected to server')
+                connectionState.updateStatus('Connected');
+                connectionState.show();
+
+                setTimeout(function () {
+                    connectionState.hide();
+
+                }, 1000);
+            });
+            WebRTCconference.event.on('connectError', function () {
+                log('Server connection failed')
+                connectionState.show();
+                //connectionState.updateStatus('reconnecting', 'Server connection failed: ');
+            });
+            WebRTCconference.event.on('reconnectError', function () {
+                log('Server reconnection failed')
+                connectionState.updateStatus('reconnection failed', 'Server connection failed: ');
+            });
+            WebRTCconference.event.on('reconnectAttempt', function (n) {
+                log('Server reconnection attempt ' + n)
+                connectionState.updateStatus('reconnection attempt ' + n, 'Server connection failed: ');
+            });
+
+            var updateLayoutOnResize = function() {
+                setTimeout(function () {
+                    screensRendering.updateLayout();
+                }, 1000)
+            }
+
+            window.addEventListener("resize", updateLayoutOnResize);
+
+            WebRTCconference.event.on('disconnected', function () {
+                window.removeEventListener('resize', updateLayoutOnResize);
+            });
+
+        }
+
+        /**
+         * Show dialog with insturctions in case when it's impossible to access microphone or camera.
+         * @method showInstructionsDialog
+         * @param {String} [kind] Name of device that is not accessible.
+         */
+        var connectionState = (function () {
+
+            var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
+
+            var _notice = null;
+            var _currentState = preparingRoom ? "Checking room's state" : 'Connecting...';
+
+            function show(state) {
+                if(state != null) updateStatus(state);
+            }
+
+            function hide() {
+                var removeNotice = function() {
+                    if(_notice != null && _notice.element.parentNode != null && document.body.contains(_notice.element)) {
+                        _notice.remove();
+                    }
+                }
+
+                if(_currentState.toLowerCase() == 'connected') {
+                    setTimeout(removeNotice, 4000);
+                } else {
+                    removeNotice();
+                }
+
+            }
+
+            function updateStatus(state, text) {
+                _currentState = state;
+                var message = ''
+                if(text != null) message += text;
+                if(state != null) message += state;
+
+                if(_notice != null && document.body.contains(_notice.element)) {
+                    _notice.update(message);
+                } else {
+                    _notice = notice.show(message, true, true, 'left');
+                }
+            }
+
+            return {
+                show:show,
+                hide:hide,
+                updateStatus:updateStatus
+            }
+
+        }());
+
+        /**
+         * Show dialog with insturctions in case when it's impossible to access microphone or camera.
+         * @method showInstructionsDialog
+         * @param {String} [kind] Name of device that is not accessible.
+         */
+        function showInstructionsDialog(kind) {
+            var instructionsPermissionDialog = document.createElement('DIV');
+            instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+            var dialogList = document.createElement('OL');
+            dialogList.className = 'Streams_webrtc_instructions_dialog';
+
+            if(Q.info.platform === 'ios') {
+                dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
+                //Q.getObject("webrtc.allow." + titleText, _textes)
+            } else {
+                dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
+									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
+            }
+
+            instructionsPermissionDialog.appendChild(dialogList);
+            Q.Dialogs.push({
+                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
+                className: 'Streams_webrtc_devices_dialog',
+                content: instructionsPermissionDialog,
+                apply: true
+            });
+        }
+
+        /**
+         * Show dialog with buttons to get permissions for camera and/or microphone.
+         * @method showPermissionsDialogue
+         */
+        function showPermissionsDialogue(constrains, callback) {
+
+            var micIcon = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
+            var cameraIcon = '<svg class="camera-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" class="cameraPath" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M77.156,60.693l-15.521-8.961v8.51H25.223v-23.42   h36.412v8.795l15.521-8.961V60.693z"/>  </svg>';
+
+
+            var addStreamToRoom = function(stream) {
+
+                if(WebRTCconference != null){
+
+                    var publishTracks = function () {
+                        var tracks = stream.getTracks();
+                        for(var t in tracks) {
+                            WebRTCconference.localMediaControls.addTrack(tracks[t], stream);
+                        }
+
+                        navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+                            WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
+                        }).catch(function (e) {
+                            console.error('ERROR: cannot get device info: ' + e.message);
+                        });
+                    }
+
+                    if(WebRTCconference.state == 'connected' && _options.streams == null) {
+                        publishTracks();
+                    } else {
+                        WebRTCconference.event.on('joined', function () {
+                            if (_options.streams == null) {
+                                publishTracks();
+                            }
+                        });
+                    }
+
+                } else if (_options.streams == null) {
+                    if(_options.startWith.video == true || _options.startWith.audio == true) _options.streams = [stream];
+                    if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
+                        if(callback != null) callback();
+                        return;
+                    }
+                    if(callback != null) callback();
+                }
+                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+            }
+
+            navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+                var videoDevices = 0;
+                var audioDevices = 0;
+                for(var i in mediaDevices) {
+                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+                        videoDevices++;
+                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+                        audioDevices++;
+                    }
+                }
+
+                var mediaDevicesDialog = document.createElement('DIV');
+                mediaDevicesDialog.className = 'Streams_webrtc_devices_dialog_inner';
+                var turnOnBtn = document.createElement('BUTTON');
+                turnOnBtn.type = 'button';
+                turnOnBtn.className = 'Q_button Streams_webrtc_enable-microphone-btn';
+                var btnText = document.createElement('SPAN');
+                turnOnBtn.appendChild(btnText)
+                var titleText;
+                if (constrains.audio) {
+                    turnOnBtn.innerHTML = micIcon + turnOnBtn.innerHTML;
+                    titleText = 'microphoneBtn';
+                }
+                if (constrains.video) {
+                    turnOnBtn.innerHTML = turnOnBtn.innerHTML + cameraIcon;
+                    titleText = 'cameraBtn';
+                }
+                if (constrains.audio && constrains.video) {
+                    titleText = 'cameraAndMicrophoneBtn';
+                }
+                var text = Q.getObject("webrtc.allow." + titleText, _textes);
+                turnOnBtn.querySelector('SPAN').innerHTML = text;
+
+
+                mediaDevicesDialog.appendChild(turnOnBtn);
+                mediaDevicesDialog.addEventListener('mouseup', function (e) {
+                    if(_options.streams != null && _options.streams.length != 0) return;
+                    navigator.mediaDevices.getUserMedia({video: constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
+                        .then(function (stream) {
+                            addStreamToRoom(stream);
+                        }).catch(function (err) {
+                        if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+                        console.error(err.name + ": " + err.message);
+                    });
+                });
+
+                Q.Dialogs.push({
+                    title: Q.getObject("webrtc.allow.dialogTitle", _textes),
+                    className: 'Streams_webrtc_devices_dialog',
+                    content: mediaDevicesDialog,
+                    apply: true
+                });
+
+            })
+        }
+
+        /**
+         * Show dialog with buttons to get permissions for camera and/or mirophone and "Join room" button.
+         * @method showPermissionsDialogue
+         */
+        function showPreparingDialogue(callback, closeCallback) {
+            var micSVG = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
+            var disabledMicSVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>';
+            var cameraSVG = '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>';
+            var disabledCameraSVG = '<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203   c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203   z"/>  <polygon fill="#FFFFFF" points="61.635,39.34 43.63,60.242 61.635,60.242 61.635,51.732 77.156,60.693 77.156,36.656 61.635,45.617    "/>  <polygon fill="#FFFFFF" points="25.223,36.822 25.223,60.242 34.391,60.242 54.564,36.822 "/>  <rect x="47.585" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3117 -20.7363)" fill="#C12337" width="4" height="73.163"/>  </svg>';
+            var screenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.072,0.054c-27.57,0-49.999,22.429-49.999,50c0,27.57,22.429,50,49.999,50  c27.571,0,50.001-22.43,50.001-50C100.073,22.484,77.644,0.054,50.072,0.054z M76.879,63.696H53.705v5.222h5.457v3.77H40.987v-3.77  h5.458v-5.222H23.268V31.439H76.88L76.879,63.696L76.879,63.696z"/> </svg>';
+            var disabledScreenSharingSVG = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path fill="#FFFFFF" d="M50.172,100.346C22.508,100.346,0,77.838,0,50.172C0,22.508,22.508,0,50.172,0  c27.666,0,50.173,22.508,50.173,50.172C100.346,77.838,77.839,100.346,50.172,100.346z M50.172,4.084  C24.76,4.084,4.084,24.76,4.084,50.172c0,25.414,20.675,46.088,46.088,46.088c25.414,0,46.088-20.675,46.088-46.088  C96.261,24.76,75.586,4.084,50.172,4.084z"/> <g>  <polygon fill="#FCFCFC" points="60.309,31.439 23.268,31.439 23.268,63.696 32.533,63.696 "/>  <polygon fill="#FCFCFC" points="68.252,31.439 40.478,63.696 46.444,63.696 46.444,68.918 40.987,68.918 40.987,72.688   59.162,72.688 59.162,68.918 53.705,68.918 53.705,63.696 76.879,63.696 76.88,63.696 76.88,31.439 "/> </g> <rect x="47.83" y="11.444" transform="matrix(-0.7577 -0.6526 0.6526 -0.7577 56.1462 117.2643)" fill="#C12337" width="4.02" height="73.532"/> </svg>';
+            var userSVG = '<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"  width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"> <path d="M65.904,52.834c-4.734,3.725-10.695,5.955-17.172,5.955c-6.316,0-12.146-2.119-16.821-5.68C16.654,55.575,5,68.803,5,84.757  c0,11.78,14.356,10.197,32.065,10.197h25.869C80.643,94.954,95,97,95,84.757C95,68.051,82.221,54.333,65.904,52.834z"/> <path d="M48.732,55.057c13.286,0,24.092-10.809,24.092-24.095c0-13.285-10.807-24.094-24.092-24.094  c-13.285,0-24.093,10.809-24.093,24.094C24.64,44.248,35.448,55.057,48.732,55.057z"/> </svg>';
+
+            var usersAvatar = null;
+            var preJoiningStreams = [];
+
+            var md = navigator.mediaDevices;
+
+            var setAvatarOnPreview = function(cameraPreview) {
+                if(!cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) cameraPreview.parentNode.classList.add('Streams_webrtc_preparing_active-audio');
+
+                if(usersAvatar != null) {
+                    cameraPreview.innerHTML = '';
+                    cameraPreview.appendChild(usersAvatar);
+                } else {
+                    Q.Streams.Avatar.get(Q.Users.loggedInUserId(), function (err, avatar) {
+                        if (!avatar) {
+                            return;
+                        }
+
+                        var src = Q.url(avatar.iconUrl(400));
+                        if(src != null) {
+                            var avatarImg = new Image();
+                            avatarImg.src = src;
+                            log('setUserAvatar set');
+                            let avatarCon = document.createElement('DIV');
+                            avatarCon.className = 'Streams_webrtc_preparing_camera-preview-avatar-con';
+                            avatarCon.appendChild(avatarImg);
+                            cameraPreview.innerHTML = '';
+                            cameraPreview.appendChild(avatarCon);
+                            usersAvatar = avatarCon;
+
+                        }
+                    });
+                }
+            }
+
+
+            var gotDevicesList = function(mediaDevices) {
+                var videoDevices = 0;
+                var audioDevices = 0;
+                for(var i in mediaDevices) {
+                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+                        videoDevices++;
+                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+                        audioDevices++;
+                    }
+                }
+
+                var mediaDevicesDialog = document.createElement('DIV');
+                mediaDevicesDialog.className = 'Streams_webrtc_preparing_dialog_inner';
+
+                if(Q.info.isMobile){
+                    var close=document.createElement('div');
+                    close.className = 'Streams_webrtc_popup-close-dialog-sign';
+                    close.innerHTML = '&#10005;';
+                    close.addEventListener('click', function() {
+                        let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
+                        if(preparingScreen != null && preparingScreen.parentNode != null) preparingScreen.parentNode.removeChild(preparingScreen);
+                        if(checkStatusInterval) {
+                            clearInterval(checkStatusInterval);
+                            checkStatusInterval = null;
+                        }
+                        switchMic(true);
+                        switchCamera(true);
+                        switchScreenshare(true);
+                        Q.handle(_options.onWebRTCRoomEnded, publicAppInterface);
+                        if(closeCallback != null) closeCallback();
+                    });
+                    mediaDevicesDialog.appendChild(close);
+                }
+
+
+                var cameraPreview = document.createElement('DIV');
+                cameraPreview.className = 'Streams_webrtc_preparing_camera-preview';
+
+                var buttonsCon = document.createElement('DIV');
+                buttonsCon.className = 'Streams_webrtc_devices_dialog_buttons_con';
+                var buttonsInner = document.createElement('DIV');
+                buttonsInner.className = 'Streams_webrtc_devices_dialog_buttons_inner_con';
+
+                if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
+                    buttonsCon.style.position = 'relative';
+                    mediaDevicesDialog.classList.add('Streams_webrtc_preparing_dialog_inner_cordova');
+                    mediaDevicesDialog.style.background = 'black';
+                }
+
+                var switchMicBtn = document.createElement('DIV');
+                switchMicBtn.type = 'button';
+                switchMicBtn.className = 'Streams_webrtc_prep-switch-mic';
+                switchMicBtn.innerHTML = disabledMicSVG;
+
+                var switchCameraBtn = document.createElement('DIV');
+                switchCameraBtn.type = 'button';
+                switchCameraBtn.className = 'Streams_webrtc_prep-switch-camera';
+                switchCameraBtn.innerHTML = disabledCameraSVG;
+
+                var switchScreenSharingBtn = document.createElement('DIV');
+                switchScreenSharingBtn.type = 'button';
+                switchScreenSharingBtn.className = 'Streams_webrtc_prep-switch-screen';
+                switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
+
+                var joinButtonCon = document.createElement('DIV');
+                joinButtonCon.className = 'Streams_webrtc_join-button-con';
+                var joinButton = document.createElement('DIV');
+                joinButton.type = 'button';
+                joinButton.className = 'Q_button Streams_webrtc_join-button';
+                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", _textes);
+
+
+                //meetingStatus.appendChild(participantsIcon);
+                mediaDevicesDialog.appendChild(cameraPreview);
+                buttonsInner.appendChild(switchMicBtn);
+                buttonsInner.appendChild(switchCameraBtn);
+                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsInner.appendChild(switchScreenSharingBtn);
+                buttonsCon.appendChild(buttonsInner);
+                mediaDevicesDialog.appendChild(buttonsCon);
+                joinButtonCon.appendChild(joinButton);
+                mediaDevicesDialog.appendChild(joinButtonCon);
+                //mediaDevicesDialog.appendChild(breakEl);
+
+                setAvatarOnPreview(cameraPreview);
+
+                var switchMic = function (off) {
+                    if(audioDevices == 0) {
+                        Q.alert('Audio input devices were not found on your device.')
+                        return
+                    }
+
+                    let audioIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'audio') {
+                            audioIsAlreadyEnabled = s;
+                        }
+                    }
+                    log('switchMic: audioIsAlreadyEnabled ' +  audioIsAlreadyEnabled)
+
+                    if(audioIsAlreadyEnabled === false && off == null) {
+                        log('switchMic: getUserMedia: before')
+
+                        var preStream = {kind:'audio', stream:null};
+                        preJoiningStreams.push(preStream);
+
+                        md.getUserMedia({audio:true})
+                            .then(function (stream) {
+                                log('switchMic: getUserMedia: got stream')
+
+                                preStream.stream = stream;
+                                switchMicBtn.innerHTML = micSVG;
+                                _options.startWith.audio = true;
+                            }).catch(function (err) {
+                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
+                                if(preJoiningStreams[s] == preStream) {
+                                    preJoiningStreams.splice(s, 1);
+                                }
+                            }
+                            console.error(err.name + ": " + err.message);
+                        });
+                    } else if(audioIsAlreadyEnabled !== false && preJoiningStreams[audioIsAlreadyEnabled].stream != null) {
+                        log('switchMic: audioIsAlreadyEnabled ' + audioIsAlreadyEnabled)
+
+                        let tracks = preJoiningStreams[audioIsAlreadyEnabled].stream.getAudioTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+
+                        preJoiningStreams.splice(audioIsAlreadyEnabled, 1);
+                        switchMicBtn.innerHTML = disabledMicSVG;
+                        _options.startWith.audio = false;
+                    }
+                }
+
+                if(_options.showPreparingDialogue.audio === true) switchMic();
+
+                switchMicBtn.addEventListener('mouseup', function () {
+                    switchMic();
+                });
+
+                var switchCamera = function (off) {
+                    if(videoDevices == 0) {
+                        Q.alert('Video input devices were not found on your device.')
+                        return
+                    }
+
+                    let cameraIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'camera') {
+                            cameraIsAlreadyEnabled = s;
+                        }
+                    }
+
+                    if(cameraIsAlreadyEnabled === false && off == null) {
+                        log('switchCamera: getUserMedia: before')
+
+                        var preStream = {kind:'camera', stream:null};
+                        preJoiningStreams.push(preStream);
+
+                        let constraints;
+                        if(Q.info.isCordova) {
+                            constraints = {
+                                'audio': false,
+                                'video': {
+                                    width: { min: 320, max: 1280 },
+                                    height: { min: 240, max: 720 }
+                                }
+                            }
+                        } else {
+                            constraints = {video:true};
+                        }
+                        md.getUserMedia(constraints)
+                            .then(function (stream) {
+                                preStream.stream = stream;
+                                let videoPreview = document.createElement('video');
+                                let screenVideo = cameraPreview.querySelector('video');
+                                try {
+                                    videoPreview.srcObject = stream;
+
+                                } catch (e) {
+                                    console.error(e);
+                                }
+
+                                videoPreview.setAttributeNode(document.createAttribute('autoplay'));
+                                videoPreview.setAttributeNode(document.createAttribute('playsinline'));
+                                if(screenVideo != null) {
+                                    screenVideo.parentElement.insertBefore(videoPreview, screenVideo);
+                                } else {
+                                    cameraPreview.innerHTML = '';
+                                    cameraPreview.appendChild(videoPreview);
+                                }
+
+                                if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
+                                    cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
+                                }
+
+
+
+                                videoPreview.play().then((e) => {
+                                    console.log('camera: play func success')
+                                }).catch((e) => {
+                                    console.error(e)
+                                    console.log('camera: play func error')
+                                });
+
+                                videoPreview.addEventListener('canplay', function () {
+                                    console.log('camera: canplay')
+                                });
+                                videoPreview.addEventListener('emptied', function () {
+                                    console.log('camera: emptied')
+                                });
+                                videoPreview.addEventListener('loadeddata', function () {
+                                    console.log('camera: loadeddata')
+                                });
+                                videoPreview.addEventListener('loadedmetadata', function () {
+                                    console.log('camera: loadedmetadata')
+                                });
+                                videoPreview.addEventListener('loadstart', function () {
+                                    console.log('camera: loadstart')
+                                });
+                                videoPreview.addEventListener('play', function () {
+                                    console.log('camera: play')
+                                });
+                                switchCameraBtn.innerHTML = cameraSVG;
+                                _options.startWith.video = true;
+                            }).catch(function (err) {
+                            if(err.name == "NotAllowedError") showInstructionsDialog('camera/microphone');
+                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
+                                if(preJoiningStreams[s] == preStream) {
+                                    preJoiningStreams.splice(s, 1);
+                                }
+                            }
+                            console.error(err.name + ": " + err.message);
+
+                        });
+                    } else if(cameraIsAlreadyEnabled !== false && preJoiningStreams[cameraIsAlreadyEnabled].stream != null) {
+                        log('switchCamera: cameraIsAlreadyEnabled ' + cameraIsAlreadyEnabled)
+
+                        let tracks = preJoiningStreams[cameraIsAlreadyEnabled].stream.getVideoTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+                        preJoiningStreams.splice(cameraIsAlreadyEnabled, 1);
+                        switchCameraBtn.innerHTML = disabledCameraSVG;
+                        let screenVideo = cameraPreview.querySelectorAll('video');
+                        if(screenVideo.length == 2) {
+                            cameraPreview.removeChild(cameraPreview.firstChild);
+                        } else {
+                            setAvatarOnPreview(cameraPreview);
+                        }
+                        _options.startWith.video = false;
+                    }
+
+                }
+                if(_options.showPreparingDialogue.video === true) switchCamera();
+                switchCameraBtn.addEventListener('mouseup', function () {
+                    switchCamera();
+                });
+
+                var switchScreenshare = function (off) {
+                    let screenIsAlreadyEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'screen') {
+                            screenIsAlreadyEnabled = s;
+                        }
+                    }
+
+                    var getUserScreen = function() {
+                        if(navigator.getDisplayMedia || navigator.mediaDevices.getDisplayMedia) {
+
+                            if(navigator.mediaDevices.getDisplayMedia) {
+                                return navigator.mediaDevices.getDisplayMedia({video: true});
+                            }
+                            else if(navigator.getDisplayMedia) {
+                                return navigator.getDisplayMedia({video: true})
+                            }
+                            return;
+                        }
+                    }
+
+                    if(screenIsAlreadyEnabled === false && off == null) {
+                        log('switchScreenshare: getUserScreen: before')
+
+                        var preStream = {kind:'screen', stream:null};
+                        preJoiningStreams.push(preStream);
+
+                        getUserScreen().then(function (stream) {
+                            stream.getVideoTracks()[0].contentHint = 'detail';
+                            preStream.stream = stream;
+                            let screenPreview = document.createElement('video');
+                            let cameraVideos = cameraPreview.querySelector('video');
+                            if(cameraVideos != null) {
+                                cameraPreview.appendChild(screenPreview);
+                            } else {
+                                cameraPreview.innerHTML = '';
+                                cameraPreview.appendChild(screenPreview);
+                            }
+
+                            if(cameraPreview.parentNode.classList.contains('Streams_webrtc_preparing_active-audio')) {
+                                cameraPreview.parentNode.classList.remove('Streams_webrtc_preparing_active-audio');
+                            }
+
+                            screenPreview.srcObject = stream;
+                            screenPreview.setAttributeNode(document.createAttribute('autoplay'));
+                            screenPreview.setAttributeNode(document.createAttribute('playsinline'));
+
+                            switchScreenSharingBtn.innerHTML = screenSharingSVG;
+                            screenPreview.play().then((e) => {
+                                console.log('screen: play func success')
+                            }).catch((e) => {
+                                console.error(e)
+                                console.log('screen: play func error')
+
+                            });
+
+                            _options.startWith.video = true;
+                        }).catch(function(error) {
+                            for (let s = preJoiningStreams.length - 1; s >= 0; s--) {
+                                if(preJoiningStreams[s] == preStream) {
+                                    preJoiningStreams.splice(s, 1);
+                                }
+                            }
+                            console.error(error.name + ': ' + error.message);
+                        });
+                    } else if(screenIsAlreadyEnabled !== false && preJoiningStreams[screenIsAlreadyEnabled].stream != null) {
+                        log('switchScreenshare: getUserScreen: screenIsAlreadyEnabled ' + screenIsAlreadyEnabled)
+
+                        let tracks = preJoiningStreams[screenIsAlreadyEnabled].stream.getVideoTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
+                        }
+
+                        preJoiningStreams.splice(screenIsAlreadyEnabled, 1);
+                        switchScreenSharingBtn.innerHTML = disabledScreenSharingSVG;
+                        let screenVideo = cameraPreview.querySelectorAll('video');
+                        if(screenVideo.length == 2) {
+                            cameraPreview.removeChild(cameraPreview.lastChild);
+                        } else {
+                            setAvatarOnPreview(cameraPreview);
+                        }
+                        _options.startWith.video = false;
+                    }
+
+                }
+                if(_options.showPreparingDialogue.screen === true) switchScreenshare();
+                switchScreenSharingBtn.addEventListener('mouseup', function () {
+                    switchScreenshare();
+                });
+
+                //var roomId = _options.roomId != null ? _options.roomId : null;
+                //if(_options.roomPublisherId == null) _options.roomPublisherId = Q.Users.loggedInUser.id;
+
+                function checkmeetingStatus() {
+
+                    Q.req("Streams/webrtc", ["status"], function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+
+                        if(!response.slots) return;
+                        let stream = response.slots.status.stream;
+                        let live = response.slots.status.live;
+                        if(live) {
+                            if(connectionState) {
+                                connectionState.updateStatus('Room is live');
+                            }
+                        } else {
+                            if(connectionState){
+                                connectionState.updateStatus('Room is offline');
+                            }
+                        }
+                    }, {
+                        method: 'get',
+                        fields: {
+                            roomId: _options.roomId,
+                            publisherId: _options.roomPublisherId,
+                        }
+                    });
+                }
+                if(_options.roomId != null && _options.roomPublisherId != null) {
+                    checkmeetingStatus();
+                    var checkStatusInterval = setInterval(checkmeetingStatus, 3000);
+                }
+
+                var joinAction = false;
+                var joinNow = function() {
+                    if(_options.streams == null) {
+                        _options.streams = [];
+                    }
+
+                    let audioEnabled = false;
+                    for(let s in preJoiningStreams) {
+                        if(preJoiningStreams[s].kind == 'audio') {
+                            audioEnabled = true;
+                        }
+                    }
+                    if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && audioEnabled == false) {
+                        if(connectionState) connectionState.show('You should to turn microphone on to be able to join');
+                        return;
+                    }
+
+                    for(let s in preJoiningStreams) {
+                        _options.streams.push(preJoiningStreams[s].stream);
+                    }
+
+                    joinAction = true;
+                    var dialog = Q.Dialogs.pop();
+                    joinAction = false;
+                    //if(dialog && dialog.parentNode != null) dialog.parentNode.removeChild(dialog);
+
+                    if(checkStatusInterval) {
+                        clearInterval(checkStatusInterval);
+                        checkStatusInterval = null;
+                    }
+
+                    let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
+                    if(preparingScreen != null && preparingScreen.parentNode != null) preparingScreen.parentNode.removeChild(preparingScreen);
+                    if(callback != null) callback()
+                }
+
+                joinButton.addEventListener('mouseup', joinNow);
+
+
+                if(Q.info.isMobile && !Q.info.isCordova) {
+                    var screen = document.createElement('DIV')
+                    screen.className = 'Streams_webrtc_preparing_screen';
+                    screen.appendChild(mediaDevicesDialog);
+                    if( _options.element != null) document.body.appendChild(screen);
+                } else {
+
+
+                    Q.Dialogs.push({
+                        title: 'Turn camera or mic on/off before you join',
+                        className: 'Streams_webrtc_preparing_dialog',
+                        content: mediaDevicesDialog,
+                        apply: false,
+                        mask: false,
+                        hidePrevious:true,
+                        removeOnClose: true,
+                        beforeClose: function() {
+                            if(joinAction) return;
+                            if(checkStatusInterval) {
+                                clearInterval(checkStatusInterval);
+                                checkStatusInterval = null;
+                            }
+                            switchMic(true);
+                            switchCamera(true);
+                            switchScreenshare(true);
+                            Q.handle(_options.onWebRTCRoomEnded, publicAppInterface);
+                            if(closeCallback != null) closeCallback();
+
+                        },
+                        onClose:function () {
+
+                        },
+                    });
+                }
+
+
+
+            }
+            if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
+                cordova.plugins.iosrtc.enumerateDevices().then(gotDevicesList)
+            } else {
+                navigator.mediaDevices.enumerateDevices().then(gotDevicesList)
+            }
+
+        }
+
+        /**
+         * Prepare media tracks while user are joining the room and publish them after user is joined the room.
+         * @method publishMediaTracks
+         */
+        function publishMediaTracks(constrains, callback) {
+            log('publishMediaTracks: video = ' + (constrains != null && constrains.video))
+            log('publishMediaTracks: audio = ' + (constrains != null && constrains.audio))
+
+            if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins) {
+                cordova.plugins.iosrtc.enumerateDevices(function(mediaDevicesList) {
+                    var mediaDevices = mediaDevicesList;
+
+                    var videoDevices = 0;
+                    var audioDevices = 0;
+                    for (var i in mediaDevices) {
+                        if (mediaDevices[i].kind.indexOf('video') != -1) {
+                            videoDevices++;
+                        } else if (mediaDevices[i].kind.indexOf('audio') != -1) {
+                            audioDevices++;
+                        }
+                    }
+
+                    var showInstructionsDialogIos = function(kind) {
+                        var instructionsPermissionDialog = document.createElement('DIV');
+                        instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
+                        var dialogList = document.createElement('OL');
+                        dialogList.className = 'Streams_webrtc_instructions_dialog';
+                        dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
+									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
+                        instructionsPermissionDialog.appendChild(dialogList);
+                        Q.Dialogs.push({
+                            title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
+                            className: 'Streams_webrtc_devices_dialog',
+                            content: instructionsPermissionDialog,
+                            apply: true
+                        });
+                    }
+
+                    var publishStreams = function (streams) {
+                        if (_options.streams != null) return;
+                        if (WebRTCconference != null) {
+                            _options.streams = streams;
+                            var publishTracks = function () {
+                                for (var s in streams) {
+                                    var tracks = streams[s].getTracks();
+                                    for (var t in tracks) {
+                                        WebRTCconference.localMediaControls.addTrack(tracks[t], streams[s]);
+                                    }
+                                }
+
+                                navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+                                    WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
+                                }).catch(function (e) {
+                                    console.error('ERROR: cannot get device info: ' + e.message);
+                                });
+                            }
+
+                            if (WebRTCconference.state == 'connected') {
+                                log('publishMediaTracks: got stream: publishTracks');
+
+                                publishTracks();
+                                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                            } else {
+                                log('publishMediaTracks: got stream: delay publishing');
+
+                                WebRTCconference.event.on('joined', function () {
+                                    publishTracks();
+                                    if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                                });
+                            }
+                        } else if (_options.streams == null) {
+                            log('publishMediaTracks: got stream: add to options');
+
+                            _options.streams = streams;
+                            window.sstream = streams;
+
+                        }
+                    }
+
+                    var requestVideoStream = function (callback) {
+                        cordova.plugins.iosrtc.getUserMedia(
+                            {
+                                video: true,
+                                audio: false
+                            },
+                            function (stream) {
+                                log('requestVideoStream: got stream');
+                                if(callback != null) callback(stream);
+                            },
+                            function (error) {
+                                showInstructionsDialogIos('Camera');
+                                console.error(error);
+                            }
+                        );
+                    }
+
+                    var requestAudioStream = function (callback) {
+                        cordova.plugins.iosrtc.getUserMedia(
+                            {
+                                video: false,
+                                audio: true
+                            },
+                            function (stream) {
+                                log('publishMediaTracks: got stream');
+                                if(callback != null) callback(stream);
+                            },
+                            function (error) {
+                                showInstructionsDialogIos('Microphone');
+                                console.error(error);
+                            }
+                        );
+                    }
+
+                    if(_options.startWith.video && videoDevices != 0 && _options.startWith.audio && audioDevices != 0) {
+                        requestVideoStream(function (videoStream) {
+                            requestAudioStream(function (audioStream) {
+                                publishStreams([videoStream, audioStream]);
+                            });
+                        });
+                    } else if(_options.startWith.video && videoDevices != 0) {
+                        requestVideoStream(function (videoStream) {
+                            publishStreams([videoStream]);
+                        });
+                    } else if(_options.startWith.audio && audioDevices != 0) {
+                        requestAudioStream(function (audioStream) {
+                            publishStreams([audioStream]);
+                        });
+                    }
+
+
+                })
+                return;
+            }
+
+
+            navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+                var videoDevices = 0;
+                var audioDevices = 0;
+                for(var i in mediaDevices) {
+                    if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
+                        videoDevices++;
+                    } else if (mediaDevices[i].kind === 'audioinput' || mediaDevices[i].kind === 'audio') {
+                        audioDevices++;
+                    }
+                }
+
+                if(!Q.info.isMobile && !Q.info.isTablet && (!constrains.video || videoDevices == 0) && (!constrains.audio || audioDevices == 0)) return;
+
+                navigator.mediaDevices.getUserMedia({video:constrains.video && videoDevices != 0, audio:constrains.audio && audioDevices != 0})
+                    .then(function (stream) {
+                        if(_options.streams != null) return;
+                        Q.Dialogs.pop();
+                        if(WebRTCconference != null){
+                            log('publishMediaTracks: stream is being added the room', stream);
+
+                            _options.streams = [stream];
+                            var publishTracks = function() {
+                                var tracks = stream.getTracks();
+                                log('publishMediaTracks: addTrack ', tracks);
+
+                                for(var t in tracks) {
+                                    WebRTCconference.localMediaControls.addTrack(tracks[t], stream);
+                                }
+
+                                navigator.mediaDevices.enumerateDevices().then(function (mediaDevices) {
+                                    WebRTCconference.localMediaControls.loadDevicesList(mediaDevices);
+                                }).catch(function (e) {
+                                    console.error('ERROR: cannot get device info: ' + e.message);
+                                });
+                            }
+
+                            if(WebRTCconference.state == 'connected') {
+                                publishTracks();
+                                if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                            } else {
+                                WebRTCconference.event.on('joined', function () {
+                                    publishTracks();
+                                    if(document.querySelector('.Streams_webrtc_instructions_dialog') == null) Q.Dialogs.pop();
+                                });
+                            }
+                        } else if (_options.streams == null) {
+                            log('publishMediaTracks: stream is added to options', stream);
+                            _options.streams = [stream];
+                            if((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova && _options.startWith.video == false && _options.startWith.audio == false) {
+                                if(callback != null) callback();
+                                return;
+                            }
+                            if(callback != null) callback();
+                        }
+                    }).catch(function(err) {
+                    console.error(err.name + ": " + err.message);
+                    if(err.name == 'NotAllowedError') showInstructionsDialog('camera/microphone');
+                });
+            }).catch(function (e) {
+                console.error('ERROR: cannot get device info: ' + e.message);
+            });
+        }
+
+
+        /**
+         * Update stream participant's data after user got socket id
+         * @method updateParticipantData
+         */
+        function updateParticipantData() {
+            Q.req("Streams/webrtc", ["updateParticipantSid"], function (err, response) {
+                var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                if (msg) {
+                    return Q.alert(msg);
+                }
+
+            }, {
+                method: 'put',
+                fields: {
+                    streamName: _roomStream.fields.name,
+                    publisherId: _options.roomPublisherId,
+                    participantSid: WebRTCconference.localParticipant().sid
+                }
+            })
+        }
+
+        /**
+         * Init conference using own node.js server for signalling process.
+         * @method initWithStreams
+         * @param {Object} [turnCredentials] Creadentials that are needed to use TURN server.
+         * @param {String} [turnCredentials.url] Address of TURN server
+         * @param {String} [turnCredentials.credential] Passphrase
+         * @param {String} [turnCredentials.username] Username
+         */
+        function initWithNodeServer(socketServer, turnCredentials) {
+            log('initWithNodeServer');
+
+            var initConference = function(){
+                log('initWithNodeServer: initConference');
+
+                if(typeof window.WebRTCRoomClient == 'undefined') return;
+                var roomId = (_roomStream.fields.name).replace('Streams/webrtc/', '');
+                var roomStartTime = _roomStream.getAttribute('startTime');
+                log('initWithNodeServer: initConference: roomId = ' + roomId)
+                log('initWithNodeServer: initConference: roomStartTime = ' + roomStartTime)
+                log('initWithNodeServer: initConference: _roomStream = ', _roomStream)
+
+                WebRTCconference = new WebRTCRoomClient({
+                    mode:'node',
+                    useAsLibrary: true,
+                    socket: Q.Socket,
+                    nodeServer: socketServer,
+                    roomName: roomId,
+                    roomStartTime: roomStartTime,
+                    roomPublisher: _roomStream.getAll().publisherId,
+                    sid: Q.Users.loggedInUser.id,
+                    username:  Q.Users.loggedInUser.id + '\t' + _roomStartTime,
+                    video: false,
+                    audio: false,
+                    startWith: _options.startWith,
+                    streams: _options.streams != null ? _options.streams : null,
+                    sounds: _options.sounds != null ? _options.sounds : null,
+                    onlyOneScreenSharingAllowed: _options.onlyOneScreenSharingAllowed,
+                    liveStreaming: _options.liveStreaming,
+                    showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
+                    turnCredentials: turnCredentials,
+                    debug: _debug
+                });
+
+                bindConferenceEvents(WebRTCconference);
+                log('initWithNodeServer: initConference: start init');
+
+                WebRTCconference.init(function (app) {
+                    log('initWithNodeServer: initConference: inited');
+                    updateParticipantData();
+                    connectionState.hide();
+                    _debugTimer.loadEnd = performance.now();
+
+                    Q.handle(_options.onWebRTCRoomCreated, publicAppInterface);
+
+                    Q.activate(
+                        document.body.appendChild(
+                            Q.Tool.setUpElement(
+                                "div", // or pass an existing element
+                                "Streams/webrtc/controls",
+                                {
+                                    webRTClibraryInstance: WebRTCconference,
+                                    webrtcClass: publicAppInterface,
+                                    onCreate: function () {
+                                        Q.handle(_options.onWebrtcControlsCreated, this);
+                                    }
+                                }
+
+                            )
+                        ),
+                        {},
+                        function () {
+                            log('initWithNodeServer: initConference: activate controls');
+
+
+                            _controls = this.element;
+                            log('initWithNodeServer: initConference: activate controls', this, this.element);
+
+                            _controlsTool = this;
+                            screensRendering.updateLayout();
+
+                            var moveWithinArea = 'window';
+                            var columnsTools = Q.Tool.byName('Q/columns');
+                            var dashboard = document.getElementById('dashboard_slot');
+                            var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
+                            var updateArearectangle = function () {
+
+                                var moveWithinArea;
+                                if(Object.keys(columnsTools).length == 0 && dashboard) {
+                                    log('initWithNodeServer: initConference: activate controls: no columns');
+                                    var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
+
+                                    var windowWidth =  window.innerWidth;
+                                    var windowHeight =  window.innerHeight;
+                                    var dashboardHeight =  dashboard.offsetHeight;
+                                    log('initWithNodeServer: initConference: activate controls: no columns', windowWidth, windowHeight, dashboardHeight);
+
+                                    if(dashboardPos == 'bottom') {
+                                        moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
+                                    } else if(dashboardPos == 'top') {
+                                        moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
+                                    }
+                                } else {
+                                    log('initWithNodeServer: initConference: activate controls: columns != 0');
+
+                                    var currentColumn = columnsTool.state.$currentColumn.get()[0];
+                                    moveWithinArea = currentColumn.getBoundingClientRect();
+                                }
+
+                                return moveWithinArea;
+                            }
+
+                            if(Q.info.isMobile) {
+                                moveWithinArea = updateArearectangle();
+                            }
+
+                            log('initWithNodeServer: initConference: activate controls: moveWithinArea', moveWithinArea);
+
+
+                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    _controls.firstChild, // or pass an existing element
+                                    "Q/resize",
+                                    {
+                                        move: true,
+                                        resize: false,
+                                        active: true,
+                                        ignoreOnElements: elementsToIgnore,
+                                        elementPosition: 'fixed',
+                                        snapToSidesOnly: true,
+                                        moveWithinArea: moveWithinArea, //window/parent/DOMRect
+                                        onMovingStart: function () {
+                                            _controls.classList.add('isMoving');
+                                        },
+                                        onMovingStop: function () {
+                                            _controls.classList.remove('isMoving');
+                                        },
+                                        onMoved: function () {
+                                            screensRendering.updateLayout();
+                                        }
+                                    }
+                                ),
+                                {},
+                                function () {
+                                    log('initWithNodeServer: initConference: activated controls', this);
+
+                                    var resizeTool = this;
+                                    if(columnsTool && Q.info.isMobile) {
+                                        columnsTool.state.onActivate.add(function () {
+                                            var moveWithinArea = updateArearectangle();
+                                            resizeTool.setContainerRect(moveWithinArea);
+                                            screensRendering.updateLayout();
+                                        });
+                                        columnsTool.state.onClose.add(function () {
+                                            var moveWithinArea = updateArearectangle();
+                                            resizeTool.setContainerRect(moveWithinArea);
+                                            screensRendering.updateLayout();
+                                        });
+
+                                    }
+
+                                    if(typeof screen != 'undefined' && screen.orientation != null) {
+                                        screen.orientation.addEventListener("change", function () {
+                                            setTimeout(function () {
+                                                var moveWithinArea = updateArearectangle();
+                                                resizeTool.setContainerRect(moveWithinArea);
+                                                screensRendering.updateLayout();
+                                            }, 1000);
+                                        });
+                                    }
+
+                                    window.addEventListener("resize", function() {
+                                        setTimeout(function () {
+                                            var moveWithinArea = updateArearectangle();
+                                            resizeTool.setContainerRect(moveWithinArea);
+                                            screensRendering.updateLayout();
+                                        }, 1000);
+                                    });
+
+                                    if(_options.controlsPosition == 'top') {
+                                        this.snapTo('top');
+                                    } else if(_options.controlsPosition == 'bottom') {
+                                        this.snapTo('bottom');
+                                    } else if(_options.controlsPosition == 'left') {
+                                        this.snapTo('left');
+                                    } else if(_options.controlsPosition == 'right') {
+                                        this.snapTo('right');
+                                    } else {
+                                        this.snapTo('bottom');
+                                        /*var dashboard = document.getElementById('dashboard_slot');
+                                        if(dashboard && Q.info.isMobile && !Q.info.isTablet) {
+                                            var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
+                                            if(dashboardPos == 'top') {
+                                                this.snapTo('bottom');
+                                            } else if (dashboardPos == 'bottom') {
+                                                this.snapTo('top');
+                                            }
+
+                                        }*/
+                                    }
+                                }
+                            );
+                        }
+                    );
+                });
+            }
+
+            var findScript = function (src) {
+                var scripts = document.getElementsByTagName('script');
+                var src = Q.url(src);
+                for (var i=0; i<scripts.length; ++i) {
+                    var srcTag = scripts[i].getAttribute('src');
+                    if (srcTag && srcTag.indexOf(src) != -1) {
+                        return true;
+                    }
+                }
+                return null;
+            };
+
+            if(findScript('{{Streams}}/js/tools/webrtc/app.js')) {
+                log('initWithNodeServer: app.js exists');
+
+                initConference();
+            } else {
+                log('initWithNodeServer: add app.js');
+                Q.addScript([
+                    "{{Streams}}/js/tools/webrtc/app.js?time=" + Date.now(),
+                    "{{Streams}}/js/tools/webrtc/RecordRTC.js",
+                ], function () {
+                    initConference();
+                });
+            }
+
+        }
+
         function overrideDefaultOptions(options) {
             if(typeof options === 'object') {
                 for (var key in options) {
@@ -6960,7 +6745,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             _resizeObserver.observe(_roomsMedia);
         }
 
-
         /**
          * Start WebRTC conference room
          * @method start
@@ -6971,12 +6755,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          *      Is required as argument for getting Stream from db
          */
         function start(options) {
-
+            publicAppInterface = this;
             Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
-                createInfoSnippet()
-
-                log('Start WebRTC conference room');
+                log('Start WebRTC conference room', publicAppInterface);
 
                 var preparingRoom = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
 
@@ -7251,15 +7033,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     Q.Streams.WebRTCRooms = [];
                                 }
 
-                                Q.Streams.WebRTCRooms.push(webRTCInstance);
+                                Q.Streams.WebRTCRooms.push(publicAppInterface);
 
                                 _options.hosts = response.slots.room.hosts;
                                 bindStreamsEvents(stream);
 
                                 initWithNodeServer(socketServer, turnCredentials);
-
-                                //window.addEventListener('beforeunload', webRTCInstance.stop);
-
                             });
 
                         }, {
@@ -7338,7 +7117,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }
             });
 
-            return webRTCInstance;
+            return this;
         }
 
         function switchTo(publisherId, streamName, options) {
@@ -7363,7 +7142,16 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(Q.Socket.getAll()['/webrtc']) {
                     Q.Socket.getAll()['/webrtc'] = null;
                 }
-
+                _events.dispatch('beforeRoomSwitch', {
+                    from: {
+                        publisherId: _roomStream.fields.publisherId,
+                        name: _roomStream.fields.name
+                    },
+                    to: {
+                        publisherId: publisherId,
+                        name: streamName
+                    }
+                });
 
                 return new Promise (function (resolve, reject) {
 
@@ -7467,34 +7255,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         function stop(callback) {
             log('WebRTC.stop', WebRTCconference);
 
-            if (_roomStream == null) {
+            if (!isActive() || _roomStream == null) {
                 return Q.handle(callback);
             }
 
             if(WebRTCconference && WebRTCconference.localParticipant() != null) WebRTCconference.localParticipant().online = false;
 
-            /*if(WebRTCconference.roomParticipants().length === 0) {
-
-				Q.req("Streams/webrtc", ["endRoom"], function (err, response) {
-					log('stop: room closed');
-
-					var msg = Q.firstErrorMessage(err, response && response.errors);
-
-					if (msg) {
-						console.error(msg);
-						return Q.alert(msg);
-					}
-
-					Q.handle(callback);
-				}, {
-					method: 'put',
-					fields: {
-						roomId:  _options.roomId,
-						publisherId: _options.roomPublisherId,
-					}
-				});
-
-			}*/
             if(appDebug.sendReportsInterbal != null) {
                 appDebug.sendReportToServer();
                 clearTimeout(appDebug.sendReportsInterbal);
@@ -7518,14 +7284,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             _layoutTool.clearCustomGenerators();
             Q.Tool.remove(_layoutTool);
-            window.removeEventListener('beforeunload', webRTCInstance.stop);
+            window.removeEventListener('beforeunload', publicAppInterface.stop);
             unsetResizeObserver();
             WebRTCconference = null;
-            Q.handle(_options.onWebRTCRoomEnded, webRTCInstance);
+            Q.handle(_options.onWebRTCRoomEnded, publicAppInterface);
 
             Q.Page.onActivate('').remove('Streams.WebRTC');
 
-            var currentRoom = Q.Streams.WebRTCRooms.indexOf(webRTCInstance);
+            var currentRoom = Q.Streams.WebRTCRooms.indexOf(publicAppInterface);
             if(currentRoom != -1) {
                 Q.Streams.WebRTCRooms.splice(currentRoom, 1);
             }
@@ -7533,6 +7299,119 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         function currentConferenceLibInstance() {
             return WebRTCconference;
+        }
+
+        function controls() {
+            return _controlsTool;
+        }
+
+        function roomsMediaContainer() {
+            return _roomsMedia;
+        }
+
+        function roomStream() {
+            return _roomStream;
+        }
+
+        function options() {
+            return _options;
+        }
+
+        function isActive() {
+            return WebRTCconference != null && WebRTCconference.state != 'disconnected' ? true : false;
+        }
+
+        function textes() {
+            return _textes;
+        }
+
+        return {
+            start: start,
+            stop: stop,
+            switchTo: switchTo,
+            currentConferenceLibInstance: currentConferenceLibInstance,
+            controls: controls,
+            roomsMediaContainer: roomsMediaContainer,
+            roomStream: roomStream,
+            options: options,
+            isActive: isActive,
+            textes: textes,
+            screenRendering: screensRendering,
+            loader: connectionState,
+            notice: notice,
+            events: _events
+        }
+
+        /**
+         * Event system of app
+         *
+         * @method app.event
+         * @return {Object}
+         */
+        function EventSystem(){
+
+            var events = {};
+
+            var CustomEvent = function (eventName) {
+
+                this.eventName = eventName;
+                this.callbacks = [];
+
+                this.registerCallback = function(callback) {
+                    this.callbacks.push(callback);
+                }
+
+                this.unregisterCallback = function(callback) {
+                    const index = this.callbacks.indexOf(callback);
+                    if (index > -1) {
+                        this.callbacks.splice(index, 1);
+                    }
+                }
+
+                this.fire = function(data) {
+                    const callbacks = this.callbacks.slice(0);
+                    callbacks.forEach((callback) => {
+                        callback(data);
+                    });
+                }
+            }
+
+            var dispatch = function(eventName, data) {
+                const event = events[eventName];
+                if (event) {
+                    event.fire(data);
+                }
+            }
+
+            var on = function(eventName, callback) {
+                let event = events[eventName];
+                if (!event) {
+                    event = new CustomEvent(eventName);
+                    events[eventName] = event;
+                }
+                event.registerCallback(callback);
+            }
+
+            var off = function(eventName, callback) {
+                const event = events[eventName];
+                if (event && event.callbacks.indexOf(callback) > -1) {
+                    event.unregisterCallback(callback);
+                    if (event.callbacks.length === 0) {
+                        delete events[eventName];
+                    }
+                }
+            }
+
+            var destroy = function () {
+                events = {};
+            }
+
+            return {
+                dispatch:dispatch,
+                on:on,
+                off:off,
+                destroy:destroy
+            }
         }
 
         function log(text) {
@@ -7567,36 +7446,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
             return M;
         }
-
-        var webRTCInstance = {
-            start: start,
-            stop: stop,
-            switchTo: switchTo,
-            screenRendering: screensRendering,
-            currentConferenceLibInstance: currentConferenceLibInstance,
-            controls: function () {
-                return _controlsTool;
-            },
-            roomsMediaContainer: function () {
-                return _roomsMedia;
-            },
-            setMediaContainer: function (el) {
-                 _roomsMedia = el;
-            },
-            roomStream: function () {
-                return _roomStream;
-            },
-            options: function () {
-                return _options;
-            },
-            textes: function () {
-                return _textes;
-            },
-            loader: connectionState,
-            notice: notice
-        };
-
-        return webRTCInstance;
     };
 
     /**

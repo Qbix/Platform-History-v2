@@ -1069,9 +1069,15 @@ window.WebRTCRoomClient = function app(options){
 
             function renderCommonVisualization() {
                 if(!localParticipant.online) return;
-                var freqDataMany = [];
-                var agg = [];
-                //var sum = 0;
+                var sum = 0;
+                function getAverage(freqData) {
+                    var average = 0;
+                    for(let i = 0; i < freqData.length; i++) {
+                        average += freqData[i]
+                    }
+                    average = average / freqData.length;
+                    return average;
+                }
 
                 for(let p in roomParticipants) {
                     let participant = roomParticipants[p];
@@ -1080,32 +1086,24 @@ window.WebRTCRoomClient = function app(options){
                     let freqData = new Uint8Array(bufferLength);
 
                     participant.soundMeter.analyser.getByteFrequencyData(freqData); // populate with data
-                    freqDataMany.push(freqData);
+                    sum += (getAverage(freqData) / 255 * 100);
 
                 }
 
                 //var average = sum / roomParticipants.length;
 
-                if (freqDataMany.length > 0) {
-                    for (let i = 0; i < freqDataMany[0].length; i++) {
-                        agg.push(0);
-                        freqDataMany.forEach((data) => {
-                            agg[i] += data[i];
-                        });
-                    }
-                }
 
                 var barsLength = commonVisualization.barsLength;
                 var i;
                 for(i = 0; i < barsLength; i++){
                     var bar = commonVisualization.soundBars[i];
                     if(i == barsLength - 1) {
-                        let average = (agg[0] / roomParticipants.length);
-                        var height = (average * 0.4);
+                        let average = (sum / roomParticipants.length);
+                        var height = average;
                         if (height > 100) {
                             height = 100;
                         } else if(average < 0.005) height = 0.1;
-                        bar.height = height / 2 ;
+                        bar.height = height ;
                         bar.y = commonVisualization.height - (commonVisualization.height / 100 * bar.height);
                         bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
 
@@ -10102,7 +10100,7 @@ window.WebRTCRoomClient = function app(options){
         if(socket != null) socket.disconnect();
         app.event.dispatch('disconnected');
         app.event.destroy();
-
+        app.state = 'disconnected';
     }
 
 
