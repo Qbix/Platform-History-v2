@@ -144,6 +144,12 @@ class Q_Session
 	 */
 	static function savePath ($savePath = null)
 	{
+		$sp = session_save_path();
+
+		if (session_status() === PHP_SESSION_ACTIVE) {
+			return $sp;
+		}
+
 		/**
 		 * @event Q/session/savePath {before}
 		 * @param {string} savePath
@@ -155,7 +161,7 @@ class Q_Session
 		if (isset($savePath)) {
 			return session_save_path($savePath);
 		}
-		$sp = session_save_path();
+
 		// A workaround for some systems:
 		if (empty($sp)) {
 			$sp = Q_FILES_DIR.DS.'Q'.DS.'sessions';
