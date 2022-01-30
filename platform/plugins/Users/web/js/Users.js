@@ -345,7 +345,7 @@
 					// otherwise they might confuse our server-side authentication.
 					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 				}
 			}, options.force ? true : false);
 		}, {
@@ -483,7 +483,7 @@
 		// multiple times on the same page, or because the page is reloaded
 		Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId, xid);
 
-		var key = platform + "\t" + platformAppId;
+		var key = platform + "_" + platformAppId;
 		if (Users.loggedInUser && Users.loggedInUser.xids[key] == xid) {
 			// The correct user is already logged in.
 			// Call onSuccess but do not pass a user object -- the user didn't change.
@@ -526,7 +526,7 @@
 					// facebook authResponse. In this case, even though they want
 					// to authenticate, we must cancel it.
 					alert("Connection to facebook was lost. Try connecting again.");
-					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 					return;
 				}
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
@@ -570,7 +570,7 @@
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
-				return _doCancel(platform, platformAppId, onSuccess, onCancel, options);
+				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
@@ -1026,7 +1026,7 @@
 					// when authenticating, until it is forced
 					var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
 					for (var key in xids) {
-						var parts = key.split("\t");
+						var parts = key.split("_");
 						Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
 					}
 					setTimeout(function () {
@@ -4004,7 +4004,7 @@
 		 */
 		getLoggedInUserXid: function () {
 			var xids = Q.getObject('Q.Users.loggedInUser.xids');
-			var key = 'web3\t*';
+			var key = 'web3_all';
 			if (xids && xids[key]) {
 				return xids[key];
 			}

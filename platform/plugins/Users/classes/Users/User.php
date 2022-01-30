@@ -1016,7 +1016,7 @@ class Users_User extends Base_Users_User
 	
 	/**
 	 * @method getXid
-	 * @param {string} $platformApp String of the form "$platform\t$appId"
+	 * @param {string} $platformApp String of the form $platform."_".$appId
 	 * @param {string|null} $default The value to return if the xid is missing
 	 * @return {string|null} The value of the xid, or the default value, or null
 	 */
@@ -1028,7 +1028,7 @@ class Users_User extends Base_Users_User
 	
 	/**
 	 * @method setXid
-	 * @param {string|array} $platformApp String of the form "$platform\t$appId"
+	 * @param {string|array} $platformApp String of the form $platform."_".$appId
 	 *  or an array of $platformApp => $xid pairs
 	 * @param {string} $xid The value to set the xid to
 	 */
