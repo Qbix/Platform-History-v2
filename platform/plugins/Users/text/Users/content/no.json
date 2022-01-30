@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Logg Inn",
-        "LogOut": "Logg ut"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Sett {{1}} som min primære {{2}}",
-        "ChoosePassPhrase": "Velg et <strong>passord for<\/strong> å logge inn med. <br> Et enkelt uttrykk som består av noen få ord som du lett kan huske.",
-        "ChoosePassPhraseSeeSuggestions": "Velg et godt <strong>passord for<\/strong> å beskytte kontoen din. Se forslagene til noen ideer.",
-        "LogOutAndTryAgain": "Logg ut og prøv igjen",
-        "IfYouFeel": "Hvis du føler at noe gikk galt, kan du",
-        "SetIdentifierButtonTitle": "begynne på nytt"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Kom i gang"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Kom i gang",
-        "Authorize": "Autorisere",
-        "TermsLabel": "Jeg har lest og er enig <br> til {{link}}",
-        "TermsTitle": "Vilkår",
-        "mustAgree": "Først må du godta vilkårene."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Jeg aksepterer {{link}}",
-        "TermsTitle": "Vilkår"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Tillatelse",
-        "prompt": "Vil du aktivere varsler? Du mottar sanntids oppdateringer om ting du bryr deg om.",
-        "yes": "Ja",
-        "no": "Nei",
-        "WelcomePleaseVerifyEmail": "Velkommen! Vennligst bekreft e-postadressen din.",
-        "WelcomeVerifyEmail": "Velkommen! Bekreft e-postadressen din.",
-        "ForgetPass": "Hei, har du glemt passordet ditt?",
-        "PassphraseSaved": "Passfrasen din er lagret.",
-        "IdentifierActivated": "{{type}} er blitt aktivert.",
-        "CompletedActivation": "Du har fullført brukeraktivering.",
-        "CompletedActivationLogIn": "Du har fullført brukeraktivering. Prøv å logge på nå."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Velg kontakt",
-            "CreateAccount": "+ Ny kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke funnet",
-            "SearchByName": "Søk etter navn",
-            "EmptyContacts": "Kontakter ikke funnet ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Velg kontakt for {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Vennligst velg etikett.",
-        "inviteUser": "Inviter bruker",
-        "selectRole": "Velg rolle",
-        "inviteRole": "Inviter {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Ugyldig språk valgt",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Velkommen",
-        "directions": "Opprett en konto, eller logg inn.",
-        "directionsNoRegister": "Logg inn hvis du har en konto.",
-        "goButton": "Gå",
-        "passphrase": "Skriv passordet ditt:",
-        "loginButton": "Kom i gang",
-        "registerButton": "Kom i gang",
-        "resendButton": "Send aktiveringsmelding",
-        "forgot": "Glemte det?",
-        "resendConfirm": "Vil du sende en melding for å tilbakestille passordfrasen?",
-        "resendSuccess": "Se etter en melding for å tilbakestille passordfrasen",
-        "resendClose": "Lukk",
-        "noPassphrase": "Før du kan logge inn, må du angi en passordfrase ved å klikke på lenken i aktiveringsmeldingen.",
-        "notVerified": "Du må sende deg en aktiveringsmelding for å logge inn.",
-        "emailExists": "Prøvde du å registrere deg med denne e-posten før? I så fall, sjekk innboksen for å aktivere kontoen din. <a href='#resend' class='Q_button Users_activation_resend'>Klikk for å sende meldingen på nytt<\/a>",
-        "mobileExists": "Prøvde du å registrere deg med dette mobilnummeret før? I så fall, sjekk SMS-en for å aktivere kontoen din. <a href='#resend' class='Q_button Users_activation_resend'>Klikk for å sende meldingen på nytt<\/a>",
-        "usingOther": "eller det kan du",
-        "prompt": "Velg et brukernavn:",
-        "newUser": "eller opprett en ny konto",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mobilnummeret ditt eller e-post",
-            "mobile": "skriv inn mobilen din #",
-            "email": "Fyll inn epostadressen din",
-            "username": "brukernavn"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Godta vilkårene for bruk?",
-        "facebookNoEmail": "Facebook-kontoen din mangler en bekreftet e-postadresse. Bare logg inn på den opprinnelige måten.",
-        "picTooltip": "Du kan endre dette bildet senere",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Logg deg på {{host}} om gangen {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Viderekobler til Wallet",
-                "content": "Når du lukker denne dialogboksen, blir du ført til lommeboken din. Etter at du har logget deg på, går du tilbake til denne siden."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Legg til en måte å logge på",
-        "sendMessage": "Send aktiveringsmelding",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "skriv inn mobilnummeret eller e-postadressen din",
-            "mobile": "skriv inn mobilnummeret ditt",
-            "email": "Fyll inn epostadressen din",
-            "username": "brukernavn"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} -konto",
-        "areUsing": "Du bruker {{platform}} som",
-        "noLongerUsing": "Du er ikke lenger koblet til {{platform}} som",
-        "doAuth": "Logg inn med denne kontoen",
-        "doSwitch": "Bytt til denne kontoen"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Eieren",
-        "Admin": "admin",
-        "Member": "Medlem",
-        "Guest": "Gjest",
-        "Host": "Vert"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daglig",
-        "Weekly": "Ukentlig",
-        "Monthly": "Månedlig",
-        "Application": "applikasjon",
-        "Pages": "Sider",
-        "Services": "Tjenester",
-        "Faq": "FAQ",
-        "WeekDays": "Uke dager"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

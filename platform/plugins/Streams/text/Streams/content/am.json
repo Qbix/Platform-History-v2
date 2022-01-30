@@ -7,7 +7,8 @@
         "Streams\/invitedMe": "ማን እንደጋበዘኝ",
         "AreYouAgree": "እርስዎ ይስማማሉ?",
         "Yes": "አዎ",
-        "No": "አይ"
+        "No": "አይ",
+        "DoYouAgree": "ትስማማለህ?"
     },
     "interests": {
         "Filter": "ምን ደስ ይልዎታል?",
@@ -84,7 +85,8 @@
             "byTwitter": "ትዊተር",
             "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}",
             "copyLink": "የግብዣ አገናኝን ለመቅዳት {{ClickOrTap}}",
-            "userChooserPlaceholder": "በስም ይፈልጉ"
+            "userChooserPlaceholder": "በስም ይፈልጉ",
+            "shareOrCopyLink": "የግብዣ አገናኝ ለመጋራት ወይም ለመቅዳት {{ClickOrTap}}"
         },
         "email": {
             "subject": "ሄይ, ይህን አረጋግጡ",
@@ -178,7 +180,8 @@
             "youStoppedLive": "ይህን ጥሪ ለብጁ RTMP ማሰራጨት አቁመዋል",
             "sbStartedLiveStreaming": "{{userName}} በቀጥታ ጀምሯል",
             "sbStoppedLiveStreaming": "{{userName}} በቀጥታ ጨርሷል",
-            "liveStopped": "ቪዲዮን ወደ መጨረሻው ነጥብ በመላክ ላይ ስህተት ተከስቷል"
+            "liveStopped": "ቪዲዮን ወደ መጨረሻው ነጥብ በመላክ ላይ ስህተት ተከስቷል",
+            "forceDisconnectingImmediately": "በአስተናጋጅ ተቋርጠዋል"
         },
         "settingsPopup": {
             "webCamera": "የድር ካሜራ",
@@ -209,7 +212,10 @@
             "start": "ጀምር",
             "stop": "ተወ",
             "streamingSettings": "ቅንብሮች",
-            "streamToRTMP": "ወደ ብጁ RTMP ይልቀቁ"
+            "streamToRTMP": "ወደ ብጁ RTMP ይልቀቁ",
+            "dialogTitle": "የቪዲዮ ቅንጅቶች",
+            "startBroadcasting": "ስርጭት ጀምር",
+            "broadcastingInProgress": "ስርጭት በሂደት ላይ ነው።"
         },
         "participantsPopup": {
             "disconnect": "ግንኙነት አቋርጥ",
@@ -225,7 +231,8 @@
             "turnOffScreenSharing": "የማያ ማጋራትን ደብቅ",
             "turnOnCamera": "ቪዲዮ አሳይ",
             "turnOnAudio": "ድምጸ-ከል አንሳ",
-            "turnOnScreenSharing": "ማሳያ ማጋራትን አሳይ"
+            "turnOnScreenSharing": "ማሳያ ማጋራትን አሳይ",
+            "dialogTitle": "የተሳታፊ ቅንብሮች"
         },
         "notAllowedToJoinCall": "ይህንን ጅረት ለመቀላቀል ፈቃድ የልዎትም።",
         "streamTitle": "{{1}} የቀጥታ ጥሪ",
@@ -242,6 +249,14 @@
             "screenSharingIsOn": "የማያ ገጽ ማጋራት በርቷል",
             "screenSharingIsOff": "ማያ ገጽ አጋራ",
             "joinNow": "ጥሪውን ይቀላቀሉ"
+        },
+        "audioSettings": {
+            "dialogTitle": "የድምጽ ቅንብሮች",
+            "speakers": "ተናጋሪዎች",
+            "microphone": "ማይክሮፎን"
+        },
+        "streamingSettings": {
+            "title": "የዥረት ቅንብሮች"
         }
     },
     "messages": {

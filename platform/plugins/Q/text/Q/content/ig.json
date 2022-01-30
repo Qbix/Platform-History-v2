@@ -1,31 +1,31 @@
 {
     "request": {
-        "error": "Njehie {{status}} n&#39;oge arịrịọ",
-        "canceled": "Arịrịọ kagburu",
-        "500": "Mperi Sava Ime",
-        "404": "Achọghị: {{url}}",
-        "501": "Arịrịọ amachibidoro"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Oge gwụchara. Tinyegharịa peeji nke ma gbalịa ọzọ.",
-        "otherDomain": "Ngalaba a na-agbanye na mpaghara cross-domain ka ọ bụrụ mba {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "kpatụ",
-        "click": "pịa",
-        "yes": "ee",
-        "no": "Ee e",
-        "Tap": "Pịa",
-        "Click": "Pịa",
-        "Yes": "Ee",
-        "No": "Ee e"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Jenụwarị",
+        "1": "January",
         "2": "February",
         "3": "March",
         "4": "April",
-        "5": "Ike",
+        "5": "May",
         "6": "June",
         "7": "July",
         "8": "August",
@@ -34,111 +34,110 @@
         "11": "November",
         "12": "December"
     },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
+    },
     "audio": {
-        "allowMicrophoneAccess": "Biko nye ohere ịnweta igwe okwu gị",
-        "record": "Dekọọ",
-        "recording": "Ịdekọ",
-        "remains": "anọgide",
-        "maximum": "oke",
-        "playing": "Na-egwu egwu",
-        "recorded": "E dekọrọ",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Ma ọ bụ bulite",
-        "usethis": "Jiri nke a",
-        "discard": "Ntufu",
-        "encoding": "Ngbanwe"
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Aka"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Kwenye",
-        "ok": "Ee",
-        "cancel": "Ee e"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Mee ngwa ngwa",
-        "ok": "Gaa"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Ejighi ede faịlụ",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Kedu ihe ị ga - achọ ime?",
-            "photo": "Were foto ọhụrụ",
-            "library": "Họrọ site na ọbá akwụkwọ"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Biko họrọ nnukwu ihe oyiyi.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Gbanwee nha na ọkwa",
-            "touchscreen": "Jiri mkpịsị aka gị mee ka ịbịgharịa na dọrọ",
-            "notTouchscreen": "Jiri ntan &amp; ugboelu gị ka ịbịgharịa na dọrọ"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "abalị ụnyahụ",
-        "lastEvening": "ikpeazụ eve",
-        "yesterday": "ụnyaahụ",
-        "thisMorning": "ututu a",
-        "today": "taa",
-        "tonight": "abali a",
-        "tomorrowMorning": "tom ututu",
-        "tomorrow": "echi",
-        "hoursAgo": "{{h}} awa gara aga",
-        "hourAgo": "{{h}} awa gara aga",
-        "minuteAgo": "{{m}} nkeji oge gara aga",
-        "minutesAgo": "{{m}} nkeji gara aga",
-        "secondAgo": "{{s}} nke abụọ gara aga",
-        "secondsAgo": "{{s}} sekọnd gara aga",
-        "fewSecondsAgo": "sekọnd gara aga",
-        "rightNow": "ugbu a",
-        "inSecond": "na {{s}} nke abuo",
-        "inSeconds": "n&#39;ime nkeji {{s}}",
-        "inMinute": "na nkeji {{m}}",
-        "inMinutes": "na nkeji {{m}}",
-        "inHour": "n’ime awa {{h}}",
-        "inHours": "n’ime awa {{h}}",
-        "inUnderMinute": "n&#39;okpuru 1 nkeji"
-    },
-    "video": {
-        "clip": "obere vidiyo",
-        "errorNoSource": "Enweghị isi iyi vidiyo",
-        "SkipAfter": "Mafere mgbe",
-        "Skip": "Mafere"
-    },
-    "pdf": {
-        "clip": "obere vidiyo",
-        "errorNoSource": "Enweghị isi pdf"
-    },
-    "clip": {
-        "SetClipStart": "Tọọ mkpido mmalite",
-        "ClipStart": "Mbido clip",
-        "SetClipEnd": "Nịm Clip End",
-        "ClipEnd": "Clip Ọgwụgwụ",
-        "StartMoreEnd": "Ọnọdụ mbido enweghị ike ịbụ ọnọdụ karịrị njedebe",
-        "EndLessStart": "Ọnọdụ ikpeazụ enweghị ike ịbụ ihe na -erughị mmalite ọnọdụ",
-        "WhichInvalid": "Arụmụka &#39;nke&#39; adịghị mma"
-    },
-    "tabs": {
-        "more": "Ọzọ",
-        "Menu": "NchNhr"
-    },
-    "durations": {
-        "second": "nke abụọ",
-        "seconds": "sekọnd",
-        "minute": "Nkeji",
-        "minutes": "Nkeji",
-        "hour": "awa",
-        "day": "ụbọchị",
-        "days": "ụbọchị",
-        "week": "izu",
-        "weeks": "izu",
-        "month": "ọnwa",
-        "months": "Ọnwa",
-        "year": "afọ",
-        "years": "afọ",
-        "decade": "afọ iri",
-        "decades": "ọtụtụ iri afọ",
-        "century": "narị afọ",
-        "centuries": "ọtụtụ narị afọ"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

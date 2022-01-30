@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Idħol",
-        "LogOut": "Oħroġ"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Issettja {{1}} bħala l-primarja tiegħi {{2}}",
-        "ChoosePassPhrase": "Agħżel <strong>frażi pass<\/strong> biex tidħol ma &#39;. <br> Frażi sempliċi li tikkonsisti fi ftit kliem li faċilment tiftakar.",
-        "ChoosePassPhraseSeeSuggestions": "Agħżel <strong>frażi<\/strong> tajba biex tipproteġi l-kont tiegħek. Ara s-suġġerimenti għal xi ideat.",
-        "LogOutAndTryAgain": "Oħroġ u Ipprova darb&#39;oħra",
-        "IfYouFeel": "Jekk tħoss li marret ħażin, tista &#39;",
-        "SetIdentifierButtonTitle": "Ibda mill-bidu"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Ibda"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Ibda",
-        "Authorize": "Tawtorizza",
-        "TermsLabel": "Jiena qrajt u naqbel <br> għall- {{link}}",
-        "TermsTitle": "Termini",
-        "mustAgree": "L-ewwel trid taqbel mat-termini."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Naċċetta l- {{link}}",
-        "TermsTitle": "Termini"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permess",
-        "prompt": "Tixtieq li jippermettu n-notifiki? Int ser tirċievi aġġornamenti fil-ħin reali dwar affarijiet li tieħu ħsiebhom.",
-        "yes": "Iva",
-        "no": "Le",
-        "WelcomePleaseVerifyEmail": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
-        "WelcomeVerifyEmail": "Merħba! Ivverifika l-indirizz elettroniku tiegħek.",
-        "ForgetPass": "Ħej, insejt il-frażi passiva?",
-        "PassphraseSaved": "Il-frażi tal-pass tiegħek ġiet salvata.",
-        "IdentifierActivated": "{{type}} tiegħek ġie attivat.",
-        "CompletedActivation": "Imxejt attivazzjoni mill-utent.",
-        "CompletedActivationLogIn": "Imxejt attivazzjoni mill-utent. Ipprova dħalt issa."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Jekk jogħġbok agħżel it-tikketta.",
-        "inviteUser": "Stieden l-Utent",
-        "selectRole": "Agħżel ir-Rwol",
-        "inviteRole": "Stieden {{role}}"
-    },
-    "invalidLanguageSelected": "Lingwa mhux valida magħżula",
     "contacts": {
         "dialog": {
-            "title": "Agħżel kuntatt",
-            "SearchByName": "Fittex bl-isem",
-            "CreateAccount": "+ Kuntatt Ġdid",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ma nstabx",
-            "EmptyContacts": "Il-kuntatti ma nstabux ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Agħżel kuntatt ta &#39;{{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Merħba",
-        "directions": "Oħloq kont, jew idħol.",
-        "directionsNoRegister": "Idħol jekk għandek kont.",
-        "goButton": "Mur",
-        "passphrase": "Daħħal il-frażi tal-pass tiegħek:",
-        "loginButton": "Ibda",
-        "registerButton": "Ibda",
-        "resendButton": "Ibgħat Messaġġ ta &#39;Attivazzjoni",
-        "forgot": "Insejtha?",
-        "resendConfirm": "Trid tibgħat messaġġ biex terġa &#39;tissettja l-passphrase tiegħek?",
-        "resendSuccess": "Iċċekkja jekk hemmx messaġġ biex terġa &#39;tpoġġi l-passfrażi tiegħek",
-        "resendClose": "Qrib",
-        "noPassphrase": "Qabel ma tkun tista &#39;tidħol, trid tissettja frażi li tgħaddi billi tikklikkja l-link fil-messaġġ ta&#39; attivazzjoni tiegħek.",
-        "notVerified": "Int trid tibgħat lilek innifsek messaġġ ta &#39;attivazzjoni biex tidħol.",
-        "emailExists": "Kont ippruvajt tirreġistra ma &#39;dan l-email qabel? Jekk iva, iċċekkja l-inbox tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa &#39;tibgħat il-messaġġ<\/a>",
-        "mobileExists": "Kont ippruvajt tirreġistra ma &#39;dan in-numru tal-mowbajl qabel? Jekk iva, iċċekkja l-SMS tiegħek biex tattiva l-kont tiegħek. <a href='#resend' class='Q_button Users_activation_resend'>Ikklikkja biex terġa &#39;tibgħat il-messaġġ<\/a>",
-        "usingOther": "jew tista &#39;",
-        "prompt": "Għażel Username:",
-        "newUser": "jew toħloq kont ġdid hawn taħt",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "# jew email mobbli tiegħek",
-            "mobile": "daħħal il-mobile tiegħek #",
-            "email": "daħħal l-indirizz tal-email tiegħek",
-            "username": "username"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Taċċetta t-Termini tas-Servizz?",
-        "facebookNoEmail": "Il-kont ta ’facebook tiegħek għandu nieqes indirizz elettroniku kkonfermat. Sempliċement idħol fil-mod indiġenu.",
-        "picTooltip": "Tista &#39;tbiddel din l-istampa aktar tard",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ir-ridirezzjoni lejn il-Kartiera",
-                "content": "Ladarba tagħlaq din id-djalogu, tkun meħud lejn il-kartiera tiegħek. Wara li tiffirma, irritorna għal din il-paġna."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Żid mod kif tidħol",
-        "sendMessage": "Ibgħat Messaġġ ta &#39;Attivazzjoni",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "daħħal il-mobile # jew l-email tiegħek",
-            "mobile": "daħħal in-numru tal-mowbajl tiegħek",
-            "email": "daħħal l-indirizz tal-email tiegħek",
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
             "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Kont",
-        "areUsing": "Int qed tuża {{platform}} bħala",
-        "noLongerUsing": "M&#39;għadekx konness ma &#39;{{platform}} bħala",
-        "doAuth": "Idħol ma &#39;dan il-kont",
-        "doSwitch": "Aqleb għal dan il-kont"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Sid il-prodott",
-        "Admin": "Amministratur",
-        "Member": "Membru",
-        "Guest": "Mistieden",
-        "Host": "Ospitanti"
-    },
-    "analytics": {
-        "Title": "Analitiċi",
-        "Daily": "Kuljum",
-        "Weekly": "Kull ġimgħa",
-        "Monthly": "Kull xahar",
-        "Application": "Applikazzjoni",
-        "Pages": "Paġni",
-        "Services": "Servizzi",
-        "Faq": "FAQ",
-        "WeekDays": "Ġranet tal-Ġimgħa"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

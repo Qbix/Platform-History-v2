@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Villa {{status}} við beiðni",
-        "canceled": "Beiðni hætt",
-        "500": "Innri miðlara villa",
-        "404": "Fannst ekki: {{url}}",
-        "501": "Beiðni stöðvuð"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Session útrunnið. Uppfæra síðuna og reyndu aftur.",
-        "otherDomain": "Lokað beinlínis beiðni til erlendra léna á {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "bankaðu á",
-        "click": "smellur",
-        "yes": "Já",
-        "no": "nr",
-        "Tap": "Pikkaðu á",
-        "Click": "Smellur",
-        "Yes": "Já",
-        "No": "Nr"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Janúar",
-        "2": "Febrúar",
-        "3": "Mars",
-        "4": "Apríl",
-        "5": "Maí",
-        "6": "Júní",
-        "7": "Júlí",
-        "8": "Ágúst",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
         "9": "September",
-        "10": "október",
-        "11": "Nóvember",
-        "12": "Desember"
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Vinsamlegast gefðu aðgang að hljóðnemanum þínum",
-        "record": "Met",
-        "recording": "Upptöku",
-        "remains": "leifar",
-        "maximum": "hámark",
-        "playing": "Spila",
-        "recorded": "Skráð",
-        "clip": "bút",
-        "orupload": "Eða Hlaða",
-        "usethis": "Notaðu þetta",
-        "discard": "Fleygja",
-        "encoding": "Kóðun"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Viðvörun"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Staðfesta",
-        "ok": "Já",
-        "cancel": "Nr"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Hvetja",
-        "ok": "Fara"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Villa við að lesa skrá",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Hvað viltu gera?",
-            "photo": "Taktu nýja mynd",
-            "library": "Veldu úr bókasafni"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Vinsamlegast veldu stærri mynd.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Stilla stærð og stöðu",
-            "touchscreen": "Notaðu fingrana til að þysja og draga",
-            "notTouchscreen": "Notaðu músina og hjólið til að þysja og draga"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "gærkvöld",
-        "lastEvening": "í fyrradag",
-        "yesterday": "í gær",
-        "thisMorning": "þetta morn",
-        "today": "í dag",
-        "tonight": "í kvöld",
-        "tomorrowMorning": "Tom Morn",
-        "tomorrow": "á morgun",
-        "hoursAgo": "Fyrir {{h}} klukkustundum",
-        "hourAgo": "{{h}} klukkustund síðan",
-        "minuteAgo": "{{m}} mínúta síðan",
-        "minutesAgo": "{{m}} mínútum",
-        "secondAgo": "{{s}} sekúndu síðan",
-        "secondsAgo": "{{s}} sekúndum",
-        "fewSecondsAgo": "sekúndum síðan",
-        "rightNow": "núna strax",
-        "inSecond": "á {{s}} sekúndu",
-        "inSeconds": "eftir {{s}} sekúndur",
-        "inMinute": "eftir {{m}} mínútu",
-        "inMinutes": "eftir {{m}} mínútur",
-        "inHour": "eftir {{h}} klukkustund",
-        "inHours": "eftir {{h}} klukkustundir",
-        "inUnderMinute": "á innan við 1 mínútu"
-    },
-    "tabs": {
-        "more": "meira",
-        "Menu": "Matseðill"
-    },
-    "video": {
-        "clip": "bút",
-        "errorNoSource": "Engin myndbandsuppspretta",
-        "SkipAfter": "Sleppa eftir",
-        "Skip": "Slepptu"
-    },
-    "pdf": {
-        "clip": "bút",
-        "errorNoSource": "Engin pdf heimild"
-    },
-    "clip": {
-        "SetClipStart": "Stilltu klemmu byrjun",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Stilltu klemmuenda",
-        "ClipEnd": "Klemmuenda",
-        "StartMoreEnd": "Upphafsstaða getur ekki verið meira en lokastaða",
-        "EndLessStart": "Lokastaða getur ekki verið minni en upphafsstaða",
-        "WhichInvalid": "Rökin „sem“ eru ógild"
-    },
-    "durations": {
-        "second": "annað",
-        "seconds": "sekúndur",
-        "minute": "mínútu",
-        "minutes": "mínútur",
-        "hour": "klukkustundir",
-        "day": "dagur",
-        "days": "daga",
-        "week": "vika",
-        "weeks": "vikur",
-        "month": "mánuði",
-        "months": "mánuðum",
-        "year": "ári",
-        "years": "ár",
-        "decade": "Áratugur",
-        "decades": "áratugir",
-        "century": "öld",
-        "centuries": "öldum"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

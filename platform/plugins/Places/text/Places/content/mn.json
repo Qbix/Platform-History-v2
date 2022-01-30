@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} лат, {{2}} жил)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}} дотор"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "метр",
-        "meters": "метр",
-        "kilometer": "километр",
-        "kilometers": "киометр",
-        "km": "км",
-        "mile": "миль",
-        "miles": "миль",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "хөл",
-        "feet": "хөл",
-        "inches": "инч"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "{{select}} - с хойш болж буй үйл явдлыг сонирхож байна",
-        "update": "Миний байршлыг шинэчлэх",
-        "set": "Миний байршлыг тохируулах",
-        "prompt": "{{ClickOrTap}} эндээс<br> өөрийн<br> байршил",
-        "myCurrentLocation": "Миний одоогийн байршил",
-        "enterAddress": "Хаяг оруулна уу",
-        "enterPostcode": "Шуудангийн код \/ зип кодоо оруулна уу",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Байршил нэмэх",
-            "title": "Шинэ байршил",
-            "nameYourLocation": "Байршлаа нэрлэнэ үү"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Энэ байршлыг хадгалах уу?",
-            "message": "Цаашид энэ байршлыг дахин ашиглахаар төлөвлөж байна уу?",
-            "ok": "Тийм ээ",
-            "cancel": "Үгүй"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Энэ байршлыг нэрлэнэ үү",
-            "placeholder": "Гэр, ажил гэх мэт.",
-            "ok": "Хадгалах"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Байршлыг сонгоно уу"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Энэ байршилд ямар нэгэн газар байна уу?",
-        "newArea": "Шинэ газар",
-        "promptTitle": "Талбайн нэрийг оруулна уу:",
-        "absent": "Талбайг тохируулна уу",
-        "error": "Алдаа",
-        "exist": "Талбай аль хэдийн бий болсон",
-        "addNewArea": "Шинэ газар нэмэх",
-        "add": "Нэмэх"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "байршлын цуглуулга",
-            "displayType": "Байршил"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Барилга, байр, усан онгоц, парк гэх мэтийг төлөөлдөг.",
-            "displayType": "Байршил"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Өрөө, иж бүрдэл гэх мэт байршилд байгаа хэсгийг төлөөлнө",
-            "displayType": "Талбай"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Барилга эсвэл усан онгоцны шалыг төлөөлдөг",
-            "displayType": "Шал"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Барилга эсвэл усан онгоцны баганыг төлөөлдөг",
-            "displayType": "Багана"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Геохашаас тодорхой зайд байгаа зүйлсийн ангилал",
-            "displayType": "Газрын ойролцоо"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Геохашаас тодорхой зайд байгаа сонирхолд нийцсэн зүйлсийн ангилал",
-            "displayType": "Сонирхсон газрууд"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

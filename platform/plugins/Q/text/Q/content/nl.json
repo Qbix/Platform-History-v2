@@ -72,7 +72,8 @@
             "title": "Pas grootte en positie aan",
             "touchscreen": "Gebruik je vingers om in te zoomen en te slepen",
             "notTouchscreen": "Gebruik je muis en muis om in te zoomen en te slepen"
-        }
+        },
+        "errorType": "Sorry, maar dit bestandstype wordt niet ondersteund"
     },
     "timestamp": {
         "lastNight": "afgelopen nacht",

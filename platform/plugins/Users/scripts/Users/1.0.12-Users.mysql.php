@@ -2,7 +2,7 @@
 
 function Users_1_0_12_rename_Users_Identify()
 {
-    echo "Renaming appId in rows: Users_Identify...";
+    echo "Renaming appId in rows: Users_Identify..." . PHP_EOL;
 	$rows = Users_Identify::select()->fetchDbRows();
 	$c = count($rows);
 	$i = 0;

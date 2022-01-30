@@ -1,167 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Coj mus rhaub kom them"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Kev them nqi ua tiav rau {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Ua tsaug rau koj cov nyiaj them rau {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} tso npe rau {{plan.title}}",
-        "YouSubscribedTo": "Koj tau sau npe mus rau {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "Koj tau txais kev them nyiaj ntawm {{displayAmount}} los ntawm {{call 'publisher.displayName'}} los ntawm &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hav, qhov no tsuas yog qhia rau koj paub tias {{1}} tau raug them {{2}} rau {{3}} los ntawm {{4}}"
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "Ua tsaug rau koj cov nyiaj them rau &quot;{{description}}&quot;",
-        "HavePaid": "Hav {{1}}, qhov no tsuas yog kev lees paub sai tias koj tau ua tiav kev them nyiaj {{2}} rau {{3}} rau {{4}}"
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Cov ntaub ntawv hais txog kev xaj",
-        "PaymentMethod": "Txoj kev them nyiaj",
-        "ContactInfo": "Hu xov tooj",
-        "Pay": "Them"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Caw txais los ntawm {{invitedUserName}}",
-        "YouHaveCreditsToStart": "Koj muaj {{amount}} khab nias los pib",
-        "PaymentFor": "Kev them nyiaj rau &quot;{{1}}&quot;",
-        "PaymentTo": "Them nyiaj rau {{1}}",
-        "PaymentToUser": "Them nyiaj rau {{toUserName}}",
-        "CreatePaidStream": "rau kev tsim {{toStreamName}}",
-        "JoinedPaidStream": "rau kev tshwj tseg hauv &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "rau tsim zej zog &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "raws li kev tso nyiaj rov qab hauv &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Yuav khoom {{amount}} khab nias",
-        "BonusCredits": "Ntxiv {{amount}} khab nias",
-        "BuyAmountCredits": "Yuav {{amount}} khab nias",
-        "WatchClip": "Khwv tau {{amount}} cov qhab nia rau saib {{fromStreamTitle}}",
-        "MissingCredits": "Tsis muaj qhab nia",
-        "YouMissingCredits": "Koj xav tau cov qhab nia ntxiv {{amount}} txhawm rau mus txuas ntxiv.",
-        "BuyCredits": "Yuav cov qhab nia",
-        "BuyBonus": "Muas {{amount}} khab nias ib zaug, yuav ua rau {{bonus}} cov qhab nia ntxiv.",
-        "Buy": "Yuav",
-        "PurchaseCredits": "Muas Khab nias",
-        "Credits": "Khab nias",
-        "ErrorInvalidAmount": "Tus nqi tsis raug",
-        "ErrorInvalidCurrency": "Hmoov tsis peb tsis txhawb nyiaj txiaj {{currency}} tseem",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} cov qhab nia",
-            "BonusCredits": "{{amount}} cov qhab nia"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Hnub tim",
-        "Amount": "Tus nqi",
-        "Description": "Nqe lus piav qhia",
-        "Client": "Neeg",
-        "To": "rau",
-        "From": "los ntawm",
-        "SeeHistory": "Saib keeb kwm kev them nyiaj rau {{1}}",
-        "HistoryEmpty": "Koj tseem tsis muaj cov ntaub ntawv tseem",
-        "PaymentFor": "Xa {{amount}} cov qhab nia",
-        "PaymentTo": "Xa {{amount}} cov qhab nia",
-        "PaymentToUser": "Xa {{amount}} cov qhab nia",
-        "CreatePaidStream": "Siv sijhawm {{amount}} khab nias",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "Khwv tau {{amount}} cov qhab nia",
-            "-": "Siv sijhawm {{amount}} khab nias"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "Khwv tau {{amount}} cov qhab nia",
-            "-": "Siv sijhawm {{amount}} khab nias"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "Tau txais {{amount}} cov qhab nia",
-            "-": "Xa {{amount}} cov qhab nia"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "Siv sijhawm {{amount}} khab nias",
-        "BoughtCredits": "Yuav khoom {{amount}} khab nias",
-        "BonusCredits": "Tau txais nyiaj ntxiv {{amount}} khab nias",
-        "InviteAcceptedBy": "Khwv tau {{amount}} cov qhab nia",
-        "YouHaveCreditsToStart": "Khwv tau {{amount}} cov qhab nia"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Teeb Cov Ntaub Ntawv Them Nqi",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Pib Sau Npe",
-            "message": "Koj puas xav sau npe mus rau {{title}}?",
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
             "ok": "OK",
-            "cancel": "Ncua tseg"
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Credit lossis daim debit card",
-        "SubscribePayment": "Sau Npe Them Nyiaj",
-        "ImmediatePayment": "Them Nyiaj Tam Sim No."
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "Teeb Cov Ntaub Ntawv Them Nqi",
-        "BuyAmountCredits": "Yuav {{amount}} khab nias",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "Them Nyiaj",
-            "message": "Koj puas pom zoo them {{symbol}} {{amount}}?",
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Ncua tseg"
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Khab nias",
-            "description": "taug qab cov qhab nia thiab them nyiaj"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "Kev Npaj Them Nyiaj",
-            "description": "kev npaj yuav khoom"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "Kev tso npe",
-            "description": "kev tso npe"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Khoom",
-            "description": "khoom raug muag"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "Kev pabcuam",
-            "description": "muab kev pabcuam"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Khwv tau {{amount}} cov qhab nia"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "Yuav khoom {{amount}} khab nias"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Ntxiv {{amount}} khab nias"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "Siv sijhawm {{amount}} khab nias"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "Xa {{amount}} khab nias rau {{toUserName}}"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Tau txais {{amount}} cov qhab nia los ntawm {{fromUserName}}"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Kev Pabcuam Tshiab",
-            "TitlePlaceholder": "Kev pabcuam lub npe",
-            "PricePlaceholder": "Teeb tus nqi",
-            "LinkPlaceholder": "teeb cov ntaub ntawv txuas ntxiv",
-            "DescriptionPlaceholder": "Kev piav qhia kev pabcuam",
-            "SaveService": "Txuag Kev Pabcuam",
-            "SelectRequiredParticipants": "Yuav tsum koom nrog"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "Tswj Cov Kev Pabcuam",
-        "ManageServices": "Tswj Cov Kev Pabcuam",
-        "Free": "Pub dawb",
-        "OptionalContribution": "Yeem pab",
-        "RequiredPayment": "Yuav tsum tau them nyiaj",
-        "AreYouSureDelete": "Koj puas paub tseeb tias koj xav rho tawm qhov kev pabcuam no?",
-        "AmountServicesRelated": "Muaj {{amount}} qhov muaj txiaj ntsig ntsig txog qhov kev pabcuam no. Lawv tseem yuav raug tshem tawm."
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

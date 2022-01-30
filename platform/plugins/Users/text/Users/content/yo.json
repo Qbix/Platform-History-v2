@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "wo ile",
-        "LogOut": "wọle jade"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Ṣeto {{1}} bi mi akọkọ {{2}}",
-        "ChoosePassPhrase": "Yan <strong>gbolohun ọrọ kan<\/strong> lati wọle pẹlu. <br> Ọrọ gbolohun kan ti o wa ninu awọn ọrọ diẹ ti o yoo ṣaima ṣe iranti.",
-        "ChoosePassPhraseSeeSuggestions": "Yan <strong>gbolohun ọrọ ti o<\/strong> dara lati dabobo àkọọlẹ rẹ. Wo awọn didaba fun diẹ ninu awọn ero.",
-        "LogOutAndTryAgain": "Jade ki o tun gbiyanju lẹẹkansi",
-        "IfYouFeel": "Ti o ba lero nkankan ti ko tọ, o le",
-        "SetIdentifierButtonTitle": "Lati ibere"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Bẹrẹ Bibẹrẹ"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Bẹrẹ Bibẹrẹ",
-        "Authorize": "Gba aṣẹ",
-        "TermsLabel": "Mo ti ka ati gba <br> si {{link}}",
-        "TermsTitle": "Awọn ofin",
-        "mustAgree": "Ni akọkọ o gbọdọ gba si awọn ofin naa."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Mo gba {{link}}",
-        "TermsTitle": "Awọn ofin"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Gbigbanilaaye",
-        "prompt": "Ṣe o fẹ lati ṣe iwifunni? Iwọ yoo gba awọn imudojuiwọn gidi-akoko nipa awọn ohun ti o bikita nipa.",
-        "yes": "Bẹẹni",
-        "no": "Rara",
-        "WelcomePleaseVerifyEmail": "Kaabo! Jọwọ ṣayẹwo adiresi imeeli rẹ.",
-        "WelcomeVerifyEmail": "Kaabo! Daju adirẹsi imeeli rẹ.",
-        "ForgetPass": "Hey, ṣe o gbagbe ọrọigbaniwọle rẹ?",
-        "PassphraseSaved": "Gbolohun rẹ ti o ti fipamọ.",
-        "IdentifierActivated": "{{type}} ti mu ṣiṣẹ.",
-        "CompletedActivation": "O ti pari mu ṣiṣẹ olumulo.",
-        "CompletedActivationLogIn": "O ti pari mu ṣiṣẹ olumulo. Gbiyanju wọle si bayi."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Yan olubasọrọ",
-            "CreateAccount": "+ Olubasọrọ Tuntun",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ko ri",
-            "SearchByName": "Wa ni orukọ",
-            "EmptyContacts": "A ko ri awọn olubasọrọ"
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Yan olubasọrọ ti {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Jowo yan aami.",
-        "inviteUser": "Olukọni Olukọni",
-        "selectRole": "Yan ipa",
-        "inviteRole": "Fiwepe {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Ainilẹjẹ ede ti a yan",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Kaabo",
-        "directions": "Ṣẹda akọọlẹ kan, tabi wọle.",
-        "directionsNoRegister": "Wọle ti o ba ni akọọlẹ kan.",
-        "goButton": "Lọ",
-        "passphrase": "Tẹ gbolohun ọrọ rẹ si:",
-        "loginButton": "Bibẹrẹ",
-        "registerButton": "Bibẹrẹ",
-        "resendButton": "Firanṣẹ Fi si ibere ise",
-        "forgot": "Gbagbe o?",
-        "resendConfirm": "Ṣe o fẹ lati fi ifiranṣẹ ranṣẹ lati tun awọn ọrọ kukuru rẹ bi?",
-        "resendSuccess": "Ṣayẹwo fun ifiranṣẹ kan lati tun ọrọ kukuru rẹ da",
-        "resendClose": "Pade",
-        "noPassphrase": "Ṣaaju ki o to wọle, o gbọdọ ṣeto gbolohun ọrọ kọja nipa titẹ ọna asopọ ninu ifiranṣẹ fi si ibere iṣẹ rẹ.",
-        "notVerified": "O gbọdọ fi ifiranṣẹ ibere ise ranṣẹ si ara rẹ lati wọle.",
-        "emailExists": "Njẹ o gbiyanju lati forukọsilẹ pẹlu imeeli yii ṣaaju? Ti o ba rii bẹ, ṣayẹwo apo-iwọle rẹ lati mu iwe ipamọ rẹ ṣiṣẹ. <a href='#resend' class='Q_button Users_activation_resend'>Tẹ lati tun firanṣẹ ranṣẹ<\/a>",
-        "mobileExists": "Ṣe o gbiyanju lati forukọsilẹ pẹlu nọmba alagbeka yii ṣaaju? Ti o ba rii bẹ, ṣayẹwo SMS rẹ lati mu iwe ipamọ rẹ ṣiṣẹ. <a href='#resend' class='Q_button Users_activation_resend'>Tẹ lati tun firanṣẹ ranṣẹ<\/a>",
-        "usingOther": "tabi o le",
-        "prompt": "Yan oruko lilo:",
-        "newUser": "tabi ṣẹda iwe apamọ tuntun",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "alagbeka rẹ # tabi imeeli",
-            "mobile": "tẹ alagbeka rẹ #",
-            "email": "tẹ adirẹsi imeeli rẹ",
-            "username": "orukọ olumulo"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Gba awọn ofin ti Iṣẹ?",
-        "facebookNoEmail": "Àkọọlẹ facebook rẹ n padanu adirẹsi imeeli ti timo. Nìkan wọle si ọna abinibi.",
-        "picTooltip": "O le yi aworan pada nigbamii",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Wọle si {{host}} ni akoko {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ìtúnjúwe sí Apamọwọ",
-                "content": "Ni kete ti o ti pa ajọṣọ yii, iwọ yoo mu lọ si apamọwọ rẹ. Lẹhin ti o wọle, pada si oju -iwe yii."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Ṣafikun ọna lati wọle",
-        "sendMessage": "Firanṣẹ Fi si ibere ise",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "tẹ alagbeka rẹ # tabi imeeli",
-            "mobile": "tẹ nọmba alagbeka rẹ",
-            "email": "tẹ adirẹsi imeeli rẹ",
-            "username": "orukọ olumulo"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
         "title": "{{Platform}} Account",
-        "areUsing": "O nlo {{platform}} bii",
-        "noLongerUsing": "O ko ni asopọ mọ si {{platform}} bii",
-        "doAuth": "Wọle pẹlu iwe ipamọ yii",
-        "doSwitch": "Yipada si iwe apamọ yii"
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Eni",
-        "Admin": "Abojuto",
-        "Member": "Ọmọ ẹgbẹ",
-        "Guest": "Alejo",
-        "Host": "Ogun"
-    },
-    "analytics": {
-        "Title": "Awọn atupale",
-        "Daily": "Ojoojumọ",
-        "Weekly": "Osẹ -osẹ",
-        "Monthly": "Oṣooṣu",
-        "Application": "Ohun elo",
-        "Pages": "Awọn oju -iwe",
-        "Services": "Awọn iṣẹ",
-        "Faq": "Faq",
-        "WeekDays": "Ọjọ Ọsẹ"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

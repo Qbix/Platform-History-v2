@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Into entsha"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Abantu ndiwameme",
-        "Streams\/invitedMe": "Ngubani owamemileyo",
-        "AreYouAgree": "Ngaba uyavuma?",
-        "Yes": "Ewe",
-        "No": "Hayi"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Uyakuthanda ntoni?",
-        "CanAdd": "Ukuba awukwazi ukufumana oko ufuna, unokongeza umdla omtsha apha ngezantsi:",
-        "TrySynonyms": "Musa ukuyibona? Zama ezinye i synonyms.",
-        "AddUnderCategory": "Yongeza phantsi kwecandelo ...",
-        "Other": "Okunye",
-        "Unlisted": "Nga bhalwanga"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Umyalezo ukhankanywe ukuphononongwa komphathi. Thepha kwakhona kwi-unflagga.",
-        "noOneSaid": "Akukho mntu uthethile nantoni na",
-        "closeChatButton": "Vala ingxoxo",
-        "closeChatConfirmTitle": "Vala le ngxoxo?",
-        "closeChatConfirm": "Uqinisekile ukuba ufuna ukuvala le ngxoxo?",
-        "closeChatConfirmYes": "Ewe",
-        "closeChatConfirmNo": "Hayi",
-        "earlierComments": "izimvo zangaphambili",
-        "Subscribed": "Thulisa iZaziso",
-        "Unsubscribed": "Fumana iZaziso",
-        "notAllowedToJoinCall": "Awunayo imvume yokujoyina le ncoko.",
-        "startedConversation": "yaqala incoko",
-        "RealTimeCall": "Ixesha lokutsala umnxeba",
-        "SearchByName": "Khangela ngegama",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} undwendwela incoko",
-            "Join": "{{displayName}} ujoyine incoko",
-            "Leave": "{{displayName}} ishiye incoko",
-            "RelatedTo": "{{displayName}} uqalile {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Umyalezo {{& message.fields.type}} kwi {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} wathi:",
-        "Streams\/changed": "Utshintsho kwi {{stream.fields.title}}",
-        "Streams\/invite": "Umenywe {{& stream.fields.title}}",
-        "Streams\/announcement": "Ukwaziswa kwi {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} utshintshe ukufikelela komlambo",
-        "Streams\/chat\/edit": "Umyalezo wengxoxo uhlelwe",
-        "Streams\/chat\/remove": "Umyalezo wengxoxo ususiwe",
-        "Streams\/closed": "{{stream.fields.title}} ivaliwe",
-        "Streams\/task\/progress": "Inkqubela phambili eyenziwe kwi {{stream.fields.title}}",
-        "Streams\/task\/complete": "Umsebenzi ogqityiweyo: {{stream.fields.title}}",
-        "Streams\/task\/error": "Iphutha ngexesha: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Umyalezo ongenawo",
-        "Streams\/relatedTo\/Streams\/call": "Umnxeba omtsha oQalile kwi {{toTitle}}",
-        "Streams\/relatedTo\/*": "Entsha {{relationDisplayType}} kwi {{1000]}",
-        "Streams\/relatedFrom\/*": "Yongezwe kwi - {{toTitle}} njenge {{1000]}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ndikukhankanyile kumazwana",
-        "Streams\/call": "{{displayName}} uqalile umnxeba okwenyani",
-        "ManageEmailSubscriptions": "lawula imirhumo yakho ye-imeyile",
-        "IfUnsubscribe": "Ukuba ufuna ukubhalisa"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} ukumeme ukuba {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Khetha kwiNxibelelwano yakho",
-            "chooseAgainFromContacts": "Khetha kwakhona kwiNxibelelwano",
-            "inviteSelectedContacts": "Mema oNxibelelwano olukhethiweyo",
-            "selectFromContacts": "Khetha Kufownelwa",
-            "photo": "Thatha umfanekiso",
-            "photoInstruction": "Ukuba umntu okhangela ikhowudi yakho ye-QR phambi kwakho, thabatha umfanekiso wabo",
-            "to": "Ku: {{Stream Title}}",
-            "go": "Hamba",
-            "title": "Mema",
-            "placeholder": "Inombolo yeselula okanye idilesi ye-imeyile",
-            "orInvite": "Okanye mema abantu ngokusebenzisa:",
-            "QR": "{{ClickOrTap}} ukudala ikhowudi ye-QR",
-            "QRtitle": "Skena le khowudi ye-QR",
-            "QRscanned": "Bayihlola!",
-            "byEmail": "Imeyili",
-            "byText": "Umbhalo",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ukuba ikhowudi iskenisiwe",
-            "copyLink": "{{ClickOrTap}} ukukopa ikhonkco lesimemo",
-            "userChooserPlaceholder": "Khangela ngegama"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hayi, khangela oku",
-            "PleaseVisitLink": "Nceda u tyelele eli linxulumano:",
-            "InvitingYou": "Ndikumema ukuba {{title}}",
-            "HasInvitedYou": "{{displayName}} ukumeme ukuba {{title}}",
-            "HasMentionedYou": "{{displayName}} ukukhankanyile kwi &quot;{{1000]}",
-            "YOUAREINVITED": "UYAXELWA!",
-            "AcceptInvite": "Yamkela isimemo"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Umenywe {{title}}. Nceda uthephe {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Umenywe. {{ClickOrTap}} apha ukuba wamkele kwaye ujoyine."
-        },
-        "command": "Mema",
-        "youCanNowPaste": "Ngoku ungancamathisela eli khonkco kwenye indawo ukumema abantu"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Izimemo zithunyelwa ukusuka kwinani lethu, abahlobo bakho abangaziqondi. Landela ngokubhaliweyo okubhaliweyo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze ikhonkco.",
-            "confirm": "Izimemo zithunyelwa ukusuka kwinani lethu, abahlobo bakho abangaziqondi. Ngaba ungathanda ukulandelelana ngombhalo osheshayo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze isiqhagamshelo.",
-            "check": "Hayi, ndikuthumelele isimemo kwi-{{app}} insiza. Nceda ukhangele i-SMS yakho kwaye nqakraza isixhumanisi!",
-            "CheckYourMobile": "Nceda ujonge iSMS kwaye ulandele imiyalelo!"
-        },
-        "email": {
-            "alert": "Izimemo zithunyelwa kwi-domain yethu, apho abahlobo bakho abangaboniyo. Landela ngokubhaliweyo okubhaliweyo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze ikhonkco.",
-            "confirm": "Izimemo zithunyelwa kwi-domain yethu, apho abahlobo bakho abangaboniyo. Ngaba ungathanda ukulandelelana ngombhalo osheshayo ukuba ubazise isimemo esivela kuwe, ubacele ukuba banqakraze isiqhagamshelo.",
-            "subject": "Ngaba ufumene isimemo?",
-            "body": "Hayi, ndikuthumelele isimemo kwi-{{app}} insiza. Nceda ukhangele i-imeyile yakho kwaye nqakraza ikhonkco apha!",
-            "CheckYourEmail": "Nceda ujonge i-imeyile yakho kwaye ulandele imiyalelo!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Nika amandla iMakrofoni",
-            "cameraTitle": "Nika amandla ikhamera",
-            "cameraAndMicrophoneTitle": "Nika amandla ikhamera kunye nemakrofoni",
-            "dialogTitle": "Iyaxhuma",
-            "microphoneBtn": "Yenza i-Microphone",
-            "cameraBtn": "Yenza iKhamera",
-            "cameraAndMicrophoneBtn": "Yenza iKhamera kunye neMakrofoni"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Imiyalelo",
-            "permissionDenied": "Imvume ye {{kind}} iyaliwe. Ukuze uyisebenzise nceda ulandele la manyathelo:",
-            "point1": "Yiya ku &quot;Useto&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Ubumfihlo nokhuseleko&quot; -&gt; &quot;Useto lweSayithi&quot; -&gt; &quot;Ikhamera&quot; okanye &quot;Useto lweSayithi&quot; -&gt; &quot;Microphone&quot;",
-            "point2": "Susa u {{hostname}} kuluhlu lwe &quot;Vimba&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Imiyalelo",
-            "permissionDenied": "Imvume ye {{kind}} iyaliwe. Nceda uphinde ulayishe eli phepha kwaye uqinisekise ukufikelela kwi - {{kind}} ukujoyina inkomfa."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Imiyalelo",
-            "permissionDenied": "Imvume ye {{kind}} iyaliwe. Ukuze uyisebenzise nceda ulandele la manyathelo:",
-            "point1": "Yiya kwiisetingi zakho ze-Android",
-            "point2": "Vula &quot;iiSoftware kunye nezaziso&quot;",
-            "point3": "Fumana &quot;{{communityName}} kwaye uyivule",
-            "point4": "Thepha kwiimvume",
-            "point5": "Nika amandla {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Imiyalelo",
-            "permissionDenied": "Imvume ye {{kind}} iyaliwe. Ukuze uyisebenzise nceda ulandele la manyathelo:",
-            "point1": "Yiya kwiisetingi zakho ze-iOS",
-            "point2": "Vula &quot;ubumfihlo&quot;",
-            "point3": "Fumana {{kind}} kwaye uyivule",
-            "point4": "Khangela &quot;{{communityName}}&quot; kwaye usebenze"
-        },
-        "notices": {
-            "youJoinedRoom": "Ungene egumbini",
-            "joining": "Ukujoyina: {{userName}}",
-            "sbLeftRoom": "{{userName}} liphume kwigumbi",
-            "youLeftRoom": "Uphume egumbini",
-            "codeCopied": "Uphume egumbini",
-            "sbBeganFbLive": "{{userName}} yaqala ukusasaza le fowuni kuFacebook",
-            "sbStoppedFbLive": "{{userName}} uyekile ukusasaza le fowuni kuFacebook",
-            "youBeganFbLive": "Uqale ukusasaza lo mnxeba kuFacebook",
-            "youStoppedFbLive": "Uyekile ukusasaza lo mnxeba kuFacebook",
-            "linkCopiedToCb": "Ikhonkco elikhutshelwe kwibhodi eqhotyoshwayo",
-            "codeCopiedToCb": "Ikhowudi ikopiwe kwibhodi eqhotyoshwayo",
-            "userHasNoVideo": "Umthathi-nxaxheba akanayo ividiyo",
-            "openInBrowserAlert": "Vula ikhonkco kwi-Safari browser ukuze ujoyine inkomfa.",
-            "youBeganVideoRecording": "Uqale ukurekhoda le nkomfa",
-            "youStoppedVideoRecording": "Uyekile ukurekhoda le nkomfa",
-            "switchingRoom": "Igumbi lokutshintsha ...",
-            "forceDisconnecting": "Uya kucinywa phakathi kwemizuzwana emi-5",
-            "youStartedLive": "Uqale ukusasaza le fowuni kwiRTMP yesiko",
-            "youStoppedLive": "Uyeke ukusasaza le fowuni kwiRTMP yesiko",
-            "sbStartedLiveStreaming": "{{userName}} uqale bukhoma",
-            "sbStoppedLiveStreaming": "{{userName}} iphele ngoku",
-            "liveStopped": "Impazamo xa kuthunyelwa ividiyo kwindawo yokugqibela yenzekile"
-        },
-        "settingsPopup": {
-            "webCamera": "Ikhamera yeWebhu",
-            "screenSharing": "Ukwabelana ngesikrini",
-            "shareAnotherScreen": "Yabelana ngesinye isikrini",
-            "turnOffCameras": "Cima zonke iikhamera",
-            "startFBLive": "Qala kwi-Live Live",
-            "stopFBLive": "Misa i-Facebook Livestream",
-            "fbLiveTitle": "Isihloko sokuBukhoma",
-            "fbLiveDescription": "Inkcazo ebukhoma",
-            "fbOnlyMeLiveAccess": "Mna kuphela",
-            "fbFriendsAccess": "Abahlobo",
-            "fbPublicAccess": "Esidlangalaleni",
-            "fbStartLive": "Yiya uphile",
-            "fbStopLive": "Phela ukuPhila",
-            "fbEmbedCode": "Shumeka",
-            "copy": "Khuphela",
-            "turnOffVideo": "Cima ikhamera \/ ukwabelana ngesikrini",
-            "turnOffScreenSharing": "Cima ukwabelana ngesikrini",
-            "cameraIsTurnedOff": "Ikhamera icinyiwe",
-            "startRecording": "Qala ukuRekhoda",
-            "stopRecording": "Yekani ukuRekhoda",
-            "recordingInProgress": "Ukurekhoda kuyaqhubeka ...",
-            "publishOnTimeline": "Shicilela kumda wexesha",
-            "publishToGroup": "Shicilela kwiqela",
-            "turnOffAudioInput": "Thulisa imakrofoni",
-            "micIsTurnedOff": "Imakrofoni icinyiwe",
-            "start": "Qalisa",
-            "stop": "Yeka",
-            "streamingSettings": "Useto",
-            "streamToRTMP": "Sakaza kwi-RTMP yesiko"
-        },
-        "participantsPopup": {
-            "disconnect": "Nqamla",
-            "floatingScreens": "Izikrini zokudada",
-            "tiledScreens": "Izikrini ezinetayile",
-            "loudestExceptMe": "Ndinesidima Ngaphandle Kwam",
-            "maximizeLoudest": "Yandisa ubukhulu becala",
-            "staticMaximized": "Ukuqina okuzinzileyo",
-            "manual": "Incwadi yezandla",
-            "fullScreen": "Isikrini esiphelele",
-            "turnOffCamera": "Fihla ividiyo",
-            "turnOffAudio": "Thulisa iaudiyo",
-            "turnOffScreenSharing": "Fihla ukwabelana ngesikrini",
-            "turnOnCamera": "Veza ividiyo",
-            "turnOnAudio": "Susa umsindo",
-            "turnOnScreenSharing": "Bonisa ukwabelana ngesikrini"
-        },
-        "notAllowedToJoinCall": "Awunayo imvume yokujoyina lo msele.",
-        "streamTitle": "{{1}} umnxeba ophilayo",
-        "preview": {
-            "preamble": "Intlanganiso:",
-            "Meeting": "Intlanganiso",
-            "MeetingEnded": "Intlanganiso yaphela"
-        },
-        "preparing": {
-            "micIsOff": "UMic ucimile",
-            "micIsOn": "Mic ivuliwe",
-            "cameraIsOff": "Ikhamera icinyiwe",
-            "cameraIsOn": "Ikhamera ivuliwe",
-            "screenSharingIsOn": "Ukwabelana ngesikrini kuvuliwe",
-            "screenSharingIsOff": "Yabelana ngescreen",
-            "joinNow": "Joyina umnxeba"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "uthumele umyalezo <em>{{message.fields.type}}<\/em> kwi {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "gqabaza",
-            "in": "ngaphakathi",
-            "body": "kwi {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "iposwe kuyo",
-                "byAvatar": "ngo {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ine {{instructions.fromDisplayType}} entsha",
-                "byAvatar": "yongezwe ngu {{avatar.displayName}}"
-            },
-            "startedCallIn": "waqala umnxeba ngaphakathi"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Ukumenyiwe",
-            "description": "Ibhokisi lemiyalezo engenayo malunga nezimemo"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Izixhobo",
-            "description": "umsinga wolawulo lokufikelela kulwazi kunye nokuthumela imiyalezo malunga nohlaziyo"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "yokufumana uhlaziyo malunga nenkqubela phambili kumsebenzi othile",
-            "displayType": "Umsebenzi"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "udidi lwemisebenzi",
-            "displayType": "Imisebenzi"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "amava aqhelekileyo amalungu oluntu",
-            "displayType": "Amava aqhelekileyo amalungu oluntu"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "Ukubulisa umntu anokuzazisa bona",
-            "displayType": "Ukubulisa"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Inani",
-            "description": "inombolo yemathematics"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Umhla",
-            "description": "umhla"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Isicatshulwa",
-            "description": "umzimba wesicatshulwa"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Isicatshulwa",
-            "description": "umzimba omncinci wesicatshulwa"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Isicatshulwa",
-            "description": "umzimba ophakathi"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Idilesi yemeyile",
-            "description": "idilesi yemeyile"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Inombolo yomnxeba",
-            "description": "inombolo yomnxeba"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
-            "displayType": "I-URL",
-            "description": "ikhonkco kwiwebhu"
+            "displayType": "URL",
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Umfanekiso",
-            "description": "umfanekiso obonakalayo",
-            "newItem": "Yongeza umfanekiso"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Igalari yemifanekiso",
-            "description": "igalari yemifanekiso"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "I-albhamu",
-            "description": "I-albhamu enxulumene nayo imithombo yeendaba eyahlukeneyo"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Ifayile",
-            "description": "ifayile egciniweyo",
-            "newItem": "Yongeza Ifayile"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Isiqeshana somsindo",
-            "description": "iklip yevidiyo",
-            "newItem": "Yongeza iAudio"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Umboniso weVidiyo",
-            "description": "iklip yevidiyo",
-            "newItem": "Yongeza iVidiyo"
-        },
-        "Streams\/live": {
-            "displayType": "Umthombo philayo",
-            "description": "irediyo ephilayo okanye ividiyo"
-        },
-        "Streams\/category": {
-            "displayType": "Udidi",
-            "description": "udidi olunokuhambelana nayo eminye imilambo"
-        },
-        "Streams\/participating": {
-            "displayType": "Index yokuThatha inxaxheba",
-            "description": "Imilambo inxulumene \/ ayidibananga noku xa umsebenzisi edibana \/ eshiya"
-        },
-        "Streams\/interest": {
-            "displayType": "Inzala",
-            "description": "imele umdla womsebenzisi kwisihloko esithile"
-        },
-        "Streams\/incoming": {
-            "displayType": "Ezayo",
-            "description": "indawo ekuthunyelwa kuyo imiyalezo ethunyelwe ngabanye abasebenzisi"
-        },
-        "Streams\/chat": {
-            "displayType": "Incoko",
-            "description": "Incoko phakathi kwabasebenzisi, kunye nembali"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Umnxeba wexesha lokwenyani",
-            "description": "ividiyo yexesha \/ ividiyo yomsindo"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Uxwebhu lwePDF",
-            "description": "Uxwebhu lwePDF",
-            "newItem": "Yongeza iPDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Umbuzo",
-            "description": "umsinga wombuzo"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Phendula",
-            "description": "umjelo wempendulo"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Iifowuni",
-            "description": "Udidi lweMisinga \/ webrtc",
-            "MaxRelationsExceeded": "Ubuninzi beminxeba bugqithile"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Isihloko",
-        "Subscribed": "Bhalisile",
-        "Participants": "Abathathi-nxaxheba",
-        "AreYouSureRemoveIdentifier": "Uqinisekile ukuba uyayisusa loo nto?",
-        "AreYouSureUnsubscribeIdentifier": "Uqinisekile ukuba awusikhuphi esi sikhombi? Izakucima izazisi kwesi isihlonzi.",
-        "AreYouSureUnsubscribeDevice": "Uqinisekile ukuba ungasikhupheli esi sixhobo? Iya kucima izaziso kwesi sixhobo.",
-        "Identifiers": "Izazisi",
-        "Devices": "Izixhobo",
-        "Streams": "Imilambo",
-        "AreYouSureRemoveParticipant": "Uqinisekile ukuba ufuna ukususa lo mthathi-nxaxheba?",
-        "RemoveParticipant": "Susa inxaxheba"
-    },
     "menu": {
-        "placeholder": "isihloko sephepha",
-        "ModTab": "Guqula into",
-        "Save": "Gcina",
-        "Delete": "Cima",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Lo mxholo ufihliwe kuwe."
-    },
     "audio": {
-        "record": "Rekhoda",
-        "reset": "Hlela kwakhona",
-        "edit": "Hlela",
-        "title": "isihloko",
-        "description": "inkcazo",
-        "upload": "Layisha",
-        "link": "Qhagamshela",
-        "setUrl": "Cwangcisa i-URL",
-        "save": "Gcina",
-        "setClip": "Sika iklip",
-        "invalidURL": "I-URL engekhoyo",
-        "invalidFile": "NONE",
-        "errorNoSource": "Akukho mthombo wesandi",
-        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
-        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Hlela kwakhona",
-        "edit": "Hlela",
-        "title": "isihloko",
-        "description": "inkcazo",
-        "upload": "Layisha",
-        "link": "Qhagamshela",
-        "setUrl": "Cwangcisa i-URL",
-        "save": "Gcina",
-        "setClip": "Sika iklip",
-        "invalidURL": "I-URL engekhoyo",
-        "invalidFile": "NONE",
-        "errorNoSource": "Akukho mthombo wevidiyo",
-        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
-        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Hlela kwakhona",
-        "edit": "Hlela",
-        "title": "isihloko",
-        "description": "inkcazo",
-        "upload": "Layisha",
-        "link": "Qhagamshela",
-        "setUrl": "Cwangcisa i-URL",
-        "save": "Gcina",
-        "setClip": "Sika iklip",
-        "invalidURL": "I-URL engekhoyo",
-        "invalidFile": "NONE",
-        "errorNoSource": "Akukho pdf mthombo",
-        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
-        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Hlela kwakhona",
-        "edit": "Hlela",
-        "title": "isihloko",
-        "description": "inkcazo",
-        "upload": "Layisha",
-        "link": "Qhagamshela",
-        "setUrl": "Cwangcisa i-URL",
-        "save": "Gcina",
-        "setClip": "Sika iklip",
-        "invalidURL": "I-URL engekhoyo",
-        "invalidFile": "NONE",
-        "errorNoSource": "Akukho mthombo womfanekiso",
-        "uploadLimit": "Ubungakanani befayile enkulu: {{size}}",
-        "errorFileSize": "Uxolo, kodwa ifayile inkulu kakhulu.<br> Ubungakanani befayile enkulu ngu- {{size}}",
-        "uploadedImage": "Umfanekiso olayishiwe",
-        "imageTitle": "Isihloko somfanekiso"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Imibuzo",
-        "Answers": "Iimpendulo",
-        "AnswerQuestion": "Phendula umbuzo",
-        "SetYourAnswer": "Nceda uphendule umbuzo",
-        "NewQuestion": "Umbuzo omtsha",
-        "NewAnswer": "Impendulo eNtsha",
-        "AnswerDetails": "Iinkcukacha zeempendulo",
-        "answerOption": "Ukhetho",
-        "answerOptionExclusive": "Ikhethekileyo",
-        "answerTextarea": "Umbhalo",
-        "FreeAnswer": "impendulo yasimahla ...",
-        "SaveQuestion": "Gcina umbuzo",
-        "SaveAnswer": "Gcina Impendulo",
-        "AddAnotherAnswer": "Yongeza enye impendulo",
-        "ErrorAnswers": "Nceda wongeze impendulo ibenye",
-        "AlreadyAnswered": "Sele iphendulwe",
-        "TitlePlaceholder": "Chwetheza umbuzo wakho",
-        "ContentPlaceholder": "Beka naluphi na ulwazi olongezelelweyo apha ukunceda abantu baphendule",
-        "ErrorTitle": "Kufuneka umbuzo",
-        "Placeholder": "Isibambi-ndawo"
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Amava amatsha",
-        "DefineTitle": "Nceda uchaze isihloko",
-        "Create": "Yenza"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Iifowuni",
-        "MaxCalls": "Iifowuni zikaMax",
-        "Update": "Uhlaziyo",
-        "NoCallsYet": "Azikho iifowuni okwangoku",
-        "CallReasonTitle": "Ithetha ngantoni le fowuni?",
-        "WaitingRoom": "Indlu yokulinda"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

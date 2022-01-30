@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Kasalahan {{status}} nalika pamundut",
-        "canceled": "Pamundut dibatalkeun",
-        "500": "Kasalahan Sérver Internal",
-        "404": "Henteu kapendak: {{url}}",
-        "501": "Pamundutna kaganggu"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sidang kadaluwarsa. Refresh kaca sareng cobian deui.",
-        "otherDomain": "Pamundut parantos domain diblokir ka domain luar nagri dina {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "toél",
-        "click": "klik",
-        "yes": "enya",
-        "no": "teu",
-        "Tap": "Tepok",
-        "Click": "Klik",
-        "Yes": "Enya",
-        "No": "Entong"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Januari",
-        "2": "Pebruari",
-        "3": "Maret",
+        "1": "January",
+        "2": "February",
+        "3": "March",
         "4": "April",
-        "5": "Mei",
-        "6": "Juni",
-        "7": "Juli",
-        "8": "Agustus",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
         "9": "September",
-        "10": "Oktober",
-        "11": "Nopémber",
-        "12": "Désémber"
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Mangga ngidinan aksés ka mikropon anjeun",
-        "record": "Rékam",
-        "recording": "Rekaman",
-        "remains": "sesa",
-        "maximum": "maksimal",
-        "playing": "Puter",
-        "recorded": "Rékaman",
-        "clip": "klip",
-        "orupload": "Atawa Unggah",
-        "usethis": "Paké ieu",
-        "discard": "Piceun",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
         "encoding": "Encoding"
     },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
     "alert": {
-        "title": "Ngageter"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Pastikeun",
-        "ok": "Enya",
-        "cancel": "Entong"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Gancang",
-        "ok": "Buka"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Kasalahan maca file",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Naon anu anjeun pikahoyong?",
-            "photo": "Candak poto anyar",
-            "library": "Pilih ti perpustakaan"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Mangga pilih gambar anu leuwih ageung.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Saluyukeun ukuran sareng posisi",
-            "touchscreen": "Paké ramo anjeun pikeun ngazum séred",
-            "notTouchscreen": "Pigunakeun mouse sareng kabayang pikeun ngazum séred"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "tadi wengi",
-        "lastEvening": "wengi panungtungan",
-        "yesterday": "kamari",
-        "thisMorning": "enjing ieu",
-        "today": "ayeuna",
-        "tonight": "wengi ayeuna",
-        "tomorrowMorning": "tom isuk",
-        "tomorrow": "isukan",
-        "hoursAgo": "{{h}} sababaraha jam ka pengker",
-        "hourAgo": "{{h}} jam ka tukang",
-        "minuteAgo": "{{m}} menit ka tukang",
-        "minutesAgo": "{{m}} sababaraha menit ka pengker",
-        "secondAgo": "{{s}} kadua tukang",
-        "secondsAgo": "{{s}} detik ka tukang",
-        "fewSecondsAgo": "detik ka tukang",
-        "rightNow": "ayeuna",
-        "inSecond": "dina {{s}} kadua",
-        "inSeconds": "dina {{s}} detik",
-        "inMinute": "dina {{m}} menit",
-        "inMinutes": "dina {{m}} menit",
-        "inHour": "dina {{h}} jam",
-        "inHours": "dina {{h}} jam",
-        "inUnderMinute": "di handapeun 1 menit"
-    },
-    "video": {
-        "clip": "jepitan",
-        "errorNoSource": "Teu aya sumber pidéo",
-        "SkipAfter": "Skip saatos",
-        "Skip": "Ngalangkungan"
-    },
-    "pdf": {
-        "clip": "jepitan",
-        "errorNoSource": "Teu aya sumber pdf"
-    },
-    "clip": {
-        "SetClipStart": "Atur Klip Mimitian",
-        "ClipStart": "Klip Mimitian",
-        "SetClipEnd": "Atur Klip Tungtung",
-        "ClipEnd": "Klip Tungtung",
-        "StartMoreEnd": "Posisi mimiti henteu tiasa langkung ti posisi tungtung",
-        "EndLessStart": "Posisi tungtung teu tiasa kirang ti posisi mimiti",
-        "WhichInvalid": "Argumen &#39;anu&#39; henteu leres"
-    },
-    "tabs": {
-        "more": "Tambih deui",
-        "Menu": "Ménu"
-    },
-    "durations": {
-        "second": "kadua",
-        "seconds": "detik",
-        "minute": "menit",
-        "minutes": "menit",
-        "hour": "jam",
-        "day": "dinten",
-        "days": "poé",
-        "week": "saminggu",
-        "weeks": "minggu",
-        "month": "sasih",
-        "months": "bulan",
-        "year": "taun",
-        "years": "taun",
-        "decade": "dékade",
-        "decades": "puluhan taun",
-        "century": "abad",
-        "centuries": "mangabad-abad"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "têketin",
-        "LogOut": "derkeve"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} wekî sereke {{2}}",
-        "ChoosePassPhrase": "Vebijêrkek <strong>derbasî<\/strong> hilbijêre ku bi navnîşan re têkevin. <br> Peyvek hêsan a çend peyvan ku hûn bi hêsanî bibînin.",
-        "ChoosePassPhraseSeeSuggestions": "A <strong>pêşkêş pass<\/strong> baş ji bo parastina hesabê xwe hilbijêre. Pêşniyarên hin fikrên xwe bibînin.",
-        "LogOutAndTryAgain": "Bikin û Biceribîne",
-        "IfYouFeel": "Heke hûn difikirin tiştek xerab bû, hûn dikarin",
-        "SetIdentifierButtonTitle": "dest pê bikin"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Destpêk"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Destpêk",
-        "Authorize": "Ercdan",
-        "TermsLabel": "Min xwendin û mikûlim <br> ji {{link}}",
-        "TermsTitle": "Şertên",
-        "mustAgree": "Pêşîn divê hûn şertan bipejirînin."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ez qebûl dikim {{link}}",
-        "TermsTitle": "Şertên"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Destûr",
-        "prompt": "Ma hûn dixwazin agahdariyên çalak bikin? Hûn tiştên ku hûn hewce dikin di navnîşên rast-rojan de agahdar bikin.",
-        "yes": "Erê",
-        "no": "Na",
-        "WelcomePleaseVerifyEmail": "Bi xêr hatî! Ji kerema xwe ji navnîşana e-nameya xwe bişîne",
-        "WelcomeVerifyEmail": "Bi xêr hatî! Navnîşana nameya xwe ya Verîteyê bikin.",
-        "ForgetPass": "Hey, ji we re şîfreyê xwe bibîr kir?",
-        "PassphraseSaved": "Fraza weyê hilanîn.",
-        "IdentifierActivated": "{{999} Your we hate aktîfkirin.",
-        "CompletedActivation": "We aktîfkirina bikarhêner qedand.",
-        "CompletedActivationLogIn": "We aktîfkirina bikarhêner qedand. Naha têkevinê."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Têkiliyê hilbijêre",
-            "CreateAccount": "+ Têkiliya Nû",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nehat dîtin",
-            "SearchByName": "Bi navî bigerin",
-            "EmptyContacts": "Têkilî nehat dîtin ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Têkilî hilbijêre {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Ji kerema xwe vegotinê hilbijêr",
-        "inviteUser": "Invite User",
-        "selectRole": "Role hilbijêrin",
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
         "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Zimanek çewt e",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Bi xêr hatî",
-        "directions": "Hesabek çêbikin, an jî têkeve.",
-        "directionsNoRegister": "Ger hesabek we heye têkevinê.",
-        "goButton": "Çûyin",
-        "passphrase": "Gotina xweya derbazkirinê binivîse:",
-        "loginButton": "Destpêkirin",
-        "registerButton": "Destpêkirin",
-        "resendButton": "Peyama ationalakbûnê bişînin",
-        "forgot": "Jibîrkir?",
-        "resendConfirm": "Ma hûn dixwazin ji bo vesazkirina şîfreya xwe peyamek bişînin?",
-        "resendSuccess": "Ji bo ku mesajek were girtin ji rîfreya xwe rakirin",
-        "resendClose": "Nêzîkî",
-        "noPassphrase": "Berî ku hûn bikaribin têkevinê, divê hûn pêvekek pass li dar bixin û di peyama xwe ya aktîvkirinê de bidin hev.",
-        "notVerified": "Ji bo ku têkevinê divê hûn ji xwe re peyamek çalakiyê bişînin.",
-        "emailExists": "Ma we hewl da ku hûn berî vê e-nameyê qeyd bikin? Heke wusa be, hûn inboxê xwe kontrol bikin ku hûn hesabê xwe çalak bikin. <a href='#resend' class='Q_button Users_activation_resend'>Ji bo ku ji nû ve bişînin mesajê bikirtînin<\/a>",
-        "mobileExists": "Ma we hewl da ku hûn berî vê hejmarê mobîl tomar bikin? Heke wusa be, SMS-ya xwe kontrol bikin ku hûn hesabê xwe çalak bikin. <a href='#resend' class='Q_button Users_activation_resend'>Ji bo ku ji nû ve bişînin mesajê bikirtînin<\/a>",
-        "usingOther": "an jî hûn dikarin",
-        "prompt": "Navek bikarhêner hilbijêrin:",
-        "newUser": "an hesabek nû biafirînin",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mobile xwe an e-nameyê",
-            "mobile": "têlefona xwe têkevim #",
-            "email": "navnîşana e-nameya xwe binivîse",
-            "username": "navê bikarhêner"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Mercên karûbar qebûl dikin?",
-        "facebookNoEmail": "Hesabê weya facebookê navnîşana e-nameyek pejirandî winda ye. Bi hêsanî bi rengek xweser têkevin.",
-        "picTooltip": "Hûn dikarin vê wêneyê paşê veguherînin",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Têkeve {{host}} wextê {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Beralîkirina li Wallet",
-                "content": "Gava ku hûn vê diyalogê bigire, hûn ê werin berîka xwe. Piştî ku hûn têkevinê, vegerin ser vê rûpelê."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Awirek ku têkeve hundurê",
-        "sendMessage": "Peyama ationalakbûnê bişînin",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "# an e-nameya xweya mobîl têkevin",
-            "mobile": "hejmara telefona xwe têkevin",
-            "email": "navnîşana e-nameya xwe binivîse",
-            "username": "navê bikarhêner"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "99 {999}} Hesabê",
-        "areUsing": "Hûn wekî {999}} wekî kar dikin",
-        "noLongerUsing": "Aredî hûn bi {999} connected re wekî ve girêdayî ne",
-        "doAuth": "Bi vê hesabê têkevin",
-        "doSwitch": "Binêre hesabê vê"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Xwedî",
-        "Admin": "Rêvebir",
-        "Member": "Endam",
-        "Guest": "Mêvan",
-        "Host": "Mazûban"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Rojane",
-        "Weekly": "Heftane",
-        "Monthly": "Mehane",
-        "Application": "Bikaranînî",
-        "Pages": "Rûpelan",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Rojên Hefteyê"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

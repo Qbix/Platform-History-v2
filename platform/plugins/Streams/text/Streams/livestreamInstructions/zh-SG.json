@@ -1,4 +1,0 @@
-{
-    "youtube": "要查找 YouTube 的 RTMP 信息，请登录您的 YouTube 帐户，然后导航至创建 &gt; 上线。然后，您将看到以下屏幕：<br> {{youtubeLive}}<br> .复制“Stream URL”并将其插入到“Paste RTMP URL here”字段中。接下来，复制“流密钥”并将其粘贴到“流密钥”字段。点击“Go Live”开始直播。<div style=\"display:flex;justify-content:center;\"> {{rtmpLive}}</div>",
-    "facebook": "您可以通过 RTMP 从 Facebook 的“创建实时流”页面（并单击“创建实时流”）或通过单击您希望流式传输到的页面或个人资料的“创建”区域中的“直播”按钮，将其流式传输到您的个人资料。您将被带到 Facebook 的 Live Producer。<br />向下滚动预览播放器下方。确保在“开始使用”下的下拉菜单设置为使用流密钥。您将找到此目的地的 RTMP URL 和流密钥。 （注意：您的视频预览仍然在右下角可见。）{{facebookLive}} 复制“服务器 URL”并将其插入到“在此处粘贴 RTMP URL”字段中。接下来，复制“流密钥”并将其粘贴到“流密钥”字段。点击“Go Live”开始直播。<div style=\"display:flex;justify-content:center;\"> {{rtmpLive}}</div>"
-}

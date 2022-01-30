@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "ஊக்குவிக்க இணைப்பு",
-                "startDate": "தொடக்க தேதி",
-                "startTime": "ஆரம்பிக்கும் நேரம்",
-                "endDate": "கடைசி தேதி",
-                "endTime": "முடிவு நேரம்",
-                "budget": "பட்ஜெட்"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "ஆர்வத்தை வடிகட்டவும்",
-                "FilterInterests": "ஆர்வம் தட்டச்சு செய்யத் தொடங்குங்கள் ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "ஆர்வம்",
-            "Location": "இருப்பிடம்"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "போய்",
-            "PasteLinkHere": "இங்கே ஒரு இணைப்பை ஒட்டுக",
-            "BrowseTheWeb": "உலாவ",
-            "WriteToStartConversation": "உரையாடலைத் தொடங்க உங்கள் எண்ணங்களை எழுதுங்கள்",
-            "StartConversation": "உரையாடலைத் தொடங்குங்கள்",
-            "GotoConversation": "உரையாடலுக்குச் செல்லவும்",
-            "reset": "மீட்டமை",
-            "edit": "தொகு",
-            "link": "இணைப்பு",
-            "setUrl": "URL ஐ அமைக்கவும்",
-            "save": "சேமி",
-            "setClip": "கட் அவுட் கிளிப்",
-            "invalidURL": "தவறான வலைதள முகவரி"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "தேக்ககத்திற்கு கோப்பு மிகப் பெரியது. அதிகபட்ச கோப்பு அளவு {{size}}",
-        "InvalidPDF": "கோப்பு சரியான PDF அல்ல",
-        "StartTypingTitleOrKeywords": "தலைப்பு அல்லது முக்கிய வார்த்தைகளைத் தட்டச்சு செய்யத் தொடங்குங்கள் ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "பல்வேறு பயனர்கள் பார்க்க மற்றும் திருத்தக்கூடிய ஒரு HTML ஆவணம்",
-            "displayType": "கட்டுரை"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "விளக்கக்காட்சியில் ஒரு ஸ்லைடு, HTML, ஆடியோ போன்றவற்றை சேர்க்கலாம்.",
-            "displayType": "ஸ்லைடு"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "பல்வேறு ஸ்லைடுகளைக் கொண்ட விளக்கக்காட்சி",
-            "displayType": "வழங்கல்"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "ஒரு வலைத்தளத்தில் ஒரு விளம்பர அலகு",
-            "displayType": "விளம்பர அலகு"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "விளம்பர அலகுகளை ஒரு பெயரில் தொகுக்கும் ஒரு வழி",
-            "displayType": "விளம்பரம்"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "விளம்பரத்திற்கான உள்ளடக்கம்",
-            "displayType": "ஆக்கப்பூர்வமாக விளம்பரம் செய்யுங்கள்"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "ஒரு விளம்பர பிரச்சாரம்",
-            "displayType": "விளம்பர பிரச்சாரம்"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "மெட்டாடேட்டா ஸ்கிராப் செய்யப்பட்ட வலைத்தளத்தை குறிக்கிறது",
-            "displayType": "வலைப்பக்கம்"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -1,167 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Taɓa don biyan kuɗi"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: an sarrafa cajin akan {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Na gode da biyan kuɗin ku zuwa {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} ya yi rajista ga {{plan.title}}",
-        "YouSubscribedTo": "An yi rijista da ku {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "Kuna samun biyan kuɗin {{displayAmount}} daga {{call 'publisher.displayName'}} ta &quot;{{description}}&quot;)",
-        "HasBeenCharged": "Hey, wannan don sanar da ku {{1}} an caje {{2}} na {1001}} ta {{4}}"
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "Na gode don biyan kuɗin ku na &quot;{{description}}&quot;)",
-        "HavePaid": "Hey {{1}}, wannan tabbaci ne mai sauri cewa kun sami nasarar biya {{2}} zuwa {1001}} na {{4}}"
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Bayani game da oda",
-        "PaymentMethod": "Hanyar biyan kuɗi",
-        "ContactInfo": "Bayanin tuntuɓa",
-        "Pay": "Biya"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "{{invitedUserName}} ya karɓi gayyata",
-        "YouHaveCreditsToStart": "Kuna da ƙima {{amount}} don farawa",
-        "PaymentFor": "Biyan &quot;{{1}}&quot;)",
-        "PaymentTo": "Biya ga {{1}}",
-        "PaymentToUser": "Biya ga {{toUserName}}",
-        "CreatePaidStream": "don ƙirƙirar {{toStreamName}}",
-        "JoinedPaidStream": "don ajiyar wuri a cikin &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;&#39;)",
-        "CreatedCommunity": "don ƙirƙirar al&#39;umma &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "azaman kuɗin ajiyar wuri a cikin &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;&#39;)",
-        "BoughtCredits": "Sayi ƙima {{amount}}",
-        "BonusCredits": "Kyauta {{amount}} kuɗi",
-        "BuyAmountCredits": "Sayi kuɗi {{amount}}",
-        "WatchClip": "Sami {{amount}} kuɗi don kallon {{fromStreamTitle}}",
-        "MissingCredits": "Abubuwan da aka rasa",
-        "YouMissingCredits": "Kuna buƙatar ƙarin kuɗi {{amount}} don ci gaba.",
-        "BuyCredits": "Sayi kuɗi",
-        "BuyBonus": "Sayen kuɗi {{amount}} a lokaci ɗaya, zai kai ga {{bonus}} kari na kari.",
-        "Buy": "Sayi",
-        "PurchaseCredits": "Sayen kuɗi",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
-        "ErrorInvalidAmount": "Adadi baya aiki",
-        "ErrorInvalidCurrency": "Abin baƙin ciki ba mu goyi bayan kudin {{currency}} ba tukuna",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "Darajoji {{amount}}",
-            "BonusCredits": "Darajoji {{amount}}"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Kwanan wata",
-        "Amount": "Adadi",
-        "Description": "Bayani",
-        "Client": "Abokin ciniki",
-        "To": "zuwa",
-        "From": "daga",
-        "SeeHistory": "Duba tarihin biyan kuɗi don {{1}}",
-        "HistoryEmpty": "Ba ku da bayanai tukuna",
-        "PaymentFor": "An aika {{amount}} kuɗi",
-        "PaymentTo": "An aika {{amount}} kuɗi",
-        "PaymentToUser": "An aika {{amount}} kuɗi",
-        "CreatePaidStream": "An kashe kuɗi {{amount}}",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "Sami kuɗi {{amount}}",
-            "-": "An kashe kuɗi {{amount}}"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "Sami kuɗi {{amount}}",
-            "-": "An kashe kuɗi {{amount}}"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "An karɓi kuɗi {{amount}}",
-            "-": "An aika {{amount}} kuɗi"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "An kashe kuɗi {{amount}}",
-        "BoughtCredits": "Sayi ƙima {{amount}}",
-        "BonusCredits": "An sami kari {{amount}} kuɗi",
-        "InviteAcceptedBy": "Sami kuɗi {{amount}}",
-        "YouHaveCreditsToStart": "Sami kuɗi {{amount}}"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Saita Bayanin Biyan Kuɗi",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Fara Biyan Kuɗi",
-            "message": "Kuna son yin rijista zuwa {{title}}?",
-            "ok": "KO",
-            "cancel": "Soke"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Katin kuɗi ko katin kuɗi",
-        "SubscribePayment": "Biyan Kuɗi",
-        "ImmediatePayment": "Biyan Kuzari"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "Saita Bayanin Biyan Kuɗi",
-        "BuyAmountCredits": "Sayi kuɗi {{amount}}",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "Yi Biya",
-            "message": "Shin kun yarda ku biya {{symbol}} {{amount}}?",
-            "ok": "KO",
-            "cancel": "Soke"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Credits",
-            "description": "yana kula da kuɗi da biyan kuɗi"
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "Shirin Tallafi",
-            "description": "tsarin biyan kuɗi"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "Biyan kuɗi",
-            "description": "biyan kuɗi"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Samfurin",
-            "description": "ana siyar da samfurin"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "Sabis",
-            "description": "ana ba da sabis"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Sami kuɗi {{amount}}"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "Sayi ƙima {{amount}}"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Kyauta {{amount}} kuɗi"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "An kashe kuɗi {{amount}}"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "An aika {{amount}} kuɗi zuwa {{toUserName}}}"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "An karɓi kuɗi {{amount}} daga {{fromUserName}}"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Sabon Sabis",
-            "TitlePlaceholder": "Taken sabis",
-            "PricePlaceholder": "Saita farashin",
-            "LinkPlaceholder": "saita ƙarin hanyar haɗin bayanai",
-            "DescriptionPlaceholder": "Bayanin sabis",
-            "SaveService": "Ajiye Sabis",
-            "SelectRequiredParticipants": "Mahalarta da ake buƙata"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "Sarrafa Samfuran Sabis",
-        "ManageServices": "Sarrafa Sabis",
-        "Free": "Kyauta",
-        "OptionalContribution": "Gudunmawar zaɓi",
-        "RequiredPayment": "Biyan da ake buƙata",
-        "AreYouSureDelete": "Ka tabbata kana so ka goge wannan sabis ɗin?",
-        "AmountServicesRelated": "Akwai {{amount}} wadatattun abubuwan da suka shafi wannan sabis ɗin. Su ma za a cire su."
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

@@ -1,168 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "탭하여 지불"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}} : {{call 'user.displayName'}}에 청구 된 금액",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}에 지불 해 주셔서 감사합니다.",
-        "SubscribedTo": "{{call 'user.displayName'}}이 (가) {{plan.title}}을 구독했습니다.",
-        "YouSubscribedTo": "{{plan.title}}에 가입했습니다."
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+    },
+    "charged": {
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "주문 정보",
-        "PaymentMethod": "결제 방법",
-        "ContactInfo": "연락 정보",
-        "Pay": "지불"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "{{1}} (으)로 초대 됨",
-        "YouHaveCreditsToStart": "시작할 크레딧이 {{999}입니다.",
-        "PaymentFor": "&quot;{{1}}&quot;에 대한 지불",
-        "PaymentTo": "{{1}}에 지불",
-        "PaymentToUser": "{{userName}}에 지불",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;가입",
-        "CreatedCommunity": "&quot;{{communityId}}&quot;커뮤니티 만들기",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;떠나기",
-        "BoughtCredits": "{{amount}} 크레딧 구매",
-        "BuyAmountCredits": "{{amount}} 크레딧 구매",
-        "MissingCredits": "크레딧 누락",
-        "YouMissingCredits": "{{amount}} 크레딧이 누락되었습니다",
-        "BuyCredits": "크레딧 구매",
-        "Buy": "구입",
-        "Credits": "크레딧",
-        "ErrorInvalidAmount": "유효하지 않은 금액",
-        "ErrorInvalidCurrency": "불행히도 아직 {{currency}} 통화를 지원하지 않습니다",
-        "WatchClip": "{{fromStreamTitle}}을 시청하여 {{amount}} 크레딧을 받았습니다.",
-        "PurchaseCredits": "크레딧 구매",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} 크레딧",
-            "BonusCredits": "{{amount}} 크레딧"
-        },
-        "CreatePaidStream": "생성을 위해 {{toStreamName}}",
-        "BonusCredits": "보너스 {{amount}} 크레딧",
-        "BuyBonus": "한 번에 {{amount}} 크레딧을 구매하면 {{bonus}} 크레딧 보너스가 제공됩니다."
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
+        }
     },
     "history": {
-        "Date": "날짜",
-        "Amount": "양",
-        "Description": "기술",
-        "Client": "고객",
-        "To": "에",
-        "From": "...에서",
-        "HistoryEmpty": "아직 데이터가 없습니다.",
-        "SeeHistory": "{{1}}의 지불 내역보기",
-        "PaymentFor": "사용한 {{amount}} 크레딧",
-        "PaymentTo": "{{amount}} 크레딧을 보냈습니다.",
-        "PaymentToUser": "{{amount}} 크레딧을 보냈습니다.",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
+        "WatchClip": {
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
+        },
         "JoinedPaidStream": {
-            "+": "{{amount}} 크레딧 획득",
-            "-": "사용한 {{amount}} 크레딧"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} 크레딧을 받았습니다",
-            "-": "{{amount}} 크레딧을 보냈습니다."
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "사용한 {{amount}} 크레딧",
-        "BoughtCredits": "{{amount}} 크레딧 구매",
-        "InviteAcceptedBy": "{{amount}} 크레딧 획득",
-        "YouHaveCreditsToStart": "{{amount}} 크레딧 획득",
-        "CreatePaidStream": "{{amount}} 크레딧 사용",
-        "WatchClip": {
-            "+": "{{amount}} 크레딧 획득",
-            "-": "{{amount}} 크레딧 사용"
-        },
-        "BonusCredits": "보너스 {{amount}} 크레딧 획득"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "지불 정보 설정",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "구독 시작",
-            "message": "{{title}}에 가입 하시겠습니까?",
-            "ok": "승인",
-            "cancel": "취소"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "신용 카드 또는 직불 카드",
-        "SubscribePayment": "결제 신청",
-        "ImmediatePayment": "즉시 지불"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "지불 정보 설정",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "지불하다",
-            "message": "{{symbol}} {{amount}}의 지불에 동의하십니까?",
-            "ok": "승인",
-            "cancel": "취소"
-        },
-        "BuyAmountCredits": "{{amount}} 크레딧 구매"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "크레딧",
-            "description": "크레딧 및 지불을 추적합니다"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "가입 계획",
-            "description": "가입 계획"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "신청",
-            "description": "신청"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "생성물",
-            "description": "판매중인 제품"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "서비스",
-            "description": "제공되는 서비스"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} 크레딧 획득"
-        },
-        "Assets\/credits\/spent": {
-            "content": "사용한 {{amount}} 크레딧"
-        },
-        "Assets\/credits\/sent": {
-            "content": "{{amount}} 크레딧을 보냈습니다."
-        },
-        "Assets\/credits\/received": {
-            "content": "{{amount}} 크레딧을 받았습니다"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} 크레딧 구매"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "보너스 {{amount}} 크레딧"
+            "content": "Bonus {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Spent {{amount}} credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sent {{amount}} credits to {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
-    },
-    "charge": {
-        "Subject": "&quot;{{description}}&quot;에 의해 {{call 'publisher.displayName'}}에서 {{displayAmount}}의 지불금을받습니다.",
-        "HasBeenCharged": "안녕하세요, {{4}}이 (가) {{3}}에게 {{1}}이 (가) {{2}}을 (를) 청구했음을 알려드립니다."
-    },
-    "charged": {
-        "Subject": "&quot;{{description}}&quot;에 대한 지불에 감사드립니다.",
-        "HavePaid": "{{1}} 님, {{4}}의 {{3}}에게 {{2}}을 (를) 성공적으로 지불했다는 확인 메시지입니다."
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "새로운 서비스",
-            "TitlePlaceholder": "서비스 제목",
-            "PricePlaceholder": "가격 설정",
-            "LinkPlaceholder": "추가 정보 링크 설정",
-            "DescriptionPlaceholder": "서비스 설명",
-            "SaveService": "서비스 저장",
-            "SelectRequiredParticipants": "필수 참가자"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "서비스 템플릿 관리",
-        "ManageServices": "서비스 관리",
-        "FreeEvent": "무료 이벤트",
-        "OptionalContribution": "선택적 기여",
-        "RequiredPayment": "필요한 지불",
-        "AreYouSureDelete": "이 서비스를 삭제 하시겠습니까?",
-        "AmountServicesRelated": "이 서비스와 관련된 {{amount}}의 이용 가능성이 있습니다. 또한 제거됩니다.",
-        "Free": "비어 있는"
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

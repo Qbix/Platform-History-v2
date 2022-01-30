@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Ссылка для продвижения",
-                "startDate": "Дата начала",
-                "startTime": "Начальное время",
-                "endDate": "Дата окончания",
-                "endTime": "Время окончания",
-                "budget": "бюджет"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Фильтровать по интересам",
-                "FilterInterests": "Начните вводить интерес ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Интерес",
-            "Location": "Место нахождения"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Идти",
-            "PasteLinkHere": "Вставьте ссылку сюда",
-            "BrowseTheWeb": "Просматривать",
-            "WriteToStartConversation": "Напишите свои мысли, чтобы начать разговор",
-            "StartConversation": "Начать разговор",
-            "GotoConversation": "Перейти к разговору",
-            "reset": "Сброс настроек",
-            "edit": "редактировать",
-            "link": "Ссылка на сайт",
-            "setUrl": "Установить URL",
-            "save": "Сохранить",
-            "setClip": "Вырезать клип",
-            "invalidURL": "неправильный адрес"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Файл слишком велик для кеширования. Максимальный размер файла {{size}}",
-        "InvalidPDF": "Файл не является действующим PDF-файлом",
-        "StartTypingTitleOrKeywords": "Начните вводить заголовок или ключевые слова ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML-документ, который различные пользователи могут просматривать и редактировать",
-            "displayType": "Статья"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Слайд в презентации, может включать HTML, аудио и т. Д.",
-            "displayType": "Горка"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Презентация, состоящая из различных слайдов",
-            "displayType": "презентация"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Рекламный блок на сайте",
-            "displayType": "Рекламный блок"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Способ группировки рекламных блоков под именем",
-            "displayType": "Размещение рекламы"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Контент для рекламы",
-            "displayType": "Рекламное объявление"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Рекламная кампания",
-            "displayType": "Рекламная кампания"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Представляет веб-сайт, метаданные которого были удалены",
-            "displayType": "страница интернета"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

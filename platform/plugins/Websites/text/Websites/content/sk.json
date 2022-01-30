@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Odkaz na podporu",
-                "startDate": "Dátum začiatku",
-                "startTime": "Doba spustenia",
-                "endDate": "Dátum ukončenia",
-                "endTime": "Čas ukončenia",
-                "budget": "rozpočet"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtrovať podľa záujmu",
-                "FilterInterests": "Začať písať záujem ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "záujem",
-            "Location": "umiestnenia"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "ísť",
-            "PasteLinkHere": "Vložte tu odkaz",
-            "BrowseTheWeb": "prezerať",
-            "WriteToStartConversation": "Napíšte svoje myšlienky na začatie konverzácie",
-            "StartConversation": "Spustite konverzáciu",
-            "GotoConversation": "Prejdite na konverzáciu",
-            "reset": "Resetovať",
-            "edit": "Upraviť",
-            "link": "Odkaz",
-            "setUrl": "Nastaviť URL",
-            "save": "Uložiť",
-            "setClip": "Vystrihnúť klip",
-            "invalidURL": "neplatná URL adresa"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Súbor je príliš veľký na uloženie do pamäte cache. Maximálna veľkosť súboru {{size}}",
-        "InvalidPDF": "Súbor nie je platný súbor PDF",
-        "StartTypingTitleOrKeywords": "Začnite písať názov alebo kľúčové slová ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokument HTML, ktorý môžu rôzni používatelia prezerať a upravovať",
-            "displayType": "článok"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Snímka v prezentácii môže obsahovať HTML, audio atď.",
-            "displayType": "Šmykľavka"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Prezentácia pozostávajúca z rôznych snímok",
-            "displayType": "predstavenie"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Reklamná jednotka na webovej stránke",
-            "displayType": "Reklamná jednotka"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Spôsob zoskupovania reklamných jednotiek pod menom",
-            "displayType": "Umiestnenie reklamy"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Obsah pre reklamu",
-            "displayType": "Reklamná kreatíva"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Reklamná kampaň",
-            "displayType": "Reklamná kampaň"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Predstavuje webovú stránku, ktorej metadáta boli zoškrabané",
-            "displayType": "webstránka"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Жаңа элемент"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Мен шақырған адамдар",
-        "Streams\/invitedMe": "Маған кім шақырды",
-        "AreYouAgree": "Сіз келісесіз бе?",
-        "Yes": "Иә",
-        "No": "Жоқ"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Сізге не ұнайды?",
-        "CanAdd": "Егер іздегеніңізді әлі де таба алмасаңыз, төменде жаңа қызығушылық қосуға болады:",
-        "TrySynonyms": "Оны көрмейсіз бе? Кейбір синонимдерді қолданып көріңіз.",
-        "AddUnderCategory": "Санат бойынша қосу ...",
-        "Other": "Басқа",
-        "Unlisted": "Тізімде жоқ"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Хабар әкімші шолуы үшін белгіленді. Ашпау үшін қайтадан түртіңіз.",
-        "noOneSaid": "Ешкім ештеңе айтқан жоқ",
-        "closeChatButton": "Сөйлесуді жабыңыз",
-        "closeChatConfirmTitle": "Бұл сөйлесуді жабыңыз?",
-        "closeChatConfirm": "Бұл сөйлесуді шынымен жабу керек пе?",
-        "closeChatConfirmYes": "Иә",
-        "closeChatConfirmNo": "Жоқ",
-        "earlierComments": "бұрынғы ескертулер",
-        "Subscribed": "Үнсіз хабарландырулар",
-        "Unsubscribed": "Хабарламалар алыңыз",
-        "notAllowedToJoinCall": "Бұл әңгімеге қосылуға рұқсатыңыз жоқ.",
-        "startedConversation": "әңгіме бастады",
-        "RealTimeCall": "Нақты уақыттағы қоңырау",
-        "SearchByName": "Аты бойынша іздеу",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} чатқа кіріп жатыр",
-            "Join": "{{displayName}} чатқа қосылды",
-            "Leave": "{{displayName}} чаттан кетті",
-            "RelatedTo": "{{displayName}} {{stream.displayType}} бастады"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "{{& message.fields.type}} дегенге {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} деді:",
-        "Streams\/changed": "{{stream.fields.title}} ішіндегі өзгерістер",
-        "Streams\/invite": "Сізге {{& stream.fields.title}} шақырылды",
-        "Streams\/announcement": "{{& streams.fields.title}} жүйесінде хабарландыру",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ағымдық кіруді өзгертті",
-        "Streams\/chat\/edit": "Чат хабары өңделді",
-        "Streams\/chat\/remove": "Чат хабарлама жойылды",
-        "Streams\/closed": "{{stream.fields.title}} жабылды",
-        "Streams\/task\/progress": "{{stream.fields.title}} арқылы жасалған прогресс",
-        "Streams\/task\/complete": "Тапсырма аяқталды: {{stream.fields.title}}",
-        "Streams\/task\/error": "Қате: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Кіріс хабары",
-        "Streams\/relatedTo\/Streams\/call": "{{toTitle}} жаңа қоңырау басталды",
-        "Streams\/relatedTo\/*": "{{toTitle}} жаңа {{relationDisplayType}}",
-        "Streams\/relatedFrom\/*": "{{toTitle}} тізіміне {{relationDisplayType}} ретінде қосылды",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} сізді түсініктемеде атады",
-        "Streams\/call": "{{displayName}} нақты уақытта қоңырау шала бастады",
-        "ManageEmailSubscriptions": "электрондық пошта жазылымдарын басқарыңыз",
-        "IfUnsubscribe": "Жазылымнан бас тартқыңыз келсе"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} сізді {{inviteUrl}} шақырды",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Контактілеріңізден таңдаңыз",
-            "chooseAgainFromContacts": "Контактілерден қайтадан таңдаңыз",
-            "inviteSelectedContacts": "Таңдалған контактілерді шақырыңыз",
-            "selectFromContacts": "Контактілерден таңдаңыз",
-            "photo": "Суретке түсіру",
-            "photoInstruction": "Егер сіздің QR-кодты сканерлеген тұлға алдыңызда болса, оларды суретке түсіріңіз",
-            "to": "Кімге: {{Stream Title}}",
-            "go": "Барыңыз",
-            "title": "Шақыру",
-            "placeholder": "Ұялы телефон нөмірі немесе электрондық пошта мекенжайы",
-            "orInvite": "Немесе адамдарды пайдалана отырып:",
-            "QR": "QR кодын жасау үшін {{ClickOrTap}}",
-            "QRtitle": "Бұл QR кодын сканерлеңіз",
-            "QRscanned": "Олар оны сканерледі!",
-            "byEmail": "Электрондық пошта",
-            "byText": "Мәтін",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "Егер код сканерленген болса {{ClickOrTap}}",
-            "copyLink": "Шақыру сілтемесін көшіру үшін {{ClickOrTap}}",
-            "userChooserPlaceholder": "Аты бойынша іздеу"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, мұны тексеріңіз",
-            "PleaseVisitLink": "Келесі сілтеме бойынша өтіңіз:",
-            "InvitingYou": "Мен сізді {{title}} -ке шақырамын",
-            "HasInvitedYou": "{{displayName}} сізді {{title}} шақырды",
-            "HasMentionedYou": "{{displayName}} сізді «{{title}}» ішінде атады",
-            "YOUAREINVITED": "Сіздер шақырылдыңыз!",
-            "AcceptInvite": "Шақыруды қабылдау"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Сізге {{title}} шақырылды. {{url}} түртіңіз."
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Сізді шақырды. {{ClickOrTap}} мұнда қабылдау және қосылу үшін."
-        },
-        "command": "Шақыру",
-        "youCanNowPaste": "Енді сіз бұл сілтемені адамдарды шақыру үшін бір жерге қоюға болады"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Шақырулар біздің достарымыз әлі танымайтын біздің нөмірімізден жіберіледі. Сізден алынған шақыруды білу үшін сілтеме бойынша басуды сұрайтын жылдам мәтінмен танысыңыз.",
-            "confirm": "Шақырулар біздің достарымыз әлі танымайтын біздің нөмірімізден жіберіледі. Сізге жылдам шақыру мәтінін қадағалап, сізден келген шақыруды біліп, сілтемені басуын сұраңыз.",
-            "check": "Hey, мен сізді {{app}} қосымшаға шақырдым. Өзіңіздің смсыңызды тексеріп, сілтемені басыңыз!",
-            "CheckYourMobile": "SMS тексеріп, нұсқауларды орындаңыз!"
-        },
-        "email": {
-            "alert": "Шақырулар біздің достарымыз әлі танымайтын біздің доменімізден жіберіледі. Сізден алынған шақыруды білу үшін сілтеме бойынша басуды сұрайтын жылдам мәтінмен танысыңыз.",
-            "confirm": "Шақырулар біздің достарымыз әлі танымайтын біздің доменімізден жіберіледі. Сізге жылдам шақыру мәтінін қадағалап, сізден келген шақыруды біліп, сілтемені басуын сұраңыз.",
-            "subject": "Сіз шақыру алды ма?",
-            "body": "Hey, мен сізді {{app}} қосымшаға шақырдым. Электрондық поштаңызды тексеріп, сілтемеге басыңыз!",
-            "CheckYourEmail": "Электрондық поштаны тексеріп, нұсқауларды орындаңыз!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Микрофонды қосу",
-            "cameraTitle": "Камераны қосу",
-            "cameraAndMicrophoneTitle": "Камераны және микрофонды қосыңыз",
-            "dialogTitle": "Қосылуда",
-            "microphoneBtn": "Микрофонды қосыңыз",
-            "cameraBtn": "Камераны қосыңыз",
-            "cameraAndMicrophoneBtn": "Камера мен микрофонды қосыңыз"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Нұсқаулық",
-            "permissionDenied": "{{kind}} үшін рұқсат берілмеді. Оны пайдалану үшін келесі қадамдарды орындаңыз:",
-            "point1": "«Параметрлер» -&gt; «Қосымша» -&gt; «Құпиялылық және қауіпсіздік» -&gt; «Сайт параметрлері» -&gt; «Камера» немесе «Сайт параметрлері» -&gt; «Микрофон» тармақтарына өтіңіз.",
-            "point2": "«Блоктау» тізімінен {{hostname}} жойыңыз"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Нұсқаулық",
-            "permissionDenied": "{{kind}} үшін рұқсат берілмеді. Осы парақты қайта жүктеп, конференцияға қатысу үшін {{kind}} қатынасын растаңыз."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Нұсқаулық",
-            "permissionDenied": "{{kind}} үшін рұқсат берілмеді. Оны пайдалану үшін келесі қадамдарды орындаңыз:",
-            "point1": "Android параметрлеріне өтіңіз",
-            "point2": "«Қолданбалар және хабарландырулар» ашыңыз",
-            "point3": "«{{communityName}}» тауып, оны ашыңыз",
-            "point4": "Рұқсаттар түймесін түртіңіз",
-            "point5": "{{kind}} қосу"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Нұсқаулық",
-            "permissionDenied": "{{kind}} үшін рұқсат берілмеді. Оны пайдалану үшін келесі қадамдарды орындаңыз:",
-            "point1": "IOS параметрлеріне өтіңіз",
-            "point2": "«Құпиялылықты» ашыңыз",
-            "point3": "{{kind}} тауып, ашыңыз",
-            "point4": "«{{communityName}}» тауып, қосыңыз"
-        },
-        "notices": {
-            "youJoinedRoom": "Сіз бөлмеге қосылдыңыз",
-            "joining": "Қосылу: {{userName}}",
-            "sbLeftRoom": "{{userName}} бөлмеден шықты",
-            "youLeftRoom": "Сіз бөлмеден шықтыңыз",
-            "codeCopied": "Сіз бөлмеден шықтыңыз",
-            "sbBeganFbLive": "{{userName}} бұл қоңырауды Facebook-те тарата бастады",
-            "sbStoppedFbLive": "{{userName}} бұл қоңырауды Facebook-та таратуды тоқтатты",
-            "youBeganFbLive": "Сіз бұл қоңырауды Facebook-те тарата бастадыңыз",
-            "youStoppedFbLive": "Сіз бұл қоңырауды Facebook-те таратуды тоқтаттыңыз",
-            "linkCopiedToCb": "Сілтеме алмасу буферіне көшірілді",
-            "codeCopiedToCb": "Код алмасу буферіне көшірілді",
-            "userHasNoVideo": "Қатысушының бейнесі жоқ",
-            "openInBrowserAlert": "Конференцияға қатысу үшін Safari шолғышында сілтемені ашыңыз.",
-            "youBeganVideoRecording": "Сіз осы конференцияны жаза бастадыңыз",
-            "youStoppedVideoRecording": "Сіз бұл конференцияны жазуды тоқтаттыңыз",
-            "switchingRoom": "Ауыстыру бөлмесі ...",
-            "forceDisconnecting": "Сіз 5 секунд ішінде ажыратыласыз",
-            "youStartedLive": "Сіз бұл қоңырауды арнайы RTMP -ге жібере бастадыңыз",
-            "youStoppedLive": "Сіз бұл қоңырауды арнайы RTMP -ге жіберуді тоқтаттыңыз",
-            "sbStartedLiveStreaming": "{{userName}} тікелей эфирде бастады",
-            "sbStoppedLiveStreaming": "{{userName}} тікелей эфирде аяқталды",
-            "liveStopped": "Бейнені соңғы нүктеге жіберу кезінде қате орын алды"
-        },
-        "settingsPopup": {
-            "webCamera": "Веб-камера",
-            "screenSharing": "Экранды бөлісу",
-            "shareAnotherScreen": "Басқа экранмен бөлісіңіз",
-            "turnOffCameras": "Барлық камераларды өшіріңіз",
-            "startFBLive": "Facebook Livestream іске қосыңыз",
-            "stopFBLive": "Facebook Livestream тоқтатыңыз",
-            "fbLiveTitle": "Тікелей эфир",
-            "fbLiveDescription": "Тікелей сипаттама",
-            "fbOnlyMeLiveAccess": "Тек қана мен",
-            "fbFriendsAccess": "Достар",
-            "fbPublicAccess": "Қоғамдық",
-            "fbStartLive": "Өмір сүр",
-            "fbStopLive": "Тікелей эфир",
-            "fbEmbedCode": "Ендіру",
-            "copy": "Көшіру",
-            "turnOffVideo": "Камера \/ экран бөлісуді өшіріңіз",
-            "turnOffScreenSharing": "Экранды бөлісуді өшіріңіз",
-            "cameraIsTurnedOff": "Камера өшірулі",
-            "startRecording": "Жазуды бастаңыз",
-            "stopRecording": "Жазуды тоқтату",
-            "recordingInProgress": "Жазу орындалуда ...",
-            "publishOnTimeline": "Уақыт кестесінде жариялау",
-            "publishToGroup": "Топқа жариялау",
-            "turnOffAudioInput": "Микрофонды өшіру",
-            "micIsTurnedOff": "Микрофон өшірулі",
-            "start": "Бастау",
-            "stop": "Тоқта",
-            "streamingSettings": "Параметрлер",
-            "streamToRTMP": "Реттелетін RTMP -ге ағын"
-        },
-        "participantsPopup": {
-            "disconnect": "Ажырату",
-            "floatingScreens": "Қалқымалы экрандар",
-            "tiledScreens": "Кірістірілген экрандар",
-            "loudestExceptMe": "Менен басқа ең жоғары дауыс",
-            "maximizeLoudest": "Ең жоғары деңгей",
-            "staticMaximized": "Статикалық максималды",
-            "manual": "Қолмен",
-            "fullScreen": "Толық экран",
-            "turnOffCamera": "Бейнені жасыру",
-            "turnOffAudio": "Дыбысты өшіру",
-            "turnOffScreenSharing": "Экранмен бөлісуді жасыру",
-            "turnOnCamera": "Видеоны көрсету",
-            "turnOnAudio": "Дыбысты қосу",
-            "turnOnScreenSharing": "Экранмен бөлісуді көрсету"
-        },
-        "notAllowedToJoinCall": "Бұл ағынға қосылуға рұқсатыңыз жоқ.",
-        "streamTitle": "{{1}} тікелей қоңырау",
-        "preview": {
-            "preamble": "Кездесу:",
-            "Meeting": "Кездесу",
-            "MeetingEnded": "Жиналыс аяқталды"
-        },
-        "preparing": {
-            "micIsOff": "Микрофон өшірулі",
-            "micIsOn": "Микрофон қосулы",
-            "cameraIsOff": "Камера өшірулі",
-            "cameraIsOn": "Камера қосулы",
-            "screenSharingIsOn": "Экранды бөлісу қосулы",
-            "screenSharingIsOff": "Бөлісу экраны",
-            "joinNow": "Қоңырауға қосылыңыз"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "<em>{{message.fields.type}}<\/em> хабарламасын {{stream.fields.title}} жіберді"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "түсініктеме берді",
-            "in": "ішінде",
-            "body": "{{& url}} ішінде: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "орналастырылды",
-                "byAvatar": "авторы: {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "жаңа {{instructions.fromDisplayType}} бар",
-                "byAvatar": "қосылған {{avatar.displayName}}"
-            },
-            "startedCallIn": "қоңырау шала бастады"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Шақырылған",
-            "description": "Шақыруға арналған жәшігі"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Ресурс",
-            "description": "ресурстарға қол жетімділікті басқару және жаңартулар туралы хабарлама жіберу үшін ағын"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "белгілі бір тапсырманың орындалу барысы туралы жаңартуларды алу үшін",
-            "displayType": "Тапсырма"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "тапсырмалар категориясы",
-            "displayType": "Тапсырмалар"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "қоғамдастық мүшелері үшін ортақ тәжірибе",
-            "displayType": "Қауымдастық мүшелеріне ортақ тәжірибе"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "пайдаланушы өздерін таныстыра алатын сәлемдесу",
-            "displayType": "Сәлемдесу"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Сан",
-            "description": "математикалық сан"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Күні",
-            "description": "күні"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Мәтін",
-            "description": "мәтін мәтіні"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Мәтін",
-            "description": "кіші мәтін"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Мәтін",
-            "description": "мәтіннің орташа денесі"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Электрондық пошта",
-            "description": "электрондық пошта"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Телефон нөмірі",
-            "description": "телефон нөмірі"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
-            "displayType": "URL мекен-жайы",
-            "description": "интернеттегі сілтеме"
+            "displayType": "URL",
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Сурет",
-            "description": "көрнекі сурет",
-            "newItem": "Кескін қосу"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Суреттер галереясы",
-            "description": "суреттер галереясы"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Альбом",
-            "description": "әр түрлі медиа байланысты альбом"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Файл",
-            "description": "жүктелген файл",
-            "newItem": "Файл қосу"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Аудио клип",
-            "description": "аудио клип",
-            "newItem": "Дыбысты қосу"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Видеоролик",
-            "description": "бейнеролик",
-            "newItem": "Бейне қосу"
-        },
-        "Streams\/live": {
-            "displayType": "Тікелей эфир",
-            "description": "тірі аудио немесе видео"
-        },
-        "Streams\/category": {
-            "displayType": "Санат",
-            "description": "басқа ағындарды байланыстыруға болатын категория"
-        },
-        "Streams\/participating": {
-            "displayType": "Қатысушы индекс",
-            "description": "Пайдаланушы қосылған \/ кеткенде ағындар бұған байланысты \/ байланысты емес"
-        },
-        "Streams\/interest": {
-            "displayType": "Қызығушылық",
-            "description": "пайдаланушының белгілі бір тақырыпқа деген қызығушылығын білдіреді"
-        },
-        "Streams\/incoming": {
-            "displayType": "Кіріс",
-            "description": "басқа пайдаланушылар жіберетін хабарлардың тағайындалуы"
-        },
-        "Streams\/chat": {
-            "displayType": "Әңгіме",
-            "description": "пайдаланушылар арасындағы тарих, әңгіме"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Нақты уақыттағы қоңырау",
-            "description": "нақты уақыттағы бейне \/ аудио қоңырау"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF құжаты",
-            "description": "PDF құжаты",
-            "newItem": "PDF қосыңыз"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Сұрақ",
-            "description": "сұрақтар ағыны"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Жауап",
-            "description": "жауаптар ағыны"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Қоңыраулар",
-            "description": "Streams\/webrtc санаты",
-            "MaxRelationsExceeded": "Ең көп қоңыраулар асып кетті"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Атауы",
-        "Subscribed": "Жазылды",
-        "Participants": "Қатысушылар",
-        "AreYouSureRemoveIdentifier": "Осы идентификаторды алып тастау керек пе?",
-        "AreYouSureUnsubscribeIdentifier": "Осы идентификатордан бас тартуға сенімдісіз бе? Ол осы идентификаторға хабарландыруларды өшіреді.",
-        "AreYouSureUnsubscribeDevice": "Бұл құрылғыны өшіргеніңізге сенімдісіз бе? Бұл құрылғыға арналған хабарландыруларды өшіреді.",
-        "Identifiers": "Анықтағыштар",
-        "Devices": "Құрылғылар",
-        "Streams": "Ағындар",
-        "AreYouSureRemoveParticipant": "Осы қатысушыны алып тастағыңыз келе ме?",
-        "RemoveParticipant": "Қатысушыны алып тастаңыз"
-    },
     "menu": {
-        "placeholder": "парақтың тақырыбын теріңіз",
-        "ModTab": "Элементті өзгертіңіз",
-        "Save": "Сақтау",
-        "Delete": "Жою",
-        "Submenu": "Ішкі мәзір"
-    },
-    "errors": {
-        "HiddenFromYou": "Бұл мазмұн сізден жасырылған."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Жазба",
-        "reset": "Қалпына келтіру",
-        "edit": "Өңдеу",
-        "title": "тақырып",
-        "description": "сипаттама",
-        "upload": "Жүктеу",
-        "link": "Сілтеме",
-        "setUrl": "URL мекенжайын орнатыңыз",
-        "save": "Сақтау",
-        "setClip": "Клипті кесіп тастаңыз",
-        "invalidURL": "URL дұрыс емес",
-        "invalidFile": "Жарамсыз файл",
-        "errorNoSource": "Аудио көзі жоқ",
-        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
-        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Қалпына келтіру",
-        "edit": "Өңдеу",
-        "title": "тақырып",
-        "description": "сипаттама",
-        "upload": "Жүктеу",
-        "link": "Сілтеме",
-        "setUrl": "URL мекенжайын орнатыңыз",
-        "save": "Сақтау",
-        "setClip": "Клипті кесіп тастаңыз",
-        "invalidURL": "URL дұрыс емес",
-        "invalidFile": "Жарамсыз файл",
-        "errorNoSource": "Бейне көзі жоқ",
-        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
-        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Қалпына келтіру",
-        "edit": "Өңдеу",
-        "title": "тақырып",
-        "description": "сипаттама",
-        "upload": "Жүктеу",
-        "link": "Сілтеме",
-        "setUrl": "URL мекенжайын орнатыңыз",
-        "save": "Сақтау",
-        "setClip": "Клипті кесіп тастаңыз",
-        "invalidURL": "URL дұрыс емес",
-        "invalidFile": "Жарамсыз файл",
-        "errorNoSource": "Pdf көзі жоқ",
-        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
-        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Қалпына келтіру",
-        "edit": "Өңдеу",
-        "title": "тақырып",
-        "description": "сипаттама",
-        "upload": "Жүктеу",
-        "link": "Сілтеме",
-        "setUrl": "URL мекенжайын орнатыңыз",
-        "save": "Сақтау",
-        "setClip": "Клипті кесіп тастаңыз",
-        "invalidURL": "URL дұрыс емес",
-        "invalidFile": "Жарамсыз файл",
-        "errorNoSource": "Кескін көзі жоқ",
-        "uploadLimit": "Файлдың максималды өлшемі: {{size}}",
-        "errorFileSize": "Кешіріңіз, бірақ файл тым үлкен.<br> Файлдың максималды өлшемі: {{size}}",
-        "uploadedImage": "Жүктелген сурет",
-        "imageTitle": "Кескін атауы"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Сұрақтар",
-        "Answers": "Жауаптар",
-        "AnswerQuestion": "Сұраққа жауап беріңіз",
-        "SetYourAnswer": "Сұраққа жауап беріңізші",
-        "NewQuestion": "Жаңа сұрақ",
-        "NewAnswer": "Жаңа жауап",
-        "AnswerDetails": "Толығырақ жауап беріңіз",
-        "answerOption": "Опция",
-        "answerOptionExclusive": "Эксклюзивті",
-        "answerTextarea": "Тектерея",
-        "FreeAnswer": "тегін жауап ...",
-        "SaveQuestion": "Сұрақты сақтау",
-        "SaveAnswer": "Жауапты сақтау",
-        "AddAnotherAnswer": "Тағы бір жауап қосыңыз",
-        "ErrorAnswers": "Бір жауабын да қосыңыз",
-        "AlreadyAnswered": "Қазірдің өзінде жауап берді",
-        "TitlePlaceholder": "Сұрағыңызды теріңіз",
-        "ContentPlaceholder": "Адамдарға жауап беру үшін кез-келген қосымша ақпаратты осы жерге салыңыз",
-        "ErrorTitle": "Сұрақ қажет",
-        "Placeholder": "Орын толтырғыш"
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Жаңа тәжірибе",
-        "DefineTitle": "Тақырыпты анықтаңыз",
-        "Create": "Жасау"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Қоңыраулар",
-        "MaxCalls": "Максималды қоңыраулар",
-        "Update": "Жаңарту",
-        "NoCallsYet": "Әлі қоңырау жоқ",
-        "CallReasonTitle": "Бұл қоңырау не туралы?",
-        "WaitingRoom": "Күту бөлмесі"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

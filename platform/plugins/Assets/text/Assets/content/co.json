@@ -49,7 +49,12 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} crediti",
             "BonusCredits": "{{amount}} crediti"
-        }
+        },
+        "Streams_user_firstname": "{{invitedUserName}} hà intrutu u nome",
+        "Streams_user_lastname": "{{invitedUserName}} hà intrutu u cognome",
+        "Streams_user_icon": "{{invitedUserName}} icona inserita",
+        "Places_user_location": "{{invitedUserName}} intrutu in locu",
+        "Streams_greeting": "{{invitedUserName}} hà intrutu in u salutu"
     },
     "history": {
         "Date": "Data",
@@ -80,7 +85,12 @@
         "BoughtCredits": "Cumpratu {{amount}} crediti",
         "BonusCredits": "Avete bonus {{amount}} crediti",
         "InviteAcceptedBy": "Guadagnatu {{amount}} crediti",
-        "YouHaveCreditsToStart": "Guadagnatu {{amount}} crediti"
+        "YouHaveCreditsToStart": "Guadagnatu {{amount}} crediti",
+        "Streams_user_firstname": "Guadagnatu {{amount}} crediti",
+        "Streams_user_lastname": "Guadagnatu {{amount}} crediti",
+        "Streams_user_icon": "Guadagnatu {{amount}} crediti",
+        "Places_user_location": "Guadagnatu {{amount}} crediti",
+        "Streams_greeting": "Guadagnatu {{amount}} crediti"
     },
     "subscriptions": {
         "infoTitle": "Impostate l&#39;infurmazioni di pagamentu",
@@ -163,5 +173,93 @@
         "RequiredPayment": "Pagamentu necessariu",
         "AreYouSureDelete": "Site sicuru di vulè sguassà stu serviziu?",
         "AmountServicesRelated": "Ci hè {{amount}} dispunibilità in relazione à stu serviziu. Sò ancu seranu rimossi."
+    },
+    "NFT": {
+        "Title": "Informazioni nantu à {{title}} NFT",
+        "Description": "L&#39;infurmazione nantu à a cumpagnia NFT",
+        "FixedBid": "Cumprà avà",
+        "CurrentBid": "Offerta attuale",
+        "StartingIn": "Partendu in",
+        "EndingIn": "Finisce in",
+        "CreateNFT": "Crea un NFT",
+        "TitlePlaceholder": "Dà u vostru NFT un titulu",
+        "DescriptionPlaceholder": "Dà a vostra NFT una descrizzione",
+        "CreateYourNFT": "Crea u vostru NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Opcional. A quantità pagata à u creatore prima di u trasferimentu.",
+        "ExpirationDate": "Data di perenzione",
+        "StartingDate": "Data di principiu",
+        "BidsBelowThisAmount": "L&#39;offerte sottu à questa quantità ùn saranu micca permesse",
+        "MinimumBid": "Offerta minima",
+        "Price": "prezzu",
+        "Owner": "Pruprietariu",
+        "SelectCategory": "Selezziunà categuria",
+        "Day": "Ghjornu",
+        "Days": "Ghjorni",
+        "Hour": "Ora",
+        "Hours": "Ore",
+        "Minute": "Minutu",
+        "Minutes": "Minuti",
+        "Second": "Sicondu",
+        "Seconds": "Sicondi",
+        "SalesCreator": "di vendite andarà à u creatore",
+        "Details": "Dettagli",
+        "Bids": "Offerte",
+        "History": "Storia",
+        "LoremIpsum": "Lorem Ipsum hè solu un testu simulatu di l&#39;industria di stampa è di stampa.",
+        "PutOnSale": "Metti in vendita",
+        "PutOffSale": "Ritirate da a vendita",
+        "Transfer": "Trasferimentu",
+        "Update": "Actualizazione",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Crea Token",
+        "PlaceBid": "Pone l&#39;offerta",
+        "SoldOut": "Vendu",
+        "NftName": "nome NFT",
+        "DescribeYourNFT": "Per piacè descrivi a vostra NFT",
+        "NftPicture": "Foto per rapprisintà NFT",
+        "NftMovie": "Film per rapprisintà NFT",
+        "UploadMovie": "Caricate filmu",
+        "MovieSource": "Fonte di u filmu",
+        "UploadFile": "Caricà un schedariu",
+        "PutOnMarketplace": "Mettite nantu à u mercatu",
+        "InstantPurchase": "Inserite u prezzu per permette à l&#39;utilizatori di cumprà immediatamente u vostru NFT",
+        "FixedPrice": "Prezzu fissu",
+        "TimedAuction": "Asta cronometrata",
+        "OpenForBids": "Apertu per offerte",
+        "PriceOnePiece": "Inserite u prezzu per un pezzu",
+        "EnterMinimumBid": "Inserite l&#39;offerta minima",
+        "SelectChain": "Selezziunà a catena",
+        "WrongChain": "Stu NFT creatu sottu &quot;{{chain}}&quot;. Per piacè aduprà sta catena.",
+        "import": {
+            "importNFT": "Importazione di NFT",
+            "fileNotFound": "Scusate, u schedariu CSV ùn hè micca truvatu.",
+            "fileEmpty": "Scusate, u schedariu CSV hè viotu.",
+            "userIdNotFound": "utilizatore esiste ma id viotu",
+            "errorLine": "linea {{1}}",
+            "fieldNotFound": "U campu obligatoriu &quot;{{1}}&quot; ùn hè micca truvatu",
+            "taskStreamInvalid": "flussu di attività invalidu",
+            "instructionsEmpty": "Istruzzioni di u flussu di attività vacanti",
+            "complete": "Cumpleta",
+            "activateUsers": "mandà un missaghju di attivazione à l&#39;utilizatori?",
+            "importProgress": "Prugressu",
+            "importOptions": "Opzioni",
+            "sampleCSV": "Scaricate Sample CSV",
+            "fileLabel": "Caricate un fogliu di calculu:",
+            "errorsTitle": "Errori accaduti"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filtra per e cullezzione NFT",
+                "ShowNFTCollection": "Mostra a cullezzione NFT in ...",
+                "AllCollections": "Tutte e cullezzione"
+            },
+            "ByUser": {
+                "AllAuthors": "Tutti l&#39;autori",
+                "AllUsers": "Tutti",
+                "FilterByAuthors": "Filtra per Autori"
+            }
+        },
+        "Back": "Torna à a cullezzione"
     }
 }

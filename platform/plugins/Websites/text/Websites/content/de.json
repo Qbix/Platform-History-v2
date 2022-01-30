@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link zu fördern",
-                "startDate": "Anfangsdatum",
-                "startTime": "Startzeit",
-                "endDate": "Endtermin",
-                "endTime": "Endzeit",
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Nach Interesse filtern",
-                "FilterInterests": "Beginnen Sie mit der Eingabe eines Interesses ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Interesse",
-            "Location": "Ort"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Gehen",
-            "PasteLinkHere": "Fügen Sie hier einen Link ein",
-            "BrowseTheWeb": "Durchsuche",
-            "WriteToStartConversation": "Schreiben Sie Ihre Gedanken, um das Gespräch zu beginnen",
-            "StartConversation": "Konversation starten",
-            "GotoConversation": "Gehe zum Gespräch",
-            "reset": "Zurücksetzen",
-            "edit": "Bearbeiten",
-            "link": "Verknüpfung",
-            "setUrl": "URL festlegen",
-            "save": "sparen",
-            "setClip": "Clip ausschneiden",
-            "invalidURL": "ungültige URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Datei zu groß zum Zwischenspeichern. Maximale Dateigröße {{size}}",
-        "InvalidPDF": "Die Datei ist kein gültiges PDF",
-        "StartTypingTitleOrKeywords": "Beginnen Sie mit der Eingabe von Titeln oder Schlüsselwörtern ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Ein HTML-Dokument, das verschiedene Benutzer anzeigen und bearbeiten können",
-            "displayType": "Artikel"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Eine Folie in einer Präsentation kann HTML, Audio usw. enthalten.",
-            "displayType": "Rutschen"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Eine Präsentation bestehend aus verschiedenen Folien",
-            "displayType": "Präsentation"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Eine Werbeeinheit auf einer Website",
-            "displayType": "Anzeigeeinheit"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Eine Möglichkeit, Werbeeinheiten unter einem Namen zu gruppieren",
-            "displayType": "Anzeigenplatzierung"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Inhalt für eine Anzeige",
-            "displayType": "Werbekreativ"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Eine Werbekampagne",
-            "displayType": "Werbekampagne"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Stellt eine Website dar, deren Metadaten erfasst wurden",
-            "displayType": "Website"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

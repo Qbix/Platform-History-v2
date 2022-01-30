@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ouvri sesyon an",
-        "LogOut": "Dekonekte"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Mete {{1}} kòm prensipal mwen {{2}}",
-        "ChoosePassPhrase": "Chwazi yon <strong>fraz pas<\/strong> pou konekte. <br> Yon fraz senp ki gen ladan kèk mo ke ou pral fasil sonje.",
-        "ChoosePassPhraseSeeSuggestions": "Chwazi yon <strong>fraz pas<\/strong> bon pou pwoteje kont ou. Gade sijesyon yo pou kèk ide.",
-        "LogOutAndTryAgain": "Log out epi eseye ankò",
-        "IfYouFeel": "Si ou santi yon bagay ale mal, ou kapab",
-        "SetIdentifierButtonTitle": "rekomanse"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Kòmanse"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Kòmanse",
-        "Authorize": "Otorize",
-        "TermsLabel": "Mwen te li epi mwen dakò <br> nan {{link}}",
-        "TermsTitle": "Tèm yo",
-        "mustAgree": "Premye ou dwe dakò ak tèm yo."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Mwen aksepte {{link}}",
-        "TermsTitle": "Tèm yo"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Pèmisyon",
-        "prompt": "Èske w vle pèmèt notifikasyon yo? Ou pral resevwa dènye enfòmasyon an tan reyèl sou bagay ou pran swen.",
-        "yes": "Wi",
-        "no": "Non",
-        "WelcomePleaseVerifyEmail": "Byenveni! Tanpri verifye adrès imèl ou.",
-        "WelcomeVerifyEmail": "Byenveni! Verify adrès imel ou.",
-        "ForgetPass": "Hey, ou te bliye pasfraz ou a?",
-        "PassphraseSaved": "Fraz pas ou te sove.",
-        "IdentifierActivated": "{{type}} ou te aktive.",
-        "CompletedActivation": "Ou te fini aktivasyon itilizatè.",
-        "CompletedActivationLogIn": "Ou te fini aktivasyon itilizatè. Eseye antre nan kounye a."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Chwazi kontak",
-            "CreateAccount": "+ Nouvo Kontak",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create pa jwenn",
-            "SearchByName": "Rechèch pa non",
-            "EmptyContacts": "Kontak pa jwenn ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Chwazi kontak nan {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Tanpri chwazi etikèt.",
-        "inviteUser": "Envite Itilizatè a",
-        "selectRole": "Chwazi wòl",
-        "inviteRole": "Envite {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Lang valab chwazi",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Byenveni",
-        "directions": "Kreye yon kont, oswa ouvri sesyon an.",
-        "directionsNoRegister": "Log in si ou gen yon kont.",
-        "goButton": "Ale",
-        "passphrase": "Antre fraz pas ou:",
-        "loginButton": "Kòmanse",
-        "registerButton": "Kòmanse",
-        "resendButton": "Voye Mesaj Aktivasyon",
-        "forgot": "Bliye li?",
-        "resendConfirm": "Ou vle voye yon mesaj pou retabli pasfraz ou a?",
-        "resendSuccess": "Tcheke pou yon mesaj pou Reyajiste pasfraz ou",
-        "resendClose": "Fèmen",
-        "noPassphrase": "Anvan ou ka ouvri sesyon an, ou dwe mete yon fraz pas pa klike lyen ki nan mesaj deklanchman ou.",
-        "notVerified": "Ou dwe voye yon mesaj aktivasyon pou ou antre nan kay la.",
-        "emailExists": "Eske ou te eseye enskri ak imèl sa a anvan? Si se konsa, tcheke bwat resepsyon ou a aktive kont ou. <a href='#resend' class='Q_button Users_activation_resend'>Klike sou re-voye mesaj la<\/a>",
-        "mobileExists": "Eske ou te eseye enskri ak nimewo mobil sa a anvan? Si se konsa, tcheke SMS ou a aktive kont ou. <a href='#resend' class='Q_button Users_activation_resend'>Klike sou re-voye mesaj la<\/a>",
-        "usingOther": "oswa ou kapab",
-        "prompt": "Chwazi yon non itilizatè:",
-        "newUser": "oswa kreye yon nouvo kont",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mobil ou oswa imèl",
-            "mobile": "antre nan mobil ou",
-            "email": "antre nan adrès imel ou",
-            "username": "non itilizatè"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Aksepte kondisyon ki nan sèvis la?",
-        "facebookNoEmail": "Kont facebook ou manke yon adrès imèl konfime. Senpleman ale nan fason natif natal la.",
-        "picTooltip": "Ou ka chanje foto sa a pita",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Konekte nan {{host}} nan moman {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Redireksyon nan bous",
-                "content": "Yon fwa ou fèmen dyalòg sa a, ou pral pran nan bous ou. Apre ou fin siyen an, retounen nan paj sa a."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Ajoute yon fason pou ouvri sesyon an",
-        "sendMessage": "Voye Mesaj Aktivasyon",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "antre nan mobil ou # oswa imèl",
-            "mobile": "antre nimewo mobil ou",
-            "email": "antre nan adrès imel ou",
-            "username": "non itilizatè"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "Kont {{Platform}}",
-        "areUsing": "Ou ap itilize {{platform}} kòm",
-        "noLongerUsing": "Ou pa gen plis koneksyon ak {{platform}} kòm",
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
         "doAuth": "Log in with this account",
-        "doSwitch": "Chanje nan kont sa a"
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Pwopriyetè",
+        "Owner": "Owner",
         "Admin": "Admin",
-        "Member": "Manm",
+        "Member": "Member",
         "Guest": "Guest",
-        "Host": "Akèy"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Chak jou",
-        "Weekly": "Chak semèn",
-        "Monthly": "Chak mwa",
-        "Application": "Aplikasyon",
-        "Pages": "Paj",
-        "Services": "Sèvis",
-        "Faq": "FAQ",
-        "WeekDays": "Jou Semèn"
+        "Host": "Host"
     }
 }

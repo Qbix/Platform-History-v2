@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "ไอเท็มใหม่"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "คนที่ฉันเชิญ",
-        "Streams\/invitedMe": "ใครเชิญฉัน",
-        "AreYouAgree": "คุณเห็นด้วยหรือไม่?",
-        "Yes": "ใช่",
-        "No": "เลขที่",
-        "DoYouAgree": "คุณเห็นด้วยหรือไม่?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "คุณสนใจอะไร?",
-        "CanAdd": "หากคุณยังไม่พบสิ่งที่คุณต้องการคุณสามารถเพิ่มความสนใจใหม่ด้านล่าง:",
-        "TrySynonyms": "ไม่เห็นเหรอ ลองคำพ้องความหมาย",
-        "AddUnderCategory": "เพิ่มภายใต้หมวดหมู่ ...",
-        "Other": "อื่น ๆ",
-        "Unlisted": "ไม่แสดง"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "ข้อความถูกตั้งค่าสถานะเพื่อให้ผู้ดูแลระบบตรวจสอบ แตะอีกครั้งเพื่อยกเลิกการติดธง",
-        "noOneSaid": "ไม่มีใครพูดอะไรเลย",
-        "closeChatButton": "ปิดการแชท",
-        "closeChatConfirmTitle": "ปิดการแชทนี้ไหม",
-        "closeChatConfirm": "คุณแน่ใจหรือว่าต้องการปิดการแชทนี้?",
-        "closeChatConfirmYes": "ใช่",
-        "closeChatConfirmNo": "ไม่",
-        "earlierComments": "ความคิดเห็นก่อนหน้า",
-        "Subscribed": "ปิดการแจ้งเตือน",
-        "Unsubscribed": "รับการแจ้งเตือน",
-        "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมการสนทนานี้",
-        "startedConversation": "เริ่มการสนทนา",
-        "RealTimeCall": "โทรตามเวลาจริง",
-        "SearchByName": "ค้นหาตามชื่อ",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} กำลังเยี่ยมชมการแชท",
-            "Join": "{{displayName}} เข้าร่วมการแชท",
-            "Leave": "{{displayName}} ออกจากการแชท",
-            "RelatedTo": "{{displayName}} เริ่ม {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "ข้อความ {{& message.fields.type}} ถึง {{1,000}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} พูดว่า:",
-        "Streams\/changed": "การเปลี่ยนแปลงใน {{stream.fields.title}}",
-        "Streams\/invite": "คุณได้รับเชิญให้ {{& stream.fields.title}}",
-        "Streams\/announcement": "ประกาศใน {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} เปลี่ยนการเข้าถึงสตรีม",
-        "Streams\/chat\/edit": "แก้ไขข้อความแชทแล้ว",
-        "Streams\/chat\/remove": "ลบข้อความแชทแล้ว",
-        "Streams\/closed": "{{stream.fields.title}} ปิดแล้ว",
-        "Streams\/task\/progress": "ความคืบหน้าเมื่อวันที่ {{stream.fields.title}}",
-        "Streams\/task\/complete": "ภารกิจเสร็จสิ้น: {{stream.fields.title}}",
-        "Streams\/task\/error": "ข้อผิดพลาดระหว่าง: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ข้อความที่เข้ามา",
-        "ManageEmailSubscriptions": "จัดการการสมัครอีเมลของคุณ",
-        "IfUnsubscribe": "หากคุณต้องการยกเลิกการสมัคร",
-        "Streams\/relatedTo\/Streams\/call": "เริ่มการโทรใหม่ใน {{toTitle}}",
-        "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{1,000}}",
-        "Streams\/relatedFrom\/*": "เพิ่มไปที่ {{toTitle}} เป็น {{1,000}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} พูดถึงคุณในความคิดเห็น",
-        "Streams\/call": "{{displayName}} เริ่มการโทรตามเวลาจริง"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} เชิญคุณเข้าร่วม {{1,000}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "เลือกจากผู้ติดต่อของคุณ",
-            "selectFromContacts": "เลือกจากผู้ติดต่อ",
-            "photo": "ถ่ายรูป",
-            "photoInstruction": "หากบุคคลที่สแกนรหัส QR ของคุณอยู่ข้างหน้าคุณให้ถ่ายรูปพวกเขา",
-            "to": "ถึง: {{Stream Title}}",
-            "go": "ไป",
-            "title": "เชิญ",
-            "placeholder": "หมายเลขโทรศัพท์หรือที่อยู่อีเมล",
-            "orInvite": "หรือเชิญผู้คนโดยใช้:",
-            "QR": "{{ClickOrTap}} เพื่อสร้างรหัส QR",
-            "QRtitle": "สแกนรหัส QR นี้",
-            "byEmail": "อีเมล์",
-            "byText": "ข้อความ",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "พูดเบาและรวดเร็ว",
-            "QRscanned": "พวกเขาสแกนมัน!",
-            "chooseAgainFromContacts": "เลือกอีกครั้งจากที่อยู่ติดต่อ",
-            "inviteSelectedContacts": "เชิญผู้ติดต่อที่เลือกไว้",
-            "scannedQR": "{{ClickOrTap}} หากสแกนรหัสแล้ว",
-            "copyLink": "{{ClickOrTap}} เพื่อคัดลอกลิงก์เชิญ",
-            "userChooserPlaceholder": "ค้นหาด้วยชื่อ",
-            "shareOrCopyLink": "{{ClickOrTap}} เพื่อแชร์หรือคัดลอกลิงก์เชิญ"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "เฮ้ลองดูนี่สิ",
-            "PleaseVisitLink": "กรุณาเยี่ยมชมลิงค์ต่อไปนี้:",
-            "InvitingYou": "ฉันเชิญคุณให้ {{title}}",
-            "HasInvitedYou": "{{displayName}} เชิญคุณให้ {{title}}",
-            "HasMentionedYou": "{{displayName}} ได้พูดถึงคุณใน &quot;{{title}}&quot;",
-            "YOUAREINVITED": "คุณได้รับเชิญ!",
-            "AcceptInvite": "ยอมรับคำเชิญ"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "คุณได้รับเชิญให้ {{title}} กรุณาแตะ {{1,000}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
-        },
-        "youCanNowPaste": "ตอนนี้คุณสามารถวางลิงค์นี้เพื่อเชิญคนอื่น",
-        "command": "เชิญ"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
-            "confirm": "คำเชิญจะถูกส่งจากหมายเลขของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
-            "check": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} กรุณาตรวจสอบ sms ของคุณแล้วคลิกที่ลิงค์!",
-            "CheckYourMobile": "โปรดตรวจสอบ SMS และทำตามคำแนะนำ!"
-        },
-        "email": {
-            "alert": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ ติดตามด้วยข้อความด่วนเพื่อให้พวกเขารู้ว่าคำเชิญมาจากคุณขอให้พวกเขาคลิกที่ลิงค์",
-            "confirm": "คำเชิญจะถูกส่งจากโดเมนของเราซึ่งเพื่อนของคุณยังจำไม่ได้ คุณต้องการติดตามข้อความสั้น ๆ เพื่อให้พวกเขาทราบว่าข้อความเชิญมาจากคุณขอให้พวกเขาคลิกลิงก์",
-            "subject": "คุณได้รับคำเชิญหรือไม่",
-            "body": "สวัสดีฉันเพิ่งส่งคำเชิญให้คุณไปยังแอป {{app}} โปรดตรวจสอบอีเมลของคุณและคลิกลิงก์ในนั้น!",
-            "CheckYourEmail": "โปรดตรวจสอบอีเมลของคุณและทำตามคำแนะนำ!"
-        }
-    },
-    "participating": {
-        "Title": "หัวข้อ",
-        "Subscribed": "สมัครเป็นสมาชิก",
-        "Participants": "ผู้เข้าร่วม",
-        "AreYouSureRemoveIdentifier": "คุณแน่ใจที่จะลบตัวระบุนี้?",
-        "AreYouSureUnsubscribeIdentifier": "คุณแน่ใจหรือไม่ยกเลิกการสมัครตัวระบุนี้ มันจะปิดการแจ้งเตือนไปยังตัวระบุนี้",
-        "AreYouSureUnsubscribeDevice": "คุณแน่ใจหรือว่ายกเลิกการสมัครอุปกรณ์นี้ มันจะปิดการแจ้งเตือนไปยังอุปกรณ์นี้",
-        "Identifiers": "ตัวบ่งชี้",
-        "Devices": "อุปกรณ์",
-        "Streams": "ลำธาร",
-        "AreYouSureRemoveParticipant": "คุณแน่ใจหรือว่าต้องการลบผู้เข้าร่วมนี้",
-        "RemoveParticipant": "ลบผู้เข้าร่วม"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "เปิดใช้งานไมโครโฟน",
-            "cameraTitle": "เปิดใช้งานกล้อง",
-            "cameraAndMicrophoneTitle": "เปิดใช้งานกล้องและไมโครโฟน",
-            "dialogTitle": "เปิดใช้งานกล่องโต้ตอบ",
-            "microphoneBtn": "เปิดใช้งานไมโครโฟน",
-            "cameraBtn": "เปิดใช้งานกล้อง",
-            "cameraAndMicrophoneBtn": "เปิดใช้งานกล้องและไมโครโฟน"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่ &quot;การตั้งค่า&quot; -&gt; &quot;ขั้นสูง&quot; -&gt; &quot;ความเป็นส่วนตัวและความปลอดภัย&quot; -&gt; &quot;การตั้งค่าไซต์&quot; -&gt; &quot;กล้อง&quot; หรือ &quot;การตั้งค่าไซต์&quot; -&gt; &quot;ไมโครโฟน&quot;",
-            "point2": "ลบ {{hostname}} ออกจากรายการ &quot;บล็อก&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} โปรดโหลดหน้านี้ซ้ำและยืนยันการเข้าถึง {{kind}} เพื่อเข้าร่วมการประชุม"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่การตั้งค่า Android ของคุณ",
-            "point2": "เปิด &quot;แอปและการแจ้งเตือน&quot;",
-            "point3": "ค้นหา &quot;{{communityName}}&quot; และเปิด",
-            "point4": "แตะที่สิทธิ์",
-            "point5": "เปิดใช้งาน {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "คำแนะนำ",
-            "permissionDenied": "ปฏิเสธสิทธิ์สำหรับ {{kind}} หากต้องการใช้โปรดปฏิบัติตามขั้นตอนเหล่านี้:",
-            "point1": "ไปที่การตั้งค่า iOS ของคุณ",
-            "point2": "เปิด &quot;ความเป็นส่วนตัว&quot;",
-            "point3": "ค้นหา {{kind}} และเปิด",
-            "point4": "ค้นหา &quot;{{communityName}}&quot; และเปิดใช้งาน"
-        },
-        "notices": {
-            "youJoinedRoom": "คุณเข้าร่วมห้อง",
-            "joining": "กำลังเข้าร่วม: {{userName}}",
-            "sbLeftRoom": "{{userName}} ออกจากห้องไป",
-            "youLeftRoom": "คุณออกจากห้องไป",
-            "codeCopied": "คุณออกจากห้องไป",
-            "sbBeganFbLive": "{{userName}} เริ่มแพร่ภาพการโทรนี้ใน Facebook",
-            "sbStoppedFbLive": "{{userName}} หยุดถ่ายทอดการโทรนี้ใน Facebook",
-            "youBeganFbLive": "คุณเริ่มแพร่ภาพการโทรนี้ใน Facebook",
-            "youStoppedFbLive": "คุณหยุดแพร่ภาพการโทรนี้ใน Facebook",
-            "linkCopiedToCb": "ลิงก์คัดลอกไปยังคลิปบอร์ด",
-            "codeCopiedToCb": "รหัสคัดลอกไปยังคลิปบอร์ด",
-            "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
-            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม",
-            "youBeganVideoRecording": "คุณเริ่มบันทึกการประชุมนี้",
-            "youStoppedVideoRecording": "คุณหยุดบันทึกการประชุมนี้",
-            "switchingRoom": "ห้องเปลี่ยน...",
-            "forceDisconnecting": "คุณจะถูกตัดการเชื่อมต่อภายใน 5 วินาที",
-            "youStartedLive": "คุณเริ่มแพร่ภาพการโทรนี้ไปยัง RTMP . ที่กำหนดเอง",
-            "youStoppedLive": "คุณหยุดออกอากาศการโทรนี้ไปยัง RTMP . ที่กำหนดเอง",
-            "sbStartedLiveStreaming": "{{userName}} เริ่มถ่ายทอดสด",
-            "sbStoppedLiveStreaming": "{{userName}} สิ้นสุดการถ่ายทอดสด",
-            "liveStopped": "เกิดข้อผิดพลาดขณะส่งวิดีโอไปยังปลายทาง",
-            "forceDisconnectingImmediately": "คุณถูกตัดการเชื่อมต่อโดยโฮสต์"
-        },
-        "settingsPopup": {
-            "webCamera": "กล้องเว็บ",
-            "screenSharing": "การแชร์หน้าจอ",
-            "shareAnotherScreen": "แบ่งปันหน้าจออื่น",
-            "turnOffCameras": "ปิดกล้องทั้งหมด",
-            "startFBLive": "เริ่ม Facebook Livestream",
-            "stopFBLive": "หยุด Livestream Facebook",
-            "fbLiveTitle": "ชื่อสด",
-            "fbLiveDescription": "คำอธิบายสด",
-            "fbOnlyMeLiveAccess": "แค่ฉัน",
-            "fbFriendsAccess": "เพื่อน",
-            "fbPublicAccess": "สาธารณะ",
-            "fbStartLive": "ใช้ชีวิต",
-            "fbStopLive": "จบการแข่งขัน",
-            "fbEmbedCode": "ฝัง",
-            "copy": "สำเนา",
-            "turnOffVideo": "ปิดการแชร์กล้อง \/ หน้าจอ",
-            "turnOffScreenSharing": "ปิดการแชร์หน้าจอ",
-            "cameraIsTurnedOff": "ปิดกล้องแล้ว",
-            "startRecording": "เริ่มการบันทึก",
-            "stopRecording": "หยุดการบันทึก",
-            "recordingInProgress": "กำลังบันทึก ...",
-            "publishOnTimeline": "เผยแพร่บนไทม์ไลน์",
-            "publishToGroup": "เผยแพร่ไปยังกลุ่ม",
-            "turnOffAudioInput": "ปิดเสียงไมโครโฟน",
-            "micIsTurnedOff": "ไมโครโฟนปิดอยู่",
-            "start": "เริ่ม",
-            "stop": "หยุด",
-            "streamingSettings": "การตั้งค่า",
-            "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง",
-            "dialogTitle": "การตั้งค่าวิดีโอ",
-            "startBroadcasting": "เริ่มออกอากาศ",
-            "broadcastingInProgress": "กำลังออกอากาศ"
-        },
-        "participantsPopup": {
-            "disconnect": "ปลด",
-            "floatingScreens": "หน้าจอลอย",
-            "tiledScreens": "หน้าจอกระเบื้อง",
-            "loudestExceptMe": "ดังยกเว้นฉัน",
-            "maximizeLoudest": "ขยายใหญ่สุด",
-            "staticMaximized": "สถิตสูงสุด",
-            "manual": "คู่มือ",
-            "turnOffCamera": "ซ่อนวิดีโอ",
-            "turnOffAudio": "ปิดเสียง",
-            "turnOffScreenSharing": "ซ่อนการแชร์หน้าจอ",
-            "turnOnCamera": "แสดงวิดีโอ",
-            "turnOnAudio": "เปิดเสียง",
-            "turnOnScreenSharing": "แสดงการแชร์หน้าจอ",
-            "fullScreen": "เต็มจอ",
-            "dialogTitle": "การตั้งค่าผู้เข้าร่วม"
-        },
-        "notAllowedToJoinCall": "คุณไม่ได้รับอนุญาตให้เข้าร่วมสตรีมนี้",
-        "streamTitle": "{{1}} การโทรสด",
-        "preview": {
-            "preamble": "การประชุม:",
-            "Meeting": "การประชุม",
-            "MeetingEnded": "สิ้นสุดการประชุม"
-        },
-        "preparing": {
-            "micIsOff": "ไมค์ปิดอยู่",
-            "micIsOn": "ไมค์เปิดอยู่",
-            "cameraIsOff": "กล้องปิดอยู่",
-            "cameraIsOn": "กล้องเปิดอยู่",
-            "screenSharingIsOn": "การแชร์หน้าจอเปิดอยู่",
-            "screenSharingIsOff": "แชร์หน้าจอ",
-            "joinNow": "เข้าร่วมการโทร"
-        },
-        "audioSettings": {
-            "dialogTitle": "การตั้งค่าเสียง",
-            "speakers": "ลำโพง",
-            "microphone": "ไมโครโฟน"
-        },
-        "streamingSettings": {
-            "title": "การตั้งค่าสตรีมมิ่ง"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "ได้รับเชิญ",
-            "description": "กล่องจดหมายสำหรับคำเชิญ"
-        },
-        "Streams\/resource": {
-            "displayType": "ทรัพยากร",
-            "description": "สตรีมสำหรับจัดการการเข้าถึงทรัพยากรและโพสต์ข้อความเกี่ยวกับการอัปเดต"
-        },
-        "Streams\/task": {
-            "displayType": "งาน",
-            "description": "งานที่ต้องทำโดยมนุษย์หรือเครื่องจักร"
-        },
-        "Streams\/number": {
-            "displayType": "จำนวน",
-            "description": "จำนวนทางคณิตศาสตร์"
-        },
-        "Streams\/date": {
-            "displayType": "วันที่",
-            "description": "วันที่"
-        },
-        "Streams\/text": {
-            "displayType": "ข้อความ",
-            "description": "เนื้อความของข้อความ"
-        },
-        "Streams\/text\/small": {
-            "displayType": "ข้อความ",
-            "description": "ข้อความเล็ก ๆ"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "ข้อความ",
-            "description": "เนื้อความกลางของข้อความ"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "ที่อยู่อีเมล",
-            "description": "ที่อยู่อีเมล"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "หมายเลขโทรศัพท์",
-            "description": "หมายเลขโทรศัพท์"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL",
-            "description": "ลิงค์บนเว็บ"
-        },
-        "Streams\/image": {
-            "displayType": "ภาพ",
-            "description": "ภาพภาพ",
-            "newItem": "ใส่รูปภาพ"
-        },
-        "Streams\/images": {
-            "displayType": "คลังภาพ",
-            "description": "คลังภาพ"
-        },
-        "Streams\/album": {
-            "displayType": "อัลบั้ม",
-            "description": "อัลบั้มที่เกี่ยวข้องกับสื่อต่าง ๆ"
-        },
-        "Streams\/file": {
-            "displayType": "ไฟล์",
-            "description": "อัพโหลดไฟล์",
-            "newItem": "เพิ่มไฟล์"
-        },
-        "Streams\/audio": {
-            "displayType": "คลิปเสียง",
-            "description": "คลิปเสียง",
-            "newItem": "เพิ่มเสียง"
-        },
-        "Streams\/video": {
-            "displayType": "คลิปวิดีโอ",
-            "description": "คลิปวิดีโอ",
-            "newItem": "เพิ่มวิดีโอ"
-        },
-        "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "เสียงสดหรือวิดีโอ"
-        },
-        "Streams\/category": {
-            "displayType": "ประเภท",
-            "description": "หมวดหมู่ที่สตรีมอื่นสามารถเกี่ยวข้อง"
-        },
-        "Streams\/participating": {
-            "displayType": "ดัชนีที่เข้าร่วม",
-            "description": "สตรีมเกี่ยวข้อง \/ ไม่เกี่ยวข้องกับสิ่งนี้เมื่อผู้ใช้เข้าร่วม \/ ออกจาก"
-        },
-        "Streams\/interest": {
-            "displayType": "ดอกเบี้ย",
-            "description": "แสดงถึงความสนใจของผู้ใช้ในบางหัวข้อ"
-        },
-        "Streams\/incoming": {
-            "displayType": "ขาเข้า",
-            "description": "ปลายทางสำหรับข้อความที่ส่งโดยผู้ใช้รายอื่น"
-        },
-        "Streams\/chat": {
-            "displayType": "การสนทนา",
-            "description": "การสนทนาระหว่างผู้ใช้ที่มีประวัติ"
-        },
-        "Streams\/webrtc": {
-            "displayType": "โทรตามเวลาจริง",
-            "description": "การสนทนาทางวิดีโอ \/ เสียงแบบเรียลไทม์"
-        },
-        "Streams\/tasks": {
-            "description": "หมวดหมู่สำหรับงาน",
-            "displayType": "งาน"
-        },
-        "Streams\/experience": {
-            "description": "ประสบการณ์ทั่วไปสำหรับสมาชิกของชุมชน",
-            "displayType": "ประสบการณ์ทั่วไปสำหรับสมาชิกของชุมชน"
-        },
-        "Streams\/greeting": {
-            "description": "คำทักทายที่ผู้ใช้สามารถแนะนำตัวเอง",
-            "displayType": "คำอวยพร"
-        },
-        "Streams\/pdf": {
-            "displayType": "เอกสาร PDF",
-            "description": "เอกสาร PDF",
-            "newItem": "เพิ่ม PDF"
-        },
-        "Streams\/question": {
-            "displayType": "คำถาม",
-            "description": "กระแสคำถาม"
-        },
-        "Streams\/answer": {
-            "displayType": "ตอบ",
-            "description": "ตอบสตรีม"
-        },
-        "Streams\/calls": {
-            "displayType": "โทร",
-            "description": "หมวดหมู่สำหรับ Streams\/webrtc",
-            "MaxRelationsExceeded": "เกินการโทรสูงสุด"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "โพสต์ข้อความ <em>{{message.fields.type}}<\/em> ไปที่ {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "แสดงความคิดเห็นใน",
-            "in": "ใน",
-            "body": "ใน {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ถูกโพสต์ไปที่",
-                "byAvatar": "โดย {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "มี {{instructions.fromDisplayType}} ใหม่",
-                "byAvatar": "เพิ่มโดย {{avatar.displayName}}"
-            },
-            "startedCallIn": "เริ่มการโทรเข้า"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "พิมพ์ชื่อหน้า",
-        "ModTab": "แก้ไขรายการ",
-        "Save": "บันทึก",
-        "Delete": "ลบ",
-        "Submenu": "เมนูย่อย"
-    },
-    "errors": {
-        "HiddenFromYou": "เนื้อหานี้ถูกซ่อนจากคุณ"
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "บันทึก",
-        "reset": "รีเซ็ต",
-        "edit": "แก้ไข",
-        "title": "หัวข้อ",
-        "description": "คำอธิบาย",
-        "upload": "ที่อัพโหลด",
-        "link": "ลิงค์",
-        "setUrl": "ตั้งค่า URL",
-        "save": "บันทึก",
-        "setClip": "ตัดคลิป",
-        "invalidURL": "URL ไม่ถูกต้อง",
-        "invalidFile": "ไฟล์ไม่ถูกต้อง",
-        "errorNoSource": "ไม่มีแหล่งที่มาของเสียง",
-        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "รีเซ็ต",
-        "edit": "แก้ไข",
-        "title": "หัวข้อ",
-        "description": "คำอธิบาย",
-        "upload": "ที่อัพโหลด",
-        "link": "ลิงค์",
-        "setUrl": "ตั้งค่า URL",
-        "save": "บันทึก",
-        "setClip": "ตัดคลิป",
-        "invalidURL": "URL ไม่ถูกต้อง",
-        "invalidFile": "ไฟล์ไม่ถูกต้อง",
-        "errorNoSource": "ไม่มีแหล่งที่มาของวิดีโอ",
-        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "รีเซ็ต",
-        "edit": "แก้ไข",
-        "title": "หัวข้อ",
-        "description": "คำอธิบาย",
-        "upload": "ที่อัพโหลด",
-        "link": "ลิงค์",
-        "setUrl": "ตั้งค่า URL",
-        "save": "บันทึก",
-        "setClip": "ตัดคลิป",
-        "invalidURL": "URL ไม่ถูกต้อง",
-        "invalidFile": "ไฟล์ไม่ถูกต้อง",
-        "errorNoSource": "ไม่มีแหล่งที่มาของ pdf",
-        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "รีเซ็ต",
-        "edit": "แก้ไข",
-        "title": "หัวข้อ",
-        "description": "คำอธิบาย",
-        "upload": "ที่อัพโหลด",
-        "link": "ลิงค์",
-        "setUrl": "ตั้งค่า URL",
-        "save": "บันทึก",
-        "setClip": "ตัดคลิป",
-        "invalidURL": "URL ไม่ถูกต้อง",
-        "invalidFile": "ไฟล์ไม่ถูกต้อง",
-        "errorNoSource": "ไม่มีแหล่งที่มาของรูปภาพ",
-        "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัยไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}",
-        "uploadedImage": "รูปภาพที่อัพโหลด",
-        "imageTitle": "ชื่อภาพ"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "คำถาม",
-        "Answers": "คำตอบ",
-        "AnswerQuestion": "ตอบคำถาม",
-        "SetYourAnswer": "กรุณาตอบคำถาม",
-        "NewQuestion": "คำถามใหม่",
-        "NewAnswer": "คำตอบใหม่",
-        "AnswerDetails": "รายละเอียดคำตอบ",
-        "answerOption": "ตัวเลือก",
-        "answerOptionExclusive": "พิเศษ",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "ตอบฟรี ...",
-        "SaveQuestion": "บันทึกคำถาม",
-        "SaveAnswer": "บันทึกคำตอบ",
-        "AddAnotherAnswer": "เพิ่มคำตอบอื่น",
-        "ErrorAnswers": "โปรดเพิ่มแม้แต่คำตอบเดียว",
-        "AlreadyAnswered": "ตอบไปแล้ว",
-        "TitlePlaceholder": "พิมพ์คำถามของคุณ",
-        "ContentPlaceholder": "ใส่ข้อมูลเพิ่มเติมที่นี่เพื่อช่วยคนตอบ",
-        "ErrorTitle": "ต้องมีคำถาม",
-        "Placeholder": "ตัวยึด"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "ประสบการณ์ใหม่",
-        "DefineTitle": "โปรดระบุชื่อเรื่อง",
-        "Create": "สร้าง"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "โทร",
-        "MaxCalls": "โทรสูงสุด",
-        "Update": "อัปเดต",
-        "NoCallsYet": "ยังไม่รับสาย",
-        "CallReasonTitle": "นี่โทรมาเรื่องอะไร?",
-        "WaitingRoom": "ห้องรอ"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

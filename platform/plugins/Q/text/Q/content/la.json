@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "{{Error CMXCIX per petitionem}}",
-        "canceled": "request cancellatam",
-        "500": "Internum distributorii errorem",
-        "404": "Non inveni: {{CMXCIX}}",
-        "501": "request intermisit"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Periodus finit. Page rursum reficere.",
-        "otherDomain": "Clausus crucem, ad petitionem domain domain in externis {{CMXCIX}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ICTUS",
+        "tap": "tap",
         "click": "click",
-        "yes": "etiam",
-        "no": "nihil",
-        "Tap": "ICTUS",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
         "Click": "Click",
-        "Yes": "Ita",
-        "No": "nullum"
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Ianuarii",
-        "2": "Februarius",
-        "3": "Martii",
-        "4": "Aprilis",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
         "5": "May",
         "6": "June",
-        "7": "Iulii",
+        "7": "July",
         "8": "August",
         "9": "September",
-        "10": "Octobris",
+        "10": "October",
         "11": "November",
         "12": "December"
     },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
+    },
     "audio": {
-        "allowMicrophoneAccess": "Tortor velit permittere accessum ad",
-        "record": "record",
-        "recording": "Book",
-        "remains": "permanet",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
         "maximum": "maximum",
-        "playing": "ludens",
-        "recorded": "memoriae",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "aut onerati",
-        "usethis": "uti haec",
-        "discard": "Relinquere",
-        "encoding": "modum translitterandi"
-    },
-    "alert": {
-        "title": "erecti"
-    },
-    "confirm": {
-        "title": "Constituo",
-        "ok": "Ita",
-        "cancel": "nullum"
-    },
-    "prompt": {
-        "title": "promptus",
-        "ok": "ad"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Lectio file Error",
-        "cameraCommands": {
-            "prompt": "Quid velis agere?",
-            "photo": "Ut nova photo",
-            "library": "Select a bibliotheca"
-        },
-        "tooSmall": "Placere eligere maior imago.",
-        "cropping": {
-            "title": "Adjust magnitudine dignitateque",
-            "touchscreen": "Et trahunt digitis tuis zoom",
-            "notTouchscreen": "Uti &amp; mus et rota to zoom drag"
-        }
-    },
-    "timestamp": {
-        "lastNight": "noctis",
-        "lastEvening": "tandem eve",
-        "yesterday": "hesterno",
-        "thisMorning": "hoc mane habes",
-        "today": "hodie",
-        "tonight": "hac nocte",
-        "tomorrowMorning": "Tom mane junctum",
-        "tomorrow": "cras",
-        "hoursAgo": "{{CMXCIX}} horis abhinc",
-        "hourAgo": "{{CMXCIX ante horam}}",
-        "minuteAgo": "{{Minute ante CMXCIX}}",
-        "minutesAgo": "{{CMXCIX}} minutes ago",
-        "secondAgo": "{{CMXCIX ante secundam}}",
-        "secondsAgo": "{{CMXCIX ago}}",
-        "fewSecondsAgo": "ante seconds",
-        "rightNow": "nunc",
-        "inSecond": "{{In secunda CMXCIX}}",
-        "inSeconds": "} {in} {CMXCIX seconds",
-        "inMinute": "{{In momento CMXCIX}}",
-        "inMinutes": "{{in}} minuta CMXCIX",
-        "inHour": "{{CMXCIX in hora}}",
-        "inHours": "{{CMXCIX per horas}}",
-        "inUnderMinute": "in momento in I"
+        "discard": "Discard",
+        "encoding": "Encoding"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Nec video fons",
-        "SkipAfter": "post Skip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
         "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Non fons pdf"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Satus set clip",
-        "ClipStart": "Satus clip",
-        "SetClipEnd": "Set finem clip",
-        "ClipEnd": "finis clip",
-        "StartMoreEnd": "Initium loci non plus quam finis positionis",
-        "EndLessStart": "Finis positio non minus quam principium positio",
-        "WhichInvalid": "Argumentum quod irritum"
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "magis",
+        "more": "more",
         "Menu": "Menu"
     },
-    "durations": {
-        "second": "secundus",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "horis",
-        "day": "dies",
-        "days": "diebus",
-        "week": "septem",
-        "weeks": "hebdomades",
-        "month": "mensis",
-        "months": "menses",
-        "year": "annos singulos",
-        "years": "annorum",
-        "decade": "decennium",
-        "decades": "decennium",
-        "century": "saeculum",
-        "centuries": "saecula"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

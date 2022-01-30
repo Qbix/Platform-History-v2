@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Einloggen",
-        "LogOut": "Ausloggen"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Legen Sie {{1}} als primäres {{2}} fest.",
-        "ChoosePassPhrase": "Wählen Sie eine <strong>Passphrase,<\/strong> um sich mit anzumelden. <br> Eine einfache Phrase, die aus wenigen Wörtern besteht, an die Sie sich leicht erinnern werden.",
-        "ChoosePassPhraseSeeSuggestions": "Wählen Sie eine gute <strong>Passphrase<\/strong> , um Ihr Konto zu schützen. Siehe die Vorschläge für einige Ideen.",
-        "LogOutAndTryAgain": "Abmelden und erneut versuchen",
-        "IfYouFeel": "Wenn Sie das Gefühl haben, dass etwas schief gelaufen ist, können Sie",
-        "SetIdentifierButtonTitle": "Von vorn anfangen"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Loslegen"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Loslegen",
-        "Authorize": "Genehmigen",
-        "TermsLabel": "Ich habe gelesen und stimme zu <br> zum {{link}}",
-        "TermsTitle": "Bedingungen",
-        "mustAgree": "Zuerst müssen Sie den Bedingungen zustimmen."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ich akzeptiere die {{link}}",
-        "TermsTitle": "Bedingungen"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Genehmigung",
-        "prompt": "Möchten Sie Benachrichtigungen aktivieren? Sie erhalten Echtzeit-Updates zu wichtigen Dingen.",
-        "yes": "Ja",
-        "no": "Nein",
-        "WelcomePleaseVerifyEmail": "Herzlich willkommen! Bitte bestätige deine Email Adresse.",
-        "WelcomeVerifyEmail": "Herzlich willkommen! Bestätige deine Email-Adresse.",
-        "ForgetPass": "Hey, hast du deine Passphrase vergessen?",
-        "PassphraseSaved": "Ihre Passphrase wurde gespeichert.",
-        "IdentifierActivated": "Dein {{type}} wurde aktiviert.",
-        "CompletedActivation": "Sie haben die Benutzeraktivierung abgeschlossen.",
-        "CompletedActivationLogIn": "Sie haben die Benutzeraktivierung abgeschlossen. Melden Sie sich jetzt an."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Bitte Label auswählen.",
-        "inviteUser": "Benutzer einladen",
-        "selectRole": "Wählen Sie Rolle",
-        "inviteRole": "{{role}} einladen"
-    },
-    "invalidLanguageSelected": "Ungültige Sprache ausgewählt",
     "contacts": {
         "dialog": {
-            "title": "Kontakt auswählen",
-            "SearchByName": "Suche mit Name",
-            "CreateAccount": "+ Neuer Kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nicht gefunden",
-            "EmptyContacts": "Kontakte nicht gefunden ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Kontakt auswählen von {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Herzlich willkommen",
-        "directions": "Erstellen Sie ein Konto oder melden Sie sich an.",
-        "directionsNoRegister": "Melden Sie sich an, wenn Sie ein Konto haben.",
-        "goButton": "Gehen",
-        "passphrase": "Geben Sie Ihre Passphrase ein:",
-        "loginButton": "Loslegen",
-        "registerButton": "Loslegen",
-        "resendButton": "Aktivierungsnachricht senden",
-        "forgot": "Hab&#39;s vergessen?",
-        "resendConfirm": "Möchten Sie eine Nachricht senden, um Ihre Passphrase zurückzusetzen?",
-        "resendSuccess": "Suchen Sie nach einer Nachricht, um Ihre Passphrase zurückzusetzen",
-        "resendClose": "Schließen",
-        "noPassphrase": "Bevor Sie sich anmelden können, müssen Sie eine Passphrase festlegen, indem Sie auf den Link in Ihrer Aktivierungsnachricht klicken.",
-        "notVerified": "Sie müssen sich selbst eine Aktivierungsnachricht senden, um sich anmelden zu können.",
-        "emailExists": "Haben Sie bereits versucht, sich mit dieser E-Mail zu registrieren? Wenn ja, überprüfen Sie Ihren Posteingang, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie hier, um die Nachricht erneut zu senden<\/a>",
-        "mobileExists": "Haben Sie schon einmal versucht, sich mit dieser Handynummer zu registrieren? Wenn ja, überprüfen Sie Ihre SMS, um Ihr Konto zu aktivieren. <a href='#resend' class='Q_button Users_activation_resend'>Klicken Sie hier, um die Nachricht erneut zu senden<\/a>",
-        "usingOther": "oder du kannst",
-        "prompt": "Wähle einen Benutzernamen:",
-        "newUser": "oder erstellen Sie unten ein neues Konto",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "Ihre Handynummer oder E-Mail",
-            "mobile": "Geben Sie Ihre Handynummer ein",
-            "email": "Geben sie ihre E-Mailadresse ein",
-            "username": "Nutzername"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Nutzungsbedingungen akzeptieren?",
-        "facebookNoEmail": "In Ihrem Facebook-Konto fehlt eine bestätigte E-Mail-Adresse. Einfach auf native Weise einloggen.",
-        "picTooltip": "Sie können dieses Bild später ändern",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Melden Sie sich zum Zeitpunkt {{timestamp}} bei {{host}} an",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Weiterleitung an Wallet",
-                "content": "Sobald Sie dieses Dialogfeld schließen, werden Sie zu Ihrem Wallet weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Füge eine Möglichkeit hinzu, sich anzumelden",
-        "sendMessage": "Aktivierungsnachricht senden",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "Geben Sie Ihre Handynummer oder E-Mail-Adresse ein",
-            "mobile": "Geben sie Ihre Mobilfunknummer ein",
-            "email": "Geben sie ihre E-Mailadresse ein",
-            "username": "Nutzername"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konto",
-        "areUsing": "Sie verwenden {{platform}} als",
-        "noLongerUsing": "Sie sind nicht mehr mit {{platform}} verbunden als",
-        "doAuth": "Melden Sie sich mit diesem Konto an",
-        "doSwitch": "Wechseln Sie zu diesem Konto"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Inhaber",
-        "Admin": "Administrator",
-        "Member": "Mitglied",
-        "Guest": "Gast",
-        "Host": "Gastgeber"
-    },
-    "analytics": {
-        "Title": "Analytik",
-        "Daily": "Täglich",
-        "Weekly": "Wöchentlich",
-        "Monthly": "Monatlich",
-        "Application": "Anwendung",
-        "Pages": "Seiten",
-        "Services": "Dienstleistungen",
-        "Faq": "FAQ",
-        "WeekDays": "Wochentage"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

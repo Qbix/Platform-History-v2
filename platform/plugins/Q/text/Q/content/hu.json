@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "{{status}} hiba történt a kérés során",
-        "canceled": "A kérés törölve",
-        "500": "Belső Szerverhiba",
-        "404": "Nem található: {{url}}",
-        "501": "A kérés megszakadt"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "A munkamenet ideje lejárt. Frissítse az oldalt, és próbálja újra.",
-        "otherDomain": "A {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "Koppintson a",
-        "click": "kettyenés",
-        "yes": "Igen",
-        "no": "nem",
-        "Tap": "Koppintson a",
-        "Click": "Kattints",
-        "Yes": "Igen",
-        "No": "Nem"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "január",
-        "2": "február",
-        "3": "március",
-        "4": "április",
-        "5": "Lehet",
-        "6": "június",
-        "7": "július",
-        "8": "augusztus",
-        "9": "szeptember",
-        "10": "október",
-        "11": "november",
-        "12": "december"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Kérjük, engedélyezze a mikrofonhoz való hozzáférést",
-        "record": "Rekord",
-        "recording": "Felvétel",
-        "remains": "maradványok",
-        "maximum": "maximális",
-        "playing": "Játék",
-        "recorded": "feljegyzett",
-        "clip": "csipesz",
-        "orupload": "Vagy Feltöltés",
-        "usethis": "Használd ezt",
-        "discard": "Dobja",
-        "encoding": "kódolás"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Éber"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "megerősít",
-        "ok": "Igen",
-        "cancel": "Nem"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Gyors",
-        "ok": "Megy"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Hiba a fájl olvasása közben",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Mit szeretnél csinálni?",
-            "photo": "Új fotó készítése",
-            "library": "Válasszon a könyvtárból"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Kérjük, válasszon nagyobb képet.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Állítsa be a méretet és a pozíciót",
-            "touchscreen": "Használja az ujjait nagyításhoz és húzáshoz",
-            "notTouchscreen": "Használja az egeret és a kereket a nagyításhoz és a húzáshoz"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "tegnap éjjel",
-        "lastEvening": "utolsó előestéjén",
-        "yesterday": "tegnap",
-        "thisMorning": "ma reggel",
-        "today": "Ma",
-        "tonight": "ma este",
-        "tomorrowMorning": "tom reggel",
-        "tomorrow": "holnap",
-        "hoursAgo": "{{h}} órával ezelőtt",
-        "hourAgo": "{{h}} órával ezelőtt",
-        "minuteAgo": "{{m}} perccel ezelőtt",
-        "minutesAgo": "{{m}} perccel ezelőtt",
-        "secondAgo": "{{s}} másodperccel ezelőtt",
-        "secondsAgo": "{{s}} másodperccel ezelőtt",
-        "fewSecondsAgo": "másodperccel ezelőtt",
-        "rightNow": "épp most",
-        "inSecond": "{{s}} másodperc alatt",
-        "inSeconds": "{{s}} másodperc alatt",
-        "inMinute": "{{m}} perc múlva",
-        "inMinutes": "{{m}} perc alatt",
-        "inHour": "{{h}} óra múlva",
-        "inHours": "{{h}} óra alatt",
-        "inUnderMinute": "1 perc alatt"
-    },
-    "tabs": {
-        "more": "több",
-        "Menu": "Menü"
-    },
-    "video": {
-        "clip": "csipesz",
-        "errorNoSource": "Nincs video forrás",
-        "SkipAfter": "Ugrás után",
-        "Skip": "Ugrás"
-    },
-    "pdf": {
-        "clip": "csipesz",
-        "errorNoSource": "Nincs pdf forrás"
-    },
-    "clip": {
-        "SetClipStart": "A Clip Start beállítása",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Állítsa be a klip végét",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "A kiindulási helyzet nem lehet több, mint a véghelyzet",
-        "EndLessStart": "A véghelyzet nem lehet kevesebb, mint a kiindulási helyzet",
-        "WhichInvalid": "Érvénytelen érv"
-    },
-    "durations": {
-        "second": "második",
-        "seconds": "másodpercig",
-        "minute": "perc",
-        "minutes": "percek",
-        "hour": "órák",
-        "day": "nap",
-        "days": "napok",
-        "week": "hét",
-        "weeks": "hétig",
-        "month": "hónap",
-        "months": "hónapok",
-        "year": "év",
-        "years": "évek",
-        "decade": "évtized",
-        "decades": "évtizedekig",
-        "century": "század",
-        "centuries": "századokban"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -371,6 +371,8 @@ class Q_Utils
 	 *  You can also change this default using the config Db/normalize/characters
 	 * @param {integer} [$numChars=200] Defaults to 200, maximum length of normalized string
 	 * @param {boolean} [$keepCaseIntact=false] If true, doesn't convert to lowercase
+	 * @return {string}
+	 * @throws {Q_Exception_RequiredField} if $text is null
 	 */
 	static function normalize(
 		$text,
@@ -379,6 +381,9 @@ class Q_Utils
 		$numChars = 200,
 		$keepCaseIntact = false)
 	{
+		if (!isset($text)) {
+			throw new Q_Exception_RequiredField(array('field' => 'text'));
+		}
 		if (!isset($characters)) {
 			$characters = '/[^\p{L}0-9]+/u';
 			if (class_exists('Q_Config')) {

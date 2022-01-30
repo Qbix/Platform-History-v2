@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "מענטשן איך פארבעטן",
-        "Streams\/invitedMe": "ווער געבעטן מיר",
-        "AreYouAgree": "ביסטו מסכים?",
-        "Yes": "יא",
-        "No": "ניין"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "וואָס טאָן דו הנאה?",
-        "CanAdd": "אויב איר נאָך קענען נישט געפֿינען וואָס איר זוכט פֿאַר, איר קענען לייגן אַ נייַע אינטערעס:",
-        "TrySynonyms": "צי ניט זען עס? פרובירט עטלעכע סינאָנימס.",
-        "AddUnderCategory": "לייג אונטער קאַטעגאָריע ...",
-        "Other": "אנדערע",
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
         "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "אָנזאָג איז געווען פלאַגד פֿאַר אַדמין איבערבליק. טאַפּט ווידער צו ונפלאַג.",
-        "noOneSaid": "קיין איינער האט געזאגט עפּעס",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
         "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "נאָענט דעם שמועס?",
-        "closeChatConfirm": "זענט איר זיכער איר ווילן צו פאַרמאַכן דעם שמועס?",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
         "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "ניין",
-        "earlierComments": "פריער באַמערקונגען",
-        "Subscribed": "שטום נאָטיפיקאַטיאָנס",
-        "Unsubscribed": "באַקומען נאָוטאַפאַקיישאַנז",
-        "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם שמועס.",
-        "startedConversation": "סטאַרטעד אַ שמועס",
-        "RealTimeCall": "פאַקטיש צייט רופן",
-        "SearchByName": "זוכן דורך נאָמען",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} באַזוכן דעם שמועס",
-            "Join": "{{displayName}} האָט זיך אייַנגעשלאָסן אין דעם שמועס",
-            "Leave": "{{displayName}} האָט איבערגעלאָזט דעם שמועס",
-            "RelatedTo": "{{displayName}} האָט אָנגעהויבן אַ {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "אָנזאָג {{& message.fields.type}} צו {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} האט געזאגט:",
-        "Streams\/changed": "ענדערונגען אין {{stream.fields.title}}",
-        "Streams\/invite": "איר זענען פארבעטן צו {{& stream.fields.title}}",
-        "Streams\/announcement": "אָנזאָג אין {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} געביטן טייַך אַקסעס",
-        "Streams\/chat\/edit": "שמועסן אָנזאָג ענדערונגען",
-        "Streams\/chat\/remove": "שמועסן אָנזאָג אראפגענומען",
-        "Streams\/closed": "{{stream.fields.title}} איז פארשלאסן געווארן",
-        "Streams\/task\/progress": "פּראָגרעס געמאכט אויף {{stream.fields.title}}",
-        "Streams\/task\/complete": "אַרבעט געענדיקט: {{stream.fields.title}}",
-        "Streams\/task\/error": "טעות בעשאַס: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ינקאָמינג אָנזאָג",
-        "Streams\/relatedTo\/Streams\/call": "נייַ רופן סטאַרטעד אין {{toTitle}}",
-        "Streams\/relatedTo\/*": "נייַ {{relationDisplayType}} אין {{toTitle}}",
-        "Streams\/relatedFrom\/*": "צוגעגעבן צו {{toTitle}} ווי {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} דערמאנט איר אין אַ באַמערקונג",
-        "Streams\/call": "{{displayName}} סטאַרטעד אַ פאַקטיש-צייט רופן",
-        "ManageEmailSubscriptions": "פירן דיין E- בריוו אַבאָנעמענץ",
-        "IfUnsubscribe": "אויב איר ווילט אַבאָנירן"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} פארבעטן איר צו {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "קלייַבן פון דיין קאַנטאַקס",
-            "chooseAgainFromContacts": "קלייַבן ווידער פון קאַנטאַקס",
-            "inviteSelectedContacts": "פארנומען סעלעקטעד קאָנטאַקטן",
-            "selectFromContacts": "אויסקלייַבן פון קאָנטאַקטן",
-            "photo": "נעם א בילד",
-            "photoInstruction": "אויב די מענטש וואס סקאַנד דיין QR קאָד איז אין פאָרויס פון איר, נעמען אַ פאָטאָ פון זיי",
-            "to": "צו: {{Stream Title}}",
-            "go": "גיין",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
             "title": "Invite",
-            "placeholder": "מאָביל נומער אָדער בליצפּאָסט אַדרעס",
-            "orInvite": "אָדער פאַרבעטן מענטשן דורך ניצן:",
-            "QR": "{{ClickOrTap}} צו פּראָדוצירן QR קאָד",
-            "QRtitle": "יבערקוקן דעם קר קאָד",
-            "QRscanned": "זיי סקאַנד עס!",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "byEmail": "Email",
-            "byText": "טעקסט",
-            "byFacebook": "פאַסעבאָאָק",
-            "byTwitter": "טוויטער",
-            "scannedQR": "{{ClickOrTap}} אויב די קאָד איז געווען סקאַנד",
-            "copyLink": "{{ClickOrTap}} צו צייכענען די פאַרבעטן לינק",
-            "userChooserPlaceholder": "זוך מיטן נאָמען"
+            "byText": "Text",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "היי, קאָנטראָלירן דעם אויס",
-            "PleaseVisitLink": "ביטע באַזוכן די פאלגענדע לינק:",
-            "InvitingYou": "איך בין אייך ינווייטינג צו {{title}}",
-            "HasInvitedYou": "{{displayName}} האָט איר פארבעטן צו {{title}}",
-            "HasMentionedYou": "{{displayName}} האָט איר דערמאנט אין &quot;{{title}}&quot;",
-            "YOUAREINVITED": "איר זענט פאַרבעטן!",
-            "AcceptInvite": "אָננעמען פאַרבעטן"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "איר זענט פארבעטן צו {{title}}. ביטע צאַפּן {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "איר האָט שוין פארבעטן. {{ClickOrTap}} דאָ צו אָננעמען און פאַרבינדן."
-        },
-        "command": "לאַדן",
-        "youCanNowPaste": "איר קענט איצט פּאַפּירן דעם לינק ערגעץ צו פארבעטן מענטשן"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "ינווייץ זענען געשיקט פון אונדזער נומער, וואָס דיין פריינט טאָן ניט נאָך דערקענען. גיי אַרויף מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
-            "confirm": "ינווייץ זענען געשיקט פון אונדזער נומער, וואָס דיין פריינט טאָן ניט נאָך דערקענען. איר וואָלט ווי צו נאָכגיין מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
-            "check": "היי, איך נאָר געשיקט איר אַ לאַדן צו די {{app}} אַפּ. ביטע טשעק דיין SMS און גיט די לינקס!",
-            "CheckYourMobile": "ביטע טשעק SMS און נאָכגיין ינסטראַקשאַנז!"
-        },
-        "email": {
-            "alert": "ינווייץ זענען געשיקט פון אונדזער פעלד, וואָס דיין פריינט טאָן ניט נאָך דערקענען. גיי אַרויף מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
-            "confirm": "ינווייץ זענען געשיקט פון אונדזער פעלד, וואָס דיין פריינט טאָן ניט נאָך דערקענען. איר וואָלט ווי צו נאָכגיין מיט אַ שנעל טעקסט צו לאָזן זיי וויסן די ינווייטינג געקומען פון איר, אַסקינג זיי צו גיט די לינק.",
-            "subject": "האָט איר באַקומען אַ פאַרבעטן?",
-            "body": "היי, איך נאָר געשיקט איר אַ לאַדן צו די {{app}} אַפּ. ביטע טשעק דיין בליצפּאָסט און גיט די לינקס אין דאָרט!",
-            "CheckYourEmail": "ביטע טשעק דיין E- בריוו און נאָכגיין ינסטראַקשאַנז!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "געבן מיקראָפאָן",
-            "cameraTitle": "Enable Camera",
-            "cameraAndMicrophoneTitle": "געבן קאַמעראַ און מיקראָפאָן",
-            "dialogTitle": "קאַנעקטינג",
-            "microphoneBtn": "געבן מיקראָפאָן",
-            "cameraBtn": "געבן קאַמעראַ",
-            "cameraAndMicrophoneBtn": "געבן קאַמעראַ און מיקראָפאָן"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "ינסטראַקשאַנז",
-            "permissionDenied": "דערלויבעניש פֿאַר {{kind}} איז אפגעזאגט. נאָכפאָלגן די סטעפּס צו נוצן עס:",
-            "point1": "גיין צו &quot;סעטטינגס&quot; -&gt; &quot;אַוואַנסירטע&quot; -&gt; &quot;פּריוואַטקייט און זיכערהייט&quot; -&gt; &quot;מאַפּע סעטטינגס&quot; -&gt; &quot;אַפּאַראַט&quot; אָדער &quot;מאַפּע סעטטינגס&quot; -&gt; &quot;מיקראָפאָן&quot;",
-            "point2": "אַראָפּנעמען {{hostname}} פון די &quot;בלאַק&quot; רשימה"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "ינסטראַקשאַנז",
-            "permissionDenied": "דערלויבעניש פֿאַר {{kind}} איז אפגעזאגט. ביטע רילאָוד דעם בלאַט און באַשטעטיקן דעם צוטריט צו {{kind}} צו פאַרבינדן די זיצונג."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "ינסטראַקשאַנז",
-            "permissionDenied": "דערלויבעניש פֿאַר {{kind}} איז אפגעזאגט. נאָכפאָלגן די סטעפּס צו נוצן עס:",
-            "point1": "גיין צו דיין אַנדרויד סעטטינגס",
-            "point2": "עפֿן &quot;אַפּפּס &amp; נאָוטאַפאַקיישאַנז&quot;",
-            "point3": "געפֿינען &quot;{{communityName}}&quot; און עפֿענען דאָס",
-            "point4": "צאַפּן אויף פּערמישאַנז",
-            "point5": "ענאַבלע {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "ינסטראַקשאַנז",
-            "permissionDenied": "דערלויבעניש פֿאַר {{kind}} איז אפגעזאגט. נאָכפאָלגן די סטעפּס צו נוצן עס:",
-            "point1": "גיין צו דיין יאָס סעטטינגס",
-            "point2": "עפֿנט &quot;פּריוואַטקייט&quot;",
-            "point3": "געפֿינען {{kind}} און עפֿענען דאָס",
-            "point4": "געפֿינען &quot;{{communityName}}&quot; און געבן"
-        },
-        "notices": {
-            "youJoinedRoom": "איר זיך איינגעשריבן די צימער",
-            "joining": "זיך איינגעשריבן: {{userName}}",
-            "sbLeftRoom": "{{userName}} לינקס דער פּלאַץ",
-            "youLeftRoom": "איר לינקס דער פּלאַץ",
-            "codeCopied": "איר לינקס דער פּלאַץ",
-            "sbBeganFbLive": "{{userName}} סטאַרטעד בראָדקאַסט דעם רופן אין פאַסעבאָאָק",
-            "sbStoppedFbLive": "{{userName}} פארשטאפט בראָדקאַסטינג דעם רוף אין פאַסעבאָאָק",
-            "youBeganFbLive": "איר האָט בראָדקאַסט די רופן אין פאַסעבאָאָק",
-            "youStoppedFbLive": "איר סטאַפּט בראָדקאַסטינג דעם רוף אין פאַסעבאָאָק",
-            "linkCopiedToCb": "לינק קאַפּיד צו קליפּבאָרד",
-            "codeCopiedToCb": "קאָד קאַפּיד צו קליפּבאָרד",
-            "userHasNoVideo": "דער באַטייליקטער האט קיין ווידעא",
-            "openInBrowserAlert": "עפֿן לינק אין Safari בלעטערער צו פאַרבינדן די זיצונג.",
-            "youBeganVideoRecording": "איר האָט רעקאָרדינג די זיצונג",
-            "youStoppedVideoRecording": "איר סטאַפּט רעקאָרדינג די זיצונג",
-            "switchingRoom": "סוויטשינג צימער ...",
-            "forceDisconnecting": "איר וועט זיין דיסקאַנעקטיד אין 5 סעקונדעס",
-            "youStartedLive": "איר האָט סטאַרטעד בראָדקאַסטינג דעם רופן צו מנהג RTMP",
-            "youStoppedLive": "איר האָט פארשטאפט בראָדקאַסטינג דעם רופן צו מנהג RTMP",
-            "sbStartedLiveStreaming": "{{userName}} האָט אָנגעהויבן לעבן",
-            "sbStoppedLiveStreaming": "{{userName}} האָט געענדיקט לעבן",
-            "liveStopped": "א טעות ביי שיקט ווידעא צו ענדפּוינט פארגעקומען"
-        },
-        "settingsPopup": {
-            "webCamera": "וועב קאַמעראַ",
-            "screenSharing": "סקרין ייַנטיילונג",
-            "shareAnotherScreen": "שער אן אנדער פאַרשטעלן",
-            "turnOffCameras": "קער אַוועק אַלע קאַמעראַס",
-            "startFBLive": "אָנהייב פאַסעבאָאָק ליוועסטרעאַם",
-            "stopFBLive": "האַלטן פאַסעבאָאָק ליוועסטרעאַם",
-            "fbLiveTitle": "לייוו טיטל",
-            "fbLiveDescription": "לעבן באַשרייַבונג",
-            "fbOnlyMeLiveAccess": "בלויז מיר",
-            "fbFriendsAccess": "פרייַנד",
-            "fbPublicAccess": "עפנטלעך",
-            "fbStartLive": "גיי לייוו",
-            "fbStopLive": "סוף לעבן",
-            "fbEmbedCode": "עמבעד",
-            "copy": "קאָפּיע",
-            "turnOffVideo": "ייַנטיילן אַפּאַראַט \/ פאַרשטעלן ייַנטיילונג",
-            "turnOffScreenSharing": "ייַנטיילן פאַרשטעלן ייַנטיילונג",
-            "cameraIsTurnedOff": "קאַמעראַ איז פארקערט אַוועק",
-            "startRecording": "אָנהייב רעקאָרדינג",
-            "stopRecording": "האַלטן רעקאָרדינג",
-            "recordingInProgress": "די רעקאָרדינג איז אין פּראָגרעס ...",
-            "publishOnTimeline": "אַרויסגעבן אויף טיימליין",
-            "publishToGroup": "אַרויסגעבן צו גרופּע",
-            "turnOffAudioInput": "שטום מיקראָפאָן",
-            "micIsTurnedOff": "מיקראָפאָן איז פארקערט אַוועק",
-            "start": "אָנהייב",
-            "stop": "אָפּשטעל",
-            "streamingSettings": "סעטטינגס",
-            "streamToRTMP": "סטרים צו מנהג RTMP"
-        },
-        "participantsPopup": {
-            "disconnect": "דיסקאַנעקט",
-            "floatingScreens": "פלאָוטינג סקרינז",
-            "tiledScreens": "טיילד סקרינז",
-            "loudestExceptMe": "די לאָודאַסט אַחוץ מיר",
-            "maximizeLoudest": "מאַקסאַמייז לאַודאַסט",
-            "staticMaximized": "סטאַטיק מאַקסאַמייזד",
-            "manual": "מאַנואַל",
-            "fullScreen": "גאנצע סקרין",
-            "turnOffCamera": "באַהאַלטן ווידעא",
-            "turnOffAudio": "שטום אַודיאָ",
-            "turnOffScreenSharing": "באַהאַלטן ייַנטיילונג פון פאַרשטעלן",
-            "turnOnCamera": "ווייַזן ווידעא",
-            "turnOnAudio": "ונטערטעניק אַודיאָ",
-            "turnOnScreenSharing": "ווייַזן פאַרשטעלן ייַנטיילונג"
-        },
-        "notAllowedToJoinCall": "איר האָט נישט קיין דערלויבעניש צו פאַרבינדן דעם טייַך.",
-        "streamTitle": "{{1}} לעבן רופן",
-        "preview": {
-            "preamble": "פאַרזאַמלונג:",
-            "Meeting": "באַגעגעניש",
-            "MeetingEnded": "פאַרזאַמלונג געענדיקט"
-        },
-        "preparing": {
-            "micIsOff": "מיק איז אַוועק",
-            "micIsOn": "מיקראָפאָן איז אויף",
-            "cameraIsOff": "קאַמעראַ איז אַוועק",
-            "cameraIsOn": "קאַמעראַ איז אויף",
-            "screenSharingIsOn": "Screensharing איז אויף",
-            "screenSharingIsOff": "שער פאַרשטעלן",
-            "joinNow": "פאַרבינדן די רופן"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "אַרייַנגעשיקט אַ <em>{{message.fields.type}}<\/em> אָנזאָג צו {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "קאַמענטאַד אויף",
-            "in": "אין",
-            "body": "אין {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "האט שוין אַרייַנגעשיקט צו",
-                "byAvatar": "דורך {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "האט אַ נייַע {{instructions.fromDisplayType}}",
-                "byAvatar": "צוגעגעבן דורך {{avatar.displayName}}"
-            },
-            "startedCallIn": "סטאַרטעד אַ רוף אין"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "פאַרבעטן",
-            "description": "ינבאָקס פֿאַר ינוויטיישאַנז"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "ריסאָרס",
-            "description": "טייַך פֿאַר אָנפירונג אַקסעס צו אַ מיטל און פּאָסטינג אַרטיקלען וועגן דערהייַנטיקונגען"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "פֿאַר ריסיווינג דערהייַנטיקונגען וועגן פּראָגרעס אויף אַ זיכער אַרבעט",
-            "displayType": "אַרבעט"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "קאַטעגאָריע פֿאַר טאַסקס",
-            "displayType": "טאַסקס"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "אַ פּראָסט דערפאַרונג פֿאַר מיטגלידער פון אַ קהל",
-            "displayType": "פּראָסט דערפאַרונג פֿאַר מיטגלידער פון אַ קהל"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "גרוס מיט וואָס אַ באַניצער קענען באַקענען זיך",
-            "displayType": "גרוס"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "נומער",
-            "description": "מאַטאַמאַטיקאַל נומער"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "דאַטע",
-            "description": "דאַטע"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "טעקסט",
-            "description": "גוף פון טעקסט"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "טעקסט",
-            "description": "קליין גוף פון טעקסט"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "טעקסט",
-            "description": "מיטל גוף פון טעקסט"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "אימעיל אדרעס",
-            "description": "אימעיל אדרעס"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "טעלעפאן נומער",
-            "description": "טעלעפאָן נומער"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "לינק אויף די וועב"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "בילד",
-            "description": "וויסואַל בילד",
-            "newItem": "לייג בילד"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "בילד גאַלערי",
-            "description": "גאַלעריע פון בילדער"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "אלבאם",
-            "description": "אַן אלבאם צו וואָס פאַרשידן מעדיע איז פארבונדן"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "טעקע",
-            "description": "ופּלאָאַדעד טעקע",
-            "newItem": "לייג טעקע"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip",
-            "newItem": "לייג אַודיאָ"
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "ווידעא קליפּ",
-            "description": "ווידעא קלעמערל",
-            "newItem": "לייג ווידעא"
-        },
-        "Streams\/live": {
-            "displayType": "ליוועסטרעאַם",
-            "description": "לעבן אַודיאָ אָדער ווידעא"
-        },
-        "Streams\/category": {
-            "displayType": "קאַטעגאָריע",
-            "description": "אַ קאַטעגאָריע צו וואָס אנדערע סטרימז קענען זיין שייך"
-        },
-        "Streams\/participating": {
-            "displayType": "פּאַרטיסאַפּייטינג אינדעקס",
-            "description": "סטרימז זענען פֿאַרבונדן \/ אַנרילייטיד צו דעם ווען אַ באַניצער דזשאָינס \/ בלעטער"
-        },
-        "Streams\/interest": {
-            "displayType": "אינטערעס",
-            "description": "רעפּראַזענץ אַ באַניצער &#39;ס אינטערעס אין אַ זיכער טעמע"
-        },
-        "Streams\/incoming": {
-            "displayType": "אָנקומענדיק",
-            "description": "דעסטיניישאַן פֿאַר אַרטיקלען געשיקט דורך אנדערע ניצערס"
-        },
-        "Streams\/chat": {
-            "displayType": "שמועס",
-            "description": "אַ שמועס צווישן יוזערז, מיט געשיכטע"
-        },
-        "Streams\/webrtc": {
-            "displayType": "פאַקטיש-צייט רופן",
-            "description": "אַ פאַקטיש-צייט ווידעא \/ אַודיאָ רופן"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF דאָקומענט",
-            "description": "PDF דאָקומענט",
-            "newItem": "לייג PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "פראגע",
-            "description": "קשיא טייַך"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "ענטפער",
-            "description": "ענטפֿערן טייַך"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "רופט",
-            "description": "קאַטעגאָריע פֿאַר סטרימז\/וועברטק",
-            "MaxRelationsExceeded": "מאַקס קאַללס יקסידיד"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "טיטל",
-        "Subscribed": "אַבאָנירן",
-        "Participants": "פּאַרטיסאַפּאַנץ",
-        "AreYouSureRemoveIdentifier": "ביסט איר זיכער צו באַזייַטיקן דעם ידענטיפיער?",
-        "AreYouSureUnsubscribeIdentifier": "זענט איר זיכער אַבאָנירן דעם ידענטיפיער? עס וועט קער אַוועק נאָוטאַפאַקיישאַנז צו דעם ידענטיפיער.",
-        "AreYouSureUnsubscribeDevice": "זענט איר זיכער אַבאָנירן צו דעם מיטל? עס וועט קער אַוועק נאָוטאַפאַקיישאַנז צו דעם מיטל.",
-        "Identifiers": "ידענטיפיערס",
-        "Devices": "דעוויסעס",
-        "Streams": "סטרעאַמס",
-        "AreYouSureRemoveParticipant": "זענט איר זיכער אַז איר ווילט באַזייַטיקן דעם באַטייליקטער?",
-        "RemoveParticipant": "אַראָפּנעמען באַטייליקטער"
-    },
     "menu": {
-        "placeholder": "טיפּ בלאַט טיטל",
-        "ModTab": "מאָדיפיצירן יטעם",
-        "Save": "היט",
-        "Delete": "ויסמעקן",
-        "Submenu": "סובמענו"
-    },
-    "errors": {
-        "HiddenFromYou": "דער אינהאַלט איז פאַרבאָרגן פון איר."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "רעקאָרד",
-        "reset": "באַשטעטיק",
-        "edit": "רעדאַגירן",
-        "title": "טיטל",
-        "description": "באַשרייַבונג",
-        "upload": "צופֿעליקער",
-        "link": "לינק",
-        "setUrl": "שטעלן URL",
-        "save": "היט",
-        "setClip": "שנייַדן אָוט קלעמערל",
-        "invalidURL": "אונגילטיג URL",
-        "invalidFile": "אונגילטיג טעקע",
-        "errorNoSource": "קיין אַודיאָ מקור",
-        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
-        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "באַשטעטיק",
-        "edit": "רעדאַגירן",
-        "title": "טיטל",
-        "description": "באַשרייַבונג",
-        "upload": "צופֿעליקער",
-        "link": "לינק",
-        "setUrl": "שטעלן URL",
-        "save": "היט",
-        "setClip": "שנייַדן אָוט קלעמערל",
-        "invalidURL": "אונגילטיג URL",
-        "invalidFile": "אונגילטיג טעקע",
-        "errorNoSource": "קיין ווידעא מקור",
-        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
-        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "באַשטעטיק",
-        "edit": "רעדאַגירן",
-        "title": "טיטל",
-        "description": "באַשרייַבונג",
-        "upload": "צופֿעליקער",
-        "link": "לינק",
-        "setUrl": "שטעלן URL",
-        "save": "היט",
-        "setClip": "שנייַדן אָוט קלעמערל",
-        "invalidURL": "אונגילטיג URL",
-        "invalidFile": "אונגילטיג טעקע",
-        "errorNoSource": "קיין פּדף מקור",
-        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
-        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "באַשטעטיק",
-        "edit": "רעדאַגירן",
-        "title": "טיטל",
-        "description": "באַשרייַבונג",
-        "upload": "צופֿעליקער",
-        "link": "לינק",
-        "setUrl": "שטעלן URL",
-        "save": "היט",
-        "setClip": "שנייַדן אָוט קלעמערל",
-        "invalidURL": "אונגילטיג URL",
-        "invalidFile": "אונגילטיג טעקע",
-        "errorNoSource": "קיין בילד מקור",
-        "uploadLimit": "מאקס טעקע גרייס: {{size}}",
-        "errorFileSize": "אנטשולדיגט, אָבער די טעקע איז צו גרויס.<br> מאַקס טעקע גרייס איז {{size}}",
-        "uploadedImage": "ופּלאָאַדעד בילד",
-        "imageTitle": "בילד טיטל"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "פֿראגן",
-        "Answers": "ענטפֿערס",
-        "AnswerQuestion": "ענטפער פראגע",
-        "SetYourAnswer": "ביטע ענטפֿערן די קשיא",
-        "NewQuestion": "ניו קשיא",
-        "NewAnswer": "ניו ענטפער",
-        "AnswerDetails": "ענטפער דעטאַילס",
-        "answerOption": "אָפּציע",
-        "answerOptionExclusive": "ויסשליסיק",
-        "answerTextarea": "טעקסטאַרעאַ",
-        "FreeAnswer": "פריי ענטפער ...",
-        "SaveQuestion": "היט פֿראַגע",
-        "SaveAnswer": "היט ענטפער",
-        "AddAnotherAnswer": "לייג אן אנדער ענטפער",
-        "ErrorAnswers": "ביטע לייגן אפילו איין ענטפער",
-        "AlreadyAnswered": "שוין געענטפערט",
-        "TitlePlaceholder": "טיפּ דיין קשיא",
-        "ContentPlaceholder": "שטעלן דאָ נאָך אינפֿאָרמאַציע צו העלפֿן מענטשן ענטפֿערן",
-        "ErrorTitle": "קשיא פארלאנגט",
-        "Placeholder": "אָרטהאָלדער"
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "ניו עקספּעריענסע",
-        "DefineTitle": "ביטע דעפינירן א טיטל",
-        "Create": "שאַפֿן"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "רופט",
-        "MaxCalls": "מאַקס רופט",
-        "Update": "דערהייַנטיקן",
-        "NoCallsYet": "קיין רופט נאָך",
-        "CallReasonTitle": "וואָס איז דעם רופן וועגן?",
-        "WaitingRoom": "ווארט צימער"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

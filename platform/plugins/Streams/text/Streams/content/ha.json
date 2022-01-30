@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Mutane da na kira su",
-        "Streams\/invitedMe": "Wane ne ya gayyace ni",
-        "AreYouAgree": "Kun yarda?",
-        "Yes": "Na&#39;am",
-        "No": "A&#39;a"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Me kuke jin dadi?",
-        "CanAdd": "Idan har yanzu ba za ka iya samun abin da kake nema ba, za ka iya ƙara sabon sha&#39;awa a ƙasa:",
-        "TrySynonyms": "Shin ba ku gani ba? Gwada wasu alamu.",
-        "AddUnderCategory": "Ƙara a ƙarƙashin category ...",
-        "Other": "Sauran",
-        "Unlisted": "Sako"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "An tayi sakon da aka yi don dubawa. Matsa sake zuwa unflag.",
-        "noOneSaid": "Babu wanda ya faɗi kome",
-        "closeChatButton": "Kusa taɗi",
-        "closeChatConfirmTitle": "Rufe wannan hira?",
-        "closeChatConfirm": "Shin kuna tabbatar kuna so ku rufe wannan hira?",
-        "closeChatConfirmYes": "Ee",
-        "closeChatConfirmNo": "A&#39;a",
-        "earlierComments": "baya comments",
-        "Subscribed": "Fadakarwar sanarwa na saiti",
-        "Unsubscribed": "Samu sanarwar",
-        "notAllowedToJoinCall": "Baka da izinin shiga wannan tattaunawar.",
-        "startedConversation": "fara hira",
-        "RealTimeCall": "Kira na Gaskiya",
-        "SearchByName": "Bincika da suna",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} yana ziyartar tattaunawar",
-            "Join": "{{displayName}} ya shiga tattaunawar",
-            "Leave": "{{displayName}} ya bar hira",
-            "RelatedTo": "{{displayName}} ya fara {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Message {{& message.fields.type}} zuwa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ya ce:",
-        "Streams\/changed": "Canje-canje a {{stream.fields.title}}",
-        "Streams\/invite": "An kira ku zuwa [{999}}",
-        "Streams\/announcement": "Sanarwa a {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} canza canjin canji",
-        "Streams\/chat\/edit": "An shirya hoton saƙon",
-        "Streams\/chat\/remove": "An cire saƙon sako",
-        "Streams\/closed": "{{stream.fields.title}} an rufe",
-        "Streams\/task\/progress": "An cigaba da cigaba a [{999}}",
-        "Streams\/task\/complete": "An kammala aikin: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kuskure a lokacin: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Saƙon shiga",
-        "Streams\/relatedTo\/Streams\/call": "An fara Sabuwar Kira a {{toTitle}}",
-        "Streams\/relatedTo\/*": "Sabuwar {{relationDisplayType}} a cikin {{toTitle}}",
-        "Streams\/relatedFrom\/*": "An kara shi zuwa {{toTitle}} kamar yadda {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ya ambace ka cikin sharhi",
-        "Streams\/call": "{{displayName}} ya fara kira na ainihi",
-        "ManageEmailSubscriptions": "gudanar da rajistar imel",
-        "IfUnsubscribe": "Idan kana son ficewa"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} ya gayyatar ku zuwa {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Zaɓa daga Lambobinka",
-            "chooseAgainFromContacts": "Zaɓi Again daga Lambobi",
-            "inviteSelectedContacts": "Yi kira ga Lambobin Zaɓi",
-            "selectFromContacts": "Zaɓi Daga Lambobi",
-            "photo": "Ɗauki hoto",
-            "photoInstruction": "Idan mutumin da ya bincika QR code yana gaban ku, ɗauki hoto daga gare su",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
             "to": "To: {{Stream Title}}",
-            "go": "Ku tafi",
-            "title": "Gayyata",
-            "placeholder": "Lambar wayar ko adireshin imel",
-            "orInvite": "Ko kuma kiran mutane ta amfani da:",
-            "QR": "{{ClickOrTap}} don samar da QR code",
-            "QRtitle": "Duba wannan QR code",
-            "QRscanned": "Sun duba shi!",
-            "byEmail": "Imel",
-            "byText": "Rubutu",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} idan aka kirkiri lambar",
-            "copyLink": "{{ClickOrTap}} don kwafar hanyar gayyata",
-            "userChooserPlaceholder": "Bincika da suna"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, duba wannan",
-            "PleaseVisitLink": "Da fatan a ziyarci mahaɗin da ke biyowa:",
-            "InvitingYou": "Ina kiran ku zuwa [{999}}",
-            "HasInvitedYou": "{{displayName}} ya gayyatar ku zuwa {{title}}",
-            "HasMentionedYou": "{{displayName}} ya ambace ka a cikin &quot;{{title}}&quot;",
-            "YOUAREINVITED": "KA SAN KYAUTA!",
-            "AcceptInvite": "Karɓi Gayyata"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "An gayyace ku zuwa {{title}}. Da fatan a latsa {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "An gayyatar ku. {{ClickOrTap}} nan don karɓa da shiga."
-        },
-        "command": "Gayyata",
-        "youCanNowPaste": "Yanzu zaku iya liƙa wannan hanyar haɗin yanar gizon don gayyatar mutane"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
-            "confirm": "An aiko da kira daga lambarmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
-            "check": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba sms dinku kuma danna mahadar!",
-            "CheckYourMobile": "Da fatan za a duba SMS kuma a bi umarni!"
-        },
-        "email": {
-            "alert": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Biyo tare da rubutun sauri don sanar da su gayyatar ya zo daga gare ku, ya umarce su su danna mahaɗin.",
-            "confirm": "Ana aika da kira daga yankinmu, wanda abokanka ba su gane ba tukuna. Kuna so ku bi ta hanyar rubutun sauri don sanar da su cewa gayyatar ya zo daga gare ku, yana tambayar su su danna mahaɗin.",
-            "subject": "Shin kun samo kira?",
-            "body": "Hakanan, na aika muku da kira ga {{app}} app. Da fatan a duba adireshin imel ku kuma danna mahadar a can!",
-            "CheckYourEmail": "Da fatan za a bincika imel ɗinku kuma ku bi umarnin!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Yi amfani da Microphone",
-            "cameraTitle": "Enable Kamara",
-            "cameraAndMicrophoneTitle": "Enable Kamara da Kira",
-            "dialogTitle": "Haɗawa",
-            "microphoneBtn": "Kunna Makirufo",
-            "cameraBtn": "Kunna Kamara",
-            "cameraAndMicrophoneBtn": "Sanya Kyamara da makirufo"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Umarnin",
-            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
-            "point1": "Je zuwa &quot;Saiti&quot; -&gt; &quot;Ci gaba&quot; -&gt; &quot;Sirri da tsaro&quot; -&gt; &quot;Saiti shafin&quot; -&gt; &quot;Kamara&quot; ko &quot;Saitunan yanar gizo&quot; -&gt; &quot;Makirufo&quot;",
-            "point2": "Cire {{hostname}} daga &quot;Jerin&quot; jerin"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Umarnin",
-            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Da fatan za a sake buɗe wannan shafin kuma tabbatar da samun dama ga {{kind}} don shiga taron."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Umarnin",
-            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
-            "point1": "Je zuwa Saitunan ku na Android",
-            "point2": "Bude &quot;Apps &amp; sanarwar&quot;",
-            "point3": "Nemo &quot;{{communityName}}&quot; kuma buɗe ta",
-            "point4": "Matsa kan Izini",
-            "point5": "A kunna {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Umarnin",
-            "permissionDenied": "An ba da izini ga {{kind}} ya hana. Don amfani da shi don Allah bi waɗannan matakan:",
-            "point1": "Je zuwa Saitunan iOS ɗinku",
-            "point2": "Bude &quot;Sirri&quot;",
-            "point3": "Nemo {{kind}} kuma buɗe shi",
-            "point4": "Nemo &quot;{{communityName}}&quot; kuma a kunna"
-        },
-        "notices": {
-            "youJoinedRoom": "Kun shiga dakin",
-            "joining": "Kasancewa: {{userName}}",
-            "sbLeftRoom": "{{userName}} ya bar dakin",
-            "youLeftRoom": "Kun bar dakin",
-            "codeCopied": "Kun bar dakin",
-            "sbBeganFbLive": "{{userName}} ya fara yada wannan kiran a Facebook",
-            "sbStoppedFbLive": "{{userName}} ya daina watsa wannan kiran a Facebook",
-            "youBeganFbLive": "Kun fara yada wannan kiran ne a Facebook",
-            "youStoppedFbLive": "Ka dakatar da yada wannan kiran a Facebook",
-            "linkCopiedToCb": "An lika hanyar haɗi zuwa allon rubutu",
-            "codeCopiedToCb": "Lambar da aka kwafa zuwa allo",
-            "userHasNoVideo": "Mai halarta bashi da bidiyo",
-            "openInBrowserAlert": "Buɗe hanyar haɗi a mai binciken Safari don shiga taron.",
-            "youBeganVideoRecording": "Kun fara rikodin wannan taron",
-            "youStoppedVideoRecording": "Kun dakatar da yin wannan taron",
-            "switchingRoom": "Dakin canzawa ...",
-            "forceDisconnecting": "Za a cire haɗin ku a cikin dakika 5",
-            "youStartedLive": "Kun fara watsa wannan kiran zuwa RTMP na al&#39;ada",
-            "youStoppedLive": "Kun daina watsa wannan kiran zuwa RTMP na al&#39;ada",
-            "sbStartedLiveStreaming": "{{userName}} ya fara kai tsaye",
-            "sbStoppedLiveStreaming": "{{userName}} ya ƙare kai tsaye",
-            "liveStopped": "An sami kuskure yayin aika bidiyo zuwa ƙarshen magana"
-        },
-        "settingsPopup": {
-            "webCamera": "Kyamarar Yanar gizo",
-            "screenSharing": "Raba allo",
-            "shareAnotherScreen": "Raba wani allo",
-            "turnOffCameras": "Kashe duk kyamarori",
-            "startFBLive": "Fara Facebook Livestream",
-            "stopFBLive": "Dakatar da Facebook Livestream",
-            "fbLiveTitle": "Taken Live",
-            "fbLiveDescription": "Bayanin Rayuwa",
-            "fbOnlyMeLiveAccess": "Kawai Ni",
-            "fbFriendsAccess": "Abokai",
-            "fbPublicAccess": "Jama&#39;a",
-            "fbStartLive": "Ku tafi Live",
-            "fbStopLive": "Livearshen Rayuwa",
-            "fbEmbedCode": "Saka ciki",
-            "copy": "Kwafa",
-            "turnOffVideo": "Kashe raba kyamara \/ allo",
-            "turnOffScreenSharing": "Kashe raba allo",
-            "cameraIsTurnedOff": "Ana kashe kamara",
-            "startRecording": "Fara Rikodi",
-            "stopRecording": "Tsaya Rikodi",
-            "recordingInProgress": "Rikodin suna kan ...",
-            "publishOnTimeline": "Buga kan saiti",
-            "publishToGroup": "Bugawa zuwa rukuni",
-            "turnOffAudioInput": "Muryar makirufo",
-            "micIsTurnedOff": "An kashe makirufo",
-            "start": "Fara",
-            "stop": "Tsaya",
-            "streamingSettings": "Saituna",
-            "streamToRTMP": "Jera zuwa RTMP na al&#39;ada"
-        },
-        "participantsPopup": {
-            "disconnect": "Cire haɗin",
-            "floatingScreens": "Screens Screens",
-            "tiledScreens": "Screens Screens",
-            "loudestExceptMe": "Banda Wuya Sai Ni",
-            "maximizeLoudest": "Kara girman Loudest",
-            "staticMaximized": "Matsakaicin Matsakaici",
-            "manual": "Manual",
-            "fullScreen": "Cikakken kariya",
-            "turnOffCamera": "Boye bidiyo",
-            "turnOffAudio": "Sauraren sauti",
-            "turnOffScreenSharing": "Boye raba allo",
-            "turnOnCamera": "Nuna bidiyo",
-            "turnOnAudio": "Bude sauti",
-            "turnOnScreenSharing": "Nuna raba allo"
-        },
-        "notAllowedToJoinCall": "Baka da izinin shiga wannan rafin.",
-        "streamTitle": "{{1}} kiran bidiyo",
-        "preview": {
-            "preamble": "Gamuwa:",
-            "Meeting": "Ganawa",
-            "MeetingEnded": "An gama taro"
-        },
-        "preparing": {
-            "micIsOff": "Mic a kashe",
-            "micIsOn": "Mic yana kunne",
-            "cameraIsOff": "An kashe kamara",
-            "cameraIsOn": "Kamara tana kunne",
-            "screenSharingIsOn": "Ana kunna allo",
-            "screenSharingIsOff": "Share allo",
-            "joinNow": "Haɗa Kira"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "buga wani sakon <em>{{message.fields.type}}<\/em> zuwa {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "sharhi a kan",
-            "in": "a",
-            "body": "a {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "An sanya wa",
-                "byAvatar": "ta {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "yana da sabon {{instructions.fromDisplayType}}",
-                "byAvatar": "kara da {{avatar.displayName}}"
-            },
-            "startedCallIn": "fara kira a ciki"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "An Gayyata",
-            "description": "Akwati.saƙ.m-shig .. don gayyata"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Kayan aiki",
-            "description": "rafi don sarrafa damar amfani da hanya da kuma aika sakonni game da sabuntawa"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "don karɓar sabuntawa game da ci gaba akan wani aiki",
-            "displayType": "Aiki"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "rukuni don ayyuka",
-            "displayType": "Ksawainiya"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "sanannen masani ne ga membobin wata al&#39;umma",
-            "displayType": "Kwarewa ta yau da kullun ga membobin wata al&#39;umma"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "gaisuwa da wanda mai amfani zai iya gabatar da kansu",
-            "displayType": "Gaisuwa"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Lambar",
-            "description": "lambar lissafi"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Kwanan Wata",
-            "description": "kwanan wata"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Rubutu",
-            "description": "jikin rubutu"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Rubutu",
-            "description": "karamin jikin rubutu"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Rubutu",
-            "description": "matsakaici jikin rubutu"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Adireshin i-mel",
-            "description": "adireshin i-mel"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Lambar tarho",
-            "description": "lambar tarho"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "mahaɗi akan yanar gizo"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Hoto",
-            "description": "hoto na gani",
-            "newItem": "Imageara hoto"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Hoton Hoto",
-            "description": "gidan hotuna"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Kundin hoto",
-            "description": "kundi wanda yake da alaƙa da kafofin watsa labarai daban-daban"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Fayiloli",
-            "description": "fayil da aka ɗora",
-            "newItem": "Fileara Fayil"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Clip Audio",
-            "description": "shirin bidiyo",
-            "newItem": "Audioara Audio"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Filin Bidiyo",
-            "description": "shirin bidiyo",
-            "newItem": "Videoara Bidiyo"
-        },
-        "Streams\/live": {
-            "displayType": "Hanyar rayuwa",
-            "description": "live audio ko bidiyo"
-        },
-        "Streams\/category": {
-            "displayType": "Kashi",
-            "description": "rukuni wanda za&#39;a iya danganta wasu koguna"
-        },
-        "Streams\/participating": {
-            "displayType": "Kasancewa Index",
-            "description": "Kogunan suna da alaƙa \/ basu da alaƙa da wannan lokacin da mai amfani ya shiga \/ ganye"
-        },
-        "Streams\/interest": {
-            "displayType": "Sha&#39;awa",
-            "description": "wakiltar sha&#39;awar mai amfani a wani takamaiman taken"
-        },
-        "Streams\/incoming": {
-            "displayType": "Mai shigowa",
-            "description": "manufa don saƙonnin da wasu masu amfani suka aiko"
-        },
-        "Streams\/chat": {
-            "displayType": "Tattaunawa",
-            "description": "tattaunawa tsakanin masu amfani, tare da tarihi"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Kira na Gaskiya",
-            "description": "lokaci na ainihi bidiyo \/ kira"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Takaddun PDF",
-            "description": "Takaddun PDF",
-            "newItem": "PDFara PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Tambaya",
-            "description": "Tambayar tambaya"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Amsa",
-            "description": "amsar rafi"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Kira",
-            "description": "rukuni don Streams\/webrtc",
-            "MaxRelationsExceeded": "An wuce kiran max"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Take",
-        "Subscribed": "Biyan kuɗi",
-        "Participants": "Mahalarta",
-        "AreYouSureRemoveIdentifier": "An tabbatar an cire wannan mai gano?",
-        "AreYouSureUnsubscribeIdentifier": "Ka tabbata ka fitar da wannan ma&#39;aikacin? Zai kashe sanarwa ga wannan mai gano.",
-        "AreYouSureUnsubscribeDevice": "An tabbata an cire wannan na&#39;urar? Zai kashe sanarwa a wannan na&#39;urar.",
-        "Identifiers": "Masu Gano",
-        "Devices": "Na&#39;urori",
-        "Streams": "Ruwaya",
-        "AreYouSureRemoveParticipant": "Shin ka tabbata kana so ka cire wannan mahaɗan?",
-        "RemoveParticipant": "Cire ɗan takara"
-    },
     "menu": {
-        "placeholder": "buga taken shafi",
-        "ModTab": "Gyara abu",
-        "Save": "Ajiye",
-        "Delete": "Share",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Wannan abu yana ɓoye muku."
-    },
     "audio": {
-        "record": "Rikodi",
-        "reset": "Sake saita",
-        "edit": "Shirya",
-        "title": "take",
-        "description": "bayanin",
-        "upload": "Loda",
-        "link": "Haɗi",
-        "setUrl": "Saita URL",
-        "save": "Ajiye",
-        "setClip": "Yanke Clip",
-        "invalidURL": "URL mara aiki",
-        "invalidFile": "Fayil mara aiki",
-        "errorNoSource": "Babu tushen tushe na sauti",
-        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
-        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Sake saita",
-        "edit": "Shirya",
-        "title": "take",
-        "description": "bayanin",
-        "upload": "Loda",
-        "link": "Haɗi",
-        "setUrl": "Saita URL",
-        "save": "Ajiye",
-        "setClip": "Yanke Clip",
-        "invalidURL": "URL mara aiki",
-        "invalidFile": "Fayil mara aiki",
-        "errorNoSource": "Babu tushen bidiyo",
-        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
-        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Sake saita",
-        "edit": "Shirya",
-        "title": "take",
-        "description": "bayanin",
-        "upload": "Loda",
-        "link": "Haɗi",
-        "setUrl": "Saita URL",
-        "save": "Ajiye",
-        "setClip": "Yanke Clip",
-        "invalidURL": "URL mara aiki",
-        "invalidFile": "Fayil mara aiki",
-        "errorNoSource": "Babu tushen pdf",
-        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
-        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Sake saita",
-        "edit": "Shirya",
-        "title": "take",
-        "description": "bayanin",
-        "upload": "Loda",
-        "link": "Haɗi",
-        "setUrl": "Saita URL",
-        "save": "Ajiye",
-        "setClip": "Yanke Clip",
-        "invalidURL": "URL mara aiki",
-        "invalidFile": "Fayil mara aiki",
-        "errorNoSource": "Babu tushen hoto",
-        "uploadLimit": "Matsakaicin girman fayil: {{size}}",
-        "errorFileSize": "Yi haƙuri, amma fayil ɗin ya cika girma.<br> Matsakaicin girman fayil shine {{size}}",
-        "uploadedImage": "Hoton da aka ɗora",
-        "imageTitle": "Taken hoton"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Tambayoyi",
-        "Answers": "Amsoshi",
-        "AnswerQuestion": "Amsa Tambaya",
-        "SetYourAnswer": "Da fatan za a amsa tambayar",
-        "NewQuestion": "Sabuwar Tambaya",
-        "NewAnswer": "Sabon Amsa",
-        "AnswerDetails": "Bayanin Amsa",
-        "answerOption": "Zaɓi",
-        "answerOptionExclusive": "Keɓancewa",
-        "answerTextarea": "Rubutun",
-        "FreeAnswer": "Amsa kyauta ...",
-        "SaveQuestion": "Ajiye Tambaya",
-        "SaveAnswer": "Ajiye Amsa",
-        "AddAnotherAnswer": "Anotherara wata amsa",
-        "ErrorAnswers": "Da fatan za a kara koda guda daya",
-        "AlreadyAnswered": "An riga an amsa",
-        "TitlePlaceholder": "Buga tambayarka",
-        "ContentPlaceholder": "Sanya kowane ƙarin bayani anan don taimakawa mutane amsa",
-        "ErrorTitle": "Tambaya ake bukata",
-        "Placeholder": "Mai riƙe wuri"
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Sabuwar Kwarewa",
-        "DefineTitle": "Da fatan a ayyana take",
-        "Create": "Ƙirƙiri"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Kira",
-        "MaxCalls": "Max kira",
-        "Update": "Sabuntawa",
-        "NoCallsYet": "Babu kira tukuna",
-        "CallReasonTitle": "Menene wannan kiran?",
-        "WaitingRoom": "Dakin Jira"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

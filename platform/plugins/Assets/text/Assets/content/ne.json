@@ -1,167 +1,265 @@
 {
     "browsertab": {
-        "html": "{{99}}}",
-        "button": "भुक्तान गर्न ट्याप गर्नुहोस्"
+        "html": "{{button}}",
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: शुल्क {{call 'user.displayName'}} को लागी प्रशोधन गरियो",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} को भुक्तानी को लागी धन्यवाद",
-        "SubscribedTo": "{{call 'user.displayName'}} ले {{plan.title}} को सदस्यता लिनुभयो",
-        "YouSubscribedTo": "तपाइँ {{plan.title}} को सदस्यता लिनुभएको छ"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "तपाइँ &quot;{{description}}&quot; बाट {{call 'publisher.displayName'}} बाट {{displayAmount}} को भुक्तानी पाउनुहुन्छ",
-        "HasBeenCharged": "हे, यो मात्र तपाइँलाई बताउन को लागी हो कि {{1}} लाई {{3}} को {{4}} द्वारा {{2}} शुल्क लगाइएको हो"
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; को लागी तपाइँको भुक्तानी को लागी धन्यवाद",
-        "HavePaid": "नमस्ते {{1}}, यो मात्र एक छिटो पुष्टिकरण हो कि तपाइँ सफलतापूर्वक {{2}} लाई {{3}} लाई {{4}}"
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "आदेश को बारे मा जानकारी",
-        "PaymentMethod": "भुक्तानी विधि",
-        "ContactInfo": "सम्पर्क जानकारी",
-        "Pay": "तिर्नुहोस्"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "{{invitedUserName}} द्वारा निमन्त्रणा स्वीकार गरियो",
-        "YouHaveCreditsToStart": "तपाइँसँग सुरु गर्नका लागि {{amount}} क्रेडिट छ",
-        "PaymentFor": "&quot;{{1}}&quot; को लागी भुक्तानी",
-        "PaymentTo": "{{1}} लाई भुक्तानी",
-        "PaymentToUser": "{{toUserName}} लाई भुक्तानी",
-        "CreatePaidStream": "{{99}}} को लागी",
-        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; मा आरक्षण को लागी",
-        "CreatedCommunity": "समुदाय &quot;{{communityId}}&quot; बनाउन को लागी",
-        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; मा आरक्षण फिर्ताको रूपमा",
-        "BoughtCredits": "{{amount}} क्रेडिट किन्नुभयो",
-        "BonusCredits": "बोनस {{amount}} क्रेडिट",
-        "BuyAmountCredits": "{{amount}} क्रेडिट किन्नुहोस्",
-        "WatchClip": "{{fromStreamTitle}} हेरेर {{amount}} क्रेडिट कमाउनुभयो",
-        "MissingCredits": "हराएको क्रेडिट",
-        "YouMissingCredits": "तपाइँ अगाडी बढ्न को लागी एक अतिरिक्त {{amount}} क्रेडिट को आवश्यकता छ।",
-        "BuyCredits": "क्रेडिट किन्नुहोस्",
-        "BuyBonus": "एक पटकमा {{amount}} क्रेडिट किन्नु, {{bonus}} क्रेडिट बोनस को लागी नेतृत्व गर्दछ।",
-        "Buy": "किन्नुहोस्",
-        "PurchaseCredits": "क्रय क्रेडिट",
-        "Credits": "क्रेडिट्स",
-        "ErrorInvalidAmount": "अमान्य रकम",
-        "ErrorInvalidCurrency": "दुर्भाग्यवश हामी मुद्रा {{currency}} लाई अझै समर्थन गर्दैनौं",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} क्रेडिट",
-            "BonusCredits": "{{amount}} क्रेडिट"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "मिति",
-        "Amount": "रकम",
-        "Description": "विवरण",
-        "Client": "ग्राहक",
-        "To": "लाई",
-        "From": "बाट",
-        "SeeHistory": "{{1}} को भुक्तानी इतिहास हेर्नुहोस्",
-        "HistoryEmpty": "तपाइँसँग अझै कुनै डाटा छैन",
-        "PaymentFor": "{{amount}} क्रेडिट पठाइयो",
-        "PaymentTo": "{{amount}} क्रेडिट पठाइयो",
-        "PaymentToUser": "{{amount}} क्रेडिट पठाइयो",
-        "CreatePaidStream": "{{amount}} क्रेडिट खर्च गर्नुभयो",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "{{amount}} क्रेडिट कमाईयो",
-            "-": "{{amount}} क्रेडिट खर्च गर्नुभयो"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} क्रेडिट कमाईयो",
-            "-": "{{amount}} क्रेडिट खर्च गर्नुभयो"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} क्रेडिट प्राप्त भयो",
-            "-": "{{amount}} क्रेडिट पठाइयो"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "{{amount}} क्रेडिट खर्च गर्नुभयो",
-        "BoughtCredits": "{{amount}} क्रेडिट किन्नुभयो",
-        "BonusCredits": "बोनस {{amount}} क्रेडिट पाउनुभयो",
-        "InviteAcceptedBy": "{{amount}} क्रेडिट कमाईयो",
-        "YouHaveCreditsToStart": "{{amount}} क्रेडिट कमाईयो"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "भुक्तानी जानकारी सेट गर्नुहोस्",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "सदस्यता सुरु गर्नुहोस्",
-            "message": "के तपाइँ {{title}} को सदस्यता लिन चाहनुहुन्छ?",
-            "ok": "ठिक छ",
-            "cancel": "रद्द गर्नुहोस्"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "क्रेडिट वा डेबिट कार्ड",
-        "SubscribePayment": "भुक्तानी सदस्यता लिनुहोस्",
-        "ImmediatePayment": "तत्काल भुक्तानी"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "भुक्तानी जानकारी सेट गर्नुहोस्",
-        "BuyAmountCredits": "{{amount}} क्रेडिट किन्नुहोस्",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "एक भुक्तानी गर्नुहोस्",
-            "message": "के तपाइँ {{symbol}} {{amount}} तिर्न सहमत हुनुहुन्छ?",
-            "ok": "ठिक छ",
-            "cancel": "रद्द गर्नुहोस्"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "क्रेडिट्स",
-            "description": "क्रेडिट र भुक्तानी को ट्रयाक राख्छ"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "अनुदान योजना",
-            "description": "सदस्यता योजना"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "सदस्यता",
-            "description": "सदस्यता"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "उत्पादन",
-            "description": "उत्पादन बेचिन्छ"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "सेवा",
-            "description": "सेवा प्रदान गरीरहेको छ"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} क्रेडिट कमाईयो"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} क्रेडिट किन्नुभयो"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "बोनस {{amount}} क्रेडिट"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} क्रेडिट खर्च गर्नुभयो"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} क्रेडिट {{toUserName}} लाई पठाइयो"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "{{fromUserName}} बाट {{amount}} क्रेडिट प्राप्त भयो"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "नयाँ सेवा",
-            "TitlePlaceholder": "सेवा शीर्षक",
-            "PricePlaceholder": "मूल्य सेट गर्नुहोस्",
-            "LinkPlaceholder": "अतिरिक्त जानकारी लि set्क सेट गर्नुहोस्",
-            "DescriptionPlaceholder": "सेवा विवरण",
-            "SaveService": "सेवा बचाउनुहोस्",
-            "SelectRequiredParticipants": "आवश्यक सहभागीहरु"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "सेवा टेम्प्लेट प्रबन्ध गर्नुहोस्",
-        "ManageServices": "सेवाहरु प्रबन्ध गर्नुहोस्",
-        "Free": "मुक्त",
-        "OptionalContribution": "वैकल्पिक योगदान",
-        "RequiredPayment": "आवश्यक भुक्तानी",
-        "AreYouSureDelete": "के तपाइँ पक्का यो सेवा मेटाउन चाहानुहुन्छ?",
-        "AmountServicesRelated": "त्यहाँ {{amount}} उपलब्धता यस सेवा संग सम्बन्धित छन्। तिनीहरू पनि हटाइनेछन्।"
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

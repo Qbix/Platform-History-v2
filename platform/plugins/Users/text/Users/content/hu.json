@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Belépés",
-        "LogOut": "Kijelentkezés"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Állítsa {{1}} elsődleges {{2}} -ként",
-        "ChoosePassPhrase": "Jelöljön ki egy belépési <strong>kifejezést<\/strong> a bejelentkezéshez. <br> Egy egyszerű kifejezés, amely néhány szóból áll, amit könnyen emlékezni fog.",
-        "ChoosePassPhraseSeeSuggestions": "Válasszon egy jó <strong>átutalási kifejezést,<\/strong> hogy megvédje fiókját. Tekintse meg néhány ötlet javaslatát.",
-        "LogOutAndTryAgain": "Jelentkezzen ki és próbálja újra",
-        "IfYouFeel": "Ha úgy érzi, valami baj van, akkor",
-        "SetIdentifierButtonTitle": "elölről kezdeni"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Fogj neki"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Fogj neki",
-        "Authorize": "engedélyez",
-        "TermsLabel": "Elolvastam és egyetértek <br> a {{link}}",
-        "TermsTitle": "feltételek",
-        "mustAgree": "Először el kell fogadnia a feltételeket."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Elfogadom a {{link}}",
-        "TermsTitle": "feltételek"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Engedély",
-        "prompt": "Szeretné engedélyezni az értesítéseket? Valós idejű frissítéseket fog kapni arról, amit érdekel.",
-        "yes": "Igen",
-        "no": "Nem",
-        "WelcomePleaseVerifyEmail": "Üdvözöljük! Kérem ellenőrizze az email címét.",
-        "WelcomeVerifyEmail": "Üdvözöljük! Erősítsd meg az e-mail címed.",
-        "ForgetPass": "Hé, elfelejtetted a jelszót?",
-        "PassphraseSaved": "Jelszava mentésre került.",
-        "IdentifierActivated": "A (z) {{type}} készüléke aktiválva volt.",
-        "CompletedActivation": "Befejezte a felhasználói aktiválást.",
-        "CompletedActivationLogIn": "Befejezte a felhasználói aktiválást. Próbáljon meg most bejelentkezni."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Kérjük, válassza ki a címkét.",
-        "inviteUser": "Felhasználó meghívása",
-        "selectRole": "Válassza a Szerep lehetőséget",
-        "inviteRole": "Meghívó: {{role}}"
-    },
-    "invalidLanguageSelected": "Érvénytelen nyelv van kiválasztva",
     "contacts": {
         "dialog": {
-            "title": "Válassza ki a kapcsolatot",
-            "SearchByName": "Keresés név szerint",
-            "CreateAccount": "+ Új kapcsolattartó",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nem található",
-            "EmptyContacts": "A kapcsolatok nem találhatóak ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Kapcsolat kiválasztása a {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Üdvözöljük",
-        "directions": "Hozzon létre egy fiókot, vagy jelentkezzen be.",
-        "directionsNoRegister": "Jelentkezzen be, ha van fiókja.",
-        "goButton": "Megy",
-        "passphrase": "Írja be jelszavát:",
-        "loginButton": "Fogj neki",
-        "registerButton": "Fogj neki",
-        "resendButton": "Aktiválási üzenet küldése",
-        "forgot": "Felejtsd el?",
-        "resendConfirm": "Szeretne üzenetet küldeni a jelmondat visszaállításához?",
-        "resendSuccess": "Keressen üzenetet a jelszó visszaállításához",
-        "resendClose": "Bezárás",
-        "noPassphrase": "Mielőtt be tud jelentkezni, be kell állítania egy jelmondatot az aktiválási üzenetben található linkre kattintva.",
-        "notVerified": "A bejelentkezéshez el kell küldenie magának egy aktiválási üzenetet.",
-        "emailExists": "Próbáltál már korábban regisztrálni ezzel az e-maillel? Ha igen, ellenőrizze a beérkező levelek mappát a fiók aktiválásához. <a href='#resend' class='Q_button Users_activation_resend'>Kattintson az üzenet újbóli elküldéséhez<\/a>",
-        "mobileExists": "Próbáltad már regisztrálni erre a mobilszámra? Ha igen, ellenőrizze az SMS-t a fiók aktiválásához. <a href='#resend' class='Q_button Users_activation_resend'>Kattintson az üzenet újbóli elküldéséhez<\/a>",
-        "usingOther": "vagy tudsz",
-        "prompt": "Válasszon felhasználói nevet:",
-        "newUser": "vagy hozzon létre egy új fiókot alább",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "a mobil # vagy e-mail",
-            "mobile": "írja be a mobilszámát",
-            "email": "írd be az email címed",
-            "username": "felhasználónév"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Elfogadja a Szolgáltatási feltételeket?",
-        "facebookNoEmail": "A facebook-fiókodból hiányzik egy megerősített e-mail cím. Egyszerűen jelentkezzen be natív módon.",
-        "picTooltip": "Ezt a képet később megváltoztathatja",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Jelentkezzen be {{host}} időpontban {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Átirányítás a Wallet szolgáltatásba",
-                "content": "Miután bezárta ezt a párbeszédablakot, a pénztárcájába kerül. Bejelentkezés után térjen vissza erre az oldalra."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Adjon hozzá egy módot a bejelentkezéshez",
-        "sendMessage": "Aktiválási üzenet küldése",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "írja be mobiltelefonszámát vagy e-mail címét",
-            "mobile": "írja be a mobilszámát",
-            "email": "írd be az email címed",
-            "username": "felhasználónév"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} fiók",
-        "areUsing": "A (z) {{platform}} felhasználót használja",
-        "noLongerUsing": "Ön már nem kapcsolódik a (z) {{platform}} -hez",
-        "doAuth": "Jelentkezzen be ezzel a fiókkal",
-        "doSwitch": "Váltás erre a fiókra"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Tulajdonos",
-        "Admin": "admin",
-        "Member": "Tag",
-        "Guest": "Vendég",
-        "Host": "Házigazda"
-    },
-    "analytics": {
-        "Title": "Analitika",
-        "Daily": "Napi",
-        "Weekly": "Heti",
-        "Monthly": "Havi",
-        "Application": "Alkalmazás",
-        "Pages": "Oldalak",
-        "Services": "Szolgáltatások",
-        "Faq": "GYIK",
-        "WeekDays": "Heti napok"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Nuoroda, skirta reklamuoti",
-                "startDate": "Pradžios data",
-                "startTime": "Pradžios laikas",
-                "endDate": "Pabaigos data",
-                "endTime": "Pabaigos laikas",
-                "budget": "Biudžetas"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtruoti pagal palūkanas",
-                "FilterInterests": "Pradėkite rašyti susidomėjimą ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Palūkanos",
-            "Location": "Vieta"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Eik",
-            "PasteLinkHere": "Įklijuokite nuorodą čia",
-            "BrowseTheWeb": "Naršyti",
-            "WriteToStartConversation": "Parašykite savo mintis, kad pradėtumėte pokalbį",
-            "StartConversation": "Pradėkite pokalbį",
-            "GotoConversation": "Eikite į pokalbį",
-            "reset": "Atstatyti",
-            "edit": "Redaguoti",
-            "link": "Nuoroda",
-            "setUrl": "Nustatykite URL",
-            "save": "Sutaupyti",
-            "setClip": "Iškirpti spaustuką",
-            "invalidURL": "neteisingas URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Failas per didelis, kad būtų galima išsaugoti talpyklą. Maksimalus failo dydis {{size}}",
-        "InvalidPDF": "Failas nėra galiojantis PDF failas",
-        "StartTypingTitleOrKeywords": "Pradėkite rašyti pavadinimą ar raktinius žodžius ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML dokumentas, kurį įvairūs vartotojai gali peržiūrėti ir redaguoti",
-            "displayType": "Straipsnis"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Pristatymo skaidrė gali apimti HTML, garso įrašus ir kt.",
-            "displayType": "Pristatymas"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Pristatymas, sudarytas iš įvairių skaidrių",
-            "displayType": "Pristatymas"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Reklamos vienetas svetainėje",
-            "displayType": "Skelbimo vienetas"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Reklamos vienetų grupavimo pagal pavadinimą būdas",
-            "displayType": "Skelbimų talpinimas"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Skelbimo turinys",
-            "displayType": "Skelbimas kūrybinis"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Reklaminė kampanija",
-            "displayType": "Reklamos kampanija"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Pateikia svetainę, kurios metaduomenys buvo iškarpyti",
-            "displayType": "tinklo puslapis"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

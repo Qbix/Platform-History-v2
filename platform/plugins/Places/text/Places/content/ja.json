@@ -1,88 +1,88 @@
 {
-    "LatLng": "（{{1}}緯度、{{2}} lng）",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}}（{{2}}）",
-        "Title": "{{1}}以内"
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "メーター",
-        "meters": "メートル",
-        "kilometer": "キロメートル",
-        "kilometers": "キロメートル",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "マイル",
-        "miles": "マイル",
-        "mi": "ミ",
-        "foot": "足",
-        "feet": "足",
-        "inches": "インチ"
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "の{{select}}内で行われていることに興味があります",
-        "update": "現在地を更新する",
-        "prompt": "{{ClickOrTap}}こちらへ<br>あなたを設定<br>ロケーション",
-        "myCurrentLocation": "私の現在地",
-        "enterAddress": "住所を入力",
-        "enterPostcode": "郵便番号を入力してください",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "場所を追加",
-            "title": "新しい場所",
-            "nameYourLocation": "あなたの場所に名前を付ける"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "この場所を保存しますか？",
-            "message": "あなたは将来この場所をまた使うつもりですか？",
-            "ok": "はい",
-            "cancel": "いいえ"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "この場所に名前を付ける",
-            "placeholder": "家、仕事など",
-            "ok": "保存する"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "場所を選択"
-        },
-        "set": "現在地を設定"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "この場所の中のどこか？",
-        "newArea": "新しい地域",
-        "promptTitle": "エリアの名前を入力してください：",
-        "absent": "地域を設定してください",
-        "error": "エラー",
-        "exist": "エリアはすでに存在します",
-        "addNewArea": "新しいエリアを追加",
-        "add": "追加する"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "場所のコレクション",
-            "displayType": "場所"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "建物、会場、船、公園などを表します。",
-            "displayType": "ロケーション"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "部屋やスイートなど、場所内のエリアを表します",
-            "displayType": "エリア"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "建物または船の床を表します",
-            "displayType": "床"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "建物または船の列を表します",
-            "displayType": "カラム"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "ジオハッシュから一定の距離内にあるもののカテゴリ",
-            "displayType": "場所の近く"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "関心に一致する、ジオハッシュから一定の距離内にあるもののカテゴリ",
-            "displayType": "興味のある場所"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

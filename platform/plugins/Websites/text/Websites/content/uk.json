@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Посилання для просування",
-                "startDate": "Дата початку",
-                "startTime": "Час початку",
-                "endDate": "Дата закінчення",
-                "endTime": "Час завершення",
-                "budget": "Бюджет"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Фільтрувати за інтересами",
-                "FilterInterests": "Почніть вводити інтерес ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Інтерес",
-            "Location": "Розташування"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Ідіть",
-            "PasteLinkHere": "Вставте посилання тут",
-            "BrowseTheWeb": "Огляд",
-            "WriteToStartConversation": "Напишіть свої думки, щоб почати розмову",
-            "StartConversation": "Почати розмову",
-            "GotoConversation": "Перейдіть до розмови",
-            "reset": "Скинути",
-            "edit": "Редагувати",
-            "link": "Посилання",
-            "setUrl": "Встановити URL-адресу",
-            "save": "Зберегти",
-            "setClip": "Виріжте кліп",
-            "invalidURL": "Недійсна URL-адреса"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Файл завеликий для кешування. Максимальний розмір файлу {{size}}",
-        "InvalidPDF": "Файл не є дійсним PDF",
-        "StartTypingTitleOrKeywords": "Почніть вводити заголовок або ключові слова ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML-документ, який можуть переглядати та редагувати різні користувачі",
-            "displayType": "Стаття"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Слайд презентації, може включати HTML, аудіо тощо.",
-            "displayType": "Слайд"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Презентація, що складається з різних слайдів",
-            "displayType": "Презентація"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Рекламний блок на веб-сайті",
-            "displayType": "Рекламний блок"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Спосіб групування рекламних підрозділів під назвою",
-            "displayType": "Розміщення реклами"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Вміст для реклами",
-            "displayType": "Рекламне оголошення"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Рекламна кампанія",
-            "displayType": "Рекламна кампанія"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Представляє веб-сайт, метадані якого були скреблені",
-            "displayType": "веб-сторінка"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

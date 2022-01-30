@@ -49,7 +49,12 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} ምስጋናዎች",
             "BonusCredits": "{{amount}} ምስጋናዎች"
-        }
+        },
+        "Streams_user_firstname": "{{invitedUserName}} የመጀመሪያ ስም አስገብቷል።",
+        "Streams_user_lastname": "{{invitedUserName}} የአያት ስም አስገብቷል።",
+        "Streams_user_icon": "{{invitedUserName}} የገባው አዶ",
+        "Places_user_location": "{{invitedUserName}} አካባቢ ገብቷል።",
+        "Streams_greeting": "{{invitedUserName}} ሰላምታ ገብቷል።"
     },
     "history": {
         "Date": "ቀን",
@@ -80,7 +85,12 @@
         "BoughtCredits": "{{amount}} ክሬዲቶችን ገዝቷል",
         "BonusCredits": "ጉርሻ አግኝተዋል {{amount}} ክሬዲቶች",
         "InviteAcceptedBy": "{{amount}} ክሬዲቶች አግኝተዋል",
-        "YouHaveCreditsToStart": "{{amount}} ክሬዲቶች አግኝተዋል"
+        "YouHaveCreditsToStart": "{{amount}} ክሬዲቶች አግኝተዋል",
+        "Streams_user_firstname": "የተገኘው {999} ክሬዲት",
+        "Streams_user_lastname": "የተገኘው {999} ክሬዲት",
+        "Streams_user_icon": "የተገኘው {999} ክሬዲት",
+        "Places_user_location": "የተገኘው {999} ክሬዲት",
+        "Streams_greeting": "የተገኘው {999} ክሬዲት"
     },
     "subscriptions": {
         "infoTitle": "የክፍያ መረጃን ያዘጋጁ",
@@ -163,5 +173,93 @@
         "RequiredPayment": "ተፈላጊ ክፍያ",
         "AreYouSureDelete": "እርግጠኛ ነዎት ይህን አገልግሎት መሰረዝ ይፈልጋሉ?",
         "AmountServicesRelated": "ከዚህ አገልግሎት ጋር የሚዛመዱ {{amount}} ተደራሽነቶች አሉ። እነሱ ደግሞ ይወገዳሉ።"
+    },
+    "NFT": {
+        "Title": "ስለ {{title}} NFT መረጃ",
+        "Description": "ስለ NFT ዝርዝር መረጃ",
+        "FixedBid": "ግዛ",
+        "CurrentBid": "አሁን ያለ ጨረታ",
+        "StartingIn": "ጀምሮ",
+        "EndingIn": "ማለቁ",
+        "CreateNFT": "NFT ይፍጠሩ",
+        "TitlePlaceholder": "የእርስዎን NFT ርዕስ ይስጡት።",
+        "DescriptionPlaceholder": "የእርስዎን NFT መግለጫ ይስጡ",
+        "CreateYourNFT": "የእርስዎን NFT ይፍጠሩ",
+        "Royalties": "የሮያሊቲ ክፍያ",
+        "RoyaltyPlaceholder": "አማራጭ። ከመተላለፉ በፊት ለፈጣሪ የተከፈለው መጠን።",
+        "ExpirationDate": "የመጠቀሚያ ግዜ",
+        "StartingDate": "የመጀመሪያ ቀን",
+        "BidsBelowThisAmount": "ከዚህ መጠን በታች ጨረታ አይፈቀድም።",
+        "MinimumBid": "ዝቅተኛው ጨረታ",
+        "Price": "ዋጋ",
+        "Owner": "ባለቤት",
+        "SelectCategory": "ምድብ ይምረጡ",
+        "Day": "ቀን",
+        "Days": "ቀናት",
+        "Hour": "ሰአት",
+        "Hours": "ሰዓታት",
+        "Minute": "ደቂቃ",
+        "Minutes": "ደቂቃዎች",
+        "Second": "ሁለተኛ",
+        "Seconds": "ሰከንዶች",
+        "SalesCreator": "ሽያጩ ወደ ፈጣሪ ይሄዳል",
+        "Details": "ዝርዝሮች",
+        "Bids": "ጨረታዎች",
+        "History": "ታሪክ",
+        "LoremIpsum": "ሎሬም ኢፕሱም የሕትመት እና የጽሕፈት መኪና ኢንዱስትሪ ጽሑፍ ብቻ ነው።",
+        "PutOnSale": "ለሽያጭ ያቅርቡ",
+        "PutOffSale": "ከሽያጭ ውጣ",
+        "Transfer": "ማስተላለፍ",
+        "Update": "አዘምን",
+        "UpdateToken": "ማስመሰያ አዘምን",
+        "CreateToken": "ማስመሰያ ይፍጠሩ",
+        "PlaceBid": "ጨረታ ማስገባት",
+        "SoldOut": "የተሸጠ",
+        "NftName": "የ NFT ስም",
+        "DescribeYourNFT": "እባክዎ የእርስዎን NFT ይግለጹ",
+        "NftPicture": "NFT የሚወክል ምስል",
+        "NftMovie": "NFT የሚወክል ፊልም",
+        "UploadMovie": "ፊልም ስቀል",
+        "MovieSource": "የፊልም ምንጭ",
+        "UploadFile": "ፋይል ስቀል",
+        "PutOnMarketplace": "በገበያ ቦታ ላይ ያስቀምጡ",
+        "InstantPurchase": "ተጠቃሚዎች የእርስዎን NFT ወዲያውኑ እንዲገዙ ለማስቻል ዋጋ ያስገቡ",
+        "FixedPrice": "ቋሚ ዋጋ",
+        "TimedAuction": "በጊዜ የተያዘ ጨረታ",
+        "OpenForBids": "ለጨረታ ክፍት ነው።",
+        "PriceOnePiece": "ለአንድ ቁራጭ ዋጋ ያስገቡ",
+        "EnterMinimumBid": "ዝቅተኛውን ጨረታ ያስገቡ",
+        "SelectChain": "ሰንሰለት ይምረጡ",
+        "WrongChain": "ይህ NFT የተፈጠረው በ&quot;{{chain}}&quot; ስር ነው። እባኮትን ይህን ሰንሰለት ይጠቀሙ።",
+        "import": {
+            "importNFT": "NFT በማስመጣት ላይ",
+            "fileNotFound": "ይቅርታ፣ የCSV ፋይል አልተገኘም።",
+            "fileEmpty": "ይቅርታ፣ የCSV ፋይል ባዶ ነው።",
+            "userIdNotFound": "ተጠቃሚ አለ ግን መታወቂያ ባዶ ነው።",
+            "errorLine": "መስመር {999}",
+            "fieldNotFound": "የሚፈለገው መስክ &quot;{999}}&quot; አልተገኘም።",
+            "taskStreamInvalid": "የተግባር ዥረት ልክ ያልሆነ",
+            "instructionsEmpty": "የተግባር ዥረት መመሪያዎች ባዶ",
+            "complete": "ተጠናቀቀ",
+            "activateUsers": "የማግበር መልእክት ለተጠቃሚዎች ይላኩ?",
+            "importProgress": "እድገት",
+            "importOptions": "አማራጮች",
+            "sampleCSV": "ናሙና CSV አውርድ",
+            "fileLabel": "የተመን ሉህ ስቀል፡",
+            "errorsTitle": "ስህተቶች ተከስተዋል።"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "በNFT ስብስቦች አጣራ",
+                "ShowNFTCollection": "የNFT ስብስብን በ... አሳይ",
+                "AllCollections": "ሁሉም ስብስቦች"
+            },
+            "ByUser": {
+                "AllAuthors": "ሁሉም ደራሲዎች",
+                "AllUsers": "ሁሉም ሰው",
+                "FilterByAuthors": "በደራሲያን አጣራ"
+            }
+        },
+        "Back": "ወደ ስብስብ ተመለስ"
     }
 }

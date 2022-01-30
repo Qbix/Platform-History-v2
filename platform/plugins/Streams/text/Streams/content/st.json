@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Sehlooho se secha"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Batho bao ke ba memileng",
-        "Streams\/invitedMe": "Ke mang ea nketselitseng",
-        "AreYouAgree": "Na ua lumela?",
-        "Yes": "Ho joalo",
-        "No": "Che"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "U thabela eng?",
-        "CanAdd": "Haeba u ntse u sa fumane seo u se batlang, u ka kenya thahasello e ncha tlase:",
-        "TrySynonyms": "U se ke ua e bona? Leka li-synonyms tse ling.",
-        "AddUnderCategory": "Eketsa tlas&#39;a sehlopha ...",
-        "Other": "Tse ling",
-        "Unlisted": "Ha e ngoloe"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Molaetsa o &#39;nile oa tšoaetsoa bakeng sa tlhahlobo ea admin. Tlanya hape ho unflag.",
-        "noOneSaid": "Ha ho motho ea buileng letho",
-        "closeChatButton": "Tlosa puisano",
-        "closeChatConfirmTitle": "Tlosa puisano ee?",
-        "closeChatConfirm": "Na u netefatsa hore u batla ho koala puisano ee?",
-        "closeChatConfirmYes": "E.",
-        "closeChatConfirmNo": "Che",
-        "earlierComments": "pejana litlhaloso",
-        "Subscribed": "Tsebisoang",
-        "Unsubscribed": "Fumana Litsebiso",
-        "notAllowedToJoinCall": "Ha u na tumello ea ho kena moqoqong ona.",
-        "startedConversation": "o qalile moqoqo",
-        "RealTimeCall": "Mohala oa Nako ea &#39;nete",
-        "SearchByName": "Batla ka lebitso",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} e etela moqoqo",
-            "Join": "{{displayName}} o kene moqoqong",
-            "Leave": "{{displayName}} o tlohetse moqoqo",
-            "RelatedTo": "{{displayName}} o qalile {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Molaetsa {{& message.fields.type}} ho {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} o itse:",
-        "Streams\/changed": "Liphetoho ka {{stream.fields.title}}",
-        "Streams\/invite": "U ile ua memeloa ho {{& stream.fields.title}}",
-        "Streams\/announcement": "Phatlalatso ka {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} e fetotse monyetla oa ho fumana molaetsa",
-        "Streams\/chat\/edit": "Molaetsa oa puisano o hlophisitsoeng",
-        "Streams\/chat\/remove": "Molaetsa oa puisano o tlosoa",
-        "Streams\/closed": "{{stream.fields.title}} e koetsoe",
-        "Streams\/task\/progress": "Tsoelo-pele e entsoeng ka {{stream.fields.title}}",
-        "Streams\/task\/complete": "Mosebetsi o phethiloe: {{stream.fields.title}}",
-        "Streams\/task\/error": "Phoso nakong ea: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Molaetsa o sa keneng",
-        "Streams\/relatedTo\/Streams\/call": "Qaliso e ncha e qalile ho {{toTitle}}",
-        "Streams\/relatedTo\/*": "Ncha {{relationDisplayType}} ho {{1000]}",
-        "Streams\/relatedFrom\/*": "E kenyellelitsoe ho {{toTitle}} joalo ka {{1000]}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} o u boletse ka maikutlo",
-        "Streams\/call": "{{displayName}} o letsetse mohala oa nako ea nnete",
-        "ManageEmailSubscriptions": "hlokomela ngoliso ea hau ea lengolo-tsoibila",
-        "IfUnsubscribe": "Haeba u batla ho itokolla"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} eu meme ho {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Khetha ho Litso tsa hau",
-            "chooseAgainFromContacts": "Khetha hape ho Metsoalle",
-            "inviteSelectedContacts": "Mema Mabitso a Khethiloeng",
-            "selectFromContacts": "Khetha ho Mabitso",
-            "photo": "Nka setšoantšo",
-            "photoInstruction": "Haeba motho ea hlahlobang khoutu ea hau ea QR a le ka pel&#39;a hao, nka setšoantšo sa bona",
-            "to": "Ho: {{Stream Title}}",
-            "go": "Tsamaea",
-            "title": "Mema",
-            "placeholder": "Nomoro ea mohala kapa aterese ea imeile",
-            "orInvite": "Kapa u meme batho ka ho sebelisa:",
-            "QR": "{{ClickOrTap}} ho hlahisa khoutu ea QR",
-            "QRtitle": "Hlakola khoutu ena ea QR",
-            "QRscanned": "Ba ile ba e hlahloba!",
-            "byEmail": "Imeile",
-            "byText": "Mongolo",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} haeba khoutu e hlahlojoa",
-            "copyLink": "{{ClickOrTap}} ho kopitsa sehokelo sa memo",
-            "userChooserPlaceholder": "Batla ka mabitso"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, hlahloba sena",
-            "PleaseVisitLink": "Ka kopo, etela kgokahanyo e latelang:",
-            "InvitingYou": "Ke u mema ho {{title}}",
-            "HasInvitedYou": "{{displayName}} eu mema ho {{title}}",
-            "HasMentionedYou": "{{displayName}} o boletse ka uena ho &quot;{{{title}}&quot;",
-            "YOUAREINVITED": "O TLETSE!",
-            "AcceptInvite": "Amohela Memo"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "U mengoe ho {{title}}. Ka kōpo tlanya {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "U memetsoe. {{ClickOrTap}} mona ho amohela le ho ikopanya."
-        },
-        "command": "Mema",
-        "youCanNowPaste": "Hona joale o ka beha sehokelo sena kae kae ho mema batho"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
-            "confirm": "Memo e romeloa ho tloha palo ea rona, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
-            "check": "Hey, ke u rometse memo ho {{app}} app. Ka kopo sheba li-sms tsa hau mme o tobetsa sekahare!",
-            "CheckYourMobile": "Ka kopo sheba SMS mme u latele litaelo!"
-        },
-        "email": {
-            "alert": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Latela ka temana e potlakileng ho ba tsebisa memo eo e tsoa ho uena, u ba kōpe hore ba tobetse konteraka.",
-            "confirm": "Memo e romeloa ho tsoa ho domain, eo metsoalle ea hau e sa e tsebeng. Na o ka rata ho latela le mongolo o potlakileng ho ba tsebisa memo eo e tsoa ho uena, o ba kopa ho tobetsa konteraka.",
-            "subject": "O fumane tumemo?",
-            "body": "Hey, ke u rometse memo ho {{app}} app. Ka kopo, sheba lengolo la hau la imeile mme o tobetsa konteraka ho eona!",
-            "CheckYourEmail": "Ka kopo sheba lengolo-tsoibila la hau mme u latele litaelo!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Numella Microphone",
-            "cameraTitle": "Etsa K&#39;hamera",
-            "cameraAndMicrophoneTitle": "Etsa K&#39;hamera le Microphone",
-            "dialogTitle": "Ho hokela",
-            "microphoneBtn": "Nolofatsa Microphone",
-            "cameraBtn": "Nolofatsa Khamera",
-            "cameraAndMicrophoneBtn": "Nolofatsa Khamera le Microphone"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Litaelo",
-            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
-            "point1": "Eya ho &quot;Litlhophiso&quot; -&gt; &quot;E hatetse pele&quot; -&gt; &quot;Boitsebiso le lekunutu&quot; -&gt; &quot;Litlhophiso tsa Sebaka&quot; - &quot;Khamera&quot; kapa &quot;Litlhophiso tsa Sebaka&quot; -&gt; &quot;Microphone&quot;",
-            "point2": "Tlosa {{hostname}} lenaneng la &quot;Block&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Litaelo",
-            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ka kopo kenya leqephe lena hape &#39;me u netefatse ho fihlella ho {{kind}} ho kenela kopano."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Litaelo",
-            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
-            "point1": "Eya ho Litlhophiso tsa hau tsa Android",
-            "point2": "Bula &quot;Lisebelisoa le tsebiso&quot;",
-            "point3": "Fumana &quot;{{communityName}} &#39;me u e bule",
-            "point4": "Tlanya ka Litumello",
-            "point5": "Nolofatsa {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Litaelo",
-            "permissionDenied": "Ho lumelloa tumello ea {{kind}}. Ho e sebelisa ka kopo latela mehato ena:",
-            "point1": "Eya ho Litlhophiso tsa hau tsa iOS",
-            "point2": "Bula &quot;Lekunutu&quot;",
-            "point3": "Fumana {{kind}} &#39;me u e bule",
-            "point4": "Fumana &quot;{{communityName}} &#39;me u khone"
-        },
-        "notices": {
-            "youJoinedRoom": "O kene ka phapusing",
-            "joining": "Joang: {{userName}}",
-            "sbLeftRoom": "{{userName}} a tsoa ka phapusing",
-            "youLeftRoom": "U tsoile ka phapusing",
-            "codeCopied": "U tsoile ka phapusing",
-            "sbBeganFbLive": "{{userName}} o qalile ho phatlalatsa mohala ona ho Facebook",
-            "sbStoppedFbLive": "{{userName}} o emisitse ho phatlalatsa mohala ona ho Facebook",
-            "youBeganFbLive": "U qalile ho phatlalatsa mohala ona ho Facebook",
-            "youStoppedFbLive": "O emisitse ho phatlalatsa mohala ona ho Facebook",
-            "linkCopiedToCb": "Khokahano e kopitsoe ho clipboard",
-            "codeCopiedToCb": "Khoutu e kopitsoe ho clipboard",
-            "userHasNoVideo": "Morupeluoa ha a na video",
-            "openInBrowserAlert": "Bula sehokelo ka sebatli sa Safari ho kenela kopano.",
-            "youBeganVideoRecording": "O qalile ho rekota kopano ena",
-            "youStoppedVideoRecording": "O emisitse ho rekota kopano ena",
-            "switchingRoom": "Ho fetola kamore ...",
-            "forceDisconnecting": "O tla hakolloa kamora metsotsoana e 5",
-            "youStartedLive": "O qalile ho phatlalatsa mohala ona ho RTMP ea tloaelo",
-            "youStoppedLive": "U emisitse ho phatlalatsa mohala ona ho RTMP ea tloaelo",
-            "sbStartedLiveStreaming": "{{userName}} e qalile ka kotloloho",
-            "sbStoppedLiveStreaming": "{{userName}} e fedile hang",
-            "liveStopped": "Phoso ha ho romelloa video ho fihla qetellong e etsahetse"
-        },
-        "settingsPopup": {
-            "webCamera": "Khamera ea Webo",
-            "screenSharing": "Ho arolelana Screen",
-            "shareAnotherScreen": "Abelana skrini se seng",
-            "turnOffCameras": "Tima likh&#39;amera tsohle",
-            "startFBLive": "Qala Facebook Livestream",
-            "stopFBLive": "Emisa Facebook Livestream",
-            "fbLiveTitle": "Sehlooho se Phelang",
-            "fbLiveDescription": "Tlhaloso e Phelang",
-            "fbOnlyMeLiveAccess": "Ke Nna feela",
-            "fbFriendsAccess": "Metsoalle",
-            "fbPublicAccess": "Tsa phatlalatsa",
-            "fbStartLive": "Eya ho phela",
-            "fbStopLive": "Phethahetseng",
-            "fbEmbedCode": "Embed",
-            "copy": "Kopitsa",
-            "turnOffVideo": "Tima ho arolelana kh&#39;amera \/ skrineng",
-            "turnOffScreenSharing": "Tima ho arolelana skrineng",
-            "cameraIsTurnedOff": "Khamera e felisitsoe",
-            "startRecording": "Qala ho Rekota",
-            "stopRecording": "Emisa ho Rekota",
-            "recordingInProgress": "Ho rekota hoa tsoela pele ...",
-            "publishOnTimeline": "Hatisa ka tatellano ea nako",
-            "publishToGroup": "Phatlalatsa ho sehlopha",
-            "turnOffAudioInput": "Khutsa maekrofono",
-            "micIsTurnedOff": "Maekrofouno o timme",
-            "start": "Qala",
-            "stop": "Ema",
-            "streamingSettings": "Litlhophiso",
-            "streamToRTMP": "Phallela ho RTMP ea tloaelo"
-        },
-        "participantsPopup": {
-            "disconnect": "Lahla",
-            "floatingScreens": "Lits&#39;oants&#39;o tsa Phaphamale",
-            "tiledScreens": "Mehala ea Literase",
-            "loudestExceptMe": "O Ratehang Haholo ntle le nna",
-            "maximizeLoudest": "Phahamisa ka ho Fetisisa",
-            "staticMaximized": "E matlafalitsoe",
-            "manual": "Buka ea matsoho",
-            "fullScreen": "Skrine se felletseng",
-            "turnOffCamera": "Pata video",
-            "turnOffAudio": "Utloisa molumo",
-            "turnOffScreenSharing": "Pata ho arolelana skrini",
-            "turnOnCamera": "Bontša video",
-            "turnOnAudio": "Sokolla molumo",
-            "turnOnScreenSharing": "Bontša ho arolelana skrineng"
-        },
-        "notAllowedToJoinCall": "Ha u na tumello ea ho kenella molatsoaneng ona.",
-        "streamTitle": "{{1}} mohala o tsitsitseng",
-        "preview": {
-            "preamble": "Seboka:",
-            "Meeting": "Kopano",
-            "MeetingEnded": "Kopano e ile ea fela"
-        },
-        "preparing": {
-            "micIsOff": "Mic e tima",
-            "micIsOn": "Mic e buletsoe",
-            "cameraIsOff": "Khamera e timme",
-            "cameraIsOn": "Khamera e buletsoe",
-            "screenSharingIsOn": "Screensharing e butsoe",
-            "screenSharingIsOff": "Abelana skrine",
-            "joinNow": "Eba mohala"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "o romelle molaetsa oa <em>{{message.fields.type}}<\/em> ho {{1000]}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "fana ka maikutlo ka",
-            "in": "ka",
-            "body": "ho {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "e romelletsoe ho",
-                "byAvatar": "ka {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "e na le {{instructions.fromDisplayType}} e ncha",
-                "byAvatar": "e kentsoe ke {{avatar.displayName}}"
-            },
-            "startedCallIn": "o ile a qala ho letsetsa"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "E memiloe",
-            "description": "Inbox bakeng sa limemo"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Sesebelisoa",
-            "description": "phallela bakeng sa ho laola phihlello ea lisebelisoa le ho romella melaetsa mabapi le lipapatso"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "bakeng sa ho amohela lintlha mabapi le tsoelo-pele mabapi le mosebetsi o itseng",
-            "displayType": "Mosebetsi"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "mokga bakeng sa mesebetsi",
-            "displayType": "Mesebetsi"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "boiphihlelo bo tloaelehileng ho litho tsa sechaba",
-            "displayType": "Boiphihlelo bo tloaelehileng bakeng sa litho tsa sechaba"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "litumeliso tseo mosebelisi a ka itlhahisang ka tsona",
-            "displayType": "Litumeliso"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Palo",
-            "description": "nomoro ea lipalo"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Letsatsi",
-            "description": "letsatsi"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Mongolo",
-            "description": "mmele wa sengoloa"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Mongolo",
-            "description": "mmele o monyane wa sengoloa"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Mongolo",
-            "description": "mmele o mahareng oa mongolo"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Aterese ea imeile",
-            "description": "aterese ea imeile"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Nomoro ea mohala",
-            "description": "nomoro ea mohala"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "khokahano ho webosaete"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Setšoantšo",
-            "description": "setšoantšo se bonoang",
-            "newItem": "Eketsa Setšoantšo"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Setšoantšo sa litšoantšo",
-            "description": "pokello ea litšoantšo"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Albums",
-            "description": "albamo e amanang le litaba tse fapaneng e amanang le eona"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Faele",
-            "description": "faele e kentsoeng",
-            "newItem": "Kenya File"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Molumo oa Audio",
-            "description": "sekotlo sa molumo",
-            "newItem": "Kenya Audio"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Papali ea Video",
-            "description": "sekotwana sa video",
-            "newItem": "Kenya Video"
-        },
-        "Streams\/live": {
-            "displayType": "Ho pharalla",
-            "description": "seea-le-moea kapa video"
-        },
-        "Streams\/category": {
-            "displayType": "Sehlopha",
-            "description": "sehlopha seo melapo e meng e ka amanang le sona"
-        },
-        "Streams\/participating": {
-            "displayType": "Index e Akarelletsang",
-            "description": "melapo e amana \/ e hokahane le sena ha mosebelisi a kenella \/ a tsoa"
-        },
-        "Streams\/interest": {
-            "displayType": "Thahasello",
-            "description": "e emetse thahasello ea mosebelisi ka sehlooho se itseng"
-        },
-        "Streams\/incoming": {
-            "displayType": "E tlang",
-            "description": "sebaka sa melaetsa e rometsoeng ke basebelisi ba bang"
-        },
-        "Streams\/chat": {
-            "displayType": "Moqoqo",
-            "description": "puisano pakeng tsa basebelisi, e nang le nalane"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Mohala oa Nako ea &#39;nete",
-            "description": "video ea nako ea &#39;nete \/ mohala oa molumo"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Tokomane ea PDF",
-            "description": "Tokomane ea PDF",
-            "newItem": "Kenya PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Potso",
-            "description": "molapo oa lipotso"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Karabo",
-            "description": "karabo ea karabo"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Di-call",
-            "description": "sehlopha bakeng sa Melapo \/ webrtc",
-            "MaxRelationsExceeded": "Mehala e mengata e fete"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Sehlooho",
-        "Subscribed": "E ngolisitsoe",
-        "Participants": "Barupeluoa",
-        "AreYouSureRemoveIdentifier": "O na le bonnete ba hore o tlosa pontšo ee?",
-        "AreYouSureUnsubscribeIdentifier": "O na le bonnete ba hore u ngolisa sesupo see? E tla tima tsebiso ho tsebisoang.",
-        "AreYouSureUnsubscribeDevice": "O na le bonnete ba hore u ngolisa sesebelisoa see? E tla tima tsebiso mabapi le sesebelisoa sena.",
-        "Identifiers": "Matšoao",
-        "Devices": "Lisebelisoa",
-        "Streams": "Meroallo",
-        "AreYouSureRemoveParticipant": "U na le bonnete ba hore u batla ho tlosa motho enoa ea nkang karolo?",
-        "RemoveParticipant": "Tlosa motho ea nkang karolo"
-    },
     "menu": {
-        "placeholder": "mofuta oa leqephe la sehlooho",
-        "ModTab": "Fetola Taba",
-        "Save": "Boloka",
-        "Delete": "Tlosa",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Litaba tsena li patetsoe uena."
-    },
     "audio": {
-        "record": "Rekoto",
-        "reset": "Seta bocha",
-        "edit": "Edita",
-        "title": "sehlooho",
-        "description": "tlhaloso",
-        "upload": "Kenya",
-        "link": "Khokahano",
-        "setUrl": "Seta URL",
-        "save": "Boloka",
-        "setClip": "Khaola Sekoto",
-        "invalidURL": "URL e fosahetseng",
-        "invalidFile": "Faele e fosahetseng",
-        "errorNoSource": "Ha ho mohloli oa molumo",
-        "uploadLimit": "Boholo ba faele: {{size}}",
-        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Seta bocha",
-        "edit": "Edita",
-        "title": "sehlooho",
-        "description": "tlhaloso",
-        "upload": "Kenya",
-        "link": "Khokahano",
-        "setUrl": "Seta URL",
-        "save": "Boloka",
-        "setClip": "Khaola Sekoto",
-        "invalidURL": "URL e fosahetseng",
-        "invalidFile": "Faele e fosahetseng",
-        "errorNoSource": "Ha ho mohloli oa video",
-        "uploadLimit": "Boholo ba faele: {{size}}",
-        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Seta bocha",
-        "edit": "Edita",
-        "title": "sehlooho",
-        "description": "tlhaloso",
-        "upload": "Kenya",
-        "link": "Khokahano",
-        "setUrl": "Seta URL",
-        "save": "Boloka",
-        "setClip": "Khaola Sekoto",
-        "invalidURL": "URL e fosahetseng",
-        "invalidFile": "Faele e fosahetseng",
-        "errorNoSource": "Ha ho mohloli oa pdf",
-        "uploadLimit": "Boholo ba faele: {{size}}",
-        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Seta bocha",
-        "edit": "Edita",
-        "title": "sehlooho",
-        "description": "tlhaloso",
-        "upload": "Kenya",
-        "link": "Khokahano",
-        "setUrl": "Seta URL",
-        "save": "Boloka",
-        "setClip": "Khaola Sekoto",
-        "invalidURL": "URL e fosahetseng",
-        "invalidFile": "Faele e fosahetseng",
-        "errorNoSource": "Ha ho mohloli oa setšoantšo",
-        "uploadLimit": "Boholo ba faele: {{size}}",
-        "errorFileSize": "Tšoarelo, empa file e kholo haholo.<br> Boholo ba faele ke {{size}}",
-        "uploadedImage": "Setšoantšo se kentsoeng",
-        "imageTitle": "Sehlooho sa setšoantšo"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Lipotso",
-        "Answers": "Likarabo",
-        "AnswerQuestion": "Araba Potso",
-        "SetYourAnswer": "Ka kopo araba potso",
-        "NewQuestion": "Potso e Ncha",
-        "NewAnswer": "Karabo e Ncha",
-        "AnswerDetails": "Lintlha tsa Karabo",
-        "answerOption": "Khetho",
-        "answerOptionExclusive": "E khethehileng",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "karabo ea mahala ...",
-        "SaveQuestion": "Boloka Potso",
-        "SaveAnswer": "Boloka Karabo",
-        "AddAnotherAnswer": "Kenya karabo e &#39;ngoe",
-        "ErrorAnswers": "Ka kopo eketsa karabo e le &#39;ngoe",
-        "AlreadyAnswered": "E se e arabiloe",
-        "TitlePlaceholder": "Ngola potso ea hau",
-        "ContentPlaceholder": "Beha lintlha tse ling tse tlatsetso mona ho thusa batho ho araba",
-        "ErrorTitle": "Potso ea hlokahala",
-        "Placeholder": "Setholi"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Phihlelo e Ncha",
-        "DefineTitle": "Ka kopo hlalosa sehlooho",
-        "Create": "Theha"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Di-call",
-        "MaxCalls": "Max oa letsa",
-        "Update": "Nchafatsa",
-        "NoCallsYet": "Ha ho li-call hajoale",
-        "CallReasonTitle": "Mohala ona ke oa eng?",
-        "WaitingRoom": "Kamore ea ho Leta"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

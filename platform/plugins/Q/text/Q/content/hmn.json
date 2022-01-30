@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Yuam kev {{status}} thaum thov",
-        "canceled": "Thov tso tseg",
-        "500": "Sab hauv neeg rau zaub mov yuam kev",
-        "404": "Tsis pom: {{url}}",
-        "501": "Thov cuam tshuam"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Kev sib kho tas sij hawm. Hloov cov nplooj ntawv thiab sim dua.",
-        "otherDomain": "Thaiv qhov kev thov nkag mus rau txawv teb chaws lub npe ntawm {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "coj mus rhaub",
-        "click": "nyem",
-        "yes": "yog",
-        "no": "tsis muaj",
-        "Tap": "Coj mus rhaub",
-        "Click": "Nyem",
-        "Yes": "Muaj",
-        "No": "Tsis yog"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Lub Ib Hlis",
-        "2": "Lub Ob Hlis",
-        "3": "Lub Peb Hlis Ntuj",
-        "4": "Plaub Hlis Ntuj",
-        "5": "Tsib",
-        "6": "Lub Rau Hli",
-        "7": "Lub Xya Hli",
-        "8": "Lub yim hli ntuj",
-        "9": "Lub Cuaj Hli",
-        "10": "Lub Kaum Hlis",
-        "11": "Kaum Ib Hlis",
-        "12": "Kaum Ob Hlis"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Thov cia nkag mus rau koj lub microphone",
-        "record": "Cov ntaub ntawv",
-        "recording": "Cov ntaubntawv",
-        "remains": "tshua",
-        "maximum": "siab kawg",
-        "playing": "Ua si",
-        "recorded": "Sau tseg",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Los Upload",
-        "usethis": "Siv Qhov no",
-        "discard": "Muab pov tseg",
+        "discard": "Discard",
         "encoding": "Encoding"
-    },
-    "alert": {
-        "title": "Kev ceeb toom"
-    },
-    "confirm": {
-        "title": "Tshawb xyuas",
-        "ok": "Muaj",
-        "cancel": "Tsis yog"
-    },
-    "prompt": {
-        "title": "Sij hawm",
-        "ok": "Mus"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Cov ntawv nyeem kev ua yuam kev",
-        "cameraCommands": {
-            "prompt": "Koj nyiam ua dab tsi?",
-            "photo": "Noj tshiab yees duab",
-            "library": "Xaiv tau los ntawm tsev qiv ntawv"
-        },
-        "tooSmall": "Thov xaiv duab loj.",
-        "cropping": {
-            "title": "Kho qhov loj thiab qhov chaw",
-            "touchscreen": "Siv koj tus ntiv tes kom zoom thiab luag",
-            "notTouchscreen": "Siv koj tus nas &amp; lub log kom zoom thiab luag"
-        }
-    },
-    "timestamp": {
-        "lastNight": "nag hmo",
-        "lastEvening": "kawg Eve",
-        "yesterday": "nag hmo",
-        "thisMorning": "tus niam txiv no",
-        "today": "niaj hnub no",
-        "tonight": "hmo no",
-        "tomorrowMorning": "yav sawv ntxov",
-        "tomorrow": "tag kis",
-        "hoursAgo": "{{h}} teev dhau los",
-        "hourAgo": "{{h}} teev dhau los",
-        "minuteAgo": "{{m}} feeb dhau los",
-        "minutesAgo": "{{m}} feeb dhau los",
-        "secondAgo": "{{s}} thib ob dhau los",
-        "secondsAgo": "{{s}} vib nas this dhau los",
-        "fewSecondsAgo": "vib nas this dhau los",
-        "rightNow": "tam sim no",
-        "inSecond": "hauv {{s}} thib ob",
-        "inSeconds": "hauv {{s}} vib nas this",
-        "inMinute": "hauv {{m}} feeb",
-        "inMinutes": "hauv {{m}} feeb",
-        "inHour": "hauv {{h}} teev",
-        "inHours": "hauv {{h}} teev",
-        "inUnderMinute": "hauv qab 1 feeb"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Tsis muaj cov zis video",
-        "SkipAfter": "Hla tom qab",
-        "Skip": "Hla"
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Tsis muaj pdf los"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Teem Clip Pib",
-        "ClipStart": "Clip Pib",
-        "SetClipEnd": "Teev Clip Kawg",
-        "ClipEnd": "Clip Xaus",
-        "StartMoreEnd": "Txoj haujlwm pib tsis tuaj yeem yog ntau dua txoj haujlwm kawg",
-        "EndLessStart": "Txoj haujlwm kawg tsis tuaj yeem tsawg dua pib txoj haujlwm",
-        "WhichInvalid": "Kev sib cav &#39;uas&#39; tsis raug"
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "ntxiv",
-        "Menu": "Ntawv qhia zaub mov"
+        "more": "more",
+        "Menu": "Menu"
     },
-    "durations": {
-        "second": "ob",
-        "seconds": "vib nas this",
-        "minute": "feeb",
-        "minutes": "feeb",
-        "hour": "cov sij hawm",
-        "day": "hnub",
-        "days": "hnub",
-        "week": "lub lim tiam",
-        "weeks": "lub lis piam",
-        "month": "lub hli",
-        "months": "lub hlis",
-        "year": "xyoo",
-        "years": "xyoo",
-        "decade": "xyoo caum",
-        "decades": "kaum tawm xyoo",
-        "century": "caug xyoo",
-        "centuries": "ib-paus xyoo"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

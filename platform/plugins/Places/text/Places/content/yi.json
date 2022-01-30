@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} לאַט, {{2}} לנג)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "אין {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "מעטער",
-        "meters": "מעטער",
-        "kilometer": "קילאָמעטער",
-        "kilometers": "קיאָמעטערס",
-        "km": "קילאמעטער",
-        "mile": "מייל",
-        "miles": "מייל",
-        "mi": "מי",
-        "foot": "פֿיס",
-        "feet": "פֿיס",
-        "inches": "אינטשעס"
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "איך בין אינטערעסירט אין זאכן וואָס פּאַסירן אין {{select}} פון",
-        "update": "דערהייַנטיקן מייַן לאָקאַטיאָן",
-        "set": "באַשטעטיק מייַן לאָקאַטיאָן",
-        "prompt": "{{ClickOrTap}} דאָ צו<br> שטעלן דיין<br> אָרט",
-        "myCurrentLocation": "מייַן איצטיקער אָרט",
-        "enterAddress": "אַרייַן אַן אַדרעס",
-        "enterPostcode": "אַרייַן דיין פּאָסטקאָדע \/ פאַרשלעסלען קאָד",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "לייג אָרט",
-            "title": "ניו אָרט",
-            "nameYourLocation": "נאָמען דיין אָרט"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "ראַטעווען דעם אָרט?",
-            "message": "צי איר פּלאַן צו נוצן דעם אָרט ווידער אין דער צוקונפֿט?",
-            "ok": "יא",
-            "cancel": "ניין"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "נאָמען דעם אָרט",
-            "placeholder": "היים, אַרבעט עטק.",
-            "ok": "היט"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "קלייַבן אָרט"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "קיין שטח אין דעם אָרט?",
-        "newArea": "ניו שטח",
-        "promptTitle": "אַרייַן אַ נאָמען פֿאַר דער געגנט:",
-        "absent": "ביטע שטעלן שטח",
-        "error": "טעות",
-        "exist": "שטח שוין עקסיסטירן",
-        "addNewArea": "לייג נייַ געגנט",
-        "add": "לייג צו"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "אַ זאַמלונג פון לאָוקיישאַנז",
-            "displayType": "לאָקאַטיאָנס"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "רעפּראַזענץ אַ בנין, אָרט, שיף, פּאַרק, עטק.",
-            "displayType": "אָרט"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "רעפּראַזענץ אַ שטח אין אַ אָרט, אַזאַ ווי אַ פּלאַץ אָדער סוויט",
-            "displayType": "שטח"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "רעפּראַזענץ אַ שטאָק אין אַ בנין אָדער שיף",
+            "description": "Represents a floor in a building or ship",
             "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "רעפּראַזענץ אַ זייַל אין אַ בנין אָדער שיף",
-            "displayType": "זייַל"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "קאַטעגאָריע פֿאַר טינגז אין אַ זיכער ווייַטקייט פון אַ געאָהאַש",
-            "displayType": "נאָענט דורך ערטער"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "קאַטעגאָריע פֿאַר טינגז אין אַ זיכער ווייַטקייט פון אַ געאָהאַש, וואָס ריכטן זיך אַן אינטערעס",
-            "displayType": "ערטער אינטערעס"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

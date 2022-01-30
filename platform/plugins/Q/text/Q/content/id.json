@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Kesalahan {{status}} saat permintaan",
-        "canceled": "Permintaan dibatalkan",
-        "500": "Kesalahan server dari dalam",
-        "404": "Tidak ditemukan: {{url}}",
-        "501": "Permintaan terputus"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesi berakhir. Refresh halaman dan coba lagi.",
-        "otherDomain": "Permintaan lintas domain diblokir ke domain asing di {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "keran",
-        "click": "klik",
-        "yes": "iya nih",
-        "no": "tidak",
-        "Tap": "Keran",
-        "Click": "Klik",
-        "Yes": "iya nih",
-        "No": "Tidak"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Januari",
-        "2": "Februari",
-        "3": "Maret",
+        "1": "January",
+        "2": "February",
+        "3": "March",
         "4": "April",
-        "5": "Mungkin",
-        "6": "Juni",
-        "7": "Juli",
-        "8": "Agustus",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
         "9": "September",
-        "10": "Oktober",
+        "10": "October",
         "11": "November",
-        "12": "Desember"
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Tolong izinkan akses ke mikrofon Anda",
-        "record": "Merekam",
-        "recording": "Rekaman",
-        "remains": "sisa",
-        "maximum": "maksimum",
-        "playing": "Bermain",
-        "recorded": "Tercatat",
-        "clip": "klip",
-        "orupload": "Atau Unggah",
-        "usethis": "Gunakan ini",
-        "discard": "Membuang",
-        "encoding": "Pengkodean"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Waspada"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Memastikan",
-        "ok": "iya nih",
-        "cancel": "Tidak"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Cepat",
-        "ok": "Pergi"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Kesalahan membaca file",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Apa yang ingin kamu lakukan?",
-            "photo": "Ambil foto baru",
-            "library": "Pilih dari perpustakaan"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Silakan pilih gambar yang lebih besar.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Sesuaikan ukuran dan posisi",
-            "touchscreen": "Gunakan jari Anda untuk memperbesar dan menarik",
-            "notTouchscreen": "Gunakan mouse &amp; roda Anda untuk memperbesar dan menarik"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "Tadi malam",
-        "lastEvening": "malam terakhir",
-        "yesterday": "kemarin",
-        "thisMorning": "pagi ini",
-        "today": "hari ini",
-        "tonight": "malam ini",
-        "tomorrowMorning": "tom pagi",
-        "tomorrow": "besok",
-        "hoursAgo": "{{h}} jam yang lalu",
-        "hourAgo": "{{h}} jam yang lalu",
-        "minuteAgo": "{{m}} menit yang lalu",
-        "minutesAgo": "{{m}} menit yang lalu",
-        "secondAgo": "{{s}} detik yang lalu",
-        "secondsAgo": "{{s}} detik yang lalu",
-        "fewSecondsAgo": "beberapa detik lalu",
-        "rightNow": "sekarang juga",
-        "inSecond": "dalam {{s}} detik",
-        "inSeconds": "dalam {{s}} detik",
-        "inMinute": "dalam {{m}} menit",
-        "inMinutes": "dalam {{m}} menit",
-        "inHour": "dalam {{h}} jam",
-        "inHours": "dalam {{h}} jam",
-        "inUnderMinute": "kurang dari 1 menit"
-    },
-    "video": {
-        "clip": "klip",
-        "errorNoSource": "Tidak ada sumber video",
-        "SkipAfter": "Lewati setelah",
-        "Skip": "Melewatkan"
-    },
-    "pdf": {
-        "clip": "klip",
-        "errorNoSource": "Tidak ada sumber pdf"
-    },
-    "clip": {
-        "SetClipStart": "Setel Mulai Klip",
-        "ClipStart": "Klip Mulai",
-        "SetClipEnd": "Setel Akhir Klip",
-        "ClipEnd": "Klip Akhir",
-        "StartMoreEnd": "Posisi awal tidak boleh lebih dari posisi akhir",
-        "EndLessStart": "Posisi akhir tidak boleh kurang dari posisi awal",
-        "WhichInvalid": "Argumen &#39;yang&#39; tidak valid"
-    },
-    "tabs": {
-        "more": "lebih",
-        "Menu": "Tidak bisa"
-    },
-    "durations": {
-        "second": "kedua",
-        "seconds": "detik",
-        "minute": "menit",
-        "minutes": "menit",
-        "hour": "jam",
-        "day": "hari",
-        "days": "hari",
-        "week": "minggu",
-        "weeks": "minggu",
-        "month": "bulan",
-        "months": "bulan",
-        "year": "tahun",
-        "years": "tahun",
-        "decade": "dasawarsa",
-        "decades": "dekade",
-        "century": "abad",
-        "centuries": "abad"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

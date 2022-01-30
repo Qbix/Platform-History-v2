@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Σύνδεση",
-        "LogOut": "Αποσυνδέση"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Ρυθμίστε {{1}} ως κύριο {{2}}",
-        "ChoosePassPhrase": "Επιλέξτε μια <strong>φράση<\/strong> για να συνδεθείτε με. <br> Μια απλή φράση που αποτελείται από λίγα λόγια που θα θυμάστε εύκολα.",
-        "ChoosePassPhraseSeeSuggestions": "Επιλέξτε μια καλή <strong>φράση<\/strong> για να προστατεύσετε τον λογαριασμό σας. Δείτε τις προτάσεις για κάποιες ιδέες.",
-        "LogOutAndTryAgain": "Αποσυνδεθείτε και δοκιμάστε ξανά",
-        "IfYouFeel": "Εάν αισθάνεστε ότι κάτι πήγε στραβά, μπορείτε",
-        "SetIdentifierButtonTitle": "ξεκίνα από την αρχή"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Ξεκίνα"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Ξεκίνα",
-        "Authorize": "Εξουσιοδοτώ",
-        "TermsLabel": "Έχω διαβάσει και συμφωνώ <br> στο {{link}}",
-        "TermsTitle": "Οροι",
-        "mustAgree": "Πρώτα πρέπει να συμφωνήσετε με τους όρους."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Αποδέχομαι τα {{link}}",
-        "TermsTitle": "Οροι"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Αδεια",
-        "prompt": "Θέλετε να ενεργοποιήσετε τις ειδοποιήσεις; Θα λάβετε ενημερώσεις σε πραγματικό χρόνο σχετικά με τα πράγματα που σας ενδιαφέρουν.",
-        "yes": "Ναί",
-        "no": "Οχι",
-        "WelcomePleaseVerifyEmail": "Καλως ΗΡΘΑΤΕ! Επαληθεύστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.",
-        "WelcomeVerifyEmail": "Καλως ΗΡΘΑΤΕ! Επιβεβαιώστε τη διεύθυνση ηλεκτρονικού ταχυδρομείου σας.",
-        "ForgetPass": "Γεια σου, ξεχάσατε τη φράση πρόσβασης;",
-        "PassphraseSaved": "Η φράση που χρησιμοποιείτε έχει αποθηκευτεί.",
-        "IdentifierActivated": "Το {{type}} σας έχει ενεργοποιηθεί.",
-        "CompletedActivation": "Έχετε ολοκληρώσει την ενεργοποίηση του χρήστη.",
-        "CompletedActivationLogIn": "Έχετε ολοκληρώσει την ενεργοποίηση του χρήστη. Δοκιμάστε να συνδεθείτε τώρα."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Επιλέξτε ετικέτα.",
-        "inviteUser": "Πρόσκληση χρήστη",
-        "selectRole": "Επιλέξτε Ρόλος",
-        "inviteRole": "Πρόσκληση {{role}}"
-    },
-    "invalidLanguageSelected": "Επιλέχθηκε μη έγκυρη γλώσσα",
     "contacts": {
         "dialog": {
-            "title": "Επιλέξτε επαφή",
-            "SearchByName": "Αναζήτηση βάσει ονόματος",
-            "CreateAccount": "+ Νέα επαφή",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create δεν βρέθηκε",
-            "EmptyContacts": "Δεν βρέθηκαν επαφές ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Επιλέξτε επαφή του {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "καλως ΗΡΘΑΤΕ",
-        "directions": "Δημιουργήστε έναν λογαριασμό ή συνδεθείτε.",
-        "directionsNoRegister": "Συνδεθείτε εάν έχετε λογαριασμό.",
-        "goButton": "Πηγαίνω",
-        "passphrase": "Εισαγάγετε τη φράση που χρησιμοποιείτε",
-        "loginButton": "Ξεκίνα",
-        "registerButton": "Ξεκίνα",
-        "resendButton": "Αποστολή μηνύματος ενεργοποίησης",
-        "forgot": "Το ξέχασα?",
-        "resendConfirm": "Θέλετε να στείλετε ένα μήνυμα για να επαναφέρετε τη φράση πρόσβασης;",
-        "resendSuccess": "Ελέγξτε για ένα μήνυμα για να επαναφέρετε τη φράση πρόσβασης",
-        "resendClose": "Κοντά",
-        "noPassphrase": "Για να μπορέσετε να συνδεθείτε, πρέπει να ορίσετε μια φράση επιτυχίας κάνοντας κλικ στο σύνδεσμο στο μήνυμα ενεργοποίησης.",
-        "notVerified": "Πρέπει να στείλετε ένα μήνυμα ενεργοποίησης για να συνδεθείτε.",
-        "emailExists": "Προσπαθήσατε να εγγραφείτε με αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου πριν; Αν ναι, ελέγξτε τα εισερχόμενά σας για να ενεργοποιήσετε το λογαριασμό σας. <a href='#resend' class='Q_button Users_activation_resend'>Κάντε κλικ για να στείλετε ξανά το μήνυμα<\/a>",
-        "mobileExists": "Προσπαθήσατε να εγγραφείτε με αυτόν τον αριθμό κινητού τηλεφώνου πριν; Αν ναι, ελέγξτε το SMS σας για να ενεργοποιήσετε το λογαριασμό σας. <a href='#resend' class='Q_button Users_activation_resend'>Κάντε κλικ για να στείλετε ξανά το μήνυμα<\/a>",
-        "usingOther": "ή μπορείτε",
-        "prompt": "Διάλεξε ένα όνομα χρήστη:",
-        "newUser": "ή δημιουργήστε έναν νέο λογαριασμό παρακάτω",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "το κινητό # ή το ηλεκτρονικό σας ταχυδρομείο",
-            "mobile": "εισάγετε το κινητό σας #",
-            "email": "Εισάγετε την διεύθυνση ηλεκρονικού ταχυδρομείου σας",
-            "username": "όνομα χρήστη"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Αποδέχεστε τους Όρους Παροχής Υπηρεσιών;",
-        "facebookNoEmail": "Στον λογαριασμό σας στο facebook λείπει μια επιβεβαιωμένη διεύθυνση ηλεκτρονικού ταχυδρομείου. Απλώς συνδεθείτε με τον εγγενή τρόπο.",
-        "picTooltip": "Μπορείτε να αλλάξετε αυτήν την εικόνα αργότερα",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Συνδεθείτε {{host}} κάθε φορά {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ανακατεύθυνση στο Πορτοφόλι",
-                "content": "Μόλις κλείσετε αυτό το παράθυρο διαλόγου, θα μεταφερθείτε στο πορτοφόλι σας. Αφού συνδεθείτε, επιστρέψτε σε αυτήν τη σελίδα."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Προσθέστε έναν τρόπο σύνδεσης",
-        "sendMessage": "Αποστολή μηνύματος ενεργοποίησης",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "εισάγετε το κινητό # ή το ηλεκτρονικό σας ταχυδρομείο",
-            "mobile": "Εισάγετε τον αριθμό του κινητού σας",
-            "email": "Εισάγετε την διεύθυνση ηλεκρονικού ταχυδρομείου σας",
-            "username": "όνομα χρήστη"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Λογαριασμός",
-        "areUsing": "Χρησιμοποιείτε {{platform}} ως",
-        "noLongerUsing": "Δεν είστε πλέον συνδεδεμένοι με το {{platform}} ως",
-        "doAuth": "Συνδεθείτε με αυτόν το λογαριασμό",
-        "doSwitch": "Μεταβείτε σε αυτόν το λογαριασμό"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Ιδιοκτήτης",
-        "Admin": "διαχειριστής",
-        "Member": "Μέλος",
-        "Guest": "Επισκέπτης",
-        "Host": "Πλήθος"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Καθημερινά",
-        "Weekly": "Εβδομαδιαίος",
-        "Monthly": "Μηνιαίο",
-        "Application": "Εφαρμογή",
-        "Pages": "Σελίδες",
-        "Services": "Υπηρεσίες",
-        "Faq": "Φακ",
-        "WeekDays": "Ημέρες εβδομάδας"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

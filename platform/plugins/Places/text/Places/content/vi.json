@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "trong {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "mét",
-        "meters": "mét",
-        "kilometer": "km",
-        "kilometers": "kiomet",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "dặm",
-        "miles": "dặm",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "chân",
-        "feet": "đôi chân",
-        "inches": "inch"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Tôi quan tâm đến những điều diễn ra trong {{select}} trong",
-        "update": "Cập nhật vị trí của tôi",
-        "prompt": "{{ClickOrTap}} tại đây để <br> đặt của bạn <br> vị trí",
-        "myCurrentLocation": "Vị trí hiện tại của tôi",
-        "enterAddress": "Nhập địa chỉ",
-        "enterPostcode": "Vui lòng nhập mã bưu điện \/ mã zip của bạn",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Thêm vị trí",
-            "title": "Địa điểm mới",
-            "nameYourLocation": "Đặt tên cho vị trí của bạn"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Lưu vị trí này?",
-            "message": "Bạn có kế hoạch sử dụng vị trí này một lần nữa trong tương lai?",
-            "ok": "Vâng",
-            "cancel": "Không"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Đặt tên cho vị trí này",
-            "placeholder": "Nhà, nơi làm việc, vv",
-            "ok": "Tiết kiệm"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Chọn địa điểm"
-        },
-        "set": "Đặt vị trí của tôi"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Bất kỳ khu vực bên trong vị trí này?",
-        "newArea": "Khu vực mới",
-        "promptTitle": "Nhập tên cho khu vực:",
-        "absent": "Vui lòng đặt khu vực",
-        "error": "lỗi",
-        "exist": "Khu vực đã tồn tại",
-        "addNewArea": "Thêm khu vực mới",
-        "add": "Thêm vào"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "một bộ sưu tập các địa điểm",
-            "displayType": "Địa điểm"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Đại diện cho một tòa nhà, địa điểm, tàu, công viên, vv",
-            "displayType": "Vị trí"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Đại diện cho một khu vực trong một vị trí, chẳng hạn như một căn phòng hoặc bộ",
-            "displayType": "Khu vực"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Đại diện cho một tầng trong một tòa nhà hoặc tàu",
-            "displayType": "Sàn nhà"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Đại diện cho một cột trong tòa nhà hoặc tàu",
-            "displayType": "Cột"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash",
-            "displayType": "Những nơi gần đó"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Danh mục cho những thứ trong một khoảng cách nhất định của geohash, phù hợp với sở thích",
-            "displayType": "Địa điểm quan tâm"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

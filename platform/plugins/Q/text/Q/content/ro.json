@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Eroare {{status}} în timpul solicitării",
-        "canceled": "Cererea a fost anulată",
-        "500": "Eroare interna a serverului",
-        "404": "Nu a fost găsit: {{url}}",
-        "501": "Cererea a fost întreruptă"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesiunea a expirat. Actualizați pagina și încercați din nou.",
-        "otherDomain": "A blocat cererea de domeniu încrucișat în domeniul străin la {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "Atingeți",
-        "click": "clic",
-        "yes": "da",
-        "no": "Nu",
-        "Tap": "Atingeți",
-        "Click": "Clic",
-        "Yes": "da",
-        "No": "Nu"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ianuarie",
-        "2": "februarie",
-        "3": "Martie",
-        "4": "Aprilie",
-        "5": "Mai",
-        "6": "iunie",
-        "7": "iulie",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
         "8": "August",
-        "9": "Septembrie",
-        "10": "octombrie",
-        "11": "noiembrie",
-        "12": "decembrie"
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Permiteți accesul la microfon",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
         "record": "Record",
-        "recording": "Înregistrare",
-        "remains": "rămășițe",
-        "maximum": "maxim",
-        "playing": "Joc",
-        "recorded": "Înregistrate",
-        "clip": "clamă",
-        "orupload": "Sau încărcați",
-        "usethis": "Foloseste asta",
-        "discard": "decarta",
-        "encoding": "Codare"
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Alerta"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "A confirma",
-        "ok": "da",
-        "cancel": "Nu"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
         "title": "Prompt",
-        "ok": "Merge"
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Eroare la citirea fișierului",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Ce ai vrea sa faci?",
-            "photo": "Luați o fotografie nouă",
-            "library": "Selectați din bibliotecă"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Alegeți o imagine mai mare.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Reglați mărimea și poziția",
-            "touchscreen": "Utilizați degetele pentru a mări și a mări",
-            "notTouchscreen": "Utilizați mouse-ul și rotița pentru a mări și a mări"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "noaptea trecuta",
-        "lastEvening": "ajunul trecut",
-        "yesterday": "ieri",
-        "thisMorning": "aceasta dimineata",
-        "today": "astăzi",
-        "tonight": "astă seară",
-        "tomorrowMorning": "tom dimineața",
-        "tomorrow": "Mâine",
-        "hoursAgo": "Acum {{h}} ore",
-        "hourAgo": "{{h}} acum o oră",
-        "minuteAgo": "{{m}} acum un minut",
-        "minutesAgo": "Acum {{m}} minute",
-        "secondAgo": "{{s}} acum a doua",
-        "secondsAgo": "{{s}} secunde în urmă",
-        "fewSecondsAgo": "acum câteva secunde",
-        "rightNow": "chiar acum",
-        "inSecond": "în {{s}} secundă",
-        "inSeconds": "în {{s}} secunde",
-        "inMinute": "în {{m}} minut",
-        "inMinutes": "în {{m}} minute",
-        "inHour": "în {{h}} oră",
-        "inHours": "în {{h}} ore",
-        "inUnderMinute": "în sub 1 minut"
-    },
-    "tabs": {
-        "more": "Mai Mult",
-        "Menu": "Meniul"
-    },
-    "video": {
-        "clip": "clamă",
-        "errorNoSource": "Fără sursă video",
-        "SkipAfter": "Treci după",
-        "Skip": "Ocolire"
-    },
-    "pdf": {
-        "clip": "clamă",
-        "errorNoSource": "Fără sursă pdf"
-    },
-    "clip": {
-        "SetClipStart": "Setați Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Setați Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Poziția inițială nu poate fi mai mult decât poziția finală",
-        "EndLessStart": "Poziția finală nu poate fi mai mică decât poziția inițială",
-        "WhichInvalid": "Argumentul „care” este invalid"
-    },
-    "durations": {
-        "second": "al doilea",
-        "seconds": "secunde",
-        "minute": "minut",
-        "minutes": "minute",
-        "hour": "ore",
-        "day": "zi",
-        "days": "zile",
-        "week": "săptămână",
-        "weeks": "săptămâni",
-        "month": "lună",
-        "months": "luni",
-        "year": "an",
-        "years": "ani",
-        "decade": "deceniu",
-        "decades": "decenii",
-        "century": "secol",
-        "centuries": "secole"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -1,24 +1,24 @@
 {
     "request": {
-        "error": "Zolakwitsa {{status}} panthawi yopempha",
-        "canceled": "Pempho laletsedwa",
-        "500": "Cholakwika Cham&#39;kati Chaseva",
-        "404": "Sapezeka: {{url}}",
-        "501": "Pempho linasokonezedwa"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Gawo lapita. Onjezani tsamba ndikuyesanso.",
-        "otherDomain": "Kulowetsedwa kwa-domain-request request kupita kunja kwa {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "tapani",
-        "click": "dinani",
-        "yes": "inde",
-        "no": "ayi",
-        "Tap": "Dinani",
-        "Click": "Dinani",
-        "Yes": "Inde",
-        "No": "Ayi"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
         "1": "January",
@@ -34,111 +34,110 @@
         "11": "November",
         "12": "December"
     },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
+    },
     "audio": {
-        "allowMicrophoneAccess": "Chonde lolani kuti mufike ku maikrofoni anu",
-        "record": "Lembani",
-        "recording": "Kujambula",
-        "remains": "imakhalabe",
-        "maximum": "zapamwamba",
-        "playing": "Akusewera",
-        "recorded": "Zalembedwa",
-        "clip": "chojambula",
-        "orupload": "Kapena Pakani",
-        "usethis": "Gwiritsani Ntchito Izi",
-        "discard": "Taya",
-        "encoding": "Kulemba"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Chenjezo"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Tsimikizirani",
-        "ok": "Inde",
-        "cancel": "Ayi"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Mwamsanga",
-        "ok": "Pitani"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Zolakwitsa kuwerenga fayilo",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Kodi mungakonde kuchita chiyani?",
-            "photo": "Tengani chithunzi chatsopano",
-            "library": "Sankhani ku laibulale"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Chonde sankhani chithunzi chachikulu.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Sinthani kukula ndi malo",
-            "touchscreen": "Gwiritsani ntchito zala zanu kuti muzisindikize ndikukoka",
-            "notTouchscreen": "Gwiritsani ntchito mbewa yanu ndi gudumu kuti muziseko ndikukoka"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "usiku wapita",
-        "lastEvening": "usiku watha",
-        "yesterday": "dzulo",
-        "thisMorning": "m&#39;mawa",
-        "today": "lero",
-        "tonight": "usiku uno",
-        "tomorrowMorning": "m&#39;mawa",
-        "tomorrow": "mawa",
-        "hoursAgo": "{{h}} maola apitawa",
-        "hourAgo": "{{h}} ola lapitalo",
-        "minuteAgo": "{{999]} mphindi",
-        "minutesAgo": "{{m}} mphindi zapitazo",
-        "secondAgo": "{{s}} chachiwiri",
-        "secondsAgo": "{{s}} masekondi apitawo",
-        "fewSecondsAgo": "masekondi apitawa",
-        "rightNow": "pompano",
-        "inSecond": "mu {{999]} chachiwiri",
-        "inSeconds": "m&#39;masekondi {{s}}",
-        "inMinute": "mu mphindi {{999]}",
-        "inMinutes": "mu {{m}} mphindi",
-        "inHour": "mu {{h}} ola",
-        "inHours": "mu {{h}} maora",
-        "inUnderMinute": "osakwana mphindi 1"
-    },
-    "video": {
-        "clip": "kopanira",
-        "errorNoSource": "Palibe kanema",
-        "SkipAfter": "Pitani pambuyo",
-        "Skip": "Pitani"
-    },
-    "pdf": {
-        "clip": "kopanira",
-        "errorNoSource": "Palibe pdf gwero"
-    },
-    "clip": {
-        "SetClipStart": "Khazikitsani Clip Start",
-        "ClipStart": "Yambani Clip",
-        "SetClipEnd": "Khazikitsani Mapeto",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Malo oyambira sangakhale opitilira kumapeto",
-        "EndLessStart": "Mapeto malo sangakhale ocheperako poyambira",
-        "WhichInvalid": "Kutsutsana &#39;komwe&#39; kulakwika"
-    },
-    "tabs": {
-        "more": "Zambiri",
-        "Menu": "Menyu"
-    },
-    "durations": {
-        "second": "chachiwiri",
-        "seconds": "masekondi",
-        "minute": "miniti",
-        "minutes": "mphindi",
-        "hour": "maola",
-        "day": "tsiku",
-        "days": "masiku",
-        "week": "sabata",
-        "weeks": "masabata",
-        "month": "mwezi",
-        "months": "miyezi",
-        "year": "chaka",
-        "years": "zaka",
-        "decade": "zaka khumi",
-        "decades": "zaka makumi",
-        "century": "zaka zana limodzi",
-        "centuries": "zaka mazana ambiri"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} ლატ, {{2}} lng)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}} ფარგლებში"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "მეტრი",
-        "meters": "მეტრი",
-        "kilometer": "კილომეტრი",
-        "kilometers": "კილომეტრები",
-        "km": "კმ",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
         "mile": "mile",
-        "miles": "მილი",
-        "mi": "მე",
-        "foot": "ფეხით",
-        "feet": "ფეხები",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
         "inches": "inches"
     },
     "location": {
-        "interested": "მე მაინტერესებს რამე {{select}} ფარგლებში",
-        "update": "განაახლეთ ჩემი მდებარეობა",
-        "prompt": "{{ClickOrTap}} აქ <br> მითითებული თქვენი <br> მდებარეობა",
-        "myCurrentLocation": "ჩემი ამჟამინდელი მდებარეობა",
-        "enterAddress": "შეიყვანეთ მისამართი",
-        "enterPostcode": "გთხოვთ შეიყვანოთ თქვენი საფოსტო კოდი \/ zip კოდი",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "მდებარეობის დამატება",
-            "title": "ახალი ადგილმდებარეობა",
-            "nameYourLocation": "დაასახელეთ თქვენი მდებარეობა"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "ამ ადგილის შენახვა?",
-            "message": "აპირებთ თუ არა მომავალში ამ ადგილის გამოყენებას?",
-            "ok": "დიახ",
-            "cancel": "არა"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "ამ ადგილის დასახელება",
-            "placeholder": "მთავარი, სამუშაო და ა.შ.",
-            "ok": "Შენახვა"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "აირჩიეთ მდებარეობა"
-        },
-        "set": "დააყენეთ ჩემი ადგილმდებარეობა"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "ნებისმიერი ადგილმდებარეობა ამ ადგილას?",
-        "newArea": "ახალი ტერიტორია",
-        "promptTitle": "შეიყვანეთ სახელი:",
-        "absent": "გთხოვთ, დააყენოთ ფართი",
-        "error": "შეცდომა",
-        "exist": "ფართობი უკვე არსებობს",
-        "addNewArea": "ახალი ფართობი დამატება",
-        "add": "დამატება"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "ადგილმდებარეობების კოლექცია",
-            "displayType": "ადგილები"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "წარმოადგენს შენობას, ადგილს, გემს, პარკს და ა.შ.",
-            "displayType": "ადგილმდებარეობა"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "წარმოადგენს ადგილს, როგორიცაა ოთახი ან ლუქსი",
-            "displayType": "ფართობი"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "წარმოადგენს იატაკს შენობაში ან გემში",
-            "displayType": "სართული"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "წარმოადგენს სვეტს შენობაში ან გემში",
-            "displayType": "სვეტი"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "კატეგორიისთვის geohash– ის გარკვეულ მანძილზე",
-            "displayType": "ადგილების მახლობლად"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "კატეგორიისთვის geohash– ის გარკვეულ მანძილზე, ინტერესის შესაბამისი",
-            "displayType": "ინტერესს იწვევს"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

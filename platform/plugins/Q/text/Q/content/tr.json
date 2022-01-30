@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "İstek sırasında {{status}} hatası",
-        "canceled": "İstek iptal edildi",
-        "500": "İç Sunucu Hatası",
-        "404": "Bulunamadı: {{url}}",
-        "501": "İstek kesintiye uğradı"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Oturum süresi doldu. Sayfayı yenileyin ve tekrar deneyin.",
-        "otherDomain": "{{baseUrl}} adresinde dış etki alanına çapraz etki alanı isteği engellendi"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "musluk",
-        "click": "tık",
-        "yes": "Evet",
-        "no": "yok hayır",
-        "Tap": "musluk",
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
         "Click": "Click",
-        "Yes": "Evet",
-        "No": "Yok hayır"
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Ocak",
-        "2": "Şubat",
-        "3": "Mart",
-        "4": "Nisan",
-        "5": "Mayıs ayı",
-        "6": "Haziran",
-        "7": "Temmuz",
-        "8": "Ağustos",
-        "9": "Eylül",
-        "10": "Ekim",
-        "11": "Kasım",
-        "12": "Aralık"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Lütfen mikrofonunuza erişime izin verin",
-        "record": "Kayıt",
-        "recording": "Kayıt",
-        "remains": "kalıntılar",
-        "maximum": "maksimum",
-        "playing": "oynama",
-        "recorded": "kaydedilmiş",
-        "clip": "klips",
-        "orupload": "Veya Yükle",
-        "usethis": "Bunu kullan",
-        "discard": "ıskarta",
-        "encoding": "Kodlama"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Alarm"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Onaylamak",
-        "ok": "Evet",
-        "cancel": "Yok hayır"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Komut istemi",
-        "ok": "Gitmek"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Dosya okunurken hata oluştu",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Ne yapmak istersin?",
-            "photo": "Yeni fotoğraf çek",
-            "library": "Kütüphaneden seç"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Lütfen daha büyük bir resim seçin.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Boyut ve pozisyonu ayarlayın",
-            "touchscreen": "Yakınlaştırmak ve sürüklemek için parmaklarınızı kullanın",
-            "notTouchscreen": "Yakınlaştırmak ve sürüklemek için farenizi ve tekerleğinizi kullanın"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "dün gece",
-        "lastEvening": "geçen akşam",
-        "yesterday": "dün",
-        "thisMorning": "bu sabah",
-        "today": "bugün",
-        "tonight": "Bu gece",
-        "tomorrowMorning": "tom sabah",
-        "tomorrow": "yarın",
-        "hoursAgo": "{{h}} saat önce",
-        "hourAgo": "{{h}} saat önce",
-        "minuteAgo": "{{m}} dakika önce",
-        "minutesAgo": "{{m}} dakika önce",
-        "secondAgo": "{{s}} saniye önce",
-        "secondsAgo": "{{s}} saniye önce",
-        "fewSecondsAgo": "saniyeler önce",
-        "rightNow": "şimdi",
-        "inSecond": "{{s}} saniyede",
-        "inSeconds": "{{s}} saniye içinde",
-        "inMinute": "{{m}} dakika içinde",
-        "inMinutes": "{{m}} dakika içinde",
-        "inHour": "{{h}} saat içinde",
-        "inHours": "{{h}} saat içinde",
-        "inUnderMinute": "1 dakikadan kısa sürede"
-    },
-    "tabs": {
-        "more": "Daha",
-        "Menu": "Menü"
-    },
-    "video": {
-        "clip": "klips",
-        "errorNoSource": "Video kaynağı yok",
-        "SkipAfter": "Sonra atla",
-        "Skip": "Atla"
-    },
-    "pdf": {
-        "clip": "klips",
-        "errorNoSource": "PDF kaynağı yok"
-    },
-    "clip": {
-        "SetClipStart": "Klip Başlangıcını Ayarla",
-        "ClipStart": "Klip Başlangıcı",
-        "SetClipEnd": "Klip Sonunu Ayarla",
-        "ClipEnd": "Klip Sonu",
-        "StartMoreEnd": "Başlangıç konumu, bitiş konumundan fazla olamaz",
-        "EndLessStart": "Bitiş konumu, başlangıç konumundan daha az olamaz",
-        "WhichInvalid": "Argüman &#39;hangisi&#39; geçersiz"
-    },
-    "durations": {
-        "second": "ikinci",
-        "seconds": "saniye",
-        "minute": "dakika",
-        "minutes": "dakika",
-        "hour": "saatler",
-        "day": "gün",
-        "days": "günler",
-        "week": "hafta",
-        "weeks": "haftalar",
-        "month": "ay",
-        "months": "aylar",
-        "year": "yıl",
-        "years": "yıl",
-        "decade": "onyıl",
-        "decades": "on yıllar",
-        "century": "yüzyıl",
-        "centuries": "yüzyıllar"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

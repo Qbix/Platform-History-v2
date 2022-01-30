@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Pautan untuk mempromosikan",
-                "startDate": "Tarikh mula",
-                "startTime": "Masa mula",
-                "endDate": "Tarikh tamat",
-                "endTime": "Masa tamat",
-                "budget": "Belanjawan"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Penapis Dengan Minat",
-                "FilterInterests": "Mula menaip minat ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Faedah",
-            "Location": "Lokasi"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Pergi",
-            "PasteLinkHere": "Tampalkan pautan di sini",
-            "BrowseTheWeb": "Semak imbas",
-            "WriteToStartConversation": "Tulis pemikiran anda untuk memulakan perbualan",
-            "StartConversation": "Mula Perbualan",
-            "GotoConversation": "Pergi ke Perbualan",
-            "reset": "Tetapkan semula",
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
             "edit": "Edit",
-            "link": "Pautan",
-            "setUrl": "Tetapkan URL",
-            "save": "Jimat",
-            "setClip": "Potong Klip",
-            "invalidURL": "URL tidak sah"
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Fail terlalu besar untuk cache. Saiz fail maksimum {{size}}",
-        "InvalidPDF": "Fail bukan PDF yang sah",
-        "StartTypingTitleOrKeywords": "Mula menaip tajuk atau kata kunci ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokumen HTML yang boleh dilihat dan diedit oleh pelbagai pengguna",
-            "displayType": "Artikel"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slaid dalam persembahan, boleh menyertakan HTML, audio dan sebagainya.",
-            "displayType": "Gelongsor"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Persembahan yang terdiri daripada pelbagai slaid",
-            "displayType": "Persembahan"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Unit pengiklanan di laman web",
-            "displayType": "Unit iklan"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Cara mengumpul unit pengiklanan di bawah nama",
-            "displayType": "Penempatan iklan"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Kandungan untuk iklan",
-            "displayType": "Kreatif iklan"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Kempen pengiklanan",
-            "displayType": "Kempen iklan"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Merangkumi laman web yang metadata dikikis",
-            "displayType": "laman sesawang"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Ensaluti",
-        "LogOut": "elsaluti"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Ŝanĝu {{1}} kiel mian primaran {{2}}",
-        "ChoosePassPhrase": "Elektu <strong>pasvorton<\/strong> kun kiu ensaluti. <br> Simpla frazo konsistanta el kelkaj vortoj, kiujn vi facile memoros.",
-        "ChoosePassPhraseSeeSuggestions": "Elektu bonan <strong>pasvorton<\/strong> por protekti vian konton. Vidu la sugestojn por iuj ideoj.",
-        "LogOutAndTryAgain": "Eliru kaj Provu Denove",
-        "IfYouFeel": "Se vi sentas, ke io misas, vi povas",
-        "SetIdentifierButtonTitle": "rekomencu"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Komenciĝi"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Komenciĝi",
-        "Authorize": "Permesi",
-        "TermsLabel": "Mi legis kaj konsentas <br> al la {{link}}",
-        "TermsTitle": "Kondiĉoj",
-        "mustAgree": "Unue vi devas konsenti pri la terminoj."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Mi akceptas la {{link}}",
-        "TermsTitle": "Kondiĉoj"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permeso",
-        "prompt": "Ĉu vi volas ebligi sciigojn? Vi ricevos aktualajn ĝisdatigojn pri aferoj, pri kiuj vi zorgas.",
-        "yes": "Jes",
-        "no": "Ne",
-        "WelcomePleaseVerifyEmail": "Bonvenon! Bonvolu kontroli vian retpoŝtan adreson.",
-        "WelcomeVerifyEmail": "Bonvenon! Konfirmu vian retpoŝtan adreson.",
-        "ForgetPass": "Hej, ĉu vi forgesis vian pasfrazon?",
-        "PassphraseSaved": "Via pasa frazo konserviĝis.",
-        "IdentifierActivated": "Via {{type}} estas aktivigita.",
-        "CompletedActivation": "Vi kompletigis uzantan aktivadon.",
-        "CompletedActivationLogIn": "Vi kompletigis uzantan aktivadon. Provu ensaluti nun."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Elektu kontakton",
-            "CreateAccount": "+ Nova Kontakto",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ne trovita",
-            "SearchByName": "Serĉo laŭ nomo",
-            "EmptyContacts": "Kontaktoj ne trovitaj ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Elektu kontakton de {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Bonvolu elekti etikedon.",
-        "inviteUser": "Invitu uzanton",
-        "selectRole": "Elektu Rolon",
-        "inviteRole": "Inviti {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Nevalida lingvo elektita",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Bonvenon",
-        "directions": "Kreu konton, aŭ ensalutu.",
-        "directionsNoRegister": "Ensalutu se vi havas konton.",
-        "goButton": "Iru",
-        "passphrase": "Enigu vian pasan frazon:",
-        "loginButton": "Komenciĝi",
-        "registerButton": "Komenciĝi",
-        "resendButton": "Sendi Aktivigan Mesaĝon",
-        "forgot": "Forgesis ĝin?",
-        "resendConfirm": "Ĉu vi volas sendi mesaĝon por restarigi vian pasvorton?",
-        "resendSuccess": "Kontrolu mesaĝon por restarigi vian pasvorton",
-        "resendClose": "Proksime",
-        "noPassphrase": "Antaŭ ol vi povas ensaluti, vi devas agordi pasan frazon alklakante la ligon en via aktiviga mesaĝo.",
-        "notVerified": "Vi devas sendi aktivigan mesaĝon por ensaluti.",
-        "emailExists": "Ĉu vi provis registriĝi kun ĉi tiu retpoŝto antaŭe? Se jes, kontrolu vian informkeston por aktivigi vian konton. <a href='#resend' class='Q_button Users_activation_resend'>Alklaku por re-sendi la mesaĝon<\/a>",
-        "mobileExists": "Ĉu vi antaŭe provis registriĝi kun ĉi tiu movebla numero? Se jes, kontrolu vian SMS por aktivigi vian konton. <a href='#resend' class='Q_button Users_activation_resend'>Alklaku por re-sendi la mesaĝon<\/a>",
-        "usingOther": "aŭ vi povas",
-        "prompt": "Elektu uzantnomon:",
-        "newUser": "aŭ krei novan konton",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "via poŝtelefono # aŭ retpoŝto",
-            "mobile": "enigu vian poŝtelefonon #?",
-            "email": "enigu vian retpoŝtadreson",
-            "username": "uzantnomo"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Akcepti la Kondiĉojn de Servo?",
-        "facebookNoEmail": "Via facebook-konto mankas konfirmitan retpoŝtadreson. Simple ensalutu la denaskan manieron.",
-        "picTooltip": "Vi povas ŝanĝi ĉi tiun bildon poste",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Ensalutu {{host}} samtempe {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Alidirektado al Monujo",
-                "content": "Post kiam vi fermos ĉi tiun dialogon, vi estos kondukita al via monujo. Post kiam vi ensalutis, revenu al ĉi tiu paĝo."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Aldonu manieron ensaluti",
-        "sendMessage": "Sendi Aktivigan Mesaĝon",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "enigu vian poŝtelefonon # aŭ retpoŝton",
-            "mobile": "enigu vian moveblan numeron",
-            "email": "enigu vian retpoŝtadreson",
-            "username": "uzantnomo"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Konto",
-        "areUsing": "Vi uzas {{platform}} kiel",
-        "noLongerUsing": "Vi ne plu estas ligita al {{platform}} kiel",
-        "doAuth": "Ensalutu kun ĉi tiu konto",
-        "doSwitch": "Ŝaltu al ĉi tiu konto"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Mastro",
+        "Owner": "Owner",
         "Admin": "Admin",
-        "Member": "Membro",
-        "Guest": "Gasto",
-        "Host": "Gastiganto"
-    },
-    "analytics": {
-        "Title": "Analitiko",
-        "Daily": "Ĉiutage",
-        "Weekly": "Semajna",
-        "Monthly": "Monata",
-        "Application": "Apliko",
-        "Pages": "Paĝoj",
-        "Services": "Servoj",
-        "Faq": "Oftaj Demandoj",
-        "WeekDays": "Semajnaj Tagoj"
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -7,7 +7,8 @@
         "Streams\/invitedMe": "Kinsa ang nagdapit kanako",
         "AreYouAgree": "Uyon ka ba?",
         "Yes": "Oo",
-        "No": "Dili"
+        "No": "Dili",
+        "DoYouAgree": "Uyon ka?"
     },
     "interests": {
         "Filter": "Unsay imong natagamtam?",
@@ -84,7 +85,8 @@
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} kung ang code gi-scan",
             "copyLink": "{{ClickOrTap}} aron kopyahon ang link sa pagdapit",
-            "userChooserPlaceholder": "Pagpangita sa ngalan"
+            "userChooserPlaceholder": "Pagpangita sa ngalan",
+            "shareOrCopyLink": "{{ClickOrTap}} para ipaambit o kopyahon ang link sa pagdapit"
         },
         "email": {
             "subject": "Hoy, susiha kini",
@@ -178,7 +180,8 @@
             "youStoppedLive": "Mihunong ka sa pagsibya sa kini nga tawag sa naandan nga RTMP",
             "sbStartedLiveStreaming": "Gisugdan live ang {{userName}}",
             "sbStoppedLiveStreaming": "Ang {{userName}} natapos nga live",
-            "liveStopped": "Ang sayup samtang nagpadala sa video sa endpoint nahinabo"
+            "liveStopped": "Ang sayup samtang nagpadala sa video sa endpoint nahinabo",
+            "forceDisconnectingImmediately": "Gi-disconnect ka sa usa ka host"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -209,7 +212,10 @@
             "start": "Pagsugod",
             "stop": "Hunong na",
             "streamingSettings": "Mga setting",
-            "streamToRTMP": "Pag-stream sa custom RTMP"
+            "streamToRTMP": "Pag-stream sa custom RTMP",
+            "dialogTitle": "Mga Setting sa Video",
+            "startBroadcasting": "Pagsugod sa pagsibya",
+            "broadcastingInProgress": "Nagpadayon ang pagsibya"
         },
         "participantsPopup": {
             "disconnect": "Pagdugtong",
@@ -225,7 +231,8 @@
             "turnOffScreenSharing": "Itago ang pagpaambit sa screen",
             "turnOnCamera": "Ipakita ang video",
             "turnOnAudio": "Ayaw paghunong audio",
-            "turnOnScreenSharing": "Ipakita ang pagpaambit sa screen"
+            "turnOnScreenSharing": "Ipakita ang pagpaambit sa screen",
+            "dialogTitle": "Mga Setting sa Partisipante"
         },
         "notAllowedToJoinCall": "Wala kay pagtugot nga moapil sa kini nga sapa.",
         "streamTitle": "{{1}} live nga tawag",
@@ -242,6 +249,14 @@
             "screenSharingIsOn": "Ang pag-screenshot adunay",
             "screenSharingIsOff": "Ipakita ang screen",
             "joinNow": "Pag-apil sa Tawag"
+        },
+        "audioSettings": {
+            "dialogTitle": "Mga Setting sa Audio",
+            "speakers": "Mga mamumulong",
+            "microphone": "Mikropono"
+        },
+        "streamingSettings": {
+            "title": "Mga Setting sa Pag-stream"
         }
     },
     "messages": {

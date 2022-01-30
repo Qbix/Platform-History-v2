@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Erè {{status}} pandan demann lan",
-        "canceled": "Demann anile",
-        "500": "Erè sèvè entèn yo",
-        "404": "Pa jwenn: {{url}}",
-        "501": "Demann koupe"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesyon ekspire. Refresh paj la epi eseye ankò.",
-        "otherDomain": "Bloke kwa-domèn demann nan domèn etranje nan {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "tape",
-        "click": "klike sou",
-        "yes": "wi",
-        "no": "non",
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
         "Tap": "Tap",
-        "Click": "Klike",
-        "Yes": "Wi",
-        "No": "Non"
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Janvye",
-        "2": "fevriye",
-        "3": "Mas",
-        "4": "Avril",
-        "5": "Me",
-        "6": "Jen",
-        "7": "Jiyè",
-        "8": "Out",
-        "9": "Septanm",
-        "10": "Oktòb",
-        "11": "Novanm",
-        "12": "Desanm"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Tanpri pèmèt aksè nan mikwofòn ou",
-        "record": "Ekri",
-        "recording": "Anrejistreman",
-        "remains": "rete",
-        "maximum": "maksimòm",
-        "playing": "Jwe",
-        "recorded": "Anrejistre",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Oswa Voye",
-        "usethis": "Sèvi ak sa a",
-        "discard": "Jete",
+        "discard": "Discard",
         "encoding": "Encoding"
-    },
-    "alert": {
-        "title": "Alèt"
-    },
-    "confirm": {
-        "title": "Konfime",
-        "ok": "Wi",
-        "cancel": "Non"
-    },
-    "prompt": {
-        "title": "Èd",
-        "ok": "Ale"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Erè li dosye ...",
-        "cameraCommands": {
-            "prompt": "Ki sa ou ta renmen fè?",
-            "photo": "Pran nouvo foto",
-            "library": "Chwazi nan bibliyotèk la"
-        },
-        "tooSmall": "Tanpri chwazi yon imaj pi gwo.",
-        "cropping": {
-            "title": "Ajiste gwosè ak pozisyon",
-            "touchscreen": "Sèvi ak dwèt ou pou rale ak trennen",
-            "notTouchscreen": "Sèvi ak sourit ou &amp; wou rale ak trennen"
-        }
-    },
-    "timestamp": {
-        "lastNight": "yeswa",
-        "lastEvening": "dènye vèy",
-        "yesterday": "yè",
-        "thisMorning": "Morn sa a",
-        "today": "jodi a",
-        "tonight": "aswè a",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "demen",
-        "hoursAgo": "{{h}} èdtan de sa",
-        "hourAgo": "{{h}} èdtan de sa",
-        "minuteAgo": "{{m}} minit de sa",
-        "minutesAgo": "{{m}} minit de sa",
-        "secondAgo": "{{s}} dezyèm de sa",
-        "secondsAgo": "{{s}} segonn de sa",
-        "fewSecondsAgo": "segonn de sa",
-        "rightNow": "kounye a",
-        "inSecond": "nan {{s}} dezyèm fwa",
-        "inSeconds": "nan {{s}} segonn",
-        "inMinute": "nan {{m}} minit",
-        "inMinutes": "nan {{m}} minit",
-        "inHour": "nan {{h}} èdtan",
-        "inHours": "nan {{h}} èdtan",
-        "inUnderMinute": "anba 1 minit"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Pa gen sous videyo",
-        "SkipAfter": "Sote apre",
-        "Skip": "Sote"
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Pa gen sous pdf"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Mete Clip Start",
-        "ClipStart": "Clip Kòmanse",
-        "SetClipEnd": "Mete Clip Fen",
-        "ClipEnd": "Clip Fen",
-        "StartMoreEnd": "Kòmanse pozisyon pa ka plis pase pozisyon fen",
-        "EndLessStart": "Pozisyon fen pa ka mwens pase pozisyon kòmanse",
-        "WhichInvalid": "Agiman &#39;ki&#39; valab"
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "plis",
-        "Menu": "Meni"
+        "more": "more",
+        "Menu": "Menu"
     },
-    "durations": {
-        "second": "dezyèm",
-        "seconds": "segonn",
-        "minute": "minit",
-        "minutes": "minit",
-        "hour": "èdtan",
-        "day": "jou",
-        "days": "jou",
-        "week": "semèn",
-        "weeks": "semèn",
-        "month": "mwa",
-        "months": "mwa",
-        "year": "ane",
-        "years": "ane",
-        "decade": "deseni",
-        "decades": "dè dekad",
-        "century": "syèk la",
-        "centuries": "syèk"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

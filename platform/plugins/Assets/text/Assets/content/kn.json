@@ -1,168 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "ಪಾವತಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} ಗಾಗಿ ಚಾರ್ಜ್ ಸಂಸ್ಕರಿಸಲಾಗುತ್ತದೆ",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ಗೆ ನಿಮ್ಮ ಪಾವತಿಯ ಧನ್ಯವಾದಗಳು",
-        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
-        "YouSubscribedTo": "ನೀವು {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿರುವಿರಿ"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+    },
+    "charged": {
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "ಆದೇಶದ ಬಗ್ಗೆ ಮಾಹಿತಿ",
-        "PaymentMethod": "ಪಾವತಿ ವಿಧಾನ",
-        "ContactInfo": "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
-        "Pay": "ಪಾವತಿ"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "ಆಹ್ವಾನಿಸಿ {{1}}",
-        "YouHaveCreditsToStart": "ಪ್ರಾರಂಭಿಸಲು ನೀವು {{1}} ಸಾಲಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ",
-        "PaymentFor": "&quot;{{999} for&quot; ಗೆ ಪಾವತಿ",
-        "PaymentTo": "{{999} to ಗೆ ಪಾವತಿ",
-        "PaymentToUser": "{{999} to ಗೆ ಪಾವತಿ",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} join<\/a> &quot; ಗೆ ಸೇರ್ಪಡೆಗೊಳ್ಳಲು",
-        "CreatedCommunity": "ಸಮುದಾಯವನ್ನು ರಚಿಸಲು &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{1001} leave<\/a> &quot; ಅನ್ನು ಬಿಡಲು",
-        "BoughtCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ",
-        "BuyAmountCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ",
-        "MissingCredits": "ಕಾಣೆಯಾದ ಸಾಲಗಳು",
-        "YouMissingCredits": "ನೀವು {{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದುಕೊಂಡಿದ್ದೀರಿ",
-        "BuyCredits": "ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ",
-        "Buy": "ಖರೀದಿಸಿ",
-        "Credits": "ಸಾಲಗಳು",
-        "ErrorInvalidAmount": "ಮೊತ್ತ ಅಮಾನ್ಯವಾಗಿದೆ",
-        "ErrorInvalidCurrency": "ದುರದೃಷ್ಟವಶಾತ್ ನಾವು ಇನ್ನೂ ಕರೆನ್ಸಿಯನ್ನು ಬೆಂಬಲಿಸುವುದಿಲ್ಲ {99 999}}",
-        "WatchClip": "ವೀಕ್ಷಣೆಗಾಗಿ {{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ {{fromStreamTitle}}",
-        "PurchaseCredits": "ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಿ",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ಸಾಲಗಳು",
-            "BonusCredits": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು"
-        },
-        "CreatePaidStream": "ರಚಿಸಲು {{toStreamName}}",
-        "BonusCredits": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು",
-        "BuyBonus": "ಒಮ್ಮೆ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಿದರೆ, ಅದು {{bonus}} ಕ್ರೆಡಿಟ್‌ಗಳ ಬೋನಸ್‌ಗೆ ಕಾರಣವಾಗುತ್ತದೆ."
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
+        }
     },
     "history": {
-        "Date": "ದಿನಾಂಕ",
-        "Amount": "ಮೊತ್ತ",
-        "Description": "ವಿವರಣೆ",
-        "Client": "ಗ್ರಾಹಕ",
-        "To": "ಗೆ",
-        "From": "ನಿಂದ",
-        "HistoryEmpty": "ನಿಮ್ಮ ಬಳಿ ಇನ್ನೂ ಡೇಟಾ ಇಲ್ಲ",
-        "SeeHistory": "Payment {999} for ಗಾಗಿ ಪಾವತಿ ಇತಿಹಾಸವನ್ನು ನೋಡಿ",
-        "PaymentFor": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು",
-        "PaymentTo": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ",
-        "PaymentToUser": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
+        "WatchClip": {
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
+        },
         "JoinedPaidStream": {
-            "+": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
-            "-": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} ಸಾಲಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ",
-            "-": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು",
-        "BoughtCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ",
-        "InviteAcceptedBy": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
-        "YouHaveCreditsToStart": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ",
-        "CreatePaidStream": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡಿದೆ",
-        "WatchClip": {
-            "+": "ಗಳಿಸಿದ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು",
-            "-": "{{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರ್ಚು ಮಾಡಿದೆ"
-        },
-        "BonusCredits": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಪಡೆದುಕೊಂಡಿದೆ"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "ಚಂದಾದಾರಿಕೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-            "message": "ನೀವು {{999} to ಗೆ ಚಂದಾದಾರರಾಗಲು ಬಯಸುವಿರಾ?",
-            "ok": "ಸರಿ",
-            "cancel": "ರದ್ದುಮಾಡಿ"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "ಕ್ರೆಡಿಟ್ ಅಥವಾ ಡೆಬಿಟ್ ಕಾರ್ಡ್",
-        "SubscribePayment": "ಪಾವತಿಯನ್ನು ಚಂದಾದಾರರಾಗಿ",
-        "ImmediatePayment": "ತಕ್ಷಣದ ಪಾವತಿ"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "ಪಾವತಿ ಮಾಡಿ",
-            "message": "{{symbol}} {{1000} pay ಪಾವತಿಸಲು ನೀವು ಒಪ್ಪುತ್ತೀರಾ?",
-            "ok": "ಸರಿ",
-            "cancel": "ರದ್ದುಮಾಡಿ"
-        },
-        "BuyAmountCredits": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿ"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "ಸಾಲಗಳು",
-            "description": "ಸಾಲಗಳು ಮತ್ತು ಪಾವತಿಗಳನ್ನು ಟ್ರ್ಯಾಕ್ ಮಾಡುತ್ತದೆ"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ",
-            "description": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "ಚಂದಾದಾರಿಕೆ",
-            "description": "ಚಂದಾದಾರಿಕೆ"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "ಉತ್ಪನ್ನ",
-            "description": "ಉತ್ಪನ್ನವನ್ನು ಮಾರಾಟ ಮಾಡಲಾಗುತ್ತಿದೆ"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "ಸೇವೆ",
-            "description": "ಸೇವೆಯನ್ನು ನೀಡಲಾಗುತ್ತಿದೆ"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಗಳಿಸಿದೆ"
-        },
-        "Assets\/credits\/spent": {
-            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳೆದರು"
-        },
-        "Assets\/credits\/sent": {
-            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಕಳುಹಿಸಲಾಗಿದೆ"
-        },
-        "Assets\/credits\/received": {
-            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} ಸಾಲಗಳನ್ನು ಖರೀದಿಸಿದೆ"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "ಬೋನಸ್ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳು"
+            "content": "Bonus {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Spent {{amount}} credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sent {{amount}} credits to {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
-    },
-    "charge": {
-        "Subject": "ನೀವು {{1001} by ನಿಂದ {{1000} from ನಿಂದ {{999} of ಪಾವತಿಯನ್ನು ಪಡೆಯುತ್ತೀರಿ.",
-        "HasBeenCharged": "ಹೇ, ಇದು ನಿಮಗೆ ತಿಳಿಸಲು {{1}} {{1001} for ಗೆ {{4}} ಗೆ {{1000} charge ಶುಲ್ಕ ವಿಧಿಸಲಾಗಿದೆ."
-    },
-    "charged": {
-        "Subject": "&quot;{{999} for&quot; ಗಾಗಿ ನಿಮ್ಮ ಪಾವತಿಗಾಗಿ ಧನ್ಯವಾದಗಳು",
-        "HavePaid": "ಹೇ {{1}}, ನೀವು {{1002} for ಗೆ {{2}} ಗೆ {{3}} ಗೆ ಯಶಸ್ವಿಯಾಗಿ ಪಾವತಿಸಿದ್ದೀರಿ ಎಂಬುದು ತ್ವರಿತ ದೃ mation ೀಕರಣವಾಗಿದೆ."
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "ಹೊಸ ಸೇವೆ",
-            "TitlePlaceholder": "ಸೇವಾ ಶೀರ್ಷಿಕೆ",
-            "PricePlaceholder": "ಬೆಲೆಯನ್ನು ನಿಗದಿಪಡಿಸಿ",
-            "LinkPlaceholder": "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ ಲಿಂಕ್ ಅನ್ನು ಹೊಂದಿಸಿ",
-            "DescriptionPlaceholder": "ಸೇವಾ ವಿವರಣೆ",
-            "SaveService": "ಸೇವೆಯನ್ನು ಉಳಿಸಿ",
-            "SelectRequiredParticipants": "ಅಗತ್ಯ ಭಾಗವಹಿಸುವವರು"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "ಸೇವಾ ಟೆಂಪ್ಲೇಟ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
-        "ManageServices": "ಸೇವೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
-        "FreeEvent": "ಉಚಿತ ಈವೆಂಟ್",
-        "OptionalContribution": "ಐಚ್ al ಿಕ ಕೊಡುಗೆ",
-        "RequiredPayment": "ಅಗತ್ಯ ಪಾವತಿ",
-        "AreYouSureDelete": "ಈ ಸೇವೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
-        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.",
-        "Free": "ಉಚಿತ"
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

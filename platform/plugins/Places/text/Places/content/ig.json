@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng))",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "n&#39;ime {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "mita",
-        "meters": "mita",
-        "kilometer": "kilomita",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
         "mile": "mile",
-        "miles": "kilomita",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "ụkwụ",
-        "feet": "ụkwụ",
-        "inches": "sentimita asatọ"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Enwere m mmasị n&#39;ihe na -eme n&#39;ime {{select}} nke",
-        "update": "Melite ebe m",
-        "set": "Tọọ ebe m",
-        "prompt": "{{ClickOrTap}} ebe a ka<br> setịpụ gị<br> ọnọdụ",
-        "myCurrentLocation": "Ebe m nọ ugbu a",
-        "enterAddress": "Tinye adreesị",
-        "enterPostcode": "Biko tinye koodu nzipu ozi gị \/ zipcode",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Tinye ebe",
-            "title": "Ebe ọhụrụ",
-            "nameYourLocation": "Aha ebe gị"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Chekwaa ọnọdụ a?",
-            "message": "Ị na -eme atụmatụ iji ebe a ọzọ n&#39;ọdịnihu?",
-            "ok": "Ee",
-            "cancel": "Mba"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Aha ebe a",
-            "placeholder": "Ụlọ, ọrụ wdg.",
-            "ok": "Chekwa"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Họrọ Ebe"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Enwere ngalaba ọ bụla n&#39;ime ebe a?",
-        "newArea": "Mpaghara ohuru",
-        "promptTitle": "Tinye aha maka mpaghara:",
-        "absent": "Biko tọọ mpaghara",
-        "error": "Mperi",
-        "exist": "Mpaghara adịlarị",
-        "addNewArea": "Tinye mpaghara ọhụrụ",
-        "add": "Tinye"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "nchịkọta ebe",
-            "displayType": "Ọnọdụ"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Na -anọchite anya ụlọ, ebe mgbakọ, ụgbọ mmiri, ogige, wdg.",
-            "displayType": "Ebe"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Na -anọchite anya mpaghara n&#39;ime ọnọdụ, dị ka ime ụlọ ma ọ bụ ụlọ",
-            "displayType": "Mpaghara"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Na -anọchite anya ala n&#39;ime ụlọ ma ọ bụ ụgbọ mmiri",
-            "displayType": "Ala"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Na -anọchite anya kọlụm n&#39;ime ụlọ ma ọ bụ ụgbọ mmiri",
-            "displayType": "Kọlụm"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Udi maka ihe di n&#39;ime anya nke geohash",
-            "displayType": "Na nso ebe"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Udi maka ihe dị n&#39;ime anya nke geohash, dabara na mmasị",
-            "displayType": "Ebe mmasị"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

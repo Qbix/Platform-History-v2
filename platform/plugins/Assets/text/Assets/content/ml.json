@@ -1,167 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "പണമടയ്ക്കാൻ ടാപ്പ് ചെയ്യുക"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ചാർജ് പ്രോസസ്സ് ചെയ്തത് {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} എന്നതിലേക്കുള്ള നിങ്ങളുടെ പേയ്‌മെന്റിന് നന്ദി",
-        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} വരിക്കാരായി",
-        "YouSubscribedTo": "നിങ്ങൾ {{plan.title}} വരിക്കാരായി"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "&quot;{{description}}&quot; വഴി നിങ്ങൾക്ക് {{call 'publisher.displayName'}} നിന്ന് {{displayAmount}} പേയ്‌മെന്റ് ലഭിക്കും",
-        "HasBeenCharged": "ഹേയ്, {{3}} എന്നതിന് {{3}} {{2}} ഈടാക്കിയത് {{1}} നിങ്ങളെ അറിയിക്കാനാണിത്"
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; എന്നതിനുള്ള നിങ്ങളുടെ പേയ്‌മെന്റിന് നന്ദി",
-        "HavePaid": "ഹേയ് {{1}}, {{4}} എന്നതിനായി നിങ്ങൾ {{2}} {{3}} - ന് വിജയകരമായി പണമടച്ചു എന്നതിന്റെ ഒരു ദ്രുത സ്ഥിരീകരണം മാത്രമാണ് ഇത്"
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "ഓർഡറിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ",
-        "PaymentMethod": "പണംകൊടുക്കൽരീതി",
-        "ContactInfo": "ബന്ധപ്പെടുന്നതിനുള്ള വിവരം",
-        "Pay": "പണമടയ്ക്കുക"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "ക്ഷണം {{invitedUserName}} സ്വീകരിച്ചു",
-        "YouHaveCreditsToStart": "നിങ്ങൾക്ക് ആരംഭിക്കാൻ {{amount}} ക്രെഡിറ്റുകൾ ഉണ്ട്",
-        "PaymentFor": "&quot;{{1}}&quot; എന്നതിനുള്ള പേയ്‌മെന്റ്",
-        "PaymentTo": "{{1}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
-        "PaymentToUser": "{{toUserName}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
-        "CreatePaidStream": "സൃഷ്ടിക്കുന്നതിന് {{toStreamName}}",
-        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ൽ റിസർവേഷനായി",
-        "CreatedCommunity": "കമ്മ്യൂണിറ്റി സൃഷ്ടിക്കുന്നതിന് &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; ൽ റിസർവേഷൻ റീഫണ്ടായി",
-        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
-        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ",
-        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
-        "WatchClip": "{{fromStreamTitle}} കാണുന്നതിനായി {{amount}} ക്രെഡിറ്റുകൾ നേടി",
-        "MissingCredits": "ക്രെഡിറ്റുകൾ കാണുന്നില്ല",
-        "YouMissingCredits": "തുടരുന്നതിന് നിങ്ങൾക്ക് ഒരു അധിക {{amount}} ക്രെഡിറ്റുകൾ ആവശ്യമാണ്.",
-        "BuyCredits": "ക്രെഡിറ്റുകൾ വാങ്ങുക",
-        "BuyBonus": "ഒരേസമയം {{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുന്നത്, {{bonus}} ക്രെഡിറ്റ് ബോണസിലേക്ക് നയിക്കും.",
-        "Buy": "വാങ്ങാൻ",
-        "PurchaseCredits": "ക്രെഡിറ്റുകൾ വാങ്ങുക",
-        "Credits": "ക്രെഡിറ്റുകൾ",
-        "ErrorInvalidAmount": "തുക അസാധുവാണ്",
-        "ErrorInvalidCurrency": "നിർഭാഗ്യവശാൽ ഞങ്ങൾ ഇതുവരെ കറൻസി {{currency}} പിന്തുണയ്ക്കുന്നില്ല",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ",
-            "BonusCredits": "{{amount}} ക്രെഡിറ്റുകൾ"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "തീയതി",
-        "Amount": "തുക",
-        "Description": "വിവരണം",
-        "Client": "കക്ഷി",
-        "To": "വരെ",
-        "From": "മുതൽ",
-        "SeeHistory": "{{1}} എന്നതിനായുള്ള പേയ്‌മെന്റ് ചരിത്രം കാണുക",
-        "HistoryEmpty": "നിങ്ങൾക്ക് ഇതുവരെ ഡാറ്റയില്ല",
-        "PaymentFor": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
-        "PaymentTo": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
-        "PaymentToUser": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
-        "CreatePaidStream": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
-            "-": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
-            "-": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
-            "-": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു",
-        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
-        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
-        "InviteAcceptedBy": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
-        "YouHaveCreditsToStart": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "പേയ്മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "സബ്സ്ക്രിപ്ഷൻ ആരംഭിക്കുക",
-            "message": "നിങ്ങൾക്ക് {{title}} സബ്‌സ്‌ക്രൈബുചെയ്യാൻ താൽപ്പര്യമുണ്ടോ?",
-            "ok": "ശരി",
-            "cancel": "റദ്ദാക്കുക"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "ക്രെഡിറ്റ് അല്ലെങ്കിൽ ഡെബിറ്റ് കാർഡ്",
-        "SubscribePayment": "പേയ്മെന്റ് സബ്സ്ക്രൈബ് ചെയ്യുക",
-        "ImmediatePayment": "ഉടനടി പണമടയ്ക്കൽ"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "പേയ്മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
-        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "ഒരു പേയ്മെന്റ് നടത്തുക",
-            "message": "നിങ്ങൾ {{symbol}} {{amount}} അടയ്ക്കാൻ സമ്മതിക്കുന്നുണ്ടോ?",
-            "ok": "ശരി",
-            "cancel": "റദ്ദാക്കുക"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "ക്രെഡിറ്റുകൾ",
-            "description": "ക്രെഡിറ്റുകളുടെയും പേയ്‌മെന്റുകളുടെയും ട്രാക്ക് സൂക്ഷിക്കുന്നു"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "സബ്സ്ക്രിപ്ഷൻ പ്ലാൻ",
-            "description": "സബ്സ്ക്രിപ്ഷൻ പ്ലാൻ"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "സബ്സ്ക്രിപ്ഷൻ",
-            "description": "സബ്സ്ക്രിപ്ഷൻ"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "ഉൽപ്പന്നം",
-            "description": "ഉൽപ്പന്നം വിൽക്കുന്നു"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "സേവനം",
-            "description": "സേവനം വാഗ്ദാനം ചെയ്യുന്നു"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} ക്രെഡിറ്റുകൾ ചെലവഴിച്ചു"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} ക്രെഡിറ്റുകൾ {{toUserName}} എന്നതിലേക്ക് അയച്ചു"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "{{fromUserName}} നിന്ന് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "പുതിയ സേവനം",
-            "TitlePlaceholder": "സേവന ശീർഷകം",
-            "PricePlaceholder": "വില നിശ്ചയിക്കുക",
-            "LinkPlaceholder": "അധിക വിവര ലിങ്ക് സജ്ജമാക്കുക",
-            "DescriptionPlaceholder": "സേവന വിവരണം",
-            "SaveService": "സേവനം സംരക്ഷിക്കുക",
-            "SelectRequiredParticipants": "ആവശ്യമായ പങ്കാളികൾ"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "സേവന ടെംപ്ലേറ്റുകൾ നിയന്ത്രിക്കുക",
-        "ManageServices": "സേവനങ്ങൾ നിയന്ത്രിക്കുക",
-        "Free": "സൗ ജന്യം",
-        "OptionalContribution": "ഓപ്ഷണൽ സംഭാവന",
-        "RequiredPayment": "ആവശ്യമായ പേയ്മെന്റ്",
-        "AreYouSureDelete": "നിങ്ങൾക്ക് ഈ സേവനം ഇല്ലാതാക്കണമെന്ന് തീർച്ചയാണോ?",
-        "AmountServicesRelated": "ഈ സേവനവുമായി ബന്ധപ്പെട്ട് {{amount}} ലഭ്യതകളുണ്ട്. അവയും നീക്കം ചെയ്യപ്പെടും."
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

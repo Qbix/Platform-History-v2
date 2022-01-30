@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "လော့ဂ်အင်",
-        "LogOut": "နေ log out"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "ငါ၏အမူလတန်း {{2}} အဖြစ်သတ်မှတ်ရန် {{1}}",
-        "ChoosePassPhrase": "အတူဝငျရောကျဖို့ <strong>pass ထားသောစာပိုဒ်တိုများရွေးချယ်ပါ။<\/strong> <br> သင်အလွယ်တကူမှတ်မိလိမ့်မည်ဟုစကားအနည်းငယ်ပါဝင်သောတစ်ဦးကရိုးရှင်းတဲ့ထားသောစာပိုဒ်တိုများ။",
-        "ChoosePassPhraseSeeSuggestions": "<strong>သင့်အကောင့်ကိုကာကွယ်ရန်ကောင်းတစ်ဦးဖြတ်သန်းထားသောစာပိုဒ်တိုများရွေးချယ်ပါ။<\/strong> အချို့အတွေးအခေါ်များများအတွက်အကြံပြုချက်များကိုကြည့်ပါ။",
-        "LogOutAndTryAgain": "အထဲက Log နှင့်တဖန်ကြိုးစားပါ",
-        "IfYouFeel": "သငျသညျအရာတစ်ခုခုမှားသွားတယ်ခံစားရလျှင်, သင်လုပ်နိုင်သည်",
-        "SetIdentifierButtonTitle": "ကျော်စတင်ရန်"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Started Get"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Started Get",
-        "Authorize": "ခွင့်ပြု",
-        "TermsLabel": "ကျွန်မဖတ်ပါနှင့်သဘောတူခဲ့ကြ <br> အဆိုပါ {{link}} မှ",
-        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ",
-        "mustAgree": "ပထမ ဦး စွာသင်စည်းကမ်းချက်များကိုသဘောတူရပေမည်။"
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "ငါ {{link}} ကိုလက်ခံ",
-        "TermsTitle": "စည်းမျဉ်းစည်းကမ်းများ"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "အခွင့်",
-        "prompt": "သငျသညျအသိပေးချက်များကိုဖွင့်လိုပါသလား သင်ဂရုစိုက်သောအရာတို့ကိုအကြောင်းကို Real-time updates များကိုလက်ခံရရှိပါလိမ့်မယ်။",
-        "yes": "ဟုတ်ကဲ့",
-        "no": "အဘယ်သူမျှမ",
-        "WelcomePleaseVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာအတည်ပြုရန်ပေးပါ။",
-        "WelcomeVerifyEmail": "ကြိုဆိုပါတယ်! သင့်အီးမေးလ်လိပ်စာ Verify ။",
-        "ForgetPass": "ဟေ့, သင်သည်သင်၏ passphrase ကိုမေ့လျော့ခဲ့တာလဲ",
-        "PassphraseSaved": "သင်၏ Pass စကားစုကိုသိမ်းထားပြီးပါပြီ",
-        "IdentifierActivated": "သင့် {{type}} ကိုဖွင့်ထားသည်။",
-        "CompletedActivation": "သုံးစွဲသူသက်တမ်းတိုးပြီးပါပြီ။",
-        "CompletedActivationLogIn": "သုံးစွဲသူသက်တမ်းတိုးပြီးပါပြီ။ ယခုဝင်ရောက်ရန်ကြိုးစားပါ။"
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "အဆက်အသွယ်ကိုရွေးချယ်ပါ",
-            "CreateAccount": "ဆက်သွယ်ရန်",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create မတွေ့ပါ",
-            "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ",
-            "EmptyContacts": "ဆက်သွယ်ရန်မတွေ့ပါ ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "{{displayName}} ၏အဆက်အသွယ်ကိုရွေးချယ်ပါ"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "တံဆိပ်ရွေးချယ်ပါ။",
-        "inviteUser": "အသုံးပြုသူ Invite",
-        "selectRole": "Role ကိုရွေးပါ",
-        "inviteRole": "ဖိတ်ကြားပါ {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "မှားနေသောဘာသာစကားမရွေး",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "ကြိုဆိုပါတယ်",
-        "directions": "အကောင့်တစ်ခုဖွင့်ပါ၊",
-        "directionsNoRegister": "သင့်မှာအကောင့်တစ်ခုရှိရင် log in လုပ်ပါ။",
-        "goButton": "သွား",
-        "passphrase": "သင်၏ Pass စကားစုကိုရိုက်ပါ",
-        "loginButton": "စတင်ပါ",
-        "registerButton": "စတင်ပါ",
-        "resendButton": "Activation သတင်းစကားပို့ပါ",
-        "forgot": "မေ့နေတာလား",
-        "resendConfirm": "သင်၏ passphrase ကိုပြန်လည်သတ်မှတ်ရန်စာတစ်စောင်ပို့လိုပါသလား။",
-        "resendSuccess": "သင်၏ passphrase ကိုပြန်လည်သတ်မှတ်ရန်စာတစ်စောင်ကိုစစ်ဆေးပါ",
-        "resendClose": "ပိတ်",
-        "noPassphrase": "သင် log in မလုပ်မီ activation message ရှိ link ကိုနှိပ်ခြင်းဖြင့် pass фразတစ်ခုကိုသတ်မှတ်ရမည်။",
-        "notVerified": "သင် log in လုပ်ရန် activation စာတစ်စောင်ကိုသင်ပို့ရမည်။",
-        "emailExists": "အရင်အီးမေးလ်ဖြင့်မှတ်ပုံတင်ရန်ကြိုးစားခဲ့ပါသလား။ ရှိပါကသင်၏အကောင့်ကိုသက်ဝင်ရန်သင်၏စာပုံးကိုစစ်ဆေးပါ။ <a href='#resend' class='Q_button Users_activation_resend'>မက်ဆေ့ခ်ျကိုပြန်လည်ပေးပို့ရန်ကိုနှိပ်ပါ<\/a>",
-        "mobileExists": "အရင်မိုဘိုင်းနံပါတ်ဖြင့်မှတ်ပုံတင်ရန်ကြိုးစားခဲ့ပါသလား။ ထိုသို့ဖြစ်ပါကသင်၏အကောင့်ကိုဖွင့်ရန်သင်၏ SMS ကိုစစ်ဆေးပါ။ <a href='#resend' class='Q_button Users_activation_resend'>မက်ဆေ့ခ်ျကိုပြန်လည်ပေးပို့ရန်ကိုနှိပ်ပါ<\/a>",
-        "usingOther": "ဒါမှမဟုတ်မင်းလုပ်နိုင်တယ်",
-        "prompt": "သုံးစွဲသူအမည်ရွေးပါ:",
-        "newUser": "သို့မဟုတ်အကောင့်အသစ်တစ်ခုဖန်တီးပါ",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "သင်၏မိုဘိုင်းနံပါတ်သို့မဟုတ်အီးမေးလ်",
-            "mobile": "သင်၏မိုဘိုင်းနံပါတ်ကိုထည့်ပါ",
-            "email": "သင့်အီးမေးလ်လိပ်စာကိုရိုက်ထည့်ပါ",
-            "username": "အသုံးပြုသူအမည်"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "ဝန်ဆောင်မှု၏စည်းကမ်းချက်များကိုလက်ခံပါသလား။",
-        "facebookNoEmail": "သင်၏ဖေ့ဘွတ်အကောင့်တွင်အတည်ပြုအီးမေးလ်လိပ်စာပျောက်နေသည်။ ရိုးရှင်းစွာအထဲဝင်ပါ။",
-        "picTooltip": "ဒီပုံကိုနောက်မှပြောင်းနိုင်သည်",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "အချိန် {{timestamp}} သို့ {9999} သို့ ၀ င်ပါ။",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Wallet သို့ပြန်ညွှန်းနေသည်",
-                "content": "ဒီဒိုင်ယာလော့ခ်ကိုပိတ်လိုက်တာနဲ့မင်းရဲ့ပိုက်ဆံအိတ်ထဲကိုခေါ်ဆောင်သွားလိမ့်မယ်။ သင်လက်မှတ်ထိုးပြီးနောက်ဤစာမျက်နှာသို့ပြန်လာပါ။"
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "လော့အင်ဝင်ရန်နည်းလမ်းတစ်ခုထည့်ပါ",
-        "sendMessage": "Activation သတင်းစကားပို့ပါ",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "သင်၏မိုဘိုင်းနံပါတ်သို့မဟုတ်အီးမေးလ်ကိုထည့်ပါ",
-            "mobile": "သင့်မိုဘိုင်းနံပါတ်ကိုရိုက်ထည့်ပါ",
-            "email": "သင့်အီးမေးလ်လိပ်စာကိုရိုက်ထည့်ပါ",
-            "username": "အသုံးပြုသူအမည်"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} အကောင့်",
-        "areUsing": "{{platform}} ကိုသင်အသုံးပြုနေပါတယ်",
-        "noLongerUsing": "{{platform}} ကဲ့သို့သင်မချိတ်ဆက်တော့ပါ",
-        "doAuth": "ဒီအကောင့်ဖြင့်ဝင်ပါ",
-        "doSwitch": "ဒီအကောင့်သို့ပြောင်းပါ"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "ပိုင်ရှင်",
-        "Admin": "အက်မင်",
-        "Member": "အသင်းဝင်",
-        "Guest": "။ ည့်သည်",
-        "Host": "အိမ်ရှင်"
-    },
-    "analytics": {
-        "Title": "ခွဲခြမ်းစိတ်ဖြာ",
-        "Daily": "နေ့စဉ်",
-        "Weekly": "အပတ်စဉ်",
-        "Monthly": "လစဉ်",
-        "Application": "လျှောက်လွှာ",
-        "Pages": "စာမျက်နှာများ",
-        "Services": "ဝန်ဆောင်မှုများ",
-        "Faq": "အမြဲမေးလေ့ရှိသောမေးခွန်းများ",
-        "WeekDays": "ရက်သတ္တပတ်ရက်များ"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

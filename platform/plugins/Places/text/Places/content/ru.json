@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} лат, {{2}} язык)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "в пределах {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "метр",
-        "meters": "метры",
-        "kilometer": "километр",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
-        "km": "км",
-        "mile": "мили",
-        "miles": "миль",
-        "mi": "ми",
-        "foot": "ступня",
-        "feet": "ноги",
-        "inches": "дюймов"
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Меня интересуют события, происходящие в {{select}}",
-        "update": "Обновить мое местоположение",
-        "prompt": "{{ClickOrTap}} здесь, чтобы <br> установить свой <br> место нахождения",
-        "myCurrentLocation": "Мое текущее местоположение",
-        "enterAddress": "Введите адрес",
-        "enterPostcode": "Пожалуйста, введите свой почтовый индекс \/ почтовый индекс",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Добавить местоположение",
-            "title": "Новое место",
-            "nameYourLocation": "Назовите свое местоположение"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Сохранить это место?",
-            "message": "Планируете ли вы использовать это место снова в будущем?",
-            "ok": "да",
-            "cancel": "нет"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Назовите это место",
-            "placeholder": "Дом, Работа и т. Д.",
-            "ok": "Сохранить"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Выберите место"
-        },
-        "set": "Установить мое местоположение"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Любая область внутри этого места?",
-        "newArea": "Новая область",
-        "promptTitle": "Введите имя для области:",
-        "absent": "Пожалуйста, установите площадь",
-        "error": "ошибка",
-        "exist": "Площадь уже существует",
-        "addNewArea": "Добавить новую область",
-        "add": "добавлять"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "коллекция локаций",
-            "displayType": "Места"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Представляет собой здание, объект, судно, парк и т. Д.",
-            "displayType": "Место нахождения"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Представляет область внутри местоположения, например комнату или номер",
-            "displayType": "Площадь"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Представляет пол в здании или корабле",
-            "displayType": "Этаж"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Представляет колонну в здании или корабле",
-            "displayType": "колонка"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Категория для вещей на определенном расстоянии от геохеша",
-            "displayType": "Рядом с местами"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Категория для вещей на определенном расстоянии от геохеша, соответствующих интересам",
-            "displayType": "Интересные места"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

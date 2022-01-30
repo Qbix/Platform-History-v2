@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "קישור לקידום",
-                "startDate": "תאריך התחלה",
-                "startTime": "שעת התחלה",
-                "endDate": "תאריך סיום",
-                "endTime": "שעת סיום",
-                "budget": "תַקצִיב"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "סנן לפי עניין",
-                "FilterInterests": "התחל להקליד עניין ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "ריבית",
-            "Location": "מקום"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "ללכת",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "לְדַפדֵף",
-            "WriteToStartConversation": "כתוב את מחשבותיך כדי להתחיל את השיחה",
-            "StartConversation": "התחל שיחה",
-            "GotoConversation": "עבור אל שיחה",
-            "reset": "אִתחוּל",
-            "edit": "לַעֲרוֹך",
-            "link": "קישור",
-            "setUrl": "הגדר כתובת URL",
-            "save": "להציל",
-            "setClip": "קליפ גזור",
-            "invalidURL": "כתובת אתר לא חוקית"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "הקובץ גדול מדי לשמירה במטמון. גודל קובץ מרבי {{size}}",
-        "InvalidPDF": "הקובץ אינו קובץ PDF חוקי",
-        "StartTypingTitleOrKeywords": "התחל להקליד כותרת או מילות מפתח ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "מסמך HTML שמשתמשים שונים יכולים לצפות ולערוך",
-            "displayType": "מאמר"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "שקופית במצגת, יכולה לכלול HTML, אודיו וכו &#39;.",
-            "displayType": "שקופית"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "מצגת המורכבת משקופיות שונות",
-            "displayType": "הַצָגָה"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "יחידת פרסום באתר",
-            "displayType": "יחידת פרסום"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "דרך לקבץ יחידות פרסום בשם",
-            "displayType": "מיקום מודעה"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "תוכן לפרסומת",
-            "displayType": "קריאייטיב לפרסום"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "קמפיין פרסום",
-            "displayType": "קמפיין פרסום"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "מייצג אתר שהמטא נתונים שלו נגרדו",
-            "displayType": "עמוד אינטרנט"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

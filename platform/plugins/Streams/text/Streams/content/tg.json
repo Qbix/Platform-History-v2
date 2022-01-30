@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Қисми нав"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Мардон даъват карданд",
-        "Streams\/invitedMe": "Ки маро даъват кард",
-        "AreYouAgree": "Шумо розӣ ҳастед?",
-        "Yes": "Бале",
-        "No": "Не"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Шумо аз чӣ истифода мекунед?",
-        "CanAdd": "Агар шумо ҳанӯз ҷустуҷӯ кунед, ки чӣ гуна ҷустуҷӯ мекунед, шумо метавонед манфиати навро дар поён гузоред:",
-        "TrySynonyms": "Оё онро мебинед? Якчанд синонимро санҷед.",
-        "AddUnderCategory": "Иловаи категорияи ...",
-        "Other": "Дигар",
-        "Unlisted": "Номаълум аст"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Паёмҳо барои тафтишоти admin flagship. Боз як бори дигар тамошо кунед.",
-        "noOneSaid": "Ҳеҷ кас чизе нагуфт",
-        "closeChatButton": "Чингизро пӯшед",
-        "closeChatConfirmTitle": "Ин сӯҳбатро пӯшед?",
-        "closeChatConfirm": "Оё боварӣ доред, ки ин паёмро пӯшед?",
-        "closeChatConfirmYes": "Бале",
-        "closeChatConfirmNo": "Не",
-        "earlierComments": "шарҳҳои қаблӣ",
-        "Subscribed": "Огоҳиҳоро хомӯш кунед",
-        "Unsubscribed": "Огоҳинома гиред",
-        "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин сӯҳбатро надоред.",
-        "startedConversation": "сӯҳбатро оғоз кард",
-        "RealTimeCall": "Занги вақти воқеӣ",
-        "SearchByName": "Ҷустуҷӯ аз рӯи ном",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} ба сӯҳбат ташриф меорад",
-            "Join": "{{displayName}} ба сӯҳбат ҳамроҳ шуд",
-            "Leave": "{{displayName}} сӯҳбатро тарк кард",
-            "RelatedTo": "{{displayName}} барномаи {{stream.displayType}} -ро сар кард"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "{{& message.fields.type}} то {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} гуфт:",
-        "Streams\/changed": "Тағирот дар {{stream.fields.title}}",
-        "Streams\/invite": "Шумо ба {{& stream.fields.title}} даъват шудед",
-        "Streams\/announcement": "Эълон дар {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} дастрасии ҷараёнро тағйир дод",
-        "Streams\/chat\/edit": "Паёмнависии чат карда шуд",
-        "Streams\/chat\/remove": "Паёмҳои ирсолшуда хориҷ карда шуд",
-        "Streams\/closed": "{{stream.fields.title}} шудааст",
-        "Streams\/task\/progress": "Пешрафт дар {{stream.fields.title}}",
-        "Streams\/task\/complete": "Вазифа ба анҷом расид: {{stream.fields.title}}",
-        "Streams\/task\/error": "Хатогӣ дар муддати: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Паёмҳои воридотӣ",
-        "Streams\/relatedTo\/Streams\/call": "Занги нав дар {{toTitle}} оғоз ёфт",
-        "Streams\/relatedTo\/*": "Нави {{relationDisplayType}} дар {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ба {{toTitle}} ҳамчун {{relationDisplayType}} илова карда шуд",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} шуморо дар шарҳ қайд кард",
-        "Streams\/call": "{{displayName}} тамоси воқеӣ оғоз кард",
-        "ManageEmailSubscriptions": "обунаҳои почтаи электронии худро идора кунед",
-        "IfUnsubscribe": "Агар шумо бояд обуна шавед"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} шуморо ба {{inviteUrl}} даъват кард",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Аз мухотибонатон интихоб кунед",
-            "chooseAgainFromContacts": "Аз нав аз мухотибон интихоб кунед",
-            "inviteSelectedContacts": "Даъватҳои мухтасарро даъват кунед",
-            "selectFromContacts": "Аз мухотибон интихоб кунед",
-            "photo": "Аксро гирифта метавонед",
-            "photoInstruction": "Агар шахсе, ки коди QR-ро муайян кардааст, дар назди шумо қарор дорад, онҳоро акс гирифтан",
-            "to": "Ба: {{Stream Title}}",
-            "go": "Рафтан",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
             "title": "Invite",
-            "placeholder": "Рақами телефонӣ ё нишонии почтаи электронӣ",
-            "orInvite": "Ё бо истифода аз одамон истифода баред:",
-            "QR": "{{ClickOrTap}} барои эҷоди QR коди",
-            "QRtitle": "Ин рамзи QR-ро санҷед",
-            "QRscanned": "Онҳо онро таъриф мекарданд!",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "byEmail": "Email",
-            "byText": "Матн",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} агар код скан карда шуда бошад",
-            "copyLink": "{{ClickOrTap}} -ро нусхабардорӣ кардани истинод даъватнома",
-            "userChooserPlaceholder": "Ҷустуҷӯ аз рӯи ном"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Ҳа, ин тафтиш кунед",
-            "PleaseVisitLink": "Лутфан ба пайвандҳои зерин муроҷиат кунед:",
-            "InvitingYou": "Ман шуморо даъват менамоям, ки {{title}}",
-            "HasInvitedYou": "{{displayName}} шуморо ба {{title}} даъват кард",
-            "HasMentionedYou": "{{displayName}} шуморо дар &quot;{{title}}&quot; ёдрас кард",
-            "YOUAREINVITED": "ШУМО ДИККАТ ДОРЕД!",
-            "AcceptInvite": "Даъватро қабул кунед"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Шумо ба {{title}} даъват кардаед. Лутфан {{url}} -ро лутфан гузоред"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Шумо даъват кардаед. {{ClickOrTap}} дар ин ҷо барои қабул ва ҳамроҳ шудан."
-        },
-        "command": "Даъват кунед",
-        "youCanNowPaste": "Шумо метавонед ин истинодро дар ҷое барои даъват кардани одамон гузоред"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Эълонҳо аз рақами мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам намедонанд. Бо матни фаврӣ пайравӣ кунед, то онҳо огоҳ шаванд, ки даъвати шумо аз шумо пайдо шавад, хоҳиш кунед, ки пайвандро пахш кунед.",
-            "confirm": "Эълонҳо аз рақами мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам намедонанд. Оё мехоҳед, ки бо матни зудишин пайравӣ кунед, то онҳо огоҳ бошанд, ки даъвати шумо аз шумо пайдо мешавад, хоҳиш кунед, ки пайвандро пахш кунед.",
-            "check": "Хайр, ман ба шумо даъватномаи барномаи {{app}} фиристодам. Лутфан, sms худро санҷед ва пайванди ростро пахш кунед!",
-            "CheckYourMobile": "Лутфан SMS-ро санҷед ва дастурҳоро иҷро намоед!"
-        },
-        "email": {
-            "alert": "Эълонҳо аз домҳои мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам эътироф намекунанд. Бо матни фаврӣ пайравӣ кунед, то онҳо огоҳ шаванд, ки даъвати шумо аз шумо пайдо шавад, хоҳиш кунед, ки пайвандро пахш кунед.",
-            "confirm": "Эълонҳо аз домҳои мо фиристода мешаванд, ки дӯстони онҳо ҳанӯз ҳам эътироф намекунанд. Оё мехоҳед, ки бо матни зудишин пайравӣ кунед, то онҳо огоҳ бошанд, ки даъвати шумо аз шумо пайдо мешавад, хоҳиш кунед, ки пайвандро пахш кунед.",
-            "subject": "Шумо даъвати шуморо қабул кардед?",
-            "body": "Хайр, ман ба шумо даъватномаи барномаи {{app}} фиристодам. Лутфан почтаи худро тафтиш кунед ва пайванди он дар онҷо пахш кунед!",
-            "CheckYourEmail": "Лутфан почтаи электронии худро тафтиш кунед ва дастурҳоро иҷро намоед!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Микрофонро фаъол созед",
-            "cameraTitle": "Камераро фаъол кунед",
-            "cameraAndMicrophoneTitle": "Камера ва микрофонро фаъол созед",
-            "dialogTitle": "Пайвастшавӣ",
-            "microphoneBtn": "Микрофонро фаъол кунед",
-            "cameraBtn": "Камераро фаъол кунед",
-            "cameraAndMicrophoneBtn": "Камера ва Микрофонро фаъол кунед"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Дастурамал",
-            "permissionDenied": "Иҷозат барои {{kind}} рад карда шуд. Барои истифодаи он, марҳилаҳои зеринро иҷро намоед:",
-            "point1": "Ба &quot;Танзимотҳо&quot; -&gt; &quot;Пешрафта&quot; -&gt; &quot;Махфият ва амният&quot; -&gt; &quot;Танзимоти сайт&quot; -&gt; &quot;Камера&quot; ё &quot;Танзимоти сайт&quot; -&gt; &quot;Микрофон&quot; гузаред",
-            "point2": "Аз рӯйхати &quot;Блоки&quot; аз {{hostname}} хориҷ кунед"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Дастурамал",
-            "permissionDenied": "Иҷозат барои {{kind}} рад карда шуд. Лутфан ин саҳифаро аз нав кунед ва дастрасӣ ба {{kind}} -ро барои ҳамроҳ шудан ба конфронс тасдиқ кунед."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Дастурамал",
-            "permissionDenied": "Иҷозат барои {{kind}} рад карда шуд. Барои истифодаи он, марҳилаҳои зеринро иҷро намоед:",
-            "point1": "Ба Танзимоти Android-и худ равед",
-            "point2": "Кушодани &quot;Барномаҳо ва огоҳиҳо&quot;",
-            "point3": "&quot;{{communityName}}&quot; - ро ёбед ва онро кушоед",
-            "point4": "Оид ба Иҷозатҳо ламс кунед",
-            "point5": "Ба кор андохтан {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Дастурамал",
-            "permissionDenied": "Иҷозат барои {{kind}} рад карда шуд. Барои истифодаи он, марҳилаҳои зеринро иҷро намоед:",
-            "point1": "Ба Танзимоти IOS-и худ равед",
-            "point2": "Кушодани &quot;Махфият&quot;",
-            "point3": "{{kind}} -ро ёбед ва кушоед",
-            "point4": "&quot;{{communityName}}&quot; -ро ёбед ва фаъол кунед"
-        },
-        "notices": {
-            "youJoinedRoom": "Шумо ба ҳуҷра ҳамроҳ шудед",
-            "joining": "Ҳамроҳ шудан: {{userName}}",
-            "sbLeftRoom": "{{userName}} аз утоқ баромад",
-            "youLeftRoom": "Шумо аз утоқ баромадед",
-            "codeCopied": "Шумо аз утоқ баромадед",
-            "sbBeganFbLive": "{{userName}} пахши ин зангро дар Facebook оғоз кард",
-            "sbStoppedFbLive": "{{userName}} пахши ин зангро дар Facebook қатъ кард",
-            "youBeganFbLive": "Шумо ин зангро дар Фейсбук пахш кардед",
-            "youStoppedFbLive": "Шумо пахши ин зангро дар Facebook қатъ кардед",
-            "linkCopiedToCb": "Истинод ба буфер нусхабардорӣ карда шуд",
-            "codeCopiedToCb": "Рамз ба силули мухобиротӣ нусхабардорӣ шуд",
-            "userHasNoVideo": "Иштирокчӣ видео надорад",
-            "openInBrowserAlert": "Барои ҳамроҳ шудан ба конфронс дар браузери Safari пайванд кушоед.",
-            "youBeganVideoRecording": "Шумо сабти ин конфронсро оғоз кардед",
-            "youStoppedVideoRecording": "Шумо сабти ин конфронсро қатъ кардед",
-            "switchingRoom": "Хонаи мубодила ...",
-            "forceDisconnecting": "Шумо дар давоми 5 сония ҷудо мешавед",
-            "youStartedLive": "Шумо пахши ин зангро ба фармоишгари RTMP оғоз кардед",
-            "youStoppedLive": "Шумо пахши ин зангро ба фармоишгари RTMP қатъ кардед",
-            "sbStartedLiveStreaming": "{{userName}} мустақиман оғоз ёфт",
-            "sbStoppedLiveStreaming": "{{userName}} ба таври зинда пахш шуд",
-            "liveStopped": "Ҳангоми фиристодани видео ба нуқтаи ниҳоӣ хато ба амал омад"
-        },
-        "settingsPopup": {
-            "webCamera": "Веб камера",
-            "screenSharing": "Интишори экран",
-            "shareAnotherScreen": "Экрани дигарро мубодила кунед",
-            "turnOffCameras": "Ҳама камераҳоро хомӯш кунед",
-            "startFBLive": "Facebook Livestream -ро оғоз кунед",
-            "stopFBLive": "Қатъи Facebook Livestream",
-            "fbLiveTitle": "Унвони зинда",
-            "fbLiveDescription": "Тавсифи Live",
-            "fbOnlyMeLiveAccess": "Фақат ман",
-            "fbFriendsAccess": "Дустон",
-            "fbPublicAccess": "Ҷамъиятӣ",
-            "fbStartLive": "Зинда бошед",
-            "fbStopLive": "Охири Live",
-            "fbEmbedCode": "Гузоштан",
-            "copy": "Нусха",
-            "turnOffVideo": "Мубодилаи камера \/ экранро хомӯш кунед",
-            "turnOffScreenSharing": "Мубодилаи экранро хомӯш кунед",
-            "cameraIsTurnedOff": "Камера хомӯш аст",
-            "startRecording": "Оғози сабткунӣ",
-            "stopRecording": "Сабтро қатъ кунед",
-            "recordingInProgress": "Сабт идома дорад ...",
-            "publishOnTimeline": "Дар ҷадвал нашр кунед",
-            "publishToGroup": "Нашр ба гурӯҳ",
-            "turnOffAudioInput": "Микрофонро хомӯш кунед",
-            "micIsTurnedOff": "Микрофон хомӯш карда шудааст",
-            "start": "Оғоз кунед",
-            "stop": "Ист",
-            "streamingSettings": "Танзимот",
-            "streamToRTMP": "Ба RTMP фармоишӣ интиқол диҳед"
-        },
-        "participantsPopup": {
-            "disconnect": "Қатъи",
-            "floatingScreens": "Экрани шиновар",
-            "tiledScreens": "Экрани тиллоӣ",
-            "loudestExceptMe": "Loudest ҷуз ман",
-            "maximizeLoudest": "Баланд бардоштани баландтарин",
-            "staticMaximized": "Беҳтарин статикӣ",
-            "manual": "Дастӣ",
-            "fullScreen": "Тамомсафҳа",
-            "turnOffCamera": "Видеоро пинҳон кунед",
-            "turnOffAudio": "Овози хомӯш кунед",
-            "turnOffScreenSharing": "Додугирифти экранро пинҳон кунед",
-            "turnOnCamera": "Намоиши видео",
-            "turnOnAudio": "Аудио садо медиҳад",
-            "turnOnScreenSharing": "Нишон додани мубодилаи экран"
-        },
-        "notAllowedToJoinCall": "Шумо иҷозати ҳамроҳ шудан ба ин ҷараёнро надоред.",
-        "streamTitle": "{{1}} занги мустақим",
-        "preview": {
-            "preamble": "Маҷлис:",
-            "Meeting": "Вохӯрӣ",
-            "MeetingEnded": "Вохӯрӣ ба охир расид"
-        },
-        "preparing": {
-            "micIsOff": "Микрофон хомӯш аст",
-            "micIsOn": "Микрофон фаъол аст",
-            "cameraIsOff": "Камера хомӯш аст",
-            "cameraIsOn": "Камера фаъол аст",
-            "screenSharingIsOn": "Мубодилаи экран фаъол аст",
-            "screenSharingIsOff": "Экрани мубодила",
-            "joinNow": "Ба Занг ҳамроҳ шавед"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "паёми <em>{{message.fields.type}} -ро<\/em> ба {{stream.fields.title}} пешниҳод кард"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "шарҳ дод",
-            "in": "дар",
-            "body": "дар {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ба нашр расидааст",
-                "byAvatar": "аз ҷониби {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "дорои нав {{instructions.fromDisplayType}}",
-                "byAvatar": "иловашуда {{avatar.displayName}}"
-            },
-            "startedCallIn": "занг заданро сар кард"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Даъват карданд",
-            "description": "Қуттии даъватномаҳо"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Захира",
-            "description": "ҷараён барои идоракунии дастрасӣ ба манба ва интишори паёмҳо дар бораи навсозиҳо"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "барои гирифтани навсозиҳо дар бораи пешрафт дар вазифаи муайян",
-            "displayType": "Вазифа"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "категория барои вазифаҳо",
-            "displayType": "Вазифаҳо"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "як таҷрибаи муштарак барои аъзои ҷамоа",
-            "displayType": "Таҷрибаи маъмул барои аъзоёни ҷамоа"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "салом, ки бо он корбар метавонад худро муаррифӣ кунад",
-            "displayType": "Салом"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Шумора",
-            "description": "рақами математикӣ"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Таърих",
-            "description": "санаи"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Матн",
-            "description": "матни матн"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Матн",
-            "description": "ҷасади хурди матн"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Матн",
-            "description": "ҷасади миёнаи матн"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Суроғаи электронӣ",
-            "description": "суроғаи электронӣ"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Рақами мобилӣ",
-            "description": "рақами мобилӣ"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "истиноди дар веб"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Тасвир",
-            "description": "тасвири визуалӣ",
-            "newItem": "Иловаи тасвир"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Галереяи тасвирҳо",
-            "description": "галереяи тасвирҳо"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Албом",
-            "description": "албом, ки бо васоити мухталифи он алоқаманд аст"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Файл",
-            "description": "файли боршуда",
-            "newItem": "Илова кардани файл"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Клипи аудиоӣ",
-            "description": "клипи аудио",
-            "newItem": "Иловаи аудио"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Клипи видеоӣ",
-            "description": "клипи видеоӣ",
-            "newItem": "Видео илова кунед"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "аудио ё видео зинда"
+            "description": "live audio or video"
         },
         "Streams\/category": {
-            "displayType": "Гурӯҳ",
-            "description": "категорияест, ки ба дигар ҷараёнҳо тааллуқ дошта метавонад"
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "Индекси иштирок",
-            "description": "ҷараёнҳо ба ин иртибот доранд \/ алоқаманд нестанд, вақте корбар ба он мепайвандад \/ тарк мекунад"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Фоизҳо",
-            "description": "манфиати корбарро ба мавзӯи муайян ифода мекунад"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "Воридотӣ",
-            "description": "таъинот барои паёмҳое, ки аз ҷониби корбарони дигар фиристода шудаанд"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "Гуфтугӯ",
-            "description": "як сӯҳбати байни корбарон, бо таърих"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Занги воқеӣ",
-            "description": "вақти воқеӣ видео \/ занги аудио"
-        },
-        "Streams\/pdf": {
-            "displayType": "Ҳуҷҷати PDF",
-            "description": "Ҳуҷҷати PDF",
-            "newItem": "PDF илова кунед"
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Савол",
-            "description": "ҷараёни саволҳо"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Ҷавоб",
-            "description": "ҷараёни посух"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Зангҳо",
-            "description": "категория барои ҷараёнҳо\/webrtc",
-            "MaxRelationsExceeded": "Зангҳои ҳадди аксар зиёд шуданд"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Унвон",
-        "Subscribed": "Обуна шудааст",
-        "Participants": "Иштирокчиён",
-        "AreYouSureRemoveIdentifier": "Шумо мутмаин ҳастед, ки ин муайянкунандаро нест мекунед?",
-        "AreYouSureUnsubscribeIdentifier": "Шумо мутмаин ҳастед, ки ин идентификаторро бекор мекунед? Он огоҳиномаҳоро ба ин идентификатор хомӯш мекунад.",
-        "AreYouSureUnsubscribeDevice": "Шумо мутмаин ҳастед, ки ин дастгоҳро барҳам мезанед? Он огоҳиҳоро дар ин дастгоҳ хомӯш мекунад.",
-        "Identifiers": "Муайянкунандаҳо",
-        "Devices": "Дастгоҳҳо",
-        "Streams": "Ҷараёнҳои",
-        "AreYouSureRemoveParticipant": "Дар ҳақиқат мехоҳед, ки ин иштирокчиро хориҷ кунед?",
-        "RemoveParticipant": "Иштирокчиро нест кунед"
-    },
     "menu": {
-        "placeholder": "намуди саҳифа",
-        "ModTab": "Тағир додани банд",
-        "Save": "Сарфа",
-        "Delete": "Нест кардан",
-        "Submenu": "Зерменю"
-    },
-    "errors": {
-        "HiddenFromYou": "Ин мундариҷа аз шумо пинҳон аст."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Сабт",
+        "record": "Record",
         "reset": "Reset",
-        "edit": "Таҳрир",
-        "title": "унвон",
-        "description": "тавсиф",
-        "upload": "Боргузорӣ",
-        "link": "Истинод",
-        "setUrl": "URL таъин кунед",
-        "save": "Захира кунед",
-        "setClip": "Клипро буред",
-        "invalidURL": "URL-и нодуруст",
-        "invalidFile": "Файл нодуруст аст",
-        "errorNoSource": "Манбаи аудиоӣ нест",
-        "uploadLimit": "Андозаи максималии файл: {{size}}",
-        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
         "reset": "Reset",
-        "edit": "Таҳрир",
-        "title": "унвон",
-        "description": "тавсиф",
-        "upload": "Боргузорӣ",
-        "link": "Истинод",
-        "setUrl": "URL таъин кунед",
-        "save": "Захира кунед",
-        "setClip": "Клипро буред",
-        "invalidURL": "URL-и нодуруст",
-        "invalidFile": "Файл нодуруст аст",
-        "errorNoSource": "Манбаи видеоӣ нест",
-        "uploadLimit": "Андозаи максималии файл: {{size}}",
-        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
         "reset": "Reset",
-        "edit": "Таҳрир",
-        "title": "унвон",
-        "description": "тавсиф",
-        "upload": "Боргузорӣ",
-        "link": "Истинод",
-        "setUrl": "URL таъин кунед",
-        "save": "Захира кунед",
-        "setClip": "Клипро буред",
-        "invalidURL": "URL-и нодуруст",
-        "invalidFile": "Файл нодуруст аст",
-        "errorNoSource": "Манбаи PDF нест",
-        "uploadLimit": "Андозаи максималии файл: {{size}}",
-        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}"
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
         "reset": "Reset",
-        "edit": "Таҳрир",
-        "title": "унвон",
-        "description": "тавсиф",
-        "upload": "Боргузорӣ",
-        "link": "Истинод",
-        "setUrl": "URL таъин кунед",
-        "save": "Захира кунед",
-        "setClip": "Клипро буред",
-        "invalidURL": "URL-и нодуруст",
-        "invalidFile": "Файл нодуруст аст",
-        "errorNoSource": "Манбаи тасвир нест",
-        "uploadLimit": "Андозаи максималии файл: {{size}}",
-        "errorFileSize": "Бубахшед, аммо файл хеле калон аст.<br> Андозаи максималии файл {{size}}",
-        "uploadedImage": "Тасвири боршуда",
-        "imageTitle": "Номи тасвир"
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Саволҳо",
-        "Answers": "Ҷавобҳо",
-        "AnswerQuestion": "Саволро ҷавоб диҳед",
-        "SetYourAnswer": "Лутфан ба савол ҷавоб диҳед",
-        "NewQuestion": "Саволи нав",
-        "NewAnswer": "Ҷавоби нав",
-        "AnswerDetails": "Тафсилоти ҷавоб",
-        "answerOption": "Интихоб",
-        "answerOptionExclusive": "Истисноӣ",
-        "answerTextarea": "Тектерея",
-        "FreeAnswer": "ҷавоби озод ...",
-        "SaveQuestion": "Саволро захира кунед",
-        "SaveAnswer": "Ҷавобро захира кунед",
-        "AddAnotherAnswer": "Ҷавоби дигарро илова кунед",
-        "ErrorAnswers": "Лутфан ҳатто як ҷавоб илова кунед",
-        "AlreadyAnswered": "Аллакай ҷавоб дод",
-        "TitlePlaceholder": "Саволи худро нависед",
-        "ContentPlaceholder": "Дар ин ҷо ягон маълумоти иловагӣ гузоред, то ба одамон ҷавоб диҳанд",
-        "ErrorTitle": "Савол талаб карда мешавад",
-        "Placeholder": "Ҷойгиркунанда"
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
+        "answerTextarea": "Textarea",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Таҷрибаи нав",
-        "DefineTitle": "Лутфан унвонеро муайян кунед",
-        "Create": "Эҷод кунед"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Зангҳо",
-        "MaxCalls": "Зангҳои максималӣ",
-        "Update": "Навсозӣ",
-        "NoCallsYet": "Ҳоло занг нест",
-        "CallReasonTitle": "Ин даъват чист?",
-        "WaitingRoom": "Хонаи интизорӣ"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }
