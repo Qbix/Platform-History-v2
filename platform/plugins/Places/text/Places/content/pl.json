@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "w ciągu {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metr",
-        "meters": "metrów",
-        "kilometer": "kilometr",
-        "kilometers": "kiometry",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "Mila",
-        "miles": "mile",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "stopa",
-        "feet": "stopy",
-        "inches": "cale"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Interesuje mnie to, co dzieje się w {{select}}",
-        "update": "Zaktualizuj moją lokalizację",
-        "prompt": "{{ClickOrTap}} tutaj <br> Ustaw swój <br> Lokalizacja",
-        "myCurrentLocation": "Moja aktualna lokalizacja",
-        "enterAddress": "Podaj adres",
-        "enterPostcode": "Podaj swój kod pocztowy \/ kod pocztowy",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Dodaj miejsce",
-            "title": "Nowa lokalizacja",
-            "nameYourLocation": "Nazwij swoją lokalizację"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Zapisać tę lokalizację?",
-            "message": "Czy planujesz ponownie wykorzystać tę lokalizację w przyszłości?",
-            "ok": "tak",
-            "cancel": "Nie"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Nazwij tę lokalizację",
-            "placeholder": "Dom, praca itp.",
-            "ok": "Zapisać"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Wybierz lokacje"
-        },
-        "set": "Ustaw moją lokalizację"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Jakikolwiek obszar w tej lokalizacji?",
-        "newArea": "Nowa okolica",
-        "promptTitle": "Wprowadź nazwę obszaru:",
-        "absent": "Ustaw obszar",
-        "error": "Błąd",
-        "exist": "Obszar już istnieje",
-        "addNewArea": "Dodaj nowy obszar",
-        "add": "Dodaj"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "zbiór lokalizacji",
-            "displayType": "Lokalizacje"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Reprezentuje budynek, miejsce, statek, park itp.",
-            "displayType": "Lokalizacja"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Reprezentuje obszar w danej lokalizacji, taki jak pokój lub apartament",
-            "displayType": "Powierzchnia"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Reprezentuje podłogę w budynku lub statku",
-            "displayType": "Podłoga"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Reprezentuje kolumnę w budynku lub statku",
-            "displayType": "Kolumna"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategoria dla rzeczy w pewnej odległości od geohash",
-            "displayType": "Miejsca w pobliżu"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategoria dla rzeczy w pewnej odległości od geohash, pasujących do zainteresowań",
-            "displayType": "Miejsca zainteresowania"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Articol nou"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Oameni pe care i-am invitat",
-        "Streams\/invitedMe": "Cine ma invitat",
-        "AreYouAgree": "Ești de acord?",
-        "Yes": "da",
-        "No": "Nu",
-        "DoYouAgree": "Ești de acord?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Care sunt interesele dumneavoastră?",
-        "CanAdd": "Dacă tot nu puteți găsi ceea ce căutați, puteți adăuga un interes nou mai jos:",
-        "TrySynonyms": "Nu-l vezi? Încercați unele sinonime.",
-        "AddUnderCategory": "Adăugați în categoria ...",
-        "Other": "Alte",
-        "Unlisted": "necatalogat"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Mesajul a fost marcat pentru revizuirea administratorului. Atingeți din nou pentru a dezaburi.",
-        "noOneSaid": "Nimeni nu a spus nimic",
-        "closeChatButton": "Închideți chatul",
-        "closeChatConfirmTitle": "Închideți acest chat?",
-        "closeChatConfirm": "Sigur doriți să închideți acest chat?",
-        "closeChatConfirmYes": "da",
-        "closeChatConfirmNo": "Nu",
-        "earlierComments": "comentariile anterioare",
-        "Subscribed": "Mute Notifications",
-        "Unsubscribed": "Primiți notificări",
-        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestei conversații.",
-        "startedConversation": "a început o conversație",
-        "RealTimeCall": "Apel în timp real",
-        "SearchByName": "Cauta dupa nume",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} vizitează chatul",
-            "Join": "{{displayName}} s-a alăturat chatului",
-            "Leave": "{{displayName}} a părăsit chat-ul",
-            "RelatedTo": "{{displayName}} a început o {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Mesaj {{& message.fields.type}} până la {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} a spus:",
-        "Streams\/changed": "Schimbări în {{stream.fields.title}}",
-        "Streams\/invite": "Ai fost invitat (ă) {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunț în {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} a schimbat accesul la flux",
-        "Streams\/chat\/edit": "Mesaj de chat redactat",
-        "Streams\/chat\/remove": "Mesajul de chat a fost eliminat",
-        "Streams\/closed": "{{stream.fields.title}} a fost închisă",
-        "Streams\/task\/progress": "Progresele înregistrate pe {{stream.fields.title}}",
-        "Streams\/task\/complete": "Sarcina a fost finalizată: {{stream.fields.title}}",
-        "Streams\/task\/error": "Eroare în timpul: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: mesajul primit",
-        "ManageEmailSubscriptions": "gestionați abonamentele dvs. prin e-mail",
-        "IfUnsubscribe": "Dacă doriți să vă dezabonați",
-        "Streams\/relatedTo\/Streams\/call": "Apel nou început în {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} v-a menționat într-un comentariu",
-        "Streams\/call": "{{displayName}} a pornit un apel în timp real"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} te-a invitat la {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Alegeți din Contacte",
-            "selectFromContacts": "Selectați din Contacte",
-            "photo": "Fă o poză",
-            "photoInstruction": "Dacă persoana care ți-a scanat codul QR este în fața ta, ia o fotografie cu ei",
-            "to": "Către: {{Stream Title}}",
-            "go": "Merge",
-            "title": "A invita",
-            "placeholder": "Număr mobil sau adresă de e-mail",
-            "orInvite": "Sau invitați persoane utilizând:",
-            "QR": "{{ClickOrTap}} pentru a genera cod QR",
-            "QRtitle": "Scanați acest cod QR",
-            "byEmail": "E-mail",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Stare de nervozitate",
-            "QRscanned": "Au scanat-o!",
-            "chooseAgainFromContacts": "Alegeți din nou din Contacte",
-            "inviteSelectedContacts": "Invitați contactele selectate",
-            "scannedQR": "{{ClickOrTap}} dacă codul a fost scanat",
-            "copyLink": "{{ClickOrTap}} pentru a copia linkul de invitație",
-            "userChooserPlaceholder": "Cauta dupa nume",
-            "shareOrCopyLink": "{{ClickOrTap}} pentru a partaja sau a copia linkul de invitație"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hei, verifică asta",
-            "PleaseVisitLink": "Vă rugăm să vizitați următorul link:",
-            "InvitingYou": "Vă invit să {{title}}",
-            "HasInvitedYou": "{{displayName}} te-a invitat la {{title}}",
-            "HasMentionedYou": "{{displayName}} v-a menționat în „{{title}}”",
-            "YOUAREINVITED": "ESTI INVITAT!",
-            "AcceptInvite": "Acceptați Invitați"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Ați fost invitat la {{title}}. Atingeți {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Ai fost invitat. {{ClickOrTap}} aici să accepți și să vă alăturați."
-        },
-        "youCanNowPaste": "Acum puteți lipi acest link undeva pentru a invita oameni",
-        "command": "A invita"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "confirm": "Invitațiile sunt trimise de la numărul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "check": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați SMS-ul dvs. și faceți clic pe link-ul!",
-            "CheckYourMobile": "Verificați SMS-ul și urmați instrucțiunile!"
-        },
-        "email": {
-            "alert": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Urmăriți cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "confirm": "Invitațiile sunt trimise de la domeniul nostru, pe care prietenii dvs. încă nu îl recunosc. Doriți să continuați cu un text rapid pentru a le spune că invitația a venit de la dvs., cerându-i să facă clic pe link.",
-            "subject": "Ai primit o invitație?",
-            "body": "Hei, v-am trimis o invitație la aplicația {{app}}. Verificați adresa de e-mail și faceți clic pe link-ul de acolo!",
-            "CheckYourEmail": "Vă rugăm să verificați e-mailul și urmați instrucțiunile!"
-        }
-    },
-    "participating": {
-        "Title": "Titlu",
-        "Subscribed": "subscrisă",
-        "Participants": "Participanți",
-        "AreYouSureRemoveIdentifier": "Sigur eliminați acest identificator?",
-        "AreYouSureUnsubscribeIdentifier": "Sunteți sigur că dezabonați acest identificator? Acesta va dezactiva notificările acestui identificator.",
-        "AreYouSureUnsubscribeDevice": "Sunteți sigur că vă dezabonați acest dispozitiv? Acesta va dezactiva notificările acestui dispozitiv.",
-        "Identifiers": "Identificatorii",
-        "Devices": "Dispozitive",
-        "Streams": "Curente",
-        "AreYouSureRemoveParticipant": "Sigur doriți să eliminați acest participant?",
-        "RemoveParticipant": "Eliminați participantul"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Activați microfonul",
-            "cameraTitle": "Activați camera",
-            "cameraAndMicrophoneTitle": "Activați camera și microfonul",
-            "dialogTitle": "Activarea dialogului",
-            "microphoneBtn": "Activați microfonul",
-            "cameraBtn": "Activați Camera",
-            "cameraAndMicrophoneBtn": "Activați aparatul foto și microfonul"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
-            "point1": "Accesați „Setări” -&gt; „Advanced” -&gt; „Confidențialitate și securitate” -&gt; „Setări site” -&gt; „Cameră foto” sau „Setări sit” -&gt; „Microfon”",
-            "point2": "Eliminați {{hostname}} din lista „Blocare”"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisul pentru {{kind}} refuzat. Reîncărcați această pagină și confirmați accesul la {{kind}} pentru a vă alătura conferinței."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
-            "point1": "Accesați Setările Android",
-            "point2": "Deschideți „Aplicații și notificări”",
-            "point3": "Găsiți „{{communityName}}” și deschideți-l",
-            "point4": "Atingeți Permisiuni",
-            "point5": "Activați {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisul pentru {{kind}} refuzat. Pentru ao utiliza, urmați acești pași:",
-            "point1": "Accesați Setările iOS",
-            "point2": "Deschide „Confidențialitate”",
-            "point3": "Găsiți {{kind}} și deschideți-l",
-            "point4": "Găsiți „{{communityName}}” și activați"
-        },
-        "notices": {
-            "youJoinedRoom": "Ai intrat în cameră",
-            "joining": "Alăturarea: {{userName}}",
-            "sbLeftRoom": "{{userName}} a părăsit camera",
-            "youLeftRoom": "Ai părăsit camera",
-            "codeCopied": "Ai părăsit camera",
-            "sbBeganFbLive": "{{userName}} a început difuzarea acestui apel pe Facebook",
-            "sbStoppedFbLive": "{{userName}} a încetat difuzarea acestui apel pe Facebook",
-            "youBeganFbLive": "Ați început să difuzați acest apel pe Facebook",
-            "youStoppedFbLive": "Ați încetat difuzarea acestui apel pe Facebook",
-            "linkCopiedToCb": "Link copiat în clipboard",
-            "codeCopiedToCb": "Cod copiat în clipboard",
-            "userHasNoVideo": "Participantul nu are niciun videoclip",
-            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a vă alătura conferinței.",
-            "youBeganVideoRecording": "Ai început să înregistrezi această conferință",
-            "youStoppedVideoRecording": "Ați oprit înregistrarea acestei conferințe",
-            "switchingRoom": "Vestiar ...",
-            "forceDisconnecting": "Veți fi deconectat în 5 secunde",
-            "youStartedLive": "Ați început să transmiteți acest apel către RTMP personalizat",
-            "youStoppedLive": "Ați încetat să transmiteți acest apel către RTMP personalizat",
-            "sbStartedLiveStreaming": "{{userName}} a început live",
-            "sbStoppedLiveStreaming": "{{userName}} s-a încheiat live",
-            "liveStopped": "A apărut o eroare la trimiterea videoclipului către punctul final",
-            "forceDisconnectingImmediately": "Ai fost deconectat de o gazdă"
-        },
-        "settingsPopup": {
-            "webCamera": "Camera web",
-            "screenSharing": "Partajarea ecranului",
-            "shareAnotherScreen": "Partajează un alt ecran",
-            "turnOffCameras": "Opriți toate camerele",
-            "startFBLive": "Porniți Facebook Livestream",
-            "stopFBLive": "Opriți Facebook Livestream",
-            "fbLiveTitle": "Titlu live",
-            "fbLiveDescription": "Descriere live",
-            "fbOnlyMeLiveAccess": "Doar eu",
-            "fbFriendsAccess": "Prieteni",
-            "fbPublicAccess": "Public",
-            "fbStartLive": "Du-te si traieste",
-            "fbStopLive": "End Live",
-            "fbEmbedCode": "Încorporare",
-            "copy": "Copie",
-            "turnOffVideo": "Dezactivați partajarea camerei \/ ecranului",
-            "turnOffScreenSharing": "Dezactivați partajarea ecranului",
-            "cameraIsTurnedOff": "Camera este oprită",
-            "startRecording": "Începeți înregistrarea",
-            "stopRecording": "Opriți înregistrarea",
-            "recordingInProgress": "Înregistrarea este în curs ...",
-            "publishOnTimeline": "Publicați pe cronologie",
-            "publishToGroup": "Publicați în grup",
-            "turnOffAudioInput": "Dezactivează microfonul",
-            "micIsTurnedOff": "Microfonul este oprit",
-            "start": "start",
-            "stop": "Stop",
-            "streamingSettings": "Setări",
-            "streamToRTMP": "Transmiteți la RTMP personalizat",
-            "dialogTitle": "Setari video",
-            "startBroadcasting": "Începeți să difuzați",
-            "broadcastingInProgress": "Difuzarea este în curs"
-        },
-        "participantsPopup": {
-            "disconnect": "Deconectat",
-            "floatingScreens": "Ecrane plutitoare",
-            "tiledScreens": "Ecrane de gresie",
-            "loudestExceptMe": "Cel mai tare cu excepția mea",
-            "maximizeLoudest": "Maximizează cel mai tare",
-            "staticMaximized": "Maximizat static",
-            "manual": "Manual",
-            "turnOffCamera": "Ascundeți videoclipul",
-            "turnOffAudio": "Sunetul sonor",
-            "turnOffScreenSharing": "Ascundeți partajarea ecranului",
-            "turnOnCamera": "Afișați videoclipuri",
-            "turnOnAudio": "Anulați sunetul",
-            "turnOnScreenSharing": "Afișare partajare ecran",
-            "fullScreen": "Ecran complet",
-            "dialogTitle": "Setări pentru participanți"
-        },
-        "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
-        "streamTitle": "{{1}} apel live",
-        "preview": {
-            "preamble": "Întâlnire:",
-            "Meeting": "Întâlnire",
-            "MeetingEnded": "Întâlnirea sa încheiat"
-        },
-        "preparing": {
-            "micIsOff": "Microfonul este oprit",
-            "micIsOn": "Microfonul este pornit",
-            "cameraIsOff": "Camera foto este oprită",
-            "cameraIsOn": "Camera foto este pornită",
-            "screenSharingIsOn": "Partajarea ecranului este activată",
-            "screenSharingIsOff": "Distribuie ecran",
-            "joinNow": "Alăturați-vă apelului"
-        },
-        "audioSettings": {
-            "dialogTitle": "Setari audio",
-            "speakers": "Difuzoare",
-            "microphone": "Microfon"
-        },
-        "streamingSettings": {
-            "title": "Setări de streaming"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "invitat",
-            "description": "Inbox pentru invitații"
-        },
-        "Streams\/resource": {
-            "displayType": "Resursă",
-            "description": "flux pentru gestionarea accesului la o resursă și postarea de mesaje despre actualizări"
-        },
-        "Streams\/task": {
-            "displayType": "Sarcină",
-            "description": "sarcină care trebuie făcută de oameni sau mașini"
-        },
-        "Streams\/number": {
-            "displayType": "Număr",
-            "description": "număr matematic"
-        },
-        "Streams\/date": {
-            "displayType": "Data",
-            "description": "Data"
-        },
-        "Streams\/text": {
-            "displayType": "Text",
-            "description": "corp de text"
-        },
-        "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "mic corp de text"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "corp mediu de text"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "Adresa de email",
-            "description": "adresa de email"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "Numar de telefon",
-            "description": "numar de telefon"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL-",
-            "description": "link pe web"
-        },
-        "Streams\/image": {
-            "displayType": "Imagine",
-            "description": "Imagine vizuală",
-            "newItem": "Adauga imagine"
-        },
-        "Streams\/images": {
-            "displayType": "Galerie de imagini",
-            "description": "galerie de imagini"
-        },
-        "Streams\/album": {
-            "displayType": "Album",
-            "description": "un album la care sunt legate diverse media"
-        },
-        "Streams\/file": {
-            "displayType": "Fişier",
-            "description": "fișier încărcat",
-            "newItem": "Adauga fisier"
-        },
-        "Streams\/audio": {
-            "displayType": "Clip audio",
-            "description": "clip audio",
-            "newItem": "Adăugați sunet"
-        },
-        "Streams\/video": {
-            "displayType": "Clip video",
-            "description": "clip video",
-            "newItem": "Adăugați videoclip"
-        },
-        "Streams\/live": {
-            "displayType": "Transmitere live",
-            "description": "audio sau video în direct"
-        },
-        "Streams\/category": {
-            "displayType": "Categorie",
-            "description": "o categorie la care pot fi legate și alte fluxuri"
-        },
-        "Streams\/participating": {
-            "displayType": "Index de participare",
-            "description": "fluxurile sunt legate \/ nu au legătură cu acest lucru când un utilizator se alătură \/ pleacă"
-        },
-        "Streams\/interest": {
-            "displayType": "Interes",
-            "description": "reprezintă interesul utilizatorului pentru un anumit subiect"
-        },
-        "Streams\/incoming": {
-            "displayType": "care sosește",
-            "description": "destinație pentru mesajele trimise de alți utilizatori"
-        },
-        "Streams\/chat": {
-            "displayType": "Conversaţie",
-            "description": "o conversație între utilizatori, cu istoric"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Apel în timp real",
-            "description": "un apel video \/ audio în timp real"
-        },
-        "Streams\/tasks": {
-            "description": "categoria pentru sarcini",
-            "displayType": "Sarcini"
-        },
-        "Streams\/experience": {
-            "description": "o experiență comună pentru membrii unei comunități",
-            "displayType": "Experiență comună pentru membrii unei comunități"
-        },
-        "Streams\/greeting": {
-            "description": "salut cu care un utilizator se poate prezenta",
-            "displayType": "Salut"
-        },
-        "Streams\/pdf": {
-            "displayType": "Document PDF",
-            "description": "Document PDF",
-            "newItem": "Adăugați PDF"
-        },
-        "Streams\/question": {
-            "displayType": "Întrebare",
-            "description": "flux de întrebări"
-        },
-        "Streams\/answer": {
-            "displayType": "Răspuns",
-            "description": "flux de răspuns"
-        },
-        "Streams\/calls": {
-            "displayType": "Apeluri",
-            "description": "categorie pentru fluxuri \/ webrtc",
-            "MaxRelationsExceeded": "Numărul maxim de apeluri a fost depășit"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "au postat un mesaj <em>{{message.fields.type}}<\/em> la {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "comentat",
-            "in": "în",
-            "body": "în {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "a fost postat pe",
-                "byAvatar": "de {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "are un nou {{instructions.fromDisplayType}}",
-                "byAvatar": "adăugat de {{avatar.displayName}}"
-            },
-            "startedCallIn": "a început un apel"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "tastați titlul paginii",
-        "ModTab": "Modificați articolul",
-        "Save": "salva",
-        "Delete": "Șterge",
-        "Submenu": "submeniu"
-    },
-    "errors": {
-        "HiddenFromYou": "Acest conținut vă este ascuns."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
         "record": "Record",
-        "reset": "Resetați",
-        "edit": "Editați | ×",
-        "title": "titlu",
-        "description": "Descriere",
-        "upload": "Încărcare",
-        "link": "Legătură",
-        "setUrl": "Setați adresa URL",
-        "save": "Salvați",
-        "setClip": "Decupați clipul",
-        "invalidURL": "URL invalid",
-        "invalidFile": "Fișier invalid",
-        "errorNoSource": "Fără sursă audio",
-        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Resetați",
-        "edit": "Editați | ×",
-        "title": "titlu",
-        "description": "Descriere",
-        "upload": "Încărcare",
-        "link": "Legătură",
-        "setUrl": "Setați adresa URL",
-        "save": "Salvați",
-        "setClip": "Decupați clipul",
-        "invalidURL": "URL invalid",
-        "invalidFile": "Fișier invalid",
-        "errorNoSource": "Fără sursă video",
-        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Resetați",
-        "edit": "Editați | ×",
-        "title": "titlu",
-        "description": "Descriere",
-        "upload": "Încărcare",
-        "link": "Legătură",
-        "setUrl": "Setați adresa URL",
-        "save": "Salvați",
-        "setClip": "Decupați clipul",
-        "invalidURL": "URL invalid",
-        "invalidFile": "Fișier invalid",
-        "errorNoSource": "Fără sursă pdf",
-        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Resetați",
-        "edit": "Editați | ×",
-        "title": "titlu",
-        "description": "Descriere",
-        "upload": "Încărcare",
-        "link": "Legătură",
-        "setUrl": "Setați adresa URL",
-        "save": "Salvați",
-        "setClip": "Decupați clipul",
-        "invalidURL": "URL invalid",
-        "invalidFile": "Fișier invalid",
-        "errorNoSource": "Nicio sursă de imagine",
-        "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este {{size}}",
-        "uploadedImage": "Imagine încărcată",
-        "imageTitle": "Titlul imaginii"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Întrebări",
-        "Answers": "Răspunsuri",
-        "AnswerQuestion": "Răspuns întrebare",
-        "SetYourAnswer": "Vă rugăm să răspundeți la întrebare",
-        "NewQuestion": "Întrebare nouă",
-        "NewAnswer": "Răspuns nou",
-        "AnswerDetails": "Detalii de răspuns",
-        "answerOption": "Opțiune",
-        "answerOptionExclusive": "Exclusiv",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "raspuns gratuit ...",
-        "SaveQuestion": "Salvați întrebarea",
-        "SaveAnswer": "Salvați răspunsul",
-        "AddAnotherAnswer": "Adăugați un alt răspuns",
-        "ErrorAnswers": "Vă rugăm să adăugați chiar și un singur răspuns",
-        "AlreadyAnswered": "Am răspuns deja",
-        "TitlePlaceholder": "Tastați-vă întrebarea",
-        "ContentPlaceholder": "Puneți orice informații suplimentare aici pentru a ajuta oamenii să răspundă",
-        "ErrorTitle": "Întrebare necesară",
-        "Placeholder": "Substituent"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Experienta noua",
-        "DefineTitle": "Vă rugăm să definiți un titlu",
-        "Create": "Crea"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Apeluri",
-        "MaxCalls": "Apeluri max",
-        "Update": "Actualizați",
-        "NoCallsYet": "Niciun apel încă",
-        "CallReasonTitle": "Despre ce este vorba?",
-        "WaitingRoom": "Sală de așteptare"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

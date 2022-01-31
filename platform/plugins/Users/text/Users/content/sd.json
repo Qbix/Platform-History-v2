@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "لاگ ان ۾",
-        "LogOut": "ڪم ڇڏڻ"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "سيکاريو {{1}} جيئن منهنجي شروعاتي {{2}}",
-        "ChoosePassPhrase": "سان لاگ ان ڪرڻ لاء ھڪڙو <strong>جملو<\/strong> چونڊيو. <br> ڪجھ لفظن تي مشتمل ھڪ سادي جملي آھي جنھن کي توھان کي آسان طرح ياد اچي ويندو.",
-        "ChoosePassPhraseSeeSuggestions": "پنهنجو اڪائونٽ محفوظ ڪرڻ لاء سٺو <strong>پاسورڊ<\/strong> چونڊيو. ڏسو ڪجھ خيالن لاء صلاحون.",
-        "LogOutAndTryAgain": "ٻاهر وڃو ۽ ٻيهر ڪوشش ڪريو",
-        "IfYouFeel": "جيڪڏهن توهان محسوس ڪيو ته ڪجهه غلط ٿي ويا، توهان ڪري سگهو ٿا",
-        "SetIdentifierButtonTitle": "ٻيهر شروع"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "شروع ڪر"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "شروع ڪر",
-        "Authorize": "اختيار ڏيڻ",
-        "TermsLabel": "مون پڙهيو آهي ۽ متفق آهيان <br> تائين {{link}}",
-        "TermsTitle": "ضابطا",
-        "mustAgree": "پھريون اوھان کي شرطن سان متفق آھي."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "مون کي {{link}} قبول ڪيو",
-        "TermsTitle": "ضابطا"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "اجازت",
-        "prompt": "ڇا توهان اطلاعن کي فعال ڪرڻ چاهيو ٿا؟ توهان انهن شين جي باري ۾ حقيقي وقت نوٽس وصول ڪندا.",
-        "yes": "ها",
-        "no": "نه",
-        "WelcomePleaseVerifyEmail": "ڀلي ڪري آيا! مهرباني ڪري پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
-        "WelcomeVerifyEmail": "ڀلي ڪري آيا! پنهنجي اي ميل ايڊريس جي تصديق ڪريو.",
-        "ForgetPass": "افسوس، توهان پنهنجي پاسرفيس کي وساري ڇڏيو؟",
-        "PassphraseSaved": "توهان جو پاسورڊ محفوظ ڪيو ويو آهي.",
-        "IdentifierActivated": "توهان جو {{type}} چالو ڪيو ويو آهي.",
-        "CompletedActivation": "توھان کي استعمال ڪندڙ سرگرمي مڪمل ڪيو آھي.",
-        "CompletedActivationLogIn": "توھان کي استعمال ڪندڙ سرگرمي مڪمل ڪيو آھي. ھاڻي ڪوشش ڪرڻ ۾ ڪوشش ڪريو."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "رابطو چونڊيو",
-            "CreateAccount": "+ نئين رابطو",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.cre نه مليو",
-            "SearchByName": "نالو ڳولھيو",
-            "EmptyContacts": "رابطو نه مليو ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "{{displayName}} مان رابطو ڪريو"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "مهرباني ڪري ليبل چونڊيو.",
-        "inviteUser": "دعوت نامي استعمال ڪندڙ",
-        "selectRole": "ڪردار منتخب ڪريو",
-        "inviteRole": "دعوت نامو {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "غلط ٻولي منتخب ٿيل",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "ڀلي ڪري آيا",
-        "directions": "هڪ اڪائونٽ ٺاهيو، يا لاگ ان ڪريو.",
-        "directionsNoRegister": "لاگ ان ٿيو جيڪڏهن توهان وٽ اڪائونٽ آهي.",
-        "goButton": "وڃ",
-        "passphrase": "پنهنجو پاسورڊ درج ڪريو:",
-        "loginButton": "شروع ڪر",
-        "registerButton": "شروع ڪر",
-        "resendButton": "Activation Message موڪليو",
-        "forgot": "ان کي وساريو؟",
-        "resendConfirm": "ڇا توھان پنھنجي پاسپراس کي ريٽ ڪرڻ لاء پيغام موڪلڻ چاھيو ٿا؟",
-        "resendSuccess": "توهان جي پاسفريٽ ريٽ ڪرڻ لاء پيغام جي چڪاس ڪريو",
-        "resendClose": "بند ڪريو",
-        "noPassphrase": "ان کان اڳ توهان لاگ ان ڪري سگهو ٿا، توهان کي توهان جي فعالي پيغام ۾ لنڪ تي ڪلڪ ڪندي هڪ پاس جملي کي مقرر ڪرڻ گهرجي.",
-        "notVerified": "توهان کي لاگ ان ڪرڻ لاء توهان پاڻ ڏانهن هڪ ايڪڪشن جي پيغام موڪليو.",
-        "emailExists": "ڇا توهان هن اي ميل سان رجسٽر ڪرڻ جي ڪوشش ڪئي آهي؟ جيڪڏهن ائين آهي، پنهنجي اڪائونٽ کي فعال ڪرڻ لاء پنهنجي انباڪس کي پڙتال ڪريو. <a href='#resend' class='Q_button Users_activation_resend'>پيغام موڪلڻ لاء ڪلڪ ڪريو<\/a>",
-        "mobileExists": "ڇا توھان اڳوڻي ھن نمبر تي رجسٽر ڪرڻ جي ڪوشش ڪئي؟ جيڪڏهن ائين، پنهنجي اڪائونٽ کي فعال ڪرڻ لاء پنهنجي ايس ايم ايس جي سڃاڻپ ڪريو. <a href='#resend' class='Q_button Users_activation_resend'>پيغام موڪلڻ لاء ڪلڪ ڪريو<\/a>",
-        "usingOther": "يا تون ڪري سگھين ٿو",
-        "prompt": "ھڪ استعمال ڪندڙ جو نالو چونڊيو",
-        "newUser": "يا نئون اڪائونٽ ٺاهيو",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "توهان جو موبائل # يا اي ميل",
-            "mobile": "پنهنجي موبائل فون داخل ڪريو",
-            "email": "پنهنجو اي ميل پتو داخل ڪريو",
-            "username": "استعمال ڪندڙ"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "قبول ڪريو شرطن جون شرطون؟",
-        "facebookNoEmail": "توهان جو فيسبوڪ اڪائونٽ هڪ تصديق ٿيل اي ميل ايڊريس موجود ناهي. بس رڳو اصلي طريقي سان لاگ ان ڪريو.",
-        "picTooltip": "توھان ھن تصوير کي تبديل ڪري سگھو ٿا",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "لاگ ان ٿيو {{host}} تي {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "والٽ ڏانھن واپس وڻ",
-                "content": "هڪ دفعو توهان هن ڊائيلاگ کي بند ڪري you&#39;llڏيو ، توهان کي پنهنجي پرس ۾ وي ويندا. توھان سائن ان ٿيڻ کان پوءِ ، واپس اچو ھن صفحي ڏانھن."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "لاگ ان ۾ رستو شامل ڪريو",
-        "sendMessage": "Activation Message موڪليو",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "پنھنجو موبائل يا اي ميل داخل ڪريو",
-            "mobile": "پنهنجو موبائل نمبر داخل ڪريو",
-            "email": "پنهنجو اي ميل پتو داخل ڪريو",
-            "username": "استعمال ڪندڙ"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} اڪائونٽ",
-        "areUsing": "توھان استعمال ڪيو آھي {{platform}} وانگر",
-        "noLongerUsing": "توهان هينئر تائين {{platform}} سان ڳنڍيل ناهي",
-        "doAuth": "هن اڪائونٽ سان لاگ ان ڪريو",
-        "doSwitch": "هن اڪائونٽ کي مٽايو"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "مالڪ",
-        "Admin": "منتظم",
-        "Member": "رڪن",
-        "Guest": "مهمان",
-        "Host": "ميزبان"
-    },
-    "analytics": {
-        "Title": "تجزيو",
-        "Daily": "روزاني",
-        "Weekly": "هفتيوار",
-        "Monthly": "مهينو",
-        "Application": "اپليڪيشن",
-        "Pages": "صفحا",
-        "Services": "خدمتون",
-        "Faq": "سوال",
-        "WeekDays": "هفتي جا ڏينهن"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

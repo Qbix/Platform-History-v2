@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Mír Nua"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Daoine a thug cuireadh dom",
-        "Streams\/invitedMe": "Cé a thug cuireadh dom",
-        "AreYouAgree": "An aontaíonn tú?",
-        "Yes": "Sea",
-        "No": "Níl",
-        "DoYouAgree": "An aontaíonn tú?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Cad iad na leasanna atá agat?",
-        "CanAdd": "Mura féidir leat teacht ar na rudaí atá uait, is féidir leas nua a chur leis thíos:",
-        "TrySynonyms": "Ná féach air? Bain triail as roinnt comhchiallaigh.",
-        "AddUnderCategory": "Cuir faoi chatagóir ...",
-        "Other": "Eile",
-        "Unlisted": "Neamhliostaithe"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Cuireadh an teachtaireacht in iúl le haghaidh athbhreithnithe riaracháin. Tapáil arís go neamhshuim.",
-        "noOneSaid": "Ní dhearna aon duine rud ar bith",
-        "closeChatButton": "Dún comhrá",
-        "closeChatConfirmTitle": "Dún an comhrá seo?",
-        "closeChatConfirm": "An bhfuil tú cinnte gur mian leat an comhrá seo a dhúnadh?",
-        "closeChatConfirmYes": "Is féidir",
-        "closeChatConfirmNo": "Níl",
-        "earlierComments": "tuairimí níos luaithe",
-        "Subscribed": "Fógraí Mute",
-        "Unsubscribed": "Faigh Fógraí",
-        "notAllowedToJoinCall": "Níl cead agat an comhrá seo a dhéanamh.",
-        "startedConversation": "thosaigh comhrá",
-        "RealTimeCall": "Glao Ama Fíor-Ama",
-        "SearchByName": "Cuardaigh de réir ainm",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "Tá {{displayName}} ag tabhairt cuairte ar an gcomhrá",
-            "Join": "Chuaigh {{displayName}} isteach sa chomhrá",
-            "Leave": "D’fhág {{displayName}} an comhrá",
-            "RelatedTo": "Chuir {{displayName}} tús le {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Teachtaireacht {{& message.fields.type}} go {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Dúirt {{&call 'avatar.displayName'}}:",
-        "Streams\/changed": "Athruithe i {{stream.fields.title}}",
-        "Streams\/invite": "Tugadh cuireadh duit {{& stream.fields.title}}",
-        "Streams\/announcement": "Fógra i {{& streams.fields.title}}",
-        "Streams\/access": "D&#39;athraigh {{&call 'avatar.displayName'}} rochtain srutha",
-        "Streams\/chat\/edit": "Eagarthóireacht ar an teachtaireacht chainte",
-        "Streams\/chat\/remove": "Cuireadh an teachtaireacht comhrá",
-        "Streams\/closed": "Dúnadh {{stream.fields.title}}",
-        "Streams\/task\/progress": "Dul chun cinn déanta ar {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tasc críochnaithe: {{stream.fields.title}}",
-        "Streams\/task\/error": "Earráid le linn: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Teachtaireacht Isteach",
-        "ManageEmailSubscriptions": "bainistíonn tú do shíntiúis ríomhphoist",
-        "IfUnsubscribe": "Más mian leat díliostáil",
-        "Streams\/relatedTo\/Streams\/call": "Glao Nua Glactha i {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nua {{relationDisplayType}} i {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
-        "Streams\/mention": "Luaigh {{&call 'avatar.displayName'}} tú trácht",
-        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "Thug {{displayName}} cuireadh duit {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Roghnaigh ó do Teagmhálacha",
-            "selectFromContacts": "Roghnaigh Ó Teagmhálacha",
-            "photo": "Tóg grianghraf",
-            "photoInstruction": "Má tá an duine a rinne scanadh ar do chód QR os do chomhair, tóg grianghraf díobh",
-            "to": "Go: {{Stream Title}}",
-            "go": "Téigh",
-            "title": "Tabhair cuireadh duit",
-            "placeholder": "Uimhir ghutháin nó seoladh ríomhphoist",
-            "orInvite": "Nó cuir cuireadh ar dhaoine trí:",
-            "QR": "{{ClickOrTap}} chun cód QR a ghiniúint",
-            "QRtitle": "Scan an cód QR seo",
-            "byEmail": "Ríomhphost",
-            "byText": "Téacs",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "QRscanned": "Scanadh siad é!",
-            "chooseAgainFromContacts": "Roghnaigh Arís ó Teagmhálacha",
-            "inviteSelectedContacts": "Tabhair cuireadh do Teagmhálacha Roghnaithe",
-            "scannedQR": "{{ClickOrTap}} má scanadh an cód",
-            "copyLink": "{{ClickOrTap}} chun nasc cuireadh a chóipeáil",
-            "userChooserPlaceholder": "Cuardaigh de réir ainm",
-            "shareOrCopyLink": "{{ClickOrTap}} chun nasc cuireadh a roinnt nó a chóipeáil"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, seiceáil seo amach",
-            "PleaseVisitLink": "Tabhair cuairt ar an nasc seo a leanas:",
-            "InvitingYou": "Táim ag tabhairt cuireadh duit {{title}}",
-            "HasInvitedYou": "Thug {{displayName}} cuireadh duit {{title}}",
-            "HasMentionedYou": "Luaigh {{displayName}} tú i &quot;{{title}}&quot;",
-            "YOUAREINVITED": "TÁ TÁ IAD A CHUR AR FÁIL!",
-            "AcceptInvite": "Glac le Cuireadh"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Tugadh cuireadh duit {{title}}. Le do thoil bain úsáid as {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh agus páirt a ghlacadh."
-        },
-        "youCanNowPaste": "Is féidir leat an nasc seo a ghreamú anois áit éigin chun cuireadh a thabhairt do dhaoine",
-        "command": "Tabhair cuireadh"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
-            "confirm": "Seoltar cuireadhí ónár n-uimhir, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
-            "check": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil le do thoil do chuid SMS agus cliceáil ar an nasc!",
-            "CheckYourMobile": "Seiceáil SMS agus lean treoracha!"
-        },
-        "email": {
-            "alert": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Lean ort le téacs tapaidh chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu an nasc a chliceáil.",
-            "confirm": "Seoltar cuireadhí ónár bhfearann, nach n-aithníonn do chairde go fóill iad. Ar mhaith leat téacs tapaidh a leanúint chun a chur in iúl dóibh gur tháinig an cuireadh uait, ag iarraidh orthu cliceáil ar an nasc.",
-            "subject": "An bhfuair tú cuireadh?",
-            "body": "Hey, chuir mé cuireadh chugat chuig an aip {{app}}. Seiceáil do ríomhphost agus cliceáil ar an nasc ann!",
-            "CheckYourEmail": "Seiceáil do ríomhphost agus lean na treoracha!"
-        }
-    },
-    "participating": {
-        "Title": "Teideal",
-        "Subscribed": "Suibscríofa",
-        "Participants": "Rannpháirtithe",
-        "AreYouSureRemoveIdentifier": "An bhfuil tú cinnte an t-aitheantóir seo a bhaint?",
-        "AreYouSureUnsubscribeIdentifier": "An bhfuil tú cinnte díliostáil an aitheantóra seo? Casfaidh sé fógraí faoin aitheantóir seo.",
-        "AreYouSureUnsubscribeDevice": "An bhfuil tú cinnte díliostáil an fheiste seo? Múchfaidh sé fógraí chuig an bhfeiste seo.",
-        "Identifiers": "Aitheantóirí",
-        "Devices": "Gléasanna",
-        "Streams": "Sruthanna",
-        "AreYouSureRemoveParticipant": "An bhfuil tú cinnte gur mhaith leat an rannpháirtí seo a bhaint?",
-        "RemoveParticipant": "Bain an rannpháirtí"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Cumasaigh Micreafón",
-            "cameraTitle": "Cumasaigh an Ceamara",
-            "cameraAndMicrophoneTitle": "Cumasaigh an Ceamara agus an Micreafón",
-            "dialogTitle": "Cumasú Dialóg",
-            "microphoneBtn": "Cumasaigh Micreafón",
-            "cameraBtn": "Cumasaigh an Ceamara",
-            "cameraAndMicrophoneBtn": "Cumasaigh an Ceamara agus an Micreafón"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Príobháideacht agus slándáil&quot; -&gt; &quot;Socruithe Suímh&quot; -&gt; &quot;Ceamara&quot; nó &quot;Socruithe Suímh&quot; -&gt; &quot;Micreafón&quot;",
-            "point2": "Bain {{hostname}} as an liosta “Block”"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}}. Déan an leathanach seo a athlódáil le do thoil agus dearbhaigh rochtain ar {{kind}} chun dul isteach sa chomhdháil."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go dtí do Socruithe Android",
-            "point2": "Oscail &quot;Aipeanna &amp; Fógraí&quot;",
-            "point3": "Faigh &quot;{{communityName}}&quot; agus oscail é",
-            "point4": "Beartaíonn ar Cheadanna",
-            "point5": "Cumasaigh {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Treoracha",
-            "permissionDenied": "Diúltaíodh cead do {{kind}}. Chun é a úsáid, lean na céimeanna seo le do thoil:",
-            "point1": "Téigh go dtí do Socruithe iOS",
-            "point2": "Oscail &quot;Príobháideachas&quot;",
-            "point3": "Faigh {{kind}} agus oscail é",
-            "point4": "Faigh &quot;{{communityName}}&quot; agus cuir ar a gcumas é"
-        },
-        "notices": {
-            "youJoinedRoom": "Chuaigh tú isteach sa seomra",
-            "joining": "Cónascadh: {{userName}}",
-            "sbLeftRoom": "D&#39;fhág {{userName}} an seomra",
-            "youLeftRoom": "D&#39;fhág tú an seomra",
-            "codeCopied": "D&#39;fhág tú an seomra",
-            "sbBeganFbLive": "Thosaigh {{userName}} ag craoladh an ghlao seo i Facebook",
-            "sbStoppedFbLive": "Stop {{userName}} an craoladh seo a chraoladh i Facebook",
-            "youBeganFbLive": "Thosaigh tú ag craoladh an ghlao seo i Facebook",
-            "youStoppedFbLive": "Stop tú ag craoladh an ghlao seo i Facebook",
-            "linkCopiedToCb": "Cóipeáil nasc chuig an ghearrthaisce",
-            "codeCopiedToCb": "Cód cóipeáilte chuig an ghearrthaisce",
-            "userHasNoVideo": "Níl aon fhíseán ag an rannpháirtí",
-            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun dul isteach sa chomhdháil.",
-            "youBeganVideoRecording": "Thosaigh tú ag taifeadadh na comhdhála seo",
-            "youStoppedVideoRecording": "Stop tú ag taifeadadh na comhdhála seo",
-            "switchingRoom": "Seomra lasctha ...",
-            "forceDisconnecting": "Beidh tú dícheangailte laistigh de 5 soicind",
-            "youStartedLive": "Thosaigh tú ag craoladh an ghlao seo chuig RTMP saincheaptha",
-            "youStoppedLive": "Stop tú an glao seo a chraoladh chuig RTMP saincheaptha",
-            "sbStartedLiveStreaming": "Thosaigh {{userName}} beo",
-            "sbStoppedLiveStreaming": "Tháinig deireadh le {{userName}} beo",
-            "liveStopped": "Tharla earráid agus físeán á sheoladh chuig críochphointe",
-            "forceDisconnectingImmediately": "Dhícheangail ósta thú"
-        },
-        "settingsPopup": {
-            "webCamera": "Ceamara Gréasáin",
-            "screenSharing": "Roinnt Scáileáin",
-            "shareAnotherScreen": "Roinn scáileán eile",
-            "turnOffCameras": "Múch gach ceamara",
-            "startFBLive": "Tosaigh Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "fbLiveTitle": "Teideal Beo",
-            "fbLiveDescription": "Cur Síos Beo",
-            "fbOnlyMeLiveAccess": "Mise amháin",
-            "fbFriendsAccess": "Cairde",
-            "fbPublicAccess": "Poiblí",
-            "fbStartLive": "Téigh Beo",
-            "fbStopLive": "Deireadh Beo",
-            "fbEmbedCode": "Leabú",
-            "copy": "Cóip",
-            "turnOffVideo": "Múchadh comhroinnt ceamara \/ scáileáin",
-            "turnOffScreenSharing": "Comhroinnt scáileáin a mhúchadh",
-            "cameraIsTurnedOff": "Tá an ceamara casta as",
-            "startRecording": "Tosaigh Taifeadadh",
-            "stopRecording": "Stop Taifeadadh",
-            "recordingInProgress": "Tá an taifeadadh ar siúl ...",
-            "publishOnTimeline": "Foilsigh ar an amlíne",
-            "publishToGroup": "Foilsigh don ghrúpa",
-            "turnOffAudioInput": "Micreafón balbh",
-            "micIsTurnedOff": "Tá micreafón casta as",
-            "start": "Tosaigh",
-            "stop": "Stop",
-            "streamingSettings": "Socruithe",
-            "streamToRTMP": "Sruth go RTMP saincheaptha",
-            "dialogTitle": "Socruithe Físe",
-            "startBroadcasting": "Tosaigh ag craoladh",
-            "broadcastingInProgress": "Tá an craoladh ar siúl"
-        },
-        "participantsPopup": {
-            "disconnect": "Dícheangail",
-            "floatingScreens": "Scáileáin Snámh",
-            "tiledScreens": "Scáileáin Tílithe",
-            "loudestExceptMe": "Loudest Ach amháin Mise",
-            "maximizeLoudest": "Uasmhéadaigh Loudest",
-            "staticMaximized": "Static Maximized",
-            "manual": "Lámhleabhar",
-            "turnOffCamera": "Folaigh físeán",
-            "turnOffAudio": "Fuaim bhog",
-            "turnOffScreenSharing": "Folaigh comhroinnt scáileáin",
-            "turnOnCamera": "Taispeáin físeán",
-            "turnOnAudio": "Fuaim unmute",
-            "turnOnScreenSharing": "Taispeáin comhroinnt scáileáin",
-            "fullScreen": "Scáileán iomlán",
-            "dialogTitle": "Socruithe Rannpháirtithe"
-        },
-        "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
-        "streamTitle": "{{1}} glao beo",
-        "preview": {
-            "preamble": "Cruinniú:",
-            "Meeting": "Cruinniú",
-            "MeetingEnded": "Cuireadh deireadh leis an gcruinniú"
-        },
-        "preparing": {
-            "micIsOff": "Tá Mic as",
-            "micIsOn": "Tá Mic ar",
-            "cameraIsOff": "Tá an ceamara as",
-            "cameraIsOn": "Tá an ceamara ar",
-            "screenSharingIsOn": "Tá scagthástáil ar",
-            "screenSharingIsOff": "Scáileán roinnte",
-            "joinNow": "Bí ar an nGlao"
-        },
-        "audioSettings": {
-            "dialogTitle": "Socruithe Fuaime",
-            "speakers": "Cainteoirí",
-            "microphone": "Micreafón"
-        },
-        "streamingSettings": {
-            "title": "Socruithe Sruthlaithe"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "Cuireadh",
-            "description": "Bosca isteach le haghaidh cuirí"
-        },
-        "Streams\/resource": {
-            "displayType": "Acmhainn",
-            "description": "sruth chun rochtain ar acmhainn a bhainistiú agus teachtaireachtaí faoi nuashonruithe a phostáil"
-        },
-        "Streams\/task": {
-            "displayType": "Tasc",
-            "description": "an tasc atá le déanamh ag daoine nó ag meaisíní"
-        },
-        "Streams\/number": {
-            "displayType": "Uimhir",
-            "description": "uimhir matamaitice"
-        },
-        "Streams\/date": {
-            "displayType": "Dáta",
-            "description": "dáta"
-        },
-        "Streams\/text": {
-            "displayType": "Téacs",
-            "description": "corp an téacs"
-        },
-        "Streams\/text\/small": {
-            "displayType": "Téacs",
-            "description": "corp beag téacs"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "Téacs",
-            "description": "comhlacht meánach téacs"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "Seoladh ríomhphoist",
-            "description": "seoladh ríomhphoist"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "Uimhir teileafón",
-            "description": "uimhir teileafón"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL",
-            "description": "nasc ar an ngréasán"
-        },
-        "Streams\/image": {
-            "displayType": "Íomha",
-            "description": "íomhá amhairc",
-            "newItem": "Cuir Íomhá leis"
-        },
-        "Streams\/images": {
-            "displayType": "Gailearaí Íomhá",
-            "description": "gailearaí na n-íomhánna"
-        },
-        "Streams\/album": {
-            "displayType": "Albam",
-            "description": "albam lena mbaineann meáin éagsúla"
-        },
-        "Streams\/file": {
-            "displayType": "Comhad",
-            "description": "comhad uaslódáilte",
-            "newItem": "Cuir Comhad leis"
-        },
-        "Streams\/audio": {
-            "displayType": "Clip Fuaime",
-            "description": "gearrthóg fuaime",
-            "newItem": "Cuir Fuaim leis"
-        },
-        "Streams\/video": {
-            "displayType": "Clip Físeáin",
-            "description": "gearrthóg físe",
-            "newItem": "Cuir Físeán leis"
-        },
-        "Streams\/live": {
-            "displayType": "Sruth beo",
-            "description": "fuaime beo nó físeáin"
-        },
-        "Streams\/category": {
-            "displayType": "Catagóir",
-            "description": "catagóir ar féidir le sruthanna eile a bheith bainteach léi"
-        },
-        "Streams\/participating": {
-            "displayType": "Innéacs Rannpháirteach",
-            "description": "tá sruthanna gaolmhar \/ neamhghaolmhar leis seo nuair a théann úsáideoir isteach \/ a fhágann"
-        },
-        "Streams\/interest": {
-            "displayType": "Ús",
-            "description": "léiríonn suim an úsáideora i dtopaic áirithe"
-        },
-        "Streams\/incoming": {
-            "displayType": "Teacht isteach",
-            "description": "ceann scríbe le haghaidh teachtaireachtaí a sheolann úsáideoirí eile"
-        },
-        "Streams\/chat": {
-            "displayType": "Comhrá",
-            "description": "comhrá idir úsáideoirí, le stair"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Glao Fíor-Ama",
-            "description": "glao físe \/ fuaime fíor-ama"
-        },
-        "Streams\/tasks": {
-            "description": "catagóir le haghaidh tascanna",
-            "displayType": "Tascanna"
-        },
-        "Streams\/experience": {
-            "description": "taithí choiteann do bhaill an phobail",
-            "displayType": "Taithí choiteann do bhaill an phobail"
-        },
-        "Streams\/greeting": {
-            "description": "beannú ar féidir le húsáideoir iad féin a thabhairt isteach",
-            "displayType": "Beannacht"
-        },
-        "Streams\/pdf": {
-            "displayType": "Doiciméad PDF",
-            "description": "Doiciméad PDF",
-            "newItem": "Cuir PDF leis"
-        },
-        "Streams\/question": {
-            "displayType": "Ceist",
-            "description": "sruth ceisteanna"
-        },
-        "Streams\/answer": {
-            "displayType": "Freagra",
-            "description": "sruth freagraí"
-        },
-        "Streams\/calls": {
-            "displayType": "Glaonna",
-            "description": "catagóir le haghaidh Srutháin \/ webrtc",
-            "MaxRelationsExceeded": "Sáraíodh uasghlaonna"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "Cuireadh {{avatar.displayName}} teachtaireacht <em>{{message.fields.type}}<\/em> chuig {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "trácht air",
-            "in": "isteach",
-            "body": "i {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "curtha chuig",
-                "byAvatar": "le {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "a bhfuil {{instructions.fromDisplayType}} nua aige",
-                "byAvatar": "le {{avatar.displayName}}"
-            },
-            "startedCallIn": "thosaigh glao isteach"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "teideal leathanach cineáil",
-        "ModTab": "Athraigh an Mír",
-        "Save": "Sábháil",
-        "Delete": "Scrios",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Tá an t-ábhar seo i bhfolach uait."
-    },
     "audio": {
-        "record": "Taifead",
-        "reset": "Athshocraigh",
-        "edit": "Cuir in Eagar",
-        "title": "teideal",
-        "description": "tuairisc",
-        "upload": "Uaslódáil",
-        "link": "Nasc",
-        "setUrl": "Socraigh URL",
-        "save": "Sábháil",
-        "setClip": "Gearrthóg Gearr Amach",
-        "invalidURL": "URL neamhbhailí",
-        "invalidFile": "Comhad Neamhbhailí",
-        "errorNoSource": "Gan aon fhoinse fuaime",
-        "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Athshocraigh",
-        "edit": "Cuir in Eagar",
-        "title": "teideal",
-        "description": "tuairisc",
-        "upload": "Uaslódáil",
-        "link": "Nasc",
-        "setUrl": "Socraigh URL",
-        "save": "Sábháil",
-        "setClip": "Gearrthóg Gearr Amach",
-        "invalidURL": "URL neamhbhailí",
-        "invalidFile": "Comhad Neamhbhailí",
-        "errorNoSource": "Gan aon fhoinse físe",
-        "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Athshocraigh",
-        "edit": "Cuir in Eagar",
-        "title": "teideal",
-        "description": "tuairisc",
-        "upload": "Uaslódáil",
-        "link": "Nasc",
-        "setUrl": "Socraigh URL",
-        "save": "Sábháil",
-        "setClip": "Gearrthóg Gearr Amach",
-        "invalidURL": "URL neamhbhailí",
-        "invalidFile": "Comhad Neamhbhailí",
-        "errorNoSource": "Sin foinse pdf",
-        "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Athshocraigh",
-        "edit": "Cuir in Eagar",
-        "title": "teideal",
-        "description": "tuairisc",
-        "upload": "Uaslódáil",
-        "link": "Nasc",
-        "setUrl": "Socraigh URL",
-        "save": "Sábháil",
-        "setClip": "Gearrthóg Gearr Amach",
-        "invalidURL": "URL neamhbhailí",
-        "invalidFile": "Comhad Neamhbhailí",
-        "errorNoSource": "Gan foinse íomhá",
-        "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Tá brón orm, ach comhad ró-mhór.<br> Is é uasmhéid an chomhaid {{size}}",
-        "uploadedImage": "Íomhá uaslódáilte",
-        "imageTitle": "Teideal íomhá"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Ceisteanna",
-        "Answers": "Freagraí",
-        "AnswerQuestion": "Freagair Ceist",
-        "SetYourAnswer": "Freagair an cheist le do thoil",
-        "NewQuestion": "Ceist Nua",
-        "NewAnswer": "Freagra Nua",
-        "AnswerDetails": "Sonraí Freagra",
-        "answerOption": "Rogha",
-        "answerOptionExclusive": "Eisiach",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "freagra saor in aisce ...",
-        "SaveQuestion": "Sábháil Ceist",
-        "SaveAnswer": "Sábháil Freagra",
-        "AddAnotherAnswer": "Cuir freagra eile leis",
-        "ErrorAnswers": "Cuir fiú freagra amháin le do thoil",
-        "AlreadyAnswered": "Freagraíodh cheana",
-        "TitlePlaceholder": "Clóscríobh do cheist",
-        "ContentPlaceholder": "Cuir aon fhaisnéis bhreise anseo chun cabhrú le daoine freagra a thabhairt",
-        "ErrorTitle": "Ceist ag teastáil",
-        "Placeholder": "Áititheoir"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Taithí Nua",
-        "DefineTitle": "Sainmhínigh teideal le do thoil",
-        "Create": "Cruthaigh"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Glaonna",
-        "MaxCalls": "Glaonna Max",
-        "Update": "Nuashonrú",
-        "NoCallsYet": "Níl aon ghlaonna fós",
-        "CallReasonTitle": "Cad faoi a bhfuil an glao seo?",
-        "WaitingRoom": "Seomra feithimh"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

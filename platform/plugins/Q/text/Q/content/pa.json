@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "ਬੇਨਤੀ ਦੌਰਾਨ {{status}} ਗਲਤੀ",
-        "canceled": "ਬੇਨਤੀ ਰੱਦ ਕੀਤੀ",
-        "500": "ਅੰਦਰੂਨੀ ਸਰਵਰ ਤਰੁਟੀ",
-        "404": "ਨਹੀਂ ਮਿਲਿਆ: {{url}}",
-        "501": "ਬੇਨਤੀ ਵਿੱਚ ਰੁਕਾਵਟ"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "ਸੈਸ਼ਨ ਦੀ ਮਿਆਦ ਪੁੱਗ ਗਈ ਪੰਨਾ ਤਾਜ਼ਾ ਕਰੋ ਅਤੇ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ.",
-        "otherDomain": "{{baseUrl}} ਤੇ ਕਰੌਸ-ਡੋਮੇਨ ਬੇਨਤੀ ਨੂੰ ਵਿਦੇਸ਼ੀ ਡੋਮੇਨ ਤੇ ਰੋਕੀ ਗਈ"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ਟੈਪ ਕਰੋ",
-        "click": "ਕਲਿੱਕ ਕਰੋ",
-        "yes": "ਹਾਂ",
-        "no": "ਨਹੀਂ",
-        "Tap": "ਟੈਪ ਕਰੋ",
-        "Click": "ਕਲਿਕ ਕਰੋ",
-        "Yes": "ਹਾਂ",
-        "No": "ਨਹੀਂ"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ਜਨਵਰੀ",
-        "2": "ਫਰਵਰੀ",
-        "3": "ਮਾਰਚ",
-        "4": "ਅਪ੍ਰੈਲ",
-        "5": "ਮਈ",
-        "6": "ਜੂਨ",
-        "7": "ਜੁਲਾਈ",
-        "8": "ਅਗਸਤ",
-        "9": "ਸਿਤੰਬਰ",
-        "10": "ਅਕਤੂਬਰ",
-        "11": "ਨਵੰਬਰ",
-        "12": "ਦਸੰਬਰ"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਮਾਈਕ੍ਰੋਫ਼ੋਨ ਤੱਕ ਪਹੁੰਚ ਦੀ ਆਗਿਆ ਦਿਓ",
-        "record": "ਰਿਕਾਰਡ ਕਰੋ",
-        "recording": "ਰਿਕਾਰਡਿੰਗ",
-        "remains": "ਰਹਿੰਦਾ ਹੈ",
-        "maximum": "ਅਧਿਕਤਮ",
-        "playing": "ਖੇਡਣਾ",
-        "recorded": "ਰਿਕਾਰਡ ਕੀਤਾ",
-        "clip": "ਕਲਿਪ",
-        "orupload": "ਜਾਂ ਅਪਲੋਡ ਕਰੋ",
-        "usethis": "ਇਹ ਵਰਤੋ",
-        "discard": "ਬਰਖਾਸਤ ਕਰੋ",
-        "encoding": "ਇੰਕੋਡਿੰਗ"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "ਚੇਤਾਵਨੀ"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "ਪੁਸ਼ਟੀ ਕਰੋ",
-        "ok": "ਹਾਂ",
-        "cancel": "ਨਹੀਂ"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "ਪੁੱਛੋ",
-        "ok": "ਜਾਣਾ"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "ਫਾਇਲ ਪੜ੍ਹਨ ਦੌਰਾਨ ਗਲਤੀ",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "ਤੁਸੀ ਕੀ ਕਰਨਾ ਚਾਹੋਗੇ?",
-            "photo": "ਨਵੀਂ ਫੋਟੋ ਲਵੋ",
-            "library": "ਲਾਇਬ੍ਰੇਰੀ ਤੋਂ ਚੁਣੋ"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "ਕਿਰਪਾ ਕਰਕੇ ਇੱਕ ਵੱਡਾ ਚਿੱਤਰ ਚੁਣੋ.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "ਅਕਾਰ ਅਤੇ ਸਥਿਤੀ ਨੂੰ ਅਡਜੱਸਟ ਕਰੋ",
-            "touchscreen": "ਜ਼ੂਮ ਅਤੇ ਡ੍ਰੈਗ ਕਰਨ ਲਈ ਆਪਣੀਆਂ ਉਂਗਲਾਂ ਦੀ ਵਰਤੋਂ ਕਰੋ",
-            "notTouchscreen": "ਆਪਣੇ ਮਾਊਸ ਅਤੇ ਵ੍ਹੀਲ ਨੂੰ ਜ਼ੂਮ ਅਤੇ ਡ੍ਰੈਗ ਕਰੋ"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "ਆਖਰੀ ਰਾਤ",
-        "lastEvening": "ਆਖਰੀ ਸ਼ਾਮ",
-        "yesterday": "ਕੱਲ",
-        "thisMorning": "ਇਸ ਸਵੇਰ ਨੂੰ",
-        "today": "ਅੱਜ",
-        "tonight": "ਅੱਜ ਰਾਤ",
-        "tomorrowMorning": "ਟੋਮ ਸਵੇਰ",
-        "tomorrow": "ਕੱਲ",
-        "hoursAgo": "{9 999}} ਘੰਟੇ ਪਹਿਲਾਂ",
-        "hourAgo": "} 9 999}} ਘੰਟਾ ਪਹਿਲਾਂ",
-        "minuteAgo": "} 9 999}} ਮਿੰਟ ਪਹਿਲਾਂ",
-        "minutesAgo": "} 9 999}} ਮਿੰਟ ਪਹਿਲਾਂ",
-        "secondAgo": "} 9 999}} ਸਕਿੰਟ ਪਹਿਲਾਂ",
-        "secondsAgo": "} 9 999}} ਸਕਿੰਟ ਪਹਿਲਾਂ",
-        "fewSecondsAgo": "ਸਕਿੰਟ ਪਹਿਲਾਂ",
-        "rightNow": "ਹੁਣ ਸੱਜੇ",
-        "inSecond": "{9 999}} ਸਕਿੰਟ ਵਿਚ",
-        "inSeconds": "{9 999}} ਸਕਿੰਟ ਵਿੱਚ",
-        "inMinute": "{9 999}} ਮਿੰਟ ਵਿੱਚ",
-        "inMinutes": "{9 999}} ਮਿੰਟਾਂ ਵਿੱਚ",
-        "inHour": "{9 999}} ਘੰਟੇ ਵਿੱਚ",
-        "inHours": "{9 999}} ਘੰਟਿਆਂ ਵਿੱਚ",
-        "inUnderMinute": "1 ਮਿੰਟ ਦੇ ਅੰਦਰ"
-    },
-    "video": {
-        "clip": "ਕਲਿਪ",
-        "errorNoSource": "ਕੋਈ ਵੀਡੀਓ ਸਰੋਤ ਨਹੀਂ",
-        "SkipAfter": "ਦੇ ਬਾਅਦ ਛੱਡੋ",
-        "Skip": "ਛੱਡੋ"
-    },
-    "pdf": {
-        "clip": "ਕਲਿਪ",
-        "errorNoSource": "ਕੋਈ ਪੀਡੀਐਫ ਸਰੋਤ ਨਹੀਂ"
-    },
-    "clip": {
-        "SetClipStart": "ਕਲਿੱਪ ਸ਼ੁਰੂ ਕਰੋ",
-        "ClipStart": "ਕਲਿੱਪ ਸਟਾਰਟ",
-        "SetClipEnd": "ਕਲਿੱਪ ਅੰਤ ਸੈੱਟ ਕਰੋ",
-        "ClipEnd": "ਕਲਿੱਪ ਅੰਤ",
-        "StartMoreEnd": "ਸ਼ੁਰੂਆਤੀ ਸਥਿਤੀ ਅੰਤ ਦੀ ਸਥਿਤੀ ਤੋਂ ਵੱਧ ਨਹੀਂ ਹੋ ਸਕਦੀ",
-        "EndLessStart": "ਸਮਾਪਤੀ ਸਥਿਤੀ ਸ਼ੁਰੂਆਤੀ ਸਥਿਤੀ ਤੋਂ ਘੱਟ ਨਹੀਂ ਹੋ ਸਕਦੀ",
-        "WhichInvalid": "ਦਲੀਲ &#39;ਜੋ&#39; ਅਵੈਧ ਹੈ"
-    },
-    "tabs": {
-        "more": "ਹੋਰ",
-        "Menu": "ਮੀਨੂ"
-    },
-    "durations": {
-        "second": "ਦੂਜਾ",
-        "seconds": "ਸਕਿੰਟ",
-        "minute": "ਮਿੰਟ",
-        "minutes": "ਮਿੰਟ",
-        "hour": "ਘੰਟੇ",
-        "day": "ਦਿਨ",
-        "days": "ਦਿਨ",
-        "week": "ਹਫ਼ਤਾ",
-        "weeks": "ਹਫ਼ਤੇ",
-        "month": "ਮਹੀਨਾ",
-        "months": "ਮਹੀਨੇ",
-        "year": "ਸਾਲ",
-        "years": "ਸਾਲ",
-        "decade": "ਦਹਾਕਾ",
-        "decades": "ਦਹਾਕੇ",
-        "century": "ਸਦੀ",
-        "centuries": "ਸਦੀਆਂ"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

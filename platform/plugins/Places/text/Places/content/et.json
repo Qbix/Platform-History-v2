@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "meeter",
-        "meters": "meetrit",
-        "kilometer": "kilomeetrit",
-        "kilometers": "kiomeetrid",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "miil",
-        "miles": "miili",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "jalg",
-        "feet": "jalad",
-        "inches": "tolli"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Olen huvitatud asjadest, mis toimuvad {{select}}",
-        "update": "Uuenda oma asukohta",
-        "prompt": "{{ClickOrTap}} siin <br> seadke oma <br> asukoht",
-        "myCurrentLocation": "Minu praegune asukoht",
-        "enterAddress": "Sisestage aadress",
-        "enterPostcode": "Palun sisestage oma sihtnumber \/ postiindeks",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Lisa asukoht",
-            "title": "Uus asukoht",
-            "nameYourLocation": "Nimetage oma asukoht"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Salvesta see asukoht?",
-            "message": "Kas kavatsete seda asukohta tulevikus uuesti kasutada?",
-            "ok": "Jah",
-            "cancel": "Ei"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Nimetage see asukoht",
-            "placeholder": "Kodu, töö jne",
-            "ok": "Salvesta"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Vali asukoht"
-        },
-        "set": "Määra minu asukoht"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Mis tahes ala selle asukoha sees?",
-        "newArea": "Uus ala",
-        "promptTitle": "Sisestage piirkonna nimi:",
-        "absent": "Palun määrake ala",
-        "error": "Viga",
-        "exist": "Piirkond on juba olemas",
-        "addNewArea": "Lisage uus ala",
-        "add": "Lisama"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "asukohtade kogum",
-            "displayType": "Asukohad"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Esindab ehitist, toimumiskohta, laeva, parki jne.",
-            "displayType": "Asukoht"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Esindab piirkonnas asuvat piirkonda, näiteks tuba või sviiti",
-            "displayType": "Pindala"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Kujutab ehitise või laeva põrandat",
-            "displayType": "Korrus"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Kujutab kolonni hoones või laevas",
-            "displayType": "Veerg"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategooria asjadele, mis asuvad geohasest teatud kaugusel",
-            "displayType": "Kohtade lähedal"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategooria asjadele, mis asuvad geohasest teatud kaugusel ja vastavad huvile",
-            "displayType": "Kohad huvi"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

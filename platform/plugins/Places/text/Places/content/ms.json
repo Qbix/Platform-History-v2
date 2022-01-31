@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "dalam {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
         "meter": "meter",
-        "meters": "meter",
+        "meters": "meters",
         "kilometer": "kilometer",
-        "kilometers": "kiometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "Batu",
-        "miles": "batu",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "kaki",
-        "feet": "kaki",
-        "inches": "inci"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Saya berminat dengan perkara yang berlaku dalam {{select}}",
-        "update": "Kemas kini lokasi saya",
-        "prompt": "{{ClickOrTap}} di sini <br> tetapkan anda <br> lokasi",
-        "myCurrentLocation": "Lokasi semasa saya",
-        "enterAddress": "Masukkan alamat",
-        "enterPostcode": "Sila masukkan kod pos \/ kod pos anda",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Tambah lokasi",
-            "title": "Lokasi Baru",
-            "nameYourLocation": "Namakan lokasi anda"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Simpan lokasi ini?",
-            "message": "Adakah anda merancang untuk menggunakan lokasi ini lagi pada masa akan datang?",
-            "ok": "Ya",
-            "cancel": "Tidak"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Namakan lokasi ini",
-            "placeholder": "Rumah, Kerja dll.",
-            "ok": "Simpan"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Pilih Lokasi"
-        },
-        "set": "Tetapkan Lokasi Saya"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Mana-mana kawasan di dalam lokasi ini?",
-        "newArea": "Kawasan baru",
-        "promptTitle": "Masukkan nama untuk kawasan tersebut:",
-        "absent": "Sila tetapkan kawasan",
-        "error": "Ralat",
-        "exist": "Kawasan sudah ada",
-        "addNewArea": "Tambah kawasan baru",
-        "add": "Tambah"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "koleksi lokasi",
-            "displayType": "Lokasi"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Mewakili bangunan, tempat, kapal, taman, dll.",
-            "displayType": "Lokasi"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Mewakili kawasan dalam lokasi, seperti bilik atau suite",
-            "displayType": "Kawasan"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Mewakili lantai di dalam bangunan atau kapal",
-            "displayType": "Lantai"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Merupakan lajur dalam bangunan atau kapal",
-            "displayType": "Kolum"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategori untuk perkara dalam jarak tertentu geohash",
-            "displayType": "Berhampiran dengan tempat"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategori untuk perkara dalam jarak tertentu geohash, sepadan dengan minat",
-            "displayType": "Kepentingan tempat"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

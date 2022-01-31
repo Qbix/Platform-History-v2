@@ -249,7 +249,7 @@
             "errorsTitle": "Errors occurred"
         },
         "filter": {
-            "ByCategory" : {
+            "ByCategory": {
                 "FilterByNFTCollections": "Filter by NFT Collections",
                 "ShowNFTCollection": "Show NFT collection in ...",
                 "AllCollections": "All Collections"
@@ -259,10 +259,6 @@
                 "AllUsers": "Everyone",
                 "FilterByAuthors": "Filter by Authors"
             }
-
-        },
-        "list": {
-
         },
         "Back": "Back to Collection"
     }

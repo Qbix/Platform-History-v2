@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Vật phẩm mới"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Những người tôi mời",
-        "Streams\/invitedMe": "Ai mời tôi",
-        "AreYouAgree": "Bạn có đồng ý không?",
-        "Yes": "đúng",
-        "No": "Không",
-        "DoYouAgree": "Bạn có đồng ý không?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Sở thích của bạn là gì?",
-        "CanAdd": "Nếu bạn vẫn không thể tìm thấy những gì bạn đang tìm kiếm, bạn có thể thêm một sở thích mới bên dưới:",
-        "TrySynonyms": "Đừng nhìn thấy nó? Hãy thử một số từ đồng nghĩa.",
-        "AddUnderCategory": "Thêm vào mục ...",
-        "Other": "Khác",
-        "Unlisted": "Chưa niêm yết"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Tin nhắn đã được gắn cờ để xem xét quản trị viên. Nhấn một lần nữa để unflag.",
-        "noOneSaid": "Không ai nói gì",
-        "closeChatButton": "Đóng trò chuyện",
-        "closeChatConfirmTitle": "Đóng cuộc trò chuyện này?",
-        "closeChatConfirm": "Bạn có chắc chắn muốn đóng cuộc trò chuyện này?",
-        "closeChatConfirmYes": "Vâng",
-        "closeChatConfirmNo": "Không",
-        "earlierComments": "ý kiến trước đó",
-        "Subscribed": "Thông báo tắt tiếng",
-        "Unsubscribed": "Nhận thông báo",
-        "notAllowedToJoinCall": "Bạn không được phép tham gia cuộc trò chuyện này.",
-        "startedConversation": "bắt đầu một cuộc trò chuyện",
-        "RealTimeCall": "Cuộc gọi thời gian thực",
-        "SearchByName": "Tìm kiếm theo tên",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} đang truy cập trò chuyện",
-            "Join": "{{displayName}} đã tham gia trò chuyện",
-            "Leave": "{{displayName}} rời khỏi trò chuyện",
-            "RelatedTo": "{{displayName}} đã bắt đầu {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Tin nhắn {{& message.fields.type}} đến {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} đã nói:",
-        "Streams\/changed": "Thay đổi trong {{stream.fields.title}}",
-        "Streams\/invite": "Bạn đã được mời tham gia {{& stream.fields.title}}",
-        "Streams\/announcement": "Thông báo trong {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} đã thay đổi quyền truy cập luồng",
-        "Streams\/chat\/edit": "Tin nhắn trò chuyện được chỉnh sửa",
-        "Streams\/chat\/remove": "Tin nhắn trò chuyện đã bị xóa",
-        "Streams\/closed": "{{stream.fields.title}} đã bị đóng",
-        "Streams\/task\/progress": "Tiến trình thực hiện vào {{stream.fields.title}}",
-        "Streams\/task\/complete": "Nhiệm vụ đã hoàn thành: {{stream.fields.title}}",
-        "Streams\/task\/error": "Lỗi trong: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Tin nhắn đến",
-        "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
-        "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký",
-        "Streams\/relatedTo\/Streams\/call": "Cuộc gọi mới bắt đầu trong {{toTitle}}",
-        "Streams\/relatedTo\/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Đã thêm vào {{toTitle}} dưới dạng {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} đã đề cập đến bạn trong một nhận xét",
-        "Streams\/call": "{{displayName}} đã bắt đầu cuộc gọi trong thời gian thực"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} đã mời bạn đến {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Chọn từ Danh bạ của bạn",
-            "selectFromContacts": "Chọn từ danh bạ",
-            "photo": "Chụp một tấm",
-            "photoInstruction": "Nếu người đã quét mã QR của bạn ở trước mặt bạn, hãy chụp ảnh họ",
-            "to": "Tới: {{Stream Title}}",
-            "go": "Đi",
-            "title": "Mời gọi",
-            "placeholder": "Số điện thoại di động hoặc địa chỉ email",
-            "orInvite": "Hoặc mời mọi người bằng cách sử dụng:",
-            "QR": "{{ClickOrTap}} để tạo mã QR",
-            "QRtitle": "Quét mã QR này",
-            "byEmail": "E-mail",
-            "byText": "Bản văn",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "QRscanned": "Họ đã quét nó!",
-            "chooseAgainFromContacts": "Chọn lại từ Danh bạ",
-            "inviteSelectedContacts": "Mời các địa chỉ liên lạc được chọn",
-            "scannedQR": "{{ClickOrTap}} nếu mã được quét",
-            "copyLink": "{{ClickOrTap}} để sao chép liên kết mời",
-            "userChooserPlaceholder": "Tìm kiếm theo tên",
-            "shareOrCopyLink": "{{ClickOrTap}} để chia sẻ hoặc sao chép liên kết mời"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Này, kiểm tra cái này",
-            "PleaseVisitLink": "Vui lòng truy cập liên kết sau:",
-            "InvitingYou": "Tôi mời bạn {{title}}",
-            "HasInvitedYou": "{{displayName}} đã mời bạn tham gia {{title}}",
-            "HasMentionedYou": "{{displayName}} đã đề cập đến bạn trong &quot;{{title}}&quot;",
-            "YOUAREINVITED": "BẠN ĐƯỢC MỜI!",
-            "AcceptInvite": "Chấp nhận lời mời"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Bạn đã được mời tham gia {{title}}. Vui lòng nhấn {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
-        },
-        "youCanNowPaste": "Bây giờ bạn có thể dán liên kết này ở đâu đó để mời mọi người",
-        "command": "Mời gọi"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
-            "confirm": "Lời mời được gửi từ số của chúng tôi, mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
-            "check": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra tin nhắn của bạn và nhấp vào liên kết!",
-            "CheckYourMobile": "Vui lòng kiểm tra SMS và làm theo hướng dẫn!"
-        },
-        "email": {
-            "alert": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
-            "confirm": "Lời mời được gửi từ miền của chúng tôi mà bạn bè của bạn chưa nhận ra. Bạn có muốn theo dõi với một văn bản nhanh chóng để cho họ biết lời mời đến từ bạn, yêu cầu họ nhấp vào liên kết.",
-            "subject": "Bạn đã nhận được một lời mời?",
-            "body": "Xin chào, tôi vừa gửi cho bạn lời mời đến ứng dụng {{app}}. Vui lòng kiểm tra email của bạn và nhấp vào liên kết trong đó!",
-            "CheckYourEmail": "Vui lòng kiểm tra email của bạn và làm theo hướng dẫn!"
-        }
-    },
-    "participating": {
-        "Title": "Chức vụ",
-        "Subscribed": "Đã đăng ký",
-        "Participants": "Người tham gia",
-        "AreYouSureRemoveIdentifier": "Bạn có chắc chắn để xóa định danh này?",
-        "AreYouSureUnsubscribeIdentifier": "Bạn có chắc chắn hủy đăng ký định danh này? Nó sẽ tắt thông báo cho định danh này.",
-        "AreYouSureUnsubscribeDevice": "Bạn có chắc chắn hủy đăng ký thiết bị này? Nó sẽ tắt thông báo cho thiết bị này.",
-        "Identifiers": "Định danh",
-        "Devices": "Thiết bị",
-        "Streams": "Dòng suối",
-        "AreYouSureRemoveParticipant": "Bạn có chắc chắn muốn loại bỏ người tham gia này?",
-        "RemoveParticipant": "Xóa người tham gia"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Kích hoạt micrô",
-            "cameraTitle": "Kích hoạt camera",
-            "cameraAndMicrophoneTitle": "Bật máy ảnh và micrô",
-            "dialogTitle": "Kích hoạt hộp thoại",
-            "microphoneBtn": "Kích hoạt micrô",
-            "cameraBtn": "Kích hoạt camera",
-            "cameraAndMicrophoneBtn": "Bật máy ảnh và micrô"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến &quot;Cài đặt&quot; -&gt; &quot;Nâng cao&quot; -&gt; &quot;Quyền riêng tư và bảo mật&quot; -&gt; &quot;Cài đặt trang&quot; -&gt; &quot;Máy ảnh&quot; hoặc &quot;Cài đặt trang&quot; -&gt; &quot;Micrô&quot;",
-            "point2": "Xóa {{hostname}} khỏi danh sách &quot;Chặn&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Vui lòng tải lại trang này và xác nhận quyền truy cập vào {{kind}} để tham gia hội nghị."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến Cài đặt Android của bạn",
-            "point2": "Mở &quot;Ứng dụng và thông báo&quot;",
-            "point3": "Tìm &quot;{{communityName}}&quot; và mở nó",
-            "point4": "Nhấn vào Quyền",
-            "point5": "Kích hoạt {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Hướng dẫn",
-            "permissionDenied": "Quyền cho {{kind}} bị từ chối. Để sử dụng, vui lòng làm theo các bước sau:",
-            "point1": "Chuyển đến Cài đặt iOS của bạn",
-            "point2": "Mở &quot;Quyền riêng tư&quot;",
-            "point3": "Tìm {{kind}} và mở nó",
-            "point4": "Tìm &quot;{{communityName}}&quot; và bật"
-        },
-        "notices": {
-            "youJoinedRoom": "Bạn đã tham gia phòng",
-            "joining": "Tham gia: {{userName}}",
-            "sbLeftRoom": "{{userName}} rời khỏi phòng",
-            "youLeftRoom": "Bạn rời khỏi phòng",
-            "codeCopied": "Bạn rời khỏi phòng",
-            "sbBeganFbLive": "{{userName}} đã bắt đầu phát cuộc gọi này trong Facebook",
-            "sbStoppedFbLive": "{{userName}} đã ngừng phát cuộc gọi này trong Facebook",
-            "youBeganFbLive": "Bạn đã bắt đầu phát cuộc gọi này trên Facebook",
-            "youStoppedFbLive": "Bạn đã ngừng phát cuộc gọi này trong Facebook",
-            "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
-            "codeCopiedToCb": "Mã được sao chép vào clipboard",
-            "userHasNoVideo": "Người tham gia không có video",
-            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị.",
-            "youBeganVideoRecording": "Bạn đã bắt đầu ghi âm hội nghị này",
-            "youStoppedVideoRecording": "Bạn đã dừng ghi âm hội nghị này",
-            "switchingRoom": "Chuyển phòng ...",
-            "forceDisconnecting": "Bạn sẽ bị ngắt kết nối trong vòng 5 giây",
-            "youStartedLive": "Bạn đã bắt đầu phát cuộc gọi này tới RTMP tùy chỉnh",
-            "youStoppedLive": "Bạn đã ngừng phát cuộc gọi này tới RTMP tùy chỉnh",
-            "sbStartedLiveStreaming": "{{userName}} đã bắt đầu phát trực tiếp",
-            "sbStoppedLiveStreaming": "{{userName}} đã kết thúc trực tiếp",
-            "liveStopped": "Đã xảy ra lỗi khi gửi video đến điểm cuối",
-            "forceDisconnectingImmediately": "Bạn đã bị ngắt kết nối bởi một máy chủ"
-        },
-        "settingsPopup": {
-            "webCamera": "Máy ảnh web",
-            "screenSharing": "Chia sẻ màn hình",
-            "shareAnotherScreen": "Chia sẻ màn hình khác",
-            "turnOffCameras": "Tắt tất cả các máy ảnh",
-            "startFBLive": "Bắt đầu phát trực tiếp trên Facebook",
-            "stopFBLive": "Dừng phát trực tiếp trên Facebook",
-            "fbLiveTitle": "Tiêu đề trực tiếp",
-            "fbLiveDescription": "Mô tả trực tiếp",
-            "fbOnlyMeLiveAccess": "Chỉ có tôi",
-            "fbFriendsAccess": "Bạn bè",
-            "fbPublicAccess": "Công cộng",
-            "fbStartLive": "Chưa lên",
-            "fbStopLive": "Kết thúc trực tiếp",
-            "fbEmbedCode": "Nhúng",
-            "copy": "Sao chép",
-            "turnOffVideo": "Tắt chia sẻ camera \/ màn hình",
-            "turnOffScreenSharing": "Tắt chia sẻ màn hình",
-            "cameraIsTurnedOff": "Máy ảnh bị tắt",
-            "startRecording": "Bắt đầu thu",
-            "stopRecording": "Dừng ghi âm",
-            "recordingInProgress": "Đang ghi âm ...",
-            "publishOnTimeline": "Xuất bản trên dòng thời gian",
-            "publishToGroup": "Xuất bản lên nhóm",
-            "turnOffAudioInput": "Tắt tiếng micrô",
-            "micIsTurnedOff": "Micrô bị tắt",
-            "start": "Bắt đầu",
-            "stop": "Ngừng lại",
-            "streamingSettings": "Cài đặt",
-            "streamToRTMP": "Truyền đến RTMP tùy chỉnh",
-            "dialogTitle": "Cài đặt video",
-            "startBroadcasting": "Bắt đầu phát sóng",
-            "broadcastingInProgress": "Đang phát sóng"
-        },
-        "participantsPopup": {
-            "disconnect": "Ngắt kết nối",
-            "floatingScreens": "Màn hình nổi",
-            "tiledScreens": "Màn hình lát gạch",
-            "loudestExceptMe": "Lớn nhất ngoại trừ tôi",
-            "maximizeLoudest": "Tối đa hóa to nhất",
-            "staticMaximized": "Tối đa hóa tĩnh",
-            "manual": "Hướng dẫn sử dụng",
-            "turnOffCamera": "Ẩn video",
-            "turnOffAudio": "Tắt tiếng",
-            "turnOffScreenSharing": "Ẩn chia sẻ màn hình",
-            "turnOnCamera": "Hiển thị video",
-            "turnOnAudio": "Tắt âm thanh",
-            "turnOnScreenSharing": "Hiển thị chia sẻ màn hình",
-            "fullScreen": "Toàn màn hình",
-            "dialogTitle": "Cài đặt người tham gia"
-        },
-        "notAllowedToJoinCall": "Bạn không được phép tham gia luồng này.",
-        "streamTitle": "{{1}} cuộc gọi trực tiếp",
-        "preview": {
-            "preamble": "Gặp gỡ:",
-            "Meeting": "Cuộc họp",
-            "MeetingEnded": "Cuộc họp kết thúc"
-        },
-        "preparing": {
-            "micIsOff": "Micrô đã tắt",
-            "micIsOn": "Mic đang bật",
-            "cameraIsOff": "Máy ảnh tắt",
-            "cameraIsOn": "Máy ảnh đang bật",
-            "screenSharingIsOn": "Chia sẻ màn hình đang bật",
-            "screenSharingIsOff": "Chia sẻ màn hình",
-            "joinNow": "Tham gia cuộc gọi"
-        },
-        "audioSettings": {
-            "dialogTitle": "Cài đặt âm thanh",
-            "speakers": "Diễn giả",
-            "microphone": "Cái mic cờ rô"
-        },
-        "streamingSettings": {
-            "title": "Cài đặt phát trực tuyến"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "Đã mời",
-            "description": "Hộp thư đến cho lời mời"
-        },
-        "Streams\/resource": {
-            "displayType": "Nguồn",
-            "description": "luồng để quản lý quyền truy cập vào tài nguyên và đăng thông báo về các bản cập nhật"
-        },
-        "Streams\/task": {
-            "displayType": "Bài tập",
-            "description": "nhiệm vụ được thực hiện bởi con người hoặc máy móc"
-        },
-        "Streams\/number": {
-            "displayType": "Con số",
-            "description": "số toán học"
-        },
-        "Streams\/date": {
-            "displayType": "Ngày",
-            "description": "ngày"
-        },
-        "Streams\/text": {
-            "displayType": "Bản văn",
-            "description": "thân văn bản"
-        },
-        "Streams\/text\/small": {
-            "displayType": "Bản văn",
-            "description": "cơ thể nhỏ của văn bản"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "Bản văn",
-            "description": "cơ thể vừa của văn bản"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "Địa chỉ email",
-            "description": "địa chỉ email"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "Số điện thoại",
-            "description": "số điện thoại"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL",
-            "description": "liên kết trên web"
-        },
-        "Streams\/image": {
-            "displayType": "Hình ảnh",
-            "description": "hình ảnh trực quan",
-            "newItem": "Thêm hình ảnh"
-        },
-        "Streams\/images": {
-            "displayType": "thư viện hình ảnh",
-            "description": "bộ sưu tập hình ảnh"
-        },
-        "Streams\/album": {
-            "displayType": "Album",
-            "description": "một album mà các phương tiện truyền thông khác nhau có liên quan"
-        },
-        "Streams\/file": {
-            "displayType": "Tập tin",
-            "description": "tập tin tải lên",
-            "newItem": "Thêm tập tin"
-        },
-        "Streams\/audio": {
-            "displayType": "Clip âm thanh",
-            "description": "clip âm thanh",
-            "newItem": "Thêm âm thanh"
-        },
-        "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Thêm video"
-        },
-        "Streams\/live": {
-            "displayType": "Phát trực tiếp",
-            "description": "âm thanh hoặc video trực tiếp"
-        },
-        "Streams\/category": {
-            "displayType": "thể loại",
-            "description": "một danh mục mà các luồng khác có thể liên quan"
-        },
-        "Streams\/participating": {
-            "displayType": "Chỉ số tham gia",
-            "description": "các luồng có liên quan \/ không liên quan đến điều này khi người dùng tham gia \/ rời khỏi"
-        },
-        "Streams\/interest": {
-            "displayType": "Quan tâm",
-            "description": "thể hiện sự quan tâm của người dùng trong một chủ đề nhất định"
-        },
-        "Streams\/incoming": {
-            "displayType": "Sắp có",
-            "description": "đích đến cho tin nhắn được gửi bởi người dùng khác"
-        },
-        "Streams\/chat": {
-            "displayType": "Cuộc hội thoại",
-            "description": "một cuộc trò chuyện giữa những người dùng, với lịch sử"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Cuộc gọi thời gian thực",
-            "description": "một cuộc gọi video \/ âm thanh thời gian thực"
-        },
-        "Streams\/tasks": {
-            "description": "thể loại cho các nhiệm vụ",
-            "displayType": "Nhiệm vụ"
-        },
-        "Streams\/experience": {
-            "description": "một kinh nghiệm chung cho các thành viên của một cộng đồng",
-            "displayType": "Kinh nghiệm chung cho các thành viên của cộng đồng"
-        },
-        "Streams\/greeting": {
-            "description": "chào người dùng có thể tự giới thiệu",
-            "displayType": "Lời chào"
-        },
-        "Streams\/pdf": {
-            "displayType": "Tài liệu PDF",
-            "description": "Tài liệu PDF",
-            "newItem": "Thêm PDF"
-        },
-        "Streams\/question": {
-            "displayType": "Câu hỏi",
-            "description": "dòng câu hỏi"
-        },
-        "Streams\/answer": {
-            "displayType": "Câu trả lời",
-            "description": "luồng trả lời"
-        },
-        "Streams\/calls": {
-            "displayType": "Cuộc gọi",
-            "description": "danh mục cho Luồng \/ webrtc",
-            "MaxRelationsExceeded": "Đã vượt quá số cuộc gọi tối đa"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "đã đăng một thông báo <em>{{message.fields.type}}<\/em> lên {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "Bình luận về",
-            "in": "trong",
-            "body": "trong {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "đã được đăng lên",
-                "byAvatar": "bởi {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "có {{instructions.fromDisplayType}} mới",
-                "byAvatar": "được thêm bởi {{avatar.displayName}}"
-            },
-            "startedCallIn": "bắt đầu một cuộc gọi trong"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "gõ tiêu đề trang",
-        "ModTab": "Sửa đổi mục",
-        "Save": "Tiết kiệm",
-        "Delete": "Xóa bỏ",
-        "Submenu": "Menu phụ"
-    },
-    "errors": {
-        "HiddenFromYou": "Nội dung này được ẩn từ bạn."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Ghi lại",
-        "reset": "Cài lại",
-        "edit": "Biên tập",
-        "title": "tiêu đề",
-        "description": "sự miêu tả",
-        "upload": "Tải lên",
-        "link": "Liên kết",
-        "setUrl": "Đặt URL",
-        "save": "Tiết kiệm",
-        "setClip": "Cắt ra Clip",
-        "invalidURL": "URL không hợp lệ",
-        "invalidFile": "Tập tin không hợp lệ",
-        "errorNoSource": "Không có nguồn âm thanh",
-        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
-        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Cài lại",
-        "edit": "Biên tập",
-        "title": "tiêu đề",
-        "description": "sự miêu tả",
-        "upload": "Tải lên",
-        "link": "Liên kết",
-        "setUrl": "Đặt URL",
-        "save": "Tiết kiệm",
-        "setClip": "Cắt ra Clip",
-        "invalidURL": "URL không hợp lệ",
-        "invalidFile": "Tập tin không hợp lệ",
-        "errorNoSource": "Không có nguồn video",
-        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
-        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Cài lại",
-        "edit": "Biên tập",
-        "title": "tiêu đề",
-        "description": "sự miêu tả",
-        "upload": "Tải lên",
-        "link": "Liên kết",
-        "setUrl": "Đặt URL",
-        "save": "Tiết kiệm",
-        "setClip": "Cắt ra Clip",
-        "invalidURL": "URL không hợp lệ",
-        "invalidFile": "Tập tin không hợp lệ",
-        "errorNoSource": "Không có nguồn pdf",
-        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
-        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Cài lại",
-        "edit": "Biên tập",
-        "title": "tiêu đề",
-        "description": "sự miêu tả",
-        "upload": "Tải lên",
-        "link": "Liên kết",
-        "setUrl": "Đặt URL",
-        "save": "Tiết kiệm",
-        "setClip": "Cắt ra Clip",
-        "invalidURL": "URL không hợp lệ",
-        "invalidFile": "Tập tin không hợp lệ",
-        "errorNoSource": "Không có nguồn hình ảnh",
-        "uploadLimit": "Kích thước tệp tối đa: {{size}}",
-        "errorFileSize": "Xin lỗi, nhưng tệp quá lớn.<br> Kích thước tệp tối đa là {{size}}",
-        "uploadedImage": "Hình ảnh đã tải lên",
-        "imageTitle": "Tiêu đề hình ảnh"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Câu hỏi",
-        "Answers": "Câu trả lời",
-        "AnswerQuestion": "Trả lời câu hỏi",
-        "SetYourAnswer": "Làm ơn trả lời câu hỏi này",
-        "NewQuestion": "Câu hỏi mới",
-        "NewAnswer": "Câu trả lời mới",
-        "AnswerDetails": "Chi tiết câu trả lời",
-        "answerOption": "Lựa chọn",
-        "answerOptionExclusive": "Độc quyền",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "câu trả lời miễn phí ...",
-        "SaveQuestion": "Lưu câu hỏi",
-        "SaveAnswer": "Lưu câu trả lời",
-        "AddAnotherAnswer": "Thêm câu trả lời khác",
-        "ErrorAnswers": "Vui lòng thêm ngay cả một câu trả lời",
-        "AlreadyAnswered": "Sẵn sàng trả lời",
-        "TitlePlaceholder": "Nhập câu hỏi của bạn",
-        "ContentPlaceholder": "Đặt bất kỳ thông tin bổ sung nào ở đây để giúp mọi người trả lời",
-        "ErrorTitle": "Câu hỏi bắt buộc",
-        "Placeholder": "Trình giữ chỗ"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Kinh nghiệm mới",
-        "DefineTitle": "Vui lòng xác định một tiêu đề",
-        "Create": "Tạo ra"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Cuộc gọi",
-        "MaxCalls": "Số cuộc gọi tối đa",
-        "Update": "Cập nhật",
-        "NoCallsYet": "Chưa có cuộc gọi nào",
-        "CallReasonTitle": "Cuộc gọi này là gì?",
-        "WaitingRoom": "Phòng chờ"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

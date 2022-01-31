@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Jauns vienums"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Cilvēki, kurus es uzaicināju",
-        "Streams\/invitedMe": "Kas mani uzaicināja",
-        "AreYouAgree": "Vai jūs piekrītat?",
-        "Yes": "Jā",
-        "No": "Nē",
-        "DoYouAgree": "Vai tu piekrīti?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Kādas ir tavas intereses?",
-        "CanAdd": "Ja jūs joprojām nevarat atrast meklēto, varat pievienot jaunu interesi:",
-        "TrySynonyms": "Neredziet to? Izmēģiniet sinonīmus.",
-        "AddUnderCategory": "Pievienot kategorijā ...",
-        "Other": "Citi",
-        "Unlisted": "Sarakstā neiekļautie"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Ziņojums ir atzīmēts ar administratora pārskatīšanu. Pieskarieties vēlreiz, lai noņemtu.",
-        "noOneSaid": "Neviens neko nav teicis",
-        "closeChatButton": "Aizvērt tērzēšanu",
-        "closeChatConfirmTitle": "Aizvērt šo tērzēšanu?",
-        "closeChatConfirm": "Vai tiešām vēlaties aizvērt šo tērzēšanu?",
-        "closeChatConfirmYes": "Jā",
-        "closeChatConfirmNo": "Nē",
-        "earlierComments": "iepriekšējie komentāri",
-        "Subscribed": "Izslēgt paziņojumus",
-        "Unsubscribed": "Saņemt paziņojumus",
-        "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai sarunai.",
-        "startedConversation": "sāka sarunu",
-        "RealTimeCall": "Reāllaika zvans",
-        "SearchByName": "Meklēt pēc vārda",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} apmeklē tērzēšanu",
-            "Join": "{{displayName}} pievienojās tērzēšanai",
-            "Leave": "{{displayName}} pameta tērzēšanu",
-            "RelatedTo": "{{displayName}} izveidoja {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Ziņojums {{& message.fields.type}} uz {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} teica:",
-        "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
-        "Streams\/invite": "Jūs uzaicināja uz {{& stream.fields.title}}",
-        "Streams\/announcement": "Paziņojums {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} mainīja plūsmas piekļuvi",
-        "Streams\/chat\/edit": "Tērzēšanas ziņojums ir rediģēts",
-        "Streams\/chat\/remove": "Tērzēšanas ziņojums ir noņemts",
-        "Streams\/closed": "{{stream.fields.title}} ir aizvērts",
-        "Streams\/task\/progress": "Panākumi {{stream.fields.title}}",
-        "Streams\/task\/complete": "Uzdevums pabeigts: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kļūda laikā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ienākošais ziņojums",
-        "ManageEmailSubscriptions": "pārvaldiet e-pasta abonementus",
-        "IfUnsubscribe": "Ja vēlaties atcelt abonēšanu",
-        "Streams\/relatedTo\/Streams\/call": "Jauns uzaicinājums sākās {{toTitle}}",
-        "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Pievienots mapei {{toTitle}} kā {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} pieminēja jūs komentārā",
-        "Streams\/call": "{{displayName}} sāka reāllaika zvanu"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} uzaicināja jūs uz {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Izvēlieties no saviem kontaktiem",
-            "selectFromContacts": "Izvēlieties No Contacts",
-            "photo": "Uzņemt fotogrāfiju",
-            "photoInstruction": "Ja persona, kas skenēja jūsu QR kodu, ir priekšā, fotografējiet to",
-            "to": "Kam: {{Stream Title}}",
-            "go": "Iet",
-            "title": "Uzaicināt",
-            "placeholder": "Mobilā tālruņa numurs vai e-pasta adrese",
-            "orInvite": "Vai aiciniet cilvēkus, izmantojot:",
-            "QR": "{{ClickOrTap}}, lai ģenerētu QR kodu",
-            "QRtitle": "Skenējiet šo QR kodu",
-            "byEmail": "E-pasts",
-            "byText": "Teksts",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Čivināt",
-            "QRscanned": "Viņi skenēja to!",
-            "chooseAgainFromContacts": "Izvēlieties no kontaktiem vēlreiz",
-            "inviteSelectedContacts": "Uzaicināt atlasītos kontaktus",
-            "scannedQR": "{{ClickOrTap}}, ja kods tika skenēts",
-            "copyLink": "{{ClickOrTap}}, lai kopētu ielūguma saiti",
-            "userChooserPlaceholder": "Meklēt pēc nosaukuma",
-            "shareOrCopyLink": "{{ClickOrTap}}, lai kopīgotu vai kopētu uzaicinājuma saiti"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hei, pārbaudiet to",
-            "PleaseVisitLink": "Lūdzu, apmeklējiet šo saiti:",
-            "InvitingYou": "Es aicinu jūs uz {{title}}",
-            "HasInvitedYou": "{{displayName}} uzaicināja jūs uz {{title}}",
-            "HasMentionedYou": "{{displayName}} ir pieminējis jūs žurnālā “{{title}}”",
-            "YOUAREINVITED": "JŪS AICINĀJIETIES!",
-            "AcceptInvite": "Pieņemt ielūgumu"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Jūs esat uzaicināts uz {{title}}. Lūdzu, pieskarieties {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
-        },
-        "youCanNowPaste": "Tagad varat kaut kur ielīmēt šo saiti, lai uzaicinātu cilvēkus",
-        "command": "Uzaicināt"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu numura, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "check": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu SMS un noklikšķiniet uz saites!",
-            "CheckYourMobile": "Lūdzu, pārbaudiet SMS un izpildiet instrukcijas!"
-        },
-        "email": {
-            "alert": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Sekojiet līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "confirm": "Uzaicinājumi tiek nosūtīti no mūsu domēna, ko jūsu draugi vēl neatpazīst. Vai vēlaties sekot līdzi ātram tekstam, lai ļautu viņiem uzzināt, ka ielūgums ir no jums, lūdzot tos noklikšķināt uz saites.",
-            "subject": "Vai jūs saņēmāt uzaicinājumu?",
-            "body": "Hei, es tikai nosūtīju jums uzaicinājumu uz {{app}} lietotni. Lūdzu, pārbaudiet savu e-pastu un noklikšķiniet uz saites!",
-            "CheckYourEmail": "Lūdzu, pārbaudiet savu e-pastu un izpildiet instrukcijas!"
-        }
-    },
-    "participating": {
-        "Title": "Nosaukums",
-        "Subscribed": "Abonēts",
-        "Participants": "Dalībnieki",
-        "AreYouSureRemoveIdentifier": "Vai tiešām noņemt šo identifikatoru?",
-        "AreYouSureUnsubscribeIdentifier": "Vai tiešām atteicāties no šī identifikatora abonēšanas? Tas izslēgs paziņojumus šim identifikatoram.",
-        "AreYouSureUnsubscribeDevice": "Vai tiešām atteicāties no šīs ierīces abonēšanas? Tas izslēgs paziņojumus šai ierīcei.",
-        "Identifiers": "Identifikatori",
-        "Devices": "Ierīces",
-        "Streams": "Straumes",
-        "AreYouSureRemoveParticipant": "Vai tiešām vēlaties noņemt šo dalībnieku?",
-        "RemoveParticipant": "Noņemt dalībnieku"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Iespējot mikrofonu",
-            "cameraTitle": "Iespējot kameru",
-            "cameraAndMicrophoneTitle": "Iespējot kameru un mikrofonu",
-            "dialogTitle": "Dialoga iespējošana",
-            "microphoneBtn": "Iespējot mikrofonu",
-            "cameraBtn": "Iespējot kameru",
-            "cameraAndMicrophoneBtn": "Iespējot kameru un mikrofonu"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Instrukcijas",
-            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
-            "point1": "Atveriet sadaļu &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Konfidencialitāte un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
-            "point2": "Noņemiet no saraksta “Bloķēt” {{hostname}}"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Instrukcijas",
-            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lūdzu, atkārtoti ielādējiet šo lapu un apstipriniet piekļuvi vietnei {{kind}}, lai pievienotos konferencei."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Instrukcijas",
-            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
-            "point1": "Atveriet savus Android iestatījumus",
-            "point2": "Atveriet lietotnes un paziņojumus.",
-            "point3": "Atrodiet “{{communityName}}” un atveriet to",
-            "point4": "Pieskarieties Atļaujas",
-            "point5": "Iespējot {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Instrukcijas",
-            "permissionDenied": "Vietnei {{kind}} nav atļauta. Lai to lietotu, lūdzu, rīkojieties šādi:",
-            "point1": "Atveriet iOS iestatījumus",
-            "point2": "Atveriet “Konfidencialitāte”",
-            "point3": "Atrodiet {{kind}} un atveriet to",
-            "point4": "Atrodiet “{{communityName}}” un iespējojiet"
-        },
-        "notices": {
-            "youJoinedRoom": "Jūs pievienojāties istabai",
-            "joining": "Pievienošanās: {{userName}}",
-            "sbLeftRoom": "{{userName}} atstāja istabu",
-            "youLeftRoom": "Jūs atstājāt istabu",
-            "codeCopied": "Jūs atstājāt istabu",
-            "sbBeganFbLive": "{{userName}} sāka pārraidīt šo zvanu Facebook",
-            "sbStoppedFbLive": "{{userName}} pārtrauca šī zvana pārraidi Facebook",
-            "youBeganFbLive": "Jūs sākāt šī zvana pārraidi Facebook",
-            "youStoppedFbLive": "Jūs pārtraucāt šī zvana pārraidi Facebook",
-            "linkCopiedToCb": "Saite kopēta starpliktuvē",
-            "codeCopiedToCb": "Kods nokopēts starpliktuvē",
-            "userHasNoVideo": "Dalībniekam nav video",
-            "openInBrowserAlert": "Lai pievienotos konferencei, pārlūkprogrammā Safari atveriet saiti.",
-            "youBeganVideoRecording": "Jūs sākāt ierakstīt šo konferenci",
-            "youStoppedVideoRecording": "Jūs pārtraucāt ierakstīt šo konferenci",
-            "switchingRoom": "Notiek telpu pārslēgšana ...",
-            "forceDisconnecting": "Jūs tiksit atvienots 5 sekunžu laikā",
-            "youStartedLive": "Jūs sākāt pārraidīt šo zvanu uz pielāgotu RTMP",
-            "youStoppedLive": "Jūs pārtraucāt pārraidīt šo zvanu uz pielāgotu RTMP",
-            "sbStartedLiveStreaming": "{{userName}} sāka tiešraidē",
-            "sbStoppedLiveStreaming": "{{userName}} beidzās tiešraidē",
-            "liveStopped": "Sūtot video uz galapunktu, radās kļūda",
-            "forceDisconnectingImmediately": "Jūs atvienoja saimnieks"
-        },
-        "settingsPopup": {
-            "webCamera": "Web kamera",
-            "screenSharing": "Ekrāna koplietošana",
-            "shareAnotherScreen": "Kopīgojiet citu ekrānu",
-            "turnOffCameras": "Izslēdziet visas kameras",
-            "startFBLive": "Sāciet Facebook tiešraidi",
-            "stopFBLive": "Pārtrauciet Facebook tiešraidi",
-            "fbLiveTitle": "Tiešraides nosaukums",
-            "fbLiveDescription": "Tiešraides apraksts",
-            "fbOnlyMeLiveAccess": "Tikai es",
-            "fbFriendsAccess": "Draugi",
-            "fbPublicAccess": "Publisks",
-            "fbStartLive": "Dodieties dzīvot",
-            "fbStopLive": "Beigt tiešraidi",
-            "fbEmbedCode": "Iegult",
-            "copy": "Kopēt",
-            "turnOffVideo": "Izslēdziet kameras \/ ekrāna kopīgošanu",
-            "turnOffScreenSharing": "Izslēdziet ekrāna kopīgošanu",
-            "cameraIsTurnedOff": "Kamera ir izslēgta",
-            "startRecording": "Sāciet ierakstīšanu",
-            "stopRecording": "Beigt ierakstīšanu",
-            "recordingInProgress": "Notiek ierakstīšana ...",
-            "publishOnTimeline": "Publicēt laika skalā",
-            "publishToGroup": "Publicēt grupā",
-            "turnOffAudioInput": "Izslēgt mikrofonu",
-            "micIsTurnedOff": "Mikrofons ir izslēgts",
-            "start": "Sākt",
-            "stop": "Apstāties",
-            "streamingSettings": "Iestatījumi",
-            "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
-            "dialogTitle": "Video iestatījumi",
-            "startBroadcasting": "Sāciet apraidi",
-            "broadcastingInProgress": "Notiek apraide"
-        },
-        "participantsPopup": {
-            "disconnect": "Atvienojiet",
-            "floatingScreens": "Peldošie ekrāni",
-            "tiledScreens": "Ekrāni ar flīzēm",
-            "loudestExceptMe": "Skaļāk, izņemot mani",
-            "maximizeLoudest": "Maksimizēt skaļākos",
-            "staticMaximized": "Statisks maksimizēts",
-            "manual": "Rokasgrāmata",
-            "turnOffCamera": "Slēpt video",
-            "turnOffAudio": "Izslēgt skaņu",
-            "turnOffScreenSharing": "Slēpt ekrāna kopīgošanu",
-            "turnOnCamera": "Rādīt video",
-            "turnOnAudio": "Ieslēgt skaņu",
-            "turnOnScreenSharing": "Rādīt ekrāna koplietošanu",
-            "fullScreen": "Pilnekrāna režīmā",
-            "dialogTitle": "Dalībnieka iestatījumi"
-        },
-        "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
-        "streamTitle": "{{1}} tiešais zvans",
-        "preview": {
-            "preamble": "Tikšanās:",
-            "Meeting": "Tikšanās",
-            "MeetingEnded": "Sapulce beigusies"
-        },
-        "preparing": {
-            "micIsOff": "Mikrofons ir izslēgts",
-            "micIsOn": "Mikrofons ir ieslēgts",
-            "cameraIsOff": "Kamera ir izslēgta",
-            "cameraIsOn": "Kamera ir ieslēgta",
-            "screenSharingIsOn": "Ekrāna kopīgošana ir ieslēgta",
-            "screenSharingIsOff": "Kopīgot ekrānu",
-            "joinNow": "Pievienojieties aicinājumam"
-        },
-        "audioSettings": {
-            "dialogTitle": "Audio iestatījumi",
-            "speakers": "Skaļruņi",
-            "microphone": "Mikrofons"
-        },
-        "streamingSettings": {
-            "title": "Straumēšanas iestatījumi"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "Aicināti",
-            "description": "Iesūtne ielūgumiem"
-        },
-        "Streams\/resource": {
-            "displayType": "Resurss",
-            "description": "straume, lai pārvaldītu piekļuvi resursam un nosūtītu ziņas par atjauninājumiem"
-        },
-        "Streams\/task": {
-            "displayType": "Uzdevums",
-            "description": "uzdevums, kas jāveic cilvēkiem vai mašīnām"
-        },
-        "Streams\/number": {
-            "displayType": "Skaits",
-            "description": "matemātiskais skaitlis"
-        },
-        "Streams\/date": {
-            "displayType": "Datums",
-            "description": "datums"
-        },
-        "Streams\/text": {
-            "displayType": "Teksts",
-            "description": "teksta pamatteksts"
-        },
-        "Streams\/text\/small": {
-            "displayType": "Teksts",
-            "description": "mazs teksta fragments"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "Teksts",
-            "description": "vidējs teksts"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "Epasta adrese",
-            "description": "epasta adrese"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "Telefona numurs",
-            "description": "telefona numurs"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL",
-            "description": "saite tīmeklī"
-        },
-        "Streams\/image": {
-            "displayType": "Attēls",
-            "description": "vizuālais tēls",
-            "newItem": "Pievienot attēlu"
-        },
-        "Streams\/images": {
-            "displayType": "Attēlu galerija",
-            "description": "attēlu galerija"
-        },
-        "Streams\/album": {
-            "displayType": "Albums",
-            "description": "albums, ar kuru saistīti dažādi mediji"
-        },
-        "Streams\/file": {
-            "displayType": "Fails",
-            "description": "augšupielādēts fails",
-            "newItem": "Pievienot failu"
-        },
-        "Streams\/audio": {
-            "displayType": "Audio klips",
-            "description": "audio klips",
-            "newItem": "Pievienot audio"
-        },
-        "Streams\/video": {
-            "displayType": "Videoklips",
-            "description": "videoklips",
-            "newItem": "Pievienot videoklipu"
-        },
-        "Streams\/live": {
-            "displayType": "Tiešraide",
-            "description": "dzīvs audio vai video"
-        },
-        "Streams\/category": {
-            "displayType": "Kategorija",
-            "description": "kategorija, ar kuru var saistīt citas straumes"
-        },
-        "Streams\/participating": {
-            "displayType": "Iesaistītais indekss",
-            "description": "straumes ir saistītas \/ nav saistītas ar to, kad lietotājs pievienojas \/ aiziet"
-        },
-        "Streams\/interest": {
-            "displayType": "Interese",
-            "description": "atspoguļo lietotāja interesi par noteiktu tēmu"
-        },
-        "Streams\/incoming": {
-            "displayType": "Ienākošie",
-            "description": "citu lietotāju nosūtīto ziņojumu mērķis"
-        },
-        "Streams\/chat": {
-            "displayType": "Saruna",
-            "description": "lietotāju saruna ar vēsturi"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Zvana reāllaikā",
-            "description": "reālā laika video \/ audio zvans"
-        },
-        "Streams\/tasks": {
-            "description": "kategorija uzdevumiem",
-            "displayType": "Uzdevumi"
-        },
-        "Streams\/experience": {
-            "description": "kopīga pieredze kopienas locekļiem",
-            "displayType": "Kopīga pieredze kopienas locekļiem"
-        },
-        "Streams\/greeting": {
-            "description": "sveiciens, ar kuru lietotājs var iepazīstināt sevi",
-            "displayType": "Sveiciens"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF dokuments",
-            "description": "PDF dokuments",
-            "newItem": "Pievienot PDF"
-        },
-        "Streams\/question": {
-            "displayType": "Jautājums",
-            "description": "jautājumu straume"
-        },
-        "Streams\/answer": {
-            "displayType": "Atbilde",
-            "description": "atbilžu straume"
-        },
-        "Streams\/calls": {
-            "displayType": "Zvani",
-            "description": "kategorija straumēm\/tīmekļa vietnei",
-            "MaxRelationsExceeded": "Pārsniegts maksimālais zvanu skaits"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "nosūtīja <em>{{message.fields.type}}<\/em> ziņojumu uz {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "komentēja",
-            "in": "iekšā",
-            "body": "{{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ir nosūtīts uz",
-                "byAvatar": "autors: {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ir jauns {{instructions.fromDisplayType}}",
-                "byAvatar": "pievienoja {{avatar.displayName}}"
-            },
-            "startedCallIn": "sāka sarunu"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "ierakstiet lapas virsrakstu",
-        "ModTab": "Modificēt vienumu",
-        "Save": "Saglabāt",
-        "Delete": "Dzēst",
-        "Submenu": "Apakšizvēlne"
-    },
-    "errors": {
-        "HiddenFromYou": "Šis saturs ir paslēpts no jums."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Ieraksts",
-        "reset": "Atiestatīt",
-        "edit": "Rediģēt",
-        "title": "nosaukums",
-        "description": "apraksts",
-        "upload": "Augšupielādēt",
-        "link": "Saite",
-        "setUrl": "Iestatīt URL",
-        "save": "Saglabāt",
-        "setClip": "Izgriezt klipu",
-        "invalidURL": "Nederīgs URL",
-        "invalidFile": "Nederīgs fails",
-        "errorNoSource": "Nav audio avota",
-        "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Atiestatīt",
-        "edit": "Rediģēt",
-        "title": "nosaukums",
-        "description": "apraksts",
-        "upload": "Augšupielādēt",
-        "link": "Saite",
-        "setUrl": "Iestatīt URL",
-        "save": "Saglabāt",
-        "setClip": "Izgriezt klipu",
-        "invalidURL": "Nederīgs URL",
-        "invalidFile": "Nederīgs fails",
-        "errorNoSource": "Nav video avota",
-        "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Atiestatīt",
-        "edit": "Rediģēt",
-        "title": "nosaukums",
-        "description": "apraksts",
-        "upload": "Augšupielādēt",
-        "link": "Saite",
-        "setUrl": "Iestatīt URL",
-        "save": "Saglabāt",
-        "setClip": "Izgriezt klipu",
-        "invalidURL": "Nederīgs URL",
-        "invalidFile": "Nederīgs fails",
-        "errorNoSource": "Nav pdf avota",
-        "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Atiestatīt",
-        "edit": "Rediģēt",
-        "title": "nosaukums",
-        "description": "apraksts",
-        "upload": "Augšupielādēt",
-        "link": "Saite",
-        "setUrl": "Iestatīt URL",
-        "save": "Saglabāt",
-        "setClip": "Izgriezt klipu",
-        "invalidURL": "Nederīgs URL",
-        "invalidFile": "Nederīgs fails",
-        "errorNoSource": "Nav attēla avota",
-        "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Diemžēl fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}",
-        "uploadedImage": "Augšupielādēts attēls",
-        "imageTitle": "Attēla nosaukums"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Jautājumi",
-        "Answers": "Atbildes",
-        "AnswerQuestion": "Atbildiet uz jautājumu",
-        "SetYourAnswer": "Lūdzu, atbildiet uz jautājumu",
-        "NewQuestion": "Jauns jautājums",
-        "NewAnswer": "Jauna atbilde",
-        "AnswerDetails": "Atbildes informācija",
-        "answerOption": "Opcija",
-        "answerOptionExclusive": "Ekskluzīvs",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "brīva atbilde ...",
-        "SaveQuestion": "Saglabāt jautājumu",
-        "SaveAnswer": "Saglabāt atbildi",
-        "AddAnotherAnswer": "Pievienojiet citu atbildi",
-        "ErrorAnswers": "Lūdzu, pievienojiet pat vienu atbildi",
-        "AlreadyAnswered": "Jau atbildēju",
-        "TitlePlaceholder": "Ierakstiet savu jautājumu",
-        "ContentPlaceholder": "Ievietojiet šeit papildu informāciju, lai palīdzētu cilvēkiem atbildēt",
-        "ErrorTitle": "Nepieciešams jautājums",
-        "Placeholder": "Vietturis"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Jauna pieredze",
-        "DefineTitle": "Lūdzu, definējiet nosaukumu",
-        "Create": "Izveidot"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Zvani",
-        "MaxCalls": "Maks. Zvani",
-        "Update": "Atjaunināt",
-        "NoCallsYet": "Zvanu vēl nav",
-        "CallReasonTitle": "Par ko ir šis aicinājums?",
-        "WaitingRoom": "Uzgaidāmā telpa"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

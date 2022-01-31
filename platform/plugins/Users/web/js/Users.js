@@ -345,7 +345,7 @@
 					// otherwise they might confuse our server-side authentication.
 					Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 					Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 				}
 			}, options.force ? true : false);
 		}, {
@@ -483,7 +483,7 @@
 		// multiple times on the same page, or because the page is reloaded
 		Q.cookie('Users_ignorePlatformXids_'+platform+"_"+platformAppId, xid);
 
-		var key = platform + "\t" + platformAppId;
+		var key = platform + "_" + platformAppId;
 		if (Users.loggedInUser && Users.loggedInUser.xids[key] == xid) {
 			// The correct user is already logged in.
 			// Call onSuccess but do not pass a user object -- the user didn't change.
@@ -526,7 +526,7 @@
 					// facebook authResponse. In this case, even though they want
 					// to authenticate, we must cancel it.
 					alert("Connection to facebook was lost. Try connecting again.");
-					_doCancel(null, platform, platformAppId, onSuccess, onCancel, options);
+					_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
 					return;
 				}
 				ar.expires = Math.floor(Date.now() / 1000) + ar.expiresIn;
@@ -570,7 +570,7 @@
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
-				return _doCancel(platform, platformAppId, onSuccess, onCancel, options);
+				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
@@ -1026,7 +1026,7 @@
 					// when authenticating, until it is forced
 					var xids = Q.getObject(['loggedInUser', 'xids'], Users) || {};
 					for (var key in xids) {
-						var parts = key.split("\t");
+						var parts = key.split("_");
 						Q.cookie('Users_ignorePlatformXids_'+parts.join('_'), xids[key]);
 					}
 					setTimeout(function () {
@@ -1219,33 +1219,36 @@
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
 	 */
 	Users.setIdentifier = function (options) {
-		var o = Q.extend({}, Users.setIdentifier.options, options);
-		var identifierType = Q.getObject("identifierType", o);
+		options = Q.extend({}, Users.setIdentifier.options, options);
+		var identifierType = Q.getObject("identifierType", options);
 		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
 
 		function onSuccess(user) {
-			if (false !== Q.handle(o.onResult, this, [user])) {
-				Q.handle(o.onSuccess, this, [user]);
+			if (false !== Q.handle(options.onResult, this, [user])) {
+				Q.handle(options.onSuccess, this, [user]);
 			}
 		}
 
 		function onCancel(scope) {
-			if (false !== Q.handle(o.onResult, this, [scope])) {
-				Q.handle(o.onCancel, this, [scope]);
+			if (false !== Q.handle(options.onResult, this, [scope])) {
+				Q.handle(options.onCancel, this, [scope]);
 			}
 		}
 
 		priv.setIdentifier_onSuccess = onSuccess;
 		priv.setIdentifier_onCancel = onCancel;
 
-		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
-			setIdentifier_setupDialog(identifierType, o);
-			var d = setIdentifier_setupDialog.dialog;
+		options.onActivate = function () {
+			var d = this;
 			if (d.css('display') === 'none') {
 				d.data('Q/dialog').load();
 			}
 			$('input[name="identifierType"]', d).val(identifierType);
 			$('input[name="identifier"]', d).val(identifier);
+		};
+
+		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
+			setIdentifier_setupDialog(identifierType, options);
 		});
 	};
 
@@ -1934,15 +1937,15 @@
 	}
 
 	function setIdentifier_setupDialog(identifierType, options) {
-		var options = options || {};
+		options = options || {};
 		var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
 		var type = Q.info.isTouchscreen ? 'email' : 'text';
 		var parts = identifierType ? identifierType.split(',') : [];
 		if (parts.length === 1) {
-			if (parts[0] == 'email') {
+			if (parts[0] === 'email') {
 				type = 'email';
 				placeholder = Q.text.Users.setIdentifier.placeholders.email;
-			} else if (parts[0] == 'mobile') {
+			} else if (parts[0] === 'mobile') {
 				type = 'tel';
 				placeholder = Q.text.Users.setIdentifier.placeholders.mobile;
 			}
@@ -1968,9 +1971,9 @@
 				)
 			)
 		).submit(function (event) {
-			var h = $('#Users_setIdentifier_identifier').outerHeight() - 5;
-			;
-			$('#Users_setIdentifier_identifier').css({
+			var $identifier = $('#Users_setIdentifier_identifier');
+			var h = $identifier.outerHeight() - 5;
+			$identifier.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
 				'background-repeat': 'no-repeat',
 				'background-position': 'right center',
@@ -1979,7 +1982,6 @@
 			var url = Q.action('Users/identifier') + '?' + $(this).serialize();
 			Q.request(url, 'data', setIdentifier_callback, {"method": "post"});
 			event.preventDefault();
-			return;
 		});
 		if (options.userId) {
 			step1_form.append($('<input />').attr({
@@ -2010,6 +2012,7 @@
 				var $input = $('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus');
 				setTimeout(function () {
 					$input.val('').trigger('change');
+					Q.handle(options.onActivate, dialog);
 				}, 0);
 			},
 			onClose: function () {
@@ -3973,11 +3976,6 @@
 			});
 		},
 
-		getChainId: function () {
-			var info = Q.getObject(['Q', 'Users', 'apps', 'web3', Q.info.app]);
-			return info.chainId || info.appId;
-		},
-
 		/**
 		 * Used get the currently selected address on current ethereum chain
 		 * @method getContract
@@ -4004,7 +4002,7 @@
 		 */
 		getLoggedInUserXid: function () {
 			var xids = Q.getObject('Q.Users.loggedInUser.xids');
-			var key = 'web3\t*';
+			var key = 'web3_all';
 			if (xids && xids[key]) {
 				return xids[key];
 			}

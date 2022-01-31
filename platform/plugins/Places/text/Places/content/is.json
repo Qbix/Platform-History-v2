@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} latneskur, {{2}} lng)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "innan {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metra",
-        "meters": "metrar",
-        "kilometer": "km",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "Míla",
-        "miles": "mílur",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "fótur",
-        "feet": "fætur",
-        "inches": "tommur"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Ég hef áhuga á hlutum sem eiga sér stað innan {{select}} af",
-        "update": "Uppfæra staðsetningu mína",
-        "prompt": "{{ClickOrTap}} hér til <br> stilltu þinn <br> staðsetning",
-        "myCurrentLocation": "Núverandi staðsetning mín",
-        "enterAddress": "Sláðu inn heimilisfang",
-        "enterPostcode": "Vinsamlegast sláðu inn póstnúmer \/ póstnúmer",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Bæta við staðsetningu",
-            "title": "Nýtt Staðsetning",
-            "nameYourLocation": "Gefðu upp staðsetningu þína"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Vista þessa staðsetningu?",
-            "message": "Ætlar þú að nota þennan stað aftur í framtíðinni?",
-            "ok": "Já",
-            "cancel": "Nr"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Nafn þessa staðsetningu",
-            "placeholder": "Heim, Vinna o.fl.",
-            "ok": "Vista"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Veldu staðsetningu"
-        },
-        "set": "Stilltu staðsetningu mína"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Einhver svæði innan þessa staðsetningar?",
-        "newArea": "Nýtt svæði",
-        "promptTitle": "Sláðu inn nafn svæðisins:",
-        "absent": "Vinsamlegast settu svæði",
-        "error": "Villa",
-        "exist": "Svæði er þegar til",
-        "addNewArea": "Bæta við nýju svæði",
-        "add": "Bæta við"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "safn staða",
-            "displayType": "Staðsetningar"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Táknar byggingu, vettvang, skip, almenningsgarð osfrv.",
-            "displayType": "Staðsetning"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Táknar svæði á stað, svo sem herbergi eða föruneyti",
-            "displayType": "Svæði"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Táknar hæð í byggingu eða skipi",
-            "displayType": "Gólf"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Táknar súlu í byggingu eða skipi",
-            "displayType": "Súlan"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Flokkaðu hluti eftir ákveðinni fjarlægð frá geohash",
-            "displayType": "Nálægt eftir stöðum"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Flokkaðu hluti eftir ákveðinni fjarlægð frá geohash, sem samsvarar áhuga",
-            "displayType": "Staðir vekja áhuga"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

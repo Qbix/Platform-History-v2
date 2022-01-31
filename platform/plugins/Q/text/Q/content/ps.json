@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "تېروتنه {{status}} د غوښتنې پرمهال",
-        "canceled": "غوښتنه رد شوی",
-        "500": "داخلي سرور تېروتنه",
-        "404": "ونه موندل شو: {9 9}}}",
-        "501": "غوښتنه نده شوې"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "ناسته پای ته ورسیده. پاڼه تازه کړه او بیا هڅه وکړئ.",
-        "otherDomain": "په عمومي {{baseUrl}} کې د ډومین ډوم ډومین غوښتنه غوښتنه شوې"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ټوپ کړئ",
-        "click": "ټک وکړئ",
-        "yes": "هو",
-        "no": "نه",
-        "Tap": "ټپ",
-        "Click": "ټک وکړئ",
-        "Yes": "هو",
-        "No": "نه"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "جنوري",
-        "2": "فبروري",
-        "3": "مارچ",
-        "4": "اپریل",
-        "5": "می",
-        "6": "جون",
-        "7": "جولای",
-        "8": "اګست",
-        "9": "سپتمبر",
-        "10": "اکتوبر",
-        "11": "نومبر",
-        "12": "دسمبر"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "مهرباني وکړئ خپل مایکروفون ته لاسرسی ومومئ",
-        "record": "ریکارډ",
-        "recording": "ریکارډ",
-        "remains": "پاتې دی",
-        "maximum": "لوړ",
-        "playing": "لوبه کول",
-        "recorded": "ثبت شوی",
-        "clip": "کلیپ",
-        "orupload": "یا اپارتمان",
-        "usethis": "دا کارول",
-        "discard": "رد کړئ",
-        "encoding": "کوډونې"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "خبرتیا"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "تایید کړئ",
-        "ok": "هو",
-        "cancel": "نه"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "ژمنھ کړئ",
-        "ok": "لاړ شه"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "د دوتنې لوستلو تېروتنه",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "څه غواړې چې وکړې؟",
-            "photo": "نوی عکس واخلئ",
-            "library": "د کتابتون څخه غوره کړه"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "لطفا لوی عکس غوره کړئ.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "اندازه او موقف ترتیب کړئ",
-            "touchscreen": "د ځوړولو او ځغلولو لپاره خپلې ګوتې وکارئ",
-            "notTouchscreen": "د زوم او ټوپ کولو لپاره خپل مایع او څیر کاروئ"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "تېره شپه",
-        "lastEvening": "اخري ورځ",
-        "yesterday": "پرون",
-        "thisMorning": "دا سهار",
-        "today": "نن",
-        "tonight": "نن شپه",
-        "tomorrowMorning": "نن سهار",
-        "tomorrow": "سبا",
-        "hoursAgo": "{9 999}} ساعتونه مخکې",
-        "hourAgo": "} 9 999}} ساعت مخکې",
-        "minuteAgo": "} 9 999}} دقیقه مخکې",
-        "minutesAgo": "} 9 999}} دقیقې دمخه",
-        "secondAgo": "} 9 999}} دوهم دمخه",
-        "secondsAgo": "{9 999}} ثانیې مخکې",
-        "fewSecondsAgo": "ثانیې مخکې",
-        "rightNow": "همدا اوس",
-        "inSecond": "په {9 999}} دوهم کې",
-        "inSeconds": "په {9 999}} ثانیو کې",
-        "inMinute": "په {9 999}} دقیقه کې",
-        "inMinutes": "په {9 999}} دقیقو کې",
-        "inHour": "په {9 999}} ساعت کې",
-        "inHours": "په {9 999}} ساعتونو کې",
-        "inUnderMinute": "د 1 دقیقو لاندې"
-    },
-    "video": {
-        "clip": "کليپ",
-        "errorNoSource": "نه د ویډیو سرچینه",
-        "SkipAfter": "وروسته پرېښودل",
-        "Skip": "پرېښودل"
-    },
-    "pdf": {
-        "clip": "کليپ",
-        "errorNoSource": "د پی ډي ایف سرچینه نشته"
-    },
-    "clip": {
-        "SetClipStart": "کليپ پيل وټاکه",
-        "ClipStart": "کليپ پيل",
-        "SetClipEnd": "کليپ پای وټاکه",
-        "ClipEnd": "کليپ پای",
-        "StartMoreEnd": "د پیل موقعیت د پای موقعیت څخه ډیر نشي کیدی",
-        "EndLessStart": "د پای موقعیت د پیل موقعیت څخه کم کیدی نشي",
-        "WhichInvalid": "دلیل &#39;کوم&#39; باطل دی"
-    },
-    "tabs": {
-        "more": "نور",
-        "Menu": "مینو"
-    },
-    "durations": {
-        "second": "دوهم",
-        "seconds": "ثانیې",
-        "minute": "دقیقه",
-        "minutes": "دقیقې",
-        "hour": "ساعتونه",
-        "day": "ورځ",
-        "days": "ورځې",
-        "week": "اونۍ",
-        "weeks": "اونۍ",
-        "month": "میاشت",
-        "months": "میاشتې",
-        "year": "کال",
-        "years": "کلونه",
-        "decade": "لسيزه",
-        "decades": "لسیزې",
-        "century": "پیړۍ",
-        "centuries": "پېړۍ"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

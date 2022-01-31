@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Logare",
-        "LogOut": "ieșiți"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Setați {{1}} ca principalul meu {{2}}",
-        "ChoosePassPhrase": "Alegeți o <strong>expresie de acces<\/strong> pentru a vă conecta. <br> O simplă expresie constând din câteva cuvinte pe care le veți aminti cu ușurință.",
-        "ChoosePassPhraseSeeSuggestions": "Alegeți o <strong>expresie<\/strong> bună pentru a vă proteja contul. Vedeți sugestiile pentru câteva idei.",
-        "LogOutAndTryAgain": "Deconectați-vă și încercați din nou",
-        "IfYouFeel": "Dacă simțiți că ceva a mers prost, puteți",
-        "SetIdentifierButtonTitle": "începe peste"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Incepe"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Incepe",
-        "Authorize": "Autoriza",
-        "TermsLabel": "Am citit și sunt de acord <br> la {{link}}",
-        "TermsTitle": "Termeni",
-        "mustAgree": "În primul rând, trebuie să fiți de acord cu termenii."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Accept din {{link}}",
-        "TermsTitle": "Termeni"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permisiune",
-        "prompt": "Doriți să activați notificările? Veți primi actualizări în timp real despre lucrurile care vă interesează.",
-        "yes": "da",
-        "no": "Nu",
-        "WelcomePleaseVerifyEmail": "Bine ati venit! Vă rog să vă verificați adresa de email.",
-        "WelcomeVerifyEmail": "Bine ati venit! Verifică-ți adresa de email.",
-        "ForgetPass": "Hei, ai uitat expresia ta de acces?",
-        "PassphraseSaved": "Fraza dvs. de trecere a fost salvată.",
-        "IdentifierActivated": "{{type}} a fost activat.",
-        "CompletedActivation": "Ați finalizat activarea utilizatorului.",
-        "CompletedActivationLogIn": "Ați finalizat activarea utilizatorului. Încercați să vă autentificați acum."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Selectați eticheta.",
-        "inviteUser": "Invitați utilizatorul",
-        "selectRole": "Selectați rolul",
-        "inviteRole": "Invitați {{role}}"
-    },
-    "invalidLanguageSelected": "Limba nevalidă selectată",
     "contacts": {
         "dialog": {
-            "title": "Alegeți o persoană de contact",
-            "SearchByName": "Cauta dupa nume",
-            "CreateAccount": "+ Contact nou",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nu a fost găsit",
-            "EmptyContacts": "Contacte nu au fost găsite ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Selectați persoana de contact din {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Bine ati venit",
-        "directions": "Creați un cont sau conectați-vă.",
-        "directionsNoRegister": "Conectați-vă dacă aveți un cont.",
-        "goButton": "Merge",
-        "passphrase": "Introduceți fraza de trecere:",
-        "loginButton": "Incepe",
-        "registerButton": "Incepe",
-        "resendButton": "Trimite mesaj de activare",
-        "forgot": "Am uitat asta?",
-        "resendConfirm": "Doriți să trimiteți un mesaj pentru a vă reseta fraza de acces?",
-        "resendSuccess": "Căutați un mesaj pentru a vă reseta parola",
-        "resendClose": "Închide",
-        "noPassphrase": "Înainte de a vă autentifica, trebuie să setați o frază de acces făcând clic pe linkul din mesajul de activare.",
-        "notVerified": "Trebuie să vă trimiteți un mesaj de activare pentru a vă autentifica.",
-        "emailExists": "Ați încercat să vă înregistrați cu acest e-mail înainte? Dacă da, verificați inbox-ul pentru a vă activa contul. <a href='#resend' class='Q_button Users_activation_resend'>Faceți clic pentru a trimite din nou mesajul<\/a>",
-        "mobileExists": "Ai mai încercat să te înregistrezi cu acest număr de telefon mobil? Dacă da, verificați SMS-ul pentru a vă activa contul. <a href='#resend' class='Q_button Users_activation_resend'>Faceți clic pentru a trimite din nou mesajul<\/a>",
-        "usingOther": "sau puteți",
-        "prompt": "Alege un nume de utilizator:",
-        "newUser": "sau creați un cont nou mai jos",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "numărul de telefon mobil sau e-mailul",
-            "mobile": "introduceți numărul dvs. de telefon mobil",
-            "email": "introduceți adresa dvs. de e-mail",
-            "username": "nume de utilizator"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Acceptați Termenii de serviciu?",
-        "facebookNoEmail": "Din contul dvs. de Facebook lipsește o adresă de e-mail confirmată. Pur și simplu autentificați-vă în modul nativ.",
-        "picTooltip": "Puteți schimba această imagine mai târziu",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Conectați-vă la {{host}} la ora {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Redirecționare către Wallet",
-                "content": "După ce închideți acest dialog, veți fi direcționat către portofelul dvs. După ce vă conectați, reveniți la această pagină."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Adăugați o modalitate de a vă autentifica",
-        "sendMessage": "Trimite mesaj de activare",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "introduceți numărul mobil sau e-mailul dvs.",
-            "mobile": "Introdu numărul tău de telefon",
-            "email": "introduceți adresa dvs. de e-mail",
-            "username": "nume de utilizator"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Cont",
-        "areUsing": "Folosiți {{platform}} ca",
-        "noLongerUsing": "Nu mai sunteți conectat la {{platform}} as",
-        "doAuth": "Conectați-vă cu acest cont",
-        "doSwitch": "Treceți la acest cont"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Proprietar",
-        "Admin": "admin",
-        "Member": "Membru",
-        "Guest": "Oaspete",
-        "Host": "Gazdă"
-    },
-    "analytics": {
-        "Title": "Analize",
-        "Daily": "Zilnic",
-        "Weekly": "Săptămânal",
-        "Monthly": "Lunar",
-        "Application": "Cerere",
-        "Pages": "Pagini",
-        "Services": "Servicii",
-        "Faq": "FAQ",
-        "WeekDays": "Zilele saptamanii"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

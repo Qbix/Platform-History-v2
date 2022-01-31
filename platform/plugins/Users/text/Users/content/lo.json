@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ເຂົ້າ​ສູ່​ລະ​ບົບ",
-        "LogOut": "ອອກ​ຈາກ​ລະ​ບົບ"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "ຕັ້ງ {{1}} ເປັນປະຖົມ {{2}} ຂອງຂ້ອຍ",
-        "ChoosePassPhrase": "ເລືອກ <strong>ປະໂຫຍກທີ່ຜ່ານມາ<\/strong> ເພື່ອເຂົ້າສູ່ລະບົບດ້ວຍ. <br> ປະໂຫຍກທີ່ງ່າຍດາຍປະກອບດ້ວຍຄໍາສັບຕ່າງໆທີ່ທ່ານຈະສາມາດຈົດຈໍາໄດ້ຢ່າງງ່າຍດາຍ.",
-        "ChoosePassPhraseSeeSuggestions": "ເລືອກ <strong>ປະໂຫຍກ<\/strong> ທີ່ດີເພື່ອປົກປ້ອງບັນຊີຂອງທ່ານ. ເບິ່ງຄໍາແນະນໍາສໍາລັບບາງຄໍາແນະນໍາ.",
-        "LogOutAndTryAgain": "ອອກຈາກແລະພະຍາຍາມອີກເທື່ອຫນຶ່ງ",
-        "IfYouFeel": "ຖ້າທ່ານຮູ້ສຶກບາງສິ່ງບາງຢ່າງທີ່ຜິດພາດ, ທ່ານສາມາດເຮັດໄດ້",
-        "SetIdentifierButtonTitle": "ເລີ່ມຕົ້ນຫຼາຍກວ່າ"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "ເລີ່ມ​ຕົ້ນ"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "ເລີ່ມ​ຕົ້ນ",
-        "Authorize": "ອະນຸຍາດ",
-        "TermsLabel": "ຂ້າພະເຈົ້າໄດ້ອ່ານແລະຕົກລົງເຫັນດີ <br> ກັບ {{link}}",
-        "TermsTitle": "ຂໍ້ກໍານົດ",
-        "mustAgree": "ທຳ ອິດທ່ານຕ້ອງຕົກລົງກັບຂໍ້ ກຳ ນົດ."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "ຂ້ອຍຍອມຮັບ {{link}}",
-        "TermsTitle": "ຂໍ້ກໍານົດ"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "ການອະນຸຍາດ",
-        "prompt": "ທ່ານຕ້ອງການເປີດການແຈ້ງເຕືອນບໍ? ທ່ານຈະໄດ້ຮັບການປັບປຸງເວລາທີ່ແທ້ຈິງກ່ຽວກັບສິ່ງທີ່ທ່ານສົນໃຈ.",
-        "yes": "ແມ່ນແລ້ວ",
-        "no": "ບໍ່ມີ",
-        "WelcomePleaseVerifyEmail": "ຍິນດີຕ້ອນຮັບ! ກະລຸນາກວດສອບອີເມວຂອງທ່ານ.",
-        "WelcomeVerifyEmail": "ຍິນດີຕ້ອນຮັບ! ຢືນ​ຢັນ​ທີ່​ຢູ່​ອີ​ເມວ​ຂອງ​ທ່ານ.",
-        "ForgetPass": "Hey, ທ່ານລືມລະຫັດຜ່ານຂອງທ່ານບໍ?",
-        "PassphraseSaved": "ປະໂຫຍກຜ່ານຂອງທ່ານຖືກບັນທຶກແລ້ວ.",
-        "IdentifierActivated": "{{type}} ຂອງທ່ານໄດ້ຖືກເປີດໃຊ້ງານແລ້ວ.",
-        "CompletedActivation": "ທ່ານໄດ້ ສຳ ເລັດການເປີດໃຊ້ງານຂອງຜູ້ໃຊ້ແລ້ວ.",
-        "CompletedActivationLogIn": "ທ່ານໄດ້ ສຳ ເລັດການເປີດໃຊ້ງານຂອງຜູ້ໃຊ້ແລ້ວ. ລອງເຂົ້າສູ່ລະບົບດຽວນີ້."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "ເລືອກຕິດຕໍ່",
-            "CreateAccount": "+ ຕິດຕໍ່ ໃໝ່",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ບໍ່ພົບ",
-            "SearchByName": "ຄົ້ນຫາຕາມຊື່",
-            "EmptyContacts": "ບໍ່ພົບລາຍຊື່ຜູ້ຕິດຕໍ່ ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "ເລືອກທີ່ຕິດຕໍ່ຂອງ {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "ກະລຸນາເລືອກເອົາປ້າຍຊື່.",
-        "inviteUser": "Invite User",
-        "selectRole": "ເລືອກພາລະບົດບາດ",
-        "inviteRole": "ເຊີນເຂົ້າຮ່ວມ {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "ພາສາບໍ່ຖືກຕ້ອງທີ່ເລືອກ",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "ຍິນດີຕ້ອນຮັບ",
-        "directions": "ສ້າງບັນຊີ, ຫລືເຂົ້າສູ່ລະບົບ.",
-        "directionsNoRegister": "ເຂົ້າສູ່ລະບົບຖ້າທ່ານມີບັນຊີ.",
-        "goButton": "ໄປ",
-        "passphrase": "ກະລຸນາໃສ່ປະໂຫຍກຜ່ານຂອງທ່ານ:",
-        "loginButton": "ເລີ່ມ​ຕົ້ນ",
-        "registerButton": "ເລີ່ມ​ຕົ້ນ",
-        "resendButton": "ສົ່ງຂໍ້ຄວາມກະຕຸ້ນ",
-        "forgot": "ລືມມັນແລ້ວ?",
-        "resendConfirm": "ທ່ານຕ້ອງການສົ່ງຂໍ້ຄວາມເພື່ອຕັ້ງ ຄຳ ສັບຂອງທ່ານຄືນ ໃໝ່ ບໍ?",
-        "resendSuccess": "ກວດເບິ່ງຂໍ້ຄວາມເພື່ອປັບລະຫັດຜ່ານຂອງທ່ານ",
-        "resendClose": "ປິດ",
-        "noPassphrase": "ກ່ອນທີ່ທ່ານຈະເຂົ້າສູ່ລະບົບ, ທ່ານຕ້ອງຕັ້ງປະໂຫຍກຜ່ານໂດຍການກົດປຸ່ມເຊື່ອມຕໍ່ໃນຂໍ້ຄວາມເປີດໃຊ້ຂອງທ່ານ.",
-        "notVerified": "ທ່ານຕ້ອງສົ່ງຂໍ້ຄວາມເປີດໃຊ້ເພື່ອຕົວເອງ.",
-        "emailExists": "ທ່ານໄດ້ພະຍາຍາມລົງທະບຽນກັບອີເມວນີ້ກ່ອນບໍ? ຖ້າເປັນດັ່ງນັ້ນ, ໃຫ້ກວດເບິ່ງກ່ອງຈົດ ໝາຍ ຂອງທ່ານເພື່ອເປີດບັນຊີຂອງທ່ານ. <a href='#resend' class='Q_button Users_activation_resend'>ກົດເພື່ອສົ່ງຂໍ້ຄວາມຄືນ ໃໝ່<\/a>",
-        "mobileExists": "ທ່ານໄດ້ພະຍາຍາມລົງທະບຽນກັບເບີໂທລະສັບມືຖືນີ້ກ່ອນບໍ? ຖ້າເປັນດັ່ງນັ້ນ, ກວດເບິ່ງ SMS ຂອງທ່ານເພື່ອເປີດບັນຊີຂອງທ່ານ. <a href='#resend' class='Q_button Users_activation_resend'>ກົດເພື່ອສົ່ງຂໍ້ຄວາມຄືນ ໃໝ່<\/a>",
-        "usingOther": "ຫຼືທ່ານສາມາດເຮັດໄດ້",
-        "prompt": "ເລືອກ​ຊື່​ຜູ້​ໃຊ້:",
-        "newUser": "ຫຼືສ້າງບັນຊີ ໃໝ່",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "ໂທລະສັບມືຖື # ຫຼືອີເມວຂອງທ່ານ",
-            "mobile": "ໃສ່ໂທລະສັບມືຖືຂອງທ່ານ #",
-            "email": "ກະລຸນາໃສ່ທີ່ຢູ່ອີເມວຂອງທ່ານ",
-            "username": "ຊື່ຜູ້ໃຊ້"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "ຍອມຮັບເງື່ອນໄຂການໃຫ້ບໍລິການບໍ?",
-        "facebookNoEmail": "ບັນຊີ facebook ຂອງທ່ານຂາດທີ່ຢູ່ອີເມວທີ່ຖືກຢືນຢັນ. ພຽງແຕ່ເຂົ້າໃນແບບພື້ນເມືອງ.",
-        "picTooltip": "ທ່ານສາມາດປ່ຽນຮູບນີ້ໄດ້ໃນພາຍຫລັງ",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "ເຂົ້າສູ່ລະບົບ {{host}} ໃນເວລາ {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "ກຳ ລັງປ່ຽນເສັ້ນທາງໄປຫາ Wallet",
-                "content": "ເມື່ອເຈົ້າປິດກ່ອງໂຕ້ຕອບນີ້, ເຈົ້າຈະຖືກພາໄປຫາກະເປົາເງິນຂອງເຈົ້າ. ຫຼັງຈາກເຈົ້າເຂົ້າສູ່ລະບົບແລ້ວ, ກັບຄືນຫາ ໜ້າ ນີ້."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "ເພີ່ມວິທີການເຂົ້າສູ່ລະບົບ",
-        "sendMessage": "ສົ່ງຂໍ້ຄວາມກະຕຸ້ນ",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "ໃສ່ໂທລະສັບມືຖື # ຫຼືອີເມວຂອງທ່ານ",
-            "mobile": "ໃສ່ເບີໂທລະສັບມືຖືຂອງທ່ານ",
-            "email": "ກະລຸນາໃສ່ທີ່ຢູ່ອີເມວຂອງທ່ານ",
-            "username": "ຊື່ຜູ້ໃຊ້"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} ບັນຊີ",
-        "areUsing": "ທ່ານ ກຳ ລັງໃຊ້ {{platform}} ຄື",
-        "noLongerUsing": "ທ່ານບໍ່ໄດ້ເຊື່ອມຕໍ່ກັບ {{platform}} ແລ້ວ",
-        "doAuth": "ເຂົ້າສູ່ລະບົບດ້ວຍບັນຊີນີ້",
-        "doSwitch": "ປ່ຽນໄປໃຊ້ບັນຊີນີ້"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "ເຈົ້າຂອງ",
-        "Admin": "ບໍລິຫານ",
-        "Member": "ສະມາຊິກ",
-        "Guest": "ແຂກ",
-        "Host": "ເຈົ້າພາບ"
-    },
-    "analytics": {
-        "Title": "ການວິເຄາະ",
-        "Daily": "ປະຈໍາວັນ",
-        "Weekly": "ປະຈໍາອາທິດ",
-        "Monthly": "ປະຈໍາເດືອນ",
-        "Application": "ຄໍາຮ້ອງສະຫມັກ",
-        "Pages": "ໜ້າ",
-        "Services": "ການບໍລິການ",
-        "Faq": "ຄຳ ຖາມທີ່ຖາມເລື້ອຍ",
-        "WeekDays": "ວັນອາທິດ"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

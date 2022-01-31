@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "പ്രമോട്ടുചെയ്യാനുള്ള ലിങ്ക്",
-                "startDate": "ആരംഭിക്കുന്ന തീയതി",
-                "startTime": "ആരംഭ സമയം",
-                "endDate": "അവസാന ദിവസം",
-                "endTime": "അവസാന സമയം",
-                "budget": "ബജറ്റ്"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "പലിശ പ്രകാരം ഫിൽട്ടർ ചെയ്യുക",
-                "FilterInterests": "ഒരു പലിശ ടൈപ്പ് ചെയ്യാൻ തുടങ്ങുക ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "പലിശ",
-            "Location": "സ്ഥാനം"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "പോകൂ",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "ബ്രൗസ് ചെയ്യുക",
-            "WriteToStartConversation": "സംഭാഷണം ആരംഭിക്കാൻ നിങ്ങളുടെ ചിന്തകൾ എഴുതുക",
-            "StartConversation": "സംഭാഷണം ആരംഭിക്കുക",
-            "GotoConversation": "സംഭാഷണത്തിലേക്ക് പോകുക",
-            "reset": "റീസെറ്റ് ചെയ്യുക",
-            "edit": "എഡിറ്റ് ചെയ്യുക",
-            "link": "ലിങ്ക്",
-            "setUrl": "URL സജ്ജമാക്കുക",
-            "save": "രക്ഷിക്കും",
-            "setClip": "ക്ലിപ്പ് മുറിക്കുക",
-            "invalidURL": "അസാധുവായ URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "കാഷെ ചെയ്യാൻ ഫയൽ വളരെ വലുതാണ്. പരമാവധി ഫയൽ വലുപ്പം {{size}}",
-        "InvalidPDF": "ഫയൽ ഒരു സാധുവായ PDF അല്ല",
-        "StartTypingTitleOrKeywords": "ശീർഷകം അല്ലെങ്കിൽ കീവേഡുകൾ ടൈപ്പുചെയ്യാൻ ആരംഭിക്കുക ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "വിവിധ ഉപയോക്താക്കൾക്ക് കാണാനും എഡിറ്റുചെയ്യാനും കഴിയുന്ന ഒരു HTML പ്രമാണം",
-            "displayType": "ലേഖനം"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "അവതരണത്തിലെ ഒരു സ്ലൈഡിൽ HTML, ഓഡിയോ തുടങ്ങിയവ ഉൾപ്പെടുത്താം.",
-            "displayType": "സ്ലൈഡ്"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "വിവിധ സ്ലൈഡുകൾ അടങ്ങുന്ന അവതരണം",
-            "displayType": "അവതരണം"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "ഒരു വെബ്സൈറ്റിലെ ഒരു പരസ്യ യൂണിറ്റ്",
-            "displayType": "പരസ്യ യൂണിറ്റ്"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "ഒരു പേരിൽ പരസ്യ യൂണിറ്റുകൾ ഗ്രൂപ്പുചെയ്യുന്നതിനുള്ള ഒരു മാർഗ്ഗം",
-            "displayType": "പ്ലേസ്മെന്റ് പരസ്യം ചെയ്യുക"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "ഒരു പരസ്യത്തിനുള്ള ഉള്ളടക്കം",
-            "displayType": "സൃഷ്ടിപരമായ പരസ്യം"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "ഒരു പരസ്യ പ്രചാരണം",
-            "displayType": "പരസ്യ പ്രചാരണം"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "മെറ്റാഡാറ്റ സ്ക്രാപ്പ് ചെയ്ത ഒരു വെബ്സൈറ്റിനെ പ്രതിനിധീകരിക്കുന്നു",
-            "displayType": "വെബ് പേജ്"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

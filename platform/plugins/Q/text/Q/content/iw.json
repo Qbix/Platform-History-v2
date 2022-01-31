@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "שגיאה {{status}} במהלך הבקשה",
-        "canceled": "הבקשה בוטלה",
-        "500": "שגיאת שרת פנימית",
-        "404": "לא נמצא: {{url}}",
-        "501": "הבקשה הופסקה"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "פג תוקף הפעילות באתר. רענן את הדף ונסה שוב.",
-        "otherDomain": "בקשה לחסימה בין תחומים לדומיין זר בכתובת {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "הקש על",
-        "click": "לחץ על",
-        "yes": "כן",
-        "no": "לא",
-        "Tap": "הקש על",
-        "Click": "לחץ על",
-        "Yes": "כן",
-        "No": "לא"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ינואר",
-        "2": "פברואר",
-        "3": "מרץ",
-        "4": "אפריל",
-        "5": "מאי",
-        "6": "יוני",
-        "7": "יולי",
-        "8": "אוגוסט",
-        "9": "ספטמבר",
-        "10": "אוקטובר",
-        "11": "נובמבר",
-        "12": "דצמבר"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "אפשר גישה למיקרופון שלך",
-        "record": "תקליט",
-        "recording": "הקלטה",
-        "remains": "נשאר",
-        "maximum": "מקסימום",
-        "playing": "משחק",
-        "recorded": "הוקלט",
-        "clip": "קליפ",
-        "orupload": "או העלה",
-        "usethis": "השתמש בזה",
-        "discard": "להשליך",
-        "encoding": "קידוד"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "התראה"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "אשר",
-        "ok": "כן",
-        "cancel": "לא"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "הפקודה",
-        "ok": "ללכת"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "שגיאה בקריאת הקובץ",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "מה תרצה לעשות?",
-            "photo": "צלם תמונה חדשה",
-            "library": "בחר מתוך הספרייה"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "בחר תמונה גדולה יותר.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "כוונן את הגודל ואת המיקום",
-            "touchscreen": "השתמש באצבעות כדי להגדיל ולגרור",
-            "notTouchscreen": "השתמש בעכבר &amp; גלגל כדי להגדיל ולגרור"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "אתמול בלילה",
-        "lastEvening": "ערב אחרון",
-        "yesterday": "אתמול",
-        "thisMorning": "הבוקר הזה",
-        "today": "היום",
-        "tonight": "היום בלילה",
-        "tomorrowMorning": "טום מורן",
-        "tomorrow": "מחר",
-        "hoursAgo": "לפני {{h}} שעות",
-        "hourAgo": "לפני {{h}} שעה",
-        "minuteAgo": "לפני {{m}} דקה",
-        "minutesAgo": "לפני {{m}} דקות",
-        "secondAgo": "לפני {{s}} שנייה",
-        "secondsAgo": "לפני {{s}} שניות",
-        "fewSecondsAgo": "לפני שניות",
-        "rightNow": "עכשיו",
-        "inSecond": "בעוד {{s}} שנייה",
-        "inSeconds": "תוך {{s}} שניות",
-        "inMinute": "תוך {{m}} דקה",
-        "inMinutes": "תוך {{m}} דקות",
-        "inHour": "תוך {{h}} שעה",
-        "inHours": "בעוד {{h}} שעות",
-        "inUnderMinute": "תוך פחות מדקה"
-    },
-    "video": {
-        "clip": "לְקַצֵץ",
-        "errorNoSource": "אין מקור וידאו",
-        "SkipAfter": "דלג אחרי",
-        "Skip": "לדלג"
-    },
-    "pdf": {
-        "clip": "לְקַצֵץ",
-        "errorNoSource": "אין מקור pdf"
-    },
-    "clip": {
-        "SetClipStart": "הגדר את התחלת הקליפ",
-        "ClipStart": "התחל קליפ",
-        "SetClipEnd": "הגדר את סוף הקליפ",
-        "ClipEnd": "סוף קליפ",
-        "StartMoreEnd": "עמדת התחלה לא יכולה להיות יותר מעמדת הסיום",
-        "EndLessStart": "מיקום הסיום לא יכול להיות פחות ממיקום ההתחלה",
-        "WhichInvalid": "הטיעון &#39;אשר&#39; אינו חוקי"
-    },
-    "tabs": {
-        "more": "יותר",
-        "Menu": "תַפרִיט"
-    },
-    "durations": {
-        "second": "שְׁנִיָה",
-        "seconds": "שניות",
-        "minute": "דַקָה",
-        "minutes": "דקות",
-        "hour": "שעה (ות",
-        "day": "יְוֹם",
-        "days": "ימים",
-        "week": "שָׁבוּעַ",
-        "weeks": "שבועות",
-        "month": "חוֹדֶשׁ",
-        "months": "חודשים",
-        "year": "שָׁנָה",
-        "years": "שנים",
-        "decade": "עָשׂוֹר",
-        "decades": "עשרות שנים",
-        "century": "מֵאָה",
-        "centuries": "מאות שנים"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

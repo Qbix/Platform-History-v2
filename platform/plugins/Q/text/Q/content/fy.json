@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Flater {{status}} by fersyk",
-        "canceled": "Fersyk annulearre",
-        "500": "Ynterne server error",
-        "404": "Net fûn: {{url}}",
-        "501": "Fersyk ûnderbrekke"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesje ferrûn. Ferfarskje de side en besykje it nochris.",
-        "otherDomain": "Blokkearre cross-domain request nei bûtenlânske domein by {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "taap",
-        "click": "klikke",
-        "yes": "Ja",
-        "no": "Nee",
-        "Tap": "Taap",
-        "Click": "Klik op",
-        "Yes": "Ja",
-        "No": "Nee"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "jannewaris",
-        "2": "febrewaris",
-        "3": "maart",
-        "4": "april",
-        "5": "Meie",
-        "6": "juny",
-        "7": "july",
-        "8": "augustus",
-        "9": "spetimber",
-        "10": "oktober",
-        "11": "novimber",
-        "12": "desimber"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Meitsje tagong ta jo mikrofoan",
-        "record": "Opnimme",
-        "recording": "Opname",
-        "remains": "oerbliuwsel",
-        "maximum": "maksimum",
-        "playing": "Spylje",
-        "recorded": "Opnommen",
-        "clip": "klip",
-        "orupload": "Of upload",
-        "usethis": "Brûk dit",
-        "discard": "Untwerp",
-        "encoding": "Kodearring"
-    },
-    "alert": {
-        "title": "Alarmearje"
-    },
-    "confirm": {
-        "title": "Befêstigje",
-        "ok": "Ja",
-        "cancel": "Nee"
-    },
-    "prompt": {
-        "title": "Prompt",
-        "ok": "Rinne"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Flater by lêzen fan triem",
-        "cameraCommands": {
-            "prompt": "Wat soesto dwaan wolle?",
-            "photo": "Nim nije foto",
-            "library": "Selektearje út bibleteek"
-        },
-        "tooSmall": "Kies in gruttere ôfbylding.",
-        "cropping": {
-            "title": "Grutte en posysje oanpasse",
-            "touchscreen": "Brûk jo fingeren om te ferpleatsen en te ferpleatsen",
-            "notTouchscreen": "Brûk jo mûs &amp; rol om te ferpleatsen en te ferpleatsen"
-        }
-    },
-    "timestamp": {
-        "lastNight": "justerjûn",
-        "lastEvening": "lêste foarjûn",
-        "yesterday": "juster",
-        "thisMorning": "dizze moarn",
-        "today": "hjoed",
-        "tonight": "fannacht",
-        "tomorrowMorning": "tom moarn",
-        "tomorrow": "moarn",
-        "hoursAgo": "{{h}} oeren lyn",
-        "hourAgo": "{{h}} oere lyn",
-        "minuteAgo": "{{m}} minút lyn",
-        "minutesAgo": "{{m}} minuten lyn",
-        "secondAgo": "{{s}} twadde lyn",
-        "secondsAgo": "{{s}} sekonden lyn",
-        "fewSecondsAgo": "sekonden lyn",
-        "rightNow": "fuortendaalks",
-        "inSecond": "yn {{s}} sekonde",
-        "inSeconds": "yn {{s}} sekonden",
-        "inMinute": "yn {{m}} minút",
-        "inMinutes": "yn {{m}} minuten",
-        "inHour": "yn {{h}} oere",
-        "inHours": "yn {{h}} oeren",
-        "inUnderMinute": "yn minder dan 1 minút"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Gjin fideoboarne",
-        "SkipAfter": "Oerslaan nei",
-        "Skip": "Oerslaan"
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Gjin pdf-boarne"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Stel Clip Start yn",
+        "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
-        "SetClipEnd": "Klem ein sette",
-        "ClipEnd": "Clip Ein",
-        "StartMoreEnd": "Startposysje kin net mear wêze as einposysje",
-        "EndLessStart": "Eindeposysje kin net minder wêze dan startposysje",
-        "WhichInvalid": "Argumint &#39;hokker&#39; ûnjildich"
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "mear",
+        "more": "more",
         "Menu": "Menu"
     },
-    "durations": {
-        "second": "twadde",
-        "seconds": "sekonden",
-        "minute": "minút",
-        "minutes": "minuten",
-        "hour": "oeren",
-        "day": "dei",
-        "days": "dagen",
-        "week": "wike",
-        "weeks": "wiken",
-        "month": "moanne",
-        "months": "moannen",
-        "year": "jier",
-        "years": "jierren",
-        "decade": "dekade",
-        "decades": "desennia",
-        "century": "ieu",
-        "centuries": "ieuwen"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

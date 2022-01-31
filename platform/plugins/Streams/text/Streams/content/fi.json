@@ -1,538 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Uusi kohde"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Ihmiset, joita olen kutsunut",
-        "Streams\/invitedMe": "Kuka kutsui minut",
-        "AreYouAgree": "Oletko samaa mieltä?",
-        "Yes": "Joo",
-        "No": "Ei",
-        "DoYouAgree": "Oletko samaa mieltä?"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Mistä olet kiinnostunut?",
-        "CanAdd": "Jos et vieläkään löydä etsimääsi, voit lisätä alla olevan uuden kiinnostuksen:",
-        "TrySynonyms": "Älä näe sitä? Kokeile synonyymejä.",
-        "AddUnderCategory": "Lisää luokkaan ...",
-        "Other": "muut",
-        "Unlisted": "noteeraamaton"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Viesti on merkitty järjestelmänvalvojan tarkistukseen. Napauta uudelleen, jos haluat avata.",
-        "noOneSaid": "Kukaan ei ole sanonut mitään",
-        "closeChatButton": "Sulje keskustelu",
-        "closeChatConfirmTitle": "Sulje tämä keskustelu?",
-        "closeChatConfirm": "Haluatko varmasti sulkea tämän chatin?",
-        "closeChatConfirmYes": "Joo",
-        "closeChatConfirmNo": "Ei",
-        "earlierComments": "aiemmat huomautukset",
-        "Subscribed": "Ohita ilmoitukset",
-        "Unsubscribed": "Saa ilmoituksia",
-        "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän keskusteluun.",
-        "startedConversation": "aloitti keskustelun",
-        "RealTimeCall": "Reaaliaikainen puhelu",
-        "SearchByName": "Etsi nimen mukaan",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} vierailee chatissa",
-            "Join": "{{displayName}} liittyi chattiin",
-            "Leave": "{{displayName}} lähti keskustelusta",
-            "RelatedTo": "{{displayName}} perusti {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Viesti {{& message.fields.type}} kohtaan {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sanoi:",
-        "Streams\/changed": "Muutokset {{stream.fields.title}}",
-        "Streams\/invite": "Sinut kutsuttiin {{& stream.fields.title}}",
-        "Streams\/announcement": "Ilmoitus {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} muutti virrankäyttöoikeutta",
-        "Streams\/chat\/edit": "Chat-viesti muokattu",
-        "Streams\/chat\/remove": "Chat-viesti poistettu",
-        "Streams\/closed": "{{stream.fields.title}} on suljettu",
-        "Streams\/task\/progress": "Edistyminen {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tehtävä on valmis: {{stream.fields.title}}",
-        "Streams\/task\/error": "Virhe aikana: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Saapuva viesti",
-        "ManageEmailSubscriptions": "hallitse sähköpostiosoitteitasi",
-        "IfUnsubscribe": "Jos haluat peruuttaa tilauksen",
-        "Streams\/relatedTo\/Streams\/call": "Uusi puhelu aloitettiin {{toTitle}}",
-        "Streams\/relatedTo\/*": "Uusi {{relationDisplayType}} {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Lisätty kansioon {{toTitle}} nimellä {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mainitsi sinut kommentissa",
-        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} kutsui sinut {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Valitse yhteystiedoista",
-            "selectFromContacts": "Valitse yhteystiedoista",
-            "photo": "Ottaa valokuva",
-            "photoInstruction": "Jos QR-koodisi skannannut henkilö on edessäsi, ota valokuva niistä",
-            "to": "Vastaanottaja: {{Stream Title}}",
-            "go": "Mennä",
-            "title": "kutsu",
-            "placeholder": "Matkapuhelinnumero tai sähköpostiosoite",
-            "orInvite": "Tai kutsua ihmisiä käyttämällä:",
-            "QR": "{{ClickOrTap}} luoda QR-koodi",
-            "QRtitle": "Skannaa tämä QR-koodi",
-            "byEmail": "Sähköposti",
-            "byText": "Teksti",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Viserrys",
-            "QRscanned": "He skannasi sen!",
-            "chooseAgainFromContacts": "Valitse Yhteystiedot-sovelluksesta uudelleen",
-            "inviteSelectedContacts": "Kutsu valitut yhteystiedot",
-            "scannedQR": "{{ClickOrTap}}, jos koodi skannattiin",
-            "copyLink": "{{ClickOrTap}} kopioida kutsulinkki",
-            "userChooserPlaceholder": "Hae nimen perusteella",
-            "shareOrCopyLink": "{{ClickOrTap}} jakaa tai kopioida kutsulinkin"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hei, tarkista tämä",
-            "PleaseVisitLink": "Käy seuraavassa linkissä:",
-            "InvitingYou": "Kutsun sinut {{title}}",
-            "HasInvitedYou": "{{displayName}} on kutsunut sinut {{title}}",
-            "HasMentionedYou": "{{displayName}} on maininnut sinut &quot;{{title}}&quot;",
-            "YOUAREINVITED": "SINUT ON KUTSUTTU!",
-            "AcceptInvite": "Hyväksy kutsu"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Sinut on kutsuttu {{title}}. Napauta {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyä ja liittyä."
-        },
-        "youCanNowPaste": "Voit nyt liittää tämän linkin jonnekin kutsuaksesi ihmisiä",
-        "command": "kutsu"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "confirm": "Kutsut lähetetään numerostamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "check": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sms ja napsauta linkkiä!",
-            "CheckYourMobile": "Tarkista tekstiviesti ja noudata ohjeita!"
-        },
-        "email": {
-            "alert": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Seuraa nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "confirm": "Kutsut lähetetään verkkotunnuksestamme, jota ystäväsi eivät vielä tunnista. Haluatko seurata nopeaa tekstiä, jotta he tietävät, että kutsu tuli sinulta, pyytäen heitä napsauttamaan linkkiä.",
-            "subject": "Saitko kutsun?",
-            "body": "Lähetin juuri sinulle kutsun {{app}} -sovellukseen. Tarkista sähköpostiosoitteesi ja napsauta siellä olevaa linkkiä!",
-            "CheckYourEmail": "Tarkista sähköpostisi ja noudata ohjeita!"
-        }
-    },
-    "participating": {
-        "Title": "otsikko",
-        "Subscribed": "Tilatut",
-        "Participants": "osallistujien",
-        "AreYouSureRemoveIdentifier": "Haluatko varmasti poistaa tämän tunnisteen?",
-        "AreYouSureUnsubscribeIdentifier": "Oletko varma, että peruutat tämän tunnisteen tilauksen? Se poistaa ilmoitukset tämän tunnisteen käytöstä.",
-        "AreYouSureUnsubscribeDevice": "Haluatko varmasti lopettaa tämän laitteen tilauksen? Se poistaa tämän laitteen ilmoitukset käytöstä.",
-        "Identifiers": "tunnisteet",
-        "Devices": "Laitteet",
-        "Streams": "Streams",
-        "AreYouSureRemoveParticipant": "Haluatko varmasti poistaa tämän osallistujan?",
-        "RemoveParticipant": "Poista osallistuja"
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Ota mikrofoni käyttöön",
-            "cameraTitle": "Ota kamera käyttöön",
-            "cameraAndMicrophoneTitle": "Ota kamera ja mikrofoni käyttöön",
-            "dialogTitle": "Ota valintaikkuna käyttöön",
-            "microphoneBtn": "Ota mikrofoni käyttöön",
-            "cameraBtn": "Ota kamera käyttöön",
-            "cameraAndMicrophoneBtn": "Ota kamera ja mikrofoni käyttöön"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
-            "point1": "Siirry kohtaan &quot;Asetukset&quot; -&gt; &quot;Lisäasetukset&quot; -&gt; &quot;Tietosuoja ja suojaus&quot; -&gt; &quot;Sivuston asetukset&quot; -&gt; &quot;Kamera&quot; tai &quot;Sivuston asetukset&quot; -&gt; &quot;Mikrofoni&quot;",
-            "point2": "Poista {{hostname}} Estä-luettelosta"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Lataa tämä sivu uudelleen ja vahvista pääsy osoitteeseen {{kind}} liittyäksesi konferenssiin."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
-            "point1": "Siirry Android-asetuksiin",
-            "point2": "Avaa &quot;Sovellukset ja ilmoitukset&quot;",
-            "point3": "Etsi &quot;{{communityName}}&quot; ja avaa se",
-            "point4": "Napauta Käyttöoikeudet",
-            "point5": "Ota {{kind}} käyttöön"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Ohjeet",
-            "permissionDenied": "Käyttäjän {{kind}} käyttölupa evätty. Voit käyttää sitä noudattamalla näitä vaiheita:",
-            "point1": "Siirry iOS-asetuksiin",
-            "point2": "Avaa &quot;Tietosuoja&quot;",
-            "point3": "Etsi {{kind}} ja avaa se",
-            "point4": "Etsi &quot;{{communityName}}&quot; ja ota se käyttöön"
-        },
-        "notices": {
-            "youJoinedRoom": "Liityit huoneeseen",
-            "joining": "Liittyminen: {{userName}}",
-            "sbLeftRoom": "{{userName}} lähti huoneesta",
-            "youLeftRoom": "Lähdit huoneesta",
-            "codeCopied": "Lähdit huoneesta",
-            "sbBeganFbLive": "{{userName}} aloitti tämän puhelun lähettämisen Facebookissa",
-            "sbStoppedFbLive": "{{userName}} lopetti tämän puhelun lähettämisen Facebookissa",
-            "youBeganFbLive": "Aloitit tämän puhelun lähettämisen Facebookissa",
-            "youStoppedFbLive": "Lopetit tämän puhelun lähettämisen Facebookissa",
-            "linkCopiedToCb": "Linkki kopioitiin leikepöydälle",
-            "codeCopiedToCb": "Koodi kopioitiin leikepöydälle",
-            "userHasNoVideo": "Osallistujalla ei ole videota",
-            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin.",
-            "youBeganVideoRecording": "Aloitit tämän konferenssin nauhoittamisen",
-            "youStoppedVideoRecording": "Lopetit tämän konferenssin nauhoittamisen",
-            "switchingRoom": "Vaihdetaan huonetta ...",
-            "forceDisconnecting": "Yhteys katkeaa 5 sekunnin kuluessa",
-            "youStartedLive": "Aloitit lähettää tämän puhelun mukautetulle RTMP: lle",
-            "youStoppedLive": "Lopetit tämän puhelun lähettämisen mukautettuun RTMP: hen",
-            "sbStartedLiveStreaming": "{{userName}} aloitti livenä",
-            "sbStoppedLiveStreaming": "{{userName}} päättyi livenä",
-            "liveStopped": "Tapahtui virhe lähetettäessä videota päätepisteeseen",
-            "forceDisconnectingImmediately": "Isäntä katkaisi yhteyden sinuun"
-        },
-        "settingsPopup": {
-            "webCamera": "Nettikamera",
-            "screenSharing": "Näytön jakaminen",
-            "shareAnotherScreen": "Jaa toinen näyttö",
-            "turnOffCameras": "Sammuta kaikki kamerat",
-            "startFBLive": "Käynnistä Facebook Livestream",
-            "stopFBLive": "Lopeta Facebook Livestream",
-            "fbLiveTitle": "Live-otsikko",
-            "fbLiveDescription": "Live kuvaus",
-            "fbOnlyMeLiveAccess": "Vain minä",
-            "fbFriendsAccess": "Ystävät",
-            "fbPublicAccess": "Julkinen",
-            "fbStartLive": "Elä",
-            "fbStopLive": "Lopeta live",
-            "fbEmbedCode": "Upottaa",
-            "copy": "Kopio",
-            "turnOffVideo": "Poista kameran \/ näytön jakaminen käytöstä",
-            "turnOffScreenSharing": "Sammuta näytön jakaminen",
-            "cameraIsTurnedOff": "Kamera on kytketty pois päältä",
-            "startRecording": "Aloita nauhottaminen",
-            "stopRecording": "Lopeta tallennus",
-            "recordingInProgress": "Tallennus on käynnissä ...",
-            "publishOnTimeline": "Julkaise aikajanaan",
-            "publishToGroup": "Julkaise ryhmälle",
-            "turnOffAudioInput": "Mykistä mikrofoni",
-            "micIsTurnedOff": "Mikrofoni on pois päältä",
-            "start": "alkaa",
-            "stop": "Lopettaa",
-            "streamingSettings": "asetukset",
-            "streamToRTMP": "Suoratoista mukautettuun RTMP: hen",
-            "dialogTitle": "Videoasetukset",
-            "startBroadcasting": "Aloita lähetys",
-            "broadcastingInProgress": "Lähetys on käynnissä"
-        },
-        "participantsPopup": {
-            "disconnect": "Katkaista",
-            "floatingScreens": "Kelluvat näytöt",
-            "tiledScreens": "Laatoitetut näytöt",
-            "loudestExceptMe": "Lojain paitsi minä",
-            "maximizeLoudest": "Maksimoi Loudest",
-            "staticMaximized": "Staattinen maksimoitu",
-            "manual": "manuaalinen",
-            "turnOffCamera": "Piilota video",
-            "turnOffAudio": "Mykistä ääni",
-            "turnOffScreenSharing": "Piilota näytön jakaminen",
-            "turnOnCamera": "Näytä video",
-            "turnOnAudio": "Poista äänen mykistys",
-            "turnOnScreenSharing": "Näytä näytön jakaminen",
-            "fullScreen": "Koko näyttö",
-            "dialogTitle": "Osallistujaasetukset"
-        },
-        "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
-        "streamTitle": "{{1}} suora puhelu",
-        "preview": {
-            "preamble": "Tapaaminen:",
-            "Meeting": "Tapaaminen",
-            "MeetingEnded": "Kokous päättyi"
-        },
-        "preparing": {
-            "micIsOff": "Mikrofoni on pois päältä",
-            "micIsOn": "Mikrofoni on päällä",
-            "cameraIsOff": "Kamera on pois päältä",
-            "cameraIsOn": "Kamera on päällä",
-            "screenSharingIsOn": "Näytön jakaminen on käytössä",
-            "screenSharingIsOff": "Jaa näyttö",
-            "joinNow": "Liity puheluun"
-        },
-        "audioSettings": {
-            "dialogTitle": "Ääniasetukset",
-            "speakers": "Kaiuttimet",
-            "microphone": "Mikrofoni"
-        },
-        "streamingSettings": {
-            "title": "Suoratoistoasetukset"
-        }
-    },
-    "types": {
-        "Streams\/invited": {
-            "displayType": "Kutsuttu",
-            "description": "Saapuneet kutsut"
-        },
-        "Streams\/resource": {
-            "displayType": "Resurssi",
-            "description": "stream resurssien käyttöoikeuksien hallintaa ja päivityksiä koskevien viestien lähettämistä varten"
-        },
-        "Streams\/task": {
-            "displayType": "Tehtävä",
-            "description": "ihmisten tai koneiden tehtävä"
-        },
-        "Streams\/number": {
-            "displayType": "Määrä",
-            "description": "matemaattinen luku"
-        },
-        "Streams\/date": {
-            "displayType": "Treffi",
-            "description": "Treffi"
-        },
-        "Streams\/text": {
-            "displayType": "Teksti",
-            "description": "tekstiosa"
-        },
-        "Streams\/text\/small": {
-            "displayType": "Teksti",
-            "description": "pieni tekstiosa"
-        },
-        "Streams\/text\/medium": {
-            "displayType": "Teksti",
-            "description": "keskikokoinen teksti"
-        },
-        "Streams\/text\/emailAddress": {
-            "displayType": "Sähköpostiosoite",
-            "description": "sähköpostiosoite"
-        },
-        "Streams\/text\/phoneNumber": {
-            "displayType": "Puhelinnumero",
-            "description": "puhelinnumero"
-        },
-        "Streams\/text\/url": {
-            "displayType": "URL-",
-            "description": "linkki verkossa"
-        },
-        "Streams\/image": {
-            "displayType": "Kuva",
-            "description": "visuaalinen kuva",
-            "newItem": "Lisää kuva"
-        },
-        "Streams\/images": {
-            "displayType": "kuvagalleria",
-            "description": "kuvagalleria"
-        },
-        "Streams\/album": {
-            "displayType": "Albumi",
-            "description": "albumi, johon eri mediat liittyvät"
-        },
-        "Streams\/file": {
-            "displayType": "tiedosto",
-            "description": "ladattu tiedosto",
-            "newItem": "Lisää tiedosto"
-        },
-        "Streams\/audio": {
-            "displayType": "Äänileike",
-            "description": "äänileike",
-            "newItem": "Lisää ääni"
-        },
-        "Streams\/video": {
-            "displayType": "Videoleike",
-            "description": "videoleike",
-            "newItem": "Lisää video"
-        },
-        "Streams\/live": {
-            "displayType": "livestream",
-            "description": "suora ääni tai video"
-        },
-        "Streams\/category": {
-            "displayType": "Kategoria",
-            "description": "luokka, johon muut virrat voidaan liittää"
-        },
-        "Streams\/participating": {
-            "displayType": "Osallistuva hakemisto",
-            "description": "virrat liittyvät \/ eivät liity tähän, kun käyttäjä liittyy \/ poistuu"
-        },
-        "Streams\/interest": {
-            "displayType": "Kiinnostuksen kohde",
-            "description": "edustaa käyttäjän kiinnostusta tiettyyn aiheeseen"
-        },
-        "Streams\/incoming": {
-            "displayType": "saapuva",
-            "description": "kohde muiden käyttäjien lähettämille viesteille"
-        },
-        "Streams\/chat": {
-            "displayType": "Keskustelu",
-            "description": "keskustelu käyttäjien välillä, historian kanssa"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Reaaliaikainen puhelu",
-            "description": "reaaliaikainen video- \/ äänipuhelu"
-        },
-        "Streams\/tasks": {
-            "description": "tehtäväluokka",
-            "displayType": "tehtävät"
-        },
-        "Streams\/experience": {
-            "description": "yhteinen kokemus yhteisön jäsenille",
-            "displayType": "Yhteinen kokemus yhteisön jäsenille"
-        },
-        "Streams\/greeting": {
-            "description": "tervehdys, jonka avulla käyttäjä voi esitellä itsensä",
-            "displayType": "Tervehdys"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF-tiedosto",
-            "description": "PDF-tiedosto",
-            "newItem": "Lisää PDF"
-        },
-        "Streams\/question": {
-            "displayType": "Kysymys",
-            "description": "kysymysvirta"
-        },
-        "Streams\/answer": {
-            "displayType": "Vastaus",
-            "description": "vastausvirta"
-        },
-        "Streams\/calls": {
-            "displayType": "Puhelut",
-            "description": "Streams\/webrtc -luokka",
-            "MaxRelationsExceeded": "Maksimipuhelut ylitetty"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "lähetti <em>{{message.fields.type}}<\/em> -viestin {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "kommentoi",
-            "in": "sisään",
-            "body": "{{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "on lähetetty",
-                "byAvatar": "lähettäjä {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "on uusi {{instructions.fromDisplayType}}",
-                "byAvatar": "lisännyt {{avatar.displayName}}"
-            },
-            "startedCallIn": "aloitti puhelun"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
+        }
+    },
+    "types": {
+        "Streams\/invited": {
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
+        },
+        "Streams\/resource": {
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
+        },
+        "Streams\/task": {
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
+        },
+        "Streams\/tasks": {
+            "description": "category for tasks",
+            "displayType": "Tasks"
+        },
+        "Streams\/experience": {
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
+        },
+        "Streams\/greeting": {
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
+        },
+        "Streams\/number": {
+            "displayType": "Number",
+            "description": "mathematical number"
+        },
+        "Streams\/date": {
+            "displayType": "Date",
+            "description": "date"
+        },
+        "Streams\/text": {
+            "displayType": "Text",
+            "description": "body of text"
+        },
+        "Streams\/text\/small": {
+            "displayType": "Text",
+            "description": "small body of text"
+        },
+        "Streams\/text\/medium": {
+            "displayType": "Text",
+            "description": "medium body of text"
+        },
+        "Streams\/text\/emailAddress": {
+            "displayType": "Email Address",
+            "description": "email address"
+        },
+        "Streams\/text\/phoneNumber": {
+            "displayType": "Phone Number",
+            "description": "phone number"
+        },
+        "Streams\/text\/url": {
+            "displayType": "URL",
+            "description": "link on the web"
+        },
+        "Streams\/image": {
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
+        },
+        "Streams\/images": {
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
+        },
+        "Streams\/album": {
+            "displayType": "Album",
+            "description": "an album to which various media is related"
+        },
+        "Streams\/file": {
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
+        },
+        "Streams\/audio": {
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
+        },
+        "Streams\/video": {
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
+        },
+        "Streams\/question": {
+            "displayType": "Question",
+            "description": "question stream"
+        },
+        "Streams\/answer": {
+            "displayType": "Answer",
+            "description": "answer stream"
+        },
+        "Streams\/calls": {
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
     "menu": {
-        "placeholder": "kirjoita sivun otsikko",
-        "ModTab": "Muokkaa kohdetta",
-        "Save": "Tallentaa",
-        "Delete": "Poistaa",
-        "Submenu": "alivalikko"
-    },
-    "errors": {
-        "HiddenFromYou": "Tämä sisältö on piilotettu teiltä."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Ennätys",
-        "reset": "Nollaa",
-        "edit": "Muokata",
-        "title": "otsikko",
-        "description": "kuvaus",
-        "upload": "Lähetä",
-        "link": "Linkki",
-        "setUrl": "Aseta URL-osoite",
-        "save": "Tallentaa",
-        "setClip": "Leikkaa leike",
-        "invalidURL": "Virheellinen URL",
-        "invalidFile": "Virheellinen tiedosto",
-        "errorNoSource": "Ei äänilähdettä",
-        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Nollaa",
-        "edit": "Muokata",
-        "title": "otsikko",
-        "description": "kuvaus",
-        "upload": "Lähetä",
-        "link": "Linkki",
-        "setUrl": "Aseta URL-osoite",
-        "save": "Tallentaa",
-        "setClip": "Leikkaa leike",
-        "invalidURL": "Virheellinen URL",
-        "invalidFile": "Virheellinen tiedosto",
-        "errorNoSource": "Ei videolähdettä",
-        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Nollaa",
-        "edit": "Muokata",
-        "title": "otsikko",
-        "description": "kuvaus",
-        "upload": "Lähetä",
-        "link": "Linkki",
-        "setUrl": "Aseta URL-osoite",
-        "save": "Tallentaa",
-        "setClip": "Leikkaa leike",
-        "invalidURL": "Virheellinen URL",
-        "invalidFile": "Virheellinen tiedosto",
-        "errorNoSource": "Ei pdf-lähdettä",
-        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Nollaa",
-        "edit": "Muokata",
-        "title": "otsikko",
-        "description": "kuvaus",
-        "upload": "Lähetä",
-        "link": "Linkki",
-        "setUrl": "Aseta URL-osoite",
-        "save": "Tallentaa",
-        "setClip": "Leikkaa leike",
-        "invalidURL": "Virheellinen URL",
-        "invalidFile": "Virheellinen tiedosto",
-        "errorNoSource": "Ei kuvalähdettä",
-        "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Valitettavasti tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}",
-        "uploadedImage": "Ladattu kuva",
-        "imageTitle": "Kuvan otsikko"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Kysymyksiä",
-        "Answers": "Vastaukset",
-        "AnswerQuestion": "Vastata kysymykseen",
-        "SetYourAnswer": "Ole hyvä ja vastaa kysymykseen",
-        "NewQuestion": "Uusi kysymys",
-        "NewAnswer": "Uusi vastaus",
-        "AnswerDetails": "Vastauksen tiedot",
-        "answerOption": "Vaihtoehto",
-        "answerOptionExclusive": "Yksinomainen",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "ilmainen vastaus ...",
-        "SaveQuestion": "Tallenna kysymys",
-        "SaveAnswer": "Tallenna vastaus",
-        "AddAnotherAnswer": "Lisää toinen vastaus",
-        "ErrorAnswers": "Lisää edes yksi vastaus",
-        "AlreadyAnswered": "Vastasin jo",
-        "TitlePlaceholder": "Kirjoita kysymyksesi",
-        "ContentPlaceholder": "Lisää tähän lisätietoja auttaaksesi ihmisiä vastaamaan",
-        "ErrorTitle": "Kysymys vaaditaan",
-        "Placeholder": "Paikanpitäjä"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Uusi kokemus",
-        "DefineTitle": "Määritä otsikko",
-        "Create": "Luoda"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Puhelut",
-        "MaxCalls": "Max puhelut",
-        "Update": "Päivittää",
-        "NoCallsYet": "Ei vielä puheluita",
-        "CallReasonTitle": "Mistä tässä puhelussa on kyse?",
-        "WaitingRoom": "Odotushuone"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

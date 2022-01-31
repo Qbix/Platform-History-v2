@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "प्रचार गर्न को लागी लिंक",
-                "startDate": "सुरू मिति",
-                "startTime": "समय सुरु गर्नुहोस्",
-                "endDate": "अन्त्य मिति",
-                "endTime": "अन्त्य समय",
-                "budget": "बजेट"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "ब्याज द्वारा फिल्टर",
-                "FilterInterests": "रुचि टाइप गर्न सुरु गर्नुहोस् ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "ब्याज",
-            "Location": "स्थान"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "जानुहोस्",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "ब्राउज गर्नुहोस्",
-            "WriteToStartConversation": "कुराकानी शुरू गर्न को लागी तपाइँको विचार लेख्नुहोस्",
-            "StartConversation": "कुराकानी सुरु गर्नुहोस्",
-            "GotoConversation": "कुराकानीमा जानुहोस्",
-            "reset": "रिसेट गर्नुहोस्",
-            "edit": "सम्पादन गर्नुहोस्",
-            "link": "लि्क",
-            "setUrl": "URL सेट गर्नुहोस्",
-            "save": "सुरक्षित गर्नुहोस्",
-            "setClip": "क्लिप काट्नुहोस्",
-            "invalidURL": "अमान्य URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "क्यासिंग को लागी फाइल धेरै ठुलो छ। अधिकतम फाइल आकार {{size}}",
-        "InvalidPDF": "फाइल वैध PDF हैन",
-        "StartTypingTitleOrKeywords": "शीर्षक वा कीवर्ड टाइप गर्न सुरु गर्नुहोस् ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "एक HTML दस्तावेज हो कि विभिन्न प्रयोगकर्ताहरु हेर्न र सम्पादन गर्न सक्नुहुन्छ",
-            "displayType": "लेख"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "एक प्रस्तुति मा एक स्लाइड, HTML, अडियो आदि समावेश गर्न सक्नुहुन्छ।",
-            "displayType": "स्लाइड"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "एक प्रस्तुति विभिन्न स्लाइडहरु मिलेर बनेको छ",
-            "displayType": "प्रस्तुति"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "एक वेबसाइट मा एक विज्ञापन इकाई",
-            "displayType": "विज्ञापन एकाइ"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "एक नाम अन्तर्गत विज्ञापन एकाइहरु समूहीकरण को एक तरीका",
-            "displayType": "विज्ञापन प्लेसमेन्ट"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "एक विज्ञापन को लागी सामग्री",
-            "displayType": "रचनात्मक विज्ञापन"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "एक विज्ञापन अभियान",
-            "displayType": "विज्ञापन अभियान"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "एक वेबसाइट को प्रतिनिधित्व गर्दछ जसको मेटाडेटा स्क्र्याप गरिएको थियो",
-            "displayType": "वेब पेज"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

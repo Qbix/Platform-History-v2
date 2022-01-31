@@ -31,6 +31,7 @@
  *    If "loader" is Q.getter and request should be done bypasing cache, assign true to .ignoreCache property of the tool
  * @param {array|string} [$options.slotsToRequest] Optional. A string or array of slot names to request in response. Should include "form".
  * @param {array|string} [$options.contentElements] Optional. Array of $slotName => $cssSelector pairs for child element of the form to fill with HTML returned from the slot.
+ * @param {array} [$params] Same as Q_Html::smartTag() params field
  */
 function Q_form_tool($options)
 {
@@ -80,6 +81,7 @@ function Q_form_tool($options)
 		);
 		$value = $field2['value'];
 		$o = $field2['options'];
+		$p = Q::ifset($field2, 'params', array());
 		$message = $field2['message'];
 		if (!empty($options['fillFromRequest']) and !in_array($type, array('button', 'submit'))) {
 			if (isset($_REQUEST[$name])) {
@@ -127,7 +129,7 @@ function Q_form_tool($options)
 			case 'textarea':
 				$tr_rest = "<td class='Q_form_fieldinput' data-fieldname=\"$name_text\" $colspan>"
 					. ($extra ? "<div class='Q_form_label'>$label</div>" : '')
-					. Q_Html::smartTag($type, $attributes, $value, $o)
+					. Q_Html::smartTag($type, $attributes, $value, $o, $p)
 					. "</td></tr><tr><td class='Q_form_placeholder'>"
 					. "</td><td class='Q_form_undermessage Q_form_textarea_undermessage' $colspan>"
 					. "<div class='Q_form_undermessagebubble'>$message</div></td>";
@@ -135,7 +137,7 @@ function Q_form_tool($options)
 			default:
 				$tr_rest = "<td class='Q_form_fieldinput' data-fieldname=\"$name_text\">"
 					. ($extra ? "<div class='Q_form_label'>$label</div>" : '')
- 					. Q_Html::smartTag($type, $attributes, $value, $o)
+ 					. Q_Html::smartTag($type, $attributes, $value, $o, $p)
  					. "</td>"
 					. ($messages_td
 						? "<td class='Q_form_fieldmessage Q_form_{$type}_message'>$message</td>"
@@ -153,7 +155,7 @@ function Q_form_tool($options)
 		."\n</table>";
 	foreach ($options['fields'] as $name => $field) {
  		if (isset($field['type']) and $field['type'] === 'hidden') {
-			$result .= Q_Html::hidden($field['value'], $name);
+			$result .= Q_Html::hidden(array($name => $field['value']));
 		}
 	}
 	$fields = array('onSubmit', 'onResponse', 'onSuccess', 'slotsToRequest', 'loader', 'contentElements');

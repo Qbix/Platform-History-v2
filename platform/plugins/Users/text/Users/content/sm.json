@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "tusi i totonu",
-        "LogOut": "saini ese j"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Seti {{1}} i loʻu matua {{2}}",
-        "ChoosePassPhrase": "Filifili se <strong>fuaitau fasefulu<\/strong> e teu ai. <br> Se fasifuaitau faigofie e aofia ai ni nai upu o le ae faigofie ona manatuaina.",
-        "ChoosePassPhraseSeeSuggestions": "Filifili se <strong>fuaitau pasi<\/strong> lelei e puipui ai lau teugatupe. Vaʻai fautuaga mo nisi manatu.",
-        "LogOutAndTryAgain": "Fafafo ma toe taumafai",
-        "IfYouFeel": "Afai e te lagona se mea ua sese, e mafai",
-        "SetIdentifierButtonTitle": "amata i luga"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Amata"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Amata",
-        "Authorize": "Faataga",
-        "TermsLabel": "Ua ou faitau ma ioe <br> i le {{link}}",
-        "TermsTitle": "Faʻamatalaga",
-        "mustAgree": "Muamua e tatau ona e malilie i tuutuuga."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ou te taliaina le {{link}}",
-        "TermsTitle": "Faʻamatalaga"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Faatagaga",
-        "prompt": "E te manaʻo e faʻatagaina faʻamatalaga? O le ae maua ni faʻamatalaga lata mai i mea e te popole i ai.",
-        "yes": "ioe",
-        "no": "leai",
-        "WelcomePleaseVerifyEmail": "Afio mai! Faamolemole siaki lou tuatusi imeli.",
-        "WelcomeVerifyEmail": "Afio mai! Faʻamaonia lau tuatusi imeli.",
-        "ForgetPass": "Hey, na e galo lau pasese?",
-        "PassphraseSaved": "Na faasaoina lau pasese faʻasologa.",
-        "IdentifierActivated": "Ua faʻaalia le {{type}}.",
-        "CompletedActivation": "Ua maeʻa faʻauʻuina tagata.",
-        "CompletedActivationLogIn": "Ua maeʻa faʻauʻuina tagata. Taumafai e teu i totonu nei."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Filifili fesoʻotaʻiga",
+            "title": "Choose contact",
             "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "F.Users.Cordova.UI.create e le maua",
-            "SearchByName": "Saili i le igoa",
-            "EmptyContacts": "Le faʻamatalaga e le maua ..."
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Filifili le fesoʻotaʻiga o {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Faamolemole filifili le igoa.",
-        "inviteUser": "Valaaulia le Tagata",
-        "selectRole": "Filifili le Matafaioi",
-        "inviteRole": "Valaaulia {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Filifili le gagana filifilia",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Afio mai",
-        "directions": "Fausia se tala, pe ulufale i totonu.",
-        "directionsNoRegister": "Faamolemole pe a iai sau tala.",
-        "goButton": "Alu",
-        "passphrase": "Ulufale lau faʻaiuga fuaitau:",
-        "loginButton": "Amata",
-        "registerButton": "Amata",
-        "resendButton": "Auina Atu le Faauluga Faaulu",
-        "forgot": "Faʻamagaloina?",
-        "resendConfirm": "E te manaʻo e lafo se savali e toefaʻalo ai lau faʻailoga?",
-        "resendSuccess": "Siaki mo se savali e toefaʻailoga lau pasese",
-        "resendClose": "Katia",
-        "noPassphrase": "Aʻo leʻi mafai ona e ulufale i totonu, e tatau ona e faatulagaina se fuaitau fesuiaiga e ala i le kiliki o le fesoʻotaʻiga i lau savali e faʻasaga ai.",
-        "notVerified": "E tatau ona e auina atu se savali o le toe faatoaga ina ia e ulufale ai.",
-        "emailExists": "Na e taumafai e lesitala i lenei imeli muamua? Afai o lea, siaki lau atigipusa e faʻaagaoioi lau tala. <a href='#resend' class='Q_button Users_activation_resend'>Kiliki ina ia toe auina atu le savali<\/a>",
-        "mobileExists": "Na e taumafai e lesitala i lenei telefoni feaveaʻi muamua? Afai o lea, siaki lau SSS e faʻaagaoioi ai lau faʻamatalaga. <a href='#resend' class='Q_button Users_activation_resend'>Kiliki ina ia toe auina atu le savali<\/a>",
-        "usingOther": "pe mafai foʻi",
-        "prompt": "Filifili se igoa ole igoa:",
-        "newUser": "pe fatu se tala fou",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "lau mobile # po o le imeli",
-            "mobile": "ulufale i lau mobile #",
-            "email": "ulufale i lau tuatusi imeli",
-            "username": "igoa ole igoa"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Talia le Tuutuuga o Auaunaga?",
-        "facebookNoEmail": "O lau facebook tala o loʻo misi se tuatusi imeli imeli. Faʻasinoa le ala i le auala masani.",
-        "picTooltip": "E mafai ona e suia lenei ata mulimuli ane",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Alu i totonu {{host}} i le taimi {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Faʻatonutonuina i Wallet",
-                "content": "O le taimi lava e te tapunia ai lenei talanoaga, o le a aveina oe i lau atotupe. A uma ona e saini i totonu, toe foi i lenei itulau."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Faʻaopoopo se auala e teu ai",
-        "sendMessage": "Auina Atu le Faauluga Faaulu",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "ulufale i lau mobile # po o le imeli",
-            "mobile": "ulufale i lau numera feaveaʻi",
-            "email": "ulufale i lau tuatusi imeli",
-            "username": "igoa ole igoa"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
         "title": "{{Platform}} Account",
-        "areUsing": "Oe faʻaaoga {{platform}} as",
-        "noLongerUsing": "E le toe fesoʻotaʻi atu i {{platform}}",
-        "doAuth": "Faʻailoga i lenei tala",
-        "doSwitch": "Suʻe i lenei tala"
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Pule",
-        "Admin": "Pule",
-        "Member": "Sui",
-        "Guest": "Tagata asiasi",
-        "Host": "Talimalo"
-    },
-    "analytics": {
-        "Title": "Auiliiliga",
-        "Daily": "Aso uma",
-        "Weekly": "Vaiaso",
-        "Monthly": "Masina taʻitasi",
-        "Application": "Talosaga",
-        "Pages": "Itulau",
-        "Services": "Tautua",
-        "Faq": "Faq",
-        "WeekDays": "Vaiaso Aso"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

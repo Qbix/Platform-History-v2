@@ -7,7 +7,8 @@
         "Streams\/invitedMe": "Ko me je pozvao",
         "AreYouAgree": "Slažete li se?",
         "Yes": "Da",
-        "No": "Ne"
+        "No": "Ne",
+        "DoYouAgree": "Slažeš li se?"
     },
     "interests": {
         "Filter": "Šta uživate?",
@@ -84,7 +85,8 @@
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ako je kod skeniran",
             "copyLink": "{{ClickOrTap}} za kopiranje pozivnice",
-            "userChooserPlaceholder": "Pretražujte po imenu"
+            "userChooserPlaceholder": "Pretražujte po imenu",
+            "shareOrCopyLink": "{{ClickOrTap}} za dijeljenje ili kopiranje linka poziva"
         },
         "email": {
             "subject": "Hej, vidi ovo",
@@ -178,7 +180,8 @@
             "youStoppedLive": "Prestali ste emitirati ovaj poziv na prilagođeni RTMP",
             "sbStartedLiveStreaming": "{{userName}} počeo uživo",
             "sbStoppedLiveStreaming": "{{userName}} završilo uživo",
-            "liveStopped": "Došlo je do greške pri slanju videa na krajnju tačku"
+            "liveStopped": "Došlo je do greške pri slanju videa na krajnju tačku",
+            "forceDisconnectingImmediately": "Domaćin vas je prekinuo"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -209,7 +212,10 @@
             "start": "Počni",
             "stop": "Stop",
             "streamingSettings": "Postavke",
-            "streamToRTMP": "Prijenos prema prilagođenom RTMP -u"
+            "streamToRTMP": "Prijenos prema prilagođenom RTMP -u",
+            "dialogTitle": "Video Settings",
+            "startBroadcasting": "Počni sa emitovanjem",
+            "broadcastingInProgress": "Emitovanje je u toku"
         },
         "participantsPopup": {
             "disconnect": "Prekini vezu",
@@ -225,7 +231,8 @@
             "turnOffScreenSharing": "Sakrij deljenje ekrana",
             "turnOnCamera": "Prikaži video",
             "turnOnAudio": "Zanemarivanje zvuka",
-            "turnOnScreenSharing": "Prikaži dijeljenje ekrana"
+            "turnOnScreenSharing": "Prikaži dijeljenje ekrana",
+            "dialogTitle": "Postavke učesnika"
         },
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom toku.",
         "streamTitle": "{999}} poziv uživo",
@@ -242,6 +249,14 @@
             "screenSharingIsOn": "Dijeljenje ekrana je uključeno",
             "screenSharingIsOff": "Dijeli ekran",
             "joinNow": "Pridružite se pozivu"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio postavke",
+            "speakers": "Zvučnici",
+            "microphone": "Mikrofon"
+        },
+        "streamingSettings": {
+            "title": "Postavke strujanja"
         }
     },
     "messages": {

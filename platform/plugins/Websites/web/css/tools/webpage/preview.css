@@ -4,6 +4,7 @@
 	position: relative;
 	border-radius: 7px;
 	border: none;
+	text-align: left;
 }
 .Websites_webpage_preview_tool[data-mode=title] {
 	margin: 0;

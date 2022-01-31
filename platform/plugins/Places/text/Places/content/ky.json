@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} лат, {{2}} пн)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}} ичинде"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "метр",
-        "meters": "метр",
-        "kilometer": "километр",
-        "kilometers": "киометрлер",
-        "km": "км",
-        "mile": "миля",
-        "miles": "миля",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "бут",
-        "feet": "буттар",
-        "inches": "дюйм"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Мен {{select}} ичинде болуп жаткан нерселерге кызыгам",
-        "update": "Жайгашкан жеримди жаңыртуу",
-        "set": "Жайгашкан жеримди коюу",
-        "prompt": "{{ClickOrTap}} бул жерде<br> сиздин<br> жайгашуу",
-        "myCurrentLocation": "Менин азыркы жайгашкан жерим",
-        "enterAddress": "Даректи киргизиңиз",
-        "enterPostcode": "Почта индексиңизди \/ почтаңызды киргизиңиз",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Жайгашкан жерди кошуу",
-            "title": "Жаңы Жайгашуу",
-            "nameYourLocation": "Жайгашкан жериңизди атаңыз"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Бул жер сакталсынбы?",
-            "message": "Келечекте бул жерди дагы колдонууну пландап жатасызбы?",
-            "ok": "Ооба",
-            "cancel": "Жок"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Бул жерге ат коюңуз",
-            "placeholder": "Үй, Жумуш ж.",
-            "ok": "Сактоо"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Жайгашкан жерди тандоо"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Бул жердин ичинде кандайдыр бир аймак барбы?",
-        "newArea": "Жаңы аймак",
-        "promptTitle": "Аймактын атын киргизиңиз:",
-        "absent": "Сураныч, аймакты коюңуз",
-        "error": "Ката",
-        "exist": "Аймак мурунтан эле бар",
-        "addNewArea": "Жаңы аймакты кошуу",
-        "add": "Кошуу"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "жерлердин жыйындысы",
-            "displayType": "Жайгашуулар"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Имаратты, ордун, кемени, паркты ж.б.",
-            "displayType": "Жайгашкан жери"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Бөлмө же люкс сыяктуу жайгашкан жердин аймагын билдирет",
-            "displayType": "Аймак"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Имараттын же кеменин кабатын билдирет",
-            "displayType": "Кабат"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Имараттагы же кемедеги мамычаны билдирет",
-            "displayType": "Колонна"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Геохаштан белгилүү бир аралыкта жайгашкан нерселердин категориясы",
-            "displayType": "Жерге жакын"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Кызыкчылыкка дал келген геоаштан белгилүү бир аралыкта жайгашкан нерселердин категориясы",
-            "displayType": "Кызыккан жерлери"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

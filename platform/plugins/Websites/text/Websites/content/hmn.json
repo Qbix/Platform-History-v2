@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Txuas mus txhawb",
-                "startDate": "Hnub Pib",
-                "startTime": "Sijhawm Pib",
-                "endDate": "Hnub Kawg",
-                "endTime": "Sijhawm Kawg",
-                "budget": "Nyiaj txiag"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Lim Los Ntawm Kev Txaus Siab",
-                "FilterInterests": "Pib ntaus ntawv txaus siab ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Kev txaus siab",
-            "Location": "Qhov chaw"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Mus",
-            "PasteLinkHere": "https: \/\/ yog ...",
-            "BrowseTheWeb": "Xauj",
-            "WriteToStartConversation": "Sau koj cov kev xav kom pib tawm ntawm kev sib tham",
-            "StartConversation": "Pib Sib Tham",
-            "GotoConversation": "Mus rau Kev Sib Tham",
-            "reset": "Pib dua",
-            "edit": "Kho kom raug",
-            "link": "Txuas",
-            "setUrl": "Teeb URL",
-            "save": "Txuag",
-            "setClip": "Txiav tawm Clip",
-            "invalidURL": "URL tsis raug"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Cov ntaub ntawv loj dhau rau caching. Max cov ntaub ntawv loj {{size}}",
-        "InvalidPDF": "Cov ntaub ntawv tsis yog PDF siv tau",
-        "StartTypingTitleOrKeywords": "Pib ntaus lub npe lossis cov ntsiab lus ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Ib daim ntawv HTML uas ntau cov neeg siv tuaj yeem saib thiab kho",
-            "displayType": "Tshooj lus"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Ib qho swb hauv kev nthuav qhia, tuaj yeem suav nrog HTML, suab thiab lwm yam.",
-            "displayType": "Xaub"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Kev nthuav qhia muaj ntau yam swb",
-            "displayType": "Kev nthuav qhia"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Ib chav tshaj tawm ntawm lub vev xaib",
-            "displayType": "Chav tsev tshaj tawm"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Ib txoj hauv kev ntawm kev faib pawg tshaj tawm hauv qab lub npe",
-            "displayType": "Kev tso chaw tshaj tawm"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Cov ntsiab lus rau kev tshaj tawm",
-            "displayType": "Tshaj tawm tswv yim"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Kev tshaj tawm phiaj xwm",
-            "displayType": "Kev tshaj tawm phiaj xwm"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Sawv cev lub vev xaib uas nws cov metadata raug muab tshem tawm",
-            "displayType": "Nplooj ntawv"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

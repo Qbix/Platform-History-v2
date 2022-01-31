@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ログイン",
-        "LogOut": "ログアウト"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "プライマリ{{2}}として{{1}}を設定してください",
-        "ChoosePassPhrase": "ログインする<strong>パスフレーズ<\/strong>を選択してください。 <br>あなたが簡単に覚えているだろういくつかの単語から成る簡単なフレーズ。",
-        "ChoosePassPhraseSeeSuggestions": "アカウントを保護するために適切な<strong>パスフレーズ<\/strong>を選択してください。いくつかのアイデアについては提案を参照してください。",
-        "LogOutAndTryAgain": "ログアウトしてやり直してください",
-        "IfYouFeel": "何か問題があると感じたら、",
-        "SetIdentifierButtonTitle": "やり直す"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "はじめに"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "はじめに",
-        "Authorize": "承認する",
-        "TermsLabel": "読んで同意します<br> {{link}}へ",
-        "TermsTitle": "条項",
-        "mustAgree": "まず、条件に同意する必要があります。"
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "{{link}}を受け入れます",
-        "TermsTitle": "条項"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "許可",
-        "prompt": "通知を有効にしますか？あなたが気にしていることについてのリアルタイムの最新情報を受け取ることができます。",
-        "yes": "はい",
-        "no": "いいえ",
-        "WelcomePleaseVerifyEmail": "ようこそ！火事もおきました。",
-        "WelcomeVerifyEmail": "ようこそ！あなたのメールアドレスを確認してください。",
-        "ForgetPass": "こんにちは、パスフレーズを忘れましたか？",
-        "PassphraseSaved": "パスフレーズが保存されました。",
-        "IdentifierActivated": "{{type}}が有効になりました。",
-        "CompletedActivation": "ユーザーのアクティベーションが完了しました。",
-        "CompletedActivationLogIn": "ユーザーのアクティベーションが完了しました。今すぐログインしてみてください。"
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "ラベルを選択してください。",
-        "inviteUser": "ユーザーを招待",
-        "selectRole": "役割を選択",
-        "inviteRole": "{{role}}を招待"
-    },
-    "invalidLanguageSelected": "無効な言語が選択されました",
     "contacts": {
         "dialog": {
-            "title": "連絡先を選択",
-            "SearchByName": "名前で検索",
-            "CreateAccount": "+新しい連絡先",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.createが見つかりません",
-            "EmptyContacts": "連絡先が見つかりません..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "{{displayName}}の連絡先を選択"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "ようこそ",
-        "directions": "アカウントを作成するか、ログインします。",
-        "directionsNoRegister": "アカウントをお持ちの場合はログインしてください。",
-        "goButton": "行く",
-        "passphrase": "パスフレーズを入力してください：",
-        "loginButton": "始めましょう",
-        "registerButton": "始めましょう",
-        "resendButton": "アクティベーションメッセージを送信",
-        "forgot": "忘れた？",
-        "resendConfirm": "パスフレーズをリセットするメッセージを送信しますか？",
-        "resendSuccess": "パスフレーズをリセットするメッセージを確認してください",
-        "resendClose": "閉じる",
-        "noPassphrase": "ログインする前に、アクティベーションメッセージのリンクをクリックしてパスフレーズを設定する必要があります。",
-        "notVerified": "ログインするには、アクティベーションメッセージを自分で送信する必要があります。",
-        "emailExists": "以前にこのメールで登録しようとしましたか？その場合は、受信ボックスをチェックしてアカウントを有効にします。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します<\/a>",
-        "mobileExists": "以前にこの携帯電話番号で登録しようとしましたか？その場合は、SMSを確認してアカウントを有効にしてください。 <a href='#resend' class='Q_button Users_activation_resend'>クリックしてメッセージを再送信します<\/a>",
-        "usingOther": "またはあなたができる",
-        "prompt": "ユーザー名を選択：",
-        "newUser": "または以下で新しいアカウントを作成してください",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "携帯番号またはメール",
-            "mobile": "携帯番号を入力してください",
-            "email": "メールアドレスを入力してください",
-            "username": "ユーザー名"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "利用規約に同意しますか？",
-        "facebookNoEmail": "Facebookアカウントに確認済みのメールアドレスがありません。ネイティブの方法でログインするだけです。",
-        "picTooltip": "この写真は後で変更できます",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "時間{{timestamp}}に{{host}}にログインします",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "ウォレットへのリダイレクト",
-                "content": "このダイアログを閉じると、ウォレットに移動します。サインインしたら、このページに戻ります。"
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "ログインする方法を追加する",
-        "sendMessage": "アクティベーションメッセージを送信",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "携帯番号またはメールアドレスを入力してください",
-            "mobile": "携帯番号を入力してください",
-            "email": "メールアドレスを入力してください",
-            "username": "ユーザー名"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}}アカウント",
-        "areUsing": "{{platform}}を使用しています",
-        "noLongerUsing": "次のように{{platform}}に接続していません",
-        "doAuth": "このアカウントでログイン",
-        "doSwitch": "このアカウントに切り替える"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "オーナー",
-        "Admin": "管理者",
-        "Member": "メンバー",
-        "Guest": "ゲスト",
-        "Host": "ホスト"
-    },
-    "analytics": {
-        "Title": "分析",
-        "Daily": "毎日",
-        "Weekly": "毎週",
-        "Monthly": "毎月",
-        "Application": "応用",
-        "Pages": "ページ",
-        "Services": "サービス",
-        "Faq": "よくある質問",
-        "WeekDays": "平日"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

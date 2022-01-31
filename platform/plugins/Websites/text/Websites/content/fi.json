@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Linkki edistämiseksi",
-                "startDate": "Aloituspäivämäärä",
-                "startTime": "Aloitusaika",
-                "endDate": "Päättymispäivä",
-                "endTime": "Loppu aika",
-                "budget": "talousarvio"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Suodata koron mukaan",
-                "FilterInterests": "Aloita kirjoittamalla kiinnostuksen ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Kiinnostuksen kohde",
-            "Location": "Sijainti"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Mennä",
-            "PasteLinkHere": "Liitä linkki tähän",
-            "BrowseTheWeb": "selailla",
-            "WriteToStartConversation": "Kirjoita ajatuksesi keskustelun aloittamiseksi",
-            "StartConversation": "Aloita keskustelu",
-            "GotoConversation": "Siirry keskusteluun",
-            "reset": "Nollaa",
-            "edit": "Muokata",
-            "link": "Linkki",
-            "setUrl": "Aseta URL-osoite",
-            "save": "Tallentaa",
-            "setClip": "Leikkaa leike",
-            "invalidURL": "Virheellinen URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Tiedosto on liian suuri välimuistiin tallentamista varten. Tiedoston enimmäiskoko {{size}}",
-        "InvalidPDF": "Tiedosto ei ole kelvollinen PDF-tiedosto",
-        "StartTypingTitleOrKeywords": "Aloita otsikon tai avainsanojen kirjoittaminen ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML-dokumentti, jota eri käyttäjät voivat tarkastella ja muokata",
-            "displayType": "Artikla"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Dia esityksessä, voi sisältää HTML, ääni jne.",
-            "displayType": "dia"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Eri dioista koostuva esitys",
-            "displayType": "esittely"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Mainontayksikkö verkkosivustolla",
-            "displayType": "Mainosyksikkö"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Tapa ryhmitellä mainosyksiköitä nimen alla",
-            "displayType": "Mainosten sijoittelu"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Mainoksen sisältö",
-            "displayType": "Mainos luova"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Mainoskampanja",
-            "displayType": "Mainoskampanja"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Edustaa verkkosivustoa, jonka metatiedot on kaapattu",
-            "displayType": "Nettisivu"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

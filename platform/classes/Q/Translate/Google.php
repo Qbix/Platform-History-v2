@@ -32,8 +32,10 @@ class   Q_Translate_Google {
 					continue;
 				}
 			}
-			foreach ($localeNames as $localeName) {
-				$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+			if (isset($this->parent->options['locales'])) {
+				foreach ($localeNames as $localeName) {
+					$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+				}
 			}
 		}
 	}

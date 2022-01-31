@@ -2473,7 +2473,8 @@ Q.openUrl = function (url, name = "_blank") {
 	if (browsertab) {
 		browsertab.openUrl(url);
 	} else {
-		window.open(url, name).focus();
+		var win = window.open(url, name);
+		win && win.focus();
 	}
 };
 
@@ -7391,8 +7392,8 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * It uses script tags and JSONP callbacks for remote domains, and prefers XHR for the local domain.
  * @static
  * @method request
- * @param {Object} fields
- *  Optional object of fields to pass
+ * @param {Object} [fields]
+ *  Optional object of fields to pass, syntactic sugar for adding fields to GET requests
  * @param {String} url
  *  The URL you pass will normally be automatically extended through Q.ajaxExtend
  * @param {String|Array} slotNames
@@ -7406,6 +7407,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  A hash of options, including options that would be passed to Q.url(), but also these:
  * @param {String} [options.method="GET"] the HTTP method to use. If not "GET" and options.form is set, adds to url &Q.method= that value to the querystring, and uses POST method.
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
+ * @param {Object} [options.formdata] if set, instead of fields, submits the formdata (including multipart form-data such as files, etc.) 
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
  * @param {String} [options.resultFunction="result"] The path to the function to handle inside the
  *  contentWindow of the resulting iframe, e.g. "Foo.result". 
@@ -7588,14 +7590,16 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.extend(xmlhttp, o.xhr);
 				sync = sync || xmlhttp.sync;
 			}
-			var content = Q.queryString(o.fields);
+			var content = o.formdata ? o.formdata : Q.queryString(o.fields);
 			request.xmlhttp = xmlhttp;
 			if (verb === 'GET') {
 				xmlhttp.open('GET', url + (content ? '&' + content : ''), !sync);
 				xmlhttp.send();
 			} else {
 				xmlhttp.open(verb, url, !sync);
-				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				if (!o.formdata) {
+					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
+				}
 				//xmlhttp.setRequestHeader("Content-length", content.length);
 				//xmlhttp.setRequestHeader("Connection", "close");
 				xmlhttp.send(content);
@@ -8966,6 +8970,7 @@ var _latestLoadUrlObjects = {};
  * @param {boolean} [options.ignoreLoadingErrors=false] If true, ignores any errors in loading scripts.
  * @param {boolean} [options.ignoreHash=false] if true, does not navigate to the hash part of the URL in browsers that can support it
  * @param {Object} [options.fields] additional fields to pass via the querystring
+ * @param {Object} [options.formdata] if set, instead of fields, submits the formdata (including multipart form-data such as files, etc.) 
  * @param {Boolean|String} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {Number|boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {boolean} [options.quiet=false] if true, allows visual indications that the request is going to take place.

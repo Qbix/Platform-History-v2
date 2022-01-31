@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}} ichida"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metr",
-        "meters": "metr",
-        "kilometer": "kilometr",
-        "kilometers": "kiometrlar",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "milya",
-        "miles": "milya",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "oyoq",
-        "feet": "oyoqlar",
-        "inches": "dyuym"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Menga {{select}} ichida sodir bo&#39;layotgan voqealar qiziq",
-        "update": "Mening joylashuvimni yangilash",
-        "set": "Mening joylashuvimni sozlash",
-        "prompt": "{{ClickOrTap}} bu erga<br> sozlang<br> Manzil",
-        "myCurrentLocation": "Mening hozirgi joylashuvim",
-        "enterAddress": "Manzilni kiriting",
-        "enterPostcode": "Iltimos, pochta indeksi \/ pochta indeksini kiriting",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Manzil qo&#39;shish",
-            "title": "Yangi Manzil",
-            "nameYourLocation": "Manzilingizni nomlang"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Bu joy saqlansinmi?",
-            "message": "Kelgusida bu joydan yana foydalanmoqchimisiz?",
-            "ok": "Ha",
-            "cancel": "Yo&#39;q"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Bu manzilga nom bering",
-            "placeholder": "Uy, ish va boshqalar.",
-            "ok": "Saqlash"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Joyni tanlang"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Bu joy ichida biron joy bormi?",
-        "newArea": "Yangi maydon",
-        "promptTitle": "Hudud uchun nom kiriting:",
-        "absent": "Iltimos, maydonni belgilang",
-        "error": "Xato",
-        "exist": "Hudud allaqachon mavjud",
-        "addNewArea": "Yangi maydon qo&#39;shish",
-        "add": "Qo&#39;shish"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "joylar to&#39;plami",
-            "displayType": "Joylar"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Bino, makon, kema, park va boshqalarni ifodalaydi.",
-            "displayType": "Manzil"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Joyni, masalan, xona yoki to&#39;plamni ifodalaydi",
-            "displayType": "Hudud"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Bino yoki kemadagi polni ifodalaydi",
-            "displayType": "Zamin"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Bino yoki kemadagi ustunni ifodalaydi",
-            "displayType": "Ustun"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Geohash ma&#39;lum masofada joylashgan narsalar toifasi",
-            "displayType": "Joylarga yaqin"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Qiziqishlarga mos keladigan geohash ma&#39;lum masofadagi narsalar toifasi",
-            "displayType": "Qiziqarli joylar"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "홍보 링크",
-                "startDate": "시작 날짜",
-                "startTime": "시작 시간",
-                "endDate": "종료일",
-                "endTime": "종료 시간",
-                "budget": "예산"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "관심 분야별 필터링",
-                "FilterInterests": "관심 분야를 입력하기 시작합니다 ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "관심",
-            "Location": "위치"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "가기",
-            "PasteLinkHere": "여기에 링크 붙여 넣기",
-            "BrowseTheWeb": "검색",
-            "WriteToStartConversation": "대화를 시작할 생각을 남기세요.",
-            "StartConversation": "대화 시작",
-            "GotoConversation": "대화로 이동",
-            "reset": "초기화",
-            "edit": "편집하다",
-            "link": "링크",
-            "setUrl": "URL 설정",
-            "save": "저장",
-            "setClip": "잘라낸 클립",
-            "invalidURL": "잘못된 URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "캐싱하기에 파일이 너무 큽니다. 최대 파일 크기 {{size}}",
-        "InvalidPDF": "파일이 유효한 PDF가 아닙니다.",
-        "StartTypingTitleOrKeywords": "제목 또는 키워드 입력 시작 ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "다양한 사용자가보고 편집 할 수있는 HTML 문서",
-            "displayType": "조"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "프리젠 테이션의 슬라이드에는 HTML, 오디오 등이 포함될 수 있습니다.",
-            "displayType": "슬라이드"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "다양한 슬라이드로 구성된 프레젠테이션",
-            "displayType": "표시"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "웹 사이트의 광고 단위",
-            "displayType": "광고 단위"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "이름으로 광고 단위를 그룹화하는 방법",
-            "displayType": "광고 게재 위치"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "광고 내용",
-            "displayType": "광고 소재"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "광고 캠페인",
-            "displayType": "광고 캠페인"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "메타 데이터가 스크랩 된 웹 사이트를 나타냅니다",
-            "displayType": "웹 페이지"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

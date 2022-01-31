@@ -55,9 +55,9 @@ function Assets_after_Streams_save($params) {
 	}
 
 	$streamName = strpos($stream->name, "Streams/greeting/") === false ? $stream->name : "Streams/greeting";
-	Assets_Credits::grant($credits, ucfirst(Q_Utils::normalize($streamName)), $inviteRow->invitingUserId, array(
+	Assets_Credits::grant($credits, Q_Utils::ucfirst(Q_Utils::normalize($streamName)), $inviteRow->invitingUserId, array(
 		'publisherId' => $stream->publisherId,
 		'streamName' => $stream->name,
-		'invitedUserName' => $invitedUser->displayName()
+		'invitedUserName' => $invitedUser->displayName(array('asUserId' => $inviteRow->invitingUserId))
 	));
 }

@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "taobh a-staigh {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "meatair",
-        "meters": "meatairean",
-        "kilometer": "cilemeatair",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "mìle",
-        "miles": "mìltean",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "chas",
-        "feet": "troighean",
-        "inches": "òirleach"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Tha ùidh agam ann an rudan a tha a ’tachairt taobh a-staigh {{select}} de",
-        "update": "Ùraich mo shuidheachadh",
-        "set": "Suidhich mo shuidheachadh",
-        "prompt": "{{ClickOrTap}} an seo gu<br> suidhich do<br> àite",
-        "myCurrentLocation": "An t-àite a th ’agam an-dràsta",
-        "enterAddress": "Cuir a-steach seòladh",
-        "enterPostcode": "Cuir a-steach an còd-puist \/ còd-zip agad",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Cuir Suidheachadh ris",
-            "title": "Àite ùr",
-            "nameYourLocation": "Ainmich d ’àite"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Sàbhail an àite seo?",
-            "message": "A bheil thu an dùil an t-àite seo a chleachdadh a-rithist san àm ri teachd?",
-            "ok": "tha",
-            "cancel": "Chan eil"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Ainmich an t-àite seo",
-            "placeholder": "Dachaigh, Obair msaa.",
-            "ok": "Sàbhail"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Tagh Suidheachadh"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Sgìre sam bith taobh a-staigh an àite seo?",
-        "newArea": "Sgìre ùr",
-        "promptTitle": "Cuir a-steach ainm airson na sgìre:",
-        "absent": "Feuch an cuir thu sgìre air dòigh",
-        "error": "Mearachd",
-        "exist": "Tha sgìre ann mu thràth",
-        "addNewArea": "Cuir raon ùr ris",
-        "add": "Cuir ris"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "cruinneachadh de dh ’àiteachan",
-            "displayType": "Àiteachan"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "A ’riochdachadh togalach, àite, bàta, pàirc, msaa.",
-            "displayType": "Àite"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "A ’riochdachadh sgìre taobh a-staigh àite, leithid seòmar no seòmar",
-            "displayType": "Sgìre"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "A ’riochdachadh làr ann an togalach no bàta",
-            "displayType": "Làr"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "A ’riochdachadh colbh ann an togalach no bàta",
-            "displayType": "Colbh"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Roinn-seòrsa airson rudan taobh a-staigh astar sònraichte de ghehashash",
-            "displayType": "Faisg air àiteachan"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Roinn airson rudan taobh a-staigh astar sònraichte de ghehashash, a ’maidseadh ùidh",
-            "displayType": "Àite àiteachan"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Nouvo atik"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Moun mwen envite",
-        "Streams\/invitedMe": "Ki moun ki envite m &#39;",
-        "AreYouAgree": "Èske ou dakò?",
-        "Yes": "Wi",
-        "No": "Non"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Kisa ou renmen?",
-        "CanAdd": "Si ou toujou pa ka jwenn sa w ap chèche a, ou ka ajoute yon nouvo enterè anba a:",
-        "TrySynonyms": "Pa wè li? Eseye kèk sinonim.",
-        "AddUnderCategory": "Ajoute anba kategori ...",
-        "Other": "Lòt",
-        "Unlisted": "Non"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Mesaj te afiche pou revizyon admin. Tape ankò pou unflag.",
-        "noOneSaid": "Pa gen moun ki te di anyen",
-        "closeChatButton": "Fèmen chat",
-        "closeChatConfirmTitle": "Fèmen chat sa a?",
-        "closeChatConfirm": "Èske ou sèten ou vle fèmen chat sa a?",
-        "closeChatConfirmYes": "Wi",
-        "closeChatConfirmNo": "Non",
-        "earlierComments": "kòmantè pi bonè",
-        "Subscribed": "Notifikasyon sou bèbè",
-        "Unsubscribed": "Jwenn Notifikasyon yo",
-        "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan konvèsasyon sa a.",
-        "startedConversation": "te kòmanse yon konvèsasyon",
-        "RealTimeCall": "Rele nan tan reyèl",
-        "SearchByName": "Rechèch pa non",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} ap vizite chat la",
-            "Join": "{{displayName}} rantre nan chat la",
-            "Leave": "{{displayName}} kite chat la",
-            "RelatedTo": "{{displayName}} te kòmanse yon {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Mesaj {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} te di:",
-        "Streams\/changed": "Chanjman nan {{stream.fields.title}}",
-        "Streams\/invite": "Ou te envite nan {{& stream.fields.title}}",
-        "Streams\/announcement": "Anons nan {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} chanje aksè kouran an",
-        "Streams\/chat\/edit": "Mesaj chat modifye",
-        "Streams\/chat\/remove": "Mesaj chat retire li",
-        "Streams\/closed": "{{stream.fields.title}} te fèmen",
-        "Streams\/task\/progress": "Pwogrè ki fèt sou {{stream.fields.title}}",
-        "Streams\/task\/complete": "Objektif Travay la ranpli: {{stream.fields.title}}",
-        "Streams\/task\/error": "Erè pandan: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesaj kap vini",
-        "Streams\/relatedTo\/Streams\/call": "Nouvo apèl te kòmanse nan {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nouvo {{relationDisplayType}} nan {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Te ajoute nan {{toTitle}} kòm {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mansyone ou nan yon kòmantè",
-        "Streams\/call": "{{displayName}} te kòmanse yon apèl an tan reyèl",
-        "ManageEmailSubscriptions": "jere abonnman imel ou",
-        "IfUnsubscribe": "Si ou vle koupe abònman"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} envite ou nan {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Chwazi nan Kontak ou",
-            "chooseAgainFromContacts": "Chwazi ankò soti nan Kontak",
-            "inviteSelectedContacts": "Envite Kontak chwazi yo",
-            "selectFromContacts": "Chwazi nan Kontak",
-            "photo": "Pran yon foto",
-            "photoInstruction": "Si moun ki tcheke kòd QR ou an devan ou, pran yon foto nan yo",
-            "to": "Pou: {{Stream Title}}",
-            "go": "Ale",
-            "title": "Envite",
-            "placeholder": "Nimewo mobil oswa adrès imel",
-            "orInvite": "Oswa envite moun lè l sèvi avèk:",
-            "QR": "{{ClickOrTap}} jenere kòd QR",
-            "QRtitle": "Fè enspeksyon kòd QR sa a",
-            "QRscanned": "Yo tcheke li!",
-            "byEmail": "Imèl",
-            "byText": "Tèks",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} si yo te eskane kòd la",
-            "copyLink": "{{ClickOrTap}} kopye lyen envite",
-            "userChooserPlaceholder": "Rechèch pa non"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, tcheke sa a soti",
-            "PleaseVisitLink": "Tanpri vizite lyen sa a:",
-            "InvitingYou": "Mwen envite ou nan {{title}}",
-            "HasInvitedYou": "{{displayName}} envite ou nan {{title}}",
-            "HasMentionedYou": "{{displayName}} te mansyone ou nan &quot;{{title}}&quot;",
-            "YOUAREINVITED": "Ou envite!",
-            "AcceptInvite": "Aksepte Envite"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Ou te envite nan {{title}}. Tanpri tape {1000}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Ou te envite. {{ClickOrTap}} isit la pou aksepte ak rantre nan."
-        },
-        "command": "Envite",
-        "youCanNowPaste": "Ou kapab kounye a kole lyen sa a yon kote pou envite moun"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
-            "confirm": "Envite yo voye soti nan nimewo nou an, ki zanmi ou pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
-            "check": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke SMS ou epi klike sou lyen an!",
-            "CheckYourMobile": "Tanpri tcheke SMS epi swiv enstriksyon yo!"
-        },
-        "email": {
-            "alert": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Swiv avèk yon tèks rapid fè yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
-            "confirm": "Envite yo voye soti nan domèn nou an, ki zanmi ou yo pa ankò rekonèt. Èske ou ta renmen swiv avèk yon tèks rapid yo kite yo konnen envitasyon an te soti nan ou, mande yo klike sou lyen an.",
-            "subject": "Eske ou te jwenn yon envite?",
-            "body": "Hey, mwen jis voye ou yon envite nan {{app}} app a. Tanpri tcheke imèl ou epi klike sou lyen an nan la!",
-            "CheckYourEmail": "Tanpri tcheke imèl ou epi swiv enstriksyon yo!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Pèmèt mikwofòn",
-            "cameraTitle": "Pèmèt kamera",
-            "cameraAndMicrophoneTitle": "Pèmèt kamera ak mikwofòn",
-            "dialogTitle": "Konekte",
-            "microphoneBtn": "Pèmèt mikwofòn",
-            "cameraBtn": "Pèmèt kamera",
-            "cameraAndMicrophoneBtn": "Pèmèt kamera ak mikwofòn"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Enstriksyon",
-            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
-            "point1": "Ale nan &quot;Anviwònman&quot; -&gt; &quot;Avanse&quot; -&gt; &quot;Konfidansyalite ak sekirite&quot; -&gt; &quot;Anviwònman lokal&quot; -&gt; &quot;Kamera&quot; oswa &quot;Anviwònman lokal&quot; -&gt; &quot;Mikwo&quot;",
-            "point2": "Retire {{hostname}} nan lis &quot;blòk&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Enstriksyon",
-            "permissionDenied": "Pèmisyon pou {{kind}} refize. Tanpri rechaje paj sa a epi konfime aksè a {{kind}} pou rantre nan konferans lan."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Enstriksyon",
-            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
-            "point1": "Ale nan Anviwònman android ou",
-            "point2": "Louvri &quot;Apps &amp; notifikasyon&quot;",
-            "point3": "Jwenn &quot;{{communityName}}&quot; epi louvri li",
-            "point4": "Tape sou Permissions",
-            "point5": "Pèmèt {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Enstriksyon",
-            "permissionDenied": "Pèmisyon pou {{kind}} refize. Pou itilize li tanpri swiv etap sa yo:",
-            "point1": "Ale nan anviwònman iOS ou",
-            "point2": "Louvri &quot;Privacy&quot;",
-            "point3": "Jwenn {{kind}} epi louvri li",
-            "point4": "Jwenn &quot;{{communityName}}&quot; ak pèmèt"
-        },
-        "notices": {
-            "youJoinedRoom": "Ou antre nan sal la",
-            "joining": "Rantre nan: {{userName}}",
-            "sbLeftRoom": "{{userName}} kite chanm nan",
-            "youLeftRoom": "Ou te kite sal la",
-            "codeCopied": "Ou te kite sal la",
-            "sbBeganFbLive": "{{userName}} te kòmanse transmèt apèl sa a nan Facebook",
-            "sbStoppedFbLive": "{{userName}} te sispann transmèt apèl sa a nan Facebook",
-            "youBeganFbLive": "Ou te kòmanse transmèt apèl sa a nan Facebook",
-            "youStoppedFbLive": "Ou te sispann difize apèl sa a nan Facebook",
-            "linkCopiedToCb": "Link kopye nan papye",
-            "codeCopiedToCb": "Kòd kopye nan papye",
-            "userHasNoVideo": "Patisipan an pa gen okenn videyo",
-            "openInBrowserAlert": "Louvri lyen nan navigatè Safari pou rantre nan konferans lan.",
-            "youBeganVideoRecording": "Ou te kòmanse anrejistre konferans sa a",
-            "youStoppedVideoRecording": "Ou te sispann anrejistre konferans sa a",
-            "switchingRoom": "Chanje chanm ...",
-            "forceDisconnecting": "Ou pral dekonekte nan lespas 5 segonn",
-            "youStartedLive": "Ou te kòmanse difize apèl sa a nan koutim RTMP",
-            "youStoppedLive": "Ou sispann difize apèl sa a sou koutim RTMP",
-            "sbStartedLiveStreaming": "{{userName}} te kòmanse ap viv",
-            "sbStoppedLiveStreaming": "{{userName}} te fini ap viv",
-            "liveStopped": "Erè pandan y ap voye videyo nan pwen final ki te fèt"
-        },
-        "settingsPopup": {
-            "webCamera": "Kamera entènèt",
-            "screenSharing": "Pataje ekran",
-            "shareAnotherScreen": "Pataje yon lòt ekran",
-            "turnOffCameras": "Etenn tout kamera yo",
-            "startFBLive": "Kòmanse Facebook Livestream",
-            "stopFBLive": "One Stop Facebook Livestream",
-            "fbLiveTitle": "Tit Live",
-            "fbLiveDescription": "Live Deskripsyon",
-            "fbOnlyMeLiveAccess": "Sèlman mwen",
-            "fbFriendsAccess": "Zanmi",
-            "fbPublicAccess": "Piblik",
-            "fbStartLive": "Ale viv",
-            "fbStopLive": "Fen Live",
-            "fbEmbedCode": "Afiche",
-            "copy": "Kopi",
-            "turnOffVideo": "Etenn kamera \/ ekran pataje",
-            "turnOffScreenSharing": "Etenn pataje ekran",
-            "cameraIsTurnedOff": "Kamera etenn",
-            "startRecording": "Kòmanse anrejistreman",
-            "stopRecording": "One Stop anrejistreman",
-            "recordingInProgress": "Anrejistreman an nan pwogrè ...",
-            "publishOnTimeline": "Pibliye sou delè",
-            "publishToGroup": "Pibliye nan gwoup la",
-            "turnOffAudioInput": "Mikwofòn bèbè",
-            "micIsTurnedOff": "Mikwofòn etenn",
-            "start": "Kòmanse",
-            "stop": "Sispann",
-            "streamingSettings": "Anviwònman",
-            "streamToRTMP": "Kouran nan koutim RTMP"
-        },
-        "participantsPopup": {
-            "disconnect": "Dekonekte",
-            "floatingScreens": "Ekran k ap flote",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Pi fò eksepte mwen",
-            "maximizeLoudest": "Maksimize Loudest",
-            "staticMaximized": "Static Maximized",
-            "manual": "Manyèl",
-            "fullScreen": "Full Screen",
-            "turnOffCamera": "Kache videyo",
-            "turnOffAudio": "Bèbè odyo",
-            "turnOffScreenSharing": "Kache pataje ekran",
-            "turnOnCamera": "Montre videyo",
-            "turnOnAudio": "Unmute odyo",
-            "turnOnScreenSharing": "Montre pataje ekran"
-        },
-        "notAllowedToJoinCall": "Ou pa gen pèmisyon pou rantre nan kouran sa a.",
-        "streamTitle": "{{1}} apèl viv",
-        "preview": {
-            "preamble": "Reyinyon:",
-            "Meeting": "Reyinyon",
-            "MeetingEnded": "Reyinyon te fini"
-        },
-        "preparing": {
-            "micIsOff": "Mic se koupe",
-            "micIsOn": "Mic sou",
-            "cameraIsOff": "Kamera koupe",
-            "cameraIsOn": "Kamera sou",
-            "screenSharingIsOn": "Screensharing se sou",
-            "screenSharingIsOff": "Pataje ekran",
-            "joinNow": "Antre nan apèl la"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "afiche yon <em>{{message.fields.type}}<\/em> mesaj bay {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "kòmante sou",
-            "in": "pous",
-            "body": "nan {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "te afiche sou",
-                "byAvatar": "pa {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "gen yon nouvo {{instructions.fromDisplayType}}",
-                "byAvatar": "{{avatar.displayName}} te ajoute"
-            },
-            "startedCallIn": "te kòmanse yon apèl nan"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Envite",
-            "description": "Bwat resepsyon pou envitasyon"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Resous",
-            "description": "kouran pou jere aksè nan yon resous ak afiche mesaj sou dènye enfòmasyon yo"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "pou resevwa nouvèl sou pwogrè sou yon sèten travay",
-            "displayType": "Objektif Travay la"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "kategori pou travay",
-            "displayType": "Travay"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "yon eksperyans komen pou manm yon kominote",
-            "displayType": "Eksperyans komen pou manm yon kominote"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "bonjou ak yon itilizatè ka prezante tèt yo",
-            "displayType": "Salitasyon"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Nimewo",
-            "description": "nimewo matematik"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Dat",
-            "description": "dat"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Tèks",
-            "description": "kò tèks la"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Tèks",
-            "description": "ti kò nan tèks la"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Tèks",
-            "description": "kò medyòm tèks la"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Adrès imèl",
-            "description": "adrès imèl"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Nimewo telefòn",
-            "description": "nimewo telefòn"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "lyen sou entènèt la"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Imaj",
-            "description": "imaj vizyèl",
-            "newItem": "Ajoute Imaj"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Galeri Imaj",
-            "description": "galri nan imaj yo"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "yon album kote plizyè medya gen rapò"
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "Uploaded file",
+            "description": "uploaded file",
             "newItem": "Add File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "odyo clip",
-            "newItem": "Ajoute odyo"
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Videyo Clip",
-            "description": "videyo",
-            "newItem": "Ajoute Videyo"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "viv odyo oswa videyo"
+            "description": "live audio or video"
         },
         "Streams\/category": {
-            "displayType": "Kategori",
-            "description": "yon kategori ki ka gen lòt sous dlo ki gen rapò"
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "Patisipe Index",
-            "description": "sous dlo yo gen rapò ak \/ asosye ak sa a lè yon itilizatè kontre ak \/ kite"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Enterè",
-            "description": "reprezante enterè yon itilizatè nan yon sijè sèten"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "Fèk ap rantre",
-            "description": "destinasyon pou mesaj ke lòt itilizatè yo voye"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "Konvèsasyon",
-            "description": "yon konvèsasyon ant itilizatè yo, ak istwa"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Rele an tan reyèl",
-            "description": "yon tan reyèl videyo \/ odyo apèl"
-        },
-        "Streams\/pdf": {
-            "displayType": "Dokiman PDF",
-            "description": "Dokiman PDF",
-            "newItem": "Ajoute PDF"
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Kesyon",
-            "description": "kesyon kouran"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Reponn",
-            "description": "kouran repons"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Apèl",
-            "description": "kategori pou Streams \/ webrtc",
-            "MaxRelationsExceeded": "Max apèl depase"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Tit",
-        "Subscribed": "Enskri",
-        "Participants": "Patisipan yo",
-        "AreYouSureRemoveIdentifier": "Èske ou asire w ke ou retire sa a idantifyan?",
-        "AreYouSureUnsubscribeIdentifier": "Èske ou sèten koupe abònman sa a idantifyan? Li pral fèmen notifikasyon sa a idantifyan.",
-        "AreYouSureUnsubscribeDevice": "Èske ou sèten koupe abònman aparèy sa a? Li pral fèmen notifikasyon sou aparèy sa a.",
-        "Identifiers": "Idantifikatè yo",
-        "Devices": "Aparèy",
-        "Streams": "Flux",
-        "AreYouSureRemoveParticipant": "Èske ou sèten ou vle retire patisipan sa a?",
-        "RemoveParticipant": "Retire patisipan an"
-    },
     "menu": {
-        "placeholder": "tape tit paj",
-        "ModTab": "Modifye Item",
-        "Save": "Sove",
-        "Delete": "Efase",
-        "Submenu": "Soumèt"
-    },
-    "errors": {
-        "HiddenFromYou": "Kontni sa a kache pou ou."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Dosye",
-        "reset": "Reyajiste",
-        "edit": "Edite",
-        "title": "tit",
-        "description": "deskripsyon",
-        "upload": "Voye",
-        "link": "Lyen",
-        "setUrl": "Mete URL",
-        "save": "Sove",
-        "setClip": "Koupe Clip",
-        "invalidURL": "URL ki pa valab",
-        "invalidFile": "Dosye ki pa valab",
-        "errorNoSource": "Pa gen sous odyo",
-        "uploadLimit": "Gwosè dosye max: {{size}}",
-        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Reyajiste",
-        "edit": "Edite",
-        "title": "tit",
-        "description": "deskripsyon",
-        "upload": "Voye",
-        "link": "Lyen",
-        "setUrl": "Mete URL",
-        "save": "Sove",
-        "setClip": "Koupe Clip",
-        "invalidURL": "URL ki pa valab",
-        "invalidFile": "Dosye ki pa valab",
-        "errorNoSource": "Pa gen sous videyo",
-        "uploadLimit": "Gwosè dosye max: {{size}}",
-        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye max se {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Reyajiste",
-        "edit": "Edite",
-        "title": "tit",
-        "description": "deskripsyon",
-        "upload": "Voye",
-        "link": "Lyen",
-        "setUrl": "Mete URL",
-        "save": "Sove",
-        "setClip": "Koupe Clip",
-        "invalidURL": "URL ki pa valab",
-        "invalidFile": "Dosye ki pa valab",
-        "errorNoSource": "Pa gen sous pdf",
-        "uploadLimit": "Gwosè dosye max: {{size}}",
-        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Reyajiste",
-        "edit": "Edite",
-        "title": "tit",
-        "description": "deskripsyon",
-        "upload": "Voye",
-        "link": "Lyen",
-        "setUrl": "Mete URL",
-        "save": "Sove",
-        "setClip": "Koupe Clip",
-        "invalidURL": "URL ki pa valab",
-        "invalidFile": "Dosye ki pa valab",
-        "errorNoSource": "Pa gen sous imaj",
-        "uploadLimit": "Gwosè dosye max: {{size}}",
-        "errorFileSize": "Padon, men dosye twò gwo.<br> Gwosè dosye maksimòm lan se {{size}}",
-        "uploadedImage": "Uploaded imaj",
-        "imageTitle": "Tit imaj la"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Kesyon",
-        "Answers": "Repons",
-        "AnswerQuestion": "Reponn kesyon",
-        "SetYourAnswer": "Tanpri reponn kesyon an",
-        "NewQuestion": "Nouvo Kesyon",
-        "NewAnswer": "Nouvo Repons",
-        "AnswerDetails": "Reponn Detay",
-        "answerOption": "Opsyon",
-        "answerOptionExclusive": "Eksklizif",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "repons gratis ...",
-        "SaveQuestion": "Sove kesyon an",
-        "SaveAnswer": "Sove Repons",
-        "AddAnotherAnswer": "Ajoute yon lòt repons",
-        "ErrorAnswers": "Tanpri ajoute menm yon repons",
-        "AlreadyAnswered": "Deja reponn",
-        "TitlePlaceholder": "Tape kesyon ou an",
-        "ContentPlaceholder": "Mete nenpòt lòt enfòmasyon isit la pou ede moun yo reponn",
-        "ErrorTitle": "Kesyon obligatwa",
-        "Placeholder": "Plasman"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Nouvo Eksperyans",
-        "DefineTitle": "Tanpri defini yon tit",
-        "Create": "Kreye"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Apèl",
-        "MaxCalls": "Max apèl",
-        "Update": "Mizajou",
-        "NoCallsYet": "Pa gen apèl ankò",
-        "CallReasonTitle": "Ki sa ki rele sa a sou?",
-        "WaitingRoom": "Sal datant"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

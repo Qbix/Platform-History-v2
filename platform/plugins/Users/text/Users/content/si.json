@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ඇතුල් වන්න",
-        "LogOut": "ඉවත් වන්න"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Primary {999} my මගේ ප්‍රාථමික {{1000} Set ලෙස සකසන්න",
-        "ChoosePassPhrase": "පුරනය වීමට <strong>පාස් වාක්‍යයක්<\/strong> තෝරන්න. <br> ඔබට පහසුවෙන් මතක තබා ගත හැකි වචන කිහිපයකින් සමන්විත සරල වාක්‍ය ඛණ්ඩයකි.",
-        "ChoosePassPhraseSeeSuggestions": "ඔබගේ ගිණුම ආරක්ෂා කිරීම සඳහා හොඳ <strong>පාස් වාක්‍යයක්<\/strong> තෝරන්න. සමහර අදහස් සඳහා යෝජනා බලන්න.",
-        "LogOutAndTryAgain": "ඉවත් වී නැවත උත්සාහ කරන්න",
-        "IfYouFeel": "යමක් වැරදී ඇති බව ඔබට දැනේ නම්, ඔබට හැකිය",
-        "SetIdentifierButtonTitle": "නැවත ආරම්භ කරන්න"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "ආරම්භ කරන්න"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "ආරම්භ කරන්න",
-        "Authorize": "අවසරලත්",
-        "TermsLabel": "මම කියවා එකඟ වී සිටිමි <br> {{999} to වෙත",
-        "TermsTitle": "කොන්දේසි",
-        "mustAgree": "පළමුව ඔබ කොන්දේසි වලට එකඟ විය යුතුය."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "මම පිළිගන්නේ {{link}}",
-        "TermsTitle": "කොන්දේසි"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "අවසර",
-        "prompt": "ඔබට දැනුම්දීම් සක්‍රීය කිරීමට අවශ්‍යද? ඔබ සැලකිලිමත් වන දේවල් පිළිබඳ තත්‍ය කාලීන යාවත්කාලීන කිරීම් ඔබට ලැබෙනු ඇත.",
-        "yes": "ඔව්",
-        "no": "නොමැත",
-        "WelcomePleaseVerifyEmail": "සාදරයෙන් පිළිගනිමු! කරුණාකර ඔබගේ විද්‍යුත් තැපැල් ලිපිනය සත්‍යාපනය කරන්න.",
-        "WelcomeVerifyEmail": "සාදරයෙන් පිළිගනිමු! ඔබගේ විද්‍යුත් තැපැල් ලිපිනය සත්‍යාපනය කරන්න.",
-        "ForgetPass": "හේයි, ඔබේ මුරපදය ඔබට අමතකද?",
-        "PassphraseSaved": "ඔබගේ පාස් වාක්‍යය සුරකින ලදි.",
-        "IdentifierActivated": "ඔබගේ {99 999} activ සක්‍රීය කර ඇත.",
-        "CompletedActivation": "ඔබ පරිශීලක සක්‍රිය කිරීම සම්පූර්ණ කර ඇත.",
-        "CompletedActivationLogIn": "ඔබ පරිශීලක සක්‍රිය කිරීම සම්පූර්ණ කර ඇත. දැන් පුරනය වීමට උත්සාහ කරන්න."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "සම්බන්ධතා තෝරන්න",
-            "CreateAccount": "+ නව සම්බන්ධතා",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create හමු නොවීය",
-            "SearchByName": "නමින් සොයන්න",
-            "EmptyContacts": "සම්බන්ධතා හමු නොවීය ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Contact {999} contact හි සම්බන්ධතාවය තෝරන්න"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "කරුණාකර ලේබලය තෝරන්න.",
-        "inviteUser": "පරිශීලකයාට ආරාධනා කරන්න",
-        "selectRole": "භූමිකාව තෝරන්න",
-        "inviteRole": "ආරාධනා කරන්න {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "අවලංගු භාෂාව තෝරා ඇත",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "සාදරයෙන් පිළිගනිමු",
-        "directions": "ගිණුමක් සාදන්න, නැතහොත් පුරනය වන්න.",
-        "directionsNoRegister": "ඔබට ගිණුමක් ඇත්නම් ලොග් වන්න.",
-        "goButton": "යන්න",
-        "passphrase": "ඔබගේ පාස් වාක්‍යය ඇතුළත් කරන්න:",
-        "loginButton": "ආරම්භ කරන්න",
-        "registerButton": "ආරම්භ කරන්න",
-        "resendButton": "සක්‍රිය කිරීමේ පණිවිඩය යවන්න",
-        "forgot": "එය අමතකද?",
-        "resendConfirm": "ඔබගේ මුරපදය නැවත සැකසීමට පණිවිඩයක් යැවීමට ඔබට අවශ්‍යද?",
-        "resendSuccess": "ඔබගේ මුරපදය නැවත සැකසීමට පණිවිඩයක් සඳහා පරීක්ෂා කරන්න",
-        "resendClose": "වසන්න",
-        "noPassphrase": "ඔබට පුරනය වීමට පෙර, ඔබගේ සක්‍රිය කිරීමේ පණිවිඩයේ ඇති සබැඳිය ක්ලික් කිරීමෙන් පාස් වාක්‍යයක් සැකසිය යුතුය.",
-        "notVerified": "පුරනය වීම සඳහා ඔබ විසින්ම සක්‍රීය පණිවිඩයක් යැවිය යුතුය.",
-        "emailExists": "ඔබ මීට පෙර මෙම විද්‍යුත් තැපෑලෙන් ලියාපදිංචි වීමට උත්සාහ කළාද? එසේ නම්, ඔබගේ ගිණුම සක්‍රිය කිරීමට ඔබගේ එන ලිපි පරීක්ෂා කරන්න. <a href='#resend' class='Q_button Users_activation_resend'>පණිවිඩය නැවත යැවීමට ක්ලික් කරන්න<\/a>",
-        "mobileExists": "ඔබ මීට පෙර මෙම ජංගම දුරකථන අංකය සමඟ ලියාපදිංචි වීමට උත්සාහ කළාද? එසේ නම්, ඔබගේ ගිණුම සක්‍රිය කිරීමට ඔබේ කෙටි පණිවුඩය පරීක්ෂා කරන්න. <a href='#resend' class='Q_button Users_activation_resend'>පණිවිඩය නැවත යැවීමට ක්ලික් කරන්න<\/a>",
-        "usingOther": "නැත්නම් ඔබට පුළුවන්",
-        "prompt": "පරිශීලක නාමයක් තෝරන්න:",
-        "newUser": "හෝ නව ගිණුමක් සාදන්න",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "ඔබගේ ජංගම # හෝ විද්‍යුත් තැපෑල",
-            "mobile": "ඔබගේ ජංගම දුරකථනය ඇතුළත් කරන්න #",
-            "email": "ඔබගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුළත් කරන්න",
-            "username": "පරිශීලක නාමය"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "සේවා කොන්දේසි පිළිගන්නවාද?",
-        "facebookNoEmail": "ඔබගේ ෆේස්බුක් ගිණුමට තහවුරු කළ විද්‍යුත් තැපැල් ලිපිනයක් නොමැත. ස්වදේශීය ක්‍රමයට පිවිසෙන්න.",
-        "picTooltip": "ඔබට මෙම පින්තූරය පසුව වෙනස් කළ හැකිය",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "වේලාවකට {{timestamp}} {{host}} වෙත පිවිසෙන්න",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "පසුම්බිය වෙත හරවා යැවීම",
-                "content": "ඔබ මෙම සංවාදය වසා දැමීමෙන් පසු ඔබව පසුම්බියට ගෙන යනු ඇත. ඔබ පුරනය වූ පසු, මෙම පිටුවට ආපසු යන්න."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "පුරනය වීමට ක්‍රමයක් එක් කරන්න",
-        "sendMessage": "සක්‍රිය කිරීමේ පණිවිඩය යවන්න",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "ඔබගේ ජංගම # හෝ විද්‍යුත් තැපෑල ඇතුළත් කරන්න",
-            "mobile": "ඔබගේ ජංගම දුරකථන අංකය ඇතුලත් කරන්න",
-            "email": "ඔබගේ විද්‍යුත් තැපැල් ලිපිනය ඇතුළත් කරන්න",
-            "username": "පරිශීලක නාමය"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} ගිණුම",
-        "areUsing": "ඔබ {{999} as ලෙස භාවිතා කරයි",
-        "noLongerUsing": "ඔබ තවදුරටත් {{999} to ලෙස සම්බන්ධ නොවේ",
-        "doAuth": "මෙම ගිණුම සමඟ ලොග් වන්න",
-        "doSwitch": "මෙම ගිණුමට මාරුවන්න"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "හිමිකරු",
-        "Admin": "පරිපාලක",
-        "Member": "සාමාජික",
-        "Guest": "අමුත්තන්ගේ",
-        "Host": "සත්කාරක"
-    },
-    "analytics": {
-        "Title": "විශ්ලේෂණ",
-        "Daily": "දිනපතා",
-        "Weekly": "සතිපතා",
-        "Monthly": "මාසික",
-        "Application": "අයදුම්පත",
-        "Pages": "පිටු",
-        "Services": "සේවාවන්",
-        "Faq": "නිති අසන පැණ",
-        "WeekDays": "සතියේ දින"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Waxyaabaha cusub"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Dadka aan ku casuumay",
-        "Streams\/invitedMe": "Yaa iigu yeedhay",
-        "AreYouAgree": "Ma ku raacsan tahay?",
-        "Yes": "Haa",
-        "No": "Maya"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Maxaad ku raaxaysataa?",
-        "CanAdd": "Haddii aadan weli helin waxaad raadineyso, waxaad ku dari kartaa dulsaar cusub:",
-        "TrySynonyms": "Ma aragto? Isku day qaar isku mid ah.",
-        "AddUnderCategory": "Ku dar qeybta ...",
-        "Other": "Kuwa kale",
-        "Unlisted": "Liis ma liisto"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Farriinta ayaa lagu calaamadeeyay dib u eegista admin. Mar labaad ku dheji foolxumo.",
-        "noOneSaid": "Qofna wax ma sheegin",
-        "closeChatButton": "Sheekeysi dhow",
-        "closeChatConfirmTitle": "Kudhaw khariidadan?",
-        "closeChatConfirm": "Ma hubtaa inaad rabto inaad xirto wada sheekeysiga?",
-        "closeChatConfirmYes": "Haa",
-        "closeChatConfirmNo": "Maya",
-        "earlierComments": "faallooyinka hore",
-        "Subscribed": "Kusoo Ogeysiisyada",
-        "Unsubscribed": "Hel Ogeysiisyada",
-        "notAllowedToJoinCall": "Uma lihin rukhsad inaad ku biirto wadahadalka.",
-        "startedConversation": "bilaabay wadahadal",
-        "RealTimeCall": "Wicitaanka waqtiga dhabta ah",
-        "SearchByName": "Magac raadso",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} ayaa booqanaya wada sheekaysiga",
-            "Join": "{{displayName}} waxay ku biirtay wada sheekaysiga",
-            "Leave": "{{displayName}} sheekadii wuu ka tagay",
-            "RelatedTo": "{{displayName}} wuxuu bilaabay {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Fariin {{& message.fields.type}} ilaa {1000}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ayaa yiri:",
-        "Streams\/changed": "Isbedelada {999}}",
-        "Streams\/invite": "Waxaa laguugu casuumay {999}}",
-        "Streams\/announcement": "Ogeysiiska gudaha {999}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ayaa la beddelay gelitaanka socodka",
-        "Streams\/chat\/edit": "Farriinta sheekaysiga ayaa la sameeyay",
-        "Streams\/chat\/remove": "Farriinta hadalka ayaa laga saaray",
-        "Streams\/closed": "{{stream.fields.title}} waa la xidhay",
-        "Streams\/task\/progress": "Horumarka laga gaaray {{stream.fields.title}}",
-        "Streams\/task\/complete": "Hawlaha la dhammeeyey: {999}}",
-        "Streams\/task\/error": "Xilliga lagu jiro: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Farriinta soo socota",
-        "Streams\/relatedTo\/Streams\/call": "Wicitaan cusub ayaa ka bilaabmay {{toTitle}}",
-        "Streams\/relatedTo\/*": "Cusub {{relationDisplayType}} ee {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Lagu daray {{toTitle}} sida {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ayaa lagu sheegay faallooyinka",
-        "Streams\/call": "{{displayName}} waxay bilaabeen wicitaan waqti-buuxa ah",
-        "ManageEmailSubscriptions": "maaree rukhsadaha emaylkaaga",
-        "IfUnsubscribe": "Hadaad rabto inaad rukhsad ka bixiso"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} kugu martiqaaday {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Xulo Xidhiidhkaaga",
-            "chooseAgainFromContacts": "Mar labaad ka doorto Xiriirrada",
-            "inviteSelectedContacts": "Ku casuumi Xiriirrada la Doortay",
-            "selectFromContacts": "Xulo Xiriirada",
-            "photo": "Qaado sawir",
-            "photoInstruction": "Haddii qofka ku sawiray qadarkaaga QR waa adiga horteed, sawir ka qaado",
-            "to": "Ku:: {{Stream Title}}",
-            "go": "Tag",
-            "title": "Soo-jeedi",
-            "placeholder": "Lambarka taleefanka ama cinwaanka emailka",
-            "orInvite": "Ama ku casuumi dadka adigoo isticmaalaya:",
-            "QR": "{{ClickOrTap}} si loo abuuro QR code",
-            "QRtitle": "Sawir QR-QR",
-            "QRscanned": "Waxay tarjumeen!",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "byEmail": "Email",
-            "byText": "Qoraalka",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} haddii koodhkaas la-sawiray",
-            "copyLink": "{{ClickOrTap}} si loo nuqulo xiriirika martiqaadka",
-            "userChooserPlaceholder": "Magac ku raadi"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, hubi tan",
-            "PleaseVisitLink": "Fadlan booqo xiriirka soo socda:",
-            "InvitingYou": "Waxaan kugu martiqaadayaa {999}",
-            "HasInvitedYou": "{{displayName}} ayaa kugu martiqaaday {{title}}",
-            "HasMentionedYou": "{{displayName}} wuxuu kugu xusey &quot;{{title}}&quot;",
-            "YOUAREINVITED": "WAAD KU JIRTAA!",
-            "AcceptInvite": "Aqbal Martiqaadka"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Waxaa lagugu casuumay {999}}. Fadlan wac {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Waxaa lagugu casuumey. {{ClickOrTap}} halkan si aad u aqbalo una biirto."
-        },
-        "command": "Martiqaad",
-        "youCanNowPaste": "Hada waad ku dhejin kartaa xiriirinkan meel aad ku casuumayso dadka"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
-            "confirm": "Soo-casuumaad ayaa laga soo diraa lambarkayaga, kuwaas oo saaxiibadaa aysan weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
-            "check": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan hubi sms-kaaga oo guji link",
-            "CheckYourMobile": "Fadlan hubi SMS oo raac tilmaamaha!"
-        },
-        "email": {
-            "alert": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. La soco qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kaa yimid, adoo waydiinaya inay isku xiraan link.",
-            "confirm": "Soo-casuumaadyada ayaa laga soo diraa nooca domain, kuwaas oo asxaabtaadu aanay weli aqoonsan. Ma jeclaan lahayd in aad la socoto qoraal deg-deg ah si aad ugu sheegto martiqaadku inuu kuu yimaado, adoo weydiinaya inay isku xiraan link.",
-            "subject": "Ma heshay martiqaad?",
-            "body": "Haa, waxaan kaliya kuu soo diray martiqaadka barnaamijka {999}}. Fadlan calaamadee emailkaaga oo guji linkada!",
-            "CheckYourEmail": "Fadlan hubi emaylkaaga oo raac tilmaamaha!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "U oggolow Mikrafoon",
-            "cameraTitle": "Awood siinta Kamarida",
-            "cameraAndMicrophoneTitle": "Awood injiiyaha iyo Maqalka",
-            "dialogTitle": "Isku xidhka",
-            "microphoneBtn": "Karti makarafoon",
-            "cameraBtn": "Karti Kaameeraha",
-            "cameraAndMicrophoneBtn": "Karti Kaamerada iyo makarafoonka"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Tilmaamaha",
-            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
-            "point1": "Tag &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Qarsoodiga iyo Amniga&quot; -&gt; &quot;Meelaha Dejinta&quot; -&gt; &quot;Kaamirada&quot; ama &quot;Meelaha Dejinta&quot; -&gt; &quot;makarafoon&quot;",
-            "point2": "Ka saar {{hostname}} liistada &quot;Qulqul&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Tilmaamaha",
-            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Fadlan dib ujiir boggan oo xaqiiji marin u hel {{kind}} si aad ugu biirto shirka."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Tilmaamaha",
-            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
-            "point1": "Tag Nidaamkaaga Android",
-            "point2": "Fur &quot;Barnaamijyada &amp; Ogeysiisyada&quot;",
-            "point3": "Raadi &quot;{{communityName}}&quot; oo fur",
-            "point4": "Taabo rukhsadaha",
-            "point5": "Karti {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Tilmaamaha",
-            "permissionDenied": "Oggolaanshaha {{kind}} waa la diiday. Si aad u isticmaasho fadlan raac talaabooyinkan:",
-            "point1": "Tag barnaamijyada macruufkaaga",
-            "point2": "Fur &quot;Qarsoodinimo&quot;",
-            "point3": "Raadi {{kind}} oo fur",
-            "point4": "Raadi &quot;{{communityName}}&quot; oo karti gali"
-        },
-        "notices": {
-            "youJoinedRoom": "Qolka ayaad ku biirtay",
-            "joining": "Ku soo biirista: {{userName}}",
-            "sbLeftRoom": "{{userName}} qolka ayuu ka tagay",
-            "youLeftRoom": "Qolka ayaad ka baxday",
-            "codeCopied": "Qolka ayaad ka baxday",
-            "sbBeganFbLive": "{{userName}} ayaa bilaabay inuu wicitaankan ku baahiyo Facebook-ga",
-            "sbStoppedFbLive": "{{userName}} waxay joojisay baahinta wicitaankan Facebook",
-            "youBeganFbLive": "Waxaad bilawday inaad ku baajiso wicitaankan Facebook",
-            "youStoppedFbLive": "Waad joojisay baahinta wicitaankan Facebook",
-            "linkCopiedToCb": "Xiriirinta ayaa lagu soo guuriyey galka",
-            "codeCopiedToCb": "Koodhka ayaa lagu soo guuriyey shaashadda",
-            "userHasNoVideo": "Ka-qeybgalaha ma leh muuqaal",
-            "openInBrowserAlert": "Ku fur xiriiriyaha Safari biraawsarka si aad ugu biirto shirka.",
-            "youBeganVideoRecording": "Waxaad bilawday duubista shirkan",
-            "youStoppedVideoRecording": "Waad joojisay duubista shirkan",
-            "switchingRoom": "Bedelka qolka ...",
-            "forceDisconnecting": "Waxaa lagaa jari doonaa 5 ilbidhiqsi gudahood",
-            "youStartedLive": "Waxaad bilowday baahinta wicitaankan RTMP -ga caadada u ah",
-            "youStoppedLive": "Waxaad joojisay baahinta wicitaankan RTMP -ga caadada u ah",
-            "sbStartedLiveStreaming": "{{userName}} toos baa loo bilaabay",
-            "sbStoppedLiveStreaming": "{{userName}} si toos ah baa loo dhammeeyay",
-            "liveStopped": "Cilad markii loo dirayay fiidiyaha barta dhammaadka ayaa dhacday"
-        },
-        "settingsPopup": {
-            "webCamera": "Kaamirada Websaydhka",
-            "screenSharing": "Wadaagista Shaashadda",
-            "shareAnotherScreen": "La wadaag shaashad kale",
-            "turnOffCameras": "Dami dhamaan kamaradaha",
-            "startFBLive": "Bilow Facebook Livestream",
-            "stopFBLive": "Jooji Facebook Livestream",
-            "fbLiveTitle": "Cinwaanka Tooska ah",
-            "fbLiveDescription": "Sharraxaadda Tooska ah",
-            "fbOnlyMeLiveAccess": "Kaliya aniga",
-            "fbFriendsAccess": "Asxaabta",
-            "fbPublicAccess": "Dadweynaha",
-            "fbStartLive": "Toos U Soco",
-            "fbStopLive": "Dhamaadka Tooska",
-            "fbEmbedCode": "Ku dhaji",
-            "copy": "Nuqul",
-            "turnOffVideo": "Dami kamarad \/ shaashad wadaag",
-            "turnOffScreenSharing": "Dami wadaagista shaashadda",
-            "cameraIsTurnedOff": "Kaamirada ayaa dansan",
-            "startRecording": "Bilow duubista",
-            "stopRecording": "Jooji Duubista",
-            "recordingInProgress": "Duubista ayaa socota ...",
-            "publishOnTimeline": "Ku daabac jadwalka waqtiga",
-            "publishToGroup": "Daabac kooxda",
-            "turnOffAudioInput": "Codbaahiyaha makarafoonka",
-            "micIsTurnedOff": "Mikrafoon waa la damiyay",
-            "start": "Bilow",
-            "stop": "Jooji",
-            "streamingSettings": "Dejinta",
-            "streamToRTMP": "Ku qulquli RTMP -ga caadada u ah"
-        },
-        "participantsPopup": {
-            "disconnect": "Kala goynta",
-            "floatingScreens": "Shaashadaha Biyo-Hareenka",
-            "tiledScreens": "Muraayadaha shaashadda leh",
-            "loudestExceptMe": "Aniga mooyee",
-            "maximizeLoudest": "Kordhin Loudest",
-            "staticMaximized": "Static Maximized",
-            "manual": "Buugga",
-            "fullScreen": "Shaashad Buuxa",
-            "turnOffCamera": "Qari fiidiyaha",
-            "turnOffAudio": "Cod maqal",
-            "turnOffScreenSharing": "Qari wadaagida shaashadda",
-            "turnOnCamera": "Muuji fiidiyow",
-            "turnOnAudio": "Cod maqal",
-            "turnOnScreenSharing": "Muuji wadaagida shaashadda"
-        },
-        "notAllowedToJoinCall": "Uma lihin ogolaansho inaad ku biirto qulqulkaan.",
-        "streamTitle": "{{1}} wicitaan toos ah",
-        "preview": {
-            "preamble": "Kulan:",
-            "Meeting": "Kulanka",
-            "MeetingEnded": "Kulanku wuu dhammaaday"
-        },
-        "preparing": {
-            "micIsOff": "Mikirifoonku waa dansan yahay",
-            "micIsOn": "Mic ayaa daaran",
-            "cameraIsOff": "Kamaradu waa dansan tahay",
-            "cameraIsOn": "Kamaradu way shidan tahay",
-            "screenSharingIsOn": "Shaashadda shaashadu waa daaran tahay",
-            "screenSharingIsOff": "La wadaag shaashadda",
-            "joinNow": "Ku biir Wicitaanka"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted <em>{{message.fields.type}}<\/em> a fariin u {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "faallo ka bixiyay",
-            "in": "gudaha",
-            "body": "ee {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ayaa lagu dhajiyay",
-                "byAvatar": "Waxaa qoray {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "leeyahay mid cusub {{instructions.fromDisplayType}}",
-                "byAvatar": "lagu daray {{avatar.displayName}}"
-            },
-            "startedCallIn": "waxay ku bilaabatay wicitaan gudaha"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Casuumay",
-            "description": "Sanduuqa martiqaadyada"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Kheyraadka",
-            "description": "u qulqulka maaraynta marin u helka macluumaadka iyo dhajinta farriimaha ku saabsan cusbooneysiinta"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "si aad u hesho cusboonaysiinta ku saabsan horumarka hawl gaar ah",
-            "displayType": "Hawl"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "qaybta hawlaha",
-            "displayType": "Hawlaha"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "waayo-aragnimo guud oo loogu talagalay xubnaha bulshada",
-            "displayType": "Khibrad guud oo loogu talagalay xubnaha bulshada"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "salaan taas oo isticmaale isbarasho isu sameyn karo",
-            "displayType": "Salaan"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Tirada",
-            "description": "lambar xisaabeed"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Taariikh",
-            "description": "taariikhda"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Qoraal",
-            "description": "jirka qoraalka"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Qoraal",
-            "description": "jirka yar ee qoraalka"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Qoraal",
-            "description": "jirka dhexe ee qoraalka"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Cinwaanka emailka",
-            "description": "cinwaanka emailka"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Lambarka taleefanka",
-            "description": "lambarka taleefanka"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "iskuxiraha shabakadda"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Sawirka",
-            "description": "muuqaal muuqaal ah",
-            "newItem": "Kudar Sawir"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Sawirka Sawirka",
-            "description": "sawirrada sawirrada"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "album ay ku xiran tahay warbaahinta kala duwan"
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Fayl",
-            "description": "faylka la galiyay",
-            "newItem": "Kudar Fayl"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Clip Audio",
-            "description": "maqal maqal ah",
-            "newItem": "Kudar Codka"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Clip Video",
-            "description": "Muuqaal video ah",
-            "newItem": "Ku dar Video"
-        },
-        "Streams\/live": {
-            "displayType": "Tooska",
-            "description": "live audio ama video"
-        },
-        "Streams\/category": {
-            "displayType": "Nooca",
-            "description": "Qaybta ay durdurrada kale xiriir la yeelan karaan"
-        },
-        "Streams\/participating": {
-            "displayType": "Kaqeybgalka kaqaybgalka",
-            "description": "durdurku waa la xiriira \/ kuma xirna tan tan marka isticmaale uu ku biiro \/ baxo"
-        },
-        "Streams\/interest": {
-            "displayType": "Daneyn",
-            "description": "wuxuu matalaa danaha isticmaale ee mowduuc gaar ah"
-        },
-        "Streams\/incoming": {
-            "displayType": "Soo gal",
-            "description": "halka loo socdo fariimaha ay isticmaaleyaan isticmaaleyaasha kale"
-        },
-        "Streams\/chat": {
-            "displayType": "Wadahadal",
-            "description": "wadahadal u dhexeeya isticmaaleyaasha, oo leh taariikh"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Wicitaan waqti-dhab ah",
-            "description": "waqti fiidiyow ah \/ maqal maqal ah"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Dukumiintiga PDF",
-            "description": "Dukumiintiga PDF",
-            "newItem": "Kudar PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Su’aal",
-            "description": "durdur su&#39;aal"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Jawaab",
-            "description": "jawaabta qulqulka"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Wicitaanada",
-            "description": "qaybta loogu talagalay Streams\/webrtc",
-            "MaxRelationsExceeded": "Wicitaanadii ugu badnaa way dhaafeen"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Cinwaanka",
-        "Subscribed": "Isdiiwaangaliyay",
-        "Participants": "Kaqeybgalayaasha",
-        "AreYouSureRemoveIdentifier": "Ma hubtaa inaad meesha ka saartay aqoonsi-yaqaankan?",
-        "AreYouSureUnsubscribeIdentifier": "Ma hubtaa inaad kabixid aqoonsi? Waxay deminta ogeysiiska u tirtireysaa aqoonsigan.",
-        "AreYouSureUnsubscribeDevice": "Ma hubtaa in aad iskaa iska bixinayso aaladda? Waxay dami doontaa ogeysiisyada aaladdaan.",
-        "Identifiers": "Aqoonsiyeyaasha",
-        "Devices": "Aaladda",
-        "Streams": "Qulqulka",
-        "AreYouSureRemoveParticipant": "Ma hubtaa inaad rabto inaad meesha ka saarto ka qaybqaatahan?",
-        "RemoveParticipant": "Ka saar ka qaybqaatayaasha"
-    },
     "menu": {
-        "placeholder": "nooca cinwaanka bogga",
-        "ModTab": "Wax ka Beddelka Shayga",
-        "Save": "Badbaadi",
-        "Delete": "Tirtir",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Nuxurka ayaa kaa qarsoon."
-    },
     "audio": {
-        "record": "Diiwaan",
-        "reset": "Dib u celi",
-        "edit": "Tafatir",
-        "title": "cinwaan",
-        "description": "sharaxaad",
-        "upload": "Geli",
-        "link": "Xiriir",
-        "setUrl": "Deji URL",
-        "save": "Keydso",
-        "setClip": "Iska yaree Clip",
-        "invalidURL": "URL aan ansax ahayn",
-        "invalidFile": "Fayl aan ansax ahayn",
-        "errorNoSource": "Ma jiro ilo maqal ah",
-        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
-        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Dib u celi",
-        "edit": "Tafatir",
-        "title": "cinwaan",
-        "description": "sharaxaad",
-        "upload": "Geli",
-        "link": "Xiriir",
-        "setUrl": "Deji URL",
-        "save": "Keydso",
-        "setClip": "Iska yaree Clip",
-        "invalidURL": "URL aan ansax ahayn",
-        "invalidFile": "Fayl aan ansax ahayn",
-        "errorNoSource": "Ma jiro ilo fiidiyoow",
-        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
-        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Dib u celi",
-        "edit": "Tafatir",
-        "title": "cinwaan",
-        "description": "sharaxaad",
-        "upload": "Geli",
-        "link": "Xiriir",
-        "setUrl": "Deji URL",
-        "save": "Keydso",
-        "setClip": "Iska yaree Clip",
-        "invalidURL": "URL aan ansax ahayn",
-        "invalidFile": "Fayl aan ansax ahayn",
-        "errorNoSource": "Ma jiro ilo pdf",
-        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
-        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Dib u celi",
-        "edit": "Tafatir",
-        "title": "cinwaan",
-        "description": "sharaxaad",
-        "upload": "Geli",
-        "link": "Xiriir",
-        "setUrl": "Deji URL",
-        "save": "Keydso",
-        "setClip": "Iska yaree Clip",
-        "invalidURL": "URL aan ansax ahayn",
-        "invalidFile": "Fayl aan ansax ahayn",
-        "errorNoSource": "Ma jiro ilo sawir",
-        "uploadLimit": "Cabirka faylka ugu badan: {{size}}",
-        "errorFileSize": "Waan ka xunnahay, laakiin faylku aad buu u ballaaran yahay.<br> Cabirka faylka ugu badan waa {{size}}",
-        "uploadedImage": "Sawirka la soo geliyay",
-        "imageTitle": "Cinwaanka sawirka"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Su&#39;aalaha",
-        "Answers": "Jawaabaha",
-        "AnswerQuestion": "Jawaab Su&#39;aal",
-        "SetYourAnswer": "Fadlan ka jawaab su&#39;aasha",
-        "NewQuestion": "Su’aal Cusub",
-        "NewAnswer": "Jawaab Cusub",
-        "AnswerDetails": "Faahfaahinta Jawaab",
-        "answerOption": "Xulasho",
-        "answerOptionExclusive": "Gaar ah",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "jawaab bilaash ah ...",
-        "SaveQuestion": "Keydso Su&#39;aal",
-        "SaveAnswer": "Jawaab kaydi",
-        "AddAnotherAnswer": "Ku dar jawaab kale",
-        "ErrorAnswers": "Fadlan ku dar xitaa hal jawaab",
-        "AlreadyAnswered": "Horaa looga jawaabay",
-        "TitlePlaceholder": "Qor su&#39;aashaada",
-        "ContentPlaceholder": "Macluumaad kasta oo dheeri ah halkaan dhig si aad uga caawiso dadka inay ka jawaabaan",
-        "ErrorTitle": "Su&#39;aal ayaa loo baahan yahay",
-        "Placeholder": "Meesha"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Khibrad Cusub",
-        "DefineTitle": "Fadlan qeex cinwaan",
-        "Create": "Abuur"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Wicitaanada",
-        "MaxCalls": "Wicitaanada Max",
-        "Update": "Cusboonaysii",
-        "NoCallsYet": "Wicitaanno weli ma jiro",
-        "CallReasonTitle": "Muxuu yahay baaqani?",
-        "WaitingRoom": "Qolka Sugitaanka"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

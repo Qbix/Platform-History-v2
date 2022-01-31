@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Истинод барои таблиғ",
-                "startDate": "Саршавии Сана",
-                "startTime": "Вақти оғоз",
-                "endDate": "Санаи анҷом",
-                "endTime": "Вақти анҷом",
-                "budget": "Буҷет"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Филтр аз рӯи фоизҳо",
-                "FilterInterests": "Ба навиштани фоизҳо оғоз кунед ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Фоиз",
-            "Location": "Макон"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Бирав",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Мурури",
-            "WriteToStartConversation": "Барои оғози сӯҳбат андешаҳои худро нависед",
-            "StartConversation": "Сӯҳбатро оғоз кунед",
-            "GotoConversation": "Ба Гуфтугӯ гузаред",
-            "reset": "Аз нав танзим кардан",
-            "edit": "Таҳрир кардан",
-            "link": "Пайванд",
-            "setUrl": "URL -ро таъин кунед",
-            "save": "Захира кунед",
-            "setClip": "Клипро буред",
-            "invalidURL": "URL нодуруст"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Файл барои кэшкунӣ хеле калон аст. Андозаи максималии файл {{size}}",
-        "InvalidPDF": "Файл PDF -и дуруст нест",
-        "StartTypingTitleOrKeywords": "Ба навиштани унвон ё калимаҳои калидӣ оғоз кунед ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Ҳуҷҷати HTML, ки корбарони гуногун метавонанд дидан ва таҳрир кунанд",
-            "displayType": "Мақола"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Слайд дар презентатсия метавонад HTML, аудио ва ғайраҳоро дар бар гирад.",
-            "displayType": "Слайд"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Презентатсия аз слайдҳои гуногун",
-            "displayType": "Муаррифӣ"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Воҳиди таблиғ дар вебсайт",
-            "displayType": "Воҳиди таблиғ"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Усули гурӯҳбандии воҳидҳои таблиғотӣ ба ном",
-            "displayType": "Ҷойгиркунии таблиғ"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Мундариҷа барои таблиғ",
-            "displayType": "Рекламаи эҷодӣ"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Маъракаи таблиғотӣ",
-            "displayType": "Маъракаи таблиғотӣ"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Вебсайтро ифода мекунад, ки метамаълумоташ канда шудаанд",
-            "displayType": "торнамо"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

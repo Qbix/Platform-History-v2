@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ynlogge",
-        "LogOut": "útlogge"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as myn primêre {{2}}",
-        "ChoosePassPhrase": "Kies in <strong>passende phrase<\/strong> om yn te loggen mei. <br> In ienfâldige phrase dy&#39;t bestiet út in pear wurden dy&#39;t jo maklik makliker fine.",
-        "ChoosePassPhraseSeeSuggestions": "Kies in goeie <strong>passoaze<\/strong> om jo akkount te beskermjen. Sjoch de suggestjes foar guon ideeën.",
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
         "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "As jo fiele dat wat ferkeard is, kinne jo",
-        "SetIdentifierButtonTitle": "oernij begjinne"
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Begjinne"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Begjinne",
+        "GetStarted": "Get Started",
         "Authorize": "Authorize",
-        "TermsLabel": "Ik haw lêzen en oerien <br> nei de {{link}}",
-        "TermsTitle": "Betingsten",
-        "mustAgree": "Earst moatte jo akkoard gean mei de betingsten."
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ik akseptearje de {{link}}",
-        "TermsTitle": "Betingsten"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permisje",
-        "prompt": "Wolle jo notifikaasjes ynskeakelje? Jo krije regisseur-fernijings oer dingen dy&#39;t jo soargje.",
-        "yes": "Ja",
-        "no": "Nee",
-        "WelcomePleaseVerifyEmail": "Wolkom! Kontrolearje jo jo adres.",
-        "WelcomeVerifyEmail": "Wolkom! Kontrolearje jo email adres.",
-        "ForgetPass": "Hey, ferjitten jo passphrase?",
-        "PassphraseSaved": "Jo wachtwurd is bewarre.",
-        "IdentifierActivated": "Jo {{type}} is aktiveare.",
-        "CompletedActivation": "Jo hawwe brûkersaktivering foltôge.",
-        "CompletedActivationLogIn": "Jo hawwe brûkersaktivering foltôge. Besykje no yn te loggen."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Kies kontakt",
-            "CreateAccount": "+ Nij kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fûn",
-            "SearchByName": "Sykje op namme",
-            "EmptyContacts": "Kontakten net fûn ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Selektearje kontaktpersoan fan {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Selektearje labels.",
-        "inviteUser": "Meidogger brûke",
-        "selectRole": "Selektearje rol",
-        "inviteRole": "Noegje {{role}} út"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Unjildige taal selektearre",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Wolkom",
-        "directions": "Meitsje in akkount oan, of oanmelde.",
-        "directionsNoRegister": "Meld jo oan as jo in akkount hawwe.",
-        "goButton": "Rinne",
-        "passphrase": "Fier jo paswurd yn:",
-        "loginButton": "Begjinne",
-        "registerButton": "Begjinne",
-        "resendButton": "Stjoer aktivaasjeberjocht",
-        "forgot": "Ferjitten?",
-        "resendConfirm": "Wolle jo in berjocht stjoere om jo wachtwurd te resetten?",
-        "resendSuccess": "Kontrolearje op in berjocht om jo wachtwurd te resetten",
-        "resendClose": "Slute",
-        "noPassphrase": "Foardat jo kinne oanmelde, moatte jo in paswurd ynstelle troch te klikken op de keppeling yn jo aktivearberjocht.",
-        "notVerified": "Jo moatte josels in aktivaasjeberjocht stjoere om yn te loggen.",
-        "emailExists": "Besocht jo earder te registrearjen mei dizze e-post? As dat sa is, kontrolearje jo ynfak om jo akkount te aktivearjen. <a href='#resend' class='Q_button Users_activation_resend'>Klikje om it berjocht opnij te stjoeren<\/a>",
-        "mobileExists": "Hawwe jo earder besocht mei dit mobile nûmer te registrearjen? As dat sa is, kontrolearje jo SMS om jo akkount te aktivearjen. <a href='#resend' class='Q_button Users_activation_resend'>Klikje om it berjocht opnij te stjoeren<\/a>",
-        "usingOther": "as jo kinne",
-        "prompt": "Kies in gebrûkersnamme:",
-        "newUser": "of meitsje in nij akkount",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "jo mobile # as e-post",
-            "mobile": "ynfiere jo mobyl #",
-            "email": "Fier dyn emailadres yn",
-            "username": "brûkersnamme"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "De tsjinstbetingsten akseptearje?",
-        "facebookNoEmail": "Jo facebook-account mist in befêstige e-postadres. Meld jo gewoan de native manier oan.",
-        "picTooltip": "Jo kinne dizze ôfbylding letter feroarje",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Oanmelde by {{host}} op &#39;e tiid {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Trochferwize nei Wallet",
-                "content": "As jo dit dialooch slute, wurde jo nei jo portemonnee brocht. Neidat jo jo oanmeld hawwe, gean werom nei dizze side."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Foegje in manier om oan te melden",
-        "sendMessage": "Stjoer aktivaasjeberjocht",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "Fier jo mobyl # as e-post yn",
-            "mobile": "Fier jo mobile nûmer yn",
-            "email": "Fier dyn emailadres yn",
-            "username": "brûkersnamme"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} akkount",
-        "areUsing": "Jo brûke {{platform}} as",
-        "noLongerUsing": "Jo binne net langer ferbûn mei {{platform}} as",
-        "doAuth": "Log yn mei dit akkount",
-        "doSwitch": "Wikselje nei dit akkount"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Eigner",
-        "Admin": "Behearder",
-        "Member": "Lid",
-        "Guest": "Gast",
-        "Host": "Gasthear"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Deistich",
-        "Weekly": "Wykliks",
-        "Monthly": "Moanne",
-        "Application": "Oanfraach",
-        "Pages": "Siden",
-        "Services": "Tsjinsten",
-        "Faq": "FAQ",
-        "WeekDays": "Wykdagen"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Saite, lai veicinātu",
-                "startDate": "Sākuma datums",
-                "startTime": "Sākuma laiks",
-                "endDate": "Beigu datums",
-                "endTime": "Beigu laiks",
-                "budget": "Budžets"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtrēt pēc procentiem",
-                "FilterInterests": "Sāciet rakstīt interesi ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Interese",
-            "Location": "Atrašanās vieta"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Iet",
-            "PasteLinkHere": "Ielīmējiet saiti šeit",
-            "BrowseTheWeb": "Pārlūkot",
-            "WriteToStartConversation": "Uzrakstiet savas domas, lai sāktu sarunu",
-            "StartConversation": "Sāciet sarunu",
-            "GotoConversation": "Dodieties uz Sarunu",
-            "reset": "Atiestatīt",
-            "edit": "Rediģēt",
-            "link": "Saite",
-            "setUrl": "Iestatīt URL",
-            "save": "Saglabāt",
-            "setClip": "Izgriezt klipu",
-            "invalidURL": "Nederīgs URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Fails ir par lielu kešatmiņai. Maksimālais faila lielums {{size}}",
-        "InvalidPDF": "Fails nav derīgs PDF fails",
-        "StartTypingTitleOrKeywords": "Sāciet rakstīt virsrakstu vai atslēgvārdus ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML dokuments, kuru var apskatīt un rediģēt dažādi lietotāji",
-            "displayType": "Raksts"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Prezentācijas slaids, var ietvert HTML, audio utt.",
-            "displayType": "Slidkalniņš"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Prezentācija, kas sastāv no dažādiem slaidiem",
-            "displayType": "Prezentācija"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Reklāmas vienība vietnē",
-            "displayType": "Reklāmas vienība"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Reklāmas vienību grupēšanas veids zem nosaukuma",
-            "displayType": "Sludinājumu izvietošana"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Reklāmas saturs",
-            "displayType": "Reklāma radoša"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Reklāmas kampaņa",
-            "displayType": "Reklāmas kampaņa"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Pārstāv vietni, kuras metadati tika nokasīti",
-            "displayType": "Web lapa"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "belül {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "méter",
-        "meters": "méter",
-        "kilometer": "kilométer",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "mérföld",
-        "miles": "mérföld",
-        "mi": "km",
-        "foot": "láb",
-        "feet": "láb",
-        "inches": "hüvelyk"
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Érdekelnek a {{select}} -on belül zajló dolgok",
-        "update": "Frissítse a helyemet",
-        "prompt": "{{ClickOrTap}} itt <br> állítsa be <br> elhelyezkedés",
-        "myCurrentLocation": "Jelenlegi helyem",
-        "enterAddress": "Adjon meg egy címet",
-        "enterPostcode": "Kérjük, adja meg irányítószámát",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Helyszín hozzáadása",
-            "title": "Új hely",
-            "nameYourLocation": "Adja meg a helyét"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Mentse el ezt a helyet?",
-            "message": "Tervezi, hogy a jövőben újra használja ezt a helyet?",
-            "ok": "Igen",
-            "cancel": "Nem"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Nevezze el ezt a helyet",
-            "placeholder": "Otthon, munka stb.",
-            "ok": "Mentés"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Válassza a Helyet"
-        },
-        "set": "Állítsa be a Saját pozíciót"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Bármely terület ezen a helyen?",
-        "newArea": "Új terület",
-        "promptTitle": "Adja meg a terület nevét:",
-        "absent": "Kérjük, állítsa be a területet",
-        "error": "Hiba",
-        "exist": "A terület már létezik",
-        "addNewArea": "Új terület hozzáadása",
-        "add": "hozzáad"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "helyek gyűjteménye",
-            "displayType": "Helyszínek"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Épületet, helyszínt, hajót, parkot ábrázol",
-            "displayType": "Elhelyezkedés"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Egy adott területen belüli területet képvisel, például egy szobát vagy lakosztályt",
-            "displayType": "Terület"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Egy épület vagy hajó padlóját ábrázolja",
-            "displayType": "Padló"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Egy épület vagy hajó oszlopát ábrázolja",
-            "displayType": "Oszlop"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategória azokra a dolgokra, amelyek egy geohash-tól bizonyos távolságra vannak",
-            "displayType": "Helyek közelében"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategória azokra a dolgokra, amelyek egy geohash-tól egy bizonyos távolságra vannak, egy érdeklődésnek megfelelnek",
-            "displayType": "Helyek érdeklődés"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

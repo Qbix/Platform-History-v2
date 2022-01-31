@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Хүсэлтэд {{status}} алдаа гарлаа",
-        "canceled": "Хүсэлт цуцлав",
-        "500": "Дотоод серверийн алдаа",
-        "404": "Олдсонгүй: {{url}}",
-        "501": "Хүсэлт тасалдсан"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Сүүлийн хугацаа дууссан. Хуудсыг дахин ачаалаад дахин оролдоно уу.",
-        "otherDomain": "{{baseUrl}} дээр гадаад домэйныг хаасан"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "дарна уу",
-        "click": "дарна уу",
-        "yes": "тийм ээ",
-        "no": "Үгүй",
-        "Tap": "Tap товшино уу",
-        "Click": "Дарна уу",
-        "Yes": "Тиймээ",
-        "No": "Үгүй"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Нэгдүгээр сар",
-        "2": "Хоёрдугаар сар",
-        "3": "Гуравдугаар сар",
-        "4": "Дөрөвдүгээр сар",
-        "5": "Тавдугаар сар",
-        "6": "Зургадугаар сар",
-        "7": "Долдугаар сар",
-        "8": "Наймдугаар сар",
-        "9": "Есдүгээр сар",
-        "10": "Аравдугаар сар",
-        "11": "Арваннэгдүгээр сар",
-        "12": "Арванхоёрдугаар сар"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Микрофон руу нэвтрэхийг зөвшөөрнө үү",
-        "record": "Бичлэг",
-        "recording": "Бичлэг хийх",
-        "remains": "үлдсэн",
-        "maximum": "Хамгийн их",
-        "playing": "Тоглолт",
-        "recorded": "Бичсэн",
-        "clip": "клип",
-        "orupload": "Эсвэл байршуулах",
-        "usethis": "Үүнийг ашиглах",
-        "discard": "Хаях",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
         "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "Баталгаажуулна",
-        "ok": "Тиймээ",
-        "cancel": "Үгүй"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Захиалга",
-        "ok": "Явцгаая"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Файлыг уншихад алдаа гарлаа",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Та юу хиймээр байна?",
-            "photo": "Шинэ зураг авах",
-            "library": "Номын сангаас сонгоно уу"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Том зураг сонгоно уу.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Хэмжээ, байрлалыг тохируулна уу",
-            "touchscreen": "Томруулж, татахын тулд хуруугаа ашиглана уу",
-            "notTouchscreen": "Хөдөлгөөнгүй болгохын тулд хулганаа &amp; дугуй ашиглана уу"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "өнгөрсөн шөнө",
-        "lastEvening": "өнгөрсөн үдэш",
-        "yesterday": "өчигдөр",
-        "thisMorning": "энэ өглөө",
-        "today": "өнөөдөр",
-        "tonight": "өнөө орой",
-        "tomorrowMorning": "том эрэг",
-        "tomorrow": "маргааш",
-        "hoursAgo": "{{h}} цагийн өмнө",
-        "hourAgo": "{{h}} цагийн өмнө",
-        "minuteAgo": "{{m}} минутын өмнө",
-        "minutesAgo": "{{m}} минутын өмнө",
-        "secondAgo": "{{s}} секундын өмнө",
-        "secondsAgo": "{{s}} секундын өмнө",
-        "fewSecondsAgo": "секундын өмнө",
-        "rightNow": "яг одоо",
-        "inSecond": "секундэд {{s}} дарна уу",
-        "inSeconds": "{{s}} секундын дотор",
-        "inMinute": "{{m}} минутанд ашиглах боломжтой",
-        "inMinutes": "{{m}} минутанд ашигладаг",
-        "inHour": "{{h}} цагт",
-        "inHours": "{{h}} цагт",
-        "inUnderMinute": "1 минутын дотор"
-    },
-    "video": {
-        "clip": "клип",
-        "errorNoSource": "Видео эх сурвалж байхгүй",
-        "SkipAfter": "Дараа нь алгасах",
-        "Skip": "Алгасах"
-    },
-    "pdf": {
-        "clip": "клип",
-        "errorNoSource": "PDF эх сурвалж байхгүй"
-    },
-    "clip": {
-        "SetClipStart": "Клип Эхлэлийг тохируулна уу",
-        "ClipStart": "Клип Эхлэл",
-        "SetClipEnd": "Клипний төгсгөлийг тохируулна уу",
-        "ClipEnd": "Клип Төгсгөл",
-        "StartMoreEnd": "Эхлэх байрлал нь эцсийн байрлалаас илүү байж болохгүй",
-        "EndLessStart": "Төгсгөлийн байрлал нь эхлэлийн байрлалаас доогуур байж болохгүй",
-        "WhichInvalid": "&#39;Аль&#39; хүчин төгөлдөр бус аргумент"
-    },
-    "tabs": {
-        "more": "дэлгэрэнгүй",
-        "Menu": "Цэс"
-    },
-    "durations": {
-        "second": "хоёр дахь",
-        "seconds": "секунд",
-        "minute": "минут",
-        "minutes": "минут",
-        "hour": "цаг",
-        "day": "өдөр",
-        "days": "өдөр",
-        "week": "долоо хоног",
-        "weeks": "долоо хоног",
-        "month": "сар",
-        "months": "сар",
-        "year": "жил",
-        "years": "жил",
-        "decade": "арван жил",
-        "decades": "арван жил",
-        "century": "зуун",
-        "centuries": "зууны"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

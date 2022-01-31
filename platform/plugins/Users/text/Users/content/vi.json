@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "đăng nhập",
-        "LogOut": "đăng xuất"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Đặt {{1}} làm {{2}} chính của tôi",
-        "ChoosePassPhrase": "Chọn một <strong>cụm từ<\/strong> để đăng nhập với. <br> Một cụm từ đơn giản bao gồm một vài từ mà bạn sẽ dễ nhớ.",
-        "ChoosePassPhraseSeeSuggestions": "Chọn một <strong>cụm từ<\/strong> tốt để bảo vệ tài khoản của bạn. Xem các đề xuất cho một số ý tưởng.",
-        "LogOutAndTryAgain": "Đăng xuất và thử lại",
-        "IfYouFeel": "Nếu bạn cảm thấy có gì đó không ổn, bạn có thể",
-        "SetIdentifierButtonTitle": "bắt đầu lại"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Bắt đầu"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Bắt đầu",
-        "Authorize": "Ủy quyền",
-        "TermsLabel": "tôi đã đọc và đồng ý <br> tới {{link}}",
-        "TermsTitle": "Điều kiện",
-        "mustAgree": "Đầu tiên bạn phải đồng ý với các điều khoản."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Tôi chấp nhận {{link}}",
-        "TermsTitle": "Điều kiện"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Giấy phép",
-        "prompt": "Bạn có muốn bật thông báo không? Bạn sẽ nhận được cập nhật theo thời gian thực về những điều bạn quan tâm.",
-        "yes": "Vâng",
-        "no": "Không",
-        "WelcomePleaseVerifyEmail": "Chào mừng bạn Vui lòng xác nhận địa chỉ email.",
-        "WelcomeVerifyEmail": "Chào mừng bạn Xác nhận địa chỉ email của bạn.",
-        "ForgetPass": "Này, bạn đã quên mật khẩu của bạn?",
-        "PassphraseSaved": "Cụm từ vượt qua của bạn đã được lưu.",
-        "IdentifierActivated": "{{type}} của bạn đã được kích hoạt.",
-        "CompletedActivation": "Bạn đã hoàn thành kích hoạt người dùng.",
-        "CompletedActivationLogIn": "Bạn đã hoàn thành kích hoạt người dùng. Hãy thử đăng nhập ngay bây giờ."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Vui lòng chọn nhãn.",
-        "inviteUser": "Mời người dùng",
-        "selectRole": "Chọn vai trò",
-        "inviteRole": "Mời {{role}}"
-    },
-    "invalidLanguageSelected": "Đã chọn ngôn ngữ không hợp lệ",
     "contacts": {
         "dialog": {
-            "title": "Chọn liên hệ",
-            "SearchByName": "Tìm kiếm theo tên",
-            "CreateAccount": "+ Liên hệ mới",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create không tìm thấy",
-            "EmptyContacts": "Không tìm thấy địa chỉ liên hệ ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Chọn liên hệ của {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Chào mừng bạn",
-        "directions": "Tạo một tài khoản, hoặc đăng nhập.",
-        "directionsNoRegister": "Đăng nhập nếu bạn có tài khoản.",
-        "goButton": "Đi",
-        "passphrase": "Nhập cụm từ của bạn:",
-        "loginButton": "Bắt đầu",
-        "registerButton": "Bắt đầu",
-        "resendButton": "Gửi tin nhắn kích hoạt",
-        "forgot": "Quên nó?",
-        "resendConfirm": "Bạn có muốn gửi tin nhắn để đặt lại cụm mật khẩu của mình không?",
-        "resendSuccess": "Kiểm tra tin nhắn để đặt lại cụm mật khẩu của bạn",
-        "resendClose": "Gần",
-        "noPassphrase": "Trước khi bạn có thể đăng nhập, bạn phải đặt cụm từ thông qua bằng cách nhấp vào liên kết trong thông báo kích hoạt của bạn.",
-        "notVerified": "Bạn phải gửi cho mình một tin nhắn kích hoạt để đăng nhập.",
-        "emailExists": "Bạn đã thử đăng ký với email này trước đây? Nếu vậy, hãy kiểm tra hộp thư đến của bạn để kích hoạt tài khoản của bạn. <a href='#resend' class='Q_button Users_activation_resend'>Nhấn vào đây để gửi lại tin nhắn<\/a>",
-        "mobileExists": "Bạn đã thử đăng ký với số điện thoại di động này trước? Nếu vậy, hãy kiểm tra SMS của bạn để kích hoạt tài khoản của bạn. <a href='#resend' class='Q_button Users_activation_resend'>Nhấn vào đây để gửi lại tin nhắn<\/a>",
-        "usingOther": "hoặc bạn có thể",
-        "prompt": "Chọn tên người dùng:",
-        "newUser": "hoặc tạo một tài khoản mới bên dưới",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "số điện thoại di động hoặc email của bạn",
-            "mobile": "nhập số điện thoại di động của bạn",
-            "email": "nhập địa chỉ email của bạn",
-            "username": "tên người dùng"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Chấp nhận Điều khoản dịch vụ?",
-        "facebookNoEmail": "Tài khoản facebook của bạn đang thiếu một địa chỉ email được xác nhận. Đơn giản chỉ cần đăng nhập theo cách bản địa.",
-        "picTooltip": "Bạn có thể thay đổi hình ảnh này sau",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Đăng nhập vào {{host}} cùng lúc {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Chuyển hướng đến Wallet",
-                "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Thêm một cách để đăng nhập",
-        "sendMessage": "Gửi tin nhắn kích hoạt",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "nhập số điện thoại di động hoặc email của bạn",
-            "mobile": "Nhập sô điện thoại di động của bạn",
-            "email": "nhập địa chỉ email của bạn",
-            "username": "tên người dùng"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Tài khoản",
-        "areUsing": "Bạn đang sử dụng {{platform}} là",
-        "noLongerUsing": "Bạn không còn kết nối với {{platform}} như",
-        "doAuth": "Đăng nhập bằng tài khoản này",
-        "doSwitch": "Chuyển sang tài khoản này"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Chủ nhân",
-        "Admin": "quản trị viên",
-        "Member": "Hội viên",
-        "Guest": "Khách",
-        "Host": "Tổ chức"
-    },
-    "analytics": {
-        "Title": "phân tích",
-        "Daily": "Hằng ngày",
-        "Weekly": "Hàng tuần",
-        "Monthly": "Hàng tháng",
-        "Application": "Ứng dụng",
-        "Pages": "Các trang",
-        "Services": "Dịch vụ",
-        "Faq": "Câu hỏi thường gặp",
-        "WeekDays": "Ngày trong tuần"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

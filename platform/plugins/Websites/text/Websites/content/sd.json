@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "فروغ ڏيڻ لاءِ لنڪ",
-                "startDate": "شروعاتي تاريخ",
-                "startTime": "شروعاتي وقت",
-                "endDate": "ختم ٿيڻ جي تاريخ",
-                "endTime": "آخري وقت",
-                "budget": "بجيٽ"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "دلچسپيءَ سان فلٽر ڪريو",
-                "FilterInterests": "دلچسپي لکڻ شروع ڪريو ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "دلچسپي",
-            "Location": "جھ"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "و",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "براؤز ڪريو",
-            "WriteToStartConversation": "گفتگو شروع ڪرڻ لاءِ پنھنجا خيال لکو",
-            "StartConversation": "گفتگو شروع ڪريو",
-            "GotoConversation": "و Goو گفتگوءَ ڏانھن",
-            "reset": "ري سيٽ ڪريو",
-            "edit": "تبديلي آڻيو",
-            "link": "ن",
-            "setUrl": "URL سيٽ ڪريو",
-            "save": "بچايو",
-            "setClip": "ڪٽ آئوٽ ڪلپ",
-            "invalidURL": "غلط URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "فائل ڪيش ڪرڻ لاءِ تمام وڏي آھي. و Max ۾ و file فائيل سائيز {{size}}",
-        "InvalidPDF": "فائل صحيح PDF ناھي",
-        "StartTypingTitleOrKeywords": "شروع ڪريو عنوان يا لفظ لکڻ."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "ھڪڙو HTML دستاويز جيڪو مختلف استعمال ڪندڙ ڏسي ۽ تدوين ڪري سگھن ٿا",
-            "displayType": "آرٽيڪل"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "ھڪڙي سلائيڊ ھڪڙي پيشڪش ۾ ، شامل ڪري سگھي ٿي HTML ، آڊيو وغيره.",
-            "displayType": "سلائيڊ"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "هڪ پيشڪش جنهن ۾ مختلف سلائيڊون شامل آهن",
-            "displayType": "پيشڪش"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "هڪ اشتهارسازي يونٽ هڪ ويب سائيٽ تي",
-            "displayType": "اشتھار يونٽ"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "ھڪڙي نالي سان اشتهارن جي يونٽن کي گروھ ڪرڻ جو طريقو",
-            "displayType": "اشتھار جي جھ"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "اشتهار لاءِ مواد",
-            "displayType": "اشتھار تخليقي"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "هڪ اشتهاري مهم",
-            "displayType": "اشتهار مهم"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "نمائندگي ڪري ٿي ھڪڙي ويب سائيٽ جنھن جو ميٽاداٽ ختم ڪيو ويو ھو",
-            "displayType": "ويب پيج"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Viga {{status}} päringu ajal",
-        "canceled": "Taotlus tühistatud",
-        "500": "Sisemine serveri viga",
-        "404": "Ei leitud: {{url}}",
-        "501": "Taotlus katkes"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Seanss lõppes. Värskenda lehte ja proovige uuesti.",
-        "otherDomain": "Blokeeritud domeenidevaheline taotlus välismaa domeenile aadressil {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "koputage",
-        "click": "klõpsa",
-        "yes": "jah",
-        "no": "ei",
-        "Tap": "Koputage",
-        "Click": "Klõpsake nuppu",
-        "Yes": "Jah",
-        "No": "Ei"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Jaanuar",
-        "2": "Veebruar",
-        "3": "Märts",
-        "4": "Aprill",
-        "5": "Mai",
-        "6": "Juuni",
-        "7": "Juuli",
-        "8": "august",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
         "9": "September",
-        "10": "Oktoober",
+        "10": "October",
         "11": "November",
-        "12": "Detsember"
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Lubage juurdepääs oma mikrofonile",
-        "record": "Salvestage",
-        "recording": "Salvestamine",
-        "remains": "jäänused",
-        "maximum": "maksimaalselt",
-        "playing": "Mängib",
-        "recorded": "Salvestatud",
-        "clip": "klipi",
-        "orupload": "Või üleslaadimine",
-        "usethis": "Kasuta seda",
-        "discard": "Visake ära",
-        "encoding": "Kodeerimine"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Hoiatus"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Kinnitage",
-        "ok": "Jah",
-        "cancel": "Ei"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Küsi",
-        "ok": "Mine"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Viga faili lugemisel",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Mida sa teha tahaksid?",
-            "photo": "Tehke uus foto",
-            "library": "Valige teegist"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Palun valige suurem pilt.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Reguleerige suurust ja asendit",
-            "touchscreen": "Suumimiseks ja lohistamiseks kasutage sõrmi",
-            "notTouchscreen": "Suumimiseks ja lohistamiseks kasutage hiirt ja ratast"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "eile õhtul",
-        "lastEvening": "eelõhtul",
-        "yesterday": "eile",
-        "thisMorning": "see hommik",
-        "today": "täna",
-        "tonight": "täna õhtul",
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
         "tomorrowMorning": "tom morn",
-        "tomorrow": "homme",
-        "hoursAgo": "{{h}} tundi tagasi",
-        "hourAgo": "{{h}} tund tagasi",
-        "minuteAgo": "{{m}} minut tagasi",
-        "minutesAgo": "{{m}} minutit tagasi",
-        "secondAgo": "{{s}} teine tagasi",
-        "secondsAgo": "{{s}} sekundit tagasi",
-        "fewSecondsAgo": "sekundit tagasi",
-        "rightNow": "praegu",
-        "inSecond": "sekundis {{s}}",
-        "inSeconds": "{{s}} sekundiga",
-        "inMinute": "{{m}} minutiga",
-        "inMinutes": "{{m}} minutiga",
-        "inHour": "tunni pärast {{h}}",
-        "inHours": "{{h}} tunni pärast",
-        "inUnderMinute": "vähem kui 1 minut"
-    },
-    "tabs": {
-        "more": "rohkem",
-        "Menu": "Menüü"
-    },
-    "video": {
-        "clip": "klipp",
-        "errorNoSource": "Videoallikat pole",
-        "SkipAfter": "Jäta pärast",
-        "Skip": "Vahele jätma"
-    },
-    "pdf": {
-        "clip": "klipp",
-        "errorNoSource": "Puudub pdf-allikas"
-    },
-    "clip": {
-        "SetClipStart": "Määra Clip Start",
-        "ClipStart": "Klipi algus",
-        "SetClipEnd": "Määra klipi lõpp",
-        "ClipEnd": "Klipi lõpp",
-        "StartMoreEnd": "Alguspositsioon ei tohi olla rohkem kui lõppasend",
-        "EndLessStart": "Lõppasend ei tohi olla väiksem kui algasend",
-        "WhichInvalid": "Argument „mis” on kehtetu"
-    },
-    "durations": {
-        "second": "teine",
-        "seconds": "sekundit",
-        "minute": "minut",
-        "minutes": "minutit",
-        "hour": "tundi",
-        "day": "päeval",
-        "days": "päeva",
-        "week": "nädal",
-        "weeks": "nädalat",
-        "month": "kuu",
-        "months": "kuud",
-        "year": "aasta",
-        "years": "aastat",
-        "decade": "kümnendil",
-        "decades": "aastakümneid",
-        "century": "sajandil",
-        "centuries": "sajandeid"
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

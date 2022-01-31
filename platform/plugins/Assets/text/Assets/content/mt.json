@@ -1,168 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tektek biex tħallas"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ħlas ipproċessat għal {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Grazzi tal-ħlas tiegħek lil {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} sottoskritt għal {{plan.title}}",
-        "YouSubscribedTo": "Inti ġejt sottoskritt għal {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+    },
+    "charge": {
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+    },
+    "charged": {
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Informazzjoni dwar l-ordni",
-        "PaymentMethod": "Metodu ta &#39;pagament",
-        "ContactInfo": "Info ta &#39;kuntatt",
-        "Pay": "Inħallas"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Stedina aċċettata minn {{1}}",
-        "YouHaveCreditsToStart": "Għandek {{1}} krediti biex tibda",
-        "PaymentFor": "Ħlas għal &quot;{{1}}&quot;",
-        "PaymentTo": "Ħlas lil {{1}}",
-        "PaymentToUser": "Ħlas lil {{userName}}",
-        "JoinedPaidStream": "biex tgħaqqad &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "għall-ħolqien ta &#39;komunità &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "għat-tluq &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Xtrajt {{amount}} kredti",
-        "BuyAmountCredits": "Ixtri {{amount}} kredti",
-        "MissingCredits": "Krediti Nieqsa",
-        "YouMissingCredits": "Int nieqes {{amount}} kredti",
-        "BuyCredits": "Ixtri krediti",
-        "Buy": "Ixtri",
-        "Credits": "Krediti",
-        "ErrorInvalidAmount": "Ammont mhux validu",
-        "ErrorInvalidCurrency": "Sfortunatament għadna ma nappoġġjawx il-munita {{currency}}",
-        "WatchClip": "Ksibt {{amount}} krediti talli segwi {{fromStreamTitle}}",
-        "PurchaseCredits": "Ixtri Krediti",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} krediti",
-            "BonusCredits": "{{amount}} krediti"
-        },
-        "CreatePaidStream": "għall-ħolqien ta &#39;{{toStreamName}}",
-        "BonusCredits": "Bonus {{amount}} krediti",
-        "BuyBonus": "Ix-xiri ta &#39;{{amount}} krediti f&#39;daqqa, iwassal għal bonus ta&#39; {{bonus}} krediti."
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
+        }
     },
     "history": {
-        "Date": "Data",
-        "Amount": "Ammont",
-        "Description": "Deskrizzjoni",
-        "Client": "Klijent",
-        "To": "lil",
-        "From": "minn",
-        "HistoryEmpty": "Għad m’għandekx dejta",
-        "SeeHistory": "Ara l-istorja tal-ħlas għal {{1}}",
-        "PaymentFor": "Intnefqu {{amount}} kredti",
-        "PaymentTo": "Intbagħtu {{amount}} kredti",
-        "PaymentToUser": "Intbagħtu {{amount}} kredti",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
+        "WatchClip": {
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
+        },
         "JoinedPaidStream": {
-            "+": "Kiseb {{amount}} kredti",
-            "-": "Intnefqu {{amount}} kredti"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "Irċevejt {{amount}} kredti",
-            "-": "Intbagħtu {{amount}} kredti"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "Intnefqu {{amount}} kredti",
-        "BoughtCredits": "Xtrajt {{amount}} kredti",
-        "InviteAcceptedBy": "Kiseb {{amount}} kredti",
-        "YouHaveCreditsToStart": "Kiseb {{amount}} kredti",
-        "CreatePaidStream": "Krediti li ntefqu {{amount}}",
-        "WatchClip": {
-            "+": "Miksuba {{amount}} krediti",
-            "-": "Krediti li ntefqu {{amount}}"
-        },
-        "BonusCredits": "Ghandek bonus ta &#39;{{amount}}"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Ibda Abbonament",
-            "message": "Tixtieq tabbona għal {{title}}?",
-            "ok": "kollox sew",
-            "cancel": "Ikkanċella"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Karta ta &#39;kreditu jew debitu",
-        "SubscribePayment": "Abbona għall-Ħlas",
-        "ImmediatePayment": "Ħlas Immedjat"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "Twaqqaf Informazzjoni ta &#39;Ħlas",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "Agħmel Ħlas",
-            "message": "Taqbel li tħallas {{symbol}} {{amount}}?",
-            "ok": "kollox sew",
-            "cancel": "Ikkanċella"
-        },
-        "BuyAmountCredits": "Ixtri {{amount}} kredti"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
+        }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Krediti",
-            "description": "iżomm rekord tal-krediti u l-pagamenti"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "Pjan tas-sottoskrizzjoni",
-            "description": "pjan ta &#39;abbonament"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "Abbonament",
-            "description": "abbonament"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Prodott",
-            "description": "prodott li qed jinbiegħ"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "Servizz",
-            "description": "servizz li qed jiġi offrut"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Kiseb {{amount}} kredti"
-        },
-        "Assets\/credits\/spent": {
-            "content": "Intnefqu {{amount}} kredti"
-        },
-        "Assets\/credits\/sent": {
-            "content": "Intbagħtu {{amount}} kredti"
-        },
-        "Assets\/credits\/received": {
-            "content": "Irċevejt {{amount}} kredti"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "Xtrajt {{amount}} kredti"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} krediti"
+            "content": "Bonus {{amount}} credits"
+        },
+        "Assets\/credits\/spent": {
+            "content": "Spent {{amount}} credits"
+        },
+        "Assets\/credits\/sent": {
+            "content": "Sent {{amount}} credits to {{toUserName}}"
+        },
+        "Assets\/credits\/received": {
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
-    },
-    "charge": {
-        "Subject": "Ikollok il-ħlas ta &#39;{{displayAmount}} minn {{call 'publisher.displayName'}} minn &quot;{{description}}&quot;",
-        "HasBeenCharged": "Ħej, dan biss biex jgħidlek {{1}} ġie akkużat {{2}} għal {{3}} minn {{4}}"
-    },
-    "charged": {
-        "Subject": "Grazzi għall-ħlas għal &quot;{{description}}&quot;",
-        "HavePaid": "Ħej {{1}}, din hija biss konferma ta &#39;malajr li int ħallast b&#39;suċċess {{2}} minn {{3}} għal {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Servizz Ġdid",
-            "TitlePlaceholder": "Titolu tas-servizz",
-            "PricePlaceholder": "Issettja l-prezz",
-            "LinkPlaceholder": "waqqaf link addizzjonali ta &#39;informazzjoni",
-            "DescriptionPlaceholder": "Deskrizzjoni tas-Servizz",
-            "SaveService": "Issejvja s-Servizz",
-            "SelectRequiredParticipants": "Parteċipanti Meħtieġa"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "Immaniġġja Templates tas-Servizz",
-        "ManageServices": "Servizzi ta &#39;Ġestjoni",
-        "FreeEvent": "Avveniment b&#39;xejn",
-        "OptionalContribution": "Kontribuzzjoni mhux obbligatorja",
-        "RequiredPayment": "Ħlas meħtieġ",
-        "AreYouSureDelete": "Int żgur li trid tħassar dan is-servizz?",
-        "AmountServicesRelated": "Hemm {{amount}} disponibbilitajiet relatati ma &#39;dan is-servizz. Huma wkoll se jitneħħew.",
-        "Free": "B&#39;xejn"
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

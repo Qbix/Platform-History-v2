@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "o fewn {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metr",
-        "meters": "metr",
-        "kilometer": "cilometr",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "milltir",
-        "miles": "milltiroedd",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "troed",
-        "feet": "traed",
-        "inches": "modfedd"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Mae gen i ddiddordeb mewn pethau sy&#39;n digwydd o fewn {{select}} o",
-        "update": "Diweddaru fy lleoliad",
-        "prompt": "{{ClickOrTap}} yma i <br> gosod eich <br> lleoliad",
-        "myCurrentLocation": "Fy lleoliad presennol",
-        "enterAddress": "Rhowch gyfeiriad",
-        "enterPostcode": "Rhowch eich cod post \/ zipcode os gwelwch yn dda",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Ychwanegu Lleoliad",
-            "title": "Lleoliad Newydd",
-            "nameYourLocation": "Enwch eich lleoliad"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Cadwch y lleoliad hwn?",
-            "message": "Ydych chi&#39;n bwriadu defnyddio&#39;r lleoliad hwn eto yn y dyfodol?",
-            "ok": "Ydw",
-            "cancel": "Na"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Enwch y lleoliad hwn",
-            "placeholder": "Cartref, Gwaith ac ati",
-            "ok": "Arbedwch"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Dewiswch Lleoliad"
-        },
-        "set": "Gosod Fy Lleoliad"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Unrhyw ardal y tu mewn i&#39;r lleoliad hwn?",
-        "newArea": "Ardal newydd",
-        "promptTitle": "Rhowch enw ar gyfer yr ardal:",
-        "absent": "Os gwelwch yn dda gosodwch yr ardal",
-        "error": "Gwall",
-        "exist": "Mae&#39;r ardal eisoes yn bodoli",
-        "addNewArea": "Ychwanegu ardal newydd",
-        "add": "Ychwanegwch"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "casgliad o leoliadau",
-            "displayType": "Lleoliadau"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Yn cynrychioli adeilad, lleoliad, llong, parc, ac ati.",
-            "displayType": "Lleoliad"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Yn cynrychioli ardal mewn lleoliad, fel ystafell neu ystafell",
-            "displayType": "Ardal"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Yn cynrychioli llawr mewn adeilad neu long",
-            "displayType": "Llawr"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Yn cynrychioli colofn mewn adeilad neu long",
-            "displayType": "Colofn"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash",
-            "displayType": "Gerllaw lleoedd"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Categori ar gyfer pethau o fewn pellter penodol i geohash, sy&#39;n cyfateb i ddiddordeb",
-            "displayType": "Lleoedd diddordeb"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Lỗi {{status}} trong khi yêu cầu",
-        "canceled": "Yêu cầu hủy",
-        "500": "Lỗi máy chủ nội bộ",
-        "404": "Không tìm thấy: {{url}}",
-        "501": "Yêu cầu bị gián đoạn"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Phiên hết hạn. Làm mới trang và thử lại.",
-        "otherDomain": "Yêu cầu tên miền chéo bị chặn sang tên miền nước ngoài tại {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "gõ",
-        "click": "nhấp chuột",
-        "yes": "Vâng",
-        "no": "Không",
-        "Tap": "Nhấn",
-        "Click": "Nhấp chuột",
-        "Yes": "Vâng",
-        "No": "Không"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "tháng Giêng",
-        "2": "Tháng hai",
-        "3": "tháng Ba",
-        "4": "Tháng tư",
-        "5": "có thể",
-        "6": "Tháng 6",
-        "7": "Tháng 7",
-        "8": "tháng Tám",
-        "9": "Tháng Chín",
-        "10": "Tháng Mười",
-        "11": "Tháng 11",
-        "12": "Tháng 12"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Vui lòng cho phép truy cập vào micrô của bạn",
-        "record": "Ghi lại",
-        "recording": "ghi âm",
-        "remains": "vẫn còn",
-        "maximum": "tối đa",
-        "playing": "Đang chơi",
-        "recorded": "Ghi lại",
-        "clip": "kẹp",
-        "orupload": "Hoặc tải lên",
-        "usethis": "Dùng cái này",
-        "discard": "Vứt bỏ",
-        "encoding": "Mã hóa"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Thông báo"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Xác nhận",
-        "ok": "Vâng",
-        "cancel": "Không"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Lời nhắc",
-        "ok": "Đi"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Lỗi đọc tập tin",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Bạn thích làm gì?",
-            "photo": "Chụp ảnh mới",
-            "library": "Chọn từ thư viện"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Vui lòng chọn một hình ảnh lớn hơn.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Điều chỉnh kích thước và vị trí",
-            "touchscreen": "Sử dụng ngón tay của bạn để phóng to và kéo",
-            "notTouchscreen": "Sử dụng chuột và bánh xe của bạn để phóng to và kéo"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "tối hôm qua",
-        "lastEvening": "đêm trước",
-        "yesterday": "hôm qua",
-        "thisMorning": "buổi sáng này",
-        "today": "hôm nay",
-        "tonight": "tối nay",
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
         "tomorrowMorning": "tom morn",
-        "tomorrow": "Ngày mai",
-        "hoursAgo": "{{h}} giờ trước",
-        "hourAgo": "{{h}} giờ trước",
-        "minuteAgo": "{{m}} phút trước",
-        "minutesAgo": "{{m}} phút trước",
-        "secondAgo": "{{s}} thứ hai trước",
-        "secondsAgo": "{{s}} giây trước",
-        "fewSecondsAgo": "Cách đây vài giây",
-        "rightNow": "ngay bây giờ",
-        "inSecond": "trong {{s}} giây",
-        "inSeconds": "trong {{s}} giây",
-        "inMinute": "trong {{m}} phút",
-        "inMinutes": "trong {{m}} phút",
-        "inHour": "trong {{h}} giờ",
-        "inHours": "trong {{h}} giờ",
-        "inUnderMinute": "dưới 1 phút"
-    },
-    "tabs": {
-        "more": "hơn",
-        "Menu": "Thực đơn"
-    },
-    "video": {
-        "clip": "kẹp",
-        "errorNoSource": "Không có nguồn video",
-        "SkipAfter": "Bỏ qua sau",
-        "Skip": "Nhảy"
-    },
-    "pdf": {
-        "clip": "kẹp",
-        "errorNoSource": "Không có nguồn pdf"
-    },
-    "clip": {
-        "SetClipStart": "Đặt bắt đầu clip",
-        "ClipStart": "Bắt đầu clip",
-        "SetClipEnd": "Đặt kết thúc clip",
-        "ClipEnd": "Clip kết thúc",
-        "StartMoreEnd": "Vị trí bắt đầu không được nhiều hơn vị trí kết thúc",
-        "EndLessStart": "Vị trí kết thúc không được nhỏ hơn vị trí bắt đầu",
-        "WhichInvalid": "Đối số &#39;mà&#39; không hợp lệ"
-    },
-    "durations": {
-        "second": "thứ hai",
-        "seconds": "giây",
-        "minute": "phút",
-        "minutes": "phút",
-        "hour": "giờ",
-        "day": "ngày",
-        "days": "ngày",
-        "week": "tuần",
-        "weeks": "tuần",
-        "month": "tháng",
-        "months": "tháng",
-        "year": "năm",
-        "years": "năm",
-        "decade": "thập kỷ",
-        "decades": "thập kỷ",
-        "century": "kỷ",
-        "centuries": "thế kỉ"
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

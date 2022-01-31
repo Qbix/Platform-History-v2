@@ -490,7 +490,7 @@ class Q_Html
 	 * @static
 	 * @param {string} $name The name of the input
 	 * @param {array} $list Associative array of value => caption.
-	 * @param {array} [$ids=''] Either an associative array of key => id (in the HTML element sense) pairs, or
+	 * @param {array|string} [$ids=''] Either an associative array of key => id (in the HTML element sense) pairs, or a string prefix for ids
 	 * @param {string} [$selectedKey=null] Basically the value of the selected radiobutton
 	 * @param {string} [$between=''] The text to insert in the markup between the generated elements
 	 * @param {array} [$attributes=array()] An array of additional attributes to render. Consists of name => value pairs.
@@ -757,7 +757,7 @@ class Q_Html
 	 *  'static', 'boolean', 'text', 'email', 'tel', 
 	 *  'textarea', 'password', 'select', 
 	 *  'radios', 'checkboxes', 'buttons', 'submit_buttons',
-	 *  'submit', 'hidden', 'image', or the name of a tag.
+	 *  'submit', 'hidden', 'image', 'file', or the name of a tag.
 	 * @param {array|string} [$attributes=array()] The attributes for the resulting element. Should at least include the name. You can also just pass the name as a string here.
 	 * @param {array} [$value=null] The value to start out with in the resulting element. If there are options present, this should be the value of one of the options.
 	 * @param {array} [$options=null] Associative array of options, used if the tag type is 'select', 'radios' or 'checkboxes'.
@@ -878,6 +878,10 @@ class Q_Html
 				
 			case 'date':
 				return self::date($attributes['name'], $value, $options, $attributes);
+
+			case 'file':
+				$attributes['type'] = 'file';
+				return self::tag('input', $attributes, $value);
 				
 			default:
 				return self::tag($type, $attributes, $value);

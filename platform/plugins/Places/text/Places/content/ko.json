@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{999} 위도, {{2}} 위도)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
         "Title": "within {{1}}"
     },
     "units": {
-        "meter": "미터",
-        "meters": "미터",
-        "kilometer": "킬로미터",
-        "kilometers": "기압계",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "마일",
-        "miles": "마일",
-        "mi": "미",
-        "foot": "발",
-        "feet": "피트",
-        "inches": "신장"
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "{{select}} 이내에 일어나는 일에 관심이 있습니다.",
-        "update": "내 위치 업데이트",
-        "prompt": "{{ClickOrTap}} 여기에 <br> 너를 세우다. <br> 위치",
-        "myCurrentLocation": "내 현재 위치",
-        "enterAddress": "주소 입력",
-        "enterPostcode": "우편 번호 \/ 우편 번호를 입력하십시오.",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "위치 추가",
-            "title": "새로운 위치",
-            "nameYourLocation": "위치 이름 지정"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "이 위치를 저장 하시겠습니까?",
-            "message": "앞으로이 위치를 다시 사용 하시겠습니까?",
-            "ok": "예",
-            "cancel": "아니"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "이 위치 이름 지정",
-            "placeholder": "집, 직장 등",
-            "ok": "구하다"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "위치 선택"
-        },
-        "set": "내 위치 설정"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "이 위치 안의 어떤 지역?",
-        "newArea": "새로운 영역",
-        "promptTitle": "해당 지역의 이름을 입력하십시오 :",
-        "absent": "지역을 설정하십시오.",
-        "error": "오류",
-        "exist": "이미 존재하는 지역",
-        "addNewArea": "새 영역 추가",
-        "add": "더하다"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "위치 모음",
-            "displayType": "위치"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "건물, 장소, 선박, 공원 등을 나타냅니다.",
-            "displayType": "위치"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "객실 또는 스위트와 같은 위치 내의 영역을 나타냅니다.",
-            "displayType": "지역"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "건물 또는 선박의 바닥을 나타냅니다.",
-            "displayType": "바닥"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "건물이나 선박의 기둥을 나타냅니다.",
-            "displayType": "기둥"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "지오 해시의 특정 거리 내 사물 카테고리",
-            "displayType": "장소 근처"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "관심거리와 일치하는 지오 해시의 특정 거리 내 사물 카테고리",
-            "displayType": "관심 장소"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

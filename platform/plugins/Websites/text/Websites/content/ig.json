@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Njikọ iji kwalite",
-                "startDate": "Ụbọchị mmalite",
-                "startTime": "Oge Mbido",
-                "endDate": "Ụbọchị Ọgwụgwụ",
-                "endTime": "Ọgwụgwụ Oge",
-                "budget": "Mmefu ego"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Nyocha site na mmasị",
-                "FilterInterests": "Bido ịpịnye mmasị ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Mmasị",
-            "Location": "Ebe"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Gaa",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Chọgharịa",
-            "WriteToStartConversation": "Dee echiche gị ka ịmalite mkparịta ụka ahụ",
-            "StartConversation": "Malite Mkparịta ụka",
-            "GotoConversation": "Gaa na Mkparịta ụka",
-            "reset": "Tọgharia",
-            "edit": "Dezie",
-            "link": "Njikọ",
-            "setUrl": "Tọọ URL",
-            "save": "Chekwa",
-            "setClip": "Ebipụ Clip",
-            "invalidURL": "URL na ezighi ezi"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faịlụ buru oke ibu maka ịchekwa ihe. Ogo faịlụ kacha {{size}}",
-        "InvalidPDF": "Faịlụ abụghị PDF ziri ezi",
-        "StartTypingTitleOrKeywords": "Malite ịpị aha ma ọ bụ mkpụrụokwu ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Akwụkwọ HTML nke ndị ọrụ dị iche iche nwere ike ịlele ma dezie",
-            "displayType": "Nkeji edemede"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Ihe mmịfe na ngosi, nwere ike ịgụnye HTML, ọdịyo wdg.",
-            "displayType": "Ihe mmịfe"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Ihe ngosi nke nwere ihe mmịfe dị iche iche",
-            "displayType": "Ngosi"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Ngalaba mgbasa ozi na weebụsaịtị",
-            "displayType": "Ngalaba mgbasa ozi"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Ụzọ nke ijikọ nkeji mgbasa ozi n&#39;okpuru aha",
-            "displayType": "Ebe mgbasa ozi"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Ọdịnaya maka mgbasa ozi",
-            "displayType": "Mgbasa ozi okike"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Mgbasa ozi mgbasa ozi",
-            "displayType": "Mgbasa ozi"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Na -anọchite anya weebụsaịtị nke kpochapụrụ metadata ya",
-            "displayType": "ibe weebụ"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

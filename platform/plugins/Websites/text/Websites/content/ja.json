@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "促進するためのリンク",
-                "startDate": "開始日",
-                "startTime": "始まる時間",
-                "endDate": "終了日",
-                "endTime": "終了時間",
-                "budget": "予算"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "関心で絞り込む",
-                "FilterInterests": "興味を入力してください..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "興味",
-            "Location": "ロケーション"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "行く",
-            "PasteLinkHere": "ここにリンクを貼り付けてください",
-            "BrowseTheWeb": "ブラウズ",
-            "WriteToStartConversation": "会話を始めるためにあなたの考えを書きなさい",
-            "StartConversation": "会話を開始",
-            "GotoConversation": "会話へ",
-            "reset": "リセット",
-            "edit": "編集",
-            "link": "リンク",
-            "setUrl": "URLを設定する",
-            "save": "セーブ",
-            "setClip": "クリップを切り取る",
-            "invalidURL": "無効なURL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "ファイルが大きすぎてキャッシュできません。最大ファイルサイズ{{size}}",
-        "InvalidPDF": "ファイルは有効なPDFではありません",
-        "StartTypingTitleOrKeywords": "タイトルまたはキーワードの入力を開始します..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "さまざまなユーザーが表示および編集できるHTMLドキュメント",
-            "displayType": "記事"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "プレゼンテーションのスライドには、HTML、オーディオなどを含めることができます。",
-            "displayType": "滑り台"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "さまざまなスライドで構成されるプレゼンテーション",
-            "displayType": "プレゼンテーション"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "ウェブサイト上の広告ユニット",
-            "displayType": "広告ユニット"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "名前の下に広告ユニットをグループ化する方法",
-            "displayType": "広告の配置"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "広告のコンテンツ",
-            "displayType": "広告クリエイティブ"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "広告キャンペーン",
-            "displayType": "広告キャンペーン"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "メタデータがスクレイピングされたWebサイトを表します",
-            "displayType": "ウェブページ"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

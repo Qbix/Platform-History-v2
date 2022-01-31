@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Σύνδεσμος για την προώθηση",
-                "startDate": "Ημερομηνία έναρξης",
-                "startTime": "Ωρα έναρξης",
-                "endDate": "Ημερομηνία λήξης",
-                "endTime": "Τέλος χρόνου",
-                "budget": "Προϋπολογισμός"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Φιλτράρισμα βάσει ενδιαφέροντος",
-                "FilterInterests": "Ξεκινήστε να πληκτρολογείτε ένα ενδιαφέρον ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Ενδιαφέρον",
-            "Location": "Τοποθεσία"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Πηγαίνω",
-            "PasteLinkHere": "Επικολλήστε ένα σύνδεσμο εδώ",
-            "BrowseTheWeb": "Ξεφυλλίζω",
-            "WriteToStartConversation": "Γράψτε τις σκέψεις σας για να ξεκινήσετε τη συζήτηση",
-            "StartConversation": "Ξεκινήστε τη συνομιλία",
-            "GotoConversation": "Μεταβείτε στην &quot;Συνομιλία&quot;",
-            "reset": "Επαναφορά",
-            "edit": "Επεξεργασία",
-            "link": "Σύνδεσμος",
-            "setUrl": "Ορισμός διεύθυνσης URL",
-            "save": "Αποθηκεύσετε",
-            "setClip": "Αποκοπή κλιπ",
-            "invalidURL": "Μη έγκυρη διεύθυνση URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Το αρχείο είναι πολύ μεγάλο για προσωρινή αποθήκευση. Μέγιστο μέγεθος αρχείου {{size}}",
-        "InvalidPDF": "Το αρχείο δεν είναι έγκυρο PDF",
-        "StartTypingTitleOrKeywords": "Ξεκινήστε να πληκτρολογείτε τίτλο ή λέξεις-κλειδιά ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Ένα έγγραφο HTML που μπορούν να δουν και να επεξεργαστούν οι διάφοροι χρήστες",
-            "displayType": "Αρθρο"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Μια διαφάνεια σε μια παρουσίαση, μπορεί να περιλαμβάνει HTML, ήχο κλπ.",
-            "displayType": "Ολίσθηση"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Μια παρουσίαση που αποτελείται από διάφορες διαφάνειες",
-            "displayType": "Παρουσίαση"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Μια διαφημιστική μονάδα σε έναν ιστότοπο",
-            "displayType": "Μονάδα διαφημίσεων"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Ένας τρόπος ομαδοποίησης διαφημιστικών μονάδων με ένα όνομα",
-            "displayType": "Διαφήμιση"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Περιεχόμενο για μια διαφήμιση",
-            "displayType": "Δημιουργία διαφημίσεων"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Μια διαφημιστική καμπάνια",
-            "displayType": "Διαφημιστική καμπάνια"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Αντιπροσωπεύει έναν ιστότοπο του οποίου τα μεταδεδομένα έχουν αποξεσθεί",
-            "displayType": "ιστοσελίδα"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

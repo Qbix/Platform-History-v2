@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "ลิงค์เพื่อโปรโมต",
-                "startDate": "วันที่เริ่มต้น",
-                "startTime": "เวลาเริ่มต้น",
-                "endDate": "วันที่สิ้นสุด",
-                "endTime": "เวลาสิ้นสุด",
-                "budget": "งบ"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "กรองตามความสนใจ",
-                "FilterInterests": "เริ่มพิมพ์ความสนใจ ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "ดอกเบี้ย",
-            "Location": "ที่ตั้ง"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "ไป",
-            "PasteLinkHere": "วางลิงค์ที่นี่",
-            "BrowseTheWeb": "หมวด",
-            "WriteToStartConversation": "เขียนความคิดของคุณเพื่อเริ่มการสนทนา",
-            "StartConversation": "เริ่มการสนทนา",
-            "GotoConversation": "ไปที่การสนทนา",
-            "reset": "รีเซ็ต",
-            "edit": "แก้ไข",
-            "link": "ลิงค์",
-            "setUrl": "ตั้งค่า URL",
-            "save": "บันทึก",
-            "setClip": "ตัดคลิป",
-            "invalidURL": "URL ไม่ถูกต้อง"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "ไฟล์ใหญ่เกินไปสำหรับการแคช ขนาดไฟล์สูงสุด {{size}}",
-        "InvalidPDF": "ไฟล์ไม่ใช่ PDF ที่ถูกต้อง",
-        "StartTypingTitleOrKeywords": "เริ่มพิมพ์ชื่อเรื่องหรือคำสำคัญ ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "เอกสาร HTML ที่ผู้ใช้หลายคนสามารถดูและแก้ไข",
-            "displayType": "บทความ"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "สไลด์ในงานนำเสนอสามารถรวม HTML เสียงและอื่น ๆ",
-            "displayType": "สไลด์"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "งานนำเสนอประกอบด้วยสไลด์ต่างๆ",
-            "displayType": "การเสนอ"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "หน่วยโฆษณาบนเว็บไซต์",
-            "displayType": "หน่วยโฆษณา"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "วิธีการจัดกลุ่มหน่วยโฆษณาภายใต้ชื่อ",
-            "displayType": "โฆษณาตำแหน่ง"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "เนื้อหาสำหรับการโฆษณา",
-            "displayType": "โฆษณาสร้างสรรค์"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "แคมเปญโฆษณา",
-            "displayType": "แคมเปญโฆษณา"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "แสดงถึงเว็บไซต์ที่มีการคัดลอกข้อมูลเมตา",
-            "displayType": "หน้าเว็บ"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Khokahano ea ho khothaletsa",
-                "startDate": "Letsatsi la qalo",
-                "startTime": "Nako ea Qalo",
-                "endDate": "Letsatsi la ho qetela",
-                "endTime": "Nako ea ho Qetela",
-                "budget": "Tekanyetso"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Sefa ka Thahasello",
-                "FilterInterests": "Qala ho thaepa thahasello ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Thahasello",
-            "Location": "Sebaka"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Tsamaea",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Sheba",
-            "WriteToStartConversation": "Ngola mehopolo ea hau ho qala moqoqo",
-            "StartConversation": "Qala Moqoqo",
-            "GotoConversation": "Eya ho Moqoqo",
-            "reset": "Seta bocha",
-            "edit": "Edita",
-            "link": "Khokahano",
-            "setUrl": "Seta URL",
-            "save": "Boloka",
-            "setClip": "Khaola Sekoto",
-            "invalidURL": "URL e fosahetseng"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faele e kholo haholo bakeng sa ho boloka polokelo. Boholo ba faele boholo {{size}}",
-        "InvalidPDF": "Faele ha se PDF e nepahetseng",
-        "StartTypingTitleOrKeywords": "Qala ho thaepa sehlooho kapa mantsoe a bohlokoa ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Tokomane ea HTML eo basebelisi ba fapaneng ba ka e bonang le ho e hlophisa",
-            "displayType": "Sengoloa"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slide se hlahisong se ka kenyelletsa HTML, audio le tse ling.",
+            "description": "A slide in a presentation, can include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Tlhahiso e nang le li-slide tse fapaneng",
-            "displayType": "Tlhahiso"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Setsi sa papatso webosaeteng",
-            "displayType": "Setsi sa papatso"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Mokhoa oa ho arola lihlopha tsa papatso tlasa lebitso",
-            "displayType": "Ho beoa papatso"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Likahare tsa papatso",
-            "displayType": "Phatlalatso ea papatso"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Letšolo la papatso",
-            "displayType": "Letšolo la papatso"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "E emela sebaka sa marang-rang seo metadata ea sona e ileng ea hlakoloa",
-            "displayType": "leqephe la tepo"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

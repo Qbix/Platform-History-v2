@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "dina {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "méteran",
-        "meters": "méter",
-        "kilometer": "kilométer",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "mil",
-        "miles": "mil",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "suku",
-        "feet": "suku",
-        "inches": "inci"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Abdi resep kana hal-hal anu lumangsung dina waktos {{select}} ti",
-        "update": "Perbarui Lokasi Abdi",
-        "set": "Atur Lokasi Abdi",
-        "prompt": "{{ClickOrTap}} di dieu pikeun<br> atur anjeun<br> lokasi",
-        "myCurrentLocation": "Lokasi kuring ayeuna",
-        "enterAddress": "Lebetkeun alamat",
-        "enterPostcode": "Punten lebetkeun postcode \/ zipcode anjeun",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Tambihkeun Lokasi",
-            "title": "Lokasi Anyar",
-            "nameYourLocation": "Nami lokasi anjeun"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Simpen lokasi ieu?",
-            "message": "Naha anjeun ngarencanakeun nganggo lokasi ieu deui kapayunna?",
-            "ok": "Leres",
-            "cancel": "Henteu"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Sebutkeun lokasi ieu",
-            "placeholder": "Bumi, Pagawean jsb.",
-            "ok": "Ngahémat"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Pilih Lokasi"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Naon waé daérah di jero lokasi ieu?",
-        "newArea": "Daérah anyar",
-        "promptTitle": "Lebetkeun nami kanggo daérah éta:",
-        "absent": "Punten diaturkeun daérah",
-        "error": "Kasalahan",
-        "exist": "Daérah parantos aya",
-        "addNewArea": "Tambihkeun daérah énggal",
-        "add": "Tambihkeun"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "kumpulan lokasi",
-            "displayType": "Lokasi"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Ngalambangkeun gedong, tempat, kapal, taman, jst.",
-            "displayType": "Lokasi"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Ngagambarkeun area dina lokasi, sapertos kamar atanapi suite",
-            "displayType": "Daérah"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Ngagambarkeun lanté dina gedong atanapi kapal",
-            "displayType": "Lantai"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Ngagambarkeun kolom dina wangunan atanapi kapal",
-            "displayType": "Kolom"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategori pikeun hal-hal dina jarak anu tangtu tina geohash",
-            "displayType": "Deukeut ku tempat"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategori pikeun hal-hal dina jarak anu tangtu tina geohash, cocog sareng minat",
-            "displayType": "Kapentingan tempat"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

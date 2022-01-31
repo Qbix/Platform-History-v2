@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "sa loob ng {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metro",
-        "meters": "metro",
-        "kilometer": "kilometro",
-        "kilometers": "mga kiometers",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "milya",
-        "miles": "milya",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "paa",
-        "feet": "paa",
-        "inches": "pulgada"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Interesado ako sa mga bagay na nagaganap sa loob ng {{select}} ng",
-        "update": "I-update ang Aking Lokasyon",
-        "set": "Itakda ang Aking Lokasyon",
-        "prompt": "{{ClickOrTap}} dito sa<br> itakda ang iyong<br> lokasyon",
-        "myCurrentLocation": "Ang lokasyon ko ngayon",
-        "enterAddress": "Maglagay ng isang address",
-        "enterPostcode": "Mangyaring ipasok ang iyong postcode \/ zipcode",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Magdagdag ng Lokasyon",
-            "title": "Bagong lokasyon",
-            "nameYourLocation": "Pangalanan ang iyong lokasyon"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "I-save ang lokasyon na ito?",
-            "message": "Plano mo bang gamitin muli ang lokasyong ito sa hinaharap?",
-            "ok": "Oo",
-            "cancel": "Hindi"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Pangalanan ang lokasyong ito",
-            "placeholder": "Tahanan, Trabaho atbp.",
-            "ok": "Magtipid"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Piliin ang Lokasyon"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Anumang lugar sa loob ng lokasyon na ito?",
-        "newArea": "Bagong lugar",
-        "promptTitle": "Magpasok ng isang pangalan para sa lugar:",
-        "absent": "Mangyaring magtakda ng lugar",
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
         "error": "Error",
-        "exist": "Mayroon nang lugar",
-        "addNewArea": "Magdagdag ng bagong lugar",
-        "add": "Idagdag pa"
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "isang koleksyon ng mga lokasyon",
-            "displayType": "Mga lokasyon"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Kinakatawan ang isang gusali, venue, barko, parke, atbp.",
-            "displayType": "Lokasyon"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Kinakatawan ang isang lugar sa loob ng isang lokasyon, tulad ng isang silid o suite",
-            "displayType": "Lugar"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Kinakatawan ang isang sahig sa isang gusali o barko",
-            "displayType": "Palapag"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Kinakatawan ang isang haligi sa isang gusali o barko",
-            "displayType": "Haligi"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategoryang para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash",
-            "displayType": "Malapit sa mga lugar"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategoryang para sa mga bagay sa loob ng isang tiyak na distansya ng isang geohash, na tumutugma sa isang interes",
-            "displayType": "Mga interes ng lugar"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

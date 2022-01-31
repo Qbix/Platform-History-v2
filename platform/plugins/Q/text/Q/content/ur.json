@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "درخواست کے دوران {{status}} خرابی",
-        "canceled": "درخواست منسوخ ہوگئی",
-        "500": "اندرونی سرور کی خرابی",
-        "404": "نہیں مل سکا: {{url}}",
-        "501": "درخواست میں مداخلت"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "مدت ختم ہو گئی. صفحہ تازہ کریں اور دوبارہ کوشش کریں.",
-        "otherDomain": "{9 9}} پر غیر ملکی ڈومین پر کراس ڈومین کی درخواست کی روک تھام"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "نل",
-        "click": "کلک کریں",
-        "yes": "جی ہاں",
-        "no": "نہیں",
-        "Tap": "نل",
-        "Click": "کلک کریں",
-        "Yes": "جی ہاں",
-        "No": "نہیں"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "جنوری",
-        "2": "فروری",
-        "3": "مارچ",
-        "4": "اپریل",
-        "5": "مئی",
-        "6": "جون",
-        "7": "جولائی",
-        "8": "اگست",
-        "9": "ستمبر",
-        "10": "اکتوبر",
-        "11": "نومبر",
-        "12": "دسمبر"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "برائے مہربانی اپنے مائیکروفون تک رسائی کی اجازت دیں",
-        "record": "ریکارڈ",
-        "recording": "ریکارڈنگ",
-        "remains": "باقی",
-        "maximum": "زیادہ سے زیادہ",
-        "playing": "چل رہا ہے",
-        "recorded": "محفوظ شدہ",
-        "clip": "کلپ",
-        "orupload": "یا اپ لوڈ کریں",
-        "usethis": "اسے استعمال کرو",
-        "discard": "رکھو",
-        "encoding": "انکوڈنگ"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "انتباہ"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "تصدیق کریں",
-        "ok": "جی ہاں",
-        "cancel": "نہیں"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "فوری طور پر",
-        "ok": "جاؤ"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "فائل پڑھنے میں خرابی",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "آپ کیا کرنا چاہیں گے؟",
-            "photo": "نئی تصویر لیں",
-            "library": "لائبریری سے منتخب کریں"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "براہ کرم ایک بڑی تصویر منتخب کریں.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "سائز اور پوزیشن کو ایڈجسٹ کریں",
-            "touchscreen": "زوم اور ڈریگ کرنے کیلئے اپنی انگلیوں کا استعمال کریں",
-            "notTouchscreen": "زوم اور ڈریگ کرنے کے لئے اپنے ماؤس اور پہیا کا استعمال کریں"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "گزشتہ رات",
-        "lastEvening": "آخری موقع",
-        "yesterday": "کل",
-        "thisMorning": "یہ صبح",
-        "today": "آج",
-        "tonight": "آج کی رات",
-        "tomorrowMorning": "ٹام صبح",
-        "tomorrow": "کل",
-        "hoursAgo": "} 9 999}} گھنٹے پہلے",
-        "hourAgo": "} 9 999}} گھنٹہ پہلے",
-        "minuteAgo": "} 9 999}} منٹ پہلے",
-        "minutesAgo": "} 9 999}} منٹ پہلے",
-        "secondAgo": "} 9 999}} سیکنڈ پہلے",
-        "secondsAgo": "{9 999}} سیکنڈ پہلے",
-        "fewSecondsAgo": "سیکنڈ پہلے",
-        "rightNow": "ابھی",
-        "inSecond": "{9 999}} سیکنڈ میں",
-        "inSeconds": "{9 999}} سیکنڈ میں",
-        "inMinute": "{9 999}} منٹ میں",
-        "inMinutes": "{9 999}} منٹ میں",
-        "inHour": "{9 999}} گھنٹے میں",
-        "inHours": "{9 999}} گھنٹوں میں",
-        "inUnderMinute": "1 منٹ سے کم میں"
-    },
-    "tabs": {
-        "more": "مزید",
-        "Menu": "مینو"
-    },
-    "video": {
-        "clip": "کلپ",
-        "errorNoSource": "کوئی ویڈیو ماخذ نہیں ہے",
-        "SkipAfter": "بعد چھوڑیں",
-        "Skip": "چھوڑ دو"
-    },
-    "pdf": {
-        "clip": "کلپ",
-        "errorNoSource": "کوئی پی ڈی ایف ماخذ نہیں ہے"
-    },
-    "clip": {
-        "SetClipStart": "کلپ اسٹارٹ سیٹ کریں",
-        "ClipStart": "کلپ اسٹارٹ",
-        "SetClipEnd": "کلپ اینڈ سیٹ کریں",
-        "ClipEnd": "ویڈیوکلپ اختتام",
-        "StartMoreEnd": "اسٹارٹ پوزیشن اختتامی پوزیشن سے زیادہ نہیں ہو سکتی۔",
-        "EndLessStart": "اختتامی پوزیشن اسٹارٹ پوزیشن سے کم نہیں ہو سکتی۔",
-        "WhichInvalid": "دلیل &#39;جو&#39; غلط ہے۔"
-    },
-    "durations": {
-        "second": "دوسرا",
-        "seconds": "سیکنڈ",
-        "minute": "منٹ",
-        "minutes": "منٹ",
-        "hour": "گھنٹے",
-        "day": "دن",
-        "days": "دن",
-        "week": "ہفتہ",
-        "weeks": "ہفتوں",
-        "month": "مہینہ",
-        "months": "مہینے",
-        "year": "سال",
-        "years": "سال",
-        "decade": "دہائی",
-        "decades": "دہائیاں",
-        "century": "صدی",
-        "centuries": "صدیوں"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

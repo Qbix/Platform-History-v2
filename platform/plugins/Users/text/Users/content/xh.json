@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Ngema",
-        "LogOut": "Phuma"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Setha {{1}} njengento yam yokuqala {{2}}",
-        "ChoosePassPhrase": "Khetha <strong>ibinzana lokupasa<\/strong> ukungena ngemvume. <br> Ibinzana elilula elinamagama ambalwa oza kukukhumbula ngokulula.",
-        "ChoosePassPhraseSeeSuggestions": "Khetha <strong>ibinzana elipasa<\/strong> ukukhusela iakhawunti yakho. Jonga iziphakamiso zezinye iimbono.",
-        "LogOutAndTryAgain": "Phuma kwaye uzame kwakhona",
-        "IfYouFeel": "Ukuba uvakalelwa into ethile, ungakwazi",
-        "SetIdentifierButtonTitle": "Qalela ekuqaleni"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Qalisa"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Qalisa",
-        "Authorize": "Ugunyazisile",
-        "TermsLabel": "Ndiyifunde kwaye ndiyavuma <br> {{link}}",
-        "TermsTitle": "Imigomo",
-        "mustAgree": "Okokuqala kufuneka uvume imigaqo."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ndiyamkela {{link}}",
-        "TermsTitle": "Imigomo"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Imvume",
-        "prompt": "Ngaba ufuna ukunika izaziso amandla? Uya kufumana ukuhlaziywa kwexesha langempela malunga nezinto ozikhathalelayo.",
-        "yes": "Ewe",
-        "no": "Hayi",
-        "WelcomePleaseVerifyEmail": "Wamkelekile! Nceda uqinisekise idilesi yakho ye-imeyile.",
-        "WelcomeVerifyEmail": "Wamkelekile! Qinisekisa idilesi yakho ye-imeyile.",
-        "ForgetPass": "Hayi, uyalilibala inqabana yakho?",
-        "PassphraseSaved": "Ibinzana lakho lokuphumelela ligcinwe.",
-        "IdentifierActivated": "Eyakho {{type}} yenziwe yasebenza.",
-        "CompletedActivation": "Ugqibile ukusebenza komsebenzisi.",
-        "CompletedActivationLogIn": "Ugqibile ukusebenza komsebenzisi. Zama ukungena ngoku."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Khetha uqhagamshelwano",
-            "CreateAccount": "+ Unxibelelwano olutsha",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create akafumaneki",
-            "SearchByName": "Khangela ngegama",
-            "EmptyContacts": "Abaqhagamshelwa abafunyenwanga ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Khetha uqhagamshelwano lwe {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Nceda ukhethe ilebula.",
-        "inviteUser": "Mema Umsebenzisi",
-        "selectRole": "Khetha Indima",
-        "inviteRole": "Mema {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Ulwimi olungavumelekanga",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Wamkelekile",
-        "directions": "Yenza iakhawunti, okanye ungene.",
-        "directionsNoRegister": "Ngena ukuba uneakhawunti.",
-        "goButton": "Yiya",
-        "passphrase": "Ngenisa intetho yakho:",
-        "loginButton": "Qalisa",
-        "registerButton": "Qalisa",
-        "resendButton": "Thumela Umyalezo wokuvula",
-        "forgot": "Uyilibale?",
-        "resendConfirm": "Ngaba ufuna ukuthumela umyalezo wokuba usekwe kwakhona igama lakho lokugqithisa?",
-        "resendSuccess": "Jonga umyalezo ukuze usete kwakhona igama lakho lokugqithisa",
-        "resendClose": "Vala",
-        "noPassphrase": "Ngaphambi kokuba ungene, kufuneka usete ibinzana lokudlula ngokuchofoza ikhonkco kumyalezo wokuvula.",
-        "notVerified": "Kuya kufuneka uzithumele umyalezo wokuvula ukuze ungene.",
-        "emailExists": "Ukhe wazama ukubhalisa kule imeyile ngaphambili? Ukuba kunjalo, jonga i-inbox yakho ukuze isebenze. <a href='#resend' class='Q_button Users_activation_resend'>Cofa ukuze uphinde uthumele umyalezo<\/a>",
-        "mobileExists": "Ukhe wazama ukubhalisa kule nombolo yeselula ngaphambili? Ukuba kunjalo, jonga i-SMS yakho ukuze isebenze. <a href='#resend' class='Q_button Users_activation_resend'>Cofa ukuze uphinde uthumele umyalezo<\/a>",
-        "usingOther": "okanye unako",
-        "prompt": "Khetha igama lokuyisebeznisa:",
-        "newUser": "okanye wenze iakhawunti entsha",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mobile wakho # okanye i-imeyile",
-            "mobile": "Ngenisa iselfowuni yakho #",
-            "email": "faka Idilesi yakho yemeyile",
-            "username": "igama lomsebenzisi"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Uyayamkela iMigaqo yeNkonzo?",
-        "facebookNoEmail": "Iakhawunti yakho ye-facebook ilahlekile idilesi ye-imeyile. Ngena nje ngendlela yemveli.",
-        "picTooltip": "Ungawutshintsha lo mfanekiso kamva",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Ngena kwi {{host}} ngexesha {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ukuqondisa kwakhona kwiWallet",
-                "content": "Nje ukuba uvale le ncoko, uya kusiwa kwisipaji sakho. Emva kokuba ungene, buyela kweli phepha."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Yongeza indlela yokungena",
-        "sendMessage": "Thumela Umyalezo wokuvula",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "Ngenisa iselfowuni yakho # okanye i-imeyile",
-            "mobile": "faka inombolo yakho yeselula",
-            "email": "faka Idilesi yakho yemeyile",
-            "username": "igama lomsebenzisi"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} iakhawunti",
-        "areUsing": "Usebenzisa {{platform}} njenge",
-        "noLongerUsing": "Awukaqhagamshelwa kwi {{platform}} njenge",
-        "doAuth": "Ngena kule akhawunti",
-        "doSwitch": "Tshintshela kule akhawunti"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Umnini",
-        "Admin": "Ulawulo",
-        "Member": "Ilungu",
-        "Guest": "Undwendwe",
-        "Host": "Umgcini"
-    },
-    "analytics": {
-        "Title": "Uhlalutyo",
-        "Daily": "Yonke imihla",
-        "Weekly": "Ngeveki",
-        "Monthly": "Ngenyanga",
-        "Application": "Ukusetyenziswa",
-        "Pages": "Amaphepha",
-        "Services": "Iinkonzo",
-        "Faq": "FAQ",
-        "WeekDays": "Iintsuku zeveki"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

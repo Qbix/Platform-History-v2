@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Feeler {{status}} während Ufro",
-        "canceled": "Demande gespaart",
-        "500": "Intern Server Server Feeler",
-        "404": "Net fonnt: {{url}}",
-        "501": "Ënnerbriechen Ënnerbrieche"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sessioun verluer. D&#39;Säit aktualiséieren an probéiert nach eng Kéier.",
-        "otherDomain": "Blockéierte cross-domain request zu friemem Domain um {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ofhänken",
-        "click": "klickt",
-        "yes": "jo",
-        "no": "Nee",
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
         "Tap": "Tap",
-        "Click": "Klickt op",
-        "Yes": "jo",
-        "No": "Nee"
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Januar",
-        "2": "Februar",
-        "3": "Mäerz",
-        "4": "Abrëll",
-        "5": "Mee",
-        "6": "Juni",
-        "7": "Juli",
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
         "8": "August",
         "9": "September",
-        "10": "Oktober",
+        "10": "October",
         "11": "November",
-        "12": "Dezember"
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Gitt weg Zougang zu Ärem Mikrofon",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
         "record": "Record",
-        "recording": "Opzehuelen",
-        "remains": "bleiwt",
-        "maximum": "Maximum",
-        "playing": "Ze spillen",
-        "recorded": "Opgepasst",
-        "clip": "Clip",
-        "orupload": "Oder Upload",
-        "usethis": "Benotzt dëse",
-        "discard": "Ofbriechen",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
         "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
         "title": "Confirm",
-        "ok": "jo",
-        "cancel": "Nee"
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Prompéiert",
+        "title": "Prompt",
         "ok": "Go"
     },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
+    },
     "imagepicker": {
-        "errorReadingFile": "Feeler liesen Datei",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Wat wëllt Dir maachen?",
-            "photo": "Maacht nei Foto",
-            "library": "Auswielen vun der Bibliothéik"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Wielt we g ee méi grouss Bild.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Gréisst a Positioun änneren",
-            "touchscreen": "Benotzt Är Fanger fir ze vergréisseren an ze ziehen",
-            "notTouchscreen": "Benotzt Är Maus a Rad fir ze zoomen an ze ziehen"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "d&#39;lescht Nuecht",
-        "lastEvening": "leschten Owend",
-        "yesterday": "gëschter",
-        "thisMorning": "dëser Moien",
-        "today": "haut",
-        "tonight": "haut den Owend",
-        "tomorrowMorning": "tom muer",
-        "tomorrow": "muer",
-        "hoursAgo": "{{h}} Stonnen",
-        "hourAgo": "{{h}} Stonn virun",
-        "minuteAgo": "{{m}} Minutten",
-        "minutesAgo": "{{m}} Minutten",
-        "secondAgo": "{{s}} Sekonn",
-        "secondsAgo": "{{s}} Sekonne viru",
-        "fewSecondsAgo": "Sekonnen",
-        "rightNow": "an desem Moment",
-        "inSecond": "an {{s}} Sekonn",
-        "inSeconds": "an {{s}} Sekonnen",
-        "inMinute": "an {{m}} Minutt",
-        "inMinutes": "an {{m}} Minutten",
-        "inHour": "an {{h}} Stonn",
-        "inHours": "an {{h}} Stonnen",
-        "inUnderMinute": "an ënner 1 Minutt"
-    },
-    "video": {
-        "clip": "Clip",
-        "errorNoSource": "Keng Videoquell",
-        "SkipAfter": "Skip no",
-        "Skip": "Skip"
-    },
-    "pdf": {
-        "clip": "Clip",
-        "errorNoSource": "Keng pdf Quell"
-    },
-    "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip Enn",
-        "StartMoreEnd": "Start Positioun kann net méi wéi d&#39;Enn Positioun sinn",
-        "EndLessStart": "Enn Positioun kann net manner sinn wéi Start Positioun",
-        "WhichInvalid": "Argument &#39;wat&#39; ongëlteg"
-    },
-    "tabs": {
-        "more": "méi",
-        "Menu": "Menu"
-    },
-    "durations": {
-        "second": "zweeten",
-        "seconds": "Sekonnen",
-        "minute": "Minutt",
-        "minutes": "Minutten",
-        "hour": "Stonnen",
-        "day": "Dag",
-        "days": "Deeg",
-        "week": "Woch",
-        "weeks": "Wochen",
-        "month": "Mount",
-        "months": "Méint",
-        "year": "Joer",
-        "years": "Joer",
-        "decade": "Jorzéngt",
-        "decades": "Joerzéngten",
-        "century": "Joerhonnert",
-        "centuries": "Joerhonnerte"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

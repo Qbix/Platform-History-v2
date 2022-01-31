@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat ، {{2}} lng)",
+    "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "اندر {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "ميٽر",
-        "meters": "ميٽر",
-        "kilometer": "ڪلوميٽر",
-        "kilometers": "ڪلو ميٽر",
-        "km": "ڪلوميٽر",
-        "mile": "ميل",
-        "miles": "ميل",
-        "mi": "ميلو",
-        "foot": "پير",
-        "feet": "پير",
-        "inches": "انچ"
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "مان انھن شين ۾ دلچسپي وان ٿو جيڪي {{select}} جي اندر ٿي رھيون آھن",
-        "update": "منهنجي ج Updateھ کي اپڊيٽ ڪريو",
-        "set": "منهنجو مقام مقرر ڪريو",
-        "prompt": "{{ClickOrTap}} ھتي<br> پنهنجو مقرر ڪريو<br> جھ",
-        "myCurrentLocation": "منهنجو موجوده مقام",
-        "enterAddress": "هڪ پتو داخل ڪريو",
-        "enterPostcode": "مھرباني ڪري پنھنجو پوسٽ ڪوڊ \/ زپ ڪوڊ داخل ڪريو",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "ج Addھ شامل ڪريو",
-            "title": "نئون مقام",
-            "nameYourLocation": "پنھنجي ج Nameھ کي نالو ڏيو"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "ھن ج Saveھ کي محفوظ ڪريو؟",
-            "message": "youا توھان پلان ڪيو ٿا ته ھن ج locationھ کي useيھر استعمال ڪريو مستقبل ۾؟",
-            "ok": "ها",
-            "cancel": "نه"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "ھن ج Nameھ کي نالو ڏيو",
-            "placeholder": "گھر ، ڪم وغيره.",
-            "ok": "بچايو"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "ج Chooseھ چونڊيو"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "ھن ج insideھ اندر ڪو علائقو؟",
-        "newArea": "نئون علائقو",
-        "promptTitle": "علائقي جو نالو داخل ڪريو:",
-        "absent": "مھرباني ڪري علائقو مقرر ڪريو",
-        "error": "غلطي",
-        "exist": "ايريا ا already ۾ ئي موجود آهي",
-        "addNewArea": "نئون علائقو شامل ڪريو",
-        "add": "شامل ڪريو"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "ج locationsھن جو ھڪڙو مجموعو",
-            "displayType": "جھون"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "نمائندگي ڪري ٿو ھڪڙي عمارت ، جvenueھ ، shipيڙي ، پارڪ ، وغيره.",
-            "displayType": "جھ"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "نمائندگي ڪري ٿو ھڪڙو علائقو ھڪڙي ج locationھ جي اندر ، جھڙوڪ ھڪڙو ڪمرو يا سوٽ",
-            "displayType": "ايريا"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "ھڪڙي عمارت يا inيڙيءَ ۾ فرش جي نمائندگي ڪري ٿو",
-            "displayType": "فرش"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "ھڪڙي عمارت يا inيڙيءَ ۾ ھڪ ڪالمن جي نمائندگي ڪري ٿو",
-            "displayType": "ڪالمن"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "ڪيٽيگري شين لاءِ هڪ مخصوص فاصلي تي جيو هش جي",
-            "displayType": "هن placesن جي ويجهو"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "ڪيٽيگري شين لاءِ هڪ خاص مفاصلي تي جيو هش ۾ ، ميچ سان دلچسپي",
-            "displayType": "دلچسپي جي جھون"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

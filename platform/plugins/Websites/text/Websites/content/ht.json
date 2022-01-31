@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link pou ankouraje",
-                "startDate": "Dat Kòmanse",
-                "startTime": "Tan Kòmanse",
-                "endDate": "Dat Fen",
-                "endTime": "Tan Fen",
-                "budget": "Bidjè"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtre pa enterè",
-                "FilterInterests": "Kòmanse tape yon enterè ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Enterè",
-            "Location": "Kote"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Ale",
-            "PasteLinkHere": "https: \/\/ ...",
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Ekri panse ou yo kòmanse konvèsasyon an",
-            "StartConversation": "Kòmanse Konvèsasyon",
-            "GotoConversation": "Ale nan Konvèsasyon",
-            "reset": "Reyajiste",
-            "edit": "Edite",
-            "link": "Lyen",
-            "setUrl": "Mete URL",
-            "save": "Sove",
-            "setClip": "Koupe Clip",
-            "invalidURL": "URL ki pa valab"
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Dosye twò gwo pou kachèt. Gwosè dosye max {{size}}",
-        "InvalidPDF": "Dosye se pa yon PDF ki valab",
-        "StartTypingTitleOrKeywords": "Kòmanse tape tit oswa mo kle ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Yon dokiman HTML ke divinò divès kalite ka wè ak modifye",
-            "displayType": "Atik"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Yon glise nan yon prezantasyon, ka gen ladan HTML, odyo elatriye.",
+            "description": "A slide in a presentation, can include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Yon prezantasyon ki gen plizyè glisad",
-            "displayType": "Prezantasyon"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Yon inite piblisite sou yon sit entènèt",
-            "displayType": "Inite anons"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Yon fason pou gwoupman inite piblisite yo anba yon non",
-            "displayType": "Plasman anons"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Kontni pou yon reklam",
-            "displayType": "Piblisite kreyatif"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Yon kanpay piblisite",
-            "displayType": "Kanpay anons"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Reprezante yon sit entènèt ki gen metadata te grate",
-            "displayType": "Paj entènèt"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

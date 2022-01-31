@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Ошибка {{status}} во время запроса",
-        "canceled": "Запрос отменен",
-        "500": "Внутренняя ошибка сервера",
-        "404": "Не найдено: {{url}}",
-        "501": "Запрос прерван"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Сессия истекла. Обновите страницу и попробуйте снова.",
-        "otherDomain": "Заблокированный междоменный запрос к чужому домену в {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "нажмите",
-        "click": "щелчок",
-        "yes": "да",
-        "no": "нет",
-        "Tap": "Нажмите",
-        "Click": "Нажмите",
-        "Yes": "да",
-        "No": "нет"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "январь",
-        "2": "февраль",
-        "3": "марш",
-        "4": "апрель",
-        "5": "май",
-        "6": "июнь",
-        "7": "июль",
-        "8": "августейший",
-        "9": "сентябрь",
-        "10": "октября",
-        "11": "ноябрь",
-        "12": "Декабрь"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Пожалуйста, разрешите доступ к вашему микрофону",
-        "record": "запись",
-        "recording": "запись",
-        "remains": "остатки",
-        "maximum": "максимальная",
-        "playing": "Воспроизведение",
-        "recorded": "записанный",
-        "clip": "клип",
-        "orupload": "Или загрузить",
-        "usethis": "Использовать этот",
-        "discard": "отбрасывать",
-        "encoding": "кодирование"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "бдительный"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "подтвердить",
-        "ok": "да",
-        "cancel": "нет"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Незамедлительный",
-        "ok": "Идти"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Ошибка чтения файла",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Чем бы Вы хотели заняться?",
-            "photo": "Сделать новое фото",
-            "library": "Выбрать из библиотеки"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Пожалуйста, выберите увеличенное изображение.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Отрегулируйте размер и положение",
-            "touchscreen": "Используйте свои пальцы, чтобы увеличить и перетащить",
-            "notTouchscreen": "Используйте мышь и колесо для масштабирования и перетаскивания"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "прошлой ночью",
-        "lastEvening": "последний канун",
-        "yesterday": "вчерашний день",
-        "thisMorning": "это утро",
-        "today": "Cегодня",
-        "tonight": "сегодня ночью",
-        "tomorrowMorning": "Том Морн",
-        "tomorrow": "завтра",
-        "hoursAgo": "{{h}} часов назад",
-        "hourAgo": "{{h}} час назад",
-        "minuteAgo": "{{m}} минуту назад",
-        "minutesAgo": "{{m}} минут назад",
-        "secondAgo": "{{s}} второй назад",
-        "secondsAgo": "{{s}} секунд назад",
-        "fewSecondsAgo": "секунд назад",
-        "rightNow": "прямо сейчас",
-        "inSecond": "через {{s}} секунду",
-        "inSeconds": "через {{s}} секунд",
-        "inMinute": "через {{m}} минуту",
-        "inMinutes": "через {{m}} минут",
-        "inHour": "через {{h}} час",
-        "inHours": "в {{h}} часах",
-        "inUnderMinute": "менее чем за 1 минуту"
-    },
-    "tabs": {
-        "more": "Больше",
-        "Menu": "Меню"
-    },
-    "video": {
-        "clip": "зажим",
-        "errorNoSource": "Нет источника видео",
-        "SkipAfter": "Пропустить после",
-        "Skip": "Пропускать"
-    },
-    "pdf": {
-        "clip": "зажим",
-        "errorNoSource": "Нет источника в формате pdf"
-    },
-    "clip": {
-        "SetClipStart": "Установить начало клипа",
-        "ClipStart": "Начало клипа",
-        "SetClipEnd": "Установить конец клипа",
-        "ClipEnd": "Конец клипа",
-        "StartMoreEnd": "Начальная позиция не может быть больше конечной.",
-        "EndLessStart": "Конечная позиция не может быть меньше начальной.",
-        "WhichInvalid": "Аргумент &quot;which&quot; недействителен"
-    },
-    "durations": {
-        "second": "второй",
-        "seconds": "секунды",
-        "minute": "минута",
-        "minutes": "минут",
-        "hour": "часы",
-        "day": "день",
-        "days": "дней",
-        "week": "неделю",
-        "weeks": "недели",
-        "month": "месяц",
-        "months": "месяцы",
-        "year": "год",
-        "years": "лет",
-        "decade": "десятилетие",
-        "decades": "десятилетия",
-        "century": "век",
-        "centuries": "века"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

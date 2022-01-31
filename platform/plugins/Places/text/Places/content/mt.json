@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "fi {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "metru",
-        "meters": "metru",
-        "kilometer": "kilometru",
-        "kilometers": "kilometri",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "mil",
-        "miles": "mili",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "sieq",
-        "feet": "saqajn",
-        "inches": "pulzieri"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Jien interessat li affarijiet li jseħħu fi {{select}} ta &#39;",
-        "update": "Aġġorna l-pożizzjoni tiegħi",
-        "prompt": "{{ClickOrTap}} hawnhekk sal <br> sett tiegħek <br> post",
-        "myCurrentLocation": "Il-post attwali tiegħi",
-        "enterAddress": "Daħħal indirizz",
-        "enterPostcode": "Jekk jogħġbok ikteb il-kodiċi postali \/ zipcode tiegħek",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Żid Post",
-            "title": "Post Ġdid",
-            "nameYourLocation": "Isem il-lokalità tiegħek"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Ħlief dan il-post?",
-            "message": "Qed tippjana li terġa &#39;tuża dan il-post fil-futur?",
-            "ok": "Iva",
-            "cancel": "Le"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Isem dan il-post",
-            "placeholder": "Id-dar, ix-xogħol eċċ.",
-            "ok": "Ħlief"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Agħżel Location"
-        },
-        "set": "Issettja l-Post Tiegħi"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Kwalunkwe żona ġewwa dan il-post?",
-        "newArea": "Żona ġdida",
-        "promptTitle": "Daħħal isem għaż-żona:",
-        "absent": "Jekk jogħġbok issettja l-erja",
-        "error": "Żball",
-        "exist": "Żona diġà teżisti",
-        "addNewArea": "Żid żona ġdida",
-        "add": "Żid"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "ġabra ta &#39;lokalitajiet",
-            "displayType": "Lokalitajiet"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Jirrappreżenta bini, post, vapur, park, eċċ.",
-            "displayType": "Post"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Jirrappreżenta żona f&#39;post, bħal kamra jew suite",
-            "displayType": "Qasam"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Jirrappreżenta sular f&#39;bini jew vapur",
-            "displayType": "Sular"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Jirrappreżenta kolonna f&#39;bini jew vapur",
-            "displayType": "Kolonna"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta &#39;ġeohash",
-            "displayType": "Postijiet viċin"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Kategorija għal affarijiet f&#39;ċerta distanza ta &#39;ġeohash, li taqbel ma&#39; interess",
-            "displayType": "Postijiet ta &#39;interess"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -1329,7 +1329,7 @@ abstract class Users extends Base_Users
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile", or "$platform\t$appId",
+	 * @param {string|array} $type can be "email", "mobile", or $platform."_".$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  It could also be an array of ($type => $value) pairs.
@@ -1340,7 +1340,7 @@ abstract class Users extends Base_Users
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * $platformApp - a string of the form "$platform\t$appId"
+	 * * $platformApp - a string of the form $platform."_".$appId"
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1376,7 +1376,7 @@ abstract class Users extends Base_Users
 	 *
 	 * @method futureUser
 	 * @param {string} $type can be "email", "mobile", 
-	 *  a string of the form "$platform\t$appId"
+	 *  a string of the form $platform."_".$appId"
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. The type
@@ -1555,10 +1555,13 @@ abstract class Users extends Base_Users
 				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
 				$largestImage = $icoFileService->extractIcon($data, 32, 32);
 			} else {
-				$largestImage = imagecreatefromstring($data);
+				$largestImage = @imagecreatefromstring($data);
 			}
-			$sw = imagesx($largestImage);
-			$sh = imagesy($largestImage);
+
+			if ($largestImage) {
+				$sw = imagesx($largestImage);
+				$sh = imagesy($largestImage);
+			}
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
@@ -1601,7 +1604,6 @@ abstract class Users extends Base_Users
 				}
 				if ($sw == $w and $sh == $h) {
 					$image = $largestImage;
-					$success = true;
 				} else {
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
@@ -1610,7 +1612,7 @@ abstract class Users extends Base_Users
 					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
+					imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
@@ -2081,7 +2083,8 @@ abstract class Users extends Base_Users
 			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
-			$parts = explode("\t", $type);
+			$parts = explode("\t", $parts[0]); // backwards compatibility
+			$parts = explode("_", $type);
 			switch ($parts[0]) {
 				case 'email':
 					if (!Q_Valid::email($identifier, $normalized)) {

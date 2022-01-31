@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "acceder",
-        "LogOut": "saia"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Establece {{1}} como o meu {{2}} primario",
-        "ChoosePassPhrase": "Escolla unha <strong>frase de entrada<\/strong> para iniciar sesión. <br> Unha frase sinxela composta por algunhas palabras que facilmente recordarás.",
-        "ChoosePassPhraseSeeSuggestions": "Escolle unha boa <strong>frase de paso<\/strong> para protexer a túa conta. Vexa as suxestións para algunhas ideas.",
-        "LogOutAndTryAgain": "Pechar sesión e probar de novo",
-        "IfYouFeel": "Se pensas que algo andou mal, podes",
-        "SetIdentifierButtonTitle": "comezar de novo"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Comezar"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Comezar",
-        "Authorize": "Autorizar",
-        "TermsLabel": "Lin e estou de acordo <br> ao {{link}}",
-        "TermsTitle": "Termos",
-        "mustAgree": "Primeiro debes aceptar os termos."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Acepto o {{link}}",
-        "TermsTitle": "Termos"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permiso",
-        "prompt": "Quere activar as notificacións? Recibirás actualizacións en tempo real sobre cousas que che interesas.",
-        "yes": "Si",
-        "no": "Non",
-        "WelcomePleaseVerifyEmail": "Benvido! Verifica o teu enderezo de correo electrónico.",
-        "WelcomeVerifyEmail": "Benvido! Verifique o seu enderezo de correo electrónico.",
-        "ForgetPass": "Ei, esqueciches o teu contrasinal?",
-        "PassphraseSaved": "Gardouse a frase de paso.",
-        "IdentifierActivated": "Activouse o teu {{type}}.",
-        "CompletedActivation": "Remataches a activación do usuario.",
-        "CompletedActivationLogIn": "Remataches a activación do usuario. Proba a iniciar sesión agora."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Seleccione a etiqueta.",
-        "inviteUser": "Invitar ao usuario",
-        "selectRole": "Selecciona papel",
-        "inviteRole": "Invitar {{role}}"
-    },
-    "invalidLanguageSelected": "Idioma seleccionado non válido",
     "contacts": {
         "dialog": {
-            "title": "Escolla o contacto",
-            "SearchByName": "Busca por nome",
-            "CreateAccount": "+ Novo contacto",
-            "CreateAccountNotFound": "Non se atopou Q.Users.Cordova.UI.create",
-            "EmptyContacts": "Non se atoparon contactos ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Seleccione o contacto de {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Benvido",
-        "directions": "Crear unha conta ou iniciar sesión.",
-        "directionsNoRegister": "Inicia sesión se tes unha conta.",
-        "goButton": "Vaia",
-        "passphrase": "Insira a súa frase de paso:",
-        "loginButton": "Comezar",
-        "registerButton": "Comezar",
-        "resendButton": "Enviar mensaxe de activación",
-        "forgot": "Esqueciches?",
-        "resendConfirm": "¿Quere enviar unha mensaxe para restablecer a súa contraseña?",
-        "resendSuccess": "Asegúrese de que unha mensaxe poida restablecer a súa contraseña",
-        "resendClose": "Pechar",
-        "noPassphrase": "Antes de poder iniciar sesión, debes definir unha frase facendo clic na ligazón da mensaxe de activación.",
-        "notVerified": "Para iniciar sesión ten que enviar unha mensaxe de activación.",
-        "emailExists": "¿Intentaches rexistrar con este correo antes? En caso afirmativo, comproba a túa caixa de entrada para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
-        "mobileExists": "¿Intentaches rexistrar con este número de móbil antes? Se é así, comproba o teu SMS para activar a túa conta. <a href='#resend' class='Q_button Users_activation_resend'>Fai clic para volver enviar a mensaxe<\/a>",
-        "usingOther": "ou podes",
-        "prompt": "Escolle un nome de usuario:",
-        "newUser": "ou crea unha nova conta a continuación",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "o teu número de teléfono ou correo electrónico",
-            "mobile": "introduce o teu móbil",
-            "email": "introduza o teu enderezo de correo electrónico",
-            "username": "nome de usuario"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "¿Acepta os termos de servizo?",
-        "facebookNoEmail": "A súa conta de Facebook carece dun enderezo de correo electrónico confirmado. Basta con iniciar sesión na forma nativa.",
-        "picTooltip": "Máis tarde podes cambiar esta foto",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Iniciar sesión en {{host}} á vez {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Redireccionando a Wallet",
-                "content": "Unha vez que peche este diálogo, dirixirase á súa carteira. Despois de iniciar sesión, volve a esta páxina."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Engade un xeito de iniciar sesión",
-        "sendMessage": "Enviar mensaxe de activación",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "introduce o teu número de teléfono ou correo electrónico",
-            "mobile": "introduce o teu número de móbil",
-            "email": "introduza o teu enderezo de correo electrónico",
-            "username": "nome de usuario"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} conta",
-        "areUsing": "Está a usar {{platform}} como",
-        "noLongerUsing": "Xa non estás conectado a {{platform}} como",
-        "doAuth": "Inicie sesión con esta conta",
-        "doSwitch": "Cambia a esta conta"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Propietario",
-        "Admin": "Administrador",
-        "Member": "Membro",
-        "Guest": "Convidado",
-        "Host": "Anfitrión"
-    },
-    "analytics": {
-        "Title": "Analítica",
-        "Daily": "Diario",
-        "Weekly": "Semanalmente",
-        "Monthly": "Mensual",
-        "Application": "Solicitude",
-        "Pages": "Páxinas",
-        "Services": "Servizos",
-        "Faq": "FAQ",
-        "WeekDays": "Días da semana"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }
