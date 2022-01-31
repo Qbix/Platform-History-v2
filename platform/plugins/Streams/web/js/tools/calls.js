@@ -24,7 +24,6 @@
 
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
                 if (tool.stream.testWriteLevel("edit")) {
-                    let getParams = new URLSearchParams(window.location.search);
                     state.isAdmin = true;
                     tool.initMainRoom();
                     tool.settings();
@@ -214,8 +213,6 @@
                                     name: tool.state.mainRoomConfig.mainRoomStream.fields.name,
                                     immediate: true,
                                     userId: platformId,
-                                    clipStreamPublisherId:tool.stream.fields.publisherId,
-                                    clipStreamName:tool.stream.fields.name
                                 }),
                             }, function() {
 
