@@ -69,8 +69,10 @@ class Q_Uri
 		}
 		
 		// returns it as a string
-		$module = isset($this->fields['module']) ? $this->fields['module'] : null;
-		$action = isset($this->fields['action']) ? $this->fields['action'] : null;
+		$fields = $this->fields;
+		unset($fields['']);
+		$module = isset($fields['module']) ? $fields['module'] : null;
+		$action = isset($fields['action']) ? $fields['action'] : null;
 		$result = "$module/$action";
 		if ($this->querystring) {
 			$result .= '?'.$this->querystring;
@@ -79,7 +81,7 @@ class Q_Uri
 			$result .= '#'.$this->anchorstring;
 		}
 		$other_fields = array();
-		foreach ($this->fields as $name => $value) {
+		foreach ($fields as $name => $value) {
 			if (is_numeric($name) 
 			 or $name == 'action' 
 			 or $name == 'module') {

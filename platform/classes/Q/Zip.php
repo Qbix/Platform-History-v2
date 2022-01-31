@@ -98,7 +98,7 @@ SOFTWARE.
  * 
 **/
 
-class Zip {
+class Q_Zip {
 	
 	
 	// for creating or adding files
@@ -344,6 +344,7 @@ class Zip {
 	
 	public function unzip_file($file_path,$target_dir=NULL) {
 		
+
 		// if it doesn't exist
 		if(!file_exists($file_path)) throw new Exception("PHP-ZIP: File doesn't Exist");
 		
@@ -394,7 +395,7 @@ class Zip {
 		// it exists, but it's not a directory
 		if(file_exists($target_dir) && (!is_dir($target_dir))) throw new Exception("PHP-ZIP: Target directory exists as a file not a directory");
 		// it doesn't exist
-		if(!file_exists($target_dir)) if(!mkdir($target_dir)) throw new Exception("PHP-ZIP: Directory not found, and unable to create it");
+		if(!file_exists($target_dir)) if(!mkdir($target_dir, 0777, true)) throw new Exception("PHP-ZIP: Directory not found, and unable to create it");
 		// validations -- end //
 		
 		$this->extr_dirc = $target_dir;
