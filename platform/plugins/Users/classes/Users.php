@@ -1555,10 +1555,13 @@ abstract class Users extends Base_Users
 				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
 				$largestImage = $icoFileService->extractIcon($data, 32, 32);
 			} else {
-				$largestImage = imagecreatefromstring($data);
+				$largestImage = @imagecreatefromstring($data);
 			}
-			$sw = imagesx($largestImage);
-			$sh = imagesy($largestImage);
+
+			if ($largestImage) {
+				$sw = imagesx($largestImage);
+				$sh = imagesy($largestImage);
+			}
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
@@ -1601,7 +1604,6 @@ abstract class Users extends Base_Users
 				}
 				if ($sw == $w and $sh == $h) {
 					$image = $largestImage;
-					$success = true;
 				} else {
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
@@ -1610,7 +1612,7 @@ abstract class Users extends Base_Users
 					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
+					imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {

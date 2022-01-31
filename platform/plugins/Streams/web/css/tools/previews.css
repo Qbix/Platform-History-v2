@@ -293,7 +293,7 @@
 	display: flex;
 	padding: 10px 5px 5px 5px;
 }
-.Streams_preview_accept_button, .Streams_preview_disconnect_button, .Streams_preview_call_button, .Streams_preview_switch_back_button {
+.Streams_preview_accept_button, .Streams_preview_disconnect_button, .Streams_preview_call_button, .Streams_preview_switch_back_button, .Streams_preview_hold_button {
 	/*width: 100px;*/
 	height: 40px;
 	display: flex;
@@ -315,11 +315,20 @@
 }
 .Streams_preview_call_control_call {
 	margin-right: 10px;
+	display: flex;
 }
 .Streams_preview_call_button {
 	background: #007bff;
 	/*width:60px;*/
 	height:40px;
+}
+.Streams_preview_hold_button {
+	display: none;
+	background: #007bff;
+	/*width:60px;*/
+	height:40px;
+	margin-left: 10px;
+
 }
 
 .Streams_preview_contents {

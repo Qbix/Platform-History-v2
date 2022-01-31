@@ -951,6 +951,7 @@ class Q_Browscap
                 } else {
                     throw new Exception('Cannot open the local file');
                 }
+                break;
             case self::UPDATE_FOPEN:
                 // include proxy settings in the file_get_contents() call
                 $context = $this->_getStreamContext();
@@ -959,6 +960,7 @@ class Q_Browscap
                 if ($file !== false) {
                     return $file;
                 } // else try with the next possibility (break omitted)
+				break;
             case self::UPDATE_FSOCKOPEN:
                 $remote_url = parse_url($url);
                 $remote_handler = fsockopen($remote_url['host'], 80, $c, $e, $this->timeout);
@@ -997,6 +999,7 @@ class Q_Browscap
                         return $file;
                     }
                 } // else try with the next possibility
+				break;
             case self::UPDATE_CURL:
                 $ch = curl_init($url);
 
@@ -1011,6 +1014,7 @@ class Q_Browscap
                 if ($file !== false) {
                     return $file;
                 } // else try with the next possibility
+				break;
             case false:
                 throw new Exception('Your server can\'t connect to external resources. Please update the file manually.');
         }
