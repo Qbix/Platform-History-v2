@@ -49,6 +49,10 @@ function Assets_before_Q_responseExtras() {
 	}
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.chains', $chains);
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.currencies', $currencies);
+	$nf = Q_Config::get('Assets', 'Web3', 'NFT', 'factory', 'contract', 'address', null);
+	if ($nf) {
+		Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.factory.contract.address', $nf);
+	}
 
 	// set Assets.Web3.NFT.icon.sizes for imagepicker
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
