@@ -103,7 +103,11 @@ module.exports = function(socket,io) {
 
             var streamName = 'Streams/webrtc/' + roomId;
             if(clients.length > 0) {
+                if(_debug) console.log('DISCONNECT: clients.length > 0');
+
                 Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
+                    if(_debug) console.log('DISCONNECT: fetchOne');
+
                     if(err || !stream) {
                         return;
                     }

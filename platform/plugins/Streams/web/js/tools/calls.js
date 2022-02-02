@@ -318,6 +318,7 @@
                                 this.state.mainWebrtcRoom = state.mainWebrtcRoom;
                                 this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
                                 this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
+                                this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
                                 this.state.eventsStream = tool.state.eventsStream;
                                 /*this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {

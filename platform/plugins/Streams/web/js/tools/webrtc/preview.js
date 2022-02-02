@@ -154,17 +154,17 @@
                 var aboutContainer = tool.element.querySelector('.Streams_preview_about');
                 var previewMediaContainer = tool.element.querySelector('.Streams_preview_media_container');
                 var praticipantsContainer = tool.element.querySelector('.Streams_preview_participants');
-                var callButton = tool.$('.Streams_preview_call_button');
-                var switchBackButton = tool.$('.Streams_preview_switch_back_button');
-                var acceptButton = tool.$('.Streams_preview_accept_button');
-                var holdButton = tool.$('.Streams_preview_hold_button');
+                var callButton = tool.element.querySelector('.Streams_preview_call_button');
+                var switchBackButton = tool.element.querySelector('.Streams_preview_switch_back_button');
+                var acceptButton = tool.element.querySelector('.Streams_preview_accept_button');
+                var holdButton = tool.element.querySelector('.Streams_preview_hold_button');
+                var approveButton = tool.element.querySelector('.Streams_preview_approve_button');
 
-                acceptButton.on(Q.Pointer.fastclick, function () {
+                acceptButton.addEventListener('click', function () {
                     Q.req('Streams/calls', 'manage', function () {
-                        acceptButton.css('display', 'none');
-                        switchBackButton.css('display', 'none');
-                        acceptButton.css('display', 'none');
-                        callButton.css('display', 'none');
+                        acceptButton.style.display = 'none';
+                        switchBackButton.style.display = 'none';
+                        callButton.style.display = 'none';
 
                         if(tool.state.mainWebrtcRoom == null || !tool.state.mainWebrtcRoom.isActive()) {
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -199,7 +199,7 @@
 
                 });
 
-                callButton.on(Q.Pointer.fastclick, function () {
+                callButton.addEventListener('click', function () {
 
                     if(tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.isActive()) {
                         tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
@@ -210,9 +210,9 @@
 
                             moveVisualizationToPreview();
                             //praticipantsContainer.style.display = 'none';
-                            callButton.css('display', 'none');
-                            holdButton.css('display', 'flex');
-                            switchBackButton.css('display', 'flex');
+                            callButton.style.display = 'none';
+                            holdButton.style.display = 'flex';
+                            switchBackButton.style.display = 'flex';
 
                             tool.stream.post({
                                 type: 'Streams/calls/interviewing',
@@ -233,9 +233,9 @@
                             defaultDesktopViewMode: 'audio',
                             defaultMobileViewMode: 'audio',
                             onWebRTCRoomCreated: function() {
-                                callButton.css('display', 'none');
-                                switchBackButton.css('display', 'flex');
-                                holdButton.css('display', 'flex');
+                                callButton.style.display = 'none';
+                                switchBackButton.style.display = 'flex';
+                                holdButton.style.display = 'flex';
                                 moveVisualizationToPreview();
                                 Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
                             },
@@ -250,7 +250,7 @@
 
 
                 });
-                switchBackButton.on(Q.Pointer.fastclick, function () {
+                switchBackButton.addEventListener('click', function () {
                     tool.stream.post({
                         type: 'Streams/webrtc/forceDisconnect',
                         content: JSON.stringify({
@@ -261,15 +261,15 @@
                             tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
-                                acceptButton.css('display', 'none');
-                                switchBackButton.css('display', 'none');
+                                acceptButton.style.display = 'none';
+                                switchBackButton.style.display = 'none';
 
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
                             });
                         } else {
-                            acceptButton.css('display', 'none');
-                            switchBackButton.css('display', 'none');
+                            acceptButton.style.display = 'none';
+                            switchBackButton.style.display = 'none';
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
                             tool.preview.delete();
 
@@ -280,29 +280,61 @@
                 });
 
 
-                holdButton.on(Q.Pointer.fastclick, function () {
+                holdButton.addEventListener('click', function () {
                     if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
                         tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                             resumeClosed: true
                         }).then(function () {
-                            switchBackButton.css('display', 'none');
-                            holdButton.css('display', 'none');
-                            acceptButton.css('display', '');
-                            callButton.css('display', '');
+                            switchBackButton.style.display = 'none';
+                            holdButton.style.display = 'none';
+                            acceptButton.style.display = '';
+                            callButton.style.display = '';
 
                             moveVisualizationToMainContainer();
+                            tool.stream.post({
+                                type: 'Streams/calls/interviewing',
+                                content: 'ended',
+                            })
                         });
                     } else {
                         if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
                         previewMediaContainer.style.display = 'none';
                         aboutContainer.style.display = '';
-                        switchBackButton.css('display', 'none');
-                        holdButton.css('display', 'none');
-                        acceptButton.css('display', '');
-                        callButton.css('display', '');
+                        switchBackButton.style.display = 'none';
+                        holdButton.style.display = 'none';
+                        acceptButton.style.display = '';
+                        callButton.style.display = '';
 
                     }
                 });
+
+                approveButton.addEventListener('click', function () {
+                    Q.req('Streams/calls', 'approveCall', function (err, response) {
+
+                        console.log('approveeeeeeee', response);
+                        if(response.slots.approveCall == 'approve') {
+                            tool.state.approved = true;
+                            approveButton.innerHTML = 'Approved';
+                        } else {
+                            tool.state.approved = false;
+                            approveButton.innerHTML = 'Approve';
+                        }
+
+                        tool.stream.post({
+                            type: 'Streams/approved',
+                            content: 'true',
+                        })
+
+                    }, {
+                        fields: {
+                            action: tool.state.approved == true ? 'disapprove' : 'approve',
+                            webrtcStreamPublisher: tool.stream.fields.publisherId,
+                            webrtcStreamName: tool.stream.fields.name
+                        }
+                    })
+                });
+
+                updatePreview();
 
                 function moveVisualizationToPreview() {
                     console.log('moveVisualizationToPreview');
@@ -336,13 +368,96 @@
                             titleContainer.innerHTML = tool.text.calls.WaitingRoom;
                         }
                     }
-                }, tool);
+                });
 
+                tool.stream.onMessage("Streams/join").set(function (stream, message) {
+                    console.log('PREVIEW stream JOIN event:', message)
+                    let byUserId = message.byUserId;
+                    updateTitle();
+                });
+
+                tool.stream.onMessage("Streams/leave").set(function (stream, message) {
+                    console.log('PREVIEW stream LEAVE event:', message)
+                    let byUserId = message.byUserId;
+                    updateTitle();
+                });
+
+                /*tool.stream.onMessage("Streams/approved").set(function (stream, message) {
+                    console.log('PREVIEW stream APPROVED event:', message)
+                    let byUserId = message.byUserId;
+
+                });*/
+
+                tool.stream.onMessage("Streams/changed").set(function (stream, message) {
+                    console.log('PREVIEW stream CHANGED event:', message)
+                    let byUserId = message.byUserId;
+                    updatePreview(true);
+                });
+
+                function updatePreview(reload) {
+                    var updateUI = function(stream) {
+                        let currentlyApproved = tool.state.approved = stream.getAttribute('approved') == 'true' ? true : false;
+                        if(currentlyApproved == true) {
+                            approveButton.innerHTML = 'Approved';
+                            if(!approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.add('Streams_preview_approve_button_approved');
+
+                        } else {
+                            approveButton.innerHTML = 'Approve';
+                            if(approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.remove('Streams_preview_approve_button_approved');
+                        }
+                    }
+                    if(reload) {
+                        Q.Streams.get(tool.stream.fields.publisherId, tool.stream.fields.name, function (err, stream) {
+                            var msg = Q.firstErrorMessage(err);
+                            if (msg) {
+                                return Q.alert(msg);
+                            }
+
+                            //tool.stream = stream;
+                           updateUI(stream);
+
+                        });
+                        return;
+                    }
+                    updateUI(tool.stream);
+                }
+
+                function updateTitle() {
+                    Q.req('Streams/calls', 'callParticipants', function (err, response) {
+                        var msg = Q.firstErrorMessage(err, response && response.errors);
+
+                        if (msg) {
+                            return Q.alert(msg);
+                        }
+                        console.log('callParticipants', response.slots.callParticipants);
+                        console.log('callParticipants2', Object.keys(response.slots.callParticipants));
+                        var participantsIds = Object.keys(response.slots.callParticipants);
+                        for (let i in participantsIds) {
+                            console.log('tool.isHost(participantsIds[i])',tool.isHost(participantsIds[i]), participantsIds[i] == Q.Users.loggedInUserId())
+                            if ((tool.isHost(participantsIds[i]) || tool.isScreener(participantsIds[i])) && participantsIds[i] != Q.Users.loggedInUserId()) {
+                                titleContainer.innerHTML = 'Currently is interviewed by another host';
+                                return;
+                            }
+                        }
+                        titleContainer.innerHTML = tool.text.calls.WaitingRoom;
+
+                    }, {
+                        fields: {
+                            webrtcStreamPublisher: tool.stream.fields.publisherId,
+                            webrtcStreamName: tool.stream.fields.name
+                        }
+                    })
+                }
+                updateTitle();
             },
             isHost: function (userId) {
                 if(!this.state.hostsUsers) return false;
                 return this.state.hostsUsers.includes(userId);
             },
+            isScreener: function (userId) {
+                if(!this.state.screenersUsers) return false;
+                return this.state.screenersUsers.includes(userId);
+            }
 
         });
 
@@ -359,6 +474,7 @@
         + '<div class="Streams_preview_participants" style="display: none;">{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}</div>'
         + '<div class="Streams_preview_call_control">'
         + '<div class="Streams_preview_call_control_call">'
+        + '<div class="Streams_preview_approve_button">Approve</div>'
         + '<div class="Streams_preview_call_button">Interview</div>'
         + '<div class="Streams_preview_switch_back_button">End Call</div>'
         + '<div class="Streams_preview_hold_button">Hold</div>'
