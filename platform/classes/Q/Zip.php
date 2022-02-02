@@ -270,7 +270,7 @@ class Q_Zip {
 		// using PclZip
 		if($this->lib === 2) {
 			// require the lib
-			require_once "inc/pclzip.lib.php";
+			require_once "Zip/pclzip.lib.php";
 			$common = $this->commonPath($this->org_files, false);
 
 			if(!$lib = new PclZip($this->new_file_path)) throw new Exception('PHP-ZIP: Permission Denied or zlib can\'t be found');
@@ -411,7 +411,7 @@ class Q_Zip {
 		
 		// extarct using PclZip
 		if($this->lib === 2) {
-			require_once "inc/pclzip.lib.php";
+			require_once "Zip/pclzip.lib.php";
 			$lib = new PclZip($this->extr_file);
 			if(!$lib->extract(PCLZIP_OPT_PATH,$this->extr_dirc)) throw new Exception("PHP-ZIP: Unable to extract files");
 		}

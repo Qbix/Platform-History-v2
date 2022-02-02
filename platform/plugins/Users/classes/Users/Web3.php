@@ -8,7 +8,7 @@ use Crypto\Keccak;
  * @module Users
  */
 /**
- * Class handle with BlockChain
+ * Class for dealing with EVM blockchains
  *
  * @class Users_Web3
  */
