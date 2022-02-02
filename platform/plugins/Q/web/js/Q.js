@@ -8979,6 +8979,7 @@ var _latestLoadUrlObjects = {};
  * @param {Object} [options.retainSlots] an object of {slotName: whetherToRetain} pairs, retained slots aren't requested
  * @param {boolean} [options.slotContainer] optional function taking (slotName, response) and returning the element, if any, to fill for that slot
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace. Overrides "data-q-retain" attributes but not retainSlots option.
+ * @param {Object} [options.dontRestoreScrollPosition] set dontRestoreScroll[url] = true to skip fillSlots restoring scroll position for that url, or just set dontRestoreScroll[''] = true to skip all urls
  * @param {String} [options.key='Q'] If a response to the request initiated by this call to Q.loadUrl is preceded by another call to Q.loadUrl with the same key, then the response handler is not run for that response (since a newer one is pending or arrived).
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. Receives function as argument - the function might be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
@@ -14145,7 +14146,10 @@ Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 		} else if (elem = o.slotContainer(name, res)) { 
 			try {
 				Q.replace(elem, res.slots[name], options);
-				if (pos = Q.getObject(['Q', 'scroll', url], elem)) {
+				if (!o.dontRestoreScrollPosition['']
+				&& !o.dontRestoreScrollPosition[url]
+				&& (pos = Q.getObject(['Q', 'scroll', url], elem))
+				) {
 					elem.scrollLeft = pos.left;
 					elem.scrollTop = pos.top;
 				} else {
@@ -14174,6 +14178,7 @@ Q.loadUrl.options = {
 	onLoad: new Q.Event(),
 	onActivate: new Q.Event(),
 	slotNames: [],
+	dontRestoreScrollPosition: {},
 	slotContainer: function (slotName) {
 		return document.getElementById(slotName+"_slot");
 	},
