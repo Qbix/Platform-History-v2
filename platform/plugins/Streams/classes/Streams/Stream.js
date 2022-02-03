@@ -940,7 +940,79 @@ Sp.join = function(options, callback) {
 
 Sp.leave = function(options, callback) {
 	// TODO: Nazar: Implement to be similar to PHP, and add documentation
-	callback(); // pass err
+	//callback(); // pass err
+
+    var stream = this;
+    if (typeof options === "function") {
+        callback = options;
+        options = {};
+    }
+    this._fetchAsUser(options, function(err, stream, userId) {
+        if (err) return callback.call(stream, err);
+        //if (!stream.testWriteLevel('join')) return callback.call(stream, new Error("User is not authorized"));
+        new Streams.Participant({
+            publisherId: stream.fields.publisherId,
+            streamName: stream.fields.name,
+            userId: userId
+        }).retrieve(function(err, sp) {
+            if (err) return callback.call(stream, err);
+            var type = 'Streams/leave';
+            if (sp.length) {
+                sp = sp[0];
+                var save = false, subscribed = options.subscribed;
+                if (subscribed && sp.fields.subscribed == 'yes') {
+                    sp.fields.subscribed = 'no';
+                    save = true;
+                }
+
+                if (sp.fields.state === 'participating') {
+                    sp.fields.state = 'left';
+                    save = true;
+                }
+                if (save) {
+                    sp.save(true, _afterSaveParticipant);
+                } else {
+                    _afterSaveParticipant();
+                }
+            }
+            function _afterSaveParticipant(err) {
+                if (err) return callback.call(stream, err);
+                Users.Socket.emitToUser(userId, 'Streams/leave', sp.fillMagicFields().getFields());
+                stream.updateParticipantCounts(
+                    'left', sp.fields.state, _afterUpdateParticipantCounts
+                );
+            }
+            function _afterUpdateParticipantCounts() {
+                var f = sp.fields;
+                stream.post(userId, {
+                    type: type,
+                    instructions: JSON.stringify({
+                        reason: f.reason,
+                        enthusiasm: f.enthusiasm
+                    })
+                }, function(err) {
+                    if (err) return callback.call(stream, err);
+                    new Streams.Stream({
+                        publisherId: userId,
+                        name: 'Streams/participating'
+                    }).retrieve(function (err, pstream) {
+                        if (err || !pstream.length) return callback.call(stream, err);
+                        pstream[0].post(userId, {
+                            type: type,
+                            content: '',
+                            instructions: JSON.stringify({
+                                publisherId: stream.fields.publisherId,
+                                streamName: stream.fields.name
+                            })
+                        }, function (err) {
+                            if (err) return callback.call(stream, err);
+                            callback.call(stream, null, sp);
+                        });
+                    });
+                });
+            }
+        });
+    });
 };
 
 /**

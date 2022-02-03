@@ -24,7 +24,6 @@
 
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
                 if (tool.stream.testWriteLevel("edit")) {
-                    let getParams = new URLSearchParams(window.location.search);
                     state.isAdmin = true;
                     tool.initMainRoom();
                     tool.settings();
@@ -214,8 +213,6 @@
                                     name: tool.state.mainRoomConfig.mainRoomStream.fields.name,
                                     immediate: true,
                                     userId: platformId,
-                                    clipStreamPublisherId:tool.stream.fields.publisherId,
-                                    clipStreamName:tool.stream.fields.name
                                 }),
                             }, function() {
 
@@ -321,6 +318,7 @@
                                 this.state.mainWebrtcRoom = state.mainWebrtcRoom;
                                 this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
                                 this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
+                                this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
                                 this.state.eventsStream = tool.state.eventsStream;
                                 /*this.state.onWebRTCRoomEnded.set(function () {
                                     if (!state.isAdmin) {
