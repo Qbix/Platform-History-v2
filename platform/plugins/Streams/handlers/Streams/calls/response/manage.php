@@ -44,20 +44,6 @@ function Streams_calls_response_manage ($params) {
                 )
             ), true);
         }
-    } else if ($action == "approve") {
-        $participant = $webrtc->leave(compact("userId"));
-        $webrtc->setAttribute('startTime', $startTime);
-        $webrtcStream->clearAttribute('endTime');
-        $webrtcStream->save();
-        if ($participant->state == "left") {
-            $eventsStream->post(Users::communityId(), array(
-                "type" => "Media/webrtc/guest",
-                "instructions" => array(
-                    "joined" => false,
-                    "userId" => $userId
-                )
-            ), true);
-        }
     }
 }
 
