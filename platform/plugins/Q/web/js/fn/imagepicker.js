@@ -430,7 +430,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 						return _revert();
 					}
 
-					if (state.cropping && !state.saveSizeName.x) {
+					if (state.cropping) {
 						var $croppingElement = $('<img />').attr({ src: img.src })
 							.css({'visibility': 'hidden'});
 						var $title = $('<div />')

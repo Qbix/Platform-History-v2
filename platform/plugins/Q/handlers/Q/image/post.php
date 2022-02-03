@@ -26,7 +26,7 @@ function Q_image_post($params = null)
 {
 	$p = $params
 		? $params
-		: Q::take($_REQUEST, array('data', 'path', 'subpath', 'merge', 'crop', 'save'));
+		: Q::take($_REQUEST, array('data', 'path', 'subpath', 'merge', 'crop', 'save', 'original'));
 	Q_Valid::requireFields(array('path'), $p, true);
 	if (!empty($_FILES)) {
 		$file = reset($_FILES);
@@ -40,10 +40,23 @@ function Q_image_post($params = null)
 			throw new Q_Exception_RequiredField(array('field' => 'data'), 'data');
 		}
 		$p['data'] = base64_decode(chunk_split(substr($p['data'], strpos($p['data'], ',')+1)));
+
+		if (!empty($p['original'])) {
+			$p['original'] = base64_decode(chunk_split(substr($p['original'], strpos($p['original'], ',')+1)));
+		}
 	}
 	$timeLimit = Q_Config::get('Q', 'uploads', 'limits', 'time', 5*60*60);
 	set_time_limit($timeLimit); // default is 5 min for saving the image in various formats
 	$data = Q_Image::save($p);
+
+	// save original image
+	if (!empty($p['original'])) {
+		if (!imagecreatefromstring($p['original'])) {
+			throw new Q_Exception("Image type not supported");
+		}
+
+		file_put_contents($data['writePath'].'original.'.$data['ext'], $p['original']);
+	}
 	if (empty($params)) {
 		Q_Response::setSlot('data', $data);
 	}
