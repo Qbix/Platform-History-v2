@@ -17,7 +17,9 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * Used to execute methods on the blockchain
 	 * @method execute
 	 * @static
-	 * @param {string} $contractAddress on that chain
+	 * @param {string|array} $contractAddress the contract address to call the method on,
+	 *  or array($contractAddress, $abiContent) to specify custom ABI content (JSON),
+	 *  useful for when you have many contracts with the same ABI produced by a factory
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
@@ -33,6 +35,10 @@ class Users_Web3 extends Base_Users_Web3 {
 		$caching = true,
 		$cacheDuration = null)
 	{
+		if (is_array($contractAddress)) {
+			list($contractAddress, $abi) = $contractAddress;
+		}
+
 		if (!isset($appId)) {
 			$appId = Q::app();
 		}
@@ -74,11 +80,13 @@ class Users_Web3 extends Base_Users_Web3 {
 			compact('infuraId')
 		);
 
-		$filename = self::getABIFilename($contractAddress);
-		if (!is_file($filename)) {
-			throw new Q_Exception_MissingFile(compact('filename'));
+		if (empty($abi)) {
+			$filename = self::getABIFilename($contractAddress);
+			if (!is_file($filename)) {
+				throw new Q_Exception_MissingFile(compact('filename'));
+			}
+			$abi = file_get_contents($filename);
 		}
-		$abi = file_get_contents($filename);
 		$data = array();
 		$arguments = array($methodName);
 		if (is_array($params)) {
