@@ -1639,6 +1639,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(screen.screensharing == true) {
                     if(!screen.screenEl.classList.contains('Streams_webrtc_chat-active-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
+                    if(!screen.screenEl.classList.contains('Streams_webrtc_chat-local-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-local-screen-sharing');
                     if(screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
                 }
 
