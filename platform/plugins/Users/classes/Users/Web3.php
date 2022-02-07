@@ -24,7 +24,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
 	 * @param {boolean|null|callable} [$caching=true] Set false to ignore cache and request blockchain every time.
-	 *  Set to null to cache any result as long as it is generated.
+	 *  Set to null to cache any truthy result while not caching falsy results.
 	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
 	 * @return array
@@ -57,15 +57,15 @@ class Users_Web3 extends Base_Users_Web3 {
 			));
 		}
 
-		if ($caching && $cacheDuration) {
+		if (!is_array($params)) {
+			$params = array($params);
+		}
+
+		$cache = null;
+		if ($caching !== false && $cacheDuration) {
 			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 			if ($cache->wasRetrieved()) {
-				$json = Q::json_decode($cache->result);
-				if (is_array($json) || is_object($json)) {
-					return $json;
-				}
-
-				return $cache->result;
+				return Q::json_decode($cache->result);
 			}
 		}
 
@@ -91,12 +91,8 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		$data = array();
 		$arguments = array($methodName);
-		if (is_array($params)) {
-			foreach ($params as $param) {
-				$arguments[] = $param;
-			}
-		} else {
-			$arguments[] = $params;
+		foreach ($params as $param) {
+			$arguments[] = $param;
 		}
 		$arguments[] = function ($err, $results) use (&$data) {
 			if ($err) {
@@ -133,25 +129,22 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		if ($data instanceof \phpseclib\Math\BigInteger) {
 			$data = $data->toString();
-		} else {
-			$data = Q::json_encode($data, true);
 		}
 
 		if ($cache) {
-			$cache->result = $data;
+			if ((
+				is_callable($caching)
+				and call_user_func_array($caching, array($data))
+			) or (
+				($data && $caching !== false)
+				or (!$data && $caching === true)
+			)) {
+				$cache->result = Q::json_encode($data);
+				$cache->save(true);
+			}
 		}
 
-		if ((
-			is_callable($caching)
-			and call_user_func_array($caching, array($data))
-		) or (
-			($data && $caching !== false)
-			or (!$data && $caching === true)
-		)) {
-			$cache->save(true);
-		}
-
-		return Q::json_decode($data);
+		return $data;
 	}
 	/**
 	 * Get the filename of the ABI file for a contract. 
