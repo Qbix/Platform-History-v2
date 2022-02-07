@@ -1721,13 +1721,16 @@ abstract class Users extends Base_Users
 	 * @method appId
 	 * @static
 	 * @param {string} $platform The platform or platform for the app
-	 * @param {string} $appId Can be either an internal or external app id
+	 * @param {string} [$appId=Q::app()] Can be either an internal or external app id
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
 	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
 	 * @throws Q_Exception_MissingConfig
 	 */
-	static function appInfo($platform, $appId, $throwIfMissing = false)
+	static function appInfo($platform, $appId = null, $throwIfMissing = false)
 	{
+		if ($appId === null) {
+			$appId = Q::app();
+		}
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
 		$id = $appId;
 		if (isset($apps[$id])) {

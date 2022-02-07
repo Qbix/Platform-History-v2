@@ -128,7 +128,7 @@ class Q_Utils
 
 	/**
 	 * Converts arbitrary-precision decimal number to hex (without '0x')
-	 * @method asc2hex
+	 * @method dec2hex
 	 * @static
 	 * @param {string} $dec
 	 * @param {boolean} [$prefix='0x'] set to false to skip prepending prefix
@@ -149,11 +149,11 @@ class Q_Utils
 	 * @method hex2dec
 	 * @static
 	 * @param {string} $hex
-	 * @param {string} [$prefix='0x'] the prefix to strip, if any
+	 * @param {string} [$prefix='0x'] the prefix to strip, if it is found
 	 * @return {string} The arbitrary-precision decimal number
 	 */
 	 static function hex2dec($hex, $prefix='0x') {
-		if ($prefix) {
+		if ($prefix and substr($hex, 0, 2) == $prefix) {
 			$hex = substr($hex, strlen($prefix));
 		}
 		if (strlen($hex) == 1) {
@@ -161,7 +161,7 @@ class Q_Utils
 		}
 		$remain = substr($hex, 0, -1);
 		$last = substr($hex, -1);
-		return bcadd(bcmul(16, bchexdec($remain)), hexdec($last));
+		return bcadd(bcmul(16, self::hex2dec($remain)), hexdec($last));
 	 }
 	
 	/**
