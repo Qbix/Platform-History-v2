@@ -3038,8 +3038,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  */
                 audioScreensGrid: function (container, roomScreens) {
                     var parentRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                    if(parentRect == 0 || parentRect.height == 0) return false;
                     var count = roomScreens.length;
+                    if(count == 0 || parentRect == 0 || parentRect.height == 0) return false;
                     var rects = [];
 
                     //var mainRadius = Math.min(size.parentWidth, size.parentHeight);
