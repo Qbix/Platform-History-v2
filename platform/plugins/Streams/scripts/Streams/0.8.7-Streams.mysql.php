@@ -13,8 +13,8 @@ function Streams_0_8_7_Streams_mysql()
 		'icon' => 'default',
 		'content' => '',
 		'attributes' => null,
-		'readLevel' => Streams::$READ_LEVEL['messages'], 
-		'writeLevel' => Streams::$WRITE_LEVEL['close'], 
+		'readLevel' => Streams::$READ_LEVEL['messages'],
+		'writeLevel' => Streams::$WRITE_LEVEL['join'],
 		'adminLevel' => Streams::$ADMIN_LEVEL['invite']
 	);
 	$access = array(
@@ -23,8 +23,8 @@ function Streams_0_8_7_Streams_mysql()
 		'ofUserId' => '',
 		'grantedByUserId' => null,
 		'ofContactLabel' => "$app/admins",
-		'readLevel' => Streams::$READ_LEVEL['messages'], 
-		'writeLevel' => Streams::$WRITE_LEVEL['close'], 
+		'readLevel' => Streams::$READ_LEVEL['messages'],
+		'writeLevel' => Streams::$WRITE_LEVEL['close'],
 		'adminLevel' => Streams::$ADMIN_LEVEL['invite']
 	);
 	Streams_Stream::insert($stream)->execute();

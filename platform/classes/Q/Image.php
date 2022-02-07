@@ -387,7 +387,11 @@ class Q_Image
 			$sx = $isx;
 			$sy = $isy;
 			// determine destination image size
-			if (!empty($size)) {
+			if (empty($size) || $size == 'x') {
+				$size = 'x';
+				$dw = $w2 = $sw;
+				$dh = $h2 = $sh;
+			} else {
 				$sa = explode('x', $size);
 				$square = (count($sa) == 1);
 				if ($square) {
@@ -399,12 +403,12 @@ class Q_Image
 							$dh = $sh;
 						} else {
 							$dh = intval($sa[1]);
-							$dw = $sw * $dh / $sh;
+							$dw = round($sw * $dh / $sh);
 						}
 					} else {
 						$dw = intval($sa[0]);
 						if ($sa[1] === '') {
-							$dh = $sh * $dw / $sw;
+							$dh = round($sh * $dw / $sw);
 						} else {
 							$dh = intval($sa[1]);
 						}
@@ -417,10 +421,6 @@ class Q_Image
 				$h2 = round($dh * $min);
 				$sx = round($sx + ($sw - $w2) / 2);
 				$sy = round($sy + ($sh - $h2) / 2);
-			} else {
-				$size = 'x';
-				$dw = $w2 = $sw;
-				$dh = $h2 = $sh;
 			}
 			// create destination image
 			$maxWidth = Q_Config::get('Q', 'images', 'maxWidth', null);
@@ -483,6 +483,8 @@ class Q_Image
 			}
 		}
 		$data[''] = $subpath ? "$path/$subpath" : "$path";
+		$data['writePath'] = $writePath;
+		$data['ext'] = $ext;
 
 		/**
 		 * @event Q/image/save {after}
