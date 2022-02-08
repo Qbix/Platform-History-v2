@@ -83,50 +83,52 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		pipe.fill('texts')();
 	});
 
-	tool.intersectionObserver = new IntersectionObserver(function (entries) {
-		entries.forEach(function (entry) {
-			if (entry.intersectionRatio === 0) {
-				return;
-			}
-
-			if (entry.target === tool.element) {
-				if (!state.infinitescroll || tool.infinitescrollApplied) {
+	Q.ensure('IntersectionObserver', function () {
+		tool.intersectionObserver = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (entry.intersectionRatio === 0) {
 					return;
 				}
 
-				var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
-				var scrollableElement = tool.element.scrollingParent(true, "vertical", true);
-				$dummyElement.remove();
-				if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
-					return console.warn("Streams/related: scrolligParent for infinitescroll not found");
-				}
-
-				$(scrollableElement).tool('Q/infinitescroll', {
-					onInvoke: function () {
-						var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
-						var infiniteTool = this;
-
-						// skip duplicated (same offsets) requests
-						if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
-							return;
-						}
-
-						infiniteTool.setLoading(true);
-						infiniteTool.state.offset = offset;
-						tool.loadMore(offset, function () {
-							infiniteTool.setLoading(false);
-						});
+				if (entry.target === tool.element) {
+					if (!state.infinitescroll || tool.infinitescrollApplied) {
+						return;
 					}
-				}).activate(function () {
-					tool.infinitescrollApplied = true;
-				});
-			}
+
+					var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
+					var scrollableElement = tool.element.scrollingParent(true, "vertical", true);
+					$dummyElement.remove();
+					if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
+						return console.warn("Streams/related: scrolligParent for infinitescroll not found");
+					}
+
+					$(scrollableElement).tool('Q/infinitescroll', {
+						onInvoke: function () {
+							var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+							var infiniteTool = this;
+
+							// skip duplicated (same offsets) requests
+							if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+								return;
+							}
+
+							infiniteTool.setLoading(true);
+							infiniteTool.state.offset = offset;
+							tool.loadMore(offset, function () {
+								infiniteTool.setLoading(false);
+							});
+						}
+					}).activate(function () {
+						tool.infinitescrollApplied = true;
+					});
+				}
+			});
+		}, {
+			root: tool.element.parentElement
 		});
-	}, {
-		root: document
+		// detect when tool element become visible
+		tool.intersectionObserver.observe(tool.element);
 	});
-	// detect when tool element become visible
-	tool.intersectionObserver.observe(tool.element);
 
 	// observe dom elements for mutation
 	tool.mutationObserver = new MutationObserver(function (mutations) {
