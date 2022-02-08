@@ -83,35 +83,53 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		pipe.fill('texts')();
 	});
 
-	if (state.infinitescroll) {
-		var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
-		var scrollableElement = this.element.scrollingParent(true, "vertical", true);
-		$dummyElement.remove();
-		if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
-			return console.warn("Streams/related: scrolligParent for infinitescroll not found");
-		}
+	tool.intersectionObserver = new IntersectionObserver(function (entries) {
+		entries.forEach(function (entry) {
+			if (entry.intersectionRatio === 0) {
+				return;
+			}
 
-		$(scrollableElement).tool('Q/infinitescroll', {
-			onInvoke: function () {
-				var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
-				var infiniteTool = this;
-
-				// skip duplicated (same offsets) requests
-				if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+			if (entry.target === tool.element) {
+				if (!state.infinitescroll || tool.infinitescrollApplied) {
 					return;
 				}
 
-				infiniteTool.setLoading(true);
-				infiniteTool.state.offset = offset;
-				tool.loadMore(offset, function () {
-					infiniteTool.setLoading(false);
+				var $dummyElement = $("<div>").css("height", $(window).height() * 2).appendTo(tool.element);
+				var scrollableElement = tool.element.scrollingParent(true, "vertical", true);
+				$dummyElement.remove();
+				if (!(scrollableElement instanceof HTMLElement) || scrollableElement.tagName === "HTML") {
+					return console.warn("Streams/related: scrolligParent for infinitescroll not found");
+				}
+
+				$(scrollableElement).tool('Q/infinitescroll', {
+					onInvoke: function () {
+						var offset = $(">.Streams_preview_tool.Streams_related_stream:visible", tool.element).length;
+						var infiniteTool = this;
+
+						// skip duplicated (same offsets) requests
+						if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+							return;
+						}
+
+						infiniteTool.setLoading(true);
+						infiniteTool.state.offset = offset;
+						tool.loadMore(offset, function () {
+							infiniteTool.setLoading(false);
+						});
+					}
+				}).activate(function () {
+					tool.infinitescrollApplied = true;
 				});
 			}
-		}).activate();
-	}
+		});
+	}, {
+		root: document
+	});
+	// detect when tool element become visible
+	tool.intersectionObserver.observe(tool.element);
 
 	// observe dom elements for mutation
-	tool.domObserver = new MutationObserver(function (mutations) {
+	tool.mutationObserver = new MutationObserver(function (mutations) {
 		mutations.forEach(function(mutation) {
 			if (mutation.type !== 'childList' || Q.isEmpty(mutation.removedNodes)) {
 				return;
@@ -131,7 +149,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			});
 		});
 	});
-	tool.domObserver.observe(tool.element, {childList: true});
+	tool.mutationObserver.observe(tool.element.parentElement, {childList: true});
 },
 
 {
@@ -771,7 +789,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		beforeRemove: function () {
 			$(this.element).plugin('Q/sortable', 'remove');
 			this.state.onUpdate.remove("Streams/related");
-			this.domObserver.disconnect();
+			this.mutationObserver.disconnect();
+			this.intersectionObserver.disconnect();
 		}
 	}
 }
