@@ -329,6 +329,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.addScript("{{Q}}/js/contextual.js", function () {
 					$te.find(".Streams_chat_addons").plugin('Q/contextual', {
 						className: "Streams_chat_addons",
+						fadeTime: 300,
+						doubleBlink: true,
 						onConstruct: function (contextual, cid) {
 							tool.addonsContextual = this;
 							Q.handle(state.onContextualCreated, tool, [contextual]);
