@@ -13,6 +13,9 @@
  * @param {Object} [options] options an object that can include:
  * @param {Array} [options.elements] elements is an array of LI elements to add
  * @param {String} [options.className=''] className is a CSS class name for additional styling. Optional
+ * @param {Integer} [options.hideDelay] Amount of milliseconds before hide contextual.
+ * @param {Integer} [options.fadeTime] Amount of milliseconds to fade out.
+ * @param {Boolean} [options.doubleBlink] If true use selected menu item double blinked (like iOS style) before console closed.
  * @param {Q.Event|function|String} [options.defaultHandler=null] defaultHandler is a Q.Event, or function which is called when a specific handler for selected item is not defined.
  *   So you can use just one handler for whole contextual or provide separate handlers for each item.
  * @param {Object} [options.size=null] size is an object with values for override default contextual size.
@@ -46,6 +49,21 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 	var contextual = $('<div class="Q_contextual" />');
 	if (state.className) {
 		contextual.addClass(state.className);
+	}
+	if (state.fadeTime) {
+		contextual.data("fadeTime", state.fadeTime);
+	}
+	if (state.hideDelay) {
+		contextual.data("hideDelay", state.hideDelay);
+	} else if (state.doubleBlink) {
+		var hideDelay = 300;
+		contextual.data("hideDelay", hideDelay);
+		contextual.on(Q.Pointer.fastclick, "li", function () {
+			var $this = $(this);
+			$this.addClass("Q_contextual_pulsate").on("animationend", function () {
+				$this.removeClass("Q_contextual_pulsate");
+			});
+		});
 	}
 	var listingWrapper = $('<div class="Q_listing_wrapper" />');
 	if (state.defaultHandler) {
