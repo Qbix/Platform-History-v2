@@ -56,9 +56,9 @@ Q.Tool.jQuery('Q/contextual', function _Q_contextual() {
 	if (state.hideDelay) {
 		contextual.data("hideDelay", state.hideDelay);
 	} else if (state.doubleBlink) {
-		var hideDelay = 300;
+		var hideDelay = 200;
 		contextual.data("hideDelay", hideDelay);
-		contextual.on(Q.Pointer.fastclick, "li", function () {
+		contextual.on(Q.info.isMobile ? Q.Pointer.fastclick : "click", "li", function () {
 			var $this = $(this);
 			$this.addClass("Q_contextual_pulsate").on("animationend", function () {
 				$this.removeClass("Q_contextual_pulsate");

@@ -158,6 +158,6 @@ html.Q_contextual_shown body {
 	overflow: hidden;
 }
 .Q_contextual_pulsate {
-	animation: Q_pulsate .2s ease-in-out infinite alternate;
-	animation-iteration-count: 2;
+	animation: Q_pulsate .1s ease-in-out infinite alternate;
+	animation-iteration-count: 1;
 }
