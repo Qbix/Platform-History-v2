@@ -11,7 +11,7 @@ use \CloudConvert\Models\Task;
  * @class Q_CloudConvert
  */
 class Q_Video_CloudConvert {
-	static function _setup () {
+	static function setup () {
 		$cloudconvert = new CloudConvert([
 			'api_key' => Q_Config::expect("Q", "video", "cloudconvert", "key"),
 			'sandbox' => false
@@ -20,48 +20,61 @@ class Q_Video_CloudConvert {
 		return $cloudconvert;
 	}
 
+	static function getTaskKey () {
+		return Q_Config::get("Q", "video", "cloudconvert", "taskKey", "my-file");
+	}
+
 	/**
 	 * Upload file to CloudConvert
 	 * @method convert
 	 * @static
 	 * @param {string} $inputFile Can be URL or local path
-	 * @param {string} $outputFile local path where to put result file
-	 * @param {string} [$key="my-file"] string key used in tasks names. This task name will be passed to webhook.
+	 * @param {string} [$tag] Some local param which will need to identify this process with some local ID.
 	 * @param {string} [$format="gif"]
+	 * @param {array} [$options] Array with additional options
+	 * @param {array} [$options.convert] Array with additional options pass to "convert" task
+	 * @param {array} [$options.export] Array with additional options pass to "export" task
 	 * @return {array}
 	 */
-	static function convert ($inputFile, $key="my-file", $format="gif")	{
-		$cloudconvert = self::_setup();
+	static function convert ($inputFile, $tag=null, $format="gif", $options=array())	{
+		$taskKey = self::getTaskKey();
+		$cloudconvert = self::setup();
 
 		if (filter_var($inputFile, FILTER_VALIDATE_URL)) {
 			$job = (new Job())
 				->addTask(
-				(new Task('import/url', 'import-'.$key))
+				(new Task('import/url', 'import-'.$taskKey))
 					->set('url', $inputFile)
 				);
 		} else {
 			$job = (new Job())
 				->addTask(
-					new Task('import/upload','upload-'.$key)
+					new Task('import/upload','upload-'.$taskKey)
 				);
 		}
 
-		$job->addTask(
-			(new Task('convert', 'convert-'.$key))
-				->set('input', 'import-'.$key)
-				->set('output_format', $format)
-				->set('some_other_option', 'value')
-			)
-			->addTask(
-				(new Task('export/url', 'export-'.$key))
-					->set('input', 'convert-'.$key)
-			);
+		$taskConvert = new Task('convert', 'convert-'.$taskKey);
+		$taskConvert->set('input', 'import-'.$taskKey);
+		$taskConvert->set('output_format', $format);
+		foreach (Q::ifset($options, "convert", array()) as $key => $value) {
+			$taskConvert->set($key, $value);
+		}
+		$job->addTask($taskConvert);
+
+		$taskExport = new Task('export/url', 'export-'.$taskKey);
+		$taskExport->set('input', 'convert-'.$taskKey);
+		foreach (Q::ifset($options, "export", array()) as $key => $value) {
+			$taskConvert->set($key, $value);
+		}
+		$job->addTask($taskExport);
+
+		$job->setTag($tag);
 
 		$cloudconvert->jobs()->create($job);
 
 		// if local path, start uploading
 		if (!filter_var($inputFile, FILTER_VALIDATE_URL)) {
-			$uploadTask = $job->getTasks()->whereName('upload-'.$key)[0];
+			$uploadTask = $job->getTasks()->whereName('upload-'.$taskKey)[0];
 			$cloudconvert->tasks()->upload($uploadTask, fopen($inputFile, 'r'), basename($inputFile));
 		}
 
