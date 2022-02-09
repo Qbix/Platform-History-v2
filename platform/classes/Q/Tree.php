@@ -326,7 +326,7 @@ class Q_Tree
 	 *  Defaults to false. If true, then this function ignores
 	 *  the cached value, if any, and attempts to search
 	 *  for the file. It will cache the new value.
-	 * @return {boolean} Returns true if loaded, otherwise false.
+	 * @return {Q_Tree|null} Returns $this if loaded, otherwise null.
 	 * @throws {Q_Exception_InvalidInput}
 	 */
 	function load(
@@ -335,7 +335,7 @@ class Q_Tree
 	{
 		$filename2 = Q::realPath($filename, $ignoreCache);
 		if (!$filename2) {
-			return false;
+			return null;
 		}
 		
 		$this->filename = $filename2;
@@ -343,7 +343,7 @@ class Q_Tree
 		// if class cache is set - use it
 		if (isset(self::$cache[$filename2])) {
 			$this->merge(self::$cache[$filename2]);
-			return true;
+			return $this;
 		}
 
 		// check Q_Cache and if set - use it
@@ -352,7 +352,7 @@ class Q_Tree
 		if (isset($arr)) {
 			self::$cache[$filename2] = $arr;
 			$this->merge($arr);
-			return true;
+			return $this;
 		}
 
 		/**
@@ -385,13 +385,13 @@ class Q_Tree
 			throw new Q_Exception_InvalidInput(array('source' => $filename));
 		}
 		if (!is_array($arr)) {
-			return false;
+			return null;
 		}
 		// $arr was loaded from $filename2 or by Q/tree/load before event
 		$this->merge($arr);
 		self::$cache[$filename2] = $arr;
 		Q_Cache::set("Q_Tree\t$filename2", $arr); // no need to check result - on failure Q_Cache is disabled
-		return true;
+		return $this;
 	}
 	
 	/**
