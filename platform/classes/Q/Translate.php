@@ -28,12 +28,13 @@ class Q_Translate
 				throw new Q_Exception("No such source directory: " . $this->options['in'] . "\n");
 			}
 		}
-		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->options['in'], RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST);
+		$objects = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(
+			$this->options['in'], 
+			RecursiveDirectoryIterator::SKIP_DOTS
+		), RecursiveIteratorIterator::SELF_FIRST);
 		foreach ($objects as $filename => $object) {
 			if (basename($filename) === $lang . ($locale ? '-' . $locale : '') . '.json') {
-				$tree = new Q_Tree();
-				$tree->load($filename);
-				$all = $tree->getAll();
+				$all = Q_Tree::createAndLoad($filename)->getAll();
 				$res = array();
 				$srcPath = ltrim(str_replace($this->options['in'], "", $filename), '/');
 				$this->flatten($srcPath, $all, $res);

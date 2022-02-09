@@ -54,15 +54,17 @@ Options include:
 --retranslate     This option can be used more than once. It should be followed by a
                   slash-separated ("/") set of strings that together form the key of a string,
                   or of an object containing strings, to be translated even if already translated
-                  in the destination. 
+                  in the destination.
+
+--retranslate-all Use this option to just retranslate everything, even if it is already translated.
 				  
 --locales         Use this to indicate the alternative filename to config/Q/locales.json
 
 EOT;
 
 // get all CLI options
-$opts = array( 'h::', 's::', 'i::', 'o::', 'n::', 'f::', 'g::', 'r:', 'l:', 'p:');
-$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate::', 'locales::', 'plugins', 'plugin:', 'all', 'app');
+$opts = array( 'h:', 's:', 'i:', 'o:', 'n:', 'f:', 'g:', 'r:', 'l:', 'p:');
+$longopts = array('help', 'source:', 'in:', 'out:', 'null:', 'format:', 'google-format:', 'retranslate:', 'retranslate-all::', 'locales:', 'plugins', 'plugin:', 'all', 'app');
 $options = getopt(implode('', $opts), $longopts);
 if (isset($options['help'])) {
 	echo $help;
