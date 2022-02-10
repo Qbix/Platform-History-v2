@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "טעות {{status}} בעשאַס בעטן",
+        "canceled": "בעטן קאַנסאַלד",
+        "500": "אינערלעכער סערווער טעות",
+        "404": "ניט געפונען: {{url}}",
+        "501": "בעטן ינטעראַפּטיד"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "סעסיע אויסגעגאנגען. דערפרישן דעם בלאַט און פּרוּווט ווידער.",
+        "otherDomain": "אפגעשטעלט קרייז-דומיין בעטן צו פרעמד פעלד ביי {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "צאַפּן",
+        "click": "גיט",
+        "yes": "יאָ",
+        "no": "ניין",
+        "Tap": "צאַפּן",
+        "Click": "דריקט",
+        "Yes": "יא",
+        "No": "ניין"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "יאנואר",
+        "2": "פעברואַר",
+        "3": "מאַרץ",
+        "4": "אפריל",
+        "5": "מאי",
+        "6": "יוני",
+        "7": "יולי",
+        "8": "אויגוסט",
+        "9": "סעפטעמבער",
+        "10": "אקטאבער",
+        "11": "נאוועמבער",
+        "12": "דעצעמבער"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "סעקונדע",
+        "seconds": "סעקונדעס",
+        "minute": "מינוט",
+        "minutes": "מינוט",
+        "hour": "שעה",
+        "day": "טאָג",
+        "days": "טעג",
+        "week": "וואָך",
+        "weeks": "וואָכן",
+        "month": "חודש",
+        "months": "חדשים",
+        "year": "יאָר",
+        "years": "יאָרן",
+        "decade": "יאָרצענדלינג",
+        "decades": "דעקאַדעס",
+        "century": "יאָרהונדערט",
+        "centuries": "סענטשעריז"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "ביטע לאָזן אַקסעס צו דיין מיקראָפאָן",
+        "record": "רעקאָרד",
+        "recording": "רעקאָרדינג",
+        "remains": "בלייבט",
+        "maximum": "מאַקסימום",
+        "playing": "פּלייַינג",
+        "recorded": "רעקאָרדעד",
+        "clip": "קלעמערל",
+        "discard": "אַוועקוואַרפן",
+        "encoding": "קאָדירונג"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "קלעמערל",
+        "errorNoSource": "קיין ווידעא מקור",
+        "SkipAfter": "האָפּקען נאָך",
+        "Skip": "האָפּקען"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "קלעמערל",
+        "errorNoSource": "קיין פּדף מקור"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "שטעלן קליפּ אָנהייב",
+        "ClipStart": "קלעמערל אָנהייב",
+        "SetClipEnd": "שטעלן קליפּ סוף",
+        "ClipEnd": "קליפ סוף",
+        "StartMoreEnd": "אָנהייב שטעלע קען נישט זיין מער ווי די סוף שטעלע",
+        "EndLessStart": "סוף שטעלע קענען ניט זיין ווייניקער ווי אָנהייב שטעלע",
+        "WhichInvalid": "אַרגומענט &#39;וואָס&#39; פאַרקריפּלט"
     },
     "alert": {
-        "title": "Alert"
+        "title": "פלינק"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "באַשטעטיקן",
+        "ok": "יא",
+        "cancel": "ניין"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "פּינטלעך",
+        "ok": "גיי"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "מער",
+        "Menu": "מעניו"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "טעות לייענען טעקע",
+        "errorType": "אנטשולדיגט, אָבער דער טעקע טיפּ איז נישט געשטיצט",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "וואס וואלסטו געוואלט טון?",
+            "photo": "נעמען נייַע פאָטאָ",
+            "library": "אויסקלייַבן פון ביבליאָטעק"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "ביטע קלייַבן אַ גרעסערע בילד.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "סטרויערן גרייס און שטעלע",
+            "touchscreen": "ניצן דיין פינגער צו פארגרעסער און שלעפּן",
+            "notTouchscreen": "ניצן דיין מויז און ראָד צו פארגרעסער און שלעפּן"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "נעכטן נאכט",
+        "lastEvening": "לעצטע יוו",
+        "yesterday": "נעכטן",
+        "thisMorning": "דעם מאָרגן",
+        "today": "היינט",
+        "tonight": "היינט ביינאכט",
+        "tomorrowMorning": "מאָרגן",
+        "tomorrow": "מאָרגן",
+        "hoursAgo": "{{h}} שעה צוריק",
+        "hourAgo": "{{h}} שעה צוריק",
+        "minuteAgo": "{{m}} מינוט צוריק",
+        "minutesAgo": "{{m}} מינוטן צוריק",
+        "secondAgo": "{{s}} רגע צוריק",
+        "secondsAgo": "{{s}} סעקונדעס צוריק",
+        "fewSecondsAgo": "סעקונדעס צוריק",
+        "rightNow": "גלייך יעצט",
+        "inSecond": "אין {{s}} רגע",
+        "inSeconds": "אין {{s}} סעקונדעס",
+        "inMinute": "אין {{m}} מינוט",
+        "inMinutes": "אין {{m}} מינוטן",
+        "inHour": "אין {{h}} שעה",
+        "inHours": "אין {{h}} שעה",
+        "inUnderMinute": "אין ווייניקער ווי 1 מינוט"
     }
 }

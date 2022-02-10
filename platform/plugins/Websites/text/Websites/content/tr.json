@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Tanıtım için bağlantı",
+                "startDate": "Başlangıç tarihi",
+                "startTime": "Başlangıç saati",
+                "endDate": "Bitiş tarihi",
+                "endTime": "Bitiş zamanı",
+                "budget": "Bütçe"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "İlgi Alanına Göre Filtrele",
+                "FilterInterests": "Bir ilgi alanı yazmaya başlayın..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Faiz",
+            "Location": "Konum"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Gitmek",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Araştır",
+            "WriteToStartConversation": "Sohbeti başlatmak için düşüncelerinizi yazın",
+            "StartConversation": "Konuşmayı Başlat",
+            "GotoConversation": "Konuşmaya Git",
+            "reset": "Sıfırla",
+            "edit": "Düzenlemek",
+            "link": "Bağlantı",
+            "setUrl": "URL&#39;yi ayarla",
+            "save": "Kayıt etmek",
+            "setClip": "Klip Kes",
+            "invalidURL": "Geçersiz URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Dosya önbelleğe almak için çok büyük. Maksimum dosya boyutu {{size}}",
+        "InvalidPDF": "Dosya geçerli bir PDF değil",
+        "StartTypingTitleOrKeywords": "Başlık veya anahtar kelimeleri yazmaya başlayın..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Çeşitli kullanıcıların görüntüleyebileceği ve düzenleyebileceği bir HTML belgesi",
+            "displayType": "Madde"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Bir sunumdaki slayt, HTML, ses vb. içerebilir.",
+            "displayType": "Kayma"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Çeşitli slaytlardan oluşan bir sunum",
+            "displayType": "Sunum"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Bir web sitesinde bir reklam birimi",
+            "displayType": "reklam birimi"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Reklam birimlerini bir ad altında gruplamanın bir yolu",
+            "displayType": "reklam yerleşimi"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Bir reklam için içerik",
+            "displayType": "reklam kreatifi"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Bir reklam kampanyası",
+            "displayType": "reklam kampanyası"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Meta verileri kazınmış bir web sitesini temsil eder",
+            "displayType": "internet sayfası"
         }
     }
 }

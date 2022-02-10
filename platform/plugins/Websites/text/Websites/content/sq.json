@@ -2,72 +2,72 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Lidhje për të promovuar",
+                "link": "Link për të promovuar",
                 "startDate": "Data e fillimit",
                 "startTime": "Koha e nisjes",
                 "endDate": "Data e përfundimit",
-                "endTime": "Koha e mbarimit",
-                "budget": "buxhet"
+                "endTime": "Koha e Fundit",
+                "budget": "Buxheti"
             },
             "interests": {
                 "Title": "Filtro sipas interesit",
-                "FilterInterests": "Filloni të shtypni një interes ..."
+                "FilterInterests": "Filloni të shkruani një interes..."
             },
-            "Interest": "interes",
-            "Location": "vend"
+            "Interest": "Interesi",
+            "Location": "Vendndodhja"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "shkoj",
-            "PasteLinkHere": "Ngjit një lidhje këtu",
-            "BrowseTheWeb": "shfletoj",
-            "WriteToStartConversation": "Shkruani mendimet tuaja për të nisur bisedën",
-            "StartConversation": "Filloni bisedën",
+            "Go": "Shkoni",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Shfletoni",
+            "WriteToStartConversation": "Shkruani mendimet tuaja për të filluar bisedën",
+            "StartConversation": "Filloni Bisedën",
             "GotoConversation": "Shkoni te Biseda",
             "reset": "Rivendos",
             "edit": "Redakto",
             "link": "Lidhje",
-            "setUrl": "Vendos URL",
+            "setUrl": "Cakto URL-në",
             "save": "Ruaj",
             "setClip": "Klip i prerë",
             "invalidURL": "URL e pavlefshme"
         },
-        "FileTooLarge": "Skedari është shumë i madh për caching. Madhësia maksimale e skedarit {{size}}",
+        "FileTooLarge": "Skedari shumë i madh për memorie. Madhësia maksimale e skedarit {{size}}",
         "InvalidPDF": "Skedari nuk është një PDF i vlefshëm",
-        "StartTypingTitleOrKeywords": "Filloni të shtypni titull ose fjalë kyçe ..."
+        "StartTypingTitleOrKeywords": "Filloni të shkruani titullin ose fjalë kyçe..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Një dokument HTML që përdoruesit e ndryshëm mund të shikojnë dhe modifikojnë",
-            "displayType": "artikull"
+            "description": "Një dokument HTML që përdorues të ndryshëm mund ta shikojnë dhe modifikojnë",
+            "displayType": "Neni"
         },
         "Websites\/slide": {
             "description": "Një rrëshqitje në një prezantim, mund të përfshijë HTML, audio etj.",
-            "displayType": "rrëshqitje"
+            "displayType": "Rrëshqitje"
         },
         "Websites\/presentation": {
-            "description": "Një prezantim i përbërë nga rrëshqitje të ndryshme",
-            "displayType": "prezantim"
+            "description": "Një prezantim i përbërë nga sllajde të ndryshme",
+            "displayType": "Prezantimi"
         },
         "Websites\/advert\/unit": {
-            "description": "Një njësi reklamimi në një uebfaqe",
+            "description": "Një njësi reklamimi në një faqe interneti",
             "displayType": "Njësia e reklamave"
         },
         "Websites\/advert\/placement": {
-            "description": "Një mënyrë e grupimit të njësive të reklamimit nën një emër",
-            "displayType": "Vendosja e reklamës"
+            "description": "Një mënyrë e grupimit të njësive reklamuese nën një emër",
+            "displayType": "Vendosja e reklamave"
         },
         "Websites\/advert\/creative": {
             "description": "Përmbajtja për një reklamë",
-            "displayType": "Reklamoni krijues"
+            "displayType": "Reklamim kreativ"
         },
         "Websites\/advert\/campaign": {
-            "description": "Një fushatë reklamimi",
-            "displayType": "Fushata e reklamave"
+            "description": "Një fushatë reklamuese",
+            "displayType": "Fushata reklamuese"
         },
         "Websites\/webpage": {
-            "description": "Përfaqëson një faqe në internet, metadatat e së cilës u hodhën poshtë",
+            "description": "Përfaqëson një faqe interneti, të dhënat meta të së cilës janë fshirë",
             "displayType": "faqe interneti"
         }
     }

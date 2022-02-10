@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "loulou e hoʻolaha",
+                "startDate": "Lā Hoʻomaka",
+                "startTime": "Manawa Hoomaka",
+                "endDate": "Lā Hoʻopau",
+                "endTime": "Manawa Hoopau",
+                "budget": "Puke kālā"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "kānana ma ka hoihoi",
+                "FilterInterests": "Hoʻomaka e paʻi i kahi hoihoi..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "hoihoi",
+            "Location": "Wahi"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Hele",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Huli",
+            "WriteToStartConversation": "E kākau i kou mau manaʻo e hoʻomaka i ke kamaʻilio ʻana",
+            "StartConversation": "Hoʻomaka kamaʻilio",
+            "GotoConversation": "E hele i Kūkākūkā",
+            "reset": "Hoʻoponopono hou",
+            "edit": "Hoʻoponopono",
+            "link": "loulou",
+            "setUrl": "E hoʻonoho i ka URL",
+            "save": "Mālama",
+            "setClip": "ʻOki ʻoki Clip",
+            "invalidURL": "Helu &#39;ole"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Nui loa ka waihona no ka hoʻopaʻa ʻana. Nui waihona {{size}}",
+        "InvalidPDF": "ʻAʻole he PDF kūpono ka faila",
+        "StartTypingTitleOrKeywords": "Hoʻomaka e paʻi i ka inoa a i ʻole nā huaʻōlelo..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "He palapala HTML i hiki i nā mea hoʻohana like ʻole ke nānā a hoʻoponopono",
+            "displayType": "ʻatikala"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Hiki ke hoʻokomo i kahi paheʻe i kahi hōʻike, HTML, leo etc.",
+            "displayType": "Paheʻe"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "He hōʻike i loaʻa i nā kiʻi like ʻole",
+            "displayType": "Hōʻike"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "He hui hoʻolaha ma kahi pūnaewele",
+            "displayType": "Hui hoʻolaha"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "He ala e hui pū ai i nā ʻāpana hoʻolaha ma lalo o kahi inoa",
+            "displayType": "Hoʻokomo hoʻolaha"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Maʻiʻo no ka hoʻolaha",
+            "displayType": "Hoʻolaha hoʻolaha"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "He hoʻolaha hoʻolaha",
+            "displayType": "Hoʻolaha hoʻolaha"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Hōʻike i kahi pūnaewele nona ka metadata i ʻoki ʻia",
+            "displayType": "ʻaoʻao pūnaewele"
         }
     }
 }

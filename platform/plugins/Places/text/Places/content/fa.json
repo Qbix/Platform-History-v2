@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} lat، {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "PostcodeLabel": "{{1}} {{2}})",
+        "Title": "در {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "متر",
+        "meters": "متر",
+        "kilometer": "کیلومتر",
+        "kilometers": "کیلومتر",
+        "km": "کیلومتر",
+        "mile": "مایل",
+        "miles": "مایل",
+        "mi": "مایل",
+        "foot": "پا",
+        "feet": "پا",
+        "inches": "اینچ"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "من علاقه مندم که چیزهایی در {{select}} از این زمان اتفاق بیفتد",
+        "update": "مکان من را به روز کنید",
+        "set": "مکان من را تنظیم کنید",
+        "prompt": "{{ClickOrTap}} اینجا به<br> خود را تنظیم کنید<br> محل",
+        "myCurrentLocation": "مکان فعلی من",
+        "enterAddress": "آدرسی را وارد کنید",
+        "enterPostcode": "لطفا کد پستی \/ کد پستی خود را وارد کنید",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "اضافه کردن مکان",
+            "title": "مکان جدید",
+            "nameYourLocation": "مکان خود را نام ببرید"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "این مکان ذخیره شود؟",
+            "message": "آیا قصد دارید در آینده دوباره از این مکان استفاده کنید؟",
+            "ok": "آره",
+            "cancel": "خیر"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "این مکان را نام ببرید",
+            "placeholder": "خانه، محل کار و غیره",
+            "ok": "صرفه جویی"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "مکان را انتخاب کنید"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "آیا منطقه ای در داخل این مکان وجود دارد؟",
+        "newArea": "منطقه جدید",
+        "promptTitle": "یک نام برای منطقه وارد کنید:",
+        "absent": "لطفا منطقه را تنظیم کنید",
+        "error": "خطا",
+        "exist": "منطقه در حال حاضر وجود دارد",
+        "addNewArea": "اضافه کردن منطقه جدید",
+        "add": "اضافه کردن"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "مجموعه ای از مکان ها",
+            "displayType": "مکان ها"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "نمایانگر ساختمان، مکان، کشتی، پارک و غیره است.",
+            "displayType": "محل"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "نمایانگر یک منطقه در یک مکان، مانند یک اتاق یا سوئیت است",
+            "displayType": "حوزه"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "نمایانگر یک طبقه در یک ساختمان یا کشتی است",
+            "displayType": "کف"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "نمایانگر ستونی در ساختمان یا کشتی است",
+            "displayType": "ستون"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "دسته بندی برای چیزهایی که در فاصله معینی از ژئوهش قرار دارند",
+            "displayType": "نزدیک به مکان ها"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "دسته بندی برای چیزهایی که در فاصله معینی از ژئوهش قرار دارند، مطابق با علاقه",
+            "displayType": "مکان های مورد علاقه"
         }
     }
 }

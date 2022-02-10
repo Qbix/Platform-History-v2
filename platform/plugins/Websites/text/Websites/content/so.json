@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Xiriirinta kor u qaadida",
+                "startDate": "Taariikhda billowga",
+                "startTime": "Waqtiga Bilawga",
+                "endDate": "Taariikhda dhamaadka",
+                "endTime": "Dhamaadka Waqtiga",
+                "budget": "Miisaaniyada"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Ku Shaandhayso Xiisaha",
+                "FilterInterests": "Bilaw inaad qorto xiisaha..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Xiisaha",
+            "Location": "Goobta"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Tag",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "baadh",
+            "WriteToStartConversation": "Qor fikradahaaga si aad u bilowdo wada hadalka",
+            "StartConversation": "Bilow wada sheekeysiga",
+            "GotoConversation": "Aad Wadahadalka",
+            "reset": "Dib u dajin",
+            "edit": "Wax ka beddel",
+            "link": "Xiriirinta",
+            "setUrl": "Deji URL",
+            "save": "Badbaadin",
+            "setClip": "Iska Jaray Clip",
+            "invalidURL": "URL aan sax ahayn"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Faylka aad u weyn si loo kaydiyo Cabbirka ugu badan ee faylka {{size}}",
+        "InvalidPDF": "Faylku maaha PDF sax ah",
+        "StartTypingTitleOrKeywords": "Bilow inaad qorto cinwaanka ama ereyada muhiimka ah..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Dukumeenti HTML ah oo isticmaalayaasha kala duwan ay arki karaan oo wax ka beddeli karaan",
+            "displayType": "Maqaal"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Sawirka bandhigga, waxaa ku jiri kara HTML, maqal iwm.",
+            "displayType": "Islaaydh"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Soo jeedin ka kooban bogag kala duwan",
+            "displayType": "Soo bandhigid"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Unug xayaysiis ah oo ku yaala mareegaha",
+            "displayType": "Unug xayaysiis"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Habka loo kooxeeyo unugyada xayaysiinta ee magaca hoostiisa",
+            "displayType": "meelaynta xayeysiinta"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Nuxurka xayaysiinta",
+            "displayType": "Xayeysii hal abuur leh"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Olole xayaysiis",
+            "displayType": "Ololaha xayeysiinta"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Waxay ka dhigan tahay shabakad xog-ururintiisa la xoqay",
+            "displayType": "Bogga shabakadda"
         }
     }
 }

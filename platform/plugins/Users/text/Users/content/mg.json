@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Daily": "isan&#39;andro",
+        "Weekly": "isan-kerinandro",
+        "Monthly": "Isam-bolana",
+        "Application": "Fampiharana",
+        "Pages": "Pejy",
+        "Services": "tolotra",
+        "Faq": "FAQ",
+        "WeekDays": "Andro Herinandro"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Hiditra",
+        "LogOut": "miala"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Ataovy {{1}} ho voalohany {{2}}",
+        "ChoosePassPhrase": "Misafidiana <strong>fehezanteny<\/strong> iray hidirana.<br> Andian-teny tsotra ahitana teny vitsivitsy izay ho tadidinao mora foana.",
+        "ChoosePassPhraseSeeSuggestions": "Misafidiana <strong>fehezanteny mandalo<\/strong> tsara mba hiarovana ny kaontinao. Jereo ny soso-kevitra momba ny hevitra sasany.",
+        "LogOutAndTryAgain": "Midira ary andramo indray",
+        "IfYouFeel": "Raha tsapanao fa nisy zavatra tsy nety, azonao atao",
+        "SetIdentifierButtonTitle": "manomboka indray"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Manomboka"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Manomboka",
+        "Authorize": "manome lalana",
+        "TermsLabel": "Efa namaky aho ary manaiky<br> mankany amin&#39;ny {{link}}",
+        "TermsTitle": "Anarana iombonana",
+        "mustAgree": "Voalohany dia tsy maintsy manaiky ny fepetra ianao."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Manaiky ny {{link}} aho",
+        "TermsTitle": "Anarana iombonana"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Fanomezan-dàlana",
+        "prompt": "Te-hampiditra fampahafantarana ve ianao? Hahazo fanavaozam-baovao amin&#39;ny fotoana tena izy momba ny zavatra tianao ianao.",
+        "yes": "ENY",
+        "no": "tsy misy",
+        "WelcomePleaseVerifyEmail": "Tongasoa! Hamarino azafady ny adiresy mailakao.",
+        "WelcomeVerifyEmail": "Tongasoa! Hamarino ny adiresy mailakao.",
+        "ForgetPass": "Hey, adinonao ve ny fehezan-teninao?",
+        "PassphraseSaved": "Voatahiry ny fehezan-teny mandalo anao.",
+        "IdentifierActivated": "Navitrika ny {{type}} anao.",
+        "CompletedActivation": "Vitanao ny fampahavitrihana ny mpampiasa.",
+        "CompletedActivationLogIn": "Vitanao ny fampahavitrihana ny mpampiasa. Andramo midira izao."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Mifidiana fifandraisana",
+            "CreateAccount": "+ Fifandraisana vaovao",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsy hita",
+            "SearchByName": "Karoka amin&#39;ny anarana",
+            "EmptyContacts": "Tsy hita ny fifandraisana..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Safidio ny fifandraisana amin&#39;ny {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
+        "selectLabel": "Mifidiana etikety azafady.",
+        "inviteUser": "Asao ny mpampiasa",
         "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "inviteRole": "Asao {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Fiteny tsy mety voafantina",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "tonga soa",
+        "directions": "Mamorona kaonty, na midira.",
+        "directionsNoRegister": "Midira raha manana kaonty ianao.",
+        "goButton": "Mandehana",
+        "passphrase": "Ampidiro ny fehezan-teninao:",
+        "loginButton": "Manomboka",
+        "registerButton": "Manomboka",
+        "resendButton": "Alefaso Message Activation",
+        "forgot": "Adino izany?",
+        "resendConfirm": "Te-handefa hafatra hamerenana ny tenimiafinao ve ianao?",
+        "resendSuccess": "Hamarino raha misy hafatra hamerenana ny tenimiafinao",
+        "resendClose": "AKAIKY",
+        "noPassphrase": "Alohan&#39;ny hidiranao dia tsy maintsy mametraka fehezanteny mandalo ianao amin&#39;ny fipihana ny rohy amin&#39;ny hafatra fampahavitrihana anao.",
+        "notVerified": "Tsy maintsy mandefa hafatra fampahavitrihana ho anao ianao raha te hidirana.",
+        "emailExists": "Efa nanandrana nisoratra anarana tamin&#39;ity mailaka ity ve ianao taloha? Raha eny, jereo ny boaty fidiranao mba hampavitrika ny kaontinao. <a href='#resend' class='Q_button Users_activation_resend'>Tsindrio raha handefa indray ny hafatra<\/a>",
+        "mobileExists": "Efa nanandrana nisoratra anarana tamin&#39;io laharana finday io ve ianao taloha? Raha eny, jereo ny SMS-nao mba hampavitrika ny kaontinao. <a href='#resend' class='Q_button Users_activation_resend'>Tsindrio raha handefa indray ny hafatra<\/a>",
+        "usingOther": "na azonao atao",
+        "prompt": "Misafidiana solon&#39;anarana:",
+        "newUser": "na mamorona kaonty vaovao eto ambany",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "# finday na mailakao",
+            "mobile": "ampidiro ny findainao #",
+            "email": "Ampidiro ny adiresy email",
+            "username": "mampiasa litera sy isa ihany"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Manaiky ny fepetran&#39;ny serivisy?",
+        "facebookNoEmail": "Tsy misy adiresy mailaka voamarina ny kaontinao facebook. Midira fotsiny amin&#39;ny fomba teratany.",
+        "picTooltip": "Afaka manova ity sary ity ianao any aoriana any",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Midira ao amin&#39;ny {{host}} amin&#39;ny fotoana {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Hiverina any amin&#39;ny Wallet",
+                "content": "Rehefa tapitra ity fifanakalozan-kevitra ity dia hoentina any amin&#39;ny poketrao ianao. Rehefa miditra ianao dia miverena amin&#39;ity pejy ity."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Manampia fomba hidirana",
+        "sendMessage": "Alefaso Message Activation",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "ampidiro ny # findainao na mailaka",
+            "mobile": "ampidiro ny nomerao findainao",
+            "email": "Ampidiro ny adiresy email",
+            "username": "Anaran&#39;ny mpampiasa"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Kaonty",
+        "areUsing": "Mampiasa {{platform}} ianao ho",
+        "noLongerUsing": "Tsy mifandray amin&#39;ny {{platform}} intsony ianao",
+        "doAuth": "Midira amin&#39;ity kaonty ity",
+        "doSwitch": "Midira amin&#39;ity kaonty ity"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "TOMPON&#39;NY",
         "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Member": "FIANGONANA",
+        "Guest": "HIVAHINY",
+        "Host": "miaramila"
     }
 }

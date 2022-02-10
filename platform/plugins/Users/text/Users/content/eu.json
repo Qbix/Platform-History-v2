@@ -4,11 +4,11 @@
         "LogOut": "Saioa amaitu"
     },
     "activate": {
-        "SetAsPrimary": "{{1}} ezarri nire lehen {{2}} gisa",
-        "ChoosePassPhrase": "Aukeratu <strong>pasahitzarekin<\/strong> saioa hasteko. <br> Esaldi erraz sinple bat gogoratuko duzuen zenbait hitz dituena.",
-        "ChoosePassPhraseSeeSuggestions": "Aukeratu <strong>pasahitz<\/strong> egokia zure kontua babesteko. Ikusi ideia batzuetarako iradokizunak.",
-        "LogOutAndTryAgain": "Itxi saioa eta saiatu berriro",
-        "IfYouFeel": "Zerbait oker zegoela uste baduzu, egin dezakezu",
+        "SetAsPrimary": "Ezarri {{1}} nire {{2}} nagusi gisa",
+        "ChoosePassPhrase": "Aukeratu <strong>pasaesaldi<\/strong> bat saioa hasteko.<br> Erraz gogoratuko dituzun hitz batzuez osatutako esaldi sinplea.",
+        "ChoosePassPhraseSeeSuggestions": "Aukeratu <strong>pasaesaldi<\/strong> on bat zure kontua babesteko. Ikusi ideia batzuen iradokizunak.",
+        "LogOutAndTryAgain": "Amaitu saioa eta saiatu berriro",
+        "IfYouFeel": "Zerbait gaizki joan dela sentitzen baduzu, egin dezakezu",
         "SetIdentifierButtonTitle": "berriro hasi"
     },
     "session": {
@@ -16,32 +16,32 @@
     },
     "authorize": {
         "GetStarted": "Hasi",
-        "Authorize": "baimentzea",
-        "TermsLabel": "Irakurri eta onartzen dut <br> {{link}}",
-        "TermsTitle": "baldintzak",
-        "mustAgree": "Lehenik eta behin baldintzak adostu behar dituzu."
+        "Authorize": "Baimena eman",
+        "TermsLabel": "Irakurri dut eta ados nago<br> {{link}}",
+        "TermsTitle": "Baldintzak",
+        "mustAgree": "Lehenik eta behin, baldintzak onartu behar dituzu."
     },
     "register": {
-        "TermsLabel": "Onartzen dut {{link}}}",
-        "TermsTitle": "baldintzak"
+        "TermsLabel": "{{link}} onartzen dut",
+        "TermsTitle": "Baldintzak"
     },
     "notifications": {
-        "title": "Lizentzia",
-        "prompt": "Jakinarazpenak gaitu nahi al dituzu? Zaintzazko gauzen inguruko denbora errealean eguneratzeak jasoko dituzu.",
+        "title": "Baimena",
+        "prompt": "Jakinarazpenak gaitu nahi dituzu? Axola zaizkizun gauzei buruzko eguneraketak denbora errealean jasoko dituzu.",
         "yes": "Bai",
         "no": "Ez",
-        "WelcomePleaseVerifyEmail": "Ongi etorri! Mesedez, egiaztatu zure helbide elektronikoa.",
+        "WelcomePleaseVerifyEmail": "Ongi etorri! Egiaztatu zure helbide elektronikoa.",
         "WelcomeVerifyEmail": "Ongi etorri! Egiaztatu zure helbide elektronikoa.",
-        "ForgetPass": "Hey, ahaztu egin duzu zure pasaesaldia?",
-        "PassphraseSaved": "Zure pasahitz esaldia gorde da.",
-        "IdentifierActivated": "Zure {{type}} aktibatuta dago.",
-        "CompletedActivation": "Erabiltzaileen aktibazioa amaitu duzu.",
-        "CompletedActivationLogIn": "Erabiltzaileen aktibazioa amaitu duzu. Saiatu saioa hasten orain."
+        "ForgetPass": "Aizu, ahaztu al duzu pasaesaldia?",
+        "PassphraseSaved": "Zure pasaesaldia gorde da.",
+        "IdentifierActivated": "Zure {{type}} aktibatu da.",
+        "CompletedActivation": "Erabiltzaileen aktibazioa osatu duzu.",
+        "CompletedActivationLogIn": "Erabiltzaileen aktibazioa osatu duzu. Saiatu orain saioa hasten."
     },
     "usersContacts": {
         "selectLabel": "Hautatu etiketa.",
-        "inviteUser": "Gonbidatu erabiltzailea",
-        "selectRole": "Hautatu Rola",
+        "inviteUser": "Erabiltzaileak gonbidatu",
+        "selectRole": "Hautatu Rol",
         "inviteRole": "Gonbidatu {{role}}"
     },
     "invalidLanguageSelected": "Hizkuntza baliogabea hautatu da",
@@ -51,78 +51,78 @@
             "SearchByName": "Bilatu izenaren arabera",
             "CreateAccount": "+ Kontaktu berria",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ez da aurkitu",
-            "EmptyContacts": "Aurkitu ez diren kontaktuak ..."
+            "EmptyContacts": "Kontaktuak ez dira aurkitu..."
         },
         "select": {
-            "title": "{{displayName}} zerbitzuko kontaktu aukeratu"
+            "title": "Hautatu {{displayName}} kontaktua"
         }
     },
     "login": {
-        "title": "Ongi",
-        "directions": "Sortu kontua edo hasi saioa.",
+        "title": "Ongi etorri",
+        "directions": "Sortu kontu bat edo hasi saioa.",
         "directionsNoRegister": "Hasi saioa kontu bat baduzu.",
-        "goButton": "joan",
-        "passphrase": "Idatzi zure esaldia:",
+        "goButton": "Zoaz",
+        "passphrase": "Idatzi pasaesaldia:",
         "loginButton": "Hasi",
         "registerButton": "Hasi",
-        "resendButton": "Bidali aktibazio mezua",
-        "forgot": "Ahaztu al zaizu?",
-        "resendConfirm": "Pasahitza berrezartzeko mezu bat bidali nahi al duzu?",
-        "resendSuccess": "Begiratu mezu bat zure pasahitza berrezartzeko",
+        "resendButton": "Bidali aktibazio-mezua",
+        "forgot": "Ahaztu al duzu?",
+        "resendConfirm": "Mezu bat bidali nahi duzu pasaesaldia berrezartzeko?",
+        "resendSuccess": "Egiaztatu pasaesaldia berrezartzeko mezurik",
         "resendClose": "Itxi",
-        "noPassphrase": "Saioa hasi aurretik, pasahitz bat ezarri behar duzu aktibazio mezuan dagoen estekan klik eginez.",
-        "notVerified": "Saioa hasteko aktibazio mezua bidali behar duzu.",
-        "emailExists": "Lehenago saiatu al zara posta elektroniko honekin erregistratzen? Hala bada, egiaztatu zure sarrerako ontzia zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
-        "mobileExists": "Aurretik saiatu al zara mugikor zenbaki honekin erregistratzen? Hala bada, egiaztatu zure SMS kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
+        "noPassphrase": "Saioa hasi aurretik, pasaesaldi bat ezarri behar duzu zure aktibazio-mezuko estekan klik eginez.",
+        "notVerified": "Zure buruari aktibazio-mezu bat bidali behar diozu saioa hasteko.",
+        "emailExists": "Email honekin erregistratzen saiatu zara aurretik? Hala bada, egiaztatu sarrera-ontzia zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
+        "mobileExists": "Saiatu al zara aurretik mugikor zenbaki honekin erregistratzen? Hala bada, egiaztatu zure SMSa zure kontua aktibatzeko. <a href='#resend' class='Q_button Users_activation_resend'>Egin klik mezua berriro bidaltzeko<\/a>",
         "usingOther": "edo ahal duzu",
         "prompt": "Erabiltzaile izena aukeratu:",
-        "newUser": "edo sortu kontu berria behean",
+        "newUser": "edo sortu kontu berri bat behean",
         "placeholders": {
-            "identifier": "zure mugikorra # edo posta elektronikoa",
-            "mobile": "sartu zure mugikorrean #",
+            "identifier": "zure mugikorraren # edo posta elektronikoa",
+            "mobile": "sartu zure mugikorraren #",
             "email": "sartu zure helbide elektronikoa",
-            "username": "Erabiltzaile izena"
+            "username": "erabili letrak eta zenbakiak soilik"
         },
-        "confirmTerms": "Onartu Zerbitzuaren baldintzak?",
-        "facebookNoEmail": "Zure Facebook kontuan konfirmatutako helbide elektronikoa falta da. Besterik gabe, hasi jatorrizko moduan.",
-        "picTooltip": "Argazki hau gero alda dezakezu",
+        "confirmTerms": "Zerbitzu-baldintzak onartu?",
+        "facebookNoEmail": "Zure facebook-eko kontuari baieztatutako helbide elektroniko bat falta zaio. Hasi saioa jatorrizko moduan.",
+        "picTooltip": "Irudi hau geroago alda dezakezu",
         "wallet": {
             "payload": "Hasi saioa {{host}} unean {{timestamp}}",
             "alert": {
                 "title": "Wallet-era birbideratzen",
-                "content": "Elkarrizketa hau ixten duzunean, zorroan sartuko zara. Saioa hasi ondoren, itzuli orrialde honetara."
+                "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
             }
         }
     },
     "setIdentifier": {
         "title": "Gehitu saioa hasteko modu bat",
-        "sendMessage": "Bidali aktibazio mezua",
+        "sendMessage": "Bidali aktibazio-mezua",
         "placeholders": {
-            "identifier": "sartu zure mugikorraren # edo helbide elektronikoa",
-            "mobile": "sartu zure mugikorreko zenbakia",
+            "identifier": "sartu zure mugikorraren # edo posta elektronikoa",
+            "mobile": "sartu zure mugikorraren zenbakia",
             "email": "sartu zure helbide elektronikoa",
-            "username": "Erabiltzaile izena"
+            "username": "erabiltzaile-izena"
         }
     },
     "prompt": {
-        "title": "{{Platform}} kontua",
-        "areUsing": "{{platform}} erabiltzen ari zara",
-        "noLongerUsing": "Ez zara {{platform}} (r) ekin konektatuta",
+        "title": "{{Platform}} Kontua",
+        "areUsing": "{{platform}} gisa erabiltzen ari zara",
+        "noLongerUsing": "Jada ez zaude {{platform}}-ra konektatuta",
         "doAuth": "Hasi saioa kontu honekin",
         "doSwitch": "Aldatu kontu honetara"
     },
     "roles": {
         "Owner": "Jabea",
-        "Admin": "admin",
-        "Member": "kidea",
+        "Admin": "Admin",
+        "Member": "Kide",
         "Guest": "Gonbidatua",
         "Host": "Ostalaria"
     },
     "analytics": {
         "Title": "Analitika",
         "Daily": "Egunero",
-        "Weekly": "Astero",
-        "Monthly": "Hilabetekaria",
+        "Weekly": "Asterokoa",
+        "Monthly": "Hilerokoa",
         "Application": "Aplikazio",
         "Pages": "Orriak",
         "Services": "Zerbitzuak",

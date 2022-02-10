@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Prekni për të paguar"
+        "button": "Trokit për të paguar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: pagesë të përpunuar për {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Faleminderit për pagesën tuaj në {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} u pajtua për {{plan.title}}",
-        "YouSubscribedTo": "Ju jeni regjistruar në {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tarifa e përpunuar për {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Faleminderit për pagesën në {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonuar në {{plan.title}}",
+        "YouSubscribedTo": "Ju jeni abonuar në {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informacione për porosinë",
+        "AboutOrder": "Informacion rreth porosisë",
         "PaymentMethod": "Metoda e pagesës",
         "ContactInfo": "Informacioni i kontaktit",
-        "Pay": "Pay"
+        "Pay": "Paguaj"
     },
     "credits": {
-        "InviteAcceptedBy": "Ftoni të pranuar nga {{1}}",
-        "YouHaveCreditsToStart": "Ju keni {{1}} kredi për të filluar",
-        "PaymentFor": "Pagesa për &quot;999 {&quot;",
-        "PaymentTo": "Pagesa në 99 999}",
-        "PaymentToUser": "Pagesa në 99 999}",
-        "JoinedPaidStream": "për t&#39;u bashkuar me &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "InviteAcceptedBy": "Ftesa u pranua nga {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Ju keni {{amount}} kredite për të filluar",
+        "PaymentFor": "Pagesa për &quot;{{1}}&quot;",
+        "PaymentTo": "Pagesa për {{1}}",
+        "PaymentToUser": "Pagesa për {{toUserName}}",
+        "JoinedPaidStream": "për rezervim në &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
         "CreatedCommunity": "për krijimin e komunitetit &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "për largimin nga &quot;&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>1001}}<\/a> &quot;",
-        "BoughtCredits": "Blerë kredi {999",
-        "BuyAmountCredits": "Bleni kredi 99 999",
+        "LeftPaidStream": "si rimbursim rezervimi në &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Bleva {{amount}} kredite",
+        "BuyAmountCredits": "Bli {{amount}} kredite",
         "MissingCredits": "Kreditë që mungojnë",
-        "YouMissingCredits": "Ju mungojnë kreditë {999",
-        "BuyCredits": "Bleni kredi",
+        "YouMissingCredits": "Të duhen {{amount}} kredite shtesë për të vazhduar.",
+        "BuyCredits": "Blej kredite",
         "Buy": "Blej",
-        "Credits": "kredite",
+        "Credits": "Kreditë",
         "ErrorInvalidAmount": "Shuma e pavlefshme",
-        "ErrorInvalidCurrency": "Fatkeqësisht ne nuk e mbështesin ende monedhën {999} akoma",
-        "WatchClip": "Fitua {{amount}} kredite për të shikuar {{fromStreamTitle}}",
-        "PurchaseCredits": "Blerjet e kredive",
+        "ErrorInvalidCurrency": "Fatkeqësisht, ne nuk e mbështesim ende monedhën {{currency}}",
+        "WatchClip": "Fitove {{amount}} kredite për shikimin {{fromStreamTitle}}",
+        "PurchaseCredits": "Bleni Kredi",
         "forMessages": {
             "BoughtCredits": "{{amount}} kredite",
-            "BonusCredits": "Kredite {{amount}}"
+            "BonusCredits": "{{amount}} kredite"
         },
         "CreatePaidStream": "për krijimin e {{toStreamName}}",
-        "BonusCredits": "Bonuse {{amount}} kredite",
-        "BuyBonus": "Blerja e {{amount}} krediteve njëherësh, do të çojë në bonus {{bonus}} kredite.",
+        "BonusCredits": "Bonus {{amount}} kredite",
+        "BuyBonus": "Blerja e {999}} krediteve në të njëjtën kohë, do të çojë në {{bonus}} bonus kredite.",
         "Streams_user_firstname": "{{invitedUserName}} futi emrin e parë",
         "Streams_user_lastname": "{{invitedUserName}} futi mbiemrin",
         "Streams_user_icon": "{{invitedUserName}} ikonën e futur",
@@ -49,35 +49,35 @@
         "Streams_greeting": "{{invitedUserName}} hyri në përshëndetje"
     },
     "history": {
-        "Date": "data",
-        "Amount": "sasi",
+        "Date": "Data",
+        "Amount": "Shuma",
         "Description": "Përshkrim",
-        "Client": "klient",
-        "To": "në",
+        "Client": "Klienti",
+        "To": "te",
         "From": "nga",
-        "HistoryEmpty": "Ju nuk keni ende të dhëna",
-        "SeeHistory": "Shihni historikun e pagesave për 99 99 999}}",
-        "PaymentFor": "Kredi Sp 999 kredite",
-        "PaymentTo": "Dërguar kredi {999",
-        "PaymentToUser": "Dërguar kredi {999",
+        "HistoryEmpty": "Nuk keni ende të dhëna",
+        "SeeHistory": "Shiko historikun e pagesave për {{1}}",
+        "PaymentFor": "Dërguar {{amount}} kredite",
+        "PaymentTo": "Dërguar {{amount}} kredite",
+        "PaymentToUser": "Dërguar {{amount}} kredite",
         "JoinedPaidStream": {
-            "+": "Fituar kredi {999",
-            "-": "Kredi Sp 999 kredite"
+            "+": "Fitoi {{amount}} kredite",
+            "-": "{{amount}} kredite të shpenzuara"
         },
         "LeftPaidStream": {
-            "+": "Mori kredi {999",
-            "-": "Dërguar kredi {999"
+            "+": "Mori {{amount}} kredite",
+            "-": "Dërguar {{amount}} kredite"
         },
-        "CreatedCommunity": "Kredi Sp 999 kredite",
-        "BoughtCredits": "Blerë kredi {999",
-        "InviteAcceptedBy": "Fituar kredi {999",
-        "YouHaveCreditsToStart": "Fituar kredi {999",
-        "CreatePaidStream": "Shpenzoi {{amount}} kredite",
+        "CreatedCommunity": "{{amount}} kredite të shpenzuara",
+        "BoughtCredits": "Bleva {{amount}} kredite",
+        "InviteAcceptedBy": "Fitoi {{amount}} kredite",
+        "YouHaveCreditsToStart": "Fitoi {{amount}} kredite",
+        "CreatePaidStream": "{{amount}} kredite të shpenzuara",
         "WatchClip": {
             "+": "Fitoi {{amount}} kredite",
-            "-": "Shpenzoi {{amount}} kredite"
+            "-": "{{amount}} kredite të shpenzuara"
         },
-        "BonusCredits": "Mori bonus kreditit {{amount}}",
+        "BonusCredits": "Mora {{amount}} kredite bonus",
         "Streams_user_firstname": "Fitoi {{amount}} kredite",
         "Streams_user_lastname": "Fitoi {{amount}} kredite",
         "Streams_user_icon": "Fitoi {{amount}} kredite",
@@ -88,35 +88,35 @@
         "infoTitle": "Vendosni informacionin e pagesës",
         "confirm": {
             "title": "Filloni Abonimin",
-            "message": "Dëshironi të regjistroheni në 99 999}?",
+            "message": "Dëshironi të abonoheni në {{title}}?",
             "ok": "Ne rregull",
-            "cancel": "anuloj"
+            "cancel": "Anulo"
         },
         "CreditOrDebitCard": "Kartë krediti ose debiti",
-        "SubscribePayment": "Regjistroni Pagesën",
+        "SubscribePayment": "Regjistrohu për pagesën",
         "ImmediatePayment": "Pagesa e menjëhershme"
     },
     "payments": {
         "infoTitle": "Vendosni informacionin e pagesës",
         "confirm": {
-            "title": "Bëni një Pagesë",
-            "message": "A pranoni të paguani {999}} {{amount}}?",
+            "title": "Bëni një pagesë",
+            "message": "A pranoni të paguani {{symbol}}{{amount}}?",
             "ok": "Ne rregull",
-            "cancel": "anuloj"
+            "cancel": "Anulo"
         },
-        "BuyAmountCredits": "Bleni kredi 99 999"
+        "BuyAmountCredits": "Bli {{amount}} kredite"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "kredite",
+            "displayType": "Kreditë",
             "description": "mban gjurmët e kredive dhe pagesave"
         },
         "Assets\/plan": {
-            "displayType": "Plani i Ndarjes",
-            "description": "plani i pajtimit"
+            "displayType": "Plani i Abonimit",
+            "description": "plani i abonimit"
         },
         "Assets\/subscription": {
-            "displayType": "abonim",
+            "displayType": "Abonimi",
             "description": "abonim"
         },
         "Assets\/product": {
@@ -124,55 +124,55 @@
             "description": "produkti që shitet"
         },
         "Assets\/service": {
-            "displayType": "shërbim",
+            "displayType": "Shërbimi",
             "description": "shërbimi që ofrohet"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Fituar kredi {999"
+            "content": "Fitoi {{amount}} kredite"
         },
         "Assets\/credits\/spent": {
-            "content": "Kredi Sp 999 kredite"
+            "content": "{{amount}} kredite të shpenzuara"
         },
         "Assets\/credits\/sent": {
-            "content": "Dërguar kredi {999"
+            "content": "Dërgoi {{amount}} kredite te {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Mori kredi 99 999"
+            "content": "Mora {{amount}} kredite nga {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Blerë kredi {999"
+            "content": "Bleva {{amount}} kredite"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonuse {{amount}} kredite"
+            "content": "Bonus {{amount}} kredite"
         }
     },
     "charge": {
-        "Subject": "Ju merrni pagesa prej 999} nga {{call 'publisher.displayName'}} nga &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hej, kjo është vetëm për t&#39;ju njoftuar {99 999 been është akuzuar {{1000} {për 1001} {nga {1002}}"
+        "Subject": "Ju merrni pagesën prej {{displayAmount}} nga {{call 'publisher.displayName'}} nga &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, kjo është vetëm për t&#39;ju bërë të ditur se {{1}} është tarifuar {{2}} për {{3}} nga {{4}}"
     },
     "charged": {
         "Subject": "Faleminderit për pagesën tuaj për &quot;{{description}}&quot;",
-        "HavePaid": "Hej {999} this, ky është vetëm një konfirmim i shpejtë që keni paguar me sukses {1000}} në {1001} për {1002"
+        "HavePaid": "Hej {{1}}, ky është vetëm një konfirmim i shpejtë që i ke paguar me sukses {{2}} {{3}} për {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Shërbim i ri",
+            "Title": "Shërbimi i ri",
             "TitlePlaceholder": "Titulli i shërbimit",
-            "PricePlaceholder": "Cmimi i caktuar",
-            "LinkPlaceholder": "caktoni lidhje shtesë informacioni",
+            "PricePlaceholder": "Cakto çmimin",
+            "LinkPlaceholder": "vendosni lidhjen e informacionit shtesë",
             "DescriptionPlaceholder": "Përshkrimi i shërbimit",
-            "SaveService": "Ruani shërbimin",
+            "SaveService": "Ruaj shërbimin",
             "SelectRequiredParticipants": "Pjesëmarrësit e kërkuar"
         },
-        "ManageServiceTemplates": "Menaxhoni Modelet e Shërbimit",
-        "ManageServices": "Menaxhoni Shërbimet",
+        "ManageServiceTemplates": "Menaxho modelet e shërbimit",
+        "ManageServices": "Menaxho Shërbimet",
         "FreeEvent": "Ngjarje falas",
-        "OptionalContribution": "Kontributi fakultativ",
-        "RequiredPayment": "Pagesa e kërkuar",
-        "AreYouSureDelete": "Jeni i sigurt që doni të fshini këtë shërbim?",
-        "AmountServicesRelated": "Ka disponueshmëri prej 999 {{në lidhje me këtë shërbim. Ata gjithashtu do të hiqen.",
+        "OptionalContribution": "Kontribut opsional",
+        "RequiredPayment": "Pagesa e nevojshme",
+        "AreYouSureDelete": "Jeni i sigurt që dëshironi ta fshini këtë shërbim?",
+        "AmountServicesRelated": "Ka {{amount}} disponueshmëri në lidhje me këtë shërbim. Ata gjithashtu do të hiqen.",
         "Free": "Falas"
     },
     "NFT": {

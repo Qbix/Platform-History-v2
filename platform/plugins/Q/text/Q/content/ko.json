@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "요청 중 오류 {{status}}",
+        "canceled": "취소된 요청",
+        "500": "인터넷 서버 오류",
+        "404": "찾을 수 없음: {{url}}",
+        "501": "요청이 중단됨"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "세션이 만료되었습니다. 페이지를 새로고침하고 다시 시도하세요.",
+        "otherDomain": "{{baseUrl}}에서 외부 도메인에 대한 교차 도메인 요청 차단됨"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "수도꼭지",
+        "click": "딸깍 하는 소리",
+        "yes": "네",
+        "no": "아니요",
+        "Tap": "수도꼭지",
+        "Click": "딸깍 하는 소리",
+        "Yes": "네",
+        "No": "아니"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "1 월",
+        "2": "2 월",
+        "3": "3 월",
+        "4": "4 월",
+        "5": "할 수있다",
+        "6": "6 월",
+        "7": "칠월",
+        "8": "팔월",
+        "9": "구월",
+        "10": "십월",
+        "11": "십일월",
+        "12": "12 월"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "둘째",
+        "seconds": "초",
+        "minute": "분",
+        "minutes": "분",
+        "hour": "시간",
+        "day": "낮",
+        "days": "날",
+        "week": "주",
+        "weeks": "주",
+        "month": "월",
+        "months": "개월",
+        "year": "년도",
+        "years": "연령",
+        "decade": "열개의",
+        "decades": "수십 년",
+        "century": "세기",
+        "centuries": "수세기"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "마이크에 대한 액세스를 허용하세요.",
+        "record": "기록",
+        "recording": "녹음",
+        "remains": "유적",
+        "maximum": "최고",
+        "playing": "놀이",
+        "recorded": "녹음",
+        "clip": "클립",
+        "discard": "버리다",
+        "encoding": "부호화"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "클립",
+        "errorNoSource": "비디오 소스 없음",
+        "SkipAfter": "다음 시간 이후 건너뛰기",
+        "Skip": "건너 뛰다"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "클립",
+        "errorNoSource": "pdf 소스 없음"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "클립 시작 설정",
+        "ClipStart": "클립 시작",
+        "SetClipEnd": "클립 끝 설정",
+        "ClipEnd": "클립 끝",
+        "StartMoreEnd": "시작 위치는 끝 위치보다 클 수 없습니다.",
+        "EndLessStart": "종료 위치는 시작 위치보다 작을 수 없습니다.",
+        "WhichInvalid": "&#39;어떤&#39; 인수가 유효하지 않습니다."
     },
     "alert": {
-        "title": "Alert"
+        "title": "알리다"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "확인하다",
+        "ok": "네",
+        "cancel": "아니"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "즉각적인",
+        "ok": "가다"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "더",
+        "Menu": "메뉴"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "파일을 읽는 동안 오류가 발생했습니다.",
+        "errorType": "죄송합니다. 이 파일 형식은 지원되지 않습니다.",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "무엇을하고 싶으십니까?",
+            "photo": "새 사진 찍기",
+            "library": "라이브러리에서 선택"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "더 큰 이미지를 선택하세요.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "크기 및 위치 조정",
+            "touchscreen": "손가락을 사용하여 확대\/축소 및 드래그",
+            "notTouchscreen": "마우스와 휠을 사용하여 확대\/축소 및 드래그"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "지난 밤",
+        "lastEvening": "지난 밤",
+        "yesterday": "어제",
+        "thisMorning": "오늘 아침",
+        "today": "오늘",
+        "tonight": "오늘 밤",
+        "tomorrowMorning": "톰 아침",
+        "tomorrow": "내일",
+        "hoursAgo": "{{h}}시간 전",
+        "hourAgo": "{{h}}시간 전",
+        "minuteAgo": "{{m}}분 전",
+        "minutesAgo": "{{m}}분 전",
+        "secondAgo": "{{s}}초 전",
+        "secondsAgo": "{{s}}초 전",
+        "fewSecondsAgo": "초 전",
+        "rightNow": "지금 바로",
+        "inSecond": "{{s}}초 후",
+        "inSeconds": "{{s}}초 후",
+        "inMinute": "{{m}}분 후",
+        "inMinutes": "{{m}}분 후",
+        "inHour": "{{h}}시간 후",
+        "inHours": "{{h}}시간 후",
+        "inUnderMinute": "1분 이내"
     }
 }

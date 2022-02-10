@@ -4,44 +4,44 @@
         "button": "Tik om te betaal"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: koste verwerk vir {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: heffing verwerk vir {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Dankie vir jou betaling aan {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} ingeteken op {{plan.title}}",
+        "SubscribedTo": "{{call 'user.displayName'}} het ingeteken op {{plan.title}}",
         "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}"
     },
     "payment": {
         "AboutOrder": "Inligting oor bestelling",
         "PaymentMethod": "Betalings metode",
         "ContactInfo": "Kontakbesonderhede",
-        "Pay": "Pay"
+        "Pay": "Betaal"
     },
     "credits": {
-        "InviteAcceptedBy": "Uitnodiging aanvaar deur {{1}}",
-        "YouHaveCreditsToStart": "Jy het {{1}} krediete om te begin",
+        "InviteAcceptedBy": "Uitnodiging aanvaar deur {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Jy het {{amount}} krediete om te begin",
         "PaymentFor": "Betaling vir &quot;{{1}}&quot;",
         "PaymentTo": "Betaling aan {{1}}",
-        "PaymentToUser": "Betaling aan {{userName}}",
-        "JoinedPaidStream": "om by &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; aan te sluit",
-        "CreatedCommunity": "vir die skepping van die gemeenskap &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "omdat u &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; verlaat",
+        "PaymentToUser": "Betaling aan {{toUserName}}",
+        "JoinedPaidStream": "vir bespreking in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "vir die skep van gemeenskap &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "as besprekingterugbetaling in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Het {{amount}} krediete gekoop",
         "BuyAmountCredits": "Koop {{amount}} krediete",
         "MissingCredits": "Ontbrekende krediete",
-        "YouMissingCredits": "U ontbreek {{amount}} krediete",
+        "YouMissingCredits": "Jy benodig &#39;n bykomende {{amount}} krediete om voort te gaan.",
         "BuyCredits": "Koop krediete",
         "Buy": "Koop",
-        "Credits": "krediete",
+        "Credits": "Krediete",
         "ErrorInvalidAmount": "Bedrag ongeldig",
         "ErrorInvalidCurrency": "Ongelukkig ondersteun ons nog nie geldeenheid {{currency}} nie",
-        "WatchClip": "Verdien {{amount}} krediete vir kyk {{fromStreamTitle}}",
+        "WatchClip": "Het {{amount}} krediete verdien om {{fromStreamTitle}} te kyk",
         "PurchaseCredits": "Koop krediete",
         "forMessages": {
             "BoughtCredits": "{{amount}} krediete",
             "BonusCredits": "{{amount}} krediete"
         },
         "CreatePaidStream": "vir die skep van {{toStreamName}}",
-        "BonusCredits": "Bonuskrediete van {{amount}}",
-        "BuyBonus": "As u tegelyk {{amount}} krediete koop, lei dit tot &#39;n bonus van {{bonus}} krediete.",
+        "BonusCredits": "Bonus {{amount}} krediete",
+        "BuyBonus": "Om {{amount}} krediete gelyktydig te koop, sal lei tot {{bonus}} krediete bonus.",
         "Streams_user_firstname": "{{invitedUserName}} het voornaam ingevoer",
         "Streams_user_lastname": "{{invitedUserName}} het van ingevoer",
         "Streams_user_icon": "{{invitedUserName}} ingevoer ikoon",
@@ -49,33 +49,33 @@
         "Streams_greeting": "{{invitedUserName}} het groete ingeskryf"
     },
     "history": {
-        "Date": "datum",
-        "Amount": "bedrag",
-        "Description": "beskrywing",
-        "Client": "kliënt",
-        "To": "om",
+        "Date": "Datum",
+        "Amount": "Bedrag",
+        "Description": "Beskrywing",
+        "Client": "Kliënt",
+        "To": "aan",
         "From": "van",
-        "HistoryEmpty": "U het nog geen data nie",
-        "SeeHistory": "Kyk na betalingsgeskiedenis vir {{1}}",
-        "PaymentFor": "{{amount}} krediete bestee",
-        "PaymentTo": "{{amount}} krediete gestuur",
-        "PaymentToUser": "{{amount}} krediete gestuur",
+        "HistoryEmpty": "Jy het nog geen data nie",
+        "SeeHistory": "Sien betalingsgeskiedenis vir {{1}}",
+        "PaymentFor": "Het {{amount}} krediete gestuur",
+        "PaymentTo": "Het {{amount}} krediete gestuur",
+        "PaymentToUser": "Het {{amount}} krediete gestuur",
         "JoinedPaidStream": {
-            "+": "{{amount}} krediete verdien",
-            "-": "{{amount}} krediete bestee"
+            "+": "Verdien {{amount}} krediete",
+            "-": "Het {{amount}} krediete spandeer"
         },
         "LeftPaidStream": {
             "+": "Het {{amount}} krediete ontvang",
-            "-": "{{amount}} krediete gestuur"
+            "-": "Het {{amount}} krediete gestuur"
         },
-        "CreatedCommunity": "{{amount}} krediete bestee",
+        "CreatedCommunity": "Het {{amount}} krediete spandeer",
         "BoughtCredits": "Het {{amount}} krediete gekoop",
-        "InviteAcceptedBy": "{{amount}} krediete verdien",
-        "YouHaveCreditsToStart": "{{amount}} krediete verdien",
-        "CreatePaidStream": "Het {{amount}} krediete bestee",
+        "InviteAcceptedBy": "Verdien {{amount}} krediete",
+        "YouHaveCreditsToStart": "Verdien {{amount}} krediete",
+        "CreatePaidStream": "Het {{amount}} krediete spandeer",
         "WatchClip": {
             "+": "Verdien {{amount}} krediete",
-            "-": "Het {{amount}} krediete bestee"
+            "-": "Het {{amount}} krediete spandeer"
         },
         "BonusCredits": "Het bonuskrediete van {{amount}} gekry",
         "Streams_user_firstname": "Verdien {{amount}} krediete",
@@ -85,94 +85,94 @@
         "Streams_greeting": "Verdien {{amount}} krediete"
     },
     "subscriptions": {
-        "infoTitle": "Stel betalinginligting op",
+        "infoTitle": "Stel betalingsinligting",
         "confirm": {
             "title": "Begin intekening",
-            "message": "Wil u inteken op {{title}}?",
+            "message": "Wil jy inteken op {{title}}?",
             "ok": "OK",
-            "cancel": "kanselleer"
+            "cancel": "Kanselleer"
         },
         "CreditOrDebitCard": "Krediet- of debietkaart",
-        "SubscribePayment": "Teken betaling in",
+        "SubscribePayment": "Teken in Betaling",
         "ImmediatePayment": "Onmiddellike betaling"
     },
     "payments": {
-        "infoTitle": "Stel betalinginligting op",
+        "infoTitle": "Stel betalingsinligting",
         "confirm": {
             "title": "Maak n betaling",
-            "message": "Stem u in om {{symbol}} {{amount}} te betaal?",
+            "message": "Stem jy in om {{symbol}}{{amount}} te betaal?",
             "ok": "OK",
-            "cancel": "kanselleer"
+            "cancel": "Kanselleer"
         },
         "BuyAmountCredits": "Koop {{amount}} krediete"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "krediete",
-            "description": "hou krediete en betalings dop"
+            "displayType": "Krediete",
+            "description": "hou rekord van krediete en betalings"
         },
         "Assets\/plan": {
-            "displayType": "Onttrekkingsplan",
-            "description": "intekeningplan"
+            "displayType": "Inskrywingsplan",
+            "description": "intekenplan"
         },
         "Assets\/subscription": {
-            "displayType": "inskrywing",
-            "description": "inskrywing"
+            "displayType": "Intekening",
+            "description": "intekening"
         },
         "Assets\/product": {
-            "displayType": "produk",
-            "description": "produk verkoop word"
+            "displayType": "Produk",
+            "description": "produk wat verkoop word"
         },
         "Assets\/service": {
-            "displayType": "diens",
-            "description": "diens wat aangebied word"
+            "displayType": "Diens",
+            "description": "diens aangebied word"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} krediete verdien"
+            "content": "Verdien {{amount}} krediete"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} krediete bestee"
+            "content": "Het {{amount}} krediete spandeer"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} krediete gestuur"
+            "content": "Het {{amount}} krediete aan {{toUserName}} gestuur"
         },
         "Assets\/credits\/received": {
-            "content": "Het {{amount}} krediete ontvang"
+            "content": "Het {{amount}} krediete van {{fromUserName}} ontvang"
         },
         "Assets\/credits\/bought": {
             "content": "Het {{amount}} krediete gekoop"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonuskrediete van {{amount}}"
+            "content": "Bonus {{amount}} krediete"
         }
     },
     "charge": {
-        "Subject": "U ontvang {{displayAmount}} betaling vanaf {{call 'publisher.displayName'}} deur &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hallo, dit is net om jou te laat weet {{1}} is {{2}} van {{3}} deur {{4}} aangekla."
+        "Subject": "Jy kry betaling van {{displayAmount}} vanaf {{call 'publisher.displayName'}} deur &quot;{{description}}&quot;",
+        "HasBeenCharged": "Haai, dit is net om jou te laat weet {{1}} is gehef {{2}} vir {{3}} deur {{4}}"
     },
     "charged": {
-        "Subject": "Dankie vir u betaling vir &quot;{{description}}&quot;",
-        "HavePaid": "Hallo {{1}}, dit is net &#39;n vinnige bevestiging dat u {{2}} suksesvol aan {{3}} betaal het vir {{4}}"
+        "Subject": "Dankie vir jou betaling vir &quot;{{description}}&quot;",
+        "HavePaid": "Haai {{1}}, hierdie is net &#39;n vinnige bevestiging dat jy suksesvol {{2}} aan {{3}} betaal het vir {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Nuwe diens",
+            "Title": "Nuwe Diens",
             "TitlePlaceholder": "Diens titel",
             "PricePlaceholder": "Stel prys",
-            "LinkPlaceholder": "stel addisionele inligtingskakel",
+            "LinkPlaceholder": "stel addisionele inligtingskakel in",
             "DescriptionPlaceholder": "Diensbeskrywing",
             "SaveService": "Stoor diens",
             "SelectRequiredParticipants": "Vereiste deelnemers"
         },
-        "ManageServiceTemplates": "Bestuur diensjablone",
+        "ManageServiceTemplates": "Bestuur dienssjablone",
         "ManageServices": "Bestuur dienste",
         "FreeEvent": "Gratis geleentheid",
         "OptionalContribution": "Opsionele bydrae",
         "RequiredPayment": "Vereiste betaling",
-        "AreYouSureDelete": "Is u seker dat u hierdie diens wil uitvee?",
-        "AmountServicesRelated": "Daar is {{amount}} beskikbaarhede wat met hierdie diens verband hou. Hulle word ook verwyder.",
+        "AreYouSureDelete": "Is jy seker jy wil hierdie diens uitvee?",
+        "AmountServicesRelated": "Daar is {{amount}} beskikbaarheid wat met hierdie diens verband hou. Hulle sal ook verwyder word.",
         "Free": "Vry"
     },
     "NFT": {
@@ -240,7 +240,7 @@
             "errorLine": "reël {{1}}",
             "fieldNotFound": "Vereiste veld &quot;{{1}}&quot; nie gevind nie",
             "taskStreamInvalid": "taakstroom ongeldig",
-            "instructionsEmpty": "taakstroom instruksies leeg",
+            "instructionsEmpty": "taakstroominstruksies leeg",
             "complete": "Voltooi",
             "activateUsers": "aktiveringsboodskap aan gebruikers stuur?",
             "importProgress": "Vordering",

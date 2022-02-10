@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Tengill til að kynna",
+                "startDate": "Upphafsdagur",
+                "startTime": "Byrjunartími",
+                "endDate": "Loka dagsetning",
+                "endTime": "Lokatími",
+                "budget": "Fjárhagsáætlun"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Sía eftir vöxtum",
+                "FilterInterests": "Byrjaðu að slá inn áhugamál..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Áhugi",
+            "Location": "Staðsetning"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Farðu",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Skoðaðu",
+            "WriteToStartConversation": "Skrifaðu hugsanir þínar til að hefja samtalið",
+            "StartConversation": "Byrjaðu samtal",
+            "GotoConversation": "Farðu í Samtal",
+            "reset": "Endurstilla",
+            "edit": "Breyta",
+            "link": "Tengill",
+            "setUrl": "Stilltu vefslóð",
+            "save": "Vista",
+            "setClip": "Klippa út",
+            "invalidURL": "Ógild vefslóð"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Skrá of stór fyrir skyndiminni. Hámarksskráarstærð {{size}}",
+        "InvalidPDF": "Skrá er ekki gild PDF",
+        "StartTypingTitleOrKeywords": "Byrjaðu að slá inn titil eða leitarorð..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "HTML skjal sem ýmsir notendur geta skoðað og breytt",
+            "displayType": "gr"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Skyggna í kynningu, getur innihaldið HTML, hljóð osfrv.",
+            "displayType": "Renna"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Kynning sem samanstendur af ýmsum glærum",
+            "displayType": "Kynning"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Auglýsingaeining á vefsíðu",
+            "displayType": "Auglýsingareining"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Leið til að flokka auglýsingaeiningar undir nafni",
+            "displayType": "Auglýsingasetning"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Efni fyrir auglýsingu",
+            "displayType": "Auglýsingar skapandi"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Auglýsingaherferð",
+            "displayType": "Auglýsingaherferð"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Táknar vefsíðu þar sem lýsigögn voru skafin",
+            "displayType": "Vefsíða"
         }
     }
 }

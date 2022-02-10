@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Hoc te latet contentum."
     },
     "preview": {
         "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
+        "Streams\/invited": "Populus invitavi",
+        "Streams\/invitedMe": "Qui me invitavit",
+        "DoYouAgree": "Consentisne?",
+        "Yes": "Ita",
         "No": "No"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
+        "Filter": "Quid interest tua?",
+        "CanAdd": "Si adhuc invenire non potes quod petebas, novam rem infra addere potes:",
+        "TrySynonyms": "Non vides? Conare nonnulla synonyma.",
+        "AddUnderCategory": "Adde sub categoria...",
         "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Unlisted": "non audio"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
+        "flaggedForAdminReview": "Epistula languefacta est pro recognitione admin. ICTUS iterum ad unglag.",
+        "noOneSaid": "Nemo aliquid dixit",
         "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmTitle": "Claudite hunc chat?",
+        "closeChatConfirm": "Certusne esne hoc chat occludere?",
+        "Subscribed": "Acta Vicimediorum Enabled",
+        "Unsubscribed": "Notificationes Muted",
+        "closeChatConfirmYes": "Ita",
         "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "earlierComments": "ante comment",
+        "startedConversation": "coepi colloquium",
+        "RealTimeCall": "Verus tempus Call",
+        "SearchByName": "Quaere nomine",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} chat",
+            "Join": "{{displayName}} chat iuncta",
+            "Leave": "{{displayName}} chat",
+            "RelatedTo": "{{displayName}} incepit a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "administrare vestri email subnotationes",
+        "IfUnsubscribe": "Si vis unsubscribe",
+        "*": "Nuntius {{& message.fields.type}} ad {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dixit: {{& message.content}}",
+        "Streams\/changed": "Mutationes in {{stream.fields.title}}",
+        "Streams\/invite": "Invitatus es ad {{& stream.fields.title}}",
+        "Streams\/announcement": "Annuntiatio in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} accessum mutavit in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat nuntius editus in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat nuntius remotus in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} occlusum est",
+        "Streams\/task\/progress": "Progressus in {{stream.fields.title}}",
+        "Streams\/task\/complete": "Negotium confectum: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error inter: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Nuntius advenientis",
+        "Streams\/relatedTo\/Streams\/call": "Nova vocatio Coepi in {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nova {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ad {{toTitle}} ut {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} te memoravi in comment",
+        "Streams\/call": "{{displayName}} vocationis realis tempus incepit"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "invitare",
+        "messageContent": "{{displayName}} te invitavit ad {{inviteUrl}}",
+        "youCanNowPaste": "Nunc crustulum hoc nexum alicubi homines invitare potes",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
+            "chooseFromContacts": "Elige ex Contactus",
+            "chooseAgainFromContacts": "Elige Iterum ex Contactus",
+            "inviteSelectedContacts": "Lego invitare Contactus",
+            "selectFromContacts": "Ex Contactus eligere",
+            "userChooserPlaceholder": "Quaere nomine",
+            "photo": "Accipies photo",
+            "photoInstruction": "Si is qui inspectis tuis QR code est coram te, accipe imaginem photographicam eorum",
+            "to": "Ad: {{Stream Title}}",
             "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "title": "invitare",
+            "placeholder": "Mobile numerum vel inscriptio electronica",
+            "orInvite": "Vel invitare utendo;",
+            "copyLink": "{{ClickOrTap}} ad effingendum invitare nexum",
+            "shareOrCopyLink": "{{ClickOrTap}} ad communicandum vel effingendum invitare nexum",
+            "QR": "{{ClickOrTap}} ad QR codem generat",
+            "QRtitle": "Hoc QR code scan",
+            "QRscanned": "Viderunt eam!",
+            "scannedQR": "{{ClickOrTap}} si codice lustratus est",
             "byEmail": "Email",
-            "byText": "Text",
+            "byText": "Textum",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
             "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "PleaseVisitLink": "Quaeso vide nexum sequentem:",
+            "InvitingYou": "Rogamus te ad {{title}}",
+            "HasInvitedYou": "{{displayName}} te ad {{title}} invitavit.",
+            "HasMentionedYou": "{{displayName}} te nominavit in &quot;{{title}}&quot;",
+            "YOUAREINVITED": "INVITARI!",
+            "AcceptInvite": "Accipere invitare"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Invitatus es ad {{title}}. Quaeso ICTUS {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Invitatus es. {999}} hic accipere et iungere."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "missae a <em>{{message.fields.type}}<\/em> nuntium ad {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
+            "commentedOn": "commentatione",
+            "startedCallIn": "coepi vocatio in",
             "in": "in",
             "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
+                "hasBeenPostedTo": "missae sunt",
                 "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "novam habet {{instructions.fromDisplayType}}",
+                "byAvatar": "adiecit {999}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Invitationes ex numero nostro mittuntur, quas amici nondum agnoscunt. Sequere textum celeris ut sciant invitationem abs te venisse, rogans ut nexum strepat.",
+            "confirm": "Invitationes ex numero nostro mittuntur, quas amici nondum agnoscunt. Velisne textum vivum insequi ut sciant invitationem a te venisse, rogans ut nexum strepat.",
+            "check": "Heus, modo invitationem tibi misi ad {{app}} app. Quaeso reprehendo tuum SMS ac preme nexum!",
+            "CheckYourMobile": "Please SMS and follow instructions!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Invitationes ex dominio nostro mittuntur, quas amici tui nondum agnoscunt. Sequere textum celeris ut sciant invitationem abs te venisse, rogans ut nexum strepat.",
+            "confirm": "Invitationes ex dominio nostro mittuntur, quas amici tui nondum agnoscunt. Velisne textum vivum insequi ut sciant invitationem a te venisse, rogans ut nexum strepat.",
+            "subject": "An invitare habuistis?",
+            "body": "Heus, modo invitationem tibi misi ad {{app}} app. Quaeso reprehendo vestri email et preme nexum in ibi!",
+            "CheckYourEmail": "Please your email and follow instructions!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
+        "Title": "Titulus",
+        "Subscribed": "Subscriptum",
+        "Participants": "Praesent",
+        "AreYouSureRemoveIdentifier": "Certus esne hoc identifier tollere?",
+        "AreYouSureUnsubscribeIdentifier": "Certus esne hoc identifier unsubscribe? Is averte notificationes huic identifier.",
+        "AreYouSureUnsubscribeDevice": "Certus esne hanc machinam unsubscribe? Hoc autem averte notificationes huic fabrica.",
+        "AreYouSureRemoveParticipant": "Visne vero hunc participem amovere?",
+        "RemoveParticipant": "Aufer participem",
         "Identifiers": "Identifiers",
         "Devices": "Devices",
-        "Streams": "Streams"
+        "Streams": "rivi"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Non licebit tibi hunc rivum iungere.",
+        "streamTitle": "{{1}} vocationem vivam incepit",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Connectens",
+            "microphoneBtn": "Admitte Microphone",
+            "cameraBtn": "Admitte Camera",
+            "cameraAndMicrophoneBtn": "Admitte Camera et Microphone"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
+            "micIsOff": "Mic non vigilat",
+            "micIsOn": "Mic est on",
+            "cameraIsOff": "Camera non vigilat",
+            "cameraIsOn": "Camera on",
+            "screenSharingIsOn": "Screensharing in",
             "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "joinNow": "Iungere Call"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Instructiones",
+            "permissionDenied": "Permissio pro {{kind}} negavit. Uti placet, hos gradus sequere:",
+            "point1": "Perge ad &quot;Optiones&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and security&quot; -&gt; &quot;Site Optiones&quot; -&gt; &quot;Camera&quot; vel &quot;Site Optiones&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Aufer {999}} ab &quot;Tubus&quot; album"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Instructiones",
+            "permissionDenied": "Permissio pro {{kind}} negavit. Quaeso, hanc paginam reload et confirma aditum ad {{kind}} colloquium iungere."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Instructiones",
+            "permissionDenied": "Permissio pro {{kind}} negavit. Uti placet, hos gradus sequere:",
+            "point1": "Vade ad Android Occasus",
+            "point2": "Apertum &quot;Apps &amp; notificationes&quot;",
+            "point3": "Inveni &quot;{999}&quot; et aperi",
+            "point4": "Tap in Permissionibus",
+            "point5": "Admitte"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Instructiones",
+            "permissionDenied": "Permissio pro {{kind}} negavit. Uti placet, hos gradus sequere:",
+            "point1": "Vade ad iOS Optiones",
+            "point2": "Apertum &quot;Privacy&quot;",
+            "point3": "Inveni {999}} et aperi",
+            "point4": "Inveni &quot;{999}&quot; et da"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Accessistis ad cubiculum",
+            "joining": "Coniungens: {{userName}}",
+            "sbLeftRoom": "{{userName}} cubiculum discessit",
+            "switchingRoom": "Commutandi locus...",
+            "forceDisconnecting": "V seconds eris in disiungitur",
+            "forceDisconnectingImmediately": "Tu disiungitur ab hospite",
+            "youLeftRoom": "Locus egressus es",
+            "codeCopied": "Locus egressus es",
+            "sbBeganFbLive": "{{userName}} hanc vocationem evulgare incepit in Facebook",
+            "sbStoppedFbLive": "{{userName}} hanc vocationem emittere in Facebook",
+            "youBeganFbLive": "Incepisti hanc vocationem in Facebook",
+            "youStoppedFbLive": "Hoc vocationem in Facebook diffundere desiisti",
+            "youStartedLive": "Hanc vocationem ad consuetudinem RTMP evulgandam coepisti",
+            "youStoppedLive": "Hoc vocationem ad consuetudinem RTMP emissiones diffundere cessasti",
+            "sbStartedLiveStreaming": "{{userName}} incepit vivere",
+            "sbStoppedLiveStreaming": "{{userName}} vitam finivit",
+            "liveStopped": "Error cum mittens video ad endpoint occurrit",
+            "youBeganVideoRecording": "Hoc colloquium incepistis",
+            "youStoppedVideoRecording": "Destitisti hoc colloquium",
+            "linkCopiedToCb": "Link copied ut clipboard",
+            "codeCopiedToCb": "Code copied ut clipboard",
+            "userHasNoVideo": "Participem non habet video",
+            "openInBrowserAlert": "Vinculum apertum in navigatro Safari ad colloquium iungere."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
+            "dialogTitle": "Video Occasus",
             "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
+            "screenSharing": "Screen Socius",
+            "shareAnotherScreen": "Participes aliud screen",
+            "turnOffCameras": "Illuminationes camera",
+            "turnOffVideo": "Averte camera \/ screen sharing",
+            "turnOffAudioInput": "tortor ligula muta",
+            "turnOffScreenSharing": "Illuminationes screen sharing",
+            "cameraIsTurnedOff": "Camera est off",
+            "micIsTurnedOff": "Tortor est off",
+            "startFBLive": "Satus Facebook Livestream",
+            "stopFBLive": "Subsisto Facebook Livestream",
+            "startRecording": "Satus Book",
+            "stopRecording": "Subsisto Book",
+            "start": "Satus",
+            "stop": "prohibere",
+            "recordingInProgress": "Recordatio est in progressu...",
+            "fbLiveTitle": "Titulus Livestream",
+            "fbLiveDescription": "Livestream describere tuum. Quod super eam est?",
+            "fbOnlyMeLiveAccess": "solum Me",
+            "fbFriendsAccess": "amici",
+            "fbPublicAccess": "Publica",
+            "publishOnTimeline": "Publica in timeline",
+            "publishToGroup": "Ad publica coetus",
+            "fbStartLive": "Ire live",
+            "fbStopLive": "Finis Livestream",
+            "streamingSettings": "Occasus",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "streamToRTMP": "Amnis ad morem RTMP",
+            "startBroadcasting": "Satus molestie lacus",
+            "broadcastingInProgress": "Progressus est radiophonicus, datus"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
+            "dialogTitle": "Audio Optiones",
+            "speakers": "Orator",
             "microphone": "Microphone"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
+            "dialogTitle": "Participem Occasus",
             "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
+            "floatingScreens": "Natantes Screens",
             "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "loudestExceptMe": "Maxima praeter Me",
+            "maximizeLoudest": "Maximize maxima",
             "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
+            "fullScreen": "Plena Screen",
             "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "turnOffCamera": "celare video",
+            "turnOffAudio": "Mutum audio",
+            "turnOffScreenSharing": "Celare screen sharing",
+            "turnOnCamera": "Ostende video",
+            "turnOnAudio": "audio unmute",
+            "turnOnScreenSharing": "Ostende screen sharing"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "streaming Occasus"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Conventus",
+            "MeetingEnded": "occurrens finita"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "invitatus",
+            "description": "Inbuxo ad invitationes"
         },
         "Streams\/resource": {
             "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "description": "amnis ad administrandi accessum ad a resource ac nuntiis de updates dispositis"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "ad recipiendum updates de progressus ad certum opus",
+            "displayType": "Negotium"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
+            "description": "genus munia",
             "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "communis usus ad membra communitatis",
+            "displayType": "Communia experientia membra communitatis"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "salutem quibus a user potest inducere se",
+            "displayType": "salutatio"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Numerus",
+            "description": "numerus mathematica"
         },
         "Streams\/date": {
             "displayType": "Date",
             "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Textum",
+            "description": "corpus illud"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Textum",
+            "description": "parvum corpus text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Textum",
+            "description": "medium corpus text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Inscriptio electronica",
+            "description": "inscriptio electronica"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Numerus telephonicus",
+            "description": "numerus telephonicus"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "link in web"
         },
         "Streams\/image": {
             "displayType": "Image",
             "description": "visual image",
-            "newItem": "Add Image"
+            "newItem": "Imaginem addere"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Imago Gallery",
+            "description": "gallery imaginum"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "album cui varia media comparatur"
         },
         "Streams\/file": {
             "displayType": "File",
             "description": "uploaded file",
-            "newItem": "Add File"
+            "newItem": "Tabularium addere"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip",
-            "newItem": "Add Audio"
+            "newItem": "Adde Audio"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
+            "displayType": "Video clip",
             "description": "video clip",
             "newItem": "Add Video"
         },
         "Streams\/pdf": {
             "displayType": "PDF document",
             "description": "PDF document",
-            "newItem": "Add PDF"
+            "newItem": "Adde PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "Vivamus audio vel video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Categoria",
+            "description": "genus ad quod alii rivi referri possunt"
         },
         "Streams\/participating": {
             "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "description": "flumina comparantur \/ finitimus huic cum usor coniungit \/ folia"
         },
         "Streams\/interest": {
             "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "description": "constituit user scriptor interest in quadam topic"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "advenientis",
+            "description": "destinatum nuntiis ab aliis users"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Colloquium",
+            "description": "colloquium inter utentes cum historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Real-Tempus Call",
+            "description": "verum tempus video \/ audio vocatio"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Quaestione",
+            "description": "quaestio stream"
         },
         "Streams\/answer": {
             "displayType": "Answer",
-            "description": "answer stream"
+            "description": "responsum amnis"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "vocat",
+            "description": "genus pro rivi\/webrtc",
+            "MaxRelationsExceeded": "Max vocat exceditur"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "typus pagina titulum",
+        "ModTab": "Mutare Item",
+        "Save": "salvare",
+        "Delete": "Delere",
         "Submenu": "Submenu"
     },
     "audio": {
         "record": "Record",
         "reset": "Reset",
         "edit": "Edit",
-        "title": "title",
+        "title": "titulus",
         "description": "description",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "URL constitue",
+        "save": "salvare",
+        "setClip": "Tonde de Clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Non audio fontem",
+        "uploadLimit": "Magnitudo fasciculi max: {{size}}",
+        "errorFileSize": "Dolemus, sed file magna nimis.<br> Magnitudo fasciculi max{999}} est"
     },
     "video": {
         "reset": "Reset",
         "edit": "Edit",
-        "title": "title",
+        "title": "titulus",
         "description": "description",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "URL constitue",
+        "save": "salvare",
+        "setClip": "Tonde de Clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Non video fontem",
+        "uploadLimit": "Magnitudo fasciculi max: {{size}}",
+        "errorFileSize": "Dolemus, sed file magna nimis.<br> Magnitudo fasciculi max{999}} est"
     },
     "pdf": {
         "reset": "Reset",
         "edit": "Edit",
-        "title": "title",
+        "title": "titulus",
         "description": "description",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "URL constitue",
+        "save": "salvare",
+        "setClip": "Tonde de Clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Nulla pdf fons",
+        "uploadLimit": "Magnitudo fasciculi max: {{size}}",
+        "errorFileSize": "Dolemus, sed file magna nimis.<br> Magnitudo fasciculi max{999}} est"
     },
     "image": {
         "reset": "Reset",
         "edit": "Edit",
-        "title": "title",
+        "title": "titulus",
         "description": "description",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
+        "setUrl": "URL constitue",
+        "save": "salvare",
         "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "imageTitle": "Imago titulus",
+        "setClip": "Tonde de Clip",
+        "invalidURL": "Aliquam URL",
+        "invalidFile": "Aliquam File",
+        "errorNoSource": "Nulla imago fons",
+        "uploadLimit": "Magnitudo fasciculi max: {{size}}",
+        "errorFileSize": "Dolemus, sed file magna nimis.<br> Magnitudo fasciculi max{999}} est"
     },
     "questions": {
-        "Questions": "Questions",
+        "Questions": "Quaestiones",
         "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
+        "AnswerQuestion": "Quaestione responde",
+        "SetYourAnswer": "Obsecro quaestio",
+        "NewQuestion": "Nova quaestio",
+        "NewAnswer": "Novum Answer",
+        "AnswerDetails": "Responde Details",
         "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "answerOptionExclusive": "Proprie",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
+        "FreeAnswer": "Responsum tuum hic scribere",
+        "SaveQuestion": "Serva Quaestio",
+        "SaveAnswer": "Salvum Answer",
+        "AddAnotherAnswer": "Adde aliud responsum",
+        "ErrorAnswers": "Quaeso adde etiam unum respondere",
+        "AlreadyAnswered": "Iam respondit",
+        "TitlePlaceholder": "Typus quaeris",
+        "ContentPlaceholder": "Pone hic informationis informationis ad auxilium hominum responde",
+        "ErrorTitle": "Quaeritur",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
+        "NewExperience": "Nova experientia",
+        "DefineTitle": "Quaeso definias titulum",
         "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "vocat",
+        "MaxCalls": "Max vocat",
+        "Update": "Renovatio",
+        "NoCallsYet": "No vocat adhuc",
+        "CallReasonTitle": "Quid est hoc de vocatione?",
+        "WaitingRoom": "Expectantes locus"
     }
 }

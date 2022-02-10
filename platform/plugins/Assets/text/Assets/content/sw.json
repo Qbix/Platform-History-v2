@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Gusa ili kulipa"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: malipo yamechakatwa kwa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Asante kwa malipo yako kwa {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} alijisajili kwa {{plan.title}}",
+        "YouSubscribedTo": "Umejisajili kwa {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Unapata malipo ya {{displayAmount}} kutoka kwa {{call 'publisher.displayName'}} kwa &quot;{1001}}&quot;",
+        "HasBeenCharged": "Ala, hii ni kukujulisha tu {{1}} imetozwa {{2}} kwa {{3}} na {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Asante kwa malipo yako ya &quot;{999}}&quot;",
+        "HavePaid": "Hujambo {{1}}, huu ni uthibitisho wa haraka kwamba umelipa {{2}} kwa {{3}} kwa {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Habari juu ya agizo",
+        "PaymentMethod": "Njia ya malipo",
+        "ContactInfo": "Maelezo ya mawasiliano",
+        "Pay": "Lipa"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Mwaliko umekubaliwa na {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} umeweka jina la kwanza",
+        "Streams_user_lastname": "{{invitedUserName}} imeweka jina la mwisho",
+        "Streams_user_icon": "{{invitedUserName}} ikoni iliyoingizwa",
+        "Places_user_location": "{{invitedUserName}} eneo limeingizwa",
+        "Streams_greeting": "{{invitedUserName}} aliingia salamu",
+        "YouHaveCreditsToStart": "Una {999}} mikopo ya kuanza",
+        "PaymentFor": "Malipo ya &quot;{999}}&quot;",
+        "PaymentTo": "Malipo kwa {{1}}",
+        "PaymentToUser": "Malipo kwa {{toUserName}}",
+        "CreatePaidStream": "kwa kuunda {{toStreamName}}",
+        "JoinedPaidStream": "kwa kuhifadhi katika &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "kwa kuunda jumuiya &quot;{999}}&quot;",
+        "LeftPaidStream": "kama urejeshaji wa pesa uliyohifadhi katika &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Umenunua {{amount}} mikopo",
+        "BonusCredits": "Salio la bonasi {{amount}}",
+        "BuyAmountCredits": "Nunua {{amount}} mikopo",
+        "WatchClip": "Umejipatia {{amount}} salio kwa kutazama {{fromStreamTitle}}",
+        "MissingCredits": "Mikopo inayokosekana",
+        "YouMissingCredits": "Unahitaji salio la ziada {{amount}} ili kuendelea.",
+        "BuyCredits": "Nunua mikopo",
+        "BuyBonus": "Kununua {{amount}} salio mara moja, kutapelekea {{bonus}} bonasi ya mikopo.",
+        "Buy": "Nunua",
+        "PurchaseCredits": "Kununua Mikopo",
+        "Credits": "Mikopo",
+        "ErrorInvalidAmount": "Kiasi ni batili",
+        "ErrorInvalidCurrency": "Kwa bahati mbaya bado hatutumii sarafu {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} mikopo",
+            "BonusCredits": "{{amount}} mikopo"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Tarehe",
+        "Amount": "Kiasi",
+        "Description": "Maelezo",
+        "Client": "Mteja",
+        "To": "kwa",
+        "From": "kutoka",
+        "SeeHistory": "Angalia historia ya malipo ya {{1}}",
+        "HistoryEmpty": "Bado huna data",
+        "PaymentFor": "Imetuma{999}} salio",
+        "PaymentTo": "Imetuma{999}} salio",
+        "PaymentToUser": "Imetuma {{amount}} salio",
+        "CreatePaidStream": "Umetumia {{amount}} mikopo",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Umejipatia {{amount}} mikopo",
+            "-": "Umetumia {{amount}} mikopo"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Umejipatia {{amount}} salio",
+            "-": "Umetumia {{amount}} mikopo"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Umepokea {{amount}} salio",
+            "-": "Imetuma{999}} salio"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Umetumia {{amount}} mikopo",
+        "BoughtCredits": "Umenunua {{amount}} mikopo",
+        "BonusCredits": "Nimepata mikopo {{amount}} ya bonasi",
+        "InviteAcceptedBy": "Umejipatia {{amount}} mikopo",
+        "Streams_user_firstname": "Umejipatia {{amount}} salio",
+        "Streams_user_lastname": "Umejipatia {{amount}} salio",
+        "Streams_user_icon": "Umejipatia {{amount}} salio",
+        "Places_user_location": "Umejipatia {{amount}} mikopo",
+        "Streams_greeting": "Umejipatia {{amount}} salio",
+        "YouHaveCreditsToStart": "Umejipatia {{amount}} salio"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Weka Taarifa ya Malipo",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Anza Usajili",
+            "message": "Je, ungependa kujiandikisha kwa {{title}}?",
+            "ok": "sawa",
+            "cancel": "Ghairi"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kadi ya mkopo au ya benki",
+        "SubscribePayment": "Jisajili Malipo",
+        "ImmediatePayment": "Malipo ya Hapo Hapo"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Weka Taarifa ya Malipo",
+        "BuyAmountCredits": "Nunua {{amount}} mikopo",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Fanya malipo",
+            "message": "Je, unakubali kulipa {{symbol}}{{amount}}?",
+            "ok": "sawa",
+            "cancel": "Ghairi"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Mikopo",
+            "description": "hufuatilia mikopo na malipo"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Mpango wa Usajili",
+            "description": "mpango wa usajili"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Usajili",
+            "description": "usajili"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Bidhaa",
+            "description": "bidhaa inayouzwa"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Huduma",
+            "description": "huduma inayotolewa"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Umejipatia {{amount}} mikopo"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Umenunua {{amount}} mikopo"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Salio la bonasi {{amount}}"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Umetumia {{amount}} mikopo"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Imetuma {{amount}} salio kwa {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Umepokea {{amount}} salio kutoka kwa {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Huduma Mpya",
+            "TitlePlaceholder": "Jina la huduma",
+            "PricePlaceholder": "Weka bei",
+            "LinkPlaceholder": "weka kiungo cha maelezo ya ziada",
+            "DescriptionPlaceholder": "Maelezo ya huduma",
+            "SaveService": "Hifadhi Huduma",
+            "SelectRequiredParticipants": "Washiriki Wanaohitajika"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Dhibiti Violezo vya Huduma",
+        "ManageServices": "Dhibiti Huduma",
+        "Free": "Bure",
+        "OptionalContribution": "Mchango wa hiari",
+        "RequiredPayment": "Malipo yanayohitajika",
+        "AreYouSureDelete": "Je, una uhakika unataka kufuta huduma hii?",
+        "AmountServicesRelated": "Kuna {{amount}} vitu vinavyopatikana vinavyohusiana na huduma hii. Wao pia wataondolewa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Taarifa kuhusu {{title}} NFT",
+        "Description": "Maelezo ya kina kuhusu NFT",
+        "FixedBid": "Nunua Sasa",
+        "CurrentBid": "Zabuni ya sasa",
+        "StartingIn": "Kuanzia ndani",
+        "EndingIn": "Kumalizia",
+        "CreateNFT": "Unda NFT",
+        "TitlePlaceholder": "Ipe NFT yako jina",
+        "DescriptionPlaceholder": "Ipe NFT yako maelezo",
+        "CreateYourNFT": "Unda NFT yako",
+        "Royalties": "Mirabaha",
+        "RoyaltyPlaceholder": "Hiari. Kiasi kinacholipwa kwa mtayarishi kabla ya kuhamisha.",
+        "ExpirationDate": "Tarehe ya kumalizika muda wake",
+        "StartingDate": "Tarehe ya Kuanza",
+        "BidsBelowThisAmount": "Zabuni zilizo chini ya kiasi hiki hazitaruhusiwa",
+        "MinimumBid": "Kima cha chini cha zabuni",
+        "Price": "Bei",
+        "Owner": "Mmiliki",
+        "SelectCategory": "Chagua kategoria",
+        "Day": "Siku",
+        "Days": "Siku",
+        "Hour": "Saa",
+        "Hours": "Saa",
+        "Minute": "Dakika",
+        "Minutes": "Dakika",
+        "Second": "Pili",
+        "Seconds": "Sekunde",
+        "SalesCreator": "mauzo yataenda kwa muundaji",
+        "Details": "Maelezo",
+        "Bids": "Zabuni",
+        "History": "Historia",
+        "LoremIpsum": "Lorem Ipsum ni maandishi dumu ya tasnia ya uchapishaji na uchapaji.",
+        "PutOnSale": "Weka kwenye mauzo",
+        "PutOffSale": "Ondoka kwenye mauzo",
+        "Transfer": "Uhamisho",
+        "Update": "Sasisha",
+        "UpdateToken": "Sasisha Tokeni",
+        "CreateToken": "Tengeneza Tokeni",
+        "PlaceBid": "Zabuni ya Mahali",
+        "SoldOut": "Inauzwa",
+        "NftName": "Jina la NFT",
+        "DescribeYourNFT": "Tafadhali eleza NFT yako",
+        "NftPicture": "Picha ya kuwakilisha NFT",
+        "NftMovie": "Filamu ya kuwakilisha NFT",
+        "UploadMovie": "Pakia filamu",
+        "MovieSource": "Chanzo cha Sinema",
+        "UploadFile": "Pakia faili",
+        "PutOnMarketplace": "Weka sokoni",
+        "InstantPurchase": "Weka bei ili kuruhusu watumiaji kununua NFT yako papo hapo",
+        "FixedPrice": "Bei isiyobadilika",
+        "TimedAuction": "Mnada uliopitwa na wakati",
+        "OpenForBids": "Fungua kwa zabuni",
+        "PriceOnePiece": "Weka bei ya kipande kimoja",
+        "EnterMinimumBid": "Weka Kima cha chini cha zabuni",
+        "SelectChain": "Chagua mnyororo",
+        "WrongChain": "NFT hii iliundwa chini ya &quot;{{chain}}&quot;. Tafadhali tumia mnyororo huu.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Inaleta NFT&#39;s",
+            "fileNotFound": "Samahani, faili ya CSV haikupatikana.",
+            "fileEmpty": "Samahani, faili ya CSV haina chochote.",
+            "userIdNotFound": "mtumiaji yupo lakini kitambulisho tupu",
+            "errorLine": "mstari {{1}}",
+            "fieldNotFound": "Sehemu inayohitajika &quot;{{1}}&quot; haijapatikana",
+            "taskStreamInvalid": "mtiririko wa kazi ni batili",
+            "instructionsEmpty": "maagizo ya mtiririko wa kazi tupu",
+            "complete": "Kamilisha",
+            "activateUsers": "kutuma ujumbe wa kuwezesha kwa watumiaji?",
+            "importProgress": "Maendeleo",
+            "importOptions": "Chaguzi",
+            "sampleCSV": "Pakua Sampuli ya CSV",
+            "fileLabel": "Pakia Lahajedwali:",
+            "errorsTitle": "Hitilafu zimetokea"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Chuja kulingana na Mikusanyiko ya NFT",
+                "ShowNFTCollection": "Onyesha mkusanyiko wa NFT katika ...",
+                "AllCollections": "Mikusanyiko Yote"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Waandishi Wote",
+                "AllUsers": "Kila mtu",
+                "FilterByAuthors": "Chuja kwa Waandishi"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Rudi kwenye Mkusanyiko"
     }
 }

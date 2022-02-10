@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "İstek sırasında hata {{status}}",
+        "canceled": "istek iptal edildi",
+        "500": "İç Sunucu Hatası",
+        "404": "Bulunamadı: {{url}}",
+        "501": "istek kesintiye uğradı"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Oturum süresi doldu. Sayfayı yenileyin ve tekrar deneyin.",
+        "otherDomain": "{{baseUrl}} adresindeki yabancı etki alanına yönelik etki alanları arası istek engellendi"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "musluk",
+        "click": "Tıklayın",
+        "yes": "Evet",
+        "no": "Hayır",
+        "Tap": "Musluk",
+        "Click": "Tıklamak",
+        "Yes": "Evet",
+        "No": "Numara"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Ocak ayı",
+        "2": "Şubat",
+        "3": "Mart",
+        "4": "Nisan",
+        "5": "Mayıs ayı",
+        "6": "Haziran",
+        "7": "Temmuz",
+        "8": "Ağustos",
+        "9": "Eylül",
+        "10": "Ekim",
+        "11": "Kasım",
+        "12": "ARALIK AYI"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "ikinci",
+        "seconds": "saniye",
+        "minute": "dakika",
+        "minutes": "dakika",
+        "hour": "saatler",
+        "day": "gün",
+        "days": "günler",
+        "week": "hafta",
+        "weeks": "haftalar",
+        "month": "ay",
+        "months": "aylar",
+        "year": "yıl",
+        "years": "yıllar",
+        "decade": "on yıl",
+        "decades": "onlarca yıl",
+        "century": "Yüzyıl",
+        "centuries": "yüzyıllar"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Lütfen mikrofonunuza erişime izin verin",
+        "record": "Kayıt",
+        "recording": "Kayıt",
+        "remains": "kalıntılar",
+        "maximum": "maksimum",
+        "playing": "oynamak",
+        "recorded": "kaydedildi",
+        "clip": "klips",
+        "discard": "atmak",
+        "encoding": "kodlama"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klips",
+        "errorNoSource": "Video kaynağı yok",
+        "SkipAfter": "sonra atla",
+        "Skip": "Atlamak"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klips",
+        "errorNoSource": "pdf kaynağı yok"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Klip Başlangıcını Ayarla",
+        "ClipStart": "Klip Başlangıç",
+        "SetClipEnd": "Klip Sonunu Ayarla",
+        "ClipEnd": "Klip Sonu",
+        "StartMoreEnd": "Başlangıç konumu, bitiş konumundan fazla olamaz",
+        "EndLessStart": "Bitiş konumu, başlangıç konumundan daha az olamaz",
+        "WhichInvalid": "Argüman &#39;hangisi&#39; geçersiz"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Uyarmak"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Teyit etmek",
+        "ok": "Evet",
+        "cancel": "Numara"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Çabuk",
+        "ok": "Gitmek"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "daha fazla",
+        "Menu": "Menü"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Dosya okunurken hata oluştu",
+        "errorType": "Üzgünüz, ancak bu dosya türü desteklenmiyor",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Ne yapmak istersin?",
+            "photo": "Yeni fotoğraf çek",
+            "library": "Kitaplıktan seç"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Lütfen daha büyük bir resim seçin.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Boyutu ve konumu ayarlayın",
+            "touchscreen": "Yakınlaştırmak ve sürüklemek için parmaklarınızı kullanın",
+            "notTouchscreen": "Yakınlaştırmak ve sürüklemek için farenizi ve tekerleğinizi kullanın"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "dün gece",
+        "lastEvening": "son arife",
+        "yesterday": "dün",
+        "thisMorning": "bu sabah",
+        "today": "bugün",
+        "tonight": "Bu gece",
+        "tomorrowMorning": "sabah erken",
+        "tomorrow": "yarın",
+        "hoursAgo": "{{h}} saat önce",
+        "hourAgo": "{{h}} saat önce",
+        "minuteAgo": "{{m}} dakika önce",
+        "minutesAgo": "{{m}} dakika önce",
+        "secondAgo": "{{s}} saniye önce",
+        "secondsAgo": "{{s}} saniye önce",
+        "fewSecondsAgo": "saniyeler önce",
+        "rightNow": "şu anda",
+        "inSecond": "{{s}} saniye içinde",
+        "inSeconds": "{{s}} saniye içinde",
+        "inMinute": "{{m}} dakika içinde",
+        "inMinutes": "{{m}} dakika içinde",
+        "inHour": "{{h}} saat içinde",
+        "inHours": "{{h}} saat içinde",
+        "inUnderMinute": "1 dakikanın altında"
     }
 }

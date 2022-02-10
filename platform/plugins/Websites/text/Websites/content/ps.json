@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "د ودې لپاره لینک",
+                "startDate": "پیل نېټه",
+                "startTime": "د پيل وخت",
+                "endDate": "د پای نیټه",
+                "endTime": "د پای وخت",
+                "budget": "بودیجه"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "د ګټو له مخې فلټر کړئ",
+                "FilterInterests": "د علاقې ټایپ کول پیل کړئ ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "دلچسپي",
+            "Location": "ځای"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "لاړ شه",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "لټون وکړئ",
+            "WriteToStartConversation": "د خبرو اترو پیل کولو لپاره خپل نظرونه ولیکئ",
+            "StartConversation": "خبرې اترې پیل کړئ",
+            "GotoConversation": "خبرو اترو ته لاړ شئ",
+            "reset": "بیا تنظیم کړئ",
+            "edit": "سمون",
+            "link": "لینک",
+            "setUrl": "URL ترتیب کړئ",
+            "save": "خوندي کړئ",
+            "setClip": "کلیپ پرې کړئ",
+            "invalidURL": "ناسم URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "د کیچ کولو لپاره فایل ډیر لوی دی. د دوتنې اعظمي اندازه {{size}}",
+        "InvalidPDF": "فایل یو معتبر PDF ندی",
+        "StartTypingTitleOrKeywords": "د سرلیک یا کلیمې ټایپ کول پیل کړئ ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "یو HTML سند چې مختلف کارونکي یې لیدلی او ترمیم کولی شي",
+            "displayType": "مقاله"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "په پریزنټشن کې یو سلایډ، کېدای شي HTML، آډیو او نور شامل وي.",
+            "displayType": "سلایډ"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "یو پریزنټشن چې مختلف سلایډونه لري",
+            "displayType": "پریزنټیشن"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "په ویب پاڼه کې د اعلاناتو واحد",
+            "displayType": "د اعلان واحد"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "د نوم لاندې د اعلاناتو واحدونو ګروپ کولو یوه لاره",
+            "displayType": "د اعلان ځای پرځای کول"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "د اعلان لپاره مینځپانګه",
+            "displayType": "تخلیقي اعلان کړئ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "د اعلاناتو کمپاین",
+            "displayType": "د اعلان کمپاین"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "د یوې ویب پاڼې استازیتوب کوي چې میټاډاټا یې سکریپ شوې وه",
+            "displayType": "ویب پاڼه"
         }
     }
 }

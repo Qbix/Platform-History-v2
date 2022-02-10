@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Hapa {{status}} i te wa e tono ana",
+        "canceled": "Kua whakakorehia te tono",
+        "500": "Hapa tūmau ā-roto",
+        "404": "Kāore i kitea: {{url}}",
+        "501": "I haukotia te tono"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Kua pau te wahanga. Tāmatahia te whārangi ka ngana anō.",
+        "otherDomain": "Kua aukatihia te tono rohe-whiti ki te rohe ke i {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
+        "tap": "paopao",
+        "click": "pawhiria",
+        "yes": "āe",
+        "no": "kahore",
         "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Click": "Pāwhiri",
+        "Yes": "Ae",
+        "No": "Kao"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Hanuere",
+        "2": "Pepuere",
+        "3": "Maehe",
+        "4": "Paenga-whāwhā",
+        "5": "Mei",
+        "6": "Hune",
+        "7": "Hōngongoi",
+        "8": "Akuhata",
+        "9": "Hepetema",
+        "10": "Oketopa",
+        "11": "Noema",
+        "12": "Hakihea"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "tuarua",
+        "seconds": "hēkona",
+        "minute": "meneti",
+        "minutes": "meneti",
+        "hour": "haora",
+        "day": "rā",
+        "days": "nga ra",
+        "week": "wiki",
+        "weeks": "wiki",
+        "month": "marama",
+        "months": "marama",
+        "year": "tau",
+        "years": "tau",
+        "decade": "tekau tau",
+        "decades": "tekau tau",
+        "century": "rautau",
+        "centuries": "rautau"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Whakaaetia te uru ki to hopuorooro",
+        "record": "Tuhia",
+        "recording": "Te tuhi",
+        "remains": "noho tonu",
+        "maximum": "mōrahi",
+        "playing": "Te purei",
+        "recorded": "Kua tuhia",
+        "clip": "topenga",
+        "discard": "Makahia",
+        "encoding": "Whakawaehere"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "topenga",
+        "errorNoSource": "Kaore he puna ataata",
+        "SkipAfter": "Tīpoka i muri",
+        "Skip": "Tīpoka"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "topenga",
+        "errorNoSource": "Karekau he puna pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Tautuhi Topenga Tīmata",
+        "ClipStart": "Topenga Tīmata",
+        "SetClipEnd": "Tautuhi Mutunga Topenga",
+        "ClipEnd": "Topenga Mutunga",
+        "StartMoreEnd": "Ko te tuunga timatanga kaua e neke ake i te tuunga mutunga",
+        "EndLessStart": "Ko te tuunga mutunga kaua e iti iho i te tuunga timatanga",
+        "WhichInvalid": "Tohenga &#39;he&#39; muhu"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Matohi"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Whakaū",
+        "ok": "Ae",
+        "cancel": "Kao"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Whakatairanga",
+        "ok": "Haere"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "atu",
+        "Menu": "Tahua"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Hapa te panui i te konae",
+        "errorType": "Aroha mai, engari kaore tenei momo kōnae i te tautokohia",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "He aha to hiahia ki te mahi?",
+            "photo": "Tangohia he whakaahua hou",
+            "library": "Tīpakohia mai i te whare pukapuka"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Tena koa whiriwhiria he ahua nui ake.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Whakaritehia te rahi me te waahi",
+            "touchscreen": "Whakamahia o maihao ki te topa me te toia",
+            "notTouchscreen": "Whakamahia to kiore me to wira ki te topa me te toia"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "inapo",
+        "lastEvening": "po whakamutunga",
+        "yesterday": "inanahi",
+        "thisMorning": "i tenei ata",
+        "today": "i tenei ra",
+        "tonight": "i tenei po",
+        "tomorrowMorning": "ata ata",
+        "tomorrow": "apopo",
+        "hoursAgo": "{{h}} haora i mua",
+        "hourAgo": "{{h}} haora i mua",
+        "minuteAgo": "{{m}} meneti i mua",
+        "minutesAgo": "{{m}} meneti i mua",
+        "secondAgo": "{{s}} tuarua i mua",
+        "secondsAgo": "{{s}} hekona i mua",
+        "fewSecondsAgo": "hekona i mua",
+        "rightNow": "inaianei tonu",
+        "inSecond": "i {{s}} tuarua",
+        "inSeconds": "i roto i {{s}} hēkona",
+        "inMinute": "i roto i {{m}} meneti",
+        "inMinutes": "i roto i {{m}} meneti",
+        "inHour": "i {{h}} haora",
+        "inHours": "i {{h}} haora",
+        "inUnderMinute": "i raro i te 1 meneti"
     }
 }

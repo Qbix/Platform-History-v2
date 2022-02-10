@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "התוכן הזה מוסתר ממך."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "פריט חדש"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "אנשים שהזמנתי",
+        "Streams\/invitedMe": "מי הזמין אותי",
+        "DoYouAgree": "אתה מסכים?",
+        "Yes": "כן",
+        "No": "לא"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "מה תחומי העניין שלך?",
+        "CanAdd": "אם אתה עדיין לא מוצא את מה שאתה מחפש, אתה יכול להוסיף עניין חדש למטה:",
+        "TrySynonyms": "לא רואה את זה? נסה כמה מילים נרדפות.",
+        "AddUnderCategory": "הוסף תחת קטגוריה...",
+        "Other": "אַחֵר",
+        "Unlisted": "לא רשום"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "ההודעה סומנה לבדיקת מנהל. הקש שוב כדי לבטל את הסימון.",
+        "noOneSaid": "אף אחד לא אמר כלום",
+        "closeChatButton": "סגור צ&#39;אט",
+        "closeChatConfirmTitle": "לסגור את הצ&#39;אט הזה?",
+        "closeChatConfirm": "האם אתה בטוח שברצונך לסגור את הצ&#39;אט הזה?",
+        "Subscribed": "התראות מופעלות",
+        "Unsubscribed": "הודעות מושתקות",
+        "closeChatConfirmYes": "כן",
+        "closeChatConfirmNo": "לא",
+        "earlierComments": "הערות קודמות",
+        "startedConversation": "התחילה שיחה",
+        "RealTimeCall": "שיחה בזמן אמת",
+        "SearchByName": "חפש לפי שם",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} מבקר בצ&#39;אט",
+            "Join": "{{displayName}} הצטרף לצ&#39;אט",
+            "Leave": "{{displayName}} עזב את הצ&#39;אט",
+            "RelatedTo": "{{displayName}} התחילה {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "לנהל את מנויי האימייל שלך",
+        "IfUnsubscribe": "אם אתה רוצה לבטל את המנוי",
+        "*": "הודעה {{& message.fields.type}} אל {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} אמר: {{& message.content}}",
+        "Streams\/changed": "שינויים ב-{{stream.fields.title}}",
+        "Streams\/invite": "הוזמנת ל-{{& stream.fields.title}}",
+        "Streams\/announcement": "הודעה ב-{{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} שינה את הגישה ב-{{& stream.fields.title}}",
+        "Streams\/chat\/edit": "הודעת הצ&#39;אט נערך ב-{{& stream.fields.title}}",
+        "Streams\/chat\/remove": "הודעת צ&#39;אט הוסרה ב-{{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} נסגר",
+        "Streams\/task\/progress": "התקדמות שנעשתה ב-{{stream.fields.title}}",
+        "Streams\/task\/complete": "המשימה הושלמה: {{stream.fields.title}}",
+        "Streams\/task\/error": "שגיאה במהלך: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: הודעה נכנסת",
+        "Streams\/relatedTo\/Streams\/call": "שיחה חדשה החלה ב-{{toTitle}}",
+        "Streams\/relatedTo\/*": "חדש {{relationDisplayType}} ב-{{toTitle}}",
+        "Streams\/relatedFrom\/*": "נוסף ל-{{toTitle}} בתור {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} הזכיר אותך בתגובה",
+        "Streams\/call": "{{displayName}} התחילה שיחה בזמן אמת"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "להזמין",
+        "messageContent": "{{displayName}} הזמין אותך ל-{{inviteUrl}}",
+        "youCanNowPaste": "כעת תוכל להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "בחר מתוך אנשי הקשר שלך",
+            "chooseAgainFromContacts": "בחר שוב מתוך אנשי קשר",
+            "inviteSelectedContacts": "הזמן אנשי קשר נבחרים",
+            "selectFromContacts": "בחר מתוך אנשי קשר",
+            "userChooserPlaceholder": "חפש לפי שם",
+            "photo": "צלם תמונה",
+            "photoInstruction": "אם האדם שסרק את קוד ה-QR שלך נמצא מולך, צלם אותו",
+            "to": "אל: {{Stream Title}}",
+            "go": "ללכת",
+            "title": "להזמין",
+            "placeholder": "מספר נייד או כתובת אימייל",
+            "orInvite": "או הזמן אנשים באמצעות:",
+            "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה",
+            "shareOrCopyLink": "{{ClickOrTap}} כדי לשתף או להעתיק את קישור ההזמנה",
+            "QR": "{{ClickOrTap}} ליצירת קוד QR",
+            "QRtitle": "סרוק את קוד ה-QR הזה",
+            "QRscanned": "הם סרקו את זה!",
+            "scannedQR": "{{ClickOrTap}} אם הקוד נסרק",
+            "byEmail": "אימייל",
+            "byText": "טֶקסט",
+            "byFacebook": "פייסבוק",
+            "byTwitter": "טוויטר"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "היי, תבדוק את זה",
+            "PleaseVisitLink": "אנא בקר בקישור הבא:",
+            "InvitingYou": "אני מזמין אותך ל-{{title}}",
+            "HasInvitedYou": "{{displayName}} הזמין אותך ל-{{title}}",
+            "HasMentionedYou": "{{displayName}} הזכיר אותך ב&quot;{{title}}&quot;",
+            "YOUAREINVITED": "אתם מוזמנים!",
+            "AcceptInvite": "קבל הזמנה"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "הוזמנת ל-{{title}}. הקש על {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "פרסם הודעה <em>{{message.fields.type}}<\/em> אל {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "הגיב על",
+            "startedCallIn": "התחילה שיחה פנימה",
+            "in": "ב",
+            "body": "ב-{{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "פורסם ל",
+                "byAvatar": "מאת {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "יש {{instructions.fromDisplayType}} חדש",
+                "byAvatar": "נוסף על ידי {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "ההזמנות נשלחות מהמספר שלנו, שחבריך עדיין לא מזהים. המשך עם טקסט מהיר כדי ליידע אותם שההזמנה הגיעה ממך, וביקש מהם ללחוץ על הקישור.",
+            "confirm": "ההזמנות נשלחות מהמספר שלנו, שחבריך עדיין לא מזהים. האם תרצה להמשיך עם טקסט מהיר כדי ליידע אותם שההזמנה הגיעה ממך, לבקש מהם ללחוץ על הקישור.",
+            "check": "היי, זה עתה שלחתי לך הזמנה לאפליקציית {{app}}. אנא בדוק את ה-SMS שלך ולחץ על הקישור!",
+            "CheckYourMobile": "אנא בדוק SMS ופעל לפי ההוראות!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "הזמנות נשלחות מהדומיין שלנו, שחבריך עדיין לא מזהים. המשך עם טקסט מהיר כדי ליידע אותם שההזמנה הגיעה ממך, וביקש מהם ללחוץ על הקישור.",
+            "confirm": "הזמנות נשלחות מהדומיין שלנו, שחבריך עדיין לא מזהים. האם תרצה להמשיך עם טקסט מהיר כדי ליידע אותם שההזמנה הגיעה ממך, לבקש מהם ללחוץ על הקישור.",
+            "subject": "קיבלת הזמנה?",
+            "body": "היי, זה עתה שלחתי לך הזמנה לאפליקציית {{app}}. אנא בדוק את האימייל שלך ולחץ על הקישור שם!",
+            "CheckYourEmail": "אנא בדוק את האימייל שלך ופעל לפי ההוראות!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "כותרת",
+        "Subscribed": "נרשם",
+        "Participants": "משתתפים",
+        "AreYouSureRemoveIdentifier": "האם אתה בטוח להסיר מזהה זה?",
+        "AreYouSureUnsubscribeIdentifier": "האם אתה בטוח לבטל את הרישום של המזהה הזה? זה יכבה את ההתראות למזהה הזה.",
+        "AreYouSureUnsubscribeDevice": "האם אתה בטוח לבטל את הרישום של המכשיר הזה? זה יכבה את ההתראות למכשיר הזה.",
+        "AreYouSureRemoveParticipant": "האם אתה בטוח שברצונך להסיר את המשתתף הזה?",
+        "RemoveParticipant": "הסר את המשתתף",
+        "Identifiers": "מזהים",
+        "Devices": "התקנים",
+        "Streams": "זרמים"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "אין לך הרשאה להצטרף לזרם הזה.",
+        "streamTitle": "{{1}} התחילה שיחה חיה",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "מְקַשֵׁר",
+            "microphoneBtn": "אפשר מיקרופון",
+            "cameraBtn": "הפעל את המצלמה",
+            "cameraAndMicrophoneBtn": "אפשר מצלמה ומיקרופון"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "המיקרופון כבוי",
+            "micIsOn": "המיקרופון פועל",
+            "cameraIsOff": "המצלמה כבויה",
+            "cameraIsOn": "המצלמה מופעלת",
+            "screenSharingIsOn": "שיתוף מסך מופעל",
+            "screenSharingIsOff": "שתף מסך",
+            "joinNow": "הצטרף לשיחה"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "הוראות",
+            "permissionDenied": "ההרשאה עבור {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
+            "point1": "עבור אל &quot;הגדרות&quot; -&gt; &quot;מתקדם&quot; -&gt; &quot;פרטיות ואבטחה&quot; -&gt; &quot;הגדרות אתר&quot; -&gt; &quot;מצלמה&quot; או &quot;הגדרות אתר&quot; -&gt; &quot;מיקרופון&quot;",
+            "point2": "הסר את {{hostname}} מרשימת &quot;חסום&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "הוראות",
+            "permissionDenied": "ההרשאה עבור {{kind}} נדחתה. טען מחדש את הדף הזה ואשר את הגישה אל {{kind}} כדי להצטרף לוועידה."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "הוראות",
+            "permissionDenied": "ההרשאה עבור {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
+            "point1": "עבור להגדרות אנדרואיד שלך",
+            "point2": "פתח את &quot;אפליקציות והתראות&quot;",
+            "point3": "מצא את &quot;{{communityName}}&quot; ופתח אותו",
+            "point4": "הקש על הרשאות",
+            "point5": "הפעל את {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "הוראות",
+            "permissionDenied": "ההרשאה עבור {{kind}} נדחתה. כדי להשתמש בו אנא בצע את השלבים הבאים:",
+            "point1": "עבור להגדרות iOS שלך",
+            "point2": "פתח את &quot;פרטיות&quot;",
+            "point3": "מצא את {{kind}} ופתח אותו",
+            "point4": "מצא את &quot;{{communityName}}&quot; והפעל"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "הצטרפת לחדר",
+            "joining": "מצטרף: {{userName}}",
+            "sbLeftRoom": "{{userName}} יצא מהחדר",
+            "switchingRoom": "מחליף חדר...",
+            "forceDisconnecting": "תתנתק תוך 5 שניות",
+            "forceDisconnectingImmediately": "ניתקת על ידי מארח",
+            "youLeftRoom": "יצאת מהחדר",
+            "codeCopied": "יצאת מהחדר",
+            "sbBeganFbLive": "{{userName}} החל לשדר את השיחה הזו בפייסבוק",
+            "sbStoppedFbLive": "{{userName}} הפסיק לשדר את השיחה הזו בפייסבוק",
+            "youBeganFbLive": "התחלת לשדר את השיחה הזו בפייסבוק",
+            "youStoppedFbLive": "הפסקת לשדר את השיחה הזו בפייסבוק",
+            "youStartedLive": "התחלת לשדר את השיחה הזו ל-RTMP מותאם אישית",
+            "youStoppedLive": "הפסקת לשדר את השיחה הזו ל-RTMP מותאם אישית",
+            "sbStartedLiveStreaming": "{{userName}} התחיל בשידור חי",
+            "sbStoppedLiveStreaming": "{{userName}} הסתיים בשידור חי",
+            "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה",
+            "youBeganVideoRecording": "התחלת להקליט את הוועידה הזו",
+            "youStoppedVideoRecording": "הפסקת להקליט את הוועידה הזו",
+            "linkCopiedToCb": "הקישור הועתק ללוח",
+            "codeCopiedToCb": "הקוד הועתק ללוח",
+            "userHasNoVideo": "למשתתף אין סרטון",
+            "openInBrowserAlert": "פתח קישור בדפדפן Safari כדי להצטרף לוועידה."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "הגדרות וידיאו",
+            "webCamera": "מצלמת רשת",
+            "screenSharing": "שיתוף מסך",
+            "shareAnotherScreen": "שתף מסך אחר",
+            "turnOffCameras": "כבה את המצלמה",
+            "turnOffVideo": "כבה את שיתוף המצלמה\/מסך",
+            "turnOffAudioInput": "השתקת מיקרופון",
+            "turnOffScreenSharing": "כבה את שיתוף המסך",
+            "cameraIsTurnedOff": "המצלמה כבויה",
+            "micIsTurnedOff": "המיקרופון כבוי",
+            "startFBLive": "התחל את הסטרימינג בשידור חי של פייסבוק",
+            "stopFBLive": "עצור את השידור החי של פייסבוק",
+            "startRecording": "התחל להקליט",
+            "stopRecording": "הפסק להקליט",
+            "start": "הַתחָלָה",
+            "stop": "תפסיק",
+            "recordingInProgress": "ההקלטה בעיצומה...",
+            "fbLiveTitle": "כותרת השידור החי",
+            "fbLiveDescription": "תאר את השידור החי שלך. על מה זה?",
+            "fbOnlyMeLiveAccess": "רק אני",
+            "fbFriendsAccess": "חברים",
+            "fbPublicAccess": "פּוּמְבֵּי",
+            "publishOnTimeline": "פרסם בציר הזמן",
+            "publishToGroup": "פרסם לקבוצה",
+            "fbStartLive": "לך תחיה",
+            "fbStopLive": "סיום שידור חי",
+            "streamingSettings": "הגדרות",
+            "fbEmbedCode": "לְשַׁבֵּץ",
+            "copy": "עותק",
+            "streamToRTMP": "הזרם ל-RTMP מותאם אישית",
+            "startBroadcasting": "התחל לשדר",
+            "broadcastingInProgress": "השידור בעיצומו"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "הגדרות אודיו",
+            "speakers": "רמקולים",
+            "microphone": "מִיקרוֹפוֹן"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "הגדרות משתתף",
+            "disconnect": "לְנַתֵק",
+            "floatingScreens": "מסכים צפים",
+            "tiledScreens": "מסכי אריחים",
+            "loudestExceptMe": "הכי חזק חוץ ממני",
+            "maximizeLoudest": "ממקסם הכי חזק",
+            "staticMaximized": "סטטי ממקסימום",
+            "fullScreen": "מסך מלא",
+            "manual": "מדריך ל",
+            "turnOffCamera": "הסתר סרטון",
+            "turnOffAudio": "השתקת אודיו",
+            "turnOffScreenSharing": "הסתר שיתוף מסך",
+            "turnOnCamera": "הצג וידאו",
+            "turnOnAudio": "בטל השתקת אודיו",
+            "turnOnScreenSharing": "הצג שיתוף מסך"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "הגדרות סטרימינג"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "פְּגִישָׁה",
+            "MeetingEnded": "הפגישה הסתיימה"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "מוזמן",
+            "description": "תיבת דואר נכנס להזמנות"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "מַשׁאָב",
+            "description": "זרם לניהול גישה למשאב ופרסום הודעות על עדכונים"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "לקבלת עדכונים על התקדמות במשימה מסוימת",
+            "displayType": "מְשִׁימָה"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "קטגוריה למשימות",
+            "displayType": "משימות"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "חוויה משותפת לחברי קהילה",
+            "displayType": "ניסיון משותף לחברי קהילה"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "ברכה שאיתה משתמש יכול להציג את עצמו",
+            "displayType": "בְּרָכָה"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "מספר",
+            "description": "מספר מתמטי"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "תַאֲרִיך",
+            "description": "תַאֲרִיך"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "טֶקסט",
+            "description": "גוף הטקסט"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "טֶקסט",
+            "description": "גוף טקסט קטן"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "טֶקסט",
+            "description": "גוף טקסט בינוני"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "כתובת דוא&quot;ל",
+            "description": "כתובת דוא&quot;ל"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "מספר טלפון",
+            "description": "מספר טלפון"
         },
         "Streams\/text\/url": {
-            "displayType": "URL",
-            "description": "link on the web"
+            "displayType": "כתובת אתר",
+            "description": "קישור באינטרנט"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "תמונה",
+            "description": "תמונה ויזואלית",
+            "newItem": "להוסיף תמונה"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "גלריית תמונות",
+            "description": "גלריית תמונות"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "אַלבּוֹם",
+            "description": "אלבום אליו קשורים מדיות שונות"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "קוֹבֶץ",
+            "description": "קובץ שהועלה",
+            "newItem": "הוסף קובץ"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "קליפ אודיו",
+            "description": "קליפ אודיו",
+            "newItem": "הוסף אודיו"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "סרטון וידאו",
+            "description": "סרטון וידאו",
+            "newItem": "הוסף וידאו"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "מסמך PDF",
+            "description": "מסמך PDF",
+            "newItem": "הוסף PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "שידור חי",
+            "description": "אודיו או וידאו חי"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "קטגוריה",
+            "description": "קטגוריה שאליה ניתן לקשר זרמים אחרים"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "אינדקס משתתף",
+            "description": "זרמים קשורים\/לא קשורים לזה כאשר משתמש מצטרף\/עוזב"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ריבית",
+            "description": "מייצג עניין של משתמש בנושא מסוים"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "נִכנָס",
+            "description": "יעד להודעות שנשלחו על ידי משתמשים אחרים"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "שִׂיחָה",
+            "description": "שיחה בין משתמשים, עם היסטוריה"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "שיחה בזמן אמת",
+            "description": "שיחת וידאו\/שמע בזמן אמת"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "שְׁאֵלָה",
+            "description": "זרם שאלות"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "תשובה",
+            "description": "זרם תשובות"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "שיחות",
+            "description": "קטגוריה עבור Streams\/webrtc",
+            "MaxRelationsExceeded": "חרג ממספר השיחות"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "הקלד את כותרת העמוד",
+        "ModTab": "שנה פריט",
+        "Save": "להציל",
+        "Delete": "לִמְחוֹק",
+        "Submenu": "תפריט משנה"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "תקליט",
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת URL",
+        "save": "להציל",
+        "setClip": "קליפ גזור",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור שמע",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת URL",
+        "save": "להציל",
+        "setClip": "קליפ גזור",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור וידאו",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת URL",
+        "save": "להציל",
+        "setClip": "קליפ גזור",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור pdf",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "אִתחוּל",
+        "edit": "לַעֲרוֹך",
+        "title": "כותרת",
+        "description": "תיאור",
+        "upload": "העלה",
+        "link": "קישור",
+        "setUrl": "הגדר כתובת URL",
+        "save": "להציל",
+        "uploadedImage": "תמונה שהועלתה",
+        "imageTitle": "כותרת התמונה",
+        "setClip": "קליפ גזור",
+        "invalidURL": "כתובת אתר לא חוקית",
+        "invalidFile": "קובץ לא תקין",
+        "errorNoSource": "אין מקור תמונה",
+        "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
+        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "שאלות",
+        "Answers": "תשובות",
+        "AnswerQuestion": "ענה לשאלה",
+        "SetYourAnswer": "בבקשה ענה על השאלה",
+        "NewQuestion": "שאלה חדשה",
+        "NewAnswer": "תשובה חדשה",
+        "AnswerDetails": "פרטי תשובה",
+        "answerOption": "אוֹפְּצִיָה",
+        "answerOptionExclusive": "בִּלעָדִי",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "כתבו כאן את תשובתכם",
+        "SaveQuestion": "שמור שאלה",
+        "SaveAnswer": "שמור תשובה",
+        "AddAnotherAnswer": "הוסף עוד תשובה",
+        "ErrorAnswers": "נא להוסיף אפילו תשובה אחת",
+        "AlreadyAnswered": "כבר נענה",
+        "TitlePlaceholder": "הקלד את השאלה שלך",
+        "ContentPlaceholder": "שים כאן כל מידע נוסף כדי לעזור לאנשים לענות",
+        "ErrorTitle": "נדרשת שאלה",
+        "Placeholder": "מציין מקום"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "חוויה חדשה",
+        "DefineTitle": "נא להגדיר כותרת",
+        "Create": "לִיצוֹר"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "שיחות",
+        "MaxCalls": "מקסימום שיחות",
+        "Update": "עדכון",
+        "NoCallsYet": "עדיין אין שיחות",
+        "CallReasonTitle": "על מה השיחה הזו?",
+        "WaitingRoom": "חדר המתנה"
     }
 }

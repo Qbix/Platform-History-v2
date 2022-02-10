@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Analitik",
+        "Daily": "Sehari-hari",
+        "Weekly": "Mingguan",
+        "Monthly": "Bulanan",
+        "Application": "Aplikasi",
+        "Pages": "halaman",
+        "Services": "Jasa",
+        "Faq": "FAQ",
+        "WeekDays": "Hari Minggu"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Gabung",
+        "LogOut": "keluar"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Tetapkan {{1}} sebagai {{2}} utama saya",
+        "ChoosePassPhrase": "Pilih <strong>frasa sandi<\/strong> untuk masuk.<br> Frasa sederhana yang terdiri dari beberapa kata yang mudah Anda ingat.",
+        "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa sandi<\/strong> yang baik untuk melindungi akun Anda. Lihat saran untuk beberapa ide.",
+        "LogOutAndTryAgain": "Keluar dan Coba Lagi",
+        "IfYouFeel": "Jika Anda merasa ada yang tidak beres, Anda bisa",
+        "SetIdentifierButtonTitle": "mulai lagi"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Memulai"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Memulai",
+        "Authorize": "Mengizinkan",
+        "TermsLabel": "Saya telah membaca dan setuju<br> ke {{link}}",
+        "TermsTitle": "Ketentuan",
+        "mustAgree": "Pertama, Anda harus menyetujui persyaratannya."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Saya menerima {{link}}",
+        "TermsTitle": "Ketentuan"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Izin",
+        "prompt": "Apakah Anda ingin mengaktifkan notifikasi? Anda akan menerima pembaruan waktu nyata tentang hal-hal yang Anda pedulikan.",
+        "yes": "Ya",
+        "no": "Tidak",
+        "WelcomePleaseVerifyEmail": "Selamat datang! Harap verifikasi alamat email Anda.",
+        "WelcomeVerifyEmail": "Selamat datang! Verifikasi alamat email Anda.",
+        "ForgetPass": "Hei, apakah Anda lupa kata sandi Anda?",
+        "PassphraseSaved": "Frasa sandi Anda telah disimpan.",
+        "IdentifierActivated": "{{type}} Anda telah diaktifkan.",
+        "CompletedActivation": "Anda telah menyelesaikan aktivasi pengguna.",
+        "CompletedActivationLogIn": "Anda telah menyelesaikan aktivasi pengguna. Coba masuk sekarang."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Pilih kontak",
+            "CreateAccount": "+ Kontak Baru",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tidak ditemukan",
+            "SearchByName": "Cari berdasarkan nama",
+            "EmptyContacts": "Kontak tidak ditemukan..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Pilih kontak dari {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Silakan pilih label.",
+        "inviteUser": "Undang Pengguna",
+        "selectRole": "Pilih Peran",
+        "inviteRole": "Undang {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Bahasa yang dipilih tidak valid",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Selamat datang",
+        "directions": "Buat akun, atau masuk.",
+        "directionsNoRegister": "Masuk jika Anda memiliki akun.",
+        "goButton": "Pergi",
+        "passphrase": "Masukkan frasa sandi Anda:",
+        "loginButton": "Memulai",
+        "registerButton": "Memulai",
+        "resendButton": "Kirim Pesan Aktivasi",
+        "forgot": "Lupakanlah?",
+        "resendConfirm": "Apakah Anda ingin mengirim pesan untuk mengatur ulang kata sandi Anda?",
+        "resendSuccess": "Periksa pesan untuk mengatur ulang kata sandi Anda",
+        "resendClose": "Menutup",
+        "noPassphrase": "Sebelum Anda dapat masuk, Anda harus menetapkan frasa sandi dengan mengeklik tautan di pesan aktivasi Anda.",
+        "notVerified": "Anda harus mengirim sendiri pesan aktivasi untuk masuk.",
+        "emailExists": "Apakah Anda mencoba mendaftar dengan email ini sebelumnya? Jika demikian, periksa kotak masuk Anda untuk mengaktifkan akun Anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk mengirim ulang pesan<\/a>",
+        "mobileExists": "Apakah Anda mencoba mendaftar dengan nomor ponsel ini sebelumnya? Jika demikian, periksa SMS Anda untuk mengaktifkan akun Anda. <a href='#resend' class='Q_button Users_activation_resend'>Klik untuk mengirim ulang pesan<\/a>",
+        "usingOther": "atau kamu bisa",
+        "prompt": "Pilih nama pengguna:",
+        "newUser": "atau buat akun baru di bawah",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "# ponsel Anda atau email",
+            "mobile": "masukkan ponsel Anda #",
+            "email": "Masukkan alamat email Anda",
+            "username": "gunakan huruf dan angka saja"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Terima Persyaratan Layanan?",
+        "facebookNoEmail": "Akun facebook Anda tidak memiliki alamat email yang dikonfirmasi. Cukup masuk dengan cara asli.",
+        "picTooltip": "Anda dapat mengubah gambar ini nanti",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Masuk ke {{host}} pada waktu {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Mengarahkan ke Wallet",
+                "content": "Setelah Anda menutup dialog ini, Anda akan dibawa ke dompet Anda. Setelah Anda masuk, kembali ke halaman ini."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Tambahkan cara untuk masuk",
+        "sendMessage": "Kirim Pesan Aktivasi",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "masukkan # ponsel Anda atau email",
+            "mobile": "Masukkan nomor ponsel Anda",
+            "email": "Masukkan alamat email Anda",
+            "username": "nama pengguna"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Akun",
+        "areUsing": "Anda menggunakan {{platform}} sebagai",
+        "noLongerUsing": "Anda tidak lagi terhubung ke {{platform}} sebagai",
+        "doAuth": "Masuk dengan akun ini",
+        "doSwitch": "Beralih ke akun ini"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Pemilik",
+        "Admin": "admin",
+        "Member": "Anggota",
+        "Guest": "Tamu",
+        "Host": "Tuan rumah"
     }
 }

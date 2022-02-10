@@ -1,24 +1,24 @@
 {
     "request": {
         "error": "Gabim {{status}} gjatë kërkesës",
-        "canceled": "Kërkesa është anuluar",
+        "canceled": "Kërkesa u anulua",
         "500": "Gabim i brendshëm i serverit",
         "404": "Nuk u gjet: {{url}}",
-        "501": "Kërkesa është ndërprerë"
+        "501": "Kërkesa u ndërpre"
     },
     "nonce": {
-        "sameDomain": "Sesioni skadoi. Rifresko faqen dhe provo përsëri.",
-        "otherDomain": "Kërkesa ndër-domain e bllokuar në domenin e huaj në {{baseUrl}}"
+        "sameDomain": "Seanca skadoi. Rifresko faqen dhe provo sërish.",
+        "otherDomain": "Kërkesa e bllokuar për domenin e huaj në {{baseUrl}}"
     },
     "words": {
         "tap": "trokitje e lehtë",
-        "click": "click",
+        "click": "klikoni",
         "yes": "po",
-        "no": "jo",
-        "Tap": "trokitje e lehtë",
-        "Click": "Kliko",
+        "no": "nr",
+        "Tap": "Prekni",
+        "Click": "Klikoni",
         "Yes": "po",
-        "No": "jo"
+        "No": "Nr"
     },
     "months": {
         "1": "janar",
@@ -31,74 +31,74 @@
         "8": "gusht",
         "9": "shtator",
         "10": "tetor",
-        "11": "nëntor",
+        "11": "Nëntor",
         "12": "dhjetor"
     },
     "audio": {
-        "allowMicrophoneAccess": "Ju lutemi të lejoni qasje në mikrofonin tuaj",
-        "record": "rekord",
-        "recording": "regjistrimi",
+        "allowMicrophoneAccess": "Lejo qasjen në mikrofonin tënd",
+        "record": "Regjistro",
+        "recording": "Regjistrimi",
         "remains": "Mbetet",
-        "maximum": "maksimal",
+        "maximum": "maksimale",
         "playing": "Duke luajtur",
-        "recorded": "Recorded",
-        "clip": "kapëse",
+        "recorded": "I regjistruar",
+        "clip": "klip",
         "orupload": "Ose Ngarko",
         "usethis": "Përdor këtë",
-        "discard": "heq dorë nga",
-        "encoding": "encoding"
+        "discard": "Hidhni",
+        "encoding": "Kodimi"
     },
     "alert": {
-        "title": "vigjilent"
+        "title": "Alarmi"
     },
     "confirm": {
-        "title": "konfirmoj",
+        "title": "Konfirmo",
         "ok": "po",
-        "cancel": "jo"
+        "cancel": "Nr"
     },
     "prompt": {
-        "title": "i menjëhershëm",
-        "ok": "shkoj"
+        "title": "Prompt",
+        "ok": "Shkoni"
     },
     "imagepicker": {
         "errorReadingFile": "Gabim gjatë leximit të skedarit",
         "cameraCommands": {
             "prompt": "Çfarë do të dëshironit të bënit?",
-            "photo": "Merrni foto të reja",
-            "library": "Zgjidh nga biblioteka"
+            "photo": "Bëni një foto të re",
+            "library": "Zgjidhni nga biblioteka"
         },
-        "tooSmall": "Zgjidh një imazh më të madh.",
+        "tooSmall": "Ju lutemi zgjidhni një imazh më të madh.",
         "cropping": {
-            "title": "Rregullo madhësinë dhe pozicionin",
+            "title": "Rregulloni madhësinë dhe pozicionin",
             "touchscreen": "Përdorni gishtat për të zmadhuar dhe zvarritur",
             "notTouchscreen": "Përdorni miun dhe timonin për të zmadhuar dhe zvarritur"
         },
         "errorType": "Na vjen keq, por ky lloj skedari nuk mbështetet"
     },
     "timestamp": {
-        "lastNight": "natën e kaluar",
-        "lastEvening": "pragun e fundit",
+        "lastNight": "mbrëmë",
+        "lastEvening": "prag të fundit",
         "yesterday": "dje",
-        "thisMorning": "kjo e mëngjesit",
+        "thisMorning": "këtë mëngjes",
         "today": "sot",
         "tonight": "sonte",
-        "tomorrowMorning": "tom mëngjesit",
+        "tomorrowMorning": "tom Morn",
         "tomorrow": "nesër",
         "hoursAgo": "{{h}} orë më parë",
         "hourAgo": "{{h}} orë më parë",
-        "minuteAgo": "99 {999}} minutë më parë",
+        "minuteAgo": "{{m}} minutë më parë",
         "minutesAgo": "{{m}} minuta më parë",
-        "secondAgo": "99 {999}} sekondë më parë",
+        "secondAgo": "{{s}} sekondë më parë",
         "secondsAgo": "{{s}} sekonda më parë",
         "fewSecondsAgo": "sekonda më parë",
-        "rightNow": "tani",
-        "inSecond": "në 99 99 999}} sekondë",
-        "inSeconds": "në 99 999}} sekonda",
-        "inMinute": "në 99 999}} minutë",
-        "inMinutes": "në 99 999}} minuta",
-        "inHour": "në {999}} orë",
-        "inHours": "në {999}} orë",
-        "inUnderMinute": "në nën 1 minutë"
+        "rightNow": "pikërisht tani",
+        "inSecond": "në {{s}} sekondë",
+        "inSeconds": "në {{s}} sekonda",
+        "inMinute": "në {{m}} minutë",
+        "inMinutes": "në {{m}} minuta",
+        "inHour": "në {{h}} orë",
+        "inHours": "në {{h}} orë",
+        "inUnderMinute": "në më pak se 1 minutë"
     },
     "tabs": {
         "more": "më shumë",
@@ -106,22 +106,22 @@
     },
     "video": {
         "clip": "klip",
-        "errorNoSource": "Asnjë burim video",
-        "SkipAfter": "Kapërce pas",
-        "Skip": "Kapërce"
+        "errorNoSource": "Nuk ka burim video",
+        "SkipAfter": "Kalo pas",
+        "Skip": "Kapërceni"
     },
     "pdf": {
         "clip": "klip",
-        "errorNoSource": "Asnjë burim pdf"
+        "errorNoSource": "Nuk ka burim pdf"
     },
     "clip": {
-        "SetClipStart": "Vendos Clip Start",
-        "ClipStart": "Fillo klipin",
-        "SetClipEnd": "Cakto fundin e klipit",
-        "ClipEnd": "Fundi i Klipit",
-        "StartMoreEnd": "Pozicioni fillestar nuk mund të jetë më shumë se pozicioni përfundimtar",
-        "EndLessStart": "Pozicioni përfundimtar nuk mund të jetë më pak se pozicioni fillestar",
-        "WhichInvalid": "Argumenti &#39;cili&#39; i pavlefshëm"
+        "SetClipStart": "Cakto fillimin e klipit",
+        "ClipStart": "Fillimi i klipit",
+        "SetClipEnd": "Cakto Fundin e Klipit",
+        "ClipEnd": "Fundi i klipit",
+        "StartMoreEnd": "Pozicioni fillestar nuk mund të jetë më shumë se pozicioni i fundit",
+        "EndLessStart": "Pozicioni i fundit nuk mund të jetë më i vogël se pozicioni i fillimit",
+        "WhichInvalid": "Argumenti &#39;cil&#39; është i pavlefshëm"
     },
     "durations": {
         "second": "e dyta",
@@ -135,7 +135,7 @@
         "weeks": "javë",
         "month": "muaj",
         "months": "muaj",
-        "year": "viti",
+        "year": "vit",
         "years": "vjet",
         "decade": "dekadë",
         "decades": "dekada",

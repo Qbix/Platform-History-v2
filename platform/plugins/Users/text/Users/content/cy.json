@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Dadansoddeg",
+        "Daily": "Dyddiol",
+        "Weekly": "Wythnosol",
+        "Monthly": "Yn fisol",
+        "Application": "Cais",
+        "Pages": "Tudalennau",
+        "Services": "Gwasanaethau",
+        "Faq": "Cwestiynau Cyffredin",
+        "WeekDays": "Dyddiau Wythnos"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Mewngofnodi",
+        "LogOut": "allgofnodi"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Gosod {{1}} fel fy {{2}} cynradd",
+        "ChoosePassPhrase": "Dewiswch <strong>ymadrodd pasio<\/strong> i fewngofnodi ag ef.<br> Ymadrodd syml yn cynnwys ychydig eiriau y byddwch chi&#39;n eu cofio&#39;n hawdd.",
+        "ChoosePassPhraseSeeSuggestions": "Dewiswch <strong>ymadrodd pasio<\/strong> da i amddiffyn eich cyfrif. Gweler yr awgrymiadau am rai syniadau.",
+        "LogOutAndTryAgain": "Allgofnodi a Ceisiwch Eto",
+        "IfYouFeel": "Os ydych chi&#39;n teimlo bod rhywbeth wedi mynd o&#39;i le, fe allwch chi",
+        "SetIdentifierButtonTitle": "dechrau eto"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Dechrau"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Dechrau",
+        "Authorize": "Awdurdodi",
+        "TermsLabel": "Rwyf wedi darllen ac yn cytuno<br> i&#39;r {{link}}",
+        "TermsTitle": "Termau",
+        "mustAgree": "Yn gyntaf rhaid i chi gytuno i&#39;r telerau."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Rwy&#39;n derbyn y {{link}}",
+        "TermsTitle": "Termau"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Caniatâd",
+        "prompt": "Ydych chi am alluogi hysbysiadau? Byddwch yn derbyn diweddariadau amser real am bethau sy&#39;n bwysig i chi.",
+        "yes": "Oes",
+        "no": "Nac ydw",
+        "WelcomePleaseVerifyEmail": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
+        "WelcomeVerifyEmail": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
+        "ForgetPass": "Hei, a wnaethoch chi anghofio&#39;ch cyfrinair?",
+        "PassphraseSaved": "Mae eich ymadrodd pasio wedi&#39;i gadw.",
+        "IdentifierActivated": "Mae eich {{type}} wedi&#39;i actifadu.",
+        "CompletedActivation": "Rydych chi wedi cwblhau actifadu defnyddiwr.",
+        "CompletedActivationLogIn": "Rydych chi wedi cwblhau actifadu defnyddiwr. Ceisiwch fewngofnodi nawr."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Dewiswch cyswllt",
+            "CreateAccount": "+ Cyswllt Newydd",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create heb ei ganfod",
+            "SearchByName": "Chwilio yn ôl enw",
+            "EmptyContacts": "Cysylltiadau heb eu canfod..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Dewiswch gyswllt o {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Dewiswch label.",
+        "inviteUser": "Gwahodd Defnyddwyr",
+        "selectRole": "Dewiswch Rôl",
+        "inviteRole": "Gwahodd {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Dewiswyd iaith annilys",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Croeso",
+        "directions": "Creu cyfrif, neu fewngofnodi.",
+        "directionsNoRegister": "Mewngofnodwch os oes gennych gyfrif.",
+        "goButton": "Ewch",
+        "passphrase": "Rhowch eich ymadrodd pasio:",
+        "loginButton": "Dechrau",
+        "registerButton": "Dechrau",
+        "resendButton": "Anfon Neges Cychwyn",
+        "forgot": "Wedi anghofio fe?",
+        "resendConfirm": "Ydych chi am anfon neges i ailosod eich cyfrinair?",
+        "resendSuccess": "Gwiriwch am neges i ailosod eich cyfrinair",
+        "resendClose": "Cau",
+        "noPassphrase": "Cyn i chi allu mewngofnodi, rhaid i chi osod ymadrodd pasio trwy glicio ar y ddolen yn eich neges actifadu.",
+        "notVerified": "Rhaid i chi anfon neges actifadu eich hun er mwyn mewngofnodi.",
+        "emailExists": "A wnaethoch chi geisio cofrestru gyda&#39;r e-bost hwn o&#39;r blaen? Os felly, gwiriwch eich mewnflwch i actifadu eich cyfrif. <a href='#resend' class='Q_button Users_activation_resend'>Cliciwch i ail-anfon y neges<\/a>",
+        "mobileExists": "A wnaethoch chi geisio cofrestru gyda&#39;r rhif ffôn symudol hwn o&#39;r blaen? Os felly, gwiriwch eich SMS i actifadu&#39;ch cyfrif. <a href='#resend' class='Q_button Users_activation_resend'>Cliciwch i ail-anfon y neges<\/a>",
+        "usingOther": "neu gallwch chi",
+        "prompt": "Dewiswch enw defnyddiwr:",
+        "newUser": "neu greu cyfrif newydd isod",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "eich ffôn symudol # neu e-bost",
+            "mobile": "rhowch eich ffôn symudol #",
+            "email": "rhowch eich cyfeiriad e-bost",
+            "username": "defnyddio llythrennau a rhifau yn unig"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Derbyn y Telerau Gwasanaeth?",
+        "facebookNoEmail": "Mae cyfeiriad e-bost wedi&#39;i gadarnhau ar goll o&#39;ch cyfrif facebook. Yn syml, mewngofnodwch yn y ffordd frodorol.",
+        "picTooltip": "Gallwch newid y llun hwn yn ddiweddarach",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Mewngofnodwch i {{host}} ar amser {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Ailgyfeirio i Wallet",
+                "content": "Unwaith y byddwch chi&#39;n cau&#39;r ymgom hwn, fe&#39;ch cymerir i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Ychwanegu ffordd i fewngofnodi",
+        "sendMessage": "Anfon Neges Cychwyn",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "rhowch eich # ffôn symudol neu e-bost",
+            "mobile": "rhowch eich rhif ffôn symudol",
+            "email": "rhowch eich cyfeiriad e-bost",
+            "username": "enw defnyddiwr"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Cyfrif",
+        "areUsing": "Rydych yn defnyddio {{platform}} fel",
+        "noLongerUsing": "Nid ydych bellach yn gysylltiedig â {{platform}} fel",
+        "doAuth": "Mewngofnodwch gyda&#39;r cyfrif hwn",
+        "doSwitch": "Newid i&#39;r cyfrif hwn"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Perchennog",
+        "Admin": "Gweinyddol",
+        "Member": "Aelod",
+        "Guest": "Gwestai",
+        "Host": "Gwesteiwr"
     }
 }

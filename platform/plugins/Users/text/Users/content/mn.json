@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Аналитик",
+        "Daily": "Өдөр бүр",
+        "Weekly": "Долоо хоног бүр",
+        "Monthly": "Сар бүр",
+        "Application": "Өргөдөл",
+        "Pages": "Хуудас",
+        "Services": "Үйлчилгээ",
+        "Faq": "Түгээмэл асуулт",
+        "WeekDays": "Ажлын өдрүүд"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "нэвтэрнэ үү",
+        "LogOut": "гарах"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "{{1}}-г миний үндсэн {{2}} болгон тохируулах",
+        "ChoosePassPhrase": "Нэвтрэхийн тулд нэвтрэх <strong>үгээ<\/strong> сонгоно уу.<br> Хэдхэн үгээс бүрдсэн энгийн хэллэг бөгөөд таны санахад хялбар болно.",
+        "ChoosePassPhraseSeeSuggestions": "Бүртгэлээ хамгаалахын тулд сайн <strong>нэвтрэх үг<\/strong> сонгоно уу. Зарим санаануудын зөвлөмжийг харна уу.",
+        "LogOutAndTryAgain": "Гараад дахин оролдоно уу",
+        "IfYouFeel": "Хэрэв та ямар нэг зүйл буруу болсныг мэдэрч байвал та чадна",
+        "SetIdentifierButtonTitle": "эхнээс нь эхлэх"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Эхэлцгээе"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Эхэлцгээе",
+        "Authorize": "Зөвшөөрөх",
+        "TermsLabel": "Би уншсан, зөвшөөрч байна<br> {{link}} руу",
+        "TermsTitle": "Нөхцөл",
+        "mustAgree": "Эхлээд та нөхцөлийг зөвшөөрөх ёстой."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Би зөвшөөрч байна {{link}}",
+        "TermsTitle": "Нөхцөл"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Зөвшөөрөл",
+        "prompt": "Та мэдэгдлийг идэвхжүүлэхийг хүсэж байна уу? Та сонирхож буй зүйлсийнхээ талаар бодит цагийн мэдээ хүлээн авах болно.",
+        "yes": "Тиймээ",
+        "no": "Үгүй",
+        "WelcomePleaseVerifyEmail": "Тавтай морил! Имэйл хаягаа баталгаажуулна уу.",
+        "WelcomeVerifyEmail": "Тавтай морил! Имэйл хаягаа баталгаажуулна уу.",
+        "ForgetPass": "Хөөе, чи нэвтрэх үгээ мартсан уу?",
+        "PassphraseSaved": "Таны нэвтрэх үг хадгалагдсан.",
+        "IdentifierActivated": "Таны {{type}} идэвхжсэн байна.",
+        "CompletedActivation": "Та хэрэглэгчийн идэвхжүүлэлтийг дуусгалаа.",
+        "CompletedActivationLogIn": "Та хэрэглэгчийн идэвхжүүлэлтийг дуусгалаа. Одоо нэвтэрч үзнэ үү."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Харилцагчийг сонгоно уу",
+            "CreateAccount": "+ Шинэ харилцагч",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create олдсонгүй",
+            "SearchByName": "Нэрээр нь хайх",
+            "EmptyContacts": "Харилцагч олдсонгүй..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "{{displayName}}-н харилцагчийг сонгоно уу"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Шошго сонгоно уу.",
+        "inviteUser": "Хэрэглэгчдийг урих",
+        "selectRole": "Role сонгоно уу",
+        "inviteRole": "{{role}}-г урих"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Буруу хэл сонгосон",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Тавтай морил",
+        "directions": "Бүртгэл үүсгэх эсвэл нэвтэрнэ үү.",
+        "directionsNoRegister": "Бүртгэлтэй бол нэвтэрнэ үү.",
+        "goButton": "Яв",
+        "passphrase": "Нууц үгээ оруулна уу:",
+        "loginButton": "Эхэлцгээе",
+        "registerButton": "Эхэлцгээе",
+        "resendButton": "Идэвхжүүлэх мессеж илгээх",
+        "forgot": "Мартсан уу?",
+        "resendConfirm": "Та нэвтрэх үгээ шинэчлэхийн тулд мессеж илгээхийг хүсэж байна уу?",
+        "resendSuccess": "Нууц үгээ шинэчлэх мессеж байгаа эсэхийг шалгана уу",
+        "resendClose": "Хаах",
+        "noPassphrase": "Нэвтрэхээсээ өмнө идэвхжүүлэх мессеж дээрх холбоос дээр дарж нэвтрэх үг оруулах ёстой.",
+        "notVerified": "Нэвтрэхийн тулд та өөртөө идэвхжүүлэх мессеж илгээх ёстой.",
+        "emailExists": "Та өмнө нь энэ имэйлээр бүртгүүлэх гэж оролдсон уу? Хэрэв тийм бол бүртгэлээ идэвхжүүлэхийн тулд ирсэн имэйлээ шалгана уу. <a href='#resend' class='Q_button Users_activation_resend'>Зурвасыг дахин илгээхийн тулд товшино уу<\/a>",
+        "mobileExists": "Та өмнө нь энэ утасны дугаараар бүртгүүлэх гэж оролдсон уу? Хэрэв тийм бол бүртгэлээ идэвхжүүлэхийн тулд SMS-ээ шалгана уу. <a href='#resend' class='Q_button Users_activation_resend'>Зурвасыг дахин илгээхийн тулд товшино уу<\/a>",
+        "usingOther": "эсвэл та чадна",
+        "prompt": "Хэрэглэгчийн нэр сонгоно уу:",
+        "newUser": "эсвэл доор шинэ бүртгэл үүсгэнэ үү",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "таны гар утасны # эсвэл имэйл",
+            "mobile": "гар утасны дугаараа оруулна уу",
+            "email": "имэйл хаягаа оруулна уу",
+            "username": "зөвхөн үсэг, тоо ашиглана уу"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Үйлчилгээний нөхцөлийг зөвшөөрөх үү?",
+        "facebookNoEmail": "Таны фэйсбүүк хаягт баталгаажсан имэйл хаяг алга байна. Зүгээр л эх аргаар нэвтэрнэ үү.",
+        "picTooltip": "Та энэ зургийг дараа нь өөрчилж болно",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "{{host}}-д {{timestamp}} цагт нэвтэрнэ үү",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Wallet руу дахин чиглүүлж байна",
+                "content": "Энэ харилцах цонхыг хаасны дараа та түрийвч рүүгээ орох болно. Та нэвтэрсний дараа энэ хуудас руу буцна уу."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Нэвтрэх аргыг нэмнэ үү",
+        "sendMessage": "Идэвхжүүлэх мессеж илгээх",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "гар утасны дугаар эсвэл имэйлээ оруулна уу",
+            "mobile": "утасны дугаараа оруулна уу",
+            "email": "имэйл хаягаа оруулна уу",
+            "username": "хэрэглэгчийн нэр"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Бүртгэл",
+        "areUsing": "Та {{platform}}-г ашиглаж байна",
+        "noLongerUsing": "Та цаашид {{platform}}-тай холбогдохгүй",
+        "doAuth": "Энэ бүртгэлээр нэвтэрнэ үү",
+        "doSwitch": "Энэ бүртгэл рүү шилжинэ үү"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Эзэмшигч",
+        "Admin": "админ",
+        "Member": "Гишүүн",
+        "Guest": "Зочин",
+        "Host": "Хөтлөгч"
     }
 }

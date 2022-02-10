@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "ແຕະເພື່ອຈ່າຍເງິນ"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ການເກັບຄ່າທຳນຽມສຳລັບ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "ຂໍຂອບໃຈສຳລັບການຈ່າຍເງິນຂອງທ່ານໃຫ້ກັບ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ສະໝັກໃຊ້ {{plan.title}}",
+        "YouSubscribedTo": "ທ່ານໄດ້ສະໝັກໃຊ້ {{plan.title}} ແລ້ວ"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "ທ່ານໄດ້ຮັບການຈ່າຍເງິນ {{displayAmount}} ຈາກ {{call 'publisher.displayName'}} ໂດຍ &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, ນີ້ແມ່ນພຽງແຕ່ແຈ້ງໃຫ້ທ່ານຮູ້ວ່າ {{1}} ໄດ້ຖືກຮຽກເກັບເງິນ {{2}} ສໍາລັບ {{3}} ໂດຍ {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "ຂໍຂອບໃຈສຳລັບການຈ່າຍເງິນຂອງທ່ານສຳລັບ &quot;{{description}}&quot;",
+        "HavePaid": "ສະບາຍດີ {{1}}, ນີ້ແມ່ນພຽງແຕ່ການຢືນຢັນວ່າທ່ານໄດ້ຈ່າຍເງິນ {{2}} ໃຫ້ {{3}} ສໍາລັບ {{4}} ສຳເລັດແລ້ວ"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ຂໍ້​ມູນ​ກ່ຽວ​ກັບ​ຄໍາ​ສັ່ງ​",
+        "PaymentMethod": "ວິທີການຈ່າຍເງິນ",
+        "ContactInfo": "ຂໍ້​ມູນ​ຕິດ​ຕໍ່",
+        "Pay": "ຈ່າຍ"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "ຮັບການເຊີນໂດຍ {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ໃສ່ຊື່",
+        "Streams_user_lastname": "{{invitedUserName}} ໃສ່ນາມສະກຸນ",
+        "Streams_user_icon": "{{invitedUserName}} ໃສ່ໄອຄອນແລ້ວ",
+        "Places_user_location": "{{invitedUserName}} ເຂົ້າໄປທີ່ຕັ້ງ",
+        "Streams_greeting": "{{invitedUserName}} ເຂົ້າທັກທາຍ",
+        "YouHaveCreditsToStart": "ທ່ານມີເຄຣດິດ {{amount}} ເພື່ອເລີ່ມຕົ້ນ",
+        "PaymentFor": "ການຈ່າຍເງິນສຳລັບ &quot;{{1}}&quot;",
+        "PaymentTo": "ການຈ່າຍເງິນໃຫ້ {{1}}",
+        "PaymentToUser": "ການຈ່າຍເງິນໃຫ້ {{toUserName}}",
+        "CreatePaidStream": "ເພື່ອສ້າງ {{toStreamName}}",
+        "JoinedPaidStream": "ສຳລັບການຈອງໃນ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ເພື່ອສ້າງຊຸມຊົນ &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ເປັນການຄືນເງິນການຈອງໃນ &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "ຊື້ເຄຣດິດ {{amount}}",
+        "BonusCredits": "ໂບນັດ {{amount}} ເຄຣດິດ",
+        "BuyAmountCredits": "ຊື້ເຄຣດິດ {{amount}}",
+        "WatchClip": "ໄດ້ຮັບເຄຣດິດ {{amount}} ສຳລັບການເບິ່ງ {{fromStreamTitle}}",
+        "MissingCredits": "ສິນເຊື່ອທີ່ຂາດຫາຍໄປ",
+        "YouMissingCredits": "ທ່ານຕ້ອງການເຄຣດິດ {{amount}} ເພີ່ມເຕີມເພື່ອດຳເນີນການຕໍ່.",
+        "BuyCredits": "ຊື້ສິນເຊື່ອ",
+        "BuyBonus": "ຊື້ເຄຣດິດ {{amount}} ພ້ອມກັນ, ຈະນຳໄປສູ່ໂບນັດເຄຣດິດ {{bonus}}.",
+        "Buy": "ຊື້",
+        "PurchaseCredits": "ສິນເຊື່ອຊື້",
+        "Credits": "ສິນເຊື່ອ",
+        "ErrorInvalidAmount": "ຈຳນວນບໍ່ຖືກຕ້ອງ",
+        "ErrorInvalidCurrency": "ຂໍອະໄພ, ພວກເຮົາຍັງບໍ່ຮອງຮັບສະກຸນເງິນ {{currency}} ເທື່ອ",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "ເຄຣດິດ {{amount}}",
+            "BonusCredits": "ເຄຣດິດ {{amount}}"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "ວັນທີ",
+        "Amount": "ຈໍາ​ນວນ",
+        "Description": "ລາຍລະອຽດ",
+        "Client": "ລູກ​ຄ້າ",
+        "To": "ກັບ",
+        "From": "ຈາກ",
+        "SeeHistory": "ເບິ່ງປະຫວັດການຈ່າຍເງິນສຳລັບ {{1}}",
+        "HistoryEmpty": "ທ່ານຍັງບໍ່ມີຂໍ້ມູນເທື່ອ",
+        "PaymentFor": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "PaymentTo": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "PaymentToUser": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ",
+        "CreatePaidStream": "ໃຊ້ເຄຣດິດໄປແລ້ວ {{amount}}",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+            "-": "ໃຊ້ເຄຣດິດໄປແລ້ວ {{amount}}"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+            "-": "ໃຊ້ເຄຣດິດໄປແລ້ວ {{amount}}"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "ໄດ້ຮັບເຄຣດິດ {{amount}}",
+            "-": "ສົ່ງເຄຣດິດ {{amount}} ແລ້ວ"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "ໃຊ້ເຄຣດິດໄປແລ້ວ {{amount}}",
+        "BoughtCredits": "ຊື້ເຄຣດິດ {{amount}}",
+        "BonusCredits": "ໄດ້ໂບນັດ {{amount}} ເຄຣດິດ",
+        "InviteAcceptedBy": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "Streams_user_firstname": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "Streams_user_lastname": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "Streams_user_icon": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "Places_user_location": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "Streams_greeting": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ",
+        "YouHaveCreditsToStart": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "ກໍານົດຂໍ້ມູນການຈ່າຍເງິນ",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ເລີ່ມການສະໝັກສະມາຊິກ",
+            "message": "ທ່ານຕ້ອງການສະໝັກໃຊ້ {{title}} ບໍ?",
+            "ok": "ຕົກ​ລົງ",
+            "cancel": "ຍົກເລີກ"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "ບັດເຄຣດິດ ຫຼືບັດເດບິດ",
+        "SubscribePayment": "ຈອງການຈ່າຍເງິນ",
+        "ImmediatePayment": "ການຈ່າຍເງິນທັນທີ"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "ກໍານົດຂໍ້ມູນການຈ່າຍເງິນ",
+        "BuyAmountCredits": "ຊື້ເຄຣດິດ {{amount}}",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ຈ່າຍເງິນ",
+            "message": "ທ່ານຕົກລົງທີ່ຈະຈ່າຍເງິນ {{symbol}}{{amount}} ບໍ?",
+            "ok": "ຕົກ​ລົງ",
+            "cancel": "ຍົກເລີກ"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "ສິນເຊື່ອ",
+            "description": "ຕິດຕາມສິນເຊື່ອ ແລະການຈ່າຍເງິນ"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "ແຜນການຈອງ",
+            "description": "ແຜນການສະໝັກໃຊ້"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "ການສະໝັກໃຊ້",
+            "description": "ການສະໝັກໃຊ້"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "ຜະລິດຕະພັນ",
+            "description": "ຜະ​ລິດ​ຕະ​ພັນ​ທີ່​ຖືກ​ຂາຍ​"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "ການບໍລິການ",
+            "description": "ການ​ບໍ​ລິ​ການ​ໄດ້​ຖືກ​ສະ​ຫນອງ​ໃຫ້​"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "ໄດ້ຮັບ {{amount}} ເຄຣດິດ"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "ຊື້ເຄຣດິດ {{amount}}"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "ໂບນັດ {{amount}} ເຄຣດິດ"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "ໃຊ້ເຄຣດິດໄປແລ້ວ {{amount}}"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "ສົ່ງເຄຣດິດ {{amount}} ໄປໃຫ້ {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "ໄດ້ຮັບເຄຣດິດ {{amount}} ຈາກ {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "ບໍລິການໃໝ່",
+            "TitlePlaceholder": "ຊື່ການບໍລິການ",
+            "PricePlaceholder": "ກໍານົດລາຄາ",
+            "LinkPlaceholder": "ກໍານົດການເຊື່ອມຕໍ່ຂໍ້ມູນເພີ່ມເຕີມ",
+            "DescriptionPlaceholder": "ລາຍລະອຽດການບໍລິການ",
+            "SaveService": "ບັນທຶກການບໍລິການ",
+            "SelectRequiredParticipants": "ຜູ້ເຂົ້າຮ່ວມທີ່ຕ້ອງການ"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "ຈັດການແມ່ແບບການບໍລິການ",
+        "ManageServices": "ຄຸ້ມຄອງການບໍລິການ",
+        "Free": "ຟຣີ",
+        "OptionalContribution": "ການປະກອບສ່ວນທາງເລືອກ",
+        "RequiredPayment": "ການຈ່າຍເງິນທີ່ຕ້ອງການ",
+        "AreYouSureDelete": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບການບໍລິການນີ້?",
+        "AmountServicesRelated": "ມີຄວາມພ້ອມ {{amount}} ທີ່ກ່ຽວຂ້ອງກັບການບໍລິການນີ້. ພວກເຂົາເຈົ້າຍັງຈະຖືກໂຍກຍ້າຍອອກ."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "ຂໍ້ມູນກ່ຽວກັບ {{title}} NFT",
+        "Description": "ຂໍ້ມູນລະອຽດກ່ຽວກັບ NFT",
+        "FixedBid": "ຊື້​ດຽວ​ນີ້",
+        "CurrentBid": "ການສະເຫນີລາຄາໃນປະຈຸບັນ",
+        "StartingIn": "ເລີ່ມຕົ້ນໃນ",
+        "EndingIn": "ສິ້ນສຸດໃນ",
+        "CreateNFT": "ສ້າງ NFT",
+        "TitlePlaceholder": "ໃຫ້ NFT ຂອງທ່ານເປັນຫົວຂໍ້",
+        "DescriptionPlaceholder": "ໃຫ້ຄໍາອະທິບາຍ NFT ຂອງທ່ານ",
+        "CreateYourNFT": "ສ້າງ NFT ຂອງທ່ານ",
+        "Royalties": "ຄ່າພາກຫຼວງ",
+        "RoyaltyPlaceholder": "ທາງເລືອກ. ຈໍານວນທີ່ຈ່າຍໃຫ້ຜູ້ສ້າງກ່ອນການໂອນ.",
+        "ExpirationDate": "ວັນ​ຫມົດ​ອາ​ຍຸ",
+        "StartingDate": "ວັນ​ທີ່​ເລີ່ມ",
+        "BidsBelowThisAmount": "ການສະເຫນີລາຄາຕ່ໍາກວ່າຈໍານວນນີ້ຈະບໍ່ອະນຸຍາດໃຫ້",
+        "MinimumBid": "ການສະເຫນີລາຄາຂັ້ນຕ່ໍາ",
+        "Price": "ລາຄາ",
+        "Owner": "ເຈົ້າຂອງ",
+        "SelectCategory": "ເລືອກປະເພດ",
+        "Day": "ມື້",
+        "Days": "ມື້",
+        "Hour": "ຊົ່ວໂມງ",
+        "Hours": "ຊົ່ວໂມງ",
+        "Minute": "ນາທີ",
+        "Minutes": "ນາທີ",
+        "Second": "ທີສອງ",
+        "Seconds": "ວິນາທີ",
+        "SalesCreator": "ການຂາຍຈະໄປຫາຜູ້ສ້າງ",
+        "Details": "ລາຍລະອຽດ",
+        "Bids": "ການປະມູນ",
+        "History": "ປະຫວັດສາດ",
+        "LoremIpsum": "Lorem Ipsum ແມ່ນພຽງແຕ່ຂໍ້ຄວາມ dummy ຂອງອຸດສາຫະກໍາການພິມແລະການພິມ.",
+        "PutOnSale": "ວາງຂາຍ",
+        "PutOffSale": "ຖອນອອກຈາກການຂາຍ",
+        "Transfer": "ໂອນ",
+        "Update": "ອັບເດດ",
+        "UpdateToken": "ອັບເດດ Token",
+        "CreateToken": "ສ້າງໂທເຄັນ",
+        "PlaceBid": "ວາງ Bid",
+        "SoldOut": "ຂາຍແລ້ວ",
+        "NftName": "ຊື່ NFT",
+        "DescribeYourNFT": "ກະລຸນາອະທິບາຍ NFT ຂອງທ່ານ",
+        "NftPicture": "ຮູບພາບເພື່ອເປັນຕົວແທນຂອງ NFT",
+        "NftMovie": "ຮູບເງົາເພື່ອເປັນຕົວແທນຂອງ NFT",
+        "UploadMovie": "ອັບໂຫຼດຮູບເງົາ",
+        "MovieSource": "ແຫຼ່ງຮູບເງົາ",
+        "UploadFile": "ອັບໂຫຼດໄຟລ໌",
+        "PutOnMarketplace": "ໃສ່ຕະຫຼາດ",
+        "InstantPurchase": "ໃສ່ລາຄາເພື່ອໃຫ້ຜູ້ໃຊ້ຊື້ NFT ຂອງທ່ານທັນທີ",
+        "FixedPrice": "ລາ​ຄາ​ຄົງ​ທີ່",
+        "TimedAuction": "ເວລາປະມູນ",
+        "OpenForBids": "ເປີດສໍາລັບການປະມູນ",
+        "PriceOnePiece": "ໃສ່ລາຄາສຳລັບໜຶ່ງຊິ້ນ",
+        "EnterMinimumBid": "ໃສ່ການປະມູນຂັ້ນຕ່ຳ",
+        "SelectChain": "ເລືອກຕ່ອງໂສ້",
+        "WrongChain": "NFT ນີ້ສ້າງຂຶ້ນພາຍໃຕ້ &quot;{{chain}}&quot;. ກະລຸນາໃຊ້ຕ່ອງໂສ້ນີ້.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "ການ​ນໍາ​ເຂົ້າ NFTs",
+            "fileNotFound": "ຂໍອະໄພ, ບໍ່ພົບໄຟລ໌ CSV.",
+            "fileEmpty": "ຂໍອະໄພ, ໄຟລ໌ CSV ຫວ່າງເປົ່າ.",
+            "userIdNotFound": "ຜູ້ໃຊ້ມີຢູ່ແຕ່ id ຫວ່າງເປົ່າ",
+            "errorLine": "ແຖວ {{1}}",
+            "fieldNotFound": "ບໍ່ພົບຊ່ອງຂໍ້ມູນທີ່ຕ້ອງການ &quot;{{1}}&quot;",
+            "taskStreamInvalid": "ການຖ່າຍທອດໜ້າວຽກບໍ່ຖືກຕ້ອງ",
+            "instructionsEmpty": "ຄຳແນະນຳການຖ່າຍທອດໜ້າວຽກຫວ່າງເປົ່າ",
+            "complete": "ສໍາເລັດ",
+            "activateUsers": "ສົ່ງຂໍ້ຄວາມເປີດໃຊ້ກັບຜູ້ໃຊ້ບໍ?",
+            "importProgress": "ຄວາມຄືບໜ້າ",
+            "importOptions": "ທາງເລືອກ",
+            "sampleCSV": "ດາວໂຫລດຕົວຢ່າງ CSV",
+            "fileLabel": "ອັບໂຫລດສະເປຣດຊີດ:",
+            "errorsTitle": "ຄວາມຜິດພາດເກີດຂຶ້ນ"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "ການກັ່ນຕອງໂດຍ NFT Collections",
+                "ShowNFTCollection": "ສະແດງຄໍເລັກຊັນ NFT ໃນ ...",
+                "AllCollections": "ຄໍເລັກຊັນທັງໝົດ"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "ຜູ້ຂຽນທັງໝົດ",
+                "AllUsers": "ທຸກຄົນ",
+                "FilterByAuthors": "ການກັ່ນຕອງໂດຍຜູ້ຂຽນ"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "ກັບໄປທີ່ຄໍເລັກຊັນ"
     }
 }

@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "دننه {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "meter": "متره",
+        "meters": "متره",
+        "kilometer": "کیلومتر",
+        "kilometers": "کیلومتره",
+        "km": "کیلومتره",
+        "mile": "میل",
+        "miles": "میلونه",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "پښه",
+        "feet": "پښې",
+        "inches": "انچه"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "زه د هغه شیانو سره علاقه لرم چې په {{select}} کې ترسره کیږي",
+        "update": "زما ځای تازه کړئ",
+        "set": "زما ځای وټاکئ",
+        "prompt": "دلته {{ClickOrTap}} ته<br> خپل تنظیم کړئ<br> ځای",
+        "myCurrentLocation": "زما اوسنی موقعیت",
+        "enterAddress": "یو پته دننه کړئ",
+        "enterPostcode": "مهرباني وکړئ خپل پوسټ کوډ \/ زپ کوډ دننه کړئ",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "ځای اضافه کړئ",
+            "title": "نوی ځای",
+            "nameYourLocation": "خپل ځای نوم کړئ"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "دا ځای خوندي کړئ؟",
+            "message": "ایا تاسو پلان لرئ چې په راتلونکي کې بیا دا ځای وکاروئ؟",
+            "ok": "هو",
+            "cancel": "نه"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "دا ځای نوم کړئ",
+            "placeholder": "کور، کار او داسې نور.",
+            "ok": "خوندي کړئ"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "ځای غوره کړئ"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "د دې ځای دننه کومه سیمه؟",
+        "newArea": "نوې سیمه",
+        "promptTitle": "د سیمې لپاره نوم ولیکئ:",
+        "absent": "مهرباني وکړئ ساحه تنظیم کړئ",
+        "error": "تېروتنه",
+        "exist": "ساحه لا دمخه شتون لري",
+        "addNewArea": "نوې سیمه اضافه کړئ",
+        "add": "اضافه کړئ"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "د ځایونو ټولګه",
+            "displayType": "ځایونه"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "د ودانۍ، ځای، کښتۍ، پارک، او نور استازیتوب کوي.",
+            "displayType": "ځای"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "په یو ځای کې د یوې سیمې استازیتوب کوي، لکه یوه خونه یا سویټ",
+            "displayType": "ساحه"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "په ودانۍ یا کښتۍ کې د پوړ استازیتوب کوي",
+            "displayType": "فرش"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "په ودانۍ یا کښتۍ کې د کالم استازیتوب کوي",
+            "displayType": "کالم"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "د جیوشاش څخه د یو ټاکلي فاصلې دننه د شیانو کټګوري",
+            "displayType": "نږدې ځایونو کې"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "د شیانو لپاره کټګوري د جیوشاش په یو ټاکلي فاصله کې، د ګټو سره سمون لري",
+            "displayType": "د علاقې وړ ځایونه"
         }
     }
 }

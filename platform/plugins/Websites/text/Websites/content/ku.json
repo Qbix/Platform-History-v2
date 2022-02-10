@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Girêdana pêşvebirinê",
+                "startDate": "Dîroka Destpêkê",
+                "startTime": "Demjimêra Destpêkê",
+                "endDate": "Dîroka Dawî",
+                "endTime": "Dema Dawî",
+                "budget": "Sermîyan"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Parzûna By Interest",
+                "FilterInterests": "Dest bi nivîsandina berjewendiyekê bikin..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Zem",
+            "Location": "Cîh"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Çûyin",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
+            "WriteToStartConversation": "Ramanên xwe binivîsin da ku dest bi axaftinê bikin",
+            "StartConversation": "Danûstandinê dest pê bikin",
+            "GotoConversation": "Biçe Gotûbêjê",
             "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "edit": "Weşandin",
+            "link": "Pêvek",
+            "setUrl": "URL-ê saz bikin",
+            "save": "Rizgarkirin",
+            "setClip": "Clip Out Clip",
+            "invalidURL": "URL nederbasdar"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Pelê ji bo cachkirinê pir mezin e. Mezinahiya pelê ya herî zêde {{size}}",
+        "InvalidPDF": "Pelê ne PDF-ya derbasdar e",
+        "StartTypingTitleOrKeywords": "Dest bi nivîsandina sernav an peyvên sereke bikin..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Belgeyek HTML ku bikarhênerên cihêreng dikarin bibînin û biguherînin",
+            "displayType": "Tişt"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Slaydek di pêşkêşiyekê de, dikare HTML, deng hwd.",
+            "displayType": "Şemitîn"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Pêşniyarek ku ji slaytên cihêreng pêk tê",
+            "displayType": "Pêşkêşî"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Yekîneyek reklamê li ser malperê",
+            "displayType": "yekîneya reklamê"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Awayê komkirina yekîneyên reklamê di bin navekî de",
+            "displayType": "danîna reklamê"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
+            "description": "Naveroka ji bo reklamê",
             "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Kampanyayek reklamê",
+            "displayType": "Kampanya reklamê"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Malperek ku metadata wê hatî qefilandin temsîl dike",
+            "displayType": "Rûpelê malperê"
         }
     }
 }

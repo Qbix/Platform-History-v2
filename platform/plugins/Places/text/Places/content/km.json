@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "ក្នុង {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "ម៉ែត្រ",
+        "meters": "ម៉ែត្រ",
+        "kilometer": "គីឡូម៉ែត្រ",
+        "kilometers": "គីឡូម៉ែត្រ",
+        "km": "គីឡូម៉ែត្រ",
+        "mile": "ម៉ាយ",
+        "miles": "ម៉ាយល៍",
+        "mi": "ម៉ាយ",
+        "foot": "ជើង",
+        "feet": "ជើង",
+        "inches": "អ៊ីញ"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "ខ្ញុំចាប់អារម្មណ៍លើអ្វីៗដែលកើតឡើងក្នុងរង្វង់ {{select}} នៃ",
+        "update": "ធ្វើបច្ចុប្បន្នភាពទីតាំងរបស់ខ្ញុំ",
+        "set": "កំណត់ទីតាំងរបស់ខ្ញុំ",
+        "prompt": "{{ClickOrTap}} នៅទីនេះ<br> កំណត់របស់អ្នក។<br> ទីតាំង",
+        "myCurrentLocation": "ទីតាំងបច្ចុប្បន្នរបស់ខ្ញុំ",
+        "enterAddress": "បញ្ចូលអាសយដ្ឋាន",
+        "enterPostcode": "សូមបញ្ចូលលេខកូដប្រៃសណីយ៍ \/ លេខកូដតំបន់របស់អ្នក។",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "បន្ថែមទីតាំង",
+            "title": "ទីតាំងថ្មី។",
+            "nameYourLocation": "ដាក់ឈ្មោះទីតាំងរបស់អ្នក។"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "រក្សាទុកទីតាំងនេះ?",
+            "message": "តើអ្នកមានគម្រោងប្រើទីតាំងនេះម្តងទៀតនៅថ្ងៃអនាគតទេ?",
+            "ok": "បាទ",
+            "cancel": "ទេ"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ដាក់ឈ្មោះទីតាំងនេះ។",
+            "placeholder": "ផ្ទះ កន្លែងធ្វើការ ។ល។",
+            "ok": "រក្សាទុក"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "ជ្រើសរើសទីតាំង"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "តំបន់ណាមួយនៅក្នុងទីតាំងនេះ?",
+        "newArea": "តំបន់ថ្មី។",
+        "promptTitle": "បញ្ចូលឈ្មោះសម្រាប់តំបន់៖",
+        "absent": "សូមកំណត់តំបន់",
+        "error": "កំហុស",
+        "exist": "តំបន់មានរួចហើយ",
+        "addNewArea": "បន្ថែមតំបន់ថ្មី។",
+        "add": "បន្ថែម"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ការប្រមូលផ្តុំនៃទីតាំង",
+            "displayType": "ទីតាំង"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "តំណាងឱ្យអគារ ទីកន្លែង កប៉ាល់ ឧទ្យាន។ល។",
+            "displayType": "ទីតាំង"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "តំណាងឱ្យតំបន់មួយនៅក្នុងទីតាំងមួយ ដូចជាបន្ទប់ ឬបន្ទប់",
+            "displayType": "តំបន់"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "តំណាងឱ្យជាន់មួយនៅក្នុងអគារឬកប៉ាល់",
+            "displayType": "ជាន់"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "តំណាងឱ្យជួរឈរនៅក្នុងអគារឬកប៉ាល់",
+            "displayType": "ជួរ"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "ប្រភេទសម្រាប់វត្ថុក្នុងចម្ងាយជាក់លាក់មួយនៃ geohash",
+            "displayType": "នៅជិតកន្លែងនានា"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "ប្រភេទសម្រាប់វត្ថុក្នុងចម្ងាយជាក់លាក់មួយនៃ geohash ដែលត្រូវគ្នានឹងចំណាប់អារម្មណ៍",
+            "displayType": "កន្លែងចាប់អារម្មណ៍"
         }
     }
 }

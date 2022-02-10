@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Iphutha {{status}} phakathi nesicelo",
+        "canceled": "Isicelo sikhanseliwe",
+        "500": "Iphutha Leseva Engaphakathi",
+        "404": "Ayitholakali: {{url}}",
+        "501": "Isicelo siphazamisekile"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Iseshini iphelelwe yisikhathi. Vuselela ikhasi bese uzama futhi.",
+        "otherDomain": "Isicelo esivinjiwe sesizinda esihlukene sesizinda sangaphandle kokuthi {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "kampompi",
+        "click": "chofoza",
+        "yes": "yebo",
+        "no": "cha",
+        "Tap": "Thepha",
+        "Click": "Chofoza",
+        "Yes": "Yebo",
+        "No": "Cha"
     },
     "months": {
         "1": "January",
         "2": "February",
-        "3": "March",
+        "3": "Mashi",
         "4": "April",
-        "5": "May",
-        "6": "June",
+        "5": "Meyi",
+        "6": "Juni",
         "7": "July",
-        "8": "August",
+        "8": "Agasti",
         "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "10": "Okthoba",
+        "11": "Novemba",
+        "12": "Disemba"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "okwesibili",
+        "seconds": "imizuzwana",
+        "minute": "umzuzu",
+        "minutes": "imizuzu",
+        "hour": "amahora",
+        "day": "usuku",
+        "days": "izinsuku",
+        "week": "isonto",
+        "weeks": "amasonto",
+        "month": "inyanga",
+        "months": "izinyanga",
+        "year": "unyaka",
+        "years": "iminyaka",
+        "decade": "ishumi leminyaka",
+        "decades": "amashumi eminyaka",
+        "century": "ikhulu leminyaka",
+        "centuries": "amakhulu eminyaka"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Sicela uvumele ukufinyelela kumakrofoni yakho",
+        "record": "Qopha",
+        "recording": "Iyaqopha",
+        "remains": "izinsalela",
+        "maximum": "esiphezulu",
+        "playing": "Iyadlala",
+        "recorded": "Irekhodiwe",
+        "clip": "isiqeshana",
+        "discard": "Lahla",
+        "encoding": "Ukufaka ikhodi"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "isiqeshana",
+        "errorNoSource": "Awukho umthombo wevidiyo",
+        "SkipAfter": "Yeqa ngemva",
+        "Skip": "Yeqa"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "isiqeshana",
+        "errorNoSource": "Awukho umthombo we-pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Setha Ukuqala Kwesiqeshana",
+        "ClipStart": "Isiqeshana Qala",
+        "SetClipEnd": "Setha Ukuphela Kwesiqeshana",
+        "ClipEnd": "Isiqeshana Ukuphela",
+        "StartMoreEnd": "Indawo yokuqala ayikwazi ukuba ngaphezu kwendawo yokugcina",
+        "EndLessStart": "Indawo yokugcina ayikwazi ukuba ngaphansi kwendawo yokuqala",
+        "WhichInvalid": "Ukungqubuzana &#39;okuyinto&#39; engavumelekile"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Isexwayiso"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Qinisekisa",
+        "ok": "Yebo",
+        "cancel": "Cha"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Shesha",
+        "ok": "Hamba"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "Okuningi",
+        "Menu": "Imenyu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Iphutha lokufunda ifayela",
+        "errorType": "Uxolo, kodwa lolu hlobo lwefayela alusekelwe",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Ungathanda ukwenzani?",
+            "photo": "Thatha isithombe esisha",
+            "library": "Khetha kulabhulali"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Sicela ukhethe isithombe esikhudlwana.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Lungisa usayizi nendawo",
+            "touchscreen": "Sebenzisa iminwe yakho ukusondeza nokuhudula",
+            "notTouchscreen": "Sebenzisa igundane lakho nesondo ukuze usondeze futhi uhudule"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "izolo ebusuku",
+        "lastEvening": "ngobusuku bokugcina",
+        "yesterday": "izolo",
+        "thisMorning": "namhlanje ekuseni",
+        "today": "namuhla",
+        "tonight": "namuhla ebusuku",
+        "tomorrowMorning": "ekuseni",
+        "tomorrow": "kusasa",
+        "hoursAgo": "{{h}} amahora adlule",
+        "hourAgo": "{{h}} ihora eledlule",
+        "minuteAgo": "{{m}} iminithi eledlule",
+        "minutesAgo": "{{m}} amaminithi adlule",
+        "secondAgo": "{{s}} isekhondi eledlule",
+        "secondsAgo": "{{s}} imizuzwana edlule",
+        "fewSecondsAgo": "imizuzwana edlule",
+        "rightNow": "khona manje",
+        "inSecond": "kusekhondi {{s}}",
+        "inSeconds": "kumasekhondi angu-{{s}}",
+        "inMinute": "emizuzwini engu-{{m}}",
+        "inMinutes": "emaminithini angu-{{m}}",
+        "inHour": "ehoreni elingu-{{h}}",
+        "inHours": "emahoreni angu-{{h}}",
+        "inUnderMinute": "ngaphansi kweminithi elingu-1"
     }
 }

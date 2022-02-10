@@ -3,32 +3,32 @@
         "NewItemTitle": "Нов продукт"
     },
     "labels": {
-        "Streams\/invited": "Хората, които поканих",
+        "Streams\/invited": "Хора, които поканих",
         "Streams\/invitedMe": "Кой ме покани",
         "AreYouAgree": "Съгласни ли сте?",
-        "Yes": "Да",
+        "Yes": "да",
         "No": "Не",
         "DoYouAgree": "Съгласен ли си?"
     },
     "interests": {
         "Filter": "Какви са ти интересите?",
         "CanAdd": "Ако все още не можете да намерите това, което търсите, можете да добавите нов интерес по-долу:",
-        "TrySynonyms": "Не го виждате? Изпробвайте някои синоними.",
-        "AddUnderCategory": "Добавяне под категория ...",
-        "Other": "друг",
-        "Unlisted": "Скритите"
+        "TrySynonyms": "Не го виждате? Опитайте някои синоними.",
+        "AddUnderCategory": "Добавяне под категория...",
+        "Other": "Друго",
+        "Unlisted": "Скрит"
     },
     "chat": {
-        "flaggedForAdminReview": "Съобщението бе сигнализирано за администраторски преглед. Докоснете отново, за да размачите.",
-        "noOneSaid": "Никой не е казал нищо",
-        "closeChatButton": "Затворете разговора",
-        "closeChatConfirmTitle": "Затворете този разговор?",
-        "closeChatConfirm": "Наистина ли искате да затворите този разговор?",
+        "flaggedForAdminReview": "Съобщението е маркирано за преглед от администратор. Докоснете отново, за да премахнете флага.",
+        "noOneSaid": "Никой нищо не е казал",
+        "closeChatButton": "Затворете чата",
+        "closeChatConfirmTitle": "Да се затвори ли този чат?",
+        "closeChatConfirm": "Наистина ли искате да затворите този чат?",
         "closeChatConfirmYes": "да",
         "closeChatConfirmNo": "Не",
         "earlierComments": "по-ранни коментари",
-        "Subscribed": "Заглуши известията",
-        "Unsubscribed": "Получаване на известия",
+        "Subscribed": "Известията са активирани",
+        "Unsubscribed": "Известията са заглушени",
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този разговор.",
         "startedConversation": "започна разговор",
         "RealTimeCall": "Обаждане в реално време",
@@ -37,26 +37,26 @@
             "Visit": "{{displayName}} посещава чата",
             "Join": "{{displayName}} се присъедини към чата",
             "Leave": "{{displayName}} напусна чата",
-            "RelatedTo": "{{displayName}} стартира {{stream.displayType}}"
+            "RelatedTo": "{{displayName}} започна {{stream.displayType}}"
         }
     },
     "notifications": {
         "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} каза:",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} каза: {{& message.content}}",
         "Streams\/changed": "Промени в {{stream.fields.title}}",
-        "Streams\/invite": "Поканени сте в {{& stream.fields.title}}",
-        "Streams\/announcement": "Съобщение в {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} промениха достъпа до потока",
-        "Streams\/chat\/edit": "Съобщението в чата е редактирано",
-        "Streams\/chat\/remove": "Съобщението в чата е премахнато",
+        "Streams\/invite": "Бяхте поканени в {{& stream.fields.title}}",
+        "Streams\/announcement": "Съобщение в {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} промени достъпа в {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Съобщение в чата, редактирано в {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Съобщението в чата е премахнато през {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} е затворен",
-        "Streams\/task\/progress": "Напредъкът на {{stream.fields.title}}",
-        "Streams\/task\/complete": "Завършената задача: {{stream.fields.title}}",
+        "Streams\/task\/progress": "Напредъкът, постигнат на {{stream.fields.title}}",
+        "Streams\/task\/complete": "Задачата е изпълнена: {{stream.fields.title}}",
         "Streams\/task\/error": "Грешка по време на: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Входящо съобщение",
-        "ManageEmailSubscriptions": "управлявайте абонаментите си за имейли",
+        "ManageEmailSubscriptions": "управлявайте вашите имейл абонаменти",
         "IfUnsubscribe": "Ако искате да се отпишете",
-        "Streams\/relatedTo\/Streams\/call": "Ново повикване започна от {{toTitle}}",
+        "Streams\/relatedTo\/Streams\/call": "Ново обаждане започна след {{toTitle}}",
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавено към {{toTitle}} като {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} ви спомена в коментар",
@@ -65,13 +65,13 @@
     "invite": {
         "messageContent": "{{displayName}} ви покани на {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Изберете от контактите си",
+            "chooseFromContacts": "Изберете от вашите контакти",
             "selectFromContacts": "Изберете От контакти",
             "photo": "Направи снимка",
-            "photoInstruction": "Ако лицето, което е сканирало вашия QR код, е пред вас, направете снимка на тях",
+            "photoInstruction": "Ако човекът, който е сканирал вашия QR код, е пред вас, направете го снимка",
             "to": "До: {{Stream Title}}",
             "go": "Отивам",
-            "title": "каня",
+            "title": "покани",
             "placeholder": "Мобилен номер или имейл адрес",
             "orInvite": "Или поканете хора, като използвате:",
             "QR": "{{ClickOrTap}} за генериране на QR код",
@@ -79,58 +79,58 @@
             "byEmail": "електронна поща",
             "byText": "Текст",
             "byFacebook": "Facebook",
-            "byTwitter": "кикотене",
-            "QRscanned": "Те го сканираха!",
-            "chooseAgainFromContacts": "Изберете Отново от Контакти",
-            "inviteSelectedContacts": "Покана за избрани контакти",
-            "scannedQR": "{{ClickOrTap}} ако кодът е сканиран",
-            "copyLink": "{{ClickOrTap}} за да копирате връзка за покана",
-            "userChooserPlaceholder": "Търсете по име",
+            "byTwitter": "Twitter",
+            "QRscanned": "Сканираха го!",
+            "chooseAgainFromContacts": "Изберете отново от Контакти",
+            "inviteSelectedContacts": "Поканете избрани контакти",
+            "scannedQR": "{{ClickOrTap}}, ако кодът е сканиран",
+            "copyLink": "{{ClickOrTap}}, за да копирате връзката за покана",
+            "userChooserPlaceholder": "Търсене по име",
             "shareOrCopyLink": "{{ClickOrTap}} за споделяне или копиране на връзка за покана"
         },
         "email": {
-            "subject": "Хей, провери това",
-            "PleaseVisitLink": "Моля, посетете следната връзка:",
+            "subject": "Хей, виж това",
+            "PleaseVisitLink": "Моля, посетете следния линк:",
             "InvitingYou": "Каня ви на {{title}}",
             "HasInvitedYou": "{{displayName}} ви покани на {{title}}",
-            "HasMentionedYou": "{{displayName}} ви спомена в &quot;{{title}}&quot;",
+            "HasMentionedYou": "{{displayName}} ви спомена в „{{title}}“",
             "YOUAREINVITED": "ВИЕ СТЕ ПОКАНЕНИ!",
             "AcceptInvite": "Приемете покана"
         },
         "sms": {
-            "content": "Поканени сте в {{title}}. Моля, докоснете {{url}}"
+            "content": "Бяхте поканени в {{title}}. Моля, докоснете {{url}}"
         },
         "notice": {
-            "text": "Бяхте поканени. {{ClickOrTap}} тук, за да приеме и да се присъедини."
+            "text": "Вие сте поканени. {{ClickOrTap}} тук, за да приемете и да се присъедините."
         },
         "youCanNowPaste": "Вече можете да поставите тази връзка някъде, за да поканите хора",
-        "command": "каня"
+        "command": "покани"
     },
     "followup": {
         "mobile": {
-            "alert": "Поканите се изпращат от нашия номер, които вашите приятели все още не познават. Следвайте бърз текст, за да знаете, че поканата дойде от вас, като ги помолите да кликнат върху връзката.",
-            "confirm": "Поканите се изпращат от нашия номер, които вашите приятели все още не познават. Бихте ли искали да продължите с бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да кликнат върху връзката.",
-            "check": "Хей, току-що ви изпратих покана за {{app}} приложението. Моля, проверете вашите SMS и кликнете върху връзката!",
+            "alert": "Поканите се изпращат от нашия номер, който вашите приятели все още не разпознават. Продължете с бърз текст, за да ги уведомите, че поканата е дошла от вас, като ги помолите да щракнат върху връзката.",
+            "confirm": "Поканите се изпращат от нашия номер, който вашите приятели все още не разпознават. Искате ли да последвате бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да щракнат върху връзката.",
+            "check": "Хей, току-що ви изпратих покана за приложението {{app}}. Моля, проверете вашите sms-и и щракнете върху връзката!",
             "CheckYourMobile": "Моля, проверете SMS и следвайте инструкциите!"
         },
         "email": {
-            "alert": "Поканите се изпращат от нашия домейн, които вашите приятели все още не разпознават. Следвайте бърз текст, за да знаете, че поканата дойде от вас, като ги помолите да кликнат върху връзката.",
-            "confirm": "Поканите се изпращат от нашия домейн, които вашите приятели все още не разпознават. Бихте ли искали да продължите с бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да кликнат върху връзката.",
+            "alert": "Поканите се изпращат от нашия домейн, който вашите приятели все още не разпознават. Продължете с бърз текст, за да ги уведомите, че поканата е дошла от вас, като ги помолите да щракнат върху връзката.",
+            "confirm": "Поканите се изпращат от нашия домейн, който вашите приятели все още не разпознават. Искате ли да последвате бърз текст, за да ги уведомите, че поканата е от вас, като ги помолите да щракнат върху връзката.",
             "subject": "Получихте ли покана?",
-            "body": "Хей, току-що ви изпратих покана за {{app}} приложението. Моля, проверете електронната си поща и кликнете върху връзката там!",
+            "body": "Хей, току-що ви изпратих покана за приложението {{app}}. Моля, проверете имейла си и кликнете върху връзката там!",
             "CheckYourEmail": "Моля, проверете имейла си и следвайте инструкциите!"
         }
     },
     "participating": {
         "Title": "Заглавие",
-        "Subscribed": "Записан",
-        "Participants": "Участниците",
-        "AreYouSureRemoveIdentifier": "Сигурен ли сте да премахнете този идентификатор?",
-        "AreYouSureUnsubscribeIdentifier": "Сигурни ли сте, че отпишете този идентификатор? Той ще изключи известията към този идентификатор.",
-        "AreYouSureUnsubscribeDevice": "Сигурни ли сте, че се отпишете от това устройство? Той ще изключи известията за това устройство.",
+        "Subscribed": "Абонирах се",
+        "Participants": "Участници",
+        "AreYouSureRemoveIdentifier": "Сигурни ли сте, че ще премахнете този идентификатор?",
+        "AreYouSureUnsubscribeIdentifier": "Сигурни ли сте да прекратите абонамента за този идентификатор? Той ще изключи известията до този идентификатор.",
+        "AreYouSureUnsubscribeDevice": "Сигурни ли сте да прекратите абонамента за това устройство? Той ще изключи известията до това устройство.",
         "Identifiers": "Идентификатори",
-        "Devices": "устройства",
-        "Streams": "потоци",
+        "Devices": "Устройства",
+        "Streams": "Потоци",
         "AreYouSureRemoveParticipant": "Наистина ли искате да премахнете този участник?",
         "RemoveParticipant": "Премахване на участник"
     },
@@ -139,116 +139,116 @@
             "microphoneTitle": "Активиране на микрофона",
             "cameraTitle": "Активиране на камерата",
             "cameraAndMicrophoneTitle": "Активиране на камерата и микрофона",
-            "dialogTitle": "Активиране на диалоговия прозорец",
+            "dialogTitle": "Свързване",
             "microphoneBtn": "Активиране на микрофона",
             "cameraBtn": "Активиране на камерата",
-            "cameraAndMicrophoneBtn": "Активиране на камерата и микрофона"
+            "cameraAndMicrophoneBtn": "Активирайте камерата и микрофона"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "инструкции",
+            "dialogTitle": "Инструкции",
             "permissionDenied": "Разрешението за {{kind}} е отказано. За да го използвате, моля, изпълнете следните стъпки:",
-            "point1": "Отворете &quot;Настройки&quot; -&gt; &quot;Разширени&quot; -&gt; &quot;Поверителност и сигурност&quot; -&gt; &quot;Настройки на сайта&quot; -&gt; &quot;Камера&quot; или &quot;Настройки на сайта&quot; -&gt; &quot;Микрофон&quot;",
-            "point2": "Премахнете {{hostname}} от списъка „Блокиране“"
+            "point1": "Отидете на &quot;Настройки&quot; -&gt; &quot;Разширени&quot; -&gt; &quot;Поверителност и сигурност&quot; -&gt; &quot;Настройки на сайта&quot; -&gt; &quot;Камера&quot; или &quot;Настройки на сайта&quot; -&gt; &quot;Микрофон&quot;",
+            "point2": "Премахнете {{hostname}} от списъка „Блокиране“."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "инструкции",
-            "permissionDenied": "Разрешението за {{kind}} е отказано. Моля, презаредете тази страница и потвърдете достъп до {{kind}}, за да се присъедините към конференцията."
+            "dialogTitle": "Инструкции",
+            "permissionDenied": "Разрешението за {{kind}} е отказано. Моля, презаредете тази страница и потвърдете достъпа до {{kind}}, за да се присъедините към конференцията."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "инструкции",
+            "dialogTitle": "Инструкции",
             "permissionDenied": "Разрешението за {{kind}} е отказано. За да го използвате, моля, изпълнете следните стъпки:",
-            "point1": "Отидете в настройките си за Android",
+            "point1": "Отидете на вашите настройки за Android",
             "point2": "Отворете „Приложения и известия“",
             "point3": "Намерете „{{communityName}}“ и го отворете",
             "point4": "Докоснете Разрешения",
-            "point5": "Активиране {{kind}}"
+            "point5": "Активиране на {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "инструкции",
+            "dialogTitle": "Инструкции",
             "permissionDenied": "Разрешението за {{kind}} е отказано. За да го използвате, моля, изпълнете следните стъпки:",
-            "point1": "Отидете на настройките за iOS",
+            "point1": "Отидете на вашите настройки за iOS",
             "point2": "Отворете „Поверителност“",
             "point3": "Намерете {{kind}} и го отворете",
             "point4": "Намерете „{{communityName}}“ и активирайте"
         },
         "notices": {
-            "youJoinedRoom": "Присъединихте се към стаята",
+            "youJoinedRoom": "Ти се присъедини към стаята",
             "joining": "Присъединяване: {{userName}}",
             "sbLeftRoom": "{{userName}} напусна стаята",
-            "youLeftRoom": "Напуснахте стаята",
-            "codeCopied": "Напуснахте стаята",
-            "sbBeganFbLive": "{{userName}} започна излъчването на това обаждане във Facebook",
+            "youLeftRoom": "Ти напусна стаята",
+            "codeCopied": "Ти напусна стаята",
+            "sbBeganFbLive": "{{userName}} започна да излъчва това обаждане във Facebook",
             "sbStoppedFbLive": "{{userName}} спря да излъчва това обаждане във Facebook",
             "youBeganFbLive": "Започнахте да излъчвате това обаждане във Facebook",
             "youStoppedFbLive": "Спряхте да излъчвате това обаждане във Facebook",
-            "linkCopiedToCb": "Връзка се копира в клипборда",
-            "codeCopiedToCb": "Кодът се копира в клипборда",
+            "linkCopiedToCb": "Връзката е копирана в клипборда",
+            "codeCopiedToCb": "Кодът е копиран в клипборда",
             "userHasNoVideo": "Участникът няма видео",
-            "openInBrowserAlert": "Отворете връзката в браузъра Safari, за да се присъедините към конференцията.",
-            "youBeganVideoRecording": "Започнахте да записвате тази конференция",
+            "openInBrowserAlert": "Отворете връзка в браузъра Safari, за да се присъедините към конференцията.",
+            "youBeganVideoRecording": "Вие започнахте да записвате тази конференция",
             "youStoppedVideoRecording": "Спряхте да записвате тази конференция",
-            "switchingRoom": "Стая за смяна ...",
-            "forceDisconnecting": "Ще бъдете изключени в рамките на 5 секунди",
+            "switchingRoom": "Смяна на стая...",
+            "forceDisconnecting": "Ще бъдете прекъснати в рамките на 5 секунди",
             "youStartedLive": "Започнахте да излъчвате това обаждане до персонализиран RTMP",
-            "youStoppedLive": "Спряхте излъчването на това обаждане към персонализиран RTMP",
+            "youStoppedLive": "Спряхте да излъчвате това обаждане към персонализиран RTMP",
             "sbStartedLiveStreaming": "{{userName}} започна на живо",
             "sbStoppedLiveStreaming": "{{userName}} завърши на живо",
-            "liveStopped": "Възникна грешка при изпращането на видеоклип до крайната точка",
+            "liveStopped": "Възникна грешка при изпращане на видео към крайната точка",
             "forceDisconnectingImmediately": "Бяхте прекъснати от хост"
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
             "screenSharing": "Споделяне на екрана",
             "shareAnotherScreen": "Споделете друг екран",
-            "turnOffCameras": "Изключете всички камери",
+            "turnOffCameras": "Изключете камерата",
             "startFBLive": "Стартирайте Facebook Livestream",
             "stopFBLive": "Спрете Facebook Livestream",
-            "fbLiveTitle": "Заглавие на живо",
-            "fbLiveDescription": "Описание на живо",
+            "fbLiveTitle": "Заглавие на предаване на живо",
+            "fbLiveDescription": "Опишете своя поток на живо. За какво става дума?",
             "fbOnlyMeLiveAccess": "Само аз",
             "fbFriendsAccess": "Приятели",
-            "fbPublicAccess": "обществен",
+            "fbPublicAccess": "Обществени",
             "fbStartLive": "Отидете на живо",
-            "fbStopLive": "Край на живо",
-            "fbEmbedCode": "закрепвам",
+            "fbStopLive": "Край на живо предаване",
+            "fbEmbedCode": "Вграждане",
             "copy": "копие",
-            "turnOffVideo": "Изключете споделянето на камера \/ екран",
+            "turnOffVideo": "Изключете споделянето на камера\/екран",
             "turnOffScreenSharing": "Изключете споделянето на екрана",
             "cameraIsTurnedOff": "Камерата е изключена",
-            "startRecording": "Започнете записа",
+            "startRecording": "Започнете да записвате",
             "stopRecording": "Спрете записа",
-            "recordingInProgress": "Записът е в ход ...",
-            "publishOnTimeline": "Публикуване на времевата линия",
+            "recordingInProgress": "Записването е в ход...",
+            "publishOnTimeline": "Публикувайте на времевата линия",
             "publishToGroup": "Публикуване в групата",
             "turnOffAudioInput": "Изключване на микрофона",
             "micIsTurnedOff": "Микрофонът е изключен",
-            "start": "Старт",
+            "start": "Започнете",
             "stop": "Спри се",
             "streamingSettings": "Настройки",
-            "streamToRTMP": "Поток към персонализиран RTMP",
+            "streamToRTMP": "Поточно предаване към персонализиран RTMP",
             "dialogTitle": "Видео настройки",
             "startBroadcasting": "Започнете излъчване",
             "broadcastingInProgress": "Излъчването е в ход"
         },
         "participantsPopup": {
-            "disconnect": "Прекъсване на връзката",
+            "disconnect": "Прекъснете връзката",
             "floatingScreens": "Плаващи екрани",
-            "tiledScreens": "Облицовани екрани",
-            "loudestExceptMe": "Най-силно освен мен",
-            "maximizeLoudest": "Увеличете най-силно",
-            "staticMaximized": "Статичен максимизиран",
-            "manual": "наръчник",
+            "tiledScreens": "Екрани с плочки",
+            "loudestExceptMe": "Най-силният освен мен",
+            "maximizeLoudest": "Увеличете най-високо",
+            "staticMaximized": "Статично увеличено",
+            "manual": "Ръководство",
             "turnOffCamera": "Скриване на видеоклипа",
             "turnOffAudio": "Заглушаване на звука",
             "turnOffScreenSharing": "Скриване на споделянето на екрана",
             "turnOnCamera": "Показване на видео",
-            "turnOnAudio": "Спиране на звука",
+            "turnOnAudio": "Включване на звука",
             "turnOnScreenSharing": "Показване на споделяне на екрана",
             "fullScreen": "Цял екран",
             "dialogTitle": "Настройки на участниците"
         },
         "notAllowedToJoinCall": "Нямате разрешение да се присъедините към този поток.",
-        "streamTitle": "{{1}} обаждане на живо",
+        "streamTitle": "{{1}} започна разговор на живо",
         "preview": {
             "preamble": "Среща:",
             "Meeting": "Среща",
@@ -259,7 +259,7 @@
             "micIsOn": "Микрофонът е включен",
             "cameraIsOff": "Камерата е изключена",
             "cameraIsOn": "Камерата е включена",
-            "screenSharingIsOn": "Споделянето на екрани е включено",
+            "screenSharingIsOn": "Споделянето на екрана е включено",
             "screenSharingIsOff": "сподели екран",
             "joinNow": "Присъединете се към обаждането"
         },
@@ -278,12 +278,12 @@
             "description": "Входяща кутия за покани"
         },
         "Streams\/resource": {
-            "displayType": "средство",
+            "displayType": "Ресурс",
             "description": "поток за управление на достъпа до ресурс и публикуване на съобщения за актуализации"
         },
         "Streams\/task": {
-            "displayType": "задача",
-            "description": "задача, която трябва да се изпълни от хора или машини"
+            "displayType": "Задача",
+            "description": "за получаване на актуализации за напредъка на определена задача"
         },
         "Streams\/number": {
             "displayType": "номер",
@@ -295,15 +295,15 @@
         },
         "Streams\/text": {
             "displayType": "Текст",
-            "description": "текст на текста"
+            "description": "основна част от текста"
         },
         "Streams\/text\/small": {
             "displayType": "Текст",
-            "description": "малък текст на текста"
+            "description": "малка част от текста"
         },
         "Streams\/text\/medium": {
             "displayType": "Текст",
-            "description": "средно тяло на текста"
+            "description": "среден обем на текста"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Имейл адрес",
@@ -318,8 +318,8 @@
             "description": "връзка в мрежата"
         },
         "Streams\/image": {
-            "displayType": "Изображение",
-            "description": "визуално изображение",
+            "displayType": "Образ",
+            "description": "визуален образ",
             "newItem": "Добавяне на изображение"
         },
         "Streams\/images": {
@@ -327,18 +327,18 @@
             "description": "галерия от изображения"
         },
         "Streams\/album": {
-            "displayType": "албум",
-            "description": "албум, към който са свързани различни медии"
+            "displayType": "Албум",
+            "description": "албум, с който са свързани различни медии"
         },
         "Streams\/file": {
-            "displayType": "досие",
+            "displayType": "Файл",
             "description": "качен файл",
             "newItem": "Добави файл"
         },
         "Streams\/audio": {
             "displayType": "Аудио клип",
             "description": "аудио клип",
-            "newItem": "Добавете аудио"
+            "newItem": "Добавяне на аудио"
         },
         "Streams\/video": {
             "displayType": "Видеоклип",
@@ -346,39 +346,39 @@
             "newItem": "Добавяне на видео"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
+            "displayType": "Поток на живо",
             "description": "аудио или видео на живо"
         },
         "Streams\/category": {
-            "displayType": "категория",
+            "displayType": "Категория",
             "description": "категория, към която могат да бъдат свързани други потоци"
         },
         "Streams\/participating": {
-            "displayType": "Участващ индекс",
-            "description": "потоците са свързани \/ несвързани с това, когато потребителят се присъедини \/ напусне"
+            "displayType": "Индекс за участие",
+            "description": "потоците са свързани\/несвързани с това, когато потребител се присъедини\/напусне"
         },
         "Streams\/interest": {
-            "displayType": "интерес",
-            "description": "представлява интерес на потребителя към определена тема"
+            "displayType": "Интерес",
+            "description": "представлява интереса на потребителя към определена тема"
         },
         "Streams\/incoming": {
-            "displayType": "входящ",
-            "description": "местоназначение за съобщения, изпратени от други потребители"
+            "displayType": "Входящи",
+            "description": "дестинация за съобщения, изпратени от други потребители"
         },
         "Streams\/chat": {
-            "displayType": "разговор",
-            "description": "разговор между потребители, с история"
+            "displayType": "Разговор",
+            "description": "разговор между потребители с история"
         },
         "Streams\/webrtc": {
             "displayType": "Обаждане в реално време",
-            "description": "видео \/ аудио разговор в реално време"
+            "description": "видео\/аудио разговор в реално време"
         },
         "Streams\/tasks": {
             "description": "категория за задачи",
             "displayType": "Задачи"
         },
         "Streams\/experience": {
-            "description": "общ опит за членове на общност",
+            "description": "общо преживяване за членовете на общността",
             "displayType": "Общ опит за членове на общност"
         },
         "Streams\/greeting": {
@@ -396,12 +396,12 @@
         },
         "Streams\/answer": {
             "displayType": "Отговор",
-            "description": "отговор поток"
+            "description": "поток от отговори"
         },
         "Streams\/calls": {
             "displayType": "Обаждания",
             "description": "категория за потоци\/webrtc",
-            "MaxRelationsExceeded": "Превишен е максималният брой обаждания"
+            "MaxRelationsExceeded": "Максималният брой обаждания е надхвърлен"
         }
     },
     "messages": {
@@ -413,20 +413,20 @@
             "in": "в",
             "body": "в {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "е публикувано до",
+                "hasBeenPostedTo": "е публикуван на",
                 "byAvatar": "от {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "има нов {{instructions.fromDisplayType}}",
                 "byAvatar": "добавено от {{avatar.displayName}}"
             },
-            "startedCallIn": "започна повикване"
+            "startedCallIn": "започна обаждане"
         }
     },
     "menu": {
-        "placeholder": "тип заглавие на страницата",
+        "placeholder": "въведете заглавие на страницата",
         "ModTab": "Промяна на елемент",
-        "Save": "Запази",
+        "Save": "Запазете",
         "Delete": "Изтрий",
         "Submenu": "Подменю"
     },
@@ -443,12 +443,12 @@
         "link": "Връзка",
         "setUrl": "Задайте URL",
         "save": "Запазете",
-        "setClip": "Изрежете клип",
+        "setClip": "Изрежете клипс",
         "invalidURL": "невалиден адрес",
         "invalidFile": "Невалиден файл",
         "errorNoSource": "Няма аудио източник",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
     },
     "video": {
         "reset": "Нулиране",
@@ -459,12 +459,12 @@
         "link": "Връзка",
         "setUrl": "Задайте URL",
         "save": "Запазете",
-        "setClip": "Изрежете клип",
+        "setClip": "Изрежете клипс",
         "invalidURL": "невалиден адрес",
         "invalidFile": "Невалиден файл",
         "errorNoSource": "Няма видео източник",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
     },
     "pdf": {
         "reset": "Нулиране",
@@ -475,12 +475,12 @@
         "link": "Връзка",
         "setUrl": "Задайте URL",
         "save": "Запазете",
-        "setClip": "Изрежете клип",
+        "setClip": "Изрежете клипс",
         "invalidURL": "невалиден адрес",
         "invalidFile": "Невалиден файл",
-        "errorNoSource": "Няма PDF източник",
+        "errorNoSource": "Няма източник на pdf",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
     },
     "image": {
         "reset": "Нулиране",
@@ -491,12 +491,12 @@
         "link": "Връзка",
         "setUrl": "Задайте URL",
         "save": "Запазете",
-        "setClip": "Изрежете клип",
+        "setClip": "Изрежете клипс",
         "invalidURL": "невалиден адрес",
         "invalidFile": "Невалиден файл",
         "errorNoSource": "Няма източник на изображение",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "За съжаление файлът е твърде голям.<br> Максималният размер на файла е {{size}}",
+        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}",
         "uploadedImage": "Качено изображение",
         "imageTitle": "Заглавие на изображението"
     },
@@ -508,29 +508,29 @@
         "NewQuestion": "Нов въпрос",
         "NewAnswer": "Нов отговор",
         "AnswerDetails": "Подробности за отговора",
-        "answerOption": "Вариант",
+        "answerOption": "Опция",
         "answerOptionExclusive": "Изключителен",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "безплатен отговор ...",
-        "SaveQuestion": "Запазете въпроса",
-        "SaveAnswer": "Запазване на отговор",
-        "AddAnotherAnswer": "Добавете още един отговор",
+        "answerTextarea": "Текстова област",
+        "FreeAnswer": "Напишете своя отговор тук",
+        "SaveQuestion": "Запазване на въпроса",
+        "SaveAnswer": "Запазете отговора",
+        "AddAnotherAnswer": "Добавете друг отговор",
         "ErrorAnswers": "Моля, добавете дори един отговор",
-        "AlreadyAnswered": "Вече отговорих",
+        "AlreadyAnswered": "Вече отговори",
         "TitlePlaceholder": "Въведете въпроса си",
-        "ContentPlaceholder": "Поставете допълнителна информация тук, за да помогнете на хората да отговорят",
+        "ContentPlaceholder": "Поставете всяка допълнителна информация тук, за да помогнете на хората да отговорят",
         "ErrorTitle": "Изисква се въпрос",
         "Placeholder": "Заместител"
     },
     "experience": {
         "NewExperience": "Ново преживяване",
-        "DefineTitle": "Моля, определете заглавие",
+        "DefineTitle": "Моля, дефинирайте заглавие",
         "Create": "Създайте"
     },
     "calls": {
         "SettingsTitle": "Обаждания",
         "MaxCalls": "Макс се обажда",
-        "Update": "Актуализиране",
+        "Update": "Актуализация",
         "NoCallsYet": "Все още няма обаждания",
         "CallReasonTitle": "За какво е това обаждане?",
         "WaitingRoom": "Чакалня"

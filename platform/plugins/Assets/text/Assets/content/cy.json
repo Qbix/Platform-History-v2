@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tapiwch i dalu"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tâl wedi&#39;i brosesu ar gyfer {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Diolch am eich taliad i {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Mae {{call 'user.displayName'}} wedi tanysgrifio i {{plan.title}}",
+        "YouSubscribedTo": "Rydych wedi cael eich tanysgrifio i {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Rydych yn cael taliad o {{displayAmount}} gan {{call 'publisher.displayName'}} gan &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, mae hyn er mwyn rhoi gwybod i chi bod {{1}} wedi cael ei godi {{2}} am {{3}} gan {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Diolch am eich taliad am &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, dim ond cadarnhad cyflym yw hwn eich bod wedi llwyddo i dalu {{2}} i {{3}} am {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Gwybodaeth am drefn",
+        "PaymentMethod": "Dull talu",
+        "ContactInfo": "Gwybodaeth cyswllt",
+        "Pay": "Talu"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Gwahoddiad wedi&#39;i dderbyn gan {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} wedi rhoi enw cyntaf",
+        "Streams_user_lastname": "{{invitedUserName}} wedi rhoi cyfenw",
+        "Streams_user_icon": "{{invitedUserName}} wedi rhoi eicon",
+        "Places_user_location": "{{invitedUserName}} wedi rhoi lleoliad",
+        "Streams_greeting": "Rhoddodd {{invitedUserName}} y cyfarchiad",
+        "YouHaveCreditsToStart": "Mae gennych {{amount}} o gredydau i ddechrau",
+        "PaymentFor": "Taliad am &quot;{{1}}&quot;",
+        "PaymentTo": "Taliad i {{1}}",
+        "PaymentToUser": "Taliad i {{toUserName}}",
+        "CreatePaidStream": "ar gyfer creu {{toStreamName}}",
+        "JoinedPaidStream": "ar gyfer archeb yn &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ar gyfer creu cymuned &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "fel ad-daliad archeb yn &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Wedi prynu {{amount}} o gredydau",
+        "BonusCredits": "Credydau bonws {{amount}}",
+        "BuyAmountCredits": "Prynu {{amount}} credyd",
+        "WatchClip": "Wedi ennill {{amount}} credyd am wylio {{fromStreamTitle}}",
+        "MissingCredits": "Credydau Coll",
+        "YouMissingCredits": "Mae angen {{amount}} o gredydau ychwanegol i barhau.",
+        "BuyCredits": "Prynu credydau",
+        "BuyBonus": "Bydd prynu {{amount}} credyd ar unwaith yn arwain at {{bonus}} fonws credydau.",
+        "Buy": "Prynwch",
+        "PurchaseCredits": "Credydau Prynu",
+        "Credits": "Credydau",
+        "ErrorInvalidAmount": "Swm annilys",
+        "ErrorInvalidCurrency": "Yn anffodus nid ydym yn cefnogi arian cyfred {{currency}} eto",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} credyd",
+            "BonusCredits": "{{amount}} credyd"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Dyddiad",
+        "Amount": "Swm",
+        "Description": "Disgrifiad",
+        "Client": "Cleient",
+        "To": "i",
+        "From": "rhag",
+        "SeeHistory": "Gweld hanes talu ar gyfer {{1}}",
+        "HistoryEmpty": "Nid oes gennych unrhyw ddata eto",
+        "PaymentFor": "Wedi anfon {{amount}} credyd",
+        "PaymentTo": "Wedi anfon {{amount}} credyd",
+        "PaymentToUser": "Wedi anfon {{amount}} credyd",
+        "CreatePaidStream": "Wedi gwario {{amount}} credyd",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Wedi ennill {{amount}} credyd",
+            "-": "Wedi gwario {{amount}} credyd"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Wedi ennill {{amount}} credyd",
+            "-": "Wedi gwario {{amount}} credyd"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Wedi derbyn {{amount}} credyd",
+            "-": "Wedi anfon {{amount}} credyd"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Wedi gwario {{amount}} credyd",
+        "BoughtCredits": "Wedi prynu {{amount}} o gredydau",
+        "BonusCredits": "Wedi cael {{amount}} credyd bonws",
+        "InviteAcceptedBy": "Wedi ennill {{amount}} credyd",
+        "Streams_user_firstname": "Wedi ennill {{amount}} credyd",
+        "Streams_user_lastname": "Wedi ennill {{amount}} credyd",
+        "Streams_user_icon": "Wedi ennill {{amount}} credyd",
+        "Places_user_location": "Wedi ennill {{amount}} credyd",
+        "Streams_greeting": "Wedi ennill {{amount}} credyd",
+        "YouHaveCreditsToStart": "Wedi ennill {{amount}} credyd"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Gosod Gwybodaeth Taliad",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Dechrau Tanysgrifio",
+            "message": "Hoffech chi danysgrifio i {{title}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Cerdyn credyd neu ddebyd",
+        "SubscribePayment": "Tanysgrifio Taliad",
+        "ImmediatePayment": "Taliad Ar Unwaith"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Gosod Gwybodaeth Taliad",
+        "BuyAmountCredits": "Prynu {{amount}} credyd",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Gwneud Taliad",
+            "message": "Ydych chi&#39;n cytuno i dalu {{symbol}}{{amount}}?",
+            "ok": "iawn",
+            "cancel": "Canslo"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Credydau",
+            "description": "yn cadw golwg ar gredydau a thaliadau"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Cynllun Tanysgrifio",
+            "description": "cynllun tanysgrifio"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Tanysgrifiad",
+            "description": "tanysgrifiad"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Cynnyrch",
+            "description": "cynnyrch yn cael ei werthu"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Gwasanaeth",
+            "description": "gwasanaeth yn cael ei gynnig"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Wedi ennill {{amount}} credyd"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Wedi prynu {{amount}} o gredydau"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Credydau bonws {{amount}}"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Wedi gwario {{amount}} credyd"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Wedi anfon {{amount}} credyd i {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Wedi derbyn {{amount}} credyd gan {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Gwasanaeth Newydd",
+            "TitlePlaceholder": "Teitl gwasanaeth",
+            "PricePlaceholder": "Gosod pris",
+            "LinkPlaceholder": "gosod dolen gwybodaeth ychwanegol",
+            "DescriptionPlaceholder": "Disgrifiad o&#39;r gwasanaeth",
+            "SaveService": "Arbed Gwasanaeth",
+            "SelectRequiredParticipants": "Cyfranogwyr Gofynnol"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Rheoli Templedi Gwasanaeth",
+        "ManageServices": "Rheoli Gwasanaethau",
+        "Free": "Rhad ac am ddim",
+        "OptionalContribution": "Cyfraniad dewisol",
+        "RequiredPayment": "Taliad gofynnol",
+        "AreYouSureDelete": "Ydych chi&#39;n siŵr eich bod am ddileu&#39;r gwasanaeth hwn?",
+        "AmountServicesRelated": "Mae {{amount}} ar gael sy&#39;n gysylltiedig â&#39;r gwasanaeth hwn. Maent hefyd yn cael eu dileu."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Gwybodaeth am {{title}} NFT",
+        "Description": "Gwybodaeth fanwl am NFT",
+        "FixedBid": "Prynwch nawr",
+        "CurrentBid": "Cais cyfredol",
+        "StartingIn": "Yn dechrau i mewn",
+        "EndingIn": "Yn dod i ben i mewn",
+        "CreateNFT": "Creu NFT",
+        "TitlePlaceholder": "Rhowch deitl i&#39;ch NFT",
+        "DescriptionPlaceholder": "Rhowch ddisgrifiad i&#39;ch NFT",
+        "CreateYourNFT": "Creu eich NFT",
+        "Royalties": "Breindaliadau",
+        "RoyaltyPlaceholder": "Dewisol. Swm a dalwyd i&#39;r crëwr cyn trosglwyddo.",
+        "ExpirationDate": "Dyddiad Dod i Ben",
+        "StartingDate": "Dyddiad cychwyn",
+        "BidsBelowThisAmount": "Ni chaniateir bidiau o dan y swm hwn",
+        "MinimumBid": "Cynnig lleiaf",
+        "Price": "Pris",
+        "Owner": "Perchennog",
+        "SelectCategory": "Dewiswch gategori",
+        "Day": "Dydd",
+        "Days": "Dyddiau",
+        "Hour": "Awr",
+        "Hours": "Oriau",
+        "Minute": "Munud",
+        "Minutes": "Munudau",
+        "Second": "Yn ail",
+        "Seconds": "Eiliadau",
+        "SalesCreator": "Bydd y gwerthiant yn mynd i&#39;r crëwr",
+        "Details": "Manylion",
+        "Bids": "Bidiau",
+        "History": "Hanes",
+        "LoremIpsum": "Testun ffug o&#39;r diwydiant argraffu a chysodi yw Lorem Ipsum.",
+        "PutOnSale": "Rhoi ar werth",
+        "PutOffSale": "Tynnu&#39;n ôl o&#39;r gwerthiant",
+        "Transfer": "Trosglwyddiad",
+        "Update": "Diweddariad",
+        "UpdateToken": "Diweddaru Tocyn",
+        "CreateToken": "Creu Tocyn",
+        "PlaceBid": "Bid Lle",
+        "SoldOut": "Wedi gwerthu",
+        "NftName": "Enw NFT",
+        "DescribeYourNFT": "Disgrifiwch eich NFT",
+        "NftPicture": "Llun i gynrychioli NFT",
+        "NftMovie": "Ffilm i gynrychioli NFT",
+        "UploadMovie": "Uwchlwytho ffilm",
+        "MovieSource": "Ffynhonnell Ffilm",
+        "UploadFile": "Llwythwch ffeil i fyny",
+        "PutOnMarketplace": "Rhoi ar farchnad",
+        "InstantPurchase": "Rhowch y pris i ganiatáu i ddefnyddwyr brynu&#39;ch NFT ar unwaith",
+        "FixedPrice": "Pris sefydlog",
+        "TimedAuction": "Arwerthiant wedi&#39;i amseru",
+        "OpenForBids": "Ar agor ar gyfer cynigion",
+        "PriceOnePiece": "Nodwch y pris am un darn",
+        "EnterMinimumBid": "Rhowch y cynnig lleiaf",
+        "SelectChain": "Dewiswch gadwyn",
+        "WrongChain": "Creodd yr NFT hwn o dan &quot;{{chain}}&quot;. Defnyddiwch y gadwyn hon.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Mewnforio NFT&#39;s",
+            "fileNotFound": "Mae&#39;n ddrwg gennym, ni chanfuwyd y ffeil CSV.",
+            "fileEmpty": "Mae&#39;n ddrwg gennym, mae&#39;r ffeil CSV yn wag.",
+            "userIdNotFound": "defnyddiwr yn bodoli ond id yn wag",
+            "errorLine": "llinell {{1}}",
+            "fieldNotFound": "Ni chanfuwyd maes gofynnol &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "ffrwd tasg yn annilys",
+            "instructionsEmpty": "cyfarwyddiadau ffrwd tasg yn wag",
+            "complete": "Cyflawn",
+            "activateUsers": "anfon neges actifadu at ddefnyddwyr?",
+            "importProgress": "Cynnydd",
+            "importOptions": "Opsiynau",
+            "sampleCSV": "Lawrlwythwch Sampl CSV",
+            "fileLabel": "Uwchlwytho Taenlen:",
+            "errorsTitle": "Digwyddodd gwallau"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Hidlo yn ôl Casgliadau NFT",
+                "ShowNFTCollection": "Dangos casgliad NFT yn ...",
+                "AllCollections": "Pob Casgliad"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Pob Awdwr",
+                "AllUsers": "Pawb",
+                "FilterByAuthors": "Hidlo yn ôl Awduron"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Yn ôl i&#39;r Casgliad"
     }
 }

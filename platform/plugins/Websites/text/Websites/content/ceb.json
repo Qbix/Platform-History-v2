@@ -2,16 +2,16 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Pag-link aron itanyag",
+                "link": "Link sa pag-promote",
                 "startDate": "Petsa sa Pagsugod",
-                "startTime": "Oras sa Pagsugod",
-                "endDate": "Kataposang Petsa",
-                "endTime": "Katapusan nga Oras",
-                "budget": "Budget"
+                "startTime": "Panahon sa Pagsugod",
+                "endDate": "Petsa sa Katapusan",
+                "endTime": "Panahon sa Katapusan",
+                "budget": "Badyet"
             },
             "interests": {
-                "Title": "Pagsala Pinaagi sa Interes",
-                "FilterInterests": "Pagsugod sa pag-type usa ka interes ..."
+                "Title": "Salain Pinaagi sa Interes",
+                "FilterInterests": "Sugdi ang pag-type og interes..."
             },
             "Interest": "Interes",
             "Location": "Lokasyon"
@@ -20,55 +20,55 @@
     "webpage": {
         "composer": {
             "Go": "Lakaw",
-            "PasteLinkHere": "https: \/\/ ...",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Pag-browse",
-            "WriteToStartConversation": "Isulat ang imong hunahuna aron masugdan ang panagsulti",
-            "StartConversation": "Pagsugod sa Panagsulti",
-            "GotoConversation": "Pag-adto sa Panagsulti",
-            "reset": "Pag-usab",
-            "edit": "Pag-edit",
-            "link": "Pag-link",
+            "WriteToStartConversation": "Isulat ang imong mga hunahuna sa pagsugod sa panag-istoryahanay",
+            "StartConversation": "Pagsugod sa Pag-istoryahanay",
+            "GotoConversation": "Adto sa Pag-istoryahanay",
+            "reset": "I-reset",
+            "edit": "Edit",
+            "link": "Link",
             "setUrl": "Ibutang ang URL",
-            "save": "Pagtipig",
+            "save": "Tipigi",
             "setClip": "Guntinga ang Clip",
             "invalidURL": "Dili balido nga URL"
         },
-        "FileTooLarge": "Labing kadako ang file alang sa pag-cache. Max nga kadako sa file {{size}}",
-        "InvalidPDF": "Ang file dili usa ka balido nga PDF",
-        "StartTypingTitleOrKeywords": "Sugdi ang pag-type sa ulohan o mga keyword ..."
+        "FileTooLarge": "Dako kaayo ang file para sa pag-cache. Max nga gidak-on sa payl {{size}}",
+        "InvalidPDF": "Ang file dili balido nga PDF",
+        "StartTypingTitleOrKeywords": "Sugdi ang pag-type sa titulo o mga keyword..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Usa ka dokumento sa HTML nga mahimo tan-awon ug mai-edit sa lainlaing mga tiggamit",
+            "description": "Usa ka HTML nga dokumento nga makita ug ma-edit sa lain-laing tiggamit",
             "displayType": "Artikulo"
         },
         "Websites\/slide": {
             "description": "Ang usa ka slide sa usa ka presentasyon, mahimong maglakip sa HTML, audio ug uban pa.",
-            "displayType": "Pag-slide"
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
             "description": "Usa ka presentasyon nga naglangkob sa lainlaing mga slide",
-            "displayType": "Pasundayag"
+            "displayType": "Presentasyon"
         },
         "Websites\/advert\/unit": {
             "description": "Usa ka yunit sa advertising sa usa ka website",
-            "displayType": "Unit sa advert"
+            "displayType": "Yunit sa ad"
         },
         "Websites\/advert\/placement": {
-            "description": "Usa ka paagi sa pag-grupo sa mga yunit sa advertising sa us aka ngalan",
-            "displayType": "Pagpahiluna sa advert"
+            "description": "Usa ka paagi sa paggrupo sa mga yunit sa advertising ubos sa usa ka ngalan",
+            "displayType": "Pagbutang sa ad"
         },
         "Websites\/advert\/creative": {
-            "description": "Sulud alang sa usa ka ad",
-            "displayType": "Nagmugna paglalang"
+            "description": "Kontento alang sa usa ka ad",
+            "displayType": "Mamugnaon nga ad"
         },
         "Websites\/advert\/campaign": {
             "description": "Usa ka kampanya sa advertising",
-            "displayType": "Kampanya sa advert"
+            "displayType": "Kampanya sa ad"
         },
         "Websites\/webpage": {
-            "description": "Nagrepresenta sa usa ka website kansang metadata gikuhaan",
-            "displayType": "Panid sa web"
+            "description": "Nagrepresentar sa usa ka website kansang metadata gi-scrap",
+            "displayType": "Web page"
         }
     }
 }

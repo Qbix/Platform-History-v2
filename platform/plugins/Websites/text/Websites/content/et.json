@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link reklaamimiseks",
+                "startDate": "Algus kuupäev",
+                "startTime": "Algusaeg",
+                "endDate": "Lõppkuupäev",
+                "endTime": "Lõpuaeg",
+                "budget": "Eelarve"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filtreeri huvide järgi",
+                "FilterInterests": "Alustage huvi tippimist..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Huvi",
+            "Location": "Asukoht"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Mine",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
+            "BrowseTheWeb": "Sirvige",
+            "WriteToStartConversation": "Vestluse alustamiseks kirjutage oma mõtted",
+            "StartConversation": "Alusta vestlust",
+            "GotoConversation": "Minge jaotisse Vestlus",
+            "reset": "Lähtesta",
+            "edit": "Muuda",
             "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "setUrl": "Määra URL",
+            "save": "Salvesta",
+            "setClip": "Lõika välja klipp",
+            "invalidURL": "vigane URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Fail vahemällu salvestamiseks liiga suur. Max faili suurus {{size}}",
+        "InvalidPDF": "Fail ei ole kehtiv PDF",
+        "StartTypingTitleOrKeywords": "Alustage pealkirja või märksõnade tippimist..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "HTML-dokument, mida erinevad kasutajad saavad vaadata ja redigeerida",
+            "displayType": "Artikkel"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Esitluse slaid võib sisaldada HTML-i, heli jne.",
+            "displayType": "Libisema"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Erinevatest slaididest koosnev esitlus",
+            "displayType": "Esitlus"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Reklaamiüksus veebisaidil",
+            "displayType": "Reklaamiüksus"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Reklaamiüksuste rühmitamise viis nime alla",
+            "displayType": "Reklaami paigutus"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Reklaami sisu",
+            "displayType": "Reklaami loov"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Reklaamikampaania",
+            "displayType": "Reklaamikampaania"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Esindab veebisaiti, mille metaandmed kaabiti",
+            "displayType": "veebileht"
         }
     }
 }

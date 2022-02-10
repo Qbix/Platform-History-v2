@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "ប៉ះដើម្បីបង់ប្រាក់"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}៖ ការគិតថ្លៃបានដំណើរការសម្រាប់ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "សូមអរគុណចំពោះការបង់ប្រាក់របស់អ្នកទៅ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} បានជាវ {{plan.title}}",
+        "YouSubscribedTo": "អ្នក​ត្រូវ​បាន​ជាវ {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "អ្នកទទួលបានការបង់ប្រាក់ចំនួន {{displayAmount}} ពី {{call 'publisher.displayName'}} ដោយ &quot;{{description}}&quot;",
+        "HasBeenCharged": "ហេ នេះគ្រាន់តែប្រាប់អ្នកឱ្យដឹងថា {{1}} ត្រូវបានគិតថ្លៃ {{2}} សម្រាប់ {{3}} ដោយ {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "សូមអរគុណចំពោះការបង់ប្រាក់របស់អ្នកសម្រាប់ &quot;{{description}}&quot;",
+        "HavePaid": "សួស្តី {{1}} នេះគ្រាន់តែជាការបញ្ជាក់យ៉ាងរហ័សថា អ្នកបានបង់ប្រាក់ {{2}} ទៅ {{3}} ដោយជោគជ័យសម្រាប់ {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ព័ត៌មានអំពីការបញ្ជាទិញ",
+        "PaymentMethod": "វិធី​សា​ស្រ្ត​ទូទាត់",
+        "ContactInfo": "ព័ត៌មានទំនាក់ទំនង",
+        "Pay": "បង់"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "ការអញ្ជើញត្រូវបានទទួលយកដោយ {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} បាន​បញ្ចូល​ឈ្មោះ",
+        "Streams_user_lastname": "{{invitedUserName}} បាន​បញ្ចូល​នាមត្រកូល",
+        "Streams_user_icon": "{{invitedUserName}} បាន​បញ្ចូល​រូបតំណាង",
+        "Places_user_location": "{{invitedUserName}} បាន​បញ្ចូល​ទីតាំង",
+        "Streams_greeting": "{{invitedUserName}} បាន​បញ្ចូល​ការ​ស្វាគមន៍",
+        "YouHaveCreditsToStart": "អ្នកមានក្រេឌីត {{amount}} ដើម្បីចាប់ផ្តើម",
+        "PaymentFor": "ការទូទាត់សម្រាប់ &quot;{{1}}&quot;",
+        "PaymentTo": "ការទូទាត់ទៅ {{1}}",
+        "PaymentToUser": "ការទូទាត់ទៅ {{toUserName}}",
+        "CreatePaidStream": "សម្រាប់​ការ​បង្កើត {{toStreamName}}",
+        "JoinedPaidStream": "សម្រាប់​ការ​កក់​ទុក​ក្នុង &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "សម្រាប់ការបង្កើតសហគមន៍ &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ជាការសងប្រាក់ការកក់ទុកក្នុង &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "បានទិញក្រេឌីត {{amount}}",
+        "BonusCredits": "ប្រាក់រង្វាន់ {{amount}} ក្រេឌីត",
+        "BuyAmountCredits": "ទិញក្រេឌីត {{amount}}",
+        "WatchClip": "ទទួលបានក្រេឌីត {{amount}} សម្រាប់ការមើល {{fromStreamTitle}}",
+        "MissingCredits": "បាត់ក្រេឌីត",
+        "YouMissingCredits": "អ្នកត្រូវការក្រេឌីត {{amount}} បន្ថែម ដើម្បីបន្ត។",
+        "BuyCredits": "ទិញឥណទាន",
+        "BuyBonus": "ការទិញក្រេឌីត {{amount}} ក្នុងពេលតែមួយ នឹងនាំទៅដល់ {{bonus}} ប្រាក់រង្វាន់ក្រេឌីត។",
+        "Buy": "ទិញ",
+        "PurchaseCredits": "ការទិញឥណទាន",
+        "Credits": "ឥណទាន",
+        "ErrorInvalidAmount": "ចំនួនទឹកប្រាក់មិនត្រឹមត្រូវ",
+        "ErrorInvalidCurrency": "ជាអកុសល យើងមិនទាន់គាំទ្ររូបិយប័ណ្ណ {{currency}} នៅឡើយទេ",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "ឥណទាន {{amount}}",
+            "BonusCredits": "ឥណទាន {{amount}}"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "កាលបរិច្ឆេទ",
+        "Amount": "ចំនួនទឹកប្រាក់",
+        "Description": "ការពិពណ៌នា",
+        "Client": "អតិថិជន",
+        "To": "ទៅ",
+        "From": "ពី",
+        "SeeHistory": "មើលប្រវត្តិការទូទាត់សម្រាប់ {{1}}",
+        "HistoryEmpty": "អ្នកមិនទាន់មានទិន្នន័យនៅឡើយទេ",
+        "PaymentFor": "បានផ្ញើក្រេឌីត {{amount}}",
+        "PaymentTo": "បានផ្ញើក្រេឌីត {{amount}}",
+        "PaymentToUser": "បានផ្ញើក្រេឌីត {{amount}}",
+        "CreatePaidStream": "ចំណាយអស់ {{amount}} ក្រេឌីត",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ទទួលបានក្រេឌីត {{amount}}",
+            "-": "ចំណាយអស់ {{amount}} ក្រេឌីត"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ទទួលបានក្រេឌីត {{amount}}",
+            "-": "ចំណាយអស់ {{amount}} ក្រេឌីត"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "បានទទួលក្រេឌីត {{amount}}",
+            "-": "បានផ្ញើក្រេឌីត {{amount}}"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "ចំណាយអស់ {{amount}} ក្រេឌីត",
+        "BoughtCredits": "បានទិញក្រេឌីត {{amount}}",
+        "BonusCredits": "ទទួលបានឥណទានចំនួន {{amount}} បន្ថែម",
+        "InviteAcceptedBy": "ទទួលបានក្រេឌីត {{amount}}",
+        "Streams_user_firstname": "ទទួលបានក្រេឌីត {{amount}}",
+        "Streams_user_lastname": "ទទួលបានក្រេឌីត {{amount}}",
+        "Streams_user_icon": "ទទួលបានក្រេឌីត {{amount}}",
+        "Places_user_location": "ទទួលបានក្រេឌីត {{amount}}",
+        "Streams_greeting": "ទទួលបានក្រេឌីត {{amount}}",
+        "YouHaveCreditsToStart": "ទទួលបានក្រេឌីត {{amount}}"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "កំណត់ព័ត៌មានការទូទាត់",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ចាប់ផ្តើមការជាវ",
+            "message": "តើអ្នកចង់ជាវ {{title}} ទេ?",
+            "ok": "យល់ព្រម",
+            "cancel": "បោះបង់"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "កាតឥណទាន ឬឥណពន្ធ",
+        "SubscribePayment": "ជាវការទូទាត់",
+        "ImmediatePayment": "ការទូទាត់ភ្លាមៗ"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "កំណត់ព័ត៌មានការទូទាត់",
+        "BuyAmountCredits": "ទិញក្រេឌីត {{amount}}",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ធ្វើ​ការ​ទូទាត់",
+            "message": "តើអ្នកយល់ព្រមបង់ប្រាក់ {{symbol}}{{amount}} ទេ?",
+            "ok": "យល់ព្រម",
+            "cancel": "បោះបង់"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "ឥណទាន",
+            "description": "តាមដានឥណទាន និងការទូទាត់"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "ផែនការជាវ",
+            "description": "គម្រោងការជាវ"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "ការជាវ",
+            "description": "ការជាវ"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "ផលិតផល",
+            "description": "ផលិតផលកំពុងលក់"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "សេវាកម្ម",
+            "description": "សេវាកម្មត្រូវបានផ្តល់ជូន"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "ទទួលបានក្រេឌីត {{amount}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "បានទិញក្រេឌីត {{amount}}"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "ប្រាក់រង្វាន់ {{amount}} ក្រេឌីត"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "ចំណាយអស់ {{amount}} ក្រេឌីត"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "បានផ្ញើក្រេឌីត {{amount}} ទៅ {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "បានទទួលក្រេឌីត {{amount}} ពី {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "សេវាកម្មថ្មី។",
+            "TitlePlaceholder": "ចំណងជើងសេវាកម្ម",
+            "PricePlaceholder": "កំណត់តម្លៃ",
+            "LinkPlaceholder": "កំណត់តំណភ្ជាប់ព័ត៌មានបន្ថែម",
+            "DescriptionPlaceholder": "ការពិពណ៌នាអំពីសេវាកម្ម",
+            "SaveService": "រក្សាទុកសេវាកម្ម",
+            "SelectRequiredParticipants": "អ្នកចូលរួមដែលត្រូវការ"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "គ្រប់គ្រងគំរូសេវាកម្ម",
+        "ManageServices": "គ្រប់គ្រងសេវាកម្ម",
+        "Free": "ឥតគិតថ្លៃ",
+        "OptionalContribution": "ការរួមចំណែកជាជម្រើស",
+        "RequiredPayment": "ការទូទាត់ចាំបាច់",
+        "AreYouSureDelete": "តើអ្នកប្រាកដថាចង់លុបសេវាកម្មនេះទេ?",
+        "AmountServicesRelated": "មានភាពអាចរកបាន {{amount}} ដែលទាក់ទងនឹងសេវាកម្មនេះ។ ពួកគេក៏នឹងត្រូវដកចេញផងដែរ។"
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "ព័ត៌មានអំពី {{title}} NFT",
+        "Description": "ព័ត៌មានលំអិតអំពី NFT",
+        "FixedBid": "ទិញ​ឥឡូវនេះ",
+        "CurrentBid": "ការ​ដេញ​ថ្លៃ​នា​ពេល​បច្ចុប្បន្ន",
+        "StartingIn": "ចាប់ផ្តើមនៅក្នុង",
+        "EndingIn": "បញ្ចប់នៅក្នុង",
+        "CreateNFT": "បង្កើត NFT",
+        "TitlePlaceholder": "ផ្តល់ចំណងជើង NFT របស់អ្នក។",
+        "DescriptionPlaceholder": "ផ្តល់ឱ្យ NFT របស់អ្នកនូវការពិពណ៌នា",
+        "CreateYourNFT": "បង្កើត NFT របស់អ្នក។",
+        "Royalties": "សួយសារអាករ",
+        "RoyaltyPlaceholder": "ស្រេចចិត្ត។ ចំនួនទឹកប្រាក់ដែលត្រូវបង់ទៅអ្នកបង្កើតមុនពេលផ្ទេរ។",
+        "ExpirationDate": "កាលបរិច្ឆេទ​ផុតកំណត់",
+        "StartingDate": "ថ្ងៃ​ចាប់ផ្តើម",
+        "BidsBelowThisAmount": "ការដេញថ្លៃក្រោមចំនួនទឹកប្រាក់នេះនឹងមិនត្រូវបានអនុញ្ញាតទេ។",
+        "MinimumBid": "ការដេញថ្លៃអប្បបរមា",
+        "Price": "តម្លៃ",
+        "Owner": "ម្ចាស់",
+        "SelectCategory": "ជ្រើសរើសប្រភេទ",
+        "Day": "ថ្ងៃ",
+        "Days": "ថ្ងៃ",
+        "Hour": "ម៉ោង",
+        "Hours": "ម៉ោង",
+        "Minute": "នាទី",
+        "Minutes": "នាទី",
+        "Second": "ទីពីរ",
+        "Seconds": "វិនាទី",
+        "SalesCreator": "ការលក់នឹងទៅដល់អ្នកបង្កើត",
+        "Details": "ព័ត៌មានលម្អិត",
+        "Bids": "ការដេញថ្លៃ",
+        "History": "ប្រវត្តិសាស្ត្រ",
+        "LoremIpsum": "Lorem Ipsum គឺជាអត្ថបទមិនពិតនៃឧស្សាហកម្មបោះពុម្ព និងវាយអក្សរ។",
+        "PutOnSale": "ដាក់លក់",
+        "PutOffSale": "ដកពីការលក់",
+        "Transfer": "ផ្ទេរ",
+        "Update": "ធ្វើបច្ចុប្បន្នភាព",
+        "UpdateToken": "ធ្វើបច្ចុប្បន្នភាព Token",
+        "CreateToken": "បង្កើតនិមិត្តសញ្ញា",
+        "PlaceBid": "ដាក់ដេញថ្លៃ",
+        "SoldOut": "លក់",
+        "NftName": "ឈ្មោះ NFT",
+        "DescribeYourNFT": "សូមពណ៌នាអំពី NFT របស់អ្នក។",
+        "NftPicture": "រូបភាពតំណាងឱ្យ NFT",
+        "NftMovie": "ភាពយន្តដើម្បីតំណាងឱ្យ NFT",
+        "UploadMovie": "បង្ហោះភាពយន្ត",
+        "MovieSource": "ប្រភពភាពយន្ត",
+        "UploadFile": "បង្ហោះឯកសារ",
+        "PutOnMarketplace": "ដាក់នៅលើទីផ្សារ",
+        "InstantPurchase": "បញ្ចូលតម្លៃដើម្បីឱ្យអ្នកប្រើប្រាស់ទិញ NFT របស់អ្នកភ្លាមៗ",
+        "FixedPrice": "តំលៃ​ថេរ",
+        "TimedAuction": "ការដេញថ្លៃតាមពេលវេលា",
+        "OpenForBids": "បើកសម្រាប់ការដេញថ្លៃ",
+        "PriceOnePiece": "បញ្ចូលតម្លៃសម្រាប់មួយដុំ",
+        "EnterMinimumBid": "បញ្ចូលការដេញថ្លៃអប្បបរមា",
+        "SelectChain": "ជ្រើសរើសខ្សែសង្វាក់",
+        "WrongChain": "NFT នេះបង្កើតនៅក្រោម &quot;{{chain}}&quot;។ សូមប្រើខ្សែសង្វាក់នេះ។",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "ការនាំចូល NFT",
+            "fileNotFound": "សូមអភ័យទោស រកមិនឃើញឯកសារ CSV ទេ។",
+            "fileEmpty": "សូមអភ័យទោស ឯកសារ CSV គឺទទេ។",
+            "userIdNotFound": "អ្នកប្រើប្រាស់មាន ប៉ុន្តែលេខសម្គាល់ទទេ",
+            "errorLine": "បន្ទាត់ {{1}}",
+            "fieldNotFound": "រកមិនឃើញវាលដែលត្រូវការ &quot;{{1}}&quot;",
+            "taskStreamInvalid": "ស្ទ្រីមភារកិច្ចមិនត្រឹមត្រូវ",
+            "instructionsEmpty": "ការណែនាំអំពីស្ទ្រីមកិច្ចការទទេ",
+            "complete": "បញ្ចប់",
+            "activateUsers": "ផ្ញើសារធ្វើឱ្យសកម្មទៅកាន់អ្នកប្រើប្រាស់?",
+            "importProgress": "វឌ្ឍនភាព",
+            "importOptions": "ជម្រើស",
+            "sampleCSV": "ទាញយកគំរូ CSV",
+            "fileLabel": "ផ្ទុកឡើងសៀវភៅបញ្ជី៖",
+            "errorsTitle": "កំហុសបានកើតឡើង"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "ត្រងដោយ NFT Collections",
+                "ShowNFTCollection": "បង្ហាញការប្រមូល NFT នៅក្នុង...",
+                "AllCollections": "បណ្តុំទាំងអស់។"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "អ្នកនិពន្ធទាំងអស់។",
+                "AllUsers": "គ្រប់គ្នា",
+                "FilterByAuthors": "ត្រងដោយអ្នកនិពន្ធ"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "ត្រឡប់ទៅ បណ្តុំ"
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "برای پرداخت ضربه بزنید"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: هزینه پردازش شده برای {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "از پرداخت شما به {{call 'publisher.displayName'}} سپاسگزاریم",
+        "SubscribedTo": "{{call 'user.displayName'}} مشترک {{plan.title}}",
+        "YouSubscribedTo": "شما مشترک {{plan.title}} شده اید"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "شما مبلغ {{displayAmount}} را از {{call 'publisher.displayName'}} توسط &quot;{1001}}&quot; دریافت می‌کنید",
+        "HasBeenCharged": "سلام، این فقط برای اطلاع شماست که {{1}} هزینه {{2}} برای {{3}} توسط {{4}} کسر شده است"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "از پرداخت شما برای &quot;{{description}}&quot; سپاسگزاریم",
+        "HavePaid": "سلام {{1}}، این فقط یک تأیید سریع است که با موفقیت {{2}} را به {{3}} برای {{4}} پرداخت کرده‌اید"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "اطلاعات در مورد سفارش",
+        "PaymentMethod": "روش پرداخت",
+        "ContactInfo": "اطلاعات تماس",
+        "Pay": "پرداخت"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "دعوت توسط {{invitedUserName}} پذیرفته شد",
+        "Streams_user_firstname": "{{invitedUserName}} نام کوچک را وارد کرد",
+        "Streams_user_lastname": "{{invitedUserName}} نام خانوادگی را وارد کرد",
+        "Streams_user_icon": "{{invitedUserName}} نماد وارد شده است",
+        "Places_user_location": "{{invitedUserName}} مکان را وارد کرد",
+        "Streams_greeting": "{{invitedUserName}} سلام را وارد کرد",
+        "YouHaveCreditsToStart": "شما {{amount}} اعتبار برای شروع دارید",
+        "PaymentFor": "پرداخت برای &quot;{{1}}&quot;",
+        "PaymentTo": "پرداخت به {{1}}",
+        "PaymentToUser": "پرداخت به {{toUserName}}",
+        "CreatePaidStream": "برای ایجاد {{toStreamName}}",
+        "JoinedPaidStream": "برای رزرو در &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "CreatedCommunity": "برای ایجاد انجمن &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "به عنوان بازپرداخت رزرو در &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "BoughtCredits": "{{amount}} اعتبار خریداری کرد",
+        "BonusCredits": "پاداش {{amount}} اعتبار",
+        "BuyAmountCredits": "{{amount}} اعتبار بخرید",
+        "WatchClip": "برای تماشای {{amount}} اعتبار کسب کرد{1000}}",
+        "MissingCredits": "اعتبارات از دست رفته",
+        "YouMissingCredits": "برای ادامه به {{amount}} اعتبار اضافی نیاز دارید.",
+        "BuyCredits": "اعتبار بخرید",
+        "BuyBonus": "خرید یکباره {{amount}} اعتبار، به پاداش {{bonus}} اعتبار منجر می‌شود.",
+        "Buy": "خرید کنید",
+        "PurchaseCredits": "خرید اعتبار",
+        "Credits": "وام",
+        "ErrorInvalidAmount": "مبلغ نامعتبر است",
+        "ErrorInvalidCurrency": "متأسفانه ما هنوز از ارز {{currency}} پشتیبانی نمی‌کنیم",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} اعتبار",
+            "BonusCredits": "{{amount}} اعتبار"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "تاریخ",
+        "Amount": "میزان",
+        "Description": "شرح",
+        "Client": "مشتری",
+        "To": "به",
+        "From": "از جانب",
+        "SeeHistory": "مشاهده سابقه پرداخت برای {{1}}",
+        "HistoryEmpty": "شما هنوز هیچ داده ای ندارید",
+        "PaymentFor": "{{amount}} اعتبار ارسال شد",
+        "PaymentTo": "{{amount}} اعتبار ارسال شد",
+        "PaymentToUser": "{{amount}} اعتبار ارسال شد",
+        "CreatePaidStream": "{{amount}} اعتبار هزینه کرد",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} اعتبار کسب کرد",
+            "-": "{{amount}} اعتبار هزینه کرد"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} اعتبار کسب کرد",
+            "-": "{{amount}} اعتبار هزینه کرد"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}} اعتبار دریافت کرد",
+            "-": "{{amount}} اعتبار ارسال شد"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "{{amount}} اعتبار هزینه کرد",
+        "BoughtCredits": "{{amount}} اعتبار خریداری کرد",
+        "BonusCredits": "{{amount}} اعتبار دریافت کرد",
+        "InviteAcceptedBy": "{{amount}} اعتبار کسب کرد",
+        "Streams_user_firstname": "{{amount}} اعتبار کسب کرد",
+        "Streams_user_lastname": "{{amount}} اعتبار کسب کرد",
+        "Streams_user_icon": "{{amount}} اعتبار کسب کرد",
+        "Places_user_location": "{{amount}} اعتبار کسب کرد",
+        "Streams_greeting": "{{amount}} اعتبار کسب کرد",
+        "YouHaveCreditsToStart": "{{amount}} اعتبار کسب کرد"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "تنظیم اطلاعات پرداخت",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "شروع اشتراک",
+            "message": "آیا می خواهید در {{title}} مشترک شوید؟",
+            "ok": "خوب",
+            "cancel": "لغو کنید"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "کارت اعتباری",
+        "SubscribePayment": "اشتراک پرداخت",
+        "ImmediatePayment": "پرداخت فوری"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "تنظیم اطلاعات پرداخت",
+        "BuyAmountCredits": "{{amount}} اعتبار بخرید",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ایجاد یک پرداخت",
+            "message": "آیا با پرداخت {{symbol}}{{amount}} موافقید؟",
+            "ok": "خوب",
+            "cancel": "لغو کنید"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "وام",
+            "description": "اعتبارات و پرداخت ها را پیگیری می کند"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "طرح اشتراک",
+            "description": "طرح اشتراک"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "اشتراک، ابونمان",
+            "description": "اشتراک، ابونمان"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "تولید - محصول",
+            "description": "محصول در حال فروش"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "سرویس",
+            "description": "خدمات ارائه شده"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}} اعتبار کسب کرد"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}} اعتبار خریداری کرد"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "پاداش {{amount}} اعتبار"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "{{amount}} اعتبار هزینه کرد"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "ارسال {{amount}} اعتبار به {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "دریافت {{amount}} اعتبار از {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "سرویس جدید",
+            "TitlePlaceholder": "عنوان خدمات",
+            "PricePlaceholder": "تعیین قیمت",
+            "LinkPlaceholder": "تنظیم لینک اطلاعات اضافی",
+            "DescriptionPlaceholder": "شرح خدمات",
+            "SaveService": "ذخیره سرویس",
+            "SelectRequiredParticipants": "شرکت کنندگان مورد نیاز"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "مدیریت الگوهای خدمات",
+        "ManageServices": "مدیریت خدمات",
+        "Free": "رایگان",
+        "OptionalContribution": "مشارکت اختیاری",
+        "RequiredPayment": "پرداخت مورد نیاز",
+        "AreYouSureDelete": "آیا مطمئن هستید که می خواهید این سرویس را حذف کنید؟",
+        "AmountServicesRelated": "{{amount}} امکانات مربوط به این سرویس وجود دارد. آنها نیز حذف خواهند شد."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "اطلاعاتی درباره {{title}} NFT",
+        "Description": "اطلاعات دقیق در مورد NFT",
+        "FixedBid": "هم اکنون خریداری کنید",
+        "CurrentBid": "پیشنهاد فعلی",
+        "StartingIn": "شروع در",
+        "EndingIn": "پایان در",
+        "CreateNFT": "یک NFT ایجاد کنید",
+        "TitlePlaceholder": "به NFT خود یک عنوان بدهید",
+        "DescriptionPlaceholder": "NFT خود را توضیح دهید",
+        "CreateYourNFT": "NFT خود را ایجاد کنید",
+        "Royalties": "مزایا و امتیازها",
+        "RoyaltyPlaceholder": "اختیاری. مبلغ پرداخت شده به پدیدآورنده قبل از انتقال.",
+        "ExpirationDate": "تاریخ انقضا",
+        "StartingDate": "تاریخ شروع",
+        "BidsBelowThisAmount": "پیشنهادهای کمتر از این مقدار مجاز نخواهد بود",
+        "MinimumBid": "حداقل پیشنهاد",
+        "Price": "قیمت",
+        "Owner": "مالک",
+        "SelectCategory": "دسته را انتخاب کنید",
+        "Day": "روز",
+        "Days": "روزها",
+        "Hour": "ساعت",
+        "Hours": "ساعت ها",
+        "Minute": "دقیقه",
+        "Minutes": "دقایق",
+        "Second": "دومین",
+        "Seconds": "ثانیه ها",
+        "SalesCreator": "از فروش به سازنده خواهد رسید",
+        "Details": "جزئیات",
+        "Bids": "مناقصه",
+        "History": "تاریخ",
+        "LoremIpsum": "Lorem Ipsum به سادگی متن ساختگی صنعت چاپ و حروفچینی است.",
+        "PutOnSale": "به فروش گذاشته شود",
+        "PutOffSale": "انصراف از فروش",
+        "Transfer": "انتقال",
+        "Update": "به روز رسانی",
+        "UpdateToken": "رمز را به روز کنید",
+        "CreateToken": "توکن ایجاد کنید",
+        "PlaceBid": "محل مناقصه",
+        "SoldOut": "فروخته شد",
+        "NftName": "نام NFT",
+        "DescribeYourNFT": "لطفا NFT خود را شرح دهید",
+        "NftPicture": "تصویر برای نشان دادن NFT",
+        "NftMovie": "فیلمی برای نشان دادن NFT",
+        "UploadMovie": "آپلود فیلم",
+        "MovieSource": "منبع فیلم",
+        "UploadFile": "یک فایل آپلود کنید",
+        "PutOnMarketplace": "در بازار قرار دهید",
+        "InstantPurchase": "قیمت را وارد کنید تا کاربران بتوانند فوراً NFT شما را خریداری کنند",
+        "FixedPrice": "قیمت ثابت",
+        "TimedAuction": "حراج به موقع",
+        "OpenForBids": "برای مناقصه باز است",
+        "PriceOnePiece": "قیمت یک عدد را وارد کنید",
+        "EnterMinimumBid": "حداقل پیشنهاد را وارد کنید",
+        "SelectChain": "زنجیره را انتخاب کنید",
+        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "واردات NFT",
+            "fileNotFound": "با عرض پوزش، فایل CSV یافت نشد.",
+            "fileEmpty": "با عرض پوزش، فایل CSV خالی است.",
+            "userIdNotFound": "کاربر وجود دارد اما شناسه خالی است",
+            "errorLine": "خط {{1}}",
+            "fieldNotFound": "فیلد الزامی &quot;{{1}}&quot; یافت نشد",
+            "taskStreamInvalid": "جریان کار نامعتبر است",
+            "instructionsEmpty": "دستورالعمل های جریان کار خالی است",
+            "complete": "کامل",
+            "activateUsers": "ارسال پیام فعال سازی برای کاربران؟",
+            "importProgress": "پیش رفتن",
+            "importOptions": "گزینه ها",
+            "sampleCSV": "دانلود نمونه CSV",
+            "fileLabel": "آپلود صفحه گسترده:",
+            "errorsTitle": "خطاهایی رخ داده است"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "فیلتر بر اساس مجموعه های NFT",
+                "ShowNFTCollection": "نمایش مجموعه NFT در ...",
+                "AllCollections": "همه مجموعه ها"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "همه نویسندگان",
+                "AllUsers": "هر کس",
+                "FilterByAuthors": "فیلتر بر اساس نویسندگان"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "بازگشت به مجموعه"
     }
 }

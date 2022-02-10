@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Σφάλμα {{status}} κατά το αίτημα",
+        "canceled": "Το αίτημα ακυρώθηκε",
+        "500": "Εσωτερικό Σφάλμα Διακομιστή",
+        "404": "Δεν βρέθηκε: {{url}}",
+        "501": "Το αίτημα διεκόπη"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Η συνεδρία έληξε. Ανανεώστε τη σελίδα και δοκιμάστε ξανά.",
+        "otherDomain": "Αποκλείστηκε αίτημα μεταξύ τομέων σε ξένο τομέα στο {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "παρακέντηση",
+        "click": "Κάντε κλικ",
+        "yes": "Ναί",
+        "no": "όχι",
+        "Tap": "Παρακέντηση",
+        "Click": "Κάντε κλικ",
+        "Yes": "Ναί",
+        "No": "Οχι"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Ιανουάριος",
+        "2": "Φεβρουάριος",
+        "3": "Μάρτιος",
+        "4": "Απρίλιος",
+        "5": "Ενδέχεται",
+        "6": "Ιούνιος",
+        "7": "Ιούλιος",
+        "8": "Αύγουστος",
+        "9": "Σεπτέμβριος",
+        "10": "Οκτώβριος",
+        "11": "Νοέμβριος",
+        "12": "Δεκέμβριος"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "δεύτερος",
+        "seconds": "δευτερόλεπτα",
+        "minute": "λεπτό",
+        "minutes": "λεπτά",
+        "hour": "ώρες",
+        "day": "ημέρα",
+        "days": "ημέρες",
+        "week": "εβδομάδα",
+        "weeks": "εβδομάδες",
+        "month": "μήνας",
+        "months": "μήνες",
+        "year": "έτος",
+        "years": "χρόνια",
+        "decade": "δεκαετία",
+        "decades": "δεκαετίες",
+        "century": "αιώνας",
+        "centuries": "αιώνες"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Επιτρέψτε την πρόσβαση στο μικρόφωνό σας",
+        "record": "Ρεκόρ",
+        "recording": "Εγγραφή",
+        "remains": "λείψανα",
+        "maximum": "το πολύ",
+        "playing": "Παιχνίδι",
+        "recorded": "Εχει καταγραφεί",
+        "clip": "συνδετήρας",
+        "discard": "Απορρίπτω",
+        "encoding": "Κωδικοποίηση"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "συνδετήρας",
+        "errorNoSource": "Δεν υπάρχει πηγή βίντεο",
+        "SkipAfter": "Παράλειψη μετά",
+        "Skip": "Παραλείπω"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "συνδετήρας",
+        "errorNoSource": "Δεν υπάρχει πηγή pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Ρύθμιση Clip Start",
+        "ClipStart": "Έναρξη κλιπ",
+        "SetClipEnd": "Ορισμός Clip End",
+        "ClipEnd": "Τέλος κλιπ",
+        "StartMoreEnd": "Η αρχική θέση δεν μπορεί να είναι μεγαλύτερη από τη θέση τερματισμού",
+        "EndLessStart": "Η τελική θέση δεν μπορεί να είναι μικρότερη από τη θέση έναρξης",
+        "WhichInvalid": "Το επιχείρημα &quot;ποιο&quot; είναι άκυρο"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Συναγερμός"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Επιβεβαιώνω",
+        "ok": "Ναί",
+        "cancel": "Οχι"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Προτροπή",
+        "ok": "Πηγαίνω"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "περισσότερο",
+        "Menu": "Μενού"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Σφάλμα κατά την ανάγνωση του αρχείου",
+        "errorType": "Λυπούμαστε, αλλά αυτός ο τύπος αρχείου δεν υποστηρίζεται",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Τι θα ήθελες να κάνεις?",
+            "photo": "Τραβήξτε νέα φωτογραφία",
+            "library": "Επιλέξτε από τη βιβλιοθήκη"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Επιλέξτε μια μεγαλύτερη εικόνα.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Προσαρμόστε το μέγεθος και τη θέση",
+            "touchscreen": "Χρησιμοποιήστε τα δάχτυλά σας για μεγέθυνση και μεταφορά",
+            "notTouchscreen": "Χρησιμοποιήστε το ποντίκι και τον τροχό σας για μεγέθυνση και μεταφορά"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "την προηγούμενη νύχτα",
+        "lastEvening": "τελευταία παραμονή",
+        "yesterday": "εχθές",
+        "thisMorning": "σήμερα το πρωί",
+        "today": "σήμερα",
+        "tonight": "απόψε",
+        "tomorrowMorning": "Τομ Μορν",
+        "tomorrow": "αύριο",
+        "hoursAgo": "πριν από {{h}} ώρες",
+        "hourAgo": "πριν από {{h}} ώρα",
+        "minuteAgo": "{{m}} πριν από ένα λεπτό",
+        "minutesAgo": "Πριν από {{m}} λεπτά",
+        "secondAgo": "πριν από {{s}} δευτερόλεπτο",
+        "secondsAgo": "πριν από {{s}} δευτερόλεπτα",
+        "fewSecondsAgo": "δευτερόλεπτα πριν",
+        "rightNow": "τώρα αμέσως",
+        "inSecond": "σε {{s}} δευτερόλεπτο",
+        "inSeconds": "σε {{s}} δευτερόλεπτα",
+        "inMinute": "σε {{m}} λεπτό",
+        "inMinutes": "σε {{m}} λεπτά",
+        "inHour": "σε {{h}} ώρα",
+        "inHours": "σε {{h}} ώρες",
+        "inUnderMinute": "σε λιγότερο από 1 λεπτό"
     }
 }

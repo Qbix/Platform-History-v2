@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
+                "link": "Länk att marknadsföra",
+                "startDate": "Start datum",
+                "startTime": "Starttid",
+                "endDate": "Slutdatum",
+                "endTime": "Sluttid",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filtrera efter intresse",
+                "FilterInterests": "Börja skriva ett intresse..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Intressera",
+            "Location": "Plats"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Gå",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Bläddra",
+            "WriteToStartConversation": "Skriv dina tankar för att börja konversationen",
+            "StartConversation": "Starta konversation",
+            "GotoConversation": "Gå till Konversation",
+            "reset": "Återställa",
+            "edit": "Redigera",
+            "link": "Länk",
+            "setUrl": "Ange URL",
+            "save": "Spara",
+            "setClip": "Klipp ut klipp",
+            "invalidURL": "Ogiltig URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Filen är för stor för cachelagring. Max filstorlek {{size}}",
+        "InvalidPDF": "Filen är inte en giltig PDF",
+        "StartTypingTitleOrKeywords": "Börja skriva rubrik eller nyckelord..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Ett HTML-dokument som olika användare kan visa och redigera",
+            "displayType": "Artikel"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "En bild i en presentation kan innehålla HTML, ljud etc.",
+            "displayType": "Glida"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
+            "description": "En presentation bestående av olika bilder",
             "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "En annonsenhet på en webbplats",
+            "displayType": "Annonsenhet"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Ett sätt att gruppera annonsenheter under ett namn",
+            "displayType": "Annonsplacering"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Innehåll för en annons",
+            "displayType": "Annons kreativ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "En reklamkampanj",
+            "displayType": "Annonskampanj"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Representerar en webbplats vars metadata har skrapats",
+            "displayType": "webbsida"
         }
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link pikeun ngamajukeun",
+                "startDate": "Tanggal mimiti",
+                "startTime": "Mimitian Waktos",
+                "endDate": "Tanggal tungtung",
+                "endTime": "Waktos Tungtung",
+                "budget": "Anggaran"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Nyaring Ku Minat",
+                "FilterInterests": "Mimitian ngetik minat..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "kapentingan",
+            "Location": "lokasi"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "indit",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
+            "BrowseTheWeb": "Ngotéktak",
+            "WriteToStartConversation": "Tulis pikiran anjeun pikeun ngamimitian paguneman",
+            "StartConversation": "Mimitian Paguneman",
+            "GotoConversation": "Pindah ka Paguneman",
             "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "edit": "Édit",
+            "link": "Tumbu",
+            "setUrl": "Setel URL",
+            "save": "Simpen",
+            "setClip": "Potong Klip",
+            "invalidURL": "URL teu valid"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "File ageung teuing kanggo cache. Ukuran file maksimal {{size}}",
+        "InvalidPDF": "File sanes PDF anu sah",
+        "StartTypingTitleOrKeywords": "Mimitian ngetik judul atanapi kecap konci..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Dokumén HTML anu tiasa ditingali sareng diédit ku sababaraha pangguna",
+            "displayType": "Pasal"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "A slide dina presentasi a, bisa ngawengku HTML, audio jsb.",
+            "displayType": "Geser"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "A presentasi diwangun ku rupa-rupa slides",
+            "displayType": "Presentasi"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Hiji unit iklan dina ramatloka a",
+            "displayType": "Unit iklan"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Cara ngagolongkeun unit iklan dina ngaran",
+            "displayType": "panempatan Iklan"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Eusi pikeun hiji iklan",
+            "displayType": "Iklan kreatif"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Kampanye iklan",
+            "displayType": "Kampanye iklan"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Ngagambarkeun ramatloka anu metadata ieu scraped",
+            "displayType": "kaca wéb"
         }
     }
 }

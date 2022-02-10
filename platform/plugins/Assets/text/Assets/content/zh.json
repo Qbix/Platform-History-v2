@@ -4,44 +4,44 @@
         "button": "点按即可付款"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}：已为{{call 'user.displayName'}}处理的费用",
-        "ThankYouForYourPayment": "感谢您付款给{{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}}已订阅{{plan.title}}",
-        "YouSubscribedTo": "您已订阅{{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}：为 {{call 'user.displayName'}} 处理的费用",
+        "ThankYouForYourPayment": "感谢您向 {{call 'publisher.displayName'}} 付款",
+        "SubscribedTo": "{{call 'user.displayName'}} 订阅了 {{plan.title}}",
+        "YouSubscribedTo": "您已订阅 {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "有关订单的信息",
-        "PaymentMethod": "付款方法",
-        "ContactInfo": "联络资料",
-        "Pay": "工资"
+        "AboutOrder": "订单信息",
+        "PaymentMethod": "付款方式",
+        "ContactInfo": "联系方式",
+        "Pay": "支付"
     },
     "credits": {
-        "InviteAcceptedBy": "邀请被{{1}}接受",
-        "YouHaveCreditsToStart": "你有{{1}}学分开始",
-        "PaymentFor": "付款“ {{1}}”",
-        "PaymentTo": "付款至{{1}}",
-        "PaymentToUser": "付款至{{userName}}",
-        "JoinedPaidStream": "加入“ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”",
-        "CreatedCommunity": "用于创建社区“ {{communityId}}”",
-        "LeftPaidStream": "离开“ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”",
-        "BoughtCredits": "购买了{{amount}}个积分",
-        "BuyAmountCredits": "购买{{amount}}积分",
+        "InviteAcceptedBy": "{{invitedUserName}} 接受邀请",
+        "YouHaveCreditsToStart": "您有 {{amount}} 个积分可以开始",
+        "PaymentFor": "“{{1}}”的付款",
+        "PaymentTo": "支付给 {{1}}",
+        "PaymentToUser": "支付给 {{toUserName}}",
+        "JoinedPaidStream": "在“ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”中预订",
+        "CreatedCommunity": "用于创建社区“{{communityId}}”",
+        "LeftPaidStream": "作为“ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”中的预订退款",
+        "BoughtCredits": "购买了 {{amount}} 积分",
+        "BuyAmountCredits": "购买 {{amount}} 积分",
         "MissingCredits": "缺少学分",
-        "YouMissingCredits": "您错过了{{amount}}个积分",
+        "YouMissingCredits": "您需要额外的 {{amount}} 积分才能继续。",
         "BuyCredits": "购买积分",
-        "Buy": "购买",
+        "Buy": "买",
         "Credits": "学分",
         "ErrorInvalidAmount": "金额无效",
-        "ErrorInvalidCurrency": "不幸的是，我们暂不支持货币{{currency}}",
-        "WatchClip": "观看{{fromStreamTitle}}可赚取{{amount}}积分",
+        "ErrorInvalidCurrency": "很遗憾，我们尚不支持货币 {{currency}}",
+        "WatchClip": "观看 {{fromStreamTitle}} 获得 {{amount}} 积分",
         "PurchaseCredits": "购买积分",
         "forMessages": {
-            "BoughtCredits": "{{amount}}个积分",
+            "BoughtCredits": "{{amount}} 学分",
             "BonusCredits": "{{amount}} 学分"
         },
         "CreatePaidStream": "用于创建 {{toStreamName}}",
-        "BonusCredits": "奖金 {{amount}} 学分",
-        "BuyBonus": "一次购买 {{amount}} 积分，将获得 {{bonus}} 积分奖励。",
+        "BonusCredits": "奖励 {{amount}} 积分",
+        "BuyBonus": "一次购买 {{amount}} 个积分，将获得 {{bonus}} 个积分奖励。",
         "Streams_user_firstname": "{{invitedUserName}} 输入了名字",
         "Streams_user_lastname": "{{invitedUserName}} 输入姓氏",
         "Streams_user_icon": "{{invitedUserName}} 输入图标",
@@ -50,34 +50,34 @@
     },
     "history": {
         "Date": "日期",
-        "Amount": "量",
+        "Amount": "数量",
         "Description": "描述",
         "Client": "客户",
-        "To": "至",
+        "To": "到",
         "From": "从",
-        "HistoryEmpty": "你还没有数据",
-        "SeeHistory": "查看{{1}}的付款记录",
-        "PaymentFor": "消费了{{amount}}个学分",
-        "PaymentTo": "已发送{{amount}}积分",
-        "PaymentToUser": "已发送{{amount}}积分",
+        "HistoryEmpty": "您还没有数据",
+        "SeeHistory": "查看 {{1}} 的付款历史记录",
+        "PaymentFor": "已发送 {{amount}} 个积分",
+        "PaymentTo": "已发送 {{amount}} 个积分",
+        "PaymentToUser": "已发送 {{amount}} 个积分",
         "JoinedPaidStream": {
-            "+": "赚取了{{amount}}积分",
-            "-": "消费了{{amount}}个学分"
+            "+": "获得 {{amount}} 积分",
+            "-": "花费 {{amount}} 个积分"
         },
         "LeftPaidStream": {
-            "+": "已收到{{amount}}个积分",
-            "-": "已发送{{amount}}积分"
+            "+": "获得 {{amount}} 积分",
+            "-": "已发送 {{amount}} 个积分"
         },
-        "CreatedCommunity": "消费了{{amount}}个学分",
-        "BoughtCredits": "购买了{{amount}}个积分",
-        "InviteAcceptedBy": "赚取了{{amount}}积分",
-        "YouHaveCreditsToStart": "赚取了{{amount}}积分",
-        "CreatePaidStream": "花费了 {{amount}} 学分",
+        "CreatedCommunity": "花费 {{amount}} 个积分",
+        "BoughtCredits": "购买了 {{amount}} 积分",
+        "InviteAcceptedBy": "获得 {{amount}} 积分",
+        "YouHaveCreditsToStart": "获得 {{amount}} 积分",
+        "CreatePaidStream": "花费 {{amount}} 个积分",
         "WatchClip": {
-            "+": "获得 {{amount}} 学分",
-            "-": "花费了 {{amount}} 学分"
+            "+": "获得 {{amount}} 积分",
+            "-": "花费 {{amount}} 个积分"
         },
-        "BonusCredits": "获得奖金 {{amount}} 积分",
+        "BonusCredits": "获得奖励 {{amount}} 积分",
         "Streams_user_firstname": "获得 {{amount}} 积分",
         "Streams_user_lastname": "获得 {{amount}} 积分",
         "Streams_user_icon": "获得 {{amount}} 积分",
@@ -88,8 +88,8 @@
         "infoTitle": "设置付款信息",
         "confirm": {
             "title": "开始订阅",
-            "message": "您要订阅{{title}}吗？",
-            "ok": "好",
+            "message": "您想订阅 {{title}} 吗？",
+            "ok": "行",
             "cancel": "取消"
         },
         "CreditOrDebitCard": "信用卡或借记卡",
@@ -100,19 +100,19 @@
         "infoTitle": "设置付款信息",
         "confirm": {
             "title": "进行付款",
-            "message": "您同意支付{{symbol}} {{amount}}吗？",
-            "ok": "好",
+            "message": "您同意支付 {{symbol}}{{amount}} 吗？",
+            "ok": "行",
             "cancel": "取消"
         },
-        "BuyAmountCredits": "购买{{amount}}积分"
+        "BuyAmountCredits": "购买 {{amount}} 积分"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "积分",
+            "displayType": "学分",
             "description": "跟踪信用和付款"
         },
         "Assets\/plan": {
-            "displayType": "订购计划",
+            "displayType": "订阅计划",
             "description": "订阅计划"
         },
         "Assets\/subscription": {
@@ -121,47 +121,47 @@
         },
         "Assets\/product": {
             "displayType": "产品",
-            "description": "正在出售的产品"
+            "description": "正在销售的产品"
         },
         "Assets\/service": {
             "displayType": "服务",
-            "description": "提供服务"
+            "description": "提供的服务"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "获得{{amount}}学分"
+            "content": "获得 {{amount}} 积分"
         },
         "Assets\/credits\/spent": {
-            "content": "花了{{amount}}学分"
+            "content": "花费 {{amount}} 个积分"
         },
         "Assets\/credits\/sent": {
-            "content": "已发送{{amount}}个学分"
+            "content": "已向 {{toUserName}} 发送 {{amount}} 个积分"
         },
         "Assets\/credits\/received": {
-            "content": "收到{{amount}}个学分"
+            "content": "从 {{fromUserName}} 获得 {{amount}} 积分"
         },
         "Assets\/credits\/bought": {
-            "content": "购买了{{amount}}个积分"
+            "content": "购买了 {{amount}} 积分"
         },
         "Assets\/credits\/bonus": {
-            "content": "奖金 {{amount}} 学分"
+            "content": "奖励 {{amount}} 积分"
         }
     },
     "charge": {
-        "Subject": "您将通过{{description}}从{{call 'publisher.displayName'}}获得{{displayAmount}}的付款",
-        "HasBeenCharged": "嘿，这只是让您知道{{4}}已向{{10001}}收取了{{3}}的{{2}}"
+        "Subject": "您从“{{description}}”收到 {{call 'publisher.displayName'}} 支付的 {{displayAmount}}",
+        "HasBeenCharged": "嘿，这只是为了让您知道 {{1}} 已由 {{4}} 向 {{3}} 收取 {{2}}"
     },
     "charged": {
-        "Subject": "感谢您支付“ {{description}}”",
-        "HavePaid": "嘿{{1}}，这只是一个快速确认，您已成功将{{4}}的{{2}}支付给{{3}}"
+        "Subject": "感谢您为“{{description}}”付款",
+        "HavePaid": "嘿{{1}}，这只是快速确认您已成功向{{3}}支付{{2}}的{{4}}"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "新服务",
             "TitlePlaceholder": "服务名称",
-            "PricePlaceholder": "设定价",
-            "LinkPlaceholder": "设置其他信息链接",
+            "PricePlaceholder": "设定价格",
+            "LinkPlaceholder": "设置附加信息链接",
             "DescriptionPlaceholder": "服务说明",
             "SaveService": "保存服务",
             "SelectRequiredParticipants": "所需参与者"
@@ -169,10 +169,10 @@
         "ManageServiceTemplates": "管理服务模板",
         "ManageServices": "管理服务",
         "FreeEvent": "免费活动",
-        "OptionalContribution": "可选的贡献",
+        "OptionalContribution": "可选贡献",
         "RequiredPayment": "所需付款",
         "AreYouSureDelete": "您确定要删除此服务吗？",
-        "AmountServicesRelated": "有{{amount}}个与此服务有关的可用性。它们也将被删除。",
+        "AmountServicesRelated": "有 {{amount}} 项与此服务相关的可用性。它们也将被删除。",
         "Free": "自由"
     },
     "NFT": {

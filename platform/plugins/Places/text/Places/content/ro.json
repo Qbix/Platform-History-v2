@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "în {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "metru",
+        "meters": "metri",
+        "kilometer": "kilometru",
+        "kilometers": "kiometre",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "milă",
+        "miles": "mile",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "picior",
+        "feet": "picioarele",
+        "inches": "inci"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Sunt interesat de lucrurile care au loc în {{select}} de",
+        "update": "Actualizați locația mea",
+        "set": "Setați locația mea",
+        "prompt": "{{ClickOrTap}} aici pentru<br> setează-ți<br> Locație",
+        "myCurrentLocation": "Locația mea actuală",
+        "enterAddress": "Introduceți o adresă",
+        "enterPostcode": "Vă rugăm să introduceți codul poștal\/codul poștal",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Adaugă locație",
+            "title": "Locație nouă",
+            "nameYourLocation": "Denumiți-vă locația"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Salvați această locație?",
+            "message": "Intenționați să folosiți această locație din nou în viitor?",
+            "ok": "da",
+            "cancel": "Nu"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Denumiți această locație",
+            "placeholder": "Acasă, serviciu etc.",
+            "ok": "salva"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Alegeți Locație"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Vreo zonă în această locație?",
+        "newArea": "Zona noua",
+        "promptTitle": "Introduceți un nume pentru zonă:",
+        "absent": "Vă rugăm să setați zona",
+        "error": "Eroare",
+        "exist": "Zona exista deja",
+        "addNewArea": "Adăugați o zonă nouă",
+        "add": "Adăuga"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "o colecție de locații",
+            "displayType": "Locații"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Reprezintă o clădire, un loc, o navă, un parc etc.",
+            "displayType": "Locație"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Reprezintă o zonă dintr-o locație, cum ar fi o cameră sau o suită",
+            "displayType": "Zonă"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Reprezintă un etaj într-o clădire sau navă",
+            "displayType": "Podea"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Reprezintă o coloană într-o clădire sau navă",
+            "displayType": "Coloană"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Categorie pentru lucruri aflate la o anumită distanță de un geohash",
+            "displayType": "Aproape de locuri"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Categorie pentru lucruri aflate la o anumită distanță de un geohash, care se potrivește cu un interes",
+            "displayType": "Locuri de interes"
         }
     }
 }

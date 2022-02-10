@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "שגיאה {{status}} במהלך הבקשה",
+        "canceled": "הבקשה בוטלה",
+        "500": "שגיאת שרת פנימית",
+        "404": "לא נמצא: {{url}}",
+        "501": "הבקשה נקטעה"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "פג תוקף ההפעלה. רענן את הדף ונסה שוב.",
+        "otherDomain": "בקשה חוצת דומיינים חסומה לדומיין זר ב-{{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "בֶּרֶז",
+        "click": "נְקִישָׁה",
+        "yes": "כן",
+        "no": "לא",
+        "Tap": "בֶּרֶז",
+        "Click": "נְקִישָׁה",
+        "Yes": "כן",
+        "No": "לא"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "יָנוּאָר",
+        "2": "פברואר",
+        "3": "מרץ",
+        "4": "אַפּרִיל",
+        "5": "מאי",
+        "6": "יוני",
+        "7": "יולי",
+        "8": "אוגוסט",
+        "9": "סֶפּטֶמבֶּר",
+        "10": "אוֹקְטוֹבֶּר",
+        "11": "נוֹבֶמבֶּר",
+        "12": "דֵצֶמבֶּר"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "שְׁנִיָה",
+        "seconds": "שניות",
+        "minute": "דַקָה",
+        "minutes": "דקות",
+        "hour": "שעה (ות",
+        "day": "יְוֹם",
+        "days": "ימים",
+        "week": "שָׁבוּעַ",
+        "weeks": "שבועות",
+        "month": "חוֹדֶשׁ",
+        "months": "חודשים",
+        "year": "שָׁנָה",
+        "years": "שנים",
+        "decade": "עָשׂוֹר",
+        "decades": "עשרות שנים",
+        "century": "מֵאָה",
+        "centuries": "מאות שנים"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "אנא אפשר גישה למיקרופון שלך",
+        "record": "תקליט",
+        "recording": "הקלטה",
+        "remains": "שְׂרִידִים",
+        "maximum": "מַקסִימוּם",
+        "playing": "משחק",
+        "recorded": "מוּקלָט",
+        "clip": "לְקַצֵץ",
+        "discard": "להשליך",
+        "encoding": "הַצפָּנָה"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "לְקַצֵץ",
+        "errorNoSource": "אין מקור וידאו",
+        "SkipAfter": "דלג אחרי",
+        "Skip": "לדלג"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "לְקַצֵץ",
+        "errorNoSource": "אין מקור pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "הגדר את התחלת קליפ",
+        "ClipStart": "התחל קליפ",
+        "SetClipEnd": "הגדר את סוף הקליפ",
+        "ClipEnd": "קליפ סוף",
+        "StartMoreEnd": "מיקום התחלה לא יכול להיות יותר ממיקום קצה",
+        "EndLessStart": "מיקום הסיום לא יכול להיות פחות ממיקום ההתחלה",
+        "WhichInvalid": "טיעון &#39;איזה&#39; פסול"
     },
     "alert": {
-        "title": "Alert"
+        "title": "עֵרָנִי"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "לְאַשֵׁר",
+        "ok": "כן",
+        "cancel": "לא"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "מיידי",
+        "ok": "ללכת"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "יותר",
+        "Menu": "תַפרִיט"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "שגיאה בקריאת הקובץ",
+        "errorType": "מצטערים, אבל סוג קובץ זה אינו נתמך",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "מה תרצה לעשות?",
+            "photo": "צלם תמונה חדשה",
+            "library": "בחר מתוך הספרייה"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "נא לבחור תמונה גדולה יותר.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "התאם את הגודל והמיקום",
+            "touchscreen": "השתמש באצבעותיך כדי להתקרב ולגרור",
+            "notTouchscreen": "השתמש בעכבר ובגלגל כדי להתקרב ולגרור"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "אתמול בלילה",
+        "lastEvening": "ערב אחרון",
+        "yesterday": "אתמול",
+        "thisMorning": "הבוקר",
+        "today": "היום",
+        "tonight": "היום בלילה",
+        "tomorrowMorning": "יום בוקר",
+        "tomorrow": "מָחָר",
+        "hoursAgo": "לפני {{h}} שעות",
+        "hourAgo": "לפני {{h}} שעה",
+        "minuteAgo": "לפני דקה {{m}}",
+        "minutesAgo": "לפני {{m}} דקות",
+        "secondAgo": "לפני שנייה {{s}}",
+        "secondsAgo": "לפני {{s}} שניות",
+        "fewSecondsAgo": "לפני שניות",
+        "rightNow": "עכשיו",
+        "inSecond": "בעוד {{s}} שניה",
+        "inSeconds": "בעוד {{s}} שניות",
+        "inMinute": "בעוד {{m}} דקה",
+        "inMinutes": "בעוד {{m}} דקות",
+        "inHour": "בעוד {{h}} שעה",
+        "inHours": "בעוד {{h}} שעות",
+        "inUnderMinute": "תוך פחות מדקה אחת"
     }
 }

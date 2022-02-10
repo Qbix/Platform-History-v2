@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tinya kuti ubhadhare"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: kuchaja kwakagadziriswa {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tinokutendai nekubhadhara kwenyu ku {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} vakanyoresa ku {{plan.title}}",
+        "YouSubscribedTo": "Wakanyoreswa ku {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Unowana mubhadharo we {{displayAmount}} kubva ku {{call 'publisher.displayName'}} ne &quot;{1001}}&quot;",
+        "HasBeenCharged": "Hei, izvi ndezvekukuzivisai kuti {{1}} yabhadhariswa {{2}} ye{1001}} na{1002}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Tinokutendai nekubhadhara kwenyu &quot;{999}}&quot;",
+        "HavePaid": "Nhai {{1}}, ichi chingori chitsidzo chekukurumidza kuti wabhadhara {{2}} ku {{3}} ye{{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
+        "AboutOrder": "Info nezve order",
+        "PaymentMethod": "Kubhadhara nzira",
         "ContactInfo": "Contact info",
         "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "InviteAcceptedBy": "Kukoka kunotambirwa ne {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} maisa zita rekutanga",
+        "Streams_user_lastname": "{{invitedUserName}} maisa zita remhuri",
+        "Streams_user_icon": "{{invitedUserName}} yakapinda chiratidzo",
+        "Places_user_location": "{{invitedUserName}} yapinda nzvimbo",
+        "Streams_greeting": "{{invitedUserName}} akapinda kwaziso",
+        "YouHaveCreditsToStart": "Une {{amount}} makiredhiti ekuti utange",
+        "PaymentFor": "Mubhadharo we &quot;{{1}}&quot;",
+        "PaymentTo": "Kubhadhara ku {{1}}",
+        "PaymentToUser": "Kubhadhara ku {{toUserName}}",
+        "CreatePaidStream": "kugadzira {{toStreamName}}",
+        "JoinedPaidStream": "kuti uchengetedzwe mu &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "yekugadzira nharaunda &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "semari yekudzoserwa mu&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Vakatenga {{amount}} makiredhiti",
+        "BonusCredits": "bhonasi {{amount}} makiredhiti",
+        "BuyAmountCredits": "Tenga {{amount}} makiredhiti",
+        "WatchClip": "Wakawana {{amount}} makiredhiti ekuona {{fromStreamTitle}}",
+        "MissingCredits": "Zvikwereti Zvisipo",
+        "YouMissingCredits": "Unoda imwe {{amount}} makiredhiti kuti uenderere mberi.",
+        "BuyCredits": "Tenga zvikwereti",
+        "BuyBonus": "Kutenga {{amount}} makiredhiti kamwechete, kunozounza ku{{bonus}} bhonasi yezvikwereti.",
         "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
+        "PurchaseCredits": "Kutenga Credits",
         "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "ErrorInvalidAmount": "Mari haina kushanda",
+        "ErrorInvalidCurrency": "Sezvineiwo hatisi kutsigira mari {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} makiredhiti",
+            "BonusCredits": "{{amount}} makiredhiti"
         }
     },
     "history": {
         "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
+        "Amount": "Mari",
+        "Description": "Tsanangudzo",
         "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "To": "ku",
+        "From": "kubva",
+        "SeeHistory": "Ona nhoroondo yekubhadhara kwe{{1}}",
+        "HistoryEmpty": "Hauna data parizvino",
+        "PaymentFor": "Akatumirwa {{amount}} makiredhiti",
+        "PaymentTo": "Akatumirwa {{amount}} makiredhiti",
+        "PaymentToUser": "Akatumirwa {{amount}} makiredhiti",
+        "CreatePaidStream": "Ndakapedza {{amount}} makiredhiti",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ndakawana {{amount}} makiredhiti",
+            "-": "Ndakapedza {{amount}} makiredhiti"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ndakawana {{amount}} makiredhiti",
+            "-": "Ndakapedza {{amount}} makiredhiti"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Takagamuchira {{amount}} makiredhiti",
+            "-": "Akatumirwa {{amount}} makiredhiti"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Ndakapedza {{amount}} makiredhiti",
+        "BoughtCredits": "Vakatenga {{amount}} makiredhiti",
+        "BonusCredits": "Wawana bhonasi {{amount}} makiredhiti",
+        "InviteAcceptedBy": "Ndakawana {{amount}} makiredhiti",
+        "Streams_user_firstname": "Ndakawana {{amount}} makiredhiti",
+        "Streams_user_lastname": "Ndakawana {{amount}} makiredhiti",
+        "Streams_user_icon": "Ndakawana {{amount}} makiredhiti",
+        "Places_user_location": "Ndakawana {{amount}} makiredhiti",
+        "Streams_greeting": "Ndakawana {{amount}} makiredhiti",
+        "YouHaveCreditsToStart": "Ndakawana {{amount}} makiredhiti"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Seta Kubhadhara Ruzivo",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Tanga Kunyoresa",
+            "message": "Unoda kunyoresa ku{{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Kanzura"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kadhi rechikwereti kana rechikwereti",
+        "SubscribePayment": "Bhalisa Kubhadhara",
+        "ImmediatePayment": "Kubhadhara Pakarepo"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Seta Kubhadhara Ruzivo",
+        "BuyAmountCredits": "Tenga {{amount}} makiredhiti",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Ita Payment",
+            "message": "Unobvuma here kubhadhara {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Kanzura"
         }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "description": "inochengetedza zvikwereti uye kubhadhara"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Kunyoresa Chirongwa",
+            "description": "kunyorera chirongwa"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Kunyoresa",
+            "description": "kubhadhara"
         },
         "Assets\/product": {
             "displayType": "Product",
-            "description": "product being sold"
+            "description": "chigadzirwa chiri kutengeswa"
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered"
+            "description": "sevhisi iri kupihwa"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Ndakawana {{amount}} makiredhiti"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Vakatenga {{amount}} makiredhiti"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "bhonasi {{amount}} makiredhiti"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Ndakapedza {{amount}} makiredhiti"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Akatumira {{amount}} makiredhiti ku {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Takagamuchira {{amount}} makiredhiti kubva ku{1000}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
+            "TitlePlaceholder": "Zita rebasa",
+            "PricePlaceholder": "Seta mutengo",
+            "LinkPlaceholder": "set yekuwedzera info link",
+            "DescriptionPlaceholder": "Tsanangudzo yebasa",
             "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "SelectRequiredParticipants": "Vanodiwa Vatori vechikamu"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServiceTemplates": "Manage Service Matemplate",
         "ManageServices": "Manage Services",
         "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "OptionalContribution": "Optional mupiro",
+        "RequiredPayment": "Kubhadhara kunodiwa",
+        "AreYouSureDelete": "Une chokwadi chekuti unoda kudzima sevhisi iyi?",
+        "AmountServicesRelated": "Pane {{amount}} zviripo zvinechekuita nesevhisi iyi. Naivowo vachabviswa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
+        "Title": "Ruzivo nezve {{title}} NFT",
+        "Description": "Ruzivo rwakadzama nezveNFT",
+        "FixedBid": "Tenga izvozvi",
         "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "StartingIn": "Kutanga mukati",
+        "EndingIn": "Kuguma mukati",
+        "CreateNFT": "Gadzira iyo NFT",
+        "TitlePlaceholder": "Ipa NFT yako zita",
+        "DescriptionPlaceholder": "Ipa NFT yako tsananguro",
+        "CreateYourNFT": "Gadzira yako NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "RoyaltyPlaceholder": "Optional. Mari yakabhadharwa kumugadziri asati achinjisa.",
+        "ExpirationDate": "Zuva rekupera",
+        "StartingDate": "Zuva Rokutanga",
+        "BidsBelowThisAmount": "Mabhidhi ari pasi pemari iyi haatenderwe",
         "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
+        "Price": "Mutengo",
+        "Owner": "Muridzi",
+        "SelectCategory": "Sarudza chikamu",
+        "Day": "Zuva",
+        "Days": "Mazuva",
+        "Hour": "Awa",
+        "Hours": "Maawa",
+        "Minute": "Mineti",
+        "Minutes": "Maminitsi",
+        "Second": "Chepiri",
+        "Seconds": "Sekondi",
+        "SalesCreator": "zvekutengesa zvichaenda kumusiki",
         "Details": "Details",
         "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
+        "History": "Nhoroondo",
+        "LoremIpsum": "Lorem Ipsum inongori dummy zvinyorwa zvekudhinda uye typesetting indasitiri.",
+        "PutOnSale": "Isa pakutengesa",
+        "PutOffSale": "Bvisa pakutengesa",
         "Transfer": "Transfer",
         "Update": "Update",
         "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "CreateToken": "Gadzira Chiratidzo",
+        "PlaceBid": "Nzvimbo Bid",
+        "SoldOut": "Kutengeswa",
+        "NftName": "NFT zita",
+        "DescribeYourNFT": "Ndokumbira utsanangure NFT yako",
+        "NftPicture": "Mufananidzo unomiririra NFT",
+        "NftMovie": "Firimu rinomiririra NFT",
+        "UploadMovie": "Isa bhaisikopo",
+        "MovieSource": "Vadivelu Comedy Movie Source",
+        "UploadFile": "Isa faira",
+        "PutOnMarketplace": "Isa pamusika",
+        "InstantPurchase": "Isa mutengo kuti ubvumire vashandisi kutenga yako NFT ipapo ipapo",
         "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "TimedAuction": "Auction yenguva",
+        "OpenForBids": "Vhura mabhidhi",
+        "PriceOnePiece": "Pinda mutengo wechidimbu chimwe chete",
+        "EnterMinimumBid": "Pinda Minimum bid",
+        "SelectChain": "Sarudza ketani",
+        "WrongChain": "Iyi NFT yakagadzirwa pasi pe&quot;{{chain}}&quot;. Ndapota shandisa cheni iyi.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
+            "importNFT": "Kuunza NFT&#39;s",
+            "fileNotFound": "Tine hurombo, CSV file harina kuwanikwa.",
+            "fileEmpty": "Tine urombo, CSV faira harina chinhu.",
+            "userIdNotFound": "mushandisi aripo asi id isina chinhu",
+            "errorLine": "mutsetse {{1}}",
+            "fieldNotFound": "Nzvimbo inodiwa &quot;{{1}}&quot; haina kuwanikwa",
+            "taskStreamInvalid": "Task stream haishande",
+            "instructionsEmpty": "Task stream mirayiridzo isina chinhu",
             "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
+            "activateUsers": "kutumira meseji yekushandisa kune vashandisi?",
+            "importProgress": "Kufambira mberi",
             "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "sampleCSV": "Dhaunirodha Muenzaniso CSV",
+            "fileLabel": "Isa Spreadsheet:",
+            "errorsTitle": "Zvikanganiso zvakaitika"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
+                "FilterByNFTCollections": "Sefa neNFT Collections",
+                "ShowNFTCollection": "Ratidza muunganidzwa weNFT mu...",
                 "AllCollections": "All Collections"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Vose Vanyori",
+                "AllUsers": "Munhu wese",
+                "FilterByAuthors": "Sefa neVanyori"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Dzokera kuKuunganidzwa"
     }
 }

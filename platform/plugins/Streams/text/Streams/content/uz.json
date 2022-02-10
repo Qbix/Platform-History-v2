@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Bu kontent sizdan yashirin."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Yangi element"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Men taklif qilgan odamlar",
+        "Streams\/invitedMe": "Meni kim taklif qildi",
+        "DoYouAgree": "Siz ham shu fikrdamisiz?",
+        "Yes": "Ha",
+        "No": "Yo&#39;q"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Sizning qiziqishlaringiz qanday?",
+        "CanAdd": "Agar siz hali ham qidirayotgan narsangizni topa olmasangiz, quyida yangi qiziqish qo&#39;shishingiz mumkin:",
+        "TrySynonyms": "Ko&#39;rmayapsizmi? Sinonimlarni sinab ko&#39;ring.",
+        "AddUnderCategory": "Turkum ostida qo&#39;shish...",
+        "Other": "Boshqa",
+        "Unlisted": "Roʻyxatga kiritilmagan"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Xabar administrator tomonidan tekshirilishi uchun belgilandi. Belgini olib tashlash uchun yana bosing.",
+        "noOneSaid": "Hech kim hech narsa demadi",
+        "closeChatButton": "Chatni yopish",
+        "closeChatConfirmTitle": "Bu chat yopilsinmi?",
+        "closeChatConfirm": "Haqiqatan ham bu chatni yopmoqchimisiz?",
+        "Subscribed": "Bildirishnomalar yoqilgan",
+        "Unsubscribed": "Bildirishnomalar oʻchirildi",
+        "closeChatConfirmYes": "Ha",
+        "closeChatConfirmNo": "Yo&#39;q",
+        "earlierComments": "oldingi sharhlar",
+        "startedConversation": "suhbat boshladi",
+        "RealTimeCall": "Haqiqiy vaqtda qo&#39;ng&#39;iroq",
+        "SearchByName": "Ism bo&#39;yicha qidirish",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} chatga tashrif buyurmoqda",
+            "Join": "{{displayName}} chatga qoʻshildi",
+            "Leave": "{{displayName}} chatni tark etdi",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} boshladi"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "elektron pochta obunalaringizni boshqaring",
+        "IfUnsubscribe": "Agar obunani bekor qilmoqchi bo&#39;lsangiz",
+        "*": "{{& message.fields.type}} {{& stream.fields.title}} ga xabar yuborish",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} aytdi: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} dagi oʻzgarishlar",
+        "Streams\/invite": "Sizni {{& stream.fields.title}} ga taklif qilishdi",
+        "Streams\/announcement": "Eʼlon: {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ruxsatni {{& stream.fields.title}}da o‘zgartirdi",
+        "Streams\/chat\/edit": "Chat xabari tahrirlangan: {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat xabari {{& stream.fields.title}} ichida olib tashlandi",
+        "Streams\/closed": "{{stream.fields.title}} yopildi",
+        "Streams\/task\/progress": "Taraqqiyot: {{stream.fields.title}}",
+        "Streams\/task\/complete": "Vazifa bajarildi: {{stream.fields.title}}",
+        "Streams\/task\/error": "Xato: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: kiruvchi xabar",
+        "Streams\/relatedTo\/Streams\/call": "Yangi qoʻngʻiroq {{toTitle}} da boshlandi",
+        "Streams\/relatedTo\/*": "Yangi {{relationDisplayType}}, {{toTitle}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} roʻyxatiga {{relationDisplayType}} sifatida qoʻshildi",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} sizni fikrda aytib o‘tdi",
+        "Streams\/call": "{{displayName}} real vaqtda qo‘ng‘iroqni boshladi"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Taklif qiling",
+        "messageContent": "{{displayName}} sizni {{inviteUrl}} ga taklif qildi",
+        "youCanNowPaste": "Endi siz odamlarni taklif qilish uchun ushbu havolani biron joyga qo&#39;yishingiz mumkin",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Kontaktlaringizdan tanlang",
+            "chooseAgainFromContacts": "Kontaktlardan Qayta-ni tanlang",
+            "inviteSelectedContacts": "Tanlangan kontaktlarni taklif qiling",
+            "selectFromContacts": "Kontaktlardan tanlang",
+            "userChooserPlaceholder": "Ism bo&#39;yicha qidirish",
+            "photo": "Suratga oling",
+            "photoInstruction": "QR kodingizni skanerlagan odam sizning oldingizda bo&#39;lsa, uni suratga oling",
+            "to": "Kimga: {{Stream Title}}",
+            "go": "Bor",
+            "title": "Taklif qiling",
+            "placeholder": "Mobil raqam yoki elektron pochta manzili",
+            "orInvite": "Yoki quyidagi yordamida odamlarni taklif qiling:",
+            "copyLink": "Taklif havolasini nusxalash uchun {{ClickOrTap}}",
+            "shareOrCopyLink": "Taklif havolasini ulashish yoki nusxalash uchun {{ClickOrTap}}",
+            "QR": "QR kodini yaratish uchun {{ClickOrTap}}",
+            "QRtitle": "Ushbu QR kodni skanerlang",
+            "QRscanned": "Ular skanerlashdi!",
+            "scannedQR": "{{ClickOrTap}} agar kod skanerlangan boʻlsa",
+            "byEmail": "Elektron pochta",
+            "byText": "Matn",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hey, buni tekshirib ko&#39;ring",
+            "PleaseVisitLink": "Iltimos, quyidagi havolaga tashrif buyuring:",
+            "InvitingYou": "Men sizni {{title}} ga taklif qilyapman",
+            "HasInvitedYou": "{{displayName}} sizni {{title}} ga taklif qildi",
+            "HasMentionedYou": "{{displayName}} sizni &quot;{{title}}&quot; da eslatib o‘tdi",
+            "YOUAREINVITED": "TAKLIF EDILSIZ!",
+            "AcceptInvite": "Taklifni qabul qiling"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Sizni {{title}} ga taklif qilishdi. Iltimos, {{url}} bosing"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Siz taklif qilindingiz. Qabul qilish va qoʻshilish uchun {{ClickOrTap}} bu yerda."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "<em>{{message.fields.type}}<\/em> xabar yubordi: {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "sharhladi",
+            "startedCallIn": "qo&#39;ng&#39;iroqni boshladi",
+            "in": "ichida",
+            "body": "{{& url}} ichida: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "ga e&#39;lon qilingan",
+                "byAvatar": "muallif: {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "yangi {{instructions.fromDisplayType}} bor",
+                "byAvatar": "{{avatar.displayName}} tomonidan qoʻshilgan"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Do&#39;stlaringiz hali tanimaydigan raqamimizdan taklifnomalar yuboriladi. Ularga taklifnoma sizdan kelganligini bildirish uchun havolani bosishlarini so&#39;rash uchun tezkor matnni kuzatib boring.",
+            "confirm": "Do&#39;stlaringiz hali tanimaydigan raqamimizdan taklifnomalar yuboriladi. Ularga taklifnoma sizdan kelganligi haqida xabar berish uchun havolani bosishlarini so&#39;rab tezkor matnni yuborishni xohlaysizmi.",
+            "check": "Hey, men sizga hozirgina {{app}} ilovasiga taklif yubordim. Iltimos, sms-ni tekshiring va havolani bosing!",
+            "CheckYourMobile": "Iltimos, SMS-ni tekshiring va ko&#39;rsatmalarga amal qiling!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Takliflar do&#39;stlaringiz hali tanimaydigan domenimizdan yuboriladi. Ularga taklifnoma sizdan kelganligini bildirish uchun havolani bosishlarini so&#39;rash uchun tezkor matnni kuzatib boring.",
+            "confirm": "Takliflar do&#39;stlaringiz hali tanimaydigan domenimizdan yuboriladi. Ularga taklifnoma sizdan kelganligi haqida xabar berish uchun havolani bosishlarini so&#39;rab tezkor matnni yuborishni xohlaysizmi.",
+            "subject": "Taklif oldingizmi?",
+            "body": "Hey, men sizga hozirgina {{app}} ilovasiga taklif yubordim. Iltimos, elektron pochtangizni tekshiring va u yerdagi havolani bosing!",
+            "CheckYourEmail": "Iltimos, elektron pochtangizni tekshiring va ko&#39;rsatmalarga amal qiling!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Sarlavha",
+        "Subscribed": "Obuna boʻlgan",
+        "Participants": "Ishtirokchilar",
+        "AreYouSureRemoveIdentifier": "Bu identifikatorni oʻchirib tashlashingizga ishonchingiz komilmi?",
+        "AreYouSureUnsubscribeIdentifier": "Ushbu identifikator obunasini bekor qilishga ishonchingiz komilmi? Bu identifikatorga bildirishnomalarni oʻchirib qoʻyadi.",
+        "AreYouSureUnsubscribeDevice": "Bu qurilma obunasini bekor qilyapsizmi? Bu qurilmaga bildirishnomalarni oʻchirib qoʻyadi.",
+        "AreYouSureRemoveParticipant": "Haqiqatan ham bu ishtirokchini olib tashlamoqchimisiz?",
+        "RemoveParticipant": "Ishtirokchini olib tashlash",
+        "Identifiers": "Identifikatorlar",
+        "Devices": "Qurilmalar",
+        "Streams": "Oqimlar"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Sizda bu oqimga qo‘shilish uchun ruxsat yo‘q.",
+        "streamTitle": "{{1}} jonli qo‘ng‘iroqni boshladi",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Ulanmoqda",
+            "microphoneBtn": "Mikrofonni yoqing",
+            "cameraBtn": "Kamerani yoqish",
+            "cameraAndMicrophoneBtn": "Kamera va mikrofonni yoqing"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mikrofon oʻchiq",
+            "micIsOn": "Mikrofon yoqilgan",
+            "cameraIsOff": "Kamera oʻchirilgan",
+            "cameraIsOn": "Kamera yoqilgan",
+            "screenSharingIsOn": "Ekran almashish yoqilgan",
+            "screenSharingIsOff": "Ekranni ulashish",
+            "joinNow": "Qo&#39;ng&#39;iroqqa qo&#39;shiling"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "&quot;Sozlamalar&quot; -&gt; &quot;Kengaytirilgan&quot; -&gt; &quot;Maxfiylik va xavfsizlik&quot; -&gt; &quot;Sayt sozlamalari&quot; -&gt; &quot;Kamera&quot; yoki &quot;Sayt sozlamalari&quot; -&gt; &quot;Mikrofon&quot; ga o&#39;ting.",
+            "point2": "{{hostname}} ni “Bloklash” roʻyxatidan olib tashlang"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Iltimos, ushbu sahifani qayta yuklang va konferentsiyaga qoʻshilish uchun {{kind}} ga kirishni tasdiqlang."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "Android sozlamalaringizga o&#39;ting",
+            "point2": "&quot;Ilovalar va bildirishnomalar&quot; ni oching",
+            "point3": "“{{communityName}}”ni toping va uni oching",
+            "point4": "Ruxsatlar ustiga bosing",
+            "point5": "{{kind}} ni yoqish"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Ko&#39;rsatmalar",
+            "permissionDenied": "{{kind}} uchun ruxsat rad etildi. Uni ishlatish uchun quyidagi amallarni bajaring:",
+            "point1": "iOS sozlamalaringizga o&#39;ting",
+            "point2": "&quot;Maxfiylik&quot; ni oching",
+            "point3": "{{kind}} toping va uni oching",
+            "point4": "“{{communityName}}”ni toping va yoqing"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Siz xonaga kirdingiz",
+            "joining": "Qo‘shilish: {{userName}}",
+            "sbLeftRoom": "{{userName}} xonani tark etdi",
+            "switchingRoom": "Xonani almashtirish...",
+            "forceDisconnecting": "5 soniya ichida aloqangiz uziladi",
+            "forceDisconnectingImmediately": "Siz uy egasi tomonidan uzildingiz",
+            "youLeftRoom": "Siz xonani tark etdingiz",
+            "codeCopied": "Siz xonani tark etdingiz",
+            "sbBeganFbLive": "{{userName}} ushbu qo‘ng‘iroqni Facebook’da translyatsiya qilishni boshladi",
+            "sbStoppedFbLive": "{{userName}} bu qo‘ng‘iroqni Facebook’da translyatsiya qilishni to‘xtatdi",
+            "youBeganFbLive": "Siz ushbu qoʻngʻiroqni Facebook’da translyatsiya qilishni boshladingiz",
+            "youStoppedFbLive": "Siz ushbu qoʻngʻiroqni Facebook’da translyatsiya qilishni toʻxtatdingiz",
+            "youStartedLive": "Siz ushbu qo‘ng‘iroqni maxsus RTMPga translyatsiya qilishni boshladingiz",
+            "youStoppedLive": "Siz ushbu qo‘ng‘iroqni maxsus RTMPga translyatsiya qilishni to‘xtatdingiz",
+            "sbStartedLiveStreaming": "{{userName}} jonli efirni boshladi",
+            "sbStoppedLiveStreaming": "{{userName}} jonli efirni tugatdi",
+            "liveStopped": "Videoni oxirgi nuqtaga yuborishda xatolik yuz berdi",
+            "youBeganVideoRecording": "Siz ushbu konferensiyani yozib olishni boshladingiz",
+            "youStoppedVideoRecording": "Siz ushbu konferensiyani yozib olishni toʻxtatdingiz",
+            "linkCopiedToCb": "Havola vaqtinchalik xotiraga nusxalandi",
+            "codeCopiedToCb": "Kod vaqtinchalik xotiraga nusxalandi",
+            "userHasNoVideo": "Ishtirokchida video yo&#39;q",
+            "openInBrowserAlert": "Konferentsiyaga qo&#39;shilish uchun Safari brauzerida havolani oching."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Video sozlamalari",
+            "webCamera": "Veb-kamera",
+            "screenSharing": "Ekran almashish",
+            "shareAnotherScreen": "Boshqa ekranni ulashing",
+            "turnOffCameras": "Kamerani o&#39;chiring",
+            "turnOffVideo": "Kamera\/ekran almashishni o&#39;chiring",
+            "turnOffAudioInput": "Mikrofon ovozini o&#39;chirish",
+            "turnOffScreenSharing": "Ekranni almashishni o&#39;chirib qo&#39;ying",
+            "cameraIsTurnedOff": "Kamera o&#39;chirilgan",
+            "micIsTurnedOff": "Mikrofon o&#39;chirilgan",
+            "startFBLive": "Facebook Livestream-ni ishga tushiring",
+            "stopFBLive": "Facebook Livestreamni to‘xtating",
+            "startRecording": "Yozishni boshlang",
+            "stopRecording": "Yozishni to‘xtating",
+            "start": "Boshlash",
+            "stop": "STOP",
+            "recordingInProgress": "Yozish davom etmoqda...",
+            "fbLiveTitle": "Jonli efir sarlavhasi",
+            "fbLiveDescription": "Jonli efiringizni tasvirlab bering. Bu nima haqida?",
+            "fbOnlyMeLiveAccess": "Faqat men",
+            "fbFriendsAccess": "Do&#39;stlar",
+            "fbPublicAccess": "Ommaviy",
+            "publishOnTimeline": "Vaqt jadvalida nashr qilish",
+            "publishToGroup": "Guruhga nashr qilish",
+            "fbStartLive": "Jonli efirga chiqing",
+            "fbStopLive": "Jonli efirni tugatish",
+            "streamingSettings": "Sozlamalar",
+            "fbEmbedCode": "Oʻrnatish",
+            "copy": "Nusxalash",
+            "streamToRTMP": "Maxsus RTMP ga uzating",
+            "startBroadcasting": "Efirni boshlash",
+            "broadcastingInProgress": "Translatsiya davom etmoqda"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Audio sozlamalari",
+            "speakers": "Spikerlar",
+            "microphone": "Mikrofon"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Ishtirokchi sozlamalari",
+            "disconnect": "Ulanishni uzing",
+            "floatingScreens": "Suzuvchi ekranlar",
+            "tiledScreens": "Plitkali ekranlar",
+            "loudestExceptMe": "Mendan boshqa eng baland ovoz",
+            "maximizeLoudest": "Eng baland ovozli",
+            "staticMaximized": "Statik maksimallashtirilgan",
+            "fullScreen": "To&#39;liq ekran",
+            "manual": "Qo&#39;llanma",
+            "turnOffCamera": "Videoni yashirish",
+            "turnOffAudio": "Ovozni oʻchirish",
+            "turnOffScreenSharing": "Ekranni ulashishni yashirish",
+            "turnOnCamera": "Videoni ko&#39;rsatish",
+            "turnOnAudio": "Ovozni yoqish",
+            "turnOnScreenSharing": "Ekran almashishni ko&#39;rsatish"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Oqim sozlamalari"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Uchrashuv",
+            "MeetingEnded": "Uchrashuv tugadi"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Taklif qilingan",
+            "description": "Taklifnomalar uchun inbox"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Manba",
+            "description": "resursga kirishni boshqarish va yangilanishlar haqida xabarlarni joylashtirish uchun oqim"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "Muayyan topshiriqning bajarilishi haqida yangilanishlarni olish uchun",
+            "displayType": "Vazifa"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "vazifalar uchun toifa",
+            "displayType": "Vazifalar"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "jamiyat a&#39;zolari uchun umumiy tajriba",
+            "displayType": "Jamiyat a&#39;zolari uchun umumiy tajriba"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "foydalanuvchi o&#39;zini tanishtirishi mumkin bo&#39;lgan salomlashish",
+            "displayType": "Salom"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Raqam",
+            "description": "matematik raqam"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Sana",
+            "description": "sana"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Matn",
+            "description": "matn tanasi"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Matn",
+            "description": "matnning kichik qismi"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Matn",
+            "description": "matnning o&#39;rta qismi"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Elektron pochta manzili",
+            "description": "elektron pochta manzili"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Telefon raqami",
+            "description": "telefon raqami"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "internetdagi havola"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Rasm",
+            "description": "vizual tasvir",
+            "newItem": "Rasm qo&#39;shish"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Rasmlar galereyasi",
+            "description": "tasvirlar galereyasi"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Albom",
+            "description": "turli ommaviy axborot vositalari bog&#39;liq bo&#39;lgan albom"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Fayl",
+            "description": "yuklangan fayl",
+            "newItem": "Fayl qo&#39;shish"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Audio klip",
+            "description": "audio klip",
+            "newItem": "Audio qo&#39;shish"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Video klip",
+            "description": "video klip",
+            "newItem": "Video qo&#39;shish"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF hujjat",
+            "description": "PDF hujjat",
+            "newItem": "PDF qo&#39;shish"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Jonli efir",
+            "description": "jonli audio yoki video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Turkum",
+            "description": "boshqa oqimlar bog&#39;lanishi mumkin bo&#39;lgan kategoriya"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Ishtirokchilar indeksi",
+            "description": "foydalanuvchi qo&#39;shilgan\/ketganida oqimlar bunga bog&#39;liq\/aloqasiz"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Qiziqish",
+            "description": "foydalanuvchining muayyan mavzuga qiziqishini ifodalaydi"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Kiruvchi",
+            "description": "boshqa foydalanuvchilar tomonidan yuborilgan xabarlar uchun maqsad"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Suhbat",
+            "description": "foydalanuvchilar o&#39;rtasidagi suhbat, tarix bilan"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Haqiqiy vaqtda qo&#39;ng&#39;iroq",
+            "description": "real vaqtda video\/audio qo&#39;ng&#39;iroq"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Savol",
+            "description": "savol oqimi"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Javob",
+            "description": "javoblar oqimi"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Qo&#39;ng&#39;iroqlar",
+            "description": "Streams\/webrtc uchun toifa",
+            "MaxRelationsExceeded": "Maksimal qoʻngʻiroqlar soni oshib ketdi"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "sahifa sarlavhasini kiriting",
+        "ModTab": "Elementni o&#39;zgartirish",
+        "Save": "Saqlash",
+        "Delete": "Oʻchirish",
+        "Submenu": "Pastki menyu"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Yozib olish",
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsifi",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini oʻrnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL noto‘g‘ri",
+        "invalidFile": "Yaroqsiz fayl",
+        "errorNoSource": "Audio manba yo&#39;q",
+        "uploadLimit": "Maksimal fayl hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Maksimal fayl hajmi: {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsifi",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini oʻrnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL noto‘g‘ri",
+        "invalidFile": "Yaroqsiz fayl",
+        "errorNoSource": "Video manbasi yo&#39;q",
+        "uploadLimit": "Maksimal fayl hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Maksimal fayl hajmi: {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsifi",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini oʻrnating",
+        "save": "Saqlash",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL noto‘g‘ri",
+        "invalidFile": "Yaroqsiz fayl",
+        "errorNoSource": "Pdf manbasi yo&#39;q",
+        "uploadLimit": "Maksimal fayl hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Maksimal fayl hajmi: {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Qayta o&#39;rnatish",
+        "edit": "Tahrirlash",
+        "title": "sarlavha",
+        "description": "tavsifi",
+        "upload": "Yuklash",
+        "link": "Havola",
+        "setUrl": "URL manzilini oʻrnating",
+        "save": "Saqlash",
+        "uploadedImage": "Yuklangan rasm",
+        "imageTitle": "Rasm sarlavhasi",
+        "setClip": "Klipni kesib oling",
+        "invalidURL": "URL noto‘g‘ri",
+        "invalidFile": "Yaroqsiz fayl",
+        "errorNoSource": "Rasm manbai yo&#39;q",
+        "uploadLimit": "Maksimal fayl hajmi: {{size}}",
+        "errorFileSize": "Kechirasiz, lekin fayl juda katta.<br> Maksimal fayl hajmi: {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Savollar",
+        "Answers": "Javoblar",
+        "AnswerQuestion": "Savolga javob berish",
+        "SetYourAnswer": "Iltimos, savolga javob bering",
+        "NewQuestion": "Yangi savol",
+        "NewAnswer": "Yangi javob",
+        "AnswerDetails": "Javob tafsilotlari",
+        "answerOption": "Variant",
+        "answerOptionExclusive": "Eksklyuziv",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "Javobingizni shu yerga yozing",
+        "SaveQuestion": "Savolni saqlash",
+        "SaveAnswer": "Javobni saqlash",
+        "AddAnotherAnswer": "Boshqa javob qo&#39;shing",
+        "ErrorAnswers": "Iltimos, bitta javob qo&#39;shing",
+        "AlreadyAnswered": "Allaqachon javob berdi",
+        "TitlePlaceholder": "Savolingizni yozing",
+        "ContentPlaceholder": "Odamlarga javob berishga yordam berish uchun har qanday qo&#39;shimcha ma&#39;lumotni bu erga qo&#39;ying",
+        "ErrorTitle": "Savol talab qilinadi",
+        "Placeholder": "To&#39;ldiruvchi"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Yangi tajriba",
+        "DefineTitle": "Iltimos, sarlavha belgilang",
+        "Create": "Yaratmoq"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Qo&#39;ng&#39;iroqlar",
+        "MaxCalls": "Maksimal qo&#39;ng&#39;iroqlar",
+        "Update": "Yangilash",
+        "NoCallsYet": "Hozircha qo‘ng‘iroqlar yo‘q",
+        "CallReasonTitle": "Bu qo&#39;ng&#39;iroq nima haqida?",
+        "WaitingRoom": "Kutish xonasi"
     }
 }

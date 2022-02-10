@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Çewtiya {{status}} di dema daxwaziyê de",
+        "canceled": "Daxwaz hat betal kirin",
+        "500": "Çewtiya servera navxweyî",
+        "404": "nehat dîtin: {{url}}",
+        "501": "Daxwaz qut bû"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Rûniştin qediya. Rûpelê nûve bikin û dîsa biceribînin.",
+        "otherDomain": "Daxwaza xaça-domainê ji domaina biyanî re li {{baseUrl}} hate asteng kirin"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "dîk",
+        "click": "bitikîne",
+        "yes": "Erê",
+        "no": "na",
+        "Tap": "Dîk",
+        "Click": "Bikirtînin",
+        "Yes": "Erê",
+        "No": "Na"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Rêbendan",
+        "2": "Reşemî",
+        "3": "Adar",
+        "4": "Avrêl",
+        "5": "Gulan",
+        "6": "Pûşper",
+        "7": "Tîrmeh",
+        "8": "Tebax",
+        "9": "Îlon",
+        "10": "Cotmeh",
+        "11": "Mijdar",
+        "12": "Berfanbar"
     },
     "durations": {
-        "second": "second",
+        "second": "duyem",
         "seconds": "seconds",
-        "minute": "minute",
+        "minute": "deqqe",
         "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "hour": "saetan",
+        "day": "roj",
+        "days": "rojan",
+        "week": "hefte",
+        "weeks": "hefteyan",
+        "month": "meh",
+        "months": "mehan",
+        "year": "sal",
+        "years": "salan",
+        "decade": "dehsal",
+        "decades": "dehsalan",
+        "century": "sedsal",
+        "centuries": "sedsalan"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "allowMicrophoneAccess": "Ji kerema xwe destûrê bide gihîştina mîkrofona xwe",
+        "record": "Rekor",
+        "recording": "Girtinî",
+        "remains": "jibermayî",
+        "maximum": "zêdetir",
+        "playing": "Dilîstin",
+        "recorded": "Tomar kirin",
         "clip": "clip",
-        "discard": "Discard",
+        "discard": "Davêjin",
         "encoding": "Encoding"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "Çavkaniyek vîdyoyê tune",
+        "SkipAfter": "Pişt re derbas bibin",
+        "Skip": "Hilperkîn"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Çavkaniyek pdf tune"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
+        "SetClipStart": "Destpêka Klîpê saz bikin",
+        "ClipStart": "Destpêka Klîpê",
         "SetClipEnd": "Set Clip End",
         "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "StartMoreEnd": "Helwesta destpêkê nikare ji pozîsyona dawîyê bêtir be",
+        "EndLessStart": "Helwesta dawî nikare ji pozîsyona destpêkê kêmtir be",
+        "WhichInvalid": "Argumenta &#39;kîjan&#39; nederbasdar e"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Hişyar"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Tesdîqkirin",
+        "ok": "Erê",
+        "cancel": "Na"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Derhal",
+        "ok": "Çûyin"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "zêde",
+        "Menu": "Qerta xûrekê"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Di xwendina pelê de çewtî",
+        "errorType": "Mixabin, lê ev cureyê pelê nayê piştgirî kirin",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Tu dixwazî çi bikî?",
+            "photo": "Wêneyek nû bistînin",
+            "library": "Ji pirtûkxaneyê hilbijêrin"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Ji kerema xwe wêneyek mezintir hilbijêrin.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Mezinahî û pozîsyonê eyar bikin",
+            "touchscreen": "Tiliyên xwe bikar bînin da ku zoom û kaş bikin",
+            "notTouchscreen": "Mişk û çerxa xwe bikar bînin da ku zoom û kaş bikin"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
+        "lastNight": "şevê dî",
+        "lastEvening": "şeva dawîn",
+        "yesterday": "do",
+        "thisMorning": "vê sibê",
+        "today": "îro",
+        "tonight": "îro êvarî",
+        "tomorrowMorning": "tom sibê",
+        "tomorrow": "sibê",
+        "hoursAgo": "{{h}} saet berê",
+        "hourAgo": "{{h}} saet berê",
+        "minuteAgo": "{{m}} deqîqe berê",
+        "minutesAgo": "{{m}} deqîqe berê",
+        "secondAgo": "{{s}} saniye berê",
+        "secondsAgo": "{{s}} saniye berê",
         "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "rightNow": "Niha",
+        "inSecond": "di {{s}} çirkeyê de",
+        "inSeconds": "di {{s}} çirkeyan de",
+        "inMinute": "di {{m}} deqeyê de",
+        "inMinutes": "di {{m}} deqîqeyan de",
+        "inHour": "di {{h}} saetê de",
+        "inHours": "di {{h}} saetan de",
+        "inUnderMinute": "di bin 1 deqîqe"
     }
 }

@@ -1,29 +1,29 @@
 {
-    "LatLng": "({{1}} lat ، {{2}} lng)",
+    "LatLng": "({{1}} خطوط الطول ، {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "ضمن {{1}}"
+        "Title": "في نطاق {{1}}"
     },
     "units": {
         "meter": "متر",
-        "meters": "متر",
+        "meters": "أمتار",
         "kilometer": "كيلومتر",
-        "kilometers": "kiometers",
+        "kilometers": "كيومترات",
         "km": "كم",
         "mile": "ميل",
         "miles": "اميال",
         "mi": "ميل",
         "foot": "قدم",
-        "feet": "أقدام",
-        "inches": "بوصة"
+        "feet": "قدم",
+        "inches": "بوصات"
     },
     "location": {
-        "interested": "أنا مهتم بالأمور التي تحدث داخل {{select}} من",
+        "interested": "أنا مهتم بالأشياء التي تحدث في حدود {{select}} من",
         "update": "تحديث موقعي",
-        "prompt": "{{ClickOrTap}} هنا ل <br> وضع الخاص بك <br> موقعك",
+        "prompt": "{{ClickOrTap}} هنا ل<br> وضع الخاص بك<br> موقعك",
         "myCurrentLocation": "موقعي الحالي",
         "enterAddress": "أدخل عنوانا",
-        "enterPostcode": "الرجاء إدخال الرمز البريدي \/ الرمز البريدي الخاص بك",
+        "enterPostcode": "الرجاء إدخال الرمز البريدي الخاص بك \/ الرمز البريدي",
         "create": {
             "action": "أضف الموقع",
             "title": "موقع جديد",
@@ -32,13 +32,13 @@
         "confirm": {
             "title": "حفظ هذا الموقع؟",
             "message": "هل تخطط لاستخدام هذا الموقع مرة أخرى في المستقبل؟",
-            "ok": "نعم فعلا",
-            "cancel": "لا"
+            "ok": "نعم",
+            "cancel": "رقم"
         },
         "add": {
             "title": "اسم هذا الموقع",
-            "placeholder": "المنزل ، العمل الخ",
-            "ok": "حفظ"
+            "placeholder": "المنزل والعمل وما إلى ذلك.",
+            "ok": "يحفظ"
         },
         "dialog": {
             "title": "اختيار موقع"
@@ -53,36 +53,36 @@
         "error": "خطأ",
         "exist": "المنطقة موجودة بالفعل",
         "addNewArea": "أضف منطقة جديدة",
-        "add": "إضافة"
+        "add": "يضيف"
     },
     "types": {
         "Places\/locations": {
             "description": "مجموعة من المواقع",
-            "displayType": "مواقع"
+            "displayType": "المواقع"
         },
         "Places\/location": {
-            "description": "يمثل مبنى ، مكان ، سفينة ، حديقة ، إلخ.",
-            "displayType": "موقعك"
+            "description": "يمثل مبنى أو مكانًا أو سفينة أو متنزهًا ، وما إلى ذلك.",
+            "displayType": "موقع"
         },
         "Places\/area": {
-            "description": "يمثل منطقة داخل الموقع ، مثل الغرفة أو الجناح",
-            "displayType": "منطقة"
+            "description": "يمثل منطقة داخل موقع ، مثل غرفة أو جناح",
+            "displayType": "مساحة"
         },
         "Places\/floor": {
             "description": "يمثل أرضية في مبنى أو سفينة",
-            "displayType": "أرضية"
+            "displayType": "الأرض"
         },
         "Places\/column": {
             "description": "يمثل عمودًا في مبنى أو سفينة",
             "displayType": "عمود"
         },
         "Places\/nearby": {
-            "description": "فئة للأشياء ضمن مسافة معينة من geohash",
+            "description": "فئة للأشياء الواقعة على مسافة معينة من geohash",
             "displayType": "الاماكن المجاورة"
         },
         "Places\/interest": {
-            "description": "فئة للأشياء ضمن مسافة معينة من geohash ، مطابقة الاهتمام",
-            "displayType": "مصلحة الأماكن"
+            "description": "تصنيف للأشياء الواقعة على مسافة معينة من geohash ، ومطابقة إحدى الاهتمامات",
+            "displayType": "أماكن الاهتمام"
         }
     }
 }

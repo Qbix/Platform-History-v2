@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Rohy hampiroboroboana",
+                "startDate": "Daty nanombohana",
+                "startTime": "Ora fanombohana",
+                "endDate": "Daty famaranana",
+                "endTime": "Fotoana farany",
+                "budget": "Tetibola"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Sivanina araka ny tombontsoa",
+                "FilterInterests": "Manomboha manoratra fahalianana..."
             },
             "Interest": "Interest",
-            "Location": "Location"
+            "Location": "Toerana"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Mandehana",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Mikaroka",
+            "WriteToStartConversation": "Soraty ny eritreritrao hanombohana ny resaka",
+            "StartConversation": "Manomboka resaka",
+            "GotoConversation": "Mandehana any amin&#39;ny Resadresaka",
+            "reset": "Mamerina",
+            "edit": "Ovay",
+            "link": "Rohy",
+            "setUrl": "Mametraka URL",
+            "save": "afa-tsy",
+            "setClip": "Tapaho Clip",
+            "invalidURL": "URL tsy mety"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Lehibe loatra ny rakitra ho an&#39;ny cache. Max haben&#39;ny rakitra {{size}}",
+        "InvalidPDF": "Tsy PDF manankery ny rakitra",
+        "StartTypingTitleOrKeywords": "Manomboka manoratra lohateny na teny fototra..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
+            "description": "Taratasy HTML azon&#39;ny mpampiasa isan-karazany jerena sy ovaina",
             "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Slide amin&#39;ny famelabelarana, mety ahitana HTML, audio sns.",
+            "displayType": "tsary"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
+            "description": "Fampisehoana misy sary mihetsika isan-karazany",
             "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Sampana dokam-barotra amina tranonkala iray",
+            "displayType": "Dokam-barotra"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Fomba fanakambanana vondrona dokam-barotra amin&#39;ny anarana",
+            "displayType": "Fametrahana doka"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Votoaty ho an&#39;ny dokam-barotra",
+            "displayType": "Mamorona dokam-barotra"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Fanentanana dokam-barotra",
+            "displayType": "Fanentanana doka"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Maneho vohikala iray misy metadata voakiky",
+            "displayType": "pejin-tranonkala"
         }
     }
 }

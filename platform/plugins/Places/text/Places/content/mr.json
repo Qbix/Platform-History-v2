@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} अक्षांश, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "{{1}} च्या आत"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "meter": "मीटर",
+        "meters": "मीटर",
+        "kilometer": "किलोमीटर",
+        "kilometers": "किलोमीटर",
+        "km": "किमी",
+        "mile": "मैल",
+        "miles": "मैल",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "पाऊल",
+        "feet": "पाय",
+        "inches": "इंच"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "मला {{select}} च्या आत घडणाऱ्या गोष्टींमध्ये रस आहे",
+        "update": "माझे स्थान अद्यतनित करा",
+        "set": "माझे स्थान सेट करा",
+        "prompt": "{{ClickOrTap}} येथे<br> आपले सेट करा<br> स्थान",
+        "myCurrentLocation": "माझे वर्तमान स्थान",
+        "enterAddress": "पत्ता प्रविष्ट करा",
+        "enterPostcode": "कृपया तुमचा पोस्टकोड \/ पिनकोड प्रविष्ट करा",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "स्थान जोडा",
+            "title": "नवीन स्थान",
+            "nameYourLocation": "तुमच्या स्थानाला नाव द्या"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "हे स्थान जतन करायचे?",
+            "message": "भविष्यात हे स्थान पुन्हा वापरण्याची तुमची योजना आहे का?",
+            "ok": "होय",
+            "cancel": "नाही"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "या स्थानाला नाव द्या",
+            "placeholder": "घर, काम इ.",
+            "ok": "जतन करा"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "स्थान निवडा"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "या स्थानाच्या आत कोणतेही क्षेत्र आहे?",
+        "newArea": "नवीन क्षेत्र",
+        "promptTitle": "क्षेत्रासाठी नाव प्रविष्ट करा:",
+        "absent": "कृपया क्षेत्र निश्चित करा",
+        "error": "त्रुटी",
+        "exist": "क्षेत्र आधीच अस्तित्वात आहे",
+        "addNewArea": "नवीन क्षेत्र जोडा",
+        "add": "अॅड"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "स्थानांचा संग्रह",
+            "displayType": "स्थाने"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "इमारत, ठिकाण, जहाज, उद्यान इ.चे प्रतिनिधित्व करते.",
+            "displayType": "स्थान"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "खोली किंवा सूट सारख्या स्थानातील क्षेत्राचे प्रतिनिधित्व करते",
+            "displayType": "क्षेत्रफळ"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "इमारत किंवा जहाजातील मजल्याचे प्रतिनिधित्व करते",
+            "displayType": "मजला"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "इमारत किंवा जहाजातील स्तंभाचे प्रतिनिधित्व करते",
+            "displayType": "स्तंभ"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "जिओहॅशच्या ठराविक अंतरावरील गोष्टींसाठी वर्गवारी",
+            "displayType": "ठिकाणांजवळ"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "जिओहॅशच्या ठराविक अंतरावरील गोष्टींसाठी वर्गवारी, स्वारस्याशी जुळणारी",
+            "displayType": "ठिकाणे स्वारस्य"
         }
     }
 }

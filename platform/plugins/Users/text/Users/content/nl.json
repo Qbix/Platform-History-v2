@@ -5,10 +5,10 @@
     },
     "activate": {
         "SetAsPrimary": "Stel {{1}} in als mijn primaire {{2}}",
-        "ChoosePassPhrase": "Kies een <strong>wachtwoordzin<\/strong> om in te loggen met. <br> Een eenvoudige zin bestaande uit een paar woorden die u gemakkelijk zult onthouden.",
-        "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Bekijk de suggesties voor enkele ideeën.",
-        "LogOutAndTryAgain": "Uitloggen en opnieuw proberen",
-        "IfYouFeel": "Als je denkt dat er iets fout is gegaan, kan dat",
+        "ChoosePassPhrase": "Kies een <strong>wachtwoordzin<\/strong> om in te loggen.<br> Een eenvoudige zin bestaande uit een paar woorden die u gemakkelijk zult onthouden.",
+        "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Zie de suggesties voor enkele ideeën.",
+        "LogOutAndTryAgain": "Log uit en probeer het opnieuw",
+        "IfYouFeel": "Als u denkt dat er iets mis is gegaan, kunt u",
         "SetIdentifierButtonTitle": "begin opnieuw"
     },
     "session": {
@@ -17,17 +17,17 @@
     "authorize": {
         "GetStarted": "Begin",
         "Authorize": "Toestemming geven",
-        "TermsLabel": "Ik heb het gelezen en ga hiermee akkoord <br> naar de {{link}}",
-        "TermsTitle": "Voorwaarden",
+        "TermsLabel": "Ik heb gelezen en ga akkoord<br> naar de {{link}}",
+        "TermsTitle": "voorwaarden",
         "mustAgree": "Eerst moet u akkoord gaan met de voorwaarden."
     },
     "register": {
         "TermsLabel": "Ik accepteer de {{link}}",
-        "TermsTitle": "Voorwaarden"
+        "TermsTitle": "voorwaarden"
     },
     "notifications": {
         "title": "Toestemming",
-        "prompt": "Wilt u meldingen inschakelen? U ontvangt realtime updates over dingen waar u om geeft.",
+        "prompt": "Wil je meldingen inschakelen? U ontvangt realtime updates over dingen die u belangrijk vindt.",
         "yes": "Ja",
         "no": "Nee",
         "WelcomePleaseVerifyEmail": "Welkom! Verifieer uw email adres alstublieft.",
@@ -35,14 +35,14 @@
         "ForgetPass": "Hé, ben je je wachtwoordzin vergeten?",
         "PassphraseSaved": "Uw wachtwoordzin is opgeslagen.",
         "IdentifierActivated": "Uw {{type}} is geactiveerd.",
-        "CompletedActivation": "U hebt de activering van de gebruiker voltooid.",
-        "CompletedActivationLogIn": "U hebt de activering van de gebruiker voltooid. Probeer nu in te loggen."
+        "CompletedActivation": "U heeft de gebruikersactivering voltooid.",
+        "CompletedActivationLogIn": "U heeft de gebruikersactivering voltooid. Probeer nu in te loggen."
     },
     "usersContacts": {
-        "selectLabel": "Selecteer een label.",
-        "inviteUser": "Gebruiker uitnodigen",
+        "selectLabel": "Selecteer etiket.",
+        "inviteUser": "Gebruikers uitnodigen",
         "selectRole": "Selecteer rol",
-        "inviteRole": "Uitnodigen {{role}}"
+        "inviteRole": "Nodig {{role}} uit"
     },
     "invalidLanguageSelected": "Ongeldige taal geselecteerd",
     "contacts": {
@@ -51,7 +51,7 @@
             "SearchByName": "Zoek op naam",
             "CreateAccount": "+ Nieuw contact",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create niet gevonden",
-            "EmptyContacts": "Contacten niet gevonden ..."
+            "EmptyContacts": "Contacten niet gevonden..."
         },
         "select": {
             "title": "Selecteer contact van {{displayName}}"
@@ -59,60 +59,60 @@
     },
     "login": {
         "title": "Welkom",
-        "directions": "Maak een account aan of log in.",
-        "directionsNoRegister": "Log in als u een account hebt.",
+        "directions": "Maak een account aan, of log in.",
+        "directionsNoRegister": "Log in als je een account hebt.",
         "goButton": "Gaan",
         "passphrase": "Voer uw wachtwoordzin in:",
         "loginButton": "Begin",
         "registerButton": "Begin",
-        "resendButton": "Stuur activeringsbericht",
+        "resendButton": "Activeringsbericht verzenden",
         "forgot": "Vergeet het?",
-        "resendConfirm": "Wilt u een bericht verzenden om uw wachtwoordzin opnieuw in te stellen?",
+        "resendConfirm": "Wil je een bericht sturen om je wachtwoordzin te resetten?",
         "resendSuccess": "Controleer op een bericht om uw wachtwoordzin opnieuw in te stellen",
         "resendClose": "Dichtbij",
         "noPassphrase": "Voordat u kunt inloggen, moet u een wachtwoordzin instellen door op de link in uw activeringsbericht te klikken.",
         "notVerified": "U moet uzelf een activeringsbericht sturen om in te loggen.",
-        "emailExists": "Heb je eerder geprobeerd je met deze e-mail te registreren? Controleer dan uw inbox om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
-        "mobileExists": "Heb je eerder geprobeerd je met dit mobiele nummer te registreren? Controleer dan uw sms om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "emailExists": "Heeft u zich eerder met dit e-mailadres proberen te registreren? Controleer in dat geval uw inbox om uw account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
+        "mobileExists": "Heb je je al eerder geprobeerd te registreren met dit mobiele nummer? Check dan je sms om je account te activeren. <a href='#resend' class='Q_button Users_activation_resend'>Klik om het bericht opnieuw te verzenden<\/a>",
         "usingOther": "of je kan",
         "prompt": "Kies een gebruikersnaam:",
         "newUser": "of maak hieronder een nieuw account aan",
         "placeholders": {
-            "identifier": "uw mobiele nummer of e-mailadres",
-            "mobile": "voer je mobiel in #",
+            "identifier": "uw mobiele # of e-mail",
+            "mobile": "voer je mobiel # in",
             "email": "Vul je e-mailadres in",
-            "username": "gebruikersnaam"
+            "username": "gebruik alleen letters en cijfers"
         },
-        "confirmTerms": "Accepteer de Servicevoorwaarden?",
-        "facebookNoEmail": "Er ontbreekt een bevestigd e-mailadres in je Facebook-account. Log gewoon in op de native manier.",
-        "picTooltip": "U kunt deze afbeelding later wijzigen",
+        "confirmTerms": "De servicevoorwaarden accepteren?",
+        "facebookNoEmail": "Je Facebook-account mist een bevestigd e-mailadres. Log gewoon in op de native manier.",
+        "picTooltip": "Je kunt deze afbeelding later wijzigen",
         "wallet": {
-            "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
+            "payload": "Log in op {{host}} om {{timestamp}}",
             "alert": {
                 "title": "Omleiden naar Wallet",
-                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
+                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Nadat u zich heeft aangemeld, keert u terug naar deze pagina."
             }
         }
     },
     "setIdentifier": {
-        "title": "Een manier toevoegen om in te loggen",
-        "sendMessage": "Stuur activeringsbericht",
+        "title": "Voeg een manier toe om in te loggen",
+        "sendMessage": "Activeringsbericht verzenden",
         "placeholders": {
-            "identifier": "voer uw mobiele nummer of e-mailadres in",
-            "mobile": "voer uw mobiele nummer in",
+            "identifier": "voer je mobiele # of e-mail in",
+            "mobile": "voer je mobiele nummer in",
             "email": "Vul je e-mailadres in",
             "username": "gebruikersnaam"
         }
     },
     "prompt": {
-        "title": "{{Platform}} account",
-        "areUsing": "U gebruikt {{platform}} als",
-        "noLongerUsing": "U bent niet langer verbonden met {{platform}} als",
+        "title": "{{Platform}} Account",
+        "areUsing": "Je gebruikt {{platform}} als",
+        "noLongerUsing": "U bent niet langer verbonden met {{platform}} as",
         "doAuth": "Log in met dit account",
-        "doSwitch": "Schakel over naar dit account"
+        "doSwitch": "Overschakelen naar dit account"
     },
     "roles": {
-        "Owner": "Eigenaar",
+        "Owner": "Baasje",
         "Admin": "beheerder",
         "Member": "Lid",
         "Guest": "Gast",

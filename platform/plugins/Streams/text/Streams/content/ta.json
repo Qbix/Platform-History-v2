@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "இந்த உள்ளடக்கம் உங்களிடமிருந்து மறைக்கப்பட்டுள்ளது."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "புதிய பொருள்"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "நான் அழைத்தவர்கள்",
+        "Streams\/invitedMe": "யார் என்னை அழைத்தார்கள்",
+        "DoYouAgree": "நீங்கள் ஒப்புக்கொள்கிறீர்களா?",
+        "Yes": "ஆம்",
+        "No": "இல்லை"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "உங்கள் ஆர்வங்கள் என்ன?",
+        "CanAdd": "நீங்கள் தேடுவதை இன்னும் கண்டுபிடிக்க முடியவில்லை என்றால், கீழே ஒரு புதிய ஆர்வத்தைச் சேர்க்கலாம்:",
+        "TrySynonyms": "பார்க்கவில்லையா? சில ஒத்த சொற்களை முயற்சிக்கவும்.",
+        "AddUnderCategory": "வகையின் கீழ் சேர்...",
+        "Other": "மற்றவை",
+        "Unlisted": "பட்டியலிடப்படாதது"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "நிர்வாகி மதிப்பாய்வுக்காக செய்தி கொடியிடப்பட்டது. கொடியை அவிழ்க்க மீண்டும் தட்டவும்.",
+        "noOneSaid": "யாரும் எதுவும் சொல்லவில்லை",
+        "closeChatButton": "அரட்டையை மூடு",
+        "closeChatConfirmTitle": "இந்த அரட்டையை மூடவா?",
+        "closeChatConfirm": "இந்த அரட்டையை நிச்சயமாக மூட விரும்புகிறீர்களா?",
+        "Subscribed": "அறிவிப்புகள் இயக்கப்பட்டன",
+        "Unsubscribed": "அறிவிப்புகள் முடக்கப்பட்டன",
+        "closeChatConfirmYes": "ஆம்",
+        "closeChatConfirmNo": "இல்லை",
+        "earlierComments": "முந்தைய கருத்துக்கள்",
+        "startedConversation": "ஒரு உரையாடலைத் தொடங்கினார்",
+        "RealTimeCall": "நிகழ் நேர அழைப்பு",
+        "SearchByName": "பெயரால் தேடுங்கள்",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} அரட்டைக்குச் செல்கிறார்",
+            "Join": "{{displayName}} அரட்டையில் சேர்ந்தார்",
+            "Leave": "{{displayName}} அரட்டையிலிருந்து வெளியேறினார்",
+            "RelatedTo": "{{displayName}} ஒரு {{stream.displayType}} தொடங்கினார்"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "உங்கள் மின்னஞ்சல் சந்தாக்களை நிர்வகிக்கவும்",
+        "IfUnsubscribe": "நீங்கள் குழுவிலக விரும்பினால்",
+        "*": "{{& stream.fields.title}}க்கு {{& message.fields.type}} செய்தி அனுப்பவும்",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} கூறினார்: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} இல் மாற்றங்கள்",
+        "Streams\/invite": "நீங்கள் {{& stream.fields.title}} க்கு அழைக்கப்பட்டீர்கள்",
+        "Streams\/announcement": "{{& stream.fields.title}} இல் அறிவிப்பு",
+        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} இல் அணுகலை மாற்றியது",
+        "Streams\/chat\/edit": "அரட்டை செய்தி {{& stream.fields.title}} இல் திருத்தப்பட்டது",
+        "Streams\/chat\/remove": "{{& stream.fields.title}} இல் அரட்டை செய்தி அகற்றப்பட்டது",
+        "Streams\/closed": "{{stream.fields.title}} மூடப்பட்டது",
+        "Streams\/task\/progress": "{{stream.fields.title}} இல் முன்னேற்றம் ஏற்பட்டது",
+        "Streams\/task\/complete": "பணி முடிந்தது: {{stream.fields.title}}",
+        "Streams\/task\/error": "இதன் போது பிழை: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: உள்வரும் செய்தி",
+        "Streams\/relatedTo\/Streams\/call": "புதிய அழைப்பு {{toTitle}} இல் தொடங்கியது",
+        "Streams\/relatedTo\/*": "{{toTitle}} இல் புதிய {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} இல் {{relationDisplayType}} ஆக சேர்க்கப்பட்டது",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ஒரு கருத்தில் உங்களைக் குறிப்பிட்டுள்ளார்",
+        "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கினார்"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "அழைக்கவும்",
+        "messageContent": "{{displayName}} உங்களை {{inviteUrl}} க்கு அழைத்துள்ளார்",
+        "youCanNowPaste": "மக்களை அழைக்க இந்த இணைப்பை நீங்கள் இப்போது எங்காவது ஒட்டலாம்",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "உங்கள் தொடர்புகளில் இருந்து தேர்வு செய்யவும்",
+            "chooseAgainFromContacts": "தொடர்புகளில் இருந்து மீண்டும் தேர்வு செய்யவும்",
+            "inviteSelectedContacts": "தேர்ந்தெடுக்கப்பட்ட தொடர்புகளை அழைக்கவும்",
+            "selectFromContacts": "தொடர்புகளிலிருந்து தேர்ந்தெடுக்கவும்",
+            "userChooserPlaceholder": "பெயரால் தேடுங்கள்",
+            "photo": "புகைப்படம் எடுங்கள்",
+            "photoInstruction": "உங்கள் QR குறியீட்டை ஸ்கேன் செய்தவர் உங்களுக்கு முன்னால் இருந்தால், அவர்களைப் புகைப்படம் எடுக்கவும்",
+            "to": "பெறுநர்: {{Stream Title}}",
+            "go": "போ",
+            "title": "அழைக்கவும்",
+            "placeholder": "மொபைல் எண் அல்லது மின்னஞ்சல் முகவரி",
+            "orInvite": "அல்லது இதைப் பயன்படுத்தி மக்களை அழைக்கவும்:",
+            "copyLink": "அழைப்பு இணைப்பை நகலெடுக்க {{ClickOrTap}}",
+            "shareOrCopyLink": "அழைப்பு இணைப்பைப் பகிர அல்லது நகலெடுக்க {{ClickOrTap}}",
+            "QR": "QR குறியீட்டை உருவாக்க {{ClickOrTap}}",
+            "QRtitle": "இந்த QR குறியீட்டை ஸ்கேன் செய்யவும்",
+            "QRscanned": "ஸ்கேன் செய்தார்கள்!",
+            "scannedQR": "குறியீடு ஸ்கேன் செய்யப்பட்டிருந்தால் {{ClickOrTap}}",
+            "byEmail": "மின்னஞ்சல்",
+            "byText": "உரை",
+            "byFacebook": "முகநூல்",
+            "byTwitter": "ட்விட்டர்"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "ஏய், இதைப் பாருங்கள்",
+            "PleaseVisitLink": "பின்வரும் இணைப்பைப் பார்வையிடவும்:",
+            "InvitingYou": "நான் உங்களை {{title}}க்கு அழைக்கிறேன்",
+            "HasInvitedYou": "{{displayName}} உங்களை {{title}} க்கு அழைத்துள்ளார்",
+            "HasMentionedYou": "{{displayName}} உங்களை &quot;{{title}}&quot; இல் குறிப்பிட்டுள்ளார்",
+            "YOUAREINVITED": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள்!",
+            "AcceptInvite": "அழைப்பை ஏற்கவும்"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "நீங்கள் {{title}} க்கு அழைக்கப்பட்டுள்ளீர்கள். {{url}} என்பதைத் தட்டவும்"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். {{ClickOrTap}} ஏற்கவும் சேரவும் இங்கே."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}}க்கு { <em>{999}}<\/em> செய்தியை இடுகையிட்டார்"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "கருத்துரைத்தார்",
+            "startedCallIn": "ஒரு அழைப்பைத் தொடங்கினார்",
+            "in": "உள்ளே",
+            "body": "{{& url}}: {{& message.fields.content}} இல்",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "க்கு அனுப்பப்பட்டுள்ளது",
+                "byAvatar": "மூலம் {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "புதிய {{instructions.fromDisplayType}} உள்ளது",
+                "byAvatar": "{{avatar.displayName}} ஆல் சேர்க்கப்பட்டது"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "எங்கள் எண்ணிலிருந்து அழைப்புகள் அனுப்பப்படுகின்றன, உங்கள் நண்பர்கள் இன்னும் அடையாளம் காணவில்லை. உங்களிடமிருந்து அழைப்பு வந்துள்ளது என்பதை அவர்களுக்குத் தெரிவிக்க விரைவான உரையைப் பின்தொடரவும், இணைப்பைக் கிளிக் செய்யும்படி அவர்களிடம் கேட்கவும்.",
+            "confirm": "எங்கள் எண்ணிலிருந்து அழைப்புகள் அனுப்பப்படுகின்றன, உங்கள் நண்பர்கள் இன்னும் அடையாளம் காணவில்லை. உங்களிடமிருந்து வந்த அழைப்பை அவர்களுக்குத் தெரிவிக்க, இணைப்பைக் கிளிக் செய்யும்படி அவர்களிடம் ஒரு விரைவான உரையைப் பின்தொடர விரும்புகிறீர்களா.",
+            "check": "ஏய், நான் உங்களுக்கு {{app}} பயன்பாட்டிற்கு அழைப்பை அனுப்பினேன். உங்கள் எஸ்எம்எஸ் சரிபார்த்து, இணைப்பைக் கிளிக் செய்யவும்!",
+            "CheckYourMobile": "SMS சரிபார்த்து, வழிமுறைகளைப் பின்பற்றவும்!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "எங்கள் டொமைனில் இருந்து அழைப்புகள் அனுப்பப்படுகின்றன, உங்கள் நண்பர்கள் இன்னும் அடையாளம் காணவில்லை. உங்களிடமிருந்து அழைப்பு வந்துள்ளது என்பதை அவர்களுக்குத் தெரிவிக்க விரைவான உரையைப் பின்தொடரவும், இணைப்பைக் கிளிக் செய்யும்படி அவர்களிடம் கேட்கவும்.",
+            "confirm": "எங்கள் டொமைனில் இருந்து அழைப்புகள் அனுப்பப்படுகின்றன, உங்கள் நண்பர்கள் இன்னும் அடையாளம் காணவில்லை. உங்களிடமிருந்து வந்த அழைப்பை அவர்களுக்குத் தெரிவிக்க, இணைப்பைக் கிளிக் செய்யும்படி அவர்களிடம் ஒரு விரைவான உரையைப் பின்தொடர விரும்புகிறீர்களா.",
+            "subject": "உங்களுக்கு அழைப்பு வந்ததா?",
+            "body": "ஏய், நான் உங்களுக்கு {{app}} பயன்பாட்டிற்கு அழைப்பை அனுப்பினேன். உங்கள் மின்னஞ்சலைச் சரிபார்த்து, அதில் உள்ள இணைப்பைக் கிளிக் செய்யவும்!",
+            "CheckYourEmail": "உங்கள் மின்னஞ்சலைச் சரிபார்த்து, வழிமுறைகளைப் பின்பற்றவும்!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "தலைப்பு",
+        "Subscribed": "குழுசேர்ந்தார்",
+        "Participants": "பங்கேற்பாளர்கள்",
+        "AreYouSureRemoveIdentifier": "இந்த அடையாளங்காட்டியை நிச்சயமாக அகற்றுகிறீர்களா?",
+        "AreYouSureUnsubscribeIdentifier": "இந்த அடையாளங்காட்டியை நிச்சயமாக குழுவிலகுகிறீர்களா? இது இந்த அடையாளங்காட்டிக்கான அறிவிப்புகளை முடக்கும்.",
+        "AreYouSureUnsubscribeDevice": "இந்தச் சாதனத்தில் நிச்சயமாக குழுவிலகுகிறீர்களா? இது இந்தச் சாதனத்திற்கான அறிவிப்புகளை முடக்கும்.",
+        "AreYouSureRemoveParticipant": "இந்தப் பங்கேற்பாளரை நிச்சயமாக அகற்ற விரும்புகிறீர்களா?",
+        "RemoveParticipant": "பங்கேற்பாளரை அகற்று",
+        "Identifiers": "அடையாளங்காட்டிகள்",
+        "Devices": "சாதனங்கள்",
+        "Streams": "நீரோடைகள்"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "இந்த ஸ்ட்ரீமில் சேர உங்களுக்கு அனுமதி இல்லை.",
+        "streamTitle": "{{1}} நேரலை அழைப்பைத் தொடங்கினார்",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "இணைக்கிறது",
+            "microphoneBtn": "மைக்ரோஃபோனை இயக்கு",
+            "cameraBtn": "கேமராவை இயக்கு",
+            "cameraAndMicrophoneBtn": "கேமரா மற்றும் மைக்ரோஃபோனை இயக்கவும்"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "மைக் ஆஃப் செய்யப்பட்டுள்ளது",
+            "micIsOn": "மைக் இயக்கத்தில் உள்ளது",
+            "cameraIsOff": "கேமரா ஆஃப் செய்யப்பட்டுள்ளது",
+            "cameraIsOn": "கேமரா இயக்கத்தில் உள்ளது",
+            "screenSharingIsOn": "திரைப் பகிர்வு இயக்கத்தில் உள்ளது",
+            "screenSharingIsOff": "திரையைப் பகிரவும்",
+            "joinNow": "அழைப்பில் சேரவும்"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "வழிமுறைகள்",
+            "permissionDenied": "{{kind}}க்கான அனுமதி மறுக்கப்பட்டது. அதைப் பயன்படுத்த, பின்வரும் படிகளைப் பின்பற்றவும்:",
+            "point1": "&quot;அமைப்புகள்&quot; -&gt; &quot;மேம்பட்டது&quot; -&gt; &quot;தனியுரிமை மற்றும் பாதுகாப்பு&quot; -&gt; &quot;தள அமைப்புகள்&quot; -&gt; &quot;கேமரா&quot; அல்லது &quot;தள அமைப்புகள்&quot; -&gt; &quot;மைக்ரோஃபோன்&quot; என்பதற்குச் செல்லவும்",
+            "point2": "&quot;தடுப்பு&quot; பட்டியலில் இருந்து {{hostname}} ஐ அகற்றவும்"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "வழிமுறைகள்",
+            "permissionDenied": "{{kind}}க்கான அனுமதி மறுக்கப்பட்டது. இந்தப் பக்கத்தை மீண்டும் ஏற்றி, மாநாட்டில் சேர {{kind}}க்கான அணுகலை உறுதிப்படுத்தவும்."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "வழிமுறைகள்",
+            "permissionDenied": "{{kind}}க்கான அனுமதி மறுக்கப்பட்டது. அதைப் பயன்படுத்த, பின்வரும் படிகளைப் பின்பற்றவும்:",
+            "point1": "உங்கள் Android அமைப்புகளுக்குச் செல்லவும்",
+            "point2": "&quot;பயன்பாடுகள் &amp; அறிவிப்புகள்&quot; திறக்கவும்",
+            "point3": "&quot;{{communityName}}&quot;ஐக் கண்டுபிடித்து திறக்கவும்",
+            "point4": "அனுமதிகளைத் தட்டவும்",
+            "point5": "இயக்கு {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "வழிமுறைகள்",
+            "permissionDenied": "{{kind}}க்கான அனுமதி மறுக்கப்பட்டது. அதைப் பயன்படுத்த, பின்வரும் படிகளைப் பின்பற்றவும்:",
+            "point1": "உங்கள் iOS அமைப்புகளுக்குச் செல்லவும்",
+            "point2": "&quot;தனியுரிமை&quot; திறக்கவும்",
+            "point3": "{{kind}} கண்டுபிடித்து திறக்கவும்",
+            "point4": "&quot;{{communityName}}&quot;ஐக் கண்டுபிடித்து இயக்கவும்"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "நீங்கள் அறைக்குச் சேர்ந்தீர்கள்",
+            "joining": "இணைகிறது: {{userName}}",
+            "sbLeftRoom": "{{userName}} அறையை விட்டு வெளியேறினார்",
+            "switchingRoom": "மாறுதல் அறை...",
+            "forceDisconnecting": "5 வினாடிகளில் நீங்கள் துண்டிக்கப்படுவீர்கள்",
+            "forceDisconnectingImmediately": "ஹோஸ்ட் மூலம் நீங்கள் துண்டிக்கப்பட்டீர்கள்",
+            "youLeftRoom": "நீங்கள் அறையை விட்டு வெளியேறினீர்கள்",
+            "codeCopied": "நீங்கள் அறையை விட்டு வெளியேறினீர்கள்",
+            "sbBeganFbLive": "{{userName}} இந்த அழைப்பை Facebook இல் ஒளிபரப்பத் தொடங்கினார்",
+            "sbStoppedFbLive": "{{userName}} இந்த அழைப்பை Facebook இல் ஒளிபரப்புவதை நிறுத்தியது",
+            "youBeganFbLive": "இந்த அழைப்பை Facebook இல் ஒளிபரப்பத் தொடங்கியுள்ளீர்கள்",
+            "youStoppedFbLive": "இந்த அழைப்பை Facebook இல் ஒளிபரப்புவதை நிறுத்திவிட்டீர்கள்",
+            "youStartedLive": "இந்த அழைப்பை தனிப்பயன் RTMPக்கு ஒளிபரப்பத் தொடங்கியுள்ளீர்கள்",
+            "youStoppedLive": "இந்த அழைப்பை தனிப்பயன் RTMPக்கு ஒளிபரப்புவதை நிறுத்திவிட்டீர்கள்",
+            "sbStartedLiveStreaming": "{{userName}} நேரலையில் தொடங்கியது",
+            "sbStoppedLiveStreaming": "{{userName}} நேரலையில் முடிந்தது",
+            "liveStopped": "இறுதிப்புள்ளிக்கு வீடியோவை அனுப்புவதில் பிழை ஏற்பட்டது",
+            "youBeganVideoRecording": "நீங்கள் இந்த மாநாட்டை பதிவு செய்ய ஆரம்பித்தீர்கள்",
+            "youStoppedVideoRecording": "இந்த மாநாட்டை பதிவு செய்வதை நிறுத்திவிட்டீர்கள்",
+            "linkCopiedToCb": "இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது",
+            "codeCopiedToCb": "குறியீடு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது",
+            "userHasNoVideo": "பங்கேற்பாளரிடம் வீடியோ இல்லை",
+            "openInBrowserAlert": "மாநாட்டில் சேர சஃபாரி உலாவியில் இணைப்பைத் திறக்கவும்."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "வீடியோ அமைப்புகள்",
+            "webCamera": "வெப் கேமரா",
+            "screenSharing": "திரை பகிர்வு",
+            "shareAnotherScreen": "மற்றொரு திரையைப் பகிரவும்",
+            "turnOffCameras": "கேமராவை அணைக்கவும்",
+            "turnOffVideo": "கேமரா\/திரை பகிர்வை முடக்கவும்",
+            "turnOffAudioInput": "மைக்ரோஃபோனை முடக்கு",
+            "turnOffScreenSharing": "திரைப் பகிர்வை முடக்கு",
+            "cameraIsTurnedOff": "கேமரா ஆஃப் செய்யப்பட்டுள்ளது",
+            "micIsTurnedOff": "மைக்ரோஃபோன் அணைக்கப்பட்டுள்ளது",
+            "startFBLive": "Facebook லைவ்ஸ்ட்ரீமைத் தொடங்கவும்",
+            "stopFBLive": "பேஸ்புக் லைவ்ஸ்ட்ரீமை நிறுத்துங்கள்",
+            "startRecording": "பதிவைத் தொடங்கவும்",
+            "stopRecording": "பதிவு செய்வதை நிறுத்து",
+            "start": "தொடங்கு",
+            "stop": "நிறுத்து",
+            "recordingInProgress": "பதிவு நடந்து கொண்டிருக்கிறது...",
+            "fbLiveTitle": "லைவ்ஸ்ட்ரீமின் தலைப்பு",
+            "fbLiveDescription": "உங்கள் லைவ்ஸ்ட்ரீமை விவரிக்கவும். அது எதைப்பற்றி?",
+            "fbOnlyMeLiveAccess": "நான் மட்டும்",
+            "fbFriendsAccess": "நண்பர்கள்",
+            "fbPublicAccess": "பொது",
+            "publishOnTimeline": "காலவரிசையில் வெளியிடவும்",
+            "publishToGroup": "குழுவில் வெளியிடவும்",
+            "fbStartLive": "போய் வாழ்",
+            "fbStopLive": "லைவ்ஸ்ட்ரீமை முடிக்கவும்",
+            "streamingSettings": "அமைப்புகள்",
+            "fbEmbedCode": "உட்பொதிக்கவும்",
+            "copy": "நகலெடுக்கவும்",
+            "streamToRTMP": "தனிப்பயன் RTMPக்கு ஸ்ட்ரீம் செய்யவும்",
+            "startBroadcasting": "ஒளிபரப்பத் தொடங்குங்கள்",
+            "broadcastingInProgress": "ஒளிபரப்பு நடந்து கொண்டிருக்கிறது"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "ஆடியோ அமைப்புகள்",
+            "speakers": "பேச்சாளர்கள்",
+            "microphone": "ஒலிவாங்கி"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "பங்கேற்பாளர் அமைப்புகள்",
+            "disconnect": "துண்டிக்கவும்",
+            "floatingScreens": "மிதக்கும் திரைகள்",
+            "tiledScreens": "டைல்ஸ் திரைகள்",
+            "loudestExceptMe": "என்னைத் தவிர சத்தமாக",
+            "maximizeLoudest": "சத்தமாக அதிகரிக்கவும்",
+            "staticMaximized": "நிலையான அதிகபட்சம்",
+            "fullScreen": "முழு திரை",
+            "manual": "கையேடு",
+            "turnOffCamera": "வீடியோவை மறை",
+            "turnOffAudio": "ஆடியோவை முடக்கு",
+            "turnOffScreenSharing": "திரைப் பகிர்வை மறை",
+            "turnOnCamera": "வீடியோவைக் காட்டு",
+            "turnOnAudio": "ஆடியோவை இயக்கு",
+            "turnOnScreenSharing": "திரைப் பகிர்வைக் காட்டு"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "ஸ்ட்ரீமிங் அமைப்புகள்"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "சந்தித்தல்",
+            "MeetingEnded": "கூட்டம் முடிந்தது"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "அழைக்கப்பட்டது",
+            "description": "அழைப்பிதழ்களுக்கான இன்பாக்ஸ்"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "வளம்",
+            "description": "ஒரு ஆதாரத்திற்கான அணுகலை நிர்வகிப்பதற்கும் புதுப்பிப்புகளைப் பற்றிய செய்திகளை இடுகையிடுவதற்கும் ஸ்ட்ரீம்"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "ஒரு குறிப்பிட்ட பணியின் முன்னேற்றம் குறித்த அறிவிப்புகளைப் பெறுவதற்கு",
+            "displayType": "பணி"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "பணிகளுக்கான வகை",
+            "displayType": "பணிகள்"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "ஒரு சமூகத்தின் உறுப்பினர்களுக்கு பொதுவான அனுபவம்",
+            "displayType": "ஒரு சமூகத்தின் உறுப்பினர்களுக்கு பொதுவான அனுபவம்"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "ஒரு பயனர் தங்களை அறிமுகப்படுத்திக் கொள்ளக்கூடிய வாழ்த்து",
+            "displayType": "வணக்கம்"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "எண்",
+            "description": "கணித எண்"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "தேதி",
+            "description": "தேதி"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "உரை",
+            "description": "உரையின் உடல்"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "உரை",
+            "description": "சிறிய உரை"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "உரை",
+            "description": "நடுத்தர உரை"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "மின்னஞ்சல் முகவரி",
+            "description": "மின்னஞ்சல் முகவரி"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "தொலைபேசி எண்",
+            "description": "தொலைபேசி எண்"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "இணையத்தில் இணைப்பு"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "படம்",
+            "description": "காட்சி படம்",
+            "newItem": "படத்தைச் சேர்க்கவும்"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "படத்தொகுப்பு",
+            "description": "படங்களின் தொகுப்பு"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "ஆல்பம்",
+            "description": "பல்வேறு ஊடகங்கள் தொடர்புடைய ஆல்பம்"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "கோப்பு",
+            "description": "பதிவேற்றிய கோப்பு",
+            "newItem": "கோப்பைச் சேர்க்கவும்"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "ஆடியோ கிளிப்",
+            "description": "ஆடியோ கிளிப்",
+            "newItem": "ஆடியோவைச் சேர்க்கவும்"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "வீடியோ கிளிப்",
+            "description": "வீடியோ கிளிப்",
+            "newItem": "வீடியோவைச் சேர்க்கவும்"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF ஆவணம்",
+            "description": "PDF ஆவணம்",
+            "newItem": "PDF ஐச் சேர்க்கவும்"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "லைவ்ஸ்ட்ரீம்",
+            "description": "நேரடி ஆடியோ அல்லது வீடியோ"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "வகை",
+            "description": "மற்ற ஸ்ட்ரீம்கள் தொடர்புடைய ஒரு வகை"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "பங்கேற்பு அட்டவணை",
+            "description": "ஒரு பயனர் சேரும்போது\/வெளியேறும்போது ஸ்ட்ரீம்கள் இதனுடன் தொடர்புடையவை\/தொடர்பற்றவை"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ஆர்வம்",
+            "description": "ஒரு குறிப்பிட்ட தலைப்பில் பயனரின் ஆர்வத்தை பிரதிபலிக்கிறது"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "வருகை",
+            "description": "பிற பயனர்கள் அனுப்பிய செய்திகளுக்கான இலக்கு"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "உரையாடல்",
+            "description": "வரலாற்றுடன் பயனர்களுக்கு இடையே ஒரு உரையாடல்"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "நிகழ்நேர அழைப்பு",
+            "description": "உண்மையான நேர வீடியோ\/ஆடியோ அழைப்பு"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "கேள்வி",
+            "description": "கேள்வி ஓட்டம்"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "பதில்",
+            "description": "பதில் ஸ்ட்ரீம்"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "அழைப்புகள்",
+            "description": "ஸ்ட்ரீம்கள்\/webrtc க்கான வகை",
+            "MaxRelationsExceeded": "அதிகபட்ச அழைப்புகள் மீறப்பட்டுள்ளன"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "பக்க தலைப்பை தட்டச்சு செய்யவும்",
+        "ModTab": "உருப்படியை மாற்றவும்",
+        "Save": "சேமிக்கவும்",
+        "Delete": "அழி",
+        "Submenu": "துணைமெனு"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "பதிவு",
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமிக்கவும்",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "ஆடியோ ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமிக்கவும்",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "வீடியோ ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமிக்கவும்",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "pdf ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "மீட்டமை",
+        "edit": "தொகு",
+        "title": "தலைப்பு",
+        "description": "விளக்கம்",
+        "upload": "பதிவேற்றவும்",
+        "link": "இணைப்பு",
+        "setUrl": "URL ஐ அமைக்கவும்",
+        "save": "சேமிக்கவும்",
+        "uploadedImage": "பதிவேற்றப்பட்ட படம்",
+        "imageTitle": "படத்தின் தலைப்பு",
+        "setClip": "கட் அவுட் கிளிப்",
+        "invalidURL": "தவறான வலைதள முகவரி",
+        "invalidFile": "தவறான கோப்பு",
+        "errorNoSource": "பட ஆதாரம் இல்லை",
+        "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
+        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "கேள்விகள்",
+        "Answers": "பதில்கள்",
+        "AnswerQuestion": "பதிலளி",
+        "SetYourAnswer": "கேள்விக்கு பதில் சொல்லுங்கள்",
+        "NewQuestion": "புதிய கேள்வி",
+        "NewAnswer": "புதிய பதில்",
+        "AnswerDetails": "பதில் விவரங்கள்",
+        "answerOption": "விருப்பம்",
+        "answerOptionExclusive": "பிரத்தியேகமானது",
+        "answerTextarea": "டெக்ஸ்டாரியா",
+        "FreeAnswer": "உங்கள் பதிலை இங்கே எழுதுங்கள்",
+        "SaveQuestion": "கேள்வியைச் சேமிக்கவும்",
+        "SaveAnswer": "பதிலைச் சேமிக்கவும்",
+        "AddAnotherAnswer": "மற்றொரு பதிலைச் சேர்க்கவும்",
+        "ErrorAnswers": "ஒரு பதிலையாவது சேர்க்கவும்",
+        "AlreadyAnswered": "ஏற்கனவே பதில்",
+        "TitlePlaceholder": "உங்கள் கேள்வியை உள்ளிடவும்",
+        "ContentPlaceholder": "மக்கள் பதிலளிக்க உதவுவதற்கு ஏதேனும் கூடுதல் தகவலை இங்கே வைக்கவும்",
+        "ErrorTitle": "கேள்வி தேவை",
+        "Placeholder": "ப்ளாஸ்ஹோல்டர்"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "புதிய அனுபவம்",
+        "DefineTitle": "தயவுசெய்து ஒரு தலைப்பை வரையறுக்கவும்",
+        "Create": "உருவாக்கு"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "அழைப்புகள்",
+        "MaxCalls": "அதிகபட்ச அழைப்புகள்",
+        "Update": "புதுப்பிக்கவும்",
+        "NoCallsYet": "இன்னும் அழைப்புகள் இல்லை",
+        "CallReasonTitle": "இந்த அழைப்பு எதைப் பற்றியது?",
+        "WaitingRoom": "காத்திருப்பு அறை"
     }
 }

@@ -8,20 +8,20 @@
     },
     "nonce": {
         "sameDomain": "Vrijeme isteklo. Osvježite stranicu i pokušajte ponovno.",
-        "otherDomain": "Blokiran zahtjev za više domena na stranoj domeni na {{baseUrl}}"
+        "otherDomain": "Blokiran zahtjev za više domena za stranu domenu na {{baseUrl}}"
     },
     "words": {
-        "tap": "slavina",
+        "tap": "tapnite",
         "click": "klik",
         "yes": "Da",
         "no": "Ne",
-        "Tap": "slavina",
+        "Tap": "Dodirnite",
         "Click": "Klik",
         "Yes": "Da",
         "No": "Ne"
     },
     "months": {
-        "1": "siječanj",
+        "1": "siječnja",
         "2": "veljača",
         "3": "ožujak",
         "4": "travanj",
@@ -35,66 +35,66 @@
         "12": "prosinac"
     },
     "audio": {
-        "allowMicrophoneAccess": "Dopustite pristup mikrofonu",
+        "allowMicrophoneAccess": "Dopustite pristup svom mikrofonu",
         "record": "Snimiti",
         "recording": "Snimanje",
         "remains": "ostaci",
         "maximum": "maksimum",
-        "playing": "igranje",
+        "playing": "Igranje",
         "recorded": "Snimljeno",
-        "clip": "spojnica",
+        "clip": "isječak",
         "orupload": "Ili učitajte",
         "usethis": "Koristi ovo",
         "discard": "Odbaciti",
-        "encoding": "kodiranje"
+        "encoding": "Kodiranje"
     },
     "alert": {
-        "title": "uzbuna"
+        "title": "Upozorenje"
     },
     "confirm": {
-        "title": "potvrditi",
+        "title": "Potvrdite",
         "ok": "Da",
         "cancel": "Ne"
     },
     "prompt": {
-        "title": "Brz",
+        "title": "Potaknuti",
         "ok": "Ići"
     },
     "imagepicker": {
         "errorReadingFile": "Pogreška pri čitanju datoteke",
         "cameraCommands": {
-            "prompt": "Što biste željeli učiniti?",
+            "prompt": "Što biste željeli raditi?",
             "photo": "Snimite novu fotografiju",
-            "library": "Odaberite iz knjižnice"
+            "library": "Odaberite iz biblioteke"
         },
-        "tooSmall": "Odaberite veću sliku.",
+        "tooSmall": "Molimo odaberite veću sliku.",
         "cropping": {
-            "title": "Podesite veličinu i položaj",
+            "title": "Prilagodite veličinu i položaj",
             "touchscreen": "Koristite prste za zumiranje i povlačenje",
-            "notTouchscreen": "Koristite miš i kotač za zumiranje i povlačenje"
+            "notTouchscreen": "Koristite miš i kotačić za zumiranje i povlačenje"
         },
         "errorType": "Žao nam je, ali ova vrsta datoteke nije podržana"
     },
     "timestamp": {
         "lastNight": "prošlu noć",
-        "lastEvening": "zadnja uoči",
+        "lastEvening": "zadnje večeri",
         "yesterday": "jučer",
-        "thisMorning": "ovog jutra",
+        "thisMorning": "jutros",
         "today": "danas",
         "tonight": "večeras",
-        "tomorrowMorning": "tom morn",
+        "tomorrowMorning": "tom jutro",
         "tomorrow": "sutra",
-        "hoursAgo": "{{h}} sati prije",
-        "hourAgo": "{{h}} prije sat vremena",
-        "minuteAgo": "{{m}} prije minute",
-        "minutesAgo": "{{m}} minuta",
-        "secondAgo": "{{s}} prije sekunde",
-        "secondsAgo": "{{s}} sekundi",
+        "hoursAgo": "prije {{h}} sati",
+        "hourAgo": "prije {{h}} sat",
+        "minuteAgo": "Prije {{m}} minute",
+        "minutesAgo": "Prije {{m}} minuta",
+        "secondAgo": "Prije {{s}} sekunde",
+        "secondsAgo": "Prije {{s}} sekundi",
         "fewSecondsAgo": "prije nekoliko sekundi",
         "rightNow": "sada",
-        "inSecond": "za {{s}} sekundu",
+        "inSecond": "u {{s}} sekundi",
         "inSeconds": "za {{s}} sekundi",
-        "inMinute": "za {{m}} minutu",
+        "inMinute": "za {{m}} minuta",
         "inMinutes": "za {{m}} minuta",
         "inHour": "za {{h}} sat",
         "inHours": "za {{h}} sati",
@@ -116,18 +116,18 @@
     },
     "clip": {
         "SetClipStart": "Postavite Clip Start",
-        "ClipStart": "Isječak Start",
-        "SetClipEnd": "Postavi kraj isječka",
+        "ClipStart": "Početak isječka",
+        "SetClipEnd": "Postavite Clip End",
         "ClipEnd": "Kraj isječka",
-        "StartMoreEnd": "Početni položaj ne može biti više od krajnjeg položaja",
-        "EndLessStart": "Krajnji položaj ne može biti manji od početnog",
-        "WhichInvalid": "Argument &#39;koji&#39; nije valjan"
+        "StartMoreEnd": "Početni položaj ne može biti veći od krajnjeg položaja",
+        "EndLessStart": "Krajnji položaj ne može biti manji od početne pozicije",
+        "WhichInvalid": "Argument &#39;koji&#39; je nevažeći"
     },
     "durations": {
         "second": "drugi",
-        "seconds": "sekunde",
+        "seconds": "sekundi",
         "minute": "minuta",
-        "minutes": "minuta",
+        "minutes": "minutama",
         "hour": "sati",
         "day": "dan",
         "days": "dana",
@@ -138,8 +138,8 @@
         "year": "godina",
         "years": "godine",
         "decade": "desetljeće",
-        "decades": "desetljeća",
-        "century": "stoljeću",
+        "decades": "desetljećima",
+        "century": "stoljeća",
         "centuries": "stoljeća"
     }
 }

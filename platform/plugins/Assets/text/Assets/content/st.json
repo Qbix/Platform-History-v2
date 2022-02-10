@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tlanya ho lefa"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tefiso e sebeditswe {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Re leboha tefo ya hao ho {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ingolisa ho {{plan.title}}",
+        "YouSubscribedTo": "U ngolisitsoe ho {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "O fumana tefo ya {{displayAmount}} ho tswa {{call 'publisher.displayName'}} ka &quot;{1001}}&quot;",
+        "HasBeenCharged": "Lumela, sena ke ho u tsebisa feela {{1}} o lefisitsoe {{2}} bakeng sa {{3}} ke {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Rea leboha ka tefo ea hau ea &quot;{999}}&quot;",
+        "HavePaid": "Lumela {{1}}, ena ke netefatso e potlakileng ea hore u lefile ka katleho {{3}} ho {{3}} bakeng sa {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Lintlha mabapi le taelo",
+        "PaymentMethod": "Mokhoa oa tefo",
+        "ContactInfo": "Lintlha tsa ho ikopanya",
+        "Pay": "Lefa"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Memo e amohetsoe ke {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} e kentse lebitso la pele",
+        "Streams_user_lastname": "{{invitedUserName}} e kentse fane",
+        "Streams_user_icon": "{{invitedUserName}} aekhone e kentsoeng",
+        "Places_user_location": "{{invitedUserName}} sebaka se kentsoeng",
+        "Streams_greeting": "{{invitedUserName}} o kene tumeliso",
+        "YouHaveCreditsToStart": "U na le {{amount}} likoloto tseo u batlang ho li qala",
+        "PaymentFor": "Tefo ea &quot;{999}}&quot;",
+        "PaymentTo": "Tefo ho {{1}}",
+        "PaymentToUser": "Tefo ho {{toUserName}}",
+        "CreatePaidStream": "bakeng sa ho theha {{toStreamName}}",
+        "JoinedPaidStream": "bakeng sa peheletso &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "bakeng sa ho theha sechaba &quot;{999}}&quot;",
+        "LeftPaidStream": "joalo ka puseletso ea peheletso ho &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "O rekile {{amount}} mekitlane",
+        "BonusCredits": "Bonase {{amount}} mekoloto",
+        "BuyAmountCredits": "Reka {{amount}} likalimo",
+        "WatchClip": "E fumane chelete ea {{amount}} ka ho shebella {{fromStreamTitle}}",
+        "MissingCredits": "Likoloto tse sieo",
+        "YouMissingCredits": "U hloka {{amount}} e &#39;ngoe ea likoloto hore u tsoele pele.",
+        "BuyCredits": "Reka likoloto",
+        "BuyBonus": "Ho reka {{amount}} mekitlane hang-hang, ho tla lebisa ho {{bonus}} bonase ea mekitlane.",
+        "Buy": "Reka",
+        "PurchaseCredits": "Likoloto tsa ho Reka",
+        "Credits": "Likoloto",
+        "ErrorInvalidAmount": "Chelete ha e sebetse",
+        "ErrorInvalidCurrency": "Ka bomalimabe ha re sebelise chelete {{currency}} hajoale",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} mekitlane",
+            "BonusCredits": "{{amount}} mekitlane"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Letsatsi",
+        "Amount": "Chelete",
+        "Description": "Tlhaloso",
+        "Client": "Moreki",
+        "To": "ho",
+        "From": "ho tloha",
+        "SeeHistory": "Sheba nalane ea litefo tsa {{1}}",
+        "HistoryEmpty": "Ha u na data hajoale",
+        "PaymentFor": "E rometsoe {{amount}} likalimo",
+        "PaymentTo": "E rometsoe {{amount}} likalimo",
+        "PaymentToUser": "E rometsoe {{amount}} likalimo",
+        "CreatePaidStream": "Ke sebelisitse {{amount}} likalimo",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "E fumane {{amount}} likalimo",
+            "-": "Ke sebelisitse {{amount}} likalimo"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "E fumane {{amount}} likalimo",
+            "-": "Ke sebelisitse {{amount}} likalimo"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "O fumane {{amount}} likalimo",
+            "-": "E rometsoe {{amount}} likalimo"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Ke sebelisitse {{amount}} likalimo",
+        "BoughtCredits": "O rekile {{amount}} mekitlane",
+        "BonusCredits": "Ke fumane likhrediti tsa bonase {{amount}}",
+        "InviteAcceptedBy": "E fumane {{amount}} likalimo",
+        "Streams_user_firstname": "E fumane {{amount}} likalimo",
+        "Streams_user_lastname": "E fumane {{amount}} likalimo",
+        "Streams_user_icon": "E fumane {{amount}} likalimo",
+        "Places_user_location": "E fumane {{amount}} likalimo",
+        "Streams_greeting": "E fumane {{amount}} likalimo",
+        "YouHaveCreditsToStart": "E fumane {{amount}} likalimo"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Beha Boitsebiso ba Tefo",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Qala Ngoliso",
+            "message": "O ka thabela ho ingolisa ho {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Hlakola"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Karete ea mokitlane kapa debit",
+        "SubscribePayment": "Ngolisa Tefo",
+        "ImmediatePayment": "Tefo ea Hang-hang"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Beha Boitsebiso ba Tefo",
+        "BuyAmountCredits": "Reka {{amount}} likalimo",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Etsa Tefo",
+            "message": "A na u lumela ho lefa {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Hlakola"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Likoloto",
+            "description": "e boloka tlaleho ea likoloto le litefiso"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Morero oa ho ngolisa",
+            "description": "leano la peeletso"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Ngoliso",
+            "description": "peeletso"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Sehlahisoa",
+            "description": "sehlahisoa se rekisoang"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Tshebeletso",
+            "description": "tšebeletso e fanoang"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "E fumane {{amount}} likalimo"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "O rekile {{amount}} mekitlane"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonase {{amount}} mekoloto"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Ke sebelisitse {{amount}} likalimo"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "E rometsoe {{amount}} likalimo ho {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "E fumane {{amount}} mekoloto ho tsoa ho {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Tšebeletso e Ncha",
+            "TitlePlaceholder": "Sehlooho sa tšebeletso",
+            "PricePlaceholder": "Beha theko",
+            "LinkPlaceholder": "seta sehokelo sa lintlha tse ling",
+            "DescriptionPlaceholder": "Tlhaloso ea litšebeletso",
+            "SaveService": "Boloka Tšebeletso",
+            "SelectRequiredParticipants": "Barupeluoa ba Hlokehang"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Laola Lithempleite tsa Tšebeletso",
+        "ManageServices": "Laola Litšebeletso",
+        "Free": "Mahala",
+        "OptionalContribution": "Tlatsetso ea boikhethelo",
+        "RequiredPayment": "Tefo e hlokahalang",
+        "AreYouSureDelete": "Na ehlile u batla ho hlakola tšebeletso ee?",
+        "AmountServicesRelated": "Ho na le {{amount}} lisebelisoa tse amanang le litšebeletso tsena. Le tsona li tla tlosoa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Litaba mabapi le {{title}} NFT",
+        "Description": "Lintlha tse felletseng mabapi le NFT",
+        "FixedBid": "Reka hona joale",
+        "CurrentBid": "Teko ea hajoale",
+        "StartingIn": "Ho qala ka",
+        "EndingIn": "E qetella ka",
+        "CreateNFT": "Theha NFT",
+        "TitlePlaceholder": "Fana ka sehlooho sa NFT ea hau",
+        "DescriptionPlaceholder": "Fana ka tlhaloso ea NFT ea hau",
+        "CreateYourNFT": "Theha NFT ea hau",
+        "Royalties": "Lichelete",
+        "RoyaltyPlaceholder": "Taba ea boikhethelo. Chelete e lefuoang ho moetsi pele e fetisoa.",
+        "ExpirationDate": "Letsatsi la pheletso",
+        "StartingDate": "Letsatsi la qalo",
+        "BidsBelowThisAmount": "Litheko tse ka tlase ho chelete ena li ke ke tsa lumelloa",
+        "MinimumBid": "Teko e fokolang",
+        "Price": "Theko",
+        "Owner": "Mong&#39;a",
+        "SelectCategory": "Khetha sehlopha",
+        "Day": "Letsatsi",
+        "Days": "Matsatsi",
+        "Hour": "Hora",
+        "Hours": "Lihora",
+        "Minute": "Motsotso",
+        "Minutes": "Metsotso",
+        "Second": "Ea bobeli",
+        "Seconds": "Metsotsoana",
+        "SalesCreator": "ea thekiso e tla ea ho moetsi",
+        "Details": "Lintlha",
+        "Bids": "Litefiso",
+        "History": "Histori",
+        "LoremIpsum": "Lorem Ipsum ke mongolo o makatsang oa indasteri ea khatiso le ea ho seta.",
+        "PutOnSale": "Beha thekisong",
+        "PutOffSale": "Tlosa thekisong",
+        "Transfer": "Phetisetso",
+        "Update": "Nchafatso",
+        "UpdateToken": "Ntlafatsa Letshwao",
+        "CreateToken": "Theha Letshwao",
+        "PlaceBid": "Bid ea sebaka",
+        "SoldOut": "E rekisitsoe",
+        "NftName": "Lebitso la NFT",
+        "DescribeYourNFT": "Ka kopo hlalosa NFT ea hau",
+        "NftPicture": "Setšoantšo se emelang NFT",
+        "NftMovie": "Filimi e emelang NFT",
+        "UploadMovie": "Kenya filimi",
+        "MovieSource": "Mohloli oa lifilimi",
+        "UploadFile": "Kenya faele",
+        "PutOnMarketplace": "Beha &#39;marakeng",
+        "InstantPurchase": "Kenya theko ho lumella basebelisi ho reka NFT ea hau hang hang",
+        "FixedPrice": "Theko e tsitsitseng",
+        "TimedAuction": "Fantisi e nakong",
+        "OpenForBids": "E butsoe bakeng sa litefiso",
+        "PriceOnePiece": "Kenya theko bakeng sa sekotoana se le seng",
+        "EnterMinimumBid": "Kenya Bonyane Bonyane",
+        "SelectChain": "Khetha ketane",
+        "WrongChain": "NFT ena e thehile tlasa &quot;{999}}&quot;. Ka kopo sebelisa ketane ena.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Ho kenya NFT&#39;s",
+            "fileNotFound": "Tšoarelo, faele ea CSV ha e fumanehe.",
+            "fileEmpty": "Tšoarelo, faele ea CSV ha e na letho.",
+            "userIdNotFound": "mosebelisi o teng empa id ha e na letho",
+            "errorLine": "mola {{1}}",
+            "fieldNotFound": "Sebaka se hlokahalang &quot;{999}}&quot; ha se fumanehe",
+            "taskStreamInvalid": "sebaka sa mosebetsi ha se sebetse",
+            "instructionsEmpty": "ditaelo tsa molapo o se nang letho",
+            "complete": "Feletseng",
+            "activateUsers": "romela molaetsa oa ho kenya tshebetsong ho basebelisi?",
+            "importProgress": "Tsoelopele",
+            "importOptions": "Dikgetho",
+            "sampleCSV": "Khoasolla Mohlala oa CSV",
+            "fileLabel": "Kenya Spreadsheet:",
+            "errorsTitle": "Ho bile le liphoso"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Sefa ka NFT Collections",
+                "ShowNFTCollection": "Hlahisa pokello ea NFT ho ...",
+                "AllCollections": "Likopano Tsohle"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Bangoli bohle",
+                "AllUsers": "Bohle",
+                "FilterByAuthors": "Sefa ka Bangoli"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Khutlela ho Pokello"
     }
 }

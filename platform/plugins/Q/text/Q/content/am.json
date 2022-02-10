@@ -1,14 +1,14 @@
 {
     "request": {
-        "error": "ስህተት {{status}} በጠየቅ ጊዜ",
-        "canceled": "ጥያቄው ተሰርዟል",
+        "error": "በጥያቄ ጊዜ ስህተት {{status}}",
+        "canceled": "ጥያቄ ተሰርዟል።",
         "500": "የውስጥ መቆጣጠርያ ችግር",
-        "404": "አልተገኘም: {{url}}",
+        "404": "አልተገኘም፦ {{url}}",
         "501": "ጥያቄ ተቋርጧል"
     },
     "nonce": {
-        "sameDomain": "ክፍለ-ጊዜው ጊዜ አልፎበታል. ገጹን አድስ እና እንደገና ሞክር.",
-        "otherDomain": "ወደ {{baseUrl}} የውጭ ጎራ አግዶ የጎን-የጎራ ጥያቄን አግዷል"
+        "sameDomain": "ክፍለ ጊዜው አልፎበታል። ገጹን ያድሱ እና እንደገና ይሞክሩ።",
+        "otherDomain": "በ {{baseUrl}} ላይ ወደ ውጭ ጎራ የሚደረግ የጎራ ተሻጋሪ ጥያቄ ታግዷል"
     },
     "words": {
         "tap": "መታ ያድርጉ",
@@ -16,7 +16,7 @@
         "yes": "አዎ",
         "no": "አይ",
         "Tap": "መታ ያድርጉ",
-        "Click": "ጠቅ አድርግ",
+        "Click": "ጠቅ ያድርጉ",
         "Yes": "አዎ",
         "No": "አይ"
     },
@@ -36,17 +36,17 @@
     },
     "audio": {
         "allowMicrophoneAccess": "እባክዎ ወደ ማይክሮፎንዎ መዳረሻ ይፍቀዱ",
-        "record": "ቅዳ",
+        "record": "መዝገብ",
         "recording": "መቅዳት",
-        "remains": "የቀረው",
+        "remains": "ቀርቷል።",
         "maximum": "ከፍተኛ",
-        "playing": "በመጫወት",
-        "recorded": "የተቀዳ",
+        "playing": "በመጫወት ላይ",
+        "recorded": "ተመዝግቧል",
         "clip": "ቅንጥብ",
         "orupload": "ወይም ይጫኑ",
         "usethis": "ይህን ይጠቀሙ",
         "discard": "አስወግድ",
-        "encoding": "ማመስጠር"
+        "encoding": "ኢንኮዲንግ"
     },
     "alert": {
         "title": "ማንቂያ"
@@ -57,66 +57,66 @@
         "cancel": "አይ"
     },
     "prompt": {
-        "title": "አስገራሚ",
+        "title": "አፋጣኝ",
         "ok": "ሂድ"
     },
     "imagepicker": {
-        "errorReadingFile": "ፋይል በማንበብ ላይ ስህተት",
+        "errorReadingFile": "ፋይል ማንበብ ላይ ስህተት",
         "cameraCommands": {
             "prompt": "ምን መስራት ይፈልጋሉ?",
-            "photo": "አዲስ ፎቶ ይውሰዱ",
-            "library": "ከቤተ-መጽሐፍት ምረጥ"
+            "photo": "አዲስ ፎቶ አንሳ",
+            "library": "ከቤተ-መጽሐፍት ይምረጡ"
         },
-        "tooSmall": "እባክህ ሰፋ ያለ ምስል ምረጥ.",
+        "tooSmall": "እባክዎ ትልቅ ምስል ይምረጡ።",
         "cropping": {
-            "title": "መጠንና ቦታ አስተካክል",
-            "touchscreen": "ለማጉላት እና ለመጎተት ጣቶችህን ተጠቀም",
-            "notTouchscreen": "ለማጉላት እና ለመጎተት የእርስዎን መዳፊት እና ጎኖች ይጠቀሙ"
+            "title": "መጠን እና አቀማመጥ ያስተካክሉ",
+            "touchscreen": "ለማጉላት እና ለመጎተት ጣቶችዎን ይጠቀሙ",
+            "notTouchscreen": "ለማጉላት እና ለመጎተት የእርስዎን መዳፊት እና ጎማ ይጠቀሙ"
         },
         "errorType": "ይቅርታ፣ ግን የዚህ ፋይል አይነት አይደገፍም።"
     },
     "timestamp": {
         "lastNight": "ትናንትና ማታ",
-        "lastEvening": "የመጨረሻው ዋዜማ",
+        "lastEvening": "የመጨረሻ ዋዜማ",
         "yesterday": "ትናንት",
-        "thisMorning": "ይህ ጥዋት",
+        "thisMorning": "ዛሬ ጠዋት",
         "today": "ዛሬ",
         "tonight": "ዛሬ ማታ",
-        "tomorrowMorning": "ቶማ ጠዋት",
+        "tomorrowMorning": "ቶም ጠዋት",
         "tomorrow": "ነገ",
-        "hoursAgo": "ከ {{h}} ሰዓታት በፊት",
-        "hourAgo": "ከ {{h}} ሰዓት በፊት",
-        "minuteAgo": "ከ {{m}} ደቂቃ በፊት",
-        "minutesAgo": "ከ {{m}} ደቂቃዎች በፊት",
+        "hoursAgo": "ከ{999} ሰዓታት በፊት",
+        "hourAgo": "ከ{999} ሰዓት በፊት",
+        "minuteAgo": "{{m}} ደቂቃ በፊት",
+        "minutesAgo": "ከ{999} ደቂቃዎች በፊት",
         "secondAgo": "{{s}} ሰከንድ በፊት",
-        "secondsAgo": "ከ {{s}} ሰከንዶች በፊት",
+        "secondsAgo": "{{s}} ሰከንዶች በፊት",
         "fewSecondsAgo": "ከሰከንዶች በፊት",
-        "rightNow": "አሁን",
-        "inSecond": "በ {{s}} ሰከንድ ውስጥ",
-        "inSeconds": "በ {{s}} ሰከንዶች ውስጥ",
-        "inMinute": "በ {{m}} ደቂቃ ውስጥ",
-        "inMinutes": "በ {{m}} ደቂቃዎች ውስጥ",
-        "inHour": "በ {{h}} ሰዓት ውስጥ",
-        "inHours": "በ {{h}} ሰዓታት ውስጥ",
-        "inUnderMinute": "ከ 1 ደቂቃ በታች"
+        "rightNow": "ልክ አሁን",
+        "inSecond": "በ{999} ሰከንድ ውስጥ",
+        "inSeconds": "በ{999} ሰከንዶች ውስጥ",
+        "inMinute": "በ{999} ደቂቃ ውስጥ",
+        "inMinutes": "በ{999} ደቂቃዎች ውስጥ",
+        "inHour": "በ{999} ሰዓት ውስጥ",
+        "inHours": "በ{999} ሰዓቶች ውስጥ",
+        "inUnderMinute": "ከ1 ደቂቃ በታች"
     },
     "video": {
         "clip": "ቅንጥብ",
-        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም",
+        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም።",
         "SkipAfter": "በኋላ ዝለል",
         "Skip": "ዝለል"
     },
     "pdf": {
         "clip": "ቅንጥብ",
-        "errorNoSource": "ምንም የፒዲኤፍ ምንጭ የለም"
+        "errorNoSource": "የፒዲኤፍ ምንጭ የለም።"
     },
     "clip": {
-        "SetClipStart": "ቅንጥብ ጅምርን ያዘጋጁ",
+        "SetClipStart": "የቅንጥብ ጅምርን አዘጋጅ",
         "ClipStart": "ቅንጥብ ጀምር",
-        "SetClipEnd": "ቅንጥብ ማብቂያ ያዘጋጁ",
-        "ClipEnd": "ክሊፕ መጨረሻ",
-        "StartMoreEnd": "የመነሻ አቀማመጥ ከመጨረሻ ቦታ በላይ መሆን አይችልም",
-        "EndLessStart": "የመጨረሻ ቦታ ከመነሻ ቦታ ያነሰ ሊሆን አይችልም",
+        "SetClipEnd": "የቅንጥብ መጨረሻ አዘጋጅ",
+        "ClipEnd": "ቅንጥብ መጨረሻ",
+        "StartMoreEnd": "የመነሻ ቦታ ከመጨረሻው ቦታ በላይ ሊሆን አይችልም።",
+        "EndLessStart": "የመጨረሻው ቦታ ከመጀመሪያው አቀማመጥ ያነሰ ሊሆን አይችልም",
         "WhichInvalid": "ክርክር &#39;የትኛው&#39; ልክ ያልሆነ"
     },
     "tabs": {
@@ -134,11 +134,11 @@
         "week": "ሳምንት",
         "weeks": "ሳምንታት",
         "month": "ወር",
-        "months": "ወሮች",
+        "months": "ወራት",
         "year": "አመት",
         "years": "ዓመታት",
-        "decade": "አስር አመት",
-        "decades": "አስርት ዓመታት",
+        "decade": "አስርት አመታት",
+        "decades": "አሥርተ ዓመታት",
         "century": "ክፍለ ዘመን",
         "centuries": "ክፍለ ዘመናት"
     }

@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Ĉi tiu enhavo estas kaŝita de vi."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Nova Ero"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Homoj, kiujn mi invitis",
+        "Streams\/invitedMe": "Kiu invitis min",
+        "DoYouAgree": "Ĉu vi konsentas?",
+        "Yes": "Jes",
+        "No": "Ne"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Kio estas viaj interesoj?",
+        "CanAdd": "Se vi ankoraŭ ne povas trovi tion, kion vi serĉas, vi povas aldoni novan intereson sube:",
+        "TrySynonyms": "Ĉu vi ne vidas ĝin? Provu kelkajn sinonimojn.",
+        "AddUnderCategory": "Aldoni sub kategorio...",
+        "Other": "Alia",
+        "Unlisted": "Nelistigita"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Mesaĝo estis markita por administra revizio. Frapu denove por malmarka.",
+        "noOneSaid": "Neniu diris ion ajn",
+        "closeChatButton": "Fermu babilejon",
+        "closeChatConfirmTitle": "Ĉu fermi ĉi tiun babilejon?",
+        "closeChatConfirm": "Ĉu vi certas, ke vi volas fermi ĉi tiun babilejon?",
+        "Subscribed": "Sciigoj Ebligitaj",
+        "Unsubscribed": "Sciigoj silentigitaj",
+        "closeChatConfirmYes": "Jes",
+        "closeChatConfirmNo": "Ne",
+        "earlierComments": "pli fruaj komentoj",
+        "startedConversation": "komencis konversacion",
+        "RealTimeCall": "Reala Tempo Voko",
+        "SearchByName": "Serĉu laŭ nomo",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} vizitas la babilejon",
+            "Join": "{{displayName}} aliĝis al la babilejo",
+            "Leave": "{{displayName}} forlasis la babilejon",
+            "RelatedTo": "{{displayName}} komencis {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "administru viajn retpoŝtajn abonojn",
+        "IfUnsubscribe": "Se vi volas malaboni",
+        "*": "Mesaĝo {{& message.fields.type}} al {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} diris: {{& message.content}}",
+        "Streams\/changed": "Ŝanĝoj en {{stream.fields.title}}",
+        "Streams\/invite": "Vi estis invitita al {{& stream.fields.title}}",
+        "Streams\/announcement": "Anonco en {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ŝanĝis aliron en {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Babilmesaĝo redaktita en {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Babilmesaĝo forigita en {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} estis fermita",
+        "Streams\/task\/progress": "Progreso farita je {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tasko plenumita: {{stream.fields.title}}",
+        "Streams\/task\/error": "Eraro dum: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Envenanta Mesaĝo",
+        "Streams\/relatedTo\/Streams\/call": "Nova Voko Komencita en {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nova {{relationDisplayType}} en {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Aldonita al {{toTitle}} kiel {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} menciis vin en komento",
+        "Streams\/call": "{{displayName}} komencis realtempan vokon"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Invitu",
+        "messageContent": "{{displayName}} invitis vin al {{inviteUrl}}",
+        "youCanNowPaste": "Vi nun povas alglui ĉi tiun ligon ien por inviti homojn",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
+            "chooseFromContacts": "Elektu el viaj Kontaktoj",
+            "chooseAgainFromContacts": "Elektu Denove el Kontaktoj",
+            "inviteSelectedContacts": "Invitu Elektitajn Kontaktojn",
+            "selectFromContacts": "Elektu El Kontaktoj",
+            "userChooserPlaceholder": "Serĉu laŭ nomo",
+            "photo": "Prenu foton",
+            "photoInstruction": "Se la persono kiu skanis vian QR-kodon estas antaŭ vi, prenu foton de ili",
+            "to": "Al: {{Stream Title}}",
+            "go": "Iru",
+            "title": "Invitu",
+            "placeholder": "Poŝtelefona numero aŭ retadreso",
+            "orInvite": "Aŭ invitu homojn uzante:",
+            "copyLink": "{{ClickOrTap}} por kopii invitligon",
+            "shareOrCopyLink": "{{ClickOrTap}} por dividi aŭ kopii invitligon",
+            "QR": "{{ClickOrTap}} por generi QR-kodon",
+            "QRtitle": "Skanu ĉi tiun QR-kodon",
+            "QRscanned": "Ili skanis ĝin!",
+            "scannedQR": "{{ClickOrTap}} se la kodo estis skanita",
+            "byEmail": "Retpoŝto",
+            "byText": "Teksto",
+            "byFacebook": "Fejsbuko",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hej, kontrolu ĉi tion",
+            "PleaseVisitLink": "Bonvolu viziti la sekvan ligilon:",
+            "InvitingYou": "Mi invitas vin al {{title}}",
+            "HasInvitedYou": "{{displayName}} invitis vin al {{title}}",
+            "HasMentionedYou": "{{displayName}} menciis vin en &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VI ESTAS INVITITA!",
+            "AcceptInvite": "Akceptu Inviton"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Vi estis invitita al {{title}}. Bonvolu frapeti {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Vi estis invitita. {{ClickOrTap}} ĉi tie por akcepti kaj aliĝi."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "afiŝis <em>{{message.fields.type}}<\/em> mesaĝon al {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "komentis",
+            "startedCallIn": "komencis vokon",
+            "in": "en",
+            "body": "en {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "estis afiŝita al",
+                "byAvatar": "de {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "havas novan {{instructions.fromDisplayType}}",
+                "byAvatar": "aldonita de {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu per rapida teksto por sciigi ilin, ke la invito venis de vi, petante ilin klaki la ligilon.",
+            "confirm": "Invitoj estas senditaj de nia numero, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus daŭrigi per rapida teksto por sciigi ilin, ke la invito venis de vi, petante ilin klaki la ligilon.",
+            "check": "Hej, mi ĵus sendis al vi inviton al la apo {{app}}. Bonvolu kontroli vian sms kaj klaki la ligilon!",
+            "CheckYourMobile": "Bonvolu kontroli SMS kaj sekvi instrukciojn!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Sekvu per rapida teksto por sciigi ilin, ke la invito venis de vi, petante ilin klaki la ligilon.",
+            "confirm": "Invitoj estas senditaj de nia domajno, kiun viaj amikoj ankoraŭ ne rekonas. Ĉu vi ŝatus daŭrigi per rapida teksto por sciigi ilin, ke la invito venis de vi, petante ilin klaki la ligilon.",
+            "subject": "Ĉu vi ricevis inviton?",
+            "body": "Hej, mi ĵus sendis al vi inviton al la {{app}} apo. Bonvolu kontroli vian retpoŝton kaj alklaku la ligilon tie!",
+            "CheckYourEmail": "Bonvolu kontroli vian retpoŝton kaj sekvi instrukciojn!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Titolo",
+        "Subscribed": "Abonita",
+        "Participants": "Partoprenantoj",
+        "AreYouSureRemoveIdentifier": "Ĉu vi certe forigas ĉi tiun identigilon?",
+        "AreYouSureUnsubscribeIdentifier": "Ĉu vi certe malabonas ĉi tiun identigilon? Ĝi malŝaltos sciigojn al ĉi tiu identigilo.",
+        "AreYouSureUnsubscribeDevice": "Ĉu vi certas malaboni ĉi tiun aparaton? Ĝi malŝaltos sciigojn al ĉi tiu aparato.",
+        "AreYouSureRemoveParticipant": "Ĉu vi certas, ke vi volas forigi ĉi tiun partoprenanton?",
+        "RemoveParticipant": "Forigi partoprenanton",
+        "Identifiers": "Identigiloj",
+        "Devices": "Aparatoj",
+        "Streams": "Rojoj"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Vi ne havas permeson aliĝi al ĉi tiu fluo.",
+        "streamTitle": "{{1}} komencis vivan vokon",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Konektante",
+            "microphoneBtn": "Ebligu Mikrofonon",
+            "cameraBtn": "Ebligu Fotilon",
+            "cameraAndMicrophoneBtn": "Ebligu Fotilon kaj Mikrofonon"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mikfono estas malŝaltita",
+            "micIsOn": "Mikrofono estas ŝaltita",
+            "cameraIsOff": "Fotilo estas malŝaltita",
+            "cameraIsOn": "Fotilo estas ŝaltita",
+            "screenSharingIsOn": "Ekrandividado estas aktiva",
+            "screenSharingIsOff": "Kunhavigi ekranon",
+            "joinNow": "Aliĝu al la Voko"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} rifuzita. Por uzi ĝin, bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al &quot;Agordoj&quot; -&gt; &quot;Altnivelaj&quot; -&gt; &quot;Privateco kaj sekureco&quot; -&gt; &quot;Agordoj de la retejo&quot; -&gt; &quot;Fotilo&quot; aŭ &quot;Agordoj de la retejo&quot; -&gt; &quot;Mikrofono&quot;",
+            "point2": "Forigu {{hostname}} el &quot;Bloki&quot; listo"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} rifuzita. Bonvolu reŝargi ĉi tiun paĝon kaj konfirmi aliron al {{kind}} por aliĝi al la konferenco."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} rifuzita. Por uzi ĝin, bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al viaj Android-Agordoj",
+            "point2": "Malfermu &quot;Aplikoj kaj sciigoj&quot;",
+            "point3": "Trovu &quot;{{communityName}}&quot; kaj malfermu ĝin",
+            "point4": "Alklaku Permesojn",
+            "point5": "Ebligu {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Instrukcioj",
+            "permissionDenied": "Permeso por {{kind}} rifuzita. Por uzi ĝin, bonvolu sekvi ĉi tiujn paŝojn:",
+            "point1": "Iru al viaj iOS-Agordoj",
+            "point2": "Malfermu &quot;Privatecon&quot;",
+            "point3": "Trovu {{kind}} kaj malfermu ĝin",
+            "point4": "Trovu &quot;{{communityName}}&quot; kaj ebligu"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Vi aliĝis al la ĉambro",
+            "joining": "Aliĝo: {{userName}}",
+            "sbLeftRoom": "{{userName}} forlasis la ĉambron",
+            "switchingRoom": "Ŝanĝante ĉambron...",
+            "forceDisconnecting": "Vi estos malkonektita ene de 5 sekundoj",
+            "forceDisconnectingImmediately": "Vi estis malkonektita de gastiganto",
+            "youLeftRoom": "Vi forlasis la ĉambron",
+            "codeCopied": "Vi forlasis la ĉambron",
+            "sbBeganFbLive": "{{userName}} komencis dissendi ĉi tiun vokon en Fejsbuko",
+            "sbStoppedFbLive": "{{userName}} ĉesis dissendi ĉi tiun vokon en Fejsbuko",
+            "youBeganFbLive": "Vi komencis dissendi ĉi tiun vokon en Fejsbuko",
+            "youStoppedFbLive": "Vi ĉesis dissendi ĉi tiun vokon en Fejsbuko",
+            "youStartedLive": "Vi komencis dissendi ĉi tiun alvokon al kutima RTMP",
+            "youStoppedLive": "Vi ĉesis dissendi ĉi tiun vokon al kutima RTMP",
+            "sbStartedLiveStreaming": "{{userName}} komencis vivi",
+            "sbStoppedLiveStreaming": "{{userName}} finiĝis viva",
+            "liveStopped": "Okazis eraro dum sendado de video al finpunkto",
+            "youBeganVideoRecording": "Vi komencis registri ĉi tiun konferencon",
+            "youStoppedVideoRecording": "Vi ĉesis registri ĉi tiun konferencon",
+            "linkCopiedToCb": "Ligo kopiita al tondujo",
+            "codeCopiedToCb": "Kodo kopiita al tondujo",
+            "userHasNoVideo": "Partoprenanto havas neniun videon",
+            "openInBrowserAlert": "Malfermu ligilon en Safari-retumilo por aliĝi al la konferenco."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Video Agordoj",
+            "webCamera": "Reteja Fotilo",
+            "screenSharing": "Ekrana Kunhavigo",
+            "shareAnotherScreen": "Kunhavigu alian ekranon",
+            "turnOffCameras": "Malŝaltu fotilon",
+            "turnOffVideo": "Malŝaltu fotilon\/ekranan kundividon",
+            "turnOffAudioInput": "Mutiga mikrofono",
+            "turnOffScreenSharing": "Malŝaltu ekrankundividon",
+            "cameraIsTurnedOff": "Fotilo estas malŝaltita",
+            "micIsTurnedOff": "Mikrofono estas malŝaltita",
+            "startFBLive": "Komencu Facebook Livestream",
+            "stopFBLive": "Ĉesu Facebook Livestream",
+            "startRecording": "Komencu Registradon",
+            "stopRecording": "Ĉesu Registradon",
+            "start": "Komencu",
+            "stop": "Haltu",
+            "recordingInProgress": "Registrado estas en progreso...",
+            "fbLiveTitle": "Titolo de Livestream",
+            "fbLiveDescription": "Priskribu vian Livestream. Pri kio temas?",
+            "fbOnlyMeLiveAccess": "Nur mi",
+            "fbFriendsAccess": "Amikoj",
+            "fbPublicAccess": "Publiko",
+            "publishOnTimeline": "Eldoni sur templinio",
+            "publishToGroup": "Publiki al grupo",
+            "fbStartLive": "Iru vivi",
+            "fbStopLive": "Finu Livestream",
+            "streamingSettings": "Agordoj",
+            "fbEmbedCode": "Enigi",
+            "copy": "Kopiu",
+            "streamToRTMP": "Flui al kutima RTMP",
+            "startBroadcasting": "Komencu dissendi",
+            "broadcastingInProgress": "Dissendado estas en progreso"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Sonaj Agordoj",
+            "speakers": "Parolantoj",
+            "microphone": "Mikrofono"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Agordoj de partoprenantoj",
+            "disconnect": "Malkonekti",
+            "floatingScreens": "Flosantaj Ekranoj",
+            "tiledScreens": "Kahelitaj Ekranoj",
+            "loudestExceptMe": "Plej laŭta Krom Mi",
+            "maximizeLoudest": "Maksimumigi Plej laŭte",
+            "staticMaximized": "Statika Maksimumigita",
+            "fullScreen": "Plenekrane",
+            "manual": "Manlibro",
+            "turnOffCamera": "Kaŝi videon",
+            "turnOffAudio": "Mutigu audio",
+            "turnOffScreenSharing": "Kaŝi ekrankundividon",
+            "turnOnCamera": "Montru videon",
+            "turnOnAudio": "Malŝaltu audio",
+            "turnOnScreenSharing": "Montru ekrankundividon"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Streaming Agordoj"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Renkontiĝo",
+            "MeetingEnded": "Renkontiĝo finiĝis"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Invititaj",
+            "description": "Enirkesto por invitoj"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Rimedo",
+            "description": "fluo por administri aliron al rimedo kaj afiŝi mesaĝojn pri ĝisdatigoj"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "por ricevi ĝisdatigojn pri progreso pri certa tasko",
+            "displayType": "Tasko"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "kategorio por taskoj",
+            "displayType": "Taskoj"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "komuna sperto por membroj de komunumo",
+            "displayType": "Ofta sperto por membroj de komunumo"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "saluton per kiu uzanto povas prezenti sin",
+            "displayType": "Saluton"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Numero",
+            "description": "matematika nombro"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Dato",
+            "description": "dato"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Teksto",
+            "description": "korpo de teksto"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Teksto",
+            "description": "malgranda korpo de teksto"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Teksto",
+            "description": "meza korpo de teksto"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Retpoŝta adreso",
+            "description": "retpoŝta adreso"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Telefonnumero",
+            "description": "telefonnumero"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ligilo en la reto"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Bildo",
+            "description": "vida bildo",
+            "newItem": "Aldonu Bildon"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Bildgalerio",
+            "description": "galerio de bildoj"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Albumo",
+            "description": "albumo al kiu rilatas diversaj amaskomunikiloj"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Dosiero",
+            "description": "alŝutita dosiero",
+            "newItem": "Aldonu Dosieron"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "description": "aŭdklipo",
+            "newItem": "Aldonu Audion"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "description": "filmeto",
+            "newItem": "Aldonu Videon"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF-dokumento",
+            "description": "PDF-dokumento",
+            "newItem": "Aldonu PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "viva audio aŭ video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Kategorio",
+            "description": "kategorio al kiu aliaj fluoj povas rilati"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Partoprena Indekso",
+            "description": "fluoj rilatas\/senrilatas al tio kiam uzanto aliĝas\/foriras"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Intereso",
+            "description": "reprezentas la intereson de uzanto en certa temo"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Alvenanta",
+            "description": "celo por mesaĝoj senditaj de aliaj uzantoj"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Konversacio",
+            "description": "konversacio inter uzantoj, kun historio"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Realtempa Voko",
+            "description": "realtempa video\/aŭdvoko"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Demando",
+            "description": "demandofluo"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Respondu",
+            "description": "respondfluo"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Vokoj",
+            "description": "kategorio por Rojoj\/webrtc",
+            "MaxRelationsExceeded": "Maksimumo de vokoj superita"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "tajpu paĝotitolon",
+        "ModTab": "Modifi Eron",
+        "Save": "Savi",
+        "Delete": "Forigi",
+        "Submenu": "Submenuo"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Rekordo",
+        "reset": "Restarigi",
+        "edit": "Redakti",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝutu",
+        "link": "Ligo",
+        "setUrl": "Agordu URL",
+        "save": "Savi",
+        "setClip": "Eltranĉu Clip",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu sonfonto",
+        "uploadLimit": "Maksimuma dosiergrandeco: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restarigi",
+        "edit": "Redakti",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝutu",
+        "link": "Ligo",
+        "setUrl": "Agordu URL",
+        "save": "Savi",
+        "setClip": "Eltranĉu Clip",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu videofonto",
+        "uploadLimit": "Maksimuma dosiergrandeco: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restarigi",
+        "edit": "Redakti",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝutu",
+        "link": "Ligo",
+        "setUrl": "Agordu URL",
+        "save": "Savi",
+        "setClip": "Eltranĉu Clip",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu pdf-fonto",
+        "uploadLimit": "Maksimuma dosiergrandeco: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restarigi",
+        "edit": "Redakti",
+        "title": "titolo",
+        "description": "Priskribo",
+        "upload": "Alŝutu",
+        "link": "Ligo",
+        "setUrl": "Agordu URL",
+        "save": "Savi",
+        "uploadedImage": "Alŝutita bildo",
+        "imageTitle": "Bilda titolo",
+        "setClip": "Eltranĉu Clip",
+        "invalidURL": "Nevalida URL",
+        "invalidFile": "Nevalida Dosiero",
+        "errorNoSource": "Neniu bildofonto",
+        "uploadLimit": "Maksimuma dosiergrandeco: {{size}}",
+        "errorFileSize": "Pardonu, sed dosiero tro granda.<br> Maksimuma dosiergrandeco estas {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Demandoj",
+        "Answers": "Respondoj",
+        "AnswerQuestion": "Responda Demando",
+        "SetYourAnswer": "Bonvolu respondi la demandon",
+        "NewQuestion": "Nova Demando",
+        "NewAnswer": "Nova Respondo",
+        "AnswerDetails": "Respondaj Detaloj",
+        "answerOption": "Opcio",
+        "answerOptionExclusive": "Ekskluziva",
+        "answerTextarea": "Tekstaro",
+        "FreeAnswer": "Skribu vian respondon ĉi tie",
+        "SaveQuestion": "Konservu Demandon",
+        "SaveAnswer": "Konservu Respondon",
+        "AddAnotherAnswer": "Aldonu alian respondon",
+        "ErrorAnswers": "Bonvolu aldoni eĉ unu respondon",
+        "AlreadyAnswered": "Jam respondis",
+        "TitlePlaceholder": "Tajpu vian demandon",
+        "ContentPlaceholder": "Metu ajnajn pliajn informojn ĉi tie por helpi homojn respondi",
+        "ErrorTitle": "Demando bezonata",
+        "Placeholder": "Anstataŭilo"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Nova Sperto",
+        "DefineTitle": "Bonvolu difini titolon",
+        "Create": "Krei"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Vokoj",
+        "MaxCalls": "Max vokas",
+        "Update": "Ĝisdatigo",
+        "NoCallsYet": "Ankoraŭ neniuj vokoj",
+        "CallReasonTitle": "Pri kio temas ĉi tiu voko?",
+        "WaitingRoom": "Atendoĉambro"
     }
 }

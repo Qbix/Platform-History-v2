@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "εντός {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "μετρητής",
+        "meters": "μέτρα",
+        "kilometer": "χιλιόμετρο",
+        "kilometers": "χιλιομετρα",
+        "km": "χλμ",
+        "mile": "μίλι",
+        "miles": "μίλια",
+        "mi": "μι",
+        "foot": "πόδι",
+        "feet": "πόδια",
+        "inches": "ίντσες"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Με ενδιαφέρουν τα πράγματα να λαμβάνουν χώρα εντός {{select}} από",
+        "update": "Ενημέρωση της τοποθεσίας μου",
+        "set": "Ορισμός τοποθεσίας μου",
+        "prompt": "{{ClickOrTap}} εδώ για να<br> ρυθμίστε το δικό σας<br> τοποθεσία",
+        "myCurrentLocation": "Η τρέχουσα τοποθεσία μου",
+        "enterAddress": "Εισαγάγετε μια διεύθυνση",
+        "enterPostcode": "Εισαγάγετε τον ταχυδρομικό σας κώδικα \/ ταχυδρομικό κώδικα",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Προσθήκη τοποθεσίας",
+            "title": "Νέα τοποθεσία",
+            "nameYourLocation": "Ονομάστε την τοποθεσία σας"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Αποθήκευση αυτής της τοποθεσίας;",
+            "message": "Σκοπεύετε να χρησιμοποιήσετε ξανά αυτήν την τοποθεσία στο μέλλον;",
+            "ok": "Ναί",
+            "cancel": "Οχι"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Ονομάστε αυτήν την τοποθεσία",
+            "placeholder": "Σπίτι, Εργασία κλπ.",
+            "ok": "Σώσει"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Επιλέξτε Τοποθεσία"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Υπάρχει κάποια περιοχή εντός αυτής της τοποθεσίας;",
+        "newArea": "Νέα περιοχή",
+        "promptTitle": "Εισαγάγετε ένα όνομα για την περιοχή:",
+        "absent": "Ορίστε την περιοχή",
+        "error": "Λάθος",
+        "exist": "Η περιοχή υπάρχει ήδη",
+        "addNewArea": "Προσθήκη νέας περιοχής",
+        "add": "Προσθήκη"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "μια συλλογή τοποθεσιών",
+            "displayType": "Τοποθεσίες"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Αντιπροσωπεύει ένα κτίριο, χώρο, πλοίο, πάρκο κ.λπ.",
+            "displayType": "Τοποθεσία"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Αντιπροσωπεύει μια περιοχή μέσα σε μια τοποθεσία, όπως ένα δωμάτιο ή μια σουίτα",
+            "displayType": "Περιοχή"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Αντιπροσωπεύει έναν όροφο σε ένα κτίριο ή πλοίο",
+            "displayType": "Πάτωμα"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Αντιπροσωπεύει μια στήλη σε ένα κτίριο ή πλοίο",
+            "displayType": "Στήλη"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Κατηγορία για πράγματα σε μια ορισμένη απόσταση από ένα geohash",
+            "displayType": "Κοντά σε μέρη"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Κατηγορία για πράγματα σε μια ορισμένη απόσταση από ένα geohash, που ταιριάζει με ένα ενδιαφέρον",
+            "displayType": "Μέρη ενδιαφέροντος"
         }
     }
 }

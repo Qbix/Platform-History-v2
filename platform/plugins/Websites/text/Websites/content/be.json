@@ -2,40 +2,40 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Спасылка для садзейнічання",
+                "link": "Спасылка для прасоўвання",
                 "startDate": "Дата пачатку",
                 "startTime": "Час пачатку",
-                "endDate": "Калі выбегла",
-                "endTime": "час заканчэння",
-                "budget": "бюджэт"
+                "endDate": "Дата заканчэння",
+                "endTime": "Час заканчэння",
+                "budget": "Бюджэт"
             },
             "interests": {
-                "Title": "Фільтр па інтарэсам",
-                "FilterInterests": "Пачніце ўводзіць цікавасць ..."
+                "Title": "Фільтр па інтарэсах",
+                "FilterInterests": "Пачніце ўводзіць цікавасць..."
             },
-            "Interest": "цікавасць",
-            "Location": "размяшчэнне"
+            "Interest": "Цікавасць",
+            "Location": "Месцазнаходжанне"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "ісці",
-            "PasteLinkHere": "Ўставіць спасылку тут",
-            "BrowseTheWeb": "Агляд",
+            "Go": "Ідзі",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Праглядзіце",
             "WriteToStartConversation": "Напішыце свае думкі, каб пачаць размову",
-            "StartConversation": "Пачатак размовы",
-            "GotoConversation": "Перайсці да размовы",
-            "reset": "Скід",
+            "StartConversation": "Пачаць размову",
+            "GotoConversation": "Перайсці да Размовы",
+            "reset": "Скінуць",
             "edit": "Рэдагаваць",
             "link": "Спасылка",
-            "setUrl": "Устанавіць URL",
+            "setUrl": "Задаць URL",
             "save": "Захаваць",
             "setClip": "Выразаць кліп",
             "invalidURL": "Няправільны URL"
         },
         "FileTooLarge": "Файл занадта вялікі для кэшавання. Максімальны памер файла {{size}}",
         "InvalidPDF": "Файл не з&#39;яўляецца сапраўдным PDF",
-        "StartTypingTitleOrKeywords": "Пачніце ўводзіць загаловак ці ключавыя словы ..."
+        "StartTypingTitleOrKeywords": "Пачніце ўводзіць назву або ключавыя словы..."
     },
     "types": {
         "Websites\/article": {
@@ -43,7 +43,7 @@
             "displayType": "Артыкул"
         },
         "Websites\/slide": {
-            "description": "Слайд у прэзентацыі, які можа ўключаць HTML, аўдыё і г.д.",
+            "description": "Слайд у прэзентацыі можа ўключаць HTML, аўдыё і г.д.",
             "displayType": "Слайд"
         },
         "Websites\/presentation": {
@@ -55,19 +55,19 @@
             "displayType": "Рэкламны блок"
         },
         "Websites\/advert\/placement": {
-            "description": "Спосаб групування рэкламных блокаў пад назвай",
+            "description": "Спосаб групоўкі рэкламных адзінак пад назвай",
             "displayType": "Размяшчэнне рэкламы"
         },
         "Websites\/advert\/creative": {
-            "description": "Змесціва для рэкламы",
-            "displayType": "Рэклама крэатыўная"
+            "description": "Кантэнт для рэкламы",
+            "displayType": "Рэкламны крэатыў"
         },
         "Websites\/advert\/campaign": {
             "description": "Рэкламная кампанія",
             "displayType": "Рэкламная кампанія"
         },
         "Websites\/webpage": {
-            "description": "Уяўляе сабой вэб-сайт, метададзеныя якога былі вычышчаны",
+            "description": "Уяўляе сабой вэб-сайт, метададзеныя якога былі ачышчаны",
             "displayType": "вэб-старонка"
         }
     }

@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Cov ntsiab lus no tau muab zais los ntawm koj."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Yam khoom tshiab"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Cov neeg kuv caw",
+        "Streams\/invitedMe": "Leej twg caw kuv",
+        "DoYouAgree": "Koj puas pom zoo?",
+        "Yes": "Yog lawm",
+        "No": "Tsis muaj"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Koj nyiam dab tsi?",
+        "CanAdd": "Yog tias koj tseem nrhiav tsis tau qhov koj tab tom nrhiav, koj tuaj yeem ntxiv qhov kev txaus siab tshiab hauv qab no:",
+        "TrySynonyms": "Tsis pom nws? Sim qee cov ntsiab lus.",
+        "AddUnderCategory": "Ntxiv hauv qeb ...",
+        "Other": "Lwm yam",
+        "Unlisted": "Tsis sau npe"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Cov lus tau raug chij rau admin tshuaj xyuas. Coj mus rhaub dua kom unflag.",
+        "noOneSaid": "Tsis muaj leej twg hais dab tsi",
+        "closeChatButton": "Kaw kev sib tham",
+        "closeChatConfirmTitle": "Kaw qhov kev sib tham?",
+        "closeChatConfirm": "Koj puas paub tseeb tias koj xav kaw qhov kev sib tham no?",
+        "Subscribed": "Kev ceeb toom Enabled",
+        "Unsubscribed": "Kev ceeb toom kaw",
+        "closeChatConfirmYes": "Yog lawm",
+        "closeChatConfirmNo": "Tsis muaj",
+        "earlierComments": "cov lus ua ntej",
+        "startedConversation": "pib kev sib tham",
+        "RealTimeCall": "Real Time Hu",
+        "SearchByName": "Nrhiav lub npe",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} tab tom mus ntsib kev sib tham",
+            "Join": "{{displayName}} tau koom nrog kev sib tham",
+            "Leave": "{{displayName}} tawm ntawm kev sib tham",
+            "RelatedTo": "{{displayName}} pib ib {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "tswj koj tus email subscriptions",
+        "IfUnsubscribe": "Yog koj xav unsubscribe",
+        "*": "Xa lus {{& message.fields.type}} rau {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} hais tias: {{& message.content}}",
+        "Streams\/changed": "Hloov pauv hauv {{stream.fields.title}}",
+        "Streams\/invite": "Koj raug caw tuaj rau {{& stream.fields.title}}",
+        "Streams\/announcement": "Tshaj tawm hauv {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} hloov kev nkag hauv {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Cov lus sib tham tau hloov kho hauv {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Cov lus sib tham raug tshem tawm hauv {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} tau raug kaw lawm",
+        "Streams\/task\/progress": "Kev vam meej tau ua rau {{stream.fields.title}}",
+        "Streams\/task\/complete": "Ua haujlwm tiav: {{stream.fields.title}}",
+        "Streams\/task\/error": "yuam kev thaum: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Lus xa tuaj",
+        "Streams\/relatedTo\/Streams\/call": "Kev hu tshiab pib hauv {{toTitle}}",
+        "Streams\/relatedTo\/*": "Tshiab {{relationDisplayType}} hauv {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Ntxiv rau {{toTitle}} li {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} tau hais rau koj hauv kev tawm tswv yim",
+        "Streams\/call": "{{displayName}} pib hu rau lub sijhawm tiag tiag"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Caw",
+        "messageContent": "{{displayName}} caw koj los rau {{inviteUrl}}",
+        "youCanNowPaste": "Tam sim no koj tuaj yeem muab qhov txuas no mus rau qhov twg los caw tib neeg",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "chooseFromContacts": "Xaiv los ntawm koj Cov Neeg Tiv Thaiv",
+            "chooseAgainFromContacts": "Xaiv dua los ntawm kev sib cuag",
+            "inviteSelectedContacts": "Caw cov neeg xaiv",
+            "selectFromContacts": "Xaiv Los Ntawm Kev Tiv Thaiv",
+            "userChooserPlaceholder": "Nrhiav lub npe",
+            "photo": "thaij duab",
+            "photoInstruction": "Yog tias tus neeg uas luam theej koj QR code nyob rau pem hauv ntej ntawm koj, thaij duab rau lawv",
+            "to": "Rau: {{Stream Title}}",
+            "go": "Mus",
+            "title": "Caw",
+            "placeholder": "Xov tooj ntawm tes los yog email chaw nyob",
+            "orInvite": "Los yog caw tib neeg los ntawm kev siv:",
+            "copyLink": "{{ClickOrTap}} luam theej caw link",
+            "shareOrCopyLink": "{{ClickOrTap}} los qhia lossis luam theej caw txuas",
+            "QR": "{{ClickOrTap}} los tsim QR code",
+            "QRtitle": "Luam theej duab QR code",
+            "QRscanned": "Lawv tau tshuaj xyuas nws!",
+            "scannedQR": "{{ClickOrTap}} yog tias tus lej luam theej duab",
             "byEmail": "Email",
-            "byText": "Text",
+            "byText": "Ntawv nyeem",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hav, xyuas qhov no tawm",
+            "PleaseVisitLink": "Thov mus saib qhov txuas hauv qab no:",
+            "InvitingYou": "Kuv caw koj los rau {{title}}",
+            "HasInvitedYou": "{{displayName}} tau caw koj los rau {{title}}",
+            "HasMentionedYou": "{{displayName}} tau hais rau koj hauv &quot;{{title}}&quot;",
+            "YOUAREINVITED": "KOJ Caw koj!",
+            "AcceptInvite": "Txais Caw"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Koj tau raug caw tuaj rau {{title}}. Thov coj mus rhaub {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Koj raug caw lawm. {{ClickOrTap}} ntawm no txais thiab koom."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "tshaj tawm <em>{{message.fields.type}}<\/em> lus rau {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented rau",
+            "startedCallIn": "pib hu rau hauv",
+            "in": "hauv",
+            "body": "hauv {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "tau muab tso rau",
+                "byAvatar": "los ntawm {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "muaj ib tug tshiab {{instructions.fromDisplayType}}",
+                "byAvatar": "ntxiv los ntawm {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Cov lus caw raug xa los ntawm peb tus lej, uas koj cov phooj ywg tseem tsis tau paub. Ua raws li cov ntawv ceev kom qhia rau lawv paub qhov kev caw tuaj ntawm koj, nug lawv kom nyem qhov txuas.",
+            "confirm": "Cov lus caw raug xa los ntawm peb tus lej, uas koj cov phooj ywg tseem tsis tau paub. Koj puas xav ua raws li cov ntawv ceev kom qhia rau lawv paub qhov kev caw tuaj ntawm koj, nug lawv kom nyem qhov txuas.",
+            "check": "Hav, Kuv nyuam qhuav xa koj mus rau lub app {{app}}. Thov xyuas koj sms thiab nyem qhov txuas!",
+            "CheckYourMobile": "Thov kos SMS thiab ua raws li cov lus qhia!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Cov lus caw raug xa los ntawm peb lub npe, uas koj cov phooj ywg tseem tsis tau paub. Ua raws li cov ntawv ceev kom qhia rau lawv paub qhov kev caw tuaj ntawm koj, nug lawv kom nyem qhov txuas.",
+            "confirm": "Cov lus caw raug xa los ntawm peb lub npe, uas koj cov phooj ywg tseem tsis tau paub. Koj puas xav ua raws li cov ntawv ceev kom qhia rau lawv paub qhov kev caw tuaj ntawm koj, nug lawv kom nyem qhov txuas.",
+            "subject": "Koj puas tau txais kev caw?",
+            "body": "Hav, kuv nyuam qhuav xa koj mus rau lub app {{app}}. Thov tshawb xyuas koj tus email thiab nyem qhov txuas hauv qhov ntawd!",
+            "CheckYourEmail": "Thov xyuas koj tus email thiab ua raws li cov lus qhia!"
         }
     },
     "participating": {
         "Title": "Title",
         "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Participants": "Cov neeg koom nrog",
+        "AreYouSureRemoveIdentifier": "Koj puas paub tseeb tias yuav tshem tus cim no?",
+        "AreYouSureUnsubscribeIdentifier": "Koj puas paub tseeb tias unsubscribe tus cim no? Nws yuav kaw cov ntawv ceeb toom rau tus cim no.",
+        "AreYouSureUnsubscribeDevice": "Koj puas paub tseeb tias unsubscribe no ntaus ntawv? Nws yuav kaw cov ntawv ceeb toom rau lub cuab yeej no.",
+        "AreYouSureRemoveParticipant": "Koj puas paub tseeb tias koj xav tshem tus neeg koom nrog no?",
+        "RemoveParticipant": "Tshem tawm cov neeg koom nrog",
+        "Identifiers": "Cov cim",
+        "Devices": "Cov khoom siv",
+        "Streams": "Kwj"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Koj tsis muaj kev tso cai los koom nrog kwj no.",
+        "streamTitle": "{{1}} pib hu nyob",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Kev sib txuas",
+            "microphoneBtn": "Qhib Microphone",
+            "cameraBtn": "Qhib lub koob yees duab",
+            "cameraAndMicrophoneBtn": "Qhib lub koob yees duab thiab Microphone"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mic tawm",
+            "micIsOn": "Mic nyob rau",
+            "cameraIsOff": "Lub koob yees duab kaw",
+            "cameraIsOn": "Lub koob yees duab nyob rau",
+            "screenSharingIsOn": "Screensharing yog nyob rau",
+            "screenSharingIsOff": "Qhia tawm screen",
+            "joinNow": "Koom nrog Hu"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Cov lus qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Txhawm rau siv nws thov ua raws li cov kauj ruam no:",
+            "point1": "Mus rau &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and security&quot; -&gt; &quot;Site Settings&quot; -&gt; &quot;Camera&quot; or &quot;Site Settings&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Tshem tawm {{hostname}} ntawm &quot;Block&quot; daim ntawv teev npe"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Cov lus qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Thov rov rub nplooj ntawv no thiab lees paub kev nkag mus rau {{kind}} los koom nrog lub rooj sab laj."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Cov lus qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Txhawm rau siv nws thov ua raws li cov kauj ruam no:",
+            "point1": "Mus rau koj qhov chaw Android",
+            "point2": "Qhib &quot;Apps &amp; ceeb toom&quot;",
+            "point3": "Nrhiav &quot;{{communityName}}&quot; thiab qhib nws",
+            "point4": "Coj mus rhaub rau Permissions",
+            "point5": "Pab kom {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Cov lus qhia",
+            "permissionDenied": "Tso cai rau {{kind}} tsis kam. Txhawm rau siv nws thov ua raws li cov kauj ruam no:",
+            "point1": "Mus rau koj qhov chaw iOS",
+            "point2": "Qhib &quot;Privacy&quot;",
+            "point3": "Nrhiav {{kind}} thiab qhib nws",
+            "point4": "Nrhiav &quot;{{communityName}}&quot; thiab pab"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Koj tau koom nrog chav",
+            "joining": "Koom nrog: {{userName}}",
+            "sbLeftRoom": "{{userName}} tawm hauv chav",
+            "switchingRoom": "Hloov chav...",
+            "forceDisconnecting": "Koj yuav raug txiav tsis pub dhau 5 vib nas this",
+            "forceDisconnectingImmediately": "Koj raug rho tawm los ntawm tus tswv tsev",
+            "youLeftRoom": "Koj tawm hauv chav",
+            "codeCopied": "Koj tawm hauv chav",
+            "sbBeganFbLive": "{{userName}} tau pib tshaj tawm qhov kev hu no hauv Facebook",
+            "sbStoppedFbLive": "{{userName}} txwv tsis pub tshaj tawm xov tooj no hauv Facebook",
+            "youBeganFbLive": "Koj tau pib tshaj tawm qhov kev hu no hauv Facebook",
+            "youStoppedFbLive": "Koj txwv tsis pub tshaj tawm xov tooj no hauv Facebook",
+            "youStartedLive": "Koj tau pib tshaj tawm qhov kev hu no rau kev cai RTMP",
+            "youStoppedLive": "Koj tau tso tseg qhov kev hu xov tooj no mus rau RTMP kev cai",
+            "sbStartedLiveStreaming": "{{userName}} pib nyob",
+            "sbStoppedLiveStreaming": "{{userName}} xaus nyob",
+            "liveStopped": "Yuam kev thaum xa video mus rau qhov kawg tshwm sim",
+            "youBeganVideoRecording": "Koj tau pib sau lub rooj sab laj no",
+            "youStoppedVideoRecording": "Koj tso tseg lub rooj sab laj no",
+            "linkCopiedToCb": "Txuas tau theej rau daim ntawv teev lus",
+            "codeCopiedToCb": "Code theej rau daim ntawv teev lus",
+            "userHasNoVideo": "Cov neeg koom tsis muaj video",
+            "openInBrowserAlert": "Qhib qhov txuas hauv Safari browser los koom lub rooj sib tham."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
+            "dialogTitle": "Video Chaw",
+            "webCamera": "Lub Koob Yees Duab",
+            "screenSharing": "Kev Sib Tham",
+            "shareAnotherScreen": "Qhia lwm qhov screen",
+            "turnOffCameras": "Tua lub koob yees duab",
+            "turnOffVideo": "Tua lub koob yees duab \/ npo sib koom",
             "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
+            "turnOffScreenSharing": "Tua tawm kev sib koom ntawm qhov screen",
+            "cameraIsTurnedOff": "Lub koob yees duab kaw lawm",
+            "micIsTurnedOff": "Microphone raug kaw",
+            "startFBLive": "Pib Facebook Livestream",
+            "stopFBLive": "Nres Facebook Livestream",
+            "startRecording": "Pib Sau",
+            "stopRecording": "Tso tseg",
+            "start": "Pib",
+            "stop": "Nres",
+            "recordingInProgress": "Cov ntaub ntawv tseem tab tom ua ...",
+            "fbLiveTitle": "Lub npe ntawm Livestream",
+            "fbLiveDescription": "Piav koj Livestream. Nws yog dab tsi?",
+            "fbOnlyMeLiveAccess": "Tsuas yog kuv xwb",
+            "fbFriendsAccess": "phooj ywg",
+            "fbPublicAccess": "Pej xeem",
+            "publishOnTimeline": "Tshaj tawm ntawm ncua sij hawm",
+            "publishToGroup": "Tshaj tawm rau pawg",
+            "fbStartLive": "Mus Nyob",
+            "fbStopLive": "Xaus Livestream",
+            "streamingSettings": "Chaw",
             "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "copy": "Luam",
+            "streamToRTMP": "kwj rau kev cai RTMP",
+            "startBroadcasting": "Pib tshaj tawm",
+            "broadcastingInProgress": "Kev tshaj tawm tab tom ua"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
+            "dialogTitle": "Suab Settings",
+            "speakers": "Cov neeg hais lus",
             "microphone": "Microphone"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
+            "dialogTitle": "Kev Koom Tes",
+            "disconnect": "Txiav tawm",
             "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "tiledScreens": "Cov ntxaij vab tshaus",
+            "loudestExceptMe": "Suab nrov Tsuas yog Kuv",
+            "maximizeLoudest": "Ua kom nrov tshaj plaws",
             "staticMaximized": "Static Maximized",
             "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
+            "manual": "Phau ntawv",
+            "turnOffCamera": "Nkaum video",
             "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "turnOffScreenSharing": "Nkaum kev tshuaj ntsuam sib qhia",
+            "turnOnCamera": "Qhia video",
+            "turnOnAudio": "Unmute suab",
+            "turnOnScreenSharing": "Qhia qhov screen sib koom"
         },
         "streamingSettings": {
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Kev sib ntsib",
+            "MeetingEnded": "Lub rooj sib tham xaus"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Caw",
+            "description": "Inbox rau kev caw"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Cov peev txheej",
+            "description": "kwj los tswj kev nkag mus rau cov peev txheej thiab tshaj tawm cov lus hais txog kev hloov tshiab"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "kom tau txais kev hloov kho tshiab txog kev nce qib ntawm ib txoj haujlwm",
+            "displayType": "Ua haujlwm"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "qeb rau cov haujlwm",
+            "displayType": "Cov hauj lwm"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "ib qho kev paub dhau los rau cov tswv cuab hauv zej zog",
+            "displayType": "Ib qho kev paub dhau los rau cov tswv cuab hauv zej zog"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "txais tos uas tus neeg siv tuaj yeem qhia lawv tus kheej",
+            "displayType": "Ua tsaug"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Tus lej",
+            "description": "lej lej"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Hnub tim",
+            "description": "hnub"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Ntawv nyeem",
+            "description": "lub cev ntawv"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Ntawv nyeem",
+            "description": "cov ntawv me me"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Ntawv nyeem",
+            "description": "nruab nrab lub cev ntawm cov ntawv"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Email Chaw Nyob",
+            "description": "email chaw nyob"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Xov tooj",
+            "description": "tus xov tooj"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "txuas hauv web"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Duab",
+            "description": "pom duab",
+            "newItem": "Ntxiv Duab"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Duab Gallery",
+            "description": "gallery cov duab"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "ib qho album uas ntau yam xov xwm cuam tshuam"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Cov ntaub ntawv",
+            "description": "upload cov ntaub ntawv",
+            "newItem": "Ntxiv Cov Ntaub Ntawv"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Suab Clip",
+            "description": "suab clip",
+            "newItem": "Ntxiv Suab"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
             "description": "video clip",
-            "newItem": "Add Video"
+            "newItem": "Ntxiv Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF ntaub ntawv",
+            "description": "PDF ntaub ntawv",
+            "newItem": "Ntxiv PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "nyob audio or video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Qeb",
+            "description": "ib qeb uas lwm cov kwj deg tuaj yeem cuam tshuam"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Kev Koom Tes Index",
+            "description": "Cov kwj deg muaj feem cuam tshuam \/ tsis cuam tshuam rau qhov no thaum tus neeg siv koom \/ tawm"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Txaus siab",
+            "description": "sawv cev rau tus neeg siv qhov kev txaus siab hauv ib lub ntsiab lus"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Tuaj",
+            "description": "qhov chaw rau cov lus xa los ntawm lwm tus neeg siv"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Kev sib tham",
+            "description": "kev sib tham ntawm cov neeg siv, nrog keeb kwm"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Real-Time Hu",
+            "description": "lub sijhawm tiag tiag video \/ suab hu"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Lus nug",
+            "description": "nqe lus nug"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Teb",
+            "description": "teb kwj"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Hu",
+            "description": "qeb rau kwj\/webrtc",
+            "MaxRelationsExceeded": "Max hu tau tshaj"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "ntaus nplooj ntawv npe",
+        "ModTab": "Hloov kho yam khoom",
+        "Save": "Txuag",
+        "Delete": "Rho tawm",
         "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "record": "Cov ntaub ntawv",
+        "reset": "Rov pib dua",
+        "edit": "Kho kom raug",
+        "title": "lub npe",
+        "description": "piav qhia",
         "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "link": "Txuas",
+        "setUrl": "Teem URL",
+        "save": "Txuag",
+        "setClip": "Txiav tawm Clip",
+        "invalidURL": "Qhov URL tsis raug",
+        "invalidFile": "Cov ntaub ntawv tsis raug",
+        "errorNoSource": "Tsis muaj lub hauv paus",
+        "uploadLimit": "Cov ntaub ntawv loj tshaj plaws: {{size}}",
+        "errorFileSize": "Thov txim, tab sis cov ntaub ntawv loj heev.<br> Cov ntaub ntawv loj tshaj plaws yog {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Rov pib dua",
+        "edit": "Kho kom raug",
+        "title": "lub npe",
+        "description": "piav qhia",
         "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "link": "Txuas",
+        "setUrl": "Teem URL",
+        "save": "Txuag",
+        "setClip": "Txiav tawm Clip",
+        "invalidURL": "Qhov URL tsis raug",
+        "invalidFile": "Cov ntaub ntawv tsis raug",
+        "errorNoSource": "Tsis muaj qhov video",
+        "uploadLimit": "Cov ntaub ntawv loj tshaj plaws: {{size}}",
+        "errorFileSize": "Thov txim, tab sis cov ntaub ntawv loj heev.<br> Cov ntaub ntawv loj tshaj plaws yog {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Rov pib dua",
+        "edit": "Kho kom raug",
+        "title": "lub npe",
+        "description": "piav qhia",
         "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "link": "Txuas",
+        "setUrl": "Teem URL",
+        "save": "Txuag",
+        "setClip": "Txiav tawm Clip",
+        "invalidURL": "Qhov URL tsis raug",
+        "invalidFile": "Cov ntaub ntawv tsis raug",
+        "errorNoSource": "Tsis muaj pdf qhov chaw",
+        "uploadLimit": "Cov ntaub ntawv loj tshaj plaws: {{size}}",
+        "errorFileSize": "Thov txim, tab sis cov ntaub ntawv loj heev.<br> Cov ntaub ntawv loj tshaj plaws yog {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Rov pib dua",
+        "edit": "Kho kom raug",
+        "title": "lub npe",
+        "description": "piav qhia",
         "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "link": "Txuas",
+        "setUrl": "Teem URL",
+        "save": "Txuag",
+        "uploadedImage": "Upload duab",
+        "imageTitle": "Duab lub npe",
+        "setClip": "Txiav tawm Clip",
+        "invalidURL": "Qhov URL tsis raug",
+        "invalidFile": "Cov ntaub ntawv tsis raug",
+        "errorNoSource": "Tsis muaj duab qhov chaw",
+        "uploadLimit": "Cov ntaub ntawv loj tshaj plaws: {{size}}",
+        "errorFileSize": "Thov txim, tab sis cov ntaub ntawv loj heev.<br> Cov ntaub ntawv loj tshaj plaws yog {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Cov lus nug",
+        "Answers": "Teb",
+        "AnswerQuestion": "Teb cov lus nug",
+        "SetYourAnswer": "Thov teb cov lus nug",
+        "NewQuestion": "Lus nug tshiab",
+        "NewAnswer": "Teb tshiab",
+        "AnswerDetails": "Teb Paub meej",
+        "answerOption": "Kev xaiv",
+        "answerOptionExclusive": "Tshwj xeeb",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "Sau koj cov lus teb ntawm no",
+        "SaveQuestion": "Txuag Lus Nug",
+        "SaveAnswer": "Txuag teb",
+        "AddAnotherAnswer": "Ntxiv lwm lo lus teb",
+        "ErrorAnswers": "Thov ntxiv ib lo lus teb",
+        "AlreadyAnswered": "Twb teb lawm",
+        "TitlePlaceholder": "Ntaus koj cov lus nug",
+        "ContentPlaceholder": "Muab cov ntaub ntawv ntxiv ntawm no los pab tib neeg teb",
+        "ErrorTitle": "Cov lus nug yuav tsum tau",
+        "Placeholder": "Qhov chaw"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Kev paub tshiab",
+        "DefineTitle": "Thov txhais lub npe",
+        "Create": "Tsim"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Hu",
+        "MaxCalls": "Max hu",
+        "Update": "Hloov tshiab",
+        "NoCallsYet": "Tseem tsis tau hu",
+        "CallReasonTitle": "Qhov no hu li cas?",
+        "WaitingRoom": "Chav nyob tos"
     }
 }

@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Грешка {{status}} при барањето",
+        "canceled": "Барањето е откажано",
+        "500": "Внатрешна серверска грешка",
+        "404": "Не е пронајдено: {{url}}",
+        "501": "Барањето е прекинато"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Сесијата истече. Освежете ја страницата и обидете се повторно.",
+        "otherDomain": "Блокирано барање за вкрстени домени до странски домен на {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "допрете",
+        "click": "кликнете",
+        "yes": "да",
+        "no": "бр",
+        "Tap": "Допрете",
+        "Click": "Кликнете",
+        "Yes": "Да",
+        "No": "бр"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "јануари",
+        "2": "февруари",
+        "3": "март",
+        "4": "април",
+        "5": "мај",
+        "6": "јуни",
+        "7": "јули",
+        "8": "август",
+        "9": "септември",
+        "10": "октомври",
+        "11": "ноември",
+        "12": "декември"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "второ",
+        "seconds": "секунди",
+        "minute": "минута",
+        "minutes": "минути",
+        "hour": "часови",
+        "day": "ден",
+        "days": "денови",
+        "week": "недела",
+        "weeks": "недели",
+        "month": "месец",
+        "months": "месеци",
+        "year": "година",
+        "years": "години",
+        "decade": "декада",
+        "decades": "децении",
+        "century": "век",
+        "centuries": "векови"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Дозволете пристап до вашиот микрофон",
+        "record": "Снимајте",
+        "recording": "Снимање",
+        "remains": "останува",
+        "maximum": "максимум",
+        "playing": "Играње",
+        "recorded": "Снимено",
+        "clip": "клип",
+        "discard": "Отфрли",
+        "encoding": "Кодирање"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "клип",
+        "errorNoSource": "Нема извор на видео",
+        "SkipAfter": "Прескокни после",
+        "Skip": "Прескокни"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "клип",
+        "errorNoSource": "Нема извор на pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Поставете почеток на клип",
+        "ClipStart": "Почеток на клипот",
+        "SetClipEnd": "Поставете го крајот на клипот",
+        "ClipEnd": "Крај на клипот",
+        "StartMoreEnd": "Почетната позиција не може да биде повеќе од крајна позиција",
+        "EndLessStart": "Крајната позиција не може да биде помала од почетната позиција",
+        "WhichInvalid": "Аргументот „кој“ е неважечки"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Предупредување"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Потврди",
+        "ok": "Да",
+        "cancel": "бр"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Прашај",
+        "ok": "Оди"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "повеќе",
+        "Menu": "Мени"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Грешка при читање на датотеката",
+        "errorType": "Извинете, но овој тип на датотека не е поддржан",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Што би сакале да правите?",
+            "photo": "Направете нова фотографија",
+            "library": "Изберете од библиотеката"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Изберете поголема слика.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Прилагодете ја големината и положбата",
+            "touchscreen": "Користете ги прстите за да зумирате и влечете",
+            "notTouchscreen": "Користете го глувчето и тркалото за да зумирате и влечете"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "минатата ноќ",
+        "lastEvening": "последната вечер",
+        "yesterday": "вчера",
+        "thisMorning": "ова утро",
+        "today": "денес",
+        "tonight": "вечерва",
+        "tomorrowMorning": "Том Мор",
+        "tomorrow": "утре",
+        "hoursAgo": "пред {{h}} часа",
+        "hourAgo": "пред {{h}} час",
+        "minuteAgo": "Пред {{m}} минута",
+        "minutesAgo": "Пред {{m}} минути",
+        "secondAgo": "Пред {{s}} секунда",
+        "secondsAgo": "Пред {{s}} секунди",
+        "fewSecondsAgo": "пред неколку секунди",
+        "rightNow": "веднаш",
+        "inSecond": "за {{s}} секунда",
+        "inSeconds": "за {{s}} секунди",
+        "inMinute": "за {{m}} минута",
+        "inMinutes": "за {{m}} минути",
+        "inHour": "за {{h}} час",
+        "inHours": "за {{h}} часа",
+        "inUnderMinute": "за помалку од 1 минута"
     }
 }

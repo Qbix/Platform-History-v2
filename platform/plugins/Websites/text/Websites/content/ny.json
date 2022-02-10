@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Ulalo wolimbikitsa",
+                "startDate": "Tsiku loyambira",
+                "startTime": "Nthawi Yoyambira",
+                "endDate": "Tsiku Lomaliza",
+                "endTime": "Nthawi Yotsiriza",
+                "budget": "Bajeti"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Sefa Ndi Chidwi",
+                "FilterInterests": "Yambani kulemba chidwi..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Chidwi",
+            "Location": "Malo"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
-            "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "Go": "Pitani",
+            "PasteLinkHere": "https:\/\/..",
+            "BrowseTheWeb": "Sakatulani",
+            "WriteToStartConversation": "Lembani maganizo anu kuti muyambe kukambirana",
+            "StartConversation": "Yambitsani Kucheza",
+            "GotoConversation": "Pitani ku Kukambirana",
+            "reset": "Bwezerani",
+            "edit": "Sinthani",
+            "link": "Lumikizani",
+            "setUrl": "Khazikitsani URL",
+            "save": "Sungani",
+            "setClip": "Dulani Clip",
+            "invalidURL": "URL yolakwika"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Fayilo yayikulu kwambiri kuti isasungidwe. Kukula kwakukulu kwa fayilo {{size}}",
+        "InvalidPDF": "Fayilo si PDF yolondola",
+        "StartTypingTitleOrKeywords": "Yambani kulemba mutu kapena mawu osakira..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Chikalata cha HTML chomwe ogwiritsa ntchito osiyanasiyana amatha kuwona ndikusintha",
+            "displayType": "Nkhani"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Chiwonetsero chazithunzi, chitha kukhala ndi HTML, audio ndi zina.",
+            "displayType": "Yendani"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Chiwonetsero chokhala ndi zithunzi zosiyanasiyana",
+            "displayType": "Ulaliki"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
+            "description": "Chigawo chotsatsa patsamba",
             "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Njira yoyika magulu otsatsa pansi pa dzina",
+            "displayType": "Kuyika kwa malonda"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Zotsatsa zotsatsa",
+            "displayType": "Kutsatsa malonda"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Kampeni yotsatsa",
+            "displayType": "Kampeni yotsatsa"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Ikuyimira tsamba lomwe metadata yake idachotsedwa",
+            "displayType": "tsamba la webu"
         }
     }
 }

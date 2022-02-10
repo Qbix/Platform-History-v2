@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "{{1}} ಒಳಗೆ"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "ಮೀಟರ್",
+        "meters": "ಮೀಟರ್",
+        "kilometer": "ಕಿಲೋಮೀಟರ್",
+        "kilometers": "ಕಿಯೋಮೀಟರ್‌ಗಳು",
+        "km": "ಕಿ.ಮೀ",
+        "mile": "ಮೈಲಿ",
+        "miles": "ಮೈಲುಗಳಷ್ಟು",
+        "mi": "ಮೈ",
+        "foot": "ಪಾದ",
+        "feet": "ಅಡಿ",
+        "inches": "ಇಂಚುಗಳು"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "ನಾನು {{select}} ರಲ್ಲಿ ನಡೆಯುವ ವಿಷಯಗಳಲ್ಲಿ ಆಸಕ್ತಿ ಹೊಂದಿದ್ದೇನೆ",
+        "update": "ನನ್ನ ಸ್ಥಳವನ್ನು ನವೀಕರಿಸಿ",
+        "set": "ನನ್ನ ಸ್ಥಳವನ್ನು ಹೊಂದಿಸಿ",
+        "prompt": "{{ClickOrTap}} ಇಲ್ಲಿಗೆ<br> ನಿಮ್ಮ ಹೊಂದಿಸಿ<br> ಸ್ಥಳ",
+        "myCurrentLocation": "ನನ್ನ ಪ್ರಸ್ತುತ ಸ್ಥಳ",
+        "enterAddress": "ವಿಳಾಸವನ್ನು ನಮೂದಿಸಿ",
+        "enterPostcode": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಪೋಸ್ಟ್‌ಕೋಡ್ \/ ಪಿನ್‌ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "ಸ್ಥಳವನ್ನು ಸೇರಿಸಿ",
+            "title": "ಹೊಸ ಸ್ಥಳ",
+            "nameYourLocation": "ನಿಮ್ಮ ಸ್ಥಳವನ್ನು ಹೆಸರಿಸಿ"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "ಈ ಸ್ಥಳವನ್ನು ಉಳಿಸುವುದೇ?",
+            "message": "ಭವಿಷ್ಯದಲ್ಲಿ ಈ ಸ್ಥಳವನ್ನು ಮತ್ತೆ ಬಳಸಲು ನೀವು ಯೋಜಿಸುತ್ತೀರಾ?",
+            "ok": "ಹೌದು",
+            "cancel": "ಸಂ"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ಈ ಸ್ಥಳವನ್ನು ಹೆಸರಿಸಿ",
+            "placeholder": "ಮನೆ, ಕೆಲಸ ಇತ್ಯಾದಿ.",
+            "ok": "ಉಳಿಸಿ"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "ಸ್ಥಳವನ್ನು ಆಯ್ಕೆಮಾಡಿ"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "ಈ ಸ್ಥಳದ ಒಳಗೆ ಯಾವುದೇ ಪ್ರದೇಶವಿದೆಯೇ?",
+        "newArea": "ಹೊಸ ಪ್ರದೇಶ",
+        "promptTitle": "ಪ್ರದೇಶಕ್ಕೆ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:",
+        "absent": "ದಯವಿಟ್ಟು ಪ್ರದೇಶವನ್ನು ಹೊಂದಿಸಿ",
+        "error": "ದೋಷ",
+        "exist": "ಪ್ರದೇಶ ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ",
+        "addNewArea": "ಹೊಸ ಪ್ರದೇಶವನ್ನು ಸೇರಿಸಿ",
+        "add": "ಸೇರಿಸಿ"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ಸ್ಥಳಗಳ ಸಂಗ್ರಹ",
+            "displayType": "ಸ್ಥಳಗಳು"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "ಕಟ್ಟಡ, ಸ್ಥಳ, ಹಡಗು, ಉದ್ಯಾನವನ ಇತ್ಯಾದಿಗಳನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ.",
+            "displayType": "ಸ್ಥಳ"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "ಕೊಠಡಿ ಅಥವಾ ಸೂಟ್‌ನಂತಹ ಸ್ಥಳದೊಳಗಿನ ಪ್ರದೇಶವನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ",
+            "displayType": "ಪ್ರದೇಶ"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "ಕಟ್ಟಡ ಅಥವಾ ಹಡಗಿನಲ್ಲಿ ನೆಲವನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ",
+            "displayType": "ಮಹಡಿ"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "ಕಟ್ಟಡ ಅಥವಾ ಹಡಗಿನಲ್ಲಿ ಕಾಲಮ್ ಅನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ",
+            "displayType": "ಅಂಕಣ"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "ಜಿಯೋಹಾಶ್‌ನ ನಿರ್ದಿಷ್ಟ ಅಂತರದಲ್ಲಿರುವ ವಸ್ತುಗಳ ವರ್ಗ",
+            "displayType": "ಸ್ಥಳಗಳಿಂದ ಹತ್ತಿರ"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "ಜಿಯೋಹಾಶ್‌ನ ನಿರ್ದಿಷ್ಟ ಅಂತರದಲ್ಲಿರುವ ವಸ್ತುಗಳ ವರ್ಗ, ಆಸಕ್ತಿಗೆ ಹೊಂದಿಕೆಯಾಗುತ್ತದೆ",
+            "displayType": "ಆಸಕ್ತಿಯ ಸ್ಥಳಗಳು"
         }
     }
 }

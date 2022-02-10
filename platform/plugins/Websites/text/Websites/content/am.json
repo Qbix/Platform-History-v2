@@ -4,14 +4,14 @@
             "placeholders": {
                 "link": "ለማስተዋወቅ አገናኝ",
                 "startDate": "የመጀመሪያ ቀን",
-                "startTime": "የመነሻ ሰዓት",
-                "endDate": "ማብቂያ ቀን",
-                "endTime": "የማብቂያ ጊዜ",
+                "startTime": "የመጀመሪያ ጊዜ",
+                "endDate": "የመጨረሻ ቀን",
+                "endTime": "የመጨረሻ ጊዜ",
                 "budget": "በጀት"
             },
             "interests": {
-                "Title": "በፍላጎት ያጣሩ",
-                "FilterInterests": "ፍላጎት መተየብ ይጀምሩ ..."
+                "Title": "በፍላጎት አጣራ",
+                "FilterInterests": "ፍላጎት መተየብ ጀምር..."
             },
             "Interest": "ፍላጎት",
             "Location": "አካባቢ"
@@ -20,46 +20,46 @@
     "webpage": {
         "composer": {
             "Go": "ሂድ",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "ያስሱ",
-            "WriteToStartConversation": "ውይይቱን ለመጀመር ሀሳቦችዎን ይፃፉ",
-            "StartConversation": "ውይይት ይጀምሩ",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "አስስ",
+            "WriteToStartConversation": "ውይይቱን ለመጀመር ሀሳብዎን ይፃፉ",
+            "StartConversation": "ውይይት ጀምር",
             "GotoConversation": "ወደ ውይይት ይሂዱ",
             "reset": "ዳግም አስጀምር",
             "edit": "አርትዕ",
             "link": "አገናኝ",
-            "setUrl": "ዩአርኤል አዘጋጅ",
+            "setUrl": "URL አዘጋጅ",
             "save": "አስቀምጥ",
-            "setClip": "ቅንጥብ ይቁረጡ",
-            "invalidURL": "ልክ ያልሆነ ዩአርኤል"
+            "setClip": "ቁረጥ ክሊፕ",
+            "invalidURL": "ልክ ያልሆነ URL"
         },
-        "FileTooLarge": "ለመሸጎጫ ፋይል በጣም ትልቅ ነው። ከፍተኛው የፋይል መጠን {{size}}",
-        "InvalidPDF": "ፋይሉ የሚሰራ ፒዲኤፍ አይደለም",
-        "StartTypingTitleOrKeywords": "ርዕስ ወይም ቁልፍ ቃላትን መተየብ ይጀምሩ ..."
+        "FileTooLarge": "ፋይል ለመሸጎጥ በጣም ትልቅ ነው። ከፍተኛው የፋይል መጠን {{size}}",
+        "InvalidPDF": "ፋይል የሚሰራ ፒዲኤፍ አይደለም።",
+        "StartTypingTitleOrKeywords": "ርዕስ ወይም ቁልፍ ቃላትን መተየብ ጀምር..."
     },
     "types": {
         "Websites\/article": {
-            "description": "የተለያዩ ተጠቃሚዎች ማየት እና ማርትዕ የሚችሉበት የኤችቲኤምኤል ሰነድ",
+            "description": "የተለያዩ ተጠቃሚዎች ማየት እና ማረም የሚችሉት የኤችቲኤምኤል ሰነድ",
             "displayType": "አንቀጽ"
         },
         "Websites\/slide": {
-            "description": "በዝግጅት አቀራረብ ውስጥ ስላይድ ፣ ኤችቲኤምኤል ፣ ኦዲዮ ወዘተ ሊያካትት ይችላል",
-            "displayType": "ተንሸራታች"
+            "description": "የዝግጅት አቀራረብ ስላይድ፣ HTML፣ ኦዲዮ ወዘተ ሊያካትት ይችላል።",
+            "displayType": "ስላይድ"
         },
         "Websites\/presentation": {
-            "description": "የተለያዩ ስላይዶችን ያካተተ አቀራረብ",
+            "description": "የተለያዩ ስላይዶችን ያካተተ የዝግጅት አቀራረብ",
             "displayType": "የዝግጅት አቀራረብ"
         },
         "Websites\/advert\/unit": {
-            "description": "በአንድ ድር ጣቢያ ላይ የማስታወቂያ ክፍል",
+            "description": "በድር ጣቢያ ላይ የማስታወቂያ ክፍል",
             "displayType": "የማስታወቂያ ክፍል"
         },
         "Websites\/advert\/placement": {
-            "description": "የማስታወቂያ ክፍሎችን በስም የመመደብ መንገድ",
+            "description": "የማስታወቂያ ክፍሎችን በስም የመቧደን መንገድ",
             "displayType": "የማስታወቂያ አቀማመጥ"
         },
         "Websites\/advert\/creative": {
-            "description": "ለማስታወቂያ ይዘት",
+            "description": "የማስታወቂያ ይዘት",
             "displayType": "ፈጠራን ያስተዋውቁ"
         },
         "Websites\/advert\/campaign": {
@@ -67,7 +67,7 @@
             "displayType": "የማስታወቂያ ዘመቻ"
         },
         "Websites\/webpage": {
-            "description": "ዲበ ውሂቡ የተቧጨበትን ድር ጣቢያ ይወክላል",
+            "description": "ሜታዳታው የተቦጫጨቀ ድር ጣቢያን ይወክላል",
             "displayType": "ድረገፅ"
         }
     }

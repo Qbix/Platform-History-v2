@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "intra {{1}}"
     },
     "units": {
         "meter": "meter",
-        "meters": "meters",
+        "meters": "metris",
         "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "kilometers": "kiometrorum",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "milliare",
+        "miles": "milia passuum",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "pedites",
+        "feet": "pedes",
+        "inches": "pollices"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
+        "interested": "Im &#39;interested in rebus intra {{select}} of",
+        "update": "Renova meum Location",
+        "set": "Pone mihi Location",
+        "prompt": "{{ClickOrTap}} hic to<br> pone tibi<br> locus",
+        "myCurrentLocation": "Mihi locus current",
+        "enterAddress": "Intra electronica",
         "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Adde Location",
+            "title": "Novum Location",
+            "nameYourLocation": "Nomen tuum locus"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
+            "title": "Serva hunc locum?",
+            "message": "Placet uti hoc loco in futurum?",
+            "ok": "Ita",
             "cancel": "No"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Nomen hunc locum",
+            "placeholder": "Domum, Opus etc.",
+            "ok": "salvare"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Elige Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
+        "filterPlaceholder": "Nulla regio intra hunc locum?",
+        "newArea": "Nova regio",
+        "promptTitle": "Intra nomen areae:",
+        "absent": "Quaeso pone regio",
         "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
+        "exist": "Area iam est",
+        "addNewArea": "Addere novam regio",
         "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
+            "description": "a collection of locis",
             "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Repraesentat aedificium, venum, navem, parcum, &amp;c.",
+            "displayType": "Locus"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
+            "description": "Repraesentat spatium intra locum, ut cubiculum seu suite",
             "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Repraesentat areæ in aedificium aut navis",
+            "displayType": "Tabulatum"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Repraesentat columna in aedificationem vel navis",
+            "displayType": "Columna"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Genus rerum intra certum spatium geohash",
+            "displayType": "Prope per loca"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Genus rerum intra certum spatium geohash, usuram congruens",
+            "displayType": "Loca interest"
         }
     }
 }

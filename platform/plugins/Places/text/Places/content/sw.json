@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} lat, {{100}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "PostcodeLabel": "{{1}} {{2}})",
+        "Title": "ndani ya {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "kilomita",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "maili",
+        "miles": "maili",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "mguu",
+        "feet": "miguu",
+        "inches": "inchi"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ninavutiwa na mambo yanayoendelea ndani ya {{select}} ya",
+        "update": "Sasisha Mahali Pangu",
+        "set": "Weka Mahali Pangu",
+        "prompt": "{{ClickOrTap}} hapa kwa<br> weka yako<br> eneo",
+        "myCurrentLocation": "Eneo langu la sasa",
+        "enterAddress": "Weka anwani",
+        "enterPostcode": "Tafadhali weka msimbo wako wa posta \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Ongeza Mahali",
+            "title": "Mahali Mpya",
+            "nameYourLocation": "Taja eneo lako"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Ungependa kuhifadhi eneo hili?",
+            "message": "Je, unapanga kutumia eneo hili tena katika siku zijazo?",
+            "ok": "Ndiyo",
+            "cancel": "Hapana"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Taja eneo hili",
+            "placeholder": "Nyumbani, Kazini nk.",
+            "ok": "Hifadhi"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Chagua Mahali"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Eneo lolote ndani ya eneo hili?",
+        "newArea": "Eneo jipya",
+        "promptTitle": "Weka jina la eneo:",
+        "absent": "Tafadhali weka eneo",
+        "error": "Hitilafu",
+        "exist": "Eneo tayari lipo",
+        "addNewArea": "Ongeza eneo jipya",
+        "add": "Ongeza"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "mkusanyiko wa maeneo",
+            "displayType": "Maeneo"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Inawakilisha jengo, ukumbi, meli, bustani, nk.",
+            "displayType": "Mahali"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Inawakilisha eneo ndani ya eneo, kama vile chumba au chumba",
+            "displayType": "Eneo"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Inawakilisha sakafu katika jengo au meli",
+            "displayType": "Sakafu"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Inawakilisha safu katika jengo au meli",
+            "displayType": "Safu"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategoria ya vitu vilivyo umbali fulani wa geohash",
+            "displayType": "Karibu na maeneo"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Aina ya vitu vilivyo umbali fulani wa geohash, vinavyolingana na mambo yanayokuvutia",
+            "displayType": "Maslahi ya maeneo"
         }
     }
 }

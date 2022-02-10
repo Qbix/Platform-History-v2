@@ -7,22 +7,22 @@
                 "startTime": "Начален час",
                 "endDate": "Крайна дата",
                 "endTime": "Крайно време",
-                "budget": "бюджет"
+                "budget": "Бюджет"
             },
             "interests": {
                 "Title": "Филтриране по интерес",
-                "FilterInterests": "Започнете да въвеждате интерес ..."
+                "FilterInterests": "Започнете да пишете интерес..."
             },
-            "Interest": "интерес",
-            "Location": "местоположение"
+            "Interest": "Интерес",
+            "Location": "Местоположение"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Отивам",
-            "PasteLinkHere": "Поставете връзка тук",
-            "BrowseTheWeb": "паса",
-            "WriteToStartConversation": "Напишете мислите си, за да започнете разговора",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Прегледайте",
+            "WriteToStartConversation": "Напишете вашите мисли, за да започнете разговора",
             "StartConversation": "Започнете разговор",
             "GotoConversation": "Отидете в Разговор",
             "reset": "Нулиране",
@@ -30,29 +30,29 @@
             "link": "Връзка",
             "setUrl": "Задайте URL",
             "save": "Запазете",
-            "setClip": "Изрежете клип",
+            "setClip": "Изрежете клипс",
             "invalidURL": "невалиден адрес"
         },
         "FileTooLarge": "Файлът е твърде голям за кеширане. Максимален размер на файла {{size}}",
-        "InvalidPDF": "Файлът не е валиден PDF файл",
-        "StartTypingTitleOrKeywords": "Започнете да пишете заглавие или ключови думи ..."
+        "InvalidPDF": "Файлът не е валиден PDF",
+        "StartTypingTitleOrKeywords": "Започнете да пишете заглавие или ключови думи..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML документ, който различни потребители могат да преглеждат и редактират",
-            "displayType": "статия"
+            "description": "HTML документ, който различни потребители могат да разглеждат и редактират",
+            "displayType": "член"
         },
         "Websites\/slide": {
-            "description": "Слайд в презентация, може да включва HTML, аудио и т.н.",
+            "description": "Слайд в презентация може да включва HTML, аудио и др.",
             "displayType": "пързалка"
         },
         "Websites\/presentation": {
             "description": "Презентация, състояща се от различни слайдове",
-            "displayType": "представяне"
+            "displayType": "Презентация"
         },
         "Websites\/advert\/unit": {
-            "description": "Рекламна единица на уебсайт",
-            "displayType": "Рекламен елемент"
+            "description": "Рекламна единица в уебсайт",
+            "displayType": "Рекламен блок"
         },
         "Websites\/advert\/placement": {
             "description": "Начин за групиране на рекламни единици под име",
@@ -60,14 +60,14 @@
         },
         "Websites\/advert\/creative": {
             "description": "Съдържание за реклама",
-            "displayType": "Рекламно рекламно послание"
+            "displayType": "Рекламно послание"
         },
         "Websites\/advert\/campaign": {
             "description": "Рекламна кампания",
             "displayType": "Рекламна кампания"
         },
         "Websites\/webpage": {
-            "description": "Представлява уебсайт, чиито метаданни са били бракувани",
+            "description": "Представлява уебсайт, чиито метаданни са били изтъркани",
             "displayType": "уеб страница"
         }
     }

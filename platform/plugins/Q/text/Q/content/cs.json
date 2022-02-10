@@ -1,22 +1,22 @@
 {
     "request": {
         "error": "Chyba {{status}} během požadavku",
-        "canceled": "Požadavek byl zrušen",
+        "canceled": "Žádost byla zrušena",
         "500": "Interní chyba serveru",
         "404": "Nenalezeno: {{url}}",
-        "501": "Požadavek byl přerušen"
+        "501": "Žádost byla přerušena"
     },
     "nonce": {
         "sameDomain": "Relace vypršela. Obnovte stránku a zkuste to znovu.",
-        "otherDomain": "Blokovaný požadavek mezi doménami na cizí doménu na adrese {{baseUrl}}"
+        "otherDomain": "Zablokován požadavek z více domén na zahraniční doménu na adrese {{baseUrl}}"
     },
     "words": {
-        "tap": "klepněte na",
+        "tap": "klepnout",
         "click": "klikněte",
         "yes": "Ano",
         "no": "Ne",
-        "Tap": "Klepněte na",
-        "Click": "Klikněte na",
+        "Tap": "Klepněte",
+        "Click": "Klikněte",
         "Yes": "Ano",
         "No": "Ne"
     },
@@ -35,17 +35,17 @@
         "12": "prosinec"
     },
     "audio": {
-        "allowMicrophoneAccess": "Povolte přístup k mikrofonu",
+        "allowMicrophoneAccess": "Povolte přístup ke svému mikrofonu",
         "record": "Záznam",
         "recording": "Záznam",
-        "remains": "zbytky",
+        "remains": "Zůstává",
         "maximum": "maximum",
         "playing": "Hraní",
         "recorded": "Zaznamenáno",
         "clip": "klip",
         "orupload": "Nebo Nahrát",
         "usethis": "Použij toto",
-        "discard": "Zlikvidujte",
+        "discard": "Vyřadit",
         "encoding": "Kódování"
     },
     "alert": {
@@ -64,32 +64,32 @@
         "errorReadingFile": "Chyba při čtení souboru",
         "cameraCommands": {
             "prompt": "Co bys rád dělal?",
-            "photo": "Vezměte si novou fotku",
+            "photo": "Pořídit novou fotku",
             "library": "Vyberte z knihovny"
         },
         "tooSmall": "Vyberte prosím větší obrázek.",
         "cropping": {
-            "title": "Nastavte velikost a polohu",
-            "touchscreen": "Prstem můžete přiblížit a přetáhnout",
-            "notTouchscreen": "Pro přiblížení a přetažení použijte myš a kolečko"
+            "title": "Upravte velikost a polohu",
+            "touchscreen": "K přiblížení a přetažení použijte prsty",
+            "notTouchscreen": "Pomocí myši a kolečka můžete přibližovat a táhnout"
         },
         "errorType": "Omlouváme se, ale tento typ souboru není podporován"
     },
     "timestamp": {
         "lastNight": "minulou noc",
-        "lastEvening": "poslední den",
+        "lastEvening": "poslední večer",
         "yesterday": "včera",
-        "thisMorning": "toto ráno",
+        "thisMorning": "dnes ráno",
         "today": "dnes",
         "tonight": "dnes večer",
-        "tomorrowMorning": "tom ráno",
+        "tomorrowMorning": "ráno",
         "tomorrow": "zítra",
-        "hoursAgo": "{{h}} před hodinami",
-        "hourAgo": "{{h}} před hodinou",
-        "minuteAgo": "{{m}} před minutou",
-        "minutesAgo": "{{m}} před minutami",
-        "secondAgo": "{{s}} před sekundou",
-        "secondsAgo": "{{s}} sekund",
+        "hoursAgo": "před {{h}} hodinami",
+        "hourAgo": "před {{h}} hodinou",
+        "minuteAgo": "před {{m}} minutou",
+        "minutesAgo": "před {{m}} minutami",
+        "secondAgo": "před {{s}} sekundou",
+        "secondsAgo": "před {{s}} sekundami",
         "fewSecondsAgo": "před sekundami",
         "rightNow": "právě teď",
         "inSecond": "za {{s}} sekundu",
@@ -107,21 +107,21 @@
     "video": {
         "clip": "klip",
         "errorNoSource": "Žádný zdroj videa",
-        "SkipAfter": "Přeskočit po",
+        "SkipAfter": "Přeskočit za",
         "Skip": "Přeskočit"
     },
     "pdf": {
         "clip": "klip",
-        "errorNoSource": "Žádný zdroj ve formátu PDF"
+        "errorNoSource": "Žádný zdroj pdf"
     },
     "clip": {
-        "SetClipStart": "Nastavte začátek klipu",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Nastavte konec klipu",
+        "SetClipStart": "Nastavte Spuštění klipu",
+        "ClipStart": "Start klipu",
+        "SetClipEnd": "Nastavit konec klipu",
         "ClipEnd": "Konec klipu",
-        "StartMoreEnd": "Počáteční pozice nemůže být větší než koncová poloha",
-        "EndLessStart": "Koncová poloha nesmí být menší než počáteční poloha",
-        "WhichInvalid": "Argument „který“ je neplatný"
+        "StartMoreEnd": "Počáteční pozice nemůže být větší než koncová pozice",
+        "EndLessStart": "Koncová poloha nemůže být menší než počáteční poloha",
+        "WhichInvalid": "Argument &#39;který&#39; je neplatný"
     },
     "durations": {
         "second": "druhý",
@@ -130,9 +130,9 @@
         "minutes": "minut",
         "hour": "hodin",
         "day": "den",
-        "days": "dnů",
+        "days": "dní",
         "week": "týden",
-        "weeks": "týdny",
+        "weeks": "týdnů",
         "month": "Měsíc",
         "months": "měsíce",
         "year": "rok",

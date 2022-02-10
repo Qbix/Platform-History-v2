@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Аналитика",
+        "Daily": "Күнделікті",
+        "Weekly": "Апта сайын",
+        "Monthly": "Ай сайын",
+        "Application": "Қолдану",
+        "Pages": "Беттер",
+        "Services": "Қызметтер",
+        "Faq": "Жиі қойылатын сұрақтар",
+        "WeekDays": "Апта күндері"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "кіру",
+        "LogOut": "шығу"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "{{1}} менің негізгі {{2}} ретінде орнату",
+        "ChoosePassPhrase": "Жүйеге кіру үшін <strong>рұқсат сөз тіркесін<\/strong> таңдаңыз.<br> Сіз оңай есте сақтайтын бірнеше сөзден тұратын қарапайым сөз тіркесі.",
+        "ChoosePassPhraseSeeSuggestions": "Тіркелгіңізді қорғау үшін жақсы <strong>өту фразасын<\/strong> таңдаңыз. Кейбір идеялар үшін ұсыныстарды қараңыз.",
+        "LogOutAndTryAgain": "Жүйеден шығып, әрекетті қайталаңыз",
+        "IfYouFeel": "Егер сіз бірдеңе дұрыс емес екенін сезсеңіз, мүмкін",
+        "SetIdentifierButtonTitle": "басынан бастаңыз"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Жұмысты бастау"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Жұмысты бастау",
+        "Authorize": "Рұқсат ету",
+        "TermsLabel": "Мен оқыдым және келісемін<br> {{link}}",
+        "TermsTitle": "Шарттар",
+        "mustAgree": "Алдымен сіз шарттармен келісуіңіз керек."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Мен {{link}} қабылдаймын",
+        "TermsTitle": "Шарттар"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Рұқсат",
+        "prompt": "Хабарландыруларды қосқыңыз келе ме? Сізді қызықтыратын нәрселер туралы нақты уақытта жаңартулар аласыз.",
+        "yes": "Иә",
+        "no": "Жоқ",
+        "WelcomePleaseVerifyEmail": "Қош келдіңіз! Электрондық пошта мекенжайыңызды растаңыз.",
+        "WelcomeVerifyEmail": "Қош келдіңіз! Электрондық пошта мекенжайыңызды растаңыз.",
+        "ForgetPass": "Эй, құпия сөзді ұмытып қалдың ба?",
+        "PassphraseSaved": "Құпия сөз тіркесі сақталды.",
+        "IdentifierActivated": "{{type}} белсендірілді.",
+        "CompletedActivation": "Сіз пайдаланушыны белсендіруді аяқтадыңыз.",
+        "CompletedActivationLogIn": "Сіз пайдаланушыны белсендіруді аяқтадыңыз. Қазір кіріп көріңіз."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Байланысты таңдаңыз",
+            "CreateAccount": "+ Жаңа контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create табылмады",
+            "SearchByName": "Аты бойынша іздеу",
+            "EmptyContacts": "Контактілер табылмады..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "{{displayName}} контактісін таңдаңыз"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Белгіні таңдаңыз.",
+        "inviteUser": "Пайдаланушыларды шақыру",
+        "selectRole": "Рөлді таңдаңыз",
+        "inviteRole": "Шақыру {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Жарамсыз тіл таңдалды",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Қош келдіңіз",
+        "directions": "Тіркелгі жасаңыз немесе жүйеге кіріңіз.",
+        "directionsNoRegister": "Есептік жазбаңыз болса жүйеге кіріңіз.",
+        "goButton": "Барыңыз",
+        "passphrase": "Құпия сөзді енгізіңіз:",
+        "loginButton": "Жұмысты бастау",
+        "registerButton": "Жұмысты бастау",
+        "resendButton": "Белсендіру хабарын жіберу",
+        "forgot": "Ұмытып қалдыңыз ба?",
+        "resendConfirm": "Құпия фразаны қалпына келтіру үшін хабар жібергіңіз келе ме?",
+        "resendSuccess": "Құпия фразаны қалпына келтіру үшін хабарды тексеріңіз",
+        "resendClose": "Жабық",
+        "noPassphrase": "Жүйеге кірмес бұрын белсендіру хабарындағы сілтемені басу арқылы рұқсат сөз тіркесін орнатуыңыз керек.",
+        "notVerified": "Жүйеге кіру үшін өзіңізге белсендіру хабарламасын жіберуіңіз керек.",
+        "emailExists": "Осы электрондық пошта арқылы бұрын тіркелуге әрекеттеніп көрдіңіз бе? Олай болса, тіркелгіңізді белсендіру үшін кіріс жәшігін тексеріңіз. <a href='#resend' class='Q_button Users_activation_resend'>Хабарды қайта жіберу үшін басыңыз<\/a>",
+        "mobileExists": "Осы ұялы телефон нөмірімен бұрын тіркелуге әрекеттеніп көрдіңіз бе? Олай болса, есептік жазбаңызды белсендіру үшін SMS-ті тексеріңіз. <a href='#resend' class='Q_button Users_activation_resend'>Хабарды қайта жіберу үшін басыңыз<\/a>",
+        "usingOther": "немесе сіз аласыз",
+        "prompt": "Қолданушы атын таңдаңыз:",
+        "newUser": "немесе төменде жаңа есептік жазба жасаңыз",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "ұялы телефон нөмірі немесе электрондық пошта",
+            "mobile": "ұялы телефон нөмірін енгізіңіз",
+            "email": "электрондық пошта мекенжайыңызды енгізіңіз",
+            "username": "әріптер мен сандарды ғана пайдаланыңыз"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Қызмет көрсету шарттарын қабылдайсыз ба?",
+        "facebookNoEmail": "Сіздің Facebook тіркелгіңізде расталған электрондық пошта мекенжайы жоқ. Тек жергілікті жолмен жүйеге кіріңіз.",
+        "picTooltip": "Бұл суретті кейінірек өзгертуге болады",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "{{host}} жүйесіне {{timestamp}} уақытта кіріңіз",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Әмиянға қайта бағытталуда",
+                "content": "Осы диалогты жапқаннан кейін сіз әмияныңызға түсесіз. Жүйеге кіргеннен кейін осы бетке оралыңыз."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Жүйеге кіру жолын қосыңыз",
+        "sendMessage": "Белсендіру хабарын жіберу",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "ұялы телефон нөмірін немесе электрондық поштаны енгізіңіз",
+            "mobile": "ұялы телефон нөміріңізді енгізіңіз",
+            "email": "электрондық пошта мекенжайыңызды енгізіңіз",
+            "username": "пайдаланушы аты"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Есептік жазба",
+        "areUsing": "Сіз {{platform}} ретінде пайдаланасыз",
+        "noLongerUsing": "Сіз енді {{platform}} ретінде қосылмадыңыз",
+        "doAuth": "Осы тіркелгімен кіріңіз",
+        "doSwitch": "Осы есептік жазбаға ауысыңыз"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Меншік иесі",
+        "Admin": "Админ",
+        "Member": "мүше",
+        "Guest": "Қонақ",
+        "Host": "Хост"
     }
 }

@@ -1,124 +1,124 @@
 {
     "preview": {
-        "NewItemTitle": "አዲስ ንጥል"
+        "NewItemTitle": "አዲስ ነገር"
     },
     "labels": {
         "Streams\/invited": "የጋበዝኳቸው ሰዎች",
-        "Streams\/invitedMe": "ማን እንደጋበዘኝ",
+        "Streams\/invitedMe": "ማን ጋበዘኝ።",
         "AreYouAgree": "እርስዎ ይስማማሉ?",
         "Yes": "አዎ",
         "No": "አይ",
         "DoYouAgree": "ትስማማለህ?"
     },
     "interests": {
-        "Filter": "ምን ደስ ይልዎታል?",
-        "CanAdd": "የሚፈልጉትን ነገር አሁንም የማይፈልጉ ከሆነ ከዚህ በታች አንድ አዲስ ፍላጎት ማከል ይችላሉ:",
-        "TrySynonyms": "አታዩትም? አንዳንድ ተመሳሳይ ተመሳሳይ ቃላት ሞክር.",
-        "AddUnderCategory": "በምድብ ውስጥ አክል ...",
+        "Filter": "የእርስዎ ፍላጎቶች ምንድን ናቸው?",
+        "CanAdd": "አሁንም የሚፈልጉትን ማግኘት ካልቻሉ፣ ከዚህ በታች አዲስ ፍላጎት ማከል ይችላሉ።",
+        "TrySynonyms": "አይታየውም? አንዳንድ ተመሳሳይ ቃላትን ይሞክሩ።",
+        "AddUnderCategory": "ከምድብ ስር አክል...",
         "Other": "ሌላ",
         "Unlisted": "ያልተዘረዘረ"
     },
     "chat": {
-        "flaggedForAdminReview": "መልዕክት ለአስተዳዳሪ ግምገማ ተጠቁሟል. ለማዘግየት እንደገና መታ ያድርጉ.",
-        "noOneSaid": "ማንም አልነገርም",
+        "flaggedForAdminReview": "መልእክት ለአስተዳዳሪ ግምገማ ተጠቁሟል። ባንዲራ ለማንሳት እንደገና ይንኩ።",
+        "noOneSaid": "ማንም ምንም የተናገረው የለም።",
         "closeChatButton": "ውይይት ዝጋ",
-        "closeChatConfirmTitle": "ይህ ውይይት ይዝጉ?",
+        "closeChatConfirmTitle": "ይህን ውይይት ዝጋው?",
         "closeChatConfirm": "እርግጠኛ ነዎት ይህን ውይይት መዝጋት ይፈልጋሉ?",
         "closeChatConfirmYes": "አዎ",
         "closeChatConfirmNo": "አይ",
-        "earlierComments": "ቀደምት አስተያየቶች",
-        "Subscribed": "ማሳወቂያዎችን ድምጸ-ከል አድርግ",
-        "Unsubscribed": "ማሳወቂያዎችን ያግኙ",
+        "earlierComments": "ቀደም አስተያየቶች",
+        "Subscribed": "ማሳወቂያዎች ነቅተዋል።",
+        "Unsubscribed": "ማሳወቂያዎች ድምጸ-ከል ተደርገዋል።",
         "notAllowedToJoinCall": "ይህንን ውይይት ለመቀላቀል ፈቃድ የልዎትም።",
-        "startedConversation": "ውይይት ጀመርኩ",
-        "RealTimeCall": "እውነተኛ ሰዓት ጥሪ",
-        "SearchByName": "በስም ይፈልጉ",
+        "startedConversation": "ውይይት ጀመረ",
+        "RealTimeCall": "የእውነተኛ ጊዜ ጥሪ",
+        "SearchByName": "በስም ፈልግ",
         "Notifications": {
-            "Visit": "{{displayName}} ውይይቱን እየጎበኘ ነው",
-            "Join": "{{displayName}} ውይይቱን ተቀላቅሏል",
-            "Leave": "{{displayName}} ውይይቱን ትቶ ወጥቷል",
-            "RelatedTo": "{{displayName}} አንድ {{stream.displayType}} ጀምረዋል"
+            "Visit": "{{999} ውይይቱን እየጎበኘ ነው።",
+            "Join": "{{displayName}} ውይይቱን ተቀላቅሏል።",
+            "Leave": "{{999} ውይይቱን ለቋል",
+            "RelatedTo": "{{displayName}} አንድ {{stream.displayType}} ጀምሯል"
         }
     },
     "notifications": {
-        "*": "መልዕክት {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} እንዲህ አለ:",
-        "Streams\/changed": "በ {{stream.fields.title}} ለውጦች",
-        "Streams\/invite": "ወደ {{& stream.fields.title}} ተጋብዘዋል",
-        "Streams\/announcement": "ማስታወቂያ በ {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} የዥረት መዳረሻ ለውጧል",
-        "Streams\/chat\/edit": "የቻት መልዕክት አርትዕ ተደርጓል",
-        "Streams\/chat\/remove": "የውይይት መልዕክት ተወግዷል",
-        "Streams\/closed": "{{stream.fields.title}} ተዘግቷል",
-        "Streams\/task\/progress": "በ {{stream.fields.title}} ላይ የተደረገው ሂደት",
-        "Streams\/task\/complete": "ተግባር ተጠናቅቋል: {{stream.fields.title}}",
-        "Streams\/task\/error": "ስህተት በዚህ ጊዜ: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: ገቢ መልዕክት",
-        "Streams\/relatedTo\/Streams\/call": "አዲስ ጥሪ በ {{toTitle}} ውስጥ ተጀምሯል",
-        "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}} ውስጥ",
+        "*": "መልዕክት {999} ወደ {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{999} እንዲህ ብሏል፡ {{& message.content}}",
+        "Streams\/changed": "በ{999} ውስጥ ያሉ ለውጦች",
+        "Streams\/invite": "ለ{999} ተጋብዘሃል",
+        "Streams\/announcement": "ማስታወቂያ በ{999}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} በ{1000} ውስጥ መዳረሻን ቀይሯል",
+        "Streams\/chat\/edit": "የውይይት መልእክት በ{999} ውስጥ ተስተካክሏል",
+        "Streams\/chat\/remove": "የውይይት መልእክት በ{999} ውስጥ ተወግዷል",
+        "Streams\/closed": "{{stream.fields.title}} ተዘግቷል።",
+        "Streams\/task\/progress": "ሂደት በ{999}",
+        "Streams\/task\/complete": "ተግባር ተጠናቀቀ፡ {{stream.fields.title}}",
+        "Streams\/task\/error": "ስህተት በሚከተለው ጊዜ፦ {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{999}፡ ገቢ መልእክት",
+        "Streams\/relatedTo\/Streams\/call": "አዲስ ጥሪ በ{999} ተጀመረ",
+        "Streams\/relatedTo\/*": "አዲስ {{999} በ {{toTitle}}",
         "Streams\/relatedFrom\/*": "ወደ {{toTitle}} እንደ {{relationDisplayType}} ታክሏል",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶዎታል",
-        "Streams\/call": "{{displayName}} ቅጽበታዊ ጥሪ ጀመረ",
-        "ManageEmailSubscriptions": "የኢሜይል ምዝገባዎችዎን ያቀናብሩ",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} በአስተያየት ውስጥ ጠቅሶሃል",
+        "Streams\/call": "{{displayName}} የአሁናዊ ጥሪ ጀምሯል።",
+        "ManageEmailSubscriptions": "የኢሜል ምዝገባዎችዎን ያስተዳድሩ",
         "IfUnsubscribe": "ከደንበኝነት ምዝገባ መውጣት ከፈለጉ"
     },
     "invite": {
-        "messageContent": "{{displayName}} ወደ {{inviteUrl}} እንዲገኙ ጋብዘዎታል",
+        "messageContent": "{{displayName}} ወደ {{inviteUrl}} ጋብዞዎታል",
         "dialog": {
             "chooseFromContacts": "ከእውቂያዎችዎ ውስጥ ይምረጡ",
-            "chooseAgainFromContacts": "ከዕውቂያዎች ውስጥ እንደገና ምረጥ",
+            "chooseAgainFromContacts": "ከእውቂያዎች ውስጥ እንደገና ይምረጡ",
             "inviteSelectedContacts": "የተመረጡ እውቂያዎችን ይጋብዙ",
-            "selectFromContacts": "ከእውቂያዎች ውስጥ ይምረጡ",
+            "selectFromContacts": "ከእውቂያዎች ይምረጡ",
             "photo": "ፎቶ አንሳ",
-            "photoInstruction": "የ QR ኮድዎን ያሰመረው ሰው ከእርስዎ በፊት ከሆነ, ፎቶግራፍ ይውሰዱ",
-            "to": "ለ: {{Stream Title}}",
+            "photoInstruction": "የQR ኮድህን የቃኘው ሰው ከፊትህ ካለ ፎቶግራፍ አንሳ",
+            "to": "ለ፡ {{Stream Title}}",
             "go": "ሂድ",
-            "title": "ይጋብዙ",
-            "placeholder": "የሞባይል ቁጥር ወይም የኢሜይል አድራሻ",
-            "orInvite": "ወይም እነኚህን በመጠቀም ሰዎችን ጋብዝ:",
-            "QR": "QR ኮድ ለማመንጨት {{ClickOrTap}}",
-            "QRtitle": "ይህን የ QR ኮድ ይቃኙ",
-            "QRscanned": "እነሱ ያዩትታል!",
+            "title": "ጋብዝ",
+            "placeholder": "የሞባይል ቁጥር ወይም ኢሜል አድራሻ",
+            "orInvite": "ወይም የሚከተሉትን በመጠቀም ሰዎችን ጋብዝ",
+            "QR": "QR ኮድ ለመፍጠር {{ClickOrTap}}",
+            "QRtitle": "ይህን የQR ኮድ ይቃኙ",
+            "QRscanned": "እነሱ ቃኙት!",
             "byEmail": "ኢሜይል",
             "byText": "ጽሑፍ",
             "byFacebook": "ፌስቡክ",
             "byTwitter": "ትዊተር",
-            "scannedQR": "ኮዱ ከተቃኘ {{ClickOrTap}}",
-            "copyLink": "የግብዣ አገናኝን ለመቅዳት {{ClickOrTap}}",
-            "userChooserPlaceholder": "በስም ይፈልጉ",
-            "shareOrCopyLink": "የግብዣ አገናኝ ለመጋራት ወይም ለመቅዳት {{ClickOrTap}}"
+            "scannedQR": "ኮዱ የተቃኘ ከሆነ {{ClickOrTap}}",
+            "copyLink": "የግብዣ ማገናኛን ለመቅዳት {{ClickOrTap}}",
+            "userChooserPlaceholder": "በስም ፈልግ",
+            "shareOrCopyLink": "የግብዣ አገናኝን ለመጋራት ወይም ለመቅዳት {{ClickOrTap}}"
         },
         "email": {
-            "subject": "ሄይ, ይህን አረጋግጡ",
-            "PleaseVisitLink": "እባክዎ የሚከተለውን አገናኝ ይጎብኙ:",
-            "InvitingYou": "ወደ {{title}} በመጋበዝ ላይ ነኝ",
-            "HasInvitedYou": "{{displayName}} እርስዎን በ {{title}} ላይ ጋብዞዎታል",
-            "HasMentionedYou": "{{displayName}} በ &quot;{{title}}&quot; ውስጥ ጠቅሶዎታል",
+            "subject": "ሄይ፣ ይህንን ተመልከት",
+            "PleaseVisitLink": "እባክዎ የሚከተለውን ሊንክ ይጎብኙ፡-",
+            "InvitingYou": "ወደ {{title}} እየጋበዝኩህ ነው።",
+            "HasInvitedYou": "{{displayName}} ወደ {{title}} ጋብዞዎታል",
+            "HasMentionedYou": "{{displayName}} በ&quot;{1000}} ውስጥ ጠቅሶሃል",
             "YOUAREINVITED": "ተጋብዘዋል!",
-            "AcceptInvite": "ግብዣውን ተቀበል"
+            "AcceptInvite": "ግብዣ ተቀበል"
         },
         "sms": {
-            "content": "ወደ {{title}} ተጋብዘዋል. እባክዎ {{url}} ን መታ ያድርጉ"
+            "content": "ወደ {{title}} ተጋብዘሃል። እባክህ {1000}ን ንካ"
         },
         "notice": {
-            "text": "ተጋብዘዋል. ለመቀበል እና ለመቀላቀል እዚህ ላይ {{ClickOrTap}} እዚህ."
+            "text": "ተጋብዘዋል። ለመቀበል እና ለመቀላቀል እዚህ {{ClickOrTap}}"
         },
         "command": "ጋብዝ",
-        "youCanNowPaste": "ሰዎችን ለመጋበዝ አሁን ይህን አገናኝ በአንድ ቦታ ላይ መለጠፍ ይችላሉ"
+        "youCanNowPaste": "አሁን ሰዎችን ለመጋበዝ ይህን ሊንክ የሆነ ቦታ መለጠፍ ይችላሉ።"
     },
     "followup": {
         "mobile": {
-            "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
-            "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ቁጥር ይላካሉ. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
-            "check": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜልዎን ይፈትሹ እና አገናኙን ጠቅ ያድርጉ!",
-            "CheckYourMobile": "እባክዎ ኤስኤምኤስ ይመልከቱ እና መመሪያዎችን ይከተሉ!"
+            "alert": "ግብዣዎች ከኛ ቁጥር ተልከዋል፣ ይህም ጓደኞችዎ እስካሁን ያላወቁት። ግብዣው ከእርስዎ እንደመጣ ለማሳወቅ አገናኙን ጠቅ እንዲያደርጉ በመጠየቅ ፈጣን ጽሑፍ ይከታተሉ።",
+            "confirm": "ግብዣዎች ከኛ ቁጥር ተልከዋል፣ ይህም ጓደኞችዎ እስካሁን ያላወቁት። ግብዣው ከእርስዎ እንደመጣ ለማሳወቅ አገናኙን ጠቅ እንዲያደርጉ በመጠየቅ ፈጣን ጽሁፍ በመያዝ መከታተል ይፈልጋሉ።",
+            "check": "ሄይ፣ አሁን የ{999} መተግበሪያ ግብዣ ልኬልዎታል። እባክዎን ኤስኤምኤስዎን ያረጋግጡ እና ሊንኩን ይጫኑ!",
+            "CheckYourMobile": "እባክዎን ኤስኤምኤስ ይመልከቱ እና መመሪያዎችን ይከተሉ!"
         },
         "email": {
-            "alert": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉላቸው በፍጥነት የሚገልጽ ጽሑፍ ይከታተሉ.",
-            "confirm": "ግብዣዎች ጓደኞችዎ እስካላወቁት ድረስ ከእኛ ጎራ የተላከ ነው. ግብዣው የመጣው ከእርስዎ የመጣ መሆኑን እንዲያውቁ እና አገናኙን ጠቅ እንዲያደርጉ እንዲረዳቸው በቅጽበት ጽሑፍ መከታተል ይፈልጋሉ.",
-            "subject": "ግብዣ አግኝተው ነበር?",
-            "body": "ሰላም, አሁን ለ {{app}} መተግበሪያ ግብዣ ልካሎሻለሁ. እባክዎ ኢሜይልዎን ይፈትሹ እና እዛው ጠቅ ያድርጉ!",
-            "CheckYourEmail": "እባክዎ ኢሜይልዎን ይመልከቱ እና መመሪያዎችን ይከተሉ!"
+            "alert": "ግብዣዎች ከኛ ጎራ ተልከዋል፣ ጓደኛዎችዎ እስካሁን የማያውቁት። ግብዣው ከእርስዎ እንደመጣ ለማሳወቅ አገናኙን ጠቅ እንዲያደርጉ በመጠየቅ ፈጣን ጽሑፍ ይከታተሉ።",
+            "confirm": "ግብዣዎች ከኛ ጎራ ተልከዋል፣ ጓደኛዎችዎ እስካሁን የማያውቁት። ግብዣው ከእርስዎ እንደመጣ ለማሳወቅ አገናኙን ጠቅ እንዲያደርጉ በመጠየቅ ፈጣን ጽሁፍ በመያዝ መከታተል ይፈልጋሉ።",
+            "subject": "ግብዣ አግኝተዋል?",
+            "body": "ሄይ፣ አሁን የ{999} መተግበሪያ ግብዣ ልኬልዎታል። እባክዎን ኢሜልዎን ያረጋግጡ እና እዚያ ያለውን ሊንክ ይጫኑ!",
+            "CheckYourEmail": "እባክዎ ኢሜልዎን ያረጋግጡ እና መመሪያዎችን ይከተሉ!"
         }
     },
     "webrtc": {
@@ -128,86 +128,86 @@
             "cameraAndMicrophoneTitle": "ካሜራ እና ማይክሮፎን ያንቁ",
             "dialogTitle": "በመገናኘት ላይ",
             "microphoneBtn": "ማይክሮፎን አንቃ",
-            "cameraBtn": "ካሜራ አንቃ",
-            "cameraAndMicrophoneBtn": "ካሜራ እና ማይክሮፎን ያንቁ"
+            "cameraBtn": "ካሜራን አንቃ",
+            "cameraAndMicrophoneBtn": "ካሜራ እና ማይክሮፎን አንቃ"
         },
         "webInstructionsDialog": {
             "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
-            "point1": "ወደ &quot;ቅንብሮች&quot; -&gt; &quot;የላቀ&quot; -&gt; &quot;ግላዊነት እና ደህንነት&quot; -&gt; &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ካሜራ&quot; ወይም &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ማይክሮፎን&quot; ይሂዱ",
-            "point2": "{{hostname}} ን ከ “አግድ” ዝርዝር ያስወግዱት"
+            "permissionDenied": "ለ{999}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ።",
+            "point1": "ወደ &quot;ቅንጅቶች&quot; -&gt; &quot;የላቀ&quot; -&gt; &quot;ግላዊነት እና ደህንነት&quot; -&gt; &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ካሜራ&quot; ወይም &quot;የጣቢያ ቅንብሮች&quot; -&gt; &quot;ማይክሮፎን&quot; ይሂዱ",
+            "point2": "{{hostname}}ን ከ&quot;አግድ&quot; ዝርዝር አስወግድ"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እባክዎን ይህንን ገጽ እንደገና ይጫኑት እና ጉባ conferenceውን ለመቀላቀል {{kind}} ን ያረጋግጡ ፡፡"
+            "permissionDenied": "ለ{999}} ፍቃድ ተከልክሏል። እባክዎ ይህን ገጽ እንደገና ይጫኑ እና ኮንፈረንሱን ለመቀላቀል የ{999}} መዳረሻ ያረጋግጡ።"
         },
         "androidInstructionsDialog": {
             "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
-            "point1": "ወደ የእርስዎ የ Android ቅንብሮች ይሂዱ",
-            "point2": "&quot;መተግበሪያዎችን እና ማስታወቂያዎችን&quot; ይክፈቱ",
-            "point3": "«{{communityName}}» ን ይፈልጉ እና ይክፈቱት",
+            "permissionDenied": "ለ{999}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ።",
+            "point1": "ወደ የእርስዎ አንድሮይድ ቅንብሮች ይሂዱ",
+            "point2": "&quot;መተግበሪያዎች እና ማሳወቂያዎች&quot; ክፈት",
+            "point3": "«{{communityName}}»ን አግኝ እና ይክፈቱት።",
             "point4": "ፈቃዶች ላይ መታ ያድርጉ",
-            "point5": "{{kind}} ን ያንቁ"
+            "point5": "አንቃ {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "መመሪያዎች",
-            "permissionDenied": "የ {{kind}} ፈቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ",
-            "point1": "ወደ እርስዎ የ iOS ቅንብሮች ይሂዱ",
-            "point2": "“ግላዊነት” ክፈት",
-            "point3": "{{kind}} ን ያግኙ እና ይክፈቱት",
-            "point4": "«{{communityName}}» ን ያግኙ እና ያንቁ"
+            "permissionDenied": "ለ{999}} ፍቃድ ተከልክሏል። እሱን ለመጠቀም የሚከተሉትን ደረጃዎች ይከተሉ።",
+            "point1": "ወደ የእርስዎ iOS ቅንብሮች ይሂዱ",
+            "point2": "ክፈት &quot;ግላዊነት&quot;",
+            "point3": "{{kind}}ን አግኝ እና ይክፈቱት።",
+            "point4": "«{{communityName}}»ን አግኝ እና አንቃ"
         },
         "notices": {
-            "youJoinedRoom": "ወደ ክፍሉ ገብተዋል",
-            "joining": "በመቀላቀል ላይ {{userName}}",
-            "sbLeftRoom": "{{userName}} ክፍሉ ወጥቷል",
-            "youLeftRoom": "ክፍሉን ለቀው ወጥተዋል",
-            "codeCopied": "ክፍሉን ለቀው ወጥተዋል",
+            "youJoinedRoom": "ክፍሉን ተቀላቅለዋል።",
+            "joining": "በመቀላቀል ላይ፡ {{userName}}",
+            "sbLeftRoom": "{{userName}} ክፍሉን ለቋል",
+            "youLeftRoom": "ክፍሉን ለቀው ወጡ",
+            "codeCopied": "ክፍሉን ለቀው ወጡ",
             "sbBeganFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨት ጀመረ",
-            "sbStoppedFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁሟል",
-            "youBeganFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት ጀመሩ",
+            "sbStoppedFbLive": "{{userName}} ይህንን ጥሪ በፌስቡክ ማሰራጨቱን አቁሟል",
+            "youBeganFbLive": "ይህን ጥሪ በፌስቡክ ማስተላለፍ ጀመርክ",
             "youStoppedFbLive": "ይህንን ጥሪ በፌስቡክ ማሰራጨት አቁመዋል",
-            "linkCopiedToCb": "አገናኝ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
-            "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል",
-            "userHasNoVideo": "ተሳታፊ ቪዲዮ የለውም",
-            "openInBrowserAlert": "ጉባኤውን ለመቀላቀል Safari አሳሽ ውስጥ አገናኝን ይክፈቱ።",
-            "youBeganVideoRecording": "ይህንን ስብሰባ መቅዳት ጀምረዋል",
-            "youStoppedVideoRecording": "ይህንን ስብሰባ መቅዳት አቁመዋል",
-            "switchingRoom": "የመቀየሪያ ክፍል ...",
-            "forceDisconnecting": "በ 5 ሰከንዶች ውስጥ ይቋረጣሉ",
-            "youStartedLive": "ይህን ጥሪ ለብጁ RTMP ማሰራጨት ጀመሩ",
-            "youStoppedLive": "ይህን ጥሪ ለብጁ RTMP ማሰራጨት አቁመዋል",
-            "sbStartedLiveStreaming": "{{userName}} በቀጥታ ጀምሯል",
-            "sbStoppedLiveStreaming": "{{userName}} በቀጥታ ጨርሷል",
-            "liveStopped": "ቪዲዮን ወደ መጨረሻው ነጥብ በመላክ ላይ ስህተት ተከስቷል",
+            "linkCopiedToCb": "ማገናኛ ወደ ቅንጥብ ሰሌዳ ተቀድቷል።",
+            "codeCopiedToCb": "ኮድ ወደ ቅንጥብ ሰሌዳ ተቀድቷል።",
+            "userHasNoVideo": "ተሳታፊ ምንም ቪዲዮ የለውም",
+            "openInBrowserAlert": "ኮንፈረንሱን ለመቀላቀል በ Safari አሳሽ ውስጥ ያለውን አገናኝ ይክፈቱ።",
+            "youBeganVideoRecording": "ይህንን ጉባኤ መቅዳት ጀመርክ",
+            "youStoppedVideoRecording": "ይህን ኮንፈረንስ መቅዳት አቁመዋል",
+            "switchingRoom": "ክፍል መቀየሪያ...",
+            "forceDisconnecting": "በ5 ሰከንድ ውስጥ ግንኙነቱ ይቋረጣል",
+            "youStartedLive": "ይህን ጥሪ ወደ ብጁ RTMP ማሰራጨት ጀመርክ",
+            "youStoppedLive": "ይህን ጥሪ ወደ ብጁ RTMP ማሰራጨት አቁመዋል",
+            "sbStartedLiveStreaming": "{999} በቀጥታ ስርጭት ጀምሯል።",
+            "sbStoppedLiveStreaming": "{{userName}} በቀጥታ ተጠናቋል",
+            "liveStopped": "ቪዲዮ ወደ መጨረሻ ነጥብ በመላክ ላይ ሳለ ስህተት ተከስቷል።",
             "forceDisconnectingImmediately": "በአስተናጋጅ ተቋርጠዋል"
         },
         "settingsPopup": {
             "webCamera": "የድር ካሜራ",
-            "screenSharing": "ማያ ገጽ ማጋራት",
-            "shareAnotherScreen": "ሌላ ማያ ገጽ ያጋሩ",
-            "turnOffCameras": "ሁሉንም ካሜራዎች ያጥፉ",
-            "startFBLive": "ፌስቡክ ቀጥታ ስርጭት ይጀምሩ",
-            "stopFBLive": "ፌስቡክ ቀጥታ ስርጭት አቁም",
-            "fbLiveTitle": "የቀጥታ ርዕስ",
-            "fbLiveDescription": "የቀጥታ መግለጫ",
+            "screenSharing": "ስክሪን ማጋራት።",
+            "shareAnotherScreen": "ሌላ ስክሪን አጋራ",
+            "turnOffCameras": "ካሜራን ያጥፉ",
+            "startFBLive": "Facebook Livestream ጀምር",
+            "stopFBLive": "የፌስቡክ ቀጥታ ስርጭትን አቁም",
+            "fbLiveTitle": "የቀጥታ ስርጭት ርዕስ",
+            "fbLiveDescription": "የእርስዎን የቀጥታ ስርጭት ይግለጹ። ስለምንድን ነው?",
             "fbOnlyMeLiveAccess": "እኔ ብቻ",
             "fbFriendsAccess": "ጓደኞች",
-            "fbPublicAccess": "ሕዝባዊ",
-            "fbStartLive": "ቀጥታ ስርጭት ይሂዱ",
-            "fbStopLive": "የቀጥታ ስርጭት",
-            "fbEmbedCode": "ክተት",
-            "copy": "ገልብጥ",
-            "turnOffVideo": "ካሜራ \/ ማያ ማጋራትን ያጥፉ",
-            "turnOffScreenSharing": "የማያ ማጋራትን ያጥፉ",
+            "fbPublicAccess": "የህዝብ",
+            "fbStartLive": "በቀጥታ ስርጭት ይሂዱ",
+            "fbStopLive": "የቀጥታ ስርጭትን ጨርስ",
+            "fbEmbedCode": "መክተት",
+            "copy": "ቅዳ",
+            "turnOffVideo": "ካሜራ\/ስክሪን ማጋራትን ያጥፉ",
+            "turnOffScreenSharing": "ማያ ገጽ ማጋራትን ያጥፉ",
             "cameraIsTurnedOff": "ካሜራ ጠፍቷል",
-            "startRecording": "መቅዳት ይጀምሩ",
+            "startRecording": "መቅዳት ጀምር",
             "stopRecording": "መቅዳት አቁም",
-            "recordingInProgress": "ቀረጻ በሂደት ላይ ነው ...",
-            "publishOnTimeline": "በጊዜ መስመር ላይ ያትሙ",
+            "recordingInProgress": "ቀረጻ በሂደት ላይ ነው...",
+            "publishOnTimeline": "በጊዜ መስመር ላይ አትም",
             "publishToGroup": "ወደ ቡድን ያትሙ",
-            "turnOffAudioInput": "ማይክሮፎን ድምጸ -ከል ያድርጉ",
+            "turnOffAudioInput": "ማይክሮፎን ድምጸ-ከል አድርግ",
             "micIsTurnedOff": "ማይክሮፎን ጠፍቷል",
             "start": "ጀምር",
             "stop": "ተወ",
@@ -219,35 +219,35 @@
         },
         "participantsPopup": {
             "disconnect": "ግንኙነት አቋርጥ",
-            "floatingScreens": "ተንሳፋፊ ማያ ገጾች",
-            "tiledScreens": "የታጠቁ ማያ ገጾች",
-            "loudestExceptMe": "ከእኔ በስተቀር እጅግ ከባድ ነው",
-            "maximizeLoudest": "ከፍተኛ ድምጽን ከፍ ያድርጉ",
-            "staticMaximized": "የማይንቀሳቀስ ከፍተኛ",
+            "floatingScreens": "ተንሳፋፊ ስክሪኖች",
+            "tiledScreens": "የታጠቁ ስክሪኖች",
+            "loudestExceptMe": "ከእኔ በቀር በጣም ጮሆ",
+            "maximizeLoudest": "ከፍተኛውን ከፍ አድርግ",
+            "staticMaximized": "የማይንቀሳቀስ ከፍተኛ ደረጃ ላይ ደርሷል",
             "manual": "መመሪያ",
             "fullScreen": "ሙሉ ማያ",
             "turnOffCamera": "ቪዲዮ ደብቅ",
-            "turnOffAudio": "ኦዲዮን ድምጸ-ከል ያድርጉ",
-            "turnOffScreenSharing": "የማያ ማጋራትን ደብቅ",
+            "turnOffAudio": "ኦዲዮን ድምጸ-ከል አድርግ",
+            "turnOffScreenSharing": "ማያ ገጽ ማጋራትን ደብቅ",
             "turnOnCamera": "ቪዲዮ አሳይ",
-            "turnOnAudio": "ድምጸ-ከል አንሳ",
-            "turnOnScreenSharing": "ማሳያ ማጋራትን አሳይ",
+            "turnOnAudio": "የድምጽ ድምጸ-ከል አንሳ",
+            "turnOnScreenSharing": "ማያ ገጽ ማጋራትን አሳይ",
             "dialogTitle": "የተሳታፊ ቅንብሮች"
         },
-        "notAllowedToJoinCall": "ይህንን ጅረት ለመቀላቀል ፈቃድ የልዎትም።",
-        "streamTitle": "{{1}} የቀጥታ ጥሪ",
+        "notAllowedToJoinCall": "ይህን ዥረት ለመቀላቀል ፍቃድ የለዎትም።",
+        "streamTitle": "{{1}} የቀጥታ ጥሪ ጀምሯል።",
         "preview": {
             "preamble": "ስብሰባ",
             "Meeting": "ስብሰባ",
-            "MeetingEnded": "ስብሰባ ተጠናቀቀ"
+            "MeetingEnded": "ስብሰባው አልቋል"
         },
         "preparing": {
-            "micIsOff": "ማይክ ጠፍቷል",
-            "micIsOn": "ማይክ በርቷል",
+            "micIsOff": "ማይክሮፎን ጠፍቷል",
+            "micIsOn": "ማይክሮፎን በርቷል።",
             "cameraIsOff": "ካሜራ ጠፍቷል",
-            "cameraIsOn": "ካሜራ በርቷል",
-            "screenSharingIsOn": "የማያ ገጽ ማጋራት በርቷል",
-            "screenSharingIsOff": "ማያ ገጽ አጋራ",
+            "cameraIsOn": "ካሜራ በርቷል።",
+            "screenSharingIsOn": "ስክሪን ማጋራት በርቷል።",
+            "screenSharingIsOff": "ማያ አጋራ",
             "joinNow": "ጥሪውን ይቀላቀሉ"
         },
         "audioSettings": {
@@ -261,46 +261,46 @@
     },
     "messages": {
         "html": {
-            "posted": "<em>{{message.fields.type}}<\/em> መልእክት {{stream.fields.title}} ላይ <em>ለጥ postedል<\/em>"
+            "posted": "ወደ {{stream.fields.title}} <em>{{message.fields.type}}<\/em> መልዕክት ለጥፏል"
         },
         "text": {
-            "commentedOn": "አስተያየት ተሰጥቷል",
+            "commentedOn": "ላይ አስተያየት ሰጥቷል",
             "in": "ውስጥ",
-            "body": "በ {{& url}}: {{& message.fields.content}}",
+            "body": "በ{999}፡ {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ተለጠፈ",
+                "hasBeenPostedTo": "ላይ ተለጠፈ",
                 "byAvatar": "በ {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "አዲስ {{instructions.fromDisplayType}} አለው",
                 "byAvatar": "በ {{avatar.displayName}} ታክሏል"
             },
-            "startedCallIn": "በ ውስጥ ጥሪ ጀመረ"
+            "startedCallIn": "ጥሪ ጀመረ"
         }
     },
     "types": {
         "Streams\/invited": {
             "displayType": "ተጋብዘዋል",
-            "description": "ለግብዣዎች የገቢ መልእክት ሳጥን"
+            "description": "የግብዣ ሳጥን"
         },
         "Streams\/resource": {
             "displayType": "ምንጭ",
-            "description": "ስለአስተማማኝ ግብዓቶችን ለማደራጀት እና መልዕክቶችን ለመለጠፍ ፍሰት"
+            "description": "የንብረት መዳረሻን ለማስተዳደር እና ስለ ዝመናዎች መልዕክቶችን ለመለጠፍ ዥረት"
         },
         "Streams\/task": {
             "description": "በአንድ የተወሰነ ተግባር ላይ ስለ መሻሻል ዝማኔዎችን ለመቀበል",
             "displayType": "ተግባር"
         },
         "Streams\/tasks": {
-            "description": "ምድብ ለ ተግባራት",
+            "description": "ለተግባሮች ምድብ",
             "displayType": "ተግባራት"
         },
         "Streams\/experience": {
-            "description": "ለአንድ ማህበረሰብ አባላት የተለመደ ተሞክሮ",
-            "displayType": "የጋራ ተሞክሮ ለአንዱ ማህበረሰብ"
+            "description": "ለአንድ ማህበረሰብ አባላት የተለመደ ልምድ",
+            "displayType": "የጋራ ልምድ ለአንድ ማህበረሰብ አባላት"
         },
         "Streams\/greeting": {
-            "description": "አንድ ተጠቃሚ እራሳቸውን ማስተዋወቅ የሚችልበት ሰላምታ",
+            "description": "ተጠቃሚው እራሱን ማስተዋወቅ የሚችልበት ሰላምታ",
             "displayType": "ሰላምታ"
         },
         "Streams\/number": {
@@ -317,11 +317,11 @@
         },
         "Streams\/text\/small": {
             "displayType": "ጽሑፍ",
-            "description": "የጽሑፍ አካል"
+            "description": "ትንሽ የጽሑፍ አካል"
         },
         "Streams\/text\/medium": {
             "displayType": "ጽሑፍ",
-            "description": "የጽሑፍ አካል"
+            "description": "መካከለኛ የጽሑፍ አካል"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "የ ኢሜል አድራሻ",
@@ -333,7 +333,7 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "ድር ላይ አገናኝ"
+            "description": "በድር ላይ አገናኝ"
         },
         "Streams\/image": {
             "displayType": "ምስል",
@@ -341,12 +341,12 @@
             "newItem": "ምስል አክል"
         },
         "Streams\/images": {
-            "displayType": "የምስል ማእከል",
-            "description": "የምስል ማሳያ"
+            "displayType": "የምስል ጋለሪ",
+            "description": "የምስሎች ማዕከለ-ስዕላት"
         },
         "Streams\/album": {
             "displayType": "አልበም",
-            "description": "የተለያዩ ሚዲያዎች የሚገናኙበት አልበም"
+            "description": "የተለያዩ ሚዲያዎች የሚዛመዱበት አልበም"
         },
         "Streams\/file": {
             "displayType": "ፋይል",
@@ -354,51 +354,51 @@
             "newItem": "ፋይል አክል"
         },
         "Streams\/audio": {
-            "displayType": "ኦዲዮ ክሊፕ",
-            "description": "የድምፅ ቅንጥብ",
-            "newItem": "ኦዲዮን አክል"
+            "displayType": "የድምጽ ቅንጥብ",
+            "description": "የድምጽ ቅንጥብ",
+            "newItem": "ኦዲዮ ያክሉ"
         },
         "Streams\/video": {
-            "displayType": "ቪዲዮ ክሊፕ",
+            "displayType": "የቪዲዮ ቅንጥብ",
             "description": "ቪዲዮ ክሊፕ",
-            "newItem": "ቪዲዮ አክል"
+            "newItem": "ቪዲዮ ጨምር"
         },
         "Streams\/live": {
-            "displayType": "ቀጥታ ስርጭት",
+            "displayType": "የቀጥታ ስርጭት",
             "description": "የቀጥታ ድምጽ ወይም ቪዲዮ"
         },
         "Streams\/category": {
             "displayType": "ምድብ",
-            "description": "ሌሎች ፈሳሾች የሚገናኙበት ምድብ"
+            "description": "ሌሎች ዥረቶች ሊዛመዱ የሚችሉበት ምድብ"
         },
         "Streams\/participating": {
-            "displayType": "ማውጫውን በመሳተፍ ላይ",
-            "description": "ተጠቃሚው ሲቀላቀል \/ ሲቀየር ዥረቶቹ ከዚህ ጋር ይዛመዳሉ \/ አይዛመዱም"
+            "displayType": "ተሳታፊ ኢንዴክስ",
+            "description": "ተጠቃሚው ሲቀላቀል\/ሲወጣ ዥረቶች ከዚህ ጋር የተያያዙ\/ያልሆኑ ናቸው።"
         },
         "Streams\/interest": {
             "displayType": "ፍላጎት",
-            "description": "በአንድ የተወሰነ ርዕስ ውስጥ የተጠቃሚውን ፍላጎት ይወክላል"
+            "description": "ለተወሰነ ርዕስ የተጠቃሚውን ፍላጎት ይወክላል"
         },
         "Streams\/incoming": {
             "displayType": "ገቢ",
-            "description": "በሌሎች ተጠቃሚዎች ለተላኩ መልእክቶች መድረሻ"
+            "description": "በሌሎች ተጠቃሚዎች የተላኩ መልዕክቶች መድረሻ"
         },
         "Streams\/chat": {
             "displayType": "ውይይት",
-            "description": "ከታሪክ ጋር በተጠቃሚዎች መካከል የተደረገ ውይይት"
+            "description": "በተጠቃሚዎች መካከል የሚደረግ ውይይት ፣ ከታሪክ ጋር"
         },
         "Streams\/webrtc": {
-            "displayType": "የእውነተኛ-ጊዜ ጥሪ",
-            "description": "የእውነተኛ ጊዜ ቪዲዮ \/ ድምጽ ጥሪ"
+            "displayType": "የእውነተኛ ጊዜ ጥሪ",
+            "description": "የእውነተኛ ጊዜ የቪዲዮ\/የድምጽ ጥሪ"
         },
         "Streams\/pdf": {
-            "displayType": "የፒዲኤፍ ሰነድ",
-            "description": "የፒዲኤፍ ሰነድ",
+            "displayType": "ፒዲኤፍ ሰነድ",
+            "description": "ፒዲኤፍ ሰነድ",
             "newItem": "ፒዲኤፍ አክል"
         },
         "Streams\/question": {
             "displayType": "ጥያቄ",
-            "description": "የጥያቄ ጅረት"
+            "description": "የጥያቄ ዥረት"
         },
         "Streams\/answer": {
             "displayType": "መልስ",
@@ -406,29 +406,29 @@
         },
         "Streams\/calls": {
             "displayType": "ጥሪዎች",
-            "description": "ለዥረቶች\/webrtc ምድብ",
+            "description": "ምድብ ለ ዥረቶች\/webrtc",
             "MaxRelationsExceeded": "ከፍተኛ ጥሪዎች ታልፈዋል"
         }
     },
     "participating": {
         "Title": "ርዕስ",
-        "Subscribed": "ተመዝግበዋል",
+        "Subscribed": "ተመዝግቧል",
         "Participants": "ተሳታፊዎች",
-        "AreYouSureRemoveIdentifier": "እርግጠኛ ነዎት ይህን ለer ያስወግዳሉ?",
-        "AreYouSureUnsubscribeIdentifier": "እርግጠኛ ነዎት ለዚህ መለያ ከደንበኝነት ምዝገባ ይወጣሉ? ለእዚህ መለያ ማሳወቂያዎችን ያጠፋል ፡፡",
-        "AreYouSureUnsubscribeDevice": "እርግጠኛ ነዎት የዚህ መሣሪያ ደንበኝነት ምዝገባ ይወጣሉ? ለዚህ መሣሪያ ማሳወቂያዎችን ያጠፋል።",
-        "Identifiers": "ለifዎች",
-        "Devices": "መሣሪያዎች",
-        "Streams": "ጅረቶች",
-        "AreYouSureRemoveParticipant": "እርግጠኛ ነዎት ይህንን ተሳታፊ ለማስወገድ ይፈልጋሉ?",
-        "RemoveParticipant": "ተሳታፊውን ያስወግዱ"
+        "AreYouSureRemoveIdentifier": "እርግጠኛ ነዎት ይህን መለያ ማስወገድ?",
+        "AreYouSureUnsubscribeIdentifier": "እርግጠኛ ነዎት ይህን መለያ ከደንበኝነት ምዝገባ መውጣታቸው? ለዚህ መለያ ማሳወቂያዎችን ያጠፋል።",
+        "AreYouSureUnsubscribeDevice": "እርግጠኛ ነዎት ይህን መሣሪያ ከደንበኝነት ምዝገባ መውጣታቸው? ለዚህ መሣሪያ ማሳወቂያዎችን ያጠፋል.",
+        "Identifiers": "መለያዎች",
+        "Devices": "መሳሪያዎች",
+        "Streams": "ዥረቶች",
+        "AreYouSureRemoveParticipant": "እርግጠኛ ነዎት ይህን ተሳታፊ ማስወገድ ይፈልጋሉ?",
+        "RemoveParticipant": "ተሳታፊን ያስወግዱ"
     },
     "menu": {
-        "placeholder": "ገጽ ርዕስ ይተይቡ",
-        "ModTab": "ንጥል ያሻሽሉ",
+        "placeholder": "የገጽ ርዕስ ይተይቡ",
+        "ModTab": "ንጥልን አስተካክል።",
         "Save": "አስቀምጥ",
         "Delete": "ሰርዝ",
-        "Submenu": "ንዑስ"
+        "Submenu": "ንዑስ ምናሌ"
     },
     "errors": {
         "HiddenFromYou": "ይህ ይዘት ከእርስዎ ተደብቋል።"
@@ -441,14 +441,14 @@
         "description": "መግለጫ",
         "upload": "ስቀል",
         "link": "አገናኝ",
-        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "setUrl": "URL አዘጋጅ",
         "save": "አስቀምጥ",
-        "setClip": "ክሊፕን ይቁረጡ",
-        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "setClip": "ቁረጥ ክሊፕ",
+        "invalidURL": "ልክ ያልሆነ URL",
         "invalidFile": "ልክ ያልሆነ ፋይል",
-        "errorNoSource": "ምንም የድምፅ ምንጭ የለም",
-        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
-        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+        "errorNoSource": "ምንም የድምጽ ምንጭ የለም።",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን፡ {{size}}",
+        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
     },
     "video": {
         "reset": "ዳግም አስጀምር",
@@ -457,14 +457,14 @@
         "description": "መግለጫ",
         "upload": "ስቀል",
         "link": "አገናኝ",
-        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "setUrl": "URL አዘጋጅ",
         "save": "አስቀምጥ",
-        "setClip": "ክሊፕን ይቁረጡ",
-        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "setClip": "ቁረጥ ክሊፕ",
+        "invalidURL": "ልክ ያልሆነ URL",
         "invalidFile": "ልክ ያልሆነ ፋይል",
-        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም",
-        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
-        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+        "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም።",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን፡ {{size}}",
+        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
     },
     "pdf": {
         "reset": "ዳግም አስጀምር",
@@ -473,14 +473,14 @@
         "description": "መግለጫ",
         "upload": "ስቀል",
         "link": "አገናኝ",
-        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "setUrl": "URL አዘጋጅ",
         "save": "አስቀምጥ",
-        "setClip": "ክሊፕን ይቁረጡ",
-        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "setClip": "ቁረጥ ክሊፕ",
+        "invalidURL": "ልክ ያልሆነ URL",
         "invalidFile": "ልክ ያልሆነ ፋይል",
-        "errorNoSource": "ምንም የፒዲኤፍ ምንጭ የለም",
-        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
-        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
+        "errorNoSource": "የፒዲኤፍ ምንጭ የለም።",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን፡ {{size}}",
+        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው"
     },
     "image": {
         "reset": "ዳግም አስጀምር",
@@ -489,50 +489,50 @@
         "description": "መግለጫ",
         "upload": "ስቀል",
         "link": "አገናኝ",
-        "setUrl": "ዩአርኤል ያዘጋጁ",
+        "setUrl": "URL አዘጋጅ",
         "save": "አስቀምጥ",
-        "setClip": "ክሊፕን ይቁረጡ",
-        "invalidURL": "ልክ ያልሆነ ዩ.አር.ኤል.",
+        "setClip": "ቁረጥ ክሊፕ",
+        "invalidURL": "ልክ ያልሆነ URL",
         "invalidFile": "ልክ ያልሆነ ፋይል",
-        "errorNoSource": "የምስል ምንጭ የለም",
-        "uploadLimit": "ከፍተኛው የፋይል መጠን ፦ {{size}}",
-        "errorFileSize": "ይቅርታ ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው",
+        "errorNoSource": "ምንም የምስል ምንጭ የለም።",
+        "uploadLimit": "ከፍተኛው የፋይል መጠን፡ {{size}}",
+        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው",
         "uploadedImage": "የተሰቀለ ምስል",
         "imageTitle": "የምስል ርዕስ"
     },
     "questions": {
         "Questions": "ጥያቄዎች",
         "Answers": "መልሶች",
-        "AnswerQuestion": "የመልስ ጥያቄ",
-        "SetYourAnswer": "እባክዎን ለጥያቄው መልስ ይስጡ",
+        "AnswerQuestion": "ጥያቄ መልሱ",
+        "SetYourAnswer": "እባክዎን ጥያቄውን ይመልሱ",
         "NewQuestion": "አዲስ ጥያቄ",
         "NewAnswer": "አዲስ መልስ",
-        "AnswerDetails": "የመልስ ዝርዝሮች",
+        "AnswerDetails": "ዝርዝር መልስ",
         "answerOption": "አማራጭ",
         "answerOptionExclusive": "ብቸኛ",
-        "answerTextarea": "ቴክስታሪያ",
-        "FreeAnswer": "ነፃ መልስ ...",
-        "SaveQuestion": "ጥያቄን አስቀምጥ",
-        "SaveAnswer": "መልስ አስቀምጥ",
-        "AddAnotherAnswer": "ሌላ መልስ ያክሉ",
-        "ErrorAnswers": "እባክዎን አንድ መልስ እንኳን ያክሉ",
-        "AlreadyAnswered": "ቀድሞውኑ መልስ ተሰጥቷል",
+        "answerTextarea": "ጽሑፍ አካባቢ",
+        "FreeAnswer": "መልስህን እዚህ ጻፍ",
+        "SaveQuestion": "ጥያቄ አስቀምጥ",
+        "SaveAnswer": "መልሱን አስቀምጥ",
+        "AddAnotherAnswer": "ሌላ መልስ ጨምር",
+        "ErrorAnswers": "እባክህ አንድ እንኳን መልስ ጨምር",
+        "AlreadyAnswered": "አስቀድሞ መልስ ሰጥተዋል",
         "TitlePlaceholder": "ጥያቄዎን ይተይቡ",
-        "ContentPlaceholder": "ሰዎች መልስ እንዲሰጡ ለማገዝ ማንኛውንም ተጨማሪ መረጃ እዚህ ያኑሩ",
+        "ContentPlaceholder": "ሰዎች እንዲመልሱ ለመርዳት ማንኛውንም ተጨማሪ መረጃ እዚህ ያስቀምጡ",
         "ErrorTitle": "ጥያቄ ያስፈልጋል",
         "Placeholder": "ቦታ ያዥ"
     },
     "experience": {
-        "NewExperience": "አዲስ ተሞክሮ",
-        "DefineTitle": "እባክዎ ርዕስ ይግለጹ",
+        "NewExperience": "አዲስ ልምድ",
+        "DefineTitle": "እባክዎን ርዕስ ይግለጹ",
         "Create": "ፍጠር"
     },
     "calls": {
         "SettingsTitle": "ጥሪዎች",
-        "MaxCalls": "ማክስ ጥሪዎች",
+        "MaxCalls": "ከፍተኛ ጥሪዎች",
         "Update": "አዘምን",
-        "NoCallsYet": "ገና ጥሪዎች የሉም",
-        "CallReasonTitle": "ይህ ጥሪ ምንድነው?",
+        "NoCallsYet": "እስካሁን ምንም ጥሪ የለም።",
+        "CallReasonTitle": "ይህ ጥሪ ስለ ምንድን ነው?",
         "WaitingRoom": "መቆያ ክፍል"
     }
 }

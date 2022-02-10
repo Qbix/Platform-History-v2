@@ -10,8 +10,8 @@
                 "budget": "Pressupost"
             },
             "interests": {
-                "Title": "Filtrar per interessos",
-                "FilterInterests": "Comenceu a escriure un interès ..."
+                "Title": "Filtra per interessos",
+                "FilterInterests": "Comença a escriure un interès..."
             },
             "Interest": "Interès",
             "Location": "Ubicació"
@@ -20,9 +20,9 @@
     "webpage": {
         "composer": {
             "Go": "Vés",
-            "PasteLinkHere": "Enganxa un enllaç aquí",
-            "BrowseTheWeb": "Navegueu",
-            "WriteToStartConversation": "Escriviu els vostres pensaments per començar la conversa",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Navega",
+            "WriteToStartConversation": "Escriu els teus pensaments per començar la conversa",
             "StartConversation": "Inicia la conversa",
             "GotoConversation": "Vés a Conversa",
             "reset": "Restableix",
@@ -30,12 +30,12 @@
             "link": "Enllaç",
             "setUrl": "Estableix l&#39;URL",
             "save": "Desa",
-            "setClip": "Clip retallable",
+            "setClip": "Retalla el clip",
             "invalidURL": "URL no vàlid"
         },
-        "FileTooLarge": "El fitxer és massa gran per emmagatzemar-lo a la memòria cau. Mida màxima del fitxer {{size}}",
+        "FileTooLarge": "Fitxer massa gran per a la memòria cau. Mida màxima del fitxer {{size}}",
         "InvalidPDF": "El fitxer no és un PDF vàlid",
-        "StartTypingTitleOrKeywords": "Comenceu a escriure el títol o les paraules clau ..."
+        "StartTypingTitleOrKeywords": "Comenceu a escriure títol o paraules clau..."
     },
     "types": {
         "Websites\/article": {
@@ -44,30 +44,30 @@
         },
         "Websites\/slide": {
             "description": "Una diapositiva en una presentació, pot incloure HTML, àudio, etc.",
-            "displayType": "Presentació"
+            "displayType": "Diapositiva"
         },
         "Websites\/presentation": {
-            "description": "Una presentació formada per diverses diapositives",
+            "description": "Una presentació que consta de diverses diapositives",
             "displayType": "Presentació"
         },
         "Websites\/advert\/unit": {
-            "description": "Una unitat de publicitat en un lloc web",
-            "displayType": "Unitat d’anuncis"
+            "description": "Una unitat publicitària en un lloc web",
+            "displayType": "Unitat publicitària"
         },
         "Websites\/advert\/placement": {
-            "description": "Una forma d&#39;agrupar unitats publicitàries amb un nom",
-            "displayType": "Ubicació de l’anunci"
+            "description": "Una manera d&#39;agrupar unitats publicitàries sota un nom",
+            "displayType": "Col·locació de l&#39;anunci"
         },
         "Websites\/advert\/creative": {
             "description": "Contingut per a un anunci",
-            "displayType": "Publicitat creativa"
+            "displayType": "Anunci creatiu"
         },
         "Websites\/advert\/campaign": {
             "description": "Una campanya publicitària",
-            "displayType": "Campanya d’anuncis"
+            "displayType": "Campanya publicitària"
         },
         "Websites\/webpage": {
-            "description": "Representa un lloc web amb el qual es va raspar els metadades",
+            "description": "Representa un lloc web les metadades del qual s&#39;han esborrat",
             "displayType": "pàgina web"
         }
     }

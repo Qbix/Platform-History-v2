@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Dan il-kontenut huwa moħbi għalik."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Punt Ġdid"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Nies li stedint",
+        "Streams\/invitedMe": "Min stidinni",
+        "DoYouAgree": "Taqbel?",
+        "Yes": "Iva",
+        "No": "Nru"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "X&#39;inhuma l-interessi tiegħek?",
+        "CanAdd": "Jekk għadek ma tistax issib dak li qed tfittex, tista &#39;żżid interess ġdid hawn taħt:",
+        "TrySynonyms": "Tarahx? Ipprova xi sinonimi.",
+        "AddUnderCategory": "Żid taħt il-kategorija...",
+        "Other": "Oħrajn",
+        "Unlisted": "Mhux ikkwotat"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Il-messaġġ ġie mmarkat għal reviżjoni tal-amministratur. Tektek mill-ġdid biex tneħħi l-bandiera.",
+        "noOneSaid": "Ħadd ma qal xejn",
+        "closeChatButton": "Agħlaq iċ-chat",
+        "closeChatConfirmTitle": "Tagħlaq dan iċ-chat?",
+        "closeChatConfirm": "Żgur li trid tagħlaq dan iċ-chat?",
+        "Subscribed": "Notifiki Attivati",
+        "Unsubscribed": "Notifiki Siekta",
+        "closeChatConfirmYes": "Iva",
+        "closeChatConfirmNo": "Nru",
+        "earlierComments": "kummenti preċedenti",
+        "startedConversation": "beda konverżazzjoni",
+        "RealTimeCall": "Sejħa f&#39;Ħin Real",
+        "SearchByName": "Fittex bl-isem",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} qed iżżur iċ-chat",
+            "Join": "{{displayName}} ingħaqad maċ-chat",
+            "Leave": "{{displayName}} ħalla ċ-chat",
+            "RelatedTo": "{{displayName}} beda {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "immaniġġja l-abbonamenti tal-email tiegħek",
+        "IfUnsubscribe": "Jekk trid tneħħi l-abbonament",
+        "*": "Messaġġ {{& message.fields.type}} lil {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} qal: {{& message.content}}",
+        "Streams\/changed": "Bidliet fi {{stream.fields.title}}",
+        "Streams\/invite": "Int ġejt mistieden għal {{& stream.fields.title}}",
+        "Streams\/announcement": "Tħabbira fi {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} biddel l-aċċess fi {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Messaġġ taċ-chat editjat fi {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Messaġġ taċ-chat tneħħa fi {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} ingħalaq",
+        "Streams\/task\/progress": "Progress li sar fi {{stream.fields.title}}",
+        "Streams\/task\/complete": "Kompitu lest: {{stream.fields.title}}",
+        "Streams\/task\/error": "Żball waqt: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Messaġġ Dħul",
+        "Streams\/relatedTo\/Streams\/call": "Sejħa Ġdida Bdiet fi {{toTitle}}",
+        "Streams\/relatedTo\/*": "Ġdid {{relationDisplayType}} fi {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Miżjud ma&#39; {{toTitle}} bħala {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} semmejtek f&#39;kumment",
+        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Stieden",
+        "messageContent": "{{displayName}} stedinkom biex {{inviteUrl}}",
+        "youCanNowPaste": "Issa tista&#39; tippejstja din il-link x&#39;imkien biex tistieden lin-nies",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "chooseFromContacts": "Agħżel mill-Kuntatti tiegħek",
+            "chooseAgainFromContacts": "Agħżel Erġa &#39;mill-Kuntatti",
+            "inviteSelectedContacts": "Stieden Kuntatti Magħżula",
+            "selectFromContacts": "Agħżel Minn Kuntatti",
+            "userChooserPlaceholder": "Fittex bl-isem",
+            "photo": "Ħu ritratt",
+            "photoInstruction": "Jekk il-persuna li skennjat il-kodiċi QR tiegħek tkun quddiemek, ħudha ritratt",
+            "to": "Lil: {{Stream Title}}",
+            "go": "Mur",
+            "title": "Stieden",
+            "placeholder": "Numru tal-mowbajl jew indirizz elettroniku",
+            "orInvite": "Jew stieden lin-nies billi tuża:",
+            "copyLink": "{{ClickOrTap}} biex tikkopja l-link tal-istedina",
+            "shareOrCopyLink": "{{ClickOrTap}} biex taqsam jew tikkopja link tal-istedina",
+            "QR": "{{ClickOrTap}} biex tiġġenera kodiċi QR",
+            "QRtitle": "Skennja dan il-kodiċi QR",
+            "QRscanned": "Skennjawha!",
+            "scannedQR": "{{ClickOrTap}} jekk il-kodiċi ġie skannjat",
             "byEmail": "Email",
-            "byText": "Text",
+            "byText": "Test",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Ħej, iċċekkja dan",
+            "PleaseVisitLink": "Jekk jogħġbok żur il-link li ġej:",
+            "InvitingYou": "Qed nistedinkom biex {{title}}",
+            "HasInvitedYou": "{{displayName}} stedinkom biex {{title}}",
+            "HasMentionedYou": "{{displayName}} semmejt f&#39;&quot;{{title}}&quot;",
+            "YOUAREINVITED": "INTI MISTIEDNA!",
+            "AcceptInvite": "Aċċetta Stieden"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Ġejt mistieden għal {{title}}. Jekk jogħġbok tektek {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Ġejt mistieden. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "poġġiet messaġġ <em>{{message.fields.type}}<\/em> lil {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "ikkummentat fuq",
+            "startedCallIn": "beda sejħa fil",
+            "in": "fi",
+            "body": "fi {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "ġie stazzjonat fuq",
+                "byAvatar": "minn {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "għandha {{instructions.fromDisplayType}} ġdida",
+                "byAvatar": "miżjud minn {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "L-istediniet jintbagħtu min-numru tagħna, li sħabek għadhom ma jagħrfux. Segwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "confirm": "L-istediniet jintbagħtu min-numru tagħna, li sħabek għadhom ma jagħrfux. Tixtieq issegwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "check": "Ħej, għadni kif bgħattlek stedina għall-app {{app}}. Jekk jogħġbok iċċekkja l-sms tiegħek u kklikkja l-link!",
+            "CheckYourMobile": "Jekk jogħġbok iċċekkja l-SMS u segwi l-istruzzjonijiet!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Segwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "confirm": "L-istediniet jintbagħtu mid-dominju tagħna, li l-ħbieb tiegħek għadhom ma jagħrfux. Tixtieq issegwi b&#39;test ta&#39; malajr biex tgħarrafhom li l-istedina ġiet minnek, u titlobhom biex ikklikkja l-link.",
+            "subject": "Ġejt stedina?",
+            "body": "Ħej, għadni kif bgħattlek stedina għall-app {{app}}. Jekk jogħġbok iċċekkja l-email tiegħek u kklikkja l-link hemmhekk!",
+            "CheckYourEmail": "Jekk jogħġbok iċċekkja l-email tiegħek u segwi l-istruzzjonijiet!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
+        "Title": "Titolu",
+        "Subscribed": "Abbonat",
+        "Participants": "Parteċipanti",
+        "AreYouSureRemoveIdentifier": "Żgur li tneħħi dan l-identifikatur?",
+        "AreYouSureUnsubscribeIdentifier": "Żgur li tħassar dan l-identifikatur? Itfi n-notifiki lil dan l-identifikatur.",
+        "AreYouSureUnsubscribeDevice": "Żgur li tħassar dan l-apparat? Itfi n-notifiki lil dan l-apparat.",
+        "AreYouSureRemoveParticipant": "Int żgur li trid tneħħi lil dan il-parteċipant?",
+        "RemoveParticipant": "Neħħi parteċipant",
+        "Identifiers": "Identifikaturi",
+        "Devices": "Apparat",
         "Streams": "Streams"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "M&#39;għandekx permess biex tissieħeb f&#39;dan il-fluss.",
+        "streamTitle": "{{1}} beda sejħa diretta",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Konnessjoni",
+            "microphoneBtn": "Ippermetti Mikrofonu",
+            "cameraBtn": "Ippermetti Kamera",
+            "cameraAndMicrophoneBtn": "Ippermetti Kamera u Mikrofonu"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mic huwa mitfi",
+            "micIsOn": "Mic huwa mixgħul",
+            "cameraIsOff": "Il-kamera hija mitfija",
+            "cameraIsOn": "Il-kamera hija mixgħula",
+            "screenSharingIsOn": "Il-qsim tal-iskrin huwa mixgħul",
+            "screenSharingIsOff": "Aqsam l-iskrin",
+            "joinNow": "Ingħaqad mas-Sejħa"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur &quot;Settings&quot; -&gt; &quot;Avvanzat&quot; -&gt; &quot;Privatezza u sigurtà&quot; -&gt; &quot;Settings tas-Sit&quot; -&gt; &quot;Kamera&quot; jew &quot;Settings tas-Sit&quot; -&gt; &quot;Mikrofonu&quot;",
+            "point2": "Neħħi {{hostname}} mil-lista &quot;Blokk&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Permess għal {{kind}} miċħud. Jekk jogħġbok erġa&#39; tagħbija din il-paġna u kkonferma l-aċċess għal {{kind}} biex tissieħeb fil-konferenza."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur fis-Settings tal-Android tiegħek",
+            "point2": "Iftaħ &quot;Apps u notifiki&quot;",
+            "point3": "Sib &quot;{{communityName}}&quot; u iftħu",
+            "point4": "Tektek fuq Permessi",
+            "point5": "Attiva {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Istruzzjonijiet",
+            "permissionDenied": "Permess għal {{kind}} miċħud. Biex tużah jekk jogħġbok segwi dawn il-passi:",
+            "point1": "Mur fis-Settings tal-iOS tiegħek",
+            "point2": "Iftaħ &quot;Privatezza&quot;",
+            "point3": "Sib {{kind}} u iftħu",
+            "point4": "Sib &quot;{{communityName}}&quot; u abilita"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Inti ssieħbu fil-kamra",
+            "joining": "Issieħeb: {{userName}}",
+            "sbLeftRoom": "{{userName}} telqet mill-kamra",
+            "switchingRoom": "Kamra tal-bidla...",
+            "forceDisconnecting": "Int tkun skonnettjat fi żmien 5 sekondi",
+            "forceDisconnectingImmediately": "Int ġejt skonnettjat minn host",
+            "youLeftRoom": "Tlaqt mill-kamra",
+            "codeCopied": "Tlaqt mill-kamra",
+            "sbBeganFbLive": "{{userName}} beda jxandar din is-sejħa fuq Facebook",
+            "sbStoppedFbLive": "{{userName}} waqaf ixxandar din is-sejħa fuq Facebook",
+            "youBeganFbLive": "Bdejt xxandar din is-sejħa fuq Facebook",
+            "youStoppedFbLive": "Waqaft ixandir din is-sejħa fuq Facebook",
+            "youStartedLive": "Bdejt xxandar din is-sejħa lill-RTMP tad-dwana",
+            "youStoppedLive": "Waqaft ixandir din is-sejħa għal RTMP personalizzat",
+            "sbStartedLiveStreaming": "{{userName}} beda live",
+            "sbStoppedLiveStreaming": "{{userName}} spiċċa live",
+            "liveStopped": "Sar żball waqt li jintbagħat il-vidjo lill-endpoint",
+            "youBeganVideoRecording": "Bdejt tirreġistra din il-konferenza",
+            "youStoppedVideoRecording": "Waqaft tirreġistra din il-konferenza",
+            "linkCopiedToCb": "Link ikkupjat mal-clipboard",
+            "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
+            "userHasNoVideo": "Parteċipant m&#39;għandux vidjo",
+            "openInBrowserAlert": "Iftaħ il-link fil-browser Safari biex tingħaqad mal-konferenza."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
+            "dialogTitle": "Settings tal-Vidjo",
             "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
+            "screenSharing": "Qsim tal-Iskrin",
+            "shareAnotherScreen": "Aqsam skrin ieħor",
+            "turnOffCameras": "Itfi l-kamera",
+            "turnOffVideo": "Itfi l-kondiviżjoni tal-kamera\/iskrin",
+            "turnOffAudioInput": "Mikrofonu mute",
+            "turnOffScreenSharing": "Itfi l-qsim tal-iskrin",
+            "cameraIsTurnedOff": "Il-kamera hija mitfija",
+            "micIsTurnedOff": "Il-mikrofonu huwa mitfi",
+            "startFBLive": "Ibda Facebook Livestream",
+            "stopFBLive": "Waqqaf Facebook Livestream",
+            "startRecording": "Ibda Reġistrazzjoni",
+            "stopRecording": "Waqqaf ir-Reġistrazzjoni",
+            "start": "Ibda",
+            "stop": "Waqfa",
+            "recordingInProgress": "Ir-reġistrazzjoni għaddejja...",
+            "fbLiveTitle": "Titolu ta&#39; Livestream",
+            "fbLiveDescription": "Iddeskrivi l-Livestream tiegħek. X&#39;inhu dwar?",
+            "fbOnlyMeLiveAccess": "Jien biss",
+            "fbFriendsAccess": "Ħbieb",
+            "fbPublicAccess": "Pubbliku",
+            "publishOnTimeline": "Ippubblika fuq il-kalendarju",
+            "publishToGroup": "Ippubblika lill-grupp",
+            "fbStartLive": "Mur Ħaj",
+            "fbStopLive": "Tmiem Livestream",
             "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "fbEmbedCode": "Inkorpora",
+            "copy": "Kopja",
+            "streamToRTMP": "Stream għal RTMP tad-dwana",
+            "startBroadcasting": "Ibda x-xandir",
+            "broadcastingInProgress": "Ix-xandir għadu għaddej"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Settings tal-awdjo",
+            "speakers": "Kelliema",
+            "microphone": "Mikrofonu"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Settings tal-Parteċipant",
+            "disconnect": "Skonnettja",
+            "floatingScreens": "Skrins li jżommu f&#39;wiċċ l-ilma",
+            "tiledScreens": "Skrins bil-madum",
+            "loudestExceptMe": "L-aktar Għoli Ħlief Jien",
+            "maximizeLoudest": "Timmassimizza Loudest",
+            "staticMaximized": "Statika Maximized",
+            "fullScreen": "Sħiħ Screen",
+            "manual": "Manwal",
+            "turnOffCamera": "Aħbi l-vidjo",
+            "turnOffAudio": "Awdjo mute",
+            "turnOffScreenSharing": "Aħbi l-qsim tal-iskrin",
+            "turnOnCamera": "Uri vidjo",
+            "turnOnAudio": "Iċċekkja l-awdjo",
+            "turnOnScreenSharing": "Uri l-qsim tal-iskrin"
         },
         "streamingSettings": {
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Laqgħa",
+            "MeetingEnded": "Il-laqgħa spiċċat"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Mistiedna",
+            "description": "Inbox għall-istediniet"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Riżorsa",
+            "description": "fluss għall-ġestjoni tal-aċċess għal riżorsa u l-istazzjonar ta’ messaġġi dwar aġġornamenti"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "biex tirċievi aġġornamenti dwar il-progress fuq ċertu kompitu",
+            "displayType": "Kompitu"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "kategorija għall-kompiti",
+            "displayType": "Kompiti"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "esperjenza komuni għall-membri ta’ komunità",
+            "displayType": "Esperjenza komuni għal membri ta&#39; komunità"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "tislima li biha utent jista&#39; jintroduċi ruħu",
+            "displayType": "Tislijiet"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Numru",
+            "description": "numru matematiku"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Data",
+            "description": "data"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Test",
+            "description": "korp tat-test"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Test",
+            "description": "korp żgħir tat-test"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Test",
+            "description": "korp medju tat-test"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Indirizz elettroniku",
+            "description": "indirizz elettroniku"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Numru tat-telefon",
+            "description": "numru tat-telefon"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "link fuq il-web"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Immaġni",
+            "description": "immaġni viżwali",
+            "newItem": "Żid Immaġni"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Gallerija tal-Immaġni",
+            "description": "gallerija ta&#39; stampi"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "album li miegħu hija relatata diversi midja"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Fajl",
+            "description": "fajl imtella",
+            "newItem": "Żid Fajl"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Clip Awdjo",
+            "description": "klipp awdjo",
+            "newItem": "Żid Awdjo"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
             "description": "video clip",
-            "newItem": "Add Video"
+            "newItem": "Żid Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "Dokument PDF",
+            "description": "Dokument PDF",
+            "newItem": "Żid PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "awdjo jew vidjo live"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Kategorija",
+            "description": "kategorija li magħha jistgħu jkunu relatati flussi oħra"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Indiċi Parteċipanti",
+            "description": "flussi huma relatati\/mhux relatati ma&#39; dan meta utent jingħaqad\/titlaq"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Interess",
+            "description": "jirrappreżenta l-interess ta&#39; utent f&#39;ċertu suġġett"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Dieħla",
+            "description": "destinazzjoni għal messaġġi mibgħuta minn utenti oħra"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Konversazzjoni",
+            "description": "konverżazzjoni bejn l-utenti, bl-istorja"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Sejħa f&#39;ħin reali",
+            "description": "sejħa bil-vidjo\/awdjo f&#39;ħin reali"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Mistoqsija",
+            "description": "fluss tal-mistoqsijiet"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Tweġiba",
+            "description": "fluss tat-tweġiba"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Sejħiet",
+            "description": "kategorija għal Streams\/webrtc",
+            "MaxRelationsExceeded": "Max sejħiet inqabeż"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "ittajpja it-titlu tal-paġna",
+        "ModTab": "Immodifika l-Oġġett",
+        "Save": "Ħlief",
+        "Delete": "Ħassar",
         "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "record": "Rekord",
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titolu",
+        "description": "deskrizzjoni",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta&#39; Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors awdjo",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titolu",
+        "description": "deskrizzjoni",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta&#39; Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors tal-vidjo",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titolu",
+        "description": "deskrizzjoni",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "setClip": "Aqta&#39; Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors pdf",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Irrisettja",
+        "edit": "Editja",
+        "title": "titolu",
+        "description": "deskrizzjoni",
         "upload": "Upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Issettja l-URL",
+        "save": "Ħlief",
+        "uploadedImage": "Immaġini mtellgħa",
+        "imageTitle": "Titolu tal-immaġni",
+        "setClip": "Aqta&#39; Clip",
+        "invalidURL": "URL invalidu",
+        "invalidFile": "Fajl Invalidu",
+        "errorNoSource": "L-ebda sors ta &#39;immaġni",
+        "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
+        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
+        "Questions": "Mistoqsijiet",
+        "Answers": "Tweġibiet",
+        "AnswerQuestion": "Wieġeb Mistoqsija",
+        "SetYourAnswer": "Jekk jogħġbok wieġeb il-mistoqsija",
+        "NewQuestion": "Mistoqsija Ġdida",
+        "NewAnswer": "Tweġiba Ġdida",
+        "AnswerDetails": "Tweġiba Dettalji",
+        "answerOption": "Għażla",
+        "answerOptionExclusive": "Esklussiva",
+        "answerTextarea": "Żona tat-test",
+        "FreeAnswer": "Ikteb it-tweġiba tiegħek hawn",
+        "SaveQuestion": "Ħlief Mistoqsija",
+        "SaveAnswer": "Ħlief Tweġiba",
+        "AddAnotherAnswer": "Żid tweġiba oħra",
+        "ErrorAnswers": "Jekk jogħġbok żid anke tweġiba waħda",
+        "AlreadyAnswered": "Diġà wieġeb",
+        "TitlePlaceholder": "Ittajpja l-mistoqsija tiegħek",
+        "ContentPlaceholder": "Poġġi kwalunkwe informazzjoni addizzjonali hawn biex tgħin lin-nies iwieġbu",
+        "ErrorTitle": "Mistoqsija meħtieġa",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Esperjenza Ġdida",
+        "DefineTitle": "Jekk jogħġbok iddefinixxi titolu",
+        "Create": "Oħloq"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
+        "SettingsTitle": "Sejħiet",
+        "MaxCalls": "Max sejħiet",
+        "Update": "Aġġornament",
+        "NoCallsYet": "L-ebda telefonata għadha",
+        "CallReasonTitle": "Din is-sejħa dwar xiex?",
         "WaitingRoom": "Waiting Room"
     }
 }

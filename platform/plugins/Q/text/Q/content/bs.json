@@ -1,48 +1,48 @@
 {
     "request": {
         "error": "Greška {{status}} tokom zahtjeva",
-        "canceled": "Zahtev je otkazan",
+        "canceled": "Zahtjev je otkazan",
         "500": "Interna greška servera",
         "404": "Nije pronađeno: {{url}}",
-        "501": "Zahtev je prekinut"
+        "501": "Zahtjev je prekinut"
     },
     "nonce": {
-        "sameDomain": "Sesija je istekla. Osvežite stranicu i pokušajte ponovo.",
-        "otherDomain": "Blokiran zahtjev za više domena na strani domen na {{baseUrl}}"
+        "sameDomain": "Sesija je istekla. Osvježite stranicu i pokušajte ponovo.",
+        "otherDomain": "Blokiran zahtjev za više domena za stranu domenu na {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "klik",
+        "click": "kliknite",
         "yes": "da",
-        "no": "ne",
+        "no": "br",
         "Tap": "Dodirnite",
         "Click": "Kliknite",
         "Yes": "Da",
-        "No": "Ne"
+        "No": "br"
     },
     "months": {
         "1": "Januar",
         "2": "februar",
-        "3": "Mart",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "Jul",
-        "8": "August",
-        "9": "Septembar",
-        "10": "Oktobar",
-        "11": "Novembar",
-        "12": "Decembar"
+        "3": "mart",
+        "4": "april",
+        "5": "maja",
+        "6": "juna",
+        "7": "jula",
+        "8": "avgust",
+        "9": "septembra",
+        "10": "oktobar",
+        "11": "novembar",
+        "12": "decembar"
     },
     "audio": {
-        "allowMicrophoneAccess": "Dopustite pristup mikrofonu",
-        "record": "Record",
+        "allowMicrophoneAccess": "Dozvolite pristup vašem mikrofonu",
+        "record": "Zapis",
         "recording": "Snimanje",
-        "remains": "ostaje",
+        "remains": "ostaci",
         "maximum": "maksimum",
         "playing": "Igranje",
         "recorded": "Snimljeno",
-        "clip": "clip",
+        "clip": "isječak",
         "orupload": "Ili otpremi",
         "usethis": "Koristi ovo",
         "discard": "Odbaci",
@@ -54,7 +54,7 @@
     "confirm": {
         "title": "Potvrdi",
         "ok": "Da",
-        "cancel": "Ne"
+        "cancel": "br"
     },
     "prompt": {
         "title": "Prompt",
@@ -63,38 +63,38 @@
     "imagepicker": {
         "errorReadingFile": "Greška pri čitanju datoteke",
         "cameraCommands": {
-            "prompt": "Šta želite da uradite?",
+            "prompt": "šta biste željeli raditi?",
             "photo": "Snimite novu fotografiju",
-            "library": "Izaberite iz biblioteke"
+            "library": "Odaberite iz biblioteke"
         },
         "tooSmall": "Molimo odaberite veću sliku.",
         "cropping": {
             "title": "Podesite veličinu i položaj",
-            "touchscreen": "Koristite prste za zumiranje i povlačenje",
-            "notTouchscreen": "Koristite miš i točak za zumiranje i povlačenje"
+            "touchscreen": "Koristite prste za zumiranje i prevlačenje",
+            "notTouchscreen": "Koristite miš i kotačić za zumiranje i prevlačenje"
         },
         "errorType": "Žao nam je, ali ova vrsta datoteke nije podržana"
     },
     "timestamp": {
         "lastNight": "prošle noći",
-        "lastEvening": "last eve",
-        "yesterday": "jučer",
-        "thisMorning": "ovo jutro",
+        "lastEvening": "poslednje veče",
+        "yesterday": "juče",
+        "thisMorning": "jutros",
         "today": "danas",
         "tonight": "večeras",
-        "tomorrowMorning": "tom morn",
+        "tomorrowMorning": "tom jutro",
         "tomorrow": "sutra",
         "hoursAgo": "{{h}} sati",
-        "hourAgo": "{{h}} pre sat vremena",
-        "minuteAgo": "{{m}} pre minut",
-        "minutesAgo": "{{m}} pre nekoliko minuta",
-        "secondAgo": "{{s}} pre sekundu",
+        "hourAgo": "{{h}} prije sat",
+        "minuteAgo": "{{m}} minuta prije",
+        "minutesAgo": "{{m}} minuta prije",
+        "secondAgo": "{{s}} prije sekunde",
         "secondsAgo": "{{s}} sekundi",
         "fewSecondsAgo": "prije nekoliko sekundi",
         "rightNow": "upravo sada",
         "inSecond": "za {{s}} sekundu",
         "inSeconds": "za {{s}} sekundi",
-        "inMinute": "za {{m}} minutu",
+        "inMinute": "za {{m}} minuta",
         "inMinutes": "za {{m}} minuta",
         "inHour": "za {{h}} sat",
         "inHours": "za {{h}} sati",
@@ -103,8 +103,8 @@
     "video": {
         "clip": "isječak",
         "errorNoSource": "Nema video izvora",
-        "SkipAfter": "Preskoči nakon",
-        "Skip": "Preskoči"
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "isječak",
@@ -113,10 +113,10 @@
     "clip": {
         "SetClipStart": "Postavite Clip Start",
         "ClipStart": "Clip Start",
-        "SetClipEnd": "Postavi kraj isječka",
+        "SetClipEnd": "Postavite Clip End",
         "ClipEnd": "Clip End",
-        "StartMoreEnd": "Početna pozicija ne može biti više od krajnje",
-        "EndLessStart": "Krajnji položaj ne može biti manji od početnog",
+        "StartMoreEnd": "Početna pozicija ne može biti više od krajnje pozicije",
+        "EndLessStart": "Krajnja pozicija ne može biti manja od početne pozicije",
         "WhichInvalid": "Argument &#39;koji&#39; je nevažeći"
     },
     "tabs": {
@@ -125,8 +125,8 @@
     },
     "durations": {
         "second": "sekunda",
-        "seconds": "sekunde",
-        "minute": "minutu",
+        "seconds": "sekundi",
+        "minute": "minuta",
         "minutes": "minuta",
         "hour": "sati",
         "day": "dan",
@@ -139,7 +139,7 @@
         "years": "godine",
         "decade": "decenija",
         "decades": "decenijama",
-        "century": "vijeka",
-        "centuries": "vijeka"
+        "century": "veka",
+        "centuries": "stoljeća"
     }
 }

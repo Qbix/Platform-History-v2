@@ -2,16 +2,16 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Խթանման հղում",
+                "link": "Հղում խթանելու համար",
                 "startDate": "Մեկնարկի ամսաթիվ",
-                "startTime": "Սկսելու ժամանակը",
-                "endDate": "Ավարտի ամսաթիվը",
+                "startTime": "Մեկնարկի ժամանակը",
+                "endDate": "Ավարտի ամսաթիվ",
                 "endTime": "Ավարտի ժամանակը",
                 "budget": "Բյուջե"
             },
             "interests": {
-                "Title": "Filտել ըստ հետաքրքրության",
-                "FilterInterests": "Սկսեք հետաքրքրություն մուտքագրել ..."
+                "Title": "Զտել ըստ տոկոսների",
+                "FilterInterests": "Սկսեք մուտքագրել հետաքրքրություն..."
             },
             "Interest": "Հետաքրքրություն",
             "Location": "Գտնվելու վայրը"
@@ -20,22 +20,22 @@
     "webpage": {
         "composer": {
             "Go": "Գնա",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Թերթել",
-            "WriteToStartConversation": "Գրեք ձեր մտքերը ՝ խոսակցությունը սկսելու համար",
-            "StartConversation": "Սկսեք խոսակցություն",
-            "GotoConversation": "Գնալ դեպի versրույց",
-            "reset": "Վերակայել",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Թերթիր",
+            "WriteToStartConversation": "Խոսակցությունը սկսելու համար գրեք ձեր մտքերը",
+            "StartConversation": "Սկսեք զրույցը",
+            "GotoConversation": "Գնալ դեպի Զրույց",
+            "reset": "Վերականգնել",
             "edit": "Խմբագրել",
             "link": "Հղում",
-            "setUrl": "Սահմանել URL- ը",
-            "save": "Պահել",
+            "setUrl": "Սահմանել URL",
+            "save": "Պահպանել",
             "setClip": "Cut Out Clip",
             "invalidURL": "Անվավեր URL"
         },
-        "FileTooLarge": "Պահեստավորման համար ֆայլը չափազանց մեծ է: Ֆայլի առավելագույն չափը {{size}}",
+        "FileTooLarge": "Ֆայլը չափազանց մեծ է քեշավորման համար: Ֆայլի առավելագույն չափը {{size}}",
         "InvalidPDF": "Ֆայլը վավեր PDF չէ",
-        "StartTypingTitleOrKeywords": "Սկսեք մուտքագրել վերնագիր կամ հիմնաբառեր ..."
+        "StartTypingTitleOrKeywords": "Սկսեք մուտքագրել վերնագիր կամ հիմնաբառեր..."
     },
     "types": {
         "Websites\/article": {
@@ -47,7 +47,7 @@
             "displayType": "Սլայդ"
         },
         "Websites\/presentation": {
-            "description": "Տարբեր սլայդներից բաղկացած ներկայացում",
+            "description": "Ներկայացում, որը բաղկացած է տարբեր սլայդներից",
             "displayType": "Ներկայացում"
         },
         "Websites\/advert\/unit": {
@@ -55,11 +55,11 @@
             "displayType": "Գովազդային միավոր"
         },
         "Websites\/advert\/placement": {
-            "description": "Գովազդային միավորների անվան տակ խմբավորման եղանակ",
+            "description": "Գովազդային միավորները անվան տակ խմբավորելու եղանակ",
             "displayType": "Գովազդի տեղադրում"
         },
         "Websites\/advert\/creative": {
-            "description": "Գովազդի բովանդակություն",
+            "description": "Բովանդակություն գովազդի համար",
             "displayType": "Ստեղծագործական գովազդ"
         },
         "Websites\/advert\/campaign": {
@@ -67,7 +67,7 @@
             "displayType": "Գովազդային արշավ"
         },
         "Websites\/webpage": {
-            "description": "Ներկայացնում է մի կայք, որի մետատվյալները ջնջվել են",
+            "description": "Ներկայացնում է մի կայք, որի մետատվյալները քերծվել են",
             "displayType": "ինտերնետային էջ"
         }
     }

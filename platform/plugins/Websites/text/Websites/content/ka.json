@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "ბმული პოპულარიზაციისთვის",
+                "startDate": "Დაწყების თარიღი",
+                "startTime": "დაწყების დრო",
+                "endDate": "Დასრულების თარიღი",
+                "endTime": "Დროის დასასრული",
+                "budget": "ბიუჯეტი"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "გაფილტვრა ინტერესის მიხედვით",
+                "FilterInterests": "დაიწყეთ ინტერესის აკრეფა..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "ინტერესი",
+            "Location": "მდებარეობა"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "წადი",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "დათვალიერება",
+            "WriteToStartConversation": "დაწერეთ თქვენი აზრები საუბრის დასაწყებად",
+            "StartConversation": "დაიწყეთ საუბარი",
+            "GotoConversation": "გადადით საუბარში",
+            "reset": "გადატვირთვა",
+            "edit": "რედაქტირება",
+            "link": "Ბმული",
+            "setUrl": "URL-ის დაყენება",
+            "save": "Შენახვა",
+            "setClip": "ამოჭრა კლიპი",
+            "invalidURL": "არასწორი ლინკი"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "ფაილი ძალიან დიდია ქეშირებისთვის. ფაილის მაქსიმალური ზომა {{size}}",
+        "InvalidPDF": "ფაილი არ არის სწორი PDF",
+        "StartTypingTitleOrKeywords": "დაიწყე სათაურის ან საკვანძო სიტყვების აკრეფა..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "HTML დოკუმენტი, რომლის ნახვა და რედაქტირება შეუძლია სხვადასხვა მომხმარებლებს",
+            "displayType": "სტატია"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "პრეზენტაციის სლაიდი, შეიძლება შეიცავდეს HTML, აუდიო და ა.შ.",
+            "displayType": "სლაიდი"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "პრეზენტაცია, რომელიც შედგება სხვადასხვა სლაიდებისგან",
+            "displayType": "პრეზენტაცია"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "სარეკლამო ერთეული ვებსაიტზე",
+            "displayType": "სარეკლამო ერთეული"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "სარეკლამო ერთეულების სახელით დაჯგუფების გზა",
+            "displayType": "რეკლამის განთავსება"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "რეკლამის შინაარსი",
+            "displayType": "კრეატიული რეკლამა"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "სარეკლამო კამპანია",
+            "displayType": "სარეკლამო კამპანია"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "წარმოადგენს ვებსაიტს, რომლის მეტამონაცემები დაიშალა",
+            "displayType": "ვებ გვერდი"
         }
     }
 }

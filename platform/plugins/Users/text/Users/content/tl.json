@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
+        "Daily": "Araw-araw",
+        "Weekly": "Linggu-linggo",
+        "Monthly": "Buwan-buwan",
+        "Application": "Aplikasyon",
+        "Pages": "Mga pahina",
+        "Services": "Mga serbisyo",
         "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "WeekDays": "Mga Araw ng Linggo"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "mag log in",
+        "LogOut": "mag log out"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Itakda ang {{1}} bilang aking pangunahing {{2}}",
+        "ChoosePassPhrase": "Pumili ng <strong>pass phrase<\/strong> upang mag-log in.<br> Isang simpleng parirala na binubuo ng ilang salita na madali mong maaalala.",
+        "ChoosePassPhraseSeeSuggestions": "Pumili ng magandang <strong>pass phrase<\/strong> para protektahan ang iyong account. Tingnan ang mga mungkahi para sa ilang ideya.",
+        "LogOutAndTryAgain": "Mag-log Out at Subukang Muli",
+        "IfYouFeel": "Kung sa tingin mo ay may nangyaring mali, magagawa mo",
+        "SetIdentifierButtonTitle": "magsimula muli"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Magsimula"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Magsimula",
+        "Authorize": "Pahintulutan",
+        "TermsLabel": "Nabasa ko at sumasang-ayon ako<br> sa {{link}}",
+        "TermsTitle": "Mga tuntunin",
+        "mustAgree": "Una kailangan mong sumang-ayon sa mga tuntunin."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Tinatanggap ko ang {{link}}",
+        "TermsTitle": "Mga tuntunin"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Pahintulot",
+        "prompt": "Gusto mo bang paganahin ang mga notification? Makakatanggap ka ng mga real-time na update tungkol sa mga bagay na mahalaga sa iyo.",
+        "yes": "Oo",
+        "no": "Hindi",
+        "WelcomePleaseVerifyEmail": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
+        "WelcomeVerifyEmail": "Maligayang pagdating! I-verify ang iyong email address.",
+        "ForgetPass": "Uy, nakalimutan mo ba ang iyong passphrase?",
+        "PassphraseSaved": "Na-save na ang iyong pass phrase.",
+        "IdentifierActivated": "Ang iyong {{type}} ay naisaaktibo.",
+        "CompletedActivation": "Nakumpleto mo na ang pag-activate ng user.",
+        "CompletedActivationLogIn": "Nakumpleto mo na ang pag-activate ng user. Subukang mag-log in ngayon."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
+            "title": "Pumili ng contact",
+            "CreateAccount": "+ Bagong Contact",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "SearchByName": "Maghanap ayon sa pangalan",
+            "EmptyContacts": "Hindi nahanap ang mga contact..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Pumili ng contact ng {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Mangyaring pumili ng label.",
+        "inviteUser": "Mag-imbita ng mga User",
+        "selectRole": "Piliin ang Tungkulin",
+        "inviteRole": "Imbitahan {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Di-wastong wika ang napili",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Maligayang pagdating",
+        "directions": "Gumawa ng account, o mag-log in.",
+        "directionsNoRegister": "Mag-log in kung mayroon kang account.",
+        "goButton": "Pumunta ka",
+        "passphrase": "Ilagay ang iyong pass phrase:",
+        "loginButton": "Magsimula",
+        "registerButton": "Magsimula",
+        "resendButton": "Magpadala ng Mensahe sa Pag-activate",
+        "forgot": "Nakalimutan na?",
+        "resendConfirm": "Gusto mo bang magpadala ng mensahe para i-reset ang iyong passphrase?",
+        "resendSuccess": "Tingnan kung may mensahe upang i-reset ang iyong passphrase",
+        "resendClose": "Isara",
+        "noPassphrase": "Bago ka makapag-log in, dapat kang magtakda ng pass phrase sa pamamagitan ng pag-click sa link sa iyong activation message.",
+        "notVerified": "Dapat kang magpadala sa iyong sarili ng isang activation message upang makapag-log in.",
+        "emailExists": "Nasubukan mo na bang magrehistro sa email na ito dati? Kung gayon, suriin ang iyong inbox upang i-activate ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>I-click upang muling ipadala ang mensahe<\/a>",
+        "mobileExists": "Nasubukan mo na bang magrehistro gamit ang mobile number na ito dati? Kung gayon, suriin ang iyong SMS upang i-activate ang iyong account. <a href='#resend' class='Q_button Users_activation_resend'>I-click upang muling ipadala ang mensahe<\/a>",
+        "usingOther": "o kaya mo",
+        "prompt": "Pumili ng username:",
+        "newUser": "o gumawa ng bagong account sa ibaba",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "iyong mobile # o email",
+            "mobile": "ilagay ang iyong mobile #",
+            "email": "ilagay ang iyong email address",
+            "username": "gumamit lamang ng mga titik at numero"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Tanggapin ang Mga Tuntunin ng Serbisyo?",
+        "facebookNoEmail": "Walang kumpirmadong email address ang iyong facebook account. Mag-log in sa katutubong paraan.",
+        "picTooltip": "Maaari mong baguhin ang larawang ito sa ibang pagkakataon",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Mag-log in sa {{host}} sa oras {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Nagre-redirect sa Wallet",
+                "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Magdagdag ng paraan para mag-log in",
+        "sendMessage": "Magpadala ng Mensahe sa Pag-activate",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
+            "identifier": "ilagay ang iyong mobile # o email",
+            "mobile": "ilagay ang iyong mobile number",
+            "email": "ilagay ang iyong email address",
             "username": "username"
         }
     },
     "prompt": {
         "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "areUsing": "Ginagamit mo ang {{platform}} bilang",
+        "noLongerUsing": "Hindi ka na nakakonekta sa {{platform}} bilang",
+        "doAuth": "Mag-log in gamit ang account na ito",
+        "doSwitch": "Lumipat sa account na ito"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "May-ari",
         "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
+        "Member": "Miyembro",
+        "Guest": "Bisita",
         "Host": "Host"
     }
 }

@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Napaka {{status}} med zahtevo",
+        "canceled": "Zahteva preklicana",
+        "500": "Napaka notranjega strežnika",
+        "404": "Ni bilo mogoče najti: {{url}}",
+        "501": "Zahteva je prekinjena"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Seja je potekla. Osvežite stran in poskusite znova.",
+        "otherDomain": "Blokirana meddomenska zahteva za tujo domeno na {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "tapnite",
+        "click": "kliknite",
+        "yes": "da",
+        "no": "št",
+        "Tap": "Dotaknite se",
+        "Click": "Kliknite",
+        "Yes": "da",
+        "No": "št"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "januarja",
+        "2": "februarja",
+        "3": "marca",
+        "4": "aprila",
+        "5": "maja",
+        "6": "junija",
+        "7": "julija",
+        "8": "avgusta",
+        "9": "septembra",
+        "10": "oktober",
+        "11": "novembra",
+        "12": "december"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "drugič",
+        "seconds": "sekundah",
+        "minute": "minuta",
+        "minutes": "minut",
+        "hour": "ure",
+        "day": "dan",
+        "days": "dnevi",
+        "week": "teden",
+        "weeks": "tednov",
+        "month": "mesec",
+        "months": "mesecev",
+        "year": "leto",
+        "years": "let",
+        "decade": "desetletje",
+        "decades": "desetletja",
+        "century": "stoletja",
+        "centuries": "stoletja"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Dovolite dostop do mikrofona",
+        "record": "Zapis",
+        "recording": "Snemanje",
+        "remains": "ostanki",
+        "maximum": "največ",
+        "playing": "Igranje",
+        "recorded": "Posneto",
+        "clip": "posnetek",
+        "discard": "Zavrzi",
+        "encoding": "Kodiranje"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "posnetek",
+        "errorNoSource": "Ni video vira",
+        "SkipAfter": "Preskoči po",
+        "Skip": "Preskoči"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "posnetek",
+        "errorNoSource": "Brez vira pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Nastavite začetek posnetka",
+        "ClipStart": "Začetek posnetka",
+        "SetClipEnd": "Nastavite konec posnetka",
+        "ClipEnd": "Konec posnetka",
+        "StartMoreEnd": "Začetni položaj ne sme biti več kot končni položaj",
+        "EndLessStart": "Končni položaj ne sme biti manjši od začetnega položaja",
+        "WhichInvalid": "Argument &#39;kateri&#39; je neveljaven"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Opozorilo"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Potrdi",
+        "ok": "da",
+        "cancel": "št"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Poziv",
+        "ok": "Pojdi"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "več",
+        "Menu": "meni"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Napaka pri branju datoteke",
+        "errorType": "Oprostite, vendar ta vrsta datoteke ni podprta",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Kaj bi rad počel?",
+            "photo": "Posnemite novo fotografijo",
+            "library": "Izberite iz knjižnice"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Prosimo, izberite večjo sliko.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Prilagodite velikost in položaj",
+            "touchscreen": "S prsti povečajte in povlecite",
+            "notTouchscreen": "Uporabite miško in kolesce za povečavo in vlečenje"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "prejšnjo noč",
+        "lastEvening": "zadnji večer",
+        "yesterday": "včeraj",
+        "thisMorning": "danes zjutraj",
+        "today": "danes",
+        "tonight": "nocoj",
+        "tomorrowMorning": "tom jutro",
+        "tomorrow": "jutri",
+        "hoursAgo": "Pred {{h}} urami",
+        "hourAgo": "pred {{h}} uro",
+        "minuteAgo": "Pred {{m}} minuto",
+        "minutesAgo": "Pred {{m}} minutami",
+        "secondAgo": "{{s}} sekundo nazaj",
+        "secondsAgo": "Pred {{s}} sekundami",
+        "fewSecondsAgo": "pred sekundami",
+        "rightNow": "takoj zdaj",
+        "inSecond": "čez {{s}} sekundo",
+        "inSeconds": "v {{s}} sekundah",
+        "inMinute": "v {{m}} minuti",
+        "inMinutes": "čez {{m}} minut",
+        "inHour": "čez {{h}} uro",
+        "inHours": "čez {{h}} ur",
+        "inUnderMinute": "v manj kot 1 minuti"
     }
 }

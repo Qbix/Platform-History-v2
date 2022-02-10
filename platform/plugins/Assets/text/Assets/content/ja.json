@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "タップして支払う"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}：{{call 'user.displayName'}}の請求が処理されました",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}にお支払いいただきありがとうございます",
+        "SubscribedTo": "{{call 'user.displayName'}}が{{plan.title}}にサブスクライブしました",
+        "YouSubscribedTo": "{{plan.title}}に登録しました"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "{{call 'publisher.displayName'}}から「{{description}}」で{{displayAmount}}の支払いを受け取ります",
+        "HasBeenCharged": "ねえ、これは{{1}}が{{4}}によって{{3}}に対して{{2}}請求されたことをお知らせするためのものです。"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "「{{description}}」のお支払いありがとうございます",
+        "HavePaid": "{{1}}さん、これは{{4}}に対して{{2}}を{{3}}に正常に支払ったことの簡単な確認です。"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "注文に関する情報",
+        "PaymentMethod": "支払方法",
+        "ContactInfo": "連絡先情報",
+        "Pay": "支払い"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "{{invitedUserName}}によって受け入れられた招待",
+        "Streams_user_firstname": "{{invitedUserName}}が名を入力しました",
+        "Streams_user_lastname": "{{invitedUserName}}は姓を入力しました",
+        "Streams_user_icon": "{{invitedUserName}}入力されたアイコン",
+        "Places_user_location": "{{invitedUserName}}が場所を入力しました",
+        "Streams_greeting": "{{invitedUserName}}が挨拶を入力しました",
+        "YouHaveCreditsToStart": "開始する{{amount}}クレジットがあります",
+        "PaymentFor": "「{{1}}」の支払い",
+        "PaymentTo": "{{1}}への支払い",
+        "PaymentToUser": "{{toUserName}}への支払い",
+        "CreatePaidStream": "{{toStreamName}}を作成するため",
+        "JoinedPaidStream": "「 <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> 」での予約",
+        "CreatedCommunity": "コミュニティ「{{communityId}}」を作成するため",
+        "LeftPaidStream": "「 <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> 」の予約払い戻しとして",
+        "BoughtCredits": "{{amount}}クレジットを購入しました",
+        "BonusCredits": "ボーナス{{amount}}クレジット",
+        "BuyAmountCredits": "{{amount}}クレジットを購入する",
+        "WatchClip": "{{fromStreamTitle}}を視聴したことで{{amount}}クレジットを獲得",
+        "MissingCredits": "クレジットがありません",
+        "YouMissingCredits": "続行するには、追加の{{amount}}クレジットが必要です。",
+        "BuyCredits": "クレジットを購入する",
+        "BuyBonus": "{{amount}}クレジットを一度に購入すると、{{bonus}}クレジットボーナスが発生します。",
+        "Buy": "買う",
+        "PurchaseCredits": "購入クレジット",
+        "Credits": "クレジット",
+        "ErrorInvalidAmount": "金額が無効です",
+        "ErrorInvalidCurrency": "残念ながら、通貨{{currency}}はまだサポートされていません",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}}クレジット",
+            "BonusCredits": "{{amount}}クレジット"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "日にち",
+        "Amount": "額",
+        "Description": "説明",
+        "Client": "クライアント",
+        "To": "に",
+        "From": "から",
+        "SeeHistory": "{{1}}の支払い履歴を参照してください",
+        "HistoryEmpty": "まだデータがありません",
+        "PaymentFor": "{{amount}}クレジットを送信しました",
+        "PaymentTo": "{{amount}}クレジットを送信しました",
+        "PaymentToUser": "{{amount}}クレジットを送信しました",
+        "CreatePaidStream": "使用済みの{{amount}}クレジット",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}}クレジットを獲得",
+            "-": "使用済みの{{amount}}クレジット"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}}クレジットを獲得",
+            "-": "使用済みの{{amount}}クレジット"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}}クレジットを受け取りました",
+            "-": "{{amount}}クレジットを送信しました"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "使用済みの{{amount}}クレジット",
+        "BoughtCredits": "{{amount}}クレジットを購入しました",
+        "BonusCredits": "ボーナス{{amount}}クレジットを取得しました",
+        "InviteAcceptedBy": "{{amount}}クレジットを獲得",
+        "Streams_user_firstname": "{{amount}}クレジットを獲得",
+        "Streams_user_lastname": "{{amount}}クレジットを獲得",
+        "Streams_user_icon": "{{amount}}クレジットを獲得",
+        "Places_user_location": "{{amount}}クレジットを獲得",
+        "Streams_greeting": "{{amount}}クレジットを獲得",
+        "YouHaveCreditsToStart": "{{amount}}クレジットを獲得"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "支払い情報を設定する",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "サブスクリプションを開始する",
+            "message": "{{title}}に登録しますか？",
+            "ok": "わかった",
+            "cancel": "キャンセル"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "クレジットカードまたはデビットカード",
+        "SubscribePayment": "支払いを購読する",
+        "ImmediatePayment": "即時支払い"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "支払い情報を設定する",
+        "BuyAmountCredits": "{{amount}}クレジットを購入する",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "支払いをする",
+            "message": "{{symbol}} {{amount}}を支払うことに同意しますか？",
+            "ok": "わかった",
+            "cancel": "キャンセル"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "クレジット",
+            "description": "クレジットと支払いを追跡します"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "サブスクリプションプラン",
+            "description": "サブスクリプションプラン"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "サブスクリプション",
+            "description": "サブスクリプション"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "製品",
+            "description": "販売されている製品"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "サービス",
+            "description": "提供されているサービス"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}}クレジットを獲得"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}}クレジットを購入しました"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "ボーナス{{amount}}クレジット"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "使用済みの{{amount}}クレジット"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "{{amount}}クレジットを{{toUserName}}に送信しました"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "{{fromUserName}}から{{amount}}クレジットを受け取りました"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "新しいサービス",
+            "TitlePlaceholder": "サービスタイトル",
+            "PricePlaceholder": "設定価格",
+            "LinkPlaceholder": "追加情報リンクを設定する",
+            "DescriptionPlaceholder": "サービスの説明",
+            "SaveService": "サービスを保存",
+            "SelectRequiredParticipants": "必要な参加者"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "サービステンプレートの管理",
+        "ManageServices": "サービスの管理",
+        "Free": "無料",
+        "OptionalContribution": "オプションの貢献",
+        "RequiredPayment": "必要な支払い",
+        "AreYouSureDelete": "このサービスを削除してもよろしいですか？",
+        "AmountServicesRelated": "このサービスに関連する{{amount}}の可用性があります。それらも削除されます。"
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "{{title}} NFTに関する情報",
+        "Description": "NFTに関する詳細情報",
+        "FixedBid": "今買う",
+        "CurrentBid": "現在の入札",
+        "StartingIn": "で始まる",
+        "EndingIn": "で終わります",
+        "CreateNFT": "NFTを作成する",
+        "TitlePlaceholder": "NFTにタイトルを付ける",
+        "DescriptionPlaceholder": "NFTに説明を付けます",
+        "CreateYourNFT": "NFTを作成する",
+        "Royalties": "使用料",
+        "RoyaltyPlaceholder": "オプション。譲渡前にクリエイターに支払われた金額。",
+        "ExpirationDate": "有効期限",
+        "StartingDate": "開始日",
+        "BidsBelowThisAmount": "この金額を下回る入札は許可されません",
+        "MinimumBid": "最低入札価格",
+        "Price": "価格",
+        "Owner": "オーナー",
+        "SelectCategory": "カテゴリを選んでください",
+        "Day": "日",
+        "Days": "日々",
+        "Hour": "時間",
+        "Hours": "時間",
+        "Minute": "分",
+        "Minutes": "分",
+        "Second": "2番",
+        "Seconds": "秒",
+        "SalesCreator": "売上高のはクリエイターに行きます",
+        "Details": "詳細",
+        "Bids": "入札",
+        "History": "歴史",
+        "LoremIpsum": "Lorem Ipsumは、印刷および植字業界の単なるダミーテキストです。",
+        "PutOnSale": "売り出す",
+        "PutOffSale": "販売から撤退する",
+        "Transfer": "移行",
+        "Update": "アップデート",
+        "UpdateToken": "トークンの更新",
+        "CreateToken": "トークンを作成する",
+        "PlaceBid": "入札する",
+        "SoldOut": "販売済み",
+        "NftName": "NFT名",
+        "DescribeYourNFT": "NFTについて説明してください",
+        "NftPicture": "NFTを表す画像",
+        "NftMovie": "NFTを表す映画",
+        "UploadMovie": "映画をアップロードする",
+        "MovieSource": "映画ソース",
+        "UploadFile": "ファイルをアップロードする",
+        "PutOnMarketplace": "市場に出す",
+        "InstantPurchase": "ユーザーがNFTをすぐに購入できるように価格を入力してください",
+        "FixedPrice": "固定価格",
+        "TimedAuction": "時限オークション",
+        "OpenForBids": "入札可能",
+        "PriceOnePiece": "ワンピースの価格を入力してください",
+        "EnterMinimumBid": "最低入札価格を入力してください",
+        "SelectChain": "チェーンを選択",
+        "WrongChain": "このNFTは「{{chain}}」の下に作成されました。このチェーンをご利用ください。",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFTのインポート",
+            "fileNotFound": "申し訳ありませんが、CSVファイルが見つかりません。",
+            "fileEmpty": "申し訳ありませんが、CSVファイルは空です。",
+            "userIdNotFound": "ユーザーは存在しますが、IDは空です",
+            "errorLine": "行{{1}}",
+            "fieldNotFound": "必須フィールド「{{1}}」が見つかりません",
+            "taskStreamInvalid": "タスクストリームが無効です",
+            "instructionsEmpty": "タスクストリーム命令が空",
+            "complete": "完了",
+            "activateUsers": "ユーザーにアクティベーションメッセージを送信しますか？",
+            "importProgress": "進捗",
+            "importOptions": "オプション",
+            "sampleCSV": "サンプルCSVをダウンロード",
+            "fileLabel": "スプレッドシートのアップロード：",
+            "errorsTitle": "エラーが発生しました"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "NFTコレクションによるフィルタリング",
+                "ShowNFTCollection": "でNFTコレクションを表示...",
+                "AllCollections": "すべてのコレクション"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "すべての著者",
+                "AllUsers": "みんな",
+                "FilterByAuthors": "著者によるフィルタリング"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "コレクションに戻る"
     }
 }

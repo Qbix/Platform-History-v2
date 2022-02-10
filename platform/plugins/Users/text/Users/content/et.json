@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Analüütika",
+        "Daily": "Igapäevane",
+        "Weekly": "Iganädalane",
+        "Monthly": "Igakuine",
+        "Application": "Rakendus",
+        "Pages": "Leheküljed",
+        "Services": "Teenused",
+        "Faq": "KKK",
+        "WeekDays": "Nädalapäevad"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Logi sisse",
+        "LogOut": "Logi välja"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Määra {{1}} minu peamiseks {{2}}",
+        "ChoosePassPhrase": "Valige sisselogimiseks <strong>parool<\/strong> .<br> Lihtne mõnest sõnast koosnev fraas, mis jääb kergesti meelde.",
+        "ChoosePassPhraseSeeSuggestions": "Valige oma konto kaitsmiseks hea <strong>parool<\/strong> . Vaadake mõnede ideede soovitusi.",
+        "LogOutAndTryAgain": "Logige välja ja proovige uuesti",
+        "IfYouFeel": "Kui tunnete, et midagi läks valesti, saate seda teha",
+        "SetIdentifierButtonTitle": "Alusta uuesti"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Alustama"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Alustama",
+        "Authorize": "Volita",
+        "TermsLabel": "Olen lugenud ja nõustun<br> {{link}}",
+        "TermsTitle": "Tingimused",
+        "mustAgree": "Kõigepealt peate tingimustega nõustuma."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Nõustun {{link}}",
+        "TermsTitle": "Tingimused"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Luba",
+        "prompt": "Kas soovite märguanded lubada? Saate reaalajas värskendusi teile oluliste asjade kohta.",
+        "yes": "Jah",
+        "no": "Ei",
+        "WelcomePleaseVerifyEmail": "Tere tulemast! Palun kinnitage oma e-posti aadress.",
+        "WelcomeVerifyEmail": "Tere tulemast! Kinnita oma e-posti aadress.",
+        "ForgetPass": "Hei, kas unustasite oma parooli?",
+        "PassphraseSaved": "Teie parool on salvestatud.",
+        "IdentifierActivated": "Teie {{type}} on aktiveeritud.",
+        "CompletedActivation": "Olete kasutaja aktiveerimise lõpetanud.",
+        "CompletedActivationLogIn": "Olete kasutaja aktiveerimise lõpetanud. Proovige kohe sisse logida."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Valige kontakt",
+            "CreateAccount": "+ Uus kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ei leitud",
+            "SearchByName": "Otsi nime järgi",
+            "EmptyContacts": "Kontakte ei leitud..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Valige kontakt {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Valige silt.",
+        "inviteUser": "Kutsuge kasutajaid",
+        "selectRole": "Valige Roll",
+        "inviteRole": "Kutsu {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Valitud keel",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Tere tulemast",
+        "directions": "Looge konto või logige sisse.",
+        "directionsNoRegister": "Logige sisse, kui teil on konto.",
+        "goButton": "Mine",
+        "passphrase": "Sisestage oma paroolifraas:",
+        "loginButton": "Alustama",
+        "registerButton": "Alustama",
+        "resendButton": "Saada aktiveerimissõnum",
+        "forgot": "Unustasin?",
+        "resendConfirm": "Kas soovite parooli lähtestamiseks saata sõnumi?",
+        "resendSuccess": "Parooli lähtestamiseks vaadake sõnumit",
+        "resendClose": "Sulge",
+        "noPassphrase": "Enne sisselogimist peate määrama parooli, klõpsates aktiveerimissõnumis olevat linki.",
+        "notVerified": "Sisselogimiseks peate saatma endale aktiveerimissõnumi.",
+        "emailExists": "Kas proovisite selle meiliga varem registreeruda? Kui jah, kontrollige oma konto aktiveerimiseks oma postkasti. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
+        "mobileExists": "Kas proovisite varem selle mobiilinumbriga registreeruda? Kui jah, kontrollige oma konto aktiveerimiseks oma SMS-i. <a href='#resend' class='Q_button Users_activation_resend'>Klõpsake sõnumi uuesti saatmiseks<\/a>",
+        "usingOther": "või saate",
+        "prompt": "Vali kasutajanimi:",
+        "newUser": "või looge allpool uus konto",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "oma mobiilinumbrit või e-posti",
+            "mobile": "sisesta oma mobiili number",
+            "email": "Sisesta oma emaili aadress",
+            "username": "kasutage ainult tähti ja numbreid"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Kas nõustute teenusetingimustega?",
+        "facebookNoEmail": "Teie Facebooki kontol puudub kinnitatud e-posti aadress. Lihtsalt logige sisse algsel viisil.",
+        "picTooltip": "Saate seda pilti hiljem muuta",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Logige sisse {{host}} kell {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Ümbersuunamine Walletisse",
+                "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Lisage sisselogimisviis",
+        "sendMessage": "Saada aktiveerimissõnum",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "sisestage oma mobiiltelefoni number või e-posti aadress",
+            "mobile": "Sisesta oma mobiilinumber",
+            "email": "Sisesta oma emaili aadress",
+            "username": "kasutajanimi"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Konto",
+        "areUsing": "Kasutate {{platform}} kui",
+        "noLongerUsing": "Te ei ole enam ühendatud kasutajaga {{platform}} as",
+        "doAuth": "Logige sisse selle kontoga",
+        "doSwitch": "Lülitu sellele kontole"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "Omanik",
         "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
+        "Member": "liige",
+        "Guest": "Külaline",
         "Host": "Host"
     }
 }

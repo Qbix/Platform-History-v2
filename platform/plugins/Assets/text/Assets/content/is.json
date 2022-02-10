@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Bankaðu til að borga"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: gjaldið unnið fyrir {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Þakka þér fyrir greiðsluna til {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} gerðist áskrifandi að {{plan.title}}",
+        "YouSubscribedTo": "Þú hefur verið áskrifandi að {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Þú færð {{displayAmount}} greiðslu frá {{call 'publisher.displayName'}} með „{{description}}“",
+        "HasBeenCharged": "Hæ, þetta er bara til að láta þig vita að {{1}} hefur verið rukkað fyrir {{2}} fyrir {{3}} af {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Þakka þér fyrir greiðsluna fyrir „{{description}}“",
+        "HavePaid": "Hæ {{1}}, þetta er bara fljótleg staðfesting á því að þú hafir greitt {{2}} til {{3}} fyrir {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Upplýsingar um pöntun",
+        "PaymentMethod": "Greiðslumáti",
+        "ContactInfo": "Upplýsingar um tengilið",
+        "Pay": "Borga"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Boð samþykkt af {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} sló inn fornafn",
+        "Streams_user_lastname": "{{invitedUserName}} sló inn eftirnafn",
+        "Streams_user_icon": "{{invitedUserName}} skráð tákn",
+        "Places_user_location": "{{invitedUserName}} sló inn staðsetningu",
+        "Streams_greeting": "{{invitedUserName}} setti inn kveðju",
+        "YouHaveCreditsToStart": "Þú átt {{amount}} inneign til að byrja",
+        "PaymentFor": "Greiðsla fyrir „{{1}}“",
+        "PaymentTo": "Greiðsla til {{1}}",
+        "PaymentToUser": "Greiðsla til {{toUserName}}",
+        "CreatePaidStream": "fyrir að búa til {{toStreamName}}",
+        "JoinedPaidStream": "fyrir bókun í &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "fyrir að búa til samfélag „{{communityId}}“",
+        "LeftPaidStream": "sem endurgreiðsla bókunar í &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Keypti {{amount}} inneign",
+        "BonusCredits": "Bónus {{amount}} inneign",
+        "BuyAmountCredits": "Kauptu {{amount}} inneign",
+        "WatchClip": "Fékk {{amount}} inneign fyrir að horfa á {{fromStreamTitle}}",
+        "MissingCredits": "Vantar inneignir",
+        "YouMissingCredits": "Þú þarft {{amount}} inneign til viðbótar til að halda áfram.",
+        "BuyCredits": "Kaupa inneign",
+        "BuyBonus": "Að kaupa {{amount}} inneign í einu mun leiða til {{bonus}} eininga bónus.",
+        "Buy": "Kaupa",
+        "PurchaseCredits": "Kaupa inneign",
+        "Credits": "Inneign",
+        "ErrorInvalidAmount": "Upphæð ógild",
+        "ErrorInvalidCurrency": "Því miður styðjum við ekki gjaldmiðil {{currency}} ennþá",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} einingar",
+            "BonusCredits": "{{amount}} einingar"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Dagsetning",
+        "Amount": "Magn",
+        "Description": "Lýsing",
+        "Client": "Viðskiptavinur",
+        "To": "til",
+        "From": "frá",
+        "SeeHistory": "Sjá greiðsluferil fyrir {{1}}",
+        "HistoryEmpty": "Þú hefur engin gögn ennþá",
+        "PaymentFor": "Sendi {{amount}} inneign",
+        "PaymentTo": "Sendi {{amount}} inneign",
+        "PaymentToUser": "Sendi {{amount}} inneign",
+        "CreatePaidStream": "Eyddi {{amount}} einingar",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fékk {{amount}} inneign",
+            "-": "Eyddi {{amount}} einingar"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fékk {{amount}} inneign",
+            "-": "Eyddi {{amount}} einingar"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Fékk {{amount}} inneign",
+            "-": "Sendi {{amount}} inneign"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Eyddi {{amount}} einingar",
+        "BoughtCredits": "Keypti {{amount}} inneign",
+        "BonusCredits": "Fékk bónus {{amount}} inneign",
+        "InviteAcceptedBy": "Fékk {{amount}} inneign",
+        "Streams_user_firstname": "Fékk {{amount}} inneign",
+        "Streams_user_lastname": "Fékk {{amount}} inneign",
+        "Streams_user_icon": "Fékk {{amount}} inneign",
+        "Places_user_location": "Fékk {{amount}} inneign",
+        "Streams_greeting": "Fékk {{amount}} inneign",
+        "YouHaveCreditsToStart": "Fékk {{amount}} inneign"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Stilltu greiðsluupplýsingar",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Byrjaðu áskrift",
+            "message": "Viltu gerast áskrifandi að {{title}}?",
+            "ok": "Allt í lagi",
+            "cancel": "Hætta við"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kredit- eða debetkort",
+        "SubscribePayment": "Gerast áskrifandi Greiðsla",
+        "ImmediatePayment": "Greiðsla strax"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Stilltu greiðsluupplýsingar",
+        "BuyAmountCredits": "Kauptu {{amount}} inneign",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Greiða",
+            "message": "Samþykkir þú að greiða {{symbol}}{{amount}}?",
+            "ok": "Allt í lagi",
+            "cancel": "Hætta við"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Inneign",
+            "description": "heldur utan um inneignir og greiðslur"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Áskriftaráætlun",
+            "description": "áskriftaráætlun"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Áskrift",
+            "description": "Áskrift"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Vara",
+            "description": "vara sem verið er að selja"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Þjónusta",
+            "description": "þjónusta sem boðið er upp á"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Fékk {{amount}} inneign"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Keypti {{amount}} inneign"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bónus {{amount}} inneign"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Eyddi {{amount}} einingar"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Sendi {{amount}} inneign til {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Fékk {{amount}} inneign frá {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Ný þjónusta",
+            "TitlePlaceholder": "Þjónustuheiti",
+            "PricePlaceholder": "Ákveðið verð",
+            "LinkPlaceholder": "stilltu viðbótarupplýsingahlekk",
+            "DescriptionPlaceholder": "Þjónustulýsing",
+            "SaveService": "Vista þjónustu",
+            "SelectRequiredParticipants": "Nauðsynlegir þátttakendur"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Stjórna þjónustusniðmátum",
+        "ManageServices": "Stjórna þjónustu",
+        "Free": "Ókeypis",
+        "OptionalContribution": "Valfrjálst framlag",
+        "RequiredPayment": "Áskilið greiðslu",
+        "AreYouSureDelete": "Ertu viss um að þú viljir eyða þessari þjónustu?",
+        "AmountServicesRelated": "Það eru {{amount}} tiltækileikar sem tengjast þessari þjónustu. Þeir verða einnig fjarlægðir."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Upplýsingar um {{title}} NFT",
+        "Description": "Ítarlegar upplýsingar um NFT",
+        "FixedBid": "Kaupa núna",
+        "CurrentBid": "Núverandi tilboð",
+        "StartingIn": "Byrjar inn",
+        "EndingIn": "Endar á",
+        "CreateNFT": "Búðu til NFT",
+        "TitlePlaceholder": "Gefðu NFT þínum titil",
+        "DescriptionPlaceholder": "Gefðu NFT þínum lýsingu",
+        "CreateYourNFT": "Búðu til NFT þinn",
+        "Royalties": "Þóknanir",
+        "RoyaltyPlaceholder": "Valfrjálst. Upphæð greidd til höfundar fyrir millifærslu.",
+        "ExpirationDate": "Gildistími",
+        "StartingDate": "Upphafsdagur",
+        "BidsBelowThisAmount": "Tilboð undir þessari upphæð verða ekki leyfð",
+        "MinimumBid": "Lágmarkstilboð",
+        "Price": "Verð",
+        "Owner": "Eigandi",
+        "SelectCategory": "Veldu flokk",
+        "Day": "Dagur",
+        "Days": "Dagar",
+        "Hour": "Klukkutími",
+        "Hours": "Klukkutímar",
+        "Minute": "Mínúta",
+        "Minutes": "Fundargerð",
+        "Second": "Í öðru lagi",
+        "Seconds": "Sekúndur",
+        "SalesCreator": "af sölu mun fara til skapara",
+        "Details": "Upplýsingar",
+        "Bids": "Tilboð",
+        "History": "Saga",
+        "LoremIpsum": "Lorem Ipsum er einfaldlega blekkingartexti prent- og setningariðnaðarins.",
+        "PutOnSale": "Setja í sölu",
+        "PutOffSale": "Draga úr sölu",
+        "Transfer": "Flytja",
+        "Update": "Uppfærsla",
+        "UpdateToken": "Uppfærðu táknið",
+        "CreateToken": "Búðu til tákn",
+        "PlaceBid": "Veðja",
+        "SoldOut": "Seldur",
+        "NftName": "NFT nafn",
+        "DescribeYourNFT": "Vinsamlegast lýstu NFT þínum",
+        "NftPicture": "Mynd til að tákna NFT",
+        "NftMovie": "Kvikmynd til að tákna NFT",
+        "UploadMovie": "Sækja kvikmynd",
+        "MovieSource": "Kvikmyndaheimild",
+        "UploadFile": "Hladdu upp skrá",
+        "PutOnMarketplace": "Sett á markaðstorg",
+        "InstantPurchase": "Sláðu inn verð til að leyfa notendum að kaupa NFT strax",
+        "FixedPrice": "Fast verð",
+        "TimedAuction": "Tímasett uppboð",
+        "OpenForBids": "Opið fyrir tilboðum",
+        "PriceOnePiece": "Færið inn verð fyrir eitt stykki",
+        "EnterMinimumBid": "Sláðu inn lágmarkstilboð",
+        "SelectChain": "Veldu keðju",
+        "WrongChain": "Þetta NFT búið til undir „{{chain}}“. Vinsamlegast notaðu þessa keðju.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Flytur inn NFT",
+            "fileNotFound": "Því miður, CSV skrá fannst ekki.",
+            "fileEmpty": "Því miður er CSV skráin tóm.",
+            "userIdNotFound": "notandi er til en auðkennið er tómt",
+            "errorLine": "lína {{1}}",
+            "fieldNotFound": "Áskilinn reitur &quot;{{1}}&quot; fannst ekki",
+            "taskStreamInvalid": "verkefnastraumur ógildur",
+            "instructionsEmpty": "verkstraumsleiðbeiningar tómar",
+            "complete": "Heill",
+            "activateUsers": "senda virkjunarskilaboð til notenda?",
+            "importProgress": "Framfarir",
+            "importOptions": "Valmöguleikar",
+            "sampleCSV": "Sækja sýnishorn af CSV",
+            "fileLabel": "Hladdu upp töflureikni:",
+            "errorsTitle": "Villur komu upp"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Sía eftir NFT söfnum",
+                "ShowNFTCollection": "Sýna NFT safn í ...",
+                "AllCollections": "Öll söfn"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Allir höfundar",
+                "AllUsers": "Allir",
+                "FilterByAuthors": "Sía eftir höfundum"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Aftur í safn"
     }
 }

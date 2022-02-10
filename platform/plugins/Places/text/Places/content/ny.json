@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "mkati mwa {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "makilomita",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "mtunda",
+        "miles": "mailosi",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "phazi",
+        "feet": "mapazi",
+        "inches": "mainchesi"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ndimachita chidwi ndi zomwe zikuchitika mkati mwa {{select}}",
+        "update": "Sinthani Malo Anga",
+        "set": "Khazikitsani Malo Anga",
+        "prompt": "{{ClickOrTap}} apa ku<br> khazikitsa wanu<br> malo",
+        "myCurrentLocation": "Malo anga pano",
+        "enterAddress": "Lowetsani adilesi",
+        "enterPostcode": "Chonde lowetsani postcode \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Onjezani Malo",
+            "title": "Malo Atsopano",
+            "nameYourLocation": "Tchulani komwe muli"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Sungani malowa?",
+            "message": "Kodi mukufuna kugwiritsanso ntchito malowa mtsogolomu?",
+            "ok": "Inde",
+            "cancel": "Ayi"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Tchulani malo awa",
+            "placeholder": "Nyumba, Ntchito etc.",
+            "ok": "Sungani"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Sankhani Malo"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Malo aliwonse mkati mwaderali?",
+        "newArea": "Malo atsopano",
+        "promptTitle": "Lowetsani dzina laderalo:",
+        "absent": "Chonde ikani malo",
+        "error": "Cholakwika",
+        "exist": "Malo alipo kale",
+        "addNewArea": "Onjezani malo atsopano",
+        "add": "Onjezani"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "gulu la malo",
+            "displayType": "Malo"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Zimayimira nyumba, malo, sitima, paki, ndi zina.",
+            "displayType": "Malo"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Imayimira malo mkati mwa malo, monga chipinda kapena suite",
+            "displayType": "Malo"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Imayimira pansi munyumba kapena sitima",
+            "displayType": "Pansi"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Imayimira mzati munyumba kapena sitima",
+            "displayType": "Mzere"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Gulu la zinthu zomwe zili pamtunda wina wa geohash",
+            "displayType": "Pafupi ndi malo"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Gulu la zinthu zomwe zili pamtunda wina wa geohash, zofananira ndi chidwi",
+            "displayType": "Malo chidwi"
         }
     }
 }

@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "Аналитика",
+        "Daily": "Ежедневно",
+        "Weekly": "Еженедельно",
+        "Monthly": "Ежемесячно",
+        "Application": "Применение",
+        "Pages": "Страницы",
+        "Services": "Услуги",
+        "Faq": "Вопросы-Ответы",
+        "WeekDays": "Будни"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "авторизоваться",
+        "LogOut": "выйти"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Установить {{1}} в качестве основного {{2}}",
+        "ChoosePassPhrase": "Выберите <strong>парольную фразу<\/strong> для входа.<br> Простая фраза, состоящая из нескольких слов, которые вы легко запомните.",
+        "ChoosePassPhraseSeeSuggestions": "Выберите хорошую <strong>фразу-пароль<\/strong> , чтобы защитить свою учетную запись. См. предложения для некоторых идей.",
+        "LogOutAndTryAgain": "Выйдите из системы и повторите попытку",
+        "IfYouFeel": "Если вы чувствуете, что что-то пошло не так, вы можете",
+        "SetIdentifierButtonTitle": "начать сначала"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Начать"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Начать",
+        "Authorize": "Разрешить",
+        "TermsLabel": "Я прочитал и согласен<br> к {{link}}",
+        "TermsTitle": "Условия",
+        "mustAgree": "Сначала вы должны согласиться с условиями."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Я принимаю {{link}}",
+        "TermsTitle": "Условия"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Разрешение",
+        "prompt": "Вы хотите включить уведомления? Вы будете получать обновления в режиме реального времени о вещах, которые вам небезразличны.",
+        "yes": "да",
+        "no": "Нет",
+        "WelcomePleaseVerifyEmail": "Добро пожаловать! Пожалуйста, подтвердите свой адрес электронной почты.",
+        "WelcomeVerifyEmail": "Добро пожаловать! Проверьте свой адрес электронной почты.",
+        "ForgetPass": "Эй, ты забыл пароль?",
+        "PassphraseSaved": "Ваша парольная фраза сохранена.",
+        "IdentifierActivated": "Ваш {{type}} был активирован.",
+        "CompletedActivation": "Вы завершили активацию пользователя.",
+        "CompletedActivationLogIn": "Вы завершили активацию пользователя. Попробуйте войти сейчас."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Выберите контакт",
+            "CreateAccount": "+ Новый контакт",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create не найден",
+            "SearchByName": "Поиск по имени",
+            "EmptyContacts": "Контакты не найдены..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Выберите контакт {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Пожалуйста, выберите ярлык.",
+        "inviteUser": "Пригласить пользователей",
+        "selectRole": "Выберите роль",
+        "inviteRole": "Пригласить {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Выбран неверный язык",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Добро пожаловать",
+        "directions": "Создайте учетную запись или войдите в систему.",
+        "directionsNoRegister": "Войдите, если у вас есть учетная запись.",
+        "goButton": "Идти",
+        "passphrase": "Введите парольную фразу:",
+        "loginButton": "Начать",
+        "registerButton": "Начать",
+        "resendButton": "Отправить сообщение активации",
+        "forgot": "Забыл?",
+        "resendConfirm": "Вы хотите отправить сообщение для сброса парольной фразы?",
+        "resendSuccess": "Проверьте наличие сообщения для сброса парольной фразы",
+        "resendClose": "Закрывать",
+        "noPassphrase": "Прежде чем вы сможете войти в систему, вы должны установить парольную фразу, щелкнув ссылку в сообщении активации.",
+        "notVerified": "Вы должны отправить себе активационное сообщение, чтобы войти в систему.",
+        "emailExists": "Вы пытались зарегистрироваться с этим адресом электронной почты раньше? Если это так, проверьте свой почтовый ящик, чтобы активировать свою учетную запись. <a href='#resend' class='Q_button Users_activation_resend'>Нажмите, чтобы повторно отправить сообщение<\/a>",
+        "mobileExists": "Вы пытались зарегистрироваться с этим номером мобильного телефона раньше? Если это так, проверьте свое SMS, чтобы активировать свою учетную запись. <a href='#resend' class='Q_button Users_activation_resend'>Нажмите, чтобы повторно отправить сообщение<\/a>",
+        "usingOther": "или вы можете",
+        "prompt": "Выберете имя пользователя:",
+        "newUser": "или создайте новую учетную запись ниже",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "номер вашего мобильного телефона или электронная почта",
+            "mobile": "введите свой мобильный #",
+            "email": "Введите ваш адрес электронной почты",
+            "username": "используйте только буквы и цифры"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Принять Условия использования?",
+        "facebookNoEmail": "В вашей учетной записи facebook отсутствует подтвержденный адрес электронной почты. Просто войдите в систему родным способом.",
+        "picTooltip": "Вы можете изменить это изображение позже",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Войдите в {{host}} в {{timestamp}} время",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Перенаправление на кошелек",
+                "content": "Как только вы закроете это диалоговое окно, вы попадете в свой кошелек. После входа вернитесь на эту страницу."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Добавить способ входа",
+        "sendMessage": "Отправить сообщение активации",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "введите номер своего мобильного телефона или адрес электронной почты",
+            "mobile": "Введите номер мобильного телефона",
+            "email": "Введите ваш адрес электронной почты",
+            "username": "имя пользователя"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Аккаунт",
+        "areUsing": "Вы используете {{platform}} как",
+        "noLongerUsing": "Вы больше не подключены к {{platform}} как",
+        "doAuth": "Войти с этой учетной записью",
+        "doSwitch": "Переключиться на этот аккаунт"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Владелец",
+        "Admin": "Админ",
+        "Member": "Член",
+        "Guest": "Гость",
+        "Host": "Хозяин"
     }
 }

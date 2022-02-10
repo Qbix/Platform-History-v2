@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "ანალიტიკა",
+        "Daily": "ყოველდღიური",
+        "Weekly": "ყოველკვირეული",
+        "Monthly": "ყოველთვიური",
+        "Application": "განაცხადი",
+        "Pages": "გვერდები",
+        "Services": "სერვისები",
+        "Faq": "კითხვა",
+        "WeekDays": "Კვირის დღეები"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "შესვლა",
+        "LogOut": "გამოსვლა"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "დააყენე {{1}} ჩემს ძირითადად {{2}}",
+        "ChoosePassPhrase": "აირჩიეთ შესასვლელი <strong>ფრაზა<\/strong> , რომლითაც უნდა შეხვიდეთ.<br> მარტივი ფრაზა, რომელიც შედგება რამდენიმე სიტყვისაგან, რომელსაც ადვილად დაიმახსოვრებთ.",
+        "ChoosePassPhraseSeeSuggestions": "აირჩიეთ კარგი <strong>საპასუხო ფრაზა<\/strong> თქვენი ანგარიშის დასაცავად. იხილეთ წინადადებები რამდენიმე იდეისთვის.",
+        "LogOutAndTryAgain": "გამოდით და სცადეთ ხელახლა",
+        "IfYouFeel": "თუ გრძნობთ, რომ რაღაც არასწორედ მოხდა, შეგიძლიათ",
+        "SetIdentifierButtonTitle": "თავიდან დაწყება"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Დაიწყე"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Დაიწყე",
+        "Authorize": "ავტორიზაცია",
+        "TermsLabel": "წავიკითხე და ვეთანხმები<br> {{link}}-მდე",
+        "TermsTitle": "Ვადები",
+        "mustAgree": "ჯერ უნდა დაეთანხმოთ პირობებს."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "მე ვეთანხმები {{link}}",
+        "TermsTitle": "Ვადები"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "ნებართვა",
+        "prompt": "გსურთ შეტყობინებების ჩართვა? თქვენ მიიღებთ რეალურ დროში განახლებებს თქვენთვის საინტერესო საკითხების შესახებ.",
+        "yes": "დიახ",
+        "no": "არა",
+        "WelcomePleaseVerifyEmail": "მოგესალმებით! გთხოვთ, დაადასტუროთ თქვენი ელ.ფოსტის მისამართი.",
+        "WelcomeVerifyEmail": "მოგესალმებით! დაადასტურეთ თქვენი ელ.ფოსტის მისამართი.",
+        "ForgetPass": "ჰეი, დაგავიწყდა პაროლი?",
+        "PassphraseSaved": "თქვენი პაროლის ფრაზა შენახულია.",
+        "IdentifierActivated": "თქვენი {{type}} გააქტიურებულია.",
+        "CompletedActivation": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება.",
+        "CompletedActivationLogIn": "თქვენ დაასრულეთ მომხმარებლის გააქტიურება. სცადეთ შესვლა ახლავე."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "აირჩიეთ კონტაქტი",
+            "CreateAccount": "+ ახალი კონტაქტი",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ვერ მოიძებნა",
+            "SearchByName": "მოძებნეთ სახელით",
+            "EmptyContacts": "კონტაქტები ვერ მოიძებნა..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "აირჩიეთ {{displayName}}-ის კონტაქტი"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "გთხოვთ, აირჩიოთ ეტიკეტი.",
+        "inviteUser": "მოიწვიე მომხმარებლები",
+        "selectRole": "აირჩიეთ როლი",
+        "inviteRole": "მოიწვიე {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "არჩეულია არასწორი ენა",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "მოგესალმებით",
+        "directions": "შექმენით ანგარიში, ან შედით სისტემაში.",
+        "directionsNoRegister": "შედით, თუ გაქვთ ანგარიში.",
+        "goButton": "წადი",
+        "passphrase": "შეიყვანეთ თქვენი პაროლის ფრაზა:",
+        "loginButton": "Დაიწყე",
+        "registerButton": "Დაიწყე",
+        "resendButton": "გააქტიურების შეტყობინების გაგზავნა",
+        "forgot": "Დამავიწყდა?",
+        "resendConfirm": "გსურთ გაგზავნოთ თქვენი პაროლის ფრაზის გადაყენება?",
+        "resendSuccess": "შეამოწმეთ შეტყობინება თქვენი საიდუმლო ფრაზის აღსადგენად",
+        "resendClose": "დახურვა",
+        "noPassphrase": "სანამ შესვლას შეძლებთ, თქვენ უნდა დააყენოთ გამშვები ფრაზა თქვენს აქტივაციის შეტყობინებაში ბმულზე დაწკაპუნებით.",
+        "notVerified": "თქვენ უნდა გამოაგზავნოთ აქტივაციის შეტყობინება, რომ შეხვიდეთ სისტემაში.",
+        "emailExists": "ადრე სცადეთ დარეგისტრირება ამ ელ.წერილით? თუ ასეა, შეამოწმეთ თქვენი შემომავალი თქვენი ანგარიშის გასააქტიურებლად. <a href='#resend' class='Q_button Users_activation_resend'>დააწკაპუნეთ შეტყობინების ხელახლა გასაგზავნად<\/a>",
+        "mobileExists": "აქამდე სცადე ამ მობილურის ნომრით დარეგისტრირება? თუ ასეა, შეამოწმეთ თქვენი SMS თქვენი ანგარიშის გასააქტიურებლად. <a href='#resend' class='Q_button Users_activation_resend'>დააწკაპუნეთ შეტყობინების ხელახლა გასაგზავნად<\/a>",
+        "usingOther": "ან შეგიძლია",
+        "prompt": "Აირჩიეთ სახელი:",
+        "newUser": "ან შექმენით ახალი ანგარიში ქვემოთ",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "თქვენი მობილური # ან ელფოსტა",
+            "mobile": "შეიყვანეთ თქვენი მობილური #",
+            "email": "შეიყვანეთ თქვენი ელ.ფოსტის მისამართი",
+            "username": "გამოიყენეთ მხოლოდ ასოები და რიცხვები"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "ეთანხმებით მომსახურების პირობებს?",
+        "facebookNoEmail": "თქვენს facebook ანგარიშს აკლია დადასტურებული ელფოსტის მისამართი. უბრალოდ შედით მშობლიური გზით.",
+        "picTooltip": "თქვენ შეგიძლიათ შეცვალოთ ეს სურათი მოგვიანებით",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "შედით {{host}} დროს {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Wallet-ზე გადამისამართება",
+                "content": "ამ დიალოგის დახურვის შემდეგ გადაგიყვანთ თქვენს საფულეში. შესვლის შემდეგ დაბრუნდით ამ გვერდზე."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "დაამატეთ სისტემაში შესვლის გზა",
+        "sendMessage": "გააქტიურების შეტყობინების გაგზავნა",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "შეიყვანეთ თქვენი მობილური # ან ელფოსტა",
+            "mobile": "შეიყვანეთ თქვენი მობილურის ნომერი",
+            "email": "შეიყვანეთ თქვენი ელ.ფოსტის მისამართი",
+            "username": "მომხმარებლის სახელი"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} ანგარიში",
+        "areUsing": "თქვენ იყენებთ {{platform}} როგორც",
+        "noLongerUsing": "თქვენ აღარ ხართ დაკავშირებული {{platform}}-თან როგორც",
+        "doAuth": "შედით ამ ანგარიშით",
+        "doSwitch": "გადაერთეთ ამ ანგარიშზე"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "მფლობელი",
+        "Admin": "ადმინ",
+        "Member": "წევრი",
+        "Guest": "სტუმარი",
+        "Host": "მასპინძელი"
     }
 }

@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "ເນື້ອຫານີ້ຖືກເຊື່ອງໄວ້ຈາກທ່ານ."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "ລາຍການໃໝ່"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "ຄົນທີ່ຂ້ອຍເຊີນ",
+        "Streams\/invitedMe": "ໃຜເຊີນຂ້ອຍ",
+        "DoYouAgree": "ເຈົ້າ​ເຫັນ​ດີ​ບໍ່?",
+        "Yes": "ແມ່ນແລ້ວ",
+        "No": "ບໍ່"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "ຜົນປະໂຫຍດຂອງເຈົ້າແມ່ນຫຍັງ?",
+        "CanAdd": "ຖ້າທ່ານຍັງບໍ່ສາມາດຊອກຫາສິ່ງທີ່ທ່ານກໍາລັງຊອກຫາ, ທ່ານສາມາດເພີ່ມຄວາມສົນໃຈໃຫມ່ຂ້າງລຸ່ມນີ້:",
+        "TrySynonyms": "ບໍ່ເຫັນບໍ? ລອງໃຊ້ຄໍາສັບຄ້າຍຄືກັນ.",
+        "AddUnderCategory": "ເພີ່ມພາຍໃຕ້ໝວດໝູ່...",
+        "Other": "ອື່ນໆ",
+        "Unlisted": "ບໍ່ມີລາຍຊື່"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "ຂໍ້ຄວາມຖືກໝາຍໄວ້ສຳລັບການກວດສອບຜູ້ເບິ່ງແຍງລະບົບ. ແຕະອີກເທື່ອໜຶ່ງເພື່ອປົດທຸງ.",
+        "noOneSaid": "ບໍ່ມີໃຜເວົ້າຫຍັງ",
+        "closeChatButton": "ປິດການສົນທະນາ",
+        "closeChatConfirmTitle": "ປິດການສົນທະນານີ້ບໍ?",
+        "closeChatConfirm": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການປິດການສົນທະນານີ້?",
+        "Subscribed": "ເປີດການແຈ້ງເຕືອນແລ້ວ",
+        "Unsubscribed": "ປິດການແຈ້ງເຕືອນແລ້ວ",
+        "closeChatConfirmYes": "ແມ່ນແລ້ວ",
+        "closeChatConfirmNo": "ບໍ່",
+        "earlierComments": "ຄໍາເຫັນກ່ອນຫນ້ານີ້",
+        "startedConversation": "ເລີ່ມການສົນທະນາ",
+        "RealTimeCall": "ໂທໃນເວລາຈິງ",
+        "SearchByName": "ຊອກຫາດ້ວຍຊື່",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} ກຳລັງຢ້ຽມຢາມການສົນທະນາ",
+            "Join": "{{displayName}} ເຂົ້າຮ່ວມການສົນທະນາ",
+            "Leave": "{{displayName}} ອອກຈາກການສົນທະນາ",
+            "RelatedTo": "{{displayName}} ເລີ່ມ {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "ຈັດການການສະໝັກໃຊ້ອີເມວຂອງທ່ານ",
+        "IfUnsubscribe": "ຖ້າທ່ານຕ້ອງການຍົກເລີກການຈອງ",
+        "*": "ສົ່ງຂໍ້ຄວາມ {{& message.fields.type}} ຫາ {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ເວົ້າວ່າ: {{& message.content}}",
+        "Streams\/changed": "ການປ່ຽນແປງໃນ {{stream.fields.title}}",
+        "Streams\/invite": "ທ່ານໄດ້ຮັບເຊີນໃຫ້ {{& stream.fields.title}}",
+        "Streams\/announcement": "ປະກາດໃນ {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ໄດ້ປ່ຽນການເຂົ້າເຖິງໃນ {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "ຂໍ້ຄວາມສົນທະນາຖືກແກ້ໄຂໃນ {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "ລຶບຂໍ້ຄວາມສົນທະນາອອກໃນ {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} ປິດແລ້ວ",
+        "Streams\/task\/progress": "ມີຄວາມຄືບໜ້າເມື່ອ {{stream.fields.title}}",
+        "Streams\/task\/complete": "ສຳເລັດໜ້າວຽກ: {{stream.fields.title}}",
+        "Streams\/task\/error": "ຜິດພາດໃນລະຫວ່າງ: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ຂໍ້ຄວາມຂາເຂົ້າ",
+        "Streams\/relatedTo\/Streams\/call": "ສາຍໂທໃໝ່ເລີ່ມໃນ {{toTitle}}",
+        "Streams\/relatedTo\/*": "ໃໝ່ {{relationDisplayType}} ໃນ {{toTitle}}",
+        "Streams\/relatedFrom\/*": "ເພີ່ມໃສ່ {{toTitle}} ເປັນ {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ໄດ້ກ່າວເຖິງທ່ານໃນຄຳເຫັນ",
+        "Streams\/call": "{{displayName}} ເລີ່ມການໂທແບບສົດໆ"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "ເຊີນ",
+        "messageContent": "{{displayName}} ເຊີນທ່ານເຂົ້າ {{inviteUrl}}",
+        "youCanNowPaste": "ດຽວນີ້ທ່ານສາມາດວາງລິ້ງນີ້ໄວ້ບ່ອນໃດບ່ອນໜຶ່ງເພື່ອເຊີນຄົນໄດ້",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
+            "chooseFromContacts": "ເລືອກຈາກລາຍຊື່ຜູ້ຕິດຕໍ່ຂອງທ່ານ",
+            "chooseAgainFromContacts": "ເລືອກອີກເທື່ອຫນຶ່ງຈາກຜູ້ຕິດຕໍ່",
+            "inviteSelectedContacts": "ເຊີນຜູ້ຕິດຕໍ່ທີ່ເລືອກ",
+            "selectFromContacts": "ເລືອກຈາກຕິດຕໍ່ພົວພັນ",
+            "userChooserPlaceholder": "ຊອກຫາດ້ວຍຊື່",
+            "photo": "ຖ່າຍ​ຮູບ",
+            "photoInstruction": "ຖ້າຜູ້ທີ່ສະແກນລະຫັດ QR ຂອງທ່ານຢູ່ທາງຫນ້າຂອງທ່ານ, ຖ່າຍຮູບໃຫ້ເຂົາເຈົ້າ",
+            "to": "ເຖິງ: {{Stream Title}}",
+            "go": "ໄປ",
+            "title": "ເຊີນ",
+            "placeholder": "ເບີໂທລະສັບ ຫຼືທີ່ຢູ່ອີເມວ",
+            "orInvite": "ຫຼືເຊີນຄົນໂດຍໃຊ້:",
+            "copyLink": "{{ClickOrTap}} ເພື່ອສຳເນົາລິ້ງເຊີນ",
+            "shareOrCopyLink": "{{ClickOrTap}} ເພື່ອແບ່ງປັນ ຫຼືສຳເນົາລິ້ງເຊີນ",
+            "QR": "{{ClickOrTap}} ເພື່ອສ້າງລະຫັດ QR",
+            "QRtitle": "ສະແກນລະຫັດ QR ນີ້",
+            "QRscanned": "ພວກເຂົາສະແກນມັນ!",
+            "scannedQR": "{{ClickOrTap}} ຖ້າລະຫັດຖືກສະແກນ",
+            "byEmail": "ອີເມວ",
+            "byText": "ຂໍ້​ຄວາມ",
+            "byFacebook": "ເຟສບຸກ",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hey, ກວດເບິ່ງນີ້ອອກ",
+            "PleaseVisitLink": "ກະລຸນາເຂົ້າໄປທີ່ລິ້ງຕໍ່ໄປນີ້:",
+            "InvitingYou": "ຂ້ອຍເຊີນເຈົ້າໄປ {{title}}",
+            "HasInvitedYou": "{{displayName}} ໄດ້ເຊີນທ່ານເຂົ້າຮ່ວມ {{title}}",
+            "HasMentionedYou": "{{displayName}} ໄດ້ກ່າວເຖິງທ່ານໃນ &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ທ່ານ​ໄດ້​ຖືກ​ເຊື້ອ​ເຊີນ!",
+            "AcceptInvite": "ຍອມຮັບຄຳເຊີນ"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "ທ່ານໄດ້ຖືກເຊີນໃຫ້ເຂົ້າຮ່ວມ {{title}}. ກະລຸນາແຕະ {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "ທ່ານໄດ້ຖືກເຊື້ອເຊີນ. {{ClickOrTap}} ທີ່ນີ້ເພື່ອຍອມຮັບ ແລະເຂົ້າຮ່ວມ."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "ໂພສ <em>{{message.fields.type}}<\/em> ຂໍ້ຄວາມຫາ {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "ຄໍາເຫັນກ່ຽວກັບ",
+            "startedCallIn": "ເລີ່ມໂທເຂົ້າ",
+            "in": "ໃນ",
+            "body": "ໃນ {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "ໄດ້ຖືກຈັດພີມມາເຖິງ",
+                "byAvatar": "ໂດຍ {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "ມີ {{instructions.fromDisplayType}} ໃໝ່",
+                "byAvatar": "ເພີ່ມໂດຍ {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "ຄຳເຊີນແມ່ນສົ່ງມາຈາກເບີໂທຂອງພວກເຮົາ, ເຊິ່ງໝູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ຮູ້. ຕິດຕາມດ້ວຍຂໍ້ຄວາມດ່ວນເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊື້ອເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາຄລິກໃສ່ການເຊື່ອມຕໍ່.",
+            "confirm": "ຄຳເຊີນແມ່ນສົ່ງມາຈາກເບີໂທຂອງພວກເຮົາ, ເຊິ່ງໝູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ຮູ້. ທ່ານຕ້ອງການຕິດຕາມດ້ວຍຂໍ້ຄວາມດ່ວນເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊື້ອເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາຄລິກໃສ່ການເຊື່ອມຕໍ່.",
+            "check": "ສະບາຍດີ, ຂ້ອຍຫາກໍສົ່ງຄຳເຊີນໄປຫາແອັບ {{app}}. ກະລຸນາກວດເບິ່ງ sms ຂອງທ່ານແລະຄລິກໃສ່ການເຊື່ອມຕໍ່!",
+            "CheckYourMobile": "ກະລຸນາກວດເບິ່ງ SMS ແລະປະຕິບັດຕາມຄໍາແນະນໍາ!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "ການເຊີນໄດ້ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ທີ່ຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ທັນຮັບຮູ້. ຕິດຕາມດ້ວຍຂໍ້ຄວາມດ່ວນເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊື້ອເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາຄລິກໃສ່ການເຊື່ອມຕໍ່.",
+            "confirm": "ການເຊີນໄດ້ຖືກສົ່ງມາຈາກໂດເມນຂອງພວກເຮົາ, ທີ່ຫມູ່ເພື່ອນຂອງທ່ານຍັງບໍ່ທັນຮັບຮູ້. ທ່ານຕ້ອງການຕິດຕາມດ້ວຍຂໍ້ຄວາມດ່ວນເພື່ອໃຫ້ພວກເຂົາຮູ້ວ່າການເຊື້ອເຊີນມາຈາກທ່ານ, ຂໍໃຫ້ພວກເຂົາຄລິກໃສ່ການເຊື່ອມຕໍ່.",
+            "subject": "ທ່ານໄດ້ຮັບເຊີນບໍ?",
+            "body": "ສະບາຍດີ, ຂ້ອຍຫາກໍສົ່ງຄຳເຊີນໄປຫາແອັບ {{app}}. ກະ​ລຸ​ນາ​ກວດ​ສອບ​ອີ​ເມວ​ຂອງ​ທ່ານ​ແລະ​ຄລິກ​ໃສ່​ການ​ເຊື່ອມ​ຕໍ່​ໃນ​ທີ່​ນັ້ນ​!",
+            "CheckYourEmail": "ກະລຸນາກວດເບິ່ງອີເມວຂອງທ່ານແລະປະຕິບັດຕາມຄໍາແນະນໍາ!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "ຫົວຂໍ້",
+        "Subscribed": "ສະໝັກແລ້ວ",
+        "Participants": "ຜູ້ເຂົ້າຮ່ວມ",
+        "AreYouSureRemoveIdentifier": "ທ່ານແນ່ໃຈບໍ່ວ່າລຶບຕົວລະບຸນີ້ອອກ?",
+        "AreYouSureUnsubscribeIdentifier": "ທ່ານແນ່ໃຈບໍ່ວ່າເຊົາຕິດຕາມຕົວລະບຸນີ້? ມັນຈະປິດການແຈ້ງເຕືອນຕໍ່ກັບຕົວລະບຸນີ້.",
+        "AreYouSureUnsubscribeDevice": "ທ່ານແນ່ໃຈບໍ່ວ່າຍົກເລີກການສະໝັກໃຊ້ອຸປະກອນນີ້? ມັນຈະປິດການແຈ້ງເຕືອນຕໍ່ກັບອຸປະກອນນີ້.",
+        "AreYouSureRemoveParticipant": "ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຜູ້ເຂົ້າຮ່ວມນີ້ອອກ?",
+        "RemoveParticipant": "ເອົາຜູ້ເຂົ້າຮ່ວມອອກ",
+        "Identifiers": "ຕົວລະບຸ",
+        "Devices": "ອຸປະກອນ",
+        "Streams": "ສາຍນ້ຳ"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "ທ່ານບໍ່ໄດ້ຮັບອະນຸຍາດໃຫ້ເຂົ້າຮ່ວມການຖ່າຍທອດນີ້.",
+        "streamTitle": "{{1}} ເລີ່ມການໂທສົດ",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "ກຳລັງເຊື່ອມຕໍ່",
+            "microphoneBtn": "ເປີດໃຊ້ໄມໂຄຣໂຟນ",
+            "cameraBtn": "ເປີດໃຊ້ກ້ອງຖ່າຍຮູບ",
+            "cameraAndMicrophoneBtn": "ເປີດໃຊ້ກ້ອງຖ່າຍຮູບ ແລະໄມໂຄຣໂຟນ"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "ໄມປິດຢູ່",
+            "micIsOn": "ໄມເປີດຢູ່",
+            "cameraIsOff": "ກ້ອງປິດຢູ່",
+            "cameraIsOn": "ກ້ອງເປີດຢູ່",
+            "screenSharingIsOn": "ການແບ່ງປັນໜ້າຈໍເປີດຢູ່",
+            "screenSharingIsOff": "ແບ່ງ​ປັນ​ຫນ້າ​ຈໍ​",
+            "joinNow": "ເຂົ້າຮ່ວມການໂທ"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "ຄໍາແນະນໍາ",
+            "permissionDenied": "ການອະນຸຍາດສຳລັບ {{kind}} ຖືກປະຕິເສດ. ເພື່ອໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ &quot;ການຕັ້ງຄ່າ&quot; -&gt; &quot;ຂັ້ນສູງ&quot; -&gt; &quot;ຄວາມເປັນສ່ວນຕົວແລະຄວາມປອດໄພ&quot; -&gt; &quot;ການຕັ້ງຄ່າເວັບໄຊທ໌&quot; -&gt; &quot;ກ້ອງຖ່າຍຮູບ&quot; ຫຼື &quot;ການຕັ້ງຄ່າເວັບໄຊທ໌&quot; -&gt; &quot;ໄມໂຄຣໂຟນ&quot;",
+            "point2": "ລຶບ {{hostname}} ອອກຈາກລາຍຊື່ &quot;ບລັອກ&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "ຄໍາແນະນໍາ",
+            "permissionDenied": "ການອະນຸຍາດສຳລັບ {{kind}} ຖືກປະຕິເສດ. ກະລຸນາໂຫຼດໜ້ານີ້ຄືນໃໝ່ ແລະຢືນຢັນການເຂົ້າເຖິງ {{kind}} ເພື່ອເຂົ້າຮ່ວມກອງປະຊຸມ."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "ຄໍາແນະນໍາ",
+            "permissionDenied": "ການອະນຸຍາດສຳລັບ {{kind}} ຖືກປະຕິເສດ. ເພື່ອໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ການຕັ້ງຄ່າ Android ຂອງທ່ານ",
+            "point2": "ເປີດ &quot;ແອັບ ແລະ ການແຈ້ງເຕືອນ&quot;",
+            "point3": "ຊອກຫາ &quot;{{communityName}}&quot; ແລະເປີດມັນ",
+            "point4": "ແຕະທີ່ການອະນຸຍາດ",
+            "point5": "ເປີດໃຊ້ {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "ຄໍາແນະນໍາ",
+            "permissionDenied": "ການອະນຸຍາດສຳລັບ {{kind}} ຖືກປະຕິເສດ. ເພື່ອໃຊ້ມັນກະລຸນາປະຕິບັດຕາມຂັ້ນຕອນເຫຼົ່ານີ້:",
+            "point1": "ໄປທີ່ການຕັ້ງຄ່າ iOS ຂອງທ່ານ",
+            "point2": "ເປີດ &quot;ຄວາມເປັນສ່ວນຕົວ&quot;",
+            "point3": "ຊອກຫາ {{kind}} ແລະເປີດມັນ",
+            "point4": "ຊອກຫາ &quot;{{communityName}}&quot; ແລະເປີດໃຊ້"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "ທ່ານໄດ້ເຂົ້າຮ່ວມຫ້ອງ",
+            "joining": "ເຂົ້າຮ່ວມ: {{userName}}",
+            "sbLeftRoom": "{{userName}} ອອກຈາກຫ້ອງ",
+            "switchingRoom": "ສະຫຼັບຫ້ອງ...",
+            "forceDisconnecting": "ເຈົ້າຈະຖືກຕັດການເຊື່ອມຕໍ່ພາຍໃນ 5 ວິນາທີ",
+            "forceDisconnectingImmediately": "ເຈົ້າຖືກຕັດການເຊື່ອມຕໍ່ໂດຍເຈົ້າພາບ",
+            "youLeftRoom": "ເຈົ້າອອກຈາກຫ້ອງ",
+            "codeCopied": "ເຈົ້າອອກຈາກຫ້ອງ",
+            "sbBeganFbLive": "{{userName}} ເລີ່ມອອກອາກາດການໂທນີ້ໃນ Facebook",
+            "sbStoppedFbLive": "{{userName}} ຢຸດການອອກອາກາດການໂທນີ້ໃນ Facebook",
+            "youBeganFbLive": "ເຈົ້າເລີ່ມອອກອາກາດການໂທນີ້ໃນເຟສບຸກ",
+            "youStoppedFbLive": "ທ່ານໄດ້ຢຸດການອອກອາກາດການໂທນີ້ໃນ Facebook",
+            "youStartedLive": "ທ່ານເລີ່ມອອກອາກາດການໂທນີ້ໄປຫາ RTMP ແບບກຳນົດເອງ",
+            "youStoppedLive": "ທ່ານໄດ້ຢຸດການອອກອາກາດການໂທນີ້ໄປຫາ RTMP ແບບກຳນົດເອງ",
+            "sbStartedLiveStreaming": "{{userName}} ເລີ່ມຖ່າຍທອດສົດແລ້ວ",
+            "sbStoppedLiveStreaming": "{{userName}} ສິ້ນສຸດການຖ່າຍທອດສົດ",
+            "liveStopped": "ເກີດຄວາມຜິດພາດໃນລະຫວ່າງການສົ່ງວິດີໂອໄປຫາຈຸດສິ້ນສຸດ",
+            "youBeganVideoRecording": "ເຈົ້າເລີ່ມບັນທຶກກອງປະຊຸມນີ້",
+            "youStoppedVideoRecording": "ທ່ານຢຸດການບັນທຶກກອງປະຊຸມນີ້",
+            "linkCopiedToCb": "ສຳເນົາລິ້ງໃສ່ຄລິບບອດແລ້ວ",
+            "codeCopiedToCb": "ສຳເນົາລະຫັດໃສ່ຄລິບບອດແລ້ວ",
+            "userHasNoVideo": "ຜູ້ເຂົ້າຮ່ວມບໍ່ມີວິດີໂອ",
+            "openInBrowserAlert": "ເປີດລິ້ງໃນຕົວທ່ອງເວັບ Safari ເພື່ອເຂົ້າຮ່ວມກອງປະຊຸມ."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "ການຕັ້ງຄ່າວິດີໂອ",
+            "webCamera": "ກ້ອງເວັບ",
+            "screenSharing": "ການແບ່ງປັນໜ້າຈໍ",
+            "shareAnotherScreen": "ແບ່ງປັນໜ້າຈໍອື່ນ",
+            "turnOffCameras": "ປິດກ້ອງຖ່າຍຮູບ",
+            "turnOffVideo": "ປິດການແບ່ງປັນກ້ອງຖ່າຍຮູບ\/ໜ້າຈໍ",
+            "turnOffAudioInput": "ປິດສຽງໄມໂຄຣໂຟນ",
+            "turnOffScreenSharing": "ປິດການແບ່ງປັນໜ້າຈໍ",
+            "cameraIsTurnedOff": "ກ້ອງຖ່າຍຮູບຖືກປິດ",
+            "micIsTurnedOff": "ໄມໂຄຣໂຟນຖືກປິດໄວ້",
+            "startFBLive": "ເລີ່ມການຖ່າຍທອດສົດ Facebook",
+            "stopFBLive": "ຢຸດການຖ່າຍທອດສົດ Facebook",
+            "startRecording": "ເລີ່ມການບັນທຶກ",
+            "stopRecording": "ຢຸດການບັນທຶກ",
+            "start": "ເລີ່ມ",
+            "stop": "ຢຸດ",
+            "recordingInProgress": "ກຳລັງດຳເນີນການບັນທຶກ...",
+            "fbLiveTitle": "ຊື່ການຖ່າຍທອດສົດ",
+            "fbLiveDescription": "ອະທິບາຍການຖ່າຍທອດສົດຂອງທ່ານ. ມັນ​ກ່ຽວ​ກັບ​ຫຍັງ?",
+            "fbOnlyMeLiveAccess": "ພຽງ​ຂ້ອຍ",
+            "fbFriendsAccess": "ເພື່ອນ",
+            "fbPublicAccess": "ສາທາລະນະ",
+            "publishOnTimeline": "ເຜີຍແຜ່ໃນທາມລາຍ",
+            "publishToGroup": "ເຜີຍແຜ່ໃສ່ກຸ່ມ",
+            "fbStartLive": "ໄປສົດ",
+            "fbStopLive": "ສິ້ນສຸດການຖ່າຍທອດສົດ",
+            "streamingSettings": "ການຕັ້ງຄ່າ",
+            "fbEmbedCode": "ຝັງ",
+            "copy": "ສຳເນົາ",
+            "streamToRTMP": "ຖ່າຍທອດໄປຫາ RTMP ແບບກຳນົດເອງ",
+            "startBroadcasting": "ເລີ່ມອອກອາກາດ",
+            "broadcastingInProgress": "ການອອກອາກາດກຳລັງດຳເນີນຢູ່"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "ການຕັ້ງຄ່າສຽງ",
+            "speakers": "ລໍາໂພງ",
+            "microphone": "ໄມໂຄຣໂຟນ"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "ການຕັ້ງຄ່າຜູ້ເຂົ້າຮ່ວມ",
+            "disconnect": "ຕັດການເຊື່ອມຕໍ່",
+            "floatingScreens": "ໜ້າຈໍເລື່ອນ",
+            "tiledScreens": "ໜ້າຈໍກະເບື້ອງ",
+            "loudestExceptMe": "ດັງທີ່ສຸດຍົກເວັ້ນຂ້ອຍ",
+            "maximizeLoudest": "ຂະຫຍາຍສຽງສູງສຸດ",
+            "staticMaximized": "ສູງສຸດຄົງທີ່",
+            "fullScreen": "ເຕັມ​ຈໍ",
+            "manual": "ຄູ່ມື",
+            "turnOffCamera": "ເຊື່ອງວິດີໂອ",
+            "turnOffAudio": "ປິດສຽງ",
+            "turnOffScreenSharing": "ເຊື່ອງການແບ່ງປັນໜ້າຈໍ",
+            "turnOnCamera": "ສະແດງວິດີໂອ",
+            "turnOnAudio": "ເປີດສຽງ",
+            "turnOnScreenSharing": "ສະແດງການແບ່ງປັນໜ້າຈໍ"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "ການຕັ້ງຄ່າການຖ່າຍທອດ"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "ກອງປະຊຸມ",
+            "MeetingEnded": "ກອງປະຊຸມສິ້ນສຸດລົງ"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "ເຊີນ",
+            "description": "Inbox ສໍາລັບການເຊື້ອເຊີນ"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "ຊັບພະຍາກອນ",
+            "description": "stream ສໍາລັບການຄຸ້ມຄອງການເຂົ້າເຖິງຊັບພະຍາກອນແລະການປະກາດຂໍ້ຄວາມກ່ຽວກັບການອັບເດດ"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "ສໍາລັບການໄດ້ຮັບການປັບປຸງກ່ຽວກັບຄວາມຄືບຫນ້າກ່ຽວກັບວຽກງານສະເພາະໃດຫນຶ່ງ",
+            "displayType": "ວຽກງານ"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "ໝວດໝູ່ສຳລັບໜ້າວຽກ",
+            "displayType": "ວຽກງານ"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "ປະສົບການທົ່ວໄປສໍາລັບສະມາຊິກຂອງຊຸມຊົນ",
+            "displayType": "ປະສົບການທົ່ວໄປສໍາລັບສະມາຊິກຂອງຊຸມຊົນ"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "ການທັກທາຍທີ່ຜູ້ໃຊ້ສາມາດແນະນໍາຕົນເອງໄດ້",
+            "displayType": "ທັກທາຍ"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "ເລກ",
+            "description": "ເລກຄະນິດສາດ"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "ວັນທີ",
+            "description": "ວັນທີ"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ເນື້ອໃນຂອງຂໍ້ຄວາມ"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ເນື້ອໃນຂະຫນາດນ້ອຍຂອງຂໍ້ຄວາມ"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "ຂໍ້​ຄວາມ",
+            "description": "ເນື້ອໃນຂະຫນາດກາງຂອງຂໍ້ຄວາມ"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "ທີ່​ຢູ່​ອີ​ເມວ",
+            "description": "ທີ່​ຢູ່​ອີ​ເມວ"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "ເບີ​ໂທລະ​ສັບ",
+            "description": "ເບີ​ໂທລະ​ສັບ"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ເຊື່ອມຕໍ່ຢູ່ໃນເວັບ"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "ຮູບພາບ",
+            "description": "ຮູບ​ພາບ​",
+            "newItem": "ເພີ່ມຮູບພາບ"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "ຄັງຮູບພາບ",
+            "description": "ຄັງ​ຮູບ​ພາບ​"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "ອະລະບໍ້າ",
+            "description": "ອັນລະບັ້ມທີ່ສື່ຕ່າງໆທີ່ກ່ຽວຂ້ອງ"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "ໄຟລ໌",
+            "description": "ອັບໂຫລດໄຟລ໌",
+            "newItem": "ເພີ່ມໄຟລ໌"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "ຄລິບສຽງ",
+            "description": "ຄລິບສຽງ",
+            "newItem": "ເພີ່ມສຽງ"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "ຄລິບວີດີໂອ",
+            "description": "ຄລິບວີດີໂອ",
+            "newItem": "ເພີ່ມວິດີໂອ"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "ເອກະສານ PDF",
+            "description": "ເອກະສານ PDF",
+            "newItem": "ເພີ່ມ PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "ຖ່າຍທອດສົດ",
+            "description": "ສຽງ ຫຼືວິດີໂອສົດ"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "ປະເພດ",
+            "description": "ໝວດໝູ່ທີ່ສາຍນ້ຳອື່ນສາມາດກ່ຽວຂ້ອງກັນໄດ້"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "ດັດຊະນີທີ່ເຂົ້າຮ່ວມ",
+            "description": "streams ແມ່ນກ່ຽວຂ້ອງ \/ ບໍ່ກ່ຽວຂ້ອງກັບນີ້ໃນເວລາທີ່ຜູ້ໃຊ້ເຂົ້າຮ່ວມ \/ ອອກ"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ດອກເບ້ຍ",
+            "description": "ເປັນຕົວແທນຄວາມສົນໃຈຂອງຜູ້ໃຊ້ໃນຫົວຂໍ້ໃດຫນຶ່ງ"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "ຂາເຂົ້າ",
+            "description": "ຈຸດຫມາຍປາຍທາງສໍາລັບຂໍ້ຄວາມທີ່ສົ່ງໂດຍຜູ້ໃຊ້ອື່ນໆ"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "ການສົນທະນາ",
+            "description": "ການສົນທະນາລະຫວ່າງຜູ້ໃຊ້, ກັບປະຫວັດສາດ"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "ໂທແບບສົດໆ",
+            "description": "ໂທວິດີໂອ\/ສຽງໃນເວລາຈິງ"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "ຄຳຖາມ",
+            "description": "ກະແສຄຳຖາມ"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "ຄໍາຕອບ",
+            "description": "ກະແສຕອບ"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "ໂທ",
+            "description": "ໝວດໝູ່ສຳລັບ Stream\/webrtc",
+            "MaxRelationsExceeded": "ເກີນການໂທສູງສຸດ"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "ພິມຊື່ຫນ້າ",
+        "ModTab": "ແກ້ໄຂລາຍການ",
+        "Save": "ບັນທຶກ",
+        "Delete": "ລຶບ",
+        "Submenu": "ເມນູຍ່ອຍ"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "ບັນທຶກ",
+        "reset": "ຣີເຊັດ",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ລາຍລະອຽດ",
+        "upload": "ອັບໂຫຼດ",
+        "link": "ເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດອອກ Clip",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ໄຟລ໌ບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງສຽງ",
+        "uploadLimit": "ຂະໜາດໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍອະໄພ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະໜາດໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ຣີເຊັດ",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ລາຍລະອຽດ",
+        "upload": "ອັບໂຫຼດ",
+        "link": "ເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດອອກ Clip",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ໄຟລ໌ບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ",
+        "uploadLimit": "ຂະໜາດໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍອະໄພ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະໜາດໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ຣີເຊັດ",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ລາຍລະອຽດ",
+        "upload": "ອັບໂຫຼດ",
+        "link": "ເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "setClip": "ຕັດອອກ Clip",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ໄຟລ໌ບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງ pdf",
+        "uploadLimit": "ຂະໜາດໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍອະໄພ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະໜາດໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ຣີເຊັດ",
+        "edit": "ແກ້ໄຂ",
+        "title": "ຫົວຂໍ້",
+        "description": "ລາຍລະອຽດ",
+        "upload": "ອັບໂຫຼດ",
+        "link": "ເຊື່ອມຕໍ່",
+        "setUrl": "ຕັ້ງ URL",
+        "save": "ບັນທຶກ",
+        "uploadedImage": "ຮູບພາບທີ່ອັບໂຫລດ",
+        "imageTitle": "ຊື່ຮູບພາບ",
+        "setClip": "ຕັດອອກ Clip",
+        "invalidURL": "URL ບໍ່ຖືກຕ້ອງ",
+        "invalidFile": "ໄຟລ໌ບໍ່ຖືກຕ້ອງ",
+        "errorNoSource": "ບໍ່ມີແຫຼ່ງຮູບພາບ",
+        "uploadLimit": "ຂະໜາດໄຟລ໌ສູງສຸດ: {{size}}",
+        "errorFileSize": "ຂໍອະໄພ, ແຕ່ໄຟລ໌ໃຫຍ່ເກີນໄປ.<br> ຂະໜາດໄຟລ໌ສູງສຸດແມ່ນ {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "ຄຳຖາມ",
+        "Answers": "ຄໍາຕອບ",
+        "AnswerQuestion": "ຕອບ​ຄໍາ​ຖາມ",
+        "SetYourAnswer": "ກະລຸນາຕອບຄໍາຖາມ",
+        "NewQuestion": "ຄຳຖາມໃໝ່",
+        "NewAnswer": "ຄໍາຕອບໃຫມ່",
+        "AnswerDetails": "ລາຍລະອຽດຄໍາຕອບ",
+        "answerOption": "ທາງເລືອກ",
+        "answerOptionExclusive": "ສະເພາະ",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "ຂຽນຄໍາຕອບຂອງເຈົ້າຢູ່ທີ່ນີ້",
+        "SaveQuestion": "ບັນທຶກຄຳຖາມ",
+        "SaveAnswer": "ບັນທຶກຄໍາຕອບ",
+        "AddAnotherAnswer": "ເພີ່ມຄໍາຕອບອື່ນ",
+        "ErrorAnswers": "ກະລຸນາເພີ່ມຄໍາຕອບດຽວ",
+        "AlreadyAnswered": "ຕອບແລ້ວ",
+        "TitlePlaceholder": "ພິມຄໍາຖາມຂອງເຈົ້າ",
+        "ContentPlaceholder": "ເອົາຂໍ້ມູນເພີ່ມເຕີມໃສ່ບ່ອນນີ້ເພື່ອຊ່ວຍຄົນຕອບ",
+        "ErrorTitle": "ຕ້ອງການຄໍາຖາມ",
+        "Placeholder": "ຕົວຍຶດ"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "ປະສົບການໃໝ່",
+        "DefineTitle": "ກະລຸນາກຳນົດຊື່",
+        "Create": "ສ້າງ"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "ໂທ",
+        "MaxCalls": "ໂທສູງສຸດ",
+        "Update": "ອັບເດດ",
+        "NoCallsYet": "ບໍ່ມີການໂທເທື່ອ",
+        "CallReasonTitle": "ໂທນີ້ກ່ຽວກັບຫຍັງ?",
+        "WaitingRoom": "ຫ້ອງ​ລໍ​ຖ້າ"
     }
 }

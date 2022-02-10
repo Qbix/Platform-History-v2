@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "تجزیه",
+        "Daily": "ورځنی",
+        "Weekly": "اونۍ",
+        "Monthly": "میاشتنی",
+        "Application": "غوښتنلیک",
+        "Pages": "پاڼې",
+        "Services": "خدمتونه",
+        "Faq": "پرله پسې پوښتنې",
+        "WeekDays": "د اونۍ ورځې"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "د ننه کیدل",
+        "LogOut": "وتل"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "زما د لومړني {{2}} په توګه {{1}} وټاکه",
+        "ChoosePassPhrase": "د ننوتلو لپاره <strong>پاس جمله<\/strong> غوره کړئ.<br> یو ساده جمله چې د څو کلمو څخه جوړه ده چې تاسو به په اسانۍ سره په یاد ولرئ.",
+        "ChoosePassPhraseSeeSuggestions": "د خپل حساب ساتلو لپاره یو ښه <strong>پاس جمله<\/strong> غوره کړئ. د ځینو نظرونو لپاره وړاندیزونه وګورئ.",
+        "LogOutAndTryAgain": "ننوتل او بیا هڅه وکړئ",
+        "IfYouFeel": "که تاسو احساس کوئ چې یو څه غلط شوی، تاسو کولی شئ",
+        "SetIdentifierButtonTitle": "له سره پیل کول"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "پیل کړئ"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "پیل کړئ",
+        "Authorize": "واک ورکول",
+        "TermsLabel": "ما لوستلی او موافق یم<br> {{link}} ته",
+        "TermsTitle": "شرایط",
+        "mustAgree": "لومړی تاسو باید د شرایطو سره موافق یاست."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "زه {{link}} منم",
+        "TermsTitle": "شرایط"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "اجازه",
+        "prompt": "ایا تاسو غواړئ خبرتیاوې فعال کړئ؟ تاسو به د هغه شیانو په اړه ریښتیني وخت تازه معلومات ترلاسه کړئ چې تاسو ورته پام کوئ.",
+        "yes": "هو",
+        "no": "نه",
+        "WelcomePleaseVerifyEmail": "ښه راغلاست! مهرباني وکړئ خپل بریښنالیک آدرس تصدیق کړئ.",
+        "WelcomeVerifyEmail": "ښه راغلاست! خپل برېښنالیک تایید کړۍ.",
+        "ForgetPass": "هو، ایا تاسو خپل پاسفریج هیر کړی؟",
+        "PassphraseSaved": "ستاسو پاس جمله خوندي شوې ده.",
+        "IdentifierActivated": "ستاسو {{type}} فعال شوی دی.",
+        "CompletedActivation": "تاسو د کاروونکي فعالول بشپړ کړي.",
+        "CompletedActivationLogIn": "تاسو د کاروونکي فعالول بشپړ کړي. اوس د ننوتلو هڅه وکړئ."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "اړیکه غوره کړئ",
+            "CreateAccount": "+ نوې اړیکه",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ونه موندل شو",
+            "SearchByName": "د نوم په واسطه لټون وکړئ",
+            "EmptyContacts": "اړیکې ونه موندل شوې..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "د {{displayName}} اړیکه غوره کړئ"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "مهرباني وکړئ لیبل غوره کړئ.",
+        "inviteUser": "کاروونکو ته بلنه ورکړئ",
+        "selectRole": "رول غوره کړئ",
+        "inviteRole": "بلنه {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "ناسمه ژبه غوره شوې",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "ښه راغلاست",
+        "directions": "‏ د دې لپاره چې له ‏‎Account‎‏ سره ونښلې، نو ننوځئ او یا یو ګڼون جوړ کړئ.",
+        "directionsNoRegister": "ننوتل که تاسو حساب لرئ.",
+        "goButton": "لاړ شه",
+        "passphrase": "خپل پاس جمله دننه کړئ:",
+        "loginButton": "پیل کړئ",
+        "registerButton": "پیل کړئ",
+        "resendButton": "د فعالولو پیغام واستوئ",
+        "forgot": "هېره شوې؟",
+        "resendConfirm": "ایا تاسو غواړئ د خپل پاسفریج بیا تنظیمولو لپاره یو پیغام واستوئ؟",
+        "resendSuccess": "د خپل پاسفریج بیا تنظیمولو لپاره د پیغام لپاره وګورئ",
+        "resendClose": "تړل",
+        "noPassphrase": "مخکې له دې چې تاسو لاګ ان شئ، تاسو باید د خپل فعالولو پیغام کې د لینک په کلیک کولو سره د پاس جملې ترتیب کړئ.",
+        "notVerified": "تاسو باید د ننوتلو لپاره خپل ځان ته د فعالیت پیغام واستوئ.",
+        "emailExists": "ایا تاسو مخکې له دې بریښنالیک سره راجستر کولو هڅه کړې؟ که داسې وي، خپل حساب فعالولو لپاره خپل ان باکس وګورئ. <a href='#resend' class='Q_button Users_activation_resend'>د پیغام د بیا لیږلو لپاره کلیک وکړئ<\/a>",
+        "mobileExists": "ایا تاسو مخکې له دې د ګرځنده شمیرې سره راجستر کولو هڅه کړې؟ که داسې وي، خپل حساب فعالولو لپاره خپل SMS وګورئ. <a href='#resend' class='Q_button Users_activation_resend'>د پیغام د بیا لیږلو لپاره کلیک وکړئ<\/a>",
+        "usingOther": "یا تاسو کولی شئ",
+        "prompt": "د کارونکي یو نوم وټاکئ:",
+        "newUser": "یا لاندې یو نوی حساب جوړ کړئ",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "ستاسو ګرځنده # یا بریښنالیک",
+            "mobile": "خپل موبایل # داخل کړئ",
+            "email": "خپل بریښنا لیک ادرس داخل کړه",
+            "username": "یوازې لیکونه او شمیرې وکاروئ"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "د خدمت شرایط ومنی؟",
+        "facebookNoEmail": "ستاسو د فیسبوک حساب یو تایید شوی بریښنالیک ورک دی. په ساده ډول په اصلي لاره ننوتل.",
+        "picTooltip": "تاسو کولی شئ دا عکس وروسته بدل کړئ",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "په {{host}} کې په {{timestamp}} کې ننوتل",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "والټ ته لیږدول",
+                "content": "یوځل چې تاسو دا ډیالوګ بند کړئ، تاسو به خپل بټوه ته یوړل شئ. د ننوتلو وروسته، دې پاڼې ته ورشئ."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "د ننوتلو لپاره یوه لاره اضافه کړئ",
+        "sendMessage": "د فعالولو پیغام واستوئ",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "خپل ګرځنده # یا بریښنالیک دننه کړئ",
+            "mobile": "خپل ګرځنده شمیره دننه کړئ",
+            "email": "خپل بریښنا لیک ادرس داخل کړه",
+            "username": "کارن نوم"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} حساب",
+        "areUsing": "تاسو د {{platform}} په توګه کاروئ",
+        "noLongerUsing": "تاسو نور د {{platform}} په توګه تړلی نه یاست",
+        "doAuth": "د دې حساب سره ننوتل",
+        "doSwitch": "دې حساب ته لاړشئ"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "خاوند",
+        "Admin": "اډمین",
+        "Member": "غړی",
+        "Guest": "مېلمه",
+        "Host": "کوربه"
     }
 }

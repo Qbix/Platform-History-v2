@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "അഭ്യർത്ഥന സമയത്ത് പിശക് {{status}}",
+        "canceled": "അഭ്യർത്ഥന റദ്ദാക്കി",
+        "500": "ഇന്റേർണൽ സെർവർ പിശക്",
+        "404": "കണ്ടെത്തിയില്ല: {{url}}",
+        "501": "അഭ്യർത്ഥന തടസ്സപ്പെട്ടു"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "സമയം കഴിഞ്ഞു. പേജ് പുതുക്കി വീണ്ടും ശ്രമിക്കുക.",
+        "otherDomain": "{{baseUrl}} എന്നതിൽ വിദേശ ഡൊമെയ്‌നിലേക്കുള്ള ക്രോസ്-ഡൊമെയ്‌ൻ അഭ്യർത്ഥന തടഞ്ഞു"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "ടാപ്പ്",
+        "click": "ക്ലിക്ക് ചെയ്യുക",
+        "yes": "അതെ",
+        "no": "ഇല്ല",
+        "Tap": "ടാപ്പ് ചെയ്യുക",
+        "Click": "ക്ലിക്ക് ചെയ്യുക",
+        "Yes": "അതെ",
+        "No": "ഇല്ല"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "ജനുവരി",
+        "2": "ഫെബ്രുവരി",
+        "3": "മാർച്ച്",
+        "4": "ഏപ്രിൽ",
+        "5": "മെയ്",
+        "6": "ജൂൺ",
+        "7": "ജൂലൈ",
+        "8": "ഓഗസ്റ്റ്",
+        "9": "സെപ്റ്റംബർ",
+        "10": "ഒക്ടോബർ",
+        "11": "നവംബർ",
+        "12": "ഡിസംബർ"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "രണ്ടാമത്തേത്",
+        "seconds": "സെക്കന്റുകൾ",
+        "minute": "മിനിറ്റ്",
+        "minutes": "മിനിറ്റ്",
+        "hour": "മണിക്കൂറുകൾ",
+        "day": "ദിവസം",
+        "days": "ദിവസങ്ങളിൽ",
+        "week": "ആഴ്ച",
+        "weeks": "ആഴ്ചകൾ",
+        "month": "മാസം",
+        "months": "മാസങ്ങൾ",
+        "year": "വർഷം",
+        "years": "വർഷങ്ങൾ",
+        "decade": "ദശാബ്ദം",
+        "decades": "പതിറ്റാണ്ടുകളായി",
+        "century": "നൂറ്റാണ്ട്",
+        "centuries": "നൂറ്റാണ്ടുകൾ"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "നിങ്ങളുടെ മൈക്രോഫോണിലേക്ക് ആക്‌സസ് അനുവദിക്കുക",
+        "record": "രേഖപ്പെടുത്തുക",
+        "recording": "റെക്കോർഡിംഗ്",
+        "remains": "അവശേഷിക്കുന്നു",
+        "maximum": "പരമാവധി",
+        "playing": "കളിക്കുന്നു",
+        "recorded": "രേഖപ്പെടുത്തി",
+        "clip": "ക്ലിപ്പ്",
+        "discard": "നിരസിക്കുക",
+        "encoding": "എൻകോഡിംഗ്"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "ക്ലിപ്പ്",
+        "errorNoSource": "വീഡിയോ ഉറവിടമില്ല",
+        "SkipAfter": "ശേഷം ഒഴിവാക്കുക",
+        "Skip": "ഒഴിവാക്കുക"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "ക്ലിപ്പ്",
+        "errorNoSource": "പിഡിഎഫ് ഉറവിടമില്ല"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "ക്ലിപ്പ് ആരംഭം സജ്ജമാക്കുക",
+        "ClipStart": "ക്ലിപ്പ് ആരംഭിക്കുക",
+        "SetClipEnd": "ക്ലിപ്പ് എൻഡ് സജ്ജീകരിക്കുക",
+        "ClipEnd": "ക്ലിപ്പ് അവസാനം",
+        "StartMoreEnd": "ആരംഭ സ്ഥാനം അവസാന സ്ഥാനത്തേക്കാൾ കൂടുതലാകരുത്",
+        "EndLessStart": "അവസാന സ്ഥാനം ആരംഭ സ്ഥാനത്തേക്കാൾ കുറവായിരിക്കരുത്",
+        "WhichInvalid": "&#39;ഏത്&#39; എന്ന വാദം അസാധുവാണ്"
     },
     "alert": {
-        "title": "Alert"
+        "title": "മുന്നറിയിപ്പ്"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "സ്ഥിരീകരിക്കുക",
+        "ok": "അതെ",
+        "cancel": "ഇല്ല"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "പ്രോംപ്റ്റ്",
+        "ok": "പോകൂ"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "കൂടുതൽ",
+        "Menu": "മെനു"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "ഫയൽ വായിക്കുന്നതിൽ പിശക്",
+        "errorType": "ക്ഷമിക്കണം, ഈ ഫയൽ തരം പിന്തുണയ്ക്കുന്നില്ല",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "നിങ്ങൾ എന്താണ് ചെയ്യാൻ ആഗ്രഹിക്കുന്നത്?",
+            "photo": "പുതിയ ഫോട്ടോ എടുക്കുക",
+            "library": "ലൈബ്രറിയിൽ നിന്ന് തിരഞ്ഞെടുക്കുക"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "ദയവായി ഒരു വലിയ ചിത്രം തിരഞ്ഞെടുക്കുക.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "വലുപ്പവും സ്ഥാനവും ക്രമീകരിക്കുക",
+            "touchscreen": "സൂം ചെയ്യാനും വലിച്ചിടാനും നിങ്ങളുടെ വിരലുകൾ ഉപയോഗിക്കുക",
+            "notTouchscreen": "സൂം ചെയ്യാനും വലിച്ചിടാനും നിങ്ങളുടെ മൗസും വീലും ഉപയോഗിക്കുക"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "കഴിഞ്ഞ രാത്രി",
+        "lastEvening": "കഴിഞ്ഞ സായാഹ്നം",
+        "yesterday": "ഇന്നലെ",
+        "thisMorning": "ഇന്ന് രാവിലെ",
+        "today": "ഇന്ന്",
+        "tonight": "ഇന്ന് രാത്രി",
+        "tomorrowMorning": "ടോം രാവിലെ",
+        "tomorrow": "നാളെ",
+        "hoursAgo": "{{h}} മണിക്കൂർ മുമ്പ്",
+        "hourAgo": "{{h}} മണിക്കൂർ മുമ്പ്",
+        "minuteAgo": "{{m}} മിനിറ്റ് മുമ്പ്",
+        "minutesAgo": "{{m}} മിനിറ്റ് മുമ്പ്",
+        "secondAgo": "{{s}} സെക്കൻഡ് മുമ്പ്",
+        "secondsAgo": "{{s}} സെക്കൻഡ് മുമ്പ്",
+        "fewSecondsAgo": "സെക്കന്റുകൾ മുമ്പ്",
+        "rightNow": "ഇപ്പോൾ തന്നെ",
+        "inSecond": "{{s}} സെക്കൻഡിൽ",
+        "inSeconds": "{{s}} സെക്കൻഡിൽ",
+        "inMinute": "{{m}} മിനിറ്റിൽ",
+        "inMinutes": "{{m}} മിനിറ്റിനുള്ളിൽ",
+        "inHour": "{{h}} മണിക്കൂറിൽ",
+        "inHours": "{{h}} മണിക്കൂറിനുള്ളിൽ",
+        "inUnderMinute": "1 മിനിറ്റിൽ താഴെ"
     }
 }

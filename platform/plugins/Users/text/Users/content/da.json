@@ -5,10 +5,10 @@
     },
     "activate": {
         "SetAsPrimary": "Indstil {{1}} som min primære {{2}}",
-        "ChoosePassPhrase": "Vælg en <strong>passord<\/strong> til at logge ind med. <br> En simpel sætning bestående af et par ord, som du nemt kan huske.",
-        "ChoosePassPhraseSeeSuggestions": "Vælg en god <strong>passord for<\/strong> at beskytte din konto. Se forslag til nogle ideer.",
+        "ChoosePassPhrase": "Vælg en <strong>adgangssætning<\/strong> at logge på med.<br> En simpel sætning bestående af nogle få ord, som du nemt vil huske.",
+        "ChoosePassPhraseSeeSuggestions": "Vælg en god <strong>adgangssætning<\/strong> for at beskytte din konto. Se forslagene til nogle ideer.",
         "LogOutAndTryAgain": "Log ud og prøv igen",
-        "IfYouFeel": "Hvis du føler, at noget gik galt, kan du",
+        "IfYouFeel": "Hvis du føler noget gik galt, kan du det",
         "SetIdentifierButtonTitle": "start forfra"
     },
     "session": {
@@ -17,44 +17,44 @@
     "authorize": {
         "GetStarted": "Kom igang",
         "Authorize": "Bemyndige",
-        "TermsLabel": "Jeg har læst og accepteret <br> til {{link}}",
-        "TermsTitle": "Betingelser",
-        "mustAgree": "Først skal du acceptere betingelserne."
+        "TermsLabel": "Jeg har læst og er enig<br> til {{link}}",
+        "TermsTitle": "Vilkår",
+        "mustAgree": "Først skal du acceptere vilkårene."
     },
     "register": {
         "TermsLabel": "Jeg accepterer {{link}}",
-        "TermsTitle": "Betingelser"
+        "TermsTitle": "Vilkår"
     },
     "notifications": {
         "title": "Tilladelse",
-        "prompt": "Vil du aktivere underretninger? Du modtager opdateringer i realtid om ting, du er interesseret i.",
+        "prompt": "Vil du aktivere notifikationer? Du vil modtage opdateringer i realtid om ting, du holder af.",
         "yes": "Ja",
         "no": "Ingen",
-        "WelcomePleaseVerifyEmail": "Velkommen! Bekræft venligst din email-adresse.",
+        "WelcomePleaseVerifyEmail": "Velkommen! Bekræft venligst din e-mailadresse.",
         "WelcomeVerifyEmail": "Velkommen! Bekræft din e-mail-adresse.",
         "ForgetPass": "Hej, har du glemt din adgangskode?",
-        "PassphraseSaved": "Din adgangssætning er gemt.",
+        "PassphraseSaved": "Din adgangssætning er blevet gemt.",
         "IdentifierActivated": "Din {{type}} er blevet aktiveret.",
-        "CompletedActivation": "Du har afsluttet brugeraktivering.",
-        "CompletedActivationLogIn": "Du har afsluttet brugeraktivering. Prøv at logge ind nu."
+        "CompletedActivation": "Du har fuldført brugeraktivering.",
+        "CompletedActivationLogIn": "Du har fuldført brugeraktivering. Prøv at logge ind nu."
     },
     "usersContacts": {
         "selectLabel": "Vælg venligst etiket.",
-        "inviteUser": "Inviter bruger",
-        "selectRole": "Vælg rolle",
+        "inviteUser": "Inviter brugere",
+        "selectRole": "Vælg Rolle",
         "inviteRole": "Inviter {{role}}"
     },
     "invalidLanguageSelected": "Ugyldigt sprog valgt",
     "contacts": {
         "dialog": {
             "title": "Vælg kontakt",
-            "SearchByName": "Søg efter navn",
+            "SearchByName": "Søg på navn",
             "CreateAccount": "+ Ny kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create ikke fundet",
-            "EmptyContacts": "Kontakter ikke fundet ..."
+            "EmptyContacts": "Kontakter ikke fundet..."
         },
         "select": {
-            "title": "Vælg kontakt af {{displayName}}"
+            "title": "Vælg kontakt til {{displayName}}"
         }
     },
     "login": {
@@ -67,30 +67,30 @@
         "registerButton": "Kom igang",
         "resendButton": "Send aktiveringsmeddelelse",
         "forgot": "Glemte det?",
-        "resendConfirm": "Vil du sende en besked for at nulstille din adgangskode?",
-        "resendSuccess": "Kontroller, om der er en meddelelse, der nulstiller din adgangskode",
+        "resendConfirm": "Vil du sende en besked for at nulstille din adgangssætning?",
+        "resendSuccess": "Se efter en besked for at nulstille din adgangssætning",
         "resendClose": "Tæt",
-        "noPassphrase": "Inden du kan logge ind, skal du indstille en adgangssætning ved at klikke på linket i din aktiveringsmeddelelse.",
-        "notVerified": "Du skal sende dig selv en aktiveringsmeddelelse for at logge ind.",
-        "emailExists": "Forsøgte du at registrere dig med denne e-mail før? I så fald skal du kontrollere din indbakke for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
-        "mobileExists": "Forsøgte du at registrere dig med dette mobilnummer før? I så fald skal du kontrollere din SMS for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
+        "noPassphrase": "Før du kan logge ind, skal du angive en adgangssætning ved at klikke på linket i din aktiveringsmeddelelse.",
+        "notVerified": "Du skal sende dig selv en aktiveringsbesked for at logge ind.",
+        "emailExists": "Har du prøvet at registrere dig med denne e-mail før? Hvis ja, tjek din indbakke for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
+        "mobileExists": "Har du prøvet at registrere dig med dette mobilnummer før? Hvis ja, tjek din SMS for at aktivere din konto. <a href='#resend' class='Q_button Users_activation_resend'>Klik for at sende beskeden igen<\/a>",
         "usingOther": "eller du kan",
         "prompt": "Vælg et brugernavn:",
         "newUser": "eller opret en ny konto nedenfor",
         "placeholders": {
-            "identifier": "din mobilnummer eller e-mail",
-            "mobile": "indtast din mobil #",
+            "identifier": "dit mobilnummer eller din e-mail",
+            "mobile": "indtast dit mobilnummer",
             "email": "Indtast din e-mailadresse",
-            "username": "brugernavn"
+            "username": "brug kun bogstaver og tal"
         },
-        "confirmTerms": "Accepterer du servicevilkårene?",
-        "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mail-adresse. Log ind på den oprindelige måde.",
+        "confirmTerms": "Vil du acceptere servicevilkårene?",
+        "facebookNoEmail": "Din facebook-konto mangler en bekræftet e-mailadresse. Du skal blot logge på den oprindelige måde.",
         "picTooltip": "Du kan ændre dette billede senere",
         "wallet": {
-            "payload": "Log ind på {{host}} på et tidspunkt {{timestamp}}",
+            "payload": "Log ind på {{host}} på tidspunktet {{timestamp}}",
             "alert": {
                 "title": "Omdirigerer til Wallet",
-                "content": "Når du lukker denne dialog, bliver du ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
+                "content": "Når du lukker denne dialog, vil du blive ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
             }
         }
     },
@@ -98,16 +98,16 @@
         "title": "Tilføj en måde at logge ind på",
         "sendMessage": "Send aktiveringsmeddelelse",
         "placeholders": {
-            "identifier": "indtast din mobilnummer eller e-mail",
+            "identifier": "indtast dit mobilnummer eller din e-mail",
             "mobile": "Skriv dit telefonnummer",
             "email": "Indtast din e-mailadresse",
             "username": "brugernavn"
         }
     },
     "prompt": {
-        "title": "{{Platform}} -konto",
+        "title": "{{Platform}} Konto",
         "areUsing": "Du bruger {{platform}} som",
-        "noLongerUsing": "Du er ikke længere tilsluttet {{platform}} som",
+        "noLongerUsing": "Du er ikke længere forbundet til {{platform}} som",
         "doAuth": "Log ind med denne konto",
         "doSwitch": "Skift til denne konto"
     },
@@ -125,8 +125,8 @@
         "Monthly": "Månedlige",
         "Application": "Ansøgning",
         "Pages": "sider",
-        "Services": "Services",
-        "Faq": "Ofte stillede spørgsmål",
+        "Services": "Tjenester",
+        "Faq": "Faq",
         "WeekDays": "Ugedage"
     }
 }

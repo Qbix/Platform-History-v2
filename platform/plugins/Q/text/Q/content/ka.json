@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "შეცდომა {{status}} მოთხოვნისას",
+        "canceled": "მოთხოვნა გაუქმდა",
+        "500": "შიდა სერვერის შეცდომა",
+        "404": "ვერ მოიძებნა: {{url}}",
+        "501": "მოთხოვნა შეწყდა"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "სესიას ვადა ამოეწურა. განაახლეთ გვერდი და სცადეთ ხელახლა.",
+        "otherDomain": "დაბლოკილია ჯვარედინი დომენის მოთხოვნა უცხო დომენზე {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "ჩამოსასხმელი",
+        "click": "დააწკაპუნეთ",
+        "yes": "დიახ",
+        "no": "არა",
+        "Tap": "შეეხეთ",
+        "Click": "დააწკაპუნეთ",
+        "Yes": "დიახ",
+        "No": "არა"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "იანვარი",
+        "2": "თებერვალი",
+        "3": "მარტი",
+        "4": "აპრილი",
+        "5": "მაისი",
+        "6": "ივნისი",
+        "7": "ივლისი",
+        "8": "აგვისტო",
+        "9": "სექტემბერი",
+        "10": "ოქტომბერი",
+        "11": "ნოემბერი",
+        "12": "დეკემბერი"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "მეორე",
+        "seconds": "წამი",
+        "minute": "წუთი",
+        "minutes": "წუთები",
+        "hour": "საათები",
+        "day": "დღეს",
+        "days": "დღეები",
+        "week": "კვირა",
+        "weeks": "კვირები",
+        "month": "თვე",
+        "months": "თვეების",
+        "year": "წელიწადი",
+        "years": "წლები",
+        "decade": "ათწლეული",
+        "decades": "ათწლეულები",
+        "century": "საუკუნეში",
+        "centuries": "საუკუნეებს"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "გთხოვთ, დაუშვათ თქვენს მიკროფონზე წვდომა",
+        "record": "ჩანაწერი",
+        "recording": "ჩაწერა",
+        "remains": "რჩება",
+        "maximum": "მაქსიმუმ",
+        "playing": "უკრავს",
+        "recorded": "ჩაწერილია",
+        "clip": "კლიპი",
+        "discard": "Გაუქმება",
+        "encoding": "კოდირება"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "კლიპი",
+        "errorNoSource": "ვიდეოს წყარო არ არის",
+        "SkipAfter": "გამოტოვება შემდეგ",
+        "Skip": "გამოტოვება"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "კლიპი",
+        "errorNoSource": "pdf წყარო არ არის"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "დააყენეთ კლიპის დაწყება",
+        "ClipStart": "კლიპის დაწყება",
+        "SetClipEnd": "დააყენეთ კლიპის დასასრული",
+        "ClipEnd": "კლიპის დასასრული",
+        "StartMoreEnd": "საწყისი პოზიცია არ შეიძლება იყოს დასასრულზე მეტი",
+        "EndLessStart": "ბოლო პოზიცია არ შეიძლება იყოს საწყისი პოზიციაზე ნაკლები",
+        "WhichInvalid": "არგუმენტი „რომელი“ არასწორია"
     },
     "alert": {
-        "title": "Alert"
+        "title": "გაფრთხილება"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "დაადასტურეთ",
+        "ok": "დიახ",
+        "cancel": "არა"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Სწრაფი",
+        "ok": "წადი"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "მეტი",
+        "Menu": "მენიუ"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "შეცდომა ფაილის წაკითხვისას",
+        "errorType": "უკაცრავად, მაგრამ ფაილის ეს ტიპი არ არის მხარდაჭერილი",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "რის გაკეთებას ისურვებდით?",
+            "photo": "ახალი ფოტოს გადაღება",
+            "library": "აირჩიეთ ბიბლიოთეკიდან"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "გთხოვთ, აირჩიოთ უფრო დიდი სურათი.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "დაარეგულირეთ ზომა და პოზიცია",
+            "touchscreen": "გამოიყენეთ თითები გასადიდებლად და გადასატანად",
+            "notTouchscreen": "გამოიყენეთ მაუსი და ბორბალი გასადიდებლად და გადასატანად"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "გასულ ღამეს",
+        "lastEvening": "ბოლო ღამე",
+        "yesterday": "გუშინ",
+        "thisMorning": "ამ დილით",
+        "today": "დღეს",
+        "tonight": "ამაღამ",
+        "tomorrowMorning": "ტომ მორნი",
+        "tomorrow": "ხვალ",
+        "hoursAgo": "{{h}} საათის წინ",
+        "hourAgo": "{{h}} საათის წინ",
+        "minuteAgo": "{{m}} წუთის წინ",
+        "minutesAgo": "{{m}} წუთის წინ",
+        "secondAgo": "{{s}} წამის წინ",
+        "secondsAgo": "{{s}} წამის წინ",
+        "fewSecondsAgo": "წამის წინ",
+        "rightNow": "ეხლა",
+        "inSecond": "{{s}} წამში",
+        "inSeconds": "{{s}} წამში",
+        "inMinute": "{{m}} წუთში",
+        "inMinutes": "{{m}} წუთში",
+        "inHour": "{{h}} საათში",
+        "inHours": "{{h}} საათში",
+        "inUnderMinute": "1 წუთზე ნაკლებ დროში"
     }
 }

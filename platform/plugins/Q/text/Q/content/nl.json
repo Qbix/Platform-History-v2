@@ -1,31 +1,31 @@
 {
     "request": {
-        "error": "Fout {{status}} tijdens aanvraag",
+        "error": "Fout {{status}} tijdens verzoek",
         "canceled": "Verzoek geannuleerd",
         "500": "Interne Server Fout",
         "404": "Niet gevonden: {{url}}",
         "501": "Verzoek onderbroken"
     },
     "nonce": {
-        "sameDomain": "Sessie verlopen. Ververs de pagina en probeer het opnieuw.",
-        "otherDomain": "Geblokkeerde interdomeinstructieverzoek aan buitenlands domein om {{baseUrl}}"
+        "sameDomain": "Sessie verlopen. Vernieuw de pagina en probeer het opnieuw.",
+        "otherDomain": "Geblokkeerd cross-domein verzoek naar buitenlands domein op {{baseUrl}}"
     },
     "words": {
-        "tap": "tik",
+        "tap": "kraan",
         "click": "Klik",
         "yes": "Ja",
         "no": "Nee",
-        "Tap": "Tik",
+        "Tap": "Kraan",
         "Click": "Klik",
         "Yes": "Ja",
         "No": "Nee"
     },
     "months": {
-        "1": "januari-",
+        "1": "januari",
         "2": "februari",
         "3": "maart",
         "4": "april",
-        "5": "mei",
+        "5": "Kunnen",
         "6": "juni-",
         "7": "juli-",
         "8": "augustus",
@@ -35,21 +35,21 @@
         "12": "december"
     },
     "audio": {
-        "allowMicrophoneAccess": "Sta toegang tot uw microfoon toe",
-        "record": "Record",
-        "recording": "opname",
+        "allowMicrophoneAccess": "Geef toegang tot uw microfoon a.u.b.",
+        "record": "Dossier",
+        "recording": "Opnemen",
         "remains": "stoffelijk overschot",
         "maximum": "maximum",
         "playing": "Spelen",
-        "recorded": "opgenomen",
+        "recorded": "Opgenomen",
         "clip": "klem",
         "orupload": "Of upload",
         "usethis": "Gebruik dit",
-        "discard": "afdanken",
+        "discard": "Weggooien",
         "encoding": "codering"
     },
     "alert": {
-        "title": "alarm"
+        "title": "Waarschuwing"
     },
     "confirm": {
         "title": "Bevestigen",
@@ -57,21 +57,21 @@
         "cancel": "Nee"
     },
     "prompt": {
-        "title": "prompt",
+        "title": "Snel",
         "ok": "Gaan"
     },
     "imagepicker": {
-        "errorReadingFile": "Fout bij lezen van bestand",
+        "errorReadingFile": "Fout bij lezen bestand",
         "cameraCommands": {
             "prompt": "Wat zou je willen doen?",
-            "photo": "Maak een nieuwe foto",
+            "photo": "Nieuwe foto maken",
             "library": "Kies uit bibliotheek"
         },
         "tooSmall": "Kies een grotere afbeelding.",
         "cropping": {
             "title": "Pas grootte en positie aan",
             "touchscreen": "Gebruik je vingers om in te zoomen en te slepen",
-            "notTouchscreen": "Gebruik je muis en muis om in te zoomen en te slepen"
+            "notTouchscreen": "Gebruik je muis en wiel om te zoomen en te slepen"
         },
         "errorType": "Sorry, maar dit bestandstype wordt niet ondersteund"
     },
@@ -79,10 +79,10 @@
         "lastNight": "afgelopen nacht",
         "lastEvening": "laatste avond",
         "yesterday": "gisteren",
-        "thisMorning": "deze morgen",
+        "thisMorning": "vanmorgen",
         "today": "vandaag",
         "tonight": "vanavond",
-        "tomorrowMorning": "Tom Morn",
+        "tomorrowMorning": "morgenochtend",
         "tomorrow": "morgen",
         "hoursAgo": "{{h}} uur geleden",
         "hourAgo": "{{h}} uur geleden",
@@ -91,11 +91,11 @@
         "secondAgo": "{{s}} seconde geleden",
         "secondsAgo": "{{s}} seconden geleden",
         "fewSecondsAgo": "seconden geleden",
-        "rightNow": "nu",
-        "inSecond": "in {{s}} seconde",
-        "inSeconds": "in {{s}} seconden",
+        "rightNow": "direct",
+        "inSecond": "over {{s}} seconde",
+        "inSeconds": "over {{s}} seconden",
         "inMinute": "over {{m}} minuut",
-        "inMinutes": "in {{m}} minuten",
+        "inMinutes": "over {{m}} minuten",
         "inHour": "over {{h}} uur",
         "inHours": "over {{h}} uur",
         "inUnderMinute": "in minder dan 1 minuut"
@@ -108,27 +108,27 @@
         "clip": "klem",
         "errorNoSource": "Geen videobron",
         "SkipAfter": "Overslaan na",
-        "Skip": "Overspringen"
+        "Skip": "Overslaan"
     },
     "pdf": {
         "clip": "klem",
         "errorNoSource": "Geen pdf-bron"
     },
     "clip": {
-        "SetClipStart": "Stel Clip Start in",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Clip-einde instellen",
+        "SetClipStart": "Clip starten instellen",
+        "ClipStart": "Clip starten",
+        "SetClipEnd": "Clip einde instellen",
         "ClipEnd": "Clip einde",
         "StartMoreEnd": "Startpositie kan niet meer zijn dan eindpositie",
         "EndLessStart": "Eindpositie kan niet kleiner zijn dan startpositie",
         "WhichInvalid": "Argument &#39;welke&#39; ongeldig"
     },
     "durations": {
-        "second": "tweede",
+        "second": "seconde",
         "seconds": "seconden",
         "minute": "minuut",
         "minutes": "minuten",
-        "hour": "uren",
+        "hour": "uur",
         "day": "dag",
         "days": "dagen",
         "week": "week",
@@ -136,7 +136,7 @@
         "month": "maand",
         "months": "maanden",
         "year": "jaar",
-        "years": "jaren",
+        "years": "jaar",
         "decade": "decennium",
         "decades": "tientallen jaren",
         "century": "eeuw",

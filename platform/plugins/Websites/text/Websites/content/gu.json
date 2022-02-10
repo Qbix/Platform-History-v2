@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "પ્રમોટ કરવા માટે લિંક",
+                "startDate": "પ્રારંભ તારીખ",
+                "startTime": "પ્રારંભ સમય",
+                "endDate": "અંતિમ તારીખ",
+                "endTime": "સમાપ્તિ સમય",
+                "budget": "બજેટ"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "રસ દ્વારા ફિલ્ટર કરો",
+                "FilterInterests": "રસ લખવાનું શરૂ કરો..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "વ્યાજ",
+            "Location": "સ્થાન"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "જાઓ",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "બ્રાઉઝ કરો",
+            "WriteToStartConversation": "વાતચીત શરૂ કરવા માટે તમારા વિચારો લખો",
+            "StartConversation": "વાતચીત શરૂ કરો",
+            "GotoConversation": "વાતચીત પર જાઓ",
+            "reset": "રીસેટ કરો",
+            "edit": "સંપાદિત કરો",
+            "link": "લિંક",
+            "setUrl": "URL સેટ કરો",
+            "save": "સાચવો",
+            "setClip": "કટ આઉટ ક્લિપ",
+            "invalidURL": "અમાન્ય URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "કેશીંગ માટે ફાઇલ ખૂબ મોટી છે. મહત્તમ ફાઇલ કદ {{size}}",
+        "InvalidPDF": "ફાઇલ માન્ય PDF નથી",
+        "StartTypingTitleOrKeywords": "શીર્ષક અથવા કીવર્ડ્સ લખવાનું શરૂ કરો..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "એક HTML દસ્તાવેજ જે વિવિધ વપરાશકર્તાઓ જોઈ અને સંપાદિત કરી શકે છે",
+            "displayType": "કલમ"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "પ્રસ્તુતિની સ્લાઇડમાં HTML, ઑડિઓ વગેરેનો સમાવેશ થઈ શકે છે.",
+            "displayType": "સ્લાઇડ"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "વિવિધ સ્લાઇડ્સ ધરાવતી પ્રસ્તુતિ",
+            "displayType": "પ્રસ્તુતિ"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "વેબસાઇટ પર જાહેરાત એકમ",
+            "displayType": "જાહેરાત એકમ"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "એક નામ હેઠળ જાહેરાત એકમોને જૂથબદ્ધ કરવાની રીત",
+            "displayType": "જાહેરાત પ્લેસમેન્ટ"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "જાહેરાત માટેની સામગ્રી",
+            "displayType": "સર્જનાત્મક જાહેરાત"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "એક જાહેરાત ઝુંબેશ",
+            "displayType": "જાહેરાત ઝુંબેશ"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "એક વેબસાઇટનું પ્રતિનિધિત્વ કરે છે જેનો મેટાડેટા સ્ક્રેપ કરવામાં આવ્યો હતો",
+            "displayType": "વેબ પેજ"
         }
     }
 }

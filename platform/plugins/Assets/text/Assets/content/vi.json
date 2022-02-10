@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Nhấn để thanh toán"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: khoản phí được xử lý cho {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Cảm ơn bạn đã thanh toán cho {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} đã đăng ký với {{plan.title}}",
+        "YouSubscribedTo": "Bạn đã được đăng ký với {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Bạn nhận được khoản thanh toán {{displayAmount}} từ {{call 'publisher.displayName'}} bằng &quot;{{description}}&quot;",
+        "HasBeenCharged": "Này, thông báo này chỉ để cho bạn biết {{1}} đã bị {{2}} tính phí {{3}} bởi {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Cảm ơn bạn đã thanh toán cho &quot;{{description}}&quot;",
+        "HavePaid": "Xin chào {{1}}, đây chỉ là một xác nhận nhanh rằng bạn đã thanh toán thành công {{2}} cho {{3}} cho {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Thông tin về đơn đặt hàng",
+        "PaymentMethod": "Phương thức thanh toán",
+        "ContactInfo": "Thông tin liên lạc",
+        "Pay": "Trả"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Lời mời được chấp nhận bởi {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} đã nhập tên",
+        "Streams_user_lastname": "{{invitedUserName}} đã nhập họ",
+        "Streams_user_icon": "{{invitedUserName}} đã nhập biểu tượng",
+        "Places_user_location": "{{invitedUserName}} đã nhập vị trí",
+        "Streams_greeting": "{{invitedUserName}} đã nhập lời chào",
+        "YouHaveCreditsToStart": "Bạn có {{amount}} tín dụng để bắt đầu",
+        "PaymentFor": "Thanh toán cho &quot;{{1}}&quot;",
+        "PaymentTo": "Thanh toán cho {{1}}",
+        "PaymentToUser": "Thanh toán cho {{toUserName}}",
+        "CreatePaidStream": "để tạo {{toStreamName}}",
+        "JoinedPaidStream": "để đặt chỗ ở &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "để tạo cộng đồng &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "dưới dạng hoàn tiền đặt chỗ trong &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Đã mua {{amount}} tín dụng",
+        "BonusCredits": "Thưởng {{amount}} tín dụng",
+        "BuyAmountCredits": "Mua {{amount}} tín dụng",
+        "WatchClip": "Đã kiếm được {{amount}} tín dụng khi xem {{fromStreamTitle}}",
+        "MissingCredits": "Các khoản tín dụng bị thiếu",
+        "YouMissingCredits": "Bạn cần thêm {{amount}} tín dụng để tiếp tục.",
+        "BuyCredits": "Mua thẻ tín dụng",
+        "BuyBonus": "Mua {{amount}} tín dụng cùng một lúc, sẽ dẫn đến phần thưởng {{bonus}} tín dụng.",
+        "Buy": "Mua",
+        "PurchaseCredits": "Mua tín dụng",
+        "Credits": "Tín dụng",
+        "ErrorInvalidAmount": "Số tiền không hợp lệ",
+        "ErrorInvalidCurrency": "Rất tiếc, chúng tôi chưa hỗ trợ đơn vị tiền tệ {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} tín dụng",
+            "BonusCredits": "{{amount}} tín dụng"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Ngày",
+        "Amount": "Số lượng",
+        "Description": "Sự miêu tả",
+        "Client": "Khách hàng",
+        "To": "đến",
+        "From": "từ",
+        "SeeHistory": "Xem lịch sử thanh toán cho {{1}}",
+        "HistoryEmpty": "Bạn chưa có dữ liệu",
+        "PaymentFor": "Đã gửi {{amount}} tín dụng",
+        "PaymentTo": "Đã gửi {{amount}} tín dụng",
+        "PaymentToUser": "Đã gửi {{amount}} tín dụng",
+        "CreatePaidStream": "Đã tiêu {{amount}} tín dụng",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Đã kiếm được {{amount}} tín dụng",
+            "-": "Đã tiêu {{amount}} tín dụng"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Đã kiếm được {{amount}} tín dụng",
+            "-": "Đã tiêu {{amount}} tín dụng"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Đã nhận được {{amount}} tín dụng",
+            "-": "Đã gửi {{amount}} tín dụng"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Đã tiêu {{amount}} tín dụng",
+        "BoughtCredits": "Đã mua {{amount}} tín dụng",
+        "BonusCredits": "Nhận được khoản tín dụng {{amount}} tiền thưởng",
+        "InviteAcceptedBy": "Đã kiếm được {{amount}} tín dụng",
+        "Streams_user_firstname": "Đã kiếm được {{amount}} tín dụng",
+        "Streams_user_lastname": "Đã kiếm được {{amount}} tín dụng",
+        "Streams_user_icon": "Đã kiếm được {{amount}} tín dụng",
+        "Places_user_location": "Đã kiếm được {{amount}} tín dụng",
+        "Streams_greeting": "Đã kiếm được {{amount}} tín dụng",
+        "YouHaveCreditsToStart": "Đã kiếm được {{amount}} tín dụng"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Đặt thông tin thanh toán",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Bắt đầu đăng ký",
+            "message": "Bạn có muốn đăng ký {{title}} không?",
+            "ok": "VÂNG",
+            "cancel": "Hủy bỏ"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Thẻ tín dụng hoặc thẻ ghi nợ",
+        "SubscribePayment": "Đăng ký thanh toán",
+        "ImmediatePayment": "Thanh toán ngay lập tức"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Đặt thông tin thanh toán",
+        "BuyAmountCredits": "Mua {{amount}} tín dụng",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Thực hiện thanh toán",
+            "message": "Bạn có đồng ý trả {{symbol}} {{amount}} không?",
+            "ok": "VÂNG",
+            "cancel": "Hủy bỏ"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Tín dụng",
+            "description": "theo dõi các khoản tín dụng và thanh toán"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Gói đăng ký",
+            "description": "gói đăng ký"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Đăng ký",
+            "description": "đăng ký"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Sản phẩm",
+            "description": "sản phẩm đang được bán"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Dịch vụ",
+            "description": "dịch vụ đang được cung cấp"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Đã kiếm được {{amount}} tín dụng"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Đã mua {{amount}} tín dụng"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Thưởng {{amount}} tín dụng"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Đã tiêu {{amount}} tín dụng"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Đã gửi {{amount}} tín dụng cho {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Đã nhận được {{amount}} tín dụng từ {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Dịch vụ mới",
+            "TitlePlaceholder": "Chức vụ",
+            "PricePlaceholder": "Đặt giá",
+            "LinkPlaceholder": "đặt liên kết thông tin bổ sung",
+            "DescriptionPlaceholder": "Dịch vụ Mô tả",
+            "SaveService": "Lưu dịch vụ",
+            "SelectRequiredParticipants": "Người tham gia bắt buộc"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Quản lý Mẫu dịch vụ",
+        "ManageServices": "Quản lý dịch vụ",
+        "Free": "Rảnh rỗi",
+        "OptionalContribution": "Đóng góp tùy chọn",
+        "RequiredPayment": "Thanh toán bắt buộc",
+        "AreYouSureDelete": "Bạn có chắc chắn muốn xóa dịch vụ này không?",
+        "AmountServicesRelated": "Có {{amount}} tính khả dụng liên quan đến dịch vụ này. Chúng cũng sẽ bị xóa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Thông tin về {{title}} NFT",
+        "Description": "Thông tin chi tiết về NFT",
+        "FixedBid": "Mua ngay",
+        "CurrentBid": "Giá thầu hiện tại",
+        "StartingIn": "Bắt đầu từ",
+        "EndingIn": "Kết thúc trong",
+        "CreateNFT": "Tạo một NFT",
+        "TitlePlaceholder": "Đặt cho NFT của bạn một tiêu đề",
+        "DescriptionPlaceholder": "Cung cấp cho NFT của bạn một mô tả",
+        "CreateYourNFT": "Tạo NFT của bạn",
+        "Royalties": "Tiền bản quyền",
+        "RoyaltyPlaceholder": "Không bắt buộc. Số tiền trả cho người sáng tạo trước khi chuyển.",
+        "ExpirationDate": "Ngày hết hạn",
+        "StartingDate": "Ngày bắt đầu",
+        "BidsBelowThisAmount": "Giá thầu dưới số tiền này sẽ không được phép",
+        "MinimumBid": "Giá tối thiểu",
+        "Price": "Giá",
+        "Owner": "Chủ nhân",
+        "SelectCategory": "Chọn danh mục",
+        "Day": "Ngày",
+        "Days": "Ngày",
+        "Hour": "Giờ",
+        "Hours": "Giờ",
+        "Minute": "Phút",
+        "Minutes": "Phút",
+        "Second": "Thứ hai",
+        "Seconds": "Giây",
+        "SalesCreator": "doanh số bán hàng sẽ đến tay người sáng tạo",
+        "Details": "Thông tin chi tiết",
+        "Bids": "Giá thầu",
+        "History": "Môn lịch sử",
+        "LoremIpsum": "Lorem Ipsum chỉ đơn giản là văn bản giả của ngành in ấn và sắp chữ.",
+        "PutOnSale": "Bán",
+        "PutOffSale": "Rút tiền từ việc bán",
+        "Transfer": "Chuyển giao",
+        "Update": "Cập nhật",
+        "UpdateToken": "Cập nhật mã thông báo",
+        "CreateToken": "Tạo mã thông báo",
+        "PlaceBid": "Đặt giá thầu",
+        "SoldOut": "Đã bán",
+        "NftName": "Tên NFT",
+        "DescribeYourNFT": "Vui lòng mô tả NFT của bạn",
+        "NftPicture": "Hình ảnh đại diện cho NFT",
+        "NftMovie": "Phim đại diện cho NFT",
+        "UploadMovie": "Tải phim lên",
+        "MovieSource": "Nguồn phim",
+        "UploadFile": "Tải lên một tập tin",
+        "PutOnMarketplace": "Đưa lên thị trường",
+        "InstantPurchase": "Nhập giá để cho phép người dùng mua ngay NFT của bạn",
+        "FixedPrice": "Giá cố định",
+        "TimedAuction": "Đấu giá theo thời gian",
+        "OpenForBids": "Mở cho giá thầu",
+        "PriceOnePiece": "Nhập giá cho một sản phẩm",
+        "EnterMinimumBid": "Nhập giá thầu tối thiểu",
+        "SelectChain": "Chọn chuỗi",
+        "WrongChain": "NFT này được tạo trong &quot;{{chain}}&quot;. Hãy sử dụng chuỗi này.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Nhập NFT&#39;s",
+            "fileNotFound": "Xin lỗi, không tìm thấy tệp CSV.",
+            "fileEmpty": "Xin lỗi, tệp CSV trống.",
+            "userIdNotFound": "người dùng tồn tại nhưng id trống",
+            "errorLine": "dòng {{1}}",
+            "fieldNotFound": "Không tìm thấy trường bắt buộc &quot;{{1}}&quot;",
+            "taskStreamInvalid": "luồng nhiệm vụ không hợp lệ",
+            "instructionsEmpty": "hướng dẫn dòng nhiệm vụ trống",
+            "complete": "Hoàn chỉnh",
+            "activateUsers": "gửi tin nhắn kích hoạt cho người dùng?",
+            "importProgress": "Phát triển",
+            "importOptions": "Tùy chọn",
+            "sampleCSV": "Tải xuống CSV mẫu",
+            "fileLabel": "Tải lên bảng tính:",
+            "errorsTitle": "Đã xảy ra lỗi"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Lọc theo Bộ sưu tập NFT",
+                "ShowNFTCollection": "Hiển thị bộ sưu tập NFT trong ...",
+                "AllCollections": "Tất cả các bộ sưu tập"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Tất cả các tác giả",
+                "AllUsers": "Tất cả mọi người",
+                "FilterByAuthors": "Lọc theo tác giả"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Quay lại Bộ sưu tập"
     }
 }

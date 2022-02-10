@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "ene de {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "metro",
+        "meters": "metroj",
+        "kilometer": "kilometro",
+        "kilometers": "kiometroj",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "mejlo",
+        "miles": "mejloj",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "piedo",
+        "feet": "piedoj",
+        "inches": "colojn"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Mi interesiĝas pri aferoj okazantaj ene de {{select}} de",
+        "update": "Ĝisdatigu Mian Lokon",
+        "set": "Agordu Mian Lokon",
+        "prompt": "{{ClickOrTap}} ĉi tie al<br> starigu vian<br> loko",
+        "myCurrentLocation": "Mia nuna loko",
+        "enterAddress": "Enigu adreson",
+        "enterPostcode": "Bonvolu enigi vian poŝtkodon \/ poŝtkodon",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Aldonu Lokon",
+            "title": "Nova Loko",
+            "nameYourLocation": "Nomu vian lokon"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Ĉu konservi ĉi tiun lokon?",
+            "message": "Ĉu vi planas uzi ĉi tiun lokon denove estonte?",
+            "ok": "Jes",
+            "cancel": "Ne"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Nomu ĉi tiun lokon",
+            "placeholder": "Hejmo, Laboro ktp.",
+            "ok": "Savi"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Elektu Lokon"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Iu areo ene de ĉi tiu loko?",
+        "newArea": "Nova areo",
+        "promptTitle": "Enigu nomon por la areo:",
+        "absent": "Bonvolu agordi areon",
+        "error": "Eraro",
+        "exist": "Areo jam ekzistas",
+        "addNewArea": "Aldonu novan areon",
+        "add": "Aldoni"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "kolekto de lokoj",
+            "displayType": "Lokoj"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Reprezentas konstruaĵon, ejon, ŝipon, parkon ktp.",
+            "displayType": "Loko"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Reprezentas areon ene de loko, kiel ĉambro aŭ serio",
+            "displayType": "Areo"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Reprezentas etaĝon en konstruaĵo aŭ ŝipo",
+            "displayType": "Planko"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Reprezentas kolonon en konstruaĵo aŭ ŝipo",
+            "displayType": "Kolumno"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategorio por aferoj en certa distanco de geohash",
+            "displayType": "Proksime de lokoj"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategorio por aferoj en certa distanco de geohash, kongrua kun intereso",
+            "displayType": "Interesaj lokoj"
         }
     }
 }

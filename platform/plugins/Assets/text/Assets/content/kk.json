@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Төлеу үшін түртіңіз"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} үшін төлем өңделді",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} төлеміңіз үшін рахмет",
+        "SubscribedTo": "{{call 'user.displayName'}} жазылды {{plan.title}}",
+        "YouSubscribedTo": "Сіз {{plan.title}} арнасына жазылдыңыз"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "&quot;{{description}}&quot; арқылы {{call 'publisher.displayName'}} бастап {{displayAmount}} төлем аласыз",
+        "HasBeenCharged": "Сәлем, бұл жай ғана {{1}} {{2}} үшін {{3}} үшін {{4}} ақы алынғанын хабарлау үшін."
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "&quot;{{description}}&quot; төлеміңіз үшін рахмет",
+        "HavePaid": "Сәлем {{1}}, бұл жай ғана {{2}} {{3}} картасына {{4}} үшін сәтті төлегеніңізді растау."
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Тапсырыс туралы ақпарат",
+        "PaymentMethod": "Төлем тәсілі",
+        "ContactInfo": "Байланыс ақпараты",
+        "Pay": "Төлеу"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Шақыруды {{invitedUserName}} қабылдады",
+        "Streams_user_firstname": "{{invitedUserName}} аты енгізілді",
+        "Streams_user_lastname": "{{invitedUserName}} тегі енгізілді",
+        "Streams_user_icon": "{{invitedUserName}} белгішесін енгізді",
+        "Places_user_location": "{{invitedUserName}} орынды енгізді",
+        "Streams_greeting": "{{invitedUserName}} сәлемдесуді енгізді",
+        "YouHaveCreditsToStart": "Бастау үшін {{amount}} несиеңіз бар",
+        "PaymentFor": "&quot;{{1}}&quot; үшін төлем",
+        "PaymentTo": "Төлем: {{1}}",
+        "PaymentToUser": "Төлем: {{toUserName}}",
+        "CreatePaidStream": "жасау үшін {{toStreamName}}",
+        "JoinedPaidStream": "брондау үшін &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; қауымдастығын құру үшін",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ішінде брондау ақысын қайтару ретінде",
+        "BoughtCredits": "{{amount}} несие сатып алды",
+        "BonusCredits": "Бонус {{amount}} несие",
+        "BuyAmountCredits": "{{amount}} несие сатып алыңыз",
+        "WatchClip": "{{fromStreamTitle}} көру үшін {{amount}} кредит алды",
+        "MissingCredits": "Жетіспейтін несиелер",
+        "YouMissingCredits": "Жалғастыру үшін сізге қосымша {{amount}} кредит қажет.",
+        "BuyCredits": "Несие сатып алыңыз",
+        "BuyBonus": "Бірден {{amount}} несие сатып алсаңыз, {{bonus}} несие бонусына әкеледі.",
+        "Buy": "Сатып алу",
+        "PurchaseCredits": "Несиелерді сатып алу",
+        "Credits": "Несиелер",
+        "ErrorInvalidAmount": "Сома жарамсыз",
+        "ErrorInvalidCurrency": "Өкінішке орай, біз {{currency}} валютасын әлі қолдамаймыз",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} кредит",
+            "BonusCredits": "{{amount}} кредит"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Күн",
+        "Amount": "Сома",
+        "Description": "Сипаттама",
+        "Client": "Клиент",
+        "To": "дейін",
+        "From": "бастап",
+        "SeeHistory": "{{1}} төлем тарихын қараңыз",
+        "HistoryEmpty": "Сізде әлі деректер жоқ",
+        "PaymentFor": "{{amount}} кредит жіберілді",
+        "PaymentTo": "{{amount}} кредит жіберілді",
+        "PaymentToUser": "{{amount}} кредит жіберілді",
+        "CreatePaidStream": "{{amount}} кредит жұмсалды",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} несие алды",
+            "-": "{{amount}} кредит жұмсалды"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} несие алды",
+            "-": "{{amount}} кредит жұмсалды"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}} кредит алынды",
+            "-": "{{amount}} кредит жіберілді"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "{{amount}} кредит жұмсалды",
+        "BoughtCredits": "{{amount}} несие сатып алды",
+        "BonusCredits": "Бонус {{amount}} несие алды",
+        "InviteAcceptedBy": "{{amount}} несие алды",
+        "Streams_user_firstname": "{{amount}} несие алды",
+        "Streams_user_lastname": "{{amount}} несие алды",
+        "Streams_user_icon": "{{amount}} несие алды",
+        "Places_user_location": "{{amount}} несие алды",
+        "Streams_greeting": "{{amount}} несие алды",
+        "YouHaveCreditsToStart": "{{amount}} несие алды"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Төлем ақпаратын орнату",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Жазылымды бастау",
+            "message": "{{title}} жазылуын қалайсыз ба?",
+            "ok": "ЖАРАЙДЫ МА",
+            "cancel": "Болдырмау"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Несие немесе дебеттік карта",
+        "SubscribePayment": "Жазылу төлемі",
+        "ImmediatePayment": "Жедел төлем"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Төлем ақпаратын орнату",
+        "BuyAmountCredits": "{{amount}} несие сатып алыңыз",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Төлем жасаңыз",
+            "message": "{{symbol}}{{amount}} төлеуге келісесіз бе?",
+            "ok": "ЖАРАЙДЫ МА",
+            "cancel": "Болдырмау"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Несиелер",
+            "description": "несиелер мен төлемдердің есебін жүргізеді"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Жазылым жоспары",
+            "description": "жазылу жоспары"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Жазылым",
+            "description": "жазылу"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Өнім",
+            "description": "өнім сатылуда"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Қызмет",
+            "description": "қызмет ұсынылуда"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}} несие алды"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}} несие сатып алды"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Бонус {{amount}} несие"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "{{amount}} кредит жұмсалды"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "{{amount}} кредит {{toUserName}} жіберілді"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "{{fromUserName}} ұсынған {{amount}} кредит алынды"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Жаңа қызмет",
+            "TitlePlaceholder": "Қызмет атауы",
+            "PricePlaceholder": "Бағаны орнату",
+            "LinkPlaceholder": "қосымша ақпарат сілтемесін орнатыңыз",
+            "DescriptionPlaceholder": "Қызмет сипаттамасы",
+            "SaveService": "Қызметті сақтау",
+            "SelectRequiredParticipants": "Міндетті қатысушылар"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Қызмет үлгілерін басқару",
+        "ManageServices": "Қызметтерді басқару",
+        "Free": "Тегін",
+        "OptionalContribution": "Қосымша үлес",
+        "RequiredPayment": "Міндетті төлем",
+        "AreYouSureDelete": "Бұл қызметті шынымен жойғыңыз келе ме?",
+        "AmountServicesRelated": "Бұл қызметке қатысты {{amount}} қолжетімділік бар. Олар да жойылады."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "{{title}} NFT туралы ақпарат",
+        "Description": "NFT туралы толық ақпарат",
+        "FixedBid": "Қазір сатып Ал",
+        "CurrentBid": "Ағымдағы баға",
+        "StartingIn": "Бастау",
+        "EndingIn": "Аяқталу",
+        "CreateNFT": "NFT жасаңыз",
+        "TitlePlaceholder": "NFT-ке тақырып беріңіз",
+        "DescriptionPlaceholder": "NFT сипаттамасын беріңіз",
+        "CreateYourNFT": "NFT жасаңыз",
+        "Royalties": "Роялти",
+        "RoyaltyPlaceholder": "Қосымша. Аудармас бұрын авторға төленген сома.",
+        "ExpirationDate": "Мерзімнің өту күні",
+        "StartingDate": "Басталатын күн",
+        "BidsBelowThisAmount": "Бұл сомадан төмен баға ұсыныстарына жол берілмейді",
+        "MinimumBid": "Ең аз ұсыныс",
+        "Price": "Бағасы",
+        "Owner": "Меншік иесі",
+        "SelectCategory": "Санатты таңдаңыз",
+        "Day": "Күн",
+        "Days": "Күндер",
+        "Hour": "Сағат",
+        "Hours": "Сағат",
+        "Minute": "Минут",
+        "Minutes": "Минут",
+        "Second": "Екінші",
+        "Seconds": "Секундтар",
+        "SalesCreator": "сатылым жасаушыға түседі",
+        "Details": "Егжей",
+        "Bids": "Баға ұсыныстары",
+        "History": "Тарих",
+        "LoremIpsum": "Lorem Ipsum - бұл басып шығару және теру өнеркәсібінің қарапайым мәтіні.",
+        "PutOnSale": "Сатылымға қойыңыз",
+        "PutOffSale": "Сатудан бас тарту",
+        "Transfer": "Тасымалдау",
+        "Update": "Жаңарту",
+        "UpdateToken": "Токенді жаңарту",
+        "CreateToken": "Токен жасау",
+        "PlaceBid": "Өтінімді орналастыру",
+        "SoldOut": "Сатылған",
+        "NftName": "NFT атауы",
+        "DescribeYourNFT": "NFT-ті сипаттаңыз",
+        "NftPicture": "NFT көрсететін сурет",
+        "NftMovie": "NFT-ті көрсететін фильм",
+        "UploadMovie": "Фильмді жүктеп салу",
+        "MovieSource": "Фильмнің көзі",
+        "UploadFile": "Файлды жүктеп салыңыз",
+        "PutOnMarketplace": "Базарға қойыңыз",
+        "InstantPurchase": "Пайдаланушыларға NFT-ті бірден сатып алуға мүмкіндік беру үшін бағаны енгізіңіз",
+        "FixedPrice": "Орнатылған баға",
+        "TimedAuction": "Уақыты белгіленген аукцион",
+        "OpenForBids": "Өтінімдерге ашық",
+        "PriceOnePiece": "Бір дана бағасын енгізіңіз",
+        "EnterMinimumBid": "Ең төменгі бағаны енгізіңіз",
+        "SelectChain": "Тізбекті таңдаңыз",
+        "WrongChain": "Бұл NFT &quot;{{chain}}&quot; астында жасалған. Осы тізбекті пайдаланыңыз.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT импорттау",
+            "fileNotFound": "Кешіріңіз, CSV файлы табылмады.",
+            "fileEmpty": "Кешіріңіз, CSV файлы бос.",
+            "userIdNotFound": "пайдаланушы бар, бірақ идентификатор бос",
+            "errorLine": "жол {{1}}",
+            "fieldNotFound": "Міндетті өріс &quot;{{1}}&quot; табылмады",
+            "taskStreamInvalid": "тапсырма ағыны жарамсыз",
+            "instructionsEmpty": "тапсырмалар ағынының нұсқаулары бос",
+            "complete": "Аяқталды",
+            "activateUsers": "пайдаланушыларға белсендіру хабарын жіберу керек пе?",
+            "importProgress": "Прогресс",
+            "importOptions": "Опциялар",
+            "sampleCSV": "CSV үлгісін жүктеп алыңыз",
+            "fileLabel": "Электрондық кестені жүктеп салу:",
+            "errorsTitle": "Қателер орын алды"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "NFT жинақтары бойынша сүзгілеу",
+                "ShowNFTCollection": "NFT топтамасын көрсету...",
+                "AllCollections": "Барлық жинақтар"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Барлық авторлар",
+                "AllUsers": "Барлығы",
+                "FilterByAuthors": "Авторлар бойынша сүзгілеу"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Жинақ дегенге қайта келу"
     }
 }

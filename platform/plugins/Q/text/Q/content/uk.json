@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Помилка {{status}} під час запиту",
+        "canceled": "Запит скасовано",
+        "500": "Внутрішня помилка сервера",
+        "404": "Не знайдено: {{url}}",
+        "501": "Запит перервано"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Сеанс закінчився. Оновіть сторінку та спробуйте ще раз.",
+        "otherDomain": "Заблокований міждоменний запит до іноземного домену за адресою {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "натисніть",
+        "click": "клацніть",
+        "yes": "так",
+        "no": "немає",
+        "Tap": "Торкніться",
+        "Click": "Натисніть",
+        "Yes": "Так",
+        "No": "Немає"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "січня",
+        "2": "лютий",
+        "3": "березень",
+        "4": "квітень",
+        "5": "Може",
+        "6": "червень",
+        "7": "липень",
+        "8": "серпень",
+        "9": "Вересень",
+        "10": "жовтень",
+        "11": "Листопад",
+        "12": "Грудень"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "другий",
+        "seconds": "секунд",
+        "minute": "хвилина",
+        "minutes": "хвилин",
+        "hour": "годин",
+        "day": "день",
+        "days": "днів",
+        "week": "тиждень",
+        "weeks": "тижнів",
+        "month": "місяць",
+        "months": "місяців",
+        "year": "рік",
+        "years": "років",
+        "decade": "десятиліття",
+        "decades": "десятиліттями",
+        "century": "століття",
+        "centuries": "століть"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Будь ласка, надайте доступ до свого мікрофона",
+        "record": "Запис",
+        "recording": "Запис",
+        "remains": "залишається",
+        "maximum": "максимум",
+        "playing": "Грає",
+        "recorded": "Записано",
+        "clip": "кліп",
+        "discard": "Відкинути",
+        "encoding": "Кодування"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "кліп",
+        "errorNoSource": "Немає джерела відео",
+        "SkipAfter": "Пропустити після",
+        "Skip": "Пропустити"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "кліп",
+        "errorNoSource": "Немає джерела pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Установіть початок кліпу",
+        "ClipStart": "Початок кліпу",
+        "SetClipEnd": "Установіть кінець кліпу",
+        "ClipEnd": "Кінець кліпу",
+        "StartMoreEnd": "Початкове положення не може перевищувати кінцеве положення",
+        "EndLessStart": "Кінцева позиція не може бути меншою за початкову",
+        "WhichInvalid": "Аргумент &quot;який&quot; недійсний"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Оповіщення"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Підтвердьте",
+        "ok": "Так",
+        "cancel": "Немає"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Підказка",
+        "ok": "Іди"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "більше",
+        "Menu": "Меню"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Помилка читання файлу",
+        "errorType": "Вибачте, але цей тип файлу не підтримується",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Що б ти хотів зробити?",
+            "photo": "Зробіть нове фото",
+            "library": "Виберіть із бібліотеки"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Виберіть зображення більшого розміру.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Відрегулюйте розмір і положення",
+            "touchscreen": "Збільшуйте та перетягуйте пальцями",
+            "notTouchscreen": "Використовуйте мишу та колесо для масштабування та перетягування"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "минулої ночі",
+        "lastEvening": "останній вечір",
+        "yesterday": "вчора",
+        "thisMorning": "сьогодні вранці",
+        "today": "сьогодні",
+        "tonight": "сьогодні ввечері",
+        "tomorrowMorning": "том ранок",
+        "tomorrow": "завтра",
+        "hoursAgo": "{{h}} год тому",
+        "hourAgo": "{{h}} годину тому",
+        "minuteAgo": "{{m}} хвилину тому",
+        "minutesAgo": "{{m}} хвилин тому",
+        "secondAgo": "{{s}} секунди тому",
+        "secondsAgo": "{{s}} секунд тому",
+        "fewSecondsAgo": "секунд тому",
+        "rightNow": "прямо зараз",
+        "inSecond": "через {{s}} секунду",
+        "inSeconds": "через {{s}} секунд",
+        "inMinute": "через {{m}} хвилину",
+        "inMinutes": "через {{m}} хвилин",
+        "inHour": "через {{h}} годину",
+        "inHours": "через {{h}} год",
+        "inUnderMinute": "менше ніж за 1 хвилину"
     }
 }

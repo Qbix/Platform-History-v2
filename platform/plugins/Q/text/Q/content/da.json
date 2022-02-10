@@ -4,18 +4,18 @@
         "canceled": "Anmodning annulleret",
         "500": "Intern serverfejl",
         "404": "Ikke fundet: {{url}}",
-        "501": "Forespørgsel afbrudt"
+        "501": "Anmodning afbrudt"
     },
     "nonce": {
-        "sameDomain": "Sessionen er udløbet. Opdater siden og prøv igen.",
-        "otherDomain": "Blokeret anmodning på tværs af domæner til udenlandsk domæne ved {{baseUrl}}"
+        "sameDomain": "Sessionen er udløbet. Opdater siden, og prøv igen.",
+        "otherDomain": "Blokeret anmodning på tværs af domæner til udenlandsk domæne på {{baseUrl}}"
     },
     "words": {
-        "tap": "hanen",
+        "tap": "tryk",
         "click": "klik",
         "yes": "Ja",
         "no": "ingen",
-        "Tap": "Tap",
+        "Tap": "Tryk på",
         "Click": "Klik",
         "Yes": "Ja",
         "No": "Ingen"
@@ -35,18 +35,18 @@
         "12": "december"
     },
     "audio": {
-        "allowMicrophoneAccess": "Tillad adgang til din mikrofon",
+        "allowMicrophoneAccess": "Tillad venligst adgang til din mikrofon",
         "record": "Optage",
         "recording": "Indspilning",
-        "remains": "resterne",
+        "remains": "forbliver",
         "maximum": "maksimum",
-        "playing": "Afspilning",
+        "playing": "Spiller",
         "recorded": "Optaget",
         "clip": "klip",
         "orupload": "Eller Upload",
         "usethis": "Brug denne",
         "discard": "Kassér",
-        "encoding": "Kodning"
+        "encoding": "Indkodning"
     },
     "alert": {
         "title": "Alert"
@@ -65,13 +65,13 @@
         "cameraCommands": {
             "prompt": "Hvad vil du gerne lave?",
             "photo": "Tag nyt billede",
-            "library": "Vælg fra bibliotek"
+            "library": "Vælg fra biblioteket"
         },
         "tooSmall": "Vælg venligst et større billede.",
         "cropping": {
             "title": "Juster størrelse og position",
-            "touchscreen": "Brug dine fingre til at zoome og trække",
-            "notTouchscreen": "Brug din mus og hjul til at zoome og trække"
+            "touchscreen": "Brug fingrene til at zoome og trække",
+            "notTouchscreen": "Brug musen og hjulet til at zoome og trække"
         },
         "errorType": "Beklager, men denne filtype understøttes ikke"
     },
@@ -79,17 +79,17 @@
         "lastNight": "igåraftes",
         "lastEvening": "sidste aften",
         "yesterday": "i går",
-        "thisMorning": "denne morn",
+        "thisMorning": "denne morgen",
         "today": "i dag",
         "tonight": "i aften",
-        "tomorrowMorning": "Tom morn",
+        "tomorrowMorning": "imorgen",
         "tomorrow": "i morgen",
-        "hoursAgo": "For {{h}} timer siden",
-        "hourAgo": "For {{h}} time siden",
+        "hoursAgo": "{{h}} timer siden",
+        "hourAgo": "{{h}} time siden",
         "minuteAgo": "{{m}} minut siden",
-        "minutesAgo": "{{m}} minutter siden",
-        "secondAgo": "{{s}} andet siden",
-        "secondsAgo": "For {{s}} sekunder siden",
+        "minutesAgo": "for {{m}} minutter siden",
+        "secondAgo": "{{s}} sekund siden",
+        "secondsAgo": "{{s}} sekunder siden",
         "fewSecondsAgo": "sekunder siden",
         "rightNow": "lige nu",
         "inSecond": "om {{s}} sekund",
@@ -107,7 +107,7 @@
     "video": {
         "clip": "klip",
         "errorNoSource": "Ingen videokilde",
-        "SkipAfter": "Spring efter",
+        "SkipAfter": "Spring over efter",
         "Skip": "Springe"
     },
     "pdf": {
@@ -115,12 +115,12 @@
         "errorNoSource": "Ingen pdf-kilde"
     },
     "clip": {
-        "SetClipStart": "Indstil Clip Start",
-        "ClipStart": "Klip Start",
-        "SetClipEnd": "Indstil klipende",
+        "SetClipStart": "Indstil klipstart",
+        "ClipStart": "Klip start",
+        "SetClipEnd": "Indstil Clip End",
         "ClipEnd": "Clip End",
         "StartMoreEnd": "Startposition kan ikke være mere end slutposition",
-        "EndLessStart": "Slutposition kan ikke være mindre end startposition",
+        "EndLessStart": "Slutpositionen må ikke være mindre end startpositionen",
         "WhichInvalid": "Argumentet &#39;hvilket&#39; er ugyldigt"
     },
     "durations": {

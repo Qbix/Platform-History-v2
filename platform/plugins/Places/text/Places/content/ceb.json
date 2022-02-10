@@ -2,56 +2,56 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "sulud sa {{1}}"
+        "Title": "sulod sa {{1}}"
     },
     "units": {
         "meter": "metro",
-        "meters": "metro",
+        "meters": "metros",
         "kilometer": "kilometro",
-        "kilometers": "kiometers",
+        "kilometers": "mga kiometer",
         "km": "km",
         "mile": "milya",
         "miles": "milya",
         "mi": "mi",
         "foot": "tiil",
-        "feet": "mga tiil",
+        "feet": "tiil",
         "inches": "pulgada"
     },
     "location": {
-        "interested": "Interesado ako sa mga butang nga nahinabo sa sulud sa {{select}} sa",
-        "update": "Pagbag-o sa Akong Lokasyon",
+        "interested": "Interesado ko sa mga butang nga nahitabo sulod sa {{select}} sa",
+        "update": "I-update ang Akong Lokasyon",
         "set": "Ibutang ang Akong Lokasyon",
         "prompt": "{{ClickOrTap}} dinhi sa<br> ibutang ang imong<br> lokasyon",
-        "myCurrentLocation": "Ang akong lokasyon karon",
-        "enterAddress": "Pagsulud usa ka adres",
-        "enterPostcode": "Palihug isulud ang imong postcode \/ zipcode",
+        "myCurrentLocation": "Akong nahimutangan karon",
+        "enterAddress": "Pagsulod ug adres",
+        "enterPostcode": "Palihug isulod ang imong postcode \/ zipcode",
         "create": {
             "action": "Idugang ang Lokasyon",
-            "title": "Bag-ong Lokasyon",
-            "nameYourLocation": "Nganli ang imong lokasyon"
+            "title": "Bag-ong Lugar",
+            "nameYourLocation": "Ngalan ang imong lokasyon"
         },
         "confirm": {
             "title": "I-save kini nga lokasyon?",
-            "message": "Plano ba nimo nga gamiton kini nga lokasyon sa umaabot?",
+            "message": "Nagplano ka ba nga gamiton kini nga lokasyon pag-usab sa umaabot?",
             "ok": "Oo",
             "cancel": "Dili"
         },
         "add": {
-            "title": "Nganli kini nga lokasyon",
-            "placeholder": "Balay, Trabaho ug uban pa.",
-            "ok": "Pagtipig"
+            "title": "Ngalan kini nga lokasyon",
+            "placeholder": "Balay, Trabaho etc.",
+            "ok": "Tipigi"
         },
         "dialog": {
             "title": "Pilia ang Lokasyon"
         }
     },
     "areas": {
-        "filterPlaceholder": "Adunay bisan unsang lugar sa sulud niini nga lokasyon?",
+        "filterPlaceholder": "Bisan unsa nga lugar sa sulod niini nga lokasyon?",
         "newArea": "Bag-ong lugar",
-        "promptTitle": "Pagsulud usa ka ngalan alang sa lugar:",
+        "promptTitle": "Pagsulod ug ngalan para sa lugar:",
         "absent": "Palihug ibutang ang lugar",
-        "error": "Sayup",
-        "exist": "Naa na ang lugar",
+        "error": "Sayop",
+        "exist": "Anaa na ang lugar",
         "addNewArea": "Pagdugang bag-ong lugar",
         "add": "Idugang"
     },
@@ -61,27 +61,27 @@
             "displayType": "Mga lokasyon"
         },
         "Places\/location": {
-            "description": "Nagrepresentar sa usa ka bilding, venue, barko, parke, ug uban pa.",
+            "description": "Nagrepresentar sa usa ka bilding, lugar, barko, parke, ug uban pa.",
             "displayType": "Lokasyon"
         },
         "Places\/area": {
-            "description": "Nagrepresenta sa usa ka lugar sa sulud sa usa ka lokasyon, sama sa usa ka kuwarto o suite",
-            "displayType": "Dapit"
+            "description": "Nagrepresentar sa usa ka lugar sulod sa usa ka lokasyon, sama sa usa ka kwarto o suite",
+            "displayType": "Lugar"
         },
         "Places\/floor": {
             "description": "Nagrepresentar sa usa ka salog sa usa ka bilding o barko",
             "displayType": "Salog"
         },
         "Places\/column": {
-            "description": "Nagrepresenta sa usa ka kolum sa usa ka bilding o barko",
+            "description": "Nagrepresentar sa usa ka kolum sa usa ka bilding o barko",
             "displayType": "Kolum"
         },
         "Places\/nearby": {
-            "description": "Kategoryang alang sa mga butang sa sulud sa usa ka gilay-on sa usa ka geohash",
+            "description": "Kategorya sa mga butang sulod sa usa ka gilay-on sa usa ka geohash",
             "displayType": "Duol sa mga lugar"
         },
         "Places\/interest": {
-            "description": "Ang kategorya alang sa mga butang sa sulud sa usa ka gilay-on sa usa ka geohash, nga nagpares sa usa ka interes",
+            "description": "Kategorya sa mga butang sulod sa usa ka gilay-on sa usa ka geohash, nga katumbas sa usa ka interes",
             "displayType": "Mga lugar nga interes"
         }
     }

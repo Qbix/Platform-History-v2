@@ -1,14 +1,14 @@
 {
     "actions": {
         "LogIn": "تسجيل الدخول",
-        "LogOut": "الخروج"
+        "LogOut": "تسجيل خروج"
     },
     "activate": {
-        "SetAsPrimary": "عيّن {{1}} كـ {{2}} الأساسي",
-        "ChoosePassPhrase": "اختر <strong>عبارة مرور<\/strong> لتسجيل الدخول. <br> عبارة بسيطة تتكون من بضع كلمات سوف تتذكرها بسهولة.",
-        "ChoosePassPhraseSeeSuggestions": "اختر <strong>عبارة مرور<\/strong> جيدة لحماية حسابك. انظر الاقتراحات لبعض الأفكار.",
-        "LogOutAndTryAgain": "تسجيل الخروج وحاول مرة أخرى",
-        "IfYouFeel": "إذا شعرت أن هناك خطأ ما ، يمكنك ذلك",
+        "SetAsPrimary": "تعيين {{1}} باعتباره {{2}} الأساسي",
+        "ChoosePassPhrase": "اختر <strong>عبارة مرور<\/strong> لتسجيل الدخول باستخدامها.<br> عبارة بسيطة تتكون من بضع كلمات يسهل عليك تذكرها.",
+        "ChoosePassPhraseSeeSuggestions": "اختر <strong>عبارة مرور<\/strong> جيدة لحماية حسابك. انظر إلى الاقتراحات لبعض الأفكار.",
+        "LogOutAndTryAgain": "سجل الخروج وحاول مرة أخرى",
+        "IfYouFeel": "إذا شعرت أن شيئًا ما قد حدث خطأ ، يمكنك ذلك",
         "SetIdentifierButtonTitle": "ابدأ من جديد"
     },
     "session": {
@@ -16,8 +16,8 @@
     },
     "authorize": {
         "GetStarted": "البدء",
-        "Authorize": "يأذن",
-        "TermsLabel": "لقد قرأت وأوافق <br> إلى {{link}}",
+        "Authorize": "تفويض",
+        "TermsLabel": "لقد قرأت وأوافق<br> إلى {{link}}",
         "TermsTitle": "شروط",
         "mustAgree": "أولا يجب أن توافق على الشروط."
     },
@@ -26,66 +26,66 @@
         "TermsTitle": "شروط"
     },
     "notifications": {
-        "title": "الإذن",
-        "prompt": "هل تريد تمكين الإشعارات؟ ستتلقى تحديثات في الوقت الفعلي حول الأشياء التي تهتم بها.",
-        "yes": "نعم فعلا",
-        "no": "لا",
-        "WelcomePleaseVerifyEmail": "أهلا بك! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
-        "WelcomeVerifyEmail": "أهلا بك! تحقق من عنوان بريدك الإلكتروني",
-        "ForgetPass": "مهلا ، هل نسيت عبارة المرور الخاصة بك؟",
+        "title": "إذن",
+        "prompt": "هل تريد تمكين الإخطارات؟ ستتلقى تحديثات في الوقت الفعلي حول الأشياء التي تهتم بها.",
+        "yes": "نعم",
+        "no": "رقم",
+        "WelcomePleaseVerifyEmail": "مرحبا! يرجى التحقق من عنوان البريد الإلكتروني الخاص بك.",
+        "WelcomeVerifyEmail": "مرحبا! تحقق من عنوان بريدك الإلكتروني.",
+        "ForgetPass": "مرحبًا ، هل نسيت عبارة مرورك؟",
         "PassphraseSaved": "تم حفظ عبارة المرور الخاصة بك.",
         "IdentifierActivated": "تم تفعيل {{type}} الخاص بك.",
         "CompletedActivation": "لقد أكملت تنشيط المستخدم.",
         "CompletedActivationLogIn": "لقد أكملت تنشيط المستخدم. حاول تسجيل الدخول الآن."
     },
     "usersContacts": {
-        "selectLabel": "يرجى اختيار التسمية.",
-        "inviteUser": "دعوة المستخدم",
-        "selectRole": "اختر الدور",
+        "selectLabel": "الرجاء تحديد التسمية.",
+        "inviteUser": "قم بدعوة المستخدمين",
+        "selectRole": "حدد الدور",
         "inviteRole": "دعوة {{role}}"
     },
     "invalidLanguageSelected": "تم تحديد لغة غير صالحة",
     "contacts": {
         "dialog": {
-            "title": "اختيار الاتصال",
+            "title": "اختر جهة اتصال",
             "SearchByName": "البحث عن طريق الإسم",
-            "CreateAccount": "+ اتصال جديد",
-            "CreateAccountNotFound": "لم يتم العثور على Q.Users.Cordova.UI.Create",
+            "CreateAccount": "+ جهة اتصال جديدة",
+            "CreateAccountNotFound": "Q.users.Cordova.UI.create غير موجود",
             "EmptyContacts": "لم يتم العثور على جهات الاتصال ..."
         },
         "select": {
-            "title": "اختر جهة اتصال {{displayName}}"
+            "title": "حدد جهة اتصال لـ {{displayName}}"
         }
     },
     "login": {
-        "title": "أهلا بك",
+        "title": "مرحبا",
         "directions": "إنشاء حساب أو تسجيل الدخول.",
         "directionsNoRegister": "تسجيل الدخول إذا كان لديك حساب.",
-        "goButton": "اذهب",
+        "goButton": "يذهب",
         "passphrase": "أدخل عبارة المرور الخاصة بك:",
         "loginButton": "البدء",
         "registerButton": "البدء",
-        "resendButton": "إرسال رسالة التفعيل",
+        "resendButton": "أرسل رسالة تفعيل",
         "forgot": "هل نسيت ذلك؟",
-        "resendConfirm": "هل تريد إرسال رسالة لإعادة تعيين عبارة المرور؟",
+        "resendConfirm": "هل تريد إرسال رسالة لإعادة تعيين عبارة مرورك؟",
         "resendSuccess": "تحقق من وجود رسالة لإعادة تعيين عبارة المرور الخاصة بك",
-        "resendClose": "أغلق",
-        "noPassphrase": "قبل أن تتمكن من تسجيل الدخول ، يجب عليك تعيين عبارة مرور بالنقر فوق الارتباط الموجود في رسالة التنشيط.",
-        "notVerified": "يجب أن ترسل لنفسك رسالة تنشيط من أجل تسجيل الدخول.",
-        "emailExists": "هل حاولت التسجيل باستخدام هذا البريد الإلكتروني من قبل؟ إذا كان الأمر كذلك ، فتحقق من البريد الوارد لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
-        "mobileExists": "هل حاولت التسجيل باستخدام رقم الجوال هذا من قبل؟ إذا كان الأمر كذلك ، تحقق من رسائلك النصية لتفعيل حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
+        "resendClose": "قريب",
+        "noPassphrase": "قبل أن تتمكن من تسجيل الدخول ، يجب عليك تعيين عبارة مرور عن طريق النقر فوق الارتباط الموجود في رسالة التنشيط الخاصة بك.",
+        "notVerified": "يجب أن ترسل لنفسك رسالة تفعيل من أجل تسجيل الدخول.",
+        "emailExists": "هل حاولت التسجيل مع هذا البريد الإلكتروني من قبل؟ إذا كان الأمر كذلك ، فتحقق من صندوق الوارد الخاص بك لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
+        "mobileExists": "هل حاولت التسجيل باستخدام رقم الهاتف المحمول هذا من قبل؟ إذا كان الأمر كذلك ، فتحقق من رسائل SMS الخاصة بك لتنشيط حسابك. <a href='#resend' class='Q_button Users_activation_resend'>انقر لإعادة إرسال الرسالة<\/a>",
         "usingOther": "أو تستطيع",
-        "prompt": "اختر اسم للمستخدم:",
+        "prompt": "اختيار اسم المستخدم:",
         "newUser": "أو إنشاء حساب جديد أدناه",
         "placeholders": {
-            "identifier": "# هاتفك المحمول أو البريد الإلكتروني",
+            "identifier": "رقم هاتفك المحمول أو بريدك الإلكتروني",
             "mobile": "أدخل رقم هاتفك المحمول",
             "email": "أدخل عنوان بريدك الالكتروني",
-            "username": "اسم المستخدم"
+            "username": "استخدم الحروف والأرقام فقط"
         },
         "confirmTerms": "قبول شروط الخدمة؟",
-        "facebookNoEmail": "يفتقد حسابك على Facebook عنوان بريد إلكتروني مؤكد. ببساطة تسجيل الدخول بالطريقة الأصلية.",
-        "picTooltip": "يمكنك تغيير هذه الصورة في وقت لاحق",
+        "facebookNoEmail": "يفتقد حساب Facebook الخاص بك إلى عنوان بريد إلكتروني مؤكد. ببساطة قم بتسجيل الدخول بالطريقة الأصلية.",
+        "picTooltip": "يمكنك تغيير هذه الصورة لاحقا",
         "wallet": {
             "payload": "سجّل الدخول إلى {{host}} في الساعة {{timestamp}}",
             "alert": {
@@ -95,35 +95,35 @@
         }
     },
     "setIdentifier": {
-        "title": "إضافة وسيلة لتسجيل الدخول",
-        "sendMessage": "إرسال رسالة التفعيل",
+        "title": "أضف طريقة لتسجيل الدخول",
+        "sendMessage": "أرسل رسالة تفعيل",
         "placeholders": {
-            "identifier": "أدخل رقم هاتفك المحمول أو بريدك الإلكتروني",
+            "identifier": "أدخل رقم هاتفك المحمول أو البريد الإلكتروني",
             "mobile": "أدخل رقم هاتفك المحمول",
             "email": "أدخل عنوان بريدك الالكتروني",
-            "username": "اسم المستخدم"
+            "username": "اسم االمستخدم"
         }
     },
     "prompt": {
         "title": "{{Platform}} الحساب",
         "areUsing": "أنت تستخدم {{platform}} كـ",
-        "noLongerUsing": "لم تعد متصلاً بـ {{platform}} كـ",
-        "doAuth": "تسجيل الدخول باستخدام هذا الحساب",
-        "doSwitch": "التبديل إلى هذا الحساب"
+        "noLongerUsing": "لم تعد متصلًا بـ {{platform}} كـ",
+        "doAuth": "تسجيل الدخول بهذا الحساب",
+        "doSwitch": "قم بالتبديل إلى هذا الحساب"
     },
     "roles": {
         "Owner": "صاحب",
         "Admin": "مشرف",
         "Member": "عضو",
         "Guest": "زائر",
-        "Host": "مضيف"
+        "Host": "يستضيف"
     },
     "analytics": {
         "Title": "تحليلات",
         "Daily": "اليومي",
         "Weekly": "أسبوعي",
         "Monthly": "شهريا",
-        "Application": "تطبيق",
+        "Application": "طلب",
         "Pages": "الصفحات",
         "Services": "خدمات",
         "Faq": "التعليمات",

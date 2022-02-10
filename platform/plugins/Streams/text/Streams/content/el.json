@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Αυτό το περιεχόμενο είναι κρυμμένο από εσάς."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Νέο αντικείμενο"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Άνθρωποι που προσκάλεσα",
+        "Streams\/invitedMe": "Ποιος με προσκάλεσε",
+        "DoYouAgree": "Συμφωνείς?",
+        "Yes": "Ναί",
+        "No": "Οχι"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Ποια είναι τα ενδιαφέροντά σου?",
+        "CanAdd": "Εάν εξακολουθείτε να μην μπορείτε να βρείτε αυτό που ψάχνετε, μπορείτε να προσθέσετε ένα νέο ενδιαφέρον παρακάτω:",
+        "TrySynonyms": "Δεν το βλέπεις; Δοκιμάστε μερικά συνώνυμα.",
+        "AddUnderCategory": "Προσθήκη στην κατηγορία...",
+        "Other": "Αλλα",
+        "Unlisted": "Ακαταχώριστος"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Το μήνυμα έχει επισημανθεί για έλεγχο από διαχειριστή. Πατήστε ξανά για κατάργηση της επισήμανσης.",
+        "noOneSaid": "Κανείς δεν έχει πει τίποτα",
+        "closeChatButton": "Κλείσιμο συνομιλίας",
+        "closeChatConfirmTitle": "Κλείσιμο αυτής της συνομιλίας;",
+        "closeChatConfirm": "Είστε βέβαιοι ότι θέλετε να κλείσετε αυτήν τη συνομιλία;",
+        "Subscribed": "Οι ειδοποιήσεις ενεργοποιήθηκαν",
+        "Unsubscribed": "Ειδοποιήσεις σε σίγαση",
+        "closeChatConfirmYes": "Ναί",
+        "closeChatConfirmNo": "Οχι",
+        "earlierComments": "προηγούμενα σχόλια",
+        "startedConversation": "ξεκίνησε μια συζήτηση",
+        "RealTimeCall": "Κλήση σε πραγματικό χρόνο",
+        "SearchByName": "Αναζήτηση με το όνομα",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "Ο χρήστης {{displayName}} επισκέπτεται τη συνομιλία",
+            "Join": "Ο {{displayName}} συμμετείχε στη συζήτηση",
+            "Leave": "Ο {{displayName}} αποχώρησε από τη συζήτηση",
+            "RelatedTo": "Ο {{displayName}} ξεκίνησε ένα {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "διαχειριστείτε τις συνδρομές email σας",
+        "IfUnsubscribe": "Εάν θέλετε να διαγραφείτε",
+        "*": "Μήνυμα {{& message.fields.type}} προς {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} είπε: {{& message.content}}",
+        "Streams\/changed": "Αλλαγές σε {{stream.fields.title}}",
+        "Streams\/invite": "Έχετε προσκληθεί στο {{& stream.fields.title}}",
+        "Streams\/announcement": "Ανακοίνωση σε {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} άλλαξε πρόσβαση στο {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Το μήνυμα συνομιλίας επεξεργάστηκε σε {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Το μήνυμα συζήτησης καταργήθηκε στο {{& stream.fields.title}}",
+        "Streams\/closed": "Το {{stream.fields.title}} έχει κλείσει",
+        "Streams\/task\/progress": "Πρόοδος που σημειώθηκε στις {{stream.fields.title}}",
+        "Streams\/task\/complete": "Η εργασία ολοκληρώθηκε: {{stream.fields.title}}",
+        "Streams\/task\/error": "Σφάλμα κατά τη διάρκεια: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Εισερχόμενο μήνυμα",
+        "Streams\/relatedTo\/Streams\/call": "Νέα κλήση ξεκίνησε το {{toTitle}}",
+        "Streams\/relatedTo\/*": "Νέο {{relationDisplayType}} σε {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Προστέθηκε στο {{toTitle}} ως {{relationDisplayType}}",
+        "Streams\/mention": "Ο {{&call 'avatar.displayName'}} σας ανέφερε σε ένα σχόλιο",
+        "Streams\/call": "Ο {{displayName}} ξεκίνησε μια κλήση σε πραγματικό χρόνο"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Καλώ",
+        "messageContent": "{{displayName}} σας προσκάλεσε στο {{inviteUrl}}",
+        "youCanNowPaste": "Τώρα μπορείτε να επικολλήσετε αυτόν τον σύνδεσμο κάπου για να προσκαλέσετε άτομα",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Επιλέξτε από τις Επαφές σας",
+            "chooseAgainFromContacts": "Επιλέξτε ξανά από τις Επαφές",
+            "inviteSelectedContacts": "Πρόσκληση επιλεγμένων επαφών",
+            "selectFromContacts": "Επιλέξτε Από τις Επαφές",
+            "userChooserPlaceholder": "Αναζήτηση με το όνομα",
+            "photo": "Βγάλε μια φωτογραφία",
+            "photoInstruction": "Εάν το άτομο που σάρωσε τον κωδικό QR σας βρίσκεται μπροστά σας, τραβήξτε το μια φωτογραφία",
+            "to": "Προς: {{Stream Title}}",
+            "go": "Πηγαίνω",
+            "title": "Καλώ",
+            "placeholder": "Αριθμός κινητού τηλεφώνου ή διεύθυνση email",
+            "orInvite": "Ή προσκαλέστε άτομα χρησιμοποιώντας:",
+            "copyLink": "{{ClickOrTap}} για να αντιγράψετε τον σύνδεσμο πρόσκλησης",
+            "shareOrCopyLink": "{{ClickOrTap}} για κοινή χρήση ή αντιγραφή συνδέσμου πρόσκλησης",
+            "QR": "{{ClickOrTap}} για τη δημιουργία κωδικού QR",
+            "QRtitle": "Σαρώστε αυτόν τον κωδικό QR",
+            "QRscanned": "Το σκάναραν!",
+            "scannedQR": "{{ClickOrTap}} εάν ο κωδικός σαρώθηκε",
+            "byEmail": "ΗΛΕΚΤΡΟΝΙΚΗ ΔΙΕΥΘΥΝΣΗ",
+            "byText": "Κείμενο",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Κελάδημα"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Γεια, ελέγξτε αυτό",
+            "PleaseVisitLink": "Παρακαλούμε επισκεφθείτε τον παρακάτω σύνδεσμο:",
+            "InvitingYou": "Σας προσκαλώ στο {{title}}",
+            "HasInvitedYou": "Ο χρήστης {{displayName}} σας προσκάλεσε στο {{title}}",
+            "HasMentionedYou": "Ο {{displayName}} σας ανέφερε στο &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ΚΑΛΕΙΣΤΕ!",
+            "AcceptInvite": "Αποδοχή πρόσκλησης"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Έχετε προσκληθεί στο {{title}}. Πατήστε {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Έχετε προσκληθεί. {{ClickOrTap}} εδώ για να αποδεχτείτε και να εγγραφείτε."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "δημοσίευσε ένα μήνυμα <em>{{message.fields.type}}<\/em> στον {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "σχολίασε",
+            "startedCallIn": "ξεκίνησε μια κλήση",
+            "in": "σε",
+            "body": "σε {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "έχει αναρτηθεί στο",
+                "byAvatar": "από {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "έχει ένα νέο {{instructions.fromDisplayType}}",
+                "byAvatar": "προστέθηκε από {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Οι προσκλήσεις αποστέλλονται από τον αριθμό μας, τον οποίο οι φίλοι σας δεν αναγνωρίζουν ακόμη. Συνεχίστε με ένα γρήγορο μήνυμα για να τους ενημερώσετε ότι η πρόσκληση προήλθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
+            "confirm": "Οι προσκλήσεις αποστέλλονται από τον αριθμό μας, τον οποίο οι φίλοι σας δεν αναγνωρίζουν ακόμη. Θα θέλατε να συνεχίσετε με ένα γρήγορο μήνυμα για να τους ενημερώσετε ότι η πρόσκληση προήλθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
+            "check": "Γεια σας, μόλις σας έστειλα μια πρόσκληση στην εφαρμογή {{app}}. Ελέγξτε το sms σας και κάντε κλικ στον σύνδεσμο!",
+            "CheckYourMobile": "Ελέγξτε το SMS και ακολουθήστε τις οδηγίες!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Οι προσκλήσεις αποστέλλονται από τον τομέα μας, τις οποίες οι φίλοι σας δεν αναγνωρίζουν ακόμη. Συνεχίστε με ένα γρήγορο μήνυμα για να τους ενημερώσετε ότι η πρόσκληση προήλθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
+            "confirm": "Οι προσκλήσεις αποστέλλονται από τον τομέα μας, τις οποίες οι φίλοι σας δεν αναγνωρίζουν ακόμη. Θα θέλατε να συνεχίσετε με ένα γρήγορο μήνυμα για να τους ενημερώσετε ότι η πρόσκληση προήλθε από εσάς, ζητώντας τους να κάνουν κλικ στον σύνδεσμο.",
+            "subject": "Πήρες πρόσκληση;",
+            "body": "Γεια σας, μόλις σας έστειλα μια πρόσκληση στην εφαρμογή {{app}}. Ελέγξτε το email σας και κάντε κλικ στον σύνδεσμο εκεί!",
+            "CheckYourEmail": "Ελέγξτε το email σας και ακολουθήστε τις οδηγίες!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Τίτλος",
+        "Subscribed": "Εγγεγραμμένος",
+        "Participants": "Συμμετέχοντες",
+        "AreYouSureRemoveIdentifier": "Είστε βέβαιοι ότι θα καταργήσετε αυτό το αναγνωριστικό;",
+        "AreYouSureUnsubscribeIdentifier": "Είστε βέβαιοι ότι καταργείτε την εγγραφή αυτού του αναγνωριστικού; Θα απενεργοποιήσει τις ειδοποιήσεις σε αυτό το αναγνωριστικό.",
+        "AreYouSureUnsubscribeDevice": "Είστε βέβαιοι ότι καταργείτε την εγγραφή αυτής της συσκευής; Θα απενεργοποιήσει τις ειδοποιήσεις σε αυτήν τη συσκευή.",
+        "AreYouSureRemoveParticipant": "Είστε βέβαιοι ότι θέλετε να καταργήσετε αυτόν τον συμμετέχοντα;",
+        "RemoveParticipant": "Κατάργηση συμμετέχοντα",
+        "Identifiers": "Αναγνωριστικά",
+        "Devices": "συσκευές",
+        "Streams": "Ρεύματα"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Δεν έχετε άδεια συμμετοχής σε αυτήν τη ροή.",
+        "streamTitle": "Ο {{1}} ξεκίνησε μια ζωντανή κλήση",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Συνδετικός",
+            "microphoneBtn": "Ενεργοποίηση μικροφώνου",
+            "cameraBtn": "Ενεργοποίηση κάμερας",
+            "cameraAndMicrophoneBtn": "Ενεργοποιήστε την κάμερα και το μικρόφωνο"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Το μικρόφωνο είναι απενεργοποιημένο",
+            "micIsOn": "Το μικρόφωνο είναι ενεργοποιημένο",
+            "cameraIsOff": "Η κάμερα είναι απενεργοποιημένη",
+            "cameraIsOn": "Η κάμερα είναι ενεργοποιημένη",
+            "screenSharingIsOn": "Η κοινή χρήση οθόνης είναι ενεργοποιημένη",
+            "screenSharingIsOff": "Κοινή χρήση οθόνης",
+            "joinNow": "Εγγραφείτε στην κλήση"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Οδηγίες",
+            "permissionDenied": "Η άδεια για το {{kind}} απορρίφθηκε. Για να το χρησιμοποιήσετε, ακολουθήστε τα παρακάτω βήματα:",
+            "point1": "Μεταβείτε στις &quot;Ρυθμίσεις&quot; -&gt; &quot;Σύνθετες&quot; -&gt; &quot;Απόρρητο και ασφάλεια&quot; -&gt; &quot;Ρυθμίσεις τοποθεσίας&quot; -&gt; &quot;Κάμερα&quot; ή &quot;Ρυθμίσεις τοποθεσίας&quot; -&gt; &quot;Μικρόφωνο&quot;",
+            "point2": "Καταργήστε το {{hostname}} από τη λίστα &quot;Αποκλεισμός&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Οδηγίες",
+            "permissionDenied": "Απορρίφθηκε η άδεια για το {{kind}}. Επαναλάβετε τη φόρτωση αυτής της σελίδας και επιβεβαιώστε την πρόσβαση στο {{kind}} για να συμμετάσχετε στη διάσκεψη."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Οδηγίες",
+            "permissionDenied": "Η άδεια για το {{kind}} απορρίφθηκε. Για να το χρησιμοποιήσετε, ακολουθήστε τα παρακάτω βήματα:",
+            "point1": "Μεταβείτε στις Ρυθμίσεις Android",
+            "point2": "Ανοίξτε &quot;Εφαρμογές και ειδοποιήσεις&quot;",
+            "point3": "Βρείτε το &quot;{{communityName}}&quot; και ανοίξτε το",
+            "point4": "Πατήστε Δικαιώματα",
+            "point5": "Ενεργοποίηση {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Οδηγίες",
+            "permissionDenied": "Η άδεια για το {{kind}} απορρίφθηκε. Για να το χρησιμοποιήσετε, ακολουθήστε τα παρακάτω βήματα:",
+            "point1": "Μεταβείτε στις Ρυθμίσεις iOS",
+            "point2": "Ανοίξτε το &quot;Απόρρητο&quot;",
+            "point3": "Βρείτε το {{kind}} και ανοίξτε το",
+            "point4": "Βρείτε το &quot;{{communityName}}&quot; και ενεργοποιήστε το"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Μπήκατε στο δωμάτιο",
+            "joining": "Συμμετοχή: {{userName}}",
+            "sbLeftRoom": "Ο {{userName}} έφυγε από το δωμάτιο",
+            "switchingRoom": "Εναλλάκτης...",
+            "forceDisconnecting": "Θα αποσυνδεθείτε μέσα σε 5 δευτερόλεπτα",
+            "forceDisconnectingImmediately": "Αποσυνδεθήκατε από έναν κεντρικό υπολογιστή",
+            "youLeftRoom": "Έφυγες από το δωμάτιο",
+            "codeCopied": "Έφυγες από το δωμάτιο",
+            "sbBeganFbLive": "Ο {{userName}} άρχισε να μεταδίδει αυτήν την κλήση στο Facebook",
+            "sbStoppedFbLive": "Ο {{userName}} διέκοψε τη μετάδοση αυτής της κλήσης στο Facebook",
+            "youBeganFbLive": "Αρχίσατε να μεταδίδετε αυτήν την κλήση στο Facebook",
+            "youStoppedFbLive": "Σταματήσατε τη μετάδοση αυτής της κλήσης στο Facebook",
+            "youStartedLive": "Ξεκινήσατε τη μετάδοση αυτής της κλήσης σε προσαρμοσμένο RTMP",
+            "youStoppedLive": "Σταματήσατε τη μετάδοση αυτής της κλήσης σε προσαρμοσμένο RTMP",
+            "sbStartedLiveStreaming": "Το {{userName}} ξεκίνησε ζωντανά",
+            "sbStoppedLiveStreaming": "Το {{userName}} έληξε ζωντανά",
+            "liveStopped": "Παρουσιάστηκε σφάλμα κατά την αποστολή του βίντεο στο τελικό σημείο",
+            "youBeganVideoRecording": "Αρχίσατε να ηχογραφείτε αυτό το συνέδριο",
+            "youStoppedVideoRecording": "Σταματήσατε την εγγραφή αυτής της διάσκεψης",
+            "linkCopiedToCb": "Ο σύνδεσμος αντιγράφηκε στο πρόχειρο",
+            "codeCopiedToCb": "Ο κώδικας αντιγράφηκε στο πρόχειρο",
+            "userHasNoVideo": "Ο συμμετέχων δεν έχει βίντεο",
+            "openInBrowserAlert": "Ανοίξτε τον σύνδεσμο στο πρόγραμμα περιήγησης Safari για να συμμετάσχετε στη διάσκεψη."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
+            "dialogTitle": "Ρυθμίσεις βίντεο",
             "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "screenSharing": "Κοινή χρήση οθόνης",
+            "shareAnotherScreen": "Κοινή χρήση άλλης οθόνης",
+            "turnOffCameras": "Απενεργοποιήστε την κάμερα",
+            "turnOffVideo": "Απενεργοποιήστε την κοινή χρήση κάμερας\/οθόνης",
+            "turnOffAudioInput": "Σίγαση μικροφώνου",
+            "turnOffScreenSharing": "Απενεργοποιήστε την κοινή χρήση οθόνης",
+            "cameraIsTurnedOff": "Η κάμερα είναι απενεργοποιημένη",
+            "micIsTurnedOff": "Το μικρόφωνο είναι απενεργοποιημένο",
+            "startFBLive": "Ξεκινήστε το Facebook Livestream",
+            "stopFBLive": "Σταματήστε τη ζωντανή ροή του Facebook",
+            "startRecording": "Ξεκινήστε την εγγραφή",
+            "stopRecording": "Διακοπή εγγραφής",
+            "start": "Αρχή",
+            "stop": "Να σταματήσει",
+            "recordingInProgress": "Η ηχογράφηση είναι σε εξέλιξη...",
+            "fbLiveTitle": "Τίτλος Livestream",
+            "fbLiveDescription": "Περιγράψτε τη ζωντανή ροή σας. Περί τίνος πρόκειται?",
+            "fbOnlyMeLiveAccess": "Μόνο εγώ",
+            "fbFriendsAccess": "Οι φιλοι",
+            "fbPublicAccess": "Δημόσιο",
+            "publishOnTimeline": "Δημοσίευση στο χρονοδιάγραμμα",
+            "publishToGroup": "Δημοσίευση στην ομάδα",
+            "fbStartLive": "Μεταβείτε ζωντανά",
+            "fbStopLive": "Τερματίστε τη ζωντανή ροή",
+            "streamingSettings": "Ρυθμίσεις",
+            "fbEmbedCode": "Ενθέτω",
+            "copy": "αντίγραφο",
+            "streamToRTMP": "Ροή σε προσαρμοσμένο RTMP",
+            "startBroadcasting": "Ξεκινήστε τη μετάδοση",
+            "broadcastingInProgress": "Η μετάδοση είναι σε εξέλιξη"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Ρυθμίσεις ήχου",
+            "speakers": "Ηχεία",
+            "microphone": "Μικρόφωνο"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Ρυθμίσεις συμμετεχόντων",
+            "disconnect": "Αποσυνδέω",
+            "floatingScreens": "Πλωτές Οθόνες",
+            "tiledScreens": "Σίτες με πλακάκια",
+            "loudestExceptMe": "Πιο δυνατά εκτός από εμένα",
+            "maximizeLoudest": "Μεγιστοποίηση πιο δυνατά",
+            "staticMaximized": "Στατική μεγιστοποίηση",
+            "fullScreen": "ΠΛΗΡΗΣ ΟΘΟΝΗ",
+            "manual": "Εγχειρίδιο",
+            "turnOffCamera": "Απόκρυψη βίντεο",
+            "turnOffAudio": "Σίγαση ήχου",
+            "turnOffScreenSharing": "Απόκρυψη κοινής χρήσης οθόνης",
+            "turnOnCamera": "Εμφάνιση βίντεο",
+            "turnOnAudio": "Κατάργηση σίγασης ήχου",
+            "turnOnScreenSharing": "Εμφάνιση κοινής χρήσης οθόνης"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Ρυθμίσεις ροής"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Συνάντηση",
+            "MeetingEnded": "Η συνάντηση έληξε"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Καλεσμένος",
+            "description": "Εισερχόμενα για προσκλήσεις"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Πόρος",
+            "description": "ροή για τη διαχείριση της πρόσβασης σε έναν πόρο και τη δημοσίευση μηνυμάτων σχετικά με ενημερώσεις"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "για τη λήψη ενημερώσεων σχετικά με την πρόοδο σε μια συγκεκριμένη εργασία",
+            "displayType": "Εργο"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "κατηγορία για εργασίες",
+            "displayType": "Καθήκοντα"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "μια κοινή εμπειρία για τα μέλη μιας κοινότητας",
+            "displayType": "Κοινή εμπειρία για μέλη μιας κοινότητας"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "χαιρετισμός με τον οποίο ένας χρήστης μπορεί να συστηθεί",
+            "displayType": "Χαιρετισμός"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Αριθμός",
+            "description": "μαθηματικός αριθμός"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Ημερομηνία",
+            "description": "ημερομηνία"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Κείμενο",
+            "description": "σώμα κειμένου"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Κείμενο",
+            "description": "μικρό σώμα κειμένου"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Κείμενο",
+            "description": "μεσαίο σώμα κειμένου"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Διεύθυνση ηλεκτρονικού ταχυδρομείου",
+            "description": "διεύθυνση ηλεκτρονικού ταχυδρομείου"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Τηλεφωνικό νούμερο",
+            "description": "τηλεφωνικό νούμερο"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "σύνδεσμος στον Ιστό"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Εικόνα",
+            "description": "οπτική εικόνα",
+            "newItem": "Προσθέστε εικόνα"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Συλλογή εικόνων",
+            "description": "γκαλερί εικόνων"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Αλμπουμ",
+            "description": "ένα άλμπουμ με το οποίο σχετίζονται διάφορα μέσα"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Αρχείο",
+            "description": "μεταφορτωμένο αρχείο",
+            "newItem": "Προσθήκη αρχείου"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Κλιπ ήχου",
+            "description": "ηχητικό κλιπ",
+            "newItem": "Προσθήκη ήχου"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Βίντεο κλιπ",
+            "description": "βίντεο κλιπ",
+            "newItem": "Προσθήκη βίντεο"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "έγγραφο PDF",
+            "description": "έγγραφο PDF",
+            "newItem": "Προσθήκη PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Ζωντανή μετάδοση",
+            "description": "ζωντανό ήχο ή βίντεο"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Κατηγορία",
+            "description": "μια κατηγορία με την οποία μπορούν να συσχετιστούν άλλα ρεύματα"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Συμμετέχοντας Ευρετήριο",
+            "description": "Οι ροές σχετίζονται\/άσχετες με αυτό όταν ένας χρήστης εγγράφεται\/αποχωρεί"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Ενδιαφέρον",
+            "description": "αντιπροσωπεύει το ενδιαφέρον ενός χρήστη για ένα συγκεκριμένο θέμα"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Εισερχόμενος",
+            "description": "προορισμός για μηνύματα που αποστέλλονται από άλλους χρήστες"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Συνομιλία",
+            "description": "μια συνομιλία μεταξύ των χρηστών, με το ιστορικό"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Κλήση σε πραγματικό χρόνο",
+            "description": "κλήση βίντεο\/ήχου σε πραγματικό χρόνο"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Ερώτηση",
+            "description": "ροή ερωτήσεων"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Απάντηση",
+            "description": "ροή απαντήσεων"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "κλήσεις",
+            "description": "κατηγορία για Ροές\/webrtc",
+            "MaxRelationsExceeded": "Υπέρβαση του μέγιστου αριθμού κλήσεων"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "πληκτρολογήστε τίτλο σελίδας",
+        "ModTab": "Τροποποίηση αντικειμένου",
+        "Save": "Σώσει",
+        "Delete": "Διαγράφω",
+        "Submenu": "Υπομενού"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Ρεκόρ",
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Σώσει",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή ήχου",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Σώσει",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή βίντεο",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Σώσει",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή pdf",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Επαναφορά",
+        "edit": "Επεξεργασία",
+        "title": "τίτλος",
+        "description": "περιγραφή",
+        "upload": "Μεταφόρτωση",
+        "link": "Σύνδεσμος",
+        "setUrl": "Ορισμός διεύθυνσης URL",
+        "save": "Σώσει",
+        "uploadedImage": "Μεταφορτωμένη εικόνα",
+        "imageTitle": "Τίτλος εικόνας",
+        "setClip": "Αποκοπή κλιπ",
+        "invalidURL": "Μη έγκυρη διεύθυνση URL",
+        "invalidFile": "Μη έγκυρο αρχείο",
+        "errorNoSource": "Δεν υπάρχει πηγή εικόνας",
+        "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
+        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Ερωτήσεις",
+        "Answers": "Απαντήσεις",
+        "AnswerQuestion": "Απάντησε στην ερώτηση",
+        "SetYourAnswer": "Παρακαλώ απαντήστε στην ερώτηση",
+        "NewQuestion": "Νέα Ερώτηση",
+        "NewAnswer": "Νέα Απάντηση",
+        "AnswerDetails": "Απάντηση Λεπτομέρειες",
+        "answerOption": "Επιλογή",
+        "answerOptionExclusive": "Αποκλειστικός",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
+        "FreeAnswer": "Γράψε την απάντησή σου εδώ",
+        "SaveQuestion": "Αποθήκευση ερώτησης",
+        "SaveAnswer": "Αποθήκευση απάντησης",
+        "AddAnotherAnswer": "Προσθέστε μια άλλη απάντηση",
+        "ErrorAnswers": "Προσθέστε έστω και μία απάντηση",
+        "AlreadyAnswered": "Ήδη απαντήθηκε",
+        "TitlePlaceholder": "Πληκτρολογήστε την ερώτησή σας",
+        "ContentPlaceholder": "Βάλτε οποιεσδήποτε πρόσθετες πληροφορίες εδώ για να βοηθήσετε τους ανθρώπους να απαντήσουν",
+        "ErrorTitle": "Απαιτείται ερώτηση",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Νέα εμπειρία",
+        "DefineTitle": "Ορίστε έναν τίτλο",
+        "Create": "Δημιουργώ"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "κλήσεις",
+        "MaxCalls": "Ο Max καλεί",
+        "Update": "Εκσυγχρονίζω",
+        "NoCallsYet": "Δεν υπάρχουν ακόμη κλήσεις",
+        "CallReasonTitle": "Τι είναι αυτή η κλήση;",
+        "WaitingRoom": "Αίθουσα αναμονής"
     }
 }

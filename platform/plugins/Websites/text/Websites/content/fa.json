@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "لینک برای تبلیغ",
+                "startDate": "تاریخ شروع",
+                "startTime": "زمان شروع",
+                "endDate": "تاریخ پایان",
+                "endTime": "زمان پایان",
+                "budget": "بودجه"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "فیلتر بر اساس علاقه",
+                "FilterInterests": "شروع به تایپ علاقه..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "علاقه",
+            "Location": "محل"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "برو",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "مرور کردن",
+            "WriteToStartConversation": "برای شروع گفتگو، افکار خود را بنویسید",
+            "StartConversation": "شروع مکالمه",
+            "GotoConversation": "به گفتگو بروید",
+            "reset": "بازنشانی کنید",
+            "edit": "ویرایش کنید",
+            "link": "ارتباط دادن",
+            "setUrl": "URL را تنظیم کنید",
+            "save": "صرفه جویی",
+            "setClip": "برش کلیپ",
+            "invalidURL": "URL نامعتبر است"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "فایل برای ذخیره سازی خیلی بزرگ است. حداکثر اندازه فایل {{size}}",
+        "InvalidPDF": "فایل یک PDF معتبر نیست",
+        "StartTypingTitleOrKeywords": "شروع به تایپ عنوان یا کلمات کلیدی کنید..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "یک سند HTML که کاربران مختلف می توانند آن را مشاهده و ویرایش کنند",
+            "displayType": "مقاله"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "یک اسلاید در یک ارائه، می تواند شامل HTML، صدا و غیره باشد.",
+            "displayType": "اسلاید"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "ارائه ای متشکل از اسلایدهای مختلف",
+            "displayType": "ارائه"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "یک واحد تبلیغاتی در یک وب سایت",
+            "displayType": "واحد تبلیغات"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "روشی برای گروه بندی واحدهای تبلیغاتی تحت یک نام",
+            "displayType": "قرار دادن آگهی"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "محتوای یک تبلیغ",
+            "displayType": "تبلیغات خلاقانه"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "یک کمپین تبلیغاتی",
+            "displayType": "کمپین تبلیغاتی"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "نشان دهنده وب سایتی است که ابرداده آن خراشیده شده است",
+            "displayType": "صفحه وب"
         }
     }
 }
