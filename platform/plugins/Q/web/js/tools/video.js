@@ -153,7 +153,7 @@ Q.Tool.define("Q/video", function (options) {
 				}
 				var match = state.url.match(/\/v\/([0-9A-Za-z]+).*$/);
 				if (!match) {
-					Q.Error("Q/video/muse: need url to contain '/v/:museVideoId'");
+					return Q.Error("Q/video/muse: need url to contain '/v/:museVideoId'");
 				}
 				var custom = {};
 				custom.video = match[1];
@@ -1090,6 +1090,13 @@ Q.Tool.define("Q/video", function (options) {
 		newA.href = url;
 		var host = newA.hostname;
 
+		var ext = url.split('.').pop();
+		switch(ext) {
+			case 'webm': return 'webm';
+			case 'ogg': return 'ogg';
+			case 'mp4': return 'mp4';
+		}
+
 		if (host.includes("youtube.com") || host.includes("youtu.be")) {
 			return 'youtube';
 		} else if (host.includes("vimeo.com")) {
@@ -1100,12 +1107,7 @@ Q.Tool.define("Q/video", function (options) {
 			return 'muse';
 		}
 
-		var ext = url.split('.').pop();
-		switch(ext) {
-			case 'webm': return 'webm';
-			case 'ogg': return 'ogg';
-			default: return 'mp4';
-		}
+		return 'mp4';
 		//throw new Q.Exception(this.id + ': No adapter for this URL');
 	},
 	/**

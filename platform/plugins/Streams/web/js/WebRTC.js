@@ -1639,6 +1639,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(screen.screensharing == true) {
                     if(!screen.screenEl.classList.contains('Streams_webrtc_chat-active-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
+                    if(!screen.screenEl.classList.contains('Streams_webrtc_chat-local-screen-sharing')) screen.screenEl.classList.add('Streams_webrtc_chat-local-screen-sharing');
                     if(screen.videoScreen.videoCon.classList.contains('Streams_webrtc_chat-flipped-video')) screen.videoScreen.videoCon.classList.remove('Streams_webrtc_chat-flipped-video');
                 }
 
@@ -3038,8 +3039,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  */
                 audioScreensGrid: function (container, roomScreens) {
                     var parentRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
-                    if(parentRect == 0 || parentRect.height == 0) return false;
                     var count = roomScreens.length;
+                    if(count == 0 || parentRect == 0 || parentRect.height == 0) return false;
                     var rects = [];
 
                     //var mainRadius = Math.min(size.parentWidth, size.parentHeight);

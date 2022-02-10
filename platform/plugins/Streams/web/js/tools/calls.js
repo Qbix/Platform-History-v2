@@ -177,13 +177,12 @@
 
                 WebRTCClientUI.screenRendering.layoutEvents.on('layoutRendered', function (e) {
                     let mediaContainer = WebRTCClientUI.roomsMediaContainer();
-                    console.log('layoutRendered', mediaContainer, e)
                     if(!mediaContainer) return;
-                    /*if(e.viewMode != 'audio') {
+                    if(e.viewMode != 'audio') {
                         if(document.body.firstChild) document.body.insertBefore(mediaContainer, document.body.firstChild);
                     } else {
                         tool.state.mainRoomConfig.mainRoomContainer.appendChild(mediaContainer);
-                    }*/
+                    }
                 })
                 WebRTCClientUI.screenRendering.layoutEvents.on('audioScreenCreated', function (e) {
                     var platformId = e.participant.identity != null ? e.participant.identity.split('\t')[0] : null;
