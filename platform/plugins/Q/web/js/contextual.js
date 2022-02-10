@@ -44,7 +44,10 @@
 	
 		// settable value to temporary disable contextual showing
 		triggeringDisabled: false,
-	
+
+		// timeout before hide
+		hideDelay: 0,
+
 		/**
 		 * Adds a contextual to the collection for further managing it.
 	     * @method add
@@ -736,10 +739,28 @@
 			}
 
 			var contextual = Q.Contextual.collection[Q.Contextual.current].contextual;
+			if (!contextual.is(":visible") || contextual.data("hideOccur")) { // nothing to hide if already hidden
+				return ;
+			}
 			var info = Q.Contextual.collection[Q.Contextual.current].info;
 			info.moveTarget = null;
 			info.selectedAtStart = false;
-		
+
+			var hideDelay = contextual.data("hideDelay") || Q.Contextual.hideDelay;
+			var hideDelayUsed = contextual.data("hideDelayUsed");
+			if (hideDelay && !hideDelayUsed) {
+				return setTimeout(function () {
+					if (!contextual.is(":visible") || contextual.data("hideOccur")) {
+						return;
+					}
+
+					contextual.data("hideDelayUsed", true);
+					Q.Contextual.hide(leaveMask);
+				}, hideDelay);
+			}
+			contextual.data("hideDelayUsed", false);
+			contextual.data("hideOccur", true);
+
 			contextual.find('.Q_selected').removeClass('Q_selected');
 
 			var listingWrapper = contextual.children('.Q_listing_wrapper');
@@ -750,10 +771,14 @@
 			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
-			if (Q.Contextual.fadeTime > 0) {
-				contextual.fadeOut(Q.Contextual.fadeTime);
+			var fadeTime = contextual.data("fadeTime") || Q.Contextual.fadeTime;
+			if (fadeTime) {
+				contextual.fadeOut(fadeTime, function () {
+					contextual.data("hideOccur", false);
+				});
 			} else {
 				contextual.hide();
+				contextual.data("hideOccur", false);
 			}
 
 			if (!leaveMask)
