@@ -49,7 +49,7 @@ class Q_Video_CloudConvert {
 		} else {
 			$job = (new Job())
 				->addTask(
-					new Task('import/upload','upload-'.$taskKey)
+					new Task('import/upload','import-'.$taskKey)
 				);
 		}
 
@@ -74,7 +74,7 @@ class Q_Video_CloudConvert {
 
 		// if local path, start uploading
 		if (!filter_var($inputFile, FILTER_VALIDATE_URL)) {
-			$uploadTask = $job->getTasks()->whereName('upload-'.$taskKey)[0];
+			$uploadTask = $job->getTasks()->whereName('import-'.$taskKey)[0];
 			$cloudconvert->tasks()->upload($uploadTask, fopen($inputFile, 'r'), basename($inputFile));
 		}
 
