@@ -11,6 +11,7 @@ platform/.idea/
 platform/local/*
 platform/files/Q/Browscap/*
 platform/files/Q/sessions/*
+platform/plugins/Q/vendor/
 platform/files/sessions/*
 platform/plugins/*/web/img/icons
 platform/plugins/*/files/
