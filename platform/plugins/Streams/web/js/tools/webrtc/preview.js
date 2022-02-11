@@ -171,7 +171,7 @@
                             tool.preview.delete();
 
                         } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
-                            tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
+                            if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
                                 tool.preview.delete();

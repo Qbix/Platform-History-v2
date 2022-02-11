@@ -959,7 +959,7 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.reset = function () {
                     setTimeout(function () {
                         updatVisualizationWidth(participant, visualisation)
-                    }, 300);
+                    }, 1000);
                 };
                 visualisation.remove = function () {
                     delete options.participant.soundMeter.visualizations[name];
@@ -6524,7 +6524,7 @@ window.WebRTCRoomClient = function app(options){
 
             if (event.candidate) {
                 if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
-                    //return;
+                    return;
                 }
 
                 log('gotIceCandidate: existingParticipant', existingParticipant)
@@ -7000,12 +7000,17 @@ window.WebRTCRoomClient = function app(options){
                                 return;
                             }
 
+
+
                             var localDescription;
                             if(typeof cordova != 'undefined' && _isiOS) {
                                 localDescription = new RTCSessionDescription(offer);
                             } else {
                                 localDescription = offer;
                             }
+
+                            //for testing only
+                            //localDescription.sdp = removeNotRelayCandidates(offer.sdp);
 
                             /*if(_isiOS){
 								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
@@ -7426,6 +7431,26 @@ window.WebRTCRoomClient = function app(options){
             return sdp;
         }
 
+        //for testing only
+        function removeNotRelayCandidates(sdp) {
+            //console.log('removeNotRelayCandidates sdp', sdp);
+            var sdpLines = (sdp).split("\n");
+            //console.log('removeNotRelayCandidates sdpLines', sdpLines);
+            for (let i = sdpLines.length - 1; i >= 0; i--) {
+                let line = sdpLines[i];
+                if(line.startsWith('a=candidate') && line.indexOf('relay') == -1) {
+                    sdpLines.splice(i, 1);
+                }
+            }
+            //console.log('removeNotRelayCandidates sdpLines2', sdpLines);
+
+            sdp = sdpLines.filter(function(l) {
+                return l != null;
+            }).join('\n')
+
+            return sdp;
+        }
+
         function offerReceived() {
 
             function createPeerConnection(senderParticipant) {
@@ -7812,6 +7837,9 @@ window.WebRTCRoomClient = function app(options){
                         .then(function(answer) {
                             log('offerReceived: answer created ' + answer.sdp);
                             senderParticipant.signalingState.setStage('answerCreated');
+
+                            //for testing only
+                            //answer.sdp = removeNotRelayCandidates(answer.sdp);
 
                             if(_isiOS){
                                 //answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
@@ -9430,9 +9458,9 @@ window.WebRTCRoomClient = function app(options){
 
                 if (event.candidate) {
 
-                    if (event.candidate.candidate.indexOf("relay") < 0) {
-                        //return;
-                    }
+                    /*if (event.candidate.candidate.indexOf("relay") < 0) {
+                        return;
+                    }*/
                     var message = {
                         type: "candidate",
                         label: event.candidate.sdpMLineIndex,
