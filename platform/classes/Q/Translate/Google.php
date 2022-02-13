@@ -164,7 +164,7 @@ class   Q_Translate_Google {
 			if (!$response) {
 				throw new Q_Exception ("Bad translation response");
 			}
-			if ($response['error']) {
+			if (!empty($response['error'])) {
 				$more = "Make sure you have Q/translate/google/key specified.";
 				throw new Q_Exception($response['error']['message'] . ' ' . $more);
 			}
