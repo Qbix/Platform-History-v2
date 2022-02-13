@@ -40,6 +40,7 @@
                                         resumeClosed: true
                                     }).then(function () {
                                         state.waitingRoom = null;
+                                        if(tool.subtitleEl != null) tool.subtitleEl.innerHTML = tool.text.calls.LiveRoom;
                                     });
                                 }
                             } else {
@@ -49,6 +50,9 @@
                             if(instructions.userId == Q.Users.loggedInUserId()) {
                                 if(state.waitingRoom != null) {
                                     state.waitingRoom.stop();
+                                }
+                                if(tool.subtitleEl != null) {
+                                    tool.subtitleEl.innerHTML = '';
                                 }
                             } else {
 
@@ -105,7 +109,9 @@
             maxCalls: 0,
             publisherId: Users.currentCommunityId,
             streamName: "Streams/calls/main",
-            relationType: "Streams/calls"
+            relationType: "Streams/calls",
+            onCallStart: new Q.Event(),
+            onCallEnd: new Q.Event()
         },
 
         {
@@ -159,19 +165,11 @@
                     onStart: function () {
                         tool.state.mainRoomConfig.mainRoomStream = this.roomStream();
                         tool.state.mainWebrtcRoom = this;
-                        /*var conferenceSignaling = WebRTCClientUI.currentConferenceLibInstance();
 
-                        if(conferenceSignaling) {
-                            conferenceSignaling.event.on('participantConnected', function (e) {
-                                if(conferenceSignaling.roomParticipants().length > 1) {
-                                    $toolElement.attr("data-visualization", "hosts");
-
-                                }
-                            })
-                        }*/
+                        Q.handle(tool.state.onCallStart, tool, [tool.state.mainWebrtcRoom]);
                     },
                     onEnd: function () {
-                        //state.webrtc = 'ended';
+                        Q.handle(tool.state.onCallEnd, tool);
                     }
                 });
 
@@ -352,7 +350,16 @@
                         }
 
                         console.log('call state', state, state.relationType );
+                        var subtitleEl = tool.subtitleEl  = document.createElement('DIV');
+                        subtitleEl.innerHTML = tool.text.calls.WaitingRoom;
+                        subtitleEl.style.position = 'absolute';
+                        subtitleEl.style.top = '0';
+                        subtitleEl.style.left = '0';
+                        subtitleEl.style.padding = '5px';
+                        var containerForMedia = document.createElement('DIV');
                         tool.state.mainRoomConfig.mainRoomContainer.innerHTML = '';
+                        tool.state.mainRoomConfig.mainRoomContainer.appendChild(subtitleEl);
+                        tool.state.mainRoomConfig.mainRoomContainer.appendChild(containerForMedia);
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
                             element: tool.state.mainRoomConfig.mainRoomContainer,
@@ -366,18 +373,13 @@
                             defaultMobileViewMode: 'audio',
                             tool: tool,
                             onStart: function () {
-                                /*var conferenceSignaling = state.waitingRoom.currentConferenceLibInstance();
-                                console.log('conferenceSignaling', conferenceSignaling)
-
-                                if(conferenceSignaling) {
-                                    conferenceSignaling.event.on('participantConnected', function (e) {
-                                        if(conferenceSignaling.roomParticipants().length > 1) {
-                                            $clipToolElement.attr("data-visualization", "hosts");
-
-                                        }
-                                    })
-                                }*/
+                                Q.handle(tool.state.onCallStart, tool, [this]);
                             },
+                            onEnd: function () {
+                                if(tool.subtitleEl != null) tool.subtitleEl.innerHTML = '';
+
+                                Q.handle(tool.state.onCallEnd, tool);
+                            }
                         });
                     }, {
                         title: tool.text.calls.CallReasonTitle,
