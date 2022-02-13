@@ -7010,6 +7010,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var msg = Q.firstErrorMessage(err, response && response.errors);
 
                             if (msg) {
+                                _options.streams.map(function (mediStream) {
+                                    mediStream.getTracks().forEach(function (t) {
+                                        t.stop();
+                                    })
+                                });
+                                connectionState.updateStatus('Disconnected');
+                                setTimeout(function() {
+                                    connectionState.hide();
+                                }, 3000);
                                 return Q.alert(msg);
                             }
                             log('createRoomStream: joined/connected', response.slots.room);
@@ -7050,6 +7059,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 description: _options.description,
                                 resumeClosed: _options.resumeClosed,
                                 closeManually: _options.closeManually,
+                                onlyParticipantsAllowed: _options.onlyParticipantsAllowed,
                                 writeLevel: _options.writeLevel,
                                 relate: _options.relate,
                                 useRelatedTo: _options.useRelatedTo
@@ -7487,6 +7497,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             resumeClosed: options.resumeClosed,
             closeManually: options.closeManually,
             description: options.description,
+            onlyParticipantsAllowed: options.onlyParticipantsAllowed,
             useRelatedTo: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,

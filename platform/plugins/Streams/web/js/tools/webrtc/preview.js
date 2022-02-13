@@ -16,7 +16,6 @@
 
             var tool = this;
             this.state = Q.extend({}, this.state, options);
-            console.log('center: Streams/webrtc/preview2', this.state);
 
             var state = this.state;
             tool.preview = preview;
@@ -37,7 +36,7 @@
                 preview.state.onRefresh.add(tool.refresh.bind(tool));
             });
 
-            this.preview.state.beforeClose = function (wasRemoved) {
+            /*this.preview.state.beforeClose = function (wasRemoved) {
                 let previewTool = this;
                 tool.stream.post({
                     type: 'Streams/webrtc/forceDisconnect',
@@ -45,10 +44,11 @@
                         userId:  tool.stream.fields.publisherId
                     }),
                 }, function () {
-                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                         tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                             resumeClosed: true
                         }).then(function () {
+                            Q.handle(state.onRoomSwitch, tool, ['main']);
                             previewTool.delete();
                         });
                     } else {
@@ -57,7 +57,7 @@
                     }
                 })
 
-            };
+            };*/
 
             tool.refresh();
 
@@ -76,7 +76,8 @@
             onWebRTCRoomCreated: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
-            onRender: new Q.Event()
+            onRender: new Q.Event(),
+            onRoomSwitch: new Q.Event()
         },
 
         {
@@ -113,21 +114,22 @@
                     alt: 'icon',
                     title: stream.fields.title,
                     content: stream.fields.content,
+                    time: stream.fields.insertedTime,
                     duration: duration,
                     preamble: preamble
                 });
 
                 console.log('preview: fields', fields, stream);
 
-
-                if(state.mainRoomStream == null) return;
-
-                console.log('preview: renderTool', state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name);
+                console.log('preview: renderTool');
                 Q.Template.render(
                     'Streams/webrtc/preview/view',
                     fields,
                     function (err, html) {
-                        if (err) return;
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
                         tool.element.innerHTML = html;
                         Q.activate(tool, function () {
                             // load the icon
@@ -150,7 +152,7 @@
                     state.templates.view
                 );
 
-                var titleContainer = tool.element.querySelector('.Streams_preview_title');
+                var titleContainer = tool.element.querySelector('.Streams_preview_title_text');
                 var aboutContainer = tool.element.querySelector('.Streams_preview_about');
                 var previewMediaContainer = tool.element.querySelector('.Streams_preview_media_container');
                 var praticipantsContainer = tool.element.querySelector('.Streams_preview_participants');
@@ -165,17 +167,20 @@
                         acceptButton.style.display = 'none';
                         switchBackButton.style.display = 'none';
                         callButton.style.display = 'none';
+                        holdButton.style.display = 'none';
+                        approveButton.style.display = 'none';
 
                         if(tool.state.mainWebrtcRoom == null || !tool.state.mainWebrtcRoom.isActive()) {
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
                             tool.preview.delete();
 
-                        } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
-                            if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
+                        } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
+                            tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -201,6 +206,7 @@
 
                 callButton.addEventListener('click', function () {
 
+                    console.log('callButton', tool.state.mainWebrtcRoom);
                     if(tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.isActive()) {
                         tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
                             resumeClosed: false
@@ -208,6 +214,7 @@
                             tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
                             //tool.state.mainWebrtcRoom = null;
 
+                            Q.handle(state.onRoomSwitch, tool, ['waiting']);
                             moveVisualizationToPreview();
                             //praticipantsContainer.style.display = 'none';
                             callButton.style.display = 'none';
@@ -219,6 +226,7 @@
                                 content: 'started',
                             })
                             Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
+                            Q.handle(state.onRoomSwitch, tool, ['waiting']);
                         });
 
                     } else {
@@ -238,11 +246,13 @@
                                 holdButton.style.display = 'flex';
                                 moveVisualizationToPreview();
                                 Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
+                                Q.handle(state.onRoomSwitch, tool, ['waiting']);
                             },
                             onWebrtcControlsCreated: function() {
                                 Q.handle(state.onWebrtcControlsCreated, tool, [tool.state.waitingtWebRTCRoom]);
                             },
                             onWebRTCRoomEnded: function () {
+                                Q.handle(state.onRoomSwitch, tool, ['none']);
                                 Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
                             }
                         });
@@ -257,7 +267,7 @@
                             userId: fields.publisherId
                         }),
                     }, function () {
-                        if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                        if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                             tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
@@ -266,6 +276,7 @@
 
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
                             acceptButton.style.display = 'none';
@@ -281,7 +292,7 @@
 
 
                 holdButton.addEventListener('click', function () {
-                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                         tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                             resumeClosed: true
                         }).then(function () {
@@ -290,11 +301,12 @@
                             acceptButton.style.display = '';
                             callButton.style.display = '';
 
-                            moveVisualizationToMainContainer();
+                            if(tool.state.guestWaitingRoom.screenRendering.getActiveViewMode() == 'audio') moveVisualizationToMainContainer();
                             tool.stream.post({
                                 type: 'Streams/calls/interviewing',
                                 content: 'ended',
                             })
+                            Q.handle(state.onRoomSwitch, tool, ['main']);
                         });
                     } else {
                         if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -317,7 +329,7 @@
                             approveButton.innerHTML = 'Approved';
                         } else {
                             tool.state.approved = false;
-                            approveButton.innerHTML = 'Approve';
+                            approveButton.innerHTML = 'Mark Approved';
                         }
 
                         tool.stream.post({
@@ -339,6 +351,8 @@
                 function moveVisualizationToPreview() {
                     console.log('moveVisualizationToPreview');
                     let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+                    console.log('moveVisualizationToPreview', currentMediaContainer, previewMediaContainer);
+
                     if(currentMediaContainer) {
                         previewMediaContainer.appendChild(currentMediaContainer)
                         previewMediaContainer.style.display = 'block';
@@ -349,6 +363,7 @@
                     console.log('moveVisualizationToMainContainer');
                     let mediaContainerOfMainRoom = tool.state.guestWaitingRoom.options().element;
                     let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+
                     if(currentMediaContainer && mediaContainerOfMainRoom) {
                         mediaContainerOfMainRoom.appendChild(currentMediaContainer)
                         previewMediaContainer.style.display = 'none';
@@ -382,12 +397,6 @@
                     updateTitle();
                 });
 
-                /*tool.stream.onMessage("Streams/approved").set(function (stream, message) {
-                    console.log('PREVIEW stream APPROVED event:', message)
-                    let byUserId = message.byUserId;
-
-                });*/
-
                 tool.stream.onMessage("Streams/changed").set(function (stream, message) {
                     console.log('PREVIEW stream CHANGED event:', message)
                     let byUserId = message.byUserId;
@@ -402,7 +411,7 @@
                             if(!approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.add('Streams_preview_approve_button_approved');
 
                         } else {
-                            approveButton.innerHTML = 'Approve';
+                            approveButton.innerHTML = 'Mark Approved';
                             if(approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.remove('Streams_preview_approve_button_approved');
                         }
                     }
@@ -466,7 +475,7 @@
         + '<img alt="{{alt}}" class="Streams_preview_icon">'
         + '<div class="Streams_preview_contents {{titleClass}}">'
         + '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
-        + '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+        + '<{{titleTag}} class="Streams_preview_title"><span class="Streams_preview_title_text">{{title}}</span><span class="Streams_preview_titme">{{time}}</span></{{titleTag}}>'
         + '<div class="Streams_preview_content">'
         + '<div class="Streams_preview_about"><div class="Streams_preview_about_avatar">{{&tool "Users/avatar" userId=publisherId}}</div><div class="Streams_chat_bubble"><div class="Streams_chat_tick"></div><div class="Streams_chat_message">{{content}}</div></div></div>'
         + '<div class="Streams_preview_body">'
@@ -474,7 +483,7 @@
         + '<div class="Streams_preview_participants" style="display: none;">{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}</div>'
         + '<div class="Streams_preview_call_control">'
         + '<div class="Streams_preview_call_control_call">'
-        + '<div class="Streams_preview_approve_button">Approve</div>'
+        + '<div class="Streams_preview_approve_button">Mark Approved</div>'
         + '<div class="Streams_preview_call_button">Interview</div>'
         + '<div class="Streams_preview_switch_back_button">End Call</div>'
         + '<div class="Streams_preview_hold_button">Hold</div>'

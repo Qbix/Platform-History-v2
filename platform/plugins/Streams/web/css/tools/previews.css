@@ -354,6 +354,10 @@
 .Streams_preview_contents {
 	padding:0 0 5px 0;
 }
+.Streams_preview_container .Streams_preview_title{
+	display: flex;
+	justify-content: space-between;
+}
 .Streams_preview_container .Streams_preview_contents {
 	width: 100%;
 }
