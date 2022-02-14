@@ -1041,8 +1041,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 name: 'participantScreenAudio',
                                 type: 'circles',
                                 participant: screen.participant,
-                                element: screen.audioScreen.avatarCon,
-                                stopOnMute: true
+                                element: screen.audioScreen.avatarCon
                             });
                         }
                     } else if (screen.activeScreenType == 'video') {
@@ -1050,8 +1049,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             WebRTCconference.mediaManager.audioVisualization.build({
                                 name: 'participantScreenVideo',
                                 participant: screen.participant,
-                                element: screen.videoScreen.soundEl,
-                                stopOnMute: true
+                                element: screen.videoScreen.soundEl
                             });
                         }
                     }
@@ -1307,8 +1305,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreenVideo',
                         participant: screen.participant,
-                        element: participantVoice,
-                        stopOnMute: true
+                        element: participantVoice
                     });
                 }
 
@@ -1390,8 +1387,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         name: 'participantScreenAudio',
                         participant: screen.participant,
                         type: 'circles',
-                        element: screen.audioScreen.avatarCon,
-                        stopOnMute: true
+                        element: screen.audioScreen.avatarCon
                     });
                 }
 
@@ -1435,8 +1431,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreen',
                         participant: screen.participant,
-                        element: participantVoice,
-                        stopOnMute: true
+                        element: participantVoice
                     });
                 }*/
 

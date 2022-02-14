@@ -12,7 +12,7 @@
      * @param {Q.Event} [options.onRender] called when tool element completely rendered
      */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
-            console.log('center: Streams/webrtc/preview', this);
+            console.log('WebRTC preview');
 
             var tool = this;
             this.state = Q.extend({}, this.state, options);
@@ -36,7 +36,7 @@
                 preview.state.onRefresh.add(tool.refresh.bind(tool));
             });
 
-            /*this.preview.state.beforeClose = function (wasRemoved) {
+            this.preview.state.beforeClose = function (wasRemoved) {
                 let previewTool = this;
                 tool.stream.post({
                     type: 'Streams/webrtc/forceDisconnect',
@@ -57,8 +57,9 @@
                     }
                 })
 
-            };*/
+            };
 
+            console.log('WebRTC preview 2');
             tool.refresh();
 
 
@@ -86,9 +87,11 @@
                 var state = this.state;
                 var $toolElement = $(tool.element);
 
+                console.log('WebRTC preview refresh 1', stream, tool.state);
                 if (!Q.Streams.isStream(stream)) {
                     return;
                 }
+                console.log('WebRTC preview refresh 2');
 
                 stream.observe();
 
