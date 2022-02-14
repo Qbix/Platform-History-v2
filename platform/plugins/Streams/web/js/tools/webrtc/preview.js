@@ -50,6 +50,7 @@
                         }).then(function () {
                             Q.handle(state.onRoomSwitch, tool, ['main']);
                             previewTool.delete();
+                            tool.state.guestWaitingRoom = null;
                         });
                     } else {
                         if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -183,6 +184,7 @@
                             }).then(function () {
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                tool.state.guestWaitingRoom = null;
                                 Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
@@ -257,6 +259,7 @@
                             onWebRTCRoomEnded: function () {
                                 Q.handle(state.onRoomSwitch, tool, ['none']);
                                 Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
+                                tool.state.guestWaitingRoom = null;
                             }
                         });
                     }
@@ -279,6 +282,7 @@
 
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                tool.state.guestWaitingRoom = null;
                                 Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
@@ -309,6 +313,7 @@
                                 type: 'Streams/calls/interviewing',
                                 content: 'ended',
                             })
+                            tool.state.guestWaitingRoom = null;
                             Q.handle(state.onRoomSwitch, tool, ['main']);
                         });
                     } else {
