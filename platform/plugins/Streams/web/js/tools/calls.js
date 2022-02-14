@@ -111,7 +111,9 @@
             streamName: "Streams/calls/main",
             relationType: "Streams/calls",
             onCallStart: new Q.Event(),
-            onCallEnd: new Q.Event()
+            onCallEnd: new Q.Event(),
+            activeRoom: null, //main|waiting|null
+            activePreview: null
         },
 
         {
@@ -149,7 +151,7 @@
             initMainRoom: function() {
                 var tool = this;
                 var mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
-                var WebRTCClientUI = Streams.WebRTC.start({
+                var WebRTCClientUI = tool.state.mainWebrtcRoom = Streams.WebRTC.start({
                     element: tool.state.mainRoomConfig.mainRoomContainer,
                     roomPublisherId: mainRoomStream ? mainRoomStream.fields.publisherId : null,
                     roomId: mainRoomStream ? mainRoomStream.fields.name : null,
@@ -157,6 +159,7 @@
                     streamName: tool.state.eventsStream.fields.name, /*"Streams/webrtc/live"*/
                     relationType: tool.state.eventsStreamRelationType,
                     resumeClosed: true,
+                    onlyParticipantsAllowed: true,
                     useExisting: false,
                     tool: tool,
                     defaultDesktopViewMode: 'audio',
@@ -164,22 +167,39 @@
                     writeLevel: 10,
                     onStart: function () {
                         tool.state.mainRoomConfig.mainRoomStream = this.roomStream();
-                        tool.state.mainWebrtcRoom = this;
-
+                        //tool.state.mainWebrtcRoom = this;
+                        tool.state.activeRoom = 'main';
                         Q.handle(tool.state.onCallStart, tool, [tool.state.mainWebrtcRoom]);
                     },
                     onEnd: function () {
+                        tool.state.activeRoom = null;
                         Q.handle(tool.state.onCallEnd, tool);
                     }
                 });
 
                 WebRTCClientUI.screenRendering.layoutEvents.on('layoutRendered', function (e) {
+                    console.log('EVENT LAYOUT');
                     let mediaContainer = WebRTCClientUI.roomsMediaContainer();
+                    console.log('EVENT LAYOUT 2',mediaContainer);
+
                     if(!mediaContainer) return;
+                    console.log('EVENT LAYOUT 3', e);
+
                     if(e.viewMode != 'audio') {
                         if(document.body.firstChild) document.body.insertBefore(mediaContainer, document.body.firstChild);
-                    } else {
+                        console.log('EVENT LAYOUT if1');
+
+                    } else if(tool.state.activeRoom == 'main') {
+                        console.log('EVENT LAYOUT if2');
+
                         tool.state.mainRoomConfig.mainRoomContainer.appendChild(mediaContainer);
+                    } else if(tool.state.activeRoom == 'waiting') {
+                        console.log('EVENT LAYOUT if3');
+
+                        var activePreviewTool = tool.state.activePreview;
+                        if(!activePreviewTool) return;
+                        var previewMediaContainer = activePreviewTool.element.querySelector('.Streams_preview_media_container');
+                        previewMediaContainer.appendChild(mediaContainer);
                     }
                 })
                 WebRTCClientUI.screenRendering.layoutEvents.on('audioScreenCreated', function (e) {
@@ -236,6 +256,13 @@
                     });
                 })
 
+                console.log('tool.callPreviewsElement', tool.callPreviewsElement);
+                if(tool.callPreviewsElement != null) {
+                    tool.callPreviewsElement.forEachTool("Streams/webrtc/preview", function () {
+                        this.state.mainWebrtcRoom = tool.state.mainWebrtcRoom;
+                    }, tool);
+                }
+
                 /*1. get last created webrtc stream that is related to clip tool and type of Q.Media.clip.webrtc.relations.main
                 * 2. if this stream exists, create webrtc room based on this stream; if doesn't exist, new
                 *    webrtc stream will be created
@@ -273,8 +300,9 @@
                             // if opened in columns - third argument is a column element,
                             // if opened dialog - first argument is dialog element
                             var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
+                            tool.callPreviewsElement = parentElement;
                             var $callsRelated = $(".Streams_calls_related", parentElement);
-                            $callsRelated.tool("Streams/related", {
+                            var prevTool = $callsRelated.tool("Streams/related", {
                                 publisherId: state.publisherId,
                                 streamName: state.streamName,
                                 relationType: state.relationType,
@@ -284,19 +312,10 @@
                                 realtime: true,
                                 foo:'bar'
                             }).activate();
-                            $callsRelated[0].forEachTool("Streams/webrtc/preview", function () {
-                                let interviewing = false;
-                                if(this.stream) {
-                                    let interviewing = this.stream.getAttribute('interviewing');
-                                }
-                                this.state.onRender.add(function () {
-                                    if(interviewing) {
-                                        $(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom + ' (currently is interviewing by another host)');
-                                    } else {
-                                        $(".Streams_preview_title", this.element).html(tool.text.calls.WaitingRoom);
-                                    }
-
-                                });
+                            console.log('previewTool', $callsRelated, Q.Tool.from(prevTool))
+                            var relatedTool = Q.Tool.from(prevTool);
+                            relatedTool.state.onUpdate.add(function () {
+                                updateCallInfoForPreviews();
                             });
 
                             $("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
@@ -310,27 +329,39 @@
                                 }
                             });
 
-                            parentElement.forEachTool("Streams/webrtc/preview", function () {
-                                var previewTool = this;
-                                this.state.mainWebrtcRoom = state.mainWebrtcRoom;
-                                this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
-                                this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
-                                this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
-                                this.state.eventsStream = tool.state.eventsStream;
-                                /*this.state.onWebRTCRoomEnded.set(function () {
-                                    if (!state.isAdmin) {
-                                        return;
-                                    }
+                            function updateCallInfoForPreviews() {
+                                console.log('updateCallInfoForPreviews')
 
-                                    Q.Streams.unrelate(
-                                        state.publisherId,
-                                        state.streamName,
-                                        state.relationType,
-                                        this.stream.fields.publisherId,
-                                        this.stream.fields.name
-                                    );
-                                }, tool);*/
-                            }, tool);
+                                parentElement.forEachTool("Streams/webrtc/preview", function () {
+                                    console.log('updateCallInfoForPreviews for', this)
+
+                                    var previewTool = this;
+                                    this.state.mainWebrtcRoom = tool.state.mainWebrtcRoom;
+                                    this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                                    this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
+                                    this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
+                                    this.state.eventsStream = tool.state.eventsStream;
+                                    this.state.onRoomSwitch = function (roomType) {
+                                        console.log('onRoomSwitch', this, roomType)
+                                        tool.state.activeRoom = roomType == 'none' ? null : roomType;
+                                        tool.state.activePreview = roomType == 'none' ? null : this;
+                                    };
+                                    /*this.state.onWebRTCRoomEnded.set(function () {
+                                        if (!state.isAdmin) {
+                                            return;
+                                        }
+
+                                        Q.Streams.unrelate(
+                                            state.publisherId,
+                                            state.streamName,
+                                            state.relationType,
+                                            this.stream.fields.publisherId,
+                                            this.stream.fields.name
+                                        );
+                                    }, tool);*/
+                                }, tool);
+                            }
+                            updateCallInfoForPreviews();
                         }
                     });
                 });
@@ -373,11 +404,13 @@
                             defaultMobileViewMode: 'audio',
                             tool: tool,
                             onStart: function () {
+                                tool.state.activeRoom = 'waiting';
                                 Q.handle(tool.state.onCallStart, tool, [this]);
                             },
                             onEnd: function () {
                                 if(tool.subtitleEl != null) tool.subtitleEl.innerHTML = '';
 
+                                tool.state.activeRoom = null;
                                 Q.handle(tool.state.onCallEnd, tool);
                             }
                         });
