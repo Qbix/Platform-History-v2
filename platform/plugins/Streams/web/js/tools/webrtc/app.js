@@ -8120,10 +8120,11 @@ window.WebRTCRoomClient = function app(options){
 
         function loadDevicesList(mediaDevicesList, reload) {
             log('loadDevicesList');
-
+            videoInputDevices = [];
+            audioInputDevices = [];
+            audioOutputDevices = [];
             if(mediaDevicesList != null && typeof reload == 'undefined') {
-                videoInputDevices = [];
-                audioInputDevices = [];
+
                 var i, device;
                 for (i = 0; device = mediaDevicesList[i]; i++) {
                     log('loadDevicesList: ' + device.kind);
@@ -8469,7 +8470,7 @@ window.WebRTCRoomClient = function app(options){
                         console.warn('Browser does not support output device selection.');
                         break;
                     }
-                    /*audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
+                    audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
                         .then(() => {
                             console.log(`Success, audio output device attached: ${outputDevice.deviceId}`);
                         })
@@ -8479,7 +8480,7 @@ window.WebRTCRoomClient = function app(options){
                                 errorMessage = `You need to use HTTPS for selecting audio output device: ${error}`;
                             }
                             console.error(errorMessage);
-                        });*/
+                        });
                 }
             }
             currentAudioOutputDevice = outputDevice;

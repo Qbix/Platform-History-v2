@@ -557,7 +557,7 @@
 }
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
-    padding: 8px 16px;
+    padding: 8px 8px;
     border-bottom: 1px solid #ddd;
     width:100%;
 }
@@ -640,7 +640,7 @@
 
 .Streams_webrtc_mobile-screen ul.Streams_webrtc_participants-list li {
     display: flex;
-    padding: 8px 16px;
+    padding: 8px 8px;
     border-bottom: 1px solid #ddd;
     width: 100%;
 }
@@ -702,7 +702,7 @@
     flex: 1;
     display: flex;
     align-items: center;
-    padding-left: 10px;
+    /*padding-left: 10px;*/
     overflow: hidden;
     position: relative;
 }
@@ -880,6 +880,9 @@
 .Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-screen-btns {
     z-index: 2;
 }
+.Streams_webrtc_mobile-screen .Streams_webrtc_maximized-main-screen .Streams_webrtc_participant-screen-btns img{
+    height: 30px;
+}
 .Streams_webrtc_mobile-screen .Streams_webrtc_participant-screen-btns button,
 .Streams_webrtc_mobile-screen .Streams_webrtc_participant-screen-btns button {
     background: transparent;
@@ -912,9 +915,18 @@
     white-space: nowrap;
     z-index: 10;
 }
-.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text div{
-    overflow: hidden;
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name > *{
     text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+    display: inline-block;
 }
 
 
@@ -1802,7 +1814,7 @@
 .dialog-con {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     position: fixed;
     top: 0;
@@ -1815,9 +1827,6 @@
 .dialog-box {
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
     position: relative;
-    padding: 1em;
-    margin: 1em;
-    margin-top: 4em;
     max-width: 90%;
     /*border-radius: 4px;*/
     z-index: 999999;
@@ -2663,7 +2672,7 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 }
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_popup-settings.Streams_webrtc_popup-box {
-    max-height: 228px;
+   /* max-height: 228px;*/
     overflow-y: scroll;
 }
 .Streams_webrtc_popup-box .Streams_webrtc_choose-output-device-con {
@@ -2755,6 +2764,14 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     height: 35px;
     width: 35px;
 }
+.Streams_webrtc_choose-device .Streams_webrtc_notice_alert{
+    color: #383d41;
+    background-color: #e2e3e5;
+    border: 1px solid #d6d8db;
+    padding: 5px;
+    font-size: 14px;
+}
+
 
 .Streams_webrtc_streaming .Streams_webrtc_streaming_url,
 .Streams_webrtc_streaming label {
