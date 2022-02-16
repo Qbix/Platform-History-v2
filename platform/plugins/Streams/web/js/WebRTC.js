@@ -817,6 +817,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var screensRendering = (function () {
             var activeScreen;
             var activeScreenRect;
+            var activeScreensType;
             var viewMode;
             var prevViewMode;
             var roomScreens = [];
@@ -877,6 +878,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 this.audioScreen = {
                     screenEl: null,
                     nameEl: null,
+                    avatarCon: null,
+                    avatarImgCon: null
                 };
                 this.tracks = [];
                 this.streams = [];
@@ -890,15 +893,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
-                this.hasLiveTracks = function () {
+                this.hasLiveTracks = function (kind) {
                     var hasLiveTracks = false;
                     for(let t in this.tracks) {
                         let track = this.tracks[t];
-                        if(track.mediaStreamTrack.enabled == true && track.mediaStreamTrack.readyState == 'live') {
+                        if(kind && kind != this.tracks[t].kind) continue;
+                        if(track.mediaStreamTrack.muted == false && track.mediaStreamTrack.readyState != 'ended') {
                             hasLiveTracks = true;
                             break;
                         }
                     }
+
                     return hasLiveTracks;
                 }
                 this.audioTracks = function () {
@@ -925,6 +930,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(this.videoScreen.screenEl && this.videoScreen.screenEl.parentNode != null) {
                         this.videoScreen.screenEl.parentNode.removeChild(this.videoScreen.screenEl);
                     }
+                    log('switchToAudioScreen : hasLiveTracks',  this.hasLiveTracks('video'));
+
+                    this.fillAudioScreenWithAvatarOrVideo();
                     this.screenEl.appendChild(this.audioScreen.screenEl);
                 };
                 this.switchToVideoScreen = function () {
@@ -956,8 +964,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(this.audioScreen.screenEl && this.audioScreen.screenEl.parentNode != null) {
                         this.audioScreen.screenEl.parentNode.removeChild(this.audioScreen.screenEl);
                     }
+
+                    if(this.videoTrack) this.videoScreen.videoCon.appendChild(this.videoTrack);
+
                     this.screenEl.appendChild(this.videoScreen.screenEl);
                 };
+                this.fillAudioScreenWithAvatarOrVideo = function () {
+                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                        this.audioScreen.avatarImgCon.innerHTML = '';
+                        this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
+                    } else {
+                        this.audioScreen.avatarImgCon.innerHTML = '';
+                        this.audioScreen.avatarImgCon.appendChild(this.audioScreen.avatarImg);
+                    }
+                }
                 this.hide = function() {
                     log('screen.hide');
                     let screen = this;
@@ -1373,7 +1393,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(screen.screensharing) audioScreenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
                 var chatParticipantAvatarCon = screen.audioScreen.avatarCon = document.createElement('DIV');
                 chatParticipantAvatarCon.className = 'Streams_webrtc_chat-participant-avatar-con';
-                var chatParticipantAvatarInner = document.createElement('DIV');
+                var dummyElForEqualGeught = document.createElement('DIV');
+                dummyElForEqualGeught.className = 'Streams_webrtc_chat-participant-avatar-dummy';
+                var chatParticipantAvatarInner = screen.audioScreen.avatarImgCon = document.createElement('DIV');
                 chatParticipantAvatarInner.className = 'Streams_webrtc_chat-participant-avatar';
                 var chatParticipantName = screen.audioScreen.nameEl = document.createElement('DIV');
                 chatParticipantName.className = 'Streams_webrtc_chat-participant-name';
@@ -1406,7 +1428,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         avatarImg.setAttribute('draggable', false);
 
                         chatParticipantAvatarInner.appendChild(avatarImg);
-
+                        screen.audioScreen.avatarImg = avatarImg;
                     }
                 });
 
@@ -1437,6 +1459,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 participantNameTextCon.appendChild(participantNameText);
                 chatParticipantName.appendChild(participantNameTextCon);
+                chatParticipantAvatarCon.appendChild(dummyElForEqualGeught);
                 chatParticipantAvatarCon.appendChild(chatParticipantAvatarInner);
                 audioScreenEl.appendChild(chatParticipantAvatarCon);
                 audioScreenEl.appendChild(chatParticipantName);
@@ -1460,9 +1483,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function newTrackAdded(track, participant) {
                 log('newTrackAdded', participant.screens.length, participant.isLocal);
                 if(participant.screens.length >= 1) log('newTrackAdded', participant.screens[0].tracks.length);
-
+                var trackParentScreen;
                 if(track.kind == 'video') {
-                    var trackParentScreen;
                     if(track.parentScreen != null) {
                         trackParentScreen = track.parentScreen;
                     }  else if(participant.screens.length == 1 && participant.screens[0].tracks.length == 0){
@@ -1474,8 +1496,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         trackParentScreen = createRoomScreen(participant);
                     }
 
+                    trackParentScreen.videoTrack = track.trackEl;
                     trackParentScreen.videoScreen.videoCon.appendChild(track.trackEl);
+
+                    if(trackParentScreen.activeScreenType == 'audio') {
+                        trackParentScreen.fillAudioScreenWithAvatarOrVideo();
+                    }
                 }
+
 
             }
 
@@ -2064,6 +2092,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             function switchScreenType(modeToSwitchTo) {
                 log('switchScreenType', modeToSwitchTo, roomScreens.length)
+                //if(modeToSwitchTo == activeScreensType) return;
                 var participants = WebRTCconference.roomParticipants();
                 if(modeToSwitchTo == 'video') {
                     for(let p in participants) {
@@ -2085,6 +2114,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                 }
+
+                //activeScreensType = modeToSwitchTo;
             }
 
             /**
@@ -5076,6 +5107,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(track.parentScreen == null || track.kind != 'video') return;
 
+                if(track.parentScreen.activeScreenType == 'audio') {
+                    track.parentScreen.fillAudioScreenWithAvatarOrVideo();
+                    return;
+                }
                 if(track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended'){
                     removeScreenFromCommonList(track.parentScreen);
                     track.parentScreen.removeTimer = null;
@@ -5115,6 +5150,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function onVideoUnMute(track) {
                 log('mediaStreamTrack unmuted 1', track);
                 if(track.parentScreen == null || track.kind != 'video') return;
+
+                if(track.parentScreen.activeScreenType == 'audio') {
+                    track.parentScreen.fillAudioScreenWithAvatarOrVideo();
+                    return;
+                }
+
                 if(track.parentScreen.removeTimer != null) {
                     clearTimeout(track.parentScreen.removeTimer);
                     track.parentScreen.removeTimer = null;

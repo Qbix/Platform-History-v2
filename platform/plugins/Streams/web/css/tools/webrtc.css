@@ -491,11 +491,20 @@
 
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-con {
     position: relative;
+    display: inline-block;
     border: 3px solid;
     border-color: rgba(255, 255, 255, 0);
     border-radius: 50%;
 }
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-dummy {
+    margin-top: 100%;
+}
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
     border-radius: 50%;
     border: 3px solid white;
     overflow: hidden;
@@ -506,11 +515,14 @@
     left:0;
     overflow: visible;
 }
-.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar img{
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar img,
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar video{
     display: block;
     width: 100%;
     object-fit: cover;
     height: 100%;
+    border-radius: 50%;
+    background: transparent;
 }
 /*end*/
 
@@ -1029,12 +1041,19 @@
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-con {
+    display: inline-block;
     position: relative;
     border: 3px solid;
     border-color: rgba(255, 255, 255, 0);
     border-radius: 50%;
 }
+.Streams_webrtc_desktop-screen  .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-dummy {
+    margin-top: 100%;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar {
+    position: absolute;
+    top: 0;
+    left: 0;
     border-radius: 50%;
     border: 3px solid white;
     background: transparent;
@@ -1045,7 +1064,16 @@
     left:0;
     overflow: visible;
 }
-.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar img{
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar .Streams_webrtc_chat-participant-video {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    border-radius: 50%;
+    background: transparent;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar img,
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar video{
     display: block;
     width: 100%;
     object-fit: cover;

@@ -3396,8 +3396,8 @@
 
 							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
                             if(hasNoVideo && manually) {
-								tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
-								//if(activeViewMode == 'audio') screen.show();
+                                if(activeViewMode != 'audio') tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
+								if(activeViewMode == 'audio') screen.show();
 								return;
 							} else if(hasNoVideo && !screen.videoIsChanging) {
 								return;
