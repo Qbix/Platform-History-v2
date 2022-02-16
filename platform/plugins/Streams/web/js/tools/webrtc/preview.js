@@ -33,7 +33,7 @@
                 }
 
                 tool.text = text;
-                preview.state.onRefresh.add(tool.refresh.bind(tool));
+                tool.preview.state.onRefresh.add(tool.refresh.bind(tool));
             });
 
             this.preview.state.beforeClose = function (wasRemoved) {
@@ -61,7 +61,7 @@
             };
 
             console.log('WebRTC preview 2');
-            tool.refresh();
+            //tool.refresh();
 
 
         },
