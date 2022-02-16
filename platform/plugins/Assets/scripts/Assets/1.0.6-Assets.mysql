@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS {{prefix}}nft_attributes (
+  id MEDIUMINT NOT NULL AUTO_INCREMENT,
+  display_type varchar(100) NOT NULL,
+  trait_type varchar(100) NOT NULL,
+  value varchar(1024) NOT NULL,
+  insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
+  
+  PRIMARY KEY (id),
+  KEY display_type (display_type),
+  KEY trait_type (trait_type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
