@@ -432,6 +432,7 @@ box-shadow:0 0 10px #000; }
 .Q_big_prompt .Q_button,
 .Q_notTouchscreen .Q_big_prompt .Q_button { padding: 5px 1em; box-sizing: content-box; display: inline-block; }
 .Q_big_prompt .Q_button span { display: inline-block; line-height: 1em; margin-top: -2px; }
+.Q_big_prompt .Q_buttons { white-space: nowrap; }
 .Q_big_prompt input[type=text],
 .Q_big_prompt input[type=email],
 .Q_big_prompt input[type=tel],
