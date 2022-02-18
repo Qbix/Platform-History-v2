@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.5",
+				"version": "1.0.6",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -132,6 +132,9 @@
 					"contract": {
 						"address": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
 					}
+				},
+				"attributes": {
+					"display_type": ["string", "number", "date", "list"]
 				}
 			},
 			"currencies": [
