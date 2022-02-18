@@ -16,7 +16,7 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
- * @param {integer} [$fields.id] defaults to 0
+ * @param {string} [$fields.publisherId] defaults to ""
  * @param {string} [$fields.display_type] defaults to ""
  * @param {string} [$fields.trait_type] defaults to ""
  * @param {string} [$fields.value] defaults to ""
@@ -26,9 +26,9 @@
 abstract class Base_Assets_NftAttributes extends Db_Row
 {
 	/**
-	 * @property $id
-	 * @type integer
-	 * @default 0
+	 * @property $publisherId
+	 * @type string
+	 * @default ""
 	 * 
 	 */
 	/**
@@ -72,7 +72,10 @@ abstract class Base_Assets_NftAttributes extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'id',
+			  0 => 'publisherId',
+			  1 => 'display_type',
+			  2 => 'trait_type',
+			  3 => 'value',
 			)
 		);
 	}
@@ -276,51 +279,51 @@ abstract class Base_Assets_NftAttributes extends Db_Row
 	}
 	
 	/**
-	 * Method is called before setting the field and verifies if integer value falls within allowed limits
-	 * @method beforeSet_id
-	 * @param {integer} $value
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_publisherId
+	 * @param {string} $value
 	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
-	function beforeSet_id($value)
+	function beforeSet_publisherId($value)
 	{
+		if (!isset($value)) {
+			$value='';
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('id', $value);
+			return array('publisherId', $value);
 		}
-		if (!is_numeric($value) or floor($value) != $value)
-			throw new Exception('Non-integer value being assigned to '.$this->getTable().".id");
-		$value = intval($value);
-		if ($value < -8388608 or $value > 8388607) {
-			$json = json_encode($value);
-			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".id");
-		}
-		return array('id', $value);			
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".publisherId");
+		if (strlen($value) > 8)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".publisherId");
+		return array('publisherId', $value);			
 	}
 
 	/**
-	 * @method maxSize_id
-	 * Returns the maximum integer that can be assigned to the id field
+	 * Returns the maximum string length that can be assigned to the publisherId field
 	 * @return {integer}
 	 */
-	function maxSize_id()
+	function maxSize_publisherId()
 	{
 
-		return 8388607;			
+		return 8;			
 	}
 
 	/**
-	 * Returns schema information for id column
+	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_id()
+	static function column_publisherId()
 	{
 
 return array (
   0 => 
   array (
-    0 => 'mediumint',
-    1 => '9',
+    0 => 'varchar',
+    1 => '8',
     2 => '',
     3 => false,
   ),
@@ -349,7 +352,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".display_type");
-		if (strlen($value) > 100)
+		if (strlen($value) > 50)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".display_type");
 		return array('display_type', $value);			
 	}
@@ -361,7 +364,7 @@ return array (
 	function maxSize_display_type()
 	{
 
-		return 100;			
+		return 50;			
 	}
 
 	/**
@@ -375,12 +378,12 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '100',
+    1 => '50',
     2 => '',
     3 => false,
   ),
   1 => false,
-  2 => 'MUL',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -435,7 +438,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'MUL',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -459,7 +462,7 @@ return array (
 		}
 		if (!is_string($value) and !is_numeric($value))
 			throw new Exception('Must pass a string to '.$this->getTable().".value");
-		if (strlen($value) > 1024)
+		if (strlen($value) > 100)
 			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".value");
 		return array('value', $value);			
 	}
@@ -471,7 +474,7 @@ return array (
 	function maxSize_value()
 	{
 
-		return 1024;			
+		return 100;			
 	}
 
 	/**
@@ -485,12 +488,12 @@ return array (
   0 => 
   array (
     0 => 'varchar',
-    1 => '1024',
+    1 => '100',
     2 => '',
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -532,7 +535,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1024',
+    1 => '100',
     2 => '',
     3 => false,
   ),
@@ -582,7 +585,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1024',
+    1 => '100',
     2 => '',
     3 => false,
   ),
@@ -592,9 +595,23 @@ return array (
 );			
 	}
 
+	/**
+	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+	 * @method beforeSave
+	 * @param {array} $value The array of fields
+	 * @return {array}
+	 * @throws {Exception} If mandatory field is not set
+	 */
 	function beforeSave($value)
 	{
-						
+		if (!$this->retrieved) {
+			$table = $this->getTable();
+			foreach (array('publisherId','display_type','trait_type','value') as $name) {
+				if (!isset($value[$name])) {
+					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+				}
+			}
+		}						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			
@@ -610,7 +627,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'display_type', 'trait_type', 'value', 'insertedTime', 'updatedTime');
+		$field_names = array('publisherId', 'display_type', 'trait_type', 'value', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

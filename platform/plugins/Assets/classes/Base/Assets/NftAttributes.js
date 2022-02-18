@@ -21,7 +21,7 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
- * @param {Integer} [fields.id] defaults to 0
+ * @param {String} [fields.publisherId] defaults to ""
  * @param {String} [fields.display_type] defaults to ""
  * @param {String} [fields.trait_type] defaults to ""
  * @param {String} [fields.value] defaults to ""
@@ -35,9 +35,9 @@ function Base (fields) {
 Q.mixin(Base, Row);
 
 /**
- * @property id
- * @type Integer
- * @default 0
+ * @property publisherId
+ * @type String
+ * @default ""
  * 
  */
 /**
@@ -257,7 +257,10 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"id"
+		"publisherId",
+		"display_type",
+		"trait_type",
+		"value"
 	];
 };
 
@@ -278,7 +281,7 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
-		"id",
+		"publisherId",
 		"display_type",
 		"trait_type",
 		"value",
@@ -288,38 +291,41 @@ Base.fieldNames = function () {
 };
 
 /**
- * Method is called before setting the field and verifies if integer value falls within allowed limits
- * @method beforeSet_id
- * @param {integer} value
- * @return {integer} The value
- * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_publisherId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_id = function (value) {
+Base.prototype.beforeSet_publisherId = function (value) {
+		if (value == null) {
+			value='';
+		}
 		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value) || Math.floor(value) != value) 
-			throw new Error('Non-integer value being assigned to '+this.table()+".id");
-		if (value < -8388608 || value > 8388607)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".id");
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".publisherId");
+		if (typeof value === "string" && value.length > 8)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".publisherId");
 		return value;
 };
 
-/**
- * Returns the maximum integer that can be assigned to the id field
- * @return {integer}
- */
-Base.prototype.maxSize_id = function () {
+	/**
+	 * Returns the maximum string length that can be assigned to the publisherId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_publisherId = function () {
 
-		return 8388607;
+		return 8;
 };
 
 	/**
-	 * Returns schema information for id column
+	 * Returns schema information for publisherId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_id = function () {
+Base.column_publisherId = function () {
 
-return [["mediumint","9","",false],false,"PRI",null];
+return [["varchar","8","",false],false,"PRI",null];
 };
 
 /**
@@ -337,7 +343,7 @@ Base.prototype.beforeSet_display_type = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".display_type");
-		if (typeof value === "string" && value.length > 100)
+		if (typeof value === "string" && value.length > 50)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".display_type");
 		return value;
 };
@@ -348,7 +354,7 @@ Base.prototype.beforeSet_display_type = function (value) {
 	 */
 Base.prototype.maxSize_display_type = function () {
 
-		return 100;
+		return 50;
 };
 
 	/**
@@ -357,7 +363,7 @@ Base.prototype.maxSize_display_type = function () {
 	 */
 Base.column_display_type = function () {
 
-return [["varchar","100","",false],false,"MUL",null];
+return [["varchar","50","",false],false,"PRI",null];
 };
 
 /**
@@ -395,7 +401,7 @@ Base.prototype.maxSize_trait_type = function () {
 	 */
 Base.column_trait_type = function () {
 
-return [["varchar","100","",false],false,"MUL",null];
+return [["varchar","100","",false],false,"PRI",null];
 };
 
 /**
@@ -413,7 +419,7 @@ Base.prototype.beforeSet_value = function (value) {
 		if (value instanceof Db.Expression) return value;
 		if (typeof value !== "string" && typeof value !== "number")
 			throw new Error('Must pass a String to '+this.table()+".value");
-		if (typeof value === "string" && value.length > 1024)
+		if (typeof value === "string" && value.length > 100)
 			throw new Error('Exceedingly long value being assigned to '+this.table()+".value");
 		return value;
 };
@@ -424,7 +430,7 @@ Base.prototype.beforeSet_value = function (value) {
 	 */
 Base.prototype.maxSize_value = function () {
 
-		return 1024;
+		return 100;
 };
 
 	/**
@@ -433,7 +439,7 @@ Base.prototype.maxSize_value = function () {
 	 */
 Base.column_value = function () {
 
-return [["varchar","1024","",false],false,"",null];
+return [["varchar","100","",false],false,"PRI",null];
 };
 
 /**
@@ -458,7 +464,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1024","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","100","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -484,11 +490,27 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1024","",false],true,"",null];
+return [["timestamp","100","",false],true,"",null];
 };
 
+/**
+ * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+ * @method beforeSave
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
+ */
 Base.prototype.beforeSave = function (value) {
-
+	var fields = ['publisherId','display_type','trait_type','value'], i;
+	if (!this._retrieved) {
+		var table = this.table();
+		for (i=0; i<fields.length; i++) {
+			if (this.fields[fields[i]] === undefined) {
+				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+			}
+		}
+	}
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;
