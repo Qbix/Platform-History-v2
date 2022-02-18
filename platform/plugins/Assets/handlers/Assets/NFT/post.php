@@ -6,11 +6,8 @@ function Assets_NFT_post ($params) {
 
 	// update NFT attributes
 	if (Q_Request::slotName("attrUpdate")) {
-		$displayTypes = Q_Config::expect("Assets", "Web3", "NFT", "attributes", "display_type");
-		if (!in_array($req["display_type"], $displayTypes)) {
-			return;
-		}
 		$attribute = new Assets_NftAttributes();
+		$attribute->publisherId = $req["publisherId"];
 		$attribute->display_type = $req["display_type"];
 		$attribute->trait_type = $req["trait_type"];
 		$attribute->value = $req["value"];
