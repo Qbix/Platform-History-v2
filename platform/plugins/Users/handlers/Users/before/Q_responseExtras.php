@@ -87,4 +87,17 @@ function Users_before_Q_responseExtras()
 		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
 		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
 	}
+
+	// blockchain data
+	$currencies = Q_Config::get("Users", "web3", "currencies", array());
+	$chainsClient = Users_Web3::getChains();
+	Q_Response::setScriptData('Q.plugins.Users.Web3.NFT.chains', $chainsClient);
+	Q_Response::setScriptData('Q.plugins.Users.Web3.NFT.currencies', $currencies);
+	$nf = Q_Config::get('Users', 'Users', 'NFT', 'factory', 'contract', 'address', null);
+	if ($nf) {
+		Q_Response::setScriptData('Q.plugins.Users.Web3.NFT.factory.contract.address', $nf);
+	}
+
+	// set Users.Web3.NFT.icon.sizes for imagepicker
+	Q_Response::setScriptData('Q.plugins.Users.Web3.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 }
